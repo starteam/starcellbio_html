@@ -1,0 +1,61 @@
+.icon_with_text {
+  display: inline-block;
+  font-size: 9px;
+  margin: 2px;
+}
+.space_above {
+  margin-top: 15px;
+  padding-top: 15px;
+}
+.center_text {
+  text-align: center;
+}
+.scb_inline {
+  display: inline-block;
+}
+.scb_section_title {
+  background-color: #e0e0e0;
+  width: 100%;
+}
+.scb_250px {
+  min-width: 250px;
+}
+.scb_200px {
+  min-width: 200px;
+}
+.scb_150px {
+  min-width: 150px;
+}
+.scb_100px {
+  min-width: 100px;
+}
+a.a_sidebar:link, a.a_sidebar:visited {
+  text-decoration: none;
+  color: #000;
+}
+a.a_sidebar:hover, a.a_sidebar:active {
+  text-decoration: underline;
+  color: #000;
+}
+a.a_black_link:link, a.a_black_link:visited, a.a_black_link:hover, a.a_black_link:active {
+  color: #000;
+}
+.sidebar_list {
+  list-style-type: none;
+  padding-left: 20px;
+}
+.inline_block {
+  display: inline-block;
+}
+.grouping_label {
+  font-size: 24px;
+  text-align: center;
+  width: 75%;
+  min-width: 500px;
+  margin-bottom: 10px;
+  display: block;
+}
+.group_header {
+  font-size: 20px;
+  font-weight: 600;
+}

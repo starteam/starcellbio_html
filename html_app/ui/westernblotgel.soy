@@ -1,0 +1,643 @@
+{namespace scb_ui}
+
+/**
+  Display Experiment
+  @param gel Selected Gel
+  @param template
+  @param experiment
+  @param experiment_list
+ */
+{template .display_western_blot_gel}
+			{call .western_blot_gel_name}
+				{param gel:$gel/}
+			{/call}
+			{if $gel.lysate_made }
+				<div class='group_header'>Gel Preparation</div>
+				<div class='display_instructions'>
+				Prepare your gel to be run and transferred. 
+				<ul><li>Order the samples into the order in which they will appear on the gel by clicking on each sample and dragging it into place.</li>
+				<li>Type in the amount of protein lysate (µg) to load in each well.</li>
+				<li>When you are done preparing your gel, select <b>Run SDS-PAGE and Transfer</b>.</li></ul>				
+				</div>
+				{call .experiment_setup_row_header2} 
+					{param template:$template/}
+					{param display_collection_times:$template.ui_configuration.display_collection_times/}
+					{param display_stimulation_times:false/}					
+					{param insert_space:true/}
+					{param protein_loaded:true/}
+				{/call}	
+				{call .western_blot_gel_lysates_list} 
+					{param gel:$gel/}
+					{param template:$template/}
+				{/call}
+				
+			{else}
+				<div class='group_header'>Sample Selection</div>
+				<div class='display_instructions'>
+				Select the samples from which you would like to prepare lysates.
+				<ul>
+				<li>Select a particular experiment from the drop down menu at the top of the page.</li>
+				<li>To select the particular samples for lysate preparation, click the button with the appropriate collection time.</li>
+				</ul>
+				</div>
+				<div class='western_blot_experiment_list'>
+				{call .western_blot_experiment_list}
+					{param template:$template/}
+					{param experiment:$experiment/}
+					{param experiment_list:$experiment_list/}
+				{/call}			
+				</div>
+				{if $gel.lanes_list.length != 0}
+				<div class='group_header list_of_lysates_to_prepare'>List of Lysates to Prepare</div>
+				<div class='display_instructions'>
+				<ul><li>Organize the samples by clicking on the sample and dragging it into place.</li> 
+				<li>Select <b>Whole Cell</b> from the dropdown menu to prepare whole cell lysates.</li>
+				<li>When you are done, select <b>Prepare Lysates</b>.</li></ul>				
+				</div>
+				 
+				{call .experiment_setup_row_header2}
+					{param template:$template/}
+					{param display_collection_times:false/}
+					{param display_stimulation_times:false/}
+					{param insert_space:true/}
+					{param protein_loaded:false/}
+				{/call}	
+				{call .western_blot_gel_lysates_list}
+					{param gel:$gel/}
+					{param template:$template/}				
+				{/call}
+				{/if}
+			{/if}
+		<div id='experiment_setup_row_treatment_edit_blackout'>
+			<div id='experiment_setup_row_treatment_edit' style='display:none'>
+			</div>
+		</div>
+			
+{/template}
+
+/**
+ Display Western_Blot Name DIV
+ @param gel Selected Gel
+*/
+{template .western_blot_gel_name}
+	<span model_id='{$gel.id}'>
+	{call scb_util.display_header_name}
+		{param name:$gel.name/}
+		{param name_label:'W.B. experiment name:'/}
+		{param name_class:'western_blot_gel_name_text'/}
+		{param icon_class:'edit_western_blot_gel_name_text'/}
+		{param remove_class:'remove_western_blot_gel'/}
+		{param remove_title:'Discard W.B. Exp'/}		
+	{/call}
+	</span>
+{/template}
+
+/**
+ Display Western Blot Lysates
+ @param gel Western Blot Gel
+ @param template
+*/
+{template .western_blot_gel_lysates_list}
+	<ol class='western_blot_gel_lysates_list'>
+	{foreach $lane in $gel.lanes_list.list}
+		{call .western_blot_gel_lysate_list_row}
+			{param gel:$gel/}
+			{param lane:$lane/}
+			{param index:index($lane)/}
+			{param template:$template/}
+			{param gel:$gel/}
+		{/call}
+	{/foreach}		
+	</ol>
+
+	{if $gel.sdsgelrun }
+		{if $gel.finished}
+			{call .western_blot_gel_sds_anti_body_read_only}
+				{param gel:$gel/}
+				{param template:$template/}		
+			{/call}		
+		{else} 
+			{call .western_blot_gel_sds_anti_body}
+				{param gel:$gel/}
+				{param template:$template/}		
+			{/call}
+		{/if}
+		<div class='group_header space_above'>Exposure times</div>
+		{call .western_blot_exposure_times}
+			{param gel:$gel/}
+			{param template:$template/}
+		{/call}
+		
+		{if $gel.finished}
+		{else}
+		{call .western_blot_gel_develop_western_blot}
+		{/call}
+		{/if}
+		{if $gel.finished}
+			{call .western_blot_gel_display}
+				{param gel:$gel/}
+				{param template:$template/}
+				
+			{/call}
+		{/if}
+	{/if}
+	{if $gel.lysate_made}
+		{if $gel.sdsgelrun }
+		{else}
+		{call .western_blot_gel_lysate_sdsgelrun}
+			{param gel:$gel/}
+		{/call}
+		{/if}
+	{else}
+	{call .western_blot_gel_lysate_make_lysate}
+		{param gel:$gel/}
+	{/call}
+	{/if} 
+	
+{/template}
+
+/**
+ Display Western Blot Lysate Lane
+ @param lane
+ @param index
+ @param template
+ @param gel
+*/
+{template .western_blot_gel_lysate} 
+	<tr class='western_blot_gel_lysate_row' model_id='{$lane.id}'>
+		<td class='wb_counter inline_block'>{$index}</td>
+		<td class='western_blot_gel_lysate_row_treatment' model_id='{$lane.id}'>
+		{call .experiment_setup_row}
+					{param row:$lane.cell_treatment/}
+					{param template:$template/}
+					{param selected_experiment:$lane.experiment/}
+		{/call} 
+		<td class='wb_collection_time inline_block'>
+			{if $template.ui_configuration.display_collection_times}
+			{$lane.collection_schedule.schedule}
+			{/if}			
+			</td>
+			
+		</td>
+		<td class='wb_lysate_kind inline_block'>
+			{if $gel.lysate_made}
+				{$template.lysate_kinds[$lane.kind].name}
+			{else}
+			{call .western_blot_gel_lysate_kind}
+				{param lane:$lane/}
+				{param template:$template/}
+			{/call}
+			{/if}
+		</td>
+		{if $template.ui_configuration.lysate_display_ip}		
+		
+		<td class='wb_ip inline_block'>
+			{if $gel.lysate_made }
+			{else}				
+			{call .western_blot_gel_lysate_kind_ip}
+				{param lane:$lane/}
+			{/call}
+			{/if}		
+		</td>
+		<td class='wb_ip_anti_body inline_block'>
+			{if $gel.lysate_made }
+				{if $lane.ip}
+				{$template.ip_primary_anti_body[$lane.ip_primary_anti_body].name}<br>
+				{$template.ip_secondary_anti_body[$lane.ip_secondary_anti_body].name}<br>
+				{/if}			
+			{else}
+			{call .western_blot_gel_lysate_kind_ip_anti_body}
+				{param lane:$lane/}
+				{param template:$template/}
+			{/call}
+			{/if}
+		</td>
+		{/if}
+		<td>
+		{if $gel.lysate_made }
+			{if $gel.sdsgelrun }
+			<div class='western_blot_protein_loaded'>	
+				{$lane.amount_of_protein_loaded} &#181;g
+			</div>
+			{else}
+				<input type='text' model_id='{$lane.id}' class='set_amount_of_protein_loaded' size='5' value='{$lane.amount_of_protein_loaded}'></input>&#181;g
+			{/if}
+		{/if}
+		{if $gel.sdsgelrun }
+		{else}
+		<div class='toolbox_experiment_row'>
+			{call scb_util.icon_with_text}
+				{param src:'icons/actions/Delete.png'/}
+				{param text:'Delete'/}
+				{param cls:'delete_western_blot_row'/}
+			{/call}
+			{call scb_util.icon_with_text}
+				{param src:'icons/actions/Copy.png'/}
+				{param text:'Copy'/}
+				{param cls:'duplicate_western_blot_row'/}
+			{/call}			
+		</div>
+		{/if}
+		</td>		
+	</tr>
+{/template}
+
+
+/**
+ Row detail template
+ @param row
+ @param template
+ @param selected_experiment
+*/
+{template .western_blot_gel_lysate_list_row_detail}
+		<div class='experiment_row_cell_line'>
+			{call .experiment_setup_row_cell_line}
+				{param row:$row /}
+				{param template:$template /}
+				{param selected_experiment:$selected_experiment /}			
+			{/call}
+		</div>
+		<div class='experiment_row_treatments'>
+			{if $row.treatment_list.list.length == 0}
+			<div class='experiment_row_treatment' style='border-width:0px;'>
+				<div class='experiment_row_treatment_drug'>
+						<div class=	'experiment_row_treatment_drug_one'>
+							&nbsp;
+						</div>		
+				</div>
+				{if $template.ui_configuration.treatment_options_display_temperature}
+					<div class='experiment_row_treatment_temperature'>
+						&nbsp;
+					</div>
+				{/if}				
+				<div class='experiment_row_treatment_schedule'>
+					&nbsp;
+				</div>
+			</div>			
+			{/if}
+			{foreach $t in $row.treatment_list.list}
+				{call .experiment_setup_row_treatment}
+					{param treatment:$t/}
+					{param template:$template/}
+					{param cell_treatment_id:$row.id/}
+					{param selected_experiment:$selected_experiment /}			
+				{/call}
+			{/foreach}
+		</div>
+	
+{/template}
+/**
+ Display Western Blot Lysate Lane
+ @param lane
+ @param template
+ @param gel
+*/
+{template .western_blot_gel_lysate_list_row} 
+	<li class='western_blot_gel_lysate_row' model_id='{$lane.id}'>
+		<div class='western_blot_gel_lysate_row_treatment' model_id='{$lane.id}'>
+			{call .western_blot_gel_lysate_list_row_detail}
+					{param row:$lane.cell_treatment/}
+					{param template:$template/}
+					{param selected_experiment:$lane.experiment/}
+			{/call}
+			<div class='wb_collection_time inline_block'>
+			{if $template.ui_configuration.display_collection_times}
+			{$lane.collection_schedule.schedule}
+			{/if}
+			</div>
+		
+			<div class='wb_lysate_kind inline_block'>
+				{if $gel.lysate_made}
+					{$template.lysate_kinds[$lane.kind].name}
+				{else}
+				{call .western_blot_gel_lysate_kind}
+					{param lane:$lane/}
+					{param template:$template/}
+				{/call}
+				{/if}
+			</div>
+		
+		{if $template.ui_configuration.lysate_display_ip}					
+			<div class='wb_ip inline_block'>
+				{if $gel.lysate_made }
+				{else}				
+				{call .western_blot_gel_lysate_kind_ip}
+					{param lane:$lane/}
+				{/call}
+				{/if}		
+			</div>
+			<div class='wb_ip_anti_body inline_block'>
+				{if $gel.lysate_made }
+					{if $lane.ip}
+					{$template.ip_primary_anti_body[$lane.ip_primary_anti_body].name}<br>
+					{$template.ip_secondary_anti_body[$lane.ip_secondary_anti_body].name}<br>
+					{/if}			
+				{else}
+				{call .western_blot_gel_lysate_kind_ip_anti_body}
+					{param lane:$lane/}
+					{param template:$template/}
+				{/call}
+				{/if}
+			</div>
+		{/if}
+		
+		{if $gel.lysate_made }
+			{if $gel.sdsgelrun }
+			<div class='western_blot_protein_loaded'>	
+				{$lane.amount_of_protein_loaded} &#181;g
+			</div>
+			{else}
+				<input type='text' model_id='{$lane.id}' class='set_amount_of_protein_loaded' size='5' value='{$lane.amount_of_protein_loaded}'></input>&#181;g
+			{/if}
+		{/if}
+		{if $gel.sdsgelrun }
+		{else}
+		<div class='toolbox_experiment_row'>
+			{call scb_util.icon_with_text}
+				{param src:'icons/actions/Delete.png'/}
+				{param text:'Delete'/}
+				{param cls:'delete_western_blot_row'/}
+			{/call}
+			{call scb_util.icon_with_text}
+				{param src:'icons/actions/Copy.png'/}
+				{param text:'Copy'/}
+				{param cls:'duplicate_western_blot_row'/}
+			{/call}			
+		</div>
+		{/if}
+		</div>		
+	</li>
+{/template}
+
+
+/**
+ Display Western Blot Lysate Make Lysate
+*/
+{template .western_blot_gel_lysate_make_lysate}
+	<div class='make_western_blot_lysate green button'>Prepare Lysates</div>
+{/template}
+
+/**
+ Display Western Blot Lysate run SDSGEL
+*/
+{template .western_blot_gel_lysate_sdsgelrun}
+	<div class='run_western_blot_sds_gel green button'>Run SDS-PAGE and Transfer</div>
+{/template}
+
+/**
+ Display Western Blot Lysate run Develop
+*/
+{template .western_blot_gel_develop_western_blot}
+	<div class='run_western_blot_develop green button'>Develop Western Blot</div>
+{/template}
+
+/** Western Blot Lysate Kind
+ @param lane lane
+ @param template
+*/
+{template .western_blot_gel_lysate_kind}
+	<span class='western_blot_lysate_kind'>
+	{call scb_util.select_from_dict}
+		{param map:$template.lysate_kinds /}
+		{param map_name:'name'/}
+		{param model_id:$lane.kind/}
+		{param associated_class:'making_lysates_row_lysate_kind'/}	
+		{param model2_id:$lane.id/}	
+	{/call}
+	</span>
+{/template}
+
+/** IP Display
+ @param lane
+*/
+{template .western_blot_gel_lysate_kind_ip}
+	<input type='checkbox' name='ip' class='western_blot_gel_lysate_kind_ip' lane_id='{$lane.id}' {if $lane.ip}checked='checked'{/if}/>
+{/template}
+
+/** IP Antibody
+ @param lane lane
+ @param template
+*/
+{template .western_blot_gel_lysate_kind_ip_anti_body}
+<span class='ip_value_div' {if $lane.ip}{else}style='display:none'{/if}>
+	{call scb_util.select_from_dict}
+		{param map:$template.ip_primary_anti_body /}
+		{param map_name:'name'/}
+		{param model_id:$lane.ip_primary_anti_body/}
+		{param associated_class:'making_lysates_row_primary_anti_body'/}	
+		{param model2_id:$lane.id/}	
+		
+	{/call}
+	{call scb_util.select_from_dict}
+		{param map:$template.ip_secondary_anti_body /}
+		{param map_name:'name'/}
+		{param model_id:$lane.ip_secondary_anti_body/}
+		{param associated_class:'making_lysates_row_secondary_anti_body'/}	
+		{param model2_id:$lane.id/}	
+	{/call}
+	</span>
+{/template}
+/**
+	western_blot_experiment_list
+	
+ @param experiment
+ @param template
+ @param experiment_list
+*/
+{template .western_blot_experiment_list}
+	<div class='western_blot_experiment_selector'>
+		{call scb_util.select_from_obj}
+			{param map:$experiment_list.list /}
+			{param map_name:'name'/}
+			{param model_id:'id'/}
+			{param selected_id:$experiment.id/}
+			{param associated_class:'select_western_blot_lysate_experiment'/}	
+		{/call}
+	</div>
+	<div class='experiment_rows'>
+	<table>
+		<tr><td>
+					{call .experiment_setup_row_header}
+						{param template:$template/}
+						{param display_collection_times:false/}
+						{param display_stimulation_times:$template.ui_configuration.display_stimulation_times /}
+					{/call}
+		</td>
+			<td>
+			{if $template.ui_configuration.display_collection_times!=false}
+			Collection Times
+			{else}
+			Select sample?									
+			{/if}
+			</td>
+		</tr>
+	{foreach $t in $experiment.cell_treatment_list.list}
+		<tr><td class='experiment_rows_list'>
+				{call .experiment_setup_row}
+					{param row:$t/}
+					{param template:$template/}
+					{param selected_experiment:$experiment/}
+					{param display_collection_times:false/}
+				{/call} 
+			</td>
+			<td>
+			{foreach $s in $t.collection_schedule_list.list}
+				<button class='button small green add_western_blot_experiment_element' experiment_id='{$experiment.id}' treatment_id='{$t.id}' schedule_id='{$s.id}'>
+				{if $template.ui_configuration.display_collection_times}{$s.schedule}{else}Select{/if}
+				</button>
+			{/foreach}
+			</td>
+		</tr>
+	{/foreach}
+	</table>
+				<button class='button medium green add_western_blot_experiment_element_all' style='margin-left:680px' experiment_id='{$experiment.id}'>Select all samples</button>
+	</div>
+{/template}
+/**
+ western_blot_gel_sds_anti_body_heading
+*/
+{template .western_blot_gel_sds_anti_body_heading}
+	<div class='group_header'>Western Blotting</div>
+	<div class='display_instructions'>
+	<ul><li>
+	Specify the primary and secondary antibodies to blot for the proteins you would like to analyze. Be sure to select the appropriate combination of antibodies from the drop down menus.
+</li><li>	Select the exposure time(s) to expose your Western blot, by clicking on <img src='icons/actions/Add.png' style='height:16px'> and typing in the exposure time and units for the length of time.
+</li><li>	When you are done, select <b>Develop Western Blot</b>. Once you develop your blot, you will be unable to change the antibody selections. You can add additional exposure times by clicking on <img src='icons/actions/Add.png' style='height:16px'> underneath exposure times.
+</li></ul>
+	</div>
+
+{/template}
+
+/**
+ western_blot_gel_sds_anti_body_heading_read_only
+*/ 
+{template .western_blot_gel_sds_anti_body_heading_read_only}
+	<div class='group_header'>Western Blotting</div>
+	<div class='display_instructions'>
+	<ul><li> You can add additional exposure times by clicking on <img src='icons/actions/Add.png' style='height:16px'> underneath exposure times.
+</li><li>	To view the Western blot(s), click on the appropriate tab.
+</li><li>	To reblot your current western blot with another set of antibodies, select <b>Duplicate gel</b>. The duplicated western blot will appear in the menu on the left hand side.
+</li><li>	To run another western blot experiment, click <b><img src='icons/actions/Add.png' style='height:16px'></b> in the menu on the left hand side.
+</li></ul>
+	</div>
+
+{/template}
+
+
+/**
+	Display SDS antibody selector
+	@param gel
+	@param template
+*/
+{template .western_blot_gel_sds_anti_body}
+	{call .western_blot_gel_sds_anti_body_heading}
+	{/call}
+	<div class='western_blot_gel_sds_primary_anti_body'>
+		Select primary antibody:
+		{call scb_util.select_from_dict}
+			{param map:$template.primary_anti_body /}
+			{param map_name:'name'/}
+			{param model_id:$gel.primary_anti_body/}
+			{param associated_class:'making_lysates_gel_primary_anti_body'/}	
+			{param model2_id:$gel.id/}	
+		{/call}
+		
+	</div>
+	<div class='western_blot_gel_sds_secondary_anti_body'> 
+		Select secondary antibody:
+		{call scb_util.select_from_dict}
+			{param map:$template.secondary_anti_body /}
+			{param map_name:'name'/}
+			{param model_id:$gel.secondary_anti_body/}
+			{param associated_class:'making_lysates_gel_secondary_anti_body'/}	
+			{param model2_id:$gel.id/}	
+		{/call}
+	</div>
+{/template}
+
+	
+/**
+	Display SDS antibody selector
+	@param gel
+	@param template
+*/
+{template .western_blot_gel_sds_anti_body_read_only}
+	{call .western_blot_gel_sds_anti_body_heading_read_only}
+	{/call}
+	<table><tr><td class='western_blot_gel_sds_primary_anti_body'>
+		Primary antibody:		</td><td>
+		 {$template.primary_anti_body[$gel.primary_anti_body].name}
+		 </td></tr><tr><td class='western_blot_gel_sds_secondary_anti_body'> 
+		Secondary antibody: 		</td><td>
+		{$template.secondary_anti_body[$gel.secondary_anti_body].name}
+		</td></tr></table>
+	<div class='button green western_blot_duplicate_gel'>Duplicate gel</div>
+{/template}
+
+
+/**
+	Western Blot Exposure Times
+	@param gel
+	@param template
+*/
+{template .western_blot_exposure_times}
+		<div class='western_blot_exposure_times'>
+			{foreach $t in $gel.exposure_list.list}
+				{call .western_blot_exposure_time}
+					{param schedule:$t/}
+					{param template:$template/}				
+				{/call}
+			{/foreach}
+			<div class='add_western_blot_exposure_time'>&nbsp;
+				<img class='add_western_blot_exposure_time_icon' src='icons/actions/Add.png' width='24px'>
+			</div>
+		</div> 
+{/template}
+		
+/** 
+* Display schedule
+* @param schedule Schedule
+*
+*/
+{template .western_blot_exposure_time}
+	<div class='western_blot_time' schedule_id='{$schedule.id}'>
+		{$schedule.schedule}
+		<div class='experiment_row_treatment_tools' >
+		<!--
+			<img class='western_blot_time_edit' src='icons/actions/Edit.png' width='24px'>
+		-->
+			<img class='western_blot_time_delete' src='icons/actions/Delete.png' width='24px'>
+		</div>
+		<div class='experiment_row_treatment_tools_spacer'>
+		</div>
+	</div>
+{/template}
+
+/**
+	Western Blot Gel Display
+	@param gel
+
+*/
+{template .western_blot_gel_display}
+		<div class='western_blot_gels'>
+			{call .western_blot_gel_radio}
+				{param gel:$gel/}
+			{/call}
+		</div>
+			<canvas class='western_blot_gel_canvas' id='western_blot_gel_canvas_{$gel.id}' width='1000' height='1000' style='width:600px;height:300px;text-align:center'>
+			</canvas>
+{/template}
+
+
+/**
+	Western Blot Gel Radio
+	@param gel
+
+*/
+{template .western_blot_gel_radio}
+			{foreach $t in $gel.exposure_list.list}
+				<input type='radio' {if $t.id==$gel.exposure_list.selected_id}checked=checked{/if} class='display_western_blot_gel' name='western_blot_gel_radio_selector' schedule_id='{$t.id}' id='{$t.id}'/><label for='{$t.id}'>{$t.schedule}</label></input>
+			{/foreach}
+{/template}
+
+ 

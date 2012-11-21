@@ -1,0 +1,61 @@
+MASTER_MODEL:
+	TEMPLATE
+	
+	SESSIONLIST
+		SESSION
+			EXPERIMENTLIST
+				EXPERIMENT
+					name
+					CELLTREATMENTLIST
+						CELLTREATMENT
+							CELLLINE
+							TREATMENTLIST
+								TREATMENT
+									schedule										
+									temperature
+									DRUGLIST
+										DRUG
+											drug
+											concentration
+					COLLECTIONSCHEDULELIST
+						COLLECTIONSCHEDULE
+							schedule
+					// WHEN EXPERIMENT FINISHED
+					RESULTLIST
+						RESULTROW
+							celltreatment_id
+							schedule_id
+							WESTERNBLOT
+								protein
+			MAKINGLYSTELIST
+				MAKINGLYSATE
+					name
+					LYSATEKINDLIST
+						LYSATEKIND
+							experiment_id, cell_treatment_id
+							experiment_id, schedule_id
+							whole_cell
+							cytoplasm
+							nuclear
+							ip
+							ip_primary_anti_body
+							ip_secondary_anti_body
+			WESTERNBLOTLIST
+				WESTERNBLOT
+					name
+					WESTERNBLOTLINE_LIST
+						WESTERNBLOTLINE
+							concentration
+							makinglysate_id, lysate_kind_id
+					primary_anti_body
+					secondary_anti_body
+					EXPOSURELIST
+						EXPOSURE
+							exposure
+							WESTERNBLOTGEL
+								WESTERNBLOTGELLANELIST
+									WESTERNBLOTGELLANE
+										westernblotline_id
+										background
+										blotlist
+			

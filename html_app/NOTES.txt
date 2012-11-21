@@ -1,0 +1,29 @@
+User interface structure:
+	DASHBOARD
+		Contains list of Exercises student can do
+		Each exercise starts exactly one session
+		Session are often auto-saved
+	VIEWS
+		VIEW BY EXPERIMENT
+			One setup
+			Many related Western Blots
+			Many related FACS
+			Many related Microscopy
+		VIEW BY WESTERN BLOT
+			List of western blots
+			Sublist displays which experiments it uses
+			Can make new Western Blot
+	EXPERIMENTAL SETUP
+		Create cell lines & treatments
+		Create collections times
+		Finish & Run
+			Upon finish & run prompts user to continue using 'new western blot' in sidebar
+			If only western blot enabled than starts western blot automatically
+	WESTERN BLOT
+		Display active experiment lysates
+		Allow creation of more lysates
+		Pick lysates for Western Blot lanes
+		Run SDS-PAGE
+		Pick Antibodies
+		On adding schedule generate gel
+	Create multiple IPs using 		

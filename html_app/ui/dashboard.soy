@@ -1,0 +1,28 @@
+{namespace scb_ui}
+
+/**
+ * Dashboard
+ */
+{template .dashboard}
+	<div class='dashboard'>
+		Here will come list of available exercises<br>
+		Also list of available previous sessions<br>
+		Actually, this is everything that is not an experiment<br>
+		<input type='button' class='create_new_session' value='Create New Session'>
+	</div>
+{/template}
+
+/**
+ * Dashboard sidebar
+ * @param session_list List of sessions
+ * @param selected_session_id Selected session
+ */
+{template .dashboard_sidebar}
+	<ul class='sidebar_list'>
+	{foreach $session in $session_list}
+		<li><a href='#{$session.id}' session='{$session.id}' class='a_black_link select_session {if $selected_session_id == $session.id}
+			dashboard_sidebar_selected_session
+		{/if}'>{$session.name}</a></li>
+	{/foreach}
+	<ul>
+{/template}

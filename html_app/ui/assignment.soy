@@ -1,0 +1,61 @@
+{namespace scb_assignment}
+
+/**
+* Assignment selector
+* @param t template
+* @param assignment AssignmentView
+
+*/
+{template .main}
+<div class='scb_s_assignment_view'>
+    {call scb_assignments.display_header}
+    {param t:$t /}
+    {/call}
+    {call .display_assignment}
+    {param assignment:$assignment/}
+    {/call}
+    {call .display_details}
+    {param t:$t/}
+    {param assignment:$assignment/}
+    {/call}
+
+    {call scb_assignments.display_footer}
+    {param t:$t /}
+    {/call}
+</div>
+{/template}
+
+/**
+Assignment description
+@param t template
+@param assignment
+*/
+{template .display_details}
+<div class='scb_s_assignment_description'>
+        <b>
+        {$assignment.name |noAutoescape}
+        </b>
+        <br/>
+        {$assignment.description |noAutoescape}
+        <!-- {$t} -->
+    <br/>
+        <a class="scb_f_open_experiment" href="#view=experiment_design&assignment_id={$assignment.id}">Design experiment</a>
+        <a class="scb_f_select_assignment" href="#view=assignments&assignment_id={$assignment.id}">Assignments</a>
+
+</div>
+{/template}
+
+/**
+Assignment assignments
+@param assignment
+*/
+{template .display_assignment}
+<div class='scb_s_assignment_sidebar'>
+    DISPLAY ASSIGNMENT SIDEBAR {$assignment.id}
+    {call scb_assignments.display_experiments}
+    {param experiments:$assignment.experiments/}
+    {param assignment:$assignment/}
+    {/call}
+</div>
+{/template}
+

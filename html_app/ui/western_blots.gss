@@ -1,0 +1,4 @@
+.create_new_western_blot {
+    padding-left: 20px;
+    text-decoration: underline;
+}
