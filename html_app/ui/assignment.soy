@@ -3,19 +3,23 @@
 /**
 * Assignment selector
 * @param t template
+* @param global_template
 * @param assignment AssignmentView
 
 */
 {template .main}
 <div class='scb_s_assignment_view'>
     {call scb_assignments.display_header}
-    {param t:$t /}
+    {param global_template:$global_template /}
     {/call}
     {call .display_assignment}
     {param assignment:$assignment/}
+    {param global_template:$global_template /}
+    {param t:$t/}
     {/call}
     {call .display_details}
     {param t:$t/}
+    {param global_template:$global_template /}
     {param assignment:$assignment/}
     {/call}
 
@@ -37,7 +41,7 @@ Assignment description
         </b>
         <br/>
         {$assignment.description |noAutoescape}
-        <!-- {$t} -->
+        {$t.instructions |noAutoescape}
     <br/>
         <a class="scb_f_open_experiment" href="#view=experiment_design&assignment_id={$assignment.id}">Design experiment</a>
         <a class="scb_f_select_assignment" href="#view=assignments&assignment_id={$assignment.id}">Assignments</a>

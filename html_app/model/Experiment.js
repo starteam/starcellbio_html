@@ -9,8 +9,8 @@ scb.ExperimentList = function scb_ExperimentList(data, context, parent) {
 	self.start = function(d) {
 		d = ( typeof (d) == 'undefined' ? {} : d);
 		if (Object.keys(d).length == 0) {
-			if (context.template.experiment_templates && context.template.experiment_templates['default']) {
-				d = scb.utils.clone_and_clear(context.template.experiment_templates['default']);
+			if (this.parent.template.experiment_templates && this.parent.template.experiment_templates['default']) {
+				d = scb.utils.clone_and_clear(this.parent.template.experiment_templates['default']);
 			}
 		}
 		if (! d.hasOwnProperty('name')) {
@@ -34,6 +34,9 @@ scb.Experiment = function scb_Experiment(data, context, parent) {
 	var self = this;
 	self.parent = parent;
 	scb.ModelHelpers.common_entry_code(self, data, context);
+    scb.Utils.initialize_accessor_field(self,data,'hypothesis','',null,context);
+    scb.Utils.initialize_accessor_field(self,data,'last_view','experiment_design',null,context);
+
 
 	scb.Utils.initialize_accessor_field(self,data,'cell_treatment_list',{},scb.CellTreatmentList,context);
 	scb.Utils.initialize_accessor_field(self,data,'western_blot_list',{},scb.WesternBlotList,context);

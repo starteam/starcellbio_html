@@ -1,0 +1,49 @@
+{namespace scb_experiment_design}
+
+/**
+* Experiment design
+* @param t template
+* @param global_template
+* @param assignment Assignment model
+* @param experiment Experiment model
+*/
+{template .main}
+<div class='scb_s_experiment_design_view'>
+    {call scb_assignments.display_header}
+    {param global_template:$global_template /}
+    {/call}
+    {call .display_details}
+    {param t:$t/}
+    {param global_template:$global_template /}
+    {param assignment:$assignment/}
+    {param experiment:$experiment/}
+    {/call}
+    {call scb_assignments.display_footer}
+    {param t:$t /}
+    {/call}
+</div>
+{/template}
+
+/**
+Experiment active area
+@param t template
+@param assignment
+@param experiment
+*/
+{template .display_details}
+<div class='scb_s_assignment_description'>
+    EXPERIMENT DESIGN
+        <b>
+        {$experiment.name |noAutoescape}
+        </b>
+        <br/>
+        {$assignment.description |noAutoescape}
+        {$t.instructions |noAutoescape}
+        <br/>
+        <textarea class='scb_s_experiment_design_hypothesis' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.hypothesis}</textarea>
+    <br/>
+        <a class="scb_f_open_experiment_setup" href="#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Experiment setup</a><br/>
+        <a class="scb_f_open_assignment" href="#view=assignment&assignment_id={$assignment.id}">Assignment</a>
+
+</div>
+{/template}

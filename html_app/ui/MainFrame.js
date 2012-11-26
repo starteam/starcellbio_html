@@ -23,11 +23,30 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         'height':'100%'
     });
 
+    scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_hypothesis', function () {
+        var experiment_id = $(this).attr('experiment_id');
+        var assignment_id = $(this).attr('assignment_id');
+        var state = {
+            experiment_id: experiment_id,
+            assignment_id: assignment_id
+        };
+        var parsed = self.validate_state(state);
+        if( parsed.redisplay )
+        {
+            alert( "INVALID ELEMENT!");
+        }
+        if( parsed.experiment )
+        {
+            parsed.experiment.hypothesis = this.text;
+        }
+    });
+
     scb.utils.off_on(workarea, 'click', '.save_master_model', function () {
         var tmp;
         try {
-        tmp = assignments.selected.experiments.selected_id;
-        }catch(ex){}
+            tmp = assignments.selected.experiments.selected_id;
+        } catch (ex) {
+        }
         try {
             assignment.selected.experiments.selected_id = null;
         } catch (ex) {
@@ -66,6 +85,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context:context
     });
 
+    self.sections.experiment_design = new scb.ui.ExperimentDesignView({
+        workarea:workarea,
+        context:context
+    });
+
     self.sections.workarea = new scb.ui.WorkspaceView({
         workarea:workarea,
         context:context
@@ -76,28 +100,120 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             $.bbq.pushState(state, 2);
         }
     }
+
+    self.validate_state = function (state) {
+        var ret = {
+            redisplay:false
+        };
+        if (state.assignment_id) {
+            var assignment = assignments.get(state.assignment_id);
+            if (assignment) {
+                assignments.selected_id = assignment.id;
+                ret.assignment = assignment;
+
+                if (state.experiment_id) {
+                    var experiment = assignment.experiments.get(state.experiment_id);
+                    if (experiment) {
+                        assignment.experiments.selected_id = experiment.id;
+                        ret.experiment = experiment;
+                    }
+                    else {
+                        // if experiment_id is invalid go to assignment
+                        alert('Experiment ' + state.experiment_id + ' does not exist.');
+                        state.onhashchange = false;
+                        state.view = 'assignment';
+                        delete state.experiment_id;
+                        self.update_hash(state);
+                        ret.redisplay = true;
+                        ret.redisplay_state = state;
+                    }
+                }
+            }
+            else {
+                // if assignment_id is invalid go to assignments
+                alert('Assignment ' + state.assignment_id + ' does not exist.');
+                state.onhashchange = false;
+                state.view = 'assignments';
+                delete state.assignment_id;
+                self.update_hash(state);
+                ret.redisplay = true;
+                ret.redisplay_state = state;
+            }
+        }
+        if(! ret.redisplay )
+        {
+            self.update_hash(state);
+        }
+        return ret;
+    }
+
+
     self.show = function (state) {
         state = state || {
             view:'assignments'
         }
         console.info(JSON.stringify(state));
-
+        var parsed = self.validate_state(state);
+        if (parsed.redisplay) {
+            self.show(parsed.redisplay_state);
+            return;
+        }
         if (state.view == 'assignments') {
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             self.update_hash(state);
             self.sections.assignments.show({
-                workarea: workarea,
+                workarea:workarea,
                 assignments:assignments
             });
         }
         if (state.view == 'assignment') {
-            self.update_hash(state);
-            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
-            self.sections.assignment.show({
+            if (parsed.assignment) {
+                self.sections.assignment.show({
+                    workarea:workarea,
+                    assignment:parsed.assignment
+                });
+            }
+            else {
+                self.show({view:'assignments'})
+            }
+        }
+        if (state.view == 'experiment_design') {
+            if (!parsed.experiment) {
+                var experiment = parsed.assignment.experiments.start({});
+                state.experiment_id = experiment.id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+            self.sections.experiment_design.show({
                 workarea:workarea,
-                assignment:assignments.selected,
-                template:context.template
+                assignment:parsed.assignment,
+                experiment:parsed.experiment
             });
+        }
+        if (state.view == 'experiment_last') {
+            if( parsed.experiment)
+            {
+                state.view = parsed.experiment.last_view ? parsed.experiment.last_view : 'experiment_design';
+                self.show(state);
+            }
+            else
+            {
+                alert( "Experiment does not exist");
+                if( parsed.assignment)
+                {
+                    self.show({
+                        view:'assignment',
+                        assignment:parsed.assignment
+                    });
+                }
+                else
+                {
+                    self.show({
+                        view:'assignments'
+                    });
+                }
+            }
         }
 
 //		var assignment = assignments.selected;

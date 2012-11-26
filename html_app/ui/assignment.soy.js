@@ -18,7 +18,7 @@ scb_assignment.main = function(opt_data, opt_sb) {
 
 scb_assignment.display_details = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_assignment_description\'><b>', opt_data.assignment.name, '</b><br/>', opt_data.assignment.description, '<!-- ', soy.$$escapeHtml(opt_data.t), ' --><br/><a class="scb_f_open_experiment" href="#view=experiment_design&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '">Design experiment</a><a class="scb_f_select_assignment" href="#view=assignments&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '">Assignments</a></div>');
+  output.append('<div class=\'scb_s_assignment_description\'><b>', opt_data.assignment.name, '</b><br/>', opt_data.assignment.description, opt_data.t.instructions, '<br/><a class="scb_f_open_experiment" href="#view=experiment_design&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '">Design experiment</a><a class="scb_f_select_assignment" href="#view=assignments&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '">Assignments</a></div>');
   return opt_sb ? '' : output.toString();
 };
 

@@ -2,40 +2,41 @@
 
 /**
 * Assignment selector
-* @param t template 
+* @param global_template
+* //@/param t template
 * @param assignments AssignmentsView
 */
 {template .main}
 <div class='scb_s_assignments_view'>
     {call .display_header}
-    {param t:$t /}
+    {param global_template:$global_template /}
     {/call}
     {call .display_assignments}
     {param assignments:$assignments/}
     {/call}
     {call .display_abstract}
-    {param t:$t/}
+    {param global_template:$global_template/}
     {param assignments:$assignments/}
     {/call}
     {call .display_footer}
-    {param t:$t /}
+    {param global_template:$global_template /}
     {/call}
 </div>
 {/template}
 
 /**
 Assignment title
-@param t template
+@param global_template template
 */
 {template .display_header}
 <div class='scb_s_header'>
-        {$t.app_title}
+        {$global_template.app_title}
 </div>
 {/template}
 
 /**
 Assignment footer
-@/param t template
+@/param global_template template
 */
 {template .display_footer}
 <div class='scb_s_footer'>
@@ -45,7 +46,7 @@ Assignment footer
 
 /**
 Assignment description
-@param t template
+@param global_template template
 @param assignments
 */
 {template .display_abstract}
@@ -58,7 +59,7 @@ Assignment description
         <br/>
         {$assignments.selected.description |noAutoescape}
     {else}
-        {$t.app_description |noAutoescape}
+        {$global_template.app_description |noAutoescape}
     {/if}
 </div>
 {/template}
@@ -95,7 +96,7 @@ Assignment experiments
 {if length($experiments.list) != 0}
     {foreach $experiment in $experiments.list}
     <li class='scb_s_assignment_experiment_list_item'>
-        <a class='scb_f_open_assignment_experiment' href='#' model_id='{$assignment.id}' sub_model_id='{$experiment.id}'>{$experiment.name}</a>
+        <a class='scb_f_open_assignment_experiment' href='#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$experiment.id}' model_id='{$assignment.id}' sub_model_id='{$experiment.id}'>{$experiment.name}</a>
     </li>
     {/foreach}
 {/if}

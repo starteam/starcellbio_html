@@ -12,7 +12,7 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
 		window.assignments = assignments;
 		var workarea = gstate.workarea;
 		workarea.html(scb_assignments.main({
-			t : gstate.context.master_model,
+			global_template : gstate.context.master_model,
 			assignments : assignments
 		}));
 	}

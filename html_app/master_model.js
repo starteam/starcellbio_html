@@ -793,6 +793,7 @@ var __basic_tests = {
 			experiments : {},
 			template : {
 				instructions : '$DISPLAY_ASSIGNMENT_INSTRUCTIONS$',
+
 				add_new_row_instructions : 'On this page, set up your experiment to treat the wild-type worms with the four new drugs, Vulvarines 1-4, identified in your chemical screen. <ul><li>To get started, click <b>Add Treatment Protocol.</b></li><li>For each treatment protocol, select the <i>C. elegans</i> strain, treatment(s), and treatment dose.</li><li> For all of your treatments, treat the <i>C. elegans</i> immediately (time = 0 minutes) and collect after 3 days.</li><li>Once you finish setting up your experiment, select <b>Finish setup & run experiment.</b> After you run your experiment, you will be unable to change your treatment protocols.</li></ul>',
 				ui_configuration : {
 					experiment_steps_setup : true, // this is not even checked...
@@ -844,8 +845,8 @@ var __basic_tests = {
 								schedule_value : 3600 * 24 * 3,
 								id : '3 d'
 							}]
-							},
-						},
+							}
+						}
 					}
 				},
 				name : '7.02 StarCellBio Prototype Assignment',
