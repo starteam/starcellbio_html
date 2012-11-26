@@ -23,12 +23,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         'height':'100%'
     });
 
-    scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_hypothesis', function () {
+    scb.utils.off_on(workarea, 'keyup', '.scb_s_experiment_design_hypothesis', function (e) {
         var experiment_id = $(this).attr('experiment_id');
         var assignment_id = $(this).attr('assignment_id');
         var state = {
             experiment_id: experiment_id,
-            assignment_id: assignment_id
+            assignment_id: assignment_id,
+            view:'experiment_design'
         };
         var parsed = self.validate_state(state);
         if( parsed.redisplay )
@@ -37,8 +38,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if( parsed.experiment )
         {
-            parsed.experiment.hypothesis = this.text;
+            parsed.experiment.hypothesis = $(this).attr('value');
         }
+
     });
 
     scb.utils.off_on(workarea, 'click', '.save_master_model', function () {
