@@ -1,0 +1,146 @@
+{namespace scb_ui}
+
+/**
+*	Edit experiment name
+*	@param name
+*/ 
+{template .experiment_name_text_edit}
+	<input type='text' name='experiment_name_text_edit' size='45' class='experiment_name_text_edit' value='{$name}' />
+	<div class='experiment_row_treatment_tools'>
+		<img class='experiment_name_text_edit_save' src='icons/actions/Save.png' width='24px'>
+		<img class='experiment_name_text_edit_cancel' src='icons/actions/Cancel.png' width='24px'>
+	</div>
+{/template}
+
+/**
+* Edit cell line
+* @param treatment Treatment
+* @param template Template
+*/
+{template .experiment_setup_row_cellline_edit}
+	<select title='Cell Line' size='1' row='0' class='experiment_setup_row_cellline_edit_field'>
+		{foreach $t in keys($template.cell_lines)}
+			<option value='{$t}' {if $t == $treatment.cell_line}selected='true'{/if}>{$template.cell_lines[$t].name}</option>
+		{/foreach} 
+	</select>
+	<div class='experiment_row_treatment_tools'>
+		<img class='experiment_row_treatment_edit cell_line_save' src='icons/actions/Save.png' width='24px'>
+		<img class='experiment_row_treatment_edit cell_line_cancel' src='icons/actions/Cancel.png' width='24px'>
+	</div>
+	<div class='experiment_row_treatment_tools_spacer'>
+	</div>	
+{/template}
+
+/**
+* Edit treatment
+* @param treatment Treatment
+* @param template Template
+*/
+{template .experiment_setup_row_treatment_edit}
+	<div class='experiment_row_treatment_drug'>
+		{foreach $t in $treatment.drug_list.list}
+			{call .experiment_setup_row_treatment_drug_edit}
+				{param template:$template/}
+				{param concentrations:$template.drugs[$t.drug_id].concentrations/}
+				{param drug_id:$t.drug_id/}
+				{param concentration_id:$t.concentration_id/}	
+			{/call}
+		{/foreach}
+		<div class='add_experiment_row_treatment_drug'>
+			<img class='experiment_row_treatment_drug_add' src='icons/actions/Add.png' width='24px'>
+		</div>
+		
+	</div>
+	
+	{if $template.ui_configuration.treatment_options_display_temperature}	
+	<div class='experiment_row_treatment_temperature'>
+		<select title='Temperature' size='1' row='0' class='experiment_row_treatment_temperature_field'>
+			{foreach $t in keys($template.experiment_temperatures)}
+				<option value='{$t}' {if $t.id == $treatment.temperature}selected='true'{/if}>{$template.experiment_temperatures[$t].name}</option>
+			{/foreach} 
+		</select> C
+	</div>
+	{/if}				
+	
+	<div class='experiment_row_treatment_schedule' style='margin-left:-4px'>
+		{if $template.ui_configuration.treatment_options_edit_schedule}
+		<input type='text' value='{$treatment.schedule}' size='8' class='experiment_row_treatment_schedule_field'>
+		{else}
+		{$treatment.schedule}
+		{/if}
+	</div>
+
+	<div class='experiment_row_treatment_schedule2'>
+		{if $template.ui_configuration.treatment_options_edit_schedule}
+		<input type='text' value='{$treatment.duration}' size='8' class='experiment_row_treatment_duration_field'>
+		{else}
+		{$treatment.duration}
+		{/if}
+	</div>
+	
+	
+	<div class='experiment_row_treatment_tools'>
+		<img class='experiment_row_treatment_edit' src='icons/actions/Save.png' width='24px'>
+		<img class='experiment_row_treatment_edit' src='icons/actions/Cancel.png' width='24px'>
+	</div>
+	<div class='experiment_row_treatment_tools_spacer'>
+	</div>	
+{/template}
+
+/**
+*	Edit a drug
+*	@param template
+*	@param concentrations
+*	@param drug_id
+*   @param concentration_id
+*/
+{template .experiment_setup_row_treatment_drug_edit}
+	<div class='experiment_setup_row_treatment_drug_edit'>
+		<select title='drug' size='1' row='0' class='experiment_setup_row_treatment_drug_edit_drug_field'>
+		{foreach $t in keys($template.drugs)}
+			<option value='{$t}' {if $t==$drug_id}selected='selected'{/if}>{$template.drugs[$t].name}</option>
+		{/foreach}
+		</select>
+
+		{call .experiment_setup_row_treatment_drug_edit_concentrations}
+			{param template:$template/}
+			{param concentrations:$concentrations/}
+			{param concentration_id:$concentration_id/}
+		{/call}
+	
+		<img class='experiment_setup_row_treatment_drug_edit_delete' src='icons/actions/Delete.png' width='24px'>
+	</div>
+{/template}
+  
+
+/**
+*	Edit a drug concentration
+*	@param template
+*	@param concentrations
+*   @param concentration_id
+*/
+{template .experiment_setup_row_treatment_drug_edit_concentrations}
+	<select title='drug' size='1' row='0' class='experiment_setup_row_treatment_drug_edit_concentrations_field'>
+	{foreach $t in $concentrations}
+		<option value='{$t}' {if $t==$concentration_id}selected='true'{/if}>{$template.concentrations[$t].name}</option>
+	{/foreach}
+	</select>
+{/template}
+
+/***
+* Collection_schedule_time_edit
+* @param schedule
+*/
+{template .collection_schedule_time_edit}
+	<div class='experiment_setup_row_treatment_edit'>
+		<input type='text' value='{$schedule.schedule}' size='8' class='experiment_collection_schedule_field'>
+			<div class='experiment_row_treatment_tools'>
+		<img class='experiment_setup_row_treatment_save' src='icons/actions/Save.png' width='24px'>
+		<img class='experiment_setup_row_treatment_cancel' src='icons/actions/Cancel.png' width='24px'>
+	</div>
+	<div class='experiment_row_treatment_tools_spacer'>
+	</div>	
+		
+	</div>
+	</div>
+{/template}

@@ -34,7 +34,7 @@ Experiment active area
 <div class='scb_s_assignment_description'>
     EXPERIMENT DESIGN
         <b>
-        {$experiment.name |noAutoescape}
+            <input type='text' class='scb_s_experiment_name_edit' maxlength="20" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'>
         </b>
         <br/>
         {$assignment.description |noAutoescape}
@@ -44,6 +44,5 @@ Experiment active area
     <br/>
         <a class="scb_f_open_experiment_setup" href="#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Experiment setup</a><br/>
         <a class="scb_f_open_assignment" href="#view=assignment&assignment_id={$assignment.id}">Assignment</a>
-
 </div>
 {/template}

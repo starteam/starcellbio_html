@@ -54,12 +54,12 @@ def processor( path ):
         update_index = True
     if( path.endswith(".soy") ):
         infile = path
-        outfile = infile + ".js" 
+        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".js"
         call(["java", "-jar" , "/Users/ceraj/Sites/closure-templates/SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
         print "compile soy %s " % (path)
     if( path.endswith(".gss") ):
         infile = path
-        outfile = infile + ".css" 
+        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".css"
         call(["java", "-jar" , "../../closure-stylesheets-20111230.jar" , "--pretty-print" , infile , "-o" , outfile])
         print "compile gss %s to %s " % (infile,outfile)
     if( path.endswith(".touch_index" ) ):

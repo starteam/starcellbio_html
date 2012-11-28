@@ -1,0 +1,33 @@
+.making_lysates_schedule {
+    display: inline-block;
+    font-size: 12px
+}
+.making_lysates_temperature {
+    display: inline-block;
+    font-size: 12px;
+}
+.making_lysates_treatments {
+    display: inline-block;
+    font-size: 12px;
+}
+.making_lysates_treatment_name {
+    display: inline-block;
+    font-size: 9px;
+}
+.making_lysates_treatment_concentration {
+    display: inline-block;
+    font-size: 9px;
+}
+tr.tr_making_lysates_row:nth-child(even) {
+    background: #EEEEEE;
+}
+tr.tr_making_lysates_row:nth-child(odd) {
+    background: #ffffff;
+}
+.making_lysates_list {
+    width: 100%;
+}
+.create_new_making_lysates {
+    padding-left: 20px;
+    text-decoration: underline;
+}

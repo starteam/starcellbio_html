@@ -1,0 +1,162 @@
+{namespace scb_ui}
+
+/**
+* Making Lysates 
+* @param current
+* @param template
+*/
+{template .making_lysates}
+	{if $current == null }
+		{call .dashboard /}
+	{else}
+		{call .making_lysates_display}
+			{param current:$current /}
+			{param template:$template /}
+		{/call}
+	{/if}
+{/template}
+
+/**
+* Making Lysates sidebar
+* @param list
+* @param current 
+*/ 
+{template .making_lysates_sidebar}
+	<div class='create_new_making_lysates'>Make Lysates</div>			
+	<ul class='sidebar_list'>
+	{foreach $ml in $list.list}
+		<li><a href='#{$ml.id}' model_id='{$ml.id}' 
+			class='a_black_link select_making_lysates {if $current!=null}{if $current.id == $ml.id}experiment_sidebar_selected_experiment{/if}{/if}'>
+			{$ml.name}</a></li>
+	{/foreach}  
+	</ul>
+{/template}
+
+/**
+* Display making lysates
+* @param current
+* @param template
+*/
+{template .making_lysates_display}
+	<div class='making_lysates_display'>
+		{call .making_lysates_name}
+			{param current:$current /}
+		{/call}
+		<div class='experiment_rows space_above'>
+			<b>Experiment samples used to make lysates</b>
+		</div>
+		
+		<table class='making_lysates_list'>
+		<th class='making_lysates_table_header>
+			<td class='cell_line_name'>Cell line</td>
+			<td class='treatments'>Treatments</td>
+			<td class='collection_time'>Collection time</td>
+			<td class='whole_cell'>Whole Cell</td>
+			<td class='cytoplasm'>Cytoplasm</td>
+			<td class='nuclear'>Nuclear</td>
+			<td class='ip'>IP</td>
+		</th>
+			{foreach $t in $current.lysate_kind_list.list}
+		<tr class='tr_making_lysates_row'>
+				{call .making_lysates_row}
+					{param t:$t/} 
+					{param template:$template/}
+				{/call} 
+		</tr>
+			{/foreach}
+		</table>
+		<div class='finish_experiment_setup_wrapper space_above center_text '>
+		{if $current.finished == true}
+				<div class='no_op'>Experiment setup has been executed</div>		
+		{else}
+				<div class='finish_making_lysates center_text button green' model_id='{$current.id}'>Finish setup & run experiment</div>
+		{/if}
+		</div>
+		
+	</div> 
+{/template}
+
+/**
+* Display making lysates
+* @param t
+* @param template
+*/
+{template .making_lysates_row}
+
+<td class='cell_line_name'>{$template.cell_lines[$t.cell_line_id].name}</td>
+<td class='treatments'>
+	{foreach $tl in $t.treatment_list}
+	<div class='making_lysates_treatment_row {if index($tl)%2==0}making_lysates_treatment_row_even{else}making_lysates_treatment_row_odd{/if}'>
+		<div class='making_lysates_schedule'>
+			{$tl.schedule}
+		</div>
+		<div class='making_lysates_temperature'>
+			{$tl.temperature}
+		</div>
+		<div class='making_lysates_treatments'>
+			{foreach $td in $tl.drug_list}
+			<div class='making_lysates_treatment'>
+				<div class='making_lysates_treatment_name'>{$td.name}</div>
+				<div class='making_lysates_treatment_concentration'>{$td.concentration}</div>
+			</div>
+			{/foreach}
+		</div>
+	</div>
+	{/foreach} 
+</td>
+<td class='collection_time'>{$t.collection_time}</td>
+<td class='whole_cell'>
+	<input type='checkbox' class='making_lysates_whole_cell_checkbox' name='whole_cell' lysate_kind_id='{$t.id}' {if $t.whole_cell}checked='checked'{/if}>
+</td>
+<td class='cytoplasm'>
+	<input type='checkbox' class='making_lysates_cytoplasm_checkbox' name='cytoplasm' lysate_kind_id='{$t.id}' {if $t.cytoplasm}checked='checked'{/if}'>
+
+</td>
+<td class='nuclear'>
+	<input type='checkbox' class='making_lysates_nuclear_checkbox' name='nuclear' lysate_kind_id='{$t.id}' {if $t.nuclear}checked='checked'{/if}'>
+</td>
+<td class='ip'>
+	<input type='checkbox' class='making_lysates_ip_checkbox' name='ip' lysate_kind_id='{$t.id}' lysate_kind_id='{$t.id}' {if $t.ip}checked='checked'{/if}'>
+	<span class='ip_value_div' {if $t.ip}{else}style='display:none'{/if}>
+	{call scb_util.select_from_dict}
+		{param map:$template.ip_primary_anti_body /}
+		{param map_name:'name'/}
+		{param model_id:''/}
+		{param associated_class:'making_lysates_row_primary_anti_body'/}	
+		{param model2_id:$t.id/}	
+		
+	{/call}
+	{call scb_util.select_from_dict}
+		{param map:$template.ip_secondary_anti_body /}
+		{param map_name:'name'/}
+		{param model_id:''/}
+		{param associated_class:'making_lysates_row_secondary_anti_body'/}	
+		{param model2_id:$t.id/}	
+	{/call}
+	
+	</span>
+</td>
+
+{/template}
+
+
+/**
+* Display Name DIV
+* @param current
+*/
+{template .making_lysates_name}
+			<div class='making_lysates_name'>
+				Lysate preparation: <div class='making_lysates_text'>
+					{$current.name}
+					<div class='edit_tools'>
+						{call scb_util.small_icon_without_text}
+							{param src:'icons/actions/Edit.png'/}
+							{param text:'Edit'/}
+							{param cls:'edit_experiment_name_text'/}
+						{/call}
+					</div>
+					<div class='edit_tools_spacer'>
+					</div>
+				</div>
+			</div>
+{/template}

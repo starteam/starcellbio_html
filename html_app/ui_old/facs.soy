@@ -1,0 +1,277 @@
+{namespace scb_ui}
+
+/**
+ Display facs 
+  @param facs_list
+*/
+{template .display_facs_list}
+	Hello World, here we display facs list and we will add 'Add facs button'
+	<ul>
+	{foreach $lane in $facs_list.list}
+		<li><a href='#' class='select_facs_experiment' model_id='{$lane.id}'> {$lane.name}</a></li>
+	{/foreach}
+	</ul>
+	<a href="#" class='new_facs button green'>Add FACS experiment</a>
+{/template}
+
+/**
+ Display facs 
+  @param facs
+  @param facs_lanes
+  @param template
+  @param all_selected
+*/
+{template .display_facs}
+	{if $facs.prepared}
+		{call .display_facs_finished}
+			{param facs:$facs /}
+			{param facs_lanes:$facs_lanes /}
+			{param template:$template /}
+		{/call}	
+	{else}
+		{call .display_facs_setup}
+			{param facs:$facs /}
+			{param facs_lanes:$facs_lanes /}
+			{param template:$template /}
+			{param all_selected:$all_selected /}
+		{/call}
+	{/if}
+{/template} 
+
+
+/**
+ Display facs pre-finished
+  @param facs
+  @param facs_lanes
+  @param template 
+*/
+{template .display_facs_finished}
+	FACS: {$facs.name}<br>
+		{foreach $row in $facs_lanes}
+			{if $row.enabled}
+				{if $row.preparation_list.length != 0}
+					{foreach $preparation in $row.preparation_list.list}
+						{call .experiment_setup_row}
+							{param row:$row.cell_treatment/}
+							{param template:$template/}
+							{param selected_experiment:$row.experiment/}
+						{/call}
+						{$row.collection_schedule.schedule}
+				
+						{$preparation.kind}
+						{$preparation.treatment}
+						{$preparation.sub_treatment}
+						<br>
+						Chart:<br>
+						{call .display_facs_chart}
+							{param row:$row/}
+							{param template:$template/}
+							{param preparation:$preparation/}							
+						{/call}						
+						<br>
+					{/foreach}
+				{/if}
+			{/if}
+		{/foreach}
+	is_prepared: {$facs.prepared} 
+{/template}
+/**
+ Display facs pre-finished
+  @param facs
+  @param facs_lanes
+  @param template
+  @param all_selected
+*/
+{template .display_facs_setup}
+	FACS: {$facs.name}<br>
+	
+	<table>
+		<tr>
+		<th>
+				<input type='checkbox' class='facs_lane_select_all' {if $all_selected}checked='checked'{/if}/>			
+		</th>
+		<th>
+		Sample
+		</th>
+		<th>
+		Collection time
+		</th>
+		<th>Fixed?</th>
+		<th>
+			Treatments
+		</th>
+		<th>
+			(A)
+		</th>
+		</tr>
+		{foreach $row in $facs_lanes}
+			{if $row.enabled}
+				{if $row.preparation_list.length != 0}
+					{foreach $preparation in $row.preparation_list.list}
+						<tr class='{if index($row)%2==0}even1{else}odd1{/if}'>
+							{if isFirst($preparation)}
+								{call .display_facs_common_row}
+									{param row:$row/}
+									{param template:$template/}
+									{param height:$row.preparation_list.length+1/}
+								{/call}
+							{/if}
+							<td>
+								{if $row.enabled}
+									{call .display_facs_fix_select}
+										{param row:$row/}
+										{param template:$template/}
+										{param selected_experiment:$row.experiment/}
+										{param preparation:$preparation/}
+									{/call}					
+								{/if}
+							</td>
+							<td>
+								{if $row.enabled}
+									{call .display_facs_select1}
+										{param row:$row/}
+										{param preparation:$preparation/}
+										{param template:$template/}
+									{/call}								
+									on selected kind show dropdown
+								{/if}
+							</td>
+							<td>
+								<button class='facs_remove_preparataion button small red' data-row='{$row.id}' data-preparation='{$preparation.id}'>X</button>
+							</td>
+						</tr>
+					{/foreach}
+						<tr class='{if index($row)%2==0}even1{else}odd1{/if}'>
+							<td>
+								{call .display_facs_fix_select}
+									{param row:$row/}
+									{param template:$template/}
+									{param selected_experiment:$row.experiment/}
+								{/call}					
+							</td>
+							<td>
+								{if $row.enabled}
+									on selected kind show dropdown
+								{/if}
+							</td>
+							<td>
+								
+							</td>
+						</tr>
+
+				{else}
+				// if preparation list is empty, and it's enabled we need to display it w/ one templated row
+					<tr class='{if index($row)%2==0}even1{else}odd1{/if}'>
+						{call .display_facs_common_row}
+							{param row:$row/}
+							{param template:$template/}
+							{param height:1/}							
+						{/call}
+						<td>
+						{if $row.enabled}
+								{call .display_facs_fix_select}
+									{param row:$row/}
+									{param template:$template/}
+									{param selected_experiment:$row.experiment/}
+								{/call}										
+						{/if}
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>					
+					</tr>		
+				{/if}
+
+			{else}
+				// if row is not enabled display only checkbox
+				<tr class='{if index($row)%2==0}even1{else}odd1{/if}'>
+					{call .display_facs_common_row}
+						{param row:$row/}
+						{param template:$template/}
+						{param height:1/}													
+					{/call}
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>					
+				</tr>
+			{/if}
+
+
+		{/foreach}
+	</table>
+	<button class='facs_finish_sample_prep buttom medium green'>Prepare samples</button> 	
+	
+{/template}
+
+/**
+	@param row
+	@param preparation
+*/
+{template .display_facs_fix_select}
+	<input type='radio' id='kind_live_{$row.id}_{if $preparation}{$preparation.id}{/if}' data-row='{$row.id}' enabled='{$row.enabled}' {if $preparation}data-preparation='{$preparation.id}' {if $preparation.kind == 'live'}checked='checked'{/if} {/if} name='kind_{$row.id}_{if $preparation}{$preparation.id}{/if}' value='live' class='facs_kind_radio' /><label for='kind_live_{$row.id}'>Live</label>
+	<br>
+	<input type='radio' id='kind_fixed_{$row.id}_{if $preparation}{$preparation.id}{/if}' data-row='{$row.id}' enabled='{$row.enabled}' {if $preparation}data-preparation='{$preparation.id}' {if $preparation.kind == 'fixed'}checked='checked'{/if}{/if} name='kind_{$row.id}_{if $preparation}{$preparation.id}{/if}' value='fixed' class='facs_kind_radio'/><label for='kind_fixed_{$row.id}'>Fixed</label>
+{/template}
+
+/** 
+	@param row
+	@param template	
+	@param height
+*/
+{template .display_facs_common_row}
+	<td rowspan='{$height}'>
+	<input type='checkbox' class='facs_lane_select' id='{$row.id}' {if $row.enabled}checked='checked'{/if}/>
+	</td>
+	<td rowspan='{$height}'>
+		{call .experiment_setup_row}
+			{param row:$row.cell_treatment/}
+			{param template:$template/}
+			{param selected_experiment:$row.experiment/}
+		{/call}
+		{$row.cell_treatment.id}
+	</td>
+	<td rowspan='{$height}'>
+		{$row.collection_schedule.schedule}
+	</td>
+{/template}
+
+/**
+	@param row
+	@param template	
+	@param preparation
+
+*/
+{template .display_facs_select1}
+	<select class="facs_select1" data-row='{$row.id}' data-preparation='{$preparation.id}' id='select1_{$row.id}_{$preparation.id}'>
+	{foreach $s1 in keys($template.facs_preparation[$preparation.kind])}
+		<option value="{$s1}" {if $preparation.treatment == $s1}selected="selected"{/if} >{$template.facs_preparation[$preparation.kind][$s1].name}</option>
+	{/foreach}
+	</select>
+	{if $preparation.treatment}{if $template.facs_preparation[$preparation.kind][$preparation.treatment].secondary}
+	<select class="facs_select2" data-row='{$row.id}' data-preparation='{$preparation.id}' data-treatment='{$preparation.treatment}' id='select2_{$row.id}_{$preparation.id}'>
+	{foreach $s2 in keys($template.facs_preparation[$preparation.kind][$preparation.treatment].secondary)}
+		<option value="{$s2}" {if $preparation.sub_treatment == $s2}selected="selected"{/if} >{$template.facs_preparation[$preparation.kind][$preparation.treatment].secondary[$s2].name}</option>
+	{/foreach}
+	</select>
+		
+	{/if}{/if}
+	
+{/template}
+
+/**
+	Display individual chart
+	@param row
+	@param preparation
+	@/param template
+*/
+{template .display_facs_chart}
+	row: {$row.id}<br>
+	prep: {$preparation.id}<br>
+	<div id='facs_chart_{$preparation.id}' class='facs_chart' data-row_id='{$row.id}' data-preparation_id='{$preparation.id}' style='width:600px;height:300px'>
+	</div>
+	
+{/template}
