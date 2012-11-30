@@ -10,7 +10,7 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
 import time
-import ipdb
+import pudb
 
 class SimpleTest(TestCase):
     @classmethod
@@ -51,16 +51,56 @@ class SimpleTest(TestCase):
         self.assert_on_assigment_page()
         self.go_back('Assignments')
         self.assert_on_assigments_page()
-
+        self.open_assignment('basic_tests', title='StarCellBio Basic Tests',
+                    description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.assert_on_assigment_page()
+        self.assert_experiments([])
+        self.go_back('New Experiment')
+        self.assert_on_experiment_design_page()
+        experiment_title = 'Test Experiment 12'
+        experiment_hypo = 'Sample hypothesis ABC'
+        self.set_experiment_design_values(experiment_title,experiment_hypo)
+        self.go_back('Assignment')
+        self.assert_on_assigment_page()
+        self.assert_experiments(['Test Experiment 12'])
+        self.go_back(experiment_title)
+        self.assert_on_experiment_design_page()
+        self.assert_experiment_design_values(experiment_title,experiment_hypo)
 
     ## navigation helpers and assertions
     def assert_on_assigments_page(self):
         self.find_by_class_name('scb_s_assignments_view');
 
-
     def assert_on_assigment_page(self):
         self.find_by_class_name('scb_s_assignment_view');
 
+    def assert_on_experiment_design_page(self):
+        self.find_by_class_name('scb_s_experiment_design_view')
+
+    def assert_experiments(self,experiment_list):
+        web_experiment_list = self.driver.find_elements_by_class_name('scb_f_open_assignment_experiment')
+        self.assertEqual(experiment_list.__len__(), web_experiment_list.__len__())
+        web_experiment_titles = [x.text for x in web_experiment_list]
+        self.assertEqual( web_experiment_titles , experiment_list )
+        pass
+
+    def set_experiment_design_values(self,title,hypo):
+        e_title = self.find_by_class_name('scb_s_experiment_name_edit')
+        e_hypo = self.find_by_class_name('scb_s_experiment_design_hypothesis')
+        e_title.clear()
+        e_title.send_keys(title)
+        e_title.send_keys("\n")
+        e_hypo.clear()
+        e_hypo.send_keys(hypo)
+        e_hypo.send_keys("\n")
+        pass
+
+    def assert_experiment_design_values(self,title,hypo):
+        e_title = self.find_by_class_name('scb_s_experiment_name_edit')
+        e_hypo = self.find_by_class_name('scb_s_experiment_design_hypothesis')
+        self.assertEqual(e_title.get_attribute('value'),title)
+        self.assertEqual(e_hypo.text,hypo)
+        pass
 
     def load_website(self):
         self.driver.get(self.base_url)
