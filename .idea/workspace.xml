@@ -28,16 +28,7 @@
           <file leaf-file-name="experiment_design.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_design.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="20" column="41" selection-start="560" selection-end="560" vertical-scroll-proportion="-12.5">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="assignment.soy" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.soy">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="28" column="6" selection-start="657" selection-end="657" vertical-scroll-proportion="0.0">
+                <state line="20" column="41" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -89,13 +80,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="tests.py" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="100" column="0" selection-start="3699" selection-end="3699" vertical-scroll-proportion="0.7506562">
-                  <folding>
-                    <element signature="e#184#216#0" expanded="true" />
-                  </folding>
+                <state line="105" column="38" selection-start="3885" selection-end="3885" vertical-scroll-proportion="0.421365">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="assignment.soy" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.soy">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="28" column="6" selection-start="657" selection-end="657" vertical-scroll-proportion="0.0">
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -124,10 +122,10 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="MainFrame.js" pinned="false" current="false" current-in-tab="true">
+              <file leaf-file-name="MainFrame.js" pinned="false" current="true" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/html_app/ui_old/MainFrame.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state line="56" column="40" selection-start="1628" selection-end="1628" vertical-scroll-proportion="0.30612245">
+                    <state line="229" column="46" selection-start="7349" selection-end="7349" vertical-scroll-proportion="0.46296296">
                       <folding />
                     </state>
                   </provider>
@@ -158,7 +156,7 @@
               <file leaf-file-name="ExperimentDesignView.js" pinned="false" current="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state line="17" column="57" selection-start="516" selection-end="516" vertical-scroll-proportion="0.6836461">
+                    <state line="17" column="57" selection-start="516" selection-end="516" vertical-scroll-proportion="0.777439">
                       <folding />
                     </state>
                   </provider>
@@ -192,8 +190,8 @@
         <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_design.soy" />
         <option value="$PROJECT_DIR$/html_app/watch.py" />
-        <option value="$PROJECT_DIR$/html_app/ui_old/MainFrame.js" />
         <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
+        <option value="$PROJECT_DIR$/html_app/ui_old/MainFrame.js" />
       </list>
     </option>
   </component>
@@ -201,7 +199,7 @@
     <option name="x" value="19" />
     <option name="y" value="22" />
     <option name="width" value="2540" />
-    <option name="height" value="1534" />
+    <option name="height" value="1374" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -283,12 +281,12 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="Settings.JavaScript.Linters.JSHint" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="Settings.JavaScript.Linters.JSHint" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -335,6 +333,25 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="StarCellBio" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <method />
+    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -354,25 +371,6 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <module name="StarCellBio" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -455,17 +453,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="19" y="22" width="2540" height="1534" extended-state="0" />
-    <editor active="true" />
+    <frame x="19" y="22" width="2540" height="1374" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12189254" sideWeight="0.82802546" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17197452" sideWeight="0.4935846" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12269447" sideWeight="0.8284118" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17158818" sideWeight="0.49198076" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17197452" sideWeight="0.50360864" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17158818" sideWeight="0.5052125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979476" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -579,6 +577,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_design.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="41" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/Assignments.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="1" selection-start="732" selection-end="732" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="61" selection-start="1146" selection-end="1156" vertical-scroll-proportion="0.0">
@@ -602,45 +619,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="57" selection-start="516" selection-end="516" vertical-scroll-proportion="0.6836461">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_design.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="41" selection-start="560" selection-end="560" vertical-scroll-proportion="-12.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/model/Assignments.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="1" selection-start="732" selection-end="732" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui_old/MainFrame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="40" selection-start="1628" selection-end="1628" vertical-scroll-proportion="0.30612245">
+        <state line="17" column="57" selection-start="516" selection-end="516" vertical-scroll-proportion="0.777439">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="0" selection-start="3699" selection-end="3699" vertical-scroll-proportion="0.7506562">
-          <folding>
-            <element signature="e#184#216#0" expanded="true" />
-          </folding>
+        <state line="105" column="38" selection-start="3885" selection-end="3885" vertical-scroll-proportion="0.421365">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui_old/MainFrame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="229" column="46" selection-start="7349" selection-end="7349" vertical-scroll-proportion="0.46296296">
+          <folding />
         </state>
       </provider>
     </entry>

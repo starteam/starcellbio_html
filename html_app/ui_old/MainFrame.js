@@ -226,6 +226,15 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 experiment:parsed.experiment
             });
         }
+        if( state.view == 'experiment_setup') {
+            //TODO: if ! experiment than error
+            self.sections.experiment_setup.show({
+                workarea:workarea,
+                assignment:parsed.assignment,
+                experiment:parsed.experiment
+            });
+
+        }
         if (state.view == 'experiment_last') {
             if( parsed.experiment)
             {
