@@ -122,6 +122,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context:context
     });
 
+    self.sections.experiment_setup = new scb.ui.ExperimentSetupView({
+        workarea:workarea,
+        context:context
+    });
+
     self.sections.workarea = new scb.ui.WorkspaceView({
         workarea:workarea,
         context:context
@@ -227,7 +232,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if( state.view == 'experiment_setup') {
-            //TODO: if ! experiment than error
+            //TODO: if no experiment than error
             self.sections.experiment_setup.show({
                 workarea:workarea,
                 assignment:parsed.assignment,
