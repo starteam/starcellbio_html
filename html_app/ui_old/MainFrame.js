@@ -1,6 +1,63 @@
 //'use strict';
 
 scb.ui = scb.ui || {};
+scb.ui.static = scb.ui.static || {};
+
+scb.ui.static.MainFrame = scb.ui.static.MainFrame || {};
+
+scb.ui.static.MainFrame.update_hash = function (state) {
+    if (!state.onhashchange) {
+        $.bbq.pushState(state, 2);
+    }
+}
+
+scb.ui.static.MainFrame.validate_state = function (state) {
+     var ret = {
+         redisplay:false
+     };
+
+     if (state.assignment_id) {
+         var assignment = assignments.get(state.assignment_id);
+         if (assignment) {
+             assignments.selected_id = assignment.id;
+             ret.assignment = assignment;
+
+             if (state.experiment_id) {
+                 var experiment = assignment.experiments.get(state.experiment_id);
+                 if (experiment) {
+                     assignment.experiments.selected_id = experiment.id;
+                     ret.experiment = experiment;
+                 }
+                 else {
+                     // if experiment_id is invalid go to assignment
+                     alert('Experiment ' + state.experiment_id + ' does not exist.');
+                     state.onhashchange = false;
+                     state.view = 'assignment';
+                     delete state.experiment_id;
+                     scb.ui.static.MainFrame.update_hash(state);
+                     ret.redisplay = true;
+                     ret.redisplay_state = state;
+                 }
+             }
+         }
+         else {
+             // if assignment_id is invalid go to assignments
+             alert('Assignment ' + state.assignment_id + ' does not exist.');
+             state.onhashchange = false;
+             state.view = 'assignments';
+             delete state.assignment_id;
+             scb.ui.static.MainFrame.update_hash(state);
+             ret.redisplay = true;
+             ret.redisplay_state = state;
+         }
+     }
+     if( ret.redisplay == false && state.skip_hash_update != true)
+     {
+         scb.ui.static.MainFrame.update_hash(state);
+     }
+     return ret;
+ }
+
 
 scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     var self = this;
@@ -23,55 +80,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         'height':'100%'
     });
 
-    self.update_experiment_design_hypothesis = function(element)
-    {
-        var experiment_id = $(element).attr('experiment_id');
-        var assignment_id = $(element).attr('assignment_id');
-        var state = {
-            experiment_id: experiment_id,
-            assignment_id: assignment_id,
-            view:'experiment_design',
-            skip_hash_update: true
-        };
-        var parsed = self.validate_state(state);
-        if( parsed.redisplay )
-        {
-            alert( "INVALID ELEMENT!");
-        }
-        if( parsed.experiment )
-        {
-            parsed.experiment.hypothesis = $(element).attr('value');
-        }
-    }
-
-    self.scb_s_experiment_name_edit = function(element)
-    {
-        var experiment_id = $(element).attr('experiment_id');
-        var assignment_id = $(element).attr('assignment_id');
-        var state = {
-            experiment_id: experiment_id,
-            assignment_id: assignment_id,
-            view:'experiment_design',
-            skip_hash_update: true
-        };
-        var parsed = self.validate_state(state);
-        if( parsed.redisplay )
-        {
-            alert( "INVALID ELEMENT!");
-        }
-        if( parsed.experiment )
-        {
-            parsed.experiment.name = $(element).attr('value');
-        }
-    }
-
-    scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_hypothesis', function (e) {
-        self.update_experiment_design_hypothesis(this);
-    });
-
-    scb.utils.off_on(workarea, 'change', '.scb_s_experiment_name_edit', function (e) {
-        self.scb_s_experiment_name_edit(this);
-    });
+    scb.ui.static.ExperimentDesignView.register(workarea);
 
     scb.utils.off_on(workarea, 'click', '.save_master_model', function () {
         var tmp;
@@ -132,58 +141,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context:context
     })
 
-    self.update_hash = function (state) {
-        if (!state.onhashchange) {
-            $.bbq.pushState(state, 2);
-        }
-    }
 
-    self.validate_state = function (state) {
-        var ret = {
-            redisplay:false
-        };
-
-        if (state.assignment_id) {
-            var assignment = assignments.get(state.assignment_id);
-            if (assignment) {
-                assignments.selected_id = assignment.id;
-                ret.assignment = assignment;
-
-                if (state.experiment_id) {
-                    var experiment = assignment.experiments.get(state.experiment_id);
-                    if (experiment) {
-                        assignment.experiments.selected_id = experiment.id;
-                        ret.experiment = experiment;
-                    }
-                    else {
-                        // if experiment_id is invalid go to assignment
-                        alert('Experiment ' + state.experiment_id + ' does not exist.');
-                        state.onhashchange = false;
-                        state.view = 'assignment';
-                        delete state.experiment_id;
-                        self.update_hash(state);
-                        ret.redisplay = true;
-                        ret.redisplay_state = state;
-                    }
-                }
-            }
-            else {
-                // if assignment_id is invalid go to assignments
-                alert('Assignment ' + state.assignment_id + ' does not exist.');
-                state.onhashchange = false;
-                state.view = 'assignments';
-                delete state.assignment_id;
-                self.update_hash(state);
-                ret.redisplay = true;
-                ret.redisplay_state = state;
-            }
-        }
-        if( ret.redisplay == false && state.skip_hash_update != true)
-        {
-            self.update_hash(state);
-        }
-        return ret;
-    }
 
 
     self.show = function (state) {
@@ -192,7 +150,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
 
         console.info(JSON.stringify(state));
-        var parsed = self.validate_state(state);
+        var parsed = scb.ui.static.MainFrame.validate_state(state);
         if (parsed.redisplay) {
             self.show(parsed.redisplay_state);
             return;
@@ -200,7 +158,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
         if (state.view == 'assignments') {
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
-            self.update_hash(state);
+            scb.ui.static.MainFrame.update_hash(state);
             self.sections.assignments.show({
                 workarea:workarea,
                 assignments:assignments

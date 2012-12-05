@@ -28,17 +28,40 @@ Experiment active area
 @/param t template
 @param assignment
 @param experiment
+@param headings
+@param rows
+@param actions
 */
 {template .display_details}
 <div class='scb_s_experiment_setup_table'>
     EXPERIMENT SETUP
-    <table class="scb_s_experiment_design_table">
-        <thead>
+    <table class="scb_s_experiment_setup_table">
+        <thead class='scb_s_experiment_setup_table_head'>
+        {foreach $h in $headings}
+        <td class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
+            {$h.title}
+        </td>
+        {/foreach}
         </thead>
-
+        {foreach $r in $rows}
+        <tr class='scb_s_experiment_setup_table_row' cell_treatment='{$r.id}'>
+            {foreach $c in $r.columns}
+            <td class='scb_s_experiment_setup_table_heading' kind='{$c.kind}' rowspan="{$c.rows}">
+                {$c.title}
+            </td>
+            {/foreach}
+        </tr>
+        {/foreach}
     </table>
+    {foreach $action in $actions}
+        <button class='scb_f_experiment_setup_action' action='{$action.kind}'>{$action.title}</button>
+    {/foreach}
     <br/>
-        <a class="scb_f_open_experiment_setup_readonly" href="#view=experiment_setup_readonly&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Run Experiment</a><br/>
-        <a class="scb_f_open_experiment_design" href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design experiment</a>
+    <a class="scb_f_open_experiment_setup_readonly"
+       href="#view=experiment_setup_readonly&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Run
+        Experiment</a><br/>
+    <a class="scb_f_open_experiment_design"
+       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design
+        experiment</a>
 </div>
 {/template}
