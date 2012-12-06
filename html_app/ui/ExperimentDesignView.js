@@ -1,14 +1,8 @@
 'use strict';
 
-if( typeof (scb.ui ) == 'undefined') {
-	scb.ui = {};
-}
-if( typeof (scb.ui.static ) == 'undefined') {
-	scb.ui.static = {};
-}
-if( typeof (scb.ui.static.ExperimentDesignView ) == 'undefined') {
-	scb.ui.static.ExperimentDesignView = {};
-}
+scb.ui = scb.ui || {};
+scb.ui.static = scb.ui.static || {};
+scb.ui.static.ExperimentDesignView = scb.ui.static.ExperimentDesignView || {};
 
 scb.ui.static.ExperimentDesignView.update_experiment_design_hypothesis = function(element)
      {

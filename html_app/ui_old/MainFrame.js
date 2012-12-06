@@ -11,53 +11,6 @@ scb.ui.static.MainFrame.update_hash = function (state) {
     }
 }
 
-scb.ui.static.MainFrame.validate_state = function (state) {
-     var ret = {
-         redisplay:false
-     };
-
-     if (state.assignment_id) {
-         var assignment = assignments.get(state.assignment_id);
-         if (assignment) {
-             assignments.selected_id = assignment.id;
-             ret.assignment = assignment;
-
-             if (state.experiment_id) {
-                 var experiment = assignment.experiments.get(state.experiment_id);
-                 if (experiment) {
-                     assignment.experiments.selected_id = experiment.id;
-                     ret.experiment = experiment;
-                 }
-                 else {
-                     // if experiment_id is invalid go to assignment
-                     alert('Experiment ' + state.experiment_id + ' does not exist.');
-                     state.onhashchange = false;
-                     state.view = 'assignment';
-                     delete state.experiment_id;
-                     scb.ui.static.MainFrame.update_hash(state);
-                     ret.redisplay = true;
-                     ret.redisplay_state = state;
-                 }
-             }
-         }
-         else {
-             // if assignment_id is invalid go to assignments
-             alert('Assignment ' + state.assignment_id + ' does not exist.');
-             state.onhashchange = false;
-             state.view = 'assignments';
-             delete state.assignment_id;
-             scb.ui.static.MainFrame.update_hash(state);
-             ret.redisplay = true;
-             ret.redisplay_state = state;
-         }
-     }
-     if( ret.redisplay == false && state.skip_hash_update != true)
-     {
-         scb.ui.static.MainFrame.update_hash(state);
-     }
-     return ret;
- }
-
 
 scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     var self = this;
@@ -65,6 +18,53 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     self.sections = {};
 
     var assignments = new scb.AssignmentList(master_model.assignments, context);
+
+
+    scb.ui.static.MainFrame.validate_state = function (state) {
+        var ret = {
+            redisplay:false
+        };
+
+        if (state.assignment_id) {
+            var assignment = assignments.get(state.assignment_id);
+            if (assignment) {
+                assignments.selected_id = assignment.id;
+                ret.assignment = assignment;
+
+                if (state.experiment_id) {
+                    var experiment = assignment.experiments.get(state.experiment_id);
+                    if (experiment) {
+                        assignment.experiments.selected_id = experiment.id;
+                        ret.experiment = experiment;
+                    }
+                    else {
+                        // if experiment_id is invalid go to assignment
+                        alert('Experiment ' + state.experiment_id + ' does not exist.');
+                        state.onhashchange = false;
+                        state.view = 'assignment';
+                        delete state.experiment_id;
+                        scb.ui.static.MainFrame.update_hash(state);
+                        ret.redisplay = true;
+                        ret.redisplay_state = state;
+                    }
+                }
+            }
+            else {
+                // if assignment_id is invalid go to assignments
+                alert('Assignment ' + state.assignment_id + ' does not exist.');
+                state.onhashchange = false;
+                state.view = 'assignments';
+                delete state.assignment_id;
+                scb.ui.static.MainFrame.update_hash(state);
+                ret.redisplay = true;
+                ret.redisplay_state = state;
+            }
+        }
+        if (ret.redisplay == false && state.skip_hash_update != true) {
+            scb.ui.static.MainFrame.update_hash(state);
+        }
+        return ret;
+    }
 
     //assignments.selected_id = 'assignment_tufts';
     //TODO: DEBUG REMOVE
@@ -81,6 +81,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     });
 
     scb.ui.static.ExperimentDesignView.register(workarea);
+    scb.ui.static.ExperimentSetupView.register(workarea);
 
     scb.utils.off_on(workarea, 'click', '.save_master_model', function () {
         var tmp;
@@ -142,8 +143,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     })
 
 
-
-
     self.show = function (state) {
         state = state || {
             view:'assignments'
@@ -189,7 +188,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 experiment:parsed.experiment
             });
         }
-        if( state.view == 'experiment_setup') {
+        if (state.view == 'experiment_setup') {
             //TODO: if no experiment than error
             self.sections.experiment_setup.show({
                 workarea:workarea,
@@ -199,23 +198,19 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
         }
         if (state.view == 'experiment_last') {
-            if( parsed.experiment)
-            {
+            if (parsed.experiment) {
                 state.view = parsed.experiment.last_view ? parsed.experiment.last_view : 'experiment_design';
                 self.show(state);
             }
-            else
-            {
-                alert( "Experiment does not exist");
-                if( parsed.assignment)
-                {
+            else {
+                alert("Experiment does not exist");
+                if (parsed.assignment) {
                     self.show({
                         view:'assignment',
                         assignment:parsed.assignment
                     });
                 }
-                else
-                {
+                else {
                     self.show({
                         view:'assignments'
                     });

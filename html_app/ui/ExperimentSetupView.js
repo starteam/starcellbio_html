@@ -1,19 +1,26 @@
 'use strict';
 
-if (typeof (scb.ui ) == 'undefined') {
-    scb.ui = {};
+scb.ui = scb.ui || {};
+scb.ui.static = scb.ui.static || {};
+scb.ui.static.ExperimentSetupView = scb.ui.static.ExperimentSetupView || {};
+
+scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action = function (element) {
+    alert("Click" + $(element).html());
+}
+
+
+scb.ui.static.ExperimentSetupView.register = function (workarea) {
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_action', function (e) {
+        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action(this);
+    });
 }
 
 scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
     var self = this;
 
-    self.show = function (state) {
-        var workarea = state.workarea;
-        var experiment = state.experiment;
-        var template = state.assignment.template;
+    self.headings = function (table_map) {
         var headings = [];
-        for (var part_index in template.ui.experiment_setup.table) {
-            var part = template.ui.experiment_setup.table[part_index];
+        _.each(table_map, function (part) {
             if (part.kind == 'cell_line') {
                 headings.push(part);
             }
@@ -26,77 +33,100 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             if (part.kind == 'custom') {
                 headings.push(part);
             }
-        }
+
+        });
+        return headings;
+    }
+
+    self.rows = function (cell_treatment_list, headings) {
         var rows = [];
-        for (var sample in experiment.cell_treatment_list.list) {
+        _.each(cell_treatment_list, function (sample, sample_index, list) {
             var row = [];
-            var size = sample.treatment_list.list_size;
             var treatment_list = sample.treatment_list.list;
-            for( var treatment_index in treatment_list )
-            {
-                var treatment = treatment_list[treatment_index];
-                for (var part_index in headings) {
-                    var part = headings[part_index];
-                    if ( treatment_index == 0 && part.kind == 'cell_line') {
+            var size = treatment_list.length;
+            _.each(treatment_list, function (treatment, treatment_index, list) {
+                _.each(headings, function (part, part_index, list) {
+                    if (treatment_index == 0 && part.kind == 'cell_line') {
                         row.push({
                             kind:'cell_line',
-                            title: sample.cell_line.name,
-                            rows: size
+                            title:sample.cell_line.name,
+                            rows:size
                         });
                     }
-                    if( part.kind == 'treatments') {
+                    if (part.kind == 'treatments') {
                         for (var subpart in part.children) {
-                            if( subpart.kind == 'treatments')
-                            {row.push({
-                                kind:'treatments',
-                                title: 'here goes drugs',
-                                rows:1
-                            });
-                            }
-                            else if( subpart.kind == 'start')
-                            {
+                            if (subpart.kind == 'treatments') {
                                 row.push({
-                                    kind:'start',
-                                    title: treatment.schedule,
+                                    kind:'treatments',
+                                    title:'here goes drugs',
                                     rows:1
                                 });
                             }
-                            else if( subpart.kind == 'duration')
-                            {
+                            else if (subpart.kind == 'start') {
+                                row.push({
+                                    kind:'start',
+                                    title:treatment.schedule,
+                                    rows:1
+                                });
+                            }
+                            else if (subpart.kind == 'duration') {
                                 row.push({
                                     kind:'duration',
-                                    title: treatment.duration,
+                                    title:treatment.duration,
                                     rows:1
                                 })
                             }
                         }
                     }
-                    if( treatment_index == 0 && part.kind == 'custom')
-                    {
+                    if (treatment_index == 0 && part.kind == 'custom') {
                         row.push({
-                            kind: part.kind,
-                            title: sample[part.key],
+                            kind:part.kind,
+                            title:sample[part.key],
                             rows:1
                         })
                     }
-                }
-            }
+                });
+            });
             rows.push({
-                id: sample.id,
+                id:sample.id,
                 columns:row
             });
-        }
-        //TODO: loop over samples
-        //TODO: loop over headings
+        });
+        return rows;
+    }
+
+    self.action_rows = function(template,actions,headings){
+        var action_rows = {};
+        _.each(actions,function(action,action_index,list){
+            if (action.kind == 'add_protocol') {
+                var json_list = { list:template.experiment_setup_actions.add_protocol};
+                var list = new scb.CellTreatmentList(json_list,gstate.context,null);
+                var rows = self.rows(list,headings);
+                action_rows = _.union( action_rows, rows );
+            } else {
+                throw 'Unknown action kind';
+            }
+        });
+        return action_rows;
+    }
+
+    self.show = function (state) {
+        var workarea = state.workarea;
+        var experiment = state.experiment;
+        var template = state.assignment.template;
+        var headings = self.headings(template.ui.experiment_setup.table);
+        var rows = self.rows(experiment.cell_treatment_list.list, headings);
+        var action_rows = self.action_rows(template,template.ui.experiment_setup.actions,headings);
 
         workarea.html(scb_experiment_setup.main({
             global_template:gstate.context.master_model,
             t:template,
             assignment:state.assignment,
             experiment:state.experiment,
-            headings: headings,
+            headings:headings,
             rows:rows,
-            actions:template.ui.experiment_setup.actions
+            actions:template.ui.experiment_setup.actions,
+            action_rows: action_rows
         }));
         state.experiment.last_view = 'experiment_design';
     }

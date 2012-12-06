@@ -912,8 +912,50 @@ var __basic_tests = {
                     title:"Stimulation Time",
                     editable:false,
                     key:"stimulation_time"}
-            ],actions:[{kind:"add_protocol",title:"Add Treatment Protocol"}
+            ], actions:[
+                {kind:"add_protocol", title:"Add Treatment Protocol"}
             ]}
+        },
+
+        experiment_setup_actions:{
+            add_protocol:[
+                {   protocol_id: 'P1',
+                    title:'Basic protocol',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', duration_value:3600 * 24 * 3, duration:'3 d', drug_list:{list:[
+                            {drug_id:'nc', concentration_id:0}
+                        ]}}
+                    ]},
+                    collection_schedule_list:{
+                        list:[
+                            {
+                                schedule:"3 d",
+                                schedule_value:3600 * 24 * 3,
+                                id:'3 d'
+                            }
+                        ]
+                    }
+                },
+                {   protocol_id: 'P2',
+                    title:'Basic protocol',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', duration_value:3600 * 24 * 3, duration:'3 d', drug_list:{list:[
+                            {drug_id:'nc', concentration_id:0}
+                        ]}}
+                    ]},
+                    collection_schedule_list:{
+                        list:[
+                            {
+                                schedule:"3 d",
+                                schedule_value:3600 * 24 * 3,
+                                id:'3 d'
+                            }
+                        ]
+                    }
+                }
+
+            ]
+
         },
 
         add_new_row_instructions:'On this page, set up your experiment to treat the wild-type worms with the four new drugs, Vulvarines 1-4, identified in your chemical screen. <ul><li>To get started, click <b>Add Treatment Protocol.</b></li><li>For each treatment protocol, select the <i>C. elegans</i> strain, treatment(s), and treatment dose.</li><li> For all of your treatments, treat the <i>C. elegans</i> immediately (time = 0 minutes) and collect after 3 days.</li><li>Once you finish setting up your experiment, select <b>Finish setup & run experiment.</b> After you run your experiment, you will be unable to change your treatment protocols.</li></ul>',

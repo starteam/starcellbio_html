@@ -43,7 +43,7 @@ scb_experiment_setup.display_details = function(opt_data, opt_sb) {
   var actionListLen39 = actionList39.length;
   for (var actionIndex39 = 0; actionIndex39 < actionListLen39; actionIndex39++) {
     var actionData39 = actionList39[actionIndex39];
-    output.append('<button class=\'scb_f_experiment_setup_action\' action=\'', soy.$$escapeHtml(actionData39.kind), '\'>', soy.$$escapeHtml(actionData39.title), '</button>');
+    output.append('<div class="scb_f_experiment_setup_action_', soy.$$escapeHtml(actionData39.kind), '"></div><button class=\'scb_f_experiment_setup_action\' action=\'', soy.$$escapeHtml(actionData39.kind), '\'>', soy.$$escapeHtml(actionData39.title), '</button>');
   }
   output.append('<br/><a class="scb_f_open_experiment_setup_readonly" href="#view=experiment_setup_readonly&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '">Run Experiment</a><br/><a class="scb_f_open_experiment_design" href="#view=experiment_design&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '">Design experiment</a></div>');
   return opt_sb ? '' : output.toString();

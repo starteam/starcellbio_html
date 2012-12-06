@@ -225,7 +225,7 @@ scb.utils.accessor2_getter_only = function (obj, field, source) {
     Object.defineProperty(obj, field, { get:function () {
         return source[field];
     }, set:function (d) {
-        throw new "READ ONLY FIELD";
+        throw "READ ONLY FIELD";
     }});
 }
 
@@ -238,7 +238,7 @@ scb.utils.accessor2_custom = function (obj, field, getter, setter) {
 }
 
 scb.utils.read_only_exception = function () {
-    throw new "READ ONLY FIELD";
+    throw "READ ONLY FIELD";
 }
 
 scb.utils.tools_hover = function (target, top) {
@@ -287,13 +287,13 @@ scb.utils.wrap_list = function (obj, field, source, proto, context) {
             }
             return ret;
         }, set:function (d) {
-            throw new "READ ONLY FIELD";
+            throw 'READ ONLY FIELD';
         }});
     Object.defineProperty(obj, field + "_size", {
         get:function () {
             return source[field].length;
         }, set:function (d) {
-            throw new "READ ONLY FIELD";
+            throw 'READ ONLY FIELD';
         }});
 }
 

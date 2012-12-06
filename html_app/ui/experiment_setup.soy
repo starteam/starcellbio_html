@@ -54,6 +54,9 @@ Experiment active area
         {/foreach}
     </table>
     {foreach $action in $actions}
+        <div class="scb_f_experiment_setup_action_{$action.kind}">
+
+        </div>
         <button class='scb_f_experiment_setup_action' action='{$action.kind}'>{$action.title}</button>
     {/foreach}
     <br/>
