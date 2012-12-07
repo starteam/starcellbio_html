@@ -918,107 +918,35 @@ var __basic_tests = {
         },
 
         experiment_setup_actions:{
-            add_protocol:[
-                {   protocol_id: 'P1',
+            cell_lines:['wt'],
+            treatment_protocol_list:[
+                {
+                    id:'P1',
                     title:'Basic protocol',
                     treatment_list:{list:[
                         {schedule_value:0, schedule:'immediately', duration_value:3600 * 24 * 3, duration:'3 d', drug_list:{list:[
                             {drug_id:'nc', concentration_id:0}
                         ]}}
-                    ]},
-                    collection_schedule_list:{
-                        list:[
-                            {
-                                schedule:"3 d",
-                                schedule_value:3600 * 24 * 3,
-                                id:'3 d'
-                            }
-                        ]
-                    }
+                    ]}
                 },
-                {   protocol_id: 'P2',
-                    title:'Basic protocol',
+                {
+                    id:'P2',
+                    title:'Basic protocol 2',
                     treatment_list:{list:[
                         {schedule_value:0, schedule:'immediately', duration_value:3600 * 24 * 3, duration:'3 d', drug_list:{list:[
                             {drug_id:'nc', concentration_id:0}
                         ]}}
-                    ]},
-                    collection_schedule_list:{
-                        list:[
-                            {
-                                schedule:"3 d",
-                                schedule_value:3600 * 24 * 3,
-                                id:'3 d'
-                            }
-                        ]
-                    }
+                    ]}
                 }
 
+            ],
+            collection_schedule_list:[
+                {id:'3 d', title:'3 days'}
             ]
-
         },
 
         add_new_row_instructions:'On this page, set up your experiment to treat the wild-type worms with the four new drugs, Vulvarines 1-4, identified in your chemical screen. <ul><li>To get started, click <b>Add Treatment Protocol.</b></li><li>For each treatment protocol, select the <i>C. elegans</i> strain, treatment(s), and treatment dose.</li><li> For all of your treatments, treat the <i>C. elegans</i> immediately (time = 0 minutes) and collect after 3 days.</li><li>Once you finish setting up your experiment, select <b>Finish setup & run experiment.</b> After you run your experiment, you will be unable to change your treatment protocols.</li></ul>',
-        ui_configuration:{
-            experiment_steps_setup:true, // this is not even checked...
-            experiment_steps_western_blot:true,
-            experiment_steps_facs:false,
-            experiment_steps_microscopy:false,
-            treatment_options_display_temperature:false,
-            treatment_options_edit_schedule:false,
-            lysate_display_ip:false,
-            amount_of_protein_loaded:50,
-            experiment_setup_duration:3600, // seconds
-            experiment_setup_resolution_height:3600,
-            experiment_setup_physical_height:600,
-            collection_times_fixed:true,
-            maximum_number_of_treatments_per_protocol:1,
-            show_add_new_experiment_rows:true
-        },
-        drug_template:{
-            name:'Buffer only',
-            drug_id:'nc',
-            concentration_id:0
-        },
-        experiment_templates:{
-            'default':{
-                collection_schedule_list:{
-                    list:[
-                        {
-                            schedule:"3 d",
-                            schedule_value:3600 * 24 * 3,
-                            id:'3 d'
-                        }
-                    ]
-                },
-                treatment:{
-                    schedule_value:0,
-                    schedule:'immediately',
-                    duration_value:3600 * 24 * 3,
-                    duration:'3 d'
-                }
-            },
-            'treatment_protocol_template':{
-                'P1':{
-                    title:'Basic protocol',
-                    treatment_list:{list:[
-                        {schedule_value:0, schedule:'immediately', duration_value:3600 * 24 * 3, duration:'3 d', drug_list:{list:[
-                            {drug_id:'nc', concentration_id:0}
-                        ]}}
-                    ]},
-                    collection_schedule_list:{
-                        list:[
-                            {
-                                schedule:"3 d",
-                                schedule_value:3600 * 24 * 3,
-                                id:'3 d'
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        name:'7.02 StarCellBio Prototype Assignment',
+
         concentrations:{
             1:{
                 name:'1 ' + microEntity + 'M',
@@ -1324,7 +1252,7 @@ var __basic_tests = {
             }
         }
     }
-};
+}
 
 
 master_model_data = {

@@ -4,15 +4,32 @@ scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.ExperimentSetupView = scb.ui.static.ExperimentSetupView || {};
 
-scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action = function (element) {
-    alert("Click" + $(element).html());
+scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open = function (element) {
+    var dialog_selector = $('.scb_s_experiment_setup_table_add_samples_dialog');
+    dialog_selector.dialog("open");
+    scb.utils.off_on(dialog_selector, 'click', '.scb_f_experiment_setup_dialog_apply', function (e) {
+        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply(this);
+    });
+    scb.utils.off_on(dialog_selector, 'click', '.scb_f_experiment_setup_dialog_cancel', function (e) {
+        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_cancel(this);
+    });
+
 }
+
+scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply = function (param) {
+    $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close");
+};
+
+scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_cancel = function (param) {
+    $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close");
+};
 
 
 scb.ui.static.ExperimentSetupView.register = function (workarea) {
-    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_action', function (e) {
-        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action(this);
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_table_add_samples_dialog', function (e) {
+        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open(this);
     });
+
 }
 
 scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
@@ -129,5 +146,6 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             action_rows: action_rows
         }));
         state.experiment.last_view = 'experiment_design';
+        $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen:false})
     }
 }
