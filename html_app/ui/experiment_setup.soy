@@ -58,6 +58,8 @@ Experiment active area
     </table>
     {call .display_add_sample_dialog}
         {param t:$t /}
+        {param assignment:$assignment /}
+        {param experiment:$experiment /}
     {/call}
     <br/>
     <a class="scb_f_open_experiment_setup_readonly"
@@ -72,30 +74,32 @@ Experiment active area
 /**
 * Display add dialog
 * @param t template
+* @param assignment
+* @param experiment
 */
 {template .display_add_sample_dialog}
-<div class='scb_s_experiment_setup_table_add_samples_dialog' title='Add sample'>
+<div class='scb_s_experiment_setup_table_add_samples_dialog' title='Add sample' experiment_id='{$experiment.id}' assignment_id='{$assignment.id}'>
     <div class='scb_s_experiment_setup_dialog_cell_lines'>
-       <select class='scb_s_experiment_setup_dialog_cell_lines_select'>
-           <option value="0" selected="selected" data-skip="1">Choose Your Cell Line</option>
-           {foreach $cell_line in $t.experiment_setup_actions.cell_lines}
-                <option value='{$cell_line}'>{$t.cell_lines[$cell_line].name}</option>
-           {/foreach}
-       </select>
+        Choose Your Cell Line:
+        <select class='scb_s_experiment_setup_dialog_cell_lines_select' multiple='multiple'>
+            {foreach $cell_line in $t.experiment_setup_actions.cell_lines}
+            <option value='{$cell_line.id}'>{$cell_line.title}</option>
+            {/foreach}
+        </select>
     </div>
     <div class='scb_s_experiment_setup_dialog_treatments'>
-        <select class='scb_s_experiment_setup_dialog_treatments_select'>
-            <option value="0" selected="selected" data-skip="1">Choose Your Treatment Line</option>
+        Choose Your Treatment Line<br>
+        <select class='scb_s_experiment_setup_dialog_treatments_select' multiple='multiple'>
             {foreach $treat in $t.experiment_setup_actions.treatment_protocol_list}
-                 <option value='{$treat.id}'>{$treat.title}</option>
+            <option value='{$treat.id}'>{$treat.title}</option>
             {/foreach}
         </select>
     </div>
     <div class='scb_s_experiment_setup_dialog_collection'>
-        <select class='scb_s_experiment_setup_dialog_collection_select'>
-            <option value="0" selected="selected" data-skip="1">Choose Your Treatment Line</option>
+        Choose Your Treatment Line<br>
+        <select class='scb_s_experiment_setup_dialog_collection_select' multiple='multiple'>
             {foreach $collect in $t.experiment_setup_actions.collection_schedule_list}
-                 <option value='{$collect.id}'>{$collect.title}</option>
+            <option value='{$collect.id}'>{$collect.title}</option>
             {/foreach}
         </select>
     </div>

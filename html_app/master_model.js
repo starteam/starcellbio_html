@@ -918,7 +918,11 @@ var __basic_tests = {
         },
 
         experiment_setup_actions:{
-            cell_lines:['wt'],
+            cell_lines:[{
+                id:'wt',
+                title: 'Wild Type',
+                cell_line:'wt'
+            }],
             treatment_protocol_list:[
                 {
                     id:'P1',

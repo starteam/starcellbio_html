@@ -8,6 +8,55 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open = function 
     var dialog_selector = $('.scb_s_experiment_setup_table_add_samples_dialog');
     dialog_selector.dialog("open");
     scb.utils.off_on(dialog_selector, 'click', '.scb_f_experiment_setup_dialog_apply', function (e) {
+        //TODO: form new 'cell_treatment' using dialog box
+        var experiment_id = $('.scb_s_experiment_setup_table_add_samples_dialog').attr('experiment_id');
+        var assignment_id = $('.scb_s_experiment_setup_table_add_samples_dialog').attr('assignment_id');
+        var state = {
+            experiment_id: experiment_id,
+            assignment_id: assignment_id,
+            view:'experiment_setup',
+            skip_hash_update: true
+        };
+        var parsed = scb.ui.static.MainFrame.validate_state(state);
+        if( parsed.redisplay )
+        {
+            alert( "INVALID ELEMENT!");
+        }
+        var cell_treatment_list = parsed.experiment.cell_treatment_list;
+        var template = parsed.assignment.template;
+        var cell_lines = $('.scb_s_experiment_setup_dialog_cell_lines_select').val();
+        var treatments = $('.scb_s_experiment_setup_dialog_treatments_select').val();
+        var schedules = $('.scb_s_experiment_setup_dialog_collection_select').val();
+        _.each(cell_lines, function (cell_line) {
+            var cell_line_template = scb.utils.find( template.experiment_setup_actions.cell_lines , cell_line );
+            _.each(treatments, function (treatment) {
+                var treatment_template = scb.utils.find( template.experiment_setup_actions.treatment_protocol_list,treatment);
+                _.each(schedules, function (schedule) {
+                    var collection_template = scb.utils.find( template.experiment_setup_actions.collection_schedule_list,schedule);
+                    var construct = {} ;
+                    _.each(cell_line_template, function( v,k) {
+                        if( k != 'id' && k != 'title' )
+                        {
+                            construct[k]=v;
+                        }
+                    });
+                    _.each(treatment_template, function( v,k) {
+                        if( k != 'id' && k != 'title' )
+                        {
+                            construct[k]=v;
+                        }
+                    });
+                    _.each(collection_template, function( v,k) {
+                        if( k != 'id' && k != 'title' )
+                        {
+                            construct[k]=v;
+                        }
+                    });
+                    cell_treatment_list.start(construct);
+                    console.info( "NEXT");
+                });
+            });
+        });
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply(this);
     });
     scb.utils.off_on(dialog_selector, 'click', '.scb_f_experiment_setup_dialog_cancel', function (e) {
@@ -112,14 +161,14 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         return rows;
     }
 
-    self.action_rows = function(template,actions,headings){
+    self.action_rows = function (template, actions, headings) {
         var action_rows = {};
-        _.each(actions,function(action,action_index,list){
+        _.each(actions, function (action, action_index, list) {
             if (action.kind == 'add_protocol') {
                 var json_list = { list:template.experiment_setup_actions.add_protocol};
-                var list = new scb.CellTreatmentList(json_list,gstate.context,null);
-                var rows = self.rows(list,headings);
-                action_rows = _.union( action_rows, rows );
+                var list = new scb.CellTreatmentList(json_list, gstate.context, null);
+                var rows = self.rows(list, headings);
+                action_rows = _.union(action_rows, rows);
             } else {
                 throw 'Unknown action kind';
             }
@@ -133,7 +182,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         var template = state.assignment.template;
         var headings = self.headings(template.ui.experiment_setup.table);
         var rows = self.rows(experiment.cell_treatment_list.list, headings);
-        var action_rows = self.action_rows(template,template.ui.experiment_setup.actions,headings);
+        var action_rows = self.action_rows(template, template.ui.experiment_setup.actions, headings);
 
         workarea.html(scb_experiment_setup.main({
             global_template:gstate.context.master_model,
@@ -143,7 +192,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             headings:headings,
             rows:rows,
             actions:template.ui.experiment_setup.actions,
-            action_rows: action_rows
+            action_rows:action_rows
         }));
         state.experiment.last_view = 'experiment_design';
         $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen:false})
