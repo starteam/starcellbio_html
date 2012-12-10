@@ -46,9 +46,9 @@ scb.Drug = function scb_Drug(data, context,parent) {
 		return data.drug_id != null ? context.template.drugs[data.drug_id].name : '';
 	}, scb.utils.read_only_exception);
 
-	self.drug_concentration = function() {
+    scb.utils.accessor2_custom(self, 'drug_concentration' , function() {
 		return data.concentration_id != null ? context.template.concentrations[data.concentration_id].name : '';
-	}
+	}, scb.utils.read_only_exception);
 
 	scb.Utils.accessor_toString(self.drug_id);
 	scb.Utils.accessor_toString(self.concentration_id);

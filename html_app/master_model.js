@@ -901,9 +901,8 @@ var __basic_tests = {
                 },
                 {kind:"treatments",
                     children:[
-                        {kind:"treatments",
-                            title:"Treatments",
-                            editable:false},
+                        {kind:"drug", title:"Treatments", editable:false},
+                        {kind:"concentration", title:"Concentration", editable:false},
                         {kind:"start", title:"Start", editable:false},
                         {kind:"duration", title:"Duration", editable:false}
                     ]
@@ -918,18 +917,20 @@ var __basic_tests = {
         },
 
         experiment_setup_actions:{
-            cell_lines:[{
-                id:'wt',
-                title: 'Wild Type',
-                cell_line:'wt'
-            }],
+            cell_lines:[
+                {
+                    id:'wt',
+                    title:'Wild Type',
+                    cell_line:'wt'
+                }
+            ],
             treatment_protocol_list:[
                 {
                     id:'P1',
                     title:'Basic protocol',
                     treatment_list:{list:[
                         {schedule_value:0, schedule:'immediately', duration_value:3600 * 24 * 3, duration:'3 d', drug_list:{list:[
-                            {drug_id:'nc', concentration_id:0}
+                            {drug_id:'nc', concentration_id:0},{drug_id:'nc', concentration_id:1}
                         ]}}
                     ]}
                 },
