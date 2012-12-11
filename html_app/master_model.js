@@ -910,7 +910,10 @@ var __basic_tests = {
                 {kind:"custom",
                     title:"Stimulation Time",
                     editable:false,
-                    key:"stimulation_time"}
+                    key:"stimulation_time"},
+                {kind:"actions",
+                    title:"Actions"
+                }
             ], actions:[
                 {kind:"add_protocol", title:"Add Treatment Protocol"}
             ]}
@@ -922,28 +925,90 @@ var __basic_tests = {
                     id:'wt',
                     title:'Wild Type',
                     cell_line:'wt'
+                },
+                {
+                    id:'m1',
+                    title:'Mutant 1',
+                    cell_line:'m1'
                 }
             ],
             treatment_protocol_list:[
                 {
                     id:'P1',
-                    title:'Basic protocol',
+                    title:'Buffer Only',
                     treatment_list:{list:[
-                        {schedule_value:0, schedule:'immediately', duration_value:3600 * 24 * 3, duration:'3 d', drug_list:{list:[
-                            {drug_id:'nc', concentration_id:0},{drug_id:'nc', concentration_id:1}
-                        ]}}
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:0}
+                            ]}}
                     ]}
                 },
                 {
                     id:'P2',
-                    title:'Basic protocol 2',
+                    title:'V1 low conc',
                     treatment_list:{list:[
-                        {schedule_value:0, schedule:'immediately', duration_value:3600 * 24 * 3, duration:'3 d', drug_list:{list:[
-                            {drug_id:'nc', concentration_id:0}
-                        ]}}
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:'0'},
+                                {drug_id:'1', concentration_id:'1'}
+                            ]}}
                     ]}
+                },
+                {
+                    id:'P3',
+                    title:'V1 high conc',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:'0'},
+                                {drug_id:'1', concentration_id:'125'}
+                            ]}}
+                    ]}
+                },
+                {
+                    id:'P4',
+                    title:'V2 low conc',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:'0'},
+                                {drug_id:'1', concentration_id:'50'}
+                            ]}}
+                    ]}
+                },
+                {
+                    id:'P5',
+                    title:'Many drugs',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:'0'},
+                                {drug_id:'1', concentration_id:'0'},
+                                {drug_id:'2', concentration_id:'5'},
+                                {drug_id:'3', concentration_id:'10'}
+                            ]}}
+                    ]}
+                },
+                {
+                    id:'P6',
+                    title:'Many drugs, Many times',
+                    treatment_list:{
+                        list:[
+                            {schedule_value:0, schedule:'immediately', // start
+                                duration_value:3600 * 24 * 3, duration:'3 d', // end
+                                drug_list:{list:[
+                                    {drug_id:'nc', concentration_id:'0'},
+                                    {drug_id:'1', concentration_id:'0'},
+                                    {drug_id:'2', concentration_id:'5'},
+                                    {drug_id:'3', concentration_id:'10'}
+                                ]}}
+                        ]}
                 }
-
             ],
             collection_schedule_list:[
                 {id:'3 d', title:'3 days'}
@@ -953,35 +1018,35 @@ var __basic_tests = {
         add_new_row_instructions:'On this page, set up your experiment to treat the wild-type worms with the four new drugs, Vulvarines 1-4, identified in your chemical screen. <ul><li>To get started, click <b>Add Treatment Protocol.</b></li><li>For each treatment protocol, select the <i>C. elegans</i> strain, treatment(s), and treatment dose.</li><li> For all of your treatments, treat the <i>C. elegans</i> immediately (time = 0 minutes) and collect after 3 days.</li><li>Once you finish setting up your experiment, select <b>Finish setup & run experiment.</b> After you run your experiment, you will be unable to change your treatment protocols.</li></ul>',
 
         concentrations:{
-            1:{
+            '1':{
                 name:'1 ' + microEntity + 'M',
                 value:1000
             },
-            5:{
+            '5':{
                 name:'5 ' + microEntity + 'M',
                 value:5000
             },
-            10:{
+            '10':{
                 name:'10 ' + microEntity + 'M',
                 value:10000
             },
-            20:{
+            '20':{
                 name:'20 ' + microEntity + 'M',
                 value:20000
             },
-            25:{
+            '25':{
                 name:'25 ' + microEntity + 'M',
                 value:25000
             },
-            40:{
+            '40':{
                 name:'40 ' + microEntity + 'M',
                 value:40000
             },
-            80:{
+            '80':{
                 name:'80 ' + microEntity + 'M',
                 value:80000
             },
-            125:{
+            '125':{
                 name:'125 ' + microEntity + 'M',
                 value:125000
             },
@@ -989,23 +1054,23 @@ var __basic_tests = {
                 name:'10 nM',
                 value:10
             },
-            50:{
+            '50':{
                 name:'50 nM',
                 value:50
             },
-            100:{
+            '100':{
                 name:'100 nM',
                 value:100
             },
-            200:{
+            '200':{
                 name:'200 nM',
                 value:200
             },
-            400:{
+            '400':{
                 name:'400 nM',
                 value:400
             },
-            0:{
+            '0':{
                 name:'0 nM',
                 value:0
             }
@@ -1015,19 +1080,19 @@ var __basic_tests = {
                 name:'Buffer only',
                 concentrations:[0]
             },
-            1:{
+            '1':{
                 name:'Vulvarine 1',
                 concentrations:[5, 10, 20, 40, 80]
             },
-            2:{
+            '2':{
                 name:'Vulvarine 2',
                 concentrations:[50, 100, 200, 400]
             },
-            3:{
+            '3':{
                 name:'Vulvarine 3',
                 concentrations:[1, 5, 25, 125]
             },
-            4:{
+            '4':{
                 name:'Vulvarine 4',
                 concentrations:['10n', 50, 100, 200, 400]
             }
@@ -1040,6 +1105,9 @@ var __basic_tests = {
         cell_lines:{
             'wt':{
                 name:'Wild Type'
+            },
+            'm1':{
+                name:'Mutant 1'
             }
 
         },

@@ -52,6 +52,7 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open = function 
                     console.info("NEXT");
                 });
             });
+            scb.ui.static.MainFrame.refresh();
         });
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply(this);
     });
@@ -95,6 +96,10 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             if (part.kind == 'custom') {
                 headings.push(part);
             }
+            if (part.kind == 'actions') {
+                headings.push(part);
+            }
+
 
         });
         return headings;
@@ -114,10 +119,6 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
                 _.each(drug_list, function (drug, drug_index, list) {
                     var row = [];
                     _.each(headings, function (part, part_index, list) {
-                        console.info(part);
-                        console.info(drug);
-                        console.info(treatment);
-
                         if (drug_index == 0 && treatment_index == 0 && part.kind == 'cell_line') {
                             row.push({
                                 kind:'cell_line',
