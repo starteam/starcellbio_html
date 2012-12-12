@@ -17,30 +17,30 @@ scb_experiment_setup.main = function(opt_data, opt_sb) {
 
 scb_experiment_setup.display_details = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_experiment_setup_view\'>EXPERIMENT SETUP<table class="scb_s_experiment_setup_table"><thead class=\'scb_s_experiment_setup_table_head\'>');
-  var hList15 = opt_data.headings;
-  var hListLen15 = hList15.length;
-  for (var hIndex15 = 0; hIndex15 < hListLen15; hIndex15++) {
-    var hData15 = hList15[hIndex15];
-    output.append('<td class=\'scb_s_experiment_setup_table_heading\' kind=\'', soy.$$escapeHtml(hData15.kind), '\'>', soy.$$escapeHtml(hData15.title), '</td>');
+  output.append('<div class=\'scb_s_experiment_setup_view\'>EXPERIMENT SETUP<table class="scb_s_experiment_setup_table ', (opt_data.kind == 'readwrite') ? 'scb_s_experiment_setup_table_editable' : 'scb_s_experiment_setup_table_readonly', '"><thead class=\'scb_s_experiment_setup_table_head\'>');
+  var hList21 = opt_data.headings;
+  var hListLen21 = hList21.length;
+  for (var hIndex21 = 0; hIndex21 < hListLen21; hIndex21++) {
+    var hData21 = hList21[hIndex21];
+    output.append('<td class=\'scb_s_experiment_setup_table_heading\' kind=\'', soy.$$escapeHtml(hData21.kind), '\'>', soy.$$escapeHtml(hData21.title), '</td>');
   }
   output.append('</thead>');
-  var rList23 = opt_data.rows;
-  var rListLen23 = rList23.length;
-  for (var rIndex23 = 0; rIndex23 < rListLen23; rIndex23++) {
-    var rData23 = rList23[rIndex23];
-    output.append('<tr class=\'scb_s_experiment_setup_table_row\' cell_treatment=\'', soy.$$escapeHtml(rData23.id), '\'>');
-    var cList27 = rData23.columns;
-    var cListLen27 = cList27.length;
-    for (var cIndex27 = 0; cIndex27 < cListLen27; cIndex27++) {
-      var cData27 = cList27[cIndex27];
-      output.append('<td class=\'scb_s_experiment_setup_table_heading\' kind=\'', soy.$$escapeHtml(cData27.kind), '\' rowspan="', soy.$$escapeHtml(cData27.rows), '">', (cData27.kind == 'actions') ? '<button class=\'scb_f_experiment_setup_remove_sample\' cell_treatment_id=\'' + soy.$$escapeHtml(rData23.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'>Remove</button>' : soy.$$escapeHtml(cData27.title), '</td>');
+  var rList29 = opt_data.rows;
+  var rListLen29 = rList29.length;
+  for (var rIndex29 = 0; rIndex29 < rListLen29; rIndex29++) {
+    var rData29 = rList29[rIndex29];
+    output.append('<tr class=\'scb_s_experiment_setup_table_row\' cell_treatment=\'', soy.$$escapeHtml(rData29.id), '\'>');
+    var cList33 = rData29.columns;
+    var cListLen33 = cList33.length;
+    for (var cIndex33 = 0; cIndex33 < cListLen33; cIndex33++) {
+      var cData33 = cList33[cIndex33];
+      output.append('<td class=\'scb_s_experiment_setup_table_heading\' kind=\'', soy.$$escapeHtml(cData33.kind), '\' rowspan="', soy.$$escapeHtml(cData33.rows), '">', (cData33.kind == 'actions') ? (opt_data.kind == 'readwrite') ? '<button class=\'scb_f_experiment_setup_remove_sample\' cell_treatment_id=\'' + soy.$$escapeHtml(rData29.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'>Remove</button>' : '' : soy.$$escapeHtml(cData33.title), '</td>');
     }
     output.append('</tr>');
   }
-  output.append('<tr><td colspan="', soy.$$escapeHtml(opt_data.headings.length), '" ><button class=\'scb_f_experiment_setup_action_open_add_samples_dialog\'>Add</button></td></tr></table>');
+  output.append((opt_data.kind == 'readwrite') ? '<tr><td colspan="' + soy.$$escapeHtml(opt_data.headings.length) + '"><button class=\'scb_f_experiment_setup_action_open_add_samples_dialog\'>Add</button></td></tr>' : '', '</table>');
   scb_experiment_setup.display_add_sample_dialog(opt_data, output);
-  output.append('<br/><a class="scb_f_open_experiment_setup_readonly" href="#view=experiment_setup_readonly&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '">Run Experiment</a><br/><a class="scb_f_open_experiment_design" href="#view=experiment_design&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '">Design Experiment</a></div>');
+  output.append('<br/>', (opt_data.kind == 'readwrite') ? '<a class="scb_f_open_experiment_setup_readonly" href="#view=experiment_run&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '">Run Experiment</a><br/><a class="scb_f_open_experiment_design" href="#view=experiment_design&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '">Design Experiment</a>' : '<a class="scb_f_open_select_technique" href="#view=select_technique&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '">Select technique</a><br/>' + ((opt_data.experiment.experiment_setup_finished) ? '<a class="scb_f_open_experiment_design" href="#view=experiment_design&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '">Design Experiment</a>' : '<a class="scb_f_open_experiment_setup" href="#view=experiment_setup&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '">Setup Experiment</a>'), '</div>');
   return opt_sb ? '' : output.toString();
 };
 
@@ -48,25 +48,25 @@ scb_experiment_setup.display_details = function(opt_data, opt_sb) {
 scb_experiment_setup.display_add_sample_dialog = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_experiment_setup_table_add_samples_dialog\' title=\'Add sample\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\'><div class=\'scb_s_experiment_setup_dialog_cell_lines\'>Choose Your Cell Line:<select class=\'scb_s_experiment_setup_dialog_cell_lines_select\' multiple=\'multiple\'>');
-  var cell_lineList70 = opt_data.t.experiment_setup_actions.cell_lines;
-  var cell_lineListLen70 = cell_lineList70.length;
-  for (var cell_lineIndex70 = 0; cell_lineIndex70 < cell_lineListLen70; cell_lineIndex70++) {
-    var cell_lineData70 = cell_lineList70[cell_lineIndex70];
-    output.append('<option class=\'scb_s_experiment_setup_dialog_cell_lines_select_option\' value=\'', soy.$$escapeHtml(cell_lineData70.id), '\'>', soy.$$escapeHtml(cell_lineData70.title), '</option>');
+  var cell_lineList104 = opt_data.t.experiment_setup_actions.cell_lines;
+  var cell_lineListLen104 = cell_lineList104.length;
+  for (var cell_lineIndex104 = 0; cell_lineIndex104 < cell_lineListLen104; cell_lineIndex104++) {
+    var cell_lineData104 = cell_lineList104[cell_lineIndex104];
+    output.append('<option class=\'scb_s_experiment_setup_dialog_cell_lines_select_option\' value=\'', soy.$$escapeHtml(cell_lineData104.id), '\'>', soy.$$escapeHtml(cell_lineData104.title), '</option>');
   }
   output.append('</select></div><div class=\'scb_s_experiment_setup_dialog_treatments\'>Choose Your Treatment Line<br><select class=\'scb_s_experiment_setup_dialog_treatments_select\' multiple=\'multiple\'>');
-  var treatList78 = opt_data.t.experiment_setup_actions.treatment_protocol_list;
-  var treatListLen78 = treatList78.length;
-  for (var treatIndex78 = 0; treatIndex78 < treatListLen78; treatIndex78++) {
-    var treatData78 = treatList78[treatIndex78];
-    output.append('<option class=\'scb_s_experiment_setup_dialog_treatments_select_option\' value=\'', soy.$$escapeHtml(treatData78.id), '\'>', soy.$$escapeHtml(treatData78.title), '</option>');
+  var treatList112 = opt_data.t.experiment_setup_actions.treatment_protocol_list;
+  var treatListLen112 = treatList112.length;
+  for (var treatIndex112 = 0; treatIndex112 < treatListLen112; treatIndex112++) {
+    var treatData112 = treatList112[treatIndex112];
+    output.append('<option class=\'scb_s_experiment_setup_dialog_treatments_select_option\' value=\'', soy.$$escapeHtml(treatData112.id), '\'>', soy.$$escapeHtml(treatData112.title), '</option>');
   }
   output.append('</select></div><div class=\'scb_s_experiment_setup_dialog_collection\'>Choose Your Treatment Line<br><select class=\'scb_s_experiment_setup_dialog_collection_select\' multiple=\'multiple\'>');
-  var collectList86 = opt_data.t.experiment_setup_actions.collection_schedule_list;
-  var collectListLen86 = collectList86.length;
-  for (var collectIndex86 = 0; collectIndex86 < collectListLen86; collectIndex86++) {
-    var collectData86 = collectList86[collectIndex86];
-    output.append('<option class=\'scb_s_experiment_setup_dialog_collection_select_option\' value=\'', soy.$$escapeHtml(collectData86.id), '\'>', soy.$$escapeHtml(collectData86.title), '</option>');
+  var collectList120 = opt_data.t.experiment_setup_actions.collection_schedule_list;
+  var collectListLen120 = collectList120.length;
+  for (var collectIndex120 = 0; collectIndex120 < collectListLen120; collectIndex120++) {
+    var collectData120 = collectList120[collectIndex120];
+    output.append('<option class=\'scb_s_experiment_setup_dialog_collection_select_option\' value=\'', soy.$$escapeHtml(collectData120.id), '\'>', soy.$$escapeHtml(collectData120.title), '</option>');
   }
   output.append('</select></div><button class=\'scb_f_experiment_setup_dialog_apply\'>Add</button><button class=\'scb_f_experiment_setup_dialog_cancel\'>Cancel</button></div>');
   return opt_sb ? '' : output.toString();

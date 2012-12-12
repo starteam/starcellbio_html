@@ -30,12 +30,12 @@ Experiment active area
 @param experiment
 @param headings
 @param rows
-@/param actions
+@param kind
 */
 {template .display_details}
 <div class='scb_s_experiment_setup_view'>
     EXPERIMENT SETUP
-    <table class="scb_s_experiment_setup_table">
+    <table class="scb_s_experiment_setup_table {if $kind == 'readwrite'}scb_s_experiment_setup_table_editable{else}scb_s_experiment_setup_table_readonly{/if}">
         <thead class='scb_s_experiment_setup_table_head'>
         {foreach $h in $headings}
         <td class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
@@ -48,30 +48,53 @@ Experiment active area
             {foreach $c in $r.columns}
             <td class='scb_s_experiment_setup_table_heading' kind='{$c.kind}' rowspan="{$c.rows}">
                 {if $c.kind == 'actions'}
-                    <button class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Remove</button>
+                    {if $kind == 'readwrite'}
+                        <button class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}'
+                                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Remove
+                        </button>
+                    {/if}
                 {else}
-                    {$c.title}
+                {$c.title}
                 {/if}
             </td>
             {/foreach}
         </tr>
         {/foreach}
+        {if $kind == 'readwrite'}
         <tr>
-            <td colspan="{$headings.length}" ><button class='scb_f_experiment_setup_action_open_add_samples_dialog'>Add</button></td>
+            <td colspan="{$headings.length}">
+                <button class='scb_f_experiment_setup_action_open_add_samples_dialog'>Add</button>
+            </td>
         </tr>
+        {/if}
     </table>
     {call .display_add_sample_dialog}
-        {param t:$t /}
-        {param assignment:$assignment /}
-        {param experiment:$experiment /}
+    {param t:$t /}
+    {param assignment:$assignment /}
+    {param experiment:$experiment /}
     {/call}
     <br/>
+    {if $kind == 'readwrite'}
     <a class="scb_f_open_experiment_setup_readonly"
-       href="#view=experiment_setup_readonly&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Run
+       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Run
         Experiment</a><br/>
     <a class="scb_f_open_experiment_design"
        href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design
         Experiment</a>
+    {else}
+    <a class="scb_f_open_select_technique"
+       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Select technique</a><br/>
+    {if $experiment.experiment_setup_finished}
+    <a class="scb_f_open_experiment_design"
+       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design
+        Experiment</a>
+    {else}
+    <a class="scb_f_open_experiment_setup"
+       href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Setup
+        Experiment</a>
+    {/if}
+
+    {/if}
 </div>
 {/template}
 
@@ -82,12 +105,15 @@ Experiment active area
 * @param experiment
 */
 {template .display_add_sample_dialog}
-<div class='scb_s_experiment_setup_table_add_samples_dialog' title='Add sample' experiment_id='{$experiment.id}' assignment_id='{$assignment.id}'>
+<div class='scb_s_experiment_setup_table_add_samples_dialog' title='Add sample' experiment_id='{$experiment.id}'
+     assignment_id='{$assignment.id}'>
     <div class='scb_s_experiment_setup_dialog_cell_lines'>
         Choose Your Cell Line:
         <select class='scb_s_experiment_setup_dialog_cell_lines_select' multiple='multiple'>
             {foreach $cell_line in $t.experiment_setup_actions.cell_lines}
-            <option class='scb_s_experiment_setup_dialog_cell_lines_select_option' value='{$cell_line.id}'>{$cell_line.title}</option>
+            <option class='scb_s_experiment_setup_dialog_cell_lines_select_option' value='{$cell_line.id}'>
+                {$cell_line.title}
+            </option>
             {/foreach}
         </select>
     </div>
@@ -95,7 +121,8 @@ Experiment active area
         Choose Your Treatment Line<br>
         <select class='scb_s_experiment_setup_dialog_treatments_select' multiple='multiple'>
             {foreach $treat in $t.experiment_setup_actions.treatment_protocol_list}
-            <option class='scb_s_experiment_setup_dialog_treatments_select_option' value='{$treat.id}'>{$treat.title}</option>
+            <option class='scb_s_experiment_setup_dialog_treatments_select_option' value='{$treat.id}'>{$treat.title}
+            </option>
             {/foreach}
         </select>
     </div>
@@ -103,7 +130,9 @@ Experiment active area
         Choose Your Treatment Line<br>
         <select class='scb_s_experiment_setup_dialog_collection_select' multiple='multiple'>
             {foreach $collect in $t.experiment_setup_actions.collection_schedule_list}
-            <option class='scb_s_experiment_setup_dialog_collection_select_option' value='{$collect.id}'>{$collect.title}</option>
+            <option class='scb_s_experiment_setup_dialog_collection_select_option' value='{$collect.id}'>
+                {$collect.title}
+            </option>
             {/foreach}
         </select>
     </div>

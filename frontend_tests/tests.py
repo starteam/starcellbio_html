@@ -82,8 +82,8 @@ class SimpleTest(TestCase):
         self.navigate_via('Experiment setup')
         self.assert_on_experiment_setup_page()
         self.assert_samples([sample2])
-        #self.navigate_via('Run Experiment')
-        #self.assert_on_experiment_run_page()
+        self.navigate_via('Run Experiment')
+        self.assert_on_experiment_run_page()
 
 
     ## navigation helpers and assertions
@@ -98,6 +98,12 @@ class SimpleTest(TestCase):
 
     def assert_on_experiment_setup_page(self):
         self.find_by_class_name('scb_s_experiment_setup_view')
+        self.find_by_class_name('scb_s_experiment_setup_table_editable')
+
+    def assert_on_experiment_run_page(self):
+        self.find_by_class_name('scb_s_experiment_setup_view')
+        self.find_by_class_name('scb_s_experiment_setup_table_readonly')
+
 
     def assert_experiments(self, experiment_list):
         web_experiment_list = self.driver.find_elements_by_class_name('scb_f_open_assignment_experiment')

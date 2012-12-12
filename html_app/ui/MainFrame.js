@@ -193,7 +193,18 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             self.sections.experiment_setup.show({
                 workarea:workarea,
                 assignment:parsed.assignment,
-                experiment:parsed.experiment
+                experiment:parsed.experiment,
+                mode:'readwrite',
+                last_view:'experiment_setup'
+            });
+        }
+        if (state.view == 'experiment_run') {
+            self.sections.experiment_setup.show({
+                workarea:workarea,
+                assignment:parsed.assignment,
+                experiment:parsed.experiment,
+                mode:'readonly',
+                last_view:'experiment_run'
             });
 
         }
@@ -246,7 +257,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     }
 
-    scb.ui.static.MainFrame.refresh = function() {
+    scb.ui.static.MainFrame.refresh = function () {
         var state = $.deparam(location.hash.replace(/^#/, ''), true);
         state.onhashchange = true;
         state.view = state.view || 'assignments';
