@@ -4,7 +4,7 @@ scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.ExperimentSetupView = scb.ui.static.ExperimentSetupView || {};
 
-scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open = function (element) {
+scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog = function (element) {
     var dialog_selector = $('.scb_s_experiment_setup_table_add_samples_dialog');
     dialog_selector.dialog("open");
     scb.utils.off_on(dialog_selector, 'click', '.scb_f_experiment_setup_dialog_apply', function (e) {
@@ -52,7 +52,6 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open = function 
                     console.info("NEXT");
                 });
             });
-            scb.ui.static.MainFrame.refresh();
         });
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply(this);
     });
@@ -60,14 +59,14 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open = function 
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_cancel(this);
     });
 }
-//TODO: are these used?
 scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply = function (param) {
-    $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close");
+    $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close").detach();
+    scb.ui.static.MainFrame.refresh();
 };
 
-//TODO: are these used?
 scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_cancel = function (param) {
-    $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close");
+    $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close").detach();
+    scb.ui.static.MainFrame.refresh();
 };
 
 scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample = function (param) {
@@ -93,8 +92,8 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample = functio
 
 
 scb.ui.static.ExperimentSetupView.register = function (workarea) {
-    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_table_add_samples_dialog', function (e) {
-        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open(this);
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_action_open_add_samples_dialog', function (e) {
+        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_remove_sample', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample(this);

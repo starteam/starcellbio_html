@@ -33,7 +33,7 @@ Experiment active area
 @/param actions
 */
 {template .display_details}
-<div class='scb_s_experiment_setup_table'>
+<div class='scb_s_experiment_setup_view'>
     EXPERIMENT SETUP
     <table class="scb_s_experiment_setup_table">
         <thead class='scb_s_experiment_setup_table_head'>
@@ -57,7 +57,7 @@ Experiment active area
         </tr>
         {/foreach}
         <tr>
-            <td class='scb_f_experiment_setup_table_add_samples_dialog' colspan="{$headings.length}" >Add</td>
+            <td colspan="{$headings.length}" ><button class='scb_f_experiment_setup_action_open_add_samples_dialog'>Add</button></td>
         </tr>
     </table>
     {call .display_add_sample_dialog}
@@ -71,7 +71,7 @@ Experiment active area
         Experiment</a><br/>
     <a class="scb_f_open_experiment_design"
        href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design
-        experiment</a>
+        Experiment</a>
 </div>
 {/template}
 
@@ -87,7 +87,7 @@ Experiment active area
         Choose Your Cell Line:
         <select class='scb_s_experiment_setup_dialog_cell_lines_select' multiple='multiple'>
             {foreach $cell_line in $t.experiment_setup_actions.cell_lines}
-            <option value='{$cell_line.id}'>{$cell_line.title}</option>
+            <option class='scb_s_experiment_setup_dialog_cell_lines_select_option' value='{$cell_line.id}'>{$cell_line.title}</option>
             {/foreach}
         </select>
     </div>
@@ -95,7 +95,7 @@ Experiment active area
         Choose Your Treatment Line<br>
         <select class='scb_s_experiment_setup_dialog_treatments_select' multiple='multiple'>
             {foreach $treat in $t.experiment_setup_actions.treatment_protocol_list}
-            <option value='{$treat.id}'>{$treat.title}</option>
+            <option class='scb_s_experiment_setup_dialog_treatments_select_option' value='{$treat.id}'>{$treat.title}</option>
             {/foreach}
         </select>
     </div>
@@ -103,7 +103,7 @@ Experiment active area
         Choose Your Treatment Line<br>
         <select class='scb_s_experiment_setup_dialog_collection_select' multiple='multiple'>
             {foreach $collect in $t.experiment_setup_actions.collection_schedule_list}
-            <option value='{$collect.id}'>{$collect.title}</option>
+            <option class='scb_s_experiment_setup_dialog_collection_select_option' value='{$collect.id}'>{$collect.title}</option>
             {/foreach}
         </select>
     </div>
