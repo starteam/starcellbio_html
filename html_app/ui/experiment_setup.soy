@@ -47,13 +47,17 @@ Experiment active area
         <tr class='scb_s_experiment_setup_table_row' cell_treatment='{$r.id}'>
             {foreach $c in $r.columns}
             <td class='scb_s_experiment_setup_table_heading' kind='{$c.kind}' rowspan="{$c.rows}">
-                {$c.title}
+                {if $c.kind == 'actions'}
+                    <button class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Remove</button>
+                {else}
+                    {$c.title}
+                {/if}
             </td>
             {/foreach}
         </tr>
         {/foreach}
         <tr>
-            <td class='scb_f_experiment_setup_table_add_samples_dialog' colspan="{$headings.length}">Add</td>
+            <td class='scb_f_experiment_setup_table_add_samples_dialog' colspan="{$headings.length}" >Add</td>
         </tr>
     </table>
     {call .display_add_sample_dialog}

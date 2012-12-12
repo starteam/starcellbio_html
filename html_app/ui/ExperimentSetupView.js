@@ -59,23 +59,46 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open = function 
     scb.utils.off_on(dialog_selector, 'click', '.scb_f_experiment_setup_dialog_cancel', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_cancel(this);
     });
-
 }
-
+//TODO: are these used?
 scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply = function (param) {
     $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close");
 };
 
+//TODO: are these used?
 scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_cancel = function (param) {
     $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close");
 };
+
+scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample = function (param) {
+    var experiment_id = $(param).attr('experiment_id');
+    var assignment_id = $(param).attr('assignment_id');
+    var cell_treatment_id = $(param).attr('cell_treatment_id');
+
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        view:'experiment_setup',
+        skip_hash_update:true
+    };
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    var cell_treatment_list = parsed.experiment.cell_treatment_list;
+    cell_treatment_list.remove(cell_treatment_id);
+    scb.ui.static.MainFrame.refresh();
+};
+
 
 
 scb.ui.static.ExperimentSetupView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_table_add_samples_dialog', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open(this);
     });
-
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_remove_sample', function (e) {
+        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample(this);
+    });
 }
 
 scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
@@ -160,6 +183,12 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
                                 title:sample[part.key],
                                 rows:total_height
                             })
+                        }
+                        else if (drug_index == 0 && treatment_index == 0 && part.kind == 'actions') {
+                            row.push({
+                                kind:part.kind,
+                                rows:total_height
+                            });
                         }
                     });
                     rows.push({

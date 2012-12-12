@@ -43,10 +43,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="experiment_setup.soy" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="experiment_setup.soy" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="52" column="13" selection-start="1375" selection-end="1375" vertical-scroll-proportion="-23.416666">
+                <state line="55" column="22" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.1773779">
                   <folding />
                 </state>
               </provider>
@@ -110,15 +110,6 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MainFrame.js" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/html_app/ui_old/MainFrame.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="248" column="35" selection-start="7834" selection-end="7834" vertical-scroll-proportion="0.3986711">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
         </leaf>
       </split-first>
       <split-second>
@@ -150,10 +141,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="55" column="0" selection-start="2856" selection-end="2856" vertical-scroll-proportion="0.67292005">
+                <state line="75" column="63" selection-start="3761" selection-end="3816" vertical-scroll-proportion="0.42822185">
                   <folding />
                 </state>
               </provider>
@@ -198,12 +189,12 @@
         <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js" />
         <option value="$PROJECT_DIR$/html_app/utils/Utilities.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
         <option value="$PROJECT_DIR$/html_app/model/CellTreatment.js" />
         <option value="$PROJECT_DIR$/html_app/starcellbio.app.js" />
         <option value="$PROJECT_DIR$/html_app/model/Drugs.js" />
         <option value="$PROJECT_DIR$/html_app/master_model.js" />
         <option value="$PROJECT_DIR$/html_app/ui_old/MainFrame.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
       </list>
     </option>
@@ -679,20 +670,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="13" selection-start="1375" selection-end="1375" vertical-scroll-proportion="-23.416666">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="13" selection-start="1927" selection-end="1927" vertical-scroll-proportion="-26.125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="931" column="34" selection-start="35155" selection-end="35155" vertical-scroll-proportion="0.0">
@@ -720,14 +697,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui_old/MainFrame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="35" selection-start="7834" selection-end="7834" vertical-scroll-proportion="0.3986711">
+        <state line="294" column="0" selection-start="9216" selection-end="9216" vertical-scroll-proportion="0.9717608">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="13" selection-start="1927" selection-end="1927" vertical-scroll-proportion="-26.125">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="0" selection-start="2856" selection-end="2856" vertical-scroll-proportion="0.67292005">
+        <state line="75" column="63" selection-start="3761" selection-end="3816" vertical-scroll-proportion="0.42822185">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="22" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.1773779">
           <folding />
         </state>
       </provider>
