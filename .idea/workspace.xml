@@ -25,74 +25,19 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="experiment_design.soy" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_design.soy">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="20" column="41" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="assignments.soy" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.soy">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="96" column="46" selection-start="2435" selection-end="2435" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="common.soy" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/ui_old/common.soy">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="73" column="11" selection-start="1472" selection-end="1472" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <marker date="1352840389000" expanded="true" signature="130:220" placeholder="..." />
-                    <marker date="1352840389000" expanded="true" signature="353:425" placeholder="..." />
-                    <marker date="1352840389000" expanded="true" signature="640:797" placeholder="..." />
-                    <marker date="1352840389000" expanded="true" signature="1032:1224" placeholder="..." />
-                    <marker date="1352840389000" expanded="true" signature="1524:2000" placeholder="..." />
-                    <marker date="1352840389000" expanded="true" signature="1570:1890" placeholder="..." />
-                    <marker date="1352840389000" expanded="true" signature="1633:1810" placeholder="..." />
-                    <marker date="1352840389000" expanded="true" signature="1867:1879" placeholder="..." />
-                    <marker date="1352840389000" expanded="false" signature="1939:1965" placeholder="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="master_model.js" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="847" column="29" selection-start="24799" selection-end="24799" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ModelHelpers.js" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/model/ModelHelpers.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="tests.py" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="105" column="38" selection-start="3885" selection-end="3885" vertical-scroll-proportion="0.421365">
+                <state line="87" column="0" selection-start="3260" selection-end="3260" vertical-scroll-proportion="0.2804428">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="assignment.soy" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.soy">
+          <file leaf-file-name="experiment_setup.soy" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="28" column="6" selection-start="657" selection-end="657" vertical-scroll-proportion="0.0">
+                <state line="87" column="20" selection-start="2933" selection-end="2933" vertical-scroll-proportion="-24.833334">
                   <folding />
                 </state>
               </provider>
@@ -101,70 +46,44 @@
         </leaf>
       </split-first>
       <split-second>
-        <splitter split-orientation="vertical" split-proportion="0.65611637">
-          <split-first>
-            <leaf>
-              <file leaf-file-name="Assignments.js" pinned="false" current="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/html_app/model/Assignments.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="22" column="1" selection-start="732" selection-end="732" vertical-scroll-proportion="0.0">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="Experiment.js" pinned="false" current="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="36" column="61" selection-start="1146" selection-end="1156" vertical-scroll-proportion="0.0">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="MainFrame.js" pinned="false" current="true" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/html_app/ui_old/MainFrame.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="229" column="46" selection-start="7349" selection-end="7349" vertical-scroll-proportion="0.46296296">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-first>
-          <split-second>
-            <leaf>
-              <file leaf-file-name="AssignmentsView.js" pinned="false" current="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentsView.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="14" column="27" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="AssignmentView.js" pinned="false" current="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentView.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="11" column="38" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="ExperimentDesignView.js" pinned="false" current="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="17" column="57" selection-start="516" selection-end="516" vertical-scroll-proportion="0.777439">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-second>
-        </splitter>
+        <leaf>
+          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="107" column="38" selection-start="4871" selection-end="4871" vertical-scroll-proportion="0.44649446">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Experiment.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="43" column="65" selection-start="1612" selection-end="1626" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="60" column="36" selection-start="5126" selection-end="5126" vertical-scroll-proportion="-15.208333">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MainFrame.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="205" column="32" selection-start="6744" selection-end="6744" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
       </split-second>
     </splitter>
   </component>
@@ -176,22 +95,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/StarCellBio/settings.py" />
-        <option value="$PROJECT_DIR$/html_app/utils/Utilities.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/assignments.gss" />
-        <option value="$PROJECT_DIR$/html_app/ui/AssignmentView.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/assignment.soy" />
-        <option value="$PROJECT_DIR$/html_app/master_model.js" />
-        <option value="$PROJECT_DIR$/html_app/model/Experiment.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/assignments.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/AssignmentsView.js" />
         <option value="$PROJECT_DIR$/html_app/index.html" />
-        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_design.soy" />
         <option value="$PROJECT_DIR$/html_app/watch.py" />
-        <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
+        <option value="$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js" />
+        <option value="$PROJECT_DIR$/html_app/utils/Utilities.js" />
+        <option value="$PROJECT_DIR$/html_app/model/CellTreatment.js" />
+        <option value="$PROJECT_DIR$/html_app/starcellbio.app.js" />
+        <option value="$PROJECT_DIR$/html_app/model/Drugs.js" />
+        <option value="$PROJECT_DIR$/html_app/master_model.js" />
         <option value="$PROJECT_DIR$/html_app/ui_old/MainFrame.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/ExperimentRunView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
+        <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
       </list>
     </option>
   </component>
@@ -227,7 +146,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -243,6 +161,92 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui_old" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -276,13 +280,14 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="Settings.JavaScript.Linters.JSHint" />
+    <property name="options.lastSelected" value="preferences.keymap" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="FullScreen" value="false" />
     <property name="options.searchVisible" value="true" />
@@ -298,6 +303,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/html_app/ui" />
       <recent name="$PROJECT_DIR$/html_app/ui_old" />
     </key>
   </component>
@@ -454,22 +460,22 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="19" y="22" width="2540" height="1374" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32960895" sideWeight="0.4967923" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12269447" sideWeight="0.8284118" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17158818" sideWeight="0.49198076" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12349639" sideWeight="0.6703911" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17158818" sideWeight="0.49198076" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17158818" sideWeight="0.5052125" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.50040096" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979476" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979476" sideWeight="0.49839616" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -526,67 +532,43 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/html_app/master_model.js</url>
+          <line>699</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/model/ModelHelpers.js">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentsView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="14" column="27" selection-start="418" selection-end="418" vertical-scroll-proportion="0.17128874">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/gen/assignment.gss.css">
+    <entry file="file://$PROJECT_DIR$/html_app/model/Drugs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/gen/assignment.soy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="174" selection-end="174" vertical-scroll-proportion="0.05420054">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/watch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="78" selection-start="2220" selection-end="2220" vertical-scroll-proportion="0.81696427" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="6" selection-start="657" selection-end="657" vertical-scroll-proportion="0.0">
+        <state line="50" column="38" selection-start="1580" selection-end="1580" vertical-scroll-proportion="0.61174554">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.soy">
+    <entry file="file://$PROJECT_DIR$/html_app/model/Treatment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="46" selection-start="2435" selection-end="2435" vertical-scroll-proportion="0.0">
+        <state line="23" column="62" selection-start="718" selection-end="727" vertical-scroll-proportion="0.26916802">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
+    <entry file="file://$PROJECT_DIR$/html_app/utils/Utilities.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="847" column="29" selection-start="24799" selection-end="24799" vertical-scroll-proportion="0.0">
+        <state line="262" column="10" selection-start="7412" selection-end="7422" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_design.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="41" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/model/Assignments.js">
@@ -596,44 +578,76 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="931" column="34" selection-start="35155" selection-end="35155" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#35225#38797#0" expanded="false" />
+            <element signature="e#39594#41022#0" expanded="false" />
+            <element signature="e#41038#41636#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/CellTreatment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="79" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="13" selection-start="1927" selection-end="1927" vertical-scroll-proportion="-26.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/starcellbio.app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="36" selection-start="1002" selection-end="1002" vertical-scroll-proportion="0.30587277">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="36" selection-start="5126" selection-end="5126" vertical-scroll-proportion="-15.208333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="61" selection-start="1146" selection-end="1156" vertical-scroll-proportion="0.0">
+        <state line="43" column="65" selection-start="1612" selection-end="1626" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentsView.js">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="27" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+        <state line="205" column="32" selection-start="6744" selection-end="6744" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentView.js">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="38" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0">
+        <state line="107" column="38" selection-start="4871" selection-end="4871" vertical-scroll-proportion="0.44649446">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="57" selection-start="516" selection-end="516" vertical-scroll-proportion="0.777439">
+        <state line="87" column="20" selection-start="2933" selection-end="2933" vertical-scroll-proportion="-24.833334">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="38" selection-start="3885" selection-end="3885" vertical-scroll-proportion="0.421365">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui_old/MainFrame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="229" column="46" selection-start="7349" selection-end="7349" vertical-scroll-proportion="0.46296296">
+        <state line="87" column="0" selection-start="3260" selection-end="3260" vertical-scroll-proportion="0.2804428">
           <folding />
         </state>
       </provider>

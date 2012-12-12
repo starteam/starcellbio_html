@@ -24,12 +24,10 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
 
 	scb.ModelHelpers.common_entry_code(self, data, context);
 
-	scb.Utils.initialize_accessor_field(self,data,'cell_line',scb.utils.any_key(context.template.cell_lines),null,context);
+	scb.Utils.initialize_accessor_field(self,data,'cell_line','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'treatment_list',{},scb.TreatmentList,context);
 	scb.Utils.initialize_accessor_field(self,data,'stimulation_time','',null,context);
-	scb.Utils.initialize_accessor_field(self,data,'collection_schedule_list',scb.utils.clone_and_clear(scb.utils.get(context.template.experiment_templates, ['default', 'collection_schedule_list'], {
-		list : []
-	})),scb.CollectionScheduleList,context);
+	scb.Utils.initialize_accessor_field(self,data,'collection_schedule_list','',null, context);
 
 	scb.Utils.accessor_toString(self.cell_line);
 }

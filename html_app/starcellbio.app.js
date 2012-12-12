@@ -30,7 +30,9 @@ function starcellbio(jquery_selector_main, master_model) {
 	window.master_context = context;
 
 	scb.Utils.initialize_field(context, 'js_model', {});
-	var main_frame = new scb.ui.MainFrame(init_model, context);
+        scb.utils.accessor2_custom(context, 'template', function() {
+        		return context.js_model.current_assignment.template;
+        	}, scb.utils.read_only_exception);	var main_frame = new scb.ui.MainFrame(init_model, context);
 	} catch( err ) {
 		if( document.documentMode < 9 )
 		{

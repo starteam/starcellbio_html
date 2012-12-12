@@ -1,107 +1,144 @@
-{namespace scb_ui}
+{namespace scb_experiment_setup}
 
 /**
-* Vertical view calendar setup
-* @param selected_experiment
-* @param template
+* Assignment selector
+* @param t template
+* @param global_template
+* @param assignment AssignmentView
+
 */
-{template .experiment_setup_display_vertical}
-	<div>
-	{if $selected_experiment.cell_treatment_list.length == 0}
-                <div>
-                Add new Cell treatment
-                </div>
+{template .main}
+<div class='scb_s_experiment_setup_view'>
+    {call scb_assignments.display_header}
+    {param global_template:$global_template /}
+    {/call}
+    {call .display_details}
+    {param t:$t/}
+    {param global_template:$global_template /}
+    {param assignment:$assignment/}
+    {/call}
+    {call scb_assignments.display_footer}
+    {param t:$t /}
+    {/call}
+</div>
+{/template}
+
+/**
+Experiment active area
+@param t template
+@param assignment
+@param experiment
+@param headings
+@param rows
+@param kind
+*/
+{template .display_details}
+<div class='scb_s_experiment_setup_view'>
+    EXPERIMENT SETUP
+    <table class="scb_s_experiment_setup_table {if $kind == 'readwrite'}scb_s_experiment_setup_table_editable{else}scb_s_experiment_setup_table_readonly{/if}">
+        <thead class='scb_s_experiment_setup_table_head'>
+        {foreach $h in $headings}
+        <td class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
+            {$h.title}
+        </td>
+        {/foreach}
+        </thead>
+        {foreach $r in $rows}
+        <tr class='scb_s_experiment_setup_table_row' cell_treatment='{$r.id}'>
+            {foreach $c in $r.columns}
+            <td class='scb_s_experiment_setup_table_heading' kind='{$c.kind}' rowspan="{$c.rows}">
+                {if $c.kind == 'actions'}
+                {if $kind == 'readwrite'}
+                <button class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}'
+                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Remove
+                </button>
+                {/if}
+                {else}
+                {$c.title}
+                {/if}
+            </td>
+            {/foreach}
+        </tr>
+        {/foreach}
+        {if $kind == 'readwrite'}
+        <tr>
+            <td colspan="{$headings.length}">
+                <button class='scb_f_experiment_setup_action_open_add_samples_dialog'>Add</button>
+            </td>
+        </tr>
+        {/if}
+    </table>
+    {call .display_add_sample_dialog}
+    {param t:$t /}
+    {param assignment:$assignment /}
+    {param experiment:$experiment /}
+    {/call}
+    <br/>
+    {if $kind == 'readwrite'}
+    <a class="scb_f_open_experiment_setup_readonly"
+       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Run
+        Experiment</a><br/>
+    <a class="scb_f_open_experiment_design"
+       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design
+        Experiment</a>
     {else}
-	{foreach $t in $selected_experiment.cell_treatment_list.list}
-	<div class='experiment_setup_display_vertical'>
-		<div class='esv_protocol_name'>
-			{$t.name}
-		</div>
-		<div class='esv_cell_line'>
-				<div class='experiment_row_cell_line'>
-				{call .experiment_setup_row_cell_line}
-					{param row:$t  /}
-					{param template:$template /}	
-					{param selected_experiment:$selected_experiment /}		
-				{/call}
-			</div>
-		</div>
-		<div class='esv_tools'>
-			<button>x</button>
-		</div>
-		<div class='esv_bottom'>
-		<div class='esv_add_schedule'>
-			<button class='button small green'>Add Collection Time</button>
-		</div>
-		<div class='esv_add_treatment'>
-			<button class='button small green'>Add Treatment Protocol</button> 
-		</div>		
-		</div>
-		<div class='esv_block'>
-		        {call scb.experiment_setup_treatment_display}
-                	{param selected_experiment:$selected_experiment /}
-                	{param template:$template /}                
-                	{param cell_treatment:$t /}                
-                {/call}		
-		</div>
-	</div> 
-	{/foreach}
-	{/if}
-	<div>
+    <a class="scb_f_open_select_technique"
+       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Select technique</a><br/>
+    {if $experiment.setup_finished}
+    <a class="scb_f_open_experiment_design"
+       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design
+        Experiment</a>
+    {else}
+    <a class="scb_f_open_experiment_setup"
+       href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Setup
+        Experiment</a>
+    {/if}
+
+    {/if}
+</div>
 {/template}
 
 /**
- Experiment Setup treatment field
- @param selected_experiment
- @param template 
- @param treatment 
- @param cell_treatment_id  
+* Display add dialog
+* @param t template
+* @param assignment
+* @param experiment
 */
-{template .experiment_setup_treatment}
-	<div class='experiment_setup_row_treatment' treatment_id="{$treatment.id}" cell_treatment_id="{$cell_treatment_id}">
-		<table class='experiment_setup_row_schedule'>
-			<tr>
-			<td>
-			<b>start: {$treatment.schedule}</b> 
-			</td>
-			<td>
-			<b>duration: {$treatment.duration}</b>  
-			</td>
-			<td>
-				<a href='#'>Edit</a>
-			</td>
-			</tr>
-		</table>
-		<table class='experiment_setup_row_treatment_drug'>
-			{foreach $t in $treatment.drug_list.list}
-				<tr class='experiment_setup_row_treatment_drug_one'>
-					<td>{$template.drugs[$t.drug_id].name}</td><td>({$template.concentrations[$t.concentration_id].name})</td>
-				</tr>		
-			{/foreach}
-		</table> 
-		{if $template.ui_configuration.treatment_options_display_temperature}
-		<div class='experiment_row_treatment_temperature'>
-			{$treatment.temperature} 'C
-		</div>
-		{/if}				
-		{if $selected_experiment.setup_finished}
-		{else}	
-		<div class='experiment_row_treatment_tools'>
-			<img class='experiment_row_treatment_edit' src='icons/actions/Edit.png' width='24px'>
-			<img class='experiment_row_treatment_delete' src='icons/actions/Delete.png' width='24px'>
-		</div>
-		<div class='experiment_row_treatment_tools_spacer'>
-		</div>
-		{/if}				
-	</div>			
-{/template}
+{template .display_add_sample_dialog}
+<div class='scb_s_experiment_setup_table_add_samples_dialog' title='Add sample' experiment_id='{$experiment.id}'
+     assignment_id='{$assignment.id}'>
+    <div class='scb_s_experiment_setup_dialog_cell_lines'>
+        Choose Your Cell Line:
+        <select class='scb_s_experiment_setup_dialog_cell_lines_select' multiple='multiple'>
+            {foreach $cell_line in $t.experiment_setup_actions.cell_lines}
+            <option class='scb_s_experiment_setup_dialog_cell_lines_select_option' value='{$cell_line.id}'>
+                {$cell_line.title}
+            </option>
+            {/foreach}
+        </select>
+    </div>
+    <div class='scb_s_experiment_setup_dialog_treatments'>
+        Choose Your Treatment Line<br>
+        <select class='scb_s_experiment_setup_dialog_treatments_select' multiple='multiple'>
+            {foreach $treat in $t.experiment_setup_actions.treatment_protocol_list}
+            <option class='scb_s_experiment_setup_dialog_treatments_select_option' value='{$treat.id}'>{$treat.title}
+            </option>
+            {/foreach}
+        </select>
+    </div>
+    <div class='scb_s_experiment_setup_dialog_collection'>
+        Choose Your Treatment Line<br>
+        <select class='scb_s_experiment_setup_dialog_collection_select' multiple='multiple'>
+            {foreach $collect in $t.experiment_setup_actions.collection_schedule_list}
+            <option class='scb_s_experiment_setup_dialog_collection_select_option' value='{$collect.id}'>
+                {$collect.title}
+            </option>
+            {/foreach}
+        </select>
+    </div>
+    <button class='scb_f_experiment_setup_dialog_apply'>Add</button>
+    <button class='scb_f_experiment_setup_dialog_cancel'>Cancel</button>
 
-/**
- Collection
- @param collection_schedule
-*/
-{template .experiment_setup_collection}
-	<div class='experiment_setup_row_collection'>
-	<b>Collect at {$collection_schedule.schedule}</b> <a href='#'>Edit</a>
-	</div>
+</div>
 {/template}
