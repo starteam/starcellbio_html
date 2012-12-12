@@ -48,11 +48,11 @@ Experiment active area
             {foreach $c in $r.columns}
             <td class='scb_s_experiment_setup_table_heading' kind='{$c.kind}' rowspan="{$c.rows}">
                 {if $c.kind == 'actions'}
-                    {if $kind == 'readwrite'}
-                        <button class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}'
-                                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Remove
-                        </button>
-                    {/if}
+                {if $kind == 'readwrite'}
+                <button class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}'
+                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Remove
+                </button>
+                {/if}
                 {else}
                 {$c.title}
                 {/if}
@@ -83,8 +83,9 @@ Experiment active area
         Experiment</a>
     {else}
     <a class="scb_f_open_select_technique"
-       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Select technique</a><br/>
-    {if $experiment.experiment_setup_finished}
+       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Select technique</a><br/>
+    {if $experiment.setup_finished}
     <a class="scb_f_open_experiment_design"
        href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design
         Experiment</a>

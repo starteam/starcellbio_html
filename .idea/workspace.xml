@@ -25,10 +25,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="tests.py" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="85" column="8" selection-start="3177" selection-end="3177" vertical-scroll-proportion="0.49815497">
+                <state line="87" column="0" selection-start="3260" selection-end="3260" vertical-scroll-proportion="0.2804428">
                   <folding />
                 </state>
               </provider>
@@ -37,7 +37,7 @@
           <file leaf-file-name="experiment_setup.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="37" column="109" selection-start="825" selection-end="862" vertical-scroll-proportion="-5.375">
+                <state line="87" column="20" selection-start="2933" selection-end="2933" vertical-scroll-proportion="-24.833334">
                   <folding />
                 </state>
               </provider>
@@ -47,10 +47,10 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="186" column="21" selection-start="8201" selection-end="8201" vertical-scroll-proportion="0.11193112">
+                <state line="107" column="38" selection-start="4871" selection-end="4871" vertical-scroll-proportion="0.44649446">
                   <folding />
                 </state>
               </provider>
@@ -631,23 +631,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="38" selection-start="4871" selection-end="4871" vertical-scroll-proportion="0.44649446">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="109" selection-start="825" selection-end="862" vertical-scroll-proportion="-5.375">
+        <state line="87" column="20" selection-start="2933" selection-end="2933" vertical-scroll-proportion="-24.833334">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="8" selection-start="3177" selection-end="3177" vertical-scroll-proportion="0.49815497">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="186" column="21" selection-start="8201" selection-end="8201" vertical-scroll-proportion="0.11193112">
+        <state line="87" column="0" selection-start="3260" selection-end="3260" vertical-scroll-proportion="0.2804428">
           <folding />
         </state>
       </provider>

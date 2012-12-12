@@ -84,6 +84,7 @@ class SimpleTest(TestCase):
         self.assert_samples([sample2])
         self.navigate_via('Run Experiment')
         self.assert_on_experiment_run_page()
+        self.navigate_via('Select technique')
 
 
     ## navigation helpers and assertions
