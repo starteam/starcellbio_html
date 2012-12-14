@@ -1,0 +1,52 @@
+{namespace scb_select_technique}
+
+/**
+*
+* @param t template
+* @param global_template
+* @param assignment AssignmentView
+*/
+{template .main}
+<div class='scb_s_select_technique_view'>
+    {call scb_assignments.display_header}
+    {param global_template:$global_template /}
+    {/call}
+    {call .display_details}
+    {param t:$t/}
+    {param global_template:$global_template /}
+    {param assignment:$assignment/}
+    {/call}
+    {call scb_assignments.display_footer}
+    {param t:$t /}
+    {/call}
+</div>
+{/template}
+
+
+/**
+Select technique area
+
+TODO: westernblot links
+TODO: new western blot
+TODO: facs links
+TODO: new facs
+
+@/param t template
+@param assignment
+@param experiment
+*/
+{template .display_details}
+<div class='scb_s_select_technique_details_view'>
+    <div class='scb_s_select_technique_western_blot'>
+        {foreach $w in $experiment.western_blot_list.list}
+            {$w.id}<br>
+        {/foreach}
+        <a class='scb_f_new_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>New Western Blot</a>
+    </div>
+
+    <a class="scb_f_open_experiment_setup_readonly"
+       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Run
+        Experiment</a><br/>
+
+</div>
+{/template}

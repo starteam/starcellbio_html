@@ -137,6 +137,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context:context
     });
 
+    self.sections.select_technique = new scb.ui.SelectTechniqueView({
+        workarea:workarea,
+        context:context
+    });
+
     self.sections.workarea = new scb.ui.WorkspaceView({
         workarea:workarea,
         context:context
@@ -205,6 +210,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 experiment:parsed.experiment,
                 mode:'readonly',
                 last_view:'experiment_run'
+            });
+
+        }
+        if (state.view == 'select_technique') {
+            self.sections.select_technique.show({
+                workarea:workarea,
+                assignment:parsed.assignment,
+                experiment:parsed.experiment,
             });
 
         }

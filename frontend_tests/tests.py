@@ -5,6 +5,7 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
+from StarCellBio import settings
 from django.test import TestCase
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -15,7 +16,9 @@ import pudb
 class SimpleTest(TestCase):
     @classmethod
     def setUpClass(self):
-        self.driver = webdriver.Firefox()
+        #self.driver = webdriver.Firefox()
+        print settings.rel('../../chromedriver')
+        self.driver = webdriver.Chrome(settings.rel('../../chromedriver'))
         self.base_url = 'http://localhost:8000/static/index.html'
 
     @classmethod
@@ -84,6 +87,7 @@ class SimpleTest(TestCase):
         self.assert_samples([sample2])
         self.navigate_via('Run Experiment')
         self.assert_on_experiment_run_page()
+        pudb.set_trace()
         self.navigate_via('Select technique')
 
 

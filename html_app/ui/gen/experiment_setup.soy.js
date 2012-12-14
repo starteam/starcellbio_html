@@ -17,7 +17,7 @@ scb_experiment_setup.main = function(opt_data, opt_sb) {
 
 scb_experiment_setup.display_details = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_experiment_setup_view\'>EXPERIMENT SETUP<table class="scb_s_experiment_setup_table ', (opt_data.kind == 'readwrite') ? 'scb_s_experiment_setup_table_editable' : 'scb_s_experiment_setup_table_readonly', '"><thead class=\'scb_s_experiment_setup_table_head\'>');
+  output.append('<div class=\'scb_s_experiment_setup_details_view\'>EXPERIMENT SETUP<table class="scb_s_experiment_setup_table ', (opt_data.kind == 'readwrite') ? 'scb_s_experiment_setup_table_editable' : 'scb_s_experiment_setup_table_readonly', '"><thead class=\'scb_s_experiment_setup_table_head\'>');
   var hList21 = opt_data.headings;
   var hListLen21 = hList21.length;
   for (var hIndex21 = 0; hIndex21 < hListLen21; hIndex21++) {
