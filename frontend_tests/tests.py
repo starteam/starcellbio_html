@@ -5,6 +5,7 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
+from StarCellBio import settings
 from django.test import TestCase
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -15,7 +16,9 @@ import pudb
 class SimpleTest(TestCase):
     @classmethod
     def setUpClass(self):
-        self.driver = webdriver.Firefox()
+        #self.driver = webdriver.Firefox()
+        print settings.rel('../../chromedriver')
+        self.driver = webdriver.Chrome(settings.rel('../../chromedriver'))
         self.base_url = 'http://localhost:8000/static/index.html'
 
     @classmethod
@@ -85,6 +88,21 @@ class SimpleTest(TestCase):
         self.navigate_via('Run Experiment')
         self.assert_on_experiment_run_page()
         self.navigate_via('Select technique')
+        self.assert_on_select_technique_page()
+        self.assert_western_blots([])
+        self.navigate_via('New Western Blot')
+        self.assert_on_western_blot_page()
+        self.navigate_via('Select technique')
+        self.assert_on_select_technique_page()
+        self.assert_western_blots(['W.B. Exp. 1'])
+        self.navigate_via('New Western Blot')
+        self.assert_on_western_blot_page()
+        self.navigate_via('Select technique')
+        self.assert_on_select_technique_page()
+        self.assert_western_blots(['W.B. Exp. 1','W.B. Exp. 2'])
+        self.navigate_via('W.B. Exp. 2')
+        pudb.set_trace()
+        self.navigate_via('Select technique')
 
 
     ## navigation helpers and assertions
@@ -105,6 +123,11 @@ class SimpleTest(TestCase):
         self.find_by_class_name('scb_s_experiment_setup_view')
         self.find_by_class_name('scb_s_experiment_setup_table_readonly')
 
+    def assert_on_select_technique_page(self):
+        self.find_by_class_name('scb_s_select_technique_view')
+
+    def assert_on_western_blot_page(self):
+        self.find_by_class_name('scb_s_western_blot_view')
 
     def assert_experiments(self, experiment_list):
         web_experiment_list = self.driver.find_elements_by_class_name('scb_f_open_assignment_experiment')
@@ -150,6 +173,12 @@ class SimpleTest(TestCase):
     def remove_sample(self,sample):
         remove_button = self.find_by_class_name('scb_f_experiment_setup_remove_sample')
         remove_button.click();
+
+    def assert_western_blots(self, western_blot_titles):
+        web_wb_rows = self.driver.find_elements_by_class_name('scb_f_open_western_blot');
+        self.assertEqual(western_blot_titles.__len__(), web_wb_rows.__len__())
+        web_wb_list = [x.text for x in web_wb_rows]
+        self.assertEqual(web_wb_list, western_blot_titles)
 
     def select_option(self, value, attribute, css_class):
         web_options = self.driver.find_elements_by_class_name(css_class)

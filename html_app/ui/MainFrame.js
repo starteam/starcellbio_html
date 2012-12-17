@@ -36,6 +36,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                     if (experiment) {
                         assignment.experiments.selected_id = experiment.id;
                         ret.experiment = experiment;
+                        if (state.western_blot_id) {
+                            var western_blot = experiment.western_blot_list.get(state.western_blot_id);
+                            if (western_blot) {
+                                ret.western_blot = western_blot;
+                            }
+                        }
                     }
                     else {
                         // if experiment_id is invalid go to assignment
@@ -137,6 +143,16 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context:context
     });
 
+    self.sections.select_technique = new scb.ui.SelectTechniqueView({
+        workarea:workarea,
+        context:context
+    });
+
+    self.sections.western_blot = new scb.ui.WesternBlotView({
+        workarea:workarea,
+        context:context
+    })
+
     self.sections.workarea = new scb.ui.WorkspaceView({
         workarea:workarea,
         context:context
@@ -207,6 +223,29 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 last_view:'experiment_run'
             });
 
+        }
+        if (state.view == 'select_technique') {
+            self.sections.select_technique.show({
+                workarea:workarea,
+                assignment:parsed.assignment,
+                experiment:parsed.experiment
+            });
+
+        }
+        if (state.view == 'western_blot') {
+            if(!parsed.western_blot)
+            {
+                var western_blot = parsed.experiment.western_blot_list.start({});
+                state.western_blot_id = western_blot.id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+            self.sections.western_blot.show({
+                workarea:workarea,
+                assignment:parsed.assignment,
+                experiment:parsed.experiment
+            });
         }
         if (state.view == 'experiment_last') {
             if (parsed.experiment) {

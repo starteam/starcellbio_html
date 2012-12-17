@@ -1,0 +1,38 @@
+{namespace scb_western_blot}
+
+/**
+* Assignment selector
+* @param t template
+* @param global_template
+* @param assignment AssignmentView
+*/
+{template .main}
+<div class='scb_s_western_blot_view'>
+    {call scb_assignments.display_header}
+    {param global_template:$global_template /}
+    {/call}
+    {call .display_details}
+    {param t:$t/}
+    {param global_template:$global_template /}
+    {param assignment:$assignment/}
+    {/call}
+    {call scb_assignments.display_footer}
+    {param t:$t /}
+    {/call}
+</div>
+{/template}
+
+/** Display Western Blot main screen
+
+@/param t template
+@param assignment
+@param experiment
+*/
+{template .display_details}
+    <div class='scb_western_blot_details_view'>
+
+        <a class="scb_f_open_select_technique"
+              href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+              assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Select technique</a><br/>
+    </div>
+{/template}
