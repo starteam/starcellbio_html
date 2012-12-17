@@ -22,7 +22,7 @@ scb_select_technique.display_details = function(opt_data, opt_sb) {
   var wListLen15 = wList15.length;
   for (var wIndex15 = 0; wIndex15 < wListLen15; wIndex15++) {
     var wData15 = wList15[wIndex15];
-    output.append(soy.$$escapeHtml(wData15.id), '<br>');
+    output.append('<a class=\'scb_f_open_western_blot\' western_blot_id=\'', soy.$$escapeHtml(wData15.id), '\' href=\'#view=western_blot&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(wData15.id), '\'>', soy.$$escapeHtml(wData15.name), '<br>');
   }
   output.append('<a class=\'scb_f_new_western_blot\' href=\'#view=western_blot&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '\'>New Western Blot</a></div><a class="scb_f_open_experiment_setup_readonly" href="#view=experiment_run&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '">Run Experiment</a><br/></div>');
   return opt_sb ? '' : output.toString();

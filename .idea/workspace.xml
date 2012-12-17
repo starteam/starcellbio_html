@@ -25,10 +25,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="tests.py" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="44" column="7" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.0">
+                <state line="178" column="0" selection-start="7511" selection-end="7511" vertical-scroll-proportion="1.2093023">
                   <folding>
                     <element signature="e#184#216#0" expanded="true" />
                   </folding>
@@ -39,16 +39,34 @@
           <file leaf-file-name="select_technique.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="33" column="18" selection-start="643" selection-end="643" vertical-scroll-proportion="-20.625">
+                <state line="41" column="45" selection-start="896" selection-end="919" vertical-scroll-proportion="-25.625">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="WesternBlotView.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="WesternBlotView.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="23" column="2" selection-start="689" selection-end="689" vertical-scroll-proportion="0.34124628">
+                <state line="18" column="40" selection-start="570" selection-end="570" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Experiment.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="41" column="68" selection-start="1427" selection-end="1444" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Assignments.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/model/Assignments.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -57,7 +75,7 @@
           <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="32" column="0" selection-start="701" selection-end="701" vertical-scroll-proportion="-20.0">
+                <state line="9" column="35" selection-start="168" selection-end="191" vertical-scroll-proportion="-5.625">
                   <folding />
                 </state>
               </provider>
@@ -79,7 +97,7 @@
           <file leaf-file-name="MainFrame.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="137" column="7" selection-start="4460" selection-end="4460" vertical-scroll-proportion="0.50445104">
+                <state line="208" column="49" selection-start="6833" selection-end="6833" vertical-scroll-proportion="0.3827893">
                   <folding />
                 </state>
               </provider>
@@ -106,13 +124,13 @@
         <option value="$PROJECT_DIR$/html_app/ui_old/MainFrame.js" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentRunView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
-        <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/html_app/ui/SelectTechniqueView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/select_technique.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/select_technique.soy" />
+        <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
       </list>
     </option>
   </component>
@@ -203,6 +221,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -499,13 +535,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/model/CellTreatment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="79" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/starcellbio.app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="36" selection-start="1002" selection-end="1002" vertical-scroll-proportion="0.30587277">
@@ -516,13 +545,6 @@
     <entry file="file://$PROJECT_DIR$/html_app/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="62" column="36" selection-start="5299" selection-end="5299" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="65" selection-start="1612" selection-end="1626" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -562,39 +584,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="7" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#184#216#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="80" column="0" selection-start="2314" selection-end="2495" vertical-scroll-proportion="0.7084189">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="701" selection-end="701" vertical-scroll-proportion="-20.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="18" selection-start="643" selection-end="643" vertical-scroll-proportion="-20.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="137" column="7" selection-start="4460" selection-end="4460" vertical-scroll-proportion="0.50445104">
           <folding />
         </state>
       </provider>
@@ -606,10 +598,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="68" selection-start="1427" selection-end="1444" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/Assignments.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="2" selection-start="689" selection-end="689" vertical-scroll-proportion="0.34124628">
+        <state line="18" column="40" selection-start="570" selection-end="570" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="208" column="49" selection-start="6833" selection-end="6833" vertical-scroll-proportion="0.3827893">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="35" selection-start="168" selection-end="191" vertical-scroll-proportion="-5.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="45" selection-start="896" selection-end="919" vertical-scroll-proportion="-25.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="178" column="0" selection-start="7511" selection-end="7511" vertical-scroll-proportion="1.2093023">
+          <folding>
+            <element signature="e#184#216#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
