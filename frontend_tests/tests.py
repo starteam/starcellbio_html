@@ -101,6 +101,10 @@ class SimpleTest(TestCase):
         self.assert_on_select_technique_page()
         self.assert_western_blots(['W.B. Exp. 1','W.B. Exp. 2'])
         self.navigate_via('W.B. Exp. 2')
+        self.assert_on_western_blot_page()
+        self.assert_western_blot_tabs('W.B. Exp. 2', ['W.B. Exp. 1'])
+        self.navigate_via('W.B. Exp. 1')
+        self.assert_western_blot_tabs('W.B. Exp. 1', ['W.B. Exp. 2'])
         pudb.set_trace()
         self.navigate_via('Select technique')
 
@@ -175,6 +179,14 @@ class SimpleTest(TestCase):
         remove_button.click();
 
     def assert_western_blots(self, western_blot_titles):
+        web_wb_rows = self.driver.find_elements_by_class_name('scb_f_open_western_blot');
+        self.assertEqual(western_blot_titles.__len__(), web_wb_rows.__len__())
+        web_wb_list = [x.text for x in web_wb_rows]
+        self.assertEqual(web_wb_list, western_blot_titles)
+
+    def assert_western_blot_tabs(self, western_blot_active, western_blot_titles):
+        web_active_western_blot = self.find_by_class_name('scb_s_western_blot_selected')
+        self.assertEqual(western_blot_active,web_active_western_blot.text)
         web_wb_rows = self.driver.find_elements_by_class_name('scb_f_open_western_blot');
         self.assertEqual(western_blot_titles.__len__(), web_wb_rows.__len__())
         web_wb_list = [x.text for x in web_wb_rows]

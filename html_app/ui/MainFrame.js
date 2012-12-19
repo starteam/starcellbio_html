@@ -244,7 +244,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             self.sections.western_blot.show({
                 workarea:workarea,
                 assignment:parsed.assignment,
-                experiment:parsed.experiment
+                experiment:parsed.experiment,
+                western_blot:parsed.western_blot
             });
         }
         if (state.view == 'experiment_last') {

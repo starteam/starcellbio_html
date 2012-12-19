@@ -5,6 +5,8 @@
 * @param t template
 * @param global_template
 * @param assignment AssignmentView
+* @param western_blot WesternBlotView
+* @param rows
 */
 {template .main}
 <div class='scb_s_western_blot_view'>
@@ -15,6 +17,8 @@
     {param t:$t/}
     {param global_template:$global_template /}
     {param assignment:$assignment/}
+    {param western_blot:$western_blot /}
+    {param rows:$rows /}
     {/call}
     {call scb_assignments.display_footer}
     {param t:$t /}
@@ -27,12 +31,63 @@
 @/param t template
 @param assignment
 @param experiment
+@param western_blot
+@param rows
 */
 {template .display_details}
     <div class='scb_western_blot_details_view'>
 
+        {call .display_tabs}
+            {param assignment:$assignment/}
+            {param experiment:$experiment /}
+            {param western_blot:$western_blot /}
+            {param rows:$rows /}
+        {/call}
         <a class="scb_f_open_select_technique"
               href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Select technique</a><br/>
+    </div>
+{/template}
+
+/**
+    @param assignment
+    @param experiment
+    @param western_blot
+    @param rows
+*/
+{template .display_tabs}
+    <div class='scb_s_western_blot_tabs'>
+    {foreach $wb in $experiment.western_blot_list.list}
+        {if $western_blot.id == $wb.id}
+            <span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}'>{$wb.name}</span> <button class='scb_f_western_blot_remove' western_blot_id='{$wb.id}'>X</button>
+        {else}
+            <a class='scb_f_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}' western_blot_id='{$wb.id}'>{$wb.name}</a>
+        {/if}
+    {/foreach}
+    </div>
+    <div class='scb_s_western_blot_samples_table'>
+        <table>
+            <thead>
+                <td>Select</td>
+                <td>Samples</td>
+                <td>Lysate type</td>
+                <td>Action</td>
+            </thead>
+            {foreach $r in $rows}
+            <tr>
+                <td>
+                    <input type="checkbox" class="scb_f_western_blot_sample_active">
+                </td>
+                <td>
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            {/foreach}
+        </table>
     </div>
 {/template}
