@@ -25,10 +25,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="106" column="69" selection-start="4247" selection-end="4247" vertical-scroll-proportion="0.44942904">
+                <state line="95" column="46" selection-start="3684" selection-end="3684" vertical-scroll-proportion="0.0">
                   <folding>
                     <element signature="e#184#216#0" expanded="true" />
                   </folding>
@@ -81,10 +81,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="western_blot.soy" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="75" column="33" selection-start="2316" selection-end="2316" vertical-scroll-proportion="-36.25">
+                <state line="110" column="32" selection-start="3383" selection-end="3383" vertical-scroll-proportion="0.8329049">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CellTreatment.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/model/CellTreatment.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="31" column="48" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -121,10 +130,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="WesternBlotView.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="WesternBlotView.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="17" column="33" selection-start="594" selection-end="594" vertical-scroll-proportion="0.20799348">
+                <state line="23" column="51" selection-start="866" selection-end="866" vertical-scroll-proportion="0.28140295">
                   <folding />
                 </state>
               </provider>
@@ -155,9 +164,9 @@
         <option value="$PROJECT_DIR$/html_app/ui/select_technique.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
-        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
         <option value="$PROJECT_DIR$/html_app/model/WesternBlotLanes.js" />
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
       </list>
     </option>
   </component>
@@ -562,13 +571,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/StarCellBio/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="3" selection-start="116" selection-end="119" vertical-scroll-proportion="0.07418398">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.soy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -651,25 +653,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="33" selection-start="2316" selection-end="2316" vertical-scroll-proportion="-36.25">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="69" selection-start="4247" selection-end="4247" vertical-scroll-proportion="0.44942904">
+        <state line="95" column="46" selection-start="3684" selection-end="3684" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#184#216#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/CellTreatment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="48" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="33" selection-start="594" selection-end="594" vertical-scroll-proportion="0.20799348">
+        <state line="23" column="51" selection-start="866" selection-end="866" vertical-scroll-proportion="0.28140295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="32" selection-start="3383" selection-end="3383" vertical-scroll-proportion="0.8329049">
           <folding />
         </state>
       </provider>

@@ -76,18 +76,43 @@
             {foreach $r in $rows}
             <tr>
                 <td>
-                    <input type="checkbox" class="scb_f_western_blot_sample_active">
+                    <input type="checkbox" class="scb_f_western_blot_sample_active" western_blot_id='{$western_blot.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
+                </td>
+                <td>{if $r.display_sample}
+                    {$r.cell_treatment.name}
+                    {/if}
                 </td>
                 <td>
+                    {call .display_lysate_types}
+                        {param assignment:$assignment/}
+                        {param experiment:$experiment/}
+                        {param western_blot:$western_blot/}
+                        {param lane:$r/}
+                    {/call}
                 </td>
                 <td>
-
-                </td>
-                <td>
-
+                    {if $r.kind == 'existing'}
+                        <button>X</button>
+                    {/if}
                 </td>
             </tr>
             {/foreach}
         </table>
     </div>
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param western_blot
+@param lane
+
+*/
+{template .display_lysate_types}
+    <select class='scb_f_western_blot_lysate_type' western_blot_id='{$western_blot.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind='{$lane.kind}' lane_id='{if $lane.kind=="existing"}{$lane.lane.id}{/if}'>
+        <option selected="selected" disabled="disabled">Pick Lysate Type</option>
+        <option>Whole Cell</option>
+        <option>Cyto</option>
+        <option>Proto</option>
+    </select>
 {/template}
