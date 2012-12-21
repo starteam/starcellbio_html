@@ -56,15 +56,15 @@ scb.WesternBlotLane = function scb_WesternBlotLane(data, context, parent) {
     scb.ModelHelpers.common_entry_code(self, data, context);
     scb.Utils.initialize_accessor_field(self, data, 'kind', _.keys(context.template.lysate_kinds)[0], null, context);
     scb.Utils.initialize_accessor_field(self, data, 'ip', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'amount_of_protein_loaded', context.template.ui_configuration.amount_of_protein_loaded, null, context);
+//    scb.Utils.initialize_accessor_field(self, data, 'amount_of_protein_loaded', context.template.ui_configuration.amount_of_protein_loaded, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'marks', [], null, context);
     scb.Utils.initialize_accessor_field(self, data, 'cell_treatment_id', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'collection_schedule_id', null, null, context);
 
-    if (context.template.ui_configuration.lysate_display_ip) {
-        scb.Utils.initialize_accessor_field(self, data, 'ip_primary_anti_body', _.keys(context.template.ip_primary_anti_body)[0], null, context);
-        scb.Utils.initialize_accessor_field(self, data, 'ip_secondary_anti_body', _.keys(context.template.ip_secondary_anti_body)[0], null, context);
-    }
+//    if (context.template.ui_configuration.lysate_display_ip) {
+//        scb.Utils.initialize_accessor_field(self, data, 'ip_primary_anti_body', _.keys(context.template.ip_primary_anti_body)[0], null, context);
+//        scb.Utils.initialize_accessor_field(self, data, 'ip_secondary_anti_body', _.keys(context.template.ip_secondary_anti_body)[0], null, context);
+//    }
 
     scb.Utils.initialize_field(data, 'experiment_id', null);
 
