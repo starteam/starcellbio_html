@@ -125,6 +125,12 @@ class SimpleTest(TestCase):
         self.assert_on_select_technique_page()
         self.navigate_via('W.B. Exp. 1')
         self.assert_western_blot_tabs('W.B. Exp. 1', ['W.B. Exp. 2'])
+        self.rename_western_blot('Exp. 1')
+        self.navigate_via('Select technique')
+        self.assert_on_select_technique_page()
+        self.navigate_via('Exp. 1')
+        self.assert_western_blot_tabs('Exp. 1', ['W.B. Exp. 2'])
+
         pudb.set_trace()
         self.navigate_via('Select technique')
 
@@ -215,6 +221,13 @@ class SimpleTest(TestCase):
     def remove_western_blot(self):
         web_active_western_blot_remove_button = self.find_by_class_name('scb_f_western_blot_remove')
         web_active_western_blot_remove_button.click()
+
+    def rename_western_blot(self, title):
+        e_title = self.find_by_class_name('scb_s_western_blot_selected')
+        e_title.clear()
+        e_title.send_keys(title)
+        e_title.send_keys("\n")
+
 
     def select_option(self, value, attribute, css_class):
         web_options = self.driver.find_elements_by_class_name(css_class)
