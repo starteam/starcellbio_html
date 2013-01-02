@@ -74,17 +74,28 @@ class SimpleTest(TestCase):
         self.assert_samples([])
         sample1 = {'cell_line_id': 'wt', 'treatment_id': 'P1', 'collection_id': '3 d'}
         sample2 = {'cell_line_id': 'wt', 'treatment_id': 'P6', 'collection_id': '3 d'}
+        sample3 = {'cell_line_id': 'wt', 'treatment_id': 'P2', 'collection_id': '3 d'}
+        sample4 = {'cell_line_id': 'wt', 'treatment_id': 'P3', 'collection_id': '3 d'}
+        sample5 = {'cell_line_id': 'wt', 'treatment_id': 'P4', 'collection_id': '3 d'}
         self.add_sample(sample1)
         self.assert_samples([sample1])
         self.add_sample(sample2)
         self.assert_samples([sample1,sample2])
         self.remove_sample([sample1])
         self.assert_samples([sample2])
+        self.add_sample(sample1)
+        self.assert_samples([sample2,sample1])
+        self.add_sample(sample3)
+        self.assert_samples([sample2,sample1,sample3])
+        self.add_sample(sample4)
+        self.assert_samples([sample2,sample1,sample3,sample4])
+        self.add_sample(sample5)
+        self.assert_samples([sample2,sample1,sample3,sample4,sample5])
         self.navigate_via('Design Experiment')
         self.assert_on_experiment_design_page()
         self.navigate_via('Experiment setup')
         self.assert_on_experiment_setup_page()
-        self.assert_samples([sample2])
+        self.assert_samples([sample2,sample1,sample3,sample4,sample5])
         self.navigate_via('Run Experiment')
         self.assert_on_experiment_run_page()
         self.navigate_via('Select technique')
