@@ -25,10 +25,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="tests.py" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="83" column="0" selection-start="3240" selection-end="3240" vertical-scroll-proportion="0.0">
+                <state line="123" column="0" selection-start="5176" selection-end="5176" vertical-scroll-proportion="0.55350554">
                   <folding />
                 </state>
               </provider>
@@ -43,10 +43,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="western_blot.soy" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="104" column="29" selection-start="3510" selection-end="3510" vertical-scroll-proportion="0.8613333">
+                <state line="62" column="44" selection-start="1714" selection-end="1739" vertical-scroll-proportion="-2.12">
                   <folding />
                 </state>
               </provider>
@@ -156,8 +156,8 @@
         <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
-        <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
         <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
+        <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
       </list>
     </option>
   </component>
@@ -660,16 +660,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="0" selection-start="3240" selection-end="3240" vertical-scroll-proportion="0.0">
+        <state line="62" column="44" selection-start="1714" selection-end="1739" vertical-scroll-proportion="-2.12">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+    <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="29" selection-start="3510" selection-end="3510" vertical-scroll-proportion="0.8613333">
+        <state line="123" column="0" selection-start="5176" selection-end="5176" vertical-scroll-proportion="0.55350554">
           <folding />
         </state>
       </provider>

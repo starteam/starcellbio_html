@@ -116,6 +116,15 @@ class SimpleTest(TestCase):
         self.assert_western_blot_tabs('W.B. Exp. 2', ['W.B. Exp. 1'])
         self.navigate_via('W.B. Exp. 1')
         self.assert_western_blot_tabs('W.B. Exp. 1', ['W.B. Exp. 2'])
+        self.navigate_via('Select technique')
+        self.assert_on_select_technique_page()
+        self.navigate_via('New Western Blot')
+        self.assert_on_western_blot_page()
+        self.assert_western_blot_tabs('W.B. Exp. 3', ['W.B. Exp. 1', 'W.B. Exp. 2'])
+        self.remove_western_blot()
+        self.assert_on_select_technique_page()
+        self.navigate_via('W.B. Exp. 1')
+        self.assert_western_blot_tabs('W.B. Exp. 1', ['W.B. Exp. 2'])
         pudb.set_trace()
         self.navigate_via('Select technique')
 
@@ -202,6 +211,10 @@ class SimpleTest(TestCase):
         self.assertEqual(western_blot_titles.__len__(), web_wb_rows.__len__())
         web_wb_list = [x.text for x in web_wb_rows]
         self.assertEqual(web_wb_list, western_blot_titles)
+
+    def remove_western_blot(self):
+        web_active_western_blot_remove_button = self.find_by_class_name('scb_f_western_blot_remove')
+        web_active_western_blot_remove_button.click()
 
     def select_option(self, value, attribute, css_class):
         web_options = self.driver.find_elements_by_class_name(css_class)
