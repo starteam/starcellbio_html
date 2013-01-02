@@ -68,6 +68,7 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self, data, 'canvas_data', null, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.WesternBlotLaneList, context);
 	scb.Utils.initialize_accessor_field(self, data, 'exposure_list', {}, scb.WesternBlotExposureList, context);
+    scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
 
 	scb.Utils.initialize_field(data, 'gels_list', {});
 
