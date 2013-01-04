@@ -8,10 +8,10 @@
 * @param western_blot WesternBlotView
 * @param rows
 * @param kind
+* @param can_prepare_lysate
 */
 {template .main}
 <div class='scb_s_western_blot_view'>
-    {if $kind == 'sample_prep'}
     {call scb_assignments.display_header}
     {param global_template:$global_template /}
     {/call}
@@ -21,21 +21,12 @@
     {param assignment:$assignment/}
     {param western_blot:$western_blot /}
     {param rows:$rows /}
+    {param kind:$kind /}
+    {param can_prepare_lysate:$can_prepare_lysate/}
     {/call}
     {call scb_assignments.display_footer}
     {param t:$t /}
     {/call}
-    {/if}
-    {if $kind == 'prepare_gel'}
-    {call scb_assignments.display_header}
-    {param global_template:$global_template /}
-    {/call}
-    PREPARE GEL!
-    {call scb_assignments.display_footer}
-    {param t:$t /}
-    {/call}
-    {/if}
-
 </div>
 {/template}
 
@@ -46,6 +37,8 @@
 @param experiment
 @param western_blot
 @param rows
+@param kind
+@param can_prepare_lysate
 */
 {template .display_details}
 <div class='scb_western_blot_details_view'>
@@ -55,6 +48,8 @@
     {param experiment:$experiment /}
     {param western_blot:$western_blot /}
     {param rows:$rows /}
+    {param kind:$kind /}
+    {param can_prepare_lysate:$can_prepare_lysate/}
     {/call}
     <a class="scb_f_open_select_technique"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
@@ -67,6 +62,8 @@
 @param experiment
 @param western_blot
 @param rows
+@param kind
+@param can_prepare_lysate
 */
 {template .display_tabs}
 <div class='scb_s_western_blot_tabs'>
@@ -84,6 +81,7 @@
     {/if}
     {/foreach}
 </div>
+{if $kind == 'sample_prep'}
 <div class='scb_s_western_blot_samples_table'>
     <table>
         <thead>
@@ -127,9 +125,14 @@
         {/foreach}
     </table>
     <button class='scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
-            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' disabled='disabled'Prepare lysates
+            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+    {if $can_prepare_lysate}{else}disabled='disabled'{/if}> Prepare lysates
     </button>
 </div>
+{/if}
+{if $kind == 'prepare_gel'}
+LYSATE PREPARED!
+{/if}
 {/template}
 
 /**

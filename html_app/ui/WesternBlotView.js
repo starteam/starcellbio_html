@@ -129,7 +129,7 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_selected = function (element) {
     parsed.western_blot.name = $(element).text();
 }
 
-scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function(element) {
+scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (element) {
     var assignment_id = $(element).attr('assignment_id');
     var experiment_id = $(element).attr('experiment_id');
     var western_blot_id = $(element).attr('western_blot_id');
@@ -211,12 +211,13 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         });
 
         var kind = 'sample_prep';
-        if( state.western_blot.lysate_prepared )
-        {
+        if (state.western_blot.lysate_prepared) {
             kind = 'prepare_gel';
         }
 
-        var can_prepare_lysate = _.find()
+        var can_prepare_lysate = _.find(rows, function (e) {
+            return e.is_sample_enabled
+        }) && true;
         workarea.html(scb_western_blot.main({
             global_template:gstate.context.master_model,
             t:template,
