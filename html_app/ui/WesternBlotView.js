@@ -129,6 +129,27 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_selected = function (element) {
     parsed.western_blot.name = $(element).text();
 }
 
+scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function(element) {
+    var assignment_id = $(element).attr('assignment_id');
+    var experiment_id = $(element).attr('experiment_id');
+    var western_blot_id = $(element).attr('western_blot_id');
+
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        western_blot_id:western_blot_id,
+        view:'western_blot',
+        skip_hash_update:true
+    };
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    parsed.western_blot.lysate_prepared = true;
+    scb.ui.static.MainFrame.refresh();
+}
+
 scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_select_lysate_type', function (e) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type(this);
@@ -144,6 +165,9 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'blur', '.scb_s_western_blot_selected', function (e) {
         scb.ui.static.WesternBlotView.scb_s_western_blot_selected(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_prepare_lysates', function (e) {
+        scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates(this);
     });
 
 
@@ -185,13 +209,23 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
                 })
             }
         });
+
+        var kind = 'sample_prep';
+        if( state.western_blot.lysate_prepared )
+        {
+            kind = 'prepare_gel';
+        }
+
+        var can_prepare_lysate = _.find()
         workarea.html(scb_western_blot.main({
             global_template:gstate.context.master_model,
             t:template,
             assignment:state.assignment,
             experiment:state.experiment,
             western_blot:state.western_blot,
-            rows:rows
+            rows:rows,
+            kind:kind,
+            can_prepare_lysate:can_prepare_lysate
         }));
         state.experiment.last_view = 'western_blot';
     }

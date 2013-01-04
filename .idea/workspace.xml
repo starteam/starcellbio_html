@@ -25,10 +25,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="tests.py" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="131" column="39" selection-start="5580" selection-end="5580" vertical-scroll-proportion="0.51660514">
+                <state line="131" column="39" selection-start="5580" selection-end="5580" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -37,16 +37,16 @@
           <file leaf-file-name="WesternBlot.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlot.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="48" column="13" selection-start="1551" selection-end="1551" vertical-scroll-proportion="0.0">
+                <state line="61" column="68" selection-start="1889" selection-end="1904" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="62" column="44" selection-start="1714" selection-end="1739" vertical-scroll-proportion="-2.12">
+                <state line="129" column="78" selection-start="4177" selection-end="4177" vertical-scroll-proportion="0.904325">
                   <folding />
                 </state>
               </provider>
@@ -83,48 +83,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="WesternBlotView.js" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="WesternBlotView.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="93" column="36" selection-start="3262" selection-end="3262" vertical-scroll-proportion="-4.4615383">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="256" column="76" selection-start="10590" selection-end="10590" vertical-scroll-proportion="0.82846254">
-                  <folding>
-                    <element signature="e#1516#2837#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Experiment.js" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="41" column="68" selection-start="1427" selection-end="1444" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="LysateKind.js" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/model/LysateKind.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="34" column="0" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="WesternBlotLanes.js" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotLanes.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="75" column="26" selection-start="3025" selection-end="3025" vertical-scroll-proportion="0.0">
+                <state line="218" column="40" selection-start="7780" selection-end="7780" vertical-scroll-proportion="0.79034305">
                   <folding />
                 </state>
               </provider>
@@ -152,12 +114,12 @@
         <option value="$PROJECT_DIR$/html_app/ui/SelectTechniqueView.js" />
         <option value="$PROJECT_DIR$/html_app/model/LysateKind.js" />
         <option value="$PROJECT_DIR$/html_app/model/WesternBlotLanes.js" />
-        <option value="$PROJECT_DIR$/html_app/model/WesternBlot.js" />
         <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
         <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
+        <option value="$PROJECT_DIR$/html_app/model/WesternBlot.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
       </list>
     </option>
   </component>
@@ -602,27 +564,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/model/LysateKind.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotLanes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="26" selection-start="3025" selection-end="3025" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="68" selection-start="1427" selection-end="1444" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.soy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="35" selection-start="411" selection-end="411" vertical-scroll-proportion="-10.0">
@@ -637,16 +578,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlot.js">
+    <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="13" selection-start="1551" selection-end="1551" vertical-scroll-proportion="0.0">
+        <state line="131" column="39" selection-start="5580" selection-end="5580" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
+    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotLanes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="36" selection-start="3262" selection-end="3262" vertical-scroll-proportion="-4.4615383">
+        <state line="75" column="26" selection-start="3025" selection-end="3025" vertical-scroll-proportion="1.02375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/LysateKind.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="0" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.018450184">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="68" selection-start="1427" selection-end="1444" vertical-scroll-proportion="0.75645757">
           <folding />
         </state>
       </provider>
@@ -660,16 +615,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlot.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="44" selection-start="1714" selection-end="1739" vertical-scroll-proportion="-2.12">
+        <state line="61" column="68" selection-start="1889" selection-end="1904" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="39" selection-start="5580" selection-end="5580" vertical-scroll-proportion="0.51660514">
+        <state line="129" column="78" selection-start="4177" selection-end="4177" vertical-scroll-proportion="0.904325">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="218" column="40" selection-start="7780" selection-end="7780" vertical-scroll-proportion="0.79034305">
           <folding />
         </state>
       </provider>

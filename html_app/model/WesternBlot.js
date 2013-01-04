@@ -59,7 +59,7 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
 	var self = this;
 	self.parent = parent;
 	scb.ModelHelpers.common_entry_code(self, data, context);
-	scb.Utils.initialize_accessor_field(self, data, 'lysate_made', false, null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'lysate_prepared', false, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'primary_anti_body', _.keys(context.template.primary_anti_body)[0], null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'secondary_anti_body', _.keys(context.template.secondary_anti_body)[0], null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'display_lysates_id', null, null, context);

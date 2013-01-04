@@ -7,9 +7,11 @@
 * @param assignment AssignmentView
 * @param western_blot WesternBlotView
 * @param rows
+* @param kind
 */
 {template .main}
 <div class='scb_s_western_blot_view'>
+    {if $kind == 'sample_prep'}
     {call scb_assignments.display_header}
     {param global_template:$global_template /}
     {/call}
@@ -23,6 +25,17 @@
     {call scb_assignments.display_footer}
     {param t:$t /}
     {/call}
+    {/if}
+    {if $kind == 'prepare_gel'}
+    {call scb_assignments.display_header}
+    {param global_template:$global_template /}
+    {/call}
+    PREPARE GEL!
+    {call scb_assignments.display_footer}
+    {param t:$t /}
+    {/call}
+    {/if}
+
 </div>
 {/template}
 
@@ -59,8 +72,11 @@
 <div class='scb_s_western_blot_tabs'>
     {foreach $wb in $experiment.western_blot_list.list}
     {if $western_blot.id == $wb.id}
-    <span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
-    <button class='scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>X</button>
+    <span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+          experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+    <button class='scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+            experiment_id='{$experiment.id}'>X
+    </button>
     {else}
     <a class='scb_f_open_western_blot'
        href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
@@ -80,7 +96,8 @@
         <tr>
             <td>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_western_blot_sample_active" western_blot_id='{$western_blot.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' cell_treatment_id='{$r.cell_treatment.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                       cell_treatment_id='{$r.cell_treatment.id}'
                 {if $r.is_sample_enabled}checked="checked"{/if}
                 >
                 {/if}
@@ -102,13 +119,16 @@
                 {if $r.kind == 'existing'}
                 <button class="scb_f_western_blot_sample_remove" western_blot_id='{$western_blot.id}'
                         assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
-                        {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>X
+                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>X
                 </button>
                 {/if}
             </td>
         </tr>
         {/foreach}
     </table>
+    <button class='scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
+            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' disabled='disabled'Prepare lysates
+    </button>
 </div>
 {/template}
 
@@ -124,21 +144,21 @@
 <select class="scb_f_western_blot_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
         western_blot_id='{$western_blot.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
         lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
-        {if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
-        >
-    {if $lane.kind == 'existing'}
-    <option value='whole_cell'
-    {if $lane.lane.kind == 'whole_cell'}selected="selected"{/if}>Whole Cell</option>
-    <option value='cytoplasm'
-    {if $lane.lane.kind == 'cytoplasm'}selected="selected"{/if}>Cyto</option>
-    <option value='nuclear'
-    {if $lane.lane.kind == 'nuclear'}selected="selected"{/if}>Nuclear</option>
-    {else}
-    <option selected="selected" disabled="disabled">Pick Lysate Type</option>
-    <option value='whole_cell'>Whole Cell</option>
-    <option value='cytoplasm'>Cyto</option>
-    <option value='nuclear'>Nuclear</option>
+{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
+>
+{if $lane.kind == 'existing'}
+<option value='whole_cell'
+{if $lane.lane.kind == 'whole_cell'}selected="selected"{/if}>Whole Cell</option>
+<option value='cytoplasm'
+{if $lane.lane.kind == 'cytoplasm'}selected="selected"{/if}>Cyto</option>
+<option value='nuclear'
+{if $lane.lane.kind == 'nuclear'}selected="selected"{/if}>Nuclear</option>
+{else}
+<option selected="selected" disabled="disabled">Pick Lysate Type</option>
+<option value='whole_cell'>Whole Cell</option>
+<option value='cytoplasm'>Cyto</option>
+<option value='nuclear'>Nuclear</option>
 
-    {/if}
+{/if}
 </select>
 {/template}
