@@ -3,17 +3,6 @@
   height: 100%;
   max-width: 1280px;
 }
-.scb_s_header, .scb_s_footer {
-  font-size: 24px;
-  text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #a0a0a0;
-  border-radius: 8px;
-  background-color: #c0d0d0;
-  display: block;
-  padding: 10px;
-}
 .scb_s_abstract {
   margin-top: 8px;
   font-size: 12px;

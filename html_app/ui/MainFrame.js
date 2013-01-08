@@ -124,6 +124,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
     });
 
+    self.sections.homepage = new scb.ui.HomepageView({
+        workarea:workarea,
+        context:context
+    });
     self.sections.assignments = new scb.ui.AssignmentsView({
         workarea:workarea,
         context:context
@@ -171,7 +175,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             self.show(parsed.redisplay_state);
             return;
         }
-
+        if (state.view == 'homepage') {
+            self.sections.homepage.show({
+                workarea:workarea,
+            });
+        }
         if (state.view == 'assignments') {
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.MainFrame.update_hash(state);
