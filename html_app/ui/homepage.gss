@@ -105,7 +105,11 @@
 }
 
 .scb_s_envelope_icon {
+    margin-bottom:8px;
+}
 
+.scb_s_envelope_text {
+    margin-bottom:8px;
 }
 
 .scb_s_header_tools_text {
@@ -122,6 +126,7 @@
 
 .scb_s_login_status {
     padding-right: 15px;
+    margin-bottom: 8px;
 }
 
 .scb_s_homepage_top {

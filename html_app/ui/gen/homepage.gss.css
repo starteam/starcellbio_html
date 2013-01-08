@@ -76,6 +76,9 @@
   display: block;
   text-align: right;
 }
+.scb_s_envelope_icon, .scb_s_envelope_text {
+  margin-bottom: 8px;
+}
 .scb_s_header_tools_text {
   padding-left: 6px;
   padding-right: 6px;
@@ -88,6 +91,7 @@
 }
 .scb_s_login_status {
   padding-right: 15px;
+  margin-bottom: 8px;
 }
 .scb_s_homepage_top {
   display: block;
