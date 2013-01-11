@@ -7,10 +7,10 @@ if (typeof scb_assignment == 'undefined') { var scb_assignment = {}; }
 scb_assignment.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_assignment_view\'>');
-  scb_assignments.display_header(opt_data, output);
+  scb_homepage.display_header(opt_data, output);
   scb_assignment.display_assignment(opt_data, output);
   scb_assignment.display_details(opt_data, output);
-  scb_assignments.display_footer(opt_data, output);
+  scb_homepage.display_footer(opt_data, output);
   output.append('</div>');
   return opt_sb ? '' : output.toString();
 };

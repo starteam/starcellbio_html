@@ -8,8 +8,7 @@
 */
 {template .main}
 <div class='scb_s_assignments_view'>
-    {call .display_header}
-    {param global_template:$global_template /}
+    {call scb_homepage.display_header}
     {/call}
     {call .display_assignments}
     {param assignments:$assignments/}
@@ -18,8 +17,9 @@
     {param global_template:$global_template/}
     {param assignments:$assignments/}
     {/call}
-    {call .display_footer}
-    {param global_template:$global_template /}
+    {call scb_homepage.display_experiment_design}
+    {/call}
+    {call scb_homepage.display_footer}
     {/call}
 </div>
 {/template}

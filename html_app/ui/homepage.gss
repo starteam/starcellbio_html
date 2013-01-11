@@ -397,3 +397,6 @@
 
 }
 
+.scb_no_underline {
+    text-decoration: none;
+}

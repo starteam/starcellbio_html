@@ -7,9 +7,9 @@ if (typeof scb_select_technique == 'undefined') { var scb_select_technique = {};
 scb_select_technique.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_select_technique_view\'>');
-  scb_assignments.display_header(opt_data, output);
+  scb_homepage.display_header(opt_data, output);
   scb_select_technique.display_details(opt_data, output);
-  scb_assignments.display_footer(opt_data, output);
+  scb_homepage.display_footer(opt_data, output);
   output.append('</div>');
   return opt_sb ? '' : output.toString();
 };

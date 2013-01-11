@@ -315,3 +315,6 @@
   vertical-align: top;
   margin-top: 20px;
 }
+.scb_no_underline {
+  text-decoration: none;
+}

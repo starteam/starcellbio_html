@@ -9,7 +9,7 @@
 */
 {template .main}
 <div class='scb_s_assignment_view'>
-    {call scb_assignments.display_header}
+    {call scb_homepage.display_header}
     {param global_template:$global_template /}
     {/call}
     {call .display_assignment}
@@ -23,7 +23,7 @@
     {param assignment:$assignment/}
     {/call}
 
-    {call scb_assignments.display_footer}
+    {call scb_homepage.display_footer}
     {param t:$t /}
     {/call}
 </div>

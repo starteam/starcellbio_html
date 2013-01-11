@@ -7,9 +7,9 @@ if (typeof scb_experiment_setup == 'undefined') { var scb_experiment_setup = {};
 scb_experiment_setup.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_experiment_setup_view\'>');
-  scb_assignments.display_header(opt_data, output);
+  scb_homepage.display_header(opt_data, output);
   scb_experiment_setup.display_details(opt_data, output);
-  scb_assignments.display_footer(opt_data, output);
+  scb_homepage.display_footer(opt_data, output);
   output.append('</div>');
   return opt_sb ? '' : output.toString();
 };
