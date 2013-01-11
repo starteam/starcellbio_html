@@ -14,8 +14,9 @@
   border-width: 1px;
   border-color: #a0a0a0;
   border-radius: 8px;
-  background-color: #c0d0d0;
+  background-color: white;
   padding: 10px;
+  width: 686px;
 }
 .assignments_block {
   left: 20px;
@@ -23,7 +24,7 @@
   border-style: solid;
   border-width: 1px;
   border-color: #a0a0a0;
-  border-radius: 8px;
+  border-radius: 5px;
   background-color: #c0d0d0;
   display: block;
   padding: 10px;
@@ -40,8 +41,18 @@
   text-align: justify;
   display: inline-block;
   vertical-align: top;
-  min-height: 350px;
-  width: 320px;
+  width: 230px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #a0a0a0;
+  border-radius: 5px;
+  margin-right: 10px;
+  padding: 5px;
+  background-color: white;
+}
+.scb_s_assignments_sidebar_title {
+  font-size: 18px;
+  font-weight: bold;
 }
 .scb_s_assignments_sidebar_name {
   font-size: 12px;

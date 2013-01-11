@@ -40,7 +40,7 @@ scb_assignments.display_abstract = function(opt_data, opt_sb) {
 
 scb_assignments.display_assignments = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_assignments_sidebar\'><dl>');
+  output.append('<div class=\'scb_s_assignments_sidebar\'><h1 class=\'scb_s_assignments_sidebar_title\'>YOUR ASSIGNMENTS</h1><dl>');
   var assignmentList35 = opt_data.assignments.list;
   var assignmentListLen35 = assignmentList35.length;
   for (var assignmentIndex35 = 0; assignmentIndex35 < assignmentListLen35; assignmentIndex35++) {
