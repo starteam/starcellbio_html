@@ -48,15 +48,17 @@ TODO: new facs
         {param step:4/}
     {/call}
     <div class='scb_s_select_technique_western_blot'>
+        <h1>Available Western Blot:</h1>
+        <div class='scb_s_select_technique_western_blot_available'>
         {foreach $w in $experiment.western_blot_list.list}
             <a class='scb_f_open_western_blot' western_blot_id='{$w.id}' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$w.id}'>{$w.name}<br>
         {/foreach}
-        <a class='scb_f_new_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>New Western Blot</a>
+        </div>
+        <a class='scb_s_navigation_button scb_f_new_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>New Western Blot</a>
     </div>
 
     <a class="scb_f_open_experiment_setup_readonly"
-       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Run
-        Experiment</a><br/>
+       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Review set-up</a><br/>
 
 </div>
 {/template}
