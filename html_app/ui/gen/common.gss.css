@@ -31,4 +31,10 @@
   position: absolute;
   top: 65px;
   left: 275px;
+  color: #69a996;
+}
+.scb_s_assignment_step {
+  background-color: #69a996;
+  color: white;
+  width: 960px;
 }

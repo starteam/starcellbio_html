@@ -5,12 +5,18 @@
 * @param t template
 * @param global_template
 * @param assignment AssignmentView
+* @param experiment ExperimentView
 
 */
 {template .main}
 <div class='scb_s_experiment_setup_view'>
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
+    {/call}
+    {call scb_common.assignment_step}
+        {param step:4/}
+        {param assignment_name:$assignment.name/}
+        {param experiment_name:$experiment.name/}
     {/call}
     {call .display_details}
     {param t:$t/}
@@ -34,7 +40,26 @@ Experiment active area
 */
 {template .display_details}
 <div class='scb_s_experiment_setup_details_view'>
-    EXPERIMENT SETUP
+
+    {if $kind == 'readwrite'}
+    {call scb_common.experiment_step}
+        {param step:2/}
+    {/call}
+    <div class='scb_s_experiment_setup_choose_template'>
+        THIS NEEDS A BIT MORE THINKING!
+        <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind">Create new set-up</input>
+        <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind">Select pre-existing set-up as a template</input>
+        <select class='scb_s_experiment_setup_choose_template_id'>
+            <option>Experiment 1</option>
+            <option>Experiment 1</option>
+        </select>
+    </div>
+    {else}
+    {call scb_common.experiment_step}
+        {param step:3/}
+    {/call}
+
+    {/if}
     <table class="scb_s_experiment_setup_table {if $kind == 'readwrite'}scb_s_experiment_setup_table_editable{else}scb_s_experiment_setup_table_readonly{/if}">
         <thead class='scb_s_experiment_setup_table_head'>
         {foreach $h in $headings}
@@ -63,7 +88,7 @@ Experiment active area
         {if $kind == 'readwrite'}
         <tr>
             <td colspan="{$headings.length}">
-                <button class='scb_f_experiment_setup_action_open_add_samples_dialog'>Add</button>
+                <button class='scb_f_experiment_setup_action_open_add_samples_dialog'>Add multiple rows</button>
             </td>
         </tr>
         {/if}
@@ -75,24 +100,24 @@ Experiment active area
     {/call}
     <br/>
     {if $kind == 'readwrite'}
-    <a class="scb_f_open_experiment_setup_readonly"
+    <a class="scb_s_navigation_button scb_f_open_experiment_setup_readonly"
        href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Run
-        Experiment</a><br/>
-    <a class="scb_f_open_experiment_design"
-       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design
-        Experiment</a>
+        Experiment &#9654;</a><br/>
+    <a class="scb_s_navigation_button scb_f_open_experiment_design"
+       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; Design
+        </a>
     {else}
-    <a class="scb_f_open_select_technique"
+    <a class="scb_s_navigation_button scb_f_open_select_technique"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Select technique</a><br/>
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Confirm set-up & Select technique &#9654;</a><br/>
     {if $experiment.setup_finished}
-    <a class="scb_f_open_experiment_design"
-       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Design
-        Experiment</a>
+    <a class="scb_s_navigation_button scb_f_open_experiment_design"
+       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; Design
+        </a>
     {else}
-    <a class="scb_f_open_experiment_setup"
-       href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}">Setup
-        Experiment</a>
+    <a class="scb_s_navigation_button scb_f_open_experiment_setup"
+       href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; Edit Set-up
+        </a>
     {/if}
 
     {/if}

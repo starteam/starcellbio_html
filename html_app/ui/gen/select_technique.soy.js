@@ -8,6 +8,7 @@ scb_select_technique.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_select_technique_view\'>');
   scb_homepage.display_header(opt_data, output);
+  scb_common.assignment_step({step: 5, assignment_name: opt_data.assignment.name, experiment_name: opt_data.experiment.name}, output);
   scb_select_technique.display_details(opt_data, output);
   scb_homepage.display_footer(opt_data, output);
   output.append('</div>');
@@ -17,12 +18,14 @@ scb_select_technique.main = function(opt_data, opt_sb) {
 
 scb_select_technique.display_details = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_select_technique_details_view\'><div class=\'scb_s_select_technique_western_blot\'>');
-  var wList15 = opt_data.experiment.western_blot_list.list;
-  var wListLen15 = wList15.length;
-  for (var wIndex15 = 0; wIndex15 < wListLen15; wIndex15++) {
-    var wData15 = wList15[wIndex15];
-    output.append('<a class=\'scb_f_open_western_blot\' western_blot_id=\'', soy.$$escapeHtml(wData15.id), '\' href=\'#view=western_blot&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(wData15.id), '\'>', soy.$$escapeHtml(wData15.name), '<br>');
+  output.append('<div class=\'scb_s_select_technique_details_view\'>');
+  scb_common.experiment_step({step: 4}, output);
+  output.append('<div class=\'scb_s_select_technique_western_blot\'>');
+  var wList22 = opt_data.experiment.western_blot_list.list;
+  var wListLen22 = wList22.length;
+  for (var wIndex22 = 0; wIndex22 < wListLen22; wIndex22++) {
+    var wData22 = wList22[wIndex22];
+    output.append('<a class=\'scb_f_open_western_blot\' western_blot_id=\'', soy.$$escapeHtml(wData22.id), '\' href=\'#view=western_blot&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(wData22.id), '\'>', soy.$$escapeHtml(wData22.name), '<br>');
   }
   output.append('<a class=\'scb_f_new_western_blot\' href=\'#view=western_blot&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '\'>New Western Blot</a></div><a class="scb_f_open_experiment_setup_readonly" href="#view=experiment_run&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '">Run Experiment</a><br/></div>');
   return opt_sb ? '' : output.toString();
