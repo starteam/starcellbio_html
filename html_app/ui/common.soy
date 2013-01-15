@@ -1,0 +1,55 @@
+{namespace scb_common}
+
+/**
+* Progress bar
+@param step
+@param assignment_name
+@param experiment_name
+@param technique_name
+*/
+{template .assignment_step}
+    {if $step > 0}
+    <div class='scb_s_assignment_step'>
+        {if $step > 0}
+            ASSIGNMENTS
+        {/if}
+        {if $step > 1}
+            &gt;
+            {$assignment_name}
+        {/if}
+        {if $step > 2}
+            &gt;
+            DESIGN
+            <div class='scb_s_assignment_step_experiment'>
+                &#8988; {$experiment_name}
+            </div>
+        {/if}
+        {if $step > 3}
+            &gt;
+            SETUP
+        {/if}
+        {if $step > 4}
+            &gt;
+            TECHNIQUES
+        {/if}
+        {if $step > 5}
+            &gt;
+            {$technique_name}
+        {/if}
+
+    </div>
+    {/if}
+{/template}
+/**
+* Progress bar
+* @param step
+*/
+{template .experiment_step}
+    <div class='scb_s_experiment_step'>
+        <div class='scb_s_experiment_step_circle {if $step==1}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>1</div></div>
+        <div class='scb_s_experiment_step_circle {if $step==2}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>2</div></div>
+        <div class='scb_s_experiment_step_circle {if $step==3}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>3</div></div>
+        <div class='scb_s_experiment_step_circle {if $step==4}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>4</div></div>
+        <div class='scb_s_experiment_step_circle {if $step==5}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>5</div></div>
+    </div>
+{/template}

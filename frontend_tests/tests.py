@@ -62,13 +62,14 @@ class SimpleTest(TestCase):
         self.assert_on_experiment_design_page()
         experiment_title = 'Test Experiment 12'
         experiment_hypo = 'Sample hypothesis ABC'
-        self.set_experiment_design_values(experiment_title, experiment_hypo)
+        experiment_obj = 'Sample objective ABC'
+        self.set_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
         self.navigate_via('Assignment')
         self.assert_on_assignment_page()
         self.assert_experiments(['Test Experiment 12'])
         self.navigate_via(experiment_title)
         self.assert_on_experiment_design_page()
-        self.assert_experiment_design_values(experiment_title, experiment_hypo)
+        self.assert_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
         self.navigate_via('Experiment setup')
         self.assert_on_experiment_setup_page()
         self.assert_samples([])
@@ -166,24 +167,29 @@ class SimpleTest(TestCase):
         self.assertEqual(web_experiment_titles, experiment_list)
         pass
 
-    def set_experiment_design_values(self, title, hypo):
+    def set_experiment_design_values(self, title, hypo,obj):
         e_title = self.find_by_class_name('scb_s_experiment_name_edit')
         e_hypo = self.find_by_class_name('scb_s_experiment_design_hypothesis')
+        e_obj = self.find_by_class_name('scb_s_experiment_design_objective')
         e_title.clear()
         e_title.send_keys(title)
         e_title.send_keys("\n")
         e_hypo.clear()
         e_hypo.send_keys(hypo)
         e_hypo.send_keys("\n")
+        e_obj.clear()
+        e_obj.send_keys(obj)
+        e_obj.send_keys("\n")
         pass
 
-    def assert_experiment_design_values(self, title, hypo):
+    def assert_experiment_design_values(self, title, hypo,obj):
         e_title = self.find_by_class_name('scb_s_experiment_name_edit')
         e_hypo = self.find_by_class_name('scb_s_experiment_design_hypothesis')
+        e_obj = self.find_by_class_name('scb_s_experiment_design_objective')
         self.assertEqual(e_title.get_attribute('value'), title)
         self.assertEqual(e_hypo.text, hypo)
+        self.assertEqual(e_obj.text, obj)
         pass
-
 
     def assert_samples(self, samples_list):
         web_sample_rows = self.driver.find_elements_by_class_name('scb_s_experiment_setup_table_row');
@@ -282,7 +288,7 @@ class SimpleTest(TestCase):
 
 
     def find_by_link_text(self, selector):
-        elements = self.driver.find_elements_by_link_text(selector)
+        elements = self.driver.find_elements_by_partial_link_text(selector)
         self.assertGreater(elements.__len__(), 0)
         return elements[0]
 

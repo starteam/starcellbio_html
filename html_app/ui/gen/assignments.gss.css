@@ -17,6 +17,7 @@
   background-color: white;
   padding: 10px;
   width: 686px;
+  position: relative;
 }
 .assignments_block {
   left: 20px;
@@ -63,4 +64,9 @@
 }
 .assignement_experiment_list {
   font-size: 11px;
+}
+.scb_s_abstract>.scb_f_select_assignment {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }

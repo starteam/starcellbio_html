@@ -33,13 +33,13 @@
     width:686px;
 }
 
-.scb_f_select_assignment {
+.scb_s_assignment_description>.scb_f_select_assignment {
     position: absolute;
     bottom: 5px;
     left: 5px
 }
 
-.scb_f_open_experiment {
+.scb_s_assignment_description>.scb_f_open_experiment {
     position: absolute;
     bottom: 5px;
     right: 5px

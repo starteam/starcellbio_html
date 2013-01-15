@@ -34,7 +34,10 @@ scb.Experiment = function scb_Experiment(data, context, parent) {
 	var self = this;
 	self.parent = parent;
 	scb.ModelHelpers.common_entry_code(self, data, context);
+    // experiment_design_fields
     scb.Utils.initialize_accessor_field(self,data,'hypothesis','',null,context);
+    scb.Utils.initialize_accessor_field(self,data,'objective','',null,context);
+    // ui state
     scb.Utils.initialize_accessor_field(self,data,'last_view','experiment_design',null,context);
 
 

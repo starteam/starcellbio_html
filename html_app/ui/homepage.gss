@@ -1,4 +1,4 @@
-@import "utilities.gss";
+@import "common.gss";
 
 @defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
   background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */

@@ -9,6 +9,9 @@
     {call .display_header}
     {param global_template:$global_template /}
     {/call}
+    {call scb_common.assignment_step}
+        {param step:0/}
+    {/call}
     {call .display_content/}
     {call .display_footer}
     {param global_template:$global_template /}
@@ -26,7 +29,7 @@ TODO: this needs to be login/logout depending on the state
 {template .display_header}
 <div class='scb_s_header'>
     <img class='scb_s_header_line_top' src='images/header/scb_header_line.png'>
-    <a href='#view=assignments'><img class='scb_s_logo' src='images/header/scb_logo.png'></a>
+    <a href='#view=homepage'><img class='scb_s_logo' src='images/header/scb_logo.png'></a>
     <span class='scb_s_header_tools'>
         <img class='scb_s_envelope_icon' src='images/header/scb_envelope_icon.png'>
         <img class='scb_s_envelope_text scb_s_header_tools_text' src='images/header/scb_envelope_text.png'>
@@ -124,30 +127,36 @@ Assignment display_experiment_design
             <span class='scb_s_homepage_technique_title'>
                 <img src='images/homepage/techniques.png'>
             </span>
-            <span class='scb_s_homepage_technique_wb'>
-                <img class='scb_s_homepage_technique_title_image' src='images/homepage/western_blot.png'>
-                Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
-                <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
-
-            </span>
-            <img class='scb_s_homepage_technique_bar'
-                 src='images/homepage/experimental_design_bar.png'>
-            <span class='scb_s_homepage_technique_flow'>
-                <img class='scb_s_homepage_technique_title_image' src='images/homepage/flow_cytometry.png'>
-                                Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
-                                <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
-            </span>
-            <img class='scb_s_homepage_technique_bar'
-                 src='images/homepage/experimental_design_bar.png'>
-            <span class='scb_s_homepage_technique_micro'>
-                <img class='scb_s_homepage_technique_title_image' src='images/homepage/microscopy.png'>
-                                Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
-                                <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
-            </span>
-            <img class='scb_s_homepage_technique_more' src='images/homepage/more_techniques.png'>
+            {call scb_homepage.display_techniques}
+            {/call}
         </span>
-
     </span>
+{/template}
+
+/** Techniques */
+{template .display_techniques}
+<span class='scb_s_homepage_technique_wb'>
+    <img class='scb_s_homepage_technique_title_image' src='images/homepage/western_blot.png'>
+    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
+    <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
+
+</span>
+<img class='scb_s_homepage_technique_bar'
+     src='images/homepage/experimental_design_bar.png'>
+<span class='scb_s_homepage_technique_flow'>
+    <img class='scb_s_homepage_technique_title_image' src='images/homepage/flow_cytometry.png'>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
+                    <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
+</span>
+<img class='scb_s_homepage_technique_bar'
+     src='images/homepage/experimental_design_bar.png'>
+<span class='scb_s_homepage_technique_micro'>
+    <img class='scb_s_homepage_technique_title_image' src='images/homepage/microscopy.png'>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
+                    <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
+</span>
+<img class='scb_s_homepage_technique_more' src='images/homepage/more_techniques.png'>
+
 {/template}
 /**
 Assignment footer
