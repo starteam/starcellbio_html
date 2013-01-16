@@ -111,7 +111,6 @@ class SimpleTest(TestCase):
         self.assert_on_western_blot_page()
         self.navigate_via('Select technique')
         self.assert_on_select_technique_page()
-        pudb.set_trace()
         self.assert_western_blots(['W.B. Exp. 1','W.B. Exp. 2'])
         self.navigate_via('W.B. Exp. 2')
         self.assert_on_western_blot_page()
@@ -132,7 +131,6 @@ class SimpleTest(TestCase):
         self.assert_on_select_technique_page()
         self.navigate_via('Exp. 1')
         self.assert_western_blot_tabs('Exp. 1', ['W.B. Exp. 2'])
-
         pudb.set_trace()
         self.navigate_via('Select technique')
 
