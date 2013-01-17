@@ -131,8 +131,10 @@ class SimpleTest(TestCase):
         self.assert_on_select_technique_page()
         self.navigate_via('Exp. 1')
         self.assert_western_blot_tabs('Exp. 1', ['W.B. Exp. 2'])
+        self.select_lysates()
+        self.navigate_via('Prepare lysate')
         pudb.set_trace()
-        self.navigate_via('Select technique')
+        #self.navigate_via('Select technique')
 
 
     ## navigation helpers and assertions
@@ -240,6 +242,18 @@ class SimpleTest(TestCase):
         self.assertGreater(web_filtered.__len__(), 0)
         option = web_filtered[0]
         option.click()
+
+    def select_lysates(self):
+        cbs = self.driver.find_elements_by_css_selector('.scb_f_western_blot_sample_active')
+        for i in range(0,cbs.__len__()):
+            checkboxes = self.driver.find_elements_by_css_selector('.scb_f_western_blot_sample_active')
+            cb = checkboxes[i]
+            cb.click()
+            select = self.driver.find_elements_by_css_selector('.scb_f_western_blot_select_lysate_type')
+            options = select[2*i].find_elements_by_tag_name('option')
+            option = [x for x in options if x.get_attribute('value') == 'whole_cell']
+            if(option.__len__() > 0 ):
+                option[0].click()
 
     def load_website(self):
         self.driver.get(self.base_url)

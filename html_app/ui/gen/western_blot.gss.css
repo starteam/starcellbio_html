@@ -1,0 +1,80 @@
+.scb_western_blot_details_view_inner {
+  background: white;
+  border: 1px #c0c0c0 solid;
+  border-radius: 5px;
+  width: 950px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+.scb_s_western_blot_samples_table {
+  border: 1px #b0b0b0 solid;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.scb_f_open_western_blot {
+  border: 1px #b0b0b0 solid;
+  padding: 2px;
+  margin: 3px;
+  margin-left: 5px;
+}
+.scb_s_western_blot_active {
+  border: 1px #b0b0b0 solid;
+  padding: 2px;
+  margin: 3px;
+  margin-left: 5px;
+  border-bottom: 1px white solid;
+}
+.scb_f_western_blot_prepare_lysates {
+  border-radius: 5px;
+  position: relative;
+  left: 750px;
+  bottom: 5px;
+}
+.scb_s_western_blot_progress {
+  display: block;
+  width: 800px;
+  height: 80px;
+  margin-left: 25px;
+}
+.scb_s_western_blot_progress_prefix {
+  background: green;
+  border-radius: 12px;
+  width: 12px;
+  height: 12px;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  padding-bottom: 12px;
+  display: inline-block;
+}
+.scb_s_western_blot_progress_rest {
+  display: inline-block;
+  border: 1px #c0c0c0 solid;
+  padding: 5px;
+  margin-left: 12px;
+  border-radius: 6px;
+}
+.scb_s_western_blot_progress_item {
+  display: inline-block;
+  margin-left: 12px;
+}
+.scb_s_western_blot_progress_selected {
+  color: green;
+}
+.scb_s_western_blot_samples_area {
+  width: 300px;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: inline-block;
+  vertical-align: top;
+}
+.scb_s_western_blot_samples_gel_area {
+  display: inline-block;
+  border: 1px solid black;
+  vertical-align: top;
+  width: 500px;
+  margin-left: 25px;
+}

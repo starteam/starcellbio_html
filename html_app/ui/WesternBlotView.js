@@ -228,6 +228,10 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             kind:kind,
             can_prepare_lysate:can_prepare_lysate
         }));
+        if( kind == 'prepare_gel')
+        {
+            $('.scb_s_western_blot_choose_samples_order_list').sortable();
+        }
         state.experiment.last_view = 'western_blot';
     }
 }
