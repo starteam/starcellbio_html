@@ -108,7 +108,9 @@
     {call .display_wb_progress}
     {param step:3/}
     {/call}
-    LYSATE PREPARED!
+    {/if}
+    {if $kind == 'gel_operations'}
+
     {/if}
 
 </div>
@@ -221,8 +223,17 @@
     {/if}
 </div>
 <div class='scb_s_western_blot_samples_gel_area'>
-    Here comes gel stuff
-    <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' href="#">Run gel & transfer</a>
+    <div class='scb_s_western_blot_gel_tabs'>
+        <div class='scb_s_western_blot_gel_tab'>Gel</div>
+    </div>
+    <div class='scb_s_western_blot_gel_content'>
+    <div class='scb_s_western_blot_gel'>
+
+    </div>
+    <div class='scb_s_western_blot_tools'>
+        <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">Run gel & transfer</a>
+    </div>
+    </div>
 </div>
 {/template}
 

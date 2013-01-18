@@ -201,6 +201,31 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input = functio
     scb.ui.static.MainFrame.refresh();
 }
 
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function (element) {
+    var assignment_id = $(element).attr('assignment_id');
+    var experiment_id = $(element).attr('experiment_id');
+    var western_blot_id = $(element).attr('western_blot_id');
+
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        western_blot_id:western_blot_id,
+        view:'western_blot',
+        skip_hash_update:true
+    };
+    //TODO: 1st things first -- we needs to save NEW order
+
+    // than rest of the stuff is:
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    parsed.western_blot.is_transfered = true;
+    scb.ui.static.MainFrame.refresh();
+}
+
 scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_select_lysate_type', function (e) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type(this);
@@ -226,6 +251,11 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_choose_gel_type_input', function (e, ui) {
         scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input(this);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_run_gel_and_transfer', function (e, ui) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer(this);
+    });
+
+
 
 
 }

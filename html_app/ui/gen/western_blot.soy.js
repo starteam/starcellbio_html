@@ -42,9 +42,8 @@ scb_western_blot.display_tabs = function(opt_data, opt_sb) {
   }
   if (opt_data.kind == 'load_gel') {
     scb_western_blot.display_wb_progress({step: 3}, output);
-    output.append('LYSATE PREPARED!');
   }
-  output.append('</div>');
+  output.append((opt_data.kind == 'gel_operations') ? '' : '', '</div>');
   return opt_sb ? '' : output.toString();
 };
 
@@ -53,13 +52,13 @@ scb_western_blot.sample_prep = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   scb_western_blot.display_wb_progress({step: 1}, output);
   output.append('<div class=\'scb_s_western_blot_samples_table\'><table><thead><td>Select</td><td>Samples</td><td>Lysate type</td><td>Action</td></thead>');
-  var rList94 = opt_data.rows;
-  var rListLen94 = rList94.length;
-  for (var rIndex94 = 0; rIndex94 < rListLen94; rIndex94++) {
-    var rData94 = rList94[rIndex94];
-    output.append('<tr><td>', (rData94.display_sample) ? '<input type="checkbox" class="scb_f_western_blot_sample_active" western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' cell_treatment_id=\'' + soy.$$escapeHtml(rData94.cell_treatment.id) + '\'' + ((rData94.is_sample_enabled) ? 'checked="checked"' : '') + '>' : '', '</td><td>', (rData94.display_sample) ? soy.$$escapeHtml(rData94.cell_treatment.name) : '', '</td><td>');
-    scb_western_blot.display_lysate_types({assignment: opt_data.assignment, experiment: opt_data.experiment, western_blot: opt_data.western_blot, cell_treatment: rData94.cell_treatment, lane: rData94}, output);
-    output.append('</td><td>', (rData94.kind == 'existing') ? '<button class="scb_f_western_blot_sample_remove" western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' lane_id=\'' + soy.$$escapeHtml(rData94.lane.id) + '\'' + ((rData94.is_sample_enabled) ? '' : 'disabled="disabled"') + '>X</button>' : '', '</td></tr>');
+  var rList95 = opt_data.rows;
+  var rListLen95 = rList95.length;
+  for (var rIndex95 = 0; rIndex95 < rListLen95; rIndex95++) {
+    var rData95 = rList95[rIndex95];
+    output.append('<tr><td>', (rData95.display_sample) ? '<input type="checkbox" class="scb_f_western_blot_sample_active" western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' cell_treatment_id=\'' + soy.$$escapeHtml(rData95.cell_treatment.id) + '\'' + ((rData95.is_sample_enabled) ? 'checked="checked"' : '') + '>' : '', '</td><td>', (rData95.display_sample) ? soy.$$escapeHtml(rData95.cell_treatment.name) : '', '</td><td>');
+    scb_western_blot.display_lysate_types({assignment: opt_data.assignment, experiment: opt_data.experiment, western_blot: opt_data.western_blot, cell_treatment: rData95.cell_treatment, lane: rData95}, output);
+    output.append('</td><td>', (rData95.kind == 'existing') ? '<button class="scb_f_western_blot_sample_remove" western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' lane_id=\'' + soy.$$escapeHtml(rData95.lane.id) + '\'' + ((rData95.is_sample_enabled) ? '' : 'disabled="disabled"') + '>X</button>' : '', '</td></tr>');
   }
   output.append('</table><a class=\'scb_s_navigation_button scb_f_western_blot_prepare_lysates\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\'', (opt_data.can_prepare_lysate) ? '' : 'disabled=\'disabled\'', '> Prepare lysates</a></div>');
   return opt_sb ? '' : output.toString();
@@ -70,13 +69,13 @@ scb_western_blot.prepare_gel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   scb_western_blot.display_wb_progress({step: 2}, output);
   output.append('<div class=\'scb_s_western_blot_samples_area\'><div class=\'scb_s_western_blot_choose_gel_type\'>1) Choose Gel Type:<input class=\'scb_s_western_blot_choose_gel_type_input\' type="radio" name="gel_type" value=".10" western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' ', (opt_data.western_blot.gel_type == '.10') ? 'checked=\'checked\'' : '', '>10%</input><input class=\'scb_s_western_blot_choose_gel_type_input\' type="radio" name="gel_type" value=".12" western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' ', (opt_data.western_blot.gel_type == '.12') ? 'checked=\'checked\'' : '', '>12%</input><input class=\'scb_s_western_blot_choose_gel_type_input\' type="radio" name="gel_type" value=".15" western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' ', (opt_data.western_blot.gel_type == '.15') ? 'checked=\'checked\'' : '', '>15%</input></div><div class=\'scb_s_western_blot_choose_samples_note\'>NOTE: You can reorder samples by dragging and dropping into new order</div><div class=\'scb_s_western_blot_choose_samples_order\'><ol class=\'scb_s_western_blot_choose_samples_order_list\'>');
-  var rList187 = opt_data.rows;
-  var rListLen187 = rList187.length;
-  for (var rIndex187 = 0; rIndex187 < rListLen187; rIndex187++) {
-    var rData187 = rList187[rIndex187];
-    output.append((rData187.display_sample) ? '<li>' + soy.$$escapeHtml(rData187.cell_treatment.name) + ' -' + soy.$$escapeHtml(rData187.lane.kind) + '</li>' : '');
+  var rList188 = opt_data.rows;
+  var rListLen188 = rList188.length;
+  for (var rIndex188 = 0; rIndex188 < rListLen188; rIndex188++) {
+    var rData188 = rList188[rIndex188];
+    output.append((rData188.display_sample) ? '<li>' + soy.$$escapeHtml(rData188.cell_treatment.name) + ' -' + soy.$$escapeHtml(rData188.lane.kind) + '</li>' : '');
   }
-  output.append('</ol>', (opt_data.western_blot.marker_loaded == true) ? '<div class=\'scb_s_western_blot_marker\'>15. Marker</div>' : '', '</div>', (opt_data.western_blot.marker_loaded == false) ? '<button class=\'scb_s_western_blot_load_marker\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'>Load Marker</button>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'>Here comes gel stuff<a class=\'scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button\' href="#">Run gel & transfer</a></div>');
+  output.append('</ol>', (opt_data.western_blot.marker_loaded == true) ? '<div class=\'scb_s_western_blot_marker\'>15. Marker</div>' : '', '</div>', (opt_data.western_blot.marker_loaded == false) ? '<button class=\'scb_s_western_blot_load_marker\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'>Load Marker</button>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'><div class=\'scb_s_western_blot_gel_tab\'>Gel</div></div><div class=\'scb_s_western_blot_gel_content\'><div class=\'scb_s_western_blot_gel\'></div><div class=\'scb_s_western_blot_tools\'><a class=\'scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button\' href="#view=western_blot_gel&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(opt_data.western_blot.id), '">Run gel & transfer</a></div></div></div>');
   return opt_sb ? '' : output.toString();
 };
 

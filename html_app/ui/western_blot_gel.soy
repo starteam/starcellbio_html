@@ -1,0 +1,32 @@
+{namespace scb_western_blot_gel}
+
+/**
+* Assignment selector
+* @param t template
+* @param global_template
+* @param assignment AssignmentView
+* @param western_blot WesternBlotView
+* @param rows
+* @param kind
+* @param can_prepare_lysate
+*/
+{template .main}
+<div class='scb_s_western_blot_view_gel'>
+    {call scb_homepage.display_header}
+    {param global_template:$global_template /}
+    {/call}
+    HERE I AM BABY
+    {call scb_western_blot.display_details}
+    {param t:$t/}
+    {param global_template:$global_template /}
+    {param assignment:$assignment/}
+    {param western_blot:$western_blot /}
+    {param rows:$rows /}
+    {param kind:$kind /}
+    {param can_prepare_lysate:$can_prepare_lysate/}
+    {/call}
+    {call scb_homepage.display_footer}
+    {param t:$t /}
+    {/call}
+</div>
+{/template}

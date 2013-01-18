@@ -7,6 +7,7 @@ scb.ui.static.MainFrame = scb.ui.static.MainFrame || {};
 
 scb.ui.static.MainFrame.update_hash = function (state) {
     if (!state.onhashchange) {
+        delete state.onhashchange;
         $.bbq.pushState(state, 2);
     }
 }
@@ -40,6 +41,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                             var western_blot = experiment.western_blot_list.get(state.western_blot_id);
                             if (western_blot) {
                                 ret.western_blot = western_blot;
+                                if(state.western_blot_gel_id)
+                                {
+                                    var western_blot_gel = western_blot.gel_list.get(state.western_blot_gel_id);
+                                    ret.western_blot_gel = western_blot_gel;
+                                }
                             }
                         }
                     }
@@ -158,6 +164,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context:context
     })
 
+    self.sections.western_blot_gel = new scb.ui.WesternBlotGelView({
+        workarea:workarea,
+        context:context
+    })
+
+
     self.sections.workarea = new scb.ui.WorkspaceView({
         workarea:workarea,
         context:context
@@ -177,7 +189,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'homepage') {
             self.sections.homepage.show({
-                workarea:workarea,
+                workarea:workarea
             });
         }
         if (state.view == 'assignments') {
@@ -255,6 +267,30 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 assignment:parsed.assignment,
                 experiment:parsed.experiment,
                 western_blot:parsed.western_blot
+            });
+        }
+        if (state.view == 'western_blot_gel') {
+            if(!parsed.western_blot)
+            {
+                state.onhashchange = false;
+                state.view = 'select_technique';
+                self.show(state);
+                return;
+            }
+            if(!parsed.western_blot_gel)
+            {
+                var gel = parsed.western_blot.gel_list.start({});
+                state.western_blot_gel_id=gel.id;
+                state.onhashchange=false;
+                self.show(state);
+                return;
+            }
+            self.sections.western_blot_gel.show({
+                workarea:workarea,
+                assignment:parsed.assignment,
+                experiment:parsed.experiment,
+                western_blot:parsed.western_blot,
+                western_blot_gel:parsed.western_blot_gel
             });
         }
         if (state.view == 'experiment_last') {

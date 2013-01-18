@@ -89,3 +89,47 @@
     width:500px;
     margin-left:25px;
 }
+
+.scb_s_western_blot_samples_gel_area {
+    width:600px;
+    height:400px;
+}
+
+.scb_s_western_blot_gel_tabs {
+    width:600px;
+    height:50px;
+}
+
+.scb_s_western_blot_gel_tab {
+    width:50px;
+}
+
+.scb_s_western_blot_gel_content
+{
+    height:350px;
+    width:600px;
+}
+
+.scb_s_western_blot_gel {
+    width:400px;
+    height:300px;
+    display:inline-block;
+    vertical-align: top;
+    background-color: #a0a0a0;
+}
+
+.scb_s_western_blot_tools {
+    width:150px;
+    height:400px;
+    vertical-align: top;
+    display: inline-block;
+    position: static;
+}
+
+.scb_s_western_blot_run_gel_and_transfer {
+    position: relative;
+    top:250px;
+    left:50px;
+}
+
+
