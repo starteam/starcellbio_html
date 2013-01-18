@@ -141,12 +141,63 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
         view:'western_blot',
         skip_hash_update:true
     };
+    //TODO: 1st things first -- we needs to save NEW order
+
+    // than rest of the stuff is:
     var parsed = scb.ui.static.MainFrame.validate_state(state);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
 
     parsed.western_blot.lysate_prepared = true;
+    scb.ui.static.MainFrame.refresh();
+}
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element) {
+    var assignment_id = $(element).attr('assignment_id');
+    var experiment_id = $(element).attr('experiment_id');
+    var western_blot_id = $(element).attr('western_blot_id');
+
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        western_blot_id:western_blot_id,
+        view:'western_blot',
+        skip_hash_update:true
+    };
+    //TODO: 1st things first -- we needs to save NEW order
+
+    // than rest of the stuff is:
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    parsed.western_blot.marker_loaded = true;
+    scb.ui.static.MainFrame.refresh();
+}
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input = function (element) {
+    var assignment_id = $(element).attr('assignment_id');
+    var experiment_id = $(element).attr('experiment_id');
+    var western_blot_id = $(element).attr('western_blot_id');
+
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        western_blot_id:western_blot_id,
+        view:'western_blot',
+        skip_hash_update:true
+    };
+    //TODO: 1st things first -- we needs to save NEW order
+
+    // than rest of the stuff is:
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    parsed.western_blot.gel_type = $(element).val();
     scb.ui.static.MainFrame.refresh();
 }
 
@@ -168,6 +219,12 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_prepare_lysates', function (e) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_load_marker', function (e) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_choose_gel_type_input', function (e, ui) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input(this);
     });
 
 
@@ -228,8 +285,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             kind:kind,
             can_prepare_lysate:can_prepare_lysate
         }));
-        if( kind == 'prepare_gel')
-        {
+        if (kind == 'prepare_gel') {
             $('.scb_s_western_blot_choose_samples_order_list').sortable();
         }
         state.experiment.last_view = 'western_blot';
