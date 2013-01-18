@@ -62,24 +62,11 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self, data, 'lysate_prepared', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'marker_loaded', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'gel_type', null, null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'primary_anti_body', _.keys(context.template.primary_anti_body)[0], null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'secondary_anti_body', _.keys(context.template.secondary_anti_body)[0], null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'display_lysates_id', null, null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'sdsgelrun', false, null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'finished', false, null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'canvas_data', null, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'is_transfered', null, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.WesternBlotLaneList, context);
-	scb.Utils.initialize_accessor_field(self, data, 'exposure_list', {}, scb.WesternBlotExposureList, context);
+    scb.Utils.initialize_accessor_field(self, data, 'gels_list', {}, scb.WesternBlotGelList, context);
+
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
 
-	scb.Utils.initialize_field(data, 'gels_list', {});
 
-	Object.defineProperty(self, 'display_lysates', {
-		get : function() {
-			if(data.display_lysates_id != null) {
-				return context.js_model.current_session.making_lysate_list.get(data.display_lysates_id)
-			}
-			return null;
-		}
-	});
 }
