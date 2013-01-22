@@ -41,8 +41,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                             var western_blot = experiment.western_blot_list.get(state.western_blot_id);
                             if (western_blot) {
                                 ret.western_blot = western_blot;
-                                if(state.western_blot_gel_id)
-                                {
+                                if (state.western_blot_gel_id) {
                                     var western_blot_gel = western_blot.gel_list.get(state.western_blot_gel_id);
                                     ret.western_blot_gel = western_blot_gel;
                                 }
@@ -254,16 +253,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
         }
         if (state.view == 'western_blot') {
-            if(!parsed.western_blot)
-            {
+            if (!parsed.western_blot) {
                 var western_blot = parsed.experiment.western_blot_list.start({});
                 state.western_blot_id = western_blot.id;
                 state.onhashchange = false;
                 self.show(state);
                 return;
             }
-            if( parsed.western_blot.is_transfered )
-            {
+            if (parsed.western_blot.is_transfered) {
                 state.view = 'western_blot_gel';
                 state.onhashchange = false;
                 self.show(state);
@@ -277,25 +274,27 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'western_blot_gel') {
-            if(!parsed.western_blot)
-            {
+            if (!parsed.western_blot) {
                 state.onhashchange = false;
                 state.view = 'select_technique';
                 self.show(state);
                 return;
             }
-            if(! parsed.western_blot.is_transfered )
-            {
+            if (!parsed.western_blot.is_transfered) {
                 state.view = 'western_blot';
                 state.onhashchange = false;
                 self.show(state);
                 return;
             }
-            if(!parsed.western_blot_gel)
-            {
-                var gel = parsed.western_blot.gel_list.start({});
-                state.western_blot_gel_id=gel.id;
-                state.onhashchange=false;
+            if (!parsed.western_blot_gel) {
+                var gel_id = parsed.western_blot.last_gel;
+                if (!gel_id) {
+                    gel = parsed.western_blot.gel_list.start({});
+                    parsed.western_blot.last_gel = gel.id;
+                    gel_id = gel.id;
+                }
+                state.western_blot_gel_id = gel_id;
+                state.onhashchange = false;
                 self.show(state);
                 return;
             }

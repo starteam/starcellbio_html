@@ -6,6 +6,7 @@
 * @param global_template
 * @param assignment AssignmentView
 * @param western_blot WesternBlotView
+* @param western_blot_gel
 * @param rows
 * @param kind
 * @param can_prepare_lysate
@@ -21,6 +22,7 @@
     {param global_template:$global_template /}
     {param assignment:$assignment/}
     {param western_blot:$western_blot /}
+    {param western_blot_gel:$western_blot_gel /}
     {param rows:$rows /}
     {param kind:$kind /}
     {param can_prepare_lysate:$can_prepare_lysate/}
@@ -36,6 +38,7 @@
 @param assignment
 @param experiment
 @param western_blot
+@param western_blot_gel
 @param rows
 @param kind
 @param can_prepare_lysate
@@ -48,6 +51,7 @@
         {param assignment:$assignment/}
         {param experiment:$experiment /}
         {param western_blot:$western_blot /}
+        {param western_blot_gel:$western_blot_gel /}
         {param rows:$rows /}
         {param kind:$kind /}
         {param can_prepare_lysate:$can_prepare_lysate/}
@@ -63,19 +67,104 @@
 @param assignment
 @param experiment
 @param western_blot
-@/param rows
+@param western_blot_gel
+@param rows
 @/param kind
 @/param can_prepare_lysate
 */
 {template .display_tabs}
 {call scb_western_blot.display_tabs_selector}
-    {param assignment:$assignment/}
-    {param experiment:$experiment /}
-    {param western_blot:$western_blot /}
+{param assignment:$assignment/}
+{param experiment:$experiment /}
+{param western_blot:$western_blot /}
 {/call}
 <div class='scb_s_western_blot_tab_content'>
+    {if $western_blot_gel.is_developed}
     {call scb_western_blot.display_wb_progress}
-        {param step:6/}
+    {param step:7 /}
     {/call}
+    {else}
+    {call scb_western_blot.display_wb_progress}
+    {param step:6 /}
+    {/call}
+    {/if}
+    <div class='scb_s_western_blot_samples_area'>
+
+        <div class='scb_s_western_blot_choose_gel_type'>
+            1) Choose Gel Type:
+            <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".10"
+                   western_blot_id='{$western_blot.id}'
+                   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type ==
+            '.10'}checked='checked'{/if} disabled='disabled'>10%</input>
+            <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12"
+                   western_blot_id='{$western_blot.id}'
+                   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type ==
+            '.12'}checked='checked'{/if} disabled='disabled'>12%</input>
+            <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15"
+                   western_blot_id='{$western_blot.id}'
+                   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type ==
+            '.15'}checked='checked'{/if} disabled='disabled'>15%</input>
+        </div>
+        <div class='scb_s_western_blot_choose_samples_order'>
+            <ol class='scb_s_western_blot_choose_samples_order_list'>
+                {foreach $r in $rows}
+                {if $r.display_sample}
+                <li>
+                    {$r.cell_treatment.name} -
+                    {$r.lane.kind}
+                </li>
+                {/if}
+
+                {/foreach}
+            </ol>
+            {if $western_blot.marker_loaded == true}
+            <div class='scb_s_western_blot_marker'>15. Marker</div>
+            {/if}
+        </div>
+        {if $western_blot.marker_loaded == false}
+        <div class='scb_s_western_blot_marker'>No marker loaded.</div>
+        {/if}
+    </div>
+    <div class='scb_s_western_blot_samples_gel_area'>
+        <div class='scb_s_western_blot_gel_tabs'>
+            {foreach $gel in $western_blot.gel_list.list}
+            {if $western_blot_gel.id == $gel.id}
+            <span class='scb_s_western_blot_gel_active'>
+
+            <div class='scb_s_western_blot_gel_tab_selected' western_blot_id='{$western_blot.id}'
+                 assignment_id='{$assignment.id}'
+                 experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}' contenteditable="true">{$gel.name}
+            </div>
+            <button class='scb_f_western_blot_gel_remove' western_blot_id='{$western_blot.id}'
+                    assignment_id='{$assignment.id}'
+                    experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}'>X
+            </button>
+            </span>
+            {else}
+            <div class='scb_s_western_blot_gel_tab' western_blot_id='{$western_blot.id}'
+                 assignment_id='{$assignment.id}'
+                 experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}'>{$gel.name}
+            </div>
+            {/if}
+
+            {/foreach}
+        </div>
+        <div class='scb_s_western_blot_gel_content'>
+            <div class='scb_s_western_blot_gel'>
+                This is a gel! {$western_blot_gel.id}
+            </div>
+            <div class='scb_s_western_blot_tools'>
+                {if $western_blot_gel.is_developed}
+                <a class='scb_s_western_blot_reprobe scb_s_navigation_button' western_blot_id='{$western_blot.id}'
+                   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Re-probe</a>
+
+                {else}
+                <a class='scb_s_western_blot_blot_and_develop scb_s_navigation_button'
+                   western_blot_id='{$western_blot.id}'
+                   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Blot & Develop</a>
+                {/if}
+            </div>
+        </div>
+    </div>
 </div>
 {/template}

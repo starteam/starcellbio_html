@@ -51,10 +51,12 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
             assignment:state.assignment,
             experiment:state.experiment,
             western_blot:state.western_blot,
+            western_blot_gel:state.western_blot_gel,
             rows:rows,
             kind:kind,
             can_prepare_lysate:can_prepare_lysate
         }));
         state.experiment.last_view = 'western_blot_gel';
+        state.western_blot.last_gel = state.western_blot_gel.id;
     }
 };
