@@ -262,6 +262,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 self.show(state);
                 return;
             }
+            if( parsed.western_blot.is_transfered )
+            {
+                state.view = 'western_blot_gel';
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
             self.sections.western_blot.show({
                 workarea:workarea,
                 assignment:parsed.assignment,
@@ -274,6 +281,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             {
                 state.onhashchange = false;
                 state.view = 'select_technique';
+                self.show(state);
+                return;
+            }
+            if(! parsed.western_blot.is_transfered )
+            {
+                state.view = 'western_blot';
+                state.onhashchange = false;
                 self.show(state);
                 return;
             }

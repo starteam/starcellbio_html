@@ -69,23 +69,11 @@
 @param can_prepare_lysate
 */
 {template .display_tabs}
-<div class='scb_s_western_blot_tabs'>
-    {foreach $wb in $experiment.western_blot_list.list}
-    {if $western_blot.id == $wb.id}
-    <span class='scb_s_western_blot_active'>
-    <span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-          experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
-    <button class='scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-            experiment_id='{$experiment.id}'>X
-    </button>
-    </span>
-    {else}
-    <a class='scb_f_open_western_blot'
-       href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
-       western_blot_id='{$wb.id}'>{$wb.name}</a>
-    {/if}
-    {/foreach}
-</div>
+{call .display_tabs_selector}
+    {param assignment:$assignment/}
+    {param experiment:$experiment /}
+    {param western_blot:$western_blot /}
+{/call}
 <div class='scb_s_western_blot_tab_content'>
     {if $kind == 'sample_prep'}
     {call .sample_prep}
@@ -112,7 +100,31 @@
     {if $kind == 'gel_operations'}
 
     {/if}
+</div>
+{/template}
 
+/**
+@param assignment
+@param experiment
+@param western_blot
+*/
+{template .display_tabs_selector}
+<div class='scb_s_western_blot_tabs'>
+    {foreach $wb in $experiment.western_blot_list.list}
+    {if $western_blot.id == $wb.id}
+    <span class='scb_s_western_blot_active'>
+    <span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+          experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+    <button class='scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+            experiment_id='{$experiment.id}'>X
+    </button>
+    </span>
+    {else}
+    <a class='scb_f_open_western_blot'
+       href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
+       western_blot_id='{$wb.id}'>{$wb.name}</a>
+    {/if}
+    {/foreach}
 </div>
 {/template}
 
@@ -231,7 +243,8 @@
 
     </div>
     <div class='scb_s_western_blot_tools'>
-        <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">Run gel & transfer</a>
+        <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' western_blot_id='{$western_blot.id}'
+                    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">Run gel & transfer</a>
     </div>
     </div>
 </div>

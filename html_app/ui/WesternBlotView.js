@@ -223,6 +223,8 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
     }
 
     parsed.western_blot.is_transfered = true;
+
+    //TODO: before repaint need to do steps in animation...
     scb.ui.static.MainFrame.refresh();
 }
 

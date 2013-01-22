@@ -5,7 +5,7 @@ scb.ui.static.WesternBlotGelView = scb.ui.static.WesternBlotGelView || {};
 
 scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
     var self = this;
-    
+
     self.show = function(state)
     {
         var workarea = state.workarea;

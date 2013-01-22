@@ -16,7 +16,7 @@
     {param global_template:$global_template /}
     {/call}
     HERE I AM BABY
-    {call scb_western_blot.display_details}
+    {call .display_details}
     {param t:$t/}
     {param global_template:$global_template /}
     {param assignment:$assignment/}
@@ -27,6 +27,55 @@
     {/call}
     {call scb_homepage.display_footer}
     {param t:$t /}
+    {/call}
+</div>
+{/template}
+
+/**
+@/param t template
+@param assignment
+@param experiment
+@param western_blot
+@param rows
+@param kind
+@param can_prepare_lysate
+*/
+{template .display_details}
+<div class='scb_western_blot_details_view'>
+
+    <div class='scb_western_blot_details_view_inner'>
+        {call .display_tabs}
+        {param assignment:$assignment/}
+        {param experiment:$experiment /}
+        {param western_blot:$western_blot /}
+        {param rows:$rows /}
+        {param kind:$kind /}
+        {param can_prepare_lysate:$can_prepare_lysate/}
+        {/call}
+    </div>
+    <a class="scb_s_navigation_button scb_f_open_select_technique"
+       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Select technique</a><br/>
+</div>
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param western_blot
+@/param rows
+@/param kind
+@/param can_prepare_lysate
+*/
+{template .display_tabs}
+{call scb_western_blot.display_tabs_selector}
+    {param assignment:$assignment/}
+    {param experiment:$experiment /}
+    {param western_blot:$western_blot /}
+{/call}
+<div class='scb_s_western_blot_tab_content'>
+    {call scb_western_blot.display_wb_progress}
+        {param step:6/}
     {/call}
 </div>
 {/template}
