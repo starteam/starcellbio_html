@@ -53,3 +53,34 @@
         <div class='scb_s_experiment_step_circle {if $step==5}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>5</div></div>
     </div>
 {/template}
+
+/**
+* Format time - from parts
+* @param days days
+* @param hours hours
+* @param minutes minutes
+* @param seconds seconds
+* @param now is less than one minute from now
+*/
+{template .format_time_detailed_w_sec}
+	{if $days != 0} {$days} {if $days > 1}d{else}d{/if}{/if}
+	{if $hours != 0} {$hours} {if $hours > 1}h{else}h{/if}{/if}
+	{if $minutes != 0} {$minutes} {if $minutes > 1}min{else}min{/if}{/if}
+	{if $seconds != 0} {$seconds} {if $seconds > 1}sec{else}sec{/if}{/if}
+	{if $now}0 min{/if}
+{/template}
+
+
+/**
+* Format time - from parts
+* @param days days
+* @param hours hours
+* @param minutes minutes
+* @param now is less than one minute from now
+*/
+{template .format_time_detailed}
+	{if $days != 0} {$days} {if $days > 1}d{else}d{/if}{/if}
+	{if $hours != 0} {$hours} {if $hours > 1}h{else}h{/if}{/if}
+	{if $minutes != 0} {$minutes} {if $minutes > 1}min{else}min{/if}{/if}
+	{if $now}0 sec{/if}
+{/template}

@@ -21,8 +21,8 @@ scb.WesternBlotGel = function scb_WesternBlotGel(data, context, parent) {
 	self.parent = parent;
 	scb.ModelHelpers.common_entry_code(self, data, context);
 
-	scb.Utils.initialize_accessor_field(self, data, 'primary_anti_body', _.keys(context.template.primary_anti_body)[0], null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'secondary_anti_body', _.keys(context.template.secondary_anti_body)[0], null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'primary_anti_body', null, null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'secondary_anti_body', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'exposure_time', "60", null, context);
     scb.Utils.initialize_accessor_field(self, data, 'is_developed', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'canvas_data', null, null, context);

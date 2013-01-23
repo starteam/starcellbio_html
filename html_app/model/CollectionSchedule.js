@@ -33,7 +33,7 @@ scb.CollectionSchedule = function scb_CollectionSchedule(data, context, parent) 
 			var hours = Math.floor((time % 86400) / 3600);
 			var minutes = Math.round((time % 3600) / 60);
 			var now = (time < 60 );
-			return scb_ui.format_time_detailed({
+			return scb_common.format_time_detailed({
 				days : days,
 				hours : hours,
 				minutes : minutes,

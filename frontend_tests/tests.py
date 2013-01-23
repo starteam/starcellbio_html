@@ -133,6 +133,7 @@ class SimpleTest(TestCase):
         self.assert_western_blot_tabs('Exp. 1', ['W.B. Exp. 2'])
         self.select_lysates()
         self.navigate_via('Prepare lysate')
+        self.navigate_via('Run gel')
         pudb.set_trace()
         #self.navigate_via('Select technique')
 
