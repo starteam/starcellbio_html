@@ -134,16 +134,22 @@ class SimpleTest(TestCase):
         self.select_lysates()
         self.navigate_via('Prepare lysate')
         self.navigate_via('Run gel')
+        wb_sample1 = { 'primary_antibody':'1' , 'secondary_antibody':'2' }
+        self.select_wb_antibody(wb_sample1)
+        self.navigate_via('Blot')
+        self.navigate_via('Re-probe')
+        self.navigate_via('Gel 1')
+        self.navigate_via('Gel 2')
         pudb.set_trace()
         #self.navigate_via('Select technique')
 
 
     ## navigation helpers and assertions
     def assert_on_assignments_page(self):
-        self.find_by_class_name('scb_s_assignments_view');
+        self.find_by_class_name('scb_s_assignments_view')
 
     def assert_on_assignment_page(self):
-        self.find_by_class_name('scb_s_assignment_view');
+        self.find_by_class_name('scb_s_assignment_view')
 
     def assert_on_experiment_design_page(self):
         self.find_by_class_name('scb_s_experiment_design_view')
@@ -194,12 +200,12 @@ class SimpleTest(TestCase):
         pass
 
     def assert_samples(self, samples_list):
-        web_sample_rows = self.driver.find_elements_by_class_name('scb_s_experiment_setup_table_row');
+        web_sample_rows = self.driver.find_elements_by_class_name('scb_s_experiment_setup_table_row')
         web_sample_list = [y for y in set([x.get_attribute('cell_treatment') for x in web_sample_rows])]
         self.assertEqual(samples_list.__len__(), web_sample_list.__len__())
 
     def add_sample(self, sample):
-        add_button = self.find_by_class_name('scb_f_experiment_setup_action_open_add_samples_dialog');
+        add_button = self.find_by_class_name('scb_f_experiment_setup_action_open_add_samples_dialog')
         add_button.click()
         self.find_by_class_name('scb_s_experiment_setup_table_add_samples_dialog')
         self.select_option(sample['cell_line_id'], 'value', 'scb_s_experiment_setup_dialog_cell_lines_select_option')
@@ -236,6 +242,12 @@ class SimpleTest(TestCase):
         e_title.send_keys(title)
         e_title.send_keys("\n")
 
+    def select_wb_antibody(self,sample):
+        time.sleep(1)
+        self.select_option(sample['primary_antibody'], 'model_id', 'scb_f_wb_anti_body_select_primary_option')
+        time.sleep(1)
+        self.select_option(sample['secondary_antibody'], 'model_id', 'scb_f_wb_anti_body_select_secondary_option')
+        pass
 
     def select_option(self, value, attribute, css_class):
         web_options = self.driver.find_elements_by_class_name(css_class)

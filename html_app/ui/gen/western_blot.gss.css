@@ -82,9 +82,24 @@
 .scb_s_western_blot_gel_tabs {
   width: 600px;
   height: 50px;
+  border-bottom: 1px solid black;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-top: -1px;
 }
-.scb_s_western_blot_gel_tab {
+.scb_s_western_blot_gel_tab, .scb_s_western_blot_gel_active {
   width: 50px;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 6px 6px 0 0;
+  border-bottom: 0;
+  height: 50px;
+}
+.scb_s_western_blot_gel_tab_selected, .scb_f_western_blot_gel_remove {
+  display: inline-block;
 }
 .scb_s_western_blot_gel_content {
   height: 350px;

@@ -106,6 +106,11 @@ scb.ui.static.WesternBlotGelView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_reprobe', function (e) {
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe(this);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_gel_remove', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove(this);
+    });
+
+
 }
 
 scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
