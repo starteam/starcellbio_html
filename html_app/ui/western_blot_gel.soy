@@ -109,7 +109,7 @@
         <div class='scb_s_western_blot_choose_samples_order'>
             <ol class='scb_s_western_blot_choose_samples_order_list'>
                 {foreach $r in $rows}
-                {if $r.display_sample}
+                {if $r.is_valid}
                 <li>
                     {$r.cell_treatment.name} -
                     {$r.lane.kind}

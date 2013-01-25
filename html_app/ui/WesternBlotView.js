@@ -4,8 +4,7 @@ scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.WesternBlotView = scb.ui.static.WesternBlotView || {};
 
-scb.ui.static.WesternBlotView.parse = function(element)
-{
+scb.ui.static.WesternBlotView.parse = function (element) {
     var assignment_id = $(element).attr('assignment_id');
     var experiment_id = $(element).attr('experiment_id');
     var western_blot_id = $(element).attr('western_blot_id');
@@ -97,10 +96,18 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    //TODO: 1st things first -- we needs to save NEW order
+    var rows_state = parsed.western_blot.rows_state();
+    if (rows_state.valid > scb.ui.static.WesternBlotView.MAX_ROWS) {
+        alert("Maximum number of lysate samples is " + scb.ui.static.WesternBlotView.MAX_ROWS + ". Please remove some and try again.");
+    }
+    else if (rows_state.valid < 1) {
+        alert("Please select at least 1 lysate to prepare.");
 
-    parsed.western_blot.lysate_prepared = true;
-    scb.ui.static.MainFrame.refresh();
+    }
+    else {
+        parsed.western_blot.lysate_prepared = true;
+        scb.ui.static.MainFrame.refresh();
+    }
 }
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element) {
@@ -169,9 +176,9 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     });
 
 
-
-
 }
+
+scb.ui.static.WesternBlotView.MAX_ROWS = 4;
 
 scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
     var self = this;
@@ -180,56 +187,64 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         var workarea = state.workarea;
         var experiment = state.experiment;
         var template = state.assignment.template;
-        var grouped_rows = state.western_blot.lanes_list.grouped_list;
-        var rows = [];
-        _.each(experiment.cell_treatment_list.list, function (e) {
-            if (grouped_rows[e.id]) {
-                _.each(grouped_rows[e.id], function (ee, index) {
-                    rows.push({
-                        kind:'existing',
-                        cell_treatment:e,
-                        lane:ee,
-                        display_sample:index == 0,
-                        is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id],
-                        index:index
-                    });
-                });
-                rows.push({
-                    kind:'placeholder',
-                    display_sample:false,
-                    cell_treatment:e,
-                    is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id]
-                });
-            } else {
-                rows.push({
-                    row_type:'new',
-                    display_sample:true,
-                    cell_treatment:e,
-                    is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id]
-                })
-            }
-        });
+//        var grouped_rows = state.western_blot.lanes_list.grouped_list;
+//        var rows = [];
+//        _.each(experiment.cell_treatment_list.list, function (e) {
+//            if (grouped_rows[e.id]) {
+//                _.each(grouped_rows[e.id], function (ee, index) {
+//                    rows.push({
+//                        kind:'existing',
+//                        cell_treatment:e,
+//                        lane:ee,
+//                        display_sample:index == 0,
+//                        is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id],
+//                        index:index
+//                    });
+//                });
+//                rows.push({
+//                    kind:'placeholder',
+//                    display_sample:false,
+//                    cell_treatment:e,
+//                    is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id]
+//                });
+//            } else {
+//                rows.push({
+//                    row_type:'new',
+//                    display_sample:true,
+//                    cell_treatment:e,
+//                    is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id]
+//                })
+//            }
+//        });
+        var rows_state = state.western_blot.rows_state();
 
         var kind = 'sample_prep';
         if (state.western_blot.lysate_prepared) {
             kind = 'prepare_gel';
         }
 
-        var can_prepare_lysate = _.find(rows, function (e) {
-            return e.is_sample_enabled
-        }) && true;
+        var can_prepare_lysate = rows_state.valid > 0;
+
         workarea.html(scb_western_blot.main({
             global_template:gstate.context.master_model,
             t:template,
             assignment:state.assignment,
             experiment:state.experiment,
             western_blot:state.western_blot,
-            rows:rows,
+            rows:rows_state.rows,
+            rows_valid:rows_state.valid,
             kind:kind,
             can_prepare_lysate:can_prepare_lysate
         }));
         if (kind == 'prepare_gel') {
             $('.scb_s_western_blot_choose_samples_order_list').sortable();
+        }
+
+        if (rows_state.valid >= scb.ui.static.WesternBlotView.MAX_ROWS) {
+            $('.scb_f_western_blot_sample_active').attr('disabled', 'disabled');
+            $('.scb_f_western_blot_select_lysate_type').attr('disabled', 'disabled');
+            $('.scb_f_western_blot_sample_active[checked="checked"]').removeAttr('disabled');
+
         }
         state.experiment.last_view = 'western_blot';
 

@@ -50,6 +50,6 @@ scb_homepage.display_techniques = function(opt_data, opt_sb) {
 
 scb_homepage.display_footer = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_footer\'><img class=\'scb_s_homepage_footer_logo\' src=\'images/homepage/mit_logo.png\'><img class=\'scb_s_homepage_footer_divider\' src=\'images/homepage/small_divider.png\'><img class=\'scb_s_homepage_footer_about\' src=\'images/homepage/about_star.png\'><img class=\'scb_s_homepage_footer_divider\' src=\'images/homepage/small_divider.png\'><img class=\'scb_s_homepage_footer_support\' src=\'images/homepage/support.png\'></div>');
+  output.append('<div class=\'scb_s_footer\'><img class=\'scb_s_homepage_footer_logo\' src=\'images/homepage/mit_logo.png\'><img class=\'scb_s_homepage_footer_divider\' src=\'images/homepage/small_divider.png\'><img class=\'scb_s_homepage_footer_about\' src=\'images/homepage/about_star.png\'><img class=\'scb_s_homepage_footer_divider\' src=\'images/homepage/small_divider.png\'><img class=\'scb_s_homepage_footer_support\' src=\'images/homepage/support.png\'><button class=\'save_master_model\'>Save</button><button class=\'load_master_model\'>Load</button></div>');
   return opt_sb ? '' : output.toString();
 };

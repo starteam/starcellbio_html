@@ -61,7 +61,7 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
 	scb.ModelHelpers.common_entry_code(self, data, context);
 	scb.Utils.initialize_accessor_field(self, data, 'lysate_prepared', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'marker_loaded', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'gel_type', null, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'gel_type', '.10', null, context);
     scb.Utils.initialize_accessor_field(self, data, 'is_transfered', false, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.WesternBlotLaneList, context);
     scb.Utils.initialize_accessor_field(self, data, 'gel_list', {}, scb.WesternBlotGelList, context);
@@ -69,5 +69,42 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
 
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
 
-
+    self.rows_state = function(exp) {
+        var experiment = exp || self.parent.parent;
+        var grouped_rows = self.lanes_list.grouped_list;
+        var rows = [];
+        _.each(experiment.cell_treatment_list.list, function (e) {
+            if (grouped_rows[e.id]) {
+                _.each(grouped_rows[e.id], function (ee, index) {
+                    rows.push({
+                        kind:'existing',
+                        cell_treatment:e,
+                        lane:ee,
+                        display_sample:index == 0,
+                        is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                        index:index,
+                        is_valid:self.is_cell_treatment_enabled[e.id] && ee
+                    });
+                });
+                rows.push({
+                    kind:'placeholder',
+                    display_sample:false,
+                    cell_treatment:e,
+                    is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                    is_valid:false
+                });
+            } else {
+                rows.push({
+                    row_type:'new',
+                    display_sample:true,
+                    cell_treatment:e,
+                    is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                    is_valid:false
+                })
+            }
+        });
+        var count = 0 ;
+        _.each( rows,  function(e) { if(e.is_valid) count++; });
+        return {rows:rows, valid:count};
+    }
 }

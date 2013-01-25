@@ -121,35 +121,36 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         var workarea = state.workarea;
         var experiment = state.experiment;
         var template = state.assignment.template;
-        var grouped_rows = state.western_blot.lanes_list.grouped_list;
-        var rows = [];
-        _.each(experiment.cell_treatment_list.list, function (e) {
-            if (grouped_rows[e.id]) {
-                _.each(grouped_rows[e.id], function (ee, index) {
-                    rows.push({
-                        kind:'existing',
-                        cell_treatment:e,
-                        lane:ee,
-                        display_sample:index == 0,
-                        is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id],
-                        index:index
-                    });
-                });
-                rows.push({
-                    kind:'placeholder',
-                    display_sample:false,
-                    cell_treatment:e,
-                    is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id]
-                });
-            } else {
-                rows.push({
-                    row_type:'new',
-                    display_sample:true,
-                    cell_treatment:e,
-                    is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id]
-                })
-            }
-        });
+//        var grouped_rows = state.western_blot.lanes_list.grouped_list;
+//        var rows = [];
+//        _.each(experiment.cell_treatment_list.list, function (e) {
+//            if (grouped_rows[e.id]) {
+//                _.each(grouped_rows[e.id], function (ee, index) {
+//                    rows.push({
+//                        kind:'existing',
+//                        cell_treatment:e,
+//                        lane:ee,
+//                        display_sample:index == 0,
+//                        is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id],
+//                        index:index
+//                    });
+//                });
+//                rows.push({
+//                    kind:'placeholder',
+//                    display_sample:false,
+//                    cell_treatment:e,
+//                    is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id]
+//                });
+//            } else {
+//                rows.push({
+//                    row_type:'new',
+//                    display_sample:true,
+//                    cell_treatment:e,
+//                    is_sample_enabled:state.western_blot.is_cell_treatment_enabled[e.id]
+//                })
+//            }
+//        });
+        var rows = state.western_blot.rows();
         var kind = 'prepare_gel';
 
         var can_prepare_lysate = _.find(rows, function (e) {
