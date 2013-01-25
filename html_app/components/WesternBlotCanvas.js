@@ -75,7 +75,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
 		tab.gel = state.gel.id;
 
 		tab.lanes = [];
-		var lanes_list = state.gel.lanes_list.list;
+		var lanes_list = state.gel.marks;
 		for(var lane_index in lanes_list ) {
 			var lane = {};
 			var lane_item = lanes_list[lane_index];

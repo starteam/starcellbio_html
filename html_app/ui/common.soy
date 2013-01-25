@@ -1,91 +1,86 @@
-{namespace scb_util}
+{namespace scb_common}
 
-/** Icon
-*
-* @param src
-* @param text
-* @param cls
+/**
+* Progress bar
+@param step
+@param assignment_name
+@param experiment_name
+@param technique_name
 */
-{template .icon_with_text}
-<div class='icon_with_text'>
-			<img class='{$cls}' src='{$src}' alt='{$text}' width='24px'/>
-			<br>{$text}
-			</div>
+{template .assignment_step}
+    {if $step > 0}
+    <div class='scb_s_assignment_step'>
+        {if $step > 0}
+            ASSIGNMENTS
+        {/if}
+        {if $step > 1}
+            &gt;
+            {$assignment_name}
+        {/if}
+        {if $step > 2}
+            &gt;
+            DESIGN
+            <div class='scb_s_assignment_step_experiment'>
+                &#8988; {$experiment_name}
+            </div>
+        {/if}
+        {if $step > 3}
+            &gt;
+            SETUP
+        {/if}
+        {if $step > 4}
+            &gt;
+            TECHNIQUES
+        {/if}
+        {if $step > 5}
+            &gt;
+            {$technique_name}
+        {/if}
+
+    </div>
+    {/if}
+{/template}
+/**
+* Progress bar
+* @param step
+*/
+{template .experiment_step}
+    <div class='scb_s_experiment_step'>
+        <div class='scb_s_experiment_step_circle {if $step==1}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>1</div></div>
+        <div class='scb_s_experiment_step_circle {if $step==2}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>2</div></div>
+        <div class='scb_s_experiment_step_circle {if $step==3}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>3</div></div>
+        <div class='scb_s_experiment_step_circle {if $step==4}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>4</div></div>
+        <div class='scb_s_experiment_step_circle {if $step==5}scb_experiment_step_selected{/if}'><div class='scb_s_experiment_step_number'>5</div></div>
+    </div>
 {/template}
 
-
-/** Icon
-*
-* @param src
-* @param text
-* @param cls
+/**
+* Format time - from parts
+* @param days days
+* @param hours hours
+* @param minutes minutes
+* @param seconds seconds
+* @param now is less than one minute from now
 */
-{template .small_icon_without_text}
-<div class='icon_with_text'>
-			<img class='{$cls}' src='{$src}' alt='{$text}' width='16px'/>
-</div>
-{/template}
-
-/** List
-*
-* @param map
-* @param map_name
-* @param model_id
-* @param model2_id
-* @param associated_class
-*
-*/
-{template .select_from_dict}
-	<select class='{$associated_class}' model2_id='{$model2_id}'>
-	{foreach $k in keys($map)}
-		<option model_id='{$k}' {if $k == $model_id}selected='selected'{/if} >{$map[$k][$map_name]}</option> 		
-	{/foreach}
-	</select>
-{/template}
-
-/** List
-*
-* @param map
-* @param map_name
-* @param model_id
-* @param model2_id
-* @param associated_class
-* @param selected_id
-*
-*/
-{template .select_from_obj}
-	<select class='{$associated_class}' model2_id='{$model2_id}'>
-	{foreach $k in keys($map)}
-		<option model_id='{$map[$k][$model_id]}' {if $selected_id==$map[$k][$model_id]}selected='selected'{/if} >{$map[$k][$map_name]}</option> 		
-	{/foreach}
-	</select>
+{template .format_time_detailed_w_sec}
+	{if $days != 0} {$days} {if $days > 1}d{else}d{/if}{/if}
+	{if $hours != 0} {$hours} {if $hours > 1}h{else}h{/if}{/if}
+	{if $minutes != 0} {$minutes} {if $minutes > 1}min{else}min{/if}{/if}
+	{if $seconds != 0} {$seconds} {if $seconds > 1}sec{else}sec{/if}{/if}
+	{if $now}0 min{/if}
 {/template}
 
 
 /**
-* Display Experiment Name DIV
- @param name Selected Experiment
- @param name_label Label for name
- @param name_class Class for whole div
- @param icon_class Class for icons
- @param remove_class
- @param remove_title
-*/ 
-{template .display_header_name}
-			<div class='experiment_name'>
-				{$name_label} <div class='{$name_class}'>
-					{$name}
-					<div class='experiment_row_treatment_tools'>
-						{call scb_util.small_icon_without_text}
-							{param src:'icons/actions/Edit.png'/}
-							{param text:'Edit'/}
-							{param cls:$icon_class/}
-						{/call}
-					</div>
-					<div class='experiment_row_treatment_tools_spacer'>
-					</div>
-				</div>
-				<button class='{$remove_class} red' style='position:fixed; right:10px'>{$remove_title}</button>
-			</div>
-
+* Format time - from parts
+* @param days days
+* @param hours hours
+* @param minutes minutes
+* @param now is less than one minute from now
+*/
+{template .format_time_detailed}
+	{if $days != 0} {$days} {if $days > 1}d{else}d{/if}{/if}
+	{if $hours != 0} {$hours} {if $hours > 1}h{else}h{/if}{/if}
+	{if $minutes != 0} {$minutes} {if $minutes > 1}min{else}min{/if}{/if}
+	{if $now}0 sec{/if}
 {/template}

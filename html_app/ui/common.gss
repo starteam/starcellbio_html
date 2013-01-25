@@ -1,78 +1,47 @@
-@def LINK_COLOR rgb(0,0,0);
+.dummy {
+}
 
-.icon_with_text {
-    display: inline-block;
-    font-size: 9px;
-    margin: 2px;
-}
-.space_above {
-    margin-top: 15px;
-    padding-top: 15px;
-}
-.center_text {
+.scb_s_navigation_button {
+    background-image: url('../images/homepage/instructor_resources_button.png');
+    padding: 6px 25px 6px 24px;
+    width: 180px;
+    background-position: center;
+    color: white;
+    text-decoration: none;
     text-align: center;
 }
-.scb_inline { 
-    display: inline-block;
-}
-.scb_section_title {
-    background-color: #e0e0e0;
-    width: 100%;
-}
-.scb_250px {
-    min-width: 250px;
-}
-.scb_200px {
-    min-width: 200px;
-}
-.scb_150px {
-    min-width: 150px;
-}
-.scb_100px {
-    min-width: 100px;
-}
-.small_caps {
-}
 
-a.a_sidebar:link {
-    text-decoration: none;
-    color: LINK_COLOR;
-}
-a.a_sidebar:visited {
-    text-decoration: none;
-    color: LINK_COLOR;
-}
-a.a_sidebar:hover {
-    text-decoration: underline;
-    color: LINK_COLOR;
-}
-a.a_sidebar:active {
-    text-decoration: underline;
-    color: LINK_COLOR;
-}
-a.a_black_link:link, a.a_black_link:visited, a.a_black_link:hover, a.a_black_link:active {
-    color: LINK_COLOR;
-}
-
-.sidebar_list {
-    list-style-type: none;
-    padding-left: 20px;
-}
-
-.inline_block {
-    display: inline-block;
-}
-
-.grouping_label {
-    font-size: 24px;
+.scb_s_experiment_step_circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
     text-align: center;
-    width:75%;
-    min-width: 500px;
-    margin-bottom:10px;
-    display:block;
+    vertical-align: 90%;
+    color: white;
+    background-color: #696969;
+    position: relative;
+    display: inline-block;
+    margin-left: 2em;
 }
 
-.group_header {
-    font-size: 20px;
-    font-weight: 600;
+.scb_s_experiment_step_number {
+    padding: .4em .25em .25em .25em;
+    vertical-align: top;
+}
+
+.scb_experiment_step_selected {
+    background-color: green;
+}
+
+.scb_s_assignment_step_experiment {
+    position: absolute;
+    top: 65px;
+    left: 275px;
+    color: #69a996;
+}
+
+.scb_s_assignment_step {
+    background-color: #69a996;
+    color: white;
+    width: 960px;
 }

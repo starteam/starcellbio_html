@@ -1,8 +1,11 @@
 Django==1.4.2
 MacFSEvents==0.2.8
+Pygments==1.5
 distribute==0.6.30
 ipdb==0.7
 ipython==0.13.1
+pudb==2012.3
 readline==6.2.4.1
 selenium==2.26.0
+urwid==1.1.1
 wsgiref==0.1.2

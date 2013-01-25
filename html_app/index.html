@@ -1,79 +1,99 @@
 <!DOCTYPE html><html><head><title>StarCellBio Prototype</title>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cabin"><link type="text/css" href="ui/sidebar.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/westernblotgel.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/common.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/making_lysates.gss.css" rel="Stylesheet" />
-<link type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
-<link type="text/css" href="ui/experiment_setup.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/facs.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/back_button.css" rel="Stylesheet" />
-<link type="text/css" href="test/test.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/button.css" rel="Stylesheet" />
-<link type="text/css" href="starcellbio.app.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/making_lysates.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/workspace.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/experiment.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui/gen/select_technique.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/dashboard.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/sidebar.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui/gen/experiment_setup.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui/gen/common.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/back_button.css" rel="Stylesheet" />
+<link type="text/css" href="ui/gen/experiment_design.gss.css" rel="Stylesheet" />
+<link type="text/css" href="test/gen/test.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/western_blots.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/facs.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui/gen/homepage.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/common.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui/gen/western_blot.gss.css" rel="Stylesheet" />
 <link type="text/css" href="css/jquery.multiselect.css" rel="Stylesheet" />
-<link type="text/css" href="ui/dashboard.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/workspace.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/western_blots.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/assignments.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/assignment.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/experiment.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/westernblotgel.gss.css" rel="Stylesheet" />
 <link type="text/css" href="css/layout-default.css" rel="Stylesheet" />
+<link type="text/css" href="ui/gen/assignments.gss.css" rel="Stylesheet" />
+<link type="text/css" href="starcellbio.app.css" rel="Stylesheet" />
+<link type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/button.css" rel="Stylesheet" />
+<link type="text/css" href="ui_old/gen/experiment_setup.gss.css" rel="Stylesheet" />
+<link type="text/css" href="ui/gen/assignment.gss.css" rel="Stylesheet" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="starcellbio.app.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/gen/experiment_setup.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="master_model.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/Assignments.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/underscore.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/LysateKind.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/assignment.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/DashboardView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/FacsView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="utils/Utilities.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/gen/assignments.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/jstat-1.0.0.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/underscore-min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/DashboardView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/gen/western_blot_gel.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/MakingLysatesView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/WesternBlotGelView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/SelectTechniqueView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/WesternBlotView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="ui/AssignmentsView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/making_lysates.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/WesternBlotLanes.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/Treatment.js" charset="UTF-8"></script>
 <script type="text/javascript" src="components/ModelFactory.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/Sidebar.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/experiment_setup.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/MakingLysates.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/jq.pubsub.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/soyutils.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/making_lysates.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/workspace.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/gen/select_technique.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="model/Assignments.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/ExperimentSetupView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="ui/WesternBlotView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/FacsLanesPreparation.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/experiment.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/FacsLanes.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/westernblotgel.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/jquery.flot.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/WesternBlot.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/workspace.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/western_blots.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/gen/western_blot.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/ModelHelpers.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/Facs.js" charset="UTF-8"></script>
 <script type="text/javascript" src="components/WesternBlotCanvas.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/experiment_edit.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/CollectionSchedule.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/jquery.layout-1.2.0.js" charset="UTF-8"></script>
 <script type="text/javascript" src="components/FACSModelFactory.js" charset="UTF-8"></script>
-<script type="text/javascript" src="utils/Utilities.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/experiment_edit.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/HomepageView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="test/gen/test.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="ui/MainFrame.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/WorkspaceView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/gen/common.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="components/WesternBlotModelFactory.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/FacsView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/common.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/experiment_setup.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/assignments.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="model/WesternBlotGel.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/Drugs.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/Experiment.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/WesternBlotGelView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/experiment.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="test/test.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/WesternBlotGelView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/gen/experiment_design.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/ExperimentView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/gen/assignment.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/soyutils.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/WesternBlotExposure.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/dashboard.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/MakingLysatesView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/WorkspaceView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/Sidebar.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/dashboard.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/western_blots.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/common.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/jquery.ba-bbq.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="model/CellTreatment.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/ExperimentView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/ExperimentDesignView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui/gen/homepage.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/westernblotgel.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="ui/AssignmentView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/facs.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/FacsOneView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/jquery.multiselect.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/FacsOneView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="ui_old/gen/facs.soy.js" charset="UTF-8"></script>
 </head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});})</script></body>

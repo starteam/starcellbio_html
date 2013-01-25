@@ -1,0 +1,70 @@
+{namespace scb_experiment_design}
+
+/**
+* Experiment design
+* @param t template
+* @param global_template
+* @param assignment Assignment model
+* @param experiment Experiment model
+*/
+{template .main}
+<div class='scb_s_experiment_design_view'>
+    {call scb_homepage.display_header}
+    {param global_template:$global_template /}
+    {/call}
+    {call scb_common.assignment_step}
+        {param step:3/}
+        {param assignment_name:$assignment.name/}
+        {param experiment_name:$experiment.name/}
+    {/call}
+    {call .display_details}
+    {param t:$t/}
+    {param global_template:$global_template /}
+    {param assignment:$assignment/}
+    {param experiment:$experiment/}
+    {/call}
+    {call scb_homepage.display_experiment_design}
+    {/call}
+    {call scb_homepage.display_footer}
+    {param t:$t /}
+    {/call}
+</div>
+{/template}
+
+/**
+Experiment active area
+@param t template
+@param assignment
+@param experiment
+*/
+{template .display_details}
+<div class='scb_s_design_description'>
+        {call scb_common.experiment_step}
+            {param step:1/}
+        {/call}
+        <b>
+            <input type='text' class='scb_s_experiment_name_edit' maxlength="20" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'>
+        </b>
+        <br/>
+        {$assignment.description |noAutoescape}
+        {$t.instructions |noAutoescape}
+        <br/>
+        <div class='scb_s_experiment_design_objective_container'>
+            <div class='scb_s_experiment_design_objective_text'>What objective or question is your experiment going to address?</div>
+            <textarea class='scb_s_experiment_design_objective' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.objective}</textarea>
+        </div>
+
+        <div class='scb_s_experiment_design_hypothesis_container'>
+            <div class='scb_s_experiment_design_hypothesis_text'>What is your goal or hypothesis for this experiment?</div>
+        <textarea class='scb_s_experiment_design_hypothesis' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.hypothesis}</textarea>
+        </div>
+
+        <div class='scb_s_experiment_design_techniques_container'>
+        {call scb_homepage.display_techniques}
+        {/call}
+        </div>
+    <br/>
+        <a class="scb_f_open_experiment_setup scb_s_navigation_button" href="#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}">Experiment setup &#9654;</a><br/>
+        <a class="scb_f_open_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignment.id}">&#9664; Assignment</a>
+</div>
+{/template}

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/html_app/ui/assignments.soy" line="74" mnemonic="4" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" name="Default" comment="" />
     <ignored path="StarCellBio.iws" />
     <ignored path=".idea/workspace.xml" />
+    <file path="/watch.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359057410835" ignored="false" />
+    <file path="/starcellbio.app.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359054922539" ignored="false" />
+    <file path="/tests.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359056939911" ignored="false" />
+    <file path="/western_blot_gel.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359055602371" ignored="false" />
+    <file path="/western_blot.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359053067061" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,31 +27,144 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
+          <file leaf-file-name="western_blot_gel.soy" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot_gel.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="6" column="0" selection-start="183" selection-end="183" vertical-scroll-proportion="-1.6363636">
+                <state line="176" column="146" selection-start="6517" selection-end="6517" vertical-scroll-proportion="-18.64">
                   <folding>
-                    <element signature="e#184#216#0" expanded="true" />
+                    <element signature="n#style#0;n#canvas#0;n#div#0;n#div#3;n#!!top" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="assignment.soy" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.soy">
+          <file leaf-file-name="WesternBlotGelView.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="42" column="41" selection-start="969" selection-end="969" vertical-scroll-proportion="-26.25">
+                <state line="132" column="67" selection-start="5342" selection-end="5342" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="assignments.soy" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.soy">
+          <file leaf-file-name="MainFrame.js" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="4" column="20" selection-start="75" selection-end="75" vertical-scroll-proportion="0.044477392">
+                <state line="376" column="44" selection-start="12590" selection-end="12590" vertical-scroll-proportion="0.83471763">
+                  <folding>
+                    <element signature="e#596#3017#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlotLanes.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotLanes.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="73" column="58" selection-start="2922" selection-end="2922" vertical-scroll-proportion="0.0">
                   <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlotGel.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotGel.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="25" column="69" selection-start="911" selection-end="915" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlotView.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="180" column="42" selection-start="6542" selection-end="6542" vertical-scroll-proportion="-18.192308">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="tests.py" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="142" column="0" selection-start="6035" selection-end="6035" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="watch.py" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/watch.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="38" column="10" selection-start="1370" selection-end="1370" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlot.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlot.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="63" column="65" selection-start="2087" selection-end="2087" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="217" column="27" selection-start="7087" selection-end="7087" vertical-scroll-proportion="-28.75">
+                  <folding>
+                    <marker date="1359134010000" expanded="true" signature="286:745" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="996:1620" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="1051:1348" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="1416:1608" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="1968:2604" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="2752:3509" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="2889:3258" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="2996:3079" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="3186:3246" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="3309:3477" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="3746:5569" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="3758:5293" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="3774:3893" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="3936:5261" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="3953:4369" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="4093:4247" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="4386:4489" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="4506:4832" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="4849:5247" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="4995:5107" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="5405:5477" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="5779:7645" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="5833:6754" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="6004:6084" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="6298:6378" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="6592:6672" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="6811:6900" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="6958:7390" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="7024:7252" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="7104:7196" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="7525:7628" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="7695:8340" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="7741:7810" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="7859:8333" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="7900:7912" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="7955:8322" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="8076:8311" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="8580:8783" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="9513:10908" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="9624:10900" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="9766:9808" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="9950:9992" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="10134:10173" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="10315:10349" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="10491:10530" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="10672:10707" placeholder="..." />
+                    <marker date="1359134010000" expanded="true" signature="10849:10887" placeholder="..." />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -57,52 +172,44 @@
         </leaf>
       </split-first>
       <split-second>
-        <splitter split-orientation="vertical" split-proportion="0.5">
-          <split-first>
-            <leaf>
-              <file leaf-file-name="Assignments.js" pinned="false" current="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/html_app/model/Assignments.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="22" column="1" selection-start="732" selection-end="732" vertical-scroll-proportion="0.0">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="MainFrame.js" pinned="false" current="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="89" column="39" selection-start="2651" selection-end="2651" vertical-scroll-proportion="0.73333335">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-first>
-          <split-second>
-            <leaf>
-              <file leaf-file-name="AssignmentsView.js" pinned="false" current="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentsView.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="12" column="24" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="AssignmentView.js" pinned="false" current="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentView.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state line="14" column="40" selection-start="436" selection-end="436" vertical-scroll-proportion="0.3106509">
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-second>
-        </splitter>
+        <leaf>
+          <file leaf-file-name="WesternBlot.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlot.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="57" column="67" selection-start="1739" selection-end="1739" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlotGelView.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui_old/WesternBlotGelView.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="402" column="20" selection-start="13593" selection-end="13632" vertical-scroll-proportion="-162.76923">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlotModelFactory.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotModelFactory.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="141" column="45" selection-start="5447" selection-end="5447" vertical-scroll-proportion="-34.615383">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlotCanvas.js" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="87" column="124" selection-start="2704" selection-end="2728" vertical-scroll-proportion="0.4328112">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
       </split-second>
     </splitter>
   </component>
@@ -114,25 +221,29 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/StarCellBio/settings.py" />
-        <option value="$PROJECT_DIR$/html_app/utils/Utilities.js" />
-        <option value="$PROJECT_DIR$/html_app/master_model.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/assignments.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot.gss" />
+        <option value="$PROJECT_DIR$/html_app/starcellbio.app.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/homepage.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
+        <option value="$PROJECT_DIR$/html_app/model/WesternBlot.js" />
+        <option value="$PROJECT_DIR$/html_app/watch.py" />
         <option value="$PROJECT_DIR$/html_app/index.html" />
-        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/AssignmentsView.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/AssignmentView.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/assignment.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
         <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
-        <option value="$PROJECT_DIR$/html_app/ui/assignments.soy" />
+        <option value="$PROJECT_DIR$/html_app/model/WesternBlotLanes.js" />
+        <option value="$PROJECT_DIR$/html_app/components/WesternBlotModelFactory.js" />
+        <option value="$PROJECT_DIR$/html_app/model/WesternBlotGel.js" />
+        <option value="$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot_gel.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="19" />
     <option name="y" value="22" />
-    <option name="width" value="2540" />
-    <option name="height" value="1534" />
+    <option name="width" value="2560" />
+    <option name="height" value="1374" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -160,7 +271,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -207,7 +317,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
+              <option name="myItemId" value="ui_old" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -257,7 +367,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="frontend_tests" />
+              <option name="myItemId" value="html_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -271,19 +385,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemId" value="frontend_tests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="Settings.JavaScript.Linters.JSHint" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="FullScreen" value="false" />
     <property name="options.searchVisible" value="true" />
@@ -296,6 +411,12 @@
     <option name="myDjangoConsoleState">
       <PyConsoleSettings />
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/html_app/ui" />
+      <recent name="$PROJECT_DIR$/html_app/ui_old" />
+    </key>
   </component>
   <component name="RunManager" selected="Django server.StarCellBio">
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
@@ -387,9 +508,9 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
       <JSDebuggerConfigurationSettings>
-        <option name="engineId" />
+        <option name="engineId" value="embedded" />
         <option name="fileUrl" />
       </JSDebuggerConfigurationSettings>
       <method />
@@ -399,8 +520,9 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="StarCellBio.settings" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../bin/python" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <module name="StarCellBio" />
@@ -413,6 +535,8 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
       <method />
     </configuration>
     <list size="1">
@@ -446,26 +570,47 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="19" y="22" width="2540" height="1534" extended-state="0" />
+    <frame x="0" y="22" width="2560" height="1374" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22745411" sideWeight="0.4967923" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11948677" sideWeight="0.67020524" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1267041" sideWeight="0.17478053" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.096658714" sideWeight="0.7725459" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14365523" sideWeight="0.49198076" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1267041" sideWeight="0.31284916" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.50040096" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979476" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Heroku" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979476" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24979952" sideWeight="0.8292099" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -519,127 +664,176 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="11" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="234" column="8" selection-start="7814" selection-end="7814" vertical-scroll-proportion="0.3326087">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://AlchemyModelDependency/#StarCellBio">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>AlchemyModelDependency</ID>
-          <OriginalElement>#StarCellBio</OriginalElement>
-          <nodes />
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="930.5" y="679.5" />
-          <SelectedNodes />
-          <Categories />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/utils/Utilities.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="306" column="0" selection-start="7348" selection-end="7348" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.1471231">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.gss">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/common.soy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <marker date="1358972957000" expanded="true" signature="211:796" placeholder="..." />
+            <marker date="1358972957000" expanded="true" signature="475:537" placeholder="..." />
+            <marker date="1358972957000" expanded="true" signature="922:1698" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.gss.css">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/model/Assignments.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="1" selection-start="732" selection-end="732" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="217" column="27" selection-start="7087" selection-end="7087" vertical-scroll-proportion="-28.75">
+          <folding>
+            <marker date="1359134010000" expanded="true" signature="286:745" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="996:1620" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="1051:1348" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="1416:1608" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="1968:2604" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="2752:3509" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="2889:3258" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="2996:3079" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="3186:3246" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="3309:3477" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="3746:5569" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="3758:5293" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="3774:3893" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="3936:5261" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="3953:4369" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="4093:4247" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="4386:4489" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="4506:4832" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="4849:5247" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="4995:5107" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="5405:5477" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="5779:7645" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="5833:6754" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="6004:6084" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="6298:6378" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="6592:6672" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="6811:6900" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="6958:7390" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="7024:7252" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="7104:7196" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="7525:7628" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="7695:8340" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="7741:7810" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="7859:8333" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="7900:7912" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="7955:8322" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="8076:8311" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="8580:8783" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="9513:10908" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="9624:10900" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="9766:9808" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="9950:9992" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="10134:10173" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="10315:10349" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="10491:10530" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="10672:10707" placeholder="..." />
+            <marker date="1359134010000" expanded="true" signature="10849:10887" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="49" selection-start="5978" selection-end="5978" vertical-scroll-proportion="0.800593">
+        <state line="56" column="85" selection-start="4669" selection-end="4669" vertical-scroll-proportion="0.5893224">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
+    <entry file="file://$PROJECT_DIR$/html_app/watch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="102" selection-start="241" selection-end="241" vertical-scroll-proportion="0.054624908">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="39" selection-start="2651" selection-end="2651" vertical-scroll-proportion="0.73333335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentsView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="24" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="40" selection-start="436" selection-end="436" vertical-scroll-proportion="0.3106509">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.gss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="26" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.8160173">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="41" selection-start="969" selection-end="969" vertical-scroll-proportion="-26.25">
+        <state line="38" column="10" selection-start="1370" selection-end="1370" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend_tests/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="183" selection-end="183" vertical-scroll-proportion="-1.6363636">
+        <state line="142" column="0" selection-start="6035" selection-end="6035" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlot.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="65" selection-start="2087" selection-end="2087" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/components/ModelFactory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotLanes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="58" selection-start="2922" selection-end="2922" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotModelFactory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="45" selection-start="5447" selection-end="5447" vertical-scroll-proportion="-34.615383">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="180" column="42" selection-start="6542" selection-end="6542" vertical-scroll-proportion="-18.192308">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui_old/WesternBlotGelView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="402" column="20" selection-start="13593" selection-end="13632" vertical-scroll-proportion="-162.76923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot_gel.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="176" column="146" selection-start="6517" selection-end="6517" vertical-scroll-proportion="-18.64">
           <folding>
-            <element signature="e#184#216#0" expanded="true" />
+            <element signature="n#style#0;n#canvas#0;n#div#0;n#div#3;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.soy">
+    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotGel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="20" selection-start="75" selection-end="75" vertical-scroll-proportion="0.044477392">
+        <state line="25" column="69" selection-start="911" selection-end="915" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="124" selection-start="2704" selection-end="2728" vertical-scroll-proportion="0.4328112">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="67" selection-start="5342" selection-end="5342" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="376" column="44" selection-start="12590" selection-end="12590" vertical-scroll-proportion="0.83471763">
+          <folding>
+            <element signature="e#596#3017#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

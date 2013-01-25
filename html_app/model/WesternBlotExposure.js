@@ -33,7 +33,7 @@ scb.WesternBlotExposure = function scb_WesternBlotExposure(data, context, parent
 			var minutes = Math.floor((time % 3600) / 60);
 			var seconds = time % 60;
 			var now = (time == 0);
-			return scb_ui.format_time_detailed_w_sec({
+			return scb_common.format_time_detailed_w_sec({
 				days : days,
 				hours : hours,
 				minutes : minutes,

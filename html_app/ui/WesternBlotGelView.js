@@ -1,424 +1,228 @@
-scb.WesternBlotGelView = function scb_WesternBlotGelView(state) {
-	var self = this;
+scb.ui = scb.ui || {};
+scb.ui.static = scb.ui.static || {};
+scb.ui.static.WesternBlotGelView = scb.ui.static.WesternBlotGelView || {};
 
-	var workarea = state.workarea;
-	var gel = state.gel;
+scb.ui.static.WesternBlotGelView.parse = function (element) {
+    var assignment_id = $(element).attr('assignment_id');
+    var experiment_id = $(element).attr('experiment_id');
+    var western_blot_id = $(element).attr('western_blot_id');
+    var western_blot_gel_id = $(element).attr('western_blot_gel_id');
 
-	var panel = $('.workspace', workarea);
-
-	scb.utils.off_on(panel, 'click', '.western_blot_gel_name_text', function() {
-		edit_name(this, gel);
-	});
-
-	scb.utils.off_on(panel, 'click', '.delete_western_blot_row', function() {
-		var model_id = scb.Utils.get_attribute($(this), 'model_id');
-		gel.lanes_list.remove(model_id);
-		self.show({});
-		console.info("Western Blot Lane - Delete." + model_id);
-	});
-
-	scb.utils.off_on(panel, 'click', '.duplicate_western_blot_row', function() {
-		var model_id = scb.Utils.get_attribute($(this), 'model_id');
-		gel.lanes_list.duplicate(model_id);
-		self.show({});
-		console.info("Western Blot Lane - Duplicate." + model_id);
-	});
-
-	scb.utils.off_on(panel, 'click', '.make_western_blot_lysate', function() {
-		if(gel.lanes_list.length > 0) {
-			gel.lysate_made = true;
-			self.show({});
-		} else {
-			alert("You have not selected any lysates to prepare. Please add samples to 'List of Lysates to Prepare' by clicking on the buttons above.");
-		}
-	});
-
-	scb.utils.off_on(panel, 'click', '.run_western_blot_sds_gel', function() {
-		gel.sdsgelrun = true;
-		self.show({});
-	});
-
-	scb.utils.off_on(panel, 'click', '.run_western_blot_develop', function() {
-		gel.finished = true;
-		self.develop_gel();
-		console.info("GEL IS " + gel.finished);
-		self.show({});
-	});
-
-	scb.utils.off_on(panel, 'click', '.western_blot_gel_lysate_row_treatment', function() {
-		var model_id = $(this).attr('model_id');
-		if(scb.utils.isDefined(model_id)) {
-			console.info("EDIT" + model_id);
-		}
-	});
-
-	scb.utils.off_on(panel, 'click', '.western_blot_gel_lysate_kind_ip', function() {
-		var model_id = scb.Utils.get_attribute('model_id');
-		var lane_id = $(this).attr('lane_id');
-		var lane = gel.lanes_list.get(lane_id);
-		lane.ip = $(this).is(':checked');
-		console.info(lane_id + " " + $(this).is(':checked'));
-		self.show();
-	});
-
-	scb.utils.off_on(panel, 'click', '.select_western_blot_lysate_experiment', function() {
-		var experiment_id = $('option:selected', this).attr('model_id');
-		var lys_exp = state.assignment.experiments.get(experiment_id);
-		$('.western_blot_experiment_list', workarea).html(scb_ui.western_blot_experiment_list({
-			gel : gel,
-			template : state.context.template,
-			experiment : lys_exp,
-			experiment_list : state.assignment.experiments
-		}));
-	});
-
-
-	scb.utils.off_on(panel, 'click', '.add_western_blot_experiment_element', function() {
-		if(gel.lanes_list.length >= 12) {
-			alert("Maximum number of lanes visible is 12. Please delete some lanes first.");
-			return;
-		}
-		var experiment_id = $(this).attr('experiment_id');
-		var treatment_id = $(this).attr('treatment_id');
-		var schedule_id = $(this).attr('schedule_id');
-		var exp = state.assignment.experiments.get(experiment_id);
-		var treat = exp.cell_treatment_list.get(treatment_id);
-		var sch = treat.collection_schedule_list.get(schedule_id);
-
-		gel.lanes_list.start({
-			experiment_id : experiment_id,
-			cell_treatment_id : treatment_id,
-			collection_schedule_id : schedule_id
-		});
-		self.show({});
-		console.info("Western Blot Lane - Add - " + experiment_id + " " + treatment_id + " " + schedule_id);
-
-	});
-
-	scb.utils.off_on(panel, 'click', '.add_western_blot_experiment_element_all', function() {
-		var experiment_id = $(this).attr('experiment_id');
-		// var treatment_id = $(this).attr('treatment_id');
-		// var schedule_id = $(this).attr('schedule_id');
-		var exp = state.assignment.experiments.get(experiment_id);
-		// var treat = exp.cell_treatment_list.get(treatment_id);
-		// var sch = treat.collection_schedule_list.get(schedule_id);
-		var exp_list = exp.cell_treatment_list.list;
-		for(var t in exp_list ) {
-			var treat = exp_list[t];
-			var treatment_id = treat.id;
-			var sch_list = treat.collection_schedule_list.list
-			for(s in sch_list ) {
-				var sch = sch_list[s];
-
-				var schedule_id = sch.id;
-				gel.lanes_list.start({
-					experiment_id : experiment_id,
-					cell_treatment_id : treatment_id,
-					collection_schedule_id : schedule_id
-				});
-			}
-
-		}
-		if(gel.lanes_list.length > 12) {
-			alert("Maximum number of lanes visible is 12. Please delete some lanes before proceeding.");
-		}
-		self.show({});
-		console.info("Western Blot Lane - Add - " + experiment_id + " " + treatment_id + " " + schedule_id);
-
-	});
-
-	scb.utils.off_on(panel, 'change', '.making_lysates_row_lysate_kind', function() {
-		var lane_id = $(this).attr('model2_id');
-		var id = $(':selected', this).attr('model_id');
-		gel.lanes_list.get(lane_id).kind = id;
-		self.show({});
-	});
-
-	scb.utils.off_on(panel, 'change', '.making_lysates_row_primary_anti_body', function() {
-		var lane_id = $(this).attr('model2_id');
-		var id = $(':selected', this).attr('model_id');
-		gel.lanes_list.get(lane_id).ip_primary_anti_body = id;
-		self.show({});
-	});
-
-	scb.utils.off_on(panel, 'change', '.making_lysates_row_secondary_anti_body', function() {
-		var lane_id = $(this).attr('model2_id');
-		var id = $(':selected', this).attr('model_id');
-		gel.lanes_list.get(lane_id).ip_secondary_anti_body = id;
-		self.show({});
-	});
-
-	scb.utils.off_on(panel, 'change', '.making_lysates_gel_primary_anti_body', function() {
-		var id = $(':selected', this).attr('model_id');
-		gel.primary_anti_body = id;
-		self.show({});
-	});
-
-	scb.utils.off_on(panel, 'change', '.making_lysates_gel_secondary_anti_body', function() {
-		var id = $(':selected', this).attr('model_id');
-		gel.secondary_anti_body = id;
-		self.show({});
-	});
-
-	scb.utils.off_on(panel, 'change', '.set_amount_of_protein_loaded', function() {
-		var lane_id = $(this).attr('model_id');
-		var value = parseFloat($(this).val());
-		gel.lanes_list.get(lane_id).amount_of_protein_loaded = value;
-		self.show({});
-	});
-
-	scb.utils.off_on(panel, 'click', '.add_western_blot_exposure_time', function(e) {
-		var exposure = gel.exposure_list.start({
-
-		});
-		$('.western_blot_exposure_times', workarea).replaceWith(scb_ui.western_blot_exposure_times({
-			gel : gel,
-			template : state.context.template
-		}));
-		gel.exposure_list.selected_id = exposure.id;
-		western_blot_time_edit(exposure, $('div:[schedule_id=' + exposure.id + ']', workarea));
-		//		self.display_gels(exposure.id);
-		//TODO: Need to activate displayed gel correctly!
-	});
-
-	scb.utils.off_on(panel, 'click', '.western_blot_duplicate_gel', function(e) {
-		
-		var name = prompt("New W.B. Exp name?", gel.name + (gel.name.indexOf('(Copy)') == -1 ? " (Copy)" : ""));
-		if(name) {
-			var new_gel = state.experiment.western_blot_list.duplicate(gel.id);
-			new_gel.name = name;
-			self.show({});
-		}
-	});
-	function western_blot_time_edit(selected_schedule, element) {
-		var collection_time_edit_str = scb_ui.collection_schedule_time_edit({
-			schedule : selected_schedule
-		});
-		var dialog = $('#experiment_setup_row_treatment_edit', workarea);
-		dialog.html(collection_time_edit_str);
-		scb.Utils.position_div_over($(element), dialog);
-		$('#experiment_setup_row_treatment_edit_blackout').show();
-
-		function save() {
-			var time = $('.experiment_collection_schedule_field', dialog).val();
-			console.info("save " + time);
-			selected_schedule.schedule(time);
-			$('.western_blot_exposure_times', workarea).replaceWith(scb_ui.western_blot_exposure_times({
-				gel : gel,
-				template : state.context.template
-			}));
-			self.display_gels(selected_schedule.id);
-			dialog.hide();
-			$('#experiment_setup_row_treatment_edit_blackout').hide();
-			$('#experiment_setup_row_treatment_edit_blackout').unbind('click');
-		}
-
-
-		$('.experiment_setup_row_treatment_save', dialog).unbind('click').click(function(e) {
-			save();
-		});
-		$('.experiment_setup_row_treatment_cancel', dialog).unbind('click').click(function(e) {
-			dialog.hide();
-			$('#experiment_setup_row_treatment_edit_blackout').hide();
-			$('#experiment_setup_row_treatment_edit_blackout').unbind('click');
-
-		});
-		$('.experiment_row_treatment_tools', dialog).show();
-		$('.experiment_row_treatment_tools_spacer', dialog).hide();
-
-		$('#experiment_setup_row_treatment_edit_blackout').unbind('click').click(function(e) {
-			if(this == e.srcElement) {
-				save();
-			}
-		});
-	}
-
-
-	scb.utils.off_on(panel, 'click', '.western_blot_time_edit', function(e) {
-		var element = $(element).parent().parent();
-		var schedule_id = scb.Utils.get_attribute($(this), "schedule_id");
-		var selected_schedule = gel.exposure_list.get(schedule_id);
-		var collection_time_edit_str = scb_ui.collection_schedule_time_edit({
-			schedule : selected_schedule
-		});
-		var dialog = $('#experiment_setup_row_treatment_edit', workarea);
-		dialog.html(collection_time_edit_str);
-		scb.Utils.position_div_over($(this).parent().parent(), dialog);
-		$('#experiment_setup_row_treatment_edit_blackout').show();
-
-		$('.experiment_setup_row_treatment_save', dialog).unbind('click').click(function(e) {
-			var time = $('.experiment_collection_schedule_field', dialog).val();
-			console.info("save " + time);
-			selected_schedule.schedule(time);
-			$('.western_blot_exposure_times', workarea).replaceWith(scb_ui.western_blot_exposure_times({
-				gel : gel,
-				template : state.context.template
-			}));
-			self.display_gels();
-			dialog.hide();
-			$('#experiment_setup_row_treatment_edit_blackout').hide();
-		});
-		$('.experiment_setup_row_treatment_cancel', dialog).unbind('click').click(function(e) {
-			dialog.hide();
-			$('#experiment_setup_row_treatment_edit_blackout').hide();
-
-		});
-		$('.experiment_row_treatment_tools', dialog).show();
-		$('.experiment_row_treatment_tools_spacer', dialog).hide();
-	});
-
-	scb.utils.off_on(panel, 'click', '.western_blot_time_delete', function(e) {
-		var schedule_id = scb.Utils.get_attribute($(this), "schedule_id");
-		console.info("Delete schedule id:" + schedule_id);
-		gel.exposure_list.remove(schedule_id);
-		$('.western_blot_exposure_times', workarea).replaceWith(scb_ui.western_blot_exposure_times({
-			gel : gel,
-			template : state.context.template
-		}));
-		self.display_gels();
-
-	});
-
-	scb.utils.off_on(panel, 'click', '.display_western_blot_gel', function(e) {
-		var schedule_id = $(this).attr('schedule_id');
-		gel.exposure_list.selected_id = schedule_id;
-		self.paint_canvas({
-			schedule_id : schedule_id,
-			canvas_id : 'western_blot_gel_canvas_' + gel.id
-		});
-	});
-
-	scb.utils.tools_hover('.western_blot_time', workarea);
-
-	scb.utils.tools_hover('.western_blot_gel_name_text', workarea);
-
-	scb.utils.tools_hover('.western_blot_gel_lysate_row', workarea);
-
-	self.display_gels = function(schedule_id) {
-		if(gel.finished) {
-			var selector = $('.western_blot_gels', workarea);
-			selector.html(scb_ui.western_blot_gel_radio({
-				gel : gel,
-				template : state.context.template
-			})).buttonset();
-			if(scb.utils.isDefined(gel.exposure_list.selected_id)) {
-				self.paint_canvas({
-					schedule_id : gel.exposure_list.selected_id,
-					canvas_id : 'western_blot_gel_canvas_' + gel.id
-				});
-			}
-		}
-	}
-
-	self.show = function(data) {
-
-		$('.workspace', workarea).html(scb_ui.display_western_blot_gel({
-			gel : gel,
-			template : state.context.template,
-			experiment : state.experiment,
-			experiment_list : state.assignment.experiments
-		}));
-
-		self.display_gels();
-		if(!gel.sdsgelrun) {
-			$('.western_blot_gel_lysates_list', workarea).sortable({
-				update : function(event, ui) {
-					var new_order = [];
-					$('li', this).each(function() {
-						new_order.push($(this).attr('model_id'));
-					});
-					gel.lanes_list.reorder(new_order);
-				}
-			});
-		}
-		scb.utils.call_back(state.context.repaint_sidebar);
-
-	}
-	function edit_name(elem, selected_experiment, data) {
-		var offset = $(elem).position();
-		var top = offset.top + 0;
-		var left = offset.left + 0;
-		var width = $(elem).width() + 6;
-		var height = $(elem).height() + 6;
-
-		var dialog = $('#experiment_setup_row_treatment_edit', workarea);
-		dialog.html(scb_ui.experiment_name_text_edit({
-			name : selected_experiment.name
-		}));
-		dialog.css('position', 'absolute').css('top', top + 'px').css('left', left + 'px').css('width', width + 'px').css('height', height + 'px').show().unbind('click');
-
-		$('#experiment_setup_row_treatment_edit_blackout').show();
-		$('.experiment_row_treatment_tools', dialog).show();
-		$('.experiment_row_treatment_tools_spacer', dialog).hide();
-
-		$('.experiment_name_text_edit_save').unbind('click').click(function() {
-			var name = $('.experiment_name_text_edit', dialog).val();
-			selected_experiment.name = name;
-			$(dialog).hide();
-			$('#experiment_setup_row_treatment_edit_blackout').hide();
-
-			self.show({});
-		});
-
-		$('.experiment_name_text_edit_cancel').unbind('click').click(function() {
-			$(dialog).hide();
-			$('#experiment_setup_row_treatment_edit_blackout').hide();
-		});
-	}
-
-
-	self.paint_canvas = function(data) {
-		if(gel.canvas_data == null) {
-			var cstate = {
-				time : 0,
-				gel : gel,
-				lanes_length : gel.lanes_list.list.length
-			}
-			context = state.context;
-
-			var c = new scb.components.WesternBlot(cstate, context);
-			c.initialize_bias();
-
-			gel.canvas_data = {
-				background : c.background,
-				lane_yslope : c.lane_yslope,
-				lane_xoffset : c.lane_xoffset
-			}
-		}
-
-		var schedule = gel.exposure_list.get(data['schedule_id']);
-		if(schedule != null) {
-			if(schedule.canvas_data == null) {
-				var cstate = {
-					time : schedule.schedule_value,
-					gel : gel
-				}
-				context = state.context;
-
-				var c = new scb.components.WesternBlot(cstate, context);
-				c.background = gel.canvas_data.background;
-				c.lane_yslope = gel.canvas_data.lane_yslope;
-				c.lane_xoffset = gel.canvas_data.lane_xoffset;
-				c.build_one_tab(cstate);
-				var canvas_id = data['canvas_id'];
-				c.paint_blot(canvas_id, c.tab);
-				schedule.canvas_data = c.tab;
-			} else {
-				context = state.context;
-				var canvas_id = data['canvas_id'];
-				var c = new scb.components.WesternBlot(cstate, context);
-				c.paint_blot(canvas_id, schedule.canvas_data);
-			}
-		}
-	}
-
-	self.develop_gel = function() {
-		var lanes_list = gel.lanes_list.list;
-		var template = state.context.template;
-		var model = new scb.components.ModelFactory(template);
-		for(var lane_index in lanes_list ) {
-			var lane = lanes_list[lane_index];
-			model.western_blot.compute(lane, gel);
-		}
-	}
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        western_blot_id:western_blot_id,
+        western_blot_gel_id:western_blot_gel_id,
+        view:'western_blot_gel',
+        skip_hash_update:true
+    };
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+    parsed.state = state;
+    return parsed;
 }
+
+scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (element) {
+    var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    console.info(parsed.western_blot_gel.primary_anti_body);
+    parsed.western_blot_gel.primary_anti_body = $(element.selectedOptions).attr('model_id');
+    console.info(parsed.western_blot_gel.primary_anti_body);
+    console.info(parsed.western_blot_gel);
+
+}
+
+scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function (element) {
+    var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    parsed.western_blot_gel.secondary_anti_body = $(element.selectedOptions).attr('model_id');
+}
+
+scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function (element) {
+    var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    if (parsed.western_blot_gel.primary_anti_body && parsed.western_blot_gel.secondary_anti_body) {
+        parsed.western_blot_gel.is_developed = true;
+    } else {
+        alert("Please select primary & secondary anti-body first.");
+    }
+    scb.ui.static.MainFrame.refresh();
+}
+
+scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe = function (element) {
+    var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    var gel = parsed.western_blot.gel_list.start({});
+    parsed.western_blot.last_gel = gel.id;
+    parsed.state.western_blot_gel_id = gel.id;
+    scb.ui.static.MainFrame.refresh(parsed.state);
+}
+
+scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (element) {
+    var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    parsed.western_blot.gel_list.remove(parsed.western_blot_gel.id);
+    var list = parsed.western_blot.gel_list.list;
+    parsed.western_blot.last_gel = list.length > 0 ? list[0] : null;
+    parsed.state.view = 'western_blot';
+    scb.ui.static.MainFrame.refresh(parsed.state);
+}
+scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [1, 1, 2, 5, 10, 30, 1 * 60, 2 * 60, 5 * 60, 10 * 60, 20 * 60, 60 * 60];
+
+scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider = function (e, ui) {
+    var element = this;
+    var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    var value = ui.value || $(element).slider('value');
+    parsed.western_blot_gel.exposure_time = scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array[value];
+    $('.scb_s_wb_exposure_time_value', $(element).parent()).text(scb.utils.print_time_w_seconds(parsed.western_blot_gel.exposure_time));
+    if(_.isObject(e))
+    {
+        scb.ui.static.MainFrame.refresh();
+    }
+}
+
+scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index = function( exposure_time )
+{
+    var ret = 0;
+    _.find(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array,function(a,b){if(exposure_time >= a ){
+        ret=b;return false};});
+    return ret;
+}
+
+
+scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all = function (workarea, gstate, state) {
+    var gels = $('.scb_s_western_blot_gel[is_developed="true"]', workarea || $('body'));
+    gels.each(function (index, element) {
+        scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint(element, gstate, state);
+    });
+}
+
+scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (element, gstate, state) {
+    var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    var context = gstate.context;
+
+    if( parsed.western_blot_gel.marks.length == 0 )
+    {
+            // develop gel
+        var rows_state = parsed.western_blot.rows_state();
+        var lanes = [];
+        _.each(rows_state.rows, function (r) {
+            if (r.is_valid) lanes.push(r.lane);
+        });
+        var template = gstate.context.template;
+        var model = new scb.components.ModelFactory(template);
+        var lane_marks = [];
+        _.each(lanes, function (lane, index) {
+            var marks = [];
+            model.western_blot.compute(lane, parsed.western_blot_gel, marks);
+            lane_marks.push({marks:marks,amount_of_protein_loaded:10});
+        });
+        parsed.western_blot_gel.marks = lane_marks;
+    }
+
+    var gel = parsed.western_blot_gel;
+    if (gel.canvas_metadata == null) {
+        var cstate = {
+            time:0,
+            gel:gel,
+            lanes_length:gel.marks.length
+        }
+
+        var c = new scb.components.WesternBlot(cstate, context);
+        c.initialize_bias();
+
+        gel.canvas_metadata = {
+            background:c.background,
+            lane_yslope:c.lane_yslope,
+            lane_xoffset:c.lane_xoffset
+        }
+    }
+    var cstate = {
+        time:gel.exposure_time,
+        gel:gel
+    }
+    var c = new scb.components.WesternBlot(cstate,context);
+    c.background = gel.canvas_metadata.background;
+    c.lane_yslope = gel.canvas_metadata.lane_yslope;
+    c.lane_xoffset = gel.canvas_metadata.lane_xoffset;
+    c.build_one_tab(cstate);
+    var canvas_id = parsed.western_blot_gel.id;
+    c.paint_blot(canvas_id, c.tab);
+    gel.canvas_data = c.tab;
+}
+
+scb.ui.static.WesternBlotGelView.register = function (workarea) {
+    scb.utils.off_on(workarea, 'change', '.scb_f_wb_anti_body_select_primary', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary(this);
+    });
+
+    scb.utils.off_on(workarea, 'change', '.scb_f_wb_anti_body_select_secondary', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_blot_and_develop', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_reprobe', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_gel_remove', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove(this);
+    });
+
+
+}
+
+scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
+    var self = this;
+
+    self.show = function (state) {
+        var workarea = state.workarea;
+        var experiment = state.experiment;
+        var template = state.assignment.template;
+        var rows_state = state.western_blot.rows_state();
+        var rows = rows_state.rows;
+
+        var kind = 'prepare_gel';
+
+        workarea.html(scb_western_blot_gel.main({
+            global_template:gstate.context.master_model,
+            t:template,
+            assignment:state.assignment,
+            experiment:state.experiment,
+            western_blot:state.western_blot,
+            western_blot_gel:state.western_blot_gel,
+            rows:rows,
+            kind:kind,
+        }));
+        state.experiment.last_view = 'western_blot_gel';
+        state.western_blot.last_gel = state.western_blot_gel.id;
+
+
+        $('.scb_f_wb_exposure_slider').slider({
+            orientation:"horizontal",
+            range:"min",
+            max:scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length - 1,
+            value:scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
+            slide:scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
+            change:scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider
+        }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
+
+        scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all(workarea, gstate, state);
+
+    }
+};

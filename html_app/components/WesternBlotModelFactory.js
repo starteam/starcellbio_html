@@ -23,9 +23,8 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
 	}
 
 	if(scb.utils.isDefined(model.cyto)) {
-		self.cyto = function(lane, gel) {
-			if(lane.kind == 'whole' || lane.kind == 'cyto') {
-				var lane_marks = lane.marks || [];
+		self.cyto = function(lane, gel,lane_marks) {
+			if(lane.kind == 'whole' || lane.kind == 'cyto' || lane.kind=='whole_cell') {
 				if(scb.utils.isDefined(model.cyto.parser_1)) {
 					var rules = model.cyto.parser_1;
 					for(var rule_index in rules ) {
@@ -139,7 +138,7 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
 		}
 	}
 	
-	self.compute = function(lane, gel) {
-		return self.cyto(lane, gel);
+	self.compute = function(lane, gel,lane_marks) {
+		return self.cyto(lane, gel,lane_marks);
 	}
 }
