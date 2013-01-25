@@ -38,11 +38,22 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="WesternBlotGelView.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="WesternBlotGelView.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="132" column="67" selection-start="5342" selection-end="5342" vertical-scroll-proportion="0.67607975">
+                <state line="132" column="67" selection-start="5342" selection-end="5342" vertical-scroll-proportion="0.0">
                   <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MainFrame.js" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="376" column="44" selection-start="12590" selection-end="12590" vertical-scroll-proportion="0.83471763">
+                  <folding>
+                    <element signature="e#596#3017#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -210,7 +221,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/html_app/model/Treatment.js" />
         <option value="$PROJECT_DIR$/html_app/ui/western_blot.gss" />
         <option value="$PROJECT_DIR$/html_app/starcellbio.app.js" />
         <option value="$PROJECT_DIR$/html_app/ui/homepage.soy" />
@@ -226,6 +236,7 @@
         <option value="$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js" />
         <option value="$PROJECT_DIR$/html_app/ui/western_blot_gel.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
       </list>
     </option>
   </component>
@@ -658,18 +669,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="699" column="0" selection-start="27183" selection-end="27183" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#71#14437#0" expanded="false" />
-            <element signature="e#8626#14429#0" expanded="false" />
-            <element signature="e#14464#27180#0" expanded="false" />
-            <element signature="e#27206#33605#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/common.soy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -824,8 +823,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="67" selection-start="5342" selection-end="5342" vertical-scroll-proportion="0.67607975">
+        <state line="132" column="67" selection-start="5342" selection-end="5342" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="376" column="44" selection-start="12590" selection-end="12590" vertical-scroll-proportion="0.83471763">
+          <folding>
+            <element signature="e#596#3017#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

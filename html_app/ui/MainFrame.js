@@ -179,7 +179,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     self.show = function (state) {
         state = state || {
-            view:'assignments'
+            view:'homepage'
         }
 
         console.info(JSON.stringify(state));
@@ -360,21 +360,21 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.ui.static.MainFrame.refresh = function (navigation_state) {
         var state = navigation_state || $.deparam(location.hash.replace(/^#/, ''), true);
         state.onhashchange = true;
-        state.view = state.view || 'assignments';
+        state.view = state.view || 'homepage';
         self.show(state);
     }
 
     $(window).bind('hashchange', function (e) {
         var state = $.deparam(location.hash.replace(/^#/, ''), true);
         state.onhashchange = true;
-        state.view = state.view || 'assignments';
+        state.view = state.view || 'homepage';
         self.show(state);
     });
 
     (function () {
         var state = $.deparam(location.hash.replace(/^#/, ''), true);
         state.onhashchange = true;
-        state.view = state.view || 'assignments';
+        state.view = state.view || 'homepage';
         self.show(state);
     })();
 
