@@ -71,8 +71,7 @@ scb.WesternBlotLane = function scb_WesternBlotLane(data, context, parent) {
     scb.Utils.accessor2(self, 'making_lysate_id', data);
 
     scb.utils.accessor2_custom(self, 'experiment', function () {
-        var assignment = context.js_model.current_assignment;
-        var experiment = assignment.experiments.get(data.experiment_id);
+        var experiment = self.parent.parent.parent.parent;
         return experiment;
     }, scb.utils.noop);
 

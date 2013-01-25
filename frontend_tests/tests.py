@@ -139,8 +139,8 @@ class SimpleTest(TestCase):
         self.navigate_via('Blot')
         self.navigate_via('Re-probe')
         self.navigate_via('Gel 1')
-        self.navigate_via('Gel 2')
         pudb.set_trace()
+        self.navigate_via('Gel 2')
         #self.navigate_via('Select technique')
 
 

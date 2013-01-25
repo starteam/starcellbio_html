@@ -26,5 +26,8 @@ scb.WesternBlotGel = function scb_WesternBlotGel(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'exposure_time', "60", null, context);
     scb.Utils.initialize_accessor_field(self, data, 'is_developed', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'canvas_data', null, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'canvas_metadata', null, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'marks', [], null, context);
+
 
 }

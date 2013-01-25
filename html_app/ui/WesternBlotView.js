@@ -178,7 +178,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
 
 }
 
-scb.ui.static.WesternBlotView.MAX_ROWS = 4;
+scb.ui.static.WesternBlotView.MAX_ROWS = 14;
 
 scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
     var self = this;
