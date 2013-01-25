@@ -1,0 +1,47 @@
+.dummy {
+}
+
+.scb_s_navigation_button {
+    background-image: url('../images/homepage/instructor_resources_button.png');
+    padding: 6px 25px 6px 24px;
+    width: 180px;
+    background-position: center;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+.scb_s_experiment_step_circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    text-align: center;
+    vertical-align: 90%;
+    color: white;
+    background-color: #696969;
+    position: relative;
+    display: inline-block;
+    margin-left: 2em;
+}
+
+.scb_s_experiment_step_number {
+    padding: .4em .25em .25em .25em;
+    vertical-align: top;
+}
+
+.scb_experiment_step_selected {
+    background-color: green;
+}
+
+.scb_s_assignment_step_experiment {
+    position: absolute;
+    top: 65px;
+    left: 275px;
+    color: #69a996;
+}
+
+.scb_s_assignment_step {
+    background-color: #69a996;
+    color: white;
+    width: 960px;
+}

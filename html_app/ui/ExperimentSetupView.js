@@ -53,14 +53,17 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples
                 });
             });
         });
+        console.info( "DETACH HERE!")
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply(this);
+
     });
     scb.utils.off_on(dialog_selector, 'click', '.scb_f_experiment_setup_dialog_cancel', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_cancel(this);
     });
 }
 scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply = function (param) {
-    $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close").detach();
+    $('.scb_s_experiment_setup_table_add_samples_dialog').dialog("close");
+    $('.scb_s_experiment_setup_table_add_samples_dialog').detach();
     scb.ui.static.MainFrame.refresh();
 };
 
@@ -86,6 +89,7 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample = functio
     }
     var cell_treatment_list = parsed.experiment.cell_treatment_list;
     cell_treatment_list.remove(cell_treatment_id);
+    $('.scb_s_experiment_setup_table_add_samples_dialog').detach();
     scb.ui.static.MainFrame.refresh();
 };
 
@@ -235,6 +239,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             state.mode = 'readonly';
             state.last_view = 'experiment_run';
         }
+        $('.scb_s_experiment_setup_table_add_samples_dialog').detach();
         workarea.html(scb_experiment_setup.main({
             global_template:gstate.context.master_model,
             t:template,

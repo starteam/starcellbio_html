@@ -1,0 +1,402 @@
+@import "common.gss";
+
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
+
+@font-face {
+    font-family: 'SourceSansPro-Black';
+    src: url("../fonts/SourceSansPro-Black.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-BlackIt';
+    src: url("../fonts/SourceSansPro-BlackIt.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-Bold';
+    src: url("../fonts/SourceSansPro-Bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-BoldIt';
+    src: url("../fonts/SourceSansPro-BoldIt.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-ExtraLight';
+    src: url("../fonts/SourceSansPro-ExtraLight.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-ExtraLightIt';
+    src: url("fonts/SourceSansPro-ExtraLight.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-Light';
+    src: url("../fonts/SourceSansPro-Light.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-LightIt';
+    src: url("../fonts/SourceSansPro-Light.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-Regular';
+    src: url("../fonts/SourceSansPro-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url("../fonts/SourceSansPro-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-RegularIt';
+    src: url("../fonts/SourceSansPro-It.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-Semibold';
+    src: url("../fonts/SourceSansPro-Semibold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'SourceSansPro-SemiboldIt';
+    src: url("../fonts/SourceSansPro-SemiboldIt.otf") format("opentype");
+}
+
+.scb_s_homepage_view {
+    width: 960px;
+    height: 688px;
+    background-color: #F4F6F8;
+}
+
+.scb_s_header {
+    height: 80px;
+    width: 960px;
+    padding-top: 0px;
+    background-color: #F4F6F8;
+    display: block;
+}
+
+.scb_s_header_line_top {
+    display: block;
+}
+
+.scb_s_logo {
+    float: left;
+    padding: 20px;
+    display: block;
+}
+
+.scb_s_header_tools {
+    float: rigth;
+    vertical-align: top;
+    display: block;
+    text-align: right;
+}
+
+.scb_s_envelope_icon {
+    margin-bottom:8px;
+}
+
+.scb_s_envelope_text {
+    margin-bottom:8px;
+}
+
+.scb_s_header_tools_text {
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.scb_s_header_vertical_line {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.scb_s_login_status {
+    padding-right: 15px;
+    margin-bottom: 8px;
+}
+
+.scb_s_homepage_top {
+    display: block;
+    height: 322px;
+    padding-left:5px;
+}
+
+.scb_s_homepage_top_left {
+    vertical-align: top;
+    display: inline-block;
+    background-image: url('../images/homepage/cells.png');
+    height: 322px;
+    width: 288px;
+    margin-right: -5px;
+}
+
+.scb_s_homepage_top_left_image {
+    padding: 40px 12px 15px 12px;
+}
+
+.scb_s_homepage_see_more_button {
+    background-image: url('../images/homepage/more_button.png');
+    padding: 6px 25px 6px 24px;
+    margin-left: 12px;
+    background-position: center;
+}
+
+.scb_s_homepage_top_right {
+    display: inline-block;
+    vertical-align: top;
+    background-color: white;
+    border-color: black;
+    border-width: 1px;
+    height: 316px;
+    width: 232px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #a0a0a0;
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-right: -10px;
+}
+
+.scb_s_homepage_video_player {
+    display: block;
+    margin-bottom: 4px;
+    width: 228px;
+    margin-left: 2px;
+    margin-top: 4px;
+}
+
+.scb_s_homepage_blue_actions {
+    font-family: 'SourceSansPro-Semibold';
+    color: #008DDD;
+    margin-left: 10px;
+    margin-bottom: -10px;
+}
+
+.scb_s_homepage_blue_line {
+    margin-left: 5px;
+    width: 200px;
+}
+
+.scb_s_instructor_resources {
+    background: transparent;
+    border-width: 0px;
+    background-image: url('../images/homepage/instructor_resources_button.png');
+    background-size: 210px 33px;
+    background-position: center;
+    height: 33px;
+    width: 210px;
+    margin-left: 8px;
+    font-family: 'sourcesanspro-semibold';
+    color: white;
+    font-size: 12px;
+}
+
+.scb_s_homepage_bottom {
+    display: block;
+    height: 207px;
+    width: 960px;
+    margin-top: 15px;
+    @mixin gradient(top,#ffffff,#e6e6e6,#f0f0f0);
+}
+
+.scb_s_homepage_experimental_design {
+    display: inline-block;
+    background-image: url('../images/homepage/bottom_bg.png');
+    height: 207px;
+    width: 440px;
+}
+
+.scb_s_homepage_experimental_design_text {
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.scb_s_homepage_experimental_design_bar {
+    display: inline-block;
+    margin-left: 5px;
+    top: 14px;
+}
+
+.scb_s_homepage_experimental_design_list {
+    width: 400px;
+    height: 200px;
+    display: inline-block;
+}
+
+.scb_s_homepage_experimental_design_list_title {
+    width: 400px;
+    display: block;
+    vertical-align: top;
+    font-family: 'sourcesanspro-regular';
+    font-size:.75em;
+    margin-left:10px;
+    margin-top: 10px;
+
+}
+
+.scb_s_homepage_experimental_design_list_items {
+    width: 140px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.scb_s_homepage_experimental_design_list_bar {
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 8px;
+    height:160px;
+
+}
+
+.scb_s_homepage_experimental_design_list_info {
+    width: 200px;
+    display: inline-block;
+    font-family: 'sourcesanspro-regular';
+    vertical-align: 50%;
+    font-size:.95em;
+    padding-left:10px;
+}
+
+.scb_s_homepage_experimental_design_bullet_item {
+    display:block;
+    font-family: 'sourcesanspro-bold';
+    font-size:.75em;
+    vertical-align: top;
+    margin-left:10px;
+    padding-top:4px;
+    padding-bottom:4px;
+}
+.scb_s_homepage_experimental_design_bullet {
+    display: inline-block;
+    color: #5e9c90;
+}
+
+.scb_s_homepage_experimental_design_item {
+    margin-left:5px;
+    display: inline-block;
+}
+
+.scb_s_homepage_learn_more {
+    display:block;
+    background: transparent;
+    border-width: 0px;
+    background-image: url('../images/homepage/learn_more_button.png');
+    background-size: 120px 33px;
+    background-position: center;
+    height: 33px;
+    width: 120px;
+    margin-top:20px;
+    margin-left: 8px;
+    font-family: 'sourcesanspro-semibold';
+    color: white;
+    font-size: .9em;
+}
+
+.scb_s_homepage_technique {
+    display: inline-block;
+    height:200px;
+    vertical-align: top;
+    margin-left:25px;
+}
+
+.scb_s_homepage_technique_title {
+    display:block;
+    margin-top:20px;
+}
+
+.scb_s_homepage_technique_title_image {
+    display: block;
+    margin-top:10px;
+    margin-bottom:5px;
+}
+
+.scb_s_homepage_technique_wb {
+    display:inline-block;
+    font-family: 'sourcesanspro-light';
+    font-size:.75em;
+    width:130px;
+    vertical-align: top;
+}
+
+.scb_s_homepage_technique_flow {
+    display:inline-block;
+    font-family: 'sourcesanspro-light';
+    font-size:.75em;
+    width:130px;
+    vertical-align: top;
+}
+
+.scb_s_homepage_technique_micro {
+    display:inline-block;
+    font-family: 'sourcesanspro-light';
+    font-size:.75em;
+    width:130px;
+    vertical-align: top;}
+
+.scb_s_homepage_technique_bar {
+    height:160px;
+    padding-left:10px;
+    padding-right: 14px;
+ }
+
+
+.scb_s_homepage_technique_learn_more {
+    display:block;
+    background: transparent;
+    border-width: 0px;
+    background-image: url('../images/homepage/learn_more_button.png');
+    background-size: 110px 33px;
+    background-position: center;
+    height: 33px;
+    width: 110px;
+    margin-top:20px;
+    margin-left: 0px;
+    font-family: 'sourcesanspro-semibold';
+    color: white;
+    font-size: .9em;
+}
+
+.scb_s_homepage_technique_more {
+    vertical-align: top;
+    margin-top:50px;
+    display:inline-block;
+    margin-left:20px;
+}
+
+.scb_s_footer {
+    padding: 20px;
+    width: 920px;
+    background-color: #F4F6F8;
+    display: block;
+}
+
+.scb_s_homepage_footer_divider {
+    padding-left:3px;
+    padding-right:3px;
+    vertical-align: top;
+    margin-top:17px;
+}
+
+.scb_s_homepage_footer_support {
+    vertical-align: top;
+    margin-top:20px;
+
+}
+
+.scb_no_underline {
+    text-decoration: none;
+}

@@ -7,6 +7,7 @@ scb.ui.static.MainFrame = scb.ui.static.MainFrame || {};
 
 scb.ui.static.MainFrame.update_hash = function (state) {
     if (!state.onhashchange) {
+        delete state.onhashchange;
         $.bbq.pushState(state, 2);
     }
 }
@@ -40,6 +41,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                             var western_blot = experiment.western_blot_list.get(state.western_blot_id);
                             if (western_blot) {
                                 ret.western_blot = western_blot;
+                                if (state.western_blot_gel_id) {
+                                    var western_blot_gel = western_blot.gel_list.get(state.western_blot_gel_id);
+                                    ret.western_blot_gel = western_blot_gel;
+                                }
                             }
                         }
                     }
@@ -88,6 +93,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     scb.ui.static.ExperimentDesignView.register(workarea);
     scb.ui.static.ExperimentSetupView.register(workarea);
+    scb.ui.static.WesternBlotView.register(workarea);
+    scb.ui.static.WesternBlotGelView.register(workarea);
+
 
     scb.utils.off_on(workarea, 'click', '.save_master_model', function () {
         var tmp;
@@ -123,6 +131,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
     });
 
+    self.sections.homepage = new scb.ui.HomepageView({
+        workarea:workarea,
+        context:context
+    });
     self.sections.assignments = new scb.ui.AssignmentsView({
         workarea:workarea,
         context:context
@@ -153,6 +165,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context:context
     })
 
+    self.sections.western_blot_gel = new scb.ui.WesternBlotGelView({
+        workarea:workarea,
+        context:context
+    })
+
+
     self.sections.workarea = new scb.ui.WorkspaceView({
         workarea:workarea,
         context:context
@@ -161,7 +179,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     self.show = function (state) {
         state = state || {
-            view:'assignments'
+            view:'homepage'
         }
 
         console.info(JSON.stringify(state));
@@ -170,7 +188,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             self.show(parsed.redisplay_state);
             return;
         }
-
+        if (state.view == 'homepage') {
+            self.sections.homepage.show({
+                workarea:workarea
+            });
+        }
         if (state.view == 'assignments') {
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.MainFrame.update_hash(state);
@@ -233,10 +255,15 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
         }
         if (state.view == 'western_blot') {
-            if(!parsed.western_blot)
-            {
+            if (!parsed.western_blot) {
                 var western_blot = parsed.experiment.western_blot_list.start({});
                 state.western_blot_id = western_blot.id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+            if (parsed.western_blot.is_transfered) {
+                state.view = 'western_blot_gel';
                 state.onhashchange = false;
                 self.show(state);
                 return;
@@ -244,7 +271,41 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             self.sections.western_blot.show({
                 workarea:workarea,
                 assignment:parsed.assignment,
-                experiment:parsed.experiment
+                experiment:parsed.experiment,
+                western_blot:parsed.western_blot
+            });
+        }
+        if (state.view == 'western_blot_gel') {
+            if (!parsed.western_blot) {
+                state.onhashchange = false;
+                state.view = 'select_technique';
+                self.show(state);
+                return;
+            }
+            if (!parsed.western_blot.is_transfered) {
+                state.view = 'western_blot';
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+            if (!parsed.western_blot_gel) {
+                var gel_id = parsed.western_blot.last_gel;
+                if (!gel_id) {
+                    gel = parsed.western_blot.gel_list.start({});
+                    parsed.western_blot.last_gel = gel.id;
+                    gel_id = gel.id;
+                }
+                state.western_blot_gel_id = gel_id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+            self.sections.western_blot_gel.show({
+                workarea:workarea,
+                assignment:parsed.assignment,
+                experiment:parsed.experiment,
+                western_blot:parsed.western_blot,
+                western_blot_gel:parsed.western_blot_gel
             });
         }
         if (state.view == 'experiment_last') {
@@ -296,24 +357,24 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     }
 
-    scb.ui.static.MainFrame.refresh = function () {
-        var state = $.deparam(location.hash.replace(/^#/, ''), true);
+    scb.ui.static.MainFrame.refresh = function (navigation_state) {
+        var state = navigation_state || $.deparam(location.hash.replace(/^#/, ''), true);
         state.onhashchange = true;
-        state.view = state.view || 'assignments';
+        state.view = state.view || 'homepage';
         self.show(state);
     }
 
     $(window).bind('hashchange', function (e) {
         var state = $.deparam(location.hash.replace(/^#/, ''), true);
         state.onhashchange = true;
-        state.view = state.view || 'assignments';
+        state.view = state.view || 'homepage';
         self.show(state);
     });
 
     (function () {
         var state = $.deparam(location.hash.replace(/^#/, ''), true);
         state.onhashchange = true;
-        state.view = state.view || 'assignments';
+        state.view = state.view || 'homepage';
         self.show(state);
     })();
 

@@ -152,14 +152,33 @@ scb.utils.print_time = function (value) {
     var days = Math.floor(time / 86400);
     var hours = Math.floor((time % 86400) / 3600);
     var minutes = Math.floor((time % 3600) / 60);
+    var seconds = Math.floor(time % 60);
     var now = (time < 60 );
-    return scb_ui.format_time_detailed({
+    return scb_common.format_time_detailed({
         days:days,
         hours:hours,
         minutes:minutes,
+        seconds:seconds,
         now:now
     }).trim();
 }
+
+scb.utils.print_time_w_seconds = function (value) {
+    var time = parseFloat(value);
+    var days = Math.floor(time / 86400);
+    var hours = Math.floor((time % 86400) / 3600);
+    var minutes = Math.floor((time % 3600) / 60);
+    var seconds = Math.floor(time % 60);
+    var now = (time < 1 );
+    return scb_common.format_time_detailed_w_sec({
+        days:days,
+        hours:hours,
+        minutes:minutes,
+        seconds:seconds,
+        now:now
+    }).trim();
+}
+
 
 scb.utils.keys = function (map) {
     return _.map(map, function (v, k, l) {

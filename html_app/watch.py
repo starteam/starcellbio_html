@@ -5,7 +5,7 @@ import time
 from threading import Timer
 from subprocess import call
 
-root = '/Users/ceraj/.virtualenvs/StarCellBio/StarCellBio/html_app/';
+root = os.environ['HOME']+'/.virtualenvs/StarCellBio/StarCellBio/html_app/';
 
 global_update_index = True
 js = dict();
@@ -19,7 +19,7 @@ js_prefix='<script type="text/javascript" src="'
 js_suffix='" charset="UTF-8"></script>\n'
 
 html_prefix = "<!DOCTYPE html><html><head><title>StarCellBio Prototype</title>\n"
-html_prefix += '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cabin">'
+#html_prefix += '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=SourceSansPro">'
 html_suffix = "</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});})</script></body>"
 
 def index_html():
@@ -55,7 +55,7 @@ def processor( path ):
     if( path.endswith(".soy") ):
         infile = path
         outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".js"
-        call(["java", "-jar" , "/Users/ceraj/Sites/closure-templates/SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
+        call(["java", "-jar" , "../../SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
         print "compile soy %s " % (path)
     if( path.endswith(".gss") ):
         infile = path

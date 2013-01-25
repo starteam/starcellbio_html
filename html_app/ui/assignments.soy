@@ -8,8 +8,10 @@
 */
 {template .main}
 <div class='scb_s_assignments_view'>
-    {call .display_header}
-    {param global_template:$global_template /}
+    {call scb_homepage.display_header}
+    {/call}
+    {call scb_common.assignment_step}
+        {param step:1/}
     {/call}
     {call .display_assignments}
     {param assignments:$assignments/}
@@ -18,8 +20,9 @@
     {param global_template:$global_template/}
     {param assignments:$assignments/}
     {/call}
-    {call .display_footer}
-    {param global_template:$global_template /}
+    {call scb_homepage.display_experiment_design}
+    {/call}
+    {call scb_homepage.display_footer}
     {/call}
 </div>
 {/template}
@@ -58,6 +61,9 @@ Assignment description
         </b>
         <br/>
         {$assignments.selected.description |noAutoescape}
+
+    <a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignments.selected_id}">Assignments &#9654;</a>
+
     {else}
         {$global_template.app_description |noAutoescape}
     {/if}
@@ -70,6 +76,7 @@ Assignment assignments
 */
 {template .display_assignments}
 <div class='scb_s_assignments_sidebar'>
+    <h1 class='scb_s_assignments_sidebar_title'>YOUR ASSIGNMENTS</h1>
     <dl>
         {foreach $assignment in $assignments.list}
         <dt class='scb_s_assignments_sidebar_name'>

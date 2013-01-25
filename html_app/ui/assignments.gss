@@ -4,30 +4,6 @@
     max-width:1280px;
 }
 
-.scb_s_header {
-    font-size: 24px;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #a0a0a0;
-    border-radius: 8px;
-    background-color: #C0D0D0;
-    display: block;
-    padding: 10px;
-}
-
-.scb_s_footer {
-    font-size: 24px;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #a0a0a0;
-    border-radius: 8px;
-    background-color: #C0D0D0;
-    display: block;
-    padding: 10px;
-}
-
 .scb_s_abstract {
     margin-top: 8px;
     font-size: 12px;
@@ -39,8 +15,10 @@
     border-width: 1px;
     border-color: #a0a0a0;
     border-radius: 8px;
-    background-color: #C0D0D0;
+    background-color: white;
     padding: 10px;
+    width:686px;
+    position: relative;
 }
 
 .assignments_block {
@@ -49,7 +27,7 @@
     border-style: solid;
     border-width: 1px;
     border-color: #a0a0a0;
-    border-radius: 8px;
+    border-radius: 5px;
     background-color: #C0D0D0;
     display: block;
     padding: 10px;
@@ -74,9 +52,20 @@
     text-align: justify;
     display: inline-block;
     vertical-align: top;
-    min-height:350px;
-    width:320px;
+    width:230px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a0a0a0;
+    border-radius: 5px;
+    margin-right:10px;
+    padding:5px;
+    background-color: white;
 }
+.scb_s_assignments_sidebar_title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .scb_s_assignments_sidebar_name {
     font-size: 12px;
 }
@@ -90,4 +79,11 @@
 }
 
 .assignement_experiment_list_item {
+}
+
+
+.scb_s_abstract>.scb_f_select_assignment {
+    position: absolute;
+    bottom: 5px;
+    right: 5px
 }
