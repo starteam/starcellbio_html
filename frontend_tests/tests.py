@@ -19,7 +19,7 @@ class SimpleTest(TestCase):
         #self.driver = webdriver.Firefox()
         print settings.rel('../../chromedriver')
         self.driver = webdriver.Chrome(settings.rel('../../chromedriver'))
-        self.base_url = 'http://localhost:8000/static/index.html'
+        self.base_url = 'http://localhost:8000/static/index.html#view=assignments'
 
     @classmethod
     def tearDownClass(self):

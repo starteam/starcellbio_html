@@ -8,7 +8,7 @@ scb_experiment_design.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_experiment_design_view\'>');
   scb_homepage.display_header(opt_data, output);
-  scb_common.assignment_step({step: 3, assignment_name: opt_data.assignment.name, experiment_name: opt_data.experiment.name}, output);
+  scb_common.assignment_step({step: 3, assignment_name: opt_data.assignment.name, experiment_name: opt_data.experiment.name, assignment: opt_data.assignment, experiment: opt_data.experiment}, output);
   scb_experiment_design.display_details(opt_data, output);
   scb_homepage.display_experiment_design(null, output);
   scb_homepage.display_footer(opt_data, output);

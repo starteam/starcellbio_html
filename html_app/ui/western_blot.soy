@@ -5,6 +5,7 @@
 * @param t template
 * @param global_template
 * @param assignment AssignmentView
+* @param experiment
 * @param western_blot WesternBlotView
 * @param rows
 * @param kind
@@ -14,6 +15,17 @@
 <div class='scb_s_western_blot_view'>
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
+    {/call}
+    {call scb_common.assignment_step}
+        {param step:6/}
+        {param assignment_name:$assignment.name/}
+        {param experiment_name:$experiment.name/}
+        {param assignment:$assignment/}
+        {param experiment:$experiment/}
+        {param technique_name:'Western Blot' /}
+        {param technique_view:'western_blot' /}
+        {param technique_param:'western_blot_id' /}
+        {param technique_id:$western_blot.id /}
     {/call}
     {call .display_details}
     {param t:$t/}
