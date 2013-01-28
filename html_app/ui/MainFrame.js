@@ -196,6 +196,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'assignments') {
+            if(!parsed.assignment)
+            {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.MainFrame.update_hash(state);
             self.sections.assignments.show({

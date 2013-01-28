@@ -36,10 +36,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MainFrame.js" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="MainFrame.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="76" column="30" selection-start="3022" selection-end="3022" vertical-scroll-proportion="0.7340425">
+                <state line="218" column="19" selection-start="7176" selection-end="7176" vertical-scroll-proportion="0.44680852">
                   <folding />
                 </state>
               </provider>
@@ -148,7 +148,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="homepage.gss" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="homepage.gss" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="371" column="0" selection-start="8181" selection-end="8181" vertical-scroll-proportion="0.7768879">
@@ -209,9 +209,9 @@
         <option value="$PROJECT_DIR$/html_app/master_model.js" />
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
         <option value="$PROJECT_DIR$/html_app/model/WesternBlotGel.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/homepage.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
       </list>
     </option>
   </component>
@@ -719,14 +719,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="13" selection-start="6580" selection-end="6580" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="30" selection-start="3022" selection-end="3022" vertical-scroll-proportion="0.7340425">
+        <state line="1676" column="57" selection-start="62094" selection-end="62094" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -741,6 +734,13 @@
     <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="371" column="0" selection-start="8181" selection-end="8181" vertical-scroll-proportion="0.7768879">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="218" column="19" selection-start="7176" selection-end="7176" vertical-scroll-proportion="0.44680852">
           <folding />
         </state>
       </provider>
