@@ -48,6 +48,10 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
     }
     if (parsed.western_blot_gel.primary_anti_body && parsed.western_blot_gel.secondary_anti_body) {
         parsed.western_blot_gel.is_developed = true;
+        if( parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name )
+        {
+            parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name;
+        }
     } else {
         alert("Please select primary & secondary anti-body first.");
     }

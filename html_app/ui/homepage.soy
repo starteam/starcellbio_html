@@ -55,7 +55,7 @@ Assignment footer
     <span class='scb_s_homepage_top'>
         <span class='scb_s_homepage_top_left'>
             <img class='scb_s_homepage_top_left_image' src='images/homepage/welcome_text.png'><br/>
-            <span class='scb_s_homepage_see_more_button'><img src='images/homepage/more.png'></span>
+           <!-- <span class='scb_s_homepage_see_more_button'><img src='images/homepage/more.png'></span> -->
         </span>
         <span class='scb_s_homepage_top_center'>
             <img class='scb_s_homepage_top_center_image' src='images/homepage/lab.png'>
@@ -93,25 +93,25 @@ Assignment display_experiment_design
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit
                 </span>
                 <div class='scb_s_homepage_experimental_design_list_items'>
-                    <div class='scb_s_homepage_experimental_design_bullet_item'>
+                    <div class='scb_s_homepage_experimental_design_bullet_item' data-id="design">
                         <span class='scb_s_homepage_experimental_design_bullet'>1.</span>
                         <span class='scb_s_homepage_experimental_design_item'>Design</span></div>
-                    <div class='scb_s_homepage_experimental_design_bullet_item'>
+                    <div class='scb_s_homepage_experimental_design_bullet_item' data-id="setup">
                         <span class='scb_s_homepage_experimental_design_bullet'>2.</span>
                         <span class='scb_s_homepage_experimental_design_item'>Setup</span></div>
-                    <div class='scb_s_homepage_experimental_design_bullet_item'>
+                    <div class='scb_s_homepage_experimental_design_bullet_item' data-id="run_experiment">
                         <span class='scb_s_homepage_experimental_design_bullet'>3.</span>
                         <span class='scb_s_homepage_experimental_design_item'>Run Experiment</span></div>
-                    <div class='scb_s_homepage_experimental_design_bullet_item'>
+                    <div class='scb_s_homepage_experimental_design_bullet_item' data-id="select_technique">
                         <span class='scb_s_homepage_experimental_design_bullet'>4.</span>
                         <span class='scb_s_homepage_experimental_design_item'>Select Technique(s)</span></div>
-                    <div class='scb_s_homepage_experimental_design_bullet_item'>
+                    <div class='scb_s_homepage_experimental_design_bullet_item' data-id="run_technique">
                         <span class='scb_s_homepage_experimental_design_bullet'>5.</span>
                         <span class='scb_s_homepage_experimental_design_item'>Run Technique(s)</span></div>
-                    <div class='scb_s_homepage_experimental_design_bullet_item'>
+                    <div class='scb_s_homepage_experimental_design_bullet_item' data-id="analyze">
                         <span class='scb_s_homepage_experimental_design_bullet'>6.</span>
                         <span class='scb_s_homepage_experimental_design_item'>Analyze</span></div>
-                    <div class='scb_s_homepage_experimental_design_bullet_item'>
+                    <div class='scb_s_homepage_experimental_design_bullet_item' data-id="conclude">
                         <span class='scb_s_homepage_experimental_design_bullet'>7.</span>
                         <span class='scb_s_homepage_experimental_design_item'>Conclude</span></div>
                 </div>
@@ -137,7 +137,7 @@ Assignment display_experiment_design
 {template .display_techniques}
 <span class='scb_s_homepage_technique_wb'>
     <img class='scb_s_homepage_technique_title_image' src='images/homepage/western_blot.png'>
-    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
+    Western blotting detects overall changes in the amount or chemical modifications of a particular protein.
     <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
 
 </span>
@@ -145,18 +145,19 @@ Assignment display_experiment_design
      src='images/homepage/experimental_design_bar.png'>
 <span class='scb_s_homepage_technique_flow'>
     <img class='scb_s_homepage_technique_title_image' src='images/homepage/flow_cytometry.png'>
-                    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
+    Flow cytometry uses lasers to count and analyze the size, shape and properties of individual cells within a heterogeneous population of cells.
                     <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
 </span>
 <img class='scb_s_homepage_technique_bar'
      src='images/homepage/experimental_design_bar.png'>
 <span class='scb_s_homepage_technique_micro'>
     <img class='scb_s_homepage_technique_title_image' src='images/homepage/microscopy.png'>
-                    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..
+    Microscopy uses microscopes to view cells, tissues and organisms that otherwise cannot be observed with the human eye.
                     <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
 </span>
+<!--
 <img class='scb_s_homepage_technique_more' src='images/homepage/more_techniques.png'>
-
+-->
 {/template}
 /**
 Assignment footer
@@ -173,5 +174,47 @@ Assignment footer
     <button class='load_master_model'>Load</button>
 
 </div>
+{/template}
+
+/**
+*/
+{template .experimental_design_design}
+State the objective that the experiment will address, your hypothesis for the experiment, and think about the technique that will best suit your experiment.
+{/template}
+
+/**
+*/
+{template .experimental_design_setup}
+Specify the strain(s), treatment(s), treatment concentration(s), treatment start time, treatment duration and collection time for your experiment.
+{/template}
+
+/**
+*/
+{template .experimental_design_run_experiment}
+Perform your experiment and collect your samples.
+{/template}
+
+/**
+*/
+{template .experimental_design_select_technique}
+Select the appropriate experimental technique that is best suited for your experiment.
+{/template}
+
+/**
+*/
+{template .experimental_design_run_technique}
+Perform western blotting, flow cytometry and/or microscopy.
+{/template}
+
+/**
+*/
+{template .experimental_design_analyze}
+Analyze the results of your experiment.
+{/template}
+
+/**
+*/
+{template .experimental_design_conclude}
+Form a conclusion that addresses how your results fit your original hypothesis.
 {/template}
 

@@ -74,6 +74,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         if (ret.redisplay == false && state.skip_hash_update != true) {
             scb.ui.static.MainFrame.update_hash(state);
         }
+        ret.context = context;
         return ret;
     }
 
@@ -91,6 +92,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         'height':'100%'
     });
 
+    scb.ui.static.HomepageView.register(workarea);
     scb.ui.static.ExperimentDesignView.register(workarea);
     scb.ui.static.ExperimentSetupView.register(workarea);
     scb.ui.static.WesternBlotView.register(workarea);

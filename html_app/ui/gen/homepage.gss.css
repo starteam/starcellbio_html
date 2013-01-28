@@ -266,11 +266,18 @@
   margin-top: 10px;
   margin-bottom: 5px;
 }
-.scb_s_homepage_technique_wb, .scb_s_homepage_technique_flow, .scb_s_homepage_technique_micro {
+.scb_s_homepage_technique_wb, .scb_s_homepage_technique_flow {
   display: inline-block;
   font-family: 'sourcesanspro-light';
   font-size: .75em;
   width: 130px;
+  vertical-align: top;
+}
+.scb_s_homepage_technique_micro {
+  display: inline-block;
+  font-family: 'sourcesanspro-light';
+  font-size: .75em;
+  width: 150px;
   vertical-align: top;
 }
 .scb_s_homepage_technique_bar {

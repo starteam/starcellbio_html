@@ -344,8 +344,9 @@
     display:inline-block;
     font-family: 'sourcesanspro-light';
     font-size:.75em;
-    width:130px;
-    vertical-align: top;}
+    width:150px;
+    vertical-align: top;
+}
 
 .scb_s_homepage_technique_bar {
     height:160px;

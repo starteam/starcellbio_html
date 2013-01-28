@@ -25,7 +25,7 @@ scb_homepage.display_header = function(opt_data, opt_sb) {
 
 scb_homepage.display_content = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_homepage_content\'><span class=\'scb_s_homepage_top\'><span class=\'scb_s_homepage_top_left\'><img class=\'scb_s_homepage_top_left_image\' src=\'images/homepage/welcome_text.png\'><br/><span class=\'scb_s_homepage_see_more_button\'><img src=\'images/homepage/more.png\'></span></span><span class=\'scb_s_homepage_top_center\'><img class=\'scb_s_homepage_top_center_image\' src=\'images/homepage/lab.png\'></span><span class=\'scb_s_homepage_top_right\'><img class=\'scb_s_homepage_video_player\' src=\'images/homepage/player_background.png\'><a class=\'scb_no_underline\' href=\'#view=assignments\'><div class=\'scb_f_try_an_experiment scb_s_homepage_blue_actions\'>Try an Experiment</div></a><img class=\'scb_s_homepage_blue_line\' src=\'images/homepage/horizontal_line.png\'><div class=\'scb_f_create_instructors_account scb_s_homepage_blue_actions\'>Create Instructors Account</div><img class=\'scb_s_homepage_blue_line\' src=\'images/homepage/horizontal_line.png\'><div class=\'scb_f_create_student_account scb_s_homepage_blue_actions\'>Create Student Account</div><br><button class=\'scb_f_instructor_resources scb_s_instructor_resources\'>INSTRUCTOR RESOURCES</button></span></span>');
+  output.append('<div class=\'scb_s_homepage_content\'><span class=\'scb_s_homepage_top\'><span class=\'scb_s_homepage_top_left\'><img class=\'scb_s_homepage_top_left_image\' src=\'images/homepage/welcome_text.png\'><br/><!-- <span class=\'scb_s_homepage_see_more_button\'><img src=\'images/homepage/more.png\'></span> --></span><span class=\'scb_s_homepage_top_center\'><img class=\'scb_s_homepage_top_center_image\' src=\'images/homepage/lab.png\'></span><span class=\'scb_s_homepage_top_right\'><img class=\'scb_s_homepage_video_player\' src=\'images/homepage/player_background.png\'><a class=\'scb_no_underline\' href=\'#view=assignments\'><div class=\'scb_f_try_an_experiment scb_s_homepage_blue_actions\'>Try an Experiment</div></a><img class=\'scb_s_homepage_blue_line\' src=\'images/homepage/horizontal_line.png\'><div class=\'scb_f_create_instructors_account scb_s_homepage_blue_actions\'>Create Instructors Account</div><img class=\'scb_s_homepage_blue_line\' src=\'images/homepage/horizontal_line.png\'><div class=\'scb_f_create_student_account scb_s_homepage_blue_actions\'>Create Student Account</div><br><button class=\'scb_f_instructor_resources scb_s_instructor_resources\'>INSTRUCTOR RESOURCES</button></span></span>');
   scb_homepage.display_experiment_design(null, output);
   output.append('</div>');
   return opt_sb ? '' : output.toString();
@@ -34,7 +34,7 @@ scb_homepage.display_content = function(opt_data, opt_sb) {
 
 scb_homepage.display_experiment_design = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<span class=\'scb_s_homepage_bottom\'><span class=\'scb_s_homepage_experimental_design\'><img class=\'scb_s_homepage_experimental_design_text\' src=\'images/homepage/experimental_design.png\'><img class=\'scb_s_homepage_experimental_design_bar\' src=\'images/homepage/experimental_design_bar.png\'><span class=\'scb_s_homepage_experimental_design_list\'><span class=\'scb_s_homepage_experimental_design_list_title\'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</span><div class=\'scb_s_homepage_experimental_design_list_items\'><div class=\'scb_s_homepage_experimental_design_bullet_item\'><span class=\'scb_s_homepage_experimental_design_bullet\'>1.</span><span class=\'scb_s_homepage_experimental_design_item\'>Design</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\'><span class=\'scb_s_homepage_experimental_design_bullet\'>2.</span><span class=\'scb_s_homepage_experimental_design_item\'>Setup</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\'><span class=\'scb_s_homepage_experimental_design_bullet\'>3.</span><span class=\'scb_s_homepage_experimental_design_item\'>Run Experiment</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\'><span class=\'scb_s_homepage_experimental_design_bullet\'>4.</span><span class=\'scb_s_homepage_experimental_design_item\'>Select Technique(s)</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\'><span class=\'scb_s_homepage_experimental_design_bullet\'>5.</span><span class=\'scb_s_homepage_experimental_design_item\'>Run Technique(s)</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\'><span class=\'scb_s_homepage_experimental_design_bullet\'>6.</span><span class=\'scb_s_homepage_experimental_design_item\'>Analyze</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\'><span class=\'scb_s_homepage_experimental_design_bullet\'>7.</span><span class=\'scb_s_homepage_experimental_design_item\'>Conclude</span></div></div><img class=\'scb_s_homepage_experimental_design_list_bar\' src=\'images/homepage/experimental_design_bar.png\'><span class=\'scb_s_homepage_experimental_design_list_info\'>Euismod tincidunt ut laoreet dolore magna kjowkd aliquam erat volu<button class=\'scb_s_homepage_learn_more\'>LEARN MORE</button></span></span></span><span class=\'scb_s_homepage_technique\'><span class=\'scb_s_homepage_technique_title\'><img src=\'images/homepage/techniques.png\'></span>');
+  output.append('<span class=\'scb_s_homepage_bottom\'><span class=\'scb_s_homepage_experimental_design\'><img class=\'scb_s_homepage_experimental_design_text\' src=\'images/homepage/experimental_design.png\'><img class=\'scb_s_homepage_experimental_design_bar\' src=\'images/homepage/experimental_design_bar.png\'><span class=\'scb_s_homepage_experimental_design_list\'><span class=\'scb_s_homepage_experimental_design_list_title\'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</span><div class=\'scb_s_homepage_experimental_design_list_items\'><div class=\'scb_s_homepage_experimental_design_bullet_item\' data-id="design"><span class=\'scb_s_homepage_experimental_design_bullet\'>1.</span><span class=\'scb_s_homepage_experimental_design_item\'>Design</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\' data-id="setup"><span class=\'scb_s_homepage_experimental_design_bullet\'>2.</span><span class=\'scb_s_homepage_experimental_design_item\'>Setup</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\' data-id="run_experiment"><span class=\'scb_s_homepage_experimental_design_bullet\'>3.</span><span class=\'scb_s_homepage_experimental_design_item\'>Run Experiment</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\' data-id="select_technique"><span class=\'scb_s_homepage_experimental_design_bullet\'>4.</span><span class=\'scb_s_homepage_experimental_design_item\'>Select Technique(s)</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\' data-id="run_technique"><span class=\'scb_s_homepage_experimental_design_bullet\'>5.</span><span class=\'scb_s_homepage_experimental_design_item\'>Run Technique(s)</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\' data-id="analyze"><span class=\'scb_s_homepage_experimental_design_bullet\'>6.</span><span class=\'scb_s_homepage_experimental_design_item\'>Analyze</span></div><div class=\'scb_s_homepage_experimental_design_bullet_item\' data-id="conclude"><span class=\'scb_s_homepage_experimental_design_bullet\'>7.</span><span class=\'scb_s_homepage_experimental_design_item\'>Conclude</span></div></div><img class=\'scb_s_homepage_experimental_design_list_bar\' src=\'images/homepage/experimental_design_bar.png\'><span class=\'scb_s_homepage_experimental_design_list_info\'>Euismod tincidunt ut laoreet dolore magna kjowkd aliquam erat volu<button class=\'scb_s_homepage_learn_more\'>LEARN MORE</button></span></span></span><span class=\'scb_s_homepage_technique\'><span class=\'scb_s_homepage_technique_title\'><img src=\'images/homepage/techniques.png\'></span>');
   scb_homepage.display_techniques(null, output);
   output.append('</span></span>');
   return opt_sb ? '' : output.toString();
@@ -43,7 +43,7 @@ scb_homepage.display_experiment_design = function(opt_data, opt_sb) {
 
 scb_homepage.display_techniques = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<span class=\'scb_s_homepage_technique_wb\'><img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/western_blot.png\'>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..<button class=\'scb_s_homepage_technique_learn_more\'>LEARN MORE</button></span><img class=\'scb_s_homepage_technique_bar\' src=\'images/homepage/experimental_design_bar.png\'><span class=\'scb_s_homepage_technique_flow\'><img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/flow_cytometry.png\'>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..<button class=\'scb_s_homepage_technique_learn_more\'>LEARN MORE</button></span><img class=\'scb_s_homepage_technique_bar\' src=\'images/homepage/experimental_design_bar.png\'><span class=\'scb_s_homepage_technique_micro\'><img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/microscopy.png\'>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..<button class=\'scb_s_homepage_technique_learn_more\'>LEARN MORE</button></span><img class=\'scb_s_homepage_technique_more\' src=\'images/homepage/more_techniques.png\'>');
+  output.append('<span class=\'scb_s_homepage_technique_wb\'><img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/western_blot.png\'>Western blotting detects overall changes in the amount or chemical modifications of a particular protein.<button class=\'scb_s_homepage_technique_learn_more\'>LEARN MORE</button></span><img class=\'scb_s_homepage_technique_bar\' src=\'images/homepage/experimental_design_bar.png\'><span class=\'scb_s_homepage_technique_flow\'><img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/flow_cytometry.png\'>Flow cytometry uses lasers to count and analyze the size, shape and properties of individual cells within a heterogeneous population of cells.<button class=\'scb_s_homepage_technique_learn_more\'>LEARN MORE</button></span><img class=\'scb_s_homepage_technique_bar\' src=\'images/homepage/experimental_design_bar.png\'><span class=\'scb_s_homepage_technique_micro\'><img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/microscopy.png\'>Microscopy uses microscopes to view cells, tissues and organisms that otherwise cannot be observed with the human eye.<button class=\'scb_s_homepage_technique_learn_more\'>LEARN MORE</button></span><!--<img class=\'scb_s_homepage_technique_more\' src=\'images/homepage/more_techniques.png\'>-->');
   return opt_sb ? '' : output.toString();
 };
 
@@ -51,5 +51,54 @@ scb_homepage.display_techniques = function(opt_data, opt_sb) {
 scb_homepage.display_footer = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_footer\'><a href="http://web.mit.edu/"><img class=\'scb_s_homepage_footer_logo\' src=\'images/homepage/mit_logo.png\'></a><img class=\'scb_s_homepage_footer_divider\' src=\'images/homepage/small_divider.png\'><a href=\'http://star.mit.edu/about.html\'><img class=\'scb_s_homepage_footer_about\' src=\'images/homepage/about_star.png\'></a><img class=\'scb_s_homepage_footer_divider\' src=\'images/homepage/small_divider.png\'><a href=\'http://star.mit.edu/cellbio/support.html\'><img class=\'scb_s_homepage_footer_support\' src=\'images/homepage/support.png\'></a><button class=\'save_master_model\'>Save</button><button class=\'load_master_model\'>Load</button></div>');
+  return opt_sb ? '' : output.toString();
+};
+
+
+scb_homepage.experimental_design_design = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('State the objective that the experiment will address, your hypothesis for the experiment, and think about the technique that will best suit your experiment.');
+  return opt_sb ? '' : output.toString();
+};
+
+
+scb_homepage.experimental_design_setup = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('Specify the strain(s), treatment(s), treatment concentration(s), treatment start time, treatment duration and collection time for your experiment.');
+  return opt_sb ? '' : output.toString();
+};
+
+
+scb_homepage.experimental_design_run_experiment = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('Perform your experiment and collect your samples.');
+  return opt_sb ? '' : output.toString();
+};
+
+
+scb_homepage.experimental_design_select_technique = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('Select the appropriate experimental technique that is best suited for your experiment.');
+  return opt_sb ? '' : output.toString();
+};
+
+
+scb_homepage.experimental_design_run_technique = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('Perform western blotting, flow cytometry and/or microscopy.');
+  return opt_sb ? '' : output.toString();
+};
+
+
+scb_homepage.experimental_design_analyze = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('Analyze the results of your experiment.');
+  return opt_sb ? '' : output.toString();
+};
+
+
+scb_homepage.experimental_design_conclude = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('Form a conclusion that addresses how your results fit your original hypothesis.');
   return opt_sb ? '' : output.toString();
 };

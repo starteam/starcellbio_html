@@ -1554,21 +1554,24 @@ var __usability_test = {
                     {weight:24, intensity:.11},
                     {weight:36, intensity:.4},
                     {weight:48, intensity:.04}
-                ]
+                ],
+                gel_name:'let-23'
             },
             2:{
                 name:'mouse anti-let-60',
                 secondary:[3],
                 marks:[
                     {weight:48, intensity:.04}
-                ]
+                ],
+                gel_name: 'let-60'
             },
             3:{
                 name:'goat anti-lin15A',
                 secondary:[2],
                 marks:[
                     {weight:12, intensity:.02}
-                ]
+                ],
+                gel_name:'lin15A'
             },
             9:{
                 name:'goat anti-lin15B',
@@ -1576,27 +1579,33 @@ var __usability_test = {
                 marks:[
                     {weight:100, intensity:.01},
                     {weight:129, intensity:.11}
-                ]
+                ],
+                gel_name:'lin15B'
             },
             4:{
                 name:'goat anti-lin-1',
-                secondary:[2]
+                secondary:[2],
+                gel_name:'lin-1'
             },
             5:{
                 name:'mouse anti-Dpy-5',
-                secondary:[3]
+                secondary:[3],
+                gel_name:'Dpy-5'
             },
             6:{
                 name:'rabbit anti-Lon-2',
-                secondary:[1]
+                secondary:[1],
+                gel_name:'Lon-2'
             },
             7:{
                 name:'mouse anti-Sma-4',
-                secondary:[3]
+                secondary:[3],
+                gel_name:'Sma-4'
             },
             8:{
                 name:'goat anti-Unc-22',
-                secondary:[2]
+                secondary:[2],
+                gel_name:'Unc-22'
             }
         },
         secondary_anti_body:{
