@@ -4,11 +4,11 @@
     <list default="true" id="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" name="Default" comment="" />
     <ignored path="StarCellBio.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/watch.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359057410835" ignored="false" />
-    <file path="/starcellbio.app.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359054922539" ignored="false" />
-    <file path="/tests.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359056939911" ignored="false" />
-    <file path="/western_blot_gel.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359055602371" ignored="false" />
     <file path="/western_blot.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359053067061" ignored="false" />
+    <file path="/western_blot_gel.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359055602371" ignored="false" />
+    <file path="/tests.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359056939911" ignored="false" />
+    <file path="/starcellbio.app.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359054922539" ignored="false" />
+    <file path="/watch.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359057410835" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,13 +24,13 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.45570737">
+    <splitter split-orientation="horizontal" split-proportion="0.45570746">
       <split-first>
         <leaf>
           <file leaf-file-name="experiment_setup.soy" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="205" column="24" selection-start="7907" selection-end="7907" vertical-scroll-proportion="0.56340957">
+                <state line="205" column="24" selection-start="7907" selection-end="7907" vertical-scroll-proportion="0.8516058">
                   <folding />
                 </state>
               </provider>
@@ -76,17 +76,7 @@
             <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="1513" column="13" selection-start="56960" selection-end="56965" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="e#71#14437#0" expanded="false" />
-                    <element signature="e#27206#33605#0" expanded="false" />
-                    <element signature="e#33628#49745#0" expanded="false" />
-                    <element signature="e#50936#54832#0" expanded="false" />
-                    <element signature="e#55522#56950#0" expanded="false" />
-                    <element signature="e#57854#59290#0" expanded="false" />
-                    <element signature="e#59320#59544#0" expanded="false" />
-                    <element signature="e#59567#59787#0" expanded="false" />
-                    <element signature="e#59803#65606#0" expanded="false" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -98,7 +88,7 @@
           <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="273" column="52" selection-start="8971" selection-end="9008" vertical-scroll-proportion="-20.625">
+                <state line="273" column="52" selection-start="8971" selection-end="9008" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -107,7 +97,7 @@
           <file leaf-file-name="western_blot_gel.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot_gel.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="8" column="19" selection-start="197" selection-end="197" vertical-scroll-proportion="-4.375">
+                <state line="8" column="19" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -116,7 +106,16 @@
           <file leaf-file-name="common.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/common.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="51" column="10" selection-start="1779" selection-end="1779" vertical-scroll-proportion="-31.041666">
+                <state line="51" column="10" selection-start="1779" selection-end="1779" vertical-scroll-proportion="-16.125">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="homepage.soy" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.soy">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="49" column="17" selection-start="1964" selection-end="1964" vertical-scroll-proportion="0.82214767">
                   <folding />
                 </state>
               </provider>
@@ -131,10 +130,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="310" column="21" selection-start="13515" selection-end="13515" vertical-scroll-proportion="0.6949847">
+                <state line="310" column="21" selection-start="13515" selection-end="13515" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -161,7 +160,7 @@
           <file leaf-file-name="experiment_edit.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui_old/experiment_edit.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="119" column="27" selection-start="4112" selection-end="4128" vertical-scroll-proportion="-13.08">
+                <state line="119" column="27" selection-start="4112" selection-end="4128" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -171,13 +170,7 @@
             <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="158" column="13" selection-start="6580" selection-end="6580" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="e#4378#5780#0" expanded="false" />
-                    <element signature="e#6420#6492#0" expanded="false" />
-                    <element signature="e#14464#27180#0" expanded="false" />
-                    <element signature="e#27206#33605#0" expanded="false" />
-                    <element signature="e#49771#65614#0" expanded="false" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -194,7 +187,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/html_app/ui/assignments.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/assignment.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_design.soy" />
@@ -210,6 +202,7 @@
         <option value="$PROJECT_DIR$/html_app/model/Experiment.js" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/homepage.soy" />
       </list>
     </option>
   </component>
@@ -352,12 +345,12 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -405,25 +398,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <module name="StarCellBio" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <method />
-    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -443,6 +417,25 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="StarCellBio" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -551,11 +544,10 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1811652" sideWeight="0.4967923" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1267041" sideWeight="0.17478053" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0982498" sideWeight="0.8188348" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22825219" sideWeight="0.49198076" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.09904534" sideWeight="0.7717478" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22825219" sideWeight="0.49198076" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1267041" sideWeight="0.31284916" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.50040096" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979476" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -564,6 +556,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Heroku" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1811652" sideWeight="0.4967923" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24979952" sideWeight="0.8292099" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -631,20 +624,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.gss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="0" selection-start="1360" selection-end="1360" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="39" selection-start="541" selection-end="541" vertical-scroll-proportion="-8.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui_old/experiment_setup.soy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="93" column="14" selection-start="2780" selection-end="2780" vertical-scroll-proportion="0.7584746">
@@ -682,7 +661,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui_old/experiment_edit.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="27" selection-start="4112" selection-end="4128" vertical-scroll-proportion="-13.08">
+        <state line="119" column="27" selection-start="4112" selection-end="4128" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -704,26 +683,20 @@
     <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="158" column="13" selection-start="6580" selection-end="6580" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#4378#5780#0" expanded="false" />
-            <element signature="e#6420#6492#0" expanded="false" />
-            <element signature="e#14464#27180#0" expanded="false" />
-            <element signature="e#27206#33605#0" expanded="false" />
-            <element signature="e#49771#65614#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="273" column="52" selection-start="8971" selection-end="9008" vertical-scroll-proportion="-20.625">
+        <state line="273" column="52" selection-start="8971" selection-end="9008" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="205" column="24" selection-start="7907" selection-end="7907" vertical-scroll-proportion="0.56340957">
+        <state line="205" column="24" selection-start="7907" selection-end="7907" vertical-scroll-proportion="0.8516058">
           <folding />
         </state>
       </provider>
@@ -744,7 +717,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="310" column="21" selection-start="13515" selection-end="13515" vertical-scroll-proportion="0.6949847">
+        <state line="310" column="21" selection-start="13515" selection-end="13515" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/common.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="10" selection-start="1779" selection-end="1779" vertical-scroll-proportion="-16.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="17" selection-start="1964" selection-end="1964" vertical-scroll-proportion="0.82214767">
           <folding />
         </state>
       </provider>
