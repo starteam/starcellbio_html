@@ -44,44 +44,48 @@ Experiment active area
 <div class='scb_s_experiment_setup_details_view'>
 
     {if $kind == 'readwrite'}
-    {call scb_common.experiment_step}
-        {param step:2/}
-    {/call}
-    <div class='scb_s_experiment_setup_choose_template'>
-        THIS NEEDS A BIT MORE THINKING!
-        <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind">Create new set-up</input>
-        <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind">Select pre-existing set-up as a template</input>
-        <select class='scb_s_experiment_setup_choose_template_id'>
-            <option>Experiment 1</option>
-            <option>Experiment 1</option>
-        </select>
-    </div>
+        {call scb_common.experiment_step}
+            {param step:2/}
+        {/call}
+        <div class='scb_s_experiment_setup_choose_template'>
+            THIS NEEDS A BIT MORE THINKING!
+            <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind">Create new set-up</input><br>
+            <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind">Select pre-existing set-up as a template</input>
+            <select class='scb_s_experiment_setup_choose_template_id'>
+                <option>Experiment 1</option>
+                <option>Experiment 1</option>
+            </select><br>
+        </div>
     {else}
-    {call scb_common.experiment_step}
-        {param step:3/}
-    {/call}
+        {call scb_common.experiment_step}
+            {param step:3/}
+        {/call}
 
     {/if}
     <table class="scb_s_experiment_setup_table {if $kind == 'readwrite'}scb_s_experiment_setup_table_editable{else}scb_s_experiment_setup_table_readonly{/if}">
         <thead class='scb_s_experiment_setup_table_head'>
         {foreach $h in $headings}
-        <td class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
-            {$h.title}
-        </td>
+            <td class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
+                {$h.title}
+            </td>
         {/foreach}
         </thead>
+        <tbody class='scb_s_experiment_setup_table_body'>
         {foreach $r in $rows}
         <tr class='scb_s_experiment_setup_table_row' cell_treatment='{$r.id}'>
             {foreach $c in $r.columns}
-            <td class='scb_s_experiment_setup_table_heading' kind='{$c.kind}' rowspan="{$c.rows}">
+            <td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if}' kind='{$c.kind}' rowspan="{$c.rows}">
                 {if $c.kind == 'actions'}
-                {if $kind == 'readwrite'}
-                <button class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}'
-                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Remove
-                </button>
-                {/if}
+                    {if $kind == 'readwrite'}
+                    <button class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}'
+                            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'><img src="images/setup/scb_remove.png">
+                    </button>
+                    {/if}
                 {else}
-                {$c.title}
+                    {if $c.kind=='cell_plate'}
+                        <img src="images/setup/scb_cell_plate.png">
+                    {/if}
+                    {$c.title}
                 {/if}
             </td>
             {/foreach}
@@ -89,11 +93,30 @@ Experiment active area
         {/foreach}
         {if $kind == 'readwrite'}
         <tr>
-            <td colspan="{$headings.length}">
+            {foreach $c in $headings}
+            <td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_new_row' kind='{$c.kind}' rowspan="1">
+                {if $c.kind == 'actions'}
+                    {if $kind == 'readwrite'}
+                    <button class='scb_f_experiment_setup_save_sample' cell_treatment_id=''
+                            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' disabled="disabled">S
+                    </button>
+                    {/if}
+                {else}
+                {if $c.kind=='cell_plate'}
+                    <img src="images/setup/scb_cell_plate.png">
+                {/if}
+                    {$c.title}
+                {/if}
+            </td>
+            {/foreach}
+        </tr>
+        <tr>
+            <td colspan="{$headings.length+1}">
                 <button class='scb_f_experiment_setup_action_open_add_samples_dialog'>Add multiple rows</button>
             </td>
         </tr>
         {/if}
+        </tbody>
     </table>
     {call .display_add_sample_dialog}
     {param t:$t /}
@@ -168,4 +191,38 @@ Experiment active area
     <button class='scb_f_experiment_setup_dialog_cancel'>Cancel</button>
 
 </div>
+{/template}
+
+
+/**
+* Display add dialog
+* @param template template
+* @param drug_id
+* @/param assignment
+* @/param experiment
+*/
+{template .drug_edit}
+    <select title='drug' size='1' row='0' class='scb_f_experiment_setup_drug_edit'>
+        <option value=''>Please select</option>
+		{foreach $t in keys($template.drugs)}
+			<option value='{$t}' {if $t==$drug_id}selected='selected'{/if}>{$template.drugs[$t].name}</option>
+		{/foreach}
+	</select>
+{/template}
+
+/**
+* Display add dialog
+* @param template template
+* @param concentrations
+* @param concentration_id
+* @/param assignment
+* @/param experiment
+*/
+{template .concentration_edit}
+    <select title='concentration' size='1' row='0' class='scb_f_experiment_setup_concentration_edit'>
+        <option value=''>Please select</option>
+        {foreach $t in $concentrations}
+	        <option value='{$t}' {if $t==$concentration_id}selected='true'{/if}>{$template.concentrations[$t].name}</option>
+        {/foreach}
+    </select>
 {/template}

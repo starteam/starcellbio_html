@@ -1328,12 +1328,445 @@ var __basic_tests = {
 }
 
 
+var __usability_test = {
+    id:'usability_test',
+    name:'SCB Usability Test',
+    description:'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
+    experiments:{},
+    template:{
+        instructions:'$DISPLAY_ASSIGNMENT_INSTRUCTIONS$',
+
+        ui:{
+            experiment_setup:{table:[
+                {kind:"cell_plate",
+                    title:" ",
+                    editable:false},
+                {kind:"cell_line",
+                    title:"Strain",
+                    editable:false
+                },
+                {kind:"treatments",
+                    children:[
+                        {kind:"drug", title:"Treatments", editable:true},
+                        {kind:"concentration", title:"Concentration", editable:true},
+                        {kind:"start", title:"Start", editable:false},
+                        {kind:"duration", title:"Duration", editable:false}
+                    ]
+                },{kind:"actions",
+                    title:"Actions"
+                }
+            ], actions:[
+                {kind:"add_protocol", title:"Add Treatment Protocol"}
+            ]}
+        },
+
+        experiment_setup_actions:{
+            cell_lines:[
+                {
+                    id:'wt',
+                    title:'Wild Type',
+                    cell_line:'wt'
+                }
+            ],
+            treatment_protocol_list:[
+                {
+                    id:'P1',
+                    title:'Buffer Only',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:0}
+                            ]}}
+                    ]}
+                },
+                {
+                    id:'P2',
+                    title:'V1 low conc',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:'0'},
+                                {drug_id:'1', concentration_id:'1'}
+                            ]}}
+                    ]}
+                },
+                {
+                    id:'P3',
+                    title:'V1 high conc',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:'0'},
+                                {drug_id:'1', concentration_id:'125'}
+                            ]}}
+                    ]}
+                },
+                {
+                    id:'P4',
+                    title:'V2 low conc',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:'0'},
+                                {drug_id:'1', concentration_id:'50'}
+                            ]}}
+                    ]}
+                },
+                {
+                    id:'P5',
+                    title:'Many drugs',
+                    treatment_list:{list:[
+                        {schedule_value:0, schedule:'immediately', // start
+                            duration_value:3600 * 24 * 3, duration:'3 d', // end
+                            drug_list:{list:[
+                                {drug_id:'nc', concentration_id:'0'},
+                                {drug_id:'1', concentration_id:'0'},
+                                {drug_id:'2', concentration_id:'5'},
+                                {drug_id:'3', concentration_id:'10'}
+                            ]}}
+                    ]}
+                },
+                {
+                    id:'P6',
+                    title:'Many drugs, Many times',
+                    treatment_list:{
+                        list:[
+                            {schedule_value:0, schedule:'immediately', // start
+                                duration_value:3600 * 24 * 3, duration:'3 d', // end
+                                drug_list:{list:[
+                                    {drug_id:'nc', concentration_id:'0'},
+                                    {drug_id:'1', concentration_id:'0'},
+                                    {drug_id:'2', concentration_id:'5'},
+                                    {drug_id:'3', concentration_id:'10'}
+                                ]}}
+                        ]}
+                }
+            ],
+            collection_schedule_list:[
+                {id:'3 d', title:'3 days'}
+            ]
+        },
+
+        add_new_row_instructions:'On this page, set up your experiment to treat the wild-type worms with the four new drugs, Vulvarines 1-4, identified in your chemical screen. <ul><li>To get started, click <b>Add Treatment Protocol.</b></li><li>For each treatment protocol, select the <i>C. elegans</i> strain, treatment(s), and treatment dose.</li><li> For all of your treatments, treat the <i>C. elegans</i> immediately (time = 0 minutes) and collect after 3 days.</li><li>Once you finish setting up your experiment, select <b>Finish setup & run experiment.</b> After you run your experiment, you will be unable to change your treatment protocols.</li></ul>',
+
+        concentrations:{
+            '1':{
+                name:'1 ' + microEntity + 'M',
+                value:1000
+            },
+            '5':{
+                name:'5 ' + microEntity + 'M',
+                value:5000
+            },
+            '10':{
+                name:'10 ' + microEntity + 'M',
+                value:10000
+            },
+            '20':{
+                name:'20 ' + microEntity + 'M',
+                value:20000
+            },
+            '25':{
+                name:'25 ' + microEntity + 'M',
+                value:25000
+            },
+            '40':{
+                name:'40 ' + microEntity + 'M',
+                value:40000
+            },
+            '80':{
+                name:'80 ' + microEntity + 'M',
+                value:80000
+            },
+            '125':{
+                name:'125 ' + microEntity + 'M',
+                value:125000
+            },
+            '10n':{
+                name:'10 nM',
+                value:10
+            },
+            '50':{
+                name:'50 nM',
+                value:50
+            },
+            '100':{
+                name:'100 nM',
+                value:100
+            },
+            '200':{
+                name:'200 nM',
+                value:200
+            },
+            '400':{
+                name:'400 nM',
+                value:400
+            },
+            '0':{
+                name:'0 nM',
+                value:0
+            }
+        },
+        drugs:{
+            'nc':{
+                name:'Buffer only',
+                concentrations:[0]
+            },
+            '1':{
+                name:'Vulvarine 1',
+                concentrations:[5, 10, 20, 40, 80]
+            },
+            '2':{
+                name:'Vulvarine 2',
+                concentrations:[50, 100, 200, 400]
+            },
+            '3':{
+                name:'Vulvarine 3',
+                concentrations:[1, 5, 25, 125]
+            },
+            '4':{
+                name:'Vulvarine 4',
+                concentrations:['10n', 50, 100, 200, 400]
+            }
+        },
+        experiment_temperatures:{
+            '25':{
+                name:"25'C"
+            }
+        },
+        cell_lines:{
+            'wt':{
+                name:'Wild Type'
+            }
+        },
+        time_unit:{
+            kind:'minutes'
+        },
+        primary_anti_body:{
+            1:{
+                name:'rabbit anti-let-23',
+                secondary:[1],
+                marks:[
+                    {weight:24, intensity:.11},
+                    {weight:36, intensity:.4},
+                    {weight:48, intensity:.04}
+                ]
+            },
+            2:{
+                name:'mouse anti-let-60',
+                secondary:[3],
+                marks:[
+                    {weight:48, intensity:.04}
+                ]
+            },
+            3:{
+                name:'goat anti-lin15A',
+                secondary:[2],
+                marks:[
+                    {weight:12, intensity:.02}
+                ]
+            },
+            9:{
+                name:'goat anti-lin15B',
+                secondary:[2],
+                marks:[
+                    {weight:100, intensity:.01},
+                    {weight:129, intensity:.11}
+                ]
+            },
+            4:{
+                name:'goat anti-lin-1',
+                secondary:[2]
+            },
+            5:{
+                name:'mouse anti-Dpy-5',
+                secondary:[3]
+            },
+            6:{
+                name:'rabbit anti-Lon-2',
+                secondary:[1]
+            },
+            7:{
+                name:'mouse anti-Sma-4',
+                secondary:[3]
+            },
+            8:{
+                name:'goat anti-Unc-22',
+                secondary:[2]
+            }
+        },
+        secondary_anti_body:{
+            1:{
+                name:'donkey anti-rabbit'
+            },
+            2:{
+                name:'rabbit anti-goat'
+            },
+            3:{
+                name:'goat anti-mouse'
+            }
+        },
+        lysate_kinds:{
+            'whole':{
+                name:'Whole Cell'
+            },
+            'cyto':{
+                name:'Cytoplasm'
+            },
+            'nuclear':{
+                name:'Nuclear'
+            }
+        },
+        model:{// model
+            western_blot:{// this applies to western blot
+                'cyto':{// it acts on cytoplasm (thus on whole cell lysate as well)
+                    'parser_fixed':[
+                        {
+                            'cell_line':'wt',
+                            'transfer_function':'delta',
+                            'drug':1, // Vul 1
+                            'cutoff':10000,
+                            'above_marks':[
+                                {
+                                    name:'let-23',
+                                    weight:150,
+                                    intensity:-40,
+                                    primary_anti_body:[1]
+                                }
+                            ],
+                            'below_marks':[]
+                        },
+                        {
+                            'cell_line':'wt',
+                            'transfer_function':'delta',
+                            'drug':2, // Vul 2
+                            'cutoff':200,
+                            'above_marks':[
+                                {
+                                    name:'let-60',
+                                    weight:21,
+                                    intensity:-100,
+                                    primary_anti_body:[2]
+                                }
+                            ],
+                            'below_marks':[]
+                        },
+                        {
+                            'cell_line':'wt',
+                            'transfer_function':'delta',
+                            'drug':3, // Vul 3
+                            'cutoff':25000,
+                            'above_marks':[
+                                {
+                                    name:'let-15A',
+                                    weight:79,
+                                    intensity:-100,
+                                    primary_anti_body:[3]
+                                },
+                                {
+                                    name:'let-15B',
+                                    weight:163,
+                                    intensity:-100,
+                                    primary_anti_body:[9]
+
+                                }
+                            ],
+                            'below_marks':[]
+                        },
+                        {
+                            'cell_line':'wt',
+                            'transfer_function':'delta',
+                            'drug':4, // Vul 3
+                            'cutoff':400,
+                            'above_marks':[
+                                {
+                                    name:'let-1',
+                                    weight:48,
+                                    intensity:-100,
+                                    primary_anti_body:[4]
+                                }
+                            ],
+                            'below_marks':[]
+                        },
+                        {
+                            'cell_line':'wt',
+                            'transfer_function':'static',
+                            'marks':[
+                                {
+                                    name:'let-23',
+                                    weight:150,
+                                    intensity:40,
+                                    primary_anti_body:[1]
+                                },
+                                {
+                                    name:'let-60',
+                                    weight:21,
+                                    intensity:100,
+                                    primary_anti_body:[2]
+                                },
+                                {
+                                    name:'let-15A',
+                                    weight:79,
+                                    intensity:100,
+                                    primary_anti_body:[3]
+                                },
+                                {
+                                    name:'let-15B',
+                                    weight:163,
+                                    intensity:100,
+                                    primary_anti_body:[9]
+                                },
+                                {
+                                    name:'let-1',
+                                    weight:48,
+                                    intensity:100,
+                                    primary_anti_body:[4]
+                                },
+                                {
+                                    name:'Dpy-5',
+                                    weight:20,
+                                    intensity:60,
+                                    primary_anti_body:[5]
+                                },
+                                {
+                                    name:'Lan-2',
+                                    weight:100,
+                                    intensity:40,
+                                    primary_anti_body:[6]
+                                },
+                                {
+                                    name:'Sma-4',
+                                    weight:75,
+                                    intensity:25,
+                                    primary_anti_body:[7]
+                                },
+                                {
+                                    name:'Unc-22',
+                                    weight:40,
+                                    intensity:10,
+                                    primary_anti_body:[8]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
+
+
+
 master_model_data = {
     app_title:'StarCellBio',
     app_description:'StarCellBio Placeholder',
     //'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.',
     assignments:{
-        list:[__assigment_tufts, __assigment_facs, __assignment2, __basic_tests
+        list:[/*__assigment_tufts, __assigment_facs, __assignment2,*/ __basic_tests,__usability_test
         ]
     },
     ui:{}

@@ -137,9 +137,9 @@ class SimpleTest(TestCase):
         wb_sample1 = { 'primary_antibody':'1' , 'secondary_antibody':'2' }
         self.select_wb_antibody(wb_sample1)
         self.navigate_via('Blot')
+        pudb.set_trace()
         self.navigate_via('Re-probe')
         self.navigate_via('Gel 1')
-        pudb.set_trace()
         self.navigate_via('Gel 2')
         #self.navigate_via('Select technique')
 

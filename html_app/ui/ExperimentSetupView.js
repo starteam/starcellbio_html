@@ -53,7 +53,7 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples
                 });
             });
         });
-        console.info( "DETACH HERE!")
+        console.info("DETACH HERE!")
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_apply(this);
 
     });
@@ -130,6 +130,9 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
 scb.ui.static.ExperimentSetupView.headings = function (table_map) {
     var headings = [];
     _.each(table_map, function (part) {
+        if (part.kind == 'cell_plate') {
+            headings.push(part);
+        }
         if (part.kind == 'cell_line') {
             headings.push(part);
         }
@@ -169,48 +172,63 @@ scb.ui.static.ExperimentSetupView.rows = function (cell_treatment_list, headings
                         row.push({
                             kind:'cell_line',
                             title:template.cell_lines[sample.cell_line].name,
-                            rows:total_height
+                            rows:total_height,
+                            first_row:drug_index == 0 && treatment_index == 0
                         });
                     }
                     else if (part.kind == 'drug') {
                         row.push({
                             kind:'drug',
                             title:drug.drug_name,
-                            rows:1
+                            rows:1,
+                            first_row:drug_index == 0 && treatment_index == 0
                         });
                     }
                     else if (part.kind == 'concentration') {
                         row.push({
                             kind:'concentration',
                             title:drug.drug_concentration,
-                            rows:1
+                            rows:1,
+                            first_row:drug_index == 0 && treatment_index == 0
                         });
                     }
                     else if (drug_index == 0 && part.kind == 'start') {
                         row.push({
                             kind:'start',
                             title:treatment.schedule,
-                            rows:drug_list.length
+                            rows:drug_list.length,
+                            first_row:drug_index == 0 && treatment_index == 0
                         });
                     }
                     else if (drug_index == 0 && part.kind == 'duration') {
                         row.push({
                             kind:'duration',
                             title:treatment.duration,
-                            rows:drug_list.length
+                            rows:drug_list.length,
+                            first_row:drug_index == 0 && treatment_index == 0
                         })
                     }
                     else if (drug_index == 0 && treatment_index == 0 && part.kind == 'custom') {
                         row.push({
                             kind:part.kind,
                             title:sample[part.key],
-                            rows:total_height
+                            rows:total_height,
+                            first_row:drug_index == 0 && treatment_index == 0
+                        })
+                    }
+                    else if (drug_index == 0 && treatment_index == 0 && part.kind == 'cell_plate') {
+                        row.push({
+                            kind:part.kind,
+                            title:'',
+                            rows:total_height,
+                            first_row:drug_index == 0 && treatment_index == 0
                         })
                     }
                     else if (drug_index == 0 && treatment_index == 0 && part.kind == 'actions') {
                         row.push({
                             kind:part.kind,
-                            rows:total_height
+                            rows:total_height,
+                            first_row:drug_index == 0 && treatment_index == 0
                         });
                     }
                 });
@@ -224,6 +242,98 @@ scb.ui.static.ExperimentSetupView.rows = function (cell_treatment_list, headings
     return rows;
 }
 
+scb.ui.static.ExperimentSetupView.new_row = function (workarea, state, gstate) {
+    var template = gstate.context.template;
+    $('.scb_s_experiment_setup_new_row').each(function (index) {
+        var element = this;
+        var kind = $(element).attr('kind');
+        if (kind == 'cell_line') {
+            if (_.keys(template.cell_lines).length > 1) {
+                // this is editable
+            }
+            else {
+                state.experiment.new_row.cell_line = _.keys(template.cell_lines)[0];
+            }
+        }
+        if (kind == 'drug') {
+            if (_.keys(template.drugs).length > 1) {
+                $(element).html(scb_experiment_setup.drug_edit({
+                    global_template:gstate.context.master_model,
+                    template:template,
+                    assignment:state.assignment,
+                    experiment:state.experiment,
+                    drug_id:state.experiment.new_row.drug_id
+                }));
+                scb.utils.off_on(element,"change","select",function (e) {
+                    console.info($(this).val());
+                    state.experiment.new_row.drug_id = $(this).val();
+                    scb.ui.static.MainFrame.refresh();
+                });
+            }
+            else {
+                state.experiment.new_row.drug_id = _.keys(template.drugs)[0];
+            }
+        }
+        if (kind == 'concentration') {
+            if (_.keys(template.concentrations).length > 1) {
+                var drug_id = state.experiment.new_row.drug_id;
+                if (drug_id && template.drugs[drug_id].concentrations) {
+                    $(element).html(scb_experiment_setup.concentration_edit({
+                        global_template:gstate.context.master_model,
+                        template:template,
+                        assignment:state.assignment,
+                        experiment:state.experiment,
+                        drug_id:state.experiment.new_row.drug_id,
+                        concentrations:template.drugs[drug_id].concentrations,
+                        concentration_id:state.experiment.new_row.concentration_id
+                    }));
+                    scb.utils.off_on(element,"change","select",function (e) {
+                        console.info($(this).val());
+                        state.experiment.new_row.concentration_id = $(this).val();
+                        scb.ui.static.MainFrame.refresh();
+                    });
+                }
+                else {
+                    $(element).html("Select drug first");
+                }
+            } else {
+                state.experiment.new_row.concentration_id = _.keys(template.concentrations)[0];
+            }
+        }
+        if (kind == 'actions') {
+            var cell_line_id = state.experiment.new_row.cell_line;
+            var drug_id = state.experiment.new_row.drug_id;
+            var concentration_id = state.experiment.new_row.concentration_id;
+            if (drug_id && concentration_id) {
+                var valid = _.find(template.drugs[drug_id].concentrations, function (a) {
+                    return a == concentration_id
+                });
+                if (!_.isUndefined(valid)) {
+                    $('button', element).removeAttr('disabled');
+                    $('button', element).click(function () {
+                        var cell_treatment_list = state.experiment.cell_treatment_list;
+                        cell_treatment_list.start({
+                            title:'New row',
+                            cell_line: cell_line_id,
+                            treatment_list:{list:[
+                                {schedule_value:0, duration_value:0, drug_list:{list:[
+                                    {drug_id:drug_id, concentration_id:concentration_id}
+                                ]}
+                                }
+                            ]},
+                            collection_schedule_list:{list:[
+                                {schedule:"18h", schedule_value:18 * 3600, id:'3'}
+                            ]}
+                        });
+                        scb.ui.static.MainFrame.refresh();
+                    });
+                }
+            }
+        }
+
+    });
+}
+
 scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
     var self = this;
 
@@ -234,8 +344,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         var headings = scb.ui.static.ExperimentSetupView.headings(template.ui.experiment_setup.table);
         var rows = scb.ui.static.ExperimentSetupView.rows(experiment.cell_treatment_list.list, headings, template);
 
-        if( experiment.setup_finished )
-        {
+        if (experiment.setup_finished) {
             state.mode = 'readonly';
             state.last_view = 'experiment_run';
         }
@@ -256,5 +365,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         else {
             $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen:false})
         }
+
+        scb.ui.static.ExperimentSetupView.new_row(workarea, state, gstate);
     }
 }
