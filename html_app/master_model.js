@@ -887,7 +887,7 @@ var __assigment_facs = {
 
 var __basic_tests = {
     id:'basic_tests',
-    name:'StarCellBio Basic Tests',
+    name:'SCB Basic Tests',
     description:'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
     experiments:{},
     template:{

@@ -28,12 +28,29 @@
 }
 .scb_s_assignment_step_experiment {
   position: absolute;
-  top: 65px;
-  left: 275px;
+  top: 60px;
+  left: 280px;
   color: #69a996;
+  font-size: 2em;
 }
 .scb_s_assignment_step {
-  background-color: #69a996;
+  background: #69a996;
   color: white;
   width: 960px;
+  height: 25px;
+}
+.scb_s_assignment_step_link {
+  background-image: url('../images/header/scb_navigation_button.png');
+  width: 140px;
+  height: 15px;
+  padding: 5px;
+  margin-left: -8px;
+  text-align: center;
+  font-size: 1.5em;
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

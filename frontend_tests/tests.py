@@ -47,14 +47,14 @@ class SimpleTest(TestCase):
     def test_assignment_navigation_tests(self):
         self.load_website()
         self.assert_on_assignments_page()
-        self.select_assignment('basic_tests', title='StarCellBio Basic Tests',
+        self.select_assignment('basic_tests', title='SCB Basic Tests',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.open_assignment('basic_tests', title='StarCellBio Basic Tests',
+        self.open_assignment('basic_tests', title='SCB Basic Tests',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.assert_on_assignment_page()
         self.navigate_via('Assignments')
         self.assert_on_assignments_page()
-        self.open_assignment('basic_tests', title='StarCellBio Basic Tests',
+        self.open_assignment('basic_tests', title='SCB Basic Tests',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.assert_on_assignment_page()
         self.assert_experiments([])
