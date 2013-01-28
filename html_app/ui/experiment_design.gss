@@ -31,3 +31,7 @@
     bottom: 5px;
     right: 5px
 }
+
+.scb_s_experiment_design_objective,.scb_s_experiment_design_hypothesis {
+    width:864px;
+}

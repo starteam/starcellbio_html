@@ -266,9 +266,11 @@
     width: 200px;
     display: inline-block;
     font-family: 'sourcesanspro-regular';
-    vertical-align: 50%;
-    font-size:.95em;
+    vertical-align: top;
+    height:180px;
+    font-size:1.4em;
     padding-left:10px;
+    padding-top:40px;
 }
 
 .scb_s_homepage_experimental_design_bullet_item {
@@ -311,6 +313,7 @@
     height:200px;
     vertical-align: top;
     margin-left:25px;
+    position:relative;
 }
 
 .scb_s_homepage_technique_title {
@@ -369,6 +372,8 @@
     font-family: 'sourcesanspro-semibold';
     color: white;
     font-size: .9em;
+    position:absolute;
+    bottom:20px;
 }
 
 .scb_s_homepage_technique_more {
