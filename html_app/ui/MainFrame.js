@@ -47,6 +47,17 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                                 }
                             }
                         }
+                        if (state.cell_treatment_id) {
+                            var cell_treatment = experiment.cell_treatment_list.get(state.cell_treatment_id);
+                            if (cell_treatment) {
+                                ret.cell_treatment = cell_treatment;
+                                if (state.treatment_id) {
+                                    var treatment = cell_treatment.treatment_list.get(state.treatment_id);
+                                    ret.treatment = treatment;
+                                }
+                            }
+                        }
+
                     }
                     else {
                         // if experiment_id is invalid go to assignment

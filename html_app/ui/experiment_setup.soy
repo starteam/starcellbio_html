@@ -72,7 +72,7 @@ Experiment active area
         </thead>
         <tbody class='scb_s_experiment_setup_table_body'>
         {foreach $r in $rows}
-        <tr class='scb_s_experiment_setup_table_row' cell_treatment='{$r.id}'>
+        <tr class='scb_s_experiment_setup_table_row' cell_treatment_id='{$r.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' treatment_id='{$r.treatment.id}'>
             {foreach $c in $r.columns}
             <td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if}' kind='{$c.kind}' rowspan="{$c.rows}">
                 {if $c.kind == 'actions'}
@@ -92,14 +92,14 @@ Experiment active area
         </tr>
         {/foreach}
         {if $kind == 'readwrite'}
-        <tr>
+        <tr class='scb_s_experiment_setup_new_row' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
             {foreach $c in $headings}
-            <td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_new_row' kind='{$c.kind}' rowspan="1">
+            <td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_td' kind='{$c.kind}' rowspan="1">
                 {if $c.kind == 'actions'}
-                    {if $kind == 'readwrite'}
+                    {if $kind == 'readwrite'} <!--
                     <button class='scb_f_experiment_setup_save_sample' cell_treatment_id=''
                             assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' disabled="disabled">S
-                    </button>
+                    </button> -->
                     {/if}
                 {else}
                 {if $c.kind=='cell_plate'}
@@ -110,11 +110,13 @@ Experiment active area
             </td>
             {/foreach}
         </tr>
+            {if $t.ui.experiment_setup.actions.length > 0}
         <tr>
             <td colspan="{$headings.length+1}">
                 <button class='scb_f_experiment_setup_action_open_add_samples_dialog'>Add multiple rows</button>
             </td>
         </tr>
+            {/if}
         {/if}
         </tbody>
     </table>

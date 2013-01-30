@@ -1,3 +1,6 @@
+body {
+  background-color: #e9edf1;
+}
 .scb_s_navigation_button {
   background-image: url('../images/homepage/instructor_resources_button.png');
   padding: 6px 25px 6px 24px;

@@ -138,10 +138,9 @@
 .scb_s_homepage_top_left {
     vertical-align: top;
     display: inline-block;
-    background-image: url('../images/homepage/cells.png');
-    height: 322px;
-    width: 288px;
-    margin-right: -5px;
+    background-image: url('../images/homepage/SCB_Homepage_HeroImage.png');
+    height: 318px;
+    width: 687px;
 }
 
 .scb_s_homepage_top_left_image {
@@ -149,10 +148,9 @@
 }
 
 .scb_s_homepage_see_more_button {
-    background-image: url('../images/homepage/more_button.png');
-    padding: 6px 25px 6px 24px;
-    margin-left: 12px;
-    background-position: center;
+    left: 80px;
+    top:280px;
+    position: relative;
 }
 
 .scb_s_homepage_top_right {
@@ -162,27 +160,28 @@
     border-color: black;
     border-width: 1px;
     height: 316px;
-    width: 232px;
+    width: 245px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #a0a0a0;
-    margin-top: 3px;
+    margin-top:1px;
     margin-left: 10px;
     margin-right: -10px;
 }
 
 .scb_s_homepage_video_player {
     display: block;
-    margin-bottom: 4px;
-    width: 228px;
+    width: 240px;
     margin-left: 2px;
     margin-top: 4px;
+    margin-bottom:18px;
 }
 
 .scb_s_homepage_blue_actions {
-    font-family: 'SourceSansPro-Semibold';
+    font-family: 'SourceSansPro-Bold';
     color: #008DDD;
     margin-left: 10px;
     margin-bottom: -10px;
+    font-size: 14pt;
 }
 
 .scb_s_homepage_blue_line {
@@ -193,23 +192,26 @@
 .scb_s_instructor_resources {
     background: transparent;
     border-width: 0px;
-    background-image: url('../images/homepage/instructor_resources_button.png');
+    background-image: url('../images/homepage/SCB_Homepage_InstructorResourcesBTN.png');
     background-size: 210px 33px;
     background-position: center;
     height: 33px;
     width: 210px;
     margin-left: 8px;
-    font-family: 'sourcesanspro-semibold';
+    font-family: 'sourcesanspro-bold';
     color: white;
-    font-size: 12px;
+    font-size: 14pt;
+    margin-top:13px;
 }
 
 .scb_s_homepage_bottom {
     display: block;
     height: 207px;
-    width: 960px;
     margin-top: 15px;
-    @mixin gradient(top,#ffffff,#e6e6e6,#f0f0f0);
+    border-radius:5px;
+    margin-left: 3px;
+    width: 945px;
+    background-image: url('../images/homepage/SCB_Homepage_LowerBG.png');
 }
 
 .scb_s_homepage_experimental_design {
@@ -221,8 +223,9 @@
 
 .scb_s_homepage_experimental_design_text {
     display: inline-block;
-    margin-left: 5px;
-    margin-top: 10px;
+    margin-left: 10px;
+    margin-top: 13px;
+    margin-right:10px;
 }
 
 .scb_s_homepage_experimental_design_bar {
@@ -242,14 +245,15 @@
     display: block;
     vertical-align: top;
     font-family: 'sourcesanspro-regular';
-    font-size:.75em;
+    font-size:12pt;
+    color:black;
     margin-left:10px;
     margin-top: 10px;
 
 }
 
 .scb_s_homepage_experimental_design_list_items {
-    width: 140px;
+    width: 170px;
     display: inline-block;
     vertical-align: top;
 }
@@ -267,24 +271,24 @@
     display: inline-block;
     font-family: 'sourcesanspro-regular';
     vertical-align: top;
-    height:180px;
-    font-size:1.4em;
+    height:124px;
+    font-size:14pt;
     padding-left:10px;
-    padding-top:40px;
+    position: relative;
+    top:46px;
 }
 
 .scb_s_homepage_experimental_design_bullet_item {
     display:block;
     font-family: 'sourcesanspro-bold';
-    font-size:.75em;
+    font-size:12pt;
     vertical-align: top;
     margin-left:10px;
-    padding-top:4px;
-    padding-bottom:4px;
+    padding-bottom:3px;
 }
 .scb_s_homepage_experimental_design_bullet {
     display: inline-block;
-    color: #5e9c90;
+    color: #189689;
 }
 
 .scb_s_homepage_experimental_design_item {
@@ -306,6 +310,8 @@
     font-family: 'sourcesanspro-semibold';
     color: white;
     font-size: .9em;
+    position: absolute;
+    bottom:0px;
 }
 
 .scb_s_homepage_technique {
@@ -318,41 +324,46 @@
 
 .scb_s_homepage_technique_title {
     display:block;
-    margin-top:20px;
+    margin-top:26px;
+    font-family: 'sourcesanspro-bold';
+    font-size:14pt;
+
 }
 
 .scb_s_homepage_technique_title_image {
     display: block;
     margin-top:10px;
     margin-bottom:5px;
+    font-family: 'sourcesanspro-bold';
+    font-size:12pt;
 }
 
 .scb_s_homepage_technique_wb {
     display:inline-block;
-    font-family: 'sourcesanspro-light';
-    font-size:.75em;
+    font-family: 'sourcesanspro-regular';
+    font-size:12pt;
     width:130px;
     vertical-align: top;
 }
 
 .scb_s_homepage_technique_flow {
     display:inline-block;
-    font-family: 'sourcesanspro-light';
-    font-size:.75em;
+    font-family: 'sourcesanspro-regular';
+    font-size:12pt;
     width:130px;
     vertical-align: top;
 }
 
 .scb_s_homepage_technique_micro {
     display:inline-block;
-    font-family: 'sourcesanspro-light';
-    font-size:.75em;
+    font-family: 'sourcesanspro-regular';
+    font-size:12pt;
     width:150px;
     vertical-align: top;
 }
 
 .scb_s_homepage_technique_bar {
-    height:160px;
+    height:112px;
     padding-left:10px;
     padding-right: 14px;
  }
@@ -369,11 +380,11 @@
     width: 110px;
     margin-top:20px;
     margin-left: 0px;
-    font-family: 'sourcesanspro-semibold';
-    color: white;
-    font-size: .9em;
+    font-family: 'sourcesanspro-bold';
+    font-size: 14pt;
     position:absolute;
-    bottom:20px;
+    color:white;
+    top:115px;
 }
 
 .scb_s_homepage_technique_more {
@@ -391,8 +402,8 @@
 }
 
 .scb_s_homepage_footer_divider {
-    padding-left:3px;
-    padding-right:3px;
+    padding-left:7px;
+    padding-right:7px;
     vertical-align: top;
     margin-top:17px;
 }

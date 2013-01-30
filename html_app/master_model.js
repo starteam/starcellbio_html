@@ -1356,8 +1356,21 @@ var __usability_test = {
                     title:"Actions"
                 }
             ], actions:[
-                {kind:"add_protocol", title:"Add Treatment Protocol"}
-            ]}
+                //{kind:"add_protocol", title:"Add Treatment Protocol"}
+            ], new_row:{
+                title:'New row',
+                cell_line: 'wt',
+                treatment_list:{list:[
+                {schedule_value:0, duration_value:0, drug_list:{list:[
+                    {drug_id:'nc', concentration_id:'0'}
+                    ]}
+                }
+                ]},
+                collection_schedule_list:{list:[
+                    {schedule:"18h", schedule_value:18 * 3600, id:'3'}
+                ]}
+            }
+            }
         },
 
         experiment_setup_actions:{

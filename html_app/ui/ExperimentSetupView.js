@@ -4,6 +4,25 @@ scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.ExperimentSetupView = scb.ui.static.ExperimentSetupView || {};
 
+scb.ui.static.ExperimentSetupView.parse = function (element) {
+    var experiment_id = $(element).attr('experiment_id');
+    var assignment_id = $(element).attr('assignment_id');
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
+    var treatment_id = $(element).attr('treatment_id');
+
+
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        cell_treatment_id:cell_treatment_id,
+        treatment_id:treatment_id,
+        view:'experiment_setup',
+        skip_hash_update:true
+    };
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+
+    return parsed;
+}
 scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog = function (element) {
     var dialog_selector = $('.scb_s_experiment_setup_table_add_samples_dialog');
     dialog_selector.dialog("open");
@@ -80,6 +99,7 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample = functio
     var state = {
         experiment_id:experiment_id,
         assignment_id:assignment_id,
+        cell_treatment_id:cell_treatment_id,
         view:'experiment_setup',
         skip_hash_update:true
     };
@@ -124,7 +144,39 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_open_select_technique', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_new_row', function (e) {
+        scb.ui.static.ExperimentSetupView.new_row_edit(this);
+    });
+    scb.utils.off_on($(document), 'mouseup', 'body', function (e) {
+        if (true) {
+            var container = $(".scb_s_experiment_setup_new_row", $(document));
 
+            if (container.has(e.target).length === 0) {
+                if (container.attr('data-is_editing') == "true") {
+                    container.removeAttr('data-is_editing');
+                    console.info("-- click outside --");
+                    scb.ui.static.ExperimentSetupView.save_new_row(container);
+                    scb.ui.static.MainFrame.refresh();
+                }
+            }
+        }
+        if (true) {
+            var container = $(".scb_s_experiment_setup_table_row", $(document));
+
+            if (container.has(e.target).length === 0) {
+                if (container.attr('data-is_editing') == "true") {
+                    container.removeAttr('data-is_editing');
+                    console.info("-- click outside -- edit row -- ");
+                    //  scb.ui.static.ExperimentSetupView.save_new_row(container);
+                    //  scb.ui.static.MainFrame.refresh();
+                }
+            }
+        }
+    });
+
+    scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_table_row', function (e) {
+        scb.ui.static.ExperimentSetupView.row_edit(this);
+    });
 }
 
 scb.ui.static.ExperimentSetupView.headings = function (table_map) {
@@ -154,97 +206,250 @@ scb.ui.static.ExperimentSetupView.headings = function (table_map) {
     return headings;
 }
 
+scb.ui.static.ExperimentSetupView.row = function (sample, headings, template, rows) {
+
+    var treatment_list = sample.treatment_list.list;
+    var size = treatment_list.length;
+    var total_height = 0;
+    _.each(treatment_list, function (treatment) {
+        total_height += treatment.drug_list.length;
+    });
+    _.each(treatment_list, function (treatment, treatment_index) {
+        var drug_list = treatment.drug_list.list;
+        _.each(drug_list, function (drug, drug_index) {
+            var row = [];
+            _.each(headings, function (part) {
+                if (drug_index == 0 && treatment_index == 0 && part.kind == 'cell_line') {
+                    row.push({
+                        kind:'cell_line',
+                        title:template.cell_lines[sample.cell_line].name,
+                        rows:total_height,
+                        first_row:drug_index == 0 && treatment_index == 0,
+                        treatment:treatment.id
+                    });
+                }
+                else if (part.kind == 'drug') {
+                    row.push({
+                        kind:'drug',
+                        title:drug.drug_name,
+                        rows:1,
+                        first_row:drug_index == 0 && treatment_index == 0,
+                        treatment:treatment.id
+                    });
+                }
+                else if (part.kind == 'concentration') {
+                    row.push({
+                        kind:'concentration',
+                        title:drug.drug_concentration,
+                        rows:1,
+                        first_row:drug_index == 0 && treatment_index == 0,
+                        treatment:treatment.id
+                    });
+                }
+                else if (drug_index == 0 && part.kind == 'start') {
+                    row.push({
+                        kind:'start',
+                        title:treatment.schedule,
+                        rows:drug_list.length,
+                        first_row:drug_index == 0 && treatment_index == 0,
+                        treatment:treatment.id
+                    });
+                }
+                else if (drug_index == 0 && part.kind == 'duration') {
+                    row.push({
+                        kind:'duration',
+                        title:treatment.duration,
+                        rows:drug_list.length,
+                        first_row:drug_index == 0 && treatment_index == 0,
+                        treatment:treatment.id
+                    })
+                }
+                else if (drug_index == 0 && treatment_index == 0 && part.kind == 'custom') {
+                    row.push({
+                        kind:part.kind,
+                        title:sample[part.key],
+                        rows:total_height,
+                        first_row:drug_index == 0 && treatment_index == 0,
+                        treatment:treatment.id
+                    })
+                }
+                else if (drug_index == 0 && treatment_index == 0 && part.kind == 'cell_plate') {
+                    row.push({
+                        kind:part.kind,
+                        title:'',
+                        rows:total_height,
+                        first_row:drug_index == 0 && treatment_index == 0,
+                        treatment:treatment.id
+                    })
+                }
+                else if (drug_index == 0 && treatment_index == 0 && part.kind == 'actions') {
+                    row.push({
+                        kind:part.kind,
+                        rows:total_height,
+                        first_row:drug_index == 0 && treatment_index == 0,
+                        treatment:treatment.id
+                    });
+                }
+            });
+            rows.push({
+                id:sample.id,
+                columns:row,
+                treatment:treatment
+            });
+        });
+    });
+}
+
 scb.ui.static.ExperimentSetupView.rows = function (cell_treatment_list, headings, template) {
     var rows = [];
     _.each(cell_treatment_list, function (sample) {
-        var treatment_list = sample.treatment_list.list;
-        var size = treatment_list.length;
-        var total_height = 0;
-        _.each(treatment_list, function (treatment) {
-            total_height += treatment.drug_list.length;
-        });
-        _.each(treatment_list, function (treatment, treatment_index) {
-            var drug_list = treatment.drug_list.list;
-            _.each(drug_list, function (drug, drug_index) {
-                var row = [];
-                _.each(headings, function (part) {
-                    if (drug_index == 0 && treatment_index == 0 && part.kind == 'cell_line') {
-                        row.push({
-                            kind:'cell_line',
-                            title:template.cell_lines[sample.cell_line].name,
-                            rows:total_height,
-                            first_row:drug_index == 0 && treatment_index == 0
-                        });
-                    }
-                    else if (part.kind == 'drug') {
-                        row.push({
-                            kind:'drug',
-                            title:drug.drug_name,
-                            rows:1,
-                            first_row:drug_index == 0 && treatment_index == 0
-                        });
-                    }
-                    else if (part.kind == 'concentration') {
-                        row.push({
-                            kind:'concentration',
-                            title:drug.drug_concentration,
-                            rows:1,
-                            first_row:drug_index == 0 && treatment_index == 0
-                        });
-                    }
-                    else if (drug_index == 0 && part.kind == 'start') {
-                        row.push({
-                            kind:'start',
-                            title:treatment.schedule,
-                            rows:drug_list.length,
-                            first_row:drug_index == 0 && treatment_index == 0
-                        });
-                    }
-                    else if (drug_index == 0 && part.kind == 'duration') {
-                        row.push({
-                            kind:'duration',
-                            title:treatment.duration,
-                            rows:drug_list.length,
-                            first_row:drug_index == 0 && treatment_index == 0
-                        })
-                    }
-                    else if (drug_index == 0 && treatment_index == 0 && part.kind == 'custom') {
-                        row.push({
-                            kind:part.kind,
-                            title:sample[part.key],
-                            rows:total_height,
-                            first_row:drug_index == 0 && treatment_index == 0
-                        })
-                    }
-                    else if (drug_index == 0 && treatment_index == 0 && part.kind == 'cell_plate') {
-                        row.push({
-                            kind:part.kind,
-                            title:'',
-                            rows:total_height,
-                            first_row:drug_index == 0 && treatment_index == 0
-                        })
-                    }
-                    else if (drug_index == 0 && treatment_index == 0 && part.kind == 'actions') {
-                        row.push({
-                            kind:part.kind,
-                            rows:total_height,
-                            first_row:drug_index == 0 && treatment_index == 0
-                        });
-                    }
-                });
-                rows.push({
-                    id:sample.id,
-                    columns:row
-                });
-            });
-        });
+        scb.ui.static.ExperimentSetupView.row(sample, headings, template, rows);
     });
     return rows;
 }
 
-scb.ui.static.ExperimentSetupView.new_row = function (workarea, state, gstate) {
-    var template = gstate.context.template;
-    $('.scb_s_experiment_setup_new_row').each(function (index) {
+
+scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
+    var experiment_id = $(element).attr('experiment_id');
+    var assignment_id = $(element).attr('assignment_id');
+
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        view:'experiment_setup',
+        skip_hash_update:true
+    };
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+
+    $(element).attr('data-is_editing', false);
+
+    var template = parsed.context.template;
+    var cell_line_id = parsed.experiment.new_row.cell_line;
+    var drug_id = parsed.experiment.new_row.drug_id;
+    var concentration_id = parsed.experiment.new_row.concentration_id;
+    if (drug_id && concentration_id) {
+        var valid = _.find(template.drugs[drug_id].concentrations, function (a) {
+            return a == concentration_id
+        });
+        if (!_.isUndefined(valid)) {
+            var cell_treatment_list = parsed.experiment.cell_treatment_list;
+            cell_treatment_list.start({
+                title:'New row',
+                cell_line:cell_line_id,
+                treatment_list:{list:[
+                    {schedule_value:0, duration_value:0, drug_list:{list:[
+                        {drug_id:drug_id, concentration_id:concentration_id}
+                    ]}
+                    }
+                ]},
+                collection_schedule_list:{list:[
+                    {schedule:"18h", schedule_value:18 * 3600, id:'3'}
+                ]}
+            });
+            parsed.experiment.new_row = {};
+            scb.ui.static.MainFrame.refresh();
+        }
+    }
+}
+
+scb.ui.static.ExperimentSetupView.row_edit = function (element) {
+    var row_element = element;
+
+    var parsed = scb.ui.static.ExperimentSetupView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    $(element).attr('data-is_editing', true);
+
+    var cell_line = parsed.cell_treatment.cell_line;
+    var treatment_line = parsed.treatment.drug_list.list[0];
+    var drug_id = treatment_line.drug_id;
+    var concentration_id = treatment_line.concentration_id;
+
+    //TODO: RETHINK THIS - IT NEEDS TO GO TO TEMPORARY STATE AND ONLY CHANGE IFF STATE IS VALID
+    $('.scb_s_experiment_setup_table_element', element).each(function (index) {
+        var element = this;
+        var kind = $(element).attr('kind');
+        if (kind == 'cell_line') {
+            if (_.keys(template.cell_lines).length > 1) {
+                // this is editable
+            }
+        }
+        if (kind == 'drug') {
+            if (_.keys(template.drugs).length > 1) {
+                $(element).html(scb_experiment_setup.drug_edit({
+                    global_template:parsed.context.master_model,
+                    template:template,
+                    assignment:parsed.assignment,
+                    experiment:parsed.experiment,
+                    drug_id:parsed.experiment.new_row.drug_id
+                }));
+                scb.utils.off_on(element, "change", "select", function (e) {
+                    console.info($(this).val());
+                    parsed.experiment.new_row.drug_id = $(this).val();
+                    scb.ui.static.ExperimentSetupView.new_row_edit(row_element);
+                });
+            }
+            else {
+                parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].drug_id || _.keys(template.drugs)[0];
+            }
+        }
+        if (kind == 'concentration') {
+            if (_.keys(template.concentrations).length > 1) {
+                var drug_id = parsed.experiment.new_row.drug_id;
+                if (drug_id && template.drugs[drug_id].concentrations) {
+                    $(element).html(scb_experiment_setup.concentration_edit({
+                        global_template:parsed.context.master_model,
+                        template:template,
+                        assignment:parsed.assignment,
+                        experiment:parsed.experiment,
+                        drug_id:parsed.experiment.new_row.drug_id,
+                        concentrations:template.drugs[drug_id].concentrations,
+                        concentration_id:parsed.experiment.new_row.concentration_id
+                    }));
+                    scb.utils.off_on(element, "change", "select", function (e) {
+                        console.info($(this).val());
+                        parsed.experiment.new_row.concentration_id = $(this).val();
+                        scb.ui.static.ExperimentSetupView.new_row_edit(row_element);
+                    });
+                }
+                else {
+                    $(element).html("Select drug first");
+                }
+            } else {
+                parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
+            }
+        }
+
+    });
+
+
+}
+
+scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
+    var row_element = element;
+
+    var experiment_id = $(element).attr('experiment_id');
+    var assignment_id = $(element).attr('assignment_id');
+
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        view:'experiment_setup',
+        skip_hash_update:true
+    };
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+
+    $(element).attr('data-is_editing', true);
+
+    var template = parsed.context.template;
+
+    if (_.keys(parsed.experiment.new_row).length == 0) {
+        parsed.experiment.new_row.cell_line = template.ui.experiment_setup.new_row.cell_line || _.keys(template.cell_lines)[0];
+        parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].drug_id || _.keys(template.drugs)[0];
+        parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
+    }
+    $('.scb_s_experiment_setup_td', element).each(function (index) {
         var element = this;
         var kind = $(element).attr('kind');
         if (kind == 'cell_line') {
@@ -252,58 +457,59 @@ scb.ui.static.ExperimentSetupView.new_row = function (workarea, state, gstate) {
                 // this is editable
             }
             else {
-                state.experiment.new_row.cell_line = _.keys(template.cell_lines)[0];
+                parsed.experiment.new_row.cell_line = template.ui.experiment_setup.new_row.cell_line || _.keys(template.cell_lines)[0];
+                $(element).html(template.cell_lines[parsed.experiment.new_row.cell_line].name);
             }
         }
         if (kind == 'drug') {
             if (_.keys(template.drugs).length > 1) {
                 $(element).html(scb_experiment_setup.drug_edit({
-                    global_template:gstate.context.master_model,
+                    global_template:parsed.context.master_model,
                     template:template,
-                    assignment:state.assignment,
-                    experiment:state.experiment,
-                    drug_id:state.experiment.new_row.drug_id
+                    assignment:parsed.assignment,
+                    experiment:parsed.experiment,
+                    drug_id:parsed.experiment.new_row.drug_id
                 }));
-                scb.utils.off_on(element,"change","select",function (e) {
+                scb.utils.off_on(element, "change", "select", function (e) {
                     console.info($(this).val());
-                    state.experiment.new_row.drug_id = $(this).val();
-                    scb.ui.static.MainFrame.refresh();
+                    parsed.experiment.new_row.drug_id = $(this).val();
+                    scb.ui.static.ExperimentSetupView.new_row_edit(row_element);
                 });
             }
             else {
-                state.experiment.new_row.drug_id = _.keys(template.drugs)[0];
+                parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].drug_id || _.keys(template.drugs)[0];
             }
         }
         if (kind == 'concentration') {
             if (_.keys(template.concentrations).length > 1) {
-                var drug_id = state.experiment.new_row.drug_id;
+                var drug_id = parsed.experiment.new_row.drug_id;
                 if (drug_id && template.drugs[drug_id].concentrations) {
                     $(element).html(scb_experiment_setup.concentration_edit({
-                        global_template:gstate.context.master_model,
+                        global_template:parsed.context.master_model,
                         template:template,
-                        assignment:state.assignment,
-                        experiment:state.experiment,
-                        drug_id:state.experiment.new_row.drug_id,
+                        assignment:parsed.assignment,
+                        experiment:parsed.experiment,
+                        drug_id:parsed.experiment.new_row.drug_id,
                         concentrations:template.drugs[drug_id].concentrations,
-                        concentration_id:state.experiment.new_row.concentration_id
+                        concentration_id:parsed.experiment.new_row.concentration_id
                     }));
-                    scb.utils.off_on(element,"change","select",function (e) {
+                    scb.utils.off_on(element, "change", "select", function (e) {
                         console.info($(this).val());
-                        state.experiment.new_row.concentration_id = $(this).val();
-                        scb.ui.static.MainFrame.refresh();
+                        parsed.experiment.new_row.concentration_id = $(this).val();
+                        scb.ui.static.ExperimentSetupView.new_row_edit(row_element);
                     });
                 }
                 else {
                     $(element).html("Select drug first");
                 }
             } else {
-                state.experiment.new_row.concentration_id = _.keys(template.concentrations)[0];
+                parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
             }
         }
         if (kind == 'actions') {
-            var cell_line_id = state.experiment.new_row.cell_line;
-            var drug_id = state.experiment.new_row.drug_id;
-            var concentration_id = state.experiment.new_row.concentration_id;
+            var cell_line_id = parsed.experiment.new_row.cell_line;
+            var drug_id = parsed.experiment.new_row.drug_id;
+            var concentration_id = parsed.experiment.new_row.concentration_id;
             if (drug_id && concentration_id) {
                 var valid = _.find(template.drugs[drug_id].concentrations, function (a) {
                     return a == concentration_id
@@ -311,10 +517,10 @@ scb.ui.static.ExperimentSetupView.new_row = function (workarea, state, gstate) {
                 if (!_.isUndefined(valid)) {
                     $('button', element).removeAttr('disabled');
                     $('button', element).click(function () {
-                        var cell_treatment_list = state.experiment.cell_treatment_list;
+                        var cell_treatment_list = parsed.experiment.cell_treatment_list;
                         cell_treatment_list.start({
                             title:'New row',
-                            cell_line: cell_line_id,
+                            cell_line:cell_line_id,
                             treatment_list:{list:[
                                 {schedule_value:0, duration_value:0, drug_list:{list:[
                                     {drug_id:drug_id, concentration_id:concentration_id}
@@ -365,7 +571,5 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         else {
             $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen:false})
         }
-
-        scb.ui.static.ExperimentSetupView.new_row(workarea, state, gstate);
     }
 }
