@@ -92,7 +92,7 @@ Experiment active area
         </tr>
         {/foreach}
         {if $kind == 'readwrite'}
-        <tr class='scb_s_experiment_setup_new_row' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
+        <tr class='scb_s_experiment_setup_new_row scb_s_experiment_setup_new_row_gray' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
             {foreach $c in $headings}
             <td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_td' kind='{$c.kind}' rowspan="1">
                 {if $c.kind == 'actions'}

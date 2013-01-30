@@ -47,7 +47,7 @@ scb_experiment_setup.display_details = function(opt_data, opt_sb) {
     output.append('</tr>');
   }
   if (opt_data.kind == 'readwrite') {
-    output.append('<tr class=\'scb_s_experiment_setup_new_row\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\'>');
+    output.append('<tr class=\'scb_s_experiment_setup_new_row scb_s_experiment_setup_new_row_gray\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\'>');
     var cList91 = opt_data.headings;
     var cListLen91 = cList91.length;
     for (var cIndex91 = 0; cIndex91 < cListLen91; cIndex91++) {

@@ -72,3 +72,11 @@ table.scb_s_experiment_setup_table {
     width:24px;
     height: 16px;
 }
+
+.scb_s_experiment_setup_new_row {
+
+}
+
+.scb_s_experiment_setup_new_row_gray {
+    opacity: .25;
+}

@@ -147,7 +147,7 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_new_row', function (e) {
         scb.ui.static.ExperimentSetupView.new_row_edit(this);
     });
-    scb.utils.off_on($(document), 'mouseup', 'body', function (e) {
+    scb.utils.off_on($(document), 'mouseup', $(document), function (e) {
         if (true) {
             var container = $(".scb_s_experiment_setup_new_row", $(document));
 
@@ -167,8 +167,8 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
                 if (container.attr('data-is_editing') == "true") {
                     container.removeAttr('data-is_editing');
                     console.info("-- click outside -- edit row -- ");
-                    //  scb.ui.static.ExperimentSetupView.save_new_row(container);
-                    //  scb.ui.static.MainFrame.refresh();
+                    scb.ui.static.ExperimentSetupView.save_row(container);
+                    scb.ui.static.MainFrame.refresh();
                 }
             }
         }
@@ -308,6 +308,29 @@ scb.ui.static.ExperimentSetupView.rows = function (cell_treatment_list, headings
     return rows;
 }
 
+scb.ui.static.ExperimentSetupView.save_row = function (element) {
+    var parsed = scb.ui.static.ExperimentSetupView.parse(element);
+
+    $(element).attr('data-is_editing', false);
+
+    var template = parsed.context.template;
+    var cell_line_id = parsed.experiment.new_row.cell_line;
+    var drug_id = parsed.experiment.new_row.drug_id;
+    var concentration_id = parsed.experiment.new_row.concentration_id;
+    var treatment_line = parsed.treatment.drug_list.list[0];
+
+    if (drug_id && concentration_id) {
+        var valid = _.find(template.drugs[drug_id].concentrations, function (a) {
+            return a == concentration_id
+        });
+        if (!_.isUndefined(valid)) {
+            treatment_line.drug_id = drug_id;
+            treatment_line.concentration_id = concentration_id;
+            parsed.experiment.new_row = {};
+            scb.ui.static.MainFrame.refresh();
+        }
+    }
+}
 
 scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
     var experiment_id = $(element).attr('experiment_id');
@@ -322,6 +345,7 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
     var parsed = scb.ui.static.MainFrame.validate_state(state);
 
     $(element).attr('data-is_editing', false);
+    $(element).addClass('scb_s_experiment_setup_new_row_gray');
 
     var template = parsed.context.template;
     var cell_line_id = parsed.experiment.new_row.cell_line;
@@ -359,12 +383,20 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    $(element).attr('data-is_editing', true);
 
+    var template = parsed.context.template;
     var cell_line = parsed.cell_treatment.cell_line;
     var treatment_line = parsed.treatment.drug_list.list[0];
     var drug_id = treatment_line.drug_id;
     var concentration_id = treatment_line.concentration_id;
+
+    if( $(element).attr('data-is_editing') != 'true')
+    {
+        parsed.experiment.new_row.cell_line = cell_line;
+        parsed.experiment.new_row.drug_id = drug_id;
+        parsed.experiment.new_row.concentration_id = concentration_id;
+        $(element).attr('data-is_editing', true);
+    }
 
     //TODO: RETHINK THIS - IT NEEDS TO GO TO TEMPORARY STATE AND ONLY CHANGE IFF STATE IS VALID
     $('.scb_s_experiment_setup_table_element', element).each(function (index) {
@@ -387,7 +419,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
                 scb.utils.off_on(element, "change", "select", function (e) {
                     console.info($(this).val());
                     parsed.experiment.new_row.drug_id = $(this).val();
-                    scb.ui.static.ExperimentSetupView.new_row_edit(row_element);
+                    scb.ui.static.ExperimentSetupView.row_edit(row_element);
                 });
             }
             else {
@@ -410,7 +442,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
                     scb.utils.off_on(element, "change", "select", function (e) {
                         console.info($(this).val());
                         parsed.experiment.new_row.concentration_id = $(this).val();
-                        scb.ui.static.ExperimentSetupView.new_row_edit(row_element);
+                        scb.ui.static.ExperimentSetupView.row_edit(row_element);
                     });
                 }
                 else {
@@ -441,6 +473,7 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
     var parsed = scb.ui.static.MainFrame.validate_state(state);
 
     $(element).attr('data-is_editing', true);
+    $(element).removeClass('scb_s_experiment_setup_new_row_gray');
 
     var template = parsed.context.template;
 
