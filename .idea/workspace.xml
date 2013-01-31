@@ -96,19 +96,19 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="149" column="55" selection-start="6587" selection-end="6587" vertical-scroll-proportion="0.51354164">
+                <state line="153" column="55" selection-start="6760" selection-end="6760" vertical-scroll-proportion="-21.26923">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="homepage.gss" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="homepage.gss" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="339" column="0" selection-start="7435" selection-end="7435" vertical-scroll-proportion="-13.192307">
+                <state line="365" column="13" selection-start="7978" selection-end="7978" vertical-scroll-proportion="0.348407">
                   <folding />
                 </state>
               </provider>
@@ -182,11 +182,11 @@
         <option value="$PROJECT_DIR$/html_app/model/Experiment.js" />
         <option value="$PROJECT_DIR$/html_app/ui/common.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/homepage.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/homepage.gss" />
         <option value="$PROJECT_DIR$/html_app/master_model.js" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/homepage.gss" />
       </list>
     </option>
   </component>
@@ -671,13 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="339" column="0" selection-start="7435" selection-end="7435" vertical-scroll-proportion="-13.192307">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1793" column="9" selection-start="67818" selection-end="67818" vertical-scroll-proportion="-8.840909">
@@ -708,7 +701,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="55" selection-start="6587" selection-end="6587" vertical-scroll-proportion="0.51354164">
+        <state line="153" column="55" selection-start="6760" selection-end="6760" vertical-scroll-proportion="-21.26923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="365" column="13" selection-start="7978" selection-end="7978" vertical-scroll-proportion="0.348407">
           <folding />
         </state>
       </provider>

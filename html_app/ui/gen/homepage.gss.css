@@ -139,7 +139,7 @@
   color: #008ddd;
   margin-left: 10px;
   margin-bottom: -10px;
-  font-size: 14pt;
+  font-size: 12pt;
 }
 .scb_s_homepage_blue_line {
   margin-left: 5px;
@@ -195,7 +195,7 @@
   display: block;
   vertical-align: top;
   font-family: 'sourcesanspro-regular';
-  font-size: 12pt;
+  font-size: 10pt;
   color: black;
   margin-left: 10px;
   margin-top: 10px;
@@ -225,7 +225,7 @@
 .scb_s_homepage_experimental_design_bullet_item {
   display: block;
   font-family: 'sourcesanspro-bold';
-  font-size: 12pt;
+  font-size: 11pt;
   vertical-align: top;
   margin-left: 10px;
   padding-bottom: 3px;
@@ -251,7 +251,7 @@
   margin-left: 8px;
   font-family: 'sourcesanspro-semibold';
   color: white;
-  font-size: .9em;
+  font-size: 11pt;
   position: absolute;
   bottom: 0;
 }
@@ -278,19 +278,19 @@
 .scb_s_homepage_technique_wb, .scb_s_homepage_technique_flow {
   display: inline-block;
   font-family: 'sourcesanspro-regular';
-  font-size: 12pt;
+  font-size: 10pt;
   width: 130px;
   vertical-align: top;
 }
 .scb_s_homepage_technique_micro {
   display: inline-block;
   font-family: 'sourcesanspro-regular';
-  font-size: 12pt;
+  font-size: 10pt;
   width: 150px;
   vertical-align: top;
 }
 .scb_s_homepage_technique_bar {
-  height: 112px;
+  height: 132px;
   padding-left: 10px;
   padding-right: 14px;
 }
@@ -306,10 +306,10 @@
   margin-top: 20px;
   margin-left: 0;
   font-family: 'sourcesanspro-bold';
-  font-size: 14pt;
+  font-size: 11pt;
   position: absolute;
   color: white;
-  top: 115px;
+  top: 135px;
 }
 .scb_s_homepage_technique_more {
   vertical-align: top;
