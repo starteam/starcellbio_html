@@ -1337,6 +1337,9 @@ var __usability_test = {
         instructions:'$DISPLAY_ASSIGNMENT_INSTRUCTIONS$',
 
         ui:{
+            experimental_design:{
+              techniques:[ 'wb' ]
+            },
             experiment_setup:{table:[
                 {kind:"cell_plate",
                     title:" ",

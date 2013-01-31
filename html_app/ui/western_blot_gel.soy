@@ -191,8 +191,9 @@
             It has gels and markings on the side (if applicable)
             It also has tool for measuring.
         {else}
-            This is undeveloped gel! {$western_blot_gel.id}
-            It has nothing OR marker line.
+            {call scb_western_blot.display_western_blot_numbers}
+            {/call}
+            <img class='scb_s_western_blot_gel' src='images/western_blot/Negative_Film.png'>
         {/if}
     </div>
     <div class='scb_s_western_blot_tools'>

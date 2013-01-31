@@ -16,6 +16,7 @@
 }
 .scb_s_experiment_design_techniques_container {
   text-align: center;
+  position: relative;
 }
 .scb_s_design_description>.scb_f_open_assignment {
   position: absolute;

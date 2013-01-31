@@ -251,9 +251,11 @@
         <div class='scb_s_western_blot_gel_tab'>Gel</div>
     </div>
     <div class='scb_s_western_blot_gel_content'>
-    <div class='scb_s_western_blot_gel'>
+        {call .display_western_blot_numbers}
+        {/call}
 
-    </div>
+    <img class='scb_s_western_blot_gel' src='images/western_blot/SCB_WesternBlotting_Gel.png'>
+
     <div class='scb_s_western_blot_tools'>
         <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' western_blot_id='{$western_blot.id}'
                     assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">Run gel & transfer</a>
@@ -262,6 +264,30 @@
 </div>
 {/template}
 
+
+/**
+
+*/
+{template .display_western_blot_numbers}
+<span class='scb_s_western_blot_gel_numbers'>
+<span class='scb_s_western_blot_gel_number'>1</span>
+<span class='scb_s_western_blot_gel_number'>2</span>
+<span class='scb_s_western_blot_gel_number'>3</span>
+<span class='scb_s_western_blot_gel_number'>4</span>
+<span class='scb_s_western_blot_gel_number'>5</span>
+<span class='scb_s_western_blot_gel_number'>6</span>
+<span class='scb_s_western_blot_gel_number'>7</span>
+<span class='scb_s_western_blot_gel_number'>8</span>
+<span class='scb_s_western_blot_gel_number'>9</span>
+<span class='scb_s_western_blot_gel_number'>10</span>
+<span class='scb_s_western_blot_gel_number'>11</span>
+<span class='scb_s_western_blot_gel_number'>12</span>
+<span class='scb_s_western_blot_gel_number'>13</span>
+<span class='scb_s_western_blot_gel_number'>14</span>
+<span class='scb_s_western_blot_gel_number'>15</span>
+</span>
+
+{/template}
 /**
 @param assignment
 @param experiment

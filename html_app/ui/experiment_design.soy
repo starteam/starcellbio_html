@@ -25,8 +25,6 @@
     {param assignment:$assignment/}
     {param experiment:$experiment/}
     {/call}
-    {call scb_homepage.display_experiment_design}
-    {/call}
     {call scb_homepage.display_footer}
     {param t:$t /}
     {/call}
@@ -63,6 +61,7 @@ Experiment active area
 
         <div class='scb_s_experiment_design_techniques_container'>
         {call scb_homepage.display_techniques}
+            {param techniques:$t.ui.experimental_design.techniques/}
         {/call}
         </div>
     <br/>

@@ -128,13 +128,19 @@ Assignment display_experiment_design
                 <img src='images/homepage/techniques.png'>
             </span>
             {call scb_homepage.display_techniques}
+            {param techniques:['wb','fc','micro']/}
+
             {/call}
         </span>
     </span>
 {/template}
 
-/** Techniques */
+/** Techniques
+    @param techniques
+*/
 {template .display_techniques}
+{foreach $tech in $techniques}
+{if $tech == 'wb'}
 <span class='scb_s_homepage_technique_wb'>
     <span class='scb_s_homepage_technique_title_image'>Western Blot</span>
     <!-- <img class='scb_s_homepage_technique_title_image' src='images/homepage/western_blot.png'>-->
@@ -144,6 +150,8 @@ Assignment display_experiment_design
 </span>
 <img class='scb_s_homepage_technique_bar'
      src='images/homepage/experimental_design_bar.png'>
+{/if}
+{if $tech == 'fc'}
 <span class='scb_s_homepage_technique_flow'>
     <span class='scb_s_homepage_technique_title_image'>Flow Cytometry</span>
     <!-- <img class='scb_s_homepage_technique_title_image' src='images/homepage/flow_cytometry.png'> -->
@@ -152,15 +160,19 @@ Assignment display_experiment_design
 </span>
 <img class='scb_s_homepage_technique_bar'
      src='images/homepage/experimental_design_bar.png'>
+{/if}
+{if $tech == 'fc'}
 <span class='scb_s_homepage_technique_micro'>
     <span class='scb_s_homepage_technique_title_image'>Microscopy</span>
 <!--    <img class='scb_s_homepage_technique_title_image' src='images/homepage/microscopy.png'> -->
     Microscopy uses microscopes to view cells, tissues and organisms that otherwise cannot be observed with the human eye.
                     <button class='scb_s_homepage_technique_learn_more'>LEARN MORE</button>
 </span>
+{/if}
 <!--
 <img class='scb_s_homepage_technique_more' src='images/homepage/more_techniques.png'>
 -->
+{/foreach}
 {/template}
 /**
 Assignment footer
