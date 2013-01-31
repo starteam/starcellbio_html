@@ -10,6 +10,9 @@ body {
   text-decoration: none;
   text-align: center;
 }
+.scb_s_experiment_step {
+  position: relative;
+}
 .scb_s_experiment_step_circle {
   width: 24px;
   height: 24px;
@@ -17,17 +20,69 @@ body {
   text-align: center;
   vertical-align: 90%;
   color: white;
-  background-color: #696969;
-  position: relative;
-  display: inline-block;
+  display: block;
   margin-left: 2em;
+  margin-right: 2em;
+  background-color: #383838;
+  background-image: -webkit-linear-gradient(top,#303030,#404040);
+  background-image: -moz-linear-gradient(top,#303030,#404040);
+  background-image: -ms-linear-gradient(top,#303030,#404040);
+  background-image: -o-linear-gradient(top,#303030,#404040);
 }
 .scb_s_experiment_step_number {
   padding: .4em .25em .25em;
   vertical-align: top;
 }
 .scb_experiment_step_selected {
-  background-color: green;
+  background-color: #189689;
+  background-image: -webkit-linear-gradient(top,#80d1ae,#189689);
+  background-image: -moz-linear-gradient(top,#80d1ae,#189689);
+  background-image: -ms-linear-gradient(top,#80d1ae,#189689);
+  background-image: -o-linear-gradient(top,#80d1ae,#189689);
+}
+.scb_s_experiment_step_horizontal_line_12 {
+  position: absolute;
+  width: 66px;
+  background-color: #696969;
+  height: 1px;
+  top: 16px;
+  left: 53px;
+}
+.scb_s_experiment_step_horizontal_line_23 {
+  position: absolute;
+  width: 66px;
+  background-color: #696969;
+  height: 1px;
+  top: 16px;
+  left: 143px;
+}
+.scb_s_experiment_step_horizontal_line_34 {
+  position: absolute;
+  width: 66px;
+  background-color: #696969;
+  height: 1px;
+  top: 16px;
+  left: 233px;
+}
+.scb_s_experiment_step_horizontal_line_45 {
+  position: absolute;
+  width: 66px;
+  background-color: #696969;
+  height: 1px;
+  top: 16px;
+  left: 323px;
+}
+.scb_s_experiment_step_div {
+  display: inline-block;
+  margin: 5px;
+  height: 80px;
+  width: 80px;
+  vertical-align: top;
+}
+.scb_s_experiment_step_text {
+  display: block;
+  position: relative;
+  text-align: center;
 }
 .scb_s_assignment_step_experiment {
   position: absolute;
@@ -41,9 +96,18 @@ body {
   color: white;
   width: 960px;
   height: 25px;
+  background-color: #189689;
+  background-image: -webkit-linear-gradient(top,#80d1ae,#189689);
+  background-image: -moz-linear-gradient(top,#80d1ae,#189689);
+  background-image: -ms-linear-gradient(top,#80d1ae,#189689);
+  background-image: -o-linear-gradient(top,#80d1ae,#189689);
+}
+.scb_s_assignment_step>img {
+  height: 24px;
+  top: 1px;
+  position: relative;
 }
 .scb_s_assignment_step_link {
-  background-image: url('../images/header/scb_navigation_button.png');
   width: 140px;
   height: 15px;
   padding: 5px;
@@ -56,4 +120,10 @@ body {
   vertical-align: top;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.scb_s_assignment_step_link_active {
+  background: url('../images/header/scb_navigation_button.png');
+  margin-left: -14px;
+  margin-right: -11px;
+  margin-top: -1px;
 }
