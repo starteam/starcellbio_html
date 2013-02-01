@@ -1645,13 +1645,13 @@ var __usability_test = {
         lysate_kinds:{
             'whole':{
                 name:'Whole Cell'
-            },
+            },/*
             'cyto':{
                 name:'Cytoplasm'
             },
             'nuclear':{
                 name:'Nuclear'
-            }
+            }*/
         },
         model:{// model
             western_blot:{// this applies to western blot

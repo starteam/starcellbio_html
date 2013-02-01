@@ -30,7 +30,7 @@
           <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="235" column="22" selection-start="7679" selection-end="7679" vertical-scroll-proportion="0.504158">
+                <state line="201" column="18" selection-start="5919" selection-end="5919" vertical-scroll-proportion="0.8301282">
                   <folding />
                 </state>
               </provider>
@@ -40,7 +40,10 @@
             <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="1367" column="51" selection-start="51164" selection-end="51180" vertical-scroll-proportion="0.0">
-                  <folding />
+                  <folding>
+                    <marker date="1359740797000" expanded="true" signature="61008:61056" placeholder="{&quot;name&quot;: 'Cytoplasm'...}" />
+                    <marker date="1359740797000" expanded="true" signature="61080:61126" placeholder="{&quot;name&quot;: 'Nuclear'...}" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -70,7 +73,7 @@
           <file leaf-file-name="master_model.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="1578" column="46" selection-start="59146" selection-end="59146" vertical-scroll-proportion="0.0">
+                <state line="1668" column="50" selection-start="61790" selection-end="61790" vertical-scroll-proportion="0.0">
                   <folding>
                     <element signature="e#51971#55867#0" expanded="false" />
                     <element signature="e#56557#57985#0" expanded="false" />
@@ -89,19 +92,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="WesternBlotGelView.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="WesternBlotGelView.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="82" column="69" selection-start="3386" selection-end="3386" vertical-scroll-proportion="0.33933935">
+                <state line="82" column="69" selection-start="3386" selection-end="3386" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="WesternBlotView.js" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="WesternBlotView.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="200" column="0" selection-start="7071" selection-end="7139" vertical-scroll-proportion="0.0">
+                <state line="217" column="26" selection-start="7703" selection-end="7703" vertical-scroll-proportion="0.6696697">
                   <folding />
                 </state>
               </provider>
@@ -111,6 +114,15 @@
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot_gel.gss">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="18" column="16" selection-start="309" selection-end="309" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlotLanes.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotLanes.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="87" column="44" selection-start="3426" selection-end="3447" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -128,7 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/html_app/starcellbio.app.css" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_design.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_design.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/common.gss" />
@@ -137,13 +148,14 @@
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/select_technique.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/select_technique.soy" />
-        <option value="$PROJECT_DIR$/html_app/master_model.js" />
         <option value="$PROJECT_DIR$/html_app/ui/western_blot_gel.gss" />
         <option value="$PROJECT_DIR$/html_app/model/CellTreatment.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/western_blot_gel.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js" />
+        <option value="$PROJECT_DIR$/html_app/master_model.js" />
+        <option value="$PROJECT_DIR$/html_app/model/WesternBlotLanes.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
       </list>
     </option>
   </component>
@@ -558,13 +570,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/model/Treatment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="62" selection-start="718" selection-end="727" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/starcellbio.app.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="94" column="104" selection-start="1503" selection-end="1503" vertical-scroll-proportion="0.7313278">
@@ -628,34 +633,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1578" column="46" selection-start="59146" selection-end="59146" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#51971#55867#0" expanded="false" />
-            <element signature="e#56557#57985#0" expanded="false" />
-            <element signature="e#58001#58599#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="0" selection-start="7071" selection-end="7139" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/model/CellTreatment.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="71" column="23" selection-start="2421" selection-end="2425" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="235" column="22" selection-start="7679" selection-end="7679" vertical-scroll-proportion="0.504158">
           <folding />
         </state>
       </provider>
@@ -669,7 +649,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="69" selection-start="3386" selection-end="3386" vertical-scroll-proportion="0.33933935">
+        <state line="82" column="69" selection-start="3386" selection-end="3386" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotLanes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="44" selection-start="3426" selection-end="3447" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1668" column="50" selection-start="61790" selection-end="61790" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#51971#55867#0" expanded="false" />
+            <element signature="e#56557#57985#0" expanded="false" />
+            <element signature="e#58001#58599#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="201" column="18" selection-start="5919" selection-end="5919" vertical-scroll-proportion="0.8301282">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="217" column="26" selection-start="7703" selection-end="7703" vertical-scroll-proportion="0.6696697">
           <folding />
         </state>
       </provider>

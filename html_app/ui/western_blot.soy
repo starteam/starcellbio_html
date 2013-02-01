@@ -9,6 +9,7 @@
 * @param western_blot WesternBlotView
 * @param rows
 * @param kind
+* @param kinds
 * @param can_prepare_lysate
 */
 {template .main}
@@ -34,6 +35,7 @@
     {param western_blot:$western_blot /}
     {param rows:$rows /}
     {param kind:$kind /}
+    {param kinds:$kinds /}
     {param can_prepare_lysate:$can_prepare_lysate/}
     {/call}
     {call scb_homepage.display_footer}
@@ -50,6 +52,7 @@
 @param western_blot
 @param rows
 @param kind
+@param kinds
 @param can_prepare_lysate
 */
 {template .display_details}
@@ -63,6 +66,7 @@
         {param western_blot:$western_blot /}
         {param rows:$rows /}
         {param kind:$kind /}
+        {param kinds:$kinds/}
         {param can_prepare_lysate:$can_prepare_lysate/}
         {/call}
     </div>
@@ -78,6 +82,7 @@
 @param western_blot
 @param rows
 @param kind
+@param kinds
 @param can_prepare_lysate
 */
 {template .display_tabs}
@@ -93,6 +98,7 @@
     {param experiment:$experiment/}
     {param western_blot:$western_blot/}
     {param rows:$rows/}
+    {param kinds:$kinds/}
     {param can_prepare_lysate:$can_prepare_lysate/}
     {/call}
     {/if}
@@ -145,6 +151,7 @@
 @param experiment
 @param western_blot
 @param rows
+@param kinds
 @param can_prepare_lysate
 */
 {template .sample_prep}
@@ -179,6 +186,7 @@
                 {param experiment:$experiment/}
                 {param western_blot:$western_blot/}
                 {param cell_treatment:$r.cell_treatment/}
+                {param kinds:$kinds/}
                 {param lane:$r/}
                 {/call}
             </td>
@@ -293,7 +301,7 @@
 @param western_blot
 @param cell_treatment
 @param lane
-
+@param kinds
 */
 {template .display_lysate_types}
 <select class="scb_f_western_blot_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
@@ -302,18 +310,23 @@
 {if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
 >
 {if $lane.kind == 'existing'}
+{foreach $k in keys($kinds)}
+<option value='$k'
+{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+{/foreach}
+<!--
 <option value='whole_cell'
 {if $lane.lane.kind == 'whole_cell'}selected="selected"{/if}>Whole Cell</option>
 <option value='cytoplasm'
 {if $lane.lane.kind == 'cytoplasm'}selected="selected"{/if}>Cyto</option>
 <option value='nuclear'
 {if $lane.lane.kind == 'nuclear'}selected="selected"{/if}>Nuclear</option>
+-->
 {else}
 <option selected="selected" disabled="disabled">Pick Lysate Type</option>
-<option value='whole_cell'>Whole Cell</option>
-<option value='cytoplasm'>Cyto</option>
-<option value='nuclear'>Nuclear</option>
-
+    {foreach $k in keys($kinds)}
+        <option value='$k'>{$kinds[$k].name}</option>
+    {/foreach}
 {/if}
 </select>
 {/template}

@@ -215,6 +215,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             rows:rows_state.rows,
             rows_valid:rows_state.valid,
             kind:kind,
+            kinds:template.lysate_kinds,
             can_prepare_lysate:can_prepare_lysate
         }));
         if (kind == 'prepare_gel') {

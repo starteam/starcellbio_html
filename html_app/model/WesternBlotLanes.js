@@ -66,6 +66,7 @@ scb.WesternBlotLane = function scb_WesternBlotLane(data, context, parent) {
 //        scb.Utils.initialize_accessor_field(self, data, 'ip_secondary_anti_body', _.keys(context.template.ip_secondary_anti_body)[0], null, context);
 //    }
 
+
     scb.Utils.initialize_field(data, 'experiment_id', null);
 
     scb.Utils.accessor2(self, 'making_lysate_id', data);
@@ -81,6 +82,10 @@ scb.WesternBlotLane = function scb_WesternBlotLane(data, context, parent) {
 
     scb.utils.accessor2_custom(self, 'collection_schedule', function () {
         return self.cell_treatment.collection_schedule_list.get(data.collection_schedule_id);
+    }, scb.utils.noop);
+
+    scb.utils.accessor2_custom(self, 'kinds', function () {
+        return context.template.lysate_kinds;
     }, scb.utils.noop);
 
 }
