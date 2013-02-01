@@ -123,8 +123,7 @@
                 {foreach $r in $rows}
                 {if $r.is_valid}
                 <li>
-                    {$r.cell_treatment.name} -
-                    {$r.lane.kind}
+                    {$r.display_text} -{$r.lane.kind}
                 </li>
                 {/if}
 
@@ -187,9 +186,6 @@
                      assignment_id='{$assignment.id}'
                      experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>
         {if $western_blot_gel.is_developed}<canvas id="{$western_blot_gel.id}" class='scb_s_western_blot_gel_canvas' style="width:100%;height:100%"></canvas>
-            This is developed gel! {$western_blot_gel.id}
-            It has gels and markings on the side (if applicable)
-            It also has tool for measuring.
         {else}
             {call scb_western_blot.display_western_blot_numbers}
             {/call}

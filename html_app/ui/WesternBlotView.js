@@ -178,6 +178,14 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
 
 }
 
+scb.ui.static.WesternBlotView.format_rows = function( rows )
+{
+    _.each(rows, function(r,index,rows){
+        r.display_text = r.cell_treatment.format_row();
+        console.info(r.display_text );
+    });
+}
+
 scb.ui.static.WesternBlotView.MAX_ROWS = 14;
 
 scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
@@ -188,6 +196,8 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         var experiment = state.experiment;
         var template = state.assignment.template;
         var rows_state = state.western_blot.rows_state();
+
+        scb.ui.static.WesternBlotView.format_rows(rows_state.rows);
 
         var kind = 'sample_prep';
         if (state.western_blot.lysate_prepared) {

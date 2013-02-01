@@ -16,6 +16,7 @@
 .scb_s_wb_exposure_time {
     position: absolute;
     top: 210px;
+    width:200px;
 }
 
 .scb_s_western_blot_reprobe {

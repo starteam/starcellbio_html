@@ -1373,7 +1373,14 @@ var __usability_test = {
                     {schedule:"18h", schedule_value:18 * 3600, id:'3'}
                 ]}
             }
-            }
+            },
+            western_blot:{format:"%CELL_LINE% %TREATMENT% %CONCENTRATION%",
+                keys:{
+                    '%CELL_LINE%':{attr:['cell_line'],map:['cell_lines','%KEY%','name']},
+                    '%TREATMENT%':{attr:['treatment_list','list','0','drug_list','list','0','drug_id'],map:['drugs','%KEY%','name']},
+                    '%CONCENTRATION%':{attr:['treatment_list','list','0','drug_list','list','0','concentration_id'],map:['concentrations','%KEY%','name']}
+                }
+            },
         },
 
         experiment_setup_actions:{

@@ -170,7 +170,7 @@
                 {/if}
             </td>
             <td>{if $r.display_sample}
-                {$r.cell_treatment.name}
+                {$r.display_text}
                 {/if}
             </td>
             <td>
@@ -229,8 +229,7 @@
             {foreach $r in $rows}
             {if $r.is_valid}
             <li>
-                {$r.cell_treatment.name} -
-                {$r.lane.kind}
+                {$r.display_text} - {$r.lane.kind}
             </li>
             {/if}
 

@@ -80,7 +80,7 @@ scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (eleme
     parsed.state.view = 'western_blot';
     scb.ui.static.MainFrame.refresh(parsed.state);
 }
-scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [1, 1, 2, 5, 10, 30, 1 * 60, 2 * 60, 5 * 60, 10 * 60, 20 * 60, 60 * 60];
+scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [0,0, 1, 2, 5, 10, 30, 1 * 60, 2 * 60, 5 * 60, 10 * 60, 20 * 60, 60 * 60];
 
 scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider = function (e, ui) {
     var element = this;
@@ -200,6 +200,8 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         var template = state.assignment.template;
         var rows_state = state.western_blot.rows_state();
         var rows = rows_state.rows;
+
+        scb.ui.static.WesternBlotView.format_rows(rows);
 
         var kind = 'prepare_gel';
 
