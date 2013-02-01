@@ -185,7 +185,12 @@
     <div class='scb_s_western_blot_gel' is_developed='{$western_blot_gel.is_developed}' western_blot_id='{$western_blot.id}'
                      assignment_id='{$assignment.id}'
                      experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>
-        {if $western_blot_gel.is_developed}<canvas id="{$western_blot_gel.id}" class='scb_s_western_blot_gel_canvas' style="width:100%;height:100%"></canvas>
+        {if $western_blot_gel.is_developed}
+        {call scb_western_blot.display_western_blot_numbers}
+                {/call}
+        <div class='scb_s_western_blot_gel_canvas_wrapper'>
+            <canvas id="{$western_blot_gel.id}" class='scb_s_western_blot_gel_canvas' style="width:363px;height:288px" width='363' height='288'></canvas><div class='scb_f_slider'></div>
+        </div>
         {else}
             {call scb_western_blot.display_western_blot_numbers}
             {/call}

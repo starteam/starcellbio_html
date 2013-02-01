@@ -124,10 +124,13 @@
   display: inline-block;
   position: absolute;
   top: 0;
-  left: 350px;
+  left: 370px;
 }
 .scb_s_western_blot_run_gel_and_transfer {
   position: relative;
   top: 250px;
   left: 50px;
+}
+.scb_s_western_blot_gel_canvas_wrapper {
+  position: relative;
 }

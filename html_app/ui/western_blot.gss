@@ -161,7 +161,7 @@
     display: inline-block;
     position: absolute;
     top: 0px;
-    left: 350px;
+    left: 370px;
 }
 
 .scb_s_western_blot_run_gel_and_transfer {
@@ -170,4 +170,7 @@
     left:50px;
 }
 
+.scb_s_western_blot_gel_canvas_wrapper {
+    position: relative;
+}
 
