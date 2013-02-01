@@ -28,9 +28,10 @@ body {
 }
 
 .scb_s_experiment_step_circle {
-    width: 24px;
-    height: 24px;
-    border-radius: 12px;
+    box-shadow:0px 0px 6px #a9a9a9;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
     text-align: center;
     vertical-align: 90%;
     color: white;
@@ -41,8 +42,9 @@ body {
 }
 
 .scb_s_experiment_step_number {
-    padding: .4em .25em .25em .25em;
+    padding: .25em .25em .25em .25em;
     vertical-align: top;
+    font-size:16pt;
 }
 
 .scb_experiment_step_selected {
@@ -51,38 +53,38 @@ body {
 
 .scb_s_experiment_step_horizontal_line_12 {
     position:absolute;
-    width:66px;
+    width:55px;
     background-color: #696969;
     height:1px;
-    top:16px;
-    left:53px;
+    top:23px;
+    left:65px;
 }
 
 .scb_s_experiment_step_horizontal_line_23 {
     position:absolute;
-    width:66px;
+    width:55px;
     background-color: #696969;
     height:1px;
-    top:16px;
-    left:143px;
+    top:23px;
+    left:155px;
 }
 
 .scb_s_experiment_step_horizontal_line_34 {
     position:absolute;
-    width:66px;
+    width:55px;
     background-color: #696969;
     height:1px;
-    top:16px;
-    left:233px;
+    top:23px;
+    left:245px;
 }
 
 .scb_s_experiment_step_horizontal_line_45 {
     position:absolute;
-    width:66px;
+    width:55px;
     background-color: #696969;
     height:1px;
-    top:16px;
-    left:323px;
+    top:23px;
+    left:335px;
 }
 
 

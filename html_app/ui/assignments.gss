@@ -62,8 +62,8 @@
     background-color: white;
 }
 .scb_s_assignments_sidebar_title {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16pt;
+    font-family: "sourcesanspro-bold";
 }
 
 .scb_s_assignments_sidebar_name {

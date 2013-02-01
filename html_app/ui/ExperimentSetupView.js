@@ -314,6 +314,13 @@ scb.ui.static.ExperimentSetupView.rows = function (cell_treatment_list, headings
     return rows;
 }
 
+scb.ui.static.ExperimentSetupView.new_rows = function (new_row, headings, template) {
+    var rows = [];
+    scb.ui.static.ExperimentSetupView.row(new_row, headings, template, rows);
+    return rows;
+}
+
+
 scb.ui.static.ExperimentSetupView.ensure_save = function () {
     var container = $(".scb_s_experiment_setup_table_row", $(document));
     $(container).each(
@@ -619,7 +626,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         var template = state.assignment.template;
         var headings = scb.ui.static.ExperimentSetupView.headings(template.ui.experiment_setup.table);
         var rows = scb.ui.static.ExperimentSetupView.rows(experiment.cell_treatment_list.list, headings, template);
-
+        var new_rows = scb.ui.static.ExperimentSetupView.new_rows( new scb.CellTreatment(template.ui.experiment_setup.new_row,gstate.context), headings, template);
         if (experiment.setup_finished) {
             state.mode = 'readonly';
             state.last_view = 'experiment_run';
@@ -632,6 +639,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             experiment:state.experiment,
             headings:headings,
             rows:rows,
+            new_rows:new_rows,
             kind:state.mode
         }));
         state.experiment.last_view = state.last_view;

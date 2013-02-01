@@ -1334,7 +1334,7 @@ var __usability_test = {
     description:'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
     experiments:{},
     template:{
-        instructions:'$DISPLAY_ASSIGNMENT_INSTRUCTIONS$',
+        instructions:'',
 
         ui:{
             experimental_design:{

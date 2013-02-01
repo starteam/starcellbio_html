@@ -42,12 +42,13 @@ Experiment active area
         {call scb_common.experiment_step}
             {param step:1/}
         {/call}
-        <b>
+            <div class='experiment_name_header'>Experiment name:</div>
             <input type='text' class='scb_s_experiment_name_edit' maxlength="20" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'>
-        </b>
         <br/>
+    <!--
         {$assignment.description |noAutoescape}
         {$t.instructions |noAutoescape}
+    -->
         <br/>
         <div class='scb_s_experiment_design_objective_container'>
             <div class='scb_s_experiment_design_objective_text'>What objective or question is your experiment going to address?</div>
@@ -60,6 +61,7 @@ Experiment active area
         </div>
 
         <div class='scb_s_experiment_design_techniques_container'>
+            <div class='scb_s_experiment_design_techniques_text'>What technique(s) might be best suited for the analysis of this experiment?</div>
         {call scb_homepage.display_techniques}
             {param techniques:$t.ui.experimental_design.techniques/}
         {/call}

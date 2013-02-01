@@ -17,6 +17,7 @@
 .scb_s_experiment_design_techniques_container {
   text-align: center;
   position: relative;
+  min-height: 200px;
 }
 .scb_s_design_description>.scb_f_open_assignment {
   position: absolute;
@@ -30,4 +31,7 @@
 }
 .scb_s_experiment_design_objective, .scb_s_experiment_design_hypothesis {
   width: 864px;
+}
+.scb_s_experiment_design_techniques_text {
+  text-align: left;
 }
