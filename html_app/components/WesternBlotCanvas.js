@@ -261,7 +261,8 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
 		g.clearRect(0, 0, width, height);
 		g.fillStyle = 'white';
 		g.fillRect(0, 0, width, height);
-		g.fillStyle = '#fafafa';
+		//g.fillStyle = '#fafafa';
+        g.fillStyle='#cecece';
 		g.fillRect(0, 0, width, height);
 
 	}
