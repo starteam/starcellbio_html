@@ -173,7 +173,7 @@
     width: 240px;
     margin-left: 2px;
     margin-top: 4px;
-    margin-bottom:18px;
+    margin-bottom:5px;
 }
 
 .scb_s_homepage_blue_actions {
@@ -201,7 +201,7 @@
     font-family: 'sourcesanspro-bold';
     color: white;
     font-size: 14pt;
-    margin-top:13px;
+    margin-top:0px;
 }
 
 .scb_s_homepage_bottom {
@@ -272,7 +272,7 @@
     font-family: 'sourcesanspro-regular';
     vertical-align: top;
     height:124px;
-    font-size:14pt;
+    font-size:12pt;
     padding-left:10px;
     position: relative;
     top:46px;
@@ -281,7 +281,7 @@
 .scb_s_homepage_experimental_design_bullet_item {
     display:block;
     font-family: 'sourcesanspro-bold';
-    font-size:11pt;
+    font-size:10pt;
     vertical-align: top;
     margin-left:10px;
     padding-bottom:3px;
@@ -332,7 +332,7 @@
 
 .scb_s_homepage_technique_title_image {
     display: block;
-    margin-top:10px;
+    margin-top:-4px;
     margin-bottom:5px;
     font-family: 'sourcesanspro-bold';
     font-size:12pt;
@@ -341,7 +341,7 @@
 .scb_s_homepage_technique_wb {
     display:inline-block;
     font-family: 'sourcesanspro-regular';
-    font-size:10pt;
+    font-size:9pt;
     width:130px;
     vertical-align: top;
 }
@@ -349,7 +349,7 @@
 .scb_s_homepage_technique_flow {
     display:inline-block;
     font-family: 'sourcesanspro-regular';
-    font-size:10pt;
+    font-size:9pt;
     width:130px;
     vertical-align: top;
 }
@@ -357,7 +357,7 @@
 .scb_s_homepage_technique_micro {
     display:inline-block;
     font-family: 'sourcesanspro-regular';
-    font-size:10pt;
+    font-size:9pt;
     width:150px;
     vertical-align: top;
 }
@@ -380,11 +380,11 @@
     width: 110px;
     margin-top:20px;
     margin-left: 0px;
-    font-family: 'sourcesanspro-bold';
-    font-size: 11pt;
+    font-family: 'sourcesanspro-semibold';
+    font-size: 10.5pt;
     position:absolute;
     color:white;
-    top:135px;
+    top:146px;
 }
 
 .scb_s_homepage_technique_more {

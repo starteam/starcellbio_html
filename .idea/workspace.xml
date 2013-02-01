@@ -99,19 +99,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="common.gss" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="common.gss" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/common.gss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="80" column="12" selection-start="1973" selection-end="1973" vertical-scroll-proportion="0.873817">
+                <state line="80" column="12" selection-start="1973" selection-end="1973" vertical-scroll-proportion="-31.961538">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="homepage.gss" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="homepage.gss" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="8" column="1" selection-start="22" selection-end="602" vertical-scroll-proportion="0.0">
+                <state line="203" column="16" selection-start="4631" selection-end="4631" vertical-scroll-proportion="0.51688844">
                   <folding />
                 </state>
               </provider>
@@ -166,10 +166,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="select_technique.gss" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="select_technique.gss" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="35" column="0" selection-start="595" selection-end="595" vertical-scroll-proportion="0.53735924">
+                <state line="40" column="1" selection-start="713" selection-end="713" vertical-scroll-proportion="0.6141249">
                   <folding />
                 </state>
               </provider>
@@ -216,7 +216,6 @@
       <list>
         <option value="$PROJECT_DIR$/html_app/model/Experiment.js" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/homepage.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
@@ -230,6 +229,7 @@
         <option value="$PROJECT_DIR$/html_app/ui/common.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/common.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/select_technique.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/homepage.gss" />
       </list>
     </option>
   </component>
@@ -669,17 +669,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="495" column="44" selection-start="20286" selection-end="20286" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#893#3800#0" expanded="false" />
-            <element signature="e#3890#4075#0" expanded="false" />
-            <element signature="e#4168#4294#0" expanded="false" />
-            <element signature="e#4387#5134#0" expanded="false" />
-            <element signature="e#5219#5714#0" expanded="false" />
-            <element signature="e#13683#14628#0" expanded="false" />
-            <element signature="e#14698#16420#0" expanded="false" />
-            <element signature="e#16486#20170#0" expanded="false" />
-          </folding>
+        <state line="170" column="42" selection-start="7518" selection-end="7518" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -718,23 +709,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1" selection-start="22" selection-end="602" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/common.soy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="70" column="0" selection-start="2806" selection-end="2806" vertical-scroll-proportion="-21.666666">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/common.gss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="12" selection-start="1973" selection-end="1973" vertical-scroll-proportion="0.873817">
           <folding />
         </state>
       </provider>
@@ -760,9 +737,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/common.gss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="12" selection-start="1973" selection-end="1973" vertical-scroll-proportion="-31.961538">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="595" selection-end="595" vertical-scroll-proportion="0.53735924">
+        <state line="40" column="1" selection-start="713" selection-end="713" vertical-scroll-proportion="0.6141249">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="203" column="16" selection-start="4631" selection-end="4631" vertical-scroll-proportion="0.51688844">
           <folding />
         </state>
       </provider>
