@@ -237,7 +237,7 @@
             {foreach $r in $rows}
             {if $r.is_valid}
             <li>
-                {$r.display_text} - {$r.lane.kind}
+                {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
             </li>
             {/if}
 
@@ -311,21 +311,13 @@
 >
 {if $lane.kind == 'existing'}
 {foreach $k in keys($kinds)}
-<option value='$k'
+<option value='{$k}'
 {if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
 {/foreach}
-<!--
-<option value='whole_cell'
-{if $lane.lane.kind == 'whole_cell'}selected="selected"{/if}>Whole Cell</option>
-<option value='cytoplasm'
-{if $lane.lane.kind == 'cytoplasm'}selected="selected"{/if}>Cyto</option>
-<option value='nuclear'
-{if $lane.lane.kind == 'nuclear'}selected="selected"{/if}>Nuclear</option>
--->
 {else}
 <option selected="selected" disabled="disabled">Pick Lysate Type</option>
     {foreach $k in keys($kinds)}
-        <option value='$k'>{$kinds[$k].name}</option>
+        <option value='{$k}'>{$kinds[$k].name}</option>
     {/foreach}
 {/if}
 </select>
