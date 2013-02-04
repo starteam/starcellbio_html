@@ -189,6 +189,7 @@
   width: 400px;
   height: 200px;
   display: inline-block;
+  position: relative;
 }
 .scb_s_homepage_experimental_design_list_title {
   width: 400px;
@@ -201,7 +202,7 @@
   margin-top: 10px;
 }
 .scb_s_homepage_experimental_design_list_items {
-  width: 170px;
+  width: 150px;
   display: inline-block;
   vertical-align: top;
 }
@@ -220,7 +221,7 @@
   font-size: 12pt;
   padding-left: 10px;
   position: relative;
-  top: 46px;
+  top: 12px;
 }
 .scb_s_homepage_experimental_design_bullet_item {
   display: block;
@@ -228,15 +229,20 @@
   font-size: 10pt;
   vertical-align: top;
   margin-left: 10px;
-  padding-bottom: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 8px;
 }
 .scb_s_homepage_experimental_design_bullet {
   display: inline-block;
   color: #189689;
 }
 .scb_s_homepage_experimental_design_item {
-  margin-left: 5px;
   display: inline-block;
+}
+.scb_s_homepage_experimental_design_bullet_item_selected {
+  background-color: #80d1ae;
+  border-radius: 5px;
 }
 .scb_s_homepage_learn_more {
   display: block;
@@ -247,13 +253,13 @@
   background-position: center;
   height: 33px;
   width: 120px;
-  margin-top: 20px;
-  margin-left: 8px;
+  margin-top: 18px;
+  margin-left: 178px;
   font-family: 'sourcesanspro-semibold';
   color: white;
   font-size: 11pt;
   position: absolute;
-  bottom: 0;
+  bottom: 4px;
 }
 .scb_s_homepage_technique {
   display: inline-block;
@@ -264,7 +270,7 @@
 }
 .scb_s_homepage_technique_title {
   display: block;
-  margin-top: 26px;
+  margin-top: 12px;
   font-family: 'sourcesanspro-bold';
   font-size: 14pt;
 }
@@ -275,22 +281,15 @@
   font-family: 'sourcesanspro-bold';
   font-size: 12pt;
 }
-.scb_s_homepage_technique_wb, .scb_s_homepage_technique_flow {
+.scb_s_homepage_technique_wb, .scb_s_homepage_technique_flow, .scb_s_homepage_technique_micro {
   display: inline-block;
   font-family: 'sourcesanspro-regular';
   font-size: 9pt;
-  width: 130px;
-  vertical-align: top;
-}
-.scb_s_homepage_technique_micro {
-  display: inline-block;
-  font-family: 'sourcesanspro-regular';
-  font-size: 9pt;
-  width: 150px;
+  width: 140px;
   vertical-align: top;
 }
 .scb_s_homepage_technique_bar {
-  height: 132px;
+  height: 158px;
   padding-left: 10px;
   padding-right: 14px;
 }
