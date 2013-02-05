@@ -136,7 +136,7 @@ class SimpleTest(TestCase):
         self.navigate_via('Run gel')
         wb_sample1 = { 'primary_antibody':'1' , 'secondary_antibody':'2' }
         self.select_wb_antibody(wb_sample1)
-        self.navigate_via('Blot')
+        self.navigate_via('BLOT')
         pudb.set_trace()
         self.navigate_via('Re-probe')
         self.navigate_via('Gel 1')

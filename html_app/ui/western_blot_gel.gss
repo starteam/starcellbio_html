@@ -1,11 +1,13 @@
 .scb_s_wb_primary_antibody {
     position: absolute;
-    top:100px;
+    top:70px;
+    font-size: 12pt;
 }
 
 .scb_s_wb_secondary_antibody {
     position: absolute;
-    top: 150px;
+    top: 120px;
+    font-size: 12pt;
 }
 
 .scb_s_western_blot_blot_and_develop {
@@ -15,13 +17,14 @@
 
 .scb_s_wb_exposure_time {
     position: absolute;
-    top: 210px;
+    top: 180px;
     width:200px;
+    font-size: 12pt;
 }
 
 .scb_s_western_blot_reprobe {
     position: absolute;
-    top: 259px;
+    top: 275px;
 }
 
 .scb_f_slider {

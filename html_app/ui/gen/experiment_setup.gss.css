@@ -19,10 +19,16 @@
   bottom: 5px;
   left: 5px;
 }
-.scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly, .scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
+.scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
   position: absolute;
   bottom: 5px;
   right: 5px;
+}
+.scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 275px;
 }
 .scb_s_experiment_setup_choose_template {
   height: 155px;

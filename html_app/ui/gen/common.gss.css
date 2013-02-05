@@ -2,13 +2,20 @@ body {
   background-color: #e9edf1;
 }
 .scb_s_navigation_button {
-  background-image: url('../images/homepage/instructor_resources_button.png');
-  padding: 6px 25px 6px 24px;
+  padding: 3px 20px;
   width: 180px;
+  min-width: 180px;
   background-position: center;
   color: white;
   text-decoration: none;
   text-align: center;
+  font-size: 12pt;
+  border-radius: 5px;
+  background-color: #008ddd;
+  background-image: -webkit-linear-gradient(top,#00e0fe,#008ddd);
+  background-image: -moz-linear-gradient(top,#00e0fe,#008ddd);
+  background-image: -ms-linear-gradient(top,#00e0fe,#008ddd);
+  background-image: -o-linear-gradient(top,#00e0fe,#008ddd);
 }
 .scb_s_experiment_step {
   position: relative;

@@ -38,7 +38,8 @@
 .scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
     position: absolute;
     bottom: 5px;
-    right: 5px
+    right: 5px;
+    width:275px;
 }
 
 

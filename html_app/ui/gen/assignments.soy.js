@@ -34,7 +34,7 @@ scb_assignments.display_footer = function(opt_data, opt_sb) {
 
 scb_assignments.display_abstract = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_abstract\'>', (opt_data.assignments.selected != null) ? '<b>' + opt_data.assignments.selected.name + '</b><br/>' + opt_data.assignments.selected.description + '<a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignment&assignment_id=' + soy.$$escapeHtml(opt_data.assignments.selected_id) + '">Assignments &#9654;</a>' : opt_data.global_template.app_description, '</div>');
+  output.append('<div class=\'scb_s_abstract\'>', (opt_data.assignments.selected != null) ? '<b>' + opt_data.assignments.selected.name + '</b><br/>' + opt_data.assignments.selected.description + '<a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignment&assignment_id=' + soy.$$escapeHtml(opt_data.assignments.selected_id) + '">ASSIGNMENT &#9654;</a>' : opt_data.global_template.app_description, '</div>');
   return opt_sb ? '' : output.toString();
 };
 

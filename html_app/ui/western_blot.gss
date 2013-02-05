@@ -14,6 +14,7 @@
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
+    margin-top:20px;
 }
 
 .scb_f_open_western_blot {
@@ -47,28 +48,43 @@
 }
 
 .scb_s_western_blot_progress_prefix {
-    background: green;
-        border-radius: 12px;
-        width: 12px;
-        height: 12px;
-        color: white;
-        text-align: center;
-        padding: 5px;
-        padding-bottom: 12px;
+    color: white;
+    text-align: center;
+    padding: 4px;
+    font-size:16pt;
     display: inline-block;
+    position: relative;
+}
+
+.scb_s_western_blot_progress_prefix_img {
+    top: 24px;
+    vertical-align: top;
+    display: inline;
+    position: relative;
+}
+
+.scb_s_western_blot_progress_prefix_text {
+    display: inline-block;
+    max-width: 80px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .scb_s_western_blot_progress_rest {
+    background: url('../images/western_blot/progress_bg.png');
     display: inline-block;
-    border: 1px #c0c0c0 solid;
-        padding: 5px;
-        margin-left: 12px;
+    padding: 5px;
+    padding-top:8px;
+    margin-left: 12px;
     border-radius: 6px;
+    font-size:10.5pt;
+    height:22px;
+    width:540px;
 }
 
 .scb_s_western_blot_progress_item {
     display:inline-block;
-    margin-left:12px;
+    margin-left:7px;
 }
 .scb_s_western_blot_progress_selected {
     color:green;
@@ -76,29 +92,29 @@
 
 .scb_s_western_blot_samples_area {
     width:300px;
-    border:1px solid black;
-    border-radius: 5px;
+    border:1px solid #e0e0e0;
+    border-radius: 2px;
     display:inline-block;
     vertical-align: top;
+    margin-top:20px;
+    border-top-width: 8px;
+    box-shadow: 0px 0px 3px black;
+    height:368px;
+
 }
 
 .scb_s_western_blot_samples_gel_area {
     display:inline-block;
-    border:1px solid black;
     vertical-align: top;
-    width:500px;
     margin-left:25px;
-}
-
-.scb_s_western_blot_samples_gel_area {
     width:600px;
     height:400px;
+    padding-top:20px;
 }
 
 .scb_s_western_blot_gel_tabs {
     width:600px;
     height:25px;
-    border-bottom: 1px solid black;
     border-left: 1px solid white;
     border-right: 1px solid white;
     border-top: 1px solid white;
@@ -113,22 +129,30 @@
     border: 1px solid black;
     border-radius: 6px 6px 0px 0px;
     border-bottom: 0px;
-    height:25px
+    height:25px;
+    font-family: 'sourcesanspro-bold';
+    font-size:11.5pt;
+    text-align: center;
 }
 
 .scb_s_western_blot_gel_active {
     width:75px;
     display:inline-block;
-
-    border: 1px solid black;
+    border: 1px solid #80d1ae;
     border-radius: 6px 6px 0px 0px;
-    border-bottom: 0px;
     height:25px;
-
+    top:-1px;
+    position: relative;
+    z-index:99;
+    border-bottom-color:white;
+    color:green;
 }
 
 .scb_s_western_blot_gel_tab_selected {
     display:inline-block;
+    font-family: 'sourcesanspro-bold';
+    font-size:11.5pt;
+    text-align: center;
 }
 
 .scb_f_western_blot_gel_remove {
@@ -139,6 +163,7 @@
     height:350px;
     width:600px;
     position: relative;
+    border:1px solid #80d1ae;
 }
 
 .scb_s_western_blot_gel {
@@ -155,7 +180,7 @@
 }
 
 .scb_s_western_blot_tools {
-    width:150px;
+    width:225px;
     height:400px;
     vertical-align: top;
     display: inline-block;
@@ -167,10 +192,67 @@
 .scb_s_western_blot_run_gel_and_transfer {
     position: relative;
     top:250px;
-    left:50px;
+    left:40px;
 }
 
 .scb_s_western_blot_gel_canvas_wrapper {
     position: relative;
 }
 
+.scb_s_western_blot_progress_vertical_line {
+    padding-left:6px;
+    vertical-align: top;
+}
+
+.scb_s_western_blot_progress_prefix_group1 {
+
+    left: 10px;
+    position: relative;
+
+}
+
+.scb_s_western_blot_samples_heading {
+
+    font-size: 14pt;
+    font-family: 'sourcesanspro-semibold';
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.scb_s_western_blot_choose_samples_order_list > li {
+    font-size:11pt;
+    padding:3px;
+    color:gray;
+}
+
+.scb_s_western_blot_marker {
+    font-size: 11pt;
+    color: gray;
+    left: 15px;
+    position: relative;
+    top: -10px;
+}
+
+.scb_s_western_blot_choose_gel_type {
+    font-size: 12pt;
+    color:gray;
+    text-align: center;
+
+}
+
+.scb_s_western_blot_load_marker {
+        border: 0px;
+        text-align: center;
+        margin-left: 50px;
+        margin-right: 50px;
+}
+
+.scb_f_wb_anti_body_select_primary {
+    font-size:12pt;
+}
+
+.scb_f_wb_anti_body_select_secondary {
+    font-size:12pt;
+}

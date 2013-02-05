@@ -72,7 +72,7 @@
     </div>
     <a class="scb_s_navigation_button scb_f_open_select_technique"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Select technique</a><br/>
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 </div>
 {/template}
 
@@ -203,7 +203,7 @@
     </table>
     <a class='scb_s_navigation_button scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-    {if $can_prepare_lysate}{else}disabled='disabled'{/if}> Prepare lysates
+    {if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE LYSATE
     </a>
 </div>
 {/template}
@@ -220,8 +220,11 @@
 {/call}
 <div class='scb_s_western_blot_samples_area'>
 
+    <div class='scb_s_western_blot_samples_heading'>
+        Samples
+    </div>
     <div class='scb_s_western_blot_choose_gel_type'>
-        1) Choose Gel Type:
+        Choose Gel Type:
         <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".10" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.10'}checked='checked'{/if}>10%</input>
         <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
@@ -244,18 +247,18 @@
             {/foreach}
         </ol>
         {if $western_blot.marker_loaded == true}
-        <div class='scb_s_western_blot_marker'>15. Marker</div>
+        <div class='scb_s_western_blot_marker'>15. &nbsp; Marker</div>
         {/if}
     </div>
     {if $western_blot.marker_loaded == false}
-    <button class='scb_s_western_blot_load_marker' western_blot_id='{$western_blot.id}'
+    <button class='scb_s_western_blot_load_marker scb_s_navigation_button' western_blot_id='{$western_blot.id}'
             assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Load Marker
     </button>
     {/if}
 </div>
 <div class='scb_s_western_blot_samples_gel_area'>
     <div class='scb_s_western_blot_gel_tabs'>
-        <div class='scb_s_western_blot_gel_tab'>Gel</div>
+        <div class='scb_s_western_blot_gel_tab scb_s_western_blot_gel_active'>GEL</div>
     </div>
     <div class='scb_s_western_blot_gel_content'>
         {call .display_western_blot_numbers}
@@ -265,7 +268,7 @@
 
     <div class='scb_s_western_blot_tools'>
         <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' western_blot_id='{$western_blot.id}'
-                    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">Run gel & transfer</a>
+                    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">RUN GEL & TRANSFER</a>
     </div>
     </div>
 </div>
@@ -328,32 +331,51 @@
 */
 {template .display_wb_progress}
 <div class='scb_s_western_blot_progress'>
-    <div class='scb_s_western_blot_progress_prefix'>5</div>
+
+    <span class='scb_s_western_blot_progress_prefix_group1'>
+    <img class='scb_s_western_blot_progress_prefix_img' src="images/western_blot/backbackback.png">
+    <div class='scb_experiment_step_selected scb_s_experiment_step_circle'>
+        <div class='scb_s_western_blot_progress_prefix'>5</div>
+    </div>
+    </span>
+    <span class='scb_s_western_blot_progress_prefix_group2'>
+
+    <div class='scb_s_western_blot_progress_prefix_text'>
+        PERFORM WESTERN BLOT
+    </div>
+
     <div class='scb_s_western_blot_progress_rest'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 {if $step >= 1}scb_s_western_blot_progress_selected{/if}'>
             1. Sample Prep
         </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2 {if $step >= 2}scb_s_western_blot_progress_selected{/if}'>
             2. Prepare Gel
         </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3 {if $step >= 3}scb_s_western_blot_progress_selected{/if}'>
             3. Load Gel
         </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_4 {if $step >= 4}scb_s_western_blot_progress_selected{/if}'>
             4. Run
         </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_5 {if $step >= 5}scb_s_western_blot_progress_selected{/if}'>
             5. Transfer
         </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_6 {if $step >= 6}scb_s_western_blot_progress_selected{/if}'>
             6. Blot
         </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_7 {if $step >= 7}scb_s_western_blot_progress_selected{/if}'>
             7. Develop
         </div>
 
 
     </div>
+    </span>
 
 </div>
 {/template}

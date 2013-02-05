@@ -71,7 +71,7 @@
     </div>
     <a class="scb_s_navigation_button scb_f_open_select_technique"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Select technique</a><br/>
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 </div>
 {/template}
 
@@ -103,20 +103,14 @@
     {/if}
     <div class='scb_s_western_blot_samples_area'>
 
+        <div class='scb_s_western_blot_samples_heading'>
+            Samples
+        </div>
         <div class='scb_s_western_blot_choose_gel_type'>
-            1) Choose Gel Type:
-            <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".10"
-                   western_blot_id='{$western_blot.id}'
-                   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type ==
-            '.10'}checked='checked'{/if} disabled='disabled'>10%</input>
-            <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12"
-                   western_blot_id='{$western_blot.id}'
-                   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type ==
-            '.12'}checked='checked'{/if} disabled='disabled'>12%</input>
-            <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15"
-                   western_blot_id='{$western_blot.id}'
-                   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type ==
-            '.15'}checked='checked'{/if} disabled='disabled'>15%</input>
+            Gel Type:
+            {if $western_blot.gel_type =='.10'}10%{/if}
+            {if $western_blot.gel_type =='.12'}12%{/if}
+            {if $western_blot.gel_type =='.15'}15%{/if}
         </div>
         <div class='scb_s_western_blot_choose_samples_order'>
             <ol class='scb_s_western_blot_choose_samples_order_list'>
@@ -130,7 +124,7 @@
                 {/foreach}
             </ol>
             {if $western_blot.marker_loaded == true}
-            <div class='scb_s_western_blot_marker'>15. Marker</div>
+            <div class='scb_s_western_blot_marker'>15. &nbsp; Marker</div>
             {/if}
         </div>
         {if $western_blot.marker_loaded == false}
@@ -254,7 +248,7 @@
 
 <a class='scb_s_western_blot_blot_and_develop scb_s_navigation_button'
    western_blot_id='{$western_blot.id}'
-   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>Blot & Develop</a>
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>BLOT & DEVELOP</a>
 {/template}
 
 /**
@@ -268,11 +262,11 @@
 <h1>Blotting Conditions</h1>
 <div class='scb_s_wb_primary_antibody'>
     Primary antibody:
-        <p>{$t.primary_anti_body[$western_blot_gel.primary_anti_body].name}</p>
+        <div>{$t.primary_anti_body[$western_blot_gel.primary_anti_body].name}</div>
 </div>
 <div class='scb_s_wb_secondary_antibody'>
-    Primary antibody:
-        <p>{$t.secondary_anti_body[$western_blot_gel.secondary_anti_body].name}</p>
+    Secondary antibody:
+        <div>{$t.secondary_anti_body[$western_blot_gel.secondary_anti_body].name}</div>
 </div>
 <div class='scb_s_wb_exposure_time'>
     Exposure time: <div class='scb_s_wb_exposure_time_value'></div>
@@ -280,5 +274,5 @@
            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'></div>
 </div>
 <a class='scb_s_western_blot_reprobe scb_s_navigation_button' western_blot_id='{$western_blot.id}'
-   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>Re-probe</a>
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>RE-PROBE</a>
 {/template}
