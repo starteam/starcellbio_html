@@ -158,12 +158,14 @@
 }
 .scb_s_western_blot_tools {
   width: 225px;
-  height: 400px;
+  height: 350px;
   vertical-align: top;
   display: inline-block;
   position: absolute;
   top: 0;
   left: 370px;
+  border-left: 1px solid #e0e0e0;
+  padding-left: 6px;
 }
 .scb_s_western_blot_run_gel_and_transfer {
   position: relative;
