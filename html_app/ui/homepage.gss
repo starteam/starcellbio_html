@@ -270,7 +270,7 @@
 
 .scb_s_homepage_experimental_design_list_info {
     width: 200px;
-    display: inline-block;
+    display: inline-block; 
     font-family: 'sourcesanspro-regular';
     vertical-align: top;
     height:124px;
