@@ -51,6 +51,7 @@ scb.ui.HomepageView = function scb_ui_HomepageView(gstate) {
 			global_template : gstate.context.master_model
 		}));
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(),gstate.workarea);
+        document.title = "Home - StarCellBio";
 	}
 
 }

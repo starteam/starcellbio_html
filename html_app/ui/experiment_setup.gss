@@ -92,7 +92,7 @@ table.scb_s_experiment_setup_table {
 .scb_s_experiment_setup_table_element {
 }
 
-.scb_f_experiment_setup_remove_sample {
+.scb_f_experiment_setup_remove_sample, .scb_f_experiment_setup_duplicate_sample {
     border:0px;
     background-color: #e9e9e9;
     width:24px;

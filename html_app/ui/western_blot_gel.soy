@@ -135,16 +135,18 @@
         <div class='scb_s_western_blot_gel_tabs'>
             {foreach $gel in $western_blot.gel_list.list}
             {if $western_blot_gel.id == $gel.id}
-            <span class='scb_s_western_blot_gel_active'>
+            <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
 
             <div class='scb_s_western_blot_gel_tab_selected' western_blot_id='{$western_blot.id}'
                  assignment_id='{$assignment.id}'
-                 experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}' contenteditable="true">{$gel.name}
+                 experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}' {if $gel.is_developed}contenteditable="true"{/if}>{$gel.name}
             </div>
+        {if $gel.is_developed}
             <button class='scb_f_western_blot_gel_remove' western_blot_id='{$western_blot.id}'
                     assignment_id='{$assignment.id}'
-                    experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}'>X
+                    experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}'><img src='images/setup/scb_remove.png'>
             </button>
+        {/if}
             </span>
             {else}
             <div class='scb_s_western_blot_gel_tab' western_blot_id='{$western_blot.id}'

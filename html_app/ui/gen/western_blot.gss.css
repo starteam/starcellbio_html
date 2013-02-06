@@ -15,18 +15,33 @@
   margin-bottom: 5px;
   margin-top: 20px;
 }
+.scb_s_western_blot_tab_content {
+  border-top: 1px solid #80d1ae;
+}
 .scb_s_western_blot_open_western_blot {
-  border: 1px #b0b0b0 solid;
-  padding: 2px;
   margin: 3px;
   margin-left: 5px;
+  background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
+  display: inline-block;
+  width: 119px;
+  padding-left: 20px;
+  top: 4px;
+  position: relative;
+  height: 19px;
+  border-bottom: 1px solid #80d1ae;
+  font-size: 11pt;
 }
 .scb_s_western_blot_active {
-  border: 1px #b0b0b0 solid;
-  padding: 2px;
-  margin: 3px;
   margin-left: 5px;
   border-bottom: 1px white solid;
+  background-image: url('../images/western_blot/WesternBlot_GreenTab.png');
+  display: inline-block;
+  width: 125px;
+  padding-left: 20px;
+  top: 7px;
+  position: relative;
+  height: 20px;
+  font-size: 11pt;
 }
 .scb_f_western_blot_prepare_lysates {
   border-radius: 5px;
@@ -113,27 +128,22 @@
   margin-top: -1px;
 }
 .scb_s_western_blot_gel_tab {
-  width: 75px;
+  width: 140px;
   display: inline-block;
-  border: 1px solid black;
-  border-radius: 6px 6px 0 0;
   border-bottom: 0;
-  height: 25px;
+  height: 20px;
+  top: 7px;
   font-family: 'sourcesanspro-bold';
   font-size: 11.5pt;
   text-align: center;
+  background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
+  position: relative;
 }
 .scb_s_western_blot_gel_active {
-  width: 75px;
   display: inline-block;
-  border: 1px solid #80d1ae;
-  border-radius: 6px 6px 0 0;
-  height: 25px;
-  top: -1px;
-  position: relative;
   z-index: 99;
-  border-bottom-color: white;
   color: green;
+  background-image: url('../images/western_blot/WesternBlot_GreenTab.png');
 }
 .scb_s_western_blot_gel_tab_selected {
   display: inline-block;
@@ -143,6 +153,8 @@
 }
 .scb_f_western_blot_gel_remove {
   display: inline-block;
+  border: none;
+  background-color: transparent;
 }
 .scb_s_western_blot_gel_content {
   height: 350px;
@@ -153,6 +165,8 @@
 .scb_s_western_blot_gel {
   display: block;
   vertical-align: top;
+  width: 363px;
+  height: 288px;
 }
 .scb_s_western_blot_gel_number {
   width: 22px;
@@ -220,4 +234,8 @@
 }
 .scb_f_wb_anti_body_select_primary, .scb_f_wb_anti_body_select_secondary {
   font-size: 12pt;
+}
+.scb_f_western_blot_remove {
+  border: none;
+  background-color: white;
 }

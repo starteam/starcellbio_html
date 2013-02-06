@@ -24,103 +24,72 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="assignments.gss" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.gss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="642" selection-end="642" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="experiment_design.gss" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_design.gss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="17" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="experiment_setup.gss" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.gss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="17" selection-start="660" selection-end="660" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="homepage.gss" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="9" selection-start="2294" selection-end="2312" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="select_technique.gss" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="14" selection-start="2313" selection-end="2313" vertical-scroll-proportion="-30.681818">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="western_blot.gss" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.gss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="4" selection-start="1433" selection-end="1433" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="western_blot_gel.gss" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot_gel.gss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="master_model.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1627" column="15" selection-start="60531" selection-end="60531" vertical-scroll-proportion="-29.192308">
-              <folding>
-                <element signature="e#14464#27180#0" expanded="false" />
-                <element signature="e#27206#33605#0" expanded="false" />
-                <marker date="1360172917000" expanded="true" signature="61269:61317" placeholder="{&quot;name&quot;: 'Cytoplasm'...}" />
-                <marker date="1360172917000" expanded="true" signature="61341:61387" placeholder="{&quot;name&quot;: 'Nuclear'...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="assignment.gss" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.gss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="0" selection-start="655" selection-end="655" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="assignment.soy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.soy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="160" selection-start="1367" selection-end="1382" vertical-scroll-proportion="-20.458334">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="WesternBlotView.js" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="257" column="14" selection-start="9107" selection-end="9107" vertical-scroll-proportion="0.67650396">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="western_blot.gss" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.gss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="44" column="9" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlotCanvas.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="244" column="7" selection-start="7903" selection-end="7903" vertical-scroll-proportion="-6.34">
+                  <folding>
+                    <element signature="n#style#0;n#span#1;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="WesternBlotCanvas.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="154" column="9" selection-start="4725" selection-end="4725" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="western_blot_gel.gss" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot_gel.gss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="16" column="4" selection-start="291" selection-end="291" vertical-scroll-proportion="0.2724177">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -130,22 +99,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/html_app/ui/homepage.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/experiment_design.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/common.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/common.gss" />
-        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/western_blot.gss" />
-        <option value="$PROJECT_DIR$/html_app/ui/select_technique.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/select_technique.gss" />
-        <option value="$PROJECT_DIR$/html_app/master_model.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/homepage.gss" />
-        <option value="$PROJECT_DIR$/html_app/ui/assignment.gss" />
-        <option value="$PROJECT_DIR$/html_app/ui/assignments.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_design.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
+        <option value="$PROJECT_DIR$/html_app/model/CellTreatment.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/AssignmentsView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/HomepageView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/AssignmentView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
+        <option value="$PROJECT_DIR$/html_app/model/WesternBlot.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot_gel.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot_gel.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
       </list>
     </option>
   </component>
@@ -242,6 +211,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StarCellBio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -555,119 +542,116 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
+    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlotGel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="30" selection-start="4697" selection-end="4697" vertical-scroll-proportion="-26.75">
+        <state line="10" column="27" selection-start="361" selection-end="361" vertical-scroll-proportion="0.17462166">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/common.soy">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="107" selection-start="3307" selection-end="3307" vertical-scroll-proportion="0.017502917">
+        <state line="246" column="24" selection-start="9280" selection-end="9280" vertical-scroll-proportion="1.104773">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/common.gss">
+    <entry file="file://$PROJECT_DIR$/html_app/model/WesternBlot.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="23" selection-start="1031" selection-end="1031" vertical-scroll-proportion="0.0">
+        <state line="101" column="17" selection-start="4222" selection-end="4222" vertical-scroll-proportion="0.77299184">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="74" selection-start="3911" selection-end="3947" vertical-scroll-proportion="-12.208333">
+        <state line="98" column="64" selection-start="3419" selection-end="3419" vertical-scroll-proportion="0.88081723">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.soy">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_design.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="4" selection-start="7620" selection-end="7620" vertical-scroll-proportion="-11.875">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.40402845">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.soy">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="11" selection-start="3292" selection-end="3292" vertical-scroll-proportion="-38.833332">
+        <state line="132" column="34" selection-start="5852" selection-end="5852" vertical-scroll-proportion="-4.013621">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
+    <entry file="file://$PROJECT_DIR$/html_app/model/CellTreatment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1627" column="15" selection-start="60531" selection-end="60531" vertical-scroll-proportion="-29.192308">
-          <folding>
-            <element signature="e#14464#27180#0" expanded="false" />
-            <element signature="e#27206#33605#0" expanded="false" />
-            <marker date="1360172917000" expanded="true" signature="61269:61317" placeholder="{&quot;name&quot;: 'Cytoplasm'...}" />
-            <marker date="1360172917000" expanded="true" signature="61341:61387" placeholder="{&quot;name&quot;: 'Nuclear'...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="160" selection-start="1367" selection-end="1382" vertical-scroll-proportion="-20.458334">
+        <state line="48" column="45" selection-start="1551" selection-end="1551" vertical-scroll-proportion="0.50624293">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignment.gss">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/HomepageView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="655" selection-end="655" vertical-scroll-proportion="0.0">
+        <state line="53" column="11" selection-start="1883" selection-end="1930" vertical-scroll-proportion="0.9023836">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.gss">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="642" selection-end="642" vertical-scroll-proportion="0.0">
+        <state line="17" column="64" selection-start="565" selection-end="565" vertical-scroll-proportion="0.28944382">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_design.gss">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="17" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.33767772">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.gss">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentsView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="17" selection-start="660" selection-end="660" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="9" selection-start="2294" selection-end="2312" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="14" selection-start="2313" selection-end="2313" vertical-scroll-proportion="-30.681818">
+        <state line="17" column="51" selection-start="537" selection-end="537" vertical-scroll-proportion="0.28944382">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.gss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="4" selection-start="1433" selection-end="1433" vertical-scroll-proportion="0.0">
+        <state line="44" column="9" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot_gel.gss">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="4" selection-start="291" selection-end="291" vertical-scroll-proportion="0.2724177">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="244" column="7" selection-start="7903" selection-end="7903" vertical-scroll-proportion="-6.34">
+          <folding>
+            <element signature="n#style#0;n#span#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="257" column="14" selection-start="9107" selection-end="9107" vertical-scroll-proportion="0.67650396">
           <folding />
         </state>
       </provider>

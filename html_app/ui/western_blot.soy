@@ -41,6 +41,7 @@
     {call scb_homepage.display_footer}
     {param t:$t /}
     {/call}
+    {call .well_images/}
 </div>
 {/template}
 
@@ -134,7 +135,7 @@
     <span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
           experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
     <button class='scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-            experiment_id='{$experiment.id}'>X
+            experiment_id='{$experiment.id}'><img src="images/setup/scb_remove.png">
     </button>
     </span>
     {else}
@@ -200,6 +201,11 @@
             </td>
         </tr>
         {/foreach}
+        <tr>
+            <td colspan='4'>
+                <button class='scb_f_western_blot_sample_active_all'>Select All</button>
+            </td>
+        </tr>
     </table>
     <a class='scb_s_navigation_button scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
@@ -232,9 +238,11 @@
         <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if}>15%</input>
     </div>
+    <!--
     <div class='scb_s_western_blot_choose_samples_note'>
         NOTE: You can reorder samples by dragging and dropping into new order
     </div>
+    -->
     <div class='scb_s_western_blot_choose_samples_order'>
         <ol class='scb_s_western_blot_choose_samples_order_list'>
             {foreach $r in $rows}
@@ -264,7 +272,7 @@
         {call .display_western_blot_numbers}
         {/call}
 
-    <img class='scb_s_western_blot_gel' src='images/western_blot/SCB_WesternBlotting_Gel.png'>
+    <canvas class='scb_s_western_blot_gel' src='images/western_blot/SCB_WesternBlotting_Gel.png'/>
 
     <div class='scb_s_western_blot_tools'>
         <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' western_blot_id='{$western_blot.id}'
@@ -307,18 +315,21 @@
 @param kinds
 */
 {template .display_lysate_types}
+
 <select class="scb_f_western_blot_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
         western_blot_id='{$western_blot.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
         lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
 {if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
 >
 {if $lane.kind == 'existing'}
-{foreach $k in keys($kinds)}
-<option value='{$k}'
-{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
-{/foreach}
+    {foreach $k in keys($kinds)}
+    <option value='{$k}'
+    {if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+    {/foreach}
 {else}
-<option selected="selected" disabled="disabled">Pick Lysate Type</option>
+    {if length(keys($kinds)) != 1}
+    <option selected="selected" disabled="disabled">Pick Lysate Type</option>
+    {/if}
     {foreach $k in keys($kinds)}
         <option value='{$k}'>{$kinds[$k].name}</option>
     {/foreach}
@@ -378,4 +389,27 @@
     </span>
 
 </div>
+{/template}
+
+/**
+*/
+{template .well_images}
+    <span class='scb_wells' style='display:none;'>
+        <img src='images/western_blot/WesternBlot_BlueWells_01.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_02.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_03.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_04.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_05.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_06.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_07.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_08.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_09.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_10.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_11.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_12.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_13.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_14.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_15.png'>
+        <img src='images/western_blot/SCB_WesternBlotting_Gel.png'>
+    </span>
 {/template}

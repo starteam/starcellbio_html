@@ -62,7 +62,7 @@ table.scb_s_experiment_setup_table {
 .scb_s_experiment_setup_table_border {
   border-top: 1px solid #e0e0e0;
 }
-.scb_f_experiment_setup_remove_sample {
+.scb_f_experiment_setup_remove_sample, .scb_f_experiment_setup_duplicate_sample {
   border: 0;
   background-color: #e9e9e9;
   width: 24px;

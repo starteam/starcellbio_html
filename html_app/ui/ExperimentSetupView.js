@@ -113,6 +113,29 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample = functio
     scb.ui.static.MainFrame.refresh();
 };
 
+scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_duplicate_sample = function (param) {
+    var experiment_id = $(param).attr('experiment_id');
+    var assignment_id = $(param).attr('assignment_id');
+    var cell_treatment_id = $(param).attr('cell_treatment_id');
+
+    var state = {
+        experiment_id:experiment_id,
+        assignment_id:assignment_id,
+        cell_treatment_id:cell_treatment_id,
+        view:'experiment_setup',
+        skip_hash_update:true
+    };
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    var cell_treatment_list = parsed.experiment.cell_treatment_list;
+    cell_treatment_list.duplicate(cell_treatment_id);
+    $('.scb_s_experiment_setup_table_add_samples_dialog').detach();
+    scb.ui.static.MainFrame.refresh();
+};
+
+
 
 scb.ui.static.ExperimentSetupView.scb_f_open_select_technique = function (param) {
     var experiment_id = $(param).attr('experiment_id');
@@ -139,6 +162,9 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_remove_sample', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_duplicate_sample', function (e) {
+        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_duplicate_sample(this);
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_f_open_select_technique', function (e) {

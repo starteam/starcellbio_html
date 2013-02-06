@@ -11,6 +11,8 @@
 .scb_s_western_blot_blot_and_develop {
   position: absolute;
   top: 259px;
+  min-width: 160px;
+  width: 160px;
 }
 .scb_s_wb_exposure_time {
   position: absolute;

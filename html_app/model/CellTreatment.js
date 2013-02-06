@@ -14,7 +14,20 @@ scb.CellTreatmentList = function scb_CellTreatmentList(data, context, parent) {
 	}
 
 	self.duplicate = function(id) {
-		return self.start(scb.Utils.clone_and_clear(scb.utils.find(data.list,id)));
+        var new_list = [];
+        var list = data.list ;
+        for( var i in list )
+        {
+            var elem = list[i];
+            new_list.push(elem)
+            if( id == elem.id)
+            {
+                var new_elem = scb.Utils.clone_and_clear(elem);
+                new_list.push( new_elem );
+            }
+        }
+        data.list = new_list;
+//		return self.start(scb.Utils.clone_and_clear(scb.utils.find(data.list,id)));
 	}
 }
 

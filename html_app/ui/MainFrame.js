@@ -6,8 +6,14 @@ scb.ui.static = scb.ui.static || {};
 scb.ui.static.MainFrame = scb.ui.static.MainFrame || {};
 
 scb.ui.static.MainFrame.update_hash = function (state) {
+    console.info( "update_hash " + state.onhashchange );
+    console.info( $.bbq.getState() );
+    console.info( state );
+state
     if (!state.onhashchange) {
         delete state.onhashchange;
+        $.bbq.removeState({},2);
+        $.bbq.removeState({},2);
         $.bbq.pushState(state, 2);
     }
 }
@@ -235,9 +241,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'experiment_design') {
             if (!parsed.experiment) {
+                delete state.onhashchange;
                 var experiment = parsed.assignment.experiments.start({});
                 state.experiment_id = experiment.id;
-                state.onhashchange = false;
+                window.history.replaceState("New Experiment" , "New Experiment" , '#'+$.param(state));
+                state.onhashchange = true;
                 self.show(state);
                 return;
             }
