@@ -8,6 +8,7 @@
 
 .scb_s_assignment_view {
     background-color: #f4f6f8;
+    width: 960px;
 }
 .scb_s_assignment_sidebar {
     margin-top: 8px;
