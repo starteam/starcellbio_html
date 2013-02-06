@@ -1364,7 +1364,7 @@ var __usability_test = {
                 title:'New row',
                 cell_line: 'wt',
                 treatment_list:{list:[
-                {schedule_value:0, duration_value:0, drug_list:{list:[
+                {schedule_value:0, duration_value:3600*24*3, duration:'3 d', drug_list:{list:[
                     {drug_id:'nc', concentration_id:'0'}
                     ]}
                 }
@@ -1629,6 +1629,14 @@ var __usability_test = {
                 name:'goat anti-Unc-22',
                 secondary:[2],
                 gel_name:'Unc-22'
+            },
+            9:{
+                name:'rabbit anti-tubulin',
+                secondary:[1],
+                gel_name:'anti-tubulin',
+                marks:[
+                    {weight:50, intensity:25.1}
+                ]
             }
         },
         secondary_anti_body:{

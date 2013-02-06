@@ -1,4 +1,10 @@
-
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
 
 .scb_s_design_description {
     position: relative;
@@ -12,15 +18,27 @@
     border-width: 1px;
     border-color: #a0a0a0;
     border-radius: 8px;
-    background-color: white;
     padding: 10px;
-    width:938px;
+    width:928px;
+@mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+
+}
+
+.scb_s_experiment_design_view {
+    background-color: #f4f6f8;
 }
 
 .scb_s_experiment_design_techniques_container {
-    text-align: center;
+    text-align: left;
     position: relative;
     min-height: 200px;
+}
+
+.scb_s_experiment_design_techniques_tq {
+    padding-left:20px;
+    padding-top:20px;
+    display:block;
+    padding-bottom:10px;
 }
 .scb_s_design_description>.scb_f_open_assignment {
     position: absolute;
@@ -35,9 +53,21 @@
 }
 
 .scb_s_experiment_design_objective,.scb_s_experiment_design_hypothesis {
-    width:864px;
+    width:600px;
+    height:100px;
+    font-size:11pt;
 }
 
-.scb_s_experiment_design_techniques_text {
+.scb_s_experiment_design_hypothesis_text,.scb_s_experiment_design_objective_text,.scb_s_experiment_design_techniques_text {
+    font-size:11pt;
     text-align: left;
+}
+
+.scb_s_experiment_design_hypothesis_container,.scb_s_experiment_design_techniques_container {
+    padding-top:15px;
+}
+
+.scb_s_experiment_name_edit {
+    font-family: 'sourcesanspro-semibold';
+    font-size:11pt;
 }

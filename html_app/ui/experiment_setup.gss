@@ -1,4 +1,14 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
 
+.scb_s_experiment_setup_view {
+    background-color: #f4f6f8;
+}
 
 .scb_s_experiment_setup_details_view {
     position: relative;
@@ -12,9 +22,9 @@
     border-width: 1px;
     border-color: #a0a0a0;
     border-radius: 8px;
-    background-color: white;
     padding: 10px;
-    width:938px;
+    width:928px;
+    @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }
 
 .scb_s_experiment_setup_details_view>.scb_f_open_experiment_design {
@@ -39,7 +49,7 @@
     position: absolute;
     bottom: 5px;
     right: 5px;
-    width:275px;
+    width:285px;
 }
 
 
@@ -54,10 +64,11 @@ table.scb_s_experiment_setup_table {
     border-radius:5px;
     border-spacing: 0px;
     width:100%;
+    background-color: white;
 }
 
 .scb_s_experiment_setup_table_body {
-    background-color: #e9e9e9;
+    background-color: #edeef2;
 }
 
 .scb_s_experiment_setup_table_border {
@@ -128,4 +139,9 @@ table.scb_s_experiment_setup_table {
 
 .scb_s_warning>h1 {
     color:red;
+}
+
+.scb_s_experiment_setup_table_heading {
+    font-family: 'sourcesanspro-semibold';
+    font-size:10pt;
 }

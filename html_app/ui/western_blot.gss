@@ -17,7 +17,7 @@
     margin-top:20px;
 }
 
-.scb_f_open_western_blot {
+.scb_s_western_blot_open_western_blot {
     border: 1px #b0b0b0 solid;
         padding: 2px;
         margin: 3px;

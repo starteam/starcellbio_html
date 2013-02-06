@@ -386,6 +386,9 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
     var cell_line_id = parsed.experiment.new_row.cell_line;
     var drug_id = parsed.experiment.new_row.drug_id;
     var concentration_id = parsed.experiment.new_row.concentration_id;
+    var schedule_value = parsed.experiment.new_row.schedule_value;
+    var duration_value = parsed.experiment.new_row.duration_value;
+
     if (drug_id && concentration_id) {
         var valid = _.find(template.drugs[drug_id].concentrations, function (a) {
             return a == concentration_id
@@ -396,7 +399,7 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
                 title:'New row',
                 cell_line:cell_line_id,
                 treatment_list:{list:[
-                    {schedule_value:0, duration_value:0, drug_list:{list:[
+                    {schedule_value:schedule_value, duration_value:duration_value, drug_list:{list:[
                         {drug_id:drug_id, concentration_id:concentration_id}
                     ]}
                     }
@@ -436,6 +439,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
         parsed.experiment.new_row.cell_line = cell_line;
         parsed.experiment.new_row.drug_id = drug_id;
         parsed.experiment.new_row.concentration_id = concentration_id;
+
         $(element).attr('data-is_editing', true);
     }
 
@@ -525,6 +529,9 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
         parsed.experiment.new_row.cell_line = template.ui.experiment_setup.new_row.cell_line || _.keys(template.cell_lines)[0];
         parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].drug_id || _.keys(template.drugs)[0];
         parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
+        parsed.experiment.new_row.schedule_value = template.ui.experiment_setup.new_row.treatment_list.list[0].schedule_value || 0;
+        parsed.experiment.new_row.duration_value = template.ui.experiment_setup.new_row.treatment_list.list[0].duration_value || 0;
+
     }
     $('.scb_s_experiment_setup_td', element).each(function (index) {
         var element = this;

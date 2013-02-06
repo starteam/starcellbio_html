@@ -1,17 +1,34 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
 
+.scb_s_select_technique_view {
+    background-color: #f4f6f8;
+    width:960px;
+}
 .scb_s_select_technique_header {
     font-size: 1.5em
 }
 
 .scb_s_select_technique_western_blot_available {
     border: 1px solid #a0a0a0;
-    height: 200px;
-    width: 210px;
+    height: 160px;
+    width: 265px;
     background-color: white;
     overflow-y:scroll;
+    padding-top:10px;
+    padding-left:3px;
 }
 
-.scb_f_open_western_blot {
+.scb_s_select_technique_open_western_blot {
+    border: 0px solid white;
+    padding-left:15px;
+    display: inline-block;
+    padding-bottom: 2px;
 }
 
 .scb_f_new_western_blot {
@@ -25,21 +42,55 @@
     margin-top: 20px;
 }
 
-.scb_s_select_technique_western_blot {
-    width:220px;
+.scb_s_select_technique_western_blot, .scb_s_select_technique_flow,.scb_s_select_technique_micro {
+    width:260px;
     border: 1px solid #a0a0a0;
     border-radius: 5px;
     padding-left:10px;
     padding-right:20px;
     padding-bottom:8px;
+    display:inline-block;
+    margin-right: 20px;
+    margin-top:10px;
+    background-color: #edeef2;
+    height:368px;
+    vertical-align: top;
+    position: relative;
+    font-size:10pt;
 }
+
+.scb_s_select_technique_disabled {
+    opacity: .25;
+}
+
 
 .scb_s_select_technique_details_view {
     position: relative;
+    border:1px solid #e0e0e0;
+    border-radius: 5px;
+    width:938px;
+    margin-top: 10px;
+    padding-left:10px;
+    @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }
 
 .scb_s_select_technique_details_view>.scb_s_experiment_step {
     left:5px;
     top:10px;
     padding-left:5px;
+}
+
+.scb_s_select_technique_learn_more {
+    color: #189689;
+    font-weight: bold;
+}
+
+.scb_f_new_western_blot, .scb_f_new_flow_cytometry, .scb_f_new_microscopy {
+    position: absolute;
+    bottom:5px;
+    left:20px;
+}
+
+.scb_s_select_technique_reminder {
+    font-family: 'sourcesanspro-bold';
 }

@@ -56,14 +56,14 @@ Assignment description
 {template .display_abstract}
 <div class='scb_s_abstract'>
     {if $assignments.selected != null}
-        <b>
+        <span class="scb_s_abstract_title">
             {$assignments.selected.name |noAutoescape}
 
-        </b>
-        <br/>
+        </span>
+        <hr/>
         {$assignments.selected.description |noAutoescape}
 
-    <a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignments.selected_id}">ASSIGNMENT &#9654;</a>
+    <a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignments.selected_id}">ASSIGNMENT &nbsp; &#9654;</a>
 
     {else}
         {$global_template.app_description |noAutoescape}
@@ -77,7 +77,7 @@ Assignment assignments
 */
 {template .display_assignments}
 <div class='scb_s_assignments_sidebar'>
-    <h1 class='scb_s_assignments_sidebar_title'>YOUR ASSIGNMENTS</h1>
+    <h1 class='scb_s_assignments_sidebar_title'>Your Assignments</h1>
     <dl>
         {foreach $assignment in $assignments.list}
         <dt class='scb_s_assignments_sidebar_name'>
