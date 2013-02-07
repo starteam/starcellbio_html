@@ -1,13 +1,27 @@
 .scb_s_wb_primary_antibody {
     position: absolute;
     top:70px;
-    font-size: 12pt;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
+    padding-left: 10px;
+
+}
+.scb_s_wb_primary_antibody > div {
+    font-family: 'sourcesanspro-regular';
+
 }
 
 .scb_s_wb_secondary_antibody {
     position: absolute;
     top: 120px;
-    font-size: 12pt;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
+    padding-left: 10px;
+}
+
+.scb_s_wb_secondary_antibody > div {
+font-family: 'sourcesanspro-regular';
+
 }
 
 .scb_s_western_blot_blot_and_develop {
@@ -21,7 +35,10 @@
     position: absolute;
     top: 180px;
     width:200px;
-    font-size: 12pt;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
+    margin-left:10px;
+
 }
 
 .scb_s_western_blot_reprobe {
@@ -46,4 +63,22 @@
 
 .scb_s_western_blot_gel>.scb_s_western_blot_gel_numbers {
     margin-left:6px;
+}
+
+.scb_s_western_blot_tools > h1 {
+    font-size:11pt;
+    font-family: 'sourcesanspro-semibold';
+    padding-left:10px;
+
+}
+
+.scb_f_wb_exposure_slider {
+    height: 1px;
+    background-color: black;
+}
+
+.ui-slider-handle {
+    width: 5px;
+    background-color: black;
+    top:-10px;
 }

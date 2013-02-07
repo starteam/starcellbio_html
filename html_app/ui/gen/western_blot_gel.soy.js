@@ -34,7 +34,7 @@ scb_western_blot_gel.display_tabs = function(opt_data, opt_sb) {
   } else {
     scb_western_blot.display_wb_progress({step: 6}, output);
   }
-  output.append('<div class=\'scb_s_western_blot_samples_area\'><div class=\'scb_s_western_blot_samples_heading\'>Samples</div><div class=\'scb_s_western_blot_choose_gel_type\'>Gel Type:', (opt_data.western_blot.gel_type == '.10') ? '10%' : '', (opt_data.western_blot.gel_type == '.12') ? '12%' : '', (opt_data.western_blot.gel_type == '.15') ? '15%' : '', '</div><div class=\'scb_s_western_blot_choose_samples_order\'><ol class=\'scb_s_western_blot_choose_samples_order_list\'>');
+  output.append('<div class=\'scb_s_western_blot_samples_area\'><div class=\'scb_s_western_blot_choose_gel_type\'>Gel Type:', (opt_data.western_blot.gel_type == '.10') ? '10%' : '', (opt_data.western_blot.gel_type == '.12') ? '12%' : '', (opt_data.western_blot.gel_type == '.15') ? '15%' : '', '</div><div class=\'scb_s_western_blot_samples_heading\'>Samples</div><div class=\'scb_s_western_blot_choose_samples_order\'><ol class=\'scb_s_western_blot_choose_samples_order_list\'>');
   var rList72 = opt_data.rows;
   var rListLen72 = rList72.length;
   for (var rIndex72 = 0; rIndex72 < rListLen72; rIndex72++) {

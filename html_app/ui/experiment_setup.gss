@@ -50,7 +50,7 @@
     position: absolute;
     bottom: 5px;
     right: 5px;
-    width:285px;
+    width:305px;
 }
 
 

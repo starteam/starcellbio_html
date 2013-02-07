@@ -1374,7 +1374,7 @@ var __usability_test = {
                 ]}
             }
             },
-            western_blot:{format:"%CELL_LINE% %TREATMENT% %CONCENTRATION%",
+            western_blot:{format:"%CELL_LINE%, %TREATMENT%, %CONCENTRATION%",
                 keys:{
                     '%CELL_LINE%':{attr:['cell_line'],map:['cell_lines','%KEY%','name']},
                     '%TREATMENT%':{attr:['treatment_list','list','0','drug_list','list','0','drug_id'],map:['drugs','%KEY%','name']},

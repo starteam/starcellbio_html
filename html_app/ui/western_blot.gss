@@ -1,7 +1,13 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
+
+
 .scb_western_blot_details_view_inner {
-    background: white;
-    border: 1px #c0c0c0 solid;
-    border-radius: 5px;
     width: 950px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -10,15 +16,22 @@
 }
 
 .scb_s_western_blot_samples_table {
-    border: 1px #b0b0b0 solid;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    border:1px #189689 solid;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
     margin-top:20px;
+    min-height: 300px;
+    background-color: #EDEEF2;
+
 }
 
 .scb_s_western_blot_tab_content {
-    border-top:1px solid #80d1ae;
+    border:1px solid #808080;
+    border-radius: 5px;
+    position: relative;
+    @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }
 .scb_s_western_blot_open_western_blot {
         margin: 3px;
@@ -30,7 +43,7 @@
     top:4px;
     position: relative;
     height:19px;
-    border-bottom:1px solid #80d1ae;
+    border-bottom:1px solid #808080;
     font-size:11pt;
 
 }
@@ -38,7 +51,7 @@
 .scb_s_western_blot_active {
     margin-left:5px;
     border-bottom: 1px white solid;
-    background-image: url('../images/western_blot/WesternBlot_GreenTab.png');
+    background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
     display:inline-block;
     width: 125px;
     padding-left:20px;
@@ -46,14 +59,16 @@
     position: relative;
     height: 20px;;
     font-size:11pt;
+    z-index:99;
 }
 
 
 .scb_f_western_blot_prepare_lysates {
     border-radius: 5px;
     position: relative;
-    left: 750px;
-    bottom: 5px;
+    left: 690px;
+    bottom: 10px;
+    display:inline-block;
 }
 
 .scb_s_western_blot_progress {
@@ -121,6 +136,7 @@
     height:368px;
     overflow-y: auto;
     overflow-x: hidden;
+    background-color: white;
 }
 
 .scb_s_western_blot_samples_gel_area {
@@ -159,7 +175,7 @@
 .scb_s_western_blot_gel_active {
     display:inline-block;
     z-index:99;
-    color:green;
+    color:#189689;
     background-image: url('../images/western_blot/WesternBlot_GreenTab.png');
 }
 
@@ -181,6 +197,7 @@
     width:600px;
     position: relative;
     border:1px solid #80d1ae;
+    background-color: white;
 }
 
 .scb_s_western_blot_gel {
@@ -196,6 +213,10 @@
 }
 .scb_s_western_blot_gel_numbers {
     padding-left: 20px;
+    z-index: 99;
+    display: block;
+    position: relative;
+    top: 15px;
 }
 
 .scb_s_western_blot_tools {
@@ -234,51 +255,107 @@
 
 .scb_s_western_blot_samples_heading {
 
-    font-size: 14pt;
+    font-size: 11pt;
     font-family: 'sourcesanspro-semibold';
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    text-align: left;
+    padding-top: 15px;
+    margin-bottom: -10px;
+    padding-left: 22px;
 
 }
 
 .scb_s_western_blot_choose_samples_order_list > li {
-    font-size:11pt;
+    font-size:10pt;
     padding:3px;
-    color:gray;
+    color:black;
 }
 
 .scb_s_western_blot_marker {
-    font-size: 11pt;
-    color: gray;
-    left: 15px;
+    font-size: 10pt;
+    color: black;
+    left: 19px;
     position: relative;
     top: -10px;
 }
 
 .scb_s_western_blot_choose_gel_type {
-    font-size: 12pt;
-    color:gray;
-    text-align: center;
-
+    font-size: 11pt;
+    color: black;
+    text-align: left;
+    left: 23px;
+    display: inline-block;
+    position: relative;
+    font-family: 'sourcesanspro-semibold';
+    margin-top: 10px;
 }
 
 .scb_s_western_blot_load_marker {
-        border: 0px;
         text-align: center;
-        margin-left: 50px;
-        margin-right: 50px;
+        margin-left: 22px;
+@mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
+    border: 1px solid #e0e0e0;
+    border-radius: 5pt;
+    width: 120px;
+    height: 30px;
+    color: black;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
 }
 
 .scb_f_wb_anti_body_select_primary {
-    font-size:12pt;
+    font-size:10pt;
 }
 
 .scb_f_wb_anti_body_select_secondary {
-    font-size:12pt;
+    font-size:10pt;
 }
 
 .scb_f_western_blot_remove {
     border:none;
     background-color: white;
+}
+
+
+.scb_s_western_blot_tab_content>.scb_f_open_select_technique {
+    position: relative;
+    bottom: 10px;
+    left: -240px;
+    display:inline-block;
+}
+
+.scb_s_western_blot_samples_table > table {
+    width:100%;
+}
+
+.scb_s_western_blot_samples_table_head {
+    background-color: white;
+    font-family: 'sourcesanspro-semibold';
+    font-size:10pt;
+}
+
+.scb_s_western_blot_samples_table_heading {
+    margin: 0px;
+    font-size:10pt;
+
+}
+
+.scb_s_western_blot_samples_table_td {
+    margin: 0px;
+    font-size:10pt;
+
+}
+
+.scb_s_western_blot_samples_table_tr {
+    margin: 0px;
+}
+
+.scb_f_western_blot_sample_active_all {
+@mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
+    border: 1px solid #e0e0e0;
+    border-radius: 5pt;
+    width: 120px;
+    height: 30px;
+    color: black;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
 }

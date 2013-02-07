@@ -71,9 +71,6 @@
         {param can_prepare_lysate:$can_prepare_lysate/}
         {/call}
     </div>
-    <a class="scb_s_navigation_button scb_f_open_select_technique"
-       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 </div>
 {/template}
 
@@ -119,6 +116,10 @@
     {if $kind == 'gel_operations'}
 
     {/if}
+    <a class="scb_s_navigation_button scb_f_open_select_technique"
+       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
+
 </div>
 {/template}
 
@@ -161,15 +162,15 @@
 {/call}
 <div class='scb_s_western_blot_samples_table'>
     <table>
-        <thead>
-        <td>Select</td>
-        <td>Samples</td>
-        <td>Lysate type</td>
-        <td>Action</td>
+        <thead class='scb_s_western_blot_samples_table_head'>
+        <td class='scb_s_western_blot_samples_table_heading'>Select</td>
+        <td class='scb_s_western_blot_samples_table_heading'>Samples</td>
+        <td class='scb_s_western_blot_samples_table_heading'>Lysate type</td>
+        <td class='scb_s_western_blot_samples_table_heading'>&nbsp;</td>
         </thead>
         {foreach $r in $rows}
-        <tr>
-            <td>{if $r.display_sample}
+        <tr class='scb_s_western_blot_samples_table_tr'>
+            <td class='scb_s_western_blot_samples_table_td'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_western_blot_sample_active" western_blot_id='{$western_blot.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
                        cell_treatment_id='{$r.cell_treatment.id}'
@@ -177,11 +178,11 @@
                 >
                 {/if}
             </td>
-            <td>{if $r.display_sample}
+            <td class='scb_s_western_blot_samples_table_td'>{if $r.display_sample}
                 {$r.display_text}
                 {/if}
             </td>
-            <td>
+            <td class='scb_s_western_blot_samples_table_td'>
                 {call .display_lysate_types}
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
@@ -191,27 +192,32 @@
                 {param lane:$r/}
                 {/call}
             </td>
-            <td>
+            <td class='scb_s_western_blot_samples_table_td'>
                 {if $r.kind == 'existing'}
                 <button class="scb_f_western_blot_sample_remove" western_blot_id='{$western_blot.id}'
                         assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
                 {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>X
                 </button>
+                {else}
+                <button class="scb_f_western_blot_sample_remove"
+                disabled="disabled">X
+                </button>
+
                 {/if}
             </td>
         </tr>
         {/foreach}
         <tr>
             <td colspan='4'>
-                <button class='scb_f_western_blot_sample_active_all'>Select All</button>
+                <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
             </td>
         </tr>
     </table>
-    <a class='scb_s_navigation_button scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-    {if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE LYSATE
-    </a>
 </div>
+<a class='scb_s_navigation_button scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE LYSATES  &nbsp; &#9654;
+</a>
 {/template}
 
 /**
@@ -222,27 +228,28 @@
 */
 {template .prepare_gel}
 {call .display_wb_progress}
-{param step:2/}
+{param step:3/}
 {/call}
 <div class='scb_s_western_blot_samples_area'>
 
-    <div class='scb_s_western_blot_samples_heading'>
-        Samples
-    </div>
     <div class='scb_s_western_blot_choose_gel_type'>
-        Choose Gel Type:
+        <!-- TODO: Gel Type stuff -->
+        Gel Type:
         <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".10" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.10'}checked='checked'{/if}>10%</input>
-        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
-               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.12'}checked='checked'{/if}>12%</input>
+<!--        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
+               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.12'}checked='checked'{/if} disabled='disabled'>12%</input>
         <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15" western_blot_id='{$western_blot.id}'
-               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if}>15%</input>
-    </div>
+               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if} disabled='disabled'>15%</input>
+-->    </div>
     <!--
     <div class='scb_s_western_blot_choose_samples_note'>
         NOTE: You can reorder samples by dragging and dropping into new order
     </div>
     -->
+    <div class='scb_s_western_blot_samples_heading'>
+        Samples
+    </div>
     <div class='scb_s_western_blot_choose_samples_order'>
         <ol class='scb_s_western_blot_choose_samples_order_list'>
             {foreach $r in $rows}
@@ -260,7 +267,7 @@
     </div>
     {if $western_blot.marker_loaded == false}
     <button class='scb_s_western_blot_load_marker scb_s_navigation_button' western_blot_id='{$western_blot.id}'
-            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Load Marker
+            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>LOAD MARKER
     </button>
     {/if}
 </div>
