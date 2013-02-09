@@ -8,7 +8,8 @@ scb.WesternBlotGelList = function scb_WesternBlotGelList(data, context, parent) 
 
 	self.start = function(d) {
 		d = ( typeof (d) == 'undefined' ? {} : d);
-		d.name = d.name || "Gel " + data.counter++;
+		d.name = d.name || "BLOT";
+        data.counter++;
 		var ret = new scb.WesternBlotGel(d, context, self);
 		data.list.push(d);
 		return ret;

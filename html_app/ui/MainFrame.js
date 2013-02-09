@@ -6,8 +6,14 @@ scb.ui.static = scb.ui.static || {};
 scb.ui.static.MainFrame = scb.ui.static.MainFrame || {};
 
 scb.ui.static.MainFrame.update_hash = function (state) {
+    console.info( "update_hash " + state.onhashchange );
+    console.info( $.bbq.getState() );
+    console.info( state );
+state
     if (!state.onhashchange) {
         delete state.onhashchange;
+        $.bbq.removeState({},2);
+        $.bbq.removeState({},2);
         $.bbq.pushState(state, 2);
     }
 }
@@ -47,6 +53,17 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                                 }
                             }
                         }
+                        if (state.cell_treatment_id) {
+                            var cell_treatment = experiment.cell_treatment_list.get(state.cell_treatment_id);
+                            if (cell_treatment) {
+                                ret.cell_treatment = cell_treatment;
+                                if (state.treatment_id) {
+                                    var treatment = cell_treatment.treatment_list.get(state.treatment_id);
+                                    ret.treatment = treatment;
+                                }
+                            }
+                        }
+
                     }
                     else {
                         // if experiment_id is invalid go to assignment
@@ -74,6 +91,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         if (ret.redisplay == false && state.skip_hash_update != true) {
             scb.ui.static.MainFrame.update_hash(state);
         }
+        ret.context = context;
         return ret;
     }
 
@@ -91,6 +109,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         'height':'100%'
     });
 
+    scb.ui.static.HomepageView.register(workarea);
     scb.ui.static.ExperimentDesignView.register(workarea);
     scb.ui.static.ExperimentSetupView.register(workarea);
     scb.ui.static.WesternBlotView.register(workarea);
@@ -194,6 +213,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'assignments') {
+            if(!parsed.assignment)
+            {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.MainFrame.update_hash(state);
             self.sections.assignments.show({
@@ -214,9 +241,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'experiment_design') {
             if (!parsed.experiment) {
+                delete state.onhashchange;
                 var experiment = parsed.assignment.experiments.start({});
                 state.experiment_id = experiment.id;
-                state.onhashchange = false;
+                window.history.replaceState("New Experiment" , "New Experiment" , '#'+$.param(state));
+                state.onhashchange = true;
                 self.show(state);
                 return;
             }

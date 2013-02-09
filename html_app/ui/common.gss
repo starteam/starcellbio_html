@@ -1,47 +1,159 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
+
 .dummy {
 }
 
+body {
+    background-color: #e9edf1;
+}
+
 .scb_s_navigation_button {
-    background-image: url('../images/homepage/instructor_resources_button.png');
-    padding: 6px 25px 6px 24px;
-    width: 180px;
+   /*background-image: url('../images/homepage/instructor_resources_button.png');*/
+    padding: 3px 20px 3px 20px;
+    width: 200px;
+    min-width: 200px;
     background-position: center;
     color: white;
     text-decoration: none;
     text-align: center;
+    font-size:12pt;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-family:'sourcesanspro-semibold';
+    @mixin gradient(top,#81c9f1,#028dde,#008ddd);
+}
+
+.scb_s_experiment_step {
+    position: relative;
 }
 
 .scb_s_experiment_step_circle {
-    width: 24px;
-    height: 24px;
-    border-radius: 12px;
+    box-shadow:0px 0px 6px #a9a9a9;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
     text-align: center;
     vertical-align: 90%;
     color: white;
-    background-color: #696969;
-    position: relative;
-    display: inline-block;
-    margin-left: 2em;
+    display: block;
+    margin-left:2em;
+    margin-right:2em;
+    @mixin gradient(top,#6e6e6e,#373737,#383838);
 }
 
 .scb_s_experiment_step_number {
-    padding: .4em .25em .25em .25em;
+    padding: .25em .25em .25em .25em;
     vertical-align: top;
+    font-size:16pt;
 }
 
 .scb_experiment_step_selected {
-    background-color: green;
+    @mixin gradient(top,#7eb49d,#157776,#189689);
 }
 
+.scb_experiment_step_previous {
+    @mixin gradient(top,#88d2af,#18968a,#189689);
+}
+
+
+.scb_s_experiment_step_horizontal_line_12 {
+    position:absolute;
+    width:54px;
+    background-color: #80d1ae;
+    height:1px;
+    top:23px;
+    left:65px;
+}
+
+.scb_s_experiment_step_horizontal_line_23 {
+    position:absolute;
+    width:54px;
+    background-color: #80d1ae;
+    height:1px;
+    top:23px;
+    left:155px;
+}
+
+.scb_s_experiment_step_horizontal_line_34 {
+    position:absolute;
+    width:54px;
+    background-color: #80d1ae;
+    height:1px;
+    top:23px;
+    left:245px;
+}
+
+.scb_s_experiment_step_horizontal_line_45 {
+    position:absolute;
+    width:54px;
+    background-color: #80d1ae;
+    height:1px;
+    top:23px;
+    left:335px;
+}
+
+
+.scb_s_experiment_step_div {
+    display:inline-block;
+    margin:5px;
+    height:80px;
+    width:80px;
+    vertical-align: top;
+}
+
+.scb_s_experiment_step_text {
+    display:block;
+    position: relative;
+    text-align: center;
+    padding-top: 10px;
+}
 .scb_s_assignment_step_experiment {
     position: absolute;
-    top: 65px;
-    left: 275px;
+    top: 60px;
+    left: 280px;
     color: #69a996;
+    font-size:2em;
 }
 
 .scb_s_assignment_step {
-    background-color: #69a996;
+    background: #69a996;
     color: white;
     width: 960px;
+    height: 25px;
+    @mixin gradient(top,#80d1ae,#189689,#189689);
+
+}
+.scb_s_assignment_step > img {
+    height:24px;
+    top: 1px;
+    position: relative;
+}
+.scb_s_assignment_step_link {
+    width:140px;
+    height:15px;
+    padding:5px;
+    margin-left:-8px;
+    text-align: center;
+    font-size:1.5em;
+    text-decoration: none;
+    color:white;
+    display:inline-block;
+    vertical-align: top;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.scb_s_assignment_step_link_active {
+    background: url('../images/header/scb_navigation_button.png');
+    margin-left: -14px;
+    margin-right:-11px;
+    margin-top:-1px;
 }

@@ -19,7 +19,7 @@ class SimpleTest(TestCase):
         #self.driver = webdriver.Firefox()
         print settings.rel('../../chromedriver')
         self.driver = webdriver.Chrome(settings.rel('../../chromedriver'))
-        self.base_url = 'http://localhost:8000/static/index.html'
+        self.base_url = 'http://localhost:8000/static/index.html#view=assignments'
 
     @classmethod
     def tearDownClass(self):
@@ -47,14 +47,14 @@ class SimpleTest(TestCase):
     def test_assignment_navigation_tests(self):
         self.load_website()
         self.assert_on_assignments_page()
-        self.select_assignment('basic_tests', title='StarCellBio Basic Tests',
+        self.select_assignment('basic_tests', title='SCB Basic Tests',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.open_assignment('basic_tests', title='StarCellBio Basic Tests',
+        self.open_assignment('basic_tests', title='SCB Basic Tests',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.assert_on_assignment_page()
         self.navigate_via('Assignments')
         self.assert_on_assignments_page()
-        self.open_assignment('basic_tests', title='StarCellBio Basic Tests',
+        self.open_assignment('basic_tests', title='SCB Basic Tests',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.assert_on_assignment_page()
         self.assert_experiments([])
@@ -136,10 +136,10 @@ class SimpleTest(TestCase):
         self.navigate_via('Run gel')
         wb_sample1 = { 'primary_antibody':'1' , 'secondary_antibody':'2' }
         self.select_wb_antibody(wb_sample1)
-        self.navigate_via('Blot')
+        self.navigate_via('BLOT')
+        pudb.set_trace()
         self.navigate_via('Re-probe')
         self.navigate_via('Gel 1')
-        pudb.set_trace()
         self.navigate_via('Gel 2')
         #self.navigate_via('Select technique')
 

@@ -15,6 +15,7 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
 			global_template : gstate.context.master_model,
 			assignments : assignments
 		}));
+        document.title = "Assignments - StarCellBio"
 	}
 
 }

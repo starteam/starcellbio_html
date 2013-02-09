@@ -96,5 +96,6 @@ scb.ui.ExperimentDesignView = function scb_ui_ExperimentDesignView(gstate) {
             experiment: state.experiment
 		}));
         state.experiment.last_view = 'experiment_design';
+        document.title = state.experiment.name + " - StarCellBio" ;
 	}
 }

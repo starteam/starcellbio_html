@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from fsevents import Observer
 from fsevents import Stream
 import os
