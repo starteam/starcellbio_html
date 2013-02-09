@@ -39,10 +39,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="176" column="67" selection-start="7806" selection-end="7806" vertical-scroll-proportion="0.30749014">
+            <state line="176" column="67" selection-start="7806" selection-end="7806" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomepageView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html_app/ui/HomepageView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="32" selection-start="1752" selection-end="1883" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssignmentsView.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentsView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="130" selection-start="616" selection-end="616" vertical-scroll-proportion="0.49097472">
               <folding />
             </state>
           </provider>
@@ -58,7 +76,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/html_app/ui/AssignmentsView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/HomepageView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/AssignmentView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentDesignView.js" />
@@ -74,6 +91,7 @@
         <option value="$PROJECT_DIR$/html_app/ui/assignments.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/assignments.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/AssignmentsView.js" />
       </list>
     </option>
   </component>
@@ -431,11 +449,11 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2745358" sideWeight="0.9984089" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27431422" sideWeight="0.9984089" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Heroku" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1267041" sideWeight="0.17478053" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19153515" sideWeight="0.74189526" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19153515" sideWeight="0.7256858" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2281167" sideWeight="0.49198076" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1267041" sideWeight="0.31284916" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.50040096" order="10" side_tool="true" content_ui="tabs" />
@@ -507,20 +525,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="64" selection-start="565" selection-end="565" vertical-scroll-proportion="0.28944382">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentsView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="51" selection-start="537" selection-end="537" vertical-scroll-proportion="0.28944382">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.gss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="209" column="27" selection-start="4806" selection-end="4806" vertical-scroll-proportion="0.4015444">
@@ -614,7 +618,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="67" selection-start="7806" selection-end="7806" vertical-scroll-proportion="0.30749014">
+        <state line="176" column="67" selection-start="7806" selection-end="7806" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/HomepageView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="32" selection-start="1752" selection-end="1883" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/AssignmentsView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="130" selection-start="616" selection-end="616" vertical-scroll-proportion="0.49097472">
           <folding />
         </state>
       </provider>
