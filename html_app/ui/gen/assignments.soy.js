@@ -41,17 +41,17 @@ scb_assignments.display_abstract = function(opt_data, opt_sb) {
 
 scb_assignments.display_assignments = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_assignments_sidebar\'><h1 class=\'scb_s_assignments_sidebar_title\'>Your Assignments</h1><dl>');
+  output.append('<div class=\'scb_s_assignments_sidebar\'><h1 class=\'scb_s_assignments_sidebar_title\'>Your Assignments</h1><ul>');
   var assignmentList41 = opt_data.assignments.list;
   var assignmentListLen41 = assignmentList41.length;
   for (var assignmentIndex41 = 0; assignmentIndex41 < assignmentListLen41; assignmentIndex41++) {
     var assignmentData41 = assignmentList41[assignmentIndex41];
-    output.append('<dt class=\'scb_s_assignments_sidebar_name\'><a href=\'#view=', (assignmentData41.id == opt_data.assignments.selected_id) ? 'assignment' : 'assignments', '&assignment_id=', soy.$$escapeHtml(assignmentData41.id), '\' model_id=\'', soy.$$escapeHtml(assignmentData41.id), '\' class=\'scb_s_assignment_sidebar_link ', (assignmentData41.id == opt_data.assignments.selected_id) ? 'scb_f_open_assignment' : 'scb_f_select_assignment', '\'>', soy.$$escapeHtml(assignmentData41.name), '</a></dt>');
+    output.append('<li class=\'scb_s_assignments_sidebar_name\'><a href=\'#view=', (assignmentData41.id == opt_data.assignments.selected_id) ? 'assignment' : 'assignments', '&assignment_id=', soy.$$escapeHtml(assignmentData41.id), '\' model_id=\'', soy.$$escapeHtml(assignmentData41.id), '\' class=\'scb_s_assignment_sidebar_link ', (assignmentData41.id == opt_data.assignments.selected_id) ? 'scb_f_open_assignment' : 'scb_f_select_assignment', '\'>', soy.$$escapeHtml(assignmentData41.name), '</a></li>');
     if (assignmentData41.id == opt_data.assignments.selected_id) {
       scb_assignments.display_experiments({experiments: assignmentData41.experiments, assignment: assignmentData41}, output);
     }
   }
-  output.append('</dl></div>');
+  output.append('</ul></div>');
   return opt_sb ? '' : output.toString();
 };
 

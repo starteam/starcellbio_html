@@ -77,8 +77,9 @@
     background-color: white;
 }
 
-.scb_s_assignments_sidebar > dl {
-    margin-left:12px;
+.scb_s_assignments_sidebar > ul {
+    margin-left:-28px;
+    list-style:none;
 }
 .scb_s_assignments_sidebar_title {
     font-size: 12pt;
@@ -89,7 +90,6 @@
 
 .scb_s_assignments_sidebar_name {
     font-size: 12px;
-    margin-bottom:-12px;
 }
 .assignement_assignement_description {
     font-size: 10px;
