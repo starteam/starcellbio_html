@@ -12,12 +12,12 @@ scb.ui.static.ExperimentSetupView.parse = function (element) {
 
 
     var state = {
-        experiment_id:experiment_id,
-        assignment_id:assignment_id,
-        cell_treatment_id:cell_treatment_id,
-        treatment_id:treatment_id,
-        view:'experiment_setup',
-        skip_hash_update:true
+        experiment_id: experiment_id,
+        assignment_id: assignment_id,
+        cell_treatment_id: cell_treatment_id,
+        treatment_id: treatment_id,
+        view: 'experiment_setup',
+        skip_hash_update: true
     };
     var parsed = scb.ui.static.MainFrame.validate_state(state);
 
@@ -31,10 +31,10 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples
         var experiment_id = $('.scb_s_experiment_setup_table_add_samples_dialog').attr('experiment_id');
         var assignment_id = $('.scb_s_experiment_setup_table_add_samples_dialog').attr('assignment_id');
         var state = {
-            experiment_id:experiment_id,
-            assignment_id:assignment_id,
-            view:'experiment_setup',
-            skip_hash_update:true
+            experiment_id: experiment_id,
+            assignment_id: assignment_id,
+            view: 'experiment_setup',
+            skip_hash_update: true
         };
         var parsed = scb.ui.static.MainFrame.validate_state(state);
         if (parsed.redisplay) {
@@ -97,11 +97,11 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample = functio
     var cell_treatment_id = $(param).attr('cell_treatment_id');
 
     var state = {
-        experiment_id:experiment_id,
-        assignment_id:assignment_id,
-        cell_treatment_id:cell_treatment_id,
-        view:'experiment_setup',
-        skip_hash_update:true
+        experiment_id: experiment_id,
+        assignment_id: assignment_id,
+        cell_treatment_id: cell_treatment_id,
+        view: 'experiment_setup',
+        skip_hash_update: true
     };
     var parsed = scb.ui.static.MainFrame.validate_state(state);
     if (parsed.redisplay) {
@@ -119,11 +119,11 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_duplicate_sample = func
     var cell_treatment_id = $(param).attr('cell_treatment_id');
 
     var state = {
-        experiment_id:experiment_id,
-        assignment_id:assignment_id,
-        cell_treatment_id:cell_treatment_id,
-        view:'experiment_setup',
-        skip_hash_update:true
+        experiment_id: experiment_id,
+        assignment_id: assignment_id,
+        cell_treatment_id: cell_treatment_id,
+        view: 'experiment_setup',
+        skip_hash_update: true
     };
     var parsed = scb.ui.static.MainFrame.validate_state(state);
     if (parsed.redisplay) {
@@ -136,16 +136,15 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_duplicate_sample = func
 };
 
 
-
 scb.ui.static.ExperimentSetupView.scb_f_open_select_technique = function (param) {
     var experiment_id = $(param).attr('experiment_id');
     var assignment_id = $(param).attr('assignment_id');
 
     var state = {
-        experiment_id:experiment_id,
-        assignment_id:assignment_id,
-        view:'experiment_setup',
-        skip_hash_update:true
+        experiment_id: experiment_id,
+        assignment_id: assignment_id,
+        view: 'experiment_setup',
+        skip_hash_update: true
     };
     var parsed = scb.ui.static.MainFrame.validate_state(state);
     if (parsed.redisplay) {
@@ -171,10 +170,13 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
         scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_new_row', function (e) {
+        var mode = $('.scb_s_experiment_setup_details_view', workarea).attr('mode');
+        if (mode != 'readonly') {
         scb.ui.static.ExperimentSetupView.new_row_edit(this);
         var row = scb.ui.static.ExperimentSetupView.save_new_row(this);
-        var edit_elements = $('.scb_s_experiment_setup_table_row[cell_treatment_id="'+row.id+'"]');
+        var edit_elements = $('.scb_s_experiment_setup_table_row[cell_treatment_id="' + row.id + '"]');
         scb.ui.static.ExperimentSetupView.row_edit(edit_elements[0]);
+        }
     });
     scb.utils.off_on($(document), 'mouseup', $(document), function (e) {
         if (true) {
@@ -210,7 +212,10 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_table_row', function (e) {
-        scb.ui.static.ExperimentSetupView.row_edit(this);
+        var mode = $('.scb_s_experiment_setup_details_view', workarea).attr('mode');
+        if (mode != 'readonly') {
+            scb.ui.static.ExperimentSetupView.row_edit(this);
+        }
     });
 }
 
@@ -256,80 +261,80 @@ scb.ui.static.ExperimentSetupView.row = function (sample, headings, template, ro
             _.each(headings, function (part) {
                 if (drug_index == 0 && treatment_index == 0 && part.kind == 'cell_line') {
                     row.push({
-                        kind:'cell_line',
-                        title:template.cell_lines[sample.cell_line].name,
-                        rows:total_height,
-                        first_row:drug_index == 0 && treatment_index == 0,
-                        treatment:treatment.id
+                        kind: 'cell_line',
+                        title: template.cell_lines[sample.cell_line].name,
+                        rows: total_height,
+                        first_row: drug_index == 0 && treatment_index == 0,
+                        treatment: treatment.id
                     });
                 }
                 else if (part.kind == 'drug') {
                     row.push({
-                        kind:'drug',
-                        title:drug.drug_name,
-                        rows:1,
-                        first_row:drug_index == 0 && treatment_index == 0,
-                        treatment:treatment.id
+                        kind: 'drug',
+                        title: drug.drug_name,
+                        rows: 1,
+                        first_row: drug_index == 0 && treatment_index == 0,
+                        treatment: treatment.id
                     });
                 }
                 else if (part.kind == 'concentration') {
                     row.push({
-                        kind:'concentration',
-                        title:drug.drug_concentration,
-                        rows:1,
-                        first_row:drug_index == 0 && treatment_index == 0,
-                        treatment:treatment.id
+                        kind: 'concentration',
+                        title: drug.drug_concentration,
+                        rows: 1,
+                        first_row: drug_index == 0 && treatment_index == 0,
+                        treatment: treatment.id
                     });
                 }
                 else if (drug_index == 0 && part.kind == 'start') {
                     row.push({
-                        kind:'start',
-                        title:treatment.schedule,
-                        rows:drug_list.length,
-                        first_row:drug_index == 0 && treatment_index == 0,
-                        treatment:treatment.id
+                        kind: 'start',
+                        title: treatment.schedule,
+                        rows: drug_list.length,
+                        first_row: drug_index == 0 && treatment_index == 0,
+                        treatment: treatment.id
                     });
                 }
                 else if (drug_index == 0 && part.kind == 'duration') {
                     row.push({
-                        kind:'duration',
-                        title:treatment.duration,
-                        rows:drug_list.length,
-                        first_row:drug_index == 0 && treatment_index == 0,
-                        treatment:treatment.id
+                        kind: 'duration',
+                        title: treatment.duration,
+                        rows: drug_list.length,
+                        first_row: drug_index == 0 && treatment_index == 0,
+                        treatment: treatment.id
                     })
                 }
                 else if (drug_index == 0 && treatment_index == 0 && part.kind == 'custom') {
                     row.push({
-                        kind:part.kind,
-                        title:sample[part.key],
-                        rows:total_height,
-                        first_row:drug_index == 0 && treatment_index == 0,
-                        treatment:treatment.id
+                        kind: part.kind,
+                        title: sample[part.key],
+                        rows: total_height,
+                        first_row: drug_index == 0 && treatment_index == 0,
+                        treatment: treatment.id
                     })
                 }
                 else if (drug_index == 0 && treatment_index == 0 && part.kind == 'cell_plate') {
                     row.push({
-                        kind:part.kind,
-                        title:'',
-                        rows:total_height,
-                        first_row:drug_index == 0 && treatment_index == 0,
-                        treatment:treatment.id
+                        kind: part.kind,
+                        title: '',
+                        rows: total_height,
+                        first_row: drug_index == 0 && treatment_index == 0,
+                        treatment: treatment.id
                     })
                 }
                 else if (drug_index == 0 && treatment_index == 0 && part.kind == 'actions') {
                     row.push({
-                        kind:part.kind,
-                        rows:total_height,
-                        first_row:drug_index == 0 && treatment_index == 0,
-                        treatment:treatment.id
+                        kind: part.kind,
+                        rows: total_height,
+                        first_row: drug_index == 0 && treatment_index == 0,
+                        treatment: treatment.id
                     });
                 }
             });
             rows.push({
-                id:sample.id,
-                columns:row,
-                treatment:treatment
+                id: sample.id,
+                columns: row,
+                treatment: treatment
             });
         });
     });
@@ -401,10 +406,10 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
     var assignment_id = $(element).attr('assignment_id');
 
     var state = {
-        experiment_id:experiment_id,
-        assignment_id:assignment_id,
-        view:'experiment_setup',
-        skip_hash_update:true
+        experiment_id: experiment_id,
+        assignment_id: assignment_id,
+        view: 'experiment_setup',
+        skip_hash_update: true
     };
     var parsed = scb.ui.static.MainFrame.validate_state(state);
 
@@ -425,16 +430,16 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
         if (!_.isUndefined(valid)) {
             var cell_treatment_list = parsed.experiment.cell_treatment_list;
             var ret = cell_treatment_list.start({
-                title:'New row',
-                cell_line:cell_line_id,
-                treatment_list:{list:[
-                    {schedule_value:schedule_value, duration_value:duration_value, drug_list:{list:[
-                        {drug_id:drug_id, concentration_id:concentration_id}
+                title: 'New row',
+                cell_line: cell_line_id,
+                treatment_list: {list: [
+                    {schedule_value: schedule_value, duration_value: duration_value, drug_list: {list: [
+                        {drug_id: drug_id, concentration_id: concentration_id}
                     ]}
                     }
                 ]},
-                collection_schedule_list:{list:[
-                    {schedule:"18h", schedule_value:18 * 3600, id:'3'}
+                collection_schedule_list: {list: [
+                    {schedule: "18h", schedule_value: 18 * 3600, id: '3'}
                 ]}
             });
             parsed.experiment.new_row = {};
@@ -486,11 +491,11 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
         if (kind == 'drug') {
             if (_.keys(template.drugs).length > 1) {
                 $(element).html(scb_experiment_setup.drug_edit({
-                    global_template:parsed.context.master_model,
-                    template:template,
-                    assignment:parsed.assignment,
-                    experiment:parsed.experiment,
-                    drug_id:parsed.experiment.new_row.drug_id
+                    global_template: parsed.context.master_model,
+                    template: template,
+                    assignment: parsed.assignment,
+                    experiment: parsed.experiment,
+                    drug_id: parsed.experiment.new_row.drug_id
                 }));
                 scb.utils.off_on(element, "change", "select", function (e) {
                     console.info($(this).val());
@@ -507,13 +512,13 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
                 var drug_id = parsed.experiment.new_row.drug_id;
                 if (drug_id && template.drugs[drug_id].concentrations) {
                     $(element).html(scb_experiment_setup.concentration_edit({
-                        global_template:parsed.context.master_model,
-                        template:template,
-                        assignment:parsed.assignment,
-                        experiment:parsed.experiment,
-                        drug_id:parsed.experiment.new_row.drug_id,
-                        concentrations:template.drugs[drug_id].concentrations,
-                        concentration_id:parsed.experiment.new_row.concentration_id
+                        global_template: parsed.context.master_model,
+                        template: template,
+                        assignment: parsed.assignment,
+                        experiment: parsed.experiment,
+                        drug_id: parsed.experiment.new_row.drug_id,
+                        concentrations: template.drugs[drug_id].concentrations,
+                        concentration_id: parsed.experiment.new_row.concentration_id
                     }));
                     scb.utils.off_on(element, "change", "select", function (e) {
                         console.info($(this).val());
@@ -544,10 +549,10 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
     var assignment_id = $(element).attr('assignment_id');
 
     var state = {
-        experiment_id:experiment_id,
-        assignment_id:assignment_id,
-        view:'experiment_setup',
-        skip_hash_update:true
+        experiment_id: experiment_id,
+        assignment_id: assignment_id,
+        view: 'experiment_setup',
+        skip_hash_update: true
     };
     var parsed = scb.ui.static.MainFrame.validate_state(state);
 
@@ -579,11 +584,11 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
         if (kind == 'drug') {
             if (_.keys(template.drugs).length > 1) {
                 $(element).html(scb_experiment_setup.drug_edit({
-                    global_template:parsed.context.master_model,
-                    template:template,
-                    assignment:parsed.assignment,
-                    experiment:parsed.experiment,
-                    drug_id:parsed.experiment.new_row.drug_id
+                    global_template: parsed.context.master_model,
+                    template: template,
+                    assignment: parsed.assignment,
+                    experiment: parsed.experiment,
+                    drug_id: parsed.experiment.new_row.drug_id
                 }));
                 scb.utils.off_on(element, "change", "select", function (e) {
                     console.info($(this).val());
@@ -600,13 +605,13 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
                 var drug_id = parsed.experiment.new_row.drug_id;
                 if (drug_id && template.drugs[drug_id].concentrations) {
                     $(element).html(scb_experiment_setup.concentration_edit({
-                        global_template:parsed.context.master_model,
-                        template:template,
-                        assignment:parsed.assignment,
-                        experiment:parsed.experiment,
-                        drug_id:parsed.experiment.new_row.drug_id,
-                        concentrations:template.drugs[drug_id].concentrations,
-                        concentration_id:parsed.experiment.new_row.concentration_id
+                        global_template: parsed.context.master_model,
+                        template: template,
+                        assignment: parsed.assignment,
+                        experiment: parsed.experiment,
+                        drug_id: parsed.experiment.new_row.drug_id,
+                        concentrations: template.drugs[drug_id].concentrations,
+                        concentration_id: parsed.experiment.new_row.concentration_id
                     }));
                     scb.utils.off_on(element, "change", "select", function (e) {
                         console.info($(this).val());
@@ -634,16 +639,16 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
                     $('button', element).click(function () {
                         var cell_treatment_list = parsed.experiment.cell_treatment_list;
                         cell_treatment_list.start({
-                            title:'New row',
-                            cell_line:cell_line_id,
-                            treatment_list:{list:[
-                                {schedule_value:0, duration_value:0, drug_list:{list:[
-                                    {drug_id:drug_id, concentration_id:concentration_id}
+                            title: 'New row',
+                            cell_line: cell_line_id,
+                            treatment_list: {list: [
+                                {schedule_value: 0, duration_value: 0, drug_list: {list: [
+                                    {drug_id: drug_id, concentration_id: concentration_id}
                                 ]}
                                 }
                             ]},
-                            collection_schedule_list:{list:[
-                                {schedule:"18h", schedule_value:18 * 3600, id:'3'}
+                            collection_schedule_list: {list: [
+                                {schedule: "18h", schedule_value: 18 * 3600, id: '3'}
                             ]}
                         });
                         scb.ui.static.MainFrame.refresh();
@@ -664,28 +669,28 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         var template = state.assignment.template;
         var headings = scb.ui.static.ExperimentSetupView.headings(template.ui.experiment_setup.table);
         var rows = scb.ui.static.ExperimentSetupView.rows(experiment.cell_treatment_list.list, headings, template);
-        var new_rows = scb.ui.static.ExperimentSetupView.new_rows( new scb.CellTreatment(template.ui.experiment_setup.new_row,gstate.context), headings, template);
+        var new_rows = scb.ui.static.ExperimentSetupView.new_rows(new scb.CellTreatment(template.ui.experiment_setup.new_row, gstate.context), headings, template);
         if (experiment.setup_finished) {
             state.mode = 'readonly';
             state.last_view = 'experiment_run';
         }
         $('.scb_s_experiment_setup_table_add_samples_dialog').detach();
         workarea.html(scb_experiment_setup.main({
-            global_template:gstate.context.master_model,
-            t:template,
-            assignment:state.assignment,
-            experiment:state.experiment,
-            headings:headings,
-            rows:rows,
-            new_rows:new_rows,
-            kind:state.mode
+            global_template: gstate.context.master_model,
+            t: template,
+            assignment: state.assignment,
+            experiment: state.experiment,
+            headings: headings,
+            rows: rows,
+            new_rows: new_rows,
+            kind: state.mode
         }));
         state.experiment.last_view = state.last_view;
         if (state.mode == 'readonly') {
             $('.scb_s_experiment_setup_table_add_samples_dialog').hide();
         }
         else {
-            $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen:false})
+            $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen: false})
         }
     }
 }
