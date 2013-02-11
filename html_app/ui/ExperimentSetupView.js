@@ -692,5 +692,16 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         else {
             $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen: false})
         }
+        if(!_.isUndefined(template.setup_video_box)){
+           var x = $('.scb_s_experiment_setup_video_box',workarea);
+           x.html(template.setup_video_box);
+           if(template.setup_video_box_kind='coin-slider')
+           {
+               $('#slider',x).slides({
+                   preload:true,
+                   hoverPause:true
+               });
+           }
+        }
     }
 }
