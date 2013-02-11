@@ -1327,11 +1327,10 @@ var __basic_tests = {
     }
 }
 
-
 var __usability_test = {
     id:'usability_test',
-    name:'SCB Usability Test',
-    description:'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
+    name:'StarCellBio Usability Test',
+    description:"Placeholder",
     experiments:{},
     template:{
         instructions:'',
@@ -1811,3 +1810,10 @@ master_model_data = {
     },
     ui:{}
 };
+
+
+$(function(){
+    __usability_test.description = scb_model_usability.abstract();
+    __usability_test.template.instructions = scb_model_usability.instructions();
+    __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
+});

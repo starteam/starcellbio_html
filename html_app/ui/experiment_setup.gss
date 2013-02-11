@@ -127,6 +127,12 @@ table.scb_s_experiment_setup_table {
     background-color: #525252;
     margin-left:12px;
     margin-top:27px;
+    overflow:hidden;
+}
+
+.scb_s_experiment_setup_video_box_img {
+    width: 233px;
+    height:160px;
 }
 
 .scb_s_warning {
