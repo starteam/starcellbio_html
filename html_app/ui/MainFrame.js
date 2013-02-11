@@ -200,7 +200,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         state = state || {
             view:'homepage'
         }
-
+        window.scrollTo(0,0);
         console.info(JSON.stringify(state));
         var parsed = scb.ui.static.MainFrame.validate_state(state);
         if (parsed.redisplay) {

@@ -1,9 +1,61 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
+
 .slides_container {
-                width:570px;
-                height:270px;
-            }
-            .slides_container div {
-                width:570px;
-                height:270px;
-                display:block;
-            }
+    width: 570px;
+    height: 160px;
+}
+
+.slides_container div {
+    width: 570px;
+    height: 270px;
+    display: block;
+}
+
+#slider {
+    background-color: #e1e3e8;
+}
+
+.pagination {
+    display: inline-block;
+    list-style-image: url('images/homepage/cells.png');
+    background-color: #e1e3e8;
+}
+
+.pagination > li {
+    display: inline-block;
+    content: '&#8226;';
+    @mixin gradient(top,#6e6e6e,#373737,#383838);
+    box-shadow:0px 0px 6px #a9a9a9;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    text-align: center;
+    vertical-align: 90%;
+    margin-top:-5px;
+    margin-left:20px;
+    margin-right:20px;
+
+}
+
+.pagination > li.current {
+@mixin gradient(top,#7eb49d,#157776,#189689);
+
+}
+.pagination > li.current > a {
+    color: white;
+}
+
+.pagination > li > a {
+    content: '&#8226;';
+    color: #e1e3e8;
+    font-size: 10px;
+    text-decoration: none;
+}
+
+

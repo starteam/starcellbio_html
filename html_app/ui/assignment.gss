@@ -43,8 +43,13 @@
     width:665px;
     padding-left:20px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+    padding-bottom:50px;
 }
 
+.scb_s_assignment_description > h1 {
+    font-size: 14pt;
+    font-family: 'sourcesanspro-semibold';
+}
 .scb_s_assignment_description>.scb_f_select_assignment {
     position: absolute;
     bottom: 5px;

@@ -24,6 +24,7 @@
   background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
+  padding-bottom: 50px;
 }
 .scb_s_abstract_title {
   color: #00abe6;

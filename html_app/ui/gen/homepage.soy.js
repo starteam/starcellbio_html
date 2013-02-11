@@ -62,7 +62,7 @@ scb_homepage.display_footer = function(opt_data, opt_sb) {
 
 scb_homepage.experimental_design_design = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('State the objective that the experiment will address, your hypothesis for the experiment, and think about the technique that will best suit your experiment.');
+  output.append('State the objective that the experiment will address your hypothesis for the experiment, and think about the technique that will best suit your experiment.');
   return opt_sb ? '' : output.toString();
 };
 

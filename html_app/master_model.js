@@ -1329,7 +1329,7 @@ var __basic_tests = {
 
 var __usability_test = {
     id:'usability_test',
-    name:'StarCellBio Usability Test',
+    name:'SCB Usability Test',
     description:"Placeholder",
     experiments:{},
     template:{

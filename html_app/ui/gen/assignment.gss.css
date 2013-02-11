@@ -37,6 +37,11 @@
   background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
+  padding-bottom: 50px;
+}
+.scb_s_assignment_description>h1 {
+  font-size: 14pt;
+  font-family: 'sourcesanspro-semibold';
 }
 .scb_s_assignment_description>.scb_f_select_assignment {
   position: absolute;

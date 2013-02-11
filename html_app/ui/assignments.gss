@@ -28,6 +28,7 @@
     padding-top:17px;
     font-size:10pt;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+    padding-bottom:50px;
 }
 
 .scb_s_abstract_title {
