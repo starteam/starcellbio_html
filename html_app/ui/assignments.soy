@@ -78,11 +78,11 @@ Assignment assignments
 {template .display_assignments}
 <div class='scb_s_assignments_sidebar'>
     <h1 class='scb_s_assignments_sidebar_title'>Your Assignments</h1>
-    <dl>
+    <ul>
         {foreach $assignment in $assignments.list}
-        <dt class='scb_s_assignments_sidebar_name'>
+        <li class='scb_s_assignments_sidebar_name'>
             <a href='#view={if $assignment.id == $assignments.selected_id}assignment{else}assignments{/if}&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}</a>
-        </dt>
+        </li>
         {if $assignment.id == $assignments.selected_id}
             {call .display_experiments}
             {param experiments:$assignment.experiments/}
@@ -90,7 +90,7 @@ Assignment assignments
             {/call}
         {/if}
         {/foreach}
-    </dl>
+    </ul>
 </div>
 {/template}
 

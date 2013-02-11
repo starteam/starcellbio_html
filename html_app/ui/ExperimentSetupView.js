@@ -172,6 +172,9 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_new_row', function (e) {
         scb.ui.static.ExperimentSetupView.new_row_edit(this);
+        var row = scb.ui.static.ExperimentSetupView.save_new_row(this);
+        var edit_elements = $('.scb_s_experiment_setup_table_row[cell_treatment_id="'+row.id+'"]');
+        scb.ui.static.ExperimentSetupView.row_edit(edit_elements[0]);
     });
     scb.utils.off_on($(document), 'mouseup', $(document), function (e) {
         if (true) {
@@ -421,7 +424,7 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
         });
         if (!_.isUndefined(valid)) {
             var cell_treatment_list = parsed.experiment.cell_treatment_list;
-            cell_treatment_list.start({
+            var ret = cell_treatment_list.start({
                 title:'New row',
                 cell_line:cell_line_id,
                 treatment_list:{list:[
@@ -436,10 +439,12 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
             });
             parsed.experiment.new_row = {};
             scb.ui.static.MainFrame.refresh();
+            return ret;
         }
         else {
             parsed.experiment.new_row = {};
             scb.ui.static.MainFrame.refresh();
+            return null;
         }
     }
 }
