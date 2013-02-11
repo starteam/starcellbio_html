@@ -252,7 +252,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         }
         else
         {
-            g.fillText("marker was not loaded", 5, 15);
+           // g.fillText("marker was not loaded", 5, 15);
         }
 		g.restore();
 	}

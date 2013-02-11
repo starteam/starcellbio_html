@@ -44,6 +44,7 @@ font-family: 'sourcesanspro-regular';
 .scb_s_western_blot_reprobe {
     position: absolute;
     top: 275px;
+    width:150px;
 }
 
 .scb_f_slider {
@@ -82,3 +83,4 @@ font-family: 'sourcesanspro-regular';
     background-color: black;
     top:-10px;
 }
+

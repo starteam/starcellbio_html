@@ -4,7 +4,7 @@ body {
 .scb_s_navigation_button {
   padding: 3px 20px;
   width: 200px;
-  min-width: 200px;
+  min-width: 120px;
   background-position: center;
   color: white;
   text-decoration: none;
