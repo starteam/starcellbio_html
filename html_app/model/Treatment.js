@@ -29,8 +29,8 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 	// should be getter only
 	scb.Utils.initialize_accessor_field(self, data, 'duration_value', "0", null, context);
 
-	scb.Utils.initialize_field(data, 'schedule', "now");
-	scb.Utils.initialize_field(data, 'duration', "0");
+	scb.Utils.initialize_field(data, 'schedule', self.schedule_value);
+	scb.Utils.initialize_field(data, 'duration', self.duration_value);
 
 	Object.defineProperty(self, 'schedule', {
 		get : function() {

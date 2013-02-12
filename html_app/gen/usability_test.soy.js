@@ -23,3 +23,10 @@ scb_model_usability.setup_video_box = function(opt_data, opt_sb) {
   output.append('<div id=\'slider\'><div class="slides_container"><a target="_blank"><img class=\'scb_s_experiment_setup_video_box_img\' src=\'usability_test/Multivulva.jpg\' ><span>Vulva phenotypes in <i>C. elegans</i></span></a><a target="_blank"><img class=\'scb_s_experiment_setup_video_box_img\'  src=\'usability_test/Vulvaless.jpg\' ><span>Vulva phenotypes in <i>C. elegans</i></span></a><a target="_blank"><img class=\'scb_s_experiment_setup_video_box_img\' src=\'usability_test/Wild-type.jpg\'><span>Vulva phenotypes in <i>C. elegans</i></span></a></div></div>');
   return opt_sb ? '' : output.toString();
 };
+
+
+scb_model_usability.experiment_setup = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('<ul class=\'scb_s_experiment_setup_list\'><li>For each treatment protocol, select the treatment and treatment dose.</li><li>Once you finish setting up your experiment treatment, select Run Experiment.</li></ul>');
+  return opt_sb ? '' : output.toString();
+};

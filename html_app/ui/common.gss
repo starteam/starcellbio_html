@@ -27,8 +27,10 @@ body {
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
+    box-shadow: 0px 0px 5px #a9a9a9;
     font-family:'sourcesanspro-semibold';
     @mixin gradient(top,#81c9f1,#028dde,#008ddd);
+
 }
 
 .scb_s_experiment_step {
@@ -114,13 +116,41 @@ body {
     position: relative;
     text-align: center;
     padding-top: 10px;
+    font-size:12px;
 }
+.scb_s_assignment_step_experiment_block {
+    position: absolute;
+    top: -25px;
+    left: 300px;
+    color: black;
+    font-size:1.5em;
+}
+
 .scb_s_assignment_step_experiment {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.scb_s_assignment_step_experiment_line {
     position: absolute;
     top: 60px;
-    left: 280px;
-    color: #69a996;
-    font-size:2em;
+    left: 380px;
+    width:300px;
+    height:1px;
+    background-color: #14ac63;
+    font-size:1.5em;
+}
+
+.scb_s_assignment_step_experiment_box {
+    position: relative;
+    top:5px;
+}
+
+.scb_s_assignment_step_experiment_line {
+    position: absolute;
+    top: 8px;
+    left: 138px;
+    width: 525px;
 }
 
 .scb_s_assignment_step {
@@ -128,6 +158,7 @@ body {
     color: white;
     width: 960px;
     height: 25px;
+    position: relative;
     @mixin gradient(top,#80d1ae,#189689,#189689);
 
 }

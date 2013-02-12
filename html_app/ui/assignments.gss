@@ -55,9 +55,18 @@
 }
 
 .scb_f_open_assignment {
-    font-weight:bold
 }
 
+.scb_s_assignment_sidebar_link {
+    font-weight:bold;
+    text-decoration: none;
+    color:black;
+}
+
+.scb_f_open_assignment_experiment,.scb_f_new_assignment_experiment {
+    text-decoration: none;
+    color:black;
+}
 
 .assignement_column_wrapper {
     padding-right: 400px;    

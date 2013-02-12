@@ -61,6 +61,7 @@
   padding-top: 0;
   background-color: #f4f6f8;
   display: block;
+  position: relative;
 }
 .scb_s_header_line_top {
   display: block;
@@ -232,6 +233,7 @@
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 8px;
+  cursor: pointer;
 }
 .scb_s_homepage_experimental_design_bullet {
   display: inline-block;

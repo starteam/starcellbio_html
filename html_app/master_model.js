@@ -1349,7 +1349,7 @@ var __usability_test = {
                 },
                 {kind:"treatments",
                     children:[
-                        {kind:"drug", title:"Treatments", editable:true},
+                        {kind:"drug", title:"Treatment", editable:true},
                         {kind:"concentration", title:"Concentration", editable:true},
                         {kind:"start", title:"Start", editable:false},
                         {kind:"duration", title:"Duration", editable:false}
@@ -1816,4 +1816,6 @@ $(function(){
     __usability_test.description = scb_model_usability.abstract();
     __usability_test.template.instructions = scb_model_usability.instructions();
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
+    __usability_test.template.experiment_setup = scb_model_usability.experiment_setup();
+
 });

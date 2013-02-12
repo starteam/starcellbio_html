@@ -52,8 +52,8 @@ Experiment active area
             {param step:2/}
         {/call}
         <div class='scb_s_experiment_setup_choose_template'>
-            <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind" checked="checked" disabled="disabled">Create new set-up</input><br>
-            <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind" disabled="disabled">Select pre-existing set-up as a template</input>
+            <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind" checked="checked"  />Create new set-up<br>
+            <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind" disabled="disabled" /><span class='scb_s_experiment_setup_choose_template_kind_disabled'>Select pre-existing set-up as a template</span>
             <!-- <select class='scb_s_experiment_setup_choose_template_id' disabled="disabled">
                 <option>Experiment 1</option>
                 <option>Experiment 1</option>
@@ -61,13 +61,12 @@ Experiment active area
             -->
             <br>
             <img src='images/setup/setup_line.png'/>
-            <ul class='scb_s_experiment_setup_list'>
-                <li>For each treatment protocol, select the strain, treatments(s), and treatment dose.</li>
-                <li>For all of your treatments, select start, duration and collection time.</li>
-                <li>Once you finish setting up your experiment treatment, select Run Experiment.</li>
-            </ul>
+            {$t.experiment_setup|noAutoescape}
         </div>
         <div class='scb_s_experiment_setup_video_box_wrapper'>
+            <div class='scb_s_experiment_setup_video_box_wrapper_title'>
+                IN THE LAB
+            </div>
             <div class='scb_s_experiment_setup_video_box'>
 
             </div>
@@ -84,6 +83,9 @@ Experiment active area
             </p>
         </div>
         <div class='scb_s_experiment_setup_video_box_wrapper'>
+            <div class='scb_s_experiment_setup_video_box_wrapper_title'>
+                            IN THE LAB
+                        </div>
                    <div class='scb_s_experiment_setup_video_box'>
 
                    </div>
