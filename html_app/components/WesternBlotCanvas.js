@@ -262,7 +262,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
 		g.fillStyle = 'white';
 		g.fillRect(0, 0, width, height);
 		//g.fillStyle = '#fafafa';
-        g.fillStyle='#cecece';
+        g.fillStyle='#edeef2';
 		g.fillRect(0, 0, width, height);
 
 	}
