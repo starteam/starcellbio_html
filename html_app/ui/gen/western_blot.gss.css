@@ -114,7 +114,6 @@
   margin-top: 20px;
   border-top-width: 8px;
   box-shadow: 0 0 3px black;
-  height: 368px;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: white;
@@ -280,8 +279,9 @@
 .scb_s_western_blot_tab_content>.scb_f_open_select_technique {
   position: relative;
   bottom: 10px;
-  left: -240px;
+  left: 10px;
   display: inline-block;
+  margin-top: 30px;
 }
 .scb_s_western_blot_samples_table>table {
   width: 100%;

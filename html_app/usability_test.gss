@@ -66,6 +66,16 @@
     height:2px;
     display: block;
 }
+.scb_s_abstract_title_underline {
+    margin-left:-20px;
+       margin-right:-20px;
+       background-color: #dae9e1;
+       width:694px;
+       height:2px;
+       display: block;
+
+}
+
 
 .scb_objective_separator {
     background-color: #cad4e0;

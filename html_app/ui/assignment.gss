@@ -71,6 +71,10 @@
 }
 
 .scb_s_assignment_title_underline {
-    height: 1px;
-    color: #008ddd;
+    margin-left:-20px;
+        margin-right:-20px;
+        background-color: #dae9e1;
+        width:705px;
+        height:2px;
+        display: block;
 }
