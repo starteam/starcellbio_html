@@ -42,6 +42,7 @@
     padding: 10px;
     width:665px;
     padding-left:20px;
+    padding-right:20px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
     padding-bottom:50px;
 }

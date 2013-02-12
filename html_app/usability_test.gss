@@ -58,4 +58,44 @@
     text-decoration: none;
 }
 
+.scb_objective_main {
+ margin-left:-20px;
+    margin-right:-20px;
+    background-color: #dae9e1;
+    width:705px;
+    height:2px;
+    display: block;
+}
 
+.scb_objective_separator {
+    background-color: #cad4e0;
+    width:100%;
+    height:1px;
+    display:block;
+}
+
+.scb_objective_number {
+    box-shadow:0px 0px 6px #a9a9a9;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    text-align: center;
+    vertical-align: top;
+    color: white;
+    display: inline-block;
+    margin-right:1em;
+    @mixin gradient(top,#81c9f1,#028dde,#008ddd);
+}
+
+.scb_objective_number > div {
+    padding: 4px;
+    font-size:16pt;
+    font-family:'sourcesanspro-semibold';
+
+}
+
+.scb_objective_text {
+    font-size:12pt;
+    display:inline-block;
+    width:600px;
+}
