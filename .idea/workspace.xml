@@ -4,13 +4,13 @@
     <list default="true" id="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" name="Default" comment="" />
     <ignored path="StarCellBio.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/western_blot.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360785234935" ignored="false" />
+    <file path="/western_blot.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360785747580" ignored="false" />
     <file path="/western_blot_gel.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359055602371" ignored="false" />
     <file path="/tests.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359056939911" ignored="false" />
     <file path="/starcellbio.app.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359054922539" ignored="false" />
     <file path="/watch.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359057410835" ignored="false" />
     <file path="/usability_test.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360695849683" ignored="false" />
-    <file path="/*.regexp" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360772191078" ignored="false" />
+    <file path="/*.regexp" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360785769020" ignored="false" />
     <file path="/assignments.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360693448200" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/assignments.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360693470195" ignored="false" />
     <file path="/assignment.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360680207290" ignored="false" />
@@ -20,14 +20,14 @@
     <file path="/western_blot_gel.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360617822111" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/common.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360698229223" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/western_blot_gel.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360618155395" ignored="false" />
-    <file path="$PROJECT_DIR$/html_app/ui/gen/western_blot.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360785259105" ignored="false" />
+    <file path="$PROJECT_DIR$/html_app/ui/gen/western_blot.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360785768563" ignored="false" />
     <file path="/usability_test.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360694107172" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/gen/usability_test.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360681638057" ignored="false" />
     <file path="/assignment.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360681122655" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/assignment.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360681138858" ignored="false" />
     <file path="/assignments.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360681171184" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/assignments.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360681184580" ignored="false" />
-    <file path="/western_blot.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360772316935" ignored="false" />
+    <file path="/western_blot.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360785790726" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/western_blot.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360775444400" ignored="false" />
     <file path="/WesternBlotGelView.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360683029537" ignored="false" />
     <file path="/Treatment.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360690989176" ignored="false" />
@@ -122,7 +122,7 @@
           <file leaf-file-name="WesternBlotGelView.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="54" column="59" selection-start="2333" selection-end="2333" vertical-scroll-proportion="0.3329453">
+                <state line="82" column="27" selection-start="3377" selection-end="3377" vertical-scroll-proportion="0.81654674">
                   <folding />
                 </state>
               </provider>
@@ -198,8 +198,10 @@
           <file leaf-file-name="western_blot.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="240" column="269" selection-start="8171" selection-end="8220" vertical-scroll-proportion="-14.869565">
-                  <folding />
+                <state line="91" column="112" selection-start="2323" selection-end="2365" vertical-scroll-proportion="-11.913043">
+                  <folding>
+                    <element signature="n#style#0;n#span#1;n#!!top" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -222,10 +224,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="western_blot.gss" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="western_blot.gss" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.gss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="367" column="30" selection-start="7681" selection-end="7681" vertical-scroll-proportion="0.0">
+                <state line="380" column="43" selection-start="7943" selection-end="7943" vertical-scroll-proportion="0.8603027">
                   <folding />
                 </state>
               </provider>
@@ -240,10 +242,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="select_technique.gss" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="select_technique.gss" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="96" column="1" selection-start="2394" selection-end="2394" vertical-scroll-proportion="0.895227">
+                <state line="96" column="0" selection-start="2393" selection-end="2393" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -273,10 +275,10 @@
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
         <option value="$PROJECT_DIR$/html_app/model/WesternBlot.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/western_blot.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/select_technique.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/select_technique.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/western_blot.gss" />
       </list>
     </option>
   </component>
@@ -761,13 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="59" selection-start="2333" selection-end="2333" vertical-scroll-proportion="0.3329453">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="210" column="162" selection-start="8649" selection-end="8649" vertical-scroll-proportion="-14.125">
@@ -791,16 +786,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="240" column="269" selection-start="8171" selection-end="8220" vertical-scroll-proportion="-14.869565">
+        <state line="82" column="27" selection-start="3377" selection-end="3377" vertical-scroll-proportion="0.81654674">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.gss">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="367" column="30" selection-start="7681" selection-end="7681" vertical-scroll-proportion="0.0">
+        <state line="96" column="0" selection-start="2393" selection-end="2393" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -812,9 +807,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="1" selection-start="2394" selection-end="2394" vertical-scroll-proportion="0.895227">
+        <state line="91" column="112" selection-start="2323" selection-end="2365" vertical-scroll-proportion="-11.913043">
+          <folding>
+            <element signature="n#style#0;n#span#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.gss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="380" column="43" selection-start="7943" selection-end="7943" vertical-scroll-proportion="0.8603027">
           <folding />
         </state>
       </provider>
