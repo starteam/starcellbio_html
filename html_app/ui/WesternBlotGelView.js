@@ -198,17 +198,20 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     }
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
         var y = evt.offsetY;
+        var x = evt.offsetX;
         if( $(evt.srcElement).is('canvas') ) {
             slider.css('top', y + "px").show();
             gel.canvas_metadata.slider = y ;
-            if( y < 2 || y > 285 )
+            if( y < 2 || y > 285 || x < 2 || x > 250 )
             {
                 slider.hide();
                 delete gel.canvas_metadata.slider ;
             }
         }
     });
-
+    $(parent).unbind('mouseout').bind('mouseout', function (evt) {
+        slider.hide();
+    });
 }
 
 scb.ui.static.WesternBlotGelView.register = function (workarea) {
