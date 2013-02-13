@@ -62,7 +62,7 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
     scb.ModelHelpers.common_entry_code(self, data, context);
     scb.Utils.initialize_accessor_field(self, data, 'lysate_prepared', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'marker_loaded', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'gel_type', '.10', null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'gel_type', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'is_transfered', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.WesternBlotLaneList, context);
     scb.Utils.initialize_accessor_field(self, data, 'gel_list', {}, scb.WesternBlotGelList, context);

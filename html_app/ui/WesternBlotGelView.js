@@ -52,7 +52,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
             parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name;
         }
     } else {
-        alert("Please select primary & secondary anti-body first.");
+        alert("Please select primary & secondary antibodies.");
     }
     $('.scb_f_wb_exposure_slider').detach();
     var state = {
@@ -118,9 +118,8 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index = function (expo
     _.find(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array, function (a, b) {
         if (exposure_time >= a) {
             ret = b;
-            return false
+            return false;
         }
-        ;
     });
     return ret;
 }

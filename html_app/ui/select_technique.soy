@@ -55,6 +55,10 @@ TODO: new facs
         {foreach $w in $experiment.western_blot_list.list}
             <a class='scb_f_open_western_blot scb_s_select_technique_open_western_blot' western_blot_id='{$w.id}' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$w.id}'>{$w.name}</a><br>
         {/foreach}
+        {if $experiment.western_blot_list.length}
+            <p>No available western blots.</p>
+            <p>Select <b>New Western Blot</b> below.</p>
+        {/if}
         </div>
         <p>
             <span class='scb_s_select_technique_reminder'>Reminder:</span><br>
