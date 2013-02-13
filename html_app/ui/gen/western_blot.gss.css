@@ -37,6 +37,8 @@
   height: 19px;
   border-bottom: 1px solid #808080;
   font-size: 11pt;
+  text-decoration: none;
+  color: black;
 }
 .scb_s_western_blot_active {
   margin-left: 5px;

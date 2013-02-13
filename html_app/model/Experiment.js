@@ -46,4 +46,9 @@ scb.Experiment = function scb_Experiment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'facs_list',{},scb.FacsList,context);
 	scb.Utils.initialize_accessor_field(self,data,'setup_finished',false,null,context);
     scb.Utils.initialize_accessor_field(self,data,'new_row',{},null,context);
+    scb.Utils.initialize_accessor_field(self,data,'design_wb_cb',false,null,context);
+    scb.Utils.initialize_accessor_field(self,data,'design_fc_cb',false,null,context);
+    scb.Utils.initialize_accessor_field(self,data,'design_mi_cb',false,null,context);
+
+
 }

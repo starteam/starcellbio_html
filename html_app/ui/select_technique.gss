@@ -29,6 +29,8 @@
     padding-left:15px;
     display: inline-block;
     padding-bottom: 2px;
+    text-decoration: none;
+    color:black;
 }
 
 .scb_f_new_western_blot {

@@ -4,6 +4,20 @@ scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.ExperimentDesignView = scb.ui.static.ExperimentDesignView || {};
 
+scb.ui.static.ExperimentDesignView.parsed = function(element)
+{
+    var experiment_id = $(element).attr('experiment_id');
+             var assignment_id = $(element).attr('assignment_id');
+             var state = {
+                 experiment_id: experiment_id,
+                 assignment_id: assignment_id,
+                 view:'experiment_design',
+                 skip_hash_update: true
+             };
+             var parsed = scb.ui.static.MainFrame.validate_state(state);
+    return parsed;
+}
+
 scb.ui.static.ExperimentDesignView.update_experiment_design_hypothesis = function(element)
      {
          var experiment_id = $(element).attr('experiment_id');
@@ -68,6 +82,17 @@ scb.ui.static.ExperimentDesignView.scb_s_experiment_name_edit = function(element
          }
      }
 
+scb.ui.static.ExperimentDesignView.scb_s_experiment_design_technique_checkbox = function(element,event)
+{
+    var parsed = scb.ui.static.ExperimentDesignView.parsed(element);
+    var key = $(element).attr('data-key');
+    var value = !_.isUndefined($(element).attr('checked'));
+    if( parsed.experiment )
+    {
+        parsed.experiment[key] = value;
+        scb.ui.static.MainFrame.refresh();
+    }
+}
 scb.ui.static.ExperimentDesignView.register = function(workarea)
 {
     scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_hypothesis', function (e) {
@@ -82,6 +107,9 @@ scb.ui.static.ExperimentDesignView.register = function(workarea)
         scb.ui.static.ExperimentDesignView.scb_s_experiment_name_edit(this);
     });
 
+    scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_technique_checkbox' , function(e) {
+        scb.ui.static.ExperimentDesignView.scb_s_experiment_design_technique_checkbox(this,e);
+    })
 }
 
 scb.ui.ExperimentDesignView = function scb_ui_ExperimentDesignView(gstate) {
