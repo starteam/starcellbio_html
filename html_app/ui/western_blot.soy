@@ -228,7 +228,7 @@
 */
 {template .prepare_gel}
 {call .display_wb_progress}
-{param step:3/}
+    {param step:$western_blot.gel_type?3:2/}
 {/call}
 <div class='scb_s_western_blot_samples_area'>
 
