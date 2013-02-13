@@ -129,7 +129,7 @@ Experiment active area
         {foreach $r in $new_rows}
         <tr class='scb_s_experiment_setup_new_row scb_s_experiment_setup_new_row_gray' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
             {foreach $c in $r.columns}
-            <td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_td' kind='{$c.kind}' rowspan="1">
+            <td style='z-index:99' class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_td' kind='{$c.kind}' rowspan="1">
                 {if $c.kind == 'actions'}
                     {if $kind == 'readwrite'} <!--
                     <button class='scb_f_experiment_setup_save_sample' cell_treatment_id=''
@@ -137,10 +137,42 @@ Experiment active area
                     </button> -->
                     {/if}
                 {else}
-                {if $c.kind=='cell_plate'}
-                    <img src="images/setup/scb_cell_plate.png">
-                {/if}
+                    {if $c.kind=='cell_plate'}
+                        <img src="images/setup/scb_cell_plate.png">
+                    {/if}
+                    {if $c.kind=='drug'}
+                    <span>
+
+                     <span class='scb_concentration_edit_new'>
+                         &nbsp;
+                     </span>
+                        {call .drug_edit}
+                            {param template:$t/}
+                            {param assignment:$assignment/}
+                            {param experiment:$experiment/}
+                            {param drug_id:$r.treatment.drug_list.list[0].drug_id/}
+                            {param disabled:true/}
+                        {/call}
+                    </span>
+                    {elseif $c.kind=='concentration'}
+                    <span>
+                         <span class='scb_concentration_edit_new'>
+                             &nbsp;
+                         </span>
+
+                        {call .concentration_edit}
+                {param template:$t/}
+                {param assignment:$assignment/}
+                {param experiment:$experiment/}
+                {param drug_id:$r.treatment.drug_list.list[0].drug_id/}
+                {param concentration_id:$r.treatment.drug_list.list[0].concentration_id/}
+                {param concentrations: $t.drugs[$r.treatment.drug_list.list[0].drug_id].concentrations/}
+                {param disabled:true/}
+                {/call}
+                </span>
+                    {else}
                     {$c.title}
+                    {/if}
                 {/if}
             </td>
             {/foreach}
@@ -237,9 +269,10 @@ Experiment active area
 * @param drug_id
 * @/param assignment
 * @/param experiment
+* @param disabled
 */
 {template .drug_edit}
-    <select title='drug' size='1' row='0' class='scb_f_experiment_setup_drug_edit'>
+    <select title='drug' size='1' row='0' class='scb_f_experiment_setup_drug_edit' {if $disabled}disabled='disabled'{/if}>
         <option value=''>Please select</option>
 		{foreach $t in keys($template.drugs)}
 			<option value='{$t}' {if $t==$drug_id}selected='selected'{/if}>{$template.drugs[$t].name}</option>
@@ -254,9 +287,10 @@ Experiment active area
 * @param concentration_id
 * @/param assignment
 * @/param experiment
+* @param disabled
 */
 {template .concentration_edit}
-    <select title='concentration' size='1' row='0' class='scb_f_experiment_setup_concentration_edit'>
+    <select title='concentration' size='1' row='0' class='scb_f_experiment_setup_concentration_edit' {if $disabled}disabled='disabled'{/if}>
         <option value=''>Please select</option>
         {foreach $t in $concentrations}
 	        <option value='{$t}' {if $t==$concentration_id}selected='true'{/if}>{$template.concentrations[$t].name}</option>

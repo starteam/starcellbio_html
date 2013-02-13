@@ -122,3 +122,9 @@ table.scb_s_experiment_setup_table {
   margin-right: 1em;
   margin-bottom: 1em;
 }
+.scb_concentration_edit_new {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  float: left;
+}
