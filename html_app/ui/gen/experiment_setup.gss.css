@@ -101,7 +101,7 @@ table.scb_s_experiment_setup_table {
   height: 160px;
 }
 .scb_s_warning {
-  background: #e0e0e0;
+  background: #edeef2;
   border: 1px solid #d0d0d0;
   border-radius: 10px;
   margin-bottom: 10px;

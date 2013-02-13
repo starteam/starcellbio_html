@@ -79,5 +79,7 @@
   font-family: 'sourcesanspro-bold';
 }
 .scb_s_select_technique_none {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 10px;
 }
