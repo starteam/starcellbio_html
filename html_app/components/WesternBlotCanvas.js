@@ -116,8 +116,8 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
 
 	self.paint_blot = function(canvas_id, tab) {
 
-		var LANE_OFFSET_0 = 15.5; //14.50;
-		var LANE_OFFSET_0A = 15.25;
+		var LANE_OFFSET_0 = 15.25; //14.50;
+		var LANE_OFFSET_0A = 15.0;
 		var LANE_OFFSET_1 = .12 + .75;
 		var LANE_OFFSET_1A = .15 + .75;
 		var LANE_OFFSET_2 = .88 + .75;
@@ -246,7 +246,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
 			g.stroke();
 
 		}
-		g.fillText("kDa", lane_width * (LANE_OFFSET_0) -6, 15);
+		g.fillText("kDa", lane_width * (LANE_OFFSET_0) -0, 22);
 //		for(var lane = 0; lane < lanes; lane++) {
 //			g.fillText("Lane " + (lane + 1), lane_width * (lane + LANE_OFFSET_1A ) - g.lineWidth / 2, 15);
 //		}

@@ -10,7 +10,7 @@
     <file path="/starcellbio.app.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359054922539" ignored="false" />
     <file path="/watch.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359057410835" ignored="false" />
     <file path="/usability_test.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360695849683" ignored="false" />
-    <file path="/*.regexp" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360786279433" ignored="false" />
+    <file path="/*.regexp" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360786476869" ignored="false" />
     <file path="/assignments.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360693448200" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/assignments.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360693470195" ignored="false" />
     <file path="/assignment.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360680207290" ignored="false" />
@@ -47,7 +47,7 @@
     <file path="/WesternBlot.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360772206781" ignored="false" />
     <file path="/select_technique.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360785401425" ignored="false" />
     <file path="/select_technique.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360786335833" ignored="false" />
-    <file path="$PROJECT_DIR$/html_app/ui/gen/select_technique.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360786332005" ignored="false" />
+    <file path="$PROJECT_DIR$/html_app/ui/gen/select_technique.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360786476869" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,19 +102,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="usability_test.soy" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="usability_test.soy" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/usability_test.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="234" column="23" selection-start="6384" selection-end="6384" vertical-scroll-proportion="0.83732057">
+                <state line="234" column="23" selection-start="6384" selection-end="6384" vertical-scroll-proportion="-30.434782">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="WesternBlotCanvas.js" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="WesternBlotCanvas.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="248" column="57" selection-start="7687" selection-end="7687" vertical-scroll-proportion="-29.84">
+                <state line="119" column="33" selection-start="3804" selection-end="3804" vertical-scroll-proportion="0.21437271">
                   <folding />
                 </state>
               </provider>
@@ -158,15 +158,6 @@
             <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.gss">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="162" column="1" selection-start="3537" selection-end="3537" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="usability_test.gss" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/html_app/usability_test.gss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="17" column="1" selection-start="723" selection-end="723" vertical-scroll-proportion="-10.2">
                   <folding />
                 </state>
               </provider>
@@ -239,10 +230,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="select_technique.gss" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="select_technique.gss" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="100" column="21" selection-start="2490" selection-end="2490" vertical-scroll-proportion="0.91268915">
+                <state line="88" column="23" selection-start="2282" selection-end="2282" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="assignments.gss" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.gss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="117" column="35" selection-start="2674" selection-end="2674" vertical-scroll-proportion="0.6507567">
                   <folding />
                 </state>
               </provider>
@@ -260,12 +260,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/html_app/master_model.js" />
         <option value="$PROJECT_DIR$/html_app/usability_test.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/common.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/homepage.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/common.gss" />
-        <option value="$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js" />
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
         <option value="$PROJECT_DIR$/html_app/model/WesternBlot.js" />
@@ -276,6 +274,8 @@
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.gss" />
         <option value="$PROJECT_DIR$/html_app/ui/select_technique.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/assignments.gss" />
+        <option value="$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js" />
       </list>
     </option>
   </component>
@@ -700,20 +700,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/ui/common.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="65" selection-start="1608" selection-end="1608" vertical-scroll-proportion="-19.73913">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/common.gss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="1" selection-start="3235" selection-end="3235" vertical-scroll-proportion="-31.2">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.gss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="85" column="30" selection-start="2469" selection-end="2469" vertical-scroll-proportion="0.0">
@@ -731,13 +717,6 @@
     <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk/Tkinter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2101" column="6" selection-start="85422" selection-end="85422" vertical-scroll-proportion="0.3329453">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="57" selection-start="7687" selection-end="7687" vertical-scroll-proportion="-29.84">
           <folding />
         </state>
       </provider>
@@ -779,13 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/usability_test.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="234" column="23" selection-start="6384" selection-end="6384" vertical-scroll-proportion="0.83732057">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.gss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="380" column="43" selection-start="7943" selection-end="7943" vertical-scroll-proportion="0.0">
@@ -804,14 +776,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.gss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="1" selection-start="3537" selection-end="3537" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="11" column="1" selection-start="662" selection-end="662" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1360786183000" expanded="true" signature="3331:3398" placeholder="{...}" />
+            <marker date="1360786183000" expanded="true" signature="3574:3587" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="21" selection-start="2490" selection-end="2490" vertical-scroll-proportion="0.91268915">
+        <state line="88" column="23" selection-start="2282" selection-end="2282" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/usability_test.gss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="1" selection-start="723" selection-end="723" vertical-scroll-proportion="-10.2">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/assignments.gss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="35" selection-start="2674" selection-end="2674" vertical-scroll-proportion="0.6507567">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/usability_test.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="234" column="23" selection-start="6384" selection-end="6384" vertical-scroll-proportion="-30.434782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/components/WesternBlotCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="119" column="33" selection-start="3804" selection-end="3804" vertical-scroll-proportion="0.21437271">
           <folding />
         </state>
       </provider>

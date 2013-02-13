@@ -122,6 +122,7 @@
 }
 
 .scb_s_assignment_experiment_list {
+    list-style-type: disc;
 }
 .scb_s_abstract>.scb_f_select_assignment {
     position: absolute;
