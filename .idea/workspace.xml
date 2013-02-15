@@ -15,7 +15,7 @@
     <file path="$PROJECT_DIR$/html_app/ui/gen/assignments.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360952893587" ignored="false" />
     <file path="/assignment.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360680207290" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/assignment.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360681638057" ignored="false" />
-    <file path="$PROJECT_DIR$/html_app/ui/gen/homepage.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360960185029" ignored="false" />
+    <file path="$PROJECT_DIR$/html_app/ui/gen/homepage.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360966927200" ignored="false" />
     <file path="/MainFrame.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360679412932" ignored="false" />
     <file path="/western_blot_gel.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360956696753" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/common.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360955906796" ignored="false" />
@@ -219,7 +219,7 @@
           <file leaf-file-name="homepage.soy" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="193" column="122" selection-start="9643" selection-end="9643" vertical-scroll-proportion="0.7521264">
+                <state line="202" column="1" selection-start="10355" selection-end="10355" vertical-scroll-proportion="0.9161604">
                   <folding />
                 </state>
               </provider>
@@ -813,7 +813,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/homepage.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="122" selection-start="9643" selection-end="9643" vertical-scroll-proportion="0.7521264">
+        <state line="202" column="1" selection-start="10355" selection-end="10355" vertical-scroll-proportion="0.9161604">
           <folding />
         </state>
       </provider>
