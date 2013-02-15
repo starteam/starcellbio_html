@@ -339,9 +339,12 @@
   vertical-align: top;
   margin-top: 17px;
 }
-.scb_s_homepage_footer_support {
+.scb_s_homepage_footer_support, .scb_s_homepage_footer_about {
   vertical-align: top;
-  margin-top: 20px;
+  font-size: 9pt;
+  position: relative;
+  top: 17px;
+  color: #727272;
 }
 .scb_no_underline, a {
   text-decoration: none;

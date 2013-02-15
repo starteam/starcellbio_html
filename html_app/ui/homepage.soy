@@ -29,23 +29,23 @@ TODO: this needs to be login/logout depending on the state
 {template .display_header}
 <div class='scb_s_header'>
     <img class='scb_s_header_line_top' src='images/header/scb_header_line.png'>
-    <a href='#view=homepage'><img class='scb_s_logo' src='images/header/scb_logo.png'></a>
+    <a href='#view=homepage'><img class='scb_s_logo' src='images/header/scb_logo.png' alt='Logo'></a>
     <span class='scb_s_header_tools'>
         <a href="http://star.mit.edu/feedback.html?project=StarCellBio&source=app" target='_blank'>
-            <img class='scb_s_envelope_icon' src='images/header/scb_envelope_icon.png'>
+            <img class='scb_s_envelope_icon' src='images/header/scb_envelope_icon.png' alt='Envelope Icon'>
         <span class='scb_s_envelope_text scb_s_header_tools_text'>
             CONTACT
         </span></a>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png'>
         <a href='pdf/Reference%20Library.pdf' target='_blank'>
-            <img class='scb_s_cabinet_icon' src='images/header/scb_cabinet_icon.png'>
+            <img class='scb_s_cabinet_icon' src='images/header/scb_cabinet_icon.png' alt='Cabinet Icon'>
         <span class='scb_s_cabinet_text scb_s_header_tools_text'>
             REFERENCE LIBRARY
             <span>
         </a>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png'>
         <a href='pdf/StarCellBio%20User%20Guide.pdf' target='_blank'>
-            <img class='scb_s_user_guide_icon' src='images/header/scb_user_guide_icon.png'>
+            <img class='scb_s_user_guide_icon' src='images/header/scb_user_guide_icon.png' alt='Book Icon'>
             <span class='scb_s_user_guide_text scb_s_header_tools_text'>USER GUIDE</span></a>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png'>
         <a href='#view=assignments'><img class='scb_s_login_status' src='images/header/scb_signin_text.png'></a>
@@ -63,14 +63,14 @@ Assignment footer
     <span class='scb_s_homepage_top'>
         <span class='scb_s_homepage_top_left'>
 <!--            <img class='scb_s_homepage_top_left_image' src='images/homepage/welcome_text.png'><br/> -->
-           <span class='scb_s_homepage_see_more_button'><img src='images/homepage/SCB_Homepage_SeeMoreBTN.png'></span>
+           <span class='scb_s_homepage_see_more_button'><img src='images/homepage/SCB_Homepage_SeeMoreBTN.png' alt='See More'></span>
         </span>
 <!--        <span class='scb_s_homepage_top_center'>
             <img class='scb_s_homepage_top_center_image' src='images/homepage/lab.png'>
 
         </span>
 -->        <span class='scb_s_homepage_top_right'>
-            <img class='scb_s_homepage_video_player' src='images/homepage/player_background.png'>
+            <img class='scb_s_homepage_video_player' src='images/homepage/player_background.png' alt='Video Player Background'>
             <a class='scb_no_underline' href='#view=assignments'>
                 <div class='scb_f_try_an_experiment scb_s_homepage_blue_actions'>Try an Experiment</div>
             </a>
@@ -129,7 +129,7 @@ Assignment display_experiment_design
                     Euismod tincidunt ut laoreet dolore magna kjowkd aliquam erat volu
                 </span>
                 <a href="pdf/Reference%20Library.pdf"
-                   class='scb_s_homepage_learn_more scb_s_homepage_technique_learn_more'>LEARN MORE</a>
+                   class='scb_s_homepage_learn_more scb_s_homepage_technique_learn_more' target='_blank'>LEARN MORE</a>
             </span>
         </span>
         <span class='scb_s_homepage_technique'>
@@ -154,7 +154,7 @@ Assignment display_experiment_design
     <span class='scb_s_homepage_technique_title_image'>Western Blot</span>
     <!-- <img class='scb_s_homepage_technique_title_image' src='images/homepage/western_blot.png'>-->
     Western blotting detects overall changes in the amount or chemical modifications of a particular protein.
-    <a href="pdf/Reference%20Library.pdf" class='scb_s_homepage_technique_learn_more'>LEARN MORE</a>
+    <a href="pdf/Reference%20Library.pdf" class='scb_s_homepage_technique_learn_more' target='_blank'>LEARN MORE</a>
 
 </span>
 <img class='scb_s_homepage_technique_bar'
@@ -166,7 +166,7 @@ Assignment display_experiment_design
     <!-- <img class='scb_s_homepage_technique_title_image' src='images/homepage/flow_cytometry.png'> -->
     Flow cytometry is used to count and analyze the size, shape and properties of
     individual cells within a heterogeneous population of cells.
-    <a href="pdf/Reference%20Library.pdf" class='scb_s_homepage_technique_learn_more'>LEARN MORE</a>
+    <a href="pdf/Reference%20Library.pdf" class='scb_s_homepage_technique_learn_more' target='_blank'>LEARN MORE</a>
 </span>
 <img class='scb_s_homepage_technique_bar'
      src='images/homepage/experimental_design_bar.png'>
@@ -177,7 +177,7 @@ Assignment display_experiment_design
 <!--    <img class='scb_s_homepage_technique_title_image' src='images/homepage/microscopy.png'> -->
     Microscopy is used to study the shape, morphology and properties of cells,
     tissues or organisms that otherwise cannot be observed by eye.
-    <a href="pdf/Reference%20Library.pdf" class='scb_s_homepage_technique_learn_more'>LEARN MORE</a>
+    <a href="pdf/Reference%20Library.pdf" class='scb_s_homepage_technique_learn_more' target='_blank'>LEARN MORE</a>
 </span>
 {/if}
 <!--
@@ -191,13 +191,13 @@ Assignment footer
 */
 {template .display_footer}
 <div class='scb_s_footer'>
-    <a href="http://web.mit.edu/"><img class='scb_s_homepage_footer_logo' src='images/homepage/mit_logo.png'></a>
+    <a href="http://web.mit.edu/"><img class='scb_s_homepage_footer_logo' src='images/homepage/mit_logo.png' alt='MIT Logo'></a>
     <img class='scb_s_homepage_footer_divider' src='images/homepage/small_divider.png'>
-    <a href='http://star.mit.edu/about.html'><img class='scb_s_homepage_footer_about'
-                                                  src='images/homepage/about_star.png'></a>
+    <a href='http://star.mit.edu/about.html'><span class='scb_s_homepage_footer_about'
+                                                  src='images/homepage/about_star.png'>About STAR</span></a>
     <img class='scb_s_homepage_footer_divider' src='images/homepage/small_divider.png'>
-    <a href='http://star.mit.edu/cellbio/support.html'><img class='scb_s_homepage_footer_support'
-                                                            src='images/homepage/support.png'></a>
+    <a href='http://star.mit.edu/cellbio/support.html' target='_blank'><span class='scb_s_homepage_footer_support'
+                                                            src='images/homepage/support.png'>Support</span></a>
     <button class='save_master_model'>Save</button>
     <button class='load_master_model'>Load</button>
 
