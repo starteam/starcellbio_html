@@ -77,10 +77,25 @@
   display: block;
   text-align: right;
 }
-.scb_s_envelope_icon, .scb_s_envelope_text {
-  margin-bottom: 8px;
+.scb_s_envelope_icon {
+  vertical-align: middle;
+  position: relative;
+  top: -14px;
+}
+.scb_s_envelope_text {
+  position: relative;
+  top: -12px;
+}
+.scb_s_cabinet_text, .scb_s_user_guide_text {
+  position: relative;
+  top: -2px;
 }
 .scb_s_header_tools_text {
+  text-align: left;
+  display: inline-block;
+  font-size: 7.5pt;
+  color: #727272;
+  width: 40px;
   padding-left: 6px;
   padding-right: 6px;
   padding-top: 4px;
@@ -328,6 +343,6 @@
   vertical-align: top;
   margin-top: 20px;
 }
-.scb_no_underline {
+.scb_no_underline, a {
   text-decoration: none;
 }
