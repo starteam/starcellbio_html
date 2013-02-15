@@ -374,6 +374,7 @@
     color: black;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
+    cursor:pointer;
 }
 
 .scb_s_western_blot_choose_gel_type_input_disabled {

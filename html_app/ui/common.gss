@@ -29,6 +29,7 @@ body {
     margin-bottom: 5px;
     box-shadow: 0px 0px 5px #a9a9a9;
     font-family:'sourcesanspro-semibold';
+    cursor:pointer;
     @mixin gradient(top,#81c9f1,#028dde,#008ddd);
 
 }

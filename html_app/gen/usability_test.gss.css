@@ -64,7 +64,7 @@
   margin-right: -20px;
   background-color: #dae9e1;
   width: 694px;
-  height: 2px;
+  height: 1px;
   display: block;
 }
 .scb_objective_separator {
@@ -95,7 +95,7 @@
   font-family: 'sourcesanspro-semibold';
 }
 .scb_objective_text {
-  font-size: 12pt;
+  font-size: 11pt;
   display: inline-block;
   width: 600px;
 }

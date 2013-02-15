@@ -8,7 +8,7 @@ scb.WesternBlotList = function scb_WesternBlotList(data, context, parent) {
 
     self.start = function (d) {
         d = ( typeof (d) == 'undefined' ? {} : d);
-        d.name = d.name || "W.B. Exp. " + data.counter++;
+        d.name = d.name || "W.B. " + data.counter++;
         var ret = new scb.WesternBlot(d, context, self);
         data.list.push(d);
         return ret;

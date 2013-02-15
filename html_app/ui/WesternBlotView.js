@@ -100,8 +100,8 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
         alert("INVALID ELEMENT!");
     }
     var rows_state = parsed.western_blot.rows_state();
-    if (rows_state.valid > scb.ui.static.WesternBlotView.MAX_ROWS) {
-        alert("Maximum number of lysate samples is " + scb.ui.static.WesternBlotView.MAX_ROWS + ". Please remove some and try again.");
+    if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS-1)) {
+        alert( "You have selected more than "+scb.ui.static.WesternBlotView.MAX_ROWS+" samples. The gel only has 15 lanes. Please only select "+scb.ui.static.WesternBlotView.MAX_ROWS+" samples, and remember that one lane is usually reserved for a protein marker." );
     }
     else if (rows_state.valid < 1) {
         alert("Please select at least 1 lysate to prepare.");
@@ -140,6 +140,14 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
     var parsed = scb.ui.static.WesternBlotView.parse(element);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
+    }
+
+    if(! parsed.western_blot.marker_loaded ) {
+        var r=confirm("The protein size marker has not been loaded. Would you like to continue?")
+        if( r == false )
+        {
+            return;
+        }
     }
 
     //TODO: 1st things first -- we needs to save NEW order
@@ -222,7 +230,7 @@ scb.ui.static.WesternBlotView.format_rows = function( rows )
     });
 }
 
-scb.ui.static.WesternBlotView.MAX_ROWS = 14;
+scb.ui.static.WesternBlotView.MAX_ROWS = 15;
 
 scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
     var self = this;
@@ -265,7 +273,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             $('.scb_s_western_blot_samples_gel_area').css('opacity','.25');
         }
 
-        if (rows_state.valid >= scb.ui.static.WesternBlotView.MAX_ROWS) {
+        if (rows_state.valid >= (scb.ui.static.WesternBlotView.MAX_ROWS-1)) {
             $('.scb_f_western_blot_sample_active').attr('disabled', 'disabled');
             $('.scb_f_western_blot_select_lysate_type').attr('disabled', 'disabled');
             $('.scb_f_western_blot_sample_active[checked="checked"]').removeAttr('disabled');

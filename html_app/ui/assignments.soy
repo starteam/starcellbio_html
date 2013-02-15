@@ -63,7 +63,7 @@ Assignment description
         <div class='scb_s_abstract_title_underline'></div>
         {$assignments.selected.description |noAutoescape}
 
-    <a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignments.selected_id}">ASSIGNMENT &nbsp; &#9654;</a>
+    <a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignments.selected_id}">COMPLETE ASSIGNMENT &nbsp; &#9654;</a>
 
     {else}
         {$global_template.app_description |noAutoescape}
@@ -108,8 +108,8 @@ Assignment experiments
     </li>
     {/foreach}
 {/if}
-    <li class='scb_s_assignment_experiment_list_item'>
-        <a class='scb_f_new_assignment_experiment' href='#view=experiment_design&assignment_id={$assignment.id}' model_id='{$assignment.id}'>New Experiment</a>
-    </li>
 </ul>
+    <div class='scb_s_assignment_experiment_list_item_new_experiment'>
+       +<a class='scb_f_new_assignment_experiment scb_s_new_assignment_experiment' href='#view=experiment_design&assignment_id={$assignment.id}' model_id='{$assignment.id}'>New Experiment</a>
+    </div>
 {/template}

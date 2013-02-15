@@ -31,6 +31,12 @@
   display: block;
   padding-bottom: 10px;
 }
+.scb_s_experiment_design_techniques_tq_note {
+  display: block;
+  padding-bottom: 10px;
+  font-family: sourcesanspro-regular;
+  font-size: 10pt;
+}
 .scb_s_design_description>.scb_f_open_assignment {
   position: absolute;
   bottom: 5px;
@@ -60,7 +66,7 @@
 .scb_s_experiment_design_technique_wb, .scb_s_experiment_design_technique_flow, .scb_s_experiment_design_technique_micro {
   display: inline-block;
   width: 200px;
-  border: 1px solid #a0a0a0;
+  border: 1px solid transparent;
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 20px;
@@ -77,6 +83,7 @@
 }
 .scb_s_experiment_design_selected {
   border-width: 3px;
+  border-color: #c9c9c9;
   position: relative;
   top: -2px;
   left: -2px;
@@ -85,4 +92,7 @@
 }
 .scb_s_experiment_design_unselected {
   opacity: .75;
+}
+.scb_s_experiment_design_technique:hover {
+  border-color: #b9b9b9;
 }

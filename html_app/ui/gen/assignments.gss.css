@@ -101,3 +101,10 @@
   bottom: 5px;
   right: 5px;
 }
+.scb_s_assignment_experiment_list_item_new_experiment {
+  padding-left: 25px;
+  font-family: 'sourcesanspro-bold';
+}
+.scb_s_new_assignment_experiment {
+  padding-left: 9px;
+}

@@ -43,7 +43,7 @@ Experiment active area
             {param step:1/}
         {/call}
             <!--<div class='experiment_name_header'>Experiment name:</div>-->
-            <input type='text' class='scb_s_experiment_name_edit' maxlength="20" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'>
+            <input type='text' class='scb_s_experiment_name_edit' maxlength="15" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'>
         <br/>
     <!--
         {$assignment.description |noAutoescape}
@@ -51,12 +51,12 @@ Experiment active area
     -->
         <br/>
         <div class='scb_s_experiment_design_objective_container'>
-            <div class='scb_s_experiment_design_objective_text'>What objective or question is your experiment going to address?</div>
+            <div class='scb_s_experiment_design_objective_text'>What question is your experiment going to address?</div>
             <textarea class='scb_s_experiment_design_objective' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.objective}</textarea>
         </div>
 
         <div class='scb_s_experiment_design_hypothesis_container'>
-            <div class='scb_s_experiment_design_hypothesis_text'>What is your goal or hypothesis for this experiment?</div>
+            <div class='scb_s_experiment_design_hypothesis_text'>Do you have a hypothesis for this experiment? If so, please write it below.</div>
         <textarea class='scb_s_experiment_design_hypothesis' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.hypothesis}</textarea>
         </div>
 
@@ -70,10 +70,14 @@ Experiment active area
             {param assignment:$assignment /}
         {/call}
             </span>
+            <span class='scb_s_experiment_design_techniques_tq_note'>
+                Please note that by selecting a technique(s), you will not alter the techniques that are available to you for this experiment.
+
+            </span>
         </div>
     <br/>
         <a class="scb_f_open_experiment_setup scb_s_navigation_button" href="#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}">EXPERIMENT SETUP &nbsp; &#9654;</a><br/>
-        <a class="scb_f_open_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignment.id}">&#9664; &nbsp; ASSIGNMENT</a>
+        <a class="scb_f_open_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignment.id}">&#9664; &nbsp; COMPLETE ASSIGNMENT</a>
 </div>
 {/template}
 
@@ -85,11 +89,11 @@ Experiment active area
 {template .display_techniques}
 {foreach $tech in $techniques}
 {if $tech == 'wb'}
-<span class='scb_s_experiment_design_technique_wb {if $experiment.design_wb_cb}scb_s_experiment_design_selected{else}scb_s_experiment_design_unselected{/if}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_wb_cb' >
+<span class='scb_s_experiment_design_technique_wb scb_s_experiment_design_technique {if $experiment.design_wb_cb}scb_s_experiment_design_selected{else}scb_s_experiment_design_unselected{/if}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_wb_cb' >
 
     <span class='scb_s_homepage_technique_title_image'>
-        <input type="checkbox" value='{$experiment.design_wb_cb}'  assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_wb_cb' class='scb_s_experiment_design_technique_checkbox' {if $experiment.design_wb_cb}checked='checked'{/if}>
-        Western Blot</span>
+<!--        <input type="checkbox" value='{$experiment.design_wb_cb}'  assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_wb_cb' class='scb_s_experiment_design_technique_checkbox' {if $experiment.design_wb_cb}checked='checked'{/if}>
+-->        Western Blot</span>
     <!-- <img class='scb_s_homepage_technique_title_image' src='images/homepage/western_blot.png'>-->
     Western blotting detects overall changes in the amount or chemical modifications of a particular protein.
     <a href="pdf/Reference%20Library.pdf" class='scb_s_homepage_technique_learn_more' target='_blank'>LEARN MORE</a>
@@ -97,10 +101,10 @@ Experiment active area
 </span>
 {/if}
 {if $tech == 'fc'}
-<span class='scb_s_experiment_design_technique_flow {if $experiment.design_fc_cb}scb_s_experiment_design_selected{else}scb_s_experiment_design_unselected{/if}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_fc_cb' >
+<span class='scb_s_experiment_design_technique_flow scb_s_experiment_design_technique {if $experiment.design_fc_cb}scb_s_experiment_design_selected{else}scb_s_experiment_design_unselected{/if}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_fc_cb' >
     <span class='scb_s_homepage_technique_title_image'>
-        <input type="checkbox" value='{$experiment.design_fc_cb}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_fc_cb' class='scb_s_experiment_design_technique_checkbox' {if $experiment.design_fc_cb}checked='checked'{/if}>
-        Flow Cytometry</span>
+<!--        <input type="checkbox" value='{$experiment.design_fc_cb}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_fc_cb' class='scb_s_experiment_design_technique_checkbox' {if $experiment.design_fc_cb}checked='checked'{/if}>
+-->        Flow Cytometry</span>
     <!-- <img class='scb_s_homepage_technique_title_image' src='images/homepage/flow_cytometry.png'> -->
     Flow cytometry is used to count and analyze the size, shape and properties of
     individual cells within a heterogeneous population of cells.
@@ -108,10 +112,10 @@ Experiment active area
 </span>
 {/if}
 {if $tech == 'fc'}
-<span class='scb_s_experiment_design_technique_micro {if $experiment.design_mi_cb}scb_s_experiment_design_selected{else}scb_s_experiment_design_unselected{/if}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_mi_cb'>
+<span class='scb_s_experiment_design_technique_micro scb_s_experiment_design_technique {if $experiment.design_mi_cb}scb_s_experiment_design_selected{else}scb_s_experiment_design_unselected{/if}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_mi_cb'>
     <span class='scb_s_homepage_technique_title_image'>
-        <input type="checkbox" value='{$experiment.design_mi_cb}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_mi_cb' class='scb_s_experiment_design_technique_checkbox' {if $experiment.design_mi_cb}checked='checked'{/if}>
-        Microscopy</span>
+ <!--       <input type="checkbox" value='{$experiment.design_mi_cb}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_mi_cb' class='scb_s_experiment_design_technique_checkbox' {if $experiment.design_mi_cb}checked='checked'{/if}>
+-->        Microscopy</span>
 <!--    <img class='scb_s_homepage_technique_title_image' src='images/homepage/microscopy.png'> -->
     Microscopy is used to study the shape, morphology and properties of cells,
     tissues or organisms that otherwise cannot be observed by eye.

@@ -41,7 +41,7 @@ scb_western_blot_gel.display_tabs = function(opt_data, opt_sb) {
     var rData72 = rList72[rIndex72];
     output.append((rData72.is_valid) ? '<li>' + soy.$$escapeHtml(rData72.display_text) + ' -' + soy.$$escapeHtml(rData72.lane.kinds[rData72.lane.kind].name) + '</li>' : '');
   }
-  output.append('</ol>', (opt_data.western_blot.marker_loaded == true) ? '<div class=\'scb_s_western_blot_marker\'>15. &nbsp; Marker</div>' : '', '</div>', (opt_data.western_blot.marker_loaded == false) ? '<div class=\'scb_s_western_blot_marker\'>No marker loaded.</div>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'>');
+  output.append('</ol>', (opt_data.western_blot.marker_loaded == true) ? '<div class=\'scb_s_western_blot_marker\'>15. &nbsp; Marker</div>' : '', '</div>', (opt_data.western_blot.marker_loaded == false) ? '<div class=\'scb_s_western_blot_marker scb_s_western_blot_marker_not\'>No marker loaded.</div>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'>');
   var gelList90 = opt_data.western_blot.gel_list.list;
   var gelListLen90 = gelList90.length;
   for (var gelIndex90 = 0; gelIndex90 < gelListLen90; gelIndex90++) {

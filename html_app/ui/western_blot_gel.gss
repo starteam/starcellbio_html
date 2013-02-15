@@ -89,3 +89,10 @@ font-family: 'sourcesanspro-regular';
     color:black;
 }
 
+.scb_s_western_blot_marker_not {
+    font-family: 'sourcesanspro-semibold';
+}
+
+.scb_s_wb_exposure_time_value {
+    font-family: 'sourcesanspro-regular';
+}
