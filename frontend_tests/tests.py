@@ -52,7 +52,7 @@ class SimpleTest(TestCase):
         self.open_assignment('basic_tests', title='SCB Basic Tests',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.assert_on_assignment_page()
-        self.navigate_via('Assignments')
+        self.navigate_via(' ASSIGNMENTS')
         self.assert_on_assignments_page()
         self.open_assignment('basic_tests', title='SCB Basic Tests',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
@@ -60,17 +60,17 @@ class SimpleTest(TestCase):
         self.assert_experiments([])
         self.navigate_via('New Experiment')
         self.assert_on_experiment_design_page()
-        experiment_title = 'Test Experiment 12'
+        experiment_title = 'Test Experiment'
         experiment_hypo = 'Sample hypothesis ABC'
         experiment_obj = 'Sample objective ABC'
         self.set_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
-        self.navigate_via('Assignment')
+        self.navigate_via('COMPLETE ASSIGNMENT')
         self.assert_on_assignment_page()
-        self.assert_experiments(['Test Experiment 12'])
+        self.assert_experiments(['Test Experiment'])
         self.navigate_via(experiment_title)
         self.assert_on_experiment_design_page()
         self.assert_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
-        self.navigate_via('Experiment setup')
+        self.navigate_via('EXPERIMENT SETUP')
         self.assert_on_experiment_setup_page()
         self.assert_samples([])
         sample1 = {'cell_line_id': 'wt', 'treatment_id': 'P1', 'collection_id': '3 d'}
@@ -92,56 +92,59 @@ class SimpleTest(TestCase):
         self.assert_samples([sample2,sample1,sample3,sample4])
         self.add_sample(sample5)
         self.assert_samples([sample2,sample1,sample3,sample4,sample5])
-        self.navigate_via('Design')
+        self.navigate_via('DESIGN EXPERIMENT')
         self.assert_on_experiment_design_page()
-        self.navigate_via('Experiment setup')
+        self.navigate_via('EXPERIMENT SETUP')
         self.assert_on_experiment_setup_page()
         self.assert_samples([sample2,sample1,sample3,sample4,sample5])
-        self.navigate_via('Run Experiment')
+        self.navigate_via('RUN EXPERIMENT')
         self.assert_on_experiment_run_page()
-        self.navigate_via('Select technique')
+        self.navigate_via('SELECT TECHNIQUE')
         self.assert_on_select_technique_page()
         self.assert_western_blots([])
-        self.navigate_via('New Western Blot')
+        self.navigate_via('NEW WESTERN BLOT')
         self.assert_on_western_blot_page()
-        self.navigate_via('Select technique')
+        self.navigate_via('SELECT TECHNIQUE')
         self.assert_on_select_technique_page()
-        self.assert_western_blots(['W.B. Exp. 1'])
-        self.navigate_via('New Western Blot')
+        self.assert_western_blots(['W.B. 1'])
+        self.navigate_via('NEW WESTERN BLOT')
         self.assert_on_western_blot_page()
-        self.navigate_via('Select technique')
+        self.navigate_via('SELECT TECHNIQUE')
         self.assert_on_select_technique_page()
-        self.assert_western_blots(['W.B. Exp. 1','W.B. Exp. 2'])
-        self.navigate_via('W.B. Exp. 2')
+        self.assert_western_blots(['W.B. 1','W.B. 2'])
+        self.navigate_via('W.B. 2')
         self.assert_on_western_blot_page()
-        self.assert_western_blot_tabs('W.B. Exp. 2', ['W.B. Exp. 1'])
-        self.navigate_via('W.B. Exp. 1')
-        self.assert_western_blot_tabs('W.B. Exp. 1', ['W.B. Exp. 2'])
-        self.navigate_via('Select technique')
+        self.assert_western_blot_tabs('W.B. 2', ['W.B. 1'])
+        self.navigate_via('W.B. 1')
+        self.assert_western_blot_tabs('W.B. 1', ['W.B. 2'])
+        self.navigate_via('SELECT TECHNIQUE')
         self.assert_on_select_technique_page()
-        self.navigate_via('New Western Blot')
+        self.navigate_via('NEW WESTERN BLOT')
         self.assert_on_western_blot_page()
-        self.assert_western_blot_tabs('W.B. Exp. 3', ['W.B. Exp. 1', 'W.B. Exp. 2'])
+        self.assert_western_blot_tabs('W.B. 3', ['W.B. 1', 'W.B. 2'])
         self.remove_western_blot()
         self.assert_on_select_technique_page()
-        self.navigate_via('W.B. Exp. 1')
-        self.assert_western_blot_tabs('W.B. Exp. 1', ['W.B. Exp. 2'])
+        self.navigate_via('W.B. 1')
+        self.assert_western_blot_tabs('W.B. 1', ['W.B. 2'])
         self.rename_western_blot('Exp. 1')
-        self.navigate_via('Select technique')
+        self.navigate_via('SELECT TECHNIQUE')
         self.assert_on_select_technique_page()
         self.navigate_via('Exp. 1')
-        self.assert_western_blot_tabs('Exp. 1', ['W.B. Exp. 2'])
+        self.assert_western_blot_tabs('Exp. 1', ['W.B. 2'])
+        pudb.set_trace()
         self.select_lysates()
-        self.navigate_via('Prepare lysate')
-        self.navigate_via('Run gel')
+        self.navigate_via('PREPARE LYSATES')
+        self.select_gel_type()
+        self.select_load_marker()
+        self.navigate_via('RUN GEL')
         wb_sample1 = { 'primary_antibody':'1' , 'secondary_antibody':'2' }
         self.select_wb_antibody(wb_sample1)
         self.navigate_via('BLOT')
         pudb.set_trace()
-        self.navigate_via('Re-probe')
-        self.navigate_via('Gel 1')
-        self.navigate_via('Gel 2')
-        #self.navigate_via('Select technique')
+        self.navigate_via('RE-PROBE')
+        self.navigate_via('anti-let-23')
+        self.navigate_via('BLOT')
+        self.navigate_via('SELECT TECHNIQUE')
 
 
     ## navigation helpers and assertions
@@ -201,7 +204,7 @@ class SimpleTest(TestCase):
 
     def assert_samples(self, samples_list):
         web_sample_rows = self.driver.find_elements_by_class_name('scb_s_experiment_setup_table_row')
-        web_sample_list = [y for y in set([x.get_attribute('cell_treatment') for x in web_sample_rows])]
+        web_sample_list = [y for y in set([x.get_attribute('cell_treatment_id') for x in web_sample_rows])]
         self.assertEqual(samples_list.__len__(), web_sample_list.__len__())
 
     def add_sample(self, sample):
@@ -256,6 +259,14 @@ class SimpleTest(TestCase):
         option = web_filtered[0]
         option.click()
 
+    def select_gel_type(self):
+        e_class = self.find_by_class_name('scb_s_western_blot_choose_gel_type_input')
+        e_class.click()
+
+    def select_load_marker(self):
+        e_class = self.find_by_class_name('scb_s_western_blot_load_marker')
+        e_class.click()
+
     def select_lysates(self):
         cbs = self.driver.find_elements_by_css_selector('.scb_f_western_blot_sample_active')
         for i in range(0,cbs.__len__()):
@@ -264,7 +275,7 @@ class SimpleTest(TestCase):
             cb.click()
             select = self.driver.find_elements_by_css_selector('.scb_f_western_blot_select_lysate_type')
             options = select[2*i].find_elements_by_tag_name('option')
-            option = [x for x in options if x.get_attribute('value') == 'whole_cell']
+            option = [x for x in options if x.get_attribute('value') == 'whole']
             if(option.__len__() > 0 ):
                 option[0].click()
 

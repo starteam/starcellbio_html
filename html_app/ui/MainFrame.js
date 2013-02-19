@@ -200,7 +200,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         state = state || {
             view:'homepage'
         }
-        if( state.view != 'experiment_setup' )
+        if( state.onhashchange )
         {
             window.scrollTo(0,0);
         }

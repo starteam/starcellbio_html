@@ -335,7 +335,7 @@
     {/foreach}
 {else}
     {if length(keys($kinds)) != 1}
-    <option selected="selected" disabled="disabled">Pick Lysate Type</option>
+    <option selected="selected" disabled="disabled" value=''>Pick Lysate Type</option>
     {/if}
     {foreach $k in keys($kinds)}
         <option value='{$k}'>{$kinds[$k].name}</option>

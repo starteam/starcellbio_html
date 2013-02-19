@@ -110,7 +110,7 @@ scb_western_blot.display_lysate_types = function(opt_data, opt_sb) {
       output.append('<option value=\'', soy.$$escapeHtml(kData278), '\'', (opt_data.lane.lane.kind == kData278) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData278].name), '</option>');
     }
   } else {
-    output.append((soy.$$getMapKeys(opt_data.kinds).length != 1) ? '<option selected="selected" disabled="disabled">Pick Lysate Type</option>' : '');
+    output.append((soy.$$getMapKeys(opt_data.kinds).length != 1) ? '<option selected="selected" disabled="disabled" value=\'\'>Pick Lysate Type</option>' : '');
     var kList293 = soy.$$getMapKeys(opt_data.kinds);
     var kListLen293 = kList293.length;
     for (var kIndex293 = 0; kIndex293 < kListLen293; kIndex293++) {

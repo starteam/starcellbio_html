@@ -28,6 +28,10 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (
     }
 
     var lysate_type = $(element).val();
+    if( lysate_type == '' )
+    {
+        return;
+    }
     var lysate_id = $(element).attr('lane_id');
     if (lysate_id == '') {
         var cell_treatment_id = $(element).attr('cell_treatment_id');

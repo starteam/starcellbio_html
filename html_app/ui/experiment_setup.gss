@@ -174,12 +174,10 @@ table.scb_s_experiment_setup_table {
 
 .scb_s_experiment_setup_table_row:hover {
     opacity: 1;
-    background-color: white;
 }
 
 .scb_s_experiment_setup_new_row_gray:hover {
     opacity: 1;
-    background-color: white;
 }
 
 
