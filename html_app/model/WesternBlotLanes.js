@@ -37,17 +37,7 @@ scb.WesternBlotLaneList = function scb_WesternBlotLaneList(data, context, parent
         }
     }
 
-    scb.utils.accessor2_custom(self, 'grouped_list', function () {
-        var list = self.list;
-        var ret = _.groupBy(_.sortBy(list , function(e) {
-            return e.created_at;
-        }), function (e) {
-            return e.cell_treatment_id;
-        });
-        return ret;
-    }, scb.utils.read_only_exception);
-
-
+    scb.ModelHelpers.grouped_list(self,'cell_treatment_id');
 }
 
 scb.WesternBlotLane = function scb_WesternBlotLane(data, context, parent) {

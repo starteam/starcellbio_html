@@ -73,4 +73,57 @@ scb.Facs = function scb_Facs(data, context, parent) {
 	
 	scb.Utils.initialize_field(data, 'gels_list', {});
 
+    scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
+
+    self.rows_state = function (exp) {
+            var skip_placeholders = false;
+            if (_.keys(context.template.lysate_kinds).length == 1) {
+                skip_placeholders = true;
+            }
+            var experiment = exp || self.parent.parent;
+            var grouped_rows = self.lanes_list.grouped_list;
+            var rows = [];
+            _.each(experiment.cell_treatment_list.list, function (e) {
+                if (grouped_rows[e.id]) {
+                    _.each(grouped_rows[e.id], function (ee, index) {
+                        rows.push({
+                            kind:'existing',
+                            cell_treatment:e,
+                            lane:ee,
+                            display_sample:index == 0,
+                            is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                            index:index,
+                            is_valid:self.is_cell_treatment_enabled[e.id] && ee
+                        });
+                    });
+                    if (!skip_placeholders) {
+                        rows.push({
+                            kind:'placeholder',
+                            display_sample:false,
+                            cell_treatment:e,
+                            is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                            is_valid:false
+                        });
+                    }
+                } else {
+                    rows.push({
+                        kind:'new',
+                        row_type:'new',
+                        display_sample:true,
+                        cell_treatment:e,
+                        is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                        is_valid:false
+                    })
+                }
+            });
+            var count = 0;
+            _.each(rows, function (e) {
+                if (e.is_valid) count++;
+            });
+            _.each(rows, function(r,index,rows){
+                r.display_text = r.cell_treatment.format_row();
+            });
+            return {rows:rows, valid:count};
+        }
+
 }

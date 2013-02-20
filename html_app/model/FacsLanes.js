@@ -107,6 +107,7 @@ scb.FacsLaneList = function scb_FacsLaneList(data, context,parent) {
 		return data.list.length;
 	}, scb.utils.read_only_exception);
 
+    scb.ModelHelpers.grouped_list(self,'cell_treatment_id');
 }
 
 scb.FacsLane = function scb_FacsLane(data, context,parent) {

@@ -120,7 +120,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.ui.static.ExperimentSetupView.register(workarea);
     scb.ui.static.WesternBlotView.register(workarea);
     scb.ui.static.WesternBlotGelView.register(workarea);
-
+    scb.ui.static.FacsView.register(workarea);
 
     scb.utils.off_on(workarea, 'click', '.save_master_model', function () {
         var tmp;
