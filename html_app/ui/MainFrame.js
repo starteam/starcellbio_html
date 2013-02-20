@@ -63,6 +63,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                                 }
                             }
                         }
+                        if(state.facs_id) {
+                            var facs = experiment.facs_list.get(state.facs_id);
+                            if( facs ) {
+                                ret.facs = facs;
+                            }
+                        }
 
                     }
                     else {
@@ -174,6 +180,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context:context
     });
 
+    self.sections.facs = new scb.ui.FacsView({
+        workarea:workarea,
+        context:context
+    });
+
     self.sections.select_technique = new scb.ui.SelectTechniqueView({
         workarea:workarea,
         context:context
@@ -276,7 +287,23 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 mode:'readonly',
                 last_view:'experiment_run'
             });
-
+        }
+        if(state.view == 'facs') {
+            if (!parsed.facs) {
+                delete state.onhashchange;
+                var facs = parsed.experiment.facs_list.start({});
+                state.facs_id = facs.id;
+                window.history.replaceState("New FACS" , "New FACS" , '#'+$.param(state));
+                state.onhashchange = true;
+                self.show(state);
+                return;
+            }
+            self.sections.facs.show({
+                workarea:workarea,
+                assignment:parsed.assignment,
+                experiment:parsed.experiment,
+                facs:parsed.facs
+            });
         }
         if (state.view == 'select_technique') {
             self.sections.select_technique.show({

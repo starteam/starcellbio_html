@@ -894,6 +894,9 @@ var __basic_tests = {
         instructions: '$DISPLAY_ASSIGNMENT_INSTRUCTIONS$',
 
         ui: {
+            experimental_design: {
+                techniques: [ 'wb' , 'facs']
+            },
             experiment_setup: {table: [
                 {kind: "cell_line",
                     title: "Strain",
@@ -1366,7 +1369,7 @@ var __usability_test = {
 
         ui: {
             experimental_design: {
-                techniques: [ 'wb' ]
+                techniques: [ 'wb' , 'facs']
             },
             experiment_setup: {table: [
                 {kind: "cell_plate",
