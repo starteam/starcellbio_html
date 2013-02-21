@@ -10,7 +10,7 @@
     <file path="/starcellbio.app.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359054922539" ignored="false" />
     <file path="/watch.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359057410835" ignored="false" />
     <file path="/usability_test.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360695849683" ignored="false" />
-    <file path="/*.regexp" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361398832007" ignored="false" />
+    <file path="/*.regexp" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361484381733" ignored="false" />
     <file path="/assignments.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360952468624" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/assignments.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360952893587" ignored="false" />
     <file path="/assignment.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360680207290" ignored="false" />
@@ -35,7 +35,7 @@
     <file path="$PROJECT_DIR$/html_app/ui/gen/homepage.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360960202461" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/experiment_design.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360953709107" ignored="false" />
     <file path="/common.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360955879443" ignored="false" />
-    <file path="/experiment_setup.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360954844257" ignored="false" />
+    <file path="/experiment_setup.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361483576539" ignored="false" />
     <file path="/experiment_setup.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360955574897" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/experiment_setup.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360955610129" ignored="false" />
     <file path="/master_model.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361380086813" ignored="false" />
@@ -43,7 +43,7 @@
     <file path="/common.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360696756754" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/common.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360696793587" ignored="false" />
     <file path="/WesternBlotCanvas.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360771184416" ignored="false" />
-    <file path="/ExperimentSetupView.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360771955894" ignored="false" />
+    <file path="/ExperimentSetupView.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361484896031" ignored="false" />
     <file path="/WesternBlot.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360772206781" ignored="false" />
     <file path="/select_technique.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361380307670" ignored="false" />
     <file path="/select_technique.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360790748455" ignored="false" />
@@ -93,7 +93,7 @@
           <file leaf-file-name="facs.soy" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/html_app/ui/facs.soy">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="269" column="25" selection-start="9286" selection-end="9286" vertical-scroll-proportion="0.57674944">
+                <state line="269" column="25" selection-start="9286" selection-end="9286" vertical-scroll-proportion="2.6072235">
                   <folding />
                 </state>
               </provider>
@@ -139,10 +139,40 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="FacsView.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="FacsView.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/html_app/ui/FacsView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="21" column="76" selection-start="707" selection-end="707" vertical-scroll-proportion="0.32374102">
+                <state line="22" column="55" selection-start="764" selection-end="764" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="experiment_setup.soy" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="22" column="10" selection-start="617" selection-end="617" vertical-scroll-proportion="-14.347826">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ExperimentSetupView.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="226" column="16" selection-start="10121" selection-end="10121" vertical-scroll-proportion="-8.659091">
+                  <folding>
+                    <element signature="e#7719#8179#0" expanded="false" />
+                    <element signature="e#8253#9829#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WesternBlotGelView.js" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="246" column="0" selection-start="9498" selection-end="9498" vertical-scroll-proportion="0.6789474">
                   <folding />
                 </state>
               </provider>
@@ -209,9 +239,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/html_app/ui/homepage.gss" />
-        <option value="$PROJECT_DIR$/html_app/ui/homepage.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.gss" />
         <option value="$PROJECT_DIR$/frontend_tests/tests.py" />
         <option value="$PROJECT_DIR$/html_app/master_model.js" />
         <option value="$PROJECT_DIR$/html_app/ui/select_technique.soy" />
@@ -225,6 +252,9 @@
         <option value="$PROJECT_DIR$/html_app/ui/facs.soy" />
         <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/html_app/ui/FacsView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js" />
       </list>
     </option>
   </component>
@@ -669,27 +699,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/model/Experiment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="9" selection-start="909" selection-end="909" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="44" selection-start="3859" selection-end="3887" vertical-scroll-proportion="0.77588046">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/SelectTechniqueView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="93" selection-start="742" selection-end="742" vertical-scroll-proportion="0.27749228">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/master_model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="898" column="14" selection-start="34744" selection-end="34744" vertical-scroll-proportion="-11.4">
@@ -764,13 +773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/facs.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="269" column="25" selection-start="9286" selection-end="9286" vertical-scroll-proportion="0.57674944">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="123" column="0" selection-start="4732" selection-end="4732" vertical-scroll-proportion="0.0">
@@ -780,7 +782,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/FacsView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="76" selection-start="707" selection-end="707" vertical-scroll-proportion="0.32374102">
+        <state line="22" column="55" selection-start="764" selection-end="764" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="10" selection-start="617" selection-end="617" vertical-scroll-proportion="-14.347826">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/facs.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="269" column="25" selection-start="9286" selection-end="9286" vertical-scroll-proportion="2.6072235">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="226" column="16" selection-start="10121" selection-end="10121" vertical-scroll-proportion="-8.659091">
+          <folding>
+            <element signature="e#7719#8179#0" expanded="false" />
+            <element signature="e#8253#9829#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="246" column="0" selection-start="9498" selection-end="9498" vertical-scroll-proportion="0.6789474">
           <folding />
         </state>
       </provider>

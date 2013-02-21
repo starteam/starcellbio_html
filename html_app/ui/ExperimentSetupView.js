@@ -156,8 +156,8 @@ scb.ui.static.ExperimentSetupView.scb_f_open_select_technique = function (param)
 
 
 scb.ui.static.ExperimentSetupView.register = function (workarea) {
-    scb.utils.off_on(workarea,'click', '.scb_f_open_experiment_setup_readonly', function(e) {
-        scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly(this,e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_open_experiment_setup_readonly', function (e) {
+        scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly(this, e);
     })
 
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_action_open_add_samples_dialog', function (e) {
@@ -176,41 +176,45 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_new_row', function (e) {
         var mode = $('.scb_s_experiment_setup_details_view', workarea).attr('mode');
         if (mode != 'readonly') {
-        scb.ui.static.ExperimentSetupView.new_row_edit(this);
-        var row = scb.ui.static.ExperimentSetupView.save_new_row(this);
-        var edit_elements = $('.scb_s_experiment_setup_table_row[cell_treatment_id="' + row.id + '"]');
-        scb.ui.static.ExperimentSetupView.row_edit(edit_elements[0]);
+            scb.ui.static.ExperimentSetupView.new_row_edit(this);
+            var row = scb.ui.static.ExperimentSetupView.save_new_row(this);
+            var edit_elements = $('.scb_s_experiment_setup_table_row[cell_treatment_id="' + row.id + '"]');
+            scb.ui.static.ExperimentSetupView.row_edit(edit_elements[0]);
         }
     });
     scb.utils.off_on($(document), 'mouseup', $(document), function (e) {
         if (true) {
-            var container = $(".scb_s_experiment_setup_table_row", $(document));
+            if (e.target.tagName.toLowerCase() != 'option') {
+                var container = $(".scb_s_experiment_setup_table_row", $(document));
 
-            if (container.has(e.target).length === 0) {
-                $(container).each(function (c) {
-                    var container = $(this);
-                    if (container.attr('data-is_editing') == "true") {
-                        container.removeAttr('data-is_editing');
-                        console.info("-- click outside -- edit row -- ");
-                        scb.ui.static.ExperimentSetupView.save_row(container);
-                        scb.ui.static.MainFrame.refresh();
-                    }
-                });
+                if (container.has(e.target).length === 0) {
+                    $(container).each(function (c) {
+                        var container = $(this);
+                        if (container.attr('data-is_editing') == "true") {
+                            container.removeAttr('data-is_editing');
+                            console.info("-- click outside -- edit row -- ");
+                            scb.ui.static.ExperimentSetupView.save_row(container);
+                            scb.ui.static.MainFrame.refresh();
+                        }
+                    });
+                }
             }
         }
         if (true) {
-            var container = $(".scb_s_experiment_setup_new_row", $(document));
+            if (e.target.tagName.toLowerCase() != 'option') {
+                var container = $(".scb_s_experiment_setup_new_row", $(document));
 
-            if (container.has(e.target).length === 0) {
-                $(container).each(function (c) {
-                    var container = $(this);
-                    if (container.attr('data-is_editing') == "true") {
-                        container.removeAttr('data-is_editing');
-                        console.info("-- click outside --");
-                        scb.ui.static.ExperimentSetupView.save_new_row(container);
-                        scb.ui.static.MainFrame.refresh();
-                    }
-                });
+                if (container.has(e.target).length === 0) {
+                    $(container).each(function (c) {
+                        var container = $(this);
+                        if (container.attr('data-is_editing') == "true") {
+                            container.removeAttr('data-is_editing');
+                            console.info("-- click outside --");
+                            scb.ui.static.ExperimentSetupView.save_new_row(container);
+                            scb.ui.static.MainFrame.refresh();
+                        }
+                    });
+                }
             }
         }
     });
@@ -218,18 +222,20 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_table_row', function (e) {
         var mode = $('.scb_s_experiment_setup_details_view', workarea).attr('mode');
         if (mode != 'readonly') {
-            scb.ui.static.ExperimentSetupView.row_edit(this);
+            if( ! $(this).data('is_editing') )
+            {
+                scb.ui.static.ExperimentSetupView.row_edit(this);
+            }
         }
     });
+
 }
 
-scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = function(element,event) {
+scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = function (element, event) {
     var parsed = scb.ui.static.ExperimentSetupView.parse(element);
-    if( parsed.experiment )
-    {
-        if( parsed.experiment.cell_treatment_list.length == 0)
-        {
-            alert( "Please set up at least one sample.");
+    if (parsed.experiment) {
+        if (parsed.experiment.cell_treatment_list.length == 0) {
+            alert("Please set up at least one sample.");
             event.preventDefault();
         }
     }
@@ -708,16 +714,15 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         else {
             $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen: false})
         }
-        if(!_.isUndefined(template.setup_video_box)){
-           var x = $('.scb_s_experiment_setup_video_box',workarea);
-           x.html(template.setup_video_box);
-           if(template.setup_video_box_kind='coin-slider')
-           {
-               $('#slider',x).slides({
-                   preload:true,
-                   hoverPause:true
-               });
-           }
+        if (!_.isUndefined(template.setup_video_box)) {
+            var x = $('.scb_s_experiment_setup_video_box', workarea);
+            x.html(template.setup_video_box);
+            if (template.setup_video_box_kind = 'coin-slider') {
+                $('#slider', x).slides({
+                    preload: true,
+                    hoverPause: true
+                });
+            }
         }
     }
 }

@@ -245,8 +245,6 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         var rows_state = state.western_blot.rows_state();
         var rows = rows_state.rows;
 
-        scb.ui.static.WesternBlotView.format_rows(rows);
-
         var kind = 'prepare_gel';
 
         workarea.html(scb_western_blot_gel.main({
