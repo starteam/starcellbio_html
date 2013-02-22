@@ -1,14 +1,15 @@
 {namespace scb_facs}
 
 /**
-    FACS Main View
-    @param global_template
-    @param assignment AssignmentView
-    @param experiment
-    @param facs
-    @param t
-    @param kind
-    @param rows
+FACS Main View
+@param global_template
+@param assignment AssignmentView
+@param experiment
+@param facs
+@param t
+@param kind
+@param kinds
+@param rows
 */
 {template .main}
 <div class='scb_s_facs_view'>
@@ -16,15 +17,15 @@
     {param global_template:$global_template /}
     {/call}
     {call scb_common.assignment_step}
-        {param step:6/}
-        {param assignment_name:$assignment.name/}
-        {param experiment_name:$experiment.name/}
-        {param assignment:$assignment/}
-        {param experiment:$experiment/}
-        {param technique_name:'FACS' /}
-        {param technique_view:'facs' /}
-        {param technique_param:'facs_id' /}
-        {param technique_id:$facs.id /}
+    {param step:6/}
+    {param assignment_name:$assignment.name/}
+    {param experiment_name:$experiment.name/}
+    {param assignment:$assignment/}
+    {param experiment:$experiment/}
+    {param technique_name:'FACS' /}
+    {param technique_view:'facs' /}
+    {param technique_param:'facs_id' /}
+    {param technique_id:$facs.id /}
     {/call}
     {call .display_details}
     {param t:$t/}
@@ -32,6 +33,7 @@
     {param assignment:$assignment/}
     {param facs:$facs /}
     {param kind:$kind /}
+    {param kinds:$kinds /}
     {param rows:$rows /}
     {/call}
     {call scb_homepage.display_footer}
@@ -81,24 +83,34 @@
 */
 {template .display_tabs}
 {call .display_tabs_selector}
-    {param assignment:$assignment/}
-    {param experiment:$experiment /}
-    {param facs:$facs /}
+{param assignment:$assignment/}
+{param experiment:$experiment /}
+{param facs:$facs /}
 {/call}
-<div class='scb_s_facs_tab_content {if $kind == 'sample_prep'}scb_s_facs_tab_content_sample_prep{/if}'>
-    {if $kind == 'sample_prep'}
-    {call .sample_prep}
-    {param assignment:$assignment/}
-    {param experiment:$experiment/}
-    {param facs:$facs/}
-    {param rows:$rows/}
-    {param kinds:$kinds/}
-    {param can_prepare_lysate:$can_prepare_lysate/}
-    {/call}
-    {/if}
-    <a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_western_blot"
-       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
+<div class='scb_s_facs_tab_content {if $kind == ' sample_prep'}scb_s_facs_tab_content_sample_prep{/if}'>
+{if $kind == 'sample_prep'}
+{call .sample_prep}
+{param assignment:$assignment/}
+{param experiment:$experiment/}
+{param facs:$facs/}
+{param rows:$rows/}
+{param kinds:$kinds/}
+{param can_prepare_lysate:$can_prepare_lysate/}
+{/call}
+{/if}
+{if $kind == 'analyze'}
+{call .analyze}
+{param assignment:$assignment/}
+{param experiment:$experiment/}
+{param facs:$facs/}
+{param rows:$rows/}
+{param kinds:$kinds/}
+{param can_prepare_lysate:$can_prepare_lysate/}
+{/call}
+{/if}
+<a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_western_blot"
+   href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 
 </div>
 {/template}
@@ -114,6 +126,7 @@
     {foreach $wb in $experiment.facs_list.list}
     {if $facs.id == $wb.id}
     <span class='scb_s_facs_active'>
+
     <span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
           experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
     <button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
@@ -125,7 +138,7 @@
        href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$wb.id}'
        facs_id='{$wb.id}'>{$wb.name}</a>
     {/if}
-    {/foreach} 
+    {/foreach}
 </div>
 {/template}
 
@@ -182,7 +195,7 @@
                 </button>
                 {else}
                 <button class="scb_f_facs_sample_remove"
-                disabled="disabled">X
+                        disabled="disabled">X
                 </button>
 
                 {/if}
@@ -218,38 +231,25 @@
     <span class='scb_s_western_blot_progress_prefix_group2'>
 
     <div class='scb_s_western_blot_progress_prefix_text'>
-        PERFORM WESTERN BLOT
+        PERFORM FLOW CYTOMETRY
     </div>
 
     <div class='scb_s_western_blot_progress_rest'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 {if $step >= 1}scb_s_western_blot_progress_selected{/if}'>
             1. Sample Prep
         </div>
-        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2 {if $step >= 2}scb_s_western_blot_progress_selected{/if}'>
-            2. Prepare Gel
-        </div>
-        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3 {if $step >= 3}scb_s_western_blot_progress_selected{/if}'>
-            3. Load Gel
-        </div>
-        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_4 {if $step >= 4}scb_s_western_blot_progress_selected{/if}'>
-            4. Run
-        </div>
-        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_5 {if $step >= 5}scb_s_western_blot_progress_selected{/if}'>
-            5. Transfer
-        </div>
-        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_6 {if $step >= 6}scb_s_western_blot_progress_selected{/if}'>
-            6. Blot
-        </div>
-        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_7 {if $step >= 7}scb_s_western_blot_progress_selected{/if}'>
-            7. Develop
-        </div>
+        <img class='scb_s_western_blot_progress_vertical_line'
+             src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
 
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2 {if $step >= 2}scb_s_western_blot_progress_selected{/if}'>
+            2. Run
+        </div>
+        <img class='scb_s_western_blot_progress_vertical_line'
+             src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3 {if $step >= 3}scb_s_western_blot_progress_selected{/if}'>
+            3. Analyze
+        </div>
 
     </div>
     </span>
@@ -273,18 +273,77 @@
 {if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
 >
 {if $lane.kind == 'existing'}
-    {foreach $k in keys($kinds)}
-    <option value='{$k}'
-    {if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
-    {/foreach}
+{foreach $k in keys($kinds)}
+<option value='{$k}'
+{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+{/foreach}
 {else}
-    {if length(keys($kinds)) != 1}
-    <option selected="selected" disabled="disabled" value=''>Pick Lysate Type</option>
-    {/if}
-    {foreach $k in keys($kinds)}
-        <option value='{$k}'>{$kinds[$k].name}</option>
-    {/foreach}
+{if length(keys($kinds)) != 1}
+<option selected="selected" disabled="disabled" value=''>Pick Lysate Type</option>
+{/if}
+{foreach $k in keys($kinds)}
+<option value='{$k}'>{$kinds[$k].name}</option>
+{/foreach}
 {/if}
 </select>
 {/template}
 
+/**
+@param assignment
+@param experiment
+@param facs
+@/param cell_treatment
+@/param lane
+@/param kinds
+@param rows
+*/
+{template .analyze}
+<div class='scb_s_facs_tab_content'>
+    {if $facs.samples_finished}
+    {call .display_facs_progress}
+    {param step:3 /}
+    {/call}
+    {else}
+    {call .display_facs_progress}
+    {param step:2 /}
+    {/call}
+    {/if}
+    <div class='scb_s_facs_samples_area'>
+        <div class='scb_s_facs_samples_heading'>
+            Samples
+        </div>
+        <div class='scb_s_facs_choose_samples_order'>
+            <ol class='scb_s_facs_choose_samples_order_list'>
+                {foreach $r in $rows}
+                {if $r.is_valid}
+                <li>
+                    {$r.display_text} -{$r.lane.kinds[$r.lane.kind].name}
+                </li>
+                {/if}
+
+                {/foreach}
+            </ol>
+        </div>
+        <button class='scb_f_facs_run_samples' facs_id='{$facs.id}' assignment_id="{$assignment.id}"
+                experiment_id="{$experiment.id}">RUN SAMPLES
+        </button>
+    </div>
+    <div class='scb_s_facs_samples_graph_area'>
+        <div class='scb_s_western_blot_gel_tabs'>
+                    <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
+
+                    <div class='scb_s_western_blot_gel_tab_selected'>NAME
+                    </div>
+                    </span>
+        </div>
+        {call .display_graph}
+        {/call}
+    </div>
+</div>
+{/template}
+
+/**
+*/
+{template .display_graph}
+
+{/template}

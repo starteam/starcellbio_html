@@ -1221,6 +1221,17 @@ var __basic_tests = {
                 name: 'Nuclear'
             }
         },
+        facs_kinds: {
+            'whole': {
+                name: 'Whole Cell'
+            },
+            'cyto': {
+                name: 'Cytoplasm'
+            },
+            'nuclear': {
+                name: 'Nuclear'
+            }
+        },
         model: {// model
             western_blot: {// this applies to western blot
                 'cyto': {// it acts on cytoplasm (thus on whole cell lysate as well)

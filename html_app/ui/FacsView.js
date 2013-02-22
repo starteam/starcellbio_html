@@ -35,10 +35,80 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
     scb.ui.static.MainFrame.refresh();
 }
 
+scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element,event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    var sample_kind = $(element).val();
+    if( sample_kind == '' )
+    {
+        return;
+    }
+    var lane_id = $(element).attr('lane_id');
+    if( lane_id == '' )
+    {
+        var cell_treatment_id = $(element).attr('cell_treatment_id');
+               var lane = parsed.facs.lanes_list.start({
+                   kind:sample_kind,
+                   cell_treatment_id:cell_treatment_id,
+                   experiment_id:parsed.experiment.id
+               });
+        $(element).attr('lane_id', lane.id ) ;
+        $(element).attr('lane_kind', 'existing' ) ;
+        scb.ui.static.MainFrame.refresh();
+    }
+    else
+    {
+        parsed.facs.lanes_list.get(lane_id).kind = sample_kind;
+    }
+
+}
+
+scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element,event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    var rows_state = parsed.facs.rows_state();
+        parsed.facs.sample_prepared = true;
+        scb.ui.static.MainFrame.refresh();
+}
+
+
+scb.ui.static.FacsView.scb_f_facs_sample_active_all = function (element,event) {
+    $('.scb_f_facs_sample_active').each( function(e) {
+        var element = this;
+        $(element).attr('checked','checked');
+        scb.ui.static.FacsView.scb_f_facs_sample_active(element);
+    } ) ;
+}
+
+scb.ui.static.FacsView.scb_f_facs_run_samples = function(element,event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    parsed.facs.samples_finished = true;
+    scb.ui.static.MainFrame.refresh();
+}
 
 scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_facs_sample_active', function (e) {
         scb.ui.static.FacsView.scb_f_facs_sample_active(this, e);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_sample_active_all', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_sample_active_all(this, e);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_prepare_lysates', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_prepare_lysates(this, e);
+    });
+    scb.utils.off_on(workarea, 'change', '.scb_f_facs_select_lysate_type', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this, e);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
     });
 }
 
@@ -52,6 +122,10 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 
         var can_prepare_lysate = rows_state.valid > 0;
 
+        var kind = 'sample_prep';
+                if (state.facs.sample_prepared) {
+                    kind = 'analyze';
+                }
         workarea.html(scb_facs.main({
             global_template: gstate.context.master_model,
             assignment: state.assignment,
@@ -60,7 +134,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             t: template,
             rows: rows_state.rows,
             rows_valid: rows_state.valid,
-            kind: 'sample_prep',
+            kind: kind,
+            kinds: template.lysate_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
         document.title = "FACS - StarCellBio";

@@ -117,4 +117,6 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
         });
         return {rows:rows, valid:count};
     }
+
+
 }

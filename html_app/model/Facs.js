@@ -49,7 +49,7 @@ scb.FacsList = function scb_FacsList(data, context, parent) {
 			}
 		} catch(err) {
 		};
-		var ml = new scb.WesternBlot(clone, context, self);
+		var ml = new scb.Facs(clone, context, self);
 		data.list.push(clone);
 		return ml;
 	}
@@ -61,20 +61,10 @@ scb.Facs = function scb_Facs(data, context, parent) {
 	scb.ModelHelpers.common_entry_code(self, data, context);
 
 	scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.FacsLaneList, context);
-	scb.Utils.initialize_accessor_field(self, data, 'prepared', false, null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'sdsgelrun', false, null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'primary_anti_body', _.keys(context.template.primary_anti_body)[0], null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'secondary_anti_body', _.keys(context.template.secondary_anti_body)[0], null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'exposure_list', {}, scb.WesternBlotExposureList, context);
-	scb.Utils.initialize_accessor_field(self, data, 'finished', false, null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'canvas_data', null, null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'lysate_made', false, null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'display_lysates_id', null, null, context);
-	
-	scb.Utils.initialize_field(data, 'gels_list', {});
+	scb.Utils.initialize_accessor_field(self, data, 'samples_finished', false, null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'sample_prepared', false, null, context);
 
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
-
     self.rows_state = function (exp) {
             var skip_placeholders = false;
             if (_.keys(context.template.lysate_kinds).length == 1) {

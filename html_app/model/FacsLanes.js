@@ -114,12 +114,14 @@ scb.FacsLane = function scb_FacsLane(data, context,parent) {
 	var self = this;
 	self.parent = parent;
 	scb.ModelHelpers.common_entry_code(self, data, context);
-	scb.Utils.initialize_accessor_field(self, data, 'preparation_list', {list:[]}, scb.FacsLanePreparationList, context);
-	scb.Utils.initialize_accessor_field(self, data, 'enabled', false,null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'collection_schedule_id', null,null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'kind', null,null, context);
+
+//	scb.Utils.initialize_accessor_field(self, data, 'preparation_list', {list:[]}, scb.FacsLanePreparationList, context);
+//	scb.Utils.initialize_accessor_field(self, data, 'enabled', false,null, context);
+//	scb.Utils.initialize_accessor_field(self, data, 'collection_schedule_id', null,null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'cell_treatment_id', null,null, context);
 
-	scb.Utils.initialize_field(data, 'experiment_id', null);
+	scb.Utils.initialize_field(data, 'experiment_id', self.parent.parent.parent.parent);
 
 	scb.utils.accessor2_custom(self, 'experiment', function() {
 		var assignment = context.js_model.current_assignment;
@@ -134,5 +136,9 @@ scb.FacsLane = function scb_FacsLane(data, context,parent) {
 	scb.utils.accessor2_custom(self, 'collection_schedule', function() {
 		return self.cell_treatment.collection_schedule_list.get(data.collection_schedule_id);
 	}, scb.utils.noop);
+
+    scb.utils.accessor2_custom(self, 'kinds', function () {
+            return context.template.facs_kinds;
+        }, scb.utils.noop);
 
 }
