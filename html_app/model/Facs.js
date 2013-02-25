@@ -63,6 +63,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.FacsLaneList, context);
 	scb.Utils.initialize_accessor_field(self, data, 'samples_finished', false, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'sample_prepared', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
 
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
     self.rows_state = function (exp) {

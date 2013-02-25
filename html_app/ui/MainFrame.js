@@ -47,7 +47,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                             var western_blot = experiment.western_blot_list.get(state.western_blot_id);
                             if (western_blot) {
                                 ret.western_blot = western_blot;
-                                if (state.western_blot_gel_id) {
+                                if (state.western_blot_gel_id && western_blot) {
                                     var western_blot_gel = western_blot.gel_list.get(state.western_blot_gel_id);
                                     ret.western_blot_gel = western_blot_gel;
                                 }
@@ -57,7 +57,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                             var cell_treatment = experiment.cell_treatment_list.get(state.cell_treatment_id);
                             if (cell_treatment) {
                                 ret.cell_treatment = cell_treatment;
-                                if (state.treatment_id) {
+                                if (state.treatment_id && cell_treatment) {
                                     var treatment = cell_treatment.treatment_list.get(state.treatment_id);
                                     ret.treatment = treatment;
                                 }
@@ -67,6 +67,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                             var facs = experiment.facs_list.get(state.facs_id);
                             if( facs ) {
                                 ret.facs = facs;
+                                if( state.facs_lane_id && facs )
+                                {
+                                    var facs_lane = facs.lanes_list.get(state.facs_lane_id)
+                                    ret.facs_lane = facs_lane;
+                                }
                             }
                         }
 

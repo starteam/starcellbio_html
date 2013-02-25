@@ -93,20 +93,6 @@
     color:#189689;
 }
 
-.scb_s_western_blot_samples_area {
-    width:300px;
-    border:1px solid #e0e0e0;
-    border-radius: 2px;
-    display:inline-block;
-    vertical-align: top;
-    margin-top:20px;
-    border-top-width: 8px;
-    box-shadow: 0px 0px 3px black;
-/*    height:368px;*/
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: white;
-}
 
 .scb_s_western_blot_samples_gel_area {
     display:inline-block;
@@ -229,17 +215,6 @@
 
     left: 10px;
     position: relative;
-
-}
-
-.scb_s_western_blot_samples_heading {
-
-    font-size: 11pt;
-    font-family: 'sourcesanspro-semibold';
-    text-align: left;
-    padding-top: 15px;
-    margin-bottom: -10px;
-    padding-left: 22px;
 
 }
 

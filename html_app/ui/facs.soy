@@ -316,8 +316,9 @@ FACS Main View
             <ol class='scb_s_facs_choose_samples_order_list'>
                 {foreach $r in $rows}
                 {if $r.is_valid}
-                <li>
-                    {$r.display_text} -{$r.lane.kinds[$r.lane.kind].name}
+                <li facs_id='{$facs.id}' assignment_id="{$assignment.id}"
+                                experiment_id="{$experiment.id}" facs_lane_id='{$r.lane.id}' {if $facs.lane_selected == $r.lane.id}class='scb_s_facs_sample_selected'{/if}>
+                    {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
                 </li>
                 {/if}
 
@@ -337,13 +338,30 @@ FACS Main View
                     </span>
         </div>
         {call .display_graph}
+            {param assignment:$assignment/}
+            {param experiment:$experiment/}
+            {param facs:$facs/}
+            {param facs_line_id:$facs.lane_selected/}
         {/call}
     </div>
 </div>
 {/template}
 
 /**
+@param assignment
+@param experiment
+@param facs
+@param facs_line_id
 */
 {template .display_graph}
+<div class='scb_s_western_blot_gel_content'>
 
+    <div class='scb_s_facs_chart' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' facs_id='{$facs.id}'
+           {if $facs_line_id}facs_lane_id='{$facs_line_id}'{/if}>
+    </div>
+
+    <div class='scb_s_western_blot_tools'>
+        Here come tools
+    </div>
+</div>
 {/template}
