@@ -9,7 +9,7 @@ scb.ui.static.MainFrame.update_hash = function (state) {
     console.info( "update_hash " + state.onhashchange );
     console.info( $.bbq.getState() );
     console.info( state );
-state
+
     if (!state.onhashchange) {
         delete state.onhashchange;
         $.bbq.removeState({},2);

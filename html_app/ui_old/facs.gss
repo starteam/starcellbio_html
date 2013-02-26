@@ -1,8 +1,8 @@
 
 .even1 {
-    background-color: #ffffffff;
+    background-color: #ffffff;
 }
 
 .odd1 {
-    background-color: #ffffffff;
+    background-color: #ffffff;
 }

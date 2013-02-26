@@ -6,7 +6,7 @@ scb.experiment_setup_treatment_display = function(opt_data, opt_sb) {
 	var template = opt_data.template;
 	var cell_treatment = opt_data.cell_treatment;
 
-	var array_height = template.ui_configuration.experiment_setup_resolution_height
+	var array_height = template.ui_configuration.experiment_setup_resolution_height;
 	var screen_duration = template.ui_configuration.experiment_setup_duration;
 	var array = [];
 	for (var i = 0; i < array_height; i++) {

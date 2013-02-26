@@ -7,7 +7,7 @@ scb.AssignmentList = function scb_AssignmentList(data, context) {
 	var proto = scb.Assignment;
 	scb.utils.accessor2_with_setter(self, 'selected_id', data, function(e) {
 		context.js_model.current_assignment = self.selected;
-	})
+	});
 	scb.ModelHelpers.common_list_code(self, data, proto, context, self);
 
 	self.selected_id = data.selected_id;

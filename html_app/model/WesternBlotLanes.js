@@ -10,7 +10,7 @@ scb.WesternBlotLaneList = function scb_WesternBlotLaneList(data, context, parent
         var ret = new scb.WesternBlotLane(d, context, self);
         data.list.push(d);
         return ret;
-    }
+    };
 
     self.duplicate = function (id) {
         var orig = _.find(data.list, function (e) {
@@ -20,7 +20,7 @@ scb.WesternBlotLaneList = function scb_WesternBlotLaneList(data, context, parent
             var clone = scb.utils.clone_and_clear(orig)
             return self.start(clone);
         }
-    }
+    };
 
     self.reorder = function (new_order) {
         var new_list = [];
@@ -35,7 +35,7 @@ scb.WesternBlotLaneList = function scb_WesternBlotLaneList(data, context, parent
         } else {
             throw "NEW ORDER LENGTH != ORDER_LENGTH";
         }
-    }
+    };
 
     scb.ModelHelpers.grouped_list(self,'cell_treatment_id');
 }

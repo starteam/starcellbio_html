@@ -1368,7 +1368,7 @@ var __basic_tests = {
             }
         }
     }
-}
+};
 
 var __usability_test = {
     id: 'usability_test',
@@ -1423,7 +1423,7 @@ var __usability_test = {
                     '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
                     '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']}
                 }
-            },
+            }
         },
 
         experiment_setup_actions: {
@@ -1840,15 +1840,108 @@ var __usability_test = {
             }
         }
     }
-}
+};
 
+var __assigment_706 = {
+    id: 'mit-7.06-0313',
+    name: '7.06 Spring 2013',
+    description: 'FACS and Western Blot for temperature sensitive mutants',
+    experiments: {},
+    template: {
+        instructions: 'Here come instructions when we build them',
+        ui: {
+            experimental_design: {
+                techniques: [ 'wb' , 'facs']
+            },
+            experiment_setup: {
+                table: [ //
+                    {kind: 'cell_line', title: 'Strain', editable: true}, //
+                    {kind: 'treatments',
+                        children: [//
+                            {kind: 'drug', title: 'Treatment', editable: true},//
+                            {kind: 'concentration', title: 'Concentration', editable: true}//
+                        ]
+                    },//
+                    {kind: 'temperature', title: 'Temperature', editable: true},//
+                    {kind: 'actions', title: 'Actions'}//
+                ],//
+                actions: [],//
+                new_row: {
+                    title: 'New Row',
+                    cell_line: 'wt',
+                    treatment_list: {list: [
+                        {drug_list: {list: [
+                            {drug_id: 'nc', concentration_id: '0'}
+                        ]}, temperature: '25'
+                        }
+                    ]},
+                }
+            },
+            western_blot: {format: "%CELL_LINE%, %TREATMENT% (%CONCENTRATION%), %TEMPERATURE%",
+                keys: {
+                    '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
+                    '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
+                    '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['temperature', '%KEY%', 'name']}
+                }
+            }
+        },
+        add_new_row_instructions: 'add new row instructions',
+
+        concentrations: {
+            '0': {
+                name: '0 nM',
+                value: 0
+            },
+            '5': {
+                name: '5 mM',
+                value: 5
+            },
+            '10': {
+                name: '10 ' + microEntity + 'M',
+                value: 10000
+            }
+        },
+        drugs: {
+            'nc': {
+                name: 'Buffer only',
+                concentrations: [0]
+            },
+            '1': {
+                name: 'Nocodazole',
+                concentrations: [5, 10]
+            }
+        },
+        experiment_temperatures: {
+            '25': {
+                name: "25'C"
+            },
+            '40': {
+                name: "40'C"
+            }
+        },
+
+        cell_lines: {
+            'wt': {
+                name: 'Wild Type'
+            },
+            'm1': {
+                name: 'Mutant 1'
+            }
+
+        },
+        time_unit: {
+            kind: 'minutes'
+        }
+    },
+};
 
 master_model_data = {
     app_title: 'StarCellBio',
     app_description: 'StarCellBio Placeholder',
     //'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.',
     assignments: {
-        list: [/*__assigment_tufts, __assigment_facs, __assignment2,*/ __usability_test, __basic_tests
+        list: [/*__assigment_tufts, __assigment_facs, __assignment2,*/ __usability_test, __basic_tests, __assigment_706
         ]
     },
     ui: {}

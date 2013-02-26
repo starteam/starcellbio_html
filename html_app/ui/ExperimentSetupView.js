@@ -222,8 +222,7 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_table_row', function (e) {
         var mode = $('.scb_s_experiment_setup_details_view', workarea).attr('mode');
         if (mode != 'readonly') {
-            if( ! $(this).data('is_editing') )
-            {
+            if (!$(this).data('is_editing')) {
                 scb.ui.static.ExperimentSetupView.row_edit(this);
             }
         }
@@ -255,6 +254,9 @@ scb.ui.static.ExperimentSetupView.headings = function (table_map) {
                 var subpart = part.children[subpart_index];
                 headings.push(subpart);
             }
+        }
+        if (part.kind == 'temperature') {
+            headings.push(part);
         }
         if (part.kind == 'custom') {
             headings.push(part);
@@ -321,6 +323,15 @@ scb.ui.static.ExperimentSetupView.row = function (sample, headings, template, ro
                     row.push({
                         kind: 'duration',
                         title: treatment.duration,
+                        rows: drug_list.length,
+                        first_row: drug_index == 0 && treatment_index == 0,
+                        treatment: treatment.id
+                    })
+                }
+                else if (drug_index == 0 && part.kind == 'temperature') {
+                    row.push({
+                        kind: 'temperature',
+                        title: template.experiment_temperatures[treatment.temperature].name,
                         rows: drug_list.length,
                         first_row: drug_index == 0 && treatment_index == 0,
                         treatment: treatment.id
@@ -406,7 +417,8 @@ scb.ui.static.ExperimentSetupView.save_row = function (element) {
     var drug_id = parsed.experiment.new_row.drug_id;
     var concentration_id = parsed.experiment.new_row.concentration_id;
     var treatment_line = parsed.treatment.drug_list.list[0];
-
+    var temperature = parsed.experiment.new_row.temperature;
+    var refresh = false;
     if (drug_id && concentration_id) {
         var valid = _.find(template.drugs[drug_id].concentrations, function (a) {
             return a == concentration_id
@@ -414,12 +426,23 @@ scb.ui.static.ExperimentSetupView.save_row = function (element) {
         if (!_.isUndefined(valid)) {
             treatment_line.drug_id = drug_id;
             treatment_line.concentration_id = concentration_id;
-            parsed.experiment.new_row = {};
-            scb.ui.static.MainFrame.refresh();
+            refresh = true;
         } else {
-            parsed.experiment.new_row = {};
-            scb.ui.static.MainFrame.refresh();
+            refresh = true;
         }
+    }
+    if(cell_line_id) {
+       parsed.cell_treatment.cell_line_id = cell_line_id;
+        refresh = true;
+    }
+    if(temperature) {
+       parsed.treatment.temperature = temperature;
+        refresh = true;
+    }
+    if(refresh)
+    {
+    parsed.experiment.new_row = {};
+    scb.ui.static.MainFrame.refresh();
     }
 }
 
@@ -444,7 +467,7 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
     var concentration_id = parsed.experiment.new_row.concentration_id;
     var schedule_value = parsed.experiment.new_row.schedule_value;
     var duration_value = parsed.experiment.new_row.duration_value;
-
+    var temperature = parsed.experiment.new_row.temperature;
     if (drug_id && concentration_id) {
         var valid = _.find(template.drugs[drug_id].concentrations, function (a) {
             return a == concentration_id
@@ -457,7 +480,7 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
                 treatment_list: {list: [
                     {schedule_value: schedule_value, duration_value: duration_value, drug_list: {list: [
                         {drug_id: drug_id, concentration_id: concentration_id}
-                    ]}
+                    ]},temperature:temperature
                     }
                 ]},
                 collection_schedule_list: {list: [
@@ -492,12 +515,14 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
     var treatment_line = parsed.treatment.drug_list.list[0];
     var drug_id = treatment_line.drug_id;
     var concentration_id = treatment_line.concentration_id;
+    var temperature = parsed.treatment.temperature;
+
 
     if ($(element).attr('data-is_editing') != 'true') {
         parsed.experiment.new_row.cell_line = cell_line;
         parsed.experiment.new_row.drug_id = drug_id;
         parsed.experiment.new_row.concentration_id = concentration_id;
-
+        parsed.experiment.new_row.temperature = temperature;
         $(element).attr('data-is_editing', true);
     }
 
@@ -507,7 +532,18 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
         var kind = $(element).attr('kind');
         if (kind == 'cell_line') {
             if (_.keys(template.cell_lines).length > 1) {
-                // this is editable
+                $(element).html(scb_experiment_setup.cell_lines_edit({
+                    global_template: parsed.context.master_model,
+                    template: template,
+                    assignment: parsed.assignment,
+                    experiment: parsed.experiment,
+                    cell_line_id: parsed.experiment.new_row.cell_line
+                }));
+                scb.utils.off_on(element, "change", "select", function (e) {
+                    console.info($(this).val());
+                    parsed.experiment.new_row.cell_line = $(this).val();
+                    scb.ui.static.ExperimentSetupView.row_edit(row_element);
+                });
             }
         }
         if (kind == 'drug') {
@@ -555,11 +591,28 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
                 parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
             }
         }
+        if (kind == 'temperature') {
+            if (_.keys(template.experiment_temperatures).length > 1) {
+                var temperature = parsed.experiment.new_row.temperature;
+                $(element).html(scb_experiment_setup.temperature_edit({
+                    global_template: parsed.context.master_model,
+                    template: template,
+                    assignment: parsed.assignment,
+                    experiment: parsed.experiment,
+                    temperature: temperature
+                }));
+                scb.utils.off_on(element, "change", "select", function (e) {
+                    parsed.experiment.new_row.temperature = $(this).val();
+                    scb.ui.static.ExperimentSetupView.row_edit(row_element);
+                });
+
+            }
+        }
 
     });
 
 
-}
+};
 
 scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
     if ($(element).attr('data-is_editing') != 'true') {
@@ -589,6 +642,7 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
         parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
         parsed.experiment.new_row.schedule_value = template.ui.experiment_setup.new_row.treatment_list.list[0].schedule_value || 0;
         parsed.experiment.new_row.duration_value = template.ui.experiment_setup.new_row.treatment_list.list[0].duration_value || 0;
+        parsed.experiment.new_row.temperature = template.ui.experiment_setup.new_row.treatment_list.list[0].temperature || 0;
 
     }
     $('.scb_s_experiment_setup_td', element).each(function (index) {
@@ -680,7 +734,7 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
         }
 
     });
-}
+};
 
 scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
     var self = this;
@@ -724,5 +778,5 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
                 });
             }
         }
-    }
-}
+    };
+};

@@ -185,14 +185,14 @@ Experiment active area
                          </span>
 
                         {call .concentration_edit}
-                {param template:$t/}
-                {param assignment:$assignment/}
-                {param experiment:$experiment/}
-                {param drug_id:$r.treatment.drug_list.list[0].drug_id/}
-                {param concentration_id:$r.treatment.drug_list.list[0].concentration_id/}
-                {param concentrations: $t.drugs[$r.treatment.drug_list.list[0].drug_id].concentrations/}
-                {param disabled:true/}
-                {/call}
+                        {param template:$t/}
+                        {param assignment:$assignment/}
+                        {param experiment:$experiment/}
+                        {param drug_id:$r.treatment.drug_list.list[0].drug_id/}
+                        {param concentration_id:$r.treatment.drug_list.list[0].concentration_id/}
+                        {param concentrations: $t.drugs[$r.treatment.drug_list.list[0].drug_id].concentrations/}
+                        {param disabled:true/}
+                        {/call}
                 </span>
                     {else}
                     {$c.title}
@@ -212,11 +212,13 @@ Experiment active area
         {/if}
         </tbody>
     </table>
+    {if $t.experiment_setup_actions}
     {call .display_add_sample_dialog}
     {param t:$t /}
     {param assignment:$assignment /}
     {param experiment:$experiment /}
     {/call}
+    {/if}
     <br/>
     {if $kind == 'readwrite'}
     <a class="scb_s_navigation_button scb_f_open_experiment_setup_readonly"
@@ -289,9 +291,26 @@ Experiment active area
 </div>
 {/template}
 
+/**
+* Cell line edit
+* @param template template
+* @param cell_line_id
+* @/param assignment
+* @/param experiment
+* @param disabled
+*/
+{template .cell_lines_edit}
+    <select title='cell_line' size='1' row='0' class='scb_f_experiment_setup_cell_line_edit' {if $disabled}disabled='disabled'{/if}>
+        <option value='' disabled="disabled">Please select</option>
+		{foreach $t in keys($template.cell_lines)}
+			<option value='{$t}' {if $t==$cell_line_id}selected='selected'{/if}>{$template.cell_lines[$t].name}</option>
+		{/foreach}
+	</select>
+{/template}
+
 
 /**
-* Display add dialog
+* Drug Edit
 * @param template template
 * @param drug_id
 * @/param assignment
@@ -300,7 +319,7 @@ Experiment active area
 */
 {template .drug_edit}
     <select title='drug' size='1' row='0' class='scb_f_experiment_setup_drug_edit' {if $disabled}disabled='disabled'{/if}>
-        <option value=''>Please select</option>
+        <option value='' disabled="disabled">Please select</option>
 		{foreach $t in keys($template.drugs)}
 			<option value='{$t}' {if $t==$drug_id}selected='selected'{/if}>{$template.drugs[$t].name}</option>
 		{/foreach}
@@ -308,7 +327,7 @@ Experiment active area
 {/template}
 
 /**
-* Display add dialog
+* Concentration Edit
 * @param template template
 * @param concentrations
 * @param concentration_id
@@ -318,9 +337,27 @@ Experiment active area
 */
 {template .concentration_edit}
     <select title='concentration' size='1' row='0' class='scb_f_experiment_setup_concentration_edit' {if $disabled}disabled='disabled'{/if}>
-        <option value=''>Please select</option>
+        <option value='' disabled="disabled">Please select</option>
         {foreach $t in $concentrations}
 	        <option value='{$t}' {if $t==$concentration_id}selected='true'{/if}>{$template.concentrations[$t].name}</option>
+        {/foreach}
+    </select>
+{/template}
+
+
+/**
+* Concentration Edit
+* @param template template
+* @param temperature
+* @/param assignment
+* @/param experiment
+* @param disabled
+*/
+{template .temperature_edit}
+    <select title='temperature' size='1' row='0' class='scb_f_experiment_setup_temperature_edit' {if $disabled}disabled='disabled'{/if}>
+        <option value='' disabled="disabled">Please select</option>
+        {foreach $t in keys($template.experiment_temperatures)}
+	        <option value='{$t}' {if $t==$temperature}selected='true'{/if}>{$template.experiment_temperatures[$t].name}</option>
         {/foreach}
     </select>
 {/template}
