@@ -205,7 +205,7 @@ Experiment active area
             {if $t.ui.experiment_setup.actions.length > 0}
         <tr>
             <td colspan="{$headings.length+1}">
-                <button class='scb_f_experiment_setup_action_open_add_samples_dialog'>Add multiple rows</button>
+                <button class='scb_f_experiment_setup_action_open_add_samples_dialog' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>Add multiple rows</button>
             </td>
         </tr>
             {/if}

@@ -1843,98 +1843,290 @@ var __usability_test = {
 };
 
 var __assigment_706 = {
-    id: 'mit-7.06-0313',
-    name: '7.06 Spring 2013',
-    description: 'FACS and Western Blot for temperature sensitive mutants',
-    experiments: {},
-    template: {
-        instructions: 'Here come instructions when we build them',
-        ui: {
-            experimental_design: {
-                techniques: [ 'wb' , 'facs']
-            },
-            experiment_setup: {
-                table: [ //
-                    {kind: 'cell_line', title: 'Strain', editable: true}, //
-                    {kind: 'treatments',
-                        children: [//
-                            {kind: 'drug', title: 'Treatment', editable: true},//
-                            {kind: 'concentration', title: 'Concentration', editable: true}//
+        id: 'mit-7.06-0313',
+        name: '7.06 Spring 2013',
+        description: 'FACS and Western Blot for temperature sensitive mutants',
+        experiments: {},
+        template: {
+            instructions: 'Here come instructions when we build them',
+            ui: {
+                experimental_design: {
+                    techniques: [ 'wb' , 'facs']
+                },
+                experiment_setup: {
+                    table: [ //
+                        {kind: 'cell_line', title: 'Strain', editable: true}, //
+                        {kind: 'treatments',
+                            children: [//
+                                {kind: 'drug', title: 'Treatment', editable: true},//
+                                {kind: 'concentration', title: 'Concentration', editable: true}//
+                            ]
+                        },//
+                        {kind: 'temperature', title: 'Temperature', editable: true},//
+                        {kind: 'actions', title: 'Actions'}//
+                    ],//
+                    actions: [],//
+                    new_row: {
+                        title: 'New Row',
+                        cell_line: 'wt',
+                        treatment_list: {list: [
+                            {drug_list: {list: [
+                                {drug_id: 'nc', concentration_id: '0'}
+                            ]}, temperature: '25'
+                            }
+                        ]},
+                    }
+                },
+                western_blot: {format: "%CELL_LINE%, %TREATMENT% (%CONCENTRATION%), %TEMPERATURE%",
+                    keys: {
+                        '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+                        '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
+                        '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
+                        '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['temperature', '%KEY%', 'name']}
+                    }
+                },
+                add_multiple_dialog: {
+                    'wt': {
+                        headings: [
+                            'Treatment', 'Temperature', 'With PP1', 'Without PP1'
+                        ],
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: '25'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }},
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: '40'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Nocodazole'},
+                                    {kind: 'text', text: '25'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'nocodazole,25'
+                            }
+                            ,
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Nocodazole'},
+                                    {kind: 'text', text: '40'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'nocodazole,40'
+                            }
+                            ,
+
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Hydroxyurea'},
+                                    {kind: 'text', text: '25'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'hydroxyurea,25'
+                            }
+                            ,
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Hydroxyurea'},
+                                    {kind: 'text', text: '40'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'hydroxyurea,40'
+                            }
+                            ,
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Alpha Factor'},
+                                    {kind: 'text', text: '25'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'alpha_factor,25'
+                            }
+                            ,
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Alpha Factor'},
+                                    {kind: 'text', text: '40'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'alpha_factor,40'
+                            }
+
                         ]
-                    },//
-                    {kind: 'temperature', title: 'Temperature', editable: true},//
-                    {kind: 'actions', title: 'Actions'}//
-                ],//
-                actions: [],//
-                new_row: {
-                    title: 'New Row',
-                    cell_line: 'wt',
-                    treatment_list: {list: [
-                        {drug_list: {list: [
-                            {drug_id: 'nc', concentration_id: '0'}
-                        ]}, temperature: '25'
-                        }
-                    ]},
+                    },
+                    'm1': {
+                        headings: [
+                            'Treatment', 'Temperature', 'With PP1', 'Without PP1'
+                        ],
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: '25'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,25'
+                            },
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: '40'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,40'
+                            }
+                        ]
+
+                    },
+                    'm2': {
+                        headings: [
+                            'Treatment', 'Temperature', 'With PP1', 'Without PP1'
+                        ],
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: '25'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,25'
+                            },
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: '40'},
+                                    {kind: 'checkbox', name: 'PP1'},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,40'
+                            }
+                        ]
+
+                    }
                 }
             },
-            western_blot: {format: "%CELL_LINE%, %TREATMENT% (%CONCENTRATION%), %TEMPERATURE%",
-                keys: {
-                    '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
-                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
-                    '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
-                    '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['temperature', '%KEY%', 'name']}
+            add_new_row_instructions: 'add new row instructions',
+
+            concentrations: {
+                '0': {
+                    name: '0 nM',
+                    value: 0
+                },
+                '5': {
+                    name: '5 mM',
+                    value: 5
+                },
+                '10': {
+                    name: '10 ' + microEntity + 'M',
+                    value: 10000
+                },
+                '1u': {
+                    name: '1 unit',
+                    value: 0
                 }
-            }
-        },
-        add_new_row_instructions: 'add new row instructions',
+            },
+            drugs: {
+                'nc': {
+                    name: 'Buffer only',
+                    concentrations: [0]
+                },
+                'Nocodazole': {
+                    name: 'Nocodazole',
+                    concentrations: [5, 10]
+                },
+                'pp1': {
+                    name: 'Protein Phosphatase 1',
+                    concentrations: ['1u']
+                }
 
-        concentrations: {
-            '0': {
-                name: '0 nM',
-                value: 0
             },
-            '5': {
-                name: '5 mM',
-                value: 5
+            experiment_temperatures: {
+                '25': {
+                    name: "25'C"
+                },
+                '40': {
+                    name: "40'C"
+                }
             },
-            '10': {
-                name: '10 ' + microEntity + 'M',
-                value: 10000
-            }
-        },
-        drugs: {
-            'nc': {
-                name: 'Buffer only',
-                concentrations: [0]
-            },
-            '1': {
-                name: 'Nocodazole',
-                concentrations: [5, 10]
-            }
-        },
-        experiment_temperatures: {
-            '25': {
-                name: "25'C"
-            },
-            '40': {
-                name: "40'C"
-            }
-        },
 
-        cell_lines: {
-            'wt': {
-                name: 'Wild Type'
-            },
-            'm1': {
-                name: 'Mutant 1'
-            }
+            cell_lines: {
+                'wt': {
+                    name: 'Wild Type'
+                },
+                'm1': {
+                    name: 'Mutant 1'
+                },
+                'm2': {
+                    name: 'Mutant 2'
+                }
 
+            },
+            time_unit: {
+                kind: 'minutes'
+            }
         },
-        time_unit: {
-            kind: 'minutes'
-        }
-    },
-};
+    }
+    ;
 
 master_model_data = {
     app_title: 'StarCellBio',
@@ -1953,5 +2145,10 @@ $(function () {
     __usability_test.template.instructions = scb_model_usability.instructions();
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
     __usability_test.template.experiment_setup = scb_model_usability.experiment_setup();
+
+    __assigment_706.template.ui.experiment_setup.actions.push({
+        name: 'Add multiple',
+        open: mit706s13.setup
+    });
 
 });

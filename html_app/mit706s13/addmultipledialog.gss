@@ -1,0 +1,33 @@
+.scb_mit706s16_dialog {
+    position: absolute;
+    top:0px;
+    left:0px;
+    bottom:0px;
+    right:0px;
+    background-color: #80808080;
+}
+
+.scb_mit706s16_inner_dialog {
+    opacity: 5;
+    width: 75%;
+    height: 75%;
+    overflow: auto;
+    margin-top: 12%;
+    margin-left: 12%;
+    position: relative;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.scb_mit706s16_inner_dialog_title {
+    font-size:12pt;
+    background-color: black;
+    color:white;
+    margin:0px;
+    margin-bottom:5px;
+}
+
+.scb_mit706s16_inner_dialog_body {
+    padding:20px;
+}
