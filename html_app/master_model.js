@@ -1855,11 +1855,11 @@ var __assigment_706 = {
                 },
                 experiment_setup: {
                     table: [ //
-                        {kind: 'cell_line', title: 'Strain', editable: true}, //
+                        {kind: 'cell_line', title: 'Strain', editable: false}, //
                         {kind: 'treatments',
                             children: [//
-                                {kind: 'drug', title: 'Treatment', editable: true},//
-                                {kind: 'concentration', title: 'Concentration', editable: true}//
+                                {kind: 'drug', title: 'Treatment', editable: false},//
+                                {kind: 'concentration', title: 'Concentration', editable: false}//
                             ]
                         },//
                         {kind: 'temperature', title: 'Temperature', editable: true},//
@@ -1918,7 +1918,8 @@ var __assigment_706 = {
                                                 }
                                             ]}}
                                     ]
-                                }},
+                                }
+                            },
                             {
                                 cells: [
                                     {kind: 'text', text: 'Media Only'},
@@ -1955,7 +1956,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'nocodazole,25'
+                                treatment_id: 'nocodazole,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Nocodazole', concentration_id: '15'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Nocodazole', concentration_id: '15'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             }
                             ,
                             {
@@ -1965,7 +1986,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'nocodazole,40'
+                                treatment_id: 'nocodazole,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Nocodazole', concentration_id: '15'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Nocodazole', concentration_id: '15'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             }
                             ,
 
@@ -1976,7 +2017,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'hydroxyurea,25'
+                                treatment_id: 'hydroxyurea,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Hydroxyurea', concentration_id: '200'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Hydroxyurea', concentration_id: '200'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             }
                             ,
                             {
@@ -1986,7 +2047,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'hydroxyurea,40'
+                                treatment_id: 'hydroxyurea,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Hydroxyurea', concentration_id: '200'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Hydroxyurea', concentration_id: '200'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             }
                             ,
                             {
@@ -1996,7 +2077,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'alpha_factor,25'
+                                treatment_id: 'alpha_factor,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Alpha', concentration_id: '2'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Alpha', concentration_id: '2'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             }
                             ,
                             {
@@ -2006,7 +2107,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'alpha_factor,40'
+                                treatment_id: 'alpha_factor,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Alpha', concentration_id: '2'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'Alpha', concentration_id: '2'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             }
 
                         ]
@@ -2023,7 +2144,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'media_only,25'
+                                treatment_id: 'media_only,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             },
                             {
                                 cells: [
@@ -2032,7 +2173,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'media_only,40'
+                                treatment_id: 'media_only,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             }
                         ]
 
@@ -2049,7 +2210,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'media_only,25'
+                                treatment_id: 'media_only,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             },
                             {
                                 cells: [
@@ -2058,7 +2239,27 @@ var __assigment_706 = {
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
-                                treatment_id: 'media_only,40'
+                                treatment_id: 'media_only,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
                             }
                         ]
 
@@ -2076,9 +2277,17 @@ var __assigment_706 = {
                     name: '5 mM',
                     value: 5
                 },
-                '10': {
-                    name: '10 ' + microEntity + 'M',
-                    value: 10000
+                '2': {
+                    name: '2 ' + microEntity + 'g/mL',
+                    value: 5
+                },
+                '15': {
+                    name: '15 ' + microEntity + 'g/mL',
+                    value: 5
+                },
+                '200': {
+                    name: '200 mM',
+                    value: 5
                 },
                 '1u': {
                     name: '1 unit',
@@ -2092,7 +2301,15 @@ var __assigment_706 = {
                 },
                 'Nocodazole': {
                     name: 'Nocodazole',
-                    concentrations: [5, 10]
+                    concentrations: [15]
+                },
+                'Alpha': {
+                    name: '&0x03b1; Factor',
+                    concentrations: [2]
+                },
+                'Hydroxyurea': {
+                    name: 'Hydroxyurea',
+                    concentrations: [200]
                 },
                 'pp1': {
                     name: 'Protein Phosphatase 1',

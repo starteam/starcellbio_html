@@ -23,16 +23,16 @@ scb.ui.static.ExperimentSetupView.parse = function (element) {
 
     return parsed;
 }
-scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog = function(element,workarea) {
+scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog = function (element, workarea) {
     var parsed = scb.ui.static.ExperimentSetupView.parse(element);
     var template = parsed.assignment.template;
     var action = scb.utils.get(template, ['ui', 'experiment_setup', 'actions' , 0, 'open'], scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog_old);
-    scb.Utils.call_back(action,{
+    scb.Utils.call_back(action, {
         workarea: workarea,
         assignment: parsed.assignment,
         experiment: parsed.experiment,
         template: parsed.template,
-        element:element,
+        element: element,
         close: scb.ui.static.MainFrame.refresh
     });
 }
@@ -176,7 +176,7 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     })
 
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_action_open_add_samples_dialog', function (e) {
-        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog(this,workarea);
+        scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog(this, workarea);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_remove_sample', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample(this);
@@ -446,18 +446,17 @@ scb.ui.static.ExperimentSetupView.save_row = function (element) {
             refresh = true;
         }
     }
-    if(cell_line_id) {
-       parsed.cell_treatment.cell_line_id = cell_line_id;
+    if (cell_line_id) {
+        parsed.cell_treatment.cell_line_id = cell_line_id;
         refresh = true;
     }
-    if(temperature) {
-       parsed.treatment.temperature = temperature;
+    if (temperature) {
+        parsed.treatment.temperature = temperature;
         refresh = true;
     }
-    if(refresh)
-    {
-    parsed.experiment.new_row = {};
-    scb.ui.static.MainFrame.refresh();
+    if (refresh) {
+        parsed.experiment.new_row = {};
+        scb.ui.static.MainFrame.refresh();
     }
 }
 
@@ -495,7 +494,7 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
                 treatment_list: {list: [
                     {schedule_value: schedule_value, duration_value: duration_value, drug_list: {list: [
                         {drug_id: drug_id, concentration_id: concentration_id}
-                    ]},temperature:temperature
+                    ]}, temperature: temperature
                     }
                 ]},
                 collection_schedule_list: {list: [
@@ -512,6 +511,15 @@ scb.ui.static.ExperimentSetupView.save_new_row = function (element) {
             return null;
         }
     }
+}
+
+scb.ui.static.ExperimentSetupView.row_edit_is_editable = function (element, template) {
+    var kind = $(element).attr('kind');
+    var cell = _.find(template.ui.experiment_setup.table, function (e) {
+        return e.kind == kind
+    });
+    console.info("editable " + kind + " " + cell + " " + (cell && cell.editable));
+    return (cell && cell.editable) || false;
 }
 
 scb.ui.static.ExperimentSetupView.row_edit = function (element) {
@@ -545,7 +553,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
     $('.scb_s_experiment_setup_table_element', element).each(function (index) {
         var element = this;
         var kind = $(element).attr('kind');
-        if (kind == 'cell_line') {
+        if (kind == 'cell_line' && scb.ui.static.ExperimentSetupView.row_edit_is_editable(element, template)) {
             if (_.keys(template.cell_lines).length > 1) {
                 $(element).html(scb_experiment_setup.cell_lines_edit({
                     global_template: parsed.context.master_model,
@@ -562,7 +570,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
             }
         }
         if (kind == 'drug') {
-            if (_.keys(template.drugs).length > 1) {
+            if (_.keys(template.drugs).length > 1 && scb.ui.static.ExperimentSetupView.row_edit_is_editable(element, template)) {
                 $(element).html(scb_experiment_setup.drug_edit({
                     global_template: parsed.context.master_model,
                     template: template,
@@ -581,7 +589,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
             }
         }
         if (kind == 'concentration') {
-            if (_.keys(template.concentrations).length > 1) {
+            if (_.keys(template.concentrations).length > 1 && scb.ui.static.ExperimentSetupView.row_edit_is_editable(element, template)) {
                 var drug_id = parsed.experiment.new_row.drug_id;
                 if (drug_id && template.drugs[drug_id].concentrations) {
                     $(element).html(scb_experiment_setup.concentration_edit({
@@ -607,7 +615,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
             }
         }
         if (kind == 'temperature') {
-            if (_.keys(template.experiment_temperatures).length > 1) {
+            if (_.keys(template.experiment_temperatures).length > 1 && scb.ui.static.ExperimentSetupView.row_edit_is_editable(element, template)) {
                 var temperature = parsed.experiment.new_row.temperature;
                 $(element).html(scb_experiment_setup.temperature_edit({
                     global_template: parsed.context.master_model,
@@ -666,6 +674,13 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
         if (kind == 'cell_line') {
             if (_.keys(template.cell_lines).length > 1) {
                 // this is editable
+                $(element).html(scb_experiment_setup.cell_lines_edit({
+                    global_template: parsed.context.master_model,
+                    template: template,
+                    assignment: parsed.assignment,
+                    experiment: parsed.experiment,
+                    cell_line_id: parsed.experiment.new_row.cell_line
+                }));
             }
             else {
                 parsed.experiment.new_row.cell_line = template.ui.experiment_setup.new_row.cell_line || _.keys(template.cell_lines)[0];
