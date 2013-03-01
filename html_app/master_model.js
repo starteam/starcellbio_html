@@ -2273,10 +2273,6 @@ var __assigment_706 = {
                     name: '0 nM',
                     value: 0
                 },
-                '5': {
-                    name: '5 mM',
-                    value: 5
-                },
                 '2': {
                     name: '2 ' + microEntity + 'g/mL',
                     value: 5
@@ -2319,10 +2315,10 @@ var __assigment_706 = {
             },
             experiment_temperatures: {
                 '25': {
-                    name: "25'C"
+                    name: "30'C"
                 },
                 '40': {
-                    name: "40'C"
+                    name: "37'C"
                 }
             },
 
@@ -2340,8 +2336,92 @@ var __assigment_706 = {
             },
             time_unit: {
                 kind: 'minutes'
+            },
+            primary_anti_body: {
+                'cdt1': {
+                    name: 'rabbit anti-cdt1',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 65, intensity: 100},
+                    ],
+                    gel_name: 'let-23'
+                },
+                'cdk1': {
+                    name: 'rabbit anti-cdk1',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 34, intensity: 1},
+                        {weight: 35, intensity: 1},
+                        {weight: 36, intensity: 1}
+                    ],
+                    gel_name: 'let-23'
+                },
+                'cyclin': {
+                    name: 'mouse anti-cyclin B',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 58, intensity: 1},
+                    ],
+                    gel_name: 'let-23'
+                },
+                'securin': {
+                    name: 'rabbit anti-securin',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 41.8, intensity: 1},
+                    ],
+                    gel_name: 'let-23'
+                },
+                'cdk2': {
+                    name: 'rabbit anti-cdk2',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 33, intensity: 1},
+                        {weight: 34, intensity: 1},
+                        {weight: 35, intensity: 1}
+                    ],
+                    gel_name: 'let-23'
+                },
+                'cyclinE': {
+                    name: 'mouse anti-cyclin E',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 48, intensity: 1},
+                    ],
+                    gel_name: 'let-23'
+                },
+                'rad21': {
+                    name: 'rabbit anti-rad21',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 68, intensity: 1},
+                    ],
+                    gel_name: 'let-23'
+                },
+                'pgk1': {
+                    name: 'rabbit anti-pgk1',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 45, intensity: 1},
+                    ],
+                    gel_name: 'let-23'
+                }
+            },//
+            secondary_anti_body: {
+                'm': {
+                    name: 'rabbit anti-mouse'
+                },
+                'r': {
+                    name: 'goat anti-rabbit'
+                }
+            },//
+            lysate_kinds: {
+                'whole': {
+                    name: 'Whole Cell'
+                }
             }
-        },
+
+        }
     }
     ;
 
