@@ -9,12 +9,12 @@ scb.ui.static.WesternBlotGelView.parse = function (element) {
     var western_blot_gel_id = $(element).attr('western_blot_gel_id');
 
     var state = {
-        experiment_id:experiment_id,
-        assignment_id:assignment_id,
-        western_blot_id:western_blot_id,
-        western_blot_gel_id:western_blot_gel_id,
-        view:'western_blot_gel',
-        skip_hash_update:false
+        experiment_id: experiment_id,
+        assignment_id: assignment_id,
+        western_blot_id: western_blot_id,
+        western_blot_gel_id: western_blot_gel_id,
+        view: 'western_blot_gel',
+        skip_hash_update: false
     };
     var parsed = scb.ui.static.MainFrame.validate_state(state);
     parsed.state = state;
@@ -27,7 +27,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (e
         alert("INVALID ELEMENT!");
     }
     console.info(parsed.western_blot_gel.primary_anti_body);
-    parsed.western_blot_gel.primary_anti_body = $(element.selectedOptions).attr('model_id');
+    parsed.western_blot_gel.primary_anti_body = $('option:selected',element).attr('model_id');
     console.info(parsed.western_blot_gel.primary_anti_body);
     console.info(parsed.western_blot_gel);
 
@@ -38,7 +38,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    parsed.western_blot_gel.secondary_anti_body = $(element.selectedOptions).attr('model_id');
+    parsed.western_blot_gel.secondary_anti_body = $('option:selected',element).attr('model_id');
 }
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function (element) {
@@ -62,7 +62,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
         western_blot_id: parsed.western_blot.id,
         western_blot_gel_id: parsed.western_blot_gel.id,
         onhashchange: true
-    } ;
+    };
     parsed.western_blot.last_gel = parsed.western_blot_gel.id;
     scb.ui.static.MainFrame.refresh(state);
 }
@@ -102,13 +102,13 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider = function (e, ui) {
     $('.scb_s_wb_exposure_time_value', $(element).parent()).text(scb.utils.print_time_w_seconds(parsed.western_blot_gel.exposure_time));
     if (_.isObject(e)) {
         var state = {
-                assignment_id: parsed.assignment.id,
-                experiment_id: parsed.experiment.id,
-                view: 'western_blot_gel',
-                western_blot_id: parsed.western_blot.id,
-                western_blot_gel_id: parsed.western_blot_gel.id,
-                onhashchange: false
-            } ;
+            assignment_id: parsed.assignment.id,
+            experiment_id: parsed.experiment.id,
+            view: 'western_blot_gel',
+            western_blot_id: parsed.western_blot.id,
+            western_blot_gel_id: parsed.western_blot_gel.id,
+            onhashchange: false
+        };
         scb.ui.static.MainFrame.refresh(state);
     }
 }
@@ -151,7 +151,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         _.each(lanes, function (lane, index) {
             var marks = [];
             model.western_blot.compute(lane, parsed.western_blot_gel, marks);
-            lane_marks.push({marks:marks, amount_of_protein_loaded:10});
+            lane_marks.push({marks: marks, amount_of_protein_loaded: 10});
         });
         parsed.western_blot_gel.marks = lane_marks;
     }
@@ -159,23 +159,23 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     var gel = parsed.western_blot_gel;
     if (gel.canvas_metadata == null) {
         var cstate = {
-            time:0,
-            gel:gel,
-            lanes_length:gel.marks.length
+            time: 0,
+            gel: gel,
+            lanes_length: gel.marks.length
         }
 
         var c = new scb.components.WesternBlot(cstate, context);
         c.initialize_bias();
 
         gel.canvas_metadata = {
-            background:c.background,
-            lane_yslope:c.lane_yslope,
-            lane_xoffset:c.lane_xoffset
+            background: c.background,
+            lane_yslope: c.lane_yslope,
+            lane_xoffset: c.lane_xoffset
         }
     }
     var cstate = {
-        time:gel.exposure_time,
-        gel:gel
+        time: gel.exposure_time,
+        gel: gel
     }
     var c = new scb.components.WesternBlot(cstate, context);
     c.background = gel.canvas_metadata.background;
@@ -186,32 +186,34 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     c.paint_blot(canvas_id, c.tab);
     gel.canvas_data = c.tab;
     var parent = $($(element).parent());
-    var slider = $('.scb_f_slider',$(parent));
+    var slider = $('.scb_f_slider', $(parent));
     slider.css('top', gel.canvas_metadata.slider + 'px');
-    if(_.isUndefined(gel.canvas_metadata.slider) )
-    {
+    if (_.isUndefined(gel.canvas_metadata.slider)) {
         slider.hide();
     }
-    else
-    {
+    else {
         slider.show();
     }
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
         var y = evt.offsetY;
         var x = evt.offsetX;
-        if( $(evt.srcElement).is('canvas') ) {
+        if ($(evt.srcElement).is('canvas')) {
             slider.css('top', y + "px").show();
-            gel.canvas_metadata.slider = y ;
-            if( y < 2 || y > 285 || x < 2 || x > 250 )
-            {
+            gel.canvas_metadata.slider = y;
+            if (y < 2 || y > 285 || x < 2 || x > 250) {
                 slider.hide();
-                delete gel.canvas_metadata.slider ;
+                delete gel.canvas_metadata.slider;
             }
         }
     });
     $(parent).unbind('mouseout').bind('mouseout', function (evt) {
         slider.hide();
     });
+}
+
+scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many = function (element, event) {
+    var target = $("option:selected",element).attr('href');
+   document.location = target;
 }
 
 scb.ui.static.WesternBlotGelView.register = function (workarea) {
@@ -231,6 +233,9 @@ scb.ui.static.WesternBlotGelView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_gel_remove', function (e) {
         scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove(this);
     });
+    scb.utils.off_on(workarea, 'change', '.scb_s_western_blot_tab_select_many', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many(this, e);
+    });
 
 
 }
@@ -248,26 +253,26 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         var kind = 'prepare_gel';
 
         workarea.html(scb_western_blot_gel.main({
-            global_template:gstate.context.master_model,
-            t:template,
-            assignment:state.assignment,
-            experiment:state.experiment,
-            western_blot:state.western_blot,
-            western_blot_gel:state.western_blot_gel,
-            rows:rows,
-            kind:kind,
+            global_template: gstate.context.master_model,
+            t: template,
+            assignment: state.assignment,
+            experiment: state.experiment,
+            western_blot: state.western_blot,
+            western_blot_gel: state.western_blot_gel,
+            rows: rows,
+            kind: kind,
         }));
         state.experiment.last_view = 'western_blot_gel';
         state.western_blot.last_gel = state.western_blot_gel.id;
 
 
         $('.scb_f_wb_exposure_slider').slider({
-            orientation:"horizontal",
-            range:"min",
-            max:scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length - 1,
-            value:scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
-            slide:scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
-            change:scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider
+            orientation: "horizontal",
+            range: "min",
+            max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length - 1,
+            value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
+            slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
+            change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider
         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
 
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all(workarea, gstate, state);
