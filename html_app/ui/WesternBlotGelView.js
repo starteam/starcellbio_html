@@ -27,7 +27,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (e
         alert("INVALID ELEMENT!");
     }
     console.info(parsed.western_blot_gel.primary_anti_body);
-    parsed.western_blot_gel.primary_anti_body = $(element.selectedOptions).attr('model_id');
+    parsed.western_blot_gel.primary_anti_body = $('option:selected',element).attr('model_id');
     console.info(parsed.western_blot_gel.primary_anti_body);
     console.info(parsed.western_blot_gel);
 
@@ -38,7 +38,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    parsed.western_blot_gel.secondary_anti_body = $(element.selectedOptions).attr('model_id');
+    parsed.western_blot_gel.secondary_anti_body = $('option:selected',element).attr('model_id');
 }
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function (element) {
