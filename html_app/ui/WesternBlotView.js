@@ -182,8 +182,12 @@ scb.ui.static.WesternBlotView.populate_wells = function(rows,state,gstate) {
 
     g.drawImage( getImage( 15 ),0,0 ) ;
 
+    var i = 0 ;
     _.each(rows, function(elem, index, array ) {
-        g.drawImage( getImage( index ) ,0,0) ;
+        if( elem.is_sample_enabled )
+        {
+            g.drawImage( getImage( i++ ) ,0,0) ;
+        }
     });
     if(state.western_blot.marker_loaded)
     {

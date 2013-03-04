@@ -1877,12 +1877,12 @@ var __assigment_706 = {
                         ]},
                     }
                 },
-                western_blot: {format: "%CELL_LINE%, %TREATMENT% (%CONCENTRATION%), %TEMPERATURE%",
+                western_blot: {format: "%CELL_LINE%, %TREATMENT%, %TEMPERATURE%",
                     keys: {
                         '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                         '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
                         '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
-                        '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['temperature', '%KEY%', 'name']}
+                        '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']}
                     }
                 },
                 add_multiple_dialog: {
