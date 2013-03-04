@@ -382,24 +382,181 @@ var __assigment_tufts = {
     experiments: {
     },
     template: {
-        ui_configuration: {
-            experiment_steps_setup: true, // this is not even checked...
-            experiment_steps_western_blot: true,
-            experiment_steps_facs: false,
-            experiment_steps_microscopy: false,
-            treatment_options_display_temperature: false,
-            lysate_display_ip: false,
-            amount_of_protein_loaded: 50,
-            experiment_setup_duration: 3600, // seconds
-            experiment_setup_resolution_height: 3600,
-            experiment_setup_physical_height: 600,
-            treatment_options_edit_schedule: false,
-            maximum_number_of_treatments_per_protocol: 0,
-            collection_times_fixed: true,
-            treatments_options_edit: false,
-            display_collection_times: false,
-            display_stimulation_times: true,
-            experiment_setup_edit_cell_line: false
+        instructions: "Here come instructions",
+        ui: {
+            experimental_design: {
+                techniques: [ 'wb' ]
+            },
+            experiment_setup: {
+                table: [ //
+                    {kind: 'cell_line', title: 'Strain', editable: false}, //
+                    {kind: 'treatments',
+                        children: [//
+                            {kind: 'drug', title: 'Treatment', editable: false},//
+                            {kind: 'concentration', title: 'Concentration', editable: false}//
+                        ]
+                    },//
+                    {kind: 'actions', title: 'Actions'}//
+                ],//
+                actions: [],//
+                new_row: {
+                    title: 'New Row',
+                    cell_line: 'wt',
+                    treatment_list: {list: [
+                        {drug_list: {list: [
+                            {drug_id: '1', concentration_id: '0'}
+                        ]}
+                        }
+                    ]}
+                }
+            },
+            western_blot: {format: "%CELL_LINE%, %TREATMENT% (%CONCENTRATION%)",
+                keys: {
+                    '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
+                    '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
+                    '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']}
+                }
+            },
+            add_multiple_dialog: {
+                'wt': {
+                    headings: [
+                        'Protocol', 'Selected'
+                    ],
+                    rows: [
+                        {
+                            cells: [
+                                {kind: 'text', text: 'Serum starvation alone'},
+                                {kind: 'checkbox', name: 'SEL'}
+                            ],
+                            treatment_id: 'P1',
+                            cell_treatments: {
+                                'SEL': [
+                                    {cell_line: 'wt',
+                                        treatment_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                                {drug_id: 1, concentration_id: 0}
+                                            ]}}
+                                        ]},
+                                        collection_schedule_list: {list: [
+                                            {schedule: "18h", schedule_value: 3600 * 18, id: '3'}
+                                        ]},
+                                        stimulation_time: '0 minutes'
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            cells: [
+                                {kind: 'text', text: 'Serum starvation + agonist treatment'},
+                                {kind: 'checkbox', name: 'SEL'}
+                            ],
+                            treatment_id: 'P2',
+                            cell_treatments: {
+                                'SEL': [
+                                    {cell_line: 'wt',
+                                        treatment_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                                {drug_id: 1, concentration_id: 0}
+                                            ]}},
+                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: 600, duration: '10 min', drug_list: {list: [
+                                                {drug_id: 2, concentration_id: 1}
+                                            ]}}
+                                        ]},
+                                        collection_schedule_list: {list: [
+                                            {schedule: "3h 10 min", schedule_value: 3600 * 18 + 600, id: '31'}
+                                        ]},
+                                        stimulation_time: '10 minutes'
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            cells: [
+                                {kind: 'text', text: 'Serum starvation + EGFR inhibitor + agonist'},
+                                {kind: 'checkbox', name: 'SEL'}
+                            ],
+                            treatment_id: 'P3',
+                            cell_treatments: {
+                                'SEL': [
+                                    {cell_line: 'wt',
+                                        treatment_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                                {drug_id: 1, concentration_id: 0}
+                                            ]}},
+                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: 900, duration: '15 min', drug_list: {list: [
+                                                {drug_id: 3, concentration_id: 20}
+                                            ]}},
+                                            {schedule_value: 3600 * 18 + 15 * 60, schedule: '18h 15min', duration_value: 600, duration: '10 min', drug_list: {list: [
+                                                {drug_id: 2, concentration_id: 1}
+                                            ]}}
+                                        ]},
+                                        collection_schedule_list: {list: [
+                                            {schedule: "18h 25 min", schedule_value: 3600 * 18 + 25 * 60, id: '325'}
+                                        ]},
+                                        stimulation_time: '10 minutes'
+                                    }
+                                ]}
+                        },
+                        {
+                            cells: [
+                                {kind: 'text', text: 'Serum starvation + MEK inhibitor + agonist'},
+                                {kind: 'checkbox', name: 'SEL'}
+                            ],
+                            treatment_id: 'P4',
+                            cell_treatments: {
+                                'SEL': [
+                                    {cell_line: 'wt',
+                                        treatment_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                                {drug_id: 1, concentration_id: 0}
+                                            ]}},
+                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: 900, duration: '15 min', drug_list: {list: [
+                                                {drug_id: 4, concentration_id: 10}
+                                            ]}},
+                                            {schedule_value: 3600 * 18 + 15 * 60, schedule: '18h 15min', duration_value: 600, duration: '10 min', drug_list: {list: [
+                                                {drug_id: 2, concentration_id: 1}
+                                            ]}}
+                                        ]},
+                                        collection_schedule_list: {list: [
+                                            {schedule: "18h 25 min", schedule_value: 3600 * 18 + 25 * 60, id: '325'}
+                                        ]},
+                                        stimulation_time: '10 minutes'
+                                    }
+                                ]}
+                        },
+                        {
+                            cells: [
+                                {kind: 'text', text: 'Serum starvation + EGFR inhibitor & MEK inhibitor + agonist'},
+                                {kind: 'checkbox', name: 'SEL'}
+                            ],
+                            treatment_id: 'P5',
+                            cell_treatments: {
+                                'SEL': [
+                                    {cell_line: 'wt',
+                                        treatment_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                                {drug_id: 1, concentration_id: 0}
+                                            ]}},
+                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: 900, duration: '15 min', drug_list: {list: [
+                                                {drug_id: 3, concentration_id: 20},
+                                                {drug_id: 4, concentration_id: 10}
+                                            ]}},
+                                            {schedule_value: 3600 * 18 + 15 * 60, schedule: '18h 15min', duration_value: 600, duration: '10 min', drug_list: {list: [
+                                                {drug_id: 2, concentration_id: 1}
+                                            ]}}
+                                        ]},
+                                        collection_schedule_list: {list: [
+                                            {schedule: "18h 25 min", schedule_value: 3600 * 18 + 25 * 60, id: '325'}
+                                        ]},
+                                        stimulation_time: '10 minutes'}
+                                ]}
+                        }
+
+                    ]
+
+                }
+            }
         },
         drug_template: {
             name: 'Serum Starvation',
@@ -518,6 +675,7 @@ var __assigment_tufts = {
 
         },
         drugs: {
+
             1: {name: 'FBS',
                 concentrations: [0]
             },
@@ -552,7 +710,8 @@ var __assigment_tufts = {
                 marks: [
                     {weight: 44, intensity: 0},
                     {weight: 42, intensity: 0}
-                ]
+                ],
+                gel_name: 'P-ERK1/2'
             },
             2: {
                 name: 'rabbit anti ERK1/2',
@@ -560,28 +719,32 @@ var __assigment_tufts = {
                 marks: [
                     {weight: 44, intensity: 1},
                     {weight: 42, intensity: 1}
-                ]
+                ],
+                gel_name: 'ERK1/2'
             },
             3: {
                 name: 'rabbit P-EGFR',
                 secondary: [1],
                 marks: [
                     {weight: 175, intensity: 0}
-                ]
+                ],
+                gel_name: 'P-EGFR'
             },
             4: {
                 name: 'rabbit EGFR',
                 secondary: [1],
                 marks: [
                     {weight: 134, intensity: 1}
-                ]
+                ],
+                gel_name: 'EGFR'
             },
             5: {
                 name: 'rabbit anti tubulin',
                 secondary: [1],
                 marks: [
                     {weight: 50, intensity: 1}
-                ]
+                ],
+                gel_name: 'tubulin'
             }
         },
         secondary_anti_body: {
@@ -592,18 +755,6 @@ var __assigment_tufts = {
         lysate_kinds: {
             'whole': {
                 name: 'Whole Cell'
-            }
-        },
-        facs_preparation: {
-            'live': {
-                dye1: { name: 'dye1', kind: 'dye'},
-                dye2: { name: 'dye2', kind: 'dye'},
-                ab1: { name: 'ab1', kind: 'anti-body', 'secondary': {sab1: {name: 'sab1'}, sab2: {name: 'sab2'}} }
-            },
-            'fixed': {
-                dye1: { name: 'dye3', kind: 'dye'},
-                dye2: { name: 'dye4', kind: 'dye'},
-                ab1: { name: 'ab5', kind: 'anti-body', 'secondary': {sab1: {name: 'sab6'}, sab2: {name: 'sab7'}} }
             }
         },
         model: { // model
@@ -1865,7 +2016,9 @@ var __assigment_706 = {
                         {kind: 'temperature', title: 'Temperature', editable: true},//
                         {kind: 'actions', title: 'Actions'}//
                     ],//
-                    actions: [],//
+                    actions: [
+
+                    ],//
                     new_row: {
                         title: 'New Row',
                         cell_line: 'wt',
@@ -2430,7 +2583,7 @@ master_model_data = {
     app_description: 'StarCellBio Placeholder',
     //'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.',
     assignments: {
-        list: [/*__assigment_tufts, __assigment_facs, __assignment2,*/ __usability_test, __basic_tests, __assigment_706
+        list: [/*__assigment_tufts, __assigment_facs, __assignment2,*/ __assigment_tufts, __usability_test, __basic_tests, __assigment_706
         ]
     },
     ui: {}
@@ -2447,5 +2600,11 @@ $(function () {
         name: 'Add multiple',
         open: mit706s13.setup
     });
+
+    __assigment_tufts.template.ui.experiment_setup.actions.push({
+        name: 'Add multiple',
+        open: mit706s13.setup
+    });
+
 
 });
