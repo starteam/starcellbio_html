@@ -1994,7 +1994,7 @@ var __usability_test = {
 };
 
 var __assigment_706 = {
-        id: 'mit-7.06-0313',
+        id: 'mit_7_06_0313',
         name: '7.06 Spring 2013',
         description: 'FACS and Western Blot for temperature sensitive mutants',
         experiments: {},
