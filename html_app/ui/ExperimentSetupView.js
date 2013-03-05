@@ -177,6 +177,7 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
 
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_action_open_add_samples_dialog', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog(this, workarea);
+        e.preventDefault();
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_remove_sample', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_remove_sample(this);
