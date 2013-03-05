@@ -13,10 +13,10 @@ js = dict();
 css = dict();
 
 
-css_prefix = '<link type="text/css" href="'
+css_prefix = '<link type="text/css" href="/static/'
 css_suffix = '" rel="Stylesheet" />\n'
 
-js_prefix='<script type="text/javascript" src="'
+js_prefix='<script type="text/javascript" src="/static/'
 js_suffix='" charset="UTF-8"></script>\n'
 
 html_prefix = "<!DOCTYPE html><html><head><title>StarCellBio Prototype</title>\n"
