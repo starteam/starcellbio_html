@@ -18,6 +18,12 @@ import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "StarCellBio.settings")
 
+import os
+import sys
+import site
+site.addsitedir('/home/starcellbio/StarCellBio')
+site.addsitedir('/home/starcellbio/Python/py27/lib/python2.7/site-packages')
+
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
