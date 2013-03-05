@@ -28,7 +28,7 @@
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }
 
-.scb_s_experiment_setup_details_view>.scb_f_open_experiment_design {
+.scb_s_experiment_setup_top>.scb_f_open_experiment_design {
     position: absolute;
     bottom: 5px;
     left: 5px;
@@ -40,7 +40,7 @@
     left: 5px;
 }
 
-.scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
+.scb_s_experiment_setup_top>.scb_f_open_experiment_setup_readonly {
     position: absolute;
     bottom: 5px;
     right: 5px
