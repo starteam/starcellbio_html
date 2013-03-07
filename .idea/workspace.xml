@@ -10,7 +10,7 @@
     <file path="/starcellbio.app.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359054922539" ignored="false" />
     <file path="/watch.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1359057410835" ignored="false" />
     <file path="/usability_test.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360695849683" ignored="false" />
-    <file path="/*.regexp" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362426179791" ignored="false" />
+    <file path="/*.regexp" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362523211798" ignored="false" />
     <file path="/assignments.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360952468624" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/assignments.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360952893587" ignored="false" />
     <file path="/assignment.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360680207290" ignored="false" />
@@ -32,9 +32,8 @@
     <file path="$PROJECT_DIR$/html_app/ui/gen/homepage.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361821048904" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/experiment_design.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360953709107" ignored="false" />
     <file path="/common.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360955879443" ignored="false" />
-    <file path="/experiment_setup.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362080595972" ignored="false" />
+    <file path="/experiment_setup.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362517074857" ignored="false" />
     <file path="/experiment_setup.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360955574897" ignored="false" />
-    <file path="$PROJECT_DIR$/html_app/ui/gen/experiment_setup.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360955610129" ignored="false" />
     <file path="/master_model.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362415746036" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/gen/usability_test.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360952606044" ignored="false" />
     <file path="/common.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360696756754" ignored="false" />
@@ -43,15 +42,13 @@
     <file path="/ExperimentSetupView.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362426847890" ignored="false" />
     <file path="/WesternBlot.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362411865262" ignored="false" />
     <file path="/select_technique.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361380307670" ignored="false" />
-    <file path="/select_technique.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360790748455" ignored="false" />
-    <file path="$PROJECT_DIR$/html_app/ui/gen/select_technique.gss.css" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360790776667" ignored="false" />
+    <file path="/select_technique.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362516076113" ignored="false" />
     <file path="/WesternBlotView.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362413397549" ignored="false" />
     <file path="/Experiment.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360787853355" ignored="false" />
     <file path="/experiment_design.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360953798032" ignored="false" />
     <file path="/experiment_design.gss" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360953687678" ignored="false" />
     <file path="/ExperimentDesignView.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360953719629" ignored="false" />
     <file path="$PROJECT_DIR$/html_app/ui/gen/experiment_design.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360953804929" ignored="false" />
-    <file path="$PROJECT_DIR$/html_app/ui/gen/select_technique.soy.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360955856904" ignored="false" />
     <file path="/homepage.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1360960209003" ignored="false" />
     <file path="/facs.soy" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361825771371" ignored="false" />
     <file path="/FacsView.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1361826025104" ignored="false" />
@@ -70,7 +67,7 @@
     <file path="/AddMultipleDialog.js" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362088385883" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5.rnc" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362156151157" ignored="false" />
     <file path="/views.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362497330095" ignored="false" />
-    <file path="/urls.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362497960939" ignored="false" />
+    <file path="/urls.py" changelist="0d0c9d4a-4748-4814-86b5-33c9d6ccb355" time="1362522675058" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,10 +84,37 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainFrame.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainFrame.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="56" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.015690377">
+            <state line="41" column="56" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="experiment_setup.gss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.gss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="12" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/StarCellBio/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="0" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="select_technique.gss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="1" selection-start="1221" selection-end="1221" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -105,10 +129,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="experiment_setup.soy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="experiment_setup.soy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="0" selection-start="780" selection-end="780" vertical-scroll-proportion="-0.65217394">
+            <state line="132" column="141" selection-start="5036" selection-end="5036" vertical-scroll-proportion="0.33333334">
               <folding />
             </state>
           </provider>
@@ -135,7 +159,7 @@
       <file leaf-file-name="addmultipledialog.soy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html_app/mit706s13/addmultipledialog.soy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="70" selection-start="1342" selection-end="1342" vertical-scroll-proportion="-22.173914">
+            <state line="34" column="70" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -151,8 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/html_app/utils/Utilities.js" />
-        <option value="$PROJECT_DIR$/html_app/mit706s13/addmultipledialog.gss" />
         <option value="$PROJECT_DIR$/html_app/mit706s13/addmultipledialog.soy" />
         <option value="$PROJECT_DIR$/html_app/mit706s13/AddMultipleDialog.js" />
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotView.js" />
@@ -162,10 +184,12 @@
         <option value="$PROJECT_DIR$/html_app/ui/WesternBlotGelView.js" />
         <option value="$PROJECT_DIR$/html_app/js/jstat-1.0.0.js" />
         <option value="$PROJECT_DIR$/html_app/ui/ExperimentSetupView.js" />
-        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
-        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
         <option value="$PROJECT_DIR$/frontend_tests/views.py" />
         <option value="$PROJECT_DIR$/StarCellBio/views.py" />
+        <option value="$PROJECT_DIR$/html_app/ui/MainFrame.js" />
+        <option value="$PROJECT_DIR$/html_app/ui/select_technique.gss" />
+        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.soy" />
+        <option value="$PROJECT_DIR$/html_app/ui/experiment_setup.gss" />
         <option value="$PROJECT_DIR$/StarCellBio/urls.py" />
       </list>
     </option>
@@ -266,43 +290,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarCellBio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarCellBio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html_app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarCellBio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StarCellBio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html_app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mit706s13" />
+              <option name="myItemId" value="ui_old" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -341,12 +329,12 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -399,27 +387,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <module name="StarCellBio" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -439,6 +406,27 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="StarCellBio" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -549,9 +537,10 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.215311" sideWeight="0.85123307" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1267041" sideWeight="0.17478053" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10779634" sideWeight="0.784689" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.108591884" sideWeight="0.784689" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14992025" sideWeight="0.49164677" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1267041" sideWeight="0.31284916" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.215311" sideWeight="0.1459825" order="10" side_tool="true" content_ui="tabs" />
@@ -561,7 +550,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Heroku" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.215311" sideWeight="0.85123307" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24979952" sideWeight="0.8292099" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39952153" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -635,16 +623,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html_app/ui/WesternBlotView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="191" column="40" selection-start="6313" selection-end="6313" vertical-scroll-proportion="0.01590668" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/model/CellTreatment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="25" selection-start="1743" selection-end="1752" vertical-scroll-proportion="0.2625523" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/western_blot.soy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="274" column="16" selection-start="9880" selection-end="9880" vertical-scroll-proportion="0.016304348" />
@@ -670,13 +648,6 @@
         <state line="31" column="17" selection-start="591" selection-end="591" vertical-scroll-proportion="0.48640168" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/StarCellBio/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="1181" selection-end="1181" vertical-scroll-proportion="0.37656903">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/StarCellBio/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="41" selection-start="161" selection-end="202" vertical-scroll-proportion="0.15690376">
@@ -689,13 +660,6 @@
     <entry file="file://$PROJECT_DIR$/frontend_tests/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="780" selection-end="780" vertical-scroll-proportion="-0.65217394">
           <folding />
         </state>
       </provider>
@@ -714,13 +678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_app/mit706s13/addmultipledialog.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="70" selection-start="1342" selection-end="1342" vertical-scroll-proportion="-22.173914">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/StarCellBio/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="11" selection-start="2250" selection-end="2261" vertical-scroll-proportion="0.50209206">
@@ -728,9 +685,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/mit706s13/addmultipledialog.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="70" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html_app/ui/MainFrame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="56" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.015690377">
+        <state line="41" column="56" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/select_technique.gss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="1" selection-start="1221" selection-end="1221" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.gss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="12" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StarCellBio/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_app/ui/experiment_setup.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="141" selection-start="5036" selection-end="5036" vertical-scroll-proportion="0.33333334">
           <folding />
         </state>
       </provider>

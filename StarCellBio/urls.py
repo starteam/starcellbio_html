@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        # Examples:
                        url(r'^$', "StarCellBio.views.home", name='home'),
+                       url(r'^index.html$', "StarCellBio.views.home", name='home'),
                        # url(r'^StarCellBio/', include('StarCellBio.foo.urls')),
 
                        # Uncomment the admin/doc line below to enable admin documentation:
@@ -20,5 +21,6 @@ urlpatterns = patterns('',
                        url(r'^images/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'html_app/images/'}),
                        url(r'^pdf/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'html_app/pdf/'}),
                        url(r'^js/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'html_app/js/'}),
+
 
 )

@@ -18,7 +18,7 @@ scb.ui.static.MainFrame.update_hash = function (state) {
         }
         History.discardedState();
         History.discardedState();
-        History.pushState(state, 2, "/" );
+        History.pushState(state, 2, "/");
     }
 }
 
@@ -130,7 +130,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.ui.static.WesternBlotGelView.register(workarea);
     scb.ui.static.FacsView.register(workarea);
 
-    scb.utils.off_on(workarea, 'click', '.save_master_model', function () {
+    scb.ui.static.MainFrame.save = function () {
         var tmp;
         try {
             tmp = assignments.selected.experiments.selected_id;
@@ -145,13 +145,22 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             assignment.experiments.selected_id = tmp;
         } catch (ex) {
         }
+    };
+
+    scb.ui.static.MainFrame.load = function () {
+        var master_model = JSON.parse(localStorage.getItem("scb_master_model"));
+        master_model_data = master_model;
+        starcellbio(context.ui, master_model);
+    }
+
+
+    scb.utils.off_on(workarea, 'click', '.save_master_model', function () {
+        scb.ui.static.MainFrame.save();
         alert("Save");
     });
 
     scb.utils.off_on(workarea, 'click', '.load_master_model', function () {
-        var master_model = JSON.parse(localStorage.getItem("scb_master_model"));
-        master_model_data = master_model;
-        starcellbio(context.ui, master_model);
+        scb.ui.static.MainFrame.load()
     });
 
     scb.utils.off_on(workarea.parent(), 'click', '.remove_experiment', function () {
@@ -304,7 +313,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 state.facs_id = facs.id;
                 var History = window.History;
                 if (History.enabled) {
-                History.replaceState("New FACS", "New FACS", '#' + $.param(state));
+                    History.replaceState("New FACS", "New FACS", '#' + $.param(state));
                 }
                 state.onhashchange = true;
                 self.show(state);
@@ -331,7 +340,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 state.western_blot_id = western_blot.id;
                 var History = window.History;
                 if (History.enabled) {
-                History.replaceState("New WB", "New WB", '#' + $.param(state));
+                    History.replaceState("New WB", "New WB", '#' + $.param(state));
                 }
 
                 state.onhashchange = true;
