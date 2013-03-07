@@ -1,3 +1,4 @@
 chromedriver.log
 *.pyc
+.idea/*
 *~
