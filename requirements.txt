@@ -13,3 +13,7 @@ readline==6.2.4.1
 selenium==2.26.0
 urwid==1.1.1
 wsgiref==0.1.2
+## allauth
+django-allauth==0.9
+django-bootstrap-form==2.0.3
+django-uni-form==0.7.0

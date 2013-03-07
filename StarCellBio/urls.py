@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from StarCellBio import settings
+import auth.urls
 
 admin.autodiscover()
 
@@ -21,6 +22,5 @@ urlpatterns = patterns('',
                        url(r'^images/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'html_app/images/'}),
                        url(r'^pdf/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'html_app/pdf/'}),
                        url(r'^js/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'html_app/js/'}),
+) + auth.urls.urlpatterns;
 
-
-)
