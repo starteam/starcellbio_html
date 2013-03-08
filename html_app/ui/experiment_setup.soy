@@ -335,7 +335,7 @@ Experiment active area
 */
 {template .concentration_edit}
     <select title='concentration' size='1' row='0' class='scb_f_experiment_setup_concentration_edit' {if $disabled}disabled='disabled'{/if}>
-        <option value='' disabled="disabled">Please select</option>
+        <option value=''>Please select</option>
         {foreach $t in $concentrations}
 	        <option value='{$t}' {if $t==$concentration_id}selected='true'{/if}>{$template.concentrations[$t].name}</option>
         {/foreach}

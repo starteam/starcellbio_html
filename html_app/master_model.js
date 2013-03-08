@@ -723,7 +723,7 @@ var __assigment_tufts = {
                 gel_name: 'ERK1/2'
             },
             3: {
-                name: 'rabbit P-EGFR',
+                name: 'rabbit anti P-EGFR',
                 secondary: [1],
                 marks: [
                     {weight: 175, intensity: 0}
@@ -731,7 +731,7 @@ var __assigment_tufts = {
                 gel_name: 'P-EGFR'
             },
             4: {
-                name: 'rabbit EGFR',
+                name: 'rabbit anti EGFR',
                 secondary: [1],
                 marks: [
                     {weight: 134, intensity: 1}
@@ -2440,7 +2440,7 @@ var __assigment_706 = {
                 },
                 '1u': {
                     name: '1 unit',
-                    value: 0
+                    value: 1000
                 }
             },
             drugs: {
@@ -2572,8 +2572,106 @@ var __assigment_706 = {
                 'whole': {
                     name: 'Whole Cell'
                 }
-            }
+            },
 
+            model: { // models
+                western_blot: {
+                    'cyto': {
+                        'parser_fixed': [
+                            {
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: '*ANY*',
+                                marks: [
+                                    {
+                                        name: 'Cdt1',
+                                        weight: 65,
+                                        intensity: 100,
+                                        primary_anti_body: ['cdt1']
+                                    },
+
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: 100,
+                                        primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Securin',
+                                        weight: 41.8,
+                                        intensity: 100,
+                                        primary_anti_body: ['securin']
+                                    },
+
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        primary_anti_body: ['cyclinE']
+                                    },
+                                    {
+                                        name: 'rad21',
+                                        weight: 68,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'pgk1',
+                                        weight: 45,
+                                        primary_anti_body: ['pgk1']
+                                    }
+
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'pp1',
+                                cell_line: '*ANY*',
+                                marks_below: [
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 34, //35&36
+                                        intensity: 100,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 33, // 34&35
+                                        intensity: 100,
+                                        primary_anti_body: ['cdk2']
+                                    }
+                                ],
+                                marks_above: [
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 35, //35&36
+                                        intensity: 100,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 36, //35&36
+                                        intensity: 100,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: 100,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 36, // 34&35
+                                        intensity: 100,
+                                        primary_anti_body: ['cdk2']
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
         }
     }
     ;

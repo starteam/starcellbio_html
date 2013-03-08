@@ -147,7 +147,7 @@ scb_experiment_setup.drug_edit = function(opt_data, opt_sb) {
 
 scb_experiment_setup.concentration_edit = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<select title=\'concentration\' size=\'1\' row=\'0\' class=\'scb_f_experiment_setup_concentration_edit\' ', (opt_data.disabled) ? 'disabled=\'disabled\'' : '', '><option value=\'\' disabled="disabled">Please select</option>');
+  output.append('<select title=\'concentration\' size=\'1\' row=\'0\' class=\'scb_f_experiment_setup_concentration_edit\' ', (opt_data.disabled) ? 'disabled=\'disabled\'' : '', '><option value=\'\'>Please select</option>');
   var tList305 = opt_data.concentrations;
   var tListLen305 = tList305.length;
   for (var tIndex305 = 0; tIndex305 < tListLen305; tIndex305++) {

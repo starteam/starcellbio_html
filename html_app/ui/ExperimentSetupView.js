@@ -144,6 +144,7 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_duplicate_sample = func
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
+    scb.ui.static.ExperimentSetupView.save_row($(param).parent().parent());
     var cell_treatment_list = parsed.experiment.cell_treatment_list;
     cell_treatment_list.duplicate(cell_treatment_id);
     $('.scb_s_experiment_setup_table_add_samples_dialog').detach();
@@ -519,6 +520,15 @@ scb.ui.static.ExperimentSetupView.row_edit_is_editable = function (element, temp
     var cell = _.find(template.ui.experiment_setup.table, function (e) {
         return e.kind == kind
     });
+    if(! scb.utils.isDefined(cell))
+    {
+        var treatments = _.find(template.ui.experiment_setup.table, function (e) {
+            return e.kind == 'treatments'
+        });
+        cell = _.find(treatments.children, function (e) {
+            return e.kind == kind
+        });
+    }
     console.info("editable " + kind + " " + cell + " " + (cell && cell.editable));
     return (cell && cell.editable) || false;
 }
