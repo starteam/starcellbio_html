@@ -716,8 +716,8 @@ var __assigment_tufts = {
                 name: 'rabbit anti P-ERK1/2',
                 secondary: [1],
                 marks: [
-                    {weight: 44, intensity: 0},
-                    {weight: 42, intensity: 0}
+                    {weight: 44, intensity: 1},
+                    {weight: 42, intensity: 1}
                 ],
                 gel_name: 'P-ERK1/2'
             },

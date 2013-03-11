@@ -138,3 +138,9 @@ table.scb_s_experiment_setup_table {
 .scb_f_experiment_setup_action_open_add_samples_dialog {
   width: 160px;
 }
+.scb_s_experiment_design_gray_line {
+  width: 100%;
+  height: 2px;
+  background-color: #808080;
+  margin-bottom: 2px;
+}
