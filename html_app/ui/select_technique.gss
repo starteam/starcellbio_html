@@ -33,6 +33,9 @@
     color:black;
 }
 
+.scb_s_select_technique_open_western_blot:hover {
+    color: rgb( 106, 164,235);
+}
 .scb_f_new_western_blot {
     display:block;
     margin-top:10px;

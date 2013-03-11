@@ -48,6 +48,7 @@ mit706s13.register = function (dialog, state) {
     });
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_add', function (e) {
         mit706s13.static.scb_mit706s16_inner_dialog_add(this, dialog, state);
+        $(this).focus();
     });
 
 }
@@ -68,4 +69,9 @@ mit706s13.setup = function (state) {
 
     dialog.appendTo($(workarea));
     mit706s13.register($(dialog), state);
+
+    var css = scb.utils.get(state, ['source_state', 'css']);
+    _.each( css , function(v,k){
+        dialog.css(k,v);
+    });
 }

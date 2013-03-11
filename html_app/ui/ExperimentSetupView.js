@@ -33,7 +33,8 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples
         experiment: parsed.experiment,
         template: parsed.template,
         element: element,
-        close: scb.ui.static.MainFrame.refresh
+        close: scb.ui.static.MainFrame.refresh,
+        source_state : scb.utils.get(template, ['ui', 'experiment_setup', 'actions' , 0])
     });
 }
 
@@ -398,9 +399,13 @@ scb.ui.static.ExperimentSetupView.rows = function (cell_treatment_list, headings
     return rows;
 }
 
-scb.ui.static.ExperimentSetupView.new_rows = function (new_row, headings, template) {
+scb.ui.static.ExperimentSetupView.new_rows = function (new_row, context , headings, template) {
     var rows = [];
-    scb.ui.static.ExperimentSetupView.row(new_row, headings, template, rows);
+    if(scb.utils.isDefined(new_row))
+    {
+        var ct = new scb.CellTreatment(new_row, context);
+        scb.ui.static.ExperimentSetupView.row(ct, headings, template, rows);
+    }
     return rows;
 }
 
@@ -786,7 +791,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         var template = state.assignment.template;
         var headings = scb.ui.static.ExperimentSetupView.headings(template.ui.experiment_setup.table);
         var rows = scb.ui.static.ExperimentSetupView.rows(experiment.cell_treatment_list.list, headings, template);
-        var new_rows = scb.ui.static.ExperimentSetupView.new_rows(new scb.CellTreatment(template.ui.experiment_setup.new_row, gstate.context), headings, template);
+        var new_rows = scb.ui.static.ExperimentSetupView.new_rows(template.ui.experiment_setup.new_row, gstate.context, headings, template);
         if (experiment.setup_finished) {
             state.mode = 'readonly';
             state.last_view = 'experiment_run';

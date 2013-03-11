@@ -7,11 +7,15 @@
 */
 {template .dialog}
 <div class='scb_mit706s16_inner_dialog'>
-    <h1 class='scb_mit706s16_inner_dialog_title'> Add multiple treatments </h1>
+    <h1 class='scb_mit706s16_inner_dialog_title'> Add multiple rows </h1>
 
     <div class='scb_mit706s16_inner_dialog_body'>
         {foreach $cell_line in keys($template.ui.add_multiple_dialog)}
+        {if $template.ui.add_multiple_dialog[$cell_line].title}
+        <h1>{$template.ui.add_multiple_dialog[$cell_line].title}</h1>
+        {else}
         <h1>{$template.cell_lines[$cell_line].name}</h1>
+        {/if}
         <table>
             <thead>
             {foreach $heading in $template.ui.add_multiple_dialog[$cell_line].headings}
@@ -47,8 +51,8 @@
             {/foreach}
         </table>
         {/foreach}
-        <button class='scb_mit706s16_inner_dialog_cancel'>Cancel</button>
-        <button class='scb_mit706s16_inner_dialog_add'>Add treatments</button>
+        <button class='scb_mit706s16_inner_dialog_cancel scb_s_gray_button'>CANCEL</button>
+        <button class='scb_mit706s16_inner_dialog_add scb_s_gray_button'>ADD MULTIPLE TREATMENTS</button>
     </div>
 </div>
 {/template}

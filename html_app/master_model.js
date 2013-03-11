@@ -399,35 +399,37 @@ var __assigment_tufts = {
                     {kind: 'actions', title: 'Actions'}//
                 ],//
                 actions: [],//
-                new_row: {
-                    title: 'New Row',
-                    cell_line: 'wt',
-                    treatment_list: {list: [
-                        {drug_list: {list: [
-                            {drug_id: '1', concentration_id: '0'}
-                        ]}
-                        }
-                    ]}
-                }
+                //new_row: {
+                //    title: 'New Row',
+                //    cell_line: 'wt',
+                //    treatment_list: {list: [
+                //        {drug_list: {list: [
+                //            {drug_id: '1', concentration_id: '0'}
+                //        ]}
+                //        }
+                //    ]}
+                //}
             },
-            western_blot: {format: "%CELL_LINE%, %TREATMENT% (%CONCENTRATION%)",
-                keys: {
-                    '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
-                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
-                    '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
-                    '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']}
-                }
-            },
+//            western_blot: {format: "%CELL_LINE%, %TREATMENT% (%CONCENTRATION%)",
+//                keys: {
+//                    '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+//                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
+//                    '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
+//                    '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']}
+//                }
+//            },
+            western_blot: {},
             add_multiple_dialog: {
                 'wt': {
+                    title: 'Strain: Wild Type',
                     headings: [
-                        'Protocol', 'Selected'
+                        'Select', 'Treatment Protocol'
                     ],
                     rows: [
                         {
                             cells: [
-                                {kind: 'text', text: 'Serum starvation alone'},
-                                {kind: 'checkbox', name: 'SEL'}
+                                {kind: 'checkbox', name: 'SEL'},
+                                {kind: 'text', text: '0.1% FBS'}
                             ],
                             treatment_id: 'P1',
                             cell_treatments: {
@@ -441,15 +443,16 @@ var __assigment_tufts = {
                                         collection_schedule_list: {list: [
                                             {schedule: "18h", schedule_value: 3600 * 18, id: '3'}
                                         ]},
-                                        stimulation_time: '0 minutes'
+                                        stimulation_time: '0 minutes',
+                                        name: '0.1% FBS'
                                     }
                                 ]
                             }
                         },
                         {
                             cells: [
-                                {kind: 'text', text: 'Serum starvation + agonist treatment'},
-                                {kind: 'checkbox', name: 'SEL'}
+                                {kind: 'checkbox', name: 'SEL'},
+                                {kind: 'text', text: '0.1% FBS & EGF'}
                             ],
                             treatment_id: 'P2',
                             cell_treatments: {
@@ -466,15 +469,16 @@ var __assigment_tufts = {
                                         collection_schedule_list: {list: [
                                             {schedule: "3h 10 min", schedule_value: 3600 * 18 + 600, id: '31'}
                                         ]},
-                                        stimulation_time: '10 minutes'
+                                        stimulation_time: '10 minutes',
+                                        name: '0.1% FBS & EGF'
                                     }
                                 ]
                             }
                         },
                         {
                             cells: [
-                                {kind: 'text', text: 'Serum starvation + EGFR inhibitor + agonist'},
-                                {kind: 'checkbox', name: 'SEL'}
+                                {kind: 'checkbox', name: 'SEL'},
+                                {kind: 'text', text: '0.1% FBS & Erlotinib & EGF'}
                             ],
                             treatment_id: 'P3',
                             cell_treatments: {
@@ -494,14 +498,15 @@ var __assigment_tufts = {
                                         collection_schedule_list: {list: [
                                             {schedule: "18h 25 min", schedule_value: 3600 * 18 + 25 * 60, id: '325'}
                                         ]},
-                                        stimulation_time: '10 minutes'
+                                        stimulation_time: '10 minutes',
+                                        name: '0.1% FBS & Erlotinib & EGF'
                                     }
                                 ]}
                         },
                         {
                             cells: [
-                                {kind: 'text', text: 'Serum starvation + MEK inhibitor + agonist'},
-                                {kind: 'checkbox', name: 'SEL'}
+                                {kind: 'checkbox', name: 'SEL'},
+                                {kind: 'text', text: '0.1% FBS & U0126 & EGF'}
                             ],
                             treatment_id: 'P4',
                             cell_treatments: {
@@ -521,14 +526,15 @@ var __assigment_tufts = {
                                         collection_schedule_list: {list: [
                                             {schedule: "18h 25 min", schedule_value: 3600 * 18 + 25 * 60, id: '325'}
                                         ]},
-                                        stimulation_time: '10 minutes'
+                                        stimulation_time: '10 minutes',
+                                        name: '0.1% FBS & U0126 & EGF'
                                     }
                                 ]}
                         },
                         {
                             cells: [
-                                {kind: 'text', text: 'Serum starvation + EGFR inhibitor & MEK inhibitor + agonist'},
-                                {kind: 'checkbox', name: 'SEL'}
+                                {kind: 'checkbox', name: 'SEL'},
+                                {kind: 'text', text: '0.1% FBS & Erlotinib & U0126 & EGF'}
                             ],
                             treatment_id: 'P5',
                             cell_treatments: {
@@ -549,7 +555,9 @@ var __assigment_tufts = {
                                         collection_schedule_list: {list: [
                                             {schedule: "18h 25 min", schedule_value: 3600 * 18 + 25 * 60, id: '325'}
                                         ]},
-                                        stimulation_time: '10 minutes'}
+                                        stimulation_time: '10 minutes',
+                                        name: '0.1% FBS & Erlotinib & U0126 & EGF'
+                                    }
                                 ]}
                         }
 
@@ -749,7 +757,7 @@ var __assigment_tufts = {
         },
         secondary_anti_body: {
             1: {
-                name: 'goat anti-rabbit'
+                name: 'goat anti rabbit'
             }
         },
         lysate_kinds: {
@@ -1554,19 +1562,20 @@ var __usability_test = {
                 }
             ], actions: [
                 //{kind:"add_protocol", title:"Add Treatment Protocol"}
-            ], new_row: {
-                title: 'New row',
-                cell_line: 'wt',
-                treatment_list: {list: [
-                    {schedule_value: 0, duration_value: 3600 * 24 * 3, duration: '3 d', drug_list: {list: [
-                        {drug_id: 'nc', concentration_id: '0'}
+            ],
+                new_row: {
+                    title: 'New row',
+                    cell_line: 'wt',
+                    treatment_list: {list: [
+                        {schedule_value: 0, duration_value: 3600 * 24 * 3, duration: '3 d', drug_list: {list: [
+                            {drug_id: 'nc', concentration_id: '0'}
+                        ]}
+                        }
+                    ]},
+                    collection_schedule_list: {list: [
+                        {schedule: "18h", schedule_value: 18 * 3600, id: '3'}
                     ]}
-                    }
-                ]},
-                collection_schedule_list: {list: [
-                    {schedule: "18h", schedule_value: 18 * 3600, id: '3'}
-                ]}
-            }
+                }
             },
             western_blot: {format: "%CELL_LINE%, %TREATMENT%, %CONCENTRATION%",
                 keys: {
@@ -2700,8 +2709,13 @@ $(function () {
     });
 
     __assigment_tufts.template.ui.experiment_setup.actions.push({
-        name: 'Add multiple',
-        open: mit706s13.setup
+        name: 'Add multiple rows',
+        open: mit706s13.setup,
+        css: {
+            width:'470px',
+            height:'400px',
+            left: '300px'
+        }
     });
 
 

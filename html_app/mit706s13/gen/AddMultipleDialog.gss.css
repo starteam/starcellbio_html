@@ -5,6 +5,7 @@
   bottom: 0;
   right: 0;
   background-color: #80808080;
+  font-family: 'sourcesanspro-regular';
 }
 .scb_mit706s16_inner_dialog {
   opacity: 5;
@@ -20,11 +21,23 @@
 }
 .scb_mit706s16_inner_dialog_title {
   font-size: 12pt;
-  background-color: black;
   color: white;
   margin: 0;
   margin-bottom: 5px;
+  padding: 3px;
+  text-align: center;
+  background-color: #80d1ae;
+  background-image: -webkit-linear-gradient(top,#80d1ae,#189689);
+  background-image: -moz-linear-gradient(top,#80d1ae,#189689);
+  background-image: -ms-linear-gradient(top,#80d1ae,#189689);
+  background-image: -o-linear-gradient(top,#80d1ae,#189689);
+  font-family: 'sourcesanspro-bold';
 }
 .scb_mit706s16_inner_dialog_body {
   padding: 20px;
+  padding-top: 0;
+}
+.scb_mit706s16_inner_dialog_add {
+  width: 180px;
+  margin-left: 10px;
 }
