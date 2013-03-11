@@ -2709,7 +2709,7 @@ $(function () {
     });
 
     __assigment_tufts.template.ui.experiment_setup.actions.push({
-        name: 'Add multiple rows',
+        name: 'ADD MULTIPLE ROWS',
         open: mit706s13.setup,
         css: {
             width:'470px',

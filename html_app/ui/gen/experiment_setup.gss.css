@@ -135,3 +135,6 @@ table.scb_s_experiment_setup_table {
 .scb_s_experiment_setup_table_element {
   width: 120px;
 }
+.scb_f_experiment_setup_action_open_add_samples_dialog {
+  width: 160px;
+}

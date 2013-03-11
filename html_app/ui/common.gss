@@ -189,3 +189,14 @@ body {
     margin-right:-11px;
     margin-top:-1px;
 }
+
+.scb_s_gray_button {
+    @mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
+    border: 1px solid #e0e0e0;
+    border-radius: 5pt;
+    height: 30px;
+    color: black;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
+    cursor:pointer;
+}
