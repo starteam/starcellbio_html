@@ -18,7 +18,7 @@ scb.ui.static.MainFrame.update_hash = function (state) {
         }
         History.discardedState();
         History.discardedState();
-        History.pushState(state, 2, "/");
+        History.pushState(state, 2, "/#" + $.param(state));
     }
 }
 
