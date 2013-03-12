@@ -571,6 +571,7 @@ var __assigment_tufts = {
             drug_id: 1,
             concentration_id: 0
         },
+
         experiment_templates: {
             'default': {
                 collection_schedule_list: {list: [
@@ -682,6 +683,7 @@ var __assigment_tufts = {
             }
 
         },
+
         drugs: {
 
             1: {name: 'FBS',
@@ -716,8 +718,8 @@ var __assigment_tufts = {
                 name: 'rabbit anti P-ERK1/2',
                 secondary: [1],
                 marks: [
-                    {weight: 44, intensity: 1},
-                    {weight: 42, intensity: 1}
+                    {weight: 44, intensity: .1},
+                    {weight: 42, intensity: .1}
                 ],
                 gel_name: 'P-ERK1/2'
             },
@@ -750,7 +752,7 @@ var __assigment_tufts = {
                 name: 'rabbit anti tubulin',
                 secondary: [1],
                 marks: [
-                    {weight: 50, intensity: 1}
+                    {weight: 50, intensity: 20}
                 ],
                 gel_name: 'tubulin'
             }
@@ -778,19 +780,19 @@ var __assigment_tufts = {
                                 {
                                     name: 'P-ERK',
                                     weight: 44,
-                                    intensity: 1,
+                                    intensity: .1,
                                     primary_anti_body: [1]
                                 },
                                 {
                                     name: 'P-ERK',
                                     weight: 42,
-                                    intensity: 1,
+                                    intensity: .1,
                                     primary_anti_body: [1]
                                 },
                                 {
                                     name: 'P-EGFR',
                                     weight: 175,
-                                    intensity: 1,
+                                    intensity: .2,
                                     primary_anti_body: [3]
                                 }
                             ],
@@ -805,19 +807,19 @@ var __assigment_tufts = {
                                 {
                                     name: 'P-ERK',
                                     weight: 44,
-                                    intensity: -1,
+                                    intensity: -.1,
                                     primary_anti_body: [1]
                                 },
                                 {
                                     name: 'P-ERK',
                                     weight: 42,
-                                    intensity: -1,
+                                    intensity: -.1,
                                     primary_anti_body: [1]
                                 },
                                 {
                                     name: 'P-EGFR',
                                     weight: 175,
-                                    intensity: -1,
+                                    intensity: -.2,
                                     primary_anti_body: [3]
                                 }
                             ]
@@ -831,13 +833,13 @@ var __assigment_tufts = {
                                 {
                                     name: 'P-ERK',
                                     weight: 44,
-                                    intensity: -1,
+                                    intensity: -.1,
                                     primary_anti_body: [1]
                                 },
                                 {
                                     name: 'P-ERK',
                                     weight: 42,
-                                    intensity: -1,
+                                    intensity: -.1,
                                     primary_anti_body: [1]
                                 },
                                 {
@@ -2713,10 +2715,12 @@ $(function () {
         open: mit706s13.setup,
         css: {
             width:'470px',
-            height:'400px',
-            left: '300px'
+            height:'380px',
+            left: '300px',
+            top: '200px'
         }
     });
+    __assigment_tufts.template.experiment_setup = scb_assignment_specific_tufts.experiment_setup();
 
 
 });

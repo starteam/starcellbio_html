@@ -11,14 +11,14 @@ scb_mit706s16.dialog = function(opt_data, opt_sb) {
   var cell_lineListLen4 = cell_lineList4.length;
   for (var cell_lineIndex4 = 0; cell_lineIndex4 < cell_lineListLen4; cell_lineIndex4++) {
     var cell_lineData4 = cell_lineList4[cell_lineIndex4];
-    output.append((opt_data.template.ui.add_multiple_dialog[cell_lineData4].title) ? '<h1>' + soy.$$escapeHtml(opt_data.template.ui.add_multiple_dialog[cell_lineData4].title) + '</h1>' : '<h1>' + soy.$$escapeHtml(opt_data.template.cell_lines[cell_lineData4].name) + '</h1>', '<table><thead>');
+    output.append((opt_data.template.ui.add_multiple_dialog[cell_lineData4].title) ? '<h1>' + soy.$$escapeHtml(opt_data.template.ui.add_multiple_dialog[cell_lineData4].title) + '</h1>' : '<h1>' + soy.$$escapeHtml(opt_data.template.cell_lines[cell_lineData4].name) + '</h1>', '<table class="scb_s_experiment_setup_table"><thead class="scb_s_experiment_setup_table_head">');
     var headingList15 = opt_data.template.ui.add_multiple_dialog[cell_lineData4].headings;
     var headingListLen15 = headingList15.length;
     for (var headingIndex15 = 0; headingIndex15 < headingListLen15; headingIndex15++) {
       var headingData15 = headingList15[headingIndex15];
-      output.append('<td>', soy.$$escapeHtml(headingData15), '</td>');
+      output.append('<td class=\'scb_s_experiment_setup_table_heading\'>', soy.$$escapeHtml(headingData15), '</td>');
     }
-    output.append('</thead>');
+    output.append('</thead><tbody class="scb_s_experiment_setup_table_body">');
     var rowsList21 = opt_data.template.ui.add_multiple_dialog[cell_lineData4].rows;
     var rowsListLen21 = rowsList21.length;
     for (var rowsIndex21 = 0; rowsIndex21 < rowsListLen21; rowsIndex21++) {
@@ -28,7 +28,7 @@ scb_mit706s16.dialog = function(opt_data, opt_sb) {
       var cellListLen23 = cellList23.length;
       for (var cellIndex23 = 0; cellIndex23 < cellListLen23; cellIndex23++) {
         var cellData23 = cellList23[cellIndex23];
-        output.append('<td>', (cellData23.kind == 'text') ? soy.$$escapeHtml(cellData23.text) : '');
+        output.append('<td class=\'scb_s_experiment_setup_table_border\'>', (cellData23.kind == 'text') ? soy.$$escapeHtml(cellData23.text) : '');
         if (cellData23.kind == 'select') {
           output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(rowsData21.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\'><option disabled="disabled">Please select</option>');
           var keyList41 = soy.$$getMapKeys(opt_data.template[cellData23.field]);
@@ -43,8 +43,8 @@ scb_mit706s16.dialog = function(opt_data, opt_sb) {
       }
       output.append('</tr>');
     }
-    output.append('</table>');
+    output.append('<tr><td colspan=\'', soy.$$escapeHtml(opt_data.template.ui.add_multiple_dialog[cell_lineData4].headings.length), '\'><div class=\'scb_s_experiment_design_green_line\'></div><button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button\'>ADD MULTIPLE TREATMENTS</button></td></tr></tbody></table>');
   }
-  output.append('<button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button\'>ADD MULTIPLE TREATMENTS</button></div></div>');
+  output.append('</div></div>');
   return opt_sb ? '' : output.toString();
 };

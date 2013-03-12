@@ -74,4 +74,7 @@ mit706s13.setup = function (state) {
     _.each( css , function(v,k){
         dialog.css(k,v);
     });
+
+    $('.scb_mit706s16_dialog').draggable({handle:'.scb_mit706s16_inner_dialog_title'})
+
 }
