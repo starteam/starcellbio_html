@@ -1,12 +1,19 @@
 # Django settings for StarCellBio project.
 
+import auth.settings
 import os.path
+import os
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+STARCELLBIO_ENV = os.environ.get( 'STARCELLBIO_ENV' )
+if STARCELLBIO_ENV == 'Production':
+    DEBUG = False
+    TEMPLATE_DEBUG = DEBUG
+	
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -16,10 +23,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'starcellbio',                      # Or path to database file if using sqlite3.
+        'USER': 'starcellbio',                      # Not used with sqlite3.
+        'PASSWORD': '136a411ed9e8592089444b7164ffaf84',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -103,6 +110,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = auth.settings.AUTHENTICATION_BACKENDS
+
+TEMPLATE_CONTEXT_PROCESSORS = auth.settings.TEMPLATE_CONTEXT_PROCESSORS
+
 ROOT_URLCONF = 'StarCellBio.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -112,7 +123,9 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-)
+
+) + auth.settings.TEMPLATE_DIRS
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -128,7 +141,7 @@ INSTALLED_APPS = (
     'frontend_tests',
     'rest_framework',
     'scb_rest'
-)
+) + auth.settings.INSTALLED_APPS
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -158,3 +171,5 @@ LOGGING = {
         },
     }
 }
+
+

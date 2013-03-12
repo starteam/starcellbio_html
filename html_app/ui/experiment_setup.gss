@@ -28,7 +28,7 @@
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }
 
-.scb_s_experiment_setup_details_view>.scb_f_open_experiment_design {
+.scb_s_experiment_setup_top>.scb_f_open_experiment_design {
     position: absolute;
     bottom: 5px;
     left: 5px;
@@ -38,6 +38,12 @@
     position: absolute;
     bottom: 5px;
     left: 5px;
+}
+
+.scb_s_experiment_setup_top>.scb_f_open_experiment_setup_readonly {
+    position: absolute;
+    bottom: 5px;
+    right: 5px
 }
 
 .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
@@ -189,4 +195,15 @@ table.scb_s_experiment_setup_table {
 
 .scb_s_experiment_setup_table_element {
     width:120px;
+}
+
+.scb_f_experiment_setup_action_open_add_samples_dialog {
+    width: 160px;
+}
+
+.scb_s_experiment_design_green_line {
+    width:100%;
+    height:2px;
+    background-color: #80d1ae;
+    margin-bottom:2px;
 }

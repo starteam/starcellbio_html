@@ -1,113 +1,116 @@
 <!DOCTYPE html><html><head><title>StarCellBio Prototype</title>
-<link type="text/css" href="ui_old/gen/making_lysates.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/technique_tabs.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/gen/workspace.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/gen/experiment.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/select_technique.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/facs.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/gen/dashboard.gss.css" rel="Stylesheet" />
-<link type="text/css" href="gen/usability_test.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/gen/sidebar.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/experiment_setup.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/common.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/back_button.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/experiment_design.gss.css" rel="Stylesheet" />
-<link type="text/css" href="css/layout-default.css" rel="Stylesheet" />
-<link type="text/css" href="coin-slider/coin-slider-styles.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/gen/western_blots.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/gen/facs.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/homepage.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/assignments.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/western_blot.gss.css" rel="Stylesheet" />
-<link type="text/css" href="css/jquery.multiselect.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/gen/westernblotgel.gss.css" rel="Stylesheet" />
-<link type="text/css" href="test/gen/test.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/gen/common.gss.css" rel="Stylesheet" />
-<link type="text/css" href="starcellbio.app.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/western_blot_gel.gss.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/button.css" rel="Stylesheet" />
-<link type="text/css" href="ui_old/gen/experiment_setup.gss.css" rel="Stylesheet" />
-<link type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
-<link type="text/css" href="ui/gen/assignment.gss.css" rel="Stylesheet" />
-<link type="text/css" href="mit706s13/gen/AddMultipleDialog.gss.css" rel="Stylesheet" />
-<script type="text/javascript" src="js/jquery-1.7.2.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="starcellbio.app.js" charset="UTF-8"></script>
-<script type="text/javascript" src="mit706s13/gen/addmultipledialog.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/experiment_setup.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="master_model.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/underscore.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/LysateKind.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/ExperimentDesignView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/DashboardView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/FacsView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/facs.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="utils/Utilities.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/assignments.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/jstat-1.0.0.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/western_blot_gel.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/MakingLysatesView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/WesternBlotGelView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/SelectTechniqueView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/WesternBlotView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/AssignmentsView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/WorkspaceView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/WesternBlotLanes.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/Treatment.js" charset="UTF-8"></script>
-<script type="text/javascript" src="components/ModelFactory.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/experiment_setup.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/MakingLysates.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/jq.pubsub.js" charset="UTF-8"></script>
-<script type="text/javascript" src="coin-slider/coin-slider.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/select_technique.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/soyutils.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/ExperimentSetupView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/WesternBlotView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/FacsLanesPreparation.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/experiment.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/FacsLanes.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/jquery.flot.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/WesternBlot.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/western_blot.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/ModelHelpers.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/Facs.js" charset="UTF-8"></script>
-<script type="text/javascript" src="components/WesternBlotCanvas.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/experiment_edit.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/CollectionSchedule.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/jquery.layout-1.2.0.js" charset="UTF-8"></script>
-<script type="text/javascript" src="gen/usability_test.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="components/FACSModelFactory.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/HomepageView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="test/gen/test.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/MainFrame.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/Assignments.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/common.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="components/WesternBlotModelFactory.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/FacsView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/making_lysates.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/WesternBlotGel.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/workspace.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/Drugs.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/Experiment.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/WesternBlotGelView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/experiment_design.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/ExperimentView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/assignment.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/WesternBlotExposure.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/slides.min.jquery.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/Sidebar.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/dashboard.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/western_blots.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/common.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/jquery.ba-bbq.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="model/CellTreatment.js" charset="UTF-8"></script>
-<script type="text/javascript" src="coin-slider/coin-slider.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/gen/homepage.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/westernblotgel.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="mit706s13/AddMultipleDialog.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui/AssignmentView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/FacsOneView.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/jquery.multiselect.js" charset="UTF-8"></script>
-<script type="text/javascript" src="ui_old/gen/facs.soy.js" charset="UTF-8"></script>
+<link type="text/css" href="/static/ui_old/gen/making_lysates.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/technique_tabs.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/workspace.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/experiment.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/select_technique.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/facs.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/dashboard.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/gen/usability_test.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/sidebar.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/experiment_setup.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/common.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/back_button.css" rel="Stylesheet" />
+<link type="text/css" href="/static/assignments/tufts/gen/instructions.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/experiment_design.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/css/layout-default.css" rel="Stylesheet" />
+<link type="text/css" href="/static/coin-slider/coin-slider-styles.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/western_blots.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/facs.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/homepage.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/assignments.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/western_blot.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/css/jquery.multiselect.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/westernblotgel.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/test/gen/test.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/common.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/starcellbio.app.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/western_blot_gel.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/button.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/experiment_setup.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/css/smoothness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/assignment.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/mit706s13/gen/AddMultipleDialog.gss.css" rel="Stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/starcellbio.app.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/mit706s13/gen/addmultipledialog.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/experiment_setup.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/master_model.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/soyutils.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/LysateKind.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/ExperimentDesignView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/DashboardView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/FacsView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/facs.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/utils/Utilities.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/assignments.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jstat-1.0.0.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/western_blot_gel.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/MakingLysatesView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/WesternBlotGelView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/SelectTechniqueView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/WesternBlotView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/AssignmentsView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/WorkspaceView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/WesternBlotLanes.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/Treatment.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/components/ModelFactory.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/experiment_setup.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery.history.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/MakingLysates.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jq.pubsub.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/coin-slider/coin-slider.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/select_technique.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/underscore.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/ExperimentSetupView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/WesternBlotView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/FacsLanesPreparation.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/experiment.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/FacsLanes.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery.flot.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/WesternBlot.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/western_blot.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/ModelHelpers.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/Facs.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/components/WesternBlotCanvas.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/experiment_edit.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/CollectionSchedule.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery.layout-1.2.0.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/gen/usability_test.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/components/FACSModelFactory.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/HomepageView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/test/gen/test.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/MainFrame.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/Assignments.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/common.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/components/WesternBlotModelFactory.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/FacsView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/making_lysates.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/WesternBlotGel.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/workspace.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/Drugs.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/Experiment.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/WesternBlotGelView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/experiment_design.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/ExperimentView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/assignment.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/assignments/tufts/gen/instructions.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/WesternBlotExposure.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/slides.min.jquery.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/Sidebar.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/dashboard.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/western_blots.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/common.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery.ba-bbq.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/CellTreatment.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/coin-slider/coin-slider.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/homepage.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/westernblotgel.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/mit706s13/AddMultipleDialog.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/AssignmentView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/FacsOneView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery.multiselect.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui_old/gen/facs.soy.js" charset="UTF-8"></script>
 </head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});})</script></body>

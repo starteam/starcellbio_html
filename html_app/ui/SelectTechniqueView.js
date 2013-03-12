@@ -22,7 +22,8 @@ scb.ui.static.SelectTechniqueView.disable_techniques = function (state) {
             $('.scb_s_select_technique_micro').removeClass('scb_s_select_technique_disabled');
 
         }
-    })
+    });
+    $('a','.scb_s_select_technique_disabled').removeAttr('href').css('cursor','default');
 }
 
 scb.ui.SelectTechniqueView = function scb_ui_SelectTechniqueView(gstate) {

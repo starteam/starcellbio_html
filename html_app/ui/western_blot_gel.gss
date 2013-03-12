@@ -51,7 +51,7 @@ font-family: 'sourcesanspro-regular';
     position: absolute;
     top:-1px;
     left:0px;
-    background: black;
+    background: darkred;
     opacity: .3;
     height:1px;
     width:363px;
