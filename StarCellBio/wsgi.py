@@ -16,8 +16,8 @@ framework.
 """
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "StarCellBio.settings")
-
+#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "StarCellBio.settings")
+os.environ["DJANGO_SETTINGS_MODULE"] = 'StarCellBio.settings'
 import os
 import sys
 import site
@@ -29,6 +29,7 @@ STARCELLBIO_PARENT_FOLDER = os.path.dirname(STARCELLBIO_PATH)
 PATH = os.environ['PATH'] + ':/usr/local/bin'
 sys.path.append(STARCELLBIO_PARENT_FOLDER)
 sys.path.append(STARCELLBIO_PATH)
+
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION

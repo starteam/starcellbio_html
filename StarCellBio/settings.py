@@ -2,12 +2,18 @@
 
 import auth.settings
 import os.path
+import os
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+STARCELLBIO_ENV = os.environ.get( 'STARCELLBIO_ENV' )
+if STARCELLBIO_ENV == 'Production':
+    DEBUG = False
+    TEMPLATE_DEBUG = DEBUG
+	
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
