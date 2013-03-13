@@ -2548,7 +2548,7 @@ var __assigment_706 = {
                 },
                 'cyclinE': {
                     name: 'mouse anti-cyclin E',
-                    secondary: ['r'],
+                    secondary: ['m'],
                     marks: [
                         {weight: 48, intensity: 1},
                     ],
