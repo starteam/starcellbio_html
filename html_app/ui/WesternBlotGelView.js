@@ -27,7 +27,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (e
         alert("INVALID ELEMENT!");
     }
     console.info(parsed.western_blot_gel.primary_anti_body);
-    parsed.western_blot_gel.primary_anti_body = $('option:selected',element).attr('model_id');
+    parsed.western_blot_gel.primary_anti_body = $('option:selected', element).attr('model_id');
     console.info(parsed.western_blot_gel.primary_anti_body);
     console.info(parsed.western_blot_gel);
 
@@ -38,7 +38,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    parsed.western_blot_gel.secondary_anti_body = $('option:selected',element).attr('model_id');
+    parsed.western_blot_gel.secondary_anti_body = $('option:selected', element).attr('model_id');
 }
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function (element) {
@@ -158,20 +158,23 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
 
     var gel = parsed.western_blot_gel;
     if (gel.canvas_metadata == null) {
-        var cstate = {
-            time: 0,
-            gel: gel,
-            lanes_length: gel.marks.length
-        }
+        if (parsed.western_blot.canvas_metadata == null) {
+            var cstate = {
+                time: 0,
+                gel: gel,
+                lanes_length: gel.marks.length
+            }
 
-        var c = new scb.components.WesternBlot(cstate, context);
-        c.initialize_bias();
+            var c = new scb.components.WesternBlot(cstate, context);
+            c.initialize_bias();
 
-        gel.canvas_metadata = {
-            background: c.background,
-            lane_yslope: c.lane_yslope,
-            lane_xoffset: c.lane_xoffset
+            parsed.western_blot.canvas_metadata = {
+                background: c.background,
+                lane_yslope: c.lane_yslope,
+                lane_xoffset: c.lane_xoffset
+            }
         }
+        gel.canvas_metadata = parsed.western_blot.canvas_metadata;
     }
 
     var cstate = {
@@ -188,12 +191,13 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     gel.canvas_data = c.tab;
     var parent = $($(element).parent());
     var slider = $('.scb_f_slider', $(parent));
-    var slider_value = $('.scb_f_slider_value',$(parent));
+    var slider_value = $('.scb_f_slider_value', $(parent));
+
     function set_slider(y) {
         slider.css('top', y + 'px');
-        slider_value.css('top', (y-12) + 'px');
+        slider_value.css('top', (y - 12) + 'px');
         var weight = c.position_to_weight(y);
-        slider_value.html( Math.round(weight) + " kDa");
+        slider_value.html(Math.round(weight) + " kDa");
         if (_.isUndefined(y)) {
             slider.hide();
             slider_value.hide();
@@ -203,6 +207,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
             slider_value.show();
         }
     }
+
 //    slider.css('top', gel.canvas_metadata.slider + 'px');
 //    if (_.isUndefined(gel.canvas_metadata.slider)) {
 //        slider.hide();
@@ -232,8 +237,8 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
 }
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many = function (element, event) {
-    var target = $("option:selected",element).attr('href');
-   document.location = target;
+    var target = $("option:selected", element).attr('href');
+    document.location = target;
 }
 
 scb.ui.static.WesternBlotGelView.register = function (workarea) {
