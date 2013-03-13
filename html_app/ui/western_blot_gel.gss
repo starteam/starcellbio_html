@@ -54,7 +54,20 @@ font-family: 'sourcesanspro-regular';
     background: darkred;
     opacity: .3;
     height:1px;
-    width:363px;
+    width:366px;
+}
+
+.scb_f_slider_value {
+    position: absolute;
+    top:-1px;
+    left:346px;
+    background: darkred;
+    opacity: .8;
+    height:12px;
+    width:20px;
+    color:white;
+    text-align: center;
+
 }
 
 .scb_s_western_blot_gel_canvas_wrapper {

@@ -173,6 +173,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
             lane_xoffset: c.lane_xoffset
         }
     }
+
     var cstate = {
         time: gel.exposure_time,
         gel: gel
@@ -187,27 +188,46 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     gel.canvas_data = c.tab;
     var parent = $($(element).parent());
     var slider = $('.scb_f_slider', $(parent));
-    slider.css('top', gel.canvas_metadata.slider + 'px');
-    if (_.isUndefined(gel.canvas_metadata.slider)) {
-        slider.hide();
+    var slider_value = $('.scb_f_slider_value',$(parent));
+    function set_slider(y) {
+        slider.css('top', y + 'px');
+        slider_value.css('top', (y-12) + 'px');
+        var weight = c.position_to_weight(y);
+        slider_value.html( Math.round(weight) + " kDa");
+        if (_.isUndefined(y)) {
+            slider.hide();
+            slider_value.hide();
+        }
+        else {
+            slider.show();
+            slider_value.show();
+        }
     }
-    else {
-        slider.show();
-    }
+//    slider.css('top', gel.canvas_metadata.slider + 'px');
+//    if (_.isUndefined(gel.canvas_metadata.slider)) {
+//        slider.hide();
+//    }
+//    else {
+//        slider.show();
+//    }
+    set_slider(gel.canvas_metadata.slider);
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
         var y = evt.offsetY;
         var x = evt.offsetX;
         if ($(evt.srcElement).is('canvas')) {
-            slider.css('top', y + "px").show();
+            set_slider(gel.canvas_metadata.slider);
+//            slider.css('top', y + "px").show();
             gel.canvas_metadata.slider = y;
-            if (y < 2 || y > 285 || x < 2 || x > 250) {
+            if (y < 2 || y > 285 || x < 2 || x > 360) {
                 slider.hide();
+                slider_value.hide();
                 delete gel.canvas_metadata.slider;
             }
         }
     });
     $(parent).unbind('mouseout').bind('mouseout', function (evt) {
         slider.hide();
+        slider_value.hide();
     });
 }
 
