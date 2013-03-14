@@ -2710,12 +2710,12 @@ $(function () {
 
     __assigment_706.template.ui.experiment_setup.actions.push({
         name: 'Add multiple',
-        open: mit706s13.setup
+        open: 'mit706s13.setup'
     });
 
     __assigment_tufts.template.ui.experiment_setup.actions.push({
         name: 'ADD MULTIPLE ROWS',
-        open: mit706s13.setup,
+        open: 'mit706s13.setup',
         css: {
             width:'470px',
             height:'380px',

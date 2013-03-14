@@ -27,6 +27,14 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples
     var parsed = scb.ui.static.ExperimentSetupView.parse(element);
     var template = parsed.assignment.template;
     var action = scb.utils.get(template, ['ui', 'experiment_setup', 'actions' , 0, 'open'], scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog_old);
+    if( typeof(action) == 'string' && typeof(eval(action))=='function')
+    {
+        action = eval(action);
+    }
+    else
+    {
+        action = scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog_old;
+    }
     scb.Utils.call_back(action, {
         workarea: workarea,
         assignment: parsed.assignment,
