@@ -62,7 +62,7 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
                     }
                     else
                     {
-                        console.info( "UNKNOWN KEY " + e + " IN scb.CellTreatment.format_row");
+                        console.debug( "UNKNOWN KEY " + e + " IN scb.CellTreatment.format_row");
                     }
                 });
                 var text = template;
@@ -77,7 +77,7 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
                     }
                     else
                     {
-                        console.info( "UNKNOWN KEY " + e + " IN scb.CellTreatment.format_row 2");
+                        console.debug( "UNKNOWN KEY " + e + " IN scb.CellTreatment.format_row 2");
                     }
                 })
                 return text;

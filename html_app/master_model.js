@@ -2584,7 +2584,11 @@ var __assigment_706 = {
                     name: 'Whole Cell'
                 }
             },
-
+            facs_kinds: {
+                'whole': {
+                    name: 'Live cells'
+                }
+            },
             model: { // models
                 western_blot: {
                     'cyto': {
@@ -2684,6 +2688,47 @@ var __assigment_706 = {
                             }
                         ]
                     }
+                },
+                facs:{
+                    'dna':{
+                        'parser_simple': [
+                            {
+                                match: [],
+                                shape: 'normal'
+                            },
+                            {
+                                match: ['cell_line','temperature'],
+                                cell_line: 'm1',
+                                temperature: 40,
+                                shape: 'g2-block'
+                            },
+                            {
+                                match: ['cell_line','temperature'],
+                                cell_line: 'm2',
+                                temperature: 40,
+                                shape: 'S-block'
+                            },
+                            {
+                                match: ['cell_line','drug_id'],
+                                cell_line: 'wt',
+                                drug_id: 'Nocodazole',
+                                shape:'g2-block'
+                            },
+                            {
+                                match: ['cell_line','drug_id'],
+                                cell_line: 'wt',
+                                drug_id: 'Alpha',
+                                shape:'alpha-block'
+                            },
+                            {
+                                match: ['cell_line','drug_id'],
+                                cell_line: 'wt',
+                                drug_id: 'Hydroxyurea',
+                                shape:'S-block'
+                            }
+                        ]
+
+                    }
                 }
             }
         }
@@ -2700,6 +2745,7 @@ master_model_data = {
     },
     ui: {}
 };
+window.master_model_data = master_model_data;
 
 
 $(function () {

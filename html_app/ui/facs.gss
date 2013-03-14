@@ -7,3 +7,18 @@
     background-color: #e0e0e0;
     list-style: disc;
 }
+
+.scb_s_facs_progress {
+    display: block;
+    width:800px;
+    height:120px;
+    margin-left:25px;
+}
+
+//.scb_s_facs_samples_table {
+//  IN WESTERN BLOT.gss
+//}
+
+.scb_f_facs_prepare_lysates {
+    float:right;
+}

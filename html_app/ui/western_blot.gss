@@ -15,7 +15,7 @@
     padding-top: 5px;
 }
 
-.scb_s_western_blot_samples_table {
+.scb_s_western_blot_samples_table,.scb_s_facs_samples_table {
     border:1px #189689 solid;
     border-radius: 5px;
     margin-left: 10px;
