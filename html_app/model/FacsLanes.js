@@ -114,12 +114,14 @@ scb.FacsLane = function scb_FacsLane(data, context,parent) {
 	var self = this;
 	self.parent = parent;
 	scb.ModelHelpers.common_entry_code(self, data, context);
-    scb.Utils.initialize_accessor_field(self, data, 'kind', null,null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'kind', _.keys(context.template.facs_kinds)[0],null, context);
 
 //	scb.Utils.initialize_accessor_field(self, data, 'preparation_list', {list:[]}, scb.FacsLanePreparationList, context);
 //	scb.Utils.initialize_accessor_field(self, data, 'enabled', false,null, context);
 //	scb.Utils.initialize_accessor_field(self, data, 'collection_schedule_id', null,null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'cell_treatment_id', null,null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'canvas_metadata', null,null, context);
+
 
 	scb.Utils.initialize_field(data, 'experiment_id', self.parent.parent.parent.parent);
 

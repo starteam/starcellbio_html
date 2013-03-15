@@ -149,8 +149,22 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     scb.ui.static.MainFrame.load = function () {
         var master_model = JSON.parse(localStorage.getItem("scb_master_model"));
-        master_model_data = master_model;
         starcellbio(context.ui, master_model);
+    }
+
+    scb.ui.static.MainFrame.clear = function() {
+        var r=prompt("This will restart whole assignment. Your saved data will be lost. Type: 'YES' to proceed.");
+        if(r == 'YES')
+        {
+            self.show({view:'assignments'});
+            master_model = master_model_data;
+            scb.ui.static.MainFrame.save();
+            starcellbio(context.ui, master_model);
+        }
+        else
+        {
+            alert( "Operation canceled!\n If you wanted to clear everything type YES in previous dialog.");
+        }
     }
 
 
@@ -160,8 +174,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     });
 
     scb.utils.off_on(workarea, 'click', '.load_master_model', function () {
-        scb.ui.static.MainFrame.load()
+        scb.ui.static.MainFrame.load();
     });
+
+    scb.utils.off_on(workarea, 'click', '.clear_master_model', function () {
+        scb.ui.static.MainFrame.clear();
+    });
+
 
     scb.utils.off_on(workarea.parent(), 'click', '.remove_experiment', function () {
         var r = confirm("Delete experiment?");
@@ -231,6 +250,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         if (state.onhashchange) {
             window.scrollTo(0, 0);
         }
+        scb.ui.static.MainFrame.save();
         console.info(JSON.stringify(state));
         var parsed = scb.ui.static.MainFrame.validate_state(state);
         if (parsed.redisplay) {

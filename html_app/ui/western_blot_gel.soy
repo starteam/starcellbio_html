@@ -120,12 +120,11 @@
                     {$r.display_text} -{$r.lane.kinds[$r.lane.kind].name}
                 </li>
                 {/if}
-
                 {/foreach}
+                {if $western_blot.marker_loaded == true}
+                <li>Marker</li>
+                {/if}
             </ol>
-            {if $western_blot.marker_loaded == true}
-            <div class='scb_s_western_blot_marker'>15. &nbsp; Marker</div>
-            {/if}
         </div>
         {if $western_blot.marker_loaded == false}
         <div class='scb_s_western_blot_marker scb_s_western_blot_marker_not'>No marker loaded.</div>
@@ -202,6 +201,7 @@
             <canvas id="{$western_blot_gel.id}" class='scb_s_western_blot_gel_canvas' style="width:363px;height:288px"
                     width='363' height='288'></canvas>
             <div class='scb_f_slider'></div>
+            <div class='scb_f_slider_value'></div>
         </div>
         {else}
         {call scb_western_blot.display_western_blot_numbers}

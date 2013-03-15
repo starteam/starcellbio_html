@@ -2464,7 +2464,7 @@ var __assigment_706 = {
                     concentrations: [15]
                 },
                 'Alpha': {
-                    name: '&0x03b1; Factor',
+                    name: 'Alpha Factor',
                     concentrations: [2]
                 },
                 'Hydroxyurea': {
@@ -2506,69 +2506,69 @@ var __assigment_706 = {
                     name: 'rabbit anti-cdt1',
                     secondary: ['r'],
                     marks: [
-                        {weight: 65, intensity: 100},
+                        {weight: 65, intensity: 0},
                     ],
-                    gel_name: 'let-23'
+                    gel_name: 'cdt1'
                 },
                 'cdk1': {
                     name: 'rabbit anti-cdk1',
                     secondary: ['r'],
                     marks: [
-                        {weight: 34, intensity: 1},
-                        {weight: 35, intensity: 1},
-                        {weight: 36, intensity: 1}
+                        {weight: 34, intensity: 0},
+                        {weight: 35, intensity: 0},
+                        {weight: 36, intensity: 0}
                     ],
-                    gel_name: 'let-23'
+                    gel_name: 'cdk1'
                 },
                 'cyclin': {
                     name: 'mouse anti-cyclin B',
                     secondary: ['m'],
                     marks: [
-                        {weight: 58, intensity: 1},
+                        {weight: 58, intensity: 0},
                     ],
-                    gel_name: 'let-23'
+                    gel_name: 'cyclin B'
                 },
                 'securin': {
                     name: 'rabbit anti-securin',
                     secondary: ['r'],
                     marks: [
-                        {weight: 41.8, intensity: 1},
+                        {weight: 41.8, intensity: 0},
                     ],
-                    gel_name: 'let-23'
+                    gel_name: 'securin'
                 },
                 'cdk2': {
                     name: 'rabbit anti-cdk2',
                     secondary: ['r'],
                     marks: [
-                        {weight: 33, intensity: 1},
-                        {weight: 34, intensity: 1},
-                        {weight: 35, intensity: 1}
+                        {weight: 33, intensity: 0},
+                        {weight: 34, intensity: 0},
+                        {weight: 35, intensity: 0}
                     ],
-                    gel_name: 'let-23'
+                    gel_name: 'cdk2'
                 },
                 'cyclinE': {
                     name: 'mouse anti-cyclin E',
-                    secondary: ['r'],
+                    secondary: ['m'],
                     marks: [
-                        {weight: 48, intensity: 1},
+                        {weight: 48, intensity: 0},
                     ],
-                    gel_name: 'let-23'
+                    gel_name: 'cyclin E'
                 },
                 'rad21': {
                     name: 'rabbit anti-rad21',
                     secondary: ['r'],
                     marks: [
-                        {weight: 68, intensity: 1},
+                        {weight: 68, intensity: 0},
                     ],
-                    gel_name: 'let-23'
+                    gel_name: 'rad21'
                 },
                 'pgk1': {
                     name: 'rabbit anti-pgk1',
                     secondary: ['r'],
                     marks: [
-                        {weight: 45, intensity: 1},
+                        {weight: 45, intensity: 0},
                     ],
-                    gel_name: 'let-23'
+                    gel_name: 'pgk1'
                 }
             },//
             secondary_anti_body: {
@@ -2584,7 +2584,11 @@ var __assigment_706 = {
                     name: 'Whole Cell'
                 }
             },
-
+            facs_kinds: {
+                'whole': {
+                    name: 'Live cells'
+                }
+            },
             model: { // models
                 western_blot: {
                     'cyto': {
@@ -2598,36 +2602,39 @@ var __assigment_706 = {
                                     {
                                         name: 'Cdt1',
                                         weight: 65,
-                                        intensity: 100,
+                                        intensity: 1,
                                         primary_anti_body: ['cdt1']
                                     },
 
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 100,
+                                        intensity: 1,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
                                         name: 'Securin',
                                         weight: 41.8,
-                                        intensity: 100,
+                                        intensity: 1,
                                         primary_anti_body: ['securin']
                                     },
 
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
+                                        intensity:1,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
                                         name: 'rad21',
                                         weight: 68,
+                                        intensity:1,
                                         primary_anti_body: ['rad21']
                                     },
                                     {
                                         name: 'pgk1',
                                         weight: 45,
+                                        intensity:1,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -2638,48 +2645,89 @@ var __assigment_706 = {
                                 cutoff: 1,
                                 drug: 'pp1',
                                 cell_line: '*ANY*',
-                                marks_below: [
+                                below_marks: [
                                     {
                                         name: 'Cdk1',
                                         weight: 34, //35&36
-                                        intensity: 100,
+                                        intensity: 1,
                                         primary_anti_body: ['cdk1']
                                     },
                                     {
                                         name: 'Cdk2',
                                         weight: 33, // 34&35
-                                        intensity: 100,
+                                        intensity: 1,
                                         primary_anti_body: ['cdk2']
                                     }
                                 ],
-                                marks_above: [
+                                above_marks: [
                                     {
                                         name: 'Cdk1',
                                         weight: 35, //35&36
-                                        intensity: 100,
+                                        intensity: 1,
                                         primary_anti_body: ['cdk1']
                                     },
                                     {
                                         name: 'Cdk1',
                                         weight: 36, //35&36
-                                        intensity: 100,
+                                        intensity: 1,
                                         primary_anti_body: ['cdk1']
                                     },
                                     {
                                         name: 'Cdk2',
                                         weight: 35, // 34&35
-                                        intensity: 100,
+                                        intensity: 1,
                                         primary_anti_body: ['cdk2']
                                     },
                                     {
                                         name: 'Cdk2',
                                         weight: 36, // 34&35
-                                        intensity: 100,
+                                        intensity: 1,
                                         primary_anti_body: ['cdk2']
                                     }
                                 ]
                             }
                         ]
+                    }
+                },
+                facs:{
+                    'dna':{
+                        'parser_simple': [
+                            {
+                                match: [],
+                                shape: 'normal'
+                            },
+                            {
+                                match: ['cell_line','temperature'],
+                                cell_line: 'm1',
+                                temperature: 40,
+                                shape: 'g2-block'
+                            },
+                            {
+                                match: ['cell_line','temperature'],
+                                cell_line: 'm2',
+                                temperature: 40,
+                                shape: 'S-block'
+                            },
+                            {
+                                match: ['cell_line','drug_id'],
+                                cell_line: 'wt',
+                                drug_id: 'Nocodazole',
+                                shape:'g2-block'
+                            },
+                            {
+                                match: ['cell_line','drug_id'],
+                                cell_line: 'wt',
+                                drug_id: 'Alpha',
+                                shape:'alpha-block'
+                            },
+                            {
+                                match: ['cell_line','drug_id'],
+                                cell_line: 'wt',
+                                drug_id: 'Hydroxyurea',
+                                shape:'S-block'
+                            }
+                        ]
+
                     }
                 }
             }
@@ -2697,6 +2745,7 @@ master_model_data = {
     },
     ui: {}
 };
+window.master_model_data = master_model_data;
 
 
 $(function () {
@@ -2707,12 +2756,12 @@ $(function () {
 
     __assigment_706.template.ui.experiment_setup.actions.push({
         name: 'Add multiple',
-        open: mit706s13.setup
+        open: 'mit706s13.setup'
     });
 
     __assigment_tufts.template.ui.experiment_setup.actions.push({
         name: 'ADD MULTIPLE ROWS',
-        open: mit706s13.setup,
+        open: 'mit706s13.setup',
         css: {
             width:'470px',
             height:'380px',

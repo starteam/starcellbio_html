@@ -32,63 +32,60 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
     var cell_treatment_id = $(element).attr('cell_treatment_id');
 
     parsed.facs.is_cell_treatment_enabled[cell_treatment_id] = val;
-//        $('.scb_f_facs_select_lysate_type',$(element).parent().parent()).each( function(e) {
-//            scb.ui.static.FacsView.scb_f_western_blot_select_lysate_type(this);
-//        })
+    $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
+        scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
+    })
     scb.ui.static.MainFrame.refresh();
 }
 
-scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element,event) {
+scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
 
     var sample_kind = $(element).val();
-    if( sample_kind == '' )
-    {
+    if (sample_kind == '') {
         return;
     }
     var lane_id = $(element).attr('lane_id');
-    if( lane_id == '' )
-    {
+    if (lane_id == '') {
         var cell_treatment_id = $(element).attr('cell_treatment_id');
-               var lane = parsed.facs.lanes_list.start({
-                   kind:sample_kind,
-                   cell_treatment_id:cell_treatment_id,
-                   experiment_id:parsed.experiment.id
-               });
-        $(element).attr('lane_id', lane.id ) ;
-        $(element).attr('lane_kind', 'existing' ) ;
+        var lane = parsed.facs.lanes_list.start({
+            kind: sample_kind,
+            cell_treatment_id: cell_treatment_id,
+            experiment_id: parsed.experiment.id
+        });
+        $(element).attr('lane_id', lane.id);
+        $(element).attr('lane_kind', 'existing');
         scb.ui.static.MainFrame.refresh();
     }
-    else
-    {
+    else {
         parsed.facs.lanes_list.get(lane_id).kind = sample_kind;
     }
 
 }
 
-scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element,event) {
+scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
     var rows_state = parsed.facs.rows_state();
-        parsed.facs.sample_prepared = true;
-        scb.ui.static.MainFrame.refresh();
+    parsed.facs.sample_prepared = true;
+    scb.ui.static.MainFrame.refresh();
 }
 
 
-scb.ui.static.FacsView.scb_f_facs_sample_active_all = function (element,event) {
-    $('.scb_f_facs_sample_active').each( function(e) {
+scb.ui.static.FacsView.scb_f_facs_sample_active_all = function (element, event) {
+    $('.scb_f_facs_sample_active').each(function (e) {
         var element = this;
-        $(element).attr('checked','checked');
+        $(element).attr('checked', 'checked');
         scb.ui.static.FacsView.scb_f_facs_sample_active(element);
-    } ) ;
+    });
 }
 
-scb.ui.static.FacsView.scb_f_facs_run_samples = function(element,event) {
+scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -97,9 +94,8 @@ scb.ui.static.FacsView.scb_f_facs_run_samples = function(element,event) {
     scb.ui.static.MainFrame.refresh();
 }
 
-scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function(element, event )
-{
-    $('li',$(element).parent()).removeClass('scb_s_facs_sample_selected');
+scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (element, event) {
+    $('li', $(element).parent()).removeClass('scb_s_facs_sample_selected');
     $(element).addClass('scb_s_facs_sample_selected');
     var parsed = scb.ui.static.FacsView.parse(element);
     if (parsed.redisplay) {
@@ -131,22 +127,43 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
 
 }
-
-scb.ui.static.FacsView.charts = function(workarea)
-{
-    $('.scb_s_facs_chart').each( function() {
-        var chart = $(this);
-        var data = [ { label: "Foo", data: [ [10, 1], [17, -14], [30, 5] ] },
-          { label: "Bar", data: [ [11, 13], [19, 11], [30, -7] ] }
-        ];
-        var options = {
-            series: {
-                lines: { show: true },
-                points: { show: true }
+scb.ui.static.FacsView.evaluate_chart = function (state) {
+    if (true || !state.facs_lane.canvas_metadata) {
+        var canvas_metadata = {
+            data: [
+                { label: "Foo", data: [
+                    [10, Math.random() * 1],
+                    [17, Math.random() * -14],
+                    [30, Math.random() * 5]
+                ] },
+                { label: "Bar", data: [
+                    [11, Math.random() * 13],
+                    [19, Math.random() * 11],
+                    [30, Math.random() * -7]
+                ] }
+            ],
+            options: {
+                series: {
+                    lines: { show: true },
+                    points: { show: true }
+                }
             }
-        };
-        $.plot( chart , data, options);
+        }
+        var model = new scb.components.ModelFactory(state.context.template);
+        model.facs.compute(state);
 
+        state.facs_lane.canvas_metadata = state.data ? state.data : canvas_metadata;
+    }
+    $.plot(state.chart, state.facs_lane.canvas_metadata.data, state.facs_lane.canvas_metadata.options);
+};
+
+scb.ui.static.FacsView.charts = function (workarea) {
+    $('.scb_s_facs_chart').each(function () {
+
+        var chart = $(this);
+        var parsed = scb.ui.static.FacsView.parse(this);
+        parsed.chart = chart;
+        scb.ui.static.FacsView.evaluate_chart(parsed);
     })
 }
 scb.ui.FacsView = function scb_ui_FacsView(gstate) {
@@ -160,9 +177,9 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         var can_prepare_lysate = rows_state.valid > 0;
 
         var kind = 'sample_prep';
-                if (state.facs.sample_prepared) {
-                    kind = 'analyze';
-                }
+        if (state.facs.sample_prepared) {
+            kind = 'analyze';
+        }
         workarea.html(scb_facs.main({
             global_template: gstate.context.master_model,
             assignment: state.assignment,
@@ -172,18 +189,16 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             rows: rows_state.rows,
             rows_valid: rows_state.valid,
             kind: kind,
-            kinds: template.lysate_kinds,
+            kinds: template.facs_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
         document.title = "FACS - StarCellBio";
 
-        if( state.facs.samples_finished)
-        {
+        if (state.facs.samples_finished) {
             scb.ui.static.FacsView.charts(workarea);
         }
-        else
-        {
-            $('.scb_s_facs_samples_graph_area').css('opacity','.25');
+        else {
+            $('.scb_s_facs_samples_graph_area').css('opacity', '.25');
         }
 
     }

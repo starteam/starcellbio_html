@@ -2,6 +2,7 @@ var mit706s13 = mit706s13 || {};
 mit706s13.static = mit706s13.static || {};
 
 mit706s13.static.scb_mit706s16_inner_dialog_add = function (element, dialog, state) {
+
     $('input[type="checkbox"]:checked', dialog).each(function (e) {
         var element = $(this);
         var experiment_id = $(element).attr('experiment_id');
@@ -26,7 +27,6 @@ mit706s13.static.scb_mit706s16_inner_dialog_add = function (element, dialog, sta
         _.each(cell_treatments_array, function (eh) {
             parsed.experiment.cell_treatment_list.start(scb.utils.clone_and_clear(eh));
         });
-
     });
 
     $(dialog).detach();

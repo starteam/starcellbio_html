@@ -27,7 +27,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (e
         alert("INVALID ELEMENT!");
     }
     console.info(parsed.western_blot_gel.primary_anti_body);
-    parsed.western_blot_gel.primary_anti_body = $('option:selected',element).attr('model_id');
+    parsed.western_blot_gel.primary_anti_body = $('option:selected', element).attr('model_id');
     console.info(parsed.western_blot_gel.primary_anti_body);
     console.info(parsed.western_blot_gel);
 
@@ -38,7 +38,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    parsed.western_blot_gel.secondary_anti_body = $('option:selected',element).attr('model_id');
+    parsed.western_blot_gel.secondary_anti_body = $('option:selected', element).attr('model_id');
 }
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function (element) {
@@ -85,7 +85,7 @@ scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (eleme
     }
     parsed.western_blot.gel_list.remove(parsed.western_blot_gel.id);
     var list = parsed.western_blot.gel_list.list;
-    parsed.western_blot.last_gel = list.length > 0 ? list[0] : null;
+    parsed.western_blot.last_gel = list.length > 0 ? list[0].id : null;
     parsed.state.view = 'western_blot';
     scb.ui.static.MainFrame.refresh(parsed.state);
 }
@@ -158,21 +158,25 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
 
     var gel = parsed.western_blot_gel;
     if (gel.canvas_metadata == null) {
-        var cstate = {
-            time: 0,
-            gel: gel,
-            lanes_length: gel.marks.length
-        }
+        if (parsed.western_blot.canvas_metadata == null) {
+            var cstate = {
+                time: 0,
+                gel: gel,
+                lanes_length: gel.marks.length
+            }
 
-        var c = new scb.components.WesternBlot(cstate, context);
-        c.initialize_bias();
+            var c = new scb.components.WesternBlot(cstate, context);
+            c.initialize_bias();
 
-        gel.canvas_metadata = {
-            background: c.background,
-            lane_yslope: c.lane_yslope,
-            lane_xoffset: c.lane_xoffset
+            parsed.western_blot.canvas_metadata = {
+                background: c.background,
+                lane_yslope: c.lane_yslope,
+                lane_xoffset: c.lane_xoffset
+            }
         }
+        gel.canvas_metadata = parsed.western_blot.canvas_metadata;
     }
+
     var cstate = {
         time: gel.exposure_time,
         gel: gel
@@ -187,33 +191,54 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     gel.canvas_data = c.tab;
     var parent = $($(element).parent());
     var slider = $('.scb_f_slider', $(parent));
-    slider.css('top', gel.canvas_metadata.slider + 'px');
-    if (_.isUndefined(gel.canvas_metadata.slider)) {
-        slider.hide();
+    var slider_value = $('.scb_f_slider_value', $(parent));
+
+    function set_slider(y) {
+        slider.css('top', y + 'px');
+        slider_value.css('top', (y - 12) + 'px');
+        var weight = c.position_to_weight(y);
+        slider_value.html(Math.round(weight) + " kDa");
+        if (_.isUndefined(y)) {
+            slider.hide();
+            slider_value.hide();
+        }
+        else {
+            slider.show();
+            slider_value.show();
+        }
     }
-    else {
-        slider.show();
-    }
+
+//    slider.css('top', gel.canvas_metadata.slider + 'px');
+//    if (_.isUndefined(gel.canvas_metadata.slider)) {
+//        slider.hide();
+//    }
+//    else {
+//        slider.show();
+//    }
+    set_slider(gel.canvas_metadata.slider);
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
         var y = evt.offsetY;
         var x = evt.offsetX;
         if ($(evt.srcElement).is('canvas')) {
-            slider.css('top', y + "px").show();
+            set_slider(gel.canvas_metadata.slider);
+//            slider.css('top', y + "px").show();
             gel.canvas_metadata.slider = y;
-            if (y < 2 || y > 285 || x < 2 || x > 250) {
+            if (y < 2 || y > 285 || x < 2 || x > 360) {
                 slider.hide();
+                slider_value.hide();
                 delete gel.canvas_metadata.slider;
             }
         }
     });
     $(parent).unbind('mouseout').bind('mouseout', function (evt) {
         slider.hide();
+        slider_value.hide();
     });
 }
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many = function (element, event) {
-    var target = $("option:selected",element).attr('href');
-   document.location = target;
+    var target = $("option:selected", element).attr('href');
+    document.location = target;
 }
 
 scb.ui.static.WesternBlotGelView.register = function (workarea) {

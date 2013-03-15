@@ -17,7 +17,7 @@
     display: inline-block;
     width: 125px;
     padding-left: 20px;
-    top: 7px;
+    top: 3px;
     position: relative;
     height: 20px;;
     font-size: 11pt;
@@ -50,6 +50,7 @@
     border: 1px solid #808080;
     border-radius: 5px;
     position: relative;
+    padding-bottom:8px;
 
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }

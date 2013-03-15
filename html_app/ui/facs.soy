@@ -129,9 +129,11 @@ FACS Main View
 
     <span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
           experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+        <!--
     <button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
             experiment_id='{$experiment.id}'><img src="images/setup/scb_remove.png">
     </button>
+        -->
     </span>
     {else}
     <a class='scb_f_open_facs scb_s_facs_open_facs'
@@ -204,7 +206,7 @@ FACS Main View
         {/foreach}
         <tr>
             <td colspan='4'>
-                <button class='scb_f_facs_sample_active_all'>SELECT ALL</button>
+                <button class='scb_f_facs_sample_active_all scb_s_gray_button'>SELECT ALL</button>
             </td>
         </tr>
     </table>
@@ -220,7 +222,7 @@ FACS Main View
 @param step
 */
 {template .display_facs_progress}
-<div class='scb_s_western_blot_progress'>
+<div class='scb_s_facs_progress'>
 
     <span class='scb_s_western_blot_progress_prefix_group1'>
     <img class='scb_s_western_blot_progress_prefix_img' src="images/western_blot/backbackback.png">
@@ -325,9 +327,12 @@ FACS Main View
                 {/foreach}
             </ol>
         </div>
-        <button class='scb_f_facs_run_samples' facs_id='{$facs.id}' assignment_id="{$assignment.id}"
+        {if $facs.samples_finished}
+        {else}
+        <button class='scb_f_facs_run_samples scb_s_gray_button' facs_id='{$facs.id}' assignment_id="{$assignment.id}"
                 experiment_id="{$experiment.id}">RUN SAMPLES
         </button>
+        {/if}
     </div>
     <div class='scb_s_facs_samples_graph_area'>
         <div class='scb_s_western_blot_gel_tabs'>
@@ -361,7 +366,7 @@ FACS Main View
     </div>
 
     <div class='scb_s_western_blot_tools'>
-        Here come tools
+        Here come tools {$facs.lane_selected}
     </div>
 </div>
 {/template}
