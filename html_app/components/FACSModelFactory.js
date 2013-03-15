@@ -82,6 +82,10 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 return 1 / 4 * Math.exp(-((x - 2) * (x - 2) * 30));
             }
 
+            function s_block(x) {
+                return Math.exp(-((2 - x) * Math.exp(2 - x) - .9) * ((2 - x) * Math.exp(2 - x) - .9) / .4);
+            }
+
             function normalize(data) {
                 var sum = 0;
                 _.each(data, function (s) {
@@ -94,6 +98,36 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 }
             }
 
+            var options = {
+                series: {
+                    lines: {show: true, fill: true, steps: true},
+                    points: {show: false, radius: 1, fill: false},
+                },
+                xaxis: {
+                    min: 0,
+                    max: 3
+                },
+                grid: {show: true, clickable: true, hoverable: true,borderWidth:0,autoHighlight:true},
+                hooks: { bindEvents: [ function (plot, eventHolder) {
+                    var xaxes = plot.getXAxes()[0];
+                    var yaxes = plot.getYAxes()[0];
+                    console.info(plot);
+                    console.info(eventHolder);
+                    eventHolder.click(function (e) {
+                        var px = xaxes.c2p(e.offsetX);
+                        var py = yaxes.c2p(e.offsetY);
+                        console.info( px + " " + py ) ;
+                    });
+                    eventHolder.mousemove(function (e) {
+                        var px = xaxes.c2p(e.offsetX);
+                        var py = yaxes.c2p(e.offsetY);
+                        console.info( px + " " + py ) ;
+                    });
+
+                }
+                ]
+                }
+            };
             if (('' + shape).toLowerCase() == 'normal') {
                 var data = [];
                 for (var x = 0; x < 3; x += .01) {
@@ -104,18 +138,30 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 normalize(data);
                 state.data = {
                     data: [
-                        {label: 'DNA Content', data: data}
+                        {label: 'DNA Content', data: data},
+//                        {label: 'phase 1', data:[[0,0.01],[0.8,0.01]],lines:{fill:false}},
+//                        {label: 'phase 2', data:[[0.8,0.011],[1.2,0.011]],lines:{fill:false}},
+//                        {label: 'phase 3', data:[[1.2,0.01],[1.8,0.01]],lines:{fill:false}},
+//                        {label: 'phase 4', data:[[1.8,0.011],[2.3,0.011]],lines:{fill:false}}
+
                     ],
-                    options: {
-                        series: {
-                            lines: {show: true},
-                            points: {show: false}
-                        }
-                    }
+                    options: options
                 };
             }
             if (('' + shape).toLowerCase() == 's-block') {
+                var data = [];
+                for (var x = 0; x < 3; x += .01) {
+                    var y = s_block(x);
+                    data.push([x, y]);
 
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        {label: 'DNA Content', data: data}
+                    ],
+                    options: options
+                };
             }
             if (('' + shape).toLowerCase() == 'g1-block') {
 
@@ -132,12 +178,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     data: [
                         {label: 'DNA Content', data: data}
                     ],
-                    options: {
-                        series: {
-                            lines: {show: true},
-                            points: {show: false}
-                        }
-                    }
+                    options: options
                 };
             }
             if (('' + shape).toLowerCase() == 'alpha-block') {
@@ -151,12 +192,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     data: [
                         {label: 'DNA Content', data: data}
                     ],
-                    options: {
-                        series: {
-                            lines: {show: true},
-                            points: {show: false}
-                        }
-                    }
+                    options: options
                 };
             }
 
