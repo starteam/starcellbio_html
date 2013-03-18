@@ -1,6 +1,42 @@
+.scb_s_facs_chart_wrapper {
+    position: relative;
+    width: 400px;
+    height:360px;
+}
+
+.scb_s_facs_chart_yaxis {
+    position: absolute;
+    width:360px;
+    height:25px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    left:-165px;
+    top:140px;
+    text-align: center;
+    font-family: 'sourcesanspro-regular';
+    font-size: 11pt;
+}
+
+.scb_s_facs_chart_xaxis {
+    position: absolute;
+    top:325px;
+    width:400px;
+    height:25px;
+    display: block;
+    text-align: center;
+    font-family: 'sourcesanspro-regular';
+    font-size: 11pt;
+}
+
 .scb_s_facs_chart {
+    position: absolute;
     width:350px;
     height:325px;
+    top:0px;
+    left:25px;
 }
 .scb_s_facs_sample_selected {
     border-radius: 5px;
@@ -14,10 +50,6 @@
     height:120px;
     margin-left:25px;
 }
-
-//.scb_s_facs_samples_table {
-//  IN WESTERN BLOT.gss
-//}
 
 .scb_f_facs_prepare_lysates {
     float:right;

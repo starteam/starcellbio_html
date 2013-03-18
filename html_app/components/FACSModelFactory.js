@@ -105,9 +105,24 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 },
                 xaxis: {
                     min: 0,
-                    max: 3
+                    max: 3,
+                    ticks: [1, 2],
+                    tickFormatter: function (tf) {
+                        return tf + " C"
+                    },
+                    font: {
+                        family: 'sourcesanspro-regular',
+                        size: 11,
+                    }
                 },
-                grid: {show: true, clickable: true, hoverable: true,borderWidth:0,autoHighlight:true},
+                yaxis: {
+                    font: {
+                        family: 'sourcesanspro-regular',
+                        size: 11
+                    }
+
+                },
+                grid: {show: true, clickable: true, hoverable: true, borderWidth: 0, autoHighlight: true},
                 hooks: { bindEvents: [ function (plot, eventHolder) {
                     var xaxes = plot.getXAxes()[0];
                     var yaxes = plot.getYAxes()[0];
@@ -116,12 +131,12 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     eventHolder.click(function (e) {
                         var px = xaxes.c2p(e.offsetX);
                         var py = yaxes.c2p(e.offsetY);
-                        console.info( px + " " + py ) ;
+                        console.info(px + " " + py);
                     });
                     eventHolder.mousemove(function (e) {
                         var px = xaxes.c2p(e.offsetX);
                         var py = yaxes.c2p(e.offsetY);
-                        console.info( px + " " + py ) ;
+                        console.info(px + " " + py);
                     });
 
                 }
