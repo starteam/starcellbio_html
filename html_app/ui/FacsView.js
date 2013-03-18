@@ -87,10 +87,12 @@ scb.ui.static.FacsView.scb_f_facs_sample_active_all = function (element, event) 
 
 scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
     parsed.facs.samples_finished = true;
+    parsed.facs.lane_selected = scb.utils.get(parsed.facs.lanes_list.list, [0, 'id']);
     scb.ui.static.MainFrame.refresh();
 }
 
