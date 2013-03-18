@@ -2052,7 +2052,7 @@ var __assigment_706 = {
                 add_multiple_dialog: {
                     'wt': {
                         headings: [
-                            'Treatment', 'Temperature', 'With PP1', 'Without PP1'
+                            'Treatment', 'Temperature', '+ PP1', '- PP1'
                         ],
                         rows: [
                             {
@@ -2298,7 +2298,7 @@ var __assigment_706 = {
                     },
                     'm1': {
                         headings: [
-                            'Treatment', 'Temperature', 'With PP1', 'Without PP1'
+                            'Treatment', 'Temperature', '+ PP1', '- PP1'
                         ],
                         rows: [
                             {
@@ -2364,7 +2364,7 @@ var __assigment_706 = {
                     },
                     'm2': {
                         headings: [
-                            'Treatment', 'Temperature', 'With PP1', 'Without PP1'
+                            'Treatment', 'Temperature', '+ PP1', '- PP1'
                         ],
                         rows: [
                             {
