@@ -9,11 +9,12 @@ rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-STARCELLBIO_ENV = os.environ.get( 'STARCELLBIO_ENV' )
-if STARCELLBIO_ENV == 'Production':
+
+import platform
+if platform.node() == 'starapp':
+    # Production Platform
     DEBUG = False
     TEMPLATE_DEBUG = DEBUG
-	
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
