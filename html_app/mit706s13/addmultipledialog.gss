@@ -51,7 +51,8 @@
     font-size: 12pt;
     font-family: sourcesanspro-semibold;
 }
-.scb_mit706s16_inner_dialog_add {
+.scb_mit706s16_inner_dialog_cancel {
     width:180px;
     margin-left: 10px;
+    margin-right:10px;
 }
