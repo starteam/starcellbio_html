@@ -86,11 +86,21 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 return Math.exp(-((2 - x) * Math.exp(2 - x) - .9) * ((2 - x) * Math.exp(2 - x) - .9) / .4);
             }
 
-            function normalize(data) {
+            function normalize(data,factor) {
+                var factor = factor || .15;
                 var sum = 0;
                 _.each(data, function (s) {
                     sum += s[1];
                 });
+                _.each(data, function (s) {
+                    s[1] = s[1] / sum * (1-factor +2*factor*Math.random())
+                });
+
+                sum = 0;
+                _.each(data, function (s) {
+                    sum += s[1];
+                });
+
                 if (sum != 0) {
                     _.each(data, function (s, index) {
                         data[index][1] /= sum;
@@ -100,14 +110,29 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
             var options = {
                 series: {
-                    lines: {show: true, fill: true, steps: true},
-                    points: {show: false, radius: 1, fill: false},
+                    lines: {show: true, fill: true, steps: true, lineWidth:1},
+                    points: {show: false, radius:.5, fill: false},
                 },
                 xaxis: {
                     min: 0,
-                    max: 3
+                    max: 3,
+                    ticks: [1, 2],
+                    tickFormatter: function (tf) {
+                        return tf + " C"
+                    },
+                    font: {
+                        family: 'sourcesanspro-regular',
+                        size: 11,
+                    }
                 },
-                grid: {show: true, clickable: true, hoverable: true,borderWidth:0,autoHighlight:true},
+                yaxis: {
+                    font: {
+                        family: 'sourcesanspro-regular',
+                        size: 11
+                    }
+
+                },
+                grid: {show: true, clickable: true, hoverable: true, borderWidth: 0, autoHighlight: true},
                 hooks: { bindEvents: [ function (plot, eventHolder) {
                     var xaxes = plot.getXAxes()[0];
                     var yaxes = plot.getYAxes()[0];
@@ -116,12 +141,12 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     eventHolder.click(function (e) {
                         var px = xaxes.c2p(e.offsetX);
                         var py = yaxes.c2p(e.offsetY);
-                        console.info( px + " " + py ) ;
+                        console.info(px + " " + py);
                     });
                     eventHolder.mousemove(function (e) {
                         var px = xaxes.c2p(e.offsetX);
                         var py = yaxes.c2p(e.offsetY);
-                        console.info( px + " " + py ) ;
+                        console.info(px + " " + py);
                     });
 
                 }
@@ -130,8 +155,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             };
             if (('' + shape).toLowerCase() == 'normal') {
                 var data = [];
+                var bias = (Math.random() -.5)*.05;
                 for (var x = 0; x < 3; x += .01) {
-                    var y = g0g1(x) + g2m(x) + near_zero(x) + s(x);
+                    var y = g0g1(x+bias) + g2m(x+bias) + near_zero(x+bias) + s(x+bias);
                     data.push([x, y]);
 
                 }

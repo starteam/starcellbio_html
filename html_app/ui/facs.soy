@@ -319,8 +319,9 @@ FACS Main View
                 {foreach $r in $rows}
                 {if $r.is_valid}
                 <li facs_id='{$facs.id}' assignment_id="{$assignment.id}"
-                                experiment_id="{$experiment.id}" facs_lane_id='{$r.lane.id}' {if $facs.lane_selected == $r.lane.id}class='scb_s_facs_sample_selected'{/if}>
-                    {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
+                    experiment_id="{$experiment.id}" facs_lane_id='{$r.lane.id}'
+                {if $facs.lane_selected == $r.lane.id}class='scb_s_facs_sample_selected'{/if}>
+                {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
                 </li>
                 {/if}
 
@@ -343,10 +344,10 @@ FACS Main View
                     </span>
         </div>
         {call .display_graph}
-            {param assignment:$assignment/}
-            {param experiment:$experiment/}
-            {param facs:$facs/}
-            {param facs_line_id:$facs.lane_selected/}
+        {param assignment:$assignment/}
+        {param experiment:$experiment/}
+        {param facs:$facs/}
+        {param facs_line_id:$facs.lane_selected/}
         {/call}
     </div>
 </div>
@@ -361,12 +362,21 @@ FACS Main View
 {template .display_graph}
 <div class='scb_s_western_blot_gel_content'>
 
-    <div class='scb_s_facs_chart' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' facs_id='{$facs.id}'
-           {if $facs_line_id}facs_lane_id='{$facs_line_id}'{/if}>
+    <div class='scb_s_facs_chart_wrapper'>
+        <div class='scb_s_facs_chart_xaxis'>
+            DNA Copy number (C)
+        </div>
+        <div class='scb_s_facs_chart_yaxis'>
+            ________ (number of cells?)
+        </div>
+        <div class='scb_s_facs_chart' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             facs_id='{$facs.id}'
+        {if $facs_line_id}facs_lane_id='{$facs_line_id}'{/if}>
     </div>
+</div>
 
-    <div class='scb_s_western_blot_tools'>
-        Here come tools {$facs.lane_selected}
-    </div>
+<div class='scb_s_western_blot_tools'>
+    Here come tools {$facs.lane_selected}
+</div>
 </div>
 {/template}

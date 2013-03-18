@@ -106,9 +106,9 @@
 .scb_s_western_blot_gel_tabs {
     width:600px;
     height:25px;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
-    border-top: 1px solid white;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-top: 1px solid transparent;
     margin-left: -1px;
     margin-right:-1px;
     margin-top: -1px;
