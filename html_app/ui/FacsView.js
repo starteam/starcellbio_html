@@ -35,7 +35,10 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
     $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
         scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
     })
-    scb.ui.static.MainFrame.refresh();
+    if( event )
+    {
+        scb.ui.static.MainFrame.refresh();
+    }
 }
 
 scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event) {
@@ -58,7 +61,10 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
         });
         $(element).attr('lane_id', lane.id);
         $(element).attr('lane_kind', 'existing');
-        scb.ui.static.MainFrame.refresh();
+        if(event)
+        {
+            scb.ui.static.MainFrame.refresh();
+        }
     }
     else {
         parsed.facs.lanes_list.get(lane_id).kind = sample_kind;
@@ -83,6 +89,7 @@ scb.ui.static.FacsView.scb_f_facs_sample_active_all = function (element, event) 
         $(element).attr('checked', 'checked');
         scb.ui.static.FacsView.scb_f_facs_sample_active(element);
     });
+    scb.ui.static.MainFrame.refresh();
 }
 
 scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
@@ -130,7 +137,7 @@ scb.ui.static.FacsView.register = function (workarea) {
 
 }
 scb.ui.static.FacsView.evaluate_chart = function (state) {
-    if (true || !state.facs_lane.canvas_metadata) {
+    if (!state.facs_lane.canvas_metadata) {
         var canvas_metadata = {
             data: [
                 { label: "Foo", data: [
