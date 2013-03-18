@@ -464,7 +464,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     scb.ui.static.MainFrame.refresh = function (navigation_state) {
         var state = navigation_state || $.deparam(location.hash.replace(/^#/, ''), true);
-        state.onhashchange = true;
+        state.onhashchange = false;
         state.view = state.view || 'homepage';
         self.show(state);
     }
