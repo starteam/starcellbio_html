@@ -2058,7 +2058,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Media Only'},
-                                    {kind: 'text', text: '25'},
+                                    {kind: 'text', text: "30 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2087,7 +2087,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Media Only'},
-                                    {kind: 'text', text: '40'},
+                                    {kind: 'text', text: "37 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2116,7 +2116,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Nocodazole'},
-                                    {kind: 'text', text: '25'},
+                                    {kind: 'text', text: "30 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2146,7 +2146,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Nocodazole'},
-                                    {kind: 'text', text: '40'},
+                                    {kind: 'text', text: "37 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2177,7 +2177,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Hydroxyurea'},
-                                    {kind: 'text', text: '25'},
+                                    {kind: 'text', text: "30 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2207,7 +2207,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Hydroxyurea'},
-                                    {kind: 'text', text: '40'},
+                                    {kind: 'text', text: "37 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2237,7 +2237,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Alpha Factor'},
-                                    {kind: 'text', text: '25'},
+                                    {kind: 'text', text: "30 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2267,7 +2267,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Alpha Factor'},
-                                    {kind: 'text', text: '40'},
+                                    {kind: 'text', text: "37 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2304,7 +2304,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Media Only'},
-                                    {kind: 'text', text: '25'},
+                                    {kind: 'text', text: "30 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2333,7 +2333,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Media Only'},
-                                    {kind: 'text', text: '40'},
+                                    {kind: 'text', text: "37 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2370,7 +2370,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Media Only'},
-                                    {kind: 'text', text: '25'},
+                                    {kind: 'text', text: "30 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2399,7 +2399,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Media Only'},
-                                    {kind: 'text', text: '40'},
+                                    {kind: 'text', text: "37 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2622,19 +2622,19 @@ var __assigment_706 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity:1,
+                                        intensity: 1,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
                                         name: 'rad21',
                                         weight: 68,
-                                        intensity:1,
+                                        intensity: 1,
                                         primary_anti_body: ['rad21']
                                     },
                                     {
                                         name: 'pgk1',
                                         weight: 45,
-                                        intensity:1,
+                                        intensity: 1,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -2689,42 +2689,42 @@ var __assigment_706 = {
                         ]
                     }
                 },
-                facs:{
-                    'dna':{
+                facs: {
+                    'dna': {
                         'parser_simple': [
                             {
                                 match: [],
                                 shape: 'normal'
                             },
                             {
-                                match: ['cell_line','temperature'],
+                                match: ['cell_line', 'temperature'],
                                 cell_line: 'm1',
                                 temperature: 40,
                                 shape: 'g2-block'
                             },
                             {
-                                match: ['cell_line','temperature'],
+                                match: ['cell_line', 'temperature'],
                                 cell_line: 'm2',
                                 temperature: 40,
                                 shape: 'S-block'
                             },
                             {
-                                match: ['cell_line','drug_id'],
+                                match: ['cell_line', 'drug_id'],
                                 cell_line: 'wt',
                                 drug_id: 'Nocodazole',
-                                shape:'g2-block'
+                                shape: 'g2-block'
                             },
                             {
-                                match: ['cell_line','drug_id'],
+                                match: ['cell_line', 'drug_id'],
                                 cell_line: 'wt',
                                 drug_id: 'Alpha',
-                                shape:'alpha-block'
+                                shape: 'alpha-block'
                             },
                             {
-                                match: ['cell_line','drug_id'],
+                                match: ['cell_line', 'drug_id'],
                                 cell_line: 'wt',
                                 drug_id: 'Hydroxyurea',
-                                shape:'S-block'
+                                shape: 'S-block'
                             }
                         ]
 
@@ -2763,8 +2763,8 @@ $(function () {
         name: 'ADD MULTIPLE ROWS',
         open: 'mit706s13.setup',
         css: {
-            width:'470px',
-            height:'380px',
+            width: '470px',
+            height: '380px',
             left: '300px',
             top: '200px'
         }
