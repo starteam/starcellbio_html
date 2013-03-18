@@ -113,6 +113,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     }
     else {
         parsed.western_blot.lysate_prepared = true;
+        window.scrollTo(0,0);
         scb.ui.static.MainFrame.refresh();
     }
 }
@@ -191,7 +192,7 @@ scb.ui.static.WesternBlotView.populate_wells = function(rows,state,gstate) {
     });
     if(state.western_blot.marker_loaded)
     {
-        g.drawImage( getImage( 14 ) ,0,0) ;
+        g.drawImage( getImage( rows.length ) ,0,0) ;
     }
 }
 

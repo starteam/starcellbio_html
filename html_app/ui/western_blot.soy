@@ -258,12 +258,11 @@
                 {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
             </li>
             {/if}
-
             {/foreach}
+            {if $western_blot.marker_loaded == true}
+                <li>Marker</li>
+            {/if}
         </ol>
-        {if $western_blot.marker_loaded == true}
-        <div class='scb_s_western_blot_marker'>15. &nbsp; Marker</div>
-        {/if}
     </div>
     {if $western_blot.marker_loaded == false}
     <button class='scb_s_western_blot_load_marker scb_s_navigation_button' western_blot_id='{$western_blot.id}'
