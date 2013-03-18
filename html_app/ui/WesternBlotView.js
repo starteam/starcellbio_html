@@ -206,7 +206,7 @@ scb.ui.static.WesternBlotView.populate_wells = function (rows, state, gstate) {
         }
     });
     if (state.western_blot.marker_loaded) {
-        g.drawImage(getImage(rows.length), 0, 0);
+        g.drawImage(getImage(i), 0, 0);
     }
 }
 
