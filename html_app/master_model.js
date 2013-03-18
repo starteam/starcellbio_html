@@ -2030,7 +2030,7 @@ var __assigment_706 = {
                     actions: [
 
                     ],//
-                    new_row: {
+                    new_row_is_disabled: {
                         title: 'New Row',
                         cell_line: 'wt',
                         treatment_list: {list: [
