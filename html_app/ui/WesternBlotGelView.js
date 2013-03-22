@@ -196,7 +196,8 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     function set_slider(y) {
         slider.css('top', y + 'px');
         slider_value.css('top', (y - 12) + 'px');
-        var weight = Math.round(c.position_to_weight(y)) + " kDa";
+        var ww = Math.round(c.position_to_weight(y));
+        var weight = ww > 0 ? ww + " kDa" : "N/A";
         if(!parsed.western_blot.marker_loaded)
         {
             weight = "NaN";
@@ -214,9 +215,14 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
 
     set_slider(gel.canvas_metadata.slider);
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
-        var y = evt.offsetY;
-        var x = evt.offsetX;
-        if ($(evt.srcElement).is('canvas')) {
+        var poffset = $(element).offset();
+        var eX = evt.clientX ;
+        var eY = evt.clientY ;
+
+        console.info( (eY - poffset.top ) + " " + (eX - poffset.left )  );
+        var y = evt.offsetY || (eY - poffset.top);
+        var x = evt.offsetX || (eX - poffset.left);
+        if (true || $(evt.srcElement).is('canvas')) {
             set_slider(gel.canvas_metadata.slider);
             gel.canvas_metadata.slider = y;
             if (y < 2 || y > 285 || x < 2 || x > 360) {

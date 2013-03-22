@@ -299,7 +299,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         }
         else
         {
-            return "NaN";
+            return "N/A";
         }
     }
 
