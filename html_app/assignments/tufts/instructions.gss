@@ -7,3 +7,8 @@
 .scb_assignment_specific_tufts_experiment_setup >li>b {
     font-family: 'SourceSansPro-Semibold';
 }
+
+.scb_s_tufts_assignment_detail {
+    font-family: 'SourceSansPro-Regular';
+    font-size:12pt;
+}

@@ -2770,6 +2770,6 @@ $(function () {
         }
     });
     __assigment_tufts.template.experiment_setup = scb_assignment_specific_tufts.experiment_setup();
-
-
+    __assigment_tufts.description = scb_assignment_specific_tufts.assignment_overview();
+    __assigment_tufts.template.instructions = scb_assignment_specific_tufts.assignment_detail();
 });
