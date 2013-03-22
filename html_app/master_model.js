@@ -759,7 +759,10 @@ var __assigment_tufts = {
         },
         secondary_anti_body: {
             1: {
-                name: 'goat anti rabbit'
+                name: 'goat anti rabbit HRP'
+            },
+            2: {
+                name: 'goat anti mouse HRP'
             }
         },
         lysate_kinds: {

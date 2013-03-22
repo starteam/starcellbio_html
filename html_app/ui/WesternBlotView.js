@@ -76,16 +76,15 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (eleme
     if (event) {
         var rows_count = parsed.western_blot.rows_state();
         scb.ui.static.MainFrame.refresh();
-        if( rows_count.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1))
-        {
-            var element = $('.scb_f_western_blot_sample_active[cell_treatment_id="'+cell_treatment_id+'"]');
+        if (rows_count.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
+            var element = $('.scb_f_western_blot_sample_active[cell_treatment_id="' + cell_treatment_id + '"]');
             var parent = $(element).parent();
-            var note = $("<span>"+rows_count.valid+"</span>");
+            var note = $("<span>" + rows_count.valid + "</span>");
             note.appendTo(parent);
             console.info(parent);
-            setTimeout( function() {
+            setTimeout(function () {
                 $(note).detach();
-            },500);
+            }, 500);
         }
     }
 }
@@ -242,6 +241,11 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_active_all', function (e, ui) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active_all(this);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_tab', function (e, ui) {
+        var link = $('a', $(this));
+        document.location = link.attr('href');
+        e.preventDefault();
+    })
 
 }
 
@@ -275,6 +279,12 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             kinds: template.lysate_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
+        if (kind == 'sample_prep') {
+            if (_.keys(template.lysate_kinds).length == 1) {
+                $('button.scb_f_western_blot_sample_remove').hide();
+            }
+
+        }
         if (kind == 'prepare_gel') {
             //$('.scb_s_western_blot_choose_samples_order_list').sortable();
             scb.ui.static.WesternBlotView.populate_wells(rows_state.rows, state, gstate);
@@ -283,6 +293,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         if (state.western_blot.gel_type == null) {
             $('.scb_s_western_blot_samples_area').children().not('.scb_s_western_blot_choose_gel_type').css('opacity', '.25');
             $('.scb_s_western_blot_samples_gel_area').css('opacity', '.25');
+            $('canvas', $('.scb_s_western_blot_samples_gel_area')).hide();
         }
 
 //        if (rows_state.valid >= (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
