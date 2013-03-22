@@ -55,6 +55,11 @@ mit706s13.register = function (dialog, state) {
         $('input[type=checkbox]' , dialog).attr('checked','checked');
     });
 
+    scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_title_close', function (e) {
+        $(dialog).detach();
+        scb.utils.call_back(state.close);
+    });
+
 }
 
 mit706s13.setup = function (state) {

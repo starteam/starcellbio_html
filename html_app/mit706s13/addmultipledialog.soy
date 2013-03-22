@@ -7,7 +7,9 @@
 */
 {template .dialog}
 <div class='scb_mit706s16_inner_dialog'>
-    <h1 class='scb_mit706s16_inner_dialog_title'> Add multiple rows </h1>
+    <h1 class='scb_mit706s16_inner_dialog_title'>
+        <span class='scb_mit706s16_inner_dialog_title_close'>X</span>
+        Add multiple rows </h1>
 
     <div class='scb_mit706s16_inner_dialog_body'>
         {foreach $cell_line in keys($template.ui.add_multiple_dialog)}
