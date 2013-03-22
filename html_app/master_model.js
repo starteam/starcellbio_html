@@ -796,7 +796,19 @@ var __assigment_tufts = {
                                     primary_anti_body: [3]
                                 }
                             ],
-                            'below_marks': []
+                            'below_marks': [
+                                {
+                                                                    name: 'P-ERK',
+                                                                    weight: 44,
+                                                                    intensity: -.1,
+                                                                    primary_anti_body: [1]
+                                                                },
+                                                                {
+                                                                    name: 'P-ERK',
+                                                                    weight: 42,
+                                                                    intensity: -.1,
+                                                                    primary_anti_body: [1]
+                                                                },]
                         },
                         {
                             'cell_line': 'wt',

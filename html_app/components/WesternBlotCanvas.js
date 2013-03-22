@@ -104,6 +104,24 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
                     console.info("BG Mark intensity: " + mark.intensity + " " + tab.exposure + " " + sample_mark.intensity);
                 }
             }
+            var consolidated_lane = {} ;
+            _.each( lane.marks , function(elem) {
+                if( consolidated_lane[elem.position] )
+                {
+                    consolidated_lane[elem.position] += elem.intensity;
+                }
+                else
+                {
+                    consolidated_lane[elem.position] = elem.intensity;
+                }
+            });
+            lane.marks = [];
+            _.each( consolidated_lane , function( value, key ) {
+                lane.marks.push( {
+                    position: parseFloat(key),
+                    intensity: value
+                });
+            });
             tab.lanes.push(lane);
         }
 
