@@ -2072,7 +2072,7 @@ var __assigment_706 = {
                         rows: [
                             {
                                 cells: [
-                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "30 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
@@ -2101,7 +2101,7 @@ var __assigment_706 = {
                             },
                             {
                                 cells: [
-                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "37 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
@@ -2318,7 +2318,7 @@ var __assigment_706 = {
                         rows: [
                             {
                                 cells: [
-                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "30 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
@@ -2347,7 +2347,7 @@ var __assigment_706 = {
                             },
                             {
                                 cells: [
-                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "37 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
@@ -2384,7 +2384,7 @@ var __assigment_706 = {
                         rows: [
                             {
                                 cells: [
-                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "30 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
@@ -2413,7 +2413,7 @@ var __assigment_706 = {
                             },
                             {
                                 cells: [
-                                    {kind: 'text', text: 'Media Only'},
+                                    {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "37 'C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
