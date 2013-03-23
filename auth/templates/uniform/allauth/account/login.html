@@ -2,7 +2,7 @@
 
 {% load url from future %}
 {% load i18n %}
-{% load bootstrap %}
+{% load uni_form_tags %}
 {% load account %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
@@ -32,18 +32,19 @@ below:{% endblocktrans %}</p>
 
 {% endif %}
 
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
+<form class="login uniForm" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
-  {{ form|bootstrap }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <div class="form-actions">
-    <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
-    <a class="btn" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+  <fieldset class="inlineLabels">
+    {{ form|as_uni_form }}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <div class="buttonHolder">
+      <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
 
-  </div>
+      <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+    </div>
+  </fieldset>
 </form>
 
 {% endblock %}

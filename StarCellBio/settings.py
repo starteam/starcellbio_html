@@ -141,7 +141,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'frontend_tests',
     'rest_framework',
-    'scb_rest'
+    'scb_rest',
+    'backend'
 ) + auth.settings.INSTALLED_APPS
 
 # A sample logging configuration. The only tangible logging

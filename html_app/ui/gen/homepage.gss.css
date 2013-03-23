@@ -349,3 +349,17 @@
 .scb_no_underline, a {
   text-decoration: none;
 }
+#saving {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 10pt;
+  background-color: green;
+  color: white;
+  display: inline;
+}
+#saving_message {
+  display: inline-block;
+  font-size: 8pt;
+  background-color: red;
+}

@@ -460,3 +460,19 @@
 a {
     text-decoration: none;
 }
+
+#saving {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size:10pt;
+    background-color:green;
+    color:white;
+    display:inline;
+}
+
+#saving_message {
+    display: inline-block;
+    font-size:8pt;
+    background-color:red;
+}

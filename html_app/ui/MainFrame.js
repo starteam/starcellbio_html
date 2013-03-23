@@ -130,6 +130,20 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.ui.static.WesternBlotGelView.register(workarea);
     scb.ui.static.FacsView.register(workarea);
 
+    scb.ui.static.MainFrame.in_ajax = false;
+    scb.ui.static.MainFrame.show_in_ajax = false;
+    scb.ui.static.MainFrame.show_in_ajax_message = '';
+
+    scb.ui.static.MainFrame.in_ajax_display = function () {
+        var saving = $('#saving');
+        if (scb.ui.static.MainFrame.show_in_ajax) {
+            saving.show();
+            $('#saving_message', saving).html(scb.ui.static.MainFrame.show_in_ajax_message);
+        }
+        else {
+            saving.hide();
+        }
+    }
     scb.ui.static.MainFrame.save = function () {
         var tmp;
         try {
@@ -140,7 +154,24 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             assignment.selected.experiments.selected_id = null;
         } catch (ex) {
         }
-        localStorage.setItem("scb_master_model", JSON.stringify(master_model));
+        var model_string = JSON.stringify(master_model);
+        if (localStorage.getItem("scb_master_model") != model_string) {
+            master_model.timestamp = (new Date()).getTime();
+            model_string = JSON.stringify(master_model);
+            localStorage.setItem("scb_master_model", JSON.stringify(master_model));
+            if (!scb.ui.static.MainFrame.in_ajax) {
+                scb.ui.static.MainFrame.in_ajax = true;
+                scb.ui.static.MainFrame.show_in_ajax = true;
+                scb.ui.static.MainFrame.show_in_ajax_message = '';
+                scb.ui.static.MainFrame.in_ajax_display();
+                scb.utils.server.save(model_string, function (state) {
+                    scb.ui.static.MainFrame.in_ajax = false;
+                    scb.ui.static.MainFrame.show_in_ajax = !state.success;
+                    scb.ui.static.MainFrame.show_in_ajax_message = !state.success ? 'Failed, will retry in 30 seconds.' : '';
+                    scb.ui.static.MainFrame.in_ajax_display();
+                });
+            }
+        }
         try {
             assignment.experiments.selected_id = tmp;
         } catch (ex) {
@@ -152,18 +183,16 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         starcellbio(context.ui, master_model);
     }
 
-    scb.ui.static.MainFrame.clear = function() {
-        var r=prompt("This will restart whole assignment. Your saved data will be lost. Type: 'YES' to proceed.");
-        if(r == 'YES')
-        {
-            self.show({view:'assignments'});
+    scb.ui.static.MainFrame.clear = function () {
+        var r = prompt("This will restart whole assignment. Your saved data will be lost. Type: 'YES' to proceed.");
+        if (r == 'YES') {
+            self.show({view: 'assignments'});
             master_model = master_model_data;
             scb.ui.static.MainFrame.save();
             starcellbio(context.ui, master_model);
         }
-        else
-        {
-            alert( "Operation canceled!\n If you wanted to clear everything type YES in previous dialog.");
+        else {
+            alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.");
         }
     }
 
@@ -459,6 +488,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 //			});
 //
 //		}
+        scb.ui.static.MainFrame.in_ajax_display();
 
     }
 
