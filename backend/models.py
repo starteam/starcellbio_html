@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 
 # Create your models here.
 
@@ -10,3 +11,5 @@ class UserAssignments(models.Model):
     user = models.ForeignKey(User, unique=True)
     data = models.TextField()
     timestamp = models.BigIntegerField()
+
+admin.site.register(UserAssignments)
