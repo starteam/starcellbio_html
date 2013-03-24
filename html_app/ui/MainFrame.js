@@ -164,7 +164,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 scb.ui.static.MainFrame.show_in_ajax = true;
                 scb.ui.static.MainFrame.show_in_ajax_message = '';
                 scb.ui.static.MainFrame.in_ajax_display();
-                scb.utils.server.save(model_string, function (state) {
+                scb.utils.server.call(model_string, function (state) {
                     scb.ui.static.MainFrame.in_ajax = false;
                     scb.ui.static.MainFrame.show_in_ajax = !state.success;
                     scb.ui.static.MainFrame.show_in_ajax_message = !state.success ? 'Failed, will retry in 30 seconds.' : '';

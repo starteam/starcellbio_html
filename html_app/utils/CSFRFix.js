@@ -81,24 +81,32 @@ scb.utils.server.is_auth = function (callback) {
     }});
 }
 
-scb.utils.server.save = function (data, callback) {
-    $.ajax({url: '/scb/is_auth', data: data, type: 'POST', success: function (a, b) {
+scb.utils.server.call = function (data, callback) {
+    $.ajax({url: '/scb/is_auth', data: data, type: data ? 'POST' : 'GET', success: function (a, b) {
         if (b == "success") {
             var ret = JSON.parse(a);
             console.info(ret);
+            if (ret.command && ret.command.load) {
+                ret.data = window[ret.command.load];
+            }
             scb.utils.call_back(callback, {
                 success: true,
-                data: ret
+                data: ret.data,
+                user: ret.user
             });
         }
         else {
             scb.utils.call_back(callback, {
                 success: false,
-                data: { user: null }
+                data: null,
+                user: null
             });
         }
+    }, error: function () {
+        scb.utils.call_back(callback, {
+            success: false,
+            data: null,
+            user: null
+        });
     }});
-//    scb.utils.call_back(callback, {
-//        success: true,
-//    });
 }
