@@ -66,7 +66,7 @@
 .scb_s_experiment_design_technique_wb, .scb_s_experiment_design_technique_flow, .scb_s_experiment_design_technique_micro {
   display: inline-block;
   width: 200px;
-  border: 1px solid transparent;
+  border: 1px solid #b9b9b9;
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 20px;
@@ -94,5 +94,11 @@
   opacity: .75;
 }
 .scb_s_experiment_design_technique:hover {
+  position: relative;
   border-color: #b9b9b9;
+  border-width: 3px;
+  top: -2px;
+  left: -2px;
+  padding-right: 16px;
+  padding-bottom: 4px;
 }

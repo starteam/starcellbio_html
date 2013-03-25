@@ -20,7 +20,7 @@ def home(request):
 
 def is_auth(request):
     response = HttpResponse(json.dumps({'user': None}))
-    pudb.set_trace()
+    #pudb.set_trace()
     if request.user.is_authenticated():
     # Do something for authenticated users.
         ua, created = UserAssignments.objects.get_or_create(user=request.user)

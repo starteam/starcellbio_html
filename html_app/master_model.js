@@ -377,8 +377,8 @@ var __assignment2 = {
 
 var __assigment_tufts = {
     id: 'assignment_tufts',
-    name: 'Assignment for TUFTS',
-    description: 'TUFTS prototype assignment.',
+    name: 'Bio52 Assignment',
+    description: 'Bio52 Homework Assignment.',
     experiments: {
     },
     template: {
@@ -389,6 +389,7 @@ var __assigment_tufts = {
             },
             experiment_setup: {
                 table: [ //
+                    {kind: "cell_plate", title: " ", editable: false},
                     {kind: 'cell_line', title: 'Strain', editable: false}, //
                     {kind: 'treatments',
                         children: [//
@@ -421,7 +422,7 @@ var __assigment_tufts = {
             western_blot: {},
             add_multiple_dialog: {
                 'wt': {
-                    title: 'Strain: Wild Type',
+                    title: '<b>Strain:</b> Wild Type',
                     headings: [
                         'Select', 'Treatment Protocol'
                     ],
@@ -801,17 +802,18 @@ var __assigment_tufts = {
                             ],
                             'below_marks': [
                                 {
-                                                                    name: 'P-ERK',
-                                                                    weight: 44,
-                                                                    intensity: -.1,
-                                                                    primary_anti_body: [1]
-                                                                },
-                                                                {
-                                                                    name: 'P-ERK',
-                                                                    weight: 42,
-                                                                    intensity: -.1,
-                                                                    primary_anti_body: [1]
-                                                                },]
+                                    name: 'P-ERK',
+                                    weight: 44,
+                                    intensity: -.1,
+                                    primary_anti_body: [1]
+                                },
+                                {
+                                    name: 'P-ERK',
+                                    weight: 42,
+                                    intensity: -.1,
+                                    primary_anti_body: [1]
+                                },
+                            ]
                         },
                         {
                             'cell_line': 'wt',
@@ -2032,6 +2034,7 @@ var __assigment_706 = {
                 },
                 experiment_setup: {
                     table: [ //
+                        {kind: "cell_plate", title: " ", editable: false},
                         {kind: 'cell_line', title: 'Strain', editable: false}, //
                         {kind: 'treatments',
                             children: [//

@@ -49,7 +49,14 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
     if (parsed.western_blot_gel.primary_anti_body && parsed.western_blot_gel.secondary_anti_body) {
         parsed.western_blot_gel.is_developed = true;
         if (parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name) {
-            parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name;
+            var gel_name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name;
+            var counter = 0;
+            _.find(parsed.western_blot.gel_list.list, function (e) {
+                if (e.name.indexOf(gel_name) == 0) {
+                    counter++
+                }
+            });
+            parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name + (counter == 0 ? '' : ' - ' + (counter + 1));
         }
     } else {
         alert("Please select primary & secondary antibodies.");
@@ -198,8 +205,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         slider_value.css('top', (y - 12) + 'px');
         var ww = Math.round(c.position_to_weight(y));
         var weight = ww > 0 ? ww + " kDa" : "N/A";
-        if(!parsed.western_blot.marker_loaded)
-        {
+        if (!parsed.western_blot.marker_loaded) {
             weight = "NaN";
         }
         slider_value.html(weight);
@@ -216,25 +222,29 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     set_slider(gel.canvas_metadata.slider);
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
         var poffset = $(element).offset();
-        var eX = evt.clientX ;
-        var eY = evt.clientY ;
+        var eX = evt.clientX;
+        var eY = evt.clientY;
 
-        console.info( (eY - poffset.top ) + " " + (eX - poffset.left )  );
-        var y = evt.offsetY || (eY - poffset.top);
-        var x = evt.offsetX || (eX - poffset.left);
+        var y = (eY - poffset.top) - 14;
+        var x = (eX - poffset.left);
+        4
         if (true || $(evt.srcElement).is('canvas')) {
-            set_slider(gel.canvas_metadata.slider);
             gel.canvas_metadata.slider = y;
-            if (y < 2 || y > 285 || x < 2 || x > 360) {
+            if (y < 22 || y > 285 || x < 2 || x > 360) {
+                console.info("hide");
+
                 slider.hide();
                 slider_value.hide();
                 delete gel.canvas_metadata.slider;
+            } else {
+                console.info("show " + x + " " + y);
+                set_slider(gel.canvas_metadata.slider);
             }
         }
     });
     $(parent).unbind('mouseout').bind('mouseout', function (evt) {
-        slider.hide();
-        slider_value.hide();
+//        slider.hide();
+//        slider_value.hide();
     });
 }
 

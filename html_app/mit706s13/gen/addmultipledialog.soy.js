@@ -11,35 +11,35 @@ scb_mit706s16.dialog = function(opt_data, opt_sb) {
   var cell_lineListLen4 = cell_lineList4.length;
   for (var cell_lineIndex4 = 0; cell_lineIndex4 < cell_lineListLen4; cell_lineIndex4++) {
     var cell_lineData4 = cell_lineList4[cell_lineIndex4];
-    output.append((opt_data.template.ui.add_multiple_dialog[cell_lineData4].title) ? '<h1>' + soy.$$escapeHtml(opt_data.template.ui.add_multiple_dialog[cell_lineData4].title) + '</h1>' : '<h1>' + soy.$$escapeHtml(opt_data.template.cell_lines[cell_lineData4].name) + '</h1>', '<table class="scb_s_experiment_setup_table"><thead class="scb_s_experiment_setup_table_head">');
-    var headingList15 = opt_data.template.ui.add_multiple_dialog[cell_lineData4].headings;
-    var headingListLen15 = headingList15.length;
-    for (var headingIndex15 = 0; headingIndex15 < headingListLen15; headingIndex15++) {
-      var headingData15 = headingList15[headingIndex15];
-      output.append('<td class=\'scb_s_experiment_setup_table_heading\'>', soy.$$escapeHtml(headingData15), '</td>');
+    output.append((opt_data.template.ui.add_multiple_dialog[cell_lineData4].title) ? '<h1>' + opt_data.template.ui.add_multiple_dialog[cell_lineData4].title + '</h1>' : '<h1>' + soy.$$escapeHtml(opt_data.template.cell_lines[cell_lineData4].name) + '</h1>', '<table class="scb_s_experiment_setup_table"><thead class="scb_s_experiment_setup_table_head">');
+    var headingList16 = opt_data.template.ui.add_multiple_dialog[cell_lineData4].headings;
+    var headingListLen16 = headingList16.length;
+    for (var headingIndex16 = 0; headingIndex16 < headingListLen16; headingIndex16++) {
+      var headingData16 = headingList16[headingIndex16];
+      output.append('<td class=\'scb_s_experiment_setup_table_heading\'>', soy.$$escapeHtml(headingData16), '</td>');
     }
     output.append('</thead><tbody class="scb_s_experiment_setup_table_body">');
-    var rowsList21 = opt_data.template.ui.add_multiple_dialog[cell_lineData4].rows;
-    var rowsListLen21 = rowsList21.length;
-    for (var rowsIndex21 = 0; rowsIndex21 < rowsListLen21; rowsIndex21++) {
-      var rowsData21 = rowsList21[rowsIndex21];
+    var rowsList22 = opt_data.template.ui.add_multiple_dialog[cell_lineData4].rows;
+    var rowsListLen22 = rowsList22.length;
+    for (var rowsIndex22 = 0; rowsIndex22 < rowsListLen22; rowsIndex22++) {
+      var rowsData22 = rowsList22[rowsIndex22];
       output.append('<tr>');
-      var cellList23 = rowsData21.cells;
-      var cellListLen23 = cellList23.length;
-      for (var cellIndex23 = 0; cellIndex23 < cellListLen23; cellIndex23++) {
-        var cellData23 = cellList23[cellIndex23];
-        output.append('<td class=\'scb_s_experiment_setup_table_border\'>', (cellData23.kind == 'text') ? soy.$$escapeHtml(cellData23.text) : '');
-        if (cellData23.kind == 'select') {
-          output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(rowsData21.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\'><option disabled="disabled">Please select</option>');
-          var keyList41 = soy.$$getMapKeys(opt_data.template[cellData23.field]);
-          var keyListLen41 = keyList41.length;
-          for (var keyIndex41 = 0; keyIndex41 < keyListLen41; keyIndex41++) {
-            var keyData41 = keyList41[keyIndex41];
-            output.append('<option value=\'', soy.$$escapeHtml(opt_data.template[cellData23.field][keyData41]), '\'>', soy.$$escapeHtml(opt_data.template[cellData23.field][keyData41].name), '</option>');
+      var cellList24 = rowsData22.cells;
+      var cellListLen24 = cellList24.length;
+      for (var cellIndex24 = 0; cellIndex24 < cellListLen24; cellIndex24++) {
+        var cellData24 = cellList24[cellIndex24];
+        output.append('<td class=\'scb_s_experiment_setup_table_border\'>', (cellData24.kind == 'text') ? soy.$$escapeHtml(cellData24.text) : '');
+        if (cellData24.kind == 'select') {
+          output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(rowsData22.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\'><option disabled="disabled">Please select</option>');
+          var keyList42 = soy.$$getMapKeys(opt_data.template[cellData24.field]);
+          var keyListLen42 = keyList42.length;
+          for (var keyIndex42 = 0; keyIndex42 < keyListLen42; keyIndex42++) {
+            var keyData42 = keyList42[keyIndex42];
+            output.append('<option value=\'', soy.$$escapeHtml(opt_data.template[cellData24.field][keyData42]), '\'>', soy.$$escapeHtml(opt_data.template[cellData24.field][keyData42].name), '</option>');
           }
           output.append('</select>');
         }
-        output.append((cellData23.kind == 'checkbox') ? '<input type="checkbox" name="' + soy.$$escapeHtml(cellData23.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(rowsData21.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData4) + '\'>' : '', '</td>');
+        output.append((cellData24.kind == 'checkbox') ? '<input type="checkbox" name="' + soy.$$escapeHtml(cellData24.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(rowsData22.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData4) + '\'>' : '', '</td>');
       }
       output.append('</tr>');
     }

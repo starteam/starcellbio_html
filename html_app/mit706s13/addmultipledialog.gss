@@ -20,7 +20,7 @@
 .scb_mit706s16_inner_dialog_title_close {
     font-size: 10pt;
     background-color: black;
-    padding:1px 2px 1px 3px;
+    padding:3px 4px 3px 4px;
     border-radius: 3px;
     float:right;
     cursor:pointer;
@@ -58,8 +58,15 @@
 
 .scb_mit706s16_inner_dialog_body > h1 {
     font-size: 12pt;
+    font-family: sourcesanspro-regular;
+}
+
+.scb_mit706s16_inner_dialog_body > h1 > b {
+    font-size: 12pt;
     font-family: sourcesanspro-semibold;
 }
+
+
 .scb_mit706s16_inner_dialog_cancel {
     width:180px;
     margin-left: 10px;
