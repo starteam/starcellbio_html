@@ -11,4 +11,9 @@ class UserAssignments(models.Model):
     data = models.TextField()
     timestamp = models.BigIntegerField(null=True)
 
+class UserAssignmentsLog(models.Model):
+    user = models.ForeignKey(User)
+    data = models.FileField(upload_to='logs')
+    timestamp = models.BigIntegerField(null=True)
+
 admin.site.register(UserAssignments)
