@@ -1,4 +1,5 @@
 microEntity = $('<div />').html('&#181;').text();
+degreeEntity = $('<div />').html('&deg;').text();
 
 var __assignment2 = {
     id: 'assignment_2',
@@ -150,7 +151,7 @@ var __assignment2 = {
         },
         experiment_temperatures: {
             '25': {
-                name: "25'C"
+                name: "25"+degreeEntity+"C"
             }
         },
         cell_lines: {
@@ -704,7 +705,7 @@ var __assigment_tufts = {
             }
         },
         experiment_temperatures: {
-            '25': { name: "25'C"    }
+            '25': { name: "25"+degreeEntity+"C"    }
         },
         cell_lines: {
             'wt': {
@@ -941,7 +942,7 @@ var __assigment_facs = {
             }
         },
         experiment_temperatures: {
-            '25': { name: "25'C"    }
+            '25': { name: "25"+degreeEntity+"C"    }
         },
         cell_lines: {
             'strain 1': {
@@ -1300,7 +1301,7 @@ var __basic_tests = {
         },
         experiment_temperatures: {
             '25': {
-                name: "25'C"
+                name: "25"+degreeEntity+"C"
             }
         },
         cell_lines: {
@@ -1780,7 +1781,7 @@ var __usability_test = {
         },
         experiment_temperatures: {
             '25': {
-                name: "25'C"
+                name: "25"+degreeEntity+"C"
             }
         },
         cell_lines: {
@@ -2077,7 +2078,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "30 'C"},
+                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2106,7 +2107,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "37 'C"},
+                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2135,7 +2136,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Nocodazole'},
-                                    {kind: 'text', text: "30 'C"},
+                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2165,7 +2166,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Nocodazole'},
-                                    {kind: 'text', text: "37 'C"},
+                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2196,7 +2197,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Hydroxyurea'},
-                                    {kind: 'text', text: "30 'C"},
+                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2226,7 +2227,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Hydroxyurea'},
-                                    {kind: 'text', text: "37 'C"},
+                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2256,7 +2257,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Alpha Factor'},
-                                    {kind: 'text', text: "30 'C"},
+                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2286,7 +2287,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Alpha Factor'},
-                                    {kind: 'text', text: "37 'C"},
+                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2323,7 +2324,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "30 'C"},
+                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2352,7 +2353,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "37 'C"},
+                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2389,7 +2390,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "30 'C"},
+                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2418,7 +2419,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "37 'C"},
+                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
                                     {kind: 'checkbox', name: 'PP1'},
                                     {kind: 'checkbox', name: 'NOPP1'}
                                 ],
@@ -2499,10 +2500,10 @@ var __assigment_706 = {
             },
             experiment_temperatures: {
                 '25': {
-                    name: "30'C"
+                    name: "30"+degreeEntity+"C"
                 },
                 '40': {
-                    name: "37'C"
+                    name: "37"+degreeEntity+"C"
                 }
             },
 
@@ -3024,8 +3025,14 @@ $(function () {
     __usability_test.template.experiment_setup = scb_model_usability.experiment_setup();
 
     __assigment_706.template.ui.experiment_setup.actions.push({
-        name: 'Add multiple',
-        open: 'mit706s13.setup'
+        name: 'ADD MULTIPLE ROWS',
+        open: 'mit706s13.setup',
+        css: {
+            width: '800px',
+            height: '800px',
+            left: '300px',
+            top: '200px'
+        }
     });
 
     __assigment_tufts.template.ui.experiment_setup.actions.push({
@@ -3033,7 +3040,7 @@ $(function () {
         open: 'mit706s13.setup',
         css: {
             width: '470px',
-            height: '380px',
+            height: '400px',
             left: '300px',
             top: '200px'
         }
