@@ -243,8 +243,12 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_tab', function (e, ui) {
         var link = $('a', $(this));
-        document.location = link.attr('href');
-        e.preventDefault();
+        var href = link.attr('href');
+        if( href )
+        {
+            document.location = href;
+            e.preventDefault();
+        }
     })
 
 }

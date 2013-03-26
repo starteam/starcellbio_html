@@ -77,22 +77,28 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                         var rule = rules[rule_index];
                         if (rule.transfer_function == 'static') {
                             if (lane.cell_treatment.cell_line == rule.cell_line || rule.cell_line == '*ANY*') {
-
-                                var rule_marks = rule.marks;
-                                for (var rule_mark_index in rule_marks) {
-                                    var rule_mark = rule_marks[rule_mark_index];
-                                    if (anti_body_match(rule_mark.primary_anti_body, gel, template)) {
-                                        var intensity = rule_mark.intensity;
-                                        var update_mark = _.find(lane_marks, function (e) {
-                                            return e.weight == rule_mark.weight
-                                        });
-                                        if (scb.utils.isDefined(update_mark)) {
-                                            update_mark.intensity += intensity;
-                                        } else {
-                                            lane_marks.push({
-                                                weight: rule_mark.weight,
-                                                intensity: intensity
+                                var keep = true;
+                                if (rule.temperature) {
+                                    var value = scb.utils.get(lane, ["cell_treatment", "treatment_list", "list", 0, "temperature"], null);
+                                    keep = ( rule.temperature == value );
+                                }
+                                if (keep) {
+                                    var rule_marks = rule.marks;
+                                    for (var rule_mark_index in rule_marks) {
+                                        var rule_mark = rule_marks[rule_mark_index];
+                                        if (anti_body_match(rule_mark.primary_anti_body, gel, template)) {
+                                            var intensity = rule_mark.intensity;
+                                            var update_mark = _.find(lane_marks, function (e) {
+                                                return e.weight == rule_mark.weight
                                             });
+                                            if (scb.utils.isDefined(update_mark)) {
+                                                update_mark.intensity += intensity;
+                                            } else {
+                                                lane_marks.push({
+                                                    weight: rule_mark.weight,
+                                                    intensity: intensity
+                                                });
+                                            }
                                         }
                                     }
                                 }
@@ -112,18 +118,20 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
 
                                         for (var mark_index in marks_list) {
                                             var rule_mark = marks_list[mark_index];
-                                            if (anti_body_match(rule_mark.primary_anti_body, gel, template)) {
-                                                var intensity = rule_mark.intensity;
-                                                var update_mark = _.find(lane_marks, function (e) {
-                                                    return e.weight == rule_mark.weight
-                                                });
-                                                if (scb.utils.isDefined(update_mark)) {
-                                                    update_mark.intensity += intensity;
-                                                } else {
-                                                    lane_marks.push({
-                                                        weight: rule_mark.weight,
-                                                        intensity: intensity
+                                            if (rule_mark) {
+                                                if (anti_body_match(rule_mark.primary_anti_body, gel, template)) {
+                                                    var intensity = rule_mark.intensity;
+                                                    var update_mark = _.find(lane_marks, function (e) {
+                                                        return e.weight == rule_mark.weight
                                                     });
+                                                    if (scb.utils.isDefined(update_mark)) {
+                                                        update_mark.intensity += intensity;
+                                                    } else {
+                                                        lane_marks.push({
+                                                            weight: rule_mark.weight,
+                                                            intensity: intensity
+                                                        });
+                                                    }
                                                 }
                                             }
                                         }
@@ -139,6 +147,8 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
     }
 
     self.compute = function (lane, gel, lane_marks) {
-        return self.cyto(lane, gel, lane_marks);
+        var ret = self.cyto(lane, gel, lane_marks);
+        console.info(lane_marks);
+        return ret;
     }
 }

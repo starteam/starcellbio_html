@@ -2059,12 +2059,13 @@ var __assigment_706 = {
                         ]},
                     }
                 },
-                western_blot: {format: "%CELL_LINE%, %TREATMENT%, %TEMPERATURE%",
+                western_blot: {format: "%CELL_LINE%, %TREATMENT%, %TEMPERATURE%, %PP1%",
                     keys: {
                         '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                         '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
                         '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
-                        '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']}
+                        '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']},
+                        '%PP1%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '1', 'drug_id'], map: ['drugs', '%KEY%', 'short_name'], default: ''}
                     }
                 },
                 add_multiple_dialog: {
@@ -2491,7 +2492,8 @@ var __assigment_706 = {
                 },
                 'pp1': {
                     name: 'Protein Phosphatase 1',
-                    concentrations: ['1u']
+                    concentrations: ['1u'],
+                    short_name: 'PP1'
                 }
 
             },
@@ -2692,15 +2694,264 @@ var __assigment_706 = {
                                     },
                                     {
                                         name: 'Cdk2',
-                                        weight: 35, // 34&35
+                                        weight: 34, // 34&35
                                         intensity: 1,
                                         primary_anti_body: ['cdk2']
                                     },
                                     {
                                         name: 'Cdk2',
-                                        weight: 36, // 34&35
+                                        weight: 35, // 34&35
                                         intensity: 1,
                                         primary_anti_body: ['cdk2']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: 'wt',
+                                marks: [
+                                    {
+                                        name: 'Rad21',
+                                        weight: 29.5, // 34&35
+                                        intensity: .1,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 19.9, // 34&35
+                                        intensity: .1,
+                                        primary_anti_body: ['rad21']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: 'm1',
+                                temperature: '40',
+                                marks: [
+                                    {
+                                        name: 'Cdt1',
+                                        weight: 65,
+                                        intensity: -1,
+                                        primary_anti_body: ['cdt1']
+                                    },
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 36, //35&36
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -1,
+                                        primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: -1,
+                                        primary_anti_body: ['cyclinE']
+                                    },
+                                    {
+                                        name: 'Securin',
+                                        weight: 41.8,
+                                        intensity: -1,
+                                        primary_anti_body: ['securin']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 68, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 29.5, // 34&35
+                                        intensity: 1,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 19.9, // 34&35
+                                        intensity: 1,
+                                        primary_anti_body: ['rad21']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: 'm2',
+                                temperature: '40',
+                                marks: [
+                                    {
+                                        name: 'Cdt1',
+                                        weight: 65,
+                                        intensity: -.8,
+                                        primary_anti_body: ['cdt1']
+                                    },
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 35, //35&36
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -1,
+                                        primary_anti_body: ['cyclin']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'Nocodazole',
+                                cell_line: 'wt',
+                                above_marks: [
+                                    {
+                                        name: 'Cdt1',
+                                        weight: 65,
+                                        intensity: -2,
+                                        primary_anti_body: ['cdt1']
+                                    },
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 36, //35&36
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: -1,
+                                        primary_anti_body: ['cyclinE']
+                                    },
+                                    ,
+                                    {
+                                        name: 'Rad21',
+                                        weight: 29.5, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 19.9, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['rad21']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'Hydroxyurea',
+                                cell_line: 'wt',
+                                above_marks: [
+                                    {
+                                        name: 'Cdt1',
+                                        weight: 65,
+                                        intensity: -.8,
+                                        primary_anti_body: ['cdt1']
+                                    },
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 35, //35&36
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -1,
+                                        primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 29.5, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 19.9, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['rad21']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'Alpha',
+                                cell_line: 'wt',
+                                above_marks: [
+                                    {
+                                        name: 'Cdt1',
+                                        weight: 65,
+                                        intensity: 0,
+                                        primary_anti_body: ['cdt1']
+                                    },
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 35, //35&36
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 34, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -1,
+                                        primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 29.5, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 19.9, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['rad21']
                                     }
                                 ]
                             }

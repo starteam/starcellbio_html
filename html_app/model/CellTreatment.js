@@ -53,8 +53,8 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
             var keys = template.ui.western_blot.keys;
             var resolve = function(value)
             {
-
                 var ret = self;
+                var success = true;
                 _.each(value.attr,function(e){
                     if(!_.isUndefined(ret[e]))
                     {
@@ -62,6 +62,7 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
                     }
                     else
                     {
+                        success = false;
                         console.debug( "UNKNOWN KEY " + e + " IN scb.CellTreatment.format_row");
                     }
                 });
@@ -80,6 +81,10 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
                         console.debug( "UNKNOWN KEY " + e + " IN scb.CellTreatment.format_row 2");
                     }
                 })
+                if(! success && scb.utils.isDefined(value.default) )
+                {
+                    text = value.default;
+                }
                 return text;
             }
             _.each(keys, function(value,key,keys){
