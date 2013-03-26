@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 import json
 import pudb
 from backend.models import UserAssignments, UserAssignmentsLog
-import bz2
+#import bz2
 import StringIO
 from django.core.files.base import ContentFile
 
@@ -31,9 +31,10 @@ def is_auth(request):
                 command = {'load': '__assigment_tufts'}
                 ua.timestamp = 0
                 ual = UserAssignmentsLog.objects.create(user=request.user, timestamp=timestamp)
-                cd = bz2.BZ2Compressor()
-                cd.compress(command)
-                cd = cd.flush()
+                #cd = bz2.BZ2Compressor()
+                #cd.compress(command)
+                #cd = cd.flush()
+                cd = command
                 ual.data.save("{0}_{1}.json.bz".format(request.user.username,timestamp),ContentFile(cd),save=True)
                 ual.save()
                 response = HttpResponse(json.dumps({'user': request.user.username, 'data': ua.data, 'command': command}))
@@ -48,9 +49,10 @@ def is_auth(request):
                     ua.data = request.body
                     ua.save()
                     ual = UserAssignmentsLog.objects.create(user=request.user, timestamp=timestamp)
-                    cd = bz2.BZ2Compressor()
-                    cd.compress(request.body)
-                    cd = cd.flush()
+                    #cd = bz2.BZ2Compressor()
+                    #cd.compress(request.body)
+                    #cd = cd.flush()
+                    cd = request.body
                     ual.data.save("{0}_{1}.json.bz".format(request.user.username,timestamp),ContentFile(cd),save=True)
                     ual.save()
 
