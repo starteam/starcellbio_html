@@ -87,7 +87,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             }
 
             function normalize(data,factor) {
-                var factor = factor || .15;
+                var factor = factor || .25;
                 var sum = 0;
                 _.each(data, function (s) {
                     sum += s[1];
@@ -157,14 +157,14 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 var data = [];
                 var bias = (Math.random() -.5)*.05;
                 for (var x = 0; x < 3; x += .01) {
-                    var y = g0g1(x+bias) + g2m(x+bias) + near_zero(x+bias) + s(x+bias);
+                    var y = g0g1(x+bias) + 3*g2m(x+bias) + near_zero(x+bias) + s(x+bias);
                     data.push([x, y]);
 
                 }
                 normalize(data);
                 state.data = {
                     data: [
-                        {label: 'DNA Content', data: data},
+                        { data: data},
 //                        {label: 'phase 1', data:[[0,0.01],[0.8,0.01]],lines:{fill:false}},
 //                        {label: 'phase 2', data:[[0.8,0.011],[1.2,0.011]],lines:{fill:false}},
 //                        {label: 'phase 3', data:[[1.2,0.01],[1.8,0.01]],lines:{fill:false}},
@@ -184,7 +184,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 normalize(data);
                 state.data = {
                     data: [
-                        {label: 'DNA Content', data: data}
+                        { data: data}
                     ],
                     options: options
                 };
@@ -202,7 +202,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 normalize(data);
                 state.data = {
                     data: [
-                        {label: 'DNA Content', data: data}
+                        { data: data}
                     ],
                     options: options
                 };
@@ -216,7 +216,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 normalize(data);
                 state.data = {
                     data: [
-                        {label: 'DNA Content', data: data}
+                        { data: data}
                     ],
                     options: options
                 };

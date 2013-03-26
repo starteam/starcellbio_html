@@ -38,7 +38,6 @@
 .scb_s_facs_sample_selected {
   border-radius: 5px;
   background-color: #e0e0e0;
-  list-style: disc;
 }
 .scb_s_facs_progress {
   display: block;
