@@ -54,12 +54,14 @@ def is_auth(request):
                     ual.data.save("{0}_{1}.json.bz".format(request.user.username,timestamp),ContentFile(cd),save=True)
                     ual.save()
 
-                    return HttpResponse(json.dumps({'user': request.user.username, 'data': ua.data}))
+                    response = HttpResponse(json.dumps({'user': request.user.username, 'data': ua.data}))
             except:
                 response = HttpResponse(
                     json.dumps({'user': request.user.username, 'data': None, 'command': {'alert': 'Failed to save!'}}))
     else:
+        json_object = json.loads(request.body)
         pass
         # Do something for anonymous users.
     response.set_cookie("scb_username", request.user.username)
+    response['Content-Type']='text/json'
     return response

@@ -11,7 +11,7 @@ urlpatterns = patterns('',
                        # Examples:
                        url(r'^$', "StarCellBio.views.home", name='home'),
                        url(r'^index.html$', "StarCellBio.views.home", name='home'),
-                       url(r'^scb/is_auth$', "StarCellBio.views.is_auth", name='is_auth'),
+                       url(r'^scb/is_auth/$', "StarCellBio.views.is_auth", name='is_auth'),
 
                        # url(r'^StarCellBio/', include('StarCellBio.foo.urls')),
 

@@ -63,7 +63,7 @@ scb.utils.getCsfrToken = function () {
 
 scb.utils.server.is_auth = function (callback) {
 
-    $.ajax({url: '/scb/is_auth', data: '', type: 'GET', success: function (a, b, c) {
+    $.ajax({url: '/scb/is_auth/', data: '', type: 'GET', success: function (a, b, c) {
         if (b == "success") {
             var ret = JSON.parse(a);
             console.info(ret);
@@ -82,31 +82,44 @@ scb.utils.server.is_auth = function (callback) {
 }
 
 scb.utils.server.call = function (data, callback) {
-    $.ajax({url: '/scb/is_auth', data: data, type: data ? 'POST' : 'GET', success: function (a, b) {
-        if (b == "success") {
-            var ret = JSON.parse(a);
-            console.info(ret);
-            if (ret.command && ret.command.load) {
-                ret.data = window[ret.command.load];
+    console.info("Startnig AJAX call " + data.length);
+    $.ajax({url: '/scb/is_auth/', type: data ? 'POST' : 'GET',
+        data: data,
+//        context: document.body,
+//        cache: false,
+//        dataType: "application/json",
+        processData: false,
+        success: function (a, b) {
+            if (b == "success") {
+                var ret = a;
+                console.info(ret);
+                if (ret.command && ret.command.load) {
+                    ret.data = window[ret.command.load];
+                }
+                scb.utils.call_back(callback, {
+                    success: true,
+                    data: ret.data,
+                    user: ret.user
+                });
             }
-            scb.utils.call_back(callback, {
-                success: true,
-                data: ret.data,
-                user: ret.user
-            });
-        }
-        else {
+            else {
+                scb.utils.call_back(callback, {
+                    success: false,
+                    data: null,
+                    user: null
+                });
+            }
+        }, error: function (a, b, c) {
+            console.info(a);
+            console.info(b);
+            console.info(c);
+
             scb.utils.call_back(callback, {
                 success: false,
                 data: null,
                 user: null
             });
         }
-    }, error: function () {
-        scb.utils.call_back(callback, {
-            success: false,
-            data: null,
-            user: null
-        });
-    }});
+
+    });
 }
