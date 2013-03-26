@@ -22,7 +22,7 @@ FACS Main View
     {param experiment_name:$experiment.name/}
     {param assignment:$assignment/}
     {param experiment:$experiment/}
-    {param technique_name:'FACS' /}
+    {param technique_name:'FLOW CYTOMETRY' /}
     {param technique_view:'facs' /}
     {param technique_param:'facs_id' /}
     {param technique_id:$facs.id /}
@@ -213,7 +213,7 @@ FACS Main View
 </div>
 <a class='scb_s_navigation_button scb_f_facs_prepare_lysates' facs_id='{$facs.id}'
    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE LYSATES  &nbsp; &#9654;
+{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE SAMPLES  &nbsp; &#9654;
 </a>
 {/template}
 
@@ -330,7 +330,7 @@ FACS Main View
         </div>
         {if $facs.samples_finished}
         {else}
-        <button class='scb_f_facs_run_samples scb_s_gray_button' facs_id='{$facs.id}' assignment_id="{$assignment.id}"
+        <button class='scb_f_facs_run_samples scb_s_navigation_button' facs_id='{$facs.id}' assignment_id="{$assignment.id}"
                 experiment_id="{$experiment.id}">RUN SAMPLES
         </button>
         {/if}
