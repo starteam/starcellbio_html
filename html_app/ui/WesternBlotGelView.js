@@ -231,13 +231,10 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         if (true || $(evt.srcElement).is('canvas')) {
             gel.canvas_metadata.slider = y;
             if (y < 22 || y > 285 || x < 2 || x > 360) {
-                console.info("hide");
-
                 slider.hide();
                 slider_value.hide();
                 delete gel.canvas_metadata.slider;
             } else {
-                console.info("show " + x + " " + y);
                 set_slider(gel.canvas_metadata.slider);
             }
         }
