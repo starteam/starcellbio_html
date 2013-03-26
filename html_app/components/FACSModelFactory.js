@@ -132,7 +132,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     }
 
                 },
-                grid: {show: true, clickable: true, hoverable: true, borderWidth: 0, autoHighlight: true},
+                grid: {show: true, clickable: true, hoverable: true, borderWidth: 0, autoHighlight: false},
                 hooks: { bindEvents: [ function (plot, eventHolder) {
                     var xaxes = plot.getXAxes()[0];
                     var yaxes = plot.getYAxes()[0];

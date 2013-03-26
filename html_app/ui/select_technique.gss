@@ -24,7 +24,7 @@
     padding-left:3px;
 }
 
-.scb_s_select_technique_open_western_blot {
+.scb_s_select_technique_open_western_blot, .scb_s_select_technique_open_facs {
     border: 0px solid white;
     padding-left:15px;
     display: inline-block;

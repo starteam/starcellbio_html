@@ -158,7 +158,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         if (localStorage.getItem("scb_master_model") != model_string) {
             master_model.timestamp = (new Date()).getTime();
             model_string = JSON.stringify(master_model);
-            localStorage.setItem("scb_master_model", JSON.stringify(master_model));
+            localStorage.setItem("scb_master_model", model_string);
             if (!scb.ui.static.MainFrame.in_ajax) {
                 scb.ui.static.MainFrame.in_ajax = true;
                 scb.ui.static.MainFrame.show_in_ajax = true;
@@ -292,8 +292,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'assignments') {
-            if (!parsed.assignment) {
-                state.assignment_id = assignments.list[0].id;
+            if (!parsed.assignment ) {
+                state.assignment_id = assignments.selected_id ? assignments.selected_id : assignments.list[0].id;
                 state.onhashchange = false;
                 self.show(state);
                 return;

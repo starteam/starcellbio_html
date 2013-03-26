@@ -82,7 +82,6 @@ scb.utils.server.is_auth = function (callback) {
 }
 
 scb.utils.server.call = function (data, callback) {
-    console.info("Startnig AJAX call " + data.length);
     $.ajax({url: '/scb/is_auth/', type: data ? 'POST' : 'GET',
         data: data,
 //        context: document.body,

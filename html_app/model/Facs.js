@@ -8,7 +8,7 @@ scb.FacsList = function scb_FacsList(data, context, parent) {
 
 	self.start = function(d) {
 		d = ( typeof (d) == 'undefined' ? {} : d);
-		d.name = d.name || "Facs Exp. " + data.counter++;
+		d.name = d.name || "F. C. " + data.counter++;
 		var ret = new scb.Facs(d, context, self);
 		data.list.push(d);
 		return ret;
