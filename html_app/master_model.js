@@ -2476,7 +2476,7 @@ var __assigment_706 = {
             },
             drugs: {
                 'nc': {
-                    name: 'Buffer only',
+                    name: 'Growth Media',
                     concentrations: [0]
                 },
                 'Nocodazole': {
