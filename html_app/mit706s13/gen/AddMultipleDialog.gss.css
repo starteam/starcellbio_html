@@ -2,8 +2,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
+  width: 800px;
+  height: 800px;
   background-color: #80808080;
   font-family: 'sourcesanspro-regular';
   font-size: 10pt;

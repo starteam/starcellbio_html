@@ -143,10 +143,13 @@
     left:-2px;
     padding-right: 16px;
     padding-bottom:4px;
+    cursor: pointer;
 }
 
 .scb_s_experiment_design_unselected {
     opacity: .75;
+    cursor: pointer;
+
 }
 
 .scb_s_experiment_design_technique:hover {

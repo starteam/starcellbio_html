@@ -10,8 +10,8 @@
     position: absolute;
     top:0px;
     left:0px;
-    bottom:0px;
-    right:0px;
+    width:800px;
+    height:800px;
     background-color: #80808080;
     font-family: 'sourcesanspro-regular';
     font-size:10pt;
