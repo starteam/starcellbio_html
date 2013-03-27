@@ -36,7 +36,7 @@
 
 .scb_s_mit706s13_assignment_overview {
     font-family: 'SourceSansPro-Regular';
-    font-size:12pt;
+    font-size:11pt;
     text-align: left;
 }
 

@@ -82,10 +82,18 @@
 
 }
 
-.scb_s_western_blot_choose_samples_order_list > li, .scb_s_facs_choose_samples_order_list > li {
+.scb_s_western_blot_choose_samples_order_list > li {
     font-size:10pt;
     padding:3px;
     color:black;
+    
+}
+
+.scb_s_facs_choose_samples_order_list > li {
+    font-size:10pt;
+    padding:3px;
+    color:black;
+    cursor: pointer;
 }
 
 
