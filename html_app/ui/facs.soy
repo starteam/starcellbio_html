@@ -162,7 +162,8 @@ FACS Main View
         <thead class='scb_s_facs_samples_table_head'>
         <td class='scb_s_facs_samples_table_heading'>Select</td>
         <td class='scb_s_facs_samples_table_heading'>Samples</td>
-        <td class='scb_s_facs_samples_table_heading'>Lysate type</td>
+        <td class='scb_s_facs_samples_table_heading'>Cell Treatment</td>
+        <td class='scb_s_facs_samples_table_heading'>DNA Content Treatment</td>
         <td class='scb_s_facs_samples_table_heading'>&nbsp;</td>
         </thead>
         {foreach $r in $rows}
@@ -178,6 +179,10 @@ FACS Main View
             <td class='scb_s_facs_samples_table_td'>{if $r.display_sample}
                 {$r.display_text}
                 {/if}
+            </td>
+            <td class='scb_s_facs_samples_table_td'>
+                <input type="radio" checked="checked">Fixed</input>
+                <input type="radio" disabled='disabled' ><span style='opacity: .25'>Live</span></input>
             </td>
             <td class='scb_s_facs_samples_table_td'>
                 {call .display_lysate_types}
@@ -205,7 +210,8 @@ FACS Main View
         </tr>
         {/foreach}
         <tr>
-            <td colspan='4'>
+            <td colspan='5'>
+                <div class="scb_s_experiment_design_green_line"></div>
                 <button class='scb_f_facs_sample_active_all scb_s_gray_button'>SELECT ALL</button>
             </td>
         </tr>
@@ -300,7 +306,7 @@ FACS Main View
 @param rows
 */
 {template .analyze}
-<div class='scb_s_facs_tab_content'>
+<div class='scb_s_facs_tab_content_analyze'>
     {if $facs.samples_finished}
     {call .display_facs_progress}
     {param step:3 /}
@@ -339,7 +345,7 @@ FACS Main View
         <div class='scb_s_western_blot_gel_tabs'>
                     <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
 
-                    <div class='scb_s_facs_gel_tab_selected'>NAME
+                    <div class='scb_s_facs_gel_tab_selected'>PI
                     </div>
                     </span>
         </div>

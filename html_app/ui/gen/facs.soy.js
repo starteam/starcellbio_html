@@ -57,16 +57,16 @@ scb_facs.display_tabs_selector = function(opt_data, opt_sb) {
 scb_facs.sample_prep = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   scb_facs.display_facs_progress({step: 1}, output);
-  output.append('<div class=\'scb_s_facs_samples_table\'><table><thead class=\'scb_s_facs_samples_table_head\'><td class=\'scb_s_facs_samples_table_heading\'>Select</td><td class=\'scb_s_facs_samples_table_heading\'>Samples</td><td class=\'scb_s_facs_samples_table_heading\'>Lysate type</td><td class=\'scb_s_facs_samples_table_heading\'>&nbsp;</td></thead>');
+  output.append('<div class=\'scb_s_facs_samples_table\'><table><thead class=\'scb_s_facs_samples_table_head\'><td class=\'scb_s_facs_samples_table_heading\'>Select</td><td class=\'scb_s_facs_samples_table_heading\'>Samples</td><td class=\'scb_s_facs_samples_table_heading\'>Cell Treatment</td><td class=\'scb_s_facs_samples_table_heading\'>DNA Content Treatment</td><td class=\'scb_s_facs_samples_table_heading\'>&nbsp;</td></thead>');
   var rList113 = opt_data.rows;
   var rListLen113 = rList113.length;
   for (var rIndex113 = 0; rIndex113 < rListLen113; rIndex113++) {
     var rData113 = rList113[rIndex113];
-    output.append('<tr class=\'scb_s_facs_samples_table_tr\'><td class=\'scb_s_facs_samples_table_td\'>', (rData113.display_sample) ? '<input type="checkbox" class="scb_f_facs_sample_active" facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' cell_treatment_id=\'' + soy.$$escapeHtml(rData113.cell_treatment.id) + '\'' + ((rData113.is_sample_enabled) ? 'checked="checked"' : '') + '>' : '', '</td><td class=\'scb_s_facs_samples_table_td\'>', (rData113.display_sample) ? soy.$$escapeHtml(rData113.display_text) : '', '</td><td class=\'scb_s_facs_samples_table_td\'>');
+    output.append('<tr class=\'scb_s_facs_samples_table_tr\'><td class=\'scb_s_facs_samples_table_td\'>', (rData113.display_sample) ? '<input type="checkbox" class="scb_f_facs_sample_active" facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' cell_treatment_id=\'' + soy.$$escapeHtml(rData113.cell_treatment.id) + '\'' + ((rData113.is_sample_enabled) ? 'checked="checked"' : '') + '>' : '', '</td><td class=\'scb_s_facs_samples_table_td\'>', (rData113.display_sample) ? soy.$$escapeHtml(rData113.display_text) : '', '</td><td class=\'scb_s_facs_samples_table_td\'><input type="radio" checked="checked">Fixed</input><input type="radio" disabled=\'disabled\' ><span style=\'opacity: .25\'>Live</span></input></td><td class=\'scb_s_facs_samples_table_td\'>');
     scb_facs.display_lysate_types({assignment: opt_data.assignment, experiment: opt_data.experiment, facs: opt_data.facs, cell_treatment: rData113.cell_treatment, kinds: opt_data.kinds, lane: rData113}, output);
     output.append('</td><td class=\'scb_s_facs_samples_table_td\'>', (rData113.kind == 'existing') ? '<button class="scb_f_facs_sample_remove" facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' lane_id=\'' + soy.$$escapeHtml(rData113.lane.id) + '\'' + ((rData113.is_sample_enabled) ? '' : 'disabled="disabled"') + '>X</button>' : '<button class="scb_f_facs_sample_remove" disabled="disabled">X</button>', '</td></tr>');
   }
-  output.append('<tr><td colspan=\'4\'><button class=\'scb_f_facs_sample_active_all scb_s_gray_button\'>SELECT ALL</button></td></tr></table></div><a class=\'scb_s_navigation_button scb_f_facs_prepare_lysates\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\'', (opt_data.can_prepare_lysate) ? '' : 'disabled=\'disabled\'', '> PREPARE SAMPLES  &nbsp; &#9654;</a>');
+  output.append('<tr><td colspan=\'5\'><div class="scb_s_experiment_design_green_line"></div><button class=\'scb_f_facs_sample_active_all scb_s_gray_button\'>SELECT ALL</button></td></tr></table></div><a class=\'scb_s_navigation_button scb_f_facs_prepare_lysates\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\'', (opt_data.can_prepare_lysate) ? '' : 'disabled=\'disabled\'', '> PREPARE SAMPLES  &nbsp; &#9654;</a>');
   return opt_sb ? '' : output.toString();
 };
 
@@ -104,7 +104,7 @@ scb_facs.display_lysate_types = function(opt_data, opt_sb) {
 
 scb_facs.analyze = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_facs_tab_content\'>');
+  output.append('<div class=\'scb_s_facs_tab_content_analyze\'>');
   if (opt_data.facs.samples_finished) {
     scb_facs.display_facs_progress({step: 3}, output);
   } else {
@@ -117,7 +117,7 @@ scb_facs.analyze = function(opt_data, opt_sb) {
     var rData245 = rList245[rIndex245];
     output.append((rData245.is_valid) ? '<li facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id="' + soy.$$escapeHtml(opt_data.assignment.id) + '" experiment_id="' + soy.$$escapeHtml(opt_data.experiment.id) + '" facs_lane_id=\'' + soy.$$escapeHtml(rData245.lane.id) + '\'' + ((opt_data.facs.lane_selected == rData245.lane.id) ? 'class=\'scb_s_facs_sample_selected\'' : '') + '>' + soy.$$escapeHtml(rData245.display_text) + ' - ' + soy.$$escapeHtml(rData245.lane.kinds[rData245.lane.kind].name) + '</li>' : '');
   }
-  output.append('</ol></div>', (opt_data.facs.samples_finished) ? '' : '<button class=\'scb_f_facs_run_samples scb_s_navigation_button\' facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id="' + soy.$$escapeHtml(opt_data.assignment.id) + '" experiment_id="' + soy.$$escapeHtml(opt_data.experiment.id) + '">RUN SAMPLES</button>', '</div><div class=\'scb_s_facs_samples_graph_area\'><div class=\'scb_s_western_blot_gel_tabs\'><span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_facs_gel_tab_selected\'>NAME</div></span></div>');
+  output.append('</ol></div>', (opt_data.facs.samples_finished) ? '' : '<button class=\'scb_f_facs_run_samples scb_s_navigation_button\' facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id="' + soy.$$escapeHtml(opt_data.assignment.id) + '" experiment_id="' + soy.$$escapeHtml(opt_data.experiment.id) + '">RUN SAMPLES</button>', '</div><div class=\'scb_s_facs_samples_graph_area\'><div class=\'scb_s_western_blot_gel_tabs\'><span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_facs_gel_tab_selected\'>PI</div></span></div>');
   scb_facs.display_graph({assignment: opt_data.assignment, experiment: opt_data.experiment, facs: opt_data.facs, facs_line_id: opt_data.facs.lane_selected}, output);
   output.append('</div></div>');
   return opt_sb ? '' : output.toString();

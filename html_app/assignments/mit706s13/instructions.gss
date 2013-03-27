@@ -34,3 +34,12 @@
     padding-left: 8px;
 }
 
+.scb_s_mit706s13_assignment_overview {
+    font-family: 'SourceSansPro-Regular';
+    font-size:12pt;
+    text-align: left;
+}
+
+.scb_s_mit706s13_assignment_detail {
+    text-align: left;
+}

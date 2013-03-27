@@ -87,7 +87,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             }
 
             function normalize(data,factor) {
-                var factor = factor || .25;
+                var factor = factor || .05;
                 var sum = 0;
                 _.each(data, function (s) {
                     sum += s[1];
@@ -103,7 +103,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 if (sum != 0) {
                     _.each(data, function (s, index) {
-                        data[index][1] = data[index][1] / sum * 1000 ;
+                        data[index][1] = data[index][1] / sum * 2750 ;
 
                     });
                 }
@@ -115,7 +115,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     points: {show: false, radius:.5, fill: false},
                 },
                 xaxis: {
-                    min: 0,
+                    min: -.001,
                     max: 3,
                     ticks: [1, 2],
                     tickFormatter: function (tf) {
@@ -127,8 +127,8 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     }
                 },
                 yaxis: {
-                    min:0,
-                    max:50,
+                    min:-1,
+                    max:100,
                     font: {
                         family: 'sourcesanspro-regular',
                         size: 11
@@ -158,7 +158,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             };
             if (('' + shape).toLowerCase() == 'normal') {
                 var data = [];
-                var bias = (Math.random() -.5)*.05;
+                var bias = (Math.random() -.5)*.10;
                 for (var x = 0; x < 3; x += .01) {
                     var y = g0g1(x+bias) + 3*g2m(x+bias) + near_zero(x+bias) + s(x+bias);
                     data.push([x, y]);

@@ -1,10 +1,12 @@
 .scb_s_tufts_assignment_overview {
     font-family: 'SourceSansPro-Regular';
     font-size:12pt;
+    text-align: left;
 }
 .scb_assignment_specific_tufts_experiment_setup {
     font-family: 'SourceSansPro-Regular';
     font-size: 10pt;
+    text-align: left;
 }
 
 .scb_assignment_specific_tufts_experiment_setup >li>b {
@@ -14,5 +16,6 @@
 .scb_s_tufts_assignment_detail {
     font-family: 'SourceSansPro-Regular';
     font-size:12pt;
+    text-align: left;
 }
 

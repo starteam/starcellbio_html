@@ -76,4 +76,11 @@
     font-size:10pt;
 }
 
+.scb_f_facs_run_samples {
+    margin-left:40px;
+}
 
+.scb_s_facs_tab_content_analyze {
+    padding:5px;
+    padding-bottom:20px;
+}
