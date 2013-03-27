@@ -2108,8 +2108,8 @@ var __assigment_706 = {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "37 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'media_only,40',
                                 cell_treatments: {
@@ -2137,8 +2137,8 @@ var __assigment_706 = {
                                 cells: [
                                     {kind: 'text', text: 'Nocodazole'},
                                     {kind: 'text', text: "30 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'nocodazole,25',
                                 cell_treatments: {
@@ -2167,8 +2167,8 @@ var __assigment_706 = {
                                 cells: [
                                     {kind: 'text', text: 'Nocodazole'},
                                     {kind: 'text', text: "37 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'nocodazole,40',
                                 cell_treatments: {
@@ -2198,8 +2198,8 @@ var __assigment_706 = {
                                 cells: [
                                     {kind: 'text', text: 'Hydroxyurea'},
                                     {kind: 'text', text: "30 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'hydroxyurea,25',
                                 cell_treatments: {
@@ -2228,8 +2228,8 @@ var __assigment_706 = {
                                 cells: [
                                     {kind: 'text', text: 'Hydroxyurea'},
                                     {kind: 'text', text: "37 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'hydroxyurea,40',
                                 cell_treatments: {
@@ -2258,8 +2258,8 @@ var __assigment_706 = {
                                 cells: [
                                     {kind: 'text', text: 'Alpha Factor'},
                                     {kind: 'text', text: "30 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'alpha_factor,25',
                                 cell_treatments: {
@@ -2288,8 +2288,8 @@ var __assigment_706 = {
                                 cells: [
                                     {kind: 'text', text: 'Alpha Factor'},
                                     {kind: 'text', text: "37 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'alpha_factor,40',
                                 cell_treatments: {
@@ -2318,15 +2318,15 @@ var __assigment_706 = {
                     },
                     'm1': {
                         headings: [
-                            'Treatment', 'Temperature', '+ PP1', '- PP1'
+                            'Treatment', 'Temperature', '- PP1', '+ PP1'
                         ],
                         rows: [
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "30 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'media_only,25',
                                 cell_treatments: {
@@ -2354,8 +2354,8 @@ var __assigment_706 = {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "37 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'media_only,40',
                                 cell_treatments: {
@@ -2384,15 +2384,15 @@ var __assigment_706 = {
                     },
                     'm2': {
                         headings: [
-                            'Treatment', 'Temperature', '+ PP1', '- PP1'
+                            'Treatment', 'Temperature', '- PP1', '+ PP1'
                         ],
                         rows: [
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "30 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'media_only,25',
                                 cell_treatments: {
@@ -2420,8 +2420,8 @@ var __assigment_706 = {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "37 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'media_only,40',
                                 cell_treatments: {
