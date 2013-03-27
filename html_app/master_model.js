@@ -2072,15 +2072,15 @@ var __assigment_706 = {
                 add_multiple_dialog: {
                     'wt': {
                         headings: [
-                            'Treatment', 'Temperature', '+ PP1', '- PP1'
+                            'Treatment', 'Temperature', '- PP1', '+ PP1'
                         ],
                         rows: [
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "30 "+degreeEntity+"C"},
-                                    {kind: 'checkbox', name: 'PP1'},
-                                    {kind: 'checkbox', name: 'NOPP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
                                 ],
                                 treatment_id: 'media_only,25',
                                 cell_treatments: {
@@ -2666,7 +2666,7 @@ var __assigment_706 = {
                                 cutoff: 1,
                                 drug: 'pp1',
                                 cell_line: '*ANY*',
-                                below_marks: [
+                                above_marks: [
                                     {
                                         name: 'Cdk1',
                                         weight: 34, //35&36
@@ -2680,7 +2680,7 @@ var __assigment_706 = {
                                         primary_anti_body: ['cdk2']
                                     }
                                 ],
-                                above_marks: [
+                                below_marks: [
                                     {
                                         name: 'Cdk1',
                                         weight: 35, //35&36
