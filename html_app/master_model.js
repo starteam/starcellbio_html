@@ -3024,6 +3024,9 @@ $(function () {
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
     __usability_test.template.experiment_setup = scb_model_usability.experiment_setup();
 
+    __assigment_706.description = scb_assignment_specific_mit706s13.assignment_overview();
+    __assigment_706.template.instructions = scb_assignment_specific_mit706s13.assignment_detail();
+
     __assigment_706.template.ui.experiment_setup.actions.push({
         name: 'ADD MULTIPLE ROWS',
         open: 'mit706s13.setup',
