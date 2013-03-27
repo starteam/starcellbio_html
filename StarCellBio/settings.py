@@ -186,3 +186,4 @@ ACCOUNT_USERNAME_REQUIRED = False
 EMAIL_HOST='localhost'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'starcellbio@mit.edu'
+DEFAULT_FROM_EMAIL = 'starcellbio@mit.edu'
