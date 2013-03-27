@@ -151,7 +151,7 @@ var __assignment2 = {
         },
         experiment_temperatures: {
             '25': {
-                name: "25"+degreeEntity+"C"
+                name: "25" + degreeEntity + "C"
             }
         },
         cell_lines: {
@@ -705,7 +705,7 @@ var __assigment_tufts = {
             }
         },
         experiment_temperatures: {
-            '25': { name: "25"+degreeEntity+"C"    }
+            '25': { name: "25" + degreeEntity + "C"    }
         },
         cell_lines: {
             'wt': {
@@ -942,7 +942,7 @@ var __assigment_facs = {
             }
         },
         experiment_temperatures: {
-            '25': { name: "25"+degreeEntity+"C"    }
+            '25': { name: "25" + degreeEntity + "C"    }
         },
         cell_lines: {
             'strain 1': {
@@ -1301,7 +1301,7 @@ var __basic_tests = {
         },
         experiment_temperatures: {
             '25': {
-                name: "25"+degreeEntity+"C"
+                name: "25" + degreeEntity + "C"
             }
         },
         cell_lines: {
@@ -1781,7 +1781,7 @@ var __usability_test = {
         },
         experiment_temperatures: {
             '25': {
-                name: "25"+degreeEntity+"C"
+                name: "25" + degreeEntity + "C"
             }
         },
         cell_lines: {
@@ -2060,7 +2060,7 @@ var __assigment_706 = {
                         ]},
                     }
                 },
-                western_blot: {format: "%CELL_LINE%, %TREATMENT%, %TEMPERATURE%, %PP1%",
+                western_blot: {format: "%CELL_LINE%, %TREATMENT%, %PP1% %TEMPERATURE%",
                     keys: {
                         '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                         '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
@@ -2078,7 +2078,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2107,7 +2107,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2136,7 +2136,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Nocodazole'},
-                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2166,7 +2166,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Nocodazole'},
-                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2197,7 +2197,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Hydroxyurea'},
-                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2227,7 +2227,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Hydroxyurea'},
-                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2257,7 +2257,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Alpha Factor'},
-                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2287,7 +2287,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Alpha Factor'},
-                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2324,7 +2324,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2353,7 +2353,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2390,7 +2390,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "30 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2419,7 +2419,7 @@ var __assigment_706 = {
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "37 "+degreeEntity+"C"},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
                                     {kind: 'checkbox', name: 'NOPP1'},
                                     {kind: 'checkbox', name: 'PP1'}
                                 ],
@@ -2454,7 +2454,7 @@ var __assigment_706 = {
 
             concentrations: {
                 '0': {
-                    name: '0 nM',
+                    name: '',
                     value: 0
                 },
                 '2': {
@@ -2500,10 +2500,10 @@ var __assigment_706 = {
             },
             experiment_temperatures: {
                 '25': {
-                    name: "30"+degreeEntity+"C"
+                    name: "30" + degreeEntity + "C"
                 },
                 '40': {
-                    name: "37"+degreeEntity+"C"
+                    name: "37" + degreeEntity + "C"
                 }
             },
 
@@ -2523,14 +2523,6 @@ var __assigment_706 = {
                 kind: 'minutes'
             },
             primary_anti_body: {
-                'cdt1': {
-                    name: 'rabbit anti-cdt1',
-                    secondary: ['r'],
-                    marks: [
-                        {weight: 65, intensity: 0},
-                    ],
-                    gel_name: 'cdt1'
-                },
                 'cdk1': {
                     name: 'rabbit anti-cdk1',
                     secondary: ['r'],
@@ -2540,22 +2532,6 @@ var __assigment_706 = {
                         {weight: 36, intensity: 0}
                     ],
                     gel_name: 'cdk1'
-                },
-                'cyclin': {
-                    name: 'mouse anti-cyclin B',
-                    secondary: ['m'],
-                    marks: [
-                        {weight: 58, intensity: 0},
-                    ],
-                    gel_name: 'cyclin B'
-                },
-                'securin': {
-                    name: 'rabbit anti-securin',
-                    secondary: ['r'],
-                    marks: [
-                        {weight: 41.8, intensity: 0},
-                    ],
-                    gel_name: 'securin'
                 },
                 'cdk2': {
                     name: 'rabbit anti-cdk2',
@@ -2567,6 +2543,22 @@ var __assigment_706 = {
                     ],
                     gel_name: 'cdk2'
                 },
+                'cdt1': {
+                    name: 'rabbit anti-cdt1',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 65, intensity: 0},
+                    ],
+                    gel_name: 'cdt1'
+                },
+                'cyclin': {
+                    name: 'mouse anti-cyclin B',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 58, intensity: 0},
+                    ],
+                    gel_name: 'cyclin B'
+                },
                 'cyclinE': {
                     name: 'mouse anti-cyclin E',
                     secondary: ['m'],
@@ -2574,6 +2566,14 @@ var __assigment_706 = {
                         {weight: 48, intensity: 0},
                     ],
                     gel_name: 'cyclin E'
+                },
+                'pgk1': {
+                    name: 'rabbit anti-pgk1',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 45, intensity: 0},
+                    ],
+                    gel_name: 'pgk1'
                 },
                 'rad21': {
                     name: 'rabbit anti-rad21',
@@ -2583,13 +2583,13 @@ var __assigment_706 = {
                     ],
                     gel_name: 'rad21'
                 },
-                'pgk1': {
-                    name: 'rabbit anti-pgk1',
+                'securin': {
+                    name: 'rabbit anti-securin',
                     secondary: ['r'],
                     marks: [
-                        {weight: 45, intensity: 0},
+                        {weight: 41.8, intensity: 0},
                     ],
-                    gel_name: 'pgk1'
+                    gel_name: 'securin'
                 }
             },//
             secondary_anti_body: {
@@ -2607,7 +2607,7 @@ var __assigment_706 = {
             },
             facs_kinds: {
                 'whole': {
-                    name: 'Live cells'
+                    name: 'PI'
                 }
             },
             model: { // models
@@ -2684,7 +2684,7 @@ var __assigment_706 = {
                                     {
                                         name: 'Cdk1',
                                         weight: 35, //35&36
-                                        intensity:.5,
+                                        intensity: .5,
                                         primary_anti_body: ['cdk1']
                                     },
                                     {
@@ -2696,13 +2696,13 @@ var __assigment_706 = {
                                     {
                                         name: 'Cdk2',
                                         weight: 34, // 34&35
-                                        intensity:.3,
+                                        intensity: .3,
                                         primary_anti_body: ['cdk2']
                                     },
                                     {
                                         name: 'Cdk2',
                                         weight: 35, // 34&35
-                                        intensity:.3,
+                                        intensity: .3,
                                         primary_anti_body: ['cdk2']
                                     }
                                 ]
@@ -3026,6 +3026,7 @@ $(function () {
 
     __assigment_706.description = scb_assignment_specific_mit706s13.assignment_overview();
     __assigment_706.template.instructions = scb_assignment_specific_mit706s13.assignment_detail();
+    __assigment_706.template.experiment_setup = scb_assignment_specific_mit706s13.experiment_setup();
 
     __assigment_706.template.ui.experiment_setup.actions.push({
         name: 'ADD MULTIPLE ROWS',
