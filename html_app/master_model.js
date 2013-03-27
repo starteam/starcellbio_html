@@ -2630,7 +2630,7 @@ var __assigment_706 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 1,
+                                        intensity: 2,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -2643,7 +2643,7 @@ var __assigment_706 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 1,
+                                        intensity: 4,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -2655,7 +2655,7 @@ var __assigment_706 = {
                                     {
                                         name: 'pgk1',
                                         weight: 45,
-                                        intensity: 1,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -2670,13 +2670,13 @@ var __assigment_706 = {
                                     {
                                         name: 'Cdk1',
                                         weight: 34, //35&36
-                                        intensity: 1,
+                                        intensity: .5,
                                         primary_anti_body: ['cdk1']
                                     },
                                     {
                                         name: 'Cdk2',
                                         weight: 33, // 34&35
-                                        intensity: 1,
+                                        intensity: .3,
                                         primary_anti_body: ['cdk2']
                                     }
                                 ],
@@ -2684,25 +2684,25 @@ var __assigment_706 = {
                                     {
                                         name: 'Cdk1',
                                         weight: 35, //35&36
-                                        intensity: 1,
+                                        intensity:.5,
                                         primary_anti_body: ['cdk1']
                                     },
                                     {
                                         name: 'Cdk1',
                                         weight: 36, //35&36
-                                        intensity: 1,
+                                        intensity: .5,
                                         primary_anti_body: ['cdk1']
                                     },
                                     {
                                         name: 'Cdk2',
                                         weight: 34, // 34&35
-                                        intensity: 1,
+                                        intensity:.3,
                                         primary_anti_body: ['cdk2']
                                     },
                                     {
                                         name: 'Cdk2',
                                         weight: 35, // 34&35
-                                        intensity: 1,
+                                        intensity:.3,
                                         primary_anti_body: ['cdk2']
                                     }
                                 ]
@@ -2755,13 +2755,13 @@ var __assigment_706 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: -1,
+                                        intensity: -2,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: -1,
+                                        intensity: -4,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -2818,7 +2818,7 @@ var __assigment_706 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: -1,
+                                        intensity: -2,
                                         primary_anti_body: ['cyclin']
                                     }
                                 ]
@@ -2850,7 +2850,7 @@ var __assigment_706 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: -1,
+                                        intensity: -4,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     ,
@@ -2895,7 +2895,7 @@ var __assigment_706 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: -1,
+                                        intensity: -2,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -2939,7 +2939,7 @@ var __assigment_706 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: -1,
+                                        intensity: -2,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
