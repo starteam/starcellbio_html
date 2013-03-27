@@ -48,3 +48,21 @@
 .scb_f_facs_prepare_lysates {
   float: right;
 }
+.scb_s_facs_samples_table>table {
+  border: 1px solid #80d1ae;
+  border-radius: 5px;
+  border-spacing: 0;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 20px;
+}
+.scb_s_facs_samples_table>table>tbody {
+  background-color: #edeef2;
+}
+.scb_s_facs_samples_table_heading {
+  font-family: 'sourcesanspro-semibold';
+  font-size: 10pt;
+}
+.scb_s_facs_samples_table_td {
+  font-size: 10pt;
+}

@@ -114,6 +114,16 @@ scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (e
     scb.ui.static.MainFrame.refresh();
 }
 
+scb.ui.static.FacsView.scb_s_facs_selected = function(element)
+{
+    var parsed = scb.ui.static.FacsView.parse(element);
+        if (parsed.redisplay) {
+            alert("INVALID ELEMENT!");
+        }
+
+        parsed.facs.name = $(element).text();
+}
+
 scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_facs_sample_active', function (e) {
         scb.ui.static.FacsView.scb_f_facs_sample_active(this, e);
@@ -134,6 +144,9 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_facs_choose_samples_order_list>li', function (e) {
         scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select(this, e);
     });
+    scb.utils.off_on(workarea, 'blur', '.scb_s_facs_selected', function (e) {
+           scb.ui.static.FacsView.scb_s_facs_selected(this);
+       });
 
 }
 scb.ui.static.FacsView.evaluate_chart = function (state) {
@@ -203,6 +216,12 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         }));
         document.title = "FACS - StarCellBio";
 
+        if (kind == 'sample_prep') {
+                    if (_.keys(template.lysate_kinds).length == 1) {
+                        $('button.scb_f_facs_sample_remove').hide();
+                    }
+
+                }
         if (state.facs.samples_finished) {
             scb.ui.static.FacsView.charts(workarea);
         }

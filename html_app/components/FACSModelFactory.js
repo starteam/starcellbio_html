@@ -67,7 +67,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             var shape = state.shape;
 
             function g0g1(x) {
-                return 2 * Math.exp(-((x - 1) * (x - 1)) * 60);
+                return 4 * Math.exp(-((x - 1) * (x - 1)) * 30);
             }
 
             function near_zero(x) {
@@ -79,7 +79,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             }
 
             function g2m(x) {
-                return 1 / 4 * Math.exp(-((x - 2) * (x - 2) * 30));
+                return 1 / 2 * Math.exp(-((x - 2) * (x - 2) * 15));
             }
 
             function s_block(x) {
@@ -103,7 +103,8 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 if (sum != 0) {
                     _.each(data, function (s, index) {
-                        data[index][1] /= sum;
+                        data[index][1] = data[index][1] / sum * 1000 ;
+
                     });
                 }
             }
@@ -118,7 +119,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     max: 3,
                     ticks: [1, 2],
                     tickFormatter: function (tf) {
-                        return tf + " C"
+                        return tf * 50;
                     },
                     font: {
                         family: 'sourcesanspro-regular',
@@ -126,6 +127,8 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     }
                 },
                 yaxis: {
+                    min:0,
+                    max:50,
                     font: {
                         family: 'sourcesanspro-regular',
                         size: 11
