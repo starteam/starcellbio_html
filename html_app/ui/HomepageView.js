@@ -34,10 +34,14 @@ scb.ui.static.HomepageView.register = function(workarea) {
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_f_create_student_account', function (e) {
-        alert( "under construction!");
+        document.location = '/accounts/signup';
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_instructor_resources', function (e) {
         alert( "under construction!");
+    });
+
+    scb.utils.off_on(workarea, 'click', '.scb_f_try_an_experiment', function (e) {
+        scb.ui.static.MainFrame.clear_NO_PROMPT();
     });
 
 };

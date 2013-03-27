@@ -11,9 +11,9 @@
 <link type="text/css" href="/static/ui/gen/experiment_setup.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/common.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/back_button.css" rel="Stylesheet" />
-<link type="text/css" href="/static/assignments/tufts/gen/instructions.gss.css" rel="Stylesheet" />
-<link type="text/css" href="/static/ui/gen/experiment_design.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/assignments/mit706s13/gen/instructions.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/experiment_design.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/assignments/tufts/gen/instructions.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/css/layout-default.css" rel="Stylesheet" />
 <link type="text/css" href="/static/coin-slider/coin-slider-styles.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/western_blots.gss.css" rel="Stylesheet" />
@@ -39,7 +39,7 @@
 <script type="text/javascript" src="/static/ui/gen/experiment_setup.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/master_model.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/utils/CSFRFix.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/js/soyutils.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/assignments/mit706s13/gen/instructions.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/LysateKind.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/ExperimentDesignView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/DashboardView.js" charset="UTF-8"></script>
@@ -64,12 +64,11 @@
 <script type="text/javascript" src="/static/js/jq.pubsub.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/coin-slider/coin-slider.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/select_technique.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/js/underscore.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/soyutils.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/ExperimentSetupView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/assignments/tufts/gen/instructions.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/FacsLanesPreparation.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/assignments/mit706s13/gen/instructions.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/experiment.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/FacsLanes.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery.flot.js" charset="UTF-8"></script>
@@ -89,7 +88,7 @@
 <script type="text/javascript" src="/static/model/Assignments.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/common.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/components/WesternBlotModelFactory.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/ui/FacsView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/underscore.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/making_lysates.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/WesternBlotGel.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/workspace.soy.js" charset="UTF-8"></script>
@@ -107,13 +106,15 @@
 <script type="text/javascript" src="/static/ui_old/gen/western_blots.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/common.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery.ba-bbq.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery.cookie.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/CellTreatment.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/coin-slider/coin-slider.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/homepage.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/westernblotgel.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/FacsView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/mit706s13/AddMultipleDialog.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/AssignmentView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/FacsOneView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery.multiselect.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/facs.soy.js" charset="UTF-8"></script>
-</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});})</script></body>
+</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid="invalid"'};</script></body>

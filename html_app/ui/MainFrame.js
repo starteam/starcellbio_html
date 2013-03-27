@@ -183,6 +183,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         starcellbio(context.ui, master_model);
     }
 
+    scb.ui.static.MainFrame.clear_NO_PROMPT = function () {
+        $.ajax({url: '/accounts/logout/', async: false, timeout: 5 });
+        self.show({view: 'assignments'});
+        master_model = master_model_data;
+        scb.ui.static.MainFrame.save();
+        starcellbio(context.ui, master_model);
+    }
+
     scb.ui.static.MainFrame.clear = function () {
         var r = prompt("This will restart whole assignment. Your saved data will be lost. Type: 'YES' to proceed.");
         if (r == 'YES') {
@@ -292,7 +300,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'assignments') {
-            if (!parsed.assignment ) {
+            if (!parsed.assignment) {
                 state.assignment_id = assignments.selected_id ? assignments.selected_id : assignments.list[0].id;
                 state.onhashchange = false;
                 self.show(state);

@@ -21,7 +21,7 @@ js_suffix='" charset="UTF-8"></script>\n'
 
 html_prefix = "<!DOCTYPE html><html><head><title>StarCellBio Prototype</title>\n"
 #html_prefix += '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=SourceSansPro">'
-html_suffix = "</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});})</script></body>"
+html_suffix = "</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid=\"invalid\"'};</script></body>"
 
 def index_html():
     global css,js
