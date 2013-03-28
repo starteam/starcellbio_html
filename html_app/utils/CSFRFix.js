@@ -62,7 +62,9 @@ scb.utils.getCsfrToken = function () {
 }
 
 scb.utils.server.is_auth = function (callback) {
-
+cb.utils.call_back(callback, {
+                success: true, });
+/*
     $.ajax({url: '/scb/is_auth/', data: '', type: 'GET', success: function (a, b, c) {
         if (b == "success") {
             var ret = JSON.parse(a);
@@ -79,9 +81,13 @@ scb.utils.server.is_auth = function (callback) {
             });
         }
     }});
+*/
 }
 
 scb.utils.server.call = function (data, callback) {
+scb.utils.call_back(callback, {
+                    success: true });
+/*
     $.ajax({url: '/scb/is_auth/', type: data ? 'POST' : 'GET',
         data: data,
 //        context: document.body,
@@ -121,4 +127,5 @@ scb.utils.server.call = function (data, callback) {
         }
 
     });
+*/
 }
