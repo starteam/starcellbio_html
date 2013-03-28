@@ -74,7 +74,5 @@
 }
 
 .scb_mit706s16_button_float {
-    bottom:5px;
-    right:5px;
-    position: absolute;
+    display:block;
 }

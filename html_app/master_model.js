@@ -3043,7 +3043,7 @@ $(function () {
         name: 'ADD MULTIPLE ROWS',
         open: 'mit706s13.setup',
         css: {
-            width: '470px',
+            width: '600px',
             height: '400px',
             left: '300px',
             top: '200px'
