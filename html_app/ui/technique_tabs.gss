@@ -51,7 +51,7 @@
     border-radius: 5px;
     position: relative;
     padding-bottom:8px;
-
+    width:947px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }
 

@@ -58,6 +58,10 @@ scb.ModelHelpers.grouped_list = function(self,childs_field) {
 }
 
 scb.ModelHelpers.common_entry_code = function (self, data, context) {
+    if(! data )
+    {
+        console.info( "HERE" ) ;
+    }
     scb.Utils.initialize_field(data, 'id', scb.Utils.generateUUID(self.constructor.name + '_'));
     scb.Utils.initialize_field(data, 'name', data.id);
     scb.Utils.initialize_field(data, 'description', '');

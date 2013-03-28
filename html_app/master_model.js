@@ -3033,9 +3033,9 @@ $(function () {
         open: 'mit706s13.setup',
         css: {
             width: '800px',
-            height: '800px',
-            left: '300px',
-            top: '200px'
+            height: '900px',
+            left: '100px',
+            top: '100px'
         }
     });
 

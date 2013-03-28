@@ -107,6 +107,11 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                     });
                 }
+                _.each(data, function (s, index) {
+                    data[index][0] = data[index][0] * 50 ;
+
+                });
+
             }
 
             var options = {
@@ -115,12 +120,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     points: {show: false, radius:.5, fill: false},
                 },
                 xaxis: {
-                    min: -.001,
-                    max: 3,
-                    ticks: [1, 2],
-                    tickFormatter: function (tf) {
-                        return tf * 50;
-                    },
+                    min: 0,
+                    max: 150,
+                    ticks: [50, 100],
                     font: {
                         family: 'sourcesanspro-regular',
                         size: 11,
@@ -136,25 +138,6 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 },
                 grid: {show: true, clickable: true, hoverable: true, borderWidth: 0, autoHighlight: false},
-                hooks: { bindEvents: [ function (plot, eventHolder) {
-                    var xaxes = plot.getXAxes()[0];
-                    var yaxes = plot.getYAxes()[0];
-                    console.info(plot);
-                    console.info(eventHolder);
-                    eventHolder.click(function (e) {
-                        var px = xaxes.c2p(e.offsetX);
-                        var py = yaxes.c2p(e.offsetY);
-                        console.info(px + " " + py);
-                    });
-                    eventHolder.mousemove(function (e) {
-                        var px = xaxes.c2p(e.offsetX);
-                        var py = yaxes.c2p(e.offsetY);
-                        console.info(px + " " + py);
-                    });
-
-                }
-                ]
-                }
             };
             if (('' + shape).toLowerCase() == 'normal') {
                 var data = [];

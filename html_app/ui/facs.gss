@@ -84,3 +84,58 @@
     padding:5px;
     padding-bottom:20px;
 }
+
+.scb_s_facs_tools {
+    width:225px;
+    height: 350px;
+    vertical-align: top;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 370px;
+    border-left: 1px solid #e0e0e0;
+    padding-left: 6px;
+    overflow-y: scroll;
+}
+
+.scb_f_facs_tools_start_analysis {
+    position: absolute;
+    bottom:8px;
+    left:50px;
+}
+
+.scb_s_facs_tools_instructions_initial {
+    font-family: sourcesanspro-regular;
+    font-size:12pt;
+}
+
+.scb_s_facs_tools > h1 {
+    font-size:14pt;
+}
+
+.scb_s_facs_tools_analyze_data {
+    border: 1px solid #80d1ae;
+    border-radius: 5px;
+    border-spacing: 0;
+    width:200px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.scb_s_facs_tools_analyze_data > thead >tr>td{
+    font-family: 'sourcesanspro-semibold';
+    font-size: 10pt;
+    padding-left:5px;
+}
+
+.scb_s_facs_tools_analyze_data > tbody >tr>td{
+    background-color: #edeef2;
+}
+
+.scb_s_facs_tools_analyze_data > tbody >tr>td{
+    font-family: 'sourcesanspro-semibold';
+    font-size: 10pt;
+    padding-left:5px;
+    border-right: 1px solid #e0e0e0;
+}
+
