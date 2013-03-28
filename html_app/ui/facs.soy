@@ -435,12 +435,10 @@ FACS Main View
             <td>{$range.to}</td>
             <td>{$range.percentage}</td>
             <td>
-                {if not isLast($range)}
                 <img class='scb_f_facs_analyze_remove_point' assignment_id='{$assignment.id}'
                      experiment_id='{$experiment.id}'
-                     facs_id='{$facs.id}' facs_lane_id='{$lane.id}' value='{$range.to}'
+                     facs_id='{$facs.id}' facs_lane_id='{$lane.id}' from='{$range.from}' to='{$range.to}'
                      alt="Delete" title="Delete" src="images/setup/scb_remove.png">
-                {/if}
             </td>
         </tr>
         {/foreach}
