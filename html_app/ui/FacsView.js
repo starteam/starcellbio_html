@@ -285,6 +285,11 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
 
     for (var i in points) {
         var pts = points[i];
+        if (pts.from > pts.to) {
+            var tmp = pts.from;
+            pts.from = pts.to;
+            pts.to = tmp;
+        }
         range(pts.from, pts.to);
     }
 //    if (data.length == 0) {
