@@ -335,7 +335,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
     state.facs_lane.canvas_metadata.options.hooks = { bindEvents: [ function (plot, eventHolder) {
         var xaxes = plot.getXAxes()[0];
         var yaxes = plot.getYAxes()[0];
-            var sensitivity = 4;
+        var sensitivity = 4;
 
         var click = function (e) {
             var px = xaxes.c2p(e.clientX - e.srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
@@ -347,7 +347,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 if (!Number.isNaN(from)) {
                     var to = px;
                     if (point_to_edit) {
-                        if (Math.abs(point_to_edit.from - from)<sensitivity) {
+                        if (Math.abs(point_to_edit.from - from) < sensitivity) {
                             point_to_edit.from = to;
                         } else {
                             point_to_edit.to = to;
@@ -361,6 +361,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     scb.ui.static.FacsView.reevaluate_metadata(state);
                     state.facs.apply_dna_analysis_to_all = false;
                     from = NaN;
+                    $('.scb_s_facs_chart_helper').text('');
+
                     scb.ui.static.MainFrame.refresh();
 
                 }
@@ -374,6 +376,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             return point;
         }
         var from = NaN;
+        var from_point = null;
         var point_to_edit = null;
         var move = function (e) {
             var px = xaxes.c2p(e.clientX - e.srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
@@ -385,16 +388,33 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 if (e.which == 1 && Number.isNaN(from)) {
                     console.info("SET FROM " + px);
                     from = px;
+                    from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
+
                     var point = match(px);
                     point_to_edit = point;
                 }
                 if (e.which == 1 && !Number.isNaN(from)) {
+                    var to_point = {
+                        top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
+                    };
+                    var styles = {
+                        position: 'absolute',
+                        top: Math.min(from_point.top, to_point.top) + "px",
+                        left: Math.min(from_point.left, to_point.left) + "px",
+                        height: point_to_edit ? '0px' : Math.abs(from_point.top - to_point.top) + "px",
+                        width: Math.abs(from_point.left - to_point.left) + "px",
+                        'border': (point_to_edit ? ('1px dashed ' + point_to_edit.c) : '2px dashed #a0a0a0')
+                    }
+                    console.info(styles);
+                    $('.scb_s_facs_chart_helper').css(styles);
                     if (point_to_edit) {
-                        console.info( "ew" + px );
+                        console.info("ew" + px);
                         $(plot.getPlaceholder()).css('cursor', 'ew-resize');
                     }
                     else {
-                        console.info( "pt" + px);
+                        console.info("pt" + px);
                         $(plot.getPlaceholder()).css('cursor', 'pointer');
                     }
                 }
@@ -402,18 +422,17 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     // is it over line?
                     var point = match(px);
                     if (point) {
-                        console.info( "ew" + px );
+                        console.info("ew" + px);
                         $(plot.getPlaceholder()).css('cursor', 'ew-resize');
                     }
                     else {
-                        console.info( "pt" + px);
+                        console.info("pt" + px);
                         $(plot.getPlaceholder()).css('cursor', 'pointer');
                     }
                     console.info(point);
                 }
                 if (e.which == 0 && !Number.isNaN(from)) {
                     // is it over line?
-
                     console.info("SET TO " + px);
                     var to = px;
                     state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to)});
