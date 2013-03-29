@@ -395,7 +395,9 @@ var __assigment_tufts = {
                     {kind: 'treatments',
                         children: [//
                             {kind: 'drug', title: 'Treatment', editable: false},//
-                            {kind: 'concentration', title: 'Concentration', editable: false}//
+                            {kind: 'concentration', title: 'Concentration', editable: false},//
+                            {kind: 'duration', title: 'Time', editable: false},//
+
                         ]
                     },//
                     {kind: 'actions', title: 'Actions'}//
@@ -438,7 +440,7 @@ var __assigment_tufts = {
                                 'SEL': [
                                     {cell_line: 'wt',
                                         treatment_list: {list: [
-                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: -1, duration: '18h', drug_list: {list: [
                                                 {drug_id: 1, concentration_id: 0}
                                             ]}}
                                         ]},
@@ -461,7 +463,7 @@ var __assigment_tufts = {
                                 'SEL': [
                                     {cell_line: 'wt',
                                         treatment_list: {list: [
-                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: -1, duration: '18h', drug_list: {list: [
                                                 {drug_id: 1, concentration_id: 0}
                                             ]}},
                                             {schedule_value: 3600 * 18, schedule: '18h', duration_value: 600, duration: '10 min', drug_list: {list: [
@@ -487,10 +489,10 @@ var __assigment_tufts = {
                                 'SEL': [
                                     {cell_line: 'wt',
                                         treatment_list: {list: [
-                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: -1, duration: '18h', drug_list: {list: [
                                                 {drug_id: 1, concentration_id: 0}
                                             ]}},
-                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: 900, duration: '15 min', drug_list: {list: [
+                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: -1, duration: '15 min', drug_list: {list: [
                                                 {drug_id: 3, concentration_id: 20}
                                             ]}},
                                             {schedule_value: 3600 * 18 + 15 * 60, schedule: '18h 15min', duration_value: 600, duration: '10 min', drug_list: {list: [
@@ -515,10 +517,10 @@ var __assigment_tufts = {
                                 'SEL': [
                                     {cell_line: 'wt',
                                         treatment_list: {list: [
-                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: -1, duration: '18h', drug_list: {list: [
                                                 {drug_id: 1, concentration_id: 0}
                                             ]}},
-                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: 900, duration: '15 min', drug_list: {list: [
+                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: -1, duration: '15 min', drug_list: {list: [
                                                 {drug_id: 4, concentration_id: 10}
                                             ]}},
                                             {schedule_value: 3600 * 18 + 15 * 60, schedule: '18h 15min', duration_value: 600, duration: '10 min', drug_list: {list: [
@@ -543,10 +545,10 @@ var __assigment_tufts = {
                                 'SEL': [
                                     {cell_line: 'wt',
                                         treatment_list: {list: [
-                                            {schedule_value: 0, schedule: '0 min', duration_value: 3600 * 18, duration: '18h', drug_list: {list: [
+                                            {schedule_value: 0, schedule: '0 min', duration_value: -1, duration: '18h', drug_list: {list: [
                                                 {drug_id: 1, concentration_id: 0}
                                             ]}},
-                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: 900, duration: '15 min', drug_list: {list: [
+                                            {schedule_value: 3600 * 18, schedule: '18h', duration_value: -1, duration: '15 min', drug_list: {list: [
                                                 {drug_id: 3, concentration_id: 20},
                                                 {drug_id: 4, concentration_id: 10}
                                             ]}},
@@ -676,11 +678,11 @@ var __assigment_tufts = {
                 value: 100
             },
             20: {
-                name: '20uM',
+                name: '20'+microEntity+'M',
                 value: 20
             },
             10: {
-                name: '10uM',
+                name: '10'+microEntity+'M',
                 value: 10
             }
 
@@ -3046,7 +3048,7 @@ $(function () {
             width: '600px',
             height: '400px',
             left: '300px',
-            top: '200px'
+            top: '000px'
         }
     });
     __assigment_tufts.template.experiment_setup = scb_assignment_specific_tufts.experiment_setup();
