@@ -132,12 +132,12 @@ scb_facs.display_graph = function(opt_data, opt_sb) {
     if (opt_data.lane.canvas_metadata_analysis) {
       if (opt_data.lane.canvas_metadata_analysis.ranges) {
         if (opt_data.lane.canvas_metadata_analysis.ranges.length > 0) {
-          output.append('<table class=\'scb_s_facs_tools_analyze_data\'><thead><tr><td>Color</td><td>From</td><td>To</td><td>DNA %</td><td>Actions</td></tr></thead><tbody>');
+          output.append('<table class=\'scb_s_facs_tools_analyze_data\'><thead><tr><td></td><td>PI Fluorescence</td><td>% Cells</td><td></td></tr></thead><tbody>');
           var rangeList309 = opt_data.lane.canvas_metadata_analysis.ranges;
           var rangeListLen309 = rangeList309.length;
           for (var rangeIndex309 = 0; rangeIndex309 < rangeListLen309; rangeIndex309++) {
             var rangeData309 = rangeList309[rangeIndex309];
-            output.append('<tr><td><div style=\'background-color:', soy.$$escapeHtml(rangeData309.color), '; width:12px; height:12px\'></div></td><td>', soy.$$escapeHtml(rangeData309.from), '</td><td>', soy.$$escapeHtml(rangeData309.to), '</td><td>', soy.$$escapeHtml(rangeData309.percentage), '</td><td><img class=\'scb_f_facs_analyze_remove_point\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' facs_lane_id=\'', soy.$$escapeHtml(opt_data.lane.id), '\' from=\'', soy.$$escapeHtml(rangeData309.from), '\' to=\'', soy.$$escapeHtml(rangeData309.to), '\' alt="Delete" title="Delete" src="images/setup/scb_remove.png"></td></tr>');
+            output.append('<tr><td><div style=\'background-color:', soy.$$escapeHtml(rangeData309.color), '; width:12px; height:12px\'></div></td><td>', soy.$$escapeHtml(rangeData309.from), ' - ', soy.$$escapeHtml(rangeData309.to), '</td><td>', soy.$$escapeHtml(rangeData309.percentage), '</td><td><img class=\'scb_f_facs_analyze_remove_point\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' facs_lane_id=\'', soy.$$escapeHtml(opt_data.lane.id), '\' from=\'', soy.$$escapeHtml(rangeData309.from), '\' to=\'', soy.$$escapeHtml(rangeData309.to), '\' alt="Delete" title="Delete" src="images/setup/scb_remove.png"></td></tr>');
           }
           output.append('</tbody></table><input type="checkbox" assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' facs_lane_id=\'', soy.$$escapeHtml(opt_data.lane.id), '\' class=\'scb_f_facs_apply_to_all\'', (opt_data.facs.apply_dna_analysis_to_all) ? 'checked=\'checked\'' : '', '> Apply to all');
         }

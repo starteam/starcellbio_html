@@ -252,12 +252,16 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     _.each(raw_data.data, function (e) {
         total += e[1];
     });
-    function range(from, to) {
-        var c = colors[ ranges.length % colors.length];
+    function range(pts) {
+        var carray = _.difference(colors, _.pluck(points, 'c'));
+        var c = carray.length > 0 ? carray[0] : colors[0];
+        var from = pts.from;
+        var to = pts.to;
+        pts.c = pts.c || c;
         var range = {
-            from: from,
-            to: to,
-            color: c,
+            from: pts.from,
+            to: pts.to,
+            color: pts.c,
             percentage: 0
         };
         var series = [];
@@ -270,13 +274,13 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
             }
         });
         range.percentage = Math.round(percentage / total * 100);
-        data.push({data: series, color: c });
+        data.push({data: series, color: pts.c });
         data.push({data: [
             [from, 0],
             [from, 10000],
             [to - 1, 10000],
             [to - 1, 0]
-        ], color: c,
+        ], color: pts.c,
             lines: {show: true, fill: false, steps: true, lineWidth: 1},
         });
 
@@ -290,10 +294,10 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
             pts.from = pts.to;
             pts.to = tmp;
         }
-        range(pts.from, pts.to);
+        range(pts);
     }
 //    if (data.length == 0) {
-    data.push({data: raw_data.data, fill: false});
+    data.push({data: raw_data.data, lines: {show: true, fill: false}});
 //    }
     if (facs_lane.canvas_metadata) {
         facs_lane.canvas_metadata.data = data;
@@ -331,16 +335,28 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
     state.facs_lane.canvas_metadata.options.hooks = { bindEvents: [ function (plot, eventHolder) {
         var xaxes = plot.getXAxes()[0];
         var yaxes = plot.getYAxes()[0];
+            var sensitivity = 4;
 
         var click = function (e) {
             var px = xaxes.c2p(e.clientX - e.srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
             var py = yaxes.c2p(e.offsetY);
+            px = Math.round(px);
             if (state.facs.sample_analysis) {
                 console.info("Click on: " + px + " " + py);
                 var point = Math.round(px);
                 if (!Number.isNaN(from)) {
                     var to = px;
-                    state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to)});
+                    if (point_to_edit) {
+                        if (Math.abs(point_to_edit.from - from)<sensitivity) {
+                            point_to_edit.from = to;
+                        } else {
+                            point_to_edit.to = to;
+                        }
+                    }
+                    else {
+                        state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to)});
+                    }
+                    point_to_edit = null;
                     //state.facs_lane.canvas_metadata_analysis.points.push(Math.round(to));
                     scb.ui.static.FacsView.reevaluate_metadata(state);
                     state.facs.apply_dna_analysis_to_all = false;
@@ -350,17 +366,54 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 }
             }
         };
+        var match = function (px) {
+            var point = _.find(state.facs_lane.canvas_metadata_analysis.points, function (e) {
+                var overlap = Math.abs(px - e.from) < 4 || Math.abs(px - e.to) < sensitivity;
+                return overlap;
+            });
+            return point;
+        }
         var from = NaN;
+        var point_to_edit = null;
         var move = function (e) {
             var px = xaxes.c2p(e.clientX - e.srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
             var py = yaxes.c2p(e.offsetY);
+            px = Math.round(px);
+            console.info(px + " " + e.which + " " + from + " " + point_to_edit);
             if (state.facs.sample_analysis) {
                 window._dump_event = e;
                 if (e.which == 1 && Number.isNaN(from)) {
                     console.info("SET FROM " + px);
                     from = px;
+                    var point = match(px);
+                    point_to_edit = point;
+                }
+                if (e.which == 1 && !Number.isNaN(from)) {
+                    if (point_to_edit) {
+                        console.info( "ew" + px );
+                        $(plot.getPlaceholder()).css('cursor', 'ew-resize');
+                    }
+                    else {
+                        console.info( "pt" + px);
+                        $(plot.getPlaceholder()).css('cursor', 'pointer');
+                    }
+                }
+                if (e.which == 0 && Number.isNaN(from)) {
+                    // is it over line?
+                    var point = match(px);
+                    if (point) {
+                        console.info( "ew" + px );
+                        $(plot.getPlaceholder()).css('cursor', 'ew-resize');
+                    }
+                    else {
+                        console.info( "pt" + px);
+                        $(plot.getPlaceholder()).css('cursor', 'pointer');
+                    }
+                    console.info(point);
                 }
                 if (e.which == 0 && !Number.isNaN(from)) {
+                    // is it over line?
+
                     console.info("SET TO " + px);
                     var to = px;
                     state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to)});

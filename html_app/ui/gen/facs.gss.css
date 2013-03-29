@@ -84,6 +84,8 @@
   border-left: 1px solid #e0e0e0;
   padding-left: 6px;
   overflow-y: scroll;
+  font-family: sourcesanspro-regular;
+  font-size: 12pt;
 }
 .scb_f_facs_tools_start_analysis {
   position: absolute;
