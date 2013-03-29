@@ -676,11 +676,11 @@ var __assigment_tufts = {
                 value: 100
             },
             20: {
-                name: '20uM',
+                name: '20'+microEntity+'M',
                 value: 20
             },
             10: {
-                name: '10uM',
+                name: '10'+microEntity+'xM',
                 value: 10
             }
 
@@ -713,7 +713,7 @@ var __assigment_tufts = {
             }
         },
         time_unit: {
-            kind: 'minutes'
+            kind: 'minutes' 
         },
         primary_anti_body: {
             1: {
@@ -2071,6 +2071,7 @@ var __assigment_706 = {
                 },
                 add_multiple_dialog: {
                     'wt': {
+                        title: '<b>Strain:</b> Wild Type',
                         headings: [
                             'Treatment', 'Temperature', '- PP1', '+ PP1'
                         ],
@@ -2317,6 +2318,8 @@ var __assigment_706 = {
                         ]
                     },
                     'm1': {
+                        title: '<b>Strain:</b> Mutant 1',
+
                         headings: [
                             'Treatment', 'Temperature', '- PP1', '+ PP1'
                         ],
@@ -2383,6 +2386,8 @@ var __assigment_706 = {
 
                     },
                     'm2': {
+                        title: '<b>Strain:</b> Mutant 2',
+
                         headings: [
                             'Treatment', 'Temperature', '- PP1', '+ PP1'
                         ],
@@ -3035,7 +3040,7 @@ $(function () {
             width: '800px',
             height: '900px',
             left: '100px',
-            top: '100px'
+            top: '000px'
         }
     });
 
