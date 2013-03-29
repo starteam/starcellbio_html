@@ -245,7 +245,7 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     });
 
     var colors = [
-        "#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"
+        "#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed", 'orange' , 'black' , 'green' , 'violet' , 'purple' , 'pink'
     ];
 
     var total = 0;
