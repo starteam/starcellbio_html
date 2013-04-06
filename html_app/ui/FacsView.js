@@ -338,7 +338,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
         var sensitivity = 4;
 
         var click = function (e) {
-            var px = xaxes.c2p(e.clientX - e.srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
+            var srcElement = e.srcElement || e.target;
+            var px = xaxes.c2p(e.clientX - srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
             var py = yaxes.c2p(e.offsetY);
             px = Math.round(px);
             if (state.facs.sample_analysis) {
@@ -346,6 +347,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 var point = Math.round(px);
                 if (!Number.isNaN(from)) {
                     var to = px;
+                    to = to > 0 ? to : 0 ;
                     if (point_to_edit) {
                         if (Math.abs(point_to_edit.from - from) < sensitivity) {
                             point_to_edit.from = to;
@@ -379,22 +381,25 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
         var from_point = null;
         var point_to_edit = null;
         var move = function (e) {
-            var px = xaxes.c2p(e.clientX - e.srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
+            var srcElement = e.srcElement || e.target;
+            var px = xaxes.c2p(e.clientX - srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
             var py = yaxes.c2p(e.offsetY);
             px = Math.round(px);
-            console.info(px + " " + e.which + " " + from + " " + point_to_edit);
+            var button = scb.utils.isDefined(e.buttons) ? e.buttons : e.which ;
+            console.info(px + " " + from + " " + point_to_edit + " cb=" + button + " b=" + e.button + " bs=" + e.buttons);
             if (state.facs.sample_analysis) {
                 window._dump_event = e;
-                if (e.which == 1 && Number.isNaN(from)) {
+                if (button == 1 && Number.isNaN(from)) {
                     console.info("SET FROM " + px);
                     from = px;
+                    from = from > 0 ? from : 0 ;
                     from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
                         left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
 
                     var point = match(px);
                     point_to_edit = point;
                 }
-                if (e.which == 1 && !Number.isNaN(from)) {
+                if (button == 1 && !Number.isNaN(from)) {
                     var to_point = {
                         top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
                         left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
@@ -418,7 +423,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                         $(plot.getPlaceholder()).css('cursor', 'pointer');
                     }
                 }
-                if (e.which == 0 && Number.isNaN(from)) {
+                if (button == 0 && Number.isNaN(from)) {
                     // is it over line?
                     var point = match(px);
                     if (point) {
@@ -431,10 +436,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     }
                     console.info(point);
                 }
-                if (e.which == 0 && !Number.isNaN(from)) {
+                if (button == 0 && !Number.isNaN(from)) {
                     // is it over line?
                     console.info("SET TO " + px);
                     var to = px;
+                    to = to > 0 ? to : 0 ;
                     state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to)});
                     //state.facs_lane.canvas_metadata_analysis.points.push(Math.round(to));
                     scb.ui.static.FacsView.reevaluate_metadata(state);
