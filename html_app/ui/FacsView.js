@@ -76,6 +76,12 @@ scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
         alert("INVALID ELEMENT!");
     }
     var rows_state = parsed.facs.rows_state();
+    if (rows_state && rows_state.valid < 1) {
+        var r = confirm("No samples selected. Would you like to continue?")
+        if (r == false) {
+            return;
+        }
+    }
     parsed.facs.sample_prepared = true;
     scb.ui.static.MainFrame.refresh();
 }
@@ -158,12 +164,10 @@ scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
     var from = parseFloat($(element).attr('from'));
     var to = parseFloat($(element).attr('to'));
     parsed.facs_lane.canvas_metadata_analysis.points = parsed.facs_lane.canvas_metadata_analysis.points ? parsed.facs_lane.canvas_metadata_analysis.points : [];
-    console.info(parsed.facs_lane.canvas_metadata_analysis.points);
     var element = _.find(parsed.facs_lane.canvas_metadata_analysis.points, function (e) {
         return e.from == from && e.to == to;
     });
     parsed.facs_lane.canvas_metadata_analysis.points = _.without(parsed.facs_lane.canvas_metadata_analysis.points, element);
-    console.info(parsed.facs_lane.canvas_metadata_analysis.points);
     scb.ui.static.FacsView.reevaluate_metadata(parsed);
     parsed.facs.apply_dna_analysis_to_all = false;
     scb.ui.static.MainFrame.refresh();
@@ -178,11 +182,16 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
     parsed.facs.apply_dna_analysis_to_all = $(element).attr('checked') == 'checked';
     if (parsed.facs.apply_dna_analysis_to_all) {
         _.each(parsed.facs.lanes_list.list, function (facs_lane) {
-            facs_lane.canvas_metadata_analysis.points = parsed.facs_lane.canvas_metadata_analysis.points;
-            facs_lane.canvas_metadata_analysis.raw_data = parsed.facs_lane.canvas_metadata_analysis.raw_data ? parsed.facs_lane.canvas_metadata_analysis.raw_data : {data: []};
-            scb.ui.static.FacsView.reevaluate_metadata({
+            facs_lane.canvas_metadata_analysis.points = _.clone(parsed.facs_lane.canvas_metadata_analysis.points);
+        //    facs_lane.canvas_metadata_analysis.raw_data = _.clone(parsed.facs_lane.canvas_metadata_analysis.raw_data ? parsed.facs_lane.canvas_metadata_analysis.raw_data : {data: []});
+//            scb.ui.static.FacsView.reevaluate_metadata({
+//                facs: parsed.facs,
+//                facs_lane: facs_lane
+//            });
+            scb.ui.static.FacsView.evaluate_chart({
                 facs: parsed.facs,
-                facs_lane: parsed.facs_lane
+                facs_lane: facs_lane,
+                context: parsed.context
             });
         });
         scb.ui.static.MainFrame.refresh();
@@ -234,14 +243,14 @@ scb.ui.static.FacsView.register = function (workarea) {
 
 scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     var facs_lane = state.facs_lane;
-    facs_lane.canvas_metadata_analysis.ranges = [];
     facs_lane.canvas_metadata_analysis.points = facs_lane.canvas_metadata_analysis.points ? facs_lane.canvas_metadata_analysis.points : [];
+    facs_lane.canvas_metadata_analysis.ranges = [];
     var ranges = facs_lane.canvas_metadata_analysis.ranges;
     var points = facs_lane.canvas_metadata_analysis.points;
     var raw_data = scb.utils.get(facs_lane, ['canvas_metadata_analysis', 'raw_data', 0], []);
     var data = [];
     points = points.sort(function (a, b) {
-        return a > b;
+        return a.from > b.from;
     });
 
     var colors = [
@@ -252,6 +261,7 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     _.each(raw_data.data, function (e) {
         total += e[1];
     });
+
     function range(pts) {
         var carray = _.difference(colors, _.pluck(points, 'c'));
         var c = carray.length > 0 ? carray[0] : colors[0];
@@ -283,7 +293,6 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
         ], color: pts.c,
             lines: {show: true, fill: false, steps: true, lineWidth: 1},
         });
-
         ranges.push(range);
     }
 
@@ -347,7 +356,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 var point = Math.round(px);
                 if (!Number.isNaN(from)) {
                     var to = px;
-                    to = to > 0 ? to : 0 ;
+                    to = to > 0 ? to : 0;
                     if (point_to_edit) {
                         if (Math.abs(point_to_edit.from - from) < sensitivity) {
                             point_to_edit.from = to;
@@ -385,14 +394,14 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             var px = xaxes.c2p(e.clientX - srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
             var py = yaxes.c2p(e.offsetY);
             px = Math.round(px);
-            var button = scb.utils.isDefined(e.buttons) ? e.buttons : e.which ;
+            var button = scb.utils.isDefined(e.buttons) ? e.buttons : e.which;
             console.info(px + " " + from + " " + point_to_edit + " cb=" + button + " b=" + e.button + " bs=" + e.buttons);
             if (state.facs.sample_analysis) {
                 window._dump_event = e;
                 if (button == 1 && Number.isNaN(from)) {
                     console.info("SET FROM " + px);
                     from = px;
-                    from = from > 0 ? from : 0 ;
+                    from = from > 0 ? from : 0;
                     from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
                         left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
 
@@ -440,7 +449,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     // is it over line?
                     console.info("SET TO " + px);
                     var to = px;
-                    to = to > 0 ? to : 0 ;
+                    to = to > 0 ? to : 0;
                     state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to)});
                     //state.facs_lane.canvas_metadata_analysis.points.push(Math.round(to));
                     scb.ui.static.FacsView.reevaluate_metadata(state);
@@ -457,8 +466,9 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
     ]
     };
     scb.ui.static.FacsView.reevaluate_metadata(state);
-
-    $.plot(state.chart, state.facs_lane.canvas_metadata.data, state.facs_lane.canvas_metadata.options);
+    if (state.chart) {
+        $.plot(state.chart, state.facs_lane.canvas_metadata.data, state.facs_lane.canvas_metadata.options);
+    }
 };
 
 scb.ui.static.FacsView.charts = function (workarea) {
