@@ -395,8 +395,8 @@ FACS Main View
     <div class='scb_s_facs_tools_instructions_followup'>
         <ul>
             <li>
-                The flow cytometry analysis tool will divide the flow cytometry plot into segments and calculate the
-                percentage of cells that are found within each segment of your plot.
+                To calculate the percentage of cells within segments of the graph, click on the graph and draw a segment
+                bounded by the vertical lines provided. Repeat to create another segment.
             </li>
             <li>
                 To analyze your data, click within the flow cytometry experimental results graph at the position where
@@ -405,11 +405,10 @@ FACS Main View
                 another segment by clicking at the next position at which you would like to create another segment.
             </li>
             <li>
-                To delete a particular data analysis point, click the 'x' to the right �
+                To alter the position of the segment, drag the vertical line into the appropriate position.
             </li>
             <li>
-                To alter the position of the segment, click on the numerical value below and type the desired position
-                of the segment in terms of levels of PI Fluorescence.
+                To apply the analysis to all of your samples, select <b>Apply to All</b>.
             </li>
         </ul>
     </div>
@@ -446,14 +445,16 @@ FACS Main View
     <input type="checkbox" assignment_id='{$assignment.id}'
            experiment_id='{$experiment.id}'
            facs_id='{$facs.id}' facs_lane_id='{$lane.id}' class='scb_f_facs_apply_to_all'
-        {if $facs.apply_dna_analysis_to_all}checked='checked'{/if}> Apply to all
+    {if $facs.apply_dna_analysis_to_all}checked='checked'{/if}> Apply to all
 
     {/if}
     {/if}
     {/if}
     {else}
     <div class='scb_s_facs_tools_instructions_initial'>
+        <!--
         To view the flow cytometry data for each sample, select the sample name in the Samples window to the left.
+        -->
     </div>
     <button class='scb_f_facs_tools_start_analysis scb_s_gray_button' assignment_id='{$assignment.id}'
             experiment_id='{$experiment.id}'

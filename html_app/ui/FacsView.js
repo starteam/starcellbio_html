@@ -142,6 +142,7 @@ scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, even
 
 scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
     var jqDiv = $('.scb_s_facs_tools_instructions_followup');
+    scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
     if (show) {
         jqDiv.slideDown();
         $('.scb_s_facs_tools_instructions_followup_toggle').html('Click here to hide instructions');
@@ -183,7 +184,7 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
     if (parsed.facs.apply_dna_analysis_to_all) {
         _.each(parsed.facs.lanes_list.list, function (facs_lane) {
             facs_lane.canvas_metadata_analysis.points = _.clone(parsed.facs_lane.canvas_metadata_analysis.points);
-        //    facs_lane.canvas_metadata_analysis.raw_data = _.clone(parsed.facs_lane.canvas_metadata_analysis.raw_data ? parsed.facs_lane.canvas_metadata_analysis.raw_data : {data: []});
+            //    facs_lane.canvas_metadata_analysis.raw_data = _.clone(parsed.facs_lane.canvas_metadata_analysis.raw_data ? parsed.facs_lane.canvas_metadata_analysis.raw_data : {data: []});
 //            scb.ui.static.FacsView.reevaluate_metadata({
 //                facs: parsed.facs,
 //                facs_lane: facs_lane
@@ -524,10 +525,20 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             $('.scb_s_facs_samples_graph_area').css('opacity', '.25');
         }
 
+        if (scb.utils.isDefined(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state)) {
+            if (!scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state) {
+                $('.scb_s_facs_tools_instructions_followup').hide();
+                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(false);
+            } else {
+                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
+            }
+        }
+
         if (state.facs.selected_lane && state.facs.selected_lane.canvas_metadata_analysis.points.length > 0) {
             $('.scb_s_facs_tools_instructions_followup').hide();
             scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(false);
         }
+
 
     }
 }
