@@ -46,6 +46,11 @@
     background-color: white;
 }
 
+.scb_s_western_blot_remove > img {
+    height:12px;
+}
+
+
 .scb_s_facs_tab_content,.scb_s_western_blot_tab_content {
     border: 1px solid #808080;
     border-radius: 5px;

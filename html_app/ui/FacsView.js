@@ -183,7 +183,7 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
     parsed.facs.apply_dna_analysis_to_all = $(element).attr('checked') == 'checked';
     if (parsed.facs.apply_dna_analysis_to_all) {
         _.each(parsed.facs.lanes_list.list, function (facs_lane) {
-            facs_lane.canvas_metadata_analysis.points = _.clone(parsed.facs_lane.canvas_metadata_analysis.points);
+            facs_lane.canvas_metadata_analysis.points = JSON.parse(JSON.stringify(parsed.facs_lane.canvas_metadata_analysis.points));
             //    facs_lane.canvas_metadata_analysis.raw_data = _.clone(parsed.facs_lane.canvas_metadata_analysis.raw_data ? parsed.facs_lane.canvas_metadata_analysis.raw_data : {data: []});
 //            scb.ui.static.FacsView.reevaluate_metadata({
 //                facs: parsed.facs,
