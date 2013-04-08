@@ -414,13 +414,20 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                         top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
                         left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
                     };
+                    var left = from_point.left > to_point.left;
                     var styles = {
                         position: 'absolute',
-                        top: Math.min(from_point.top, to_point.top) + "px",
+                        //top: point_to_edit ? Math.min(from_point.top, to_point.top) + "px" : "0px",
+                        top: '0px',
                         left: Math.min(from_point.left, to_point.left) + "px",
-                        height: point_to_edit ? '0px' : Math.abs(from_point.top - to_point.top) + "px",
+                        //height: point_to_edit ? '50px' : "300px" , // Math.abs(from_point.top - to_point.top) + "px",
+                        height: '310px',
+                        color:point_to_edit? point_to_edit.c : '#808080',
                         width: Math.abs(from_point.left - to_point.left) + "px",
-                        'border': (point_to_edit ? ('1px dashed ' + point_to_edit.c) : '2px dashed #a0a0a0')
+                        'border-left': (point_to_edit ? ( left ? '2px solid ' + point_to_edit.c : '1px solid white' ) : '2px dashed #a0a0a0'),
+                        'border-right': (point_to_edit ? ( !left ? '2px solid ' + point_to_edit.c : '1px solid white') : '2px dashed #a0a0a0'),
+                        //'border-bottom': (point_to_edit ? ('1px solid ' + point_to_edit.c) : '0px dashed #a0a0a0'),
+                        'vertical-align': 'center',
                     }
                     console.info(styles);
                     $('.scb_s_facs_chart_helper').css(styles);
