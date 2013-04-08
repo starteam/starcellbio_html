@@ -59,10 +59,11 @@ table.scb_s_experiment_setup_table {
 }
 .scb_f_experiment_setup_remove_sample, .scb_f_experiment_setup_duplicate_sample {
   border: 0;
-  background-color: #e9e9e9;
   width: 24px;
+  background: transparent;
   height: 20px;
   cursor: pointer;
+  top: 0;
 }
 .scb_s_experiment_setup_new_row_gray {
   opacity: .25;
