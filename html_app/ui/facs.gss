@@ -140,3 +140,12 @@
     padding-left:5px;
     border-right: 1px solid #e0e0e0;
 }
+
+
+.scb_s_facs_tools_instructions_followup > ul{
+ -webkit-padding-start: 20px;
+ -moz-padding-start: 20px;
+ text-align: left;
+ list-style-type: disc;
+ font-size:10pt;
+}
