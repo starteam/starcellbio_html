@@ -354,7 +354,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             if (state.facs.sample_analysis) {
                 console.info("Click on: " + px + " " + py);
                 var point = Math.round(px);
-                if (!Number.isNaN(from)) {
+                if (!isNaN(from)) {
                     var to = px;
                     to = to > 0 ? to : 0;
                     if (point_to_edit) {
@@ -398,7 +398,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             console.info(px + " " + from + " " + point_to_edit + " cb=" + button + " b=" + e.button + " bs=" + e.buttons);
             if (state.facs.sample_analysis) {
                 window._dump_event = e;
-                if (button == 1 && Number.isNaN(from)) {
+                if (button == 1 && isNaN(from)) {
                     console.info("SET FROM " + px);
                     from = px;
                     from = from > 0 ? from : 0;
@@ -408,7 +408,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     var point = match(px);
                     point_to_edit = point;
                 }
-                if (button == 1 && !Number.isNaN(from)) {
+                if (button == 1 && !isNaN(from)) {
                     var to_point = {
                         top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
                         left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
@@ -432,7 +432,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                         $(plot.getPlaceholder()).css('cursor', 'pointer');
                     }
                 }
-                if (button == 0 && Number.isNaN(from)) {
+                if (button == 0 && isNaN(from)) {
                     // is it over line?
                     var point = match(px);
                     if (point) {
@@ -445,7 +445,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     }
                     console.info(point);
                 }
-                if (button == 0 && !Number.isNaN(from)) {
+                if (button == 0 && !isNaN(from)) {
                     // is it over line?
                     console.info("SET TO " + px);
                     var to = px;
