@@ -118,6 +118,7 @@
   display: inline-block;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 .scb_s_western_blot_gel_content {
   height: 350px;
