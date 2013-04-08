@@ -2043,7 +2043,7 @@ var __assigment_706 = {
                                 {kind: 'concentration', title: 'Concentration', editable: false}//
                             ]
                         },//
-                        {kind: 'temperature', title: 'Temperature', editable: true},//
+                        {kind: 'temperature', title: 'Temperature', editable: false},//
                         {kind: 'actions', title: 'Actions'}//
                     ],//
                     actions: [
