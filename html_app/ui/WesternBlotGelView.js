@@ -201,6 +201,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     var slider_value = $('.scb_f_slider_value', $(parent));
 
     function set_slider(y) {
+        console.info( "set_slider " + y ) ;
         slider.css('top', y + 'px');
         slider_value.css('top', (y - 12) + 'px');
         var ww = Math.round(c.position_to_weight(y));
@@ -227,8 +228,11 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
 
         var y = (eY - poffset.top) - 14;
         var x = (eX - poffset.left);
-        4
-        if (true || $(evt.srcElement).is('canvas')) {
+
+        console.info(evt);
+        window.__evt = evt ;
+        window.__element = element;
+        if (true || $(evt.srcElement ? evt.srcElement: evt.target).is('canvas')) {
             gel.canvas_metadata.slider = y;
             if (y < 22 || y > 285 || x < 2 || x > 360) {
                 slider.hide();
