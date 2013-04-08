@@ -19,7 +19,7 @@ def home(request):
 
     file_path = StarCellBio.settings.rel('../html_app/index.html')
     fsock = open(file_path, "r")
-    response = HttpResponse(fsock, mimetype='text/html')
+    response = HttpResponse(fsock, mimetype='text/html; charset=utf-8')
     return response
     #return redirect('static/index.html')
 

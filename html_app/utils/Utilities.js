@@ -341,4 +341,64 @@ scb.utils.get = function (root, accessors, _default) {
     }
     return _default;
 }
+/// WORKS WITH ASCII ONLY - NEED TO FIX FOR HIGH CHARS
+scb.utils.lzw_encode = function(s) {
+    var d = new Date();
 
+    var dict = {};
+    var data = (s + "").split("");
+    var out = [];
+    var currChar;
+    var phrase = data[0];
+    var code = 256;
+    for (var i=1; i<data.length; i++) {
+        currChar=data[i];
+        if (dict[phrase + currChar] != null) {
+            phrase += currChar;
+        }
+        else {
+            out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
+            dict[phrase + currChar] = code;
+            code++;
+            phrase=currChar;
+        }
+    }
+    out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
+    for (var i=0; i<out.length; i++) {
+        out[i] = String.fromCharCode(out[i]);
+    }
+
+    var retrunedresult = out.join("");
+    console.log("Input: " + s.length/1024 + "kb Output:"+ retrunedresult.length/1024 + "kb Rate: " +(s.length/retrunedresult.length) );
+    console.log((new Date()).getTime() - d.getTime() + ' ms.');
+    return retrunedresult;
+}
+
+scb.utils.lzw_decode = function(s) {
+var dict = {};
+var data = (s + "").split("");
+var currChar = data[0];
+var oldPhrase = currChar;
+var out = [currChar];
+var code = 256;
+var phrase;
+for (var i=1; i<data.length; i++) {
+var currCode = data[i].charCodeAt(0);
+if (currCode < 256) {
+    if( currCode == 1 )
+    {
+        i++;
+    }
+phrase = data[i];
+}
+else {
+phrase = dict[currCode] ? dict[currCode] : (oldPhrase + currChar);
+}
+out.push(phrase);
+currChar = phrase.charAt(0);
+dict[code] = oldPhrase + currChar;
+code++;
+oldPhrase = phrase;
+}
+return out.join("");
+}
