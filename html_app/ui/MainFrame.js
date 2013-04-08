@@ -158,18 +158,22 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         if (localStorage.getItem("scb_master_model") != model_string) {
             master_model.timestamp = (new Date()).getTime();
             model_string = JSON.stringify(master_model);
-            localStorage.setItem("scb_master_model", model_string);
-            if (!scb.ui.static.MainFrame.in_ajax) {
-                scb.ui.static.MainFrame.in_ajax = true;
-                scb.ui.static.MainFrame.show_in_ajax = true;
-                scb.ui.static.MainFrame.show_in_ajax_message = '';
-                scb.ui.static.MainFrame.in_ajax_display();
-                scb.utils.server.call(model_string, function (state) {
-                    scb.ui.static.MainFrame.in_ajax = false;
-                    scb.ui.static.MainFrame.show_in_ajax = !state.success;
-                    scb.ui.static.MainFrame.show_in_ajax_message = !state.success ? 'Failed, will retry in 30 seconds.' : '';
+            try {
+                localStorage.setItem("scb_master_model", model_string);
+                if (!scb.ui.static.MainFrame.in_ajax) {
+                    scb.ui.static.MainFrame.in_ajax = true;
+                    scb.ui.static.MainFrame.show_in_ajax = true;
+                    scb.ui.static.MainFrame.show_in_ajax_message = '';
                     scb.ui.static.MainFrame.in_ajax_display();
-                });
+                    scb.utils.server.call(model_string, function (state) {
+                        scb.ui.static.MainFrame.in_ajax = false;
+                        scb.ui.static.MainFrame.show_in_ajax = !state.success;
+                        scb.ui.static.MainFrame.show_in_ajax_message = !state.success ? 'Failed, will retry in 30 seconds.' : '';
+                        scb.ui.static.MainFrame.in_ajax_display();
+                    });
+                }
+            }
+            catch (e) {
             }
         }
         try {
