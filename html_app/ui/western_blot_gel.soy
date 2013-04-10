@@ -132,7 +132,7 @@
     </div>
     <div class='scb_s_western_blot_samples_gel_area'>
         <div class='scb_s_western_blot_gel_tabs'>
-            {if $western_blot.gel_list.length < 4}
+            {if $western_blot.gel_list.length < 5}
             {foreach $gel in $western_blot.gel_list.list}
             {if $western_blot_gel.id == $gel.id}
                 <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>

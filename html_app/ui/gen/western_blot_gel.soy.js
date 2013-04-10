@@ -42,7 +42,7 @@ scb_western_blot_gel.display_tabs = function(opt_data, opt_sb) {
     output.append((rData72.is_valid) ? '<li>' + soy.$$escapeHtml(rData72.display_text) + ' -' + soy.$$escapeHtml(rData72.lane.kinds[rData72.lane.kind].name) + '</li>' : '');
   }
   output.append((opt_data.western_blot.marker_loaded == true) ? '<li>Marker</li>' : '', '</ol></div>', (opt_data.western_blot.marker_loaded == false) ? '<div class=\'scb_s_western_blot_marker scb_s_western_blot_marker_not\'>No marker loaded.</div>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'>');
-  if (opt_data.western_blot.gel_list.length < 4) {
+  if (opt_data.western_blot.gel_list.length < 5) {
     var gelList91 = opt_data.western_blot.gel_list.list;
     var gelListLen91 = gelList91.length;
     for (var gelIndex91 = 0; gelIndex91 < gelListLen91; gelIndex91++) {
