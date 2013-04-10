@@ -64,7 +64,7 @@ scb.utils.getCsfrToken = function () {
 scb.utils.server.is_auth = function (callback) {
 scb.utils.call_back(callback, {
                 success: true,
-                data: ret
+                data: {}
             });
     return;
     $.ajax({url: '/scb/is_auth/', data: '', type: 'GET', success: function (a, b, c) {
@@ -88,7 +88,7 @@ scb.utils.call_back(callback, {
 scb.utils.server.call = function (data, callback) {
     scb.utils.call_back(callback, {
                 success: true,
-                data: ret
+                data: {}
             });
     return;
     $.ajax({url: '/scb/is_auth/', type: data ? 'POST' : 'GET',
