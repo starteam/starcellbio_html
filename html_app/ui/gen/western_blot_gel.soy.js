@@ -74,7 +74,7 @@ scb_western_blot_gel.display_gel = function(opt_data, opt_sb) {
     output.append('<div class=\'scb_s_western_blot_gel_canvas_wrapper\'><canvas id="', soy.$$escapeHtml(opt_data.western_blot_gel.id), '" class=\'scb_s_western_blot_gel_canvas\' style="width:363px;height:288px" width=\'363\' height=\'288\'></canvas><div class=\'scb_f_slider\'></div><div class=\'scb_f_slider_value\'></div></div>');
   } else {
     scb_western_blot.display_western_blot_numbers(null, output);
-    output.append('<img class=\'scb_s_western_blot_gel_membrane\' src=\'images/western_blot/SCB_WesternBlotting_F_copy_0001s_0003s_0000s_0001s_0002_Membrane-BG.png\'>', (opt_data.western_blot.marker_loaded) ? '<img style=\'position:relative;top: -233px;left: ' + soy.$$escapeHtml(20 + 22 * opt_data.valid_rows) + 'px\' class=\'scb_s_western_blot_gel_membrane\' src=\'images/western_blot/SCB_WB_Markers_Lane.png\'>' : '');
+    output.append('<img class=\'scb_s_western_blot_gel_membrane\' src=\'images/western_blot/SCB_WesternBlotting_F_copy_0001s_0003s_0000s_0001s_0002_Membrane-BG.png\'>', (opt_data.western_blot.marker_loaded) ? '<img style=\'position:relative;top: -220px;left: ' + soy.$$escapeHtml(20 + 22 * opt_data.valid_rows) + 'px\' class=\'scb_s_western_blot_gel_membrane\' src=\'images/western_blot/SCB_WB_Markers_Lane.png\'>' : '');
   }
   output.append('</div><div class=\'scb_s_western_blot_tools\'>');
   if (opt_data.western_blot_gel.is_developed) {
