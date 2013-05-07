@@ -9,12 +9,15 @@ rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-STARCELLBIO_ENV = os.environ.get( 'STARCELLBIO_ENV' )
-if STARCELLBIO_ENV == 'Production':
+
+import platform
+if platform.node() == 'starapp':
+    # Production Platform
     DEBUG = False
     TEMPLATE_DEBUG = DEBUG
-	
-
+    MEDIA_ROOT = '/scratch/starcellbio/media_root'
+else:
+    MEDIA_ROOT = '/tmp/static/'
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -57,7 +60,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+#MEDIA_ROOT = '/tmp/static/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -103,7 +106,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
@@ -140,7 +143,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'frontend_tests',
     'rest_framework',
-    'scb_rest'
+    'scb_rest',
+    'backend'
 ) + auth.settings.INSTALLED_APPS
 
 # A sample logging configuration. The only tangible logging
@@ -171,5 +175,15 @@ LOGGING = {
         },
     }
 }
-
-
+## django all-auth config
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'StarCellBio registration'
+#ACCOUNT_SIGNUP_FORM_CLASS
+ACCOUNT_USERNAME_MIN_LENGTH = 6
+ACCOUNT_USERNAME_REQUIRED = False
+EMAIL_HOST='localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'starcellbio@mit.edu'
+DEFAULT_FROM_EMAIL = 'starcellbio-admin@mit.edu'

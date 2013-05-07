@@ -104,6 +104,24 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
                     console.info("BG Mark intensity: " + mark.intensity + " " + tab.exposure + " " + sample_mark.intensity);
                 }
             }
+            var consolidated_lane = {} ;
+            _.each( lane.marks , function(elem) {
+                if( consolidated_lane[elem.position] )
+                {
+                    consolidated_lane[elem.position] += elem.intensity;
+                }
+                else
+                {
+                    consolidated_lane[elem.position] = elem.intensity;
+                }
+            });
+            lane.marks = [];
+            _.each( consolidated_lane , function( value, key ) {
+                lane.marks.push( {
+                    position: parseFloat(key),
+                    intensity: value
+                });
+            });
             tab.lanes.push(lane);
         }
 
@@ -237,11 +255,14 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         g.lineWidth = .5;
         g.shadowBlur = 0;
         g.fillStyle = '#000000';
+        self.h = h ;
+        self.height = height;
         if (state.gel.parent.parent.marker_loaded) {
             var weights = [10, 15, 20, 25, 37, 50, 75, 100, 150, 250];
             for (var weigth_index in weights) {
                 var weight = weights[weigth_index];
-                var position = h + 26 / (weight + 10) * (height - h);
+                var position = self.weight_to_position(weight);
+//                h + 26 / (weight + 10) * (height - h);
                 g.fillText("" + weight, lane_width * (LANE_OFFSET_0), position + 3);
                 g.beginPath();
                 g.moveTo(lane_width * (LANE_OFFSET_0) - g.lineWidth / 2, position);
@@ -259,6 +280,27 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
             // g.fillText("marker was not loaded", 5, 15);
         }
         g.restore();
+    }
+
+    self.weight_to_position = function(weight) {
+        var h = self.h;
+        var height = self.height;
+        var position = h + 26 / (weight + 10) * (height - h);
+        return position;
+    }
+
+    self.position_to_weight = function(position) {
+        var h = self.h;
+        var height = self.height;
+        if( position != h )
+        {
+            var weight = 26 * (height-h)/(position-h) - 10;
+            return weight;
+        }
+        else
+        {
+            return "N/A";
+        }
     }
 
     self.clear_canvas = function (canvas, width, height, g) {

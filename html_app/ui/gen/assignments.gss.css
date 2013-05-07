@@ -14,7 +14,7 @@
   border-color: #a0a0a0;
   border-radius: 8px;
   padding: 10px;
-  width: 664px;
+  width: 644px;
   position: relative;
   padding-left: 20px;
   padding-top: 17px;
@@ -72,6 +72,7 @@
   margin-right: 10px;
   padding: 5px;
   background-color: white;
+  margin-left: 20px;
 }
 .scb_s_assignments_sidebar>ul {
   margin-left: -28px;
@@ -100,6 +101,9 @@
   position: absolute;
   bottom: 5px;
   right: 5px;
+}
+ul>.scb_s_assignment_experiment_list_item_new_experiment {
+  padding-top: 10px;
 }
 .scb_s_assignment_experiment_list_item_new_experiment {
   padding-left: 25px;

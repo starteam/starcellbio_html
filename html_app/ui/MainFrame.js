@@ -130,6 +130,20 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.ui.static.WesternBlotGelView.register(workarea);
     scb.ui.static.FacsView.register(workarea);
 
+    scb.ui.static.MainFrame.in_ajax = false;
+    scb.ui.static.MainFrame.show_in_ajax = false;
+    scb.ui.static.MainFrame.show_in_ajax_message = '';
+
+    scb.ui.static.MainFrame.in_ajax_display = function () {
+        var saving = $('#saving');
+        if (scb.ui.static.MainFrame.show_in_ajax) {
+            saving.show();
+            $('#saving_message', saving).html(scb.ui.static.MainFrame.show_in_ajax_message);
+        }
+        else {
+            saving.hide();
+        }
+    }
     scb.ui.static.MainFrame.save = function () {
         var tmp;
         try {
@@ -140,7 +154,28 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             assignment.selected.experiments.selected_id = null;
         } catch (ex) {
         }
-        localStorage.setItem("scb_master_model", JSON.stringify(master_model));
+        var model_string = JSON.stringify(master_model);
+        if (localStorage.getItem("scb_master_model") != model_string) {
+            master_model.timestamp = (new Date()).getTime();
+            model_string = JSON.stringify(master_model);
+            try {
+                localStorage.setItem("scb_master_model", model_string);
+                if (!scb.ui.static.MainFrame.in_ajax) {
+                    scb.ui.static.MainFrame.in_ajax = true;
+                    scb.ui.static.MainFrame.show_in_ajax = true;
+                    scb.ui.static.MainFrame.show_in_ajax_message = '';
+                    scb.ui.static.MainFrame.in_ajax_display();
+                    scb.utils.server.call(model_string, function (state) {
+                        scb.ui.static.MainFrame.in_ajax = false;
+                        scb.ui.static.MainFrame.show_in_ajax = !state.success;
+                        scb.ui.static.MainFrame.show_in_ajax_message = !state.success ? 'Failed, will retry in 30 seconds.' : '';
+                        scb.ui.static.MainFrame.in_ajax_display();
+                    });
+                }
+            }
+            catch (e) {
+            }
+        }
         try {
             assignment.experiments.selected_id = tmp;
         } catch (ex) {
@@ -149,8 +184,28 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     scb.ui.static.MainFrame.load = function () {
         var master_model = JSON.parse(localStorage.getItem("scb_master_model"));
-        master_model_data = master_model;
         starcellbio(context.ui, master_model);
+    }
+
+    scb.ui.static.MainFrame.clear_NO_PROMPT = function () {
+        $.ajax({url: '/accounts/logout/', async: false, timeout: 5 });
+        self.show({view: 'assignments'});
+        master_model = master_model_data;
+        scb.ui.static.MainFrame.save();
+        starcellbio(context.ui, master_model);
+    }
+
+    scb.ui.static.MainFrame.clear = function () {
+        var r = prompt("This will restart whole assignment. Your saved data will be lost. Type: 'YES' to proceed.");
+        if (r == 'YES') {
+            self.show({view: 'assignments'});
+            master_model = master_model_data;
+            scb.ui.static.MainFrame.save();
+            starcellbio(context.ui, master_model);
+        }
+        else {
+            alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.");
+        }
     }
 
 
@@ -160,8 +215,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     });
 
     scb.utils.off_on(workarea, 'click', '.load_master_model', function () {
-        scb.ui.static.MainFrame.load()
+        scb.ui.static.MainFrame.load();
     });
+
+    scb.utils.off_on(workarea, 'click', '.clear_master_model', function () {
+        scb.ui.static.MainFrame.clear();
+    });
+
 
     scb.utils.off_on(workarea.parent(), 'click', '.remove_experiment', function () {
         var r = confirm("Delete experiment?");
@@ -231,6 +291,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         if (state.onhashchange) {
             window.scrollTo(0, 0);
         }
+        scb.ui.static.MainFrame.save();
         console.info(JSON.stringify(state));
         var parsed = scb.ui.static.MainFrame.validate_state(state);
         if (parsed.redisplay) {
@@ -244,7 +305,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'assignments') {
             if (!parsed.assignment) {
-                state.assignment_id = assignments.list[0].id;
+                state.assignment_id = assignments.selected_id ? assignments.selected_id : assignments.list[0].id;
                 state.onhashchange = false;
                 self.show(state);
                 return;
@@ -439,12 +500,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 //			});
 //
 //		}
+        scb.ui.static.MainFrame.in_ajax_display();
 
     }
 
     scb.ui.static.MainFrame.refresh = function (navigation_state) {
         var state = navigation_state || $.deparam(location.hash.replace(/^#/, ''), true);
-        state.onhashchange = true;
+        state.onhashchange = false;
         state.view = state.view || 'homepage';
         self.show(state);
     }

@@ -119,7 +119,8 @@
   display: inline-block;
   background-image: url('../images/homepage/SCB_Homepage_HeroImage.png');
   height: 318px;
-  width: 687px;
+  width: 667px;
+  margin-left: 20px;
 }
 .scb_s_homepage_top_left_image {
   padding: 40px 12px 15px;
@@ -156,6 +157,7 @@
   margin-left: 10px;
   margin-bottom: -10px;
   font-size: 12pt;
+  cursor: pointer;
 }
 .scb_s_homepage_blue_line {
   margin-left: 5px;
@@ -180,8 +182,8 @@
   height: 207px;
   margin-top: 15px;
   border-radius: 5px;
-  margin-left: 3px;
-  width: 945px;
+  margin-left: 23px;
+  width: 925px;
   background-image: url('../images/homepage/SCB_Homepage_LowerBG.png');
 }
 .scb_s_homepage_experimental_design {
@@ -271,7 +273,6 @@
   display: inline-block;
   height: 200px;
   vertical-align: top;
-  margin-left: 25px;
   position: relative;
 }
 .scb_s_homepage_technique_title {
@@ -348,4 +349,18 @@
 }
 .scb_no_underline, a {
   text-decoration: none;
+}
+#saving {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 10pt;
+  background-color: green;
+  color: white;
+  display: inline;
+}
+#saving_message {
+  display: inline-block;
+  font-size: 8pt;
+  background-color: red;
 }

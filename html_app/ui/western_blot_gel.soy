@@ -11,6 +11,7 @@
 * @param rows
 * @param kind
 * @param can_prepare_lysate
+* @param valid_rows
 */
 {template .main}
 <div class='scb_s_western_blot_view_gel'>
@@ -37,6 +38,7 @@
     {param rows:$rows /}
     {param kind:$kind /}
     {param can_prepare_lysate:$can_prepare_lysate/}
+    {param valid_rows:$valid_rows/}
     {/call}
     {call scb_homepage.display_footer}
     {param t:$t /}
@@ -53,6 +55,7 @@
 @param rows
 @param kind
 @param can_prepare_lysate
+@param valid_rows
 */
 {template .display_details}
 <div class='scb_western_blot_details_view'>
@@ -67,6 +70,7 @@
         {param rows:$rows /}
         {param kind:$kind /}
         {param can_prepare_lysate:$can_prepare_lysate/}
+        {param valid_rows:$valid_rows/}
         {/call}
     </div>
     <a class="scb_s_navigation_button scb_f_open_select_technique"
@@ -82,6 +86,7 @@
 @param western_blot
 @param western_blot_gel
 @param rows
+@param valid_rows
 @/param kind
 @/param can_prepare_lysate
 */
@@ -120,12 +125,11 @@
                     {$r.display_text} -{$r.lane.kinds[$r.lane.kind].name}
                 </li>
                 {/if}
-
                 {/foreach}
+                {if $western_blot.marker_loaded == true}
+                <li>Marker</li>
+                {/if}
             </ol>
-            {if $western_blot.marker_loaded == true}
-            <div class='scb_s_western_blot_marker'>15. &nbsp; Marker</div>
-            {/if}
         </div>
         {if $western_blot.marker_loaded == false}
         <div class='scb_s_western_blot_marker scb_s_western_blot_marker_not'>No marker loaded.</div>
@@ -133,7 +137,7 @@
     </div>
     <div class='scb_s_western_blot_samples_gel_area'>
         <div class='scb_s_western_blot_gel_tabs'>
-            {if $western_blot.gel_list.length < 4}
+            {if $western_blot.gel_list.length < 5}
             {foreach $gel in $western_blot.gel_list.list}
             {if $western_blot_gel.id == $gel.id}
                 <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
@@ -176,6 +180,7 @@
     {param western_blot:$western_blot /}
     {param western_blot_gel:$western_blot_gel /}
     {param rows:$rows /}
+    {param valid_rows:$valid_rows/}
     {/call}
 </div>
 </div>
@@ -188,6 +193,7 @@
 @param western_blot
 @param western_blot_gel
 @/param rows
+@param valid_rows
 */
 {template .display_gel}
 <div class='scb_s_western_blot_gel_content'>
@@ -202,12 +208,17 @@
             <canvas id="{$western_blot_gel.id}" class='scb_s_western_blot_gel_canvas' style="width:363px;height:288px"
                     width='363' height='288'></canvas>
             <div class='scb_f_slider'></div>
+            <div class='scb_f_slider_value'></div>
         </div>
         {else}
         {call scb_western_blot.display_western_blot_numbers}
         {/call}
         <img class='scb_s_western_blot_gel_membrane'
              src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0003s_0000s_0001s_0002_Membrane-BG.png'>
+        {if $western_blot.marker_loaded}
+        <img style='position:relative;top: -220px;left: {20+22*$valid_rows}px' class='scb_s_western_blot_gel_membrane'
+             src='images/western_blot/SCB_WB_Markers_Lane.png'>
+        {/if}
         {/if}
     </div>
     <div class='scb_s_western_blot_tools'>

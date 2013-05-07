@@ -7,12 +7,14 @@
 */
 {template .dialog}
 <div class='scb_mit706s16_inner_dialog'>
-    <h1 class='scb_mit706s16_inner_dialog_title'> Add multiple rows </h1>
+    <h1 class='scb_mit706s16_inner_dialog_title'>
+        <span class='scb_mit706s16_inner_dialog_title_close'>X</span>
+        Add multiple rows </h1>
 
     <div class='scb_mit706s16_inner_dialog_body'>
         {foreach $cell_line in keys($template.ui.add_multiple_dialog)}
         {if $template.ui.add_multiple_dialog[$cell_line].title}
-        <h1>{$template.ui.add_multiple_dialog[$cell_line].title}</h1>
+        <h1>{$template.ui.add_multiple_dialog[$cell_line].title|noAutoescape}</h1>
         {else}
         <h1>{$template.cell_lines[$cell_line].name}</h1>
         {/if}
@@ -49,17 +51,37 @@
                 </td>
                 {/foreach}
             </tr>
-            {/foreach}
+            {if isLast($rows)}
             <tr>
+                {foreach $cell in $rows.cells}
+                <td class='scb_s_experiment_setup_table_border'>
+                    {if $cell.kind == 'checkbox'}
+                    <button class='scb_s_gray_button scb_mit706s16_inner_dialog_select' name="{$cell.name}" assignment_id='{$assignment.id}' cell_line='{$cell_line}'>SELECT ALL</button>
+                    {/if}
+                </td>
+                {/foreach}
+
+            </tr>
+
+            {/if}
+            {/foreach}
+<!--            <tr>
                 <td colspan='{$template.ui.add_multiple_dialog[$cell_line].headings.length}'>
                     <div class='scb_s_experiment_design_green_line'></div>
                     <button class='scb_mit706s16_inner_dialog_cancel scb_s_gray_button'>CANCEL</button>
                     <button class='scb_mit706s16_inner_dialog_add scb_s_gray_button'>ADD MULTIPLE TREATMENTS</button>
                 </td>
-            </tr>
+-->            </tr>
             </tbody>
         </table>
         {/foreach}
+        <!--
+        <button class='scb_mit706s16_inner_dialog_select_all scb_s_gray_button'>SELECT ALL</button><br>
+        -->
+        <div class='scb_mit706s16_button_float'>
+        <button class='scb_mit706s16_inner_dialog_cancel scb_s_gray_button'>CANCEL</button>
+        <button class='scb_mit706s16_inner_dialog_add scb_s_gray_button'>ADD MULTIPLE TREATMENTS</button>
+        </div>
     </div>
 </div>
 {/template}

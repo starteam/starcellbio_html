@@ -1,0 +1,3 @@
+[submodule "django-allauth"]
+	path = django-allauth
+	url = https://github.com/pennersr/django-allauth.git

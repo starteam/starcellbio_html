@@ -62,6 +62,10 @@ Experiment active area
 
         <div class='scb_s_experiment_design_techniques_container'>
             <div class='scb_s_experiment_design_techniques_text'>What technique(s) might be best suited for the analysis of this experiment?</div>
+            <span class='scb_s_experiment_design_techniques_tq_note'>
+                Please note that by selecting a technique(s), you will not alter the techniques that are available to you for this experiment.
+
+            </span>
             <span class='scb_s_experiment_design_techniques_tq'>
 
         {call .display_techniques}
@@ -69,10 +73,6 @@ Experiment active area
             {param experiment:$experiment /}
             {param assignment:$assignment /}
         {/call}
-            </span>
-            <span class='scb_s_experiment_design_techniques_tq_note'>
-                Please note that by selecting a technique(s), you will not alter the techniques that are available to you for this experiment.
-
             </span>
         </div>
     <br/>

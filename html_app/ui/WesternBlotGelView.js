@@ -27,7 +27,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (e
         alert("INVALID ELEMENT!");
     }
     console.info(parsed.western_blot_gel.primary_anti_body);
-    parsed.western_blot_gel.primary_anti_body = $('option:selected',element).attr('model_id');
+    parsed.western_blot_gel.primary_anti_body = $('option:selected', element).attr('model_id');
     console.info(parsed.western_blot_gel.primary_anti_body);
     console.info(parsed.western_blot_gel);
 
@@ -38,7 +38,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    parsed.western_blot_gel.secondary_anti_body = $('option:selected',element).attr('model_id');
+    parsed.western_blot_gel.secondary_anti_body = $('option:selected', element).attr('model_id');
 }
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function (element) {
@@ -49,7 +49,14 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
     if (parsed.western_blot_gel.primary_anti_body && parsed.western_blot_gel.secondary_anti_body) {
         parsed.western_blot_gel.is_developed = true;
         if (parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name) {
-            parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name;
+            var gel_name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name;
+            var counter = 0;
+            _.find(parsed.western_blot.gel_list.list, function (e) {
+                if (e.name.indexOf(gel_name) == 0) {
+                    counter++
+                }
+            });
+            parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name + (counter == 0 ? '' : ' - ' + (counter + 1));
         }
     } else {
         alert("Please select primary & secondary antibodies.");
@@ -85,7 +92,7 @@ scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (eleme
     }
     parsed.western_blot.gel_list.remove(parsed.western_blot_gel.id);
     var list = parsed.western_blot.gel_list.list;
-    parsed.western_blot.last_gel = list.length > 0 ? list[0] : null;
+    parsed.western_blot.last_gel = list.length > 0 ? list[0].id : null;
     parsed.state.view = 'western_blot';
     scb.ui.static.MainFrame.refresh(parsed.state);
 }
@@ -158,21 +165,25 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
 
     var gel = parsed.western_blot_gel;
     if (gel.canvas_metadata == null) {
-        var cstate = {
-            time: 0,
-            gel: gel,
-            lanes_length: gel.marks.length
-        }
+        if (parsed.western_blot.canvas_metadata == null) {
+            var cstate = {
+                time: 0,
+                gel: gel,
+                lanes_length: gel.marks.length
+            }
 
-        var c = new scb.components.WesternBlot(cstate, context);
-        c.initialize_bias();
+            var c = new scb.components.WesternBlot(cstate, context);
+            c.initialize_bias();
 
-        gel.canvas_metadata = {
-            background: c.background,
-            lane_yslope: c.lane_yslope,
-            lane_xoffset: c.lane_xoffset
+            parsed.western_blot.canvas_metadata = {
+                background: c.background,
+                lane_yslope: c.lane_yslope,
+                lane_xoffset: c.lane_xoffset
+            }
         }
+        gel.canvas_metadata = parsed.western_blot.canvas_metadata;
     }
+
     var cstate = {
         time: gel.exposure_time,
         gel: gel
@@ -187,33 +198,60 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     gel.canvas_data = c.tab;
     var parent = $($(element).parent());
     var slider = $('.scb_f_slider', $(parent));
-    slider.css('top', gel.canvas_metadata.slider + 'px');
-    if (_.isUndefined(gel.canvas_metadata.slider)) {
-        slider.hide();
+    var slider_value = $('.scb_f_slider_value', $(parent));
+
+    function set_slider(y) {
+        console.info( "set_slider " + y ) ;
+        slider.css('top', y + 'px');
+        slider_value.css('top', (y - 12) + 'px');
+        var ww = Math.round(c.position_to_weight(y));
+        var weight = ww > 0 ? ww + " kDa" : "N/A";
+        if (!parsed.western_blot.marker_loaded) {
+            weight = "NaN";
+        }
+        slider_value.html(weight);
+        if (_.isUndefined(y)) {
+            slider.hide();
+            slider_value.hide();
+        }
+        else {
+            slider.show();
+            slider_value.show();
+        }
     }
-    else {
-        slider.show();
-    }
+
+    set_slider(gel.canvas_metadata.slider);
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
-        var y = evt.offsetY;
-        var x = evt.offsetX;
-        if ($(evt.srcElement).is('canvas')) {
-            slider.css('top', y + "px").show();
+        var poffset = $(element).offset();
+        var eX = evt.clientX;
+        var eY = evt.clientY;
+
+        var y = (eY - poffset.top) - 14;
+        var x = (eX - poffset.left);
+
+        console.info(evt);
+        window.__evt = evt ;
+        window.__element = element;
+        if (true || $(evt.srcElement ? evt.srcElement: evt.target).is('canvas')) {
             gel.canvas_metadata.slider = y;
-            if (y < 2 || y > 285 || x < 2 || x > 250) {
+            if (y < 22 || y > 285 || x < 2 || x > 360) {
                 slider.hide();
+                slider_value.hide();
                 delete gel.canvas_metadata.slider;
+            } else {
+                set_slider(gel.canvas_metadata.slider);
             }
         }
     });
     $(parent).unbind('mouseout').bind('mouseout', function (evt) {
-        slider.hide();
+//        slider.hide();
+//        slider_value.hide();
     });
 }
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many = function (element, event) {
-    var target = $("option:selected",element).attr('href');
-   document.location = target;
+    var target = $("option:selected", element).attr('href');
+    document.location = target;
 }
 
 scb.ui.static.WesternBlotGelView.register = function (workarea) {
@@ -261,6 +299,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
             western_blot_gel: state.western_blot_gel,
             rows: rows,
             kind: kind,
+            valid_rows: rows_state.valid
         }));
         state.experiment.last_view = 'western_blot_gel';
         state.western_blot.last_gel = state.western_blot_gel.id;

@@ -2,6 +2,7 @@ var mit706s13 = mit706s13 || {};
 mit706s13.static = mit706s13.static || {};
 
 mit706s13.static.scb_mit706s16_inner_dialog_add = function (element, dialog, state) {
+
     $('input[type="checkbox"]:checked', dialog).each(function (e) {
         var element = $(this);
         var experiment_id = $(element).attr('experiment_id');
@@ -26,7 +27,6 @@ mit706s13.static.scb_mit706s16_inner_dialog_add = function (element, dialog, sta
         _.each(cell_treatments_array, function (eh) {
             parsed.experiment.cell_treatment_list.start(scb.utils.clone_and_clear(eh));
         });
-
     });
 
     $(dialog).detach();
@@ -49,6 +49,20 @@ mit706s13.register = function (dialog, state) {
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_add', function (e) {
         mit706s13.static.scb_mit706s16_inner_dialog_add(this, dialog, state);
         $(this).focus();
+    });
+
+    scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_select_all', function (e) {
+        $('input[type=checkbox]' , dialog).attr('checked','checked');
+    });
+
+    scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_title_close', function (e) {
+        $(dialog).detach();
+        scb.utils.call_back(state.close);
+    });
+    scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_select', function (e) {
+        var cell_line = $(this).attr('cell_line');
+        var name = $(this).attr('name');
+        $('input[type=checkbox][name="'+name+'"][cell_line="'+cell_line+'"]' , dialog).attr('checked','checked');
     });
 
 }

@@ -27,6 +27,12 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples
     var parsed = scb.ui.static.ExperimentSetupView.parse(element);
     var template = parsed.assignment.template;
     var action = scb.utils.get(template, ['ui', 'experiment_setup', 'actions' , 0, 'open'], scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog_old);
+    if (typeof(action) == 'string' && typeof(eval(action)) == 'function') {
+        action = eval(action);
+    }
+    else {
+        action = scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog_old;
+    }
     scb.Utils.call_back(action, {
         workarea: workarea,
         assignment: parsed.assignment,
@@ -34,7 +40,7 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples
         template: parsed.template,
         element: element,
         close: scb.ui.static.MainFrame.refresh,
-        source_state : scb.utils.get(template, ['ui', 'experiment_setup', 'actions' , 0])
+        source_state: scb.utils.get(template, ['ui', 'experiment_setup', 'actions' , 0])
     });
 }
 
@@ -399,10 +405,9 @@ scb.ui.static.ExperimentSetupView.rows = function (cell_treatment_list, headings
     return rows;
 }
 
-scb.ui.static.ExperimentSetupView.new_rows = function (new_row, context , headings, template) {
+scb.ui.static.ExperimentSetupView.new_rows = function (new_row, context, headings, template) {
     var rows = [];
-    if(scb.utils.isDefined(new_row))
-    {
+    if (scb.utils.isDefined(new_row)) {
         var ct = new scb.CellTreatment(new_row, context);
         scb.ui.static.ExperimentSetupView.row(ct, headings, template, rows);
     }
@@ -525,8 +530,7 @@ scb.ui.static.ExperimentSetupView.row_edit_is_editable = function (element, temp
     var cell = _.find(template.ui.experiment_setup.table, function (e) {
         return e.kind == kind
     });
-    if(! scb.utils.isDefined(cell))
-    {
+    if (!scb.utils.isDefined(cell)) {
         var treatments = _.find(template.ui.experiment_setup.table, function (e) {
             return e.kind == 'treatments'
         });
@@ -601,7 +605,9 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
                 });
             }
             else {
-                parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].drug_id || _.keys(template.drugs)[0];
+                delete parsed.experiment.new_row.drug_id;
+//                parsed.experiment.new_row.drug_id = scb.utils.get( template , ['ui','experiment_setup','new_row','treatment_list','list',0,'drug_list','list',0,drug_id] ,_.keys(template.drugs)[0] );
+//                parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].drug_id || _.keys(template.drugs)[0];
             }
         }
         if (kind == 'concentration') {
@@ -627,7 +633,9 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
                     $(element).html("Select drug first");
                 }
             } else {
-                parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
+                delete parsed.experiment.new_row.concentration_id;
+//                parsed.experiment.new_row.concentration_id = scb.utils.get( template , ['ui','experiment_setup','new_row','treatment_list','list',0,'drug_list','list',0,'concentration_id'],_.keys(template.concentrations)[0]);
+//                parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
             }
         }
         if (kind == 'temperature') {

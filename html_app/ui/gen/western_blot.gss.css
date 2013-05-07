@@ -5,7 +5,7 @@
   padding-left: 10px;
   padding-top: 5px;
 }
-.scb_s_western_blot_samples_table {
+.scb_s_western_blot_samples_table, .scb_s_facs_samples_table {
   border: 1px #189689 solid;
   border-radius: 5px;
   margin-left: 10px;
@@ -83,9 +83,9 @@
 .scb_s_western_blot_gel_tabs {
   width: 600px;
   height: 25px;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-  border-top: 1px solid white;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
   margin-left: -1px;
   margin-right: -1px;
   margin-top: -1px;
@@ -108,7 +108,7 @@
   color: #189689;
   background-image: url('../images/western_blot/WesternBlot_GreenTab.png');
 }
-.scb_s_western_blot_gel_tab_selected {
+.scb_s_western_blot_gel_tab_selected, .scb_s_facs_gel_tab_selected {
   display: inline-block;
   font-family: 'sourcesanspro-bold';
   font-size: 11.5pt;
@@ -118,6 +118,7 @@
   display: inline-block;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 .scb_s_western_blot_gel_content {
   height: 350px;
