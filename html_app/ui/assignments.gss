@@ -130,6 +130,9 @@
     right: 5px
 }
 
+ul > .scb_s_assignment_experiment_list_item_new_experiment {
+    padding-top: 10px;
+}
 .scb_s_assignment_experiment_list_item_new_experiment {
     padding-left:25px;
     font-family: 'sourcesanspro-bold';
