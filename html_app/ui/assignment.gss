@@ -24,6 +24,7 @@
     margin-right:10px;
     padding:5px;
     background-color: white;
+    margin-left:20px;
 }
 
 
@@ -40,9 +41,8 @@
     border-color: #a0a0a0;
     border-radius: 8px;
     padding: 10px;
-    width:665px;
+    width:644px;
     padding-left:20px;
-    padding-right:20px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
     padding-bottom:50px;
     padding-top:17px;
@@ -75,7 +75,7 @@
     margin-left:-20px;
     margin-right:-20px;
     background-color: #dae9e1;
-    width:705px;
+    width:674px;
     height:2px;
     display: block;
     margin-bottom:5px;
