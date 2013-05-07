@@ -39,6 +39,7 @@
   background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
   padding-bottom: 50px;
+  padding-top: 17px;
 }
 .scb_s_assignment_description>h1 {
   font-size: 14pt;
@@ -55,7 +56,7 @@
   right: 5px;
 }
 .scb_s_assignment_title {
-  font-size: 11pt;
+  font-size: 14pt;
   color: #00abe6;
   font-family: 'sourcesanspro-semibold';
   font-weight: normal;
@@ -67,4 +68,5 @@
   width: 705px;
   height: 2px;
   display: block;
+  margin-bottom: 5px;
 }

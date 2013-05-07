@@ -45,6 +45,7 @@
     padding-right:20px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
     padding-bottom:50px;
+    padding-top:17px;
 }
 
 .scb_s_assignment_description > h1 {
@@ -64,7 +65,7 @@
 }
 
 .scb_s_assignment_title {
-    font-size: 11pt;
+    font-size: 14pt;
     color: #00abe6;
     font-family: 'sourcesanspro-semibold';
     font-weight: normal;
@@ -72,9 +73,10 @@
 
 .scb_s_assignment_title_underline {
     margin-left:-20px;
-        margin-right:-20px;
-        background-color: #dae9e1;
-        width:705px;
-        height:2px;
-        display: block;
+    margin-right:-20px;
+    background-color: #dae9e1;
+    width:705px;
+    height:2px;
+    display: block;
+    margin-bottom:5px;
 }
