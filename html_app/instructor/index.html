@@ -13,13 +13,16 @@
 
 </head>
 <body>
-    <div class='scbi_workspace'>
-        Welcome to SCBI workspace
-        <div id='kb_collection' data-bind='foreach: users'>
-            <p> User: <input data-bind='value: username, updateValue:"keyup"'/> </p>
-        </div>
-
-
+<div class='scbi_workspace'>
+    Welcome to SCBI workspace
+    <div id='kb_collection' data-bind='template: { name: "users-template"}, data: users'>
     </div>
+
+    <script type='text/html' id='users-template'>
+        <div data-bind='foreach: users'>
+        <p> User: <p data-bind='text: username'></p> new value: <input data-bind='value: username, updateValue:"keyup"'/></p>
+        </div>
+    </script>
+</div>
 </body>
-</html>
+</html> 
