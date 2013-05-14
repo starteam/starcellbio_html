@@ -48,7 +48,7 @@ class Assignment(models.Model):
 
 class StudentAssignment(models.Model):
     student = models.ForeignKey(User , related_name='student')
-    assignment = models.ForeignKey(User, related_name='assignment')
+    assignment = models.ForeignKey(Assignment, related_name='assignment')
     submitted = models.TextField() # this auto-submitts if assignment has end_date on first access after assignment's end_date
     current = models.TextField()
 

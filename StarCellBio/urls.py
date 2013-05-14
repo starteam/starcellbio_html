@@ -30,14 +30,13 @@ urlpatterns = patterns('',
 # add authentication URL patterns
 urlpatterns += auth.urls.urlpatterns
 
-
 from tastypie.api import Api
-from backend.services import UserResource
+from backend.services import UserResource, CourseResource, AssignmentResource, StudentAssignmentResource
+
 v1_api = Api(api_name='v1')
 v1_api.register(UserResource())
-user_resources = UserResource()
+v1_api.register(CourseResource())
+v1_api.register(AssignmentResource())
+v1_api.register(StudentAssignmentResource())
 
-urlpatterns += patterns('',url(r'^api/', include(v1_api.urls)),)
-
-print user_resources.urls
-
+urlpatterns += patterns('', url(r'^api/', include(v1_api.urls)), )

@@ -47,6 +47,8 @@ def processor( path ):
     update_index = False
     path = path.replace("//","/")
     url = path.replace(root,"")
+    if( path.find("instructor/") > 0 ):
+        return
     if( path.endswith(".js") ):
         js[url] = 1
         update_index = True
