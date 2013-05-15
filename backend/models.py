@@ -32,7 +32,7 @@ COURSE_STATUS_CHOICE_DEFAULT = 'PRIV'
 
 
 class Course(models.Model):
-    code = models.CharField(max_length=12, unique=True) # used to let students sign up for a course
+    code = models.CharField('Code',max_length=12, unique=True) # used to let students sign up for a course
     owner = models.ForeignKey(User) # this person owns the Course and is 'super administrator' - including ability to 'DELETE' course
     administrators = models.ManyToManyField(User, related_name='admins+') # this people can do anything with the course that 'owner' can
     students = models.ManyToManyField(User, related_name='students+') # this people have the course in their 'STUDENT' app

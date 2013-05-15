@@ -6,6 +6,7 @@
     <script src='js/jquery-ui-1.8.16.custom.min.js'></script>
     <script src='js/underscore.js'></script>
     <script src='js/backbone.js'></script>
+    <script src='js/backbone-relational.js'></script>
     <script src='js/backbone-tastypie.js'></script>
     <script src='js/knockout-2.2.1.debug.js'></script>
     <script src='js/knockback.js'></script>
@@ -15,14 +16,28 @@
 <body>
 <div class='scbi_workspace'>
     Welcome to SCBI workspace
-    <div id='kb_collection' data-bind='template: { name: "users-template"}, data: users'>
-    </div>
+    <div id='kb_collection' data-bind='template: { name: "users-template"}, data: users'></div>
+    <div id='kb_courses' data-bind='template: { name: "courses-template"}, data: courses'></div>
 
     <script type='text/html' id='users-template'>
         <div data-bind='foreach: users'>
         <p> User: <p data-bind='text: username'></p> new value: <input data-bind='value: username, updateValue:"keyup"'/></p>
         </div>
     </script>
+
+    <script type='text/html' id='courses-template'>
+        <div data-bind='foreach: courses'>
+        <p> Course: <br/>
+            Name: <input data-bind='value: code, updateValue:"keyup"'/><br/>
+            Owner: <span data-bind='text: owner().username'/><br/>
+            Assignments: <span data-bind='foreach: assignments()'>
+                <span data-bind='text: code'/>
+            </span>
+        </p>
+        </div>
+    </script>
+
+
 </div>
 </body>
-</html> 
+</html>
