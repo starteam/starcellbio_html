@@ -34,11 +34,14 @@ $(function () {
                 key: 'owner',
                 relatedModel: scbi.User,
                 reverseRelation: {
-                    key:'courses'
+                    key: 'courses',
+                    includeInJSON: false
                 }
             }
         ]
+
     });
+
 
     scbi.CourseCollection = Backbone.Collection.extend({
         model: scbi.Course,
@@ -47,21 +50,23 @@ $(function () {
 
         parse: function (resp) {
             return resp.objects;
-        }
+        },
     });
 
 
     scbi.Assignment = Backbone.RelationalModel.extend({
         urlRoot: '/api/v1/scb/assignment/',
 
-        relations:[{
-            type: Backbone.HasOne,
-            key:'course',
-            relatedModel: scbi.Course,
-            reverseRelation: {
-                key:'assignments'
+        relations: [
+            {
+                type: Backbone.HasOne,
+                key: 'course',
+                relatedModel: scbi.Course,
+                reverseRelation: {
+                    key: 'assignments'
+                }
             }
-        }],
+        ]
     });
 
     scbi.AssignmentCollection = Backbone.Collection.extend({
@@ -95,10 +100,32 @@ $(function () {
         }
     });
 
+    scbi.courseChange = function (modelView, event) {
+        var model = modelView.model();
+        var ret = model.save(model.attributes, {
+            error: function (a, b, c) {
+                var json = { error_message: "Error communicating to the server!"};
+                try {
+                    json = JSON.parse(b.responseText);
+                } catch (e) {
+                }
+                ;
+                alert(json.error_message);
+                a.fetch({
+                    success: function () {
+                    }
+                });
+            }
+        });
+        window.ret = ret;
+        console.info(ret);
+    }
 
     var view = new scbi.Views();
     ko.applyBindings(view);
     window.view = view;
     window.scbi = scbi;
 
-});
+
+})
+;

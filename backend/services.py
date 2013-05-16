@@ -3,7 +3,7 @@ from backend.models import Course, Assignment, StudentAssignment
 from tastypie import fields
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie.authorization import DjangoAuthorization, Authorization
-
+from tastypie.serializers import Serializer
 
 class UserResource(ModelResource):
     class Meta:
@@ -12,7 +12,6 @@ class UserResource(ModelResource):
         excludes = ['email', 'password', 'is_superuser']
         authorization = DjangoAuthorization()
 
-
 class CourseResource(ModelResource):
     owner = fields.ForeignKey(UserResource, 'owner')
 
@@ -20,7 +19,7 @@ class CourseResource(ModelResource):
         queryset = Course.objects.all()
         resource_name = 'scb/course'
         authorization = Authorization() # needs to have better authorization
-
+        serializer = Serializer(formats=['json'])
 
 class AssignmentResource(ModelResource):
     course = fields.ForeignKey(CourseResource, 'course')

@@ -9,6 +9,7 @@ rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+#TASTYPIE_FULL_DEBUG = False
 
 import platform
 if platform.node() == 'starapp':
