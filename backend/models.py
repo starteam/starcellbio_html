@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from django.forms import ModelForm
 
 # Create your models here.
 
@@ -53,6 +54,10 @@ class Course(models.Model):
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('code', 'owner', 'status')
 
+class CourseForm(ModelForm):
+    class Meta:
+        model = Course
+        fields = ['code', 'students', 'status']
 
 class Assignment(models.Model):
     code = models.CharField(max_length=12, unique=True) # used to setup JSON correctly - may be auto generated?'

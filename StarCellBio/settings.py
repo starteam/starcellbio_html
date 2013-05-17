@@ -145,7 +145,8 @@ INSTALLED_APPS = (
     'frontend_tests',
     'rest_framework',
     'scb_rest',
-    'backend'
+    'backend',
+    'instructor',
 ) + auth.settings.INSTALLED_APPS
 
 # A sample logging configuration. The only tangible logging
