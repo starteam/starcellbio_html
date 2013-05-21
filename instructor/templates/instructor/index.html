@@ -1,0 +1,10 @@
+Hello World!
+
+{% if courses %}
+    <a href='{% url instructor:instructor_index %}'>Home</a>
+    <ul>
+        {% for course in courses %}
+            <li><a href='{% url instructor:instructor_course course_id=course.id %}'>{{ course.code }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

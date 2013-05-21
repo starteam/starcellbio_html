@@ -1,0 +1,15 @@
+- model: backend.Statuses
+  pk: 1
+  fields:
+    status: Private
+    code: PRIV
+- model: backend.Statuses
+  pk: 2
+  fields:
+    status: Public
+    code: PUBL
+- model: backend.Statuses
+  pk: 3
+  fields:
+    status: Archived
+    code: ARCH
