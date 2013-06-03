@@ -1,0 +1,112 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
+
+.scb_s_western_blot_tabs, .scb_s_facs_tabs {
+
+}
+
+.scb_s_western_blot_active, .scb_s_facs_active {
+    margin-left: 5px;
+    border-bottom: 1px white solid;
+    background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
+    display: inline-block;
+    width: 125px;
+    padding-left: 20px;
+    top: 6px;
+    position: relative;
+    height: 20px;;
+    font-size: 11pt;
+    z-index: 99;
+}
+
+.scb_s_western_blot_open_western_blot, .scb_s_facs_open_facs {
+    margin: 3px;
+    margin-left: 5px;
+    background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
+    display: inline-block;
+    width: 119px;
+    padding-left: 20px;
+    top: 4px;
+    position: relative;
+    height: 19px;
+    border-bottom: 1px solid #808080;
+    font-size: 11pt;
+    text-decoration: none;
+    color: black;
+
+}
+
+.scb_s_western_blot_remove {
+    border: none;
+    background-color: white;
+}
+
+.scb_s_western_blot_remove > img {
+    height:12px;
+}
+
+
+.scb_s_facs_tab_content,.scb_s_western_blot_tab_content {
+    border: 1px solid #808080;
+    border-radius: 5px;
+    position: relative;
+    padding-bottom:8px;
+    width:947px;
+    @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+}
+
+.scb_s_western_blot_samples_area, .scb_s_facs_samples_area {
+    width:300px;
+    border:1px solid #e0e0e0;
+    border-radius: 2px;
+    display:inline-block;
+    vertical-align: top;
+    margin-top:20px;
+    border-top-width: 8px;
+    box-shadow: 0px 0px 3px black;
+/*    height:368px;*/
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: white;
+}
+
+
+.scb_s_western_blot_samples_heading, .scb_s_facs_samples_heading {
+
+    font-size: 11pt;
+    font-family: 'sourcesanspro-semibold';
+    text-align: left;
+    padding-top: 15px;
+    margin-bottom: -10px;
+    padding-left: 22px;
+
+}
+
+.scb_s_western_blot_choose_samples_order_list > li {
+    font-size:10pt;
+    padding:3px;
+    color:black;
+    
+}
+
+.scb_s_facs_choose_samples_order_list > li {
+    font-size:10pt;
+    padding:3px;
+    color:black;
+    cursor: pointer;
+}
+
+
+.scb_s_western_blot_samples_gel_area,.scb_s_facs_samples_graph_area {
+    display:inline-block;
+    vertical-align: top;
+    margin-left:25px;
+    width:600px;
+    height:400px;
+    padding-top:20px;
+}

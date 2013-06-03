@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from fsevents import Observer
 from fsevents import Stream
 import os
@@ -5,22 +6,22 @@ import time
 from threading import Timer
 from subprocess import call
 
-root = '/Users/ceraj/.virtualenvs/StarCellBio/StarCellBio/html_app/';
+root = os.environ['HOME']+'/.virtualenvs/StarCellBio/StarCellBio/html_app/';
 
 global_update_index = True
 js = dict();
 css = dict();
 
 
-css_prefix = '<link type="text/css" href="'
+css_prefix = '<link type="text/css" href="/static/'
 css_suffix = '" rel="Stylesheet" />\n'
 
-js_prefix='<script type="text/javascript" src="'
+js_prefix='<script type="text/javascript" src="/static/'
 js_suffix='" charset="UTF-8"></script>\n'
 
-html_prefix = "<!DOCTYPE html><html><head><title>StarCellBio Prototype</title>\n"
-html_prefix += '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cabin">'
-html_suffix = "</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});})</script></body>"
+html_prefix = "<!DOCTYPE html><html><head><META http-equiv='Content-Type' content='text/html; charset=UTF-8'><meta http-equiv='content-type' content='text/html; charset=utf-8'><title>StarCellBio Prototype</title>\n"
+#html_prefix += '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=SourceSansPro">'
+html_suffix = "</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid=\"invalid\"'};</script></body>"
 
 def index_html():
     global css,js
@@ -46,6 +47,8 @@ def processor( path ):
     update_index = False
     path = path.replace("//","/")
     url = path.replace(root,"")
+    if( path.find("instructor/") > 0 ):
+        return
     if( path.endswith(".js") ):
         js[url] = 1
         update_index = True
@@ -54,12 +57,12 @@ def processor( path ):
         update_index = True
     if( path.endswith(".soy") ):
         infile = path
-        outfile = infile + ".js" 
-        call(["java", "-jar" , "/Users/ceraj/Sites/closure-templates/SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
+        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".js"
+        call(["java", "-jar" , "../../SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
         print "compile soy %s " % (path)
     if( path.endswith(".gss") ):
         infile = path
-        outfile = infile + ".css" 
+        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".css"
         call(["java", "-jar" , "../../closure-stylesheets-20111230.jar" , "--pretty-print" , infile , "-o" , outfile])
         print "compile gss %s to %s " % (infile,outfile)
     if( path.endswith(".touch_index" ) ):

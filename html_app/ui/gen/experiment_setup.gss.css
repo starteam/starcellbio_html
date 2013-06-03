@@ -1,0 +1,147 @@
+.scb_s_experiment_setup_view {
+  background-color: #f4f6f8;
+  width: 960px;
+}
+.scb_s_experiment_setup_details_view {
+  position: relative;
+  margin-top: 8px;
+  font-size: 12px;
+  text-align: justify;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 350px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e1e1e1;
+  border-radius: 8px;
+  padding: 10px;
+  width: 928px;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
+}
+.scb_s_experiment_setup_top>.scb_f_open_experiment_design, .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+.scb_s_experiment_setup_top>.scb_f_open_experiment_setup_readonly, .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+.scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 305px;
+}
+.scb_s_experiment_setup_choose_template {
+  height: 155px;
+  width: 600px;
+  display: block;
+}
+table.scb_s_experiment_setup_table {
+  border: 1px solid #80d1ae;
+  border-radius: 5px;
+  border-spacing: 0;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 20px;
+}
+.scb_s_experiment_setup_table_body {
+  background-color: #edeef2;
+}
+.scb_s_experiment_setup_table_border {
+  border-top: 1px solid #e0e0e0;
+}
+.scb_f_experiment_setup_remove_sample, .scb_f_experiment_setup_duplicate_sample {
+  border: 0;
+  width: 24px;
+  background: transparent;
+  height: 20px;
+  cursor: pointer;
+  top: 0;
+}
+.scb_s_experiment_setup_new_row_gray {
+  opacity: .25;
+}
+.scb_s_experiment_setup_video_box_wrapper {
+  width: 266px;
+  height: 238px;
+  float: right;
+  background-color: #e1e3e8;
+  border-radius: 1px;
+  border: 1px solid #e1e3e8;
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-shadow: 0 0 6px gray;
+}
+.scb_s_experiment_setup_video_box_wrapper_title {
+  text-align: center;
+  font-size: 16pt;
+  margin-bottom: -27px;
+}
+.scb_s_experiment_setup_video_box {
+  width: 233px;
+  height: 188px;
+  background-color: #525252;
+  margin-left: 12px;
+  margin-top: 27px;
+  overflow: hidden;
+}
+.scb_s_experiment_setup_video_box_img {
+  width: 233px;
+  height: 160px;
+}
+.scb_s_warning {
+  background: #edeef2;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 540px;
+}
+.scb_s_warning>h1 {
+  color: red;
+}
+.scb_s_experiment_setup_table_heading {
+  font-family: 'sourcesanspro-semibold';
+  font-size: 10pt;
+}
+.scb_s_experiment_setup_choose_template_kind_disabled {
+  opacity: .5;
+}
+.scb_s_experiment_setup_choose_template_kind {
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+.scb_concentration_edit_new {
+  position: absolute;
+  float: left;
+  width: 80px;
+  height: 24px;
+}
+.scb_s_experiment_setup_table_row:hover, .scb_s_experiment_setup_new_row_gray:hover {
+  opacity: 1;
+}
+.scb_s_experiment_setup_table_element[kind="cell_plate"] {
+  width: 60px;
+  max-width: 60px;
+  min-width: 60px;
+}
+.scb_s_experiment_setup_table_element {
+  width: 120px;
+}
+.scb_f_experiment_setup_action_open_add_samples_dialog {
+  width: 160px;
+}
+.scb_s_experiment_design_green_line {
+  width: 100%;
+  height: 2px;
+  background-color: #80d1ae;
+  margin-bottom: 2px;
+}

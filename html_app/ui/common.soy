@@ -1,91 +1,144 @@
-{namespace scb_util}
+{namespace scb_common}
 
-/** Icon
-*
-* @param src
-* @param text
-* @param cls
+/**
+* Progress bar
+@param step
+@param assignment_name
+@param experiment_name
+@param assignment
+@param experiment
+@param technique_name
+@param technique_view
+@param technique_param
+@param technique_id
 */
-{template .icon_with_text}
-<div class='icon_with_text'>
-			<img class='{$cls}' src='{$src}' alt='{$text}' width='24px'/>
-			<br>{$text}
-			</div>
+{template .assignment_step}
+{if $step > 0}
+<div class='scb_s_assignment_step' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    {if $step > 0}
+    <a class='scb_s_assignment_step_link' href='#view=assignments'>
+        ASSIGNMENTS
+    </a>
+    <img src='images/header/scb_navigation_arrow.png' alt=''>
+    {/if}
+    {if $step > 1}
+    <a class='scb_s_assignment_step_link {if $step == 2}scb_s_assignment_step_link_active{/if}'
+       href='#view=assignment&assignment_id={$assignment.id}'>
+        {$assignment_name}
+    </a>
+    <img src='images/header/scb_navigation_arrow.png' alt=''>
+    {/if}
+    {if $step > 2}
+    <a class='scb_s_assignment_step_link {if $step == 3}scb_s_assignment_step_link_active{/if}'
+       href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>
+        DESIGN
+    </a>
+    <img src='images/header/scb_navigation_arrow.png' alt=''>
+
+    <div class='scb_s_assignment_step_experiment_block'>
+        <img class='scb_s_assignment_step_experiment_box' src='images/header/exp_name_box.png' alt=''>
+
+        <div class='scb_s_assignment_step_experiment'>
+            <!-- &#8988; --> {$experiment_name}
+        </div>
+        <img class='scb_s_assignment_step_experiment_line' src='images/header/exp_name_line.png' alt=''>
+    </div>
+    {/if}
+    {if $step > 3}
+    <a class='scb_s_assignment_step_link {if $step == 4}scb_s_assignment_step_link_active{/if}'
+       href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>
+        SETUP
+    </a>
+    <img src='images/header/scb_navigation_arrow.png' alt=''>
+    {/if}
+    {if $step > 4}
+    <a class='scb_s_assignment_step_link {if $step == 5}scb_s_assignment_step_link_active{/if}'
+       href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>
+        TECHNIQUES
+    </a>
+    <img src='images/header/scb_navigation_arrow.png' alt=''>
+    {/if}
+    {if $step > 5}
+    <a class='scb_s_assignment_step_link {if $step == 6}scb_s_assignment_step_link_active{/if}'
+       href='#view={$technique_view}&assignment_id={$assignment.id}&experiment_id={$experiment.id}&{$technique_param}={$technique_id}'>
+        {$technique_name}
+    </a>
+    <img src='images/header/scb_navigation_arrow.png' alt=''>
+    {/if}
+
+</div>
+{/if}
 {/template}
-
-
-/** Icon
-*
-* @param src
-* @param text
-* @param cls
+/**
+* Progress bar
+* @param step
 */
-{template .small_icon_without_text}
-<div class='icon_with_text'>
-			<img class='{$cls}' src='{$src}' alt='{$text}' width='16px'/>
+{template .experiment_step}
+<div class='scb_s_experiment_step'>
+    <div class='scb_s_experiment_step_horizontal_line_12'></div>
+    <div class='scb_s_experiment_step_horizontal_line_23'></div>
+    <div class='scb_s_experiment_step_horizontal_line_34'></div>
+    <div class='scb_s_experiment_step_horizontal_line_45'></div>
+    <div class="scb_s_experiment_step_div">
+        <div class='scb_s_experiment_step_circle {if $step==1}scb_experiment_step_selected{/if} {if $step>1}scb_experiment_step_previous{/if} '>
+            <div class='scb_s_experiment_step_number'>1</div>
+        </div>
+        <div class='scb_s_experiment_step_text'>DESIGN</div>
+    </div>
+    <div class="scb_s_experiment_step_div">
+        <div class='scb_s_experiment_step_circle {if $step==2}scb_experiment_step_selected{/if} {if $step>2}scb_experiment_step_previous{/if}'>
+            <div class='scb_s_experiment_step_number'>2</div>
+        </div>
+        <div class='scb_s_experiment_step_text'>SETUP</div>
+    </div>
+    <div class="scb_s_experiment_step_div">
+        <div class='scb_s_experiment_step_circle {if $step==3}scb_experiment_step_selected{/if} {if $step>3}scb_experiment_step_previous{/if}'>
+            <div class='scb_s_experiment_step_number'>3</div>
+        </div>
+        <div class='scb_s_experiment_step_text'>RUN</div>
+    </div>
+    <div class="scb_s_experiment_step_div">
+        <div class='scb_s_experiment_step_circle {if $step==4}scb_experiment_step_selected{/if} {if $step>4}scb_experiment_step_previous{/if}'>
+            <div class='scb_s_experiment_step_number'>4</div>
+        </div>
+        <div class='scb_s_experiment_step_text'>SELECT TECHNIQUE</div>
+    </div>
+    <div class="scb_s_experiment_step_div">
+        <div class='scb_s_experiment_step_circle {if $step==5}scb_experiment_step_selected{/if} {if $step>5}scb_experiment_step_previous{/if}'>
+            <div class='scb_s_experiment_step_number'>5</div>
+        </div>
+        <div class='scb_s_experiment_step_text'>PERFORM TECHNIQUE</div>
+    </div>
 </div>
 {/template}
 
-/** List
-*
-* @param map
-* @param map_name
-* @param model_id
-* @param model2_id
-* @param associated_class
-*
+/**
+* Format time - from parts
+* @param days days
+* @param hours hours
+* @param minutes minutes
+* @param seconds seconds
+* @param now is less than one minute from now
 */
-{template .select_from_dict}
-	<select class='{$associated_class}' model2_id='{$model2_id}'>
-	{foreach $k in keys($map)}
-		<option model_id='{$k}' {if $k == $model_id}selected='selected'{/if} >{$map[$k][$map_name]}</option> 		
-	{/foreach}
-	</select>
-{/template}
-
-/** List
-*
-* @param map
-* @param map_name
-* @param model_id
-* @param model2_id
-* @param associated_class
-* @param selected_id
-*
-*/
-{template .select_from_obj}
-	<select class='{$associated_class}' model2_id='{$model2_id}'>
-	{foreach $k in keys($map)}
-		<option model_id='{$map[$k][$model_id]}' {if $selected_id==$map[$k][$model_id]}selected='selected'{/if} >{$map[$k][$map_name]}</option> 		
-	{/foreach}
-	</select>
+{template .format_time_detailed_w_sec}
+{if $days != 0} {$days} {if $days > 1}d{else}d{/if}{/if}
+{if $hours != 0} {$hours} {if $hours > 1}h{else}h{/if}{/if}
+{if $minutes != 0} {$minutes} {if $minutes > 1}min{else}min{/if}{/if}
+{if $seconds != 0} {$seconds} {if $seconds > 1}sec{else}sec{/if}{/if}
+{if $now}0 min{/if}
 {/template}
 
 
 /**
-* Display Experiment Name DIV
- @param name Selected Experiment
- @param name_label Label for name
- @param name_class Class for whole div
- @param icon_class Class for icons
- @param remove_class
- @param remove_title
-*/ 
-{template .display_header_name}
-			<div class='experiment_name'>
-				{$name_label} <div class='{$name_class}'>
-					{$name}
-					<div class='experiment_row_treatment_tools'>
-						{call scb_util.small_icon_without_text}
-							{param src:'icons/actions/Edit.png'/}
-							{param text:'Edit'/}
-							{param cls:$icon_class/}
-						{/call}
-					</div>
-					<div class='experiment_row_treatment_tools_spacer'>
-					</div>
-				</div>
-				<button class='{$remove_class} red' style='position:fixed; right:10px'>{$remove_title}</button>
-			</div>
-
+* Format time - from parts
+* @param days days
+* @param hours hours
+* @param minutes minutes
+* @param now is less than one minute from now
+*/
+{template .format_time_detailed}
+{if $days != 0} {$days} {if $days > 1}d{else}d{/if}{/if}
+{if $hours != 0} {$hours} {if $hours > 1}h{else}h{/if}{/if}
+{if $minutes != 0} {$minutes} {if $minutes > 1}min{else}min{/if}{/if}
+{if $now}0 sec{/if}
 {/template}

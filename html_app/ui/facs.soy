@@ -1,277 +1,460 @@
-{namespace scb_ui}
+{namespace scb_facs}
 
 /**
- Display facs 
-  @param facs_list
+FACS Main View
+@param global_template
+@param assignment AssignmentView
+@param experiment
+@param facs
+@param t
+@param kind
+@param kinds
+@param rows
 */
-{template .display_facs_list}
-	Hello World, here we display facs list and we will add 'Add facs button'
-	<ul>
-	{foreach $lane in $facs_list.list}
-		<li><a href='#' class='select_facs_experiment' model_id='{$lane.id}'> {$lane.name}</a></li>
-	{/foreach}
-	</ul>
-	<a href="#" class='new_facs button green'>Add FACS experiment</a>
+{template .main}
+<div class='scb_s_facs_view'>
+    {call scb_homepage.display_header}
+    {param global_template:$global_template /}
+    {/call}
+    {call scb_common.assignment_step}
+    {param step:6/}
+    {param assignment_name:$assignment.name/}
+    {param experiment_name:$experiment.name/}
+    {param assignment:$assignment/}
+    {param experiment:$experiment/}
+    {param technique_name:'FLOW CYTOMETRY' /}
+    {param technique_view:'facs' /}
+    {param technique_param:'facs_id' /}
+    {param technique_id:$facs.id /}
+    {/call}
+    {call .display_details}
+    {param t:$t/}
+    {param global_template:$global_template /}
+    {param assignment:$assignment/}
+    {param facs:$facs /}
+    {param kind:$kind /}
+    {param kinds:$kinds /}
+    {param rows:$rows /}
+    {/call}
+    {call scb_homepage.display_footer}
+    {param t:$t /}
+    {/call}
+</div>
+{/template}
+
+/** Display Western Blot main screen
+
+@/param t template
+@param assignment
+@param experiment
+@param facs
+@param rows
+@param kind
+@param kinds
+@param can_prepare_lysate
+*/
+{template .display_details}
+<div class='scb_facs_details_view'>
+
+    <div class='scb_facs_details_view_inner'>
+
+        {call .display_tabs}
+        {param assignment:$assignment/}
+        {param experiment:$experiment /}
+        {param facs:$facs /}
+        {param rows:$rows /}
+        {param kind:$kind /}
+        {param kinds:$kinds/}
+        {param can_prepare_lysate:$can_prepare_lysate/}
+        {/call}
+    </div>
+</div>
+{/template}
+
+
+/**
+@param assignment
+@param experiment
+@param facs
+@param rows
+@param kind
+@param kinds
+@param can_prepare_lysate
+*/
+{template .display_tabs}
+{call .display_tabs_selector}
+{param assignment:$assignment/}
+{param experiment:$experiment /}
+{param facs:$facs /}
+{/call}
+<div class='scb_s_facs_tab_content {if $kind == ' sample_prep'}scb_s_facs_tab_content_sample_prep{/if}'>
+{if $kind == 'sample_prep'}
+{call .sample_prep}
+{param assignment:$assignment/}
+{param experiment:$experiment/}
+{param facs:$facs/}
+{param rows:$rows/}
+{param kinds:$kinds/}
+{param can_prepare_lysate:$can_prepare_lysate/}
+{/call}
+{/if}
+{if $kind == 'analyze'}
+{call .analyze}
+{param assignment:$assignment/}
+{param experiment:$experiment/}
+{param facs:$facs/}
+{param rows:$rows/}
+{param kinds:$kinds/}
+{param can_prepare_lysate:$can_prepare_lysate/}
+{/call}
+{/if}
+<a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_western_blot"
+   href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
+
+</div>
+{/template}
+
+
+/**
+@param assignment
+@param experiment
+@param facs
+*/
+{template .display_tabs_selector}
+<div class='scb_s_facs_tabs'>
+    {foreach $wb in $experiment.facs_list.list}
+    {if $facs.id == $wb.id}
+    <span class='scb_s_facs_active'>
+
+    <span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+          experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+        <!--
+    <button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+            experiment_id='{$experiment.id}'><img src="images/setup/scb_remove.png">
+    </button>
+        -->
+    </span>
+    {else}
+    <a class='scb_f_open_facs scb_s_facs_open_facs'
+       href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$wb.id}'
+       facs_id='{$wb.id}'>{$wb.name}</a>
+    {/if}
+    {/foreach}
+</div>
+{/template}
+
+
+/**
+@param assignment
+@param experiment
+@param facs
+@param rows
+@param kinds
+@param can_prepare_lysate
+*/
+{template .sample_prep}
+{call .display_facs_progress}
+{param step:1/}
+{/call}
+<div class='scb_s_facs_samples_table'>
+    <table>
+        <thead class='scb_s_facs_samples_table_head'>
+        <td class='scb_s_facs_samples_table_heading'>Select</td>
+        <td class='scb_s_facs_samples_table_heading'>Samples</td>
+        <td class='scb_s_facs_samples_table_heading'>Cell Treatment</td>
+        <td class='scb_s_facs_samples_table_heading'>DNA Content Treatment</td>
+        <td class='scb_s_facs_samples_table_heading'>&nbsp;</td>
+        </thead>
+        {foreach $r in $rows}
+        <tr class='scb_s_facs_samples_table_tr'>
+            <td class='scb_s_facs_samples_table_td'>{if $r.display_sample}
+                <input type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                       cell_treatment_id='{$r.cell_treatment.id}'
+                {if $r.is_sample_enabled}checked="checked"{/if}
+                >
+                {/if}
+            </td>
+            <td class='scb_s_facs_samples_table_td'>{if $r.display_sample}
+                {$r.display_text}
+                {/if}
+            </td>
+            <td class='scb_s_facs_samples_table_td'>
+                <input type="radio" checked="checked">Fixed</input>
+                <input type="radio" disabled='disabled'><span style='opacity: .25'>Live</span></input>
+            </td>
+            <td class='scb_s_facs_samples_table_td'>
+                {call .display_lysate_types}
+                {param assignment:$assignment/}
+                {param experiment:$experiment/}
+                {param facs:$facs/}
+                {param cell_treatment:$r.cell_treatment/}
+                {param kinds:$kinds/}
+                {param lane:$r/}
+                {/call}
+            </td>
+            <td class='scb_s_facs_samples_table_td'>
+                {if $r.kind == 'existing'}
+                <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
+                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
+                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>X
+                </button>
+                {else}
+                <button class="scb_f_facs_sample_remove"
+                        disabled="disabled">X
+                </button>
+
+                {/if}
+            </td>
+        </tr>
+        {/foreach}
+        <tr>
+            <td colspan='5'>
+                <div class="scb_s_experiment_design_green_line"></div>
+                <button class='scb_f_facs_sample_active_all scb_s_gray_button'>SELECT ALL</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<a class='scb_s_navigation_button scb_f_facs_prepare_lysates' facs_id='{$facs.id}'
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE SAMPLES  &nbsp; &#9654;
+</a>
+{/template}
+
+
+/**
+@param step
+*/
+{template .display_facs_progress}
+<div class='scb_s_facs_progress'>
+
+    <span class='scb_s_western_blot_progress_prefix_group1'>
+    <img class='scb_s_western_blot_progress_prefix_img' src="images/western_blot/backbackback.png">
+    <div class='scb_experiment_step_selected scb_s_experiment_step_circle'>
+        <div class='scb_s_western_blot_progress_prefix'>5</div>
+    </div>
+    </span>
+    <span class='scb_s_western_blot_progress_prefix_group2'>
+
+    <div class='scb_s_western_blot_progress_prefix_text'>
+        PERFORM FLOW CYTOMETRY
+    </div>
+
+    <div class='scb_s_western_blot_progress_rest'>
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 {if $step >= 1}scb_s_western_blot_progress_selected{/if}'>
+            1. Sample Prep
+        </div>
+        <img class='scb_s_western_blot_progress_vertical_line'
+             src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2 {if $step >= 2}scb_s_western_blot_progress_selected{/if}'>
+            2. Run
+        </div>
+        <img class='scb_s_western_blot_progress_vertical_line'
+             src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3 {if $step >= 3}scb_s_western_blot_progress_selected{/if}'>
+            3. Analyze
+        </div>
+
+    </div>
+    </span>
+
+</div>
 {/template}
 
 /**
- Display facs 
-  @param facs
-  @param facs_lanes
-  @param template
-  @param all_selected
+@param assignment
+@param experiment
+@param facs
+@param cell_treatment
+@param lane
+@param kinds
 */
-{template .display_facs}
-	{if $facs.prepared}
-		{call .display_facs_finished}
-			{param facs:$facs /}
-			{param facs_lanes:$facs_lanes /}
-			{param template:$template /}
-		{/call}	
-	{else}
-		{call .display_facs_setup}
-			{param facs:$facs /}
-			{param facs_lanes:$facs_lanes /}
-			{param template:$template /}
-			{param all_selected:$all_selected /}
-		{/call}
-	{/if}
-{/template} 
+{template .display_lysate_types}
 
-
-/**
- Display facs pre-finished
-  @param facs
-  @param facs_lanes
-  @param template 
-*/
-{template .display_facs_finished}
-	FACS: {$facs.name}<br>
-		{foreach $row in $facs_lanes}
-			{if $row.enabled}
-				{if $row.preparation_list.length != 0}
-					{foreach $preparation in $row.preparation_list.list}
-						{call .experiment_setup_row}
-							{param row:$row.cell_treatment/}
-							{param template:$template/}
-							{param selected_experiment:$row.experiment/}
-						{/call}
-						{$row.collection_schedule.schedule}
-				
-						{$preparation.kind}
-						{$preparation.treatment}
-						{$preparation.sub_treatment}
-						<br>
-						Chart:<br>
-						{call .display_facs_chart}
-							{param row:$row/}
-							{param template:$template/}
-							{param preparation:$preparation/}							
-						{/call}						
-						<br>
-					{/foreach}
-				{/if}
-			{/if}
-		{/foreach}
-	is_prepared: {$facs.prepared} 
-{/template}
-/**
- Display facs pre-finished
-  @param facs
-  @param facs_lanes
-  @param template
-  @param all_selected
-*/
-{template .display_facs_setup}
-	FACS: {$facs.name}<br>
-	
-	<table>
-		<tr>
-		<th>
-				<input type='checkbox' class='facs_lane_select_all' {if $all_selected}checked='checked'{/if}/>			
-		</th>
-		<th>
-		Sample
-		</th>
-		<th>
-		Collection time
-		</th>
-		<th>Fixed?</th>
-		<th>
-			Treatments
-		</th>
-		<th>
-			(A)
-		</th>
-		</tr>
-		{foreach $row in $facs_lanes}
-			{if $row.enabled}
-				{if $row.preparation_list.length != 0}
-					{foreach $preparation in $row.preparation_list.list}
-						<tr class='{if index($row)%2==0}even1{else}odd1{/if}'>
-							{if isFirst($preparation)}
-								{call .display_facs_common_row}
-									{param row:$row/}
-									{param template:$template/}
-									{param height:$row.preparation_list.length+1/}
-								{/call}
-							{/if}
-							<td>
-								{if $row.enabled}
-									{call .display_facs_fix_select}
-										{param row:$row/}
-										{param template:$template/}
-										{param selected_experiment:$row.experiment/}
-										{param preparation:$preparation/}
-									{/call}					
-								{/if}
-							</td>
-							<td>
-								{if $row.enabled}
-									{call .display_facs_select1}
-										{param row:$row/}
-										{param preparation:$preparation/}
-										{param template:$template/}
-									{/call}								
-									on selected kind show dropdown
-								{/if}
-							</td>
-							<td>
-								<button class='facs_remove_preparataion button small red' data-row='{$row.id}' data-preparation='{$preparation.id}'>X</button>
-							</td>
-						</tr>
-					{/foreach}
-						<tr class='{if index($row)%2==0}even1{else}odd1{/if}'>
-							<td>
-								{call .display_facs_fix_select}
-									{param row:$row/}
-									{param template:$template/}
-									{param selected_experiment:$row.experiment/}
-								{/call}					
-							</td>
-							<td>
-								{if $row.enabled}
-									on selected kind show dropdown
-								{/if}
-							</td>
-							<td>
-								
-							</td>
-						</tr>
-
-				{else}
-				// if preparation list is empty, and it's enabled we need to display it w/ one templated row
-					<tr class='{if index($row)%2==0}even1{else}odd1{/if}'>
-						{call .display_facs_common_row}
-							{param row:$row/}
-							{param template:$template/}
-							{param height:1/}							
-						{/call}
-						<td>
-						{if $row.enabled}
-								{call .display_facs_fix_select}
-									{param row:$row/}
-									{param template:$template/}
-									{param selected_experiment:$row.experiment/}
-								{/call}										
-						{/if}
-						</td>
-						<td>
-						</td>
-						<td>
-						</td>					
-					</tr>		
-				{/if}
-
-			{else}
-				// if row is not enabled display only checkbox
-				<tr class='{if index($row)%2==0}even1{else}odd1{/if}'>
-					{call .display_facs_common_row}
-						{param row:$row/}
-						{param template:$template/}
-						{param height:1/}													
-					{/call}
-					<td>
-					</td>
-					<td>
-					</td>
-					<td>
-					</td>					
-				</tr>
-			{/if}
-
-
-		{/foreach}
-	</table>
-	<button class='facs_finish_sample_prep buttom medium green'>Prepare samples</button> 	
-	
+<select class="scb_f_facs_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
+        facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
+        lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
+{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
+>
+{if $lane.kind == 'existing'}
+{foreach $k in keys($kinds)}
+<option value='{$k}'
+{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+{/foreach}
+{else}
+{if length(keys($kinds)) != 1}
+<option selected="selected" disabled="disabled" value=''>Pick Lysate Type</option>
+{/if}
+{foreach $k in keys($kinds)}
+<option value='{$k}'>{$kinds[$k].name}</option>
+{/foreach}
+{/if}
+</select>
 {/template}
 
 /**
-	@param row
-	@param preparation
+@param assignment
+@param experiment
+@param facs
+@/param cell_treatment
+@/param lane
+@/param kinds
+@param rows
 */
-{template .display_facs_fix_select}
-	<input type='radio' id='kind_live_{$row.id}_{if $preparation}{$preparation.id}{/if}' data-row='{$row.id}' enabled='{$row.enabled}' {if $preparation}data-preparation='{$preparation.id}' {if $preparation.kind == 'live'}checked='checked'{/if} {/if} name='kind_{$row.id}_{if $preparation}{$preparation.id}{/if}' value='live' class='facs_kind_radio' /><label for='kind_live_{$row.id}'>Live</label>
-	<br>
-	<input type='radio' id='kind_fixed_{$row.id}_{if $preparation}{$preparation.id}{/if}' data-row='{$row.id}' enabled='{$row.enabled}' {if $preparation}data-preparation='{$preparation.id}' {if $preparation.kind == 'fixed'}checked='checked'{/if}{/if} name='kind_{$row.id}_{if $preparation}{$preparation.id}{/if}' value='fixed' class='facs_kind_radio'/><label for='kind_fixed_{$row.id}'>Fixed</label>
-{/template}
+{template .analyze}
+<div class='scb_s_facs_tab_content_analyze'>
+    {if $facs.samples_finished}
+    {call .display_facs_progress}
+    {param step:3 /}
+    {/call}
+    {else}
+    {call .display_facs_progress}
+    {param step:2 /}
+    {/call}
+    {/if}
+    <div class='scb_s_facs_samples_area'>
+        <div class='scb_s_facs_samples_heading'>
+            Samples
+        </div>
+        <div class='scb_s_facs_choose_samples_order'>
+            <ol class='scb_s_facs_choose_samples_order_list'>
+                {foreach $r in $rows}
+                {if $r.is_valid}
+                <li facs_id='{$facs.id}' assignment_id="{$assignment.id}"
+                    experiment_id="{$experiment.id}" facs_lane_id='{$r.lane.id}'
+                {if $facs.lane_selected == $r.lane.id}class='scb_s_facs_sample_selected'{/if}>
+                {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
+                </li>
+                {/if}
 
-/** 
-	@param row
-	@param template	
-	@param height
-*/
-{template .display_facs_common_row}
-	<td rowspan='{$height}'>
-	<input type='checkbox' class='facs_lane_select' id='{$row.id}' {if $row.enabled}checked='checked'{/if}/>
-	</td>
-	<td rowspan='{$height}'>
-		{call .experiment_setup_row}
-			{param row:$row.cell_treatment/}
-			{param template:$template/}
-			{param selected_experiment:$row.experiment/}
-		{/call}
-		{$row.cell_treatment.id}
-	</td>
-	<td rowspan='{$height}'>
-		{$row.collection_schedule.schedule}
-	</td>
+                {/foreach}
+            </ol>
+        </div>
+        {if $facs.samples_finished}
+        {else}
+        <button class='scb_f_facs_run_samples scb_s_navigation_button' facs_id='{$facs.id}'
+                assignment_id="{$assignment.id}"
+                experiment_id="{$experiment.id}">RUN SAMPLES
+        </button>
+        {/if}
+    </div>
+    <div class='scb_s_facs_samples_graph_area'>
+        <div class='scb_s_western_blot_gel_tabs'>
+                    <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
+
+                    <div class='scb_s_facs_gel_tab_selected'>PI
+                    </div>
+                    </span>
+        </div>
+        {call .display_graph}
+        {param assignment:$assignment/}
+        {param experiment:$experiment/}
+        {param facs:$facs/}
+        {param facs_line_id:$facs.lane_selected/}
+        {param lane:$facs.selected_lane/}
+        {/call}
+    </div>
+</div>
 {/template}
 
 /**
-	@param row
-	@param template	
-	@param preparation
-
+@param assignment
+@param experiment
+@param facs
+@param facs_line_id
+@param lane
 */
-{template .display_facs_select1}
-	<select class="facs_select1" data-row='{$row.id}' data-preparation='{$preparation.id}' id='select1_{$row.id}_{$preparation.id}'>
-	{foreach $s1 in keys($template.facs_preparation[$preparation.kind])}
-		<option value="{$s1}" {if $preparation.treatment == $s1}selected="selected"{/if} >{$template.facs_preparation[$preparation.kind][$s1].name}</option>
-	{/foreach}
-	</select>
-	{if $preparation.treatment}{if $template.facs_preparation[$preparation.kind][$preparation.treatment].secondary}
-	<select class="facs_select2" data-row='{$row.id}' data-preparation='{$preparation.id}' data-treatment='{$preparation.treatment}' id='select2_{$row.id}_{$preparation.id}'>
-	{foreach $s2 in keys($template.facs_preparation[$preparation.kind][$preparation.treatment].secondary)}
-		<option value="{$s2}" {if $preparation.sub_treatment == $s2}selected="selected"{/if} >{$template.facs_preparation[$preparation.kind][$preparation.treatment].secondary[$s2].name}</option>
-	{/foreach}
-	</select>
-		
-	{/if}{/if}
-	
-{/template}
+{template .display_graph}
+<div class='scb_s_western_blot_gel_content'>
 
-/**
-	Display individual chart
-	@param row
-	@param preparation
-	@/param template
-*/
-{template .display_facs_chart}
-	row: {$row.id}<br>
-	prep: {$preparation.id}<br>
-	<div id='facs_chart_{$preparation.id}' class='facs_chart' data-row_id='{$row.id}' data-preparation_id='{$preparation.id}' style='width:600px;height:300px'>
-	</div>
-	
+    <div class='scb_s_facs_chart_wrapper'>
+        <div class='scb_s_facs_chart_xaxis'>
+            PI Fluorescence
+        </div>
+        <div class='scb_s_facs_chart_yaxis'>
+            Number of cells (thousands)
+        </div>
+        <div class='scb_s_facs_chart_helper'></div>
+        <div class='scb_s_facs_chart' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             facs_id='{$facs.id}'
+        {if $facs_line_id}facs_lane_id='{$facs_line_id}'{/if}>
+    </div>
+</div>
+
+<div class='scb_s_facs_tools'>
+    {if $facs.sample_analysis}
+    <h1>Flow Cytometry Analysis</h1>
+
+    <button class='scb_s_facs_tools_instructions_followup_toggle'>
+        Click here to hide instructions
+    </button>
+    <div class='scb_s_facs_tools_instructions_followup'>
+        <ul>
+            <li>
+                Click and drag to draw a segment in the graph. The % of cells within the segment will be calculated.
+            </li>
+
+            <li>
+                Drag the vertical lines that define a segment to change its width.
+            </li>
+            <li>
+                Select <b>Apply to All</b> to apply the same analysis to all samples.
+            </li>
+        </ul>
+    </div>
+    {if $lane.canvas_metadata_analysis}
+    {if $lane.canvas_metadata_analysis.ranges}
+    {if $lane.canvas_metadata_analysis.ranges.length > 0}
+    <table class='scb_s_facs_tools_analyze_data'>
+        <thead>
+        <tr>
+            <td></td>
+            <td>PI Fluorescence</td>
+            <td>% Cells</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $range in $lane.canvas_metadata_analysis.ranges}
+        <tr>
+            <td>
+                <div style='background-color:{$range.color}; width:12px; height:12px'></div>
+            </td>
+            <td>{$range.from} - {$range.to}</td>
+            <td>{$range.percentage}</td>
+            <td>
+                <img class='scb_f_facs_analyze_remove_point' assignment_id='{$assignment.id}'
+                     experiment_id='{$experiment.id}'
+                     facs_id='{$facs.id}' facs_lane_id='{$lane.id}' from='{$range.from}' to='{$range.to}'
+                     alt="Delete" title="Delete" src="images/setup/scb_remove.png">
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    <input type="checkbox" assignment_id='{$assignment.id}'
+           experiment_id='{$experiment.id}'
+           facs_id='{$facs.id}' facs_lane_id='{$lane.id}' class='scb_f_facs_apply_to_all'
+    {if $facs.apply_dna_analysis_to_all}checked='checked'{/if}> Apply to all
+
+    {/if}
+    {/if}
+    {/if}
+    {else}
+    <div class='scb_s_facs_tools_instructions_initial'>
+        <!--
+        To view the flow cytometry data for each sample, select the sample name in the Samples window to the left.
+        -->
+    </div>
+    <button class='scb_f_facs_tools_start_analysis scb_s_gray_button' assignment_id='{$assignment.id}'
+            experiment_id='{$experiment.id}'
+            facs_id='{$facs.id}'>ANALYZE DATA
+    </button>
+    {/if}
+</div>
+</div>
 {/template}

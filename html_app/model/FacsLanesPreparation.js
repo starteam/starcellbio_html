@@ -10,7 +10,7 @@ scb.FacsLanePreparationList = function scb_FacsLanePreparationList(data, context
 		var ret = new scb.FacsLanePreparation(d, context, self);
 		data.list.push(d);
 		return ret;
-	}
+	};
 
 	self.duplicate = function(id) {
 		var orig = _.find(data.list, function(e) {
@@ -20,7 +20,7 @@ scb.FacsLanePreparationList = function scb_FacsLanePreparationList(data, context
 			var clone = scb.utils.clone_and_clear(orig)
 			return self.start(clone);
 		}
-	}
+	};
 
 	self.reorder = function(new_order) {
 		var new_list = [];

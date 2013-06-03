@@ -1,129 +1,312 @@
 'use strict';
 
-scb.WesternBlotView = function scb_WesternBlotView(data, context) {
-	var self = this;
+scb.ui = scb.ui || {};
+scb.ui.static = scb.ui.static || {};
+scb.ui.static.WesternBlotView = scb.ui.static.WesternBlotView || {};
 
-	var western_blot_list;
-	var selected_western_blot;
-	self.show = function(callback) {
-		var workarea = data.workarea;
-		western_blot_list = data.session_list.selected_session().western_blot_list;
-		var selected_western_blot_id = western_blot_list.selected_id;
-		selected_western_blot = western_blot_list.selected();
+scb.ui.static.WesternBlotView.parse = function (element) {
+    var assignment_id = $(element).attr('assignment_id');
+    var experiment_id = $(element).attr('experiment_id');
+    var western_blot_id = $(element).attr('western_blot_id');
 
-		$('.workspace', workarea).html(scb_ui.western_blot({
-			current : selected_western_blot,
-			template : context.template,
-			making_lysates_list : context.js_model.current_session.making_lysate_list
-		}));
+    var state = {
+        experiment_id: experiment_id,
+        assignment_id: assignment_id,
+        western_blot_id: western_blot_id,
+        view: 'western_blot',
+        skip_hash_update: true
+    };
+    var parsed = scb.ui.static.MainFrame.validate_state(state);
+    parsed.state = state;
+    return parsed;
+}
 
-		$('.western_blot_add_lysate_button', workarea).unbind('click').click(function(e) {
-			var kind = $(this).attr('kind');
-			var lysate_kind_id = $(this).attr('lysate_kind_id');
-			var making_lysate_id = $(this).attr('making_lysate_id');
-			selected_western_blot.lanes_list.start({
-				making_lysate_id : making_lysate_id,
-				lysate_kind_id : lysate_kind_id,
-				kind : kind
-			});
-			console.info(kind + " " + lysate_kind_id + " " + making_lysate_id);
-			self.show(scb.Utils.noop);
-		});
+scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (element, event) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
 
-		$('.delete_western_blot_lane', workarea).unbind('click').click(function(e) {
-			var model_id = $(this).attr('model_id');
-			selected_western_blot.lanes_list.remove(model_id);
-			self.show(scb.Utils.noop);
-		});
+    var lysate_type = $(element).val();
+    if (lysate_type == '') {
+        return;
+    }
+    var lysate_id = $(element).attr('lane_id');
+    if (lysate_id == '') {
+        var cell_treatment_id = $(element).attr('cell_treatment_id');
+        parsed.western_blot.lanes_list.start({
+            kind: lysate_type,
+            cell_treatment_id: cell_treatment_id
+        });
+    }
+    else {
+        parsed.western_blot.lanes_list.get(lysate_id).kind = lysate_type;
+    }
+    if (event) {
+        scb.ui.static.MainFrame.refresh();
+    }
+}
 
-		$('.western_blot_display_lysate_select', workarea).unbind('click').click(function(e) {
-			var lysate_id = $('select.western_blot_display_lysate_select option:selected').attr('lysate_id');
-			selected_western_blot.display_lysates_id = lysate_id;
-			self.show(scb.Utils.noop);
-		});
+scb.ui.static.WesternBlotView.scb_f_western_blot_sample_remove = function (element) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
 
-		$('.western_blot_run_sds_button', workarea).unbind('click').click(function(e) {
-			selected_western_blot.sdsgelrun = true;
-			self.show(scb.Utils.noop);
-		});
-		context.sidebar.show();
+    var lysate_id = $(element).attr('lane_id');
+    if (lysate_id != '') {
+        parsed.western_blot.lanes_list.remove(lysate_id);
+    }
+    scb.ui.static.MainFrame.refresh();
+}
 
-		$('.western_blot_develop_button', workarea).unbind('click').click(function(e) {
-			selected_western_blot.finished = true;
-			self.show(scb.Utils.noop);
-		});
-		
-		$('.add_western_blot_exposure_time', workarea).unbind('click').click(function(e) {
-			selected_western_blot.exposure_list.start({});
-			$('.western_blot_exposure_times', workarea).replaceWith(scb_ui.western_blot_exposure_times({
-				gel : selected_western_blot,
-				template : state.template
-			}));
-			self.update_collection_handlers(workarea, selected_experiment, callback);
-		});
+scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (element, event) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
 
-		scb.utils.call_back(callback);
+    var val = $(element).attr('checked');
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
 
-//		self.update_collection_handlers(workarea, selected_western_blot, scb.Utils.noop);
-	}
+    parsed.western_blot.is_cell_treatment_enabled[cell_treatment_id] = val;
+    $('.scb_f_western_blot_select_lysate_type', $(element).parent().parent()).each(function (e) {
+        scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type(this);
+    });
+    if (event) {
+        var rows_count = parsed.western_blot.rows_state();
+        scb.ui.static.MainFrame.refresh();
+        if (rows_count.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
+            var element = $('.scb_f_western_blot_sample_active[cell_treatment_id="' + cell_treatment_id + '"]');
+            var parent = $(element).parent();
+            var note = $("<span>" + rows_count.valid + "</span>");
+            note.appendTo(parent);
+            console.info(parent);
+            setTimeout(function () {
+                $(note).detach();
+            }, 500);
+        }
+    }
+}
 
-	self.update_collection_handlers = function(workarea, selected_experiment, callback) {
-		scb.Utils.tools_hover($('.collection_schedule_time', workarea));
+scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
 
-		$('.experiment_row_treatment_edit', workarea).unbind('click').click(function(e) {
-			var schedule_id = scb.Utils.get_attribute($(this), "schedule_id");
-			console.info("Edit schedule id:" + schedule_id);
-			var selected_schedule = selected_experiment.exposure_list.get(schedule_id);
-			var collection_time_edit_str = scb_ui.collection_schedule_time_edit({
-				schedule : selected_schedule
-			});
-			var dialog = $('#dialog_edit', workarea);
-			dialog.html(collection_time_edit_str);
-			scb.Utils.position_div_over($(this).parent().parent(), dialog);
-			$('.experiment_setup_row_treatment_save', dialog).unbind('click').click(function(e) {
-				var time = $('.experiment_collection_schedule_field', dialog).val();
-				console.info("save " + time);
-				selected_schedule.schedule(time);
-				$('.experiment_collection_times', workarea).replaceWith(scb_ui.western_blot_exposure({
-					current : selected_experiment,
-					template : context.template
-				}));
-				self.update_collection_handlers(workarea, selected_experiment, callback);
-				dialog.hide();
-			});
-			$('.experiment_setup_row_treatment_cancel', dialog).unbind('click').click(function(e) {
-				dialog.hide();
+    parsed.experiment.western_blot_list.remove(parsed.western_blot.id);
+    parsed.state.view = 'select_technique';
+    delete parsed.state.skip_hash_update;
+    scb.ui.static.MainFrame.refresh(parsed.state);
 
-			});
-			$('.experiment_row_treatment_tools', dialog).show();
-			$('.experiment_row_treatment_tools_spacer', dialog).hide();
 
-		});
+}
 
-		$('.experiment_row_treatment_delete', workarea).unbind('click').click(function(e) {
-			var schedule_id = scb.Utils.get_attribute($(this), "schedule_id");
-			console.info("Delete schedule id:" + schedule_id);
-			selected_experiment.exposure_list.remove(schedule_id);
-			$('.experiment_collection_times', workarea).replaceWith(scb_ui.western_blot_exposure({
-				current : selected_experiment,
-				template : context.template
-			}));
-			self.update_collection_handlers(workarea, selected_experiment, callback);
-		});
+scb.ui.static.WesternBlotView.scb_s_western_blot_selected = function (element) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
 
-		$('.add_schedule', workarea).unbind('click').click(function(e) {
-			selected_experiment.exposure_list.start({});
-			$('.experiment_collection_times', workarea).replaceWith(scb_ui.western_blot_exposure({
-				current : selected_experiment,
-				template : context.template
-			}));
-			self.update_collection_handlers(workarea, selected_experiment, callback);
-		});
-		callback();
-	}
+    parsed.western_blot.name = $(element).text();
+}
 
-	self.new_using_making_lysates = function(making_lysates_id) {
-		western_blot_list = data.session_list.selected_session().western_blot_list;
-		western_blot_list.new_using_making_lysates(making_lysates_id);
-	}
+scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (element) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    var rows_state = parsed.western_blot.rows_state();
+    if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
+        alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.");
+
+    }
+    else if (rows_state.valid < 1) {
+        alert("Please select at least 1 lysate to prepare.");
+
+    }
+    else {
+        parsed.western_blot.lysate_prepared = true;
+        window.scrollTo(0, 0);
+        scb.ui.static.MainFrame.refresh();
+    }
+}
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    //TODO: 1st things first -- we needs to save NEW order
+
+    parsed.western_blot.marker_loaded = true;
+    scb.ui.static.MainFrame.refresh();
+}
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input = function (element) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    //TODO: 1st things first -- we needs to save NEW order
+
+    parsed.western_blot.gel_type = $(element).val();
+    scb.ui.static.MainFrame.refresh();
+}
+
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function (element) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    if (!parsed.western_blot.marker_loaded) {
+        var r = confirm("The protein size marker has not been loaded. Would you like to continue?")
+        if (r == false) {
+            return;
+        }
+    }
+
+    //TODO: 1st things first -- we needs to save NEW order
+    parsed.western_blot.is_transfered = true;
+
+    //TODO: before repaint need to do steps in animation...
+    scb.ui.static.MainFrame.refresh();
+}
+scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active_all = function (element) {
+    $('.scb_f_western_blot_sample_active').each(function (e) {
+        var element = this;
+        $(element).attr('checked', 'checked');
+        scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active(element);
+    });
+    scb.ui.static.MainFrame.refresh();
+
+}
+
+scb.ui.static.WesternBlotView.populate_wells = function (rows, state, gstate) {
+    var canvas = $('.scb_s_western_blot_gel')[0];
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+
+    var g = canvas.getContext('2d');
+
+    function getImage(index) {
+        return $('img', '.scb_wells')[index];
+    }
+
+    g.drawImage(getImage(15), 0, 0);
+
+    var i = 0;
+    _.each(rows, function (elem, index, array) {
+        if (elem.is_sample_enabled) {
+            g.drawImage(getImage(i++), 0, 0);
+        }
+    });
+    if (state.western_blot.marker_loaded) {
+        g.drawImage(getImage(i), 0, 0);
+    }
+}
+
+
+scb.ui.static.WesternBlotView.register = function (workarea) {
+    scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_select_lysate_type', function (e) {
+        scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type(this, e);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_remove', function (e) {
+        scb.ui.static.WesternBlotView.scb_f_western_blot_sample_remove(this);
+    });
+    scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_sample_active', function (e) {
+        scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active(this, e);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_remove', function (e) {
+        scb.ui.static.WesternBlotView.scb_f_western_blot_remove(this);
+    });
+    scb.utils.off_on(workarea, 'blur', '.scb_s_western_blot_selected', function (e) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_selected(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_prepare_lysates', function (e) {
+        scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_load_marker', function (e) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_choose_gel_type_input', function (e, ui) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_run_gel_and_transfer', function (e, ui) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_active_all', function (e, ui) {
+        scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active_all(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_tab', function (e, ui) {
+        var link = $('a', $(this));
+        var href = link.attr('href');
+        if( href )
+        {
+            document.location = href;
+            e.preventDefault();
+        }
+    })
+
+}
+
+scb.ui.static.WesternBlotView.MAX_ROWS = 15;
+
+scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
+    var self = this;
+
+    self.show = function (state) {
+        var workarea = state.workarea;
+        var experiment = state.experiment;
+        var template = state.assignment.template;
+        var rows_state = state.western_blot.rows_state();
+
+        var kind = 'sample_prep';
+        if (state.western_blot.lysate_prepared) {
+            kind = 'prepare_gel';
+        }
+
+        var can_prepare_lysate = rows_state.valid > 0;
+
+        workarea.html(scb_western_blot.main({
+            global_template: gstate.context.master_model,
+            t: template,
+            assignment: state.assignment,
+            experiment: state.experiment,
+            western_blot: state.western_blot,
+            rows: rows_state.rows,
+            rows_valid: rows_state.valid,
+            kind: kind,
+            kinds: template.lysate_kinds,
+            can_prepare_lysate: can_prepare_lysate
+        }));
+        if (kind == 'sample_prep') {
+            if (_.keys(template.lysate_kinds).length == 1) {
+                $('button.scb_f_western_blot_sample_remove').hide();
+            }
+
+        }
+        if (kind == 'prepare_gel') {
+            //$('.scb_s_western_blot_choose_samples_order_list').sortable();
+            scb.ui.static.WesternBlotView.populate_wells(rows_state.rows, state, gstate);
+        }
+
+        if (state.western_blot.gel_type == null) {
+            $('.scb_s_western_blot_samples_area').children().not('.scb_s_western_blot_choose_gel_type').css('opacity', '.25');
+            $('.scb_s_western_blot_samples_gel_area').css('opacity', '.25');
+            $('canvas', $('.scb_s_western_blot_samples_gel_area')).hide();
+        }
+
+//        if (rows_state.valid >= (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
+//            $('.scb_f_western_blot_sample_active').attr('disabled', 'disabled');
+//            $('.scb_f_western_blot_select_lysate_type').attr('disabled', 'disabled');
+//            $('.scb_f_western_blot_sample_active[checked="checked"]').removeAttr('disabled');
+//
+//        }
+        state.experiment.last_view = 'western_blot';
+
+    }
 }

@@ -1447,7 +1447,7 @@ var NormalDistribution = ContinuousDistribution.extend({
  */
 var LogNormalDistribution = ContinuousDistribution.extend({
     init: function(location, scale) {
-        this._super('LogNormal')
+        this._super('LogNormal');
         this._location = parseFloat(location);
         this._scale = parseFloat(scale);
         this._string = "LogNormal ("+this._location.toFixed(2)+", " + this._scale.toFixed(2) + ")";

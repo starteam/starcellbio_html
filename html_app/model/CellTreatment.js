@@ -14,7 +14,20 @@ scb.CellTreatmentList = function scb_CellTreatmentList(data, context, parent) {
 	}
 
 	self.duplicate = function(id) {
-		return self.start(scb.Utils.clone_and_clear(scb.utils.find(data.list,id)));
+        var new_list = [];
+        var list = data.list ;
+        for( var i in list )
+        {
+            var elem = list[i];
+            new_list.push(elem)
+            if( id == elem.id)
+            {
+                var new_elem = scb.Utils.clone_and_clear(elem);
+                new_list.push( new_elem );
+            }
+        }
+        data.list = new_list;
+//		return self.start(scb.Utils.clone_and_clear(scb.utils.find(data.list,id)));
 	}
 }
 
@@ -24,12 +37,64 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
 
 	scb.ModelHelpers.common_entry_code(self, data, context);
 
-	scb.Utils.initialize_accessor_field(self,data,'cell_line',scb.utils.any_key(context.template.cell_lines),null,context);
+	scb.Utils.initialize_accessor_field(self,data,'cell_line','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'treatment_list',{},scb.TreatmentList,context);
 	scb.Utils.initialize_accessor_field(self,data,'stimulation_time','',null,context);
-	scb.Utils.initialize_accessor_field(self,data,'collection_schedule_list',scb.utils.clone_and_clear(scb.utils.get(context.template.experiment_templates, ['default', 'collection_schedule_list'], {
-		list : []
-	})),scb.CollectionScheduleList,context);
+	scb.Utils.initialize_accessor_field(self,data,'collection_schedule_list','',null, context);
+
+    self.format_row = function()
+    {
+        var display_text = self.name;
+        var template = context.template;
+        if( template.ui.western_blot.format )
+        {
+            var orig_template = template.ui.western_blot.format;
+            var new_text = '' + orig_template
+            var keys = template.ui.western_blot.keys;
+            var resolve = function(value)
+            {
+                var ret = self;
+                var success = true;
+                _.each(value.attr,function(e){
+                    if(!_.isUndefined(ret[e]))
+                    {
+                        ret = ret[e];
+                    }
+                    else
+                    {
+                        success = false;
+                        console.debug( "UNKNOWN KEY " + e + " IN scb.CellTreatment.format_row");
+                    }
+                });
+                var text = template;
+                _.each(value.map,function(e){
+                    if(!_.isUndefined(text[e]))
+                    {
+                        text = text[e];
+                    }
+                    if(e=='%KEY%' && !_.isUndefined(text[ret]))
+                    {
+                        text = text[ret];
+                    }
+                    else
+                    {
+                        console.debug( "UNKNOWN KEY " + e + " IN scb.CellTreatment.format_row 2");
+                    }
+                })
+                if(! success && scb.utils.isDefined(value.default) )
+                {
+                    text = value.default;
+                }
+                return text;
+            }
+            _.each(keys, function(value,key,keys){
+                var regexp = new RegExp(key);
+                new_text = new_text.replace( regexp , resolve(value));
+            });
+            display_text = new_text == orig_template ? display_text : new_text;
+        }
+        return display_text;
+    };
 
 	scb.Utils.accessor_toString(self.cell_line);
 }

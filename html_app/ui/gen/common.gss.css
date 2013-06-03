@@ -1,0 +1,187 @@
+body {
+  background-color: #e9edf1;
+}
+.scb_s_navigation_button {
+  padding: 3px 20px;
+  width: 200px;
+  min-width: 120px;
+  background-position: center;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 12pt;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  box-shadow: 0 0 5px #a9a9a9;
+  font-family: 'sourcesanspro-semibold';
+  cursor: pointer;
+  background-color: #008ddd;
+  background-image: -webkit-linear-gradient(top,#81c9f1,#028dde);
+  background-image: -moz-linear-gradient(top,#81c9f1,#028dde);
+  background-image: -ms-linear-gradient(top,#81c9f1,#028dde);
+  background-image: -o-linear-gradient(top,#81c9f1,#028dde);
+}
+.scb_s_experiment_step {
+  position: relative;
+}
+.scb_s_experiment_step_circle {
+  box-shadow: 0 0 6px #a9a9a9;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  text-align: center;
+  vertical-align: 90%;
+  color: white;
+  display: block;
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: #383838;
+  background-image: -webkit-linear-gradient(top,#6e6e6e,#373737);
+  background-image: -moz-linear-gradient(top,#6e6e6e,#373737);
+  background-image: -ms-linear-gradient(top,#6e6e6e,#373737);
+  background-image: -o-linear-gradient(top,#6e6e6e,#373737);
+}
+.scb_s_experiment_step_number {
+  padding: .25em;
+  vertical-align: top;
+  font-size: 16pt;
+}
+.scb_experiment_step_selected {
+  background-color: #189689;
+  background-image: -webkit-linear-gradient(top,#7eb49d,#157776);
+  background-image: -moz-linear-gradient(top,#7eb49d,#157776);
+  background-image: -ms-linear-gradient(top,#7eb49d,#157776);
+  background-image: -o-linear-gradient(top,#7eb49d,#157776);
+}
+.scb_experiment_step_previous {
+  background-color: #189689;
+  background-image: -webkit-linear-gradient(top,#88d2af,#18968a);
+  background-image: -moz-linear-gradient(top,#88d2af,#18968a);
+  background-image: -ms-linear-gradient(top,#88d2af,#18968a);
+  background-image: -o-linear-gradient(top,#88d2af,#18968a);
+}
+.scb_s_experiment_step_horizontal_line_12 {
+  position: absolute;
+  width: 54px;
+  background-color: #80d1ae;
+  height: 1px;
+  top: 23px;
+  left: 65px;
+}
+.scb_s_experiment_step_horizontal_line_23 {
+  position: absolute;
+  width: 54px;
+  background-color: #80d1ae;
+  height: 1px;
+  top: 23px;
+  left: 155px;
+}
+.scb_s_experiment_step_horizontal_line_34 {
+  position: absolute;
+  width: 54px;
+  background-color: #80d1ae;
+  height: 1px;
+  top: 23px;
+  left: 245px;
+}
+.scb_s_experiment_step_horizontal_line_45 {
+  position: absolute;
+  width: 54px;
+  background-color: #80d1ae;
+  height: 1px;
+  top: 23px;
+  left: 335px;
+}
+.scb_s_experiment_step_div {
+  display: inline-block;
+  margin: 5px;
+  height: 80px;
+  width: 80px;
+  vertical-align: top;
+}
+.scb_s_experiment_step_text {
+  display: block;
+  position: relative;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 12px;
+}
+.scb_s_assignment_step_experiment_block {
+  position: absolute;
+  top: -25px;
+  left: 300px;
+  color: black;
+  font-size: 1.5em;
+}
+.scb_s_assignment_step_experiment {
+  display: inline-block;
+  margin-left: 5px;
+}
+.scb_s_assignment_step_experiment_line {
+  height: 1px;
+  background-color: #14ac63;
+  font-size: 1.5em;
+}
+.scb_s_assignment_step_experiment_box {
+  position: relative;
+  top: 5px;
+}
+.scb_s_assignment_step_experiment_line {
+  position: absolute;
+  top: 8px;
+  left: 138px;
+  width: 525px;
+}
+.scb_s_assignment_step {
+  background: #69a996;
+  color: white;
+  width: 960px;
+  height: 25px;
+  position: relative;
+  background-color: #189689;
+  background-image: -webkit-linear-gradient(top,#80d1ae,#189689);
+  background-image: -moz-linear-gradient(top,#80d1ae,#189689);
+  background-image: -ms-linear-gradient(top,#80d1ae,#189689);
+  background-image: -o-linear-gradient(top,#80d1ae,#189689);
+}
+.scb_s_assignment_step>img {
+  height: 24px;
+  top: 1px;
+  position: relative;
+}
+.scb_s_assignment_step_link {
+  width: 140px;
+  height: 15px;
+  padding: 5px;
+  margin-left: -8px;
+  text-align: center;
+  font-size: 1.5em;
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.scb_s_assignment_step_link_active {
+  background: url('../images/header/scb_navigation_button.png');
+  margin-left: -14px;
+  margin-right: -11px;
+  margin-top: -1px;
+}
+.scb_s_gray_button {
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-image: -moz-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-image: -ms-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-image: -o-linear-gradient(top,#f2f2f2,#d3d1d2);
+  border: 1px solid #e0e0e0;
+  border-radius: 5pt;
+  height: 30px;
+  color: black;
+  font-size: 10pt;
+  font-family: 'sourcesanspro-semibold';
+  cursor: pointer;
+}

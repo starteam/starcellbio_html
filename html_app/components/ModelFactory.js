@@ -9,4 +9,4 @@ scb.components.ModelFactory = function scb_components_ModelFactory(template) {
 	if(scb.utils.isDefined(template.model.facs)) {
 		self.facs = new scb.components.FACSModelFactory(template.model.facs, template);
 	}
-}
+};

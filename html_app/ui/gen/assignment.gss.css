@@ -1,0 +1,72 @@
+.scb_s_assignment_view {
+  background-color: #f4f6f8;
+  width: 960px;
+}
+.scb_s_assignment_sidebar {
+  margin-top: 8px;
+  font-size: 12px;
+  text-align: justify;
+  display: inline-block;
+  vertical-align: top;
+  width: 230px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #a0a0a0;
+  border-radius: 5px;
+  margin-right: 10px;
+  padding: 5px;
+  background-color: white;
+  margin-left: 20px;
+}
+.scb_s_assignment_description {
+  position: relative;
+  margin-top: 8px;
+  font-size: 11pt;
+  text-align: justify;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 580px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #a0a0a0;
+  border-radius: 8px;
+  padding: 10px;
+  width: 644px;
+  padding-left: 20px;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
+  padding-bottom: 50px;
+  padding-top: 17px;
+}
+.scb_s_assignment_description>h1 {
+  font-size: 14pt;
+  font-family: 'sourcesanspro-semibold';
+}
+.scb_s_assignment_description>.scb_f_select_assignment {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+.scb_s_assignment_description>.scb_f_open_experiment {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+.scb_s_assignment_title {
+  font-size: 14pt;
+  color: #00abe6;
+  font-family: 'sourcesanspro-semibold';
+  font-weight: normal;
+}
+.scb_s_assignment_title_underline {
+  margin-left: -20px;
+  margin-right: -20px;
+  background-color: #dae9e1;
+  width: 674px;
+  height: 2px;
+  display: block;
+  margin-bottom: 5px;
+}

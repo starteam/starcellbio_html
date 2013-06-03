@@ -1,0 +1,421 @@
+{namespace scb_western_blot}
+
+/**
+* Assignment selector
+* @param t template
+* @param global_template
+* @param assignment AssignmentView
+* @param experiment
+* @param western_blot WesternBlotView
+* @param rows
+* @param kind
+* @param kinds
+* @param can_prepare_lysate
+*/
+{template .main}
+<div class='scb_s_western_blot_view'>
+    {call scb_homepage.display_header}
+    {param global_template:$global_template /}
+    {/call}
+    {call scb_common.assignment_step}
+        {param step:6/}
+        {param assignment_name:$assignment.name/}
+        {param experiment_name:$experiment.name/}
+        {param assignment:$assignment/}
+        {param experiment:$experiment/}
+        {param technique_name:'WESTERN BLOT' /}
+        {param technique_view:'western_blot' /}
+        {param technique_param:'western_blot_id' /}
+        {param technique_id:$western_blot.id /}
+    {/call}
+    {call .display_details}
+    {param t:$t/}
+    {param global_template:$global_template /}
+    {param assignment:$assignment/}
+    {param western_blot:$western_blot /}
+    {param rows:$rows /}
+    {param kind:$kind /}
+    {param kinds:$kinds /}
+    {param can_prepare_lysate:$can_prepare_lysate/}
+    {/call}
+    {call scb_homepage.display_footer}
+    {param t:$t /}
+    {/call}
+    {call .well_images/}
+</div>
+{/template}
+
+/** Display Western Blot main screen
+
+@/param t template
+@param assignment
+@param experiment
+@param western_blot
+@param rows
+@param kind
+@param kinds
+@param can_prepare_lysate
+*/
+{template .display_details}
+<div class='scb_western_blot_details_view'>
+
+    <div class='scb_western_blot_details_view_inner'>
+
+        {call .display_tabs}
+        {param assignment:$assignment/}
+        {param experiment:$experiment /}
+        {param western_blot:$western_blot /}
+        {param rows:$rows /}
+        {param kind:$kind /}
+        {param kinds:$kinds/}
+        {param can_prepare_lysate:$can_prepare_lysate/}
+        {/call}
+    </div>
+</div>
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param western_blot
+@param rows
+@param kind
+@param kinds
+@param can_prepare_lysate
+*/
+{template .display_tabs}
+{call .display_tabs_selector}
+    {param assignment:$assignment/}
+    {param experiment:$experiment /}
+    {param western_blot:$western_blot /}
+{/call}
+<div class='scb_s_western_blot_tab_content {if $kind == 'sample_prep'}scb_s_western_blot_tab_content_sample_prep{/if}'>
+    {if $kind == 'sample_prep'}
+    {call .sample_prep}
+    {param assignment:$assignment/}
+    {param experiment:$experiment/}
+    {param western_blot:$western_blot/}
+    {param rows:$rows/}
+    {param kinds:$kinds/}
+    {param can_prepare_lysate:$can_prepare_lysate/}
+    {/call}
+    {/if}
+    {if $kind == 'prepare_gel'}
+    {call .prepare_gel}
+    {param assignment:$assignment/}
+    {param experiment:$experiment/}
+    {param western_blot:$western_blot/}
+    {param rows:$rows/}
+    {/call}
+    {/if}
+    {if $kind == 'load_gel'}
+    {call .display_wb_progress}
+    {param step:3/}
+    {/call}
+    {/if}
+    {if $kind == 'gel_operations'}
+
+    {/if}
+    <a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_western_blot"
+       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
+
+</div>
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param western_blot
+*/
+{template .display_tabs_selector}
+<div class='scb_s_western_blot_tabs'>
+    {foreach $wb in $experiment.western_blot_list.list}
+    {if $western_blot.id == $wb.id}
+    <span class='scb_s_western_blot_active'>
+    <span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+          experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+    <button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+            experiment_id='{$experiment.id}'><img src="images/setup/scb_remove.png">
+    </button>
+    </span>
+    {else}
+    <a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot'
+       href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
+       western_blot_id='{$wb.id}'>{$wb.name}</a>
+    {/if}
+    {/foreach}
+</div>
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param western_blot
+@param rows
+@param kinds
+@param can_prepare_lysate
+*/
+{template .sample_prep}
+{call .display_wb_progress}
+{param step:1/}
+{/call}
+<div class='scb_s_western_blot_samples_table'>
+    <table>
+        <thead class='scb_s_western_blot_samples_table_head'>
+        <td class='scb_s_western_blot_samples_table_heading'>Select</td>
+        <td class='scb_s_western_blot_samples_table_heading'>Samples</td>
+        <td class='scb_s_western_blot_samples_table_heading'>Lysate type</td>
+        <td class='scb_s_western_blot_samples_table_heading'>&nbsp;</td>
+        </thead>
+        {foreach $r in $rows}
+        <tr class='scb_s_western_blot_samples_table_tr'>
+            <td class='scb_s_western_blot_samples_table_td'>{if $r.display_sample}
+                <input type="checkbox" class="scb_f_western_blot_sample_active" western_blot_id='{$western_blot.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                       cell_treatment_id='{$r.cell_treatment.id}'
+                {if $r.is_sample_enabled}checked="checked"{/if}
+                >
+                {/if}
+            </td>
+            <td class='scb_s_western_blot_samples_table_td'>{if $r.display_sample}
+                {$r.display_text}
+                {/if}
+            </td>
+            <td class='scb_s_western_blot_samples_table_td'>
+                {call .display_lysate_types}
+                {param assignment:$assignment/}
+                {param experiment:$experiment/}
+                {param western_blot:$western_blot/}
+                {param cell_treatment:$r.cell_treatment/}
+                {param kinds:$kinds/}
+                {param lane:$r/}
+                {/call}
+            </td>
+            <td class='scb_s_western_blot_samples_table_td'>
+                {if $r.kind == 'existing'}
+                <button class="scb_f_western_blot_sample_remove" western_blot_id='{$western_blot.id}'
+                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
+                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>X
+                </button>
+                {else}
+                <button class="scb_f_western_blot_sample_remove"
+                disabled="disabled">X
+                </button>
+
+                {/if}
+            </td>
+        </tr>
+        {/foreach}
+        <tr>
+            <td colspan='4'>
+                <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<a class='scb_s_navigation_button scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE LYSATES  &nbsp; &#9654;
+</a>
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param western_blot
+@param rows
+*/
+{template .prepare_gel}
+{call .display_wb_progress}
+    {param step:$western_blot.gel_type?3:2/}
+{/call}
+<div class='scb_s_western_blot_samples_area'>
+
+    <div class='scb_s_western_blot_choose_gel_type'>
+        <!-- TODO: Gel Type stuff -->
+        Gel Type:
+        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".10" western_blot_id='{$western_blot.id}'
+               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.10'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text">10%</span>
+        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
+               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.12'}checked='checked'{/if} disabled='disabled'/><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_western_blot_choose_gel_type_input_disabled">12%</span>
+        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15" western_blot_id='{$western_blot.id}'
+               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if} disabled='disabled'/><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_western_blot_choose_gel_type_input_disabled">15%</span>
+    </div>
+    <!--
+    <div class='scb_s_western_blot_choose_samples_note'>
+        NOTE: You can reorder samples by dragging and dropping into new order
+    </div>
+    -->
+    <div class='scb_s_western_blot_samples_heading'>
+        Samples
+    </div>
+    <div class='scb_s_western_blot_choose_samples_order'>
+        <ol class='scb_s_western_blot_choose_samples_order_list'>
+            {foreach $r in $rows}
+            {if $r.is_valid}
+            <li>
+                {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
+            </li>
+            {/if}
+            {/foreach}
+            {if $western_blot.marker_loaded == true}
+                <li>Marker</li>
+            {/if}
+        </ol>
+    </div>
+    {if $western_blot.marker_loaded == false}
+    <button class='scb_s_western_blot_load_marker scb_s_navigation_button' western_blot_id='{$western_blot.id}'
+            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>LOAD MARKER
+    </button>
+    {/if}
+</div>
+<div class='scb_s_western_blot_samples_gel_area'>
+    <div class='scb_s_western_blot_gel_tabs'>
+        <div class='scb_s_western_blot_gel_tab scb_s_western_blot_gel_active'>GEL</div>
+    </div>
+    <div class='scb_s_western_blot_gel_content'>
+        {call .display_western_blot_numbers}
+        {/call}
+
+    <canvas class='scb_s_western_blot_gel' src='images/western_blot/SCB_WesternBlotting_Gel.png'/>
+
+    <div class='scb_s_western_blot_tools'>
+        <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' western_blot_id='{$western_blot.id}'
+                    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">RUN GEL & TRANSFER</a>
+    </div>
+    </div>
+</div>
+{/template}
+
+
+/**
+
+*/
+{template .display_western_blot_numbers}
+<span class='scb_s_western_blot_gel_numbers'>
+<span class='scb_s_western_blot_gel_number'>1</span>
+<span class='scb_s_western_blot_gel_number'>2</span>
+<span class='scb_s_western_blot_gel_number'>3</span>
+<span class='scb_s_western_blot_gel_number'>4</span>
+<span class='scb_s_western_blot_gel_number'>5</span>
+<span class='scb_s_western_blot_gel_number'>6</span>
+<span class='scb_s_western_blot_gel_number'>7</span>
+<span class='scb_s_western_blot_gel_number'>8</span>
+<span class='scb_s_western_blot_gel_number'>9</span>
+<span class='scb_s_western_blot_gel_number'>10</span>
+<span class='scb_s_western_blot_gel_number'>11</span>
+<span class='scb_s_western_blot_gel_number'>12</span>
+<span class='scb_s_western_blot_gel_number'>13</span>
+<span class='scb_s_western_blot_gel_number'>14</span>
+<span class='scb_s_western_blot_gel_number'>15</span>
+</span>
+
+{/template}
+/**
+@param assignment
+@param experiment
+@param western_blot
+@param cell_treatment
+@param lane
+@param kinds
+*/
+{template .display_lysate_types}
+
+<select class="scb_f_western_blot_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
+        western_blot_id='{$western_blot.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
+        lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
+{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
+>
+{if $lane.kind == 'existing'}
+    {foreach $k in keys($kinds)}
+    <option value='{$k}'
+    {if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+    {/foreach}
+{else}
+    {if length(keys($kinds)) != 1}
+    <option selected="selected" disabled="disabled" value=''>Pick Lysate Type</option>
+    {/if}
+    {foreach $k in keys($kinds)}
+        <option value='{$k}'>{$kinds[$k].name}</option>
+    {/foreach}
+{/if}
+</select>
+{/template}
+
+/**
+@param step
+*/
+{template .display_wb_progress}
+<div class='scb_s_western_blot_progress'>
+
+    <span class='scb_s_western_blot_progress_prefix_group1'>
+    <img class='scb_s_western_blot_progress_prefix_img' src="images/western_blot/backbackback.png">
+    <div class='scb_experiment_step_selected scb_s_experiment_step_circle'>
+        <div class='scb_s_western_blot_progress_prefix'>5</div>
+    </div>
+    </span>
+    <span class='scb_s_western_blot_progress_prefix_group2'>
+
+    <div class='scb_s_western_blot_progress_prefix_text'>
+        PERFORM WESTERN BLOT
+    </div>
+
+    <div class='scb_s_western_blot_progress_rest'>
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 {if $step >= 1}scb_s_western_blot_progress_selected{/if}'>
+            1. Sample Prep
+        </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2 {if $step >= 2}scb_s_western_blot_progress_selected{/if}'>
+            2. Prepare Gel
+        </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3 {if $step >= 3}scb_s_western_blot_progress_selected{/if}'>
+            3. Load Gel
+        </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_4 {if $step >= 4}scb_s_western_blot_progress_selected{/if}'>
+            4. Run
+        </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_5 {if $step >= 5}scb_s_western_blot_progress_selected{/if}'>
+            5. Transfer
+        </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_6 {if $step >= 6}scb_s_western_blot_progress_selected{/if}'>
+            6. Blot
+        </div>
+        <img class='scb_s_western_blot_progress_vertical_line' src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_7 {if $step >= 7}scb_s_western_blot_progress_selected{/if}'>
+            7. Develop
+        </div>
+
+
+    </div>
+    </span>
+
+</div>
+{/template}
+
+/**
+*/
+{template .well_images}
+    <span class='scb_wells' style='display:none;'>
+        <img src='images/western_blot/WesternBlot_BlueWells_01.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_02.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_03.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_04.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_05.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_06.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_07.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_08.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_09.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_10.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_11.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_12.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_13.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_14.png'>
+        <img src='images/western_blot/WesternBlot_BlueWells_15.png'>
+        <img src='images/western_blot/SCB_WesternBlotting_Gel.png'>
+    </span>
+{/template}

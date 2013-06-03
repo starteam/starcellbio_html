@@ -1,0 +1,105 @@
+@def SIDEBAR_WIDTH 150px; 
+
+
+.sidebar_experiment_name {
+    font-size: 16px;
+}
+
+.sidebar_display_experiments {
+    margin-top: 12px;  
+}
+
+.sidebar_display_experiment {
+    padding-top:2px;
+    padding-left:10px;
+}
+
+
+.selected_experiment {
+    background-color: #E8E8E8;
+    margin-right:-10px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.unselected_experiment {
+    background-color: #f8f8f8;
+    margin-right:-10px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    font-weight: 200;
+}
+
+
+.selected_experiment_name {
+    font-weight: bold;
+    
+}
+
+.load_save_button {
+    position:fixed;
+    bottom: 0px;
+    height: 25px;
+    background-color:white;
+    border-top-style:solid;
+    padding-top:2px;
+    border-color:#e0e0e0;
+    border-width:1px;
+    text-align: center; 
+    width: SIDEBAR_WIDTH;  
+}
+
+.load_save_button_spacer {
+    height:50px;
+}
+
+.workspace {
+    display: block;
+    top:0px;
+    vertical-align: top;
+    background-color: #e8e8e8;
+    right:0px;
+    padding-left:add(SIDEBAR_WIDTH,25px);
+}
+
+.sidebar {
+    position:fixed;
+    display: inline-block;
+    width: SIDEBAR_WIDTH;
+    top:0;
+    vertical-align: top;
+    background-color: white;
+    height: 100%;
+    padding-right:10px;
+    padding-left:10px;
+    float:left;
+    overflow-y: scroll;
+    font-variant: normal;
+}
+
+.sidebar_display_experiment_list {
+    list-style: none;
+    padding-left: 15px;
+    margin-top: 1px;
+}
+
+.select_experimental_setup {
+    text-decoration: none;
+}
+
+.display_instructions {
+    display:block;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 12px;
+    border-color: #d0d0d0;
+    padding:8px;
+    background-color: #FFFFFF;
+    text-align: justify;
+}
+
+.wester_blot_sidebar_list {
+    padding-left:20px;
+    list-style:none;
+    cursor:pointer; 
+}

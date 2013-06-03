@@ -1,0 +1,57 @@
+[0.000][INFO]:      ChromeDriver 23.0.1240.0 /Users/ceraj/.virtualenvs/StarCellBio/StarCellBio/html_app/../../chromedriver
+[0.978][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome",
+   "chromeOptions": {
+      "args": [ "window-size=400,200" ],
+      "binary": "",
+      "extensions": [  ]
+   },
+   "javascriptEnabled": true,
+   "platform": "ANY",
+   "version": ""
+}
+
+[0.979][INFO]:      Launching chrome: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --enable-logging --log-level=1 --disable-hang-monitor --disable-prompt-on-repost --dom-automation --full-memory-crash-report --no-default-browser-check --no-first-run --disable-background-networking --disable-sync --disable-translate --disable-web-resources --safebrowsing-disable-auto-update --safebrowsing-disable-download-protection --disable-client-side-phishing-detection --disable-component-update --disable-default-apps --use-mock-keychain --ignore-certificate-errors --window-size=400,200 about:blank
+[1.424][INFO]:      Connected to Chrome successfully. Version: 23.0.1271.101
+[1.459][FINE]:      Command received (/session/c5b780d9170ccbb8ff5f7150e3175e50)
+[1.460][FINE]:      Command finished (/session/c5b780d9170ccbb8ff5f7150e3175e50) with response {
+   "sessionId": "c5b780d9170ccbb8ff5f7150e3175e50",
+   "status": 0,
+   "value": {
+      "acceptSslCerts": false,
+      "applicationCacheEnabled": false,
+      "browserConnectionEnabled": false,
+      "browserName": "chrome",
+      "chrome.chromedriverVersion": "23.0.1240.0",
+      "chrome.nativeEvents": false,
+      "cssSelectorsEnabled": true,
+      "databaseEnabled": false,
+      "handlesAlerts": true,
+      "javascriptEnabled": true,
+      "locationContextEnabled": false,
+      "nativeEvents": true,
+      "platform": "mac",
+      "rotatable": false,
+      "takesScreenshot": true,
+      "version": "23.0.1271.101",
+      "webStorageEnabled": true
+   }
+}
+
+[7.395][FINE]:      Command received (/session/c5b780d9170ccbb8ff5f7150e3175e50/url) with params {
+   "sessionId": "c5b780d9170ccbb8ff5f7150e3175e50",
+   "url": "http://www.bugaco.com/test.php5"
+}
+
+[7.395][FINER]:     Waiting for all views to stop loading...
+[7.395][FINER]:     Done waiting for all views to stop loading
+[7.774][FINER]:     Waiting for all views to stop loading...
+[7.785][FINER]:     Done waiting for all views to stop loading
+[7.786][FINE]:      Command finished (/session/c5b780d9170ccbb8ff5f7150e3175e50/url) with response {
+   "sessionId": "c5b780d9170ccbb8ff5f7150e3175e50",
+   "status": 0,
+   "value": {
+
+   }
+}
+
