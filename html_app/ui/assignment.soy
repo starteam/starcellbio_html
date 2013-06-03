@@ -41,9 +41,9 @@ Assignment description
 */
 {template .display_details}
 <div class='scb_s_assignment_description'>
-        <h1 class='scb_s_assignment_title'>
+        <span class='scb_s_assignment_title'>
             {$assignment.name |noAutoescape}
-        </h1>
+        </span>
         <div class='scb_s_assignment_title_underline'></div>
         {$assignment.description |noAutoescape}
         {$t.instructions |noAutoescape}

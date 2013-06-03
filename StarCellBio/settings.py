@@ -9,6 +9,7 @@ rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+#TASTYPIE_FULL_DEBUG = False
 
 import platform
 if platform.node() == 'starapp':
@@ -144,7 +145,8 @@ INSTALLED_APPS = (
     'frontend_tests',
     'rest_framework',
     'scb_rest',
-    'backend'
+    'backend',
+    'instructor',
 ) + auth.settings.INSTALLED_APPS
 
 # A sample logging configuration. The only tangible logging

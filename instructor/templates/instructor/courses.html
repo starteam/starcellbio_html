@@ -1,0 +1,15 @@
+<form method="post" action="">
+    {{ formset.management_form }}
+    {% for form in formset %}
+        <div>
+        {% for field in form %}
+            {{ field.label_tag }}: {{ field }}
+            <span style="color:red">  {{ field.errors }} </span>
+            <br/>
+        {% endfor %}
+        </div>
+        <hr>
+
+    {% endfor %}
+<input type="submit" value="Save"/>
+</form>

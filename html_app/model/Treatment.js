@@ -60,6 +60,7 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 			var hours = Math.floor((time % 86400) / 3600);
 			var minutes = Math.round((time % 3600) / 60);
 			var now = (time < 60 );
+            if( time < 0 ) return '' ;
 			return scb_common.format_time_detailed({
 				days : days,
 				hours : hours,

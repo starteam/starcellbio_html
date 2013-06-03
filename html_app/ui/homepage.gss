@@ -98,6 +98,11 @@
     display: block;
 }
 
+.scb_s_logo_h1 {
+    display:inline;
+    font-size: 0px;
+}
+
 .scb_s_header_tools {
     float: rigth;
     vertical-align: top;
@@ -159,7 +164,8 @@
     display: inline-block;
     background-image: url('../images/homepage/SCB_Homepage_HeroImage.png');
     height: 318px;
-    width: 687px;
+    width: 667px;
+    margin-left:20px
 }
 
 .scb_s_homepage_top_left_image {
@@ -199,9 +205,12 @@
     font-family: 'SourceSansPro-Bold';
     color: #008DDD;
     margin-left: 10px;
-    margin-bottom: -10px;
+    margin-bottom: -8px;
+    margin-top:-5px;
     font-size: 12pt;
     cursor:pointer;
+    border:0px;
+    background: transparent;
 }
 
 .scb_s_homepage_blue_line {
@@ -220,8 +229,8 @@
     margin-left: 8px;
     font-family: 'sourcesanspro-bold';
     color: white;
-    font-size: 14pt;
-    margin-top: 0px;
+    font-size: 0pt;
+    margin-top: 4px;
 }
 
 .scb_s_homepage_bottom {
@@ -229,9 +238,10 @@
     height: 207px;
     margin-top: 15px;
     border-radius: 5px;
-    margin-left: 3px;
-    width: 945px;
+    margin-left: 23px;
+    width: 925px;
     background-image: url('../images/homepage/SCB_Homepage_LowerBG.png');
+
 }
 
 .scb_s_homepage_experimental_design {
@@ -352,7 +362,6 @@
     display: inline-block;
     height: 200px;
     vertical-align: top;
-    margin-left: 25px;
     position: relative;
 }
 
