@@ -67,6 +67,7 @@ scb.utils.call_back(callback, {
                 data: {}
             });
     return;
+/*
     $.ajax({url: '/scb/is_auth/', data: '', type: 'GET', success: function (a, b, c) {
         if (b == "success") {
             var ret = JSON.parse(a);
@@ -83,6 +84,7 @@ scb.utils.call_back(callback, {
             });
         }
     }});
+*/
 }
 
 scb.utils.server.call = function (data, callback) {
@@ -91,6 +93,7 @@ scb.utils.server.call = function (data, callback) {
                 data: {}
             });
     return;
+/*
     $.ajax({url: '/scb/is_auth/', type: data ? 'POST' : 'GET',
         data: data,
 //        context: document.body,
@@ -130,4 +133,5 @@ scb.utils.server.call = function (data, callback) {
         }
 
     });
+*/
 }
