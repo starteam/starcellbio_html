@@ -135,11 +135,12 @@ body {
 .scb_s_assignment_step_experiment_line {
     position: absolute;
     top: 60px;
-    left: 380px;
     width:300px;
     height:1px;
     background-color: #14ac63;
     font-size:1.5em;
+    left: 135px;
+    width: 525px;
 }
 
 .scb_s_assignment_step_experiment_box {
@@ -147,12 +148,6 @@ body {
     top:5px;
 }
 
-.scb_s_assignment_step_experiment_line {
-    position: absolute;
-    top: 8px;
-    left: 138px;
-    width: 525px;
-}
 
 .scb_s_assignment_step {
     background: #69a996;
