@@ -255,7 +255,9 @@
     display: inline-block;
     margin-left: 10px;
     margin-top: 13px;
-    margin-right: 10px;
+    margin-right: 4px;
+    position: relative;
+    top: -2px;
 }
 
 .scb_s_homepage_experimental_design_bar {
@@ -287,7 +289,7 @@
     width: 155px;
     display: inline-block;
     vertical-align: top;
-
+    padding-top: 8px;
 }
 
 .scb_s_homepage_experimental_design_list_bar {
@@ -305,7 +307,7 @@
     vertical-align: top;
     height: 124px;
     font-size: 11pt;
-    padding-left: 10px;
+    padding-left: 8px;
     position: relative;
     top: 12px;
 }
@@ -317,7 +319,7 @@
     vertical-align: top;
     margin-left: 10px;
     padding-top: 2px;
-    padding-bottom: 2px;
+    padding-bottom: 3.25px;
     padding-left: 8px;
     cursor: pointer;
 }
