@@ -488,3 +488,19 @@ a {
     font-size:8pt;
     background-color:red;
 }
+
+.scb_s_homepage_top_left_text {
+	color: white;
+	font-size: 11pt;
+	display:block;
+	position: relative;
+	top:50px;
+	left:20px;
+	width:250px;
+	background:black;
+	line-height:18pt;
+}
+
+.scb_s_homepage_top_left_text b {
+	font-size: 14pt;
+}
