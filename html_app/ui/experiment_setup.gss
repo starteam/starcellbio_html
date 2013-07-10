@@ -73,6 +73,7 @@ table.scb_s_experiment_setup_table {
     width:100%;
     background-color: white;
     margin-bottom:20px;
+    padding-bottom: 2px;
 }
 
 .scb_s_experiment_setup_table_body {
