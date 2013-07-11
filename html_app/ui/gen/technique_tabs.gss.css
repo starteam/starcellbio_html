@@ -1,15 +1,25 @@
+.scb_s_western_blot_tabs, .scb_s_facs_tabs {
+  position: absolute;
+  top: -27px;
+}
 .scb_s_western_blot_active, .scb_s_facs_active {
   margin-left: 5px;
   border-bottom: 1px white solid;
   background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
   display: inline-block;
-  width: 125px;
+  width: 116px;
   padding-left: 20px;
-  top: 6px;
+  top: 5px;
   position: relative;
   height: 20px;
   font-size: 11pt;
   z-index: 99;
+  background-position-y: 2px;
+  background-position-x: -4px;
+}
+.scb_s_western_blot_active>.scb_s_western_blot_remove {
+  position: relative;
+  top: 1px;
 }
 .scb_s_western_blot_open_western_blot, .scb_s_facs_open_facs {
   margin: 3px;
