@@ -28,8 +28,8 @@ scb_western_blot.display_details = function(opt_data, opt_sb) {
 
 scb_western_blot.display_tabs = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  scb_western_blot.display_tabs_selector(opt_data, output);
   output.append('<div class=\'scb_s_western_blot_tab_content ', (opt_data.kind == 'sample_prep') ? 'scb_s_western_blot_tab_content_sample_prep' : '', '\'>');
+  scb_western_blot.display_tabs_selector(opt_data, output);
   if (opt_data.kind == 'sample_prep') {
     scb_western_blot.sample_prep(opt_data, output);
   }

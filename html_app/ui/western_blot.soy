@@ -84,12 +84,12 @@
 @param can_prepare_lysate
 */
 {template .display_tabs}
+<div class='scb_s_western_blot_tab_content {if $kind == 'sample_prep'}scb_s_western_blot_tab_content_sample_prep{/if}'>
 {call .display_tabs_selector}
     {param assignment:$assignment/}
     {param experiment:$experiment /}
     {param western_blot:$western_blot /}
 {/call}
-<div class='scb_s_western_blot_tab_content {if $kind == 'sample_prep'}scb_s_western_blot_tab_content_sample_prep{/if}'>
     {if $kind == 'sample_prep'}
     {call .sample_prep}
     {param assignment:$assignment/}
