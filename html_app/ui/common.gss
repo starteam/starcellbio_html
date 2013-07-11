@@ -13,6 +13,13 @@ body {
     background-color: #e9edf1;
 }
 
+div#main {
+	position: relative;
+	width:100px;
+	left: 20px;
+	right: 20px;
+}
+
 .scb_s_navigation_button {
    /*background-image: url('../images/homepage/instructor_resources_button.png');*/
     padding: 3px 20px 3px 20px;
@@ -134,8 +141,7 @@ body {
 
 .scb_s_assignment_step_experiment_line {
     position: absolute;
-    top: 60px;
-    width:300px;
+    top: 8px;
     height:1px;
     background-color: #14ac63;
     font-size:1.5em;

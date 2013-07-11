@@ -1,6 +1,12 @@
 body {
   background-color: #e9edf1;
 }
+div#main {
+  position: relative;
+  width: 100px;
+  left: 20px;
+  right: 20px;
+}
 .scb_s_navigation_button {
   padding: 3px 20px;
   width: 200px;
@@ -120,12 +126,12 @@ body {
   margin-left: 5px;
 }
 .scb_s_assignment_step_experiment_line {
+  position: absolute;
+  top: 8px;
   height: 1px;
   background-color: #14ac63;
   font-size: 1.5em;
-  position: absolute;
-  top: 8px;
-  left: 138px;
+  left: 135px;
   width: 525px;
 }
 .scb_s_assignment_step_experiment_box {
