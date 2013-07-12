@@ -30,7 +30,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     var assignments = new scb.AssignmentList(master_model.assignments, context);
 
-
+    scb.ui.static.MainFrame.ensure_auth_context = function() {
+        context = context || {} ;
+        context.auth = context.auth || {} ;
+    }
     scb.ui.static.MainFrame.validate_state = function (state) {
         var ret = {
             redisplay: false
@@ -232,6 +235,23 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             self.show({});
         }
     });
+
+
+    scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
+        scb.ui.static.MainFrame.ensure_auth_context();
+        if( context.auth.logged_in )
+        {
+            context.auth.logged_in = false;
+            self.show({view:'homepage'});
+        }
+        else
+        {
+            context.auth.logged_in = true;
+            self.show({view:'assignments'});
+        }
+        evt.preventDefault();
+    });
+
 
     self.sections.homepage = new scb.ui.HomepageView({
         workarea: workarea,
@@ -500,6 +520,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 //			});
 //
 //		}
+        if( context.auth && context.auth.logged_in )
+        {
+            $('.scb_s_login_status').attr('src','images/header/scb_signout_text.png');
+            console.info( $('.scb_s_login_status') ) ;
+        }
+
         scb.ui.static.MainFrame.in_ajax_display();
 
     }
