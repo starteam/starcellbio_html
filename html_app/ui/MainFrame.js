@@ -30,9 +30,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     var assignments = new scb.AssignmentList(master_model.assignments, context);
 
-    scb.ui.static.MainFrame.ensure_auth_context = function() {
-        context = context || {} ;
-        context.auth = context.auth || {} ;
+    scb.ui.static.MainFrame.ensure_auth_context = function () {
+        context = context || {};
+        context.auth = context.auth || {};
     }
     scb.ui.static.MainFrame.validate_state = function (state) {
         var ret = {
@@ -236,18 +236,28 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
     });
 
-
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
         scb.ui.static.MainFrame.ensure_auth_context();
-        if( context.auth.logged_in )
-        {
-            context.auth.logged_in = false;
-            self.show({view:'homepage'});
+        if (context.auth.logged_in) {
+            $(workarea).append(scb_auth.logout({}));
+            scb.utils.off_on(workarea, 'click', '.scb_f_logout_close_button', function () {
+                $('.scb_s_logout_dialog').detach();
+            });
+            scb.utils.off_on(workarea, 'click', '.scb_f_logout_button', function () {
+                //TODO: here comes the flow with sign-in dialog
+                context.auth.logged_in = false;
+                scb.ui.static.MainFrame.refresh({view: 'homepage'});
+            });
         }
-        else
-        {
-            context.auth.logged_in = true;
-            self.show({view:'assignments'});
+        else {
+            $(workarea).append(scb_auth.login({}));
+            scb.utils.off_on(workarea, 'click', '.scb_f_login_close_button', function () {
+                $('.scb_s_login_dialog').detach();
+            });
+            scb.utils.off_on(workarea, 'click', '.scb_f_login_button', function () {
+                context.auth.logged_in = true;
+                scb.ui.static.MainFrame.refresh({view: 'assignments'});
+            });
         }
         evt.preventDefault();
     });
@@ -520,10 +530,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 //			});
 //
 //		}
-        if( context.auth && context.auth.logged_in )
-        {
-            $('.scb_s_login_status').attr('src','images/header/scb_signout_text.png');
-            console.info( $('.scb_s_login_status') ) ;
+        if (context.auth && context.auth.logged_in) {
+            $('.scb_s_login_status').attr('src', 'images/header/scb_signout_text.png');
         }
 
         scb.ui.static.MainFrame.in_ajax_display();

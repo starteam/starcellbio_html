@@ -1,0 +1,11 @@
+.scb_s_login_dialog, .scb_s_logout_dialog {
+
+    position: absolute;
+    background: gray;
+    border-radius: 5px;
+    margin-left:400px;
+    margin-right:400px;
+    margin-top: 200px;
+    padding: 100px;
+    top:0px;
+}
