@@ -6,7 +6,7 @@ import time
 from threading import Timer
 from subprocess import call
 
-root = os.environ['HOME']+'/.virtualenvs/StarCellBio/StarCellBio/html_app/';
+root = os.environ['HOME']+'/Desktop/VE/scb2/starcellbio_html/html_app/';
 
 global_update_index = True
 js = dict();
@@ -58,12 +58,12 @@ def processor( path ):
     if( path.endswith(".soy") ):
         infile = path
         outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".js"
-        call(["java", "-jar" , "../../SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
+        call(["java", "-jar" , "../../../SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
         print "compile soy %s " % (path)
     if( path.endswith(".gss") ):
         infile = path
         outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".css"
-        call(["java", "-jar" , "../../closure-stylesheets-20111230.jar" , "--pretty-print" , infile , "-o" , outfile])
+        call(["java", "-jar" , "../../../closure-stylesheets-20111230.jar" , "--pretty-print" , infile , "-o" , outfile])
         print "compile gss %s to %s " % (infile,outfile)
     if( path.endswith(".touch_index" ) ):
         update_index_html()
