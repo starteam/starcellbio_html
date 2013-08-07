@@ -85,6 +85,18 @@ table.scb_s_experiment_setup_table {
     border-top: 1px solid #e0e0e0;
 }
 
+.scb_s_western_blot_samples_select_all_rel{
+  bottom: 0;
+  margin-bottom:75px;
+  position:relative;
+}
+
+.scb_s_western_blot_samples_select_all_abs{
+  bottom: 0;
+  margin-bottom:75px;
+  position:absolute;
+}
+
 .scb_s_experiment_setup_td {
 }
 

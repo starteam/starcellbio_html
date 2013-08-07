@@ -207,11 +207,19 @@
             </td>
         </tr>
         {/foreach}
-        <tr>
-            <td colspan='4'>
+        {if length($rows) >= 11}
+        <tr class='scb_s_western_blot_samples_select_all_rel'>
+        	<td colspan='4'>
                 <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
             </td>
         </tr>
+        {else}
+        <tr class='scb_s_western_blot_samples_select_all_abs'>
+        	<td colspan='4'>
+                <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
+            </td>
+        </tr>
+        {/if}
     </table>
 </div>
 <a class='scb_s_navigation_button scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
