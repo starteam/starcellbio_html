@@ -231,6 +231,9 @@
   display: inline-block;
   margin-top: 30px;
 }
+.scb_s_western_blot_tab_content {
+  margin-top: -27px;
+}
 .scb_s_western_blot_samples_table>table {
   width: 100%;
 }
