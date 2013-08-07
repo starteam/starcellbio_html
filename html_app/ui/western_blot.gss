@@ -313,6 +313,22 @@
     margin: 0px;
 }
 
+.scb_s_western_blot_blank_space{
+	width: 665px;
+}
+
+.scb_f_western_blot_sample_inactive_all {
+@mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
+    border: 1px solid #e0e0e0;
+    border-radius: 5pt;
+    width: 120px;
+    height: 30px;
+    color: black;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
+    cursor:pointer;
+}
+
 .scb_f_western_blot_sample_active_all {
 @mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
     border: 1px solid #e0e0e0;

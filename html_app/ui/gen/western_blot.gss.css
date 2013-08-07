@@ -249,7 +249,10 @@
 .scb_s_western_blot_samples_table_tr {
   margin: 0;
 }
-.scb_f_western_blot_sample_active_all {
+.scb_s_western_blot_blank_space {
+  width: 665px;
+}
+.scb_f_western_blot_sample_inactive_all, .scb_f_western_blot_sample_active_all {
   background-color: #fff;
   background-image: -webkit-linear-gradient(top,#f2f2f2,#d3d1d2);
   background-image: -moz-linear-gradient(top,#f2f2f2,#d3d1d2);
