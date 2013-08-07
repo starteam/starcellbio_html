@@ -144,3 +144,13 @@ ul > .scb_s_assignment_experiment_list_item_new_experiment {
 .scb_s_new_assignment_experiment {
     padding-left:9px;
 }
+
+.scb_s_assignments_sidebar_course {
+    font-size:12pt;
+    font-weight: bold;
+}
+
+.scb_s_assignments_sidebar_course_block {
+    padding-top:12pt;
+    margin:1px;
+}
