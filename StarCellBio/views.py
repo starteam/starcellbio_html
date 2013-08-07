@@ -24,8 +24,8 @@ def home(request):
     #return redirect('static/index.html')
 
 
-def is_auth(request):
-    response = HttpResponse(json.dumps({'user': None, 'course': None}))
+def get_model(request):
+    response = HttpResponse("var get_model_result = {0};".format( json.dumps({'user': None, 'course': None})))
     #pudb.set_trace()
     course = None ## here comes course
     #pudb.set_trace()
@@ -74,10 +74,12 @@ def is_auth(request):
                     json.dumps({'user': request.user.username, 'course': course, 'data': None,
                                 'command': {'alert': 'Failed to save!'}}))
     else:
-        json_object = json.loads(request.body)
+        #import pudb
+        #pudb.set_trace()
+        #json_object = json.loads(request.body)
         pass
         # Do something for anonymous users.
     response.set_cookie("scb_username", request.user.username)
     response.set_cookie("scb_course", course)
-    response['Content-Type'] = 'text/json'
+    response['Content-Type'] = 'text/javascript'
     return response
