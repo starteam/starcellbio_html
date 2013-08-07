@@ -70,6 +70,10 @@ font-family: 'sourcesanspro-regular';
 
 }
 
+.scb_s_western_blot_choose_gel_type	{
+  margin-left:-1px;
+}
+
 .scb_s_western_blot_gel_canvas_wrapper {
     width:364px;
     height:289px;
