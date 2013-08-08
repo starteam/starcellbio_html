@@ -63,7 +63,7 @@ table.scb_s_experiment_setup_table {
 }
 .scb_s_western_blot_samples_select_all_abs {
   bottom: 0;
-  margin-bottom: 75px;
+  margin-bottom: 45px;
   position: absolute;
   border-top: #80d1ae solid 2px;
 }

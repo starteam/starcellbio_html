@@ -31,6 +31,7 @@ div#main {
     text-align: center;
     font-size:12pt;
     border-radius: 5px;
+    margin-top: 10px;
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -160,6 +161,7 @@ div#main {
     color: white;
     width: 960px;
     height: 25px;
+    font-size: 62.5%;
     position: relative;
     @mixin gradient(top,#80d1ae,#189689,#189689);
 

@@ -1,3 +1,6 @@
+.scb_western_blot_details_view {
+  padding-top: 30px;
+}
 .scb_western_blot_details_view_inner {
   width: 950px;
   margin-top: 5px;
@@ -22,7 +25,8 @@
 .scb_f_western_blot_prepare_lysates {
   border-radius: 5px;
   position: relative;
-  left: 690px;
+  left: 420px;
+  top: 0;
   bottom: 10px;
   display: inline-block;
 }
@@ -179,8 +183,14 @@
   vertical-align: top;
 }
 .scb_s_western_blot_progress_prefix_group1 {
+  top: -10px;
   left: 10px;
+  bottom: -30px;
   position: relative;
+  display: inline-block;
+}
+.scb_s_western_blot_progress_prefix_group2 {
+  height: 20px;
 }
 .scb_s_western_blot_choose_samples_order_list>li {
   font-size: 10pt;
@@ -239,11 +249,14 @@
 }
 .scb_s_western_blot_samples_table>table {
   width: 100%;
+  border-collapse: collapse;
 }
 .scb_s_western_blot_samples_table_head {
   background-color: white;
   font-family: 'sourcesanspro-semibold';
   font-size: 10pt;
+  border-spacing: 0;
+  border: 0;
 }
 .scb_s_western_blot_samples_table_heading, .scb_s_western_blot_samples_table_td {
   margin: 0;
@@ -252,8 +265,11 @@
 .scb_s_western_blot_samples_table_tr {
   margin: 0;
 }
-.scb_s_western_blot_blank_space {
+.scb_s_western_blot_blank_space1 {
   width: 404px;
+}
+.scb_s_western_blot_blank_space2 {
+  width: 14px;
 }
 .scb_f_western_blot_sample_inactive_all, .scb_f_western_blot_sample_active_all {
   background-color: #fff;
@@ -273,8 +289,9 @@
 .scb_s_western_blot_choose_gel_type_input_disabled {
   opacity: .5;
 }
-.scb_s_western_blot_tab_content_sample_prep>.scb_s_select_technique_at_western_blot {
-  left: -240px;
+.scb_s_select_technique_at_western_blot {
+  display: inline-block;
+  margin-left: -230px;
 }
 .scb_s_western_blot_view {
   background: #f4f6f8;
@@ -294,7 +311,7 @@
   border-radius: 1px;
   border: 1px solid #e1e3e8;
   position: absolute;
-  top: 0;
+  top: 110px;
   right: 0;
   box-shadow: 0 0 6px gray;
 }

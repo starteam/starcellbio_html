@@ -80,6 +80,7 @@
   vertical-align: top;
   display: block;
   text-align: right;
+  margin-top: -10px;
 }
 .scb_s_envelope_icon {
   vertical-align: middle;
