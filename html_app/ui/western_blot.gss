@@ -264,8 +264,28 @@
 
 }
 
+
 .scb_s_western_blot_choose_gel_type > input{
 	margin-right: 7px;
+	-webkit-appearance: none;
+	margin-bottom: 0px;
+	height:13px;
+	width:12px;
+	border: 1px solid #C0C0C0;
+	background-color:#D0D0D0;
+	border-radius:6px;
+}
+
+
+.scb_s_western_blot_choose_gel_type > input:checked{
+	margin-right: 7px;
+	-webkit-appearance: none;
+	margin-bottom: 0px;
+	height:13px;
+	width:12px;
+	border: 1px solid #000000;
+	background-color:#80d1ae;
+	border-radius:6px;
 }
 
 .scb_s_western_blot_load_marker {
