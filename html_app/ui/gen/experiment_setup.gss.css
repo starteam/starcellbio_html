@@ -65,6 +65,7 @@ table.scb_s_experiment_setup_table {
   bottom: 0;
   margin-bottom: 75px;
   position: absolute;
+  border-top: #80d1ae solid 2px;
 }
 .scb_s_experiment_setup_table_border {
   border-top: 1px solid #e0e0e0;

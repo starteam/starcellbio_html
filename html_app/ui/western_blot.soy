@@ -207,7 +207,12 @@
             </td>
         </tr>
         {/foreach}
-        {if length($rows) >= 11}
+        {if length($rows) >= 10}
+        <tr>
+            <td colspan='4'>
+        		<div class="scb_s_western_blot_green_line"></div>
+        	</td>
+        </tr>
         <tr class='scb_s_western_blot_samples_select_all_rel'>
         	<td colspan='2'>
                 <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>

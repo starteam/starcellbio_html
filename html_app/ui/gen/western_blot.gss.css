@@ -7,7 +7,7 @@
   position: relative;
 }
 .scb_s_western_blot_samples_table, .scb_s_facs_samples_table {
-  border: 1px #189689 solid;
+  border: 1px #80d1ae solid;
   border-radius: 5px;
   margin-left: 10px;
   margin-right: 10px;
@@ -276,4 +276,10 @@
 .scb_s_western_blot_view {
   background: #f4f6f8;
   width: 960px;
+}
+.scb_s_western_blot_green_line {
+  width: 100%;
+  height: 2px;
+  background-color: #80d1ae;
+  margin-bottom: 2px;
 }
