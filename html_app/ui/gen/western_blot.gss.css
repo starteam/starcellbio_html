@@ -1,5 +1,6 @@
 .scb_western_blot_details_view {
   padding-top: 30px;
+  width: 960px;
 }
 .scb_western_blot_details_view_inner {
   width: 950px;
@@ -87,6 +88,9 @@
   width: 600px;
   height: 400px;
   padding-top: 20px;
+}
+.scb_s_western_blot_samples_area {
+  margin-top: 28px;
 }
 .scb_s_western_blot_gel_tabs {
   width: 600px;

@@ -73,9 +73,6 @@
         {param valid_rows:$valid_rows/}
         {/call}
     </div>
-    <a class="scb_s_navigation_button scb_f_open_select_technique"
-       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 </div>
 {/template}
 
@@ -97,6 +94,7 @@
 {param western_blot:$western_blot /}
 {/call}
 <div class='scb_s_western_blot_tab_content'>
+	
     {if $western_blot_gel.is_developed}
     {call scb_western_blot.display_wb_progress}
     {param step:7 /}
@@ -173,6 +171,7 @@
         </select>
         {/if}
     </div>
+    
     {call .display_gel}
     {param t:$t/}
     {param assignment:$assignment/}
@@ -182,7 +181,11 @@
     {param rows:$rows /}
     {param valid_rows:$valid_rows/}
     {/call}
+    
 </div>
+<a class="scb_s_navigation_button scb_f_open_select_technique"
+       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 </div>
 {/template}
 
