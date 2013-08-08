@@ -271,12 +271,12 @@
 
     <div class='scb_s_western_blot_choose_gel_type'>
         <!-- TODO: Gel Type stuff -->
-        Gel Type:
+        <div class='scb_s_western_blot_choose_gel_type_title'>Gel Type:</div>
         <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".10" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.10'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text">10%</span>
-        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
+        &nbsp;&nbsp;<input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.12'}checked='checked'{/if} disabled='disabled'/><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_western_blot_choose_gel_type_input_disabled">12%</span>
-        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15" western_blot_id='{$western_blot.id}'
+        &nbsp;&nbsp;<input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if} disabled='disabled'/><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_western_blot_choose_gel_type_input_disabled">15%</span>
     </div>
     <!--

@@ -258,6 +258,16 @@
     margin-top: 10px;
 }
 
+.scb_s_western_blot_choose_gel_type_title{
+	margin-right: 5px;
+	display: inline-block;
+
+}
+
+.scb_s_western_blot_choose_gel_type > input{
+	margin-right: 7px;
+}
+
 .scb_s_western_blot_load_marker {
         text-align: center;
         margin-left: 22px;
@@ -365,8 +375,9 @@
 }
 
 .scb_s_select_technique_at_western_blot {
-    display: inline-block;
-    margin-left: -230px;
+    display: block;
+    margin-left: 20px;
+    margin-top: -33px;
 }
 
 .scb_s_western_blot_view {
@@ -423,7 +434,7 @@
 
 .scb_s_western_blot_video_heading{
     color: black;
-    font-size: 7pt;
+    font-size: 7.5pt;
     font-family: 'sourcesanspro-semibold';
     display: inline-block;
     padding-left:3em;
@@ -431,7 +442,7 @@
 
 .scb_s_western_blot_video_text{
 	color:black;
-	font-size: 7pt;
+	font-size: 7.5pt;
 	font-family: 'sourcesanspro-regular';
 	display: inline-block;
 }
