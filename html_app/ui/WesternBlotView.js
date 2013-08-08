@@ -178,9 +178,19 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active_all = function (element) {
     $('.scb_f_western_blot_sample_active').each(function (e) {
         var element = this;
-        $(element).attr('checked', 'checked');
+        $(element).attr('checked', true);
         scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active(element);
     });
+    scb.ui.static.MainFrame.refresh();
+
+}
+
+scb.ui.static.WesternBlotView.scb_f_western_blot_sample_inactive_all = function (element) {
+	$('.scb_f_western_blot_sample_active').each(function(e){
+		var element = this;
+		$(element).attr('checked', false);
+		scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active(element);
+	});    
     scb.ui.static.MainFrame.refresh();
 
 }
@@ -240,6 +250,9 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_active_all', function (e, ui) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active_all(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_inactive_all', function (e, ui){
+    	scb.ui.static.WesternBlotView.scb_f_western_blot_sample_inactive_all(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_tab', function (e, ui) {
         var link = $('a', $(this));
