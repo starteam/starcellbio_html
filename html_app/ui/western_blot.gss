@@ -114,6 +114,7 @@
 
 .scb_s_western_blot_samples_area {
 	margin-top:28px;
+	margin-left: 15px;
 }
 
 .scb_s_western_blot_gel_tabs {
@@ -462,7 +463,7 @@
     font-size: 7.5pt;
     font-family: 'sourcesanspro-semibold';
     display: inline-block;
-    padding-left:3em;
+    padding-left:2em;
 }
 
 .scb_s_western_blot_video_text{

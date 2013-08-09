@@ -46,6 +46,10 @@
   height: 1px;
   width: 366px;
 }
+.scb_s_western_blot_view_gel {
+  background: #f4f6f8;
+  width: 960px;
+}
 .scb_f_slider_value {
   position: absolute;
   top: -1px;

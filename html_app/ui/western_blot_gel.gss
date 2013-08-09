@@ -57,6 +57,11 @@ font-family: 'sourcesanspro-regular';
     width:366px;
 }
 
+.scb_s_western_blot_view_gel {
+	background: #F4F6F8;
+    width:960px;
+}
+
 .scb_f_slider_value {
     position: absolute;
     top:-1px;
