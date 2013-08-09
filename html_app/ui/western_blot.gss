@@ -205,8 +205,8 @@
     vertical-align: top;
     display: inline-block;
     position: absolute;
-    top: 0px;
-    left: 370px;
+    top: 70px;
+    left: 367px;
     border-left: 1px solid #e0e0e0;
     padding-left: 6px;
 }
