@@ -26,9 +26,13 @@ font-family: 'sourcesanspro-regular';
 
 .scb_s_western_blot_blot_and_develop {
     position: absolute;
-    top: 259px;
+    top: 235px;
     min-width: 160px;
     width: 160px;
+}
+
+.scb_s_western_blot_choose_samples_list_item {
+	cursor: pointer;
 }
 
 .scb_s_wb_exposure_time {
@@ -92,6 +96,7 @@ font-family: 'sourcesanspro-regular';
     font-size:11pt;
     font-family: 'sourcesanspro-semibold';
     padding-left:10px;
+    margin-top:-37px;
 
 }
 
