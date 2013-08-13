@@ -1080,7 +1080,7 @@ var __basic_tests = {
 
         ui: {
             experimental_design: {
-                techniques: [ 'wb' , 'facs']
+                techniques: [ 'wb' , 'facs' , 'micro']
             },
             experiment_setup: {table: [
                 {kind: "cell_line",
@@ -1566,7 +1566,7 @@ var __usability_test = {
 
         ui: {
             experimental_design: {
-                techniques: [ 'wb' , 'facs']
+                techniques: [ 'wb' , 'facs' , 'micro']
             },
             experiment_setup: {table: [
                 {kind: "cell_plate",
@@ -2039,7 +2039,7 @@ var __assigment_706 = {
             instructions: 'Here come instructions when we build them',
             ui: {
                 experimental_design: {
-                    techniques: [ 'wb' , 'facs']
+                    techniques: [ 'wb' , 'facs' , 'micro']
                 },
                 experiment_setup: {
                     table: [ //
