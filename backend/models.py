@@ -74,6 +74,11 @@ class StudentAssignment(models.Model):
     submitted = models.TextField() # this auto-submitts if assignment has end_date on first access after assignment's end_date
     current = models.TextField()
 
+    def initialize(self):
+        self.timestamp = 0
+        self.current = self.assignment.template
+        self.save()
+
     class Meta:
         unique_together = ('student', 'assignment')
 
