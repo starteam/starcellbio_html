@@ -85,21 +85,6 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe = function (element)
     scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
-scb.ui.static.WesternBlotGelView.scb_s_western_blot_choose_samples_list_item = function (element) {
-	console.log("moved");
-	/*var list = $('.scb_s_western_blot_choose_samples_order_list')[0];
-	var children =$(list.children).clone();
-	$(list).empty();
-	
-	for(var v = 0; v < children.length; v ++){
-		$(list).append($(children[v]));
-		if($(children[v]).attr('class').indexOf('ui-sortable-helper') > -1){
-			$('.ui-sortable-placeholder').text($(children[v]).text());
-			$('.ui-sortable-placeholder').css('visibility', 'visible');
-			$('.ui-sortable-placeholder').attr('class', 'scb_s_western_blot_choose_samples_list_item');
-		}
-	}*/
-}
 
 scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
