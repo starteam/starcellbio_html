@@ -83,9 +83,11 @@ scb_western_blot.prepare_gel = function(opt_data, opt_sb) {
   var rListLen220 = rList220.length;
   for (var rIndex220 = 0; rIndex220 < rListLen220; rIndex220++) {
     var rData220 = rList220[rIndex220];
-    output.append((rData220.is_valid) ? '<li class=\'scb_s_western_blot_sample_list_item\'>' + soy.$$escapeHtml(rData220.display_text) + ' - ' + soy.$$escapeHtml(rData220.lane.kinds[rData220.lane.kind].name) + '</li>' : '');
+    output.append((rData220.is_valid) ? '<li class="scb_s_western_blot_choose_samples_list_item" id=' + soy.$$escapeHtml(rData220.lane.id) + '>' + soy.$$escapeHtml(rData220.display_text) + ' - ' + soy.$$escapeHtml(rData220.lane.kinds[rData220.lane.kind].name) + '</li>' : '');
   }
-  output.append((opt_data.western_blot.marker_loaded == true) ? '<li class=\'scb_s_western_blot_sample_list_item\'>Marker</li>' : '', '</ol></div>', (opt_data.western_blot.marker_loaded == false) ? '<button class=\'scb_s_western_blot_load_marker scb_s_navigation_button\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'>LOAD MARKER</button>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'><div class=\'scb_s_western_blot_gel_tab scb_s_western_blot_gel_active\'>GEL</div></div><div class=\'scb_s_western_blot_gel_content\'>');
+  output.append('</ol>');
+  var start__soy232 = opt_data.rows.length + 1;
+  output.append('<ol class=\'scb_s_western_blot_choose_samples_marker\' start=', soy.$$escapeHtml(start__soy232), '>', (opt_data.western_blot.marker_loaded == true) ? '<li class="scb_s_western_blot_marker">Marker</li>' : '', '</ol></div>', (opt_data.western_blot.marker_loaded == false) ? '<button class=\'scb_s_western_blot_load_marker scb_s_navigation_button\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'>LOAD MARKER</button>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'><div class=\'scb_s_western_blot_gel_tab scb_s_western_blot_gel_active\'>GEL</div></div><div class=\'scb_s_western_blot_gel_content\'>');
   scb_western_blot.display_western_blot_numbers(null, output);
   output.append('<canvas class=\'scb_s_western_blot_gel\' src=\'images/western_blot/SCB_WesternBlotting_Gel.png\'/><div class=\'scb_s_western_blot_tools\'><a class=\'scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' href="#view=western_blot_gel&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(opt_data.western_blot.id), '">RUN GEL & TRANSFER</a></div></div></div>');
   return opt_sb ? '' : output.toString();
@@ -103,19 +105,19 @@ scb_western_blot.display_lysate_types = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<select class="scb_f_western_blot_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '"', (opt_data.lane.is_sample_enabled) ? '' : 'disabled="disabled"', '>');
   if (opt_data.lane.kind == 'existing') {
-    var kList282 = soy.$$getMapKeys(opt_data.kinds);
-    var kListLen282 = kList282.length;
-    for (var kIndex282 = 0; kIndex282 < kListLen282; kIndex282++) {
-      var kData282 = kList282[kIndex282];
-      output.append('<option value=\'', soy.$$escapeHtml(kData282), '\'', (opt_data.lane.lane.kind == kData282) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData282].name), '</option>');
+    var kList289 = soy.$$getMapKeys(opt_data.kinds);
+    var kListLen289 = kList289.length;
+    for (var kIndex289 = 0; kIndex289 < kListLen289; kIndex289++) {
+      var kData289 = kList289[kIndex289];
+      output.append('<option value=\'', soy.$$escapeHtml(kData289), '\'', (opt_data.lane.lane.kind == kData289) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData289].name), '</option>');
     }
   } else {
     output.append((soy.$$getMapKeys(opt_data.kinds).length != 1) ? '<option selected="selected" disabled="disabled" value=\'\'>Pick Lysate Type</option>' : '');
-    var kList297 = soy.$$getMapKeys(opt_data.kinds);
-    var kListLen297 = kList297.length;
-    for (var kIndex297 = 0; kIndex297 < kListLen297; kIndex297++) {
-      var kData297 = kList297[kIndex297];
-      output.append('<option value=\'', soy.$$escapeHtml(kData297), '\'>', soy.$$escapeHtml(opt_data.kinds[kData297].name), '</option>');
+    var kList304 = soy.$$getMapKeys(opt_data.kinds);
+    var kListLen304 = kList304.length;
+    for (var kIndex304 = 0; kIndex304 < kListLen304; kIndex304++) {
+      var kData304 = kList304[kIndex304];
+      output.append('<option value=\'', soy.$$escapeHtml(kData304), '\'>', soy.$$escapeHtml(opt_data.kinds[kData304].name), '</option>');
     }
   }
   output.append('</select>');

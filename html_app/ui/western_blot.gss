@@ -245,6 +245,35 @@
     color:black;
 }
 
+.scb_s_western_blot_choose_samples_marker > li{
+    font-size:10pt;
+    color:black;
+    left: 0px;
+}
+
+
+.scb_s_western_blot_choose_samples_list_item {
+	cursor: pointer;
+}
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ol.scb_s_western_blot_choose_samples_order_list li.placeholder {
+  position: relative;
+}
+ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
+  position: absolute;
+}
+
 .scb_s_western_blot_marker {
     font-size: 10pt;
     color: black;

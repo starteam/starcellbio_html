@@ -85,6 +85,22 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe = function (element)
     scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
+scb.ui.static.WesternBlotGelView.scb_s_western_blot_choose_samples_list_item = function (element) {
+	console.log("moved");
+	/*var list = $('.scb_s_western_blot_choose_samples_order_list')[0];
+	var children =$(list.children).clone();
+	$(list).empty();
+	
+	for(var v = 0; v < children.length; v ++){
+		$(list).append($(children[v]));
+		if($(children[v]).attr('class').indexOf('ui-sortable-helper') > -1){
+			$('.ui-sortable-placeholder').text($(children[v]).text());
+			$('.ui-sortable-placeholder').css('visibility', 'visible');
+			$('.ui-sortable-placeholder').attr('class', 'scb_s_western_blot_choose_samples_list_item');
+		}
+	}*/
+}
+
 scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
     if (parsed.redisplay) {
@@ -275,7 +291,6 @@ scb.ui.static.WesternBlotGelView.register = function (workarea) {
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many(this, e);
     });
 
-
 }
 
 scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
@@ -287,7 +302,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         var template = state.assignment.template;
         var rows_state = state.western_blot.rows_state();
         var rows = rows_state.rows;
-
+//id
         var kind = 'prepare_gel';
 
         workarea.html(scb_western_blot_gel.main({
@@ -315,6 +330,5 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
 
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all(workarea, gstate, state);
-
     }
 };

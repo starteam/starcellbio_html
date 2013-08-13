@@ -119,13 +119,16 @@
             <ol class='scb_s_western_blot_choose_samples_order_list'>
                 {foreach $r in $rows}
                 {if $r.is_valid}
-                <li>
-                    {$r.display_text} -{$r.lane.kinds[$r.lane.kind].name}
+                <li class="scb_s_western_blot_choose_samples_list" id={$r.lane.id}>
+                	{$r.display_text} -{$r.lane.kinds[$r.lane.kind].name}
                 </li>
                 {/if}
                 {/foreach}
+            </ol>
+            {let $start: $rows.length+1 /}
+            <ol class='scb_s_western_blot_choose_samples_marker' start={$start}>
                 {if $western_blot.marker_loaded == true}
-                <li>Marker</li>
+                <li class="scb_s_western_blot_marker">Marker</li>
                 {/if}
             </ol>
         </div>

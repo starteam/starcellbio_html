@@ -24,9 +24,6 @@
   min-width: 160px;
   width: 160px;
 }
-.scb_s_western_blot_choose_samples_list_item {
-  cursor: pointer;
-}
 .scb_s_wb_exposure_time {
   position: absolute;
   top: 180px;
@@ -48,6 +45,11 @@
   opacity: .3;
   height: 1px;
   width: 366px;
+}
+.scb_s_western_blot_choose_samples_marker>li {
+  font-size: 10pt;
+  color: black;
+  left: 0;
 }
 .scb_s_western_blot_view_gel {
   background: #f4f6f8;
@@ -78,6 +80,8 @@
   font-size: 11pt;
   font-family: 'sourcesanspro-semibold';
   padding-left: 10px;
+}
+.scb_s_western_blot_tools {
   margin-top: -37px;
 }
 .scb_f_wb_exposure_slider {
