@@ -80,6 +80,17 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                                 }
                             }
                         }
+                        if (state.microscopy_id) {
+                        	var microscopy = experiment.microscopy_list.get(state.microscopy_id);
+                        	if(microscopy) {
+                        		ret.microscopy = microscopy;
+                        		//SHLOKA
+                        	}
+// 							if (state.facs_lane_id && facs) {
+// 								var facs_lane = facs.lanes_list.get(state.facs_lane_id)
+// 								ret.facs_lane = facs_lane;
+// 							}
+                        }
 
                     }
                     else {
@@ -130,6 +141,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.ui.static.ExperimentDesignView.register(workarea);
     scb.ui.static.ExperimentSetupView.register(workarea);
     scb.ui.static.WesternBlotView.register(workarea);
+    scb.ui.static.MicroscopyView.register(workarea);
     scb.ui.static.WesternBlotGelView.register(workarea);
     scb.ui.static.FacsView.register(workarea);
 
@@ -301,6 +313,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         workarea: workarea,
         context: context
     })
+    
+    self.sections.microscopy = new scb.ui.MicroscopyView({
+    	workarea: workarea,
+    	context: context
+    });
 
     self.sections.western_blot_gel = new scb.ui.WesternBlotGelView({
         workarea: workarea,
@@ -450,6 +467,25 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 experiment: parsed.experiment,
                 western_blot: parsed.western_blot
             });
+        }
+        if (state.view == 'microscopy'){
+        	if(!parsed.microscopy) {
+        		var microscopy = parsed.experiment.microscopy_list.start({});
+        		state.microscopy_id=microscopy.id;
+        		var History = window.History;
+        		if (History.enabled){
+        			History.replaceState("New MICRO", "New MICRO", '#' + $.param(state));
+        		}
+        		state.onhashchange.true;
+        		self.show(state);
+        		return;
+        	}
+        	self.sections.microscopy.show({
+        		workarea: workarea,
+        		assignment: parsed.assignment,
+        		experiment: parsed.experiment,
+        		microscopy: parsed.microscopy
+        	});
         }
         if (state.view == 'western_blot_gel') {
             if (!parsed.western_blot) {
@@ -616,6 +652,15 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             templates: master_model.templates
         }, context);
         context.western_blot = self.sections.western_blot;
+        
+        /* initialize MICROSCOPY tab */
+
+        self.sections.microscopy = new scb.MicroscopyView({
+        	workarea: workarea,
+        	session_list: session_list,
+        	templates: master_model.templates
+        }, context);
+        context.microscopy=self.sections.microscopy
 
         sidebar.show();
         /* click on sidebar to display DASHBOARD */
