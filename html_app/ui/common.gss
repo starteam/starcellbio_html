@@ -161,7 +161,6 @@ div#main {
     color: white;
     width: 960px;
     height: 25px;
-    font-size: 62.5%;
     position: relative;
     @mixin gradient(top,#80d1ae,#189689,#189689);
 

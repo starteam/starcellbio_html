@@ -60,11 +60,10 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
     var self = this;
     self.parent = parent;
     scb.ModelHelpers.common_entry_code(self, data, context);
-    scb.Utils.initialize_accessor_field(self, data, 'lysate_prepared', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'slide_prepared', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'marker_loaded', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'gel_type', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'is_transfered', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.MicroscopyLaneList, context);
     scb.Utils.initialize_accessor_field(self, data, 'gel_list', {}, scb.MicroscopyGelList, context);
     scb.Utils.initialize_accessor_field(self, data, 'last_gel', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'canvas_metadata', null, null, context);
@@ -77,7 +76,6 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
             skip_placeholders = true;
         }
         var experiment = exp || self.parent.parent;
-        var grouped_rows = self.lanes_list.grouped_list;
         var rows = [];
         var count = 0;
         _.each(rows, function (e) {

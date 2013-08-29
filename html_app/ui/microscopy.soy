@@ -10,7 +10,7 @@
 * @param rows
 * @param kind
 * @param kinds
-* @param can_prepare_lysate
+* @param can_prepare_slide
 */
 {template .main}
 <div class='scb_s_microscopy_view'>
@@ -36,7 +36,7 @@
     {param rows:$rows /}
     {param kind:$kind /}
     {param kinds:$kinds /}
-    {param can_prepare_lysate:$can_prepare_lysate/}
+    {param can_prepare_slide:$can_prepare_slide/}
     {/call}
     {call scb_homepage.display_footer}
     {param t:$t /}
@@ -53,7 +53,7 @@
 @param rows
 @param kind
 @param kinds
-@param can_prepare_lysate
+@param can_prepare_slide
 */
 {template .display_details}
 <div class='scb_microscopy_details_view'>
@@ -67,11 +67,18 @@
         {param rows:$rows /}
         {param kind:$kind /}
         {param kinds:$kinds/}
-        {param can_prepare_lysate:$can_prepare_lysate/}
+        {param can_prepare_slide:$can_prepare_slide/}
         {/call}
     </div>
 </div>
 {/template}
+
+
+
+
+
+
+
 
 /**
 @param assignment
@@ -80,7 +87,7 @@
 @param rows
 @param kind
 @param kinds
-@param can_prepare_lysate
+@param can_prepare_slide
 */
 {template .display_tabs}
 <div class='scb_s_microscopy_tab_content {if $kind == 'sample_prep'}scb_s_microscopy_tab_content_sample_prep{/if}'>
@@ -96,28 +103,21 @@
     {param microscopy:$microscopy/}
     {param rows:$rows/}
     {param kinds:$kinds/}
-    {param can_prepare_lysate:$can_prepare_lysate/}
+    {param can_prepare_slide:$can_prepare_slide/}
     {/call}
     {/if}
-    {if $kind == 'prepare_gel'}
-    {call .prepare_gel}
+    {if $kind == 'prepare_slide'}
+    {call .prepare_slide}
     {param assignment:$assignment/}
     {param experiment:$experiment/}
     {param microscopy:$microscopy/}
     {param rows:$rows/}
     {/call}
     {/if}
-    {if $kind == 'load_gel'}
-    {call .display_m_progress}
-    {param step:3/}
-    {/call}
-    {/if}
-    {if $kind == 'gel_operations'}
-
-    {/if}
+    	
     <a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_microscopy"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a>
 
 </div>
 {/template}
@@ -147,12 +147,14 @@
 </div>
 {/template}
 
+
 /**
 @param assignment
 @param experiment
 @param microscopy
 @param rows
 @param kinds
+@param can_prepare_slide
 */
 {template .sample_prep}
 {call .display_m_progress}
@@ -172,7 +174,7 @@
         <thead class='scb_s_microscopy_samples_table_head'>
         <td class='scb_s_microscopy_samples_table_heading'>Select</td>
         <td class='scb_s_microscopy_samples_table_heading'>Samples</td>
-        <td class='scb_s_microscopy_samples_table_heading'>Lysate type</td>
+        <td class='scb_s_microscopy_samples_table_heading'>Slide type</td>
         <td class='scb_s_microscopy_samples_table_heading'>&nbsp;</td>
         </thead>
         {foreach $r in $rows}
@@ -180,7 +182,7 @@
             <td class='scb_s_microscopy_samples_table_td'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-                       cell_treatment_id='{$r.cell_treatment.id}'
+                       
                 {if $r.is_sample_enabled}checked="checked"{/if}
                 >
                 {/if}
@@ -190,11 +192,10 @@
                 {/if}
             </td>
             <td class='scb_s_microscopy_samples_table_td'>
-                {call .display_lysate_types}
+                {call .display_slide_types}
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
                 {param microscopy:$microscopy/}
-                {param cell_treatment:$r.cell_treatment/}
                 {param kinds:$kinds/}
                 {param lane:$r/}
                 {/call}
@@ -243,7 +244,118 @@
         </tr>
         {/if}
     </table>
+
+
 </div>
+        
+<a class='scb_s_navigation_button scb_f_microscopy_prepare_slides' microscopy_id='{$microscopy.id}'
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
+<!-- {if $can_prepare_slide}{else}disabled='false'{/if} --> PREPARE SLIDES  &nbsp; &#9654;
+</a>
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param microscopy
+@param rows
+*/
+{template .prepare_slide}
+<!-- 
+{call .display_m_progress}
+    {param step:$microscopy.slide_type?3:2/}
+{/call}
+ -->
+<div class='scb_s_microscopy_samples_area'>
+
+    <div class='scb_s_microscopy_choose_slide_type'>
+        <!-- TODO: Slide Type stuff -->
+           </div>
+    <!--
+    <div class='scb_s_microscopy_choose_samples_note'>
+        NOTE: You can reorder samples by dragging and dropping into new order
+    </div>
+    -->
+    <div class='scb_s_microscopy_samples_heading'>
+        Samples
+    </div>
+    <div class='scb_s_microscopy_choose_samples_order'>
+        <ol class='scb_s_microscopy_choose_samples_order_list' >
+            {foreach $r in $rows}
+            {if $r.is_valid}
+            <li class="scb_s_microscopy_choose_samples_list_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' microscopy_id='{$microscopy.id}' id='{$r.lane.id}'>
+                {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
+            </li>
+            {/if}
+            {/foreach}
+            </ol>
+            {let $start: $rows.length+1 /}
+            <ol class='scb_s_microscopy_choose_samples_marker' start={$start}>
+             {if $microscopy.marker_loaded == true}
+                <li class="scb_s_microscopy_marker">Marker</li>
+            {/if}
+        </ol>
+    </div>
+    
+</div>
+<div class='scb_s_microscopy_samples_slide_area'>
+			<div id='scb_s_microscopy_lens_controls'>
+				<span class='scb_s_controls_note'>Note: Use keyboard arrow keys to navigate lens across the slide.</span>
+				<p/>
+				Light<p/>
+					<img src='images/microscopy/up.jpg' class ='scb_s_micro_arrows' id='brightup'/> <br/>
+					<img src ='images/microscopy/down.jpg' class ='scb_s_micro_arrows'id='brightdown'/><p/>
+				Focus: Rough<p/>
+					<img src ='images/microscopy/up.jpg' class ='scb_s_micro_arrows' id='blurup'/><br/>
+					<img src = 'images/microscopy/down.jpg' class ='scb_s_micro_arrows' id='blurdown'/><p/>
+				Focus: Fine<p/>
+					<img src = 'images/microscopy/fineup.jpg' class ='scb_s_micro_arrows' id='fblurup'/> <br/>
+					<img src = 'images/microscopy/finedown.jpg' class ='scb_s_micro_arrows'id='fblurdown'/><p/>
+				 <span class='scb_s_microscope_status'></span>
+			</div>
+			<!-- 
+<div class = 'scb_s_list_slides'>
+				<form>
+					<input type='radio' name='slides' value='images/microscopy/Brightfield/Sample_1_10X.jpg'>Sample 1</input>
+					<input type='radio' name='slides' value='images/microscopy/Brightfield/Sample_2_10X.jpg'>Sample 2</input>
+					<input type='radio' name='slides' value='images/microscopy/Brightfield/Sample_3_20X.jpg'>Sample 3</input>
+				</form>
+			</div>
+ -->
+	</div>	
+	
+{/template}
+
+
+
+/**
+@param assignment
+@param experiment
+@param microscopy
+@param lane
+@param kinds
+*/
+{template .display_slide_types}
+
+<select class="scb_f_microscopy_select_slide_type" 
+        microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
+        lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
+{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
+>
+{if $lane.kind == 'existing'}
+    {foreach $k in keys($kinds)}
+    <option value='{$k}'
+    {if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+    {/foreach}
+{else}
+    {if length(keys($kinds)) != 1}
+    <option selected="selected" disabled="disabled" value=''>Pick Slide Type</option>
+    {/if}
+    {foreach $k in keys($kinds)}
+        <option value='{$k}'>{$kinds[$k].name}</option>
+    {/foreach}
+{/if}
+</select>
 {/template}
 
 
