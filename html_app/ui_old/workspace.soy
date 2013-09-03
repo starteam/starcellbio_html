@@ -136,7 +136,16 @@
 			{/if}
 			
 			{if $template.ui_configuration.experiment_steps_microscopy}
-			<li>Microscopy</li>
+			<li><a href='#' model_id='{$experiment.id}' class='a_sidebar select_microscopy_common'>Microscopy</a></li>
+				<ul class='microscopy_sidebar_list'>
+					{foreach $microscopy in $experiment.microscopy_list.list}
+						<li><a model_id='{$experiment.id}' sub_model_id='{$microscopy.id}' class='a_sidebar select_microscopy'>{$microscopy.name}</a></li>
+					{/foreach}
+					<li><a model_id='{$experiment.id}' class='a_sidebar new_microscopy' href='#'><img src='icons/actions/Add.png' width='24px'></a></li>
+				</ul>
+				
+				
+<!-- 			<li>Microscopy</li> -->
 			{/if}
 			  
 			{/if}

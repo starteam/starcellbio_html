@@ -56,6 +56,9 @@
   background-color: white;
   margin-bottom: 20px;
 }
+.scb_s_facs_samples_area {
+  margin-bottom: 28px;
+}
 .scb_s_facs_samples_table>table>tbody {
   background-color: #edeef2;
 }

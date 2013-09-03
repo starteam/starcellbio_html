@@ -78,7 +78,16 @@ scb_ui.sidebar_display_experiment = function(opt_data, opt_sb) {
         }
         output.append('<li><a model_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' class=\'a_sidebar new_facs\' href=\'#\'><img src=\'icons/actions/Add.png\' width=\'24px\'></a></li></ul>');
       }
-      output.append((opt_data.template.ui_configuration.experiment_steps_microscopy) ? '<li>Microscopy</li>' : '');
+      if (opt_data.template.ui_configuration.experiment_steps_microscopy) {
+        output.append('<li><a href=\'#\' model_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' class=\'a_sidebar select_microscopy_common\'>Microscopy</a></li><ul class=\'microscopy_sidebar_list\'>');
+        var microscopyList125 = opt_data.experiment.microscopy_list.list;
+        var microscopyListLen125 = microscopyList125.length;
+        for (var microscopyIndex125 = 0; microscopyIndex125 < microscopyListLen125; microscopyIndex125++) {
+          var microscopyData125 = microscopyList125[microscopyIndex125];
+          output.append('<li><a model_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' sub_model_id=\'', soy.$$escapeHtml(microscopyData125.id), '\' class=\'a_sidebar select_microscopy\'>', soy.$$escapeHtml(microscopyData125.name), '</a></li>');
+        }
+        output.append('<li><a model_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' class=\'a_sidebar new_microscopy\' href=\'#\'><img src=\'icons/actions/Add.png\' width=\'24px\'></a></li></ul><!-- \t\t\t<li>Microscopy</li> -->');
+      }
     }
     output.append('</ul>');
   } else {

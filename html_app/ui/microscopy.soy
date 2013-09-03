@@ -181,7 +181,7 @@
         <tr class='scb_s_microscopy_samples_table_tr'>
             <td class='scb_s_microscopy_samples_table_td'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id='{$microscopy.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' cell_treatment_id='{$r.cell_treatment.id}'
                        
                 {if $r.is_sample_enabled}checked="checked"{/if}
                 >
@@ -196,6 +196,7 @@
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
                 {param microscopy:$microscopy/}
+                {param cell_treatment:$r.cell_treatment/}
                 {param kinds:$kinds/}
                 {param lane:$r/}
                 {/call}
@@ -266,6 +267,16 @@
     {param step:$microscopy.slide_type?3:2/}
 {/call}
  -->
+<div class='scb_s_microscopy_tab_content_slide'>
+{if $microscopy.samples_finished}
+{call .display_m_progress}
+{param step:3 /}
+{/call}
+{else}
+{call .display_m_progress}
+{param step:2 /}
+{/call}
+{/if}
 <div class='scb_s_microscopy_samples_area'>
 
     <div class='scb_s_microscopy_choose_slide_type'>
@@ -283,22 +294,48 @@
         <ol class='scb_s_microscopy_choose_samples_order_list' >
             {foreach $r in $rows}
             {if $r.is_valid}
-            <li class="scb_s_microscopy_choose_samples_list_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' microscopy_id='{$microscopy.id}' id='{$r.lane.id}'>
+            <li 
+            microscopy_lane_id='{$r.lane.id}'
+            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' 
+            microscopy_id='{$microscopy.id}' 
+            {if $microscopy.lane_selected == $r.lane.id}class='scb_s_microscopy_sample_selected'{/if}>
+
                 {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
             </li>
             {/if}
             {/foreach}
             </ol>
-            {let $start: $rows.length+1 /}
-            <ol class='scb_s_microscopy_choose_samples_marker' start={$start}>
-             {if $microscopy.marker_loaded == true}
-                <li class="scb_s_microscopy_marker">Marker</li>
-            {/if}
-        </ol>
     </div>
-    
+    {if $microscopy.samples_finished}
+    {else}
+    <button class='scb_f_microscopy_load_slides scb_s_navigation_button' microscopy_id='{$microscopy.id}' 
+                assignment_id="{$assignment.id}"
+                experiment_id="{$experiment.id}">LOAD SLIDES
+	</button>
+	{/if}
 </div>
-<div class='scb_s_microscopy_samples_slide_area'>
+	
+    {call .display_lens}
+    {param assignment:$assignment/}
+    {param experiment:$experiment/}
+    {param microscopy:$microscopy/}
+    {param microscopy_line_id: $microscopy.lane_selected/}
+    {/call}
+</div>
+	
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param microscopy
+@param microscopy_line_id
+*/
+{template .display_lens}
+<div class='scb_s_microscopy_samples_slide_area' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             microscopy_id='{$microscopy.id}'
+			{if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>									
+			
 			<div id='scb_s_microscopy_lens_controls'>
 				<span class='scb_s_controls_note'>Note: Use keyboard arrow keys to navigate lens across the slide.</span>
 				<p/>
@@ -313,15 +350,6 @@
 					<img src = 'images/microscopy/finedown.jpg' class ='scb_s_micro_arrows'id='fblurdown'/><p/>
 				 <span class='scb_s_microscope_status'></span>
 			</div>
-			<!-- 
-<div class = 'scb_s_list_slides'>
-				<form>
-					<input type='radio' name='slides' value='images/microscopy/Brightfield/Sample_1_10X.jpg'>Sample 1</input>
-					<input type='radio' name='slides' value='images/microscopy/Brightfield/Sample_2_10X.jpg'>Sample 2</input>
-					<input type='radio' name='slides' value='images/microscopy/Brightfield/Sample_3_20X.jpg'>Sample 3</input>
-				</form>
-			</div>
- -->
 	</div>	
 	
 {/template}
@@ -332,12 +360,13 @@
 @param assignment
 @param experiment
 @param microscopy
+@param cell_treatment
 @param lane
 @param kinds
 */
 {template .display_slide_types}
 
-<select class="scb_f_microscopy_select_slide_type" 
+<select class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}'
         microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
         lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
 {if $lane.is_sample_enabled}{else}disabled="disabled"{/if}

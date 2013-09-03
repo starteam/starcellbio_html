@@ -86,10 +86,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                         		ret.microscopy = microscopy;
                         		//SHLOKA
                         	}
-// 							if (state.facs_lane_id && facs) {
-// 								var facs_lane = facs.lanes_list.get(state.facs_lane_id)
-// 								ret.facs_lane = facs_lane;
-// 							}
+							if (state.microscopy_lane_id && microscopy) {
+								var microscopy_lane = microscopy.lanes_list.get(state.microscopy_lane_id)
+								ret.microscopy_lane = microscopy_lane;
+							}
                         }
 
                     }

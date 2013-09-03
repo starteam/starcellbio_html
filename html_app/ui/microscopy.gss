@@ -6,6 +6,12 @@
   /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
 }
 
+.scb_s_microscopy_choose_samples_order_list > li {
+    font-size:10pt;
+    padding:3px;
+    color:black;
+}
+
 .scb_microscopy_details_view{
 	padding-top: 30px;
 	width: 960px;
@@ -20,7 +26,12 @@
     position: relative;
 }
 
-.scb_s_microscopy_samples_table,.scb_s_facs_samples_table {
+.scb_s_microscopy_sample_selected {
+    border-radius: 5px;
+    background-color: #e0e0e0;
+}
+
+.scb_s_microscopy_samples_table,{
     border:1px #80d1ae solid;
     border-radius: 5px;
     margin-left: 10px;
@@ -162,7 +173,8 @@ body.dragging, body.dragging * {
 .scb_s_microscopy_samples_slide_area{
 	display: inline-block;
 	margin-top: 15px;
-	left:350px;
+	margin-left:10px;
+	margin-bottom: 100px;
 	width:600px;
 }
 
@@ -193,18 +205,6 @@ body.dragging, body.dragging * {
 	overflow-x: hidden;
 	background-color:white;
 	margin-bottom: 15px;
-}
-.scb_s_microscopy_load_marker {
-        text-align: center;
-        margin-left: 22px;
-@mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
-    border: 1px solid #e0e0e0;
-    border-radius: 5pt;
-    width: 140px;
-    height: 30px;
-    color: black;
-    font-size: 10pt;
-    font-family: 'sourcesanspro-semibold';
 }
 
 .scb_f_wb_anti_body_select_primary {
@@ -381,6 +381,9 @@ body.dragging, body.dragging * {
     margin-top:27px;
     overflow:hidden;
     font-size: 8pt;
+}
+.scb_f_microscopy_load_slides {
+    margin-left:40px;
 }
 
 .scb_s_microscopy_video_box_img {

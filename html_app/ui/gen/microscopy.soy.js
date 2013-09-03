@@ -62,8 +62,8 @@ scb_microscopy.sample_prep = function(opt_data, opt_sb) {
   var rListLen112 = rList112.length;
   for (var rIndex112 = 0; rIndex112 < rListLen112; rIndex112++) {
     var rData112 = rList112[rIndex112];
-    output.append('<tr class=\'scb_s_microscopy_samples_table_tr\'><td class=\'scb_s_microscopy_samples_table_td\'>', (rData112.display_sample) ? '<input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'' + ((rData112.is_sample_enabled) ? 'checked="checked"' : '') + '>' : '', '</td><td class=\'scb_s_microscopy_samples_table_td\'>', (rData112.display_sample) ? soy.$$escapeHtml(rData112.display_text) : '', '</td><td class=\'scb_s_microscopy_samples_table_td\'>');
-    scb_microscopy.display_slide_types({assignment: opt_data.assignment, experiment: opt_data.experiment, microscopy: opt_data.microscopy, kinds: opt_data.kinds, lane: rData112}, output);
+    output.append('<tr class=\'scb_s_microscopy_samples_table_tr\'><td class=\'scb_s_microscopy_samples_table_td\'>', (rData112.display_sample) ? '<input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' cell_treatment_id=\'' + soy.$$escapeHtml(rData112.cell_treatment.id) + '\'' + ((rData112.is_sample_enabled) ? 'checked="checked"' : '') + '>' : '', '</td><td class=\'scb_s_microscopy_samples_table_td\'>', (rData112.display_sample) ? soy.$$escapeHtml(rData112.display_text) : '', '</td><td class=\'scb_s_microscopy_samples_table_td\'>');
+    scb_microscopy.display_slide_types({assignment: opt_data.assignment, experiment: opt_data.experiment, microscopy: opt_data.microscopy, cell_treatment: rData112.cell_treatment, kinds: opt_data.kinds, lane: rData112}, output);
     output.append('</td><td class=\'scb_s_microscopy_samples_table_td\'>', (rData112.kind == 'existing') ? '<button class="scb_f_microscopy_sample_remove" microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' lane_id=\'' + soy.$$escapeHtml(rData112.lane.id) + '\'' + ((rData112.is_sample_enabled) ? '' : 'disabled="disabled"') + '>X</button>' : '<button class="scb_f_microscopy_sample_remove" disabled="disabled">X</button>', '</td></tr>');
   }
   output.append((opt_data.rows.length >= 10) ? '<tr><td colspan=\'4\'><div class="scb_s_microscopy_green_line"></div></td></tr><tr class=\'scb_s_microscopy_samples_select_all_rel\'><td colspan=\'2\'><button class=\'scb_f_microscopy_sample_active_all\'>SELECT ALL</button></td><td colspan=\'2\' align=\'right\'><button class=\'scb_f_microscopy_sample_inactive_all\'>CANCEL ALL</button></td></tr>' : '<tr class=\'scb_s_microscopy_samples_select_all_abs\'><td colspan=\'1\'><button class=\'scb_f_microscopy_sample_active_all\'>SELECT ALL</button></td><td colspan=\'1\' class=\'scb_s_microscopy_blank_space1\'></td><td colspan=\'1\'><button class=\'scb_f_microscopy_sample_inactive_all\'>CANCEL ALL</button></td><td colspan=\'1\' class=\'scb_s_microscopy_blank_space2\' ></td></tr>', '</table></div><a class=\'scb_s_navigation_button scb_f_microscopy_prepare_slides\' microscopy_id=\'', soy.$$escapeHtml(opt_data.microscopy.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\'><!-- ', (opt_data.can_prepare_slide) ? '' : 'disabled=\'false\'', ' --> PREPARE SLIDES  &nbsp; &#9654;</a>');
@@ -75,37 +75,50 @@ scb_microscopy.prepare_slide = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<!--');
   scb_microscopy.display_m_progress({step: opt_data.microscopy.slide_type ? 3 : 2}, output);
-  output.append('--><div class=\'scb_s_microscopy_samples_area\'><div class=\'scb_s_microscopy_choose_slide_type\'><!-- TODO: Slide Type stuff --></div><!--<div class=\'scb_s_microscopy_choose_samples_note\'>NOTE: You can reorder samples by dragging and dropping into new order</div>--><div class=\'scb_s_microscopy_samples_heading\'>Samples</div><div class=\'scb_s_microscopy_choose_samples_order\'><ol class=\'scb_s_microscopy_choose_samples_order_list\' >');
-  var rList181 = opt_data.rows;
-  var rListLen181 = rList181.length;
-  for (var rIndex181 = 0; rIndex181 < rListLen181; rIndex181++) {
-    var rData181 = rList181[rIndex181];
-    output.append((rData181.is_valid) ? '<li class="scb_s_microscopy_choose_samples_list_item" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' id=\'' + soy.$$escapeHtml(rData181.lane.id) + '\'>' + soy.$$escapeHtml(rData181.display_text) + ' - ' + soy.$$escapeHtml(rData181.lane.kinds[rData181.lane.kind].name) + '</li>' : '');
+  output.append('--><div class=\'scb_s_microscopy_tab_content_slide\'>');
+  if (opt_data.microscopy.samples_finished) {
+    scb_microscopy.display_m_progress({step: 3}, output);
+  } else {
+    scb_microscopy.display_m_progress({step: 2}, output);
   }
-  output.append('</ol>');
-  var start__soy199 = opt_data.rows.length + 1;
-  output.append('<ol class=\'scb_s_microscopy_choose_samples_marker\' start=', soy.$$escapeHtml(start__soy199), '>', (opt_data.microscopy.marker_loaded == true) ? '<li class="scb_s_microscopy_marker">Marker</li>' : '', '</ol></div></div><div class=\'scb_s_microscopy_samples_slide_area\'><div id=\'scb_s_microscopy_lens_controls\'><span class=\'scb_s_controls_note\'>Note: Use keyboard arrow keys to navigate lens across the slide.</span><p/>Light<p/><img src=\'images/microscopy/up.jpg\' class =\'scb_s_micro_arrows\' id=\'brightup\'/> <br/><img src =\'images/microscopy/down.jpg\' class =\'scb_s_micro_arrows\'id=\'brightdown\'/><p/>Focus: Rough<p/><img src =\'images/microscopy/up.jpg\' class =\'scb_s_micro_arrows\' id=\'blurup\'/><br/><img src = \'images/microscopy/down.jpg\' class =\'scb_s_micro_arrows\' id=\'blurdown\'/><p/>Focus: Fine<p/><img src = \'images/microscopy/fineup.jpg\' class =\'scb_s_micro_arrows\' id=\'fblurup\'/> <br/><img src = \'images/microscopy/finedown.jpg\' class =\'scb_s_micro_arrows\'id=\'fblurdown\'/><p/><span class=\'scb_s_microscope_status\'></span></div><!--<div class = \'scb_s_list_slides\'><form><input type=\'radio\' name=\'slides\' value=\'images/microscopy/Brightfield/Sample_1_10X.jpg\'>Sample 1</input><input type=\'radio\' name=\'slides\' value=\'images/microscopy/Brightfield/Sample_2_10X.jpg\'>Sample 2</input><input type=\'radio\' name=\'slides\' value=\'images/microscopy/Brightfield/Sample_3_20X.jpg\'>Sample 3</input></form></div>--></div>');
+  output.append('<div class=\'scb_s_microscopy_samples_area\'><div class=\'scb_s_microscopy_choose_slide_type\'><!-- TODO: Slide Type stuff --></div><!--<div class=\'scb_s_microscopy_choose_samples_note\'>NOTE: You can reorder samples by dragging and dropping into new order</div>--><div class=\'scb_s_microscopy_samples_heading\'>Samples</div><div class=\'scb_s_microscopy_choose_samples_order\'><ol class=\'scb_s_microscopy_choose_samples_order_list\' >');
+  var rList192 = opt_data.rows;
+  var rListLen192 = rList192.length;
+  for (var rIndex192 = 0; rIndex192 < rListLen192; rIndex192++) {
+    var rData192 = rList192[rIndex192];
+    output.append((rData192.is_valid) ? '<li microscopy_lane_id=\'' + soy.$$escapeHtml(rData192.lane.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\'' + ((opt_data.microscopy.lane_selected == rData192.lane.id) ? 'class=\'scb_s_microscopy_sample_selected\'' : '') + '>' + soy.$$escapeHtml(rData192.display_text) + ' - ' + soy.$$escapeHtml(rData192.lane.kinds[rData192.lane.kind].name) + '</li>' : '');
+  }
+  output.append('</ol></div>', (opt_data.microscopy.samples_finished) ? '' : '<button class=\'scb_f_microscopy_load_slides scb_s_navigation_button\' microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' assignment_id="' + soy.$$escapeHtml(opt_data.assignment.id) + '" experiment_id="' + soy.$$escapeHtml(opt_data.experiment.id) + '">LOAD SLIDES</button>', '</div>');
+  scb_microscopy.display_lens({assignment: opt_data.assignment, experiment: opt_data.experiment, microscopy: opt_data.microscopy, microscopy_line_id: opt_data.microscopy.lane_selected}, output);
+  output.append('</div>');
+  return opt_sb ? '' : output.toString();
+};
+
+
+scb_microscopy.display_lens = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('<div class=\'scb_s_microscopy_samples_slide_area\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' microscopy_id=\'', soy.$$escapeHtml(opt_data.microscopy.id), '\'', (opt_data.microscopy_line_id) ? 'microscopy_lane_id=\'' + soy.$$escapeHtml(opt_data.microscopy_line_id) + '\'' : '', '><div id=\'scb_s_microscopy_lens_controls\'><span class=\'scb_s_controls_note\'>Note: Use keyboard arrow keys to navigate lens across the slide.</span><p/>Light<p/><img src=\'images/microscopy/up.jpg\' class =\'scb_s_micro_arrows\' id=\'brightup\'/> <br/><img src =\'images/microscopy/down.jpg\' class =\'scb_s_micro_arrows\'id=\'brightdown\'/><p/>Focus: Rough<p/><img src =\'images/microscopy/up.jpg\' class =\'scb_s_micro_arrows\' id=\'blurup\'/><br/><img src = \'images/microscopy/down.jpg\' class =\'scb_s_micro_arrows\' id=\'blurdown\'/><p/>Focus: Fine<p/><img src = \'images/microscopy/fineup.jpg\' class =\'scb_s_micro_arrows\' id=\'fblurup\'/> <br/><img src = \'images/microscopy/finedown.jpg\' class =\'scb_s_micro_arrows\'id=\'fblurdown\'/><p/><span class=\'scb_s_microscope_status\'></span></div></div>');
   return opt_sb ? '' : output.toString();
 };
 
 
 scb_microscopy.display_slide_types = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<select class="scb_f_microscopy_select_slide_type" microscopy_id=\'', soy.$$escapeHtml(opt_data.microscopy.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '"', (opt_data.lane.is_sample_enabled) ? '' : 'disabled="disabled"', '>');
+  output.append('<select class="scb_f_microscopy_select_slide_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' microscopy_id=\'', soy.$$escapeHtml(opt_data.microscopy.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '"', (opt_data.lane.is_sample_enabled) ? '' : 'disabled="disabled"', '>');
   if (opt_data.lane.kind == 'existing') {
-    var kList228 = soy.$$getMapKeys(opt_data.kinds);
-    var kListLen228 = kList228.length;
-    for (var kIndex228 = 0; kIndex228 < kListLen228; kIndex228++) {
-      var kData228 = kList228[kIndex228];
-      output.append('<option value=\'', soy.$$escapeHtml(kData228), '\'', (opt_data.lane.lane.kind == kData228) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData228].name), '</option>');
+    var kList268 = soy.$$getMapKeys(opt_data.kinds);
+    var kListLen268 = kList268.length;
+    for (var kIndex268 = 0; kIndex268 < kListLen268; kIndex268++) {
+      var kData268 = kList268[kIndex268];
+      output.append('<option value=\'', soy.$$escapeHtml(kData268), '\'', (opt_data.lane.lane.kind == kData268) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData268].name), '</option>');
     }
   } else {
     output.append((soy.$$getMapKeys(opt_data.kinds).length != 1) ? '<option selected="selected" disabled="disabled" value=\'\'>Pick Slide Type</option>' : '');
-    var kList243 = soy.$$getMapKeys(opt_data.kinds);
-    var kListLen243 = kList243.length;
-    for (var kIndex243 = 0; kIndex243 < kListLen243; kIndex243++) {
-      var kData243 = kList243[kIndex243];
-      output.append('<option value=\'', soy.$$escapeHtml(kData243), '\'>', soy.$$escapeHtml(opt_data.kinds[kData243].name), '</option>');
+    var kList283 = soy.$$getMapKeys(opt_data.kinds);
+    var kListLen283 = kList283.length;
+    for (var kIndex283 = 0; kIndex283 < kListLen283; kIndex283++) {
+      var kData283 = kList283[kIndex283];
+      output.append('<option value=\'', soy.$$escapeHtml(kData283), '\'>', soy.$$escapeHtml(opt_data.kinds[kData283].name), '</option>');
     }
   }
   output.append('</select>');
