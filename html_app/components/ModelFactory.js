@@ -9,4 +9,7 @@ scb.components.ModelFactory = function scb_components_ModelFactory(template) {
 	if(scb.utils.isDefined(template.model.facs)) {
 		self.facs = new scb.components.FACSModelFactory(template.model.facs, template);
 	}
+	if(scb.utils.isDefined(template.model.microscopy)) {
+		self.microscopy = new scb.components.MicroscopyModelFactory(template.model.microscopy, template);
+	}
 };

@@ -61,22 +61,65 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
     self.parent = parent;
     scb.ModelHelpers.common_entry_code(self, data, context);
     scb.Utils.initialize_accessor_field(self, data, 'slide_prepared', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'marker_loaded', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'gel_type', null, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'is_transfered', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'gel_list', {}, scb.MicroscopyGelList, context);
-    scb.Utils.initialize_accessor_field(self, data, 'last_gel', null, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'canvas_metadata', null, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.MicroscopyLaneList, context);
+    scb.Utils.initialize_accessor_field(self, data, 'samples_finished', false, null, context);
 
+    scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
 	
+	scb.utils.accessor2_custom(self, 'selected_lane', function () {
+        if (self.lane_selected) {
+            return self.lanes_list.get(self.lane_selected);
+        }
+        else {
+            return null;
+        }
+    }, scb.utils.noop);
+    
     self.rows_state = function (exp) {
         var skip_placeholders = false;
-        if (_.keys(context.template.lysate_kinds).length == 1) {
+        if (_.keys(context.template.micro_kinds).length == 1) {
             skip_placeholders = true;
         }
         var experiment = exp || self.parent.parent;
+        var grouped_rows = self.lanes_list.grouped_list;
         var rows = [];
+        _.each(experiment.cell_treatment_list.list, function (e) {
+            if (grouped_rows[e.id]) {
+                _.each(grouped_rows[e.id], function (ee, index) {
+                    rows.push({
+                        kind:'existing',
+                        cell_treatment:e,
+                        lane:ee,
+                        display_sample:index == 0,
+                        is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                        index:index,
+                        is_valid:self.is_cell_treatment_enabled[e.id] && ee,
+                        display_text: e.format_row()
+                    });
+                	
+                });
+                if (!skip_placeholders) {
+                    rows.push({
+                        kind:'placeholder',
+                        display_sample:false,
+                        cell_treatment:e,
+                        is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                        is_valid:false
+                    });
+                }
+            } else {
+                rows.push({
+                    kind:'new',
+                    row_type:'new',
+                    display_sample:true,
+                    cell_treatment:e,
+                    is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                    is_valid:false,
+                    display_text: e.format_row()
+                })
+            }
+        });
         var count = 0;
         _.each(rows, function (e) {
             if (e.is_valid) count++;
@@ -84,6 +127,7 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
         rows = _.sortBy(rows, function(obj){ if(obj.kind=='existing')return obj.lane.order_id; else return;});
         return {rows:rows, valid:count};
     }
+
 
 
 }
