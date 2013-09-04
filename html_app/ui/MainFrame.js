@@ -272,6 +272,28 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				
                 //scb.ui.static.MainFrame.refresh({view: 'assignments'});
             });
+            $('.iframe').load(function(){
+
+				var iframe = $('.iframe').contents();
+
+				iframe.find(".primaryAction").click(function(){
+						   $('.iframe').load(function(){
+						   	  var profile = $('.iframe').contents();
+						   	  console.log(profile);
+						   	  if(profile[0].body.textContent.indexOf('profile') >0)
+							   	  document.location = $('.iframe')[0].contentWindow.location.href;
+							 // alert('Content loaded!');
+							  
+						   });
+					   // setTimeout(function(){
+// 					   		document.location = $('.iframe')[0].contentWindow.location.href;
+// 					   },3000)
+					   
+					});
+			});
+            // scb.utils.off_on(workarea, 'click', '.primaryAction' , function (){
+//                 document.location = '/accounts/profile';
+//             });
         }
         evt.preventDefault();
     });
