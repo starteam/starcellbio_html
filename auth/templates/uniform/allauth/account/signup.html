@@ -1,13 +1,22 @@
-{% extends "account/base.html" %}
+<style>
 
+body {
+
+    position: absolute;
+    background: #f4f6f8;
+    top:0px;
+    font-family: 'sourcesanspro-bold';
+    font-size: 10pt;
+    
+}
+
+</style>
 {% load url from future %}
 {% load i18n %}
 {% load uni_form_tags %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
-
+<b>REGISTER FOR A STUDENT ACCOUNT</b>
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
 
 <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
@@ -22,6 +31,15 @@
       <button class="primaryAction" type="submit">{% trans "Sign Up" %} &raquo;</button>
     </div>
   </fieldset>
+  <button class="nextButton" type="submit">{% trans "Next" %} &raquo;</button>
+ <!-- 
+ Your instructor should have provided you with a code that you need to enter below to register and use this StarCellBio tool.
+  Please contact your instructor if you have not received this code. 
+ -->
+<!-- 
+ <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+ -->
+
 </form>
 
 {% endblock %}

@@ -268,7 +268,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
             scb.utils.off_on(workarea, 'click', '.scb_f_login_button', function () {
                 context.auth.logged_in = true;
-                scb.ui.static.MainFrame.refresh({view: 'assignments'});
+                //document.location = '/accounts/signup';
+				
+                //scb.ui.static.MainFrame.refresh({view: 'assignments'});
             });
         }
         evt.preventDefault();

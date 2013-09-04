@@ -1,11 +1,29 @@
-.scb_s_login_dialog, .scb_s_logout_dialog {
+iframe {
+
+    background: #f4f6f8;
+    border-radius: 5px;
+    padding: 10px;
+    height: 240px;
+    width: 240px;
+    top:0px;
+    font-family: 'sourcesanspro-bold';
+    font-size: 10pt;
+    
+}
+
+.scb_s_login_dialog {
 
     position: absolute;
-    background: gray;
+    background: #f4f6f8;
     border-radius: 5px;
     margin-left:400px;
     margin-right:400px;
     margin-top: 200px;
-    padding: 100px;
+    padding: 10px;
+    height: 300px;
+    width: 260px;
     top:0px;
+    font-family: 'sourcesanspro-bold';
+    font-size: 10pt;
+    
 }
