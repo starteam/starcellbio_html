@@ -67,12 +67,14 @@
   width: 230px;
   border-style: solid;
   border-width: 1px;
-  border-color: #a0a0a0;
+  border-color: #e0e0e0;
   border-radius: 5px;
   margin-right: 10px;
   padding: 5px;
   background-color: white;
   margin-left: 20px;
+  border-top-width: 8px;
+  box-shadow: 0 0 3px black;
 }
 .scb_s_assignments_sidebar>ul {
   margin-left: -28px;
@@ -111,4 +113,12 @@ ul>.scb_s_assignment_experiment_list_item_new_experiment {
 }
 .scb_s_new_assignment_experiment {
   padding-left: 9px;
+}
+.scb_s_assignments_sidebar_course {
+  font-size: 12pt;
+  font-weight: bold;
+}
+.scb_s_assignments_sidebar_course_block {
+  padding-top: 12pt;
+  margin: 1px;
 }

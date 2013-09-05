@@ -141,12 +141,12 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
-    'frontend_tests',
-    'rest_framework',
-    'scb_rest',
-    'backend',
-    'instructor',
+     'django.contrib.admindocs',
+     'frontend_tests',
+     'rest_framework',
+     'scb_rest',
+     'backend',
+     'instructor',
 ) + auth.settings.INSTALLED_APPS
 
 # A sample logging configuration. The only tangible logging
@@ -189,3 +189,12 @@ EMAIL_HOST='localhost'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'starcellbio@mit.edu'
 DEFAULT_FROM_EMAIL = 'starcellbio-admin@mit.edu'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
+
+AUTH_USER_MODEL='auth.User'

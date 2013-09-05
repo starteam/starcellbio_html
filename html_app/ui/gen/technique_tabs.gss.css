@@ -1,17 +1,27 @@
-.scb_s_western_blot_active, .scb_s_facs_active {
+.scb_s_western_blot_tabs, .scb_s_facs_tabs, .scb_s_microscopy_tabs {
+  position: absolute;
+  top: -27px;
+}
+.scb_s_western_blot_active, .scb_s_facs_active, .scb_s_microscopy_active {
   margin-left: 5px;
   border-bottom: 1px white solid;
   background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
   display: inline-block;
-  width: 125px;
+  width: 116px;
   padding-left: 20px;
-  top: 6px;
+  top: 5px;
   position: relative;
   height: 20px;
   font-size: 11pt;
   z-index: 99;
+  background-position-y: 2px;
+  background-position-x: -4px;
 }
-.scb_s_western_blot_open_western_blot, .scb_s_facs_open_facs {
+.scb_s_western_blot_active>.scb_s_western_blot_remove {
+  position: relative;
+  top: 1px;
+}
+.scb_s_western_blot_open_western_blot, .scb_s_facs_open_facs, .scb_s_microscopy_open_microscopy {
   margin: 3px;
   margin-left: 5px;
   background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
@@ -33,7 +43,7 @@
 .scb_s_western_blot_remove>img {
   height: 12px;
 }
-.scb_s_facs_tab_content, .scb_s_western_blot_tab_content {
+.scb_s_facs_tab_content, .scb_s_western_blot_tab_content, .scb_s_microscopy_tab_content {
   border: 1px solid #808080;
   border-radius: 5px;
   position: relative;
@@ -45,7 +55,7 @@
   background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
 }
-.scb_s_western_blot_samples_area, .scb_s_facs_samples_area {
+.scb_s_western_blot_samples_area, .scb_s_facs_samples_area, .scb_s_microscopy_samples_area {
   width: 300px;
   border: 1px solid #e0e0e0;
   border-radius: 2px;
@@ -58,7 +68,7 @@
   overflow-x: hidden;
   background-color: white;
 }
-.scb_s_western_blot_samples_heading, .scb_s_facs_samples_heading {
+.scb_s_western_blot_samples_heading, .scb_s_facs_samples_heading, .scb_s_microscopy_samples_heading {
   font-size: 11pt;
   font-family: 'sourcesanspro-semibold';
   text-align: left;
@@ -77,7 +87,7 @@
   color: black;
   cursor: pointer;
 }
-.scb_s_western_blot_samples_gel_area, .scb_s_facs_samples_graph_area {
+.scb_s_western_blot_samples_gel_area, .scb_s_facs_samples_graph_area, .scb_s_microscopy_samples_gel_area {
   display: inline-block;
   vertical-align: top;
   margin-left: 25px;

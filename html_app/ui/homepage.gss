@@ -108,6 +108,7 @@
     vertical-align: top;
     display: block;
     text-align: right;
+    margin-top: -10px;
 }
 
 .scb_s_envelope_icon {
@@ -174,7 +175,7 @@
 
 .scb_s_homepage_see_more_button {
     left: 80px;
-    top: 280px;
+    top: 80px;
     position: relative;
 }
 
@@ -191,6 +192,7 @@
     margin-top: 1px;
     margin-left: 9px;
     margin-right: -10px;
+    font-size: 10px;
 }
 
 .scb_s_homepage_video_player {
@@ -255,7 +257,9 @@
     display: inline-block;
     margin-left: 10px;
     margin-top: 13px;
-    margin-right: 10px;
+    margin-right: 4px;
+    position: relative;
+    top: -2px;
 }
 
 .scb_s_homepage_experimental_design_bar {
@@ -287,7 +291,7 @@
     width: 155px;
     display: inline-block;
     vertical-align: top;
-
+    padding-top: 8px;
 }
 
 .scb_s_homepage_experimental_design_list_bar {
@@ -305,7 +309,7 @@
     vertical-align: top;
     height: 124px;
     font-size: 11pt;
-    padding-left: 10px;
+    padding-left: 8px;
     position: relative;
     top: 12px;
 }
@@ -317,7 +321,7 @@
     vertical-align: top;
     margin-left: 10px;
     padding-top: 2px;
-    padding-bottom: 2px;
+    padding-bottom: 3.25px;
     padding-left: 8px;
     cursor: pointer;
 }
@@ -485,4 +489,20 @@ a {
     display: inline-block;
     font-size:8pt;
     background-color:red;
+}
+
+.scb_s_homepage_top_left_text {
+	color: white;
+	font-size: 11pt;
+	display:block;
+	position: relative;
+	top:50px;
+	left:20px;
+	width:250px;
+	background:black;
+	line-height:18pt;
+}
+
+.scb_s_homepage_top_left_text b {
+	font-size: 14pt;
 }

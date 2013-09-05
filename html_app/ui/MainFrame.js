@@ -30,7 +30,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     var assignments = new scb.AssignmentList(master_model.assignments, context);
 
-
+    scb.ui.static.MainFrame.ensure_auth_context = function () {
+        context = context || {};
+        context.auth = context.auth || {};
+    }
     scb.ui.static.MainFrame.validate_state = function (state) {
         var ret = {
             redisplay: false
@@ -76,6 +79,17 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                                     ret.facs_lane = facs_lane;
                                 }
                             }
+                        }
+                        if (state.microscopy_id) {
+                        	var microscopy = experiment.microscopy_list.get(state.microscopy_id);
+                        	if(microscopy) {
+                        		ret.microscopy = microscopy;
+                        		//SHLOKA
+                        	}
+// 							if (state.facs_lane_id && facs) {
+// 								var facs_lane = facs.lanes_list.get(state.facs_lane_id)
+// 								ret.facs_lane = facs_lane;
+// 							}
                         }
 
                     }
@@ -127,6 +141,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.ui.static.ExperimentDesignView.register(workarea);
     scb.ui.static.ExperimentSetupView.register(workarea);
     scb.ui.static.WesternBlotView.register(workarea);
+    scb.ui.static.MicroscopyView.register(workarea);
     scb.ui.static.WesternBlotGelView.register(workarea);
     scb.ui.static.FacsView.register(workarea);
 
@@ -233,6 +248,33 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
     });
 
+    scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
+        scb.ui.static.MainFrame.ensure_auth_context();
+        if (context.auth.logged_in) {
+            $(workarea).append(scb_auth.logout({}));
+            scb.utils.off_on(workarea, 'click', '.scb_f_logout_close_button', function () {
+                $('.scb_s_logout_dialog').detach();
+            });
+            scb.utils.off_on(workarea, 'click', '.scb_f_logout_button', function () {
+                //TODO: here comes the flow with sign-in dialog
+                context.auth.logged_in = false;
+                scb.ui.static.MainFrame.refresh({view: 'homepage'});
+            });
+        }
+        else {
+            $(workarea).append(scb_auth.login({}));
+            scb.utils.off_on(workarea, 'click', '.scb_f_login_close_button', function () {
+                $('.scb_s_login_dialog').detach();
+            });
+            scb.utils.off_on(workarea, 'click', '.scb_f_login_button', function () {
+                context.auth.logged_in = true;
+                scb.ui.static.MainFrame.refresh({view: 'assignments'});
+            });
+        }
+        evt.preventDefault();
+    });
+
+
     self.sections.homepage = new scb.ui.HomepageView({
         workarea: workarea,
         context: context
@@ -271,6 +313,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         workarea: workarea,
         context: context
     })
+    
+    self.sections.microscopy = new scb.ui.MicroscopyView({
+    	workarea: workarea,
+    	context: context
+    });
 
     self.sections.western_blot_gel = new scb.ui.WesternBlotGelView({
         workarea: workarea,
@@ -421,6 +468,25 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 western_blot: parsed.western_blot
             });
         }
+        if (state.view == 'microscopy'){
+        	if(!parsed.microscopy) {
+        		var microscopy = parsed.experiment.microscopy_list.start({});
+        		state.microscopy_id=microscopy.id;
+        		var History = window.History;
+        		if (History.enabled){
+        			History.replaceState("New MICRO", "New MICRO", '#' + $.param(state));
+        		}
+        		state.onhashchange.true;
+        		self.show(state);
+        		return;
+        	}
+        	self.sections.microscopy.show({
+        		workarea: workarea,
+        		assignment: parsed.assignment,
+        		experiment: parsed.experiment,
+        		microscopy: parsed.microscopy
+        	});
+        }
         if (state.view == 'western_blot_gel') {
             if (!parsed.western_blot) {
                 state.onhashchange = false;
@@ -500,6 +566,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 //			});
 //
 //		}
+        if (context.auth && context.auth.logged_in) {
+            $('.scb_s_login_status').attr('src', 'images/header/scb_signout_text.png');
+        }
+
         scb.ui.static.MainFrame.in_ajax_display();
 
     }
@@ -582,6 +652,15 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             templates: master_model.templates
         }, context);
         context.western_blot = self.sections.western_blot;
+        
+        /* initialize MICROSCOPY tab */
+
+        self.sections.microscopy = new scb.MicroscopyView({
+        	workarea: workarea,
+        	session_list: session_list,
+        	templates: master_model.templates
+        }, context);
+        context.microscopy=self.sections.microscopy
 
         sidebar.show();
         /* click on sidebar to display DASHBOARD */

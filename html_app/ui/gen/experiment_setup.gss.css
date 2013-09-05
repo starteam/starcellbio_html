@@ -16,6 +16,7 @@
   border-radius: 8px;
   padding: 10px;
   width: 928px;
+  left: 5px;
   background-color: #fff;
   background-image: -webkit-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
@@ -50,9 +51,21 @@ table.scb_s_experiment_setup_table {
   width: 100%;
   background-color: white;
   margin-bottom: 20px;
+  padding-bottom: 2px;
 }
 .scb_s_experiment_setup_table_body {
   background-color: #edeef2;
+}
+.scb_s_western_blot_samples_select_all_rel {
+  bottom: 0;
+  margin-bottom: 75px;
+  position: relative;
+}
+.scb_s_western_blot_samples_select_all_abs {
+  bottom: 0;
+  margin-bottom: 65px;
+  position: absolute;
+  border-top: #80d1ae solid 2px;
 }
 .scb_s_experiment_setup_table_border {
   border-top: 1px solid #e0e0e0;

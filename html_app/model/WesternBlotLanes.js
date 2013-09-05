@@ -26,9 +26,12 @@ scb.WesternBlotLaneList = function scb_WesternBlotLaneList(data, context, parent
         var new_list = [];
         for (var i in new_order) {
             var new_id = new_order[i];
-            new_list.push(_.find(data.list, function (e) {
-                return e.id == new_id
-            }));
+            for(var x in data.list){
+            	if(data.list[x].id ==new_id){
+            		data.list[x].order_id=parseInt(i);
+            		new_list.push(data.list[x]);
+            	}
+            }
         }
         if (new_list.length == data.list.length) {
             data.list = new_list;
@@ -50,17 +53,17 @@ scb.WesternBlotLane = function scb_WesternBlotLane(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'marks', [], null, context);
     scb.Utils.initialize_accessor_field(self, data, 'cell_treatment_id', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'collection_schedule_id', null, null, context);
-
+	
+	scb.Utils.initialize_accessor_field(self, data, 'order_id', 0, null, context);
 //    if (context.template.ui_configuration.lysate_display_ip) {
 //        scb.Utils.initialize_accessor_field(self, data, 'ip_primary_anti_body', _.keys(context.template.ip_primary_anti_body)[0], null, context);
 //        scb.Utils.initialize_accessor_field(self, data, 'ip_secondary_anti_body', _.keys(context.template.ip_secondary_anti_body)[0], null, context);
 //    }
 
-
+	
     scb.Utils.initialize_field(data, 'experiment_id', null);
 
     scb.Utils.accessor2(self, 'making_lysate_id', data);
-
     scb.utils.accessor2_custom(self, 'experiment', function () {
         var experiment = self.parent.parent.parent.parent;
         return experiment;
