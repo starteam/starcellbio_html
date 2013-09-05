@@ -44,6 +44,7 @@ scb.Experiment = function scb_Experiment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'cell_treatment_list',{},scb.CellTreatmentList,context);
 	scb.Utils.initialize_accessor_field(self,data,'western_blot_list',{},scb.WesternBlotList,context);
 	scb.Utils.initialize_accessor_field(self,data,'facs_list',{},scb.FacsList,context);
+	scb.Utils.initialize_accessor_field(self,data,'microscopy_list',{},scb.MicroscopyList,context);
 	scb.Utils.initialize_accessor_field(self,data,'setup_finished',false,null,context);
     scb.Utils.initialize_accessor_field(self,data,'new_row',{},null,context);
     scb.Utils.initialize_accessor_field(self,data,'design_wb_cb',false,null,context);

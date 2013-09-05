@@ -84,12 +84,12 @@
 @param can_prepare_lysate
 */
 {template .display_tabs}
+<div class='scb_s_western_blot_tab_content {if $kind == 'sample_prep'}scb_s_western_blot_tab_content_sample_prep{/if}'>
 {call .display_tabs_selector}
     {param assignment:$assignment/}
     {param experiment:$experiment /}
     {param western_blot:$western_blot /}
 {/call}
-<div class='scb_s_western_blot_tab_content {if $kind == 'sample_prep'}scb_s_western_blot_tab_content_sample_prep{/if}'>
     {if $kind == 'sample_prep'}
     {call .sample_prep}
     {param assignment:$assignment/}
@@ -160,6 +160,20 @@
 {call .display_wb_progress}
 {param step:1/}
 {/call}
+<div class='scb_s_western_blot_video_box_wrapper'>
+            <div class='scb_s_western_blot_video_box_wrapper_title'>
+                 IN THE LAB
+            </div>
+            <div class='scb_s_western_blot_video_reminder'>
+                   <div class='scb_s_western_blot_video_box'>
+						<img alt='In_The_Lab' title='In_The_Lab' class='scb_s_western_blot_video_box_img' src='images/western_blot/in_the_lab.png'>
+						<div class='scb_s_western_blot_video_heading'>Reminder:&nbsp;&nbsp;</div>
+						<div class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one lane&nbsp;</div>
+						<div class='scb_s_western_blot_video_text_second'>must be reserved for the protein marker.&nbsp;</div>
+						<a href='pdf/Reference%20Library.pdf' class='scb_s_western_blot_learn_more'>Learn More</a></div>
+                   </div>
+               </div>
+            </div>
 <div class='scb_s_western_blot_samples_table'>
     <table>
         <thead class='scb_s_western_blot_samples_table_head'>
@@ -207,11 +221,34 @@
             </td>
         </tr>
         {/foreach}
+        {if length($rows) >= 10}
         <tr>
             <td colspan='4'>
+        		<div class="scb_s_western_blot_green_line"></div>
+        	</td>
+        </tr>
+        <tr class='scb_s_western_blot_samples_select_all_rel'>
+        	<td colspan='2'>
                 <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
             </td>
+        	<td colspan='2' align='right'>
+                <button class='scb_f_western_blot_sample_inactive_all'>CANCEL ALL</button>
+            </td>
         </tr>
+        {else}
+        <tr class='scb_s_western_blot_samples_select_all_abs'>
+        	<td colspan='1'>
+                <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
+            </td>
+            <td colspan='1' class='scb_s_western_blot_blank_space1'>
+            </td>
+            <td colspan='1'>
+                <button class='scb_f_western_blot_sample_inactive_all'>CANCEL ALL</button>
+            </td>
+            <td colspan='1' class='scb_s_western_blot_blank_space2' >
+            </td>
+        </tr>
+        {/if}
     </table>
 </div>
 <a class='scb_s_navigation_button scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
@@ -234,12 +271,12 @@
 
     <div class='scb_s_western_blot_choose_gel_type'>
         <!-- TODO: Gel Type stuff -->
-        Gel Type:
+        <div class='scb_s_western_blot_choose_gel_type_title'>Gel Type:</div>
         <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".10" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.10'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text">10%</span>
-        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
+        &nbsp;&nbsp;<input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.12'}checked='checked'{/if} disabled='disabled'/><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_western_blot_choose_gel_type_input_disabled">12%</span>
-        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15" western_blot_id='{$western_blot.id}'
+        &nbsp;<input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if} disabled='disabled'/><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_western_blot_choose_gel_type_input_disabled">15%</span>
     </div>
     <!--
@@ -251,16 +288,19 @@
         Samples
     </div>
     <div class='scb_s_western_blot_choose_samples_order'>
-        <ol class='scb_s_western_blot_choose_samples_order_list'>
+        <ol class='scb_s_western_blot_choose_samples_order_list' >
             {foreach $r in $rows}
             {if $r.is_valid}
-            <li>
+            <li class="scb_s_western_blot_choose_samples_list_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>
                 {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
             </li>
             {/if}
             {/foreach}
-            {if $western_blot.marker_loaded == true}
-                <li>Marker</li>
+            </ol>
+            {let $start: $rows.length+1 /}
+            <ol class='scb_s_western_blot_choose_samples_marker' start={$start}>
+             {if $western_blot.marker_loaded == true}
+                <li class="scb_s_western_blot_marker">Marker</li>
             {/if}
         </ol>
     </div>

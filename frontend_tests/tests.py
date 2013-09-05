@@ -12,13 +12,17 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
 import time
 import pudb
+from selenium.webdriver import ActionChains
+import platform
 
 class SimpleTest(TestCase):
     @classmethod
     def setUpClass(self):
         #self.driver = webdriver.Firefox()
-        print settings.rel('../../chromedriver')
-        self.driver = webdriver.Chrome(settings.rel('../../chromedriver'))
+        print settings.rel('../../mac/chromedriver')
+        self.driver = webdriver.Chrome(settings.rel('../../mac/chromedriver'))
+        #print settings.rel('../../ubuntu/chromedriver')
+        #self.driver = webdriver.Chrome(settings.rel('../../ubuntu/chromedriver'))
         self.base_url = 'http://localhost:8000/static/index.html#view=assignments'
 
     @classmethod
@@ -115,6 +119,7 @@ class SimpleTest(TestCase):
         self.navigate_via('W.B. 2')
         self.assert_on_western_blot_page()
         self.assert_western_blot_tabs('W.B. 2', ['W.B. 1'])
+        #pudb.set_trace()
         self.navigate_via('W.B. 1')
         self.assert_western_blot_tabs('W.B. 1', ['W.B. 2'])
         self.navigate_via('SELECT TECHNIQUE')
@@ -131,21 +136,44 @@ class SimpleTest(TestCase):
         self.assert_on_select_technique_page()
         self.navigate_via('Exp. 1')
         self.assert_western_blot_tabs('Exp. 1', ['W.B. 2'])
-        pudb.set_trace()
+        #pudb.set_trace()
         self.select_lysates()
         self.navigate_via('PREPARE LYSATES')
+        #pudb.set_trace()
         self.select_gel_type()
+        old_order = self.read_list()
+        #The drag and drop command in selenium does not work on the Mac OSX, only the linux
+        #if(self.driver.name == u'chrome'):
+        print 'old order'
+        print old_order
+        if(platform.mac_ver()[0] != ''):
+        	self.test_sortable()
+        	time.sleep(5)
+        	new_order = self.read_list()
+        	print 'new order:'
+        	print new_order
+        	#self.assert_order_different(old_order, new_order)
         self.select_load_marker()
-        self.navigate_via('RUN GEL')
+        if(platform.mac_ver()[0] != ''):
+        	load_order = self.read_list()
+        	#self.assert_order_different(old_order, load_order)
+        	print 'load_order'
+        	print load_order
+        self.select_gel_and_transfer()
+        if(platform.mac_ver()[0] != ''):
+        	gel_order = self.read_list()
+        	#self.assert_order_different(old_order, gel_order)
+        	#self.assert_order_same(new_order, gel_order)
+		print 'gel_order'
+		print gel_order
         wb_sample1 = { 'primary_antibody':'1' , 'secondary_antibody':'2' }
         self.select_wb_antibody(wb_sample1)
         self.navigate_via('BLOT')
-        pudb.set_trace()
+        #pudb.set_trace()
         self.navigate_via('RE-PROBE')
         self.navigate_via('anti-let-23')
         self.navigate_via('BLOT')
         self.navigate_via('SELECT TECHNIQUE')
-
 
     ## navigation helpers and assertions
     def assert_on_assignments_page(self):
@@ -170,6 +198,22 @@ class SimpleTest(TestCase):
 
     def assert_on_western_blot_page(self):
         self.find_by_class_name('scb_s_western_blot_view')
+    
+    def assert_order_different(self, old, new):
+		self.assertNotEqual(old, new)	    
+    
+    def assert_order_same(self, old, new):
+    	self.assertEqual(old, new)
+    	
+    def read_list(self):
+    	array=[]
+    	elements = self.driver.find_elements_by_class_name('scb_s_western_blot_choose_samples_list_item')
+    	if (elements == []):
+    		elements = self.driver.find_elements_by_class_name('scb_s_western_blot_choose_samples_list')
+        self.assertGreaterEqual(elements.__len__(), 2)
+        for e in elements:
+        	array.append(e.get_attribute('id'))
+        return array
 
     def assert_experiments(self, experiment_list):
         web_experiment_list = self.driver.find_elements_by_class_name('scb_f_open_assignment_experiment')
@@ -262,10 +306,14 @@ class SimpleTest(TestCase):
     def select_gel_type(self):
         e_class = self.find_by_class_name('scb_s_western_blot_choose_gel_type_input')
         e_class.click()
-
+        
     def select_load_marker(self):
         e_class = self.find_by_class_name('scb_s_western_blot_load_marker')
         e_class.click()
+    
+    def select_gel_and_transfer(self):
+    	e_class = self.find_by_class_name('scb_s_western_blot_run_gel_and_transfer')
+    	e_class.click()
 
     def select_lysates(self):
         cbs = self.driver.find_elements_by_css_selector('.scb_f_western_blot_sample_active')
@@ -328,4 +376,19 @@ class SimpleTest(TestCase):
         elements = self.driver.find_elements_by_partial_link_text(selector)
         self.assertGreater(elements.__len__(), 0)
         return elements[0]
-
+        
+        
+    def test_sortable(self):
+    	with open(settings.rel('../html_app/js/jquery-1.7.2.js')) as jquery_js_2:
+    		jquery = jquery_js_2.read()
+    	self.driver.execute_script(jquery)
+    	with open(settings.rel('jquery.simulate.drag-sortable.js')) as jquery_js_3:
+    		jquery_drag = jquery_js_3.read()
+    	self.driver.execute_script(jquery_drag)
+    	#Need this library to be injected beyond the jquery to make sure you don't get errors for the other selectors
+    	with open(settings.rel('../html_app/js/jquery.ba-bbq.min.js')) as jquery_js_4:
+    		jquery_bbq = jquery_js_4.read()
+    	self.driver.execute_script(jquery_bbq)
+    	script = "$($('.scb_s_western_blot_choose_samples_list_item')[0]).simulateDragSortable({ move: 1 });"
+    	success = self.driver.execute_script(script)
+    	

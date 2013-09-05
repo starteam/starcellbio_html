@@ -3,6 +3,7 @@ degreeEntity = $('<div />').html('&deg;').text();
 
 var __assignment2 = {
     id: 'assignment_2',
+    course:'7.02',
     name: '7.02 StarCellBio Prototype Assignment',
     description: 'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
     experiments: {},
@@ -379,6 +380,7 @@ var __assignment2 = {
 var __assigment_tufts = {
     id: 'assignment_tufts',
     name: 'Bio52 Assignment',
+    course:'Bio52',
     description: 'Bio52 Homework Assignment.',
     experiments: {
     },
@@ -881,6 +883,7 @@ var __assigment_tufts = {
 var __assigment_facs = {
     id: 'assignment_3',
     name: 'FACS prototype',
+    course: 'StarX',
     description: 'FACS prototype assignment.',
     experiments: {
     },
@@ -1069,6 +1072,7 @@ var __assigment_facs = {
 var __basic_tests = {
     id: 'basic_tests',
     name: 'SCB Basic Tests',
+    course: 'StarX',
     description: 'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
     experiments: {},
     template: {
@@ -1076,7 +1080,7 @@ var __basic_tests = {
 
         ui: {
             experimental_design: {
-                techniques: [ 'wb' , 'facs']
+                techniques: [ 'wb' , 'facs' , 'micro']
             },
             experiment_setup: {table: [
                 {kind: "cell_line",
@@ -1554,6 +1558,7 @@ var __basic_tests = {
 var __usability_test = {
     id: 'usability_test',
     name: 'SCB Usability Test',
+    course: 'StarX',
     description: "Placeholder",
     experiments: {},
     template: {
@@ -1561,7 +1566,7 @@ var __usability_test = {
 
         ui: {
             experimental_design: {
-                techniques: [ 'wb' , 'facs']
+                techniques: [ 'wb' , 'facs' , 'micro']
             },
             experiment_setup: {table: [
                 {kind: "cell_plate",
@@ -2027,13 +2032,14 @@ var __usability_test = {
 var __assigment_706 = {
         id: 'mit_7_06_0313',
         name: '7.06 Spring 2013',
+        course: '7.06',
         description: 'FACS and Western Blot for temperature sensitive mutants',
         experiments: {},
         template: {
             instructions: 'Here come instructions when we build them',
             ui: {
                 experimental_design: {
-                    techniques: [ 'wb' , 'facs']
+                    techniques: [ 'wb' , 'facs' , 'micro']
                 },
                 experiment_setup: {
                     table: [ //
@@ -3017,7 +3023,7 @@ master_model_data = {
     app_description: 'StarCellBio Placeholder',
     //'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.',
     assignments: {
-        list: [/*__assigment_tufts, __assigment_facs, __assignment2, __assigment_tufts, __usability_test, __basic_tests,*/ __assigment_706, __assigment_tufts
+        list: [ __assigment_facs, __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts
         ]
     },
     ui: {}

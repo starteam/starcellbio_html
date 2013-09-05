@@ -5,6 +5,7 @@
 * @param global_template
 * //@/param t template
 * @param assignments AssignmentsView
+* @param courses // group Assignments by Course
 */
 {template .main}
 <div class='scb_s_assignments_view'>
@@ -15,7 +16,8 @@
         {param assignments:assignments/}
     {/call}
     {call .display_assignments}
-    {param assignments:$assignments/}
+        {param assignments:$assignments/}
+        {param courses:$courses/}
     {/call}
     {call .display_abstract}
     {param global_template:$global_template/}
@@ -74,12 +76,16 @@ Assignment description
 /**
 Assignment assignments
 @param assignments
+@param courses
 */
 {template .display_assignments}
 <div class='scb_s_assignments_sidebar'>
     <h1 class='scb_s_assignments_sidebar_title'>Your Assignments</h1>
     <ul>
-        {foreach $assignment in $assignments.list}
+        {foreach $course in keys($courses)}
+            <div class='scb_s_assignments_sidebar_course_block'>
+            <div class='scb_s_assignments_sidebar_course'>{$course}</div>
+        {foreach $assignment in $courses[$course]}
         <li class='scb_s_assignments_sidebar_name'>
             <a href='#view={if $assignment.id == $assignments.selected_id}assignment{else}assignments{/if}&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}</a>
         </li>
@@ -89,6 +95,8 @@ Assignment assignments
             {param assignment:$assignment/}
             {/call}
         {/if}
+        {/foreach}
+        </div>
         {/foreach}
     </ul>
 </div>

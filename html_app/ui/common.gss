@@ -13,6 +13,13 @@ body {
     background-color: #e9edf1;
 }
 
+div#main {
+	position: relative;
+	width:100px;
+	left: 20px;
+	right: 20px;
+}
+
 .scb_s_navigation_button {
    /*background-image: url('../images/homepage/instructor_resources_button.png');*/
     padding: 3px 20px 3px 20px;
@@ -24,6 +31,7 @@ body {
     text-align: center;
     font-size:12pt;
     border-radius: 5px;
+    margin-top: 10px;
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -73,7 +81,7 @@ body {
     background-color: #80d1ae;
     height:1px;
     top:23px;
-    left:65px;
+    left:78px;
 }
 
 .scb_s_experiment_step_horizontal_line_23 {
@@ -82,7 +90,7 @@ body {
     background-color: #80d1ae;
     height:1px;
     top:23px;
-    left:155px;
+    left:168px;
 }
 
 .scb_s_experiment_step_horizontal_line_34 {
@@ -91,7 +99,7 @@ body {
     background-color: #80d1ae;
     height:1px;
     top:23px;
-    left:245px;
+    left:258px;
 }
 
 .scb_s_experiment_step_horizontal_line_45 {
@@ -100,7 +108,7 @@ body {
     background-color: #80d1ae;
     height:1px;
     top:23px;
-    left:335px;
+    left:348px;
 }
 
 
@@ -134,12 +142,12 @@ body {
 
 .scb_s_assignment_step_experiment_line {
     position: absolute;
-    top: 60px;
-    left: 380px;
-    width:300px;
+    top: 8px;
     height:1px;
     background-color: #14ac63;
     font-size:1.5em;
+    left: 135px;
+    width: 525px;
 }
 
 .scb_s_assignment_step_experiment_box {
@@ -147,18 +155,13 @@ body {
     top:5px;
 }
 
-.scb_s_assignment_step_experiment_line {
-    position: absolute;
-    top: 8px;
-    left: 138px;
-    width: 525px;
-}
 
 .scb_s_assignment_step {
     background: #69a996;
     color: white;
     width: 960px;
     height: 25px;
+    font-size: 62.5%;
     position: relative;
     @mixin gradient(top,#80d1ae,#189689,#189689);
 
