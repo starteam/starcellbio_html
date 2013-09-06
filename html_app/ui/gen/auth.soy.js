@@ -11,6 +11,13 @@ scb_auth.login = function(opt_data, opt_sb) {
 };
 
 
+scb_auth.signup = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('<div class=\'scb_s_signup_dialog\'><iframe src=\'/accounts/signup/\' class=\'iframe\'></iframe><button class=\'scb_f_signup_close_button\'>Close</button></div>');
+  return opt_sb ? '' : output.toString();
+};
+
+
 scb_auth.logout = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_logout_dialog\'><button class=\'scb_f_logout_close_button\'>Close</button><button class=\'scb_f_logout_button\'>Logout</button></div>');

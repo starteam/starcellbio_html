@@ -1,0 +1,3 @@
+class test():
+	print 'Shloka'
+	

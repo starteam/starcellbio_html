@@ -34,7 +34,27 @@ scb.ui.static.HomepageView.register = function(workarea) {
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_f_create_student_account', function (e) {
-        document.location = '/accounts/signup';
+    	$(workarea).append(scb_auth.signup({}));
+        //document.location = '/accounts/signup';
+        
+		scb.utils.off_on(workarea, 'click', '.scb_f_signup_close_button', function () {
+			$('.scb_s_signup_dialog').detach();
+		});
+        $('.iframe').load(function(){
+
+				var iframe = $('.iframe').contents();
+
+				iframe.find(".primaryAction").click(function(){
+						   $('.iframe').load(function(){
+						   	  var profile = $('.iframe').contents();
+						   	  console.log(profile);
+						   	  if(profile[0].body.textContent.indexOf('profile') >0){
+						   	  	  scb.ui.static.MainFrame.refresh({view: 'profile'});
+							   	  }
+						   });
+					   
+					});
+			});
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_instructor_resources', function (e) {
         alert( "under construction!");

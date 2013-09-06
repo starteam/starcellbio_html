@@ -8,7 +8,7 @@ iframe {
   font-family: 'sourcesanspro-bold';
   font-size: 10pt;
 }
-.scb_s_login_dialog {
+.scb_s_login_dialog, .scb_s_logout_dialog, .scb_s_signup_dialog {
   position: absolute;
   background: #f4f6f8;
   border-radius: 5px;

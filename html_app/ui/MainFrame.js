@@ -251,27 +251,29 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
         scb.ui.static.MainFrame.ensure_auth_context();
         if (context.auth.logged_in) {
-            $(workarea).append(scb_auth.logout({}));
-            scb.utils.off_on(workarea, 'click', '.scb_f_logout_close_button', function () {
-                $('.scb_s_logout_dialog').detach();
-            });
-            scb.utils.off_on(workarea, 'click', '.scb_f_logout_button', function () {
-                //TODO: here comes the flow with sign-in dialog
-                context.auth.logged_in = false;
-                scb.ui.static.MainFrame.refresh({view: 'homepage'});
-            });
+        	context.auth.logged_in = false;
+            scb.ui.static.MainFrame.refresh({view: 'homepage'});
+            // $(workarea).append(scb_auth.logout({}));
+//             scb.utils.off_on(workarea, 'click', '.scb_f_logout_close_button', function () {
+//                 $('.scb_s_logout_dialog').detach();
+//             });
+//             scb.utils.off_on(workarea, 'click', '.scb_f_logout_button', function () {
+//                 //TODO: here comes the flow with sign-in dialog
+//                 context.auth.logged_in = false;
+//                 scb.ui.static.MainFrame.refresh({view: 'homepage'});
+//             });
         }
         else {
             $(workarea).append(scb_auth.login({}));
             scb.utils.off_on(workarea, 'click', '.scb_f_login_close_button', function () {
                 $('.scb_s_login_dialog').detach();
             });
-            scb.utils.off_on(workarea, 'click', '.scb_f_login_button', function () {
-                context.auth.logged_in = true;
-                //document.location = '/accounts/signup';
-				
-                //scb.ui.static.MainFrame.refresh({view: 'assignments'});
-            });
+//             scb.utils.off_on(workarea, 'click', '.scb_f_login_button', function () {
+//                 context.auth.logged_in = true;
+//                 //document.location = '/accounts/signup';
+// 				
+//                 //scb.ui.static.MainFrame.refresh({view: 'assignments'});
+//             });
             $('.iframe').load(function(){
 
 				var iframe = $('.iframe').contents();
@@ -280,8 +282,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 						   $('.iframe').load(function(){
 						   	  var profile = $('.iframe').contents();
 						   	  console.log(profile);
-						   	  if(profile[0].body.textContent.indexOf('profile') >0)
-							   	  document.location = $('.iframe')[0].contentWindow.location.href;
+						   	  if(profile[0].body.textContent.indexOf('profile') >0){
+						   	  	  context.auth.logged_in = true;
+						   	  	  scb.ui.static.MainFrame.refresh({view: 'profile'});
+							   	  //document.location = $('.iframe')[0].contentWindow.location.href;
+							   	  }
 							 // alert('Content loaded!');
 							  
 						   });
@@ -307,7 +312,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         workarea: workarea,
         context: context
     });
-
+	
+	self.sections.profile = new scb.ui.ProfileView({
+        workarea: workarea,
+        context: context
+    });
+	
     self.sections.assignment = new scb.ui.AssignmentView({
         workarea: workarea,
         context: context
@@ -385,6 +395,22 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.MainFrame.update_hash(state);
             self.sections.assignments.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+        if (state.view == 'profile') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.selected_id ? assignments.selected_id : assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+            scb.ui.static.MainFrame.ensure_auth_context();
+			context.auth.logged_in = true;
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.MainFrame.update_hash(state);
+            self.sections.profile.show({
                 workarea: workarea,
                 assignments: assignments
             });
@@ -564,32 +590,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 }
             }
         }
-
-//		var assignment = assignments.selected;
-//		if(assignment == null) {
-////			self.sections.assignments.show();
-//		} else if( master_model.ui.view == 'assignments')
-//        {
-//            $.bbq.pushState({
-//                view: master_model.ui.view
-//            });
-////            self.sections.assignments.show();
-//        }
-//        else {
-//			// var sidebar = new scb.Sidebar({
-//			// sections : self.sections,
-//			// assignment : assignment,
-//			// workarea : workarea,
-//			// }, context);
-//			// context.sidebar = sidebar;
-//
-//			self.sections.workarea.show({
-//				assignment : assignment,
-//				template : context.template
-//				//	sidebar:sidebar,
-//			});
-//
-//		}
         if (context.auth && context.auth.logged_in) {
             $('.scb_s_login_status').attr('src', 'images/header/scb_signout_text.png');
         }

@@ -21,12 +21,24 @@ SIGN-IN
 {/template}
 
 /**
+* Signup
+*/
+{template .signup}
+<div class='scb_s_signup_dialog'>
+	<iframe src='/accounts/signup/' class='iframe'>
+	</iframe>
+  <button class='scb_f_signup_close_button'>Close</button>
+</div>
+{/template}
+
+/**
 * Login
 */
 {template .logout}
 <div class='scb_s_logout_dialog'>
     <button class='scb_f_logout_close_button'>Close</button>
     <button class='scb_f_logout_button'>Logout</button>
+
 </div>
 {/template}
 

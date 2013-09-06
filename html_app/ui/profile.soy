@@ -1,0 +1,123 @@
+{namespace scb_assignments}
+
+/**
+* Assignment selector
+* @param global_template
+* //@/param t template
+* @param assignments AssignmentsView
+* @param courses // group Assignments by Course
+*/
+{template .main}
+<div class='scb_s_assignments_view'>
+    {call scb_homepage.display_header}
+    {/call}
+    {call scb_common.assignment_step}
+        {param step:1/}
+        {param assignments:assignments/}
+    {/call}
+    {call .display_assignments}
+        {param assignments:$assignments/}
+        {param courses:$courses/}
+    {/call}
+    {call .display_abstract}
+    {param global_template:$global_template/}
+    {param assignments:$assignments/}
+    {/call}
+    {call scb_homepage.display_experiment_design}
+    {/call}
+    {call scb_homepage.display_footer}
+    {/call}
+</div>
+{/template}
+
+/**
+Assignment title
+@param global_template template
+*/
+{template .display_header}
+<div class='scb_s_header'>
+        {$global_template.app_title}
+</div>
+{/template}
+
+/**
+Assignment footer
+@/param global_template template
+*/
+{template .display_footer}
+<div class='scb_s_footer'>
+        Here comes footer
+</div>
+{/template}
+
+/**
+Assignment description
+@param global_template template
+@param assignments
+*/
+{template .display_abstract}
+<div class='scb_s_abstract'>
+    {if $assignments.selected != null}
+        <span class="scb_s_abstract_title">
+            {$assignments.selected.name |noAutoescape}
+
+        </span>
+        <div class='scb_s_abstract_title_underline'></div>
+        {$assignments.selected.description |noAutoescape}
+
+    <a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignments.selected_id}">COMPLETE ASSIGNMENT &nbsp; &#9654;</a>
+
+    {else}
+        {$global_template.app_description |noAutoescape}
+    {/if}
+</div>
+{/template}
+
+/**
+Assignment assignments FIX
+@param assignments
+@param courses
+*/
+{template .display_assignments}
+<div class='scb_s_assignments_sidebar'>
+    <h1 class='scb_s_assignments_sidebar_title'>Your Assignments</h1>
+    <ul>
+        {foreach $course in keys($courses)}
+            <div class='scb_s_assignments_sidebar_course_block'>
+            <div class='scb_s_assignments_sidebar_course'>{$course}</div>
+        {foreach $assignment in $courses[$course]}
+        <li class='scb_s_assignments_sidebar_name'>
+            <a href='#view={if $assignment.id == $assignments.selected_id}assignment{else}assignments{/if}&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}</a>
+        </li>
+        {if $assignment.id == $assignments.selected_id}
+            {call .display_experiments}
+            {param experiments:$assignment.experiments/}
+            {param assignment:$assignment/}
+            {/call}
+        {/if}
+        {/foreach}
+        </div>
+        {/foreach}
+    </ul>
+</div>
+{/template}
+
+/**
+Assignment experiments
+@param experiments
+@param assignment
+*/
+{template .display_experiments}
+<ul class='scb_s_assignment_experiment_list'>
+{if length($experiments.list) != 0}
+    {foreach $experiment in $experiments.list}
+    <li class='scb_s_assignment_experiment_list_item'>
+        <a class='scb_f_open_assignment_experiment' href='#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$experiment.id}' model_id='{$assignment.id}' sub_model_id='{$experiment.id}'>{$experiment.name}</a>
+    </li>
+    {/foreach}
+{/if}
+</ul>
+    <div class='scb_s_assignment_experiment_list_item_new_experiment'>
+       <span aria-hidden="true" tabindex="-1">+</span><a class='scb_f_new_assignment_experiment scb_s_new_assignment_experiment' href='#view=experiment_design&assignment_id={$assignment.id}' model_id='{$assignment.id}'>New Experiment</a>
+    </div>
+{/template}
