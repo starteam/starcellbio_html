@@ -3109,6 +3109,54 @@ window.master_model_data = master_model_data;
 
 
 $(function () {
+	$.ajax({
+		type: "POST",
+		url: '/', 
+		data: {ass_id: __assignment2['id'],
+			   course: __assignment2['course'],
+			   name: __assignment2['name'],
+			   data: JSON.stringify(__assignment2)}
+	});
+	$.ajax({
+		type: "POST",
+		url: '/', 
+		data: {ass_id: __assigment_tufts['id'],
+			   course: __assigment_tufts['course'],
+			   name: __assigment_tufts['name'],
+			   data: JSON.stringify(__assigment_tufts)}
+	});
+	$.ajax({
+		type: "POST",
+		url: '/', 
+		data: {ass_id: __assigment_facs['id'],
+			   course: __assigment_facs['course'],
+			   name: __assigment_facs['name'],
+			   data: JSON.stringify(__assigment_facs)}
+	});
+	$.ajax({
+		type: "POST",
+		url: '/', 
+		data: {ass_id: __basic_tests['id'],
+			   course: __basic_tests['course'],
+			   name: __basic_tests['name'],
+			   data: JSON.stringify(__basic_tests)}
+	});
+	$.ajax({
+		type: "POST",
+		url: '/', 
+		data: {ass_id: __usability_test['id'],
+			   course: __usability_test['course'],
+			   name: __usability_test['name'],
+			   data: JSON.stringify(__usability_test)}
+	});
+	$.ajax({
+		type: "POST",
+		url: '/', 
+		data: {ass_id: __assigment_706['id'],
+			   course: __assigment_706['course'],
+			   name: __assigment_706['name'],
+			   data: JSON.stringify(__assigment_706)}
+	});
     __usability_test.description = scb_model_usability.abstract();
     __usability_test.template.instructions = scb_model_usability.instructions();
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();

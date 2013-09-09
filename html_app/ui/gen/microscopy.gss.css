@@ -3,9 +3,6 @@
   padding: 3px;
   color: black;
 }
-.scb_s_microscopy_choose_samples_list_item {
-  cursor: pointer;
-}
 .scb_microscopy_details_view {
   padding-top: 30px;
   width: 960px;
@@ -22,7 +19,7 @@
   border-radius: 5px;
   background-color: #e0e0e0;
 }
-.scb_s_microscopy_samples_table, .scb_s_facs_samples_table {
+.scb_s_microscopy_samples_table {
   border: 1px #80d1ae solid;
   border-radius: 5px;
   margin-left: 10px;
@@ -31,8 +28,6 @@
   margin-top: 20px;
   min-height: 300px;
   background-color: #edeef2;
-}
-.scb_s_microscopy_samples_table {
   width: 70%;
 }
 .scb_s_microscopy_progress {
@@ -298,6 +293,9 @@ body.dragging, body.dragging * {
   margin-top: 27px;
   overflow: hidden;
   font-size: 8pt;
+}
+.scb_f_microscopy_load_slides {
+  margin-left: 40px;
 }
 .scb_s_microscopy_video_box_img {
   width: 240px;
