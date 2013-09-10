@@ -19,19 +19,3 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-def create_courses(request, **kwargs):
-	import pudb
-	pudb.set_trace()
-# 	if(request.method == POST):
-# 		assign_id = request.POST["ass_id"]
-# 		course_code = request.POST["course"]
-# 		assign_name = request.POST["name"]
-# 		jsondata=request.POST["data"]
-# 		if(assign_id):
-# 			c = Course(code = course_code, course_name = 'NewCourse')
-# 			c.save()
-# 			a = Assignment(courseID=c, assignmentID=assign_id, assignmentName=assign_name, data = jsondata)
-# 			a.save()
-# 			return HttpResponse('got it')
-	return HttpResponse('/thanks/')
-		

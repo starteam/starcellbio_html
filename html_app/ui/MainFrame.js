@@ -406,10 +406,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 self.show(state);
                 return;
             }
-            scb.ui.static.MainFrame.ensure_auth_context();
-			context.auth.logged_in = true;
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.MainFrame.update_hash(state);
+    		scb.ui.static.MainFrame.ensure_auth_context();
+			context.auth.logged_in = true;
             self.sections.profile.show({
                 workarea: workarea,
                 assignments: assignments

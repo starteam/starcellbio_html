@@ -4,6 +4,7 @@ degreeEntity = $('<div />').html('&deg;').text();
 var __assignment2 = {
     id: 'assignment_2',
     course:'7.02',
+    course_name: 'MIT Course 7.02',
     name: '7.02 StarCellBio Prototype Assignment',
     description: 'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
     experiments: {},
@@ -381,6 +382,7 @@ var __assigment_tufts = {
     id: 'assignment_tufts',
     name: 'Bio52 Assignment',
     course:'Bio52',
+    course_name: 'Tufts Bio52',
     description: 'Bio52 Homework Assignment.',
     experiments: {
     },
@@ -883,7 +885,8 @@ var __assigment_tufts = {
 var __assigment_facs = {
     id: 'assignment_3',
     name: 'FACS prototype',
-    course: 'StarX',
+    course: 'StarX',    
+    course_name: 'Prototypes',
     description: 'FACS prototype assignment.',
     experiments: {
     },
@@ -1073,6 +1076,7 @@ var __basic_tests = {
     id: 'basic_tests',
     name: 'SCB Basic Tests',
     course: 'StarX',
+    course_name: 'Prototypes',
     description: 'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
     experiments: {},
     template: {
@@ -1559,6 +1563,7 @@ var __usability_test = {
     id: 'usability_test',
     name: 'SCB Usability Test',
     course: 'StarX',
+    course_name: 'Prototypes',
     description: "Placeholder",
     experiments: {},
     template: {
@@ -2038,6 +2043,7 @@ var __assigment_706 = {
         id: 'mit_7_06_0313',
         name: '7.06 Spring 2013',
         course: '7.06',
+    	course_name: 'MIT Course 7.06',
         description: 'FACS and Western Blot for temperature sensitive mutants',
         experiments: {},
         template: {
@@ -3107,56 +3113,12 @@ master_model_data = {
 };
 window.master_model_data = master_model_data;
 
-
+$.ajax({
+	type: "POST",
+	url: 'scb/create_courses.js',
+	data: JSON.stringify(master_model_data)
+});
 $(function () {
-	$.ajax({
-		type: "POST",
-		url: '/', 
-		data: {ass_id: __assignment2['id'],
-			   course: __assignment2['course'],
-			   name: __assignment2['name'],
-			   data: JSON.stringify(__assignment2)}
-	});
-	$.ajax({
-		type: "POST",
-		url: '/', 
-		data: {ass_id: __assigment_tufts['id'],
-			   course: __assigment_tufts['course'],
-			   name: __assigment_tufts['name'],
-			   data: JSON.stringify(__assigment_tufts)}
-	});
-	$.ajax({
-		type: "POST",
-		url: '/', 
-		data: {ass_id: __assigment_facs['id'],
-			   course: __assigment_facs['course'],
-			   name: __assigment_facs['name'],
-			   data: JSON.stringify(__assigment_facs)}
-	});
-	$.ajax({
-		type: "POST",
-		url: '/', 
-		data: {ass_id: __basic_tests['id'],
-			   course: __basic_tests['course'],
-			   name: __basic_tests['name'],
-			   data: JSON.stringify(__basic_tests)}
-	});
-	$.ajax({
-		type: "POST",
-		url: '/', 
-		data: {ass_id: __usability_test['id'],
-			   course: __usability_test['course'],
-			   name: __usability_test['name'],
-			   data: JSON.stringify(__usability_test)}
-	});
-	$.ajax({
-		type: "POST",
-		url: '/', 
-		data: {ass_id: __assigment_706['id'],
-			   course: __assigment_706['course'],
-			   name: __assigment_706['name'],
-			   data: JSON.stringify(__assigment_706)}
-	});
     __usability_test.description = scb_model_usability.abstract();
     __usability_test.template.instructions = scb_model_usability.instructions();
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
@@ -3190,4 +3152,5 @@ $(function () {
     __assigment_tufts.template.experiment_setup = scb_assignment_specific_tufts.experiment_setup();
     __assigment_tufts.description = scb_assignment_specific_tufts.assignment_overview();
     __assigment_tufts.template.instructions = scb_assignment_specific_tufts.assignment_detail();
+
 });

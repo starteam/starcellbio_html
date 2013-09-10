@@ -52,13 +52,13 @@ class StatusesAdmin(admin.ModelAdmin):
 #         return "{0} {1}".format(self.code, self.owner)
 
 class Course(models.Model):
-	code = models.CharField(max_length=15)
-	course_name = models.CharField(max_length=12)
+	code = models.CharField(max_length=50, primary_key=True)
+	course_name = models.TextField()
 	
 #data refers to JSON for information
 class Assignment(models.Model):
 	courseID = models.ForeignKey(Course, related_name='assignments')
-	assignmentID = models.TextField(primary_key=True)
+	assignmentID = models.CharField(max_length=50, primary_key=True)
 	assignmentName = models.TextField(max_length = 50)
 	data = models.TextField()
 
