@@ -5,6 +5,7 @@ FACS Main View
 @param global_template
 @param assignment AssignmentView
 @param experiment
+@param context
 @param facs
 @param t
 @param kind
@@ -15,6 +16,7 @@ FACS Main View
 <div class='scb_s_facs_view'>
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
+    {param context:$context /}
     {/call}
     {call scb_common.assignment_step}
     {param step:6/}

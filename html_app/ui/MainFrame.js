@@ -97,7 +97,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                         // if experiment_id is invalid go to assignment
                         alert('Experiment ' + state.experiment_id + ' does not exist.');
                         state.onhashchange = false;
-                        state.view = 'assignment';
+                        if(context.auth && context.auth.logged_in)
+                        	state.view = 'profile';
+                        else
+                        	state.view = 'assignment';
                         delete state.experiment_id;
                         scb.ui.static.MainFrame.update_hash(state);
                         ret.redisplay = true;
@@ -109,7 +112,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 // if assignment_id is invalid go to assignments
                 alert('Assignment ' + state.assignment_id + ' does not exist.');
                 state.onhashchange = false;
-                state.view = 'assignments';
+                if(context.auth && context.auth.logged_in)
+                     state.view = 'profile';
+                else
+                	state.view = 'assignments';
                 delete state.assignment_id;
                 scb.ui.static.MainFrame.update_hash(state);
                 ret.redisplay = true;

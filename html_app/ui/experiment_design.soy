@@ -4,6 +4,7 @@
 * Experiment design
 * @param t template
 * @param global_template
+* @param context
 * @param assignment Assignment model
 * @param experiment Experiment model
 */
@@ -11,6 +12,7 @@
 <div class='scb_s_experiment_design_view'>
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
+    {param context:$context /}
     {/call}
     {call scb_common.assignment_step}
         {param step:3/}

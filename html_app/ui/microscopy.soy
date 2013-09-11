@@ -4,6 +4,7 @@
 * Assignment selector
 * @param t template
 * @param global_template
+* @param context
 * @param assignment AssignmentView
 * @param experiment
 * @param microscopy MicroscopyView
@@ -16,6 +17,7 @@
 <div class='scb_s_microscopy_view'>
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
+    {param context:$context /}
     {/call}
     {call scb_common.assignment_step}
         {param step:6/}

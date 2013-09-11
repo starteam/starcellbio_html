@@ -321,6 +321,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             experiment: state.experiment,
             western_blot: state.western_blot,
             rows: rows_state.rows,
+            context: gstate.context,
             rows_valid: rows_state.valid,
             kind: kind,
             kinds: template.lysate_kinds,

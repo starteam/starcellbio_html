@@ -25,24 +25,24 @@ scb.ui.ProfileView = function scb_ui_ProfileView(gstate) {
 				}
 				var model = gstate.context.master_model;
 
-// 				model.assignments = {
-// 					list: listing
-// 				};
-// 				gstate.context.master_model.assignments = model.assignments;
-// 				assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
-// 				courses = _.groupBy(assignments.list, function (assignment) {
-// 					return (assignment.course);
-// 				});
-// 				console.log(assignments);
-// 				console.log(courses);
-
+				model.assignments = {
+					list: listing
+				};
+				model.assignments.selected_id = listing[0].id;
+				gstate.context.master_model.assignments = model.assignments;
+				self.assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
+				self.courses = _.groupBy(self.assignments.list, function (assignment) {
+					return (assignment.course);
+				});
+				workarea.html(scb_profile.main({
+					global_template: gstate.context.master_model,
+					assignments: self.assignments,
+					context: gstate.context,
+					courses: self.courses,
+				}));	
 			}
 		});
-		workarea.html(scb_assignments.main({
-			global_template: gstate.context.master_model,
-			assignments: assignments,
-			courses: courses,
-		}));	
+
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
     }

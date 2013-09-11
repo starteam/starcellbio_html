@@ -808,6 +808,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         workarea.html(scb_experiment_setup.main({
             global_template: gstate.context.master_model,
             t: template,
+            context: gstate.context,
             assignment: state.assignment,
             experiment: state.experiment,
             headings: headings,

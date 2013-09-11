@@ -72,7 +72,8 @@ scb.ui.HomepageView = function scb_ui_HomepageView(gstate) {
 	self.show = function(state) {
 		var workarea = gstate.workarea;
 		workarea.html(scb_homepage.main({
-			global_template : gstate.context.master_model
+			global_template : gstate.context.master_model,
+			context: gstate.context
 		}));
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(),gstate.workarea,false);
         document.title = "Home - StarCellBio";

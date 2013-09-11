@@ -1,15 +1,18 @@
-{namespace scb_assignments}
+{namespace scb_profile}
 
 /**
 * Assignment selector
 * @param global_template
+* @param context
 * //@/param t template
-* @param assignments AssignmentsView
+* @param assignments ProfileView
 * @param courses // group Assignments by Course
 */
 {template .main}
 <div class='scb_s_assignments_view'>
     {call scb_homepage.display_header}
+    {param global_template:$global_template /}
+    {param context:$context /}
     {/call}
     {call scb_common.assignment_step}
         {param step:1/}
@@ -87,7 +90,7 @@ Assignment assignments FIX
             <div class='scb_s_assignments_sidebar_course'>{$course}</div>
         {foreach $assignment in $courses[$course]}
         <li class='scb_s_assignments_sidebar_name'>
-            <a href='#view={if $assignment.id == $assignments.selected_id}assignment{else}assignments{/if}&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}</a>
+            <a href='#view={if $assignment.id == $assignments.selected_id}assignment{else}profile{/if}&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}</a>
         </li>
         {if $assignment.id == $assignments.selected_id}
             {call .display_experiments}

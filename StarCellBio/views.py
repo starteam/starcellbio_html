@@ -81,20 +81,26 @@ def create_courses(request, **kwargs):
 		return response
 		
 def get_courses(request, **kwargs):
+	import ast
 	list = []
 # 	import pudb
 # 	pudb.set_trace()
+	retval = []
 	if(UserCourse.objects.filter(user = request.user).count()>0):
 		usercourse = UserCourse.objects.filter(user=request.user)[0]
 		course = Course.objects.filter(usercourses = usercourse)
 		assignments = course[0].assignments.all()
 		for a in assignments:
-			import ast
 			dictionary = ast.literal_eval(a.data)
 			list.append(json.dumps(dictionary))
-		response = HttpResponse("var get_courses_result = {0};".format( list))
-		response.set_cookie("scb_username", request.user.username)
-		response['Content-Type'] = 'text/javascript'
-		return response
+		retval = {'list': json.dumps(list), 'is_auth': True, 'user': request.user.username}
 	else:
-		HttpResponse('failed')
+		all =[]
+		for a in assignments:
+			dictionary = ast.literal_eval(a.data)
+			all.append(json.dumps(dictionary))
+		retval = {'list': json.dumps(all), 'is_auth': False, 'user': request.user.username}
+	response = HttpResponse("var get_courses_result = {0};".format(retval))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response

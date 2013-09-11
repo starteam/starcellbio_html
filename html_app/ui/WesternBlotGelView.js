@@ -296,6 +296,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
             assignment: state.assignment,
             experiment: state.experiment,
             western_blot: state.western_blot,
+            context: gstate.context,
             western_blot_gel: state.western_blot_gel,
             rows: rows,
             kind: kind,

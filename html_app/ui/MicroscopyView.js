@@ -884,6 +884,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             global_template: gstate.context.master_model,
             assignment: state.assignment,
             experiment: state.experiment,
+            context: gstate.context,
             microscopy: state.microscopy,
             t: template,
             rows: rows_state.rows,
