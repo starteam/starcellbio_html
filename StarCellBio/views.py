@@ -93,14 +93,13 @@ def get_courses(request, **kwargs):
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
 			list.append(json.dumps(dictionary))
-		retval = {'list': json.dumps(list), 'is_auth': True, 'user': request.user.username}
+		retval = {'list': list, 'is_auth': True}
 	else:
 		all =[]
-		for a in assignments:
+		for a in Assignment.objects.all():
 			dictionary = ast.literal_eval(a.data)
 			all.append(json.dumps(dictionary))
-		retval = {'list': json.dumps(all), 'is_auth': False, 'user': request.user.username}
-	response = HttpResponse("var get_courses_result = {0};".format(retval))
-	response.set_cookie("scb_username", request.user.username)
+		retval = {'list': all, 'is_auth': False}
+	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
 	response['Content-Type'] = 'text/javascript'
 	return response
