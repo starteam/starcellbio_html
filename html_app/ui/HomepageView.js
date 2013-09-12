@@ -68,7 +68,6 @@ scb.ui.static.HomepageView.register = function(workarea) {
 
 scb.ui.HomepageView = function scb_ui_HomepageView(gstate) {
 	var self = this;
-
 	self.show = function(state) {
 		var workarea = gstate.workarea;
 		workarea.html(scb_homepage.main({

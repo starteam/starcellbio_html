@@ -58,8 +58,7 @@ def get_model(request):
     
 def create_courses(request, **kwargs):
 	if(request.method == 'POST'):
-# 		import pudb
-# 		pudb.set_trace()
+
 		jstr=request.raw_post_data
 		jsondata = json.loads(jstr)
 		if(jsondata):
@@ -86,19 +85,19 @@ def get_courses(request, **kwargs):
 # 	import pudb
 # 	pudb.set_trace()
 	retval = []
-	if(UserCourse.objects.filter(user = request.user).count()>0):
+	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
 		usercourse = UserCourse.objects.filter(user=request.user)[0]
 		course = Course.objects.filter(usercourses = usercourse)
 		assignments = course[0].assignments.all()
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
-			list.append(json.dumps(dictionary))
+			list.append(dictionary)
 		retval = {'list': list, 'is_auth': True}
 	else:
 		all =[]
 		for a in Assignment.objects.all():
 			dictionary = ast.literal_eval(a.data)
-			all.append(json.dumps(dictionary))
+			all.append(dictionary)
 		retval = {'list': all, 'is_auth': False}
 	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
 	response['Content-Type'] = 'text/javascript'

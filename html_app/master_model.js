@@ -3106,19 +3106,70 @@ master_model_data = {
     app_description: 'StarCellBio Placeholder',
     //'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.',
     assignments: {
-        list: [ __assigment_facs, __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts
+        list: [ 
+        __assigment_facs, __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts
         ]
     },
     ui: {}
 };
 window.master_model_data = master_model_data;
-
 $.ajax({
 	type: "POST",
 	url: 'scb/create_courses.js',
 	data: JSON.stringify(master_model_data)
 });
+
 $(function () {
+	console.log(get_courses_result);
+	var usability_test = {};
+	var assignment_706 = {};
+	var assignment_tufts = {};	
+	for (var x = 0; x < get_courses_result.list.length; x++){
+		if(get_courses_result.list[x].id == 'usability_test'){
+			usability_test = get_courses_result.list[x];
+			usability_test.description = scb_model_usability.abstract();
+			usability_test.template.instructions = scb_model_usability.instructions();
+			usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
+			usability_test.template.experiment_setup = scb_model_usability.experiment_setup();
+			get_courses_result.list[x] = usability_test;
+		}
+		if(get_courses_result.list[x].id == 'mit_7_06_0313'){
+			assignment_706 = get_courses_result.list[x];
+			assignment_706.description = scb_assignment_specific_mit706s13.assignment_overview();
+    		assignment_706.template.instructions = scb_assignment_specific_mit706s13.assignment_detail();
+    		assignment_706.template.experiment_setup = scb_assignment_specific_mit706s13.experiment_setup();
+
+			assignment_706.template.ui.experiment_setup.actions.push({
+				name: 'ADD MULTIPLE ROWS',
+				open: 'mit706s13.setup',
+				css: {
+					width: '800px',
+					height: '900px',
+					left: '100px',
+					top: '000px'
+				}
+			});
+			get_courses_result.list[x] = assignment_706;
+		}
+		if(get_courses_result.list[x].id == 'assignment_tufts'){
+			assignment_tufts = get_courses_result.list[x];
+			assignment_tufts.template.ui.experiment_setup.actions.push({
+				name: 'ADD MULTIPLE ROWS',
+				open: 'mit706s13.setup',
+				css: {
+					width: '600px',
+					height: '400px',
+					left: '300px',
+					top: '000px'
+				}
+			});
+			assignment_tufts.template.experiment_setup = scb_assignment_specific_tufts.experiment_setup();
+			assignment_tufts.description = scb_assignment_specific_tufts.assignment_overview();
+			assignment_tufts.template.instructions = scb_assignment_specific_tufts.assignment_detail();
+			get_courses_result.list[x] = assignment_tufts;
+			
+		}
+	}
     __usability_test.description = scb_model_usability.abstract();
     __usability_test.template.instructions = scb_model_usability.instructions();
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
