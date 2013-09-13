@@ -62,6 +62,15 @@ class Assignment(models.Model):
 	assignmentName = models.TextField(max_length = 50)
 	data = models.TextField()
 
+class StudentAssignment(models.Model):
+    student = models.ForeignKey(User, related_name='student')
+    course = models.ForeignKey(Course, related_name='sassignments')
+    assignmentID = models.CharField(max_length=50, primary_key=True)
+    assignmentName = models.TextField(max_length = 50)
+    token = models.IntegerField()
+    data = models.TextField()
+
+
 # class CourseAdmin(admin.ModelAdmin):
 #     list_display = ('code', 'owner', 'status')
 # 
@@ -94,26 +103,26 @@ class UserCourse(models.Model):
 # 	
 
 
-class StudentAssignment(models.Model):
-    student = models.ForeignKey(User, related_name='student')
-    assignment = models.ForeignKey(Assignment, related_name='assignment')
-    submitted = models.TextField() # this auto-submitts if assignment has end_date on first access after assignment's end_date
-    current = models.TextField()
+# class StudentAssignment(models.Model):
+#     student = models.ForeignKey(User, related_name='student')
+#     assignment = models.ForeignKey(Assignment, related_name='assignment')
+#     submitted = models.TextField() # this auto-submitts if assignment has end_date on first access after assignment's end_date
+#     current = models.TextField()
+# 
+#     def initialize(self):
+#         self.timestamp = 0
+#         self.current = self.assignment.template
+#         self.save()
+# 
+#     class Meta:
+#         unique_together = ('student', 'assignment')
 
-    def initialize(self):
-        self.timestamp = 0
-        self.current = self.assignment.template
-        self.save()
 
-    class Meta:
-        unique_together = ('student', 'assignment')
-
-
-admin.site.register(UserAssignments)
-admin.site.register(UserAssignmentsLog)
+# admin.site.register(UserAssignments)
+# admin.site.register(UserAssignmentsLog)
 admin.site.register(UserCourse)
 admin.site.register(Course)
 # admin.site.register(Course, CourseAdmin)
 admin.site.register(Assignment)
 admin.site.register(StudentAssignment)
-admin.site.register(Statuses, StatusesAdmin)
+# admin.site.register(Statuses, StatusesAdmin)

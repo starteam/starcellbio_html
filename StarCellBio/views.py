@@ -81,24 +81,53 @@ def create_courses(request, **kwargs):
 		
 def get_courses(request, **kwargs):
 	import ast
+	import random
 	list = []
-# 	import pudb
-# 	pudb.set_trace()
 	retval = []
+	token = random.randrange(0, 1000000)
 	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
 		usercourse = UserCourse.objects.filter(user=request.user)[0]
 		course = Course.objects.filter(usercourses = usercourse)
 		assignments = course[0].assignments.all()
+		if(course[0].sassignments.count() == 0 or course[0].sassignments.filter(data='').count() > 0):
+			for a in assignments:
+				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token, data = '')
+				sa.save()
+		else:
+			assignments = course[0].assignments.all()
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
 			list.append(dictionary)
-		retval = {'list': list, 'is_auth': True}
+		retval = {'list': list, 'is_auth': True, 'is_selected': list[0]['id'], 'token': token}
 	else:
 		all =[]
 		for a in Assignment.objects.all():
 			dictionary = ast.literal_eval(a.data)
 			all.append(dictionary)
-		retval = {'list': all, 'is_auth': False}
+		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token}
 	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
 	response['Content-Type'] = 'text/javascript'
 	return response
+	
+def post_state(request, **kwargs):
+	jstr = request.raw_post_data
+	jsondata = json.loads(jstr)
+	jsonmodel = jsondata['model']
+	import pudb 
+	pudb.set_trace()
+	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
+		usercourse = UserCourse.objects.filter(user=request.user)[0]
+		course = Course.objects.filter(usercourses = usercourse)
+		sassignments = course[0].sassignments.all()
+		retval = {'is_anonymous': False, 'valid_token':False, 'token': jsondata['token']}
+		for sa in sassignments:
+			for x in jsondata['model']['assignments']['list']:
+				if(sa.token == jsondata['token'] and sa.assignmentID == x.id):
+						sa.data = x
+						retval = {'is_anonymous': False, 'valid_token': True, 'token': jsondata['token']}
+	else:
+		retval = {'is_anonymous': True, 'valid_token': False, 'token': jsondata['token']}
+	response = HttpResponse("var post_state_result = {0};".format(json.dumps(retval)))
+	response['Content-Type'] = 'text/javascript'
+	return response
+

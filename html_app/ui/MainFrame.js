@@ -25,6 +25,7 @@ scb.ui.static.MainFrame.update_hash = function (state) {
 
 scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     var self = this;
+    var pending_save = false;
     context.main_frame = self;
     self.sections = {};
 
@@ -97,10 +98,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                         // if experiment_id is invalid go to assignment
                         alert('Experiment ' + state.experiment_id + ' does not exist.');
                         state.onhashchange = false;
-                        if(get_courses_result.is_auth)
-                        	state.view = 'profile';
-                        else
-                        	state.view = 'assignment';
+                        state.view = 'assignment';
                         delete state.experiment_id;
                         scb.ui.static.MainFrame.update_hash(state);
                         ret.redisplay = true;
@@ -112,10 +110,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 // if assignment_id is invalid go to assignments
                 alert('Assignment ' + state.assignment_id + ' does not exist.');
                 state.onhashchange = false;
-                if(get_courses_result.is_auth)
-                     state.view = 'profile';
-                else
-                	state.view = 'assignments';
+                state.view = 'assignments';
                 delete state.assignment_id;
                 scb.ui.static.MainFrame.update_hash(state);
                 ret.redisplay = true;
@@ -210,10 +205,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     scb.ui.static.MainFrame.clear_NO_PROMPT = function () {
         $.ajax({url: '/accounts/logout/', async: false, timeout: 5 });
-        if(get_courses_result.is_auth)	
-        	self.show({view:'profile'});
-        else
-        	self.show({view: 'assignments'});
+        self.show({view: 'assignments'});
         master_model = master_model_data;
         scb.ui.static.MainFrame.save();
         starcellbio(context.ui, master_model);
@@ -283,10 +275,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				iframe.find(".primaryAction").click(function(){
 						   $('.iframe').load(function(){
 						   	  var profile = $('.iframe').contents();
-						   	  console.log(profile);
+						   	  //console.log(profile);
 						   	  if(profile[0].body.textContent.indexOf('profile') >0){
 						   	  	  parent.document.location.reload();
-						   	  	  //scb.ui.static.MainFrame.refresh({view: 'profile'});
 							   	  }
 						   });
 					});
@@ -378,7 +369,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'assignments') {
             if (!parsed.assignment) {
-                state.assignment_id = assignments.selected_id ? assignments.selected_id : assignments.list[0].id;
+                state.assignment_id = assignments.selected_id ? assignments.selected_id : get_courses_result.is_selected;
                 state.onhashchange = false;
                 self.show(state);
                 return;
@@ -393,7 +384,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'profile') {
             if (!parsed.assignment) {
-                state.assignment_id = assignments.selected_id ? assignments.selected_id : get_courses_result.list[0].id;
+                state.assignment_id = assignments.selected_id ? assignments.selected_id : get_courses_result.is_selected;
                 state.onhashchange = false;
                 self.show(state);
                 return;
@@ -417,6 +408,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             }
         }
         if (state.view == 'experiment_design') {
+        	$.ajax({
+				type: "POST",
+				url: 'scb/post_state.js',
+				data: JSON.stringify(parsed.context.master_model),
+				success: function (data){
+					console.log(data);
+				}
+			});
             if (!parsed.experiment) {
                 delete state.onhashchange;
                 var experiment = parsed.assignment.experiments.start({});
@@ -437,6 +436,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'experiment_setup') {
             //TODO: if no experiment than error
+            $.ajax({
+				type: "POST",
+				url: 'scb/post_state.js',
+				data: JSON.stringify(parsed.context.master_model),
+				success: function (data){
+					console.log(data);
+				}
+			});
             self.sections.experiment_setup.show({
                 workarea: workarea,
                 assignment: parsed.assignment,
@@ -446,6 +453,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'experiment_run') {
+
             self.sections.experiment_setup.show({
                 workarea: workarea,
                 assignment: parsed.assignment,
@@ -455,6 +463,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'facs') {
+
             if (!parsed.facs) {
                 delete state.onhashchange;
                 var facs = parsed.experiment.facs_list.start({});
@@ -475,6 +484,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'select_technique') {
+
             self.sections.select_technique.show({
                 workarea: workarea,
                 assignment: parsed.assignment,
@@ -483,6 +493,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
         }
         if (state.view == 'western_blot') {
+
             if (!parsed.western_blot) {
                 var western_blot = parsed.experiment.western_blot_list.start({});
                 state.western_blot_id = western_blot.id;
@@ -509,6 +520,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'microscopy'){
+
         	if(!parsed.microscopy) {
         		var microscopy = parsed.experiment.microscopy_list.start({});
         		state.microscopy_id=microscopy.id;
@@ -528,6 +540,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         	});
         }
         if (state.view == 'western_blot_gel') {
+
             if (!parsed.western_blot) {
                 state.onhashchange = false;
                 state.view = 'select_technique';
@@ -561,6 +574,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'experiment_last') {
+
             if (parsed.experiment) {
                 state.view = parsed.experiment.last_view ? parsed.experiment.last_view : 'experiment_design';
                 self.show(state);
@@ -582,9 +596,30 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (get_courses_result.is_auth) {
             $('.scb_s_login_status').attr('src', 'images/header/scb_signout_text.png');
+            $('.scb_f_try_an_experiment').click();
         }
+        scb.ui.static.MainFrame.pending_save(parsed);
         scb.ui.static.MainFrame.in_ajax_display();
 
+    }
+    
+    scb.ui.static.MainFrame.pending_save = function(parsed){
+    	if(!pending_save){
+    		setTimeout(function() {
+    			pending_save = false;
+    			console.log('believe');
+    			post_obj = {'token': get_courses_result.token, 'model': parsed.context.master_model}
+    			$.ajax({
+					type: "POST",
+					url: 'scb/post_state.js',
+					data: JSON.stringify(post_obj),
+					success: function (data){
+						console.log(data);
+					}
+				});
+    		}, 15000);
+    		pending_save = true;
+    	}
     }
 
     scb.ui.static.MainFrame.refresh = function (navigation_state) {
