@@ -110,11 +110,12 @@ def get_courses(request, **kwargs):
 	return response
 	
 def post_state(request, **kwargs):
+	import pudb 
+	pudb.set_trace()
+	print request.user
 	jstr = request.raw_post_data
 	jsondata = json.loads(jstr)
 	jsonmodel = jsondata['model']
-	import pudb 
-	pudb.set_trace()
 	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
 		usercourse = UserCourse.objects.filter(user=request.user)[0]
 		course = Course.objects.filter(usercourses = usercourse)

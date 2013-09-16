@@ -412,6 +412,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				type: "POST",
 				url: 'scb/post_state.js',
 				data: JSON.stringify(parsed.context.master_model),
+				beforeSend: function (xhr) { 
+					xhr.setRequestHeader('Authorization', 'Basic XXXXXX'); 
+				},
 				success: function (data){
 					console.log(data);
 				}
