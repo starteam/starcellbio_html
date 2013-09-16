@@ -94,7 +94,7 @@ def get_courses(request, **kwargs):
 				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token, data = '')
 				sa.save()
 		else:
-			assignments = course[0].assignments.all()
+			assignments = course[0].sassignments.all()
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
 			list.append(dictionary)
@@ -106,12 +106,11 @@ def get_courses(request, **kwargs):
 			all.append(dictionary)
 		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token}
 	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'
 	return response
 	
 def post_state(request, **kwargs):
-	import pudb 
-	pudb.set_trace()
 	print request.user
 	jstr = request.raw_post_data
 	jsondata = json.loads(jstr)
@@ -123,12 +122,14 @@ def post_state(request, **kwargs):
 		retval = {'is_anonymous': False, 'valid_token':False, 'token': jsondata['token']}
 		for sa in sassignments:
 			for x in jsondata['model']['assignments']['list']:
-				if(sa.token == jsondata['token'] and sa.assignmentID == x.id):
-						sa.data = x
+				if(sa.token == jsondata['token'] and sa.assignmentID == x['id']):
+						sa.data = json.loads(json.dumps(x))
+						sa.save()
 						retval = {'is_anonymous': False, 'valid_token': True, 'token': jsondata['token']}
 	else:
 		retval = {'is_anonymous': True, 'valid_token': False, 'token': jsondata['token']}
 	response = HttpResponse("var post_state_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'
 	return response
 

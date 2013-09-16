@@ -61,7 +61,7 @@ scb.ui.static.HomepageView.register = function(workarea) {
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_f_try_an_experiment', function (e) {
-        scb.ui.static.MainFrame.clear_NO_PROMPT();
+        //scb.ui.static.MainFrame.clear_NO_PROMPT();
     });
 
 };

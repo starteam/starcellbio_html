@@ -408,17 +408,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             }
         }
         if (state.view == 'experiment_design') {
-        	$.ajax({
-				type: "POST",
-				url: 'scb/post_state.js',
-				data: JSON.stringify(parsed.context.master_model),
-				beforeSend: function (xhr) { 
-					xhr.setRequestHeader('Authorization', 'Basic XXXXXX'); 
-				},
-				success: function (data){
-					console.log(data);
-				}
-			});
             if (!parsed.experiment) {
                 delete state.onhashchange;
                 var experiment = parsed.assignment.experiments.start({});
@@ -438,15 +427,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'experiment_setup') {
-            //TODO: if no experiment than error
-            $.ajax({
-				type: "POST",
-				url: 'scb/post_state.js',
-				data: JSON.stringify(parsed.context.master_model),
-				success: function (data){
-					console.log(data);
-				}
-			});
             self.sections.experiment_setup.show({
                 workarea: workarea,
                 assignment: parsed.assignment,
@@ -624,7 +604,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     		pending_save = true;
     	}
     }
-
     scb.ui.static.MainFrame.refresh = function (navigation_state) {
         var state = navigation_state || $.deparam(location.hash.replace(/^#/, ''), true);
         state.onhashchange = false;
