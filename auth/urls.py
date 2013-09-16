@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+import views
 
 # import pudb
 # pudb.set_trace()

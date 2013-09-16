@@ -14,6 +14,7 @@ MIDDLEWARE_CLASSES = (
 AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+ACCOUNT_SIGNUP_FORM_CLASS = 'forms.SignupForm'
 
 ROOT_URLCONF = 'example.urls'
 
