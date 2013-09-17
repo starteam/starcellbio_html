@@ -48,6 +48,7 @@ mit706s13.register = function (dialog, state) {
     });
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_add', function (e) {
         mit706s13.static.scb_mit706s16_inner_dialog_add(this, dialog, state);
+    	$('.scb_f_experiment_setup_new_set_up').click();
         $(this).focus();
     });
 

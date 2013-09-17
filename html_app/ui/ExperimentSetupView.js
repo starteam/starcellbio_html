@@ -179,9 +179,15 @@ scb.ui.static.ExperimentSetupView.scb_f_open_select_technique = function (param)
 
 
 scb.ui.static.ExperimentSetupView.register = function (workarea) {
+	scb.utils.off_on(workarea, 'ready', '.scb_s_experiment_setup_new_set_up', function(e) {
+		if($('.scb_f_experiment_setup_new_set_up').prop('checked') == 'checked'){
+			$('.scb_s_experiment_setup_new_set_up').css('visibility', 'visible');
+			$('.scb_f_experiment_setup_new_set_up').prop('checked','checked');
+		}
+	});
     scb.utils.off_on(workarea, 'click', '.scb_f_open_experiment_setup_readonly', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly(this, e);
-    })
+    });
 
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_action_open_add_samples_dialog', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog(this, workarea);
@@ -196,6 +202,10 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
 
     scb.utils.off_on(workarea, 'click', '.scb_f_open_select_technique', function (e) {
         scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_new_set_up', function(e){
+    	$('.scb_s_experiment_setup_new_set_up').css('visibility', 'visible');
+    	setup = true;
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_new_row', function (e) {
         var mode = $('.scb_s_experiment_setup_details_view', workarea).attr('mode');
@@ -792,7 +802,6 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
 
 scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
     var self = this;
-
     self.show = function (state) {
         var workarea = state.workarea;
         var experiment = state.experiment;
@@ -816,12 +825,19 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             new_rows: new_rows,
             kind: state.mode
         }));
+        if(state.setup){
+			$('.scb_s_experiment_setup_new_set_up').css('visibility', 'visible');
+			$('.scb_f_experiment_setup_new_set_up').prop('checked','checked');
+        }
         state.experiment.last_view = state.last_view;
         if (state.mode == 'readonly') {
             $('.scb_s_experiment_setup_table_add_samples_dialog').hide();
+        	$('.scb_s_experiment_setup_table').css('visibility', 'visible');
+        	$('.scb_s_experiment_setup_instructions').css('display', 'none');
         }
         else {
             $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen: false})
+
         }
         if (!_.isUndefined(template.setup_video_box)) {
             var x = $('.scb_s_experiment_setup_video_box', workarea);

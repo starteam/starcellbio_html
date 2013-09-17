@@ -165,8 +165,8 @@
     display: inline-block;
     background-image: url('../images/homepage/SCB_Homepage_HeroImage.png');
     height: 318px;
-    width: 667px;
-    margin-left:20px
+    width: 678px;
+    margin-left:7px
 }
 
 .scb_s_homepage_top_left_image {
@@ -235,13 +235,14 @@
     margin-top: 4px;
 }
 
+
 .scb_s_homepage_bottom {
     display: block;
     height: 207px;
     margin-top: 15px;
     border-radius: 5px;
-    margin-left: 23px;
-    width: 925px;
+    margin-left: 11px;
+    width: 936px;
     background-image: url('../images/homepage/SCB_Homepage_LowerBG.png');
 
 }
@@ -367,6 +368,7 @@
     height: 200px;
     vertical-align: top;
     position: relative;
+    left: 15px;
 }
 
 .scb_s_homepage_technique_title {
@@ -499,7 +501,7 @@ a {
 	top:50px;
 	left:20px;
 	width:250px;
-	background:black;
+	background:rgba(0,0,0,0.5);
 	line-height:18pt;
 }
 

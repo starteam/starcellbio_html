@@ -432,7 +432,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 assignment: parsed.assignment,
                 experiment: parsed.experiment,
                 mode: 'readwrite',
-                last_view: 'experiment_setup'
+                last_view: 'experiment_setup',
+                setup: false
             });
         }
         if (state.view == 'experiment_run') {
@@ -442,7 +443,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 assignment: parsed.assignment,
                 experiment: parsed.experiment,
                 mode: 'readonly',
-                last_view: 'experiment_run'
+                last_view: 'experiment_run',
+                setup: true
             });
         }
         if (state.view == 'facs') {

@@ -3,12 +3,12 @@
   width: 960px;
 }
 .scb_s_assignment_sidebar {
-  margin-top: 8px;
+  margin-top: 9px;
   font-size: 12px;
   text-align: justify;
   display: inline-block;
   vertical-align: top;
-  width: 230px;
+  width: 247px;
   border-style: solid;
   border-width: 1px;
   border-color: #e0e0e0;
@@ -16,7 +16,7 @@
   margin-right: 10px;
   padding: 5px;
   background-color: white;
-  margin-left: 20px;
+  margin-left: 8px;
   box-shadow: 0 0 3px black;
   border-top-width: 8px;
 }

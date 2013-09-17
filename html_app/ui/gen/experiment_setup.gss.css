@@ -40,7 +40,6 @@
   width: 305px;
 }
 .scb_s_experiment_setup_choose_template {
-  height: 155px;
   width: 600px;
   display: block;
 }
@@ -61,11 +60,18 @@ table.scb_s_experiment_setup_table {
   margin-bottom: 75px;
   position: relative;
 }
+.scb_s_experiment_setup_new_set_up {
+  visibility: hidden;
+}
 .scb_s_western_blot_samples_select_all_abs {
   bottom: 0;
   margin-bottom: 65px;
   position: absolute;
   border-top: #80d1ae solid 2px;
+}
+.scb_s_experiment_setup_instructions {
+  width: 600px;
+  display: block;
 }
 .scb_s_experiment_setup_table_border {
   border-top: 1px solid #e0e0e0;

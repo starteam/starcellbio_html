@@ -75,7 +75,7 @@ div#main {
   background-color: #80d1ae;
   height: 1px;
   top: 23px;
-  left: 78px;
+  left: 65px;
 }
 .scb_s_experiment_step_horizontal_line_23 {
   position: absolute;
@@ -83,7 +83,7 @@ div#main {
   background-color: #80d1ae;
   height: 1px;
   top: 23px;
-  left: 168px;
+  left: 155px;
 }
 .scb_s_experiment_step_horizontal_line_34 {
   position: absolute;
@@ -91,7 +91,7 @@ div#main {
   background-color: #80d1ae;
   height: 1px;
   top: 23px;
-  left: 258px;
+  left: 245px;
 }
 .scb_s_experiment_step_horizontal_line_45 {
   position: absolute;
@@ -99,7 +99,7 @@ div#main {
   background-color: #80d1ae;
   height: 1px;
   top: 23px;
-  left: 348px;
+  left: 335px;
 }
 .scb_s_experiment_step_div {
   display: inline-block;
@@ -120,7 +120,7 @@ div#main {
   top: -25px;
   left: 300px;
   color: black;
-  font-size: 1.5em;
+  font-size: 13pt;
 }
 .scb_s_assignment_step_experiment {
   display: inline-block;
@@ -131,7 +131,7 @@ div#main {
   top: 8px;
   height: 1px;
   background-color: #14ac63;
-  font-size: 1.5em;
+  font-size: 13pt;
   left: 135px;
   width: 525px;
 }
@@ -162,7 +162,7 @@ div#main {
   padding: 5px;
   margin-left: -8px;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 11.5pt;
   text-decoration: none;
   color: white;
   display: inline-block;

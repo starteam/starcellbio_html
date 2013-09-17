@@ -62,7 +62,6 @@
 
 
 .scb_s_experiment_setup_choose_template {
-    height: 155px;
     width: 600px;
     display: block;
 }
@@ -91,6 +90,10 @@ table.scb_s_experiment_setup_table {
   position:relative;
 }
 
+.scb_s_experiment_setup_new_set_up{
+	visibility: hidden;	
+}
+
 .scb_s_western_blot_samples_select_all_abs{
   bottom: 0;
   margin-bottom:65px;
@@ -99,6 +102,11 @@ table.scb_s_experiment_setup_table {
 }
 
 .scb_s_experiment_setup_td {
+}
+
+.scb_s_experiment_setup_instructions{
+	width: 600px;
+	display: block;
 }
 
 
