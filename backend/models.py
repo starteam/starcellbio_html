@@ -65,7 +65,7 @@ class Assignment(models.Model):
 class StudentAssignment(models.Model):
     student = models.ForeignKey(User, related_name='student')
     course = models.ForeignKey(Course, related_name='sassignments')
-    assignmentID = models.CharField(max_length=50, primary_key=True)
+    assignmentID = models.CharField(max_length=50)
     assignmentName = models.TextField(max_length = 50)
     token = models.IntegerField()
     data = models.TextField()

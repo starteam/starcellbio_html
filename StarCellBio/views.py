@@ -89,12 +89,12 @@ def get_courses(request, **kwargs):
 		usercourse = UserCourse.objects.filter(user=request.user)[0]
 		course = Course.objects.filter(usercourses = usercourse)
 		assignments = course[0].assignments.all()
-		if(course[0].sassignments.count() == 0 or course[0].sassignments.filter(data='').count() > 0):
+		if(course[0].sassignments.filter(student=request.user).count() == 0 or course[0].sassignments.count() == 0 or course[0].sassignments.filter(data='').count() > 0):
 			for a in assignments:
 				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token, data = '')
 				sa.save()
 		else:
-			assignments = course[0].sassignments.all()
+			assignments = course[0].sassignments.filter(student=request.user)
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
 			list.append(dictionary)
