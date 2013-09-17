@@ -21,7 +21,10 @@ js_suffix='" charset="UTF-8"></script>\n'
 
 html_prefix = "<!DOCTYPE html><html><head><META http-equiv='Content-Type' content='text/html; charset=UTF-8'><meta http-equiv='content-type' content='text/html; charset=utf-8'><title>StarCellBio Prototype</title>\n"
 #html_prefix += '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=SourceSansPro">'
-html_suffix = "</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid=\"invalid\"'};</script></body>"
+html_suffix = js_prefix + "../scb/get_courses.js" + js_suffix
+html_suffix += js_prefix + "../scb/get_model.js" + js_suffix
+html_suffix += "</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid=\"invalid\"'};</script></body>"
+
 
 def index_html():
     global css,js

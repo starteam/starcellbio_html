@@ -34,25 +34,45 @@ scb.ui.static.HomepageView.register = function(workarea) {
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_f_create_student_account', function (e) {
-        document.location = '/accounts/signup';
+    	$(workarea).append(scb_auth.signup({}));
+        //document.location = '/accounts/signup';
+        
+		scb.utils.off_on(workarea, 'click', '.scb_f_signup_close_button', function () {
+			$('.scb_s_signup_dialog').detach();
+		});
+        $('.iframe').load(function(){
+
+				var iframe = $('.iframe').contents();
+
+				iframe.find(".primaryAction").click(function(){
+						   $('.iframe').load(function(){
+						   	  var profile = $('.iframe').contents();
+						   	  console.log(profile);
+						   	  if(profile[0].body.textContent.indexOf('profile') >0){
+						   	  	  scb.ui.static.MainFrame.refresh({view: 'profile'});
+							   	  }
+						   });
+					   
+					});
+			});
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_instructor_resources', function (e) {
         alert( "under construction!");
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_f_try_an_experiment', function (e) {
-        scb.ui.static.MainFrame.clear_NO_PROMPT();
+        //scb.ui.static.MainFrame.clear_NO_PROMPT();
     });
 
 };
 
 scb.ui.HomepageView = function scb_ui_HomepageView(gstate) {
 	var self = this;
-
 	self.show = function(state) {
 		var workarea = gstate.workarea;
 		workarea.html(scb_homepage.main({
-			global_template : gstate.context.master_model
+			global_template : gstate.context.master_model,
+			context: gstate.context
 		}));
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(),gstate.workarea,false);
         document.title = "Home - StarCellBio";

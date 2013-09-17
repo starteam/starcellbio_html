@@ -11,10 +11,11 @@ urlpatterns = patterns('',
                        # Examples:
                        url(r'^$', "StarCellBio.views.home", name='home'),
                        url(r'^index.html$', "StarCellBio.views.home"),
-                       url(r'^scb/is_auth/$', "StarCellBio.views.is_auth", name='is_auth'),
-
+                       url(r'^scb/get_model.js$', "StarCellBio.views.get_model", name='get_model'),
+                       url(r'^scb/create_courses.js$', "StarCellBio.views.create_courses", name='create_courses'),
+                       url(r'^scb/get_courses.js$', "StarCellBio.views.get_courses", name='get_courses'),
+                       url(r'^scb/post_state.js$', "StarCellBio.views.post_state", name='post_state'),
                        # url(r'^StarCellBio/', include('StarCellBio.foo.urls')),
-
                        # Uncomment the admin/doc line below to enable admin documentation:
                        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

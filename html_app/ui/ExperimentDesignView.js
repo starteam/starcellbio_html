@@ -136,6 +136,7 @@ scb.ui.ExperimentDesignView = function scb_ui_ExperimentDesignView(gstate) {
 		var workarea = state.workarea;
 		workarea.html(scb_experiment_design.main({
             global_template : gstate.context.master_model,
+            context: gstate.context,
 			t : state.assignment.template,
             assignment: state.assignment,
             experiment: state.experiment

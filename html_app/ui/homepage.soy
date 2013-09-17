@@ -3,11 +3,13 @@
 /**
 * Assignment selector
 * @param global_template
+* @param context
 */
 {template .main}
 <div class='scb_s_homepage_view'>
     {call .display_header}
     {param global_template:$global_template /}
+    {param context:$context /}
     {/call}
     {call scb_common.assignment_step}
     {param step:0/}
@@ -22,9 +24,7 @@
 /**
 Assignment title
 @/param global_template template
-
-TODO: this needs to be login/logout depending on the state
-
+@param context context
 */
 {template .display_header}
 <div class='scb_s_header' role='header'>
@@ -51,7 +51,12 @@ TODO: this needs to be login/logout depending on the state
             <img class='scb_s_user_guide_icon' src='images/header/scb_user_guide_icon.png' alt='' role='presentation'>
             <span class='scb_s_user_guide_text scb_s_header_tools_text'>USER GUIDE</span></a>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' alt='' role='presentation'>
-        <a class='scb_f_login' href='#view=assignments'><img class='scb_s_login_status' src='images/header/scb_signin_text.png'
+        <a class='scb_f_login' href='#view=assignments'><img class='scb_s_login_status' 
+        	{if $context.auth and $context.auth.logged_in}
+        		src='images/header/scb_signout_text.png'
+        	{else}
+        		src='images/header/scb_signin_text.png'
+        	{/if}
                                          alt='Sign in'></a>
     </span>
 

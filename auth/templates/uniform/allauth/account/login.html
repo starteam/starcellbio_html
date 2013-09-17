@@ -1,16 +1,26 @@
-{% extends "account/base.html" %}
+<style>
+
+body {
+
+    position: absolute;
+    background: #f4f6f8;
+    top:0px;
+    font-family: 'sourcesanspro-bold';
+    font-size: 10pt;
+    
+}
+
+</style>
 
 {% load url from future %}
 {% load i18n %}
 {% load uni_form_tags %}
 {% load account %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
-
 
 {% block content %}
-
-<h1>{% trans "Sign In" %}</h1>
+{% url 'account_setup' as setup %}
+<h2>{% trans "SIGN IN" %}</h2>
 
 {% if socialaccount.providers  %}
 <p>{% blocktrans with site.name as site_name %}Please sign in with one
@@ -32,6 +42,9 @@ below:{% endblocktrans %}</p>
 
 {% endif %}
 
+
+
+
 <form class="login uniForm" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
   <fieldset class="inlineLabels">
@@ -44,6 +57,8 @@ below:{% endblocktrans %}</p>
 
       <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
     </div>
+    
+    	<h3><a href="{% url 'account_signup' %}">{% trans "Not a member?" %}</a></h3>
   </fieldset>
 </form>
 

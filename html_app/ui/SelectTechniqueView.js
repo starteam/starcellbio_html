@@ -37,6 +37,7 @@ scb.ui.SelectTechniqueView = function scb_ui_SelectTechniqueView(gstate) {
         workarea.html(scb_select_technique.main({
             global_template: gstate.context.master_model,
             t: template,
+            context: gstate.context,
             assignment: state.assignment,
             experiment: state.experiment
         }));

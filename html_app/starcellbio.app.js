@@ -17,6 +17,7 @@ function starcellbio(jquery_selector_main, master_model) {
         {
             master_model = master_model_local;
         }
+        master_model.assignments = get_courses_result;
         var init_model = master_model.assignments ? master_model : master_model_data;
         window.master_model = init_model;
         for (var i in init_model.assignments.list) {

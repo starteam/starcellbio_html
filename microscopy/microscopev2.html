@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<?php
+		header('Access-Control-Allow-Origin: *');
+		?>
+<script type="text/javascript" src="jquery-1.7.2.js"></script>
+<script type="text/javascript" src="caman.full.js"></script>
+<script type="text/javascript" src="base64.js"></script>
+<script type="text/javascript" src="canvas2image.js"></script>
+
+<link rel="stylesheet" type="text/css" href="microscope.css">
+</style>
+
+</head>
+<body>
+<div class='scb_s_microscopy_samples_slide_area'>
+			<div id='scb_s_microscopy_lens_controls'>
+				<span class='scb_s_controls_note'>Note: Use keyboard arrow keys to navigate lens across the slide.</span>
+				<p/>
+				Light<p/>
+					<img src='images/microscopy/up.jpg' class ='scb_s_micro_arrows' id='brightup'/> <br/>
+					<img src ='images/microscopy/down.jpg' class ='scb_s_micro_arrows'id='brightdown'/><p/>
+				Focus: Rough<p/>
+					<img src ='images/microscopy/up.jpg' class ='scb_s_micro_arrows' id='blurup'/><br/>
+					<img src = 'images/microscopy/down.jpg' class ='scb_s_micro_arrows' id='blurdown'/><p/>
+				Focus: Fine<p/>
+					<img src = 'images/microscopy/fineup.jpg' class ='scb_s_micro_arrows' id='fblurup'/> <br/>
+					<img src = 'images/microscopy/finedown.jpg' class ='scb_s_micro_arrows'id='fblurdown'/><p/>
+				 <span class='scb_s_microscope_status'></span>
+			</div>
+			<!-- 
+<div class = 'scb_s_list_slides'>
+				<form>
+					<input type='radio' name='slides' value='images/microscopy/Brightfield/Sample_1_10X.jpg'>Sample 1</input>
+					<input type='radio' name='slides' value='images/microscopy/Brightfield/Sample_2_10X.jpg'>Sample 2</input>
+					<input type='radio' name='slides' value='images/microscopy/Brightfield/Sample_3_20X.jpg'>Sample 3</input>
+				</form>
+			</div>
+ -->
+	</div>	
+<!-- 	<script src = 'microv2.js'></script> -->
+</body>
+</html>

@@ -104,6 +104,35 @@ var MASTER_TEMPLATE = {
 		'nuclear' : {
 			name : 'Nuclear'
 		}
+	},
+	micro_kinds : {
+		'red':{
+			name: 'Red'
+		},
+		'pink':{
+			name: 'Pink'
+		},
+		'hi':{
+			name:'hi'
+		},
+		'orange':{
+			name: 'orange'
+		},
+		'yellow':{
+			name: 'yellow'
+		},
+		'black':{
+			name: 'black'
+		},
+		'purple':{
+			name: 'purple'
+		},
+		'blue':{
+			name: 'blue'
+		},
+		'green':{
+			name: 'green'
+		}
 	}
 
 };

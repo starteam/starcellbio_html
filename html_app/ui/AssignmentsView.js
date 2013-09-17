@@ -16,6 +16,7 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
         workarea.html(scb_assignments.main({
             global_template: gstate.context.master_model,
             assignments: assignments,
+            context: gstate.context,
             courses: courses,
         }));
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(), gstate.workarea);

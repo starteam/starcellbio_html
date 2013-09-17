@@ -8,7 +8,7 @@ import datetime
 from django.shortcuts import redirect
 import json
 import pudb
-from backend.models import UserAssignments, UserAssignmentsLog
+from backend.models import Statuses, Assignment, StudentAssignment, Course, UserCourse
 import bz2
 import StringIO
 from django.core.files.base import ContentFile
@@ -24,60 +24,112 @@ def home(request):
     #return redirect('static/index.html')
 
 
-def is_auth(request):
-    response = HttpResponse(json.dumps({'user': None, 'course': None}))
-    #pudb.set_trace()
-    course = None ## here comes course
-    #pudb.set_trace()
-    if request.user.is_authenticated() and course:
-        # Do something for authenticated users.
-        ua, created = UserAssignments.objects.get_or_create(user=request.user, course=course)
-        if request.method == 'GET':
-            ## this is load
-            if created:
-                ua.data = ''
-                command = {'load': '__assigment_tufts'}
-                ua.timestamp = 0
-                ual = UserAssignmentsLog.objects.create(user=request.user, timestamp=ua.timestamp, course=course)
-                cd = bz2.BZ2Compressor()
-                cd.compress(command)
-                cd = cd.flush()
-                cd = command
-                ual.data.save("{0}_{2}_{1}.json.bz".format(request.user.username, ua.timestamp, course),
-                              ContentFile(cd), save=True)
-                ual.save()
-                response = HttpResponse(
-                    json.dumps({'user': request.user.username, 'course': course, 'data': ua.data, 'command': command}))
-            else:
-                response = HttpResponse(json.dumps({'user': request.user.username, 'course': course, 'data': ua.data}))
-        if request.method == 'POST':
-            try:
-                json_object = json.loads(request.body)
-                timestamp = json_object.get('timestamp')
-                if ua.timestamp < timestamp:
-                    ua.timestamp = timestamp
-                    ua.data = request.body
-                    ua.save()
-                    ual = UserAssignmentsLog.objects.create(user=request.user, timestamp=timestamp, course=course)
-                    cd = bz2.BZ2Compressor()
-                    cd.compress(request.body)
-                    cd = cd.flush()
-                    cd = request.body
-                    ual.data.save("{0}_{2}_{1}.json.bz".format(request.user.username, timestamp, course),
-                                  ContentFile(cd), save=True)
-                    ual.save()
-
-                    response = HttpResponse(
-                        json.dumps({'user': request.user.username, 'course': course, 'data': ua.data}))
-            except:
-                response = HttpResponse(
-                    json.dumps({'user': request.user.username, 'course': course, 'data': None,
-                                'command': {'alert': 'Failed to save!'}}))
+def get_model(request):
+    json_response = {'user': None, 'authenticated': False}
+#     import pudb
+#     pudb.set_trace()
+    print request.user
+    if request.user.is_authenticated():
+        json_assignments = [];
+        json_response = { 'user': request.user.username , 'authenticated': True, 'app_title':'StarCellBio' , 'app_description':'StarCellBio Placeholder', 'assignments':{'list':json_assignments}}
+        if(Statuses.objects.exists()):
+        	public_status = Statuses.objects.get(code='PUBL')
+        	courses = request.user.course_set.filter(status=public_status)
+        	for c in courses:
+        		# Do something for authenticated users.
+        		assignments = c.assignment_set.filter(status=public_status)
+        		for a in assignments:
+        			sa, created = StudentAssignment.objects.get_or_create(student=request.user, assignment=a)
+        			if created:
+        				sa.initialize()
+        			json_assignments.append(sa.current)
+        else:
+        	return HttpResponse("var get_model_result = {0};".format( json.dumps("not working yet")))
     else:
-        json_object = json.loads(request.body)
+        #import pudb
+        #pudb.set_trace()
+        #json_object = json.loads(request.body)
         pass
         # Do something for anonymous users.
+    response = HttpResponse("var get_model_result = {0};".format( json.dumps(json_response)))
     response.set_cookie("scb_username", request.user.username)
-    response.set_cookie("scb_course", course)
-    response['Content-Type'] = 'text/json'
+    response['Content-Type'] = 'text/javascript'
     return response
+    
+def create_courses(request, **kwargs):
+	if(request.method == 'POST'):
+
+		jstr=request.raw_post_data
+		jsondata = json.loads(jstr)
+		if(jsondata):
+			#make more complex later 
+			for x in jsondata['assignments']['list']:
+				assign_id = x["id"]
+				course_code = x["course"]
+				assign_name = x["name"]
+				course_name = x["course_name"]
+				c = Course(code = course_code, course_name = course_name)
+				c.save()
+				a = Assignment(courseID=c, assignmentID=assign_id, assignmentName=assign_name, data = x)
+				a.save()
+			return HttpResponse('got it')
+	else:
+		response = HttpResponse("var create_courses_result = {0};".format( ''))
+		response.set_cookie("scb_username", request.user.username)
+		response['Content-Type'] = 'text/javascript'
+		return response
+		
+def get_courses(request, **kwargs):
+	import ast
+	import random
+	list = []
+	retval = []
+	token = random.randrange(0, 1000000)
+	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
+		usercourse = UserCourse.objects.filter(user=request.user)[0]
+		course = Course.objects.filter(usercourses = usercourse)
+		assignments = course[0].assignments.all()
+		if(course[0].sassignments.filter(student=request.user).count() == 0 or course[0].sassignments.count() == 0 or course[0].sassignments.filter(data='').count() > 0):
+			for a in assignments:
+				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token, data = '')
+				sa.save()
+		else:
+			assignments = course[0].sassignments.filter(student=request.user)
+		for a in assignments:
+			dictionary = ast.literal_eval(a.data)
+			list.append(dictionary)
+		retval = {'list': list, 'is_auth': True, 'is_selected': list[0]['id'], 'token': token}
+	else:
+		all =[]
+		for a in Assignment.objects.all():
+			dictionary = ast.literal_eval(a.data)
+			all.append(dictionary)
+		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token}
+	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response
+	
+def post_state(request, **kwargs):
+	print request.user
+	jstr = request.raw_post_data
+	jsondata = json.loads(jstr)
+	jsonmodel = jsondata['model']
+	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
+		usercourse = UserCourse.objects.filter(user=request.user)[0]
+		course = Course.objects.filter(usercourses = usercourse)
+		sassignments = course[0].sassignments.all()
+		retval = {'is_anonymous': False, 'valid_token':False, 'token': jsondata['token']}
+		for sa in sassignments:
+			for x in jsondata['model']['assignments']['list']:
+				if(sa.token == jsondata['token'] and sa.assignmentID == x['id']):
+						sa.data = json.loads(json.dumps(x))
+						sa.save()
+						retval = {'is_anonymous': False, 'valid_token': True, 'token': jsondata['token']}
+	else:
+		retval = {'is_anonymous': True, 'valid_token': False, 'token': jsondata['token']}
+	response = HttpResponse("var post_state_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response
+

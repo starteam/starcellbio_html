@@ -509,6 +509,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             global_template: gstate.context.master_model,
             assignment: state.assignment,
             experiment: state.experiment,
+            context: gstate.context,
             facs: state.facs,
             t: template,
             rows: rows_state.rows,

@@ -25,6 +25,7 @@ scb.ui.static.MainFrame.update_hash = function (state) {
 
 scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     var self = this;
+    var pending_save = false;
     context.main_frame = self;
     self.sections = {};
 
@@ -86,10 +87,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                         		ret.microscopy = microscopy;
                         		//SHLOKA
                         	}
-// 							if (state.facs_lane_id && facs) {
-// 								var facs_lane = facs.lanes_list.get(state.facs_lane_id)
-// 								ret.facs_lane = facs_lane;
-// 							}
+							if (state.microscopy_lane_id && microscopy) {
+								var microscopy_lane = microscopy.lanes_list.get(state.microscopy_lane_id)
+								ret.microscopy_lane = microscopy_lane;
+							}
                         }
 
                     }
@@ -250,26 +251,37 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
         scb.ui.static.MainFrame.ensure_auth_context();
-        if (context.auth.logged_in) {
-            $(workarea).append(scb_auth.logout({}));
-            scb.utils.off_on(workarea, 'click', '.scb_f_logout_close_button', function () {
-                $('.scb_s_logout_dialog').detach();
-            });
-            scb.utils.off_on(workarea, 'click', '.scb_f_logout_button', function () {
-                //TODO: here comes the flow with sign-in dialog
-                context.auth.logged_in = false;
-                scb.ui.static.MainFrame.refresh({view: 'homepage'});
-            });
+        if (get_courses_result.is_auth) {
+        	window.location = '/accounts/logout/';
+            // $(workarea).append(scb_auth.logout({}));
+//             scb.utils.off_on(workarea, 'click', '.scb_f_logout_close_button', function () {
+//                 $('.scb_s_logout_dialog').detach();
+//             });
+//             scb.utils.off_on(workarea, 'click', '.scb_f_logout_button', function () {
+//                 //TODO: here comes the flow with sign-in dialog
+//                 context.auth.logged_in = false;
+//                 scb.ui.static.MainFrame.refresh({view: 'homepage'});
+//             });
         }
         else {
             $(workarea).append(scb_auth.login({}));
             scb.utils.off_on(workarea, 'click', '.scb_f_login_close_button', function () {
                 $('.scb_s_login_dialog').detach();
             });
-            scb.utils.off_on(workarea, 'click', '.scb_f_login_button', function () {
-                context.auth.logged_in = true;
-                scb.ui.static.MainFrame.refresh({view: 'assignments'});
-            });
+            $('.iframe').load(function(){
+
+				var iframe = $('.iframe').contents();
+
+				iframe.find(".primaryAction").click(function(){
+						   $('.iframe').load(function(){
+						   	  var profile = $('.iframe').contents();
+						   	  //console.log(profile);
+						   	  if(profile[0].body.textContent.indexOf('profile') >0){
+						   	  	  parent.document.location.reload();
+							   	  }
+						   });
+					});
+			});
         }
         evt.preventDefault();
     });
@@ -283,7 +295,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         workarea: workarea,
         context: context
     });
-
+	
+	self.sections.profile = new scb.ui.ProfileView({
+        workarea: workarea,
+        context: context
+    });
+	
     self.sections.assignment = new scb.ui.AssignmentView({
         workarea: workarea,
         context: context
@@ -352,7 +369,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'assignments') {
             if (!parsed.assignment) {
-                state.assignment_id = assignments.selected_id ? assignments.selected_id : assignments.list[0].id;
+                state.assignment_id = assignments.selected_id ? assignments.selected_id : get_courses_result.is_selected;
                 state.onhashchange = false;
                 self.show(state);
                 return;
@@ -361,6 +378,20 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.MainFrame.update_hash(state);
             self.sections.assignments.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+        if (state.view == 'profile') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.selected_id ? assignments.selected_id : get_courses_result.is_selected;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.MainFrame.update_hash(state);
+            self.sections.profile.show({
                 workarea: workarea,
                 assignments: assignments
             });
@@ -396,7 +427,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'experiment_setup') {
-            //TODO: if no experiment than error
             self.sections.experiment_setup.show({
                 workarea: workarea,
                 assignment: parsed.assignment,
@@ -406,6 +436,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'experiment_run') {
+
             self.sections.experiment_setup.show({
                 workarea: workarea,
                 assignment: parsed.assignment,
@@ -415,6 +446,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'facs') {
+
             if (!parsed.facs) {
                 delete state.onhashchange;
                 var facs = parsed.experiment.facs_list.start({});
@@ -435,6 +467,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'select_technique') {
+
             self.sections.select_technique.show({
                 workarea: workarea,
                 assignment: parsed.assignment,
@@ -443,6 +476,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
         }
         if (state.view == 'western_blot') {
+
             if (!parsed.western_blot) {
                 var western_blot = parsed.experiment.western_blot_list.start({});
                 state.western_blot_id = western_blot.id;
@@ -469,6 +503,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'microscopy'){
+
         	if(!parsed.microscopy) {
         		var microscopy = parsed.experiment.microscopy_list.start({});
         		state.microscopy_id=microscopy.id;
@@ -488,6 +523,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         	});
         }
         if (state.view == 'western_blot_gel') {
+
             if (!parsed.western_blot) {
                 state.onhashchange = false;
                 state.view = 'select_technique';
@@ -521,6 +557,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'experiment_last') {
+
             if (parsed.experiment) {
                 state.view = parsed.experiment.last_view ? parsed.experiment.last_view : 'experiment_design';
                 self.show(state);
@@ -540,40 +577,33 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 }
             }
         }
-
-//		var assignment = assignments.selected;
-//		if(assignment == null) {
-////			self.sections.assignments.show();
-//		} else if( master_model.ui.view == 'assignments')
-//        {
-//            $.bbq.pushState({
-//                view: master_model.ui.view
-//            });
-////            self.sections.assignments.show();
-//        }
-//        else {
-//			// var sidebar = new scb.Sidebar({
-//			// sections : self.sections,
-//			// assignment : assignment,
-//			// workarea : workarea,
-//			// }, context);
-//			// context.sidebar = sidebar;
-//
-//			self.sections.workarea.show({
-//				assignment : assignment,
-//				template : context.template
-//				//	sidebar:sidebar,
-//			});
-//
-//		}
-        if (context.auth && context.auth.logged_in) {
+        if (get_courses_result.is_auth) {
             $('.scb_s_login_status').attr('src', 'images/header/scb_signout_text.png');
+            $('.scb_f_try_an_experiment').click();
         }
-
+        scb.ui.static.MainFrame.pending_save(parsed);
         scb.ui.static.MainFrame.in_ajax_display();
 
     }
-
+    
+    scb.ui.static.MainFrame.pending_save = function(parsed){
+    	if(!pending_save){
+    		setTimeout(function() {
+    			pending_save = false;
+    			console.log('believe');
+    			post_obj = {'token': get_courses_result.token, 'model': parsed.context.master_model}
+    			$.ajax({
+					type: "POST",
+					url: 'scb/post_state.js',
+					data: JSON.stringify(post_obj),
+					success: function (data){
+						console.log(data);
+					}
+				});
+    		}, 15000);
+    		pending_save = true;
+    	}
+    }
     scb.ui.static.MainFrame.refresh = function (navigation_state) {
         var state = navigation_state || $.deparam(location.hash.replace(/^#/, ''), true);
         state.onhashchange = false;
