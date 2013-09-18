@@ -8,6 +8,7 @@
 
 .scb_western_blot_details_view{
 	padding-top: 30px;
+    padding-bottom:5px;
 	width: 960px;
 }
 
@@ -25,17 +26,19 @@
     border-radius: 5px;
     margin-left: 10px;
     margin-right: 10px;
-    margin-bottom: 0px;
-    margin-top:20px;
+    margin-bottom: 5px;
     min-height: 300px;
     background-color: #EDEEF2;
 
 }
 
 .scb_s_western_blot_samples_table{
-	width: 70%;
+	width:67%;
 }
 
+.scb_s_western_blot_tabs{
+	color: rgb(125, 125,125);
+}
 
 .scb_f_western_blot_prepare_lysates {
     border-radius: 5px;
@@ -52,6 +55,29 @@
     height:80px;
     margin-left:25px;
 }
+
+.scb_s_western_blot_all_tabs {
+    display: block;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    position: relative;
+    padding-bottom:8px;
+    padding-top: 25px;
+    margin-left: 8px;
+    width: 942px;
+    @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+}
+
+
+.scb_s_western_blot_tab_content{
+	margin-top: -27px;
+ 	background-color: #FFFFFF;
+ 	background-image: none;
+ 	min-height: 439px;
+ 	width: 920px;
+ 	padding: 0px;
+}
+
 
 .scb_s_western_blot_progress_prefix {
     color: white;
@@ -106,7 +132,6 @@
 .scb_s_western_blot_samples_gel_area {
     display:inline-block;
     vertical-align: top;
-    margin-left:25px;
     width:600px;
     height:400px;
     padding-top:20px;
@@ -114,7 +139,7 @@
 
 .scb_s_western_blot_samples_area {
 	margin-top:28px;
-	margin-left: 15px;
+	margin-left: 10px;
 }
 
 .scb_s_western_blot_gel_tabs {
@@ -123,7 +148,7 @@
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
     border-top: 1px solid transparent;
-    margin-left: -1px;
+    margin-left: 9px;
     margin-right:-1px;
     margin-top: -1px;
 }
@@ -164,10 +189,11 @@
 .scb_s_western_blot_gel_content
 {
     height:350px;
-    width:600px;
+    width:590px;
     position: relative;
     border:1px solid #80d1ae;
     background-color: white;
+    margin-left: 8px;
 }
 
 .scb_s_western_blot_gel {
@@ -205,7 +231,7 @@
     vertical-align: top;
     display: inline-block;
     position: absolute;
-    top: 70px;
+    top: 37px;
     left: 367px;
     border-left: 1px solid #e0e0e0;
     padding-left: 6px;
@@ -214,7 +240,6 @@
 .scb_s_western_blot_run_gel_and_transfer {
     position: relative;
     top:250px;
-    left:10px;
 }
 
 .scb_s_western_blot_gel_canvas_wrapper {
@@ -359,11 +384,6 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 }
 
 
-.scb_s_western_blot_tab_content{
-	margin-top: -27px;
- 
-}
-
 
 .scb_s_western_blot_samples_table > table {
     width:100%;
@@ -394,11 +414,16 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 }
 
 .scb_s_western_blot_blank_space1{
-	width: 404px;
+	width: 370px;
 }
 
 .scb_s_western_blot_blank_space2{
-	width: 14px;
+	width: 0px;
+}
+
+.scb_s_western_blot_active {
+	margin-top:1px;
+	color: rgb(0,0,0);
 }
 
 .scb_f_western_blot_sample_inactive_all {
@@ -440,9 +465,6 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
     width:960px;
 }
 
-.scb_s_western_blot_tab_content {
-
-}
 
 .scb_s_western_blot_green_line {
     width:100%;
@@ -460,9 +482,10 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
     border-radius: 1px;
     border: 1px solid #e1e3e8;
     position: absolute;
-    top:110px;
+    margin-left: 2px;
     right:0px;
     box-shadow: 0px 0px 6px gray;
+    margin-right:12px;
 
 }
 

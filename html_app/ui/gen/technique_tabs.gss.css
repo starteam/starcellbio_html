@@ -90,7 +90,6 @@
 .scb_s_western_blot_samples_gel_area, .scb_s_facs_samples_graph_area, .scb_s_microscopy_samples_gel_area {
   display: inline-block;
   vertical-align: top;
-  margin-left: 25px;
   width: 600px;
   height: 400px;
   padding-top: 20px;

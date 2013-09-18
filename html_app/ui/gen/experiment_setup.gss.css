@@ -15,8 +15,8 @@
   border-color: #e1e1e1;
   border-radius: 8px;
   padding: 10px;
-  width: 928px;
-  left: 5px;
+  width: 922px;
+  margin-left: 8px;
   background-color: #fff;
   background-image: -webkit-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
@@ -28,16 +28,22 @@
   bottom: 5px;
   left: 5px;
 }
-.scb_s_experiment_setup_top>.scb_f_open_experiment_setup_readonly, .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
+.scb_s_experiment_setup_top>.scb_f_open_experiment_setup_readonly {
   position: absolute;
   bottom: 5px;
+  right: 5px;
+}
+.scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
+  position: absolute;
+  bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 4px;
   right: 5px;
 }
 .scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  width: 305px;
 }
 .scb_s_experiment_setup_choose_template {
   width: 600px;
@@ -131,12 +137,29 @@ table.scb_s_experiment_setup_table {
   font-family: 'sourcesanspro-semibold';
   font-size: 10pt;
 }
-.scb_s_experiment_setup_choose_template_kind_disabled {
+.scb_s_experiment_setup_choose_template_kind_disabled, .scb_s_experiment_setup_choose_template>input:disabled {
   opacity: .5;
 }
 .scb_s_experiment_setup_choose_template_kind {
   margin-right: 1em;
-  margin-bottom: 1em;
+}
+.scb_s_experiment_setup_choose_template>input {
+  -webkit-appearance: none;
+  height: 13px;
+  width: 12px;
+  border: 1px solid #c0c0c0;
+  background-color: #d0d0d0;
+  border-radius: 6px;
+  margin-bottom: -0.125%;
+}
+.scb_s_experiment_setup_choose_template>input:checked {
+  -webkit-appearance: none;
+  height: 13px;
+  width: 12px;
+  border: 1px solid #000;
+  background-color: #80d1ae;
+  border-radius: 6px;
+  margin-bottom: -0.125%;
 }
 .scb_concentration_edit_new {
   position: absolute;

@@ -60,8 +60,10 @@
 */
 {template .display_details}
 <div class='scb_western_blot_details_view'>
+	<div class='scb_s_western_blot_all_tabs'>
 
     <div class='scb_western_blot_details_view_inner'>
+		
 
         {call .display_tabs}
         {param assignment:$assignment/}
@@ -72,6 +74,8 @@
         {param kinds:$kinds/}
         {param can_prepare_lysate:$can_prepare_lysate/}
         {/call}
+    
+    </div>
     </div>
 </div>
 {/template}
@@ -87,6 +91,7 @@
 */
 {template .display_tabs}
 <div class='scb_s_western_blot_tab_content {if $kind == 'sample_prep'}scb_s_western_blot_tab_content_sample_prep{/if}'>
+
 {call .display_tabs_selector}
     {param assignment:$assignment/}
     {param experiment:$experiment /}
@@ -172,10 +177,10 @@
 						<div class='scb_s_western_blot_video_heading'>Reminder:&nbsp;&nbsp;</div>
 						<div class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one lane&nbsp;</div>
 						<div class='scb_s_western_blot_video_text_second'>must be reserved for the protein marker.&nbsp;</div>
-						<a href='pdf/Reference%20Library.pdf' class='scb_s_western_blot_learn_more'>Learn More</a></div>
+						<a href='pdf/Reference%20Library.pdf' class='scb_s_western_blot_learn_more'>Learn More</a>
+						</div>
                    </div>
                </div>
-            </div>
 <div class='scb_s_western_blot_samples_table'>
     <table>
         <thead class='scb_s_western_blot_samples_table_head'>
@@ -252,6 +257,8 @@
         </tr>
         {/if}
     </table>
+</div>
+
 </div>
 <a class='scb_s_navigation_button scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'

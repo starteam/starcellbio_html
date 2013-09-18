@@ -24,8 +24,8 @@
     border-color: #e1e1e1;
     border-radius: 8px;
     padding: 10px;
-    width:928px;
-    left:5px;
+    width:922px;
+    margin-left:8px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }
 
@@ -50,6 +50,8 @@
 .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
     position: absolute;
     bottom: 5px;
+    margin-top: 0px;
+    margin-bottom: 4px;
     right: 5px
 }
 
@@ -57,7 +59,6 @@
     position: absolute;
     bottom: 5px;
     right: 5px;
-    width:305px;
 }
 
 
@@ -190,9 +191,34 @@ table.scb_s_experiment_setup_table {
     opacity: .5;
 }
 
+.scb_s_experiment_setup_choose_template > input:disabled {
+    opacity: .5;
+}
+
 .scb_s_experiment_setup_choose_template_kind {
     margin-right: 1em;
-    margin-bottom:1em;
+}
+
+
+.scb_s_experiment_setup_choose_template > input{
+	-webkit-appearance: none;
+	height:13px;
+	width:12px;
+	border: 1px solid #C0C0C0;
+	background-color:#D0D0D0;
+	border-radius:6px;
+	margin-bottom: -0.125%;
+}
+
+
+.scb_s_experiment_setup_choose_template > input:checked{
+	-webkit-appearance: none;
+	height:13px;
+	width:12px;
+	border: 1px solid #000000;
+	background-color:#80d1ae;
+	border-radius:6px;
+	margin-bottom: -0.125%;
 }
 
 .scb_concentration_edit_new {
