@@ -18,7 +18,7 @@
     display: inline-block;
     width: 116px;
     padding-left: 20px;
-    top: 5px;
+    top: 4px;
     position: relative;
     height: 20px;;
     font-size: 11pt;

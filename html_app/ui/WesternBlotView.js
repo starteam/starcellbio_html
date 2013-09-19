@@ -26,8 +26,14 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
-    var lysate_type = $(element).val();
+	
+	var lysate_type = ''
+	if($(element).attr('kind')){
+		lysate_type=$(element).attr('kind');
+	}
+	else{
+    	lysate_type = $(element).val();
+    }
     if (lysate_type == '') {
         return;
     }
@@ -163,10 +169,25 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
     }
 
     if (!parsed.western_blot.marker_loaded) {
-        var r = confirm("The protein size marker has not been loaded. Would you like to continue?")
-        if (r == false) {
-            return;
-        }
+    	//var r = true;
+    	$(".scb_s_western_blot_run_gel_and_transfer").easyconfirm({locale: { title: 'Select Yes or No', button: ['No','Yes']}});
+		$(".scb_s_western_blot_run_gel_and_transfer").click(function(e) {
+				alert("You clicked yes");
+		});
+		$(".scb_s_western_blot_run_gel_and_transfer").click();
+//     	$('.scb_s_western_blot_run_gel_and_transfer').dialog({
+//     	  title: "The protein size marker has not been loaded. Would you like to continue?",
+// 		  buttons: {
+// 			"Yes": function() { console.log('hit yes')},
+// 			"No": function() { $( ".scb_s_western_blot_run_gel_and_transfer" ).dialog( "close" ); }
+// 		  }
+// 		});
+// 		$( ".selector" ).dialog( "open" );
+		
+//         var r = confirm("The protein size marker has not been loaded. Would you like to continue?")
+//         if (r == false) {
+//             return;
+//         }
     }
 
     //TODO: 1st things first -- we needs to save NEW order
@@ -327,6 +348,9 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             kinds: template.lysate_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
+        if(kind != 'sample_prep') {
+        	$('.scb_s_western_blot_video_box_wrapper').remove();
+        }
         if (kind == 'sample_prep') {
             if (_.keys(template.lysate_kinds).length == 1) {
                 $('button.scb_f_western_blot_sample_remove').hide();

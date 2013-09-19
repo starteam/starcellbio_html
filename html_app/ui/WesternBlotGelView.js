@@ -302,6 +302,9 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
             kind: kind,
             valid_rows: rows_state.valid
         }));
+        if(kind != 'sample_prep') {
+        	$('.scb_s_western_blot_video_box_wrapper').remove();
+        }
         state.experiment.last_view = 'western_blot_gel';
         state.western_blot.last_gel = state.western_blot_gel.id;
 

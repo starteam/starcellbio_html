@@ -61,6 +61,7 @@
 */
 {template .display_details}
 <div class='scb_western_blot_details_view'>
+	<div class='scb_s_western_blot_all_tabs'>
 
     <div class='scb_western_blot_details_view_inner'>
         {call .display_tabs}
@@ -74,6 +75,7 @@
         {param can_prepare_lysate:$can_prepare_lysate/}
         {param valid_rows:$valid_rows/}
         {/call}
+    </div>
     </div>
 </div>
 {/template}
@@ -90,12 +92,12 @@
 @/param can_prepare_lysate
 */
 {template .display_tabs}
+<div class='scb_s_western_blot_tab_content'>
 {call scb_western_blot.display_tabs_selector}
 {param assignment:$assignment/}
 {param experiment:$experiment /}
 {param western_blot:$western_blot /}
 {/call}
-<div class='scb_s_western_blot_tab_content'>
 	
     {if $western_blot_gel.is_developed}
     {call scb_western_blot.display_wb_progress}
@@ -110,9 +112,9 @@
 
         <div class='scb_s_western_blot_choose_gel_type'>
             Gel Type:
-            {if $western_blot.gel_type =='.10'}10%{/if}
-            {if $western_blot.gel_type =='.12'}12%{/if}
-            {if $western_blot.gel_type =='.15'}15%{/if}
+            {if $western_blot.gel_type =='.10'}&nbsp;&nbsp;&nbsp;10%{/if}
+            {if $western_blot.gel_type =='.12'}&nbsp;&nbsp;&nbsp;12%{/if}
+            {if $western_blot.gel_type =='.15'}&nbsp;&nbsp;&nbsp;15%{/if}
         </div>
         <div class='scb_s_western_blot_samples_heading'>
             Samples
@@ -130,7 +132,7 @@
             {let $start: $rows.length+1 /}
             <ol class='scb_s_western_blot_choose_samples_marker' start={$start}>
                 {if $western_blot.marker_loaded == true}
-                <li class="scb_s_western_blot_marker">Marker</li>
+                <li class="scb_s_western_blot_marker">&nbsp;Marker</li>
                 {/if}
             </ol>
         </div>
@@ -147,15 +149,16 @@
 
                 <div class='scb_s_western_blot_gel_tab_selected' western_blot_id='{$western_blot.id}'
                      assignment_id='{$assignment.id}'
-                     experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}' {if $gel.is_developed}contenteditable="true"{/if}>{$gel.name}
-        </div>
+                     experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}' {if $gel.is_developed} ="true"{/if}>{$gel.name}
+        		</div>
         {if $gel.is_developed}
         <button class='scb_f_western_blot_gel_remove' western_blot_id='{$western_blot.id}'
                 assignment_id='{$assignment.id}'
-                experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}'><img src='images/setup/scb_remove.png'>
+                experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}'>| X
+<!--                 <img src='images/setup/scb_remove.png'> -->
         </button>
         {/if}
-        </span>
+       			</span>
         {else}
         <div class='scb_s_western_blot_gel_tab' western_blot_id='{$western_blot.id}'
              assignment_id='{$assignment.id}'
@@ -175,7 +178,7 @@
             {/foreach}
         </select>
         {/if}
-    </div>
+    	</div>
     
     {call .display_gel}
     {param t:$t/}
@@ -187,11 +190,12 @@
     {param valid_rows:$valid_rows/}
     {/call}
     
+	</div>
 </div>
 <a class="scb_s_navigation_button scb_f_open_select_technique"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
-</div>
+
 {/template}
 
 /**
