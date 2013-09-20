@@ -307,7 +307,7 @@
             {let $start: $rows.length+1 /}
             <ol class='scb_s_western_blot_choose_samples_marker' start={$start}>
              {if $western_blot.marker_loaded == true}
-                <li class="scb_s_western_blot_marker">&nbsp;Marker</li>
+                <li class="scb_s_western_blot_marker">Marker</li>
             {/if}
         </ol>
     </div>
@@ -322,10 +322,12 @@
         <div class='scb_s_western_blot_gel_tab scb_s_western_blot_gel_active' contenteditable="true">GEL</div>
     </div>
     <div class='scb_s_western_blot_gel_content'>
+<!-- 
         {call .display_western_blot_numbers}
         {/call}
+ -->
 
-    <canvas class='scb_s_western_blot_gel' src='images/western_blot/SCB_WesternBlotting_Gel.png'/>
+    <canvas class='scb_s_western_blot_gel' src='images/western_blot/SCB_WesternBlotting_GelNumbers.png'/>
 
     <div class='scb_s_western_blot_tools'>
         <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' western_blot_id='{$western_blot.id}'
@@ -485,6 +487,6 @@
         <img src='images/western_blot/WesternBlot_BlueWells_13.png'>
         <img src='images/western_blot/WesternBlot_BlueWells_14.png'>
         <img src='images/western_blot/WesternBlot_BlueWells_15.png'>
-        <img src='images/western_blot/SCB_WesternBlotting_Gel.png'>
+        <img src='images/western_blot/SCB_WesternBlotting_GelNumbers.png'>
     </span>
 {/template}

@@ -6,6 +6,8 @@ scb.WesternBlotList = function scb_WesternBlotList(data, context, parent) {
 
     scb.ModelHelpers.common_list_code(self, data, scb.WesternBlot, context, self);
 
+		
+		
     self.start = function (d) {
         d = ( typeof (d) == 'undefined' ? {} : d);
         d.name = d.name || "W.B. " + data.counter++;

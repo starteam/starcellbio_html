@@ -293,6 +293,7 @@
     font-size:10pt;
     color:black;
     left: 0px;
+    padding:3px;
 }
 
 

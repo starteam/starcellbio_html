@@ -42,7 +42,8 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (
         var cell_treatment_id = $(element).attr('cell_treatment_id');
         parsed.western_blot.lanes_list.start({
             kind: lysate_type,
-            cell_treatment_id: cell_treatment_id
+            cell_treatment_id: cell_treatment_id,
+            experiment_id: parsed.experiment.id
         });
     }
     else {
@@ -71,7 +72,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (eleme
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+	
     var val = $(element).attr('checked');
     var cell_treatment_id = $(element).attr('cell_treatment_id');
 
@@ -169,32 +170,31 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
     }
 
     if (!parsed.western_blot.marker_loaded) {
-    	//var r = true;
-    	$(".scb_s_western_blot_run_gel_and_transfer").easyconfirm({locale: { title: 'Select Yes or No', button: ['No','Yes']}});
-		$(".scb_s_western_blot_run_gel_and_transfer").click(function(e) {
-				alert("You clicked yes");
-		});
-		$(".scb_s_western_blot_run_gel_and_transfer").click();
-//     	$('.scb_s_western_blot_run_gel_and_transfer').dialog({
-//     	  title: "The protein size marker has not been loaded. Would you like to continue?",
-// 		  buttons: {
-// 			"Yes": function() { console.log('hit yes')},
-// 			"No": function() { $( ".scb_s_western_blot_run_gel_and_transfer" ).dialog( "close" ); }
-// 		  }
-// 		});
-// 		$( ".selector" ).dialog( "open" );
-		
+		$.jqDialog.confirm("The protein size marker has not been loaded. Would you like to continue?",
+			function() {    
+				//TODO: 1st things first -- we needs to save NEW order
+    			parsed.western_blot.is_transfered = true;
+
+    			//TODO: before repaint need to do steps in animation...
+    			scb.ui.static.MainFrame.refresh();
+    		},// callback function for 'YES' button
+			function() {
+					return;
+			}		// callback function for 'NO' button
+		);
 //         var r = confirm("The protein size marker has not been loaded. Would you like to continue?")
 //         if (r == false) {
 //             return;
 //         }
     }
+    else{
+    	parsed.western_blot.is_transfered = true;
 
-    //TODO: 1st things first -- we needs to save NEW order
-    parsed.western_blot.is_transfered = true;
+    	//TODO: before repaint need to do steps in animation...
+    	scb.ui.static.MainFrame.refresh();
+    }
 
-    //TODO: before repaint need to do steps in animation...
-    scb.ui.static.MainFrame.refresh();
+
 }
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active_all = function (element) {
     $('.scb_f_western_blot_sample_active').each(function (e) {
@@ -354,8 +354,9 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         if (kind == 'sample_prep') {
             if (_.keys(template.lysate_kinds).length == 1) {
                 $('button.scb_f_western_blot_sample_remove').hide();
+            	//strange bug where clicks not reflected in place, hitting cancel button corrects this problem.  
             }
-
+            
         }
         if (kind == 'prepare_gel') {
             //$('.scb_s_western_blot_choose_samples_order_list').sortable();

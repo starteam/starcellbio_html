@@ -132,7 +132,7 @@
             {let $start: $rows.length+1 /}
             <ol class='scb_s_western_blot_choose_samples_marker' start={$start}>
                 {if $western_blot.marker_loaded == true}
-                <li class="scb_s_western_blot_marker">&nbsp;Marker</li>
+                <li class="scb_s_western_blot_marker">Marker</li>
                 {/if}
             </ol>
         </div>
@@ -217,16 +217,16 @@
         {call scb_western_blot.display_western_blot_numbers}
         {/call}
         <div class='scb_s_western_blot_gel_canvas_wrapper'>
-            <canvas id="{$western_blot_gel.id}" class='scb_s_western_blot_gel_canvas' style="width:363px;height:288px"
+            <canvas id="{$western_blot_gel.id}" class='scb_s_western_blot_gel_canvas' style="width:358px;height:247px"
                     width='363' height='288'></canvas>
             <div class='scb_f_slider'></div>
             <div class='scb_f_slider_value'></div>
+            <div class='scb_f_vslider'></div>
+            <div class='scb_f_vslider_value'></div>
         </div>
         {else}
-        {call scb_western_blot.display_western_blot_numbers}
-        {/call}
         <img class='scb_s_western_blot_gel_membrane'
-             src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0003s_0000s_0001s_0002_Membrane-BG.png'>
+             src='images/western_blot/SCB_WesternBlotting_Negative.png'>
         {if $western_blot.marker_loaded}
         <img style='position:relative;top: -220px;left: {20+22*$valid_rows}px' class='scb_s_western_blot_gel_membrane'
              src='images/western_blot/SCB_WB_Markers_Lane.png'>

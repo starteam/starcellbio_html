@@ -97,7 +97,7 @@ scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (eleme
     parsed.state.view = 'western_blot';
     scb.ui.static.MainFrame.refresh(parsed.state);
 }
-scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [0, 0, 1, 2, 5, 10, 30, 1 * 60, 2 * 60, 5 * 60, 10 * 60, 20 * 60, 60 * 60];
+scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [0,1, 2, 5, 10, 30, 1 * 60, 2 * 60, 5 * 60, 10 * 60, 20 * 60, 60 * 60];
 
 scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider = function (e, ui) {
     var element = this;
@@ -200,9 +200,10 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     var parent = $($(element).parent());
     var slider = $('.scb_f_slider', $(parent));
     var slider_value = $('.scb_f_slider_value', $(parent));
-
+	var vslider = $('.scb_f_vslider', $(parent));
+    var vslider_value = $('.scb_f_vslider_value', $(parent));
     function set_slider(y) {
-        console.info( "set_slider " + y ) ;
+        //console.info( "set_slider " + y ) ;
         slider.css('top', y + 'px');
         slider_value.css('top', (y - 12) + 'px');
         var ww = Math.round(c.position_to_weight(y));
@@ -220,8 +221,28 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
             slider_value.show();
         }
     }
+    function set_vslider(x) {
+        //console.info( "set_slider " + x) ;
+        vslider.css('left', x + 'px');
+        vslider_value.css('left', (x-12) + 'px');
+        var ww = Math.round(c.position_to_weight(x));
+        var weight = ww > 0 ? Math.round(x/22) + " " : "N/A";
+        if (!parsed.western_blot.marker_loaded) {
+            weight = "NaN";
+        }
+        vslider_value.html(weight);
+        if (_.isUndefined(x)) {
+            vslider.hide();
+            vslider_value.hide();
+        }
+        else {
+            vslider.show();
+            //vslider_value.show();
+        }
+    }
 
     set_slider(gel.canvas_metadata.slider);
+    set_vslider(gel.canvas_metadata.vslider);
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
         var poffset = $(element).offset();
         var eX = evt.clientX;
@@ -229,18 +250,22 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
 
         var y = (eY - poffset.top) - 14;
         var x = (eX - poffset.left);
-
-        console.info(evt);
+        //console.info(evt);
         window.__evt = evt ;
         window.__element = element;
         if (true || $(evt.srcElement ? evt.srcElement: evt.target).is('canvas')) {
             gel.canvas_metadata.slider = y;
+            gel.canvas_metadata.vslider= x;
             if (y < 22 || y > 285 || x < 2 || x > 360) {
                 slider.hide();
                 slider_value.hide();
+                vslider.hide();
+                vslider_value.hide();
                 delete gel.canvas_metadata.slider;
+                delete gel.canvas_metadata.vslider;
             } else {
                 set_slider(gel.canvas_metadata.slider);
+                set_vslider(gel.canvas_metadata.vslider);
             }
         }
     });
@@ -312,6 +337,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         $('.scb_f_wb_exposure_slider').slider({
             orientation: "horizontal",
             range: "min",
+            min: 1,
             max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length - 1,
             value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,

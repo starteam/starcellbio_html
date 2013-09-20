@@ -263,10 +263,11 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
                 var weight = weights[weigth_index];
                 var position = self.weight_to_position(weight);
 //                h + 26 / (weight + 10) * (height - h);
-                g.fillText("" + weight, lane_width * (LANE_OFFSET_0), position + 3);
+				g.font="10px Arial";
+                g.fillText("" + weight, lane_width * (LANE_OFFSET_0) +10, position + 3);
                 g.beginPath();
-                g.moveTo(lane_width * (LANE_OFFSET_0) - g.lineWidth / 2, position);
-                g.lineTo(lane_width * (LANE_OFFSET_0A) + g.lineWidth / 2, position);
+                g.moveTo((lane_width * (LANE_OFFSET_0) - g.lineWidth / 2), position);
+                g.lineTo((lane_width * (LANE_OFFSET_0A) + g.lineWidth / 2), position);
                 g.closePath();
                 g.stroke();
 
@@ -307,7 +308,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         g.clearRect(0, 0, width, height);
         g.fillStyle = 'white';
         g.fillRect(0, 0, width, height);
-        g.fillStyle = '#edeef2';
+        g.fillStyle = '#ecedf3';
         g.fillRect(0, 0, width, height);
         g.fillStyle = 'white';
         g.fillRect(0, 0, width, 20);
