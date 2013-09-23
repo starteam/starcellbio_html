@@ -240,6 +240,30 @@ scb.ui.static.WesternBlotView.populate_wells = function (rows, state, gstate) {
     }
 }
 
+scb.ui.static.WesternBlotView.scb_s_western_blot_left_western_blot = function(element, event){
+	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index -1;
+	scb.ui.static.MainFrame.refresh(parsed.state);
+}
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_right_western_blot = function(element, event){
+	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index +1;
+	scb.ui.static.MainFrame.refresh(parsed.state);
+}
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot= function(element, event){
+	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	console.log('jalwa');
+	console.log(parsed.western_blot.parent.start_tabs_index);
+	console.log(parsed.western_blot.parent.list.length);
+	if(parsed.western_blot.parent.list.length==5){
+		parsed.western_blot.parent.start_tabs_index = 1;
+	}
+	else if (parsed.western_blot.parent.list.length >5)
+		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index +1;
+	scb.ui.static.MainFrame.refresh(parsed.state);
+}
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_choose_samples_list_item = function (element) {
 	
@@ -297,8 +321,17 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_run_gel_and_transfer', function (e, ui) {
         scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer(this);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_left_western_blot', function (e) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_left_western_blot(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_right_western_blot', function (e) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_right_western_blot(this);
+    });
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_active_all', function (e, ui) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active_all(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_add_western_blot', function (e, ui) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_inactive_all', function (e, ui){
     	scb.ui.static.WesternBlotView.scb_f_western_blot_sample_inactive_all(this);
@@ -334,7 +367,9 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         }
 
         var can_prepare_lysate = rows_state.valid > 0;
-
+        console.log(')))))))))))))))))');
+		console.log(state.western_blot.parent.start_tabs_index);
+		console.log(')))))))))))))))))');
         workarea.html(scb_western_blot.main({
             global_template: gstate.context.master_model,
             t: template,
@@ -348,6 +383,24 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             kinds: template.lysate_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
+        
+        
+        if(state.western_blot.parent.start_tabs_index <= 0){
+			state.western_blot.parent.start_tabs_index = 0;
+			$('.scb_s_western_blot_left_western_blot').prop('disabled', true);
+			$('.scb_s_western_blot_right_western_blot').prop('disabled', false);
+		}
+		else $('.scb_s_western_blot_left_western_blot').prop('disabled', false);
+		
+		if(state.western_blot.parent.start_tabs_index + 4 ==state.western_blot.parent.list.length-1){
+			$('.scb_s_western_blot_right_western_blot').prop('disabled', true);
+			$('.scb_s_western_blot_left_western_blot').prop('disabled', false);
+		}
+		else $('.scb_s_western_blot_right_western_blot').prop('disabled', false);
+        
+        
+        
+        
         if(kind != 'sample_prep') {
         	$('.scb_s_western_blot_video_box_wrapper').remove();
         }

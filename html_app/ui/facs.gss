@@ -1,3 +1,11 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
+
 .scb_s_facs_chart_wrapper {
     position: relative;
     width: 400px;
@@ -50,8 +58,80 @@
     margin-left:25px;
 }
 
+.scb_s_facs_progress_rest {
+    background: url('../images/western_blot/progress_bg.png');
+    display: inline-block;
+    padding: 5px;
+    padding-top:8px;
+    margin-left: 12px;
+    border-radius: 6px;
+    font-size:10.5pt;
+    height:22px;
+    border-right: 2px solid #d7d7d7;
+    position: relative;
+    top:5px;
+}
+
 .scb_f_facs_prepare_lysates {
     float:right;
+}
+
+.scb_s_facs_all_tabs {
+    display: block;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    position: relative;
+    padding-bottom:8px;
+    padding-top: 25px;
+    margin-left: 8px;
+    width: 942px;
+    margin-top:30px;
+    @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+}
+
+
+.scb_s_facs_view {
+    background: #F4F6F8;
+    width:960px;
+}
+
+.scb_s_facs_tabs {
+	position: absolute; 
+	top:2px;
+	left:10px;
+	
+}
+
+.scb_s_facs_add_facs {
+	color: black;
+	text-align:center;
+}
+
+.scb_s_facs_add_cross_facs {
+    cursor:pointer;
+    float:right;
+    margin-right: 17px;
+}
+
+.scb_f_facs_remove {
+    border:none;
+    background-color: white;
+    cursor: pointer;
+    float:right;
+    margin-right: 17px;
+}
+
+.scb_s_facs_tab_content {
+	top: 30px;
+	left: 8px;
+	margin-top: -27px;
+ 	background-color: #FFFFFF;
+ 	background-image: none;
+ 	min-height: 439px;
+ 	width: 920px;
+ 	padding: 0px;
+ 	padding-bottom: 10px;
+	margin-bottom: 50px;
 }
 
 .scb_s_facs_samples_table > table {

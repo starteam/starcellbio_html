@@ -157,7 +157,7 @@
 }
 
 .scb_s_western_blot_gel_tabs {
-    width:600px;
+    width:640px;
     height:25px;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
@@ -165,6 +165,14 @@
     margin-left: 9px;
     margin-right:-1px;
     margin-top: -1px;
+}
+
+.scb_s_western_blot_left_western_blot, .scb_s_western_blot_right_western_blot{
+
+	padding:3px;
+	margin:0px;
+	margin-right:-5px;
+	margin-left:-5px;
 }
 
 .scb_s_western_blot_gel_tab {
@@ -227,13 +235,13 @@
     vertical-align: top;
     position: relative;
     top: 15px;
-    left: 15px;
+    left: 5px;
 }
 
 
 
 .scb_s_western_blot_gel_number {
-    width: 22px;
+    width: 21px;
     display: inline-block;
 }
 .scb_s_western_blot_gel_numbers {
@@ -253,7 +261,6 @@
     top: 37px;
     left: 367px;
     border-left: 1px solid #e0e0e0;
-    padding-left: 6px;
 }
 
 .scb_s_western_blot_run_gel_and_transfer {

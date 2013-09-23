@@ -57,7 +57,7 @@ FACS Main View
 */
 {template .display_details}
 <div class='scb_facs_details_view'>
-
+	<div class='scb_s_facs_all_tabs'>
     <div class='scb_facs_details_view_inner'>
 
         {call .display_tabs}
@@ -69,6 +69,7 @@ FACS Main View
         {param kinds:$kinds/}
         {param can_prepare_lysate:$can_prepare_lysate/}
         {/call}
+    </div>
     </div>
 </div>
 {/template}
@@ -131,11 +132,11 @@ FACS Main View
 
     <span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
           experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
-        <!--
+
     <button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-            experiment_id='{$experiment.id}'><img src="images/setup/scb_remove.png">
+            experiment_id='{$experiment.id}'>| X
+	<!--             <img src="images/setup/scb_remove.png"> -->
     </button>
-        -->
     </span>
     {else}
     <a class='scb_f_open_facs scb_s_facs_open_facs'
@@ -143,6 +144,11 @@ FACS Main View
        facs_id='{$wb.id}'>{$wb.name}</a>
     {/if}
     {/foreach}
+    <span class='scb_s_facs_add_facs' assignment_id='{$assignment.id}'
+             			experiment_id='{$experiment.id}'>
+             			 <a class='scb_f_open_facs scb_s_facs_open_facs' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
+				<span class='scb_s_facs_add_cross_facs'>| + </span></a>
+	</span>
 </div>
 {/template}
 
@@ -244,7 +250,7 @@ FACS Main View
         PERFORM FLOW CYTOMETRY
     </div>
 
-    <div class='scb_s_western_blot_progress_rest'>
+    <div class='scb_s_facs_progress_rest'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 {if $step >= 1}scb_s_western_blot_progress_selected{/if}'>
             1. Sample Prep
         </div>

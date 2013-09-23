@@ -6,7 +6,8 @@ scb.WesternBlotList = function scb_WesternBlotList(data, context, parent) {
 
     scb.ModelHelpers.common_list_code(self, data, scb.WesternBlot, context, self);
 
-		
+	scb.Utils.initialize_accessor_field(self, data, 'start_tabs_index', 0, null, context);
+	
 		
     self.start = function (d) {
         d = ( typeof (d) == 'undefined' ? {} : d);

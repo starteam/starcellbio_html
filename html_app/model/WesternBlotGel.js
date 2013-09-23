@@ -5,7 +5,7 @@ scb.WesternBlotGelList = function scb_WesternBlotGelList(data, context, parent) 
 	self.parent = parent;
 
 	scb.ModelHelpers.common_list_code(self, data, scb.WesternBlotGel, context, self);
-
+	scb.Utils.initialize_accessor_field(self, data, 'start_tabs_index', 0, null, context);
 	self.start = function(d) {
 		d = ( typeof (d) == 'undefined' ? {} : d);
 		d.name = d.name || "BLOT";

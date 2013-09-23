@@ -237,8 +237,8 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
                     g.lineWidth = lineWidth > .25 ? lineWidth : .25;
                     console.info("DISPL " + blurs[i].intensity + " " + Math.log(intensity / 10) + " " + g.lineWidth);
                     g.beginPath();
-                    g.moveTo(lane_width * (lane + LANE_OFFSET_1A) - g.lineWidth / 2, blur_position + yoffset);
-                    g.lineTo(lane_width * (lane + LANE_OFFSET_2A) + g.lineWidth / 2, blur_position + yoffset_next);
+                    g.moveTo((lane_width * (lane + LANE_OFFSET_1A) - g.lineWidth / 2)-10, blur_position + yoffset);
+                    g.lineTo((lane_width * (lane + LANE_OFFSET_2A) + g.lineWidth / 2)-10, blur_position + yoffset_next);
                     g.closePath();
                     g.stroke();
                     g.stroke();
@@ -263,16 +263,16 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
                 var weight = weights[weigth_index];
                 var position = self.weight_to_position(weight);
 //                h + 26 / (weight + 10) * (height - h);
-				g.font="10px Arial";
-                g.fillText("" + weight, lane_width * (LANE_OFFSET_0) +10, position + 3);
+				g.font="9px Arial";
+                g.fillText("" + weight, lane_width * (LANE_OFFSET_0) +1, position + 3);
                 g.beginPath();
-                g.moveTo((lane_width * (LANE_OFFSET_0) - g.lineWidth / 2), position);
-                g.lineTo((lane_width * (LANE_OFFSET_0A) + g.lineWidth / 2), position);
+                g.moveTo((lane_width * (LANE_OFFSET_0) - g.lineWidth / 2)+1, position);
+                g.lineTo((lane_width * (LANE_OFFSET_0A) + g.lineWidth / 2)+1, position);
                 g.closePath();
                 g.stroke();
 
             }
-            g.fillText("kDa", lane_width * (LANE_OFFSET_0) - 0, 22);
+            g.fillText("kDa", lane_width * (LANE_OFFSET_0), 22);
 //		for(var lane = 0; lane < lanes; lane++) {
 //			g.fillText("Lane " + (lane + 1), lane_width * (lane + LANE_OFFSET_1A ) - g.lineWidth / 2, 15);
 //		}
@@ -311,8 +311,8 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         g.fillStyle = '#ecedf3';
         g.fillRect(0, 0, width, height);
         g.fillStyle = 'white';
-        g.fillRect(0, 0, width, 20);
-        g.fillRect(width - 17, 0, width, height);
+        //g.fillRect(0, 0, width, 20);
+        g.fillRect(width - 22, 0, width, height);
 
     }
 }
