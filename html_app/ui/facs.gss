@@ -102,6 +102,43 @@
 	
 }
 
+
+.scb_s_facs_tabs > a{
+	color: gray;
+}
+
+.scb_s_facs_active > span {
+	color: black;
+}
+input[type=radio] {
+    margin-right: 7px;
+	-webkit-appearance: none;
+	margin-bottom: 0px;
+	height:13px;
+	width:12px;
+	border: 1px solid #C0C0C0;
+	background-color:#D0D0D0;
+	border-radius:6px;
+}
+
+
+input[type=radio]:checked{
+	margin-right: 7px;
+	-webkit-appearance: none;
+	margin-bottom: 0px;
+	height:13px;
+	width:12px;
+	border: 1px solid #000000;
+	background-color:#80d1ae;
+	border-radius:6px;
+}
+
+
+input[type=radio]:disabled{
+	opacity:0.5;
+}
+
+
 .scb_s_facs_add_facs {
 	color: black;
 	text-align:center;
@@ -118,7 +155,8 @@
     background-color: white;
     cursor: pointer;
     float:right;
-    margin-right: 17px;
+    margin-right: 18px;
+    margin-top:3px;
 }
 
 .scb_s_facs_tab_content {

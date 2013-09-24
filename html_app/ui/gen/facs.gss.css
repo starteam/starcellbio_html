@@ -86,6 +86,35 @@
   top: 2px;
   left: 10px;
 }
+.scb_s_facs_tabs>a {
+  color: gray;
+}
+.scb_s_facs_active>span {
+  color: black;
+}
+input[type=radio] {
+  margin-right: 7px;
+  -webkit-appearance: none;
+  margin-bottom: 0;
+  height: 13px;
+  width: 12px;
+  border: 1px solid #c0c0c0;
+  background-color: #d0d0d0;
+  border-radius: 6px;
+}
+input[type=radio]:checked {
+  margin-right: 7px;
+  -webkit-appearance: none;
+  margin-bottom: 0;
+  height: 13px;
+  width: 12px;
+  border: 1px solid #000;
+  background-color: #80d1ae;
+  border-radius: 6px;
+}
+input[type=radio]:disabled {
+  opacity: .5;
+}
 .scb_s_facs_add_facs {
   color: black;
   text-align: center;
@@ -100,7 +129,8 @@
   background-color: white;
   cursor: pointer;
   float: right;
-  margin-right: 17px;
+  margin-right: 18px;
+  margin-top: 3px;
 }
 .scb_s_facs_tab_content {
   top: 30px;

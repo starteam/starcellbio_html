@@ -456,7 +456,7 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 	margin-top:1px;
 }
 
-.scb_s_wester_blot_active > span {
+.scb_s_western_blot_active > span {
 	color: black;
 }
 

@@ -99,6 +99,23 @@
     width:25%;
 }
 
+
+.scb_s_user_guide_icon{
+	margin-left: 5px;
+}
+ 
+.scb_s_user_guide_text {
+	margin-right:-15px;
+}
+
+.scb_s_cabinet_icon{
+	margin-left: 5px;
+}
+ 
+.scb_s_cabinet_text {
+	margin-right:5px;
+}
+
 .scb_s_logo_h1 {
     display:inline;
     font-size: 0px;

@@ -370,7 +370,7 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_s_western_blot_active {
   margin-top: 1px;
 }
-.scb_s_wester_blot_active>span {
+.scb_s_western_blot_active>span {
   color: black;
 }
 .scb_f_western_blot_sample_inactive_all, .scb_f_western_blot_sample_active_all {

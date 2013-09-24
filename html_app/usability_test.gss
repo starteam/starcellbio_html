@@ -26,7 +26,8 @@
     list-style-image: url('images/homepage/cells.png');
     background-color: #e1e3e8;
     position: relative;
-    left:50px;
+    left:33px;
+    margin-right: 95px;
 }
 
 .pagination > li {
@@ -51,6 +52,26 @@
 }
 .pagination > li.current > a {
     color: white;
+}
+
+
+#slider > a{
+	font-size: 25px;
+	margin-left: 15px;
+	margin: 2px;
+	color: #727272;
+}
+
+#slider > a{
+	font-size: 25px;
+	margin-left: 15px;
+	margin: 2px;
+	color: #727272;
+}
+
+.pagination {
+	
+    display: inline-table;
 }
 
 .pagination > li > a {

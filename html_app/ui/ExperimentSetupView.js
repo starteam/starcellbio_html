@@ -836,8 +836,12 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             if (template.setup_video_box_kind = 'coin-slider') {
                 $('#slider', x).slides({
                     preload: true,
-                    hoverPause: true
+                    hoverPause: true,
+                    generateNextPrev: true,
                 });
+                $('.prev').text('<');
+                $('.next').text('>');
+                $('.next').insertAfter('.pagination');
             }
         }
     };

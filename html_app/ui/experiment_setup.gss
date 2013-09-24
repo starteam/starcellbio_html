@@ -111,7 +111,13 @@ table.scb_s_experiment_setup_table {
 	display: block;
 }
 
-
+.scb_s_experiment_setup_video_text{
+	color:black;
+	font-size: 7.5pt;
+	font-family: 'sourcesanspro-regular';
+	display: inline-block;
+	margin-left: 15px;
+}
 .scb_s_experiment_setup_table_border {
     border-top: 1px solid #e0e0e0;
 }
@@ -160,7 +166,7 @@ table.scb_s_experiment_setup_table {
     width: 233px;
     height:188px;
     background-color: #525252;
-    margin-left:12px;
+    margin-left:17px;
     margin-top:27px;
     overflow:hidden;
 }
@@ -168,7 +174,10 @@ table.scb_s_experiment_setup_table {
 .scb_s_experiment_setup_video_box_img {
     width: 233px;
     height:160px;
+    background-color: #525252;
+
 }
+
 
 .scb_s_warning {
     background: #edeef2;
