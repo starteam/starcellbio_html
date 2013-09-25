@@ -29,9 +29,11 @@
   font-size: 11pt;
 }
 .scb_s_facs_chart {
+  margin: 20px;
+  margin-left: 10px;
   position: absolute;
-  width: 350px;
-  height: 325px;
+  width: 330px;
+  height: 305px;
   top: 0;
   left: 25px;
 }
@@ -58,8 +60,34 @@
   position: relative;
   top: 5px;
 }
+.scb_s_facs_blank_space1 {
+  width: 643px;
+}
+.scb_f_facs_sample_active_all, .scb_f_facs_sample_inactive_all {
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-image: -moz-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-image: -ms-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-image: -o-linear-gradient(top,#f2f2f2,#d3d1d2);
+  border: 1px solid #e0e0e0;
+  border-radius: 5pt;
+  width: 120px;
+  height: 30px;
+  color: black;
+  font-size: 10pt;
+  font-family: 'sourcesanspro-semibold';
+  cursor: pointer;
+}
+.scb_s_facs_left_facs, .scb_s_facs_right_facs {
+  padding: 3px;
+  margin: 0;
+  margin-right: -5px;
+  margin-left: -5px;
+}
 .scb_f_facs_prepare_lysates {
   float: right;
+  position: relative;
+  top: 33px;
 }
 .scb_s_facs_all_tabs {
   display: block;
@@ -145,15 +173,17 @@ input[type=radio]:disabled {
   margin-bottom: 50px;
 }
 .scb_s_facs_samples_table>table {
-  border: 1px solid #80d1ae;
-  border-radius: 5px;
-  border-spacing: 0;
   width: 100%;
-  background-color: white;
-  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+.facs_locked {
+  opacity: .5;
 }
 .scb_s_facs_samples_area {
   margin-bottom: 28px;
+  margin-left: 5px;
+  margin-top: 28px;
+  height: 358px;
 }
 .scb_s_facs_samples_table>table>tbody {
   background-color: #edeef2;
@@ -166,7 +196,11 @@ input[type=radio]:disabled {
   font-size: 10pt;
 }
 .scb_f_facs_run_samples {
-  margin-left: 40px;
+  border: none;
+  margin-top: 20px !important;
+  margin-left: 50px !important;
+  margin-right: 20px !important;
+  margin-bottom: 20px !important;
 }
 .scb_s_facs_tab_content_analyze {
   padding: 5px;
@@ -189,7 +223,7 @@ input[type=radio]:disabled {
 .scb_f_facs_tools_start_analysis {
   position: absolute;
   bottom: 8px;
-  left: 50px;
+  border: none;
 }
 .scb_s_facs_tools_instructions_initial {
   font-family: sourcesanspro-regular;

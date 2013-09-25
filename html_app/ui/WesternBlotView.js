@@ -126,11 +126,15 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     }
     var rows_state = parsed.western_blot.rows_state();
     if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
-        alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.");
+    	$.jqDialog.alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.", function() {	/* callback function for 'OK' button*/ });
+
+//         alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.");
 
     }
     else if (rows_state.valid < 1) {
-        alert("Please select at least 1 lysate to prepare.");
+    	$.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {	/* callback function for 'OK' button*/ });
+
+//         alert("Please select at least 1 lysate to prepare.");
 
     }
     else {

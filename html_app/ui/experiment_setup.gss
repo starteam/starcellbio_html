@@ -103,6 +103,14 @@ table.scb_s_experiment_setup_table {
   padding-top: 2px;
 }
 
+.scb_s_facs_samples_select_all_abs{
+  bottom: 0;
+  margin-bottom:30px;
+  position:absolute;
+  border-top: #80d1ae solid 2px;
+  padding-top: 2px;
+}
+
 .scb_s_experiment_setup_td {
 }
 

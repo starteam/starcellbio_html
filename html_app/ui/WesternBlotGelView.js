@@ -59,7 +59,9 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
             parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name + (counter == 0 ? '' : ' - ' + (counter + 1));
         }
     } else {
-        alert("Please select primary & secondary antibodies.");
+    	$.jqDialog.alert("Please select primary & secondary antibodies.", function() {	/* callback function for 'OK' button*/ });
+
+//         alert("Please select primary & secondary antibodies.");
     }
     $('.scb_f_wb_exposure_slider').detach();
     var state = {

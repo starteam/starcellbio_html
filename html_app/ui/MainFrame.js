@@ -96,7 +96,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                     }
                     else {
                         // if experiment_id is invalid go to assignment
-                        alert('Experiment ' + state.experiment_id + ' does not exist.');
+                        $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	/* callback function for 'OK' button*/ });
+//                         alert('Experiment ' + state.experiment_id + ' does not exist.');
                         state.onhashchange = false;
                         state.view = 'assignment';
                         delete state.experiment_id;
@@ -108,7 +109,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             }
             else {
                 // if assignment_id is invalid go to assignments
-                alert('Assignment ' + state.assignment_id + ' does not exist.');
+                $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	/* callback function for 'OK' button*/ });
+
+//                 alert('Assignment ' + state.assignment_id + ' does not exist.');
                 state.onhashchange = false;
                 state.view = 'assignments';
                 delete state.assignment_id;
@@ -220,7 +223,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             starcellbio(context.ui, master_model);
         }
         else {
-            alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.");
+        	$.jqDialog.alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.", function() {	/* callback function for 'OK' button*/ });;
+// 
+//             alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.");
         }
     }
 
@@ -240,13 +245,24 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
 
     scb.utils.off_on(workarea.parent(), 'click', '.remove_experiment', function () {
-        var r = confirm("Delete experiment?");
-        if (r) {
-            var model_id = scb.Utils.get_attribute($(this), 'experiment_id');
-            assignments.selected.experiments.remove(model_id);
-            assignments.selected.experiments.selected_id = null;
-            self.show({});
-        }
+    	$.jqDialog.confirm("Delete experiment?",
+			function() {    
+				var model_id = scb.Utils.get_attribute($(this), 'experiment_id');
+				assignments.selected.experiments.remove(model_id);
+				assignments.selected.experiments.selected_id = null;
+				self.show({});
+    		},// callback function for 'YES' button
+			function() {
+					return;
+			}		// callback function for 'NO' button
+		);// 
+//         var r = confirm("");
+//         if (r) {
+//             var model_id = scb.Utils.get_attribute($(this), 'experiment_id');
+//             assignments.selected.experiments.remove(model_id);
+//             assignments.selected.experiments.selected_id = null;
+//             self.show({});
+//         }
     });
 
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
@@ -566,7 +582,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 self.show(state);
             }
             else {
-                alert("Experiment does not exist");
+            	$.jqDialog.alert("Experiment does not exist", function() {	/* callback function for 'OK' button*/ });
+//                 alert("Experiment does not exist");
                 if (parsed.assignment) {
                     self.show({
                         view: 'assignment',

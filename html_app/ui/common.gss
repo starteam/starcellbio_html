@@ -150,6 +150,19 @@ div#main {
     width: 525px;
 }
 
+#jqDialog_options > button {
+	@mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
+    border: 1px solid #e0e0e0;
+    border-radius: 5pt;
+    height: 30px;
+    color: black;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
+    cursor:pointer;
+    text-transform:uppercase;
+}
+
+
 .scb_s_assignment_step_experiment_box {
     position: relative;
     top:5px;

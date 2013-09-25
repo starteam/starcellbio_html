@@ -261,7 +261,9 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
     var parsed = scb.ui.static.ExperimentSetupView.parse(element);
     if (parsed.experiment) {
         if (parsed.experiment.cell_treatment_list.length == 0) {
-            alert("Please set up at least one sample.");
+            $.jqDialog.alert("Please set up at least one sample.", function() {	/* callback function for 'OK' button*/ });
+
+//             alert("Please set up at least one sample.");
             event.preventDefault();
         }
     }
