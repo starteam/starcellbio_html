@@ -894,6 +894,8 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 
             can_prepare_slide: can_prepare_slide
         }));
+        
+        //state.assignments.last_step = 6;
 
         if (kind == 'sample_prep') {
             if (_.keys(template.micro_kinds).length == 1) {

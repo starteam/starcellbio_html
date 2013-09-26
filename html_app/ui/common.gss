@@ -132,7 +132,9 @@ div#main {
     top: -25px;
     left: 300px;
     color: black;
-    font-size:13pt;
+    font-size:12pt;
+    overflow-x: hidden;
+    width: 660px;
 }
 
 .scb_s_assignment_step_experiment {
@@ -146,9 +148,30 @@ div#main {
     height:1px;
     background-color: #14ac63;
     font-size:13pt;
-    left: 135px;
-    width: 525px;
 }
+
+
+
+
+
+ label.custom-select {
+    position: relative;
+    display: inline-block;
+
+}
+
+.custom-select select {
+	-webkit-appearance:none;
+	display: inline-block;
+	font: inherit;
+	outline:none; 
+	line-height: 1.2;
+	background: #F4F6F8;
+	border: 0px solid #80d1ae;
+	color:black;
+}
+
+
 
 #jqDialog_options > button {
 	@mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
@@ -175,6 +198,7 @@ div#main {
     width: 960px;
     height: 25px;
     position: relative;
+    text-transform:uppercase;
     @mixin gradient(top,#80d1ae,#189689,#189689);
 
 }
@@ -196,6 +220,8 @@ div#main {
     vertical-align: top;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-top: -2px;
+    font-family: 'sourcesanspro-semibold'
 }
 
 .scb_s_assignment_step_link_active {

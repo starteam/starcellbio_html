@@ -825,6 +825,8 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
 			$('.scb_f_experiment_setup_new_set_up').prop('checked','checked');
         }
         state.experiment.last_view = state.last_view;
+        //state.assignments.last_step = 4;
+
         if (state.mode == 'readonly') {
             $('.scb_s_experiment_setup_table_add_samples_dialog').hide();
         }

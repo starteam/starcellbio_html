@@ -67,6 +67,22 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_remove = function (eleme
     scb.ui.static.MainFrame.refresh();
 }
 
+
+scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    parsed.experiment.western_blot_list.remove(parsed.western_blot.id);
+    parsed.state.view = 'western_blot';
+    delete parsed.state.skip_hash_update;
+    scb.ui.static.MainFrame.refresh(parsed.state);
+
+
+}
+
+
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (element, event) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
     if (parsed.redisplay) {
@@ -96,19 +112,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (eleme
     }
 }
 
-scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
-    var parsed = scb.ui.static.WesternBlotView.parse(element);
-    if (parsed.redisplay) {
-        alert("INVALID ELEMENT!");
-    }
 
-    parsed.experiment.western_blot_list.remove(parsed.western_blot.id);
-    parsed.state.view = 'select_technique';
-    delete parsed.state.skip_hash_update;
-    scb.ui.static.MainFrame.refresh(parsed.state);
-
-
-}
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_selected = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
@@ -433,6 +437,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 //
 //        }
         state.experiment.last_view = 'western_blot';
+        //state.assignments.last_step = 6;
 		$('ol.scb_s_western_blot_choose_samples_order_list').sortable();
 		
     }

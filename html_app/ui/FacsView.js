@@ -165,11 +165,11 @@ scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
     if (show) {
         jqDiv.slideDown();
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('Click here to hide instructions');
+        $('.scb_s_facs_tools_instructions_followup_toggle').html('HIDE INSTRUCTIONS');
     }
     else {
         jqDiv.slideUp();
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('Click here to show instructions');
+        $('.scb_s_facs_tools_instructions_followup_toggle').html('SHOW INSTRUCTIONS');
     }
 }
 
@@ -348,7 +348,9 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
             [from, 10000],
             [to - 1, 10000],
             [to - 1, 0]
-        ], color: pts.c,
+        ], grid: {show:false},
+        	xaxis: {tickSize: 5},
+        	color: pts.c,
             lines: {show: true, fill: false, steps: true, lineWidth: 1},
         });
         ranges.push(range);
@@ -364,7 +366,7 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
         range(pts);
     }
 //    if (data.length == 0) {
-    data.push({data: raw_data.data, lines: {show: true, fill: false}});
+    data.push({data: raw_data.data, grid: {show:false}, xaxis: {tickSize: 5}, lines: {show: true, fill: false}});
 //    }
     if (facs_lane.canvas_metadata) {
         facs_lane.canvas_metadata.data = data;
@@ -386,6 +388,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     [30, Math.random() * -7]
                 ] }
             ],
+            grid: {show:false},
+            xaxis: {tickSize: 5},
             options: {
                 series: {
                     lines: { show: true },
@@ -625,7 +629,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
                 scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
             }
         }
-
+		//state.assignments.last_step = 6;
         if (state.facs.selected_lane && state.facs.selected_lane.canvas_metadata_analysis.points.length > 0) {
             $('.scb_s_facs_tools_instructions_followup').hide();
             scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(false);

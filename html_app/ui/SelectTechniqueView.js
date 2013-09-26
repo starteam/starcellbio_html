@@ -42,6 +42,7 @@ scb.ui.SelectTechniqueView = function scb_ui_SelectTechniqueView(gstate) {
             experiment: state.experiment
         }));
         state.experiment.last_view = 'select_technique';
+		//state.assignments.last_step = 5;
 
         scb.ui.static.SelectTechniqueView.disable_techniques({template: template, workarea: workarea});
     }

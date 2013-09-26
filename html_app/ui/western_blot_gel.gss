@@ -131,7 +131,7 @@ font-family: 'sourcesanspro-regular';
     font-size: 115.5%;
 }
 
-.scb_s_western_blot_tools > h1 {
+.scb_s_western_blot_tools > h1, .scb_s_facs_tools> h1 {
     font-size:11pt;
     font-family: 'sourcesanspro-semibold';
     padding-left:10px;
@@ -144,9 +144,9 @@ font-family: 'sourcesanspro-regular';
 }
 
 .scb_f_wb_exposure_slider {
-    height: 5px;
+    height: 2px;
     background:none;
-    background-color: black;
+    background-color: #939393;
     color: black;
     margin-top:10px;
 }
@@ -154,17 +154,15 @@ font-family: 'sourcesanspro-regular';
 .scb_f_wb_exposure_slider > .ui-slider-range{
 	height:auto;
 	background: none;
-	border: 1px solid black;
-	background-color: black;
+	background-color: #939393;
 	color: black;
 }
 
 .scb_f_wb_exposure_slider > .ui-slider-handle {
-    width: 0.5em;
+    width: 0.3em;
     top:-.5em;
-    background: black;
-    border: 1px solid black;
-    color: black;
+    background: #939393;
+    color: #939393;
 }
 
 .scb_s_western_blot_gel_tab > a {

@@ -39,7 +39,17 @@
         <img class='scb_s_assignment_step_experiment_box' src='images/header/exp_name_box.png' alt=''>
 
         <div class='scb_s_assignment_step_experiment'>
-            <!-- &#8988; --> {$experiment_name}
+        	
+            <!-- &#8988; --> <!-- {$experiment_name}  -->
+            <label class="custom-select">
+
+				<select onchange="location = this.options[this.selectedIndex].value;">
+					{foreach $e in $assignment.experiments.list}
+						<option value='#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$e.id}' model_id='{$assignment.id}' sub_model_id='{$experiment.id}' {if $experiment.id == $e.id}selected="selected"{/if}> {$e.name}&nbsp;&nbsp;{if $experiment.id == $e.id}&#x25BC;{/if}</option>
+					{/foreach}
+					<option class='scb_s_assignment_step_experiment_new_option' value='#view=experiment_design&assignment_id={$assignment.id}' model_id='{$assignment.id}'>+New Experiment</option>
+				</select>
+			</label>
         </div>
         <img class='scb_s_assignment_step_experiment_line' src='images/header/exp_name_line.png' alt=''>
     </div>

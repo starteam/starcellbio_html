@@ -470,8 +470,8 @@ FACS Main View
     {if $facs.sample_analysis}
     <h1>Flow Cytometry Analysis</h1>
 
-    <button class='scb_s_facs_tools_instructions_followup_toggle'>
-        Click here to hide instructions
+    <button class='scb_s_facs_tools_instructions_followup_toggle scb_s_gray_button'>
+        HIDE INSTRUCTIONS
     </button>
     <div class='scb_s_facs_tools_instructions_followup'>
         <ul>
@@ -519,11 +519,12 @@ FACS Main View
         {/foreach}
         </tbody>
     </table>
+    <span class='scb_s_facs_apply'>
     <input type="checkbox" assignment_id='{$assignment.id}'
            experiment_id='{$experiment.id}'
            facs_id='{$facs.id}' facs_lane_id='{$lane.id}' class='scb_f_facs_apply_to_all'
     {if $facs.apply_dna_analysis_to_all}checked='checked'{/if}> Apply to all
-
+	</span>
     {/if}
     {/if}
     {/if}

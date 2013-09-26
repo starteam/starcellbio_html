@@ -13,6 +13,10 @@
     height:360px;
 }
 
+.scb_s_facs_choose_samples_order_list{
+	width:200px;
+}
+
 .scb_s_facs_chart_yaxis {
     position: absolute;
     width:360px;
@@ -283,12 +287,18 @@ input[type=radio]:disabled{
     font-size:12pt;
 }
 
-.scb_s_facs_tools > h1 {
-    font-size:14pt;
+.scb_s_facs_apply{
+	position:absolute;
+	top: 320px;
+	font-family: 'sourcesanspro-regular';
+	font-size: 10pt;
 }
 
 .scb_s_facs_tools_analyze_data {
     border: 1px solid #80d1ae;
+    margin-top: 10px;
+    margin-left: 4px;
+    overflow: hidden;
     border-radius: 5px;
     border-spacing: 0;
     width:200px;

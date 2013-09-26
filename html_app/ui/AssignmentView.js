@@ -16,6 +16,7 @@ scb.ui.AssignmentView = function scb_ui_AssignmentView(gstate) {
 			t : state.assignment.template,
             assignment: state.assignment
 		}));
+		//state.assignments.last_step = 2;
         document.title = state.assignment.name + " - StarCellBio" ;
 
 	}

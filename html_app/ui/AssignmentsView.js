@@ -19,6 +19,7 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
             context: gstate.context,
             courses: courses,
         }));
+        //state.assignments.last_step = 1;
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
     }
