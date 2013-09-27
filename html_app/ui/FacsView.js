@@ -577,10 +577,12 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             rows: rows_state.rows,
             rows_valid: rows_state.valid,
             kind: kind,
+			last_step: state.experiment.last_step,
             kinds: template.facs_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
-        
+        if(state.experiment.last_step >= 5)
+			state.experiment.last_step = 5;
         $('.scb_f_facs_sample_active', $('.scb_s_facs_samples_table')).each(function (e) {
         		var element = $('input[type="radio"][checked="checked"]', $(this).parent().parent());
         	if($(this).attr('checked'))

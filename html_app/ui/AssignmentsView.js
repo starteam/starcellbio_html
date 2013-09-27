@@ -13,13 +13,18 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
     self.show = function (state) {
         window.assignments = assignments;
         var workarea = gstate.workarea;
+        var last_step;
+        if(assignments.selected && assignments.selected.experiments.list.length >0)
+        	last_step = assignments.selected.experiments.selected.last_step;
+        else
+        	last_step=1;
         workarea.html(scb_assignments.main({
             global_template: gstate.context.master_model,
             assignments: assignments,
+            last_step: last_step,
             context: gstate.context,
             courses: courses,
         }));
-        //state.assignments.last_step = 1;
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
     }

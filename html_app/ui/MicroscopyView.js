@@ -880,6 +880,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         	 //init(map, draw, 'images/microscopy/black.jpg');
         }
         
+        
         workarea.html(scb_microscopy.main({
             global_template: gstate.context.master_model,
             assignment: state.assignment,
@@ -889,12 +890,15 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             t: template,
             rows: rows_state.rows,
             rows_valid: rows_state.valid,
+			last_step: state.experiment.last_step,
             kind: kind,
             kinds: template.micro_kinds,
 
             can_prepare_slide: can_prepare_slide
         }));
         
+        if(state.experiment.last_step >= 5)
+			state.experiment.last_step = 5;
         //state.assignments.last_step = 6;
 
         if (kind == 'sample_prep') {

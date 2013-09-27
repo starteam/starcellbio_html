@@ -5,6 +5,7 @@
 * @param t template
 * @param global_template
 * @param context
+* @param last_step
 * @param assignment AssignmentView
 * @param experiment ExperimentView
   @param new_rows
@@ -19,6 +20,7 @@
         {param step:4/}
         {param assignment_name:$assignment.name/}
         {param experiment_name:$experiment.name/}
+        {param last_step: $last_step/}
         {param assignment:$assignment/}
         {param experiment:$experiment/}
     {/call}
@@ -52,6 +54,7 @@ Experiment active area
     {if $kind == 'readwrite'}
         {call scb_common.experiment_step}
             {param step:2/}
+
         {/call}
         <div class='scb_s_experiment_setup_choose_template'>
             <input class='scb_s_experiment_setup_choose_template_kind scb_f_experiment_setup_new_set_up' type="radio" name="setup_kind"/>Create new set-up<br>

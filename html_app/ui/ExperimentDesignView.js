@@ -138,11 +138,15 @@ scb.ui.ExperimentDesignView = function scb_ui_ExperimentDesignView(gstate) {
             global_template : gstate.context.master_model,
             context: gstate.context,
 			t : state.assignment.template,
+			last_step: state.experiment.last_step,
             assignment: state.assignment,
             experiment: state.experiment
 		}));
         state.experiment.last_view = 'experiment_design';
-        //state.assignments.last_step = 3;
+        if(state.experiment.last_step >= 5)
+			state.experiment.last_step = 5;
+		else
+			state.experiment.last_step = state.experiment.last_step  +1;
         document.title = state.experiment.name + " - StarCellBio" ;
 	}
 }

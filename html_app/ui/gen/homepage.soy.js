@@ -8,7 +8,7 @@ scb_homepage.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_homepage_view\'>');
   scb_homepage.display_header(opt_data, output);
-  scb_common.assignment_step({step: 0}, output);
+  scb_common.assignment_step({step: 0, last_step: opt_data.last_step}, output);
   scb_homepage.display_content(null, output);
   scb_homepage.display_footer(opt_data, output);
   output.append('</div>');
@@ -43,11 +43,11 @@ scb_homepage.display_experiment_design = function(opt_data, opt_sb) {
 
 scb_homepage.display_techniques = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  var techList31 = opt_data.techniques;
-  var techListLen31 = techList31.length;
-  for (var techIndex31 = 0; techIndex31 < techListLen31; techIndex31++) {
-    var techData31 = techList31[techIndex31];
-    output.append((techData31 == 'wb') ? '<span class=\'scb_s_homepage_technique_wb\'><span class=\'scb_s_homepage_technique_title_image\'>Western Blot</span><!-- <img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/western_blot.png\'>-->Western blotting detects overall changes in the amount or chemical modifications of a particular protein.<a href="pdf/Reference%20Library.pdf" class=\'scb_s_homepage_technique_learn_more\' target=\'_blank\' aria-label=\'Learn more about western blot\'>LEARN MORE</a></span><img class=\'scb_s_homepage_technique_bar\' src=\'images/homepage/experimental_design_bar.png\' alt=\'\'>' : '', (techData31 == 'fc') ? '<span class=\'scb_s_homepage_technique_flow\'><span class=\'scb_s_homepage_technique_title_image\'>Flow Cytometry</span><!-- <img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/flow_cytometry.png\'> -->Flow cytometry is used to count and analyze the size, shape and properties of individual cells within a heterogeneous population of cells.<a href="pdf/Reference%20Library.pdf" class=\'scb_s_homepage_technique_learn_more\' target=\'_blank\' aria-label=\'Learn more about flow cytometry\'>LEARN MORE</a></span><img class=\'scb_s_homepage_technique_bar\' src=\'images/homepage/experimental_design_bar.png\' alt=\'\'>' : '', (techData31 == 'micro') ? '<span class=\'scb_s_homepage_technique_micro\'><span class=\'scb_s_homepage_technique_title_image\'>Microscopy</span><!--    <img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/microscopy.png\'> -->Microscopy is used to study the shape, morphology and properties of cells, tissues or organisms that otherwise cannot be observed by eye.<a href="pdf/Reference%20Library.pdf" class=\'scb_s_homepage_technique_learn_more\' target=\'_blank\' aria-label=\'Learn more about microscopy\'>LEARN MORE</a></span>' : '', '<!--<img class=\'scb_s_homepage_technique_more\' src=\'images/homepage/more_techniques.png\'>-->');
+  var techList32 = opt_data.techniques;
+  var techListLen32 = techList32.length;
+  for (var techIndex32 = 0; techIndex32 < techListLen32; techIndex32++) {
+    var techData32 = techList32[techIndex32];
+    output.append((techData32 == 'wb') ? '<span class=\'scb_s_homepage_technique_wb\'><span class=\'scb_s_homepage_technique_title_image\'>Western Blot</span><!-- <img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/western_blot.png\'>-->Western blotting detects overall changes in the amount or chemical modifications of a particular protein.<a href="pdf/Reference%20Library.pdf" class=\'scb_s_homepage_technique_learn_more\' target=\'_blank\' aria-label=\'Learn more about western blot\'>LEARN MORE</a></span><img class=\'scb_s_homepage_technique_bar\' src=\'images/homepage/experimental_design_bar.png\' alt=\'\'>' : '', (techData32 == 'fc') ? '<span class=\'scb_s_homepage_technique_flow\'><span class=\'scb_s_homepage_technique_title_image\'>Flow Cytometry</span><!-- <img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/flow_cytometry.png\'> -->Flow cytometry is used to count and analyze the size, shape and properties of individual cells within a heterogeneous population of cells.<a href="pdf/Reference%20Library.pdf" class=\'scb_s_homepage_technique_learn_more\' target=\'_blank\' aria-label=\'Learn more about flow cytometry\'>LEARN MORE</a></span><img class=\'scb_s_homepage_technique_bar\' src=\'images/homepage/experimental_design_bar.png\' alt=\'\'>' : '', (techData32 == 'micro') ? '<span class=\'scb_s_homepage_technique_micro\'><span class=\'scb_s_homepage_technique_title_image\'>Microscopy</span><!--    <img class=\'scb_s_homepage_technique_title_image\' src=\'images/homepage/microscopy.png\'> -->Microscopy is used to study the shape, morphology and properties of cells, tissues or organisms that otherwise cannot be observed by eye.<a href="pdf/Reference%20Library.pdf" class=\'scb_s_homepage_technique_learn_more\' target=\'_blank\' aria-label=\'Learn more about microscopy\'>LEARN MORE</a></span>' : '', '<!--<img class=\'scb_s_homepage_technique_more\' src=\'images/homepage/more_techniques.png\'>-->');
   }
   return opt_sb ? '' : output.toString();
 };

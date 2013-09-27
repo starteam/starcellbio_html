@@ -6,6 +6,7 @@ FACS Main View
 @param assignment AssignmentView
 @param experiment
 @param context
+@param last_step
 @param facs
 @param t
 @param kind
@@ -20,6 +21,7 @@ FACS Main View
     {/call}
     {call scb_common.assignment_step}
     {param step:6/}
+    {param last_step: $last_step/}
     {param assignment_name:$assignment.name/}
     {param experiment_name:$experiment.name/}
     {param assignment:$assignment/}

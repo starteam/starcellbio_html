@@ -8,6 +8,7 @@
 * @param assignment AssignmentView
 * @param western_blot WesternBlotView
 * @param experiment
+* @param last_step
 * @param western_blot_gel
 * @param rows
 * @param kind
@@ -22,6 +23,7 @@
     {/call}
     {call scb_common.assignment_step}
     {param step:6/}
+    {param last_step: $last_step/}
     {param assignment_name:$assignment.name/}
     {param experiment_name:$experiment.name/}
     {param assignment:$assignment/}

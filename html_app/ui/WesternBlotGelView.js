@@ -347,13 +347,15 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
             experiment: state.experiment,
             western_blot: state.western_blot,
             context: gstate.context,
+			last_step: state.experiment.last_step,
             western_blot_gel: state.western_blot_gel,
             rows: rows,
             kind: kind,
             valid_rows: rows_state.valid
         }));
-        
-        
+        if(state.experiment.last_step >= 5)
+			state.experiment.last_step = 5;
+
         if(state.western_blot.gel_list.start_tabs_index <= 0){
 			state.western_blot.gel_list.start_tabs_index = 0;
 			$('.scb_s_western_blot_gel_left_western_blot').prop('disabled', true);

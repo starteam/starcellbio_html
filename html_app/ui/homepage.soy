@@ -3,6 +3,7 @@
 /**
 * Assignment selector
 * @param global_template
+* @param last_step
 * @param context
 */
 {template .main}
@@ -13,6 +14,7 @@
     {/call}
     {call scb_common.assignment_step}
     {param step:0/}
+    {param last_step: $last_step/}
     {/call}
     {call .display_content/}
     {call .display_footer}

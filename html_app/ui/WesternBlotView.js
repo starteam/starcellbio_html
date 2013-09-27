@@ -387,12 +387,14 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             rows: rows_state.rows,
             context: gstate.context,
             rows_valid: rows_state.valid,
+			last_step: state.experiment.last_step,
             kind: kind,
             kinds: template.lysate_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
         
-        
+        if(state.experiment.last_step >= 5)
+			state.experiment.last_step = 5;
         if(state.western_blot.parent.start_tabs_index <= 0){
 			state.western_blot.parent.start_tabs_index = 0;
 			$('.scb_s_western_blot_left_western_blot').prop('disabled', true);
