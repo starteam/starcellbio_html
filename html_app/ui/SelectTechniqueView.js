@@ -43,7 +43,7 @@ scb.ui.SelectTechniqueView = function scb_ui_SelectTechniqueView(gstate) {
             experiment: state.experiment
         }));
         if(state.experiment.last_step >= 5)
-			state.experiment.last_step = 5;
+			state.experiment.last_step = 6;
 		else
 			state.experiment.last_step = state.experiment.last_step  +1;
 

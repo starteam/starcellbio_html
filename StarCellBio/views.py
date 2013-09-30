@@ -13,7 +13,8 @@ import bz2
 import StringIO
 from django.core.files.base import ContentFile
 import StarCellBio.settings
-
+import os
+import StarCellBio.supplements as supplements
 
 def home(request):
 
@@ -133,3 +134,18 @@ def post_state(request, **kwargs):
 	response['Content-Type'] = 'text/javascript'
 	return response
 
+def contact(request, **kwargs):
+	print "Content-Type: text/html"     # HTML is following
+	print                               # blank line, end of headers
+	#pudb.set_trace()
+	#method = os.environ['REQUEST_METHOD']
+	if request.method == "POST":
+		try:
+			post = supplements.get_post_dict(request)
+		except supplements.MissingData, e:
+			print "<h1>Error: %s</h1>" % e.value
+			return
+		supplements.send_feedback(post)
+		return HttpResponse(supplements.success(post))
+	else:
+		return HttpResponse('POST-only cgi') 

@@ -394,7 +394,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         }));
         
         if(state.experiment.last_step >= 5)
-			state.experiment.last_step = 5;
+			state.experiment.last_step = 6;
         if(state.western_blot.parent.start_tabs_index <= 0){
 			state.western_blot.parent.start_tabs_index = 0;
 			$('.scb_s_western_blot_left_western_blot').prop('disabled', true);
@@ -438,6 +438,9 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 //            $('.scb_f_western_blot_sample_active[checked="checked"]').removeAttr('disabled');
 //
 //        }
+
+		state.western_blot.parent.selected_id = state.western_blot.id;
+
         state.experiment.last_view = 'western_blot';
         //state.assignments.last_step = 6;
 		$('ol.scb_s_western_blot_choose_samples_order_list').sortable();

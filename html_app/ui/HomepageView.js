@@ -32,7 +32,17 @@ scb.ui.static.HomepageView.register = function(workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_create_instructors_account', function (e) {
         alert( "under construction!");
     });
-
+	
+	scb.utils.off_on(workarea, 'click', '.scb_f_contact', function (e){
+		scb.utils.off_on(workarea, 'click', '.scb_f_contact_close_button', function () {
+			$('.scb_s_contact_dialog').detach();
+			
+			$('.scb_f_contact_submit_button').submit(function(){
+				scb_ui.static.MainFrame.refresh();
+			});
+		});
+	});
+	
     scb.utils.off_on(workarea, 'click', '.scb_f_create_student_account', function (e) {
     	$(workarea).append(scb_auth.signup({}));
         //document.location = '/accounts/signup';

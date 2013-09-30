@@ -48,6 +48,35 @@
 }
 
 
+.scb_s_microscopy_all_tabs {
+    display: block;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    position: relative;
+    padding-bottom:8px;
+    padding-top: 25px;
+    margin-left: 8px;
+    width: 942px;
+    margin-top:30px;
+    @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+}
+
+
+.scb_s_microscopy_tabs {
+	position: absolute; 
+	left:10px;
+	
+}
+
+
+.scb_s_microscopy_tabs > a{
+	color: gray;
+}
+
+.scb_s_microscopy_active > span {
+	color: black;
+}
+
 .scb_s_microscopy_progress {
     display: block;
     width:800px;
@@ -229,7 +258,16 @@ body.dragging, body.dragging * {
 
 
 .scb_s_microscopy_tab_content{
+	top: 30px;
+	left: 8px;
 	margin-top: -27px;
+ 	background-color: #FFFFFF;
+ 	background-image: none;
+ 	min-height: 439px;
+ 	width: 920px;
+ 	padding: 0px;
+ 	padding-bottom: 10px;
+	margin-bottom: 50px;
  
 }
 

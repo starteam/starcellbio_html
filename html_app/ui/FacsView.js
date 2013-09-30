@@ -582,7 +582,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             can_prepare_lysate: can_prepare_lysate
         }));
         if(state.experiment.last_step >= 5)
-			state.experiment.last_step = 5;
+			state.experiment.last_step = 6;
         $('.scb_f_facs_sample_active', $('.scb_s_facs_samples_table')).each(function (e) {
         		var element = $('input[type="radio"][checked="checked"]', $(this).parent().parent());
         	if($(this).attr('checked'))
@@ -595,8 +595,9 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
     	})
         
         document.title = "FACS - StarCellBio";
-
-
+		
+		state.facs.parent.selected_id = state.facs.id;
+		state.experiment.last_view = 'facs';
 		if(state.facs.parent.start_tabs_index <= 0){
 			state.facs.parent.start_tabs_index = 0;
 			$('.scb_s_facs_left_facs').prop('disabled', true);

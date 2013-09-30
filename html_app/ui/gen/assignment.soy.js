@@ -8,16 +8,6 @@ scb_assignment.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_assignment_view\'>');
   scb_homepage.display_header(opt_data, output);
-  output.append('<!--  ');
-  var tname__soy8 = new soy.StringBuilder((assignment.experiments.selected.last_view == 'western_blot') ? '' : '');
-  tname__soy8 = tname__soy8.toString();
-  var tview__soy11 = new soy.StringBuilder();
-  tview__soy11 = tview__soy11.toString();
-  var tparam__soy12 = new soy.StringBuilder(' ');
-  tparam__soy12 = tparam__soy12.toString();
-  var tid__soy14 = new soy.StringBuilder();
-  tid__soy14 = tid__soy14.toString();
-  output.append(' -->');
   scb_common.assignment_step({step: 2, last_step: opt_data.last_step, assignment_name: opt_data.assignment.name, assignment: opt_data.assignment}, output);
   scb_assignment.display_assignment(opt_data, output);
   scb_assignment.display_details(opt_data, output);

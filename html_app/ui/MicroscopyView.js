@@ -898,8 +898,13 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         }));
         
         if(state.experiment.last_step >= 5)
-			state.experiment.last_step = 5;
+			state.experiment.last_step = 6;
         //state.assignments.last_step = 6;
+
+		
+		state.experiment.last_view = 'microscopy';
+		
+		state.microscopy.parent.selected_id = state.microscopy.id;
 
         if (kind == 'sample_prep') {
             if (_.keys(template.micro_kinds).length == 1) {
@@ -914,7 +919,6 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         }
         
         
-		
 
         // var workarea = state.workarea;
 //         var experiment = state.experiment;

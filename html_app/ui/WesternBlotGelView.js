@@ -354,7 +354,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
             valid_rows: rows_state.valid
         }));
         if(state.experiment.last_step >= 5)
-			state.experiment.last_step = 5;
+			state.experiment.last_step = 6;
 
         if(state.western_blot.gel_list.start_tabs_index <= 0){
 			state.western_blot.gel_list.start_tabs_index = 0;
@@ -376,7 +376,8 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         //state.assignments.last_step = 6;
 
         state.western_blot.last_gel = state.western_blot_gel.id;
-
+		
+		state.western_blot.parent.selected_id = state.western_blot.id;
 
         $('.scb_f_wb_exposure_slider').slider({
             orientation: "horizontal",

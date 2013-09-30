@@ -264,6 +264,42 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 //             self.show({});
 //         }
     });
+    
+    scb.utils.off_on(workarea.parent(), 'click', '.scb_f_contact', function (evt) {
+    	$(workarea).append(scb_contact.contact({}));
+    	scb.utils.off_on(workarea, 'click', '.scb_f_contact_close_button', function () {
+                $('.scb_s_contact_dialog').detach();
+        });
+		$('iframe').load(function(){
+
+			var iframe = $('iframe').contents();
+
+			iframe.find(".scb_f_contact_submit_button").click(function(e){
+					$('iframe').load(function(){
+						  var profile = $('iframe').contents();
+						  //console.log(profile);
+						  if(profile[0].body.textContent.indexOf('you for your feedback.') >0){
+							  parent.document.location.reload();
+							  }
+					});
+					  // $.ajax({
+// 						type: 'POST',
+// 						url: 'http://starapp.mit.edu/cgi-bin/feedback/webfeedback.cgi',
+// 						cache: false, 
+// 						crossDomain: true,
+// 						data: $(this).serialize(),
+// 						success: function(responseData, textStatus, jqXHR) {
+// 							alert('post worked');
+// 						},
+// 						error: function (responseData, textStatus, errorThrown) {
+// 							alert('POST failed.');
+// 						}
+// 					});
+// 					return false;
+
+				});
+		});
+    });
 
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
         scb.ui.static.MainFrame.ensure_auth_context();

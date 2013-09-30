@@ -822,7 +822,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             kind: state.mode
         }));
         if(state.experiment.last_step >= 5)
-			state.experiment.last_step = 5;
+			state.experiment.last_step = 6;
 		else
 			state.experiment.last_step = state.experiment.last_step  +1;
         if (rows.length > 0){
