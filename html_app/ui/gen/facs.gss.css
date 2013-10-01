@@ -188,6 +188,16 @@ input[type=radio]:disabled {
   margin-top: 28px;
   height: 358px;
 }
+.scb_s_facs_gel_tabs {
+  width: 640px;
+  height: 25px;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
+  margin-left: 9px;
+  margin-right: -1px;
+  margin-top: -1px;
+}
 .scb_s_facs_samples_table>table>tbody {
   background-color: #edeef2;
 }

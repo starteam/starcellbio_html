@@ -234,7 +234,6 @@ scb.ui.static.FacsView.scb_s_facs_right_facs = function(element, event){
 
 scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
-	console.log('jalwa');
 	console.log(parsed.facs.parent.start_tabs_index);
 	console.log(parsed.facs.parent.list.length);
 	if(parsed.facs.parent.list.length==5){
@@ -245,6 +244,20 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
+
+scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    parsed.experiment.facs_list.remove(parsed.facs.id);
+    parsed.state.view = 'select_technique';
+    delete parsed.state.skip_hash_update;
+    scb.ui.static.MainFrame.refresh(parsed.state);
+
+
+}
 
 scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_facs_sample_active', function (e) {
@@ -264,6 +277,10 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
+    });
+    
+   scb.utils.off_on(workarea, 'click', '.scb_f_facs_remove', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_remove(this);
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_s_facs_choose_samples_order_list>li', function (e) {

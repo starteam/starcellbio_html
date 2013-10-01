@@ -75,7 +75,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
     }
 
     parsed.experiment.western_blot_list.remove(parsed.western_blot.id);
-    parsed.state.view = 'western_blot';
+    parsed.state.view = 'select_technique';
     delete parsed.state.skip_hash_update;
     scb.ui.static.MainFrame.refresh(parsed.state);
 
@@ -409,7 +409,8 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		else $('.scb_s_western_blot_right_western_blot').prop('disabled', false);
         
         
-        
+        document.title = "Western Blot - StarCellBio";
+
         
         if(kind != 'sample_prep') {
         	$('.scb_s_western_blot_video_box_wrapper').remove();

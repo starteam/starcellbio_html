@@ -9,10 +9,8 @@
 }
 .scb_microscopy_details_view_inner {
   width: 950px;
-  margin-top: 5px;
   margin-bottom: 5px;
-  padding-left: 10px;
-  padding-top: 25px;
+  padding-left: 2px;
   position: relative;
 }
 .scb_s_microscopy_sample_selected {
@@ -24,18 +22,32 @@
   border-radius: 5px;
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 0;
-  margin-top: 20px;
+  margin-bottom: 5px;
   min-height: 300px;
   background-color: #edeef2;
-  width: 70%;
+  margin-top: 180px;
+}
+.scb_s_microscopy_add_microscopy {
+  color: black;
+  text-align: center;
+}
+.scb_s_microscopy_add_cross_microscopy {
+  cursor: pointer;
+  float: right;
+  margin-right: 17px;
+}
+.scb_s_microscopy_left_microscopy, .scb_s_microscopy_right_microscopy {
+  padding: 3px;
+  margin: 0;
+  margin-right: -5px;
+  margin-left: -5px;
 }
 .scb_s_microscopy_all_tabs {
   display: block;
   border: 1px solid #808080;
   border-radius: 5px;
   position: relative;
-  padding-bottom: 8px;
+  padding-bottom: 21px;
   padding-top: 25px;
   margin-left: 8px;
   width: 942px;
@@ -48,7 +60,6 @@
 }
 .scb_s_microscopy_tabs {
   position: absolute;
-  left: 10px;
 }
 .scb_s_microscopy_tabs>a {
   color: gray;
@@ -107,8 +118,24 @@
   color: #189689;
 }
 .scb_s_microscopy_samples_area {
-  margin-top: 28px;
-  margin-left: 15px;
+  margin-bottom: 28px;
+  margin-left: 10px;
+  margin-top: 198px;
+  height: 358px;
+  width: 295px;
+}
+.scb_space_control {
+  margin: 0;
+}
+.scb_s_microscopy_samples_select_all_abs {
+  margin-bottom: 62px;
+  bottom: 0;
+  position: absolute;
+  border-top: #80d1ae solid 2px;
+  padding-top: 2px;
+}
+.scb_s_microscopy_blank_space1 {
+  width: 649px;
 }
 .lens {
   display: inline-block;
@@ -118,6 +145,13 @@
 .lens_panel {
   display: inline-block;
   width: 300px;
+}
+.scb_s_microscopy_samples_slide_area {
+  display: inline-block;
+  vertical-align: top;
+  width: 600px;
+  height: 400px;
+  padding-top: 190px;
 }
 .scb_s_microscopy_tools {
   width: 225px;
@@ -159,12 +193,18 @@ body.dragging, body.dragging * {
   font-family: 'sourcesanspro-semibold';
   margin-top: 10px;
 }
-.scb_s_microscopy_samples_slide_area {
-  display: inline-block;
-  margin-top: 15px;
-  margin-left: 10px;
-  margin-bottom: 100px;
-  width: 600px;
+.scb_s_microscopy_slide_content {
+  height: 350px;
+  width: 580px;
+  position: relative;
+  border: 1px solid #80d1ae;
+  background-color: white;
+  margin-left: 8px;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+.scb_s_microscopy_tab_content_slide {
+  min-height: 720px;
 }
 #lens {
   display: inline-block;
@@ -198,6 +238,10 @@ body.dragging, body.dragging * {
 .scb_f_microscopy_remove {
   border: none;
   background-color: white;
+  cursor: pointer;
+  float: right;
+  margin-right: 18px;
+  margin-top: 3px;
 }
 .scb_s_microscopy_tab_content>.scb_f_open_select_technique {
   bottom: 10px;
@@ -213,7 +257,7 @@ body.dragging, body.dragging * {
   width: 920px;
   padding: 0;
   padding-bottom: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 82px;
 }
 .scb_s_microscopy_samples_table>table {
   width: 100%;
@@ -232,12 +276,6 @@ body.dragging, body.dragging * {
 }
 .scb_s_microscopy_samples_table_tr {
   margin: 0;
-}
-.scb_s_microscopy_blank_space1 {
-  width: 404px;
-}
-.scb_s_microscopy_blank_space2 {
-  width: 14px;
 }
 .scb_f_microscopy_sample_inactive_all, .scb_f_microscopy_sample_active_all {
   background-color: #fff;
@@ -280,9 +318,10 @@ body.dragging, body.dragging * {
   border-radius: 1px;
   border: 1px solid #e1e3e8;
   position: absolute;
-  top: 110px;
   right: 0;
+  top: 10px;
   box-shadow: 0 0 6px gray;
+  margin-right: 12px;
 }
 .scb_s_navigation_button_choose_slide_button {
   position: relative;
@@ -308,6 +347,7 @@ body.dragging, body.dragging * {
 .scb_s_microscope_status {
   color: #189689;
   font-size: 15pt;
+  background-color: rgba(255,255,255,0);
 }
 .scb_s_controls_note {
   font-size: 9pt;
@@ -342,7 +382,6 @@ body.dragging, body.dragging * {
   font-size: 7.5pt;
   font-family: 'sourcesanspro-semibold';
   display: inline-block;
-  padding-left: 2em;
 }
 .scb_s_microscopy_video_text {
   color: black;
