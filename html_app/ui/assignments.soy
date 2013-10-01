@@ -3,6 +3,7 @@
 /**
 * Assignment selector
 * @param global_template
+* @param last_step
 * //@/param t template
 * @param assignments AssignmentsView
 * @param context
@@ -16,6 +17,7 @@
     {/call}
     {call scb_common.assignment_step}
         {param step:1/}
+        {param last_step: $last_step/}
         {param assignments:assignments/}
     {/call}
     {call .display_assignments}

@@ -26,7 +26,8 @@
     list-style-image: url('images/homepage/cells.png');
     background-color: #e1e3e8;
     position: relative;
-    left:50px;
+    left:33px;
+    margin-right: 95px;
 }
 
 .pagination > li {
@@ -51,6 +52,26 @@
 }
 .pagination > li.current > a {
     color: white;
+}
+
+
+#slider > a{
+	font-size: 25px;
+	margin-left: 15px;
+	margin: 2px;
+	color: #727272;
+}
+
+#slider > a{
+	font-size: 25px;
+	margin-left: 15px;
+	margin: 2px;
+	color: #727272;
+}
+
+.pagination {
+	
+    display: inline-table;
 }
 
 .pagination > li > a {
@@ -95,7 +116,7 @@
     vertical-align: top;
     color: white;
     display: inline-block;
-    margin-right:1em;
+    margin-right:8px;
     @mixin gradient(top,#81c9f1,#028dde,#008ddd);
 }
 

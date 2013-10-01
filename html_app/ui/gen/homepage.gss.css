@@ -70,6 +70,19 @@
   float: left;
   padding: 15px;
   display: block;
+  width: 25%;
+}
+.scb_s_user_guide_icon {
+  margin-left: 5px;
+}
+.scb_s_user_guide_text {
+  margin-right: -15px;
+}
+.scb_s_cabinet_icon {
+  margin-left: 5px;
+}
+.scb_s_cabinet_text {
+  margin-right: 5px;
 }
 .scb_s_logo_h1 {
   display: inline;
@@ -124,8 +137,8 @@
   display: inline-block;
   background-image: url('../images/homepage/SCB_Homepage_HeroImage.png');
   height: 318px;
-  width: 667px;
-  margin-left: 20px;
+  width: 678px;
+  margin-left: 7px;
 }
 .scb_s_homepage_top_left_image {
   padding: 40px 12px 15px;
@@ -191,8 +204,8 @@
   height: 207px;
   margin-top: 15px;
   border-radius: 5px;
-  margin-left: 23px;
-  width: 925px;
+  margin-left: 11px;
+  width: 936px;
   background-image: url('../images/homepage/SCB_Homepage_LowerBG.png');
 }
 .scb_s_homepage_experimental_design {
@@ -286,6 +299,7 @@
   height: 200px;
   vertical-align: top;
   position: relative;
+  left: 15px;
 }
 .scb_s_homepage_technique_title {
   display: block;
@@ -384,7 +398,7 @@
   top: 50px;
   left: 20px;
   width: 250px;
-  background: black;
+  background: rgba(0,0,0,0.5);
   line-height: 18pt;
 }
 .scb_s_homepage_top_left_text b {

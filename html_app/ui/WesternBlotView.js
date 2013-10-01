@@ -26,8 +26,14 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
-    var lysate_type = $(element).val();
+	
+	var lysate_type = ''
+	if($(element).attr('kind')){
+		lysate_type=$(element).attr('kind');
+	}
+	else{
+    	lysate_type = $(element).val();
+    }
     if (lysate_type == '') {
         return;
     }
@@ -36,7 +42,8 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (
         var cell_treatment_id = $(element).attr('cell_treatment_id');
         parsed.western_blot.lanes_list.start({
             kind: lysate_type,
-            cell_treatment_id: cell_treatment_id
+            cell_treatment_id: cell_treatment_id,
+            experiment_id: parsed.experiment.id
         });
     }
     else {
@@ -60,12 +67,28 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_remove = function (eleme
     scb.ui.static.MainFrame.refresh();
 }
 
-scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (element, event) {
+
+scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
 
+    parsed.experiment.western_blot_list.remove(parsed.western_blot.id);
+    parsed.state.view = 'select_technique';
+    delete parsed.state.skip_hash_update;
+    scb.ui.static.MainFrame.refresh(parsed.state);
+
+
+}
+
+
+scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (element, event) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+	
     var val = $(element).attr('checked');
     var cell_treatment_id = $(element).attr('cell_treatment_id');
 
@@ -89,19 +112,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (eleme
     }
 }
 
-scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
-    var parsed = scb.ui.static.WesternBlotView.parse(element);
-    if (parsed.redisplay) {
-        alert("INVALID ELEMENT!");
-    }
 
-    parsed.experiment.western_blot_list.remove(parsed.western_blot.id);
-    parsed.state.view = 'select_technique';
-    delete parsed.state.skip_hash_update;
-    scb.ui.static.MainFrame.refresh(parsed.state);
-
-
-}
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_selected = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
@@ -119,11 +130,15 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     }
     var rows_state = parsed.western_blot.rows_state();
     if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
-        alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.");
+    	$.jqDialog.alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.", function() {	/* callback function for 'OK' button*/ });
+
+//         alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.");
 
     }
     else if (rows_state.valid < 1) {
-        alert("Please select at least 1 lysate to prepare.");
+    	$.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {	/* callback function for 'OK' button*/ });
+
+//         alert("Please select at least 1 lysate to prepare.");
 
     }
     else {
@@ -163,17 +178,31 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
     }
 
     if (!parsed.western_blot.marker_loaded) {
-        var r = confirm("The protein size marker has not been loaded. Would you like to continue?")
-        if (r == false) {
-            return;
-        }
+		$.jqDialog.confirm("The protein size marker has not been loaded. Would you like to continue?",
+			function() {    
+				//TODO: 1st things first -- we needs to save NEW order
+    			parsed.western_blot.is_transfered = true;
+
+    			//TODO: before repaint need to do steps in animation...
+    			scb.ui.static.MainFrame.refresh();
+    		},// callback function for 'YES' button
+			function() {
+					return;
+			}		// callback function for 'NO' button
+		);
+//         var r = confirm("The protein size marker has not been loaded. Would you like to continue?")
+//         if (r == false) {
+//             return;
+//         }
+    }
+    else{
+    	parsed.western_blot.is_transfered = true;
+
+    	//TODO: before repaint need to do steps in animation...
+    	scb.ui.static.MainFrame.refresh();
     }
 
-    //TODO: 1st things first -- we needs to save NEW order
-    parsed.western_blot.is_transfered = true;
 
-    //TODO: before repaint need to do steps in animation...
-    scb.ui.static.MainFrame.refresh();
 }
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active_all = function (element) {
     $('.scb_f_western_blot_sample_active').each(function (e) {
@@ -219,6 +248,30 @@ scb.ui.static.WesternBlotView.populate_wells = function (rows, state, gstate) {
     }
 }
 
+scb.ui.static.WesternBlotView.scb_s_western_blot_left_western_blot = function(element, event){
+	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index -1;
+	scb.ui.static.MainFrame.refresh(parsed.state);
+}
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_right_western_blot = function(element, event){
+	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index +1;
+	scb.ui.static.MainFrame.refresh(parsed.state);
+}
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot= function(element, event){
+	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	console.log('jalwa');
+	console.log(parsed.western_blot.parent.start_tabs_index);
+	console.log(parsed.western_blot.parent.list.length);
+	if(parsed.western_blot.parent.list.length==5){
+		parsed.western_blot.parent.start_tabs_index = 1;
+	}
+	else if (parsed.western_blot.parent.list.length >5)
+		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index +1;
+	scb.ui.static.MainFrame.refresh(parsed.state);
+}
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_choose_samples_list_item = function (element) {
 	
@@ -276,8 +329,17 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_run_gel_and_transfer', function (e, ui) {
         scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer(this);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_left_western_blot', function (e) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_left_western_blot(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_right_western_blot', function (e) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_right_western_blot(this);
+    });
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_active_all', function (e, ui) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active_all(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_add_western_blot', function (e, ui) {
+        scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_inactive_all', function (e, ui){
     	scb.ui.static.WesternBlotView.scb_f_western_blot_sample_inactive_all(this);
@@ -313,7 +375,9 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         }
 
         var can_prepare_lysate = rows_state.valid > 0;
-
+        console.log(')))))))))))))))))');
+		console.log(state.western_blot.parent.start_tabs_index);
+		console.log(')))))))))))))))))');
         workarea.html(scb_western_blot.main({
             global_template: gstate.context.master_model,
             t: template,
@@ -323,15 +387,40 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             rows: rows_state.rows,
             context: gstate.context,
             rows_valid: rows_state.valid,
+			last_step: state.experiment.last_step,
             kind: kind,
             kinds: template.lysate_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
+        
+        if(state.experiment.last_step >= 5)
+			state.experiment.last_step = 6;
+        if(state.western_blot.parent.start_tabs_index <= 0){
+			state.western_blot.parent.start_tabs_index = 0;
+			$('.scb_s_western_blot_left_western_blot').prop('disabled', true);
+			$('.scb_s_western_blot_right_western_blot').prop('disabled', false);
+		}
+		else $('.scb_s_western_blot_left_western_blot').prop('disabled', false);
+		
+		if(state.western_blot.parent.start_tabs_index + 4 ==state.western_blot.parent.list.length-1){
+			$('.scb_s_western_blot_right_western_blot').prop('disabled', true);
+			$('.scb_s_western_blot_left_western_blot').prop('disabled', false);
+		}
+		else $('.scb_s_western_blot_right_western_blot').prop('disabled', false);
+        
+        
+        document.title = "Western Blot - StarCellBio";
+
+        
+        if(kind != 'sample_prep') {
+        	$('.scb_s_western_blot_video_box_wrapper').remove();
+        }
         if (kind == 'sample_prep') {
             if (_.keys(template.lysate_kinds).length == 1) {
                 $('button.scb_f_western_blot_sample_remove').hide();
+            	//strange bug where clicks not reflected in place, hitting cancel button corrects this problem.  
             }
-
+            
         }
         if (kind == 'prepare_gel') {
             //$('.scb_s_western_blot_choose_samples_order_list').sortable();
@@ -350,7 +439,11 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 //            $('.scb_f_western_blot_sample_active[checked="checked"]').removeAttr('disabled');
 //
 //        }
+
+		state.western_blot.parent.selected_id = state.western_blot.id;
+
         state.experiment.last_view = 'western_blot';
+        //state.assignments.last_step = 6;
 		$('ol.scb_s_western_blot_choose_samples_order_list').sortable();
 		
     }

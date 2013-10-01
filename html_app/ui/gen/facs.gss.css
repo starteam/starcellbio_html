@@ -3,6 +3,9 @@
   width: 400px;
   height: 360px;
 }
+.scb_s_facs_choose_samples_order_list {
+  width: 200px;
+}
 .scb_s_facs_chart_yaxis {
   position: absolute;
   width: 360px;
@@ -29,9 +32,11 @@
   font-size: 11pt;
 }
 .scb_s_facs_chart {
+  margin: 20px;
+  margin-left: 10px;
   position: absolute;
-  width: 350px;
-  height: 325px;
+  width: 330px;
+  height: 305px;
   top: 0;
   left: 25px;
 }
@@ -45,19 +50,153 @@
   height: 120px;
   margin-left: 25px;
 }
+.scb_s_facs_progress_rest {
+  background: url('../images/western_blot/progress_bg.png');
+  display: inline-block;
+  padding: 5px;
+  padding-top: 8px;
+  margin-left: 12px;
+  border-radius: 6px;
+  font-size: 10.5pt;
+  height: 22px;
+  border-right: 2px solid #d7d7d7;
+  position: relative;
+  top: 5px;
+}
+.scb_s_facs_blank_space1 {
+  width: 643px;
+}
+.scb_f_facs_sample_active_all, .scb_f_facs_sample_inactive_all {
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-image: -moz-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-image: -ms-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-image: -o-linear-gradient(top,#f2f2f2,#d3d1d2);
+  border: 1px solid #e0e0e0;
+  border-radius: 5pt;
+  width: 120px;
+  height: 30px;
+  color: black;
+  font-size: 10pt;
+  font-family: 'sourcesanspro-semibold';
+  cursor: pointer;
+}
+.scb_s_facs_left_facs, .scb_s_facs_right_facs {
+  padding: 3px;
+  margin: 0;
+  margin-right: -5px;
+  margin-left: -5px;
+}
 .scb_f_facs_prepare_lysates {
   float: right;
+  position: relative;
+  top: 33px;
+}
+.scb_s_facs_all_tabs {
+  display: block;
+  border: 1px solid #808080;
+  border-radius: 5px;
+  position: relative;
+  padding-bottom: 8px;
+  padding-top: 25px;
+  margin-left: 8px;
+  width: 942px;
+  margin-top: 30px;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
+}
+.scb_s_facs_view {
+  background: #f4f6f8;
+  width: 960px;
+}
+.scb_s_facs_tabs {
+  position: absolute;
+  top: 2px;
+  left: 10px;
+}
+.scb_s_facs_tabs>a {
+  color: gray;
+}
+.scb_s_facs_active>span {
+  color: black;
+}
+input[type=radio] {
+  margin-right: 7px;
+  -webkit-appearance: none;
+  margin-bottom: 0;
+  height: 13px;
+  width: 12px;
+  border: 1px solid #c0c0c0;
+  background-color: #d0d0d0;
+  border-radius: 6px;
+}
+input[type=radio]:checked {
+  margin-right: 7px;
+  -webkit-appearance: none;
+  margin-bottom: 0;
+  height: 13px;
+  width: 12px;
+  border: 1px solid #000;
+  background-color: #80d1ae;
+  border-radius: 6px;
+}
+input[type=radio]:disabled {
+  opacity: .5;
+}
+.scb_s_facs_add_facs {
+  color: black;
+  text-align: center;
+}
+.scb_s_facs_add_cross_facs {
+  cursor: pointer;
+  float: right;
+  margin-right: 17px;
+}
+.scb_f_facs_remove {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  float: right;
+  margin-right: 18px;
+  margin-top: 3px;
+}
+.scb_s_facs_tab_content {
+  top: 30px;
+  left: 8px;
+  margin-top: -27px;
+  background-color: #fff;
+  background-image: none;
+  min-height: 439px;
+  width: 920px;
+  padding: 0;
+  padding-bottom: 10px;
+  margin-bottom: 50px;
 }
 .scb_s_facs_samples_table>table {
-  border: 1px solid #80d1ae;
-  border-radius: 5px;
-  border-spacing: 0;
   width: 100%;
-  background-color: white;
-  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+.facs_locked {
+  opacity: .5;
 }
 .scb_s_facs_samples_area {
   margin-bottom: 28px;
+  margin-left: 5px;
+  margin-top: 28px;
+  height: 358px;
+}
+.scb_s_facs_gel_tabs {
+  width: 640px;
+  height: 25px;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
+  margin-left: 9px;
+  margin-right: -1px;
+  margin-top: -1px;
 }
 .scb_s_facs_samples_table>table>tbody {
   background-color: #edeef2;
@@ -70,7 +209,11 @@
   font-size: 10pt;
 }
 .scb_f_facs_run_samples {
-  margin-left: 40px;
+  border: none;
+  margin-top: 20px !important;
+  margin-left: 50px !important;
+  margin-right: 20px !important;
+  margin-bottom: 20px !important;
 }
 .scb_s_facs_tab_content_analyze {
   padding: 5px;
@@ -93,17 +236,23 @@
 .scb_f_facs_tools_start_analysis {
   position: absolute;
   bottom: 8px;
-  left: 50px;
+  border: none;
 }
 .scb_s_facs_tools_instructions_initial {
   font-family: sourcesanspro-regular;
   font-size: 12pt;
 }
-.scb_s_facs_tools>h1 {
-  font-size: 14pt;
+.scb_s_facs_apply {
+  position: absolute;
+  top: 320px;
+  font-family: 'sourcesanspro-regular';
+  font-size: 10pt;
 }
 .scb_s_facs_tools_analyze_data {
   border: 1px solid #80d1ae;
+  margin-top: 10px;
+  margin-left: 4px;
+  overflow: hidden;
   border-radius: 5px;
   border-spacing: 0;
   width: 200px;

@@ -5,6 +5,7 @@
 * @param t template
 * @param global_template
 * @param context
+* @param last_step
 * @param assignment Assignment model
 * @param experiment Experiment model
 */
@@ -16,6 +17,7 @@
     {/call}
     {call scb_common.assignment_step}
         {param step:3/}
+        {param last_step: $last_step/}
         {param assignment_name:$assignment.name/}
         {param experiment_name:$experiment.name/}
         {param assignment:$assignment/}

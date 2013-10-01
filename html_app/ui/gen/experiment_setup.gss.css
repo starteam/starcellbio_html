@@ -15,8 +15,8 @@
   border-color: #e1e1e1;
   border-radius: 8px;
   padding: 10px;
-  width: 928px;
-  left: 5px;
+  width: 922px;
+  margin-left: 8px;
   background-color: #fff;
   background-image: -webkit-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
@@ -28,19 +28,24 @@
   bottom: 5px;
   left: 5px;
 }
-.scb_s_experiment_setup_top>.scb_f_open_experiment_setup_readonly, .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
+.scb_s_experiment_setup_top>.scb_f_open_experiment_setup_readonly {
   position: absolute;
   bottom: 5px;
+  right: 5px;
+}
+.scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
+  position: absolute;
+  bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 4px;
   right: 5px;
 }
 .scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  width: 305px;
 }
 .scb_s_experiment_setup_choose_template {
-  height: 155px;
   width: 600px;
   display: block;
 }
@@ -61,11 +66,33 @@ table.scb_s_experiment_setup_table {
   margin-bottom: 75px;
   position: relative;
 }
+.scb_s_experiment_setup_new_set_up {
+  visibility: hidden;
+}
 .scb_s_western_blot_samples_select_all_abs {
   bottom: 0;
-  margin-bottom: 65px;
+  margin-bottom: 18px;
   position: absolute;
   border-top: #80d1ae solid 2px;
+  padding-top: 2px;
+}
+.scb_s_facs_samples_select_all_abs {
+  bottom: 0;
+  margin-bottom: 30px;
+  position: absolute;
+  border-top: #80d1ae solid 2px;
+  padding-top: 2px;
+}
+.scb_s_experiment_setup_instructions {
+  width: 600px;
+  display: block;
+}
+.scb_s_experiment_setup_video_text {
+  color: black;
+  font-size: 7.5pt;
+  font-family: 'sourcesanspro-regular';
+  display: inline-block;
+  margin-left: 15px;
 }
 .scb_s_experiment_setup_table_border {
   border-top: 1px solid #e0e0e0;
@@ -102,13 +129,14 @@ table.scb_s_experiment_setup_table {
   width: 233px;
   height: 188px;
   background-color: #525252;
-  margin-left: 12px;
+  margin-left: 17px;
   margin-top: 27px;
   overflow: hidden;
 }
 .scb_s_experiment_setup_video_box_img {
   width: 233px;
   height: 160px;
+  background-color: #525252;
 }
 .scb_s_warning {
   background: #edeef2;
@@ -125,12 +153,29 @@ table.scb_s_experiment_setup_table {
   font-family: 'sourcesanspro-semibold';
   font-size: 10pt;
 }
-.scb_s_experiment_setup_choose_template_kind_disabled {
+.scb_s_experiment_setup_choose_template_kind_disabled, .scb_s_experiment_setup_choose_template>input:disabled {
   opacity: .5;
 }
 .scb_s_experiment_setup_choose_template_kind {
   margin-right: 1em;
-  margin-bottom: 1em;
+}
+.scb_s_experiment_setup_choose_template>input {
+  -webkit-appearance: none;
+  height: 13px;
+  width: 12px;
+  border: 1px solid #c0c0c0;
+  background-color: #d0d0d0;
+  border-radius: 6px;
+  margin-bottom: -0.125%;
+}
+.scb_s_experiment_setup_choose_template>input:checked {
+  -webkit-appearance: none;
+  height: 13px;
+  width: 12px;
+  border: 1px solid #000;
+  background-color: #80d1ae;
+  border-radius: 6px;
+  margin-bottom: -0.125%;
 }
 .scb_concentration_edit_new {
   position: absolute;

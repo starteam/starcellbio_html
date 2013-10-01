@@ -59,7 +59,9 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
             parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name + (counter == 0 ? '' : ' - ' + (counter + 1));
         }
     } else {
-        alert("Please select primary & secondary antibodies.");
+    	$.jqDialog.alert("Please select primary & secondary antibodies.", function() {	/* callback function for 'OK' button*/ });
+
+//         alert("Please select primary & secondary antibodies.");
     }
     $('.scb_f_wb_exposure_slider').detach();
     var state = {
@@ -79,6 +81,9 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe = function (element)
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
+    if(parsed.western_blot.gel_list.list.length == 4){
+    	parsed.western_blot.gel_list.start_tabs_index = parsed.western_blot.gel_list.start_tabs_index +1;
+    }
     var gel = parsed.western_blot.gel_list.start({});
     parsed.western_blot.last_gel = gel.id;
     parsed.state.western_blot_gel_id = gel.id;
@@ -97,7 +102,7 @@ scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (eleme
     parsed.state.view = 'western_blot';
     scb.ui.static.MainFrame.refresh(parsed.state);
 }
-scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [0, 0, 1, 2, 5, 10, 30, 1 * 60, 2 * 60, 5 * 60, 10 * 60, 20 * 60, 60 * 60];
+scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [0,1, 2, 5, 10, 30, 1 * 60, 2 * 60, 5 * 60, 10 * 60, 20 * 60, 60 * 60];
 
 scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider = function (e, ui) {
     var element = this;
@@ -200,9 +205,10 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     var parent = $($(element).parent());
     var slider = $('.scb_f_slider', $(parent));
     var slider_value = $('.scb_f_slider_value', $(parent));
-
+	var vslider = $('.scb_f_vslider', $(parent));
+    var vslider_value = $('.scb_f_vslider_value', $(parent));
     function set_slider(y) {
-        console.info( "set_slider " + y ) ;
+        //console.info( "set_slider " + y ) ;
         slider.css('top', y + 'px');
         slider_value.css('top', (y - 12) + 'px');
         var ww = Math.round(c.position_to_weight(y));
@@ -220,8 +226,28 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
             slider_value.show();
         }
     }
+    function set_vslider(x) {
+        //console.info( "set_slider " + x) ;
+        vslider.css('left', x + 'px');
+        vslider_value.css('left', (x-12) + 'px');
+        var ww = Math.round(c.position_to_weight(x));
+        var weight = ww > 0 ? Math.round(x/22) + " " : "N/A";
+        if (!parsed.western_blot.marker_loaded) {
+            weight = "NaN";
+        }
+        vslider_value.html(weight);
+        if (_.isUndefined(x)) {
+            vslider.hide();
+            vslider_value.hide();
+        }
+        else {
+            vslider.show();
+            //vslider_value.show();
+        }
+    }
 
     set_slider(gel.canvas_metadata.slider);
+    set_vslider(gel.canvas_metadata.vslider);
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
         var poffset = $(element).offset();
         var eX = evt.clientX;
@@ -229,18 +255,22 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
 
         var y = (eY - poffset.top) - 14;
         var x = (eX - poffset.left);
-
-        console.info(evt);
+        //console.info(evt);
         window.__evt = evt ;
         window.__element = element;
         if (true || $(evt.srcElement ? evt.srcElement: evt.target).is('canvas')) {
             gel.canvas_metadata.slider = y;
+            gel.canvas_metadata.vslider= x;
             if (y < 22 || y > 285 || x < 2 || x > 360) {
                 slider.hide();
                 slider_value.hide();
+                vslider.hide();
+                vslider_value.hide();
                 delete gel.canvas_metadata.slider;
+                delete gel.canvas_metadata.vslider;
             } else {
                 set_slider(gel.canvas_metadata.slider);
+                set_vslider(gel.canvas_metadata.vslider);
             }
         }
     });
@@ -254,6 +284,20 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many = function (
     var target = $("option:selected", element).attr('href');
     document.location = target;
 }
+
+
+scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_left_western_blot = function(element, event){
+	var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.western_blot.gel_list.start_tabs_index = parsed.western_blot.gel_list.start_tabs_index -1;
+	scb.ui.static.MainFrame.refresh(parsed.state);
+}
+
+scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_right_western_blot = function(element, event){
+	var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.western_blot.gel_list.start_tabs_index = parsed.western_blot.gel_list.start_tabs_index +1;
+	scb.ui.static.MainFrame.refresh(parsed.state);
+}
+
 
 scb.ui.static.WesternBlotGelView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_wb_anti_body_select_primary', function (e) {
@@ -271,6 +315,12 @@ scb.ui.static.WesternBlotGelView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_gel_remove', function (e) {
         scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_left_western_blot', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_left_western_blot(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_right_western_blot', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_right_western_blot(this);
     });
     scb.utils.off_on(workarea, 'change', '.scb_s_western_blot_tab_select_many', function (e) {
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many(this, e);
@@ -297,18 +347,42 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
             experiment: state.experiment,
             western_blot: state.western_blot,
             context: gstate.context,
+			last_step: state.experiment.last_step,
             western_blot_gel: state.western_blot_gel,
             rows: rows,
             kind: kind,
             valid_rows: rows_state.valid
         }));
-        state.experiment.last_view = 'western_blot_gel';
-        state.western_blot.last_gel = state.western_blot_gel.id;
+        if(state.experiment.last_step >= 5)
+			state.experiment.last_step = 6;
 
+        if(state.western_blot.gel_list.start_tabs_index <= 0){
+			state.western_blot.gel_list.start_tabs_index = 0;
+			$('.scb_s_western_blot_gel_left_western_blot').prop('disabled', true);
+			$('.scb_s_western_blot_gel_right_western_blot').prop('disabled', false);
+		}
+		else $('.scb_s_western_blot_gel_left_western_blot').prop('disabled', false);
+		
+		if(state.western_blot.gel_list.start_tabs_index + 3 ==state.western_blot.gel_list.list.length-1){
+			$('.scb_s_western_blot_gel_right_western_blot').prop('disabled', true);
+			$('.scb_s_western_blot_gel_left_western_blot').prop('disabled', false);
+		}
+		else $('.scb_s_western_blot_gel_right_western_blot').prop('disabled', false);
+        
+        if(kind != 'sample_prep') {
+        	$('.scb_s_western_blot_video_box_wrapper').remove();
+        }
+        state.experiment.last_view = 'western_blot_gel';
+        //state.assignments.last_step = 6;
+
+        state.western_blot.last_gel = state.western_blot_gel.id;
+		
+		state.western_blot.parent.selected_id = state.western_blot.id;
 
         $('.scb_f_wb_exposure_slider').slider({
             orientation: "horizontal",
             range: "min",
+            min: 1,
             max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length - 1,
             value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,

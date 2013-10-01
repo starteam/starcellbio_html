@@ -121,24 +121,32 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     color: '#808080'
                 },
                 xaxis: {
+                	show: true,
+                	color: '#000000',
                     min: 0,
                     max: 150,
                     ticks: [50, 100],
+                    tickLength: 0,
                     font: {
                         family: 'sourcesanspro-regular',
                         size: 11,
                     }
                 },
                 yaxis: {
-                    min: -1,
+                	show: true,
+                	color: '#000000',
+                    min: 0,
                     max: 100,
+                    tickLength:0,
                     font: {
                         family: 'sourcesanspro-regular',
                         size: 11
                     }
 
                 },
-                grid: {show: true, clickable: true, hoverable: true, borderWidth: 0, autoHighlight: false},
+                grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: 150 }, 
+                			yaxis: { from: 0, to: 0 }, color: "#000" },
+                       { xaxis: { from: 0, to: 0 }, yaxis: { from: 0, to: 100 }, color: "#000" }]},
             };
             if (('' + shape).toLowerCase() == 'normal') {
                 var data = [];

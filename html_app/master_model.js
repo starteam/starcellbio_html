@@ -3130,6 +3130,8 @@ $(function () {
 			usability_test.description = scb_model_usability.abstract();
 			usability_test.template.instructions = scb_model_usability.instructions();
 			usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
+			usability_test.template.setup_video_box_kind = 'coin-slider';
+
 			usability_test.template.experiment_setup = scb_model_usability.experiment_setup();
 			get_courses_result.list[x] = usability_test;
 		}

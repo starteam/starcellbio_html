@@ -8,7 +8,9 @@ class SignupForm(forms.Form):
 	def save(self, request):
 		import sys
 		import os
-                site_root = settings.SITE_ROOT
+		import pudb
+		#pudb.set_trace()
+		site_root = settings.SITE_ROOT
 		path_name = site_root+'/../auth/course.py'
 		try:
 			import course

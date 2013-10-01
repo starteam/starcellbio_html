@@ -5,6 +5,8 @@ scb.FacsList = function scb_FacsList(data, context, parent) {
     self.parent = parent;
 
     scb.ModelHelpers.common_list_code(self, data, scb.Facs, context, self);
+	scb.Utils.initialize_accessor_field(self, data, 'start_tabs_index', 0, null, context);
+
 
     self.start = function (d) {
         d = ( typeof (d) == 'undefined' ? {} : d);

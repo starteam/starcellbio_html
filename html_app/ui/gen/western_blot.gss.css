@@ -1,5 +1,6 @@
 .scb_western_blot_details_view {
   padding-top: 30px;
+  padding-bottom: 5px;
   width: 960px;
 }
 .scb_western_blot_details_view_inner {
@@ -15,19 +16,30 @@
   border-radius: 5px;
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 0;
-  margin-top: 20px;
+  margin-bottom: 5px;
   min-height: 300px;
   background-color: #edeef2;
 }
 .scb_s_western_blot_samples_table {
-  width: 70%;
+  margin-top: 180px;
+}
+.scb_s_western_blot_add_western_blot {
+  color: black;
+  text-align: center;
+}
+.scb_s_western_blot_add_cross_western_blot {
+  cursor: pointer;
+  float: right;
+  margin-right: 17px;
+}
+.scb_s_western_blot_tabs>a {
+  color: gray;
 }
 .scb_f_western_blot_prepare_lysates {
   border-radius: 5px;
   position: relative;
   left: 420px;
-  top: 0;
+  top: 42px;
   bottom: 10px;
   display: inline-block;
 }
@@ -35,7 +47,32 @@
   display: block;
   width: 800px;
   height: 80px;
-  margin-left: 25px;
+  margin-left: -5px;
+}
+.scb_s_western_blot_all_tabs {
+  display: block;
+  border: 1px solid #808080;
+  border-radius: 5px;
+  position: relative;
+  padding-bottom: 8px;
+  padding-top: 25px;
+  margin-left: 8px;
+  width: 942px;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
+  background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
+}
+.scb_s_western_blot_tab_content {
+  margin-top: -27px;
+  background-color: #fff;
+  background-image: none;
+  min-height: 439px;
+  width: 920px;
+  padding: 0;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 .scb_s_western_blot_progress_prefix {
   color: white;
@@ -84,24 +121,30 @@
 .scb_s_western_blot_samples_gel_area {
   display: inline-block;
   vertical-align: top;
-  margin-left: 25px;
   width: 600px;
   height: 400px;
   padding-top: 20px;
 }
 .scb_s_western_blot_samples_area {
   margin-top: 28px;
-  margin-left: 15px;
+  margin-left: 10px;
+  height: 358px;
 }
 .scb_s_western_blot_gel_tabs {
-  width: 600px;
+  width: 640px;
   height: 25px;
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
   border-top: 1px solid transparent;
-  margin-left: -1px;
+  margin-left: 9px;
   margin-right: -1px;
   margin-top: -1px;
+}
+.scb_s_western_blot_left_western_blot, .scb_s_western_blot_right_western_blot {
+  padding: 3px;
+  margin: 0;
+  margin-right: -5px;
+  margin-left: -5px;
 }
 .scb_s_western_blot_gel_tab {
   width: 140px;
@@ -121,7 +164,7 @@
   color: #189689;
   background-image: url('../images/western_blot/WesternBlot_GreenTab.png');
 }
-.scb_s_western_blot_gel_tab_selected, .scb_s_facs_gel_tab_selected {
+.scb_s_western_blot_gel_tab_selected, .scb_s_facs_gel_tab_selected, .scb_s_microscopy_gel_tab_selected {
   display: inline-block;
   font-family: 'sourcesanspro-bold';
   font-size: 11.5pt;
@@ -132,13 +175,16 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+  float: right;
+  margin-right: 17px;
 }
 .scb_s_western_blot_gel_content {
   height: 350px;
-  width: 600px;
+  width: 590px;
   position: relative;
   border: 1px solid #80d1ae;
   background-color: white;
+  margin-left: 8px;
 }
 .scb_s_western_blot_gel {
   display: block;
@@ -151,10 +197,10 @@
   vertical-align: top;
   position: relative;
   top: 15px;
-  left: 15px;
+  left: 5px;
 }
 .scb_s_western_blot_gel_number {
-  width: 22px;
+  width: 21px;
   display: inline-block;
 }
 .scb_s_western_blot_gel_numbers {
@@ -170,15 +216,13 @@
   vertical-align: top;
   display: inline-block;
   position: absolute;
-  top: 70px;
+  top: 37px;
   left: 367px;
   border-left: 1px solid #e0e0e0;
-  padding-left: 6px;
 }
 .scb_s_western_blot_run_gel_and_transfer {
   position: relative;
   top: 250px;
-  left: 10px;
 }
 .scb_s_western_blot_gel_canvas_wrapper {
   position: relative;
@@ -206,6 +250,7 @@
   font-size: 10pt;
   color: black;
   left: 0;
+  padding: 3px;
 }
 .scb_s_western_blot_choose_samples_list_item {
   cursor: pointer;
@@ -265,6 +310,9 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   background-color: #80d1ae;
   border-radius: 6px;
 }
+.scb_s_western_blot_choose_gel_type>input:disabled {
+  opacity: .5;
+}
 .scb_s_western_blot_load_marker {
   text-align: center;
   margin-left: 22px;
@@ -287,6 +335,9 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_f_western_blot_remove {
   border: none;
   background-color: white;
+  cursor: pointer;
+  float: right;
+  margin-right: 17px;
 }
 .scb_s_western_blot_tab_content>.scb_f_open_select_technique {
   position: relative;
@@ -294,9 +345,6 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   left: 10px;
   display: inline-block;
   margin-top: 30px;
-}
-.scb_s_western_blot_tab_content {
-  margin-top: -27px;
 }
 .scb_s_western_blot_samples_table>table {
   width: 100%;
@@ -317,10 +365,13 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   margin: 0;
 }
 .scb_s_western_blot_blank_space1 {
-  width: 404px;
+  width: 650px;
 }
-.scb_s_western_blot_blank_space2 {
-  width: 14px;
+.scb_s_western_blot_active {
+  margin-top: 1px;
+}
+.scb_s_western_blot_active>span {
+  color: black;
 }
 .scb_f_western_blot_sample_inactive_all, .scb_f_western_blot_sample_active_all {
   background-color: #fff;
@@ -343,7 +394,6 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_s_select_technique_at_western_blot {
   display: block;
   margin-left: 20px;
-  margin-top: -33px;
 }
 .scb_s_western_blot_view {
   background: #f4f6f8;
@@ -358,14 +408,14 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_s_western_blot_video_box_wrapper {
   width: 266px;
   height: 238px;
-  float: right;
   background-color: #e1e3e8;
   border-radius: 1px;
   border: 1px solid #e1e3e8;
   position: absolute;
-  top: 110px;
   right: 0;
+  top: 10px;
   box-shadow: 0 0 6px gray;
+  margin-right: 12px;
 }
 .scb_s_western_blot_video_box_wrapper_title {
   text-align: center;
@@ -375,7 +425,6 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_s_western_blot_video_box {
   width: 240px;
   height: 188px;
-  background-color: #fff;
   margin-left: 12px;
   margin-top: 27px;
   overflow: hidden;
@@ -391,7 +440,6 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   font-size: 7.5pt;
   font-family: 'sourcesanspro-semibold';
   display: inline-block;
-  padding-left: 2em;
 }
 .scb_s_western_blot_video_text {
   color: black;
@@ -404,7 +452,6 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   font-size: 7pt;
   font-family: 'sourcesanspro-regular';
   display: inline-block;
-  padding-left: 1.5em;
 }
 .scb_s_western_blot_learn_more {
   color: #189689;

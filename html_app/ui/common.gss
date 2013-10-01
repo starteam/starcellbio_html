@@ -81,7 +81,7 @@ div#main {
     background-color: #80d1ae;
     height:1px;
     top:23px;
-    left:78px;
+    left:65px;
 }
 
 .scb_s_experiment_step_horizontal_line_23 {
@@ -90,7 +90,7 @@ div#main {
     background-color: #80d1ae;
     height:1px;
     top:23px;
-    left:168px;
+    left:155px;
 }
 
 .scb_s_experiment_step_horizontal_line_34 {
@@ -99,7 +99,7 @@ div#main {
     background-color: #80d1ae;
     height:1px;
     top:23px;
-    left:258px;
+    left:245px;
 }
 
 .scb_s_experiment_step_horizontal_line_45 {
@@ -108,7 +108,7 @@ div#main {
     background-color: #80d1ae;
     height:1px;
     top:23px;
-    left:348px;
+    left:335px;
 }
 
 
@@ -132,7 +132,9 @@ div#main {
     top: -25px;
     left: 300px;
     color: black;
-    font-size:1.5em;
+    font-size:12pt;
+    overflow-x: hidden;
+    width: 660px;
 }
 
 .scb_s_assignment_step_experiment {
@@ -145,10 +147,44 @@ div#main {
     top: 8px;
     height:1px;
     background-color: #14ac63;
-    font-size:1.5em;
-    left: 135px;
-    width: 525px;
+    font-size:13pt;
 }
+
+
+
+
+
+ label.custom-select {
+    position: relative;
+    display: inline-block;
+
+}
+
+.custom-select select {
+	-webkit-appearance:none;
+	display: inline-block;
+	font: inherit;
+	outline:none; 
+	line-height: 1.2;
+	background: #F4F6F8;
+	border: 0px solid #80d1ae;
+	color:black;
+}
+
+
+
+#jqDialog_options > button {
+	@mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
+    border: 1px solid #e0e0e0;
+    border-radius: 5pt;
+    height: 30px;
+    color: black;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
+    cursor:pointer;
+    text-transform:uppercase;
+}
+
 
 .scb_s_assignment_step_experiment_box {
     position: relative;
@@ -162,6 +198,7 @@ div#main {
     width: 960px;
     height: 25px;
     position: relative;
+    text-transform:uppercase;
     @mixin gradient(top,#80d1ae,#189689,#189689);
 
 }
@@ -176,13 +213,15 @@ div#main {
     padding:5px;
     margin-left:-8px;
     text-align: center;
-    font-size:1.5em;
+    font-size:11.5pt;
     text-decoration: none;
     color:white;
     display:inline-block;
     vertical-align: top;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-top: -2px;
+    font-family: 'sourcesanspro-semibold'
 }
 
 .scb_s_assignment_step_link_active {

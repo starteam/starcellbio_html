@@ -24,8 +24,8 @@
     border-color: #e1e1e1;
     border-radius: 8px;
     padding: 10px;
-    width:928px;
-    left:5px;
+    width:922px;
+    margin-left:8px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }
 
@@ -50,6 +50,8 @@
 .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
     position: absolute;
     bottom: 5px;
+    margin-top: 0px;
+    margin-bottom: 4px;
     right: 5px
 }
 
@@ -57,12 +59,10 @@
     position: absolute;
     bottom: 5px;
     right: 5px;
-    width:305px;
 }
 
 
 .scb_s_experiment_setup_choose_template {
-    height: 155px;
     width: 600px;
     display: block;
 }
@@ -91,17 +91,41 @@ table.scb_s_experiment_setup_table {
   position:relative;
 }
 
+.scb_s_experiment_setup_new_set_up{
+	visibility: hidden;	
+}
+
 .scb_s_western_blot_samples_select_all_abs{
   bottom: 0;
-  margin-bottom:65px;
+  margin-bottom:18px;
   position:absolute;
   border-top: #80d1ae solid 2px;
+  padding-top: 2px;
+}
+
+.scb_s_facs_samples_select_all_abs{
+  bottom: 0;
+  margin-bottom:30px;
+  position:absolute;
+  border-top: #80d1ae solid 2px;
+  padding-top: 2px;
 }
 
 .scb_s_experiment_setup_td {
 }
 
+.scb_s_experiment_setup_instructions{
+	width: 600px;
+	display: block;
+}
 
+.scb_s_experiment_setup_video_text{
+	color:black;
+	font-size: 7.5pt;
+	font-family: 'sourcesanspro-regular';
+	display: inline-block;
+	margin-left: 15px;
+}
 .scb_s_experiment_setup_table_border {
     border-top: 1px solid #e0e0e0;
 }
@@ -150,7 +174,7 @@ table.scb_s_experiment_setup_table {
     width: 233px;
     height:188px;
     background-color: #525252;
-    margin-left:12px;
+    margin-left:17px;
     margin-top:27px;
     overflow:hidden;
 }
@@ -158,7 +182,10 @@ table.scb_s_experiment_setup_table {
 .scb_s_experiment_setup_video_box_img {
     width: 233px;
     height:160px;
+    background-color: #525252;
+
 }
+
 
 .scb_s_warning {
     background: #edeef2;
@@ -182,9 +209,34 @@ table.scb_s_experiment_setup_table {
     opacity: .5;
 }
 
+.scb_s_experiment_setup_choose_template > input:disabled {
+    opacity: .5;
+}
+
 .scb_s_experiment_setup_choose_template_kind {
     margin-right: 1em;
-    margin-bottom:1em;
+}
+
+
+.scb_s_experiment_setup_choose_template > input{
+	-webkit-appearance: none;
+	height:13px;
+	width:12px;
+	border: 1px solid #C0C0C0;
+	background-color:#D0D0D0;
+	border-radius:6px;
+	margin-bottom: -0.125%;
+}
+
+
+.scb_s_experiment_setup_choose_template > input:checked{
+	-webkit-appearance: none;
+	height:13px;
+	width:12px;
+	border: 1px solid #000000;
+	background-color:#80d1ae;
+	border-radius:6px;
+	margin-bottom: -0.125%;
 }
 
 .scb_concentration_edit_new {

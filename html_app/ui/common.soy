@@ -6,6 +6,8 @@
 @param assignment_name
 @param experiment_name
 @param assignment
+@param assignments
+@param last_step
 @param experiment
 @param technique_name
 @param technique_view
@@ -13,24 +15,47 @@
 @param technique_id
 */
 {template .assignment_step}
+{let $eid} 
+		{if $assignments}
+			{$assignments.selected.experiments.selected_id}
+		{elseif $assignment}
+			 {$assignment.experiments.selected_id}
+		{elseif $experiment}
+		   	{$experiment.id}
+		{/if} 
+{/let}
+
+{let $aid} 
+		{if $assignments}
+			{$assignments.selected_id}
+		{elseif $assignment}
+			 {$assignment.id}
+		{/if} 
+{/let}
 {if $step > 0}
 <div class='scb_s_assignment_step' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-    {if $step > 0}
+    {if $step > 0 }
     <a class='scb_s_assignment_step_link' href='#view=assignments'>
         ASSIGNMENTS
     </a>
     <img src='images/header/scb_navigation_arrow.png' alt=''>
     {/if}
-    {if $step > 1}
+    {if $step > 1 or $last_step >1}
     <a class='scb_s_assignment_step_link {if $step == 2}scb_s_assignment_step_link_active{/if}'
-       href='#view=assignment&assignment_id={$assignment.id}'>
-        {$assignment_name}
+       href='#view=assignment&assignment_id={$aid}'>
+<!-- 
+       	{if $assignments}
+       		{$assignments.selected.name}
+       	{else}
+ -->
+        	{$assignment_name}
+<!--         {/if} -->
     </a>
     <img src='images/header/scb_navigation_arrow.png' alt=''>
     {/if}
-    {if $step > 2}
+    {if $step > 2 or $last_step > 2}
     <a class='scb_s_assignment_step_link {if $step == 3}scb_s_assignment_step_link_active{/if}'
-       href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>
+       href='#view=experiment_design&assignment_id={$aid}&experiment_id={$eid}'>
         DESIGN
     </a>
     <img src='images/header/scb_navigation_arrow.png' alt=''>
@@ -39,29 +64,117 @@
         <img class='scb_s_assignment_step_experiment_box' src='images/header/exp_name_box.png' alt=''>
 
         <div class='scb_s_assignment_step_experiment'>
-            <!-- &#8988; --> {$experiment_name}
+        	
+            <!-- &#8988; --> <!-- {$experiment_name}  -->
+            <label class="custom-select">
+
+				<select onchange="location = this.options[this.selectedIndex].value;">
+					{if $assignments}
+						{foreach $e in $assignments.selected.experiments.list}
+							<option value='#view=experiment_last&assignment_id={$aid}&experiment_id={$e.id}' model_id='{$aid}' sub_model_id='{$eid}' 
+								{if $eid == $e.id}selected="selected"{/if}> {$e.name}&nbsp;&nbsp;{if $eid == $e.id}&#x25BC;{/if}
+							</option>
+						{/foreach}
+					{else}
+						{foreach $e in $assignment.experiments.list}
+							<option value='#view=experiment_last&assignment_id={$aid}&experiment_id={$e.id}' model_id='{$aid}' sub_model_id='{$eid}' 
+								{if $eid == $e.id}selected="selected"{/if}> {$e.name}&nbsp;&nbsp;{if $eid == $e.id}&#x25BC;{/if}
+							</option>
+						{/foreach}
+					{/if}
+					<option class='scb_s_assignment_step_experiment_new_option' value='#view=experiment_design&assignment_id={$aid}' model_id='{$aid}'>+New Experiment</option>
+				</select>
+			</label>
         </div>
         <img class='scb_s_assignment_step_experiment_line' src='images/header/exp_name_line.png' alt=''>
     </div>
     {/if}
-    {if $step > 3}
+    {if $step > 3 or $last_step >3}
     <a class='scb_s_assignment_step_link {if $step == 4}scb_s_assignment_step_link_active{/if}'
-       href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>
+       href='#view=experiment_setup&assignment_id={$aid}&experiment_id={$eid}'>
         SETUP
     </a>
     <img src='images/header/scb_navigation_arrow.png' alt=''>
     {/if}
-    {if $step > 4}
+    {if $step > 4 or $last_step > 4}
     <a class='scb_s_assignment_step_link {if $step == 5}scb_s_assignment_step_link_active{/if}'
-       href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>
+       href='#view=select_technique&assignment_id={$aid}&experiment_id={$eid}'>
         TECHNIQUES
     </a>
     <img src='images/header/scb_navigation_arrow.png' alt=''>
     {/if}
-    {if $step > 5}
+    {if $step > 5 or $last_step > 5}
+    	{let $tview} 
+			{if $assignments}
+				{$assignments.selected.experiments.selected.last_view}
+			{elseif $assignment}
+			 	{$assignment.experiments.selected.last_view}
+			{elseif $experiment}
+		   		{$experiment.last_view}
+		   	{else}
+		   		{$technique_view}
+			{/if} 
+		{/let}
+		
+		{let $tname}
+			{if $tview == 'western_blot'}
+				WESTERN BLOT
+			{elseif $tview == 'facs'}
+				FLOW CYTOMETRY
+			{elseif $tview == 'microscopy'}
+				MICROSCOPY
+			{else}
+				{$technique_name}
+			{/if}
+		{/let}
+		
+		{let $tparam}
+			{if $tview == 'western_blot'}
+				western_blot_id
+			{elseif $tview == 'facs'}
+				facs_id
+			{elseif $tview == 'microscopy'}
+				microscopy_id
+			{else}
+				{$technique_param}
+			{/if}
+		{/let}
+		
+		{let $tid}
+			{if $assignments}
+				{if $tview == 'western_blot'}
+					{$assignments.selected.experiments.selected.western_blot_list.selected_id}
+				{elseif $tview == 'facs'}
+					{$assignments.selected.experiments.selected.facs_list.selected_id}
+				{elseif $tview == 'microscopy'}
+					{$assignments.selected.experiments.selected.microscopy_list.selected_id}
+				{/if}
+			{elseif $assignment}
+				{if $tview == 'western_blot'}
+					{$assignment.experiments.selected.western_blot_list.selected_id}
+				{elseif $tview == 'facs'}
+					{$assignment.experiments.selected.facs_list.selected_id}
+				{elseif $tview == 'microscopy'}
+					{$assignment.experiments.selected.microscopy_list.selected_id}
+				{/if}
+			{elseif $experiment}
+				{if $tview == 'western_blot'}
+					{$experiment.western_blot_list.selected_id}
+				{elseif $tview == 'facs'}
+					{$experiment.facs_list.selected_id}
+				{elseif $tview == 'microscopy'}
+					{$experiment.microscopy_list.selected_id}
+				{/if}
+			{else}
+				{$technique_id}
+			{/if}
+		{/let}
+		
+		
+		
     <a class='scb_s_assignment_step_link {if $step == 6}scb_s_assignment_step_link_active{/if}'
-       href='#view={$technique_view}&assignment_id={$assignment.id}&experiment_id={$experiment.id}&{$technique_param}={$technique_id}'>
-        {$technique_name}
+       href='#view={$tview}&assignment_id={$aid}&experiment_id={$eid}&{$tparam}={$tid}'>
+        {$tname}
     </a>
     <img src='images/header/scb_navigation_arrow.png' alt=''>
     {/if}

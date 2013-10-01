@@ -6,6 +6,7 @@ FACS Main View
 @param assignment AssignmentView
 @param experiment
 @param context
+@param last_step
 @param facs
 @param t
 @param kind
@@ -20,6 +21,7 @@ FACS Main View
     {/call}
     {call scb_common.assignment_step}
     {param step:6/}
+    {param last_step: $last_step/}
     {param assignment_name:$assignment.name/}
     {param experiment_name:$experiment.name/}
     {param assignment:$assignment/}
@@ -57,7 +59,7 @@ FACS Main View
 */
 {template .display_details}
 <div class='scb_facs_details_view'>
-
+	<div class='scb_s_facs_all_tabs'>
     <div class='scb_facs_details_view_inner'>
 
         {call .display_tabs}
@@ -69,6 +71,7 @@ FACS Main View
         {param kinds:$kinds/}
         {param can_prepare_lysate:$can_prepare_lysate/}
         {/call}
+    </div>
     </div>
 </div>
 {/template}
@@ -99,6 +102,8 @@ FACS Main View
 {param kinds:$kinds/}
 {param can_prepare_lysate:$can_prepare_lysate/}
 {/call}
+
+</div>
 {/if}
 {if $kind == 'analyze'}
 {call .analyze}
@@ -109,12 +114,13 @@ FACS Main View
 {param kinds:$kinds/}
 {param can_prepare_lysate:$can_prepare_lysate/}
 {/call}
+
+</div>
 {/if}
 <a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_western_blot"
    href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 
-</div>
 {/template}
 
 
@@ -125,24 +131,73 @@ FACS Main View
 */
 {template .display_tabs_selector}
 <div class='scb_s_facs_tabs'>
-    {foreach $wb in $experiment.facs_list.list}
-    {if $facs.id == $wb.id}
-    <span class='scb_s_facs_active'>
+	{if $experiment.facs_list.list.length < 6}
 
-    <span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-          experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
-        <!--
-    <button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-            experiment_id='{$experiment.id}'><img src="images/setup/scb_remove.png">
-    </button>
-        -->
-    </span>
-    {else}
-    <a class='scb_f_open_facs scb_s_facs_open_facs'
-       href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$wb.id}'
-       facs_id='{$wb.id}'>{$wb.name}</a>
-    {/if}
-    {/foreach}
+		{foreach $wb in $experiment.facs_list.list}
+		{if $facs.id == $wb.id}
+		<span class='scb_s_facs_active'>
+
+		<span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+			  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+
+		<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+				experiment_id='{$experiment.id}'>| X
+		<!--             <img src="images/setup/scb_remove.png"> -->
+		</button>
+		</span>
+		{else}
+		<a class='scb_f_open_facs scb_s_facs_open_facs'
+		   href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$wb.id}'
+		   facs_id='{$wb.id}'>{$wb.name}</a>
+		{/if}
+		{/foreach}
+		<span class='scb_s_facs_add_facs' assignment_id='{$assignment.id}'
+							experiment_id='{$experiment.id}' facs_id='{$experiment.facs_list.list[length($experiment.facs_list.list)-1].id}'>
+							 <a class='scb_f_open_facs scb_s_facs_open_facs' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
+					<span class='scb_s_facs_add_cross_facs'>| + </span></a>
+		</span>
+		
+	{else}
+		<button class='scb_s_facs_left_facs' facs_id='{$facs.id}'
+             			assignment_id='{$assignment.id}'
+             			experiment_id='{$experiment.id}'>
+        				&lt;&lt;
+    	</button>
+		{foreach $wb in $experiment.facs_list.list}
+			{if index($wb) >= $experiment.facs_list.start_tabs_index and index($wb) < $experiment.facs_list.start_tabs_index +5}     				
+
+				{if $facs.id == $wb.id}
+				<span class='scb_s_facs_active'>
+
+				<span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+					  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+
+				<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+						experiment_id='{$experiment.id}'>| X
+				<!--             <img src="images/setup/scb_remove.png"> -->
+				</button>
+				</span>
+				{else}
+				<a class='scb_f_open_facs scb_s_facs_open_facs'
+				   href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$wb.id}'
+				   facs_id='{$wb.id}'>{$wb.name}</a>
+				{/if}
+			{/if}
+		{/foreach}
+		<span class='scb_s_facs_add_facs' assignment_id='{$assignment.id}'
+							experiment_id='{$experiment.id}' facs_id='{$experiment.facs_list.list[length($experiment.facs_list.list)-1].id}'>
+							 <a class='scb_f_open_facs scb_s_facs_open_facs' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
+					<span class='scb_s_facs_add_cross_facs'>| + </span></a>
+		</span>
+		<button class='scb_s_facs_right_facs' facs_id='{$facs.id}'
+             			assignment_id='{$assignment.id}'
+             			experiment_id='{$experiment.id}' >
+        				&gt;&gt;
+    	</button>
+	
+	{/if}
+	
+	
 </div>
 {/template}
 
@@ -183,8 +238,8 @@ FACS Main View
                 {/if}
             </td>
             <td class='scb_s_facs_samples_table_td'>
-                <input type="radio" checked="checked">Fixed</input>
-                <input type="radio" disabled='disabled'><span style='opacity: .25'>Live</span></input>
+                <input type="radio" checked="checked" class='facs_locked'><span class='facs_locked'>Fixed</span></input>
+                <input type="radio" disabled='disabled'><span style='opacity:0.25;'>Live</span></input>
             </td>
             <td class='scb_s_facs_samples_table_td'>
                 {call .display_lysate_types}
@@ -212,10 +267,36 @@ FACS Main View
         </tr>
         {/foreach}
         <tr>
-            <td colspan='5'>
-                <div class="scb_s_experiment_design_green_line"></div>
-                <button class='scb_f_facs_sample_active_all scb_s_gray_button'>SELECT ALL</button>
-            </td>
+        	{if length($rows) >= 11}
+			<tr>
+				<td colspan='5'>
+					<div class="scb_s_western_blot_green_line"></div>
+				</td>
+			</tr>
+			<tr class='scb_s_western_blot_samples_select_all_rel'>
+				<td colspan='2'>
+					<button class='scb_f_facs_sample_active_all scb_s_gray_button'>SELECT ALL</button>
+				</td>
+				<td colspan='3' align='right'>
+					<button class='scb_f_facs_sample_inactive_all'>CANCEL ALL</button>
+				</td>
+			</tr>
+			{else}
+			<tr class='scb_s_facs_samples_select_all_abs'>
+				<td colspan='1'>
+					<button class='scb_f_facs_sample_active_all'>SELECT ALL</button>
+				</td>
+				<td colspan='1' class='scb_s_facs_blank_space1'>
+				</td>
+				<td colspan='1' >&nbsp;
+				</td>
+				<td colspan='1'>
+					<button class='scb_f_facs_sample_inactive_all'>CANCEL ALL</button>
+				</td>
+				<td colspan='1' >&nbsp;
+				</td>
+			</tr>
+			{/if}
         </tr>
     </table>
 </div>
@@ -244,7 +325,7 @@ FACS Main View
         PERFORM FLOW CYTOMETRY
     </div>
 
-    <div class='scb_s_western_blot_progress_rest'>
+    <div class='scb_s_facs_progress_rest'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 {if $step >= 1}scb_s_western_blot_progress_selected{/if}'>
             1. Sample Prep
         </div>
@@ -391,8 +472,8 @@ FACS Main View
     {if $facs.sample_analysis}
     <h1>Flow Cytometry Analysis</h1>
 
-    <button class='scb_s_facs_tools_instructions_followup_toggle'>
-        Click here to hide instructions
+    <button class='scb_s_facs_tools_instructions_followup_toggle scb_s_gray_button'>
+        HIDE INSTRUCTIONS
     </button>
     <div class='scb_s_facs_tools_instructions_followup'>
         <ul>
@@ -433,16 +514,19 @@ FACS Main View
                      experiment_id='{$experiment.id}'
                      facs_id='{$facs.id}' facs_lane_id='{$lane.id}' from='{$range.from}' to='{$range.to}'
                      alt="Delete" title="Delete" src="images/setup/scb_remove.png">
+
+ 
             </td>
         </tr>
         {/foreach}
         </tbody>
     </table>
+    <span class='scb_s_facs_apply'>
     <input type="checkbox" assignment_id='{$assignment.id}'
            experiment_id='{$experiment.id}'
            facs_id='{$facs.id}' facs_lane_id='{$lane.id}' class='scb_f_facs_apply_to_all'
     {if $facs.apply_dna_analysis_to_all}checked='checked'{/if}> Apply to all
-
+	</span>
     {/if}
     {/if}
     {/if}
@@ -452,7 +536,7 @@ FACS Main View
         To view the flow cytometry data for each sample, select the sample name in the Samples window to the left.
         -->
     </div>
-    <button class='scb_f_facs_tools_start_analysis scb_s_gray_button' assignment_id='{$assignment.id}'
+    <button class='scb_f_facs_tools_start_analysis scb_s_navigation_button' assignment_id='{$assignment.id}'
             experiment_id='{$experiment.id}'
             facs_id='{$facs.id}'>ANALYZE DATA
     </button>

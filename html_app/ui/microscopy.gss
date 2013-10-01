@@ -19,10 +19,8 @@
 
 .scb_microscopy_details_view_inner {
     width: 950px;
-    margin-top: 5px;
     margin-bottom: 5px;
-    padding-left: 10px;
-    padding-top: 25px;
+    padding-left: 2px;
     position: relative;
 }
 
@@ -36,17 +34,63 @@
     border-radius: 5px;
     margin-left: 10px;
     margin-right: 10px;
-    margin-bottom: 0px;
-    margin-top:20px;
+    margin-bottom: 5px;
     min-height: 300px;
     background-color: #EDEEF2;
 
 }
 
 .scb_s_microscopy_samples_table{
-	width: 70%;
+	margin-top:180px;
 }
 
+
+.scb_s_microscopy_add_microscopy {
+	color: black;
+	text-align:center;
+}
+
+.scb_s_microscopy_add_cross_microscopy {
+    cursor:pointer;
+    float:right;
+    margin-right: 17px;
+}
+
+.scb_s_microscopy_left_microscopy, .scb_s_microscopy_right_microscopy{
+
+	padding:3px;
+	margin:0px;
+	margin-right:-5px;
+	margin-left:-5px;
+}
+
+.scb_s_microscopy_all_tabs {
+    display: block;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    position: relative;
+    padding-bottom:21px;
+    padding-top: 25px;
+    margin-left: 8px;
+    width: 942px;
+    margin-top:30px;
+    @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+}
+
+
+.scb_s_microscopy_tabs {
+	position: absolute; 
+	
+}
+
+
+.scb_s_microscopy_tabs > a{
+	color: gray;
+}
+
+.scb_s_microscopy_active > span {
+	color: black;
+}
 
 .scb_s_microscopy_progress {
     display: block;
@@ -106,8 +150,28 @@
 
 
 .scb_s_microscopy_samples_area {
-	margin-top:28px;
-	margin-left: 15px;
+	margin-bottom:28px;
+	margin-left: 10px;
+	margin-top:198px;
+	height:358px;
+	width: 295px
+}
+
+.scb_space_control {
+	margin: 0px;
+}
+
+
+.scb_s_microscopy_samples_select_all_abs{
+	margin-bottom: 62px;
+	bottom: 0;
+	position: absolute;
+	border-top: #80d1ae solid 2px;
+	padding-top: 2px;
+}
+
+.scb_s_microscopy_blank_space1{
+	width: 649px;
 }
 
 .lens{
@@ -118,6 +182,15 @@
 .lens_panel{
     display: inline-block;
 	width:300px;
+}
+
+
+.scb_s_microscopy_samples_slide_area{
+    display:inline-block;
+    vertical-align: top;
+    width:600px;
+    height:400px;
+    padding-top:190px;
 }
 
 .scb_s_microscopy_tools {
@@ -170,12 +243,20 @@ body.dragging, body.dragging * {
 }
 
 
-.scb_s_microscopy_samples_slide_area{
-	display: inline-block;
-	margin-top: 15px;
-	margin-left:10px;
-	margin-bottom: 100px;
-	width:600px;
+.scb_s_microscopy_slide_content{
+	height:350px;
+    width:580px;
+    position: relative;
+    border:1px solid #80d1ae;
+    background-color: white;
+    margin-left: 8px;
+    padding-left:15px;
+    padding-top: 15px;
+}
+
+
+.scb_s_microscopy_tab_content_slide{
+	min-height: 720px;
 }
 
 #lens{
@@ -218,8 +299,11 @@ body.dragging, body.dragging * {
 .scb_f_microscopy_remove {
     border:none;
     background-color: white;
+    cursor: pointer;
+    float:right;
+    margin-right: 18px;
+    margin-top:3px;
 }
-
 
 .scb_s_microscopy_tab_content>.scb_f_open_select_technique {
 
@@ -229,7 +313,16 @@ body.dragging, body.dragging * {
 
 
 .scb_s_microscopy_tab_content{
+	top: 30px;
+	left: 8px;
 	margin-top: -27px;
+ 	background-color: #FFFFFF;
+ 	background-image: none;
+ 	min-height: 439px;
+ 	width: 920px;
+ 	padding: 0px;
+ 	padding-bottom: 10px;
+	margin-bottom: 82px;
  
 }
 
@@ -262,13 +355,7 @@ body.dragging, body.dragging * {
     margin: 0px;
 }
 
-.scb_s_microscopy_blank_space1{
-	width: 404px;
-}
 
-.scb_s_microscopy_blank_space2{
-	width: 14px;
-}
 
 .scb_f_microscopy_sample_inactive_all {
 @mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
@@ -329,9 +416,11 @@ body.dragging, body.dragging * {
     border-radius: 1px;
     border: 1px solid #e1e3e8;
     position: absolute;
-    top:110px;
     right:0px;
+    top:10px;
     box-shadow: 0px 0px 6px gray;
+    margin-right:12px;
+
 
 }
 
@@ -359,6 +448,7 @@ body.dragging, body.dragging * {
 .scb_s_microscope_status{
 	color: #189689;
 	font-size: 15pt;
+	background-color: rgba(255, 255, 255, 0);
 }
 
 .scb_s_controls_note{
@@ -397,7 +487,6 @@ body.dragging, body.dragging * {
     font-size: 7.5pt;
     font-family: 'sourcesanspro-semibold';
     display: inline-block;
-    padding-left:2em;
 }
 
 .scb_s_microscopy_video_text{

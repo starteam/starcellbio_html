@@ -1,4 +1,4 @@
-iframe {
+.scb_s_login_dialog>iframe, .scb_s_logout_dialog>iframe, .scb_s_signup_dialog>iframe {
   background: #f4f6f8;
   border-radius: 5px;
   padding: 10px;

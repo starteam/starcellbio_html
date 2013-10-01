@@ -6,6 +6,9 @@ scb.WesternBlotList = function scb_WesternBlotList(data, context, parent) {
 
     scb.ModelHelpers.common_list_code(self, data, scb.WesternBlot, context, self);
 
+	scb.Utils.initialize_accessor_field(self, data, 'start_tabs_index', 0, null, context);
+	
+		
     self.start = function (d) {
         d = ( typeof (d) == 'undefined' ? {} : d);
         d.name = d.name || "W.B. " + data.counter++;
@@ -119,7 +122,7 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
         _.each(rows, function (e) {
             if (e.is_valid) count++;
         });
-        rows = _.sortBy(rows, function(obj){ if(obj.kind=='existing')return obj.lane.order_id; else return;});
+        //rows = _.sortBy(rows, function(obj){ if(obj.kind=='existing')return obj.lane.order_id; else return;});
         return {rows:rows, valid:count};
     }
 

@@ -4,7 +4,8 @@ scb.WesternBlotLaneList = function scb_WesternBlotLaneList(data, context, parent
     var self = this;
     self.parent = parent;
     scb.ModelHelpers.common_list_code(self, data, scb.WesternBlotLane, context, self);
-
+	
+    
     self.start = function (d) {
         d = ( typeof (d) == 'undefined' ? {} : d);
         var ret = new scb.WesternBlotLane(d, context, self);

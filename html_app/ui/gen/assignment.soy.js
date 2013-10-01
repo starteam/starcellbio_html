@@ -8,7 +8,7 @@ scb_assignment.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_assignment_view\'>');
   scb_homepage.display_header(opt_data, output);
-  scb_common.assignment_step({step: 2, assignment_name: opt_data.assignment.name, assignment: opt_data.assignment}, output);
+  scb_common.assignment_step({step: 2, last_step: opt_data.last_step, assignment_name: opt_data.assignment.name, assignment: opt_data.assignment}, output);
   scb_assignment.display_assignment(opt_data, output);
   scb_assignment.display_details(opt_data, output);
   scb_homepage.display_footer(opt_data, output);

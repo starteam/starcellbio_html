@@ -59,12 +59,12 @@
   padding-right: 400px;
 }
 .scb_s_assignments_sidebar {
-  margin-top: 8px;
+  margin-top: 9px;
   font-size: 12px;
   text-align: justify;
   display: inline-block;
   vertical-align: top;
-  width: 230px;
+  width: 247px;
   border-style: solid;
   border-width: 1px;
   border-color: #e0e0e0;
@@ -72,22 +72,25 @@
   margin-right: 10px;
   padding: 5px;
   background-color: white;
-  margin-left: 20px;
+  margin-left: 8px;
   border-top-width: 8px;
   box-shadow: 0 0 3px black;
 }
 .scb_s_assignments_sidebar>ul {
   margin-left: -28px;
   list-style: none;
+  margin-top: 0%;
 }
 .scb_s_assignments_sidebar_title {
   font-size: 12pt;
   font-family: "sourcesanspro-bold";
   text-align: left;
   margin-left: 12px;
+  margin-bottom: 0%;
 }
 .scb_s_assignments_sidebar_name {
   font-size: 12px;
+  margin-top: 3px;
 }
 .assignement_assignement_description {
   font-size: 10px;
