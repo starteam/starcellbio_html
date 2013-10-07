@@ -33,7 +33,8 @@
     {/call}
 
     {call scb_homepage.display_footer}
-    {param t:$t /}
+    {param global_template:$t /}
+    {param assignment:$assignment/}
     {/call}
 </div>
 {/template}
@@ -49,8 +50,11 @@ Assignment description
             {$assignment.name |noAutoescape}
         </span>
         <div class='scb_s_assignment_title_underline'></div>
+        <div class='scb_s_assignment_scroll'>
         {$assignment.description |noAutoescape}
         {$t.instructions |noAutoescape}
+        </div>
+    <div class='scb_s_assignment_button_underline'></div>
     <br/>
         <a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignment.id}"> DESIGN NEW EXPERIMENT &nbsp; &#9654;</a>
         <a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignments&assignment_id={$assignment.id}">&#9664; &nbsp; ASSIGNMENTS</a>

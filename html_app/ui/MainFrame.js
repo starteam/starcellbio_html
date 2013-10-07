@@ -96,7 +96,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                     }
                     else {
                         // if experiment_id is invalid go to assignment
-                        $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	/* callback function for 'OK' button*/ });
+                        $('body').css('overflow', 'hidden');
+                        $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 //                         alert('Experiment ' + state.experiment_id + ' does not exist.');
                         state.onhashchange = false;
                         state.view = 'assignment';
@@ -109,7 +110,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             }
             else {
                 // if assignment_id is invalid go to assignments
-                $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	/* callback function for 'OK' button*/ });
+                $('body').css('overflow', 'hidden');
+                $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 
 //                 alert('Assignment ' + state.assignment_id + ' does not exist.');
                 state.onhashchange = false;
@@ -223,7 +225,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             starcellbio(context.ui, master_model);
         }
         else {
-        	$.jqDialog.alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.", function() {	/* callback function for 'OK' button*/ });;
+        	$('body').css('overflow', 'hidden');
+        	$.jqDialog.alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.", function() {$('body').css('overflow', 'visible');	/* callback function for 'OK' button*/ });;
 // 
 //             alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.");
         }
@@ -245,14 +248,17 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
 
     scb.utils.off_on(workarea.parent(), 'click', '.remove_experiment', function () {
+    	$('body').css('overflow', 'hidden');
     	$.jqDialog.confirm("Delete experiment?",
-			function() {    
+			function() { 
+				$('body').css('overflow', 'visible');  
 				var model_id = scb.Utils.get_attribute($(this), 'experiment_id');
 				assignments.selected.experiments.remove(model_id);
 				assignments.selected.experiments.selected_id = null;
 				self.show({});
     		},// callback function for 'YES' button
 			function() {
+					$('body').css('overflow', 'visible');
 					return;
 			}		// callback function for 'NO' button
 		);// 
@@ -271,10 +277,20 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 $('.scb_s_contact_dialog').detach();
         });
 		$('iframe').load(function(){
+			
+    		var frame = document.getElementsByTagName('iframe')[0];
+			var content = (frame.contentDocument || frame.contentWindow);
+			content.body.style.fontSize = '90%';
+			content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
+			var inputs = content.getElementsByTagName('input');
+			$(inputs).css('font-family', 'sourcesanspro-semibold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
+			$(inputs).css('text-transform', 'uppercase');
+			$(inputs).css('background-color','#e0e0e0');
+			$(inputs).css('border','1px solid #e0e0e0');
+			var texts = content.querySelectorAll('input[type="text"]');
+			$(texts).css('height','25px');
 
-			var iframe = $('iframe').contents();
-
-			iframe.find(".scb_f_contact_submit_button").click(function(e){
+			$('iframe').find(".scb_f_contact_submit_button").click(function(e){
 					$('iframe').load(function(){
 						  var profile = $('iframe').contents();
 						  //console.log(profile);
@@ -321,7 +337,16 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 $('.scb_s_login_dialog').detach();
             });
             $('.iframe').load(function(){
-
+				var iframe = document.getElementsByTagName('iframe')[0];
+				var content = (iframe.contentDocument || iframe.contentWindow);
+				content.body.style.fontSize = '90%';
+				content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
+			    var inputs = content.getElementsByTagName('button');
+				$(inputs).css('font-family', 'sourcesanspro-semibold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
+				$(inputs).css('text-transform', 'uppercase');
+				$(inputs).css('background-color','#e0e0e0');
+				$(inputs).css('border','1px solid #e0e0e0');
+			
 				var iframe = $('.iframe').contents();
 
 				iframe.find(".primaryAction").click(function(){
@@ -618,7 +643,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 self.show(state);
             }
             else {
-            	$.jqDialog.alert("Experiment does not exist", function() {	/* callback function for 'OK' button*/ });
+            	$('body').css('overflow', 'hidden');
+            	$.jqDialog.alert("Experiment does not exist", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 //                 alert("Experiment does not exist");
                 if (parsed.assignment) {
                     self.show({

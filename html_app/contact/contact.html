@@ -1,15 +1,28 @@
 <html>
 <head>
+
 </head>
 
 <body>
 	<form class='scb_f_contact_form' action="/scb/contact" method="post">
               <fieldset>
-                <input id="project" name="project" type="hidden" value="StarCellBio"> <input id="source" name="source" type="hidden" value="app"> <legend>Feedback
+                <input id="project" name="project" type="hidden" value="StarCellBio"> <input id="source" name="source" type="hidden" value="app"> 
+                
+<!-- 
+                <legend>Feedback
                 Form</legend>
+ -->
                 <p>
                   <label>Your name (optional):</label> <input name="name" size="25/" type="text">
                 </p>
+                <p>
+                	<label>Email (optional):</label> <input name="email" type="text">
+                </p>
+                <p>
+                  <label>May we contact you via email?</label>
+                  <input checked="checked" name="subscribe" type="checkbox">
+                </p>
+
                 <p>
                   <label>Report type:</label><br>
                   <input name="report" type="radio" value="Bug">Bug<br>
@@ -17,17 +30,11 @@
                   <input name="report" type="radio" value="Comment">Comment<br>
                   <input name="report" type="radio" value="Question">Question
                 </p>
-                <p>
-                  <label>Email (optional):</label> <input name="email" type="text">
-                </p>
-                <p>
+				<p>
                   <label>Comment:</label><br>
                   <textarea cols="40" name="note" rows="10" style="width: 100%;"></textarea>
                 </p>
-                <p>
-                  <label>May we contact you via email?</label>
-                  <input checked="checked" name="subscribe" type="checkbox">
-                </p><input class='scb_f_contact_submit_button' type="submit" value="Submit">
+                <input class='scb_f_contact_submit_button' type="submit" value="Submit">
               </fieldset>
             </form>
 </body>

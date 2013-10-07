@@ -130,13 +130,18 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     }
     var rows_state = parsed.western_blot.rows_state();
     if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
-    	$.jqDialog.alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.", function() {	/* callback function for 'OK' button*/ });
+    	$('body').css('overflow', 'hidden');
+    	$.jqDialog.alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 
 //         alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.");
+			    	
 
     }
     else if (rows_state.valid < 1) {
-    	$.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {	/* callback function for 'OK' button*/ });
+    	    	$('body').css('overflow', 'hidden');
+
+    	$.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+				    	
 
 //         alert("Please select at least 1 lysate to prepare.");
 
@@ -178,15 +183,20 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
     }
 
     if (!parsed.western_blot.marker_loaded) {
+    	    	$('body').css('overflow', 'hidden');
+
 		$.jqDialog.confirm("The protein size marker has not been loaded. Would you like to continue?",
 			function() {    
 				//TODO: 1st things first -- we needs to save NEW order
     			parsed.western_blot.is_transfered = true;
+    			$('body').css('overflow', 'visible');
 
     			//TODO: before repaint need to do steps in animation...
     			scb.ui.static.MainFrame.refresh();
     		},// callback function for 'YES' button
 			function() {
+					$('body').css('overflow', 'visible');
+
 					return;
 			}		// callback function for 'NO' button
 		);
@@ -378,6 +388,10 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         console.log(')))))))))))))))))');
 		console.log(state.western_blot.parent.start_tabs_index);
 		console.log(')))))))))))))))))');
+		
+		state.experiment.last_technique_view = 'western_blot';
+
+		
         workarea.html(scb_western_blot.main({
             global_template: gstate.context.master_model,
             t: template,
@@ -395,6 +409,11 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         
         if(state.experiment.last_step >= 5)
 			state.experiment.last_step = 6;
+		state.experiment.last_technique = 'WESTERN BLOT';
+		state.experiment.last_id = state.western_blot.id;
+		state.experiment.last_param = 'western_blot_id';
+		
+		
         if(state.western_blot.parent.start_tabs_index <= 0){
 			state.western_blot.parent.start_tabs_index = 0;
 			$('.scb_s_western_blot_left_western_blot').prop('disabled', true);
@@ -443,6 +462,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		state.western_blot.parent.selected_id = state.western_blot.id;
 
         state.experiment.last_view = 'western_blot';
+
         //state.assignments.last_step = 6;
 		$('ol.scb_s_western_blot_choose_samples_order_list').sortable();
 		

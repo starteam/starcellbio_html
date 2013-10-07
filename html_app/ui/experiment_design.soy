@@ -30,7 +30,8 @@
     {param experiment:$experiment/}
     {/call}
     {call scb_homepage.display_footer}
-    {param t:$t /}
+    {param global_template:$t /}
+    {param assignment: $assignment /}
     {/call}
 </div>
 {/template}
@@ -54,16 +55,26 @@ Experiment active area
         {$t.instructions |noAutoescape}
     -->
         <br/>
+        <div class='scb_objective_number'>
+    		<div>1</div>
+		</div>
         <div class='scb_s_experiment_design_objective_container'>
+        	
             <div class='scb_s_experiment_design_objective_text' id='scb_s_experiment_design_objective_text_label'>What question is your experiment going to address?</div>
             <textarea aria-labelledby="scb_s_experiment_design_objective_text_label" class='scb_s_experiment_design_objective' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.objective}</textarea>
         </div>
-
-        <div class='scb_s_experiment_design_hypothesis_container'>
+        <br/>
+        <div class='scb_objective_number'>
+    		<div>2</div>
+		</div>        
+		<div class='scb_s_experiment_design_hypothesis_container'>
             <div class='scb_s_experiment_design_hypothesis_text' id="scb_s_experiment_design_hypothesis_label">Do you have a hypothesis for this experiment? If so, please write it below.</div>
         <textarea aria-labelledby="scb_s_experiment_design_hypothesis_label" class='scb_s_experiment_design_hypothesis' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.hypothesis}</textarea>
         </div>
-
+        <br/>
+        <div class='scb_objective_number'>
+    		<div>3</div>
+		</div>        
         <div class='scb_s_experiment_design_techniques_container'>
             <div class='scb_s_experiment_design_techniques_text'>What technique(s) might be best suited for the analysis of this experiment?</div>
             <span class='scb_s_experiment_design_techniques_tq_note'>

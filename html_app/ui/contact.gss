@@ -1,12 +1,23 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
+
+
+
 .scb_s_contact_dialog > iframe {
 
     background: #f4f6f8;
     border-radius: 5px;
     width: 450px;
     height: 500px;
+    border:0;
     top:0px;
     font-family: 'sourcesanspro-bold';
-    font-size: 10pt;
+    font-size: 20pt;
     
 }
 
@@ -15,6 +26,7 @@
     position: absolute;
     background: #f4f6f8;
     border-radius: 5px;
+    border: 2px solid #059789;
     margin-left:400px;
     margin-right:400px;
     margin-top: 110px;
@@ -22,6 +34,31 @@
     width: 450px;
     top:0px;
     font-family: 'sourcesanspro-bold';
-    font-size: 10pt;
+    font-size: 16px;
     
+}
+
+.scb_f_contact_close_button {
+
+	float:right;
+	-webkit-appearance: none;
+	font-family:'sourcesanspro-bold';
+	outline:none;
+	height: 25px;
+	border:0;
+	color: white;
+	background: #69a996;
+	
+    @mixin gradient(top,#80d1ae,#189689,#189689);
+}
+
+.scb_s_feedback_form{
+	background: #69a996;
+    color: white;
+    padding: 5px;
+    height: 25px;
+    position: relative;
+    left: 5px;
+    text-transform:uppercase;
+    @mixin gradient(top,#80d1ae,#189689,#189689);
 }

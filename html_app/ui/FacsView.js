@@ -78,12 +78,18 @@ scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     }
     var rows_state = parsed.facs.rows_state();
     if (rows_state && rows_state.valid < 1) {
+        	$('body').css('overflow', 'hidden');
+
     	$.jqDialog.confirm("No samples selected. Would you like to continue?",
 			function() {    
+				    	$('body').css('overflow', 'visible');
+
 				parsed.facs.sample_prepared = true;
     			scb.ui.static.MainFrame.refresh();
     		},// callback function for 'YES' button
 			function() {
+					    	$('body').css('overflow', 'visible');
+
 					return;
 			}		// callback function for 'NO' button
 		);
@@ -584,6 +590,10 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
                 scb.ui.static.FacsView.reevaluate_metadata({facs: state.facs, facs_lane: state.facs.selected_lane});
             }
         }
+        
+        state.experiment.last_technique_view = 'facs';
+
+        
         workarea.html(scb_facs.main({
             global_template: gstate.context.master_model,
             assignment: state.assignment,
@@ -600,6 +610,9 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         }));
         if(state.experiment.last_step >= 5)
 			state.experiment.last_step = 6;
+		state.experiment.last_technique = 'FLOW CYTOMETRY';
+		state.experiment.last_id = state.facs.id;
+		state.experiment.last_param = 'facs_id';
         $('.scb_f_facs_sample_active', $('.scb_s_facs_samples_table')).each(function (e) {
         		var element = $('input[type="radio"][checked="checked"]', $(this).parent().parent());
         	if($(this).attr('checked'))
@@ -615,6 +628,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 		
 		state.facs.parent.selected_id = state.facs.id;
 		state.experiment.last_view = 'facs';
+    	state.experiment.last_technique_view = state.experiment.last_view;
 		if(state.facs.parent.start_tabs_index <= 0){
 			state.facs.parent.start_tabs_index = 0;
 			$('.scb_s_facs_left_facs').prop('disabled', true);

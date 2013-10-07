@@ -34,6 +34,7 @@ scb.ui.static.HomepageView.register = function(workarea) {
     });
 	
 	scb.utils.off_on(workarea, 'click', '.scb_f_contact', function (e){
+		
 		scb.utils.off_on(workarea, 'click', '.scb_f_contact_close_button', function () {
 			$('.scb_s_contact_dialog').detach();
 			

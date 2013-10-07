@@ -32,6 +32,7 @@
 
 .scb_s_experiment_design_techniques_container {
     text-align: left;
+    display:inline-block;
     position: relative;
     min-height: 200px;
 }
@@ -70,8 +71,10 @@
     text-align: left;
 }
 
-.scb_s_experiment_design_hypothesis_container,.scb_s_experiment_design_techniques_container {
+.scb_s_experiment_design_hypothesis_container,.scb_s_experiment_design_techniques_container, .scb_s_experiment_design_objective_container {
     padding-top:15px;
+    display:inline-block;
+
 }
 
 .scb_s_experiment_name_edit {
@@ -138,7 +141,8 @@
 
 .scb_s_experiment_design_selected {
     border-width: 3px;
-    border-color: #C9C9C9;
+    border-color: #D9D9D9;
+    background:white;
     position: relative;
     top:-2px;
     left:-2px;
@@ -156,6 +160,7 @@
 .scb_s_experiment_design_technique:hover {
     position: relative;
     border-color:#B9B9B9;
+    background: white;
     border-width: 3px;
     top:-2px;
     left:-2px;

@@ -40,6 +40,12 @@ scb.Experiment = function scb_Experiment(data, context, parent) {
     // ui state
     scb.Utils.initialize_accessor_field(self,data,'last_view','experiment_design',null,context);
 	scb.Utils.initialize_accessor_field(self,data, 'last_step', 0, null,context);
+	scb.Utils.initialize_accessor_field(self,data, 'last_technique', 'undefined', null, context);
+	scb.Utils.initialize_accessor_field(self,data, 'last_id', 'undefined', null, context);
+	scb.Utils.initialize_accessor_field(self,data, 'last_technique_view', 'undefined', null, context);
+
+
+	scb.Utils.initialize_accessor_field(self,data, 'last_param', 'undefined', null, context);
 
 	scb.Utils.initialize_accessor_field(self,data,'cell_treatment_list',{},scb.CellTreatmentList,context);
 	scb.Utils.initialize_accessor_field(self,data,'western_blot_list',{},scb.WesternBlotList,context);

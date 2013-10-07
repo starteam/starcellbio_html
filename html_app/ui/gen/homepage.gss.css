@@ -78,11 +78,17 @@
 .scb_s_user_guide_text {
   margin-right: -15px;
 }
-.scb_s_cabinet_icon {
+.scb_s_cabinet_icon, .scb_s_pencil_icon {
   margin-left: 5px;
 }
-.scb_s_cabinet_text {
+.scb_s_cabinet_text, .scb_s_pencil_text {
   margin-right: 5px;
+}
+.scb_s_homepage_new_experiment {
+  left: 750px;
+  width: 150px;
+  bottom: 18px;
+  position: absolute;
 }
 .scb_s_logo_h1 {
   display: inline;
@@ -95,6 +101,9 @@
   text-align: right;
   margin-top: -10px;
 }
+.scb_f_contact, .scb_f_reference, .scb_f_user_guide, .scb_f_login {
+  cursor: pointer;
+}
 .scb_s_envelope_icon {
   vertical-align: middle;
   position: relative;
@@ -103,6 +112,10 @@
 .scb_s_envelope_text {
   position: relative;
   top: -12px;
+}
+.scb_s_new_homepage_experiment {
+  position: relative;
+  bottom: 10px;
 }
 .scb_s_cabinet_text, .scb_s_user_guide_text {
   position: relative;
@@ -391,14 +404,14 @@
   background-color: red;
 }
 .scb_s_homepage_top_left_text {
-  color: white;
+  color: black;
   font-size: 11pt;
   display: block;
   position: relative;
   top: 50px;
   left: 20px;
   width: 250px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(255,255,255,0.8);
   line-height: 18pt;
 }
 .scb_s_homepage_top_left_text b {

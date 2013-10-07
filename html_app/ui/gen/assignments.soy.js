@@ -12,7 +12,7 @@ scb_assignments.main = function(opt_data, opt_sb) {
   scb_assignments.display_assignments(opt_data, output);
   scb_assignments.display_abstract(opt_data, output);
   scb_homepage.display_experiment_design(null, output);
-  scb_homepage.display_footer(null, output);
+  scb_homepage.display_footer(opt_data, output);
   output.append('</div>');
   return opt_sb ? '' : output.toString();
 };
@@ -42,18 +42,18 @@ scb_assignments.display_abstract = function(opt_data, opt_sb) {
 scb_assignments.display_assignments = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_assignments_sidebar\'><h1 class=\'scb_s_assignments_sidebar_title\'>Your Assignments</h1><ul>');
-  var courseList45 = soy.$$getMapKeys(opt_data.courses);
-  var courseListLen45 = courseList45.length;
-  for (var courseIndex45 = 0; courseIndex45 < courseListLen45; courseIndex45++) {
-    var courseData45 = courseList45[courseIndex45];
-    output.append('<div class=\'scb_s_assignments_sidebar_course_block\'><div class=\'scb_s_assignments_sidebar_course\'>', soy.$$escapeHtml(courseData45), '</div>');
-    var assignmentList49 = opt_data.courses[courseData45];
-    var assignmentListLen49 = assignmentList49.length;
-    for (var assignmentIndex49 = 0; assignmentIndex49 < assignmentListLen49; assignmentIndex49++) {
-      var assignmentData49 = assignmentList49[assignmentIndex49];
-      output.append('<li class=\'scb_s_assignments_sidebar_name\'><a href=\'#view=', (assignmentData49.id == opt_data.assignments.selected_id) ? 'assignment' : 'assignments', '&assignment_id=', soy.$$escapeHtml(assignmentData49.id), '\' model_id=\'', soy.$$escapeHtml(assignmentData49.id), '\' class=\'scb_s_assignment_sidebar_link ', (assignmentData49.id == opt_data.assignments.selected_id) ? 'scb_f_open_assignment' : 'scb_f_select_assignment', '\'>', soy.$$escapeHtml(assignmentData49.name), '</a></li>');
-      if (assignmentData49.id == opt_data.assignments.selected_id) {
-        scb_assignments.display_experiments({experiments: assignmentData49.experiments, assignment: assignmentData49}, output);
+  var courseList46 = soy.$$getMapKeys(opt_data.courses);
+  var courseListLen46 = courseList46.length;
+  for (var courseIndex46 = 0; courseIndex46 < courseListLen46; courseIndex46++) {
+    var courseData46 = courseList46[courseIndex46];
+    output.append('<div class=\'scb_s_assignments_sidebar_course_block\'><div class=\'scb_s_assignments_sidebar_course\'>', soy.$$escapeHtml(courseData46), '</div>');
+    var assignmentList50 = opt_data.courses[courseData46];
+    var assignmentListLen50 = assignmentList50.length;
+    for (var assignmentIndex50 = 0; assignmentIndex50 < assignmentListLen50; assignmentIndex50++) {
+      var assignmentData50 = assignmentList50[assignmentIndex50];
+      output.append('<li class=\'scb_s_assignments_sidebar_name\'><a href=\'#view=', (assignmentData50.id == opt_data.assignments.selected_id) ? 'assignment' : 'assignments', '&assignment_id=', soy.$$escapeHtml(assignmentData50.id), '\' model_id=\'', soy.$$escapeHtml(assignmentData50.id), '\' class=\'scb_s_assignment_sidebar_link ', (assignmentData50.id == opt_data.assignments.selected_id) ? 'scb_f_open_assignment' : 'scb_f_select_assignment', '\'>', soy.$$escapeHtml(assignmentData50.name), '</a></li>');
+      if (assignmentData50.id == opt_data.assignments.selected_id) {
+        scb_assignments.display_experiments({experiments: assignmentData50.experiments, assignment: assignmentData50}, output);
       }
     }
     output.append('</div>');
@@ -67,11 +67,11 @@ scb_assignments.display_experiments = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<ul class=\'scb_s_assignment_experiment_list\'>');
   if (opt_data.experiments.list.length != 0) {
-    var experimentList82 = opt_data.experiments.list;
-    var experimentListLen82 = experimentList82.length;
-    for (var experimentIndex82 = 0; experimentIndex82 < experimentListLen82; experimentIndex82++) {
-      var experimentData82 = experimentList82[experimentIndex82];
-      output.append('<li class=\'scb_s_assignment_experiment_list_item\'><a class=\'scb_f_open_assignment_experiment\' href=\'#view=experiment_last&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&experiment_id=', soy.$$escapeHtml(experimentData82.id), '\' model_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' sub_model_id=\'', soy.$$escapeHtml(experimentData82.id), '\'>', soy.$$escapeHtml(experimentData82.name), '</a></li>');
+    var experimentList83 = opt_data.experiments.list;
+    var experimentListLen83 = experimentList83.length;
+    for (var experimentIndex83 = 0; experimentIndex83 < experimentListLen83; experimentIndex83++) {
+      var experimentData83 = experimentList83[experimentIndex83];
+      output.append('<li class=\'scb_s_assignment_experiment_list_item\'><a class=\'scb_f_open_assignment_experiment\' href=\'#view=experiment_last&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&experiment_id=', soy.$$escapeHtml(experimentData83.id), '\' model_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' sub_model_id=\'', soy.$$escapeHtml(experimentData83.id), '\'>', soy.$$escapeHtml(experimentData83.name), '</a></li>');
     }
   }
   output.append('</ul><div class=\'scb_s_assignment_experiment_list_item_new_experiment\'><span aria-hidden="true" tabindex="-1">+</span><a class=\'scb_f_new_assignment_experiment scb_s_new_assignment_experiment\' href=\'#view=experiment_design&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '\' model_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\'>New Experiment</a></div>');

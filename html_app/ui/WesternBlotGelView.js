@@ -59,7 +59,10 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
             parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name + (counter == 0 ? '' : ' - ' + (counter + 1));
         }
     } else {
-    	$.jqDialog.alert("Please select primary & secondary antibodies.", function() {	/* callback function for 'OK' button*/ });
+    	    	$('body').css('overflow', 'hidden');
+
+    	$.jqDialog.alert("Please select primary & secondary antibodies.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+			    	
 
 //         alert("Please select primary & secondary antibodies.");
     }
@@ -332,6 +335,8 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
     var self = this;
 
     self.show = function (state) {
+    	state.experiment.last_technique_view = 'western_blot_gel';
+
         var workarea = state.workarea;
         var experiment = state.experiment;
         var template = state.assignment.template;
@@ -355,6 +360,10 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         }));
         if(state.experiment.last_step >= 5)
 			state.experiment.last_step = 6;
+		state.experiment.last_technique = 'WESTERN BLOT';
+		state.experiment.last_id = state.western_blot.id;
+		state.experiment.last_param = 'western_blot_id';
+
 
         if(state.western_blot.gel_list.start_tabs_index <= 0){
 			state.western_blot.gel_list.start_tabs_index = 0;
@@ -373,6 +382,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         	$('.scb_s_western_blot_video_box_wrapper').remove();
         }
         state.experiment.last_view = 'western_blot_gel';
+
         //state.assignments.last_step = 6;
 
         state.western_blot.last_gel = state.western_blot_gel.id;

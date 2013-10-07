@@ -29,6 +29,10 @@
     border-top-width: 8px;
 }
 
+.scb_s_assignment_scroll{
+	overflow-y:scroll;
+	height:470px;
+}
 
 .scb_s_assignment_description {
     position: relative;
@@ -37,7 +41,7 @@
     text-align: justify;
     display: inline-block;
     vertical-align: top;
-    min-height:580px;
+    height:500px;
     border-style: solid;
     border-width: 1px;
     border-color: #a0a0a0;
@@ -77,6 +81,17 @@
     margin-left:-20px;
     margin-right:-20px;
     background-color: #dae9e1;
+    width:674px;
+    height:2px;
+    display: block;
+    margin-bottom:5px;
+}
+
+
+.scb_s_assignment_button_underline {
+    margin-left:-20px;
+    margin-right:-20px;
+    background-color: #7dd2ad;
     width:674px;
     height:2px;
     display: block;

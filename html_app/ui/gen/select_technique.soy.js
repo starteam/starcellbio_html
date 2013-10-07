@@ -10,7 +10,7 @@ scb_select_technique.main = function(opt_data, opt_sb) {
   scb_homepage.display_header(opt_data, output);
   scb_common.assignment_step({step: 5, last_step: opt_data.last_step, assignment_name: opt_data.assignment.name, experiment_name: opt_data.experiment.name, assignment: opt_data.assignment, experiment: opt_data.experiment}, output);
   scb_select_technique.display_details(opt_data, output);
-  scb_homepage.display_footer(opt_data, output);
+  scb_homepage.display_footer({global_template: opt_data.t, assignment: opt_data.assignment}, output);
   output.append('</div>');
   return opt_sb ? '' : output.toString();
 };
@@ -21,25 +21,25 @@ scb_select_technique.display_details = function(opt_data, opt_sb) {
   output.append('<div class=\'scb_s_select_technique_details_view\'>');
   scb_common.experiment_step({step: 4}, output);
   output.append('<div class=\'scb_s_select_technique_western_blot scb_f_select_technique\'><h1 class=\'scb_s_select_technique_header\'>Available Western Blot:</h1><div class=\'scb_s_select_technique_western_blot_available\'>');
-  var wList26 = opt_data.experiment.western_blot_list.list;
-  var wListLen26 = wList26.length;
-  for (var wIndex26 = 0; wIndex26 < wListLen26; wIndex26++) {
-    var wData26 = wList26[wIndex26];
-    output.append('<a class=\'scb_f_open_western_blot scb_s_select_technique_open_western_blot\' western_blot_id=\'', soy.$$escapeHtml(wData26.id), '\' href=\'#view=western_blot&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(wData26.id), '\'>', soy.$$escapeHtml(wData26.name), '</a><br>');
+  var wList27 = opt_data.experiment.western_blot_list.list;
+  var wListLen27 = wList27.length;
+  for (var wIndex27 = 0; wIndex27 < wListLen27; wIndex27++) {
+    var wData27 = wList27[wIndex27];
+    output.append('<a class=\'scb_f_open_western_blot scb_s_select_technique_open_western_blot\' western_blot_id=\'', soy.$$escapeHtml(wData27.id), '\' href=\'#view=western_blot&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(wData27.id), '\'>', soy.$$escapeHtml(wData27.name), '</a><br>');
   }
   output.append((opt_data.experiment.western_blot_list.length == 0) ? '<p class=\'scb_s_select_technique_none\'>No available western blots.</p><p class=\'scb_s_select_technique_none\'>Select <b>New Western Blot</b> below.</p>' : '', '</div><p><span class=\'scb_s_select_technique_reminder\'>Reminder:</span><br>Western blotting detects overall changes in the amount or chemical modifications of a particular protein. &nbsp;<a href="pdf/Reference%20Library.pdf" class=\'scb_s_select_technique_learn_more\'>Learn More</a></p><a class=\'scb_s_navigation_button scb_f_new_western_blot \' href=\'#view=western_blot&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '\'>NEW WESTERN BLOT &nbsp; &#9654;</a></div><div class=\'scb_s_select_technique_flow scb_f_select_technique\'><h1 class=\'scb_s_select_technique_header\'>Available Flow Cytometry:</h1><div class=\'scb_s_select_technique_western_blot_available\'>');
-  var wList47 = opt_data.experiment.facs_list.list;
-  var wListLen47 = wList47.length;
-  for (var wIndex47 = 0; wIndex47 < wListLen47; wIndex47++) {
-    var wData47 = wList47[wIndex47];
-    output.append('<a class=\'scb_f_open_facs scb_s_select_technique_open_facs\' facs_id=\'', soy.$$escapeHtml(wData47.id), '\' href=\'#view=facs&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&facs_id=', soy.$$escapeHtml(wData47.id), '\'>', soy.$$escapeHtml(wData47.name), '</a><br>');
+  var wList48 = opt_data.experiment.facs_list.list;
+  var wListLen48 = wList48.length;
+  for (var wIndex48 = 0; wIndex48 < wListLen48; wIndex48++) {
+    var wData48 = wList48[wIndex48];
+    output.append('<a class=\'scb_f_open_facs scb_s_select_technique_open_facs\' facs_id=\'', soy.$$escapeHtml(wData48.id), '\' href=\'#view=facs&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&facs_id=', soy.$$escapeHtml(wData48.id), '\'>', soy.$$escapeHtml(wData48.name), '</a><br>');
   }
   output.append((opt_data.experiment.facs_list.length == 0) ? '<p class=\'scb_s_select_technique_none\'>No available flow cytometry techniques.</p><p class=\'scb_s_select_technique_none\'>Select <b>New Flow Cytometry</b> below.</p>' : '', '</div><p><span class=\'scb_s_select_technique_reminder\'>Reminder:</span><br>Flow cytometry is used to count and analyze the size, shape and properties of individual cells within a heterogeneous population of cells. &nbsp;<a href="pdf/Reference%20Library.pdf" class=\'scb_s_select_technique_learn_more\'>Learn More</a></p><a class=\'scb_s_navigation_button scb_f_new_flow_cytometry\' href=\'#view=facs&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '\'>NEW FLOW CYTOMETRY &nbsp; &#9654;</a></div><div class=\'scb_s_select_technique_micro scb_f_select_technique\'><h1 class=\'scb_s_select_technique_header\'>Available Microscopy:</h1><div class=\'scb_s_select_technique_western_blot_available\'>');
-  var wList68 = opt_data.experiment.microscopy_list.list;
-  var wListLen68 = wList68.length;
-  for (var wIndex68 = 0; wIndex68 < wListLen68; wIndex68++) {
-    var wData68 = wList68[wIndex68];
-    output.append('<a class=\'scb_f_open_microscopy scb_s_select_technique_open_microscopy\' microscopy_id=\'', soy.$$escapeHtml(wData68.id), '\' href=\'#view=microscopy&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&microscopy_id=', soy.$$escapeHtml(wData68.id), '\'>', soy.$$escapeHtml(wData68.name), '</a><br>');
+  var wList69 = opt_data.experiment.microscopy_list.list;
+  var wListLen69 = wList69.length;
+  for (var wIndex69 = 0; wIndex69 < wListLen69; wIndex69++) {
+    var wData69 = wList69[wIndex69];
+    output.append('<a class=\'scb_f_open_microscopy scb_s_select_technique_open_microscopy\' microscopy_id=\'', soy.$$escapeHtml(wData69.id), '\' href=\'#view=microscopy&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&microscopy_id=', soy.$$escapeHtml(wData69.id), '\'>', soy.$$escapeHtml(wData69.name), '</a><br>');
   }
   output.append((opt_data.experiment.facs_list.length == 0) ? '<p class=\'scb_s_select_technique_none\'>No available microscopy techniques.</p><p class=\'scb_s_select_technique_none\'>Select <b>New Microscopy</b> below.</p>' : '', '</div><p><span class=\'scb_s_select_technique_reminder\'>Reminder:</span><br>Microscopy is used to study the shape, morphology and properties of cells, tissues or organisms that otherwise cannot be observed by eye. &nbsp;<a href="pdf/Reference%20Library.pdf" class=\'scb_s_select_technique_learn_more\'>Learn More</a></p><a class=\'scb_s_navigation_button scb_f_new_microscopy \' href=\'#view=microscopy&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '\'>NEW MICROSCOPY &nbsp; &#9654;</a></div><a class="scb_s_navigation_button scb_f_open_experiment_setup_readonly" href="#view=experiment_run&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '">&#9664; &nbsp; REVIEW SET-UP</a><br/></div>');
   return opt_sb ? '' : output.toString();

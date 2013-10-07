@@ -129,13 +129,19 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
     var parsed = scb.ui.static.MicroscopyView.parse(element);
     var rows_state = parsed.microscopy.rows_state();
     if (rows_state && rows_state.valid < 1) {
+    	    	$('body').css('overflow', 'hidden');
+
     	$.jqDialog.confirm("No samples selected. Would you like to continue?",
 			function() {    
 					parsed.microscopy.slide_prepared = true;
 					window.scrollTo(0, 0);
+					$('body').css('overflow', 'visible');
+
 					scb.ui.static.MainFrame.refresh();
     		},// callback function for 'YES' button
 			function() {
+					    	$('body').css('overflow', 'visible');
+
 					return;
 			}		// callback function for 'NO' button
 		);
@@ -919,7 +925,8 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         	 //init(map, draw, 'images/microscopy/black.jpg');
         }
         
-        
+        state.experiment.last_technique_view = 'microscopy';
+
         workarea.html(scb_microscopy.main({
             global_template: gstate.context.master_model,
             assignment: state.assignment,
@@ -938,11 +945,13 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         
         if(state.experiment.last_step >= 5)
 			state.experiment.last_step = 6;
+		state.experiment.last_technique = 'MICROSCOPY';
+		state.experiment.last_id = state.microscopy.id;
+		state.experiment.last_param = 'microscopy_id';
         //state.assignments.last_step = 6;
 
 		
 		state.experiment.last_view = 'microscopy';
-		
 		document.title = "Microscopy - StarCellBio";
 		
 		state.microscopy.parent.selected_id = state.microscopy.id;
