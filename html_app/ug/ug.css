@@ -6,10 +6,10 @@
   /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
 }
 
-.scb_microscopy_details_view{
+/*.scb_microscopy_details_view{
 	padding-top: 30px;
 	width: 960px;
-}
+}*/
 
 .scb_microscopy_details_view_inner {
     width: 950px;

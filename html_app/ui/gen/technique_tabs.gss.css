@@ -24,13 +24,13 @@
 .scb_s_western_blot_open_western_blot, .scb_s_facs_open_facs, .scb_s_microscopy_open_microscopy {
   margin: 3px;
   margin-left: 5px;
-  background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
+  background-image: url('../images/western_blot/WesternBlot_GrayTabMod.png');
   display: inline-block;
   width: 119px;
   padding-left: 20px;
-  top: 4px;
+  top: 5px;
   position: relative;
-  height: 19px;
+  height: 18px;
   border-bottom: 1px solid #808080;
   font-size: 11pt;
   text-decoration: none;

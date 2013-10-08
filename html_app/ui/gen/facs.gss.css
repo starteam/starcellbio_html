@@ -86,11 +86,19 @@
   margin: 0;
   margin-right: -5px;
   margin-left: -5px;
+  padding-bottom: 4px;
+  border: inherit;
+}
+.scb_s_facs_left_facs:enabled, .scb_s_facs_right_facs:enabled {
+  color: #29a592;
 }
 .scb_f_facs_prepare_lysates {
   float: right;
   position: relative;
   top: 33px;
+}
+.scb_facs_details_view {
+  margin-top: -20px;
 }
 .scb_s_facs_all_tabs {
   display: block;
@@ -154,6 +162,8 @@ input[type=radio]:disabled {
   cursor: pointer;
   float: right;
   margin-right: 17px;
+  position: relative;
+  font-family: 'Lucida Grande';
 }
 .scb_f_facs_remove {
   border: none;

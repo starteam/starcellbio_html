@@ -225,8 +225,8 @@ FACS Main View
         <td class='scb_s_facs_samples_table_heading'>&nbsp;</td>
         </thead>
         {foreach $r in $rows}
-        <tr class='scb_s_facs_samples_table_tr'>
-            <td class='scb_s_facs_samples_table_td'>{if $r.display_sample}
+        <tr class='scb_s_facs_samples_table_tr '>
+            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
                        cell_treatment_id='{$r.cell_treatment.id}'
@@ -234,15 +234,15 @@ FACS Main View
                 >
                 {/if}
             </td>
-            <td class='scb_s_facs_samples_table_td'>{if $r.display_sample}
+            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border'>{if $r.display_sample}
                 {$r.display_text}
                 {/if}
             </td>
-            <td class='scb_s_facs_samples_table_td'>
+            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border'>
                 <input type="radio" checked="checked" class='facs_locked'><span class='facs_locked'>Fixed</span></input>
                 <input type="radio" disabled='disabled'><span style='opacity:0.25;'>Live</span></input>
             </td>
-            <td class='scb_s_facs_samples_table_td'>
+            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border'>
                 {call .display_lysate_types}
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
@@ -252,7 +252,7 @@ FACS Main View
                 {param lane:$r/}
                 {/call}
             </td>
-            <td class='scb_s_facs_samples_table_td'>
+            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border'>
                 {if $r.kind == 'existing'}
                 <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
                         assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
@@ -279,7 +279,7 @@ FACS Main View
 					<button class='scb_f_facs_sample_active_all scb_s_gray_button'>SELECT ALL</button>
 				</td>
 				<td colspan='3' align='right'>
-					<button class='scb_f_facs_sample_inactive_all'>CANCEL ALL</button>
+					<button class='scb_f_facs_sample_inactive_all'>CLEAR ALL</button>
 				</td>
 			</tr>
 			{else}
@@ -292,7 +292,7 @@ FACS Main View
 				<td colspan='1' >&nbsp;
 				</td>
 				<td colspan='1'>
-					<button class='scb_f_facs_sample_inactive_all'>CANCEL ALL</button>
+					<button class='scb_f_facs_sample_inactive_all'>CLEAR ALL</button>
 				</td>
 				<td colspan='1' >&nbsp;
 				</td>

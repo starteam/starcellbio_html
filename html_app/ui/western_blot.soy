@@ -164,14 +164,16 @@
 		{/if}
 		{/foreach}
 		<span class='scb_s_western_blot_add_western_blot' assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> <a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
+             			experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> 
+             			<a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' 
+             			href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
+             			<span class='scb_s_add_tab'>ADD </span>
 				<span class='scb_s_western_blot_add_cross_western_blot'>| + </span></a>
 		</span>
 	{else}
 		<button class='scb_s_western_blot_left_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}'>
-        				&lt;&lt;
+             			experiment_id='{$experiment.id}'>&#x25c0;
     	</button>
 		{foreach $wb in $experiment.western_blot_list.list}
 			{if index($wb) >= $experiment.western_blot_list.start_tabs_index and index($wb) < $experiment.western_blot_list.start_tabs_index +5}     				
@@ -193,13 +195,13 @@
 			{/if}
 		{/foreach}
 		<span class='scb_s_western_blot_add_western_blot' assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> <a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
+             			experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> <a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'><span class='scb_s_add_tab'>ADD </span>
 				<span class='scb_s_western_blot_add_cross_western_blot'>| + </span></a>
 		</span>
 		<button class='scb_s_western_blot_right_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}' >
-        				&gt;&gt;
+        				&#x25b6;
     	</button>
 		
 	{/if}
@@ -278,7 +280,7 @@
                 <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
             </td>
         	<td colspan='2' align='right'>
-                <button class='scb_f_western_blot_sample_inactive_all'>CANCEL ALL</button>
+                <button class='scb_f_western_blot_sample_inactive_all'>CLEAR ALL</button>
             </td>
         </tr>
         {else}
@@ -289,7 +291,7 @@
             <td colspan='1' class='scb_s_western_blot_blank_space1'>
             </td>
             <td colspan='1'>
-                <button class='scb_f_western_blot_sample_inactive_all'>CANCEL ALL</button>
+                <button class='scb_f_western_blot_sample_inactive_all'>CLEAR ALL</button>
             </td>
             <td colspan='1' >&nbsp;
             </td>

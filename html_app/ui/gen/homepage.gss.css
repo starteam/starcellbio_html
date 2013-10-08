@@ -125,7 +125,7 @@
   text-align: left;
   display: inline-block;
   font-size: 7.5pt;
-  color: #727272;
+  color: black;
   width: 40px;
   padding-left: 6px;
   padding-right: 6px;
@@ -407,10 +407,11 @@
   color: black;
   font-size: 11pt;
   display: block;
+  padding: 15px;
   position: relative;
   top: 50px;
   left: 20px;
-  width: 250px;
+  width: 215px;
   background: rgba(255,255,255,0.8);
   line-height: 18pt;
 }

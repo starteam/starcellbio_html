@@ -237,7 +237,8 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_add_microscopy= function(element, 
 		parsed.microscopy.parent.start_tabs_index = 1;
 	}
 	else if (parsed.microscopy.parent.list.length >5)
-		parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.start_tabs_index +1;
+		//parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.start_tabs_index +1;
+		parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.length-4;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 

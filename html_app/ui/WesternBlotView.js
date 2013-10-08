@@ -279,7 +279,9 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot= function(elem
 		parsed.western_blot.parent.start_tabs_index = 1;
 	}
 	else if (parsed.western_blot.parent.list.length >5)
-		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index +1;
+		//parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index +1;
+		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.length-4;
+
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 

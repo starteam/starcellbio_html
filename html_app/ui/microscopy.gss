@@ -13,7 +13,7 @@
 }
 
 .scb_microscopy_details_view{
-	padding-top: 30px;
+	margin-top: -20px;
 	width: 960px;
 }
 
@@ -54,7 +54,10 @@
     cursor:pointer;
     float:right;
     margin-right: 17px;
+    position: relative;
+    font-family: 'Lucida Grande';
 }
+
 
 .scb_s_microscopy_left_microscopy, .scb_s_microscopy_right_microscopy{
 
@@ -62,7 +65,15 @@
 	margin:0px;
 	margin-right:-5px;
 	margin-left:-5px;
+	padding-bottom: 4px;
+	border:inherit;
 }
+
+
+.scb_s_microscopy_left_microscopy:enabled, .scb_s_microscopy_right_microscopy:enabled{
+	color: #29a592;
+}
+
 
 .scb_s_microscopy_all_tabs {
     display: block;
@@ -309,6 +320,7 @@ body.dragging, body.dragging * {
 
     bottom: 10px;
     left: 10px;
+    width: 200px;
 }
 
 

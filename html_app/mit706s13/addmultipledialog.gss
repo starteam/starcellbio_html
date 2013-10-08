@@ -18,7 +18,8 @@
 }
 
 .scb_mit706s16_inner_dialog_title_close {
-    font-size: 10pt;
+    font-size: 9pt;
+    font-family:'sourcesanspro-regular';
     background-color: black;
     padding:3px 4px 3px 4px;
     border-radius: 3px;

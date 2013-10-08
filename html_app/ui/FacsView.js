@@ -246,7 +246,8 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 		parsed.facs.parent.start_tabs_index = 1;
 	}
 	else if (parsed.facs.parent.list.length >5)
-		parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index +1;
+		//parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index +1;
+		parsed.facs.parent.start_tabs_index = parsed.facs.parent.length-4;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 

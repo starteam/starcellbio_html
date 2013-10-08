@@ -1,5 +1,5 @@
 .scb_western_blot_details_view {
-  padding-top: 30px;
+  padding-top: 10px;
   padding-bottom: 5px;
   width: 960px;
 }
@@ -27,10 +27,16 @@
   color: black;
   text-align: center;
 }
+.scb_s_add_tab {
+  position: relative;
+  top: 1px;
+}
 .scb_s_western_blot_add_cross_western_blot {
   cursor: pointer;
   float: right;
   margin-right: 17px;
+  position: relative;
+  font-family: 'Lucida Grande';
 }
 .scb_s_western_blot_tabs>a {
   color: gray;
@@ -38,8 +44,8 @@
 .scb_f_western_blot_prepare_lysates {
   border-radius: 5px;
   position: relative;
-  left: 420px;
-  top: 42px;
+  float: right;
+  margin-right: 35px;
   bottom: 10px;
   display: inline-block;
 }
@@ -145,6 +151,11 @@
   margin: 0;
   margin-right: -5px;
   margin-left: -5px;
+  padding-bottom: 4px;
+  border: inherit;
+}
+.scb_s_western_blot_left_western_blot:enabled, .scb_s_western_blot_right_western_blot:enabled {
+  color: #29a592;
 }
 .scb_s_western_blot_gel_tab {
   width: 140px;
@@ -316,16 +327,13 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_s_western_blot_load_marker {
   text-align: center;
   margin-left: 22px;
-  background-color: #fff;
-  background-image: -webkit-linear-gradient(top,#f2f2f2,#d3d1d2);
-  background-image: -moz-linear-gradient(top,#f2f2f2,#d3d1d2);
-  background-image: -ms-linear-gradient(top,#f2f2f2,#d3d1d2);
-  background-image: -o-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background-color: #676767;
+  background-image: none;
   border: 1px solid #e0e0e0;
   border-radius: 5pt;
   width: 140px;
   height: 30px;
-  color: black;
+  color: white;
   font-size: 10pt;
   font-family: 'sourcesanspro-semibold';
 }
@@ -337,6 +345,7 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   background-color: white;
   cursor: pointer;
   float: right;
+  padding-bottom: 0;
   margin-right: 17px;
 }
 .scb_s_western_blot_tab_content>.scb_f_open_select_technique {
@@ -372,6 +381,8 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 }
 .scb_s_western_blot_active>span {
   color: black;
+  position: relative;
+  top: 3px;
 }
 .scb_f_western_blot_sample_inactive_all, .scb_f_western_blot_sample_active_all {
   background-color: #fff;
@@ -394,6 +405,7 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_s_select_technique_at_western_blot {
   display: block;
   margin-left: 20px;
+  width: 200px;
 }
 .scb_s_western_blot_view {
   background: #f4f6f8;

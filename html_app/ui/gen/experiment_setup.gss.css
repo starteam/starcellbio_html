@@ -55,8 +55,8 @@ table.scb_s_experiment_setup_table {
   border-spacing: 0;
   width: 100%;
   background-color: white;
-  margin-bottom: 20px;
   padding-bottom: 2px;
+  margin-bottom: 25px;
 }
 .scb_s_experiment_setup_table_body {
   background-color: #edeef2;

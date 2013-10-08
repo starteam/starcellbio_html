@@ -26,13 +26,12 @@
   color: #6aa4eb;
 }
 .scb_f_new_western_blot {
-  display: block;
   margin-top: 10px;
-  margin-left: 0;
 }
 .scb_s_select_technique_details_view>.scb_f_open_experiment_setup_readonly {
   display: block;
   margin-top: 20px;
+  width: 200px;
 }
 .scb_s_select_technique_western_blot {
   width: 260px;
@@ -94,8 +93,13 @@
   color: #189689;
   font-weight: bold;
 }
+.scb_s_select_technique_para {
+  position: relative;
+  margin-top: 24px;
+}
 .scb_f_new_western_blot, .scb_f_new_flow_cytometry, .scb_f_new_microscopy {
-  position: absolute;
+  position: relative;
+  top: 15px;
   bottom: 5px;
   left: 20px;
 }

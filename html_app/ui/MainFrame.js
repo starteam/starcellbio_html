@@ -149,6 +149,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.ui.static.WesternBlotView.register(workarea);
     scb.ui.static.MicroscopyView.register(workarea);
     scb.ui.static.WesternBlotGelView.register(workarea);
+    scb.ui.static.SelectTechniqueView.register(workarea);
     scb.ui.static.FacsView.register(workarea);
 
     scb.ui.static.MainFrame.in_ajax = false;
@@ -289,7 +290,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			$(inputs).css('border','1px solid #e0e0e0');
 			var texts = content.querySelectorAll('input[type="text"]');
 			$(texts).css('height','25px');
-
+			var fieldset = content.querySelectorAll('fieldset');
+			$(fieldset).css('border', '0');
+			var submit = content.getElementsByClassName('scb_f_contact_submit_button');
+			$(submit).css({'float':'right', '-webkit-appearance':'none', 'border-radius': '5px', 'text-transform':'uppercase','border': '1px solid #e0e0e0' });
 			$('iframe').find(".scb_f_contact_submit_button").click(function(e){
 					$('iframe').load(function(){
 						  var profile = $('iframe').contents();
