@@ -221,18 +221,18 @@
 {call .display_wb_progress}
 {param step:1/}
 {/call}
-
+<div class='scb_s_western_blot_samples_container'>
 <div class='scb_s_western_blot_samples_table'>
     <table>
         <thead class='scb_s_western_blot_samples_table_head'>
-        <td class='scb_s_western_blot_samples_table_heading scb_s_experiment_setup_table_border'>Select</td>
-        <td class='scb_s_western_blot_samples_table_heading scb_s_experiment_setup_table_border'>Samples</td>
-        <td class='scb_s_western_blot_samples_table_heading scb_s_experiment_setup_table_border'>Lysate type</td>
-        <td class='scb_s_western_blot_samples_table_heading scb_s_experiment_setup_table_border'>&nbsp;</td>
+        <td class='scb_s_western_blot_samples_table_heading sample_prep_select scb_s_experiment_setup_table_border'>Select</td>
+        <td class='scb_s_western_blot_samples_table_heading sample_prep_samples scb_s_experiment_setup_table_border'>Samples</td>
+        <td class='scb_s_western_blot_samples_table_heading sample_prep_lysate scb_s_experiment_setup_table_border'>Lysate type</td>
+        <td class='scb_s_western_blot_samples_table_heading sample_prep_blank scb_s_experiment_setup_table_border'>&nbsp;</td>
         </thead>
         {foreach $r in $rows}
         <tr class='scb_s_western_blot_samples_table_tr'>
-            <td class='scb_s_western_blot_samples_table_td scb_s_experiment_setup_table_border'>{if $r.display_sample}
+            <td class='scb_s_western_blot_samples_table_td scb_s_experiment_setup_table_border' style='width:96px;'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_western_blot_sample_active" western_blot_id='{$western_blot.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
                        cell_treatment_id='{$r.cell_treatment.id}'
@@ -270,16 +270,16 @@
         </tr>
         {/foreach}
         {if length($rows) >= 10}
-        <tr>
+        <tr class="scb_s_western_blot_green_line_tr">
             <td colspan='4'>
         		<div class="scb_s_western_blot_green_line"></div>
         	</td>
         </tr>
         <tr class='scb_s_western_blot_samples_select_all_rel'>
-        	<td colspan='2'>
+        	<td class='scb_f_western_blot_sample_active_all_td' colspan='2'>
                 <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
             </td>
-        	<td colspan='2' align='right'>
+        	<td class='scb_f_western_blot_sample_inactive_all_td' colspan='2' align='right'>
                 <button class='scb_f_western_blot_sample_inactive_all'>CLEAR ALL</button>
             </td>
         </tr>
@@ -298,6 +298,7 @@
         </tr>
         {/if}
     </table>
+</div>
 </div>
 
 </div>

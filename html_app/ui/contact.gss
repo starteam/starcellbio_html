@@ -45,16 +45,22 @@
 	font-family:'sourcesanspro-bold';
 	outline:none;
 	height: 25px;
-	border:0;
-	color: white;
-	background: #69a996;
-	
-    @mixin gradient(top,#80d1ae,#189689,#189689);
+	width: 25px;
+	cursor:pointer;
+	border: 1px solid #000000;
+	border-radius: 6px;
+	font-size: 12pt;
+	color: black;
+	background: #f4f6f8;
+}
+
+.scb_f_contact_close_button:hover{
+	background-color: #e58986;
 }
 
 .scb_s_feedback_form{
-	background: #69a996;
-    color: white;
+	background: #f4f6f8;
+    color: black;
     padding: 5px;
     height: 25px;
     position: relative;

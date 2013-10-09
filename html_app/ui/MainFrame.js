@@ -350,7 +350,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				$(inputs).css('text-transform', 'uppercase');
 				$(inputs).css('background-color','#e0e0e0');
 				$(inputs).css('border','1px solid #e0e0e0');
-			
+				var fieldset = content.querySelectorAll('fieldset');
+				$(fieldset).css('border', '0');
 				var iframe = $('.iframe').contents();
 
 				iframe.find(".primaryAction").click(function(){

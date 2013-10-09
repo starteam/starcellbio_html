@@ -36,7 +36,6 @@
 }
 
 .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup {
-    position: absolute;
     bottom: 5px;
     left: 5px;
 }
@@ -48,15 +47,13 @@
 }
 
 .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
-    position: absolute;
     bottom: 5px;
-    margin-top: 0px;
-    margin-bottom: 4px;
-    right: 5px
+    right: 5px;
+    float:right;
 }
 
 .scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
-    position: absolute;
+    float:right;
     bottom: 5px;
     right: 5px;
 }
@@ -74,7 +71,6 @@ table.scb_s_experiment_setup_table {
     width:100%;
     background-color: white;
     padding-bottom: 2px;
-    margin-bottom: 25px;
 }
 
 .scb_s_experiment_setup_table_body {
@@ -85,11 +81,7 @@ table.scb_s_experiment_setup_table {
     border-top: 1px solid #e0e0e0;
 }
 
-.scb_s_western_blot_samples_select_all_rel{
-  bottom: 0;
-  margin-bottom:75px;
-  position:relative;
-}
+
 
 .scb_s_experiment_setup_new_set_up{
 	visibility: hidden;	
