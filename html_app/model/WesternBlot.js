@@ -122,7 +122,8 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
         _.each(rows, function (e) {
             if (e.is_valid) count++;
         });
-        //rows = _.sortBy(rows, function(obj){ if(obj.kind=='existing')return obj.lane.order_id; else return;});
+        if(self.lysate_prepared)
+	        rows = _.sortBy(rows, function(obj){ if(obj.kind=='existing')return obj.lane.order_id; else return;});
         return {rows:rows, valid:count};
     }
 

@@ -105,7 +105,7 @@ scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (eleme
     parsed.state.view = 'western_blot';
     scb.ui.static.MainFrame.refresh(parsed.state);
 }
-scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [0,1, 2, 5, 10, 30, 1 * 60, 2 * 60, 5 * 60, 10 * 60, 20 * 60, 60 * 60];
+scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [0, 0,1, 2, 5, 10, 30, 1 * 60, 2 * 60, 5 * 60, 10 * 60, 20 * 60, 60 * 60];
 
 scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider = function (e, ui) {
     var element = this;
@@ -134,9 +134,13 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index = function (expo
     _.find(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array, function (a, b) {
         if (exposure_time >= a) {
             ret = b;
+            console.log('SHLOKA');
+            console.log(ret);
             return false;
         }
     });
+    console.log('SHLOKA');
+    console.log(ret);
     return ret;
 }
 
@@ -256,8 +260,8 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         var eX = evt.clientX;
         var eY = evt.clientY;
 
-        var y = (eY - poffset.top) - 14;
-        var x = (eX - poffset.left);
+        var y = (eY - poffset.top) - 40;
+        var x = (eX - poffset.left)- 20;
         //console.info(evt);
         window.__evt = evt ;
         window.__element = element;
@@ -389,11 +393,21 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
 		
 		state.western_blot.parent.selected_id = state.western_blot.id;
 
-        $('.scb_f_wb_exposure_slider').slider({
-            orientation: "horizontal",
+//         $('.scb_f_wb_exposure_slider').slider({
+//             orientation: "vertical",
+//             range: "min",
+//             min: 0,
+//             max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length,
+//             value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
+//             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
+//             change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider
+//         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
+        
+       $('.scb_f_wb_exposure_slider').slider({
+            orientation: "vertical",
             range: "min",
-            min: 1,
-            max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length - 1,
+            min: 0,
+            max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length,
             value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
             change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider

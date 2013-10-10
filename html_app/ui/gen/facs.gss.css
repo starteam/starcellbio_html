@@ -66,6 +66,12 @@
 .scb_s_facs_blank_space1 {
   width: 643px;
 }
+.scb_f_facs_sample_active_all_td {
+  width: 436px;
+}
+.scb_f_facs_sample_inactive_all_td {
+  width: 462px;
+}
 .scb_f_facs_sample_active_all, .scb_f_facs_sample_inactive_all {
   background-color: #fff;
   background-image: -webkit-linear-gradient(top,#f2f2f2,#d3d1d2);
@@ -89,13 +95,13 @@
   padding-bottom: 4px;
   border: inherit;
 }
-.scb_s_facs_left_facs:enabled, .scb_s_facs_right_facs:enabled {
-  color: #29a592;
-}
 .scb_f_facs_prepare_lysates {
   float: right;
   position: relative;
-  top: 33px;
+  top: 11px;
+}
+.scb_s_facs_left_facs:enabled, .scb_s_facs_right_facs:enabled {
+  color: #29a592;
 }
 .scb_facs_details_view {
   margin-top: -20px;
@@ -185,6 +191,48 @@ input[type=radio]:disabled {
   padding-bottom: 10px;
   margin-bottom: 50px;
 }
+.scb_s_facs_samples_container {
+  margin-top: 180px;
+  position: relative;
+  height: 306px;
+  width: 900px;
+  left: 10px;
+  padding-top: 20px;
+  padding-bottom: 33px;
+  border: 1px #80d1ae solid;
+  border-radius: 5px;
+  background: #edeef2;
+}
+.sample_prep_select_facs {
+  width: 75px;
+}
+.sample_prep_samples_facs {
+  width: 342px;
+}
+.sample_prep_cellt_facs {
+  width: 195px;
+}
+.sample_prep_dna_facs {
+  width: 279px;
+}
+.sample_prep_blank_facs {
+  width: 10px;
+}
+.scb_s_facs_samples_table {
+  border-radius: 5px;
+  margin-bottom: 5px;
+  min-height: 300px;
+  background-color: #edeef2;
+  overflow: auto;
+  height: 216px;
+  border: 0;
+}
+.scb_s_facs_samples_select_all_abs {
+  bottom: 0;
+  position: absolute;
+  border-top: #80d1ae solid 2px;
+  padding-top: 2px;
+}
 .scb_s_facs_samples_table>table {
   width: 100%;
   border-collapse: collapse;
@@ -215,13 +263,25 @@ input[type=radio]:disabled {
   font-family: 'sourcesanspro-semibold';
   font-size: 10pt;
 }
+.scb_s_facs_samples_table_head>tr {
+  position: absolute;
+  top: 0;
+  background: white;
+}
 .scb_s_facs_samples_table_td {
   font-size: 10pt;
 }
 .scb_f_facs_run_samples {
   border: none;
-  margin-top: 20px !important;
-  margin-left: 50px !important;
+  margin-top: 0 !important;
+  margin-left: 80px !important;
+  margin-right: 20px !important;
+  margin-bottom: 20px !important;
+}
+.scb_f_facs_run_samples_short {
+  border: none;
+  margin-top: 105px !important;
+  margin-left: 80px !important;
   margin-right: 20px !important;
   margin-bottom: 20px !important;
 }

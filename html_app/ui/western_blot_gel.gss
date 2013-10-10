@@ -33,18 +33,18 @@ font-family: 'sourcesanspro-regular';
 
 .scb_s_wb_exposure_time {
     position: absolute;
-    top: 180px;
-    width:200px;
+    top: 50px;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
     margin-left:10px;
+    left:150px;
 
 }
 
 
 .scb_s_western_blot_reprobe {
     position: absolute;
-    top: 275px;
+    top: 235px;
     width:150px;
 }
 
@@ -135,7 +135,7 @@ font-family: 'sourcesanspro-regular';
     font-size:11pt;
     font-family: 'sourcesanspro-semibold';
     padding-left:10px;
-	margin-top:27px;
+	margin-top:37px;
 }
 
 .scb_s_western_blot_tools {
@@ -144,25 +144,20 @@ font-family: 'sourcesanspro-regular';
 }
 
 .scb_f_wb_exposure_slider {
-    height: 2px;
-    background:none;
-    background-color: #939393;
-    color: black;
-    margin-top:10px;
+    border-radius: 7px;
+	width: 8px;
+	background: #ebebeb;
 }
 
 .scb_f_wb_exposure_slider > .ui-slider-range{
-	height:auto;
-	background: none;
-	background-color: #939393;
-	color: black;
+	width: 3px;
+	left: 3px;
+	background: #98c0bc;
 }
 
 .scb_f_wb_exposure_slider > .ui-slider-handle {
-    width: 0.3em;
-    top:-.5em;
-    background: #939393;
-    color: #939393;
+    border-radius: 15px;
+    height:18px;
 }
 
 .scb_s_western_blot_gel_tab > a {

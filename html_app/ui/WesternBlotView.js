@@ -84,6 +84,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
 
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (element, event) {
+	//event.preventDefault();
     var parsed = scb.ui.static.WesternBlotView.parse(element);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");

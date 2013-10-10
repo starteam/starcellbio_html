@@ -90,6 +90,12 @@
   bottom: 18px;
   position: absolute;
 }
+.scb_s_new_assignments_experiment {
+  left: 750px;
+  width: 150px;
+  bottom: 27px;
+  position: absolute;
+}
 .scb_s_logo_h1 {
   display: inline;
   font-size: 0;

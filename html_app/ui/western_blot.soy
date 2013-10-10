@@ -240,7 +240,7 @@
                 >
                 {/if}
             </td>
-            <td class='scb_s_western_blot_samples_table_td scb_s_experiment_setup_table_border'>{if $r.display_sample}
+            <td class='scb_s_western_blot_samples_table_td scb_s_experiment_setup_table_border'  style='width:491px;'>{if $r.display_sample}
                 {$r.display_text}
                 {/if}
             </td>
@@ -270,11 +270,6 @@
         </tr>
         {/foreach}
         {if length($rows) >= 10}
-        <tr class="scb_s_western_blot_green_line_tr">
-            <td colspan='4'>
-        		<div class="scb_s_western_blot_green_line"></div>
-        	</td>
-        </tr>
         <tr class='scb_s_western_blot_samples_select_all_rel'>
         	<td class='scb_f_western_blot_sample_active_all_td' colspan='2'>
                 <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
@@ -298,7 +293,11 @@
         </tr>
         {/if}
     </table>
+
 </div>
+	{if length($rows) >=10}
+    	<div class="scb_s_western_blot_green_line"></div>
+    {/if}
 </div>
 
 </div>

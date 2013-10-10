@@ -1,6 +1,5 @@
 .scb_western_blot_details_view {
   padding-top: 10px;
-  padding-bottom: 5px;
   width: 960px;
 }
 .scb_western_blot_details_view_inner {
@@ -13,30 +12,24 @@
 }
 .scb_s_western_blot_samples_table {
   border-radius: 5px;
-  margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 5px;
   min-height: 300px;
   background-color: #edeef2;
-}
-.scb_s_facs_samples_table {
-  border: 1px #80d1ae solid;
-  border-radius: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 5px;
-  min-height: 300px;
-  background-color: #edeef2;
-}
-.scb_s_western_blot_samples_table {
   overflow: auto;
   height: 216px;
   border: 0;
 }
+.scb_s_western_blot_samples_select_all_abs {
+  bottom: 0;
+  position: absolute;
+  border-top: #80d1ae solid 2px;
+  padding-top: 2px;
+}
 .scb_s_western_blot_samples_container {
   margin-top: 180px;
   position: relative;
-  height: 300px;
+  height: 306px;
   width: 900px;
   left: 10px;
   padding-top: 20px;
@@ -457,6 +450,14 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   display: block;
   margin-left: 20px;
   width: 200px;
+  margin-bottom: -10px;
+}
+.scb_s_select_technique_at_facs {
+  display: block;
+  margin-top: -10px;
+  margin-left: 20px;
+  width: 200px;
+  margin-bottom: -10px;
 }
 .scb_s_western_blot_view {
   background: #f4f6f8;
@@ -465,6 +466,9 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_s_western_blot_green_line {
   width: 100%;
   height: 2px;
+  z-index: 100;
+  position: relative;
+  bottom: 4px;
   background-color: #80d1ae;
   margin-bottom: 2px;
 }
@@ -476,9 +480,8 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   border: 1px solid #e1e3e8;
   position: absolute;
   right: 0;
-  top: 10px;
+  top: 0;
   box-shadow: 0 0 6px gray;
-  margin-right: 12px;
 }
 .scb_s_western_blot_video_box_wrapper_title {
   text-align: center;
