@@ -528,7 +528,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'facs') {
-
+			
             if (!parsed.facs) {
                 delete state.onhashchange;
                 var facs = parsed.experiment.facs_list.start({});

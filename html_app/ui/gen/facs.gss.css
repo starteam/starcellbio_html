@@ -280,17 +280,18 @@ input[type=radio]:disabled {
 }
 .scb_f_facs_run_samples_short {
   border: none;
-  margin-top: 105px !important;
+  position: absolute;
+  bottom: 0;
   margin-left: 80px !important;
   margin-right: 20px !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 70px !important;
 }
 .scb_s_facs_tab_content_analyze {
   padding: 5px;
   padding-bottom: 20px;
 }
 .scb_s_facs_tools {
-  width: 225px;
+  width: 205px;
   height: 350px;
   vertical-align: top;
   display: inline-block;
@@ -340,6 +341,9 @@ input[type=radio]:disabled {
   font-size: 10pt;
   padding-left: 5px;
   border-right: 1px solid #e0e0e0;
+}
+.scb_s_facs_tools_instructions_followup {
+  display: none;
 }
 .scb_s_facs_tools_instructions_followup>ul {
   -webkit-padding-start: 20px;

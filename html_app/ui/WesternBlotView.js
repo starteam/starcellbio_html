@@ -393,7 +393,12 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		console.log(')))))))))))))))))');
 		
 		state.experiment.last_technique_view = 'western_blot';
-
+		var x = 0;
+        if($('.scb_s_western_blot_samples_table').length ==0)
+        	x=100;
+        else
+        	x = $('.scb_s_western_blot_samples_table')[0].scrollTop;
+        	
 		
         workarea.html(scb_western_blot.main({
             global_template: gstate.context.master_model,
@@ -409,7 +414,9 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             kinds: template.lysate_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
-        
+        if (kind == 'sample_prep'){
+        	$('.scb_s_western_blot_samples_table')[0].scrollTop = x;
+        }
         if(state.experiment.last_step >= 5)
 			state.experiment.last_step = 6;
 		state.experiment.last_technique = 'WESTERN BLOT';

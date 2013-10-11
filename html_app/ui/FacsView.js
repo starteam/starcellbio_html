@@ -133,6 +133,18 @@ scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
     scb.ui.static.MainFrame.refresh();
 }
 
+
+scb.ui.static.FacsView.scb_f_facs_run_samples_short = function (element, event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    parsed.facs.samples_finished = true;
+    parsed.facs.lane_selected = scb.utils.get(parsed.facs.lanes_list.list, [0, 'id']);
+    scb.ui.static.MainFrame.refresh();
+}
+
 scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
     if (parsed.redisplay) {
@@ -285,6 +297,11 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
     });
+    
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples_short', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_run_samples_short(this, e);
+    });
+    
     
    scb.utils.off_on(workarea, 'click', '.scb_f_facs_remove', function (e) {
         scb.ui.static.FacsView.scb_f_facs_remove(this);
@@ -593,8 +610,12 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         }
         
         state.experiment.last_technique_view = 'facs';
-
-        
+        var x = 0;
+        if($('.scb_s_facs_samples_table').length ==0)
+        	x=100;
+        else
+        	x = $('.scb_s_facs_samples_table')[0].scrollTop;
+        	
         workarea.html(scb_facs.main({
             global_template: gstate.context.master_model,
             assignment: state.assignment,
@@ -609,6 +630,9 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             kinds: template.facs_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
+        if (kind == 'sample_prep'){
+        	$('.scb_s_facs_samples_table')[0].scrollTop = x;
+        }
         if(state.experiment.last_step >= 5)
 			state.experiment.last_step = 6;
 		state.experiment.last_technique = 'FLOW CYTOMETRY';
