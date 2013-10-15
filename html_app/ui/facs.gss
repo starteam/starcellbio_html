@@ -128,9 +128,13 @@
 }
 
 .scb_f_facs_prepare_lysates{
-    float:right;
+    border-radius: 5px;
     position: relative;
-    top: 11px;
+	float: right;
+	margin-right: 35px;
+    bottom: 10px;
+    right: 5px;
+    display:inline-block;
 }
 
 
@@ -150,8 +154,8 @@
     position: relative;
     padding-bottom:8px;
     padding-top: 25px;
-    margin-left: 8px;
-    width: 942px;
+    margin-left: 13px;
+    width: 932px;
     margin-top:30px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }
@@ -230,22 +234,20 @@ input[type=radio]:disabled{
 
 .scb_s_facs_tab_content {
 	top: 30px;
-	left: 8px;
+	left: 10px;
 	margin-top: -27px;
  	background-color: #FFFFFF;
  	background-image: none;
  	min-height: 439px;
- 	width: 920px;
+ 	width: 910px;
  	padding: 0px;
  	padding-bottom: 10px;
 	margin-bottom: 50px;
 }
 
 .scb_s_facs_samples_container{
-	margin-top: 180px;
 	position: relative;
-	height: 306px;
-	width: 900px;
+	width: 888px;
 	left:10px;
 	padding-top: 20px;
 	padding-bottom: 33px;
@@ -277,10 +279,8 @@ input[type=radio]:disabled{
 .scb_s_facs_samples_table {
     border-radius: 5px;
     margin-bottom: 5px;
-    min-height: 300px;
     background-color: #EDEEF2;
     overflow:auto;
-	height: 216px;
 	border: 0px;
 
 }
@@ -388,7 +388,7 @@ input[type=radio]:disabled{
 }
 
 .scb_s_facs_apply{
-	position:absolute;
+	position: absolute;
 	top: 320px;
 	font-family: 'sourcesanspro-regular';
 	font-size: 10pt;

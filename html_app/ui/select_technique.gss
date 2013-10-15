@@ -55,7 +55,6 @@
     padding-bottom:8px;
     display:inline-block;
     margin-right: 10px;
-    margin-left:5px;
     margin-top:10px;
     background-color: #edeef2;
     height:368px;
@@ -93,9 +92,9 @@
     position: relative;
     border:1px solid #e0e0e0;
     border-radius: 5px;
-    width:932px;
+    width:922px;
     margin-top: 10px;
-    margin-left: 8px;
+    margin-left: 13px;
     padding-left:10px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
 }

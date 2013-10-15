@@ -293,7 +293,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			var fieldset = content.querySelectorAll('fieldset');
 			$(fieldset).css('border', '0');
 			var submit = content.getElementsByClassName('scb_f_contact_submit_button');
-			$(submit).css({'float':'right', '-webkit-appearance':'none', 'border-radius': '5px', 'text-transform':'uppercase','border': '1px solid #e0e0e0' });
+			$(submit).css({'float':'right', '-webkit-appearance':'none', 'border-radius': '5px', 'letter-spacing':'1px',
+				 'text-transform':'uppercase','border': '1px solid #e0e0e0', 'background-color': '#676767', 'border': '1px solid #e0e0e0',
+				 'height': '30px','color': 'white','font-size': '10pt', 'cursor':'pointer'});
 			$('iframe').find(".scb_f_contact_submit_button").click(function(e){
 					$('iframe').load(function(){
 						  var profile = $('iframe').contents();
@@ -352,8 +354,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				$(inputs).css('border','1px solid #e0e0e0');
 				var fieldset = content.querySelectorAll('fieldset');
 				$(fieldset).css('border', '0');
+				var submit = content.getElementsByClassName('auth_submit_button');
+				$(submit).css({'float':'right', '-webkit-appearance':'none', 'border-radius': '5px', 'letter-spacing':'1px',
+				 'text-transform':'uppercase','border': '1px solid #e0e0e0', 'background-color': '#676767', 'border': '1px solid #e0e0e0',
+				 'height': '30px','color': 'white','font-size': '10pt', 'cursor':'pointer'});
 				var iframe = $('.iframe').contents();
-
+				
 				iframe.find(".primaryAction").click(function(){
 						   $('.iframe').load(function(){
 						   	  var profile = $('.iframe').contents();

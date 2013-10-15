@@ -221,8 +221,8 @@
 {call .display_wb_progress}
 {param step:1/}
 {/call}
-<div class='scb_s_western_blot_samples_container'>
-<div class='scb_s_western_blot_samples_table'>
+<div class='scb_s_western_blot_samples_container' style='{if length($rows) >=12}  height: 306px;	{else} 	height:auto;{/if}'>
+<div class='scb_s_western_blot_samples_table'  style='{if length($rows) >=12} height: 216px;   min-height: 300px;  {else} 	height:auto;{/if}'>
     <table>
         <thead class='scb_s_western_blot_samples_table_head'>
         <td class='scb_s_western_blot_samples_table_heading sample_prep_select scb_s_experiment_setup_table_border'>Select</td>

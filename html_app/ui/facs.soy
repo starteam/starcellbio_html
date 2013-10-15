@@ -118,6 +118,10 @@ FACS Main View
 
 </div>
 {/if}
+<a class='scb_s_navigation_button scb_f_facs_prepare_lysates' facs_id='{$facs.id}'
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE SAMPLES  &nbsp; &#9654;
+</a>
 <a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_facs"
    href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
@@ -209,15 +213,14 @@ FACS Main View
 @param facs
 @param rows
 @param kinds
-@param can_prepare_lysate
 */
 {template .sample_prep}
 {call .display_facs_progress}
 {param step:1/}
 {/call}
-<div class='scb_s_facs_samples_container'>
+<div class='scb_s_facs_samples_container' style='{if length($rows) >=12}  height: 306px;	{else} 	height:auto;{/if}'>
 
-<div class='scb_s_facs_samples_table'>
+<div class='scb_s_facs_samples_table' style='{if length($rows) >=12} height: 216px;   min-height: 300px;  {else} 	height:auto;{/if}'>
     <table>
         <thead class='scb_s_facs_samples_table_head'>
         <td class='scb_s_facs_samples_table_heading sample_prep_select_facs'>Select</td>
@@ -302,10 +305,7 @@ FACS Main View
     	<div class="scb_s_western_blot_green_line"></div>
     {/if}
 </div>
-<a class='scb_s_navigation_button scb_f_facs_prepare_lysates' facs_id='{$facs.id}'
-   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE SAMPLES  &nbsp; &#9654;
-</a>
+
 {/template}
 
 

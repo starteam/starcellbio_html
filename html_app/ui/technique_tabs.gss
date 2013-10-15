@@ -114,7 +114,6 @@
     display:inline-block;
     vertical-align: top;
     width:600px;
-    margin-left: 10px;
     height:400px;
     padding-top:20px;
 }

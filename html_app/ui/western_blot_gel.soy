@@ -174,7 +174,7 @@
         		<button class='scb_s_western_blot_gel_left_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}'>
-        				&lt;&lt;
+        				&#x25c0;
     			</button>
     			{foreach $gel in $western_blot.gel_list.list}
 					{if index($gel) >= $western_blot.gel_list.start_tabs_index and index($gel) < $western_blot.gel_list.start_tabs_index +4}     				
@@ -206,7 +206,7 @@
         		<button class='scb_s_western_blot_gel_right_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}' >
-        				&gt;&gt;
+        				&#x25b6;
     			</button>
 <!-- 	
         		<select class='scb_s_western_blot_tab_select_many'>
@@ -268,7 +268,7 @@
         </div>
         {else}
         <img class='scb_s_western_blot_gel_membrane'
-             src='images/western_blot/SCB_WesternBlotting_Negative.png'>
+             src='images/western_blot/SCB_WesternBlotting_Membrane.png'>
         {if $western_blot.marker_loaded}
         <img style='position:relative;top: -220px;left: {20+22*$valid_rows}px' class='scb_s_western_blot_gel_membrane'
              src='images/western_blot/SCB_WB_Markers_Lane.png'>

@@ -50,6 +50,10 @@ div#main {
   background-image: -ms-linear-gradient(top,#6e6e6e,#373737);
   background-image: -o-linear-gradient(top,#6e6e6e,#373737);
 }
+.scb_s_experiment_step_labels {
+  width: 440px;
+  display: inline-block;
+}
 .scb_s_experiment_step_number {
   padding: .25em;
   vertical-align: top;
@@ -68,6 +72,132 @@ div#main {
   background-image: -moz-linear-gradient(top,#88d2af,#18968a);
   background-image: -ms-linear-gradient(top,#88d2af,#18968a);
   background-image: -o-linear-gradient(top,#88d2af,#18968a);
+}
+.scb_s_experiment_step_green_bar {
+  position: relative;
+  z-index: 6;
+  border: 1px solid #8f8e8c;
+  width: 440px;
+  height: 20px;
+  border-radius: 18px;
+  text-align: center;
+  vertical-align: 90%;
+  color: white;
+  display: block;
+  margin-right: 2em;
+  background-color: #189689;
+  background-image: -webkit-linear-gradient(top,#80d1ae,#189689);
+  background-image: -moz-linear-gradient(top,#80d1ae,#189689);
+  background-image: -ms-linear-gradient(top,#80d1ae,#189689);
+  background-image: -o-linear-gradient(top,#80d1ae,#189689);
+}
+.scb_s_experiment_step_black_bar {
+  position: relative;
+  width: 440px;
+  height: 22px;
+  border-radius: 18px;
+  text-align: center;
+  vertical-align: 90%;
+  color: white;
+  display: block;
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: #383838;
+  background-image: -webkit-linear-gradient(top,#6e6e6e,#373737);
+  background-image: -moz-linear-gradient(top,#6e6e6e,#373737);
+  background-image: -ms-linear-gradient(top,#6e6e6e,#373737);
+  background-image: -o-linear-gradient(top,#6e6e6e,#373737);
+}
+.scb_s_experiment_step_vertical_line_1 {
+  position: absolute;
+  width: 1px;
+  background-color: black;
+  height: 12px;
+  top: 56px;
+  left: 65px;
+}
+.scb_s_experiment_step_vertical_line_2 {
+  position: absolute;
+  width: 1px;
+  background-color: black;
+  height: 12px;
+  top: 56px;
+  left: 155px;
+}
+.scb_s_experiment_step_vertical_line_3 {
+  position: absolute;
+  width: 1px;
+  background-color: black;
+  height: 12px;
+  top: 56px;
+  left: 245px;
+}
+.scb_s_experiment_step_vertical_line_4 {
+  position: absolute;
+  width: 1px;
+  background-color: black;
+  height: 12px;
+  top: 56px;
+  left: 335px;
+}
+.scb_s_experiment_step_vertical_line_5 {
+  position: absolute;
+  width: 1px;
+  background-color: black;
+  height: 12px;
+  top: 56px;
+  left: 425px;
+}
+.scb_s_experiment_step_vertical_line_1_top {
+  position: absolute;
+  z-index: 5;
+  width: 1px;
+  background-color: #777;
+  height: 22px;
+  left: 36px;
+}
+.scb_s_experiment_step_vertical_line_2_top {
+  position: absolute;
+  width: 1px;
+  background-color: #777;
+  height: 22px;
+  left: 126px;
+  z-index: 5;
+}
+.scb_s_experiment_step_vertical_line_3_top {
+  position: absolute;
+  width: 1px;
+  background-color: #777;
+  height: 22px;
+  left: 216px;
+  z-index: 5;
+}
+.scb_s_experiment_step_vertical_line_4_top {
+  position: absolute;
+  width: 1px;
+  background-color: #777;
+  height: 22px;
+  left: 306px;
+  z-index: 5;
+}
+.scb_s_experiment_step_vertical_line_5_top {
+  position: absolute;
+  width: 1px;
+  background-color: #777;
+  height: 22px;
+  left: 396px;
+  z-index: 5;
+}
+.scb_s_experiment_step_progress_label {
+  padding: 5px;
+  width: 150px;
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 11pt;
+  text-decoration: none;
+  color: black;
+  margin-top: -2px;
+  font-family: 'sourcesanspro-regular';
 }
 .scb_s_experiment_step_horizontal_line_12 {
   position: absolute;
@@ -109,11 +239,17 @@ div#main {
   vertical-align: top;
 }
 .scb_s_experiment_step_text {
-  display: block;
+  display: inline-block;
   position: relative;
+  width: 70px;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 15px;
+  vertical-align: top;
+  left: 25px;
   font-size: 12px;
+}
+.scb_s_experiment_step_text_after {
+  padding-left: 20px;
 }
 .scb_s_assignment_step_experiment_block {
   position: absolute;
@@ -192,6 +328,8 @@ label.custom-select {
   width: 140px;
   height: 15px;
   padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   text-align: center;
   letter-spacing: 1px;
   font-size: 11pt;
@@ -207,6 +345,8 @@ label.custom-select {
 }
 .scb_s_assignment_step_link_active {
   background: url('../images/header/scb_navigation_button_new.png');
+  background-size: cover;
+  background-repeat: no-repeat;
   margin-left: -1px;
   margin-top: -1px;
 }

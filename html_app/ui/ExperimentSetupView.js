@@ -258,6 +258,7 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
 }
 
 scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = function (element, event) {
+    
     var parsed = scb.ui.static.ExperimentSetupView.parse(element);
     if (parsed.experiment) {
         if (parsed.experiment.cell_treatment_list.length == 0) {

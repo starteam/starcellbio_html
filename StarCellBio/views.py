@@ -83,6 +83,8 @@ def create_courses(request, **kwargs):
 def get_courses(request, **kwargs):
 	import ast
 	import random
+	#import pudb
+	#pudb.set_trace()
 	list = []
 	retval = []
 	token = random.randrange(0, 1000000)
@@ -122,6 +124,8 @@ def post_state(request, **kwargs):
 		sassignments = course[0].sassignments.all()
 		retval = {'is_anonymous': False, 'valid_token':False, 'token': jsondata['token']}
 		for sa in sassignments:
+			#import pudb
+			#pudb.set_trace()
 			for x in jsondata['model']['assignments']['list']:
 				if(sa.token == jsondata['token'] and sa.assignmentID == x['id']):
 						sa.data = json.loads(json.dumps(x))

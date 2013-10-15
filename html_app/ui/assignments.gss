@@ -22,13 +22,17 @@
     border-color: #a0a0a0;
     border-radius: 8px;
     padding: 10px;
-    width:644px;
+    width:634px;
     position: relative;
     padding-left:20px;
     padding-top:17px;
     font-size:10pt;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
     padding-bottom:50px;
+}
+
+.scb_s_abstract_title_underline{
+	width: 664px;
 }
 
 .scb_s_abstract > h1 {
@@ -90,7 +94,7 @@
     margin-right:10px;
     padding:5px;
     background-color: white;
-    margin-left:8px;
+    margin-left:13px;
     border-top-width:8px;
     box-shadow: 0 0 3px black;
 }

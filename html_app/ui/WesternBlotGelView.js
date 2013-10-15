@@ -134,12 +134,10 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index = function (expo
     _.find(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array, function (a, b) {
         if (exposure_time >= a) {
             ret = b;
-            console.log('SHLOKA');
             console.log(ret);
             return false;
         }
     });
-    console.log('SHLOKA');
     console.log(ret);
     return ret;
 }
@@ -404,10 +402,10 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
 //         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
         
        $('.scb_f_wb_exposure_slider').slider({
-            orientation: "vertical",
+            orientation: "horizontal",
             range: "min",
-            min: 0,
-            max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length,
+            min: 1,
+            max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length-1,
             value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
             change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider
