@@ -2,10 +2,12 @@
   background: #f4f6f8;
   border-radius: 5px;
   padding: 10px;
-  height: 240px;
-  width: 240px;
+  height: 300px;
+  width: 350px;
   border: 0;
-  top: 0;
+  top: 40px;
+  display: block;
+  margin-left: auto;
   position: relative;
   z-index: 999;
   font-family: 'sourcesanspro-bold';
@@ -20,13 +22,14 @@
   margin-right: 400px;
   margin-top: 200px;
   padding: 10px;
-  height: 300px;
-  width: 260px;
+  height: 360px;
+  width: 420px;
   top: 0;
   font-family: 'sourcesanspro-bold';
   font-size: 10pt;
 }
 .scb_f_login_close_button, .scb_f_signup_close_button, .scb_f_logout_close_button {
+  padding-top: 0;
   float: right;
   -webkit-appearance: none;
   font-family: 'sourcesanspro-bold';

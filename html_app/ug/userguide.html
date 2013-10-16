@@ -1,20 +1,49 @@
-<!DOCTYPE html>
 <html>
 <head>
-		<!-- 
+		
 
-<script type="text/javascript" src="jquery-1.7.2.js"></script>
-<script type="text/javascript" src="caman.full.js"></script>
+<script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+<!-- <script type="text/javascript" src="caman.full.js"></script>
 <script type="text/javascript" src="base64.js"></script>
 <script type="text/javascript" src="canvas2image.js"></script>
  -->
 
-<script type="text/javascript" src="ug.js"></script>
+<?php
+	header('Access-Control-Allow-Origin: *');
+?>
 
-<link rel="stylesheet" type="text/css" href="ug.css">
+
+
+<style>
+.scb_s_user_guides{
+	color:blue;
+	cursor:pointer;
+}
+
+#iframe{
+	background:rgba(0,0,0,0);
+	display: block; width: 100%; border: none; overflow-y: auto; overflow-x: hidden;
+}
 </style>
 
 </head>
 <body>
+
+<span class='scb_s_user_guides'><u>UserGuide</u></span>
+
+<script>
+$( ".scb_s_user_guides" ).click(function(evt) {
+	$.ajax({ url: 'http://starapp.mit.edu/stardev/cellbio/user_guide.html', crossDomain: true, dataType: 'html', success: function(data) { 
+		console.log(data)} 
+		
+		});
+	var iframe = document.createElement('iframe');
+	iframe.setAttribute('src', 'help.html');
+	iframe.id = 'iframe'
+	iframe.width = document.width;
+	iframe.height= document.height;
+	$('body').append(iframe);
+});
+</script>
 </body>
 </html>

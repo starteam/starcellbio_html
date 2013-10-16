@@ -1,0 +1,20 @@
+.scb_f_help{
+	width: 400px;
+	height:500px;
+	border: 1px solid pinnk;
+	position:relative;
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right:auto;
+	display: block;
+}
+
+.scb_f_help_search_bar{
+	background: gray;
+	width: 400px;
+	height: 100px;
+}
+
+.scb_f_help_form > input{
+	font-size: 16pt;
+}

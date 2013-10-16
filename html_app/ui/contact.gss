@@ -41,7 +41,7 @@
 }
 
 .scb_f_contact_close_button {
-
+	padding-top: 0px;
 	float:right;
 	-webkit-appearance: none;
 	font-family:'sourcesanspro-bold';

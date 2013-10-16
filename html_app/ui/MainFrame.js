@@ -684,7 +684,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     		setTimeout(function() {
     			pending_save = false;
     			console.log('believe');
-    			post_obj = {'token': get_courses_result.token, 'model': parsed.context.master_model}
+    			var token = 0;
+    			if(typeof post_state_result === 'undefined')
+    				token = get_courses_result.token;
+    			else
+    				token = post_state_result.token;
+    			post_obj = {'token': token, 'model': parsed.context.master_model}
     			$.ajax({
 					type: "POST",
 					url: 'scb/post_state.js',

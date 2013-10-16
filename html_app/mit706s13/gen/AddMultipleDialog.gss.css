@@ -18,6 +18,7 @@
   width: 25px;
   color: black;
   cursor: pointer;
+  padding-top: 0;
 }
 .scb_mit706s16_inner_dialog_title_close:hover {
   background-color: #e58986;

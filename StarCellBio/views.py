@@ -83,56 +83,60 @@ def create_courses(request, **kwargs):
 def get_courses(request, **kwargs):
 	import ast
 	import random
-	#import pudb
+	import pudb
 	#pudb.set_trace()
 	list = []
 	retval = []
-	token = random.randrange(0, 1000000)
+	token1 = random.randrange(0, 1000000)
 	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
 		usercourse = UserCourse.objects.filter(user=request.user)[0]
 		course = Course.objects.filter(usercourses = usercourse)
 		assignments = course[0].assignments.all()
 		if(course[0].sassignments.filter(student=request.user).count() == 0 or course[0].sassignments.count() == 0 or course[0].sassignments.filter(data='').count() > 0):
 			for a in assignments:
-				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token, data = '')
+				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = '')
 				sa.save()
 		else:
+			token1 = course[0].sassignments.filter(student=request.user)[0].token
 			assignments = course[0].sassignments.filter(student=request.user)
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
 			list.append(dictionary)
-		retval = {'list': list, 'is_auth': True, 'is_selected': list[0]['id'], 'token': token}
+		retval = {'list': list, 'is_auth': True, 'is_selected': list[0]['id'], 'token': token1}
 	else:
 		all =[]
 		for a in Assignment.objects.all():
 			dictionary = ast.literal_eval(a.data)
 			all.append(dictionary)
-		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token}
+		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
 	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
 	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'
 	return response
 	
 def post_state(request, **kwargs):
+	import pudb
 	print request.user
 	jstr = request.raw_post_data
 	jsondata = json.loads(jstr)
 	jsonmodel = jsondata['model']
+	import random
+	token2 = random.randrange(0, 1000000)
 	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
 		usercourse = UserCourse.objects.filter(user=request.user)[0]
 		course = Course.objects.filter(usercourses = usercourse)
 		sassignments = course[0].sassignments.all()
-		retval = {'is_anonymous': False, 'valid_token':False, 'token': jsondata['token']}
+		retval = {'is_anonymous': False, 'valid_token':False, 'token': token2}
 		for sa in sassignments:
-			#import pudb
-			#pudb.set_trace()
 			for x in jsondata['model']['assignments']['list']:
+				pudb.set_trace()
 				if(sa.token == jsondata['token'] and sa.assignmentID == x['id']):
 						sa.data = json.loads(json.dumps(x))
+						sa.token = token2
 						sa.save()
-						retval = {'is_anonymous': False, 'valid_token': True, 'token': jsondata['token']}
+						retval = {'is_anonymous': False, 'valid_token': True, 'token': token2}
 	else:
-		retval = {'is_anonymous': True, 'valid_token': False, 'token': jsondata['token']}
+		retval = {'is_anonymous': True, 'valid_token': False, 'token': token2}
 	response = HttpResponse("var post_state_result = {0};".format(json.dumps(retval)))
 	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'
