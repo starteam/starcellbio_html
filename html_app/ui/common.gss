@@ -356,6 +356,12 @@ div#main {
     top:5px;
 }
 
+.scb_s_assignment_step_experiment > label{
+	cursor: pointer;
+}
+.scb_s_assignment_step_experiment > label> select{
+	cursor: pointer;
+}
 
 .scb_s_assignment_step {
     background: #69a996;

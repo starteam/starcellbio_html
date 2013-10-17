@@ -304,6 +304,9 @@ label.custom-select {
   position: relative;
   top: 5px;
 }
+.scb_s_assignment_step_experiment>label, .scb_s_assignment_step_experiment>label>select {
+  cursor: pointer;
+}
 .scb_s_assignment_step {
   background: #69a996;
   color: white;
