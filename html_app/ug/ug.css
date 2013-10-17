@@ -1,20 +1,44 @@
 .scb_f_help{
-	width: 400px;
+	width: 500px;
 	height:500px;
-	border: 1px solid pinnk;
 	position:relative;
 	vertical-align: middle;
 	margin-left: auto;
 	margin-right:auto;
 	display: block;
+	overflow: auto;
+    background: #f4f6f8;
+    border-radius: 5px;
+    border: 2px solid #059789;
+    font-family: 'sourcesanspro-bold';
+    font-size: 16px;
+    resize:both;
+    
 }
 
 .scb_f_help_search_bar{
+	cursor: move;
 	background: gray;
-	width: 400px;
-	height: 100px;
+	width:inherit;
+	padding:10px;
+	height: 55px;
+}
+
+
+.scb_f_help_display{
+	padding-top: 10px;
+    padding-left: 10px;
 }
 
 .scb_f_help_form > input{
 	font-size: 16pt;
+	display: inline-block;
+}
+
+.scb_s_main_help_link{
+	color:blue;
+	cursor:pointer;
+}
+.search_found{
+	display:inline !important;
 }

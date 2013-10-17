@@ -9,7 +9,7 @@
  -->
 
 <?php
-	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Headers: *');
 ?>
 
 
@@ -33,10 +33,6 @@
 
 <script>
 $( ".scb_s_user_guides" ).click(function(evt) {
-	$.ajax({ url: 'http://starapp.mit.edu/stardev/cellbio/user_guide.html', crossDomain: true, dataType: 'html', success: function(data) { 
-		console.log(data)} 
-		
-		});
 	var iframe = document.createElement('iframe');
 	iframe.setAttribute('src', 'help.html');
 	iframe.id = 'iframe'
@@ -44,6 +40,7 @@ $( ".scb_s_user_guides" ).click(function(evt) {
 	iframe.height= document.height;
 	$('body').append(iframe);
 });
+
 </script>
 </body>
 </html>

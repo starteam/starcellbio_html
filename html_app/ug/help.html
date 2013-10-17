@@ -1,8 +1,16 @@
 <html>
 <head>
 <meta http-equiv="Access-Control-Allow-Origin" content="*">
-<script type="text/javascript" src="ug.js"></script>
-<script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+
+<script type="text/javascript" src="../js/jquery-1.7.2.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../js/jquery-ui.js" charset="UTF-8"></script>
+<link type="text/css" href="../css/layout-default.css" rel="Stylesheet" />
+<link type="text/css" href="../css/jqdialog.css" rel="Stylesheet" />
+<link type="text/css" href="../css/jquery.multiselect.css" rel="Stylesheet" />
+<link type="text/css" href="../css/smoothness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+<link type="text/css" href="../css/smoothness/jquery-ui.min.css" rel="Stylesheet" />
+
+<script type="text/javascript" src="../js/jquery-ui-1.8.16.custom.min.js" charset="UTF-8"></script>
 
 <link rel="stylesheet" type="text/css" href="ug.css">
 
@@ -12,10 +20,15 @@
 	<div class='scb_f_help'>
 	<div class ='scb_f_help_search_bar'>
 	<form class='scb_f_help_form'>
-              <input type="text" name="firstname" value = 'Search User Guide'><br> 
+			  <input type="button" value="Home" id="search" onclick="mainUG();">
+              <input type="text" name="help" class ='help_search_input' placeholder = 'Search User Guide'>
+              <input type="button" value="Search" id="search" onclick="searchUG();"><br> 
             </form>
     </div>
+    <div class='scb_f_help_display'>
     </div>
+    </div>
+    <script type="text/javascript" src="ug.js" charset="UTF-8"></script>
 </body>
 
 </html>
