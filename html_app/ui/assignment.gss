@@ -31,6 +31,9 @@
 
 .scb_s_assignment_scroll{
 	overflow-y:scroll;
+	overflow-x: hidden;
+	margin-right:-10px;
+	margin-left:-5px;
 	height:470px;
 }
 
@@ -47,8 +50,8 @@
     border-color: #a0a0a0;
     border-radius: 8px;
     padding: 10px;
-    width:634px;
-    padding-left:20px;
+    width:644px;
+    padding-left:10px;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
     padding-bottom:50px;
     padding-top:17px;
@@ -78,7 +81,7 @@
 }
 
 .scb_s_assignment_title_underline {
-    margin-left:-20px;
+    margin-left:-10px;
     margin-right:-20px;
     background-color: #dae9e1;
     width:664px;
@@ -89,7 +92,7 @@
 
 
 .scb_s_assignment_button_underline {
-    margin-left:-20px;
+    margin-left:-10px;
     margin-right:-20px;
     background-color: #7dd2ad;
     width:664px;

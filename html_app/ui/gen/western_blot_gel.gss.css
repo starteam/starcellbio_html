@@ -86,6 +86,8 @@
   margin-left: -5px;
   padding-bottom: 4px;
   border: inherit;
+  background: 0;
+  cursor: pointer;
 }
 .scb_s_western_blot_gel_left_western_blot:enabled, .scb_s_western_blot_gel_right_western_blot:enabled {
   color: #29a592;
@@ -125,6 +127,7 @@
 .scb_f_wb_exposure_slider {
   border-radius: 7px;
   height: 8px;
+  margin-top: 7px;
   background: #ebebeb;
 }
 .scb_f_wb_exposure_slider>.ui-slider-range {
@@ -136,9 +139,9 @@
 }
 .scb_f_wb_exposure_slider>.ui-slider-handle {
   border-radius: 13px;
-  height: 25px;
-  width: 25px;
-  top: -0.5em;
+  height: 24px;
+  width: 24px;
+  top: -0.6em;
 }
 .scb_s_western_blot_gel_tab>a {
   text-decoration: none;

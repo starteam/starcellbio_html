@@ -4,8 +4,10 @@
 <link type="text/css" href="/static/ui/gen/technique_tabs.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/workspace.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/contact.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/css/smoothness/jquery-ui-1.9.2.custom.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/select_technique.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/facs.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/css/smoothness/jquery-ui-1.10.3.custom.min.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/dashboard.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/gen/usability_test.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/sidebar.gss.css" rel="Stylesheet" />
@@ -19,15 +21,19 @@
 <link type="text/css" href="/static/assignments/tufts/gen/instructions.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/css/layout-default.css" rel="Stylesheet" />
 <link type="text/css" href="/static/coin-slider/coin-slider-styles.css" rel="Stylesheet" />
+<link type="text/css" href="/static/css/smoothness/jquery-ui.min.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/western_blots.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/css/jqdialog.css" rel="Stylesheet" />
+<link type="text/css" href="/static/css/jquery-ui-1.10.3.custom.min.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/experiment_setup.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/homepage.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/experiment.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/assignments.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/auth.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/css/jquery.multiselect.css" rel="Stylesheet" />
+<link type="text/css" href="/static/css/smoothness/jquery-ui-1.9.2.custom.min.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/westernblotgel.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/css/jquery-ui-1.10.3.custom.css" rel="Stylesheet" />
 <link type="text/css" href="/static/test/gen/test.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/common.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/starcellbio.app.css" rel="Stylesheet" />
@@ -35,6 +41,7 @@
 <link type="text/css" href="/static/contact/contact.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/microscopy_lens.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/western_blot_gel.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui/gen/userguide.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ug/ug.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/western_blot.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/button.css" rel="Stylesheet" />
@@ -50,6 +57,7 @@
 <script type="text/javascript" src="/static/js/jquery.history.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/workspace.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/Assignments.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ui/gen/userguide.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/WesternBlotView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/WesternBlot.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/western_blot.soy.js" charset="UTF-8"></script>
@@ -68,6 +76,7 @@
 <script type="text/javascript" src="/static/ui/gen/experiment_setup.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/LysateKind.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/DashboardView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.resizable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/utils/Utilities.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jqdialog.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/components/ModelFactory.js" charset="UTF-8"></script>
@@ -87,6 +96,7 @@
 <script type="text/javascript" src="/static/ui/gen/auth.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/WesternBlotExposure.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/common.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.mouse.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery.cookie.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/CellTreatment.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/coin-slider/coin-slider.js" charset="UTF-8"></script>
@@ -101,11 +111,13 @@
 <script type="text/javascript" src="/static/ui/SelectTechniqueView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/select_technique.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/westernblotgel.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.10.3.custom.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/profile.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/assignment.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/microscopy.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/dashboard.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/western_blots.soy.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.10.3.custom.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/MicroscopyLanes.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/mit706s13/AddMultipleDialog.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery.multiselect.js" charset="UTF-8"></script>
@@ -113,6 +125,7 @@
 <script type="text/javascript" src="/static/mit706s13/gen/addmultipledialog.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/soyutils.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.draggable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jstat-1.0.0.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/MakingLysatesView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/AssignmentsView.js" charset="UTF-8"></script>

@@ -146,7 +146,7 @@ FACS Main View
 			  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
 
 		<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}'>| X
+				experiment_id='{$experiment.id}'>| &#215;
 		<!--             <img src="images/setup/scb_remove.png"> -->
 		</button>
 		</span>
@@ -178,7 +178,7 @@ FACS Main View
 					  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
 
 				<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-						experiment_id='{$experiment.id}'>| X
+						experiment_id='{$experiment.id}'>| &#215;
 				<!--             <img src="images/setup/scb_remove.png"> -->
 				</button>
 				</span>
@@ -261,11 +261,11 @@ FACS Main View
                 {if $r.kind == 'existing'}
                 <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
                         assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
-                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>X
+                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>&#215;
                 </button>
                 {else}
                 <button class="scb_f_facs_sample_remove"
-                        disabled="disabled">X
+                        disabled="disabled">&#215;
                 </button>
 
                 {/if}

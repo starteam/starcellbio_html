@@ -184,10 +184,12 @@ scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
     if (show) {
         jqDiv.slideDown();
         $('.scb_s_facs_tools_instructions_followup_toggle').html('HIDE INSTRUCTIONS');
+        $('.scb_s_facs_tools_instructions_followup_toggle').blur();
     }
     else {
         jqDiv.slideUp();
         $('.scb_s_facs_tools_instructions_followup_toggle').html('SHOW INSTRUCTIONS');
+        $('.scb_s_facs_tools_instructions_followup_toggle').blur();
     }
 }
 

@@ -79,6 +79,7 @@
   bottom: 20px;
   right: 5px;
   display: inline-block;
+  margin-top: 20px;
 }
 .scb_s_western_blot_progress {
   display: block;
@@ -184,6 +185,8 @@
   margin-left: -5px;
   padding-bottom: 4px;
   border: inherit;
+  background: 0;
+  cursor: pointer;
 }
 .scb_s_western_blot_left_western_blot:enabled, .scb_s_western_blot_right_western_blot:enabled {
   color: #29a592;
@@ -427,16 +430,12 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   top: 3px;
 }
 .scb_f_western_blot_sample_inactive_all, .scb_f_western_blot_sample_active_all {
-  background-color: #fff;
-  background-image: -webkit-linear-gradient(top,#f2f2f2,#d3d1d2);
-  background-image: -moz-linear-gradient(top,#f2f2f2,#d3d1d2);
-  background-image: -ms-linear-gradient(top,#f2f2f2,#d3d1d2);
-  background-image: -o-linear-gradient(top,#f2f2f2,#d3d1d2);
+  background: #676767;
   border: 1px solid #e0e0e0;
   border-radius: 5pt;
   width: 120px;
   height: 30px;
-  color: black;
+  color: white;
   font-size: 10pt;
   font-family: 'sourcesanspro-semibold';
   cursor: pointer;

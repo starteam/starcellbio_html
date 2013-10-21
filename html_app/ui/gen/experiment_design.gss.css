@@ -19,6 +19,9 @@
   background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
 }
+.scb_objective_design {
+  margin-top: 18px;
+}
 .scb_s_experiment_design_view {
   background-color: #f4f6f8;
   width: 960px;

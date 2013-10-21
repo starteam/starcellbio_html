@@ -105,6 +105,8 @@ font-family: 'sourcesanspro-regular';
 	margin-left:-5px;
 	padding-bottom: 4px;
 	border:inherit;
+	background: 0;
+	cursor: pointer;
 }
 
 
@@ -157,6 +159,7 @@ font-family: 'sourcesanspro-regular';
 .scb_f_wb_exposure_slider {
     border-radius: 7px;
 	height: 8px;
+	margin-top: 7px;
 	background: #ebebeb;
 }
 
@@ -170,9 +173,9 @@ font-family: 'sourcesanspro-regular';
 
 .scb_f_wb_exposure_slider > .ui-slider-handle {
     border-radius: 13px;
-    height:25px;
-    width:25px;
-    top: -0.5em;
+    height:24px;
+    width:24px;
+    top: -0.6em;
 }
 
 .scb_s_western_blot_gel_tab > a {

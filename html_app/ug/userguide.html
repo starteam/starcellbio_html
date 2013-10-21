@@ -20,9 +20,31 @@
 	cursor:pointer;
 }
 
+
+.scb_s_ug_dialog {
+	background:rgba(0,0,0,0);
+	display: block; 
+	border: none; 
+	overflow-y: auto; 
+	overflow-x: hidden;
+    margin-left: auto;
+    margin-right: auto;
+	z-index: 999;
+	height: 100%;
+	width: 100%;
+    
+}
+
+
 #iframe{
 	background:rgba(0,0,0,0);
 	display: block; width: 100%; border: none; overflow-y: auto; overflow-x: hidden;
+	
+    top:20px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+	z-index: 999;
 }
 </style>
 
@@ -30,15 +52,35 @@
 <body>
 
 <span class='scb_s_user_guides'><u>UserGuide</u></span>
+Written languages change more slowly than corresponding spoken languages. <br/>
+When one or more registers of a language come to be strongly divergent <br/>
+rom spoken language, the resulting situation is called diglossia. <br/>
+However, such diglossia is often considered as one language, between literary <br/>
+language and other registers, especially if the writing system reflects its pronunciation.<br/>
+Native readers and writers of English are often unaware that the <br/>
+complexities of English spelling make written English a somewhat <br/>
+artificial construct. The traditional spelling of English, <br/>
+at least for inherited words, preserves a late Middle English <br/>
+phonology that is no one's speech dialect. The artificial preservation<br/>
+of this much earlier form of the language in writing might make much <br/>
+of what we write intelligible to Chaucer (1343–1400), even if we could n<br/>
+ot understand his speech.<br/>
+
 
 <script>
 $( ".scb_s_user_guides" ).click(function(evt) {
+	var div = document.createElement('div');
+	div.className='scb_s_ug_dialog';
+	div.innerHTML= "<div class='scb_s_ug_form'> StarCellBio User Guide<button class='scb_f_ug_close_button'>&#215;</button></div>";
+	div.width=document.width;
+	div.height=document.height;
+	$('body').append(div);
 	var iframe = document.createElement('iframe');
 	iframe.setAttribute('src', 'help.html');
 	iframe.id = 'iframe'
 	iframe.width = document.width;
 	iframe.height= document.height;
-	$('body').append(iframe);
+	$('.scb_s_ug_dialog').append(iframe);
 });
 
 </script>

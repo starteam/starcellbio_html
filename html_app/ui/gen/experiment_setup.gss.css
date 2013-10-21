@@ -23,6 +23,11 @@
   background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
 }
+.scb_f_run_experiment {
+  right: 5px;
+  top: 2px;
+  position: relative;
+}
 .scb_s_experiment_setup_top>.scb_f_open_experiment_design {
   position: absolute;
   bottom: 5px;
@@ -44,8 +49,9 @@
 }
 .scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
   float: right;
-  bottom: 5px;
+  bottom: 3px;
   right: 5px;
+  position: absolute;
 }
 .scb_s_experiment_setup_choose_template {
   width: 600px;
@@ -125,8 +131,9 @@ table.scb_s_experiment_setup_table {
   border: 1px solid #d0d0d0;
   border-radius: 10px;
   margin-bottom: 10px;
-  padding: 5px;
+  padding: 10px;
   width: 540px;
+  text-align: left;
 }
 .scb_s_warning>h1 {
   color: red;

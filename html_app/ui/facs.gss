@@ -16,6 +16,13 @@
 .scb_s_facs_choose_samples_order_list{
 	width:200px;
 }
+.scb_s_facs_choose_samples_order_list>li {
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	overflow:hidden;
+	list-style-position:inside;
+}
+
 
 .scb_s_facs_chart_yaxis {
     position: absolute;
@@ -93,24 +100,24 @@
 
 
 .scb_f_facs_sample_active_all {
-@mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
+	background: #676767;
     border: 1px solid #e0e0e0;
     border-radius: 5pt;
     width: 120px;
     height: 30px;
-    color: black;
+    color: white;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
     cursor:pointer;
 }
 
 .scb_f_facs_sample_inactive_all {
-@mixin gradient(top,#f2f2f2, #d3d1d2, #ffffff);
+	background: #676767;
     border: 1px solid #e0e0e0;
     border-radius: 5pt;
     width: 120px;
     height: 30px;
-    color: black;
+    color: white;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
     cursor:pointer;
@@ -125,6 +132,8 @@
 	margin-left:-5px;
 	padding-bottom: 4px;
 	border:inherit;
+	background: 0;
+	cursor: pointer;
 }
 
 .scb_f_facs_prepare_lysates{
@@ -132,6 +141,7 @@
     position: relative;
 	float: right;
 	margin-right: 35px;
+	margin-top: 0px !important;
     bottom: 10px;
     right: 5px;
     display:inline-block;
@@ -341,7 +351,7 @@ input[type=radio]:disabled{
 .scb_f_facs_run_samples {
     border:none;
     margin-top:0px !important; 
-    margin-left:80px !important;
+    margin-left:78px !important;
     margin-right:20px !important; 
     margin-bottom:20px !important;
 }
@@ -380,6 +390,7 @@ input[type=radio]:disabled{
     position: absolute;
     bottom:8px;
     border:none;
+    left: 34px;
 }
 
 .scb_s_facs_tools_instructions_initial {
@@ -398,10 +409,12 @@ input[type=radio]:disabled{
     border: 1px solid #80d1ae;
     margin-top: 10px;
     margin-left: 4px;
-    overflow: hidden;
+    overflow: scroll;
     border-radius: 5px;
     border-spacing: 0;
     width:200px;
+    max-height:200px;
+    display:block;
     background-color: white;
     margin-bottom: 20px;
 }

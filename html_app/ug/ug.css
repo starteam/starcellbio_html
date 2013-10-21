@@ -1,15 +1,9 @@
-.scb_f_help_wrapper{
-
-	vertical-align: middle;
-	margin-left: auto;
-	margin-right:auto;
-}
 
 .scb_f_help{
-	width: 600px;
-	height:500px;
-	min-width:400px;
-	min-height:400px;
+	width:450px;
+	height:300px;
+	min-width:450px;
+	min-height:300px;
 	position:relative;
 	display: block;
     background: #f4f6f8;
@@ -20,13 +14,39 @@
     border: 2px solid #059789;
     font-family: 'Arial';
     font-size: 16px;
-    #resize: both;
+    
+    
+    resize:both; 
+    overflow:auto;
+}
+
+
+.scb_f_ug_close_button {
+	padding-top: 0px;
+	float:right;
+	-webkit-appearance: none;
+	font-family:'sourcesanspro-bold';
+	outline:none;
+	height: 25px;
+	width: 25px;
+	cursor:pointer;
+	border: 0;
+	border-radius: 6px;
+	font-size: 14pt;
+	color: black;
+	background: #f4f6f8;
+}
+
+.scb_f_ug_close_button:hover{
+	background-color: #e58986;
 }
 
 .scb_f_help_search_bar{
+	width: inherit;
+	margin-right:auto;
+	margin-left: auto;
 	cursor: move;
 	background: #289A7B;
-	padding:10px;
 	height: 55px;
 	color: white;
 	font-size: 16pt;
@@ -39,9 +59,19 @@
 	padding-top: 10px;
     padding-left: 10px;
     height: 390px;
-    
-    overflow-x: hidden;
-    overflow-y: auto;
+    #margin-top: 75px;
+}
+.scb_f_ug_up_button{
+	-webkit-appearance: none;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+ .scb_f_ug_down_button{
+	-webkit-appearance: none;
+}
+
+.scb_f_help_form{
+	display:inline-block;
 }
 
 .scb_f_help_form > input{
@@ -53,12 +83,7 @@
 	color:blue;
 	cursor:pointer;
 }
+
 .search_found{
 	display:inline !important;
-}
-
-.scb_f_help_footer{
-	background: gray;
-	padding:10px;
-	height: 25px;
 }
