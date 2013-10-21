@@ -15,6 +15,8 @@
 
 .scb_s_facs_choose_samples_order_list{
 	width:200px;
+	overflow: scroll;
+	max-height: 275px;
 }
 .scb_s_facs_choose_samples_order_list>li {
 	text-overflow:ellipsis;
@@ -23,6 +25,9 @@
 	list-style-position:inside;
 }
 
+.scb_s_facs_choose_samples_order{
+	border-bottom: 2px solid gray;
+}
 
 .scb_s_facs_chart_yaxis {
     position: absolute;
@@ -350,7 +355,7 @@ input[type=radio]:disabled{
 
 .scb_f_facs_run_samples {
     border:none;
-    margin-top:0px !important; 
+    margin-top:7px !important; 
     margin-left:78px !important;
     margin-right:20px !important; 
     margin-bottom:20px !important;
