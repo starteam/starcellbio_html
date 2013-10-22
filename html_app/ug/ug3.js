@@ -23,14 +23,14 @@ $('.scb_f_help').css('max-height', $('.scb_f_help_display').width()+80);
 // $(window).scroll(function () {
 //    $('.scb_f_help_search_bar').css('position', 'absolute');
 // });
-//drag: function( event, ui ) {$('.scb_f_help_search_bar').css('position', 'static');},
-$('.scb_f_help').draggable({ handle:'.scb_f_help_search_bar'});
+//drag: function( event, ui ) {$('.scb_f_help_search_bar').css('position', 'static');}, 
+
+//$('.scb_f_help').draggable({handle:'.scb_f_help_search_bar'});
 $.get( "user_guide.html", function(data) {
 	var htmlObject = document.createElement('div');
 	htmlObject.innerHTML = data;
 	var body = htmlObject.getElementsByClassName("body")[0];
 	var links = body.getElementsByClassName('SCB-Heading1AllCaps');
-	var sublinks = [];
 	for(var i=0; i<links.length; i++){
 		var text = "";
 		var next = links[i].nextSibling;
@@ -38,28 +38,16 @@ $.get( "user_guide.html", function(data) {
 			if(next.nodeName == '#text'){
 			}
 			else{
-				if(next.className !="SCB-Heading1")
-					text= text + $(next).html();
-				else{
-					text = text + '&#9;<span class="scb_s_help_sublink">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>' + next.textContent.trim()+'</u><br/></span>';
-					//sublinks.push(next.textContent.trim());
-				}
+			text= text + $(next).html();
 			}
 			next = next.nextSibling;
 			
 		}
 		
-		//console.log(sublinks);
 		var lnk = document.createElement('span');
 		lnk.className = 'scb_s_main_help_link';
 		lnk.style.textTransform = 'uppercase';
-		lnk.innerHTML = '<p/><u>'+$(links[i]).text()+"</u>" + "<p/>";
-// 		for(var i =0; i <sublinks.length; i++){
-// 			var slnk = document.createElement('span');
-// 			slnk.className = 'scb_s_main_help_sublink';
-// 			slnk.style.textTransform = 'uppercase';
-// 			slnk.innerHTML = '<u>'+$(sublinks[i])+"</u>" + "<p/>";	
-// 		}
+		lnk.innerHTML = '<u>'+$(links[i]).text()+"</u>" + "<p/>";
 		var div = document.createElement('div');
 // 		div.className = 'scb_s_help_link_' + i;
 		div.className = 'scb_s_help_section';
@@ -69,12 +57,7 @@ $.get( "user_guide.html", function(data) {
 				$(div.childNodes[y]).wrap('<span class = "scb_f_help_sub_heading"></span>');
 			$(div.childNodes[y]).addClass('scb_s_help_sub_section')
 			$(div.childNodes[y]).addClass('scb_s_help_link_' + i)
-			if(div.childNodes[y].className.indexOf('scb_s_help_sublink')>-1){
-				div.childNodes[y].style.display = 'inline';
-			}
-			else{
-				div.childNodes[y].style.display = 'none';
-			}
+			div.childNodes[y].style.display = 'none';
 		}
 		$('.scb_f_help_display').append(lnk);
 		$('.scb_f_help_display').append(div);
@@ -96,7 +79,6 @@ function bindItem(item, ind) {
 			 else{
 			 	$('.scb_s_help_link_'+ ind).css('display', 'list-item');
 			 	}
-// 			/$('.scb_s_help_sublink').toggle();
 			$('.scb_s_main_help_link').toggle();
 			$(item).css('display', 'inline');
 			$(item).css('cursor', 'pointer');
@@ -180,9 +162,9 @@ function searchUG(){
   	
   	
   	
+  	//drag: function( event, ui ) {$('.scb_f_help_search_bar').css('position', 'static');}, 
   	
-  	//drag: function( event, ui ) {$('.scb_f_help_search_bar').css('position', 'static');},
-	$('.scb_f_help').draggable({ handle:'.scb_f_help_search_bar'});
+	//$('.scb_f_help').draggable({handle:'.scb_f_help_search_bar'});
 	for(var x = 0; x< $('.scb_s_main_help_link').length; x++){
 		bindItem($('.scb_s_main_help_link')[x], x);
 		$($('.scb_s_main_help_link')[x]).css('cursor', 'pointer');

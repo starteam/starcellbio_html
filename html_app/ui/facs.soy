@@ -413,7 +413,7 @@ FACS Main View
                 <li facs_id='{$facs.id}' assignment_id="{$assignment.id}"
                     experiment_id="{$experiment.id}" facs_lane_id='{$r.lane.id}'
                 {if $facs.lane_selected == $r.lane.id}class='scb_s_facs_sample_selected'{/if}>
-                {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
+                &nbsp;&nbsp;{$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
                 </li>
                 {/if}
 

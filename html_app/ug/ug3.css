@@ -2,7 +2,6 @@
 .scb_f_help{
 	width:650px;
 	height:500px;
-
 /* 
 	width:450px;
 	height:300px;
@@ -46,8 +45,7 @@
 }
 
 .scb_f_help_search_bar{
-	#position:fixed;
-	display:none;
+	position:fixed;
 	width: inherit;
 	margin-right:auto;
 	margin-left: auto;
@@ -65,9 +63,8 @@
 	padding-top: 10px;
     padding-left: 10px;
     height: 390px;
-    #margin-top: 75px;
+    margin-top: 75px;
 }
-
 .scb_f_ug_up_button{
 	-webkit-appearance: none;
 	padding-top: 1px;
@@ -86,18 +83,11 @@
 	display: inline-block;
 }
 
-.search_found{
-	display:inline !important;
-}
-
 .scb_s_main_help_link{
 	color:blue;
 	cursor:pointer;
 }
 
-.scb_s_help_sublink{
-	color:blue;
-	cursor:pointer;
+.search_found{
+	display:inline !important;
 }
-
-

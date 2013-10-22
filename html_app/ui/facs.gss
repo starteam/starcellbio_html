@@ -23,10 +23,12 @@
 	white-space: nowrap;
 	overflow:hidden;
 	list-style-position:inside;
+	margin-left: -20px;
 }
 
 .scb_s_facs_choose_samples_order{
 	border-bottom: 2px solid gray;
+	min-height: 275px;
 }
 
 .scb_s_facs_chart_yaxis {

@@ -325,44 +325,32 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
 	    scb.utils.off_on(workarea.parent(), 'click', '.scb_f_user_guide', function (evt) {
     	$(workarea).append(scb_userguide.userguide({}));
-//     	scb.utils.off_on(workarea, 'click', '.scb_f_ug_close_button', function () {
-//                 $('.scb_s_ug_dialog').detach();
-//         });
-		$('iframe').load(function(){
-			$('.scb_s_ug_dialog')[0].width =document.width;
-			$('.scb_s_ug_dialog')[0].height = document.height;
-    		var frame = document.getElementsByTagName('iframe')[0];
-			var content = (frame.contentDocument || frame.contentWindow);
-			content.body.style.fontSize = '90%';
-			content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
-			$('iframe').contents().find(".scb_f_ug_close_button").click(function(e){
-					$('.scb_s_ug_dialog').detach();
-				});
-
-
-// 			var inputs = content.getElementsByTagName('input');
-// 			$(inputs).css('font-family', 'sourcesanspro-semibold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
-// 			$(inputs).css('text-transform', 'uppercase');
-// 			$(inputs).css('background-color','#e0e0e0');
-// 			$(inputs).css('border','1px solid #e0e0e0');
-// 			var texts = content.querySelectorAll('input[type="text"]');
-// 			$(texts).css('height','25px');
-// 			var fieldset = content.querySelectorAll('fieldset');
-// 			$(fieldset).css('border', '0');
-// 			var submit = content.getElementsByClassName('scb_f_contact_submit_button');
-// 			$(submit).css({'float':'right', '-webkit-appearance':'none', 'border-radius': '5px', 'letter-spacing':'1px',
-// 				 'text-transform':'uppercase','border': '1px solid #e0e0e0', 'background-color': '#676767', 'border': '1px solid #e0e0e0',
-// 				 'height': '30px','color': 'white','font-size': '10pt', 'cursor':'pointer'});
-// 			$('iframe').find(".scb_f_contact_submit_button").click(function(e){
-// 					$('iframe').load(function(){
-// 						  var profile = $('iframe').contents();
-// 						  //console.log(profile);
-// 						  if(profile[0].body.textContent.indexOf('you for your feedback.') >0){
-// 							  parent.document.location.reload();
-// 							  }
-// 					});
-// 
+    	scb.utils.off_on(workarea, 'click', '.scb_f_ug_close_button', function () {
+                $('.scb_f_ug_help_search_bar').detach();
+        });
+// 		$('iframe').contents().find(".scb_f_ug_close_button").click(function(e){
+// 					$('.scb_s_ug_dialog').detach();
 // 				});
+		$('iframe').load(function(){
+			// $('.scb_s_ug_dialog')[0].width =document.width;
+// 			$('.scb_s_ug_dialog')[0].height = document.height;
+			$('.scb_f_ug_help_search_bar').width($('iframe').contents().find('.scb_f_help_display').width()+20);
+		
+			//$('iframe').draggable();	
+			$('.scb_f_ug_help_search_bar').draggable({ handle:'.handel'});
+//     		var frame = document.getElementsByTagName('iframe')[0];
+// 			var content = (frame.contentDocument || frame.contentWindow);
+// 			content.body.style.fontSize = '90%';
+// 			content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
+// 			$('iframe').contents().find(".scb_f_ug_close_button").click(function(e){
+// 					$('.scb_s_ug_dialog').detach();
+// 				});
+// 			$('iframe').contents().find('#search').click(function(){
+// 					$('iframe').contents().find(".scb_f_ug_close_button").click(function(e){
+// 								$('.scb_s_ug_dialog').detach();
+// 						});
+// 				   });
+			
 		});
     });
 

@@ -3,6 +3,18 @@
 		
 
 <script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+
+
+<link type="text/css" href="../css/layout-default.css" rel="Stylesheet" />
+<link type="text/css" href="../css/jqdialog.css" rel="Stylesheet" />
+<link type="text/css" href="../css/jquery.multiselect.css" rel="Stylesheet" />
+<link type="text/css" href="../css/smoothness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+<link type="text/css" href="../css/smoothness/jquery-ui.min.css" rel="Stylesheet" />
+
+<script type="text/javascript" src="../js/jquery-ui.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../js/jquery.layout-1.2.0.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../js/jquery-ui-1.8.16.custom.min.js" charset="UTF-8"></script>
+
 <!-- <script type="text/javascript" src="caman.full.js"></script>
 <script type="text/javascript" src="base64.js"></script>
 <script type="text/javascript" src="canvas2image.js"></script>
@@ -21,6 +33,29 @@
 }
 
 
+.scb_f_help{
+
+}
+
+
+.scb_f_ug_close_button {
+	padding-top: 0px;
+	float:right;
+	-webkit-appearance: none;
+	font-family:'sourcesanspro-bold';
+	outline:none;
+	height: 25px;
+	width: 25px;
+	cursor:pointer;
+	border: 0;
+	border-radius: 6px;
+	font-size: 14pt;
+	color: black;
+	background: #f4f6f8;
+}
+
+
+
 .scb_s_ug_dialog {
 	background:rgba(0,0,0,0);
 	display: block; 
@@ -29,23 +64,75 @@
 	overflow-x: hidden;
     margin-left: auto;
     margin-right: auto;
-	z-index: 999;
-	height: 100%;
-	width: 100%;
+	z-index: 999;	
+	width:650px;
+	height:500px;
+	min-width:450px;
+	min-height:300px;
+	position:relative;
+    background: #f4f6f8;
+    vertical-align: middle;
+    border-radius: 5px;
+    border: 2px solid #059789;
+    font-family: 'Arial';
+    font-size: 16px;
+    overflow:auto;
+    resize:both;
     
+}
+
+.scb_f_help_search_bar{
+	margin-right:auto;
+	margin-left: auto;
+	cursor: move;
+	background: #289A7B;
+	height: 55px;
+	color: white;
+	font-size: 16pt;
+	font-family: 'Arial';
+	padding-right: 4px;
+	
+    border-radius: 5px;
+    border: 2px solid #059789;
+}
+.scb_f_ug_up_button{
+	-webkit-appearance: none;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+ .scb_f_ug_down_button{
+	-webkit-appearance: none;
+}
+
+.scb_f_help_form{
+	display:inline-block;
+	margin-bottom:0px;
+}
+
+.scb_f_help_form > input{
+	font-size: 14pt;
+	display: inline-block;
+}
+
+.search_found{
+	display:inline !important;
 }
 
 
 #iframe{
 	background:rgba(0,0,0,0);
-	display: block; width: 100%; border: none; overflow-y: auto; overflow-x: hidden;
-	
-    top:20px;
+	display: block; 
+	width: 101%; 
+	border: none; 
+	overflow-y: auto; overflow-x: hidden;
+	display: list-item;
     margin-left: auto;
     margin-right: auto;
-    position: absolute;
 	z-index: 999;
+	right: 4px;
+	margin-top:-10px;
 }
+
 </style>
 
 </head>
@@ -68,19 +155,30 @@ ot understand his speech.<br/>
 
 
 <script>
-$( ".scb_s_user_guides" ).click(function(evt) {
+	$( ".scb_s_user_guides" ).click(function(evt) {
 	var div = document.createElement('div');
-	div.className='scb_s_ug_dialog';
-	div.innerHTML= "<div class='scb_s_ug_form'> StarCellBio User Guide<button class='scb_f_ug_close_button'>&#215;</button></div>";
+	div.className='scb_f_help_search_bar';
+	div.innerHTML= "StarCellBio User Guide<button class='scb_f_ug_close_button'>&#215;</button><br/><form class='scb_f_help_form'> <input type='text' name='help' class ='help_search_input' placeholder = 'Search User Guide'><span class='scb_display_search_count'></span><input type='button' value='Search' id='search' onclick='searchUG();'><br> </form><button class='scb_f_ug_up_button'>&#x25B2;</button>&nbsp;<button class='scb_f_ug_down_button'>&#x25BC;</button>";
 	div.width=document.width;
 	div.height=document.height;
 	$('body').append(div);
 	var iframe = document.createElement('iframe');
 	iframe.setAttribute('src', 'help.html');
 	iframe.id = 'iframe'
+	iframe.className = '';
 	iframe.width = document.width;
 	iframe.height= document.height;
-	$('.scb_s_ug_dialog').append(iframe);
+	$(iframe).load(function(){
+		$('.scb_f_help_search_bar').width($('iframe').contents().find('.scb_f_help_display').width()+20);
+		
+		//$('iframe').draggable();	
+		$('.scb_f_help_search_bar').draggable({ handle:'.scb_f_help_search_bar'});
+	});
+	
+	//link_top_bar();
+	$('.scb_f_help_search_bar').append(iframe);
+	
+
 });
 
 </script>
