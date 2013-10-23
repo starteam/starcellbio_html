@@ -77,13 +77,25 @@
 	z-index: 999;
 	right: 4px;
 	margin-top:-10px;
-	height: 500px;
+	min-height:400px;
+}
+
+.handel{
+	position:relative;
+	cursor: move;
+	margin-bottom: 20px;
 }
 
 .scb_f_ug_help_search_bar{
-	margin-right:auto;
-	margin-left: auto;
-	cursor: move;
+	position:absolute;
+	display: inline-table;
+	overflow:auto;
+	resize: both;
+	width: 650px;
+	margin-right:100%;
+	margin-left: 100%;
+	cursor:pointer;
+	top:0px;
 	background: #289A7B;
 	height: 55px;
 	color: white;
@@ -93,5 +105,5 @@
 	z-index:999;
     border-radius: 5px;
     border: 2px solid #059789;
-	position:relative;
+	
 }

@@ -132,7 +132,7 @@
                 {/if}
                 {/foreach}
             </ol>
-            {let $start: $rows.length+1 /}
+            {let $start: $valid_rows+1 /}
             <ol class='scb_s_western_blot_choose_samples_marker' start={$start}>
                 {if $western_blot.marker_loaded == true}
                 <li class="scb_s_western_blot_marker">Marker</li>

@@ -312,6 +312,7 @@
 @param experiment
 @param western_blot
 @param rows
+@param rows_valid
 */
 {template .prepare_gel}
 {call .display_wb_progress}
@@ -347,7 +348,7 @@
             {/if}
             {/foreach}
             </ol>
-            {let $start: $rows.length+1 /}
+            {let $start: $rows_valid+1 /}
             <ol class='scb_s_western_blot_choose_samples_marker' start={$start}>
              {if $western_blot.marker_loaded == true}
                 <li class="scb_s_western_blot_marker">Marker</li>
