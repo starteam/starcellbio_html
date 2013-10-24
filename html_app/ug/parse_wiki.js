@@ -55,13 +55,14 @@ $.get( "user_guide.html", function(data) {
 	}
 	
 
-	
+	//indent bullets
 	for(var x = 0; x < lists.length; x++){
 		lists[x].style.marginLeft = '100px';
 		
 	}
 });
 
+//toggle visibility of children, not used currently because toggle is made inactive
 function bindToggle(item){
 	$(item).click(function(){
 		$(item).parent().children().toggle();

@@ -3,12 +3,14 @@
 //         case 13: searchUG();
 //     }
 // });
+//$('.help_search_input').focus();
 
-$('.help_search_input').focus();
 
+//hide the native search bar
 $('.scb_f_help_search_bar').hide();
 
 
+//function to redirect popout link to the new page
 function popoutGuide(){
 	//window.open('', '_blank');
 	var popout_string = "";
@@ -26,10 +28,13 @@ function popoutGuide(){
 	
 	popout_string = popout_string.replace(/_/g, '-');
 	var popoutWindow =window.open("full_guide.html#"+popout_string);
-	setTimeout( function(){popoutWindow.location = "full_guide.html#"+popout_string; }, 10);
+	//the timeout is needed, because the javascript has to load first, 
+	//and then you can use the hash to the anchor
+	setTimeout( function(){popoutWindow.location = "full_guide.html#"+popout_string; }, 20);
 	
 }
 
+//This sets up the user guide
 $.get( "user_guide.html", function(data) {
 	var htmlObject = document.createElement('div');
 	htmlObject.innerHTML = data;
@@ -37,6 +42,8 @@ $.get( "user_guide.html", function(data) {
 	var links = body.getElementsByClassName('SCB-Heading1AllCaps');
 	var sublinks = [];
 	var number = 0;
+	
+	//Go through all headings and begin parsing, sublinks and sections, and creating wrappers
 	for(var i=0; i<links.length; i++){
 		var text = "";
 		var next = links[i].nextSibling;
@@ -92,7 +99,7 @@ $.get( "user_guide.html", function(data) {
 
 			
 		}
-		
+		//append the code to the display div
 		$('.scb_f_help_display').append(lnk);
 		$('.scb_f_help_display').append(div);
 		bindItem(lnk, i);
@@ -101,6 +108,8 @@ $.get( "user_guide.html", function(data) {
 	$('.scb_s_help_section > span:contains("")').remove()
 }); 
 
+
+//Bind a click to the main menu links
 function bindItem(item, ind) {
 		$(item).click(function(){
 			if($('.scb_s_help_link_'+ ind).css('display') != 'none')
@@ -116,6 +125,7 @@ function bindItem(item, ind) {
 			if($('.scb_f_help_footer').length >0)
 			$('.scb_f_help_footer').remove();
 			else{
+			//add footer code
 			var footer = document.createElement('div')
 			footer.className = 'scb_f_help_footer';
 			footer.innerHTML = "<input type='button' value='Home' style='color: blue;' id='search' onclick='mainUG();'> <input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
@@ -128,6 +138,7 @@ function bindItem(item, ind) {
 		
 }
 
+//Bind a click to main menu sublinks
 function bindSubItem(item, ind) {
 	$(item).click(function(){
 		if($('.scb_s_help_sub_section_'+ ind).css('display') != 'none')
@@ -143,6 +154,7 @@ function bindSubItem(item, ind) {
 		if($('.scb_f_help_footer').length >0)
 			$('.scb_f_help_footer').remove();
 		else{
+			//add footer code
 			var footer = document.createElement('div')
 			footer.className = 'scb_f_help_footer';
 			footer.innerHTML = "<input type='button' value='Home' style='color: blue;' id='search' onclick='mainUG();'> <input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
@@ -155,7 +167,7 @@ function bindSubItem(item, ind) {
 }
 
 
-
+//Main function; clear the current state of the user guide and search for terms.
 function searchUG(){
 	mainUG();
 	
@@ -200,6 +212,8 @@ function searchUG(){
 	
   	$('.scb_display_search_count').text(string);
   	
+  	
+  	//add a click listener to the down and up button for the userguide.
   	$('.scb_f_ug_down_button').click(function(){
   		if(counter+2 > font_list.length || counter+2 < 1)
   		return;
@@ -232,7 +246,7 @@ function searchUG(){
 	 	}
   	});
   	
-  	
+  	//Add footer code.
 	for(var x = 0; x< $('.scb_s_main_help_link').length; x++){
 		bindItem($('.scb_s_main_help_link')[x], x);
 		$($('.scb_s_main_help_link')[x]).css('cursor', 'pointer');
@@ -253,7 +267,7 @@ function searchUG(){
 	}
 }
 
-
+//Clears the screen and returns the menu to default view
 function mainUG(){
 	$('.help_search_input').focus();
 	$('.scb_f_help font').each(function() {
@@ -273,7 +287,7 @@ function mainUG(){
 
 
 
-
+//Functions taken from http://www.nsftools.com/misc/SearchAndHighlight.htm
 function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag) 
 {
   if ((!highlightStartTag) || (!highlightEndTag)) {
