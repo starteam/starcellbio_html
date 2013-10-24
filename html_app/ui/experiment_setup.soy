@@ -95,7 +95,7 @@ Experiment active area
         </p>
         </div>
         {else}
-        <div class='scb_s_warning'>
+			<div class='scb_s_warning_dialog'>
             <h1>CONFIRM SET-UP</h1>
             <p>Below is your set-up for '{$experiment.name}'.<br>
             
@@ -105,7 +105,14 @@ Experiment active area
                 Please carefully review the summary of your experimental setup and then either go back to edit your set-up or click on Confirm Setup &amp; Select Technique to run your experiment.
 -->
             </p>
-        </div>
+			
+			<a class="scb_s_navigation_button scb_f_open_select_technique"
+			   href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>CONFIRM SET-UP & SELECT TECHNIQUE &nbsp; &#9654;</a><br/>
+			<a class="scb_s_navigation_button scb_f_open_experiment_setup"
+			   href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; EDIT SET-UP
+				</a>
+				</div>
         {/if}
         <div class='scb_s_experiment_setup_video_box_wrapper'>
             <div class='scb_s_experiment_setup_video_box_wrapper_title'>
@@ -251,12 +258,6 @@ Experiment active area
        href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; DESIGN EXPERIMENT
         </a>
     {else}
-    <a class="scb_s_navigation_button scb_f_open_select_technique"
-       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>CONFIRM SET-UP & SELECT TECHNIQUE &nbsp; &#9654;</a><br/>
-    <a class="scb_s_navigation_button scb_f_open_experiment_setup"
-       href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; EDIT SET-UP
-        </a>
     {/if}
 
     {/if}

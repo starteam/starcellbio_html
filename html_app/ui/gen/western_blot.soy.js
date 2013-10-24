@@ -118,7 +118,7 @@ scb_western_blot.display_western_blot_numbers = function(opt_data, opt_sb) {
 
 scb_western_blot.display_lysate_types = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  if (soy.$$getMapKeys(opt_data.kinds).length > 1) {
+  if (soy.$$getMapKeys(opt_data.kinds).length < 1) {
     var kList369 = soy.$$getMapKeys(opt_data.kinds);
     var kListLen369 = kList369.length;
     for (var kIndex369 = 0; kIndex369 < kListLen369; kIndex369++) {
@@ -126,24 +126,33 @@ scb_western_blot.display_lysate_types = function(opt_data, opt_sb) {
       output.append('<div class="scb_f_western_blot_select_lysate_type"  kind=\'', soy.$$escapeHtml(kData369), '\' cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '">', soy.$$escapeHtml(opt_data.kinds[kData369].name), '</div>');
     }
   } else {
-    output.append('<select class="scb_f_western_blot_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '"', (opt_data.lane.is_sample_enabled) ? '' : 'disabled="disabled"', '>');
-    if (opt_data.lane.kind == 'existing') {
-      var kList413 = soy.$$getMapKeys(opt_data.kinds);
-      var kListLen413 = kList413.length;
-      for (var kIndex413 = 0; kIndex413 < kListLen413; kIndex413++) {
-        var kData413 = kList413[kIndex413];
-        output.append('<option value=\'', soy.$$escapeHtml(kData413), '\'', (opt_data.lane.lane.kind == kData413) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData413].name), '</option>');
+    if (soy.$$getMapKeys(opt_data.kinds).length == 1) {
+      var kList393 = soy.$$getMapKeys(opt_data.kinds);
+      var kListLen393 = kList393.length;
+      for (var kIndex393 = 0; kIndex393 < kListLen393; kIndex393++) {
+        var kData393 = kList393[kIndex393];
+        output.append('<span class="scb_f_western_blot_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '" value=\'', soy.$$escapeHtml(kData393), '\'>', soy.$$escapeHtml(opt_data.kinds[kData393].name), '</span>');
       }
     } else {
-      output.append((soy.$$getMapKeys(opt_data.kinds).length != 1) ? '<option selected="selected" disabled="disabled" value=\'\'>Pick Lysate Type</option>' : '');
-      var kList428 = soy.$$getMapKeys(opt_data.kinds);
-      var kListLen428 = kList428.length;
-      for (var kIndex428 = 0; kIndex428 < kListLen428; kIndex428++) {
-        var kData428 = kList428[kIndex428];
-        output.append('<option value=\'', soy.$$escapeHtml(kData428), '\'>', soy.$$escapeHtml(opt_data.kinds[kData428].name), '</option>');
+      output.append('<select class="scb_f_western_blot_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '"', (opt_data.lane.is_sample_enabled) ? '' : 'disabled="disabled"', '>');
+      if (opt_data.lane.kind == 'existing') {
+        var kList437 = soy.$$getMapKeys(opt_data.kinds);
+        var kListLen437 = kList437.length;
+        for (var kIndex437 = 0; kIndex437 < kListLen437; kIndex437++) {
+          var kData437 = kList437[kIndex437];
+          output.append('<option value=\'', soy.$$escapeHtml(kData437), '\'', (opt_data.lane.lane.kind == kData437) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData437].name), '</option>');
+        }
+      } else {
+        output.append((soy.$$getMapKeys(opt_data.kinds).length != 1) ? '<option selected="selected" disabled="disabled" value=\'\'>Pick Lysate Type</option>' : '');
+        var kList452 = soy.$$getMapKeys(opt_data.kinds);
+        var kListLen452 = kList452.length;
+        for (var kIndex452 = 0; kIndex452 < kListLen452; kIndex452++) {
+          var kData452 = kList452[kIndex452];
+          output.append('<option value=\'', soy.$$escapeHtml(kData452), '\'>', soy.$$escapeHtml(opt_data.kinds[kData452].name), '</option>');
+        }
       }
+      output.append('</select>');
     }
-    output.append('</select>');
   }
   return opt_sb ? '' : output.toString();
 };

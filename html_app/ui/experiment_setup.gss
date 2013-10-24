@@ -62,7 +62,13 @@
     float:right;
     bottom: 3px;
     right: 5px;
-    position:absolute
+    position:absolute;
+}
+
+.scb_s_warning_dialog>.scb_f_open_select_technique {
+    float:right;
+    top: 2px;
+    position: relative;
 }
 
 
@@ -181,7 +187,26 @@ table.scb_s_experiment_setup_table {
     text-align: left;
 }
 
-.scb_s_warning>h1 {
+
+.scb_s_warning_dialog {
+    background: #edeef2;
+    border: 2px solid #289a7b;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px; 
+    width:540px;
+    height: 300px;
+    position: absolute;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+	z-index:999;
+	top:50px;
+	right: 0;
+	left: 0;
+}
+
+.scb_s_warning>h1, .scb_s_warning_dialog>h1 {
     color:red;
 }
 

@@ -47,7 +47,8 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
         alert("INVALID ELEMENT!");
     }
 
-    var sample_kind = $(element).val();
+    //var sample_kind = $(element).val();
+    var sample_kind = $(element).attr('value');
     if (sample_kind == '') {
         return;
     }

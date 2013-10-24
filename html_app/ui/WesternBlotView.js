@@ -32,7 +32,8 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (
 		lysate_type=$(element).attr('kind');
 	}
 	else{
-    	lysate_type = $(element).val();
+		lysate_type= $(element).attr('value');
+    	//lysate_type = $(element).val();
     }
     if (lysate_type == '') {
         return;

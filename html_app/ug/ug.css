@@ -43,6 +43,38 @@
 	background: #f4f6f8;
 }
 
+.heading, .subheading {
+	font-family: 'Verdana';
+	font-size: 12pt;
+	cursor:pointer;
+	color: #289a7b;
+	font-weight:bold;
+}
+
+body{
+	background: #e9edf1;
+}
+.body{
+	background: #f4f6f8;
+	color: #289a7b;
+	width:920px;
+}
+
+.heading > .subheading{
+	#color: purple;
+}
+
+.subheading > ul{
+	color:black;
+	font-weight:normal;
+}
+
+.heading > ul{
+	#color:green;
+	color: black;
+	font-weight:normal;
+}
+
 .scb_f_ug_close_button:hover{
 	background-color: #e58986;
 }

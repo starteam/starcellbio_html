@@ -10,29 +10,62 @@ $.get( "user_guide.html", function(data) {
 	$('.footer').remove();
 	$('.sphinxsidebar').remove();
 	var main_headers = $('.SCB-Heading1Allcaps');
-	$(main_headers).wrap('<div class="heading"><a href=#></a></div>');
+	$(main_headers).wrap('<div class="heading"><a></a></div>');
 	var subheaders = $('.SCB-Heading1');
 	var lists = $('ul');
-	$(subheaders).wrap('<div class = "subheading"><a href=#></a></div>');
+	$(subheaders).wrap('<div class = "subheading"><a></a></div>');
 	
-	for(var x = 0; x < subheaders.length; x++){
+	
+	main_headers = $('.heading');
+	subheaders = $('.subheading');
+	
+	
+	//first attach everything to headings
+	var counter = 1;
+	for (var y=0; y<main_headers.length; y++){
+		var nextN = main_headers[y].nextElementSibling;
+		$(main_headers[y]).children('a').attr('name', 'scb-s-main-section-'+y); 
+		//bindToggle($(main_headers[y]).children('span'));
+		while(nextN!=null && nextN.className!='heading'){
+			var next = nextN.nextElementSibling;
+			if(nextN.className =='subheading'){
+				//bindToggle($(nextN).children('span'));
+				$(nextN).children('a').attr('name', 'scb-s-help-sublink-'+counter);
+				counter++;
+				nextN.style.textIndent = '50px';
+				var nextL = nextN.nextElementSibling;
+				while(nextL != null && nextL.className!='subheading' && nextL.className!='heading'){
+					nextL.style.marginLeft = '100px';
+					//nextL.style.color = 'red';
+					//nextL.style.display = 'none';
+					var temp = nextL.nextElementSibling;
+					$(nextN).append(nextL);
+					nextL = temp;
+				}
+				next = nextN.nextElementSibling;
+				$(nextN.previousElementSibling).append(nextN);
+			}
+			else if(nextN.tagName == 'UL' || nextN.className == 'SCB-Normal'){
+				//nextN.style.display = 'none';
+				$(nextN.previousElementSibling).append(nextN);
+			}
+			nextN=next;
 		
-		subheaders[x].style.textIndent = '50px';
-		var nextL = subheaders[x].parentElement.parentElement.nextSibling;
-		while(nextL !=null && nextL.className !="subheading"){
-			if(nextL.nodeName=='#text'){
-			}
-			else{
-			nextL.style.display = 'none';
-			$(subheaders[x].parentElement.parentElement).append(nextL);
-			}
-			nextL = nextL.nextElementSibling;
 		}
 	}
+	
+
 	
 	for(var x = 0; x < lists.length; x++){
 		lists[x].style.marginLeft = '100px';
 		
 	}
-	$('.heading').closest('.subheading');
+});
+
+function bindToggle(item){
+	$(item).click(function(){
+		$(item).parent().children().toggle();
 	});
+
+
+}

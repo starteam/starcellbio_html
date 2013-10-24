@@ -162,7 +162,8 @@ scb.ui.SelectTechniqueView = function scb_ui_SelectTechniqueView(gstate) {
 			state.experiment.last_step = 5;
 
         state.experiment.last_view = 'select_technique';
-
+		
+    	$("body").css("overflow", "auto");
         scb.ui.static.SelectTechniqueView.disable_techniques({template: template, workarea: workarea});
     }
 

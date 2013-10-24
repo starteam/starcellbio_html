@@ -43,7 +43,7 @@ scb.Experiment = function scb_Experiment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data, 'last_technique', 'undefined', null, context);
 	scb.Utils.initialize_accessor_field(self,data, 'last_id', 'undefined', null, context);
 	scb.Utils.initialize_accessor_field(self,data, 'last_technique_view', 'undefined', null, context);
-
+	
 
 	scb.Utils.initialize_accessor_field(self,data, 'last_param', 'undefined', null, context);
 

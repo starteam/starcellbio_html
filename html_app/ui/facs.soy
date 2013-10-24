@@ -359,26 +359,33 @@ FACS Main View
 @param kinds
 */
 {template .display_lysate_types}
-
-<select class="scb_f_facs_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
-        facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
-        lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
-{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
->
-{if $lane.kind == 'existing'}
-{foreach $k in keys($kinds)}
-<option value='{$k}'
-{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
-{/foreach}
+{if length(keys($kinds)) ==1}
+		{foreach $k in keys($kinds)}
+		<span class="scb_f_facs_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
+				facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="{$k}"
+				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$kinds[$k].name}</span>
+		{/foreach}
 {else}
-{if length(keys($kinds)) != 1}
-<option selected="selected" disabled="disabled" value=''>Pick Lysate Type</option>
+	<select class="scb_f_facs_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
+			facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
+			lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
+	{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
+	>
+	{if $lane.kind == 'existing'}
+	{foreach $k in keys($kinds)}
+	<option value='{$k}'
+	{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+	{/foreach}
+	{else}
+	{if length(keys($kinds)) != 1}
+	<option selected="selected" disabled="disabled" value=''>Pick Lysate Type</option>
+	{/if}
+	{foreach $k in keys($kinds)}
+	<option value='{$k}'>{$kinds[$k].name}</option>
+	{/foreach}
+	{/if}
+	</select>
 {/if}
-{foreach $k in keys($kinds)}
-<option value='{$k}'>{$kinds[$k].name}</option>
-{/foreach}
-{/if}
-</select>
 {/template}
 
 /**

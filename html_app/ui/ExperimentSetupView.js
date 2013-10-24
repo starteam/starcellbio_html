@@ -823,8 +823,16 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             new_rows: new_rows,
             kind: state.mode
         }));
-    	if(state.last_view == 'experiment_run')
+    	if(state.last_view == 'experiment_run'){
+    		if($('.scb_s_warning').length >0)
+    			$("body").css("overflow", "auto");
+    		else
+    			$("body").css("overflow", "hidden");
     	$('.scb_s_experiment_setup_instructions').hide();
+    	}
+    	else{
+    		$("body").css("overflow", "auto");
+    	}
       if(state.experiment.last_step < 5)
 			state.experiment.last_step = 4;
         if (rows.length > 0){

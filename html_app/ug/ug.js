@@ -10,15 +10,26 @@ $('.scb_f_help_search_bar').hide();
 
 
 function popoutGuide(){
-	window.open('full_guide.html', '_newtab');
+	//window.open('', '_blank');
+	var popout_string = "";
+	var visible=	$('u:visible');
+	if(visible.length ==1)
+	{	
+		if(!$(visible).attr('class'))
+			popout_string = $('*:visible ').parent('.scb_s_help_sublink').attr('class').split(' ')[1];
+		else
+			popout_string = $(visible).attr('class');
+	}
+	else{
+		popout_string = $($('u:visible ')[0]).attr('class');
+	}
+	
+	popout_string = popout_string.replace(/_/g, '-');
+	var popoutWindow =window.open("full_guide.html#"+popout_string);
+	setTimeout( function(){popoutWindow.location = "full_guide.html#"+popout_string; }, 10);
+	
 }
 
-
-// $(window).scroll(function () {
-//    $('.scb_f_help_search_bar').css('position', 'absolute');
-// });
-//drag: function( event, ui ) {$('.scb_f_help_search_bar').css('position', 'static');},
-//$('.scb_f_help').draggable({ handle:'.scb_f_help_search_bar'});
 $.get( "user_guide.html", function(data) {
 	var htmlObject = document.createElement('div');
 	htmlObject.innerHTML = data;
@@ -36,40 +47,23 @@ $.get( "user_guide.html", function(data) {
 				if(next.className !="SCB-Heading1")
 					text= text + $(next).html();
 				else{
-					text = text + '&#9;<div class="scb_s_help_sublink"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>' + next.textContent.trim()+'</u></span><br/></div>';
-					//sublinks.push(next.textContent.trim());
-				}
+					text = text + '&#9;<div class="scb_s_help_sublink"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>' + next.textContent.trim()+'</u></span><br/></div>';				}
 			}
 			next = next.nextSibling;
 			
 		}
 		
-		//console.log(sublinks);
 		var lnk = document.createElement('span');
 		lnk.className = 'scb_s_main_help_link';
 		lnk.style.textTransform = 'uppercase';
-		lnk.innerHTML = '<p/><u>'+$(links[i]).text()+"</u>" + "<p/>";
-// 		for(var i =0; i <sublinks.length; i++){
-// 			var slnk = document.createElement('span');
-// 			slnk.className = 'scb_s_main_help_sublink';
-// 			slnk.style.textTransform = 'uppercase';
-// 			slnk.innerHTML = '<u>'+$(sublinks[i])+"</u>" + "<p/>";	
-// 		}
+		lnk.innerHTML = '<p/><u class="scb_s_main_section_'+i+'">'+$(links[i]).text()+"</u>" + "<p/>";
 		var div = document.createElement('div');
-// 		div.className = 'scb_s_help_link_' + i;
 		div.className = 'scb_s_help_section scb_s_help_section_'+i;
 		div.innerHTML = text;
-		var y = 0;
 		
-		// 			//children of sublink are not visible
-// 			if(div.childNodes[y].className.indexOf('scb_s_help_sublink')>-1){
-// 				div.childNodes[y].style.display = 'inline';
-// 			}
-// 			else{
-// 				
-// 			}
-// 			
 		
+		
+		var y = 0;		
 		 while(y < div.childNodes.length){
 			if(!div.childNodes[y].style){
 				$(div.childNodes[y]).wrap('<span></span>');
@@ -175,7 +169,6 @@ function searchUG(){
 	for(var x =0; x < searchTerms.length ; x++){
 		search_string = search_string+ ":contains('"+searchTerms[x]+"')";
 	}
-	//var list = $("*:contains('"+ $('.help_search_input').val()+"')");
 	var list= $(search_string);
 	if(list.length == 0)
 	alert("I\'m sorry we can\'t find that word");
@@ -191,7 +184,6 @@ function searchUG(){
 		$( list[list.length-1]).css( "display", 'list-item' );
 	}
 	
-	//console.log(elements);
 	highlightSearchTerms($('.help_search_input').val(), true, true,null, null)
 
 	var display_str = counter+1;
@@ -241,7 +233,6 @@ function searchUG(){
   	});
   	
   	
-	//$('.scb_f_help').draggable({ handle:'.scb_f_help_search_bar'});
 	for(var x = 0; x< $('.scb_s_main_help_link').length; x++){
 		bindItem($('.scb_s_main_help_link')[x], x);
 		$($('.scb_s_main_help_link')[x]).css('cursor', 'pointer');
