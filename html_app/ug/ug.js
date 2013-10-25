@@ -141,27 +141,34 @@ function bindItem(item, ind) {
 //Bind a click to main menu sublinks
 function bindSubItem(item, ind) {
 	$(item).click(function(){
-		if($('.scb_s_help_sub_section_'+ ind).css('display') != 'none')
-			$('.scb_s_help_sub_section_'+ ind).css('display', 'none');
-		 else{
-			$('.scb_s_help_sub_section_'+ ind).css('display', 'list-item');
-			}
-			
-		$('.scb_s_main_help_link').hide();
-		$('.scb_s_help_sublink').hide();
-		$(item).css('display', 'inline');
-		$(item).css('cursor', 'pointer');
-		if($('.scb_f_help_footer').length >0)
-			$('.scb_f_help_footer').remove();
+		if($(item).parent().prev().css('display')!='none' && $(item).children('li').css('display') !='none'){
+			$(item).children().css('color', 'black');
+			return;
+		}
 		else{
-			//add footer code
-			var footer = document.createElement('div')
-			footer.className = 'scb_f_help_footer';
-			footer.innerHTML = "<input type='button' value='Home' style='color: blue;' id='search' onclick='mainUG();'> <input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
-			//footer.style.background = 'rgba(31, 155, 123, .5)'; 
-			footer.style.height = '25px';
-			$('.scb_f_help_display').append(footer);
-			$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width() -15);
+			$(item).children('span').css('color', 'blue');
+			if($('.scb_s_help_sub_section_'+ ind).css('display') != 'none')
+				$('.scb_s_help_sub_section_'+ ind).css('display', 'none');
+			 else{
+				$('.scb_s_help_sub_section_'+ ind).css('display', 'list-item');
+				}
+			
+			$('.scb_s_main_help_link').hide();
+			$('.scb_s_help_sublink').hide();
+			$(item).css('display', 'inline');
+			$(item).css('cursor', 'pointer');
+			if($('.scb_f_help_footer').length >0)
+				$('.scb_f_help_footer').remove();
+			else{
+				//add footer code
+				var footer = document.createElement('div')
+				footer.className = 'scb_f_help_footer';
+				footer.innerHTML = "<input type='button' value='Home' style='color: blue;' id='search' onclick='mainUG();'> <input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
+				//footer.style.background = 'rgba(31, 155, 123, .5)'; 
+				footer.style.height = '25px';
+				$('.scb_f_help_display').append(footer);
+				$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width() -15);
+			}
 		}
 	});
 }
