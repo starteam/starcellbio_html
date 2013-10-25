@@ -39,7 +39,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
         alert("INVALID ELEMENT!");
     }
 
-    var slide_type = $(element).val();
+    var slide_type = $(element).attr('value');
     if (slide_type == '') {
         return;
     }
@@ -319,8 +319,8 @@ function draw(state){
 	var canvas=document.getElementsByTagName("canvas")[0];
 	document.onkeydown=function (e) {
 		
-		document.documentElement.style.overflow='hidden';
-		document.body.style.overflow='hidden';
+		//document.documentElement.style.overflow='hidden';
+		//document.body.style.overflow='hidden';
 		e = e || window.event;
 		if(state.action =='rendering'){
 				console.log('nope');
@@ -580,8 +580,8 @@ function save_and_draw_cache_image(canvas, state){
 		});
 		console.log('rendering...');
 		state['action'] = 'rendering';
-		document.documentElement.style.overflow='hidden';
-		document.body.style.overflow='hidden';
+		//document.documentElement.style.overflow='hidden';
+		//document.body.style.overflow='hidden';
 	
 		$('.scb_s_microscope_status').text(state['action']);	
 

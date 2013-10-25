@@ -163,7 +163,7 @@
 		<button class='scb_s_microscopy_left_microscopy' microscopy_id='{$microscopy.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}'>
-        				&lt;&lt;
+        				&#x25c0;
     	</button>
 		{foreach $m in $experiment.microscopy_list.list}
 			{if index($m) >= $experiment.microscopy_list.start_tabs_index and index($m) < $experiment.microscopy_list.start_tabs_index +5}     				
@@ -192,7 +192,7 @@
 		<button class='scb_s_microscopy_right_microscopy' microscopy_id='{$microscopy.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}' >
-        				&gt;&gt;
+        				&#x25b6;
     	</button>
     {/if}
 </div>
@@ -211,18 +211,19 @@
 {call .display_m_progress}
 {param step:1/}
 {/call}
+<div class='scb_s_western_blot_samples_container' style='{if length($rows) >=12}  height: 306px;	{else} 	height:auto;{/if}'>
 
-<div class='scb_s_microscopy_samples_table'>
+<div class='scb_s_western_blot_samples_table'  style='{if length($rows) >=12} height: 216px;   min-height: 300px;  {else} 	height:auto;{/if}'>
     <table>
         <thead class='scb_s_microscopy_samples_table_head'>
-        <td class='scb_s_microscopy_samples_table_heading'>Select</td>
-        <td class='scb_s_microscopy_samples_table_heading'>Samples</td>
-        <td class='scb_s_microscopy_samples_table_heading'>Slide type</td>
-        <td class='scb_s_microscopy_samples_table_heading'>&nbsp;</td>
+        <td class='scb_s_microscopy_samples_table_heading sample_prep_select scb_s_experiment_setup_table_border'>Select</td>
+        <td class='scb_s_microscopy_samples_table_heading sample_prep_samples scb_s_experiment_setup_table_border'>Samples</td>
+        <td class='scb_s_microscopy_samples_table_heading sample_prep_lysate scb_s_experiment_setup_table_border'>Slide type</td>
+        <td class='scb_s_microscopy_samples_table_heading sample_prep_blank scb_s_experiment_setup_table_border'>&nbsp;</td>
         </thead>
         {foreach $r in $rows}
         <tr class='scb_s_microscopy_samples_table_tr'>
-            <td class='scb_s_microscopy_samples_table_td'>{if $r.display_sample}
+            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border' style='width:96px;'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' cell_treatment_id='{$r.cell_treatment.id}'
                        
@@ -230,11 +231,11 @@
                 >
                 {/if}
             </td>
-            <td class='scb_s_microscopy_samples_table_td'>{if $r.display_sample}
+            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border' style='width:491px;'>{if $r.display_sample}
                 {$r.display_text}
                 {/if}
             </td>
-            <td class='scb_s_microscopy_samples_table_td'>
+            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border'>
                 {call .display_slide_types}
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
@@ -244,12 +245,39 @@
                 {param lane:$r/}
                 {/call}
             </td>
-            <td class='scb_s_microscopy_samples_table_td'>
+<!-- 
+            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border scb_s_experiment_setup_table_border'>
+                {if $r.kind == 'existing'}
+                <button class="scb_f_microscopy_sample_remove" microscopy_id='{$microscopy.id}'
+                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
+                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>&#215;
+                </button>
+                {else}
+                <button class="scb_f_microscopy_sample_remove"
+                disabled="disabled">&#215;
+                </button>
+
+                {/if}
+            </td>
+ -->
+            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border'>
 
             </td>
+
         </tr>
         {/foreach}
         {if length($rows) >= 10}
+        <tr class='scb_s_microscopy_samples_select_all_rel'>
+        	<td class='scb_f_microscopy_sample_active_all_td' colspan='2'>
+                <button class='scb_f_microscopy_sample_active_all'>SELECT ALL</button>
+            </td>
+        	<td class='scb_f_microscopy_sample_inactive_all_td' colspan='2' align='right'>
+                <button class='scb_f_microscopy_sample_inactive_all'>CLEAR ALL</button>
+            </td>
+        </tr>
+        
+        
+<!-- 
         <tr>
             <td colspan='4'>
         		<div class="scb_s_western_blot_green_line"></div>
@@ -263,6 +291,7 @@
                 <button class='scb_f_microscopy_sample_inactive_all'>CLEAR ALL</button>
             </td>
         </tr>
+ -->
         {else}
         <tr class='scb_s_microscopy_samples_select_all_abs'>
         	<td colspan='1'>
@@ -278,10 +307,12 @@
         </tr>
         {/if}
     </table>
-
-
 </div>
-        
+	{if length($rows) >=10}
+    	<div class="scb_s_western_blot_green_line"></div>
+    {/if}
+</div>
+</div>        
 <a class='scb_s_navigation_button scb_f_microscopy_prepare_slides' microscopy_id='{$microscopy.id}'
    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 {if $can_prepare_slide}{else}disabled='disabled'{/if}> PREPARE SLIDES  &nbsp; &#9654;
@@ -311,18 +342,19 @@
 {/call}
 {/if}
 <div class='scb_s_microscopy_samples_area'>
+	<div class='scb_s_microscopy_samples_heading'>
+        Samples
+    </div>
 
-    <div class='scb_s_microscopy_choose_slide_type'>
-        <!-- TODO: Slide Type stuff -->
-           </div>
-    <!--
+    <!--<
+    div class='scb_s_microscopy_samples_heading'>
+        Samples
+    </div>
     <div class='scb_s_microscopy_choose_samples_note'>
         NOTE: You can reorder samples by dragging and dropping into new order
     </div>
     -->
-    <div class='scb_s_microscopy_samples_heading'>
-        Samples
-    </div>
+    
     <div class='scb_s_microscopy_choose_samples_order'>
         <ol class='scb_s_microscopy_choose_samples_order_list' >
             {foreach $r in $rows}
@@ -333,7 +365,7 @@
             microscopy_id='{$microscopy.id}' 
             {if $microscopy.lane_selected == $r.lane.id}class='scb_s_microscopy_sample_selected'{/if}>
 
-                {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
+             &nbsp;&nbsp;{$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
             </li>
             {/if}
             {/foreach}
@@ -341,7 +373,7 @@
     </div>
     {if $microscopy.samples_finished}
     {else}
-    <button class='scb_f_microscopy_load_slides scb_s_navigation_button' microscopy_id='{$microscopy.id}' 
+    <button class='{if $rows_valid > 9}scb_f_microscopy_load_slides {else}scb_f_microscopy_load_slides_short{/if} scb_s_navigation_button' microscopy_id='{$microscopy.id}' 
                 assignment_id="{$assignment.id}"
                 experiment_id="{$experiment.id}">LOAD SLIDES
 	</button>
@@ -407,26 +439,33 @@
 @param kinds
 */
 {template .display_slide_types}
-
-<select class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}'
-        microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
-        lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
-{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
->
-{if $lane.kind == 'existing'}
-    {foreach $k in keys($kinds)}
-    <option value='{$k}'
-    {if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
-    {/foreach}
+{if length(keys($kinds)) ==1}
+		{foreach $k in keys($kinds)}
+		<span class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}'
+				microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="{$k}"
+				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$kinds[$k].name}</span>
+		{/foreach}
 {else}
-    {if length(keys($kinds)) != 1}
-    <option selected="selected" disabled="disabled" value=''>Pick Slide Type</option>
-    {/if}
-    {foreach $k in keys($kinds)}
-        <option value='{$k}'>{$kinds[$k].name}</option>
-    {/foreach}
+	<select class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}'
+			microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
+			lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
+	{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
+	>
+	{if $lane.kind == 'existing'}
+		{foreach $k in keys($kinds)}
+		<option value='{$k}'
+		{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+		{/foreach}
+	{else}
+	{if length(keys($kinds)) != 1}
+	<option selected="selected" disabled="disabled" value=''>Pick Slide Type</option>
+	{/if}
+	{foreach $k in keys($kinds)}
+	<option value='{$k}'>{$kinds[$k].name}</option>
+	{/foreach}
+	{/if}
+	</select>
 {/if}
-</select>
 {/template}
 
 
