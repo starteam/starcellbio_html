@@ -71,35 +71,53 @@ Experiment active area
             <div class='scb_s_experiment_setup_video_box_wrapper_title'>
                 IN THE LAB
             </div>
-            <div class='scb_s_experiment_setup_video_box'>
-				<div id='slider'>
-					<div class="slides_container">
-						<a target="_blank">
+            <div id='mySwipe'class='scb_s_experiment_setup_video_box swipe'>
+				<div  class='slides_container swipe-wrap'>
+						<div><a target="_blank">
 							<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Wild-type.jpg'>
 							<span>
 								Vulva phenotypes in <i>C. elegans</i>
 							</span>
 						</a>
-					<a target="_blank">
+						</div>
+					<div><a target="_blank">
 						<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Multivulva.jpg' >
 						<span>
 							Vulva phenotypes in <i>C. elegans</i>
 
 						</span>
 					</a>
-					<a target="_blank">
+					</div>
+					<div><a target="_blank">
 						<img class='scb_s_experiment_setup_video_box_img'  src='static/usability_test/Vulvaless.jpg' >
 						<span>
 							Vulva phenotypes in <i>C. elegans</i>
 						</span>
 					</a>
-					<a target="_blank">
+					</div>
+					<div>
 						<video controls='controls' height='160' width='233' class='scb_s_experiment_setup_video_box_vid'  src='static/videos/western_blot/WesternFinalCompressed.mov' ></video>
-					</a>
+
+					</div>
 						</div>
+				</div>
+				<div class='slider_controls' style='text-align:center;'>
+  
+			  		<button onclick='mySwipe.prev()'>&#x25c0;</button> 
+					  <nav id = 'nav'>
+						<ul class='slider_dots'>
+						<li class='on'></li>
+						<li ></li>
+						<li></li>
+						<li></li>
+						</ul>
+						</nav>
+
+			  		<button onclick='mySwipe.next()'>&#x25b6;</button>
+
 				</div>            
 			</div>
-            
+
 			<div class='scb_s_experiment_setup_video_text'>
 			</div>
         </div>
@@ -140,36 +158,58 @@ Experiment active area
 				</a>
 				</div>
         {/if}
-        <div class='scb_s_experiment_setup_video_box_wrapper'>
+ 		<div class='scb_s_experiment_setup_video_box_wrapper'>
             <div class='scb_s_experiment_setup_video_box_wrapper_title'>
-                            IN THE LAB
-                        </div>
-                   <div class='scb_s_experiment_setup_video_box'>
-						<div id='slider'>
-							<div class="slides_container">
-								<a target="_blank">
-									<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Wild-type.jpg'>
-									<span>
-										Vulva phenotypes in <i>C. elegans</i>
-									</span>
-								</a>
-							<a target="_blank">
-								<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Multivulva.jpg' >
-								<span>
-									Vulva phenotypes in <i>C. elegans</i>
-
-								</span>
-							</a>
-							<a target="_blank">
-								<img class='scb_s_experiment_setup_video_box_img'  src='static/usability_test/Vulvaless.jpg' >
-								<span>
-									Vulva phenotypes in <i>C. elegans</i>
-								</span>
-							</a>
-								</div>
+                IN THE LAB
+            </div>
+            <div id='mySwipe'class='scb_s_experiment_setup_video_box swipe'>
+				<div  class='slides_container swipe-wrap'>
+						<div><a target="_blank">
+							<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Wild-type.jpg'>
+							<span>
+								Vulva phenotypes in <i>C. elegans</i>
+							</span>
+						</a>
 						</div>
-                   </div>
-               </div>
+					<div><a target="_blank">
+						<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Multivulva.jpg' >
+						<span>
+							Vulva phenotypes in <i>C. elegans</i>
+
+						</span>
+					</a>
+					</div>
+					<div><a target="_blank">
+						<img class='scb_s_experiment_setup_video_box_img'  src='static/usability_test/Vulvaless.jpg' >
+						<span>
+							Vulva phenotypes in <i>C. elegans</i>
+						</span>
+					</a>
+					</div>
+					<div>
+					<a target="_blank">
+						<video controls='controls' height='160' width='233' class='scb_s_experiment_setup_video_box_vid'  src='static/videos/western_blot/WesternFinalCompressed.mov' ></video>
+					</a>
+					</div>
+						</div>
+				</div>
+				<div class='slider_controls' style='text-align:center;'>
+  
+			  		<button onclick='mySwipe.prev()'>&#x25c0;</button> 
+					  <nav id = 'nav'>
+						<ul class='slider_dots'>
+						<li class='on'></li>
+						<li ></li>
+						<li></li>
+						<li></li>
+						</ul>
+						</nav>
+
+			  		<button onclick='mySwipe.next()'>&#x25b6;</button>
+
+				</div>            
+			</div>
+
     {/if}
     </div>
     <div class="scb_s_experiment_setup_new_set_up">

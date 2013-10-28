@@ -140,6 +140,46 @@ table.scb_s_experiment_setup_table {
   width: 540px;
   text-align: left;
 }
+nav ul li.on {
+  background: none !important;
+  background-color: #80d1ae !important;
+  border: 1px solid #000;
+}
+#nav {
+  display: inline-block;
+  margin-left: 75px;
+  margin-right: 75px;
+}
+.slider_controls {
+  bottom: 20px;
+  position: relative;
+}
+.slider_controls>button {
+  padding: 3px;
+  margin: 0;
+  margin-right: -5px;
+  margin-left: -5px;
+  padding-bottom: 4px;
+  border: inherit;
+  background: 0;
+  cursor: pointer;
+  color: #29a592;
+}
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+  background: 0;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap>div {
+  float: left;
+  width: 100%;
+  position: relative;
+}
 .scb_s_warning_dialog {
   background: #edeef2;
   border: 2px solid #289a7b;

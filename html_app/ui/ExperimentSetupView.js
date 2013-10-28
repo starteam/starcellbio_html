@@ -849,16 +849,33 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen: false})
 
         }
-        var x = $('.scb_s_experiment_setup_video_box', workarea);
-         $('#slider', x).slides({
-                    preload: true,
-                    hoverPause: true,
-                    generateNextPrev: true,
-                });
-                $('.prev').text('<');
-                $('.next').text('>');
-                $('.next').css('float', 'right');
-                $('.next').insertAfter('.pagination');
+		var elem = document.getElementById('mySwipe');
+		window.mySwipe = Swipe(elem, {
+  			auto: 1000,
+  			continuous: true,
+  			disableScroll: true,
+  			transitionEnd: function(index, element) { 
+					$('.slider_dots li').attr('class','');
+					$($('.slider_dots li')[index]).attr('class','on');}
+		});
+		$('#nav li').on ('click', function () {
+			$('.slider_dots li').attr('class','');
+			$($('.slider_dots li')[$(this).index()]).attr('class','on');
+   			 window.mySwipe.slide($(this).index(), 200);
+		});
+// with jQuery
+// window.mySwipe = $('#mySwipe').Swipe().data('Swipe');
+        
+        
+//          $('#slider', x).slides({
+//                     preload: true,
+//                     hoverPause: true,
+//                     generateNextPrev: true,
+//                 });
+//                 $('.prev').text('<');
+//                 $('.next').text('>');
+//                 $('.next').css('float', 'right');
+//                 $('.next').insertAfter('.pagination');
 //         
 //         if (!_.isUndefined(template.setup_video_box)) {
 //             var x = $('.scb_s_experiment_setup_video_box', workarea);

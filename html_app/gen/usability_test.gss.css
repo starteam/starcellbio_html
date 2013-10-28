@@ -36,14 +36,14 @@
   margin-right: 5px;
 }
 .pagination>li.current {
-  background-color: #189689;
-  background-image: -webkit-linear-gradient(top,#7eb49d,#157776);
-  background-image: -moz-linear-gradient(top,#7eb49d,#157776);
-  background-image: -ms-linear-gradient(top,#7eb49d,#157776);
-  background-image: -o-linear-gradient(top,#7eb49d,#157776);
+  border: 1px solid #000;
+  background-color: #80d1ae;
 }
 .pagination>li.current>a {
-  color: white;
+  color: rgba(0,0,0,0);
+}
+#slider>.prev, #slider>.next {
+  color: #29a592;
 }
 #slider>a {
   font-size: 25px;
