@@ -121,7 +121,7 @@ table.scb_s_experiment_setup_table {
 .scb_s_experiment_setup_video_box {
   width: 233px;
   height: 188px;
-  background-color: #525252;
+  background: 0;
   margin-left: 17px;
   margin-top: 27px;
   overflow: hidden;
@@ -143,7 +143,7 @@ table.scb_s_experiment_setup_table {
 nav ul li.on {
   background: none !important;
   background-color: #80d1ae !important;
-  border: 1px solid #000;
+  border: 1px solid #000 !important;
 }
 #nav {
   display: inline-block;
@@ -155,21 +155,21 @@ nav ul li.on {
   position: relative;
 }
 .slider_controls>button {
-  padding: 3px;
-  margin: 0;
-  margin-right: -5px;
-  margin-left: -5px;
-  padding-bottom: 4px;
-  border: inherit;
-  background: 0;
-  cursor: pointer;
-  color: #29a592;
+  padding: 3px !important;
+  margin: 0 !important;
+  margin-right: -5px !important;
+  margin-left: -5px !important;
+  padding-bottom: 4px !important;
+  border: inherit !important;
+  background: 0 !important;
+  cursor: pointer !important;
+  color: #29a592 !important;
 }
 .swipe {
   overflow: hidden;
   visibility: hidden;
   position: relative;
-  background: 0;
+  background: 0 !important;
 }
 .swipe-wrap {
   overflow: hidden;
