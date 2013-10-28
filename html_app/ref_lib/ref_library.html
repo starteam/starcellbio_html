@@ -1,0 +1,1665 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+    'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv=
+    "content-type" />
+    <title>
+      STARDEV: Cellbio - Reference Library
+    </title>
+    <link href="../media/sphinx/css/neuton_nobile_pygments.css"
+    media="screen" rel="stylesheet" type="text/css" />
+    <link href="../media/sphinx/css/pylons.css" media="screen" rel=
+    "stylesheet" type="text/css" />
+    <link href="../media/css/projectscroll_and_breadcrumb.css"
+    media="screen" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+//<![CDATA[
+                var DOCUMENTATION_OPTIONS = {
+                   URL_ROOT:    '',
+                   VERSION:     '',
+                   COLLAPSE_INDEX: false,
+                   FILE_SUFFIX: '.html',
+                   HAS_SOURCE:  false
+                };
+    //]]>
+    </script>
+  </head>
+  <body>
+    <div class="header-small">
+      <div class="logo-small">
+        <div class="logo-text">
+          <a href="index.html">StardevCellbio</a>
+        </div>
+        <div class="project_scroll">
+          <a href="../index.html"><img alt="Stardev" src=
+          "../media/uploads/project_logos/home_logo.png" title=
+          "Stardev" /></a>
+          <p>
+            Home
+          </p>
+        </div>
+        <div class="project_scroll">
+          <a href="../StarHome/index.html"><img alt="StarHome" src=
+          "../media/uploads/project_logos/generic.png" title=
+          "StarHome" /></a>
+          <p>
+            StarHome
+          </p>
+        </div>
+        <div class="project_scroll">
+          <a href="index.html"><img alt="Cellbio" src=
+          "../media/uploads/project_logos/generic.png" title=
+          "Cellbio" /></a>
+          <p>
+            Cellbio
+          </p>
+        </div>
+        <div class="project_scroll">
+          <a href="../starx/index.html"><img alt="Starx" src=
+          "../media/uploads/project_logos/hpc_new.png" title=
+          "Starx" /></a>
+          <p>
+            Starx
+          </p>
+        </div>
+        <div class="project_scroll">
+          <a href="../hydro/index.html"><img alt="Hydro" src=
+          "../media/uploads/project_logos/hydro_icon.png" title=
+          "Hydro" /></a>
+          <p>
+            Hydro
+          </p>
+        </div>
+        <div class="project_scroll">
+          <a href="../outreach/index.html"><img alt="Outreach" src=
+          "../media/uploads/project_logos/generic.png" title=
+          "Outreach" /></a>
+          <p>
+            Outreach
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="related">
+      <h3>
+        stardev Breadcrumb
+      </h3>
+      <ul>
+        <li>
+          <a href="../index.html">stardev</a> <span>&gt;</span>
+        </li>
+        <li>
+          <a href="index.html">cellbio</a> <span>&gt;</span>
+          <em>Reference Library</em>
+        </li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <p class="SCBTOC1Allcaps">
+              Table of Contents
+            </p>
+            <p class="SCBTOC1">
+              <a href="#ExperimentalDesign">Experimental Design</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#Design">1. Design</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#SetUp">2. Set Up</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#RunExperiment">3. Run Experiment</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#SelectTechniques">4. Select
+              Technique(s)</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#RunTechniques">5. Run Technique(s)</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#Analyze">6. Analyze</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#Conclude">7. Conclude</a>
+            </p>
+            <p class="SCBTOC1">
+              <a href="#ExperimentalTechniquesSection">Experimental
+              Techniques</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#WesternBlotting">A. Western Blotting</a>
+            </p>
+            <p class="SCBTOC3">
+              <a href="#WBGeneralInformation">General
+              Information</a>
+            </p>
+            <p class="SCBTOC3">
+              <a href=
+              "#WesternBlottingExperimentalTechnique">Western
+              Blotting Experimental Technique</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#SamplePreparation">1. Sample
+              Preparation</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#GelPreparation">2. Gel Preparation</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#LoadGel">3. Load Gel</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#RunGel">4. Run Gel</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#Transfer">5. Transfer</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#Blot">6. Blot</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#Develop">7. Develop</a>
+            </p>
+            <p class="SCBTOC3">
+              <a href="#WesternBlotAnalysis">Western Blot
+              Analysis</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#FlowCytometry">B. Flow Cytometry</a>
+            </p>
+            <p class="SCBTOC3">
+              <a href="#FCGeneralInformation">General
+              Information</a>
+            </p>
+            <p class="SCBTOC3">
+              <a href="#FlowCytometryExperimentalTechnique">Flow
+              Cytometry Experimental Technique</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#FCSamplePreparation">1. Sample
+              Preparation</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#FCRun">2. Run</a>
+            </p>
+            <p class="SCBTOC4">
+              <a href="#FCAnalyze">3. Analyze</a>
+            </p>
+            <p class="SCBTOC2">
+              <a href="#Microscopy">C. Microscopy</a>
+            </p>
+            <p class="SCBTOC1">
+              <a href="#Acknowledgements">Acknowledgements</a>
+            </p>
+            <p class="SCB-Heading1Allcaps">
+              Experimental Design
+            </p>
+            <p class="SCB-Normal">
+              There are 7 steps to experimental design:
+            </p>
+            <ol>
+              <li>Design
+              </li>
+              <li>Set Up
+              </li>
+              <li>Run Experiment
+              </li>
+              <li>Select Technique(s)
+              </li>
+              <li>Run Technique(s)
+              </li>
+              <li>Analyze
+              </li>
+              <li>Conclude
+              </li>
+            </ol>
+            <p class="SCB-Heading1">
+              1. Design
+            </p>
+            <p class="SCB-Normal">
+              Experiments in StarCellBio generally involve treating
+              either whole organisms or group of cells with various
+              drugs and/or altering their growth conditions. The
+              goal of a StarCellBio experiment is to determine if a
+              treatment affects the whole organism or cells being
+              treated. There are many ways in which a treatment can
+              affect an organism or a cell. Scientists use various
+              methods to diagnose the effect of a particular
+              treatment on a cell/organism. Some treatments result
+              in a change in morphology while others do not. A lack
+              of change in morphology does not mean a treatment has
+              not affected an organism or a group of cells. Some
+              changes lead to internal changes within an organism
+              or cells without resulting in visible changes.
+            </p>
+            <p class="SCB-Normal">
+              The first step is to think about the question or
+              objective that you are trying to answer and then
+              design a hypothesis. The user should also start to
+              think about the experimental technique that will be
+              best suited to analyze the samples from the
+              experiment.
+            </p>
+            <p class="SCB-Heading1">
+              2. Set Up
+            </p>
+            <p class="SCB-Normal">
+              During the experiment set up step, students will
+              think of the different treatments and conditions they
+              would like to test on a strain or set of strains
+              during a particular experiment. StarCellBio contains
+              information regarding the assignment and the
+              necessary background information that is required for
+              a student to design, perform, and analyze experiments
+              within StarCellBio.
+            </p>
+            <p class="SCB-Normal">
+              Within StarCellBio, these are all the possible
+              variables that a student will be able to specify:
+            </p>
+            <ol>
+              <li>strain(s) used during an experiment. The
+              instructor will provide all of the available strains
+              in the software.
+              </li>
+              <li>available treatment(s) and their associated
+              conditions. Possible treatments include drugs and/or
+              media conditions to be used during the experiment.
+              The instructor will provide all of the available
+              treatments in the software. Each treatment has the
+              following conditions associated with it:
+              </li>
+            </ol>
+            <p class="SCB-Normalnospacingwithtab">
+              a. concentration of treatment
+            </p>
+            <p class="SCB-Normalnospacingwithtab">
+              b. start of treatment
+            </p>
+            <p class="SCB-Normalnospacingwithtab">
+              c. duration of treatment
+            </p>
+            <p class="SCB-Normalwithtab">
+              d. temperature
+            </p>
+            <ol>
+              <li>time of sample collection from the start of
+              treatment. The instructor will provide all of the
+              possible options for collection time in the software.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              In addition to the variables mentioned above, a user
+              can also treat a particular sample with multiple
+              treatments in StarCellBio. These treatments can
+              either be simultaneous or sequential, depending on
+              the treatment start time and treatment duration
+              variables selected by the user.
+            </p>
+            <p class="SCB-Normal">
+              At this point in the experimental design, it is
+              critical for a user to set up positive and negative
+              controls. A positive control is a sample in which a
+              specific result is expected. A negative control is a
+              sample in which no result is expected. These serve to
+              demonstrate that the experiment worked as expected
+              and also as comparisons to which a user can compare
+              the results of the experimental samples.
+            </p>
+            <p class="SCB-Heading1">
+              3. Run Experiment
+            </p>
+            <p class="SCB-Normal">
+              The experiment is performed during this stage and the
+              samples are generated.
+            </p>
+            <p class="SCB-Heading1">
+              4. Select Technique(s)
+            </p>
+            <p class="SCB-Normal">
+              Now the researcher selects the experimental technique
+              that will be used to analyze the samples. In
+              StarCellBio, there will be three available
+              techniques: western blotting, flow cytometry and
+              microscopy. Currently, only western blotting and flow
+              cytometry are available for spring 2013 and
+              microscopy will be developed starting in summer 2013.
+            </p>
+            <p class="SCB-Normalwithtab">
+              <strong>A.</strong> Western blotting detects overall
+              changes in the amount or chemical modifications of a
+              particular protein.
+            </p>
+            <p class="SCB-Normalwithtab">
+              <strong>B.</strong> Flow cytometry is used to count
+              and analyze the size, shape and properties of
+              individual cells within a heterogeneous population of
+              cells.
+            </p>
+            <p class="SCB-Normalwithtab">
+              <strong>C.</strong> Microscopy is used to study the
+              shape, morphology and properties of cells, tissues or
+              organisms that otherwise cannot be observed with the
+              human eye.
+            </p>
+            <p class="SCB-Normal">
+              For more information regarding the specific
+              experimental techniques, see the appropriate section
+              below.
+            </p>
+            <p class="SCB-Heading1">
+              5. Run Technique(s)
+            </p>
+            <p class="SCB-Normal">
+              The experimental technique is performed at this time
+              and the experimental output is created. For more
+              information regarding the experimental techniques,
+              see the appropriate section below.
+            </p>
+            <p class="SCB-Normalwithtab">
+              <strong>A.</strong> Western blotting detects overall
+              changes in the amount or chemical modifications of a
+              particular protein.
+            </p>
+            <p class="SCB-Normalwithtab">
+              <strong>B.</strong> Flow cytometry is used to count
+              and analyze the size, shape and properties of
+              individual cells within a heterogeneous population of
+              cells.
+            </p>
+            <p class="SCB-Normalwithtab">
+              <strong>C.</strong> Microscopy is used to study the
+              shape, morphology and properties of cells, tissues or
+              organisms that otherwise cannot be observed with the
+              human eye.
+            </p>
+            <p class="SCB-Heading1">
+              6. Analyze
+            </p>
+            <p class="SCB-Normal">
+              A student now analyzes the data that has been
+              generated from the experimental output. For example,
+              in western blotting, the final blot will be analyzed.
+              In flow cytometry, students will analyze either a
+              histogram or a dot plot to determine the number of
+              events of a specific parameter and the size of
+              subpopulations in their sample. With microscopy,
+              students will study images obtained from the
+              microscope.
+            </p>
+            <p class="SCB-Normal">
+              For more specific information regarding the analysis
+              of each experimental technique, reference the
+              appropriate experimental technique below.
+            </p>
+            <p class="SCB-Heading1">
+              7. Conclude
+            </p>
+            <p class="SCB-Normal">
+              To construct an overall conclusion for an experiment,
+              a user brings together all of the data that they have
+              generated – possibly from multiple western blotting
+              and/or flow cytometry and/or microscopy techniques –
+              to form a conclusion about the original hypothesis
+              proposed. At this point, the user will need to decide
+              whether the original hypothesis should be revised
+              and/or if additional experiments should be set-up to
+              better address the hypothesis.
+            </p>
+            <p class="SCB-Normal"></p>
+            <p class="SCB-Heading1Allcaps">
+              Experimental Techniques
+            </p>
+            <p class="SCB-Heading1">
+              A. Western Blotting
+            </p>
+            <p class="SCB-Heading3">
+              General Information
+            </p>
+            <p class="SCB-Normal">
+              Western blotting is a technique that allows
+              scientists to detect overall changes of a particular
+              protein of interest in an organism or cell. These
+              changes can be:
+            </p>
+            <ol>
+              <li>changes in protein concentration.
+              </li>
+              <li>addition or subtraction of small chemical
+              modifications to a protein that can alter its
+              behavior.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              Proteins are the workhorses of a cell. Proteins are
+              tightly regulated by changes in the environment so
+              that they are only “expressed” (present) or can only
+              be “activated” at the right time and place. Proteins
+              are regulated by altering their concentration in the
+              cell and/or by adding a chemical modification to the
+              protein that “activates” or “deactivates” it. Either
+              or both of these types of protein regulation can
+              occur for a given protein.
+            </p>
+            <p class="SCB-Normal">
+              Any particular process in a cell is controlled by the
+              action of many proteins which form complex regulatory
+              networks with some “activating” and others
+              “repressing” the expression or activity of other
+              proteins within the pathway. In addition, most
+              proteins are involved in more than one cellular
+              process, so the whole system looks like an
+              interconnected network of protein pathways. This
+              means that often times a particular treatment will
+              result in a change in the amount of a protein or a
+              change in the activity of a particular protein that
+              is important for a specific cellular process. For
+              example, carcinogens often cause alterations or
+              mutation in DNA sequence, which can have detrimental
+              effects on an organism in the long run. When you
+              treat cells with carcinogens, cells increase the
+              production of proteins that help them deal with the
+              damage incurred by the treatment. In addition, cells
+              will also suppress the production of proteins
+              involved in promoting growth and cell division to
+              allow for the repair of the damage before cell
+              division, and therefore propagation of the damage to
+              the next generation can take place. One can diagnose
+              what type of cellular response the cells are
+              experiencing after treating them with a carcinogen by
+              looking at (1) how the overall concentration of a
+              particular protein involve in repair or cell
+              division, for example, changes after treatment and/or
+              (2) how the particular concentration of the activated
+              or deactivated form of such said proteins changes
+              after treatment.
+            </p>
+            <p class="SCB-Heading3">
+              Western Blotting Experimental Technique
+            </p>
+            <p class="SCB-Normal">
+              After the experiment is set up and performed, the
+              protein samples need to be prepared. Proteins in the
+              sample are then separated using a method called “gel
+              electrophoresis”, transferred to a cellulose membrane
+              and then the specific protein(s) of interest are
+              detected and visualized on a piece of photographic
+              film.
+            </p>
+            <p class="SCB-Normalbold">
+              Video Resource
+            </p>
+            <p class="SCB-Normal">
+              An overview of the western blotting procedure can be
+              accessed in the video article entitled: “<em>Western
+              blotting: Sample preparation to
+              Detection</em>”<a href="#_ftn1" title="">[1]</a> on
+              www.jove.com. The link is: <a href=
+              "http://www.jove.com/video/2359/western-blotting-sample-preparation-to-detection">
+              http://www.jove.com/video/2359/western-blotting-sample-preparation-to-detection</a>.
+            </p>
+            <p class="SCB-Normal">
+              The 7 steps to perform a western blotting
+              experimental technique are detailed below.
+            </p>
+            <p class="SCB-Heading5">
+              1. Sample Preparation
+            </p>
+            <p class="SCB-Normal">
+              Once an experiment is run and the samples are
+              collected, the samples need to be prepared in a
+              specific way to analyze the proteins within the
+              sample. Once a sample has been prepared for analysis
+              it is called a lysate.
+            </p>
+            <p class="SCB-Normal">
+              To analyze the proteins within your sample by western
+              blotting, you first need to prepare your lysates.
+              Lysates can be prepared from whole tissue (made of
+              cells as well as connective materials, etc.) or
+              cells. If tissue is being used, then the tissue first
+              needs to be broken down in a mechanical manner by
+              cutting or crushing the sample. The sample can then
+              be processed using different combinations of salts
+              and detergents to isolate the proteins. In addition,
+              the sample preparation is usually performed in the
+              cold to prevent the proteins from being degraded or
+              denatured (un-folded). Enzymes can also be added to
+              the lysate preparation to prevent proteins from being
+              digested or chemically modified by other enzymes
+              contained within cells.
+            </p>
+            <p class="SCB-Normal">
+              Proteins are found within several cell compartments:
+              the cytoplasm, the nucleus or embedded within a
+              membrane (either surrounding the cell or an internal
+              membrane that surrounds an organelle within the
+              cell). Depending on where a particular protein is
+              located within the cell, different conditions will
+              need to be applied to isolate the protein(s) of
+              interest. All protein preparation protocols involve
+              using detergents and/or salts of various strengths.
+              Detergents cause the membrane that surrounds and
+              protects the cell to fall apart, providing access to
+              the proteins within the cell. Depending on where the
+              proteins that the researcher is studying are
+              localized within the cell, the researcher will use
+              either weak or strong detergent to break apart only
+              the outer membrane or all the membranes within a
+              cell.
+            </p>
+            <p class="SCB-Normal">
+              There are several different types of protein samples
+              that a researcher can prepare:
+            </p>
+            <ol>
+              <li>One type of lysate sample is called a whole cell
+              lysate because it contains all proteins that are
+              located in a cell.
+              </li>
+              <li>Another type of lysate that a researcher may want
+              to prepare is a nuclear &amp; cytoplasmic lysate. In
+              this type of lysate preparation, the researcher uses
+              increasing concentrations of detergent to first
+              isolate proteins that are found in the cytoplasm and
+              then a stronger detergent to isolate proteins that
+              are found in the nucleus. The researcher will end up
+              with two samples: one will contain all of the
+              proteins from the nucleus and the other will contain
+              all the cytoplasmic proteins.
+              </li>
+              <li>A third type of protein sample is called an
+              immunoprecipitate or IP. In some experiments, a
+              researcher will want to determine whether a
+              particular protein is associated with another protein
+              (proteins often time found large complexes –
+              sometimes binding to a complex is the direct result
+              of a particular cellular event and can alter the
+              properties of a particular protein). In this
+              experiment, the researcher would first isolate, or
+              immunoprecipitate (IP) a specific protein, along with
+              anything else it is bound to, from the lysate. To do
+              this, the researcher will use an antibody that will
+              bind and isolate the protein from the lysate sample
+              (see the Blotting section for information about
+              antibodies). Then in later steps of the western
+              blotting procedure, the researcher will probe whether
+              this protein is associated with another protein of
+              interest.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              Once the protein sample is prepared – either whole
+              cell, cytoplasmic/nuclear fractionations, or IP – the
+              amount of total protein that is in each sample should
+              be quantified. In particular experiments, it is
+              critical to do a western blot with the same amount of
+              total protein in each sample in order to draw
+              conclusions from the experiment. This is extremely
+              important in experiments that are trying to determine
+              whether a particular treatment has an effect on the
+              amount of a protein in a sample. StarCellBio
+              currently has the functionality to make whole cell as
+              well as cytoplasmic and nuclear fractionations. The
+              capability to make immunoprecipitates will be added
+              in the future.
+            </p>
+            <p class="SCB-Normal">
+              Now the samples are ready to be prepared to load in
+              the polyacrylamide gel. The appropriate amount of
+              protein is mixed in a specific buffer, and a dye
+              (blue color) is added to the mixture of lysate and
+              buffer. The dye will help the researcher visualize
+              the protein mixture in the gel, prior to and during
+              movement of proteins through the gel. It is important
+              to note that the dye does not actually bind to the
+              proteins; instead, it provides a visual sense of
+              where the protein mixture front is within the clear
+              polyacrylamide gel. If a denaturing gel is being
+              used, then a chemical to denature the proteins is
+              also added and the samples are heated at 95 ºC for 5
+              minutes prior to being loaded in the gel’s well.
+            </p>
+            <p class="SCB-Heading5">
+              2. Gel Preparation
+            </p>
+            <p class="SCB-Normal">
+              Proteins are separated by size and shape by applying
+              an electric field to them in a “gel”. The word, gel,
+              refers to a mesh-like matrix made of an acrylamide
+              polymer through which different proteins will travel
+              at different speeds depending on their size and shape
+              (once the electric field is applied).
+            </p>
+            <p class="SCB-Normal">
+              The gel itself is created by pouring a solution of a
+              chemical, acrylamide, at a specific concentration
+              into a framework that is provided by two vertical
+              plates. Under the appropriate treatment conditions,
+              the acrylamide will polymerize to form a solid,
+              mesh-like matrix that is only 1-2 millimeters thick.
+              The polymerized acrylamide is now called
+              polyacrylamide.
+            </p>
+            <p class="SCB-Normal">
+              Depending on the size of the protein of interest, the
+              concentration of acrylamide can be adjusted, usually
+              in the range of 6-15%. Lower gel concentrations
+              result in large holes in the matrix and are used to
+              obtain good separation of large proteins. In
+              contrast, high concentrations result in the creation
+              of small holes and crevices through which small
+              proteins can travel and are used to obtain good
+              separation of small proteins (Figure 1). In
+              StarCellBio, users can select 10%, 12% or 15%
+              acrylamide.
+            </p>
+            <p class="SCB-Normal">
+              Western blotting gels usually contain 10 – 15 wells,
+              or pockets that serve to contain the protein samples
+              prior to the application of an electric field. In
+              StarCellBio, the gels have 15 wells, and one well
+              should be reserved for the protein marker.
+            </p>
+            <p class="SCB-Normal">
+              There are two types of gels that are used in the
+              research lab. Both of these are polyacrylamide gels
+              (PAGE or polyacrylamide gel electrophoresis).
+            </p>
+            <ol>
+              <li>The first kind of gel that is run is a
+              <span style="text-decoration: underline;">denaturing
+              gel</span>, also called “SDS-PAGE” gel. This gel
+              contains a very strong negatively charged detergent
+              (SDS) that causes the proteins to be denatured (lose
+              their three-dimensional shape) and also coats the
+              proteins with a negative charge. A denaturing gel
+              separates proteins based solely on size.
+              </li>
+              <li>The second kind of gel is a <span style=
+              "text-decoration: underline;">native gel</span>. As
+              the name suggests, this type of gel preserves the
+              native conformation of a protein (no detergent is
+              used) and separates the proteins based on shape and
+              size.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              StarCellBio currently only simulates western blotting
+              with denaturing gels. In the future, we may add the
+              capability to run native gels.
+            </p>
+            <p class="SCB-Normalbold">
+              Video Resource
+            </p>
+            <p class="SCB-Normal">
+              Benchfly.com has a great video resource on preparing
+              gels. In particular, the video details how to pour an
+              acrylamide gel and set up the gel for running. The
+              link is: <a href=
+              "http://www.benchfly.com/video/106/pouring-acrylamide-gels-for-sds-page/">
+              http://www.benchfly.com/video/106/pouring-acrylamide-gels-for-sds-page/</a>.
+              There are two additional notes to make about this
+              video:
+            </p>
+            <ol>
+              <li>This video will provide you with a visual of what
+              the gel actually looks like. The gel is a
+              polyacrylamide gel. The names of the other chemicals
+              (TEMED, etc.) mentioned are used to solidify the gel
+              and the names of each of the chemicals are not
+              relevant for our purposes.
+              </li>
+              <li>In the description above, we have not described
+              the two layers (upper and lower) that are contained
+              within the gel. Because the goal of running the gel
+              is to separate proteins based on size (and sometimes
+              also shape), you need to have the proteins enter the
+              gel at the same time. However, the well that holds
+              the protein prior to the application of the electric
+              field is relatively tall. As a result, we use gels
+              with two layers. The sole purpose of this is to
+              ensure that all of the proteins contained in the well
+              enter the lower portion of the gel at the same time.
+              </li>
+            </ol>
+            <p class="SCB-Heading5">
+              3. Load Gel
+            </p>
+            <p class="SCB-Normal">
+              Once the gel has solidified, it is placed in a
+              transparent box surrounded by a liquid buffer, which
+              will help conduct the electric field once it is
+              applied. Each of the samples can now be pipetted into
+              a well in the gel. Once all of the samples of
+              interest are added to their own individual wells, the
+              gel is ready to run.
+            </p>
+            <p class="SCB-Normal">
+              In StarCellBio, all of the samples are loaded into
+              the gel for the user. Users can organize their
+              samples into by dragging and dropping the samples in
+              the Samples Window into the particular order in which
+              they should appear in the gel.
+            </p>
+            <p class="SCB-Normal">
+              In order to determine the actual size of a protein,
+              we always run a sample that is composed of proteins
+              of known sizes in one of the gel’s wells. We refer to
+              this sample as a protein marker or ladder and it
+              usually consists of a wide range of protein sizes,
+              from approximately 10-250 kDa. Kilodaltons (kDa) is
+              the term of measurement for the molecular weight of
+              proteins.
+            </p>
+            <p class="SCB-Normalbold">
+              Video Resource
+            </p>
+            <p class="SCB-Normal">
+              Benchfly.com has a great video resource on loading a
+              gel. In particular, the video provides a nice visual
+              of the wells and how they hold the protein sample
+              prior to applying the electric field. The link is:
+              <a href=
+              "http://www.benchfly.com/video/120/how-to-load-and-run-sds-page-gels/">
+              http://www.benchfly.com/video/120/how-to-load-and-run-sds-page-gels/</a>
+            </p>
+            <p class="SCB-Heading5">
+              4. Run Gel
+            </p>
+            <p class="SCB-Normal">
+              To separate the proteins in the gel, a uniform
+              electric field (usually around 120-200V for about an
+              hour) is applied. The electric field is applied in
+              such a way that proteins will be drawn into the gel
+              and will travel through the gel at various speeds
+              depending on their size and shape. For the first
+              iteration of StarCellBio, the protein samples are
+              denatured, which means that the proteins are no
+              longer found in their natural shape in which they are
+              found inside a cell. Instead, they are in a linear
+              form and they will be separated in the gel only by
+              size, and not by shape or charge.
+            </p>
+            <p class="SCB-Normal">
+              If multiple samples have been loaded into separate
+              wells in the gel, then each sample will run in a
+              parallel fashion in their individual lanes. A “lane”
+              refers to the physical vertical space that is located
+              beneath the well. Larger proteins will take longer to
+              run through the gel and as a result will remain
+              closer to the starting point (the wells) of the gel.
+              Smaller proteins will be able to squeeze and move
+              through the gel matrix much more easily and will
+              travel farther through the gel matrix. As a result,
+              smaller proteins will move closer to the bottom of
+              the gel (farther away from the wells). Proteins in
+              different lanes that travel the same distance will be
+              approximately the same size.
+            </p>
+            <p class="SCB-Normal">
+              Depending on the proteins of interest that are being
+              examined, the electric field will need to be shut off
+              after different lengths of time for different
+              experiments. There are two visual indicators to alert
+              the researcher to when the electric field should be
+              turned off.
+            </p>
+            <ol>
+              <li>The protein samples all contain a blue dye (see
+              sample preparation). This blue dye travels through
+              the gel at the same rate as the smallest proteins.
+              When the dye front gets to the bottom of the gel,
+              this indicates to the researcher that the smallest
+              proteins in each sample will be running off of the
+              gel and into the buffer (lost forever!).
+              </li>
+              <li>The protein ladder creates samples of known sizes
+              that are all marked in various patterns and/or
+              colors. Unlike the proteins in a researcher’s samples
+              that are not dyed, the proteins in the protein ladder
+              are visually apparent. The protein ladder can be used
+              as a visual guide to tell the researcher where
+              proteins of specific sizes are present in the gel as
+              the gel is running.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              If the researcher would like to visualize ALL the
+              proteins in the gel, and not a specific protein of
+              interest, then the gel can be stained at this point
+              with a dye that will bind all proteins in a
+              non-specific manner. The dye that is most commonly
+              used is Coomassie blue, which dyes all of the
+              proteins in the gel blue (Figure 2). It is important
+              to note that the stain binds all proteins in a
+              non-specific manner and as a result, a researcher
+              cannot tell at which proteins he/she is looking. This
+              step is not always necessary and it is often skipped
+              during a western blotting experiment. Up to this
+              point, this procedure can be called just “gel
+              electrophoresis”. It is the detection of specific
+              proteins of interest that is at the heart of a
+              western blot. StarCellBio does not currently have the
+              capability of performing Coomassie blue staining, but
+              it will be added in the future.
+            </p>
+            <p class="SCB-Heading5">
+              5. Transfer
+            </p>
+            <p class="SCB-Normal">
+              In this step, the proteins are transferred from the
+              gel to a membrane. After the gel has run for an
+              appropriate length of time to allow for proteins to
+              separate sufficiently on the gel, the electric field
+              is turned off. At this point, although you can’t see
+              all the proteins, all of the proteins in a given
+              sample are separated based on their size and are
+              present at different places in the gel. We then
+              immobilize the proteins by transferring them from the
+              gel to a membrane. We do this for three reasons:
+            </p>
+            <ol>
+              <li>The gel is very thin and fragile and will not
+              hold up well to further manipulations.
+              </li>
+              <li>The proteins are contained within the gel, and
+              are not accessible to detection by antibodies, which
+              is the next step of the experiment. Once the proteins
+              are transferred to a membrane, the proteins will be
+              localized on the surface of the membrane and they
+              will be accessible to antibody detection.
+              </li>
+              <li>The proteins are not immobilized in the gel.
+              Although the electric field is no longer applied,
+              proteins will continue to slowly diffuse through the
+              gel, and the diffusion will no longer be in a
+              specific direction. As a result, we cannot use
+              proteins in the gel to differentiate between proteins
+              of different sizes.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              To transfer the proteins from the gel to the
+              membrane, we set up a “sandwich” in which the gel is
+              placed next to a membrane and protected by filter
+              paper and sponges. The membrane is a type of
+              cellulose (looks like a thick, flexible and
+              impermeable piece of paper) and is usually made up of
+              nitrocellulose or PVDF (polyvinylidene difluoride).
+              The sandwich is placed in a box and again surrounded
+              by a liquid buffer that will help to conduct the
+              electric field.
+            </p>
+            <p class="SCB-Normal">
+              Once the transfer apparatus or “sandwich” is
+              assembled, we again utilize an electric field to pull
+              the proteins from the gel and onto the membrane. The
+              proteins are still negatively charged from the use of
+              the strong detergent in the sample preparation and
+              gel running steps. As a result, the proteins will
+              migrate out of the gel and move toward the positive
+              charge and, due to the membrane’s properties, the
+              proteins will “stick” to the surface of the membrane.
+            </p>
+            <p class="SCB-Normal">
+              This step can either occur at room temperature for
+              approximately an hour at around 100 V or can be done
+              overnight at 4 ºC at 20-30 V.
+            </p>
+            <p class="SCB-Heading5">
+              6. Blot
+            </p>
+            <p class="SCB-Normal">
+              Following the transfer of the proteins from the gel
+              to the membrane, we are now ready to detect a
+              specific protein(s) of interest that is bound to the
+              membrane. In this step, we probe, or “blot”, the
+              membrane for our protein of interest using
+              antibodies. Antibodies are naturally made by our
+              immune systems in response to infection to
+              specifically bind proteins directly. Foreign invaders
+              contain proteins that are not recognized by our
+              bodies as our own. The immune system then uses the
+              foreign proteins to produce antibodies that recognize
+              them and therefore will recognize the same foreign
+              agent in other cells within our bodies in a current
+              and future infection. Researchers utilize this
+              natural process to isolate antibodies that
+              specifically recognize proteins of interest.
+              Companies now make antibodies commercially available
+              and can isolate antibodies that specifically bind a
+              protein of interest.
+            </p>
+            <p class="SCB-Normal">
+              Antibodies are a Y-shaped protein (Figure 3). The
+              tips of the two “arms” of the Y structure vary
+              between antibodies and specifically recognize and
+              bind different proteins. The “stem” portion of the Y
+              structure is the same between antibodies of the same
+              organism. All antibodies made in a particular
+              organism, for example, will have a similar stem
+              structure.
+            </p>
+            <p class="SCB-Normal">
+              To detect proteins on the membrane, we use multiple
+              steps designed to specifically recognize and bind a
+              protein of interest and then amplify this detection
+              through a second detection step and a chemical
+              reaction, which allows the visualization of protein
+              of interest.
+            </p>
+            <p class="SCB-Normal">
+              We call an antibody that recognizes a specific
+              protein of interest a <span style=
+              "text-decoration: underline;">primary
+              antibody<a href="#_ftn2" title=""><span style=
+              "text-decoration: underline;">[2]</span></a></span>.
+              A <span style="text-decoration: underline;">secondary
+              antibody</span><a href="#_ftn3" title="">[3]</a> is
+              an antibody that recognizes the primary antibody.
+              More specifically, it recognizes the stem portion of
+              the antibody. If you use a secondary antibody that
+              does not bind to the primary antibody, then no signal
+              will appear on the western blot at the end of the
+              experiment.
+            </p>
+            <p class="SCB-Normal">
+              The secondary antibody that is used in a western blot
+              experiment is bound to an enzyme that will then
+              catalyze a chemical reaction to create a light signal
+              upon the addition of a chemical substrate. This light
+              signal can be detected using photographic film.
+              Alternatively, the secondary antibody can be bound to
+              a fluorescent molecule, which eliminates the need for
+              the chemical reaction to detect the protein.
+              StarCellBio currently simulates detection of proteins
+              through a chemiluminescent reaction.
+            </p>
+            <p class="SCB-Normal">
+              The multiple steps of blotting the membrane to detect
+              proteins using antibodies are as follows:
+            </p>
+            <ol>
+              <li>The membrane is washed with a “blocking” solution
+              that is designed to block non-specific binding of an
+              antibody to the membrane or proteins. Although
+              antibodies will bind specific proteins tightly, then
+              can also bind nonspecific proteins weakly. The
+              blocking solution will prevent weak nonspecific
+              binding.
+              </li>
+              <li>The membrane is incubated in a dilute solution of
+              the <span style="text-decoration: underline;">primary
+              antibody</span>. The first (primary) antibody will
+              specifically bind to target proteins that are bound
+              on the membrane.
+              </li>
+              <li>The membrane is then washed in a very low
+              concentration of detergent to remove any weakly bound
+              or non-specifically bound antibody to the membrane or
+              the proteins bound to it that were not successfully
+              blocked by the blocking solution. Any primary
+              antibody that is tightly bound to the protein of
+              interest will remain.
+              </li>
+              <li>A second antibody incubation step is performed in
+              which the membrane is incubated in a dilute solution
+              of the secondary antibody. The secondary antibody
+              will specifically bind the primary antibody. The
+              <span style="text-decoration: underline;">secondary
+              antibody</span> is also bound to an enzyme that will
+              be used to detect the protein. Many secondary
+              antibodies can bind to each primary antibody, which
+              serves to amplify the light signal that will be
+              created in a later step.
+              </li>
+              <li>The membrane is then washed in a very low
+              concentration of detergent to remove any weakly bound
+              or non-specifically bound antibody to the membrane or
+              proteins bound to it. The antibodies that are tightly
+              bound will remain.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              The blot is now ready to be exposed to film to detect
+              the protein of interest.
+            </p>
+            <p class="SCB-Heading5">
+              7. Develop
+            </p>
+            <p class="SCB-Normal">
+              After blotting the membrane with primary and
+              secondary antibodies, the blot is now ready to be
+              exposed to film to detect the protein of interest.
+              The secondary antibody is bound to an enzyme that
+              will catalyze a chemical reaction to create a light
+              signal that will be detected on film. There are two
+              steps to develop a western blot:
+            </p>
+            <ol>
+              <li>To catalyze the chemical reaction to create a
+              light signal, the necessary substrate of the reaction
+              is added on top of the membrane. This will create a
+              light signal wherever there is a secondary antibody
+              bound to the primary antibody, which is bound to the
+              protein of interest.
+              </li>
+              <li>A piece of photographic film is applied to the
+              membrane in a dark room to visualize the light signal
+              because the light signal is not visible to the eye.
+              The location of the protein will be marked by a light
+              signal, which manifests itself as a dark band on the
+              photographic film. The membrane will typically be
+              exposed to film for a length of time that varies
+              anywhere from seconds to hours. The amount of
+              luminescent signal is proportional to the amount of
+              protein that is present on the membrane.
+              Additionally, the luminescent signal appears in the
+              physical location of the protein on the membrane and
+              can be used to determine the size of a protein by
+              comparing its location with that of the protein
+              ladder.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              At this point, the researcher will have a piece of
+              photographic film that (hopefully!) has black bands
+              on it (Figure 4). The black bands represent the
+              protein of interest.
+            </p>
+            <p class="SCB-Normal">
+              If a researcher would like to look at another
+              protein(s) of interest, then the blot (the membrane)
+              can be erased, or “stripped”, of the antibodies
+              (first and secondary) that are bound to the first
+              protein of interest.
+            </p>
+            <p class="SCB-Normal">
+              Following the stripping of the blot, the new blotting
+              conditions can be selected to detect the second
+              protein of interest utilizing a different set of
+              antibodies. This process can potentially be performed
+              several times, although usually the clarity of
+              protein detection decreases with each stripping
+              procedure. In StarCellBio, select
+              <strong>RE-PROBE</strong> to detect another protein.
+            </p>
+            <p class="SCB-Heading3">
+              Western Blot Analysis
+            </p>
+            <p class="SCB-Normal">
+              The user will analyze the presence, position and
+              intensity of the bands in all the lanes in order to
+              determine the effect of a specific treatment on the
+              protein of interest. The location of the protein
+              bands on the membrane relative to the protein ladder
+              will enable the researcher to determine the size of
+              the protein. The comparison of the presence, position
+              and intensity of the bands in the experimental
+              samples to those for the positive and negative
+              controls is critical to the analysis of the western
+              blot. While the film depicts the location of the
+              protein of interest, it does not depict the proteins
+              that were present in the protein ladder. This is
+              because the antibody used to detect the protein of
+              interest does not also detect the proteins in the
+              protein ladder (although there are cases when an
+              antibody non-specifically binds to proteins in the
+              protein ladder). As a result, the researcher will
+              need to align the membrane with the film to determine
+              the size of the proteins relative to the known sizes
+              of the proteins in the ladder.
+            </p>
+            <p class="SCB-Normal">
+              The analysis of the western blot is a critical
+              educational experience and as a result, students are
+              required to interpret their particular western blot
+              on their own.
+            </p>
+            <p class="SCB-Heading1">
+              B. Flow Cytometry
+            </p>
+            <p class="SCB-Heading3">
+              General Information
+            </p>
+            <p class="SCB-Normal">
+              Flow cytometry is used to count and analyze the size,
+              shape and properties of individual cells within a
+              heterogeneous population of cells.
+            </p>
+            <p class="SCB-Normal">
+              There are two main categories of flow cytometry
+              experiments that a researcher may perform. Flow
+              cytometry may be performed to:
+            </p>
+            <ul>
+              <li>· Analyze the size, shape and properties of
+              individual cells.
+              </li>
+              <li>· Analyze and sort cells based upon the size,
+              shape and properties of individual cells.
+              </li>
+            </ul>
+            <p class="SCB-Normal">
+              The reference library will focus on the analysis of
+              the size, shape and properties of individual cells
+              because StarCellBio currently only supports this type
+              of flow cytometry analysis.
+            </p>
+            <p class="SCB-Normal">
+              Flow cytometry is utilized to analyze many aspects of
+              the cells within a population including: cell size,
+              cell shape, DNA content, RNA content, protein
+              expression – surface or intracellular, protein
+              modifications, and cell death/viability, amongst
+              others.
+            </p>
+            <p class="SCB-Heading3">
+              Flow Cytometry Experimental Technique
+            </p>
+            <p class="SCB-Normal">
+              After the experiment is set up and performed, the
+              samples need to be prepared for flow cytometry
+              analysis. Each sample is prepared for the specific
+              type of flow cytometry analysis that will be
+              performed, run through the flow cytometer, and then
+              the populations within the sample are analyzed.
+            </p>
+            <p class="SCB-Normal">
+              The 3 steps to perform a flow cytometry experimental
+              technique are detailed below.
+            </p>
+            <p class="SCB-Normalbold">
+              Video Resource
+            </p>
+            <p class="SCB-Normal">
+              To learn more about flow cytometry, see the following
+              comprehensive reference material at Life
+              Technologies: <a href=
+              "http://probes.invitrogen.com/resources/education/tutorials/4Intro_Flow/player.html">
+              http://probes.invitrogen.com/resources/education/tutorials/4Intro_Flow/player.html</a>
+            </p>
+            <p class="SCB-Normal"></p>
+            <p class="SCB-Heading5">
+              1. Sample Preparation
+            </p>
+            <p class="SCB-Normal">
+              Once an experiment is run and the samples are
+              collected, the samples need to be prepared to analyze
+              the individual cells within the sample. To analyze
+              the individual cells within your sample by flow
+              cytometry, you first need to prepare your samples to
+              create a sample that contains only single cells, and
+              not clumps of cells. Samples of cells can be prepared
+              from whole tissue (made of cells as well as
+              connective materials, etc.) or cells growing in
+              tissue culture. If whole tissue is being used, then
+              the tissue first needs to be broken down in a
+              mechanical manner by cutting or crushing the sample.
+              The sample can then be processed using different
+              combinations of enzymes to dissociate the cells
+              within the sample. If tissue culture cells are being
+              used, then the cells simply need to be removed from
+              the tissue culture plate and dissociated to create an
+              individual cell suspension. In addition, further
+              sample preparation is usually performed in the cold
+              to prevent the continued cellular processes that may
+              confound the analysis.
+            </p>
+            <p class="SCB-Normal">
+              Depending on the particular flow cytometry analysis
+              the researcher would like to perform, the researcher
+              will choose one or more of the following analyses:
+            </p>
+            <ol>
+              <li>Analyze the size and shape of the cells in a
+              sample,
+              </li>
+              <li>Analyze cell viability and/or DNA content using
+              fluorescent dyes, and/or
+              </li>
+              <li>Analyze different cell properties including:
+              protein expression, protein modifications or the cell
+              cycle, amongst others, using antibodies.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              While flow cytometry can be used to analyze the
+              properties of cells within a population and sort the
+              cells based on those properties, StarCellBio
+              currently only supports using fluorescent dyes to
+              analyze a cell’s DNA content (Analysis B).
+            </p>
+            <p class="SCB-Normalnospacingbold">
+              A. Size and shape
+            </p>
+            <p class="SCB-Normal">
+              If a researcher would like to examine the size, shape
+              and internal complexity of the cells within their
+              sample, the researcher does not need to perform any
+              additional steps once a single cell suspension has
+              been prepared.
+            </p>
+            <p class="SCB-Normal">
+              This type of analysis is beneficial for all flow
+              cytometry analyses to identify and remove debris and
+              dead cells from further analyses. The analysis of a
+              cell’s size, shape and complexity is at the core of
+              quantifying the populations of different blood cell
+              types, such as red blood cells, neutrophils, and
+              lymphocytes, amongst others.
+            </p>
+            <p class="SCB-Normalnospacingbold">
+              B. Fluorescent dyes to analyze viability and/or DNA
+              content
+            </p>
+            <p class="SCB-Normal">
+              To analyze cell viability within a population, the
+              researcher incubates live cells with a fluorescent
+              dye, such as propidium iodide (PI) or
+              7-amino-actinomycin D (7AAD). Performing this
+              analysis with a population of live, in comparison to
+              fixed, cells is critical because only the cells that
+              have died, and therefore contain holes in the cell
+              membrane, will allow the fluorescent dye into the
+              cells. Therefore, following incubation of the cells
+              with the fluorescent dye, only the dead cells will
+              have, or be positive for, the dye. The researcher
+              will easily be able to detect the cells that are
+              positive for the dye and if desired, remove them from
+              future analyses.
+            </p>
+            <p class="SCB-Normal">
+              To analyze a cell’s DNA content, the researcher
+              incubates fixed cells with a fluorescent dye, such as
+              propidium iodide (PI), that binds, or intercalates,
+              DNA. While PI can also be used to analyze cell
+              viability, PI can also be used to analyze DNA
+              content, but must be used with fixed cells. The
+              fixation process will enable the dye to enter all of
+              the cells and the researcher will be able to analyze
+              the amount of DNA in all of the cells within the
+              sample. The amount of fluorescence signal that is
+              detected by the flow cytometer will be proportional
+              to the amount of DNA that is present in the cell and
+              the researcher will use that information to determine
+              the cell cycle stage of a particular cell.
+            </p>
+            <p class="SCB-Normalnospacingbold">
+              C. Antibody-detection of protein expression, protein
+              modifications and/or the cell cycle
+            </p>
+            <p class="SCB-Normal">
+              We use antibodies to analyze the amount of a specific
+              protein(s) of interest and/or protein modifications
+              on the surface of or in the intracellular space of
+              the cells within a population. Antibodies are
+              naturally made by our immune systems in response to
+              infection to specifically bind proteins directly.
+              Foreign invaders contain proteins that are not
+              recognized by our bodies as our own. The immune
+              system then uses the foreign proteins to produce
+              antibodies that recognize them and therefore will
+              recognize the same foreign agent in other cells
+              within our bodies in a current and future infection.
+              Researchers utilize this natural process to isolate
+              antibodies that specifically recognize proteins of
+              interest. Antibodies are now commercially available
+              and companies can isolate antibodies that
+              specifically bind a protein of interest.
+            </p>
+            <p class="SCB-Normal">
+              Antibodies are a Y-shaped protein (Figure 3). The
+              tips of the two “arms” of the Y structure vary
+              between antibodies and specifically recognize and
+              bind different proteins. The “stem” portion of the Y
+              structure is the same between antibodies of the same
+              organism. All antibodies made in a particular
+              organism, for example, will have a similar stem
+              structure.
+            </p>
+            <p class="SCB-Normal">
+              To detect protein expression and/or modification in
+              individual cells, we use multiple steps designed to
+              specifically recognize and bind a protein of interest
+              and then amplify this detection through a second
+              detection step using a fluorescent-label to allow the
+              detection and analysis of the protein of interest.
+            </p>
+            <p class="SCB-Normal">
+              We call an antibody that recognizes a specific
+              protein of interest a <span style=
+              "text-decoration: underline;">primary
+              antibody<a href="#_ftn4" title=""><span style=
+              "text-decoration: underline;">[4]</span></a></span>.
+              A <span style="text-decoration: underline;">secondary
+              antibody</span><a href="#_ftn5" title="">[5]</a> is
+              an antibody that recognizes the primary antibody.
+              More specifically, it recognizes the stem portion of
+              the antibody. If you use a secondary antibody that
+              does not recognize and bind to the primary antibody,
+              then a fluorescent signal will not be detected by the
+              flow cytometer at the end of the experiment because
+              the primary antibody is not fluorescent by itself.
+              The secondary antibody that is used in a flow
+              cytometry experiment is bound to a fluorescent
+              molecule, or fluorophore, that produces a light
+              signal when excited at the correct wavelength of
+              light by a laser in the flow cytometer. This light
+              signal can be detected by the flow cytometer.
+            </p>
+            <p class="SCB-Normal">
+              The multiple steps of detecting proteins and/or
+              modifications using antibodies are as follows:
+            </p>
+            <ol>
+              <li>The cells are first washed with a “blocking”
+              solution that is designed to block the non-specific
+              binding of an antibody to the protein of interest.
+              Although antibodies will bind specific proteins
+              tightly, then can also bind non-specific proteins
+              weakly. The blocking solution will prevent weak
+              non-specific binding.
+              </li>
+              <li>The cells are incubated in a dilute solution of
+              the <span style="text-decoration: underline;">primary
+              antibody</span>. The first (primary) antibody will
+              specifically bind to target proteins that are located
+              on the cell surface or inside the cell.
+              </li>
+              <li>The cells are then gently washed in buffer alone,
+              not containing any antibodies, to remove any weakly
+              or non-specifically bound antibody to the protein of
+              interest. Any primary antibody that is tightly bound
+              to the protein of interest will remain.
+              </li>
+              <li>A second antibody incubation step is performed in
+              which the cells are incubated in a dilute solution of
+              the secondary antibody. The secondary antibody will
+              specifically bind the primary antibody. The
+              <span style="text-decoration: underline;">secondary
+              antibody</span> is also bound to a fluorescent
+              molecule, or fluorophore, that will be used to detect
+              the protein. Many secondary antibodies can bind to
+              each primary antibody, which serves to amplify the
+              fluorescent light signal that will be detected by the
+              flow cytometer following excitation by the laser
+              light.
+              </li>
+              <li>The cells are then gently washed in buffer alone
+              to remove any weakly or non-specifically bound
+              antibody to the protein of interest. The antibodies
+              that are tightly bound will remain.
+              </li>
+            </ol>
+            <p class="SCB-Normal">
+              Following these steps, the cells are now ready to be
+              run through the flow cytometer to detect and analyze
+              the protein of interest.
+            </p>
+            <p class="SCB-Heading5">
+              2. Run
+            </p>
+            <p class="SCB-Normal">
+              Once the samples are prepared, they are ready to be
+              run through the flow cytometer. A tube containing the
+              suspension of individual cells is placed in the
+              machine. The flow cytometer aspirates the solution of
+              cells and draws the cells into the machine in such a
+              way that the cells form a single line within a stream
+              of liquid. In this manner, each cell within the
+              suspension can be analyzed independently.
+            </p>
+            <p class="SCB-Normal">
+              At a particular point in the machine, each cell will
+              pass through a laser beam. Additionally, if the
+              researcher is using fluorescent dyes and/or
+              fluorescently-tagged antibodies, then additional
+              laser(s) with the appropriate light wavelength to
+              excite the fluorescent molecule will be utilized. A
+              detector within the machine will collect and report
+              the amount of light that 1) is scattered in the
+              forward direction (forward scatter, FSC), 2) is
+              scattered to the side (side scatter, SSC), and 3)
+              corresponds to the emission spectra of the
+              fluorescent molecule(s), if applicable. Detectors
+              will read the amount of scattered light and the
+              amount of fluorescence detected for each cell, which
+              is then translated into a single data point on the
+              computer. The first two types of data, FSC and SSC,
+              are utilized to determine the size, shape and
+              complexity of each cell (Analysis A above), while the
+              third type of data is used for Analyses B and C.
+            </p>
+            <p class="SCB-Normal">
+              To learn more about how flow cytometry works, see the
+              following comprehensive reference material at Life
+              Technologies: <a href=
+              "http://probes.invitrogen.com/resources/education/tutorials/4Intro_Flow/player.html">
+              http://probes.invitrogen.com/resources/education/tutorials/4Intro_Flow/player.html</a>
+            </p>
+            <p class="SCB-Heading5">
+              3. Analyze
+            </p>
+            <p class="SCB-Normal">
+              As the samples are analyzed by the flow cytometer,
+              the computer will display plots of the amount of
+              light detected by each of the detectors in the flow
+              cytometer for each single cell. The amount of
+              fluorescence signal detected by the flow cytometer
+              equates to the presence and quantity of a
+              fluorophore, corresponding to a protein or DNA, in a
+              cell. Each individual cell will be depicted as a
+              single dot on the graph. The researcher can format
+              the data to display it either as a histogram, which
+              represents the number of cells with particular
+              emission levels for one fluorophore or as a graph
+              depicting the emission levels of two different
+              fluorophores.
+            </p>
+            <p class="SCB-Normal">
+              By examining the properties of each cell within a
+              sample, populations or groups of cells within a
+              sample that are expressing the same relative amounts
+              of fluorescence will become apparent. Once the
+              researcher has identified the appropriate populations
+              for further analysis, the researcher can use the flow
+              cytometry software program to divide the plot into
+              appropriate segments to determine the percentage of
+              cells that are within each segment of the graph.
+            </p>
+            <p class="SCB-Normal">
+              Currently, StarCellBio only supports the analysis of
+              DNA content by flow cytometry. When a researcher is
+              analyzing the amount of DNA in a cell using a
+              fluorescent dye, such as PI, the amount of PI
+              fluorescence will be proportional to the amount of
+              DNA in a cell. Based on knowledge of the relative
+              amounts of DNA in a cell at various stages of the
+              cell cycle, the researcher can determine the cell
+              cycle stage of a particular cell.
+            </p>
+            <p class="SCB-Normal">
+              To learn more about analyzing flow cytometry
+              experiments, see the following comprehensive
+              reference materials:
+            </p>
+            <p class="SCB-Normal">
+              1) <a href=
+              "http://probes.invitrogen.com/resources/education/tutorials/4Intro_Flow/player.html">
+              http://probes.invitrogen.com/resources/education/tutorials/4Intro_Flow/player.html</a>
+            </p>
+            <p class="SCB-Normal">
+              2) <a href=
+              "http://probes.invitrogen.com/resources/education/tutorials/5Data_Analysis/player.html">
+              http://probes.invitrogen.com/resources/education/tutorials/5Data_Analysis/player.html</a>
+            </p>
+            <p class="SCB-Heading1">
+              C. Microscopy
+            </p>
+            <p class="SCB-Normal">
+              Microscope analysis is used to study the shape and
+              morphology of the objects (cells, tissue slices after
+              fixation and staining) and in counting the number of
+              objects per unit volume (e.g. counting the number of
+              cells or bacteria). Microscopy is also used in
+              determining the presence and absence of certain type
+              of cells or organelles in a sample or specimen of
+              tissue.
+            </p>
+            <p class="SCB-Normal">
+              StarCellBio does not currently support microscopy
+              analysis.
+            </p>
+            <p class="SCB-Heading1Allcaps">
+              Acknowledgements
+            </p>
+            <p class="SCB-Normal">
+              We would like to acknowledge Ebaa Al-Obeidi who
+              contributed to the Experimental Design section of the
+              Reference Library.
+            </p>
+            <p class="SCB-Normal"></p>
+            <div>
+              <br clear="all" />
+              <hr align="left" size="1" width="33%" />
+              <div>
+                <p class="SCB-Footer">
+                  <a href="#_ftnref1" title="">[1]</a> Eslami, A.,
+                  Lujan, J. Western Blotting: Sample Preparation to
+                  Detection. <em>J. Vis. Exp.</em> (44), e2359,
+                  doi:10.3791/2359 (2010).
+                </p>
+              </div>
+              <div>
+                <p class="SCB-Footer">
+                  <a href="#_ftnref2" title="">[2]</a> If a primary
+                  antibody is made in a mouse to detect protein X,
+                  then it will be called “mouse anti-protein X”.
+                </p>
+              </div>
+              <div>
+                <p class="SCB-Footer">
+                  <a href="#_ftnref3" title="">[3]</a> If a
+                  secondary antibody is made in a rabbit to detect
+                  a mouse primary antibody, then it will be called
+                  “rabbit anti-mouse”.
+                </p>
+              </div>
+              <div>
+                <p class="SCB-Footer">
+                  <a href="#_ftnref4" title="">[4]</a> If a primary
+                  antibody is made in a mouse to detect protein X,
+                  then it will be called “mouse anti-protein X”.
+                </p>
+              </div>
+              <div>
+                <p class="SCB-Footer">
+                  <a href="#_ftnref5" title="">[5]</a> If a
+                  secondary antibody is made in a rabbit to detect
+                  a mouse primary antibody, then it will be called
+                  “rabbit anti-mouse”.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+          <p>
+            <a href="index.html">Home</a>
+          </p>
+          <p>
+            <a href="page.html">Test Page</a>
+          </p>
+          <p>
+            <a href="user_guide.html">User Guide</a>
+          </p>
+          <p>
+            <a href="ref_library.html">Reference Library</a>
+          </p>
+          <p>
+            <a href=
+            "https://giving.mit.edu/givenow/add-designation.dyn?designationId=2742943"
+            onclick=
+            "_gaq.push(['_trackEvent', 'STARDEV', 'Donate', 'Cellbio']);">
+            <img src="../media/uploads/link_buttons/donate.png"
+            title="Donate to STARDEV project" /></a>
+          </p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div><!--<div class="related wiki-nav">
+<h3>Navigation</h3>
+<ul>
+    <li><a href="/">Wiki Home</a></li> | 
+    
+        <li><a href="/stardev/newproject/create">Add Project</a></li> |
+    
+
+    
+        
+            <li><a href="/stardev/cellbio/menu">Edit Menu</a></li> |
+        
+    
+
+    
+        <li><a href="/stardev/cellbio/ref_library.html/edit">Edit Page</a></li> |
+        <li><a href="/stardev/cellbio/ref_library.html/preview" target=_blank>Preview Page</a></li> |
+    
+
+    <li><a href="/publish">Publish</a></li> |
+    
+            <li><a href="/stardev/cellbio/sitemap.xml">Sitemap</a></li> |
+    
+     
+    
+    <li><a href="/admin/">Admin Panel</a></li> |
+    <li><a href="/admin/filebrowser/browse/">File Browser</a></li>
+</ul>
+</div>
+-->
+    <div class="footer">
+      <table border="0" style="width: 699px; height: 30px;">
+        <tbody>
+          <tr>
+            <td>
+              <p>
+                <a href="http://web.mit.edu" title=
+                "MIT Homepage"><img alt="MIT Logo" height="36" src=
+                "../media/images/mit-logo-grey-white.gif" title=
+                "MIT Logo" width="62" /></a>
+              </p>
+            </td>
+            <td>
+              <p>
+                <a href="http://oeit.mit.edu" title=
+                "OEIT Homepage">OEIT</a> | <a href=
+                "http://whereis.mit.edu/?selection=NE48" title=
+                "Building NE48 room 308">NE48-308</a> | <a href=
+                "tel:+16172521981">617-252-1981</a> | <a href=
+                "javascript:%20window.location.href='mail'%20+%20'to'%20+':%20'%20+%20'star'+%20String.fromCharCode(64)%20+%20'mit'%20+%20'.'%20+%20'edu'">
+                Contact Us</a><br />
+                <a href="http://web.mit.edu" title=
+                "MIT Homepage">Massachusetts Institute of
+                Technology</a> | <a href="http://web.mit.edu/due"
+                title="DUE Homepage">Dean for Undergraduate
+                Education</a>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table><script src="http://scripts.mit.edu/~ceraj/star.php"
+      type="text/javascript">
+</script>
+    </div>
+  </body>
+</html>

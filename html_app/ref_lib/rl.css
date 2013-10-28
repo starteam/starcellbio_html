@@ -1,0 +1,30 @@
+.heading, .subheading {
+	
+	font-size: 12pt;
+	cursor:pointer;
+	font-weight:bold;
+}
+
+body{
+	background: #e9edf1;
+}
+.body{
+	font-family: 'Verdana';
+	background: #f4f6f8;
+	width:920px;
+}
+.subheading > a{
+	color: #289a7b;
+}
+.heading > a{
+color: #289a7b;
+}
+
+.subheading > ol{
+	font-weight:normal;
+}
+
+.heading > ol{
+	color: black;
+	font-weight:normal;
+}

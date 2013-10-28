@@ -29,6 +29,7 @@
 
 .scb_f_ug_close_button {
 	padding-top: 0px;
+    #@mixin gradient(top,#7eb49d,#157776,#189689);
 	float:right;
 	-webkit-appearance: none;
 	font-family:'sourcesanspro-bold';
