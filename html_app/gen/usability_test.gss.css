@@ -15,8 +15,7 @@
   list-style-image: url('images/homepage/cells.png');
   background-color: #e1e3e8;
   position: relative;
-  left: 33px;
-  margin-right: 95px;
+  left: 23px;
 }
 .pagination>li {
   display: inline-block;

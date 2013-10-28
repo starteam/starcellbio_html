@@ -849,19 +849,30 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen: false})
 
         }
-        if (!_.isUndefined(template.setup_video_box)) {
-            var x = $('.scb_s_experiment_setup_video_box', workarea);
-            x.html(template.setup_video_box);
-            if (template.setup_video_box_kind = 'coin-slider') {
-                $('#slider', x).slides({
+        var x = $('.scb_s_experiment_setup_video_box', workarea);
+         $('#slider', x).slides({
                     preload: true,
                     hoverPause: true,
                     generateNextPrev: true,
                 });
                 $('.prev').text('<');
                 $('.next').text('>');
+                $('.next').css('float', 'right');
                 $('.next').insertAfter('.pagination');
-            }
-        }
+//         
+//         if (!_.isUndefined(template.setup_video_box)) {
+//             var x = $('.scb_s_experiment_setup_video_box', workarea);
+//             x.html(template.setup_video_box);
+//             if (template.setup_video_box_kind == 'coin-slider') {
+//                 $('#slider', x).slides({
+//                     preload: true,
+//                     hoverPause: true,
+//                     generateNextPrev: true,
+//                 });
+//                 $('.prev').text('<');
+//                 $('.next').text('>');
+//                 $('.next').insertAfter('.pagination');
+//             }
+//         }
     };
 };
