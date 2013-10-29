@@ -19,7 +19,7 @@
 	margin-left: auto;
 	margin-right:auto;
     border-radius: 5px;
-    border: 2px solid #059789;
+    #border: 2px solid #059789;
     font-family: 'Arial';
     font-size: 16px;
 /*     overflow:auto; */
@@ -53,7 +53,8 @@
 }
 
 body{
-	background: #e9edf1;
+	background: #f4f6f8;
+	#background: #e9edf1;
 }
 .body{
 	background: #f4f6f8;
@@ -110,11 +111,11 @@ body{
 	-webkit-appearance: none;
 }
 
-.scb_f_help_form{
+.scb_f_help_form_sub{
 	display:inline-block;
 }
 
-.scb_f_help_form > input{
+.scb_f_help_form_sub > input{
 	font-size: 14pt;
 	display: inline-block;
 }

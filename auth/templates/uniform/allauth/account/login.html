@@ -20,7 +20,6 @@ body {
 
 {% block content %}
 {% url 'account_setup' as setup %}
-<h2>{% trans "SIGN IN" %}</h2>
 
 {% if socialaccount.providers  %}
 <p>{% blocktrans with site.name as site_name %}Please sign in with one
@@ -46,9 +45,9 @@ below:{% endblocktrans %}</p>
 
 
 <form class="login uniForm" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
+ 	{% csrf_token %}
   <fieldset class="inlineLabels">
-    {{ form|as_uni_form }}
+  {{ form|as_uni_form }}
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
@@ -57,7 +56,7 @@ below:{% endblocktrans %}</p>
 
       <button class="primaryAction auth_submit_button" type="submit" >{% trans "Sign In" %}</button>
     </div>
-    
+    	
     	<h3><a href="{% url 'account_signup' %}">{% trans "Not a member?" %}</a></h3>
   </fieldset>
 </form>

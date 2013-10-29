@@ -284,7 +284,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			content.body.style.fontSize = '90%';
 			content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
 			var inputs = content.getElementsByTagName('input');
-			$(inputs).css('font-family', 'sourcesanspro-semibold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
+			$(inputs).css('font-family', 'Trebuchet MS, sans-serif');
 			$(inputs).css('text-transform', 'uppercase');
 			$(inputs).css('background-color','#e0e0e0');
 			$(inputs).css('border','1px solid #e0e0e0');
@@ -325,12 +325,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
 	    scb.utils.off_on(workarea.parent(), 'click', '.scb_f_user_guide', function (evt) {
     	$(workarea).append(scb_userguide.userguide({}));
+    	$('.scb_f_ug_down_button').hide();
+    	$('.scb_f_ug_up_button').hide();
+    	$('.scb_f_ug_search_line').hide();
+    	$("#closesearch").hide();
+    	$('.scb_display_search_count').hide();
     	scb.utils.off_on(workarea, 'click', '.scb_f_ug_close_button', function () {
                 $('.scb_f_ug_help_search_bar').detach();
         });
-// 		$('iframe').contents().find(".scb_f_ug_close_button").click(function(e){
-// 					$('.scb_s_ug_dialog').detach();
-// 				});
 		$('.scb_f_ug_help_search_bar').resize(function(){
 			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
 			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
@@ -338,22 +340,35 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 		});
 		
 		$('iframe').load(function(){
-			// $('.scb_s_ug_dialog')[0].width =document.width;
-// 			$('.scb_s_ug_dialog')[0].height = document.height;
 			$('.scb_f_ug_help_search_bar').width($('iframe').contents().find('.scb_f_help_display').width()+20);
 			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
 			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
 			$('.scb_f_ug_help_search_bar').draggable({ handle:'.handel'});
 			
-			
-			
 			$('#search').click(function(){
 					$('iframe').ready(function(){
+						$('.scb_f_ug_down_button').show();
+    					$('.scb_f_ug_up_button').show();
+    					$('.scb_f_ug_search_line').show();
+    					$("#closesearch").show();
+    					$('.scb_display_search_count').show();
 						$('iframe').contents().find(".help_search_input").val($(".help_search_input").val());
 						$('iframe').contents().find("#search").click();
 						
 						$('.scb_display_search_count').text($('iframe').contents().find(".scb_display_search_count").text());
 					});
+			});
+			$(".scb_s_ug_home").click(function(){
+				$('iframe').contents().find(".scb_s_ug_home").click();
+			});
+			$("#closesearch").click(function(){
+				$('.help_search_input').val('');
+				$('.scb_f_ug_down_button').hide();
+    			$('.scb_f_ug_up_button').hide();
+    			$('.scb_f_ug_search_line').hide();
+    			$("#closesearch").hide();
+    			$('.scb_display_search_count').hide();
+
 			});
 			
 			$('.scb_f_ug_down_button').click(function(){
@@ -369,20 +384,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
   				$('.scb_display_search_count').text($('iframe').contents().find(".scb_display_search_count").text());
 
   			});
-			
-//     		var frame = document.getElementsByTagName('iframe')[0];
-// 			var content = (frame.contentDocument || frame.contentWindow);
-// 			content.body.style.fontSize = '90%';
-// 			content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
-// 			$('iframe').contents().find(".scb_f_ug_close_button").click(function(e){
-// 					$('.scb_s_ug_dialog').detach();
-// 				});
-// 			$('iframe').contents().find('#search').click(function(){
-// 					$('iframe').contents().find(".scb_f_ug_close_button").click(function(e){
-// 								$('.scb_s_ug_dialog').detach();
-// 						});
-// 				   });
-			
 		});
 		
     });
@@ -391,15 +392,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         scb.ui.static.MainFrame.ensure_auth_context();
         if (get_courses_result.is_auth) {
         	window.location = '/accounts/logout/';
-            // $(workarea).append(scb_auth.logout({}));
-//             scb.utils.off_on(workarea, 'click', '.scb_f_logout_close_button', function () {
-//                 $('.scb_s_logout_dialog').detach();
-//             });
-//             scb.utils.off_on(workarea, 'click', '.scb_f_logout_button', function () {
-//                 //TODO: here comes the flow with sign-in dialog
-//                 context.auth.logged_in = false;
-//                 scb.ui.static.MainFrame.refresh({view: 'homepage'});
-//             });
         }
         else {
             $(workarea).append(scb_auth.login({}));
@@ -412,17 +404,32 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				content.body.style.fontSize = '90%';
 				content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
 			    var inputs = content.getElementsByTagName('button');
-				$(inputs).css('font-family', 'sourcesanspro-semibold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
+				$(inputs).css('font-family', 'Trebuchet MS, sans-serif');
 				$(inputs).css('text-transform', 'uppercase');
 				$(inputs).css('background-color','#e0e0e0');
 				$(inputs).css('border','1px solid #e0e0e0');
 				var fieldset = content.querySelectorAll('fieldset');
 				$(fieldset).css('border', '0');
+				$(fieldset).children().wrap('<p></p>');
+				var texts = content.querySelectorAll('input');
+				$(texts).attr('placeholder', '');
+				$(texts).css({'font-family': 'Trebuchet MS, sans-serif',
+				'text-transform': 'uppercase',
+				'background-color': 'rgb(224, 224, 224)', 
+				'border': '1px solid rgb(224, 224, 224)', 
+				'height': '25px'});
 				var submit = content.getElementsByClassName('auth_submit_button');
 				$(submit).css({'float':'right', '-webkit-appearance':'none', 'border-radius': '5px', 'letter-spacing':'1px',
 				 'text-transform':'uppercase','border': '1px solid #e0e0e0', 'background-color': '#676767', 'border': '1px solid #e0e0e0',
 				 'height': '30px','color': 'white','font-size': '10pt', 'cursor':'pointer'});
 				var iframe = $('.iframe').contents();
+				
+				iframe.find('a:contains("member")').click(function(){
+					$('.iframe').load(function(){
+						
+						$('.scb_s_login_form > div').text('SIGN UP');
+					});
+				});
 				
 				iframe.find(".primaryAction").click(function(){
 						   $('.iframe').load(function(){

@@ -9,7 +9,7 @@
 //hide the native search bar
 $('.scb_f_help_search_bar').hide();
 
-
+$('.scb_s_ug_home').hide();
 //function to redirect popout link to the new page
 function popoutGuide(){
 	//window.open('', '_blank');
@@ -128,7 +128,7 @@ function bindItem(item, ind) {
 			//add footer code
 			var footer = document.createElement('div')
 			footer.className = 'scb_f_help_footer';
-			footer.innerHTML = "<input type='button' value='Home' style='color: blue;' id='search' onclick='mainUG();'> <input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
+			footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
 			//footer.style.background = 'rgba(31, 155, 123, .5)'; 
 			footer.style.height = '25px';
 			$('.scb_f_help_display').append(footer);
@@ -163,7 +163,7 @@ function bindSubItem(item, ind) {
 				//add footer code
 				var footer = document.createElement('div')
 				footer.className = 'scb_f_help_footer';
-				footer.innerHTML = "<input type='button' value='Home' style='color: blue;' id='search' onclick='mainUG();'> <input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
+				footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
 				//footer.style.background = 'rgba(31, 155, 123, .5)'; 
 				footer.style.height = '25px';
 				$('.scb_f_help_display').append(footer);
@@ -264,7 +264,7 @@ function searchUG(){
 	}
 	var footer = document.createElement('div')
 	footer.className = 'scb_f_help_footer';
-	footer.innerHTML = "<input type='button' value='Home' style='color: blue;' id='search' onclick='mainUG();'> <input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
+	footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
 	//footer.style.background = 'rgba(31, 155, 123, .5)'; 
 	footer.style.height = '25px';
 	$('.scb_f_help_display').append(footer);

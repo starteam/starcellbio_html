@@ -6,14 +6,14 @@ if (typeof scb_auth == 'undefined') { var scb_auth = {}; }
 
 scb_auth.login = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_login_dialog\'><button class=\'scb_f_login_close_button\'>&#215;</button><iframe src=\'/accounts/login/\' class=\'iframe\'></iframe><!-- SIGN-IN<form name="input" action="html_form_action.asp" method="get">Username: <input type="text" name="user"><input type="submit" value="Submit"></form><button class=\'scb_f_login_button\'>Login</button>--></div>');
+  output.append('<div class=\'scb_s_login_dialog\'><div class=\'scb_s_login_form\'> <div>SIGN IN</div><button class=\'scb_f_login_close_button\'>&#215;</button></div><iframe src=\'/accounts/login/\' class=\'iframe\'></iframe><!-- SIGN-IN<form name="input" action="html_form_action.asp" method="get">Username: <input type="text" name="user"><input type="submit" value="Submit"></form><button class=\'scb_f_login_button\'>Login</button>--></div>');
   return opt_sb ? '' : output.toString();
 };
 
 
 scb_auth.signup = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_signup_dialog\'><button class=\'scb_f_signup_close_button\'>&#215;</button><iframe src=\'/accounts/signup/\' class=\'iframe\'></iframe></div>');
+  output.append('<div class=\'scb_s_signup_dialog\'><div class=\'scb_s_signup_form\'> <div>SIGN UP</div><button class=\'scb_f_signup_close_button\'>&#215;</button></div><iframe src=\'/accounts/signup/\' class=\'iframe\'></iframe></div>');
   return opt_sb ? '' : output.toString();
 };
 

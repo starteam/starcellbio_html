@@ -18,7 +18,7 @@
     top:0px;
     position: relative;
 	z-index: 999;
-    font-family: 'sourcesanspro-bold';
+    font-family: 'Trebuchet MS', sans-serif;
     font-size: 20pt;
     
 }

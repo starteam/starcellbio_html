@@ -39,25 +39,68 @@
     @mixin gradient(top,#80d1ae,#189689,#189689);
 }
 
-
+.scb_f_ug_search_line{
+	height:32px;
+	width:2px;
+	background: #e0e0e0;
+	position:absolute;
+	bottom: 0px;
+	left: 487px;
+	
+}
 
 .scb_f_ug_up_button{
 	-webkit-appearance: none;
 	padding-top: 1px;
 	padding-bottom: 1px;
+	bottom: 5px;
+	position: relative;
+	background: 0;
+	border: 0;
 }
  .scb_f_ug_down_button{
 	-webkit-appearance: none;
+	bottom: 5px;
+	position: relative;
+	background: 0;
+	border: 0;
 }
 
 .scb_f_help_form{
 	display:inline-block;
 	margin-bottom:0px;
+	width:450px;
+	
+}
+
+
+.scb_s_search_wrapper{
+	border: 2px solid white;
+	border-top-left-radius: 21px;
+	border-top-right-radius: 21px;
+	border-bottom-right-radius: 21px;
+	border-bottom-left-radius: 21px;
+	width: 624px;
+	background: white;
+	height: 28px;
+
+}
+
+.scb_display_search_count{
+	color: black;
+	margin-left: 10px;
+	margin-right:10px;
 }
 
 .scb_f_help_form > input{
-	font-size: 14pt;
+	font-size: 12pt;
 	display: inline-block;
+	border-radius: 21px;
+	border: none;
+	padding: 6px;
+	position: relative;
+	bottom: 3px;
+	right: 3px;
 }
 
 .search_found{
@@ -92,16 +135,16 @@
 	overflow:auto;
 	resize: both;
 	width: 650px;
+	height: 500px;
 	margin-right:100%;
 	margin-left: 100%;
 	cursor:pointer;
 	top:0px;
-	background: #289A7B;
-	height: 55px;
-	color: white;
+	background: #CDCDCD;
+	color: black;
 	font-size: 16pt;
 	font-family: 'Arial';
-	padding-right: 4px;
+	padding: 5px;
 	z-index:999;
     border-radius: 5px;
     border: 2px solid #059789;

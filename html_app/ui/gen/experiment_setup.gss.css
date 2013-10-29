@@ -23,11 +23,6 @@
   background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
   background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
 }
-.scb_f_run_experiment {
-  right: 5px;
-  top: 2px;
-  position: relative;
-}
 .scb_s_experiment_setup_top>.scb_f_open_experiment_design {
   position: absolute;
   bottom: 5px;
@@ -37,10 +32,14 @@
   bottom: 5px;
   left: 5px;
 }
+.scb_f_open_experiment_setup {
+  margin-left: 0 !important;
+}
 .scb_s_experiment_setup_top>.scb_f_open_experiment_setup_readonly {
-  position: absolute;
   bottom: 5px;
   right: 5px;
+  top: 2px;
+  position: relative;
 }
 .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
   bottom: 5px;
@@ -186,8 +185,8 @@ nav ul li.on {
   border-radius: 10px;
   margin-bottom: 10px;
   padding: 10px;
-  width: 540px;
-  height: 300px;
+  width: 520px;
+  height: 220px;
   position: absolute;
   text-align: left;
   margin-left: auto;

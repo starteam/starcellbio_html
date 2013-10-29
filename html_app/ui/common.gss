@@ -414,7 +414,8 @@ div#main {
     border-radius: 5pt;
     height: 30px;
     color: white;
+    letter-space:1px;
     font-size: 11pt;
-    font-family: 'sourcesanspro-semibold';
+    font-family: 'sourcesanspro-regular';
     cursor:pointer;
 }

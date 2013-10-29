@@ -2,16 +2,29 @@
   background: #f4f6f8;
   border-radius: 5px;
   padding: 10px;
-  height: 300px;
-  width: 350px;
+  height: 340px;
+  width: 390px;
   border: 0;
-  top: 40px;
   display: block;
-  margin-left: auto;
+  margin-left: 0;
   position: relative;
   z-index: 999;
   font-family: 'sourcesanspro-bold';
   font-size: 10pt;
+}
+.scb_s_login_form>div, .scb_s_signup_form>div {
+  display: inline-block;
+}
+.scb_s_login_form, .scb_s_signup_form {
+  background: #f4f6f8;
+  color: black;
+  padding: 5px;
+  height: 25px;
+  position: relative;
+  left: 5px;
+  text-transform: uppercase;
+  font-family: 'sourcesanspro-bold';
+  font-size: 12pt;
 }
 .scb_s_login_dialog, .scb_s_logout_dialog, .scb_s_signup_dialog {
   position: absolute;
@@ -22,7 +35,7 @@
   margin-right: 400px;
   margin-top: 200px;
   padding: 10px;
-  height: 360px;
+  height: 390px;
   width: 420px;
   top: 0;
   font-family: 'sourcesanspro-bold';
