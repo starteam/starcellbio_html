@@ -122,13 +122,14 @@ function bindItem(item, ind) {
 			$(item).css('cursor', 'pointer');
 			$('.scb_s_help_section').hide();
 			$('.scb_s_help_section_'+ind).show();
+			$('p').css('color', 'black');
 			if($('.scb_f_help_footer').length >0)
 			$('.scb_f_help_footer').remove();
 			else{
 			//add footer code
 			var footer = document.createElement('div')
 			footer.className = 'scb_f_help_footer';
-			footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
+			footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
 			//footer.style.background = 'rgba(31, 155, 123, .5)'; 
 			footer.style.height = '25px';
 			$('.scb_f_help_display').append(footer);
@@ -163,7 +164,7 @@ function bindSubItem(item, ind) {
 				//add footer code
 				var footer = document.createElement('div')
 				footer.className = 'scb_f_help_footer';
-				footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
+				footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
 				//footer.style.background = 'rgba(31, 155, 123, .5)'; 
 				footer.style.height = '25px';
 				$('.scb_f_help_display').append(footer);
@@ -208,12 +209,16 @@ function searchUG(){
 	var display_str = counter+1;
 	
 	var font_list =[]
-	
+	var list_counter = 1;
 	for(var y=0; y<$('font').length; y++){
 		if($($('font')[y]).closest('li').css('display') !='none'){
+			$($('font')[y]).wrap('<a></a>');
+			$($('font')[y]).parent().attr('name', 'ug_'+list_counter);
+			list_counter++;
 			font_list.push($('font')[y]);
 		}
 	}
+	
 	var string = display_str+' of ' + font_list.length;
 	$(font_list[counter]).css('background-color', 'orange');
 	
@@ -229,6 +234,7 @@ function searchUG(){
 		counter = counter +1;
   		$(font_list[counter]).css('background-color', 'orange');
   		var display_str = counter+1;
+  		document.location.hash='#ug_'+display_str;
 		string = display_str+' of ' + font_list.length;
 		$('.scb_display_search_count').text(string);
 	 	var offset = $(font_list[counter]).offset()
@@ -246,6 +252,7 @@ function searchUG(){
   		counter = counter -1;
   		$(font_list[counter]).css('background-color', 'orange');
   		var display_str = counter+1;
+  		document.location.hash='#ug_'+display_str;
 		string = display_str+' of ' + font_list.length;
 		$('.scb_display_search_count').text(string);
 		var offset = $(font_list[counter]).offset()
@@ -264,7 +271,7 @@ function searchUG(){
 	}
 	var footer = document.createElement('div')
 	footer.className = 'scb_f_help_footer';
-	footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='search' onclick='popoutGuide();'> ";
+	footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
 	//footer.style.background = 'rgba(31, 155, 123, .5)'; 
 	footer.style.height = '25px';
 	$('.scb_f_help_display').append(footer);
@@ -280,6 +287,11 @@ function mainUG(){
 	$('.scb_f_help font').each(function() {
     	$(this).replaceWith($(this).text());
 	});
+	
+	$('.scb_f_help a').each(function() {
+    	$(this).replaceWith($(this).text());
+	});
+	
 	$('.scb_s_main_help_link').css('display', 'inline');
 	$('.scb_s_help_sublink >span').show();
 	$('li').hide();
@@ -289,6 +301,7 @@ function mainUG(){
 	$('.scb_f_help_footer').remove();
 	//$('.scb_f_help_search_bar').css('position', 'static');
 	$('.scb_f_help').css('overflow-x', 'hidden');
+	window.scrollTo(0);
 	
 }
 

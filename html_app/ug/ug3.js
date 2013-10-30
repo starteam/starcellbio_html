@@ -1,8 +1,8 @@
-$(window).keydown(function(e) {
-    switch (e.keyCode) {
-        case 13: searchUG();
-    }
-});
+// $(window).keydown(function(e) {
+//     switch (e.keyCode) {
+//         case 13: searchUG();
+//     }
+// });
 
 $('.help_search_input').focus();
 $('.scb_f_help').css('max-height', $('.scb_f_help_display').width()+80);

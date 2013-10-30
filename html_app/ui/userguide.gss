@@ -28,6 +28,14 @@
 	background-color: #e58986;
 }
 
+.scb_f_ug_green_line{
+	height:2px;
+	width: 672px;
+	right: 0px;
+	position: absolute;
+	background-color: #7dd2ad;
+}
+
 .scb_s_ug_form{
 	background: #f4f6f8;
     color: black;
@@ -53,14 +61,14 @@
 	-webkit-appearance: none;
 	padding-top: 1px;
 	padding-bottom: 1px;
-	bottom: 5px;
+	bottom: 10px;
 	position: relative;
 	background: 0;
 	border: 0;
 }
  .scb_f_ug_down_button{
 	-webkit-appearance: none;
-	bottom: 5px;
+	bottom: 10px;
 	position: relative;
 	background: 0;
 	border: 0;
@@ -90,6 +98,9 @@
 	color: black;
 	margin-left: 10px;
 	margin-right:10px;
+	font-size: 12pt;
+	position: relative;
+	bottom: 9px
 }
 
 .scb_f_help_form > input{
@@ -99,7 +110,7 @@
 	border: none;
 	padding: 6px;
 	position: relative;
-	bottom: 3px;
+	bottom: 9px;
 	right: 3px;
 }
 
@@ -127,6 +138,7 @@
 	position:relative;
 	cursor: move;
 	margin-bottom: 20px;
+	font-size: 24pt;
 }
 
 .scb_f_ug_help_search_bar{

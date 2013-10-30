@@ -133,5 +133,7 @@ body{
 	color:blue;
 	cursor:pointer;
 }
-
+.scb_s_help_sublink>li{
+	cursor: default;
+}
 

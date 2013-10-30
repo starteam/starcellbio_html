@@ -262,16 +262,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					$('body').css('overflow', 'visible');
 					return;
 			}		// callback function for 'NO' button
-		);// 
-//         var r = confirm("");
-//         if (r) {
-//             var model_id = scb.Utils.get_attribute($(this), 'experiment_id');
-//             assignments.selected.experiments.remove(model_id);
-//             assignments.selected.experiments.selected_id = null;
-//             self.show({});
-//         }
+		);
     });
     
+   	//HANDLER FOR CONTACT BUTTON AND IFRAME
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_contact', function (evt) {
     	$(workarea).append(scb_contact.contact({}));
     	scb.utils.off_on(workarea, 'click', '.scb_f_contact_close_button', function () {
@@ -304,31 +298,18 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 							  parent.document.location.reload();
 							  }
 					});
-					  // $.ajax({
-// 						type: 'POST',
-// 						url: 'http://starapp.mit.edu/cgi-bin/feedback/webfeedback.cgi',
-// 						cache: false, 
-// 						crossDomain: true,
-// 						data: $(this).serialize(),
-// 						success: function(responseData, textStatus, jqXHR) {
-// 							alert('post worked');
-// 						},
-// 						error: function (responseData, textStatus, errorThrown) {
-// 							alert('POST failed.');
-// 						}
-// 					});
-// 					return false;
-
 				});
 		});
     });
-
+		//HANDLER FOR USER_GUIDE BUTTON AND IFRAME
 	    scb.utils.off_on(workarea.parent(), 'click', '.scb_f_user_guide', function (evt) {
     	$(workarea).append(scb_userguide.userguide({}));
     	$('.scb_f_ug_down_button').hide();
     	$('.scb_f_ug_up_button').hide();
     	$('.scb_f_ug_search_line').hide();
     	$("#closesearch").hide();
+    	$("#main_popout").hide();
+    	$(".scb_s_ug_home").hide();
     	$('.scb_display_search_count').hide();
     	scb.utils.off_on(workarea, 'click', '.scb_f_ug_close_button', function () {
                 $('.scb_f_ug_help_search_bar').detach();
@@ -345,6 +326,15 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
 			$('.scb_f_ug_help_search_bar').draggable({ handle:'.handel'});
 			
+			$('iframe').contents().click(function(event) {
+				$(".scb_s_ug_home").show();
+				if($('iframe').contents().find("#popout").length >0){
+					$('iframe').contents().find("#popout").hide();
+					$('#main_popout').show();
+				}
+				else
+				$('#main_popout').hide(); 			
+			});
 			$('#search').click(function(){
 					$('iframe').ready(function(){
 						$('.scb_f_ug_down_button').show();
@@ -358,9 +348,35 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 						$('.scb_display_search_count').text($('iframe').contents().find(".scb_display_search_count").text());
 					});
 			});
+			
+			$('.help_search_input').keypress( function(e) {
+				var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+				if(key == 13) {
+					e.preventDefault();
+					console.log($(".help_search_input").val());
+					$('#search').click();
+				}
+			});
+			
+			
+// 			$(".help_search_input").keyup(function(e){
+// 				var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+// 				if(key == 13){
+// 					e.preventDefault();
+// 					$('#search').click();
+// 				}
+// 			});
+			
+			
 			$(".scb_s_ug_home").click(function(){
 				$('iframe').contents().find(".scb_s_ug_home").click();
+				$(".scb_s_ug_home").hide();
 			});
+			
+			$("#main_popout").click(function(){
+				$('iframe').contents().find("#main_popout").click();
+			});
+			
 			$("#closesearch").click(function(){
 				$('.help_search_input').val('');
 				$('.scb_f_ug_down_button').hide();
@@ -368,7 +384,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     			$('.scb_f_ug_search_line').hide();
     			$("#closesearch").hide();
     			$('.scb_display_search_count').hide();
-
+				$(".scb_s_ug_home").click();
 			});
 			
 			$('.scb_f_ug_down_button').click(function(){
@@ -376,9 +392,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
   				$('.scb_display_search_count').text($('iframe').contents().find(".scb_display_search_count").text());
 
   			});
-  	
-  	
-  	
+  			
 			$('.scb_f_ug_up_button').click(function(){
 				$('iframe').contents().find(".scb_f_ug_up_button").click();
   				$('.scb_display_search_count').text($('iframe').contents().find(".scb_display_search_count").text());
@@ -388,6 +402,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 		
     });
 
+	//HANDLER FOR LOGIN BUTTON AND IFRAME
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
         scb.ui.static.MainFrame.ensure_auth_context();
         if (get_courses_result.is_auth) {

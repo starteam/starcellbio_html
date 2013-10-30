@@ -9,6 +9,7 @@ $.get( "ref_library.html", function(data) {
 	var htmlObject = document.createElement('div');
 	htmlObject.innerHTML = data;
 	document.body.innerHTML = data;
+	$('.SCBTOC1Allcaps').after("<br/>");
 	$('.SCBTOC1 > a')[1].href= $('.SCBTOC1 > a')[1].href.replace("Section", '');
 	$('.SCBTOC2').css('margin-left', '25px');
 	$('.SCBTOC3').css('margin-left', '50px');
@@ -21,9 +22,15 @@ $.get( "ref_library.html", function(data) {
 	var main_headersp = $('.SCB-Heading1Allcaps');
 	$(main_headersp).wrap('<div class="heading"><a></a></div>');
 	var subheadersp = $('.SCB-Heading1');
+	var headers3 = $('.SCB-Heading3');
+	var headers4 = $('.SCB-Heading4');
+	var headers5 = $('.SCB-Heading5');
 	var lists = $('ul');
 	$(subheadersp).wrap('<div class = "subheading"><a></a></div>');
-	
+	$(headers3).wrap('<div class = "heading3"></div>');
+	$(headers4).wrap('<div class = "heading4"></div>');
+	$(headers5).wrap('<div class = "heading5"></div>');
+
 	
 	var main_headers = $('.heading');
 	var subheaders = $('.subheading');
@@ -56,8 +63,10 @@ $.get( "ref_library.html", function(data) {
 			}
 			else if(nextN.tagName == 'UL' || nextN.className == 'SCB-Normal'){
 				//nextN.style.display = 'none';
+				console.log('found' + nextN.className);
 				$(nextN.previousElementSibling).append(nextN);
 			}
+			
 			nextN=next;
 		
 		}
@@ -69,9 +78,9 @@ $.get( "ref_library.html", function(data) {
 		$(heading3[x]).parent().attr('name', $(heading3[x]).text().trim().replace(/([A-Z]\.)|[\.\(\)\s\d]/g,''));
 		
 		if($(heading3[x]).text().indexOf('General')> -1)
-			if($(heading3[x]).parent().parent().first().children().first().text().indexOf('Western') > -1)
+			if($(heading3[x]).parent().parent().parent().first().children().first().text().indexOf('Western') > -1)
 					$(heading3[x]).parent().attr('name', 'WB'+$(heading3[x]).parent().attr('name'));
-			if($(heading3[x]).parent().parent().first().children().first().text().indexOf('Flow') > -1 && $(heading3[x]).text().indexOf('Experimental')<-1)
+			if($(heading3[x]).parent().parent().parent().first().children().first().text().indexOf('Flow') > -1 && $(heading3[x]).text().indexOf('Experimental')==-1)
 					$(heading3[x]).parent().attr('name', 'FC'+$(heading3[x]).parent().attr('name'));
 
 
@@ -103,7 +112,17 @@ $.get( "ref_library.html", function(data) {
 		$(anchor_node).css('color', 'black');
 		$(anchor_node).attr('name', $(anchor_node).attr('href').replace(/\#|(ref)/g, ''));
 	}
-}).done(function() { window.location = window.location.href});
+	var back_to_top= document.createElement('a');
+	back_to_top.href = "#";
+	back_to_top.style.color = 'dodgerblue';
+	back_to_top.innerHTML='Back to Top<br/><br/>';
+	$('.subheading').append(back_to_top);
+	var divider = document.createElement('span')
+	divider.className = 'rl_dividing_line';
+	$('.subheading').append(divider);
+	
+	
+}).done(function() { window.hash = window.location.hash});
 
 //toggle visibility of children, not used currently because toggle is made inactive
 function bindToggle(item){

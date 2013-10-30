@@ -8,10 +8,20 @@
 body{
 	background: #e9edf1;
 }
+
+.SCBTOC1Allcaps{
+	text-transform: uppercase;
+	font-size: 20pt;
+}
+.SCBTOC1{
+	font-size: 14pt;
+}
+
 .body{
 	font-family: 'Verdana';
 	background: #f4f6f8;
 	width:920px;
+	padding: 15px;
 }
 .subheading > a{
 	color: #289a7b;
@@ -27,4 +37,25 @@ color: #289a7b;
 .heading > ol{
 	color: black;
 	font-weight:normal;
+}
+
+
+.body > p{
+	margin:0px;
+}
+
+.rl_dividing_line{
+	height: 2px;
+	background-color: #cdcdcd;
+	width:950px;
+	position:absolute;
+	left: 8px;
+}
+
+.SCB-Normal{
+	font-weight:normal;
+}
+
+.SCB-Normalwithtab{
+	font-weight: normal;
 }
