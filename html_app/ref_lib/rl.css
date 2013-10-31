@@ -30,7 +30,7 @@ body{
 color: #289a7b;
 }
 
-.subheading > ol{
+.subheading{
 	font-weight:normal;
 }
 
@@ -39,10 +39,25 @@ color: #289a7b;
 	font-weight:normal;
 }
 
+.heading3 >a >p {
+	margin-left: 100px;
+}
+
+.heading5 >a >p {
+	margin-left: 150px;
+}
+
 
 .body > p{
 	margin:0px;
 }
+
+
+.heading > .subheading > p {
+	text-indent:0px;
+}
+
+
 
 .rl_dividing_line{
 	height: 2px;
@@ -58,4 +73,8 @@ color: #289a7b;
 
 .SCB-Normalwithtab{
 	font-weight: normal;
+}
+
+.body li {
+	text-indent: 0px;
 }

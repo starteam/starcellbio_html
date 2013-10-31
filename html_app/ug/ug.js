@@ -1,16 +1,8 @@
-// $(window).keydown(function(e) {
-//     switch (e.keyCode) {
-//         case 13: searchUG();
-//     }
-// });
-//$('.help_search_input').focus();
-
-
 //hide the native search bar
 $('.scb_f_help_search_bar').hide();
 
 $('.scb_s_ug_home').hide();
-//function to redirect popout link to the new page
+//function to redirect popout link to the new page, NOT USED, code redone in MainFrame for new handler
 function popoutGuide(){
 	//window.open('', '_blank');
 	var popout_string = "";
@@ -30,7 +22,7 @@ function popoutGuide(){
 	var popoutWindow =window.open("full_guide.html#"+popout_string);
 	//the timeout is needed, because the javascript has to load first, 
 	//and then you can use the hash to the anchor
-	setTimeout( function(){popoutWindow.location = "full_guide.html#"+popout_string; }, 20);
+	setTimeout( function(){popoutWindow.location = "full_guide.html#"+popout_string; },50);
 	
 }
 
@@ -106,35 +98,47 @@ $.get( "user_guide.html", function(data) {
 		
 	}
 	$('.scb_s_help_section > span:contains("")').remove()
+	$('.scb_s_help_sublink > span').addClass('scb_s_section_active')
+	
+	
 }); 
 
 
 //Bind a click to the main menu links
 function bindItem(item, ind) {
 		$(item).click(function(){
-			if($('.scb_s_help_link_'+ ind).css('display') != 'none')
-			 	$('.scb_s_help_link_'+ ind).css('display', 'none');
-			 else{
-			 	$('.scb_s_help_link_'+ ind).css('display', 'list-item');
-			 	}
-			$('.scb_s_main_help_link').hide();
-			$(item).css('display', 'inline');
-			$(item).css('cursor', 'pointer');
-			$('.scb_s_help_section').hide();
-			$('.scb_s_help_section_'+ind).show();
-			$('p').css('color', 'black');
-			if($('.scb_f_help_footer').length >0)
-			$('.scb_f_help_footer').remove();
-			else{
-			//add footer code
-			var footer = document.createElement('div')
-			footer.className = 'scb_f_help_footer';
-			footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
-			//footer.style.background = 'rgba(31, 155, 123, .5)'; 
-			footer.style.height = '25px';
-			$('.scb_f_help_display').append(footer);
-			$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width() -15);
+			if($('.scb_s_help_section_'+ind).children().children('li').css('display')=='none'|| $('.scb_s_help_section_'+ind).children('li').css('display')=='none'){
+				$('.scb_s_help_section_'+ind +' span').attr('class', 'scb_s_section_inactive');
+				$(item).children().attr('onclick', 'false');
+				if($('.scb_s_help_link_'+ ind).css('display') != 'none')
+					$('.scb_s_help_link_'+ ind).css('display', 'none');
+			 	else{
+					$('.scb_s_help_link_'+ ind).css('display', 'list-item');
+					}
+				$('.scb_s_main_help_link').hide();
+				$(item).css('display', 'inline');
+				$(item).css('cursor', 'pointer');
+				$('.scb_s_help_section').hide();
+				$('.scb_s_help_section_'+ind).show();
+				$('p').attr('class', 'scb_s_section_inactive');
+
+				if($('.scb_f_help_footer').length >0)
+				$('.scb_f_help_footer').remove();
+				else{
+				//add footer code
+				var footer = document.createElement('div')
+				footer.className = 'scb_f_help_footer';
+				footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
+				//footer.style.background = 'rgba(31, 155, 123, .5)'; 
+				footer.style.height = '25px';
+				$('.scb_f_help_display').append(footer);
+				$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width() -15);
+				}
 			}
+			else{
+				return;
+			}	
+
 		});
 		
 }
@@ -142,12 +146,12 @@ function bindItem(item, ind) {
 //Bind a click to main menu sublinks
 function bindSubItem(item, ind) {
 	$(item).click(function(){
-		if($(item).parent().prev().css('display')!='none' && $(item).children('li').css('display') !='none'){
-			$(item).children().css('color', 'black');
+		if(($(item).parent().prev().css('display')!='none' && $(item).children('li').css('display') !='none')||$(item).parent().prev().css('display')=='none'){
 			return;
 		}
 		else{
-			$(item).children('span').css('color', 'blue');
+			$(item).first().children('span').attr('class', 'scb_s_section_inactive');
+			//$(item).children('span').css('color', 'blue');
 			if($('.scb_s_help_sub_section_'+ ind).css('display') != 'none')
 				$('.scb_s_help_sub_section_'+ ind).css('display', 'none');
 			 else{
@@ -204,7 +208,7 @@ function searchUG(){
 		$( list[list.length-1]).css( "display", 'list-item' );
 	}
 	
-	highlightSearchTerms($('.help_search_input').val(), true, true,null, null)
+	highlightSearchTerms($('.help_search_input').val(), false, true,null, null)
 
 	var display_str = counter+1;
 	
@@ -291,7 +295,7 @@ function mainUG(){
 	$('.scb_f_help a').each(function() {
     	$(this).replaceWith($(this).text());
 	});
-	
+	$('.scb_s_section_inactive').attr('class', 'scb_s_section_active');
 	$('.scb_s_main_help_link').css('display', 'inline');
 	$('.scb_s_help_sublink >span').show();
 	$('li').hide();

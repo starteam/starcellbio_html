@@ -23,12 +23,10 @@ $.get( "ref_library.html", function(data) {
 	$(main_headersp).wrap('<div class="heading"><a></a></div>');
 	var subheadersp = $('.SCB-Heading1');
 	var headers3 = $('.SCB-Heading3');
-	var headers4 = $('.SCB-Heading4');
 	var headers5 = $('.SCB-Heading5');
 	var lists = $('ul');
 	$(subheadersp).wrap('<div class = "subheading"><a></a></div>');
 	$(headers3).wrap('<div class = "heading3"></div>');
-	$(headers4).wrap('<div class = "heading4"></div>');
 	$(headers5).wrap('<div class = "heading5"></div>');
 
 	
@@ -51,19 +49,49 @@ $.get( "ref_library.html", function(data) {
 				nextN.style.textIndent = '50px';
 				var nextL = nextN.nextElementSibling;
 				while(nextL != null && nextL.className!='subheading' && nextL.className!='heading'){
-					nextL.style.marginLeft = '100px';
-					//nextL.style.color = 'red';
-					//nextL.style.display = 'none';
-					var temp = nextL.nextElementSibling;
-					$(nextN).append(nextL);
-					nextL = temp;
+					if(nextL.className=='heading3'){
+						var next3N = nextL.nextElementSibling;
+						while(next3N !=null && next3N.className!='heading3' && next3N.className!='subheading' && next3N.className!='heading'){
+							if(next3N.className == 'heading5'){
+								var next5N = next3N.nextElementSibling;
+								while(next5N !=null && next5N.className!='heading5' && next5N.className!='heading3' && next5N.className!='subheading' && next5N.className!='heading'){
+									console.log('********'+next5N.className+'***********')
+									var temp5=next5N.nextElementSibling;
+									next5N.style.marginLeft = '200px';
+									$(next3N).append(next5N);
+									next5N = temp5;
+									temp3 = temp5;
+								}
+								$(nextL).append(next3N);
+								addHyperlink5(next3N);
+								next3N = temp5;
+							}
+							else{
+								var temp3 = next3N.nextElementSibling;
+								next3N.style.marginLeft = '150px';
+								$(nextL).append(next3N);
+								next3N = temp3;
+							}
+						}
+						$(nextN).append(nextL);
+						addHyperlink(nextL);
+						nextL = temp3;
+					}
+ 					else{
+						var temp = nextL.nextElementSibling;
+						nextL.style.marginLeft = '100px';
+						//nextL.style.color = 'red';
+						//nextL.style.display = 'none';
+						$(nextN).append(nextL);
+						nextL = temp;
+ 					}
 				}
 				next = nextN.nextElementSibling;
 				$(nextN.previousElementSibling).append(nextN);
 			}
-			else if(nextN.tagName == 'UL' || nextN.className == 'SCB-Normal'){
+			else if(nextN.tagName == 'OL' || nextN.className == 'SCB-Normal'){
 				//nextN.style.display = 'none';
-				console.log('found' + nextN.className);
+				//console.log('found' + nextN.className);
 				$(nextN.previousElementSibling).append(nextN);
 			}
 			
@@ -72,33 +100,9 @@ $.get( "ref_library.html", function(data) {
 		}
 	}
 	
-	var heading3 = $('.SCB-Heading3');
-	for(var x=0; x < heading3.length; x++){
-		$(heading3[x]).wrap('<a></a>');
-		$(heading3[x]).parent().attr('name', $(heading3[x]).text().trim().replace(/([A-Z]\.)|[\.\(\)\s\d]/g,''));
-		
-		if($(heading3[x]).text().indexOf('General')> -1)
-			if($(heading3[x]).parent().parent().parent().first().children().first().text().indexOf('Western') > -1)
-					$(heading3[x]).parent().attr('name', 'WB'+$(heading3[x]).parent().attr('name'));
-			if($(heading3[x]).parent().parent().parent().first().children().first().text().indexOf('Flow') > -1 && $(heading3[x]).text().indexOf('Experimental')==-1)
-					$(heading3[x]).parent().attr('name', 'FC'+$(heading3[x]).parent().attr('name'));
-
-
-			
-		
-	}
 	
 	
-		
-	var heading5 = $('.SCB-Heading5');
-	for(var x=0; x < heading5.length; x++){
-		$(heading5[x]).wrap('<a></a>');
-		$(heading5[x]).parent().attr('name', $(heading5[x]).text().trim().replace(/([A-Z]\.)|[\.\(\)\s\d]/g,''));
-		
-		if($(heading5[x]).parent().parent().first().children().first().text().indexOf('Flow') > -1)
-				$(heading5[x]).parent().attr('name', 'FC'+$(heading5[x]).parent().attr('name'));
-
-	}
+	
 
 	//indent bullets
 	for(var x = 0; x < lists.length; x++){
@@ -114,15 +118,46 @@ $.get( "ref_library.html", function(data) {
 	}
 	var back_to_top= document.createElement('a');
 	back_to_top.href = "#";
+	back_to_top.className = "back_to_top";
 	back_to_top.style.color = 'dodgerblue';
 	back_to_top.innerHTML='Back to Top<br/><br/>';
 	$('.subheading').append(back_to_top);
+	$('.heading3').append(back_to_top);
+	$('.heading5').append(back_to_top);
+	$('.heading3 >.heading5').parent().children('.back_to_top').remove();
+	$('.subheading >.heading3').parent().children('.back_to_top').remove();
 	var divider = document.createElement('span')
 	divider.className = 'rl_dividing_line';
 	$('.subheading').append(divider);
 	
 	
 }).done(function() { window.hash = window.location.hash});
+
+function addHyperlink(parent){
+	var element = $(parent).children().first();
+	$(element).wrap('<a></a>');
+	$(element).parent().attr('name', $(element).text().trim().replace(/([A-Z]\.)|[\.\(\)\s\d]/g,''));
+	
+	if($(element).text().indexOf('General')> -1)
+		if($(element).parent().parent().parent().first().children().first().text().indexOf('Western') > -1)
+				$(element).parent().attr('name', 'WB'+$(element).parent().attr('name'));
+		if($(element).parent().parent().parent().first().children().first().text().indexOf('Flow') > -1 && $(element).text().indexOf('Experimental')==-1)
+				$(element).parent().attr('name', 'FC'+$(element).parent().attr('name'));
+
+}
+
+
+function addHyperlink5(parent){
+			
+	var element = $(parent).children().first();
+	$(element).wrap('<a></a>');
+	$(element).parent().attr('name', $(element).text().trim().replace(/([A-Z]\.)|[\.\(\)\s\d]/g,''));
+	
+	if($(element).parent().parent().parent().first().children().first().text().indexOf('Flow') > -1)
+			$(element).parent().attr('name', 'FC'+$(element).parent().attr('name'));
+
+
+}
 
 //toggle visibility of children, not used currently because toggle is made inactive
 function bindToggle(item){

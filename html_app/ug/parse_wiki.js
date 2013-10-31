@@ -60,6 +60,43 @@ $.get( "user_guide.html", function(data) {
 		lists[x].style.marginLeft = '100px';
 		
 	}
+	
+	$('.heading').clone().prependTo('.body').attr('class', 'title');
+	$('.title').children('.subheading').children('ul').remove();
+	$('.title').children('.subheading').children('p').remove();
+	$('.title').children('ul').remove()
+	$('.title > .subheading').attr('class', 'subtitle');
+	$('.subtitle > a').each(function(){  $(this).html($(this).text());});
+	$('.title > .SCB-Normal').remove();
+	$('.body').prepend('<span class="ug_table_of_contents">Table of Contents</span>');
+	
+	$('.title > a').each(function(){
+		$(this).attr('href', '#' +$(this).attr('name')); 
+		$(this).attr('name', '');
+	});
+	
+	$('.subtitle > a').each(function(){
+		$(this).attr('href', '#'+$(this).attr('name')); 
+		$(this).attr('name', '');
+	});
+	
+	
+	
+	var back_to_top= document.createElement('a');
+	back_to_top.href = "#";
+	back_to_top.className = "back_to_top";
+	back_to_top.style.color = 'dodgerblue';
+	back_to_top.innerHTML='Back to Top<br/><br/>';
+	$('.heading').append(back_to_top);
+	$('.subheading').append(back_to_top);
+	$('.heading >.subheading').parent().children('.back_to_top').remove();
+	var divider = document.createElement('span')
+	divider.className = 'ug_dividing_line';
+	$('.subheading').append(divider);
+	
+	
+	
+	
 });
 
 //toggle visibility of children, not used currently because toggle is made inactive

@@ -374,8 +374,25 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			});
 			
 			$("#main_popout").click(function(){
-				$('iframe').contents().find("#main_popout").click();
-			});
+					var popout_string = "";
+					var visible=	$('iframe').contents().find('u:visible');
+					if(visible.length ==1)
+					{	
+						if(!$(visible).attr('class'))
+							popout_string = $('iframe').contents().find('*:visible ').parent('.scb_s_help_sublink').attr('class').split(' ')[1];
+						else
+							popout_string = $(visible).attr('class');
+					}
+					else{
+						popout_string = $($('iframe').contents().find('u:visible')[0]).attr('class');
+					}
+	
+					popout_string = popout_string.replace(/_/g, '-');
+					var popoutWindow =window.open("static/ug/full_guide.html#"+popout_string);
+					//the timeout is needed, because the javascript has to load first, 
+					//and then you can use the hash to the anchor
+					setTimeout( function(){popoutWindow.location = "static/ug/full_guide.html#"+popout_string; },50);
+					});
 			
 			$("#closesearch").click(function(){
 				$('.help_search_input').val('');
