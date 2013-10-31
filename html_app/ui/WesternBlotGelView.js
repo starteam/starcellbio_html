@@ -99,9 +99,18 @@ scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (eleme
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
+    var index = -1
+    for(var i = 0; i < parsed.western_blot.gel_list.list.length; i ++){
+ 		if(parsed.western_blot.gel_list.list[i].id == parsed.western_blot_gel.id){
+ 			index = i;
+ 			break;
+ 		}   	
+    }
     parsed.western_blot.gel_list.remove(parsed.western_blot_gel.id);
     var list = parsed.western_blot.gel_list.list;
-    parsed.western_blot.last_gel = list.length > 0 ? list[0].id : null;
+
+
+    parsed.western_blot.last_gel = list.length > 0 ? list[index -1].id : null;
     parsed.state.view = 'western_blot';
     scb.ui.static.MainFrame.refresh(parsed.state);
 }

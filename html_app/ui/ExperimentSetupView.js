@@ -272,9 +272,9 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 				$(element).attr('href', 'javascript:void(0)');
 				$.jqDialog.content("<div class='scb_s_warning_dialog'><h1>CONFIRM SET-UP</h1><p>Below is your set-up for '"+parsed.experiment.name+"'.<br>"+
 				"Once you run this experiment, you cannot go back and make changes to this experiment's set-up."+
-             "Review the summary of your experimental set-up and then either go back to edit your set-up or click on <b>Confirm Set-Up & Select Technique</b> to run your experiment."+
+             "Review the summary of your experimental set-up and then either go back to edit your set-up or click on <b>Confirm Set-Up & Run</b> to run your experiment."+
              "</p><a class='scb_s_navigation_button scb_f_open_select_technique' href='#view=select_technique&assignment_id="+parsed.assignment.id+"&experiment_id="+parsed.experiment.id+"'"+
-			   "assignment_id='"+parsed.assignment.id+"' experiment_id='"+parsed.experiment.id+"'>CONFIRM SET-UP & SELECT TECHNIQUE &nbsp; &#9654;</a><br/>"
+			   "assignment_id='"+parsed.assignment.id+"' experiment_id='"+parsed.experiment.id+"'>CONFIRM SET-UP & RUN &nbsp; &#9654;</a><br/>"
 				+"<span class='scb_s_navigation_button scb_f_open_experiment_setup' href='#view=experiment_setup&experiment_id="+parsed.experiment.id+"&assignment_id="+parsed.assignment.id+"'>"+
 				"&#9664; &nbsp; EDIT SET-UP</span></div>");
 				$('.scb_f_open_experiment_setup').click( function () {
@@ -286,7 +286,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
         				$('.scb_s_warning_dialog').remove();
         			scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
 				});
- 				$('.scb_s_warning_dialog').css({'margin-top':'0px','font-weight': 'normal', 'margin-right':'0px', 'top':'-104px','font-size': '11pt','overflow': 'visible'});
+ 				$('.scb_s_warning_dialog').css({'margin-top':'50px','font-weight': 'normal', 'margin-right':'0px', 'top':'-104px','font-size': '11pt','overflow': 'visible'});
 				$('.scb_s_warning_dialog').parent().parent().css({'background': 'rgba(0,0,0,0)', 'border':' none'});
 			
 		}

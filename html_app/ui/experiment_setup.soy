@@ -143,7 +143,7 @@ Experiment active area
             <p>Below is your set-up for '{$experiment.name}'.<br>
             
             Once you run this experiment, you cannot go back and make changes to this experiment's set-up.
-             Review the summary of your experimental set-up and then either go back to edit your set-up or click on <b>Confirm Set-Up & Select Technique</b> to run your experiment.
+             Review the summary of your experimental set-up and then either go back to edit your set-up or click on <b>Confirm Set-Up & Run</b> to run your experiment.
 <!--
                 Please carefully review the summary of your experimental setup and then either go back to edit your set-up or click on Confirm Setup &amp; Select Technique to run your experiment.
 -->
@@ -151,7 +151,7 @@ Experiment active area
 			
 			<a class="scb_s_navigation_button scb_f_open_select_technique"
 			   href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>CONFIRM SET-UP & SELECT TECHNIQUE &nbsp; &#9654;</a><br/>
+			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>CONFIRM SET-UP & RUN &nbsp; &#9654;</a><br/>
 			<a class="scb_s_navigation_button scb_f_open_experiment_setup"
 			   href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; EDIT SET-UP
 				</a>
@@ -340,7 +340,7 @@ Experiment active area
     {if $experiment.setup_finished}
     <a class="scb_s_navigation_button scb_f_open_select_technique"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>CONFIRM SET-UP & SELECT TECHNIQUE &nbsp; &#9654;</a><br/>
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>CONFIRM SET-UP & RUN &nbsp; &#9654;</a><br/>
     <a class="scb_s_navigation_button scb_f_open_experiment_design"
        href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; DESIGN EXPERIMENT
         </a>
