@@ -278,15 +278,21 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 				+"<span class='scb_s_navigation_button scb_f_open_experiment_setup' href='#view=experiment_setup&experiment_id="+parsed.experiment.id+"&assignment_id="+parsed.assignment.id+"'>"+
 				"&#9664; &nbsp; EDIT SET-UP</span></div>");
 				$('.scb_f_open_experiment_setup').click( function () {
-					if($('.scb_s_warning_dialog').length >0)
+					if($('.scb_s_warning_dialog').length >0){
 						$('.scb_s_warning_dialog').remove();
+						$('#jqDialog_box').css('display', 'none');
+					}
+					$('#jqDialog_box').css({'background': '#f5f5f5', 'border':' 2px solid #059789'});
 				});
 				$('.scb_f_open_select_technique').click(function(){
-					if($('.scb_s_warning_dialog').length >0)
+					if($('.scb_s_warning_dialog').length >0){
         				$('.scb_s_warning_dialog').remove();
+        				$('#jqDialog_box').css('display', 'none');
+        			}
+        			$('#jqDialog_box').css({'background': '#f5f5f5', 'border':' 2px solid #059789'});
         			scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
 				});
- 				$('.scb_s_warning_dialog').css({'margin-top':'50px','font-weight': 'normal', 'margin-right':'0px', 'top':'-104px','font-size': '11pt','overflow': 'visible'});
+ 				$('.scb_s_warning_dialog').css({'margin-top':'0px','font-weight': 'normal', 'top':'-104px','font-size': '11pt','overflow': 'visible'});
 				$('.scb_s_warning_dialog').parent().parent().css({'background': 'rgba(0,0,0,0)', 'border':' none'});
 			
 		}

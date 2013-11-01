@@ -190,7 +190,7 @@ nav ul li.on {
   position: absolute;
   text-align: left;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: -180px;
   z-index: 999;
   top: 50px;
   right: 0;
