@@ -257,6 +257,7 @@ input[type=radio]:disabled {
   margin-left: 5px;
   margin-top: 28px;
   height: 358px;
+  overflow: hidden;
 }
 .scb_s_facs_gel_tabs {
   width: 640px;
