@@ -419,6 +419,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
             change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider
         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
+        $('.ui-slider-handle').mouseup(function(){ if($('scb_s_wb_exposure_time_value').text() == '1 h') console.log('fix');});
 
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all(workarea, gstate, state);
     }

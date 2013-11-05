@@ -199,7 +199,8 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
         	$('.scb_s_warning_dialog').remove();
         scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
     });
-    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_new_set_up', function(e){
+    scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_create_new_set_up', function(e){
+    	$('.scb_f_experiment_setup_new_set_up').attr('checked', 'checked');
     	$('.scb_s_experiment_setup_new_set_up').css('visibility', 'visible');
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_new_row', function (e) {
@@ -270,9 +271,8 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 			}
 			else{
 				$(element).attr('href', 'javascript:void(0)');
-				$.jqDialog.content("<div class='scb_s_warning_dialog'><h1>CONFIRM SET-UP</h1><p>Below is your set-up for '"+parsed.experiment.name+"'.<br>"+
-				"Once you run this experiment, you cannot go back and make changes to this experiment's set-up."+
-             "Review the summary of your experimental set-up and then either go back to edit your set-up or click on <b>Confirm Set-Up & Run</b> to run your experiment."+
+				$.jqDialog.content("<div class='scb_s_warning_dialog'><h1>CONFIRM SET-UP</h1><p>"+
+				"Once you confirm the set-up of this experiment and run it, you cannot go back to edit this experiment's set-up. To go back and edit your set-up, click <b>EDIT SET-UP</b> or click on <b>CONFIRM SET-UP AND RUN</b> to proceed."+
              "</p><a class='scb_s_navigation_button scb_f_open_select_technique' href='#view=select_technique&assignment_id="+parsed.assignment.id+"&experiment_id="+parsed.experiment.id+"'"+
 			   "assignment_id='"+parsed.assignment.id+"' experiment_id='"+parsed.experiment.id+"'>CONFIRM SET-UP & RUN &nbsp; &#9654;</a><br/>"
 				+"<span class='scb_s_navigation_button scb_f_open_experiment_setup' href='#view=experiment_setup&experiment_id="+parsed.experiment.id+"&assignment_id="+parsed.assignment.id+"'>"+
@@ -292,8 +292,8 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
         			$('#jqDialog_box').css({'background': '#f5f5f5', 'border':' 2px solid #059789'});
         			scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
 				});
- 				$('.scb_s_warning_dialog').css({'margin-top':'0px','font-weight': 'normal', 'top':'-104px','font-size': '11pt','overflow': 'visible'});
-				$('.scb_s_warning_dialog').parent().parent().css({'background': 'rgba(0,0,0,0)', 'border':' none'});
+				$('.scb_s_warning_dialog').parent().parent().css({'background': 'rgba(0,0,0,0)', 'border':' none', 'left': '273.5px'});
+				$('.scb_s_warning_dialog').parent().parent().css('top', (parseInt($('.scb_s_warning_dialog').parent().parent().css('top'))-94)+'px');
 			
 		}
 		

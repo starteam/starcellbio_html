@@ -2,13 +2,49 @@
 
 body {
 
-    position: absolute;
+   #position: absolute;
     background: #f4f6f8;
     top:0px;
     font-family: 'sourcesanspro-bold';
     font-size: 10pt;
-    
+    margin: 50px 0px;
+    padding: 0px;
+    text-align: center;
+    position: relative;
 }
+button{
+	font-family: 'Trebuchet MS, sans-serif';
+	text-transform: uppercase;
+	background-color: #e0e0e0;
+	border: 1px solid #e0e0e0;
+	
+}
+.inlineLabels{
+
+border:0;
+}
+
+input{
+	text-transform: uppercase;
+	background-color: rgb(224; 224; 224); 
+	border: 1px solid rgb(224; 224; 224); 
+	height: 25px;
+}
+
+.auth_submit_button{
+		float:right; 
+		-webkit-appearance:none; 
+		border-radius: 5px; 
+		letter-spacing:1px;
+		text-transform:uppercase;
+		border: 1px solid #e0e0e0; 
+		background: #676767; 
+		height: 30px;
+		color: white;
+		font-size: 10pt; 
+		cursor:pointer;
+}
+
 
 </style>
 
@@ -52,12 +88,12 @@ below:{% endblocktrans %}</p>
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     <div class="buttonHolder">
-      <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-
+      <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a><br/>
+	  <a href="{% url 'account_signup' %}">{% trans "Not a member?" %}</a> <br/><br/>
       <button class="primaryAction auth_submit_button" type="submit" >{% trans "Sign In" %}</button>
     </div>
     	
-    	<h3><a href="{% url 'account_signup' %}">{% trans "Not a member?" %}</a></h3>
+    	
   </fieldset>
 </form>
 

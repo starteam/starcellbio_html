@@ -1568,7 +1568,6 @@ var __usability_test = {
     experiments: {},
     template: {
         instructions: '',
-
         ui: {
             experimental_design: {
                 techniques: [ 'wb' , 'facs' , 'micro']

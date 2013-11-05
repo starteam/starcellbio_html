@@ -36,6 +36,10 @@
 	margin-left:-5px;
 	height:470px;
 }
+.scb_s_assignment_scroll > div{
+	margin-right:10px;
+	margin-left:5px;
+}
 
 .scb_s_assignment_description {
     position: relative;

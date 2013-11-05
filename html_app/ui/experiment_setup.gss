@@ -203,6 +203,12 @@ nav ul li.on{
 	position:relative;
 }
 
+.scb_s_experiment_setup_create_new_set_up{
+	cursor: pointer;
+	
+}
+
+
 .slider_controls > button{
 
 	padding:3px !important;
@@ -236,23 +242,11 @@ nav ul li.on{
 .scb_s_warning_dialog {
     background: #edeef2;
     border: 2px solid #289a7b;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 10px; 
+	overflow: visible;
+	padding: 10px; 
     width:520px;
     height: 220px;
-    position: absolute;
-	text-align: left;
-	margin-left: auto;
-	margin-right: -180px;
-	z-index:999;
-	right: 0;
-	left: 0;
-	margin-top:0px;
-	font-weight: normal;
-	top:-104px;
-	font-size: 11pt;
-	overflow: visible;
+    left:273.5px;
 }
 
 .scb_s_warning>h1, .scb_s_warning_dialog>h1 {

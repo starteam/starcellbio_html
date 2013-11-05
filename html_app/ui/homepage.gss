@@ -116,6 +116,10 @@
 	margin-right:5px;
 }
 
+.scb_s_homepage_see_more_button{
+	cursor: pointer;
+}
+
 
 .scb_s_homepage_new_experiment{
 	left: 750px;

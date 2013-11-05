@@ -232,7 +232,7 @@
   margin-left: 8px;
 }
 .scb_s_western_blot_gel {
-  display: block;
+  display: inline-block;
   vertical-align: top;
   width: 363px;
   height: 288px;

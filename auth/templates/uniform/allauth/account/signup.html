@@ -10,6 +10,40 @@ body {
     
 }
 
+.inlineLabels{
+
+		border:0;
+	}
+	
+.auth_submit_button{
+		float:right; 
+		-webkit-appearance:none; 
+		border-radius: 5px; 
+		letter-spacing:1px;
+		text-transform:uppercase;
+		border: 1px solid #e0e0e0; 
+		background: #676767; 
+		height: 30px;
+		color: white;
+		font-size: 10pt; 
+		cursor:pointer;
+}
+
+
+#div_id_password1{
+	position:relative;
+	left: 46px;
+}
+
+#div_id_email{
+	position:relative;
+	left: 64px;
+}
+.course_code{
+	position: relative;
+	left: 26px;
+}
+
 </style>
 {% load url from future %}
 {% load i18n %}
@@ -30,13 +64,15 @@ body {
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     
- Your instructor should have provided you with a code that you need to enter below to register and use this StarCellBio tool.
+   <div class='course_code'>
+    <label>Course Code* </label>
+    <input name="CC"  placeholder=''/>
+	</div>
+    Your instructor should have provided you with a code that you need to enter below to register and use this StarCellBio tool.
   Please contact your instructor if you have not received this code. 
-    <input name="CC" placeholder=''/>
-
-        
+      
   <div class="buttonHolder">
-      <button class="primaryAction auth_submit_button" type="submit">{% trans "Create Account" %} &raquo;</button>
+      <button class="primaryAction auth_submit_button" type="submit">{% trans "Create Account" %}</button>
     </div>
   </fieldset>
 

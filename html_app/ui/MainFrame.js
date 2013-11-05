@@ -436,30 +436,32 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				content.body.style.fontSize = '90%';
 				content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
 			    var inputs = content.getElementsByTagName('button');
-				$(inputs).css('font-family', 'Trebuchet MS, sans-serif');
-				$(inputs).css('text-transform', 'uppercase');
-				$(inputs).css('background-color','#e0e0e0');
-				$(inputs).css('border','1px solid #e0e0e0');
+ 				$(inputs).css('font-family', 'Trebuchet MS, sans-serif');
 				var fieldset = content.querySelectorAll('fieldset');
-				$(fieldset).css('border', '0');
 				$(fieldset).children().wrap('<p></p>');
 				var texts = content.querySelectorAll('input');
 				$(texts).attr('placeholder', '');
-				$(texts).css({'font-family': 'Trebuchet MS, sans-serif',
-				'text-transform': 'uppercase',
-				'background-color': 'rgb(224, 224, 224)', 
-				'border': '1px solid rgb(224, 224, 224)', 
-				'height': '25px'});
-				var submit = content.getElementsByClassName('auth_submit_button');
-				$(submit).css({'float':'right', '-webkit-appearance':'none', 'border-radius': '5px', 'letter-spacing':'1px',
-				 'text-transform':'uppercase','border': '1px solid #e0e0e0', 'background-color': '#676767', 'border': '1px solid #e0e0e0',
-				 'height': '30px','color': 'white','font-size': '10pt', 'cursor':'pointer'});
-				var iframe = $('.iframe').contents();
+				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
 				
+				var iframe = $('.iframe').contents();
+				iframe.find('input[type="checkbox"]').css('height', '12px');
 				iframe.find('a:contains("member")').click(function(){
 					$('.iframe').load(function(){
 						
 						$('.scb_s_login_form > div').text('SIGN UP');
+					});
+				});
+				iframe.find('a:contains("Password")').click(function(){
+					$('.iframe').load(function(){
+						
+						$('.scb_s_login_form > div').text('RESET PASSWORD');
+					});
+				});
+				
+				iframe.find('a:contains("Back")').click(function(){
+					$('.iframe').load(function(){
+						
+						$('.scb_s_login_form > div').text('SIGN IN');
 					});
 				});
 				

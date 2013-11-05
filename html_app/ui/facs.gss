@@ -27,8 +27,9 @@
 }
 
 .scb_s_facs_choose_samples_order{
-	border-bottom: 2px solid gray;
-	min-height: 275px;
+	border-bottom: 1px solid #e0e0e0;
+	box-shadow: 0 3px 3px -3px black;
+	min-height: 289px;
 }
 
 .scb_s_facs_chart_yaxis {
@@ -370,7 +371,7 @@ input[type=radio]:disabled{
 	bottom:0;
     margin-left:80px !important;
     margin-right:20px !important; 
-    margin-bottom:70px !important;
+    margin-bottom:61px !important;
 
 }
 
@@ -390,8 +391,13 @@ input[type=radio]:disabled{
     border-left: 1px solid #e0e0e0;
     padding-left: 6px;
     overflow-y: scroll;
+    overflow-x: hidden;
     font-family: sourcesanspro-regular;
     font-size:12pt;
+}
+
+.scb_s_facs_samples_table_td > input[type=radio]{
+	cursor:pointer;
 }
 
 .scb_f_facs_tools_start_analysis {
@@ -416,7 +422,7 @@ input[type=radio]:disabled{
 .scb_s_facs_tools_analyze_data {
     border: 1px solid #80d1ae;
     margin-top: 10px;
-    margin-left: 4px;
+    margin-left: 3px;
     overflow: scroll;
     border-radius: 5px;
     border-spacing: 0;
