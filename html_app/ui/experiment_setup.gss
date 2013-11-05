@@ -237,8 +237,6 @@ nav ul li.on{
   width:100%;
   position: relative;
 }
-
-
 .scb_s_warning_dialog {
     background: #edeef2;
     border: 2px solid #289a7b;

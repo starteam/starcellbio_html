@@ -270,6 +270,11 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 				event.preventDefault();
 			}
 			else{
+				var mask = document.createElement('div');
+				mask.className='overlay';
+				$(mask).css({'width': '100%','height': '100%','position': 'absolute', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
+				$('body').prepend(mask);
+
 				$(element).attr('href', 'javascript:void(0)');
 				$.jqDialog.content("<div class='scb_s_warning_dialog'><h1>CONFIRM SET-UP</h1><p>"+
 				"Once you confirm the set-up of this experiment and run it, you cannot go back to edit this experiment's set-up. To go back and edit your set-up, click <b>EDIT SET-UP</b> or click on <b>CONFIRM SET-UP AND RUN</b> to proceed."+
@@ -280,6 +285,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 				$('.scb_f_open_experiment_setup').click( function () {
 					if($('.scb_s_warning_dialog').length >0){
 						$('.scb_s_warning_dialog').remove();
+						$(mask).remove();
 						$('#jqDialog_box').css('display', 'none');
 					}
 					$('#jqDialog_box').css({'background': '#f5f5f5', 'border':' 2px solid #059789'});
@@ -287,6 +293,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 				$('.scb_f_open_select_technique').click(function(){
 					if($('.scb_s_warning_dialog').length >0){
         				$('.scb_s_warning_dialog').remove();
+        				$(mask).remove();
         				$('#jqDialog_box').css('display', 'none');
         			}
         			$('#jqDialog_box').css({'background': '#f5f5f5', 'border':' 2px solid #059789'});

@@ -28,8 +28,19 @@
 
 .scb_objective_design{
 	margin-top:18px;
+	background: gray !important;
+	background-image: none !important;
+	color: white !important;
+	width: 28px !important;
+	height: 28px !important;
+	font-size: 10pt !important;
+	
+	
 }
 
+.scb_objective_design>div{
+	padding:0px;
+}
 
 .scb_s_experiment_design_view {
     background-color: #f4f6f8;
@@ -163,8 +174,13 @@
 
 }
 
-.scb_s_experiment_design_technique:hover {
-    position: relative;
+.scb_s_experiment_design_technique{
+	width: 200px;
+	height:150px;
+}
+
+.scb_s_experiment_design_technique_micro:hover, .scb_s_experiment_design_technique_flow:hover, .scb_s_experiment_design_technique_wb:hover{
+	position: relative;
     border-color:#B9B9B9;
     background: white;
     border-width: 3px;
@@ -173,3 +189,4 @@
     padding-right: 16px;
     padding-bottom:4px;
 }
+

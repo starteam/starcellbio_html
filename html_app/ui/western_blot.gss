@@ -369,6 +369,12 @@
 }
 
 
+.scb_s_western_blot_choose_gel_type > input{
+	cursor: pointer;
+}
+
+
+
 .scb_s_western_blot_choose_samples_list_item {
 	cursor: pointer;
 }
@@ -445,11 +451,11 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 	opacity:0.5;
 }
 .scb_s_western_blot_load_marker {
-        text-align: center;
-        margin-left: 22px;
+    text-align: center;
+    margin-left: 22px;
     background-color: #676767;
     background-image: none;
-    border: 1px solid #e0e0e0;
+    border: none;
     border-radius: 5pt;
     width: 140px;
     height: 30px;
