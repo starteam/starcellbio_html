@@ -20,13 +20,13 @@
 }
 .scb_s_western_blot_blot_and_develop {
   position: absolute;
-  top: 254px;
+  top: 252px;
   min-width: 160px;
   width: 160px;
 }
 .scb_s_western_blot_reprobe {
   position: absolute;
-  top: 254px;
+  top: 252px;
   width: 150px;
 }
 .scb_f_slider {
@@ -133,7 +133,7 @@
   display: inline-block;
   margin-right: 15px;
   background: #ebebeb;
-  right: 5px;
+  right: 3px;
 }
 .scb_f_wb_exposure_slider>.ui-slider-range {
   height: 3px;
