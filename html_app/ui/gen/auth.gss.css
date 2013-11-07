@@ -4,7 +4,7 @@
   background: #f4f6f8;
   border-radius: 5px;
   padding: 10px;
-  height: 286px;
+  height: 322px;
   width: 398px;
   border-bottom-right-radius: 9px;
   border-bottom-left-radius: 9px;
@@ -38,6 +38,7 @@
   letter-spacing: .5px;
 }
 .scb_s_login_dialog, .scb_s_logout_dialog, .scb_s_signup_dialog {
+  z-index: 99;
   position: absolute;
   background: white;
   border-radius: 13px;
@@ -46,7 +47,7 @@
   margin-right: 400px;
   margin-top: 200px;
   padding: 10px;
-  height: 339px;
+  height: 375px;
   width: 406px;
   top: 0;
   font-family: 'sourcesanspro-bold';

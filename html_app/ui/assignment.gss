@@ -74,7 +74,7 @@
 .scb_s_assignment_description>.scb_f_open_experiment {
     position: absolute;
     bottom: 5px;
-    right: 5px
+    right: 5px;
 }
 
 .scb_s_assignment_title {

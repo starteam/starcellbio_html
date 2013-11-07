@@ -434,9 +434,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				var iframe = document.getElementsByTagName('iframe')[0];
 				var content = (iframe.contentDocument || iframe.contentWindow);
 				content.body.style.fontSize = '90%';
-				content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
+				content.body.style.fontFamily = 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif';
 			    var inputs = content.getElementsByTagName('button');
- 				$(inputs).css('font-family', 'Trebuchet MS, sans-serif');
+ 				$(inputs).css('font-family', 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
 				var fieldset = content.querySelectorAll('fieldset');
 				$(fieldset).children().wrap('<p></p>');
 				var texts = content.querySelectorAll('input');
@@ -444,24 +444,25 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
 				
 				var iframe = $('.iframe').contents();
+				//iframe.find('body').css({'font-family':'sourcesanspro-bold'});
 				iframe.find('input[type="checkbox"]').css('height', '12px');
-				iframe.find('a:contains("member")').click(function(){
+				iframe.find('a:contains("Member")').click(function(){
 					$('.iframe').load(function(){
 						
-						$('.scb_s_login_form > div').text('SIGN UP');
+						$('.scb_s_login_form > div').text('Sign Up');
 					});
 				});
 				iframe.find('a:contains("Password")').click(function(){
 					$('.iframe').load(function(){
 						
-						$('.scb_s_login_form > div').text('RESET PASSWORD');
+						$('.scb_s_login_form > div').text('Reset Password');
 					});
 				});
 				
 				iframe.find('a:contains("Back")').click(function(){
 					$('.iframe').load(function(){
 						
-						$('.scb_s_login_form > div').text('SIGN IN');
+						$('.scb_s_login_form > div').text('Sign In');
 					});
 				});
 				
@@ -485,11 +486,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context: context
     });
     self.sections.assignments = new scb.ui.AssignmentsView({
-        workarea: workarea,
-        context: context
-    });
-	
-	self.sections.profile = new scb.ui.ProfileView({
         workarea: workarea,
         context: context
     });
@@ -571,20 +567,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.MainFrame.update_hash(state);
             self.sections.assignments.show({
-                workarea: workarea,
-                assignments: assignments
-            });
-        }
-        if (state.view == 'profile') {
-            if (!parsed.assignment) {
-                state.assignment_id = assignments.selected_id ? assignments.selected_id : get_courses_result.is_selected;
-                state.onhashchange = false;
-                self.show(state);
-                return;
-            }
-            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
-            scb.ui.static.MainFrame.update_hash(state);
-            self.sections.profile.show({
                 workarea: workarea,
                 assignments: assignments
             });

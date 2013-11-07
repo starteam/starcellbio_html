@@ -7,49 +7,70 @@ body {
     top:0px;
     font-family: 'sourcesanspro-bold';
     font-size: 10pt;
+    color:#007bb5;
     
 }
 
 .inlineLabels{
+margin-left: -10px;
+border:0;
+}
 
-		border:0;
-	}
+
+input{
+	height: 31px;
+	clear: left;
+}
 	
 .auth_submit_button{
 		float:right; 
 		-webkit-appearance:none; 
-		border-radius: 5px; 
+		border-radius: 8px; 
 		letter-spacing:1px;
 		text-transform:uppercase;
-		border: 1px solid #e0e0e0; 
-		background: #676767; 
-		height: 30px;
+		background: #68bfa2; 
+		height: 27px;
 		color: white;
-		font-size: 10pt; 
+		font-size: 9pt; 
 		cursor:pointer;
+		position:relative;
+		bottom: 8px;
+		padding-left: 13px;
+		padding-right: 9px;
+		top:1px;
+		border: 0;
 }
 
-
-#div_id_password1{
-	position:relative;
-	left: 46px;
-}
-
-#div_id_email{
-	position:relative;
-	left: 64px;
-}
-.course_code{
+.auth_submit_button > div{
 	position: relative;
-	left: 26px;
+	top: 2px;
 }
+
+#div_id_email > label, #div_id_password1 > label, #div_id_password2 > label, .course_code > label{
+	color: #007bb5;
+	font-size: 9pt;
+	letter-spacing: 1px;
+	font-weight: bold;
+	float: left;
+	display:block;
+	margin-bottom: 5px;
+}
+
+#div_id_email > input, #div_id_password1 > input, #div_id_password2 > input, .course_code > input{
+
+	display: block;
+	width: 373px;
+	box-shadow: inset 1px 1px 4px 0px gray;
+}
+
+
 
 </style>
 {% load url from future %}
 {% load i18n %}
 {% load uni_form_tags %}
-
-<b>REGISTER FOR A STUDENT ACCOUNT</b>
+Your instructor should have provided you with a code that you need to enter below to register and use this StarCellBio tool.
+  Please contact your instructor if you have not received this code. 
 {% block content %}
 
 <!-- 
@@ -65,11 +86,10 @@ body {
     {% endif %}
     
    <div class='course_code'>
-    <label>Course Code* </label>
+    <label>COURSE CODE </label>
     <input name="CC"  placeholder=''/>
 	</div>
-    Your instructor should have provided you with a code that you need to enter below to register and use this StarCellBio tool.
-  Please contact your instructor if you have not received this code. 
+    
       
   <div class="buttonHolder">
       <button class="primaryAction auth_submit_button" type="submit">{% trans "Create Account" %}</button>
@@ -84,4 +104,11 @@ body {
 
 {% endblock %}
 
+
+<script>
+document.getElementById('div_id_email').children[0].textContent='E-MAIL';
+document.getElementById('div_id_password1').children[0].textContent='PASSWORD';
+document.getElementById('div_id_password2').children[0].textContent='PASSWORD (AGAIN)';
+
+</script>
 

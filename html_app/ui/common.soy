@@ -38,7 +38,7 @@
     <a class='scb_s_assignment_step_link' href='#view=assignments'>
         ASSIGNMENTS
     </a>
-    <img src='images/header/scb_navigation_arrow.png' alt=''>
+    <!-- img src='images/header/scb_navigation_arrow.png' alt='' -->
     {/if}
     {if $step > 1 or $last_step >1}
     <a class='scb_s_assignment_step_link {if $step == 2}scb_s_assignment_step_link_active{/if}'
@@ -51,14 +51,18 @@
         	{$assignment_name}
 <!--         {/if} -->
     </a>
+<!-- 
     <img src='images/header/scb_navigation_arrow.png' alt=''>
+ -->
     {/if}
     {if $step > 2 or $last_step > 2}
     <a class='scb_s_assignment_step_link {if $step == 3}scb_s_assignment_step_link_active{/if}'
        href='#view=experiment_design&assignment_id={$aid}&experiment_id={$eid}'>
         DESIGN
     </a>
+<!-- 
     <img src='images/header/scb_navigation_arrow.png' alt=''>
+ -->
 
     <div class='scb_s_assignment_step_experiment_block'>
         <img class='scb_s_assignment_step_experiment_box' src='images/header/exp_name_box.png' alt=''>
@@ -94,14 +98,18 @@
        href='#view=experiment_setup&assignment_id={$aid}&experiment_id={$eid}'>
         SETUP
     </a>
+<!-- 
     <img src='images/header/scb_navigation_arrow.png' alt=''>
+ -->
     {/if}
     {if $step > 4 or $last_step > 4}
     <a class='scb_s_assignment_step_link {if $step == 5}scb_s_assignment_step_link_active{/if}'
        href='#view=select_technique&assignment_id={$aid}&experiment_id={$eid}'>
         TECHNIQUES
     </a>
+<!-- 
     <img src='images/header/scb_navigation_arrow.png' alt=''>
+ -->
     {/if}
     {if $step > 5 or $last_step > 5}
     	{let $tview} 
@@ -180,7 +188,9 @@
        href='#view={$tview}&assignment_id={$aid}&experiment_id={$eid}&{$tparam}={$tid}'>
         {$tname}
     </a>
+<!-- 
     <img src='images/header/scb_navigation_arrow.png' alt=''>
+ -->
     {/if}
 
 </div>

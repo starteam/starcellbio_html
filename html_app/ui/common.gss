@@ -364,17 +364,16 @@ div#main {
 }
 
 .scb_s_assignment_step {
-    background: #69a996;
-    color: white;
+    background: #d5dce4;
+    color: #2c6596;
     width: 960px;
-    height: 25px;
+    height: 70px;
     position: relative;
     text-transform:uppercase;
-    @mixin gradient(top,#80d1ae,#189689,#189689);
-
+	box-shadow: inset 0 6px 17px -2px gray;
 }
 .scb_s_assignment_step > img {
-    height:24px;
+    height:69px;
     top: 1px;
     margin-left: -11px;
     margin-right:-13px;
@@ -382,7 +381,7 @@ div#main {
 }
 .scb_s_assignment_step_link {
     width:140px;
-    height:15px;
+    height:60px;
     padding:5px;
     padding-left:10px;
     padding-right:10px;
@@ -390,14 +389,14 @@ div#main {
     letter-spacing: 1px;
     font-size:11pt;
     text-decoration: none;
-    color:white;
+    color:#2c6596;
     overflow: hidden;
     display:inline-block;
     vertical-align: top;
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-top: -2px;
-    font-family: 'sourcesanspro-regular'
+    font-family: 'sourcesanspro-bold'
 }
 
 .scb_s_assignment_step_link_active {
@@ -414,7 +413,7 @@ div#main {
     border-radius: 5pt;
     height: 30px;
     color: white;
-    letter-space:1px;
+    letter-spacing:1px;
     font-size: 11pt;
     font-family: 'sourcesanspro-regular';
     cursor:pointer;

@@ -10,7 +10,13 @@
     width: 960px;
     background-color: #f4f6f8;
 }
-
+.scb_s_assignments_container{
+	background: white;
+	padding-bottom: 15px;
+	box-shadow: 0 4px 14px -1px gray;
+	position: relative;
+	z-index: 1;
+}
 .scb_s_abstract {
     margin-top: 8px;
     text-align: justify;
@@ -24,13 +30,49 @@
     padding: 10px;
     width:634px;
     position: relative;
-    padding-left:20px;
-    padding-top:17px;
     font-size:10pt;
     @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
     padding-bottom:50px;
 }
 
+.scb_s_assignments_description>.scb_f_open_experiment {
+    bottom: 5px;
+    float:right;
+}
+
+.scb_s_assignments_slider_header{
+	display: inline-block;
+	width: inherit;
+	height: 40px;
+}
+
+
+.scb_s_assignments_slider_header > div{
+	display: inline-block;
+}
+
+.scb_s_assignment_header_img_right{
+	position:relative;
+	margin-right: -10px;
+}
+
+.scb_s_assignment_header_img_left{
+	position:relative;
+	margin-left: -10px;
+}
+
+
+.scb_assignments_header_link_wrapper{
+	width: 120px;
+	height: 17px;
+	background: #3a90c1;
+	vertical-align: top;
+	color: white;
+	padding: 12px 0px 11px 16px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 .scb_s_abstract_title_underline{
 	width: 664px;
 }
@@ -41,9 +83,16 @@
 }
 
 .scb_s_abstract_title {
-    color: #00abe6;
-    font-size:14pt;
-    font-family: 'sourcesanspro-semibold';
+    color: white;
+	background: #6cc6a5;
+	font-size: 14pt;
+	padding: 8px 0 6px 17px;
+	font-family: 'sourcesanspro-semibold';
+	margin-top: -10px;
+	margin-left: -10px;
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+	margin-right: -10px;
 }
 
 .assignments_block {
@@ -62,7 +111,6 @@
 }
 
 .scb_s_assignment_sidebar_link {
-    font-weight:bold;
     text-decoration: none;
     color:black;
 }
@@ -87,35 +135,50 @@
     display: inline-block;
     vertical-align: top;
     width:247px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #e0e0e0;
-    border-radius: 5px;
     margin-right:10px;
     padding:5px;
-    background-color: white;
+    background-color: #f5f6f8;
     margin-left:13px;
-    border-top-width:8px;
-    box-shadow: 0 0 3px black;
+    border: 1px solid #d8eee7;
+	box-shadow: 0 0 0 0;
+	border-radius: 8px;
 }
 
 .scb_s_assignments_sidebar > ul {
     margin-left:-28px;
     list-style:none;
-    margin-top: 0%;
+    margin-top: 22px;
 
 }
 .scb_s_assignments_sidebar_title {
     font-size: 12pt;
-    font-family: "sourcesanspro-bold";
+    padding: 11px 0px 6px 17px;
+    font-family: "sourcesanspro-semibold";
     text-align: left;
-    margin-left:12px;
-    margin-bottom: 0%;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	color: white;
+	background: #6cc6a5;
+	margin: -5px;
+}
+
+.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid #6cc6a5;
+	left: 121px;
+	position: absolute;
+	
 }
 
 .scb_s_assignments_sidebar_name {
-    font-size: 12px;
+    font-size: 10pt;
     margin-top: 3px;
+    font-family: 'sourcesanspro-semibold';
+    position: relative;
+    left: 10px;
 }
 .assignement_assignement_description {
     font-size: 10px;
@@ -154,8 +217,10 @@ ul > .scb_s_assignment_experiment_list_item_new_experiment {
 }
 
 .scb_s_assignments_sidebar_course {
-    font-size:12pt;
+    font-size:14pt;
     font-weight: bold;
+    font-family: 'sourcesanspro-semibold';
+	color: #007cb5;
 }
 
 .scb_s_assignments_sidebar_course_block {

@@ -496,8 +496,10 @@
 .scb_s_footer {
     padding: 20px;
     width: 920px;
-    background-color: #F4F6F8;
+    background-color: #d5dce4;
     display: block;
+    position:relative;
+    z-index: 0;
 }
 
 .scb_s_homepage_footer_divider {

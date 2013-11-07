@@ -5,7 +5,7 @@ var __assignment2 = {
     id: 'assignment_2',
     course:'7.02',
     course_name: 'MIT Course 7.02',
-    name: '7.02 StarCellBio Prototype Assignment',
+    name: 'StarCellBio Prototype Assignment',
     description: 'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
     experiments: {},
     template: {
