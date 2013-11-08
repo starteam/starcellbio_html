@@ -25,6 +25,14 @@
 
 }
 
+.scb_s_experiment_design_container{
+	background: white;
+	padding-bottom: 51px;
+	box-shadow: 0 4px 14px -1px gray;
+	position: relative;
+	z-index: 1;
+}
+
 
 .scb_objective_design{
 	margin-top:18px;
@@ -66,13 +74,11 @@
     font-size:10pt;
 }
 .scb_s_design_description>.scb_f_open_assignment {
-    position: absolute;
     bottom: 5px;
     left: 5px;
 }
 
 .scb_s_design_description>.scb_f_open_experiment_setup {
-    position: absolute;
     bottom: 5px;
     right: 5px
 }

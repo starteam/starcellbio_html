@@ -11,7 +11,7 @@ scb_assignment.main = function(opt_data, opt_sb) {
   scb_common.assignment_step({step: 2, last_step: opt_data.last_step, assignment_name: opt_data.assignment.name, assignment: opt_data.assignment}, output);
   scb_assignment.display_assignment(opt_data, output);
   scb_assignment.display_details(opt_data, output);
-  scb_homepage.display_footer({global_template: opt_data.t, assignment: opt_data.assignment}, output);
+  scb_homepage.display_footer({global_template: opt_data.t}, output);
   output.append('</div>');
   return opt_sb ? '' : output.toString();
 };

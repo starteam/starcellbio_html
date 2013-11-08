@@ -63,13 +63,14 @@
 <!-- 
     <img src='images/header/scb_navigation_arrow.png' alt=''>
  -->
+<!-- 
 
     <div class='scb_s_assignment_step_experiment_block'>
         <img class='scb_s_assignment_step_experiment_box' src='images/header/exp_name_box.png' alt=''>
 
         <div class='scb_s_assignment_step_experiment'>
         	
-            <!-- &#8988; --> <!-- {$experiment_name}  -->
+            <!~~ &#8988; ~~> <!~~ {$experiment_name}  ~~>
             <label class="custom-select">
 
 				<select onchange="location = this.options[this.selectedIndex].value;">
@@ -92,6 +93,8 @@
         </div>
         <img class='scb_s_assignment_step_experiment_line' src='images/header/exp_name_line.png' alt=''>
     </div>
+ -->
+
     {/if}
     {if $step > 3 or $last_step >3}
     <a class='scb_s_assignment_step_link {if $step == 4}scb_s_assignment_step_link_active{/if}'
@@ -197,12 +200,36 @@
 {/if}
 {/template}
 /**
-* Progress bar
-* @param step
+Progress bar
+@param step
+@param assignment
+@param experiment
 */
 {template .experiment_step}
 <div class='scb_s_experiment_step'>
-	<div class = 'scb_s_experiment_step_progress_label'> YOUR PROGRESS</div>
+	<div class = 'scb_s_experiment_step_progress_label'> {$assignment.name}</div>
+	
+		<div class='scb_s_assignment_step_experiment'>
+			
+				<label class="custom-select">
+
+					<select onchange="location = this.value;">
+						{foreach $e in $assignment.experiments.list}
+							<option value='#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$e.id}' model_id='{$assignment.id}' sub_model_id='{ $experiment.id }' 
+								{if  $experiment.id  == $e.id}selected="selected"{/if}> 
+								{$e.name}&nbsp;&nbsp;
+								
+<!-- 								{if $experiment.id == $e.id}&#x25BC;{/if} -->
+							</option>
+						{/foreach}
+					</select>
+					
+				</label>
+			</div>
+	
+	<br/>
+	<br/>
+	
     <div class='scb_s_experiment_step_vertical_line_1'></div>
     <div class='scb_s_experiment_step_vertical_line_2'></div>
     <div class='scb_s_experiment_step_vertical_line_3'></div>
@@ -239,37 +266,9 @@
 			<div class='scb_s_experiment_step_text scb_s_experiment_step_text_after'>PERFORM TECHNIQUE</div>
 		</div>
     </div>
-<!-- 
-    <div class="scb_s_experiment_step_div">
-        <div class='scb_s_experiment_step_circle_holder '>
-<!~~ 
-            <div class='scb_s_experiment_step_number'>2</div>
- ~~>
-        </div>
-    </div>
-    <div class="scb_s_experiment_step_div">
-        <div class='scb_s_experiment_step_circle_holder '>
-<!~~ 
-            <div class='scb_s_experiment_step_number'>3</div>
- ~~>
-        </div>
-    </div>
-    <div class="scb_s_experiment_step_div">
-        <div class='scb_s_experiment_step_circle_holder '>
-<!~~ 
-            <div class='scb_s_experiment_step_number'>4</div>
- ~~>
-        </div>
-    </div>
-    <div class="scb_s_experiment_step_div">
-        <div class='scb_s_experiment_step_circle_holder '>
-<!~~ 
-            <div class='scb_s_experiment_step_number'>5</div>
- ~~>
-        </div>
-    </div>
- -->
 </div>
+
+
 {/template}
 
 /**

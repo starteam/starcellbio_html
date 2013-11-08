@@ -58,7 +58,6 @@ Assignment footer
 
 /**
 Assignment description
-@param global_template template
 @param assignments
 */
 {template .display_assignment}
@@ -68,42 +67,29 @@ Assignment description
     	<div class='scb_s_abstract_title'>
             {$assignments.selected.name |noAutoescape}
         </div>
-
+		
 	<div class='scb_s_assignments_slider_header'>
 		<img class = 'scb_s_assignment_header_img_left' src='../../images/header/scb_left_arrow_temp.jpg'>
-		  <div class='scb_assignments_header_link_wrapper'>Goal</div>
-		  <div class='scb_assignments_header_link_wrapper'>Introduction</div>
+		
+		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview scb_assignments_header_link_selected' value='assignment_overview'>Overview</div>
+		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_detail' value='assignment_detail'>Assignment Description</div>
 			 
-		  <div class='scb_assignments_header_link_wrapper'>Questions</div>
-		  <div class='scb_assignments_header_link_wrapper'>Reference Information</div>
+<!-- 
+		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_setup'>Experiment Setup</div>
+		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_refinfo'>Reference Information</div>
+ -->
 		<img class = 'scb_s_assignment_header_img_right'  src='../../images/header/scb_right_arrow_temp.jpg'>
 	</div>
         <div class='scb_s_assignment_scroll'>
-        {$assignments.selected.description |noAutoescape}        
-        {$assignments.selected.template.instructions |noAutoescape}
+        <div class='scb_s_display_section' value='assignment_overview'>
+        {$assignments.selected.description |noAutoescape}</div>        
+		<div class='scb_s_display_section' value='assignment_detail'>
+        {$assignments.selected.template.instructions |noAutoescape}</div>
         </div>
     <br/>
     
         <a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignments.selected.id}"> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>
-<!-- 
-        <a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignments&assignment_id={$assignments.selected.id}">&#9664; &nbsp; ASSIGNMENTS</a>
- -->
-	
-<!-- 
-     <div class="scb_s_abstract_title">
-            {$assignments.selected.name |noAutoescape}
 
-       </div><br/>
-        {$assignments.selected.description |noAutoescape}
-
-    <a class="scb_f_select_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignments.selected_id}">COMPLETE ASSIGNMENT &nbsp; &#9654;</a>
-
- --><!-- 
-
- {else}
-        	{$global_template.app_description |noAutoescape}
- -->
-	  
 	    {/if}
 </div>
 {/template}
@@ -124,14 +110,6 @@ Assignment assignments
         <li class='scb_s_assignments_sidebar_name'>
             <a href='#view={if $assignment.id == $assignments.selected_id}assignment{else}assignments{/if}&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}</a>
         </li>
-<!-- 
-        {if $assignment.id == $assignments.selected_id}
-            {call .display_experiments}
-            {param experiments:$assignment.experiments/}
-            {param assignment:$assignment/}
-            {/call}
-        {/if}
- -->
         {/foreach}
         </div>
         {/foreach}

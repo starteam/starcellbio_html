@@ -43,10 +43,16 @@ Experiment active area
 @param experiment
 */
 {template .display_details}
+<div class='scb_s_experiment_design_container'>
+
 <div class='scb_s_design_description'>
+		        <a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignment.id}"> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>
+
         {call scb_common.experiment_step}
             {param step:1/}
-        {/call}
+            {param assignment: $assignment/}
+            {param experiment: $experiment/}
+        {/call} <br/>
             <!--<div class='experiment_name_header'>Experiment name:</div>-->
             <input type='text' class='scb_s_experiment_name_edit' maxlength="15" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'>
         <br/>
@@ -93,6 +99,7 @@ Experiment active area
     <br/>
         <a class="scb_f_open_experiment_setup scb_s_navigation_button" href="#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}">EXPERIMENT SETUP &nbsp; &#9654;</a><br/>
         <a class="scb_f_open_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignment.id}">&#9664; &nbsp; COMPLETE ASSIGNMENT</a>
+</div>
 </div>
 {/template}
 

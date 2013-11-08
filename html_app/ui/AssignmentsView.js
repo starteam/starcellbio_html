@@ -4,6 +4,19 @@ if (typeof (scb.ui ) == 'undefined') {
     scb.ui = {};
 }
 
+scb.ui.static = scb.ui.static || {};
+scb.ui.static.AssignmentsView = scb.ui.static.AssignmentsView || {} ;
+
+scb.ui.static.AssignmentsView.register = function(workarea) {
+    scb.utils.off_on(workarea, 'click', '.scb_assignments_header_link_wrapper', function (e) {
+        var section = $(this).attr('value');
+        $('.scb_assignments_header_link_wrapper').removeClass('scb_assignments_header_link_selected');
+        $(this).addClass('scb_assignments_header_link_selected');
+        $('.scb_s_display_section').hide()
+        $('.scb_s_display_section[value="'+section+'"]').show();
+    });
+};
+
 scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
     var self = this;
     var assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);

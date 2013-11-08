@@ -373,7 +373,7 @@
     </div>
     {if $microscopy.samples_finished}
     {else}
-    <button class='{if $rows_valid > 9}scb_f_microscopy_load_slides {else}scb_f_microscopy_load_slides_short{/if} scb_s_navigation_button' microscopy_id='{$microscopy.id}' 
+    <button class='scb_f_microscopy_load_slides scb_s_navigation_button' microscopy_id='{$microscopy.id}' 
                 assignment_id="{$assignment.id}"
                 experiment_id="{$experiment.id}">LOAD SLIDES
 	</button>

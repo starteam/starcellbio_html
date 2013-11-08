@@ -7,7 +7,7 @@ div#main {
   left: 20px;
   right: 20px;
 }
-.scb_s_navigation_button {
+.scb_s_navigation_button_old {
   padding: 3px 20px;
   min-width: 120px;
   background-position: center;
@@ -30,8 +30,35 @@ div#main {
   background-image: -ms-linear-gradient(top,#81c9f1,#028dde);
   background-image: -o-linear-gradient(top,#81c9f1,#028dde);
 }
+.scb_s_navigation_button {
+  float: right;
+  -webkit-appearance: none;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: #68bfa2;
+  padding-top: 5px;
+  height: 20px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 9pt;
+  font-family: 'sourcesanspro-semibold';
+  cursor: pointer;
+  position: relative;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  background-position: center;
+  bottom: 8px;
+  padding-left: 13px;
+  padding-right: 9px;
+  top: 1px;
+}
 .scb_s_experiment_step {
   position: relative;
+  display: inline-block;
 }
 .scb_s_experiment_step_circle {
   box-shadow: 0 0 6px #a9a9a9;
@@ -196,6 +223,7 @@ div#main {
   font-size: 11pt;
   text-decoration: none;
   color: black;
+  display: inline-block;
   margin-top: -2px;
   font-family: 'sourcesanspro-regular';
 }
@@ -275,15 +303,22 @@ label.custom-select {
   position: relative;
   display: inline-block;
 }
+.custom-select {
+  width: 140px;
+  height: 22px;
+  overflow: hidden;
+  background: url("../images/header/downarrow.jpg") no-repeat right #fff;
+  border: 2px solid #000;
+}
 .custom-select select {
+  background: transparent;
+  width: 268px;
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  height: 22px;
   -webkit-appearance: none;
-  display: inline-block;
-  font: inherit;
-  outline: none;
-  line-height: 1.2;
-  background: #f4f6f8;
-  border: 0 solid #80d1ae;
-  color: black;
 }
 #jqDialog_options>button {
   background-color: #fff;
