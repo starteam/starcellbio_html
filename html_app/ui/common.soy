@@ -38,81 +38,31 @@
     <a class='scb_s_assignment_step_link' href='#view=assignments'>
         ASSIGNMENTS
     </a>
-    <!-- img src='images/header/scb_navigation_arrow.png' alt='' -->
     {/if}
     {if $step > 1 or $last_step >1}
     <a class='scb_s_assignment_step_link {if $step == 2}scb_s_assignment_step_link_active{/if}'
        href='#view=assignment&assignment_id={$aid}'>
-<!-- 
-       	{if $assignments}
-       		{$assignments.selected.name}
-       	{else}
- -->
+
         	{$assignment_name}
-<!--         {/if} -->
     </a>
-<!-- 
-    <img src='images/header/scb_navigation_arrow.png' alt=''>
- -->
     {/if}
     {if $step > 2 or $last_step > 2}
     <a class='scb_s_assignment_step_link {if $step == 3}scb_s_assignment_step_link_active{/if}'
        href='#view=experiment_design&assignment_id={$aid}&experiment_id={$eid}'>
         DESIGN
     </a>
-<!-- 
-    <img src='images/header/scb_navigation_arrow.png' alt=''>
- -->
-<!-- 
-
-    <div class='scb_s_assignment_step_experiment_block'>
-        <img class='scb_s_assignment_step_experiment_box' src='images/header/exp_name_box.png' alt=''>
-
-        <div class='scb_s_assignment_step_experiment'>
-        	
-            <!~~ &#8988; ~~> <!~~ {$experiment_name}  ~~>
-            <label class="custom-select">
-
-				<select onchange="location = this.options[this.selectedIndex].value;">
-					{if $assignments}
-						{foreach $e in $assignments.selected.experiments.list}
-							<option value='#view=experiment_last&assignment_id={$aid}&experiment_id={$e.id}' model_id='{$aid}' sub_model_id='{$eid}' 
-								{if $eid == $e.id}selected="selected"{/if}> {$e.name}&nbsp;&nbsp;{if $eid == $e.id}&#x25BC;{/if}
-							</option>
-						{/foreach}
-					{else}
-						{foreach $e in $assignment.experiments.list}
-							<option value='#view=experiment_last&assignment_id={$aid}&experiment_id={$e.id}' model_id='{$aid}' sub_model_id='{$eid}' 
-								{if $eid == $e.id}selected="selected"{/if}> {$e.name}&nbsp;&nbsp;{if $eid == $e.id}&#x25BC;{/if}
-							</option>
-						{/foreach}
-					{/if}
-					<option class='scb_s_assignment_step_experiment_new_option' value='#view=experiment_design&assignment_id={$aid}' model_id='{$aid}'>+New Experiment</option>
-				</select>
-			</label>
-        </div>
-        <img class='scb_s_assignment_step_experiment_line' src='images/header/exp_name_line.png' alt=''>
-    </div>
- -->
-
     {/if}
     {if $step > 3 or $last_step >3}
     <a class='scb_s_assignment_step_link {if $step == 4}scb_s_assignment_step_link_active{/if}'
        href='#view=experiment_setup&assignment_id={$aid}&experiment_id={$eid}'>
         SETUP
     </a>
-<!-- 
-    <img src='images/header/scb_navigation_arrow.png' alt=''>
- -->
     {/if}
     {if $step > 4 or $last_step > 4}
     <a class='scb_s_assignment_step_link {if $step == 5}scb_s_assignment_step_link_active{/if}'
        href='#view=select_technique&assignment_id={$aid}&experiment_id={$eid}'>
         TECHNIQUES
     </a>
-<!-- 
-    <img src='images/header/scb_navigation_arrow.png' alt=''>
- -->
     {/if}
     {if $step > 5 or $last_step > 5}
     	{let $tview} 
@@ -207,7 +157,9 @@ Progress bar
 */
 {template .experiment_step}
 <div class='scb_s_experiment_step'>
-	<div class = 'scb_s_experiment_step_progress_label'> {$assignment.name}</div>
+	<a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignment.id}"> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>
+
+	<div class = 'scb_s_experiment_step_progress_label'> {$assignment.name}:</div>
 	
 		<div class='scb_s_assignment_step_experiment'>
 			
@@ -229,42 +181,45 @@ Progress bar
 	
 	<br/>
 	<br/>
-	
-    <div class='scb_s_experiment_step_vertical_line_1'></div>
-    <div class='scb_s_experiment_step_vertical_line_2'></div>
-    <div class='scb_s_experiment_step_vertical_line_3'></div>
-    <div class='scb_s_experiment_step_vertical_line_4'></div>
-    <div class='scb_s_experiment_step_vertical_line_5'></div>
-
     <div class="scb_s_experiment_step_div ">
     	
-    	<div class='scb_s_experiment_step_black_bar '>
-    	<div class='scb_s_experiment_step_vertical_line_1_top'></div>
-   		<div class='scb_s_experiment_step_vertical_line_2_top'></div>
-    	<div class='scb_s_experiment_step_vertical_line_3_top'></div>
-    	<div class='scb_s_experiment_step_vertical_line_4_top'></div>
-    	<div class='scb_s_experiment_step_vertical_line_5_top'></div>
-        <div class='scb_s_experiment_step_green_bar ' style='width: 
-
-		{if $step==1}45px;{/if}
-        {if $step==2}135px;{/if}
-        {if $step==3}225px;{/if}
-        {if $step==4}315px;{/if}
-        {if $step==5}440px;{/if}'>
-
+    	<div class='scb_s_experiment_step_main_steps '>
+			<div class='scb_s_experiment_step_labels'>
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step==1 }scb_s_experiment_step_selected{/if}'>
+				
+					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>DESIGN</a>
+					{if $step==1 } 
+				
+					<div class="arrow-down-design"></div>
+					{/if}
+				</div>
+		
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_setup_and_run {if $step==2 or $step==3 }scb_s_experiment_step_selected{/if}'>
+			<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>SETUP & RUN</a>
+					{if $step==2 or $step==3 }
+					<div class="arrow-down-setup"></div>
+					{/if}
+				
+				</div>
+		
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_select_technique {if $step>=3 }scb_s_experiment_step_selected{/if}'>
+				
+				<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>SELECT TECHNIQUE</a>
+					{if $step>=3 }
+					<div class="arrow-down-select"></div>
+					{/if}
+				</div>
+			</div>
         </div>
+        <div class='scb_s_experiment_step_tech_steps '>
+			<div class='scb_s_experiment_step_buttons_title'>Select Your Technique: </div>
+						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_wb {if $step==5 }scb_s_experiment_step_selected{/if}'>Western Blotting</div>
+						<div class=' scb_s_experiment_step_button scb_s_experiment_step_button_facs {if $step==6 }scb_s_experiment_step_selected{/if}'>Flow Cytometry</div>
+						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_micro {if $step==7 }scb_s_experiment_step_selected{/if}'>Microscopy</div>
+
+			
         </div>
-        <div class='scb_s_experiment_step_labels'>
-			<div class='scb_s_experiment_step_text'>DESIGN</div>
-		
-			<div class='scb_s_experiment_step_text scb_s_experiment_step_text_after'>SETUP</div>
-		
-			<div class='scb_s_experiment_step_text scb_s_experiment_step_text_after'>RUN</div>
-		
-			<div class='scb_s_experiment_step_text scb_s_experiment_step_text_after'>SELECT TECHNIQUE</div>
-		
-			<div class='scb_s_experiment_step_text scb_s_experiment_step_text_after'>PERFORM TECHNIQUE</div>
-		</div>
+
     </div>
 </div>
 

@@ -46,30 +46,30 @@ div#main {
 
 .scb_s_navigation_button {
 	
-float: right;
--webkit-appearance: none;
-border-radius: 8px;
-letter-spacing: 1px;
-text-transform: uppercase;
-background: #68bfa2;
-padding-top: 5px;
-height: 20px;
-color: white;
-text-decoration: none;
-text-align: center;
-font-size: 9pt;
-font-family:'sourcesanspro-semibold';
-cursor: pointer;
-position: relative;
-margin-top: 10px;
-margin-left: 5px;
-margin-right: 5px;
-margin-bottom: 5px;
-background-position: center;
-bottom: 8px;
-padding-left: 13px;
-padding-right: 9px;
-top: 1px;
+	float: right;
+	-webkit-appearance: none;
+	border-radius: 8px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	background: #68bfa2;
+	padding-top: 5px;
+	height: 20px;
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	font-size: 9pt;
+	font-family:'sourcesanspro-semibold';
+	cursor: pointer;
+	position:relative;
+	margin-top: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	background-position: center;
+	padding-left: 13px;
+	padding-right: 9px;
+	bottom:8px;
+	top:1px;
 
 }
 
@@ -91,6 +91,22 @@ top: 1px;
     margin-left:2em;
     margin-right:2em;
     @mixin gradient(top,#6e6e6e,#373737,#383838);
+}
+
+
+.scb_s_experiment_step_button{
+	font-family: 'sourcesanspro-regular';
+	color: white;
+    border-radius:5px;
+	background: #d5dce4;
+	margin-right: 10px;
+	height: 24px;
+	padding: 3px 9px 3px 12px;
+}
+.scb_s_experiment_step_buttons_title{
+	font-family:'sourcesanspro-bold';
+	color: #3790c0;
+	padding: 27px 20px 0px 20px;
 }
 
 
@@ -146,182 +162,122 @@ top: 1px;
 
 
 
-.scb_s_experiment_step_vertical_line_1 {
-    position:absolute;
-    width:1px;
-    background-color: black;
-    height:12px;
-    top:56px;
-    left:65px;
-}
-
-.scb_s_experiment_step_vertical_line_2 {
-    position:absolute;
-    width:1px;
-    background-color: black;
-    height:12px;
-    top:56px;
-    left:155px;
-}
-
-
-.scb_s_experiment_step_vertical_line_3 {
-    position:absolute;
-    width:1px;
-    background-color: black;
-    height:12px;
-    top:56px;
-    left:245px;
-}
-
-
-.scb_s_experiment_step_vertical_line_4 {
-    position:absolute;
-    width:1px;
-    background-color: black;
-    height:12px;
-    top:56px;
-    left:335px;
-}
-
-.scb_s_experiment_step_vertical_line_5 {
-    position:absolute;
-    width:1px;
-    background-color: black;
-    height:12px;
-    top:56px;
-    left:425px;
-}
-
-
-.scb_s_experiment_step_vertical_line_1_top {
-    position:absolute;
-    z-index: 5;
-    width:1px;
-    background-color: #777777;
-    height:22px;
-    left:36px;
-}
-
-.scb_s_experiment_step_vertical_line_2_top {
-    position:absolute;
-    width:1px;
-    background-color: #777777;
-    height:22px;
-    left:126px;
-    z-index: 5;
-
-}
-
-
-.scb_s_experiment_step_vertical_line_3_top {
-    position:absolute;
-    width:1px;
-    background-color: #777777;
-    height:22px;
-    left:216px;
-    z-index: 5;
-
-}
-
-
-.scb_s_experiment_step_vertical_line_4_top {
-    position:absolute;
-    width:1px;
-    background-color: #777777;
-    height:22px;
-    left:306px;
-    z-index: 5;
-
-}
-
-.scb_s_experiment_step_vertical_line_5_top {
-    position:absolute;
-    width:1px;
-    background-color: #777777;
-    height:22px;
-    left:396px;
-	z-index: 5;
-
-}
 
 
 .scb_s_experiment_step_progress_label{
-    padding:5px;
-    width: 150px;
-    text-align: center;
-    letter-spacing: 1px;
-    font-size:11pt;
-    text-decoration: none;
-    color:black;
-    display:inline-block;
-    margin-top: -2px;
-    font-family: 'sourcesanspro-regular';
+    padding: 5px;
+	width: 150px;
+	text-align: center;
+	left: 5px;
+	letter-spacing: 1px;
+	font-size: 13pt;
+	vertical-align: middle;
+	text-decoration: none;
+	color: #1e536d;
+	display: inline-block;
+	position: relative;
+	font-family: 'sourcesanspro-bold';
+	bottom: 10px;
 }
 
-
-
-.scb_s_experiment_step_horizontal_line_12 {
-    position:absolute;
-    width:54px;
-    background-color: #80d1ae;
-    height:1px;
-    top:23px;
-    left:65px;
-}
-
-.scb_s_experiment_step_horizontal_line_23 {
-    position:absolute;
-    width:54px;
-    background-color: #80d1ae;
-    height:1px;
-    top:23px;
-    left:155px;
-}
-
-
-
-.scb_s_experiment_step_horizontal_line_34 {
-    position:absolute;
-    width:54px;
-    background-color: #80d1ae;
-    height:1px;
-    top:23px;
-    left:245px;
-}
-
-.scb_s_experiment_step_horizontal_line_45 {
-    position:absolute;
-    width:54px;
-    background-color: #80d1ae;
-    height:1px;
-    top:23px;
-    left:335px;
-}
 
 
 .scb_s_experiment_step_div {
     display:inline-block;
     margin:5px;
-    height:80px;
-    width:80px;
+    margin-left: 15px;
+    height: 112px;
+	width: 895px;
+	color:white;
+	background: white;
+	border-radius:8px;
     vertical-align: top;
+    margin-bottom: 10px;
+}
+
+.scb_s_experiment_step_design{
+	width: 76px;
+	left: 0px;
+	border-top-left-radius: 8px;
+	height: inherit;
+	padding: 10px;
+	border-bottom-left-radius: 8px;
+	border-right: 1px solid white;
+}
+
+.scb_s_experiment_step_setup_and_run{
+	width: 118px;
+	border-right: 1px solid white;
+}
+
+.scb_s_experiment_step_select_technique{
+	width: 162px;
+}
+
+.scb_s_experiment_step_text >a{
+	color:white;
+}
+
+.scb_s_experiment_step_tech_steps{
+	background: white;
+	height: 72px;
+	width: 882px;
+	font-size:13pt;
+
+	letter-spacing: 1px;
+}
+
+.scb_s_experiment_step_tech_steps > div{
+		display: inline-block;
+}
+
+.scb_s_experiment_step_button{
+	
+}
+
+.scb_s_experiment_step_main_steps{
+	background: #e9ecf1;
+	height: 42px;
+	border-radius:8px;
+	width: 882px;
+}
+
+.scb_s_experiment_step_selected{
+	background: #3a90c1 !important;
+}
+
+.arrow-down-design, .arrow-down-setup, .arrow-down-select{
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid #3a90c1;
+	position: absolute;
+	
+}
+.arrow-down-design{
+	left: 30px;
+}
+
+.arrow-down-setup{
+	left: 50px;
+}
+
+.arrow-down-select{
+	left: 74px;
 }
 
 .scb_s_experiment_step_text {
     display:inline-block;
     position: relative;
-    width: 70px;
+    padding: 10px;
     text-align: center;
-    padding-top:15px;
     vertical-align: top;
-    left: 25px;
-    font-size:12px;
+    font-size: 13pt;
+    letter-spacing: 1px;
+	background: #4dbcF5;
 }
 
-.scb_s_experiment_step_text_after{
-	padding-left: 20px;
-}
 .scb_s_assignment_step_experiment_block {
     position: absolute;
     top: -25px;
@@ -363,18 +319,24 @@ top: 1px;
 
 .custom-select {  
 
-	width: 140px;
-  height: 22px;
+	width: 219px;
+	
+  height: 21px;
+  padding-top: 6px;
+  padding-left: 10px;
   overflow: hidden;
   background: url("../images/header/downarrow.jpg") no-repeat right #FFF;
-  border: 2px solid #000;
+  box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
 }
 
 .custom-select select {
 
 	background: transparent;
    width: 268px;
-   font-size: 16px;
+   color: #1e536D;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 10pt;
    line-height: 1;
    border: 0;
    border-radius: 0;
@@ -413,7 +375,7 @@ top: 1px;
 .scb_s_assignment_step {
     background: #d5dce4;
     color: #2c6596;
-    width: 960px;
+    width: 1002px;
     height: 70px;
     position: relative;
     text-transform:uppercase;
@@ -461,7 +423,7 @@ top: 1px;
     height: 30px;
     color: white;
     letter-spacing:1px;
-    font-size: 11pt;
+    font-size: 10pt;
     font-family: 'sourcesanspro-regular';
     cursor:pointer;
 }

@@ -14,14 +14,11 @@
     display: inline-block;
     vertical-align: top;
     min-height:350px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #a0a0a0;
-    border-radius: 8px;
     padding: 10px;
     width:912px;
-    margin-left:13px;
-@mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+    margin-left: 35px;
+    border-radius: 8px;
+    background: #f5f6f8;
 
 }
 
@@ -52,7 +49,7 @@
 
 .scb_s_experiment_design_view {
     background-color: #f4f6f8;
-    width: 960px;
+    width: 1002px;
 }
 
 .scb_s_experiment_design_techniques_container {
@@ -73,14 +70,20 @@
     font-family: sourcesanspro-regular;
     font-size:10pt;
 }
-.scb_s_design_description>.scb_f_open_assignment {
+
+.scb_f_open_assignment {
     bottom: 5px;
-    left: 5px;
+    left: 15px;
+    float:left;
 }
 
-.scb_s_design_description>.scb_f_open_experiment_setup {
+.scb_f_open_experiment_setup {
     bottom: 5px;
-    right: 5px
+    right: 15px;
+}
+
+.scb_s_design_description>.scb_f_open_experiment{
+	margin-top:0px;
 }
 
 .scb_s_experiment_design_objective,.scb_s_experiment_design_hypothesis {

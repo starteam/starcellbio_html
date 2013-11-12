@@ -48,15 +48,20 @@ Experiment active area
 @param new_rows
 */
 {template .display_details}
+	
+<div class='scb_s_experiment_setup_container'>
 <div class='scb_s_experiment_setup_details_view' mode='{$kind}'>
 
-    <div class='scb_s_experiment_setup_top'>
+    
 
     {if $kind == 'readwrite'}
         {call scb_common.experiment_step}
             {param step:2/}
+            {param assignment: $assignment/}
+            {param experiment: $experiment/}
 
         {/call}
+    	<div class='scb_s_experiment_setup_top'>
         <div class='scb_s_experiment_setup_choose_template'>
             <div class='scb_s_experiment_setup_create_new_set_up'><input class='scb_s_experiment_setup_choose_template_kind scb_f_experiment_setup_new_set_up' type="radio" name="setup_kind"/>Create new set-up<br></div>
             <div class='scb_s_experiment_setup_choose_existing_template'><input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind" disabled="disabled" /><span class='scb_s_experiment_setup_choose_template_kind_disabled'>Select pre-existing set-up as a template</span></div>
@@ -123,7 +128,10 @@ Experiment active area
     {else}
         {call scb_common.experiment_step}
             {param step:3/}
+            {param assignment: $assignment/}
+            {param experiment: $experiment/}
         {/call}
+        <div class='scb_s_experiment_setup_top'>
         {if $experiment.setup_finished}
         <div class='scb_s_warning'>
 
@@ -330,7 +338,9 @@ Experiment active area
     {param experiment:$experiment /}
     {/call}
     {/if}
-    {if $kind == 'readwrite'}
+    
+</div>
+{if $kind == 'readwrite'}
     <a class="scb_s_navigation_button scb_f_open_experiment_setup_readonly scb_f_run_experiment" 
        href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>RUN EXPERIMENT &nbsp; &#9654;</a><br/>
     <a class="scb_s_navigation_button scb_f_open_experiment_design"
@@ -348,7 +358,9 @@ Experiment active area
     {/if}
 
     {/if}
-</div></div>
+</div>
+
+</div>
 {/template}
 
 /**

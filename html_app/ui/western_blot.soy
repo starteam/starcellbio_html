@@ -16,6 +16,7 @@
 */
 {template .main}
 <div class='scb_s_western_blot_view'>
+
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
     {param context:$context /}
@@ -62,7 +63,13 @@
 @param can_prepare_lysate
 */
 {template .display_details}
+<div class='scb_s_western_blot_container'>
 <div class='scb_western_blot_details_view'>
+		{call scb_common.experiment_step}
+        {param step:5/}
+    	{param assignment: $assignment/}
+        {param experiment: $experiment/}
+    {/call}
 	<div class='scb_s_western_blot_all_tabs'>
 
     <div class='scb_western_blot_details_view_inner'>
@@ -80,6 +87,7 @@
     
     </div>
     </div>
+</div>
 </div>
 {/template}
 
@@ -146,7 +154,7 @@
 */
 {template .display_tabs_selector}
 <div class='scb_s_western_blot_tabs'>
-	{if $experiment.western_blot_list.list.length < 6}
+	{if $experiment.western_blot_list.list.length < 4}
 		{foreach $wb in $experiment.western_blot_list.list}
 		{if $western_blot.id == $wb.id}
 		<span class='scb_s_western_blot_active'>
@@ -173,7 +181,7 @@
 	{else}
 		<button class='scb_s_western_blot_left_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}'>&#x25c0;
+             			experiment_id='{$experiment.id}'><img src="images/western_blot/scb_wb_left_main.png">
     	</button>
 		{foreach $wb in $experiment.western_blot_list.list}
 			{if index($wb) >= $experiment.western_blot_list.start_tabs_index and index($wb) < $experiment.western_blot_list.start_tabs_index +5}     				
@@ -201,7 +209,7 @@
 		<button class='scb_s_western_blot_right_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}' >
-        				&#x25b6;
+        				<img src="images/western_blot/scb_wb_right_main.png">
     	</button>
 		
 	{/if}
@@ -458,27 +466,16 @@
 */
 {template .display_wb_progress}
 <div class='scb_s_western_blot_progress'>
-
-    <span class='scb_s_western_blot_progress_prefix_group1'>
-    <img class='scb_s_western_blot_progress_prefix_img' src="images/western_blot/backbackback.png">
-    <div class='scb_experiment_step_selected scb_s_experiment_step_circle'>
-        <div class='scb_s_western_blot_progress_prefix'>5</div>
-    </div>
-    
-    <div class='scb_s_western_blot_progress_prefix_text'>
-        PERFORM WESTERN BLOT
-    </div>
-    </span>
     <div class='scb_s_western_blot_video_box_wrapper'>
             <div class='scb_s_western_blot_video_box_wrapper_title'>
                  IN THE LAB
             </div>
             <div class='scb_s_western_blot_video_reminder'>
                    <div class='scb_s_western_blot_video_box'>
-						<img alt='In_The_Lab' title='In_The_Lab' class='scb_s_western_blot_video_box_img' src='images/western_blot/in_the_lab_all.png'>
+						<img alt='In_The_Lab' title='In_The_Lab' class='scb_s_western_blot_video_box_img' src='images/western_blot/in_the_lab_all.png'><br/>
 						<div class='scb_s_western_blot_video_heading'>Reminder:&nbsp;&nbsp;</div>
-						<div class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one lane must&nbsp;</div>
-						<div class='scb_s_western_blot_video_text_second'>be reserved for the protein marker.&nbsp;</div>
+						<div class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one&nbsp;</div>
+						<div class='scb_s_western_blot_video_text_second'>lane must be reserved for the protein marker.&nbsp;</div><br/>
 						<a href='static/ref_lib/full_library.html#GelPreparation' target='_blank'  class='scb_s_western_blot_learn_more'>Learn More</a>
 						</div>
                    </div>

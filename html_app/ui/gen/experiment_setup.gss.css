@@ -1,6 +1,6 @@
 .scb_s_experiment_setup_view {
   background-color: #f4f6f8;
-  width: 960px;
+  width: 1002px;
 }
 .scb_s_experiment_setup_details_view {
   position: relative;
@@ -10,23 +10,19 @@
   display: inline-block;
   vertical-align: top;
   min-height: 350px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #e1e1e1;
-  border-radius: 8px;
   padding: 10px;
   width: 912px;
-  margin-left: 13px;
-  background-color: #fff;
-  background-image: -webkit-linear-gradient(top,#ffffff,#e9ebea);
-  background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
-  background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
-  background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
+  margin-left: 35px;
+  border-radius: 8px;
+  background: #f5f6f8;
 }
-.scb_s_experiment_setup_top>.scb_f_open_experiment_design {
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
+.scb_s_experiment_setup_top {
+  position: relative;
+}
+.scb_f_open_experiment_design {
+  float: left !important;
+  bottom: 5px !important;
+  left: 15px !important;
 }
 .scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup {
   bottom: 5px;
@@ -35,16 +31,18 @@
 .scb_f_open_experiment_setup {
   margin-left: 0 !important;
 }
-.scb_s_experiment_setup_top>.scb_f_open_experiment_setup_readonly {
+.scb_f_open_experiment_setup_readonly {
   bottom: 5px;
-  right: 5px;
+  right: 15px;
   top: 2px;
+  float: left;
   position: relative;
 }
-.scb_s_experiment_setup_details_view>.scb_f_open_experiment_setup_readonly {
+.scb_s_select_technique_container>.scb_f_open_experiment_setup_readonly {
   bottom: 5px;
-  right: 5px;
-  float: right;
+  left: 15px;
+  float: left;
+  top: 2px;
 }
 .scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
   float: right;
@@ -74,6 +72,9 @@ table.scb_s_experiment_setup_table {
 }
 .scb_s_experiment_setup_new_set_up {
   visibility: hidden;
+  position: relative;
+  margin-top: 90px;
+  margin-bottom: 10px;
 }
 .scb_s_experiment_setup_instructions {
   width: 600px;
@@ -124,6 +125,13 @@ table.scb_s_experiment_setup_table {
   margin-left: 17px;
   margin-top: 27px;
   overflow: hidden;
+}
+.scb_s_experiment_setup_container {
+  background: white;
+  padding-bottom: 51px;
+  box-shadow: 0 4px 14px -1px gray;
+  position: relative;
+  z-index: 1;
 }
 .scb_s_experiment_setup_video_box_img {
   width: 233px;

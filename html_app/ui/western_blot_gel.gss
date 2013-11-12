@@ -11,6 +11,10 @@
 
 }
 
+.scb_western_blot_details_view>.scb_s_experiment_step{
+	
+}
+
 .scb_s_wb_secondary_antibody {
     position: absolute;
     top: 120px;
@@ -68,7 +72,7 @@ font-family: 'sourcesanspro-regular';
 
 .scb_s_western_blot_view_gel {
 	background: #F4F6F8;
-    width:960px;
+    width:1002px;
 }
 
 .scb_f_slider_value {

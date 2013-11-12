@@ -8,10 +8,18 @@
 
 .scb_s_select_technique_view {
     background-color: #f4f6f8;
-    width:960px;
+    width:1002px;
 }
 .scb_s_select_technique_header {
     font-size: 1.5em
+}
+
+.scb_s_select_technique_container{
+	background: white;
+	padding-bottom: 51px;
+	box-shadow: 0 4px 14px -1px gray;
+	position: relative;
+	z-index: 1;
 }
 
 .scb_s_select_technique_western_blot_available {
@@ -44,6 +52,8 @@
     display:block;
     margin-top: 20px;
     width: 200px;
+    left: 15px;
+    float: left;
 }
 
 .scb_s_select_technique_western_blot{
@@ -90,17 +100,17 @@
 
 .scb_s_select_technique_details_view {
     position: relative;
-    border:1px solid #e0e0e0;
-    border-radius: 5px;
+    border-radius: 8px;
     width:922px;
-    margin-top: 10px;
-    margin-left: 13px;
+    top:10px;
+    margin-bottom: 20px;
+     margin-left: 35px;
     padding-left:10px;
-    @mixin gradient(top,#ffffff, #e9ebea, #ffffff);
+    background: #f5f6f8;
 }
 
 .scb_s_select_technique_details_view>.scb_s_experiment_step {
-    left:5px;
+    left: -11px;
     top:10px;
     padding-left:5px;
 }
@@ -121,10 +131,13 @@
     bottom:5px;
     left:20px;
     width:228px;
+    margin-right: 19px !important;
+	margin-bottom: 18px !important;
 }
 
 .scb_f_new_western_blot{
     position: relative;
+    float:none !important;
     display:block;
     left:20px;
     bottom:5px;
@@ -134,6 +147,7 @@
 
 .scb_f_new_microscopy {
     position: relative;
+    float:none !important;
     display:block;
     top:2px;
     left:20px;

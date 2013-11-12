@@ -1,6 +1,6 @@
 .scb_s_assignments_view {
   height: 100%;
-  width: 960px;
+  width: 1002px;
   background-color: #f4f6f8;
 }
 .scb_s_assignments_container {
@@ -23,6 +23,7 @@
   position: relative;
   font-size: 10pt;
   padding-bottom: 14px;
+  margin-left: 11px;
 }
 .scb_s_assignments_description>.scb_f_open_experiment {
   bottom: 5px;
@@ -40,15 +41,18 @@
 .scb_s_assignment_header_img_right {
   position: relative;
   margin-right: -10px;
+  cursor: pointer;
 }
 .scb_s_assignment_header_img_left {
   position: relative;
   margin-left: -10px;
+  cursor: pointer;
 }
 .scb_assignments_header_link_wrapper {
   width: 120px;
   height: 17px;
   background: white;
+  cursor: pointer;
   color: #3a90c1;
   vertical-align: top;
   text-align: center;
@@ -124,7 +128,7 @@
   margin-right: 10px;
   padding: 5px;
   background-color: #f5f6f8;
-  margin-left: 13px;
+  margin-left: 33px;
   border: 1px solid #d8eee7;
   box-shadow: 0 0 0 0;
   border-radius: 8px;

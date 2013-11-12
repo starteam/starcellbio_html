@@ -63,7 +63,14 @@
 @param valid_rows
 */
 {template .display_details}
+<div class='scb_s_western_blot_container'>
+
 <div class='scb_western_blot_details_view'>
+	{call scb_common.experiment_step}
+        {param step:5/}
+    	{param assignment: $assignment/}
+        {param experiment: $experiment/}
+    {/call}
 	<div class='scb_s_western_blot_all_tabs'>
 
     <div class='scb_western_blot_details_view_inner'>
@@ -80,6 +87,7 @@
         {/call}
     </div>
     </div>
+</div>
 </div>
 {/template}
 
@@ -208,17 +216,6 @@
              			experiment_id='{$experiment.id}' >
         				&#x25b6;
     			</button>
-<!-- 	
-        		<select class='scb_s_western_blot_tab_select_many'>
-            	{foreach $gel in $western_blot.gel_list.list}
-            		<option western_blot_id='{$western_blot.id}' assignment_id='{$assignment.id}'
-                    	experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}'
-            		{if $western_blot_gel.id == $gel.id}selected='selected'{/if}
-            		href='#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}&western_blot_gel_id={$gel.id}'>{$gel.name}
-            		</option>
-            	{/foreach}
-        		</select>
- -->
         	{/if}
     	</div>
     

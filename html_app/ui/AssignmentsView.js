@@ -15,6 +15,39 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
         $('.scb_s_display_section').hide()
         $('.scb_s_display_section[value="'+section+'"]').show();
     });
+    
+    scb.utils.off_on(workarea, 'click', '.scb_s_assignment_header_img_left', function (e) {
+    	var index = 0;
+    	var list = $('.scb_assignments_header_link_wrapper');
+       for (var x = 0; x<list.length; x++){ 
+       	if (list[x] == $('.scb_assignments_header_link_selected')[0]){
+       		index = x;
+       	 	$('.scb_assignments_header_link_wrapper').removeClass('scb_assignments_header_link_selected');
+       		console.log(x); 
+       	}
+       }
+       if(index <=1){
+       		 $(list[0]).addClass('scb_assignments_header_link_selected');
+       }
+       else 
+       	$(list[index-1]).addClass('scb_assignments_header_link_selected');
+    });
+    
+    scb.utils.off_on(workarea, 'click', '.scb_s_assignment_header_img_right', function (e) {
+    	var index = 0;
+    	var list = $('.scb_assignments_header_link_wrapper');
+       for (var x = 0; x<list.length; x++){ 
+       	if (list[x] == $('.scb_assignments_header_link_selected')[0]){
+       		index = x;
+       	 	$('.scb_assignments_header_link_wrapper').removeClass('scb_assignments_header_link_selected');
+       		console.log(x); 
+       	}
+       }
+       if (index >= list.length -2)
+       	$(list[list.length-1]).addClass('scb_assignments_header_link_selected');
+       else 
+       	$(list[index+1]).addClass('scb_assignments_header_link_selected');
+    });
 };
 
 scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {

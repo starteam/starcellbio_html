@@ -19,7 +19,7 @@
 }
 .scb_microscopy_details_view {
   padding-top: 10px;
-  width: 960px;
+  width: 1002px;
 }
 .scb_microscopy_details_view_inner {
   width: 950px;
@@ -364,7 +364,7 @@ body.dragging, body.dragging * {
 }
 .scb_s_microscopy_view {
   background: #f4f6f8;
-  width: 960px;
+  width: 1002px;
 }
 .scb_s_microscopy_tab_content {
   margin-top: -27px;

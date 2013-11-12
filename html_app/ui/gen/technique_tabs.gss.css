@@ -22,11 +22,9 @@
   top: 1px;
 }
 .scb_s_western_blot_open_western_blot, .scb_s_facs_open_facs, .scb_s_microscopy_open_microscopy {
-  margin: 3px;
-  margin-left: 5px;
-  background-image: url('../images/western_blot/WesternBlot_GrayTabMod.png');
+  margin-left: 2px;
   display: inline-block;
-  width: 119px;
+  width: 132px;
   padding-left: 20px;
   top: 5px;
   position: relative;
@@ -35,6 +33,7 @@
   font-size: 11pt;
   text-decoration: none;
   color: black;
+  background: gray;
 }
 .scb_s_western_blot_remove {
   border: none;
@@ -44,16 +43,11 @@
   height: 12px;
 }
 .scb_s_facs_tab_content, .scb_s_western_blot_tab_content, .scb_s_microscopy_tab_content {
-  border: 1px solid #808080;
   border-radius: 5px;
   position: relative;
   padding-bottom: 8px;
   width: 947px;
-  background-color: #fff;
-  background-image: -webkit-linear-gradient(top,#ffffff,#e9ebea);
-  background-image: -moz-linear-gradient(top,#ffffff,#e9ebea);
-  background-image: -ms-linear-gradient(top,#ffffff,#e9ebea);
-  background-image: -o-linear-gradient(top,#ffffff,#e9ebea);
+  background: white;
 }
 .scb_s_western_blot_samples_area, .scb_s_facs_samples_area, .scb_s_microscopy_samples_area {
   width: 290px;

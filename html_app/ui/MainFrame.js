@@ -100,7 +100,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                         $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 //                         alert('Experiment ' + state.experiment_id + ' does not exist.');
                         state.onhashchange = false;
-                        state.view = 'assignment';
+                        state.view = 'assignments';
                         delete state.experiment_id;
                         scb.ui.static.MainFrame.update_hash(state);
                         ret.redisplay = true;
@@ -491,10 +491,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context: context
     });
 	
-    self.sections.assignment = new scb.ui.AssignmentView({
-        workarea: workarea,
-        context: context
-    });
+//     self.sections.assignment = new scb.ui.AssignmentView({
+//         workarea: workarea,
+//         context: context
+//     });
 
     self.sections.experiment_design = new scb.ui.ExperimentDesignView({
         workarea: workarea,
@@ -572,17 +572,17 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 assignments: assignments
             });
         }
-        if (state.view == 'assignment') {
-            if (parsed.assignment) {
-                self.sections.assignment.show({
-                    workarea: workarea,
-                    assignment: parsed.assignment
-                });
-            }
-            else {
-                self.show({view: 'assignments'})
-            }
-        }
+//         if (state.view == 'assignment') {
+//             if (parsed.assignment) {
+//                 self.sections.assignment.show({
+//                     workarea: workarea,
+//                     assignment: parsed.assignment
+//                 });
+//             }
+//             else {
+//                 self.show({view: 'assignments'})
+//             }
+//         }
         if (state.view == 'experiment_design') {
             if (!parsed.experiment) {
                 delete state.onhashchange;
@@ -747,7 +747,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 //                 alert("Experiment does not exist");
                 if (parsed.assignment) {
                     self.show({
-                        view: 'assignment',
+                        view: 'assignments',
                         assignment: parsed.assignment
                     });
                 }

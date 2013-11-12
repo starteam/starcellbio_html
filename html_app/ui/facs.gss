@@ -181,7 +181,7 @@
 
 .scb_s_facs_view {
     background: #F4F6F8;
-    width:960px;
+    width:1002px;
 }
 
 .scb_s_facs_tabs {

@@ -51,13 +51,13 @@
   src: url("../fonts/SourceSansPro-SemiboldIt.otf") format("opentype");
 }
 .scb_s_homepage_view {
-  width: 960px;
+  width: 1002px;
   height: 688px;
   background-color: #f4f6f8;
 }
 .scb_s_header {
   height: 80px;
-  width: 960px;
+  width: 1002px;
   padding-top: 0;
   background-color: #f4f6f8;
   display: block;
@@ -378,7 +378,7 @@
 }
 .scb_s_footer {
   padding: 20px;
-  width: 920px;
+  width: 962px;
   background-color: #d5dce4;
   display: block;
   position: relative;

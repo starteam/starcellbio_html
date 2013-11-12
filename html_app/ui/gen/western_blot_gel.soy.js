@@ -18,9 +18,11 @@ scb_western_blot_gel.main = function(opt_data, opt_sb) {
 
 scb_western_blot_gel.display_details = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_western_blot_details_view\'><div class=\'scb_s_western_blot_all_tabs\'><div class=\'scb_western_blot_details_view_inner\'>');
+  output.append('<div class=\'scb_s_western_blot_container\'><div class=\'scb_western_blot_details_view\'>');
+  scb_common.experiment_step({step: 5, assignment: opt_data.assignment, experiment: opt_data.experiment}, output);
+  output.append('<div class=\'scb_s_western_blot_all_tabs\'><div class=\'scb_western_blot_details_view_inner\'>');
   scb_western_blot_gel.display_tabs(opt_data, output);
-  output.append('</div></div></div>');
+  output.append('</div></div></div></div>');
   return opt_sb ? '' : output.toString();
 };
 
@@ -35,38 +37,31 @@ scb_western_blot_gel.display_tabs = function(opt_data, opt_sb) {
     scb_western_blot.display_wb_progress({step: 6}, output);
   }
   output.append('<div class=\'scb_s_western_blot_samples_area\'><div class=\'scb_s_western_blot_choose_gel_type\'>Gel Type:', (opt_data.western_blot.gel_type == '.10') ? '&nbsp;&nbsp;&nbsp;10%' : '', (opt_data.western_blot.gel_type == '.12') ? '&nbsp;&nbsp;&nbsp;12%' : '', (opt_data.western_blot.gel_type == '.15') ? '&nbsp;&nbsp;&nbsp;15%' : '', '</div><div class=\'scb_s_western_blot_samples_heading\'>Samples</div><div class=\'scb_s_western_blot_choose_samples_order\'><ol class=\'scb_s_western_blot_choose_samples_order_list\'>');
-  var rList69 = opt_data.rows;
-  var rListLen69 = rList69.length;
-  for (var rIndex69 = 0; rIndex69 < rListLen69; rIndex69++) {
-    var rData69 = rList69[rIndex69];
-    output.append((rData69.is_valid) ? '<li class="scb_s_western_blot_choose_samples_list" id=' + soy.$$escapeHtml(rData69.lane.id) + '>' + soy.$$escapeHtml(rData69.display_text) + ' -' + soy.$$escapeHtml(rData69.lane.kinds[rData69.lane.kind].name) + '</li>' : '');
+  var rList74 = opt_data.rows;
+  var rListLen74 = rList74.length;
+  for (var rIndex74 = 0; rIndex74 < rListLen74; rIndex74++) {
+    var rData74 = rList74[rIndex74];
+    output.append((rData74.is_valid) ? '<li class="scb_s_western_blot_choose_samples_list" id=' + soy.$$escapeHtml(rData74.lane.id) + '>' + soy.$$escapeHtml(rData74.display_text) + ' -' + soy.$$escapeHtml(rData74.lane.kinds[rData74.lane.kind].name) + '</li>' : '');
   }
   output.append('</ol>');
-  var start__soy81 = opt_data.valid_rows + 1;
-  output.append('<ol class=\'scb_s_western_blot_choose_samples_marker\' start=', soy.$$escapeHtml(start__soy81), '>', (opt_data.western_blot.marker_loaded == true) ? '<li class="scb_s_western_blot_marker">Marker</li>' : '', '</ol></div>', (opt_data.western_blot.marker_loaded == false) ? '<div class=\'scb_s_western_blot_marker scb_s_western_blot_marker_not\'>No marker loaded.</div>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'>');
+  var start__soy86 = opt_data.valid_rows + 1;
+  output.append('<ol class=\'scb_s_western_blot_choose_samples_marker\' start=', soy.$$escapeHtml(start__soy86), '>', (opt_data.western_blot.marker_loaded == true) ? '<li class="scb_s_western_blot_marker">Marker</li>' : '', '</ol></div>', (opt_data.western_blot.marker_loaded == false) ? '<div class=\'scb_s_western_blot_marker scb_s_western_blot_marker_not\'>No marker loaded.</div>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'>');
   if (opt_data.western_blot.gel_list.length < 5) {
-    var gelList95 = opt_data.western_blot.gel_list.list;
-    var gelListLen95 = gelList95.length;
-    for (var gelIndex95 = 0; gelIndex95 < gelListLen95; gelIndex95++) {
-      var gelData95 = gelList95[gelIndex95];
-      output.append((opt_data.western_blot_gel.id == gelData95.id) ? '<span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_western_blot_gel_tab_selected\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData95.id) + '\' ' + ((gelData95.is_developed) ? ' ="true"' : '') + '>' + soy.$$escapeHtml(gelData95.name) + '</div>' + ((gelData95.is_developed) ? '<button class=\'scb_f_western_blot_gel_remove\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData95.id) + '\'>| &#215;<!--                 \t\t<img src=\'images/setup/scb_remove.png\'> --></button>' : '') + '</span>' : '<div class=\'scb_s_western_blot_gel_tab\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData95.id) + '\'><a href=\'#view=western_blot_gel&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '&western_blot_id=' + soy.$$escapeHtml(opt_data.western_blot.id) + '&western_blot_gel_id=' + soy.$$escapeHtml(gelData95.id) + '\'>' + soy.$$escapeHtml(gelData95.name) + '</a></div>');
+    var gelList100 = opt_data.western_blot.gel_list.list;
+    var gelListLen100 = gelList100.length;
+    for (var gelIndex100 = 0; gelIndex100 < gelListLen100; gelIndex100++) {
+      var gelData100 = gelList100[gelIndex100];
+      output.append((opt_data.western_blot_gel.id == gelData100.id) ? '<span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_western_blot_gel_tab_selected\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData100.id) + '\' ' + ((gelData100.is_developed) ? ' ="true"' : '') + '>' + soy.$$escapeHtml(gelData100.name) + '</div>' + ((gelData100.is_developed) ? '<button class=\'scb_f_western_blot_gel_remove\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData100.id) + '\'>| &#215;<!--                 \t\t<img src=\'images/setup/scb_remove.png\'> --></button>' : '') + '</span>' : '<div class=\'scb_s_western_blot_gel_tab\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData100.id) + '\'><a href=\'#view=western_blot_gel&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '&western_blot_id=' + soy.$$escapeHtml(opt_data.western_blot.id) + '&western_blot_gel_id=' + soy.$$escapeHtml(gelData100.id) + '\'>' + soy.$$escapeHtml(gelData100.name) + '</a></div>');
     }
   } else {
     output.append('<button class=\'scb_s_western_blot_gel_left_western_blot\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\'>&#x25c0;</button>');
-    var gelList154 = opt_data.western_blot.gel_list.list;
-    var gelListLen154 = gelList154.length;
-    for (var gelIndex154 = 0; gelIndex154 < gelListLen154; gelIndex154++) {
-      var gelData154 = gelList154[gelIndex154];
-      output.append((gelIndex154 >= opt_data.western_blot.gel_list.start_tabs_index && gelIndex154 < opt_data.western_blot.gel_list.start_tabs_index + 4) ? (opt_data.western_blot_gel.id == gelData154.id) ? '<span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_western_blot_gel_tab_selected\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData154.id) + '\' ' + ((gelData154.is_developed) ? ' ="true"' : '') + '>' + soy.$$escapeHtml(gelData154.name) + '</div>' + ((gelData154.is_developed) ? '<button class=\'scb_f_western_blot_gel_remove\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData154.id) + '\'>| &#215;<!--                 \t\t<img src=\'images/setup/scb_remove.png\'> --></button>' : '') + '</span>' : '<div class=\'scb_s_western_blot_gel_tab\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData154.id) + '\'><a href=\'#view=western_blot_gel&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '&western_blot_id=' + soy.$$escapeHtml(opt_data.western_blot.id) + '&western_blot_gel_id=' + soy.$$escapeHtml(gelData154.id) + '\'>' + soy.$$escapeHtml(gelData154.name) + '</a></div>' : '');
+    var gelList159 = opt_data.western_blot.gel_list.list;
+    var gelListLen159 = gelList159.length;
+    for (var gelIndex159 = 0; gelIndex159 < gelListLen159; gelIndex159++) {
+      var gelData159 = gelList159[gelIndex159];
+      output.append((gelIndex159 >= opt_data.western_blot.gel_list.start_tabs_index && gelIndex159 < opt_data.western_blot.gel_list.start_tabs_index + 4) ? (opt_data.western_blot_gel.id == gelData159.id) ? '<span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_western_blot_gel_tab_selected\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData159.id) + '\' ' + ((gelData159.is_developed) ? ' ="true"' : '') + '>' + soy.$$escapeHtml(gelData159.name) + '</div>' + ((gelData159.is_developed) ? '<button class=\'scb_f_western_blot_gel_remove\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData159.id) + '\'>| &#215;<!--                 \t\t<img src=\'images/setup/scb_remove.png\'> --></button>' : '') + '</span>' : '<div class=\'scb_s_western_blot_gel_tab\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_gel_id=\'' + soy.$$escapeHtml(gelData159.id) + '\'><a href=\'#view=western_blot_gel&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '&western_blot_id=' + soy.$$escapeHtml(opt_data.western_blot.id) + '&western_blot_gel_id=' + soy.$$escapeHtml(gelData159.id) + '\'>' + soy.$$escapeHtml(gelData159.name) + '</a></div>' : '');
     }
-    output.append('<button class=\'scb_s_western_blot_gel_right_western_blot\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' >&#x25b6;</button><!--<select class=\'scb_s_western_blot_tab_select_many\'>');
-    var gelList214 = opt_data.western_blot.gel_list.list;
-    var gelListLen214 = gelList214.length;
-    for (var gelIndex214 = 0; gelIndex214 < gelListLen214; gelIndex214++) {
-      var gelData214 = gelList214[gelIndex214];
-      output.append('<option western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' western_blot_gel_id=\'', soy.$$escapeHtml(gelData214.id), '\'', (opt_data.western_blot_gel.id == gelData214.id) ? 'selected=\'selected\'' : '', 'href=\'#view=western_blot_gel&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(opt_data.western_blot.id), '&western_blot_gel_id=', soy.$$escapeHtml(gelData214.id), '\'>', soy.$$escapeHtml(gelData214.name), '</option>');
-    }
-    output.append('</select>-->');
+    output.append('<button class=\'scb_s_western_blot_gel_right_western_blot\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' >&#x25b6;</button>');
   }
   output.append('</div>');
   scb_western_blot_gel.display_gel(opt_data, output);
@@ -98,18 +93,18 @@ scb_western_blot_gel.display_gel = function(opt_data, opt_sb) {
 scb_western_blot_gel.undeveloped_gel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<h1>Choose Blotting Conditions</h1><div class=\'scb_s_wb_primary_antibody\'>Primary antibody:<select class=\'scb_f_wb_anti_body_select_primary\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' western_blot_gel_id=\'', soy.$$escapeHtml(opt_data.western_blot_gel.id), '\'>');
-  var pabList309 = soy.$$getMapKeys(opt_data.t.primary_anti_body);
-  var pabListLen309 = pabList309.length;
-  for (var pabIndex309 = 0; pabIndex309 < pabListLen309; pabIndex309++) {
-    var pabData309 = pabList309[pabIndex309];
-    output.append('<option class=\'scb_f_wb_anti_body_select_primary_option\' model_id=\'', soy.$$escapeHtml(pabData309), '\'', (opt_data.western_blot_gel.primary_anti_body == pabData309) ? 'selected=\'selected\'' : '', '>', soy.$$escapeHtml(opt_data.t.primary_anti_body[pabData309].name), '</option>');
+  var pabList288 = soy.$$getMapKeys(opt_data.t.primary_anti_body);
+  var pabListLen288 = pabList288.length;
+  for (var pabIndex288 = 0; pabIndex288 < pabListLen288; pabIndex288++) {
+    var pabData288 = pabList288[pabIndex288];
+    output.append('<option class=\'scb_f_wb_anti_body_select_primary_option\' model_id=\'', soy.$$escapeHtml(pabData288), '\'', (opt_data.western_blot_gel.primary_anti_body == pabData288) ? 'selected=\'selected\'' : '', '>', soy.$$escapeHtml(opt_data.t.primary_anti_body[pabData288].name), '</option>');
   }
   output.append('<option value="Please select..." model_id=\'\'', (opt_data.western_blot_gel.primary_anti_body) ? '' : 'selected="selected"', ' disabled="disabled">Please select...</option></select></div><div class=\'scb_s_wb_secondary_antibody\'>Secondary antibody:<select class=\'scb_f_wb_anti_body_select_secondary\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' western_blot_gel_id=\'', soy.$$escapeHtml(opt_data.western_blot_gel.id), '\'>');
-  var pabList334 = soy.$$getMapKeys(opt_data.t.secondary_anti_body);
-  var pabListLen334 = pabList334.length;
-  for (var pabIndex334 = 0; pabIndex334 < pabListLen334; pabIndex334++) {
-    var pabData334 = pabList334[pabIndex334];
-    output.append('<option class=\'scb_f_wb_anti_body_select_secondary_option\' model_id=\'', soy.$$escapeHtml(pabData334), '\'', (opt_data.western_blot_gel.secondary_anti_body == pabData334) ? 'selected=\'selected\'' : '', '>', soy.$$escapeHtml(opt_data.t.secondary_anti_body[pabData334].name), '</option>');
+  var pabList313 = soy.$$getMapKeys(opt_data.t.secondary_anti_body);
+  var pabListLen313 = pabList313.length;
+  for (var pabIndex313 = 0; pabIndex313 < pabListLen313; pabIndex313++) {
+    var pabData313 = pabList313[pabIndex313];
+    output.append('<option class=\'scb_f_wb_anti_body_select_secondary_option\' model_id=\'', soy.$$escapeHtml(pabData313), '\'', (opt_data.western_blot_gel.secondary_anti_body == pabData313) ? 'selected=\'selected\'' : '', '>', soy.$$escapeHtml(opt_data.t.secondary_anti_body[pabData313].name), '</option>');
   }
   output.append('<option value="Please select..." model_id=\'\'', (opt_data.western_blot_gel.secondary_anti_body) ? '' : 'selected="selected"', ' disabled="disabled">Please select...</option></select></div><a class=\'scb_s_western_blot_blot_and_develop scb_s_navigation_button\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' western_blot_gel_id=\'', soy.$$escapeHtml(opt_data.western_blot_gel.id), '\'>BLOT & DEVELOP</a>');
   return opt_sb ? '' : output.toString();
