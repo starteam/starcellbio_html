@@ -77,6 +77,8 @@ div#main {
 .scb_s_experiment_step {
     position: relative;
     display: inline-block;
+    right: 2px;
+
 }
 
 .scb_s_experiment_step_circle {
@@ -96,13 +98,22 @@ div#main {
 
 .scb_s_experiment_step_button{
 	font-family: 'sourcesanspro-regular';
-	color: white;
+	color: white !important;
     border-radius:5px;
 	background: #d5dce4;
 	margin-right: 10px;
 	height: 24px;
 	padding: 3px 9px 3px 12px;
 }
+
+.scb_s_experiment_step_button>a{
+	color:white;
+}
+
+.scb_s_experiment_step_visited{
+	background:#46bbf8 !important;
+}
+
 .scb_s_experiment_step_buttons_title{
 	font-family:'sourcesanspro-bold';
 	color: #3790c0;
@@ -128,7 +139,9 @@ div#main {
 .scb_experiment_step_previous {
     @mixin gradient(top,#88d2af,#18968a,#189689);
 }
-
+.scb_s_experiment_step_visited{
+	background: #4dbcf5;
+}
 
 .scb_s_experiment_step_green_bar{
 	position:relative;
@@ -187,7 +200,7 @@ div#main {
     margin:5px;
     margin-left: 15px;
     height: 112px;
-	width: 895px;
+	width: 887px;
 	color:white;
 	background: white;
 	border-radius:8px;
@@ -239,7 +252,7 @@ div#main {
 	background: #e9ecf1;
 	height: 42px;
 	border-radius:8px;
-	width: 882px;
+	width: 887px;
 }
 
 .scb_s_experiment_step_selected{
@@ -275,7 +288,7 @@ div#main {
     vertical-align: top;
     font-size: 13pt;
     letter-spacing: 1px;
-	background: #4dbcF5;
+	background: #d5dce4;
 }
 
 .scb_s_assignment_step_experiment_block {

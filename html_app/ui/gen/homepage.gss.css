@@ -65,6 +65,7 @@
 }
 .scb_s_header_line_top {
   display: block;
+  width: inherit;
 }
 .scb_s_logo {
   float: left;

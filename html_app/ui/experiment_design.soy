@@ -25,6 +25,7 @@
     {/call}
     {call .display_details}
     {param t:$t/}
+    {param last_step: $last_step/}
     {param global_template:$global_template /}
     {param assignment:$assignment/}
     {param experiment:$experiment/}
@@ -40,6 +41,7 @@
 Experiment active area
 @param t template
 @param assignment
+@param last_step
 @param experiment
 */
 {template .display_details}
@@ -49,6 +51,7 @@ Experiment active area
 
 			{call scb_common.experiment_step}
 				{param step:1/}
+				{param last_step: $last_step/}
 				{param assignment: $assignment/}
 				{param experiment: $experiment/}
 			{/call} <br/>

@@ -26,6 +26,7 @@
     {/call}
     {call .display_details}
     {param t:$t/}
+    {param last_step: $last_step/}
     {param global_template:$global_template /}
     {param assignment:$assignment/}
     {param new_rows:$new_rows/}
@@ -42,6 +43,7 @@ Experiment active area
 @param t template
 @param assignment
 @param experiment
+@param last_step
 @param headings
 @param rows
 @param kind
@@ -57,6 +59,7 @@ Experiment active area
     {if $kind == 'readwrite'}
         {call scb_common.experiment_step}
             {param step:2/}
+            {param last_step: $last_step/}
             {param assignment: $assignment/}
             {param experiment: $experiment/}
 
@@ -79,14 +82,14 @@ Experiment active area
             <div id='mySwipe'class='scb_s_experiment_setup_video_box swipe'>
 				<div  class='slides_container swipe-wrap'>
 						<div><a target="_blank">
-							<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Wild-type.jpg'>
+							<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Wild-type.jpg'><br/>
 							<span>
 								Vulva phenotypes in <i>C. elegans</i>
 							</span>
 						</a>
 						</div>
 					<div><a target="_blank">
-						<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Multivulva.jpg' >
+						<img class='scb_s_experiment_setup_video_box_img' src='static/usability_test/Multivulva.jpg' ><br/>
 						<span>
 							Vulva phenotypes in <i>C. elegans</i>
 
@@ -94,14 +97,14 @@ Experiment active area
 					</a>
 					</div>
 					<div><a target="_blank">
-						<img class='scb_s_experiment_setup_video_box_img'  src='static/usability_test/Vulvaless.jpg' >
+						<img class='scb_s_experiment_setup_video_box_img'  src='static/usability_test/Vulvaless.jpg' ><br/>
 						<span>
 							Vulva phenotypes in <i>C. elegans</i>
 						</span>
 					</a>
 					</div>
 					<div>
-						<video controls='controls' height='160' width='233' class='scb_s_experiment_setup_video_box_vid'  src='static/videos/western_blot/WesternFinalCompressed.mov' ></video>
+						<video controls='controls' height='124' width='187' class='scb_s_experiment_setup_video_box_vid'  src='static/videos/western_blot/WesternFinalCompressed.mov' ></video>
 
 					</div>
 						</div>
@@ -128,6 +131,7 @@ Experiment active area
     {else}
         {call scb_common.experiment_step}
             {param step:3/}
+            {param last_step: $last_step/}
             {param assignment: $assignment/}
             {param experiment: $experiment/}
         {/call}
