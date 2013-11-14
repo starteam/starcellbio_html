@@ -184,35 +184,55 @@ Progress bar
     	
     	<div class='scb_s_experiment_step_main_steps '>
 			<div class='scb_s_experiment_step_labels'>
-				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step>1 or $last_step == 6}scb_s_experiment_step_visited{/if} {if $step==1 }scb_s_experiment_step_selected{/if}'>
-					
-					
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step>1 or  $last_step > 0}scb_s_experiment_step_visited{/if} {if $step==1 }scb_s_experiment_step_selected{/if}'>
+
+					{if $step>1 or  $last_step > 0}
 					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>DESIGN</a>
+
+					{else}
+					DESIGN
+					{/if}
+					
 					{if $step==1 } 
 				
-					<div class="arrow-down-design"></div>
-					{/if}
+						<div class="arrow-down-design"></div>
+					{/if}	
 				</div>
 		
-				<div class='scb_s_experiment_step_text scb_s_experiment_step_setup_and_run {if $step>2 or $last_step == 6}scb_s_experiment_step_visited{/if} {if $step==2 or $step==3 }scb_s_experiment_step_selected{/if}'>
-			<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>SETUP & RUN</a>
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_setup_and_run {if $step>2 or $last_step > 3}scb_s_experiment_step_visited{/if} {if $step==2 or $step==3 }scb_s_experiment_step_selected{/if}'>
+
+					
+					
+					{if $step>2 or $last_step > 3}
+					<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>SETUP & RUN</a>
+						
+					{else}
+					SETUP & RUN
+					{/if}
 					{if $step==2 or $step==3 }
-					<div class="arrow-down-setup"></div>
+						<div class="arrow-down-setup"></div>
 					{/if}
 				
 				</div>
 		
-				<div class='scb_s_experiment_step_text scb_s_experiment_step_select_technique {if $step>3 or  $last_step == 6}scb_s_experiment_step_visited{/if} {if $step>3 }scb_s_experiment_step_selected{/if}'>
-				
-				<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>SELECT TECHNIQUE</a>
-					{if $step>3 }
-					<div class="arrow-down-select"></div>
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_select_technique {if $step>3 or   $last_step >4}scb_s_experiment_step_visited{/if} {if $step>3 }scb_s_experiment_step_selected{/if}'>
+
+					
+					{if $step>3 or   $last_step >4}
+					<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}'>SELECT TECHNIQUE</a>
+
+					{else}
+					SELECT TECHNIQUE
 					{/if}
+					{if $step>3 }
+						<div class="arrow-down-select"></div>
+					{/if}
+					
 				</div>
 			</div>
         </div>
         <div class='scb_s_experiment_step_tech_steps '>
-			<div class='scb_s_experiment_step_buttons_title'>Select Your Technique: </div>
+			<div class='scb_s_experiment_step_buttons_title {if $step>3}scb_s_experiment_step_active_title{/if}'>Select Your Technique: </div>
 						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_wb {if length($experiment.western_blot_list) > 0}scb_s_experiment_step_visited{/if} {if $step==5 }scb_s_experiment_step_selected{/if}'>
 							{if length($experiment.western_blot_list) > 0}
 							<a href='#view=western_blot&assignment_id={$assignment.id}&experiment_id={$experiment.id}&western_blot_id={$experiment.western_blot_list.selected_id}'>Western Blotting</a>

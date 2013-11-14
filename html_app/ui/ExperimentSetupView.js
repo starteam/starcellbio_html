@@ -899,33 +899,5 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
 			$($('.slider_dots li')[$(this).index()]).attr('class','on');
    			 window.mySwipe.slide($(this).index(), 200);
 		});
-// with jQuery
-// window.mySwipe = $('#mySwipe').Swipe().data('Swipe');
-        
-        
-//          $('#slider', x).slides({
-//                     preload: true,
-//                     hoverPause: true,
-//                     generateNextPrev: true,
-//                 });
-//                 $('.prev').text('<');
-//                 $('.next').text('>');
-//                 $('.next').css('float', 'right');
-//                 $('.next').insertAfter('.pagination');
-//         
-//         if (!_.isUndefined(template.setup_video_box)) {
-//             var x = $('.scb_s_experiment_setup_video_box', workarea);
-//             x.html(template.setup_video_box);
-//             if (template.setup_video_box_kind == 'coin-slider') {
-//                 $('#slider', x).slides({
-//                     preload: true,
-//                     hoverPause: true,
-//                     generateNextPrev: true,
-//                 });
-//                 $('.prev').text('<');
-//                 $('.next').text('>');
-//                 $('.next').insertAfter('.pagination');
-//             }
-//         }
-    };
+	 };
 };

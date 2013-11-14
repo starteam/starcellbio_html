@@ -696,7 +696,12 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             $('.scb_s_facs_tools_instructions_followup').hide();
             scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(false);
         }
-
+		
+		_.each($(".scb_s_experiment_step_button"), function (e) {
+			if($(e).css('background-color')=='rgb(213, 220, 228)') 
+				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
+			else $(e).removeAttr('title');
+    	});
 
     }
 }

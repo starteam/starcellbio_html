@@ -3,7 +3,7 @@
     top:70px;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
-    padding-left: 10px;
+    padding-left: 5px;
 
 }
 .scb_s_wb_primary_antibody > div {
@@ -12,7 +12,7 @@
 }
 
 .scb_western_blot_details_view>.scb_s_experiment_step{
-	
+        
 }
 
 .scb_s_wb_secondary_antibody {
@@ -20,7 +20,7 @@
     top: 120px;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
-    padding-left: 10px;
+    padding-left: 5px;
 }
 
 .scb_s_wb_secondary_antibody > div {
@@ -71,7 +71,7 @@ font-family: 'sourcesanspro-regular';
 }
 
 .scb_s_western_blot_view_gel {
-	background: #F4F6F8;
+        background: #F4F6F8;
     width:1002px;
 }
 
@@ -103,24 +103,24 @@ font-family: 'sourcesanspro-regular';
 
 .scb_s_western_blot_gel_left_western_blot, .scb_s_western_blot_gel_right_western_blot{
 
-	padding:3px;
-	margin:0px;
-	margin-right:-5px;
-	margin-left:-5px;
-	padding-bottom: 4px;
-	border:inherit;
-	background: 0;
-	cursor: pointer;
+        padding:3px;
+        margin:0px;
+        margin-right:-5px;
+        margin-left:-5px;
+        padding-bottom: 4px;
+        border:inherit;
+        background: 0;
+        cursor: pointer;
 }
 
 
 .scb_s_western_blot_gel_left_western_blot:enabled, .scb_s_western_blot_gel_right_western_blot:enabled{
-	color: #29a592;
+        color: #29a592;
 }
 
 
 
-.scb_s_western_blot_choose_gel_type	{
+.scb_s_western_blot_choose_gel_type        {
   margin-left:-1px;
 }
 
@@ -140,8 +140,13 @@ font-family: 'sourcesanspro-regular';
 .scb_s_western_blot_tools > h1, .scb_s_facs_tools> h1 {
     font-size:11pt;
     font-family: 'sourcesanspro-semibold';
-    padding-left:10px;
-	margin-top:37px;
+    padding-left:5px;
+}
+
+.scb_s_western_blot_open_select_technique{
+	float: left;
+	left: 29px;
+	top: 25px;
 }
 
 .scb_s_western_blot_tools {
@@ -152,10 +157,10 @@ font-family: 'sourcesanspro-regular';
 .scb_s_wb_exposure_time {
     position: absolute;
     top: 180px;
-    width:200px;
+    width:188px;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
-    margin-left:10px;
+    margin-left:5px;
     margin-right:10px;
 
 }
@@ -163,22 +168,22 @@ font-family: 'sourcesanspro-regular';
 
 .scb_f_wb_exposure_slider {
     border-radius: 7px;
-	height: 8px;
-	margin-top: 7px;
-	width:200px;
-	display: inline-block;
-	margin-right: 15px;
-	background: #ebebeb;
-	right:3px;
+        height: 8px;
+        margin-top: 7px;
+        width:188px;
+        display: inline-block;
+        margin-right: 15px;
+        background: #ebebeb;
+        right:3px;
 }
 
 .scb_f_wb_exposure_slider > .ui-slider-range{
-	height: 3px;
-	top:3px;
-	border-radius: 2px;
-	left: 3px;
-	margin-right:15px;
-	background: #92beba;
+        height: 3px;
+        top:3px;
+        border-radius: 2px;
+        left: 3px;
+        margin-right:15px;
+        background: #92beba;
 }
 
 .scb_f_wb_exposure_slider > .ui-slider-handle {

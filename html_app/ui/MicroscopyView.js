@@ -1017,6 +1017,13 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 // rows_state.valid > 0;
 //         state.experiment.last_view = 'microscopy';
 // // 		$('ol.scb_s_microscopy_choose_samples_order_list').sortable();
-// 		
+	
+// 	
+	
+		_.each($(".scb_s_experiment_step_button"), function (e) {
+			if($(e).css('background-color')=='rgb(213, 220, 228)') 
+				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
+			else $(e).removeAttr('title');
+    	});	
     }
 }

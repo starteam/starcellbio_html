@@ -116,10 +116,13 @@ div#main {
 
 .scb_s_experiment_step_buttons_title{
 	font-family:'sourcesanspro-bold';
-	color: #3790c0;
+	color: #d5dce4;
 	padding: 27px 20px 0px 20px;
 }
-
+.scb_s_experiment_step_active_title{
+	
+	color: #3790c0 !important;
+}
 
 .scb_s_experiment_step_labels{
 	width: 440px;

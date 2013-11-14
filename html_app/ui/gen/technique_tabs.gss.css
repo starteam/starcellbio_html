@@ -1,19 +1,35 @@
 .scb_s_western_blot_tabs, .scb_s_facs_tabs, .scb_s_microscopy_tabs {
   position: absolute;
-  top: -27px;
+  top: -42px;
+  min-width: 895px;
+  overflow-y: hidden;
+}
+.scb_s_western_blot_tabs_more, .scb_s_facs_tabs_more, .scb_s_microscopy_tabs_more {
+  position: absolute;
+  top: -50px;
+  min-width: 895px;
+  overflow-y: hidden;
+}
+.scb_s_western_blot_active>span, .scb_s_facs_active>span, .scb_s_microscopy_active>span {
+  color: #007bb7;
+  position: relative;
+  top: 3px;
 }
 .scb_s_western_blot_active, .scb_s_facs_active, .scb_s_microscopy_active {
-  margin-left: 5px;
-  border-bottom: 1px white solid;
-  background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
+  background: white;
+  margin-right: 2px;
+  margin-left: 2px;
   display: inline-block;
-  width: 116px;
+  vertical-align: middle;
+  width: 129px;
   padding-left: 20px;
-  top: 4px;
+  padding-bottom: 11px;
+  padding-top: 11px;
   position: relative;
-  height: 20px;
+  height: 19px;
   font-size: 11pt;
   z-index: 99;
+  font-family: 'sourcesanspro-semibold';
   background-position-y: 2px;
   background-position-x: -4px;
 }
@@ -22,18 +38,24 @@
   top: 1px;
 }
 .scb_s_western_blot_open_western_blot, .scb_s_facs_open_facs, .scb_s_microscopy_open_microscopy {
-  margin-left: 2px;
   display: inline-block;
-  width: 132px;
+  width: 129px;
   padding-left: 20px;
-  top: 5px;
+  vertical-align: middle;
   position: relative;
-  height: 18px;
-  border-bottom: 1px solid #808080;
+  height: 19px;
+  padding-bottom: 11px;
+  padding-top: 11px;
+  margin-right: 2px;
+  margin-left: 2px;
   font-size: 11pt;
+  font-family: 'sourcesanspro-semibold';
   text-decoration: none;
-  color: black;
-  background: white;
+  color: gray;
+  background: #e9ecf1;
+}
+.scb_s_western_blot_more_open_western_blot, .scb_s_facs_more_open_facs, .scb_s_microscopy_more_open_microscopy {
+  top: 9px;
 }
 .scb_s_western_blot_remove {
   border: none;
