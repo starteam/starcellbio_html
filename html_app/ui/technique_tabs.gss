@@ -28,16 +28,29 @@
 	top: 3px;
 }
 
+
+
+.scb_s_select_technique_at_western_blot, .scb_s_select_technique_at_facs, .scb_s_select_technique_at_microscopy{
+    display: block !important;
+    position:relative !important;
+    margin-left: -13px !important;
+    width:200px !important;
+    margin-top: 20px !important;
+    top: 20px !important;
+    margin-bottom: -10px !important;
+    float: left !important;
+}
+
 .scb_s_western_blot_active, .scb_s_facs_active, .scb_s_microscopy_active {
     background:white;
 	margin-right: 2px;
 	margin-left: 2px;
     display: inline-block;
 	vertical-align: middle;
-    width: 129px;
+    width: 140px;
     padding-left: 20px;
-    padding-bottom:11px;
-    padding-top: 11px;
+    padding-bottom: 15px;
+	padding-top: 8px;
     position: relative;
     height: 19px;
     font-size: 11pt;
@@ -54,7 +67,7 @@
 
 .scb_s_western_blot_open_western_blot, .scb_s_facs_open_facs, .scb_s_microscopy_open_microscopy {
     display: inline-block;
-    width: 129px;
+    width: 140px;
     padding-left: 20px;
 	vertical-align: middle;
     position: relative;

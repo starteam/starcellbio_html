@@ -827,26 +827,6 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
     opacity: .5;
 }
 
-.scb_s_select_technique_at_western_blot {
-    display: block;
-    position:relative;
-    margin-left: -13px;
-    width:200px;
-    margin-top: 20px;
-    top: 20px;
-    margin-bottom: -10px;
-    float: left;
-}
-
-.scb_s_select_technique_at_facs {
-
-    display: block;
-    margin-top: -10px;
-    margin-left: 20px;
-    width:200px;
-    margin-bottom: -10px;
-}
-
 .scb_s_western_blot_view {
     background: #F4F6F8;
     width:1002px;

@@ -59,6 +59,7 @@ FACS Main View
 @param can_prepare_lysate
 */
 {template .display_details}
+<div class='scb_s_facs_container'>
 <div class='scb_facs_details_view'>
 	{call scb_common.experiment_step}
         {param step:6/}
@@ -78,8 +79,19 @@ FACS Main View
         {param kinds:$kinds/}
         {param can_prepare_lysate:$can_prepare_lysate/}
         {/call}
+        
+
+	<a class='scb_s_navigation_button scb_f_facs_prepare_lysates' facs_id='{$facs.id}'
+	   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+	{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE SAMPLES  &nbsp; &#9654;
+	</a>
     </div>
+    
+<a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_facs"
+   href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
     </div>
+</div>
 </div>
 {/template}
 
@@ -94,12 +106,13 @@ FACS Main View
 @param can_prepare_lysate
 */
 {template .display_tabs}
+
+<div class='scb_s_facs_tab_content {if $kind == ' sample_prep'}scb_s_facs_tab_content_sample_prep{/if}'>
 {call .display_tabs_selector}
 {param assignment:$assignment/}
 {param experiment:$experiment /}
 {param facs:$facs /}
 {/call}
-<div class='scb_s_facs_tab_content {if $kind == ' sample_prep'}scb_s_facs_tab_content_sample_prep{/if}'>
 {if $kind == 'sample_prep'}
 {call .sample_prep}
 {param assignment:$assignment/}
@@ -124,13 +137,6 @@ FACS Main View
 
 </div>
 {/if}
-<a class='scb_s_navigation_button scb_f_facs_prepare_lysates' facs_id='{$facs.id}'
-   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE SAMPLES  &nbsp; &#9654;
-</a>
-<a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_facs"
-   href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 
 {/template}
 
@@ -311,7 +317,6 @@ FACS Main View
     	<div class="scb_s_western_blot_green_line"></div>
     {/if}
 </div>
-
 {/template}
 
 
@@ -320,26 +325,40 @@ FACS Main View
 */
 {template .display_facs_progress}
 <div class='scb_s_facs_progress'>
+	
+	<div class='scb_s_facs_vertical_line_1'></div>
+    <div class='scb_s_facs_vertical_line_4'></div>
+	<div class='scb_s_facs_vertical_line_7'></div>
+    <div class='scb_s_western_blot_progress_bar'>
 
-    <div class='scb_s_facs_progress_rest'>
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 {if $step >= 1}scb_s_western_blot_progress_selected{/if}'>
-            1. Sample Prep
-        </div>
-        <img class='scb_s_western_blot_progress_vertical_line'
-             src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+		<div class = 'scb_s_western_blot_progress_gray_bar'>
+			<div class='scb_s_facs_vertical_line_1_top'></div>
+			<div class='scb_s_facs_vertical_line_4_top'></div>
+			<div class='scb_s_facs_vertical_line_7_top'></div>
+			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2 {if $step >= 2}scb_s_western_blot_progress_selected{/if}'>
-            2. Run
-        </div>
-        <img class='scb_s_western_blot_progress_vertical_line'
-             src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
+						{if $step== 1}166px;{/if}
+				{if $step== 2} 430px;{/if}
+				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
+			</div>
+		</div>
+	
+		<div class='scb_s_facs_progress_rest'>
+			<div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1'>
+				1. Sample Prep
+			</div>
+	 
+			<div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2'>
+				2. Run
+			</div>
+  
+			<div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3'>
+				3. Analyze
+			</div>
 
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3 {if $step >= 3}scb_s_western_blot_progress_selected{/if}'>
-            3. Analyze
-        </div>
+		</div>
 
     </div>
-    </span>
 
 </div>
 {/template}
@@ -423,7 +442,7 @@ FACS Main View
         </div>
         {if $facs.samples_finished}
         {else}
-        <button class='{if $rows_valid > 9}scb_f_facs_run_samples{else}scb_f_facs_run_samples_short{/if}  scb_s_navigation_button' facs_id='{$facs.id}'
+        <button class='{if $rows_valid > 9}scb_f_facs_run_samples{else}scb_f_facs_run_samples_short{/if}  scb_s_gray_button' facs_id='{$facs.id}'
                 assignment_id="{$assignment.id}"
                 experiment_id="{$experiment.id}">RUN SAMPLES
         </button>

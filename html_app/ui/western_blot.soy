@@ -186,7 +186,7 @@
     	</button>
 		{foreach $wb in $experiment.western_blot_list.list}
 			{if index($wb) >= $experiment.western_blot_list.start_tabs_index and index($wb) < $experiment.western_blot_list.start_tabs_index +5}     				
-
+				
 				{if $western_blot.id == $wb.id}
 				<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
 				<span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
@@ -202,10 +202,11 @@
 				{/if}
 			{/if}
 		{/foreach}
-		<span class='scb_s_western_blot_add_small' assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}' > 
-             			<a class='scb_f_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD +</a>
-		</span>
+		<span class='scb_s_western_blot_add_western_blot' assignment_id='{$assignment.id}'
+                                     experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> <a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'><span class='scb_s_add_tab'>ADD </span>
+                                <span class='scb_s_western_blot_add_cross_western_blot'>| + </span></a>
+                </span>
+
 		<button class='scb_s_western_blot_right_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}' >
@@ -477,9 +478,9 @@
 						<div class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one&nbsp;</div>
 						<div class='scb_s_western_blot_video_text_second'>lane must be reserved for the protein marker.&nbsp;</div><br/>
 						<a href='static/ref_lib/full_library.html#GelPreparation' target='_blank'  class='scb_s_western_blot_learn_more'>Learn More</a>
-						</div>
-                   </div>
-               </div>
+					</div>
+            </div>
+    </div>
                
      <div class='scb_s_western_blot_vertical_line_1'></div>
     <div class='scb_s_western_blot_vertical_line_2'></div>

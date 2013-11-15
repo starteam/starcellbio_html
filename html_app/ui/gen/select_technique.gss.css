@@ -102,6 +102,10 @@
   position: relative;
   margin-top: 24px;
 }
+.scb_s_facs_select_technique {
+  position: absolute !important;
+  bottom: 14px !important;
+}
 .scb_f_new_flow_cytometry {
   position: relative;
   top: 15px;
