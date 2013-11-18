@@ -147,8 +147,8 @@ FACS Main View
 @param facs
 */
 {template .display_tabs_selector}
-<div class='scb_s_facs_tabs'>
-	{if $experiment.facs_list.list.length < 6}
+<div class=' {if $experiment.western_blot_list.list.length >= 5}scb_s_facs_tabs_more {else} scb_s_facs_tabs{/if} '>
+	{if $experiment.facs_list.list.length < 5}
 
 		{foreach $wb in $experiment.facs_list.list}
 		{if $facs.id == $wb.id}
@@ -170,46 +170,72 @@ FACS Main View
 		{/foreach}
 		<span class='scb_s_facs_add_facs' assignment_id='{$assignment.id}'
 							experiment_id='{$experiment.id}' facs_id='{$experiment.facs_list.list[length($experiment.facs_list.list)-1].id}'>
-							 <a class='scb_f_open_facs scb_s_facs_open_facs' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
-					<span class='scb_s_facs_add_cross_facs'>| + </span></a>
+							 <a class='scb_f_open_facs scb_s_facs_open_facs' 
+							 href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
+							<span class='scb_s_facs_add_cross_facs'>| + </span></a>
 		</span>
 		
 	{else}
 		<button class='scb_s_facs_left_facs' facs_id='{$facs.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}'>
-        				&#x25c0;
+        				<img src="images/western_blot/scb_wb_left_main.png">
     	</button>
-		{foreach $wb in $experiment.facs_list.list}
-			{if index($wb) >= $experiment.facs_list.start_tabs_index and index($wb) < $experiment.facs_list.start_tabs_index +5}     				
+    	{if $experiment.facs_list.list.length -1 == $experiment.facs_list.start_tabs_index + 3}
+			{foreach $wb in $experiment.facs_list.list}
+					{if index($wb) >= $experiment.facs_list.start_tabs_index and index($wb) < $experiment.facs_list.start_tabs_index +4}     				
 
-				{if $facs.id == $wb.id}
-				<span class='scb_s_facs_active'>
+						{if $facs.id == $wb.id}
+						<span class='scb_s_facs_active scb_s_facs_more_open_facs'>
 
-				<span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-					  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+						<span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+							  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
 
-				<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-						experiment_id='{$experiment.id}'>| &#215;
-				<!--             <img src="images/setup/scb_remove.png"> -->
-				</button>
-				</span>
-				{else}
-				<a class='scb_f_open_facs scb_s_facs_open_facs'
-				   href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$wb.id}'
-				   facs_id='{$wb.id}'>{$wb.name}</a>
-				{/if}
-			{/if}
-		{/foreach}
-		<span class='scb_s_facs_add_facs' assignment_id='{$assignment.id}'
-							experiment_id='{$experiment.id}' facs_id='{$experiment.facs_list.list[length($experiment.facs_list.list)-1].id}'>
-							 <a class='scb_f_open_facs scb_s_facs_open_facs' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
-					<span class='scb_s_facs_add_cross_facs'>| + </span></a>
-		</span>
+						<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+								experiment_id='{$experiment.id}'>| &#215;
+						</button>
+						</span>
+						{else}
+						<a class='scb_f_open_facs scb_s_facs_open_facs scb_s_facs_more_open_facs'
+						   href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$wb.id}'
+						   facs_id='{$wb.id}'>{$wb.name}</a>
+						{/if}
+					{/if}
+			{/foreach}
+			<span class='scb_s_facs_add_facs scb_s_facs_more_open_facs' assignment_id='{$assignment.id}'
+								experiment_id='{$experiment.id}' facs_id='{$experiment.facs_list.list[length($experiment.facs_list.list)-1].id}'>
+								 <a class='scb_f_open_facs scb_s_facs_open_facs' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
+								 <span class='scb_s_add_tab'>ADD</span>
+						<span class='scb_s_facs_add_cross_facs'>| + </span></a>
+			</span>
+    	{else}
+    			{foreach $wb in $experiment.facs_list.list}
+					{if index($wb) >= $experiment.facs_list.start_tabs_index and index($wb) < $experiment.facs_list.start_tabs_index +5}     				
+
+						{if $facs.id == $wb.id}
+						<span class='scb_s_facs_active scb_s_facs_more_open_facs'>
+
+						<span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+							  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+
+						<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+								experiment_id='{$experiment.id}'>| &#215;
+						</button>
+						</span>
+						{else}
+						<a class='scb_f_open_facs scb_s_facs_open_facs scb_s_facs_more_open_facs'
+						   href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$wb.id}'
+						   facs_id='{$wb.id}'>{$wb.name}</a>
+						{/if}
+					{/if}
+				{/foreach}
+			
+		
+		{/if}
 		<button class='scb_s_facs_right_facs' facs_id='{$facs.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}' >
-        				&#x25b6;
+        				<img src="images/western_blot/scb_wb_right_main.png">
     	</button>
 	
 	{/if}
@@ -338,21 +364,21 @@ FACS Main View
 			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
 						{if $step== 1}166px;{/if}
-				{if $step== 2} 430px;{/if}
+				{if $step== 2} 438px;{/if}
 				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
 			</div>
 		</div>
 	
 		<div class='scb_s_facs_progress_rest'>
-			<div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1'>
+			<div class='scb_s_western_blot_progress_item scb_facs_progress_1'>
 				1. Sample Prep
 			</div>
 	 
-			<div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2'>
+			<div class='scb_s_western_blot_progress_item scb_facs_progress_2'>
 				2. Run
 			</div>
   
-			<div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3'>
+			<div class='scb_s_western_blot_progress_item scb_facs_progress_3'>
 				3. Analyze
 			</div>
 

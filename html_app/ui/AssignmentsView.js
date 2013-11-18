@@ -28,9 +28,14 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
        }
        if(index <=1){
        		 $(list[0]).addClass('scb_assignments_header_link_selected');
+       		 $('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_inactive.png');
+       		 $('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_active.png');
        }
-       else 
+       else {
        	$(list[index-1]).addClass('scb_assignments_header_link_selected');
+       	 $('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_active.png');
+       	 $('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_inactive.png');
+       	}
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_s_assignment_header_img_right', function (e) {
@@ -43,10 +48,18 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
        		console.log(x); 
        	}
        }
-       if (index >= list.length -2)
+       if (index >= list.length -2){
        	$(list[list.length-1]).addClass('scb_assignments_header_link_selected');
-       else 
+       	$('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_inactive.png');
+       	$('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_active.png');
+
+       	}
+       else {
        	$(list[index+1]).addClass('scb_assignments_header_link_selected');
+       	$('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_active.png');
+       	$('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_inactive.png');
+
+       	}
     });
 };
 
@@ -73,6 +86,7 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
         }));
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
+        $('.scb_assignments_header_link_wrapper').css('width' , (579/assignments.selected.template.instructions.length)-34+ 'px');
     }
 
 }

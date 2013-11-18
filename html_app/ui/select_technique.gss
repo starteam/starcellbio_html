@@ -52,7 +52,7 @@
     display:block;
     margin-top: 20px;
     width: 200px;
-    left: 15px;
+    left: 29px;
     float: left;
 }
 

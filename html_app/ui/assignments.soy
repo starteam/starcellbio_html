@@ -69,22 +69,20 @@ Assignment description
         </div>
 		
 	<div class='scb_s_assignments_slider_header'>
-		<img class = 'scb_s_assignment_header_img_left' src='../../images/header/scb_left_arrow_temp.jpg'>
-		
-		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview scb_assignments_header_link_selected' value='assignment_overview'>Overview</div>
-		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_detail' value='assignment_detail'>Assignment Description</div>
-			 
-<!-- 
-		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_setup'>Experiment Setup</div>
-		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_refinfo'>Reference Information</div>
- -->
-		<img class = 'scb_s_assignment_header_img_right'  src='../../images/header/scb_right_arrow_temp.jpg'>
+		<img class = 'scb_s_assignment_header_img_left' src='../../images/homepage/scb_gray_left_arrow_inactive.png'>
+		 
+		 
+		 {foreach $section in $assignments.selected.template.instructions}
+		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == 0}scb_assignments_header_link_selected{/if}' title='{$section[0]}' value='{$section[0]}'>{$section[0]}</div>
+		{/foreach}	 
+
+		<img class = 'scb_s_assignment_header_img_right'  src='../../images/homepage/scb_gray_right_arrow_active.png'>
 	</div>
         <div class='scb_s_assignment_scroll'>
-        <div class='scb_s_display_section' value='assignment_overview'>
-        {$assignments.selected.description |noAutoescape}</div>        
-		<div class='scb_s_display_section' value='assignment_detail'>
-        {$assignments.selected.template.instructions |noAutoescape}</div>
+        	{foreach $section in $assignments.selected.template.instructions}
+				<div class='scb_s_display_section' style='display:{if index($section) == 0}block;{/if}' value='{$section[0]}'>
+				{$section[1] |noAutoescape}</div>   
+        	{/foreach}     
         </div>
     <br/>
     
@@ -107,9 +105,13 @@ Assignment assignments
             <div class='scb_s_assignments_sidebar_course_block'>
             <div class='scb_s_assignments_sidebar_course'>{$course}</div>
         {foreach $assignment in $courses[$course]}
-        <li class='scb_s_assignments_sidebar_name'>
-<!--             <a href='#view={if $assignment.id == $assignments.selected_id}assignment{else}assignments{/if}&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}</a> -->
-            <a href='#view=assignments&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}</a>
+        <li class='scb_s_assignments_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_assignments_sidebar_name_selected{/if}'>
+            <a href='#view=assignments&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}
+
+            </a>
+            {if $assignments.selected.id == $assignment.id}
+            	<img class='scb_s_selection_arrow_img'  src='../../images/homepage/selection_arrow.png'>
+            {/if}
         </li>
         {/foreach}
         </div>

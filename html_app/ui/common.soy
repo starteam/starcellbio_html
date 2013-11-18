@@ -3,15 +3,9 @@
 /**
 * Progress bar
 @param step
-@param assignment_name
 @param assignment
 @param assignments
-@param last_step
 @param experiment
-@param technique_name
-@param technique_view
-@param technique_param
-@param technique_id
 */
 {template .assignment_step}
 {let $eid} 
@@ -31,120 +25,28 @@
 			 {$assignment.id}
 		{/if} 
 {/let}
-{if $step > 0}
+{if $step >0}
 <div class='scb_s_assignment_step' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-    {if $step > 0 }
-    <a class='scb_s_assignment_step_link' href='#view=assignments'>
-        ASSIGNMENTS
+    <a class='scb_s_assignment_step_link scb_f_assignments_step_link {if $step < 2 and $step >0}scb_s_assignment_step_link_active{/if}' href='#view=assignments'>
+        <div class='scb_s_assignment_step_wrapper'>
+			<div class='{if $step < 2 and $step >0}scb_s_assignments_link_img_active{else}scb_s_assignments_link_img {/if}'></div>
+			ASSIGNMENTS
+        </div>
     </a>
-    {/if}
-    {if $step > 1 or $last_step >1}
-    <a class='scb_s_assignment_step_link {if $step == 2}scb_s_assignment_step_link_active{/if}'
-       href='#view=assignment&assignment_id={$aid}'>
+    <a class='scb_s_assignment_step_link scb_f_experiments_step_link {if $step >= 2}scb_s_assignment_step_link_active{/if}'
+       href='#view=experiment_last&assignment_id={$aid}&experiment_id={$eid}'>
+       <div class='scb_s_assignment_step_wrapper'>
 
-        	{$assignment_name}
+		   <div class='{if $step >= 2}scb_s_experiments_link_img_active{else}scb_s_experiments_link_img {/if}'></div>
+				EXPERIMENTS
+    	</div>
     </a>
-    {/if}
-    {if $step > 2 or $last_step > 2}
-    <a class='scb_s_assignment_step_link {if $step == 3}scb_s_assignment_step_link_active{/if}'
-       href='#view=experiment_design&assignment_id={$aid}&experiment_id={$eid}'>
-        DESIGN
-    </a>
-    {/if}
-    {if $step > 3 or $last_step >3}
-    <a class='scb_s_assignment_step_link {if $step == 4}scb_s_assignment_step_link_active{/if}'
-       href='#view=experiment_setup&assignment_id={$aid}&experiment_id={$eid}'>
-        SETUP
-    </a>
-    {/if}
-    {if $step > 4 or $last_step > 4}
-    <a class='scb_s_assignment_step_link {if $step == 5}scb_s_assignment_step_link_active{/if}'
-       href='#view=select_technique&assignment_id={$aid}&experiment_id={$eid}'>
-        TECHNIQUES
-    </a>
-    {/if}
-    {if $step > 5 or $last_step > 5}
-    	{let $tview} 
-			{if $assignments}
-				{$assignments.selected.experiments.selected.last_technique_view}
-			{elseif $assignment}
-			 	{$assignment.experiments.selected.last_technique_view}
-			{elseif $experiment}
-		   		{$experiment.last_technique_view}
-		   	{else}
-		   		{$technique_view}
-			{/if} 
-		{/let}
-		
-		{let $tname}
-			{if $tview == 'western_blot'}
-				WESTERN BLOT
-			{elseif $tview == 'facs'}
-				FLOW CYTOMETRY
-			{elseif $tview == 'microscopy'}
-				MICROSCOPY
-			{elseif not $technique_param}
-				{$assignment.experiments.selected.last_technique}
-			{else}
-				{$technique_name}
-			{/if}
-		{/let}
-		
-		{let $tparam}
-			{if $tview == 'western_blot'}
-				western_blot_id
-			{elseif $tview == 'facs'}
-				facs_id
-			{elseif $tview == 'microscopy'}
-				microscopy_id
-			{elseif not $technique_param}
-				{$assignment.experiments.selected.last_param}
-			{else}
-				{$technique_param}
-			{/if}
-		{/let}
-		
-		{let $tid}
-			{if $assignments}
-				{if $tview == 'western_blot' or $tview == 'western_blot_gel'}
-					{$assignments.selected.experiments.selected.western_blot_list.selected_id}
-				{elseif $tview == 'facs'}
-					{$assignments.selected.experiments.selected.facs_list.selected_id}
-				{elseif $tview == 'microscopy'}
-					{$assignments.selected.experiments.selected.microscopy_list.selected_id}
-				{/if}
-			{elseif $assignment}
-				{if $tview == 'western_blot' or $tview == 'western_blot_gel'}
-					{$assignment.experiments.selected.western_blot_list.selected_id}
-				{elseif $tview == 'facs'}
-					{$assignment.experiments.selected.facs_list.selected_id}
-				{elseif $tview == 'microscopy'}
-					{$assignment.experiments.selected.microscopy_list.selected_id}
-				{/if}
-			{elseif $experiment}
-				{if $tview == 'western_blot' or $tview == 'western_blot_gel'}
-					{$experiment.western_blot_list.selected_id}
-				{elseif $tview == 'facs'}
-					{$experiment.facs_list.selected_id}
-				{elseif $tview == 'microscopy'}
-					{$experiment.microscopy_list.selected_id}
-				{/if}
-			{else}
-				{$technique_id}
-			{/if}
-		{/let}
-		
-		
-		
-    <a class='scb_s_assignment_step_link {if $step == 6}scb_s_assignment_step_link_active{/if}'
-       href='#view={$tview}&assignment_id={$aid}&experiment_id={$eid}&{$tparam}={$tid}'>
-        {$tname}
-    </a>
-<!-- 
-    <img src='images/header/scb_navigation_arrow.png' alt=''>
- -->
-    {/if}
-
+    <div class='scb_s_assignment_step_link scb_f_lab_notebook_link' onclick='alert("in construction");'>
+    	<div class='scb_s_assignment_step_wrapper'>
+			<div class='scb_s_lab_notebook_link_img'></div>
+			LAB NOTEBOOK
+        </div>
+    </div>
 </div>
 {/if}
 {/template}

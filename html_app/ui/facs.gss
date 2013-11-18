@@ -32,6 +32,7 @@
 	box-shadow: 0 4px 14px -1px gray;
 	position: relative;
 	z-index: 1;
+	top: 20px;
 }
 
 .scb_s_facs_choose_samples_order{
@@ -149,6 +150,8 @@
 	border:inherit;
 	background: 0;
 	cursor: pointer;
+	top: -3px;
+	position:relative;
 }
 
 .scb_f_facs_prepare_lysates{
@@ -157,7 +160,7 @@
 	float: right !important;
 	margin-right: 35px !important;
     bottom: 20px !important;
-    right: 16px !important;
+    right: -1px !important;
     top: 20px !important;
     display:inline-block !important;
     margin-top: 20px !important;
@@ -194,7 +197,7 @@
     background-color: #b0b0b0;
     height:12px;
     top:56px;
-    left: 376px;
+    left: 350px;
 }
 
 
@@ -205,7 +208,7 @@
     background-color: #b0b0b0;
     height:12px;
     top:56px;
-    left: 616px;
+    left: 623px;
 }
 
 
@@ -225,7 +228,7 @@
     width:2px;
     background-color: rgba(225,226,228, 0.3);
     height: 19px;
-    left:330px;
+    left: 304px;
     z-index: 5;
 
 }
@@ -237,11 +240,25 @@
     width:2px;
     background-color: rgba(225,226,228, 0.3);
     height: 19px;
-    left:570px;
-        z-index: 5;
+    left:577px; 
+    z-index: 5;
 
 }
 
+.scb_facs_progress_1{
+
+}
+
+.scb_facs_progress_2{
+	position: relative;
+	left: 202px;
+}
+
+.scb_facs_progress_3{
+	position: relative;
+	left: 431px;
+
+}
 
 
 
@@ -315,6 +332,8 @@ input[type=radio]:disabled{
 .scb_s_facs_add_facs {
 	color: black;
 	text-align:center;
+	right:2px;
+	position:relative;
 }
 
 .scb_s_facs_add_cross_facs {
@@ -347,8 +366,8 @@ input[type=radio]:disabled{
 
 .scb_s_facs_samples_container{
 	position: relative;
-	left:28px;
-	width: 847px;
+	left: 16px;
+	width: 856px;
 	padding-top: 20px;
 	padding-bottom: 33px;
 	border:1px #80d1ae solid;
@@ -460,9 +479,9 @@ input[type=radio]:disabled{
 	border:none;
 	position:absolute;
 	bottom:0;
-    margin-left:80px !important;
+    margin-left:92px !important;
     margin-right:20px !important; 
-    margin-bottom:61px !important;
+    margin-bottom:63px !important;
 
 }
 
@@ -514,11 +533,11 @@ input[type=radio]:disabled{
 .scb_s_facs_tools_analyze_data {
     border: 1px solid #80d1ae;
     margin-top: 10px;
-    margin-left: 3px;
+    margin-left: -3px;
     overflow: scroll;
     border-radius: 5px;
     border-spacing: 0;
-    width:200px;
+    width:189px;
     max-height:200px;
     display:block;
     background-color: white;

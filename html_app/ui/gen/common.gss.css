@@ -7,6 +7,15 @@ div#main {
   left: 20px;
   right: 20px;
 }
+.scb_f_assignments_step_link {
+  width: 202px !important;
+}
+.scb_f_experiments_step_link {
+  width: 178px !important;
+}
+.scb_f_lab_notebook_link {
+  width: 176px !important;
+}
 .scb_s_navigation_button_old {
   padding: 3px 20px;
   min-width: 120px;
@@ -36,7 +45,7 @@ div#main {
   border-radius: 8px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: #68bfa2;
+  background: #6fc7a8;
   padding-top: 5px;
   height: 20px;
   color: white;
@@ -85,6 +94,8 @@ div#main {
   background: #d5dce4;
   margin-right: 10px;
   height: 24px;
+  width: 133px;
+  text-align: center;
   padding: 3px 9px 3px 12px;
 }
 .scb_s_experiment_step_button>a {
@@ -319,6 +330,52 @@ label.custom-select {
 .scb_s_assignment_step_experiment>label, .scb_s_assignment_step_experiment>label>select {
   cursor: pointer;
 }
+.scb_s_assignments_link_img {
+  background-image: url('../images/header/scb_assignment_off.png');
+  background-repeat: no-repeat;
+  height: 26px;
+  width: 36px;
+  margin-right: 15px;
+}
+.scb_s_experiments_link_img {
+  background-image: url('../images/header/scb_experiments_off.png');
+  background-repeat: no-repeat;
+  height: 22px;
+  width: 22px;
+  margin-right: 15px;
+}
+.scb_s_lab_notebook_link_img {
+  background-image: url('../images/header/scb_labnotebook_off.png');
+  background-repeat: no-repeat;
+  height: 22px;
+  width: 22px;
+  margin-right: 15px;
+}
+.scb_s_assignments_link_img_active {
+  background-image: url('../images/header/scb_assignment_on.png');
+  background-repeat: no-repeat;
+  height: 26px;
+  width: 36px;
+  margin-right: 15px;
+}
+.scb_s_experiments_link_img_active {
+  background-image: url('../images/header/scb_experiments_on.png');
+  background-repeat: no-repeat;
+  height: 22px;
+  width: 22px;
+  margin-right: 15px;
+}
+.scb_s_lab_notebook_link_img_active {
+  background-image: url('../images/header/scb_labnotebook_on.png');
+  background-repeat: no-repeat;
+  height: 22px;
+  width: 22px;
+  margin-right: 15px;
+}
+.scb_s_assignment_step_wrapper {
+  display: inline-flex;
+  vertical-align: middle;
+}
 .scb_s_assignment_step {
   background: #d5dce4;
   color: #2c6596;
@@ -335,6 +392,10 @@ label.custom-select {
   margin-right: -13px;
   position: relative;
 }
+.scb_s_selection_arrow_img {
+  float: right;
+  padding-right: 7px;
+}
 .scb_s_assignment_step_link {
   width: 140px;
   height: 60px;
@@ -343,23 +404,22 @@ label.custom-select {
   padding-right: 10px;
   text-align: center;
   letter-spacing: 1px;
-  font-size: 11pt;
+  font-size: 12pt;
   text-decoration: none;
-  color: #2c6596;
+  color: #316f94;
   overflow: hidden;
-  display: inline-block;
-  vertical-align: top;
+  border-right: 1px solid black;
+  display: table-cell;
+  vertical-align: middle;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-top: -2px;
-  font-family: 'sourcesanspro-bold';
+  font-family: 'sourcesanspro-semibold';
 }
 .scb_s_assignment_step_link_active {
-  background: url('../images/header/scb_navigation_button_new.png');
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: #8d97a3;
+  box-shadow: inset 0 6px 17px -2px black;
   margin-left: -1px;
-  margin-top: -1px;
+  color: white;
 }
 .scb_s_gray_button {
   background-color: #676767;

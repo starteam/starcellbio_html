@@ -12,16 +12,18 @@
 	padding-top: 0px;
 	float:right;
 	-webkit-appearance: none;
-	font-family:'sourcesanspro-bold';
+	font-family:'sourcesanspro-semibold';
 	outline:none;
-	height: 25px;
-	width: 25px;
+	height: 23px;
+	width: 23px;
 	cursor:pointer;
-	border: 0;
-	border-radius: 6px;
+	border: 2px solid white;
+	border-radius: 12px;
 	font-size: 14pt;
-	color: black;
-	background: #f4f6f8;
+	color: white;
+	background: black;
+	padding-bottom: 2px;
+	padding-left: 5px;
 }
 
 .scb_f_ug_close_button:hover{

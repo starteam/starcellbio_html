@@ -25,8 +25,9 @@
   overflow-x: hidden;
   margin-right: -10px;
   margin-left: -10px;
-  height: 495px;
-  background: #f5f6f8;
+  margin-top: 42px;
+  height: 499px;
+  background: #f4f6f8;
   box-shadow: 0 16px 8px -10px #ccc;
 }
 .scb_s_assignment_scroll>div {

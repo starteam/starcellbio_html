@@ -164,8 +164,15 @@ scb.ui.static.FacsView.scb_s_facs_selected = function (element) {
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+	if($(element).text().length > 10){
+		$('body').css('overflow', 'hidden');
+		$.jqDialog.alert("Your tab title can only be 10 characters long.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+	
+	}
+	else{
+  
     parsed.facs.name = $(element).text();
+    }
 }
 
 scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, event) {
@@ -257,12 +264,12 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
 	console.log(parsed.facs.parent.start_tabs_index);
 	console.log(parsed.facs.parent.list.length);
-	if(parsed.facs.parent.list.length==5){
+	if(parsed.facs.parent.list.length==4){
 		parsed.facs.parent.start_tabs_index = 1;
 	}
-	else if (parsed.facs.parent.list.length >5)
+	else if (parsed.facs.parent.list.length >4)
 		//parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index +1;
-		parsed.facs.parent.start_tabs_index = parsed.facs.parent.length-4;
+		parsed.facs.parent.start_tabs_index = parsed.facs.parent.length-3;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
@@ -664,7 +671,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 		}
 		else $('.scb_s_facs_left_facs').prop('disabled', false);
 		
-		if(state.facs.parent.start_tabs_index + 4 ==state.facs.parent.list.length-1){
+		if(state.facs.parent.start_tabs_index + 3 ==state.facs.parent.list.length-1){
 			$('.scb_s_facs_right_facs').prop('disabled', true);
 			$('.scb_s_facs_left_facs').prop('disabled', false);
 		}
@@ -702,6 +709,12 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});
-
+		$(".scb_s_facs_selected").keypress(function(e){ return e.which != 13; });
+		if(kind == 'analyze'){
+			$('.scb_s_western_blot_progress_gray_bar').children().each(function () { console.log($(this).css('left'));
+    				$(this).css('left', parseInt($(this).css('left'))-5+'px');
+			});
+			$('.scb_s_western_blot_progress_bar').css('top', '30px');
+		}
     }
 }

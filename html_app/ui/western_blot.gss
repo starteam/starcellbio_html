@@ -65,8 +65,8 @@
 .scb_s_western_blot_samples_container{
 	margin-top: 180px;
 	position: relative;
-	left:28px;
-	width: 847px;
+	left: 16px;
+	width: 856px;
 	padding-top: 20px;
 	padding-bottom: 33px;
 	border:1px #80d1ae solid;
@@ -147,11 +147,15 @@
 	float: right;
 	margin-right: 35px;
     bottom: 20px;
-    right: 16px;
+    right: -1px;
     top: 20px;
     display:inline-block;
     margin-top: 20px;
 
+}
+
+.scb_western_blot_details_view_inner>.scb_f_open_select_technique{
+	margin-left: -24px !important;
 }
 
 .scb_s_western_blot_progress {
@@ -450,7 +454,7 @@
     background-color: #b0b0b0;
     height:12px;
     top:56px;
-    left:176px;
+    left:142px;
 }
 
 
@@ -460,7 +464,7 @@
     background-color: #b0b0b0;
     height:12px;
     top:56px;
-    left:271px;
+    left:233px;
 }
 
 
@@ -470,7 +474,7 @@
     background-color: #b0b0b0;
     height:12px;
     top:56px;
-    left:351px;
+    left:324px;
 }
 
 .scb_s_western_blot_vertical_line_5 {
@@ -479,7 +483,7 @@
     background-color: #b0b0b0;
     height:12px;
     top:56px;
-    left:435px;
+    left:415px;
 }
 
 .scb_s_western_blot_vertical_line_6 {
@@ -488,7 +492,7 @@
     background-color: #b0b0b0;
     height:12px;
     top:56px;
-    left:511px;
+    left:506px;
 }
 .scb_s_western_blot_vertical_line_7 {
     position:absolute;
@@ -496,7 +500,7 @@
     background-color: #b0b0b0;
     height:12px;
     top:56px;
-    left:591px;
+    left:598px;
 }
 
 
@@ -514,7 +518,7 @@
     width:2px;
     background-color: rgba(225,226,228, 0.3);
     height: 19px;
-    left: 155px;
+    left: 121px;
     z-index: 5;
 
 }
@@ -525,7 +529,7 @@
     width:2px;
     background-color: rgba(225,226,228, 0.3);
     height: 19px;
-    left:250px;
+    left:212px;
     z-index: 5;
 
 }
@@ -536,7 +540,7 @@
     width:2px;
     background-color: rgba(225,226,228, 0.3);
     height: 19px;
-    left:330px;
+    left:303px;
     z-index: 5;
 
 }
@@ -546,7 +550,7 @@
     width:2px;
     background-color: rgba(225,226,228, 0.3);
     height: 19px;
-    left:414px;
+    left:394px;
         z-index: 5;
 
 }
@@ -557,7 +561,7 @@
     width:2px;
     background-color: rgba(225,226,228, 0.3);
     height: 19px;
-    left:490px;
+    left:485px;
         z-index: 5;
 
 }
@@ -566,7 +570,7 @@
     width:2px;
     background-color: rgba(225,226,228, 0.3);
     height: 19px;
-    left:570px;
+    left:577px;
         z-index: 5;
 
 }
@@ -577,34 +581,34 @@
 
 .scb_s_western_blot_progress_2{
 	position: relative;
-	left: 43px;
+	left: 13px;
 }
 
 
 .scb_s_western_blot_progress_3{
 	position: relative;
-	left: 82px;
+	left: 29px;
 }
 
 
 .scb_s_western_blot_progress_4{
 	position: relative;
-	left: 120px;
+	left: 60px;
 }
 
 .scb_s_western_blot_progress_5{
 	position: relative;
-	left: 160px;
+	left: 104px;
 }
 
 .scb_s_western_blot_progress_6{
 	position: relative;
-	left: 198px;
+	left: 144px;
 }
 
 .scb_s_western_blot_progress_7{
 	position: relative;
-	left: 236px;
+	left: 188px;
 }
 
 

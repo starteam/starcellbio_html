@@ -21,7 +21,7 @@
 }
 .scb_objective_design {
   margin-top: 18px;
-  background: gray !important;
+  background: 6f7171 !important;
   background-image: none !important;
   color: white !important;
   width: 28px !important;
@@ -53,12 +53,12 @@
 }
 .scb_f_open_assignment {
   bottom: 5px;
-  left: 15px;
+  left: 29px;
   float: left;
 }
 .scb_f_open_experiment_setup {
   bottom: 5px;
-  right: 15px;
+  right: 29px;
 }
 .scb_s_design_description>.scb_f_open_experiment {
   margin-top: 0;

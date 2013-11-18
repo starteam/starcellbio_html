@@ -9,7 +9,10 @@ var __assignment2 = {
     description: 'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
     experiments: {},
     template: {
-        instructions: 'Your new lab is studying vulva development in <i>C. elegans</i>. You screen a chemical library and identify four new drugs, which all affect vulva development, and you name them Vulvarine 1, 2, 3 and 4.<br><br>Increasing amounts of Vulvarines 1 and 2 result in a vulvaless phenotype in the wild-type worms whereas treatment of wild-type worms with Vulvarines 3 and 4 results in a multivulva phenotype. Your advisor tells you that some proteins involved in the vulva development pathway are already known and she advises you to do western blots to test if some of these proteins are affected by these treatments.<br><br>i) Use the StarCellBio software to analyze the western blots from worms treated with increasing doses of Vulvarines. Choose the gene products whose expression you would like to check. <br>ii) Which proteins are affected by Vulvarine treatment? What is the critical Vulvarine concentration for each treatment?<br> iii) Look up the biological function of each protein whose expression is affected by the drug and speculate as to how the change in its levels may have a role in vulva development.<br>',
+        instructions: [
+           ['Goal & Introduction','Your new lab is studying vulva development in <i>C. elegans</i>. You screen a chemical library and identify four new drugs, which all affect vulva development, and you name them Vulvarine 1, 2, 3 and 4.<br><br>Increasing amounts of Vulvarines 1 and 2 result in a vulvaless phenotype in the wild-type worms whereas treatment of wild-type worms with Vulvarines 3 and 4 results in a multivulva phenotype. Your advisor tells you that some proteins involved in the vulva development pathway are already known and she advises you to do western blots to test if some of these proteins are affected by these treatments.<br><br>i) Use the StarCellBio software to analyze the western blots from worms treated with increasing doses of Vulvarines. Choose the gene products whose expression you would like to check. <br>ii) Which proteins are affected by Vulvarine treatment? What is the critical Vulvarine concentration for each treatment?<br> iii) Look up the biological function of each protein whose expression is affected by the drug and speculate as to how the change in its levels may have a role in vulva development.<br>']
+
+        ],
         add_new_row_instructions: 'On this page, set up your experiment to treat the wild-type worms with the four new drugs, Vulvarines 1-4, identified in your chemical screen. <ul><li>To get started, click <b>Add Treatment Protocol.</b></li><li>For each treatment protocol, select the <i>C. elegans</i> strain, treatment(s), and treatment dose.</li><li> For all of your treatments, treat the <i>C. elegans</i> immediately (time = 0 minutes) and collect after 3 days.</li><li>Once you finish setting up your experiment, select <b>Finish setup & run experiment.</b> After you run your experiment, you will be unable to change your treatment protocols.</li></ul>',
         ui_configuration: {
             experiment_steps_setup: true, // this is not even checked...
@@ -387,7 +390,9 @@ var __assigment_tufts = {
     experiments: {
     },
     template: {
-        instructions: "Here come instructions",
+        instructions: [
+        	['Goal & Introduction',"Here come instructions"]
+        ],
         ui: {
             experimental_design: {
                 techniques: [ 'wb' ]
@@ -891,6 +896,9 @@ var __assigment_facs = {
     experiments: {
     },
     template: {
+    	instructions:[
+    		['Goal & Introduction','FACS prototype assignment.']
+    	],
         ui_configuration: {
             experiment_steps_setup: true, // this is not even checked...
             experiment_steps_western_blot: false,
@@ -1080,7 +1088,10 @@ var __basic_tests = {
     description: 'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
     experiments: {},
     template: {
-        instructions: '$DISPLAY_ASSIGNMENT_INSTRUCTIONS$',
+        instructions: [
+        	['Goal & Introduction', '$DISPLAY_ASSIGNMENT_INSTRUCTIONS$']
+
+        ],
 
         ui: {
             experimental_design: {
@@ -1567,7 +1578,7 @@ var __usability_test = {
     description: "Placeholder",
     experiments: {},
     template: {
-        instructions: '',
+        instructions: [['Placeholder', 'Usability test']],
         ui: {
             experimental_design: {
                 techniques: [ 'wb' , 'facs' , 'micro']
@@ -2046,7 +2057,9 @@ var __assigment_706 = {
         description: 'FACS and Western Blot for temperature sensitive mutants',
         experiments: {},
         template: {
-            instructions: 'Here come instructions when we build them',
+            instructions: [
+            	['Goal & Introduction','Here come instructions when we build them']
+            	],
             ui: {
                 experimental_design: {
                     techniques: [ 'wb' , 'facs' , 'micro']
@@ -3127,7 +3140,7 @@ $(function () {
 		if(get_courses_result.list[x].id == 'usability_test'){
 			usability_test = get_courses_result.list[x];
 			usability_test.description = scb_model_usability.abstract();
-			usability_test.template.instructions = scb_model_usability.instructions();
+			//usability_test.template.instructions = scb_model_usability.instructions();
 			usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
 			usability_test.template.setup_video_box_kind = 'coin-slider';
 
@@ -3137,7 +3150,13 @@ $(function () {
 		if(get_courses_result.list[x].id == 'mit_7_06_0313'){
 			assignment_706 = get_courses_result.list[x];
 			assignment_706.description = scb_assignment_specific_mit706s13.assignment_overview();
-    		assignment_706.template.instructions = scb_assignment_specific_mit706s13.assignment_detail();
+    		assignment_706.template.instructions = [
+    			['Goal & Introduction', scb_assignment_specific_mit706s13.goal_and_introduction()],
+    			['Question 1',scb_assignment_specific_mit706s13.question_1()],
+    			['Question 2', scb_assignment_specific_mit706s13.question_2()],
+    			['Question 3', scb_assignment_specific_mit706s13.question_3()],
+    			['Reference Information', scb_assignment_specific_mit706s13.reference_information()]
+    			];
     		assignment_706.template.experiment_setup = scb_assignment_specific_mit706s13.experiment_setup();
 
 			assignment_706.template.ui.experiment_setup.actions.push({
@@ -3166,18 +3185,24 @@ $(function () {
 			});
 			assignment_tufts.template.experiment_setup = scb_assignment_specific_tufts.experiment_setup();
 			assignment_tufts.description = scb_assignment_specific_tufts.assignment_overview();
-			assignment_tufts.template.instructions = scb_assignment_specific_tufts.assignment_detail();
+			//assignment_tufts.template.instructions = scb_assignment_specific_tufts.assignment_detail();
 			get_courses_result.list[x] = assignment_tufts;
 			
 		}
 	}
     __usability_test.description = scb_model_usability.abstract();
-    __usability_test.template.instructions = scb_model_usability.instructions();
+   // __usability_test.template.instructions = scb_model_usability.instructions();
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
     __usability_test.template.experiment_setup = scb_model_usability.experiment_setup();
 
     __assigment_706.description = scb_assignment_specific_mit706s13.assignment_overview();
-    __assigment_706.template.instructions = scb_assignment_specific_mit706s13.assignment_detail();
+    __assigment_706.template.instructions = [
+    			['Goal & Introduction', scb_assignment_specific_mit706s13.goal_and_introduction()],
+    			['Question 1',scb_assignment_specific_mit706s13.question_1()],
+    			['Question 2', scb_assignment_specific_mit706s13.question_2()],
+    			['Question 3', scb_assignment_specific_mit706s13.question_3()],
+    			['Reference Information', scb_assignment_specific_mit706s13.reference_information()]
+    			];
     __assigment_706.template.experiment_setup = scb_assignment_specific_mit706s13.experiment_setup();
 
     __assigment_706.template.ui.experiment_setup.actions.push({
@@ -3203,6 +3228,6 @@ $(function () {
     });
     __assigment_tufts.template.experiment_setup = scb_assignment_specific_tufts.experiment_setup();
     __assigment_tufts.description = scb_assignment_specific_tufts.assignment_overview();
-    __assigment_tufts.template.instructions = scb_assignment_specific_tufts.assignment_detail();
+    //__assigment_tufts.template.instructions = scb_assignment_specific_tufts.assignment_detail();
 
 });

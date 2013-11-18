@@ -121,8 +121,14 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_selected = function (element) {
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+	if($(element).text().length > 10){
+		$('body').css('overflow', 'hidden');
+		$.jqDialog.alert("Your tab title can only be 10 characters long.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+	
+	}
+	else{
     parsed.western_blot.name = $(element).text();
+    }
 }
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (element) {
@@ -277,12 +283,12 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot= function(elem
 	console.log('jalwa');
 	console.log(parsed.western_blot.parent.start_tabs_index);
 	console.log(parsed.western_blot.parent.list.length);
-	if(parsed.western_blot.parent.list.length==5){
+	if(parsed.western_blot.parent.list.length==4){
 		parsed.western_blot.parent.start_tabs_index = 1;
 	}
-	else if (parsed.western_blot.parent.list.length >5)
+	else if (parsed.western_blot.parent.list.length >4)
 		//parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index +1;
-		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.length-4;
+		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.length-3;
 
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
@@ -432,7 +438,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		}
 		else $('.scb_s_western_blot_left_western_blot').prop('disabled', false);
 		
-		if(state.western_blot.parent.start_tabs_index + 4 ==state.western_blot.parent.list.length-1){
+		if(state.western_blot.parent.start_tabs_index + 3 ==state.western_blot.parent.list.length-1){
 			$('.scb_s_western_blot_right_western_blot').prop('disabled', true);
 			$('.scb_s_western_blot_left_western_blot').prop('disabled', false);
 		}
@@ -482,6 +488,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});
-		
+    	
+		$(".scb_s_western_blot_selected").keypress(function(e){ return e.which != 13; });
     }
 }

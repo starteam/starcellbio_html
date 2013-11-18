@@ -184,29 +184,54 @@
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}'><img src="images/western_blot/scb_wb_left_main.png">
     	</button>
-		{foreach $wb in $experiment.western_blot_list.list}
-			{if index($wb) >= $experiment.western_blot_list.start_tabs_index and index($wb) < $experiment.western_blot_list.start_tabs_index +5}     				
+    	{if $experiment.western_blot_list.list.length -1 == $experiment.western_blot_list.start_tabs_index +3}
+    	
+			{foreach $wb in $experiment.western_blot_list.list}
+				{if index($wb) >= $experiment.western_blot_list.start_tabs_index and index($wb) < $experiment.western_blot_list.start_tabs_index +4}     				
 				
-				{if $western_blot.id == $wb.id}
-				<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
-				<span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-					  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
-				<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-						experiment_id='{$experiment.id}'>| &#215;
-				</button>
-				</span>
-				{else}
-				<a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot scb_s_western_blot_more_open_western_blot'
-				   href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
-				   western_blot_id='{$wb.id}'>{$wb.name}</a>
+					{if $western_blot.id == $wb.id}
+					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
+					<span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+						  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+					<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+							experiment_id='{$experiment.id}'>| &#215;
+					</button>
+					</span>
+					{else}
+					<a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot scb_s_western_blot_more_open_western_blot'
+					   href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
+					   western_blot_id='{$wb.id}'>{$wb.name}</a>
+					{/if}
 				{/if}
-			{/if}
-		{/foreach}
-		<span class='scb_s_western_blot_add_western_blot' assignment_id='{$assignment.id}'
-                                     experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> <a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'><span class='scb_s_add_tab'>ADD </span>
-                                <span class='scb_s_western_blot_add_cross_western_blot'>| + </span></a>
-                </span>
+			{/foreach}
+			<span class='scb_s_western_blot_add_western_blot scb_s_western_blot_more_open_western_blot' assignment_id='{$assignment.id}'
+										 experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> 
+										 <a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
+										 <span class='scb_s_add_tab'>ADD </span>
+									<span class='scb_s_western_blot_add_cross_western_blot'>| + </span></a>
+					</span>
+		{else}
+			{foreach $wb in $experiment.western_blot_list.list}
+				{if index($wb) >= $experiment.western_blot_list.start_tabs_index and index($wb) < $experiment.western_blot_list.start_tabs_index +5}     				
+				
+					{if $western_blot.id == $wb.id}
+					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
+					<span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+						  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+					<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+							experiment_id='{$experiment.id}'>| &#215;
+					</button>
+					</span>
+					{else}
+					<a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot scb_s_western_blot_more_open_western_blot'
+					   href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
+					   western_blot_id='{$wb.id}'>{$wb.name}</a>
+					{/if}
+				{/if}
+			{/foreach}
 
+
+		{/if}
 		<button class='scb_s_western_blot_right_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}' >
@@ -501,12 +526,12 @@
         <div class='scb_s_western_blot_vertical_line_7_top'></div>
 		<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
-                {if $step== 1}121px;{/if}
-        {if $step== 2}216px;{/if}
-        {if $step== 3}296px;{/if}
-        {if $step== 4}380px;{/if}
-        {if $step== 5}456px;{/if}
-        {if $step== 6}536px;{/if}
+                {if $step== 1}77px;{/if}
+        {if $step== 2}168px;{/if}
+        {if $step== 3}260px;{/if}
+        {if $step== 4}350px;{/if}
+        {if $step== 5}443px;{/if}
+        {if $step== 6}534px;{/if}
         {if $step== 7}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
 		</div>
 	</div>
