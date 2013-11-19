@@ -326,7 +326,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
 			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
 			$('.scb_f_ug_help_search_bar').draggable({ handle:'.handel'});
-			
+			$('iframe').contents().find('body').css('font-family', "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
 			$('iframe').contents().click(function(event) {
 				$(".scb_s_ug_home").show();
 				if($('iframe').contents().find("#popout").length >0){

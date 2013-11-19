@@ -1,17 +1,5 @@
 
 .scb_f_help{
-/* 
-	width:650px;
-	height:500px;
-
-
-	width:450px;
-	height:300px;
-
-
-	min-width:450px;
-	min-height:300px;
- */
 	position:relative;
 	display: block;
     background: #f4f6f8;
@@ -20,10 +8,8 @@
 	margin-right:auto;
     border-radius: 5px;
     #border: 2px solid #059789;
-    font-family: 'Arial';
-    font-size: 16px;
-/*     overflow:auto; */
-/*     resize:both;  */
+    font-size: 9pt;
+    letter-spacing:0.5px;
 }
 
 
@@ -35,27 +21,8 @@
 	left: 8px;
 }
 
-/* 
-.scb_f_ug_close_button {
-	padding-top: 0px;
-    #@mixin gradient(top,#7eb49d,#157776,#189689);
-	float:right;
-	-webkit-appearance: none;
-	font-family:'sourcesanspro-bold';
-	outline:none;
-	height: 25px;
-	width: 25px;
-	cursor:pointer;
-	border: 0;
-	border-radius: 6px;
-	font-size: 14pt;
-	color: black;
-	background: #f4f6f8;
-}
- */
 
 .heading, .subheading {
-	font-family: 'Verdana';
 	font-size: 12pt;
 	cursor:pointer;
 	color: #289a7b;
@@ -64,7 +31,7 @@
 
 
 body{
-	background: #e9edf1;
+	background: #f4f6f8;
 }
 .body{
 	background-color: #f4f6f8;
@@ -102,11 +69,9 @@ body{
 	height: 55px;
 	color: white;
 	font-size: 16pt;
-	font-family: 'Arial';
 }
 
 .ug_table_of_contents{
-	font-family: 'Verdana';
 	text-transform: uppercase;
 	font-size: 20pt;
 	color:black;
@@ -116,7 +81,6 @@ body{
 .title{
 	text-decoration: underline;
 	cursor: auto;
-	font-family: 'Verdana';
 	font-size: 12pt;
 }
 .title > a >p{
@@ -125,7 +89,6 @@ body{
 }
 
 .scb_f_help_display{
-	font-family: 'Arial';
 	padding-top: 10px;
     padding-left: 10px;
     #margin-top: 75px;
@@ -154,12 +117,12 @@ body{
 }
 
 .scb_s_main_help_link{
-	color:blue;
+	color:#316f94;
 	cursor:pointer;
 }
 
 .scb_s_section_active{
-	color:blue;
+	color:#316f94;
 	cursor:pointer;
 }
 .scb_s_help_sublink>li{

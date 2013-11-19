@@ -11,7 +11,7 @@
   overflow-y: hidden;
 }
 .scb_s_western_blot_active>span, .scb_s_facs_active>span, .scb_s_microscopy_active>span {
-  color: #007bb7;
+  color: #316f94;
   position: relative;
   top: 3px;
 }
@@ -61,8 +61,8 @@
   font-size: 11pt;
   font-family: 'sourcesanspro-semibold';
   text-decoration: none;
-  color: gray;
-  background: #e9ecf1;
+  color: #6f7171;
+  background: #e9edf1;
 }
 .scb_s_western_blot_more_open_western_blot, .scb_s_microscopy_more_open_microscopy {
   top: 9px;
