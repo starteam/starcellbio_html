@@ -212,8 +212,8 @@
     font-family: 'sourcesanspro-semibold';
     position: relative;
 	left: -18px;
-	width: 232px;
-	padding: 7px 3px 3px 22px;
+	width: 221px;
+	padding: 7px 3px 3px 33px;
 	height: 20px;
 	color: #010101;
 }
