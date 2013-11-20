@@ -1,14 +1,18 @@
-.scb_s_western_blot_tabs, .scb_s_facs_tabs, .scb_s_microscopy_tabs {
+.scb_s_western_blot_tabs, .scb_s_microscopy_tabs, .scb_s_facs_tabs {
   position: absolute;
   top: -42px;
   min-width: 895px;
   overflow-y: hidden;
 }
-.scb_s_western_blot_tabs_more, .scb_s_facs_tabs_more, .scb_s_microscopy_tabs_more {
+.scb_s_western_blot_tabs_more, .scb_s_microscopy_tabs_more {
   position: absolute;
   top: -50px;
   min-width: 895px;
-  overflow-y: hidden;
+}
+.scb_s_facs_tabs_more {
+  position: absolute;
+  top: -35px;
+  min-width: 895px;
 }
 .scb_s_western_blot_active>span, .scb_s_facs_active>span, .scb_s_microscopy_active>span {
   color: #316f94;

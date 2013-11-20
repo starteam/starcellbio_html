@@ -45,7 +45,7 @@ scb_facs.display_tabs = function(opt_data, opt_sb) {
 
 scb_facs.display_tabs_selector = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\' ', (opt_data.experiment.western_blot_list.list.length >= 5) ? 'scb_s_facs_tabs_more ' : ' scb_s_facs_tabs', ' \'>');
+  output.append('<div class=\' ', (opt_data.experiment.facs_list.list.length >= 5) ? 'scb_s_facs_tabs_more ' : ' scb_s_facs_tabs', ' \'>');
   if (opt_data.experiment.facs_list.list.length < 5) {
     var wbList106 = opt_data.experiment.facs_list.list;
     var wbListLen106 = wbList106.length;
@@ -55,7 +55,7 @@ scb_facs.display_tabs_selector = function(opt_data, opt_sb) {
     }
     output.append('<span class=\'scb_s_facs_add_facs\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.experiment.facs_list.list[opt_data.experiment.facs_list.list.length - 1].id), '\'><a class=\'scb_f_open_facs scb_s_facs_open_facs\' href=\'#view=facs&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '\'>ADD<span class=\'scb_s_facs_add_cross_facs\'>| + </span></a></span>');
   } else {
-    output.append('<button class=\'scb_s_facs_left_facs\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\'><img src="images/western_blot/scb_wb_left_main.png"></button>');
+    output.append('<button class=\'scb_s_facs_left_facs\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\'></button>');
     if (opt_data.experiment.facs_list.list.length - 1 == opt_data.experiment.facs_list.start_tabs_index + 3) {
       var wbList158 = opt_data.experiment.facs_list.list;
       var wbListLen158 = wbList158.length;
@@ -72,7 +72,7 @@ scb_facs.display_tabs_selector = function(opt_data, opt_sb) {
         output.append((wbIndex203 >= opt_data.experiment.facs_list.start_tabs_index && wbIndex203 < opt_data.experiment.facs_list.start_tabs_index + 5) ? (opt_data.facs.id == wbData203.id) ? '<span class=\'scb_s_facs_active scb_s_facs_more_open_facs\'><span class=\'scb_s_facs_selected\' facs_id=\'' + soy.$$escapeHtml(wbData203.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' contenteditable="true">' + soy.$$escapeHtml(wbData203.name) + '</span><button class=\'scb_f_facs_remove\' facs_id=\'' + soy.$$escapeHtml(wbData203.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'>| &#215;</button></span>' : '<a class=\'scb_f_open_facs scb_s_facs_open_facs scb_s_facs_more_open_facs\' href=\'#view=facs&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '&facs_id=' + soy.$$escapeHtml(wbData203.id) + '\' facs_id=\'' + soy.$$escapeHtml(wbData203.id) + '\'>' + soy.$$escapeHtml(wbData203.name) + '</a>' : '');
       }
     }
-    output.append('<button class=\'scb_s_facs_right_facs\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' ><img src="images/western_blot/scb_wb_right_main.png"></button>');
+    output.append('<button class=\'scb_s_facs_right_facs\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' ></button>');
   }
   output.append('</div>');
   return opt_sb ? '' : output.toString();
