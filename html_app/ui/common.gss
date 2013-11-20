@@ -195,7 +195,6 @@ div#main {
 
 .scb_s_experiment_step_progress_label{
     padding: 5px;
-	width: 150px;
 	text-align: center;
 	left: 5px;
 	letter-spacing: 1px;
@@ -339,7 +338,10 @@ div#main {
 
 }
 
+.custom-select:hover{
+  background: url("../images/setup/scb_experiment_dropdown_hover.png") no-repeat right #FFF;
 
+}
 
 .custom-select {  
 
@@ -349,7 +351,7 @@ div#main {
   padding-top: 6px;
   padding-left: 10px;
   overflow: hidden;
-  background: url("../images/header/downarrow.jpg") no-repeat right #FFF;
+  background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
   box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
 }
 

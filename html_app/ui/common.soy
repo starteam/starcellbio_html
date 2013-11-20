@@ -27,21 +27,21 @@
 {/let}
 {if $step >0}
 <div class='scb_s_assignment_step' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-    <a class='scb_s_assignment_step_link scb_f_assignments_step_link {if $step < 2 and $step >0}scb_s_assignment_step_link_active{/if}' href='#view=assignments'>
+    <a class='scb_s_assignment_step_link scb_f_assignments_step_link {if $step < 2 and $step >0}scb_s_assignment_step_link_active{/if}' href='#view=assignments' aria-label='Assignments' role='tab'>
         <div class='scb_s_assignment_step_wrapper' aria-hidden='true'>
 			<div class='{if $step < 2 and $step >0}scb_s_assignments_link_img_active{else}scb_s_assignments_link_img {/if}'></div>
 			ASSIGNMENTS
         </div>
     </a>
     <a class='scb_s_assignment_step_link scb_f_experiments_step_link {if $step >= 2}scb_s_assignment_step_link_active{/if}'
-       href='#view=experiment_last&assignment_id={$aid}&experiment_id={$eid}' aria-controls='#view=experiment_last&assignment_id={$aid}&experiment_id={$eid}'>
+       href='#view=experiment_last&assignment_id={$aid}&experiment_id={$eid}' aria-label='Experiments' role='tab'>
        <div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
 
 		   <div class='{if $step >= 2}scb_s_experiments_link_img_active{else}scb_s_experiments_link_img {/if}'></div>
 				EXPERIMENTS
     	</div>
     </a>
-    <div class='scb_s_assignment_step_link scb_f_lab_notebook_link' onclick='alert("in construction");'>
+    <div class='scb_s_assignment_step_link scb_f_lab_notebook_link' role='tab' aria-label='Lab Notebook' aria-disabled='true' onclick='alert("in construction");'>
     	<div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
 			<div class='scb_s_lab_notebook_link_img'></div>
 			LAB NOTEBOOK
@@ -59,7 +59,7 @@ Progress bar
 */
 {template .experiment_step}
 <div class='scb_s_experiment_step'>
-	<a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignment.id}"> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>
+	<a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignment.id}" aria-label='New Experiment' role='button'> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>
 
 	<div class = 'scb_s_experiment_step_progress_label'> {$assignment.name}:</div>
 	
@@ -86,10 +86,10 @@ Progress bar
     	
     	<div class='scb_s_experiment_step_main_steps '>
 			<div class='scb_s_experiment_step_labels' aria-live='polite'>
-				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step>1 or  $last_step > 0}scb_s_experiment_step_visited{/if} {if $step==1 }scb_s_experiment_step_selected{/if}'  role ='button'>
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step>1 or  $last_step > 0}scb_s_experiment_step_visited{/if} {if $step==1 }scb_s_experiment_step_selected{/if}' aria-label='Experiment Design' aria-disabled='true' role ='button'>
 
 					{if $step>1 or  $last_step > 0}
-					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}' aria-label='Experiment Design'>DESIGN</a>
+					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >DESIGN</a>
 
 					{else}
 					DESIGN
@@ -101,12 +101,12 @@ Progress bar
 					{/if}	
 				</div>
 		
-				<div class='scb_s_experiment_step_text scb_s_experiment_step_setup_and_run {if $step>2 or $last_step > 3}scb_s_experiment_step_visited{/if} {if $step==2 or $step==3 }scb_s_experiment_step_selected{/if}'  role ='button' >
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_setup_and_run {if $step>2 or $last_step > 3}scb_s_experiment_step_visited{/if} {if $step==2 or $step==3 }scb_s_experiment_step_selected{/if}' aria-label='Setup and Run Experiment'  aria-disabled='true' role ='button' >
 
 					
 					
 					{if $step>2 or $last_step > 3}
-					<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}'aria-label='Setup and Run Experiment'>SETUP & RUN</a>
+					<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >SETUP & RUN</a>
 						
 					{else}
 					SETUP & RUN
@@ -117,11 +117,11 @@ Progress bar
 				
 				</div>
 		
-				<div class='scb_s_experiment_step_text scb_s_experiment_step_select_technique {if $step>3 or   $last_step >4}scb_s_experiment_step_visited{/if} {if $step>3 }scb_s_experiment_step_selected{/if}'  role ='button'>
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_select_technique {if $step>3 or   $last_step >4}scb_s_experiment_step_visited{/if} {if $step>3 }scb_s_experiment_step_selected{/if}'   aria-label='Select Experiment Technique' aria-disabled='true' role ='button'>
 
 					
 					{if $step>3 or   $last_step >4}
-					<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}' aria-label='Select Experiment Technique'>SELECT TECHNIQUE</a>
+					<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >SELECT TECHNIQUE</a>
 
 					{else}
 					SELECT TECHNIQUE
@@ -135,21 +135,21 @@ Progress bar
         </div>
         <div class='scb_s_experiment_step_tech_steps '>
 			<div class='scb_s_experiment_step_buttons_title {if $step>3}scb_s_experiment_step_active_title{/if}'>Select Your Technique: </div>
-						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_wb {if length($experiment.western_blot_list) > 0}scb_s_experiment_step_visited{/if} {if $step==5 }scb_s_experiment_step_selected{/if}'  role ='button'aria-label='Start Western Blotting Technique'>
+						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_wb {if length($experiment.western_blot_list) > 0}scb_s_experiment_step_visited{/if} {if $step==5 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button'aria-label='Start Western Blotting'>
 							{if length($experiment.western_blot_list) > 0}
 							<a href='#view=western_blot&assignment_id={$assignment.id}&experiment_id={$experiment.id}&western_blot_id={$experiment.western_blot_list.selected_id}'>Western Blotting</a>
 							{else}
 							Western Blotting
 							{/if}
 						</div>
-						<div class=' scb_s_experiment_step_button scb_s_experiment_step_button_facs {if length($experiment.facs_list) > 0}scb_s_experiment_step_visited{/if} {if $step==6 }scb_s_experiment_step_selected{/if}' role ='button'  aria-label='Start Flow Cytometry Technique'>
+						<div class=' scb_s_experiment_step_button scb_s_experiment_step_button_facs {if length($experiment.facs_list) > 0}scb_s_experiment_step_visited{/if} {if $step==6 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button'  aria-label='Start Flow Cytometry'>
 							{if length($experiment.facs_list) > 0}
 							<a href='#view=facs&assignment_id={$assignment.id}&experiment_id={$experiment.id}&facs_id={$experiment.facs_list.selected_id}'>Flow Cytometry</a>
 							{else}
 							Flow Cytometry
 							{/if}
 						</div>
-						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_micro {if length($experiment.microscopy_list) > 0}scb_s_experiment_step_visited{/if} {if $step==7 }scb_s_experiment_step_selected{/if}'  role ='button' aria-label='Start Microscopy Technique'>
+						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_micro {if length($experiment.microscopy_list) > 0}scb_s_experiment_step_visited{/if} {if $step==7 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button' aria-label='Start Microscopy'>
 							{if length($experiment.microscopy_list) > 0}
 							<a href='#view=microscopy&assignment_id={$assignment.id}&experiment_id={$experiment.id}&microscopy_id={$experiment.microscopy_list.selected_id}'>Microscopy</a>
 							{else}

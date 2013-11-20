@@ -42,16 +42,16 @@ scb_assignments.display_assignment = function(opt_data, opt_sb) {
     var sectionListLen36 = sectionList36.length;
     for (var sectionIndex36 = 0; sectionIndex36 < sectionListLen36; sectionIndex36++) {
       var sectionData36 = sectionList36[sectionIndex36];
-      output.append('<div class=\'scb_assignments_header_link_wrapper scb_s_assignments_slider_overview ', (sectionIndex36 == 0) ? 'scb_assignments_header_link_selected' : '', '\' role=\'link\'  value=\'', soy.$$escapeHtml(sectionData36[0]), '\' aria-atomic=\'true\' >', soy.$$escapeHtml(sectionData36[0]), '</div>');
+      output.append('<div class=\'scb_assignments_header_link_wrapper scb_s_assignments_slider_overview ', (sectionIndex36 == 0) ? 'scb_assignments_header_link_selected' : '', '\' role=\'link\'  value=\'', soy.$$escapeHtml(sectionData36[0]), '\' aria-controls=\'scb_s_assignment_scroll\' aria-atomic=\'true\' >', soy.$$escapeHtml(sectionData36[0]), '</div>');
     }
-    output.append('<img class = \'scb_s_assignment_header_img_right\'  src=\'../../images/homepage/scb_gray_right_arrow_active.png\' role=\'button\' aria-label=\'Move one section to the right\'></div><div class=\'scb_s_assignment_scroll\' aria-live="assertive">');
+    output.append('<img class = \'scb_s_assignment_header_img_right\'  src=\'../../images/homepage/scb_gray_right_arrow_active.png\' role=\'button\' aria-label=\'Move one section to the right\'></div><div class=\'scb_s_assignment_scroll\' id =\'scb_s_assignment_scroll\'  aria-live="assertive">');
     var sectionList48 = opt_data.assignments.selected.template.instructions;
     var sectionListLen48 = sectionList48.length;
     for (var sectionIndex48 = 0; sectionIndex48 < sectionListLen48; sectionIndex48++) {
       var sectionData48 = sectionList48[sectionIndex48];
       output.append('<div class=\'scb_s_display_section\' style=\'display:', (sectionIndex48 == 0) ? 'block;' : '', '\' value=\'', soy.$$escapeHtml(sectionData48[0]), '\' >', sectionData48[1], '</div>');
     }
-    output.append('</div><br/><a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id=', soy.$$escapeHtml(opt_data.assignments.selected.id), '" role=\'button\'> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>');
+    output.append('</div><br/><a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id=', soy.$$escapeHtml(opt_data.assignments.selected.id), '" aria-label=\'New Experiment\' role=\'button\'> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>');
   }
   output.append('</div>');
   return opt_sb ? '' : output.toString();

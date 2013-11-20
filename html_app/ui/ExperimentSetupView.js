@@ -899,5 +899,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
 			$($('.slider_dots li')[$(this).index()]).attr('class','on');
    			 window.mySwipe.slide($(this).index(), 200);
 		});
+		$('.scb_s_experiment_step_selected').attr('aria-disabled', 'false');
+		$('.scb_s_experiment_step_visited').attr('aria-disabled', 'false');
 	 };
 };

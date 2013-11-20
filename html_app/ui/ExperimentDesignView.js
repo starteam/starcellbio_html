@@ -146,5 +146,8 @@ scb.ui.ExperimentDesignView = function scb_ui_ExperimentDesignView(gstate) {
       if(state.experiment.last_step < 5)
 			state.experiment.last_step = 3;
         document.title = state.experiment.name + " - StarCellBio" ;
+      $('.scb_s_experiment_step_selected').attr('aria-disabled', 'false');
+      
+		$('.scb_s_experiment_step_visited').attr('aria-disabled', 'false');
 	}
 }

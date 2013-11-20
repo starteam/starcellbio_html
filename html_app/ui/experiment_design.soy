@@ -56,7 +56,7 @@ Experiment active area
 				{param experiment: $experiment/}
 			{/call} <br/>
 				<!--<div class='experiment_name_header'>Experiment name:</div>-->
-				<input type='text' class='scb_s_experiment_name_edit' maxlength="15" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'>
+				<input type='text' class='scb_s_experiment_name_edit' maxlength="15" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}' aria-label='Experiment Name' title='{$experiment.name}' role='textbox'>
 			<br/>
 		<!--
 			{$assignment.description |noAutoescape}
@@ -101,8 +101,8 @@ Experiment active area
 		<br/>
 	</div>
 
-        <a class="scb_f_open_experiment_setup scb_s_navigation_button" href="#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}">EXPERIMENT SETUP &nbsp; &#9654;</a><br/>
-        <a class="scb_f_open_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignment.id}">&#9664; &nbsp; COMPLETE ASSIGNMENT</a>
+        <a class="scb_f_open_experiment_setup scb_s_navigation_button" href="#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}" role='button' aria-label='Experiment Setup'>EXPERIMENT SETUP &nbsp; &#9654;</a><br/>
+        <a class="scb_f_open_assignment scb_s_navigation_button" href="#view=assignment&assignment_id={$assignment.id}" role='button' aria-label='Complete Assignment'>&#9664; &nbsp; COMPLETE ASSIGNMENT</a>
 
 </div>
 {/template}
