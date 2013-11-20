@@ -10,7 +10,7 @@
 * @param experiment Experiment model
 */
 {template .main}
-<div class='scb_s_experiment_design_view'>
+<div class='scb_s_experiment_design_view' id='scb_s_experiment_design_view' >
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
     {param context:$context /}
@@ -45,7 +45,7 @@ Experiment active area
 @param experiment
 */
 {template .display_details}
-<div class='scb_s_experiment_design_container'>
+<div class='scb_s_experiment_design_container'  aria-live="assertive" role='alert' >
 
 	<div class='scb_s_design_description'>
 

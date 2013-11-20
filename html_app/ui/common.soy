@@ -28,21 +28,21 @@
 {if $step >0}
 <div class='scb_s_assignment_step' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <a class='scb_s_assignment_step_link scb_f_assignments_step_link {if $step < 2 and $step >0}scb_s_assignment_step_link_active{/if}' href='#view=assignments'>
-        <div class='scb_s_assignment_step_wrapper'>
+        <div class='scb_s_assignment_step_wrapper' aria-hidden='true'>
 			<div class='{if $step < 2 and $step >0}scb_s_assignments_link_img_active{else}scb_s_assignments_link_img {/if}'></div>
 			ASSIGNMENTS
         </div>
     </a>
     <a class='scb_s_assignment_step_link scb_f_experiments_step_link {if $step >= 2}scb_s_assignment_step_link_active{/if}'
-       href='#view=experiment_last&assignment_id={$aid}&experiment_id={$eid}'>
-       <div class='scb_s_assignment_step_wrapper'>
+       href='#view=experiment_last&assignment_id={$aid}&experiment_id={$eid}' aria-controls='#view=experiment_last&assignment_id={$aid}&experiment_id={$eid}'>
+       <div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
 
 		   <div class='{if $step >= 2}scb_s_experiments_link_img_active{else}scb_s_experiments_link_img {/if}'></div>
 				EXPERIMENTS
     	</div>
     </a>
     <div class='scb_s_assignment_step_link scb_f_lab_notebook_link' onclick='alert("in construction");'>
-    	<div class='scb_s_assignment_step_wrapper'>
+    	<div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
 			<div class='scb_s_lab_notebook_link_img'></div>
 			LAB NOTEBOOK
         </div>
@@ -67,9 +67,9 @@ Progress bar
 			
 				<label class="custom-select">
 
-					<select onchange="location = this.value;">
+					<select role='list' aria-label='Experiments' alt='' onchange="location = this.value;">
 						{foreach $e in $assignment.experiments.list}
-							<option value='#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$e.id}' model_id='{$assignment.id}' sub_model_id='{ $experiment.id }' 
+							<option role='listitem' aria-label='{$e.name}' value='#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$e.id}' model_id='{$assignment.id}' sub_model_id='{ $experiment.id }' 
 								{if  $experiment.id  == $e.id}selected="selected"{/if}> 
 								{$e.name}&nbsp;&nbsp;
 								
@@ -89,7 +89,7 @@ Progress bar
 				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step>1 or  $last_step > 0}scb_s_experiment_step_visited{/if} {if $step==1 }scb_s_experiment_step_selected{/if}'  role ='button'>
 
 					{if $step>1 or  $last_step > 0}
-					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}' aria-labelledby='Experiment Design'>DESIGN</a>
+					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}' aria-label='Experiment Design'>DESIGN</a>
 
 					{else}
 					DESIGN
@@ -106,7 +106,7 @@ Progress bar
 					
 					
 					{if $step>2 or $last_step > 3}
-					<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}'aria-labelledby='Setup and Run Experiment'>SETUP & RUN</a>
+					<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}'aria-label='Setup and Run Experiment'>SETUP & RUN</a>
 						
 					{else}
 					SETUP & RUN
@@ -121,7 +121,7 @@ Progress bar
 
 					
 					{if $step>3 or   $last_step >4}
-					<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}' aria-labelledby='Select Experiment Technique'>SELECT TECHNIQUE</a>
+					<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}' aria-label='Select Experiment Technique'>SELECT TECHNIQUE</a>
 
 					{else}
 					SELECT TECHNIQUE
