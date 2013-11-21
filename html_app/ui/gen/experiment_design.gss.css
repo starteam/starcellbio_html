@@ -11,6 +11,7 @@
   margin-left: 35px;
   border-radius: 8px;
   background: #f5f6f8;
+  margin-bottom: 15px;
 }
 .scb_s_experiment_design_container {
   background: white;
@@ -21,7 +22,7 @@
 }
 .scb_objective_design {
   margin-top: 18px;
-  background: 6f7171 !important;
+  background: #6f7171 !important;
   background-image: none !important;
   color: white !important;
   width: 28px !important;
@@ -35,10 +36,30 @@
   background-color: #f4f6f8;
   width: 1002px;
 }
+.scb_s_design_description>.scb_objective_design {
+  left: 13px;
+  position: relative;
+}
+.scb_s_design_technique_learn_more {
+  display: inline-block;
+  background: transparent;
+  border-width: 0;
+  background-size: 110px 33px;
+  background-position: center;
+  height: 24px;
+  width: 95px;
+  margin-left: 0;
+  font-family: 'sourcesanspro-bold';
+  font-size: 10.5pt;
+  color: #00b49a;
+  background-position-x: 0;
+  background-position-y: 1px;
+  text-decoration: none;
+  text-transform: lowercase;
+}
 .scb_s_experiment_design_techniques_container {
   text-align: left;
   display: inline-block;
-  position: relative;
   min-height: 200px;
 }
 .scb_s_experiment_design_techniques_tq {
@@ -75,10 +96,14 @@
 .scb_s_experiment_design_hypothesis_container, .scb_s_experiment_design_techniques_container, .scb_s_experiment_design_objective_container {
   padding-top: 15px;
   display: inline-block;
+  position: relative;
+  left: 13px;
 }
 .scb_s_experiment_name_edit {
   font-family: 'sourcesanspro-semibold';
   font-size: 11pt;
+  left: 11px;
+  position: relative;
 }
 .scb_s_experiment_design_technique_wb, .scb_s_experiment_design_technique_flow, .scb_s_experiment_design_technique_micro {
   display: inline-block;
@@ -92,7 +117,7 @@
   margin-right: 20px;
   margin-top: 10px;
   background-color: #edeef2;
-  height: 180px;
+  height: 114px;
   vertical-align: top;
   font-size: 10pt;
   padding-top: 20px;
@@ -116,6 +141,7 @@
 .scb_s_experiment_design_technique {
   width: 200px;
   height: 150px;
+  display: inline;
 }
 .scb_s_experiment_design_technique_micro:hover, .scb_s_experiment_design_technique_flow:hover, .scb_s_experiment_design_technique_wb:hover {
   position: relative;

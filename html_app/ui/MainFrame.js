@@ -274,23 +274,23 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         });
 		$('iframe').load(function(){
 			
-    		var frame = document.getElementsByTagName('iframe')[0];
-			var content = (frame.contentDocument || frame.contentWindow);
-			content.body.style.fontSize = '90%';
-			content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
-			var inputs = content.getElementsByTagName('input');
-			$(inputs).css('font-family', 'Trebuchet MS, sans-serif');
-			$(inputs).css('text-transform', 'uppercase');
-			$(inputs).css('background-color','#e0e0e0');
-			$(inputs).css('border','1px solid #e0e0e0');
-			var texts = content.querySelectorAll('input[type="text"]');
-			$(texts).css('height','25px');
+				var iframe = document.getElementsByTagName('iframe')[0];
+				var content = (iframe.contentDocument || iframe.contentWindow);
+				content.body.style.fontSize = '90%';
+				content.body.style.fontFamily = 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif';
+			    var inputs = content.getElementsByTagName('button');
+ 				$(inputs).css('font-family', 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
+				var fieldset = content.querySelectorAll('fieldset');
+				var texts = content.querySelectorAll('input');
+				$(texts).attr('placeholder', '');
+				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
+				
+				var iframe = $('.iframe').contents();
+				//iframe.find('body').css({'font-family':'sourcesanspro-bold'});
+				iframe.find('input[type="checkbox"]').css('height', '12px');
+			
 			var fieldset = content.querySelectorAll('fieldset');
 			$(fieldset).css('border', '0');
-			var submit = content.getElementsByClassName('scb_f_contact_submit_button');
-			$(submit).css({'float':'right', '-webkit-appearance':'none', 'border-radius': '5px', 'letter-spacing':'1px',
-				 'text-transform':'uppercase','border': '1px solid #e0e0e0', 'background-color': '#676767', 'border': '1px solid #e0e0e0',
-				 'height': '30px','color': 'white','font-size': '10pt', 'cursor':'pointer'});
 			$('iframe').contents().find(".scb_f_contact_submit_button").click(function(e){
 					$('iframe').load(function(){
 						  var profile = $('iframe').contents();
@@ -317,7 +317,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         });
 		$('.scb_f_ug_help_search_bar').resize(function(){
 			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
-			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
+			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+60);
 		
 		});
 		
@@ -326,7 +326,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
 			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
 			$('.scb_f_ug_help_search_bar').draggable({ handle:'.handel'});
-			$('iframe').contents().find('body').css('font-family', "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
+			$('iframe').css('margin-right', '10px');
+			$('iframe').contents().find('body').css('font-family', "Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
+		
 			$('iframe').contents().click(function(event) {
 				$(".scb_s_ug_home").show();
 				if($('iframe').contents().find("#popout").length >0){
@@ -358,15 +360,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					$('#search').click();
 				}
 			});
-			
-			
-// 			$(".help_search_input").keyup(function(e){
-// 				var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
-// 				if(key == 13){
-// 					e.preventDefault();
-// 					$('#search').click();
-// 				}
-// 			});
 			
 			
 			$(".scb_s_ug_home").click(function(){
@@ -445,7 +438,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
 				
 				var iframe = $('.iframe').contents();
-				//iframe.find('body').css({'font-family':'sourcesanspro-bold'});
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 				iframe.find('a:contains("Member")').click(function(){
 					$('.iframe').load(function(){

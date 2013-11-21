@@ -4,36 +4,87 @@
 </head>
 
 <body>
+<style>
+
+
+input[type=text]{
+	height: 31px;
+	clear: left;
+	display: block;
+	width: 373px;
+	box-shadow: inset 1px 1px 4px 0px gray;
+}
+
+.radios >input{
+	margin-left: 20px;
+}
+
+body {
+
+    position: absolute;
+    background: #f4f6f8;
+    top:0px;
+    font-family: 'sourcesanspro-bold';
+    font-size: 10pt;
+    color:#316f94;
+    
+}
+
+label{
+	color: #316f94;
+	font-size: 9pt;
+	letter-spacing: 1px;
+	font-weight: bold;
+	float: left;
+	display:block;
+	margin-bottom: 5px;
+	text-transform:uppercase;
+
+}
+
+.scb_f_contact_submit_button{
+		float:right; 
+		-webkit-appearance:none; 
+		border-radius: 8px; 
+		letter-spacing:1px;
+		text-transform:uppercase;
+		background: #68bfa2; 
+		height: 27px;
+		color: white;
+		font-size: 9pt; 
+		cursor:pointer;
+		position:relative;
+		bottom: 8px;
+		padding-left: 13px;
+		padding-right: 9px;
+		top:1px;
+		border: 0;
+}
+
+</style>
 	<form class='scb_f_contact_form' action="/scb/contact" method="post">
               <fieldset class='scb_f_fieldset'>
                 <input id="project" name="project" type="hidden" value="StarCellBio"> <input id="source" name="source" type="hidden" value="app"> 
-                
-<!-- 
-                <legend>Feedback
-                Form</legend>
- -->
-                <p>
-                  <label>Your name (optional):</label> <input name="name" size="25/" type="text">
-                </p>
-                <p>
-                	<label>Email (optional):</label> <input name="email" type="text">
-                </p>
-                <p>
-                  <label>May we contact you via email?</label>
-                  <input checked="checked" name="subscribe" type="checkbox">
-                </p>
 
-                <p>
+                  <label>Your name (optional):</label> <br><input name="name" size="25/" type="text">
+                <br>
+                	<label>Email (optional):</label> <br><input name="email" type="text">
+				<br>
+				<span>
+                  <label>May we contact you via email?</label>
+                  <input checked="checked" name="subscribe" type="checkbox"></span><br><br>
+
                   <label>Report type:</label><br>
+                  <div class='radios'><br>
                   <input name="report" type="radio" value="Bug">Bug<br>
                   <input name="report" type="radio" value="Feature">Feature request<br>
                   <input name="report" type="radio" value="Comment">Comment<br>
                   <input name="report" type="radio" value="Question">Question
-                </p>
-				<p>
+                  </div>
+					<br>
                   <label>Comment:</label><br>
-                  <textarea cols="40" name="note" rows="10" style="width: 100%;"></textarea>
-                </p>
+                  <textarea cols="40" name="note" rows="10" style="width: 100%;"></textarea><p/>
+
                 <input class='scb_f_contact_submit_button' type="submit" value="Submit">
               </fieldset>
             </form>

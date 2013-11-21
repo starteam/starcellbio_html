@@ -99,7 +99,8 @@ $.get( "user_guide.html", function(data) {
 	}
 	$('.scb_s_help_section > span:contains("")').remove()
 	$('.scb_s_help_sublink > span').addClass('scb_s_section_active')
-	
+	$('.scb_s_help_sublink').append('<br/>')
+	$('.scb_s_help_sublink > li').css('text-indent', '35px');
 	
 }); 
 

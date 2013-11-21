@@ -94,13 +94,3 @@
 .scb_f_login_close_button:hover, .scb_f_signup_close_button:hover, .scb_f_logout_close_button:hover{
 	background-color: #e58986;
 }
-
-.scb_s_feedback_form{
-	background: #f4f6f8;
-    color: black;
-    padding: 5px;
-    height: 25px;
-    position: relative;
-    left: 5px;
-    text-transform:uppercase;
-}

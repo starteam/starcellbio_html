@@ -276,7 +276,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 				$('body').prepend(mask);
 
 				$(element).attr('href', 'javascript:void(0)');
-				$.jqDialog.content("<div class='scb_s_warning_dialog'><h1>CONFIRM SET-UP</h1><p>"+
+				$.jqDialog.content("<div class='scb_s_warning_dialog'><h1>Confirm Set-Up</h1><p>"+
 				"Once you confirm the set-up of this experiment and run it, you cannot go back to edit this experiment's set-up. To go back and edit your set-up, click <b>EDIT SET-UP</b> or click on <b>CONFIRM SET-UP AND RUN</b> to proceed."+
              "</p><a class='scb_s_navigation_button scb_f_open_select_technique' href='#view=select_technique&assignment_id="+parsed.assignment.id+"&experiment_id="+parsed.experiment.id+"'"+
 			   "assignment_id='"+parsed.assignment.id+"' experiment_id='"+parsed.experiment.id+"'>CONFIRM SET-UP & RUN &nbsp; &#9654;</a><br/>"

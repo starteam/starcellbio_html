@@ -55,7 +55,7 @@ div#main {
   font-family: 'sourcesanspro-semibold';
   cursor: pointer;
   position: relative;
-  margin-top: 10px;
+  margin-top: -1px;
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 5px;
@@ -216,7 +216,6 @@ div#main {
   color: white;
 }
 .scb_s_experiment_step_tech_steps {
-  background: white;
   height: 72px;
   width: 882px;
   font-size: 13pt;
@@ -284,6 +283,7 @@ div#main {
 label.custom-select {
   position: relative;
   display: inline-block;
+  height: 19px;
 }
 .custom-select:hover {
   background: url("../images/setup/scb_experiment_dropdown_hover.png") no-repeat right #fff;
@@ -291,7 +291,8 @@ label.custom-select {
 .custom-select {
   width: 219px;
   height: 21px;
-  padding-top: 6px;
+  padding-top: 4px;
+  padding-bottom: 3px;
   padding-left: 10px;
   overflow: hidden;
   background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #fff;
@@ -309,6 +310,7 @@ label.custom-select {
   border-radius: 0;
   height: 22px;
   -webkit-appearance: none;
+  bottom: 1px;
 }
 #jqDialog_options>button {
   background-color: #fff;
@@ -410,7 +412,9 @@ label.custom-select {
   text-decoration: none;
   color: #316f94;
   overflow: hidden;
-  border-right: 1px solid black;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  box-shadow: 0 1px 0 1px white;
   display: table-cell;
   vertical-align: middle;
   text-overflow: ellipsis;

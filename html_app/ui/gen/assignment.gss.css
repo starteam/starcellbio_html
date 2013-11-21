@@ -29,6 +29,8 @@
   height: 499px;
   background: #f4f6f8;
   box-shadow: 0 9px 9px -2px #939aa3;
+  text-align: left;
+  padding-top: 22px;
 }
 .scb_s_assignment_scroll>div {
   margin-right: 10px;

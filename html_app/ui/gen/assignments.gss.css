@@ -27,7 +27,7 @@
 .scb_s_assignments_description>.scb_f_open_experiment {
   bottom: 5px;
   float: right;
-  margin-top: 0;
+  margin-top: 25px;
 }
 .scb_s_assignments_slider_header {
   display: inline-block;
@@ -96,7 +96,7 @@
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
   margin-right: -10px;
-  letter-spacing: 1px;
+  letter-spacing: .9px;
 }
 .scb_s_assignments_sidebar_title {
   font-size: 13pt;

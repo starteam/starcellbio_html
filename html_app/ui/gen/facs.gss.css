@@ -252,6 +252,7 @@ input[type=radio] {
   border: 1px solid #c0c0c0;
   background-color: #d0d0d0;
   border-radius: 6px;
+  cursor: pointer;
 }
 input[type=radio]:checked {
   margin-right: 7px;

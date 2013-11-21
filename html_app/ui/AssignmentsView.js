@@ -41,7 +41,7 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
        	
        	var section = $(list[index-1]).attr('value');
        	 $('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_active.png');
-       	 $('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_inactive.png');
+       	 $('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_active.png');
        	 
 		$('.scb_s_display_section').hide()
        	$('.scb_s_display_section[value="'+section+'"]').show();
@@ -71,7 +71,7 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
        	$(list[index+1]).addClass('scb_assignments_header_link_selected');
        	var section = $(list[index+1]).attr('value');
        	$('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_active.png');
-       	$('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_inactive.png');
+       	$('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_active.png');
 		$('.scb_s_display_section').hide()
        	$('.scb_s_display_section[value="'+section+'"]').show();
        	}

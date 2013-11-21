@@ -86,6 +86,7 @@
     background-color: #F4F6F8;
     display: block;
     position: relative;
+    box-shadow: 0 9px 9px -2px #939aa3;
 }
 
 .scb_s_header_line_top {
@@ -290,6 +291,7 @@
     border-radius: 5px;
     margin-left: 11px;
     width: 936px;
+    margin-bottom: 10px;
     background-image: url('../images/homepage/SCB_Homepage_LowerBG.png');
 
 }

@@ -62,6 +62,7 @@
 @param can_prepare_slide
 */
 {template .display_details}
+<div class='scb_s_microscopy_container'>
 <div class='scb_microscopy_details_view'>
 	{call scb_common.experiment_step}
         {param step:7/}
@@ -84,6 +85,7 @@
     </div>
 	</div>
 
+</div>
 </div>
 {/template}
 
@@ -481,48 +483,52 @@
 */
 {template .display_m_progress}
 <div class='scb_s_microscopy_progress'>
-
-    <span class='scb_s_microscopy_progress_prefix_group1'>
-    <img class='scb_s_microscopy_progress_prefix_img' src="images/microscopy/backbackback.png">
-    <div class='scb_experiment_step_selected scb_s_experiment_step_circle'>
-        <div class='scb_s_microscopy_progress_prefix'>5</div>
-    </div>
-
-    <div class='scb_s_microscopy_progress_prefix_text'>
-        PERFORM MICROSCOPY
-    </div>
-    <div class='scb_s_facs_progress_rest'>
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 {if $step >= 1}scb_s_western_blot_progress_selected{/if}'>
-            1. Sample Prep
-        </div>
-        <img class='scb_s_western_blot_progress_vertical_line'
-             src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
-
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2 {if $step >= 2}scb_s_western_blot_progress_selected{/if}'>
-            2. Prepare Slides
-        </div>
-        <img class='scb_s_western_blot_progress_vertical_line'
-             src='images/western_blot/SCB_WesternBlotting_F_copy_0001s_0001s_0001s_0000_Separator-line-1.png'>
-
-        <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3 {if $step >= 3}scb_s_western_blot_progress_selected{/if}'>
-            3. Analyze
-        </div>
-
-    </div>
-    </span>
-    <div class='scb_s_microscopy_video_box_wrapper'>
+	<div class='scb_s_microscopy_video_box_wrapper'>
             <div class='scb_s_microscopy_video_box_wrapper_title'>
                  IN THE LAB
             </div>
             <div class='scb_s_microscopy_video_reminder'>
                    <div class='scb_s_microscopy_video_box'> 
                    </div>
-               </div>
             </div>
+	 </div>
     
     
-    <span class='scb_s_microscopy_progress_prefix_group2'>
-	</span>
+    <div class='scb_s_microscopy_vertical_line_1'></div>
+    <div class='scb_s_microscopy_vertical_line_4'></div>
+	<div class='scb_s_microscopy_vertical_line_7'></div>
+    <div class='scb_s_western_blot_progress_bar'>
+
+		<div class = 'scb_s_western_blot_progress_gray_bar'>
+			<div class='scb_s_facs_vertical_line_1_top'></div>
+			<div class='scb_s_facs_vertical_line_4_top'></div>
+			<div class='scb_s_facs_vertical_line_7_top'></div>
+			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
+
+						{if $step== 1}166px;{/if}
+				{if $step== 2} 438px;{/if}
+				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
+			</div>
+		</div>
+	
+		<div class='scb_s_facs_progress_rest'>
+			<div class='scb_s_western_blot_progress_item scb_microscopy_progress_1'>
+				1. Sample Prep
+			</div>
+	 
+			<div class='scb_s_western_blot_progress_item scb_microscopy_progress_2'>
+				2. Prepare Slides
+			</div>
+  
+			<div class='scb_s_western_blot_progress_item scb_microscopy_progress_3'>
+				3. Analyze
+			</div>
+
+		</div>
+
+    </div>
+
+    
     
     
 
