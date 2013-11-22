@@ -40,7 +40,16 @@
 	box-shadow:  0 9px 9px -2px #939aa3;
 	text-align: left;
 	padding-top: 22px;
+	padding-left:15px;
+	padding-right:27px;
 }
+
+.scb_s_assignment_scroll h2{
+	color: #316f94;
+	font-family: sourcesanspro-semibold;
+}
+
+
 .scb_s_assignment_scroll > div{
 	margin-right:10px;
 	margin-left:5px;

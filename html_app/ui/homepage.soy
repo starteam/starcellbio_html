@@ -54,13 +54,26 @@ Assignment title
             <img class='scb_s_user_guide_icon' src='images/header/scb_user_guide_icon.png' alt='' role='presentation'>
             <span class='scb_s_user_guide_text scb_s_header_tools_text'>USER GUIDE</span></span>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' alt='' role='presentation'>
-        <a class='scb_f_login' href='#view=assignments'><img class='scb_s_login_status' 
+        <a class='scb_f_login' href='#view=assignments'>
+        <span class='scb_s_login_status' alt='Sign in'>        	
+        	{if $context.auth and $context.auth.logged_in}
+        		SIGN OUT
+        	{else}
+        		SIGN IN
+        	{/if}
+                                         
+        </span>
+        
+<!-- 
+        <img class='scb_s_login_status' 
         	{if $context.auth and $context.auth.logged_in}
         		src='images/header/scb_signout_text.png'
         	{else}
         		src='images/header/scb_signin_text.png'
         	{/if}
-                                         alt='Sign in'></a>
+                                         alt='Sign in'>
+ -->
+        </a>
     </span>
 
     <div id='saving'>

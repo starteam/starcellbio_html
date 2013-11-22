@@ -49,6 +49,12 @@
   margin-left: -10px;
   cursor: pointer;
 }
+.scb_assignments_header_link_wrapper>span {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+}
 .scb_assignments_header_link_wrapper {
   height: 16px;
   background: rgba(0,0,0,0);
@@ -59,10 +65,32 @@
   font-size: 11pt;
   font-family: 'sourcesanspro-semibold';
   padding: 12px 22px 13px 12px;
-  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   box-shadow: inset 0 16px 8px -10px #ccb,inset 0 -16px 8px -10px #ccc;
+}
+.scb_assignments_header_link_selected>span {
+  background: #316f94;
+  padding: 12px 22px 10px 12px;
+  right: 12px;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 81.8px;
+  display: block;
+  bottom: 12px;
+  box-shadow: inset 0 16px 36px -15px #000,inset 0 -16px 25px -16px #000;
+}
+.arrow-down-blue {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #348ec2;
+  left: 26px;
+  top: -16px;
+  position: relative;
 }
 .scb_s_display_section {
   display: none;
@@ -72,11 +100,8 @@
 }
 .scb_assignments_header_link_selected {
   color: white;
-  background-image: url('../../images/homepage/scb_assignment_blue_section.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  height: 31px;
-  box-shadow: none;
 }
 .scb_s_abstract_title_underline {
   width: 664px;

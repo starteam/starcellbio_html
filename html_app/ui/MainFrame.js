@@ -304,7 +304,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     });
 		//HANDLER FOR USER_GUIDE BUTTON AND IFRAME
 	    scb.utils.off_on(workarea.parent(), 'click', '.scb_f_user_guide', function (evt) {
-    	$(workarea).append(scb_userguide.userguide({}));
+    	$('body').append(scb_userguide.userguide({}));
     	$('.scb_f_ug_down_button').hide();
     	$('.scb_f_ug_up_button').hide();
     	$('.scb_f_ug_search_line').hide();
@@ -312,7 +312,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     	$("#main_popout").hide();
     	$(".scb_s_ug_home").hide();
     	$('.scb_display_search_count').hide();
-    	scb.utils.off_on(workarea, 'click', '.scb_f_ug_close_button', function () {
+    	scb.utils.off_on('body', 'click', '.scb_f_ug_close_button', function () {
                 $('.scb_f_ug_help_search_bar').detach();
         });
 		$('.scb_f_ug_help_search_bar').resize(function(){
@@ -369,16 +369,16 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			
 			$("#main_popout").click(function(){
 					var popout_string = "";
-					var visible=	$('iframe').contents().find('u:visible');
+					var visible=	$('iframe').contents().find('.scb_s_section_inactive:visible');
 					if(visible.length ==1)
 					{	
-						if(!$(visible).attr('class'))
-							popout_string = $('iframe').contents().find('*:visible ').parent('.scb_s_help_sublink').attr('class').split(' ')[1];
+						if($(visible).attr('class') == 'scb_s_section_inactive')
+							popout_string = $('iframe').contents().find('*:visible ').closest('.scb_s_help_sublink').attr('class').split(' ')[1];
 						else
 							popout_string = $(visible).attr('class');
 					}
 					else{
-						popout_string = $($('iframe').contents().find('u:visible')[0]).attr('class');
+						popout_string = $($('iframe').contents().find('span:visible')[0]).attr('class');
 					}
 	
 					popout_string = popout_string.replace(/_/g, '-');
@@ -751,7 +751,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             }
         }
         if (get_courses_result.is_auth) {
-            $('.scb_s_login_status').attr('src', 'images/header/scb_signout_text.png');
+            $('.scb_s_login_status').text('SIGN OUT');
             $('.scb_f_try_an_experiment').click();
         }
         scb.ui.static.MainFrame.pending_save(parsed);

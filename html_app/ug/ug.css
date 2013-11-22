@@ -121,17 +121,23 @@ body{
 	cursor:pointer;
 }
 
-.scb_s_section_active{
+.scb_s_section_active  span{
 	color:#316f94;
+	text-decoration: underline;
 	cursor:pointer;
 }
 .scb_s_help_sublink>li{
 	cursor: default;
 }
 
+.underline{
+	
+	text-decoration: underline;
+}
 
-.scb_s_section_inactive{ 
-	color:black;
+.scb_s_section_inactive  span{ 
+	color:#316f94;
+	text-decoration: initial !important;
 	cursor: default;
 	
 }

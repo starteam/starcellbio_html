@@ -73,7 +73,7 @@ Assignment description
 		 
 		 
 		 {foreach $section in $assignments.selected.template.instructions}
-		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == 0}scb_assignments_header_link_selected{/if}' role='link' title='{$section[0]}'   value='{$section[0]}' aria-controls='scb_s_assignment_scroll' aria-atomic='true' >{$section[0]}</div>
+		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == 0}scb_assignments_header_link_selected{/if}' role='link' title='{$section[0]}'   value='{$section[0]}' aria-controls='scb_s_assignment_scroll' aria-atomic='true' ><span>{$section[0]}</span>{if index($section) == 0}<div class="arrow-down-blue"></div>{/if}</div>
 		{/foreach}	 
 
 		<img class = 'scb_s_assignment_header_img_right'  src='../../images/homepage/scb_gray_right_arrow_active.png' role='button' aria-label='Move one section to the right'>

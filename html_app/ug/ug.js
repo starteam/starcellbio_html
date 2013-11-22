@@ -6,16 +6,16 @@ $('.scb_s_ug_home').hide();
 function popoutGuide(){
 	//window.open('', '_blank');
 	var popout_string = "";
-	var visible=	$('u:visible');
+	var visible=	$('.scb_s_section_inactive:visible');
 	if(visible.length ==1)
 	{	
-		if(!$(visible).attr('class'))
-			popout_string = $('*:visible ').parent('.scb_s_help_sublink').attr('class').split(' ')[1];
+		if($(visible).attr('class') == 'scb_s_section_inactive')
+			popout_string = $('*:visible').closest('.scb_s_help_sublink').attr('class').split(' ')[1];
 		else
 			popout_string = $(visible).attr('class');
 	}
 	else{
-		popout_string = $($('u:visible ')[0]).attr('class');
+		popout_string = $($('span:visible')[0]).attr('class');
 	}
 	
 	popout_string = popout_string.replace(/_/g, '-');
@@ -46,7 +46,7 @@ $.get( "user_guide.html", function(data) {
 				if(next.className !="SCB-Heading1")
 					text= text + $(next).html();
 				else{
-					text = text + '&#9;<div class="scb_s_help_sublink"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>' + next.textContent.trim()+'</u></span><br/></div>';				}
+					text = text + '&#9;<div class="scb_s_help_sublink"><span class="scb_s_section_active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>' + next.textContent.trim()+'</span></span><br/></div>';}
 			}
 			next = next.nextSibling;
 			
@@ -55,7 +55,7 @@ $.get( "user_guide.html", function(data) {
 		var lnk = document.createElement('span');
 		lnk.className = 'scb_s_main_help_link';
 		lnk.style.textTransform = 'uppercase';
-		lnk.innerHTML = '<p/><u class="scb_s_main_section_'+i+'">'+$(links[i]).text()+"</u>" + "<p/>";
+		lnk.innerHTML = '<p class="scb_s_section_active"><span  class="scb_s_main_section_'+i+'">'+$(links[i]).text()+"</span></p>" + "<p/>";
 		var div = document.createElement('div');
 		div.className = 'scb_s_help_section scb_s_help_section_'+i;
 		div.innerHTML = text;
@@ -98,7 +98,6 @@ $.get( "user_guide.html", function(data) {
 		
 	}
 	$('.scb_s_help_section > span:contains("")').remove()
-	$('.scb_s_help_sublink > span').addClass('scb_s_section_active')
 	$('.scb_s_help_sublink').append('<br/>')
 	$('.scb_s_help_sublink > li').css('text-indent', '35px');
 	
@@ -109,7 +108,7 @@ $.get( "user_guide.html", function(data) {
 function bindItem(item, ind) {
 		$(item).click(function(){
 			if($('.scb_s_help_section_'+ind).children().children('li').css('display')=='none'|| $('.scb_s_help_section_'+ind).children('li').css('display')=='none'){
-				$('.scb_s_help_section_'+ind +' span').attr('class', 'scb_s_section_inactive');
+				$('.scb_s_help_section_'+ind +' span>span').attr('class', 'scb_s_section_inactive');
 				$(item).children().attr('onclick', 'false');
 				if($('.scb_s_help_link_'+ ind).css('display') != 'none')
 					$('.scb_s_help_link_'+ ind).css('display', 'none');
@@ -296,7 +295,8 @@ function mainUG(){
 	$('.scb_f_help a').each(function() {
     	$(this).replaceWith($(this).text());
 	});
-	$('.scb_s_section_inactive').attr('class', 'scb_s_section_active');
+	$('.scb_s_section_inactive').addClass('scb_s_section_active');
+	$('.scb_s_section_inactive').removeClass('scb_s_section_inactive');
 	$('.scb_s_main_help_link').css('display', 'inline');
 	$('.scb_s_help_sublink >span').show();
 	$('li').hide();

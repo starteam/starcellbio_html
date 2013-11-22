@@ -32,6 +32,10 @@
   font-size: 11pt;
   text-align: left;
 }
+.scb_s_mit706s13_assignment_overview h2 {
+  color: #316f94;
+  font-family: sourcesanspro-semibold;
+}
 .scb_s_mit706s13_assignment_detail {
   text-align: left;
 }

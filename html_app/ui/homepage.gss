@@ -154,6 +154,16 @@
 	cursor: pointer;
 }
 
+.scb_f_login{
+	width: 80px;
+	height: 15px;
+	font-size: 20px;
+	position: relative;
+	bottom: 6px;
+	font-family: 'sourcesanspro-semibold';
+	color: #316f94;
+}
+
 .scb_s_envelope_icon {
     vertical-align: middle;
     position: relative;
@@ -253,7 +263,7 @@
 
 .scb_s_homepage_blue_actions {
     font-family: 'SourceSansPro-Bold';
-    color: #008DDD;
+    color: #316f94;
     margin-left: 10px;
     margin-bottom: -8px;
     margin-top:-5px;
@@ -269,17 +279,17 @@
 }
 
 .scb_s_instructor_resources {
-    background: transparent;
+    background: #316f94;
     border-width: 0px;
-    background-image: url('../images/homepage/SCB_Homepage_InstructorResourcesBTN.png');
     background-size: 210px 33px;
     background-position: center;
     height: 33px;
     width: 210px;
+    border-radius: 6px;
     margin-left: 8px;
     font-family: 'sourcesanspro-bold';
     color: white;
-    font-size: 0pt;
+    font-size: 10pt;
     margin-top: 4px;
 }
 
@@ -468,9 +478,9 @@
 
 .scb_s_homepage_technique_learn_more {
     display: block;
-    background: transparent;
+    background: #6fc7a8;
     border-width: 0px;
-    background-image: url('../images/homepage/learn_more_button.png');
+    border-radius: 9px;
     background-size: 110px 33px;
     background-position: center;
     height: 24px; /* 33px;*/
