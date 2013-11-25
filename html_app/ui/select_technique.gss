@@ -25,7 +25,7 @@
 .scb_s_select_technique_western_blot_available {
     border: 1px solid #a0a0a0;
     height: 160px;
-    width: 265px;
+    width: 257px;
     background-color: white;
     overflow-y:scroll;
     padding-top:10px;
@@ -57,7 +57,7 @@
 }
 
 .scb_s_select_technique_western_blot{
-	width:260px;
+	width:252px;
     border: 1px solid #a0a0a0;
     border-radius: 5px;
     padding-left:10px;
@@ -66,6 +66,7 @@
     display:inline-block;
     margin-right: 10px;
     margin-top:10px;
+    margin-left: 8px;
     background-color: #edeef2;
     height:368px;
     vertical-align: top;
@@ -76,7 +77,7 @@
 
 
 .scb_s_select_technique_flow,.scb_s_select_technique_micro {
-    width:260px;
+    width:252px;
     border: 1px solid #a0a0a0;
     border-radius: 5px;
     padding-left:10px;
@@ -102,7 +103,7 @@
     position: relative;
     border-radius: 8px;
     width:922px;
-    top:10px;
+    top: 23px;
     margin-bottom: 20px;
      margin-left: 35px;
     padding-left:10px;
@@ -140,7 +141,9 @@
 }
 .scb_s_facs_select_technique{
 	position: absolute !important;
-	bottom: 14px !important;
+	bottom: -11px !important;
+	margin-right: 15px;
+
 }
 
 .scb_f_new_flow_cytometry{

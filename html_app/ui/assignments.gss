@@ -95,10 +95,10 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	width: 81.8px;
+	width: inherit;
 	display: block;
 	bottom: 12px;
-	box-shadow: inset 0 16px 36px -15px #000,inset 0 -16px 25px -16px #000;
+	box-shadow: inset 0 11px 36px -14px #000,inset 0 -25px 0px -38px #000;
 }
 
 
@@ -107,8 +107,7 @@
 	height: 0;
 	border-left: 20px solid transparent;
 	border-right: 20px solid transparent;
-	border-top: 20px solid #348ec2;
-	left: 26px;
+	border-top: 20px solid #316f94;
 	top: -16px;
 	position: relative;
 }

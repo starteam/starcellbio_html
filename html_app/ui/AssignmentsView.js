@@ -16,6 +16,7 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
         $(this).addClass('scb_assignments_header_link_selected');
         $('.scb_s_display_section').hide()
         $('.scb_s_display_section[value="'+section+'"]').show();
+        $('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/2)-15+'px');
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_s_assignment_header_img_left', function (e) {
@@ -51,6 +52,7 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
 		$('.scb_s_display_section').hide()
        	$('.scb_s_display_section[value="'+section+'"]').show();
        	}
+       	$('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/2)-15+'px');
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_s_assignment_header_img_right', function (e) {
@@ -86,6 +88,7 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
 		$('.scb_s_display_section').hide()
        	$('.scb_s_display_section[value="'+section+'"]').show();
        	}
+       	$('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/2)-15+'px');
     });
 };
 
@@ -113,6 +116,7 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
         $('.scb_assignments_header_link_wrapper').css('width' , (579/assignments.selected.template.instructions.length)-34+ 'px');
+        $('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/2)-15+'px');
     }
 
 }

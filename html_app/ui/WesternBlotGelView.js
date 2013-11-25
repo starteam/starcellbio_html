@@ -23,6 +23,8 @@ scb.ui.static.WesternBlotGelView.parse = function (element) {
 
 scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -35,6 +37,8 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (e
 
 scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -43,6 +47,8 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function 
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -81,6 +87,8 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -96,6 +104,8 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe = function (element)
 
 scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -124,6 +134,8 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [0, 0,1, 2, 5,
 scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider = function (e, ui) {
     var element = this;
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -170,6 +182,8 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all = function (wo
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (element, gstate, state) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -233,9 +247,9 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     var vslider_value = $('.scb_f_vslider_value', $(parent));
     function set_slider(y) {
         //console.info( "set_slider " + y ) ;
-        slider.css('top', y + 'px');
-        slider_value.css('top', (y - 12) + 'px');
-        var ww = Math.round(c.position_to_weight(y));
+        slider.css('top', (y+82) + 'px');
+        slider_value.css('top', (y + 72) + 'px');
+        var ww = Math.round(c.position_to_weight(y+82));
         var weight = ww > 0 ? ww + " kDa" : "N/A";
         if (!parsed.western_blot.marker_loaded) {
             weight = "NaN";
@@ -277,7 +291,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         var eX = evt.clientX;
         var eY = evt.clientY;
 
-        var y = (eY - poffset.top) - 40;
+        var y = (eY - poffset.top) + 102;
         var x = (eX - poffset.left)- 20;
         //console.info(evt);
         window.__evt = evt ;
@@ -285,7 +299,11 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         if (true || $(evt.srcElement ? evt.srcElement: evt.target).is('canvas')) {
             gel.canvas_metadata.slider = y;
             gel.canvas_metadata.vslider= x;
-            if (y < 22 || y > 285 || x < 2 || x > 360) {
+//             console.log('y');
+//             console.log(y);
+//             console.log('x');
+//             console.log(x);
+            if (y < -102 || y > 170 || x < 0 || x > 360) {
                 slider.hide();
                 slider_value.hide();
                 vslider.hide();
@@ -312,12 +330,16 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many = function (
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_left_western_blot = function(element, event){
 	var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
 	parsed.western_blot.gel_list.start_tabs_index = parsed.western_blot.gel_list.start_tabs_index -1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_right_western_blot = function(element, event){
 	var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
 	parsed.western_blot.gel_list.start_tabs_index = parsed.western_blot.gel_list.start_tabs_index +1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
@@ -385,7 +407,8 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
 		state.experiment.last_id = state.western_blot.id;
 		state.experiment.last_param = 'western_blot_id';
 
-
+		
+		document.body.scrollTop = state.experiment.last_scroll;
         if(state.western_blot.gel_list.start_tabs_index <= 0){
 			state.western_blot.gel_list.start_tabs_index = 0;
 			$('.scb_s_western_blot_gel_left_western_blot').prop('disabled', true);

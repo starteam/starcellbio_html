@@ -24,6 +24,7 @@ scb.ui.static.FacsView.parse = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -43,6 +44,7 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
 
 scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -74,6 +76,7 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
 
 scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -125,6 +128,7 @@ scb.ui.static.FacsView.scb_f_facs_sample_inactive_all = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -137,6 +141,7 @@ scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
 
 scb.ui.static.FacsView.scb_f_facs_run_samples_short = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -148,6 +153,7 @@ scb.ui.static.FacsView.scb_f_facs_run_samples_short = function (element, event) 
 
 scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -161,6 +167,7 @@ scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (e
 
 scb.ui.static.FacsView.scb_s_facs_selected = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -177,6 +184,7 @@ scb.ui.static.FacsView.scb_s_facs_selected = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -207,6 +215,7 @@ scb.ui.static.FacsView.scb_s_facs_tools_instructions_followup_toggle = function 
 
 scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -225,6 +234,7 @@ scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -250,18 +260,21 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
 
 scb.ui.static.FacsView.scb_s_facs_left_facs = function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
 	parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index -1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
 scb.ui.static.FacsView.scb_s_facs_right_facs = function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
 	parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index +1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
 scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
 	console.log(parsed.facs.parent.start_tabs_index);
 	console.log(parsed.facs.parent.list.length);
 	if(parsed.facs.parent.list.length==4){
@@ -276,6 +289,7 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 
 scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -597,6 +611,8 @@ scb.ui.static.FacsView.charts = function (workarea) {
 
         var chart = $(this);
         var parsed = scb.ui.static.FacsView.parse(this);
+        parsed.experiment.last_scroll=document.body.scrollTop;
+
         parsed.chart = chart;
         scb.ui.static.FacsView.evaluate_chart(parsed);
     })
@@ -659,6 +675,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         	}
     	})
         
+		document.body.scrollTop = state.experiment.last_scroll;
+
         document.title = "FACS - StarCellBio";
 		
 		state.facs.parent.selected_id = state.facs.id;
@@ -700,8 +718,12 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         }
 		//state.assignments.last_step = 6;
         if (state.facs.selected_lane && state.facs.selected_lane.canvas_metadata_analysis.points.length > 0) {
-            $('.scb_s_facs_tools_instructions_followup').hide();
-            scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(false);
+        	if (!scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state) {
+                $('.scb_s_facs_tools_instructions_followup').hide();
+                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(false);
+            } else {
+                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
+            }
         }
 		
 		_.each($(".scb_s_experiment_step_button"), function (e) {

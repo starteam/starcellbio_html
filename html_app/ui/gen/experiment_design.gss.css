@@ -1,6 +1,6 @@
 .scb_s_design_description {
   position: relative;
-  margin-top: 8px;
+  margin-top: 23px;
   font-size: 12px;
   text-align: justify;
   display: inline-block;
@@ -11,7 +11,6 @@
   margin-left: 35px;
   border-radius: 8px;
   background: #f5f6f8;
-  margin-bottom: 15px;
 }
 .scb_s_experiment_design_container {
   background: white;
@@ -19,6 +18,10 @@
   box-shadow: 0 4px 14px -1px gray;
   position: relative;
   z-index: 1;
+}
+.experiment_name_header {
+  display: inline-block;
+  margin-left: 13px;
 }
 .scb_objective_design {
   margin-top: 18px;

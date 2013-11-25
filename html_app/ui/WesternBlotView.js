@@ -23,6 +23,7 @@ scb.ui.static.WesternBlotView.parse = function (element) {
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (element, event) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -57,6 +58,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -71,12 +73,14 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_remove = function (eleme
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
+    var parsed_next = scb.ui.static.WesternBlotView.parse($(element).parent().next());
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
 
     parsed.experiment.western_blot_list.remove(parsed.western_blot.id);
-    parsed.state.view = 'select_technique';
+    //parsed.state.view = 'select_technique';
     delete parsed.state.skip_hash_update;
     scb.ui.static.MainFrame.refresh(parsed.state);
 
@@ -87,6 +91,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (element, event) {
 	//event.preventDefault();
     var parsed = scb.ui.static.WesternBlotView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -118,21 +123,17 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (eleme
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_selected = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-	if($(element).text().length > 10){
-		$('body').css('overflow', 'hidden');
-		$.jqDialog.alert("Your tab title can only be 10 characters long.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
-	
-	}
-	else{
     parsed.western_blot.name = $(element).text();
-    }
+
 }
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -148,9 +149,10 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     else if (rows_state.valid < 1) {
     	    	$('body').css('overflow', 'hidden');
 
-    	$.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
-				    	
-
+    	$.jqDialog.alert("<h1 class='scb_s_lysate_prepare_text'>Please select at least 1 lysate to prepare.</h1>", function() {$('#jqDialog_box').css('border', '2px solid rgb(5, 151, 137)'); $('#jqDialog_box').css('border-radius', '6px'); $('#jqDialog_content').css('margin', '10px');		$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+		$('.scb_s_lysate_prepare_text').parent().parent().css('border', '4px solid white');	
+		$('.scb_s_lysate_prepare_text').parent().parent().css('border-radius', '14px');	
+		$('.scb_s_lysate_prepare_text').parent().css('margin', '0px');	
 //         alert("Please select at least 1 lysate to prepare.");
 
     }
@@ -163,6 +165,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -174,6 +177,7 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -186,6 +190,7 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input = functio
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -268,19 +273,21 @@ scb.ui.static.WesternBlotView.populate_wells = function (rows, state, gstate) {
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_left_western_blot = function(element, event){
 	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
 	parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index -1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_right_western_blot = function(element, event){
 	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
 	parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index +1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot= function(element, event){
 	var parsed = scb.ui.static.WesternBlotView.parse(element);
-	console.log('jalwa');
+	parsed.experiment.last_scroll=document.body.scrollTop;
 	console.log(parsed.western_blot.parent.start_tabs_index);
 	console.log(parsed.western_blot.parent.list.length);
 	if(parsed.western_blot.parent.list.length==4){
@@ -296,6 +303,7 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot= function(elem
 scb.ui.static.WesternBlotView.scb_s_western_blot_choose_samples_list_item = function (element) {
 	
 	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
 	var new_order = [];
 	var list = $('.scb_s_western_blot_choose_samples_order_list')[0];
 	var children =$(list.children);
@@ -336,6 +344,18 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'blur', '.scb_s_western_blot_selected', function (e) {
         scb.ui.static.WesternBlotView.scb_s_western_blot_selected(this);
+    });
+    scb.utils.off_on(workarea, 'keydown', '.scb_s_western_blot_selected', function (e) {
+    	if ($('.scb_s_western_blot_selected').text().length<= 10) {
+    	}
+    	else{    		 
+    		$('.scb_s_western_blot_selected').text()
+    		e.preventDefault();
+    		 this.textContent= this.textContent.substring(0, this.textContent.length-1)
+    		 return false;
+    		 
+    	}
+	
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_prepare_lysates', function (e) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates(this);
@@ -430,7 +450,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		state.experiment.last_id = state.western_blot.id;
 		state.experiment.last_param = 'western_blot_id';
 		
-		
+		document.body.scrollTop = state.experiment.last_scroll;
         if(state.western_blot.parent.start_tabs_index <= 0){
 			state.western_blot.parent.start_tabs_index = 0;
 			$('.scb_s_western_blot_left_western_blot').prop('disabled', true);

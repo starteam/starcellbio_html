@@ -644,8 +644,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
         }
         if (state.view == 'western_blot') {
-
-            if (!parsed.western_blot) {
+			
+			var id_list = [];
+			for( var x=0; x < parsed.experiment.western_blot_list.list.length; x++){id_list.push(parsed.experiment.western_blot_list.list[x].id);}
+            if (id_list.indexOf(state.western_blot_id)>=0 || !parsed.western_blot ) {
                 var western_blot = parsed.experiment.western_blot_list.start({});
                 state.western_blot_id = western_blot.id;
                 var History = window.History;
@@ -656,6 +658,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 state.onhashchange = true;
                 self.show(state);
                 return;
+            }
+            else{
+            	parsed.western_blot = parsed.experiment.western_blot_list.list[0];
             }
             
             if (parsed.western_blot.is_transfered) {

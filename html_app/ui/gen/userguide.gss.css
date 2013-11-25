@@ -45,7 +45,7 @@
   background: #e0e0e0;
   position: absolute;
   bottom: -10px;
-  left: 390px;
+  left: 386px;
 }
 .scb_f_ug_up_button {
   -webkit-appearance: none;
@@ -55,7 +55,7 @@
   position: absolute;
   background: 0;
   border: 0;
-  left: 390px;
+  left: 383px;
 }
 .scb_f_ug_down_button {
   -webkit-appearance: none;
@@ -63,7 +63,7 @@
   background: 0;
   border: 0;
   bottom: -10px;
-  left: 366px;
+  left: 363px;
 }
 .scb_f_help_form {
   display: inline-block;
@@ -134,10 +134,12 @@
   padding: 4px 8px 15px;
   border-radius: 6px;
   height: 23px;
-  top: 4px !important;
+  width: 23px;
+  top: 15px !important;
   right: 0;
-  left: -80px;
+  left: 250px;
   border: none;
+  position: absolute;
 }
 .help_search_input {
   color: #316f94;

@@ -361,8 +361,8 @@ FACS Main View
 			<div class='scb_s_facs_vertical_line_7_top'></div>
 			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
-						{if $step== 1}166px;{/if}
-				{if $step== 2} 438px;{/if}
+						{if $step== 1}32px;{/if}
+				{if $step== 2} 301px;{/if}
 				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
 			</div>
 		</div>
@@ -466,7 +466,7 @@ FACS Main View
         </div>
         {if $facs.samples_finished}
         {else}
-        <button class='{if $rows_valid > 9}scb_f_facs_run_samples{else}scb_f_facs_run_samples_short{/if}  scb_s_gray_button' facs_id='{$facs.id}'
+        <button class='{if $rows_valid > 9}scb_f_facs_run_samples{else}scb_f_facs_run_samples_short{/if}  scb_s_navigation_button' facs_id='{$facs.id}'
                 assignment_id="{$assignment.id}"
                 experiment_id="{$experiment.id}">RUN SAMPLES
         </button>

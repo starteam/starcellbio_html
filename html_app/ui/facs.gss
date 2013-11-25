@@ -33,6 +33,7 @@
 	position: relative;
 	z-index: 1;
 	top: 20px;
+	margin-bottom: 21px;
 }
 
 .scb_s_facs_choose_samples_order{
@@ -213,8 +214,8 @@
     width:2px;
     background-color: #b0b0b0;
     height:12px;
-    top:56px;
-    left: 76px;
+    top:55px;
+    left: 75px;
 }
 
 
@@ -224,8 +225,8 @@
     width:2px;
     background-color: #b0b0b0;
     height:12px;
-    top:56px;
-    left: 350px;
+    top:55px;
+    left: 349px;
 }
 
 
@@ -235,8 +236,8 @@
     width:2px;
     background-color: #b0b0b0;
     height:12px;
-    top:56px;
-    left: 623px;
+    top:55px;
+    left: 622px;
 }
 
 
@@ -248,6 +249,7 @@
     background-color: rgba(225,226,228, 0.3);
     height: 19px;
     left: 30px;
+    top: 2px;
 }
 
 
@@ -258,6 +260,7 @@
     height: 19px;
     left: 304px;
     z-index: 5;
+    top: 2px;
 
 }
 
@@ -270,6 +273,7 @@
     height: 19px;
     left:577px; 
     z-index: 5;
+    top: 2px;
 
 }
 
@@ -358,13 +362,6 @@ input[type=radio]:disabled{
 }
 
 
-.scb_s_facs_add_facs {
-	color: black;
-	text-align:center;
-	right:2px;
-	position:relative;
-}
-
 .scb_s_facs_add_cross_facs {
     cursor:pointer;
     float:right;
@@ -380,13 +377,14 @@ input[type=radio]:disabled{
     float:right;
     margin-right: 18px;
     margin-top:3px;
+    font-size: 9pt;
 }
 
 .scb_s_facs_tab_content {
 	margin-top: -27px;
  	background-color: #FFFFFF;
  	background-image: none;
- 	min-height: 439px;
+ 	min-height: 386px;
  	width: 895px;
  	padding: 0px;
  	padding-bottom: 17px;
@@ -499,19 +497,20 @@ input[type=radio]:disabled{
 .scb_f_facs_run_samples {
     border:none;
     margin-top:7px !important; 
-    margin-left:78px !important;
+    margin-left:88px !important;
     margin-right:20px !important; 
-    margin-bottom:20px !important;
+    float:none !important;
+    height: auto !important;
+    top: -1px !important;
 }
 
 .scb_f_facs_run_samples_short{
 	border:none;
-	position:absolute;
-	bottom:0;
     margin-left:92px !important;
     margin-right:20px !important; 
-    margin-bottom:63px !important;
-
+	float: none !important;
+	 height: auto !important;
+	 top: -3px !important;
 }
 
 .scb_s_facs_tab_content_analyze {
@@ -545,6 +544,7 @@ input[type=radio]:disabled{
     left: 34px !important;
     padding-bottom: 20px !important;
 	position: absolute !important;
+	top: 306px !important;
 }
 
 .scb_s_facs_tools_instructions_initial {
