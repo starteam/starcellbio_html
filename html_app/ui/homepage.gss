@@ -279,7 +279,7 @@
 }
 
 .scb_s_instructor_resources {
-    background: #316f94;
+    background: #4690C1;
     border-width: 0px;
     background-size: 210px 33px;
     background-position: center;

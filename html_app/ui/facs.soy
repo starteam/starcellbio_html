@@ -80,11 +80,12 @@ FACS Main View
         {param can_prepare_lysate:$can_prepare_lysate/}
         {/call}
         
-
+	{if $kind == 'sample_prep'}
 	<a class='scb_s_navigation_button scb_f_facs_prepare_lysates' facs_id='{$facs.id}'
 	   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 	{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE SAMPLES  &nbsp; &#9654;
 	</a>
+	{/if}
     </div>
     
 <a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_facs"

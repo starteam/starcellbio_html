@@ -389,6 +389,7 @@ input[type=radio]:disabled{
  	padding: 0px;
  	padding-bottom: 17px;
  	margin-bottom: 10px;
+ 	border: 1px solid #97a4ad;
 }
 
 .scb_s_facs_samples_container{

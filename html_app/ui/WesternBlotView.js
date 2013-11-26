@@ -73,13 +73,31 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_remove = function (eleme
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
-    var parsed_next = scb.ui.static.WesternBlotView.parse($(element).parent().next());
     parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+ 	var id_list = [];
+ 	for( var x=0; x < parsed.experiment.western_blot_list.list.length; x++){id_list.push(parsed.experiment.western_blot_list.list[x].id);}
+    parsed.state.index= id_list.indexOf(parsed.western_blot.id);
+    
+    
     parsed.experiment.western_blot_list.remove(parsed.western_blot.id);
+   
+   
+    if(parsed.state.index == parsed.experiment.western_blot_list.list.length){
+    	parsed.state.index = parsed.state.index -1 ;
+    }
+    //fix tab indexing for display
+    if(parsed.state.index > parsed.experiment.western_blot_list.list.length -4) {
+    	
+    	if((parsed.experiment.western_blot_list.list.length == 5 || parsed.experiment.western_blot_list.list.length == 6) && parsed.experiment.western_blot_list.start_tabs_index <=1)
+    		parsed.experiment.western_blot_list.start_tabs_index = parsed.experiment.western_blot_list.start_tabs_index+1;
+    	else parsed.experiment.western_blot_list.start_tabs_index = parsed.experiment.western_blot_list.start_tabs_index-1;
+    }
+    
+    
+    
     //parsed.state.view = 'select_technique';
     delete parsed.state.skip_hash_update;
     scb.ui.static.MainFrame.refresh(parsed.state);

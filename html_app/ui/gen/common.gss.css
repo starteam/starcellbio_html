@@ -231,14 +231,14 @@ div#main {
   width: 887px;
 }
 .scb_s_experiment_step_selected {
-  background: #316f94 !important;
+  background: #4690c1 !important;
 }
 .arrow-down-design, .arrow-down-setup, .arrow-down-select {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid #316f94;
+  border-top: 20px solid #4690c1;
   position: absolute;
 }
 .arrow-down-design {

@@ -70,7 +70,7 @@
   box-shadow: inset 0 16px 8px -10px #ccb,inset 0 -16px 8px -10px #ccc;
 }
 .scb_assignments_header_link_selected>span {
-  background: #316f94;
+  background: #4690c1;
   padding: 12px 22px 10px 12px;
   right: 12px;
   position: relative;
@@ -87,7 +87,7 @@
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid #316f94;
+  border-top: 20px solid #4690c1;
   top: -16px;
   position: relative;
 }

@@ -69,19 +69,26 @@
 }
 
 .scb_f_login_close_button, .scb_f_signup_close_button, .scb_f_logout_close_button{
+
+	
 	padding-top: 0px;
 	float:right;
 	-webkit-appearance: none;
 	font-family:'sourcesanspro-semibold';
 	outline:none;
-	height: 23px;
-	width: 23px;
+	height: 26px;
+	width: 26px;
 	cursor:pointer;
-	border: 2px solid white;
+	border: none;
 	border-radius: 12px;
 	font-size: 14pt;
-	color: white;
-	background: black;}
+	color: transparent;
+	background: transparent;
+	background-image: url('../../images/header/scb_close_button.png');
+	padding-right: 4px;
+	padding-left: 5px;
+	
+}
 
 
 

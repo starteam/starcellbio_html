@@ -293,9 +293,30 @@ scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+	
+	var id_list = [];
+ 	for( var x=0; x < parsed.experiment.facs_list.list.length; x++){id_list.push(parsed.experiment.facs_list.list[x].id);}
+    parsed.state.index= id_list.indexOf(parsed.facs.id);
+	
+	
     parsed.experiment.facs_list.remove(parsed.facs.id);
-    parsed.state.view = 'select_technique';
+    
+       
+    if(parsed.state.index == parsed.experiment.facs_list.list.length){
+    	parsed.state.index = parsed.state.index -1 ;
+    }
+    //fix tab indexing for display
+    if(parsed.state.index > parsed.experiment.facs_list.list.length -4) {
+    	
+    	if((parsed.experiment.facs_list.list.length == 5 || parsed.experiment.facs_list.list.length == 6) && parsed.experiment.facs_list.start_tabs_index <=1)
+    		parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index+1;
+    	else parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index-1;
+    }
+    
+    
+    
+    
+    //parsed.state.view = 'select_technique';
     delete parsed.state.skip_hash_update;
     scb.ui.static.MainFrame.refresh(parsed.state);
 

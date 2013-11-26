@@ -138,6 +138,7 @@
   padding: 0;
   padding-bottom: 17px;
   margin-bottom: 10px;
+  border: 1px solid #97a4ad;
 }
 .scb_s_western_blot_progress_prefix {
   color: white;
@@ -196,7 +197,7 @@
   margin-left: 13px;
 }
 .scb_s_western_blot_gel_tabs {
-  width: 568px;
+  width: 575px;
   height: 25px;
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
@@ -226,7 +227,7 @@
   vertical-align: top;
   padding: 3px;
   margin: 0;
-  margin-left: -2px;
+  margin-left: -3px;
   padding-bottom: 4px;
   border: inherit;
   background: 0;
@@ -242,24 +243,6 @@
   color: #29a592;
   background-image: url('../images/western_blot/scb_gray_right_arrow_active.png');
 }
-.scb_s_western_blot_gel_tab {
-  width: 140px;
-  display: inline-block;
-  border-bottom: 0;
-  height: 20px;
-  top: 7px;
-  font-family: 'sourcesanspro-bold';
-  font-size: 11.5pt;
-  text-align: center;
-  background-image: url('../images/western_blot/WesternBlot_GrayTab.png');
-  position: relative;
-}
-.scb_s_western_blot_gel_active {
-  display: inline-block;
-  z-index: 99;
-  color: #189689;
-  background-image: url('../images/western_blot/WesternBlot_GreenTab.png');
-}
 .scb_s_western_blot_gel_tab_selected, .scb_s_facs_gel_tab_selected, .scb_s_microscopy_gel_tab_selected {
   display: inline-block;
   font-family: 'sourcesanspro-bold';
@@ -273,13 +256,6 @@
   cursor: pointer;
   float: right;
   margin-right: 17px;
-}
-.scb_s_western_blot_gel_content {
-  height: 350px;
-  width: 568px;
-  position: relative;
-  border: 1px solid #80d1ae;
-  background-color: white;
 }
 .scb_s_western_blot_gel {
   display: inline-block;

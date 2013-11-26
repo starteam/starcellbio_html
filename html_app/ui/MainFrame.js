@@ -309,8 +309,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     	$('.scb_f_ug_up_button').hide();
     	$('.scb_f_ug_search_line').hide();
     	$("#closesearch").hide();
-    	$("#main_popout").hide();
-    	$(".scb_s_ug_home").hide();
+    	$(".main_popout").addClass('main_popout_disabled');
+    	$('.main_popout').attr('disabled', 'disabled');
+    	$(".scb_s_ug_home").addClass('scb_s_ug_home_disabled');
+    	$('.scb_s_ug_home').attr('disabled', 'disabled');
     	$('.scb_display_search_count').hide();
     	scb.utils.off_on('body', 'click', '.scb_f_ug_close_button', function () {
                 $('.scb_f_ug_help_search_bar').detach();
@@ -330,13 +332,18 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			$('iframe').contents().find('body').css('font-family', "Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
 		
 			$('iframe').contents().click(function(event) {
-				$(".scb_s_ug_home").show();
+				//$(".scb_s_ug_home").show();
+				$(".scb_s_ug_home").removeClass('scb_s_ug_home_disabled');
+    			$('.scb_s_ug_home').removeAttr('disabled');
 				if($('iframe').contents().find("#popout").length >0){
 					$('iframe').contents().find("#popout").hide();
-					$('#main_popout').show();
+					$(".main_popout").removeClass('main_popout_disabled');
+    				$('.main_popout').removeAttr('disabled');	
 				}
-				else
-				$('#main_popout').hide(); 			
+				else{
+				    $(".main_popout").addClass('main_popout_disabled');
+    				$('.main_popout').attr('disabled', 'disabled'); 
+    			}			
 			});
 			$('#search').click(function(){
 					$('iframe').ready(function(){
@@ -364,10 +371,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			
 			$(".scb_s_ug_home").click(function(){
 				$('iframe').contents().find(".scb_s_ug_home").click();
-				$(".scb_s_ug_home").hide();
+				$(".scb_s_ug_home").addClass('scb_s_ug_home_disabled');
+    			$('.scb_s_ug_home').attr('disabled', 'disabled');
 			});
 			
-			$("#main_popout").click(function(){
+			$(".main_popout").click(function(){
 					var popout_string = "";
 					var visible=	$('iframe').contents().find('.scb_s_section_inactive:visible');
 					if(visible.length ==1)
@@ -614,18 +622,26 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'facs') {
+			var id_list = [];
+			for( var x=0; x < parsed.experiment.facs_list.list.length; x++){id_list.push(parsed.experiment.facs_list.list[x].id);}
 			
             if (!parsed.facs) {
-                delete state.onhashchange;
-                var facs = parsed.experiment.facs_list.start({});
-                state.facs_id = facs.id;
-                var History = window.History;
-                if (History.enabled) {
-                    History.replaceState("New FACS", "New FACS", '#' + $.param(state));
+            	if(state.facs_id && id_list.indexOf(state.facs_id)<0 && parsed.experiment.facs_list.list.length >1){
+            		parsed.facs = parsed.experiment.facs_list.list[state.index];
+
+            	}
+            	else{
+					delete state.onhashchange;
+					var facs = parsed.experiment.facs_list.start({});
+					state.facs_id = facs.id;
+					var History = window.History;
+					if (History.enabled) {
+						History.replaceState("New FACS", "New FACS", '#' + $.param(state));
+					}
+					state.onhashchange = true;
+					self.show(state);
+					return;
                 }
-                state.onhashchange = true;
-                self.show(state);
-                return;
             }
             self.sections.facs.show({
                 workarea: workarea,
@@ -647,21 +663,28 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			
 			var id_list = [];
 			for( var x=0; x < parsed.experiment.western_blot_list.list.length; x++){id_list.push(parsed.experiment.western_blot_list.list[x].id);}
-            if (id_list.indexOf(state.western_blot_id)>=0 || !parsed.western_blot ) {
-                var western_blot = parsed.experiment.western_blot_list.start({});
-                state.western_blot_id = western_blot.id;
-                var History = window.History;
-                if (History.enabled) {
-                    History.replaceState("New WB", "New WB", '#' + $.param(state));
-                }
+			//id_list.indexOf(state.western_blot_id)>=0 ||
+            if ( !parsed.western_blot ) {
+            	if(state.western_blot_id && id_list.indexOf(state.western_blot_id)<0 && parsed.experiment.western_blot_list.list.length >1){
+            		parsed.western_blot = parsed.experiment.western_blot_list.list[state.index];
 
-                state.onhashchange = true;
-                self.show(state);
-                return;
-            }
-            else{
-            	parsed.western_blot = parsed.experiment.western_blot_list.list[0];
-            }
+            	}
+            	else{
+					var western_blot = parsed.experiment.western_blot_list.start({});
+					state.western_blot_id = western_blot.id;
+					var History = window.History;
+					if (History.enabled) {
+						History.replaceState("New WB", "New WB", '#' + $.param(state));
+					}
+
+					state.onhashchange = true;
+					self.show(state);
+					return;
+                }
+            } 
+//             else{
+//             	parsed.western_blot = parsed.experiment.western_blot_list.list[0];
+//             }
             
             if (parsed.western_blot.is_transfered) {
                 state.view = 'western_blot_gel';
