@@ -106,5 +106,6 @@
 .scb_objective_text {
   font-size: 11pt;
   display: inline-block;
-  width: 600px;
+  margin-left: 50px;
+  margin-top: -28px;
 }

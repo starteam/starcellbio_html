@@ -125,6 +125,9 @@
   font-family: 'sourcesanspro-semibold';
   color: #316f94;
 }
+.scb_s_homepage_content {
+  margin-top: 12px;
+}
 .scb_s_envelope_icon {
   vertical-align: middle;
   position: relative;
@@ -382,6 +385,7 @@
   background-position-x: 0;
   background-position-y: 1px;
   text-decoration: none;
+  cursor: pointer;
 }
 .scb_s_homepage_technique_more {
   vertical-align: top;

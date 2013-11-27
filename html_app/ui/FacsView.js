@@ -166,18 +166,16 @@ scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (e
 }
 
 scb.ui.static.FacsView.scb_s_facs_selected = function (element) {
+    
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+    parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-	if($(element).text().length > 10){
-		$('body').css('overflow', 'hidden');
-		$.jqDialog.alert("Your tab title can only be 10 characters long.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
-	
-	}
-	else{
-  
+    if($(element).text().length <=1){
+    	 scb.ui.static.MainFrame.refresh();
+    }
+    else{
     parsed.facs.name = $(element).text();
     }
 }
@@ -358,6 +356,20 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'blur', '.scb_s_facs_selected', function (e) {
         scb.ui.static.FacsView.scb_s_facs_selected(this);
     });
+    
+    scb.utils.off_on(workarea, 'keydown', '.scb_s_facs_selected', function (e) {
+    	if ($('.scb_s_facs_selected').text().length<= 10) {
+    	}
+    	else{    		 
+    		$('.scb_s_facs_selected').text()
+    		e.preventDefault();
+    		 this.textContent= this.textContent.substring(0, this.textContent.length-1)
+    		 return false;
+    		 
+    	}
+	
+    });
+    
 	scb.utils.off_on(workarea, 'click', '.scb_s_facs_left_facs', function (e) {
         scb.ui.static.FacsView.scb_s_facs_left_facs(this);
     });

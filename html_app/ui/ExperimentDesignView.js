@@ -109,6 +109,25 @@ scb.ui.static.ExperimentDesignView.register = function(workarea)
     scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_hypothesis', function (e) {
         scb.ui.static.ExperimentDesignView.update_experiment_design_hypothesis(this);
     });
+    
+    scb.utils.off_on(workarea, 'click', '.learn_more_western_blot', function (e) {
+		var popoutWindow =window.open("static/ref_lib/full_library.html#WesternBlotting");
+		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#WesternBlotting"; },50);
+
+    });
+    
+    
+    scb.utils.off_on(workarea, 'click', '.learn_more_facs', function (e) {
+    	var popoutWindow =window.open("static/ref_lib/full_library.html#FlowCytometry");
+		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#FlowCytometry"; },50);
+
+    });
+    
+    scb.utils.off_on(workarea, 'click', '.learn_more_microscopy', function (e) {
+        var popoutWindow =window.open("static/ref_lib/full_library.html#Microscopy");
+		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#Microscopy"; },50);
+
+    });
 
     scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_objective', function (e) {
         scb.ui.static.ExperimentDesignView.scb_s_experiment_design_objective(this);

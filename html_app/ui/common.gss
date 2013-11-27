@@ -30,6 +30,9 @@ div#main {
 	width: 176px !important;
 }
 
+.scb_f_open_experiment{
+	margin-top: 0px !important;
+}
 
 .scb_s_navigation_button_old {
    /*background-image: url('../images/homepage/instructor_resources_button.png');*/

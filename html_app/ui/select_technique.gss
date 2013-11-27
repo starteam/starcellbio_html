@@ -132,7 +132,10 @@
 	background-position-x: 0;
 	background-position-y: 1px;
 	text-decoration: none;
-	text-transform: lowercase;
+}
+
+.learn_more_western_blot, .learn_more_facs, .learn_more_microscopy{
+	cursor: pointer;
 }
 
 .scb_s_select_technique_para{

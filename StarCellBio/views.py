@@ -8,7 +8,7 @@ import datetime
 from django.shortcuts import redirect
 import json
 import pudb
-from backend.models import Statuses, Assignment, StudentAssignment, Course, UserCourse
+from backend.models import Assignment, StudentAssignment, Course, UserCourse
 import bz2
 import StringIO
 from django.core.files.base import ContentFile

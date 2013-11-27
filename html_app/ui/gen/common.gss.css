@@ -16,6 +16,9 @@ div#main {
 .scb_f_lab_notebook_link {
   width: 176px !important;
 }
+.scb_f_open_experiment {
+  margin-top: 0 !important;
+}
 .scb_s_navigation_button_old {
   padding: 3px 20px;
   min-width: 120px;

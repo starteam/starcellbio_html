@@ -145,7 +145,12 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_selected = function (element) {
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
+    if($(element).text().length <=1){
+    	 scb.ui.static.MainFrame.refresh();
+    }
+    else{
     parsed.western_blot.name = $(element).text();
+    }
 
 }
 
