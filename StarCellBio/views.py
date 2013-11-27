@@ -58,6 +58,8 @@ def get_model(request):
     return response
     
 def create_courses(request, **kwargs):
+	import pudb
+	pudb.set_trace()
 	if(request.method == 'POST'):
 
 		jstr=request.raw_post_data
@@ -115,8 +117,8 @@ def get_courses(request, **kwargs):
 	return response
 	
 def post_state(request, **kwargs):
-	import pudb
-	print request.user
+	#import pudb
+	#print request.user
 	jstr = request.raw_post_data
 	jsondata = json.loads(jstr)
 	jsonmodel = jsondata['model']

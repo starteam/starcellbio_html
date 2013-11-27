@@ -3112,6 +3112,629 @@ var __assigment_706 = {
         }
     }
     ;
+    
+var __decusability = {
+        id: 'decusability',
+        name: 'StarCellBio Usability Test',
+        course: 'Dec_2013_Usability',
+    	course_name: 'December 2013 Usability Testing',
+        description: 'FACS and Western Blot for temperature sensitive mutants',
+        experiments: {},
+        template: {
+            instructions: [
+            	['Goal & Introduction','Here come instructions when we build them']
+            	],
+            ui: {
+                experimental_design: {
+                    techniques: [ 'wb' , 'facs' , 'micro']
+                },
+                experiment_setup: {
+                    table: [ //
+                        {kind: "cell_plate", title: " ", editable: false},
+                        {kind: 'cell_line', title: 'Strain', editable: false}, //
+                        {kind: 'treatments',
+                            children: [//
+                                {kind: 'drug', title: 'Treatment', editable: false},//
+                                {kind: 'concentration', title: 'Concentration', editable: false}//
+                            ]
+                        },//
+                        {kind: 'temperature', title: 'Temperature', editable: false},//
+                        {kind: 'actions', title: 'Actions'}//
+                    ],//
+                    actions: [
+
+                    ],//
+                    new_row_is_disabled: {
+                        title: 'New Row',
+                        cell_line: 'wt',
+                        treatment_list: {list: [
+                            {drug_list: {list: [
+                                {drug_id: 'nc', concentration_id: '0'}
+                            ]}, temperature: '25'
+                            }
+                        ]},
+                    }
+                },
+                western_blot: {format: "%CELL_LINE%, %TREATMENT%, %PP1% %TEMPERATURE%",
+                    keys: {
+                        '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+                        '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
+                        '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
+                        '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']},
+                        '%PP1%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '1', 'drug_id'], map: ['drugs', '%KEY%', 'short_name'], default: ''}
+                    }
+                },
+                add_multiple_dialog: {
+                    'wt': {
+                        title: '<b>Strain:</b> Wild Type',
+                        headings: [
+                            'Treatment', 'Temperature', '- PP1', '+ PP1'
+                        ],
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
+                                ],
+                                treatment_id: 'media_only,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
+                                ],
+                                treatment_id: 'media_only,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            }
+
+                        ]
+                    },
+                    'm1': {
+                        title: '<b>Strain:</b> Mutant 1',
+
+                        headings: [
+                            'Treatment', 'Temperature', '- PP1', '+ PP1'
+                        ],
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
+                                ],
+                                treatment_id: 'media_only,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
+                                ],
+                                treatment_id: 'media_only,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            }
+                        ]
+
+                    },
+                    'm2': {
+                        title: '<b>Strain:</b> Mutant 2',
+
+                        headings: [
+                            'Treatment', 'Temperature', '- PP1', '+ PP1'
+                        ],
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
+                                ],
+                                treatment_id: 'media_only,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'},
+                                    {kind: 'checkbox', name: 'PP1'}
+                                ],
+                                treatment_id: 'media_only,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                    {drug_id: 'pp1', concentration_id: '1u'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            }
+                        ]
+
+                    }
+                }
+            },
+            add_new_row_instructions: 'add new row instructions',
+
+            concentrations: {
+                '0': {
+                    name: '',
+                    value: 0
+                },
+                '2': {
+                    name: '2 ' + microEntity + 'g/mL',
+                    value: 5
+                },
+                '15': {
+                    name: '15 ' + microEntity + 'g/mL',
+                    value: 5
+                },
+                '200': {
+                    name: '200 mM',
+                    value: 5
+                },
+                '1u': {
+                    name: '1 unit',
+                    value: 1000
+                }
+            },
+            drugs: {
+                'nc': {
+                    name: 'Growth Media',
+                    concentrations: [0]
+                },
+                'Nocodazole': {
+                    name: 'Nocodazole',
+                    concentrations: [15]
+                },
+                'Alpha': {
+                    name: 'Alpha Factor',
+                    concentrations: [2]
+                },
+                'Hydroxyurea': {
+                    name: 'Hydroxyurea',
+                    concentrations: [200]
+                },
+                'pp1': {
+                    name: 'Protein Phosphatase 1',
+                    concentrations: ['1u'],
+                    short_name: 'PP1'
+                }
+
+            },
+            experiment_temperatures: {
+                '25': {
+                    name: "30" + degreeEntity + "C"
+                },
+                '40': {
+                    name: "37" + degreeEntity + "C"
+                }
+            },
+
+            cell_lines: {
+                'wt': {
+                    name: 'Wild Type'
+                },
+                'm1': {
+                    name: 'Mutant 1'
+                },
+                'm2': {
+                    name: 'Mutant 2'
+                }
+
+            },
+            time_unit: {
+                kind: 'minutes'
+            },
+            primary_anti_body: {
+                'cdk2': {
+                    name: 'rabbit anti-cdk2',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 33, intensity: 0},
+                        {weight: 34, intensity: 0},
+                        {weight: 35, intensity: 0}
+                    ],
+                    gel_name: 'cdk2'
+                },
+                'cyclin': {
+                    name: 'mouse anti-cyclin B',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 58, intensity: 0},
+                    ],
+                    gel_name: 'cyclin B'
+                },
+                'cyclinE': {
+                    name: 'mouse anti-cyclin E',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 48, intensity: 0},
+                    ],
+                    gel_name: 'cyclin E'
+                },
+                'pgk1': {
+                    name: 'rabbit anti-pgk1',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 45, intensity: 0},
+                    ],
+                    gel_name: 'pgk1'
+                }
+            },//
+            secondary_anti_body: {
+                'm': {
+                    name: 'rabbit anti-mouse'
+                },
+                'r': {
+                    name: 'goat anti-rabbit'
+                }
+            },//
+            lysate_kinds: {
+                'whole': {
+                    name: 'Whole Cell'
+                }
+            },
+            facs_kinds: {
+                'whole': {
+                    name: 'PI'
+                }
+            },
+            micro_kinds: {
+				'red':{
+					name: 'red'
+				}
+        	},
+            model: { // models
+                western_blot: {
+                    'cyto': {
+                        'parser_fixed': [
+                            {
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: '*ANY*',
+                                marks: [
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: 2,
+                                        primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: 4,
+                                        primary_anti_body: ['cyclinE']
+                                    },
+                                    {
+                                        name: 'pgk1',
+                                        weight: 45,
+                                        intensity: 10,
+                                        primary_anti_body: ['pgk1']
+                                    }
+
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'pp1',
+                                cell_line: '*ANY*',
+                                above_marks: [
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 33, // 34&35
+                                        intensity: .3,
+                                        primary_anti_body: ['cdk2']
+                                    }
+                                ],
+                                below_marks: [
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 34, // 34&35
+                                        intensity: .3,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: .3,
+                                        primary_anti_body: ['cdk2']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: 'wt',
+                                marks: [
+                                ]
+                            },
+                            {
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: 'm1',
+                                temperature: '40',
+                                marks: [
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -2,
+                                        primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: -4,
+                                        primary_anti_body: ['cyclinE']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: 'm2',
+                                temperature: '40',
+                                marks: [
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -2,
+                                        primary_anti_body: ['cyclin']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'Nocodazole',
+                                cell_line: 'wt',
+                                above_marks: [
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: -4,
+                                        primary_anti_body: ['cyclinE']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'Hydroxyurea',
+                                cell_line: 'wt',
+                                above_marks: [
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -2,
+                                        primary_anti_body: ['cyclin']
+                                    }
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'Alpha',
+                                cell_line: 'wt',
+                                above_marks: [
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 34, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -2,
+                                        primary_anti_body: ['cyclin']
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                facs: {
+                    'dna': {
+                        'parser_simple': [
+                            {
+                                match: [],
+                                shape: 'normal'
+                            },
+                            {
+                                match: ['cell_line', 'temperature'],
+                                cell_line: 'm1',
+                                temperature: 40,
+                                shape: 'g2-block'
+                            },
+                            {
+                                match: ['cell_line', 'temperature'],
+                                cell_line: 'm2',
+                                temperature: 40,
+                                shape: 'S-block'
+                            },
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'wt',
+                                drug_id: 'Nocodazole',
+                                shape: 'g2-block'
+                            },
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'wt',
+                                drug_id: 'Alpha',
+                                shape: 'alpha-block'
+                            },
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'wt',
+                                drug_id: 'Hydroxyurea',
+                                shape: 'S-block'
+                            }
+                        ]
+
+                    }
+                },
+                microscopy: {
+                	'color':{
+                		'parser_simple':[
+							{	
+								match: ['color'],
+								color: 'red'
+							}
+                		]
+                		//gypsum
+                	}
+                }
+            }
+        }
+    }
+    ;
 
 master_model_data = {
     app_title: 'StarCellBio',
@@ -3119,7 +3742,7 @@ master_model_data = {
     //'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.',
     assignments: {
         list: [ 
-        __assigment_facs, __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts
+        __assigment_facs, __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability
         ]
     },
     ui: {}
@@ -3135,6 +3758,7 @@ $(function () {
 	console.log(get_courses_result);
 	var usability_test = {};
 	var assignment_706 = {};
+	var decusability = {};
 	var assignment_tufts = {};	
 	for (var x = 0; x < get_courses_result.list.length; x++){
 		if(get_courses_result.list[x].id == 'usability_test'){
@@ -3170,6 +3794,29 @@ $(function () {
 				}
 			});
 			get_courses_result.list[x] = assignment_706;
+		}
+		
+		if(get_courses_result.list[x].id == 'decusability'){
+			decusability = get_courses_result.list[x];
+    		decusability.template.instructions = [
+    			['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
+    			['Introduction and Reference Material',scb_assignment_specific_decusability.intro_and_ref()],
+    			['Question 1', scb_assignment_specific_decusability.question_1()],
+    			['Question 2', scb_assignment_specific_decusability.question_2()]
+    			];
+    		decusability.template.experiment_setup = scb_assignment_specific_decusability.experiment_setup();
+
+			decusability.template.ui.experiment_setup.actions.push({
+				name: 'ADD MULTIPLE ROWS',
+				open: 'mit706s13.setup',
+				css: {
+					width: '800px',
+					height: '900px',
+					left: '100px',
+					top: '000px'
+				}
+			});
+			get_courses_result.list[x] = decusability;
 		}
 		if(get_courses_result.list[x].id == 'assignment_tufts'){
 			assignment_tufts = get_courses_result.list[x];
@@ -3215,6 +3862,28 @@ $(function () {
             top: '000px'
         }
     });
+    
+   __decusability.template.instructions = [
+		['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
+		['Introduction and Reference Material',scb_assignment_specific_decusability.intro_and_ref()],
+		['Question 1', scb_assignment_specific_decusability.question_1()],
+		['Question 2', scb_assignment_specific_decusability.question_2()]
+		];
+	__decusability.template.experiment_setup = scb_assignment_specific_decusability.experiment_setup();
+
+	__decusability.template.ui.experiment_setup.actions.push({
+		name: 'ADD MULTIPLE ROWS',
+		open: 'mit706s13.setup',
+		css: {
+			width: '800px',
+			height: '900px',
+			left: '100px',
+			top: '000px'
+		}
+	});
+
+    
+    
 
     __assigment_tufts.template.ui.experiment_setup.actions.push({
         name: 'ADD MULTIPLE ROWS',

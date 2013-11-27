@@ -23,7 +23,7 @@
 
 .scb_s_western_blot_tabs_more, .scb_s_microscopy_tabs_more{
   position: absolute;
-  top: -50px;
+  top: -52px;
   min-width: 895px;
 }
 

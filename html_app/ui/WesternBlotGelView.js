@@ -247,9 +247,9 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     var vslider_value = $('.scb_f_vslider_value', $(parent));
     function set_slider(y) {
         //console.info( "set_slider " + y ) ;
-        slider.css('top', y-102 + 'px');
-        slider_value.css('top', (y-114) + 'px');
-        var ww = Math.round(c.position_to_weight(y-102));
+        slider.css('top', (y-280 )+ 'px');
+        slider_value.css('top', (y-292) + 'px');
+        var ww = Math.round(c.position_to_weight(y-280));
         var weight = ww > 0 ? ww + " kDa" : "N/A";
         if (!parsed.western_blot.marker_loaded) {
             weight = "NaN";
@@ -287,23 +287,22 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
     set_slider(gel.canvas_metadata.slider);
     set_vslider(gel.canvas_metadata.vslider);
     $(parent).unbind('mousemove').bind('mousemove', function (evt) {
-        var poffset = $(element).offset();
+        var poffset = element.getClientRects()[0];
         var eX = evt.clientX;
         var eY = evt.clientY;
-
-        var y = (eY - poffset.top) + 102;
+        var bound = poffset.top - $(window).scrollTop()-36;
+        var upper_bound = bound+247;
+        var y = (eY-poffset.top+ $(window).scrollTop());
         var x = (eX - poffset.left)- 20;
-        //console.info(evt);
         window.__evt = evt ;
         window.__element = element;
         if (true || $(evt.srcElement ? evt.srcElement: evt.target).is('canvas')) {
             gel.canvas_metadata.slider = y;
             gel.canvas_metadata.vslider= x;
-//             console.log('y');
-//             console.log(y);
-//             console.log('x');
-//             console.log(x);
-            if (y < -23 || y > 389 || x < 0 || x > 325) {
+            console.log(y);
+            console.log(bound)
+            console.log(upper_bound);
+            if ((y )< bound|| (y) > upper_bound || x < 0 || x > 325) {
                 slider.hide();
                 slider_value.hide();
                 vslider.hide();

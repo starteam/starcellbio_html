@@ -361,7 +361,7 @@ scb.ui.static.FacsView.register = function (workarea) {
     	if ($('.scb_s_facs_selected').text().length<= 10) {
     	}
     	else{    		 
-    		$('.scb_s_facs_selected').text()
+    		$('.scb_s_facs_selected').text();
     		e.preventDefault();
     		 this.textContent= this.textContent.substring(0, this.textContent.length-1)
     		 return false;
