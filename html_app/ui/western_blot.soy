@@ -8,6 +8,7 @@
 * @param assignment AssignmentView
 * @param experiment
 * @param last_step
+* @param prev_step
 * @param western_blot WesternBlotView
 * @param rows
 * @param kind
@@ -24,6 +25,7 @@
     {call scb_common.assignment_step}
         {param step:6/}
         {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
         {param assignment_name:$assignment.name/}
         {param experiment_name:$experiment.name/}
         {param assignment:$assignment/}
@@ -156,11 +158,15 @@
 {template .display_tabs_selector}
 <div class='{if $experiment.western_blot_list.list.length >= 5}scb_s_western_blot_tabs_more {else} scb_s_western_blot_tabs{/if}'>
 	{if $experiment.western_blot_list.list.length < 5}
+		<button class='scb_s_western_blot_left_western_blot_left_small' disabled='disabled' western_blot_id='{$western_blot.id}'
+             			assignment_id='{$assignment.id}'
+             			experiment_id='{$experiment.id}'>
+    	</button>
 		{foreach $wb in $experiment.western_blot_list.list}
 		{if $western_blot.id == $wb.id}
 		<span class='scb_s_western_blot_active'>
-		<span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-			  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+		<input class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+			  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
 		<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' 
 				>
@@ -180,6 +186,11 @@
              			<span class='scb_s_add_tab'>ADD </span>
 				<span class='scb_s_western_blot_add_cross_western_blot'>| + </span></a>
 		</span>
+		
+		<button class='scb_s_western_blot_right_western_blot_right_small' disabled='disabled' western_blot_id='{$western_blot.id}'
+             			assignment_id='{$assignment.id}'
+             			experiment_id='{$experiment.id}' >
+    	</button>
 	{else}
 		<button class='scb_s_western_blot_left_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
@@ -192,8 +203,8 @@
 				
 					{if $western_blot.id == $wb.id}
 					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
-					<span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-						  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+					<input class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+			  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
 					<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
 							experiment_id='{$experiment.id}'>| &#215;
 					</button>
@@ -217,8 +228,8 @@
 				
 					{if $western_blot.id == $wb.id}
 					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
-					<span class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-						  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+					<input class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+			  			experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
 					<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
 							experiment_id='{$experiment.id}'>| &#215;
 					</button>

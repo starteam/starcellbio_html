@@ -57,9 +57,9 @@ def get_model(request):
     response['Content-Type'] = 'text/javascript'
     return response
     
-def create_courses(request, **kwargs):
-	import pudb
-	pudb.set_trace()
+def create_courses(request, **kwargs):# 
+# 	import pudb
+# 	pudb.set_trace()
 	if(request.method == 'POST'):
 
 		jstr=request.raw_post_data

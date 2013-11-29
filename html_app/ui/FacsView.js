@@ -176,7 +176,7 @@ scb.ui.static.FacsView.scb_s_facs_selected = function (element) {
     	 scb.ui.static.MainFrame.refresh();
     }
     else{
-    parsed.facs.name = $(element).text();
+    parsed.facs.name = $(element).val();
     }
 }
 
@@ -354,11 +354,14 @@ scb.ui.static.FacsView.register = function (workarea) {
         scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select(this, e);
     });
     scb.utils.off_on(workarea, 'blur', '.scb_s_facs_selected', function (e) {
+
+    	$('.scb_s_facs_selected').text($('.scb_s_facs_selected').attr('value'));
         scb.ui.static.FacsView.scb_s_facs_selected(this);
     });
     
     scb.utils.off_on(workarea, 'keydown', '.scb_s_facs_selected', function (e) {
     	if ($('.scb_s_facs_selected').text().length<= 10) {
+
     	}
     	else{    		 
     		$('.scb_s_facs_selected').text();
@@ -686,12 +689,14 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             rows_valid: rows_state.valid,
             kind: kind,
 			last_step: state.experiment.last_step,
+			prev_step: state.experiment.prev_step,
             kinds: template.facs_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
         if (kind == 'sample_prep'){
         	$('.scb_s_facs_samples_table')[0].scrollTop = x;
         }
+        state.experiment.prev_step=5;
         if(state.experiment.last_step >= 5)
 			state.experiment.last_step = 6;
 		state.experiment.last_technique = 'FLOW CYTOMETRY';

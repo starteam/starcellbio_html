@@ -5,6 +5,7 @@
 * @param t template
 * @param global_template
 * @param last_step
+* @param prev_step
 * @param context
 * @param assignment AssignmentView
 * @param experiment
@@ -24,6 +25,7 @@
     {call scb_common.assignment_step}
         {param step:6/}
         {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
         {param assignment_name:$assignment.name/}
         {param experiment_name:$experiment.name/}
         {param assignment:$assignment/}

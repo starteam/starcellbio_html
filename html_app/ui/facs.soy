@@ -7,6 +7,7 @@ FACS Main View
 @param experiment
 @param context
 @param last_step
+@param prev_step
 @param facs
 @param t
 @param kind
@@ -22,6 +23,7 @@ FACS Main View
     {call scb_common.assignment_step}
     {param step:6/}
     {param last_step: $last_step/}
+    {param prev_step: $prev_step/}
     {param assignment_name:$assignment.name/}
     {param experiment_name:$experiment.name/}
     {param assignment:$assignment/}
@@ -150,13 +152,16 @@ FACS Main View
 {template .display_tabs_selector}
 <div class=' {if $experiment.facs_list.list.length >= 5}scb_s_facs_tabs_more {else} scb_s_facs_tabs{/if} '>
 	{if $experiment.facs_list.list.length < 5}
-
+		<button class='scb_s_facs_left_facs_left_small' facs_id='{$facs.id}'
+             			assignment_id='{$assignment.id}'
+             			experiment_id='{$experiment.id}'>
+    	</button>
 		{foreach $wb in $experiment.facs_list.list}
 		{if $facs.id == $wb.id}
 		<span class='scb_s_facs_active'>
 
-		<span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-			  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+		<input class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+			  experiment_id='{$experiment.id}' value='{$wb.name}' type='text' maxlength=10></input>
 
 		<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}'>| &#215;
@@ -176,6 +181,10 @@ FACS Main View
 							<span class='scb_s_facs_add_cross_facs'>| + </span></a>
 		</span>
 		
+		<button class='scb_s_facs_right_facs_right_small' facs_id='{$facs.id}'
+             			assignment_id='{$assignment.id}'
+             			experiment_id='{$experiment.id}' >
+    	</button>
 	{else}
 		<button class='scb_s_facs_left_facs' facs_id='{$facs.id}'
              			assignment_id='{$assignment.id}'
@@ -188,8 +197,9 @@ FACS Main View
 						{if $facs.id == $wb.id}
 						<span class='scb_s_facs_active scb_s_facs_more_open_facs'>
 
-						<span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-							  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+						<input class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+			 			 experiment_id='{$experiment.id}' value='{$wb.name}' type='text' maxlength=10></input>
+
 
 						<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
 								experiment_id='{$experiment.id}'>| &#215;
@@ -215,8 +225,9 @@ FACS Main View
 						{if $facs.id == $wb.id}
 						<span class='scb_s_facs_active scb_s_facs_more_open_facs'>
 
-						<span class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
-							  experiment_id='{$experiment.id}' contenteditable="true">{$wb.name}</span>
+						<input class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+			  experiment_id='{$experiment.id}' value='{$wb.name}' type='text' maxlength=10></input>
+
 
 						<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
 								experiment_id='{$experiment.id}'>| &#215;

@@ -855,10 +855,12 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             experiment: state.experiment,
             headings: headings,
             rows: rows,
+            prev_step: state.experiment.prev_step,
 			last_step: state.experiment.last_step,
             new_rows: new_rows,
             kind: state.mode
         }));
+        state.experiment.prev_step=2;
     	if(state.last_view == 'experiment_run'){
     		if($('.scb_s_warning').length >0)
     			$("body").css("overflow", "auto");

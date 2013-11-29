@@ -3167,16 +3167,13 @@ var __decusability = {
                 add_multiple_dialog: {
                     'wt': {
                         title: '<b>Strain:</b> Wild Type',
-                        headings: [
-                            'Treatment', 'Temperature', '- PP1', '+ PP1'
-                        ],
+                        headings: ['Treatment', 'Temperature', ''],
                         rows: [
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "30 " + degreeEntity + "C"},
-                                    {kind: 'checkbox', name: 'NOPP1'},
-                                    {kind: 'checkbox', name: 'PP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'}
                                 ],
                                 treatment_id: 'media_only,25',
                                 cell_treatments: {
@@ -3204,8 +3201,7 @@ var __decusability = {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "37 " + degreeEntity + "C"},
-                                    {kind: 'checkbox', name: 'NOPP1'},
-                                    {kind: 'checkbox', name: 'PP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'}
                                 ],
                                 treatment_id: 'media_only,40',
                                 cell_treatments: {
@@ -3235,16 +3231,13 @@ var __decusability = {
                     'm1': {
                         title: '<b>Strain:</b> Mutant 1',
 
-                        headings: [
-                            'Treatment', 'Temperature', '- PP1', '+ PP1'
-                        ],
+                        headings: ['Treatment', 'Temperature', ''],
                         rows: [
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "30 " + degreeEntity + "C"},
-                                    {kind: 'checkbox', name: 'NOPP1'},
-                                    {kind: 'checkbox', name: 'PP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'}
                                 ],
                                 treatment_id: 'media_only,25',
                                 cell_treatments: {
@@ -3272,8 +3265,7 @@ var __decusability = {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "37 " + degreeEntity + "C"},
-                                    {kind: 'checkbox', name: 'NOPP1'},
-                                    {kind: 'checkbox', name: 'PP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'}
                                 ],
                                 treatment_id: 'media_only,40',
                                 cell_treatments: {
@@ -3303,16 +3295,13 @@ var __decusability = {
                     'm2': {
                         title: '<b>Strain:</b> Mutant 2',
 
-                        headings: [
-                            'Treatment', 'Temperature', '- PP1', '+ PP1'
-                        ],
+                        headings: [ 'Treatment', 'Temperature', ''],
                         rows: [
                             {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "30 " + degreeEntity + "C"},
-                                    {kind: 'checkbox', name: 'NOPP1'},
-                                    {kind: 'checkbox', name: 'PP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'}
                                 ],
                                 treatment_id: 'media_only,25',
                                 cell_treatments: {
@@ -3340,8 +3329,7 @@ var __decusability = {
                                 cells: [
                                     {kind: 'text', text: 'Growth Media'},
                                     {kind: 'text', text: "37 " + degreeEntity + "C"},
-                                    {kind: 'checkbox', name: 'NOPP1'},
-                                    {kind: 'checkbox', name: 'PP1'}
+                                    {kind: 'checkbox', name: 'NOPP1'}
                                 ],
                                 treatment_id: 'media_only,40',
                                 cell_treatments: {
@@ -3808,10 +3796,10 @@ $(function () {
 
 			decusability.template.ui.experiment_setup.actions.push({
 				name: 'ADD MULTIPLE ROWS',
-				open: 'mit706s13.setup',
+				open: 'decusability.setup',
 				css: {
 					width: '800px',
-					height: '900px',
+					height: '700px',
 					left: '100px',
 					top: '000px'
 				}
@@ -3873,10 +3861,10 @@ $(function () {
 
 	__decusability.template.ui.experiment_setup.actions.push({
 		name: 'ADD MULTIPLE ROWS',
-		open: 'mit706s13.setup',
+		open: 'decusability.setup',
 		css: {
 			width: '800px',
-			height: '900px',
+			height: '700px',
 			left: '100px',
 			top: '000px'
 		}

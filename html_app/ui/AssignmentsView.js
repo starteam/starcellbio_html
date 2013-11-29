@@ -106,10 +106,15 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
 //         	last_step = assignments.selected.experiments.selected.last_step;
 //         else
         	last_step=1;
+        var prev_step;
+        if(assignments.selected.experiments.selected !=null)
+        	prev_step=assignments.selected.experiments.selected.prev_step;
+        else prev_step = null;
         workarea.html(scb_assignments.main({
             global_template: gstate.context.master_model,
             assignments: assignments,
             last_step: last_step,
+            prev_step: prev_step,
             context: gstate.context,
             courses: courses,
         }));

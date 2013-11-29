@@ -233,6 +233,7 @@
 	border-radius:1px !important;
 	padding:4px !important;
 	position: relative;
+	outline: none;
 	top: -7px;
 	border:none;
 	width: 141px;

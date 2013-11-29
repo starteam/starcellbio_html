@@ -6,6 +6,7 @@
 @param assignment
 @param assignments
 @param experiment
+@param prev_step
 */
 {template .assignment_step}
 {let $eid} 
@@ -34,7 +35,25 @@
         </div>
     </a>
     <a class='scb_s_assignment_step_link scb_f_experiments_step_link {if $step >= 2}scb_s_assignment_step_link_active{/if}'
-       href='#view=experiment_last&assignment_id={$aid}&experiment_id={$eid}' aria-label='Experiments' role='tab'>
+       href=
+       {if $assignments and  not $assignments.selected.experiments.selected}
+       '#view=experiment_design&assignment_id={$aid}'
+       {elseif $prev_step == 1}
+       '#view=experiment_design&assignment_id={$aid}&experiment_id={$eid}' 
+       {elseif $prev_step == 2}
+       '#view=experiment_setup&assignment_id={$aid}&experiment_id={$eid}' 
+       {elseif $prev_step == 3}
+       '#view=select_technique&assignment_id={$aid}&experiment_id={$eid}' 
+       {elseif $prev_step == 4}
+       '#view=western_blot&assignment_id={$aid}&experiment_id={$eid}' 
+       {elseif $prev_step == 5}
+       '#view=facs&assignment_id={$aid}&experiment_id={$eid}' 
+       {elseif $prev_step == 6}
+       '#view=microscopy&assignment_id={$aid}&experiment_id={$eid}' 
+       {/if}
+       
+       
+       aria-label='Experiments' role='tab'>
        <div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
 
 		   <div class='{if $step >= 2}scb_s_experiments_link_img_active{else}scb_s_experiments_link_img {/if}'></div>

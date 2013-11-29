@@ -149,7 +149,7 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_selected = function (element) {
     	 scb.ui.static.MainFrame.refresh();
     }
     else{
-    parsed.western_blot.name = $(element).text();
+    parsed.western_blot.name = $(element).val();
     }
 
 }
@@ -366,6 +366,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_remove(this);
     });
     scb.utils.off_on(workarea, 'blur', '.scb_s_western_blot_selected', function (e) {
+    	$('.scb_s_western_blot_selected').text($('.scb_s_western_blot_selected').attr('value'));
         scb.ui.static.WesternBlotView.scb_s_western_blot_selected(this);
     });
     scb.utils.off_on(workarea, 'keydown', '.scb_s_western_blot_selected', function (e) {
@@ -460,6 +461,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             context: gstate.context,
             rows_valid: rows_state.valid,
 			last_step: state.experiment.last_step,
+			prev_step: state.experiment.prev_step,
             kind: kind,
             kinds: template.lysate_kinds,
             can_prepare_lysate: can_prepare_lysate
@@ -467,6 +469,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         if (kind == 'sample_prep'){
         	$('.scb_s_western_blot_samples_table')[0].scrollTop = x;
         }
+        state.experiment.prev_step=4;
         if(state.experiment.last_step >= 5)
 			state.experiment.last_step = 6;
 		state.experiment.last_technique = 'WESTERN BLOT';

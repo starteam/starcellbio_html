@@ -4,6 +4,7 @@
 * Assignment selector
 * @param global_template
 * @param last_step
+* @param prev_step
 * @param assignments AssignmentsView
 * @param context
 * @param courses // group Assignments by Course
@@ -18,6 +19,7 @@
     {call scb_common.assignment_step}
         {param step:1/}
         {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
         {param assignments:assignments/}
     {/call}
     <div class='scb_s_assignments_container'>

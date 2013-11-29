@@ -626,7 +626,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			for( var x=0; x < parsed.experiment.facs_list.list.length; x++){id_list.push(parsed.experiment.facs_list.list[x].id);}
 			
             if (!parsed.facs) {
-            	if(state.facs_id && id_list.indexOf(state.facs_id)<0 && parsed.experiment.facs_list.list.length >1){
+            	if(state.facs_id && id_list.indexOf(state.facs_id)<0 && parsed.experiment.facs_list.list.length >0){
             		parsed.facs = parsed.experiment.facs_list.list[state.index];
 
             	}
@@ -665,7 +665,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			for( var x=0; x < parsed.experiment.western_blot_list.list.length; x++){id_list.push(parsed.experiment.western_blot_list.list[x].id);}
 			//id_list.indexOf(state.western_blot_id)>=0 ||
             if ( !parsed.western_blot ) {
-            	if(state.western_blot_id && id_list.indexOf(state.western_blot_id)<0 && parsed.experiment.western_blot_list.list.length >1){
+            	if(state.western_blot_id && id_list.indexOf(state.western_blot_id)<0 && parsed.experiment.western_blot_list.list.length >0){
             		parsed.western_blot = parsed.experiment.western_blot_list.list[state.index];
 
             	}

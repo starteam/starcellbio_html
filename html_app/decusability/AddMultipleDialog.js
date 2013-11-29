@@ -75,7 +75,7 @@ decusability.setup = function (state) {
     var onClose = state.close;
 
     var dialog = $("<div class='scb_mit706s16_dialog'></div>");
-    dialog.html(scb_mit706s16.dialog({
+    dialog.html(decusability.dialog({
         assignment: assignment,
         experiment: experiment,
         template: template

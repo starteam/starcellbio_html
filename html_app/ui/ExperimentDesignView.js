@@ -157,10 +157,12 @@ scb.ui.ExperimentDesignView = function scb_ui_ExperimentDesignView(gstate) {
             global_template : gstate.context.master_model,
             context: gstate.context,
 			t : state.assignment.template,
+			prev_step: state.experiment.prev_step,
 			last_step: state.experiment.last_step,
             assignment: state.assignment,
             experiment: state.experiment
 		}));
+		state.experiment.prev_step = 1;
         state.experiment.last_view = 'experiment_design';
       if(state.experiment.last_step < 5)
 			state.experiment.last_step = 3;

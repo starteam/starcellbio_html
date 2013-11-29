@@ -938,11 +938,13 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             rows: rows_state.rows,
             rows_valid: rows_state.valid,
 			last_step: state.experiment.last_step,
+			prev_step: state.experiment.prev_step,
             kind: kind,
             kinds: template.micro_kinds,
 
             can_prepare_slide: can_prepare_slide
         }));
+        state.experiment.prev_step=6;
         
         if(state.experiment.last_step >= 5)
 			state.experiment.last_step = 6;

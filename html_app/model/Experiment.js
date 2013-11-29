@@ -39,6 +39,8 @@ scb.Experiment = function scb_Experiment(data, context, parent) {
     scb.Utils.initialize_accessor_field(self,data,'objective','',null,context);
     // ui state
     scb.Utils.initialize_accessor_field(self,data,'last_view','experiment_design',null,context);
+    scb.Utils.initialize_accessor_field(self,data, 'prev_step', 0, null,context);
+
 	scb.Utils.initialize_accessor_field(self,data, 'last_step', 0, null,context);
 	scb.Utils.initialize_accessor_field(self,data, 'last_scroll', 0, null,context);
 	scb.Utils.initialize_accessor_field(self,data, 'last_technique', 'undefined', null, context);

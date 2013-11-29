@@ -1,10 +1,10 @@
 // This file was automatically generated from addmultipledialog.soy.
 // Please don't edit this file by hand.
 
-if (typeof scb_mit706s16 == 'undefined') { var scb_mit706s16 = {}; }
+if (typeof decusability == 'undefined') { var decusability = {}; }
 
 
-scb_mit706s16.dialog = function(opt_data, opt_sb) {
+decusability.dialog = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_mit706s16_inner_dialog\'><h1 class=\'scb_mit706s16_inner_dialog_title\'><span class=\'scb_mit706s16_inner_dialog_title_close\'>&#215;</span>Add multiple rows </h1><div class=\'scb_mit706s16_inner_dialog_body\'>');
   var cell_lineList4 = soy.$$getMapKeys(opt_data.template.ui.add_multiple_dialog);
