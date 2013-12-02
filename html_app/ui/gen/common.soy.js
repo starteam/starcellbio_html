@@ -17,7 +17,7 @@ scb_common.assignment_step = function(opt_data, opt_sb) {
 
 scb_common.experiment_step = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_experiment_step\'><a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '" aria-label=\'New Experiment\' role=\'button\'> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a><div class = \'scb_s_experiment_step_progress_label\'> ', soy.$$escapeHtml(opt_data.assignment.name), ':</div><div class=\'scb_s_assignment_step_experiment\'><label class="custom-select"><select role=\'list\' aria-label=\'Experiments\' alt=\'\' onchange="location = this.value;">');
+  output.append('<div class=\'scb_s_experiment_step\'><a class="scb_f_open_experiment scb_f_open_experiment_top scb_s_navigation_button" href="#view=experiment_design&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '" aria-label=\'New Experiment\' role=\'button\'> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a><div class = \'scb_s_experiment_step_progress_label\'> ', soy.$$escapeHtml(opt_data.assignment.name), ':</div><div class=\'scb_s_assignment_step_experiment\'><label class="custom-select"><select role=\'list\' aria-label=\'Experiments\' alt=\'\' onchange="location = this.value;">');
   var eList88 = opt_data.assignment.experiments.list;
   var eListLen88 = eList88.length;
   for (var eIndex88 = 0; eIndex88 < eListLen88; eIndex88++) {

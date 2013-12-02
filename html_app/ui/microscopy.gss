@@ -24,7 +24,7 @@
 
 .scb_s_microscopy_choose_samples_order_list{
 	width:200px;
-	overflow: scroll;
+	overflow: auto;
 	max-height: 275px;
 }
 

@@ -17,7 +17,7 @@
   height: 160px;
   width: 257px;
   background-color: white;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-top: 10px;
   padding-left: 3px;
 }

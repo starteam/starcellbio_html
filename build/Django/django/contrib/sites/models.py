@@ -92,4 +92,6 @@ def get_current_site(request):
         current_site = Site.objects.get_current()
     else:
         current_site = RequestSite(request)
+    import pudb 
+    pudb.set_trace()
     return current_site

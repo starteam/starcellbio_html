@@ -97,7 +97,7 @@ Your instructor should have provided you with a code that you need to enter belo
     
 <div id='code_status' style='visibility:hidden; display:inline'> <span style='color:red'>&#215; </span>&nbsp; This is not a valid code. </div>
   <div class="buttonHolder">
-      <button class="primaryAction auth_submit_button" type="submit">{% trans "Create Account" %}</button>
+      <button class="primaryAction auth_submit_button" id='auth_submit_button' type="submit" disabled>{% trans "Create Account" %}</button>
     </div>
   </fieldset>
 
@@ -122,10 +122,12 @@ function setStatus(){
 }
 
 function changeStatus(){
-	if(document.getElementById('course_code_input').value=='StarX' || document.getElementById('course_code_input').value=='7.02' || document.getElementById('course_code_input').value=='7.06' || document.getElementById('course_code_input').value=='Bio52'  || document.getElementById('course_code_input').value=='usability')
-		document.getElementById('code_status').innerHTML = "<span style='color:green'>&#9745; </span>&nbsp; This is a valid code."
+	if(document.getElementById('course_code_input').value=='StarX' || document.getElementById('course_code_input').value=='7.02' || document.getElementById('course_code_input').value=='7.06' || document.getElementById('course_code_input').value=='Bio52'  || document.getElementById('course_code_input').value=='usability'){
+		document.getElementById('code_status').innerHTML = "<span style='color:green'>&#9745; </span>&nbsp; This is a valid code. You may create an account."
+		document.getElementById('auth_submit_button').disabled=false;
+	}
 	else
-		document.getElementById('code_status').innerHTML = "<span style='color:red'>&#215; </span>&nbsp; This is not a valid code."
+		document.getElementById('code_status').innerHTML = "<span style='color:red'>&#215; </span>&nbsp; This is not a valid code. You cannot create an account."
 }
 
 </script>

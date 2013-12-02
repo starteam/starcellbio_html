@@ -536,9 +536,10 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
     	});
     	
 		$(".scb_s_western_blot_selected").keypress(function(e){ return e.which != 13; });
+		var elem = document.getElementById('slider');
 		window.mySwipe = Swipe(elem, {
   			//auto: 1000,
-  			continuous: true,
+  			continuous: false,
   			disableScroll: true,
   			transitionEnd: function(index, element) { 
 					$('.slider_dots li').attr('class','');

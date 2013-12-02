@@ -471,7 +471,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 						   $('.iframe').load(function(){
 						   	  var profile = $('.iframe').contents();
 						   	  //console.log(profile);
-						   	  if(profile[0].body.textContent.indexOf('profile') >0){
+						   	  if(profile[0].body.textContent.indexOf('confirmed') >0){
 						   	  	  parent.document.location.reload();
 							   	  }
 						   });

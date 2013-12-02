@@ -19,6 +19,9 @@ div#main {
 .scb_f_open_experiment {
   margin-top: 0 !important;
 }
+.scb_f_open_experiment_top {
+  right: 271px;
+}
 .scb_s_navigation_button_old {
   padding: 3px 20px;
   min-width: 120px;

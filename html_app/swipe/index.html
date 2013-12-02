@@ -40,10 +40,7 @@
   <div class='swipe-wrap'>
     <div><b>0</b></div>
     <div><b>1</b></div>
-    <div><b>2</b></div>
-    <div><b>3</b></div>
-    <div><b>4</b></div>
-    <div><b>5</b></div>
+    <li >2</li>
   </div>
 </div>
 
@@ -54,12 +51,9 @@
   <button onclick='mySwipe.prev()'>prev</button> 
   <nav id = 'nav'>
     <ul>
-    <li class='on'>0</li>
-    <li >1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
+    <li class='on'></li>
+    <li ></li>
+    <li ></li>
     </ul>
 </nav>
   <button onclick='mySwipe.next()'>next</button>
@@ -78,7 +72,6 @@
 var elem = document.getElementById('mySwipe');
 window.mySwipe = Swipe(elem, {
   // startSlide: 4,
-  auto: 1000,
    continuous: true,
   // disableScroll: true,
   // stopPropagation: true,
