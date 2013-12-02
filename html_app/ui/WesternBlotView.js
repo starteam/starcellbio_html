@@ -536,5 +536,18 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
     	});
     	
 		$(".scb_s_western_blot_selected").keypress(function(e){ return e.which != 13; });
+		window.mySwipe = Swipe(elem, {
+  			//auto: 1000,
+  			continuous: true,
+  			disableScroll: true,
+  			transitionEnd: function(index, element) { 
+					$('.slider_dots li').attr('class','');
+					$($('.slider_dots li')[index]).attr('class','on');}
+		});
+		$('#nav li').on ('click', function () {
+			$('.slider_dots li').attr('class','');
+			$($('.slider_dots li')[$(this).index()]).attr('class','on');
+   			 window.mySwipe.slide($(this).index(), 200);
+		});
     }
 }

@@ -34,27 +34,27 @@ scb.ui.static.HomepageView.register = function(workarea) {
     scb.utils.off_on(workarea, 'click', '.learn_more_dynamic', function (e) {
     	var pop_string = $(this).attr('value');
 		var popoutWindow =window.open("static/ref_lib/full_library.html#"+pop_string);
-		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#"+pop_string; },50);
+		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#"+pop_string; },60);
 
     });
     
     
     scb.utils.off_on(workarea, 'click', '.learn_more_western_blot', function (e) {
 		var popoutWindow =window.open("static/ref_lib/full_library.html#WesternBlotting");
-		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#WesternBlotting"; },50);
+		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#WesternBlotting"; },60);
 
     });
     
     
     scb.utils.off_on(workarea, 'click', '.learn_more_facs', function (e) {
     	var popoutWindow =window.open("static/ref_lib/full_library.html#FlowCytometry");
-		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#FlowCytometry"; },50);
+		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#FlowCytometry"; },60);
 
     });
     
     scb.utils.off_on(workarea, 'click', '.learn_more_microscopy', function (e) {
         var popoutWindow =window.open("static/ref_lib/full_library.html#Microscopy");
-		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#Microscopy"; },50);
+		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#Microscopy"; },60);
 
     });
 

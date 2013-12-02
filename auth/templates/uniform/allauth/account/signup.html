@@ -41,6 +41,10 @@ input{
 		border: 0;
 }
 
+#errorMsg, #error_1_id_email{
+	color: red;
+}
+
 .auth_submit_button > div{
 	position: relative;
 	top: 2px;
@@ -54,6 +58,7 @@ input{
 	float: left;
 	display:block;
 	margin-bottom: 5px;
+	text-transform: uppercase;
 }
 
 #div_id_email > input, #div_id_password1 > input, #div_id_password2 > input, .course_code > input{
@@ -70,7 +75,7 @@ input{
 {% load i18n %}
 {% load uni_form_tags %}
 Your instructor should have provided you with a code that you need to enter below to register and use this StarCellBio tool.
-  Please contact your instructor if you have not received this code. 
+  Please contact your instructor if you have not received this code. You will receive an email to confirm your account.
 {% block content %}
 
 <!-- 
@@ -87,18 +92,17 @@ Your instructor should have provided you with a code that you need to enter belo
     
    <div class='course_code'>
     <label>COURSE CODE </label>
-    <input name="CC"  placeholder=''/>
+    <input onclick='setStatus()' onkeyup="changeStatus()" id='course_code_input' name="CC"  placeholder=''/>
 	</div>
     
-      
+<div id='code_status' style='visibility:hidden; display:inline'> <span style='color:red'>&#215; </span>&nbsp; This is not a valid code. </div>
   <div class="buttonHolder">
       <button class="primaryAction auth_submit_button" type="submit">{% trans "Create Account" %}</button>
     </div>
   </fieldset>
 
-<!-- 
  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
- -->
+
 
 </form>
 
@@ -106,9 +110,21 @@ Your instructor should have provided you with a code that you need to enter belo
 
 
 <script>
+if(document.getElementById('div_id_email').className != 'ctrlHolder error ')
 document.getElementById('div_id_email').children[0].textContent='E-MAIL';
-document.getElementById('div_id_password1').children[0].textContent='PASSWORD';
+// if(document.getElementById('div_id_password1').children[0] != 'ctrlHolder error ' || document.getElementById('error_1_id_password1').textContent =="")
+// document.getElementById('div_id_password1').children[0].textContent='PASSWORD';
+if(document.getElementById('div_id_password2').children[0] != 'ctrlHolder error ')
 document.getElementById('div_id_password2').children[0].textContent='PASSWORD (AGAIN)';
+
+function setStatus(){
+	document.getElementById('code_status').style.visibility='visible';
+}
+
+function changeStatus(){
+	if(document.getElementById('course_code_input').value=='StarX' || document.getElementById('course_code_input').value=='7.02' || document.getElementById('course_code_input').value=='7.06' || document.getElementById('course_code_input').value=='Bio52'  || document.getElementById('course_code_input').value=='usability')
+		document.getElementById('code_status').innerHTML = "<span style='color:green'>&#9745; </span>&nbsp; This is a valid code."
+}
 
 </script>
 

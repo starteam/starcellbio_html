@@ -158,10 +158,7 @@
 {template .display_tabs_selector}
 <div class='{if $experiment.western_blot_list.list.length >= 5}scb_s_western_blot_tabs_more {else} scb_s_western_blot_tabs{/if}'>
 	{if $experiment.western_blot_list.list.length < 5}
-		<button class='scb_s_western_blot_left_western_blot_left_small' disabled='disabled' western_blot_id='{$western_blot.id}'
-             			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}'>
-    	</button>
+
 		{foreach $wb in $experiment.western_blot_list.list}
 		{if $western_blot.id == $wb.id}
 		<span class='scb_s_western_blot_active'>
@@ -187,10 +184,7 @@
 				<span class='scb_s_western_blot_add_cross_western_blot'>| + </span></a>
 		</span>
 		
-		<button class='scb_s_western_blot_right_western_blot_right_small' disabled='disabled' western_blot_id='{$western_blot.id}'
-             			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}' >
-    	</button>
+
 	{else}
 		<button class='scb_s_western_blot_left_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
@@ -507,15 +501,39 @@
             <div class='scb_s_western_blot_video_box_wrapper_title'>
                  IN THE LAB
             </div>
-            <div class='scb_s_western_blot_video_reminder'>
-                   <div class='scb_s_western_blot_video_box'>
-						<img alt='In_The_Lab' title='In_The_Lab' class='scb_s_western_blot_video_box_img' src='images/western_blot/in_the_lab_all.png'><br/>
+            
+            <div id='mySwipe'class='scb_s_western_blot_video_box swipe'>
+				<div  class='slides_container swipe-wrap'>
+					<div><a target="_blank">
+						<img class='scb_s_western_blot_video_box_img' src='images/western_blot/in_the_lab_all.png' ><br/>
 						<div class='scb_s_western_blot_video_heading'>Reminder:&nbsp;&nbsp;</div>
-						<div class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one&nbsp;</div>
+						<div class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one&nbsp;</div><br/>
 						<div class='scb_s_western_blot_video_text_second'>lane must be reserved for the protein marker.&nbsp;</div><br/>
 						<a href='static/ref_lib/full_library.html#GelPreparation' target='_blank'  class='scb_s_western_blot_learn_more'>Learn More</a>
+
+					</a>
 					</div>
-            </div>
+					<div>
+						<iframe height='124' width='187' class='scb_s_experiment_setup_video_box_vid'  src="//www.youtube.com/embed/u7VwmJw9Gbc" frameborder="0" allowfullscreen></iframe>
+
+					</div>
+				</div>
+			</div>
+				<div class='slider_controls' style='text-align:center;'>
+  
+			  		<button onclick='mySwipe.prev()'>&#x25c0;</button> 
+					  <nav id = 'nav'>
+						<ul class='slider_dots'>
+						<li class='on'></li>
+						<li ></li>
+						</ul>
+						</nav>
+
+			  		<button onclick='mySwipe.next()'>&#x25b6;</button>
+
+				</div> 
+            
+
     </div>
                
      <div class='scb_s_western_blot_vertical_line_1'></div>

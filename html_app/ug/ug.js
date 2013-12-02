@@ -75,6 +75,7 @@ $.get( "user_guide.html", function(data) {
 				while(nextC !=null && nextC.className !="scb_s_help_sublink"){
 					$(nextC).addClass('scb_s_help_sub_section_'+number);
 					$(nextC).addClass('scb_s_help_link_' + i);
+					//SHLOKA
 					nextC.style.display = 'none';
 					$(div.childNodes[y]).append(nextC);
 					nextC = div.childNodes[y].nextElementSibling;
@@ -85,6 +86,7 @@ $.get( "user_guide.html", function(data) {
 			else{
 				$(div.childNodes[y]).addClass('scb_s_help_sub_section');
 				$(div.childNodes[y]).addClass('scb_s_help_link_' + i);
+				//SHLOKA
 				div.childNodes[y].style.display = 'none';
 			}
 			y++;

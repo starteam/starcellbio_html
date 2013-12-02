@@ -224,6 +224,7 @@ ul>.scb_s_assignment_experiment_list_item_new_experiment {
   font-weight: bold;
   font-family: 'sourcesanspro-semibold';
   color: #316f94;
+  text-transform: capitalize;
 }
 .scb_s_assignments_sidebar_course_block {
   padding-top: 12pt;

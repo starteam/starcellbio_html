@@ -205,6 +205,14 @@ table.scb_s_experiment_setup_table {
 
 }
 
+.scb_s_experiment_setup_video_box_placeholder {
+	width: 187px;
+	height: 124px;
+	bottom: 32px;
+	background-color: #525252;
+	position: absolute;
+	left: 6px;
+}
 
 .scb_s_warning {
     background: #edeef2;

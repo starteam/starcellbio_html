@@ -9,19 +9,19 @@
 .scb_s_western_blot_tabs,.scb_s_microscopy_tabs {
   position: absolute;
   top: -42px;
-  min-width: 895px;
+  margin-left: 36px;
+	min-width: 826px;
   overflow-y: hidden;
 }
 
  .scb_s_facs_tabs{
  
-   position: absolute;
-  top: -55px;
-  min-width: 895px;
-  overflow-y: hidden;
+   	position: absolute;
+  	top: -43px;
+  	margin-left: 36px;
+	min-width: 826px;
+  	overflow-y: hidden;
  }
-
-
 
 
 .scb_s_western_blot_left_western_blot_left_small{

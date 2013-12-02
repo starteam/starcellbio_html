@@ -153,6 +153,14 @@ table.scb_s_experiment_setup_table {
   margin-bottom: -5px;
   background-color: #525252;
 }
+.scb_s_experiment_setup_video_box_placeholder {
+  width: 187px;
+  height: 124px;
+  bottom: 32px;
+  background-color: #525252;
+  position: absolute;
+  left: 6px;
+}
 .scb_s_warning {
   background: #edeef2;
   border: 1px solid #d0d0d0;

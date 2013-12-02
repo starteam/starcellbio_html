@@ -152,10 +152,7 @@ FACS Main View
 {template .display_tabs_selector}
 <div class=' {if $experiment.facs_list.list.length >= 5}scb_s_facs_tabs_more {else} scb_s_facs_tabs{/if} '>
 	{if $experiment.facs_list.list.length < 5}
-		<button class='scb_s_facs_left_facs_left_small' facs_id='{$facs.id}'
-             			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}'>
-    	</button>
+
 		{foreach $wb in $experiment.facs_list.list}
 		{if $facs.id == $wb.id}
 		<span class='scb_s_facs_active'>
@@ -180,11 +177,7 @@ FACS Main View
 							 href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
 							<span class='scb_s_facs_add_cross_facs'>| + </span></a>
 		</span>
-		
-		<button class='scb_s_facs_right_facs_right_small' facs_id='{$facs.id}'
-             			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}' >
-    	</button>
+
 	{else}
 		<button class='scb_s_facs_left_facs' facs_id='{$facs.id}'
              			assignment_id='{$assignment.id}'

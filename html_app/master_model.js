@@ -3116,7 +3116,7 @@ var __assigment_706 = {
 var __decusability = {
         id: 'decusability',
         name: 'StarCellBio Usability Test',
-        course: 'Dec_2013_Usability',
+        course: 'usability',
     	course_name: 'December 2013 Usability Testing',
         description: 'FACS and Western Blot for temperature sensitive mutants',
         experiments: {},
