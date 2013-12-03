@@ -478,7 +478,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 						   	  	  	//$.jqDialog.alert("Please check your email to confirm this account.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 
 						   	  	  }
-						   	  	  //parent.document.location.reload();
+						   	  	  parent.document.location.reload();
 
 							   	  }
 						   });
