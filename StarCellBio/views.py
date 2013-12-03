@@ -9,7 +9,6 @@ from django.shortcuts import redirect
 import json
 import pudb
 from backend.models import Assignment, StudentAssignment, Course, UserCourse
-import bz2
 import StringIO
 from django.core.files.base import ContentFile
 import StarCellBio.settings
