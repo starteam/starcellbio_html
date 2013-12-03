@@ -303,7 +303,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 		});
     });
 		//HANDLER FOR USER_GUIDE BUTTON AND IFRAME
-	    scb.utils.off_on(workarea.parent(), 'click', '.scb_f_user_guide', function (evt) {
+	scb.utils.off_on(workarea.parent(), 'click', '.scb_f_user_guide', function (evt) {
     	$('body').append(scb_userguide.userguide({}));
     	$('.scb_f_ug_down_button').hide();
     	$('.scb_f_ug_up_button').hide();
@@ -425,6 +425,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
         scb.ui.static.MainFrame.ensure_auth_context();
         if (get_courses_result.is_auth) {
+        	
         	window.location = '/accounts/logout/';
         }
         else {
@@ -783,6 +784,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             $('.scb_s_login_status').text('SIGN OUT');
             $('.scb_f_try_an_experiment').click();
         }
+        scb.ui.static.MainFrame.pending_save_short(parsed);
         scb.ui.static.MainFrame.pending_save(parsed);
         scb.ui.static.MainFrame.in_ajax_display();
 
@@ -808,6 +810,29 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					}
 				});
     		}, 15000);
+    		pending_save = true;
+    	}
+    }
+    scb.ui.static.MainFrame.pending_save_short = function(parsed){
+    	if(!pending_save){
+    		setTimeout(function() {
+    			pending_save = false;
+    			console.log('believe');
+    			var token = 0;
+    			if(typeof post_state_result === 'undefined')
+    				token = get_courses_result.token;
+    			else
+    				token = post_state_result.token;
+    			post_obj = {'token': token, 'model': parsed.context.master_model}
+    			$.ajax({
+					type: "POST",
+					url: 'scb/post_state.js',
+					data: JSON.stringify(post_obj),
+					success: function (data){
+						console.log(data);
+					}
+				});
+    		}, 1000);
     		pending_save = true;
     	}
     }
