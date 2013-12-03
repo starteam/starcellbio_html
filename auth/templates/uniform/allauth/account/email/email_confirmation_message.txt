@@ -1,6 +1,3 @@
   
 
-{% load account %}{% load i18n %}{% autoescape off %}{% blocktrans %}You have just been registered with a StarCellBio account. Click on the link below to confirm your account.
-
-To confirm this is correct, go to {{ activate_url }}
-{% endblocktrans %}{% endautoescape %}
+{% load account %}{% load i18n %}{% autoescape off %}{% blocktrans %}You have just been registered and confirmed a StarCellBio account. This is a confirmation email. 

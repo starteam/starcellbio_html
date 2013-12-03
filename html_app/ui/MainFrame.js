@@ -472,9 +472,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 						   	  var profile = $('.iframe').contents();
 						   	  //console.log(profile);
 						   	  if(profile[0].body.textContent.indexOf('confirmed') >0){
+						   	  	  window.onload = function(){
+						   	  	  	
+						   	  	  	$('body').css('overflow', 'hidden');
+						   	  	  	$.jqDialog.alert("Please check your email to confirm this account.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+
+						   	  	  }
 						   	  	  parent.document.location.reload();
-						   	  	  $('body').css('overflow', 'hidden');
-						   	  	  $.jqDialog.alert("Please check your email to confirm this account.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 
 							   	  }
 						   });
