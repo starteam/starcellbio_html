@@ -61,28 +61,34 @@ Experiment active area
 				<input type='text' class='scb_s_experiment_name_edit' maxlength="15" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}' aria-label='Experiment Name' title='{$experiment.name}' role='textbox'>
 			<br/>
 			<br/>
+<!-- 
 			<div class='scb_objective_number scb_objective_design'>
 				<div>1</div>
 			</div>
+ -->
 			<div class='scb_s_experiment_design_objective_container'>
 			
-				<div class='scb_s_experiment_design_objective_text' id='scb_s_experiment_design_objective_text_label'>What question is your experiment going to address?</div>
+				<div class='scb_s_experiment_design_objective_text' id='scb_s_experiment_design_objective_text_label'><span class='design_numbers'>1.&nbsp;&nbsp;&nbsp;</span>What question is your experiment going to address?</div>
 				<textarea aria-labelledby="scb_s_experiment_design_objective_text_label" class='scb_s_experiment_design_objective' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.objective}</textarea>
 			</div>
 			<br/>
+<!-- 
 			<div class='scb_objective_number scb_objective_design'>
 				<div>2</div>
-			</div>        
+			</div> 
+ -->       
 			<div class='scb_s_experiment_design_hypothesis_container'>
-				<div class='scb_s_experiment_design_hypothesis_text' id="scb_s_experiment_design_hypothesis_label">Do you have a hypothesis for this experiment? If so, please write it below.</div>
+				<div class='scb_s_experiment_design_hypothesis_text' id="scb_s_experiment_design_hypothesis_label"><span class='design_numbers'>2.&nbsp;&nbsp;&nbsp;</span>Do you have a hypothesis for this experiment? If so, please write it below.</div>
 			<textarea aria-labelledby="scb_s_experiment_design_hypothesis_label" class='scb_s_experiment_design_hypothesis' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.hypothesis}</textarea>
 			</div>
 			<br/>
+<!-- 
 			<div class='scb_objective_number scb_objective_design'>
 				<div>3</div>
-			</div>        
+			</div>    
+ -->    
 			<div class='scb_s_experiment_design_techniques_container'>
-				<div class='scb_s_experiment_design_techniques_text'>What technique(s) might be best suited for the analysis of this experiment?</div>
+				<div class='scb_s_experiment_design_techniques_text'><span class='design_numbers'>3.&nbsp;&nbsp;&nbsp;</span>What technique(s) might be best suited for the analysis of this experiment?</div>
 				<span class='scb_s_experiment_design_techniques_tq_note'>
 					Please note that by selecting a technique(s), you will not alter the techniques that are available to you for this experiment.
 

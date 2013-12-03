@@ -1,3 +1,7 @@
+.design_numbers {
+  font-size: 14pt !important;
+  font-family: 'sourcesanspro-semibold';
+}
 .scb_s_design_description {
   position: relative;
   margin-top: 23px;

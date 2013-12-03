@@ -6,6 +6,11 @@
   /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
 }
 
+.design_numbers{
+	font-size: 14pt !important;
+	font-family: 'sourcesanspro-semibold';
+}
+
 .scb_s_design_description {
     position: relative;
     margin-top: 23px;
