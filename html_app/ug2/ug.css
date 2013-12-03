@@ -1,0 +1,146 @@
+
+.scb_f_help{
+	position:relative;
+	display: block;
+    background: #f4f6f8;
+    vertical-align: middle;
+	margin-left: auto;
+	margin-right:auto;
+	padding-right:10px;
+    border-radius: 5px;
+    font-size: 9pt;
+    letter-spacing:0.5px;
+}
+
+
+.ug_dividing_line{
+	height: 2px;
+	background-color: #cdcdcd;
+	width:950px;
+	position:absolute;
+	left: 8px;
+}
+
+
+.heading, .subheading {
+	font-size: 12pt;
+	cursor:pointer;
+	color: #316f94;
+	font-weight:bold;
+}
+
+
+body{
+	background: #f4f6f8;
+}
+.body{
+	background-color: #f4f6f8;
+	color: #289a7b;
+	width:920px;
+	padding:15px;
+}
+
+.heading > .subheading{
+	#color: purple;
+}
+
+.subheading > ul{
+	color:black;
+	font-weight:normal;
+}
+
+.heading > ul{
+	#color:green;
+	color: black;
+	font-weight:normal;
+}
+
+.scb_f_ug_close_button:hover{
+	background-color: #e58986;
+}
+
+.scb_f_help_search_bar{
+	#position:fixed;
+	width: inherit;
+	margin-right:auto;
+	margin-left: auto;
+	cursor: move;
+	background: #289A7B;
+	height: 55px;
+	color: white;
+	font-size: 16pt;
+}
+
+.ug_table_of_contents{
+	text-transform: uppercase;
+	font-size: 20pt;
+	color:black;
+}
+
+
+.title{
+	text-decoration: underline;
+	cursor: auto;
+	font-size: 12pt;
+}
+.title > a >p{
+	margin:0;
+	font-size: 14pt;
+}
+
+.scb_f_help_display{
+	padding-top: 10px;
+    padding-left: 10px;
+    #margin-top: 75px;
+}
+
+.scb_f_ug_up_button{
+	-webkit-appearance: none;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+ .scb_f_ug_down_button{
+	-webkit-appearance: none;
+}
+
+.scb_f_help_form_sub{
+	display:inline-block;
+}
+
+.scb_f_help_form_sub > input{
+	font-size: 14pt;
+	display: inline-block;
+}
+
+.search_found{
+	display:inline !important;
+}
+
+.scb_s_main_help_link{
+	color:#316f94;
+	cursor:pointer;
+}
+
+.scb_s_section_active  span{
+	color:#316f94;
+	text-decoration: underline;
+	cursor:pointer;
+	font-weight:bold;
+}
+.scb_s_help_sublink>li{
+	cursor: default;
+}
+
+.underline{
+	
+	text-decoration: underline;
+}
+
+.scb_s_section_inactive  span{ 
+	color:#316f94;
+	text-decoration: initial !important;
+	cursor: default;
+	font-weight: bold;
+	
+}
+
