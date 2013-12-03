@@ -26,6 +26,7 @@ scb.ui.static.MainFrame.update_hash = function (state) {
 scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     var self = this;
     var pending_save = false;
+    var pending_save2 = false;
     context.main_frame = self;
     self.sections = {};
 
@@ -814,7 +815,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     	}
     }
     scb.ui.static.MainFrame.pending_save_short = function(parsed){
-    	if(!pending_save){
+    	if(!pending_save2){
     		setTimeout(function() {
     			pending_save = false;
     			console.log('believe');
@@ -833,7 +834,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					}
 				});
     		}, 1000);
-    		pending_save = true;
+    		pending_save2 = true;
     	}
     }
     scb.ui.static.MainFrame.refresh = function (navigation_state) {
