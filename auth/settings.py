@@ -16,7 +16,7 @@ AUTHENTICATION_BACKENDS = (
 )
 ACCOUNT_SIGNUP_FORM_CLASS = 'forms.SignupForm'
 
-ROOT_URLCONF = 'starcellbio.urls'
+ROOT_URLCONF = 'example.urls'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
