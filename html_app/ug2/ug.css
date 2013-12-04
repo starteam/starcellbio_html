@@ -112,6 +112,10 @@ body{
 	display: inline-block;
 }
 
+.scb_s_help_section{
+	line-height:18px;
+}
+
 .search_found{
 	display:inline !important;
 }

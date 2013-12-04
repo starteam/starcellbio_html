@@ -310,8 +310,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     	$('.scb_f_ug_up_button').hide();
     	$('.scb_f_ug_search_line').hide();
     	$("#closesearch").hide();
-    	$(".main_popout").addClass('main_popout_disabled');
-    	$('.main_popout').attr('disabled', 'disabled');
+    	//$(".main_popout").addClass('main_popout_disabled');
+    	//$('.main_popout').attr('disabled', 'disabled');
     	$(".scb_s_ug_home").addClass('scb_s_ug_home_disabled');
     	$('.scb_s_ug_home').attr('disabled', 'disabled');
     	$('.scb_display_search_count').hide();
@@ -374,6 +374,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				$('iframe').contents().find(".scb_s_ug_home").click();
 				$(".scb_s_ug_home").addClass('scb_s_ug_home_disabled');
     			$('.scb_s_ug_home').attr('disabled', 'disabled');
+				$(".main_popout").removeClass('main_popout_disabled');
+    			$('.main_popout').removeAttr('disabled');
+    			
+						$('.scb_f_ug_down_button').hide();
+    					$('.scb_f_ug_up_button').hide();
+    					$('.scb_f_ug_search_line').hide();
+    					$("#closesearch").hide();
+    					$('.scb_display_search_count').hide();	
 			});
 			
 			$(".main_popout").click(function(){
@@ -391,6 +399,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					}
 	
 					popout_string = popout_string.replace(/_/g, '-');
+					if($('iframe').contents().find('.scb_s_section_inactive').length ==0)
+						popout_string ="";
 					var popoutWindow =window.open("static/ug2/full_guide.html#"+popout_string);
 					//the timeout is needed, because the javascript has to load first, 
 					//and then you can use the hash to the anchor

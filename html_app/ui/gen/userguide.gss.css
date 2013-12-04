@@ -97,17 +97,17 @@
   background: #e0e0e0;
   position: absolute;
   bottom: -10px;
-  left: 386px;
+  left: 261px;
 }
 .scb_f_ug_up_button {
   -webkit-appearance: none;
-  padding-top: 1px;
-  padding-bottom: 1px;
   bottom: -11px;
   position: absolute;
   background: 0;
   border: 0;
-  left: 383px;
+  width: 19px;
+  padding: 0 !important;
+  left: 263px;
 }
 .scb_f_ug_down_button {
   -webkit-appearance: none;
@@ -115,13 +115,23 @@
   background: 0;
   border: 0;
   bottom: -10px;
-  left: 363px;
+  width: 19px;
+  padding: 0 !important;
+  left: 239px;
 }
 .scb_f_help_form {
   display: inline-block;
   margin-bottom: 0;
   width: 366px;
   height: 45px;
+}
+.arrow_background {
+  position: absolute;
+  width: 43px;
+  height: 25px;
+  top: 2px;
+  left: 221px;
+  background-image: url('../../../images/homepage/unable_updown.png');
 }
 .scb_s_search_wrapper {
   border-top-left-radius: 21px;
@@ -140,7 +150,7 @@
 .scb_display_search_count {
   color: black;
   margin-left: 10px;
-  font-size: 12pt;
+  font-size: 10pt;
   position: relative;
   bottom: -7px;
   right: 77px;
@@ -174,7 +184,7 @@
   height: 23px;
   width: 74px;
   right: 0;
-  left: 292px;
+  left: 314px;
   border: none;
   margin: 0;
   top: 13px;
@@ -183,15 +193,20 @@
 }
 #closesearch {
   font-size: 9pt;
-  padding: 4px 8px 15px;
+  padding: 1px 3px 15px;
   border-radius: 6px;
-  height: 23px;
-  width: 23px;
-  top: 4px !important;
+  height: 11px;
+  width: 11px;
+  top: 8px !important;
   right: 0;
-  left: 250px;
+  left: 288px;
   border: none;
   position: absolute;
+  background: none;
+  color: black;
+}
+#closesearch:hover {
+  background-color: #e58986;
 }
 .help_search_input {
   color: #316f94;

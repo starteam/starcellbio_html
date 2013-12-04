@@ -1,6 +1,6 @@
 //hide the native search bar
 $('.scb_f_help_search_bar').hide();
-
+var total=0;
 //$('.scb_s_ug_home').hide();
 //function to redirect popout link to the new page, NOT USED, code redone in MainFrame for new handler
 function popoutGuide(){
@@ -19,6 +19,8 @@ function popoutGuide(){
 	}
 	
 	popout_string = popout_string.replace(/_/g, '-');
+	if($('.scb_s_section_inactive').length ==0)
+		popout_string =="";
 	var popoutWindow =window.open("full_guide.html#"+popout_string);
 	//the timeout is needed, because the javascript has to load first, 
 	//and then you can use the hash to the anchor
@@ -129,7 +131,7 @@ $.get( "user_guide.html", function(data) {
 	$('.scb_s_help_section').css('margin-left', '17px');
 	
 	$('.scb_s_help_sublink').show();
-	$('.special').css('margin-left', '40px');
+	$('.special').append('<br/>');
 }); 
 
 
@@ -145,7 +147,7 @@ function bindItem(item, ind) {
 					$('.scb_s_help_link_'+ ind+'.list_tag').css('display', 'list-item');
 					$('.scb_s_help_link_'+ ind+'.span_tag').css('display', 'inline');
 				}
-				$('.special').css('margin-left', '40px');
+				//$('.special').css('margin-left', '40px');
 				$('.scb_s_main_help_link').hide();
 				$(item).css('display', 'inline');
 				$(item).css('cursor', 'pointer');
@@ -153,7 +155,7 @@ function bindItem(item, ind) {
 				$('.scb_s_help_section_'+ind).show();
 				$('p').attr('class', 'scb_s_section_inactive');
 				if($('.scb_f_help_footer').length >0)
-				$('.scb_f_help_footer').remove();
+					$('.scb_f_help_footer').remove();
 				else{
 				//add footer code
 				var footer = document.createElement('div')
@@ -164,6 +166,7 @@ function bindItem(item, ind) {
 				$('.scb_f_help_display').append(footer);
 				$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width() -15);
 				}
+					window.scrollTo(0);
 			}
 			else{
 				return;
@@ -190,7 +193,7 @@ function bindSubItem(item, ind) {
 					$('.scb_s_help_sub_section_'+ ind+'.list_tag').css('display', 'list-item');
 					$('.scb_s_help_sub_section_'+ ind+'.span_tag').css('display', 'inline');
 				}
-			$('.special').css('margin-left', '40px');
+			//$('.special').css('margin-left', '40px');
 			$('.scb_s_main_help_link').hide();
 			$('.scb_s_help_sublink').hide();
 			$(item).css('display', 'inline');
@@ -207,7 +210,9 @@ function bindSubItem(item, ind) {
 				$('.scb_f_help_display').append(footer);
 				$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width() -15);
 			}
+				window.scrollTo(0);
 		}
+		
 	});
 }
 
@@ -215,7 +220,7 @@ function bindSubItem(item, ind) {
 //Main function; clear the current state of the user guide and search for terms.
 function searchUG(){
 	mainUG();
-	
+	total = 0;
 	var counter = 0; 
 	var elements = [];
 	var search_string = "*"
@@ -223,6 +228,11 @@ function searchUG(){
 		alert('A phrase was not typed. Please type a value before searching.');
 	else{
 	var searchTerms = $(".help_search_input").val().trim().split(' ');
+		// OVERWRITES old selecor
+	jQuery.expr[':'].contains = function(a, i, m) {
+	  return jQuery(a).text().toUpperCase()
+		  .indexOf(m[3].toUpperCase()) >= 0;
+	};
 	for(var x =0; x < searchTerms.length ; x++){
 		search_string = search_string+ ":contains('"+searchTerms[x]+"')";
 	}
@@ -241,14 +251,29 @@ function searchUG(){
 		$( list[list.length-1]).css( "display", 'list-item' );
 	}
 	
-	highlightSearchTerms($('.help_search_input').val(), false, true,null, null)
+	highlightSearchTerms($('.help_search_input').val(), false, true,null, null);
+	
+	
+	
+	for (var i = 1; i < list.length; i++) {
+		if (!list[i - 1].contains(list[i])) {
+			elements.push(list[i - 1]);
+			$( list[i - 1]).parents('li').css( "display", 'list-item' );
+			$( list[i - 1]).parents('span').css( "display", 'inline' );
+		}
+		
+	}
+	if(elements.length == 0){
+		$( list[list.length-1]).css( "display", 'list-item' );
+	}
+	
 
 	var display_str = counter+1;
 	
 	var font_list =[]
 	var list_counter = 1;
 	for(var y=0; y<$('font').length; y++){
-		if($($('font')[y]).closest('li').css('display') !='none'){
+		if($($('font')[y]).closest('li').css('display') !='none'  || $($('font')[y]).closest('span').css('display') !='none'){
 			$($('font')[y]).wrap('<a></a>');
 			$($('font')[y]).parent().attr('name', 'ug_'+list_counter);
 			list_counter++;
@@ -256,7 +281,7 @@ function searchUG(){
 		}
 	}
 	
-	var string = display_str+' of ' + font_list.length;
+	var string = display_str+' of ' + total;
 	$(font_list[counter]).css('background-color', 'orange');
 	
   	$('.scb_display_search_count').text(string);
@@ -272,7 +297,7 @@ function searchUG(){
   		$(font_list[counter]).css('background-color', 'orange');
   		var display_str = counter+1;
   		document.location.hash='#ug_'+display_str;
-		string = display_str+' of ' + font_list.length;
+		string = display_str+' of ' + total;
 		$('.scb_display_search_count').text(string);
 	 	var offset = $(font_list[counter]).offset()
 	 	$('.scb_f_help').scrollTop(offset);
@@ -290,7 +315,7 @@ function searchUG(){
   		$(font_list[counter]).css('background-color', 'orange');
   		var display_str = counter+1;
   		document.location.hash='#ug_'+display_str;
-		string = display_str+' of ' + font_list.length;
+		string = display_str+' of ' + total;
 		$('.scb_display_search_count').text(string);
 		var offset = $(font_list[counter]).offset()
 	 	$('.scb_f_help').scrollTop(offset);
@@ -309,7 +334,6 @@ function searchUG(){
 	var footer = document.createElement('div')
 	footer.className = 'scb_f_help_footer';
 	footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
-	//footer.style.background = 'rgba(31, 155, 123, .5)'; 
 	footer.style.height = '25px';
 	$('.scb_f_help_display').append(footer);
 	$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width()-15);
@@ -358,7 +382,7 @@ function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag)
   var i = -1;
   var lcSearchTerm = searchTerm.toLowerCase();
   var lcBodyText = bodyText.toLowerCase();
-    
+	 var counter =0;
   while (bodyText.length > 0) {
     i = lcBodyText.indexOf(lcSearchTerm, i+1);
     if (i < 0) {
@@ -368,6 +392,7 @@ function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag)
       if (bodyText.lastIndexOf(">", i) >= bodyText.lastIndexOf("<", i)) {
         if (lcBodyText.lastIndexOf("/script>", i) >= lcBodyText.lastIndexOf("<script", i)) {
           newText += bodyText.substring(0, i) + highlightStartTag + bodyText.substr(i, searchTerm.length) + highlightEndTag;
+          counter ++;
           bodyText = bodyText.substr(i + searchTerm.length);
           lcBodyText = bodyText.toLowerCase();
           i = -1;
@@ -376,7 +401,7 @@ function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag)
     }
   }
   
-  return newText;
+  return [newText, counter];
 }
 
 function highlightSearchTerms(searchText, treatAsPhrase, warnOnFailure, highlightStartTag, highlightEndTag)
@@ -393,12 +418,16 @@ function highlightSearchTerms(searchText, treatAsPhrase, warnOnFailure, highligh
     }
     return false;
   }
-  
+  var counter = 0;
   var bodyText = document.body.innerHTML;
   for (var i = 0; i < searchArray.length; i++) {
-    bodyText = doHighlight(bodyText, searchArray[i], highlightStartTag, highlightEndTag);
+  	var results =doHighlight(bodyText, searchArray[i], highlightStartTag, highlightEndTag);
+    bodyText = results[0];
+    counter = counter +results[1];
   }
   
   document.body.innerHTML = bodyText;
+  
+  total =counter/searchArray.length;
   return true;
 }
