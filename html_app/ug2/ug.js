@@ -1,7 +1,7 @@
 //hide the native search bar
 $('.scb_f_help_search_bar').hide();
 var total=0;
-//$('.scb_s_ug_home').hide();
+$('.scb_s_ug_home').hide();
 //function to redirect popout link to the new page, NOT USED, code redone in MainFrame for new handler
 function popoutGuide(){
 	//window.open('', '_blank');
@@ -50,7 +50,7 @@ $.get( "user_guide.html", function(data) {
 				if(next.className !="SCB-Heading1")
 					text= text + $(next).html();
 				else{
-					text = text + '&#9;<div class="scb_s_help_sublink"><span class="scb_s_section_active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>' + next.textContent.trim()+'</span></span><br/></div>';}
+					text = text + '&#9;<div class="scb_s_help_sublink"><span class="scb_s_section_active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>' + next.innerHTML.trim()+'</span></span><br/></div>';}
 			}
 			next = next.nextSibling;
 			
@@ -132,6 +132,8 @@ $.get( "user_guide.html", function(data) {
 	
 	$('.scb_s_help_sublink').show();
 	$('.special').append('<br/>');
+	
+
 }); 
 
 
@@ -240,29 +242,38 @@ function searchUG(){
 	if(list.length == 0)
 	alert("I\'m sorry we can\'t find that word");
 	else{
-	for (var i = 1; i < list.length; i++) {
-		if (!list[i - 1].contains(list[i])) {
-			elements.push(list[i - 1]);
-			$( list[i - 1]).css( "display", 'list-item' );
-		}
-		
-	}
-	if(elements.length == 0){
-		$( list[list.length-1]).css( "display", 'list-item' );
-	}
+	// for (var i = 1; i < list.length; i++) {
+// 		if (!list[i - 1].contains(list[i])) {
+// 			elements.push(list[i - 1]);
+// 			$( list[i - 1]).css( "display", 'list-item' );
+// 		}
+// 		
+// 	}
+// 	if(elements.length == 0){
+// 		$( list[list.length-1]).css( "display", 'list-item' );
+// 	}
 	
 	highlightSearchTerms($('.help_search_input').val(), false, true,null, null);
+	var list= $(search_string);
+	list = $(list).filter('.special')
 	
-	
-	
-	for (var i = 1; i < list.length; i++) {
-		if (!list[i - 1].contains(list[i])) {
-			elements.push(list[i - 1]);
-			$( list[i - 1]).parents('li').css( "display", 'list-item' );
-			$( list[i - 1]).parents('span').css( "display", 'inline' );
-		}
+	for (var i = 0; i < list.length; i++) {
+			elements.push(list[i]);
+			console.log(list[i]);
+			$( list[i]).closest('.list_tag').css( "display", 'list-item' );
+			$( list[i]).closest('.span_tag').css( "display", 'inline' );
 		
 	}
+	
+// 	for (var i = 0; i < list.length; i++) {
+// 		//if (!list[i - 1].contains(list[i])) {
+// 			elements.push(list[i - 1]);
+// 			console.log(list[i-1]);
+// 			$( list[i - 1]).closest('li.special').css( "display", 'list-item' );
+// 			$( list[i - 1]).closest('span.special').css( "display", 'inline' );
+// 		//}
+// 		
+// 	}
 	if(elements.length == 0){
 		$( list[list.length-1]).css( "display", 'list-item' );
 	}
@@ -349,9 +360,7 @@ function mainUG(){
     	$(this).replaceWith($(this).text());
 	});
 	
-	$('.scb_f_help a').each(function() {
-    	$(this).replaceWith($(this).text());
-	});
+
 	$('.scb_s_section_inactive').addClass('scb_s_section_active');
 	$('.scb_s_section_active').css('margin-left', '0px');
 	$('.scb_s_section_inactive').removeClass('scb_s_section_inactive');
@@ -428,6 +437,6 @@ function highlightSearchTerms(searchText, treatAsPhrase, warnOnFailure, highligh
   
   document.body.innerHTML = bodyText;
   
-  total =counter/searchArray.length;
+  total =counter;
   return true;
 }

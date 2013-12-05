@@ -344,7 +344,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				else{
 				    $(".main_popout").addClass('main_popout_disabled');
     				$('.main_popout').attr('disabled', 'disabled'); 
-    			}			
+    			}
+    			$('iframe').contents().find('.scb_f_help a').each(function() {
+					$(this).click(function(){
+						$('iframe').contents().find(".scb_s_ug_home").click();
+						$('iframe').contents().find('.scb_f_help a[name="'+$(this).attr('href').substring(1)+'"]').parents('.scb_s_help_sublink').click();
+					});
+				});			
 			});
 			$('#search').click(function(){
 					$('iframe').ready(function(){
@@ -369,7 +375,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				}
 			});
 			
-			
+
 			$(".scb_s_ug_home").click(function(){
 				$('iframe').contents().find(".scb_s_ug_home").click();
 				$(".scb_s_ug_home").addClass('scb_s_ug_home_disabled');
@@ -381,7 +387,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     					$('.scb_f_ug_up_button').hide();
     					$('.scb_f_ug_search_line').hide();
     					$("#closesearch").hide();
-    					$('.scb_display_search_count').hide();	
+    					$('.scb_display_search_count').hide();
+    					$(".help_search_input").val("");	
 			});
 			
 			$(".main_popout").click(function(){

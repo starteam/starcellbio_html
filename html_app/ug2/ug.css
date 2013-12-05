@@ -29,6 +29,9 @@
 	font-weight:bold;
 }
 
+.subheading{
+	text-indent: 0 !important;
+}
 
 body{
 	background: #f4f6f8;
@@ -126,7 +129,7 @@ body{
 }
 
 .scb_s_section_active  span{
-	color:#316f94;
+	color:#316f94 !important;
 	text-decoration: underline;
 	cursor:pointer;
 	font-weight:bold;

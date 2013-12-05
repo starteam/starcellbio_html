@@ -150,9 +150,9 @@
 .scb_display_search_count {
   color: black;
   margin-left: 10px;
-  font-size: 10pt;
+  font-size: 8pt;
   position: relative;
-  bottom: -7px;
+  bottom: -4px;
   right: 77px;
 }
 .scb_f_help_form>input {
@@ -194,9 +194,9 @@
 #closesearch {
   font-size: 9pt;
   padding: 1px 3px 15px;
-  border-radius: 6px;
-  height: 11px;
-  width: 11px;
+  border-radius: 60px;
+  height: 15px;
+  width: 15px;
   top: 8px !important;
   right: 0;
   left: 288px;

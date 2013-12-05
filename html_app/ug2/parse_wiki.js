@@ -35,7 +35,7 @@ $.get( "user_guide.html", function(data) {
 				nextN.style.textIndent = '50px';
 				var nextL = nextN.nextElementSibling;
 				while(nextL != null && nextL.className!='subheading' && nextL.className!='heading'){
-					nextL.style.marginLeft = '100px';
+					//nextL.style.marginLeft = '100px';
 					//nextL.style.color = 'red';
 					//nextL.style.display = 'none';
 					var temp = nextL.nextElementSibling;
