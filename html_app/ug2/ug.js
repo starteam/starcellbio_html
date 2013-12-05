@@ -149,6 +149,7 @@ function bindItem(item, ind) {
 					$('.scb_s_help_link_'+ ind+'.list_tag').css('display', 'list-item');
 					$('.scb_s_help_link_'+ ind+'.span_tag').css('display', 'inline');
 				}
+				
 				//$('.special').css('margin-left', '40px');
 				$('.scb_s_main_help_link').hide();
 				$(item).css('display', 'inline');
@@ -169,6 +170,7 @@ function bindItem(item, ind) {
 				$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width() -15);
 				}
 					window.scrollTo(0);
+				$('.scb_s_section_active').css('margin-left', '-40px');
 			}
 			else{
 				return;
@@ -240,18 +242,9 @@ function searchUG(){
 	}
 	var list= $(search_string);
 	if(list.length == 0)
-	alert("I\'m sorry we can\'t find that word");
+		$('.scb_display_search_count').text('0 of 0');
+		//alert("I\'m sorry we can\'t find that word");
 	else{
-	// for (var i = 1; i < list.length; i++) {
-// 		if (!list[i - 1].contains(list[i])) {
-// 			elements.push(list[i - 1]);
-// 			$( list[i - 1]).css( "display", 'list-item' );
-// 		}
-// 		
-// 	}
-// 	if(elements.length == 0){
-// 		$( list[list.length-1]).css( "display", 'list-item' );
-// 	}
 	
 	highlightSearchTerms($('.help_search_input').val(), false, true,null, null);
 	var list= $(search_string);
@@ -264,16 +257,7 @@ function searchUG(){
 			$( list[i]).closest('.span_tag').css( "display", 'inline' );
 		
 	}
-	
-// 	for (var i = 0; i < list.length; i++) {
-// 		//if (!list[i - 1].contains(list[i])) {
-// 			elements.push(list[i - 1]);
-// 			console.log(list[i-1]);
-// 			$( list[i - 1]).closest('li.special').css( "display", 'list-item' );
-// 			$( list[i - 1]).closest('span.special').css( "display", 'inline' );
-// 		//}
-// 		
-// 	}
+
 	if(elements.length == 0){
 		$( list[list.length-1]).css( "display", 'list-item' );
 	}
