@@ -219,13 +219,14 @@ function init(state, draw, image_source){
 	var img = document.createElement('IMG');
 	var canvas = document.createElement('canvas');
 	var controls = document.getElementById('scb_s_microscopy_lens_controls');
-
+	var ms = document.getElementById('scb_s_micro_slide');
 	canvas.id = 'lens';
 	var samples_area =  $('body').find('.scb_s_microscopy_samples_slide_area')[0];
 	if(samples_area){
 	samples_area.appendChild(canvas);
 	
 	samples_area.appendChild(controls);
+	samples_area.appendChild(ms);
 	}
 	var ctx = canvas.getContext('2d');
 	var canvas_hidden = document.createElement('canvas');

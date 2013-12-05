@@ -383,6 +383,21 @@ body.dragging, body.dragging * {
     font-size: 8pt;
 }
 
+#scb_s_micro_slide{
+width: 300px;
+background:white;
+border: 1px solid black;
+height: 100px;
+margin-left: 55px;
+}
+
+
+#scb_s_micro_slide > img{
+height: 100px;
+margin-left: 100px;
+}
+
+
 .scb_s_microscopy_video_box_img {
     width: 240px;
     height:160px;

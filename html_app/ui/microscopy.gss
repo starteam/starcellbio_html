@@ -28,6 +28,17 @@
 	max-height: 275px;
 }
 
+#scb_s_micro_slide{
+width: inherit;
+height: 75px;
+}
+
+
+#scb_s_micro_slide > img{
+width: inherit;
+height: 75px;
+}
+
 .scb_microscopy_details_view{
 	padding-top: 10px;
 	width: 939px;
