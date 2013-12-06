@@ -364,6 +364,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 						$('iframe').contents().find("#search").click();
 						
 						$('.scb_display_search_count').text($('iframe').contents().find(".scb_display_search_count").text());
+						if($('.scb_display_search_count').text() == '0 of 0')
+							$('.arrow_background').removeClass('arrow_background_active');
 					});
 			});
 			

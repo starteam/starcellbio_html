@@ -12,6 +12,11 @@
     letter-spacing:0.5px;
 }
 
+.dividing_line{
+	height:2px;
+	background:  #B0B0B0 ;
+	width: 900px;
+}
 
 .ug_dividing_line{
 	height: 2px;
@@ -95,6 +100,12 @@ body{
 	cursor: auto;
 	font-size: 12pt;
 	width: 400px;
+}
+
+.title a{
+	text-decoration: underline;
+	color: #316f94;
+
 }
 .title > a >p>strong, .title > a >p{
 	margin:0;

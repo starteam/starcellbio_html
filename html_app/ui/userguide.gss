@@ -124,7 +124,7 @@
 	-webkit-appearance: none;
 	padding-top: 1px;
 	padding-bottom: 1px;
-	bottom: -11px;
+	bottom: -9px;
 	position: absolute;
 	background: 0;
 	border: 0;
@@ -140,7 +140,7 @@
 	background: 0;
 	border: 0;
 	outline: none;
-	bottom: -10px;
+	bottom: -6px;
 	width: 19px;
 	padding: 0 !important;
 	left: 264px;
@@ -160,7 +160,7 @@ width: 43px;
 height: 25px;
 top: 2px;
 left: 221px;
-background-image: url('../../../images/homepage/unable_updown1.png');
+background-image: url('../../../images/homepage/unable_updown2.png');
 }
 
 .arrow_background_active{
@@ -321,10 +321,11 @@ position: absolute;
 	display: inline-table;
 	overflow:auto;
 	resize: both;
+	cursor:nwse-resize;
 	width:606px;
 	height: 367px;
 	margin-right:100%;
-	cursor:pointer;
+
 	top: 140px;
 	left: 207px;
 	background: #f4f6f8;

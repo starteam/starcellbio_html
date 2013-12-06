@@ -94,7 +94,7 @@ $.get( "user_guide.html", function(data) {
 	divider.className = 'ug_dividing_line';
 	$('.subheading').append(divider);
 	fixImages();
-
+	$($('.title')[7]).after('<br/><div class="dividing_line"></div>')
 });
 
 //toggle visibility of children, not used currently because toggle is made inactive

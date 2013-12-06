@@ -1,7 +1,7 @@
 //hide the native search bar
 $('.scb_f_help_search_bar').hide();
 var total=0;
-$('.scb_s_ug_home').hide();
+//$('.scb_s_ug_home').hide();
 //function to redirect popout link to the new page, NOT USED, code redone in MainFrame for new handler
 function popoutGuide(){
 	//window.open('', '_blank');
@@ -143,6 +143,7 @@ function bindItem(item, ind) {
 		$(item).click(function(){
 			if( $('.scb_s_help_section_'+ind).children().children('li').css('display')=='none'|| $('.scb_s_help_section_'+ind).children().css('display')=='none' || $('.scb_s_help_section_'+ind).children('li').css('display')=='none'){
 				$('.scb_s_help_section_'+ind +' span>span').attr('class', 'scb_s_section_inactive');
+				//$('.scb_s_help_section_'+ind +' span>span').parent().attr('class', 'scb_s_section_inactive');
 				$(item).children().attr('onclick', 'false');
 				if($('.scb_s_help_link_'+ ind).css('display') != 'none')
 					$('.scb_s_help_link_'+ ind).css('display', 'none');
@@ -184,7 +185,7 @@ function bindItem(item, ind) {
 //Bind a click to main menu sublinks
 function bindSubItem(item, ind) {
 	$(item).click(function(){
-		if($(item).children('span').length >3 && ($(item).parent().prev().css('display')!='none' && $(item).children('li').css('display') !='none')||$(item).parent().prev().css('display')=='none'){
+		if(($(item).children('span').length >1 || $(item).children('li').length >1 || $(item).children('span').length + $(item).children('li').length >1 ) && ($(item).parent().prev().css('display')!='none' && $(item).children('li').css('display') !='none')||$(item).parent().prev().css('display')=='none'){
 			return;
 		}
 		else{
@@ -225,6 +226,7 @@ function bindSubItem(item, ind) {
 //Main function; clear the current state of the user guide and search for terms.
 function searchUG(){
 	mainUG();
+	
 	total = 0;
 	var counter = 0; 
 	var elements = [];
