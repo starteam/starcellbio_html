@@ -383,7 +383,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     			$('.scb_s_ug_home').attr('disabled', 'disabled');
 				$(".main_popout").removeClass('main_popout_disabled');
     			$('.main_popout').removeAttr('disabled');
-    			
+    			$('.arrow_background').removeClass('arrow_background_active');
 						$('.scb_f_ug_down_button').hide();
     					$('.scb_f_ug_up_button').hide();
     					$('.scb_f_ug_search_line').hide();
@@ -423,6 +423,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     			$("#closesearch").hide();
     			$('.scb_display_search_count').hide();
 				$(".scb_s_ug_home").click();
+				$('.arrow_background').removeClass('arrow_background_active');
 			});
 			
 			$('.scb_f_ug_down_button').click(function(){
