@@ -24,10 +24,14 @@
 
 .heading, .subheading {
 	font-size: 12pt;
-	cursor:pointer;
-	color: #316f94;
-	font-weight:bold;
+	#cursor:pointer;
 }
+.heading strong, .heading strong>span, .subheading strong, .subheading strong >span{
+	
+	color: #316f94 !important;
+}
+
+
 
 .subheading{
 	text-indent: 0 !important;
@@ -39,17 +43,18 @@ body{
 .body{
 	background-color: #f4f6f8;
 	color: #289a7b;
+	font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", sans-serif; 
 	width:920px;
 	padding:15px;
-}
-
-.heading > .subheading{
-	#color: purple;
 }
 
 .subheading > ul{
 	color:black;
 	font-weight:normal;
+	margin-left: 50px !important;
+}
+.subheading > ul >ul{
+	font-size: small;
 }
 
 .heading > ul{
@@ -81,14 +86,25 @@ body{
 }
 
 
+.subtitle a{
+	color: #316f94 !important; 
+}
+
 .title{
 	text-decoration: underline;
 	cursor: auto;
 	font-size: 12pt;
+	width: 400px;
 }
-.title > a >p{
+.title > a >p>strong, .title > a >p{
 	margin:0;
 	font-size: 14pt;
+	color: #316f94 !important;
+}
+
+.title > a >p>span>strong, .title > a >p>strong>span, .title > a >p>span>strong>span{
+	margin:0;
+	color: #316f94 !important;
 }
 
 .scb_f_help_display{
@@ -136,6 +152,11 @@ body{
 }
 .scb_s_help_sublink>li{
 	cursor: default;
+}
+
+.back_to_top{
+	font-size: 10pt;
+	color: blue;
 }
 
 .underline{

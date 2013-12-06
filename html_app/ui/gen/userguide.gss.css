@@ -109,12 +109,14 @@
   padding: 0 !important;
   left: 242px;
   color: white;
+  outline: none;
 }
 .scb_f_ug_down_button {
   -webkit-appearance: none;
   position: absolute;
   background: 0;
   border: 0;
+  outline: none;
   bottom: -10px;
   width: 19px;
   padding: 0 !important;
@@ -273,7 +275,7 @@
   display: inline-table;
   overflow: auto;
   resize: both;
-  width: 406px;
+  width: 606px;
   height: 367px;
   margin-right: 100%;
   cursor: pointer;
