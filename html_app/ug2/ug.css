@@ -199,11 +199,14 @@ body{
 	
 	text-decoration: underline;
 }
+.scb_s_section_inactive{
+	cursor: default !important;
+}
 
 .scb_s_section_inactive  span{ 
 	color:#316f94 !important;
 	text-decoration: initial !important;
-	cursor: default;
+	cursor: default !important;
 	font-weight: bold;
 	
 }

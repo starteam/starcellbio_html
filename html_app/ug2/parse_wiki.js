@@ -97,7 +97,11 @@ $.get( "user_guide.html", function(data) {
 	$('.subheading').append(divider);
 	$('.heading').append(divider);
 	fixImages();
-	$($('.title')[6]).after('<br/><div class="dividing_line"></div>')
+	$($('.title')[6]).after('<br/><div class="dividing_line"></div>');
+	
+// 	$('.body strong').append('&nbsp;');
+// 	$('.heading span>a').after('&nbsp;');
+// 	$('.body strong').css('color', 'black !important');
 });
 
 //toggle visibility of children, not used currently because toggle is made inactive

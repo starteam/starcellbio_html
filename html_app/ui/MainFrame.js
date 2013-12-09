@@ -318,16 +318,27 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     	scb.utils.off_on('body', 'click', '.scb_f_ug_close_button', function () {
                 $('.scb_f_ug_help_search_bar').detach();
         });
-		$('.scb_f_ug_help_search_bar').resize(function(){
-			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
-			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+60);
-		
-		});
+        $(function() {
+			$(".scb_f_ug_help_search_bar").mousemove(function(e) {
+				var myPos = $(this).offset();
+				myPos.bottom = $(this).offset().top + $(this).outerHeight();
+				myPos.right = $(this).offset().left + $(this).outerWidth();
+
+				if (myPos.bottom > e.pageY && e.pageY > myPos.bottom -66 && myPos.right > e.pageX && e.pageX > myPos.right - 36) {
+					$(this).css({ cursor: "nwse-resize" });
+				}
+				else {
+					$(this).css({ cursor: "" });
+				}
+			});
+   		 });
 		
 		$('iframe').load(function(){
 			$('.scb_f_ug_help_search_bar').width($('iframe').contents().find('.scb_f_help_display').width()+20);
 			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
 			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
+			//$('.handle_square').css('top', ($('.scb_f_ug_help_search_bar').width()-20 )+'px');
+			//$('.handle_square').css('left', ($('.scb_f_ug_help_search_bar').width()+8 )+'px');
 			$('.scb_f_ug_help_search_bar').draggable({ handle:'.user_guide_title'});
 			$('iframe').css('margin-right', '10px');
 			$('iframe').contents().find('body').css('font-family', "Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
