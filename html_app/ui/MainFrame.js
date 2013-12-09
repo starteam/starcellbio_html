@@ -414,7 +414,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					var popoutWindow =window.open("ug2/full_guide.html#"+popout_string);
 					//the timeout is needed, because the javascript has to load first, 
 					//and then you can use the hash to the anchor
-					setTimeout( function(){popoutWindow.location = "static/ug2/full_guide.html#"+popout_string; },50);
+					setTimeout( function(){popoutWindow.location = "ug2/full_guide.html#"+popout_string; },50);
 					});
 			
 			$("#closesearch").click(function(){
