@@ -411,10 +411,22 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					popout_string = popout_string.replace(/_/g, '-');
 					if($('iframe').contents().find('.scb_s_section_inactive').length ==0)
 						popout_string ="";
-					var popoutWindow =window.open("ug2/full_guide.html#"+popout_string);
-					//the timeout is needed, because the javascript has to load first, 
-					//and then you can use the hash to the anchor
-					setTimeout( function(){popoutWindow.location = "ug2/full_guide.html#"+popout_string; },50);
+					try
+ 					 {
+  							var popoutWindow =window.open("static/ug2/full_guide.html#"+popout_string);
+							//the timeout is needed, because the javascript has to load first, 
+							//and then you can use the hash to the anchor
+							setTimeout( function(){popoutWindow.location = "static/ug2/full_guide.html#"+popout_string; },50);
+  					}
+					catch(err)
+  					{
+  						
+  							var popoutWindow =window.open("ug2/full_guide.html#"+popout_string);
+							//the timeout is needed, because the javascript has to load first, 
+							//and then you can use the hash to the anchor
+							setTimeout( function(){popoutWindow.location = "ug2/full_guide.html#"+popout_string; },50);
+  					}
+					
 					});
 			
 			$("#closesearch").click(function(){
