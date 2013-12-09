@@ -1,7 +1,7 @@
 //hide the native search bar
 $('.scb_f_help_search_bar').hide();
 var total=0;
-//$('.scb_s_ug_home').hide();
+$('.scb_s_ug_home').hide();
 //function to redirect popout link to the new page, NOT USED, code redone in MainFrame for new handler
 function popoutGuide(){
 	//window.open('', '_blank');
