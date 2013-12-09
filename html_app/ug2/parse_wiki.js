@@ -9,6 +9,10 @@ $.get( "user_guide.html", function(data) {
 	$('.related').remove();
 	$('.footer').remove();
 	$('.sphinxsidebar').remove();
+	$('.SCB-Heading1Allcaps:contains("")').each(function() {
+    	if(this.textContent== "")
+    		$(this).remove();
+	});
 	var main_headers = $('.SCB-Heading1Allcaps');
 	$(main_headers).wrap('<div class="heading"><a></a></div>');
 	var subheaders = $('.SCB-Heading1');
@@ -45,7 +49,7 @@ $.get( "user_guide.html", function(data) {
 				next = nextN.nextElementSibling;
 				$(nextN.previousElementSibling).append(nextN);
 			}
-			else if(nextN.tagName == 'UL' || nextN.className == 'SCB-Normal'){
+			else if((nextN.tagName == 'P' && nextN.previousElementSibling.className =='heading') || nextN.tagName == 'UL' || nextN.tagName == 'OL' || nextN.className == 'SCB-Normal'){
 				//nextN.style.display = 'none';
 				$(nextN.previousElementSibling).append(nextN);
 			}
@@ -55,14 +59,12 @@ $.get( "user_guide.html", function(data) {
 	}
 	
 
-	//indent bullets
-	for(var x = 0; x < lists.length; x++){
-		lists[x].style.marginLeft = '100px';
-		
-	}
+
 	
 	$('.heading').clone().prependTo('.body').attr('class', 'title');
 	$('.title').children('.subheading').children('ul').remove();
+	$('.title').children('p').remove();
+	$('.title').children('ol').remove();
 	$('.title').children('.subheading').children('p').remove();
 	$('.title').children('ul').remove()
 	$('.title > .subheading').attr('class', 'subtitle');
@@ -93,8 +95,9 @@ $.get( "user_guide.html", function(data) {
 	var divider = document.createElement('span')
 	divider.className = 'ug_dividing_line';
 	$('.subheading').append(divider);
+	$('.heading').append(divider);
 	fixImages();
-	$($('.title')[7]).after('<br/><div class="dividing_line"></div>')
+	$($('.title')[6]).after('<br/><div class="dividing_line"></div>')
 });
 
 //toggle visibility of children, not used currently because toggle is made inactive

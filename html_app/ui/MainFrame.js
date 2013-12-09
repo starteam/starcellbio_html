@@ -328,7 +328,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			$('.scb_f_ug_help_search_bar').width($('iframe').contents().find('.scb_f_help_display').width()+20);
 			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
 			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
-			$('.scb_f_ug_help_search_bar').draggable({ handle:'.handel'});
+			$('.scb_f_ug_help_search_bar').draggable({ handle:'.user_guide_title'});
 			$('iframe').css('margin-right', '10px');
 			$('iframe').contents().find('body').css('font-family', "Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
 		

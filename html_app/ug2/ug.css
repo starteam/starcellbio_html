@@ -31,6 +31,12 @@
 	font-size: 12pt;
 	#cursor:pointer;
 }
+
+.heading ul, .subheading ul{
+	margin: 0 !important;
+}
+
+
 .heading strong, .heading strong>span, .subheading strong, .subheading strong >span{
 	
 	color: #316f94 !important;
@@ -47,7 +53,6 @@ body{
 }
 .body{
 	background-color: #f4f6f8;
-	color: #289a7b;
 	font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", sans-serif; 
 	width:920px;
 	padding:15px;
@@ -56,7 +61,7 @@ body{
 .subheading > ul{
 	color:black;
 	font-weight:normal;
-	margin-left: 50px !important;
+	margin-left: 20px !important;
 }
 .subheading > ul >ul{
 	font-size: small;
@@ -82,6 +87,20 @@ body{
 	height: 55px;
 	color: white;
 	font-size: 16pt;
+}
+
+.resize_img{
+	height: auto !important;
+	width: auto !important;
+	max-width: 315px !important;
+	cursor:default;
+}
+
+.resize_icon{
+	height: auto !important;
+	width: auto !important;
+	max-height: 12px !important;
+	cursor:default;
 }
 
 .ug_table_of_contents{
@@ -123,7 +142,13 @@ body{
     padding-left: 10px;
     #margin-top: 75px;
 }
+.StarCellBioExercise-Normalnospacing{
+	font-size: small;
+}
 
+.subheading li{
+	font-size: small;
+}
 .scb_f_ug_up_button{
 	-webkit-appearance: none;
 	padding-top: 1px;
@@ -176,7 +201,7 @@ body{
 }
 
 .scb_s_section_inactive  span{ 
-	color:#316f94;
+	color:#316f94 !important;
 	text-decoration: initial !important;
 	cursor: default;
 	font-weight: bold;

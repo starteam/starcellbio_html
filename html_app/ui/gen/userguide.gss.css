@@ -109,6 +109,7 @@
   padding: 0 !important;
   left: 242px;
   color: white;
+  cursor: pointer !important;
   outline: none;
 }
 .scb_f_ug_down_button {
@@ -120,6 +121,7 @@
   bottom: -6px;
   width: 19px;
   padding: 0 !important;
+  cursor: pointer !important;
   left: 264px;
   color: white;
 }
@@ -247,18 +249,20 @@
   z-index: 999;
   right: 2px;
   top: 35px;
-  margin-top: -11px;
-  min-height: 243px;
+  margin-top: -38px;
+  min-height: 263px;
   position: relative;
 }
 .handel {
   position: relative;
-  cursor: move;
-  margin-bottom: 20px;
+  height: 114px;
+  cursor: default;
+  padding-bottom: 20px;
 }
 .user_guide_title {
   background: #38aa95;
   color: white;
+  cursor: move;
   padding: 10px;
   padding-left: 20px;
   height: 25px;
@@ -276,7 +280,7 @@
   overflow: auto;
   resize: both;
   cursor: nwse-resize;
-  width: 606px;
+  width: 406px;
   height: 367px;
   margin-right: 100%;
   top: 140px;
