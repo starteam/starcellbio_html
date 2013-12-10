@@ -29,6 +29,38 @@
   top: 252px;
   width: 150px;
 }
+label.custom-select_gel {
+  position: relative;
+  display: inline-block;
+  height: 19px;
+}
+.custom-select_gel:hover {
+  background: url("../images/setup/scb_experiment_dropdown_hover.png") no-repeat right #fff;
+}
+.custom-select_gel {
+  width: 169px;
+  height: 21px;
+  padding-top: 4px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  overflow: hidden;
+  background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #fff;
+  box-shadow: inset 1px 1px 3px 1px rgba(0,0,0,0.3);
+}
+.custom-select_gel select {
+  background: transparent;
+  width: 169px;
+  color: #316f94;
+  font-family: Arial;
+  font-weight: normal;
+  font-size: 10pt;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  height: 22px;
+  -webkit-appearance: none;
+  bottom: 1px;
+}
 .scb_f_slider {
   position: absolute;
   top: -1px;

@@ -84,19 +84,25 @@ scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     if (rows_state && rows_state.valid < 1) {
         	$('body').css('overflow', 'hidden');
 
-    	$.jqDialog.confirm("No samples selected. Would you like to continue?",
-			function() {    
-				    	$('body').css('overflow', 'visible');
+//     	$.jqDialog.confirm("No samples selected. Would you like to continue?",
+// 			function() {    
+// 				    	$('body').css('overflow', 'visible');
+// 
+// 				parsed.facs.sample_prepared = true;
+//     			scb.ui.static.MainFrame.refresh();
+//     		},// callback function for 'YES' button
+// 			function() {
+// 					    	$('body').css('overflow', 'visible');
+// 
+// 					return;
+// 			}		// callback function for 'NO' button
+// 		);
+// 		
 
-				parsed.facs.sample_prepared = true;
-    			scb.ui.static.MainFrame.refresh();
-    		},// callback function for 'YES' button
-			function() {
-					    	$('body').css('overflow', 'visible');
-
-					return;
-			}		// callback function for 'NO' button
-		);
+    	$.jqDialog.alert("<h1 class='scb_s_lysate_prepare_text'>Please select at least 1 sample to prepare.</h1>", function() {$('#jqDialog_box').css('border', '2px solid rgb(5, 151, 137)'); $('#jqDialog_box').css('border-radius', '6px'); $('#jqDialog_content').css('margin', '10px');		$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+		$('.scb_s_lysate_prepare_text').parent().parent().css('border', '4px solid white');	
+		$('.scb_s_lysate_prepare_text').parent().parent().css('border-radius', '14px');	
+		$('.scb_s_lysate_prepare_text').parent().css('margin', '0px');	
     }
     else{
     	parsed.facs.sample_prepared = true;

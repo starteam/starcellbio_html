@@ -25,6 +25,9 @@
   margin-bottom: 21px;
 }
 .scb_s_facs_choose_samples_order {
+  min-height: 289px;
+}
+.scb_s_facs_choose_samples_order_border {
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 3px 3px -3px black;
   min-height: 289px;

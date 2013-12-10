@@ -310,6 +310,8 @@
 </h1>
 <div class='scb_s_wb_primary_antibody'>
     Primary antibody:
+    
+    <label class="custom-select_gel">
     <select class='scb_f_wb_anti_body_select_primary' western_blot_id='{$western_blot.id}'
             assignment_id='{$assignment.id}'
             experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>
@@ -322,9 +324,12 @@
         {if $western_blot_gel.primary_anti_body}{else}selected="selected"{/if} disabled="disabled">Please
         select...</option>
     </select>
+    
+    </label>
 </div>
 <div class='scb_s_wb_secondary_antibody'>
     Secondary antibody:
+    <label class="custom-select_gel">
     <select class='scb_f_wb_anti_body_select_secondary' western_blot_id='{$western_blot.id}'
             assignment_id='{$assignment.id}'
             experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>
@@ -337,6 +342,7 @@
         {if $western_blot_gel.secondary_anti_body}{else}selected="selected"{/if} disabled="disabled">Please
         select...</option>
     </select>
+        </label>
 </div>
 
 <a class='scb_s_western_blot_blot_and_develop scb_s_navigation_button'

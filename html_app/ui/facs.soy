@@ -455,7 +455,7 @@ FACS Main View
         <div class='scb_s_facs_samples_heading'>
             Samples
         </div>
-        <div class='scb_s_facs_choose_samples_order'>
+        <div class='{if $facs.samples_finished}scb_s_facs_choose_samples_order {else}scb_s_facs_choose_samples_order_border{/if}'>
             <ol class='scb_s_facs_choose_samples_order_list'>
                 {foreach $r in $rows}
                 {if $r.is_valid}
