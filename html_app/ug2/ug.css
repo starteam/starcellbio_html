@@ -37,7 +37,13 @@
 }
 
 
-.heading strong, .heading strong>span, .subheading strong, .subheading strong >span{
+ .heading strong>span{
+ 
+	color: #316f94 !important;
+ }  
+ 
+ 
+ .subheading strong >span{
 	
 	color: #316f94 !important;
 }
