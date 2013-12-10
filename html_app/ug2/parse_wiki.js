@@ -100,6 +100,7 @@ $.get( "user_guide.html", function(data) {
 	$($('.title')[6]).after('<br/><div class="dividing_line"></div>');
 	
 	$('.body strong').append('&nbsp;');
+	$('.body strong').prepend('&nbsp;');
 	$('.heading span>a').after('&nbsp;');
 	$('.body strong').css('color', 'black !important');
 });
