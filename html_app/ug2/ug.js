@@ -2,6 +2,7 @@
 $('.scb_f_help_search_bar').hide();
 var total=0;
 $('.scb_s_ug_home').hide();
+last_element_offset = 0;
 //function to redirect popout link to the new page, NOT USED, code redone in MainFrame for new handler
 function popoutGuide(){
 	//window.open('', '_blank');
@@ -148,6 +149,7 @@ function bindItem(item, ind) {
 			if( $('.scb_s_help_section_'+ind).children().children('li').css('display')=='none'|| $('.scb_s_help_section_'+ind).children().css('display')=='none' || $('.scb_s_help_section_'+ind).children('li').css('display')=='none'){
 				//$('.scb_s_help_section_'+ind +' .scb_s_section_active').attr('class', 'scb_s_section_inactive');
 				$(item).children().attr('onclick', 'false');
+				last_element_offset = $(window).scrollTop();
 				if($('.scb_s_help_link_'+ ind).css('display') != 'none')
 					$('.scb_s_help_link_'+ ind).css('display', 'none');
 			 	else{
@@ -195,6 +197,7 @@ function bindSubItem(item, ind) {
 				///($(item).parent().prev().css('display')!='none' && $(item).children('.special').css('display')  !='none')||
 		}
 		else{
+			last_element_offset = $(window).scrollTop();
 			$(item).first().children('span').first().attr('class', 'scb_s_section_inactive');
 			$(item).first().children('span').first().css('margin-left' ,'-20px');
 			
@@ -371,7 +374,8 @@ function mainUG(){
 	$('.scb_f_help_footer').remove();
 	//$('.scb_f_help_search_bar').css('position', 'static');
 	$('.scb_f_help').css('overflow-x', 'hidden');
-	window.scrollTo(0);
+	window.scrollTo(0, last_element_offset);
+	last_element_offset=0;
 	
 }
 
