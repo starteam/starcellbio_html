@@ -147,8 +147,8 @@
 @param microscopy
 */
 {template .display_tabs_selector}
-<div class='scb_s_microscopy_tabs'>
-	{if $experiment.microscopy_list.list.length < 6}
+<div class=' {if $experiment.microscopy_list.list.length >= 5} scb_s_microscopy_tabs_more {else} scb_s_microscopy_tabs{/if} '>
+	{if $experiment.microscopy_list.list.length < 5}
 		{foreach $m in $experiment.microscopy_list.list}
 		{if $microscopy.id == $m.id}
 		<span class='scb_s_microscopy_active'>
@@ -156,7 +156,6 @@
 			  experiment_id='{$experiment.id}' contenteditable="true">{$m.name}</span>
 		<button class='scb_s_microscopy_remove scb_f_microscopy_remove' microscopy_id='{$m.id}' assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}'>| &#215;
-<!-- 				<img src="images/setup/scb_remove.png"> -->
 		</button>
 		</span>
 		{else}
@@ -174,36 +173,58 @@
 		<button class='scb_s_microscopy_left_microscopy' microscopy_id='{$microscopy.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}'>
-        				&#x25c0;
     	</button>
-		{foreach $m in $experiment.microscopy_list.list}
-			{if index($m) >= $experiment.microscopy_list.start_tabs_index and index($m) < $experiment.microscopy_list.start_tabs_index +5}     				
+    		{if $experiment.microscopy_list.list.length -1 == $experiment.microscopy_list.start_tabs_index + 3}
+				{foreach $m in $experiment.microscopy_list.list}
+					{if index($m) >= $experiment.microscopy_list.start_tabs_index and index($m) < $experiment.microscopy_list.start_tabs_index +4}     				
 
-				{if $microscopy.id == $m.id}
-				<span class='scb_s_microscopy_active'>
-				<span class='scb_s_microscopy_selected' microscopy_id='{$m.id}' assignment_id='{$assignment.id}'
-					  experiment_id='{$experiment.id}' contenteditable="true">{$m.name}</span>
-				<button class='scb_s_microscopy_remove scb_f_microscopy_remove' microscopy_id='{$m.id}' assignment_id='{$assignment.id}'
-						experiment_id='{$experiment.id}'>| &#215;
-						<!-- <img src="images/setup/scb_remove.png"> -->
-				</button>
-				</span>
-				{else}
-				<a class='scb_f_open_microscopy scb_s_microscopy_open_microscopy'
-				   href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}&microscopy_id={$m.id}'
-				   microscopy_id='{$m.id}'>{$m.name}</a>
-				{/if}
-			{/if}
-		{/foreach}
+						{if $microscopy.id == $m.id}
+						<span class='scb_s_microscopy_active'>
+							  
+						<input class='scb_s_microscopy_selected' facs_id='{$m.id}' assignment_id='{$assignment.id}'
+			 			 experiment_id='{$experiment.id}' value='{$m.name}' type='text' maxlength=10></input>
+
+						<button class='scb_s_microscopy_remove scb_f_microscopy_remove' microscopy_id='{$m.id}' assignment_id='{$assignment.id}'
+								experiment_id='{$experiment.id}'>| &#215;
+						</button>
+						</span>
+						{else}
+						<a class='scb_f_open_microscopy scb_s_microscopy_open_microscopy'
+						   href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}&microscopy_id={$m.id}'
+						   microscopy_id='{$m.id}'>{$m.name}</a>
+						{/if}
+					{/if}
+				{/foreach}
 		<span class='scb_s_microscopy_add_microscopy' assignment_id='{$assignment.id}'
 							experiment_id='{$experiment.id}' microscopy_id='{$experiment.microscopy_list.list[length($experiment.microscopy_list.list)-1].id}'>
 							 <a class='scb_f_open_microscopy scb_s_microscopy_open_microscopy' href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
 					<span class='scb_s_microscopy_add_cross_microscopy'>| + </span></a>
 		</span>
+		{else}
+				{foreach $m in $experiment.microscopy_list.list}
+					{if index($m) >= $experiment.microscopy_list.start_tabs_index and index($m) < $experiment.microscopy_list.start_tabs_index +5}     				
+
+						{if $microscopy.id == $m.id}
+						<span class='scb_s_microscopy_active'>
+							  
+						<input class='scb_s_microscopy_selected' facs_id='{$m.id}' assignment_id='{$assignment.id}'
+			 			 experiment_id='{$experiment.id}' value='{$m.name}' type='text' maxlength=10></input>
+
+						<button class='scb_s_microscopy_remove scb_f_microscopy_remove' microscopy_id='{$m.id}' assignment_id='{$assignment.id}'
+								experiment_id='{$experiment.id}'>| &#215;
+						</button>
+						</span>
+						{else}
+						<a class='scb_f_open_microscopy scb_s_microscopy_open_microscopy'
+						   href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}&microscopy_id={$m.id}'
+						   microscopy_id='{$m.id}'>{$m.name}</a>
+						{/if}
+					{/if}
+				{/foreach}
+		{/if}
 		<button class='scb_s_microscopy_right_microscopy' microscopy_id='{$microscopy.id}'
              			assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}' >
-        				&#x25b6;
     	</button>
     {/if}
 </div>
@@ -435,7 +456,12 @@
 					<img src = 'images/microscopy/finedown.jpg' class ='scb_s_micro_arrows'id='fblurdown'/><p class = 'scb_space_control'/>
 				
 				<span class='scb_s_microscope_status'></span>
+				
+				<div id='scb_s_micro_slide'>
+				<img src='../../images/microscopy/hi.jpg' class='microslide' />
+ 				</div>
 			</div>
+			
 	</div>	
 {/template}
 
@@ -507,8 +533,8 @@
 			<div class='scb_s_facs_vertical_line_7_top'></div>
 			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
-						{if $step== 1}166px;{/if}
-				{if $step== 2} 438px;{/if}
+						{if $step== 1}32px;{/if}
+				{if $step== 2} 301px;{/if}
 				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
 			</div>
 		</div>

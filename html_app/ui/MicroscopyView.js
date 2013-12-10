@@ -35,6 +35,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 }
 scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -63,6 +64,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_sample_remove = function (element) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -75,6 +77,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_sample_remove = function (element)
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_sample_active = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -104,6 +107,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_sample_active = function (element,
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_remove = function (element) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -118,6 +122,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_remove = function (element) {
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_selected = function (element) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -127,6 +132,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_selected = function (element) {
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     var rows_state = parsed.microscopy.rows_state();
     if (rows_state && rows_state.valid < 1) {
     	    	$('body').css('overflow', 'hidden');
@@ -157,6 +163,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_choose_gel_type_input = function (element) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -190,6 +197,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_sample_inactive_all = function (el
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
     var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -205,6 +213,8 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -218,12 +228,16 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select =
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_left_microscopy = function(element, event){
 	var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
 	parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.start_tabs_index -1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_right_microscopy = function(element, event){
 	var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
 	parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.start_tabs_index +1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
@@ -231,14 +245,16 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_right_microscopy = function(elemen
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_add_microscopy= function(element, event){
 	var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+
 	console.log(parsed.microscopy.parent.start_tabs_index);
 	console.log(parsed.microscopy.parent.list.length);
-	if(parsed.microscopy.parent.list.length==5){
+	if(parsed.microscopy.parent.list.length==4){
 		parsed.microscopy.parent.start_tabs_index = 1;
 	}
-	else if (parsed.microscopy.parent.list.length >5)
+	else if (parsed.microscopy.parent.list.length >4)
 		//parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.start_tabs_index +1;
-		parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.length-4;
+		parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.length-3;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
@@ -465,13 +481,15 @@ function init(state, draw, image_source){
 	var img = document.createElement('IMG');
 	var canvas = document.createElement('canvas');
 	var controls = document.getElementById('scb_s_microscopy_lens_controls');
-
+	//var ms = document.getElementById('scb_s_micro_slide');
 	canvas.id = 'lens';
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	if(samples_area){
 		samples_area.appendChild(canvas);
 	
 		samples_area.appendChild(controls);
+		//samples_area.appendChild(ms);
+
 		var ctx = canvas.getContext('2d');
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';
@@ -953,7 +971,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 		state.experiment.last_param = 'microscopy_id';
         //state.assignments.last_step = 6;
 
-		
+		document.body.scrollTop = state.experiment.last_scroll;
 		state.experiment.last_view = 'microscopy';
 		document.title = "Microscopy - StarCellBio";
 		
@@ -966,7 +984,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 		}
 		else $('.scb_s_microscopy_left_microscopy').prop('disabled', false);
 		
-		if(state.microscopy.parent.start_tabs_index + 4 ==state.microscopy.parent.list.length-1){
+		if(state.microscopy.parent.start_tabs_index + 3 ==state.microscopy.parent.list.length-1){
 			$('.scb_s_microscopy_right_microscopy').prop('disabled', true);
 			$('.scb_s_microscopy_left_microscopy').prop('disabled', false);
 		}
@@ -978,6 +996,12 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             }
 
         }
+        else{
+			$('.scb_s_western_blot_progress_gray_bar').children().each(function () { console.log($(this).css('left'));
+    				$(this).css('left', parseInt($(this).css('left'))-5+'px');
+			});
+			$('.scb_s_western_blot_progress_bar').css('top', '30px');
+		}
         
         
         if (state.microscopy.samples_finished) {

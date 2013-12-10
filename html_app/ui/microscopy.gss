@@ -17,6 +17,63 @@
 	margin-left: -20px;
 }
 
+#scb_s_micro_slide{
+height: 75px;
+}
+
+
+#scb_s_micro_slide >img{
+height: 75px;
+}
+
+.scb_s_microscopy_left_microscopy{
+	position: relative;
+	vertical-align: top;
+	padding:3px;
+	margin:0px;
+	margin-right:-2px;
+	padding-bottom: 4px;
+	border:inherit;
+	background: 0;
+	cursor:pointer;
+	width: 39px;
+	background-image: url('../images/western_blot/scb_gray_left_arrow_inactive.png');
+	height: 41px;
+}
+
+
+.scb_s_microscopy_right_microscopy{
+	position: relative;
+	vertical-align: top;
+	padding:3px;
+	margin:0px;
+	margin-left: -3px;
+	padding-bottom: 4px;
+	border:inherit;
+	background: 0;
+	cursor:pointer;
+	width: 39px;
+	background-image: url('../images/western_blot/scb_gray_right_arrow_inactive.png');
+	height: 41px;
+}
+
+
+.scb_s_microscopy_left_microscopy:enabled{
+	background-image: url('../images/western_blot/scb_gray_left_arrow_active.png');
+
+	
+}
+
+.scb_s_microscopy_right_microscopy:enabled{
+	color: #29a592;
+	background-image: url('../images/western_blot/scb_gray_right_arrow_active.png');
+
+}
+
+
+
+
+
 .scb_s_microscopy_choose_samples_order{
 	border-bottom: 2px solid gray;
 	min-height: 275px;
@@ -26,17 +83,6 @@
 	width:200px;
 	overflow: auto;
 	max-height: 275px;
-}
-
-#scb_s_micro_slide{
-width: inherit;
-height: 75px;
-}
-
-
-#scb_s_micro_slide > img{
-width: inherit;
-height: 75px;
 }
 
 .scb_microscopy_details_view{
@@ -89,22 +135,9 @@ height: 75px;
 }
 
 
-.scb_s_microscopy_left_microscopy, .scb_s_microscopy_right_microscopy{
-
-	padding:3px;
-	margin:0px;
-	margin-right:-5px;
-	margin-left:-5px;
-	padding-bottom: 4px;
-	border:inherit;
-	background: 0;
-	cursor:pointer;
-}
 
 
-.scb_s_microscopy_left_microscopy:enabled, .scb_s_microscopy_right_microscopy:enabled{
-	color: #29a592;
-}
+
 .scb_s_microscopy_samples_select_all_rel{
 	position: absolute;
 	bottom: -72px;
@@ -199,7 +232,7 @@ height: 75px;
 
 .scb_s_microscopy_samples_area {
 	margin-bottom:28px;
-	margin-left: 5px;
+	margin-left: 8px;
 	margin-top:198px;
 	height:358px;
 }
@@ -261,9 +294,10 @@ height: 75px;
 .scb_s_microscopy_samples_slide_area{
     display:inline-block;
     vertical-align: top;
-    width:598px;
+    width:568px;
     height:400px;
     padding-top:190px;
+    margin-left: 8px;
 }
 
 .scb_s_microscopy_tools {
@@ -325,14 +359,13 @@ body.dragging, body.dragging * {
 
 
 .scb_s_microscopy_slide_content{
-	height:335px;
-    width:575px;
+	height:345px;
+    width:563px;
     position: relative;
     border:1px solid #80d1ae;
     background-color: white;
-    margin-left: 8px;
-    padding-left:15px;
-    padding-top: 15px;
+    padding-left: 5px;
+	padding-top: 5px;
 }
 
 
@@ -348,7 +381,7 @@ body.dragging, body.dragging * {
 }
 
 
-#scb_s_microscopy_lens_controls, .scb_s_list_slides{
+.scb_s_list_slides{
 	font-size: 11pt;
     color: black;
     text-align: center;
@@ -357,6 +390,28 @@ body.dragging, body.dragging * {
     font-family: 'sourcesanspro-semibold';
     right:0px;
     margin-top:28px;
+	margin-left: 15px;
+	width:160px;
+	border: 1px solid #e0e0e0;
+	border-radius:2px;
+	vertical-align: top;
+	border-top-width: 8px;
+	box-shadow: 0px 0px 3px black;
+	overflow-y:auto;
+	overflow-x: hidden;
+	background-color:white;
+	margin-bottom: 15px;
+}
+
+
+#scb_s_microscopy_lens_controls{
+	font-size: 11pt;
+    color: black;
+    text-align: center;
+    left: 23px;
+    display: inline-block;
+    font-family: 'sourcesanspro-semibold';
+    right:0px;
 	margin-left: 15px;
 	width:160px;
 	border: 1px solid #e0e0e0;
@@ -401,12 +456,12 @@ body.dragging, body.dragging * {
 	margin-top: -27px;
  	background-color: #FFFFFF;
  	background-image: none;
- 	min-height: 439px;
+ 	min-height: 225px;
  	width: 895px !important;
  	padding: 0px;
  	padding-bottom: 17px;
  	margin-bottom: 10px;
- 
+ 	border: 1px solid #97a4ad;
 }
 
 
