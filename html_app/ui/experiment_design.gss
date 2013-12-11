@@ -230,7 +230,6 @@
     border-color:#B9B9B9;
     background: white;
     border-width: 3px;
-    top:-2px;
     left:-2px;
     padding-right: 16px;
     padding-bottom:4px;
