@@ -120,7 +120,7 @@ function setStatus(){
 }
 
 function changeStatus(){
-	if(document.getElementById('course_code_input').value=='StarX' || document.getElementById('course_code_input').value=='7.02' || document.getElementById('course_code_input').value=='7.06' || document.getElementById('course_code_input').value=='Bio52'  || document.getElementById('course_code_input').value=='usability'){
+	if(document.getElementById('course_code_input').value.toLowerCase()=='starx' || document.getElementById('course_code_input').value.toLowerCase()=='7.02' || document.getElementById('course_code_input').value.toLowerCase()=='7.06' || document.getElementById('course_code_input').value.toLowerCase()=='bio52'  || document.getElementById('course_code_input').value.toLowerCase()=='usability'){
 		document.getElementById('code_status').innerHTML = "<span style='color:green'>&#9745; </span>&nbsp; This is a valid code. You may create an account."
 		document.getElementById('auth_submit_button').disabled=false;
 	}

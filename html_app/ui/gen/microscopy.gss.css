@@ -8,8 +8,19 @@
   list-style-position: inside;
   margin-left: -20px;
 }
-#scb_s_micro_slide, #scb_s_micro_slide>img {
-  height: 75px;
+#scb_s_micro_slide {
+  height: 60px;
+  position: relative;
+}
+.circle_lens {
+  height: 13px !important;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 33px;
+}
+#scb_s_micro_slide>img {
+  height: 60px;
 }
 .scb_s_microscopy_left_microscopy {
   position: relative;
@@ -522,9 +533,10 @@ body.dragging, body.dragging * {
 .scb_f_microscopy_load_slides {
   border: none;
   margin-top: 7px !important;
-  margin-left: 78px !important;
   margin-right: 20px !important;
   margin-bottom: 20px !important;
+  right: 61px;
+  padding: 6px 13px 19px 16px;
 }
 .scb_f_microscopy_load_slides_short {
   border: none;

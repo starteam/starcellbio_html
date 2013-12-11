@@ -206,8 +206,9 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
     
     parsed.microscopy.samples_finished = true;
     parsed.microscopy.lane_selected = scb.utils.get(parsed.microscopy.lanes_list.list, [0, 'id']);
+    $('#lens').remove();
     scb.ui.static.MainFrame.refresh();
-
+	
 	//init(map, draw, 'hi.jpg');
 }
 
@@ -331,6 +332,21 @@ function draw_lens(param, addition, state, canvas){
 	}
 }
 
+function updateLensPosition(state,canvas, microslide_top, microslide_left){
+	var context = canvas.getContext('2d');
+	clear_canvas(context, canvas);
+	
+	//Make sure to handle state later when you can test it
+	var taddition = ((microslide_top*10)/0.3);
+	var laddition = (((microslide_left-33))/0.3)*10;
+	context.drawImage(state['cache']['image'], state['xparam'], state['yparam']);
+	console.log(laddition);
+	console.log(microslide_left);
+	state['xparam'] = -laddition ;
+	state['yparam'] = -taddition ;
+
+}
+
 function draw(state){
 	var canvas=document.getElementsByTagName("canvas")[0];
 	document.onkeydown=function (e) {
@@ -344,22 +360,36 @@ function draw(state){
 		else{
 			if (e.keyCode == '37') {
 				// l arrow
+				e.preventDefault();
 				draw_lens('x', 10, state, document.getElementsByTagName("canvas")[0]);
+				if(parseInt($('.circle_lens').css('left'))-0.3 <= 33);
+					$('.circle_lens').css('left', parseFloat($('.circle_lens').css('left'))-0.3+'px'); 
 				console.log('left')
 			}
 			else if (e.keyCode == '38') {
 				// u arrow
+				e.preventDefault();
 				draw_lens('y', 10, state, document.getElementsByTagName("canvas")[0]);
+				if(parseInt($('.circle_lens').css('top'))-0.3 <= $('.microslide').height());
+					$('.circle_lens').css('top', parseFloat($('.circle_lens').css('top'))-0.3+'px'); 
 				console.log('up');
 			}
 			else if (e.keyCode == '39') {
 				// r arrow
+				e.preventDefault();
 				draw_lens('x', -10, state, document.getElementsByTagName("canvas")[0]);
+				if(parseInt($('.circle_lens').css('left'))+0.3 <=  33+$('.microslide').width());
+					$('.circle_lens').css('left', parseFloat($('.circle_lens').css('left'))+0.3+'px'); 
+				
 				console.log('right');
 			}
 			else if (e.keyCode == '40') {
 				// d arrow
+				e.preventDefault();
 				draw_lens('y', -10, state, document.getElementsByTagName("canvas")[0]);
+				if(parseInt($('.circle_lens').css('top'))+0.3 >= 0);
+					$('.circle_lens').css('top', parseFloat($('.circle_lens').css('top'))+0.3+'px'); 
+				
 				console.log('down');
 			}
 		}
@@ -481,7 +511,9 @@ function init(state, draw, image_source){
 	var img = document.createElement('IMG');
 	var canvas = document.createElement('canvas');
 	var controls = document.getElementById('scb_s_microscopy_lens_controls');
-	//var ms = document.getElementById('scb_s_micro_slide');
+	var slide = document.createElement('IMG');
+	slide.className='microslide';
+	
 	canvas.id = 'lens';
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	if(samples_area){
@@ -500,6 +532,8 @@ function init(state, draw, image_source){
 		$('.scb_s_microscope_status').text(state['action']);
 		caman = Caman("#lens");
 		img.src = image_source;
+		slide.src = image_source;
+		$('#scb_s_micro_slide').append(slide);
 		img.onload= function (){
 			ctx.save();
 			img_width = img.width;
@@ -517,6 +551,16 @@ function init(state, draw, image_source){
 			initialize_state(state, img2string);
 			//console.log(img2string);
 			draw(state);
+			$('.circle_lens').draggable({ 
+			handle:'.circle_lens', 
+			containment: "#scb_s_micro_slide",
+			drag: function() {
+				updateLensPosition(state, document.getElementsByTagName("canvas")[0], parseFloat($('.circle_lens').css('top')), parseFloat($('.circle_lens').css('left')))
+			},
+			stop: function() {
+				updateLensPosition(state, document.getElementsByTagName("canvas")[0], parseFloat($('.circle_lens').css('top')), parseFloat($('.circle_lens').css('left')))
+			}
+      	});
 		
 			add_sharpen_images(map);
 
@@ -1007,7 +1051,8 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         if (state.microscopy.samples_finished) {
         	scb.ui.static.MicroscopyView.draw_slides(workarea);
         }
-        
+        else
+        init(map, draw, '../images/microscopy/black.jpg');
         
 
         // var workarea = state.workarea;

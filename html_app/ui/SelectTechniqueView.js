@@ -74,7 +74,7 @@ scb.ui.static.SelectTechniqueView.disable_techniques = function (state) {
             $('.scb_s_select_technique_flow').removeClass('scb_s_select_technique_disabled');
         }
         else if (e == 'micro') {
-           //$('.scb_s_select_technique_micro').removeClass('scb_s_select_technique_disabled');
+           $('.scb_s_select_technique_micro').removeClass('scb_s_select_technique_disabled');
 
         }
     });
