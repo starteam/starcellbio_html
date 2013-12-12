@@ -1,5 +1,5 @@
 
-$.get( "user_guide.html", function(data) {
+$.get( "/ug2/user_guide.html", function(data) {
 	var htmlObject = document.createElement('div');
 	htmlObject.innerHTML = data;
 	document.body.innerHTML = data;

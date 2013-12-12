@@ -31,7 +31,7 @@ function popoutGuide(){
 
 
 //This sets up the user guide
-$.get( "user_guide.html", function(data) {
+$.get( "/static/ug2/user_guide.html", function(data) {
 	var htmlObject = document.createElement('div');
 	htmlObject.innerHTML = data;
 	var body = htmlObject.getElementsByClassName("body")[0];
