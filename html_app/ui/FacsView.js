@@ -213,6 +213,23 @@ scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
     }
 }
 
+
+scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status = function (show) {
+    var jqDiv = $('.scb_s_facs_tools_instructions_followup');
+    scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
+    if (show) {
+        jqDiv.show();
+        $('.scb_s_facs_tools_instructions_followup_toggle').html('HIDE INSTRUCTIONS');
+        $('.scb_s_facs_tools_instructions_followup_toggle').blur();
+    }
+    else {
+        jqDiv.hide();
+        $('.scb_s_facs_tools_instructions_followup_toggle').html('SHOW INSTRUCTIONS');
+        $('.scb_s_facs_tools_instructions_followup_toggle').blur();
+    }
+}
+
+
 scb.ui.static.FacsView.scb_s_facs_tools_instructions_followup_toggle = function (element) {
     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show($('.scb_s_facs_tools_instructions_followup').is(':hidden'));
 }
@@ -755,18 +772,18 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         if (scb.utils.isDefined(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state)) {
             if (!scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state) {
                 $('.scb_s_facs_tools_instructions_followup').hide();
-                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(false);
+                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status(false);
             } else {
-                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
+                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
             }
         }
 		//state.assignments.last_step = 6;
         if (state.facs.selected_lane && state.facs.selected_lane.canvas_metadata_analysis.points.length > 0) {
         	if (!scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state) {
                 $('.scb_s_facs_tools_instructions_followup').hide();
-                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(false);
+                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status(false);
             } else {
-                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
+                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
             }
         }
 		

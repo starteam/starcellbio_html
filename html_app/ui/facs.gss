@@ -360,6 +360,14 @@ input[type=radio]:checked{
 	border: 1px solid #000000;
 	background-color:#80d1ae;
 	border-radius:6px;
+	
+}
+
+input[type=radio]:checked:before{
+	content: url("../../../images/homepage/dot3.png");
+	bottom: 1px;
+	position: relative;
+	right: 2px;
 }
 
 

@@ -271,6 +271,12 @@ input[type=radio]:checked {
   background-color: #80d1ae;
   border-radius: 6px;
 }
+input[type=radio]:checked:before {
+  content: url("../../../images/homepage/dot3.png");
+  bottom: 1px;
+  position: relative;
+  right: 2px;
+}
 input[type=radio]:disabled {
   opacity: .5;
 }
