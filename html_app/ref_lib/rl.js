@@ -5,7 +5,7 @@
 // });
 
 
-$.get( "/ref_lib/ref_library.html", function(data) {
+$.get( "/static/ref_lib/ref_library.html", function(data) {
 	var htmlObject = document.createElement('div');
 	htmlObject.innerHTML = data;
 	document.body.innerHTML = data;
