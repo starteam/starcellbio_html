@@ -1,5 +1,5 @@
-
-$.get( "/static/ug2/user_guide.html", function(data) {
+function getUG(){
+$.get( "user_guide.html", function(data) {
 	var htmlObject = document.createElement('div');
 	htmlObject.innerHTML = data;
 	document.body.innerHTML = data;
@@ -106,7 +106,7 @@ $.get( "/static/ug2/user_guide.html", function(data) {
 	$('.heading span>a').after('&nbsp;');
 	$('.body strong').css('color', 'black !important');
 });
-
+}
 //toggle visibility of children, not used currently because toggle is made inactive
 function bindToggle(item){
 	$(item).click(function(){
