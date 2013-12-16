@@ -514,12 +514,29 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				});
 				
 				iframe.find(".login_submit").click(function(){
+						   var mask = document.createElement('div');
+						   mask.className='overlay';
+						   $(mask).css({'width': '100%','height': '100%','position': 'absolute', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
+					       $('body').prepend(mask);
+					       var progress_icon = document.createElement('img');
+					       progress_icon.src = '../../../images/homepage/ajax_loader.gif';
+					       progress_icon.style.marginLeft = '50%';
+					       progress_icon.style.marginTop= '50%';
+
+					       $('.overlay').append(progress_icon);
+							
+						   $('.iframe').hide();
 						   $('.iframe').load(function(){
 						   	  var profile = $('.iframe').contents();
-						   	  //console.log(profile);
 						   	  if(profile[0].body.textContent.indexOf('confirmed') >0){
 						   	  	  parent.document.location.reload();
-
+									
+							   	  }
+							   	  
+							   	  else{
+							   	 		 $(mask).remove();
+							   	  	   $('.iframe').show();
+							   	  	   
 							   	  }
 						   });
 					});
