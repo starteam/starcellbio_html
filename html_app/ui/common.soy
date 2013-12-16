@@ -185,24 +185,25 @@ Progress bar
         <div class='scb_s_experiment_step_tech_steps '>
 			<div class='scb_s_experiment_step_buttons_title {if $step>3}scb_s_experiment_step_active_title{/if}'>Select Your Technique: </div>
 						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_wb {if length($experiment.western_blot_list) > 0}scb_s_experiment_step_visited{/if} {if $step==5 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button'aria-label='Start Western Blotting'>
-							{if length($experiment.western_blot_list) > 0 and not $step==5 }
-							<a href='#view=western_blot&assignment_id={$assignment.id}&experiment_id={$experiment.id}&western_blot_id={$experiment.western_blot_list.selected_id}'>Western Blotting</a>
-							{else}
+							{if length($experiment.western_blot_list) <= 0 or  $step==5 }
 							Western Blotting
+							{else}
+							<a href='#view=western_blot&assignment_id={$assignment.id}&experiment_id={$experiment.id}&western_blot_id={$experiment.western_blot_list.selected_id}'>Western Blotting</a>
 							{/if}
 						</div>
 						<div class=' scb_s_experiment_step_button scb_s_experiment_step_button_facs {if length($experiment.facs_list) > 0}scb_s_experiment_step_visited{/if} {if $step==6 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button'  aria-label='Start Flow Cytometry'>
-							{if length($experiment.facs_list) > 0 and not $step==6 }
-							<a href='#view=facs&assignment_id={$assignment.id}&experiment_id={$experiment.id}&facs_id={$experiment.facs_list.selected_id}'>Flow Cytometry</a>
-							{else}
+							
+							{if length($experiment.facs_list) <= 0 or $step==6 }
 							Flow Cytometry
+							{else}
+							<a href='#view=facs&assignment_id={$assignment.id}&experiment_id={$experiment.id}&facs_id={$experiment.facs_list.selected_id}'>Flow Cytometry</a>
 							{/if}
 						</div>
 						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_micro {if length($experiment.microscopy_list) > 0}scb_s_experiment_step_visited{/if} {if $step==7 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button' aria-label='Start Microscopy'>
-							{if length($experiment.microscopy_list) > 0 and not $step==7}
-							<a href='#view=microscopy&assignment_id={$assignment.id}&experiment_id={$experiment.id}&microscopy_id={$experiment.microscopy_list.selected_id}'>Microscopy</a>
-							{else}
+							{if length($experiment.microscopy_list) <= 0 or $step==7}
 							Microscopy	
+							{else}
+							<a href='#view=microscopy&assignment_id={$assignment.id}&experiment_id={$experiment.id}&microscopy_id={$experiment.microscopy_list.selected_id}'>Microscopy</a>
 							{/if}
 						</div>
 
