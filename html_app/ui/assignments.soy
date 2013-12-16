@@ -71,23 +71,27 @@ Assignment description
         </div>
 		
 	<div class='scb_s_assignments_slider_header'>
-		<img class = 'scb_s_assignment_header_img_left' src='../../images/homepage/scb_gray_left_arrow_inactive.png' role='button' aria-label='Move one section to the left'>
+<!--<a href="javascript: w=window.open('http://yoursite.com/LinkToThePDF.pdf'); w.print(); w.close(); ">​print pdf</a>-->
+		<img class = 'scb_s_assignment_header_img_left'  assignment_id='{$assignments.selected.id}' src='../../images/homepage/scb_gray_left_arrow_inactive.png' role='button' aria-label='Move one section to the left'>
 		 
 		 
 		 {foreach $section in $assignments.selected.template.instructions}
-		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == 0}scb_assignments_header_link_selected{/if}' role='link' title='{$section[0]}'   value='{$section[0]}' aria-controls='scb_s_assignment_scroll' aria-atomic='true' ><span>{$section[0]}</span>{if index($section) == 0}<div class="arrow-down-blue"></div>{/if}</div>
+		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == $assignments.selected.last_instruction}scb_assignments_header_link_selected{/if}' assignment_id='{$assignments.selected.id}' role='link' title='{$section[0]}'   value='{$section[0]}' aria-controls='scb_s_assignment_scroll' aria-atomic='true' ><span>{$section[0]}</span>{if index($section) == $assignments.selected.last_instruction}<div class="arrow-down-blue"></div>{/if}</div>
 		{/foreach}	 
 
-		<img class = 'scb_s_assignment_header_img_right'  src='../../images/homepage/scb_gray_right_arrow_active.png' role='button' aria-label='Move one section to the right'>
+		<img class = 'scb_s_assignment_header_img_right' assignment_id='{$assignments.selected.id}'  src='../../images/homepage/scb_gray_right_arrow_active.png' role='button' aria-label='Move one section to the right'>
 	</div>
         <div class='scb_s_assignment_scroll' id ='scb_s_assignment_scroll'  aria-live="assertive">
         	{foreach $section in $assignments.selected.template.instructions}
-				<div class='scb_s_display_section' style='display:{if index($section) == 0}block;{/if}' value='{$section[0]}' >
+				<div class='scb_s_display_section' style='display:{if index($section) == $assignments.selected.last_instruction}block;{/if}' value='{$section[0]}' >
 				{$section[1] |noAutoescape}</div>   
         	{/foreach}     
         </div>
     <br/>
-    
+    <div class='scb_s_assignments_bottom_scroll'>
+    		<img class = 'scb_s_assignment_header_img_left'  assignment_id='{$assignments.selected.id}'  src='../../images/homepage/scb_gray_left_arrow_inactive.png' role='button' aria-label='Move one section to the left'>
+		<img class = 'scb_s_assignment_header_img_right'  assignment_id='{$assignments.selected.id}'  src='../../images/homepage/scb_gray_right_arrow_active.png' role='button' aria-label='Move one section to the right'>
+	</div>
         <a class="scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignments.selected.id}" aria-label='New Experiment' role='button'> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>
 
 	    {/if}

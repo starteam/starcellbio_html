@@ -3772,7 +3772,7 @@ $(function () {
     		assignment_706.template.experiment_setup = scb_assignment_specific_mit706s13.experiment_setup();
 
 			assignment_706.template.ui.experiment_setup.actions.push({
-				name: 'ADD MULTIPLE ROWS',
+				name: 'ADD SAMPLES',
 				open: 'mit706s13.setup',
 				css: {
 					width: '800px',
@@ -3788,14 +3788,15 @@ $(function () {
 			decusability = get_courses_result.list[x];
     		decusability.template.instructions = [
     			['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
-    			['Introduction and Reference Material',scb_assignment_specific_decusability.intro_and_ref()],
+				['Introduction',scb_assignment_specific_decusability.intro()],
+				['Reference Information',scb_assignment_specific_decusability.ref()],
     			['Question 1', scb_assignment_specific_decusability.question_1()],
     			['Question 2', scb_assignment_specific_decusability.question_2()]
     			];
     		decusability.template.experiment_setup = scb_assignment_specific_decusability.experiment_setup();
 
 			decusability.template.ui.experiment_setup.actions.push({
-				name: 'ADD MULTIPLE ROWS',
+				name: 'ADD SAMPLES',
 				open: 'decusability.setup',
 				css: {
 					width: '800px',
@@ -3809,7 +3810,7 @@ $(function () {
 		if(get_courses_result.list[x].id == 'assignment_tufts'){
 			assignment_tufts = get_courses_result.list[x];
 			assignment_tufts.template.ui.experiment_setup.actions.push({
-				name: 'ADD MULTIPLE ROWS',
+				name: 'ADD SAMPLES',
 				open: 'mit706s13.setup',
 				css: {
 					width: '600px',
@@ -3841,7 +3842,7 @@ $(function () {
     __assigment_706.template.experiment_setup = scb_assignment_specific_mit706s13.experiment_setup();
 
     __assigment_706.template.ui.experiment_setup.actions.push({
-        name: 'ADD MULTIPLE ROWS',
+        name: 'ADD SAMPLES',
         open: 'mit706s13.setup',
         css: {
             width: '800px',
@@ -3853,14 +3854,15 @@ $(function () {
     
    __decusability.template.instructions = [
 		['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
-		['Introduction and Reference Material',scb_assignment_specific_decusability.intro_and_ref()],
+		['Introduction',scb_assignment_specific_decusability.intro()],
+		['Reference Information',scb_assignment_specific_decusability.ref()],
 		['Question 1', scb_assignment_specific_decusability.question_1()],
 		['Question 2', scb_assignment_specific_decusability.question_2()]
 		];
 	__decusability.template.experiment_setup = scb_assignment_specific_decusability.experiment_setup();
 
 	__decusability.template.ui.experiment_setup.actions.push({
-		name: 'ADD MULTIPLE ROWS',
+		name: 'ADD SAMPLES',
 		open: 'decusability.setup',
 		css: {
 			width: '800px',
@@ -3874,7 +3876,7 @@ $(function () {
     
 
     __assigment_tufts.template.ui.experiment_setup.actions.push({
-        name: 'ADD MULTIPLE ROWS',
+        name: 'ADD SAMPLES',
         open: 'mit706s13.setup',
         css: {
             width: '600px',

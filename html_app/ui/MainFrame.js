@@ -274,7 +274,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 $('.scb_s_contact_dialog').detach();
         });
 		$('iframe').load(function(){
-			
+				$('.scb_s_contact_dialog').draggable({ handle:'.scb_s_feedback_form'});
 				var iframe = document.getElementsByTagName('iframe')[0];
 				var content = (iframe.contentDocument || iframe.contentWindow);
 				content.body.style.fontSize = '90%';
@@ -340,7 +340,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			//$('.handle_square').css('top', ($('.scb_f_ug_help_search_bar').width()-20 )+'px');
 			//$('.handle_square').css('left', ($('.scb_f_ug_help_search_bar').width()+8 )+'px');
 			$('.scb_f_ug_help_search_bar').draggable({ handle:'.user_guide_title'});
-			$('iframe').css('margin-right', '10px');
 			$('iframe').contents().find('body').css('font-family', "Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
 		
 			$('iframe').contents().click(function(event) {

@@ -25,6 +25,7 @@ scb.ui.static.HomepageView.select_list_item = function(element,workarea,aria)
         }
 }
 
+
 scb.ui.static.HomepageView.register = function(workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_homepage_experimental_design_bullet_item', function (e) {
         scb.ui.static.HomepageView.select_list_item(this,workarea,true);
@@ -33,28 +34,49 @@ scb.ui.static.HomepageView.register = function(workarea) {
 	
     scb.utils.off_on(workarea, 'click', '.learn_more_dynamic', function (e) {
     	var pop_string = $(this).attr('value');
+    	var url = "static/ref_lib/full_library.html#"+pop_string;
 		var popoutWindow =window.open("static/ref_lib/full_library.html#"+pop_string);
-		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#"+pop_string; },60);
+// 		function goToLink(){
+// 			popoutWindow.location =  "static/ref_lib/full_library.html#"+pop_string;
+// 		}
+// 		popoutWindow.addEventListener('load', goToLink, true);
+		
+        setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#"+pop_string; },80);
 
     });
     
     
     scb.utils.off_on(workarea, 'click', '.learn_more_western_blot', function (e) {
 		var popoutWindow =window.open("static/ref_lib/full_library.html#WesternBlotting");
-		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#WesternBlotting"; },60);
+		
+		popoutWindow.addEventListener('load', doSomething, true);
+		function doSomething(){
+			popoutWindow.location = "static/ref_lib/full_library.html#WesternBlotting";
+		}
+		//setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#WesternBlotting"; },80);
 
     });
     
     
     scb.utils.off_on(workarea, 'click', '.learn_more_facs', function (e) {
     	var popoutWindow =window.open("static/ref_lib/full_library.html#FlowCytometry");
-		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#FlowCytometry"; },60);
+    			
+		popoutWindow.addEventListener('load', doSomething, true);
+		function doSomething(){
+			popoutWindow.location =  "static/ref_lib/full_library.html#FlowCytometry";
+		}
+		//setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#FlowCytometry"; },80);
 
     });
     
     scb.utils.off_on(workarea, 'click', '.learn_more_microscopy', function (e) {
         var popoutWindow =window.open("static/ref_lib/full_library.html#Microscopy");
-		setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#Microscopy"; },60);
+        
+        popoutWindow.addEventListener('load', doSomething, true);
+		function doSomething(){
+			popoutWindow.location =  "static/ref_lib/full_library.html#Microscopy";
+		}
+		//setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#Microscopy"; },80);
 
     });
 

@@ -61,6 +61,7 @@
   position: relative;
   right: 10px;
   bottom: 6px;
+  cursor: move;
   font-family: 'sourcesanspro-semibold';
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;

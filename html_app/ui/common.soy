@@ -26,6 +26,30 @@
 			 {$assignment.id}
 		{/if} 
 {/let}
+{let $wbid} 
+		{if $assignments and $assignments.selected.experiments.selected}
+			{$assignments.selected.experiments.selected.western_blot_list.selected_id}
+		{elseif $assignment}
+			 {$assignment.experiments.selected.western_blot_list.selected_id}
+		{/if} 
+{/let}
+
+{let $fid} 
+		{if $assignments and $assignments.selected.experiments.selected}
+			{$assignments.selected.experiments.selected.facs_list.selected_id}
+		{elseif $assignment}
+			 {$assignment.experiments.selected.facs_list.selected_id}
+		{/if} 
+{/let}
+
+{let $mid} 
+		{if $assignments and $assignments.selected.experiments.selected}
+			{$assignments.selected.experiments.selected.microscopy_list.selected_id}
+		{elseif $assignment}
+			 {$assignment.experiments.selected.microscopy_list.selected_id}
+		{/if} 
+{/let}
+
 {if $step >0}
 <div class='scb_s_assignment_step' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <a class='scb_s_assignment_step_link scb_f_assignments_step_link {if $step < 2 and $step >0}scb_s_assignment_step_link_active{/if}' href='#view=assignments' aria-label='Assignments' role='tab'>
@@ -44,11 +68,17 @@
        '#view=experiment_setup&assignment_id={$aid}&experiment_id={$eid}' 
        {elseif $prev_step == 3}
        '#view=select_technique&assignment_id={$aid}&experiment_id={$eid}' 
-       {elseif $prev_step == 4}
-       '#view=western_blot&assignment_id={$aid}&experiment_id={$eid}' 
-       {elseif $prev_step == 5}
+       {elseif $prev_step == 4 }
+       '#view=western_blot&assignment_id={$aid}&experiment_id={$eid}&western_blot_id={$wbid}'
+       {elseif $prev_step == 4 and not $wbid=='null'}
+       '#view=western_blot&assignment_id={$aid}&experiment_id={$eid}'  
+       {elseif $prev_step == 5 }
+       '#view=facs&assignment_id={$aid}&experiment_id={$eid}&facs_id={$fid}' 
+       {elseif $prev_step == 5 and not $fid=='null'}
        '#view=facs&assignment_id={$aid}&experiment_id={$eid}' 
-       {elseif $prev_step == 6}
+       {elseif $prev_step == 6 }
+       '#view=microscopy&assignment_id={$aid}&experiment_id={$eid}&microscopy_id={$mid}' 
+       {elseif $prev_step == 6 and not $mid=='null'}
        '#view=microscopy&assignment_id={$aid}&experiment_id={$eid}' 
        {/if}
        
@@ -155,21 +185,21 @@ Progress bar
         <div class='scb_s_experiment_step_tech_steps '>
 			<div class='scb_s_experiment_step_buttons_title {if $step>3}scb_s_experiment_step_active_title{/if}'>Select Your Technique: </div>
 						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_wb {if length($experiment.western_blot_list) > 0}scb_s_experiment_step_visited{/if} {if $step==5 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button'aria-label='Start Western Blotting'>
-							{if length($experiment.western_blot_list) > 0}
+							{if length($experiment.western_blot_list) > 0 and not $step==5 }
 							<a href='#view=western_blot&assignment_id={$assignment.id}&experiment_id={$experiment.id}&western_blot_id={$experiment.western_blot_list.selected_id}'>Western Blotting</a>
 							{else}
 							Western Blotting
 							{/if}
 						</div>
 						<div class=' scb_s_experiment_step_button scb_s_experiment_step_button_facs {if length($experiment.facs_list) > 0}scb_s_experiment_step_visited{/if} {if $step==6 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button'  aria-label='Start Flow Cytometry'>
-							{if length($experiment.facs_list) > 0}
+							{if length($experiment.facs_list) > 0 and not $step==6 }
 							<a href='#view=facs&assignment_id={$assignment.id}&experiment_id={$experiment.id}&facs_id={$experiment.facs_list.selected_id}'>Flow Cytometry</a>
 							{else}
 							Flow Cytometry
 							{/if}
 						</div>
 						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_micro {if length($experiment.microscopy_list) > 0}scb_s_experiment_step_visited{/if} {if $step==7 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button' aria-label='Start Microscopy'>
-							{if length($experiment.microscopy_list) > 0}
+							{if length($experiment.microscopy_list) > 0 and not $step==7}
 							<a href='#view=microscopy&assignment_id={$assignment.id}&experiment_id={$experiment.id}&microscopy_id={$experiment.microscopy_list.selected_id}'>Microscopy</a>
 							{else}
 							Microscopy	

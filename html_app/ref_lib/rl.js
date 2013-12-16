@@ -130,6 +130,7 @@ $.get( "ref_library.html", function(data) {
 	divider.className = 'rl_dividing_line';
 	$('.subheading').append(divider);
 	
+	$('.body').prepend('<span class="rl_main_title">Reference Library</span>');
 	
 }).done(function() { window.hash = window.location.hash});
 
