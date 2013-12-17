@@ -408,6 +408,35 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_sample_inactive_all', function (e, ui){
     	scb.ui.static.WesternBlotView.scb_f_western_blot_sample_inactive_all(this);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_f_wb_up_button', function (e, ui){
+    		var item = $('.markedLi');
+     	    var prev = item.prev();
+			if (prev.length == 0)
+				return;
+			prev.css('z-index', 999).css('position','relative').animate({ top: item.height() }, 250);
+			item.css('z-index', 1000).css('position', 'relative').animate({ top: '-' + prev.height() }, 300, function () {
+				prev.css('z-index', '').css('top', '').css('position', '');
+				item.css('z-index', '').css('top', '').css('position', '');
+				item.insertBefore(prev);
+			});
+		  scb.ui.static.WesternBlotView.scb_s_western_blot_choose_samples_list_item(item);
+
+   	});
+   	scb.utils.off_on(workarea, 'click', '.scb_f_wb_down_button', function (e, ui){
+    		var item = $('.markedLi');
+		 var next = item.next();
+		if (next.length == 0)
+			return;
+		next.css('z-index', 999).css('position', 'relative').animate({ top: '-' + item.height() }, 250);
+		item.css('z-index', 1000).css('position', 'relative').animate({ top: next.height() }, 300, function () {
+			next.css('z-index', '').css('top', '').css('position', '');
+			item.css('z-index', '').css('top', '').css('position', '');
+			item.insertAfter(next);
+		});
+		  scb.ui.static.WesternBlotView.scb_s_western_blot_choose_samples_list_item(item);
+
+   	});
+
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_tab', function (e, ui) {
         var link = $('a', $(this));
         var href = link.attr('href');
@@ -550,5 +579,11 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 			$($('.slider_dots li')[$(this).index()]).attr('class','on');
    			 window.mySwipe.slide($(this).index(), 200);
 		});
+		
+		$('.scb_s_western_blot_choose_samples_list_item').mousedown(function(){    	
+		$('.markedLi').removeClass('markedLi');
+    	$(this).addClass('markedLi');
+		});
+
     }
 }

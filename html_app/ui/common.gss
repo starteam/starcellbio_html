@@ -37,6 +37,7 @@ div#main {
 
 .scb_f_open_experiment_top{
 	right: 271px;
+	background: #f46d5b !important;
 }
 .scb_s_navigation_button_old {
    /*background-image: url('../images/homepage/instructor_resources_button.png');*/

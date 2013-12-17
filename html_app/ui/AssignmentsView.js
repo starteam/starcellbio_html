@@ -153,6 +153,9 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_assignment_header_img_right', function (e) {
     	 scb.ui.static.AssignmentsView.scb_s_assignment_header_img_right(this, e);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_assignments_new_experiment', function (e) {
+		 $('.scb_f_experiments_step_link')[0].click();
+    });
 };
 
 scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
@@ -185,10 +188,10 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
         document.title = "Assignments - StarCellBio"
         $('.scb_assignments_header_link_wrapper').css('width' , (579/assignments.selected.template.instructions.length)-34+ 'px');
         $('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/2)-15+'px');
-//         
-//         $('.scb_s_ref_info_link').click(function(){
-//         	$('.scb_assignments_header_link_wrapper[value="Reference Information"]').click();
-//         });
+        
+        $('.scb_s_ref_info_link').click(function(){
+        	$('.scb_assignments_header_link_wrapper[value="Reference Material"]').click();
+        });
     }
 
 }

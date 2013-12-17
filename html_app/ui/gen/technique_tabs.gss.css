@@ -80,7 +80,7 @@
   border: none;
 }
 .scb_s_movable_item:hover {
-  right: 7px;
+  background: darkgray;
   position: relative;
 }
 .scb_s_western_blot_tabs_more {

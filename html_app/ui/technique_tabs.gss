@@ -106,7 +106,7 @@
 }
 
 .scb_s_movable_item:hover{
-	right: 7px;
+	background: darkgray;
 	position: relative;
 }
 

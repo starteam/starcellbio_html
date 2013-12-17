@@ -375,7 +375,11 @@
     </div>
     -->
     <div class='scb_s_western_blot_samples_heading'>
-        Samples
+        Samples 
+        <span class='scb_s_wb_button_wrapper'>
+        <button class='scb_f_wb_up_button'>&#x25B2;</button>
+		&nbsp;
+		<button class='scb_f_wb_down_button'>&#x25BC;</button></span><br/><br/>
     </div>
     <div class='scb_s_western_blot_choose_samples_order'>
         <ol class='scb_s_western_blot_choose_samples_order_list' >
@@ -399,6 +403,9 @@
             assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>LOAD MARKER
     </button>
     {/if}
+    <a class=' scb_s_navigation_button' western_blot_id='{$western_blot.id}'
+                    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">LOAD ALL</a>
+    
 </div>
 <div class='scb_s_western_blot_samples_gel_area'>
     <div class='scb_s_western_blot_gel_tabs'>

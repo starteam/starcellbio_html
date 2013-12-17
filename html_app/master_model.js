@@ -3789,7 +3789,7 @@ $(function () {
     		decusability.template.instructions = [
     			['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
 				['Introduction',scb_assignment_specific_decusability.intro()],
-				['Reference Information',scb_assignment_specific_decusability.ref()],
+				['Reference Material',scb_assignment_specific_decusability.ref()],
     			['Question 1', scb_assignment_specific_decusability.question_1()],
     			['Question 2', scb_assignment_specific_decusability.question_2()]
     			];
@@ -3855,7 +3855,7 @@ $(function () {
    __decusability.template.instructions = [
 		['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
 		['Introduction',scb_assignment_specific_decusability.intro()],
-		['Reference Information',scb_assignment_specific_decusability.ref()],
+		['Reference Material',scb_assignment_specific_decusability.ref()],
 		['Question 1', scb_assignment_specific_decusability.question_1()],
 		['Question 2', scb_assignment_specific_decusability.question_2()]
 		];
