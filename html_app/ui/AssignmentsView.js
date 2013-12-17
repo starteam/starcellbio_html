@@ -185,6 +185,10 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
         document.title = "Assignments - StarCellBio"
         $('.scb_assignments_header_link_wrapper').css('width' , (579/assignments.selected.template.instructions.length)-34+ 'px');
         $('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/2)-15+'px');
+//         
+//         $('.scb_s_ref_info_link').click(function(){
+//         	$('.scb_assignments_header_link_wrapper[value="Reference Information"]').click();
+//         });
     }
 
 }

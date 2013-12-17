@@ -120,12 +120,17 @@ function setStatus(){
 }
 
 function changeStatus(){
-	if(document.getElementById('course_code_input').value.toLowerCase()=='starx' || document.getElementById('course_code_input').value.toLowerCase()=='7.02' || document.getElementById('course_code_input').value.toLowerCase()=='7.06' || document.getElementById('course_code_input').value.toLowerCase()=='bio52'  || document.getElementById('course_code_input').value.toLowerCase()=='usability'){
-		document.getElementById('code_status').innerHTML = "<span style='color:green'>&#9745; </span>&nbsp; This is a valid code. You may create an account."
-		document.getElementById('auth_submit_button').disabled=false;
-	}
-	else
+	var input = document.getElementById('course_code_input').value.toLowerCase();
+	var code_values = ['starx', '7.02', '7.06', 'bio52', 'usability'];
+	for(var x = 0; x < code_values.length; x++){
+		if(input == code_values[x]){
+			document.getElementById('code_status').innerHTML = "<span style='color:green'>&#9745; </span>&nbsp; This is a valid code. You may create an account."
+			document.getElementById('auth_submit_button').disabled=false;
+			break;
+		}
 		document.getElementById('code_status').innerHTML = "<span style='color:red'>&#215; </span>&nbsp; This is not a valid code. You cannot create an account."
+
+	}
 }
 
 </script>

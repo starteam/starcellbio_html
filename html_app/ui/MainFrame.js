@@ -512,7 +512,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					});
 				});
 				
-				iframe.find(".login_submit").click(function(){
+				iframe.find(".auth_submit_button").click(function(){
 						   var mask = document.createElement('div');
 						   mask.className='overlay';
 						   $(mask).css({'width': '100%','height': '100%','position': 'absolute', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
@@ -535,6 +535,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 							   	  else{
 							   	 		 $(mask).remove();
 							   	  	   $('.iframe').show();
+							   	  	   if($('.iframe').contents().find('.login_submit').length >0)
+							   	  	   	$('.iframe').contents().find('#errorMsg').html('Incorrect username or password. Try again');
 							   	  	   
 							   	  }
 						   });

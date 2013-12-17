@@ -250,6 +250,16 @@
     margin-left:10px;
 }
 
+.scb_assignments_bottom_arrow_left{
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+
+.scb_assignments_bottom_arrow_right{
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
 .assignement_experiment_list {
     font-size: 11px;
 }
