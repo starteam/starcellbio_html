@@ -300,7 +300,9 @@ position: absolute;
 	padding-bottom: 25px;
 }
 
-
+.scb_s_western_blot_load_all{
+right: 93px;
+}
 
 
 .handel{

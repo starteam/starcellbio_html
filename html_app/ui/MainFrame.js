@@ -863,6 +863,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     			else
     				token = post_state_result.token;
     			post_obj = {'token': token, 'model': parsed.context.master_model}
+    			console.log(post_obj);
     			$.ajax({
 					type: "POST",
 					url: 'scb/post_state.js',

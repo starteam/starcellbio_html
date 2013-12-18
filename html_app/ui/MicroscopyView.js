@@ -349,6 +349,10 @@ function updateLensPosition(state,canvas, microslide_top, microslide_left){
 
 function draw(state){
 	var canvas=document.getElementsByTagName("canvas")[0];
+	
+	
+	
+	
 	document.onkeydown=function (e) {
 		
 		//document.documentElement.style.overflow='hidden';
@@ -544,11 +548,19 @@ function init(state, draw, image_source){
 			var img2string=canvas.toDataURL(0,0, img.width, img.height);
 			canvas.width = 300;
 			canvas.height = 300;
+			
+			initialize_state(state, img2string);
+// 			var randomblur = Math.ceil(Math.random()*100);
+// 			state['blur'] = randomblur;
+// 			Caman(canvas, state['display'], function () {
+// 				this.stackBlur(state['blur']);
+// 				this.render(function(){
+// 				});
+// 			});
 			ctx.beginPath();
 			ctx.arc(150, 150, arc, 0, Math.PI *2, false);
 			ctx.clip();
 			ctx.drawImage(img, 0, 0);
-			initialize_state(state, img2string);
 			//console.log(img2string);
 			draw(state);
 			$('.circle_lens').draggable({ 
@@ -709,13 +721,48 @@ function modify_state_blur(addition, state, sharpen){
 		state['blur'] = 100;
 		blur_helper(state, context, canvas, addition);
 	}
+//  	if(Math.abs(state['blur']) <= Math.abs(addition)){
+//  		state['blur'] = 0;
+//  		blur_helper_abs(state,context,canvas,-addition);
+//  		}
+//  	else
+//  		blur_helper(state,context,canvas,addition);
 	if((state['blur']>0 && state['blur']<=100) || (state['sharpen']==0&&addition >0))
 		blur_helper(state,context,canvas,addition);
 	if ((state['sharpen']>0 && state['sharpen']<=100) || (state['blur']==0 && addition<0)){
+		//blur_helper(state,context,canvas,addition);
 		sharpen(-addition, state);	
 	}
 }
 
+
+function blur_helper_abs(state, context, canvas, addition){
+	state['sharpen']=0;
+	state['display'] = state['orig'];
+	state['blur'] = Math.abs(state['blur'] + addition);
+	Caman(canvas, state['display'], function () {
+		this.brightness(state['brightness']);
+		this.stackBlur(state['blur']);
+		this.render(function(){
+			state['action'] = 'blur';
+
+			console.log('stackblur');
+			
+			$('.scb_s_microscope_status').text(state['action']);
+		});
+	
+		console.log('rendering...');
+		state['action'] = 'rendering';
+		
+		$('.scb_s_microscope_status').text(state['action']);
+
+
+	});
+	context.beginPath();
+	context.arc(150, 150, arc, 0, Math.PI *2, false);
+	context.clip();	
+	context.drawImage(state['orig'], state['xparam'], state['yparam']);
+}
 
 function blur_helper(state, context, canvas, addition){
 	state['sharpen']=0;

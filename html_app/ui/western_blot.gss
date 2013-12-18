@@ -628,8 +628,12 @@ letter-spacing: .5px;
 	left: 188px;
 }
 
-.scb_s_western_blot_choose_samples_order_list, .scb_s_western_blot_choose_samples_marker {
+.scb_s_western_blot_choose_samples_order_list {
 -webkit-padding-start: 21px;
+} 
+
+.scb_s_western_blot_choose_samples_marker {
+-webkit-padding-start: 24px;
 }
 
 .markedLi{
@@ -640,12 +644,16 @@ letter-spacing: .5px;
     font-size:10pt;
     padding:3px;
     color:black;
+
+}
+
+.scb_s_western_blot_sortable_item{
+
     background: rgba(27, 27, 23, 0.27);
 	border-radius: 5px;
 	margin: 3px;
 	border: 1px solid black;
-	box-shadow: 18px 1px 11px -1px gray;
-
+	box-shadow: 6px 1px 11px -1px gray;
 }
 
 

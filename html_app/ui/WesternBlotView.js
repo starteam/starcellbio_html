@@ -270,7 +270,11 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_inactive_all = function 
 
 }
 
-scb.ui.static.WesternBlotView.populate_wells = function (rows, state, gstate) {
+scb.ui.static.WesternBlotView.populate_wells = function (rows, state) {
+//, gstate
+    //TODO: 1st things first -- we needs to save NEW order
+
+    state.western_blot.wells_loaded = true;
     var canvas = $('.scb_s_western_blot_gel')[0];
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
@@ -292,6 +296,20 @@ scb.ui.static.WesternBlotView.populate_wells = function (rows, state, gstate) {
     if (state.western_blot.marker_loaded) {
         g.drawImage(getImage(i), 0, 0);
     }
+}
+
+scb.ui.static.WesternBlotView.draw_wells=function(rows,state){
+    var canvas = $('.scb_s_western_blot_gel')[0];
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+
+    var g = canvas.getContext('2d');
+
+    function getImage(index) {
+        return $('img', '.scb_wells')[index];
+    }
+
+    g.drawImage(getImage(15), 0, 0);
 }
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_left_western_blot = function(element, event){
@@ -349,8 +367,60 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_choose_samples_list_item = func
 		if(new_order[v] == undefined)
 			new_order.splice(v, 1);
 	}
+	console.log(new_order);
 	parsed.western_blot.lanes_list.reorder(new_order);
 }
+
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_sort_up_button = function (element) {
+	
+	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+	var new_order = [];
+	var list = $('.scb_s_western_blot_choose_samples_order_list')[0];
+	var children =$(list.children);
+	var v=0;
+	while(v<children.length){
+		if($(children[v]).attr('id')== $(element).attr('id')){
+			var temp= new_order[v-1];
+			new_order[v-1] =  $(children[v]).attr('id');
+			new_order[v]=temp;
+			v++;
+		}
+		else{
+			new_order[v] = $(children[v]).attr('id');
+			v++;
+		}
+	}
+	console.log(new_order);
+	parsed.western_blot.lanes_list.reorder(new_order);
+}
+
+
+scb.ui.static.WesternBlotView.scb_s_western_blot_sort_down_button = function (element) {
+	
+	var parsed = scb.ui.static.WesternBlotView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+	var new_order = [];
+	var list = $('.scb_s_western_blot_choose_samples_order_list')[0];
+	var children =$(list.children);
+	var v=0;
+	while(v<children.length){
+		if($(children[v]).attr('id')== $(element).attr('id')){
+			var value= $(children[v+1]).attr('id');
+			new_order[v+1] =  $(children[v]).attr('id');
+			new_order[v]=value;
+			v=v+2;
+		}
+		else{
+			new_order[v] = $(children[v]).attr('id');
+			v++;
+		}
+	}
+	console.log(new_order);
+	parsed.western_blot.lanes_list.reorder(new_order);
+}
+
 
 scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_select_lysate_type', function (e) {
@@ -387,6 +457,11 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_load_marker', function (e) {
         scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker(this);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_load_all', function (e) {
+   		 var parsed = scb.ui.static.WesternBlotView.parse(this);
+		parsed.experiment.last_scroll=document.body.scrollTop;
+        scb.ui.static.WesternBlotView.populate_wells(parsed.western_blot.rows_state().rows, parsed);
+    });
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_choose_gel_type_input', function (e, ui) {
         scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input(this);
     });
@@ -409,7 +484,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     	scb.ui.static.WesternBlotView.scb_f_western_blot_sample_inactive_all(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_wb_up_button', function (e, ui){
-    		var item = $('.markedLi');
+	var item = $('.markedLi');
      	    var prev = item.prev();
 			if (prev.length == 0)
 				return;
@@ -419,11 +494,14 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
 				item.css('z-index', '').css('top', '').css('position', '');
 				item.insertBefore(prev);
 			});
-		  scb.ui.static.WesternBlotView.scb_s_western_blot_choose_samples_list_item(item);
+		//$($('.markedLi')[0]).simulateDragSortable({ move: -1,  placeHolder: '.ui-sortable-holder' });
+    	scb.ui.static.WesternBlotView.scb_s_western_blot_sort_up_button($('.markedLi')[0]);
+
+		
 
    	});
    	scb.utils.off_on(workarea, 'click', '.scb_f_wb_down_button', function (e, ui){
-    		var item = $('.markedLi');
+		var item = $('.markedLi');
 		 var next = item.next();
 		if (next.length == 0)
 			return;
@@ -433,9 +511,12 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
 			item.css('z-index', '').css('top', '').css('position', '');
 			item.insertAfter(next);
 		});
-		  scb.ui.static.WesternBlotView.scb_s_western_blot_choose_samples_list_item(item);
+		//$($('.markedLi')[0]).simulateDragSortable({ move: 1,  placeHolder: '.ui-sortable-holder' });
+    	scb.ui.static.WesternBlotView.scb_s_western_blot_sort_down_button($('.markedLi')[0]);
+
 
    	});
+
 
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_tab', function (e, ui) {
         var link = $('a', $(this));
@@ -468,9 +549,6 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         }
 
         var can_prepare_lysate = rows_state.valid > 0;
-        console.log(')))))))))))))))))');
-		console.log(state.western_blot.parent.start_tabs_index);
-		console.log(')))))))))))))))))');
 		
 		state.experiment.last_technique_view = 'western_blot';
 		var x = 0;
@@ -534,8 +612,11 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             
         }
         if (kind == 'prepare_gel') {
-            //$('.scb_s_western_blot_choose_samples_order_list').sortable();
-            scb.ui.static.WesternBlotView.populate_wells(rows_state.rows, state, gstate);
+        	if(state.western_blot.wells_loaded)
+           	    scb.ui.static.WesternBlotView.populate_wells(rows_state.rows, state);
+   			else
+        		scb.ui.static.WesternBlotView.draw_wells(rows_state.rows, state);
+   			
         }
 
         if (state.western_blot.gel_type == null) {
@@ -584,6 +665,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		$('.markedLi').removeClass('markedLi');
     	$(this).addClass('markedLi');
 		});
+
 
     }
 }

@@ -37,6 +37,8 @@ scb.Experiment = function scb_Experiment(data, context, parent) {
     // experiment_design_fields
     scb.Utils.initialize_accessor_field(self,data,'hypothesis','',null,context);
     scb.Utils.initialize_accessor_field(self,data,'objective','',null,context);
+    scb.Utils.initialize_accessor_field(self,data,'technique','',null,context);
+
     // ui state
     scb.Utils.initialize_accessor_field(self,data,'last_view','experiment_design',null,context);
     scb.Utils.initialize_accessor_field(self,data, 'prev_step', 0, null,context);

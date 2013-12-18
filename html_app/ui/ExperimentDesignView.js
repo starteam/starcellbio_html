@@ -61,6 +61,30 @@ scb.ui.static.ExperimentDesignView.scb_s_experiment_design_objective = function(
          }
      }
 
+
+
+scb.ui.static.ExperimentDesignView.scb_s_experiment_design_technique_answer = function(element)
+     {
+         var experiment_id = $(element).attr('experiment_id');
+         var assignment_id = $(element).attr('assignment_id');
+         var state = {
+             experiment_id: experiment_id,
+             assignment_id: assignment_id,
+             view:'experiment_design',
+             skip_hash_update: true
+         };
+         var parsed = scb.ui.static.MainFrame.validate_state(state);
+         if( parsed.redisplay )
+         {
+             alert( "INVALID ELEMENT!");
+         }
+         if( parsed.experiment )
+         {
+             parsed.experiment.technique = $(element).attr('value');
+         }
+     }
+
+
 scb.ui.static.ExperimentDesignView.scb_s_experiment_name_edit = function(element)
      {
          var experiment_id = $(element).attr('experiment_id');
@@ -132,7 +156,9 @@ scb.ui.static.ExperimentDesignView.register = function(workarea)
     scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_objective', function (e) {
         scb.ui.static.ExperimentDesignView.scb_s_experiment_design_objective(this);
     });
-
+	 scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_technique_answer', function (e) {
+        scb.ui.static.ExperimentDesignView.scb_s_experiment_design_technique_answer(this);
+    });
     scb.utils.off_on(workarea, 'change', '.scb_s_experiment_name_edit', function (e) {
         scb.ui.static.ExperimentDesignView.scb_s_experiment_name_edit(this);
     });

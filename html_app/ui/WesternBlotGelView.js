@@ -466,5 +466,6 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});
+    	$('.scb_s_western_blot_sortable_item').removeClass('scb_s_western_blot_sortable_item');
     }
 };

@@ -108,8 +108,7 @@ Progress bar
 */
 {template .experiment_step}
 <div class='scb_s_experiment_step'>
-	<a class="scb_f_open_experiment scb_f_open_experiment_top scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignment.id}" aria-label='New Experiment' role='button'> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>
-
+	
 	<div class = 'scb_s_experiment_step_progress_label'> {$assignment.name}:</div>
 	
 		<div class='scb_s_assignment_step_experiment'>
@@ -128,6 +127,8 @@ Progress bar
 					
 				</label>
 			</div>
+			<a class="scb_f_open_experiment scb_f_open_experiment_top scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignment.id}" aria-label='New Experiment' role='button'> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>
+
 	
 	<br/>
 	<br/>
