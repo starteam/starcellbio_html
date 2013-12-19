@@ -25,7 +25,6 @@ function popoutGuide(){
 	var popoutWindow =window.open("full_guide.html#"+popout_string);
 	//the timeout is needed, because the javascript has to load first, 
 	//and then you can use the hash to the anchor
-	setTimeout( function(){popoutWindow.location = "full_guide.html#"+popout_string; },50);
 	
 }
 
@@ -351,6 +350,9 @@ function searchUG(){
 	//$('.help_search_input').focus();
 	}
 	}
+	
+	
+	$('.scb_s_help_section' +' .scb_s_section_active').css('margin-left', '-40px');
 }
 
 //Clears the screen and returns the menu to default view

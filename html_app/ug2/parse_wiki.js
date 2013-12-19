@@ -105,7 +105,10 @@ $.get( "user_guide.html", function(data) {
 	$('.subheading').children().not('a').find('strong').prepend('&nbsp;');
 	$('.heading span>a').after('&nbsp;');
 	$('.body strong').css('color', 'black !important');
-});
+	var x = window.location.hash; 
+	window.location.hash = ''; 
+	setTimeout( function() { window.location.hash = x ;} , 20); 
+}).done(function() { window.hash = window.location.hash});
 }
 //toggle visibility of children, not used currently because toggle is made inactive
 function bindToggle(item){
