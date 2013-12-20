@@ -248,7 +248,7 @@ function searchUG(){
 	}
 	var footer = document.createElement('div')
 	footer.className = 'scb_f_help_footer';
-	footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
+	footer.innerHTML = "<input type='button' style='color: blue; display:none;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
 	footer.style.height = '25px';
 	$('.scb_f_help_display').append(footer);
 	$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width()-15);
@@ -293,7 +293,7 @@ $(window).on('hashchange', function() {
 				else{
 				var footer = document.createElement('div')
 				footer.className = 'scb_f_help_footer';
-				footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
+				footer.innerHTML = "<input type='button' style='color: blue; display:none;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
 				footer.style.height = '25px';
 				$('.scb_f_help_display').append(footer);
 				$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width() -15);
@@ -336,7 +336,7 @@ $(window).on('hashchange', function() {
 						else{
 							var footer = document.createElement('div')
 							footer.className = 'scb_f_help_footer';
-							footer.innerHTML = "<input type='button' style='color: blue;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
+							footer.innerHTML = "<input type='button' style='color: blue; display:none;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
 							footer.style.height = '25px';
 							$('.scb_f_help_display').append(footer);
 							$('.scb_f_help_footer').width($('.scb_f_help_search_bar').width() -15);
