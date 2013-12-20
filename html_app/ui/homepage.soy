@@ -64,15 +64,7 @@ Assignment title
                                          
         </span>
         
-<!-- 
-        <img class='scb_s_login_status' 
-        	{if $context.auth and $context.auth.logged_in}
-        		src='images/header/scb_signout_text.png'
-        	{else}
-        		src='images/header/scb_signin_text.png'
-        	{/if}
-                                         alt='Sign in'>
- -->
+
         </a>
     </span>
 
@@ -96,19 +88,12 @@ Assignment footer
         <span class='scb_s_homepage_top_left'>
 		<span class='scb_s_homepage_top_left_text'>
 			<b>Welcome to StarCellBio,</b><br/> a virtual experiment simulation <br/>tool that teaches the fundamental concepts of cell and molecular <br/>biology, experimental design, and analysis. 
-<!-- 
-			StarCellBio uses real and computer-generated data to generate a realistic array of experimental outcomes.
- -->
+
 		</span>
-<!--            <img class='scb_s_homepage_top_left_image' src='images/homepage/welcome_text.png'><br/> -->
            <span class='scb_s_homepage_see_more_button'><img src='images/homepage/SCB_Homepage_SeeMoreBTN.png'
                                                              alt='See More'></span>
         </span>
-<!--        <span class='scb_s_homepage_top_center'>
-            <img class='scb_s_homepage_top_center_image' src='images/homepage/lab.png'>
-
-        </span>
--->        <span class='scb_s_homepage_top_right' role='signup_area'>
+        <span class='scb_s_homepage_top_right' role='signup_area'>
             <img class='scb_s_homepage_video_player' src='images/homepage/player_background.png'
                  alt='Video Player Background'>
             <a class='scb_no_underline' href='#view=assignments'>
@@ -208,7 +193,6 @@ Assignment display_experiment_design
 {if $tech == 'wb'}
 <span class='scb_s_homepage_technique_wb'>
     <span class='scb_s_homepage_technique_title_image'>Western Blot</span>
-    <!-- <img class='scb_s_homepage_technique_title_image' src='images/homepage/western_blot.png'>-->
     Western blotting detects overall changes in the amount or chemical modifications of a particular protein.
     <a href="static/ref_lib/full_library.html#WesternBlotting"  class='scb_s_homepage_technique_learn_more ' target='_blank'
        aria-label='Learn more about western blot'>LEARN MORE</a>
@@ -220,7 +204,6 @@ Assignment display_experiment_design
 {if $tech == 'fc'}
 <span class='scb_s_homepage_technique_flow'>
     <span class='scb_s_homepage_technique_title_image'>Flow Cytometry</span>
-    <!-- <img class='scb_s_homepage_technique_title_image' src='images/homepage/flow_cytometry.png'> -->
     Flow cytometry is used to count and analyze the size, shape and properties of
     individual cells within a heterogeneous population of cells.
     <a href="static/ref_lib/full_library.html#FlowCytometry" class='scb_s_homepage_technique_learn_more ' target='_blank'
@@ -232,7 +215,6 @@ Assignment display_experiment_design
 {if $tech == 'micro'}
 <span class='scb_s_homepage_technique_micro'>
     <span class='scb_s_homepage_technique_title_image'>Microscopy</span>
-<!--    <img class='scb_s_homepage_technique_title_image' src='images/homepage/microscopy.png'> -->
     Microscopy is used to study the shape, morphology and properties of cells,
     tissues or organisms that otherwise cannot be observed by eye.
     <a href="static/ref_lib/full_library.html#Microscopy" class='scb_s_homepage_technique_learn_more ' target='_blank'

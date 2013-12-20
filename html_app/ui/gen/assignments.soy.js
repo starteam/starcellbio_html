@@ -37,7 +37,7 @@ scb_assignments.display_assignment = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_abstract scb_s_assignments_description\'>');
   if (opt_data.assignments.selected != null) {
-    output.append('<div class=\'scb_s_abstract_title\'>', opt_data.assignments.selected.name, '</div><div class=\'scb_s_assignments_slider_header\'><!--<a href="javascript: w=window.open(\'http://yoursite.com/LinkToThePDF.pdf\'); w.print(); w.close(); ">​print pdf</a>--><img class = \'scb_s_assignment_header_img_left\'  assignment_id=\'', soy.$$escapeHtml(opt_data.assignments.selected.id), '\' src=\'../../images/homepage/scb_gray_left_arrow_inactive.png\' role=\'button\' aria-label=\'Move one section to the left\'>');
+    output.append('<div class=\'scb_s_abstract_title\'>', opt_data.assignments.selected.name, '</div><div class=\'scb_s_assignments_slider_header\'><img class = \'scb_s_assignment_header_img_left\'  assignment_id=\'', soy.$$escapeHtml(opt_data.assignments.selected.id), '\' src=\'../../images/homepage/scb_gray_left_arrow_inactive.png\' role=\'button\' aria-label=\'Move one section to the left\'>');
     var sectionList39 = opt_data.assignments.selected.template.instructions;
     var sectionListLen39 = sectionList39.length;
     for (var sectionIndex39 = 0; sectionIndex39 < sectionListLen39; sectionIndex39++) {

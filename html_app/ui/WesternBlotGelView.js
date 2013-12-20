@@ -69,8 +69,6 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
 
     	$.jqDialog.alert("Please select primary & secondary antibodies.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 			    	
-
-//         alert("Please select primary & secondary antibodies.");
     }
     $('.scb_f_wb_exposure_slider').detach();
     var state = {
@@ -141,10 +139,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider = function (e, ui) {
     }
     var value = ui.value || $(element).slider('value');
     parsed.western_blot_gel.exposure_time = scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array[value];
-//     if(value == 12){
-//     	$('.ui-slider-handle').css('left', $('.ui-slider-handle').position().left-10+'px')
-// 		console.info('SHLOKA');
-//     }
+
     	
     $('.scb_s_wb_exposure_time_value', $(element).parent()).text(scb.utils.print_time_w_seconds(parsed.western_blot_gel.exposure_time));
     if (_.isObject(e)) {
@@ -246,7 +241,6 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
 	var vslider = $('.scb_f_vslider', $(parent));
     var vslider_value = $('.scb_f_vslider_value', $(parent));
     function set_slider(y) {
-        //console.info( "set_slider " + y ) ;
         slider.css('top', (y-40 )+ 'px');
         slider_value.css('top', (y-52) + 'px');
         var ww = Math.round(c.position_to_weight(y-40));
@@ -265,7 +259,6 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         }
     }
     function set_vslider(x) {
-        //console.info( "set_slider " + x) ;
         vslider.css('left', x + 'px');
         vslider_value.css('left', (x-12) + 'px');
         var ww = Math.round(c.position_to_weight(x));
@@ -280,7 +273,6 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         }
         else {
             vslider.show();
-            //vslider_value.show();
         }
     }
 
@@ -316,8 +308,6 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         }
     });
     $(parent).unbind('mouseout').bind('mouseout', function (evt) {
-//        slider.hide();
-//        slider_value.hide();
     });
 }
 
@@ -384,7 +374,6 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         var template = state.assignment.template;
         var rows_state = state.western_blot.rows_state();
         var rows = rows_state.rows;
-//id
         var kind = 'prepare_gel';
 
         workarea.html(scb_western_blot_gel.main({
@@ -428,22 +417,10 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         }
         state.experiment.last_view = 'western_blot_gel';
 
-        //state.assignments.last_step = 6;
 
         state.western_blot.last_gel = state.western_blot_gel.id;
 		
 		state.western_blot.parent.selected_id = state.western_blot.id;
-
-//         $('.scb_f_wb_exposure_slider').slider({
-//             orientation: "vertical",
-//             range: "min",
-//             min: 0,
-//             max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length,
-//             value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
-//             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
-//             change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider
-//         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
-        
        $('.scb_f_wb_exposure_slider').slider({
             orientation: "horizontal",
             range: "min",

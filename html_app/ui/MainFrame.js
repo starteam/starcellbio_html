@@ -86,7 +86,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                         	var microscopy = experiment.microscopy_list.get(state.microscopy_id);
                         	if(microscopy) {
                         		ret.microscopy = microscopy;
-                        		//SHLOKA
                         	}
 							if (state.microscopy_lane_id && microscopy) {
 								var microscopy_lane = microscopy.lanes_list.get(state.microscopy_lane_id)
@@ -99,7 +98,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                         // if experiment_id is invalid go to assignment
                         $('body').css('overflow', 'hidden');
                         $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
-//                         alert('Experiment ' + state.experiment_id + ' does not exist.');
                         state.onhashchange = false;
                         state.view = 'assignments';
                         delete state.experiment_id;
@@ -114,7 +112,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 $('body').css('overflow', 'hidden');
                 $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 
-//                 alert('Assignment ' + state.assignment_id + ' does not exist.');
                 state.onhashchange = false;
                 state.view = 'assignments';
                 delete state.assignment_id;
@@ -130,7 +127,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         return ret;
     }
 
-    //assignments.selected_id = 'assignment_tufts';
     //TODO: DEBUG REMOVE
     window._assigments = assignments;
 
@@ -230,8 +226,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         else {
         	$('body').css('overflow', 'hidden');
         	$.jqDialog.alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.", function() {$('body').css('overflow', 'visible');	/* callback function for 'OK' button*/ });;
-// 
-//             alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.");
+
         }
     }
 
@@ -287,7 +282,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
 				
 				var iframe = $('.iframe').contents();
-				//iframe.find('body').css({'font-family':'sourcesanspro-bold'});
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 			
 			var fieldset = content.querySelectorAll('fieldset');
@@ -295,7 +289,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			$('iframe').contents().find(".scb_f_contact_submit_button").click(function(e){
 					$('iframe').load(function(){
 						  var profile = $('iframe').contents();
-						  //console.log(profile);
 						  if(profile[0].body.textContent.indexOf('you for your feedback.') >0){
 							  parent.document.location.reload();
 							  }
@@ -310,8 +303,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     	$('.scb_f_ug_up_button').hide();
     	$('.scb_f_ug_search_line').hide();
     	$("#closesearch").hide();
-    	//$(".main_popout").addClass('main_popout_disabled');
-    	//$('.main_popout').attr('disabled', 'disabled');
     	$(".scb_s_ug_home").addClass('scb_s_ug_home_disabled');
     	$('.scb_s_ug_home').attr('disabled', 'disabled');
     	$('.scb_display_search_count').hide();
@@ -337,13 +328,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			$('.scb_f_ug_help_search_bar').width($('iframe').contents().find('.scb_f_help_display').width()+20);
 			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
 			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
-			//$('.handle_square').css('top', ($('.scb_f_ug_help_search_bar').width()-20 )+'px');
-			//$('.handle_square').css('left', ($('.scb_f_ug_help_search_bar').width()+8 )+'px');
 			$('.scb_f_ug_help_search_bar').draggable({ handle:'.user_guide_title'});
 			$('iframe').contents().find('body').css('font-family', "Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
 		
 			$('iframe').contents().click(function(event) {
-				//$(".scb_s_ug_home").show();
 				$(".scb_s_ug_home").removeClass('scb_s_ug_home_disabled');
     			$('.scb_s_ug_home').removeAttr('disabled');
 				if($('iframe').contents().find("#popout").length >0){
@@ -431,17 +419,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					try
  					 {
   							var popoutWindow =window.open("static/ug2/full_guide.html#"+popout_string);
-							//the timeout is needed, because the javascript has to load first, 
-							//and then you can use the hash to the anchor
-							setTimeout( function(){popoutWindow.location = "static/ug2/full_guide.html#"+popout_string; },50);
   					}
 					catch(err)
   					{
-  						
   							var popoutWindow =window.open("ug2/full_guide.html#"+popout_string);
-							//the timeout is needed, because the javascript has to load first, 
-							//and then you can use the hash to the anchor
-							setTimeout( function(){popoutWindow.location = "ug2/full_guide.html#"+popout_string; },50);
   					}
 					
 					});
@@ -565,10 +546,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         context: context
     });
 	
-//     self.sections.assignment = new scb.ui.AssignmentView({
-//         workarea: workarea,
-//         context: context
-//     });
 
     self.sections.experiment_design = new scb.ui.ExperimentDesignView({
         workarea: workarea,
@@ -646,17 +623,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 assignments: assignments
             });
         }
-//         if (state.view == 'assignment') {
-//             if (parsed.assignment) {
-//                 self.sections.assignment.show({
-//                     workarea: workarea,
-//                     assignment: parsed.assignment
-//                 });
-//             }
-//             else {
-//                 self.show({view: 'assignments'})
-//             }
-//         }
         if (state.view == 'experiment_design') {
             if (!parsed.experiment) {
                 delete state.onhashchange;
@@ -737,7 +703,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			
 			var id_list = [];
 			for( var x=0; x < parsed.experiment.western_blot_list.list.length; x++){id_list.push(parsed.experiment.western_blot_list.list[x].id);}
-			//id_list.indexOf(state.western_blot_id)>=0 ||
+
             if ( !parsed.western_blot ) {
             	if(state.western_blot_id && id_list.indexOf(state.western_blot_id)<0 && parsed.experiment.western_blot_list.list.length >0){
             		parsed.western_blot = parsed.experiment.western_blot_list.list[state.index];
@@ -846,7 +812,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             else {
             	$('body').css('overflow', 'hidden');
             	$.jqDialog.alert("Experiment does not exist", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
-//                 alert("Experiment does not exist");
                 if (parsed.assignment) {
                     self.show({
                         view: 'assignments',
@@ -992,7 +957,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         });
         /* click on sidebar to display EXPERIMENT_SETUP */
         $('.sidebar_accordian>h3>.a_accordian_experiment_setup', workarea).click(function (e) {
-            //$('.sidebar_accordian>.accordian_experiment_setup', workarea).html("exp set " + new Date());
             self.current_tab.hide(function () {
                 self.sections.experiment.show(function () {
                     self.current_tab = self.sections.experiment;

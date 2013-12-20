@@ -111,9 +111,7 @@ Experiment active area
             
             Once you run this experiment, you cannot go back and make changes to this experiment's set-up.
              Review the summary of your experimental set-up and then either go back to edit your set-up or click on <b>Confirm Set-Up & Run</b> to run your experiment.
-<!--
-                Please carefully review the summary of your experimental setup and then either go back to edit your set-up or click on Confirm Setup &amp; Select Technique to run your experiment.
--->
+
             </p>
 			
 			<a class="scb_s_navigation_button scb_f_open_select_technique"
@@ -191,10 +189,7 @@ Experiment active area
 				{foreach $c in $r.columns}
 				<td style='z-index:99' class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_td' kind='{$c.kind}' rowspan="1">
 					{if $c.kind == 'actions'}
-						{if $kind == 'readwrite'} <!--
-						<button class='scb_f_experiment_setup_save_sample' cell_treatment_id=''
-								assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' disabled="disabled">S
-						</button> -->
+						{if $kind == 'readwrite'} 
 						{/if}
 					{else}
 						{if $c.kind=='cell_plate'}

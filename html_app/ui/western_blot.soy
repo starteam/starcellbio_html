@@ -371,11 +371,6 @@
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if} disabled='disabled'/><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_western_blot_choose_gel_type_input_disabled">15%</span>
  -->
     </div>
-    <!--
-    <div class='scb_s_western_blot_choose_samples_note'>
-        NOTE: You can reorder samples by dragging and dropping into new order
-    </div>
-    -->
     <div class='scb_s_western_blot_samples_heading'>
         Samples 
         <span class='scb_s_wb_button_wrapper'>
@@ -417,10 +412,6 @@
         <div class='scb_s_western_blot_gel_tab scb_s_western_blot_gel_active' contenteditable="true">GEL</div>
     </div>
     <div class='scb_s_western_blot_gel_content'>
-<!-- 
-        {call .display_western_blot_numbers}
-        {/call}
- -->
 
     <canvas class='scb_s_western_blot_gel' src='images/western_blot/SCB_WesternBlotting_GelNumbers.png'/>
 
@@ -521,8 +512,7 @@
 						<span class='scb_s_western_blot_video_heading'>Reminder:&nbsp;&nbsp;</span>
 						<span class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one&nbsp;</span><br/>
 						<span class='scb_s_western_blot_video_text_second'>lane must be reserved for the protein marker.&nbsp;</span><br/>
-<!-- 						<a href='static/ref_lib/full_library.html#GelPreparation' target='_blank'  class='scb_s_western_blot_learn_more'>Learn More</a> -->
-						
+s						
 					</div>
 					<div>
 							<iframe height='124' width='187' class='scb_s_experiment_setup_video_box_vid'  src="//www.youtube.com/embed/u7VwmJw9Gbc" frameborder="0" allowfullscreen></iframe>

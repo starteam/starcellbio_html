@@ -1,8 +1,4 @@
-// $.get( "ref_library.html", function(data) {
-// 	var htmlObject = document.createElement('div');
-// 	htmlObject.innerHTML = data;
-// 	document.body.innerHTML = data;
-// });
+
 function getRL(){
 
 $.get( "ref_library.html", function(data) {
@@ -39,11 +35,9 @@ $.get( "ref_library.html", function(data) {
 	for (var y=0; y<main_headers.length; y++){
 		var nextN = main_headers[y].nextElementSibling;
 		$(main_headers[y]).children('a').attr('name', $(main_headersp[y]).text().replace(/\s/g,'') ); 
-		//bindToggle($(main_headers[y]).children('span'));
 		while(nextN!=null && nextN.className!='heading'){
 			var next = nextN.nextElementSibling;
 			if(nextN.className =='subheading'){
-				//bindToggle($(nextN).children('span'));
 				$(nextN).children('a').attr('name', $(subheadersp[counter]).text().trim().replace(/([A-Z]\.)|[\.\(\)\s\d]/g,''));
 				counter++;
 				nextN.style.textIndent = '0px';
@@ -80,8 +74,6 @@ $.get( "ref_library.html", function(data) {
  					else{
 						var temp = nextL.nextElementSibling;
 						nextL.style.marginLeft = '0px';
-						//nextL.style.color = 'red';
-						//nextL.style.display = 'none';
 						$(nextN).append(nextL);
 						nextL = temp;
  					}
@@ -90,8 +82,7 @@ $.get( "ref_library.html", function(data) {
 				$(nextN.previousElementSibling).append(nextN);
 			}
 			else if(nextN.tagName == 'OL' || nextN.className == 'SCB-Normal'){
-				//nextN.style.display = 'none';
-				//console.log('found' + nextN.className);
+
 				$(nextN.previousElementSibling).append(nextN);
 			}
 			

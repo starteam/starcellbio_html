@@ -266,7 +266,6 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 			if (parsed.experiment.cell_treatment_list.length == 0) {
 			$('body').css('overflow', 'hidden');
 				$.jqDialog.alert("Please set up at least one sample.", function() {	$('body').css('overflow', 'visible'); /* callback function for 'OK' button*/ });
-	//             alert("Please set up at least one sample.");
 				event.preventDefault();
 			}
 			else{
@@ -650,9 +649,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
             }
             else {
                 delete parsed.experiment.new_row.drug_id;
-//                parsed.experiment.new_row.drug_id = scb.utils.get( template , ['ui','experiment_setup','new_row','treatment_list','list',0,'drug_list','list',0,drug_id] ,_.keys(template.drugs)[0] );
-//                parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].drug_id || _.keys(template.drugs)[0];
-            }
+           }
         }
         if (kind == 'concentration') {
             if (_.keys(template.concentrations).length > 1 && scb.ui.static.ExperimentSetupView.row_edit_is_editable(element, template)) {
@@ -678,8 +675,6 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
                 }
             } else {
                 delete parsed.experiment.new_row.concentration_id;
-//                parsed.experiment.new_row.concentration_id = scb.utils.get( template , ['ui','experiment_setup','new_row','treatment_list','list',0,'drug_list','list',0,'concentration_id'],_.keys(template.concentrations)[0]);
-//                parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
             }
         }
         if (kind == 'temperature') {
@@ -879,7 +874,6 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
 			$('.scb_f_experiment_setup_new_set_up').prop('checked','checked');
         }
         state.experiment.last_view = state.last_view;
-        //state.assignments.last_step = 4;
 
         if (state.mode == 'readonly') {
             $('.scb_s_experiment_setup_table_add_samples_dialog').hide();

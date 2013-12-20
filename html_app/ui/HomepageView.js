@@ -49,70 +49,7 @@ scb.ui.static.HomepageView.register = function(workarea) {
         alert( "under construction!");
     });
 	
-	scb.utils.off_on(workarea, 'click', '.scb_f_contact', function (e){
-		
-		scb.utils.off_on(workarea, 'click', '.scb_f_contact_close_button', function () {
-			$('.scb_s_contact_dialog').detach();
-			
-			$('.scb_f_contact_submit_button').submit(function(){
-				scb_ui.static.MainFrame.refresh();
-			});
-		});
-	});
-	
-    scb.utils.off_on(workarea, 'click', '.scb_f_create_student_account', function (e) {
-    	$(workarea).append(scb_auth.signup({}));
-        //document.location = '/accounts/signup';
-        
-		scb.utils.off_on(workarea, 'click', '.scb_f_signup_close_button', function () {
-			$('.scb_s_signup_dialog').detach();
-		});
-       $('.iframe').load(function(){
-				var iframe = document.getElementsByTagName('iframe')[0];
-				var content = (iframe.contentDocument || iframe.contentWindow);
-				content.body.style.fontSize = '90%';
-				content.body.style.fontFamily = "sourcesanspro-bold, Trebuchet MS, Helvetica, Arial, Verdana, sans-serif";
-			    var inputs = content.getElementsByTagName('button');
- 				$(inputs).css('font-family', 'Trebuchet MS, sans-serif');
-				var fieldset = content.querySelectorAll('fieldset');
-				$(fieldset).children().wrap('<p></p>');
-				var texts = content.querySelectorAll('input');
-				$(texts).attr('placeholder', '');
-				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
-				
-				var iframe = $('.iframe').contents();
-				iframe.find('input[type="checkbox"]').css('height', '12px');
-				iframe.find('a:contains("member")').click(function(){
-					$('.iframe').load(function(){
-						
-						$('.scb_s_login_form > div').text('SIGN UP');
-					});
-				});
-				iframe.find('a:contains("Password")').click(function(){
-					$('.iframe').load(function(){
-						
-						$('.scb_s_login_form > div').text('RESET PASSWORD');
-					});
-				});
-				
-				iframe.find('a:contains("Back")').click(function(){
-					$('.iframe').load(function(){
-						
-						$('.scb_s_login_form > div').text('SIGN IN');
-					});
-				});
-				
-				iframe.find(".primaryAction").click(function(){
-						   $('.iframe').load(function(){
-						   	  var profile = $('.iframe').contents();
-						   	  //console.log(profile);
-						   	  if(profile[0].body.textContent.indexOf('profile') >0){
-						   	  	  parent.document.location.reload();
-							   	  }
-						   });
-					});
-			});
-    });
+
     scb.utils.off_on(workarea, 'click', '.scb_f_instructor_resources', function (e) {
         alert( "under construction!");
     });

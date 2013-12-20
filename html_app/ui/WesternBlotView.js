@@ -34,7 +34,6 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (
 	}
 	else{
 		lysate_type= $(element).attr('value');
-    	//lysate_type = $(element).val();
     }
     if (lysate_type == '') {
         return;
@@ -97,8 +96,6 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
     }
     
     
-    
-    //parsed.state.view = 'select_technique';
     delete parsed.state.skip_hash_update;
     scb.ui.static.MainFrame.refresh(parsed.state);
 
@@ -107,7 +104,6 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
 
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (element, event) {
-	//event.preventDefault();
     var parsed = scb.ui.static.WesternBlotView.parse(element);
     parsed.experiment.last_scroll=document.body.scrollTop;
     if (parsed.redisplay) {
@@ -165,7 +161,6 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     	$('body').css('overflow', 'hidden');
     	$.jqDialog.alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 
-//         alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.");
 			    	
 
     }
@@ -176,7 +171,6 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
 		$('.scb_s_lysate_prepare_text').parent().parent().css('border', '4px solid white');	
 		$('.scb_s_lysate_prepare_text').parent().parent().css('border-radius', '14px');	
 		$('.scb_s_lysate_prepare_text').parent().css('margin', '0px');	
-//         alert("Please select at least 1 lysate to prepare.");
 
     }
     else {
@@ -329,7 +323,6 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot= function(elem
 		parsed.western_blot.parent.start_tabs_index = 1;
 	}
 	else if (parsed.western_blot.parent.list.length >4)
-		//parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.start_tabs_index +1;
 		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.length-3;
 
 	scb.ui.static.MainFrame.refresh(parsed.state);
@@ -488,7 +481,6 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
 				item.css('z-index', '').css('top', '').css('position', '');
 				item.insertBefore(prev);
 			});
-		//$($('.markedLi')[0]).simulateDragSortable({ move: -1,  placeHolder: '.ui-sortable-holder' });
     	scb.ui.static.WesternBlotView.scb_s_western_blot_sort_up_button($('.markedLi')[0]);
 
 		
@@ -505,7 +497,6 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
 			item.css('z-index', '').css('top', '').css('position', '');
 			item.insertAfter(next);
 		});
-		//$($('.markedLi')[0]).simulateDragSortable({ move: 1,  placeHolder: '.ui-sortable-holder' });
     	scb.ui.static.WesternBlotView.scb_s_western_blot_sort_down_button($('.markedLi')[0]);
 
 
@@ -619,18 +610,10 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             $('canvas', $('.scb_s_western_blot_samples_gel_area')).hide();
         }
 
-//        if (rows_state.valid >= (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
-//            $('.scb_f_western_blot_sample_active').attr('disabled', 'disabled');
-//            $('.scb_f_western_blot_select_lysate_type').attr('disabled', 'disabled');
-//            $('.scb_f_western_blot_sample_active[checked="checked"]').removeAttr('disabled');
-//
-//        }
-
 		state.western_blot.parent.selected_id = state.western_blot.id;
 
         state.experiment.last_view = 'western_blot';
 
-        //state.assignments.last_step = 6;
 		$('ol.scb_s_western_blot_choose_samples_order_list').sortable();
 		
 		_.each($(".scb_s_experiment_step_button"), function (e) {
@@ -642,7 +625,6 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		$(".scb_s_western_blot_selected").keypress(function(e){ return e.which != 13; });
 		var elem = document.getElementById('slider');
 		window.mySwipe = Swipe(elem, {
-  			//auto: 1000,
   			continuous: false,
   			disableScroll: true,
   			transitionEnd: function(index, element) { 

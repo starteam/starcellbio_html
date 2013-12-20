@@ -49,7 +49,6 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
         alert("INVALID ELEMENT!");
     }
 
-    //var sample_kind = $(element).val();
     var sample_kind = $(element).attr('value');
     if (sample_kind == '') {
         return;
@@ -84,20 +83,6 @@ scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     if (rows_state && rows_state.valid < 1) {
         	$('body').css('overflow', 'hidden');
 
-//     	$.jqDialog.confirm("No samples selected. Would you like to continue?",
-// 			function() {    
-// 				    	$('body').css('overflow', 'visible');
-// 
-// 				parsed.facs.sample_prepared = true;
-//     			scb.ui.static.MainFrame.refresh();
-//     		},// callback function for 'YES' button
-// 			function() {
-// 					    	$('body').css('overflow', 'visible');
-// 
-// 					return;
-// 			}		// callback function for 'NO' button
-// 		);
-// 		
 
     	$.jqDialog.alert("<h1 class='scb_s_lysate_prepare_text'>Please select at least 1 sample to prepare.</h1>", function() {$('#jqDialog_box').css('border', '2px solid rgb(5, 151, 137)'); $('#jqDialog_box').css('border-radius', '6px'); $('#jqDialog_content').css('margin', '10px');		$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 		$('.scb_s_lysate_prepare_text').parent().parent().css('border', '4px solid white');	
@@ -263,11 +248,7 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
     if (parsed.facs.apply_dna_analysis_to_all) {
         _.each(parsed.facs.lanes_list.list, function (facs_lane) {
             facs_lane.canvas_metadata_analysis.points = JSON.parse(JSON.stringify(parsed.facs_lane.canvas_metadata_analysis.points));
-            //    facs_lane.canvas_metadata_analysis.raw_data = _.clone(parsed.facs_lane.canvas_metadata_analysis.raw_data ? parsed.facs_lane.canvas_metadata_analysis.raw_data : {data: []});
-//            scb.ui.static.FacsView.reevaluate_metadata({
-//                facs: parsed.facs,
-//                facs_lane: facs_lane
-//            });
+
             scb.ui.static.FacsView.evaluate_chart({
                 facs: parsed.facs,
                 facs_lane: facs_lane,
@@ -302,7 +283,6 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 		parsed.facs.parent.start_tabs_index = 1;
 	}
 	else if (parsed.facs.parent.list.length >4)
-		//parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index +1;
 		parsed.facs.parent.start_tabs_index = parsed.facs.parent.length-3;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
@@ -333,11 +313,6 @@ scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     		parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index+1;
     	else parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index-1;
     }
-    
-    
-    
-    
-    //parsed.state.view = 'select_technique';
     delete parsed.state.skip_hash_update;
     scb.ui.static.MainFrame.refresh(parsed.state);
 
@@ -489,9 +464,7 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
         }
         range(pts);
     }
-//    if (data.length == 0) {
     data.push({data: raw_data.data, grid: {show:false}, xaxis: {tickSize: 5}, lines: {show: true, fill: false}});
-//    }
     if (facs_lane.canvas_metadata) {
         facs_lane.canvas_metadata.data = data;
     }
@@ -554,7 +527,6 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                         state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to)});
                     }
                     point_to_edit = null;
-                    //state.facs_lane.canvas_metadata_analysis.points.push(Math.round(to));
                     scb.ui.static.FacsView.reevaluate_metadata(state);
                     state.facs.apply_dna_analysis_to_all = false;
                     from = NaN;
@@ -602,16 +574,13 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     var left = from_point.left > to_point.left;
                     var styles = {
                         position: 'absolute',
-                        //top: point_to_edit ? Math.min(from_point.top, to_point.top) + "px" : "0px",
                         top: '0px',
                         left: Math.min(from_point.left, to_point.left) + "px",
-                        //height: point_to_edit ? '50px' : "300px" , // Math.abs(from_point.top - to_point.top) + "px",
                         height: '310px',
                         color:point_to_edit? point_to_edit.c : '#808080',
                         width: Math.abs(from_point.left - to_point.left) + "px",
                         'border-left': (point_to_edit ? ( left ? '2px solid ' + point_to_edit.c : '1px solid white' ) : '2px dashed #a0a0a0'),
                         'border-right': (point_to_edit ? ( !left ? '2px solid ' + point_to_edit.c : '1px solid white') : '2px dashed #a0a0a0'),
-                        //'border-bottom': (point_to_edit ? ('1px solid ' + point_to_edit.c) : '0px dashed #a0a0a0'),
                         'vertical-align': 'center',
                     }
                     console.info(styles);
@@ -644,7 +613,6 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     var to = px;
                     to = to > 0 ? to : 0;
                     state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to)});
-                    //state.facs_lane.canvas_metadata_analysis.points.push(Math.round(to));
                     scb.ui.static.FacsView.reevaluate_metadata(state);
                     state.facs.apply_dna_analysis_to_all = false;
                     from = NaN;
@@ -777,7 +745,6 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
                 scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
             }
         }
-		//state.assignments.last_step = 6;
         if (state.facs.selected_lane && state.facs.selected_lane.canvas_metadata_analysis.points.length > 0) {
         	if (!scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state) {
                 $('.scb_s_facs_tools_instructions_followup').hide();

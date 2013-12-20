@@ -4,7 +4,6 @@ scb.ExperimentList = function scb_ExperimentList(data, context, parent) {
 	var self = this;
 	self.parent = parent;
 	scb.ModelHelpers.common_list_code(self, data, scb.Experiment, context, self);
-	//self.sort_order = 'reverse';
 
 	self.start = function(d) {
 		d = ( typeof (d) == 'undefined' ? {} : d);

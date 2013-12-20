@@ -277,21 +277,6 @@
                 {param lane:$r/}
                 {/call}
             </td>
-<!-- 
-            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border scb_s_experiment_setup_table_border'>
-                {if $r.kind == 'existing'}
-                <button class="scb_f_microscopy_sample_remove" microscopy_id='{$microscopy.id}'
-                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
-                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>&#215;
-                </button>
-                {else}
-                <button class="scb_f_microscopy_sample_remove"
-                disabled="disabled">&#215;
-                </button>
-
-                {/if}
-            </td>
- -->
             <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border'>
 
             </td>
@@ -308,22 +293,6 @@
             </td>
         </tr>
         
-        
-<!-- 
-        <tr>
-            <td colspan='4'>
-        		<div class="scb_s_western_blot_green_line"></div>
-        	</td>
-        </tr>
-        <tr class='scb_s_western_blot_samples_select_all_rel'>
-        	<td colspan='2'>
-                <button class='scb_f_microscopy_sample_active_all'>SELECT ALL</button>
-            </td>
-        	<td colspan='2' align='right'>
-                <button class='scb_f_microscopy_sample_inactive_all'>CLEAR ALL</button>
-            </td>
-        </tr>
- -->
         {else}
         <tr class='scb_s_microscopy_samples_select_all_abs'>
         	<td colspan='1'>
@@ -358,11 +327,6 @@
 @param rows
 */
 {template .prepare_slide}
-<!-- 
-{call .display_m_progress}
-    {param step:$microscopy.slide_type?3:2/}
-{/call}
- -->
 <div class='scb_s_microscopy_tab_content_slide'>
 {if $microscopy.samples_finished}
 {call .display_m_progress}
@@ -378,14 +342,6 @@
         Samples
     </div>
 
-    <!--<
-    div class='scb_s_microscopy_samples_heading'>
-        Samples
-    </div>
-    <div class='scb_s_microscopy_choose_samples_note'>
-        NOTE: You can reorder samples by dragging and dropping into new order
-    </div>
-    -->
     
     <div class='scb_s_microscopy_choose_samples_order'>
         <ol class='scb_s_microscopy_choose_samples_order_list' >

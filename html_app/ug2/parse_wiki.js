@@ -33,15 +33,11 @@ $.get( "user_guide.html", function(data) {
 		while(nextN!=null && nextN.className!='heading'){
 			var next = nextN.nextElementSibling;
 			if(nextN.className =='subheading'){
-				//bindToggle($(nextN).children('span'));
 				$(nextN).children('a').attr('name', 'scb-s-help-sublink-'+counter);
 				counter++;
 				nextN.style.textIndent = '50px';
 				var nextL = nextN.nextElementSibling;
 				while(nextL != null && nextL.className!='subheading' && nextL.className!='heading'){
-					//nextL.style.marginLeft = '100px';
-					//nextL.style.color = 'red';
-					//nextL.style.display = 'none';
 					var temp = nextL.nextElementSibling;
 					$(nextN).append(nextL);
 					nextL = temp;
@@ -50,7 +46,6 @@ $.get( "user_guide.html", function(data) {
 				$(nextN.previousElementSibling).append(nextN);
 			}
 			else if((nextN.tagName == 'P' && nextN.previousElementSibling.className =='heading') || nextN.tagName == 'UL' || nextN.tagName == 'OL' || nextN.className == 'SCB-Normal'){
-				//nextN.style.display = 'none';
 				$(nextN.previousElementSibling).append(nextN);
 			}
 			nextN=next;

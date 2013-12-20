@@ -11,7 +11,6 @@ scb.AssignmentList = function scb_AssignmentList(data, context) {
 	scb.ModelHelpers.common_list_code(self, data, proto, context, self);
 
 	self.selected_id = data.selected_id;
-//     scb.Utils.initialize_accessor_field(self,data,'last_step', 0, null, context);
 }
 
 scb.Assignment = function scb_Assignment(data, context, parent) {

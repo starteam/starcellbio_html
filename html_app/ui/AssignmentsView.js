@@ -187,11 +187,7 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
     self.show = function (state) {
         window.assignments = assignments;
         var workarea = gstate.workarea;
-        var last_step;
-        // if(assignments.selected && assignments.selected.experiments.list.length >0)
-//         	last_step = assignments.selected.experiments.selected.last_step;
-//         else
-        	last_step=1;
+        var last_step=1;
         var prev_step;
         if(assignments.selected.experiments.selected !=null)
         	prev_step=assignments.selected.experiments.selected.prev_step;
