@@ -37,7 +37,7 @@
   font-size: 13pt;
   letter-spacing: .5px;
 }
-.scb_s_login_dialog, .scb_s_logout_dialog, .scb_s_signup_dialog {
+.scb_s_login_dialog, .scb_s_logout_dialog {
   z-index: 99;
   position: absolute;
   background: white;
@@ -52,6 +52,9 @@
   top: 0;
   font-family: 'sourcesanspro-bold';
   font-size: 10pt;
+}
+.scb_s_signup_dialog {
+  height: 535px !important;
 }
 .scb_f_login_close_button, .scb_f_signup_close_button, .scb_f_logout_close_button {
   padding-top: 0;

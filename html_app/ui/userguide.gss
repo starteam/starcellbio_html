@@ -70,11 +70,46 @@
 	position: absolute;
 	top: 10px;
 	background: #6fc7a8;
-	left: 82px;
+	left: 78px;
 
  }
  
+  .nav_divider2{
+ 	display: inline-block;
+	height: 24px;
+	width: 2px;
+	position: absolute;
+	top: 10px;
+	background: #6fc7a8;
+	left: 155px;
+
+ }
+ 
+ 
+ 
+ 
 .scb_s_ug_home{
+	display: inline-block;
+	-webkit-appearance: none;
+	border: none;
+	background: transparent;
+	background-repeat: no-repeat;
+	background-image: url('../../images/header/scb_home_on.png');
+	width: 72px;
+	height: 26px;
+	color: black;
+	padding-left: 26px;
+	cursor: pointer;
+	font-family: 'sourcesanspro-semibold';
+	position: relative;
+	top: 4px;
+	left: 11px;
+	font-size: 10pt;
+}
+
+
+ 
+.scb_s_ug_back{
 	display: inline-block;
 	-webkit-appearance: none;
 	border: none;
@@ -276,7 +311,7 @@ position: absolute;
 }
 
 .nav_buttons{
-	width: 200px;
+	width: 217px;
 	position: relative;
 	height: 30px;
 	left: 20px;

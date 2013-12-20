@@ -588,6 +588,8 @@ input[type=radio]:disabled{
     margin-bottom: 20px;
 }
 
+
+
 .scb_s_facs_tools_analyze_data > thead >tr>td{
     font-family: 'sourcesanspro-semibold';
     font-size: 10pt;
@@ -604,17 +606,21 @@ input[type=radio]:disabled{
     padding-left:5px;
     border-right: 1px solid #e0e0e0;
 }
-
-
+.scb_s_facs_tools_instructions_followup_toggle{
+bottom: 34px;
+position: relative;
+left: 146px;
+}
 .scb_s_facs_tools_instructions_followup{
 	display:none;
-	right: 9px;
-	position: relative;
-}
-.scb_s_facs_tools_instructions_followup > ul{
- -webkit-padding-start: 20px;
- -moz-padding-start: 20px;
+	left: 536px;
+	position: absolute;
+	width: 205px;
+	background: white;
+	border: 1px solid black;
+	bottom: 331px;
+	z-index: 1;
+	
  text-align: left;
- list-style-type: disc;
  font-size:10pt;
 }

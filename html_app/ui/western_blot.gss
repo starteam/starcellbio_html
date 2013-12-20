@@ -428,7 +428,7 @@
     color: white;
     display: block;
     margin-right:2em;
-    background: linear-gradient(135deg,#8f9092 25%,#56575b 25%,#56575b 50%,#8f9092 50%,#8f9092 75%,#56575b 75%);
+    background: linear-gradient(135deg,#8f9092 25%,#d9d9d9 25%,#d9d9d9 50%,#8f9092 50%,#8f9092 75%,#d9d9d9 75%);
     background-size: 17px 17px;
 }
 
@@ -649,11 +649,10 @@ letter-spacing: .5px;
 
 .scb_s_western_blot_sortable_item{
 
-    background: rgba(27, 27, 23, 0.27);
+    background: #d9dadb;;
 	border-radius: 5px;
 	margin: 3px;
-	border: 1px solid black;
-	box-shadow: 6px 1px 11px -1px gray;
+	border: 1px solid gray;
 }
 
 

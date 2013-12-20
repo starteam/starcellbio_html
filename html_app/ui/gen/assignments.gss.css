@@ -201,10 +201,25 @@
 .scb_assignments_bottom_arrow_left {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  border: 1px solid gray;
+  border-right: none;
 }
 .scb_assignments_bottom_arrow_right {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  border: 1px solid gray;
+  border-left: none;
+}
+.scb_s_assignments_button_divider {
+  position: absolute;
+  display: inline;
+  width: 1px;
+  background: gray;
+  height: 41px;
+  z-index: 1;
+}
+.scb_s_assignments_print_assignment {
+  float: left !important;
 }
 .assignement_experiment_list {
   font-size: 11px;
@@ -230,7 +245,7 @@ ul>.scb_s_assignment_experiment_list_item_new_experiment {
 .scb_s_assignments_bottom_scroll {
   position: relative;
   display: inline-block;
-  left: 250px;
+  left: 277px;
 }
 .scb_s_assignments_sidebar_course {
   font-size: 14pt;

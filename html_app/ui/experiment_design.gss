@@ -142,7 +142,29 @@
     font-size:11pt;
     left: 11px;
 	position: relative;
+	width: 396px;
 }
+
+.scb_s_experiment_design_divider_1{
+	width:2px;
+	background: gray;
+	height: 100px;
+	display: inline-block;
+	position: relative;
+	right: 16px;
+	top: 32px;
+}
+
+.scb_s_experiment_design_divider_2{
+	width:2px;
+	background: gray;
+	height: 100px;
+	display: inline-block;
+	position: relative;
+	right: 16px;
+	top: 32px;
+}
+
 
 .scb_s_experiment_design_technique_wb {
     display:inline-block;

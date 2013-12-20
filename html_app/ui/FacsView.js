@@ -203,12 +203,12 @@ scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
     if (show) {
         jqDiv.slideDown();
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('HIDE INSTRUCTIONS');
+        $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
     }
     else {
         jqDiv.slideUp();
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('SHOW INSTRUCTIONS');
+        $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
     }
 }
@@ -219,12 +219,12 @@ scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status = function (sho
     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
     if (show) {
         jqDiv.show();
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('HIDE INSTRUCTIONS');
+        $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
     }
     else {
         jqDiv.hide();
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('SHOW INSTRUCTIONS');
+        $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
     }
 }

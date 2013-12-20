@@ -75,7 +75,9 @@ input{
 {% load i18n %}
 {% load uni_form_tags %}
 Your instructor should have provided you with a code that you need to enter below to register and use this StarCellBio tool.
-  Please contact your instructor if you have not received this code. You will receive an email to confirm your account.
+  Please contact your instructor if you have not received this code. You will receive an email to confirm your account. <br/>
+  <br/>
+  Your work will be saved in this account. 
 {% block content %}
 
 <!-- 
@@ -92,7 +94,7 @@ Your instructor should have provided you with a code that you need to enter belo
     
    <div class='course_code'>
     <label>COURSE CODE </label>
-    <input onclick='setStatus()' onkeyup="changeStatus()" id='course_code_input' name="CC"  placeholder=''/>
+    <input onfocus='setStatus()' onkeyup="changeStatus()" id='course_code_input' name="CC"  placeholder=''/>
 	</div>
     
 <div id='code_status' style='visibility:hidden; display:inline'> <span style='color:red'>&#215; </span>&nbsp; This is not a valid code. </div>

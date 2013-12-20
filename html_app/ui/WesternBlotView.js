@@ -192,7 +192,6 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    //TODO: 1st things first -- we needs to save NEW order
 
     parsed.western_blot.marker_loaded = true;
     scb.ui.static.MainFrame.refresh();
@@ -204,7 +203,6 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input = functio
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    //TODO: 1st things first -- we needs to save NEW order
 
     parsed.western_blot.gel_type = $(element).val();
     scb.ui.static.MainFrame.refresh();
@@ -236,10 +234,6 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
 					return;
 			}		// callback function for 'NO' button
 		);
-//         var r = confirm("The protein size marker has not been loaded. Would you like to continue?")
-//         if (r == false) {
-//             return;
-//         }
     }
     else{
     	parsed.western_blot.is_transfered = true;

@@ -79,6 +79,9 @@
   width: 85px;
   border: none;
 }
+.scb_s_facs_selected:hover, .scb_s_western_blot_selected:hover, .scb_s_microscopy_selected:hover {
+  outline: 1px solid blue;
+}
 .scb_s_movable_item:hover {
   background: darkgray;
   position: relative;

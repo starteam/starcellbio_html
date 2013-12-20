@@ -54,9 +54,18 @@
   position: absolute;
   top: 10px;
   background: #6fc7a8;
-  left: 82px;
+  left: 78px;
 }
-.scb_s_ug_home {
+.nav_divider2 {
+  display: inline-block;
+  height: 24px;
+  width: 2px;
+  position: absolute;
+  top: 10px;
+  background: #6fc7a8;
+  left: 155px;
+}
+.scb_s_ug_home, .scb_s_ug_back {
   display: inline-block;
   -webkit-appearance: none;
   border: none;
@@ -232,7 +241,7 @@
   resize: none;
 }
 .nav_buttons {
-  width: 200px;
+  width: 217px;
   position: relative;
   height: 30px;
   left: 20px;

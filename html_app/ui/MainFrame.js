@@ -404,6 +404,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     					$(".help_search_input").val("");	
 			});
 			
+			
+			$(".scb_s_ug_back").click(function(){
+				$('iframe')[0].contentWindow.history.back();
+			});
+			
+			
+			
 			$(".main_popout").click(function(){
 					var popout_string = "";
 					var visible=	$('iframe').contents().find('.scb_s_section_inactive:visible');
@@ -496,6 +503,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					$('.iframe').load(function(){
 						
 						$('.scb_s_login_form > div').text('Sign Up');
+						$('.scb_s_login_dialog').addClass('scb_s_signup_dialog');
+						$('.iframe').css('height', '482px'); 
 					});
 				});
 				iframe.find('a:contains("Password")').click(function(){
@@ -515,7 +524,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				iframe.find(".auth_submit_button").click(function(){
 						   var mask = document.createElement('div');
 						   mask.className='overlay';
-						   $(mask).css({'width': '100%','height': '100%','position': 'absolute', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
+						   $(mask).css({'width': '100%','height': '100%','position': 'fixed', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
 					       $('body').prepend(mask);
 					       var progress_icon = document.createElement('img');
 					       progress_icon.src = '../../../images/homepage/ajax_loader.gif';
@@ -747,9 +756,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					return;
                 }
             } 
-//             else{
-//             	parsed.western_blot = parsed.experiment.western_blot_list.list[0];
-//             }
             
             if (parsed.western_blot.is_transfered) {
                 state.view = 'western_blot_gel';
@@ -768,23 +774,34 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'microscopy'){
 
-        	if(!parsed.microscopy) {
-        		var microscopy = parsed.experiment.microscopy_list.start({});
-        		state.microscopy_id=microscopy.id;
-        		var History = window.History;
-        		if (History.enabled){
-        			History.replaceState("New MICRO", "New MICRO", '#' + $.param(state));
-        		}
-        		state.onhashchange.true;
-        		self.show(state);
-        		return;
-        	}
-        	self.sections.microscopy.show({
-        		workarea: workarea,
-        		assignment: parsed.assignment,
-        		experiment: parsed.experiment,
-        		microscopy: parsed.microscopy
-        	});
+
+			var id_list = [];
+			for( var x=0; x < parsed.experiment.microscopy_list.list.length; x++){id_list.push(parsed.experiment.microscopy_list.list[x].id);}
+			
+            if (!parsed.microscopy) {
+            	if(state.microscopy_id && id_list.indexOf(state.microscopy_id)<0 && parsed.experiment.microscopy_list.list.length >0){
+            		parsed.microscopy = parsed.experiment.microscopy_list.list[state.index];
+
+            	}
+            	else{
+					delete state.onhashchange;
+					var microscopy = parsed.experiment.microscopy_list.start({});
+					state.microscopy_id = microscopy.id;
+					var History = window.History;
+					if (History.enabled) {
+						History.replaceState("New FACS", "New FACS", '#' + $.param(state));
+					}
+					state.onhashchange = true;
+					self.show(state);
+					return;
+                }
+            }
+            self.sections.microscopy.show({
+                workarea: workarea,
+                assignment: parsed.assignment,
+                experiment: parsed.experiment,
+                microscopy: parsed.microscopy
+            });
         }
         if (state.view == 'western_blot_gel') {
 

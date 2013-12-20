@@ -88,12 +88,15 @@ Assignment description
         	{/foreach} 
         	<div class='scb_s_assignments_bottom_scroll'>
    				<img class = 'scb_s_assignment_header_img_left scb_assignments_bottom_arrow_left'  assignment_id='{$assignments.selected.id}'  src='../../images/homepage/scb_gray_left_arrow_inactive.png' role='button' aria-label='Move one section to the left'>
+   				<div class='scb_s_assignments_button_divider'></div>
 				<img class = 'scb_s_assignment_header_img_right scb_assignments_bottom_arrow_right'  assignment_id='{$assignments.selected.id}'  src='../../images/homepage/scb_gray_right_arrow_active.png' role='button' aria-label='Move one section to the right'>
 			</div>
     
         </div>
     <br/>
-        <span class="scb_assignments_new_experiment scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignments.selected.id}" aria-label='New Experiment' role='button'> START EXPERIMENTS &nbsp; <span aria-hidden="true" tabindex="-1">+</span></span>
+       {if $assignments.selected.id=='decusability'} <span class=" scb_s_assignments_print_assignment scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignments.selected.id}" aria-label='New Experiment' role='button'> PRINT ASSIGNMENT &nbsp;</span>{/if}
+
+        <span class="scb_assignments_new_experiment scb_f_open_experiment scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignments.selected.id}" aria-label='New Experiment' role='button'> START EXPERIMENTS &nbsp; &#9654;</span>
 
 	    {/if}
 </div>

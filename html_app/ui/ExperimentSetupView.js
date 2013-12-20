@@ -272,12 +272,13 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 			else{
 				var mask = document.createElement('div');
 				mask.className='overlay';
-				$(mask).css({'width': '100%','height': '100%','position': 'absolute', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
+				$(mask).css({'width': '100%','height': '100%','position': 'fixed', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
 				$('body').prepend(mask);
 
 				$(element).attr('href', 'javascript:void(0)');
 				$.jqDialog.content("<div class='scb_s_warning_dialog'><h1>Confirm Set-Up</h1><p>"+
 				"Once you confirm the set-up of this experiment and run it, you cannot go back to edit this experiment's set-up. To go back and edit your set-up, click <b>EDIT SET-UP</b> or click on <b>CONFIRM SET-UP AND RUN</b> to proceed."+
+				"<br/> To create a new experiment set-up, select <b>New Experiment +</b> above the navigation tool bar."+
              "</p><a class='scb_s_navigation_button scb_f_open_select_technique' href='#view=select_technique&assignment_id="+parsed.assignment.id+"&experiment_id="+parsed.experiment.id+"'"+
 			   "assignment_id='"+parsed.assignment.id+"' experiment_id='"+parsed.experiment.id+"'>CONFIRM SET-UP & RUN &nbsp; &#9654;</a><br/>"
 				+"<span class='scb_s_navigation_button scb_f_open_experiment_setup' href='#view=experiment_setup&experiment_id="+parsed.experiment.id+"&assignment_id="+parsed.assignment.id+"'>"+

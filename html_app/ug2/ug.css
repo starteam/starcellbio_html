@@ -110,6 +110,11 @@ body{
 	vertical-align: initial;
 }
 
+.anchors{
+	color: inherit! important;
+text-decoration: none !important;
+}
+
 .resize_copy{
 	height: auto !important;
 	width: auto !important;

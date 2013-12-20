@@ -36,49 +36,11 @@ scb.ui.static.HomepageView.register = function(workarea) {
     	var pop_string = $(this).attr('value');
     	var url = "static/ref_lib/full_library.html#"+pop_string;
 		var popoutWindow =window.open("static/ref_lib/full_library.html#"+pop_string);
-// 		function goToLink(){
-// 			popoutWindow.location =  "static/ref_lib/full_library.html#"+pop_string;
-// 		}
-// 		popoutWindow.addEventListener('load', goToLink, true);
-		
-        setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#"+pop_string; },80);
 
     });
     
     
-    scb.utils.off_on(workarea, 'click', '.learn_more_western_blot', function (e) {
-		var popoutWindow =window.open("static/ref_lib/full_library.html#WesternBlotting");
-		
-		popoutWindow.addEventListener('load', doSomething, true);
-		function doSomething(){
-			popoutWindow.location = "static/ref_lib/full_library.html#WesternBlotting";
-		}
-		//setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#WesternBlotting"; },80);
 
-    });
-    
-    
-    scb.utils.off_on(workarea, 'click', '.learn_more_facs', function (e) {
-    	var popoutWindow =window.open("static/ref_lib/full_library.html#FlowCytometry");
-    			
-		popoutWindow.addEventListener('load', doSomething, true);
-		function doSomething(){
-			popoutWindow.location =  "static/ref_lib/full_library.html#FlowCytometry";
-		}
-		//setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#FlowCytometry"; },80);
-
-    });
-    
-    scb.utils.off_on(workarea, 'click', '.learn_more_microscopy', function (e) {
-        var popoutWindow =window.open("static/ref_lib/full_library.html#Microscopy");
-        
-        popoutWindow.addEventListener('load', doSomething, true);
-		function doSomething(){
-			popoutWindow.location =  "static/ref_lib/full_library.html#Microscopy";
-		}
-		//setTimeout( function(){popoutWindow.location = "static/ref_lib/full_library.html#Microscopy"; },80);
-
-    });
 
 	scb.utils.off_on(workarea, 'click', '.scb_s_homepage_see_more_button', function (e) {
        	alert( "under construction!");

@@ -46,7 +46,7 @@ $.get( "ref_library.html", function(data) {
 				//bindToggle($(nextN).children('span'));
 				$(nextN).children('a').attr('name', $(subheadersp[counter]).text().trim().replace(/([A-Z]\.)|[\.\(\)\s\d]/g,''));
 				counter++;
-				nextN.style.textIndent = '50px';
+				nextN.style.textIndent = '0px';
 				var nextL = nextN.nextElementSibling;
 				while(nextL != null && nextL.className!='subheading' && nextL.className!='heading'){
 					if(nextL.className=='heading3'){
@@ -57,7 +57,7 @@ $.get( "ref_library.html", function(data) {
 								while(next5N !=null && next5N.className!='heading5' && next5N.className!='heading3' && next5N.className!='subheading' && next5N.className!='heading'){
 									console.log('********'+next5N.className+'***********')
 									var temp5=next5N.nextElementSibling;
-									next5N.style.marginLeft = '200px';
+									next5N.style.marginLeft = '75px';
 									$(next3N).append(next5N);
 									next5N = temp5;
 									temp3 = temp5;
@@ -68,7 +68,7 @@ $.get( "ref_library.html", function(data) {
 							}
 							else{
 								var temp3 = next3N.nextElementSibling;
-								next3N.style.marginLeft = '150px';
+								next3N.style.marginLeft = '50px';
 								$(nextL).append(next3N);
 								next3N = temp3;
 							}
@@ -79,7 +79,7 @@ $.get( "ref_library.html", function(data) {
 					}
  					else{
 						var temp = nextL.nextElementSibling;
-						nextL.style.marginLeft = '100px';
+						nextL.style.marginLeft = '0px';
 						//nextL.style.color = 'red';
 						//nextL.style.display = 'none';
 						$(nextN).append(nextL);
@@ -106,7 +106,7 @@ $.get( "ref_library.html", function(data) {
 
 	//indent bullets
 	for(var x = 0; x < lists.length; x++){
-		lists[x].style.marginLeft = '100px';
+		lists[x].style.marginLeft = '0px';
 		
 	}
 	var footnotes = $('.SCB-Footer');
@@ -119,7 +119,7 @@ $.get( "ref_library.html", function(data) {
 	var back_to_top= document.createElement('a');
 	back_to_top.href = "#";
 	back_to_top.className = "back_to_top";
-	back_to_top.style.color = 'dodgerblue';
+	back_to_top.style.color = 'blue';
 	back_to_top.innerHTML='Back to Top<br/><br/>';
 	$('.subheading').append(back_to_top);
 	$('.heading3').append(back_to_top);
@@ -129,9 +129,13 @@ $.get( "ref_library.html", function(data) {
 	var divider = document.createElement('span')
 	divider.className = 'rl_dividing_line';
 	$('.subheading').append(divider);
-	
+	$($('.SCBTOC1')[2]).after('<br/><div class="dividing_line"></div>');
 	$('.body').prepend('<span class="rl_main_title">Reference Library</span>');
-	
+	$('p a[name="_ftn1"]').parent().contents().not('a[name="_ftn1"]').wrap("<a target='_blank' href='http://www.ncbi.nlm.nih.gov/pubmed/?term=%5B1%5D+Eslami%2C+A.%2C+Lujan%2C+J.+Western+Blotting%3A+Sample+Preparation+to+Detection.+J.+Vis.+Exp.+(44)%2C+e2359%2C+doi%3A10.3791%2F2359+(2010)'></a>");
+	$('.heading3 ul').css('margin-left', '25px');
+	var x = window.location.hash; 
+	window.location.hash = ''; 
+	setTimeout( function() { window.location.hash = x ;} , 20); 
 }).done(function() { window.hash = window.location.hash});
 
 }

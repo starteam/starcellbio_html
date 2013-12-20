@@ -56,6 +56,11 @@ scb.ui.static.AssignmentsView.scb_assignments_header_link_wrapper = function (el
 		}
         
        parsed.assignment.last_instruction = index;
+     	var assignment_window = $('.scb_s_assignment_scroll')[0];
+        	if(assignment_window.scrollHeight == assignment_window.clientHeight)
+        	$('.scb_s_assignments_bottom_scroll').css({'top': '556px', 'position': 'absolute','left': '293px'});
+			else
+			$('.scb_s_assignments_bottom_scroll').css({'top': '0', 'position': 'relative','left': '277px'});
 
 }
 
@@ -96,6 +101,12 @@ scb.ui.static.AssignmentsView.scb_s_assignment_header_img_left = function (eleme
 			}
 			$('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/2)-15+'px');
 			parsed.assignment.last_instruction = index-1;
+			     	var assignment_window = $('.scb_s_assignment_scroll')[0];
+        	if(assignment_window.scrollHeight == assignment_window.clientHeight)
+        	$('.scb_s_assignments_bottom_scroll').css({'top': '556px', 'position': 'absolute','left': '293px'});
+			else
+			$('.scb_s_assignments_bottom_scroll').css({'top': '0', 'position': 'relative','left': '277px'});
+
 }
 
 
@@ -138,6 +149,11 @@ scb.ui.static.AssignmentsView.scb_s_assignment_header_img_right = function (elem
        	$('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/2)-15+'px');
 		parsed.assignment.last_instruction = index+1;
 		
+     	var assignment_window = $('.scb_s_assignment_scroll')[0];
+        	if(assignment_window.scrollHeight == assignment_window.clientHeight)
+        	$('.scb_s_assignments_bottom_scroll').css({'top': '556px', 'position': 'absolute','left': '293px'});
+			else
+			$('.scb_s_assignments_bottom_scroll').css({'top': '0', 'position': 'relative','left': '277px'});
 
 }
 
@@ -155,6 +171,10 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_assignments_new_experiment', function (e) {
 		 $('.scb_f_experiments_step_link')[0].click();
+    });
+     scb.utils.off_on(workarea, 'click', '.scb_s_assignments_print_assignment', function (e) {
+		 var pdfwindow = window.open("../../pdf/decusability_assignment.pdf");
+		 pdfwindow.print();
     });
 };
 
@@ -184,6 +204,7 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
             context: gstate.context,
             courses: courses,
         }));
+        
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
         $('.scb_assignments_header_link_wrapper').css('width' , (579/assignments.selected.template.instructions.length)-34+ 'px');
@@ -192,6 +213,12 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
         $('.scb_s_ref_info_link').click(function(){
         	$('.scb_assignments_header_link_wrapper[value="Reference Material"]').click();
         });
+         var assignment_window = $('.scb_s_assignment_scroll')[0];
+        	if(assignment_window.scrollHeight == assignment_window.clientHeight)
+        	$('.scb_s_assignments_bottom_scroll').css({'top': '556px', 'position': 'absolute','left': '293px'});
+			else
+			$('.scb_s_assignments_bottom_scroll').css({'top': '0', 'position': 'relative','left': '277px'});
+
     }
 
 }
