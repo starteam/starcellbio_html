@@ -191,6 +191,53 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element
     scb.ui.static.MainFrame.refresh();
 }
 
+
+scb.ui.static.WesternBlotView.populate_wells = function (rows, state) {
+//, gstate
+    //TODO: 1st things first -- we needs to save NEW order
+
+    state.western_blot.wells_loaded = true;
+    var canvas = $('.scb_s_western_blot_gel')[0];
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+
+    var g = canvas.getContext('2d');
+
+    function getImage(index) {
+        return $('img', '.scb_wells')[index];
+    }
+
+    g.drawImage(getImage(15), 0, 0);
+
+    var i = 0;
+    _.each(rows, function (elem, index, array) {
+        if (elem.is_sample_enabled) {
+            g.drawImage(getImage(i++), 0, 0);
+        }
+    });
+    if (state.western_blot.marker_loaded) {
+        g.drawImage(getImage(i), 0, 0);
+    }
+}
+
+scb.ui.static.WesternBlotView.draw_wells=function(rows,state){
+    var canvas = $('.scb_s_western_blot_gel')[0];
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+
+    var g = canvas.getContext('2d');
+
+    function getImage(index) {
+        return $('img', '.scb_wells')[index];
+    }
+
+    g.drawImage(getImage(15), 0, 0);
+}
+
+
+
+
+
 scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
     parsed.experiment.last_scroll=document.body.scrollTop;
@@ -258,47 +305,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_inactive_all = function 
 
 }
 
-scb.ui.static.WesternBlotView.populate_wells = function (rows, state) {
-//, gstate
-    //TODO: 1st things first -- we needs to save NEW order
 
-    state.western_blot.wells_loaded = true;
-    var canvas = $('.scb_s_western_blot_gel')[0];
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
-
-    var g = canvas.getContext('2d');
-
-    function getImage(index) {
-        return $('img', '.scb_wells')[index];
-    }
-
-    g.drawImage(getImage(15), 0, 0);
-
-    var i = 0;
-    _.each(rows, function (elem, index, array) {
-        if (elem.is_sample_enabled) {
-            g.drawImage(getImage(i++), 0, 0);
-        }
-    });
-    if (state.western_blot.marker_loaded) {
-        g.drawImage(getImage(i), 0, 0);
-    }
-}
-
-scb.ui.static.WesternBlotView.draw_wells=function(rows,state){
-    var canvas = $('.scb_s_western_blot_gel')[0];
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
-
-    var g = canvas.getContext('2d');
-
-    function getImage(index) {
-        return $('img', '.scb_wells')[index];
-    }
-
-    g.drawImage(getImage(15), 0, 0);
-}
 
 scb.ui.static.WesternBlotView.scb_s_western_blot_left_western_blot = function(element, event){
 	var parsed = scb.ui.static.WesternBlotView.parse(element);

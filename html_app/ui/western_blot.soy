@@ -400,7 +400,7 @@
             assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>ADD MARKER
     </button>
     {/if}
-      {if $western_blot.wells_loaded == false}
+      {if $western_blot.wells_loaded == false and $western_blot.marker_loaded == true}
     <a class='scb_s_western_blot_load_all scb_s_navigation_button' western_blot_id='{$western_blot.id}'
                     assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">LOAD ALL</a>
    
@@ -512,7 +512,7 @@
 						<span class='scb_s_western_blot_video_heading'>Reminder:&nbsp;&nbsp;</span>
 						<span class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one&nbsp;</span><br/>
 						<span class='scb_s_western_blot_video_text_second'>lane must be reserved for the protein marker.&nbsp;</span><br/>
-s						
+						
 					</div>
 					<div>
 							<iframe height='124' width='187' class='scb_s_experiment_setup_video_box_vid'  src="//www.youtube.com/embed/u7VwmJw9Gbc" frameborder="0" allowfullscreen></iframe>
