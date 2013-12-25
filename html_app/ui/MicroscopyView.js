@@ -584,9 +584,6 @@ function init(state, draw, image_source){
 				this.stackBlur(state['blur']);
 				this.render(function(){
 				});
-// 				console.log('rendering...');
-// 				state['action'] = 'rendering';
-// 				$('.scb_s_microscope_status').text(state['action']);
 			});
 			ctx.drawImage(img, 0, 0);
 			draw(state);
@@ -600,9 +597,6 @@ function init(state, draw, image_source){
 				updateLensPosition(state, document.getElementsByTagName("canvas")[0], parseFloat($('.circle_lens').css('top')), parseFloat($('.circle_lens').css('left')))
 			}
       		});
-// 			add_sharpen_images(map);
-// 
-// 			add_5_sharpen_images(map);
 		}
 	}
 
@@ -735,7 +729,6 @@ function modify_state_blur(addition, state, direction){
 	var context = elements[1];
 	console.log('blur');
 	console.log(state['blur']);
-	
 	console.log('addition');
 	console.log(addition);
 	console.log('sharpen');
@@ -761,48 +754,8 @@ function modify_state_blur(addition, state, direction){
 	else {
 			blur_helper(state,context, canvas, addition);
 	}
-		
-	
-// 	if(state['blur'] > 100){
-// 		state['blur'] = 100;
-// 		blur_helper(state, context, canvas, addition);
-// 	}
-// 	if((state['blur']>0 && state['blur']<=100) || (state['sharpen']==0&&addition >0))
-// 		blur_helper(state,context,canvas,addition);
-// 	if ((state['sharpen']>0 && state['sharpen']<=100) || (state['blur']==0 && addition<0)){
-// 		//blur_helper(state,context,canvas,addition);
-// 		//sharpen(-addition, state);	
-// 	}
 }
 
-
-function blur_helper_abs(state, context, canvas, addition){
-	state['sharpen']=0;
-	state['display'] = state['orig'];
-	state['blur'] = Math.abs(state['blur'] + addition);
-	Caman(canvas, state['display'], function () {
-		this.brightness(state['brightness']);
-		this.stackBlur(state['blur']);
-		this.render(function(){
-			state['action'] = 'blur';
-
-			console.log('stackblur');
-			
-			$('.scb_s_microscope_status').text(state['action']);
-		});
-	
-		console.log('rendering...');
-		state['action'] = 'rendering';
-		
-		$('.scb_s_microscope_status').text(state['action']);
-
-
-	});
-	context.beginPath();
-	context.arc(150, 150, arc, 0, Math.PI *2, false);
-	context.clip();	
-	context.drawImage(state['orig'], state['xparam'], state['yparam']);
-}
 
 function blur_helper(state, context, canvas, addition){
 	state['sharpen']=0;
@@ -831,177 +784,6 @@ function blur_helper(state, context, canvas, addition){
 	context.clip();	
 	context.drawImage(state['orig'], state['xparam'], state['yparam']);
 }
-
-function modify_state_sharpen(addition, state){
-	var elements = reset_canvas();
-	var canvas = elements[0]; 
-	var context = elements[1];
-	console.log('sharpen addition');
-	console.log(addition);
-	state['sharpen'] = state['sharpen'] + addition;
-	if(state['sharpen'] > 100){
-		state['sharpen'] = 100;
-		state['display']=state['sharp']['images'][state['sharpen']];
-
-	}
-	else if (state['sharpen'] <5){
-		state['sharpen'] = 0;
-		state['display']=state['orig'];
-	}
-	else
-		state['display']=state['sharp']['images'][state['sharpen']];
-	
-	Caman(canvas, state['display'], function () {
-		this.brightness(state['brightness']);
-		this.stackBlur(state['blur']);
-		this.render(function(){
-			state['action'] = 'sharpen';
-			console.log('sharpen');
-			
-			$('.scb_s_microscope_status').text(state['action']);
-		});
-	
-		console.log('rendering...');
-		state['action'] = 'rendering';
-		
-		$('.scb_s_microscope_status').text(state['action']);
-
-	});
-	context.beginPath();
-	context.arc(150, 150, arc, 0, Math.PI *2, false);
-	context.clip();	
-	context.drawImage(state['display'], state['xparam'], state['yparam']);
-	
-}
-
-
-function add_sharpen_images(state){
-	var img = document.createElement('IMG');
-	img.src = 'images/microscopy/hi_s10.jpg';
-	img.onload=function(){
-		state['sharp']['images'][10] = img;
-		var img2 = document.createElement('IMG');
-		img2.src = 'images/microscopy/hi_s20.jpg';
-		img2.onload=function(){
-			state['sharp']['images'][20] = img2;
-			var img3 = document.createElement('IMG');
-			img3.src = 'images/microscopy/hi_s30.jpg';
-			img3.onload=function(){
-				state['sharp']['images'][30] = img3;
-				var img4 = document.createElement('IMG');
-				img4.src = 'images/microscopy/hi_s40.jpg';
-				img4.onload=function(){
-					state['sharp']['images'][40] = img4;
-					var img5 = document.createElement('IMG');
-					img5.src = 'images/microscopy/hi_s50.jpg';
-					img5.onload=function(){
-						state['sharp']['images'][50] = img5;
-						var img6 = document.createElement('IMG');
-						img6.src = 'images/microscopy/hi_s60.jpg';
-						img6.onload=function(){
-							state['sharp']['images'][60] = img6;
-							var img7 = document.createElement('IMG');
-							img7.src = 'images/microscopy/hi_s70.jpg';
-							img7.onload=function(){
-								state['sharp']['images'][70] = img7;
-								var img8 = document.createElement('IMG');
-								img8.src = 'images/microscopy/hi_s80.jpg';
-								img8.onload=function(){
-									state['sharp']['images'][80] = img8;
-									var img9 = document.createElement('IMG');
-									img9.src = 'images/microscopy/hi_s90.jpg';
-									img9.onload=function(){
-										state['sharp']['images'][90] = img9;
-										var img0 = document.createElement('IMG');
-										img0.src = 'images/microscopy/hi_s100.jpg';
-										img0.onload=function(){
-											state['sharp']['images'][100] = img0;
-											console.log('allloaded');
-										}
-
-									}
-
-								}
-
-							}
-
-						}
-
-					}
-
-				}
-
-			}
-
-		}
-	}
-	
-}
-
-
-function add_5_sharpen_images(state){
-	var img = document.createElement('IMG');
-	img.src = 'images/microscopy/hi_s5.jpg';
-	img.onload=function(){
-		state['sharp']['images'][5] = img;
-		var img2 = document.createElement('IMG');
-		img2.src = 'images/microscopy/hi_s15.jpg';
-		img2.onload=function(){
-			state['sharp']['images'][15] = img2;
-			var img3 = document.createElement('IMG');
-			img3.src = 'images/microscopy/hi_s25.jpg';
-			img3.onload=function(){
-				state['sharp']['images'][25] = img3;
-				var img4 = document.createElement('IMG');
-				img4.src = 'images/microscopy/hi_s35.jpg';
-				img4.onload=function(){
-					state['sharp']['images'][35] = img4;
-					var img5 = document.createElement('IMG');
-					img5.src = 'images/microscopy/hi_s45.jpg';
-					img5.onload=function(){
-						state['sharp']['images'][45] = img5;
-						var img6 = document.createElement('IMG');
-						img6.src = 'images/microscopy/hi_s55.jpg';
-						img6.onload=function(){
-							state['sharp']['images'][55] = img6;
-							var img7 = document.createElement('IMG');
-							img7.src = 'images/microscopy/hi_s65.jpg';
-							img7.onload=function(){
-								state['sharp']['images'][65] = img7;
-								var img8 = document.createElement('IMG');
-								img8.src = 'images/microscopy/hi_s75.jpg';
-								img8.onload=function(){
-									state['sharp']['images'][75] = img8;
-									var img9 = document.createElement('IMG');
-									img9.src = 'images/microscopy/hi_s85.jpg';
-									img9.onload=function(){
-										state['sharp']['images'][85] = img9;
-										var img0 = document.createElement('IMG');
-										img0.src = 'images/microscopy/hi_s95.jpg';
-										img0.onload=function(){
-											state['sharp']['images'][95] = img0;
-											console.log('allloaded');
-										}
-
-									}
-
-								}
-
-							}
-
-						}
-
-					}
-
-				}
-
-			}
-
-		}
-	}
-	
-}
-
 
 
 scb.ui.static.MicroscopyView.register = function (workarea) {
