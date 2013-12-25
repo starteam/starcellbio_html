@@ -312,6 +312,9 @@ var caman;
 
 var arc = 150;
 
+var difference;
+
+var isLeft = false;
 /*
 
 First call init 
@@ -357,7 +360,7 @@ function updateLensPosition(state,canvas, microslide_top, microslide_left){
 	
 	//Make sure to handle state later when you can test it
 	var taddition = ((microslide_top*10)/0.3);
-	var laddition = (((microslide_left-33))/0.3)*10;
+	var laddition = (((microslide_left-difference))/0.3)*10;
 	context.drawImage(state['cache']['image'], state['xparam'], state['yparam']);
 	console.log(laddition);
 	console.log(microslide_left);
@@ -369,11 +372,10 @@ function updateLensPosition(state,canvas, microslide_top, microslide_left){
 function draw(state){
 	var canvas=document.getElementsByTagName("canvas")[0];
 	
-	
+
 	
 	
 	document.onkeydown=function (e) {
-		
 		e = e || window.event;
 		if(state.action =='rendering'){
 				console.log('nope');
@@ -383,7 +385,7 @@ function draw(state){
 				// l arrow
 				e.preventDefault();
 				draw_lens('x', 10, state, document.getElementsByTagName("canvas")[0]);
-				if(parseInt($('.circle_lens').css('left'))-0.3 <= 33);
+				if(parseInt($('.circle_lens').css('left'))-0.3 <= difference);
 					$('.circle_lens').css('left', parseFloat($('.circle_lens').css('left'))-0.3+'px'); 
 				console.log('left')
 			}
@@ -399,7 +401,7 @@ function draw(state){
 				// r arrow
 				e.preventDefault();
 				draw_lens('x', -10, state, document.getElementsByTagName("canvas")[0]);
-				if(parseInt($('.circle_lens').css('left'))+0.3 <=  33+$('.microslide').width());
+				if(parseInt($('.circle_lens').css('left'))+0.3 <=  difference+ $('.microslide').width());
 					$('.circle_lens').css('left', parseFloat($('.circle_lens').css('left'))+0.3+'px'); 
 				
 				console.log('right');
@@ -434,28 +436,28 @@ function draw(state){
 				console.log('nope');
 		}
 		else
-		modify_state_blur(-10, state, modify_state_sharpen);
+		modify_state_blur(10, state, 'up');
 	});
 	$('#blurdown').click(function(){
 		if(state.action =='rendering'){
 				console.log('nope');
 		}
 		else
-		modify_state_blur(10, state, modify_state_sharpen);
+		modify_state_blur(-10, state, 'down');
 	});
 	$('#fblurup').click(function(){
 		if(state.action =='rendering'){
 				console.log('nope');
 		}
 		else
-		modify_state_blur(-5, state, modify_state_sharpen);
+		modify_state_blur(5, state, 'up');
 	});
 	$('#fblurdown').click(function(){
 		if(state.action =='rendering'){
 				console.log('nope');
 		}
 		else
-		modify_state_blur(5, state, modify_state_sharpen);
+		modify_state_blur(-5, state, 'down');
 	});
 	$('#scb_s_navigation_button_choose_slide_button').click(function(){
 		var string = $("form input[type='radio']:checked").val();
@@ -555,6 +557,10 @@ function init(state, draw, image_source){
 		slide.src = image_source;
 		$('#scb_s_micro_slide').append(slide);
 		img.onload= function (){
+			var container = $(".microslide")[0];
+			var slide = $("#scb_s_micro_slide")[0];
+			difference = container.getBoundingClientRect().left-slide.getBoundingClientRect().left;
+			$('.circle_lens').css('left', difference+'px');
 			ctx.save();
 			img_width = img.width;
 			img_height = img.height;	
@@ -566,18 +572,23 @@ function init(state, draw, image_source){
 			canvas.height = 300;
 			
 			initialize_state(state, img2string);
-// 			var randomblur = Math.ceil(Math.random()*100);
-// 			state['blur'] = randomblur;
-// 			Caman(canvas, state['display'], function () {
-// 				this.stackBlur(state['blur']);
-// 				this.render(function(){
-// 				});
-// 			});
+			var randomblur = Math.round(Math.ceil(Math.random()*100) / 10) * 10;
+			console.log("SHLOKA");
+			console.log(randomblur);
+			state['blur'] = randomblur;
+
 			ctx.beginPath();
 			ctx.arc(150, 150, arc, 0, Math.PI *2, false);
 			ctx.clip();
+			Caman(canvas, img, function () {
+				this.stackBlur(state['blur']);
+				this.render(function(){
+				});
+// 				console.log('rendering...');
+// 				state['action'] = 'rendering';
+// 				$('.scb_s_microscope_status').text(state['action']);
+			});
 			ctx.drawImage(img, 0, 0);
-			//console.log(img2string);
 			draw(state);
 			$('.circle_lens').draggable({ 
 			handle:'.circle_lens', 
@@ -588,11 +599,10 @@ function init(state, draw, image_source){
 			stop: function() {
 				updateLensPosition(state, document.getElementsByTagName("canvas")[0], parseFloat($('.circle_lens').css('top')), parseFloat($('.circle_lens').css('left')))
 			}
-      	});
-		
-			add_sharpen_images(map);
-
-			add_5_sharpen_images(map);
+      		});
+// 			add_sharpen_images(map);
+// 
+// 			add_5_sharpen_images(map);
 		}
 	}
 
@@ -719,7 +729,7 @@ function modify_state_brightness(addition, state){
 }
 
 
-function modify_state_blur(addition, state, sharpen){
+function modify_state_blur(addition, state, direction){
 	var elements = reset_canvas();
 	var canvas = elements[0]; 
 	var context = elements[1];
@@ -731,16 +741,38 @@ function modify_state_blur(addition, state, sharpen){
 	console.log('sharpen');
 	console.log(state['sharpen']);
 	
-	if(state['blur'] > 100){
+	if(state['blur'] >100){
 		state['blur'] = 100;
-		blur_helper(state, context, canvas, addition);
 	}
-	if((state['blur']>0 && state['blur']<=100) || (state['sharpen']==0&&addition >0))
-		blur_helper(state,context,canvas,addition);
-	if ((state['sharpen']>0 && state['sharpen']<=100) || (state['blur']==0 && addition<0)){
-		//blur_helper(state,context,canvas,addition);
-		sharpen(-addition, state);	
+	else if (state['blur'] <-100){
+		state['blur'] = -100;
 	}
+	if (state['blur'] == 0 && direction =='up'){
+		isLeft = false;
+		blur_helper(state, context, canvas, Math.abs(addition));
+	}
+	else if (state['blur'] == 0 && direction =='down'){
+		isLeft = true;
+		blur_helper(state, context, canvas, Math.abs(addition));
+	}
+	else if(isLeft){
+			blur_helper(state,context, canvas, -addition);
+	}
+	else {
+			blur_helper(state,context, canvas, addition);
+	}
+		
+	
+// 	if(state['blur'] > 100){
+// 		state['blur'] = 100;
+// 		blur_helper(state, context, canvas, addition);
+// 	}
+// 	if((state['blur']>0 && state['blur']<=100) || (state['sharpen']==0&&addition >0))
+// 		blur_helper(state,context,canvas,addition);
+// 	if ((state['sharpen']>0 && state['sharpen']<=100) || (state['blur']==0 && addition<0)){
+// 		//blur_helper(state,context,canvas,addition);
+// 		//sharpen(-addition, state);	
+// 	}
 }
 
 
