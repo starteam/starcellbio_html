@@ -173,6 +173,9 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
 					return;
 			}		// callback function for 'NO' button
 		);
+		$('.jqDialog_header').remove();
+						$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+
     }
     else{
         parsed.microscopy.slide_prepared = true;

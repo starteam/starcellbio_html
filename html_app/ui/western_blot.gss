@@ -555,21 +555,6 @@
         top: 2px;
 
 }
-.scb_s_lysate_prepare_text{
-background: #38aa95;
-color: white;
-padding: 10px;
-height: 25px;
-bottom: 12px;
-position: relative;
-width: 390px;
-font-family: 'sourcesanspro-semibold';
-border-top-left-radius: 9px;
-border-top-right-radius: 9px;
-font-size: 13pt;
-letter-spacing: .5px;
-}
-
 
 .scb_s_western_blot_vertical_line_6_top {
     position:absolute;

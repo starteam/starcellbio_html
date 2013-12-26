@@ -98,6 +98,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                         // if experiment_id is invalid go to assignment
                         $('body').css('overflow', 'hidden');
                         $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+                        $('.jqDialog_header').remove();
+                        $('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+
                         state.onhashchange = false;
                         state.view = 'assignments';
                         delete state.experiment_id;
@@ -111,6 +114,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 // if assignment_id is invalid go to assignments
                 $('body').css('overflow', 'hidden');
                 $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+            	$('.jqDialog_header').remove();
+            	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
                 state.onhashchange = false;
                 state.view = 'assignments';
@@ -226,6 +231,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         else {
         	$('body').css('overflow', 'hidden');
         	$.jqDialog.alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.", function() {$('body').css('overflow', 'visible');	/* callback function for 'OK' button*/ });;
+			$('.jqDialog_header').remove();
+			$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error:</h1>");
 
         }
     }
@@ -260,6 +267,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					return;
 			}		// callback function for 'NO' button
 		);
+		$('.jqDialog_header').remove();
+		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Delete experiment?</h1>");
+
     });
     
    	//HANDLER FOR CONTACT BUTTON AND IFRAME
@@ -812,6 +822,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             else {
             	$('body').css('overflow', 'hidden');
             	$.jqDialog.alert("Experiment does not exist", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+            	$('.jqDialog_header').remove();
+            	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
                 if (parsed.assignment) {
                     self.show({
                         view: 'assignments',

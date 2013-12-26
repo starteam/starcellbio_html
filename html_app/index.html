@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head><META http-equiv='Content-Type' content='text/html; charset=UTF-8'><meta http-equiv='content-type' content='text/html; charset=utf-8'><title>StarCellBio Prototype</title>
-<link type="text/css" href="/static/ui_old/gen/facs.gss.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ug2/ug.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/making_lysates.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/technique_tabs.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/workspace.gss.css" rel="Stylesheet" />
@@ -16,6 +16,7 @@
 <link type="text/css" href="/static/ui/gen/common.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/back_button.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ref_lib/rl.css" rel="Stylesheet" />
+<link type="text/css" href="/static/ui_old/gen/facs.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/assignments/mit706s13/gen/instructions.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/microscopy.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/experiment_design.gss.css" rel="Stylesheet" />
@@ -32,6 +33,7 @@
 <link type="text/css" href="/static/ui/gen/assignments.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/starcellbio.app.css" rel="Stylesheet" />
 <link type="text/css" href="/static/css/jquery.multiselect.css" rel="Stylesheet" />
+<link type="text/css" href="/static/microscopy/microscope.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/westernblotgel.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/test/gen/test.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/gen/common.gss.css" rel="Stylesheet" />
@@ -42,7 +44,6 @@
 <link type="text/css" href="/static/ui/gen/western_blot_gel.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/userguide.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/swipe/style.css" rel="Stylesheet" />
-<link type="text/css" href="/static/ug/ug.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/western_blot.gss.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui_old/button.css" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/assignment.gss.css" rel="Stylesheet" />
@@ -69,16 +70,17 @@
 <script type="text/javascript" src="/static/model/Microscopy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/WesternBlotView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/slides.min.jquery.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/ug/ug.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery.ba-bbq.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/FacsLanesPreparation.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/utils/CSFRFix.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ug2/ug.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/experiment_setup.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/LysateKind.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/DashboardView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/ug2/parse_wiki.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/utils/Utilities.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jqdialog.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/components/ModelFactory.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/model/CollectionSchedule.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/base64.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/contact.soy.js" charset="UTF-8"></script>
@@ -91,7 +93,6 @@
 <script type="text/javascript" src="/static/components/WesternBlotModelFactory.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/swipe/swipe.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/WesternBlotGel.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/ug/parse_wiki.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/Experiment.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/auth.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/decusability/AddMultipleDialog.js" charset="UTF-8"></script>
@@ -139,7 +140,7 @@
 <script type="text/javascript" src="/static/swipe/Gruntfile.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/ModelHelpers.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/assignments.soy.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/model/CollectionSchedule.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/microscopy/microv2.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery.layout-1.2.0.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/gen/usability_test.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/MainFrame.js" charset="UTF-8"></script>
@@ -152,10 +153,10 @@
 <script type="text/javascript" src="/static/js/caman.full.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/experiment_design.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/ExperimentView.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/utils/CSFRFix.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/decusability/gen/addmultipledialog.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui_old/gen/experiment_setup.soy.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jqdialog.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/ui/AssignmentView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/ExperimentDesignView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/../scb/get_courses.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/../scb/get_model.js" charset="UTF-8"></script>

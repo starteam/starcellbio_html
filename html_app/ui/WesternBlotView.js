@@ -159,7 +159,13 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     var rows_state = parsed.western_blot.rows_state();
     if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
     	$('body').css('overflow', 'hidden');
-    	$.jqDialog.alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples. The gel only has 15 lanes. Please only select " + scb.ui.static.WesternBlotView.MAX_ROWS + " samples, and remember that one lane is usually reserved for a protein marker.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+    	$.jqDialog.alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS 
+    	+ " samples. The gel only has 15 lanes. Please only select " 
+    	+ scb.ui.static.WesternBlotView.MAX_ROWS 
+    	+ " samples, and remember that one lane is usually reserved for a protein marker.", 
+    	function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+		$('.jqDialog_header').remove();
+		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
 			    	
 
@@ -167,10 +173,11 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     else if (rows_state.valid < 1) {
     	    	$('body').css('overflow', 'hidden');
 
-    	$.jqDialog.alert("<h1 class='scb_s_lysate_prepare_text'>Please select at least 1 lysate to prepare.</h1>", function() {$('#jqDialog_box').css('border', '2px solid rgb(5, 151, 137)'); $('#jqDialog_box').css('border-radius', '6px'); $('#jqDialog_content').css('margin', '10px');		$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
-		$('.scb_s_lysate_prepare_text').parent().parent().css('border', '4px solid white');	
-		$('.scb_s_lysate_prepare_text').parent().parent().css('border-radius', '14px');	
-		$('.scb_s_lysate_prepare_text').parent().css('margin', '0px');	
+    	$.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {
+				$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ 
+		});
+ 		$('.jqDialog_header').remove();
+		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
     }
     else {
@@ -275,6 +282,9 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
 					return;
 			}		// callback function for 'NO' button
 		);
+		$('.jqDialog_header').remove();
+		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+
     }
     else{
     	parsed.western_blot.is_transfered = true;
