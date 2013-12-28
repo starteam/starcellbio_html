@@ -312,6 +312,11 @@ ul > .scb_s_assignment_experiment_list_item_new_experiment {
 	display:inline-block;
 	left: 277px;
 }
+.scb_s_assignments_bottom_scroll_abs{
+	position: absolute !important;
+	top: 556px !important;
+	left: 293px !important;
+}
 
 .scb_s_assignments_sidebar_course {
     font-size:14pt;
