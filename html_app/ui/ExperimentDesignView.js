@@ -3,6 +3,7 @@
 scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.ExperimentDesignView = scb.ui.static.ExperimentDesignView || {};
+scb.ui.static.ExperimentDesignView.TOTAL_STEPS =  5;
 
 scb.ui.static.ExperimentDesignView.parsed = function(element)
 {
@@ -106,17 +107,7 @@ scb.ui.static.ExperimentDesignView.scb_s_experiment_name_edit = function(element
          }
      }
 
-scb.ui.static.ExperimentDesignView.scb_s_experiment_design_technique_checkbox = function(element,event)
-{
-    var parsed = scb.ui.static.ExperimentDesignView.parsed(element);
-    var key = $(element).attr('data-key');
-    var value = !_.isUndefined($(element).attr('checked'));
-    if( parsed.experiment )
-    {
-        parsed.experiment[key] = value;
-        scb.ui.static.MainFrame.refresh();
-    }
-}
+
 
 scb.ui.static.ExperimentDesignView.register = function(workarea)
 {
@@ -133,10 +124,6 @@ scb.ui.static.ExperimentDesignView.register = function(workarea)
     scb.utils.off_on(workarea, 'change', '.scb_s_experiment_name_edit', function (e) {
         scb.ui.static.ExperimentDesignView.scb_s_experiment_name_edit(this);
     });
-
-    scb.utils.off_on(workarea, 'change', '.scb_s_experiment_design_technique_checkbox' , function(e) {
-        scb.ui.static.ExperimentDesignView.scb_s_experiment_design_technique_checkbox(this,e);
-    })
 
 
 }
@@ -157,11 +144,8 @@ scb.ui.ExperimentDesignView = function scb_ui_ExperimentDesignView(gstate) {
 		}));
 		state.experiment.prev_step = 1;
         state.experiment.last_view = 'experiment_design';
-      if(state.experiment.last_step < 5)
+      if(state.experiment.last_step < scb.ui.static.ExperimentDesignView.TOTAL_STEPS)
 			state.experiment.last_step = 3;
-        document.title = state.experiment.name + " - StarCellBio" ;
-      $('.scb_s_experiment_step_selected').attr('aria-disabled', 'false');
-      
-		$('.scb_s_experiment_step_visited').attr('aria-disabled', 'false');
+      document.title = state.experiment.name + " - StarCellBio" ;
 	}
 }

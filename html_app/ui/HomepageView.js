@@ -54,9 +54,6 @@ scb.ui.static.HomepageView.register = function(workarea) {
         alert( "under construction!");
     });
 
-    scb.utils.off_on(workarea, 'click', '.scb_f_try_an_experiment', function (e) {
-        //scb.ui.static.MainFrame.clear_NO_PROMPT();
-    });
 
 };
 

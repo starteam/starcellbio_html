@@ -4,6 +4,9 @@ scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.ExperimentSetupView = scb.ui.static.ExperimentSetupView || {};
 
+scb.ui.static.ExperimentSetupView.TOTAL_STEPS =  5;
+
+
 scb.ui.static.ExperimentSetupView.parse = function (element) {
     var experiment_id = $(element).attr('experiment_id');
     var assignment_id = $(element).attr('assignment_id');
@@ -203,6 +206,7 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     	$('.scb_f_experiment_setup_new_set_up').attr('checked', 'checked');
     	$('.scb_s_experiment_setup_new_set_up').css('visibility', 'visible');
     });
+    
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_new_row', function (e) {
         var mode = $('.scb_s_experiment_setup_details_view', workarea).attr('mode');
         if (mode != 'readonly') {
@@ -263,51 +267,35 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
 scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = function (element, event) {
 		var parsed = scb.ui.static.ExperimentSetupView.parse(element);
 		if (parsed.experiment) {
+			$('.jqDialog_header').remove();
 			if (parsed.experiment.cell_treatment_list.length == 0) {
 			$('body').css('overflow', 'hidden');
 				$.jqDialog.alert("Please set up at least one sample.", function() {	$('body').css('overflow', 'visible'); /* callback function for 'OK' button*/ });
-				$('.jqDialog_header').remove();
 				$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
-
 				event.preventDefault();
 			}
 			else{
-				var mask = document.createElement('div');
-				mask.className='overlay';
-				$(mask).css({'width': '100%','height': '100%','position': 'fixed', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
-				$('body').prepend(mask);
-
+				$('body').prepend(scb_experiment_setup.experiment_setup_overlay());
 				$(element).attr('href', 'javascript:void(0)');
-				$.jqDialog.content("<div class='scb_s_warning_dialog'><p>"+
-				"Once you confirm the set-up of this experiment and run it, you cannot go back to edit this experiment's set-up. To go back and edit your set-up, click <b>EDIT SET-UP</b>"+
-				" or click on <b>CONFIRM SET-UP AND RUN</b> to proceed."+
-				"<br/> To create a new experiment set-up, select <b>New Experiment +</b> above the navigation tool bar."+
-             "</p><a class='scb_s_navigation_button scb_f_open_select_technique' href='#view=select_technique&assignment_id="+parsed.assignment.id+"&experiment_id="+parsed.experiment.id+"'"+
-			   "assignment_id='"+parsed.assignment.id+"' experiment_id='"+parsed.experiment.id+"'>CONFIRM SET-UP & RUN &nbsp; &#9654;</a><br/>"
-				+"<span class='scb_s_navigation_button scb_f_open_experiment_setup' href='#view=experiment_setup&experiment_id="+parsed.experiment.id+"&assignment_id="+parsed.assignment.id+"'>"+
-				"&#9664; &nbsp; EDIT SET-UP</span></div>");
-				$('.jqDialog_header').remove();
+				
+				$.jqDialog.content(scb_experiment_setup.experiment_setup_dialog({assignment: parsed.assignment, experiment: parsed.experiment}));
 				$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Confirm Set-Up</h1>");
 				$('.scb_f_open_experiment_setup').click( function () {
 					if($('.scb_s_warning_dialog').length >0){
 						$('.scb_s_warning_dialog').remove();
-						$(mask).remove();
+						$('.overlay').remove();
 						$('#jqDialog_box').css('display', 'none');
 					}
-					//$('#jqDialog_box').css({'background': '#f5f5f5', 'border':' 2px solid #059789'});
 				});
 				$('.scb_f_open_select_technique').click(function(){
 					if($('.scb_s_warning_dialog').length >0){
         				$('.scb_s_warning_dialog').remove();
-        				$(mask).remove();
+        				$('.overlay').remove();
         				$('#jqDialog_box').css('display', 'none');
         			}
-        			//$('#jqDialog_box').css({'background': '#f5f5f5', 'border':' 2px solid #059789'});
         			scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
 				});
-				//$('.scb_s_warning_dialog').parent().parent().css({'background': 'rgba(0,0,0,0)', 'border':' none', 'left': '273.5px'});
-				//$('.scb_s_warning_dialog').parent().parent().css('top', (parseInt($('.scb_s_warning_dialog').parent().parent().css('top'))-94)+'px');
-			
+				
 		}
 		
 		}
@@ -873,7 +861,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
     	else{
     		$("body").css("overflow", "auto");
     	}
-      if(state.experiment.last_step < 5)
+      if(state.experiment.last_step < scb.ui.static.ExperimentSetupView.TOTAL_STEPS )
 			state.experiment.last_step = 4;
         if (rows.length > 0){
         	$('.scb_s_experiment_setup_new_set_up').css('visibility', 'visible');
@@ -889,7 +877,5 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
 
         }
 
-		$('.scb_s_experiment_step_selected').attr('aria-disabled', 'false');
-		$('.scb_s_experiment_step_visited').attr('aria-disabled', 'false');
 	 };
 };

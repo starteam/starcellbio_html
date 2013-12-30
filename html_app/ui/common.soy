@@ -136,7 +136,7 @@ Progress bar
     	
     	<div class='scb_s_experiment_step_main_steps '>
 			<div class='scb_s_experiment_step_labels' aria-live='polite'>
-				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step>1 or  $last_step > 0}scb_s_experiment_step_visited{/if} {if $step==1 }scb_s_experiment_step_selected{/if}' aria-label='Experiment Design' aria-disabled='true' role ='button'>
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step>1 or  $last_step > 0}scb_s_experiment_step_visited{/if} {if $step==1 }scb_s_experiment_step_selected{/if}' aria-label='Experiment Design' aria-disabled='{if $step > 1 or  $last_step > 0 or $step==1 }false{else}true{/if}' role ='button'>
 
 					{if $step>1 or  $last_step > 0}
 					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >DESIGN</a>
@@ -151,7 +151,7 @@ Progress bar
 					{/if}	
 				</div>
 		
-				<div class='scb_s_experiment_step_text scb_s_experiment_step_setup_and_run {if $step>2 or $last_step > 3}scb_s_experiment_step_visited{/if} {if $step==2 or $step==3 }scb_s_experiment_step_selected{/if}' aria-label='Setup and Run Experiment'  aria-disabled='true' role ='button' >
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_setup_and_run {if $step>2 or $last_step > 3}scb_s_experiment_step_visited{/if} {if $step==2 or $step==3 }scb_s_experiment_step_selected{/if}' aria-label='Setup and Run Experiment'  aria-disabled='{if $step>2 or $last_step > 3 or $step==2 or $step==3}false{else}true{/if}' role ='button' >
 
 					
 					
@@ -167,7 +167,7 @@ Progress bar
 				
 				</div>
 		
-				<div class='scb_s_experiment_step_text scb_s_experiment_step_select_technique {if $step>3 or   $last_step >4}scb_s_experiment_step_visited{/if} {if $step>3 }scb_s_experiment_step_selected{/if}'   aria-label='Select Experiment Technique' aria-disabled='true' role ='button'>
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_select_technique {if $step>3 or   $last_step >4}scb_s_experiment_step_visited{/if} {if $step>3 }scb_s_experiment_step_selected{/if}'   aria-label='Select Experiment Technique' aria-disabled='{if $step>3 or   $last_step >4  or $step>3}false{else}true{/if}' role ='button'>
 
 					
 					{if $step>3 or   $last_step >4}

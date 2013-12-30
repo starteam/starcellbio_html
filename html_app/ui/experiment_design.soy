@@ -105,8 +105,8 @@ Experiment active area
 {template .display_techniques}
 {foreach $tech in $techniques}
 {if $tech == 'wb'}
-<span class='scb_s_experiment_design_technique_wb {if $experiment.design_wb_cb}scb_s_experiment_design_selected{else}scb_s_experiment_design_unselected{/if}'>
-	<div class='scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_wb_cb' role="button" {if $experiment.design_wb_cb}aria-selected="true"{/if}>
+<span class='scb_s_experiment_design_technique_wb scb_s_experiment_design_unselected'>
+	<div class='scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_wb_cb' role="button" >
     <span class='scb_s_homepage_technique_title_image'>
        Western Blot</span>
     Western blotting detects overall changes in the amount or chemical modifications of a particular protein. <a href="static/ref_lib/full_library.html#WesternBlotting" class='scb_s_design_technique_learn_more ' target='_blank'>Learn more &gt;&gt;</a></div>
@@ -117,8 +117,8 @@ Experiment active area
 {/if}
 
 {if $tech == 'fc'}
-<span class='scb_s_experiment_design_technique_flow {if $experiment.design_fc_cb}scb_s_experiment_design_selected{else}scb_s_experiment_design_unselected{/if}'>
-    <div class='scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_fc_cb' role="button" {if $experiment.design_fc_cb}aria-selected="true"{/if}>
+<span class='scb_s_experiment_design_technique_flow scb_s_experiment_design_unselected'>
+    <div class='scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_fc_cb' role="button" >
     <span class='scb_s_homepage_technique_title_image'>
         Flow Cytometry</span>
     Flow cytometry is used to count and analyze the size, shape and properties of
@@ -130,8 +130,8 @@ Experiment active area
 {/if}
 
 {if $tech == 'fc'}
-<span class='scb_s_experiment_design_technique_micro {if $experiment.design_mi_cb}scb_s_experiment_design_selected{else}scb_s_experiment_design_unselected{/if}'>
-    <div role='button' class = 'scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_mi_cb' role="button" {if $experiment.design_mi_cb}aria-selected="true"{/if}>
+<span class='scb_s_experiment_design_technique_micro scb_s_experiment_design_unselected'>
+    <div role='button' class = 'scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_mi_cb' role="button" >
     	<span class='scb_s_homepage_technique_title_image'>
          Microscopy</span>
     Microscopy is used to study the shape, morphology and properties of cells,

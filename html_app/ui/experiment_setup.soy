@@ -391,3 +391,35 @@ Experiment active area
         {/foreach}
     </select>
 {/template}
+
+
+/**
+* Experiment Setup Dialog
+* @param assignment
+* @param experiment
+*/
+{template .experiment_setup_dialog}
+<div class='scb_s_warning_dialog'><p>
+Once you confirm the set-up of this experiment and run it, you cannot go back to edit this experiment's set-up. 
+To go back and edit your set-up, 
+click <b>EDIT SET-UP</b>
+or click on <b>CONFIRM SET-UP AND RUN</b> to proceed.
+<br/> To create a new experiment set-up, select <b>New Experiment +</b> above the navigation tool bar.
+</p><a class='scb_s_navigation_button scb_f_open_select_technique' 
+			href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}'
+			assignment_id='{$assignment.id}' 
+			experiment_id='{$experiment.id}'>CONFIRM SET-UP & RUN &nbsp; &#9654;</a><br/>
+<span class='scb_s_navigation_button scb_f_open_experiment_setup' 
+href='#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
+				&#9664; &nbsp; EDIT SET-UP</span></div>
+
+{/template}
+
+
+/**
+* Experiment Setup Overlay
+*/
+{template .experiment_setup_overlay}
+<div class='overlay'></div>
+
+{/template}
