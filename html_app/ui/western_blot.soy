@@ -351,7 +351,6 @@
 @param experiment
 @param western_blot
 @param rows
-@param rows_valid
 */
 {template .prepare_gel}
 {call .display_wb_progress}
@@ -382,18 +381,16 @@
         <ol class='scb_s_western_blot_choose_samples_order_list' >
             {foreach $r in $rows}
             {if $r.is_valid}
-            <li class="scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>
-                {$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
-            </li>
+            	{if $western_blot.marker_loaded == true and $r.lane.id == 'marker'}
+                	<li class="scb_s_western_blot_marker scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>Marker</li>
+            	{/if}
+				<li class="scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>
+					{$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
+				</li>
             {/if}
             {/foreach}
+            
             </ol>
-            {let $start: $rows_valid+1 /}
-            <ol class='scb_s_western_blot_choose_samples_marker' start={$start}>
-             {if $western_blot.marker_loaded == true}
-                <li class="scb_s_western_blot_marker">Marker</li>
-            {/if}
-        </ol>
     </div>
     {if $western_blot.marker_loaded == false}
     <button class='scb_s_western_blot_load_marker scb_s_navigation_button' western_blot_id='{$western_blot.id}'

@@ -32,11 +32,17 @@ scb.WesternBlotLaneList = function scb_WesternBlotLaneList(data, context, parent
             		data.list[x].order_id=parseInt(i);
             		new_list.push(data.list[x]);
             	}
+//             	if(new_id == 'marker'){
+//             		new_list.push(data.list[x]);
+//             	}
             }
         }
-        if (new_list.length == data.list.length) {
+        if (new_list.length == data.list.length ) {
+        //|| ($.inArray("marker", new_list) && new_list.length == data.list.length+1)
             data.list = new_list;
-        } else {
+        } 
+        
+        else {
             throw "NEW ORDER LENGTH != ORDER_LENGTH";
         }
     };

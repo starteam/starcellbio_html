@@ -561,13 +561,6 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder {
 ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   position: absolute;
 }
-.scb_s_western_blot_marker {
-  font-size: 10pt;
-  color: black;
-  left: 19px;
-  position: relative;
-  top: -10px;
-}
 .scb_s_western_blot_choose_gel_type {
   font-size: 11pt;
   color: black;

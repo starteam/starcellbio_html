@@ -110,11 +110,9 @@ scb_western_blot.prepare_gel = function(opt_data, opt_sb) {
   var rListLen364 = rList364.length;
   for (var rIndex364 = 0; rIndex364 < rListLen364; rIndex364++) {
     var rData364 = rList364[rIndex364];
-    output.append((rData364.is_valid) ? '<li class="scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' id=\'' + soy.$$escapeHtml(rData364.lane.id) + '\'>' + soy.$$escapeHtml(rData364.display_text) + ' - ' + soy.$$escapeHtml(rData364.lane.kinds[rData364.lane.kind].name) + '</li>' : '');
+    output.append((rData364.is_valid) ? ((opt_data.western_blot.marker_loaded == true && rData364.lane.id == 'marker') ? '<li class="scb_s_western_blot_marker scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' id=\'' + soy.$$escapeHtml(rData364.lane.id) + '\'>Marker</li>' : '') + '<li class="scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' id=\'' + soy.$$escapeHtml(rData364.lane.id) + '\'>' + soy.$$escapeHtml(rData364.display_text) + ' - ' + soy.$$escapeHtml(rData364.lane.kinds[rData364.lane.kind].name) + '</li>' : '');
   }
-  output.append('</ol>');
-  var start__soy382 = opt_data.rows_valid + 1;
-  output.append('<ol class=\'scb_s_western_blot_choose_samples_marker\' start=', soy.$$escapeHtml(start__soy382), '>', (opt_data.western_blot.marker_loaded == true) ? '<li class="scb_s_western_blot_marker">Marker</li>' : '', '</ol></div>', (opt_data.western_blot.marker_loaded == false) ? '<button class=\'scb_s_western_blot_load_marker scb_s_navigation_button\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'>ADD MARKER</button>' : '', (opt_data.western_blot.wells_loaded == false && opt_data.western_blot.marker_loaded == true) ? '<a class=\'scb_s_western_blot_load_all scb_s_navigation_button\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' href="#view=western_blot_gel&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '&western_blot_id=' + soy.$$escapeHtml(opt_data.western_blot.id) + '">LOAD ALL</a>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'><div class=\'scb_s_western_blot_gel_tab scb_s_western_blot_gel_active\' contenteditable="true">GEL</div></div><div class=\'scb_s_western_blot_gel_content\'><canvas class=\'scb_s_western_blot_gel\' src=\'images/western_blot/SCB_WesternBlotting_GelNumbers.png\'/><div class=\'scb_s_western_blot_tools\'><a class=\'scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' href="#view=western_blot_gel&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(opt_data.western_blot.id), '">RUN GEL & TRANSFER</a></div></div></div>');
+  output.append('</ol></div>', (opt_data.western_blot.marker_loaded == false) ? '<button class=\'scb_s_western_blot_load_marker scb_s_navigation_button\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'>ADD MARKER</button>' : '', (opt_data.western_blot.wells_loaded == false && opt_data.western_blot.marker_loaded == true) ? '<a class=\'scb_s_western_blot_load_all scb_s_navigation_button\' western_blot_id=\'' + soy.$$escapeHtml(opt_data.western_blot.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' href="#view=western_blot_gel&experiment_id=' + soy.$$escapeHtml(opt_data.experiment.id) + '&assignment_id=' + soy.$$escapeHtml(opt_data.assignment.id) + '&western_blot_id=' + soy.$$escapeHtml(opt_data.western_blot.id) + '">LOAD ALL</a>' : '', '</div><div class=\'scb_s_western_blot_samples_gel_area\'><div class=\'scb_s_western_blot_gel_tabs\'><div class=\'scb_s_western_blot_gel_tab scb_s_western_blot_gel_active\' contenteditable="true">GEL</div></div><div class=\'scb_s_western_blot_gel_content\'><canvas class=\'scb_s_western_blot_gel\' src=\'images/western_blot/SCB_WesternBlotting_GelNumbers.png\'/><div class=\'scb_s_western_blot_tools\'><a class=\'scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' href="#view=western_blot_gel&experiment_id=', soy.$$escapeHtml(opt_data.experiment.id), '&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&western_blot_id=', soy.$$escapeHtml(opt_data.western_blot.id), '">RUN GEL & TRANSFER</a></div></div></div>');
   return opt_sb ? '' : output.toString();
 };
 
@@ -129,36 +127,36 @@ scb_western_blot.display_western_blot_numbers = function(opt_data, opt_sb) {
 scb_western_blot.display_lysate_types = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   if (soy.$$getMapKeys(opt_data.kinds).length < 1) {
-    var kList432 = soy.$$getMapKeys(opt_data.kinds);
-    var kListLen432 = kList432.length;
-    for (var kIndex432 = 0; kIndex432 < kListLen432; kIndex432++) {
-      var kData432 = kList432[kIndex432];
-      output.append('<div class="scb_f_western_blot_select_lysate_type"  kind=\'', soy.$$escapeHtml(kData432), '\' cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '">', soy.$$escapeHtml(opt_data.kinds[kData432].name), '</div>');
+    var kList435 = soy.$$getMapKeys(opt_data.kinds);
+    var kListLen435 = kList435.length;
+    for (var kIndex435 = 0; kIndex435 < kListLen435; kIndex435++) {
+      var kData435 = kList435[kIndex435];
+      output.append('<div class="scb_f_western_blot_select_lysate_type"  kind=\'', soy.$$escapeHtml(kData435), '\' cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '">', soy.$$escapeHtml(opt_data.kinds[kData435].name), '</div>');
     }
   } else {
     if (soy.$$getMapKeys(opt_data.kinds).length == 1) {
-      var kList456 = soy.$$getMapKeys(opt_data.kinds);
-      var kListLen456 = kList456.length;
-      for (var kIndex456 = 0; kIndex456 < kListLen456; kIndex456++) {
-        var kData456 = kList456[kIndex456];
-        output.append('<span class="scb_f_western_blot_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '" value=\'', soy.$$escapeHtml(kData456), '\'>', soy.$$escapeHtml(opt_data.kinds[kData456].name), '</span>');
+      var kList459 = soy.$$getMapKeys(opt_data.kinds);
+      var kListLen459 = kList459.length;
+      for (var kIndex459 = 0; kIndex459 < kListLen459; kIndex459++) {
+        var kData459 = kList459[kIndex459];
+        output.append('<span class="scb_f_western_blot_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '" value=\'', soy.$$escapeHtml(kData459), '\'>', soy.$$escapeHtml(opt_data.kinds[kData459].name), '</span>');
       }
     } else {
       output.append('<select class="scb_f_western_blot_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '"', (opt_data.lane.is_sample_enabled) ? '' : 'disabled="disabled"', '>');
       if (opt_data.lane.kind == 'existing') {
-        var kList500 = soy.$$getMapKeys(opt_data.kinds);
-        var kListLen500 = kList500.length;
-        for (var kIndex500 = 0; kIndex500 < kListLen500; kIndex500++) {
-          var kData500 = kList500[kIndex500];
-          output.append('<option value=\'', soy.$$escapeHtml(kData500), '\'', (opt_data.lane.lane.kind == kData500) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData500].name), '</option>');
+        var kList503 = soy.$$getMapKeys(opt_data.kinds);
+        var kListLen503 = kList503.length;
+        for (var kIndex503 = 0; kIndex503 < kListLen503; kIndex503++) {
+          var kData503 = kList503[kIndex503];
+          output.append('<option value=\'', soy.$$escapeHtml(kData503), '\'', (opt_data.lane.lane.kind == kData503) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData503].name), '</option>');
         }
       } else {
         output.append((soy.$$getMapKeys(opt_data.kinds).length != 1) ? '<option selected="selected" disabled="disabled" value=\'\'>Pick Lysate Type</option>' : '');
-        var kList515 = soy.$$getMapKeys(opt_data.kinds);
-        var kListLen515 = kList515.length;
-        for (var kIndex515 = 0; kIndex515 < kListLen515; kIndex515++) {
-          var kData515 = kList515[kIndex515];
-          output.append('<option value=\'', soy.$$escapeHtml(kData515), '\'>', soy.$$escapeHtml(opt_data.kinds[kData515].name), '</option>');
+        var kList518 = soy.$$getMapKeys(opt_data.kinds);
+        var kListLen518 = kList518.length;
+        for (var kIndex518 = 0; kIndex518 < kListLen518; kIndex518++) {
+          var kData518 = kList518[kIndex518];
+          output.append('<option value=\'', soy.$$escapeHtml(kData518), '\'>', soy.$$escapeHtml(opt_data.kinds[kData518].name), '</option>');
         }
       }
       output.append('</select>');

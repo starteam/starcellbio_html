@@ -193,7 +193,13 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
+    parsed.western_blot.lanes_list.start({
+            id: 'marker',
+            name: 'Marker',
+            cell_treatment_id: "marker_treatment",
 
+            experiment_id: parsed.experiment.id
+    });
     parsed.western_blot.marker_loaded = true;
     scb.ui.static.MainFrame.refresh();
 }
