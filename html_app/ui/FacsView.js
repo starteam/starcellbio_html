@@ -87,7 +87,7 @@ scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     	$.jqDialog.alert("Please select at least 1 sample to prepare.", function() {	
     	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
     	$('.jqDialog_header').remove();
-		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
     }
     else{
     	parsed.facs.sample_prepared = true;

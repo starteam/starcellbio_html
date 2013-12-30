@@ -69,7 +69,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
 
     	$.jqDialog.alert("Please select primary & secondary antibodies.", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 		$('.jqDialog_header').remove();		
-				$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
 
     }
     $('.scb_f_wb_exposure_slider').detach();

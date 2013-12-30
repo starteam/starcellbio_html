@@ -290,6 +290,8 @@ nav ul li.on {
   z-index: 993;
   background: rgba(125,125,125,0.7);
   visibility: visible;
+  right: 0;
+  top: 0;
 }
 .scb_s_experiment_setup_table_element[kind="cell_plate"] {
   width: 60px;

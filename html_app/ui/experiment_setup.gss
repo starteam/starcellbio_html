@@ -372,6 +372,8 @@ nav ul li.on{
 	z-index: 993; 
 	background: rgba(125,125,125,0.7);
 	visibility: visible;
+	right: 0px;
+	top: 0px;
 }
 
 

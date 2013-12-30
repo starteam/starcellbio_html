@@ -271,7 +271,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 			if (parsed.experiment.cell_treatment_list.length == 0) {
 			$('body').css('overflow', 'hidden');
 				$.jqDialog.alert("Please set up at least one sample.", function() {	$('body').css('overflow', 'visible'); /* callback function for 'OK' button*/ });
-				$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
 				event.preventDefault();
 			}
 			else{
@@ -279,19 +279,19 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 				$(element).attr('href', 'javascript:void(0)');
 				
 				$.jqDialog.content(scb_experiment_setup.experiment_setup_dialog({assignment: parsed.assignment, experiment: parsed.experiment}));
-				$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Confirm Set-Up</h1>");
+				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_confirm());
 				$('.scb_f_open_experiment_setup').click( function () {
 					if($('.scb_s_warning_dialog').length >0){
 						$('.scb_s_warning_dialog').remove();
 						$('.overlay').remove();
-						$('#jqDialog_box').css('display', 'none');
+						$('#jqDialog_box').hide();
 					}
 				});
 				$('.scb_f_open_select_technique').click(function(){
 					if($('.scb_s_warning_dialog').length >0){
         				$('.scb_s_warning_dialog').remove();
         				$('.overlay').remove();
-        				$('#jqDialog_box').css('display', 'none');
+        				$('#jqDialog_box').hide();
         			}
         			scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
 				});
@@ -852,14 +852,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
         }));
         state.experiment.prev_step=2;
     	if(state.last_view == 'experiment_run'){
-    		if($('.scb_s_warning').length >0)
-    			$("body").css("overflow", "auto");
-    		else
-    			$("body").css("overflow", "hidden");
-    	$('.scb_s_experiment_setup_instructions').hide();
-    	}
-    	else{
-    		$("body").css("overflow", "auto");
+    		$('.scb_s_experiment_setup_instructions').hide();
     	}
       if(state.experiment.last_step < scb.ui.static.ExperimentSetupView.TOTAL_STEPS )
 			state.experiment.last_step = 4;

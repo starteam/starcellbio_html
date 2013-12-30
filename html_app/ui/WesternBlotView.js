@@ -165,7 +165,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     	+ " samples, and remember that one lane is usually reserved for a protein marker.", 
     	function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 		$('.jqDialog_header').remove();
-		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
 
 			    	
 
@@ -177,7 +177,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
 				$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ 
 		});
  		$('.jqDialog_header').remove();
-		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
 
     }
     else {
@@ -283,7 +283,7 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
 			}		// callback function for 'NO' button
 		);
 		$('.jqDialog_header').remove();
-		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
 
     }
     else{

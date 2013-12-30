@@ -185,3 +185,17 @@ scb_experiment_setup.experiment_setup_overlay = function(opt_data, opt_sb) {
   output.append('<div class=\'overlay\'></div>');
   return opt_sb ? '' : output.toString();
 };
+
+
+scb_experiment_setup.experiment_error = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('<h1 class=\'jqDialog_header\'>Error</h1>');
+  return opt_sb ? '' : output.toString();
+};
+
+
+scb_experiment_setup.experiment_confirm = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('<h1 class=\'jqDialog_header\'>Confirm Set-Up</h1>');
+  return opt_sb ? '' : output.toString();
+};
