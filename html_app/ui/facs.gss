@@ -161,6 +161,9 @@
 	height: 41px;
 }
 
+.scb_s_facs_bar{
+	top: 30px !important;
+}
 
 .scb_s_facs_right_facs{
 

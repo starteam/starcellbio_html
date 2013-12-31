@@ -122,6 +122,9 @@
   background-image: url('../images/western_blot/scb_gray_left_arrow_inactive.png');
   height: 41px;
 }
+.scb_s_facs_bar {
+  top: 30px !important;
+}
 .scb_s_facs_right_facs {
   padding: 3px;
   margin: 0;

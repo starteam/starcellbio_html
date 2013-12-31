@@ -1,6 +1,12 @@
 scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.FacsView = scb.ui.static.FacsView || {};
+scb.ui.static.FacsView.TOTAL_TABS =  4;
+scb.ui.static.FacsView.TOTAL_STEPS =  5;
+scb.ui.static.FacsView.TOTAL_SCROLL =  5;
+
+
+
 
 scb.ui.static.FacsView.parse = function (element) {
     var assignment_id = $(element).attr('assignment_id');
@@ -130,18 +136,6 @@ scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
 }
 
 
-scb.ui.static.FacsView.scb_f_facs_run_samples_short = function (element, event) {
-    var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
-
-    if (parsed.redisplay) {
-        alert("INVALID ELEMENT!");
-    }
-    parsed.facs.samples_finished = true;
-    parsed.facs.lane_selected = scb.utils.get(parsed.facs.lanes_list.list, [0, 'id']);
-    scb.ui.static.MainFrame.refresh();
-}
-
 scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
 	parsed.experiment.last_scroll=document.body.scrollTop;
@@ -186,32 +180,21 @@ scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, even
 scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
     var jqDiv = $('.scb_s_facs_tools_instructions_followup');
     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
-    if (show) {
-        jqDiv.slideDown();
+    if (show)  jqDiv.slideDown(); else  jqDiv.slideUp();
+    
         $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
-    }
-    else {
-        jqDiv.slideUp();
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
-        $('.scb_s_facs_tools_instructions_followup_toggle').blur();
-    }
 }
 
 
 scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status = function (show) {
     var jqDiv = $('.scb_s_facs_tools_instructions_followup');
     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
-    if (show) {
-        jqDiv.show();
+    if (show)  jqDiv.show(); else  jqDiv.hide();
+    
+    
         $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
-    }
-    else {
-        jqDiv.hide();
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
-        $('.scb_s_facs_tools_instructions_followup_toggle').blur();
-    }
 }
 
 
@@ -277,13 +260,11 @@ scb.ui.static.FacsView.scb_s_facs_right_facs = function(element, event){
 scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
 	parsed.experiment.last_scroll=document.body.scrollTop;
-	console.log(parsed.facs.parent.start_tabs_index);
-	console.log(parsed.facs.parent.list.length);
-	if(parsed.facs.parent.list.length==4){
+	if(parsed.facs.parent.list.length==scb.ui.static.FacsView.TOTAL_TABS){
 		parsed.facs.parent.start_tabs_index = 1;
 	}
-	else if (parsed.facs.parent.list.length >4)
-		parsed.facs.parent.start_tabs_index = parsed.facs.parent.length-3;
+	else if (parsed.facs.parent.list.length >scb.ui.static.FacsView.TOTAL_TABS)
+		parsed.facs.parent.start_tabs_index = parsed.facs.parent.length-scb.ui.static.FacsView.TOTAL_TABS-1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
@@ -307,9 +288,9 @@ scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     	parsed.state.index = parsed.state.index -1 ;
     }
     //fix tab indexing for display
-    if(parsed.state.index > parsed.experiment.facs_list.list.length -4) {
+    if(parsed.state.index > parsed.experiment.facs_list.list.length -scb.ui.static.FacsView.TOTAL_TABS) {
     	
-    	if((parsed.experiment.facs_list.list.length == 5 || parsed.experiment.facs_list.list.length == 6) && parsed.experiment.facs_list.start_tabs_index <=1)
+    	if((parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS+1 || parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS+2) && parsed.experiment.facs_list.start_tabs_index <=1)
     		parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index+1;
     	else parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index-1;
     }
@@ -340,7 +321,7 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples_short', function (e) {
-        scb.ui.static.FacsView.scb_f_facs_run_samples_short(this, e);
+        scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
     });
     
     
@@ -663,11 +644,11 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         }
         
         state.experiment.last_technique_view = 'facs';
-        var x = 0;
+        var scroll_num = 0;
         if($('.scb_s_facs_samples_table').length ==0)
-        	x=100;
+        	scroll_num=scb.ui.static.FacsView.TOTAL_SCROLL;
         else
-        	x = $('.scb_s_facs_samples_table')[0].scrollTop;
+        	scroll_num = $('.scb_s_facs_samples_table')[0].scrollTop;
         	
         workarea.html(scb_facs.main({
             global_template: gstate.context.master_model,
@@ -685,10 +666,10 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             can_prepare_lysate: can_prepare_lysate
         }));
         if (kind == 'sample_prep'){
-        	$('.scb_s_facs_samples_table')[0].scrollTop = x;
+        	$('.scb_s_facs_samples_table')[0].scrollTop = scroll_num;
         }
-        state.experiment.prev_step=5;
-        if(state.experiment.last_step >= 5)
+        state.experiment.prev_step=scb.ui.static.FacsView.TOTAL_STEPS;
+        if(state.experiment.last_step >= scb.ui.static.FacsView.TOTAL_STEPS)
 			state.experiment.last_step = 6;
 		state.experiment.last_technique = 'FLOW CYTOMETRY';
 		state.experiment.last_id = state.facs.id;
@@ -702,7 +683,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         		$(element).css('opacity', '0.5');
         		$('span', $(element)).css('opacity', '0.5');
         	}
-    	})
+    	});
         
 		document.body.scrollTop = state.experiment.last_scroll;
 
@@ -716,9 +697,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 			$('.scb_s_facs_left_facs').prop('disabled', true);
 			$('.scb_s_facs_right_facs').prop('disabled', false);
 		}
-		else $('.scb_s_facs_left_facs').prop('disabled', false);
-		
-		if(state.facs.parent.start_tabs_index + 3 ==state.facs.parent.list.length-1){
+		else if(state.facs.parent.start_tabs_index + scb.ui.static.FacsView.TOTAL_TABS-1 ==state.facs.parent.list.length-1){
 			$('.scb_s_facs_right_facs').prop('disabled', true);
 			$('.scb_s_facs_left_facs').prop('disabled', false);
 		}
@@ -755,16 +734,18 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         }
 		
 		_.each($(".scb_s_experiment_step_button"), function (e) {
-			if($(e).css('background-color')=='rgb(213, 220, 228)') 
+			if(!$(e).hasClass('scb_s_experiment_step_visited')) 
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});
 		$(".scb_s_facs_selected").keypress(function(e){ return e.which != 13; });
+		
 		if(kind == 'analyze'){
+			//correct offset caused in FACS to align all parts of progress bar correctly
 			$('.scb_s_western_blot_progress_gray_bar').children().each(function () { console.log($(this).css('left'));
     				$(this).css('left', parseInt($(this).css('left'))-5+'px');
 			});
-			$('.scb_s_western_blot_progress_bar').css('top', '30px');
+			$('.scb_s_western_blot_progress_bar').addClass('scb_s_facs_bar');
 		}
     }
 }
