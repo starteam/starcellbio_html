@@ -697,7 +697,9 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 			$('.scb_s_facs_left_facs').prop('disabled', true);
 			$('.scb_s_facs_right_facs').prop('disabled', false);
 		}
-		else if(state.facs.parent.start_tabs_index + scb.ui.static.FacsView.TOTAL_TABS-1 ==state.facs.parent.list.length-1){
+		else $('.scb_s_facs_left_facs').prop('disabled', false);
+		
+		if(state.facs.parent.start_tabs_index + scb.ui.static.FacsView.TOTAL_TABS-1 ==state.facs.parent.list.length-1){
 			$('.scb_s_facs_right_facs').prop('disabled', true);
 			$('.scb_s_facs_left_facs').prop('disabled', false);
 		}

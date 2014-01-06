@@ -3,8 +3,8 @@
 scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.MicroscopyView = scb.ui.static.MicroscopyView || {};
-
 scb.ui.static.MicroscopyView.TOTAL_TABS =  4;
+scb.ui.static.MicroscopyView.TOTAL_STEPS =  5;
 
 
 scb.ui.static.MicroscopyView.parse = function (element) {
@@ -495,6 +495,7 @@ function reset_canvas(){
 	ctx.clip();
 	return [new_canvas, ctx];	
 }
+
 //This function will initialize the image and serialize the data of the 
 //original unprocessed image to a string
 function init(state, draw, image_source){
@@ -540,7 +541,6 @@ function init(state, draw, image_source){
 			
 			initialize_state(state, img2string);
 			var randomblur = Math.round(Math.ceil(Math.random()*100) / 10) * 10;
-			console.log("SHLOKA");
 			console.log(randomblur);
 			state['blur'] = randomblur;
 
@@ -568,26 +568,6 @@ function init(state, draw, image_source){
 	}
 
 }
-
-
-// function initialize_state(state, img2string){
-// 	state['orig'] = reset_image(img2string);
-// 	state['display'] = reset_image(img2string);
-// 	state['brightness'] = 0;
-// 	state['xparam'] = 0;
-// 	state['yparam'] = 0;
-// 	state['blur'] = 0;
-// 	state['action'] = 'start';
-// 	state['cache'] = new Object();
-// 	state['cache']['brightness'] = 0;
-// 	state['cache']['blur'] = 0;
-// 	state['cache']['image'] = reset_image(img2string);
-// 	
-// 	$('.scb_s_microscope_status').text(state['action']);
-// 	$("input").attr("disabled", true);
-// 	
-// }
-
 
 function initialize_state(state, img2string){
 	state['orig'] =img2string;
@@ -817,8 +797,6 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
     });
 }
 
-scb.ui.static.MicroscopyView.MAX_ROWS = 15;
-
 scb.ui.static.MicroscopyView.draw_slides = function (workarea) {
     $('.scb_s_microscopy_slide_content').each(function () {
 
@@ -865,8 +843,8 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         }));
         state.experiment.prev_step=6;
         
-        if(state.experiment.last_step >= 5)
-			state.experiment.last_step = 6;
+        if(state.experiment.last_step >= scb.ui.static.MicroscopyView.TOTAL_STEPS)
+			state.experiment.last_step = scb.ui.static.MicroscopyView.TOTAL_STEPS+1;
 		state.experiment.last_technique = 'MICROSCOPY';
 		state.experiment.last_id = state.microscopy.id;
 		state.experiment.last_param = 'microscopy_id';
@@ -884,7 +862,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 		}
 		else $('.scb_s_microscopy_left_microscopy').prop('disabled', false);
 		
-		if(state.microscopy.parent.start_tabs_index + 3 ==state.microscopy.parent.list.length-1){
+		if(state.microscopy.parent.start_tabs_index + scb.ui.static.MicroscopyView.TOTAL_TABS-1 ==state.microscopy.parent.list.length-1){
 			$('.scb_s_microscopy_right_microscopy').prop('disabled', true);
 			$('.scb_s_microscopy_left_microscopy').prop('disabled', false);
 		}

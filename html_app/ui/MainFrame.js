@@ -293,9 +293,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				var iframe = $('.iframe').contents();
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 			
-			var fieldset = content.querySelectorAll('fieldset');
-			$(fieldset).css('border', '0');
-			$('iframe').contents().find(".scb_f_contact_submit_button").click(function(e){
+				var fieldset = content.querySelectorAll('fieldset');
+				$(fieldset).css('border', '0');
+				$('iframe').contents().find(".scb_f_contact_submit_button").click(function(e){
 					$('iframe').load(function(){
 						  var profile = $('iframe').contents();
 						  if(profile[0].body.textContent.indexOf('you for your feedback.') >0){

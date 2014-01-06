@@ -414,8 +414,11 @@
     <canvas class='scb_s_western_blot_gel' src='images/western_blot/SCB_WesternBlotting_GelNumbers.png'/>
 
     <div class='scb_s_western_blot_tools'>
+    	{if $western_blot.wells_loaded == true and $western_blot.marker_loaded == true}
+
         <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' western_blot_id='{$western_blot.id}'
                     assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">RUN GEL & TRANSFER</a>
+        {/if}
     </div>
     </div>
 </div>
@@ -613,4 +616,12 @@
         <img src='images/western_blot/WesternBlot_BlueWells_15.png'>
         <img src='images/western_blot/SCB_WesternBlotting_GelNumbers.png'>
     </span>
+{/template}
+
+/**
+* Western Blot Lane Error
+*/
+{template .wb_sample_error}
+You have selected more than 15 samples. The gel only has 15 lanes. Please only select 15
+ samples, and remember that one lane is usually reserved for a protein marker."
 {/template}

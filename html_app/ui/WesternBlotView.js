@@ -3,6 +3,10 @@
 scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.WesternBlotView = scb.ui.static.WesternBlotView || {};
+scb.ui.static.WesternBlotView.TOTAL_TABS =  4;
+scb.ui.static.WesternBlotView.TOTAL_STEPS =  5;
+scb.ui.static.WesternBlotView.TOTAL_SCROLL =  5;
+
 
 scb.ui.static.WesternBlotView.parse = function (element) {
     var assignment_id = $(element).attr('assignment_id');
@@ -88,9 +92,9 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
     	parsed.state.index = parsed.state.index -1 ;
     }
     //fix tab indexing for display
-    if(parsed.state.index > parsed.experiment.western_blot_list.list.length -4) {
+    if(parsed.state.index > parsed.experiment.western_blot_list.list.length -scb.ui.static.WesternBlotView.TOTAL_TABS) {
     	
-    	if((parsed.experiment.western_blot_list.list.length == 5 || parsed.experiment.western_blot_list.list.length == 6) && parsed.experiment.western_blot_list.start_tabs_index <=1)
+    	if((parsed.experiment.western_blot_list.list.length == scb.ui.static.WesternBlotView.TOTAL_TABS+1 || parsed.experiment.western_blot_list.list.length == scb.ui.static.WesternBlotView.TOTAL_TABS+2) && parsed.experiment.western_blot_list.start_tabs_index <=1)
     		parsed.experiment.western_blot_list.start_tabs_index = parsed.experiment.western_blot_list.start_tabs_index+1;
     	else parsed.experiment.western_blot_list.start_tabs_index = parsed.experiment.western_blot_list.start_tabs_index-1;
     }
@@ -159,26 +163,18 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     var rows_state = parsed.western_blot.rows_state();
     if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
     	$('body').css('overflow', 'hidden');
-    	$.jqDialog.alert("You have selected more than " + scb.ui.static.WesternBlotView.MAX_ROWS 
-    	+ " samples. The gel only has 15 lanes. Please only select " 
-    	+ scb.ui.static.WesternBlotView.MAX_ROWS 
-    	+ " samples, and remember that one lane is usually reserved for a protein marker.", 
+    	$.jqDialog.alert(scb_western_blot.wb_sample_error(), 
     	function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
 		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-
-			    	
-
     }
     else if (rows_state.valid < 1) {
-    	    	$('body').css('overflow', 'hidden');
-
+    	$('body').css('overflow', 'hidden');
     	$.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {
 				$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ 
 		});
  		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-
     }
     else {
         parsed.western_blot.lysate_prepared = true;
@@ -197,7 +193,6 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element
             id: 'marker',
             name: 'Marker',
             cell_treatment_id: "marker_treatment",
-
             experiment_id: parsed.experiment.id
     });
     parsed.western_blot.marker_loaded = true;
@@ -206,14 +201,11 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element
 
 
 scb.ui.static.WesternBlotView.populate_wells = function (rows, state) {
-//, gstate
-    //TODO: 1st things first -- we needs to save NEW order
-
     state.western_blot.wells_loaded = true;
     var canvas = $('.scb_s_western_blot_gel')[0];
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
-
+    
     var g = canvas.getContext('2d');
 
     function getImage(index) {
@@ -257,7 +249,6 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_choose_gel_type_input = functio
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
     parsed.western_blot.gel_type = $(element).val();
     scb.ui.static.MainFrame.refresh();
 }
@@ -271,20 +262,15 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
     }
 
     if (!parsed.western_blot.marker_loaded) {
-    	    	$('body').css('overflow', 'hidden');
-
+    	$('body').css('overflow', 'hidden');
 		$.jqDialog.confirm("The protein size marker has not been loaded. Would you like to continue?",
 			function() {    
-				//TODO: 1st things first -- we needs to save NEW order
     			parsed.western_blot.is_transfered = true;
     			$('body').css('overflow', 'visible');
-
-    			//TODO: before repaint need to do steps in animation...
     			scb.ui.static.MainFrame.refresh();
     		},// callback function for 'YES' button
 			function() {
 					$('body').css('overflow', 'visible');
-
 					return;
 			}		// callback function for 'NO' button
 		);
@@ -294,7 +280,6 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
     }
     else{
     	parsed.western_blot.is_transfered = true;
-
     	//TODO: before repaint need to do steps in animation...
     	scb.ui.static.MainFrame.refresh();
     }
@@ -342,12 +327,11 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot= function(elem
 	parsed.experiment.last_scroll=document.body.scrollTop;
 	console.log(parsed.western_blot.parent.start_tabs_index);
 	console.log(parsed.western_blot.parent.list.length);
-	if(parsed.western_blot.parent.list.length==4){
+	if(parsed.western_blot.parent.list.length==scb.ui.static.WesternBlotView.TOTAL_TABS){
 		parsed.western_blot.parent.start_tabs_index = 1;
 	}
-	else if (parsed.western_blot.parent.list.length >4)
-		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.length-3;
-
+	else if (parsed.western_blot.parent.list.length >scb.ui.static.WesternBlotView.TOTAL_TABS)
+		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.length-scb.ui.static.WesternBlotView.TOTAL_TABS-1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
@@ -450,9 +434,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
         scb.ui.static.WesternBlotView.scb_s_western_blot_selected(this);
     });
     scb.utils.off_on(workarea, 'keydown', '.scb_s_western_blot_selected', function (e) {
-    	if ($('.scb_s_western_blot_selected').text().length<= 10) {
-    	}
-    	else{    		 
+    	if ($('.scb_s_western_blot_selected').text().length> 10) {
     		$('.scb_s_western_blot_selected').text()
     		e.preventDefault();
     		 this.textContent= this.textContent.substring(0, this.textContent.length-1)
@@ -494,20 +476,17 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     	scb.ui.static.WesternBlotView.scb_f_western_blot_sample_inactive_all(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_wb_up_button', function (e, ui){
-	var item = $('.markedLi');
-     	    var prev = item.prev();
-			if (prev.length == 0)
+		var item = $('.markedLi');
+     	var prev = item.prev();
+		if (prev.length == 0)
 				return;
-			prev.css('z-index', 999).css('position','relative').animate({ top: item.height() }, 250);
-			item.css('z-index', 1000).css('position', 'relative').animate({ top: '-' + prev.height() }, 300, function () {
-				prev.css('z-index', '').css('top', '').css('position', '');
-				item.css('z-index', '').css('top', '').css('position', '');
-				item.insertBefore(prev);
-			});
+		prev.css('z-index', 999).css('position','relative').animate({ top: item.height() }, 250);
+		item.css('z-index', 1000).css('position', 'relative').animate({ top: '-' + prev.height() }, 300, function () {
+			prev.css('z-index', '').css('top', '').css('position', '');
+			item.css('z-index', '').css('top', '').css('position', '');
+			item.insertBefore(prev);
+		});
     	scb.ui.static.WesternBlotView.scb_s_western_blot_sort_up_button($('.markedLi')[0]);
-
-		
-
    	});
    	scb.utils.off_on(workarea, 'click', '.scb_f_wb_down_button', function (e, ui){
 		var item = $('.markedLi');
@@ -585,8 +564,8 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         	$('.scb_s_western_blot_samples_table')[0].scrollTop = x;
         }
         state.experiment.prev_step=4;
-        if(state.experiment.last_step >= 5)
-			state.experiment.last_step = 6;
+        if(state.experiment.last_step >= scb.ui.static.WesternBlotView.TOTAL_STEPS)
+			state.experiment.last_step = scb.ui.static.WesternBlotView.TOTAL_STEPS+1;
 		state.experiment.last_technique = 'WESTERN BLOT';
 		state.experiment.last_id = state.western_blot.id;
 		state.experiment.last_param = 'western_blot_id';
@@ -599,7 +578,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		}
 		else $('.scb_s_western_blot_left_western_blot').prop('disabled', false);
 		
-		if(state.western_blot.parent.start_tabs_index + 3 ==state.western_blot.parent.list.length-1){
+		if(state.western_blot.parent.start_tabs_index + scb.ui.static.WesternBlotView.TOTAL_TABS -1 ==state.western_blot.parent.list.length-1){
 			$('.scb_s_western_blot_right_western_blot').prop('disabled', true);
 			$('.scb_s_western_blot_left_western_blot').prop('disabled', false);
 		}
@@ -612,12 +591,11 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         if(kind != 'sample_prep') {
         	$('.scb_s_western_blot_video_box_wrapper').remove();
         }
-        if (kind == 'sample_prep') {
+        else {
             if (_.keys(template.lysate_kinds).length == 1) {
                 $('button.scb_f_western_blot_sample_remove').hide();
             	//strange bug where clicks not reflected in place, hitting cancel button corrects this problem.  
-            }
-            
+            }            
         }
         if (kind == 'prepare_gel') {
         	if(state.western_blot.wells_loaded)
@@ -642,7 +620,6 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		else{
 			$('.scb_s_western_blot_choose_samples_list_item').removeClass('scb_s_western_blot_sortable_item');
 			$('.scb_s_western_blot_choose_samples_list_item').removeClass('scb_s_movable_item');
-
 		}
 		
 		_.each($(".scb_s_experiment_step_button"), function (e) {
@@ -660,15 +637,15 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 					$('.slider_dots li').attr('class','');
 					$($('.slider_dots li')[index]).attr('class','on');}
 		});
-		$('#nav li').on ('click', function () {
+		$('#nav li').on('click', function () {
 			$('.slider_dots li').attr('class','');
 			$($('.slider_dots li')[$(this).index()]).attr('class','on');
    			 window.mySwipe.slide($(this).index(), 200);
 		});
 		
 		$('.scb_s_western_blot_choose_samples_list_item').mousedown(function(){    	
-		$('.markedLi').removeClass('markedLi');
-    	$(this).addClass('markedLi');
+			$('.markedLi').removeClass('markedLi');
+    		$(this).addClass('markedLi');
 		});
 
 

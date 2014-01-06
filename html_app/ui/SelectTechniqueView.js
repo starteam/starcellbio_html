@@ -3,6 +3,10 @@
 scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.SelectTechniqueView = scb.ui.static.SelectTechniqueView || {};
+scb.ui.static.SelectTechniqueView.TOTAL_STEPS =  5;
+scb.ui.static.SelectTechniqueView.TOTAL_TABS =  5;
+
+
 
 scb.ui.static.SelectTechniqueView.wbparse = function (element) {
     var assignment_id = $(element).attr('assignment_id');
@@ -81,7 +85,7 @@ scb.ui.static.SelectTechniqueView.disable_techniques = function (state) {
     $('a','.scb_s_select_technique_disabled').removeAttr('href').css('cursor','default');
 }
 
-
+//SAIYAAN
 scb.ui.static.SelectTechniqueView.scb_s_select_technique_open_western_blot = function(element, event){
 	var parsed = scb.ui.static.SelectTechniqueView.wbparse(element);
 	var blot = $.grep(parsed.experiment.western_blot_list.list, function(e){ return e.id == $(element).attr('western_blot_id'); });
@@ -159,10 +163,10 @@ scb.ui.SelectTechniqueView = function scb_ui_SelectTechniqueView(gstate) {
             experiment: state.experiment
         }));
         state.experiment.prev_step=3;
-        if(state.experiment.last_step > 5)
-			state.experiment.last_step = 6;
+        if(state.experiment.last_step > scb.ui.static.SelectTechniqueView.TOTAL_STEPS)
+			state.experiment.last_step = scb.ui.static.SelectTechniqueView.TOTAL_STEPS+1;
 		else
-			state.experiment.last_step = 5;
+			state.experiment.last_step = scb.ui.static.SelectTechniqueView.TOTAL_STEPS;
 
         state.experiment.last_view = 'select_technique';
 		
