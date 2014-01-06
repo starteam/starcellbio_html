@@ -170,7 +170,7 @@ scb.ui.SelectTechniqueView = function scb_ui_SelectTechniqueView(gstate) {
         scb.ui.static.SelectTechniqueView.disable_techniques({template: template, workarea: workarea});
         
 		_.each($(".scb_s_experiment_step_button"), function (e) {
-			if($(e).css('background-color')=='rgb(213, 220, 228)') 
+			if(!$(e).hasClass('scb_s_experiment_step_visited')) 
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});

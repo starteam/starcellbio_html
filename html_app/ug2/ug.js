@@ -4,7 +4,6 @@ var total=0;
 $('.scb_s_ug_home').hide();
 last_element_offset = 0;
 
-
 //function to redirect popout link to the new page, NOT USED, code redone in MainFrame for new handler
 function popoutGuide(){
 	var popout_string = "";

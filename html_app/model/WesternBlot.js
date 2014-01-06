@@ -95,6 +95,7 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
                         is_sample_enabled:self.is_cell_treatment_enabled[e.id],
                         index:index,
                         is_valid:self.is_cell_treatment_enabled[e.id] && ee,
+                        is_marker: false,
                         display_text: e.format_row()
                     });
                 	
@@ -105,6 +106,7 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
                         display_sample:false,
                         cell_treatment:e,
                         is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                        is_marker: false,
                         is_valid:false
                     });
                 }
@@ -115,11 +117,26 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
                     display_sample:true,
                     cell_treatment:e,
                     is_sample_enabled:self.is_cell_treatment_enabled[e.id],
+                	is_marker: false,
                     is_valid:false,
                     display_text: e.format_row()
                 })
             }
         });
+        if(grouped_rows['marker_treatment']){
+        	_.each(grouped_rows['marker_treatment'], function (ee, index) {
+                    rows.push({
+                        kind:'existing',
+                        lane:ee,
+                        display_sample:index == 0,
+                        index:index,
+                        is_valid:false,
+                        is_marker: true,
+                        display_text: ee.name
+                    });
+                	
+                });
+        }
         var count = 0;
         _.each(rows, function (e) {
             if (e.is_valid) count++;

@@ -26,7 +26,6 @@ scb.ui.static.MainFrame.update_hash = function (state) {
 scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     var self = this;
     var pending_save = false;
-    var pending_save2 = false;
     context.main_frame = self;
     self.sections = {};
 
@@ -309,6 +308,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 		//HANDLER FOR USER_GUIDE BUTTON AND IFRAME
 	scb.utils.off_on(workarea.parent(), 'click', '.scb_f_user_guide', function (evt) {
     	$('body').append(scb_userguide.userguide({}));
+    	window.iFrameChanges = -1; //will get incremented to 0 on first page load
     	$('.scb_f_ug_down_button').hide();
     	$('.scb_f_ug_up_button').hide();
     	$('.scb_f_ug_search_line').hide();
@@ -335,6 +335,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
    		 });
 		
 		$('iframe').load(function(){
+    		window.iFrameChanges+=1;
 			$('.scb_f_ug_help_search_bar').width($('iframe').contents().find('.scb_f_help_display').width()+20);
 			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
 			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
@@ -359,6 +360,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 						$('iframe').contents().find('.scb_f_help a[name="'+$(this).attr('href').substring(1)+'"]').parents('.scb_s_help_sublink').click();
 					});
 				});			
+			});
+			$($('iframe')[0].contentWindow).bind( 'hashchange', function(e) {
+				if(window.iFrameState !='back'){ 
+					window.iFrameChanges+=1;
+					window.iFrameState='forward';
+					if(window.iFrameChanges > 0) 
+						$('.scb_s_ug_back').removeAttr('disabled');
+				}
 			});
 			$('#search').click(function(){
 					$('iframe').ready(function(){
@@ -404,7 +413,17 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			
 			
 			$(".scb_s_ug_back").click(function(){
-				$('iframe')[0].contentWindow.history.back();
+				if(window.iFrameChanges >0){
+					$('iframe')[0].contentWindow.window.history.go(-1);
+					window.iFrameChanges-=1;
+					window.iFrameState='back';
+				}
+				if(window.iFrameChanges ==0){
+					$('.scb_s_ug_back').attr('disabled', 'disabled');
+					window.iFrameChanges=-1;
+					window.iFrameState='forward';
+				}
+				//$('iframe').contents().find(".scb_s_ug_back").click();
 			});
 			
 			

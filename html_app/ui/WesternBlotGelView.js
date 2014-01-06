@@ -441,7 +441,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all(workarea, gstate, state);
         
 		_.each($(".scb_s_experiment_step_button"), function (e) {
-			if($(e).css('background-color')=='rgb(213, 220, 228)') 
+			if(!$(e).hasClass('scb_s_experiment_step_visited')) 
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});

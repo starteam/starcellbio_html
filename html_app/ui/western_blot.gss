@@ -638,6 +638,8 @@
 	border-radius: 5px;
 	margin: 3px;
 	border: 1px solid gray;
+	cursor: pointer;
+
 }
 
 
@@ -689,7 +691,6 @@
 
 
 .scb_s_western_blot_choose_samples_list_item {
-	cursor: pointer;
 }
 
 body.dragging, body.dragging * {

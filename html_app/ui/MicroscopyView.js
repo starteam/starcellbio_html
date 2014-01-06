@@ -4,6 +4,9 @@ scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.MicroscopyView = scb.ui.static.MicroscopyView || {};
 
+scb.ui.static.MicroscopyView.TOTAL_TABS =  4;
+
+
 scb.ui.static.MicroscopyView.parse = function (element) {
     var assignment_id = $(element).attr('assignment_id');
     var experiment_id = $(element).attr('experiment_id');
@@ -30,8 +33,10 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	var model = new scb.components.ModelFactory(state.context.template);
 	model.microscopy.compute(state);
 	console.log(state.color);
-	init(map, draw, 'images/microscopy/'+state.color+'.jpg');
+	init(lens_map, draw, 'images/microscopy/'+state.color+'.jpg');
 }
+
+
 scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
 	parsed.experiment.last_scroll=document.body.scrollTop;
@@ -54,24 +59,10 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
     }
     else {
     	parsed.microscopy.lanes_list.get(slide_id).kind = slide_type;
-
     }
     if (event) {
         scb.ui.static.MainFrame.refresh();
     }
-}
-
-scb.ui.static.MicroscopyView.scb_f_microscopy_sample_remove = function (element) {
-    var parsed = scb.ui.static.MicroscopyView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
-    if (parsed.redisplay) {
-        alert("INVALID ELEMENT!");
-    }
-
-    var slide_id = $(element).attr('lane_id');
-    if (slide_id != '') {
-    }
-    scb.ui.static.MainFrame.refresh();
 }
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_sample_active = function (element, event) {
@@ -113,34 +104,21 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_remove = function (element) {
 	var id_list = [];
  	for( var x=0; x < parsed.experiment.microscopy_list.list.length; x++){id_list.push(parsed.experiment.microscopy_list.list[x].id);}
     parsed.state.index= id_list.indexOf(parsed.microscopy.id);
-	
-
-
-
     parsed.experiment.microscopy_list.remove(parsed.microscopy.id);
-    
-    
     if(parsed.state.index == parsed.experiment.microscopy_list.list.length){
     	parsed.state.index = parsed.state.index -1 ;
     }
     //fix tab indexing for display
-    if(parsed.state.index > parsed.experiment.microscopy_list.list.length -4) {
+    if(parsed.state.index > parsed.experiment.microscopy_list.list.length -scb.ui.static.MicroscopyView.TOTAL_TABS) {
     	
-    	if((parsed.experiment.microscopy_list.list.length == 5 || parsed.experiment.microscopy_list.list.length == 6) && parsed.experiment.microscopy_list.start_tabs_index <=1)
+    	if((parsed.experiment.microscopy_list.list.length == scb.ui.static.MicroscopyView.TOTAL_TABS+1 || parsed.experiment.microscopy_list.list.length == scb.ui.static.MicroscopyView.TOTAL_TABS+2) && parsed.experiment.microscopy_list.start_tabs_index <=1)
     		parsed.experiment.microscopy_list.start_tabs_index = parsed.experiment.microscopy_list.start_tabs_index+1;
     	else parsed.experiment.microscopy_list.start_tabs_index = parsed.experiment.microscopy_list.start_tabs_index-1;
     }
     
     delete parsed.state.skip_hash_update;
     scb.ui.static.MainFrame.refresh(parsed.state);
-
-
 }
-
-
-
-
-
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_selected = function (element) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
@@ -157,33 +135,27 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
 	parsed.experiment.last_scroll=document.body.scrollTop;
     var rows_state = parsed.microscopy.rows_state();
     if (rows_state && rows_state.valid < 1) {
-    	    	$('body').css('overflow', 'hidden');
-
+    	$('body').css('overflow', 'hidden');
     	$.jqDialog.confirm("No samples selected. Would you like to continue?",
 			function() {    
 					parsed.microscopy.slide_prepared = true;
 					window.scrollTo(0, 0);
 					$('body').css('overflow', 'visible');
-
 					scb.ui.static.MainFrame.refresh();
     		},// callback function for 'YES' button
 			function() {
-					    	$('body').css('overflow', 'visible');
-
+					$('body').css('overflow', 'visible');
 					return;
-			}		// callback function for 'NO' button
+			}// callback function for 'NO' button
 		);
 		$('.jqDialog_header').remove();
-						$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-
+		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
     }
     else{
         parsed.microscopy.slide_prepared = true;
         window.scrollTo(0, 0);
         scb.ui.static.MainFrame.refresh();
     }
-
-
 }
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_choose_gel_type_input = function (element) {
@@ -193,7 +165,6 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_choose_gel_type_input = function (
         alert("INVALID ELEMENT!");
     }
     //TODO: 1st things first -- we needs to save NEW order
-
     parsed.microscopy.gel_type = $(element).val();
     scb.ui.static.MainFrame.refresh();
 }
@@ -227,8 +198,6 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    
-    
     parsed.microscopy.samples_finished = true;
     parsed.microscopy.lane_selected = scb.utils.get(parsed.microscopy.lanes_list.list, [0, 'id']);
     $('#lens').remove();
@@ -273,11 +242,11 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_add_microscopy= function(element, 
 
 	console.log(parsed.microscopy.parent.start_tabs_index);
 	console.log(parsed.microscopy.parent.list.length);
-	if(parsed.microscopy.parent.list.length==4){
+	if(parsed.microscopy.parent.list.length==scb.ui.static.MicroscopyView.TOTAL_TABS){
 		parsed.microscopy.parent.start_tabs_index = 1;
 	}
-	else if (parsed.microscopy.parent.list.length >4)
-		parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.length-3;
+	else if (parsed.microscopy.parent.list.length >scb.ui.static.MicroscopyView.TOTAL_TABS)
+		parsed.microscopy.parent.start_tabs_index = parsed.microscopy.parent.length-scb.ui.static.MicroscopyView.TOTAL_TABS-1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
@@ -309,7 +278,7 @@ cache -
 */
 //////////////////
 
-var map = new Object();
+var lens_map = new Object();
 
 var caman;
 
@@ -337,12 +306,12 @@ you pass a callback function to the method so that it calls the draw method imme
 function draw_lens(param, addition, state, canvas){
 	var context = canvas.getContext('2d');
 	clear_canvas(context, canvas);
-	if(state['cache']['brightness'] != state['brightness'] || state['cache']['blur'] != state['blur'] || state['cache']['sharpen'] != state['sharpen']){
+	if(state['cache']['brightness'] != state['brightness'] || state['cache']['blur'] != state['blur']){
 		save_and_draw_cache_image(canvas,state);
 	}
 	else
 		//insert special method that listens for borders to rerender new portion of image
-		context.drawImage(state['cache']['image'], state['xparam'], state['yparam']);
+		context.drawImage(reset_image(state['cache']['image']), state['xparam'], state['yparam']);
 
 	switch(param)
 	{
@@ -364,7 +333,7 @@ function updateLensPosition(state,canvas, microslide_top, microslide_left){
 	//Make sure to handle state later when you can test it
 	var taddition = ((microslide_top*10)/0.3);
 	var laddition = (((microslide_left-difference))/0.3)*10;
-	context.drawImage(state['cache']['image'], state['xparam'], state['yparam']);
+	context.drawImage(reset_image(state['cache']['image']), state['xparam'], state['yparam']);
 	console.log(laddition);
 	console.log(microslide_left);
 	state['xparam'] = -laddition ;
@@ -469,17 +438,12 @@ function draw(state){
 			var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 			samples_area.removeChild(canvases[0]);
 		}
-		init(map, draw, string);
+		init(lens_map, draw, string);
 	});
 	console.log('draw');
 }
 
 
-function reset_image(img2string){
-	var image = document.createElement('img');
-	image.src = img2string;
-	return image;
-}
 
 
 
@@ -606,23 +570,38 @@ function init(state, draw, image_source){
 }
 
 
+// function initialize_state(state, img2string){
+// 	state['orig'] = reset_image(img2string);
+// 	state['display'] = reset_image(img2string);
+// 	state['brightness'] = 0;
+// 	state['xparam'] = 0;
+// 	state['yparam'] = 0;
+// 	state['blur'] = 0;
+// 	state['action'] = 'start';
+// 	state['cache'] = new Object();
+// 	state['cache']['brightness'] = 0;
+// 	state['cache']['blur'] = 0;
+// 	state['cache']['image'] = reset_image(img2string);
+// 	
+// 	$('.scb_s_microscope_status').text(state['action']);
+// 	$("input").attr("disabled", true);
+// 	
+// }
+
+
 function initialize_state(state, img2string){
-	state['orig'] = reset_image(img2string);
-	state['display'] = reset_image(img2string);
+	state['orig'] =img2string;
+	state['display'] = img2string;
 	state['brightness'] = 0;
 	state['xparam'] = 0;
 	state['yparam'] = 0;
 	state['blur'] = 0;
-	state['sharpen'] = 0;
 	state['action'] = 'start';
 	state['cache'] = new Object();
 	state['cache']['brightness'] = 0;
 	state['cache']['blur'] = 0;
-	state['cache']['sharpen'] = 0;
-	state['cache']['image'] = reset_image(img2string);
+	state['cache']['image'] = img2string;
 	
-	state['sharp']= new Object();
-	state['sharp']['images'] = [];
 	$('.scb_s_microscope_status').text(state['action']);
 	$("input").attr("disabled", true);
 	
@@ -639,7 +618,7 @@ function save_and_draw_cache_image(canvas, state){
 	var elements = reset_cache();
 	var canvas_hidden = elements[0]; 
 	var spy_ctx = elements[1];
-	var img = state['display'];
+	var img = reset_image(state['display']);
 	var spy_img;
 	Caman(canvas_hidden, img, function () {
 		this.brightness(state['brightness']);
@@ -660,9 +639,8 @@ function save_and_draw_cache_image(canvas, state){
 			hidden_canvas.width= 0;
 			hidden_canvas.height=0;
 			$('.scb_s_microscope_status').text(state['action']);
-			state['cache']['image'] = spy_img ;
+			state['cache']['image'] = spy_img.src ;
 			state['cache']['brightness'] = state['brightness'];
-			state['cache']['sharpen'] = state['sharpen'];
 			state['cache']['blur'] = state['blur'];
 			
 			document.documentElement.style.overflow='scroll';
@@ -688,7 +666,7 @@ function save_and_draw_cache_image(canvas, state){
 	ctx.beginPath();
 	ctx.arc(150, 150, arc, 0, Math.PI *2, false);
 	ctx.clip();	
-	ctx.drawImage(state['cache']['image'], state['xparam'], state['yparam']);
+	ctx.drawImage(reset_image(state['cache']['image']), state['xparam'], state['yparam']);
 }
 
 
@@ -701,7 +679,13 @@ function modify_state_brightness(addition, state){
 		state['brightness'] = 100;
 	else if (state['brightness'] <=-100)
 		state['brightness'] = -100;
-	Caman(canvas, state['display'], function () {
+	console.log('brightness');
+	console.log(state['brightness']);
+	console.log('blur');
+	console.log(state['blur']);
+	console.log('addition');
+	console.log(addition);
+	Caman(canvas, reset_image(state['display']), function () {
 		this.brightness(state['brightness']);
 		this.stackBlur(state['blur']);
 		this.render(function(){
@@ -721,7 +705,7 @@ function modify_state_brightness(addition, state){
 	context.beginPath();
 	context.arc(150, 150, arc, 0, Math.PI *2, false);
 	context.clip();	
-	context.drawImage(state['display'], state['xparam'], state['yparam']);
+	context.drawImage(reset_image(state['display']), state['xparam'], state['yparam']);
 
 }
 
@@ -734,8 +718,6 @@ function modify_state_blur(addition, state, direction){
 	console.log(state['blur']);
 	console.log('addition');
 	console.log(addition);
-	console.log('sharpen');
-	console.log(state['sharpen']);
 	
 	if(state['blur'] >100){
 		state['blur'] = 100;
@@ -752,19 +734,25 @@ function modify_state_blur(addition, state, direction){
 		blur_helper(state, context, canvas, Math.abs(addition));
 	}
 	else if(isLeft){
-			blur_helper(state,context, canvas, -addition);
+		blur_helper(state,context, canvas, -addition);
 	}
 	else {
-			blur_helper(state,context, canvas, addition);
+		blur_helper(state,context, canvas, addition);
 	}
 }
 
+function reset_image(img2string){
+	var image = document.createElement('img');
+	image.src = img2string;
+	return image;
+}
+
+
 
 function blur_helper(state, context, canvas, addition){
-	state['sharpen']=0;
 	state['display'] = state['orig'];
 	state['blur'] = state['blur'] + addition;
-	Caman(canvas, state['display'], function () {
+	Caman(canvas, reset_image(state['display']), function () {
 		this.brightness(state['brightness']);
 		this.stackBlur(state['blur']);
 		this.render(function(){
@@ -785,16 +773,13 @@ function blur_helper(state, context, canvas, addition){
 	context.beginPath();
 	context.arc(150, 150, arc, 0, Math.PI *2, false);
 	context.clip();	
-	context.drawImage(state['orig'], state['xparam'], state['yparam']);
+	context.drawImage(reset_image(state['orig']), state['xparam'], state['yparam']);
 }
 
 
 scb.ui.static.MicroscopyView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_select_slide_type', function (e) {
         scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type(this, e);
-    });
-    scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_sample_remove', function (e) {
-        scb.ui.static.MicroscopyView.scb_f_microscopy_sample_remove(this);
     });
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_sample_active', function (e) {
         scb.ui.static.MicroscopyView.scb_f_microscopy_sample_active(this, e);
@@ -841,6 +826,7 @@ scb.ui.static.MicroscopyView.draw_slides = function (workarea) {
         var parsed = scb.ui.static.MicroscopyView.parse(this);
         parsed.slide = slide;
         scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide(parsed);
+   //     parsed.microscopy_lane.lens_map = lens_map;
     })
 }
 
@@ -922,10 +908,10 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         	scb.ui.static.MicroscopyView.draw_slides(workarea);
         }
         else
-        init(map, draw, '../images/microscopy/black.jpg');
+        init(lens_map, draw, '../images/microscopy/black.jpg');
 
 		_.each($(".scb_s_experiment_step_button"), function (e) {
-			if($(e).css('background-color')=='rgb(213, 220, 228)') 
+			if(!$(e).hasClass('scb_s_experiment_step_visited')) 
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});	

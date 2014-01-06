@@ -363,12 +363,12 @@
         <div class='scb_s_western_blot_choose_gel_type_title'>Gel Type:</div>
         <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".10" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.10'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text">10%</span>
-        &nbsp;&nbsp;<!-- 
-<input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
-               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.12'}checked='checked'{/if} disabled='disabled'/><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_western_blot_choose_gel_type_input_disabled">12%</span>
+        &nbsp;&nbsp;
+        <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".12" western_blot_id='{$western_blot.id}'
+               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.12'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">12%</span>
         &nbsp;<input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15" western_blot_id='{$western_blot.id}'
-               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if} disabled='disabled'/><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_western_blot_choose_gel_type_input_disabled">15%</span>
- -->
+               assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">15%</span>
+
     </div>
     <div class='scb_s_western_blot_samples_heading'>
         Samples 
@@ -380,10 +380,11 @@
     <div class='scb_s_western_blot_choose_samples_order'>
         <ol class='scb_s_western_blot_choose_samples_order_list' >
             {foreach $r in $rows}
-            {if $r.is_valid}
-            	{if $western_blot.marker_loaded == true and $r.lane.id == 'marker'}
+            {if $western_blot.marker_loaded == true and $r.lane.id == 'marker'}
                 	<li class="scb_s_western_blot_marker scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>Marker</li>
-            	{/if}
+            {/if}
+            {if $r.is_valid}
+
 				<li class="scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>
 					{$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
 				</li>

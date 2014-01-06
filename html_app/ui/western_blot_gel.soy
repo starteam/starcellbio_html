@@ -140,18 +140,15 @@
         <div class='scb_s_western_blot_choose_samples_order'>
             <ol class='scb_s_western_blot_choose_samples_order_list'>
                 {foreach $r in $rows}
+                {if $western_blot.marker_loaded == true and $r.lane.id == 'marker'}
+                	<li class="scb_s_western_blot_marker scb_s_western_blot_choose_samples_list" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>Marker</li>
+            	{/if}
                 {if $r.is_valid}
                 <li class="scb_s_western_blot_choose_samples_list" id={$r.lane.id}>
                 	{$r.display_text} -{$r.lane.kinds[$r.lane.kind].name}
                 </li>
                 {/if}
                 {/foreach}
-            </ol>
-            {let $start: $valid_rows+1 /}
-            <ol class='scb_s_western_blot_choose_samples_marker' start={$start}>
-                {if $western_blot.marker_loaded == true}
-                <li class="scb_s_western_blot_marker">Marker</li>
-                {/if}
             </ol>
         </div>
         {if $western_blot.marker_loaded == false}
@@ -243,8 +240,7 @@
 @param experiment
 @param western_blot
 @param western_blot_gel
-@/param rows
-@param valid_rows
+@param rows
 */
 {template .display_gel}
 <div class='scb_s_western_blot_gel_content'>
@@ -266,10 +262,15 @@
         {else}
         <img class='scb_s_western_blot_gel_membrane'
              src='images/western_blot/SCB_WesternBlotting_Membrane.png'>
-        {if $western_blot.marker_loaded}
-        <img style='position:relative;top: -220px;left: {20+22*$valid_rows}px' class='scb_s_western_blot_gel_membrane'
-             src='images/western_blot/SCB_WB_Markers_Lane.png'>
-        {/if}
+        {foreach $r in $rows}
+        	 {if $r.is_marker and $western_blot.marker_loaded}
+        	 <img style='position:relative;top: -220px;left: {20+22*(index($r))}px' class='scb_s_western_blot_gel_membrane'
+             src="{if $western_blot.gel_type == '.10'}images/western_blot/SCB_WB_Markers_Lane_10.png 
+             {elseif $western_blot.gel_type == '.12'} images/western_blot/SCB_WB_Markers_Lane_12.png
+             {elseif $western_blot.gel_type == '.15'}images/western_blot/SCB_WB_Markers_Lane_15.png{/if}">
+       		 {/if}        	 	
+        {/foreach}
+        
         {/if}
     </div>
     <div class='scb_s_western_blot_tools'>

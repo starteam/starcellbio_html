@@ -636,11 +636,17 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		state.western_blot.parent.selected_id = state.western_blot.id;
 
         state.experiment.last_view = 'western_blot';
+		if(!state.western_blot.wells_loaded){
+			$('ol.scb_s_western_blot_choose_samples_order_list').sortable();
+		}
+		else{
+			$('.scb_s_western_blot_choose_samples_list_item').removeClass('scb_s_western_blot_sortable_item');
+			$('.scb_s_western_blot_choose_samples_list_item').removeClass('scb_s_movable_item');
 
-		$('ol.scb_s_western_blot_choose_samples_order_list').sortable();
+		}
 		
 		_.each($(".scb_s_experiment_step_button"), function (e) {
-			if($(e).css('background-color')=='rgb(213, 220, 228)') 
+			if(!$(e).hasClass('scb_s_experiment_step_visited')) 
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});

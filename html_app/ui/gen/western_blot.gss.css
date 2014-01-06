@@ -509,6 +509,7 @@
   border-radius: 5px;
   margin: 3px;
   border: 1px solid gray;
+  cursor: pointer;
 }
 .scb_f_wb_up_button {
   -webkit-appearance: none;
@@ -544,7 +545,7 @@
   left: 0;
   padding: 3px;
 }
-.scb_s_western_blot_choose_gel_type>input, .scb_s_western_blot_choose_samples_list_item {
+.scb_s_western_blot_choose_gel_type>input {
   cursor: pointer;
 }
 body.dragging, body.dragging * {
