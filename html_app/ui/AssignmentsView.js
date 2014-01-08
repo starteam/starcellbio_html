@@ -160,8 +160,10 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
 		 $('.scb_f_experiments_step_link')[0].click();
     });
      scb.utils.off_on(workarea, 'click', '.scb_s_assignments_print_assignment', function (e) {
-		 var pdfwindow = window.open("../../pdf/decusability_assignment.pdf");
-		 pdfwindow.print();
+     
+     	var pdfwindow = window.open("../../pdf/decusability_assignment.pdf", '_blank', false);
+    	if (navigator.appName == 'Microsoft Internet Explorer') window.print();
+    	else pdfwindow.print();
     });
 };
 
