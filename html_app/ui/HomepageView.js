@@ -39,7 +39,10 @@ scb.ui.static.HomepageView.register = function(workarea) {
 
     });
     
-    
+    scb.utils.off_on(workarea, 'click', '.scb_f_create_student_account', function (e) {
+            $('.scb_f_login').click();
+    });
+
 
 
 	scb.utils.off_on(workarea, 'click', '.scb_s_homepage_see_more_button', function (e) {

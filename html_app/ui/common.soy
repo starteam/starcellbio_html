@@ -80,6 +80,8 @@
        '#view=microscopy&assignment_id={$aid}&experiment_id={$eid}&microscopy_id={$mid}' 
        {elseif $prev_step == 6 and not $mid=='null'}
        '#view=microscopy&assignment_id={$aid}&experiment_id={$eid}' 
+       {else}
+       '#view=experiment_design'
        {/if}
        
        
@@ -215,7 +217,19 @@ Progress bar
 </div>
 
 
+
 {/template}
+
+
+
+/**
+* Contact  Overlay
+*/
+{template .contact_overlay}
+<div class='contact_overlay'></div>
+
+{/template}
+
 
 /**
 * Format time - from parts

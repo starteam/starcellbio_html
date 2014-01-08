@@ -136,15 +136,20 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
     var rows_state = parsed.microscopy.rows_state();
     if (rows_state && rows_state.valid < 1) {
     	$('body').css('overflow', 'hidden');
+    	
+    	$('body').prepend(scb_experiment_setup.general_error_overlay());
+
     	$.jqDialog.confirm("No samples selected. Would you like to continue?",
 			function() {    
 					parsed.microscopy.slide_prepared = true;
 					window.scrollTo(0, 0);
 					$('body').css('overflow', 'visible');
+					$('.error_overlay').remove();
 					scb.ui.static.MainFrame.refresh();
     		},// callback function for 'YES' button
 			function() {
 					$('body').css('overflow', 'visible');
+					$('.error_overlay').remove();
 					return;
 			}// callback function for 'NO' button
 		);

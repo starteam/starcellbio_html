@@ -617,6 +617,12 @@
 -webkit-padding-start: 21px;
 } 
 
+.scb_s_western_blot_sortable_list{
+
+overflow-y: auto;
+max-height: 177px;
+}
+
 .scb_s_western_blot_choose_samples_marker {
 -webkit-padding-start: 24px;
 }
@@ -638,7 +644,7 @@
 	border-radius: 5px;
 	margin: 3px;
 	border: 1px solid gray;
-	cursor: pointer;
+	cursor: move;
 
 }
 
@@ -791,6 +797,15 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
     font-size: 9pt;
 }
 
+
+.order_overlay{
+width: 290px;
+height: 177px;
+position: absolute;
+z-index: 993;
+background: rgba(0,0,0,0);
+visibility: visible;
+}
 
 .scb_s_western_blot_tab_content>.scb_f_open_select_technique {
     position: relative;

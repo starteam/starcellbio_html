@@ -89,9 +89,12 @@ scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     if (rows_state && rows_state.valid < 1) {
         	$('body').css('overflow', 'hidden');
 
+    	$('body').prepend(scb_experiment_setup.general_error_overlay());
+
 
     	$.jqDialog.alert("Please select at least 1 sample to prepare.", function() {	
-    	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+    	$('body').css('overflow', 'visible');
+					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
     	$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
     }
@@ -684,6 +687,17 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         		$('span', $(element)).css('opacity', '0.5');
         	}
     	});
+        
+       $('.scb_f_facs_sample_active', $('.scb_s_facs_samples_table')).each(function (e) {
+        		var element = $('.scb_f_facs_select_lysate_type', $(this).parent().parent());
+        	if($(this).attr('checked'))
+        		$(element).css('opacity', '1');
+        		
+        	else{
+        		$(element).css('opacity', '0.5');
+        	}
+    	});
+        
         
 		document.body.scrollTop = state.experiment.last_scroll;
 

@@ -361,6 +361,11 @@
     <div class='scb_s_western_blot_choose_gel_type'>
         <!-- TODO: Gel Type stuff -->
         <div class='scb_s_western_blot_choose_gel_type_title'>Gel Type:</div>
+         {if $western_blot.wells_loaded}
+            {if $western_blot.gel_type =='.10'}&nbsp;&nbsp;&nbsp;10%{/if}
+            {if $western_blot.gel_type =='.12'}&nbsp;&nbsp;&nbsp;12%{/if}
+            {if $western_blot.gel_type =='.15'}&nbsp;&nbsp;&nbsp;15%{/if}
+         {else}
         <input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".10" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.10'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text">10%</span>
         &nbsp;&nbsp;
@@ -368,17 +373,20 @@
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.12'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">12%</span>
         &nbsp;<input class='scb_s_western_blot_choose_gel_type_input' type="radio" name="gel_type" value=".15" western_blot_id='{$western_blot.id}'
                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $western_blot.gel_type == '.15'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">15%</span>
-
+		{/if}
     </div>
     <div class='scb_s_western_blot_samples_heading'>
         Samples 
+        {if $western_blot.wells_loaded == false} 
         <span class='scb_s_wb_button_wrapper'>
         <button class='scb_f_wb_up_button'>&#x25B2;</button>
 		&nbsp;
 		<button class='scb_f_wb_down_button'>&#x25BC;</button></span><br/><br/>
+		{/if}
     </div>
     <div class='scb_s_western_blot_choose_samples_order'>
-        <ol class='scb_s_western_blot_choose_samples_order_list' >
+    	{if $western_blot.gel_type}{else}<div class='order_overlay'></div>{/if}
+        <ol class='scb_s_western_blot_choose_samples_order_list {if not $western_blot.wells_loaded} scb_s_western_blot_sortable_list{/if}' >
             {foreach $r in $rows}
             {if $western_blot.marker_loaded == true and $r.lane.id == 'marker'}
                 	<li class="scb_s_western_blot_marker scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>Marker</li>
@@ -395,15 +403,13 @@
     </div>
     {if $western_blot.marker_loaded == false}
     <button class='scb_s_western_blot_load_marker scb_s_navigation_button' western_blot_id='{$western_blot.id}'
-            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>ADD MARKER
+            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>ADD MARKER +
     </button>
     {/if}
-      {if $western_blot.wells_loaded == false and $western_blot.marker_loaded == true}
+    {if $western_blot.wells_loaded == false} 
     <a class='scb_s_western_blot_load_all scb_s_navigation_button' western_blot_id='{$western_blot.id}'
-                    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">LOAD ALL</a>
-   
-    {/if}
-     
+                    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">LOAD GEL</a>
+   	{/if}
 </div>
 <div class='scb_s_western_blot_samples_gel_area'>
     <div class='scb_s_western_blot_gel_tabs'>
@@ -414,7 +420,7 @@
     <canvas class='scb_s_western_blot_gel' src='images/western_blot/SCB_WesternBlotting_GelNumbers.png'/>
 
     <div class='scb_s_western_blot_tools'>
-    	{if $western_blot.wells_loaded == true and $western_blot.marker_loaded == true}
+    	{if ($western_blot.wells_loaded == true and $western_blot.marker_loaded == true) or $western_blot.wells_loaded == true}
 
         <a class='scb_s_western_blot_run_gel_and_transfer scb_s_navigation_button' western_blot_id='{$western_blot.id}'
                     assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' href="#view=western_blot_gel&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$western_blot.id}">RUN GEL & TRANSFER</a>

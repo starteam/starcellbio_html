@@ -187,6 +187,13 @@ scb_experiment_setup.experiment_setup_overlay = function(opt_data, opt_sb) {
 };
 
 
+scb_experiment_setup.general_error_overlay = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('<div class=\'error_overlay\'></div>');
+  return opt_sb ? '' : output.toString();
+};
+
+
 scb_experiment_setup.experiment_error = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<h1 class=\'jqDialog_header\'>Error</h1>');

@@ -115,6 +115,12 @@ body{
 text-decoration: none !important;
 }
 
+.ug_main_title{
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size: 20pt;
+}
+
 .resize_copy{
 	height: auto !important;
 	width: auto !important;
@@ -131,8 +137,7 @@ text-decoration: none !important;
 }
 
 .ug_table_of_contents{
-	text-transform: uppercase;
-	font-size: 20pt;
+	font-size: 18pt;
 	color:black;
 }
 

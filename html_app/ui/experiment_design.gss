@@ -7,7 +7,7 @@
 }
 
 .design_numbers{
-	font-size: 14pt !important;
+	font-size: 11pt !important;
 	font-family: 'sourcesanspro-semibold';
 }
 
@@ -145,18 +145,8 @@
 	width: 396px;
 }
 
-.scb_s_experiment_design_divider_1{
-	width:2px;
-	background: gray;
-	height: 100px;
-	display: inline-block;
-	position: relative;
-	right: 16px;
-	top: 32px;
-}
-
-.scb_s_experiment_design_divider_2{
-	width:2px;
+.scb_s_experiment_design_divider_1, .scb_s_experiment_design_divider_2{
+	width:1px;
 	background: gray;
 	height: 100px;
 	display: inline-block;

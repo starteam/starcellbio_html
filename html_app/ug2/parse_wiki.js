@@ -65,7 +65,7 @@ $.get( "user_guide.html", function(data) {
 	$('.title > .subheading').attr('class', 'subtitle');
 	$('.subtitle > a').each(function(){  $(this).html($(this).text());});
 	$('.title > .SCB-Normal').remove();
-	$('.body').prepend('<span class="ug_table_of_contents">Table of Contents</span>');
+	$('.body').prepend('<span class="ug_table_of_contents">Table of Contents</span><p/>');
 	
 	$('.title > a').each(function(){
 		$(this).attr('href', '#' +$(this).attr('name')); 
@@ -100,6 +100,8 @@ $.get( "user_guide.html", function(data) {
 	$('.subheading').children().not('a').find('strong').prepend('&nbsp;');
 	$('.heading span>a').after('&nbsp;');
 	$('.body strong').css('color', 'black !important');
+	$('.body').prepend('<span class="ug_main_title">User Guide</span><br/>');
+
 	var x = window.location.hash; 
 	window.location.hash = ''; 
 	setTimeout( function() { window.location.hash = x ;} , 20); 

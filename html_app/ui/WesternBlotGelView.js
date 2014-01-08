@@ -81,8 +81,13 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
         }
     } else {
     	$('body').css('overflow', 'hidden');
+    	$('body').prepend(scb_experiment_setup.general_error_overlay());
+
     	$.jqDialog.alert("Please select primary & secondary antibodies.", 
-    		function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+    		function() {	$('body').css('overflow', 'visible');
+    		
+					$('.error_overlay').remove();
+    		/* callback function for 'OK' button*/ });
 		$('.jqDialog_header').remove();		
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
     }

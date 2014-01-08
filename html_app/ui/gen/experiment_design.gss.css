@@ -1,5 +1,5 @@
 .design_numbers {
-  font-size: 14pt !important;
+  font-size: 11pt !important;
   font-family: 'sourcesanspro-semibold';
 }
 .scb_s_design_description {
@@ -113,7 +113,7 @@
   width: 396px;
 }
 .scb_s_experiment_design_divider_1, .scb_s_experiment_design_divider_2 {
-  width: 2px;
+  width: 1px;
   background: gray;
   height: 100px;
   display: inline-block;

@@ -134,7 +134,27 @@
   margin-bottom: -10px !important;
   float: left !important;
 }
-.scb_s_western_blot_active, .scb_s_facs_active, .scb_s_microscopy_active {
+.scb_s_western_blot_active, .scb_s_microscopy_active {
+  background: white;
+  margin-right: 2px;
+  margin-left: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 140px;
+  padding-left: 20px;
+  padding-bottom: 13px;
+  padding-top: 8px;
+  position: relative;
+  height: 19px;
+  font-size: 11pt;
+  z-index: 99;
+  font-family: 'sourcesanspro-semibold';
+  background-position-y: 2px;
+  background-position-x: -4px;
+  border: 1px solid #97a4ad;
+  border-bottom: none;
+}
+.scb_s_facs_active {
   background: white;
   margin-right: 2px;
   margin-left: 2px;

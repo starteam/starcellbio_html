@@ -9,7 +9,7 @@
 	border-width: 1px 3px 3px 1px;
 	border-style: solid;
 	border:none;
-
+	border: 5px solid white;
 	-moz-border-radius: 9px;
 	-webkit-border-radius: 9px;
 	-khtml-border-radius: 9px;

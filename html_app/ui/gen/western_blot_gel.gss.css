@@ -60,6 +60,7 @@ label.custom-select_gel {
   height: 22px;
   -webkit-appearance: none;
   bottom: 1px;
+  outline: none;
 }
 .scb_f_slider {
   position: absolute;

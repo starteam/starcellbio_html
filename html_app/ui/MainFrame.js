@@ -96,7 +96,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                     else {
                         // if experiment_id is invalid go to assignment
                         $('body').css('overflow', 'hidden');
-                        $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+                        
+    					$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+					
+                        $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	
+                        		$('body').css('overflow', 'visible');
+                        		$('.error_overlay').remove();/* callback function for 'OK' button*/ });
                         $('.jqDialog_header').remove();
                         $('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
@@ -112,7 +118,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             else {
                 // if assignment_id is invalid go to assignments
                 $('body').css('overflow', 'hidden');
-                $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+                
+    				$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+                $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	
+                	$('body').css('overflow', 'visible');
+					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
             	$('.jqDialog_header').remove();
             	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
@@ -229,7 +240,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         else {
         	$('body').css('overflow', 'hidden');
-        	$.jqDialog.alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.", function() {$('body').css('overflow', 'visible');	/* callback function for 'OK' button*/ });;
+        	
+    			$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+        	$.jqDialog.alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.", 
+        		function() {$('body').css('overflow', 'visible');	
+					$('.error_overlay').remove();/* callback function for 'OK' button*/ });;
 			$('.jqDialog_header').remove();
 			$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error:</h1>");
 
@@ -253,9 +269,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     scb.utils.off_on(workarea.parent(), 'click', '.remove_experiment', function () {
     	$('body').css('overflow', 'hidden');
+    	
+    	$('body').prepend(scb_experiment_setup.general_error_overlay());
+
     	$.jqDialog.confirm("Delete experiment?",
 			function() { 
 				$('body').css('overflow', 'visible');  
+					$('.error_overlay').remove();
 				var model_id = scb.Utils.get_attribute($(this), 'experiment_id');
 				assignments.selected.experiments.remove(model_id);
 				assignments.selected.experiments.selected_id = null;
@@ -263,6 +283,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     		},// callback function for 'YES' button
 			function() {
 					$('body').css('overflow', 'visible');
+					$('.error_overlay').remove();
 					return;
 			}		// callback function for 'NO' button
 		);
@@ -274,8 +295,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
    	//HANDLER FOR CONTACT BUTTON AND IFRAME
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_contact', function (evt) {
     	$(workarea).append(scb_contact.contact({}));
+    	
+    	$(workarea).prepend(scb_common.contact_overlay());
+
     	scb.utils.off_on(workarea, 'click', '.scb_f_contact_close_button', function () {
                 $('.scb_s_contact_dialog').detach();
+                
+					$('.contact_overlay').remove();
         });
 		$('iframe').load(function(){
 				$('.scb_s_contact_dialog').draggable({ handle:'.scb_s_feedback_form'});
@@ -325,7 +351,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				myPos.bottom = $(this).offset().top + $(this).outerHeight();
 				myPos.right = $(this).offset().left + $(this).outerWidth();
 
-				if (myPos.bottom > e.pageY && e.pageY > myPos.bottom -66 && myPos.right > e.pageX && e.pageX > myPos.right - 36) {
+				if (myPos.bottom > e.pageY && e.pageY > myPos.bottom -20 && myPos.right > e.pageX && e.pageX > myPos.right - 20) {
 					$(this).css({ cursor: "nwse-resize" });
 				}
 				else {
@@ -362,7 +388,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				});			
 			});
 			//RAAT
-// 			$($('iframe')[0].contentWindow).bind( 'hashchange', function(e) {
+// 			$($('iframe')[0].contentWindow , workarea).bind( 'hashchange', function(e) {
 // 				if(window.iFrameState !='back'){ 
 // 					window.iFrameChanges+=1;
 // 					window.iFrameState='forward';
@@ -414,9 +440,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			
 			
 			$(".scb_s_ug_back").click(function(){
+			$('iframe')[0].contentWindow.window.history.go(-1);
 			//RAAT
 // 				if(window.iFrameChanges >0){
-// 					$('iframe')[0].contentWindow.window.history.go(-1);
+// 					
 // 					window.iFrameChanges-=1;
 // 					window.iFrameState='back';
 // 				}
@@ -425,7 +452,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 // 					window.iFrameChanges=-1;
 // 					window.iFrameState='forward';
 // 				}
-				//$('iframe').contents().find(".scb_s_ug_back").click();
 			});
 			
 			
@@ -842,7 +868,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             }
             else {
             	$('body').css('overflow', 'hidden');
-            	$.jqDialog.alert("Experiment does not exist", function() {	$('body').css('overflow', 'visible');/* callback function for 'OK' button*/ });
+            	
+    			$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+            	$.jqDialog.alert("Experiment does not exist", function() {	$('body').css('overflow', 'visible');
+					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
             	$('.jqDialog_header').remove();
             	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
                 if (parsed.assignment) {

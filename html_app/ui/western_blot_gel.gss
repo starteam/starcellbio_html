@@ -83,6 +83,7 @@ padding-bottom: 3px;
    height: 22px;
    -webkit-appearance: none;
    bottom: 1px;
+   outline: none;
 
 }
 

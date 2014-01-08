@@ -592,7 +592,6 @@ input[type=radio]:disabled{
 }
 
 
-
 .scb_s_facs_tools_analyze_data > thead >tr>td{
     font-family: 'sourcesanspro-semibold';
     font-size: 10pt;
