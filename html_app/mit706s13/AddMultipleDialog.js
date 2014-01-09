@@ -30,6 +30,7 @@ mit706s13.static.scb_mit706s16_inner_dialog_add = function (element, dialog, sta
     });
 
     $(dialog).detach();
+    $('.contact_overlay').remove();
     scb.utils.call_back(state.close);
 
 }
@@ -39,11 +40,13 @@ mit706s13.register = function (dialog, state) {
         var container = dialog;
         if (container.has(e.target).length === 0) {
             $(dialog).detach();
+            $('.contact_overlay').remove();
             scb.utils.call_back(state.close);
         }
     });
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_cancel', function (e) {
         $(dialog).detach();
+        $('.contact_overlay').remove();
         scb.utils.call_back(state.close);
     });
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_add', function (e) {
@@ -57,6 +60,7 @@ mit706s13.register = function (dialog, state) {
 
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_title_close', function (e) {
         $(dialog).detach();
+        $('.contact_overlay').remove();
         scb.utils.call_back(state.close);
     });
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_select', function (e) {

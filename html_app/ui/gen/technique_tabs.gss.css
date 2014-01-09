@@ -82,13 +82,9 @@
 .scb_s_facs_selected:hover, .scb_s_western_blot_selected:hover, .scb_s_microscopy_selected:hover {
   outline: 1px solid blue;
 }
-.scb_s_movable_item:hover {
-  background: darkgray;
-  position: relative;
-}
 .scb_s_western_blot_tabs_more {
   position: absolute;
-  top: -52px;
+  top: -51px;
   min-width: 895px;
 }
 .scb_s_microscopy_tabs_more {
@@ -275,11 +271,6 @@
   padding-top: 15px;
   margin-bottom: -10px;
   padding-left: 22px;
-}
-.scb_s_western_blot_choose_samples_order_list>li {
-  font-size: 10pt;
-  padding: 3px;
-  color: black;
 }
 .scb_s_facs_choose_samples_order_list>li {
   font-size: 10pt;

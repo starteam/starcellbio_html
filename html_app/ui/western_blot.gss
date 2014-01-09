@@ -623,6 +623,11 @@ overflow-y: auto;
 max-height: 177px;
 }
 
+.scb_s_western_blot_static_list{
+	-webkit-padding-start: 25px !important;
+margin-top: 33px;
+}
+
 .scb_s_western_blot_choose_samples_marker {
 -webkit-padding-start: 24px;
 }
@@ -648,7 +653,10 @@ max-height: 177px;
 
 }
 
-
+.scb_s_movable_item:hover{
+	background: darkgray;
+	position: relative;
+}
 
 .scb_f_wb_up_button{
 	-webkit-appearance: none;

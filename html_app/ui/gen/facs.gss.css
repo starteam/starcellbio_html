@@ -445,6 +445,24 @@ input[type=radio]:disabled {
   font-family: sourcesanspro-regular;
   font-size: 12pt;
 }
+.scb_f_note_close_button {
+  padding-top: 0;
+  float: right;
+  -webkit-appearance: none;
+  font-family: 'sourcesanspro-semibold';
+  outline: none;
+  height: 26px;
+  width: 26px;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  font-size: 14pt;
+  color: transparent;
+  background: transparent;
+  background-image: url('../../images/header/scb_close_button.png');
+  padding-right: 4px;
+  padding-left: 5px;
+}
 .scb_s_facs_apply {
   position: absolute;
   top: 320px;
@@ -486,8 +504,10 @@ input[type=radio]:disabled {
   left: 536px;
   position: absolute;
   width: 205px;
-  background: white;
-  border: 1px solid black;
+  background: #f4f6f8;
+  border-radius: 14px;
+  padding: 4px;
+  border: 4px solid white;
   bottom: 331px;
   z-index: 1;
   text-align: left;

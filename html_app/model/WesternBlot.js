@@ -125,6 +125,7 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
         });
         if(grouped_rows['marker_treatment']){
         	_.each(grouped_rows['marker_treatment'], function (ee, index) {
+        			//ee.order_id = rows.length;
                     rows.push({
                         kind:'existing',
                         lane:ee,
@@ -140,9 +141,23 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
         var count = 0;
         _.each(rows, function (e) {
             if (e.is_valid) count++;
+
         });
+//             var order_ids =[];
+// 			_.each(rows, function (e) { 
+//             if(e.kind == 'existing')
+// 	            order_ids.push(e.lane.order_id);});
+//         if(order_ids.length > 0){
+// 			if(_.uniq(order_ids) != order_ids.length)
+// 				if(rows.filter(function(el){ return el.display_text == "Marker"}).length >0)
+// 					rows.filter(function(el){ return el.display_text == "Marker"})[0].lane.order_id = rows.length-1;
+//         }
         if(self.lysate_prepared)
-	        rows = _.sortBy(rows, function(obj){ if(obj.kind=='existing')return obj.lane.order_id; else return;});
+	        rows = _.sortBy(rows, function(obj){ 
+	        	if(obj.kind=='existing')
+	        		return obj.lane.order_id; 
+	        	else return;
+	        });
         return {rows:rows, valid:count};
     }
 

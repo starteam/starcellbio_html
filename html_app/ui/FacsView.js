@@ -189,7 +189,7 @@ scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
 }
 
-
+//called status because state is already used, maintains open/close state of instructions
 scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status = function (show) {
     var jqDiv = $('.scb_s_facs_tools_instructions_followup');
     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
@@ -200,6 +200,14 @@ scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status = function (sho
         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
 }
 
+
+scb.ui.static.FacsView.scb_f_note_close_button= function (element) {
+	    scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = false;
+	    var jqDiv = $('.scb_s_facs_tools_instructions_followup');
+
+	    jqDiv.slideUp();
+
+}
 
 scb.ui.static.FacsView.scb_s_facs_tools_instructions_followup_toggle = function (element) {
     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show($('.scb_s_facs_tools_instructions_followup').is(':hidden'));
@@ -267,7 +275,7 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 		parsed.facs.parent.start_tabs_index = 1;
 	}
 	else if (parsed.facs.parent.list.length >scb.ui.static.FacsView.TOTAL_TABS)
-		parsed.facs.parent.start_tabs_index = parsed.facs.parent.length-scb.ui.static.FacsView.TOTAL_TABS-1;
+		parsed.facs.parent.start_tabs_index = parsed.facs.parent.length-(scb.ui.static.FacsView.TOTAL_TABS-1);
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
@@ -321,6 +329,11 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_note_close_button', function (e) {
+    	scb.ui.static.FacsView.scb_f_note_close_button(this);
+		
+    
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples_short', function (e) {
@@ -698,8 +711,6 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         	}
     	});
         
-        
-		document.body.scrollTop = state.experiment.last_scroll;
 
         document.title = "FACS - StarCellBio";
 		
@@ -763,5 +774,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 			});
 			$('.scb_s_western_blot_progress_bar').addClass('scb_s_facs_bar');
 		}
+		
+        
+		document.body.scrollTop = state.experiment.last_scroll;
     }
 }

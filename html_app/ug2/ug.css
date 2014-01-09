@@ -110,6 +110,15 @@ body{
 	vertical-align: initial;
 }
 
+.resize_icon_popout{
+	height: auto !important;
+	width: auto !important;
+	max-height: 12px !important;
+	cursor:default;
+	vertical-align: initial;
+	margin-left: 4px;
+}
+
 .anchors{
 	color: inherit! important;
 text-decoration: none !important;

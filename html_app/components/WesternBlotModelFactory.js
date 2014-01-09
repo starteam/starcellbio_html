@@ -25,7 +25,9 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
     if (scb.utils.isDefined(model.cyto)) {
         self.cyto = function (lane, gel, lane_marks) {
             if (lane.kind == 'whole' || lane.kind == 'cyto' || lane.kind == 'whole_cell') {
-                if (scb.utils.isDefined(model.cyto.parser_1)) {
+            	if(lane.id == 'marker')
+            		lane_marks.push({ weight: 0, intensity: 0});
+                else if (scb.utils.isDefined(model.cyto.parser_1)) {
                     var rules = model.cyto.parser_1;
                     for (var rule_index in rules) {
                         var rule = rules[rule_index];
@@ -70,8 +72,8 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                             }
                         }
                     }
-                }
-                if (scb.utils.isDefined(model.cyto.parser_fixed)) {
+                } // end parser_1
+                else if (scb.utils.isDefined(model.cyto.parser_fixed)) {
                     var rules = model.cyto.parser_fixed;
                     for (var rule_index in rules) {
                         var rule = rules[rule_index];
@@ -141,6 +143,8 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                         }
                     }
                 }
+                //END parser Fixed
+                
                 lane.marks = lane_marks;
             }
         }

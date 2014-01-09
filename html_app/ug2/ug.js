@@ -318,7 +318,7 @@ $(window).on('hashchange', function() {
 					else{
 						last_element_offset = $(window).scrollTop();
 						$(item).first().children('span').first().attr('class', 'scb_s_section_inactive');
-						$(item).first().children('span').first().css('margin-left' ,'-20px');
+						$(item).first().children('span').first().css('margin-left' ,'-23px');
 
 								$('.scb_s_help_sub_section_'+ ind+'.list_tag').css('display', 'list-item');
 								$('.scb_s_help_sub_section_'+ ind+'.span_tag').css('display', 'inline');

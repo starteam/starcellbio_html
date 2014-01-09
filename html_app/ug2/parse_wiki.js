@@ -117,11 +117,19 @@ function bindToggle(item){
 }
 
 function fixImages(){
-		
+	$('img[src="../media/uploads/scb_icon_trash.png"]').addClass('resize_icon_popout');
 	$('img[src="../media/uploads/scb_icon_trash.png"]').attr('src', '../../../images/user_guide/scb_ug_trash.png');
+	
+	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0000_18-envelope.png"]').addClass('resize_icon_popout');
 	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0000_18-envelope.png"]').attr('src', '../../../images/user_guide/scb_ug_envelope.png');
+			
+	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0003_33-cabinet.png"]').addClass('resize_icon_popout');
 	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0003_33-cabinet.png"]').attr('src', '../../../images/user_guide/scb_ug_cabinet.png');
+	
+	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0006_96-book.png"]').addClass('resize_icon_popout');
 	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0006_96-book.png"]').attr('src', '../../../images/user_guide/scb_ug_book.png');
+	
+	$('img[src="../media/uploads/scb_icons_copy.png"]').addClass('resize_icon_popout');
 	$('img[src="../media/uploads/scb_icons_copy.png"]').attr('src', '../../../images/user_guide/scb_ug_copy.png');
 	
 	//screenshots

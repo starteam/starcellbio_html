@@ -187,6 +187,7 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_action_open_add_samples_dialog', function (e) {
+        $(workarea).prepend(scb_common.contact_overlay());
         scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples_dialog(this, workarea);
         e.preventDefault();
     });

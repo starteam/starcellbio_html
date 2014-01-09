@@ -211,7 +211,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         var rows_state = parsed.western_blot.rows_state();
         var lanes = [];
         _.each(rows_state.rows, function (r) {
-            if (r.is_valid) lanes.push(r.lane);
+            if (r.is_valid || r.is_marker) lanes.push(r.lane);
         });
         var template = gstate.context.template;
         var model = new scb.components.ModelFactory(template);

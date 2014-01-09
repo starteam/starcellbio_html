@@ -373,12 +373,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     			$('.scb_s_ug_home').removeAttr('disabled');
 				if($('iframe').contents().find("#popout").length >0){
 					$('iframe').contents().find("#popout").hide();
-					$(".main_popout").removeClass('main_popout_disabled');
-    				$('.main_popout').removeAttr('disabled');	
+					//$(".main_popout").removeClass('main_popout_disabled');
+    				//$('.main_popout').removeAttr('disabled');	
 				}
 				else{
-				    $(".main_popout").addClass('main_popout_disabled');
-    				$('.main_popout').attr('disabled', 'disabled'); 
+				    //$(".main_popout").addClass('main_popout_disabled');
+    				//$('.main_popout').attr('disabled', 'disabled'); 
     			}
     			$('iframe').contents().find('.scb_f_help a').each(function() {
 					$(this).click(function(){
@@ -427,8 +427,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				$('iframe').contents().find(".scb_s_ug_home").click();
 				$(".scb_s_ug_home").addClass('scb_s_ug_home_disabled');
     			$('.scb_s_ug_home').attr('disabled', 'disabled');
-				$(".main_popout").removeClass('main_popout_disabled');
-    			$('.main_popout').removeAttr('disabled');
+				//$(".main_popout").removeClass('main_popout_disabled');
+    			//$('.main_popout').removeAttr('disabled');
     			$('.arrow_background').removeClass('arrow_background_active');
 						$('.scb_f_ug_down_button').hide();
     					$('.scb_f_ug_up_button').hide();

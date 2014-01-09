@@ -340,7 +340,7 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_add_western_blot= function(elem
 		parsed.western_blot.parent.start_tabs_index = 1;
 	}
 	else if (parsed.western_blot.parent.list.length >scb.ui.static.WesternBlotView.TOTAL_TABS)
-		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.length-scb.ui.static.WesternBlotView.TOTAL_TABS-1;
+		parsed.western_blot.parent.start_tabs_index = parsed.western_blot.parent.length-(scb.ui.static.WesternBlotView.TOTAL_TABS-1);
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
@@ -527,6 +527,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
 		});
     	scb.ui.static.WesternBlotView.scb_s_western_blot_sort_up_button($('.markedLi')[0]);
    	});
+   	
    	scb.utils.off_on(workarea, 'click', '.scb_f_wb_down_button', function (e, ui){
 		var item = $('.markedLi');
 		 var next = item.next();
@@ -681,12 +682,19 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 			$($('.slider_dots li')[$(this).index()]).attr('class','on');
    			 window.mySwipe.slide($(this).index(), 200);
 		});
-		
-		$('.scb_s_western_blot_choose_samples_list_item').mousedown(function(){    	
-			$('.markedLi').removeClass('markedLi');
-    		$(this).addClass('markedLi');
-		});
 
+		if(!state.western_blot.wells_loaded){
+		$('body').mousedown(function(e){
+			if($(e.target).parents('.scb_s_western_blot_samples_area').length ==1){
+				if($(e.target).hasClass('scb_s_western_blot_choose_samples_list_item')){
+				$('.markedLi').removeClass('markedLi');
+    			$(e.target).addClass('markedLi');
+    			}
+			}
+			else
+				$('.markedLi').removeClass('markedLi');
+		});
+		}
 
     }
 }
