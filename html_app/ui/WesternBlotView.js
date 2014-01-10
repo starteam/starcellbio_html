@@ -267,31 +267,31 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
         alert("INVALID ELEMENT!");
     }
 
-    if (!parsed.western_blot.marker_loaded) {
-    	$('body').css('overflow', 'hidden');
-    	$('body').prepend(scb_experiment_setup.general_error_overlay());
-		$.jqDialog.confirm("The protein size marker has not been loaded. Would you like to continue?",
-			function() {    
-    			parsed.western_blot.is_transfered = true;				
-				$('.error_overlay').remove();
-    			$('body').css('overflow', 'visible');
-    			scb.ui.static.MainFrame.refresh();
-    		},// callback function for 'YES' button
-			function() {
-					$('body').css('overflow', 'visible');
-					$('.error_overlay').remove();
-					return;
-			}		// callback function for 'NO' button
-		);
-		$('.jqDialog_header').remove();
-		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-
-    }
-    else{
+//     if (!parsed.western_blot.marker_loaded) {
+//     	$('body').css('overflow', 'hidden');
+//     	$('body').prepend(scb_experiment_setup.general_error_overlay());
+// 		$.jqDialog.confirm("The protein size marker has not been loaded. Would you like to continue?",
+// 			function() {    
+//     			parsed.western_blot.is_transfered = true;				
+// 				$('.error_overlay').remove();
+//     			$('body').css('overflow', 'visible');
+//     			scb.ui.static.MainFrame.refresh();
+//     		},// callback function for 'YES' button
+// 			function() {
+// 					$('body').css('overflow', 'visible');
+// 					$('.error_overlay').remove();
+// 					return;
+// 			}		// callback function for 'NO' button
+// 		);
+// 		$('.jqDialog_header').remove();
+// 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+// 
+//     }
+//     else{
     	parsed.western_blot.is_transfered = true;
     	//TODO: before repaint need to do steps in animation...
     	scb.ui.static.MainFrame.refresh();
-    }
+//     }
 
 
 }
@@ -466,7 +466,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
 
-		$.jqDialog.confirm("The protein size marker has not been loaded. Would you like to continue?",
+		$.jqDialog.confirm("The protein size marker has not been added to your samples. Would you like to continue?",
 			function() {
    				$('body').css('overflow', 'visible');
    				$('.error_overlay').remove();

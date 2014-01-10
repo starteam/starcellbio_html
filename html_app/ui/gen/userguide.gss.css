@@ -53,7 +53,7 @@
   width: 2px;
   position: absolute;
   top: 10px;
-  background: #6fc7a8;
+  background: #27956c;
   left: 78px;
 }
 .nav_divider2 {
@@ -62,16 +62,52 @@
   width: 2px;
   position: absolute;
   top: 10px;
-  background: #6fc7a8;
+  background: #27956c;
   left: 155px;
 }
-.scb_s_ug_home, .scb_s_ug_back {
+.scb_s_ug_home {
   display: inline-block;
   -webkit-appearance: none;
   border: none;
   background: transparent;
   background-repeat: no-repeat;
-  background-image: url('../../images/header/scb_home_on.png');
+  background-image: url('../../images/header/scb_index_on.png');
+  width: 72px;
+  height: 26px;
+  color: black;
+  padding-left: 26px;
+  cursor: pointer;
+  font-family: 'sourcesanspro-semibold';
+  position: relative;
+  top: 4px;
+  left: 11px;
+  font-size: 10pt;
+}
+.scb_s_ug_back {
+  display: inline-block;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  background-repeat: no-repeat;
+  background-image: url('../../images/header/scb_back_on.png');
+  width: 72px;
+  height: 26px;
+  color: black;
+  padding-left: 26px;
+  cursor: pointer;
+  font-family: 'sourcesanspro-semibold';
+  position: relative;
+  top: 4px;
+  left: 11px;
+  font-size: 10pt;
+}
+.scb_s_ug_back_disabled {
+  display: inline-block;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  background-repeat: no-repeat;
+  background-image: url('../../images/header/scb_back_off.png');
   width: 72px;
   height: 26px;
   color: black;
@@ -84,7 +120,7 @@
   font-size: 10pt;
 }
 .scb_s_ug_home_disabled {
-  background-image: url('../../images/header/scb_home_off.png') !important;
+  background-image: url('../../images/header/scb_index_off.png') !important;
 }
 .scb_s_ug_form {
   background: #f4f6f8;
@@ -95,44 +131,10 @@
   left: 5px;
   text-transform: uppercase;
   background-color: #189689;
-  background-image: -webkit-linear-gradient(top,#80d1ae,#189689);
-  background-image: -moz-linear-gradient(top,#80d1ae,#189689);
-  background-image: -ms-linear-gradient(top,#80d1ae,#189689);
-  background-image: -o-linear-gradient(top,#80d1ae,#189689);
-}
-.scb_f_ug_search_line {
-  height: 23px;
-  width: 2px;
-  background: #e0e0e0;
-  position: absolute;
-  bottom: -10px;
-  left: 261px;
-}
-.scb_f_ug_up_button {
-  -webkit-appearance: none;
-  bottom: -9px;
-  position: absolute;
-  background: 0;
-  border: 0;
-  width: 19px;
-  padding: 0 !important;
-  left: 242px;
-  color: white;
-  cursor: pointer !important;
-  outline: none;
-}
-.scb_f_ug_down_button {
-  -webkit-appearance: none;
-  position: absolute;
-  background: 0;
-  border: 0;
-  outline: none;
-  bottom: -6px;
-  width: 19px;
-  padding: 0 !important;
-  cursor: pointer !important;
-  left: 264px;
-  color: white;
+  background-image: -webkit-linear-gradient(top,#27956c,#189689);
+  background-image: -moz-linear-gradient(top,#27956c,#189689);
+  background-image: -ms-linear-gradient(top,#27956c,#189689);
+  background-image: -o-linear-gradient(top,#27956c,#189689);
 }
 .scb_f_help_form {
   display: inline-block;
@@ -146,10 +148,6 @@
   height: 25px;
   top: 2px;
   left: 221px;
-  background-image: url('../../../images/homepage/unable_updown3.png');
-}
-.arrow_background_active {
-  background: gray !important;
 }
 .scb_s_search_wrapper {
   border-top-left-radius: 21px;
@@ -264,9 +262,6 @@
   position: relative;
   padding-bottom: 25px;
 }
-.scb_s_western_blot_load_all {
-  right: 93px;
-}
 .handel {
   position: relative;
   height: 114px;
@@ -274,7 +269,7 @@
   padding-bottom: 20px;
 }
 .user_guide_title {
-  background: #38aa95;
+  background: #27956c;
   color: white;
   cursor: move;
   padding: 10px;

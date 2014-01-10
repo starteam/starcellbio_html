@@ -93,7 +93,7 @@
 }
 
 table.scb_s_experiment_setup_table {
-    border: 1px solid #80d1ae;
+    border: 1px solid #27956c;
     border-radius:5px;
     border-spacing: 0px;
     width:98%;
@@ -226,7 +226,7 @@ table.scb_s_experiment_setup_table {
 
 nav ul li.on{
 	background: none !important;
-	background-color: #80d1ae !important;
+	background-color: #27956c !important;
 	border: 1px solid #000 !important;
 } 
 
@@ -294,7 +294,7 @@ nav ul li.on{
 }
 
 .jqDialog_header {
-	background: #38aa95;
+	background: #27956c;
 	color: white;
 	padding: 10px;
 	height: 25px;
@@ -343,7 +343,7 @@ nav ul li.on{
 	height:13px;
 	width:12px;
 	border: 1px solid #000000;
-	background-color:#80d1ae;
+	background-color:#27956c;
 	border-radius:6px;
 	margin-bottom: -0.125%;
 }
@@ -404,6 +404,6 @@ nav ul li.on{
 .scb_s_experiment_design_green_line {
     width:100%;
     height:2px;
-    background-color: #80d1ae;
+    background-color: #27956c;
     margin-bottom:2px;
 }

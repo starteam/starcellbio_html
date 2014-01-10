@@ -67,6 +67,8 @@
 .scb_s_header_line_top {
   display: block;
   width: inherit;
+  height: 8px;
+  background: #27956c;
 }
 .scb_s_logo {
   float: left;
@@ -325,7 +327,7 @@
   display: inline-block;
 }
 .scb_s_homepage_experimental_design_bullet_item_selected {
-  background-color: #80d1ae;
+  background-color: #27956c;
   border-radius: 5px;
 }
 .scb_s_homepage_learn_more {
@@ -367,7 +369,7 @@
 }
 .scb_s_homepage_technique_learn_more {
   display: block;
-  background: #6fc7a8;
+  background: #27956c;
   border-width: 0;
   border-radius: 9px;
   background-size: 110px 33px;

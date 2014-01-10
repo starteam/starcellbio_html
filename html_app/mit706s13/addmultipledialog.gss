@@ -62,7 +62,7 @@
     padding: 3px;
     text-align:center;
     cursor: move;
-    @mixin gradient(top,#80d1ae,#189689,#80d1ae);
+    @mixin gradient(top,#27956c,#189689,#27956c);
     font-family: 'sourcesanspro-bold';
 }
 

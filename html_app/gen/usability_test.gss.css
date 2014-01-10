@@ -37,7 +37,7 @@
 }
 .pagination>li.current {
   border: 1px solid #000;
-  background-color: #80d1ae;
+  background-color: #27956c;
 }
 .pagination>li.current>a {
   color: rgba(0,0,0,0);

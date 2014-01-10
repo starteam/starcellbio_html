@@ -118,7 +118,7 @@ height: 60px;
 }
 
 .scb_s_microscopy_samples_table{
-    border:1px #80d1ae solid;
+    border:1px #27956c solid;
     border-radius: 5px;
     margin-right: 10px;
     margin-bottom: 5px;
@@ -257,7 +257,7 @@ height: 60px;
 	left:10px;
 	padding-top: 20px;
 	padding-bottom: 33px;
-	border:1px #80d1ae solid;
+	border:1px #27956c solid;
     border-radius: 5px;
 	background: #edeef2;
 }
@@ -265,7 +265,7 @@ height: 60px;
 .scb_s_microscopy_samples_select_all_abs{
   bottom: 0;
   position:absolute;
-  border-top: #80d1ae solid 2px;
+  border-top: #27956c solid 2px;
   padding-top: 2px;
 }
 
@@ -370,7 +370,7 @@ body.dragging, body.dragging * {
 	height:345px;
     width:563px;
     position: relative;
-    border:1px solid #80d1ae;
+    border:1px solid #27956c;
     background-color: white;
     padding-left: 5px;
 	padding-top: 5px;
@@ -589,7 +589,7 @@ body.dragging, body.dragging * {
     z-index: 100;
     position:relative;
     bottom: 4px;
-    background-color: #80d1ae;
+    background-color: #27956c;
     margin-bottom:2px;
 }
 

@@ -69,7 +69,7 @@
 	width: 2px;
 	position: absolute;
 	top: 10px;
-	background: #6fc7a8;
+	background: #27956c;
 	left: 78px;
 
  }
@@ -80,7 +80,7 @@
 	width: 2px;
 	position: absolute;
 	top: 10px;
-	background: #6fc7a8;
+	background: #27956c;
 	left: 155px;
 
  }
@@ -94,7 +94,7 @@
 	border: none;
 	background: transparent;
 	background-repeat: no-repeat;
-	background-image: url('../../images/header/scb_home_on.png');
+	background-image: url('../../images/header/scb_index_on.png');
 	width: 72px;
 	height: 26px;
 	color: black;
@@ -115,7 +115,26 @@
 	border: none;
 	background: transparent;
 	background-repeat: no-repeat;
-	background-image: url('../../images/header/scb_home_on.png');
+	background-image: url('../../images/header/scb_back_on.png');
+	width: 72px;
+	height: 26px;
+	color: black;
+	padding-left: 26px;
+	cursor: pointer;
+	font-family: 'sourcesanspro-semibold';
+	position: relative;
+	top: 4px;
+	left: 11px;
+	font-size: 10pt;
+}
+
+.scb_s_ug_back_disabled{
+	display: inline-block;
+	-webkit-appearance: none;
+	border: none;
+	background: transparent;
+	background-repeat: no-repeat;
+	background-image: url('../../images/header/scb_back_off.png');
 	width: 72px;
 	height: 26px;
 	color: black;
@@ -130,7 +149,7 @@
 
 .scb_s_ug_home_disabled{
 
-	background-image: url('../../images/header/scb_home_off.png') !important;
+	background-image: url('../../images/header/scb_index_off.png') !important;
 
 }
 
@@ -142,47 +161,12 @@
     position: relative;
     left: 5px;
     text-transform:uppercase;
-    @mixin gradient(top,#80d1ae,#189689,#189689);
+    @mixin gradient(top,#27956c,#189689,#189689);
 }
 
-.scb_f_ug_search_line{
-	height:23px;
-	width:2px;
-	background: #e0e0e0;
-	position:absolute;
-	bottom: -10px;
-	left: 261px;
-	
-}
 
-.scb_f_ug_up_button{
-	-webkit-appearance: none;
-	padding-top: 1px;
-	padding-bottom: 1px;
-	bottom: -9px;
-	position: absolute;
-	background: 0;
-	border: 0;
-	width: 19px;
-	padding: 0 !important;
-	left:242px;
-	color:white;
-	cursor: pointer !important;
-	outline: none;
-}
- .scb_f_ug_down_button{
-	-webkit-appearance: none;
-	position: absolute;
-	background: 0;
-	border: 0;
-	outline: none;
-	bottom: -6px;
-	width: 19px;
-	padding: 0 !important;
-	cursor: pointer !important;
-	left: 264px;
-	color:white;
-}
+
+
 
 .scb_f_help_form{
 	display:inline-block;
@@ -199,13 +183,8 @@ width: 43px;
 height: 25px;
 top: 2px;
 left: 221px;
-background-image: url('../../../images/homepage/unable_updown3.png');
 }
 
-.arrow_background_active{
-	background-image:none !important;
-	background: gray !important;
-}
 
 .scb_s_search_wrapper{
 	border-top-left-radius: 21px;
@@ -335,9 +314,7 @@ position: absolute;
 	padding-bottom: 25px;
 }
 
-.scb_s_western_blot_load_all{
-right: 93px;
-}
+
 
 
 .handel{
@@ -349,7 +326,7 @@ right: 93px;
 
 .user_guide_title{
 
-	background: #38aa95;
+	background: #27956c;
     color: white;
 	cursor: move;
     padding: 10px;

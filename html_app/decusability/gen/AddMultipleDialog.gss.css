@@ -43,11 +43,11 @@
   padding: 3px;
   text-align: center;
   cursor: move;
-  background-color: #80d1ae;
-  background-image: -webkit-linear-gradient(top,#80d1ae,#189689);
-  background-image: -moz-linear-gradient(top,#80d1ae,#189689);
-  background-image: -ms-linear-gradient(top,#80d1ae,#189689);
-  background-image: -o-linear-gradient(top,#80d1ae,#189689);
+  background-color: #27956c;
+  background-image: -webkit-linear-gradient(top,#27956c,#189689);
+  background-image: -moz-linear-gradient(top,#27956c,#189689);
+  background-image: -ms-linear-gradient(top,#27956c,#189689);
+  background-image: -o-linear-gradient(top,#27956c,#189689);
   font-family: 'sourcesanspro-bold';
 }
 .scb_mit706s16_inner_dialog_body {

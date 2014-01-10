@@ -47,16 +47,16 @@ scb.ui.static.AssignmentsView.scb_assignments_header_link_wrapper = function (el
         
 
         if(element == first_element){
-				 $('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_inactive.png');
-				 $('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_active.png');
+              	$('.scb_s_assignment_header_img_right').removeClass('scb_s_assignment_header_img_right_inactive');
+       			$('.scb_s_assignment_header_img_left').addClass('scb_s_assignment_header_img_left_inactive');
         }
         else if(element == last_element){
-				 $('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_active.png');
-				 $('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_inactive.png');
+       		$('.scb_s_assignment_header_img_right').addClass('scb_s_assignment_header_img_right_inactive');
+       		$('.scb_s_assignment_header_img_left').removeClass('scb_s_assignment_header_img_left_inactive');
         }
         else{
-		     $('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_active.png');
-			 $('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_active.png');
+            $('.scb_s_assignment_header_img_right').removeClass('scb_s_assignment_header_img_right_inactive');
+       		$('.scb_s_assignment_header_img_left').removeClass('scb_s_assignment_header_img_left_inactive');
         }
         parsed.assignment.last_instruction = $('.scb_assignments_header_link_selected').index()-1;
        		console.log(parsed.assignment.last_instruction);
@@ -75,13 +75,14 @@ scb.ui.static.AssignmentsView.scb_s_assignment_header_img_left = function (eleme
 		   var selected_element;
 		   if($('.scb_assignments_header_link_selected')[0]  == first_element || $('.scb_assignments_header_link_selected')[0]  == $(first_element).next()[0]){
 		   		 selected_element = first_element;
-				 $('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_inactive.png');
-				 $('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_active.png');
+		   		 
+      			$('.scb_s_assignment_header_img_right').removeClass('scb_s_assignment_header_img_right_inactive');
+       			$('.scb_s_assignment_header_img_left').addClass('scb_s_assignment_header_img_left_inactive');
 		   }
 		   else {
 		   		selected_element= $('.scb_assignments_header_link_wrapper')[$('.scb_assignments_header_link_selected').index()-1-1];
-			 	$('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_active.png');
-			 	$('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_active.png');
+            $('.scb_s_assignment_header_img_right').removeClass('scb_s_assignment_header_img_right_inactive');
+       		$('.scb_s_assignment_header_img_left').removeClass('scb_s_assignment_header_img_left_inactive');
 			}
 		
 			$('.scb_assignments_header_link_wrapper').removeClass('scb_assignments_header_link_selected');
@@ -114,13 +115,14 @@ scb.ui.static.AssignmentsView.scb_s_assignment_header_img_right = function (elem
 	var selected_element;
        if ($('.scb_assignments_header_link_selected')[0]  == last_element || $('.scb_assignments_header_link_selected')[0]  == $(last_element).prev()[0]){
        		selected_element = last_element;
-       		$('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_inactive.png');
-       		$('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_active.png');
+       		$('.scb_s_assignment_header_img_right').addClass('scb_s_assignment_header_img_right_inactive');
+       		$('.scb_s_assignment_header_img_left').removeClass('scb_s_assignment_header_img_left_inactive');
        	}
        else {
        		selected_element = $('.scb_assignments_header_link_wrapper')[$('.scb_assignments_header_link_selected').index()];
-       		$('.scb_s_assignment_header_img_right').attr('src', '../../images/homepage/scb_gray_right_arrow_active.png');
-       		$('.scb_s_assignment_header_img_left').attr('src', '../../images/homepage/scb_gray_left_arrow_active.png');
+       		
+            $('.scb_s_assignment_header_img_right').removeClass('scb_s_assignment_header_img_right_inactive');
+       		$('.scb_s_assignment_header_img_left').removeClass('scb_s_assignment_header_img_left_inactive');
        	}
        	$('.scb_assignments_header_link_wrapper').removeClass('scb_assignments_header_link_selected');
 		$(selected_element).addClass('scb_assignments_header_link_selected');

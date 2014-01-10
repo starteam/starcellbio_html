@@ -20,7 +20,7 @@ div#main {
   margin-top: 0 !important;
 }
 .scb_f_open_experiment_top {
-  background: #f46d5b !important;
+  background: #c82e3e !important;
   position: absolute !important;
 }
 .scb_s_navigation_button_old {
@@ -62,7 +62,7 @@ div#main {
   border-radius: 8px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: #6fc7a8;
+  background: #27956c;
   padding-top: 5px;
   height: 20px;
   color: white;
@@ -165,10 +165,10 @@ div#main {
   display: block;
   margin-right: 2em;
   background-color: #189689;
-  background-image: -webkit-linear-gradient(top,#80d1ae,#189689);
-  background-image: -moz-linear-gradient(top,#80d1ae,#189689);
-  background-image: -ms-linear-gradient(top,#80d1ae,#189689);
-  background-image: -o-linear-gradient(top,#80d1ae,#189689);
+  background-image: -webkit-linear-gradient(top,#27956c,#189689);
+  background-image: -moz-linear-gradient(top,#27956c,#189689);
+  background-image: -ms-linear-gradient(top,#27956c,#189689);
+  background-image: -o-linear-gradient(top,#27956c,#189689);
 }
 .scb_s_experiment_step_black_bar {
   position: relative;

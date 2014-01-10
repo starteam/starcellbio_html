@@ -361,7 +361,7 @@ input[type=radio]:checked{
 	height:13px;
 	width:12px;
 	border: 1px solid #000000;
-	background-color:#80d1ae;
+	background-color:#27956c;
 	border-radius:6px;
 	
 }
@@ -415,7 +415,7 @@ input[type=radio]:disabled{
 	width: 856px;
 	padding-top: 20px;
 	padding-bottom: 33px;
-	border:1px #80d1ae solid;
+	border:1px #27956c solid;
     border-radius: 5px;
 	background: #edeef2;
 }
@@ -452,7 +452,7 @@ input[type=radio]:disabled{
 .scb_s_facs_samples_select_all_abs{
   bottom: 0;
   position:absolute;
-  border-top: #80d1ae solid 2px;
+  border-top: #27956c solid 2px;
   padding-top: 2px;
 }
 
@@ -600,7 +600,7 @@ input[type=radio]:disabled{
 }
 
 .scb_s_facs_tools_analyze_data {
-    border: 1px solid #80d1ae;
+    border: 1px solid #27956c;
     margin-top: 10px;
     margin-left: -3px;
     overflow: auto;

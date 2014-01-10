@@ -43,11 +43,31 @@
   position: relative;
   margin-right: -10px;
   cursor: pointer;
+  display: inline;
+  width: 39px;
+  height: 41px;
+  background-image: url('../../images/homepage/scb_gray_right_arrow_active.png');
 }
 .scb_s_assignment_header_img_left {
   position: relative;
   margin-left: -10px;
   cursor: pointer;
+  display: inline;
+  width: 39px;
+  height: 41px;
+  background-image: url('../../images/homepage/scb_gray_left_arrow_active.png');
+}
+.scb_s_assignment_header_img_left_inactive {
+  background-image: url('../../images/homepage/scb_gray_left_arrow_inactive.png');
+}
+.scb_s_assignment_header_img_right_inactive {
+  background-image: url('../../images/homepage/scb_gray_right_arrow_inactive.png');
+}
+.scb_s_assignment_header_img_left:hover {
+  background-image: url('../../images/homepage/scb_gray_left_arrow_hover.png') !important;
+}
+.scb_s_assignment_header_img_right:hover {
+  background-image: url('../../images/homepage/scb_gray_right_arrow_hover.png') !important;
 }
 .scb_assignments_header_link_wrapper>span {
   white-space: nowrap;
@@ -111,7 +131,7 @@
 }
 .scb_s_abstract_title {
   color: white;
-  background: #6fc7a8;
+  background: #27956c;
   font-size: 13pt;
   padding: 12px 0 6px 17px;
   font-family: 'sourcesanspro-semibold';
@@ -130,7 +150,7 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: white;
-  background: #6fc7a8;
+  background: #27956c;
   margin: -5px;
 }
 .assignments_block {
@@ -176,7 +196,7 @@
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid #6fc7a8;
+  border-top: 20px solid #27956c;
   left: 121px;
   position: absolute;
 }
@@ -203,12 +223,14 @@
   border-bottom-left-radius: 5px;
   border: 1px solid gray;
   border-right: none;
+  display: inline-block !important;
 }
 .scb_assignments_bottom_arrow_right {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   border: 1px solid gray;
   border-left: none;
+  display: inline-block !important;
 }
 .scb_s_assignments_button_divider {
   position: absolute;
