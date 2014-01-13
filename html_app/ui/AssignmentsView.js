@@ -161,7 +161,7 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_assignments_new_experiment', function (e) {
 		 $('.scb_f_experiments_step_link')[0].click();
     });
-     scb.utils.off_on(workarea, 'click', '.scb_s_assignments_print_assignment', function (e) {
+    scb.utils.off_on(workarea, 'click', '.scb_s_assignments_print_assignment', function (e) {
      
      	var pdfwindow = window.open("../../pdf/decusability_assignment.pdf", '_blank', false);
     	if (navigator.appName == 'Microsoft Internet Explorer') window.print();
@@ -205,6 +205,13 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
 		if(assignment_window.scrollHeight == assignment_window.clientHeight)
         	$('.scb_s_assignments_bottom_scroll').addClass('scb_s_assignments_bottom_scroll_abs');
         else $('.scb_s_assignments_bottom_scroll').removeClass('scb_s_assignments_bottom_scroll_abs');
+        
+//         $('.scb_s_assignment_scroll').scroll(function () { 
+//            	var st = $(this).scrollTop();
+//         	$('scb_s_display_section').each(function(index) {
+//             $(this).css({ 'opacity' : (0 + st/ $(this).offset().top) });
+//         	})
+// 		});
 
     }
 

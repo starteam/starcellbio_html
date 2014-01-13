@@ -791,6 +791,7 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
     color: black;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
+    cursor:pointer;
 }
 
 .scb_f_wb_anti_body_select_primary {

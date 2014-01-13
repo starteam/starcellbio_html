@@ -199,7 +199,6 @@ function hashchange_function(new_hash, anchor_element){
   		var txt = new_hash.replace("#", "");
   		var ind = txt.match(/\d/g);
   			ind = ind.join("");
-  			
   		var item = $('.'+txt, anchor_element).parents('.scb_s_main_help_link');
   		var body = $(anchor_element).parents('body')[0];
   		mainUG(body);
@@ -225,12 +224,12 @@ function hashchange_function(new_hash, anchor_element){
 				if($('.scb_f_help_footer', body).length >0)
 					$('.scb_f_help_footer', body).remove();
 				else{
-				var footer = document.createElement('div')
-				footer.className = 'scb_f_help_footer';
-				footer.innerHTML = "<input type='button' style='color: blue; display:none;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
-				footer.style.height = '25px';
-				$('.scb_f_help_display', body).append(footer);
-				$('.scb_f_help_footer', body).width($('.scb_f_help_search_bar').width() -15);
+					var footer = document.createElement('div')
+					footer.className = 'scb_f_help_footer';
+					footer.innerHTML = "<input type='button' style='color: blue; display:none;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
+					footer.style.height = '25px';
+					$('.scb_f_help_display', body).append(footer);
+					$('.scb_f_help_footer', body).width($('.scb_f_help_search_bar').width() -15);
 				}
 				$(body).scrollTop(0);
 				$('.scb_s_help_section_'+ind +' .scb_s_section_active', body).css('margin-left', '-40px');

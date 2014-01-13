@@ -19,15 +19,22 @@
 }
 
 .scb_mit706s16_inner_dialog_title_close {
-    font-size: 14pt;
-    font-family:'sourcesanspro-bold';
-	background: rgba(0,0,0, 0);
-    border-radius: 6px;
-    float:right;
-	width: 25px;
-	color: black;
-	cursor:pointer;
+	
 	padding-top: 0px;
+	float:right;
+	-webkit-appearance: none;
+	font-family:'sourcesanspro-semibold';
+	outline:none;
+	height: 26px;
+	width: 26px;
+	cursor:pointer;
+	border: none;
+	border-radius: 12px;
+	font-size: 14pt;
+	color: transparent;
+	background: transparent;
+	background-image: url('../../images/header/scb_close_button.png');
+	background-repeat: no-repeat;
     
 }
 
