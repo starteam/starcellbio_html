@@ -165,6 +165,14 @@
 	top: 30px !important;
 }
 
+
+.scb_s_facs_single_range_button{
+background-image: url('../../images/header/scb_histogram_icon.png');
+height: 16px;
+width: 26px;
+background-repeat: no-repeat;
+}
+
 .scb_s_facs_right_facs{
 
 	padding:3px;
@@ -367,7 +375,7 @@ input[type=radio]:checked{
 }
 
 input[type=radio]:checked:before{
-	content: url("../../../images/homepage/dot3.png");
+	content: url("../../../images/homepage/dot4.png");
 	bottom: 1px;
 	position: relative;
 	right: 2px;
@@ -634,7 +642,21 @@ input[type=radio]:disabled{
 bottom: 34px;
 position: relative;
 left: 146px;
+background: none;
+border: none;
+height: 23px;
+width: 23px;
+color: white;
+letter-spacing: 1px;
+font-size: 10pt;
+font-family: 'sourcesanspro-regular';
+cursor: pointer;
+background-image: url('../../images/header/scb_help.png');
+background-repeat: no-repeat;
+
 }
+
+
 .scb_s_facs_tools_instructions_followup{
 	display:none;
 	left: 536px;

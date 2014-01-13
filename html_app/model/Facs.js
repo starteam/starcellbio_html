@@ -67,6 +67,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'samples_finished', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'sample_prepared', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'sample_analysis', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'show_analysis', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'apply_dna_analysis_to_all', false, null, context);
 

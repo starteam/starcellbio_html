@@ -161,17 +161,17 @@ scb_facs.analyze = function(opt_data, opt_sb) {
 scb_facs.display_graph = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_s_western_blot_gel_content\'><div class=\'scb_s_facs_chart_wrapper\'><div class=\'scb_s_facs_chart_xaxis\'>PI Fluorescence</div><div class=\'scb_s_facs_chart_yaxis\'>Number of cells (thousands)</div><div class=\'scb_s_facs_chart_helper\'></div><div class=\'scb_s_facs_chart\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\'', (opt_data.facs_line_id) ? 'facs_lane_id=\'' + soy.$$escapeHtml(opt_data.facs_line_id) + '\'' : '', '></div></div><div class=\'scb_s_facs_tools_instructions_followup\'><button class=\'scb_f_note_close_button\' aria-label=\'Close\'><span>&#215;</span></button>Click and drag within the histogram to draw a segment. The % of cells within the segment will be calculated.<p/>Select <b>Apply to All</b> to apply the same analysis parameters to all samples.</div><div class=\'scb_s_facs_tools\'>');
-  if (opt_data.facs.sample_analysis) {
-    output.append('<h1>Analysis Tools</h1><button class=\'scb_s_facs_tools_instructions_followup_toggle scb_s_gray_button\'>?</button>');
+  if (opt_data.facs.show_analysis) {
+    output.append('<h1>Analysis Tools</h1><button class=\'scb_s_facs_tools_instructions_followup_toggle\'>?</button><button class=\'scb_s_facs_single_range_button\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\'> </button>');
     if (opt_data.lane.canvas_metadata_analysis) {
       if (opt_data.lane.canvas_metadata_analysis.ranges) {
         if (opt_data.lane.canvas_metadata_analysis.ranges.length > 0) {
           output.append('<table class=\'scb_s_facs_tools_analyze_data\'><thead><tr><td></td><td>PI Fluorescence</td><td>% Cells</td><td></td></tr></thead><tbody>');
-          var rangeList493 = opt_data.lane.canvas_metadata_analysis.ranges;
-          var rangeListLen493 = rangeList493.length;
-          for (var rangeIndex493 = 0; rangeIndex493 < rangeListLen493; rangeIndex493++) {
-            var rangeData493 = rangeList493[rangeIndex493];
-            output.append('<tr><td><div style=\'background-color:', soy.$$escapeHtml(rangeData493.color), '; width:12px; height:12px\'></div></td><td>', soy.$$escapeHtml(rangeData493.from), ' - ', soy.$$escapeHtml(rangeData493.to), '</td><td>', soy.$$escapeHtml(rangeData493.percentage), '</td><td><img class=\'scb_f_facs_analyze_remove_point\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' facs_lane_id=\'', soy.$$escapeHtml(opt_data.lane.id), '\' from=\'', soy.$$escapeHtml(rangeData493.from), '\' to=\'', soy.$$escapeHtml(rangeData493.to), '\' alt="Delete" title="Delete" src="images/setup/scb_remove.png"></td></tr>');
+          var rangeList499 = opt_data.lane.canvas_metadata_analysis.ranges;
+          var rangeListLen499 = rangeList499.length;
+          for (var rangeIndex499 = 0; rangeIndex499 < rangeListLen499; rangeIndex499++) {
+            var rangeData499 = rangeList499[rangeIndex499];
+            output.append('<tr><td><div style=\'background-color:', soy.$$escapeHtml(rangeData499.color), '; width:12px; height:12px\'></div></td><td>', soy.$$escapeHtml(rangeData499.from), ' - ', soy.$$escapeHtml(rangeData499.to), '</td><td>', soy.$$escapeHtml(rangeData499.percentage), '</td><td><img class=\'scb_f_facs_analyze_remove_point\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' facs_lane_id=\'', soy.$$escapeHtml(opt_data.lane.id), '\' from=\'', soy.$$escapeHtml(rangeData499.from), '\' to=\'', soy.$$escapeHtml(rangeData499.to), '\' alt="Delete" title="Delete" src="images/setup/scb_remove.png"></td></tr>');
           }
           output.append('</tbody></table><span class=\'scb_s_facs_apply\'><input type="checkbox" assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' facs_lane_id=\'', soy.$$escapeHtml(opt_data.lane.id), '\' class=\'scb_f_facs_apply_to_all\'', (opt_data.facs.apply_dna_analysis_to_all) ? 'checked=\'checked\'' : '', '> Apply to all</span>');
         }

@@ -242,6 +242,8 @@
 }
 .scb_s_assignments_print_assignment {
   float: left !important;
+  background: none;
+  background-image: url('../../images/header/scb_print.png');
 }
 .assignement_experiment_list {
   font-size: 11px;

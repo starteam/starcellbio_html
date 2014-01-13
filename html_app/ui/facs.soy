@@ -528,13 +528,15 @@ FACS Main View
      
      </div>
 <div class='scb_s_facs_tools'>
-    {if $facs.sample_analysis}
+    {if $facs.show_analysis}
     <h1>Analysis Tools</h1>
 
-    <button class='scb_s_facs_tools_instructions_followup_toggle scb_s_gray_button'>
+    <button class='scb_s_facs_tools_instructions_followup_toggle'>
         ?
     </button>
-    
+    <button class='scb_s_facs_single_range_button' assignment_id='{$assignment.id}'
+            experiment_id='{$experiment.id}'
+            facs_id='{$facs.id}'> </button>
     {if $lane.canvas_metadata_analysis}
     {if $lane.canvas_metadata_analysis.ranges}
     {if $lane.canvas_metadata_analysis.ranges.length > 0}

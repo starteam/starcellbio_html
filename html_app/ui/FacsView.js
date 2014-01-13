@@ -175,10 +175,21 @@ scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, even
         alert("INVALID ELEMENT!");
     }
 
-    parsed.facs.sample_analysis = true;
+    parsed.facs.show_analysis = true;
     scb.ui.static.MainFrame.refresh();
 
 }
+
+scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
+	var parsed = scb.ui.static.FacsView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    parsed.facs.sample_analysis = true;
+    scb.ui.static.MainFrame.refresh();
+};
 
 scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
     var jqDiv = $('.scb_s_facs_tools_instructions_followup');
@@ -280,6 +291,8 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 }
 
 
+
+
 scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
 	parsed.experiment.last_scroll=document.body.scrollTop;
@@ -323,6 +336,9 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_prepare_lysates', function (e) {
         scb.ui.static.FacsView.scb_f_facs_prepare_lysates(this, e);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_facs_single_range_button', function (e) {
+        scb.ui.static.FacsView.scb_s_facs_single_range_button(this, e);
     });
     scb.utils.off_on(workarea, 'change', '.scb_f_facs_select_lysate_type', function (e) {
         scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this, e);
