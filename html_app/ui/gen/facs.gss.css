@@ -277,11 +277,11 @@ input[type=radio]:checked {
   height: 13px;
   width: 12px;
   border: 1px solid #000;
-  background-color: #27956c;
+  background-color: white;
   border-radius: 6px;
 }
 input[type=radio]:checked:before {
-  content: url("../../../images/homepage/dot4.png");
+  content: url("../../../images/homepage/dot5.png");
   bottom: 1px;
   position: relative;
   right: 2px;
