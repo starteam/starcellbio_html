@@ -293,7 +293,7 @@ position: absolute;
 	width: 217px;
 	position: relative;
 	height: 30px;
-	left: 20px;
+	left: 4px;
 	display:inline-block;
 }
 

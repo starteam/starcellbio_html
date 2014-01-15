@@ -56,9 +56,9 @@
     margin-top: 12%;
     margin-left: 12%;
     position: relative;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    background-color: white;
+    border: 5px solid white;
+	border-radius: 9px;
+	background-color: #f5f5f5;
 }
 
 .scb_mit706s16_inner_dialog_title {
@@ -67,7 +67,8 @@
     margin:0px;
     margin-bottom:5px;
     padding: 3px;
-    text-align:center;
+    text-align:left;
+    padding-left: 5px;
     cursor: move;
     @mixin gradient(top,#27956c,#189689,#27956c);
     font-family: 'sourcesanspro-bold';

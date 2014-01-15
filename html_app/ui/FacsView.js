@@ -187,7 +187,7 @@ scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
         alert("INVALID ELEMENT!");
     }
 
-    parsed.facs.sample_analysis = true;
+    parsed.facs.sample_analysis =  !parsed.facs.sample_analysis;
     scb.ui.static.MainFrame.refresh();
 };
 
@@ -348,8 +348,6 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_note_close_button', function (e) {
     	scb.ui.static.FacsView.scb_f_note_close_button(this);
-		
-    
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples_short', function (e) {
@@ -789,6 +787,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
     				$(this).css('left', parseInt($(this).css('left'))-5+'px');
 			});
 			$('.scb_s_western_blot_progress_bar').addClass('scb_s_facs_bar');
+			$('.scb_s_facs_single_range_button').button();
 		}
 		
         

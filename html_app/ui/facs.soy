@@ -534,9 +534,10 @@ FACS Main View
     <button class='scb_s_facs_tools_instructions_followup_toggle'>
         ?
     </button>
-    <button class='scb_s_facs_single_range_button' assignment_id='{$assignment.id}'
+    <input class='scb_s_facs_single_range_button' assignment_id='{$assignment.id}'
             experiment_id='{$experiment.id}'
-            facs_id='{$facs.id}'> </button>
+            facs_id='{$facs.id}' id="scb_facs_check" type='checkbox' {if $facs.sample_analysis}checked{/if}><label class="scb_s_facs_label" for="scb_facs_check">
+            	<img src="images/header/scb_histogram_icon.png"></label> </input>
     {if $lane.canvas_metadata_analysis}
     {if $lane.canvas_metadata_analysis.ranges}
     {if $lane.canvas_metadata_analysis.ranges.length > 0}

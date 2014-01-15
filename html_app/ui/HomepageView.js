@@ -40,7 +40,58 @@ scb.ui.static.HomepageView.register = function(workarea) {
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_f_create_student_account', function (e) {
-            $('.scb_f_login').click();
+    		
+            $(workarea).append(scb_auth.signup({}));
+            scb.utils.off_on(workarea, 'click', '.scb_f_signup_close_button', function () {
+                $('.scb_s_signup_dialog').detach();
+            });
+            $('.iframe').load(function(){
+				var iframe = document.getElementsByTagName('iframe')[0];
+				var content = (iframe.contentDocument || iframe.contentWindow);
+				content.body.style.fontSize = '90%';
+				content.body.style.fontFamily = 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif';
+			    var inputs = content.getElementsByTagName('button');
+ 				$(inputs).css('font-family', 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
+				var fieldset = content.querySelectorAll('fieldset');
+				$(fieldset).children().wrap('<p></p>');
+				var texts = content.querySelectorAll('input');
+				$(texts).attr('placeholder', '');
+				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
+				
+				var iframe = $('.iframe').contents();
+				iframe.find('input[type="checkbox"]').css('height', '12px');
+
+				iframe.find(".auth_submit_button").click(function(){
+						   var mask = document.createElement('div');
+						   mask.className='overlay';
+						   $(mask).css({'width': '100%','height': '100%','position': 'fixed', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
+					       $('body').prepend(mask);
+					       var progress_icon = document.createElement('img');
+					       progress_icon.src = '../../../images/homepage/ajax_loader.gif';
+					       progress_icon.style.marginLeft = '50%';
+					       progress_icon.style.marginTop= '50%';
+
+					       $('.overlay').append(progress_icon);
+							
+						   $('.iframe').hide();
+						   $('.iframe').load(function(){
+						   	  var profile = $('.iframe').contents();
+						   	  if(profile[0].body.textContent.indexOf('confirmed') >0){
+						   	  	  parent.document.location.reload();
+									
+							   	  }
+							   	  
+							   	  else{
+							   	 		 $(mask).remove();
+							   	  	   $('.iframe').show();
+							   	  	   if($('.iframe').contents().find('.login_submit').length >0)
+							   	  	   	$('.iframe').contents().find('#errorMsg').html('Incorrect username or password. Try again');
+							   	  	   
+							   	  }
+						   });
+					});
+			});
+        
     });
 
 

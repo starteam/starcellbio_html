@@ -615,6 +615,8 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_s_western_blot_add_marker_wrapper {
   font-size: 10pt;
   font-family: 'sourcesanspro-semibold';
+  bottom: 69px;
+  position: absolute;
 }
 .scb_s_western_blot_add_marker_text {
   display: inline-block;
@@ -702,8 +704,9 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   margin-top: 1px;
 }
 .scb_s_western_blot_load_all {
-  right: 93px;
-  top: 25px;
+  left: 115px;
+  top: 435px;
+  position: absolute;
 }
 .scb_f_western_blot_sample_inactive_all, .scb_f_western_blot_sample_active_all {
   background: #676767;

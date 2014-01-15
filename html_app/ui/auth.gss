@@ -7,7 +7,7 @@
 }
 
 
-.scb_s_login_dialog > iframe, .scb_s_logout_dialog > iframe, .scb_s_signup_dialog > iframe {
+.scb_s_login_dialog > iframe, .scb_s_logout_dialog > iframe{
 	right:6px;
 	bottom:6px;
     background: #f4f6f8;
@@ -27,6 +27,29 @@
     font-size: 10pt;
     
 }
+
+
+.scb_s_signup_dialog > iframe {
+	right:6px;
+	bottom:6px;
+    background: #f4f6f8;
+    border-radius: 5px;
+    padding: 10px;
+    height: 482px;
+    width: 398px;
+    border-bottom-right-radius: 9px;
+	border-bottom-left-radius: 9px;
+    border:0;
+    overflow:hidden;
+    display:block;
+    margin-left:0px;
+    position: relative;
+	z-index: 999;
+    font-family: 'sourcesanspro-bold';
+    font-size: 10pt;
+    
+}
+
 .scb_s_login_form >div, .scb_s_signup_form >div{
 	display: inline-block;
 	position: relative;
@@ -71,6 +94,19 @@
 
 .scb_s_signup_dialog {
     height: 535px !important;
+    z-index: 99;
+    position: absolute;
+    background: white;
+    border-radius: 13px;
+    box-shadow: 0px 0px 36px gray;
+    margin-left:400px;
+    margin-right:400px;
+    margin-top: 200px;
+    padding: 10px;
+    width: 406px;
+    top:0px;
+    font-family: 'sourcesanspro-bold';
+    font-size: 10pt;
     
 }
 
