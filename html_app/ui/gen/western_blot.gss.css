@@ -612,23 +612,32 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   background-color: #27956c;
   border-radius: 6px;
 }
+.scb_s_western_blot_add_marker_wrapper {
+  font-size: 10pt;
+  font-family: 'sourcesanspro-semibold';
+}
+.scb_s_western_blot_add_marker_text {
+  display: inline-block;
+  bottom: 9px;
+  position: relative;
+}
 .scb_s_western_blot_choose_gel_type>input:disabled {
   opacity: .5;
 }
 .scb_s_western_blot_load_marker {
-  background: none;
   background-image: url("../../images/western_blot/scb_western_blot_load_marker_icon.png");
   background-repeat: no-repeat;
   left: 22px;
-  border: none;
   border-radius: 5pt;
-  width: 129px;
-  height: 34px;
+  width: 22px;
+  height: 40px;
+  margin-right: 27px;
   position: relative;
   text-align: center;
   color: black;
   font-size: 10pt;
   font-family: 'sourcesanspro-semibold';
+  cursor: pointer;
 }
 .scb_f_wb_anti_body_select_primary, .scb_f_wb_anti_body_select_secondary {
   font-size: 10pt;

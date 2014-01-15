@@ -28,6 +28,8 @@ scb.WesternBlotExposure = function scb_WesternBlotExposure(data, context, parent
 		if ( typeof (v) == 'undefined') {
 			// getter
 			var time = parseFloat(data.schedule_value);
+			//var weeks = Math.floor(time / 604800);
+
 			var days = Math.floor(time / 86400);
 			var hours = Math.floor((time % 86400) / 3600);
 			var minutes = Math.floor((time % 3600) / 60);

@@ -29,11 +29,15 @@ scb.CollectionSchedule = function scb_CollectionSchedule(data, context, parent) 
 		if ( typeof (v) == 'undefined') {
 			// getter
 			var time = parseFloat(data.schedule_value);
-			var days = Math.floor(time / 86400);
+			var days = Math.floor((time % 604800) / 86400);
+			//var days = Math.floor(time / 86400);
+
 			var hours = Math.floor((time % 86400) / 3600);
 			var minutes = Math.round((time % 3600) / 60);
+			var weeks = Math.floor(time / 604800);
 			var now = (time < 60 );
 			return scb_common.format_time_detailed({
+				weeks: weeks,
 				days : days,
 				hours : hours,
 				minutes : minutes,

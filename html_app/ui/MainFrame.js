@@ -473,7 +473,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
   							var popoutWindow =window.open("ug2/full_guide.html#"+popout_string);
   					}
 					
-					});
+			});
 			
 			$("#closesearch").click(function(){
 				$('.help_search_input').val('');
