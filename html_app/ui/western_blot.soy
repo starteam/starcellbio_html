@@ -402,11 +402,11 @@
             </ol>
     </div>
     {if $western_blot.marker_loaded == false and $western_blot.wells_loaded == false}
-    <span class='scb_s_western_blot_add_marker_wrapper'><button class='scb_s_western_blot_load_marker' western_blot_id='{$western_blot.id}'
+    <div class='scb_s_western_blot_add_marker_wrapper'><button class='scb_s_western_blot_load_marker' western_blot_id='{$western_blot.id}'
             assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
     </button>
     <div class='scb_s_western_blot_add_marker_text'>ADD MARKER +</div>
-    </span>
+    </div>
     {/if}
     {if $western_blot.wells_loaded == false} 
     <a class='scb_s_western_blot_load_all scb_s_navigation_button' western_blot_id='{$western_blot.id}'
