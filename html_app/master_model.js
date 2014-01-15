@@ -3762,7 +3762,7 @@ var __microscopy_test = {
 						title: 'New row',
 						cell_line: 'wt',
 						treatment_list: {list: [
-							{schedule_value: 3628800, duration_value: 3600 * 24 * 5, duration: '5 d', drug_list: {list: [
+							{schedule_value: 3628800, duration_value: 3600 * 24 * 7*12, duration: '3 m', drug_list: {list: [
 								{drug_id: 'nc', concentration_id: '0'}
 							]}
 							}
@@ -3799,7 +3799,7 @@ var __microscopy_test = {
 							title: 'Buffer Only',
 							treatment_list: {list: [
 								{schedule_value: 5000, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '5 d', // end
+									duration_value: 3600 * 24 * 3, duration: '3 m', // end
 									drug_list: {list: [
 										{drug_id: 'nc', concentration_id: 0}
 									]}}
@@ -3810,7 +3810,7 @@ var __microscopy_test = {
 							title: 'V1 low conc',
 							treatment_list: {list: [
 								{schedule_value: 0, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '5 d', // end
+									duration_value: 3600 * 24 * 3, duration: '3 m', // end
 									drug_list: {list: [
 										{drug_id: 'nc', concentration_id: '0'},
 										{drug_id: '1', concentration_id: '1'}
@@ -3822,7 +3822,7 @@ var __microscopy_test = {
 							title: 'V1 high conc',
 							treatment_list: {list: [
 								{schedule_value: 0, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '5 d', // end
+									duration_value: 3600 * 24 * 3, duration: '3 m', // end
 									drug_list: {list: [
 										{drug_id: 'nc', concentration_id: '0'},
 										{drug_id: '1', concentration_id: '125'}
@@ -3834,7 +3834,7 @@ var __microscopy_test = {
 							title: 'V2 low conc',
 							treatment_list: {list: [
 								{schedule_value: 0, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '5 d', // end
+									duration_value: 3600 * 24 * 3, duration: '3 m', // end
 									drug_list: {list: [
 										{drug_id: 'nc', concentration_id: '0'},
 										{drug_id: '1', concentration_id: '50'}
@@ -3846,7 +3846,7 @@ var __microscopy_test = {
 							title: 'Many drugs',
 							treatment_list: {list: [
 								{schedule_value: 0, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '5 d', // end
+									duration_value: 3600 * 24 * 3, duration: '3 m', // end
 									drug_list: {list: [
 										{drug_id: 'nc', concentration_id: '0'},
 										{drug_id: '1', concentration_id: '0'},
@@ -3861,7 +3861,7 @@ var __microscopy_test = {
 							treatment_list: {
 								list: [
 									{schedule_value: 0, schedule: 'immediately', // start
-										duration_value: 3600 * 24 * 3, duration: '5 d', // end
+										duration_value: 3600 * 24 * 3, duration: '3 m', // end
 										drug_list: {list: [
 											{drug_id: 'nc', concentration_id: '0'},
 											{drug_id: '1', concentration_id: '0'},
@@ -3872,7 +3872,9 @@ var __microscopy_test = {
 						}
 					],
 					collection_schedule_list: [
-						{id: '5 d', title: '5 days'}
+						{id: '3 m', title: '3 months'},
+						{id: '6 m', title: '6 months'},
+						{id: '1 yr', title: '1 year'}
 					]
 				},
        			
