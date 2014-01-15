@@ -609,7 +609,7 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   height: 13px;
   width: 12px;
   border: 1px solid #000;
-  background-color: #27956c;
+  background-color: white;
   border-radius: 6px;
 }
 .scb_s_western_blot_add_marker_wrapper {
