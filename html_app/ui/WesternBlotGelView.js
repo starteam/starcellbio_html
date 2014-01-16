@@ -80,11 +80,11 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
             parsed.western_blot_gel.name = parsed.context.template.primary_anti_body[parsed.western_blot_gel.primary_anti_body].gel_name + (counter == 0 ? '' : ' - ' + (counter + 1));
         }
     } else {
-    	$('body').css('overflow', 'hidden');
+    	$('html').css('overflow', 'hidden');
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
     	$.jqDialog.alert("Please select primary & secondary antibodies.", 
-    		function() {	$('body').css('overflow', 'visible');
+    		function() {	$('html').css('overflow', 'visible');
     		
 					$('.error_overlay').remove();
     		/* callback function for 'OK' button*/ });

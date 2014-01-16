@@ -270,13 +270,13 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 		if (parsed.experiment) {
 			$('.jqDialog_header').remove();
 			if (parsed.experiment.cell_treatment_list.length == 0) {
-			$('body').css('overflow', 'hidden');
+			$('html').css('overflow', 'hidden');
 			
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
 					
 				$.jqDialog.alert("Please set up at least one sample.", 
-					function() {	$('body').css('overflow', 'visible');
+					function() {	$('html').css('overflow', 'visible');
 					 $('.error_overlay').remove();/* callback function for 'OK' button*/ });
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
 				event.preventDefault();

@@ -95,13 +95,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                     }
                     else {
                         // if experiment_id is invalid go to assignment
-                        $('body').css('overflow', 'hidden');
+                        $('html').css('overflow', 'hidden');
                         
     					$('body').prepend(scb_experiment_setup.general_error_overlay());
 
 					
                         $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	
-                        		$('body').css('overflow', 'visible');
+                        		$('html').css('overflow', 'visible');
                         		$('.error_overlay').remove();/* callback function for 'OK' button*/ });
                         $('.jqDialog_header').remove();
                         $('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
@@ -117,12 +117,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             }
             else {
                 // if assignment_id is invalid go to assignments
-                $('body').css('overflow', 'hidden');
+                $('html').css('overflow', 'hidden');
                 
     				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
                 $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	
-                	$('body').css('overflow', 'visible');
+                	$('html').css('overflow', 'visible');
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
             	$('.jqDialog_header').remove();
             	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
@@ -239,12 +239,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             starcellbio(context.ui, master_model);
         }
         else {
-        	$('body').css('overflow', 'hidden');
+        	$('html').css('overflow', 'hidden');
         	
     			$('body').prepend(scb_experiment_setup.general_error_overlay());
 
         	$.jqDialog.alert("Operation canceled!\n If you wanted to clear everything type YES in previous dialog.", 
-        		function() {$('body').css('overflow', 'visible');	
+        		function() {$('html').css('overflow', 'visible');	
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });;
 			$('.jqDialog_header').remove();
 			$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error:</h1>");
@@ -268,13 +268,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
 
     scb.utils.off_on(workarea.parent(), 'click', '.remove_experiment', function () {
-    	$('body').css('overflow', 'hidden');
+    	$('html').css('overflow', 'hidden');
     	
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
     	$.jqDialog.confirm("Delete experiment?",
 			function() { 
-				$('body').css('overflow', 'visible');  
+				$('html').css('overflow', 'visible');  
 					$('.error_overlay').remove();
 				var model_id = scb.Utils.get_attribute($(this), 'experiment_id');
 				assignments.selected.experiments.remove(model_id);
@@ -282,7 +282,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				self.show({});
     		},// callback function for 'YES' button
 			function() {
-					$('body').css('overflow', 'visible');
+					$('html').css('overflow', 'visible');
 					$('.error_overlay').remove();
 					return;
 			}		// callback function for 'NO' button
@@ -847,11 +847,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 self.show(state);
             }
             else {
-            	$('body').css('overflow', 'hidden');
+            	$('html').css('overflow', 'hidden');
             	
     			$('body').prepend(scb_experiment_setup.general_error_overlay());
 
-            	$.jqDialog.alert("Experiment does not exist", function() {	$('body').css('overflow', 'visible');
+            	$.jqDialog.alert("Experiment does not exist", function() {	$('html').css('overflow', 'visible');
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
             	$('.jqDialog_header').remove();
             	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");

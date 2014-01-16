@@ -135,7 +135,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
 	parsed.experiment.last_scroll=document.body.scrollTop;
     var rows_state = parsed.microscopy.rows_state();
     if (rows_state && rows_state.valid < 1) {
-    	$('body').css('overflow', 'hidden');
+    	$('html').css('overflow', 'hidden');
     	
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
@@ -143,12 +143,12 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
 			function() {    
 					parsed.microscopy.slide_prepared = true;
 					window.scrollTo(0, 0);
-					$('body').css('overflow', 'visible');
+					$('html').css('overflow', 'visible');
 					$('.error_overlay').remove();
 					scb.ui.static.MainFrame.refresh();
     		},// callback function for 'YES' button
 			function() {
-					$('body').css('overflow', 'visible');
+					$('html').css('overflow', 'visible');
 					$('.error_overlay').remove();
 					return;
 			}// callback function for 'NO' button
@@ -629,7 +629,7 @@ function save_and_draw_cache_image(canvas, state){
 			state['cache']['blur'] = state['blur'];
 			
 			document.documentElement.style.overflow='scroll';
-			document.body.style.overflow='scroll';
+			//document.body.style.overflow='scroll';
 			var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 			samples_area.style.overflow = 'hidden';
 			samples_area.style.height = '100%';

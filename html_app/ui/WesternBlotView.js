@@ -162,21 +162,21 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     }
     var rows_state = parsed.western_blot.rows_state();
     if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
-    	$('body').css('overflow', 'hidden');
+    	$('html').css('overflow', 'hidden');
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
     	$.jqDialog.alert(scb_western_blot.wb_sample_error(), 
-    	function() {	$('body').css('overflow', 'visible');
+    	function() {	$('html').css('overflow', 'visible');
 					$('.error_overlay').remove()/* callback function for 'OK' button*/ });
 		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
     }
     else if (rows_state.valid < 1) {
-    	$('body').css('overflow', 'hidden');
+    	$('html').css('overflow', 'hidden');
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
     	$.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {
-				$('body').css('overflow', 'visible');
+				$('html').css('overflow', 'visible');
 					$('.error_overlay').remove(); /* callback function for 'OK' button*/ 
 		});
  		$('.jqDialog_header').remove();
@@ -266,32 +266,9 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_run_gel_and_transfer = function
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
-//     if (!parsed.western_blot.marker_loaded) {
-//     	$('body').css('overflow', 'hidden');
-//     	$('body').prepend(scb_experiment_setup.general_error_overlay());
-// 		$.jqDialog.confirm("The protein size marker has not been loaded. Would you like to continue?",
-// 			function() {    
-//     			parsed.western_blot.is_transfered = true;				
-// 				$('.error_overlay').remove();
-//     			$('body').css('overflow', 'visible');
-//     			scb.ui.static.MainFrame.refresh();
-//     		},// callback function for 'YES' button
-// 			function() {
-// 					$('body').css('overflow', 'visible');
-// 					$('.error_overlay').remove();
-// 					return;
-// 			}		// callback function for 'NO' button
-// 		);
-// 		$('.jqDialog_header').remove();
-// 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-// 
-//     }
-//     else{
     	parsed.western_blot.is_transfered = true;
     	//TODO: before repaint need to do steps in animation...
     	scb.ui.static.MainFrame.refresh();
-//     }
 
 
 }
@@ -462,13 +439,13 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     	var parsed = scb.ui.static.WesternBlotView.parse(this);
 
     	 if (!parsed.western_blot.marker_loaded) {
-    	$('body').css('overflow', 'hidden');
+    	$('html').css('overflow', 'hidden');
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
 
 		$.jqDialog.confirm("The protein size marker has not been added to your samples. Would you like to continue?",
 			function() {
-   				$('body').css('overflow', 'visible');
+   				$('html').css('overflow', 'visible');
    				$('.error_overlay').remove();
 				parsed.experiment.last_scroll=document.body.scrollTop;
         		scb.ui.static.WesternBlotView.populate_wells(parsed.western_blot.rows_state().rows, parsed);
@@ -477,7 +454,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     		},// callback function for 'YES' button
 			function() {
 					$('.error_overlay').remove();
-					$('body').css('overflow', 'visible');
+					$('html').css('overflow', 'visible');
 					return;
 			}		// callback function for 'NO' button
 		);

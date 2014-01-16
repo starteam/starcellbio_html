@@ -87,13 +87,13 @@ scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     }
     var rows_state = parsed.facs.rows_state();
     if (rows_state && rows_state.valid < 1) {
-        	$('body').css('overflow', 'hidden');
+        	$('html').css('overflow', 'hidden');
 
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
 
     	$.jqDialog.alert("Please select at least 1 sample to prepare.", function() {	
-    	$('body').css('overflow', 'visible');
+    	$('html').css('overflow', 'visible');
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
     	$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());

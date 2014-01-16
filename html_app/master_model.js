@@ -3744,11 +3744,11 @@ var __microscopy_test = {
                 experiment_setup: {
                     table: [ 
                         {kind: "cell_plate", title: " ", editable: false},
-                        {kind: 'cell_line', title: 'Strain', editable: false}, 
+                        {kind: 'cell_line', title: 'Strain', editable: true}, 
                         {kind: 'treatments',
                             children: [
                                 {kind: 'drug', title: 'Treatment', editable: true},
-                                {kind: 'concentration', title: 'Treatment Concentration/Dose', editable: false},
+                                {kind: 'concentration', title: 'Treatment Concentration/Dose', editable: true},
                         		{kind: "start", title: "Treatment Start Time", editable: false},
                         		{kind: "duration", title: "Collection Timepoints", editable: true}
                             ]
@@ -3791,6 +3791,16 @@ var __microscopy_test = {
 							id: 'wt',
 							title: 'Wild Type',
 							cell_line: 'wt'
+						},
+						{
+							id: 'p+',
+							title: 'p53+/+;Rb+/+',
+							cell_line: 'p+'
+						},
+						{
+							id: 'pfl',
+							title: 'p53fl/fl;Rbfl/fl',
+							cell_line: 'pfl'
 						}
 					],
 					treatment_protocol_list: [
@@ -3939,28 +3949,11 @@ var __microscopy_test = {
 				'0': {
 					name: '0 nM',
 					value: 0
+				},
+				'108': {
+					name: '10 nM',
+					value: 1000
 				}
-         
-//                 '0': {
-//                     name: '',
-//                     value: 0
-//                 },
-//                 '2': {
-//                     name: '2 ' + microEntity + 'g/mL',
-//                     value: 5
-//                 },
-//                 '15': {
-//                     name: '15 ' + microEntity + 'g/mL',
-//                     value: 5
-//                 },
-//                 '200': {
-//                     name: '200 mM',
-//                     value: 5
-//                 },
-//                 '1u': {
-//                     name: '1 unit',
-//                     value: 1000
-//                 }
             },
             drugs: {
             
@@ -3986,6 +3979,14 @@ var __microscopy_test = {
 				'4': {
 					name: 'Vulvarine 4',
 					concentrations: ['10n', 50, 100, 200, 400]
+				},
+				'ac': {
+					name: 'Adenovirus-Cre',
+					concentrations: ['108']
+				},
+				'ae': {
+					name: 'Adenovirus-Empty',
+					concentrations: ['108']
 				}
 //                 'nc': {
 //                     name: 'Growth Media',
@@ -4028,7 +4029,13 @@ var __microscopy_test = {
                 },
                 'm2': {
                     name: 'Mutant 2'
-                }
+                },
+				'p+': {
+					name: 'p53+/+;Rb+/+'
+				},
+				'pfl': {
+					name: 'p53fl/fl;Rbfl/fl'
+				}
 
             },
             time_unit: {
