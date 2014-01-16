@@ -66,9 +66,8 @@
     color:white;
     margin:0px;
     margin-bottom:5px;
-    padding: 3px;
+    padding: 6px;
     text-align:left;
-    padding-left: 5px;
     cursor: move;
     @mixin gradient(top,#27956c,#189689,#27956c);
     font-family: 'sourcesanspro-bold';

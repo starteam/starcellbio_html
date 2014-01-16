@@ -38,7 +38,6 @@ $.get( "/static/ug2/user_guide.html", function(data) {
 	
 	var sublinks = [];
 	var number = 0;
-	
 	//Go through all headings and begin parsing, sublinks and sections, and creating wrappers
 	for(var i=0; i<links.length; i++){
 		var text = "";
@@ -94,7 +93,6 @@ $.get( "/static/ug2/user_guide.html", function(data) {
 					nextC = div.childNodes[y].nextElementSibling;
 				}
 				$(div.childNodes[y]).wrap("<a class='anchors' href='#scb_s_help_sublink_"+number+"'></a>");
-			
 			}
 			else{
 				$(div.childNodes[y]).addClass('scb_s_help_sub_section');
@@ -110,6 +108,8 @@ $.get( "/static/ug2/user_guide.html", function(data) {
 
 			
 		}
+		
+		$('a').not('.anchors').addClass('intextlink');
 		//append the code to the display div
 		$('.scb_f_help_display').append(lnk);
 		$('.scb_f_help_display').append(div);
@@ -131,6 +131,7 @@ $.get( "/static/ug2/user_guide.html", function(data) {
 	$('.scb_s_help_sublink').show();
 	$('.special').append('<br/>');
 	$('.scb_s_help_link_2').append("<br/>");
+	
 	fixImages();
 }); 
 
@@ -278,12 +279,45 @@ function hashchange_function(new_hash, anchor_element){
 							$(body).scrollTop(0);
 					}
 		}
+		else if(new_hash != '#' && new_hash != ''){
+			var item = $('a[name="'+new_hash.substr(1)+'"]').closest('.scb_s_help_sublink');
+			var ind = $(item).attr('class').match(/\d/g).join("");
+			var body = $(anchor_element).parents('body')[0];
+			mainUG(body);
+			console.log(new_hash);
+			last_element_offset = $(body).scrollTop();
+			$(item, body).first().children('span').first().attr('class', 'scb_s_section_inactive');
+			$(item, body).first().children('span').first().css('margin-left' ,'-23px');
+
+					$('.scb_s_help_sub_section_'+ ind+'.list_tag', body).css('display', 'list-item');
+					$('.scb_s_help_sub_section_'+ ind+'.span_tag', body).css('display', 'inline');
+			$('.scb_s_main_help_link', body).hide();
+			$('.scb_s_help_sublink', body).hide();
+			if($(item, body).parent().prev().text().trim() == 'EXPERIMENTS'){
+				$(item, body).parent().children('span').hide();
+				$(item, body).parent().children('li').hide();
+			}
+			$(item, body).css('display', 'inline');
+			$(item, body).css('cursor', 'pointer');
+			if($('.scb_f_help_footer', body).length >0)
+				$('.scb_f_help_footer', body).remove();
+			else{
+				var footer = document.createElement('div')
+				footer.className = 'scb_f_help_footer';
+				footer.innerHTML = "<input type='button' style='color: blue; display:none;' value='Popout' style='float:right;'id='popout' onclick='popoutGuide();'> ";
+				footer.style.height = '25px';
+				$('.scb_f_help_display', body).append(footer);
+				$('.scb_f_help_footer', body).width($('.scb_f_help_search_bar', body).width() -15);
+			}
+				$(body).scrollTop(0);
+		}
 	
 		else	mainUG();
 }
 
 $(window).on('hashchange', function(e) {
- 	hashchange_function(location.hash, $('a[href="'+location.hash+'"]')[0]);
+	if(e.currentTarget.location.pathname.indexOf('help.html') >0)
+	 	hashchange_function(location.hash, $('a[href="'+location.hash+'"]')[0]);
 });
 
 

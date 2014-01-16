@@ -382,6 +382,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					$('iframe').contents().find("#popout").hide();
 				}
 				var anchor_element = $(event.target).closest('.anchors')
+				if(event.target.className == 'intextlink')
+					anchor_element = $(event.target)
 				var anchor_hash = $(anchor_element).attr('href');
 				var window_location=window.location.toString()+'/static/ug2/help.html'+anchor_hash;
 						hashchange_function(anchor_hash, anchor_element[0]);
@@ -442,6 +444,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				else{
 					$(".scb_s_ug_back").addClass('scb_s_ug_back_disabled');
 					$('.scb_s_ug_back').attr('disabled', 'disabled');
+					
+					$(".scb_s_ug_home").addClass('scb_s_ug_home_disabled');
+    				$('.scb_s_ug_home').attr('disabled', 'disabled');
 				}
 			});
 			
