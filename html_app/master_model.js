@@ -3753,33 +3753,23 @@ var __microscopy_test = {
                         		{kind: "duration", title: "Collection Timepoints", editable: true}
                             ]
                         },
-//                         {kind: 'temperature', title: 'Temperature', editable: false},
                         {kind: 'actions', title: 'Actions'}
                     ],
                     actions: [
                     ], 
-                new_row: {
+                	new_row: {
 						title: 'New row',
-						cell_line: 'wt',
+						cell_line: 'p+',
 						treatment_list: {list: [
 							{schedule_value: 3628800, duration_value: 3600 * 24 * 7*12, duration: '3 m', drug_list: {list: [
-								{drug_id: 'nc', concentration_id: '0'}
-							]}
+								{drug_id: 'ac', concentration_id: '108'}
+							]},  temperature: '22'
 							}
 						]},
 						collection_schedule_list: {list: [
 							{schedule: "18h", schedule_value: 18 * 3600, id: '3'}
 						]}
                 	}
-                },
-                western_blot: {format: "%CELL_LINE%, %TREATMENT%, %PP1% %TEMPERATURE%",
-                    keys: {
-                        '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
-                        '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
-                        '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
-                        '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']},
-                        '%PP1%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '1', 'drug_id'], map: ['drugs', '%KEY%', 'short_name'], default: ''}
-                    }
                 }
                 
                 },
@@ -3787,11 +3777,6 @@ var __microscopy_test = {
 
 				experiment_setup_actions: {
 					cell_lines: [
-						{
-							id: 'wt',
-							title: 'Wild Type',
-							cell_line: 'wt'
-						},
 						{
 							id: 'p+',
 							title: 'p53+/+;Rb+/+',
@@ -3805,80 +3790,26 @@ var __microscopy_test = {
 					],
 					treatment_protocol_list: [
 						{
-							id: 'P1',
-							title: 'Buffer Only',
+							id: 'ADC',
+							title: 'Adenovirus-Cre',
 							treatment_list: {list: [
 								{schedule_value: 5000, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '3 m', // end
+									duration_value: 3600 * 24 * 7*12, duration: '3 m', // end
 									drug_list: {list: [
-										{drug_id: 'nc', concentration_id: 0}
+										{drug_id: 'ac', concentration_id: 108}
 									]}}
 							]}
 						},
 						{
-							id: 'P2',
-							title: 'V1 low conc',
+							id: 'ADE',
+							title: 'Adenovirus-Empty',
 							treatment_list: {list: [
-								{schedule_value: 0, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '3 m', // end
+								{schedule_value: 5000, schedule: 'immediately', // start
+									duration_value: 3600 * 24 * 7*12, duration: '3 m', // end
 									drug_list: {list: [
-										{drug_id: 'nc', concentration_id: '0'},
-										{drug_id: '1', concentration_id: '1'}
+										{drug_id: 'ae', concentration_id: '108'}
 									]}}
 							]}
-						},
-						{
-							id: 'P3',
-							title: 'V1 high conc',
-							treatment_list: {list: [
-								{schedule_value: 0, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '3 m', // end
-									drug_list: {list: [
-										{drug_id: 'nc', concentration_id: '0'},
-										{drug_id: '1', concentration_id: '125'}
-									]}}
-							]}
-						},
-						{
-							id: 'P4',
-							title: 'V2 low conc',
-							treatment_list: {list: [
-								{schedule_value: 0, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '3 m', // end
-									drug_list: {list: [
-										{drug_id: 'nc', concentration_id: '0'},
-										{drug_id: '1', concentration_id: '50'}
-									]}}
-							]}
-						},
-						{
-							id: 'P5',
-							title: 'Many drugs',
-							treatment_list: {list: [
-								{schedule_value: 0, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 3, duration: '3 m', // end
-									drug_list: {list: [
-										{drug_id: 'nc', concentration_id: '0'},
-										{drug_id: '1', concentration_id: '0'},
-										{drug_id: '2', concentration_id: '5'},
-										{drug_id: '3', concentration_id: '10'}
-									]}}
-							]}
-						},
-						{
-							id: 'P6',
-							title: 'Many drugs, Many times',
-							treatment_list: {
-								list: [
-									{schedule_value: 0, schedule: 'immediately', // start
-										duration_value: 3600 * 24 * 3, duration: '3 m', // end
-										drug_list: {list: [
-											{drug_id: 'nc', concentration_id: '0'},
-											{drug_id: '1', concentration_id: '0'},
-											{drug_id: '2', concentration_id: '5'},
-											{drug_id: '3', concentration_id: '10'}
-										]}}
-								]}
 						}
 					],
 					collection_schedule_list: [
@@ -3892,94 +3823,13 @@ var __microscopy_test = {
 
                 
             concentrations: {
-            
-			
-				'1': {
-					name: '1 ' + microEntity + 'M',
-					value: 1000
-				},
-				'5': {
-					name: '5 ' + microEntity + 'M',
-					value: 5000
-				},
-				'10': {
-					name: '10 ' + microEntity + 'M',
-					value: 10000
-				},
-				'20': {
-					name: '20 ' + microEntity + 'M',
-					value: 20000
-				},
-				'25': {
-					name: '25 ' + microEntity + 'M',
-					value: 25000
-				},
-				'40': {
-					name: '40 ' + microEntity + 'M',
-					value: 40000
-				},
-				'80': {
-					name: '80 ' + microEntity + 'M',
-					value: 80000
-				},
-				'125': {
-					name: '125 ' + microEntity + 'M',
-					value: 125000
-				},
-				'10n': {
-					name: '10 nM',
-					value: 10
-				},
-				'50': {
-					name: '50 nM',
-					value: 50
-				},
-				'100': {
-					name: '100 nM',
-					value: 100
-				},
-				'200': {
-					name: '200 nM',
-					value: 200
-				},
-				'400': {
-					name: '400 nM',
-					value: 400
-				},
-				'0': {
-					name: '0 nM',
-					value: 0
-				},
+
 				'108': {
-					name: '10 nM',
+					name: '10^8 PFU',
 					value: 1000
 				}
             },
             drugs: {
-            
-            
-            
-            
-				'nc': {
-					name: 'Buffer only',
-					concentrations: [0]
-				},
-				'1': {
-					name: 'Vulvarine 1',
-					concentrations: [5, 10, 20, 40, 80]
-				},
-				'2': {
-					name: 'Vulvarine 2',
-					concentrations: [50, 100, 200, 400]
-				},
-				'3': {
-					name: 'Vulvarine 3',
-					concentrations: [1, 5, 25, 125]
-				},
-				'4': {
-					name: 'Vulvarine 4',
-					concentrations: ['10n', 50, 100, 200, 400]
-				},
 				'ac': {
 					name: 'Adenovirus-Cre',
 					concentrations: ['108']
@@ -3988,48 +3838,14 @@ var __microscopy_test = {
 					name: 'Adenovirus-Empty',
 					concentrations: ['108']
 				}
-//                 'nc': {
-//                     name: 'Growth Media',
-//                     concentrations: [0]
-//                 },
-//                 'Nocodazole': {
-//                     name: 'Nocodazole',
-//                     concentrations: [15]
-//                 },
-//                 'Alpha': {
-//                     name: 'Alpha Factor',
-//                     concentrations: [2]
-//                 },
-//                 'Hydroxyurea': {
-//                     name: 'Hydroxyurea',
-//                     concentrations: [200]
-//                 },
-//                 'pp1': {
-//                     name: 'Protein Phosphatase 1',
-//                     concentrations: ['1u'],
-//                     short_name: 'PP1'
-//                 }
-
             },
             experiment_temperatures: {
-                '25': {
-                    name: "30" + degreeEntity + "C"
-                },
-                '40': {
-                    name: "37" + degreeEntity + "C"
+                '22': {
+                    name: "22" + degreeEntity + "C"
                 }
             },
 
             cell_lines: {
-                'wt': {
-                    name: 'Wild Type'
-                },
-                'm1': {
-                    name: 'Mutant 1'
-                },
-                'm2': {
-                    name: 'Mutant 2'
-                },
 				'p+': {
 					name: 'p53+/+;Rb+/+'
 				},
@@ -4041,131 +3857,6 @@ var __microscopy_test = {
             time_unit: {
                 kind: 'minutes'
             },
-            primary_anti_body: {
-            
-            
-					1: {
-						name: 'rabbit anti-let-23',
-						secondary: [1],
-						marks: [
-							{weight: 24, intensity: .11},
-							{weight: 36, intensity: .4},
-							{weight: 48, intensity: .04}
-						],
-						gel_name: 'let-23'
-					},
-					2: {
-						name: 'mouse anti-let-60',
-						secondary: [3],
-						marks: [
-							{weight: 48, intensity: .04}
-						],
-						gel_name: 'let-60'
-					},
-					3: {
-						name: 'goat anti-lin15A',
-						secondary: [2],
-						marks: [
-							{weight: 12, intensity: .02}
-						],
-						gel_name: 'lin15A'
-					},
-					9: {
-						name: 'goat anti-lin15B',
-						secondary: [2],
-						marks: [
-							{weight: 100, intensity: .01},
-							{weight: 129, intensity: .11}
-						],
-						gel_name: 'lin15B'
-					},
-					4: {
-						name: 'goat anti-lin-1',
-						secondary: [2],
-						gel_name: 'lin-1'
-					},
-					5: {
-						name: 'mouse anti-Dpy-5',
-						secondary: [3],
-						gel_name: 'Dpy-5'
-					},
-					6: {
-						name: 'rabbit anti-Lon-2',
-						secondary: [1],
-						gel_name: 'Lon-2'
-					},
-					7: {
-						name: 'mouse anti-Sma-4',
-						secondary: [3],
-						gel_name: 'Sma-4'
-					},
-					8: {
-						name: 'goat anti-Unc-22',
-						secondary: [2],
-						gel_name: 'Unc-22'
-					},
-					9: {
-						name: 'rabbit anti-tubulin',
-						secondary: [1],
-						gel_name: 'anti-tubulin',
-						marks: [
-							{weight: 50, intensity: 25.1}
-						]
-					}
-        
-            
-//                 'cdk2': {
-//                     name: 'rabbit anti-cdk2',
-//                     secondary: ['r'],
-//                     marks: [
-//                         {weight: 33, intensity: 0},
-//                         {weight: 34, intensity: 0},
-//                         {weight: 35, intensity: 0}
-//                     ],
-//                     gel_name: 'cdk2'
-//                 },
-//                 'cyclin': {
-//                     name: 'mouse anti-cyclin B',
-//                     secondary: ['m'],
-//                     marks: [
-//                         {weight: 58, intensity: 0},
-//                     ],
-//                     gel_name: 'cyclin B'
-//                 },
-//                 'cyclinE': {
-//                     name: 'mouse anti-cyclin E',
-//                     secondary: ['m'],
-//                     marks: [
-//                         {weight: 48, intensity: 0},
-//                     ],
-//                     gel_name: 'cyclin E'
-//                 },
-//                 'pgk1': {
-//                     name: 'rabbit anti-pgk1',
-//                     secondary: ['r'],
-//                     marks: [
-//                         {weight: 45, intensity: 0},
-//                     ],
-//                     gel_name: 'pgk1'
-//                 }
-            },//
-            secondary_anti_body: {	
-            	    1: {
-						name: 'donkey anti-rabbit'
-					},
-					2: {
-						name: 'rabbit anti-goat'
-					},
-					3: {
-						name: 'goat anti-mouse'
-					}
-//                 'm': {
-//                     name: 'rabbit anti-mouse'
-//                 },
-//                 'r': {
-//                     name: 'goat anti-rabbit'
-//                 }
-            },//
             lysate_kinds: {
                 'whole': {
                     name: 'Whole Cell'
