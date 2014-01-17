@@ -3126,7 +3126,7 @@ var __decusability = {
             	],
             ui: {
                 experimental_design: {
-                    techniques: [ 'wb' , 'facs' , 'micro']
+                    techniques: [ 'wb' , 'facs']
                 },
                 experiment_setup: {
                     table: [ //
@@ -3748,9 +3748,9 @@ var __microscopy_test = {
                         {kind: 'treatments',
                             children: [
                                 {kind: 'drug', title: 'Treatment', editable: true},
-                                {kind: 'concentration', title: 'Treatment Concentration/Dose', editable: true},
+                                {kind: 'concentration', title: 'Treatment Concentration/Dose', editable: false},
                         		{kind: "start", title: "Treatment Start Time", editable: false},
-                        		{kind: "duration", title: "Collection Timepoints", editable: true}
+                        		{kind: "collection", title: "Collection Timepoints", editable: true}
                             ]
                         },
                         {kind: 'actions', title: 'Actions'}
@@ -3761,7 +3761,7 @@ var __microscopy_test = {
 						title: 'New row',
 						cell_line: 'p+',
 						treatment_list: {list: [
-							{schedule_value: 3628800, duration_value: 3600 * 24 * 7*12, duration: '3 m', drug_list: {list: [
+							{schedule_value: 3600*24*7*7, collection_id: '6 m', duration_value: 3600 * 24 * 91, duration: '3 m', drug_list: {list: [
 								{drug_id: 'ac', concentration_id: '108'}
 							]},  temperature: '22'
 							}
@@ -3770,7 +3770,14 @@ var __microscopy_test = {
 							{schedule: "18h", schedule_value: 18 * 3600, id: '3'}
 						]}
                 	}
+                },
+            western_blot: {format: "%CELL_LINE%, %TREATMENT%, %CONCENTRATION%, %COLLECTION%",
+                keys: {
+                    '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
+                    '%COLLECTION%': {attr: ['treatment_list', 'list', '0', 'collection_id'], map:['collections', '%KEY%', 'name']}
                 }
+            }
                 
                 },
                 
@@ -3793,8 +3800,8 @@ var __microscopy_test = {
 							id: 'ADC',
 							title: 'Adenovirus-Cre',
 							treatment_list: {list: [
-								{schedule_value: 5000, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 7*12, duration: '3 m', // end
+								{schedule_value: 5000, collection_id: '6 m', schedule: 'immediately', // start
+									duration_value:  3600 * 24 * 91, duration: '3 m', // end
 									drug_list: {list: [
 										{drug_id: 'ac', concentration_id: 108}
 									]}}
@@ -3804,8 +3811,8 @@ var __microscopy_test = {
 							id: 'ADE',
 							title: 'Adenovirus-Empty',
 							treatment_list: {list: [
-								{schedule_value: 5000, schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 7*12, duration: '3 m', // end
+								{schedule_value: 5000, collection_id: '6 m',schedule: 'immediately', // start
+									duration_value: 3600 * 24 * 7*91, duration: '3 m', // end
 									drug_list: {list: [
 										{drug_id: 'ae', concentration_id: '108'}
 									]}}
@@ -3820,6 +3827,17 @@ var __microscopy_test = {
 				},
        			
        			add_new_row_instructions: 'On this page, set up your experiment to treat the wild-type worms with the four new drugs',
+       		collections:{
+       			'3 m': {
+						name: '3 months'
+       			},
+       			'6 m': {
+						name: '6 months'
+       			},
+       			'1 yr': {
+						name: '1 year'
+       			}
+       		},
 
                 
             concentrations: {
@@ -4092,6 +4110,171 @@ var __microscopy_test = {
                     }
                 },
                 microscopy: {
+                	'default':{
+                		'1': [
+                				{
+                				type:'normal', 
+                				mag: '20x'
+                				}
+                			]
+                			,
+                		'2': [{
+                			type:'normal', 
+                			mag: '20x'}
+                			, 
+                			{type:'normal',
+                			mag: '40x'}]
+                			,
+                		'3': [{
+                			type: 'normal', 
+                			mag: '20x'}]
+                			,
+                		'4': [{
+                			type: 'normal',
+                			mag: '20x'}]
+							,
+                		'5': [{
+                			type: 'normal',
+                			mag: '20x'}]
+							,
+                		'6': [{
+                			type: 'normal',
+                			mag: '4x'}]
+							,
+                		'7': [{
+                			type: 'normal',
+                			mag: '4x'}]
+							,
+                		'8': [{
+                			type: 'normal',
+                			mag: '4x'}]
+                			,
+                		'9': [{
+                			type: 'normal',
+                			mag: '20x'}]
+                	},
+                	'3 m':{
+                		'1':[{
+                			type: 'H&E',
+                			mag: '20x'
+                			}],
+                		'2':[
+                			{
+                			type: 'H&E',
+                			mag:'10x'
+                			},
+                			{
+                			type: 'H&E',
+                			mag: '20x'
+                			}]
+                	},
+                	'6 m':{
+                		'1':[{
+                			type: 'H&E',
+                			mag: '40x'
+                			}],
+                		'2':[{
+                			type: 'H&E',
+                			mag:'20x'
+                			},
+                			{
+                			type: 'H&E',
+                			mag: '40x'
+                			}],
+                		'3':[{
+                			type: 'H&E',
+                			mag:'40x'
+                			}],
+                		'4':[{
+                			type: 'H&E',
+                			mag:'20x',
+                			match:true
+                			},
+                			{
+                			type: 'H&E',
+                			mag: '40x',
+                			match: true
+                			}],
+                		'5':[{
+                			type: 'H&E',
+                			mag: '40x',
+                			match:true
+                			}],
+                		'6':[{
+                			type: 'H&E',
+                			mag:'20x',
+                			match: true
+                			},
+                			{
+                			type: 'H&E',
+                			mag: '40x',
+                			match: true
+                			}],
+                		'4m':[{
+                			type: 'IHC',
+                			ihc_type: 'secondary',
+                			mag:'20x',
+                			match:true
+                			},
+                			{
+                			type: 'IHC',
+                			ihc_type: 'secondary',
+                			mag: '40x',
+                			match: true
+                			}],
+                		'5m':[{
+                			type: 'IHC',
+                			ihc_type: 'secondary',
+                			mag: '40x',
+                			match:true
+                			}],
+                		'6m':[{
+                			type: 'IHC',
+                			ihc_type: 'secondary',
+                			mag:'20x',
+                			match: true
+                			},
+                			{
+                			type: 'IHC',
+                			ihc_type: 'secondary',
+                			mag: '40x',
+                			match: true
+                			}],
+                		'4m2':[{
+                			type: 'IHC',
+                			ihc_type: 'ki67',
+                			mag:'20x',
+                			match:true
+                			},
+                			{
+                			type: 'IHC',
+                			ihc_type: 'ki67',
+                			mag: '40x',
+                			match: true
+                			}],
+                		'5m2':[{
+                			type: 'IHC',
+                			ihc_type: 'ki67',
+                			mag: '40x',
+                			match:true
+                			}],
+                		'6m2':[{
+                			type: 'IHC',
+                			ihc_type: 'ki67',
+                			mag:'20x',
+                			match: true
+                			},
+                			{
+                			type: 'IHC',
+                			ihc_type: 'ki67',
+                			mag: '40x',
+                			match: true
+                			}],
+                		
+                			
+                	},
+                	'1 yr':{
+                	},
                 	'color':{
                 		'parser_simple':[
 							{	

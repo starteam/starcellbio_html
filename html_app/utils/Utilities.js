@@ -155,14 +155,16 @@ scb.utils.print_time = function (value) {
     var hours = Math.floor((time % 86400) / 3600);
     var minutes = Math.floor((time % 3600) / 60);
     var seconds = Math.floor(time % 60);
-    var weeks = Math.floor(time / 604800);
-
+			var months = Math.floor(time /2592000);
+			
+			var weeks = Math.floor((time % 2592000) / 604800);
     var now = (time < 60 );
     return scb_common.format_time_detailed({
     	weeks: weeks,
         days:days,
         hours:hours,
         minutes:minutes,
+        months: months,
         seconds:seconds,
         now:now
     }).trim();
@@ -176,13 +178,17 @@ scb.utils.print_time_w_seconds = function (value) {
     var hours = Math.floor((time % 86400) / 3600);
     var minutes = Math.floor((time % 3600) / 60);
     var seconds = Math.floor(time % 60);
-    var weeks = Math.floor(time / 604800);
+
+			var months = Math.floor(time /2592000);
+			
+			var weeks = Math.floor((time % 2592000) / 604800);
 
     var now = (time < 1 );
     return scb_common.format_time_detailed_w_sec({
         days:days,
         hours:hours,
         minutes:minutes,
+        months:  months,
         seconds:seconds,
         now:now
     }).trim();

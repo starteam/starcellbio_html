@@ -195,13 +195,13 @@ Experiment active area
 						{if $c.kind=='cell_plate'}
 							<img src="images/setup/scb_cell_plate.png">
 						{/if}
-						{if $c.kind=='drug'}
+						{if $c.kind=='drug' and length(keys($t.drugs)) > 1}
 						<span>
 
 						 <span class='scb_concentration_edit_new'>
 							 &nbsp;
 						 </span>
-							{call .drug_edit}
+							{call .drug_edit }
 								{param template:$t/}
 								{param assignment:$assignment/}
 								{param experiment:$experiment/}
@@ -209,12 +209,11 @@ Experiment active area
 								{param disabled:true/}
 							{/call}
 						</span>
-						{elseif $c.kind=='concentration'}
+						{elseif $c.kind=='concentration' and length(keys($t.concentrations)) > 1 }
 						<span>
 							 <span class='scb_concentration_edit_new'>
 								 &nbsp;
 							 </span>
-
 							{call .concentration_edit}
 							{param template:$t/}
 							{param assignment:$assignment/}
@@ -224,7 +223,35 @@ Experiment active area
 							{param concentrations: $t.drugs[$r.treatment.drug_list.list[0].drug_id].concentrations/}
 							{param disabled:true/}
 							{/call}
-					</span>
+						</span>
+						{elseif $c.kind=='cell_line' and length(keys($t.cell_lines)) > 1 }
+						<span>
+
+						 <span class='scb_concentration_edit_new'>
+							 &nbsp;
+						 </span>
+							{call .cell_lines_edit}
+								{param template:$t/}
+								{param assignment:$assignment/}
+								{param experiment:$experiment/}
+								{param cell_line_id:$t.cell_lines['p+']/}
+								{param disabled:true/}
+							{/call}
+						</span>
+						{elseif $c.kind=='collection' and length(keys($t.collections)) > 1 }
+						<span>
+
+						 <span class='scb_concentration_edit_new'>
+							 &nbsp;
+						 </span>
+							{call .collection_edit}
+								{param template:$t/}
+								{param assignment:$assignment/}
+								{param experiment:$experiment/}
+								{param collection_id:$t.collections['3 m']/}
+								{param disabled:true/}
+							{/call}
+						</span>
 						{else}
 						{$c.title}
 						{/if}
@@ -334,6 +361,24 @@ Experiment active area
         <option value='' disabled="disabled">Please select</option>
 		{foreach $t in keys($template.cell_lines)}
 			<option value='{$t}' {if $t==$cell_line_id}selected='selected'{/if}>{$template.cell_lines[$t].name}</option>
+		{/foreach}
+	</select>
+{/template}
+
+
+/**
+* Collection edit
+* @param template template
+* @param collection_id
+* @/param assignment
+* @/param experiment
+* @param disabled
+*/
+{template .collection_edit}
+    <select title='collection' size='1' row='0' class='scb_f_experiment_setup_collection_edit' {if $disabled}disabled='disabled'{/if}>
+        <option value='' disabled="disabled">Please select</option>
+		{foreach $t in keys($template.collections)}
+			<option value='{$t}' {if $t==$collection_id}selected='selected'{/if}>{$template.collections[$t].name}</option>
 		{/foreach}
 	</select>
 {/template}

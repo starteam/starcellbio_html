@@ -254,9 +254,11 @@ Progress bar
 * @param hours hours
 * @param minutes minutes
 * @param weeks weeks
+* @param months months
 * @param now is less than one minute from now
 */
 {template .format_time_detailed}
+{if $months != 0} {$months} {if $months >1}mths{else}mth{/if}{/if}
 {if $weeks != 0} {$weeks} {if $weeks > 1}wks{else}wk{/if}{/if}
 {if $days != 0} {$days} {if $days > 1}d{else}d{/if}{/if}
 {if $hours != 0} {$hours} {if $hours > 1}h{else}h{/if}{/if}

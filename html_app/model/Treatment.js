@@ -23,7 +23,8 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 
 	scb.Utils.initialize_accessor_field(self, data, 'drug_list', {}, scb.DrugList, context);
 	scb.Utils.initialize_accessor_field(self, data, 'temperature', "20", null, context);
-
+	scb.Utils.initialize_accessor_field(self, data, 'collection', "6 m", null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'collection_id', "0", null, context);
 	// should be getter only
 	scb.Utils.initialize_accessor_field(self, data, 'schedule_value', "0", null, context);
 	// should be getter only
@@ -36,18 +37,21 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 		get : function() {
 			var time = parseFloat(data.schedule_value);
 			//var days = Math.floor(time / 86400);
-						var days = Math.floor((time % 604800) / 86400);
-
-			var weeks = Math.floor(time / 604800);
+			var days = Math.floor((time % 604800) / 86400);
 
 			var hours = Math.floor((time % 86400) / 3600);
 			var minutes = Math.round((time % 3600) / 60);
+			
+			var months = Math.floor(time /2592000);
+			
+			var weeks = Math.floor((time % 2592000) / 604800);
 			var now = (time < 60 );
 			return scb_common.format_time_detailed({
 				weeks: weeks,
 				days : days,
 				hours : hours,
 				minutes : minutes,
+				months: months,
 				now : now
 			}).trim();
 		},
@@ -62,12 +66,14 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 		get : function() {
 			var time = parseFloat(data.duration_value);
 			//var days = Math.floor(time / 86400);
-						var days = Math.floor((time % 604800) / 86400);
+			var days = Math.floor((time % 604800) / 86400);
 
 			var hours = Math.floor((time % 86400) / 3600);
 			var minutes = Math.round((time % 3600) / 60);
-			var weeks = Math.floor(time / 604800);
-
+			
+			var months = Math.floor(time /2592000);
+			
+			var weeks = Math.floor((time % 2592000) / 604800);
 			var now = (time < 60 );
             if( time < 0 ) return '' ;
 			return scb_common.format_time_detailed({
@@ -75,6 +81,7 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 				days : days,
 				hours : hours,
 				minutes : minutes,
+				months: months,
 				now : now
 			}).trim();
 		},
@@ -84,6 +91,7 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 			data.duration = self.duration;
 		}
 	});
+
 	self.temperature_name = function() {
 		return context.template.experiment_temperatures[data.temperature].name;
 	}

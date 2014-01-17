@@ -38,9 +38,11 @@ scb.Drug = function scb_Drug(data, context,parent) {
 
 	scb.Utils.initialize_field(data, 'drug_id', null);
 	scb.Utils.initialize_field(data, 'concentration_id', null);
+	scb.Utils.initialize_field(data, 'collection_id', null);
 
 	scb.Utils.initialize_accessor_field(self, data, 'drug_id', null, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'concentration_id', null, null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'collection_id', null, null, context);
 
 	scb.utils.accessor2_custom(self, 'drug_name', function() {
 		return data.drug_id != null ? context.template.drugs[data.drug_id].name : '';
