@@ -294,17 +294,21 @@
 	height: 41px;
 }
 
+.scb_s_western_blot_left_western_blot:hover{
+	background-image: url('../images/western_blot/scb_gray_left_arrow_hover.png') !important;
+}
+
+.scb_s_western_blot_right_western_blot:hover{
+	background-image: url('../images/western_blot/scb_gray_right_arrow_hover.png') !important;
+}
 
 .scb_s_western_blot_left_western_blot:enabled{
-	background-image: url('../images/western_blot/scb_gray_left_arrow_active.png');
-
-	
+	background-image: url('../images/western_blot/scb_gray_left_arrow_active.png');	
 }
 
 .scb_s_western_blot_right_western_blot:enabled{
 	color: #29a592;
 	background-image: url('../images/western_blot/scb_gray_right_arrow_active.png');
-
 }
 
 .scb_s_western_blot_gel_tab_selected, .scb_s_facs_gel_tab_selected,  .scb_s_microscopy_gel_tab_selected  {

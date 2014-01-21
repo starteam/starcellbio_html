@@ -182,6 +182,13 @@ padding-bottom: 3px;
         background-repeat: no-repeat;
 }
 
+.scb_s_western_blot_gel_left_western_blot:hover{
+	background-image: url('../images/western_blot/scb_mini_gray_left_arrow_hover.png') !important;
+}
+
+.scb_s_western_blot_gel_right_western_blot:hover{
+	background-image: url('../images/western_blot/scb_mini_gray_right_arrow_hover.png') !important;
+}
 
 .scb_s_western_blot_gel_left_western_blot:enabled{
         color: #29a592;
