@@ -106,6 +106,27 @@ var MASTER_TEMPLATE = {
 		}
 	},
 	micro_kinds : {
+		'IF':{
+			name:'Antibody-labeling IF',
+			conditions: {
+				'NFIB': {name: 'NFIB (red), DAPI (blue), control (green)'} 
+			}
+		},
+		'IHC':{
+			name:'Antibody-labeling IHC',
+			conditions: {
+				'NFIB': {name: 'NFIB'},
+				'KI67': {name: 'Ki-67'},
+				'2nd': {name: 'Secondary only control'}   
+			}
+		},
+		'Dye':{
+			name: 'Dye/Stain',
+			conditions: {
+				'HnE': {name: 'H&E'} 
+			}
+
+		},
 		'red':{
 			name: 'Red'
 		},

@@ -3110,8 +3110,7 @@ var __assigment_706 = {
                 }
             }
         }
-    }
-    ;
+    };
     
 var __decusability = {
         id: 'decusability',
@@ -3721,10 +3720,7 @@ var __decusability = {
                 }
             }
         }
-    }
-    ;
-
-
+    };
 
 var __microscopy_test = {
         id: 'microscopy_test',
@@ -3761,17 +3757,14 @@ var __microscopy_test = {
 						title: 'New row',
 						cell_line: 'p+',
 						treatment_list: {list: [
-							{schedule_value: 3600*24*7*7, collection_id: '6 m', duration_value: 3600 * 24 * 91, duration: '3 m', drug_list: {list: [
+							{schedule_value: 3600*24*7*7, collection_id: '6 m', drug_list: {list: [
 								{drug_id: 'ac', concentration_id: '108'}
 							]},  temperature: '22'
 							}
-						]},
-						collection_schedule_list: {list: [
-							{schedule: "18h", schedule_value: 18 * 3600, id: '3'}
 						]}
                 	}
                 },
-            western_blot: {format: "%CELL_LINE%, %TREATMENT%, %CONCENTRATION%, %COLLECTION%",
+            western_blot: {format: "%CELL_LINE%, %TREATMENT%, %COLLECTION%",
                 keys: {
                     '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                     '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
@@ -3801,7 +3794,6 @@ var __microscopy_test = {
 							title: 'Adenovirus-Cre',
 							treatment_list: {list: [
 								{schedule_value: 5000, collection_id: '6 m', schedule: 'immediately', // start
-									duration_value:  3600 * 24 * 91, duration: '3 m', // end
 									drug_list: {list: [
 										{drug_id: 'ac', concentration_id: 108}
 									]}}
@@ -3812,7 +3804,6 @@ var __microscopy_test = {
 							title: 'Adenovirus-Empty',
 							treatment_list: {list: [
 								{schedule_value: 5000, collection_id: '6 m',schedule: 'immediately', // start
-									duration_value: 3600 * 24 * 7*91, duration: '3 m', // end
 									drug_list: {list: [
 										{drug_id: 'ae', concentration_id: '108'}
 									]}}
@@ -3820,9 +3811,6 @@ var __microscopy_test = {
 						}
 					],
 					collection_schedule_list: [
-						{id: '3 m', title: '3 months'},
-						{id: '6 m', title: '6 months'},
-						{id: '1 yr', title: '1 year'}
 					]
 				},
        			
@@ -3886,10 +3874,253 @@ var __microscopy_test = {
                 }
             },
             micro_kinds: {
-				'red':{
-					name: 'red'
-				}
+            	'IF':{
+            		name:'Antibody-labeling IF',
+            		conditions: {
+            			'NFIB': {name: 'NFIB (red), DAPI (blue), control (green)'} 
+            		}
+            	},
+            	'IHC':{
+            		name:'Antibody-labeling IHC',
+            		conditions: {
+            			'NFIB': {name: 'NFIB'},
+            			'KI67': {name: 'Ki-67'},
+            			'2nd': {name: 'Secondary only control'}   
+            		}
+            	},
+            	'Dye':{
+            		name: 'Dye/Stain',
+            		conditions: {
+            			'HnE': {name: 'H&E'} 
+            		}
+
+            	}
         	},
+        	slides:{
+        		'img1': '../images/microscopy/microscopy_test/'
+        	}
+            slide_parser:{
+                	'default':{
+                		'HnE':{
+                		'1': [{
+                				
+                				mag: '20x'
+                			}],
+                		'2': [{
+                				mag: '20x'
+                			}, 
+                			{
+                				mag: '40x'
+                			}],
+                		'3': [{
+                				mag: '20x'
+                			}],
+                		'4': [{
+                				mag: '20x'
+                			}],
+                		'5': [{
+                				mag: '20x'
+                			}],
+                		'6': [{
+                				mag: '4x'
+                			}],
+                		'7': [{
+                				mag: '4x'
+                			}],
+                		'8': [{
+                				mag: '4x'
+                			}],
+                		'9': [{
+                				mag: '20x'
+                			}]
+                		}
+                	},
+                	'3 m':{
+                		'HnE':{
+                			'1':[{
+                					mag: '20x'
+                				}],
+                			'2':[{
+                					mag:'10x'
+                				},
+                				{
+                					mag: '20x'
+                				}]
+                			}
+                	},
+                	'6 m':{
+                		'HnE':{
+                		'1':[{
+                			mag: '40x'
+                			}],
+                		'2':[{
+                			mag:'20x'
+                			},
+                			{
+                			mag: '40x'
+                			}],
+                		'3':[{
+                			mag:'40x'
+                			}],
+                		'4':[{
+                			mag:'20x'
+                			},
+                			{
+                			mag: '40x'
+                			}],
+                		'5':[{
+                			mag: '40x'
+                			}],
+                		'6':[{
+                			mag:'20x'
+                			},
+                			{
+                			mag: '40x'
+                			}]
+                		},
+                		'IHC':{
+                		
+                		'1':[{
+                			ihc_type: 'secondary',
+                			mag:'20x'
+                			},
+                			{
+                			ihc_type: 'secondary',
+                			mag: '40x'
+                			}],
+                		'2':[{
+                			ihc_type: 'secondary',
+                			mag: '40x'
+                			}],
+                		'3':[{
+                			ihc_type: 'secondary',
+                			mag:'20x'
+                			},
+                			{
+                			ihc_type: 'secondary',
+                			mag: '40x'
+                			}],
+                		'4':[{
+                			ihc_type: 'ki67',
+                			mag:'20x'
+                			},
+                			{
+                			ihc_type: 'ki67',
+                			mag: '40x'
+                			}],
+                		'5':[{
+                			ihc_type: 'ki67',
+                			mag: '40x'
+                			}],
+                		'6':[{
+                			ihc_type: 'ki67',
+                			mag:'20x'
+                			},
+                			{
+                			ihc_type: 'ki67',
+                			mag: '40x'
+                			}]
+                		}
+                	},
+                	'1 yr':{
+                		'HnE':{
+                			'1':[{
+                				mag:'20x'
+                			}],
+                			'2': [{
+                				mag:'20x'
+                			}],
+                			'3':[{
+                				mag:'4x'
+                			},
+                			{
+                				mag:'10x'
+                			},
+                			{
+                				mag:'20x'
+                			}],
+                			'4':[{
+                				mag:'20x'
+                			}],
+                			'5':[{
+                				mag:'20x'
+                			}],
+                			'6':[{
+                				mag:'20x'
+                			}]
+                		},
+                		'IF': {
+                			'1':[{
+                				if_type: 'red', 
+                				mag:'60x'
+                			},
+                			{
+                				if_type: 'blue', 
+                				mag:'60x'
+                			},
+                			{
+                				if_type: 'green', 
+                				mag:'60x'
+                			},
+                			{
+                				if_type: 'merge', 
+                				mag:'60x'
+                			}],
+                			'2':[{
+                				if_type: 'merge', 
+                				mag:'60x'
+                			}],
+                			'3':[{
+                				if_type: 'merge', 
+                				mag:'60x'
+                			}],
+                			'4':[{
+                				if_type: 'red', 
+                				mag:'60x'
+                			},
+                			{
+                				if_type: 'blue', 
+                				mag:'60x'
+                			},
+                			{
+                				if_type: 'green', 
+                				mag:'60x'
+                			},
+                			{	
+                				if_type: 'merge', 
+                				mag:'60x'
+                			}],
+                			'5':[{
+                				if_type: 'red', 
+                				mag:'60x'
+                			},
+                			{
+                				if_type: 'blue', 
+                				mag:'60x'
+                			},
+                			{
+                				if_type: 'green', 
+                				mag:'60x'
+                			},
+                			{
+                				if_type: 'merge', 
+                				mag:'60x'
+                			}]
+                			
+                		},
+                		'IHC': {
+                			'1':[{
+                				ihc_type: 'NFIB',
+                				mag:'20x'
+                			}],
+                			'2':[{
+                				ihc_type: 'NFIB', 
+                				mag:'20x'
+                			}],
+                		}
+                	
+                	}
+			},
             model: { // models
                 western_blot: {
                     'cyto': {
@@ -4110,171 +4341,6 @@ var __microscopy_test = {
                     }
                 },
                 microscopy: {
-                	'default':{
-                		'1': [
-                				{
-                				type:'normal', 
-                				mag: '20x'
-                				}
-                			]
-                			,
-                		'2': [{
-                			type:'normal', 
-                			mag: '20x'}
-                			, 
-                			{type:'normal',
-                			mag: '40x'}]
-                			,
-                		'3': [{
-                			type: 'normal', 
-                			mag: '20x'}]
-                			,
-                		'4': [{
-                			type: 'normal',
-                			mag: '20x'}]
-							,
-                		'5': [{
-                			type: 'normal',
-                			mag: '20x'}]
-							,
-                		'6': [{
-                			type: 'normal',
-                			mag: '4x'}]
-							,
-                		'7': [{
-                			type: 'normal',
-                			mag: '4x'}]
-							,
-                		'8': [{
-                			type: 'normal',
-                			mag: '4x'}]
-                			,
-                		'9': [{
-                			type: 'normal',
-                			mag: '20x'}]
-                	},
-                	'3 m':{
-                		'1':[{
-                			type: 'H&E',
-                			mag: '20x'
-                			}],
-                		'2':[
-                			{
-                			type: 'H&E',
-                			mag:'10x'
-                			},
-                			{
-                			type: 'H&E',
-                			mag: '20x'
-                			}]
-                	},
-                	'6 m':{
-                		'1':[{
-                			type: 'H&E',
-                			mag: '40x'
-                			}],
-                		'2':[{
-                			type: 'H&E',
-                			mag:'20x'
-                			},
-                			{
-                			type: 'H&E',
-                			mag: '40x'
-                			}],
-                		'3':[{
-                			type: 'H&E',
-                			mag:'40x'
-                			}],
-                		'4':[{
-                			type: 'H&E',
-                			mag:'20x',
-                			match:true
-                			},
-                			{
-                			type: 'H&E',
-                			mag: '40x',
-                			match: true
-                			}],
-                		'5':[{
-                			type: 'H&E',
-                			mag: '40x',
-                			match:true
-                			}],
-                		'6':[{
-                			type: 'H&E',
-                			mag:'20x',
-                			match: true
-                			},
-                			{
-                			type: 'H&E',
-                			mag: '40x',
-                			match: true
-                			}],
-                		'4m':[{
-                			type: 'IHC',
-                			ihc_type: 'secondary',
-                			mag:'20x',
-                			match:true
-                			},
-                			{
-                			type: 'IHC',
-                			ihc_type: 'secondary',
-                			mag: '40x',
-                			match: true
-                			}],
-                		'5m':[{
-                			type: 'IHC',
-                			ihc_type: 'secondary',
-                			mag: '40x',
-                			match:true
-                			}],
-                		'6m':[{
-                			type: 'IHC',
-                			ihc_type: 'secondary',
-                			mag:'20x',
-                			match: true
-                			},
-                			{
-                			type: 'IHC',
-                			ihc_type: 'secondary',
-                			mag: '40x',
-                			match: true
-                			}],
-                		'4m2':[{
-                			type: 'IHC',
-                			ihc_type: 'ki67',
-                			mag:'20x',
-                			match:true
-                			},
-                			{
-                			type: 'IHC',
-                			ihc_type: 'ki67',
-                			mag: '40x',
-                			match: true
-                			}],
-                		'5m2':[{
-                			type: 'IHC',
-                			ihc_type: 'ki67',
-                			mag: '40x',
-                			match:true
-                			}],
-                		'6m2':[{
-                			type: 'IHC',
-                			ihc_type: 'ki67',
-                			mag:'20x',
-                			match: true
-                			},
-                			{
-                			type: 'IHC',
-                			ihc_type: 'ki67',
-                			mag: '40x',
-                			match: true
-                			}],
-                		
-                			
-                	},
-                	'1 yr':{
-                	},
                 	'color':{
                 		'parser_simple':[
 							{	
@@ -4282,9 +4348,76 @@ var __microscopy_test = {
 								color: 'red'
 							}
                 		]
-                		//gypsum
+                	},
+                	'slide': {
+                	
+                		'parser_simple':[
+                		{
+                			match: [],
+                			
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'pfl',
+                			drug_id: 'ac',
+                			collection_id: '3 m',
+                			kind: 'Dye',
+                			conditions: 'HnE'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'pfl',
+                			drug_id: 'ac',
+                			collection_id: '6 m',
+                			kind: 'Dye',
+                			conditions: 'HnE'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'pfl',
+                			drug_id: 'ac',
+                			collection_id: '6 m',
+                			kind: 'IHC',
+                			conditions: '2nd'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'pfl',
+                			drug_id: 'ac',
+                			collection_id: '6 m',
+                			kind: 'IHC',
+                			conditions: 'KI67'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'pfl',
+                			drug_id: 'ac',
+                			collection_id: '1 yr',
+                			kind: 'Dye',
+                			conditions: 'HnE'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'pfl',
+                			drug_id: 'ac',
+                			collection_id: '1 yr',
+                			kind: 'IF',
+                			conditions: 'NFIB'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'pfl',
+                			drug_id: 'ac',
+                			collection_id: '1 yr',
+                			kind: 'IHC',
+                			conditions: 'NFIB'
+                		}
+                			
+                		]
+                		
                 	}
                 }
+                
 		}
 		}
 		}

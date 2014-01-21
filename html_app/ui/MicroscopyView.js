@@ -30,10 +30,11 @@ scb.ui.static.MicroscopyView.parse = function (element) {
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	console.log('draw slide');	
-	var model = new scb.components.ModelFactory(state.context.template);
-	model.microscopy.compute(state);
-	console.log(state.color);
-	init(lens_map, draw, 'images/microscopy/'+state.color+'.jpg');
+	//var model = new scb.components.ModelFactory(state.context.template);
+	//model.microscopy.compute(state);
+	//console.log(state.color);
+	//init(lens_map, draw, 'images/microscopy/'+state.color+'.jpg');
+	init(lens_map, draw, 'images/microscopy/blue.jpg');
 }
 
 
