@@ -3897,40 +3897,110 @@ var __microscopy_test = {
             	}
         	},
         	slides:{
-        		'img1': '../images/microscopy/microscopy_test/'
+        		'img1': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_1/AD20E1_20x.jpg',
+        		'img2': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_2/AD20E2_20x.jpg',
+        		'img3': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_3/AD22E1_20x.jpg',
+        		'img4': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_3/AD22E1_40x.jpg',
+        		'img5': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_4/AD27E2_20x.jpg',
+        		'img6': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_5/AD1024E_3_20x.jpg',
+        		'img7': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_6/AD901_8_4x.jpg',
+        		'img8': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_7/AD901_50_4x.jpg',
+        		'img9': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_8/AD901_52_4x.jpg',
+        		'img10': '../images/microscopy/microscopy_test/Normal_lung/HnE/Sample_9/AD1021E_20x.jpg',
+        		
+        		'img11': '../images/microscopy/microscopy_test/lung_3m/HnE/Sample_1/AD1024E_2_20x.jpg',
+        		'img12': '../images/microscopy/microscopy_test/lung_3m/HnE/Sample_2/AD1024E_10x.jpeg',
+        		'img13': '../images/microscopy/microscopy_test/lung_3m/HnE/Sample_2/AD1024E_20x.jpeg',
+
+        		'img14': '../images/microscopy/microscopy_test/lung_6m/HnE/Sample_1/AD900E1_40x.jpg',
+        		'img15': '../images/microscopy/microscopy_test/lung_6m/HnE/Sample_2/AD900E3_20x.jpg',
+        		'img16': '../images/microscopy/microscopy_test/lung_6m/HnE/Sample_2/AD900E3_40x.jpg',
+        		'img17': '../images/microscopy/microscopy_test/lung_6m/HnE/Sample_3/AD987E1_40x-3.jpg',
+        		'img18': '../images/microscopy/microscopy_test/lung_6m/HnE/Sample_4m/AD901E25-1_he_20x.jpg',
+        		'img19': '../images/microscopy/microscopy_test/lung_6m/HnE/Sample_4m/AD901E25-1_he_40x.jpg',
+        		'img20': '../images/microscopy/microscopy_test/lung_6m/HnE/Sample_5m/AD901E25-2_he_40x-2.jpg',
+        		'img21': '../images/microscopy/microscopy_test/lung_6m/HnE/Sample_6m/AD901E25-3_he_20x.jpg',
+        		'img22': '../images/microscopy/microscopy_test/lung_6m/HnE/Sample_6m/AD901E25-3_he_40x.jpg',
+        		'img23': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_1/AD901E25-1_2only_20x.jpeg',
+        		'img24': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_1/AD901E25-1_2only_40x.jpeg',
+        		'img25': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_1/AD901E25-1_ki-67_20x.jpeg',
+        		'img26': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_1/AD901E25-1_ki-67_40xadj.jpg',
+        		'img27': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_2/AD901E25-2_2only_40x.jpg',
+        		'img28': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_2/AD901E25-2_ki-67_40xadj.jpg',
+        		'img29': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_3/AD901E25-3_2only_20x-2.jpeg',
+        		'img30': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_3/AD901E25-3_2only_40x-2.jpeg',
+        		'img31': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_3/AD901E25-3_ki-67_20x-2.jpeg',
+        		'img32': '../images/microscopy/microscopy_test/lung_6m/matching/Sample_3/AD901E25-3_ki-67_40x-2.jpeg',
+        		
+        		'img33': '../images/microscopy/microscopy_test/lung_1yr/HnE/Sample_1/AD985E-1_20x-2.jpg',
+        		'img34': '../images/microscopy/microscopy_test/lung_1yr/HnE/Sample_2/AD985E-1_20x.jpg',
+        		'img35': '../images/microscopy/microscopy_test/lung_1yr/HnE/Sample_3/ad985T1_4X-2.jpg',
+        		'img36': '../images/microscopy/microscopy_test/lung_1yr/HnE/Sample_3/ad985T1_10X.jpg',
+        		'img37': '../images/microscopy/microscopy_test/lung_1yr/HnE/Sample_3/ad985T1_20X.jpg',
+        		'img38': '../images/microscopy/microscopy_test/lung_1yr/HnE/Sample_4/AD990E-1_20x.jpg',
+        		'img39': '../images/microscopy/microscopy_test/lung_1yr/HnE/Sample_5m/AD1017_HE_20X.jpg',
+        		'img40': '../images/microscopy/microscopy_test/lung_1yr/HnE/Sample_6m/AD3587E_HE_20X-1-2.jpg',
+        		'img41': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_1/AD3172EAD3172E_60X_blue_advanced4.jpeg',
+        		'img42': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_1/AD3172EAD3172E_60X_green_advanced4.jpeg',
+        		'img43': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_1/AD3172EAD3172E_60X_merge_advanced4.jpeg',
+        		'img44': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_1/AD3172EAD3172E_60X_red_advanced4.jpeg',
+        		'img45': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_2/AD3172E-02_60X_merge.jpg',
+        		'img46': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_3/AD984E2-01_R3D_D3D_PRJ_617_528_457_60X_merge.jpg',
+        		'img47': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_4/G5G5_60X_blue.jpeg',
+        		'img48': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_4/G5G5_60X_green.jpeg',
+        		'img49': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_4/G5G5_60X_merge.jpeg',
+        		'img50': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_4/G5G5_60X_red.jpeg',
+        		'img51': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_5/J5J5_60X_blue.jpeg',
+        		'img52': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_5/J5J5_60X_green.jpeg',
+        		'img53': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_5/J5J5_60X_merge.jpeg',
+        		'img54': '../images/microscopy/microscopy_test/lung_1yr/IF/Sample_5/J5J5_60X_red.jpeg',
+        		'img55': '../images/microscopy/microscopy_test/lung_1yr/match/Sample_1/AD1017_NFIB_20X.jpg',
+        		'img56': '../images/microscopy/microscopy_test/lung_1yr/match/Sample_2/AD3587E_NFIB_20X-1.jpg',
+
+
+
         	}
             slide_parser:{
                 	'default':{
                 		'HnE':{
                 		'1': [{
-                				
+                				hash: 'img1',
                 				mag: '20x'
                 			}],
                 		'2': [{
+                				hash: 'img2',
                 				mag: '20x'
-                			}, 
-                			{
-                				mag: '40x'
                 			}],
                 		'3': [{
+                				hash: 'img3',
                 				mag: '20x'
+                			},
+                			{
+                				hash: 'img4',
+                				mag: '40x'
                 			}],
                 		'4': [{
+                				hash: 'img5',
                 				mag: '20x'
                 			}],
                 		'5': [{
+                				hash: 'img6',
                 				mag: '20x'
                 			}],
                 		'6': [{
+                				hash: 'img7',
                 				mag: '4x'
                 			}],
                 		'7': [{
+                				hash: 'img8',
                 				mag: '4x'
                 			}],
                 		'8': [{
+                				hash: 'img9',
                 				mag: '4x'
                 			}],
                 		'9': [{
+                				hash: 'img10',
                 				mag: '20x'
                 			}]
                 		}
@@ -3938,12 +4008,15 @@ var __microscopy_test = {
                 	'3 m':{
                 		'HnE':{
                 			'1':[{
+                					hash: 'img11',
                 					mag: '20x'
                 				}],
                 			'2':[{
+                					hash: 'img12',
                 					mag:'10x'
                 				},
                 				{
+                					hash: 'img13',
                 					mag: '20x'
                 				}]
                 			}
@@ -3951,72 +4024,91 @@ var __microscopy_test = {
                 	'6 m':{
                 		'HnE':{
                 		'1':[{
+                			hash: 'img14',
                 			mag: '40x'
                 			}],
                 		'2':[{
+                			hash: 'img15',
                 			mag:'20x'
                 			},
                 			{
+                			hash: 'img16',	
                 			mag: '40x'
                 			}],
                 		'3':[{
+                			hash: 'img17',
                 			mag:'40x'
                 			}],
                 		'4':[{
+                			hash: 'img18',
                 			mag:'20x'
                 			},
                 			{
+                			hash: 'img19',
                 			mag: '40x'
                 			}],
                 		'5':[{
+                			hash: 'img20',
                 			mag: '40x'
                 			}],
                 		'6':[{
+                			hash: 'img21',
                 			mag:'20x'
                 			},
                 			{
+                			hash: 'img22',
                 			mag: '40x'
                 			}]
                 		},
                 		'IHC':{
                 		
                 		'1':[{
+                			hash: 'img23',
                 			ihc_type: 'secondary',
                 			mag:'20x'
                 			},
                 			{
+                			hash: 'img24',
                 			ihc_type: 'secondary',
                 			mag: '40x'
                 			}],
                 		'2':[{
+                			hash: 'img27',
                 			ihc_type: 'secondary',
                 			mag: '40x'
                 			}],
                 		'3':[{
+                			hash: 'img29',
                 			ihc_type: 'secondary',
                 			mag:'20x'
                 			},
                 			{
+                			hash: 'img30',
                 			ihc_type: 'secondary',
                 			mag: '40x'
                 			}],
                 		'4':[{
+                			hash: 'img25',
                 			ihc_type: 'ki67',
                 			mag:'20x'
                 			},
                 			{
+                			hash: 'img26',
                 			ihc_type: 'ki67',
                 			mag: '40x'
                 			}],
                 		'5':[{
+                			hash: 'img28',
                 			ihc_type: 'ki67',
                 			mag: '40x'
                 			}],
                 		'6':[{
+                			hash: 'img31',
                 			ihc_type: 'ki67',
                 			mag:'20x'
                 			},
                 			{
+                			hash: 'img32',
                 			ihc_type: 'ki67',
                 			mag: '40x'
                 			}]
@@ -4025,84 +4117,106 @@ var __microscopy_test = {
                 	'1 yr':{
                 		'HnE':{
                 			'1':[{
+                				hash: 'img33',
                 				mag:'20x'
                 			}],
                 			'2': [{
+                				hash: 'img34',
                 				mag:'20x'
                 			}],
                 			'3':[{
+                				hash: 'img35',
                 				mag:'4x'
                 			},
                 			{
+                				hash: 'img36',
                 				mag:'10x'
                 			},
                 			{
+                				hash: 'img37',
                 				mag:'20x'
                 			}],
                 			'4':[{
+                				hash: 'img38',
                 				mag:'20x'
                 			}],
                 			'5':[{
+                				hash: 'img39',
                 				mag:'20x'
                 			}],
                 			'6':[{
+                				hash: 'img40',
                 				mag:'20x'
                 			}]
                 		},
                 		'IF': {
                 			'1':[{
+                				hash: 'img44',
                 				if_type: 'red', 
                 				mag:'60x'
                 			},
                 			{
+                				hash: 'img41',
                 				if_type: 'blue', 
                 				mag:'60x'
                 			},
                 			{
+                				hash: 'img42',
                 				if_type: 'green', 
                 				mag:'60x'
                 			},
                 			{
+                				hash: 'img43',
                 				if_type: 'merge', 
                 				mag:'60x'
                 			}],
                 			'2':[{
+                				hash: 'img45',
                 				if_type: 'merge', 
                 				mag:'60x'
                 			}],
                 			'3':[{
+                				hash: 'img46',
                 				if_type: 'merge', 
                 				mag:'60x'
                 			}],
                 			'4':[{
+                				hash: 'img50',
                 				if_type: 'red', 
                 				mag:'60x'
                 			},
                 			{
+                				hash: 'img47',
                 				if_type: 'blue', 
                 				mag:'60x'
                 			},
                 			{
+                				hash: 'img48',
                 				if_type: 'green', 
                 				mag:'60x'
                 			},
                 			{	
+                				hash: 'img49',
                 				if_type: 'merge', 
                 				mag:'60x'
                 			}],
                 			'5':[{
+                				hash: 'img54',
                 				if_type: 'red', 
                 				mag:'60x'
                 			},
                 			{
+                				hash: 'img51',
                 				if_type: 'blue', 
                 				mag:'60x'
                 			},
                 			{
+                				hash: 'img52',
                 				if_type: 'green', 
                 				mag:'60x'
                 			},
                 			{
+                				hash: 'img53',
                 				if_type: 'merge', 
                 				mag:'60x'
                 			}]
@@ -4110,10 +4224,12 @@ var __microscopy_test = {
                 		},
                 		'IHC': {
                 			'1':[{
+                				hash: 'img55',
                 				ihc_type: 'NFIB',
                 				mag:'20x'
                 			}],
                 			'2':[{
+                				hash: 'img56',
                 				ihc_type: 'NFIB', 
                 				mag:'20x'
                 			}],
