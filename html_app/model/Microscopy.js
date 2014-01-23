@@ -66,7 +66,6 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'slide_prepared', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.MicroscopyLaneList, context);
     scb.Utils.initialize_accessor_field(self, data, 'samples_finished', false, null, context);
-
     scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
 	

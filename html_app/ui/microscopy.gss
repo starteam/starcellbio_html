@@ -11,7 +11,6 @@
     padding:3px;
     color:black;
 	text-overflow:ellipsis;
-	white-space: nowrap;
 	overflow:hidden;
 	cursor:pointer;
 	list-style-position:inside;
@@ -32,6 +31,27 @@ position:relative;
 
 #scb_s_micro_slide >img{
 height: 60px;
+}
+
+.scb_s_microscopy_conditions{
+	width: 189px;
+	padding-left: 22px;
+}
+
+.m_sample_prep_select{
+	width: 96px;
+}
+
+.m_sample_prep_samples{
+	width: 464px;
+}
+
+.m_sample_prep_lysate{
+	width: 220px;
+}
+
+.m_sample_prep_blank{
+	width: 196px;
 }
 
 .scb_s_microscopy_left_microscopy{

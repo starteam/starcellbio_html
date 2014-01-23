@@ -12,15 +12,14 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 //     			console.log(state);
     			if (m.parser_simple){
 					var microscopy_lane = state.microscopy_lane;
-					var cell_line = state.microscopy_lane.cell_treatment.cell_line;
-					var collection_id= state.microscopy_lane.cell_treatment.treatment_list.list[0].collection_id;
-					var drug_id = state.microscopy_lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id;
+					var cell_line = microscopy_lane.cell_treatment.cell_line;
+					var collection_id= microscopy_lane.cell_treatment.treatment_list.list[0].collection_id;
+					var drug_id = microscopy_lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id;
 					var slide_type = microscopy_lane.kind;	
-					var conditions = state.microscopy_lane.kinds[state.microscopy_lane.kind].conditions;
-					var color = microscopy_lane.kind;
-					var img_str  = '';		
+					var conditions = microscopy_lane.slide_conditions;
+					var imgs = []
 					var micro_state = {
-						slide_type: function (str) {
+						kind: function (str) {
 							return str == slide_type;
 						},
 						collection_id: function (str) {
@@ -31,19 +30,13 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 						},
 						cell_line: function (str) {
 							return str == cell_line;
-						}
-						,
+						},
 						conditions: function (str) {
 							return str == conditions;
 						}
 					}
-// 					_.each(m.parser_simple, function (rule) {
-// 						if (rule.color == color)
-// 						 	state.color = color;
-//     				});
-//     			
+					var isFound = false;
 					_.each(m.parser_simple, function (rule) {
-// 						console.info(rule);
 						if (rule.match.length == 0) {
 							img_str = '../images/microscopy/black.jpg'
 						}
@@ -57,21 +50,29 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 									console.info("UNDEFINED PROPERTY: " + property);
 								}
 							});
-							if(matches){
-								color_str = rule.color;
+							if(!isFound){
+								if(matches){
+									color_str = rule.color;
+									var max = _.size(template.slide_parser[collection_id][slide_type][conditions]);
+									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+									var slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
+									imgs=slide_array;
+									isFound = true;
+								}
+								else{
+									var max = _.size(template.slide_parser['default']['Dye']['HnE']);
+									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+									imgs = template.slide_parser['default']['Dye']['HnE'][index];
+									color_str = 'blue';
+								}
 							}
 						}
 					});
-					state.color = color_str;
+					state.slides = imgs;
+					state.slide_type = slide_type;
 				}			
  			}
     	}
-    
-//     console.log('params');
-//     console.log('model:');
-//     console.log(model);
-//     console.log(template);
-// 	console.log('called the factory rules');
     self.compute = function (state) {
         return self.slide(state);
     }

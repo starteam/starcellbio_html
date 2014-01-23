@@ -126,33 +126,6 @@ var MASTER_TEMPLATE = {
 				'HnE': {name: 'H&E'} 
 			}
 
-		},
-		'red':{
-			name: 'Red'
-		},
-		'pink':{
-			name: 'Pink'
-		},
-		'hi':{
-			name:'hi'
-		},
-		'orange':{
-			name: 'orange'
-		},
-		'yellow':{
-			name: 'yellow'
-		},
-		'black':{
-			name: 'black'
-		},
-		'purple':{
-			name: 'purple'
-		},
-		'blue':{
-			name: 'blue'
-		},
-		'green':{
-			name: 'green'
 		}
 	}
 
