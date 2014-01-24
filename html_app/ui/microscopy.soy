@@ -295,12 +295,12 @@
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rbg" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled and $r.lane.slide_conditions =='rbg' }checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">NFIB (red), DAPI (blue), control (green)</span>
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">NFIB (red), DAPI (blue), control (green)</span>
 				{elseif $r.lane.kind == 'Dye'}
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="HnE" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled and $r.lane.slide_conditions =='HnE'}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">H&E</span>
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">H&E</span>
 				{/if}
 			{/if}
             </td>
@@ -401,12 +401,27 @@
                     </div>
                     </span>
        	</div>
-			{call .display_lens}
-			{param assignment:$assignment/}
-			{param experiment:$experiment/}
-			{param microscopy:$microscopy/}
-			{param microscopy_line_id: $microscopy.lane_selected/}
-			{/call}
+       	{if $microscopy.samples_finished}
+       	  {foreach $r in $rows}
+       	  	{if $r.is_valid and $microscopy.lane_selected == $r.lane.id}
+				{call .display_lens}
+				{param assignment:$assignment/}
+				{param experiment:$experiment/}
+				{param microscopy:$microscopy/}
+				{param lane: $r.lane/}
+				{param microscopy_line_id: $microscopy.lane_selected/}
+				{/call}
+			{/if}
+		  {/foreach}
+		{else}
+				{call .display_lens}
+				{param assignment:$assignment/}
+				{param experiment:$experiment/}
+				{param microscopy:$microscopy/}
+				{param lane: false/}
+				{param microscopy_line_id: $microscopy.lane_selected/}
+				{/call}
+		{/if}
  		</div>
 </div>	
 {/template}
@@ -416,11 +431,9 @@
 @param experiment
 @param microscopy
 @param microscopy_line_id
+@param lane
 */
 {template .display_lens}
-{let $lane} 
-	$microscopy.lanes_list.get($microscopy_line_id)	
-{/let}
 
 <div class='scb_s_microscopy_slide_content' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 			 microscopy_id='{$microscopy.id}'
@@ -452,10 +465,10 @@
 				</button>	
 				
 				<input type="checkbox" class="scb_f_microscopy_laser" microscopy_id='{$microscopy.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'><span class="scb_s_western_blot_choose_gel_type_input_text">Laser</span>	 	 		 	 
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $lane.laser_on}checked='checked'{else}{/if}><span class="scb_s_western_blot_choose_gel_type_input_text">Laser</span>	 	 		 	 
 			   
 			   <input type="checkbox" class="scb_f_microscopy_light" microscopy_id='{$microscopy.id}'
-			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' ><span class="scb_s_western_blot_choose_gel_type_input_text">Light</span>
+			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $lane.light_on}checked='checked'{else}{/if} ><span class="scb_s_western_blot_choose_gel_type_input_text">Light</span>
 			   	
 			   	<button class='scb_f_microscopy_fourx' microscopy_id='{$microscopy.id}' disabled='disabled' assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}'>4x

@@ -1095,7 +1095,7 @@ var __basic_tests = {
 
         ui: {
             experimental_design: {
-                techniques: [ 'wb' , 'facs' , 'micro']
+                techniques: [ 'wb' , 'facs' ]
             },
             experiment_setup: {table: [
                 {kind: "cell_line",
@@ -1581,7 +1581,7 @@ var __usability_test = {
         instructions: [['Placeholder', 'Usability test']],
         ui: {
             experimental_design: {
-                techniques: [ 'wb' , 'facs' , 'micro']
+                techniques: [ 'wb' , 'facs' ]
             },
             experiment_setup: {table: [
                 {kind: "cell_plate",
@@ -1906,11 +1906,6 @@ var __usability_test = {
              name:'Nuclear'
              }*/
         },
-        micro_kinds: {
-        	'whole':{
-        		name: 'red'
-        	},
-        },
         model: {// model
             western_blot: {// this applies to western blot
                 'cyto': {// it acts on cytoplasm (thus on whole cell lysate as well)
@@ -2062,7 +2057,7 @@ var __assigment_706 = {
             	],
             ui: {
                 experimental_design: {
-                    techniques: [ 'wb' , 'facs' , 'micro']
+                    techniques: [ 'wb' , 'facs' ]
                 },
                 experiment_setup: {
                     table: [ //
@@ -2646,35 +2641,6 @@ var __assigment_706 = {
                     name: 'PI'
                 }
             },
-            micro_kinds: {
-				'red':{
-					name: 'red'
-				},
-				'orange':{
-					name: 'orange'
-				},
-				'yellow':{
-					name: 'yellow'
-				},
-				'black':{
-					name: 'black'
-				},
-				'purple':{
-					name: 'purple'
-				},
-				'blue':{
-					name: 'blue'
-				},
-				'green':{
-					name: 'green'
-				},
-				'pink':{
-					name: 'pink'
-				},
-				'hi':{
-					name: 'hi'
-					}
-        	},
             model: { // models
                 western_blot: {
                     'cyto': {
@@ -3064,49 +3030,6 @@ var __assigment_706 = {
                         ]
 
                     }
-                },
-                microscopy: {
-                	'color':{
-                		'parser_simple':[
-							{	
-								match: ['color'],
-								color: 'red'
-							},
-							{
-								match: ['color'],
-								color: 'orange'
-							},
-							{
-								match: ['color'],
-								color: 'black'
-							},
-							{
-								match: ['color'],
-								color: 'pink'
-							},
-							{
-								match: ['color'],
-								color: 'purple'
-							},
-							{
-								match: ['color'],
-                				color: 'blue'
-                			},
-                			{
-								match: ['color'],
-								color: 'hi'
-							},
-							{
-								match: ['color'],
-								color: 'yellow'
-							},
-							{
-								match: ['color'],
-								color: 'green'
-							},
-                		]
-                		//gypsum
-                	}
                 }
             }
         }
@@ -3483,11 +3406,6 @@ var __decusability = {
                     name: 'PI'
                 }
             },
-            micro_kinds: {
-				'red':{
-					name: 'red'
-				}
-        	},
             model: { // models
                 western_blot: {
                     'cyto': {
@@ -3706,17 +3624,6 @@ var __decusability = {
                         ]
 
                     }
-                },
-                microscopy: {
-                	'color':{
-                		'parser_simple':[
-							{	
-								match: ['color'],
-								color: 'red'
-							}
-                		]
-                		//gypsum
-                	}
                 }
             }
         }

@@ -237,19 +237,6 @@ height: 60px;
     padding-top:10px;
 }
 
-.scb_s_microscopy_progress_rest {
-    background: url('../images/microscopy/progress_bg.png');
-    display: inline-block;
-    padding: 5px;
-    padding-top:8px;
-    margin-left: 12px;
-    border-radius: 6px;
-    font-size:10.5pt;
-    height:22px;
-    width:540px;
-    position: relative;
-    top:5px;
-}
 
 .scb_s_microscopy_progress_item {
     display:inline-block;
