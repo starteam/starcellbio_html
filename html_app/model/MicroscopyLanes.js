@@ -115,7 +115,7 @@ scb.MicroscopyLane = function scb_MicroscopyLane(data, context, parent) {
     self.parent = parent;
     scb.ModelHelpers.common_entry_code(self, data, context);
     scb.Utils.initialize_accessor_field(self, data, 'kind', _.keys(context.template.micro_kinds)[0], null, context);
-	//scb.Utils.initialize_accessor_field(self, data, 'lens_map', {}, null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'lens_map', null, null, context);
 	//scb.Utils.initialize_accessor_field(self, data, 'images', {}, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'slide_conditions', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'cell_treatment_id', null, null, context);
@@ -128,12 +128,7 @@ scb.MicroscopyLane = function scb_MicroscopyLane(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'laser_on', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'light_on', false, null, context);
 
-    scb.Utils.initialize_accessor_field(self, data, 'mag4_enabled', false, null, context);
-
-    scb.Utils.initialize_accessor_field(self, data, 'mag10_enabled', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'mag20_enabled', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'mag40_enabled', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'mag60_enabled', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'mag', '0', null, context);
 
 
     scb.Utils.initialize_field(data, 'experiment_id', self.parent.parent.parent.parent);

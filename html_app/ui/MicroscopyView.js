@@ -47,19 +47,14 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		else
 			$('.scb_f_microscopy_all').prop('disabled', false);
 	}
-	for(var x = 0; x < state.slides.length; x ++){
-		if(state.slides[x].mag == '4x')
-			$('.scb_f_microscopy_fourx').prop('disabled', false);
-		else if(state.slides[x].mag == '10x')
-			$('.scb_f_microscopy_tenx').prop('disabled', false);
-		else if(state.slides[x].mag == '20x')
-			$('.scb_f_microscopy_twentyx').prop('disabled', false);
-		else if(state.slides[x].mag == '40x')
-			$('.scb_f_microscopy_fortyx').prop('disabled', false);
-		else if(state.slides[x].mag == '60x')
-			$('.scb_f_microscopy_sixtyx').prop('disabled', false);
+	$('.scb_s_microscopy_mag').text(state.slides[0].mag);
+	if(state.microscopy_lane.lens_map)
+		init(state.microscopy_lane.lens_map, false, draw, state.microscopy_lane.lens_map.src );
+	else{
+		
+		state.microscopy_lane.lens_map = new Object();
+		init(state.microscopy_lane.lens_map, true, draw, state.assignment.template.slides[img_sample]);
 	}
-	init(lens_map, draw, state.assignment.template.slides[img_sample]);
 	
 // 	init(lens_map, draw, 'images/microscopy/blue.jpg');
 }
@@ -360,11 +355,12 @@ cache -
 */
 //////////////////
 
-var lens_map = new Object();
 
 var caman;
 
-var arc = 150;
+scb.ui.static.MicroscopyView.ARC =  150;
+
+scb.ui.static.MicroscopyView.LENS =  300;
 
 var difference;
 
@@ -573,14 +569,14 @@ function reset_canvas(){
 	samples_area.insertBefore(new_canvas,samples_area.firstChild);
 	var ctx = new_canvas.getContext('2d');
 	ctx.beginPath();
-	ctx.arc(150, 150, arc, 0, Math.PI *2, false);
+	ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 	ctx.clip();
 	return [new_canvas, ctx];	
 }
 
 //This function will initialize the image and serialize the data of the 
 //original unprocessed image to a string
-function init(state, draw, image_source){
+function init(state, isNew, draw, image_source){
 	$('#spy').remove();
 		$('#lens').remove();
 
@@ -615,29 +611,29 @@ function init(state, draw, image_source){
 // 			difference = container.getBoundingClientRect().left-slide.getBoundingClientRect().left;
 // 			$('.circle_lens').css('left', difference+'px');
 			ctx.save();
-			img_width = img.width;
-			img_height = img.height;	
-			canvas.width = img.width;
-			canvas.height = img.height;
-			ctx.drawImage(img, 0, 0);	
+			img_width = img.width/2;
+			img_height = img.height/2;	
+			canvas.width = img.width/2;
+			canvas.height = img.height/2;
+			ctx.drawImage(img, 0, 0, img_width, img_height);	
 			var img2string=canvas.toDataURL(0,0, img.width, img.height);
-			canvas.width = 300;
-			canvas.height = 300;
-			
-			initialize_state(state, img2string);
+			canvas.width = scb.ui.static.MicroscopyView.LENS;
+			canvas.height = scb.ui.static.MicroscopyView.LENS;
+			if(isNew)
+				initialize_state(state, img2string, img.src);
 			var randomblur = Math.round(Math.ceil(Math.random()*100) / 10) * 10;
 			console.log(randomblur);
-			state['blur'] = randomblur;
+			//state['blur'] = randomblur;
 
 			ctx.beginPath();
-			ctx.arc(150, 150, arc, 0, Math.PI *2, false);
+			ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 			ctx.clip();
-			Caman(canvas, img, function () {
-				this.stackBlur(state['blur']);
-				this.render(function(){
-				});
-			});
-			ctx.drawImage(img, 0, 0);
+// 			Caman(canvas, img, function () {
+// 				this.stackBlur(state['blur']);
+// 				this.render(function(){
+// 				});
+// 			});
+			ctx.drawImage(reset_image(state['cache']['image']), state['xparam'], state['yparam']);
 			draw(state);
 // 			$('.circle_lens').draggable({ 
 // 			handle:'.circle_lens', 
@@ -654,7 +650,7 @@ function init(state, draw, image_source){
 
 }
 
-function initialize_state(state, img2string){
+function initialize_state(state, img2string, image_source){
 	state['orig'] =img2string;
 	state['display'] = img2string;
 	state['brightness'] = 0;
@@ -666,7 +662,7 @@ function initialize_state(state, img2string){
 	state['cache']['brightness'] = 0;
 	state['cache']['blur'] = 0;
 	state['cache']['image'] = img2string;
-	
+	state['src'] = image_source;
 	$('.scb_s_microscope_status').text(state['action']);
 // 	$("input").attr("disabled", true);
 	
@@ -725,10 +721,10 @@ function save_and_draw_cache_image(canvas, state){
 	});
 	
 	spy_ctx.drawImage(img, 0, 0);
-	canvas.width = 300;
-	canvas.height = 300;
+	canvas.width = scb.ui.static.MicroscopyView.LENS;
+	canvas.height = scb.ui.static.MicroscopyView.LENS;
 	ctx.beginPath();
-	ctx.arc(150, 150, arc, 0, Math.PI *2, false);
+	ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 	ctx.clip();	
 	ctx.drawImage(reset_image(state['cache']['image']), state['xparam'], state['yparam']);
 }
@@ -767,7 +763,7 @@ function modify_state_brightness(addition, state){
 
 	});
 	context.beginPath();
-	context.arc(150, 150, arc, 0, Math.PI *2, false);
+	context.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 	context.clip();	
 	context.drawImage(reset_image(state['display']), state['xparam'], state['yparam']);
 
@@ -829,7 +825,7 @@ function blur_helper(state, context, canvas, addition){
 		$('.scb_s_microscope_status').text(state['action']);
 	});
 	context.beginPath();
-	context.arc(150, 150, arc, 0, Math.PI *2, false);
+	context.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 	context.clip();	
 	context.drawImage(reset_image(state['orig']), state['xparam'], state['yparam']);
 }
@@ -887,7 +883,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
         var parsed = scb.ui.static.MicroscopyView.parse(this);
     	for(var x = 0; x < current_slides.length; x ++){
 			if(current_slides[x].if_type == 'red'){
-				init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
+				//init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
 				break;
 			}
 		}
@@ -897,7 +893,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
         var parsed = scb.ui.static.MicroscopyView.parse(this);
     	for(var x = 0; x < current_slides.length; x ++){
 			if(current_slides[x].if_type == 'blue'){
-				init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
+				//init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
 				break;
 			}
 		}
@@ -907,7 +903,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
         var parsed = scb.ui.static.MicroscopyView.parse(this);
     	for(var x = 0; x < current_slides.length; x ++){
 			if(current_slides[x].if_type == 'green'){
-				init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
+				//init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
 				break;
 			}
 		}    });
@@ -916,56 +912,12 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
         var parsed = scb.ui.static.MicroscopyView.parse(this);
     	for(var x = 0; x < current_slides.length; x ++){
 			if(current_slides[x].if_type == 'merge'){
-				init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
+				//init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
 				break;
 			}
-		}    });
-		
-	scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_fourx', function (e, ui){
-    	
-        var parsed = scb.ui.static.MicroscopyView.parse(this);
-    	for(var x = 0; x < current_slides.length; x ++){
-			if(current_slides[x].mag == '4x'){
-				init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
-				break;
-			}
-		}    });
-	scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_tenx', function (e, ui){
-    	
-        var parsed = scb.ui.static.MicroscopyView.parse(this);
-    	for(var x = 0; x < current_slides.length; x ++){
-			if(current_slides[x].mag == '10x'){
-				init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
-				break;
-			}
-		}    });
-	scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_twentyx', function (e, ui){
-    	
-        var parsed = scb.ui.static.MicroscopyView.parse(this);
-    	for(var x = 0; x < current_slides.length; x ++){
-			if(current_slides[x].mag == '20x'){
-				init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
-				break;
-			}
-		}    });
-	scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_fortyx', function (e, ui){
-    	
-        var parsed = scb.ui.static.MicroscopyView.parse(this);
-    	for(var x = 0; x < current_slides.length; x ++){
-			if(current_slides[x].mag == '40x'){
-				init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
-				break;
-			}
-		}    });
-	scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_sixtyx', function (e, ui){
-    	
-        var parsed = scb.ui.static.MicroscopyView.parse(this);
-    	for(var x = 0; x < current_slides.length; x ++){
-			if(current_slides[x].mag == '60x'){
-				init(lens_map, draw, parsed.assignment.template.slides[current_slides[x].hash]);
-				break;
-			}
-		}    });
+		}    
+		});
+
 }
 
 scb.ui.static.MicroscopyView.draw_slides = function (workarea) {
@@ -1010,12 +962,12 @@ function init_wb(image_source){
 			canvas.height = img.height;
 			ctx.drawImage(img, 0, 0);	
 			var img2string=canvas.toDataURL(0,0, img.width, img.height);
-			canvas.width = 300;
-			canvas.height = 300;
+			canvas.width = scb.ui.static.MicroscopyView.LENS;
+			canvas.height = scb.ui.static.MicroscopyView.LENS;
 			var randomblur = Math.round(Math.ceil(Math.random()*100) / 10) * 10;
 			console.log(randomblur);
 			ctx.beginPath();
-			ctx.arc(150, 150, arc, 0, Math.PI *2, false);
+			ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 			ctx.clip();
 			ctx.drawImage(img, 0, 0);
 		}

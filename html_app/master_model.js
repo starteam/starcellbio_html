@@ -3671,7 +3671,8 @@ var __microscopy_test = {
 						]}
                 	}
                 },
-            western_blot: {format: "%CELL_LINE%, %TREATMENT%, %COLLECTION%",
+            western_blot: {
+            	format: "%CELL_LINE%, %TREATMENT%, %COLLECTION%",
                 keys: {
                     '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                     '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
@@ -3879,10 +3880,6 @@ var __microscopy_test = {
 							'3': [{
 									hash: 'img3',
 									mag: '20x'
-								},
-								{
-									hash: 'img4',
-									mag: '40x'
 								}],
 							'4': [{
 									hash: 'img5',
@@ -3907,6 +3904,10 @@ var __microscopy_test = {
 							'9': [{
 									hash: 'img10',
 									mag: '20x'
+								}],
+							'10':[{
+									hash: 'img4',
+									mag: '40x'
 								}]
 							}
                 		}
@@ -3921,8 +3922,8 @@ var __microscopy_test = {
 								'2':[{
 										hash: 'img12',
 										mag:'10x'
-									},
-									{
+									}],
+								'3':[{
 										hash: 'img13',
 										mag: '20x'
 									}]
@@ -3939,10 +3940,6 @@ var __microscopy_test = {
 								'2':[{
 									hash: 'img15',
 									mag:'20x'
-									},
-									{
-									hash: 'img16',	
-									mag: '40x'
 									}],
 								'3':[{
 									hash: 'img17',
@@ -3951,10 +3948,6 @@ var __microscopy_test = {
 								'4':[{
 									hash: 'img18',
 									mag:'20x'
-									},
-									{
-									hash: 'img19',
-									mag: '40x'
 									}],
 								'5':[{
 									hash: 'img20',
@@ -3963,9 +3956,17 @@ var __microscopy_test = {
 								'6':[{
 									hash: 'img21',
 									mag:'20x'
-									},
-									{
+									}],
+								'7':[{
+									hash: 'img16',	
+									mag: '40x'
+									}],
+								'8':[{
 									hash: 'img22',
+									mag: '40x'
+									}],
+								'9':[{
+									hash: 'img19',
 									mag: '40x'
 									}]
                 			}
@@ -3975,10 +3976,6 @@ var __microscopy_test = {
 								'1':[{
 									hash: 'img23',
 									mag:'20x'
-									},
-									{
-									hash: 'img24',
-									mag: '40x'
 									}],
 								'2':[{
 									hash: 'img27',
@@ -3987,9 +3984,13 @@ var __microscopy_test = {
 								'3':[{
 									hash: 'img29',
 									mag:'20x'
-									},
-									{
+									}],
+								'4':[{
 									hash: 'img30',
+									mag: '40x'
+									}],
+								'5': [{
+									hash: 'img24',
 									mag: '40x'
 									}]
                 			},
@@ -3997,10 +3998,6 @@ var __microscopy_test = {
 								'1':[{
 									hash: 'img25',
 									mag:'20x'
-									},
-									{
-									hash: 'img26',
-									mag: '40x'
 									}],
 								'2':[{
 									hash: 'img28',
@@ -4009,8 +4006,12 @@ var __microscopy_test = {
 								'3':[{
 									hash: 'img31',
 									mag:'20x'
-									},
-									{
+									}],
+								'4':[{
+									hash: 'img26',
+									mag: '40x'
+									}],
+								'5':[{
 									hash: 'img32',
 									mag: '40x'
 									}]
@@ -4031,14 +4032,6 @@ var __microscopy_test = {
 								'3':[{
 									hash: 'img35',
 									mag:'4x'
-								},
-								{
-									hash: 'img36',
-									mag:'10x'
-								},
-								{
-									hash: 'img37',
-									mag:'20x'
 								}],
 								'4':[{
 									hash: 'img38',
@@ -4050,6 +4043,14 @@ var __microscopy_test = {
 								}],
 								'6':[{
 									hash: 'img40',
+									mag:'20x'
+								}],
+								'7': [{
+									hash: 'img36',
+									mag:'10x'
+								}],
+								'8': [{
+									hash: 'img37',
 									mag:'20x'
 								}]
                 			}

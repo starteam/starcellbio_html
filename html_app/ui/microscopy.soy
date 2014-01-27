@@ -254,7 +254,7 @@
         <td class='scb_s_microscopy_samples_table_heading m_sample_prep_blank scb_s_experiment_setup_table_border'>Conditions</td>
         </thead>
         {foreach $r in $rows}
-        <tr class='scb_s_microscopy_samples_table_tr'>
+        <tr class='scb_s_microscopy_samples_table_tr {if $r.display_sample} scb_s_microscopy_row_border{/if}'>
             <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border' style='width:96px;'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' cell_treatment_id='{$r.cell_treatment.id}'
@@ -469,22 +469,8 @@
 			   
 			   <input type="checkbox" class="scb_f_microscopy_light" microscopy_id='{$microscopy.id}'
 			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $lane.light_on}checked='checked'{else}{/if} ><span class="scb_s_western_blot_choose_gel_type_input_text">Light</span>
-			   	
-			   	<button class='scb_f_microscopy_fourx' microscopy_id='{$microscopy.id}' disabled='disabled' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}'>4x
-				</button>
-				<button class='scb_f_microscopy_tenx' microscopy_id='{$microscopy.id}' disabled='disabled' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}'>10x
-				</button>	 	 
-				<button class='scb_f_microscopy_twentyx' microscopy_id='{$microscopy.id}' disabled='disabled' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}'>20x
-				</button>	 	 
-				<button class='scb_f_microscopy_fortyx' microscopy_id='{$microscopy.id}' disabled='disabled' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}'>40x
-				</button>	 	 
-				<button class='scb_f_microscopy_sixtyx' microscopy_id='{$microscopy.id}' disabled='disabled' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}'>60x
-				</button>	 	 	 	 		 	 
+			   <br/>Magnification: <span class='scb_s_microscopy_mag'></span><br/>
+
 				<span class='scb_s_microscope_status'></span>
 				
 <!-- 

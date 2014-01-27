@@ -273,6 +273,10 @@ height: 60px;
 	background: #edeef2;
 }
 
+.scb_s_microscopy_row_border{
+	border-top: 2px solid black !important;
+}
+
 .scb_s_microscopy_samples_select_all_abs{
   bottom: 0;
   position:absolute;
