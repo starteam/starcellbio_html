@@ -34,24 +34,24 @@ height: 60px;
 }
 
 .scb_s_microscopy_conditions{
-	width: 189px;
+	width: 363px;
 	padding-left: 22px;
 }
 
 .m_sample_prep_select{
-	width: 96px;
+	width: 80px;
 }
 
 .m_sample_prep_samples{
-	width: 464px;
+	width: 467px;
 }
 
 .m_sample_prep_lysate{
-	width: 220px;
+	width: 240px;
 }
 
 .m_sample_prep_blank{
-	width: 196px;
+	width: 347px;
 }
 
 .scb_s_microscopy_left_microscopy{
