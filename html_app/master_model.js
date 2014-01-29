@@ -4364,6 +4364,7 @@ var __microscopy_test = {
                     }
                 },
                 microscopy: {
+                	'valid': ['pfl', 'ac'],
                 	'slide': {
                 	
                 		'parser_simple':[

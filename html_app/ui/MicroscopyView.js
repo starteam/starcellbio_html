@@ -386,6 +386,8 @@ you pass a callback function to the method so that it calls the draw method imme
 function draw_lens(param, addition, state, canvas){
 	var context = canvas.getContext('2d');
 	clear_canvas(context, canvas);
+	context.fillStyle="#000000";
+	context.fillRect(0,0, canvas.width, canvas.height);
 	if(state['cache']['brightness'] != state['brightness'] || state['cache']['blur'] != state['blur']){
 		save_and_draw_cache_image(canvas,state);
 	}
@@ -409,7 +411,9 @@ function draw_lens(param, addition, state, canvas){
 function updateLensPosition(state,canvas, microslide_top, microslide_left){
 	var context = canvas.getContext('2d');
 	clear_canvas(context, canvas);
-	
+	context.fillStyle="#000000";
+	context.fillRect(0,0, canvas.width, canvas.height);
+
 	//Make sure to handle state later when you can test it
 	var taddition = ((microslide_top*10)/0.3);
 	var laddition = (((microslide_left-difference))/0.3)*10;
@@ -533,6 +537,8 @@ function full_modify_cache(state){
 	var elements = reset_canvas();
 	var canvas = elements[0]; 
 	var context = elements[1];
+	context.fillStyle="#000000";
+	context.fillRect(0,0, canvas.width, canvas.height);
 	save_and_draw_cache_image(canvas, state)
 }
 
@@ -542,6 +548,8 @@ function clear_canvas(ctx, canvas){
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
 	
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle="#000000";
+	ctx.fillRect(0,0, canvas.width, canvas.height);
 	ctx.restore();
 
 }
@@ -557,6 +565,8 @@ function reset_cache(){
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	document.body.appendChild(new_canvas);
 	var ctx = new_canvas.getContext('2d');
+	ctx.fillStyle="#000000";
+	ctx.fillRect(0,0, new_canvas.width, new_canvas.height);
 	return [new_canvas, ctx];	
 }
 function reset_canvas(){
@@ -571,6 +581,8 @@ function reset_canvas(){
 	var samples_area = $('body').find('.scb_s_microscopy_slide_content')[0];
 	samples_area.insertBefore(new_canvas,samples_area.firstChild);
 	var ctx = new_canvas.getContext('2d');
+	ctx.fillStyle="#000000";
+	ctx.fillRect(0,0, new_canvas.width, new_canvas.height);
 	ctx.beginPath();
 	ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 	ctx.clip();
@@ -597,6 +609,9 @@ function init(state, isNew, draw, image_source){
 		samples_area.appendChild(controls);
 
 		var ctx = canvas.getContext('2d');
+		ctx.fillStyle="#000000";
+		ctx.fillRect(0,0, canvas.width, canvas.height);
+
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';
 		canvas_hidden.style.visibility='hidden';
@@ -653,6 +668,8 @@ function init(state, isNew, draw, image_source){
 
 			});
 
+			ctx.fillStyle="#000000";
+			ctx.fillRect(0,0, canvas.width, canvas.height);			
 			ctx.beginPath();
 			ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 			ctx.clip();
@@ -699,6 +716,8 @@ function initialize_state(state, img2string, image_source){
 
 function save_and_draw_cache_image(canvas, state){
 	var ctx = canvas.getContext('2d');
+	ctx.fillStyle="#000000";
+	ctx.fillRect(0,0, canvas.width, canvas.height);
 	var elements = reset_cache();
 	var canvas_hidden = elements[0]; 
 	var spy_ctx = elements[1];
@@ -797,6 +816,8 @@ function modify_state_blur(addition, state, direction){
 	var elements = reset_canvas();
 	var canvas = elements[0]; 
 	var context = elements[1];
+	context.fillStyle="#000000";
+	context.fillRect(0,0, canvas.width, canvas.height);
 	console.log('blur');
 	console.log(state['blur']);
 	console.log('addition');
@@ -847,6 +868,8 @@ function blur_helper(state, context, canvas, addition){
 		state['action'] = 'rendering';
 		$('.scb_s_microscope_status').text(state['action']);
 	});
+	context.fillStyle="#000000";
+	context.fillRect(0,0, canvas.width, canvas.height);
 	context.beginPath();
 	context.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 	context.clip();	
