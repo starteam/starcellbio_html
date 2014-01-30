@@ -71,9 +71,29 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
     if (slide_type == '') {
         return;
     }
+    
     var slide_id = $(element).attr('lane_id');
     if (slide_id == '') {
        var cell_treatment_id = $(element).attr('cell_treatment_id');
+       for(var index = 0; index < parsed.microscopy.lanes_list.list.length; index++){
+			var lane = parsed.microscopy.lanes_list.list[index];
+			if((lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id && !lane.slide_conditions) || (lane.slide_conditions == _.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)[0] && lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id) ){
+				$('html').css('overflow', 'hidden');
+				$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+				$.jqDialog.alert("You've already selected this slide option.", 
+					function() {	$('html').css('overflow', 'visible');
+			
+							$('.error_overlay').remove();
+							scb.ui.static.MainFrame.refresh();
+					/* callback function for 'OK' button*/ });
+				$('.jqDialog_header').remove();		
+				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				return;
+				
+			}
+				
+       }
        if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1)
        {
        			parsed.microscopy.lanes_list.start({
@@ -115,6 +135,25 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (elem
     var slide_id = $(element).attr('lane_id');
     if (slide_id == '') {
        var cell_treatment_id = $(element).attr('cell_treatment_id');
+       for( var index = 0; index < parsed.microscopy.lanes_list.list.length; index++){
+			var lane = parsed.microscopy.lanes_list.list[index];
+			if(lane.slide_conditions == slide_conditions && lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id){
+				$('html').css('overflow', 'hidden');
+				$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+				$.jqDialog.alert("You've already selected this slide option.", 
+					function() {	$('html').css('overflow', 'visible');
+			
+							$('.error_overlay').remove();
+					/* callback function for 'OK' button*/ 
+				scb.ui.static.MainFrame.refresh();});
+				$('.jqDialog_header').remove();		
+				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				return;
+				
+			}
+				
+       }
         parsed.microscopy.lanes_list.start({
             slide_conditions: slide_conditions,
             cell_treatment_id: cell_treatment_id,
@@ -280,6 +319,19 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
     $('#lens').remove();
     scb.ui.static.MainFrame.refresh();
 }
+
+scb.ui.static.MicroscopyView.scb_s_microscopy_slide_tab = function(element){
+	var parsed = scb.ui.static.MicroscopyView.parse(element);
+	parsed.experiment.last_scroll=document.body.scrollTop;
+	
+	if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    
+    parsed.microscopy.lane_selected = parsed.microscopy_lane.id;
+    scb.ui.static.MainFrame.refresh();
+}
+
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
@@ -901,6 +953,9 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_microscopy_right_microscopy', function (e) {
         scb.ui.static.MicroscopyView.scb_s_microscopy_right_microscopy(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_microscopy_slide_tab', function (e) {
+        scb.ui.static.MicroscopyView.scb_s_microscopy_slide_tab(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_microscopy_add_microscopy', function (e, ui) {
         scb.ui.static.MicroscopyView.scb_s_microscopy_add_microscopy(this);

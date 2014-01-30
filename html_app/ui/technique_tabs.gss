@@ -256,7 +256,7 @@
 
 
 
-.scb_s_western_blot_gel_tab {
+.scb_s_western_blot_gel_tab, .scb_s_microscopy_slide_tab {
 	width: 127px;
 	vertical-align: middle;
 	position: relative;
@@ -267,12 +267,13 @@
 	margin-left: 2px;
 	font-size: 11pt;
 	font-family: 'sourcesanspro-semibold';
-	text-decoration: none;
-	color: #6f7171;
 	background: #e9edf1;
 	text-align: center;
 	top: 4px;
 	display: inline-block;
+	text-decoration: none;
+	cursor:pointer !important;
+    color:black;
 }
 
 .scb_s_western_blot_gel_active {

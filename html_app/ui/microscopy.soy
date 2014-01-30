@@ -386,16 +386,16 @@
         <ol class='scb_s_microscopy_choose_samples_order_list' >
             {foreach $r in $rows}
             {if $r.is_valid}
-            	{if $r.index >= 0}
+            	{if $r.index == 0}
 					<li 
 					microscopy_lane_id='{$r.lane.id}'
 					assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' 
 					microscopy_id='{$microscopy.id}' 
 					lane_kind = '{$r.lane.kind}' 
 					slide_conditions = '{$r.lane.slide_conditions}'
-					{if $microscopy.lane_selected == $r.lane.id}class='scb_s_microscopy_sample_selected'{/if}>
+					{if $microscopy.selected_lane and $r.cell_treatment.id == $microscopy.selected_lane.cell_treatment_id}class='scb_s_microscopy_sample_selected'{/if}>
 
-					 &nbsp;&nbsp;{$r.display_text} - {$r.lane.kinds[$r.lane.kind].name} - {$r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].name}
+					 &nbsp;&nbsp;{$r.display_text} 
 					</li>
             	{/if}
             {/if}
@@ -412,11 +412,28 @@
 </div>
 	<div class='scb_s_microscopy_samples_slide_area'>
         <div class='scb_s_western_blot_gel_tabs'>
-                    <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
+                    {if $microscopy.samples_finished}
+        			{foreach $r in $rows}
+        				{if $r.is_valid and $r.lane.id == $microscopy.selected_lane.id}
+        				<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
+
+						<div class='scb_s_western_blot_gel_tab_selected'>{$microscopy.selected_lane.kinds[$microscopy.selected_lane.kind].name}
+						</div>
+						</span>
+        				{elseif $r.is_valid and $r.cell_treatment.id == $microscopy.selected_lane.cell_treatment_id}
+							<div class='scb_s_microscopy_slide_tab' microscopy_id='{$microscopy.id}' 
+							assignment_id='{$assignment.id}'
+							experiment_id='{$experiment.id}' microscopy_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].name}
+							</div>
+						{/if}
+					{/foreach}
+					{else}
+					<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
 
                     <div class='scb_s_western_blot_gel_tab_selected'>SLIDE
                     </div>
                     </span>
+					{/if}
        	</div>
        	{if $microscopy.samples_finished}
        	  {foreach $r in $rows}
