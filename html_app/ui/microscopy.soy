@@ -476,14 +476,14 @@
 				<span class='scb_s_controls_note'>Note: Use keyboard arrow keys to navigate lens across the slide.</span>
 				<p class = 'scb_space_control'/>
 				Light<p class = 'scb_space_control'/>
-					<img src='images/microscopy/up.jpg' class ='scb_s_micro_arrows' id='brightup'/> <br/>
-					<img src ='images/microscopy/down.jpg' class ='scb_s_micro_arrows'id='brightdown'/><p class = 'scb_space_control'/>
+					<button class ='scb_s_micro_arrows' id='brightup'><img src='images/microscopy/up.jpg' /> <br/></button>
+					<button class ='scb_s_micro_arrows'id='brightdown'><img src ='images/microscopy/down.jpg' /><p class = 'scb_space_control'/></button><br/>
 				Focus: Rough<p class = 'scb_space_control'/>
-					<img src ='images/microscopy/up.jpg' class ='scb_s_micro_arrows' id='blurup'/><br/>
-					<img src = 'images/microscopy/down.jpg' class ='scb_s_micro_arrows' id='blurdown'/><p class = 'scb_space_control'/>
+					<button class ='scb_s_micro_arrows' id='blurup'><img src ='images/microscopy/up.jpg' /></button><br/>
+					<button class ='scb_s_micro_arrows' id='blurdown'><img src = 'images/microscopy/down.jpg' /></button><p class = 'scb_space_control'/>
 				Focus: Fine<p class = 'scb_space_control'/>
-					<img src = 'images/microscopy/fineup.jpg' class ='scb_s_micro_arrows' id='fblurup'/> <br/>
-					<img src = 'images/microscopy/finedown.jpg' class ='scb_s_micro_arrows'id='fblurdown'/><p class = 'scb_space_control'/>
+					<button class ='scb_s_micro_arrows' id='fblurup'><img src = 'images/microscopy/fineup.jpg' /></button> <br/>
+					<button class ='scb_s_micro_arrows' id='fblurdown'><img src = 'images/microscopy/finedown.jpg' /></button><p class = 'scb_space_control'/>
 				<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}'  name='IF' type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}><span class="scb_s_western_blot_choose_gel_type_input_text">R</span>
 				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' name='IF' type="radio" type="radio" assignment_id='{$assignment.id}'
