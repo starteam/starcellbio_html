@@ -282,17 +282,17 @@
 				{if $r.lane.kind == 'IHC'}
 					  {foreach $k in keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])}
 					  	{if $k == 'secondary'}
-						  <input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="secondary" microscopy_id='{$microscopy.id}'
+						  <input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="secondary" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
 								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'secondary'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text">Secondary only control</span>
 							&nbsp;&nbsp;
 						{elseif $k == 'ki67'}
-							<input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="ki67" microscopy_id='{$microscopy.id}'
+							<input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="ki67" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
 								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'ki67'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">Ki-67</span>
 							&nbsp;
 						{elseif $k == 'NFIB'}
-							<input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="NFIB" microscopy_id='{$microscopy.id}'
+							<input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="NFIB" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 							   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
 							   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'NFIB'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">NFIB</span>
 						{/if}
@@ -465,7 +465,6 @@
 @param experiment
 @param microscopy
 @param microscopy_line_id
-@param lane
 */
 {template .display_lens}
 
@@ -485,24 +484,20 @@
 				Focus: Fine<p class = 'scb_space_control'/>
 					<img src = 'images/microscopy/fineup.jpg' class ='scb_s_micro_arrows' id='fblurup'/> <br/>
 					<img src = 'images/microscopy/finedown.jpg' class ='scb_s_micro_arrows'id='fblurdown'/><p class = 'scb_space_control'/>
-				<button class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>R
-				</button>		
-				<button class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>B
-				</button>	
-				<button class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>G
-				</button>
-				<button class='scb_f_microscopy_all scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>All
-				</button>	
+				<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}'  name='IF' type="radio" assignment_id='{$assignment.id}'
+				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}><span class="scb_s_western_blot_choose_gel_type_input_text">R</span>
+				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' name='IF' type="radio" type="radio" assignment_id='{$assignment.id}'
+				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}><span class="scb_s_western_blot_choose_gel_type_input_text">B</span>
+				<input class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' name='IF' type="radio" assignment_id='{$assignment.id}'
+				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}><span class="scb_s_western_blot_choose_gel_type_input_text">G</span>
+				<input class='scb_f_microscopy_all scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' name='IF' type="radio" assignment_id='{$assignment.id}'
+				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}><span class="scb_s_western_blot_choose_gel_type_input_text">All</span>
 				<br/>
 				<input type="checkbox" class="scb_f_microscopy_laser" microscopy_id='{$microscopy.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $lane.laser_on}checked='checked'{else}{/if}><span class="scb_s_western_blot_choose_gel_type_input_text">Laser</span>	 	 		 	 
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.laser_on}checked='checked'{else}{/if}><span class="scb_s_western_blot_choose_gel_type_input_text">Laser</span>	 	 		 	 
 			   
 			   <input type="checkbox" class="scb_f_microscopy_light" microscopy_id='{$microscopy.id}'
-			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $lane.light_on}checked='checked'{else}{/if} ><span class="scb_s_western_blot_choose_gel_type_input_text">Light</span>
+			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.light_on}checked='checked'{else}{/if} ><span class="scb_s_western_blot_choose_gel_type_input_text">Light</span>
 			   <br/>Magnification: <span class='scb_s_microscopy_mag'></span><br/>
 
 				<span class='scb_s_microscope_status'></span>

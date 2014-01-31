@@ -42,18 +42,40 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	else if(state.slide_type == 'IHC'){
 	}
 	else if(state.slide_type == 'IF'){
-		if(state.slides.length > 1)
+		if(state.slides.length > 1){
 			$('.scb_s_microscopy_if').prop('disabled', false);
+			$('.scb_f_microscopy_'+state.slides[0].if_type).prop('checked', 'checked');
+		}
 		else
 			$('.scb_f_microscopy_all').prop('disabled', false);
 	}
 	$('.scb_s_microscopy_mag').text(state.slides[0].mag);
-	if(state.microscopy_lane.lens_map)
-		init(state.microscopy_lane.lens_map, false, draw, state.microscopy_lane.lens_map.src );
+	if(state.microscopy_lane.lens_map){
+		if(state.slide_type != 'IF' && !state.microscopy.light_on)
+			init_wb('../images/microscopy/black.jpg');
+		else if(state.slide_type == 'IF' && state.microscopy.light_on)
+			init_wb('../images/microscopy/white.jpg');
+		else if(state.slide_type != 'IF' && state.microscopy.light_on)
+			init(state.microscopy_lane.lens_map, false, draw, state.microscopy_lane.lens_map.src );
+		else if(state.slide_type == 'IF' && !state.microscopy.light_on && state.microscopy.laser_on)
+			init(state.microscopy_lane.lens_map, false, draw, state.microscopy_lane.lens_map.src );
+	}
 	else{
+		if(state.slide_type != 'IF' && !state.microscopy.light_on)
+			init_wb('../images/microscopy/black.jpg');
+		else if(state.slide_type == 'IF' && state.microscopy.light_on)
+			init_wb('../images/microscopy/white.jpg');
+		else if(state.slide_type != 'IF' && state.microscopy.light_on){
+			
+			state.microscopy_lane.lens_map = new Object();
+			init(state.microscopy_lane.lens_map, true, draw, state.assignment.template.slides[img_sample]);
+		}
 		
-		state.microscopy_lane.lens_map = new Object();
-		init(state.microscopy_lane.lens_map, true, draw, state.assignment.template.slides[img_sample]);
+		else if(state.slide_type == 'IF' && !state.microscopy.light_on && state.microscopy.laser_on){
+			
+			state.microscopy_lane.lens_map = new Object();
+			init(state.microscopy_lane.lens_map, true, draw, state.assignment.template.slides[img_sample]);
+		}
 	}
 	
 // 	init(lens_map, draw, 'images/microscopy/blue.jpg');
@@ -77,7 +99,8 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
        var cell_treatment_id = $(element).attr('cell_treatment_id');
        for(var index = 0; index < parsed.microscopy.lanes_list.list.length; index++){
 			var lane = parsed.microscopy.lanes_list.list[index];
-			if((lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id && !lane.slide_conditions) || (lane.slide_conditions == _.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)[0] && lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id) ){
+			if((lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id && _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type]).length == 1 )){// || ($.inArray(lane.slide_conditions, _.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)) && lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id) ){
+			//parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type]
 				$('html').css('overflow', 'hidden');
 				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
@@ -133,11 +156,10 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (elem
         return;
     }
     var slide_id = $(element).attr('lane_id');
-    if (slide_id == '') {
        var cell_treatment_id = $(element).attr('cell_treatment_id');
        for( var index = 0; index < parsed.microscopy.lanes_list.list.length; index++){
 			var lane = parsed.microscopy.lanes_list.list[index];
-			if(lane.slide_conditions == slide_conditions && lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id){
+			if(lane.slide_conditions == slide_conditions && lane.kind == parsed.microscopy.lanes_list.get(slide_id).kind && lane.cell_treatment_id == cell_treatment_id){
 				$('html').css('overflow', 'hidden');
 				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
@@ -145,6 +167,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (elem
 					function() {	$('html').css('overflow', 'visible');
 			
 							$('.error_overlay').remove();
+							parsed.microscopy.lanes_list.remove(slide_id);
 					/* callback function for 'OK' button*/ 
 				scb.ui.static.MainFrame.refresh();});
 				$('.jqDialog_header').remove();		
@@ -154,15 +177,8 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (elem
 			}
 				
        }
-        parsed.microscopy.lanes_list.start({
-            slide_conditions: slide_conditions,
-            cell_treatment_id: cell_treatment_id,
-            experiment_id: parsed.experiment.id
-        });
-    }
-    else {
     	parsed.microscopy.lanes_list.get(slide_id).slide_conditions = slide_conditions;
-    }
+
     if (event) {
         scb.ui.static.MainFrame.refresh();
     }
@@ -309,12 +325,12 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
     parsed.microscopy.samples_finished = true;
     parsed.microscopy.lane_selected = scb.utils.get(parsed.microscopy.lanes_list.list, [0, 'id']);
     if(parsed.microscopy.lanes_list.list[0].kind =='IF'){
-    	parsed.microscopy.lanes_list.list[0].laser_on = true;
-    	parsed.microscopy.lanes_list.list[0].light_on =false;
+    	parsed.microscopy.laser_on = true;
+    	parsed.microscopy.light_on =false;
     }
     else{
-    	parsed.microscopy.lanes_list.list[0].laser_on = false;
-    	parsed.microscopy.lanes_list.list[0].light_on = true;
+    	parsed.microscopy.laser_on = false;
+    	parsed.microscopy.light_on = true;
     }
     $('#lens').remove();
     scb.ui.static.MainFrame.refresh();
@@ -961,10 +977,41 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
         scb.ui.static.MicroscopyView.scb_s_microscopy_add_microscopy(this);
     });
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_light', function (e) {
-		if($(this).attr('checked') =='checked')
-			init_wb('../images/microscopy/white.jpg');
-		else
-			init_wb('../images/microscopy/black.jpg');
+    	
+        var parsed = scb.ui.static.MicroscopyView.parse(this);
+        
+		if($(this).attr('checked') =='checked'){
+			if(parsed.microscopy_lane && parsed.microscopy_lane.kind !='IF'){
+				if(parsed.microscopy_lane.lens_map){
+						var model = new scb.components.ModelFactory(parsed.context.template);
+						model.microscopy.compute(state);
+						var img_sample = state.slides[0].hash;
+					parsed.microscopy_lane.lens_map = new Object();
+					init(parsed.microscopy_lane.lens_map, true, draw, parsed.assignment.template.slides[img_sample]);
+				}
+				else
+					init(parsed.microscopy_lane.lens_map, false, draw, parsed.microscopy_lane.lens_map.src );
+			}
+			else
+				init_wb('../images/microscopy/white.jpg');
+		}
+		else{
+			if(parsed.microscopy_lane && parsed.microscopy_lane.kind !='IF')
+				init_wb('../images/microscopy/black.jpg');
+			else if(parsed.slide_type == 'IF' && !parsed.microscopy.laser_on){
+				if(parsed.microscopy_lane.lens_map){
+						var model = new scb.components.ModelFactory(parsed.context.template);
+						model.microscopy.compute(state);
+						var img_sample = state.slides[0].hash;
+					parsed.microscopy_lane.lens_map = new Object();
+					init(parsed.microscopy_lane.lens_map, true, draw, parsed.assignment.template.slides[img_sample]);
+				}
+				else{
+					init(state.microscopy_lane.lens_map, false, draw, state.microscopy_lane.lens_map.src );
+				}
+			}
+			
+		}
     });
 
     scb.utils.off_on(workarea, 'click', '.scb_s_microscopy_choose_samples_order_list>li', function (e) {
