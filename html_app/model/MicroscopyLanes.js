@@ -116,15 +116,10 @@ scb.MicroscopyLane = function scb_MicroscopyLane(data, context, parent) {
     scb.ModelHelpers.common_entry_code(self, data, context);
     scb.Utils.initialize_accessor_field(self, data, 'kind', _.keys(context.template.micro_kinds)[0], null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'lens_map', null, null, context);
-	//scb.Utils.initialize_accessor_field(self, data, 'images', {}, null, context);
+//	scb.Utils.initialize_accessor_field(self, data, 'lens_map', {}, scb.LensMap, context);s
     scb.Utils.initialize_accessor_field(self, data, 'slide_conditions', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'cell_treatment_id', null, null, context);
     
-    scb.Utils.initialize_accessor_field(self, data, 'red_enabled', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'blue_enabled', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'green_enabled', false, null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'merge_enabled', false, null, context);
-
 
     scb.Utils.initialize_accessor_field(self, data, 'mag', '0', null, context);
 

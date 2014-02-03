@@ -426,15 +426,56 @@ body.dragging, body.dragging * {
 	margin-bottom: 15px;
 }
 
+.scb_s_microscopy_if{
+	opacity: .10;
+}
+
+.scb_s_microscopy_filter{
+	position: absolute !important;
+bottom: 77px !important;
+right: 29px !important;
+z-index: 5;
+}
+
+.scb_f_microscopy_red{
+height: 41px !important;
+width: 25px !important;
+right: 95px !important;
+position: absolute !important;
+z-index: 60;
+}
+
+.scb_f_microscopy_green{
+height: 41px !important;
+width: 26px !important;
+right: 71px !important;
+position: absolute !important;
+z-index: 60;
+}
+
+.scb_f_microscopy_blue{
+height: 41px !important;
+width: 25px !important;
+right: 47px !important;
+position: absolute !important;
+z-index: 60;
+}
+
+.scb_f_microscopy_all{
+height: 41px !important;
+width: 24px !important;
+right: 23px !important;
+position: absolute !important;
+z-index: 60;
+
+}
 
 #scb_s_microscopy_lens_controls{
 	font-size: 11pt;
     color: black;
     text-align: center;
-    left: 23px;
     display: inline-block;
     font-family: 'sourcesanspro-semibold';
-    right:0px;
 	margin-left: 15px;
 	width:160px;
 	border: 1px solid #e0e0e0;
@@ -446,6 +487,8 @@ body.dragging, body.dragging * {
 	overflow-x: hidden;
 	background-color:white;
 	margin-bottom: 15px;
+	position: absolute;
+	left: 382px;
 }
 
 .scb_f_wb_anti_body_select_primary {
@@ -642,6 +685,9 @@ body.dragging, body.dragging * {
 }
 .scb_s_micro_arrows{
 	cursor: pointer;
+	border: none;
+	background: none;
+
 }
 
 
