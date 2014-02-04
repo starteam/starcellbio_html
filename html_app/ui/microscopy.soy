@@ -472,27 +472,39 @@
 	
 						Note: Use keyboard arrow keys to navigate lens across the slide.
 		
-	 
+	 <div class='scb_s_microscope_status'></div>
 			 </div>
 <div class='scb_s_microscopy_slide_content' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 			 microscopy_id='{$microscopy.id}'
 			{if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>									
 			
 			<div id='scb_s_microscopy_lens_controls'>
-			
+			<div class = 'scb_s_microscopy_lens_controls_section_1'>
+			 		<span class="scb_s_microscopy_title_label">Microscopy Controls</span>
+    			<button class='scb_s_microscopy_instructions_followup_toggle'> </button>
+   			 </div>
+    
+    <div class = 'scb_s_microscopy_lens_controls_section_2'>
+    <span class="scb_s_microscopy_lens_label">Light:</span> <input type="checkbox" class="scb_f_microscopy_light" microscopy_id='{$microscopy.id}'
+			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.light_on}checked='checked'{else}{/if} >
+    </div>
+    <div class = 'scb_s_microscopy_lens_controls_section_3'>
+    				<span class="scb_s_microscopy_brightness_label">Brightness:</span><div class='scb_s_microscopy_brightness_slider'></div>
+    				<img class='scb_s_microscopy_black_icon' src='images/microscopy/Brightness_Slider_Dark.jpg'/>
+    				<img class='scb_s_microscopy_white_icon' src='images/microscopy/Brightness_Slider_Light.png'/>
+    			
+    </div>
+    
+    <div class = 'scb_s_microscopy_lens_controls_section_4'>
+    <span class="scb_s_microscopy_laser_label">Laser:</span>	 
+    	<input type="checkbox" class="scb_f_microscopy_laser" microscopy_id='{$microscopy.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.laser_on}checked='checked'{else}{/if}>	 		 	 
 			 
-    <button class='scb_s_microscopy_instructions_followup_toggle'> </button>
-				<p class = 'scb_space_control'/>
-				Light<p class = 'scb_space_control'/>
-					<button class ='scb_s_micro_arrows' id='brightup'><img src='images/microscopy/up.jpg' /> <br/></button>
-					<button class ='scb_s_micro_arrows'id='brightdown'><img src ='images/microscopy/down.jpg' /><p class = 'scb_space_control'/></button><br/>
-				Focus: Rough<p class = 'scb_space_control'/>
-					<button class ='scb_s_micro_arrows' id='blurup'><img src ='images/microscopy/up.jpg' /></button><br/>
-					<button class ='scb_s_micro_arrows' id='blurdown'><img src = 'images/microscopy/down.jpg' /></button><p class = 'scb_space_control'/>
-				Focus: Fine<p class = 'scb_space_control'/>
-					<button class ='scb_s_micro_arrows' id='fblurup'><img src = 'images/microscopy/fineup.jpg' /></button> <br/>
-					<button class ='scb_s_micro_arrows' id='fblurdown'><img src = 'images/microscopy/finedown.jpg' /></button><p class = 'scb_space_control'/>
-				<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}'  name='IF' type="radio" assignment_id='{$assignment.id}'
+    </div>
+    
+	<div class = 'scb_s_microscopy_lens_controls_section_5'>
+    			<span class='scb_s_microscopy_filter_label'>Filters:</span>
+    					<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}'  name='IF' type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>
 				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' name='IF' type="radio" type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>
@@ -503,15 +515,36 @@
 				<br/>
 				<img class = 'scb_s_microscopy_filter' src = 'images/microscopy/Filter_Slider_Red.png' />
 				<br/>
-				<input type="checkbox" class="scb_f_microscopy_laser" microscopy_id='{$microscopy.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.laser_on}checked='checked'{else}{/if}><span class="scb_s_western_blot_choose_gel_type_input_text">Laser</span>	 	 		 	 
-			   
-			   <input type="checkbox" class="scb_f_microscopy_light" microscopy_id='{$microscopy.id}'
-			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.light_on}checked='checked'{else}{/if} ><span class="scb_s_western_blot_choose_gel_type_input_text">Light</span>
-			   <br/>Magnification: <span class='scb_s_microscopy_mag'></span><br/>
+    
+    </div>
+    
+	<div class = 'scb_s_microscopy_lens_controls_section_6'>
+				<span class='scb_s_microscopy_focus_label'>Focus:</span>
+				
+					<button class ='scb_s_micro_arrows' id='fblurup'><img src = 'images/microscopy/Tight_Focus/TopArrow_Normal.png' /></button>
+					<img class='scb_s_microscopy_tight_focus_middle' src = 'images/microscopy/Tight_Focus/Focus_Tight_Middle.png'/>
+					<button class ='scb_s_micro_arrows' id='fblurdown'><img src = 'images/microscopy/Tight_Focus/BottomArrow_Normal.png' /></button>
 
-				<span class='scb_s_microscope_status'></span>
-				<button class='scb_f_save_button'>SAVE IMAGE</button>
+					<img class='scb_s_microscopy_focus_knob' src = 'images/microscopy/Focus_Knob.png'/>
+					
+					<button class ='scb_s_micro_arrows' id='blurup'><img src ='images/microscopy/Loose_Focus/TopArrow_Normal.png' /></button>
+					<img class='scb_s_microscopy_rough_focus_middle' src = 'images/microscopy/Loose_Focus/Focus_Loose_Middle.png'/>
+					<button class ='scb_s_micro_arrows' id='blurdown'><img src = 'images/microscopy/Loose_Focus/BottomArrow_Normal.png' /></button>
+					
+    
+    
+    </div>
+    
+	<div class = 'scb_s_microscopy_lens_controls_section_7'>
+	
+			  <span class='scb_s_microscopy_obj_label'>Objectives:</span> <span class='scb_s_microscopy_mag'></span><br/>
+    
+    </div>
+			
+				  
+
+				
+				<button class='scb_f_save_button scb_s_gray_button'>SAVE IMAGE</button>
 				
 			</div>
 			

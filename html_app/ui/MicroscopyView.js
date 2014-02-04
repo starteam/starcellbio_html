@@ -29,14 +29,10 @@ scb.ui.static.MicroscopyView.parse = function (element) {
 
 var current_slides = [];
 scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
-	console.log('draw slide');	// 
 	var model = new scb.components.ModelFactory(state.context.template);
 	model.microscopy.compute(state);
-	console.log(state.slides);
 	var img_sample = state.slides[0].hash;
 	current_slides = state.slides;
-	//console.log(state.color);
-	//init(lens_map, draw, 'images/microscopy/'+state.color+'.jpg');
 	if(state.slide_type == 'Dye'){
 	}
 	else if(state.slide_type == 'IHC'){
@@ -45,21 +41,36 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		if(state.slides.length > 1){
 			$('.scb_s_microscopy_if').prop('disabled', false);
 			$('.scb_f_microscopy_'+state.slides[0].if_type).prop('checked', 'checked');
+			if(state.slides[0].if_type =='red')
+				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
+			else if(state.slides[0].if_type =='green')
+				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
+			else if(state.slides[0].if_type =='blue')
+				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
+			else if(state.slides[0].if_type =='merge')
+				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
 		}
-		else
+		else{
 			$('.scb_f_microscopy_all').prop('disabled', false);
+			$('.scb_f_microscopy_all').prop('checked', 'checked');
+			$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
+		}
 	}
-	$('.scb_s_microscopy_mag').text(state.slides[0].mag);
+	
 	
 	if(state.slide_type != 'IF' && !state.microscopy.light_on && !state.microscopy.laser_on){
 		init_wb('../images/microscopy/black.jpg');
 	}
 	else if(state.slide_type != 'IF' && state.microscopy.light_on && !state.microscopy.laser_on){
 			if(state.microscopy_lane.lens_map){
+			//if(state.microscopy_lane.lens_map.action){
+				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, false, draw, state.microscopy_lane.lens_map.src );
 			}
 			else{
 				state.microscopy_lane.lens_map = new Object();
+				state.microscopy_lane.lens_map.mag = state.slides[0].mag;
+				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, true, false, draw, state.assignment.template.slides[img_sample]);
 			}
 	}
@@ -70,10 +81,14 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	
 	else if(state.slide_type != 'IF' && state.microscopy.light_on && state.microscopy.laser_on){
 			if(state.microscopy_lane.lens_map){
+			//if(state.microscopy_lane.lens_map.action){
+				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, false, draw, state.microscopy_lane.lens_map.src );
 			}
 			else{
 				state.microscopy_lane.lens_map = new Object();
+				state.microscopy_lane.lens_map.mag = state.slides[0].mag;
+				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, true, false,  draw, state.assignment.template.slides[img_sample]);
 			}
 	}
@@ -87,10 +102,14 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	}
 	else if(state.slide_type == 'IF' && !state.microscopy.light_on && state.microscopy.laser_on){
 			if(state.microscopy_lane.lens_map){
+			//if(state.microscopy_lane.lens_map.action){
+				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, false, draw, state.microscopy_lane.lens_map.src );
 			}
 			else{
 				state.microscopy_lane.lens_map = new Object();
+				state.microscopy_lane.lens_map.mag = state.slides[0].mag;
+				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, true, false, draw, state.assignment.template.slides[img_sample]);
 			}
 	}
@@ -104,12 +123,10 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	
 	if(state.microscopy.light_on){
 			$('#brightup').prop('disabled', false);
-			
 			$('#brightdown').prop('disabled', false);
 	}
 	else{
 			$('#brightup').prop('disabled', true);
-			
 			$('#brightdown').prop('disabled', true);
 	}
 }
@@ -133,13 +150,12 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
        for(var index = 0; index < parsed.microscopy.lanes_list.list.length; index++){
 			var lane = parsed.microscopy.lanes_list.list[index];
 			if((lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id && _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type]).length == 1 )){// || ($.inArray(lane.slide_conditions, _.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)) && lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id) ){
-			//parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type]
 				$('html').css('overflow', 'hidden');
 				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
 				$.jqDialog.alert("You've already selected this slide option.", 
-					function() {	$('html').css('overflow', 'visible');
-			
+					function() {	
+							$('html').css('overflow', 'visible');
 							$('.error_overlay').remove();
 							scb.ui.static.MainFrame.refresh();
 					/* callback function for 'OK' button*/ });
@@ -321,7 +337,6 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_choose_gel_type_input = function (
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    //TODO: 1st things first -- we needs to save NEW order
     parsed.microscopy.gel_type = $(element).val();
     scb.ui.static.MainFrame.refresh();
 }
@@ -489,19 +504,22 @@ function draw_lens(param, addition, state, canvas){
 	clear_canvas(context, canvas);
 	context.fillStyle="#000000";
 	context.fillRect(0,0, canvas.width, canvas.height);
+	//if(state.cache_brightness != state.brightness|| state.cache_blur != state.blur){
 	if(state['cache']['brightness'] != state['brightness'] || state['cache']['blur'] != state['blur']){
 		save_and_draw_cache_image(canvas,state);
 	}
 	else
-		//insert special method that listens for borders to rerender new portion of image
 		context.drawImage(reset_image(state['cache']['image']), state['xparam'], state['yparam']);
+		//context.drawImage(reset_image(state.cache), state.xparam, state.yparam);
 
 	switch(param)
 	{
 		case 'x':
+		  //state.xparam = state.xparam + addition;
 		  state['xparam'] = state['xparam'] + addition ;
 		  break;
 		case 'y':
+		  //state.yparam = state.yparam + addition;
 		  state['yparam'] = state['yparam'] + addition ;
 		  break;
 		default:
@@ -509,22 +527,6 @@ function draw_lens(param, addition, state, canvas){
 	}
 }
 
-function updateLensPosition(state,canvas, microslide_top, microslide_left){
-	var context = canvas.getContext('2d');
-	clear_canvas(context, canvas);
-	context.fillStyle="#000000";
-	context.fillRect(0,0, canvas.width, canvas.height);
-
-	//Make sure to handle state later when you can test it
-	var taddition = ((microslide_top*10)/0.3);
-	var laddition = (((microslide_left-difference))/0.3)*10;
-	context.drawImage(reset_image(state['cache']['image']), state['xparam'], state['yparam']);
-	console.log(laddition);
-	console.log(microslide_left);
-	state['xparam'] = -laddition ;
-	state['yparam'] = -taddition ;
-
-}
 
 function draw(state){
 	var canvas=document.getElementsByTagName("canvas")[0];
@@ -698,6 +700,8 @@ function init(state, isNew, isIF, draw, image_source){
 		canvas_hidden.style.visibility='hidden';
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		document.body.appendChild(canvas_hidden);
+		//state.action = 'loading image';
+		//$('.scb_s_microscope_status').text(state.action);
 		state['action'] = 'loading image';
 		$('.scb_s_microscope_status').text(state['action']);
 		caman = Caman("#lens");
@@ -726,13 +730,32 @@ function init(state, isNew, isIF, draw, image_source){
 				initialize_state(state, img2string, img.src);
 				var randomblur = Math.round(Math.ceil(Math.random()*10) / 10) * 10;
 				console.log(randomblur);
+				//state.blur = randomblur;
 				state['blur'] = randomblur;
 			}
 			if(isIF){
+// 				state.orig = img2string;
+// 				state.display = img2string;
+// 				state.cache = img2string;
 				state['orig'] =img2string;
 				state['display'] = img2string;
 				state['cache']['image'] = img2string;
 			}
+			
+// 			Caman(canvas, reset_image(state.display), function () {
+// 				this.brightness(state.brightness);
+// 				this.stackBlur(state.blur);
+// 				this.render(function(){
+// 				state.action = 'rendered';
+// 				console.log('rendered'); 
+// 				$('.scb_s_microscope_status').text(state.action);
+// 				});
+// 			console.log('rendering...');
+// 			state.action = 'rendering';
+// 		
+// 			$('.scb_s_microscope_status').text(state.action);
+// 
+// 			});
 				
 			Caman(canvas, reset_image(state['display']), function () {
 				this.brightness(state['brightness']);
@@ -754,6 +777,7 @@ function init(state, isNew, isIF, draw, image_source){
 			ctx.beginPath();
 			ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 			ctx.clip();
+			//ctx.drawImage(reset_image(state.display), state.xparam, state.yparam);
 			ctx.drawImage(reset_image(state['display']), state['xparam'], state['yparam']);
 			draw(state);
 		}
@@ -762,6 +786,19 @@ function init(state, isNew, isIF, draw, image_source){
 }
 
 function initialize_state(state, img2string, image_source){
+
+// 	state.orig =img2string;
+// 	state.display= img2string;
+// 	state.brightness= 0;
+// 	state.xparam = 0;
+// 	state.yparam = 0;
+// 	state.blur = 0;
+// 	state.action = 'start';
+// 	state.cache_brightness = 0;
+// 	state.cache_blur = 0;
+// 	state.cache = img2string;
+// 	state.src = image_source;
+// 	$('.scb_s_microscope_status').text(state.action);
 	state['orig'] =img2string;
 	state['display'] = img2string;
 	state['brightness'] = 0;
@@ -775,11 +812,22 @@ function initialize_state(state, img2string, image_source){
 	state['cache']['image'] = img2string;
 	state['src'] = image_source;
 	$('.scb_s_microscope_status').text(state['action']);
-// 	$("input").attr("disabled", true);
 	
 }
 
 function copy_state(current_state, new_state, new_state_source){
+// 	new_state.brightness = current_state.brightness;
+// 	new_state.xparam = current_state.xparam;
+// 	new_state.yparam = current_state.yparam;
+// 	new_state.blur = current_state.blur;
+// 	new_state.action = 'start';
+// 	new_state.cache_brightness = current_state.cache_brightness;
+// 	new_state.cache_blur = current_state.cache_blur;
+// 	new_state.src = new_state_source;
+// 	$('.scb_s_microscope_status').text(new_state.action);
+// 	return new_state;
+
+
 	new_state['brightness'] = current_state['brightness'];
 	new_state['xparam'] = current_state['xparam'];
 	new_state['yparam'] = current_state['yparam'];
@@ -808,12 +856,16 @@ function save_and_draw_cache_image(canvas, state){
 	var canvas_hidden = elements[0]; 
 	var spy_ctx = elements[1];
 	var img = reset_image(state['display']);
+	//var img = reset_image(state.display);
 	var spy_img;
 	Caman(canvas_hidden, img, function () {
 		this.brightness(state['brightness']);
+		//this.brightness(state.brightness);
 		console.log('bright');
 		this.stackBlur(state['blur']);
+		//this.stackBlur(state.blur);
 		if(state['blur']>0){
+		//if(state.blur >0)
 			this.stackBlur(state['blur']);
 			console.log('blur');
 		}
@@ -862,7 +914,8 @@ function modify_state_brightness(addition, state){
 	var elements = reset_canvas();
 	var canvas = elements[0]; 
 	var context = elements[1];
-	state['brightness'] = state['brightness'] + addition;
+	//state['brightness'] = state['brightness'] + addition;
+	state['brightness'] =  addition;
 	if(state['brightness'] >= 100)
 		state['brightness'] = 100;
 	else if (state['brightness'] <=-100)
@@ -1303,9 +1356,27 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         
         if (state.microscopy.samples_finished) {
         	scb.ui.static.MicroscopyView.draw_slides(workarea);
+        	    $( ".scb_s_microscopy_brightness_slider" ).slider({
+				  value:0,
+				  min: -100,
+				  max: 100,
+				  step: 5,
+				  stop: function( event, ui ) {
+				  	modify_state_brightness(ui.value, state.microscopy.selected_lane.lens_map);
+				  }
+				});
         }
-        else
+        else{
         init_wb('../images/microscopy/black.jpg');
+            $( ".scb_s_microscopy_brightness_slider" ).slider({
+			  value:0,
+			  min: -100,
+			  max: 100,
+			  step: 5,
+			  slide: function( event, ui ) {
+			  }
+			});
+        }
 
 		_.each($(".scb_s_experiment_step_button"), function (e) {
 			if(!$(e).hasClass('scb_s_experiment_step_visited')) 

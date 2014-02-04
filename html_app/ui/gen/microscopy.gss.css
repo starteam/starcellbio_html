@@ -330,57 +330,101 @@ body.dragging, body.dragging * {
 }
 .scb_s_microscopy_filter {
   position: absolute !important;
-  bottom: 77px !important;
-  right: 29px !important;
+  bottom: 117px !important;
+  right: 12px !important;
   z-index: 5;
 }
 .scb_f_microscopy_red {
   height: 41px !important;
   width: 25px !important;
-  right: 95px !important;
+  right: 78px !important;
+  opacity: 0 !important;
+  bottom: 124px !important;
   position: absolute !important;
   z-index: 60;
 }
 .scb_f_microscopy_green {
   height: 41px !important;
   width: 26px !important;
-  right: 71px !important;
+  right: 54px !important;
+  opacity: 0 !important;
+  bottom: 124px !important;
   position: absolute !important;
   z-index: 60;
 }
 .scb_f_microscopy_blue {
   height: 41px !important;
   width: 25px !important;
-  right: 47px !important;
+  right: 30px !important;
+  opacity: 0 !important;
+  bottom: 124px !important;
   position: absolute !important;
   z-index: 60;
 }
 .scb_f_microscopy_all {
   height: 41px !important;
   width: 24px !important;
-  right: 23px !important;
+  right: 6px !important;
   position: absolute !important;
+  bottom: 124px !important;
   z-index: 60;
+  opacity: 0 !important;
+}
+.scb_s_microscopy_filter_label {
+  left: 11px;
+  position: absolute;
+  top: 195px;
+}
+.scb_s_microscopy_focus_label {
+  position: absolute;
+  left: 10px;
+  bottom: 70px;
+}
+.scb_s_microscopy_lens_controls_section_1 {
+  height: 41px;
+}
+.scb_s_microscopy_lens_controls_section_2 {
+  height: 36px;
+  background: #f6f6f6;
+}
+.scb_s_microscopy_lens_controls_section_3 {
+  height: 58px;
+}
+.scb_s_microscopy_lens_controls_section_4 {
+  height: 36px;
+  background: #f6f6f6;
+}
+.scb_s_microscopy_lens_controls_section_5 {
+  height: 68px;
+}
+.scb_s_microscopy_lens_controls_section_6 {
+  height: 63px;
+  background: #f6f6f6;
+}
+.scb_s_microscopy_lens_controls_section_7 {
+  height: 48px;
 }
 #scb_s_microscopy_lens_controls {
-  font-size: 11pt;
+  width: 199px;
+  font-size: 10pt;
   color: black;
   text-align: center;
   display: inline-block;
   font-family: 'sourcesanspro-semibold';
   margin-left: 15px;
-  width: 160px;
-  border: 1px solid #e0e0e0;
-  border-radius: 2px;
-  vertical-align: top;
-  border-top-width: 8px;
-  box-shadow: 0 0 3px black;
-  overflow-y: auto;
-  overflow-x: hidden;
   background-color: white;
   margin-bottom: 15px;
   position: absolute;
-  left: 382px;
+  left: 353px;
+  border-left: 1px solid gray;
+  top: 0;
+  height: 350px;
+}
+.scb_f_save_button {
+  position: absolute;
+  right: 210px;
+  bottom: 12px;
+  width: 89px;
 }
 .scb_f_wb_anti_body_select_primary, .scb_f_wb_anti_body_select_secondary {
   font-size: 10pt;
@@ -632,4 +676,154 @@ body.dragging, body.dragging * {
   right: 5px;
   display: inline-block;
   margin-top: 20px;
+}
+#blurup {
+  position: absolute;
+  right: 5px;
+  bottom: 83px;
+}
+#blurdown {
+  position: absolute;
+  right: 4px;
+  bottom: 58px;
+}
+#fblurup {
+  position: absolute;
+  right: 91px;
+  bottom: 83px;
+}
+#fblurdown {
+  position: absolute;
+  right: 90px;
+  bottom: 58px;
+}
+.scb_s_microscopy_tight_focus_middle {
+  position: absolute;
+  right: 99px;
+  bottom: 73px;
+}
+.scb_s_microscopy_rough_focus_middle {
+  position: absolute;
+  right: 13px;
+  bottom: 73px;
+}
+.scb_s_microscopy_focus_knob {
+  position: absolute;
+  bottom: 56px;
+  right: 39px;
+}
+.scb_s_microscopy_mag {
+  position: absolute;
+  left: 88px;
+  bottom: 18px;
+  color: #27956c;
+}
+.scb_s_microscopy_brightness_slider {
+  border-radius: 7px !important;
+  height: 3px !important;
+  margin-top: 7px !important;
+  width: 92px !important;
+  display: inline-block !important;
+  margin-right: 15px !important;
+  background: #ebebeb !important;
+  right: 0 !important;
+  top: 91px !important;
+  position: absolute !important;
+}
+.scb_s_microscopy_black_icon {
+  position: absolute;
+  top: 107px;
+  left: 90px;
+}
+.scb_s_microscopy_white_icon {
+  position: absolute;
+  top: 107px;
+  right: 15px;
+}
+.scb_s_microscopy_brightness_slider>a {
+  -webkit-appearance: none;
+  background: url('../../../images/microscopy/Brightness_Slider_BTN.png') no-repeat !important;
+  height: 13px !important;
+  width: 13px !important;
+  top: -6px !important;
+  border: none !important;
+}
+.scb_s_microscopy_obj_label {
+  position: absolute;
+  left: 10px;
+  bottom: 18px;
+}
+.scb_s_microscopy_lens_label {
+  position: absolute;
+  left: 10px;
+  top: 49px;
+}
+.scb_s_microscopy_instructions_followup {
+  display: none;
+  left: 855px;
+  position: absolute;
+  width: 205px;
+  background: #f4f6f8;
+  border-radius: 14px;
+  padding: 4px;
+  border: 4px solid white;
+  bottom: 387px;
+  z-index: 1;
+  text-align: left;
+  font-size: 10pt;
+}
+.scb_s_microscopy_instructions_followup_toggle {
+  left: 79px;
+  bottom: -10px;
+  position: relative;
+  background: none;
+  border: none;
+  height: 23px;
+  width: 23px;
+  color: white;
+  letter-spacing: 1px;
+  font-size: 10pt;
+  font-family: 'sourcesanspro-regular';
+  cursor: pointer;
+  background-image: url('../../images/header/scb_info.png');
+  background-repeat: no-repeat;
+}
+.scb_s_microscopy_brightness_label {
+  position: absolute;
+  left: 10px;
+  top: 97px;
+}
+.scb_s_microscopy_laser_label {
+  position: absolute;
+  left: 10px;
+  top: 143px;
+}
+.scb_s_microscopy_title_label {
+  left: 39px;
+  top: 12px;
+  position: absolute;
+}
+.scb_f_microscopy_light {
+  background: url('../../../images/microscopy/Off_BTN.png') no-repeat;
+  -webkit-appearance: none;
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  right: 8px;
+  top: 43px;
+}
+.scb_f_microscopy_laser {
+  background: url('../../../images/microscopy/Off_BTN.png') no-repeat;
+  -webkit-appearance: none;
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  right: 8px;
+  top: 138px;
+}
+.scb_f_microscopy_light:checked, .scb_f_microscopy_laser:checked {
+  background: url('../../../images/microscopy/On_BTN.png') no-repeat;
+  -webkit-appearance: none;
+  width: 100px;
+  height: 30px;
 }

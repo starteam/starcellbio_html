@@ -17,31 +17,18 @@ scb.LensMap = function scb_LensMap(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'cache_brightness', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'src', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'xparam', null, null, context);
+        scb.Utils.initialize_accessor_field(self, data, 'mag', null, null, context);
+
     scb.Utils.initialize_accessor_field(self, data, 'yparam', null, null, context);
-	scb.utils.accessor2_custom(self, 'original', function () {
-        if (self.lane_selected) {
-            return self.lanes_list.get(self.lane_selected);
-        }
-        else {
-            return null;
-        }
+	scb.utils.accessor2_custom(self, 'orig', function () {
+            return scb.LensMapProxy.original;
     }, scb.utils.noop);
     scb.utils.accessor2_custom(self, 'cache', function () {
-        if (self.lane_selected) {
-            return self.lanes_list.get(self.lane_selected);
-        }
-        else {
-            return null;
-        }
+            return scb.LensMapProxy.cache;
     }, scb.utils.noop);
 
 	scb.utils.accessor2_custom(self, 'display', function () {
-        if (self.lane_selected) {
-            return self.lanes_list.get(self.lane_selected);
-        }
-        else {
-            return null;
-        }
+            return scb.LensMapProxy.display;
     }, scb.utils.noop);
     
 //     self.rows_state = function (exp) {
