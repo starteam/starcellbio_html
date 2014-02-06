@@ -18,7 +18,7 @@ scb.LensMap = function scb_LensMap(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'src', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'xparam', null, null, context);
         scb.Utils.initialize_accessor_field(self, data, 'mag', null, null, context);
-
+        scb.Utils.initialize_accessor_field(self, data, 'if_type', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'yparam', null, null, context);
 	scb.utils.accessor2_custom(self, 'orig', function () {
             return scb.LensMapProxy.original;

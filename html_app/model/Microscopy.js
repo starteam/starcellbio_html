@@ -70,6 +70,11 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
 
     scb.Utils.initialize_accessor_field(self, data, 'laser_on', false, null, context);
+        scb.Utils.initialize_accessor_field(self, data, 'red_enabled', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'blue_enabled', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'green_enabled', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'merge_enabled', false, null, context);
+
     scb.Utils.initialize_accessor_field(self, data, 'light_on', false, null, context);	
 	scb.utils.accessor2_custom(self, 'selected_lane', function () {
         if (self.lane_selected) {
