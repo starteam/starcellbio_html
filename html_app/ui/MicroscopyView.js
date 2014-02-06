@@ -604,14 +604,14 @@ function draw(state){
 				console.log('nope');
 		}
 		else{
-// 			if(state.blur >=16 && !isLeft){
+// 			if(state.blur >=10 && !isLeft){
 // 				$('#blurup').prop('disabled', true);
 // 			}
 // 			else {
 // 				$('#blurup').prop('disabled', false);
 // 				$('#blurdown').prop('disabled', false);
 // 			}
-		modify_state_blur(4, state, 'up');
+		modify_state_blur(2, state, 'up');
 		}
 	});
 	$('#blurdown').click(function(){
@@ -619,14 +619,14 @@ function draw(state){
 				console.log('nope');
 		}
 		else{
-// 			if(state.blur >=16 && isLeft){
+// 			if(state.blur >=10 && isLeft){
 // 				$('#blurdown').prop('disabled', true);
 // 			}
 // 			else {
 // 				$('#blurup').prop('disabled', false);
 // 				$('#blurdown').prop('disabled', false);
 // 			}
-		modify_state_blur(-4, state, 'down');
+		modify_state_blur(-2, state, 'down');
 		}
 	});
 	$('#fblurup').click(function(){
@@ -634,14 +634,14 @@ function draw(state){
 				console.log('nope');
 		}
 		else{
-// 			if(state.blur >=16 && !isLeft){
+// 			if(state.blur >=10 && !isLeft){
 // 				$('#fblurup').prop('disabled', true);
 // 			}
 // 			else {
 // 				$('#fblurup').prop('disabled', false);
 // 				$('#fblurdown').prop('disabled', false);
 // 			}
-		modify_state_blur(2, state, 'up');
+		modify_state_blur(1, state, 'up');
 		}
 	});
 	$('#fblurdown').click(function(){
@@ -649,14 +649,14 @@ function draw(state){
 				console.log('nope');
 		}
 		else{
-// 			if(state.blur >=16 && isLeft){
+// 			if(state.blur >=10 && isLeft){
 // 				$('#fblurdown').prop('disabled', true);
 // 			}
 // 			else {
 // 				$('#fblurup').prop('disabled', false);
 // 				$('#fblurdown').prop('disabled', false);
 // 			}
-		modify_state_blur(-2, state, 'down');
+		modify_state_blur(-1, state, 'down');
 		}
 	});
 
@@ -826,7 +826,7 @@ function init(state, isNew, isIF, draw, image_source){
 			canvas.height = scb.ui.static.MicroscopyView.LENS;
 			if(isNew){
 				initialize_state(state, img2string, img.src);
-				var randomblur = Math.round(Math.ceil(Math.random()*16));
+				var randomblur = Math.round(Math.ceil(Math.random()*10));
 				console.log(randomblur);
 				state.blur = randomblur;
 			}
@@ -1026,11 +1026,11 @@ function modify_state_blur(addition, state, direction){
 	console.log('addition');
 	console.log(addition);
 	
-	if(state.blur >16){
-		state.blur = 16;
+	if(state.blur >10){
+		state.blur = 10;
 	}
-	else if (state.blur <-16){
-		state.blur = -16;
+	else if (state.blur <-10){
+		state.blur = -10;
 	}
 	if (state.blur == 0 && direction =='up'){
 		isLeft = false;
