@@ -22,14 +22,20 @@ scb.LensMap = function scb_LensMap(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'yparam', null, null, context);
 	scb.utils.accessor2_custom(self, 'orig', function () {
             return scb.LensMapProxy.original;
-    }, scb.utils.noop);
+    }, function (d) {
+            scb.LensMapProxy.original = d;
+    });
     scb.utils.accessor2_custom(self, 'cache', function () {
             return scb.LensMapProxy.cache;
-    }, scb.utils.noop);
+    }, function (d) {
+            scb.LensMapProxy.cache = d;
+    });
 
 	scb.utils.accessor2_custom(self, 'display', function () {
             return scb.LensMapProxy.display;
-    }, scb.utils.noop);
+    }, function (d) {
+            scb.LensMapProxy.display = d;
+    });
     
 //     self.rows_state = function (exp) {
 //         var skip_placeholders = false;
