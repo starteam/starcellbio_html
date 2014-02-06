@@ -33,6 +33,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	model.microscopy.compute(state);
 	var img_sample = state.slides[0].hash;
 	current_slides = state.slides;
+	// <label class="custom-select_gel"></label>
 	if(state.slide_type == 'Dye'){
 	}
 	else if(state.slide_type == 'IHC'){
@@ -563,6 +564,7 @@ you pass a callback function to the method so that it calls the draw method imme
 function draw_lens(param, addition, state, canvas){
 	var context = canvas.getContext('2d');
 	clear_canvas(context, canvas);
+	
 	context.fillStyle="#000000";
 	context.fillRect(0,0, canvas.width, canvas.height);
 	if(state.cache_brightness != state.brightness|| state.cache_blur != state.blur){
@@ -850,6 +852,8 @@ function init(state, isNew, isIF, draw, image_source){
 		samples_area.appendChild(controls);
 
 		var ctx = canvas.getContext('2d');
+		canvas.width = scb.ui.static.MicroscopyView.LENS;
+		canvas.height = scb.ui.static.MicroscopyView.LENS;
 		ctx.fillRect(0,0, canvas.width, canvas.height);
 
 		var canvas_hidden = document.createElement('canvas');
@@ -941,8 +945,8 @@ function initialize_state(state, img2string, image_source){
 	state.orig =img2string;
 	state.display= img2string;
 	state.brightness= 0;
-	state.xparam = 0;
-	state.yparam = 0;
+	state.xparam = -250;
+	state.yparam =-250;
 	state.blur = 0;
 	state.action = 'start';
 	state.cache_brightness = 0;

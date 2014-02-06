@@ -15,6 +15,8 @@
 	cursor:pointer;
 	list-style-position:inside;
 	margin-left: -20px;
+	white-space: nowrap;
+	width: 254px;
 }
 
 #scb_s_micro_slide{
@@ -103,7 +105,9 @@ height: 60px;
 }
 
 
-
+.scb_s_microscopy_choose_samples_order_no_border{
+	min-height: 275px;
+}
 
 
 .scb_s_microscopy_choose_samples_order{
@@ -112,7 +116,7 @@ height: 60px;
 }
 
 .scb_s_microscopy_choose_samples_order_list{
-	width:200px;
+	width: 250px;
 	overflow: auto;
 	max-height: 275px;
 }
@@ -250,10 +254,10 @@ height: 60px;
 
 
 .scb_s_microscopy_samples_area {
-	margin-bottom:28px;
-	margin-left: 8px;
-	margin-top:198px;
-	height:358px;
+margin-bottom: 28px;
+margin-left: 8px;
+margin-top: 161px;
+height: 365px;
 }
 
 .scb_space_control {
@@ -274,7 +278,7 @@ height: 60px;
 }
 
 .scb_s_microscopy_row_border{
-	border-top: 2px solid black !important;
+	border-top: 1px solid black !important;
 }
 
 .scb_s_microscopy_samples_select_all_abs{
@@ -315,12 +319,13 @@ height: 60px;
 }
 
 .scb_s_microscopy_samples_slide_area{
-    display:inline-block;
-    vertical-align: top;
-    width:568px;
-    height:400px;
-    padding-top:190px;
-    margin-left: 8px;
+	display: inline-block;
+	vertical-align: top;
+	width: 568px;
+	height: 400px;
+	padding-top: 156px;
+	margin-left: 8px;
+
 }
 
 .scb_s_microscopy_tools {
@@ -385,7 +390,7 @@ body.dragging, body.dragging * {
 	height:345px;
     width:563px;
     position: relative;
-    border:1px solid #27956c;
+    border: 1px solid #97a4ad;
     background-color: white;
     padding-left: 5px;
 	padding-top: 5px;
@@ -609,6 +614,7 @@ width: 89px;
 .scb_s_microscopy_samples_table_heading {
     font-family: 'sourcesanspro-semibold';
     font-size:10pt;
+    border-bottom: 1px solid black;
 }
 
 .scb_s_microscopy_samples_table_td {
@@ -678,6 +684,11 @@ width: 89px;
     margin-left: 20px;
 	width:200px;
 	top: 0px !important;    
+}
+
+
+.scb_f_microscopy_select_slide_type{
+	min-width: 155px;
 }
 
 .scb_s_microscopy_view {
@@ -827,8 +838,9 @@ width: 89px;
     margin-top:7px !important; 
     margin-right:20px !important; 
     margin-bottom:20px !important;
-    right: 61px;
+    right: 36px;
 	padding: 6px 13px 19px 16px;
+	width: 175px;
 }
 
 .scb_f_microscopy_load_slides_short{
@@ -887,7 +899,7 @@ width: 89px;
 
 #blurup{
 position: absolute;
-right: 7px;
+right: 93px;
 bottom: 83px;
 background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Normal.png');
 background-repeat: no-repeat;
@@ -947,7 +959,7 @@ background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Gray.p
 
 #blurdown{
 position: absolute;
-right: 6px;
+right: 92px;
 bottom: 57px;
 background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Normal.png');
 background-repeat: no-repeat;
@@ -958,7 +970,7 @@ width: 25px;
 
 #fblurup{
 position: absolute;
-right: 93px;
+right: 7px;
 bottom: 83px;
 background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Normal.png');
 background-repeat: no-repeat;
@@ -969,7 +981,7 @@ width: 25px;
 
 #fblurdown{
 position: absolute;
-right: 92px;
+right: 6px;
 bottom: 57px;
 background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Normal.png');
 background-repeat: no-repeat;
@@ -981,13 +993,13 @@ width: 25px;
 
 .scb_s_microscopy_tight_focus_middle{
 position: absolute;
-right: 99px;
+right: 13px;
 bottom: 73px;
 }
 
 .scb_s_microscopy_rough_focus_middle{
 position: absolute;
-right: 13px;
+right: 99px;
 bottom: 73px;
 }
 
@@ -1016,6 +1028,7 @@ background: #ebebeb !important;
 right: 0px !important;
 top: 91px !important;
 position: absolute !important;
+cursor: pointer;
 }
 
 .scb_s_microscopy_black_icon{
@@ -1038,6 +1051,7 @@ height: 13px !important;
 width: 13px !important;
 top: -6px !important;
 border: none !important;
+cursor:pointer !important;
 }
 
 
@@ -1104,7 +1118,7 @@ top: 143px;
 
 .scb_s_microscopy_title_label{
 
-left: 39px;
+left: 9px;
 top: 12px;
 position: absolute;
 }
@@ -1118,6 +1132,9 @@ height: 30px;
 position: absolute;
 right: 8px;
 top: 43px;
+cursor:pointer !important;
+outline: none !important;
+
 }
 
 
@@ -1129,6 +1146,8 @@ height: 30px;
 position: absolute;
 right: 8px;
 top: 138px;
+cursor:pointer !important;
+outline: none !important;
 }
 
 
@@ -1147,6 +1166,7 @@ width: 16px;
 position: absolute;
 right: 530px;
 bottom: 33px;
+outline: none !important;
 }
 
 #down{
@@ -1157,6 +1177,8 @@ width: 16px;
 position: absolute;
 right: 530px;
 bottom: 9px;
+outline: none !important;
+
 }
 
 #left{
@@ -1166,6 +1188,8 @@ width: 16px;
 position: absolute;
 right: 541px;
 bottom: 21px;
+outline: none !important;
+
 }
 
 #right{
@@ -1175,6 +1199,8 @@ width: 16px;
 position: absolute;
 right: 519px;
 bottom: 21px;
+outline: none !important;
+
 }
 
 #up:hover{

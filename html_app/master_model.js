@@ -4624,8 +4624,11 @@ var __assignment_706_2014 = {
         		'img2': 'images/microscopy/assignment_706_2014/c4.jpg',
         		'img3': 'images/microscopy/assignment_706_2014/c7.jpg',
         		'img4': 'images/microscopy/assignment_706_2014/c10.jpg',
+        		'img40': 'images/microscopy/assignment_706_2014/c15-1.jpg',
+        		'img41': 'images/microscopy/assignment_706_2014/c15-2.jpg',
         		'img5': 'images/microscopy/assignment_706_2014/c16.jpg',
         		'img6': 'images/microscopy/assignment_706_2014/c17.jpg',
+        		'img42': 'images/microscopy/assignment_706_2014/c25.jpg',
         		'img7': 'images/microscopy/assignment_706_2014/c26.jpg',
         		'img8': 'images/microscopy/assignment_706_2014/c29.jpg',
         		
@@ -4666,6 +4669,7 @@ var __assignment_706_2014 = {
         		'img36': 'images/microscopy/assignment_706_2014/pm2.jpg',
         		'img37': 'images/microscopy/assignment_706_2014/pm3.jpg',
         		'img38': 'images/microscopy/assignment_706_2014/pm15.jpg',
+        		'img43': 'images/microscopy/assignment_706_2014/pm17.jpg',
         		'img39': 'images/microscopy/assignment_706_2014/pm22.jpg'
         	},
             slide_parser:{

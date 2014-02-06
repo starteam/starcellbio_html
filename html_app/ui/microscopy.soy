@@ -255,7 +255,7 @@
         </thead>
         {foreach $r in $rows}
         <tr class='scb_s_microscopy_samples_table_tr {if $r.display_sample} scb_s_microscopy_row_border{/if}'>
-            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border' style='width:96px;'>{if $r.display_sample}
+            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:96px;'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' cell_treatment_id='{$r.cell_treatment.id}'
                        
@@ -263,11 +263,11 @@
                 >
                 {/if}
             </td>
-            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border' style='width:491px;'>{if $r.display_sample}
+            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:491px;'>{if $r.display_sample}
                 {$r.display_text}
                 {/if}
             </td>
-            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border'>
+            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
                 {call .display_slide_types}
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
@@ -277,7 +277,7 @@
                 {param lane:$r/}
                 {/call}
             </td>
-            <td class='scb_s_microscopy_samples_table_td scb_s_experiment_setup_table_border scb_s_microscopy_conditions'>
+            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} scb_s_microscopy_conditions'>
             {if $r.lane}
 				{if $r.lane.kind == 'IHC'}
 					  {foreach $k in keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])}
@@ -382,7 +382,7 @@
     </div>
 
     
-    <div class='scb_s_microscopy_choose_samples_order'>
+    <div class='{if $microscopy.samples_finished} scb_s_microscopy_choose_samples_order_no_border{else}scb_s_microscopy_choose_samples_order{/if}'>
         <ol class='scb_s_microscopy_choose_samples_order_list' >
             {foreach $r in $rows}
             {if $r.is_valid}
@@ -480,7 +480,7 @@
 			
 			<div id='scb_s_microscopy_lens_controls'>
 			<div class = 'scb_s_microscopy_lens_controls_section_1'>
-			 		<span class="scb_s_microscopy_title_label">Microscopy Controls</span>
+			 		<span class="scb_s_microscopy_title_label">Microscope Controls</span>
     			<button class='scb_s_microscopy_instructions_followup_toggle'> </button>
    			 </div>
     
@@ -504,13 +504,13 @@
     
 	<div class = 'scb_s_microscopy_lens_controls_section_5'>
     			<span class='scb_s_microscopy_filter_label'>Filters:</span>
-    					<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}'  name='IF' type="radio" assignment_id='{$assignment.id}'
+    					<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}' title='Red'  name='IF' type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.red_enabled}checked='checked'{/if}>
-				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' name='IF' type="radio" type="radio" assignment_id='{$assignment.id}'
+				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' title='Blue' name='IF' type="radio" type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.blue_enabled}checked='checked'{/if}>
-				<input class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' name='IF' type="radio" assignment_id='{$assignment.id}'
+				<input class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' title='Green' name='IF' type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.green_enabled}checked='checked'{/if}>
-				<input class='scb_f_microscopy_all scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' name='IF' type="radio" assignment_id='{$assignment.id}'
+				<input class='scb_f_microscopy_all scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}'  title='All' name='IF' type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.merge_enabled}checked='checked'{/if}>
 				<br/>
 				<img class = 'scb_s_microscopy_filter' src = '{if $microscopy.red_enabled}images/microscopy/Filter_Slider_Red.png{elseif $microscopy.blue_enabled}images/microscopy/Filter_Slider_Blue.png{elseif $microscopy.green_enabled}images/microscopy/Filter_Slider_Green.png{elseif $microscopy.merge_enabled}images/microscopy/Filter_Slider_All.png{else}images/microscopy/Filter_Slider_Red.png {/if}' />
@@ -537,7 +537,7 @@
     
 	<div class = 'scb_s_microscopy_lens_controls_section_7'>
 	
-			  <span class='scb_s_microscopy_obj_label'>Objectives:</span> <span class='scb_s_microscopy_mag'></span><br/>
+			  <span class='scb_s_microscopy_obj_label'>Objective:</span> <span class='scb_s_microscopy_mag'></span><br/>
     
     </div>
 			
@@ -566,6 +566,7 @@
 @param kinds
 */
 {template .display_slide_types}
+ 
 {if length(keys($kinds)) ==1}
 		{foreach $k in keys($kinds)}
 		<span class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}'
@@ -607,6 +608,7 @@
 	{/if}
 	</select>
 {/if}
+
 {/template}
 
 
