@@ -98,6 +98,13 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 				state.microscopy.merge_enabled = true;
 				
 			}
+			else{
+				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
+				state.microscopy.red_enabled = true;
+				state.microscopy.blue_enabled = false;
+				state.microscopy.green_enabled = false;
+				state.microscopy.merge_enabled = false;
+			}
 		}
 		else{
 			$('.scb_f_microscopy_all').prop('disabled', false);

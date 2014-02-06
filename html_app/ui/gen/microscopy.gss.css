@@ -511,6 +511,7 @@ body.dragging, body.dragging * {
   display: block;
   margin-left: 20px;
   width: 200px;
+  top: 0 !important;
 }
 .scb_s_microscopy_view {
   background: #f4f6f8;
