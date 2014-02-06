@@ -679,23 +679,67 @@ body.dragging, body.dragging * {
 }
 #blurup {
   position: absolute;
-  right: 5px;
+  right: 7px;
   bottom: 83px;
+  background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Normal.png');
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  height: 18px;
+  width: 25px;
+}
+#blurup:hover {
+  background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Hover.png');
+}
+#blurdown:hover {
+  background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Hover.png');
+}
+#fblurup:hover {
+  background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Hover.png');
+}
+#fblurdown:hover {
+  background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Hover.png');
+}
+#blurup:disabled {
+  background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Gray.png');
+}
+#blurdown:disabled {
+  background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Gray.png');
+}
+#fblurup:disabled {
+  background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Gray.png');
+}
+#fblurdown:disabled {
+  background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Gray.png');
 }
 #blurdown {
   position: absolute;
-  right: 4px;
-  bottom: 58px;
+  right: 6px;
+  bottom: 57px;
+  background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Normal.png');
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  height: 18px;
+  width: 25px;
 }
 #fblurup {
   position: absolute;
-  right: 91px;
+  right: 93px;
   bottom: 83px;
+  background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Normal.png');
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  height: 18px;
+  width: 25px;
 }
 #fblurdown {
   position: absolute;
-  right: 90px;
-  bottom: 58px;
+  right: 92px;
+  bottom: 57px;
+  background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Normal.png');
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  height: 18px;
+  width: 25px;
 }
 .scb_s_microscopy_tight_focus_middle {
   position: absolute;
@@ -826,4 +870,48 @@ body.dragging, body.dragging * {
   -webkit-appearance: none;
   width: 100px;
   height: 30px;
+}
+#up {
+  background-image: url('../../../images/microscopy/Top_Arrow_Normal.png');
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  right: 530px;
+  bottom: 33px;
+}
+#down {
+  background-image: url('../../../images/microscopy/Bottom_Arrow_Normal.png');
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  right: 530px;
+  bottom: 9px;
+}
+#left {
+  background-image: url('../../../images/microscopy/Left_Arrow_Normal.png');
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  right: 541px;
+  bottom: 21px;
+}
+#right {
+  background-image: url('../../../images/microscopy/Right_Arrow_Normal.png');
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  right: 519px;
+  bottom: 21px;
+}
+#up:hover {
+  background-image: url('../../../images/microscopy/Top_Arrow_Hover.png');
+}
+#down:hover {
+  background-image: url('../../../images/microscopy/Bottom_Arrow_Hover.png');
+}
+#left:hover {
+  background-image: url('../../../images/microscopy/Left_Arrow_Hover.png');
+}
+#right:hover {
+  background-image: url('../../../images/microscopy/Right_Arrow_Hover.png');
 }

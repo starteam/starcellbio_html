@@ -568,6 +568,23 @@ function draw(state){
 			}
 		}
 	};
+	$('#up').click(function(){
+				draw_lens('y', 10, state, document.getElementsByTagName("canvas")[0]);
+				console.log('up');
+
+	});
+	$('#down').click(function(){
+				draw_lens('y', -10, state, document.getElementsByTagName("canvas")[0]);
+				console.log('down');
+	});
+	$('#left').click(function(){
+				draw_lens('x', 10, state, document.getElementsByTagName("canvas")[0]);
+				console.log('left')
+	});
+	$('#right').click(function(){
+				draw_lens('x', -10, state, document.getElementsByTagName("canvas")[0]);
+				console.log('right');
+	});
 	$('#brightup').click(function(){
 		if(state.action =='rendering'){
 				console.log('nope');
@@ -586,29 +603,61 @@ function draw(state){
 		if(state.action =='rendering'){
 				console.log('nope');
 		}
-		else
+		else{
+// 			if(state.blur >=16 && !isLeft){
+// 				$('#blurup').prop('disabled', true);
+// 			}
+// 			else {
+// 				$('#blurup').prop('disabled', false);
+// 				$('#blurdown').prop('disabled', false);
+// 			}
 		modify_state_blur(4, state, 'up');
+		}
 	});
 	$('#blurdown').click(function(){
 		if(state.action =='rendering'){
 				console.log('nope');
 		}
-		else
+		else{
+// 			if(state.blur >=16 && isLeft){
+// 				$('#blurdown').prop('disabled', true);
+// 			}
+// 			else {
+// 				$('#blurup').prop('disabled', false);
+// 				$('#blurdown').prop('disabled', false);
+// 			}
 		modify_state_blur(-4, state, 'down');
+		}
 	});
 	$('#fblurup').click(function(){
 		if(state.action =='rendering'){
 				console.log('nope');
 		}
-		else
+		else{
+// 			if(state.blur >=16 && !isLeft){
+// 				$('#fblurup').prop('disabled', true);
+// 			}
+// 			else {
+// 				$('#fblurup').prop('disabled', false);
+// 				$('#fblurdown').prop('disabled', false);
+// 			}
 		modify_state_blur(2, state, 'up');
+		}
 	});
 	$('#fblurdown').click(function(){
 		if(state.action =='rendering'){
 				console.log('nope');
 		}
-		else
+		else{
+// 			if(state.blur >=16 && isLeft){
+// 				$('#fblurdown').prop('disabled', true);
+// 			}
+// 			else {
+// 				$('#fblurup').prop('disabled', false);
+// 				$('#fblurdown').prop('disabled', false);
+// 			}
 		modify_state_blur(-2, state, 'down');
+		}
 	});
 
 	console.log('draw');
@@ -616,7 +665,58 @@ function draw(state){
 
 
 
+function add_images(state, image_source){
+	var img = document.createElement('IMG');
+	img.src = image_source;
+	var elements = reset_cache();
+	var canvas_hidden = elements[0]; 
+	var spy_ctx = elements[1];
+	var spy_img;
+	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
+	samples_area.appendChild(canvas_hidden);
 
+	img.onload= function (){
+			spy_ctx.save();
+			if(Math.floor(img.width/500) == 1 || Math.floor(img.height/500) == 1){
+				
+			img_width = img.width;
+			img_height = img.height;	
+			canvas_hidden.width = img.width;
+			canvas_hidden.height = img.height;
+			}
+			else{
+				
+			img_width = img.width/2;
+			img_height = img.height/2;	
+			canvas_hidden.width = img.width/2;
+			canvas_hidden.height = img.height/2;
+			}
+			spy_ctx.drawImage(img, 0, 0, img_width, img_height);	
+			var img2string=canvas_hidden.toDataURL(0,0, img.width, img.height);
+			state.orig = img2string;
+			state.display = img2string;
+			state.action = 'saved';
+			
+				Caman(canvas_hidden, img, function () {
+				this.brightness(state.cache_brightness);
+				this.stackBlur(state.cache_blur);
+
+				this.render(function(){
+					spy_img= Canvas2Image.saveAsPNG(canvas_hidden, true); 
+					state.cache = spy_img.src ;
+					document.documentElement.style.overflow='scroll';
+			
+					$('#spy').remove();
+
+				});	
+			});
+
+	}
+				
+			
+
+
+}
 
 
 function full_modify_cache(state){
@@ -726,9 +826,14 @@ function init(state, isNew, isIF, draw, image_source){
 			canvas.height = scb.ui.static.MicroscopyView.LENS;
 			if(isNew){
 				initialize_state(state, img2string, img.src);
-				var randomblur = Math.round(Math.ceil(Math.random()*10) / 10) * 10;
+				var randomblur = Math.round(Math.ceil(Math.random()*16));
 				console.log(randomblur);
 				state.blur = randomblur;
+			}
+			else{
+				state.orig =img2string;
+				state.display = img2string;
+				state.cache = img2string;
 			}
 			if(isIF){
 				state.orig = img2string;
