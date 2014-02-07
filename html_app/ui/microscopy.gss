@@ -1164,8 +1164,8 @@ background-image: url('../../../images/microscopy/Top_Arrow_Normal.png');
 height: 16px;
 width: 16px;
 position: absolute;
-right: 530px;
-bottom: 33px;
+right: 230px;
+bottom: 320px;
 outline: none !important;
 }
 
@@ -1175,8 +1175,8 @@ background-image: url('../../../images/microscopy/Bottom_Arrow_Normal.png');
 height: 16px;
 width: 16px;
 position: absolute;
-right: 530px;
-bottom: 9px;
+right: 230px;
+bottom: 298px;
 outline: none !important;
 
 }
@@ -1186,8 +1186,8 @@ background-image: url('../../../images/microscopy/Left_Arrow_Normal.png');
 height: 16px;
 width: 16px;
 position: absolute;
-right: 541px;
-bottom: 21px;
+right: 241px;
+bottom: 309px;
 outline: none !important;
 
 }
@@ -1197,8 +1197,8 @@ background-image: url('../../../images/microscopy/Right_Arrow_Normal.png');
 height: 16px;
 width: 16px;
 position: absolute;
-right: 519px;
-bottom: 21px;
+right: 219px;
+bottom: 309px;
 outline: none !important;
 
 }
