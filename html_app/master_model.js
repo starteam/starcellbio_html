@@ -3785,21 +3785,26 @@ var __microscopy_test = {
             	'IF':{
             		name:'Antibody-labeling IF',
             		conditions: {
-            			'rbg': {name: 'NFIB (red), DAPI (blue), control (green)'} 
+            			'rgb': {name: 'NFIB (red), DAPI (blue), control (green)',
+            			short_name: 'IF: RGB'} 
             		}
             	},
             	'IHC':{
             		name:'Antibody-labeling IHC',
             		conditions: {
-            			'NFIB': {name: 'NFIB'},
-            			'ki67': {name: 'Ki-67'},
-            			'secondary': {name: 'Secondary only control'}   
+            			'NFIB': {name: 'NFIB',
+            			short_name: 'IHC: NFIB'},
+            			'ki67': {name: 'Ki-67',
+            			short_name: 'IHC: Ki-67'},
+            			'secondary': {name: 'Secondary only control',
+            			short_name: 'IHC: Secondary'}   
             		}
             	},
             	'Dye':{
             		name: 'Dye/Stain',
             		conditions: {
-            			'HnE': {name: 'H&E'} 
+            			'HnE': {name: 'H&E',
+            			short_name: 'Dye: H&E'} 
             		}
 
             	}
@@ -4056,7 +4061,7 @@ var __microscopy_test = {
                 			}
                 		},
                 		'IF': {
-                			'rbg':{
+                			'rgb':{
 								'1':[{
 									hash: 'img44',
 									if_type: 'red', 
@@ -4418,7 +4423,7 @@ var __microscopy_test = {
                 			drug_id: 'ac',
                 			collection_id: '1 yr',
                 			kind: 'IF',
-                			conditions: 'rbg'
+                			conditions: 'rgb'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
@@ -4600,7 +4605,7 @@ var __assignment_706_2014 = {
             	'IF':{
             		name:'Antibody-labeling IF',
             		conditions: {
-            			'rbg': {name: 'NFIB (red), DAPI (blue), control (green)'} 
+            			'rgb': {name: 'NFIB (red), DAPI (blue), control (green)'} 
             		}
             	},
             	'IHC':{
@@ -4670,7 +4675,9 @@ var __assignment_706_2014 = {
         		'img37': 'images/microscopy/assignment_706_2014/pm3.jpg',
         		'img38': 'images/microscopy/assignment_706_2014/pm15.jpg',
         		'img43': 'images/microscopy/assignment_706_2014/pm17.jpg',
-        		'img39': 'images/microscopy/assignment_706_2014/pm22.jpg'
+        		'img39': 'images/microscopy/assignment_706_2014/pm22.jpg',
+        		'img44': 'images/microscopy/assignment_706_2014/pm34-1.jpg',
+        		'img45': 'images/microscopy/assignment_706_2014/pm34-2.jpg'
         	},
             slide_parser:{
                 	'default':{
@@ -4863,7 +4870,7 @@ var __assignment_706_2014 = {
                 			}
                 		},
                 		'IF': {
-                			'rbg':{
+                			'rgb':{
 								'1':[{
 									hash: 'img44',
 									if_type: 'red', 
@@ -5225,7 +5232,7 @@ var __assignment_706_2014 = {
                 			drug_id: 'ac',
                 			collection_id: '1 yr',
                 			kind: 'IF',
-                			conditions: 'rbg'
+                			conditions: 'rgb'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],

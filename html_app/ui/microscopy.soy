@@ -300,9 +300,9 @@
 				{elseif $r.lane.kind == 'IF'}
 					
 					{foreach $k in keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])}
-					{if $k == 'rbg'}
+					{if $k == 'rgb'}
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rbg" cell_treatment_id='{$r.cell_treatment.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
 						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">NFIB (red), DAPI (blue), control (green)</span>
 					{/if}
@@ -417,13 +417,13 @@
         				{if $r.is_valid and $r.lane.id == $microscopy.selected_lane.id}
         				<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
 
-						<div class='scb_s_western_blot_gel_tab_selected'>{$microscopy.selected_lane.kinds[$microscopy.selected_lane.kind].name}
+						<div class='scb_s_western_blot_gel_tab_selected'>{$microscopy.selected_lane.kinds[$microscopy.selected_lane.kind].conditions[$microscopy.selected_lane.slide_conditions].short_name}
 						</div>
 						</span>
         				{elseif $r.is_valid and $r.cell_treatment.id == $microscopy.selected_lane.cell_treatment_id}
 							<div class='scb_s_microscopy_slide_tab' microscopy_id='{$microscopy.id}' 
 							assignment_id='{$assignment.id}'
-							experiment_id='{$experiment.id}' microscopy_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].name}
+							experiment_id='{$experiment.id}' microscopy_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name}
 							</div>
 						{/if}
 					{/foreach}
