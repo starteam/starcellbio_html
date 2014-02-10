@@ -319,7 +319,15 @@
 				{/if}
 			{/if}
             </td>
-
+			<td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
+				{if $r.kind == 'existing'}
+				<button class="scb_f_microscopy_sample_remove" microscopy_id='{$microscopy.id}'
+						assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
+				{if $r.is_sample_enabled}{else}disabled="disabled"{/if}><img alt="Delete" title="Delete" src="images/setup/scb_remove.png">
+				</button>
+				{else}
+				{/if}
+			</td>
         </tr>
         {/foreach}
         {if length($rows) >= 10}

@@ -26,7 +26,11 @@
     box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-
+.scb_f_microscopy_sample_remove{
+outline: none;
+border: none;
+background: none;
+}
 
 .scb_s_microscopy_choose_samples_order_list > li {
 	font-size:10pt;
@@ -527,24 +531,27 @@ background: #f6f6f6;
 
 .scb_s_microscopy_lens_controls_section_3{
 height: 58px;
+background: #f6f6f6;
 }
 
 .scb_s_microscopy_lens_controls_section_4{
 height: 36px;
-background: #f6f6f6;
+
 }
 
 .scb_s_microscopy_lens_controls_section_5{
 height: 68px;
+background: #f6f6f6;
 }
 
 .scb_s_microscopy_lens_controls_section_6{
 height: 63px;
-background: #f6f6f6;
+
 }
 
 .scb_s_microscopy_lens_controls_section_7{
 height: 48px;
+background: #f6f6f6;
 }
 
 
