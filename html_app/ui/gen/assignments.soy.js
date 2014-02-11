@@ -44,7 +44,7 @@ scb_assignments.display_assignment = function(opt_data, opt_sb) {
       var sectionData39 = sectionList39[sectionIndex39];
       output.append('<div class=\'scb_assignments_header_link_wrapper scb_s_assignments_slider_overview ', (sectionIndex39 == opt_data.assignments.selected.last_instruction) ? 'scb_assignments_header_link_selected' : '', '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignments.selected.id), '\' role=\'link\' title=\'', soy.$$escapeHtml(sectionData39[0]), '\'   value=\'', soy.$$escapeHtml(sectionData39[0]), '\' aria-controls=\'scb_s_assignment_scroll\' aria-atomic=\'true\' ><span>', soy.$$escapeHtml(sectionData39[0]), '</span>', (sectionIndex39 == opt_data.assignments.selected.last_instruction) ? '<div class="arrow-down-blue"></div>' : '', '</div>');
     }
-    output.append('<div class = \'scb_s_assignment_header_img_right \' assignment_id=\'', soy.$$escapeHtml(opt_data.assignments.selected.id), '\' role=\'button\' aria-label=\'Move one section to the right\'></div></div><div class=\'scb_s_assignment_scroll\' id =\'scb_s_assignment_scroll\'  aria-live="assertive">');
+    output.append('<div class = \'scb_s_assignment_header_img_right \' assignment_id=\'', soy.$$escapeHtml(opt_data.assignments.selected.id), '\' role=\'button\' aria-label=\'Move one section to the right\'></div></div><div class=\'scb_s_assignments_gray_bar\'></div><div class=\'scb_s_assignment_scroll\' id =\'scb_s_assignment_scroll\'  aria-live="assertive">');
     var sectionList61 = opt_data.assignments.selected.template.instructions;
     var sectionListLen61 = sectionList61.length;
     for (var sectionIndex61 = 0; sectionIndex61 < sectionListLen61; sectionIndex61++) {
@@ -60,7 +60,7 @@ scb_assignments.display_assignment = function(opt_data, opt_sb) {
 
 scb_assignments.display_assignments = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_assignments_sidebar\'><h1 class=\'scb_s_assignments_sidebar_title\'>Select Your Assignment: <div class="arrow-down"></div></h1><ul role="listbox" aria-label="Assignments"  >');
+  output.append('<div class=\'scb_s_assignments_sidebar\'><h1 class=\'scb_s_assignments_sidebar_title\'>Assignments: <div class="arrow-down"></div></h1><ul role="listbox" aria-label="Assignments"  >');
   var courseList89 = soy.$$getMapKeys(opt_data.courses);
   var courseListLen89 = courseList89.length;
   for (var courseIndex89 = 0; courseIndex89 < courseListLen89; courseIndex89++) {

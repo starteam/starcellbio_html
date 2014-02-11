@@ -247,7 +247,7 @@ nav ul li.on{
 
 .scb_s_experiment_setup_create_new_set_up{
 	cursor: pointer;
-	
+	font-size: 14px !important;
 }
 
 
@@ -307,6 +307,23 @@ nav ul li.on{
 	right: 0px;
 	bottom: 10px;
 }
+
+.jqDialog_confirm_header {
+	background: #27956c;
+	color: white;
+	padding: 10px;
+	height: 25px;
+	position: relative;
+	width: 548px;
+	font-family: 'sourcesanspro-semibold';
+	border-top-left-radius: 9px;
+	border-top-right-radius: 9px;
+	font-size: 13pt;
+	letter-spacing: .5px;
+	right: 3px;
+	bottom: 16px;
+}
+
 
 .scb_s_experiment_setup_table_heading {
     font-family: 'sourcesanspro-semibold';

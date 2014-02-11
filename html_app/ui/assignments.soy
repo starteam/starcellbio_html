@@ -63,6 +63,7 @@ Assignment description
 @param assignments
 */
 {template .display_assignment}
+
 <div class='scb_s_abstract scb_s_assignments_description'>
 	
     {if $assignments.selected != null}
@@ -80,6 +81,7 @@ Assignment description
 
 		<div class = 'scb_s_assignment_header_img_right ' assignment_id='{$assignments.selected.id}' role='button' aria-label='Move one section to the right'></div>
 	</div>
+	<div class='scb_s_assignments_gray_bar'></div>
         <div class='scb_s_assignment_scroll' id ='scb_s_assignment_scroll'  aria-live="assertive">
         	{foreach $section in $assignments.selected.template.instructions}
 				<div class='scb_s_display_section' style='display:{if index($section) == $assignments.selected.last_instruction}block;{/if}' value='{$section[0]}' >
@@ -108,7 +110,7 @@ Assignment assignments
 */
 {template .display_assignments}
 <div class='scb_s_assignments_sidebar'>
-    <h1 class='scb_s_assignments_sidebar_title'>Select Your Assignment: <div class="arrow-down"></div></h1>
+    <h1 class='scb_s_assignments_sidebar_title'>Assignments: <div class="arrow-down"></div></h1>
     <ul role="listbox" aria-label="Assignments"  >
         {foreach $course in keys($courses)}
             <div class='scb_s_assignments_sidebar_course_block'>

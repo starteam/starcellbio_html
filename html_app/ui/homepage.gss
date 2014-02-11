@@ -191,7 +191,7 @@
 
 .scb_s_cabinet_text {
     position: relative;
-    top:-2px;
+    top: -9px;
 }
 
 .scb_s_user_guide_text {

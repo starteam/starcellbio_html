@@ -299,6 +299,15 @@ display: inline-block !important;
 
 }
 
+.scb_s_assignments_gray_bar{
+width: 657px;
+height: 25px;
+background: #f4f6f8;
+position: absolute;
+top: 81px;
+left: 0;
+}
+
 .scb_s_assignments_button_divider{
 position: absolute;
 display: inline;

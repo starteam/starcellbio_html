@@ -998,7 +998,7 @@ position: absolute;
 
 .scb_s_western_blot_video_text_second{
 	color:black;
-	font-size: 7pt;
+	font-size: 7.5pt;
 	font-family: 'sourcesanspro-regular';
 	display: inline !important;
 	width: 187px !important;

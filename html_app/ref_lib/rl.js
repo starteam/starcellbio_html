@@ -121,7 +121,7 @@ $.get( "ref_library.html", function(data) {
 	divider.className = 'rl_dividing_line';
 	$('.subheading').append(divider);
 	$($('.SCBTOC1')[2]).after('<br/><div class="dividing_line"></div>');
-	$('.body').prepend('<span class="rl_main_title">Reference Library</span>');
+	$('.body').prepend('<span class="rl_main_title">Library</span>');
 	$('p a[name="_ftn1"]').parent().contents().not('a[name="_ftn1"]').wrap("<a target='_blank' href='http://www.ncbi.nlm.nih.gov/pubmed/?term=%5B1%5D+Eslami%2C+A.%2C+Lujan%2C+J.+Western+Blotting%3A+Sample+Preparation+to+Detection.+J.+Vis.+Exp.+(44)%2C+e2359%2C+doi%3A10.3791%2F2359+(2010)'></a>");
 	$('.heading3 ul').css('margin-left', '25px');
 	var x = window.location.hash; 

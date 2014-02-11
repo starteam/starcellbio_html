@@ -144,7 +144,11 @@
   position: relative;
   bottom: 10px;
 }
-.scb_s_cabinet_text, .scb_s_user_guide_text {
+.scb_s_cabinet_text {
+  position: relative;
+  top: -9px;
+}
+.scb_s_user_guide_text {
   position: relative;
   top: -2px;
 }

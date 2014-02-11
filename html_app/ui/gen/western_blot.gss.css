@@ -776,16 +776,9 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
   width: auto !important;
   height: auto !important;
 }
-.scb_s_western_blot_video_text {
+.scb_s_western_blot_video_text, .scb_s_western_blot_video_text_second {
   color: black;
   font-size: 7.5pt;
-  font-family: 'sourcesanspro-regular';
-  display: inline !important;
-  width: 187px !important;
-}
-.scb_s_western_blot_video_text_second {
-  color: black;
-  font-size: 7pt;
   font-family: 'sourcesanspro-regular';
   display: inline !important;
   width: 187px !important;
