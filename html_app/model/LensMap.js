@@ -15,6 +15,8 @@ scb.LensMap = function scb_LensMap(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'brightness', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'cache_blur', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'cache_brightness', null, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'height', null, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'width', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'src', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'xparam', null, null, context);
         scb.Utils.initialize_accessor_field(self, data, 'mag', null, null, context);

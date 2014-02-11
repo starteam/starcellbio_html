@@ -218,10 +218,8 @@ nav ul li.on {
 .scb_s_warning_dialog {
   background: #f5f5f5;
   overflow: visible;
-  padding: 10px;
-  width: 520px;
-  height: 172px;
-  left: 273.5px;
+  width: 560px;
+  height: 225px;
   border-radius: 14px;
   font-family: sourcesanspro-regular;
   font-weight: normal !important;
@@ -234,7 +232,6 @@ nav ul li.on {
   color: white;
   padding: 10px;
   height: 25px;
-  width: inherit;
   position: relative;
   font-family: 'sourcesanspro-semibold';
   border-top-left-radius: 9px;

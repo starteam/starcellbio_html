@@ -159,10 +159,10 @@
 			window.clearTimeout(t.close_timer);
 			t.check();
 			
-			t.maintainPosition( t.parts.div_box );
 			
 			clearTimeout(t.close_timer);
 			t.parts.div_content.html(content);
+			t.maintainPosition( t.parts.div_box );
 			t.parts.div_options.show();
 
 			if(!t.active) {

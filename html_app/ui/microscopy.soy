@@ -243,19 +243,32 @@
 {call .display_m_progress}
 {param step:1/}
 {/call}
+<div class = 'scb_s_microscopy_slide_prep_instructions'>
+<b>Instructions:</b> <br/>
+
+	<ul>
+   <li>To prepare a sample for microscopy, click the checkbox to the left of each sample name or click SELECT ALL to select all samples</li>
+   <li>Select the type of microscopy analysis you would like to perform by selecting the appropriate Slide type and conditions, when appropriate.</li>
+   <li>Note: The microscopy experimental technique in StarCellBio draws upon real microscopy images. Not all slide types and conditions may be available for each sample in your experiment.</li>
+   </ul>
+   </div>
 <div class='scb_s_western_blot_samples_container' style='{if length($rows) >=12}  height: 306px;	{else} 	height:auto;{/if}'>
+
+
+
+
 
 <div class='scb_s_western_blot_samples_table'  style='{if length($rows) >=12} height: 216px;   min-height: 300px;  {else} 	height:auto;{/if}'>
     <table>
         <thead class='scb_s_microscopy_samples_table_head'>
         <td class='scb_s_microscopy_samples_table_heading m_sample_prep_select scb_s_experiment_setup_table_border'>Select</td>
         <td class='scb_s_microscopy_samples_table_heading m_sample_prep_samples scb_s_experiment_setup_table_border'>Samples</td>
-        <td class='scb_s_microscopy_samples_table_heading m_sample_prep_lysate scb_s_experiment_setup_table_border'>Slide type</td>
+        <td class='scb_s_microscopy_samples_table_heading m_sample_prep_lysate scb_s_experiment_setup_table_border'>Microscopy Analysis</td>
         <td class='scb_s_microscopy_samples_table_heading m_sample_prep_blank scb_s_experiment_setup_table_border'>Conditions</td>
         </thead>
         {foreach $r in $rows}
         <tr class='scb_s_microscopy_samples_table_tr {if $r.display_sample} scb_s_microscopy_row_border{/if}'>
-            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:96px;'>{if $r.display_sample}
+            <td class='scb_s_microscopy_sample_checkbox scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' >{if $r.display_sample}
                 <input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' cell_treatment_id='{$r.cell_treatment.id}'
                        
@@ -263,11 +276,11 @@
                 >
                 {/if}
             </td>
-            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:491px;'>{if $r.display_sample}
+            <td class='scb_s_microscopy_sample_name scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' >{if $r.display_sample}
                 {$r.display_text}
                 {/if}
             </td>
-            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
+            <td class='scb_s_microscopy_sample_type scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
                 {call .display_slide_types}
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
@@ -277,7 +290,7 @@
                 {param lane:$r/}
                 {/call}
             </td>
-            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} scb_s_microscopy_conditions'>
+            <td class=' scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} scb_s_microscopy_conditions'>
             {if $r.lane}
 				{if $r.lane.kind == 'IHC'}
 					  {foreach $k in keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])}
@@ -374,6 +387,8 @@
 @param rows
 */
 {template .prepare_slide}
+
+
 <div class='scb_s_microscopy_tab_content_slide'>
 {if $microscopy.samples_finished}
 {call .display_m_progress}
@@ -384,6 +399,16 @@
 {param step:2 /}
 {/call}
 {/if}
+<div class = 'scb_s_microscopy_prepare_slide_instructions'>
+<b>Instructions:</b> <br/>
+
+	<ul>
+   <li>To view a particular sample, select the sample name in the Samples window. The sample will be loaded onto the microscope and the image will appear on the right.</li>
+   <li>Use the microscope controls to manipulate the image.</li>
+   <li>Note: Not all microscope controls will be relevant for each image.</li>
+   <li>To save the microscope settings for a particular microscope image, click SAVE IMAGE. The microscope settings for only that particular microscope image will be saved when navigating between samples on the microscope.</li>
+   </ul>
+</div>
 <div class='scb_s_microscopy_samples_area'>
 	<div class='scb_s_microscopy_samples_heading'>
         Samples
@@ -414,7 +439,7 @@
     {else}
     <button class='scb_f_microscopy_load_slides scb_s_navigation_button' microscopy_id='{$microscopy.id}' 
                 assignment_id="{$assignment.id}"
-                experiment_id="{$experiment.id}">LOAD SLIDES
+                experiment_id="{$experiment.id}">LOAD
 	</button>
 	{/if}
 </div>
@@ -497,7 +522,7 @@
 			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.light_on}checked='checked'{else}{/if} >
     </div>
     <div class = 'scb_s_microscopy_lens_controls_section_3'>
-    				<span class="scb_s_microscopy_brightness_label">Brightness:</span><div class='scb_s_microscopy_brightness_slider'></div>
+    				<span class="scb_s_microscopy_brightness_label"></span><div class='scb_s_microscopy_brightness_slider'></div>
     				<img class='scb_s_microscopy_black_icon' src='images/microscopy/Brightness_Slider_Dark.jpg'/>
     				<img class='scb_s_microscopy_white_icon' src='images/microscopy/Brightness_Slider_Light.png'/>
     			
@@ -655,15 +680,15 @@
 	
 		<div class='scb_s_facs_progress_rest'>
 			<div class='scb_s_western_blot_progress_item scb_microscopy_progress_1'>
-				1. Slide Prep
+				1. Microscopy Prep
 			</div>
 	 
 			<div class='scb_s_western_blot_progress_item scb_microscopy_progress_2'>
-				2. Load Slides
+				2. Load
 			</div>
   
 			<div class='scb_s_western_blot_progress_item scb_microscopy_progress_3'>
-				3. Analyze Slides
+				3. Analyze
 			</div>
 		</div>
     </div>
