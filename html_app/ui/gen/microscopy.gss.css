@@ -185,7 +185,6 @@
 .scb_s_microscopy_progress {
   display: block;
   width: 800px;
-  height: 80px;
   margin-left: -5px;
 }
 .scb_s_microscopy_progress_prefix {
@@ -438,11 +437,11 @@ body.dragging, body.dragging * {
 .scb_s_microscopy_slide_prep_instructions {
   font-family: sourcesanspro-regular;
   font-size: 8pt;
-  position: absolute;
-  bottom: 238px;
+  position: relative;
   left: 14px;
   height: 106px;
   width: 658px;
+  top: 84px;
   z-index: 56;
 }
 .scb_s_microscopy_prepare_slide_instructions {
