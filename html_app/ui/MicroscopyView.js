@@ -1154,6 +1154,7 @@ function save_and_draw_cache_image(canvas, state){
 // 			e.which = 40;
 // 			e.keyCode = 40;
 // 			$(document.body).trigger(e);
+			draw_lens('y', 0, state, document.getElementsByTagName("canvas")[0]);			
 		});
 		console.log('rendering...');
 		state.action = 'rendering';

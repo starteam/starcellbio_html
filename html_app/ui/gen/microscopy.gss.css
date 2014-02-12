@@ -447,12 +447,12 @@ body.dragging, body.dragging * {
 .scb_s_microscopy_prepare_slide_instructions {
   font-family: sourcesanspro-regular;
   font-size: 8pt;
-  position: absolute;
-  bottom: 467px;
+  position: relative;
   left: 19px;
   height: 106px;
   z-index: 50;
   width: 646px;
+  top: 87px;
 }
 .scb_s_microscopy_slide_prep_instructions>b, .scb_s_microscopy_prepare_slide_instructions>b {
   font-family: sourcesanspro-semibold;
