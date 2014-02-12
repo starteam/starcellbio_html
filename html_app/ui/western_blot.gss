@@ -58,6 +58,18 @@
   padding-top: 2px;
 }
 
+.scb_s_microscopy_samples_container{
+	bottom: -170px;
+	position: relative;
+	left: 16px;
+	width: 856px;
+	padding-top: 20px;
+	padding-bottom: 33px;
+	border:1px #27956c solid;
+    border-radius: 5px;
+	background: #edeef2;
+}
+
 
 
 

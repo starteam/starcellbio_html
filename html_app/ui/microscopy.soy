@@ -108,6 +108,8 @@
 @param can_prepare_slide
 */
 {template .display_tabs}
+
+
 <div class='scb_s_microscopy_tab_content {if $kind == 'sample_prep'}scb_s_microscopy_tab_content_sample_prep{/if}'>
 {call .display_tabs_selector}
     {param assignment:$assignment/}
@@ -240,6 +242,11 @@
 @param can_prepare_slide
 */
 {template .sample_prep}
+
+{call .display_m_progress}
+{param step:1/}
+{/call}
+
 <div class = 'scb_s_microscopy_slide_prep_instructions'>
 <b>Instructions:</b> <br/>
 
@@ -249,13 +256,9 @@
    <li>Note: The microscopy experimental technique in StarCellBio draws upon real microscopy images. Not all slide types and conditions may be available for each sample in your experiment.</li>
    </ul>
    </div>
-{call .display_m_progress}
-{param step:1/}
-{/call}
-
-<div class='scb_s_western_blot_samples_container' style='{if length($rows) >=12}  height: 306px;	{else} 	height:auto;{/if}'>
 
 
+<div class='scb_s_microscopy_samples_container' style='{if length($rows) >=12}  height: 306px;	{else} height:auto;	{/if}'>
 
 
 

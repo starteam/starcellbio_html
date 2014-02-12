@@ -228,17 +228,6 @@
 .scb_space_control {
   margin: 0;
 }
-.scb_s_microscopy_samples_container {
-  margin-top: 180px;
-  position: relative;
-  width: 888px;
-  left: 10px;
-  padding-top: 20px;
-  padding-bottom: 33px;
-  border: 1px #27956c solid;
-  border-radius: 5px;
-  background: #edeef2;
-}
 .scb_s_microscopy_row_border {
   border-top: 1px solid black !important;
 }
@@ -450,10 +439,11 @@ body.dragging, body.dragging * {
   font-family: sourcesanspro-regular;
   font-size: 8pt;
   position: absolute;
-  bottom: 222px;
+  bottom: 238px;
   left: 14px;
   height: 106px;
   width: 658px;
+  z-index: 56;
 }
 .scb_s_microscopy_prepare_slide_instructions {
   font-family: sourcesanspro-regular;
