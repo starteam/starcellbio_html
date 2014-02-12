@@ -436,7 +436,7 @@ body.dragging, body.dragging * {
 }
 .scb_s_microscopy_slide_prep_instructions {
   font-family: sourcesanspro-regular;
-  font-size: 8pt;
+  font-size: 12px;
   position: relative;
   left: 14px;
   height: 106px;
@@ -446,7 +446,7 @@ body.dragging, body.dragging * {
 }
 .scb_s_microscopy_prepare_slide_instructions {
   font-family: sourcesanspro-regular;
-  font-size: 8pt;
+  font-size: 12px;
   position: relative;
   left: 19px;
   height: 106px;
@@ -685,11 +685,10 @@ body.dragging, body.dragging * {
 .scb_f_microscopy_load_slides {
   border: none;
   margin-top: 7px !important;
-  margin-right: 20px !important;
+  margin-right: 73px !important;
   margin-bottom: 20px !important;
   right: 36px;
   padding: 6px 13px 19px 16px;
-  width: 175px;
 }
 .scb_f_microscopy_load_slides_short {
   border: none;
@@ -736,16 +735,6 @@ body.dragging, body.dragging * {
   display: inline-block;
   margin-top: 20px;
 }
-#blurup {
-  position: absolute;
-  right: 93px;
-  bottom: 83px;
-  background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Normal.png');
-  background-repeat: no-repeat;
-  background-origin: content-box;
-  height: 18px;
-  width: 25px;
-}
 #blurup:hover {
   background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Hover.png');
 }
@@ -770,6 +759,17 @@ body.dragging, body.dragging * {
 #fblurdown:disabled {
   background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Gray.png');
 }
+#blurup {
+  position: absolute;
+  right: 93px;
+  bottom: 83px;
+  background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Normal.png');
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  height: 18px;
+  width: 25px;
+  outline: none;
+}
 #blurdown {
   position: absolute;
   right: 92px;
@@ -779,6 +779,13 @@ body.dragging, body.dragging * {
   background-origin: content-box;
   height: 18px;
   width: 25px;
+  outline: none;
+}
+#lens_pending {
+  margin-left: 50%;
+  position: absolute;
+  bottom: 238px;
+  left: 36px;
 }
 #fblurup {
   position: absolute;
@@ -789,6 +796,7 @@ body.dragging, body.dragging * {
   background-origin: content-box;
   height: 18px;
   width: 25px;
+  outline: none;
 }
 #fblurdown {
   position: absolute;
@@ -799,6 +807,7 @@ body.dragging, body.dragging * {
   background-origin: content-box;
   height: 18px;
   width: 25px;
+  outline: none;
 }
 .scb_s_microscopy_tight_focus_middle {
   position: absolute;

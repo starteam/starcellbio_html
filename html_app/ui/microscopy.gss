@@ -560,7 +560,7 @@ background: #f6f6f6;
 
 .scb_s_microscopy_slide_prep_instructions{
 font-family: sourcesanspro-regular;
-font-size: 8pt;
+font-size: 12px;
 position: relative;
 left: 14px;
 height: 106px;
@@ -573,7 +573,7 @@ z-index: 56;
 
 .scb_s_microscopy_prepare_slide_instructions{
 	font-family: sourcesanspro-regular;
-	font-size: 8pt;
+	font-size: 12px;
 	position: relative;
 	left: 19px;
 	height: 106px;
@@ -896,11 +896,10 @@ width: 89px;
 .scb_f_microscopy_load_slides {
     border:none;
     margin-top:7px !important; 
-    margin-right:20px !important; 
+    margin-right:73px !important; 
     margin-bottom:20px !important;
     right: 36px;
 	padding: 6px 13px 19px 16px;
-	width: 175px;
 }
 
 .scb_f_microscopy_load_slides_short{
@@ -957,16 +956,7 @@ width: 89px;
 }
 
 
-#blurup{
-position: absolute;
-right: 93px;
-bottom: 83px;
-background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Normal.png');
-background-repeat: no-repeat;
-background-origin: content-box;
-height: 18px;
-width: 25px;
-}
+
 
 #blurup:hover{
 background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Hover.png');
@@ -1016,6 +1006,18 @@ background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Gray.p
 
 }
 
+#blurup{
+position: absolute;
+right: 93px;
+bottom: 83px;
+background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Normal.png');
+background-repeat: no-repeat;
+background-origin: content-box;
+height: 18px;
+width: 25px;
+outline: none;
+}
+
 
 #blurdown{
 position: absolute;
@@ -1026,6 +1028,17 @@ background-repeat: no-repeat;
 background-origin: content-box;
 height: 18px;
 width: 25px;
+outline: none;
+
+}
+
+
+#lens_pending{
+	margin-left: 50%;
+position: absolute;
+bottom: 238px;
+left: 36px;
+
 }
 
 #fblurup{
@@ -1037,6 +1050,8 @@ background-repeat: no-repeat;
 background-origin: content-box;
 height: 18px;
 width: 25px;
+outline: none;
+
 }
 
 #fblurdown{
@@ -1048,6 +1063,7 @@ background-repeat: no-repeat;
 background-origin: content-box;
 height: 18px;
 width: 25px;
+outline: none;
 
 }
 
