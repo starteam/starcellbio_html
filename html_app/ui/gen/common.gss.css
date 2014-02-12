@@ -208,7 +208,6 @@ div#main {
   height: 112px;
   width: 887px;
   color: white;
-  background: white;
   border-radius: 8px;
   vertical-align: top;
   margin-bottom: 10px;
@@ -233,10 +232,16 @@ div#main {
   color: white;
 }
 .scb_s_experiment_step_tech_steps {
-  height: 72px;
-  width: 882px;
+  height: 66px;
+  width: 887px;
   font-size: 13pt;
   letter-spacing: 1px;
+  background: white;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  position: absolute;
+  z-index: 4;
+  top: 99px;
 }
 .scb_s_experiment_step_tech_steps>div {
   display: inline-block;
@@ -246,6 +251,8 @@ div#main {
   height: 42px;
   border-radius: 8px;
   width: 887px;
+  position: absolute;
+  z-index: 5;
 }
 .scb_s_experiment_step_selected {
   background: #4690c1 !important;

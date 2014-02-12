@@ -134,7 +134,7 @@ Progress bar
 	
 	<br/>
 	<br/>
-    <div class="scb_s_experiment_step_div ">
+    <div class="scb_s_experiment_step_div " style='height:{if $step>3 or   $last_step >4} 112px {else} 56px{/if}' >
     	
     	<div class='scb_s_experiment_step_main_steps '>
 			<div class='scb_s_experiment_step_labels' aria-live='polite'>
@@ -185,8 +185,9 @@ Progress bar
 				</div>
 			</div>
         </div>
+        {if $step>3 or   $last_step >4 }
         <div class='scb_s_experiment_step_tech_steps '>
-			<div class='scb_s_experiment_step_buttons_title {if $step>3}scb_s_experiment_step_active_title{/if}'>Select Your Technique: </div>
+			<div class='scb_s_experiment_step_buttons_title {if $step>3 }scb_s_experiment_step_active_title{/if}'>Select Your Technique: </div>
 						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_wb {if length($experiment.western_blot_list) > 0}scb_s_experiment_step_visited{/if} {if $step==5 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button'aria-label='Start Western Blotting'>
 							{if length($experiment.western_blot_list) <= 0 or  $step==5 }
 							Western Blotting
@@ -211,9 +212,10 @@ Progress bar
 						</div>
 
 			
-        </div>
+       		 </div>
 
-    </div>
+    	</div>
+    	{/if}
 </div>
 
 
