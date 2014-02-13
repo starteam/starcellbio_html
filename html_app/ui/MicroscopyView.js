@@ -1071,9 +1071,9 @@ function save_and_draw_cache_image(canvas, state){
 	var elements = reset_cache();
 	var canvas_hidden = elements[0]; 
 	var spy_ctx = elements[1];
-	var img = reset_image(state.display);
+	//var img = reset_image(state.display);
 	var spy_img;
-	Caman(canvas_hidden, img, function () {
+	Caman(canvas_hidden, reset_image(state.display), function () {
 		this.brightness(state.brightness);
 		console.log('bright');
 		this.stackBlur(state.blur);
@@ -1116,7 +1116,7 @@ function save_and_draw_cache_image(canvas, state){
 
 	});
 	
-	spy_ctx.drawImage(img, 0, 0);
+	spy_ctx.drawImage(reset_image(state.display), 0, 0);
 	canvas.width = scb.ui.static.MicroscopyView.LENS;
 	canvas.height = scb.ui.static.MicroscopyView.LENS;
 	ctx.beginPath();
