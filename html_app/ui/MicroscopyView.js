@@ -914,7 +914,7 @@ function reset_cache(){
 	old_canvas.parentNode.removeChild(old_canvas);
 	var new_canvas = document.createElement('canvas');
 	new_canvas.id = 'spy';
-	//new_canvas.style.visibility='hidden';
+	new_canvas.style.visibility='hidden';
 	new_canvas.width = img_width;
 	new_canvas.height = img_height;
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
@@ -968,7 +968,7 @@ function init(state, isNew, isIF, draw, image_source){
 
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';
-		//canvas_hidden.style.visibility='hidden';
+		canvas_hidden.style.visibility='hidden';
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		document.body.appendChild(canvas_hidden);
 		state.action = 'loading image';
@@ -1084,29 +1084,9 @@ function save_and_draw_cache_image(canvas, state){
 		this.render(function(){
 			console.log('before image');
 			state.action ='before image saved';
-			//spy_img = canvas_hidden.toDataURL("image/png;base64");
 			spy_img= Canvas2Image.saveAsPNG(canvas_hidden, true); 
 			
-// 			canvas_hidden.toBlob(function(blob) {
-// 				saveAs(blob, "image.png");
-// 				console.log(blob);
-// 			});
 
-// 			window.loadImage(blob, function (canvas_hidden) {
-// 				canvas_hidden.toBlob(
-// 					function (blob) {
-// 						window.loadImage(blob, function (canvas_hidden) {
-// 							var canvasData = canvas_hidden.getContext('2d')
-// 									.getImageData(0, 0, canvas_hidden.width, canvas_hidden.height),
-// 								new CanvasData = new Canvas.getContext('2d')
-// 									.getImageData(0, 0, new Canvas.width, new Canvas.height);
-// 							done();
-// 							expect(canvasData.width).to.be(new CanvasData.width);
-// 							expect(canvasData.height).to.be(new CanvasData.height);
-// 						}, {canvas_hidden: true});
-// 					}
-// 				);
-// 			}, {canvas: true});
 			state.action = 'rendered';
 			console.log('rendered'); 
 			var hidden_canvas = document.getElementById('spy');
@@ -1115,20 +1095,13 @@ function save_and_draw_cache_image(canvas, state){
 			$('#lens_pending').remove();
 			
 			$('.scb_s_microscope_status').text(state.action);
-			//state.cache = spy_img.src ;
-			state.cache = spy_img;
+			state.cache = spy_img.src ;
 
 			state.cache_brightness = state.brightness;
 			state.cache_blur = state.blur;
 			
 			document.documentElement.style.overflow='scroll';
-			var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
-// 			samples_area.style.overflow = 'hidden';
-// 			samples_area.style.height = '100%';
-// 			var e = jQuery.Event("keydown");
-// 			e.which = 40;
-// 			e.keyCode = 40;
-// 			$(document.body).trigger(e);
+
 			draw_lens('y', 0, state, document.getElementsByTagName("canvas")[0]);			
 		});
 		console.log('rendering...');
@@ -1625,7 +1598,7 @@ function init_wb(image_source){
 		var ctx = canvas.getContext('2d');
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';
-		//canvas_hidden.style.visibility='hidden';
+		canvas_hidden.style.visibility='hidden';
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		document.body.appendChild(canvas_hidden);
 		caman = Caman("#lens");
@@ -1673,7 +1646,7 @@ function init_wb_mod(state, image_source){
 		var ctx = canvas.getContext('2d');
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';
-		//canvas_hidden.style.visibility='hidden';
+		canvas_hidden.style.visibility='hidden';
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		document.body.appendChild(canvas_hidden);
 		caman = Caman("#lens");
