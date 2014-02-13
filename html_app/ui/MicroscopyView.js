@@ -914,7 +914,7 @@ function reset_cache(){
 	old_canvas.parentNode.removeChild(old_canvas);
 	var new_canvas = document.createElement('canvas');
 	new_canvas.id = 'spy';
-	new_canvas.style.visibility='hidden';
+	//new_canvas.style.visibility='hidden';
 	new_canvas.width = img_width;
 	new_canvas.height = img_height;
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
@@ -968,7 +968,7 @@ function init(state, isNew, isIF, draw, image_source){
 
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';
-		canvas_hidden.style.visibility='hidden';
+		//canvas_hidden.style.visibility='hidden';
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		document.body.appendChild(canvas_hidden);
 		state.action = 'loading image';
@@ -1625,7 +1625,7 @@ function init_wb(image_source){
 		var ctx = canvas.getContext('2d');
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';
-		canvas_hidden.style.visibility='hidden';
+		//canvas_hidden.style.visibility='hidden';
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		document.body.appendChild(canvas_hidden);
 		caman = Caman("#lens");
@@ -1673,7 +1673,7 @@ function init_wb_mod(state, image_source){
 		var ctx = canvas.getContext('2d');
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';
-		canvas_hidden.style.visibility='hidden';
+		//canvas_hidden.style.visibility='hidden';
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		document.body.appendChild(canvas_hidden);
 		caman = Caman("#lens");
