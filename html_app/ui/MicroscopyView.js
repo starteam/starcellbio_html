@@ -1084,8 +1084,8 @@ function save_and_draw_cache_image(canvas, state){
 		this.render(function(){
 			console.log('before image');
 			state.action ='before image saved';
-			spy_img = canvas_hidden.toDataURL("image/png;base64");
-			//spy_img= Canvas2Image.saveAsPNG(canvas_hidden, true); 
+			//spy_img = canvas_hidden.toDataURL("image/png;base64");
+			spy_img= Canvas2Image.saveAsPNG(canvas_hidden, true); 
 			
 // 			canvas_hidden.toBlob(function(blob) {
 // 				saveAs(blob, "image.png");
