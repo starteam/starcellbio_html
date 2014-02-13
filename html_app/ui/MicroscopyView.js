@@ -1084,7 +1084,29 @@ function save_and_draw_cache_image(canvas, state){
 		this.render(function(){
 			console.log('before image');
 			state.action ='before image saved';
-			spy_img= Canvas2Image.saveAsPNG(canvas_hidden, true); 
+			spy_img = canvas_hidden.toDataURL("image/png;base64");
+			//spy_img= Canvas2Image.saveAsPNG(canvas_hidden, true); 
+			
+// 			canvas_hidden.toBlob(function(blob) {
+// 				saveAs(blob, "image.png");
+// 				console.log(blob);
+// 			});
+
+// 			window.loadImage(blob, function (canvas_hidden) {
+// 				canvas_hidden.toBlob(
+// 					function (blob) {
+// 						window.loadImage(blob, function (canvas_hidden) {
+// 							var canvasData = canvas_hidden.getContext('2d')
+// 									.getImageData(0, 0, canvas_hidden.width, canvas_hidden.height),
+// 								new CanvasData = new Canvas.getContext('2d')
+// 									.getImageData(0, 0, new Canvas.width, new Canvas.height);
+// 							done();
+// 							expect(canvasData.width).to.be(new CanvasData.width);
+// 							expect(canvasData.height).to.be(new CanvasData.height);
+// 						}, {canvas_hidden: true});
+// 					}
+// 				);
+// 			}, {canvas: true});
 			state.action = 'rendered';
 			console.log('rendered'); 
 			var hidden_canvas = document.getElementById('spy');
@@ -1093,7 +1115,9 @@ function save_and_draw_cache_image(canvas, state){
 			$('#lens_pending').remove();
 			
 			$('.scb_s_microscope_status').text(state.action);
-			state.cache = spy_img.src ;
+			//state.cache = spy_img.src ;
+			state.cache = spy_img;
+
 			state.cache_brightness = state.brightness;
 			state.cache_blur = state.blur;
 			
