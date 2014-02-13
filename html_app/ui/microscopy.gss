@@ -685,6 +685,7 @@ width: 89px;
 
 .scb_s_microscopy_samples_table_tr {
     margin: 0px;
+    height: 33px;
 }
 
 .scb_s_microscopy_blank_space1{

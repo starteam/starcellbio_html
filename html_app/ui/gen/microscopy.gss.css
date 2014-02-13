@@ -529,6 +529,7 @@ body.dragging, body.dragging * {
 }
 .scb_s_microscopy_samples_table_tr {
   margin: 0;
+  height: 33px;
 }
 .scb_s_microscopy_blank_space1 {
   width: 650px;
