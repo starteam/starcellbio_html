@@ -219,11 +219,9 @@ div#main {
   height: inherit;
   padding: 10px;
   border-bottom-left-radius: 8px;
-  border-right: 1px solid white;
 }
 .scb_s_experiment_step_setup_and_run {
   width: 118px;
-  border-right: 1px solid white;
 }
 .scb_s_experiment_step_select_technique {
   width: 162px;
@@ -257,21 +255,90 @@ div#main {
 .scb_s_experiment_step_selected {
   background: #4690c1 !important;
 }
-.arrow-down-design, .arrow-down-setup, .arrow-down-select {
+.arrow-design-outer {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 8px solid white;
+  left: 97px;
+  top: 0;
+  z-index: 56;
+  position: absolute;
+}
+.arrow-setup-outer {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 8px solid white;
+  left: 139px;
+  top: 0;
+  z-index: 56;
+  position: absolute;
+}
+.arrow-down-design {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 9px solid #d5dce4;
+  left: -10px;
+  top: -20px;
+  position: absolute;
+  z-index: 56;
+}
+.arrow-down-design-selected {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 9px solid #4690c1 !important;
+  left: -10px;
+  top: -20px;
+  position: absolute;
+  z-index: 56;
+}
+.arrow-down-design-visited {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 9px solid #59bbf2 !important;
+  left: -10px;
+  top: -20px;
+  position: absolute;
+  z-index: 56;
+}
+.arrow-down-setup-visited {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 9px solid #59bbf2 !important;
+  left: -10px;
+  top: -20px;
+  z-index: 56;
+  position: absolute;
+}
+.arrow-down-setup-selected {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 9px solid #4690c1 !important;
+  left: -10px;
+  top: -20px;
+  z-index: 56;
+  position: absolute;
+}
+.arrow-down-select {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 20px solid #4690c1;
   position: absolute;
-}
-.arrow-down-design {
-  left: 30px;
-}
-.arrow-down-setup {
-  left: 50px;
-}
-.arrow-down-select {
   left: 74px;
 }
 .scb_s_experiment_step_text {

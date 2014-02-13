@@ -147,9 +147,12 @@ Progress bar
 					DESIGN
 					{/if}
 					
+					
+				<div class="arrow-design-outer">
+						<div class="arrow-down-design {if $step==1 }arrow-down-design-selected{elseif $step>1 or  $last_step > 0}arrow-down-design-visited {/if}"></div>
+				</div>
 					{if $step==1 } 
-				
-						<div class="arrow-down-design"></div>
+
 					{/if}	
 				</div>
 		
@@ -163,8 +166,11 @@ Progress bar
 					{else}
 					SETUP & RUN
 					{/if}
+					<div class="arrow-setup-outer">
+					<div class="arrow-down-setup {if $step>2 or $last_step > 3}arrow-down-setup-visited{/if} {if $step==2 or $step==3 }arrow-down-setup-selected{/if}"></div>
+					
+					</div>
 					{if $step==2 or $step==3 }
-						<div class="arrow-down-setup"></div>
 					{/if}
 				
 				</div>
@@ -185,9 +191,8 @@ Progress bar
 				</div>
 			</div>
         </div>
-        {if $step>3 or   $last_step >4 }
-        <div class='scb_s_experiment_step_tech_steps '>
-			<div class='scb_s_experiment_step_buttons_title {if $step>3 }scb_s_experiment_step_active_title{/if}'>Select Your Technique: </div>
+        <div class='scb_s_experiment_step_tech_steps ' style='{if length($experiment.western_blot_list) > 0 or length($experiment.facs_list) > 0 or length($experiment.microscopy_list) > 0}{else}display:none;{/if}'>
+			<div class='scb_s_experiment_step_buttons_title scb_s_experiment_step_active_title'>Perform Your Technique: </div>
 						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_wb {if length($experiment.western_blot_list) > 0}scb_s_experiment_step_visited{/if} {if $step==5 }scb_s_experiment_step_selected{/if}'  aria-disabled='true' role ='button'aria-label='Start Western Blotting'>
 							{if length($experiment.western_blot_list) <= 0 or  $step==5 }
 							Western Blotting
@@ -215,7 +220,6 @@ Progress bar
        		 </div>
 
     	</div>
-    	{/if}
 </div>
 
 

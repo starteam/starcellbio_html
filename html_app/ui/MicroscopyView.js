@@ -1071,9 +1071,10 @@ function save_and_draw_cache_image(canvas, state){
 	var elements = reset_cache();
 	var canvas_hidden = elements[0]; 
 	var spy_ctx = elements[1];
-	//var img = reset_image(state.display);
 	var spy_img;
 	Caman(canvas_hidden, reset_image(state.display), function () {
+	//PROBLEM FOR LOURDES STARTS HERE
+	//HOUDINI
 		this.brightness(state.brightness);
 		console.log('bright');
 		this.stackBlur(state.blur);
@@ -1096,21 +1097,17 @@ function save_and_draw_cache_image(canvas, state){
 			
 			$('.scb_s_microscope_status').text(state.action);
 			state.cache = spy_img.src ;
-
 			state.cache_brightness = state.brightness;
 			state.cache_blur = state.blur;
-			
 			document.documentElement.style.overflow='scroll';
-
 			draw_lens('y', 0, state, document.getElementsByTagName("canvas")[0]);			
 		});
 		console.log('rendering...');
 		state.action = 'rendering';
-				var progress_icon = document.createElement('img');
+		var progress_icon = document.createElement('img');
 	   	progress_icon.src = '../../../images/homepage/ajax_loader.gif';
 	   	progress_icon.style.marginLeft = '50%';
 	   	progress_icon.id = 'lens_pending';
-
 	   	$('.scb_s_microscopy_samples_slide_area').append(progress_icon);
 		$('.scb_s_microscope_status').text(state['action']);	
 
