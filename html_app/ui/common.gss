@@ -133,7 +133,7 @@ div#main {
 	background: #d5dce4;
 	margin-right: 10px;
 	height: 24px;
-	width:133px;
+	width:140px;
 	text-align:center;
 	padding: 3px 9px 3px 12px;
 }

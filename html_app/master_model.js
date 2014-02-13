@@ -4451,8 +4451,8 @@ var __microscopy_test = {
 
 var __assignment_706_2014 = {
         id: 'assignment_706_2014',
-        name: '7.06 Spring 2014',
-        course: '7.06',
+        name: 'Quiz 3',
+        course: '7.06 Spring 2014',
     	course_name: 'Prototypes',
         description: 'Microscopy Test of images',
         experiments: {},

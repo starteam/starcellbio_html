@@ -121,7 +121,7 @@ function setStatus(){
 
 function changeStatus(){
 	var input = document.getElementById('course_code_input').value.toLowerCase();
-	var code_values = ['starx', '7.02', '7.06', 'bio52', 'usability'];
+	var code_values = ['starx', '7.02', '7.06', 'bio52', 'usability', '7.06 spring 2014'];
 	for(var x = 0; x < code_values.length; x++){
 		if(input == code_values[x]){
 			document.getElementById('code_status').innerHTML = "<span style='color:green'>&#9745; </span>&nbsp; This is a valid code. You may create an account."
