@@ -564,7 +564,7 @@ font-size: 12px;
 position: relative;
 left: 14px;
 height: 106px;
-width: 658px;
+width: 603px;
 top:84px;
 z-index: 56;
 }
@@ -578,7 +578,7 @@ z-index: 56;
 	left: 19px;
 	height: 106px;
 	z-index: 50;
-	width: 646px;
+	width: 604px;
 	top:87px;
 }
 
@@ -637,17 +637,6 @@ width: 89px;
 }
 
 
-.scb_s_microscopy_tab_content{
-	margin-top: -27px;
- 	background-color: #FFFFFF;
- 	background-image: none;
- 	min-height: 225px;
- 	width: 895px !important;
- 	padding: 0px;
- 	padding-bottom: 17px;
- 	margin-bottom: 10px;
- 	border: 1px solid #97a4ad;
-}
 
 
 
@@ -761,9 +750,12 @@ width: 89px;
 	margin-top: -27px;
  	background-color: #FFFFFF;
  	background-image: none;
- 	min-height: 439px;
- 	width: 910px;
+ 	
+ 	width: 895px !important;
+ 	min-height: 676px;
  	padding: 0px;
+ 	
+ 	border: 1px solid #97a4ad;
  	padding-bottom: 10px;
  	margin-bottom: 10px;
 }
@@ -845,12 +837,12 @@ width: 89px;
 
 .scb_microscopy_progress_2{
 	position: relative;
-	left: 188px;
+	left: 177px;
 }
 
 .scb_microscopy_progress_3{
 	position: relative;
-	left: 417px;
+	left: 396px;
 
 }
 
@@ -1057,6 +1049,7 @@ outline: none;
 
 #fblurdown{
 position: absolute;
+
 right: 6px;
 bottom: 57px;
 background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Normal.png');
@@ -1067,6 +1060,81 @@ width: 25px;
 outline: none;
 
 }
+
+
+
+
+
+.scb_s_microscopy_brightness_focus_middle{
+position: absolute;
+right: 48px;
+top: 99px;
+}
+
+#brightup{
+position: absolute;
+right: 25px;
+top: 96px;
+background-image: url('../../../images/microscopy/Brightness/TopArrow_Normal.png');
+background-repeat: no-repeat;
+background-origin: content-box;
+height: 18px;
+width: 25px;
+outline: none;
+
+}
+
+.scb_s_experiment_setup_list > b{
+	font-family: sourcesanspro-semibold;
+}
+
+
+#brightdown{
+position: absolute;
+right: 61px;
+top: 97px;
+background-image: url('../../../images/microscopy/Brightness/BottomArrow_Normal.png');
+background-repeat: no-repeat;
+background-origin: content-box;
+height: 18px;
+width: 25px;
+outline: none;
+
+}
+
+
+#brightup:hover{
+
+background-image: url('../../../images/microscopy/Brightness/TopArrow_Hover.png');
+
+}
+
+
+#brightdown:hover{
+background-image: url('../../../images/microscopy/Brightness/BottomArrow_Hover.png');
+
+}
+
+#brightup:disabled{
+background-image: url('../../../images/microscopy/Brightness/TopArrow_Gray.png');
+
+}
+
+
+#brightdown:disabled{
+background-image: url('../../../images/microscopy/Brightness/BottomArrow_Gray.png');
+
+}
+
+
+
+
+
+
+
+
+
+
 
 .scb_s_microscopy_tight_focus_middle{
 position: absolute;

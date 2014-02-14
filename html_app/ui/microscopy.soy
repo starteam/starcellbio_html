@@ -250,18 +250,18 @@
 <div class = 'scb_s_microscopy_slide_prep_instructions'>
 
 	<ul class='scb_s_experiment_setup_list'>
-   <li>To prepare a sample for microscopy, click the checkbox to the left of each sample name or click <b>SELECT ALL</b> to select all samples</li>
+   <li>To prepare a sample for microscopy, click the checkbox to the left of each sample name or click <b>SELECT ALL</b> to select all samples.</li>
    <li>Select the type of microscopy analysis you would like to perform by selecting the appropriate Slide type and conditions, when appropriate.</li>
    <li>Note: The microscopy experimental technique in StarCellBio draws upon real microscopy images. Not all slide types and conditions may be available for each sample in your experiment.</li>
    </ul>
    </div>
 
 
-<div class='scb_s_microscopy_samples_container' style='{if length($rows) >=12}  height: 306px;	{else} height:auto;	{/if}'>
+<div class='scb_s_microscopy_samples_container' style='{if length($rows) >=12}  height: 342px;	{else} height: 342px;		{/if}'>
 
 
 
-<div class='scb_s_western_blot_samples_table'  style='{if length($rows) >=12} height: 216px;   min-height: 300px;  {else} 	height:auto;{/if}'>
+<div class='scb_s_western_blot_samples_table'  style='{if length($rows) >=12} height: 330px;   min-height: 330px;  {else} 	height: 330px; {/if}'>
     <table>
         <thead class='scb_s_microscopy_samples_table_head'>
         <td class='scb_s_microscopy_samples_table_heading m_sample_prep_select scb_s_experiment_setup_table_border'>Select</td>
@@ -405,10 +405,8 @@
 <div class = 'scb_s_microscopy_prepare_slide_instructions'>
 
 	<ul class='scb_s_experiment_setup_list'>
-   <li>To view a particular sample, select the sample name in the Samples window. The sample will be loaded onto the microscope and the image will appear on the right.</li>
-   <li>Use the microscope controls to manipulate the image.</li>
    <li>Note: Not all microscope controls will be relevant for each image.</li>
-   <li>To save the microscope settings for a particular microscope image, click <b>SAVE IMAGE</b>. The microscope settings for only that particular microscope image will be saved when navigating between samples on the microscope.</li>
+   <li>To save the microscope settings for a specific image, click <b>SAVE IMAGE</b>. The microscope settings will be saved when navigating away from this image.</li>
    </ul>
 </div>
 <div class='scb_s_microscopy_samples_area'>
@@ -524,10 +522,10 @@
 			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.light_on}checked='checked'{else}{/if} >
     </div>
     <div class = 'scb_s_microscopy_lens_controls_section_3'>
-    				<span class="scb_s_microscopy_brightness_label"></span><div class='scb_s_microscopy_brightness_slider'></div>
-    				<img class='scb_s_microscopy_black_icon' src='images/microscopy/Brightness_Slider_Dark.jpg'/>
-    				<img class='scb_s_microscopy_white_icon' src='images/microscopy/Brightness_Slider_Light.png'/>
-    			
+    				<span class="scb_s_microscopy_brightness_label"></span>
+    				<button class ='scb_s_micro_arrows' id='brightdown'></button>
+					<img class='scb_s_microscopy_brightness_focus_middle' src = 'images/microscopy/Brightness/Brightness_Middle.png'/>
+					<button class ='scb_s_micro_arrows' id='brightup'></button>
     </div>
     
     <div class = 'scb_s_microscopy_lens_controls_section_4'>
@@ -629,7 +627,7 @@
 		
 	{else}
 	{if length(keys($kinds)) != 1}
-	<option selected="selected" disabled="disabled" value=''>Pick Slide Type</option>
+	<option selected="selected" disabled="disabled" value=''>Select Analysis</option>
 	{/if}
 	{if $lane.cell_treatment.cell_line == $assignment.template.model.microscopy.valid[0] and $lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id == $assignment.template.model.microscopy.valid[1]}
 		{foreach $k in keys($assignment.template.slide_parser[$lane.cell_treatment.treatment_list.list[0].collection_id])}	

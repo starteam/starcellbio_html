@@ -141,10 +141,10 @@ Progress bar
 				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step>1 or  $last_step > 0}scb_s_experiment_step_visited{/if} {if $step==1 }scb_s_experiment_step_selected{/if}' aria-label='Experiment Design' aria-disabled='{if $step > 1 or  $last_step > 0 or $step==1 }false{else}true{/if}' role ='button'>
 
 					{if $step>1 or  $last_step > 0}
-					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >DESIGN</a>
+					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >1. DESIGN</a>
 
 					{else}
-					DESIGN
+					1. DESIGN
 					{/if}
 					
 					
@@ -161,10 +161,10 @@ Progress bar
 					
 					
 					{if $step>2 or $last_step > 3}
-					<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >SETUP & RUN</a>
+					<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >2. SETUP & RUN</a>
 						
 					{else}
-					SETUP & RUN
+					2. SETUP & RUN
 					{/if}
 					<div class="arrow-setup-outer">
 					<div class="arrow-down-setup {if $step>2 or $last_step > 3}arrow-down-setup-visited{/if} {if $step==2 or $step==3 }arrow-down-setup-selected{/if}"></div>
@@ -179,10 +179,10 @@ Progress bar
 
 					
 					{if $step>3 or   $last_step >4}
-					<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >SELECT TECHNIQUE</a>
+					<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}' >3. SELECT TECHNIQUE</a>
 
 					{else}
-					SELECT TECHNIQUE
+					3. SELECT TECHNIQUE
 					{/if}
 					{if $step>3 }
 						<div class="arrow-down-select"></div>

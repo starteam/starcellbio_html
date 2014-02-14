@@ -213,7 +213,7 @@ div#main {
   margin-bottom: 10px;
 }
 .scb_s_experiment_step_design {
-  width: 76px;
+  width: 77px;
   left: 0;
   border-top-left-radius: 8px;
   height: inherit;
@@ -221,10 +221,10 @@ div#main {
   border-bottom-left-radius: 8px;
 }
 .scb_s_experiment_step_setup_and_run {
-  width: 118px;
+  width: 125px;
 }
 .scb_s_experiment_step_select_technique {
-  width: 162px;
+  width: 178px;
 }
 .scb_s_experiment_step_text>a {
   color: white;
@@ -261,7 +261,7 @@ div#main {
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 8px solid white;
-  left: 97px;
+  left: 98px;
   top: 0;
   z-index: 56;
   position: absolute;
@@ -272,12 +272,12 @@ div#main {
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 8px solid white;
-  left: 139px;
+  left: 146px;
   top: 0;
   z-index: 56;
   position: absolute;
 }
-.arrow-down-design {
+.arrow-down-design, .arrow-down-setup {
   width: 0;
   height: 0;
   border-top: 20px solid transparent;

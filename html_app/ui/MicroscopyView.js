@@ -135,9 +135,11 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	
 	
 	if(state.slide_type != 'IF' && !state.microscopy.light_on && !state.microscopy.laser_on){
+		current_slides = [];
 		init_wb('../images/microscopy/black.jpg');
 	}
 	else if(state.slide_type != 'IF' && state.microscopy.light_on && !state.microscopy.laser_on){
+		current_slides = [];
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, false, draw, state.microscopy_lane.lens_map.src );
@@ -150,11 +152,13 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 			}
 	}
 	else if(state.slide_type != 'IF' && !state.microscopy.light_on && state.microscopy.laser_on){
+		current_slides = [];
 		init_wb('../images/microscopy/black.jpg');
 
 	}
 	
 	else if(state.slide_type != 'IF' && state.microscopy.light_on && state.microscopy.laser_on){
+		current_slides = [];
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, false, draw, state.microscopy_lane.lens_map.src );
@@ -802,15 +806,33 @@ function draw(state){
 		if(state.action =='rendering'){
 				console.log('nope');
 		}
-		else
+		else{
+		if(state.brightness >=100){
+				$('#brightup').prop('disabled', true);
+		}
+		else{
+				$('#brightup').prop('disabled', false);
+				$('#brightdown').prop('disabled', false);
+
+		}
 		modify_state_brightness(5, state);
+		}
 	});
 	$('#brightdown').click(function(){
 		if(state.action =='rendering'){
 				console.log('nope');
 		}
-		else
+		else{
+		if(state.brightness <=-100){
+				$('#brightdown').prop('disabled', true);
+		}
+		else{
+				$('#brightup').prop('disabled', false);
+				$('#brightdown').prop('disabled', false);
+
+		}
 		modify_state_brightness(-5, state);
+		}
 	});
 	$('#blurup').click(function(){
 		if(state.action =='rendering'){
@@ -1133,7 +1155,7 @@ function modify_state_brightness(addition, state){
 	var context = elements[1];
 	//state['brightness'] = state['brightness'] + addition;
 	
-	state.brightness =  addition;
+	state.brightness =  state.brightness + addition;
 	if(state.brightness >= 100)
 		state.brightness = 100;
 	else if (state.brightness <=-100)
