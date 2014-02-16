@@ -4498,7 +4498,7 @@ var __assignment_706_2014 = {
                     '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
                     '%COLLECTION%': {attr: ['treatment_list', 'list', '0', 'collection_id'], map:['collections', '%KEY%', 'name']}
                 }
-            }
+            },
                 add_multiple_dialog: {
                     'wt': {
                         title: '<b>Strain:</b> Wild Type',
