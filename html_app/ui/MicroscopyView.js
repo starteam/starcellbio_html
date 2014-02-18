@@ -932,6 +932,7 @@ function clear_canvas(ctx, canvas){
 }
 
 function reset_cache(){
+	console.info( "RESET_CACHE");
 	var old_canvas = document.getElementById('spy');
 	old_canvas.parentNode.removeChild(old_canvas);
 	var new_canvas = document.createElement('canvas');
@@ -947,6 +948,7 @@ function reset_cache(){
 	return [new_canvas, ctx];	
 }
 function reset_canvas(){
+	console.info( "RESET_CANVAS");
 	var old_canvas = document.getElementById('lens');
 	var width = old_canvas.width;
 	var height = old_canvas.height;
@@ -1094,7 +1096,8 @@ function save_and_draw_cache_image(canvas, state){
 	var canvas_hidden = elements[0]; 
 	var spy_ctx = elements[1];
 	var spy_img;
-	Caman(canvas_hidden, reset_image(state.display), function () {
+	var my_img = reset_image(state.display);
+	Caman(canvas_hidden, my_img, function () {
 	//PROBLEM FOR LOURDES STARTS HERE
 	//HOUDINI
 		this.brightness(state.brightness);
@@ -1135,7 +1138,7 @@ function save_and_draw_cache_image(canvas, state){
 
 	});
 	
-	spy_ctx.drawImage(reset_image(state.display), 0, 0);
+	spy_ctx.drawImage(my_img, 0, 0);
 	canvas.width = scb.ui.static.MicroscopyView.LENS;
 	canvas.height = scb.ui.static.MicroscopyView.LENS;
 	ctx.beginPath();
@@ -1166,7 +1169,8 @@ function modify_state_brightness(addition, state){
 	console.log(state.blur);
 	console.log('addition');
 	console.log(addition);
-	Caman(canvas, reset_image(state.display), function () {
+	var my_img = reset_image(state.display);
+	Caman(canvas, my_img, function () {
 		this.brightness(state.brightness);
 		this.stackBlur(state.blur);
 		this.render(function(){
@@ -1193,7 +1197,7 @@ function modify_state_brightness(addition, state){
 	context.beginPath();
 	context.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 	context.clip();	
-	context.drawImage(reset_image(state.display), state.xparam, state.yparam);
+	context.drawImage(my_img, state.xparam, state.yparam);
 
 }
 
@@ -1638,6 +1642,7 @@ function init_wb(image_source){
 			ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 			ctx.clip();
 			ctx.drawImage(img, 0, 0);
+			ctx.restore();
 		}
 	}
 
@@ -1690,6 +1695,7 @@ function init_wb_mod(state, image_source){
 			ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 			ctx.clip();
 			ctx.drawImage(img, 0, 0);
+			ctx.restore();
 		}
 	}
 
