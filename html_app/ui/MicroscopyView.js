@@ -1352,6 +1352,8 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
         scb.ui.static.MicroscopyView.scb_s_microscopy_add_microscopy(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_save_button', function (e, ui) {
+    var parsed = scb.ui.static.MicroscopyView.parse(this);
+        	parsed.experiment.last_scroll=document.body.scrollTop;
         draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
     });
     

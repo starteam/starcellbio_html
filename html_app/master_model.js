@@ -4444,11 +4444,6 @@ var __microscopy_test = {
 		}
     ;
 
-
-
-
-
-
 var __assignment_706_2014 = {
         id: 'assignment_706_2014',
         name: 'Quiz 3',
@@ -4473,7 +4468,7 @@ var __assignment_706_2014 = {
                                 {kind: 'drug', title: 'Treatment', editable: true},
                                 {kind: 'concentration', title: 'Treatment Concentration/Dose', editable: false},
                         		{kind: "start", title: "Treatment Start Time", editable: false},
-                        		{kind: "collection", title: "Collection Timepoints", editable: true}
+                        		{kind: "collection", title: "Collection Timepoints", editable: false}
                             ]
                         },
                         {kind: 'actions', title: 'Actions'}
@@ -4484,8 +4479,8 @@ var __assignment_706_2014 = {
 						title: 'New row',
 						cell_line: 'p+',
 						treatment_list: {list: [
-							{schedule_value: 3600*24*7*7, collection_id: '6 m', drug_list: {list: [
-								{drug_id: 'ac', concentration_id: '108'}
+							{schedule_value: 0, collection_id: 0, drug_list: {list: [
+								{drug_id: 'ac', concentration_id: 0}
 							]},  temperature: '22'
 							}
 						]}
@@ -4501,19 +4496,19 @@ var __assignment_706_2014 = {
             },
                 add_multiple_dialog: {
                     'wt': {
-                        title: '<b>Strain:</b> Wild Type',
+                        title: '<b>Strain:</b> WT-GFP',
                         headings: [
-                            'Treatment', 'Temperature', '- PP1', '+ PP1'
+                            'Growth media only', 'Ligand growth media', 'Inhibitor growth media'
                         ],
                         rows: [
                             {
                                 cells: [
-                                    {kind: 'text', text: 'Growth Media'},
-                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
-                                    {kind: 'checkbox', name: 'NOPP1'},
-                                    {kind: 'checkbox', name: 'PP1'}
+                                    {kind: 'text', text: 'WT-GFP'},
+                                    {kind: 'checkbox', name: "G"},
+                                    {kind: 'checkbox', name: 'L'},
+                                    {kind: 'checkbox', name: 'I'}
                                 ],
-                                treatment_id: 'media_only,25',
+                                treatment_id: 'media_only',
                                 cell_treatments: {
                                     PP1: [
                                         {cell_line: 'wt',
@@ -4521,7 +4516,7 @@ var __assignment_706_2014 = {
                                                 {drug_list: {list: [
                                                     {drug_id: 'nc', concentration_id: '0'},
                                                     {drug_id: 'pp1', concentration_id: '1u'}
-                                                ]}, temperature: '25'
+                                                ]}, temperature: '22'
                                                 }
                                             ]}}
                                     ], NOPP1: [
@@ -4529,7 +4524,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {drug_list: {list: [
                                                     {drug_id: 'nc', concentration_id: '0'}
-                                                ]}, temperature: '25'
+                                                ]}, temperature: '22'
                                                 }
                                             ]}}
                                     ]
@@ -4899,6 +4894,39 @@ var __assignment_706_2014 = {
 							id: 'pfl',
 							title: 'p53fl/fl;Rbfl/fl',
 							cell_line: 'pfl'
+						},
+						{
+							id: 'gfp',
+							name: 'WT-GFP'
+						},
+						{	id: 'gfpA',
+							name: 'WT-GFP-Protein A'
+						},
+						{
+							id: 'gfpB',
+							name: 'WT-GFP-Protein B'
+						},
+						{
+							id: 'gfpC', 
+							name: 'WT-GFP-Protein C'
+						},
+						{
+							id: 'gfpD',
+							name: 'WT-GFP-Protein D'
+						},
+						{	id: 'gfpK', 
+							name: 'WT-GFP-Kinase'
+						},
+						{	id: 'gfpH',
+							name: 'WT-GFP-Histone H2B'
+						},
+						{
+							id: 'gfp100', 
+							name: 'WT-GFP-p100'
+						},
+						{
+							id: 'gfpTD',
+							name: 'WT-GFP-pTD'
 						}
 					],
 					treatment_protocol_list: [
@@ -4906,9 +4934,9 @@ var __assignment_706_2014 = {
 							id: 'ADC',
 							title: 'Adenovirus-Cre',
 							treatment_list: {list: [
-								{schedule_value: 5000, collection_id: '6 m', schedule: 'immediately', // start
+								{schedule_value: 0, collection_id: 0, schedule: 'immediately', // start
 									drug_list: {list: [
-										{drug_id: 'ac', concentration_id: 108}
+										{drug_id: 'ac', concentration_id: 0}
 									]}}
 							]}
 						},
@@ -4916,9 +4944,9 @@ var __assignment_706_2014 = {
 							id: 'ADE',
 							title: 'Adenovirus-Empty',
 							treatment_list: {list: [
-								{schedule_value: 5000, collection_id: '6 m',schedule: 'immediately', // start
+								{schedule_value: 0, collection_id: 0,schedule: 'immediately', // start
 									drug_list: {list: [
-										{drug_id: 'ae', concentration_id: '108'}
+										{drug_id: 'ae', concentration_id: 0}
 									]}}
 							]}
 						}
@@ -4929,24 +4957,17 @@ var __assignment_706_2014 = {
        			
        			add_new_row_instructions: 'On this page, set up your experiment to treat the wild-type worms with the four new drugs',
        		collections:{
-       			'3 m': {
-						name: '3 months'
-       			},
-       			'6 m': {
-						name: '6 months'
-       			},
-       			'1 yr': {
-						name: '1 year'
+       			0: {
+						name: ''
        			}
        		},
 
                 
             concentrations: {
-
-				'108': {
-					name: '10^8 PFU',
-					value: 1000
-				}
+            	0: {
+                name: '',
+                value: 0
+            	}
             },
             drugs: {
 				'ac': {
@@ -4965,11 +4986,32 @@ var __assignment_706_2014 = {
             },
 
             cell_lines: {
-				'p+': {
-					name: 'p53+/+;Rb+/+'
+				'gfp': {
+					name: 'WT-GFP'
 				},
-				'pfl': {
-					name: 'p53fl/fl;Rbfl/fl'
+				'gfpA': {
+					name: 'WT-GFP-Protein A'
+				},
+				'gfpB': {
+					name: 'WT-GFP-Protein B'
+				},
+				'gfpC': {
+					name: 'WT-GFP-Protein C'
+				},
+				'gfpD': {
+					name: 'WT-GFP-Protein D'
+				},
+				'gfpK': {
+					name: 'WT-GFP-Kinase'
+				},
+				'gfpH': {
+					name: 'WT-GFP-Histone H2B'
+				},
+				'gfp100': {
+					name: 'WT-GFP-p100'
+				},
+				'gfpTD': {
+					name: 'WT-GFP-pTD'
 				}
 
             },
@@ -4979,11 +5021,6 @@ var __assignment_706_2014 = {
             lysate_kinds: {
                 'whole': {
                     name: 'Whole Cell'
-                }
-            },
-            facs_kinds: {
-                'whole': {
-                    name: 'PI'
                 }
             },
             micro_kinds: {
@@ -5065,7 +5102,7 @@ var __assignment_706_2014 = {
         		'img45': 'images/microscopy/assignment_706_2014/pm34-2.jpg'
         	},
             slide_parser:{
-                	'default':{
+                	0:{
                 		'Dye':{
 							'HnE':{
 							'1': [{
@@ -5521,47 +5558,6 @@ var __assignment_706_2014 = {
                         ]
                     }
                 },
-                facs: {
-                    'dna': {
-                        'parser_simple': [
-                            {
-                                match: [],
-                                shape: 'normal'
-                            },
-                            {
-                                match: ['cell_line', 'temperature'],
-                                cell_line: 'm1',
-                                temperature: 40,
-                                shape: 'g2-block'
-                            },
-                            {
-                                match: ['cell_line', 'temperature'],
-                                cell_line: 'm2',
-                                temperature: 40,
-                                shape: 'S-block'
-                            },
-                            {
-                                match: ['cell_line', 'drug_id'],
-                                cell_line: 'wt',
-                                drug_id: 'Nocodazole',
-                                shape: 'g2-block'
-                            },
-                            {
-                                match: ['cell_line', 'drug_id'],
-                                cell_line: 'wt',
-                                drug_id: 'Alpha',
-                                shape: 'alpha-block'
-                            },
-                            {
-                                match: ['cell_line', 'drug_id'],
-                                cell_line: 'wt',
-                                drug_id: 'Hydroxyurea',
-                                shape: 'S-block'
-                            }
-                        ]
-
-                    }
-                },
                 microscopy: {
                 	'valid': ['pfl', 'ac'],
                 	'slide': {
@@ -5575,7 +5571,7 @@ var __assignment_706_2014 = {
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
                 			cell_line: 'pfl',
                 			drug_id: 'ac',
-                			collection_id: '3 m',
+                			collection_id: 0,
                 			kind: 'Dye',
                 			conditions: 'HnE'
                 		},
@@ -5583,7 +5579,7 @@ var __assignment_706_2014 = {
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
                 			cell_line: 'pfl',
                 			drug_id: 'ac',
-                			collection_id: '6 m',
+                			collection_id: 0,
                 			kind: 'Dye',
                 			conditions: 'HnE'
                 		},
@@ -5591,7 +5587,7 @@ var __assignment_706_2014 = {
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
                 			cell_line: 'pfl',
                 			drug_id: 'ac',
-                			collection_id: '6 m',
+                			collection_id: 0,
                 			kind: 'IHC',
                 			conditions: 'secondary'
                 		},
@@ -5599,7 +5595,7 @@ var __assignment_706_2014 = {
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
                 			cell_line: 'pfl',
                 			drug_id: 'ac',
-                			collection_id: '6 m',
+                			collection_id: 0,
                 			kind: 'IHC',
                 			conditions: 'ki67'
                 		},
@@ -5607,7 +5603,7 @@ var __assignment_706_2014 = {
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
                 			cell_line: 'pfl',
                 			drug_id: 'ac',
-                			collection_id: '1 yr',
+                			collection_id: 0,
                 			kind: 'Dye',
                 			conditions: 'HnE'
                 		},
@@ -5615,7 +5611,7 @@ var __assignment_706_2014 = {
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
                 			cell_line: 'pfl',
                 			drug_id: 'ac',
-                			collection_id: '1 yr',
+                			collection_id: 0,
                 			kind: 'IF',
                 			conditions: 'rgb'
                 		},
@@ -5623,7 +5619,7 @@ var __assignment_706_2014 = {
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
                 			cell_line: 'pfl',
                 			drug_id: 'ac',
-                			collection_id: '1 yr',
+                			collection_id: 0,
                 			kind: 'IHC',
                 			conditions: 'NFIB'
                 		}

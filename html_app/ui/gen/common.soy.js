@@ -44,13 +44,13 @@ scb_common.contact_overlay = function(opt_data, opt_sb) {
 
 scb_common.format_time_detailed_w_sec = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append((opt_data.days != 0) ? ' ' + soy.$$escapeHtml(opt_data.days) + ' ' + ((opt_data.days > 1) ? 'd' : 'd') : '', (opt_data.hours != 0) ? ' ' + soy.$$escapeHtml(opt_data.hours) + ' ' + ((opt_data.hours > 1) ? 'h' : 'h') : '', (opt_data.minutes != 0) ? ' ' + soy.$$escapeHtml(opt_data.minutes) + ' ' + ((opt_data.minutes > 1) ? 'min' : 'min') : '', (opt_data.seconds != 0) ? ' ' + soy.$$escapeHtml(opt_data.seconds) + ' ' + ((opt_data.seconds > 1) ? 'sec' : 'sec') : '', (opt_data.now) ? '0 sec' : '');
+  output.append((opt_data.days == 0 && opt_data.hours == 0 && opt_data.minutes == 0 && opt_data.seconds == 0) ? '' : ((opt_data.days != 0) ? ' ' + soy.$$escapeHtml(opt_data.days) + ' ' + ((opt_data.days > 1) ? 'd' : 'd') : '') + ((opt_data.hours != 0) ? ' ' + soy.$$escapeHtml(opt_data.hours) + ' ' + ((opt_data.hours > 1) ? 'h' : 'h') : '') + ((opt_data.minutes != 0) ? ' ' + soy.$$escapeHtml(opt_data.minutes) + ' ' + ((opt_data.minutes > 1) ? 'min' : 'min') : '') + ((opt_data.seconds != 0) ? ' ' + soy.$$escapeHtml(opt_data.seconds) + ' ' + ((opt_data.seconds > 1) ? 'sec' : 'sec') : '') + ((opt_data.now) ? '0 sec' : ''));
   return opt_sb ? '' : output.toString();
 };
 
 
 scb_common.format_time_detailed = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append((opt_data.months != 0) ? ' ' + soy.$$escapeHtml(opt_data.months) + ' ' + ((opt_data.months > 1) ? 'mths' : 'mth') : '', (opt_data.weeks != 0) ? ' ' + soy.$$escapeHtml(opt_data.weeks) + ' ' + ((opt_data.weeks > 1) ? 'wks' : 'wk') : '', (opt_data.days != 0) ? ' ' + soy.$$escapeHtml(opt_data.days) + ' ' + ((opt_data.days > 1) ? 'd' : 'd') : '', (opt_data.hours != 0) ? ' ' + soy.$$escapeHtml(opt_data.hours) + ' ' + ((opt_data.hours > 1) ? 'h' : 'h') : '', (opt_data.minutes != 0) ? ' ' + soy.$$escapeHtml(opt_data.minutes) + ' ' + ((opt_data.minutes > 1) ? 'min' : 'min') : '', (opt_data.now) ? '0 sec' : '');
+  output.append((opt_data.weeks == 0 && opt_data.months == 0 && opt_data.days == 0 && opt_data.hours == 0 && opt_data.minutes == 0) ? '' : ((opt_data.months != 0) ? ' ' + soy.$$escapeHtml(opt_data.months) + ' ' + ((opt_data.months > 1) ? 'mths' : 'mth') : '') + ((opt_data.weeks != 0) ? ' ' + soy.$$escapeHtml(opt_data.weeks) + ' ' + ((opt_data.weeks > 1) ? 'wks' : 'wk') : '') + ((opt_data.days != 0) ? ' ' + soy.$$escapeHtml(opt_data.days) + ' ' + ((opt_data.days > 1) ? 'd' : 'd') : '') + ((opt_data.hours != 0) ? ' ' + soy.$$escapeHtml(opt_data.hours) + ' ' + ((opt_data.hours > 1) ? 'h' : 'h') : '') + ((opt_data.minutes != 0) ? ' ' + soy.$$escapeHtml(opt_data.minutes) + ' ' + ((opt_data.minutes > 1) ? 'min' : 'min') : '') + ((opt_data.now) ? '0 sec' : ''));
   return opt_sb ? '' : output.toString();
 };

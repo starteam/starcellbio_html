@@ -616,6 +616,7 @@ body.dragging, body.dragging * {
   color: #189689;
   font-size: 15pt;
   background-color: rgba(255,255,255,0);
+  display: none;
 }
 .scb_s_controls_note {
   font-size: 9pt;
