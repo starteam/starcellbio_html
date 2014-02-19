@@ -1,4 +1,4 @@
-{namespace microscopy_test}
+{namespace mit706s14}
 
 /**
 @param template
@@ -13,11 +13,7 @@
 
     <div class='scb_mit706s16_inner_dialog_body'>
         {foreach $cell_line in keys($template.ui.add_multiple_dialog)}
-        {if $template.ui.add_multiple_dialog[$cell_line].title}
-        <h1>{$template.ui.add_multiple_dialog[$cell_line].title|noAutoescape}</h1>
-        {else}
-        <h1>{$template.cell_lines[$cell_line].name}</h1>
-        {/if}
+
         <table class="scb_s_experiment_setup_table">
             <thead class="scb_s_experiment_setup_table_head">
             {foreach $heading in $template.ui.add_multiple_dialog[$cell_line].headings}
@@ -37,7 +33,7 @@
                     {if $cell.kind == 'select'}
                     HERE GOES SELECT
                     <select assignment='{$assignment.id}' experiment_id='{$experiment.id}'
-                            treatment_id='{$rows.treatment_id}' cell_line='{$cell_line}' cell_line='{$cell_line}'>
+                            treatment_id='{$cell.treatment_id}' cell_line='{$cell_line}' cell_line='{$cell_line}'>
                         <option disabled="disabled">Please select</option>
                         {foreach $key in keys($template[$cell.field])}
                         <option value='{$template[$cell.field][$key]}'>{$template[$cell.field][$key].name}</option>
@@ -46,7 +42,7 @@
                     {/if}
                     {if $cell.kind == 'checkbox'}
                     <input type="checkbox" name="{$cell.name}" assignment_id='{$assignment.id}'
-                           experiment_id='{$experiment.id}' treatment_id='{$rows.treatment_id}' cell_line='{$cell_line}'>
+                           experiment_id='{$experiment.id}' treatment_id='{$cell.treatment_id}' cell_line='{$cell_line}'>
                     {/if}
                 </td>
                 {/foreach}

@@ -1,7 +1,7 @@
-var decusability = decusability || {};
-decusability.static = decusability.static || {};
+var mit706s14 = mit706s14 || {};
+mit706s14.static = mit706s14.static || {};
 
-decusability.static.scb_mit706s16_inner_dialog_add = function (element, dialog, state) {
+mit706s14.static.scb_mit706s16_inner_dialog_add = function (element, dialog, state) {
 
     $('input[type="checkbox"]:checked', dialog).each(function (e) {
         var element = $(this);
@@ -19,7 +19,7 @@ decusability.static.scb_mit706s16_inner_dialog_add = function (element, dialog, 
         });
 
         var template = parsed.assignment.template;
-        var rows = template.ui.add_multiple_dialog[cell_line].rows;
+        var rows = template.ui.add_multiple_dialog[cell_line].rows.cell_treatments;
         var row = _.find(rows, function (eh) {
             return eh.treatment_id == treatment_id;
         });
@@ -35,7 +35,7 @@ decusability.static.scb_mit706s16_inner_dialog_add = function (element, dialog, 
 
 }
 
-decusability.register = function (dialog, state) {
+mit706s14.register = function (dialog, state) {
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_dialog', function (e) {
         var container = dialog;
         if (container.has(e.target).length === 0) {
@@ -50,7 +50,7 @@ decusability.register = function (dialog, state) {
         scb.utils.call_back(state.close);
     });
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_add', function (e) {
-        decusability.static.scb_mit706s16_inner_dialog_add(this, dialog, state);
+        mit706s14.static.scb_mit706s16_inner_dialog_add(this, dialog, state);
         $(this).focus();
     });
 
@@ -71,7 +71,7 @@ decusability.register = function (dialog, state) {
 
 }
 
-decusability.setup = function (state) {
+mit706s14.setup = function (state) {
     var workarea = state.workarea;
     var assignment = state.assignment;
     var experiment = state.experiment;
@@ -79,14 +79,14 @@ decusability.setup = function (state) {
     var onClose = state.close;
 
     var dialog = $("<div class='scb_mit706s16_dialog'></div>");
-    dialog.html(decusability.dialog({
+    dialog.html(mit706s14.dialog({
         assignment: assignment,
         experiment: experiment,
         template: template
     }));
 
     dialog.appendTo($(workarea));
-    decusability.register($(dialog), state);
+    mit706s14.register($(dialog), state);
 
     var css = scb.utils.get(state, ['source_state', 'css']);
     _.each( css , function(v,k){
