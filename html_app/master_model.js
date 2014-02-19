@@ -4494,10 +4494,11 @@ var __assignment_706_2014 = {
                 }
             },
             add_multiple_dialog: {
+
             	'gfp':{
-                        headings: [
-							'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-                        ],
+           		 headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
                         rows: [
                             {
                                 cells: [
@@ -4547,8 +4548,15 @@ var __assignment_706_2014 = {
                                             ]}}
                                     ]
                                 }
-                            },
-                            {
+                            }
+                        ]
+                    },
+				'gfpA':{
+					headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
+                    rows: [
+                    {
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Protein A'},
                   					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
@@ -4596,8 +4604,14 @@ var __assignment_706_2014 = {
                                             ]}}
                                     ]
                                 }
-                            },
-                            {
+                            }
+                    ]
+				},
+				'gfpB':{
+					headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
+                    rows: [ {
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Protein B'},
                   					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
@@ -4645,8 +4659,15 @@ var __assignment_706_2014 = {
                                             ]}}
                                     ]
                                 }
-                            },
-                            {
+                            }
+                    ]
+				},
+				'gfpC':{
+					headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
+                    rows: [
+                    {
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Protein C'},
                   					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
@@ -4694,8 +4715,14 @@ var __assignment_706_2014 = {
                                             ]}}
                                     ]
                                 }
-                            },
-                            {
+                            }
+                    ]
+				},
+				'gfpD':{
+					headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
+                    rows: [{
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Protein D'},
                   					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
@@ -4743,8 +4770,14 @@ var __assignment_706_2014 = {
                                             ]}}
                                     ]
                                 }
-                            },
-                            {
+                            }
+                    ]
+				},
+				'gfpK':{					
+					headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
+                    rows: [{
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Kinase'},
                   					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
@@ -4792,8 +4825,14 @@ var __assignment_706_2014 = {
                                             ]}}
                                     ]
                                 }
-                            },
-                            {
+                            }
+                    ]
+				},
+				'gfpH':{					
+					headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
+                    rows: [{
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Histone H2B'},
                   					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
@@ -4841,8 +4880,16 @@ var __assignment_706_2014 = {
                                             ]}}
                                     ]
                                 }
-                            },
-                            {
+                            }
+                    ]
+				
+				},
+				'gfp100':{
+					headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
+                    rows: [
+                     {
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-p100'},
                   					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
@@ -4890,8 +4937,15 @@ var __assignment_706_2014 = {
                                             ]}}
                                     ]
                                 }
-                            },                            
-                            {
+                            }
+                    ]
+				
+				},
+				'gfpTD':{
+					headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
+                    rows: [{
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-pTD'},
                   					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
@@ -4941,8 +4995,10 @@ var __assignment_706_2014 = {
                                 }
                             }
 
-                        ]
-                    }
+                    ]
+				
+				}
+                    
                 }
                 
         },

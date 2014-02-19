@@ -11,7 +11,7 @@ mit706s14.dialog = function(opt_data, opt_sb) {
   var cell_lineListLen4 = cell_lineList4.length;
   for (var cell_lineIndex4 = 0; cell_lineIndex4 < cell_lineListLen4; cell_lineIndex4++) {
     var cell_lineData4 = cell_lineList4[cell_lineIndex4];
-    output.append('<table class="scb_s_experiment_setup_table"><thead class="scb_s_experiment_setup_table_head">');
+    output.append('<!--headings--><table class="scb_s_experiment_setup_table"><thead class="scb_s_experiment_setup_table_head">');
     var headingList6 = opt_data.template.ui.add_multiple_dialog[cell_lineData4].headings;
     var headingListLen6 = headingList6.length;
     for (var headingIndex6 = 0; headingIndex6 < headingListLen6; headingIndex6++) {

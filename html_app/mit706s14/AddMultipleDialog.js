@@ -19,7 +19,7 @@ mit706s14.static.scb_mit706s16_inner_dialog_add = function (element, dialog, sta
         });
 
         var template = parsed.assignment.template;
-        var rows = template.ui.add_multiple_dialog[cell_line].rows.cell_treatments;
+        var rows = template.ui.add_multiple_dialog[cell_line].rows;
         var row = _.find(rows, function (eh) {
             return eh.treatment_id == treatment_id;
         });
