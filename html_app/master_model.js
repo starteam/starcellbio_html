@@ -4486,19 +4486,18 @@ var __assignment_706_2014 = {
                 	}
                 },
             western_blot: {
-            	format: "%CELL_LINE%, %TREATMENT%, %COLLECTION%",
+            	format: "%CELL_LINE%, %TREATMENT%",
                 keys: {
                     '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
-                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
-                    '%COLLECTION%': {attr: ['treatment_list', 'list', '0', 'collection_id'], map:['collections', '%KEY%', 'name']}
+                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']}
                 }
             },
             add_multiple_dialog: {
-
-            	'gfp':{
-           		 headings: [
+				headings: [
 					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
                			],
+            	'gfp':{
+           		 
                         rows: [
                             {
                                 cells: [
@@ -4514,7 +4513,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfp',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '0',
+                                            	{collection_id: 'default',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4523,7 +4522,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfp',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4532,7 +4531,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfp',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4541,7 +4540,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfp',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4570,7 +4569,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpA',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '0',
+                                            	{collection_id: 'default',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4579,7 +4578,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpA',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4588,7 +4587,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpA',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4597,7 +4596,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpA',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4625,7 +4624,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpB',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '0',
+                                            	{collection_id: 'default',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4634,7 +4633,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpB',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4643,7 +4642,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpB',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4652,7 +4651,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpB',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4681,7 +4680,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpC',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '0',
+                                            	{collection_id: 'default',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4690,7 +4689,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpC',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4699,7 +4698,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpC',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4708,7 +4707,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpC',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4736,7 +4735,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpD',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '0',
+                                            	{collection_id: '',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4745,7 +4744,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpD',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: '',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4754,7 +4753,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpD',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: '',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4763,7 +4762,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpD',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: '',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4791,7 +4790,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpK',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '0',
+                                            	{collection_id: 'default',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4800,7 +4799,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpK',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4809,7 +4808,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpK',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4818,7 +4817,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpK',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4846,7 +4845,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpH',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '0',
+                                            	{collection_id: 'default',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4855,7 +4854,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpH',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4864,7 +4863,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpH',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4873,7 +4872,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpH',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4903,7 +4902,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfp100',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '0',
+                                            	{collection_id: 'default',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4912,7 +4911,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfp100',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4921,7 +4920,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfp100',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4930,7 +4929,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfp100',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4959,7 +4958,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpTD',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '0',
+                                            	{collection_id: 'default',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4968,7 +4967,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpTD',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4977,7 +4976,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpTD',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4986,7 +4985,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpTD',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '0',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -5005,7 +5004,7 @@ var __assignment_706_2014 = {
        			
         add_new_row_instructions: 'On this page, set up your experiment to treat the wild-type worms with the four new drugs',
 		collections:{
-			'0': {
+			'': {
 				name: ''
 			}
 		},
@@ -5072,39 +5071,53 @@ var __assignment_706_2014 = {
 			kind: 'minutes'
 		},
 		primary_anti_body: {
-			'cdk2': {
-				name: 'rabbit anti-cdk2',
-				secondary: ['r'],
-				marks: [
-					{weight: 33, intensity: 0},
-					{weight: 34, intensity: 0},
-					{weight: 35, intensity: 0}
-				],
-				gel_name: 'cdk2'
-			},
-			'cyclin': {
-				name: 'mouse anti-cyclin B',
+			'mpA': {
+				name: 'mouse anti-phospho-protein A',
 				secondary: ['m'],
 				marks: [
-					{weight: 58, intensity: 0},
+					{weight: 46, intensity: 0}
 				],
-				gel_name: 'cyclin B'
+				gel_name: 'protein A'
 			},
-			'cyclinE': {
-				name: 'mouse anti-cyclin E',
+			'mpB': {
+				name: 'mouse anti-phospho-protein B',
 				secondary: ['m'],
 				marks: [
-					{weight: 48, intensity: 0},
+					{weight: 134, intensity: 0},
 				],
-				gel_name: 'cyclin E'
+				gel_name: 'protein B'
 			},
-			'pgk1': {
-				name: 'rabbit anti-pgk1',
+			'mpC': {
+				name: 'mouse anti-phospho-protein C',
+				secondary: ['m'],
+				marks: [
+					{weight: 44, intensity: 0},
+				],
+				gel_name: 'protein C'
+			},
+			'mpD': {
+				name: 'mouse anti-phospho-protein D',
+				secondary: ['m'],
+				marks: [
+					{weight: 67, intensity: 0},
+				],
+				gel_name: 'protein D'
+			},
+			'mpX': {
+				name: 'mouse anti-phospho-kinase X',
+				secondary: ['m'],
+				marks: [
+					{weight: 74, intensity: 0},
+				],
+				gel_name: 'kinase X'
+			},
+			'mpAG': {
+				name: 'rabbit anti-GAPDH (loading control)',
 				secondary: ['r'],
 				marks: [
-					{weight: 45, intensity: 0},
+					{weight: 37, intensity: 0},
 				],
-				gel_name: 'pgk1'
+				gel_name: 'anti-GAPDH'
 			}
 		},//
 		secondary_anti_body: {
@@ -5563,69 +5576,69 @@ var __assignment_706_2014 = {
                 			
                 		},
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfp',
-                			drug_id: ['G', 'L', 'I', 'A'],
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'cytoplasm_nucleus'
                 		},             		
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfpH',
-                			drug_id: ['G', 'L', 'I', 'A'],
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'nucleus'
                 		},             		
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfp100',
-                			drug_id:['G', 'L', 'I', 'A'],
+                			drug_id:['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'cytoplasm'
                 		},               		
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfpTD',
-                			drug_id: ['G', 'L', 'I', 'A'],
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'plasma_membrane'
                 		},
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfpA',
-                			drug_id: ['G', 'I'],
+                			drug_id: ['gm', 'gmi'],
                 			phenotype: 'cytoplasm'
                 		},
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfpA',
-                			drug_id: ['L',  'A'],
+                			drug_id: ['gml',  'gmil'],
                 			phenotype: 'plasma_membrane'
                 		},
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfpB',
-                			drug_id: ['G', 'L', 'I', 'A'],
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'plasma_membrane'
                 		},
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfpC',
-                			drug_id: ['G',  'I', 'A'],
+                			drug_id: ['gm',  'gmi', 'gmil'],
                 			phenotype: 'cytoplasm'
                 		},
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfpC',
-                			drug_id: ['L'],
+                			drug_id: ['gml'],
                 			phenotype: 'nucleus'
                 		},
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfpD',
-                			drug_id: ['G', 'L', 'I', 'A'],
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'cytoplasm'
                 		},
                 		{
-                			match: ['cell_line', 'drug_id', 'phenotype'],
+                			match: ['cell_line', 'drug_id'],
                 			cell_line: 'gfpK',
-                			drug_id: ['G', 'L', 'I', 'A'],
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'cytoplasm'
                 		}
                 			

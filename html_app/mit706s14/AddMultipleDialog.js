@@ -20,10 +20,10 @@ mit706s14.static.scb_mit706s16_inner_dialog_add = function (element, dialog, sta
 
         var template = parsed.assignment.template;
         var rows = template.ui.add_multiple_dialog[cell_line].rows;
-        var row = _.find(rows, function (eh) {
-            return eh.treatment_id == treatment_id;
-        });
-        var cell_treatments_array = row.cell_treatments[name];
+//         var row = _.find(rows[0].cell_treatments, function (eh) {
+//             return eh[0].treatment_id == treatment_id;
+//         });
+        var cell_treatments_array = rows[0].cell_treatments[name];
         _.each(cell_treatments_array, function (eh) {
             parsed.experiment.cell_treatment_list.start(scb.utils.clone_and_clear(eh));
         });
@@ -66,7 +66,7 @@ mit706s14.register = function (dialog, state) {
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_select', function (e) {
         var cell_line = $(this).attr('cell_line');
         var name = $(this).attr('name');
-        $('input[type=checkbox][name="'+name+'"][cell_line="'+cell_line+'"]' , dialog).attr('checked','checked');
+        $('input[type=checkbox][name="'+name+'"]' , dialog).attr('checked','checked');
     });
 
 }

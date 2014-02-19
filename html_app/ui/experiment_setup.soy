@@ -177,7 +177,10 @@ Experiment active area
 						{if $c.kind=='cell_plate'}
 							<img src="images/setup/scb_cell_plate.png">
 						{/if}
+						{if $c.kind =='collection' and $c.title =='default'}
+						{else}
 						{$c.title}
+						{/if}
 					{/if}
 				</td>
 				{/foreach}

@@ -399,7 +399,7 @@ scb.ui.static.ExperimentSetupView.row = function (sample, headings, template, ro
                 else if (drug_index == 0 && part.kind == 'collection') {
                     row.push({
                         kind: 'collection',
-                        title: treatment.collection,
+                        title: treatment.collection_id,
                         rows: drug_list.length,
                         first_row: drug_index == 0 && treatment_index == 0,
                         treatment: treatment.id
@@ -518,7 +518,6 @@ scb.ui.static.ExperimentSetupView.save_row = function (element) {
         refresh = true;
     }
     if (collection_id) {
-    	parsed.treatment.collection = collection_id;
     	parsed.treatment.collection_id = collection_id;
     	refresh = true;
     }
@@ -620,7 +619,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
     var treatment_line = parsed.treatment.drug_list.list[0];
     var drug_id = treatment_line.drug_id;
     var concentration_id = treatment_line.concentration_id;
-    var collection_id = parsed.cell_treatment.collection;
+    var collection_id = parsed.cell_treatment.collection_id;
     var temperature = parsed.treatment.temperature;
 
 
