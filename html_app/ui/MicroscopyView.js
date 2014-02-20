@@ -122,14 +122,52 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		}
 		else{
 			current_slides = []
-			$('.scb_s_microscopy_if').prop('disabled', false);
-			$('.scb_f_microscopy_all').prop('checked', 'checked');
+			if(state.slides[0].if_type == 'red' ){
+				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
+				state.microscopy.red_enabled = true;
+				state.microscopy.blue_enabled = false;
+				state.microscopy.green_enabled = false;
+				state.microscopy.merge_enabled = false;
+				
+			$('.scb_f_microscopy_red').prop('checked', 'checked');
 			
+			
+			$('.scb_s_microscopy_red').prop('disabled', false);
+				
+				}
+			else if(state.slides[0].if_type == 'green'){
+				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
+				state.microscopy.red_enabled = false;
+				state.microscopy.blue_enabled = false;
+				state.microscopy.green_enabled = true;
+				state.microscopy.merge_enabled = false;
+				
+			$('.scb_f_microscopy_green').prop('checked', 'checked');
+				$('.scb_s_microscopy_green').prop('disabled', false);
+
+				}
+			else if(state.slides[0].if_type == 'blue'){
+				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
+				state.microscopy.red_enabled = false;
+				state.microscopy.blue_enabled = true;
+				state.microscopy.green_enabled = false;
+				state.microscopy.merge_enabled = false;
+				
+			$('.scb_f_microscopy_blue').prop('checked', 'checked');
+				$('.scb_s_microscopy_blue').prop('disabled', false);
+
+				}
+			else if(state.slides[0].if_type == 'merge'){
+				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
 				state.microscopy.red_enabled = false;
 				state.microscopy.blue_enabled = false;
 				state.microscopy.green_enabled = false;
 				state.microscopy.merge_enabled = true;
-			$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
+				
+			$('.scb_f_microscopy_all').prop('checked', 'checked');
+				$('.scb_s_microscopy_all').prop('disabled', false);
+
+			}
 		}
 	}
 	

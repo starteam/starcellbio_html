@@ -364,40 +364,92 @@ body.dragging, body.dragging * {
   z-index: 5;
 }
 .scb_f_microscopy_red {
-  height: 41px !important;
-  width: 25px !important;
-  right: 78px !important;
-  opacity: 0 !important;
-  bottom: 124px !important;
+  height: 30px !important;
+  width: 30px !important;
+  right: 94px !important;
+  bottom: 130px !important;
   position: absolute !important;
   z-index: 60;
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-image: url(../../../images/microscopy/Unselected/Filter_Red_Unselected.png);
+  background-repeat: no-repeat;
+  opacity: 1 !important;
 }
 .scb_f_microscopy_green {
-  height: 41px !important;
-  width: 26px !important;
-  right: 54px !important;
-  opacity: 0 !important;
-  bottom: 124px !important;
+  height: 30px !important;
+  width: 30px !important;
+  right: 64px !important;
+  bottom: 130px !important;
   position: absolute !important;
   z-index: 60;
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-image: url(../../../images/microscopy/Unselected/Filter_Green_Unselected.png);
+  background-repeat: no-repeat;
+  opacity: 1 !important;
 }
 .scb_f_microscopy_blue {
-  height: 41px !important;
-  width: 25px !important;
-  right: 30px !important;
-  opacity: 0 !important;
-  bottom: 124px !important;
+  height: 30px !important;
+  width: 30px !important;
+  right: 35px !important;
+  bottom: 130px !important;
   position: absolute !important;
   z-index: 60;
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-image: url(../../../images/microscopy/Unselected/Filter_Blue_Unselected.png);
+  background-repeat: no-repeat;
+  opacity: 1 !important;
 }
 .scb_f_microscopy_all {
-  height: 41px !important;
-  width: 24px !important;
+  height: 30px !important;
+  width: 30px !important;
   right: 6px !important;
   position: absolute !important;
-  bottom: 124px !important;
+  bottom: 130px !important;
   z-index: 60;
-  opacity: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-image: url(../../../images/microscopy/Unselected/Filter_All_Unselected.png);
+  background-repeat: no-repeat;
+  opacity: 1 !important;
+}
+.scb_f_microscopy_red:disabled {
+  background-image: url(../../../images/microscopy/Unavailable/Filter_Red_Unavailable.png) !important;
+  background-repeat: no-repeat !important;
+}
+.scb_f_microscopy_green:disabled {
+  background-image: url(../../../images/microscopy/Unavailable/Filter_Green_Unavailable.png) !important;
+  background-repeat: no-repeat !important;
+}
+.scb_f_microscopy_blue:disabled {
+  background-image: url(../../../images/microscopy/Unavailable/Filter_Blue_Unavailable.png) !important;
+  background-repeat: no-repeat !important;
+}
+.scb_f_microscopy_all:disabled {
+  background-image: url(../../../images/microscopy/Unavailable/Filter_All_Unavailable.png) !important;
+  background-repeat: no-repeat !important;
+}
+.scb_f_microscopy_red:checked {
+  background-image: url(../../../images/microscopy/Selected/Filter_Red_Selected.png) !important;
+  background-repeat: no-repeat !important;
+}
+.scb_f_microscopy_green:checked {
+  background-image: url(../../../images/microscopy/Selected/Filter_Green_Selected.png) !important;
+  background-repeat: no-repeat !important;
+}
+.scb_f_microscopy_blue:checked {
+  background-image: url(../../../images/microscopy/Selected/Filter_Blue_Selected.png) !important;
+  background-repeat: no-repeat !important;
+}
+.scb_f_microscopy_all:checked {
+  background-image: url(../../../images/microscopy/Selected/Filter_All_Selected.png) !important;
+  background-repeat: no-repeat !important;
 }
 .scb_s_microscopy_filter_label {
   left: 11px;
@@ -811,14 +863,14 @@ body.dragging, body.dragging * {
 }
 .scb_s_microscopy_brightness_focus_middle {
   position: absolute;
-  right: 48px;
-  top: 99px;
+  right: 27px;
+  top: 114px;
 }
 #brightup {
   position: absolute;
-  right: 25px;
-  top: 96px;
-  background-image: url('../../../images/microscopy/Brightness/TopArrow_Normal.png');
+  right: 9px;
+  top: 111px;
+  background-image: url('../../../images/microscopy/Brightness/Brightness_Arrow_Green_Right.png');
   background-repeat: no-repeat;
   background-origin: content-box;
   height: 18px;
@@ -830,9 +882,9 @@ body.dragging, body.dragging * {
 }
 #brightdown {
   position: absolute;
-  right: 61px;
-  top: 97px;
-  background-image: url('../../../images/microscopy/Brightness/BottomArrow_Normal.png');
+  right: 90px;
+  top: 111px;
+  background-image: url('../../../images/microscopy/Brightness/Brightness_Arrow_Green_Left.png');
   background-repeat: no-repeat;
   background-origin: content-box;
   height: 18px;
@@ -840,16 +892,16 @@ body.dragging, body.dragging * {
   outline: none;
 }
 #brightup:hover {
-  background-image: url('../../../images/microscopy/Brightness/TopArrow_Hover.png');
+  background-image: url('../../../images/microscopy/Brightness/Brightness_Arrow_Hover_Right.png');
 }
 #brightdown:hover {
-  background-image: url('../../../images/microscopy/Brightness/BottomArrow_Hover.png');
+  background-image: url('../../../images/microscopy/Brightness/Brightness_Arrow_Hover_Left.png');
 }
 #brightup:disabled {
-  background-image: url('../../../images/microscopy/Brightness/TopArrow_Gray.png');
+  background-image: url('../../../images/microscopy/Brightness/Brightness_Arrow_Gray_Right.png');
 }
 #brightdown:disabled {
-  background-image: url('../../../images/microscopy/Brightness/BottomArrow_Gray.png');
+  background-image: url('../../../images/microscopy/Brightness/Brightness_Arrow_Gray_Left.png');
 }
 .scb_s_microscopy_tight_focus_middle {
   position: absolute;
@@ -887,12 +939,12 @@ body.dragging, body.dragging * {
 }
 .scb_s_microscopy_black_icon {
   position: absolute;
-  top: 107px;
+  top: 93px;
   left: 90px;
 }
 .scb_s_microscopy_white_icon {
   position: absolute;
-  top: 107px;
+  top: 93px;
   right: 15px;
 }
 .scb_s_microscopy_brightness_slider>a {

@@ -4735,7 +4735,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpD',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
-                                            	{collection_id: '',
+                                            	{collection_id: 'default',
                                             		drug_list: {list: [
                                                     	{drug_id: 'gm', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4744,7 +4744,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpD',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
-                                                {collection_id: '',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gml', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4753,7 +4753,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpD',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
-                                                {collection_id: '',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmi', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -4762,7 +4762,7 @@ var __assignment_706_2014 = {
                                         {cell_line: 'gfpD',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
-                                                {collection_id: '',
+                                                {collection_id: 'default',
                                                 	drug_list: {list: [
                                                     	{drug_id: 'gmil', concentration_id: '0'}
                                                 	]}, temperature: '22'}
@@ -5132,26 +5132,31 @@ var __assignment_706_2014 = {
 			'whole': {
 				name: 'Whole Cell'
 			}
-		},
+		},            
 		micro_kinds: {
 			'IF':{
 				name:'Antibody-labeling IF',
 				conditions: {
-					'rgb': {name: 'NFIB (red), DAPI (blue), control (green)'} 
+					'rgb': {name: 'NFIB (red), DAPI (blue), control (green)',
+					short_name: 'IF: RGB'} 
 				}
 			},
 			'IHC':{
 				name:'Antibody-labeling IHC',
 				conditions: {
-					'NFIB': {name: 'NFIB'},
-					'ki67': {name: 'Ki-67'},
-					'secondary': {name: 'Secondary only control'}   
+					'NFIB': {name: 'NFIB',
+					short_name: 'IHC: NFIB'},
+					'ki67': {name: 'Ki-67',
+					short_name: 'IHC: Ki-67'},
+					'secondary': {name: 'Secondary only control',
+					short_name: 'IHC: Secondary'}   
 				}
 			},
 			'Dye':{
 				name: 'Dye/Stain',
 				conditions: {
-					'HnE': {name: 'H&E'} 
+					'HnE': {name: 'H&E',
+					short_name: 'Dye: H&E'} 
 				}
 
 			}
@@ -5211,124 +5216,153 @@ var __assignment_706_2014 = {
 							'cytoplasm':{
 								'1': [{
 									hash: 'img1',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'2': [{
 									hash: 'img2',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'3': [{
 									hash: 'img3',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'4': [{
 									hash: 'img4',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'5': [{
 									hash: 'img40',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'6': [{
 									hash: 'img41',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'7': [{
 									hash: 'img5',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'8': [{
 									hash: 'img6',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'9': [{
 									hash: 'img42',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'10': [{
 									hash: 'img7',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'11': [{
 									hash: 'img8',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}]
 							},
 							'plasma_membrane': {
 								'1': [{
 									hash: 'img36',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'2': [{
 									hash: 'img37',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'3': [{
 									hash: 'img38',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'4': [{
 									hash: 'img43',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'5': [{
 									hash: 'img39',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'6': [{
 									hash: 'img44',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'7': [{
 									hash: 'img45',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}]
 							
 							},
 							'nucleus': {
 								'1': [{
 									hash: 'img21',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'2': [{
 									hash: 'img22',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'3': [{
 									hash: 'img23',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'4': [{
 									hash: 'img24',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'5': [{
 									hash: 'img25',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'6': [{
 									hash: 'img26',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'7': [{
 									hash: 'img29',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'8': [{
 									hash: 'img30',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'9': [{
 									hash: 'img31',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'10': [{
 									hash: 'img32',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'11': [{
 									hash: 'img46',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}]
 							
 							
@@ -5336,51 +5370,63 @@ var __assignment_706_2014 = {
 							'cytoplasm_nucleus': {									
 								'1': [{
 									hash: 'img9',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'2': [{
 									hash: 'img10',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'3': [{
 									hash: 'img11',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'4': [{
 									hash: 'img12',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'5': [{
 									hash: 'img13',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'6': [{
 									hash: 'img14',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'7': [{
 									hash: 'img15',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'8': [{
 									hash: 'img16',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'9': [{
 									hash: 'img17',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'10': [{
 									hash: 'img18',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],
 								'11': [{
 									hash: 'img19',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}],									
 								'12': [{
 									hash: 'img20',
-									mag: 'N/A'
+									mag: 'N/A',
+									if_type: 'green'
 								}]
 							
 							}
@@ -5392,177 +5438,117 @@ var __assignment_706_2014 = {
                 western_blot: {
                     'cyto': {
                         'parser_fixed': [
-                            {
+                        	{
                                 transfer_function: 'static',
                                 cutoff: -1,
-                                drug: 'nc',
+                                drug: 'gm',
                                 cell_line: '*ANY*',
                                 marks: [
                                     {
-                                        name: 'Cyclin B',
-                                        weight: 58,
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['cyclin']
+                                        primary_anti_body: ['mpC']
                                     },
                                     {
-                                        name: 'Cyclin E',
-                                        weight: 48,
-                                        intensity: 4,
-                                        primary_anti_body: ['cyclinE']
-                                    },
-                                    {
-                                        name: 'pgk1',
-                                        weight: 45,
-                                        intensity: 10,
-                                        primary_anti_body: ['pgk1']
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
                                     }
-
                                 ]
                             },
                             {
-                                transfer_function: 'delta',
-                                cutoff: 1,
-                                drug: 'pp1',
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'gml',
                                 cell_line: '*ANY*',
-                                above_marks: [
+                                marks: [
                                     {
-                                        name: 'Cdk2',
-                                        weight: 33, // 34&35
-                                        intensity: .3,
-                                        primary_anti_body: ['cdk2']
-                                    }
-                                ],
-                                below_marks: [
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 34, // 34&35
-                                        intensity: .3,
-                                        primary_anti_body: ['cdk2']
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpB']
                                     },
                                     {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: .3,
-                                        primary_anti_body: ['cdk2']
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpC']
+                                    },
+                                    {
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpD']
+                                    },
+                                    {
+                                        name: 'kinase X',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpX']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ]
+                            },
+                        	{
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'gmi',
+                                cell_line: '*ANY*',
+                                marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpC']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
                                     }
                                 ]
                             },
                             {
                                 transfer_function: 'static',
                                 cutoff: -1,
-                                drug: 'nc',
-                                cell_line: 'wt',
-                                marks: [
-                                ]
-                            },
-                            {
-                                transfer_function: 'static',
-                                cutoff: -1,
-                                drug: 'nc',
-                                cell_line: 'm1',
-                                temperature: '22',
+                                drug: 'gmil',
+                                cell_line: '*ANY*',
                                 marks: [
                                     {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpB']
                                     },
                                     {
-                                        name: 'Cyclin B',
-                                        weight: 58,
-                                        intensity: -2,
-                                        primary_anti_body: ['cyclin']
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpC']
                                     },
                                     {
-                                        name: 'Cyclin E',
-                                        weight: 48,
-                                        intensity: -4,
-                                        primary_anti_body: ['cyclinE']
-                                    }
-                                ]
-                            },
-                            {
-                                transfer_function: 'static',
-                                cutoff: -1,
-                                drug: 'nc',
-                                cell_line: 'm2',
-                                temperature: '22',
-                                marks: [
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
+                                        name: 'kinase X',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpX']
                                     },
                                     {
-                                        name: 'Cyclin B',
-                                        weight: 58,
-                                        intensity: -2,
-                                        primary_anti_body: ['cyclin']
-                                    }
-                                ]
-                            },
-                            {
-                                transfer_function: 'delta',
-                                cutoff: 1,
-                                drug: 'Nocodazole',
-                                cell_line: 'wt',
-                                above_marks: [
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
-                                    },
-                                    {
-                                        name: 'Cyclin E',
-                                        weight: 48,
-                                        intensity: -4,
-                                        primary_anti_body: ['cyclinE']
-                                    }
-                                ]
-                            },
-                            {
-                                transfer_function: 'delta',
-                                cutoff: 1,
-                                drug: 'Hydroxyurea',
-                                cell_line: 'wt',
-                                above_marks: [
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
-                                    },
-                                    {
-                                        name: 'Cyclin B',
-                                        weight: 58,
-                                        intensity: -2,
-                                        primary_anti_body: ['cyclin']
-                                    }
-                                ]
-                            },
-                            {
-                                transfer_function: 'delta',
-                                cutoff: 1,
-                                drug: 'Alpha',
-                                cell_line: 'wt',
-                                above_marks: [
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 34, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
-                                    },
-                                    {
-                                        name: 'Cyclin B',
-                                        weight: 58,
-                                        intensity: -2,
-                                        primary_anti_body: ['cyclin']
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
                                     }
                                 ]
                             }
+                            
                         ]
                     }
                 },
@@ -5664,7 +5650,7 @@ master_model_data = {
     app_description: 'StarCellBio Placeholder',
     assignments: {
         list: [ 
-        __assigment_facs, __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability, __microscopy_test
+        __assigment_facs, __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability, __microscopy_test, __assignment_706_2014
         ]
     },
     ui: {}
@@ -5729,6 +5715,28 @@ $(function () {
 			});
 			get_courses_result.list[x] = assignment_706;
 		}
+		if(get_courses_result.list[x].id == 'assignment_706_2014'){
+			assignment_706_2014 = get_courses_result.list[x];
+			assignment_706_2014.template.instructions = [
+				['Introduction', scb_assignment_specific_mit706s14.introduction()],
+				['Background Information',scb_assignment_specific_mit706s14.background_information()],
+				['Question 1', scb_assignment_specific_mit706s14.question_1()],
+				['Question 2', scb_assignment_specific_mit706s14.question_2()]
+				];
+			assignment_706_2014.template.experiment_setup = scb_assignment_specific_mit706s14.experiment_setup();
+
+			assignment_706_2014.template.ui.experiment_setup.actions.push({
+				name: 'ADD SAMPLES',
+				open: 'mit706s14.setup',
+				css: {
+					width: '880px',
+					height: '540px',
+					left: '100px',
+					top: '050px'
+				}
+			});
+			get_courses_result.list[x] = assignment_706_2014;
+		}
 		
 		if(get_courses_result.list[x].id == 'decusability'){
 			decusability = get_courses_result.list[x];
@@ -5771,6 +5779,13 @@ $(function () {
 			
 		}
 	}
+	
+	__assignment_706_2014.template.instructions = [
+		['Introduction', scb_assignment_specific_mit706s14.introduction()],
+		['Background Information',scb_assignment_specific_mit706s14.background_information()],
+		['Question 1', scb_assignment_specific_mit706s14.question_1()],
+		['Question 2', scb_assignment_specific_mit706s14.question_2()]
+		];
 	__assignment_706_2014.template.experiment_setup = scb_assignment_specific_mit706s13.experiment_setup();
 
     __assignment_706_2014.template.ui.experiment_setup.actions.push({
@@ -5783,7 +5798,6 @@ $(function () {
             top: '050px'
         }
     });
-	get_courses_result.list.push(__assignment_706_2014);
 	
     __usability_test.description = scb_model_usability.abstract();
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();

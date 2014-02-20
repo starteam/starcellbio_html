@@ -523,10 +523,30 @@
     </div>
     <div class = 'scb_s_microscopy_lens_controls_section_3'>
     				<span class="scb_s_microscopy_brightness_label"></span>
-    				<img class='scb_s_microscopy_black_icon' src='images/microscopy/Brightness_Slider_Dark.jpg'/>
-    				<img class='scb_s_microscopy_white_icon' src='images/microscopy/Brightness_Slider_Light.png'/>
+    				<img class='scb_s_microscopy_black_icon' src='images/microscopy/Brightness/Brightness_Dark.png'/>
+    				<img class='scb_s_microscopy_white_icon' src='images/microscopy/Brightness/Brightness_Light.png'/>
     				<button class ='scb_s_micro_arrows' id='brightdown'></button>
-					<img class='scb_s_microscopy_brightness_focus_middle' src = 'images/microscopy/Brightness/Brightness_Middle.png'/>
+    				<div class='scb_s_microscopy_brightness_focus_middle'>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+
+    				</div>
 					<button class ='scb_s_micro_arrows' id='brightup'></button>
     </div>
     
@@ -548,7 +568,9 @@
 				<input class='scb_f_microscopy_all scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}'  title='All' name='IF' type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.merge_enabled}checked='checked'{/if}>
 				<br/>
+<!-- 
 				<img class = 'scb_s_microscopy_filter' src = '{if $microscopy.red_enabled}images/microscopy/Filter_Slider_Red.png{elseif $microscopy.blue_enabled}images/microscopy/Filter_Slider_Blue.png{elseif $microscopy.green_enabled}images/microscopy/Filter_Slider_Green.png{elseif $microscopy.merge_enabled}images/microscopy/Filter_Slider_All.png{else}images/microscopy/Filter_Slider_Red.png {/if}' />
+ -->
 				<br/>
     
     </div>
