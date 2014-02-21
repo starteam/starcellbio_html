@@ -4479,7 +4479,7 @@ var __assignment_706_2014 = {
 						cell_line: 'p+',
 						treatment_list: {list: [
 							{schedule_value: 0, collection_id: '0', drug_list: {list: [
-								{drug_id: 'ac', concentration_id: '0'}
+								{drug_id: 'ac', concentration_id: '100'}
 							]},  temperature: '22'
 							}
 						]}
@@ -4515,7 +4515,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
                                             		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '0'}
+                                                    	{drug_id: 'gm', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
@@ -4524,7 +4524,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '0'}
+                                                    	{drug_id: 'gml', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
@@ -4533,7 +4533,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '0'}
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
@@ -4542,7 +4542,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '0'}
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ]
@@ -4568,7 +4568,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
                                             		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '0'}
+                                                    	{drug_id: 'gm', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
@@ -4577,7 +4577,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '0'}
+                                                    	{drug_id: 'gml', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
@@ -4586,7 +4586,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '0'}
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
@@ -4595,7 +4595,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '0'}
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ]
@@ -4620,7 +4620,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
                                             		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '0'}
+                                                    	{drug_id: 'gm', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
@@ -4629,7 +4629,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '0'}
+                                                    	{drug_id: 'gml', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
@@ -4638,7 +4638,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '0'}
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
@@ -4647,7 +4647,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '0'}
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ]
@@ -4673,7 +4673,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
                                             		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '0'}
+                                                    	{drug_id: 'gm', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
@@ -4682,7 +4682,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '0'}
+                                                    	{drug_id: 'gml', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
@@ -4691,7 +4691,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '0'}
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
@@ -4700,7 +4700,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '0'}
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ]
@@ -4725,7 +4725,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
                                             		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '0'}
+                                                    	{drug_id: 'gm', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
@@ -4734,7 +4734,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '0'}
+                                                    	{drug_id: 'gml', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
@@ -4743,7 +4743,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '0'}
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
@@ -4752,7 +4752,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '0'}
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ]
@@ -4777,7 +4777,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
                                             		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '0'}
+                                                    	{drug_id: 'gm', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
@@ -4786,7 +4786,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '0'}
+                                                    	{drug_id: 'gml', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
@@ -4795,7 +4795,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '0'}
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
@@ -4804,7 +4804,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '0'}
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ]
@@ -4829,7 +4829,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
                                             		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '0'}
+                                                    	{drug_id: 'gm', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
@@ -4838,7 +4838,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '0'}
+                                                    	{drug_id: 'gml', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
@@ -4847,7 +4847,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '0'}
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
@@ -4856,7 +4856,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '0'}
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ]
@@ -4883,7 +4883,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
                                             		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '0'}
+                                                    	{drug_id: 'gm', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
@@ -4892,7 +4892,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '0'}
+                                                    	{drug_id: 'gml', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
@@ -4901,7 +4901,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '0'}
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
@@ -4910,7 +4910,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '0'}
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ]
@@ -4936,7 +4936,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
                                             		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '0'}
+                                                    	{drug_id: 'gm', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
@@ -4945,7 +4945,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '0'}
+                                                    	{drug_id: 'gml', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
@@ -4954,7 +4954,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '0'}
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
@@ -4963,7 +4963,7 @@ var __assignment_706_2014 = {
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
                                                 	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '0'}
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ]
@@ -4985,27 +4985,27 @@ var __assignment_706_2014 = {
 			}
 		},
 		concentrations: {
-			0: {
+			100: {
 				name: '',
-				value: 0
+				value: 100
 			}
 		},
 		drugs: {
 			'gm': {
 				name: 'Growth media only',
-				concentrations: ['0']
+				concentrations: ['100']
 			},
 			'gml': {
 				name:'Growth media + ligand',
-				concentrations: ['0']
+				concentrations: ['100']
 			},
 			'gmi': {
 				name: 'Growth media + inhibitor',
-				concentrations: ['0']
+				concentrations: ['100']
 			},
 			'gmil': {
 				name: 'Growth media + ligand + inhibitor',
-				concentrations: ['0']
+				concentrations: ['100']
 			}
 		},
 		experiment_temperatures: {
@@ -5112,30 +5112,11 @@ var __assignment_706_2014 = {
 		},            
 		micro_kinds: {
 			'IF':{
-				name:'Antibody-labeling IF',
+				name:'Fluorescence',
 				conditions: {
-					'rgb': {name: 'NFIB (red), DAPI (blue), control (green)',
-					short_name: 'IF: RGB'} 
+					'rgb': {name: 'GFP (green)',
+					short_name: 'Fluorescence: GFP'} 
 				}
-			},
-			'IHC':{
-				name:'Antibody-labeling IHC',
-				conditions: {
-					'NFIB': {name: 'NFIB',
-					short_name: 'IHC: NFIB'},
-					'ki67': {name: 'Ki-67',
-					short_name: 'IHC: Ki-67'},
-					'secondary': {name: 'Secondary only control',
-					short_name: 'IHC: Secondary'}   
-				}
-			},
-			'Dye':{
-				name: 'Dye/Stain',
-				conditions: {
-					'HnE': {name: 'H&E',
-					short_name: 'Dye: H&E'} 
-				}
-
 			}
 		},
 		slides:{
@@ -5417,7 +5398,7 @@ var __assignment_706_2014 = {
                         'parser_fixed': [
                         	{
                                 transfer_function: 'delta',
-                                cutoff: -1,
+                                cutoff: 1,
                                 drug: 'gm',
                                 cell_line: '*ANY*',
                                 above_marks: [
@@ -5438,7 +5419,7 @@ var __assignment_706_2014 = {
                             },
                             {
                                 transfer_function: 'delta',
-                                cutoff: -1,
+                                cutoff: 1,
                                 drug: 'gml',
                                 cell_line: '*ANY*',
                                 above_marks: [
@@ -5477,7 +5458,7 @@ var __assignment_706_2014 = {
                             },
                         	{
                                 transfer_function: 'delta',
-                                cutoff: -1,
+                                cutoff: 1,
                                 drug: 'gmi',
                                 cell_line: '*ANY*',
                                 above_marks: [
@@ -5498,7 +5479,7 @@ var __assignment_706_2014 = {
                             },
                             {
                                 transfer_function: 'delta',
-                                cutoff: -1,
+                                cutoff: 1,
                                 drug: 'gmil',
                                 cell_line: '*ANY*',
                                 above_marks: [

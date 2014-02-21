@@ -41,13 +41,11 @@ mit706s14.register = function (dialog, state) {
         if (container.has(e.target).length === 0) {
             $(dialog).detach();
             $('.contact_overlay').remove();
-            scb.utils.call_back(state.close);
         }
     });
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_cancel', function (e) {
         $(dialog).detach();
         $('.contact_overlay').remove();
-        scb.utils.call_back(state.close);
     });
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_add', function (e) {
         mit706s14.static.scb_mit706s16_inner_dialog_add(this, dialog, state);
@@ -61,7 +59,6 @@ mit706s14.register = function (dialog, state) {
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_title_close', function (e) {
         $(dialog).detach();
         $('.contact_overlay').remove();
-        scb.utils.call_back(state.close);
     });
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_select', function (e) {
         var cell_line = $(this).attr('cell_line');
