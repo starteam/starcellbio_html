@@ -33,6 +33,8 @@ def index_html():
         js.pop('js/jquery-1.7.2.min.js')
     if( js.has_key( 'starcellbio.app.js' )):
         js.pop('starcellbio.app.js')
+    if( js.has_key( 'Gruntfile.js' )):
+        js.pop('Gruntfile.js')
     
     css_join = css_prefix + (css_suffix+css_prefix).join(css.keys()) + css_suffix
     js_join = js_prefix + (js_suffix+js_prefix).join(js.keys()) + js_suffix
