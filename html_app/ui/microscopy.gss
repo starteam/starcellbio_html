@@ -870,6 +870,7 @@ width: 89px;
 	cursor: pointer;
 	border: none;
 	background: none;
+	background-repeat: no-repeat; 
 
 }
 

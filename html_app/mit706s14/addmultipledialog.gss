@@ -6,8 +6,8 @@
   /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
 }
 
-.scb_mit706s16_dialog {
-    position: absolute;
+.scb_mit706s14_dialog {
+    position: fixed;
     z-index: 999;
     top:0px;
     left:0px;

@@ -165,9 +165,12 @@ Experiment active area
 				<td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if}' kind='{$c.kind}' rowspan="{$c.rows}">
 					{if $c.kind == 'actions'}
 						{if $kind == 'readwrite'}
+						{if $assignment.id == 'assignment_706_2014'}
+						{else}
 						<button class='scb_f_experiment_setup_duplicate_sample' cell_treatment_id='{$r.id}'
 								assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'><img alt="Copy" title="Copy" src="images/setup/scb_copy.png">
 						</button>
+						{/if}
 						<button class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}'
 							assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'><img alt="Delete" title="Delete" src="images/setup/scb_remove.png">
 						</button>

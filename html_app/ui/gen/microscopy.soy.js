@@ -135,27 +135,27 @@ scb_microscopy.prepare_slide = function(opt_data, opt_sb) {
   var rListLen493 = rList493.length;
   for (var rIndex493 = 0; rIndex493 < rListLen493; rIndex493++) {
     var rData493 = rList493[rIndex493];
-    output.append((rData493.is_valid) ? (rData493.index == 0) ? '<li microscopy_lane_id=\'' + soy.$$escapeHtml(rData493.lane.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' lane_kind = \'' + soy.$$escapeHtml(rData493.lane.kind) + '\' slide_conditions = \'' + soy.$$escapeHtml(rData493.lane.slide_conditions) + '\'' + ((opt_data.microscopy.selected_lane && rData493.cell_treatment.id == opt_data.microscopy.selected_lane.cell_treatment_id) ? 'class=\'scb_s_microscopy_sample_selected\'' : '') + '>&nbsp;&nbsp;' + soy.$$escapeHtml(rData493.display_text) + '</li>' : '' : '');
+    output.append((rData493.is_valid) ? (rData493.index == 0) ? '<li microscopy_lane_id=\'' + soy.$$escapeHtml(rData493.lane.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' lane_kind = \'' + soy.$$escapeHtml(rData493.lane.kind) + '\' slide_conditions = \'' + soy.$$escapeHtml(rData493.lane.slide_conditions) + '\' title=\'' + soy.$$escapeHtml(rData493.display_text) + ' \'' + ((opt_data.microscopy.selected_lane && rData493.cell_treatment.id == opt_data.microscopy.selected_lane.cell_treatment_id) ? 'class=\'scb_s_microscopy_sample_selected\'' : '') + '>&nbsp;&nbsp;' + soy.$$escapeHtml(rData493.display_text) + '</li>' : '' : '');
   }
   output.append('</ol></div>', (opt_data.microscopy.samples_finished) ? '' : '<button class=\'scb_f_microscopy_load_slides scb_s_navigation_button\' microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' assignment_id="' + soy.$$escapeHtml(opt_data.assignment.id) + '" experiment_id="' + soy.$$escapeHtml(opt_data.experiment.id) + '">LOAD</button>', '</div><div class=\'scb_s_microscopy_samples_slide_area\'><div class=\'scb_s_western_blot_gel_tabs\'>');
   if (opt_data.microscopy.samples_finished) {
-    var rList532 = opt_data.rows;
-    var rListLen532 = rList532.length;
-    for (var rIndex532 = 0; rIndex532 < rListLen532; rIndex532++) {
-      var rData532 = rList532[rIndex532];
-      output.append((rData532.is_valid && rData532.lane.id == opt_data.microscopy.selected_lane.id) ? '<span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_western_blot_gel_tab_selected\'>' + soy.$$escapeHtml(opt_data.microscopy.selected_lane.kinds[opt_data.microscopy.selected_lane.kind].conditions[opt_data.microscopy.selected_lane.slide_conditions].short_name) + '</div></span>' : (rData532.is_valid && rData532.cell_treatment.id == opt_data.microscopy.selected_lane.cell_treatment_id) ? '<div class=\'scb_s_microscopy_slide_tab\' microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' microscopy_lane_id=\'' + soy.$$escapeHtml(rData532.lane.id) + '\'>' + soy.$$escapeHtml(rData532.lane.kinds[rData532.lane.kind].conditions[rData532.lane.slide_conditions].short_name) + '</div>' : '');
+    var rList534 = opt_data.rows;
+    var rListLen534 = rList534.length;
+    for (var rIndex534 = 0; rIndex534 < rListLen534; rIndex534++) {
+      var rData534 = rList534[rIndex534];
+      output.append((rData534.is_valid && rData534.lane.id == opt_data.microscopy.selected_lane.id) ? '<span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_western_blot_gel_tab_selected\'>' + soy.$$escapeHtml(opt_data.microscopy.selected_lane.kinds[opt_data.microscopy.selected_lane.kind].conditions[opt_data.microscopy.selected_lane.slide_conditions].short_name) + '</div></span>' : (rData534.is_valid && rData534.cell_treatment.id == opt_data.microscopy.selected_lane.cell_treatment_id) ? '<div class=\'scb_s_microscopy_slide_tab\' microscopy_id=\'' + soy.$$escapeHtml(opt_data.microscopy.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' microscopy_lane_id=\'' + soy.$$escapeHtml(rData534.lane.id) + '\'>' + soy.$$escapeHtml(rData534.lane.kinds[rData534.lane.kind].conditions[rData534.lane.slide_conditions].short_name) + '</div>' : '');
     }
   } else {
     output.append('<span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_western_blot_gel_tab_selected\'>SLIDE</div></span>');
   }
   output.append('</div>');
   if (opt_data.microscopy.samples_finished) {
-    var rList556 = opt_data.rows;
-    var rListLen556 = rList556.length;
-    for (var rIndex556 = 0; rIndex556 < rListLen556; rIndex556++) {
-      var rData556 = rList556[rIndex556];
-      if (rData556.is_valid && opt_data.microscopy.lane_selected == rData556.lane.id) {
-        scb_microscopy.display_lens({assignment: opt_data.assignment, experiment: opt_data.experiment, microscopy: opt_data.microscopy, lane: rData556.lane, microscopy_line_id: opt_data.microscopy.lane_selected}, output);
+    var rList558 = opt_data.rows;
+    var rListLen558 = rList558.length;
+    for (var rIndex558 = 0; rIndex558 < rListLen558; rIndex558++) {
+      var rData558 = rList558[rIndex558];
+      if (rData558.is_valid && opt_data.microscopy.lane_selected == rData558.lane.id) {
+        scb_microscopy.display_lens({assignment: opt_data.assignment, experiment: opt_data.experiment, microscopy: opt_data.microscopy, lane: rData558.lane, microscopy_line_id: opt_data.microscopy.lane_selected}, output);
       }
     }
   } else {
@@ -176,45 +176,45 @@ scb_microscopy.display_lens = function(opt_data, opt_sb) {
 scb_microscopy.display_slide_types = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   if (soy.$$getMapKeys(opt_data.kinds).length == 1) {
-    var kList701 = soy.$$getMapKeys(opt_data.kinds);
-    var kListLen701 = kList701.length;
-    for (var kIndex701 = 0; kIndex701 < kListLen701; kIndex701++) {
-      var kData701 = kList701[kIndex701];
-      output.append('<span class="scb_f_microscopy_select_slide_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' microscopy_id=\'', soy.$$escapeHtml(opt_data.microscopy.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" value="', soy.$$escapeHtml(kData701), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '">', soy.$$escapeHtml(opt_data.kinds[kData701].name), '</span>');
+    var kList703 = soy.$$getMapKeys(opt_data.kinds);
+    var kListLen703 = kList703.length;
+    for (var kIndex703 = 0; kIndex703 < kListLen703; kIndex703++) {
+      var kData703 = kList703[kIndex703];
+      output.append('<span class="scb_f_microscopy_select_slide_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' microscopy_id=\'', soy.$$escapeHtml(opt_data.microscopy.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" value="', soy.$$escapeHtml(kData703), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '">', soy.$$escapeHtml(opt_data.kinds[kData703].name), '</span>');
     }
   } else {
     output.append('<select class="scb_f_microscopy_select_slide_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' microscopy_id=\'', soy.$$escapeHtml(opt_data.microscopy.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '"', (opt_data.lane.is_sample_enabled) ? '' : 'disabled="disabled"', '>');
     if (opt_data.lane.kind == 'existing') {
       if (opt_data.lane.cell_treatment.cell_line == opt_data.assignment.template.model.microscopy.valid[0] && opt_data.lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id == opt_data.assignment.template.model.microscopy.valid[1]) {
-        var kList747 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser[opt_data.lane.cell_treatment.treatment_list.list[0].collection_id]);
-        var kListLen747 = kList747.length;
-        for (var kIndex747 = 0; kIndex747 < kListLen747; kIndex747++) {
-          var kData747 = kList747[kIndex747];
-          output.append('<option value=\'', soy.$$escapeHtml(kData747), '\'', (opt_data.lane.lane.kind == kData747) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData747].name), '</option>');
+        var kList749 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser[opt_data.lane.cell_treatment.treatment_list.list[0].collection_id]);
+        var kListLen749 = kList749.length;
+        for (var kIndex749 = 0; kIndex749 < kListLen749; kIndex749++) {
+          var kData749 = kList749[kIndex749];
+          output.append('<option value=\'', soy.$$escapeHtml(kData749), '\'', (opt_data.lane.lane.kind == kData749) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData749].name), '</option>');
         }
       } else {
-        var kList759 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser['default']);
-        var kListLen759 = kList759.length;
-        for (var kIndex759 = 0; kIndex759 < kListLen759; kIndex759++) {
-          var kData759 = kList759[kIndex759];
-          output.append('<option value=\'', soy.$$escapeHtml(kData759), '\'', (opt_data.lane.lane.kind == kData759) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData759].name), '</option>');
+        var kList761 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser['default']);
+        var kListLen761 = kList761.length;
+        for (var kIndex761 = 0; kIndex761 < kListLen761; kIndex761++) {
+          var kData761 = kList761[kIndex761];
+          output.append('<option value=\'', soy.$$escapeHtml(kData761), '\'', (opt_data.lane.lane.kind == kData761) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData761].name), '</option>');
         }
       }
     } else {
       output.append((soy.$$getMapKeys(opt_data.kinds).length != 1) ? '<option selected="selected" disabled="disabled" value=\'\'>Select Analysis</option>' : '');
       if (opt_data.lane.cell_treatment.cell_line == opt_data.assignment.template.model.microscopy.valid[0] && opt_data.lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id == opt_data.assignment.template.model.microscopy.valid[1]) {
-        var kList776 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser[opt_data.lane.cell_treatment.treatment_list.list[0].collection_id]);
-        var kListLen776 = kList776.length;
-        for (var kIndex776 = 0; kIndex776 < kListLen776; kIndex776++) {
-          var kData776 = kList776[kIndex776];
-          output.append('<option value=\'', soy.$$escapeHtml(kData776), '\'>', soy.$$escapeHtml(opt_data.kinds[kData776].name), '</option>');
+        var kList778 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser[opt_data.lane.cell_treatment.treatment_list.list[0].collection_id]);
+        var kListLen778 = kList778.length;
+        for (var kIndex778 = 0; kIndex778 < kListLen778; kIndex778++) {
+          var kData778 = kList778[kIndex778];
+          output.append('<option value=\'', soy.$$escapeHtml(kData778), '\'>', soy.$$escapeHtml(opt_data.kinds[kData778].name), '</option>');
         }
       } else {
-        var kList784 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser['default']);
-        var kListLen784 = kList784.length;
-        for (var kIndex784 = 0; kIndex784 < kListLen784; kIndex784++) {
-          var kData784 = kList784[kIndex784];
-          output.append('<option value=\'', soy.$$escapeHtml(kData784), '\'>', soy.$$escapeHtml(opt_data.kinds[kData784].name), '</option>');
+        var kList786 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser['default']);
+        var kListLen786 = kList786.length;
+        for (var kIndex786 = 0; kIndex786 < kListLen786; kIndex786++) {
+          var kData786 = kList786[kIndex786];
+          output.append('<option value=\'', soy.$$escapeHtml(kData786), '\'>', soy.$$escapeHtml(opt_data.kinds[kData786].name), '</option>');
         }
       }
     }

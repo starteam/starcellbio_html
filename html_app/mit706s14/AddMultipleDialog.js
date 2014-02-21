@@ -36,7 +36,7 @@ mit706s14.static.scb_mit706s16_inner_dialog_add = function (element, dialog, sta
 }
 
 mit706s14.register = function (dialog, state) {
-    scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_dialog', function (e) {
+    scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s14_dialog', function (e) {
         var container = dialog;
         if (container.has(e.target).length === 0) {
             $(dialog).detach();
@@ -78,7 +78,7 @@ mit706s14.setup = function (state) {
     var template = state.assignment.template;
     var onClose = state.close;
 
-    var dialog = $("<div class='scb_mit706s16_dialog'></div>");
+    var dialog = $("<div class='scb_mit706s14_dialog'></div>");
     dialog.html(mit706s14.dialog({
         assignment: assignment,
         experiment: experiment,

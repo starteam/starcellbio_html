@@ -426,6 +426,7 @@
 					microscopy_id='{$microscopy.id}' 
 					lane_kind = '{$r.lane.kind}' 
 					slide_conditions = '{$r.lane.slide_conditions}'
+					title='{$r.display_text} '
 					{if $microscopy.selected_lane and $r.cell_treatment.id == $microscopy.selected_lane.cell_treatment_id}class='scb_s_microscopy_sample_selected'{/if}>
 
 					 &nbsp;&nbsp;{$r.display_text} 

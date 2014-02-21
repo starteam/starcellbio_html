@@ -8,16 +8,18 @@
      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 
     <h2>Goal</h2>
-The goal of this assignment is to increase understanding of cell biology techniques and their application by providing you with the opportunity to conduct and analyze data from your own cell biology experiments.
+The goal of this assignment is to increase understanding of cell biology techniques and their application by 
+providing you with the opportunity to conduct and analyze data from your own cell biology experiments.
 
     <h2>StarCellBio</h2>
 
     <p>
-To conduct your cell biology experiments, you will use StarCellBio, a cell and molecular experiment simulator launched from the edX course website.
+To conduct your cell biology experiments, you will use StarCellBio, a cell and molecular
+ experiment simulator launched from the 7.06r MITx website.
     </p>
     
      <h2>Due Date & Points</h2>
-     Your completed experiments and answers to questions on the course website will be due on <b>Friday, March 14th by 11 AM</b>. <br/>
+Your answers to the questions on the 7.06r MITx website will be due on <b>Friday, March 14th by 11 AM</b>. <br/><br/>
 This assignment is worth a total of _____ points. 
 
 
@@ -31,33 +33,87 @@ This assignment is worth a total of _____ points.
 <div class='scb_s_mit706s14_assignment_overview' xmlns="http://www.w3.org/1999/html"
      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 
-	<br/>
-You are characterizing a newly identified serine/threonine kinase, <b>Kinase X</b>, involved in cellular growth and differentiation. This kinase is part of a pathway, which is activated by the binding of an extracellular ligand to a receptor.
-
-<br/>
-You have identified four potential substrates (<b>Proteins A-D</b>) of Kinase X through an siRNA screen in mammalian cells, and would like to further characterize them. To this end, you conduct experiments in a mammalian cell line in which this pathway can be easily activated with the addition of the extracellular ligand. 
-
-<br/>
-
-First, you monitor the protein levels of Proteins A-D upon addition of the activitating extracellular ligand, and compare them with those in which only growth media is added. You observe that within the time frame in which your experiment is conducted, Proteins A-D levels do not change upon the addition of ligand. Next, you decide to further investigate the effect of ligand addition and pathway activation by monitoring changes in Proteins A-D's phosphorylation and subcellular localization. To do this end you are provided with the following reagents:
-
-<br/>
-
-<ol>
-<li>The ligand that activates Kinase X's signaling pathway as well as an inhibitor of this pathway.</li>
-<li>Commercially available protein-specific phospho antibodies generated against specific phosphorylation sites in Proteins A-D and Kinase X. These phosphorylation sites were previously identified in a protein wide analysis that uncovered sites commmonly phosphorylated upon activation of various signalining pathways. The protein-specific phospho antibodies only recognize the phosphorylated form of these protein residues.</li>
-<li> Stably expressing wild-type mammalian cell lines, each expressing a GFP-potential substrate fusion protein (called "WT-GFP-Protein A", "WT-GFP-Protein B", etc.). In addition, the following stably expressing cell lines have also been provided to you, in which the subcellular localization of the protein being stably expressed in each of these cell lines does not change upon the addition of ligand or inhibitor. <br/>
-<ul>
-<li>WT-GFP = a wild-type mammalian cell line stably expressing Green Flouresecent Protein.</li>
-<li>WT-GFP-Kinase = a wild-type mammanlian cell line stably expressing the Kinase X protein fused to GFP.</li>
-<li>WT-GFP-Histone H2B = a wild-type mammalian cell line stably expressing the Histone H2B protein fused to GFP.</li>
-<li>WT-GFP-p100 = a wild-type mammalian cell line stably expressing a protein with a molecular weight of 100 kDa fused to GFP.</li>
-<li>WT-GFP-pTD = a wild-type mammalian cell line stably expressing a protein with a transmembrane domain and an internal signal sequence, fused to GFP.</li>
-</ul>
-</li>
-</ol>
+	<p>
+You are characterizing a newly identified serine/threonine kinase, <b>Kinase X</b>, involved in cellular growth and differentiation. This kinase is part of a pathway that is activated by the binding of an extracellular ligand to a receptor.</p>
 <p>
-Conduct the appropiate experiments within StarCellBio to determine the effects of pahtway activation on Proteins A-D phosphorylation and subcellular localization. Using the results you obtained from these experiments, answer the following questions concerning Proteins A-D and the signal transduction pathway in question.</p>
+You have identified four potential substrates (<b>Proteins A-D</b>) of Kinase X through an siRNA screen in mammalian cells and you would like to further characterize them. To this end, you conduct experiments in a mammalian cell line in which this pathway can be easily activated by the addition of the extracellular ligand.</p>
+<p>
+
+First, you monitor the protein levels of Proteins A-D upon addition of the activating extracellular ligand and compare them with those in which only growth media is added. You observe that within the time frame in which your experiment is conducted, the levels of Proteins A-D do not change upon the addition of ligand. Next, you decide to further investigate the effect of ligand addition and pathway activation by monitoring changes in Proteins A-D's phosphorylation and subcellular localization. To do this, you are provided with the following reagents:</p>
+
+<ol >
+	<li>The ligand that activates Kinase X's signaling pathway as well as an inhibitor of this pathway.
+	</li>
+<p/>
+	<li>Commercially available protein-specific phospho antibodies generated against specific phosphorylation sites in Proteins A-D and Kinase X. These phosphorylation sites were previously identified in a proteomic analysis that uncovered sites commonly phosphorylated upon activation of various signaling pathways. The protein-specific phospho antibodies only recognize the phosphorylated form of these protein residues. You also have access to an antibody against a protein, GAPDH, which is not a substrate of Kinase X and is not affected by activation of this pathway.
+	<p/>
+	
+	<table class='scb_s_objective_table'>
+            <thead>
+            <td>Antibodies
+
+            </td>
+            <td>Molecular Weight (kDa)
+
+            </td>
+            </thead>
+            <tbody>
+            <tr>
+                <td>anti-phospho-protein A</td>
+                <td>46</td>
+            </tr>
+            <tr>
+                <td>anti-phospho-protein B</td>
+                <td>134</td>
+            </tr>
+            <tr>
+                <td>anti-phospho-protein C</td>
+                <td>44</td>
+            </tr>
+            <tr>
+                <td>anti-phospho-protein D</td>
+                <td>67</td>
+            </tr>
+            <tr>
+                <td>anti-phospho-kinase X</td>
+                <td>74</td>
+            </tr>
+            <tr>
+                <td>anti-GADPH (loading control)</td>
+                <td>37</td>
+            </tr>
+            </tbody>
+
+        </table>
+	
+	</li>
+<p/>
+
+	<li> 
+	Wild-type mammalian cell lines, each stably expressing a fusion protein where the Green Fluorescent Protein (GFP) is fused to a potential substrate (called "WT-GFP-Protein A", "WT-GFP-Protein B", etc.). In addition, the following stably-expressing cell lines have also been provided to you, in which the subcellular localization of the protein being stably expressed in each of these cell lines does not change upon the addition of ligand or inhibitor. 
+	<p/>
+		<ul type='disc'>
+		<li>
+			WT-GFP = a wild-type mammalian cell line stably expressing GFP.
+		</li>
+		<li>
+			WT-GFP-Kinase = a wild-type mammalian cell line stably expressing the Kinase X protein fused to GFP.
+		</li>
+		<li>
+			WT-GFP-Histone H2B = a wild-type mammalian cell line stably expressing the Histone H2B protein fused to GFP.
+		</li>
+		<li>
+			WT-GFP-p100 = a wild-type mammalian cell line stably expressing a protein with a molecular weight of 100 kDa fused to GFP.
+		</li>
+		<li>
+			WT-GFP-pTD = a wild-type mammalian cell line stably expressing a protein with a transmembrane domain and an internal signal sequence, fused to GFP.
+		</li>
+		</ul>
+	</li>
+	</ol>
+<p>
+Conduct the appropriate experiments within StarCellBio to determine the effect of pathway activation on the phosphorylation and subcellular localization of Proteins A-D. Using the results that you obtain from these experiments, answer the following questions concerning Proteins A-D and the signal transduction pathway in question.
+</p>
 
 
 </div>
@@ -69,8 +125,18 @@ Conduct the appropiate experiments within StarCellBio to determine the effects o
 {template .question_1}
 <div class='scb_s_mit706s14_assignment_overview' xmlns="http://www.w3.org/1999/html"
      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-<br/>
-Using the conclusions from the data you have generated, for each potential substrate, describe the effect of this signal transduction pathway activation by indicating 1) whether it is phosphorylated, and 2) its subcellular localization in the absence and presence of ligand. Answer Question 1 within the MITx 7.06 site.
+<div class='scb_objective_number scb_objective_design'>
+    <div>1</div>
+</div>
+<div class='scb_objective_text'>
+<p>
+Using the conclusions from the data you generated, describe the effect of pathway activation on each potential substrate by indicating 1) whether the substrate is phosphorylated, and 2) the substrate’s subcellular localization in the absence and presence of ligand.
+</p>
+
+<p>
+Answer Question 1 within the 7.06r MITx website.
+</p>
+</div>
 </div>
 {/template}
 
@@ -81,24 +147,37 @@ Using the conclusions from the data you have generated, for each potential subst
 {template .question_2}
 <div class='scb_s_mit706s14_assignment_overview' xmlns="http://www.w3.org/1999/html"
      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<div class='scb_objective_number scb_objective_design'>
+    <div>2</div>
+</div>
+<div class='scb_objective_text'>
  <h2>Part A</h2>
  
- <p>Addition of ligand results in the activation of the signal transduction pathway in question, and in the expression of genes important for cellular growth and differentiation. Given your experimental results, suggest the most likely order for Proteins A-D and Kinase X within this signal transduction pathway, beginning with the addition of ligand and ending with gene expression. 
-<br/>Answer Question 2 Part A within the MITx 7.06 site.
-</p>
+ <p>
+Addition of ligand results in the activation of the signal transduction pathway in question and in the expression of genes important for cellular growth and differentiation. Given your experimental results, suggest the most likely order for Proteins A-D and Kinase X within this signal transduction pathway, beginning with the addition of ligand and ending with gene expression. </p>
+
+<p>
+Answer Question 2 Part A within the 7.06r MITx website.</p>
  
  
   <h2>Part B</h2>
-  <p>At which point within the pathway does the inhibitor act? 
-<br/>Answer Question 2 Part B within the MITx 7.06 site.
-</p>
+  <p>
+At which point within the pathway does the inhibitor act?  </p>
+<p>
+Answer Question 2 Part B within the 7.06r MITx website.</p>
   
    <h2>Part C</h2>
    
-   <p>Explain the reasoning by which you ordered the signal transduction pathway using your experimental results to justify your explanation. 
-<br/>Answer Question 2 Part C within the MITx 7.06 site.
+<p>
+Explain the reasoning by which you ordered the signal transduction pathway. Be sure to use your experimental results in your justification of your explanation.   
 </p>
-
+<p>
+Answer Question 2 Part C within the 7.06r MITx website.
+</p>
+</div>
+<br/>
+<br/>
+<br/>
 </div>
 {/template}
 

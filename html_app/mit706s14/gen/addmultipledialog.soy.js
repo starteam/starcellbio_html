@@ -6,7 +6,7 @@ if (typeof mit706s14 == 'undefined') { var mit706s14 = {}; }
 
 mit706s14.dialog = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_mit706s16_inner_dialog\'><h1 class=\'scb_mit706s16_inner_dialog_title\'><span class=\'scb_mit706s16_inner_dialog_title_close\'>&#215;</span>Add Samples </h1><div class=\'scb_mit706s16_inner_dialog_body\'><!--headings--><table class="scb_s_experiment_setup_table"><thead class="scb_s_experiment_setup_table_head">');
+  output.append('<div class=\'scb_mit706s14_inner_dialog\'><h1 class=\'scb_mit706s16_inner_dialog_title\'><span class=\'scb_mit706s16_inner_dialog_title_close\'>&#215;</span>Add Samples </h1><div class=\'scb_mit706s16_inner_dialog_body\'><!--headings--><table class="scb_s_experiment_setup_table"><thead class="scb_s_experiment_setup_table_head">');
   var headingList4 = opt_data.template.ui.add_multiple_dialog.headings;
   var headingListLen4 = headingList4.length;
   for (var headingIndex4 = 0; headingIndex4 < headingListLen4; headingIndex4++) {
@@ -14,11 +14,11 @@ mit706s14.dialog = function(opt_data, opt_sb) {
     output.append('<td class=\'scb_s_experiment_setup_table_heading\'>', soy.$$escapeHtml(headingData4), '</td>');
   }
   output.append('</thead>');
-  var cell_lineList10 = soy.$$getMapKeys(opt_data.template.ui.add_multiple_dialog);
+  var cell_lineList10 = opt_data.template.ui.add_multiple_dialog.order;
   var cell_lineListLen10 = cell_lineList10.length;
   for (var cell_lineIndex10 = 0; cell_lineIndex10 < cell_lineListLen10; cell_lineIndex10++) {
     var cell_lineData10 = cell_lineList10[cell_lineIndex10];
-    if (cell_lineData10 == 'headings') {
+    if (cell_lineData10 == 'headings' || cell_lineData10 == 'order') {
     } else {
       output.append('<tbody class="scb_s_experiment_setup_table_body">');
       var rowsList15 = opt_data.template.ui.add_multiple_dialog[cell_lineData10].rows;

@@ -677,6 +677,7 @@ body.dragging, body.dragging * {
   cursor: pointer;
   border: none;
   background: none;
+  background-repeat: no-repeat;
 }
 .scb_s_microscopy_vertical_line_1 {
   position: absolute;

@@ -97,7 +97,7 @@ scb_western_blot_gel.display_gel = function(opt_data, opt_sb) {
 scb_western_blot_gel.undeveloped_gel = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<h1>Choose Blotting <br/> Conditions</h1><div class=\'scb_s_wb_primary_antibody\'>Primary antibody:<label class="custom-select_gel"><select class=\'scb_f_wb_anti_body_select_primary\' western_blot_id=\'', soy.$$escapeHtml(opt_data.western_blot.id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' western_blot_gel_id=\'', soy.$$escapeHtml(opt_data.western_blot_gel.id), '\'>');
-  var pabList303 = soy.$$getMapKeys(opt_data.t.primary_anti_body);
+  var pabList303 = opt_data.t.primary_anti_body.order;
   var pabListLen303 = pabList303.length;
   for (var pabIndex303 = 0; pabIndex303 < pabListLen303; pabIndex303++) {
     var pabData303 = pabList303[pabIndex303];

@@ -4445,7 +4445,7 @@ var __microscopy_test = {
 
 var __assignment_706_2014 = {
         id: 'assignment_706_2014',
-        name: 'Quiz 3',
+        name: 'StarCellBio Problem 1',
         course: '7.06 Spring 2014',
     	course_name: 'Prototypes',
         description: 'Microscopy Test of images',
@@ -4493,11 +4493,11 @@ var __assignment_706_2014 = {
                 }
             },
             add_multiple_dialog: {
+            	order: ['gfp', 'gfpA', 'gfpB', 'gfpC', 'gfpD', 'gfpK', 'gfpH', 'gfp100', 'gfpTD'],
 				headings: [
 					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
                			],
             	'gfp':{
-           		 
                         rows: [
                             {
                                 cells: [
@@ -4551,9 +4551,6 @@ var __assignment_706_2014 = {
                         ]
                     },
 				'gfpA':{
-					headings: [
-					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-               			],
                     rows: [
                     {
                                 cells: [
@@ -4607,9 +4604,6 @@ var __assignment_706_2014 = {
                     ]
 				},
 				'gfpB':{
-					headings: [
-					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-               			],
                     rows: [ {
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Protein B'},
@@ -4662,9 +4656,6 @@ var __assignment_706_2014 = {
                     ]
 				},
 				'gfpC':{
-					headings: [
-					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-               			],
                     rows: [
                     {
                                 cells: [
@@ -4718,9 +4709,6 @@ var __assignment_706_2014 = {
                     ]
 				},
 				'gfpD':{
-					headings: [
-					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-               			],
                     rows: [{
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Protein D'},
@@ -4772,10 +4760,7 @@ var __assignment_706_2014 = {
                             }
                     ]
 				},
-				'gfpK':{					
-					headings: [
-					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-               			],
+				'gfpK':{				
                     rows: [{
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Kinase'},
@@ -4828,9 +4813,6 @@ var __assignment_706_2014 = {
                     ]
 				},
 				'gfpH':{					
-					headings: [
-					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-               			],
                     rows: [{
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Histone H2B'},
@@ -4884,9 +4866,6 @@ var __assignment_706_2014 = {
 				
 				},
 				'gfp100':{
-					headings: [
-					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-               			],
                     rows: [
                      {
                                 cells: [
@@ -4941,9 +4920,6 @@ var __assignment_706_2014 = {
 				
 				},
 				'gfpTD':{
-					headings: [
-					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-               			],
                     rows: [{
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-pTD'},
@@ -5071,13 +5047,14 @@ var __assignment_706_2014 = {
 			kind: 'minutes'
 		},
 		primary_anti_body: {
+			order:['mpA', 'mpB', 'mpC', 'mpD', 'mpX', 'mpAG'],
 			'mpA': {
 				name: 'mouse anti-phospho-protein A',
 				secondary: ['m'],
 				marks: [
 					{weight: 46, intensity: 0}
 				],
-				gel_name: 'protein A'
+				gel_name: 'Phospho-Protein A'
 			},
 			'mpB': {
 				name: 'mouse anti-phospho-protein B',
@@ -5085,7 +5062,7 @@ var __assignment_706_2014 = {
 				marks: [
 					{weight: 134, intensity: 0},
 				],
-				gel_name: 'protein B'
+				gel_name: 'Phospho-Protein B'
 			},
 			'mpC': {
 				name: 'mouse anti-phospho-protein C',
@@ -5093,7 +5070,7 @@ var __assignment_706_2014 = {
 				marks: [
 					{weight: 44, intensity: 0},
 				],
-				gel_name: 'protein C'
+				gel_name: 'Phospho-Protein C'
 			},
 			'mpD': {
 				name: 'mouse anti-phospho-protein D',
@@ -5101,7 +5078,7 @@ var __assignment_706_2014 = {
 				marks: [
 					{weight: 67, intensity: 0},
 				],
-				gel_name: 'protein D'
+				gel_name: 'Phospho-Protein D'
 			},
 			'mpX': {
 				name: 'mouse anti-phospho-kinase X',
@@ -5109,15 +5086,15 @@ var __assignment_706_2014 = {
 				marks: [
 					{weight: 74, intensity: 0},
 				],
-				gel_name: 'kinase X'
+				gel_name: 'Phospho-Kinase X'
 			},
 			'mpAG': {
-				name: 'rabbit anti-GAPDH (loading control)',
+				name: 'rabbit anti-GAPDH',
 				secondary: ['r'],
 				marks: [
 					{weight: 37, intensity: 0},
 				],
-				gel_name: 'anti-GAPDH'
+				gel_name: 'GAPDH'
 			}
 		},//
 		secondary_anti_body: {
@@ -5439,11 +5416,11 @@ var __assignment_706_2014 = {
                     'cyto': {
                         'parser_fixed': [
                         	{
-                                transfer_function: 'static',
+                                transfer_function: 'delta',
                                 cutoff: -1,
                                 drug: 'gm',
                                 cell_line: '*ANY*',
-                                marks: [
+                                above_marks: [
                                     {
                                         name: 'protein C',
                                         weight: 44, // 34&35
@@ -5456,14 +5433,15 @@ var __assignment_706_2014 = {
                                         intensity: 2,
                                         primary_anti_body: ['mpAG']
                                     }
-                                ]
+                                ],
+                                below_marks: []
                             },
                             {
-                                transfer_function: 'static',
+                                transfer_function: 'delta',
                                 cutoff: -1,
                                 drug: 'gml',
                                 cell_line: '*ANY*',
-                                marks: [
+                                above_marks: [
                                     {
                                         name: 'protein B',
                                         weight: 134, // 34&35
@@ -5494,14 +5472,15 @@ var __assignment_706_2014 = {
                                         intensity: 2,
                                         primary_anti_body: ['mpAG']
                                     }
-                                ]
+                                ],
+                                below_marks: []
                             },
                         	{
-                                transfer_function: 'static',
+                                transfer_function: 'delta',
                                 cutoff: -1,
                                 drug: 'gmi',
                                 cell_line: '*ANY*',
-                                marks: [
+                                above_marks: [
                                     {
                                         name: 'protein C',
                                         weight: 44, // 34&35
@@ -5514,14 +5493,15 @@ var __assignment_706_2014 = {
                                         intensity: 2,
                                         primary_anti_body: ['mpAG']
                                     }
-                                ]
+                                ],
+                                below_marks: []
                             },
                             {
-                                transfer_function: 'static',
+                                transfer_function: 'delta',
                                 cutoff: -1,
                                 drug: 'gmil',
                                 cell_line: '*ANY*',
-                                marks: [
+                                above_marks: [
                                     {
                                         name: 'protein B',
                                         weight: 134, // 34&35
@@ -5546,7 +5526,8 @@ var __assignment_706_2014 = {
                                         intensity: 2,
                                         primary_anti_body: ['mpAG']
                                     }
-                                ]
+                                ],
+                                below_marks: []
                             }
                             
                         ]
@@ -5732,7 +5713,7 @@ $(function () {
 					width: '880px',
 					height: '540px',
 					left: '100px',
-					top: '050px'
+					top: '000px'
 				}
 			});
 			get_courses_result.list[x] = assignment_706_2014;
@@ -5795,7 +5776,7 @@ $(function () {
             width: '880px',
             height: '540px',
             left: '100px',
-            top: '050px'
+            top: '000px'
         }
     });
 	

@@ -6,7 +6,7 @@
 @param experiment
 */
 {template .dialog}
-<div class='scb_mit706s16_inner_dialog'>
+<div class='scb_mit706s14_inner_dialog'>
     <h1 class='scb_mit706s16_inner_dialog_title'>
         <span class='scb_mit706s16_inner_dialog_title_close'>&#215;</span>
         Add Samples </h1>
@@ -22,8 +22,8 @@
             </td>
             {/foreach}
             </thead>
-            {foreach $cell_line in keys($template.ui.add_multiple_dialog)}
-            {if $cell_line == 'headings'}
+            {foreach $cell_line in $template.ui.add_multiple_dialog.order}
+            {if $cell_line == 'headings' or $cell_line =='order'}
             {else}
             <tbody class="scb_s_experiment_setup_table_body">
             {foreach $rows in $template.ui.add_multiple_dialog[$cell_line].rows}
