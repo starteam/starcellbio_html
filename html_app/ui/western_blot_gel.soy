@@ -140,7 +140,7 @@
         <div class='scb_s_western_blot_choose_samples_order'>
             <ol class='scb_s_western_blot_choose_samples_order_list scb_s_western_blot_static_list'>
                 {foreach $r in $rows}
-                {if $western_blot.marker_loaded == true and $r.lane.id == 'marker'}
+                {if  $r.kind =='existing' and  $western_blot.marker_loaded == true and $r.lane.id == 'marker'}
                 	<li class="scb_s_western_blot_marker scb_s_western_blot_choose_samples_list" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>Marker</li>
             	{/if}
                 {if $r.is_valid}

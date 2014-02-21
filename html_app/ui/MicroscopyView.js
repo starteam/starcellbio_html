@@ -596,6 +596,9 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
+    
+
+
     parsed.microscopy.samples_finished = true;
     parsed.microscopy.lane_selected = scb.utils.get(parsed.microscopy.lanes_list.list, [0, 'id']);
     if(parsed.microscopy.lanes_list.list[0].kind =='IF'){
@@ -631,8 +634,8 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select =
         alert("INVALID ELEMENT!");
     }
    if (parsed.microscopy.samples_finished) {
-   		if(parsed.microscopy.selected_lane.lens_map && parsed.microscopy.selected_lane.lens_map.cache)
-   			draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
+//    		if(parsed.microscopy.selected_lane.lens_map && parsed.microscopy.selected_lane.lens_map.cache)
+//    			draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
         $('li', $(element).parent()).removeClass('scb_s_microscopy_sample_selected');
         $(element).addClass('scb_s_microscopy_sample_selected');
         parsed.microscopy.lane_selected = parsed.microscopy_lane.id;
@@ -1390,9 +1393,9 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
         scb.ui.static.MicroscopyView.scb_s_microscopy_add_microscopy(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_save_button', function (e, ui) {
-    var parsed = scb.ui.static.MicroscopyView.parse(this);
-        	parsed.experiment.last_scroll=document.body.scrollTop;
-        draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
+//     var parsed = scb.ui.static.MicroscopyView.parse(this);
+//         	parsed.experiment.last_scroll=document.body.scrollTop;
+//         draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
     });
     
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_laser', function (e) {
@@ -1838,6 +1841,11 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             }
         }
         if (state.microscopy.samples_finished) {
+        	debugger;
+        	$('.scb_s_microscopy_load_followup').show();
+			$('.scb_s_microscopy_load_followup').mouseover(function(){
+				$(this).fadeOut();
+			});
         	if (!scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state) {
                 $('.scb_s_microscopy_instructions_followup').hide();
                 scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_status(false);

@@ -417,6 +417,8 @@
 {/if}
 <div class = 'scb_s_microscopy_prepare_slide_instructions'>
 
+
+	
 	<ul class='scb_s_experiment_setup_list'>
    <li>Note: Not all microscope controls will be relevant for each image.</li>
    <li>To save the microscope settings for a specific image, click <b>SAVE IMAGE</b>. The microscope settings will be saved when navigating away from this image.</li>
@@ -514,6 +516,14 @@
 @param microscopy_line_id
 */
 {template .display_lens}
+
+<div class='scb_s_microscopy_load_followup scb_s_controls_note'>
+			<button class='scb_f_controls_close_button' aria-label='Close'><span>&#215;</span></button>
+	
+						The slide has been loaded. Use the arrow keys to move around the slide.
+		
+	 <div class='scb_s_microscope_status'></div>
+			 </div>
 <div class='scb_s_microscopy_instructions_followup scb_s_controls_note'>
 			<button class='scb_f_controls_close_button' aria-label='Close'><span>&#215;</span></button>
 	

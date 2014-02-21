@@ -143,21 +143,28 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
             if (e.is_valid) count++;
 
         });
-//             var order_ids =[];
-// 			_.each(rows, function (e) { 
-//             if(e.kind == 'existing')
-// 	            order_ids.push(e.lane.order_id);});
-//         if(order_ids.length > 0){
-// 			if(_.uniq(order_ids) != order_ids.length)
-// 				if(rows.filter(function(el){ return el.display_text == "Marker"}).length >0)
-// 					rows.filter(function(el){ return el.display_text == "Marker"})[0].lane.order_id = rows.length-1;
-//         }
-        if(self.lysate_prepared)
+
+        if(self.lysate_prepared){
+        	var existing_rows = 0;
 	        rows = _.sortBy(rows, function(obj){ 
-	        	if(obj.kind=='existing')
-	        		return obj.lane.order_id; 
+	        	if(obj.kind == 'existing' && (obj.is_valid || obj.is_marker)){
+	        		existing_rows ++;
+	        		return obj.lane.order_id;
+	        	} 
 	        	else return;
 	        });
+	        if(rows[1].is_marker){
+	        	var marker = rows[1];
+				rows.splice(1,1);
+				rows.splice(existing_rows, 0, marker);
+	        }
+	        if(rows[rows.length-1].is_marker){
+	        	var marker = rows[rows.length-1];
+				rows.splice(rows.length-1,1);
+				rows.splice(existing_rows, 0, marker);
+	        }
+	    }
+	        	
         return {rows:rows, valid:count};
     }
 
