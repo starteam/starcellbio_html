@@ -24,7 +24,8 @@ html_prefix = "<!DOCTYPE html><html><head><META http-equiv='Content-Type' conten
 html_suffix = js_prefix + "../scb/get_courses.js" + js_suffix
 html_suffix += js_prefix + "../scb/get_model.js" + js_suffix
 html_suffix += "</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid=\"invalid\"'};</script></body>"
-
+# add raven
+html_suffix += "<script src="//cdn.ravenjs.com/1.1.11/jquery,native/raven.min.js"></script> <script> Raven.config('https://7845856fc975496e8dc2130b7140b19c@app.getsentry.com/19461', { whitelistUrls: ['starcellbio.mit.edu'] }).install(); </script>"
 
 def index_html():
     global css,js
@@ -32,6 +33,8 @@ def index_html():
         js.pop('js/jquery-1.7.2.min.js')
     if( js.has_key( 'starcellbio.app.js' )):
         js.pop('starcellbio.app.js')
+    if( js.has_key( 'swipe/Gruntfile.js' )):
+        js.pop('swipe/Gruntfile.js')
     
     css_join = css_prefix + (css_suffix+css_prefix).join(css.keys()) + css_suffix
     js_join = js_prefix + (js_suffix+js_prefix).join(js.keys()) + js_suffix
