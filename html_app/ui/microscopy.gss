@@ -472,6 +472,10 @@ right: 12px !important;
 z-index: 5;
 }
 
+.scb_s_microscopy_dim_conditions{
+opacity: 0.5;
+}
+
 .scb_f_microscopy_red{
 height: 30px !important;
 width: 30px !important;

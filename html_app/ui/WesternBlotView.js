@@ -663,7 +663,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 		if(!state.western_blot.wells_loaded){
 		$('body').mousedown(function(e){
 			if($(e.target).parents('.scb_s_western_blot_samples_area').length ==1){
-				if($(e.target).hasClass('scb_s_western_blot_choose_samples_list_item')){
+				if($(e.target).hasClass('scb_s_western_blot_sortable_item')){
 				$('.markedLi').removeClass('markedLi');
     			$(e.target).addClass('markedLi');
     			}

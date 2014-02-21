@@ -300,27 +300,34 @@
 					  	{if $k == 'secondary'}
 						  <input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="secondary" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'secondary'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text">Secondary only control</span>
+								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'secondary'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.IHC.conditions.secondary.name}</span>
 							&nbsp;&nbsp;
 						{elseif $k == 'ki67'}
 							<input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="ki67" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'ki67'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">Ki-67</span>
+								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'ki67'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.ki67.name}</span>
 							&nbsp;
 						{elseif $k == 'NFIB'}
 							<input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="NFIB" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 							   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-							   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'NFIB'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">NFIB</span>
+							   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'NFIB'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.NFIB.name}</span>
 						{/if}
 					{/foreach}
-				{elseif $r.lane.kind == 'IF'}
+					{elseif $assignment.id =='assignment_706_2014'}			
+					 <input class="scb_f_microscopy_select_conditions {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" microscopy_id='{$microscopy.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
+                       lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+
+				{elseif $r.lane.kind == 'IF' and not $assignment.id =='assignment_706_2014'}
 					
 					{foreach $k in keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])}
-					{if $k == 'rgb'}
+					{if $k == 'rgb' and not $assignment.id =='assignment_706_2014'}
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">NFIB (red), DAPI (blue), control (green)</span>
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+
 					{/if}
 					{/foreach}
 				{elseif $r.lane.kind == 'Dye'}
@@ -329,10 +336,16 @@
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="HnE" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">H&E</span>
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.Dye.conditions.HnE.name}</span>
 					{/if}
 					{/foreach}
 				{/if}
+			{elseif $assignment.id =='assignment_706_2014'}			
+					 <input class="scb_f_microscopy_select_conditions {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" microscopy_id='{$microscopy.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
+                       lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+
 			{/if}
             </td>
 			<td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
@@ -627,7 +640,7 @@
  
 {if length(keys($kinds)) ==1}
 		{foreach $k in keys($kinds)}
-		<span class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}'
+		<span class="scb_f_microscopy_select_slide_type {if $lane.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" cell_treatment_id='{$cell_treatment.id}'
 				microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="{$k}"
 				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$kinds[$k].name}</span>
 		{/foreach}
