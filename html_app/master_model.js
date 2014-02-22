@@ -5054,7 +5054,7 @@ var __assignment_706_2014 = {
 				marks: [
 					{weight: 46, intensity: 0}
 				],
-				gel_name: 'Phospho-Protein A'
+				gel_name: 'P-Protein A'
 			},
 			'mpB': {
 				name: 'mouse anti-phospho-protein B',
@@ -5062,7 +5062,7 @@ var __assignment_706_2014 = {
 				marks: [
 					{weight: 134, intensity: 0},
 				],
-				gel_name: 'Phospho-Protein B'
+				gel_name: 'P-Protein B'
 			},
 			'mpC': {
 				name: 'mouse anti-phospho-protein C',
@@ -5070,7 +5070,7 @@ var __assignment_706_2014 = {
 				marks: [
 					{weight: 44, intensity: 0},
 				],
-				gel_name: 'Phospho-Protein C'
+				gel_name: 'P-Protein C'
 			},
 			'mpD': {
 				name: 'mouse anti-phospho-protein D',
@@ -5078,7 +5078,7 @@ var __assignment_706_2014 = {
 				marks: [
 					{weight: 67, intensity: 0},
 				],
-				gel_name: 'Phospho-Protein D'
+				gel_name: 'P-Protein D'
 			},
 			'mpX': {
 				name: 'mouse anti-phospho-kinase X',
@@ -5086,7 +5086,7 @@ var __assignment_706_2014 = {
 				marks: [
 					{weight: 74, intensity: 0},
 				],
-				gel_name: 'Phospho-Kinase X'
+				gel_name: 'P-Kinase X'
 			},
 			'mpAG': {
 				name: 'rabbit anti-GAPDH',
