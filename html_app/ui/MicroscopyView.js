@@ -757,7 +757,7 @@ function draw(state){
 	
 	document.onkeydown=function (e) {
 		e = e || window.event;
-		if(caman_deadlock){
+		if(caman_lock){
 				console.log('nope');
 		}
 		else{
@@ -790,7 +790,7 @@ function draw(state){
 		}
 	};
 	$('#up').click(function(){
-			if(caman_deadlock){
+			if(caman_lock){
 			}
 			else{
 				draw_lens('y', 10, state, document.getElementsByTagName("canvas")[0]);
@@ -799,7 +799,7 @@ function draw(state){
 
 	});
 	$('#down').click(function(){
-			if(caman_deadlock){
+			if(caman_lock){
 			}
 			else{
 				draw_lens('y', -10, state, document.getElementsByTagName("canvas")[0]);
@@ -807,7 +807,7 @@ function draw(state){
 			}
 	});
 	$('#left').click(function(){
-			if(caman_deadlock){
+			if(caman_lock){
 			}
 			else{
 				draw_lens('x', 10, state, document.getElementsByTagName("canvas")[0]);
@@ -815,7 +815,7 @@ function draw(state){
 			}
 	});
 	$('#right').click(function(){
-			if(caman_deadlock){
+			if(caman_lock){
 			}
 			else{
 				draw_lens('x', -10, state, document.getElementsByTagName("canvas")[0]);
@@ -823,7 +823,7 @@ function draw(state){
 			}
 	});
 	$('#brightup').click(function(){
-		if(caman_deadlock){
+		if(caman_lock){
 				console.log('nope');
 		}
 		else{
@@ -839,7 +839,7 @@ function draw(state){
 		}
 	});
 	$('#brightdown').click(function(){
-		if(caman_deadlock){
+		if(caman_lock){
 				console.log('nope');
 		}
 		else{
@@ -855,7 +855,7 @@ function draw(state){
 		}
 	});
 	$('#blurup').click(function(){
-		if(caman_deadlock){
+		if(caman_lock){
 				console.log('nope');
 		}
 		else{
@@ -872,7 +872,7 @@ function draw(state){
 		}
 	});
 	$('#blurdown').click(function(){
-		if(caman_deadlock){
+		if(caman_lock){
 				console.log('nope');
 		}
 		else{
@@ -889,7 +889,7 @@ function draw(state){
 		}
 	});
 	$('#fblurup').click(function(){
-		if(caman_deadlock){
+		if(caman_lock){
 				console.log('nope');
 		}
 		else{
@@ -907,7 +907,7 @@ function draw(state){
 		}
 	});
 	$('#fblurdown').click(function(){
-		if(caman_deadlock){
+		if(caman_lock){
 				console.log('nope');
 		}
 		else{
@@ -1109,11 +1109,11 @@ function copy_state(current_state, new_state, new_state_source){
 /////////////////////////////////////////////////////////////
 //////////////////ORIGINAL FUNCTIONS/////////////////////////
 
-var caman_deadlock = false;
+var caman_lock = false;
 
 var save_and_draw_cache_image_list = [];
 function save_and_draw_cache_image(canvas, state){
-	caman_deadlock = true;
+	caman_lock = true;
 	save_and_draw_cache_image_list.push({ canvas:canvas, state:state });
 	if(save_and_draw_cache_image_list.length != 1)
 	{
@@ -1166,7 +1166,7 @@ function save_and_draw_cache_image(canvas, state){
 				save_and_draw_cache_image( last.canvas, last.state);
 			}
 			save_and_draw_cache_image_list = [];
-			caman_deadlock = false;
+			caman_lock = false;
 		});
 		console.log('rendering...');
 		state.action = 'rendering';
@@ -1194,7 +1194,7 @@ function save_and_draw_cache_image(canvas, state){
 
 
 function modify_state_brightness(addition, state){
-	caman_deadlock = true;
+	caman_lock = true;
 	var elements = reset_canvas();
 	var canvas = elements[0]; 
 	var context = elements[1];
@@ -1223,7 +1223,7 @@ function modify_state_brightness(addition, state){
 			$('.scb_s_microscope_status').text(state.action);
 			
 			$('#lens_pending').remove();
-			caman_deadlock = false;
+			caman_lock = false;
 		});
 		
 		console.log('rendering...');
@@ -1285,7 +1285,7 @@ function reset_image(img2string){
 
 
 function blur_helper(state, context, canvas, addition){
-	caman_deadlock = true;
+	caman_lock = true;
 	state.display = state.orig;
 	state.blur = state.blur + addition;
 	Caman(canvas, reset_image(state.display), function () {
@@ -1296,7 +1296,7 @@ function blur_helper(state, context, canvas, addition){
 			console.log('stackblur');
 			$('.scb_s_microscope_status').text(state.action);
 			$('#lens_pending').remove();
-			caman_deadlock = false;
+			caman_lock = false;
 		});
 		console.log('rendering...');
 		state.action = 'rendering';
