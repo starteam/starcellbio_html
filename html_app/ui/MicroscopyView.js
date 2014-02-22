@@ -38,7 +38,6 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	current_slides = state.slides;
 	var disableSlider = false;
 	var enableIFSlider = false;
-	// <label class="custom-select_gel"></label>
 	if(state.slide_type == 'Dye'){
 	$('.scb_s_microscopy_if').prop('disabled', false);
 	}
@@ -291,31 +290,6 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		  }
 		});
 	}
-// 				
-// 	else if (enableIFSlider){
-// 		$( ".scb_s_microscopy_brightness_slider" ).slider({
-// 		  value: state.microscopy_lane.lens_map.brightness,
-// 		  min: 0,
-// 		  max: 300,
-// 		  step: 5,
-// 		  slide: function( event, ui ) {
-// 		  	modify_state_brightness(ui.value, state.microscopy_lane.lens_map);
-// 		  }
-// 		});
-// 	
-// 	}
-// 	
-// 	else{
-// 		  $( ".scb_s_microscopy_brightness_slider" ).slider({
-// 			  value:0,
-// 			  min: -100,
-// 			  max: 100,
-// 			  step: 5,
-// 			  slide: function( event, ui ) {
-// 			  }
-// 			});
-// 	}
-// 	
 	
 	if(state.microscopy.light_on){
 			$('#brightup').prop('disabled', false);
@@ -376,8 +350,6 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 				return;
 				
 			}
-				
-       //}
        if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1)
        {
        			parsed.microscopy.lanes_list.start({
@@ -631,8 +603,6 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select =
         alert("INVALID ELEMENT!");
     }
    if (parsed.microscopy.samples_finished) {
-//    		if(parsed.microscopy.selected_lane.lens_map && parsed.microscopy.selected_lane.lens_map.cache)
-//    			draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
         $('li', $(element).parent()).removeClass('scb_s_microscopy_sample_selected');
         $(element).addClass('scb_s_microscopy_sample_selected');
         parsed.microscopy.lane_selected = parsed.microscopy_lane.id;
@@ -784,14 +754,10 @@ function draw_lens(param, addition, state, canvas){
 function draw(state){
 	var canvas=document.getElementsByTagName("canvas")[0];
 	
-
-	
-	
-	//$(document).keydown(function (e) {
 	
 	document.onkeydown=function (e) {
 		e = e || window.event;
-		if(state.action =='rendering' ){
+		if(caman_deadlock){
 				console.log('nope');
 		}
 		else{
@@ -824,24 +790,40 @@ function draw(state){
 		}
 	};
 	$('#up').click(function(){
+			if(caman_deadlock){
+			}
+			else{
 				draw_lens('y', 10, state, document.getElementsByTagName("canvas")[0]);
 				console.log('up');
+			}
 
 	});
 	$('#down').click(function(){
+			if(caman_deadlock){
+			}
+			else{
 				draw_lens('y', -10, state, document.getElementsByTagName("canvas")[0]);
 				console.log('down');
+			}
 	});
 	$('#left').click(function(){
+			if(caman_deadlock){
+			}
+			else{
 				draw_lens('x', 10, state, document.getElementsByTagName("canvas")[0]);
 				console.log('left')
+			}
 	});
 	$('#right').click(function(){
+			if(caman_deadlock){
+			}
+			else{
 				draw_lens('x', -10, state, document.getElementsByTagName("canvas")[0]);
 				console.log('right');
+			}
 	});
 	$('#brightup').click(function(){
-		if(state.action =='rendering'){
+		if(caman_deadlock){
 				console.log('nope');
 		}
 		else{
@@ -857,7 +839,7 @@ function draw(state){
 		}
 	});
 	$('#brightdown').click(function(){
-		if(state.action =='rendering'){
+		if(caman_deadlock){
 				console.log('nope');
 		}
 		else{
@@ -873,7 +855,7 @@ function draw(state){
 		}
 	});
 	$('#blurup').click(function(){
-		if(state.action =='rendering'){
+		if(caman_deadlock){
 				console.log('nope');
 		}
 		else{
@@ -890,7 +872,7 @@ function draw(state){
 		}
 	});
 	$('#blurdown').click(function(){
-		if(state.action =='rendering'){
+		if(caman_deadlock){
 				console.log('nope');
 		}
 		else{
@@ -907,7 +889,7 @@ function draw(state){
 		}
 	});
 	$('#fblurup').click(function(){
-		if(state.action =='rendering'){
+		if(caman_deadlock){
 				console.log('nope');
 		}
 		else{
@@ -925,7 +907,7 @@ function draw(state){
 		}
 	});
 	$('#fblurdown').click(function(){
-		if(state.action =='rendering'){
+		if(caman_deadlock){
 				console.log('nope');
 		}
 		else{
@@ -1127,8 +1109,11 @@ function copy_state(current_state, new_state, new_state_source){
 /////////////////////////////////////////////////////////////
 //////////////////ORIGINAL FUNCTIONS/////////////////////////
 
+var caman_deadlock = false;
+
 var save_and_draw_cache_image_list = [];
 function save_and_draw_cache_image(canvas, state){
+	caman_deadlock = true;
 	save_and_draw_cache_image_list.push({ canvas:canvas, state:state });
 	if(save_and_draw_cache_image_list.length != 1)
 	{
@@ -1162,7 +1147,6 @@ function save_and_draw_cache_image(canvas, state){
 			}
 			state.action = 'rendered';
 			console.log('rendered'); 
-			//var hidden_canvas = document.getElementById('spy');
 			var hidden_canvas = canvas_hidden;
 			hidden_canvas.width= 0;
 			hidden_canvas.height=0;
@@ -1182,6 +1166,7 @@ function save_and_draw_cache_image(canvas, state){
 				save_and_draw_cache_image( last.canvas, last.state);
 			}
 			save_and_draw_cache_image_list = [];
+			caman_deadlock = false;
 		});
 		console.log('rendering...');
 		state.action = 'rendering';
@@ -1209,6 +1194,7 @@ function save_and_draw_cache_image(canvas, state){
 
 
 function modify_state_brightness(addition, state){
+	caman_deadlock = true;
 	var elements = reset_canvas();
 	var canvas = elements[0]; 
 	var context = elements[1];
@@ -1237,6 +1223,7 @@ function modify_state_brightness(addition, state){
 			$('.scb_s_microscope_status').text(state.action);
 			
 			$('#lens_pending').remove();
+			caman_deadlock = false;
 		});
 		
 		console.log('rendering...');
@@ -1262,8 +1249,6 @@ function modify_state_blur(addition, state, direction){
 	var elements = reset_canvas();
 	var canvas = elements[0]; 
 	var context = elements[1];
-	//context.fillStyle="#000000";
-	//context.fillRect(0,0, canvas.width, canvas.height);
 	console.log('blur');
 	console.log(state.blur);
 	console.log('addition');
@@ -1300,6 +1285,7 @@ function reset_image(img2string){
 
 
 function blur_helper(state, context, canvas, addition){
+	caman_deadlock = true;
 	state.display = state.orig;
 	state.blur = state.blur + addition;
 	Caman(canvas, reset_image(state.display), function () {
@@ -1310,6 +1296,7 @@ function blur_helper(state, context, canvas, addition){
 			console.log('stackblur');
 			$('.scb_s_microscope_status').text(state.action);
 			$('#lens_pending').remove();
+			caman_deadlock = false;
 		});
 		console.log('rendering...');
 		state.action = 'rendering';

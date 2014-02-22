@@ -1310,7 +1310,8 @@ top: 49px;
 	border-radius: 14px;
 	padding: 4px;
 	border: 4px solid white;
-	bottom: 231px;
+	bottom: 171px;
+	height: 150px;
 	z-index: 1;
 	
  text-align: left;
