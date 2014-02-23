@@ -15,6 +15,8 @@ import StarCellBio.settings
 import os
 import StarCellBio.supplements as supplements
 
+random_mapping = {0: 'BADC', 1: 'CBAD', 2: 'ABDC', 3: 'CDAB', 4: 'CABD', 5: 'DCBA', 6: 'ADCB', 7: 'BACD', 8: 'DBAC', 9: 'DCAB', 10: 'CDBA', 11: 'ACDB', 12: 'BDAC', 13: 'DBCA', 14: 'DABC', 15: 'ACBD', 16: 'BCDA', 17: 'DACB', 18: 'BDCA', 19: 'ADBC', 20: 'CBDA', 21: 'ABCD', 22: 'CADB', 23: 'BCAD'}
+
 def home(request):
 
     file_path = StarCellBio.settings.rel('../html_app/index.html')
@@ -86,7 +88,7 @@ def get_courses(request, **kwargs):
 	import random
 	import pudb
 	#pudb.set_trace()
-	list = []
+	alist = []
 	retval = []
 	token1 = random.randrange(0, 1000000)
 	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
@@ -95,15 +97,60 @@ def get_courses(request, **kwargs):
 		assignments = course[0].assignments.all()
 		if(course[0].sassignments.filter(student=request.user).count() == 0 or course[0].sassignments.count() == 0):
 			for a in assignments:
-				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = '')
+				if(a.assignmentName == 'StarCellBio Problem 1'):
+					pudb.set_trace()
+					import hashlib
+					md5 = hashlib.md5()
+					md5.update(str(request.user.email))
+					encoded_email = md5.hexdigest()
+					encoded_number = int(encoded_email, 16)%24
+					order = random_mapping[encoded_number]
+					order = list(order)
+					original_assignment_data = a.data
+					assignment_data = ast.literal_eval(original_assignment_data)
+					#replace A
+					assignment_data['template']['ui']['add_multiple_dialog']['gfp1']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[0]+""
+					assignment_data['template']['cell_lines']['gfp1']['name'] = "WT-GFP-Protein "+order[0]+""
+					assignment_data['template']['primary_anti_body']['mp1']['name'] = "mouse anti-phospho-protein "+order[0]+""
+					assignment_data['template']['primary_anti_body']['mp1']['gel_name'] = "P-Protein "+order[0]+""
+					
+					#replace B
+					assignment_data['template']['ui']['add_multiple_dialog']['gfp2']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[1]+""
+					assignment_data['template']['cell_lines']['gfp2']['name'] = "WT-GFP-Protein "+order[1]+""
+					assignment_data['template']['primary_anti_body']['mp2']['name'] = "mouse anti-phospho-protein "+order[1]+""
+					assignment_data['template']['primary_anti_body']['mp2']['gel_name'] = "P-Protein "+order[1]+""
+					assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][1]['above_marks'][0]['name'] = "protein "+order[1]+""
+					assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][3]['above_marks'][0]['name'] = "protein "+order[1]+""
+					
+					
+					#replace C
+					assignment_data['template']['ui']['add_multiple_dialog']['gfp3']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[2]+""
+					assignment_data['template']['cell_lines']['gfp3']['name'] = "WT-GFP-Protein "+order[2]+""
+					assignment_data['template']['primary_anti_body']['mp3']['name'] = "mouse anti-phospho-protein "+order[2]+""
+					assignment_data['template']['primary_anti_body']['mp3']['gel_name'] = "P-Protein "+order[2]+""
+					assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][0]['above_marks'][0]['name'] = "protein "+order[2]+""
+					assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][1]['above_marks'][1]['name'] = "protein "+order[2]+""
+					assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][2]['above_marks'][0]['name'] = "protein "+order[2]+""
+					assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][3]['above_marks'][1]['name'] = "protein "+order[2]+""
+					
+					#replace D
+					assignment_data['template']['ui']['add_multiple_dialog']['gfp4']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[3]+""
+					assignment_data['template']['cell_lines']['gfp4']['name'] = "WT-GFP-Protein "+order[3]+""
+					assignment_data['template']['primary_anti_body']['mp4']['name'] = "mouse anti-phospho-protein "+order[3]+""
+					assignment_data['template']['primary_anti_body']['mp4']['gel_name'] = "P-Protein "+order[3]+""
+					assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][1]['above_marks'][2]['name'] = "protein "+order[3]+""
+					
+					original_assignment_data = repr(assignment_data)
+				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = original_assignment_data)
 				sa.save()
+			assignments = course[0].sassignments.filter(student=request.user)
 		else:
 			token1 = course[0].sassignments.filter(student=request.user)[0].token
 			assignments = course[0].sassignments.filter(student=request.user)
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
-			list.append(dictionary)
-		retval = {'list': list, 'is_auth': True, 'is_selected': list[0]['id'], 'token': token1}
+			alist.append(dictionary)
+		retval = {'list': alist, 'is_auth': True, 'is_selected': alist[0]['id'], 'token': token1}
 	else:
 		all =[]
 		for a in Assignment.objects.all():

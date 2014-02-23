@@ -4493,7 +4493,7 @@ var __assignment_706_2014 = {
                 }
             },
             add_multiple_dialog: {
-            	order: ['gfp', 'gfpA', 'gfpB', 'gfpC', 'gfpD', 'gfpK', 'gfpH', 'gfp100', 'gfpTD'],
+            	order: ['gfp', 'gfp1', 'gfp2', 'gfp3', 'gfp4', 'gfpK', 'gfpH', 'gfp100', 'gfpTD'],
 				headings: [
 					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
                			],
@@ -4550,7 +4550,7 @@ var __assignment_706_2014 = {
                             }
                         ]
                     },
-				'gfpA':{
+				'gfp1':{
                     rows: [
                     {
                                 cells: [
@@ -4563,7 +4563,7 @@ var __assignment_706_2014 = {
                                
                                 cell_treatments: {
                                     G: [
-                                        {cell_line: 'gfpA',
+                                        {cell_line: 'gfp1',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
@@ -4572,7 +4572,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
-                                        {cell_line: 'gfpA',
+                                        {cell_line: 'gfp1',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4581,7 +4581,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
-                                        {cell_line: 'gfpA',
+                                        {cell_line: 'gfp1',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4590,7 +4590,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
-                                        {cell_line: 'gfpA',
+                                        {cell_line: 'gfp1',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4603,7 +4603,7 @@ var __assignment_706_2014 = {
                             }
                     ]
 				},
-				'gfpB':{
+				'gfp2':{
                     rows: [ {
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Protein B'},
@@ -4615,7 +4615,7 @@ var __assignment_706_2014 = {
                                
                                 cell_treatments: {
                                     G: [
-                                        {cell_line: 'gfpB',
+                                        {cell_line: 'gfp2',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
@@ -4624,7 +4624,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
-                                        {cell_line: 'gfpB',
+                                        {cell_line: 'gfp2',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4633,7 +4633,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
-                                        {cell_line: 'gfpB',
+                                        {cell_line: 'gfp2',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4642,7 +4642,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
-                                        {cell_line: 'gfpB',
+                                        {cell_line: 'gfp2',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4655,7 +4655,7 @@ var __assignment_706_2014 = {
                             }
                     ]
 				},
-				'gfpC':{
+				'gfp3':{
                     rows: [
                     {
                                 cells: [
@@ -4668,7 +4668,7 @@ var __assignment_706_2014 = {
                                
                                 cell_treatments: {
                                     G: [
-                                        {cell_line: 'gfpC',
+                                        {cell_line: 'gfp3',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
@@ -4677,7 +4677,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
-                                        {cell_line: 'gfpC',
+                                        {cell_line: 'gfp3',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4686,7 +4686,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
-                                        {cell_line: 'gfpC',
+                                        {cell_line: 'gfp3',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4695,7 +4695,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
-                                        {cell_line: 'gfpC',
+                                        {cell_line: 'gfp3',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4708,7 +4708,7 @@ var __assignment_706_2014 = {
                             }
                     ]
 				},
-				'gfpD':{
+				'gfp4':{
                     rows: [{
                                 cells: [
                                     {kind: 'text', text: 'WT-GFP-Protein D'},
@@ -4720,7 +4720,7 @@ var __assignment_706_2014 = {
                                
                                 cell_treatments: {
                                     G: [
-                                        {cell_line: 'gfpD',
+                                        {cell_line: 'gfp4',
                                          	treatment_id: 'media_only',
                                             treatment_list: {list: [
                                             	{collection_id: 'default',
@@ -4729,7 +4729,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], L: [
-                                        {cell_line: 'gfpD',
+                                        {cell_line: 'gfp4',
                                         	treatment_id: 'ligand_media',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4738,7 +4738,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], I: [
-                                        {cell_line: 'gfpD',
+                                        {cell_line: 'gfp4',
                                         	treatment_id: 'inhibitor_media',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -4747,7 +4747,7 @@ var __assignment_706_2014 = {
                                                 	]}, temperature: '22'}
                                             ]}}
                                     ], A: [
-                                        {cell_line: 'gfpD',
+                                        {cell_line: 'gfp4',
                                         	treatment_id: 'ligand_media_inhibitor',
                                             treatment_list: {list: [
                                                 {collection_id: 'default',
@@ -5017,16 +5017,16 @@ var __assignment_706_2014 = {
 			'gfp': {
 				name: 'WT-GFP'
 			},
-			'gfpA': {
+			'gfp1': {
 				name: 'WT-GFP-Protein A'
 			},
-			'gfpB': {
+			'gfp2': {
 				name: 'WT-GFP-Protein B'
 			},
-			'gfpC': {
+			'gfp3': {
 				name: 'WT-GFP-Protein C'
 			},
-			'gfpD': {
+			'gfp4': {
 				name: 'WT-GFP-Protein D'
 			},
 			'gfpK': {
@@ -5047,8 +5047,8 @@ var __assignment_706_2014 = {
 			kind: 'minutes'
 		},
 		primary_anti_body: {
-			order:['mpA', 'mpB', 'mpC', 'mpD', 'mpX', 'mpAG'],
-			'mpA': {
+			order:['mp1', 'mp2', 'mp3', 'mp4', 'mpX', 'mpAG'],
+			'mp1': {
 				name: 'mouse anti-phospho-protein A',
 				secondary: ['m'],
 				marks: [
@@ -5056,7 +5056,7 @@ var __assignment_706_2014 = {
 				],
 				gel_name: 'P-Protein A'
 			},
-			'mpB': {
+			'mp2': {
 				name: 'mouse anti-phospho-protein B',
 				secondary: ['m'],
 				marks: [
@@ -5064,7 +5064,7 @@ var __assignment_706_2014 = {
 				],
 				gel_name: 'P-Protein B'
 			},
-			'mpC': {
+			'mp3': {
 				name: 'mouse anti-phospho-protein C',
 				secondary: ['m'],
 				marks: [
@@ -5072,7 +5072,7 @@ var __assignment_706_2014 = {
 				],
 				gel_name: 'P-Protein C'
 			},
-			'mpD': {
+			'mp4': {
 				name: 'mouse anti-phospho-protein D',
 				secondary: ['m'],
 				marks: [
@@ -5406,7 +5406,7 @@ var __assignment_706_2014 = {
                                         name: 'protein C',
                                         weight: 44, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['mpC']
+                                        primary_anti_body: ['mp3']
                                     },
                                     {
                                         name: 'anti-GAPDH',
@@ -5427,19 +5427,19 @@ var __assignment_706_2014 = {
                                         name: 'protein B',
                                         weight: 134, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['mpB']
+                                        primary_anti_body: ['mp2']
                                     },
                                     {
                                         name: 'protein C',
                                         weight: 44, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['mpC']
+                                        primary_anti_body: ['mp3']
                                     },
                                     {
                                         name: 'protein D',
                                         weight: 67, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['mpD']
+                                        primary_anti_body: ['mp4']
                                     },
                                     {
                                         name: 'kinase X',
@@ -5466,7 +5466,7 @@ var __assignment_706_2014 = {
                                         name: 'protein C',
                                         weight: 44, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['mpC']
+                                        primary_anti_body: ['mp3']
                                     },
                                     {
                                         name: 'anti-GAPDH',
@@ -5487,13 +5487,13 @@ var __assignment_706_2014 = {
                                         name: 'protein B',
                                         weight: 134, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['mpB']
+                                        primary_anti_body: ['mp2']
                                     },
                                     {
                                         name: 'protein C',
                                         weight: 44, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['mpC']
+                                        primary_anti_body: ['mp3']
                                     },
                                     {
                                         name: 'kinase X',
@@ -5549,37 +5549,37 @@ var __assignment_706_2014 = {
                 		},
                 		{
                 			match: ['cell_line', 'drug_id'],
-                			cell_line: 'gfpA',
+                			cell_line: 'gfp1',
                 			drug_id: ['gm', 'gmi'],
                 			phenotype: 'cytoplasm'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id'],
-                			cell_line: 'gfpA',
+                			cell_line: 'gfp1',
                 			drug_id: ['gml',  'gmil'],
                 			phenotype: 'plasma_membrane'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id'],
-                			cell_line: 'gfpB',
+                			cell_line: 'gfp2',
                 			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'plasma_membrane'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id'],
-                			cell_line: 'gfpC',
+                			cell_line: 'gfp3',
                 			drug_id: ['gm',  'gmi', 'gmil'],
                 			phenotype: 'cytoplasm'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id'],
-                			cell_line: 'gfpC',
+                			cell_line: 'gfp3',
                 			drug_id: ['gml'],
                 			phenotype: 'nucleus'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id'],
-                			cell_line: 'gfpD',
+                			cell_line: 'gfp4',
                 			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'cytoplasm'
                 		},

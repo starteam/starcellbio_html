@@ -30,7 +30,7 @@ class StudentAssignment(models.Model):
 
 
 class UserCourse(models.Model):
-	course_name = models.CharField(max_length=12)
+	course_name = models.CharField(max_length=50)
 	user = models.ForeignKey(User)
 	courseID = models.ForeignKey(Course, related_name='usercourses')
     
