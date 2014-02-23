@@ -98,7 +98,7 @@ def get_courses(request, **kwargs):
 		if(course[0].sassignments.filter(student=request.user).count() == 0 or course[0].sassignments.count() == 0):
 			for a in assignments:
 				if(a.assignmentName == 'StarCellBio Problem 1'):
-					pudb.set_trace()
+					#pudb.set_trace()
 					import hashlib
 					md5 = hashlib.md5()
 					md5.update(str(request.user.email))
@@ -139,6 +139,26 @@ def get_courses(request, **kwargs):
 					assignment_data['template']['primary_anti_body']['mp4']['name'] = "mouse anti-phospho-protein "+order[3]+""
 					assignment_data['template']['primary_anti_body']['mp4']['gel_name'] = "P-Protein "+order[3]+""
 					assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][1]['above_marks'][2]['name'] = "protein "+order[3]+""
+					
+					for key, value in assignment_data['template']['ui']['add_multiple_dialog'].iteritems():
+						if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein A'):
+							assignment_data['template']['ui']['add_multiple_dialog']['order'][1] = key
+						if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein B'):
+							assignment_data['template']['ui']['add_multiple_dialog']['order'][2] = key
+						if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein C'):
+							assignment_data['template']['ui']['add_multiple_dialog']['order'][3] = key
+						if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein D'):
+							assignment_data['template']['ui']['add_multiple_dialog']['order'][4] = key
+					for key, value in assignment_data['template']['primary_anti_body'].iteritems():
+						if(key != 'order' and value['gel_name'] == 'P-Protein A'):
+							assignment_data['template']['primary_anti_body']['order'][0] = key
+						if(key != 'order' and value['gel_name'] == 'P-Protein B'):
+							assignment_data['template']['primary_anti_body']['order'][1] = key
+						if(key != 'order' and value['gel_name'] == 'P-Protein C'):
+							assignment_data['template']['primary_anti_body']['order'][2] = key
+						if(key != 'order' and value['gel_name'] == 'P-Protein D'):
+							assignment_data['template']['primary_anti_body']['order'][3] = key
+					
 					
 					original_assignment_data = repr(assignment_data)
 				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = original_assignment_data)

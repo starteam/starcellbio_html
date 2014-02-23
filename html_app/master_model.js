@@ -169,6 +169,7 @@ var __assignment2 = {
             kind: 'minutes'
         },
         primary_anti_body: {
+        	order:[1,2,3,9,4,5,6,7,8],
             1: {
                 name: 'rabbit anti-let-23',
                 secondary: [1],
@@ -727,6 +728,7 @@ var __assigment_tufts = {
             kind: 'minutes' 
         },
         primary_anti_body: {
+        	order: [1,2,3,4,5],
             1: {
                 name: 'rabbit anti P-ERK1/2',
                 secondary: [1],
@@ -969,6 +971,7 @@ var __assigment_facs = {
             kind: 'minutes'
         },
         primary_anti_body: {
+        	order:[1,2,3],
             1: {
                 name: 'rabbit anti-goat beta-actin',
                 secondary: [2],
@@ -1338,6 +1341,7 @@ var __basic_tests = {
             kind: 'minutes'
         },
         primary_anti_body: {
+        	order:[1,2,3,9,4,5,6,7,8],
             1: {
                 name: 'rabbit anti-let-23',
                 secondary: [1],
@@ -1815,6 +1819,7 @@ var __usability_test = {
             kind: 'minutes'
         },
         primary_anti_body: {
+        	order:[1,2,3,9,4,5,6,7,8,9],
             1: {
                 name: 'rabbit anti-let-23',
                 secondary: [1],
@@ -2554,6 +2559,7 @@ var __assigment_706 = {
                 kind: 'minutes'
             },
             primary_anti_body: {
+            	order: ['cdk1', 'cdk2', 'cdt1', 'cyclin', 'cyclinE', 'pgk1', 'rad21', 'securin'],
                 'cdk1': {
                     name: 'rabbit anti-cdk1',
                     secondary: ['r'],
@@ -3353,6 +3359,7 @@ var __decusability = {
                 kind: 'minutes'
             },
             primary_anti_body: {
+            	order: ['cdk2', 'cyclin', 'cyclinE', 'pgk1'],
                 'cdk2': {
                     name: 'rabbit anti-cdk2',
                     secondary: ['r'],
