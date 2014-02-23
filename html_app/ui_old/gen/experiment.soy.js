@@ -184,7 +184,7 @@ scb_ui.experiment_setup_row_treatment = function(opt_data, opt_sb) {
 
 scb_ui.format_time_detailed = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('\t', (opt_data.days != 0) ? ' ' + soy.$$escapeHtml(opt_data.days) + ' ' + ((opt_data.days > 1) ? 'd' : 'd') : '', (opt_data.hours != 0) ? ' ' + soy.$$escapeHtml(opt_data.hours) + ' ' + ((opt_data.hours > 1) ? 'h' : 'h') : '', (opt_data.minutes != 0) ? ' ' + soy.$$escapeHtml(opt_data.minutes) + ' ' + ((opt_data.minutes > 1) ? 'min' : 'min') : '', (opt_data.now) ? '0 sec' : '');
+  output.append('\t', (opt_data.weeks != 0) ? ' ' + soy.$$escapeHtml(opt_data.weeks) + ' ' + ((opt_data.weeks > 1) ? 'wks' : 'wk') : '', (opt_data.days != 0) ? ' ' + soy.$$escapeHtml(opt_data.days) + ' ' + ((opt_data.days > 1) ? 'd' : 'd') : '', (opt_data.hours != 0) ? ' ' + soy.$$escapeHtml(opt_data.hours) + ' ' + ((opt_data.hours > 1) ? 'h' : 'h') : '', (opt_data.minutes != 0) ? ' ' + soy.$$escapeHtml(opt_data.minutes) + ' ' + ((opt_data.minutes > 1) ? 'min' : 'min') : '', (opt_data.now) ? '0 sec' : '');
   return opt_sb ? '' : output.toString();
 };
 
@@ -199,11 +199,11 @@ scb_ui.format_time_detailed_w_sec = function(opt_data, opt_sb) {
 scb_ui.experiment_collection_times = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('\t\t\t<div class=\'experiment_collection_times\'>');
-  var tList395 = opt_data.selected_experiment.collection_schedule_list.list;
-  var tListLen395 = tList395.length;
-  for (var tIndex395 = 0; tIndex395 < tListLen395; tIndex395++) {
-    var tData395 = tList395[tIndex395];
-    scb_ui.collection_schedule({schedule: tData395, template: opt_data.template}, output);
+  var tList405 = opt_data.selected_experiment.collection_schedule_list.list;
+  var tListLen405 = tList405.length;
+  for (var tIndex405 = 0; tIndex405 < tListLen405; tIndex405++) {
+    var tData405 = tList405[tIndex405];
+    scb_ui.collection_schedule({schedule: tData405, template: opt_data.template}, output);
   }
   output.append((opt_data.selected_experiment.setup_finished) ? '' : (opt_data.template.ui_configuration.collection_times_fixed) ? '' : '<div class=\'add_experiment_collection_times\'>&nbsp;<img class=\'add_experiment_collection_times_icon\' src=\'icons/actions/Add.png\' width=\'24px\'></div>', '</div>');
   return opt_sb ? '' : output.toString();
