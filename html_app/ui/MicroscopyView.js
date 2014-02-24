@@ -1022,7 +1022,7 @@ function init(state, isNew, isIF, draw, image_source){
 		img.src = image_source;
 		img.onload= function (){
 			ctx.save();
-			if(Math.floor(img.width/500) == 1 || Math.floor(img.height/500) == 1){
+			if(Math.floor(img.width/500) <= 1 || Math.floor(img.height/500) <= 1){
 				
 			img_width = img.width;
 			img_height = img.height;	
