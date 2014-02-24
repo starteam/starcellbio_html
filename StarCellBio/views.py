@@ -101,7 +101,7 @@ def get_courses(request, **kwargs):
 					#pudb.set_trace()
 					import hashlib
 					md5 = hashlib.md5()
-					md5.update(str(request.user.email))
+					md5.update(str(request.user.email).lower())
 					encoded_email = md5.hexdigest()
 					encoded_number = int(encoded_email, 16)%24
 					order = random_mapping[encoded_number]
