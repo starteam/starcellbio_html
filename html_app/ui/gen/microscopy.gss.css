@@ -357,6 +357,12 @@ body.dragging, body.dragging * {
 .scb_s_microscopy_if {
   opacity: .1;
 }
+input[type=radio].scb_s_microscopy_if:checked:before {
+  content: none !important;
+  bottom: 1px;
+  position: relative;
+  right: 2px;
+}
 .scb_s_microscopy_filter {
   position: absolute !important;
   bottom: 117px !important;

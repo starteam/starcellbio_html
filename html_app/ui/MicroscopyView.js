@@ -169,7 +169,15 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 			}
 		}
 	}
-	
+		
+	if(state.microscopy.light_on){
+			$('#brightup').prop('disabled', false);
+			$('#brightdown').prop('disabled', false);
+	}
+	else{
+			$('#brightup').prop('disabled', true);
+			$('#brightdown').prop('disabled', true);
+	}
 	
 	if(state.slide_type != 'IF' && !state.microscopy.light_on && !state.microscopy.laser_on){
 		current_slides = [];
@@ -206,23 +214,19 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, true, false,  draw, state.assignment.template.slides[img_sample]);
 			}
+		
 	}
 	else if(state.slide_type == 'IF' && !state.microscopy.light_on && !state.microscopy.laser_on){
 			init_wb('../images/microscopy/black.jpg');
 			disableSlider = true;
 			
-			$( ".scb_s_microscopy_brightness_slider" ).slider({
-			  value:0,
-			  min: -100,
-			  max: 100,
-			  step: 5,
-			  slide: function( event, ui ) {
-			  }
-			});
 	}
 	else if(state.slide_type == 'IF' && state.microscopy.light_on && !state.microscopy.laser_on){
-		init_wb_mod(state.microscopy_lane.lens_map, '../images/microscopy/white.jpg');
-
+		if(state.microscopy_lane.lens_map.brightness >0 ||state.microscopy_lane.lens_map.cache_brightness >0)
+			init_wb_mod(state.microscopy_lane.lens_map, '../images/microscopy/white.jpg');
+		else
+			init_wb_mod(state.microscopy_lane.lens_map, '../images/microscopy/black.jpg');
+	
 	}
 	else if(state.slide_type == 'IF' && !state.microscopy.light_on && state.microscopy.laser_on){
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
@@ -242,63 +246,39 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 			}
 			disableSlider = true;
 			
-		$( ".scb_s_microscopy_brightness_slider" ).slider({
-		  value: state.microscopy_lane.lens_map.brightness,
-		  min: 0,
-		  max: 300,
-		  step: 5,
-		  slide: function( event, ui ) {
-		  }
-		});
-			
 			
 	}
 	else if(state.slide_type == 'IF' && state.microscopy.light_on && state.microscopy.laser_on){
 		//init_wb('../images/microscopy/white.jpg');
 		enableIFSlider = true;
+		$('#brightdown').prop('disabled', true);
 		if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
+				if(state.microscopy_lane.lens_map.brightness <0 || state.microscopy_lane.lens_map.cache_brightness<0){
+					state.microscopy_lane.lens_map.brightness = 0;
+					state.microscopy_lane.lens_map.cache_brightness = 0;
+				}
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, true, draw, state.microscopy_lane.lens_map.src );
 		}
 		else{
 			//state.microscopy_lane.lens_map = new Object();
 			state.microscopy_lane.lens_map.mag = state.slides[0].mag;
+			state.microscopy_lane.lens_map.brightness = 0;
+			state.microscopy_lane.lens_map.cache_brightness = 0;
 			$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 			init(state.microscopy_lane.lens_map, true, true, draw, state.assignment.template.slides[img_sample]);
 		}
 		
-		$( ".scb_s_microscopy_brightness_slider" ).slider({
-		  value: state.microscopy_lane.lens_map.brightness,
-		  min: 0,
-		  max: 300,
-		  step: 5,
-		  slide: function( event, ui ) {
-		  	modify_state_brightness(ui.value, state.microscopy_lane.lens_map);
-		  }
-		});
+		min_brightness=0;
+		max_brightness=100;
 	}
 	
 	
 	if(!disableSlider  && !enableIFSlider){
-		$( ".scb_s_microscopy_brightness_slider" ).slider({
-		  value: state.microscopy_lane.lens_map.brightness,
-		  min: -100,
-		  max: 100,
-		  step: 5,
-		  stop: function( event, ui ) {
-			modify_state_brightness(ui.value, state.microscopy_lane.lens_map);
-		  }
-		});
+		min_brightness = -100;
+		max_brightness = 100;
 	}
-	
-	if(state.microscopy.light_on){
-			$('#brightup').prop('disabled', false);
-			$('#brightdown').prop('disabled', false);
-	}
-	else{
-			$('#brightup').prop('disabled', true);
-			$('#brightdown').prop('disabled', true);
-	}
+
 }
 
 
@@ -828,7 +808,7 @@ function draw(state){
 				console.log('nope');
 		}
 		else{
-		if(state.brightness >=100){
+		if(state.brightness >=max_brightness){
 				$('#brightup').prop('disabled', true);
 		}
 		else{
@@ -844,7 +824,7 @@ function draw(state){
 				console.log('nope');
 		}
 		else{
-		if(state.brightness <=-100){
+		if(state.brightness <=min_brightness){
 				$('#brightdown').prop('disabled', true);
 		}
 		else{
@@ -1193,6 +1173,8 @@ function save_and_draw_cache_image(canvas, state){
 
 }
 
+var min_brightness = -100;
+var max_brightness = 100;
 
 function modify_state_brightness(addition, state){
 	caman_lock = true;
@@ -1202,10 +1184,10 @@ function modify_state_brightness(addition, state){
 	//state['brightness'] = state['brightness'] + addition;
 	
 	state.brightness =  state.brightness + addition;
-	if(state.brightness >= 100)
-		state.brightness = 100;
-	else if (state.brightness <=-100)
-		state.brightness = -100;
+	if(state.brightness >= max_brightness)
+		state.brightness = max_brightness;
+	else if (state.brightness <=min_brightness)
+		state.brightness = min_brightness;
 	console.log('brightness');
 	console.log(state.brightness);
 	console.log('blur');
@@ -1735,13 +1717,12 @@ function init_wb_mod(state, image_source){
 			state.cache = img2string;
 			canvas.width = scb.ui.static.MicroscopyView.LENS;
 			canvas.height = scb.ui.static.MicroscopyView.LENS;
-			var randomblur = Math.round(Math.ceil(Math.random()*100) / 10) * 10;
-			console.log(randomblur);
 			ctx.beginPath();
 			ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
 			ctx.clip();
 			ctx.drawImage(img, 0, 0);
 			ctx.restore();
+			draw(state);
 		}
 	}
 
