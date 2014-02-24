@@ -29,7 +29,7 @@
             {foreach $rows in $template.ui.add_multiple_dialog[$cell_line].rows}
             <tr>
                 {foreach $cell in $rows.cells}
-                <td class="scb_s_experiment_setup_table_border">
+                <td class="scb_s_experiment_setup_table_border {if $cell.kind == 'checkbox'}scb_s_experiment_setup_center_cell {/if}">
                     {if $cell.kind == 'text'}
                     {$cell.text}
                     {/if}
@@ -44,7 +44,7 @@
                     </select>
                     {/if}
                     {if $cell.kind == 'checkbox'}
-                    <input class = 'scb_s_experiment_setup_center_cell' type="checkbox" name="{$cell.name}" assignment_id='{$assignment.id}'
+                    <input type="checkbox" name="{$cell.name}" assignment_id='{$assignment.id}'
                            experiment_id='{$experiment.id}' treatment_id='{$cell.treatment_id}' cell_line='{$cell_line}'>
                     {/if}
                 </td>
@@ -53,7 +53,7 @@
             {if isLast($cell_line)}
             <tr>
                 {foreach $cell in $rows.cells}
-                <td class='scb_s_experiment_setup_table_border'>
+                <td class='scb_s_experiment_setup_table_border scb_s_experiment_setup_center_cell'>
                     {if $cell.kind == 'checkbox'}
                     <button class='scb_s_gray_button scb_mit706s16_inner_dialog_select' name="{$cell.name}" assignment_id='{$assignment.id}' cell_line='{$cell_line}'>SELECT ALL</button>
                     {/if}

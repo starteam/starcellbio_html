@@ -4471,10 +4471,11 @@ var __assignment_706_2014 = {
                         {kind: 'cell_line', title: 'Strain', editable: true}, 
                         {kind: 'treatments',
                             children: [
-                                {kind: 'drug', title: 'Treatment', editable: true},
-                                {kind: 'concentration', title: 'Treatment Concentration/Dose', editable: false},
-                        		{kind: "start", title: "Treatment Start Time", editable: false},
-                        		{kind: "collection", title: "Collection Timepoints", editable: false}
+                                {kind: 'drug', title: 'Treatment', editable: true}
+//                                 ,
+//                                 {kind: 'concentration', title: 'Treatment Concentration/Dose', editable: false},
+//                         		{kind: "start", title: "Treatment Start Time", editable: false},
+//                         		{kind: "collection", title: "Collection Timepoints", editable: false}
                             ]
                         },
                         {kind: 'actions', title: 'Actions'}
@@ -5661,9 +5662,9 @@ $(function () {
 				name: 'ADD SAMPLES',
 				open: 'mit706s14.setup',
 				css: {
-					width: '880px',
+					width: '1035px',
 					height: '540px',
-					left: '100px',
+					left: '31px',
 					top: '000px'
 				}
 			});

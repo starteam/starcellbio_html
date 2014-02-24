@@ -30,27 +30,27 @@ mit706s14.dialog = function(opt_data, opt_sb) {
         var cellListLen21 = cellList21.length;
         for (var cellIndex21 = 0; cellIndex21 < cellListLen21; cellIndex21++) {
           var cellData21 = cellList21[cellIndex21];
-          output.append('<td class="scb_s_experiment_setup_table_border">', (cellData21.kind == 'text') ? soy.$$escapeHtml(cellData21.text) : '');
+          output.append('<td class="scb_s_experiment_setup_table_border ', (cellData21.kind == 'checkbox') ? 'scb_s_experiment_setup_center_cell ' : '', '">', (cellData21.kind == 'text') ? soy.$$escapeHtml(cellData21.text) : '');
           if (cellData21.kind == 'select') {
             output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(cellData21.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData14), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData14), '\'><option disabled="disabled">Please select</option>');
-            var keyList39 = soy.$$getMapKeys(opt_data.template[cellData21.field]);
-            var keyListLen39 = keyList39.length;
-            for (var keyIndex39 = 0; keyIndex39 < keyListLen39; keyIndex39++) {
-              var keyData39 = keyList39[keyIndex39];
-              output.append('<option value=\'', soy.$$escapeHtml(opt_data.template[cellData21.field][keyData39]), '\'>', soy.$$escapeHtml(opt_data.template[cellData21.field][keyData39].name), '</option>');
+            var keyList43 = soy.$$getMapKeys(opt_data.template[cellData21.field]);
+            var keyListLen43 = keyList43.length;
+            for (var keyIndex43 = 0; keyIndex43 < keyListLen43; keyIndex43++) {
+              var keyData43 = keyList43[keyIndex43];
+              output.append('<option value=\'', soy.$$escapeHtml(opt_data.template[cellData21.field][keyData43]), '\'>', soy.$$escapeHtml(opt_data.template[cellData21.field][keyData43].name), '</option>');
             }
             output.append('</select>');
           }
-          output.append((cellData21.kind == 'checkbox') ? '<input class = \'scb_s_experiment_setup_center_cell\' type="checkbox" name="' + soy.$$escapeHtml(cellData21.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(cellData21.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData14) + '\'>' : '', '</td>');
+          output.append((cellData21.kind == 'checkbox') ? '<input type="checkbox" name="' + soy.$$escapeHtml(cellData21.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(cellData21.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData14) + '\'>' : '', '</td>');
         }
         output.append('</tr>');
         if (cell_lineIndex14 == cell_lineListLen14 - 1) {
           output.append('<tr>');
-          var cellList66 = rowsData19.cells;
-          var cellListLen66 = cellList66.length;
-          for (var cellIndex66 = 0; cellIndex66 < cellListLen66; cellIndex66++) {
-            var cellData66 = cellList66[cellIndex66];
-            output.append('<td class=\'scb_s_experiment_setup_table_border\'>', (cellData66.kind == 'checkbox') ? '<button class=\'scb_s_gray_button scb_mit706s16_inner_dialog_select\' name="' + soy.$$escapeHtml(cellData66.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData14) + '\'>SELECT ALL</button>' : '', '</td>');
+          var cellList70 = rowsData19.cells;
+          var cellListLen70 = cellList70.length;
+          for (var cellIndex70 = 0; cellIndex70 < cellListLen70; cellIndex70++) {
+            var cellData70 = cellList70[cellIndex70];
+            output.append('<td class=\'scb_s_experiment_setup_table_border scb_s_experiment_setup_center_cell\'>', (cellData70.kind == 'checkbox') ? '<button class=\'scb_s_gray_button scb_mit706s16_inner_dialog_select\' name="' + soy.$$escapeHtml(cellData70.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData14) + '\'>SELECT ALL</button>' : '', '</td>');
           }
           output.append('</tr>');
         }

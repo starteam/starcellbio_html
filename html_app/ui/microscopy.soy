@@ -251,7 +251,7 @@
 
 	<ul class='scb_s_experiment_setup_list'>
    <li>To prepare a sample for microscopy, click the checkbox to the left of each sample name or click <b>SELECT ALL</b> to select all samples.</li>
-   <li>Select the type of microscopy analysis you would like to perform by selecting the appropriate Slide type and conditions, when appropriate.</li>
+   <li>Select the type of microscopy analysis you would like to perform by selecting the appropriate Microscopy Analysis and Conditions, when appropriate.</li>
    <li>Note: The microscopy experimental technique in StarCellBio draws upon real microscopy images. Not all slide types and conditions may be available for each sample in your experiment.</li>
    </ul>
    </div>
@@ -300,7 +300,7 @@
 					  	{if $k == 'secondary'}
 						  <input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="secondary" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'secondary'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.IHC.conditions.secondary.name}</span>
+								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'secondary'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.secondary.name}</span>
 							&nbsp;&nbsp;
 						{elseif $k == 'ki67'}
 							<input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="ki67" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
@@ -317,7 +317,7 @@
 					 <input class="scb_f_microscopy_select_conditions {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
 
 				{elseif $r.lane.kind == 'IF' and not $assignment.id =='assignment_706_2014'}
 					
@@ -326,7 +326,7 @@
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
 
 					{/if}
 					{/foreach}
@@ -336,7 +336,7 @@
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="HnE" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.Dye.conditions.HnE.name}</span>
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.Dye.conditions.HnE.name}</span>
 					{/if}
 					{/foreach}
 				{/if}
@@ -344,7 +344,7 @@
 					 <input class="scb_f_microscopy_select_conditions {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_microscopy_dim_conditions">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
 
 			{/if}
             </td>
@@ -421,7 +421,7 @@
 	
 	<ul class='scb_s_experiment_setup_list'>
    <li>Note: Not all microscope controls will be relevant for each image.</li>
-   <li>To save the microscope settings for a specific image, click <b>SAVE IMAGE</b>. The microscope settings will be saved when navigating away from this image.</li>
+   <li>Once you have manipulated the microscope controls, they will be automatically saved when navigating away from the image.</li>
    </ul>
 </div>
 <div class='scb_s_microscopy_samples_area'>
