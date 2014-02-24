@@ -9,6 +9,17 @@
   font-family: 'sourcesanspro-regular';
   font-size: 10pt;
 }
+.scb_s_experiment_setup_center_cell {
+  text-align: center;
+  vertical-align: middle;
+  margin-left: 39px;
+}
+.scb_s_experiment_setup_special {
+  width: 100% !important;
+}
+.scb_s_experiment_setup_table_heading_strain {
+  width: 125px;
+}
 .scb_mit706s16_inner_dialog_title_close {
   padding-top: 0;
   float: right;

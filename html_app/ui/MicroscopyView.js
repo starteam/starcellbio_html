@@ -1847,8 +1847,8 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             debugger;
             if(!state.microscopy.warning_fired){
 				$('.scb_s_microscopy_load_followup').show();
-				$('.scb_s_microscopy_load_followup').mouseover(function(){
-					$(this).fadeOut();
+				$('.scb_s_microscopy_load_followup>.scb_f_controls_close_button').click(function(){
+					$('.scb_s_microscopy_load_followup').fadeOut();
 				});
 				state.microscopy.warning_fired = true;
 			}
