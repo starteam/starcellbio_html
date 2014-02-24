@@ -113,16 +113,21 @@ Assignment assignments
     <ul role="listbox" aria-label="Assignments"  >
         {foreach $course in keys($courses)}
             <div class='scb_s_assignments_sidebar_course_block'>
+            {if $course == '7.06_Spring_2014'}
+            <div class='scb_s_assignments_sidebar_course'>7.06 Spring 2014</div>
+            {else}
             <div class='scb_s_assignments_sidebar_course'>{$course}</div>
-        {foreach $assignment in $courses[$course]}
-        <li role="listitem" class='scb_s_assignments_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_assignments_sidebar_name_selected{/if}'   >
-            <a href='#view=assignments&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}
-
-            </a>
-            {if $assignments.selected.id == $assignment.id}
-            	<img class='scb_s_selection_arrow_img'  src='../../images/homepage/selection_arrow.png' >
             {/if}
-        </li>
+        {foreach $assignment in $courses[$course]}
+
+			<li role="listitem" class='scb_s_assignments_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_assignments_sidebar_name_selected{/if}'   >
+				<a href='#view=assignments&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}
+
+				</a>
+				{if $assignments.selected.id == $assignment.id}
+					<img class='scb_s_selection_arrow_img'  src='../../images/homepage/selection_arrow.png' >
+				{/if}
+			</li>
         {/foreach}
         </div>
         {/foreach}

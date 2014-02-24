@@ -4453,7 +4453,7 @@ var __microscopy_test = {
 var __assignment_706_2014 = {
         id: 'assignment_706_2014',
         name: 'StarCellBio Problem 1',
-        course: '7.06 Spring 2014',
+        course: '7.06_Spring_2014',
     	course_name: 'Prototypes',
         description: 'Microscopy Test of images',
         experiments: {},
@@ -5133,7 +5133,6 @@ var __assignment_706_2014 = {
 			'img4': 'images/microscopy/assignment_706_2014/c10.jpg',
 			'img40': 'images/microscopy/assignment_706_2014/c15-1.jpg',
 			'img41': 'images/microscopy/assignment_706_2014/c15-2.jpg',
-			'img5': 'images/microscopy/assignment_706_2014/c16.jpg',
 			'img6': 'images/microscopy/assignment_706_2014/c17.jpg',
 			'img42': 'images/microscopy/assignment_706_2014/c25.jpg',
 			'img7': 'images/microscopy/assignment_706_2014/c26.jpg',
@@ -5146,7 +5145,6 @@ var __assignment_706_2014 = {
 			'img12': 'images/microscopy/assignment_706_2014/cn6.jpg',
 			'img13': 'images/microscopy/assignment_706_2014/cn7.jpg',
 			'img14': 'images/microscopy/assignment_706_2014/cn8.jpg',
-			'img15': 'images/microscopy/assignment_706_2014/cn9.jpg',
 			'img16': 'images/microscopy/assignment_706_2014/cn11.jpg',
 			'img17': 'images/microscopy/assignment_706_2014/cn12.jpg',
 			'img18': 'images/microscopy/assignment_706_2014/cn15.jpg',
@@ -5157,7 +5155,6 @@ var __assignment_706_2014 = {
 			'img22': 'images/microscopy/assignment_706_2014/n2.jpg',
 			'img23': 'images/microscopy/assignment_706_2014/n8.jpg',
 			'img24': 'images/microscopy/assignment_706_2014/n9.jpg',
-			'img25': 'images/microscopy/assignment_706_2014/n11.jpg',
 			'img26': 'images/microscopy/assignment_706_2014/n18.jpg',
 			'img29': 'images/microscopy/assignment_706_2014/n34.jpg',
 			'img30': 'images/microscopy/assignment_706_2014/n43.jpg',
@@ -5168,9 +5165,6 @@ var __assignment_706_2014 = {
 			
 			'img36': 'images/microscopy/assignment_706_2014/pm2.jpg',
 			'img37': 'images/microscopy/assignment_706_2014/pm3.jpg',
-			'img38': 'images/microscopy/assignment_706_2014/pm15.jpg',
-			'img43': 'images/microscopy/assignment_706_2014/pm17.jpg',
-			'img39': 'images/microscopy/assignment_706_2014/pm22.jpg',
 			'img44': 'images/microscopy/assignment_706_2014/pm34-1.jpg',
 			'img45': 'images/microscopy/assignment_706_2014/pm34-2.jpg'
 		},
@@ -5210,26 +5204,21 @@ var __assignment_706_2014 = {
 									if_type: 'green'
 								}],
 								'7': [{
-									hash: 'img5',
-									mag: 'N/A',
-									if_type: 'green'
-								}],
-								'8': [{
 									hash: 'img6',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'9': [{
+								'8': [{
 									hash: 'img42',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'10': [{
+								'9': [{
 									hash: 'img7',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'11': [{
+								'10': [{
 									hash: 'img8',
 									mag: 'N/A',
 									if_type: 'green'
@@ -5247,26 +5236,11 @@ var __assignment_706_2014 = {
 									if_type: 'green'
 								}],
 								'3': [{
-									hash: 'img38',
-									mag: 'N/A',
-									if_type: 'green'
-								}],
-								'4': [{
-									hash: 'img43',
-									mag: 'N/A',
-									if_type: 'green'
-								}],
-								'5': [{
-									hash: 'img39',
-									mag: 'N/A',
-									if_type: 'green'
-								}],
-								'6': [{
 									hash: 'img44',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'7': [{
+								'4': [{
 									hash: 'img45',
 									mag: 'N/A',
 									if_type: 'green'
@@ -5295,36 +5269,31 @@ var __assignment_706_2014 = {
 									if_type: 'green'
 								}],
 								'5': [{
-									hash: 'img25',
-									mag: 'N/A',
-									if_type: 'green'
-								}],
-								'6': [{
 									hash: 'img26',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'7': [{
+								'6': [{
 									hash: 'img29',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'8': [{
+								'7': [{
 									hash: 'img30',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'9': [{
+								'8': [{
 									hash: 'img31',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'10': [{
+								'9': [{
 									hash: 'img32',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'11': [{
+								'10': [{
 									hash: 'img46',
 									mag: 'N/A',
 									if_type: 'green'
@@ -5364,31 +5333,26 @@ var __assignment_706_2014 = {
 									if_type: 'green'
 								}],
 								'7': [{
-									hash: 'img15',
-									mag: 'N/A',
-									if_type: 'green'
-								}],
-								'8': [{
 									hash: 'img16',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'9': [{
+								'8': [{
 									hash: 'img17',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'10': [{
+								'9': [{
 									hash: 'img18',
 									mag: 'N/A',
 									if_type: 'green'
 								}],
-								'11': [{
+								'10': [{
 									hash: 'img19',
 									mag: 'N/A',
 									if_type: 'green'
 								}],									
-								'12': [{
+								'11': [{
 									hash: 'img20',
 									mag: 'N/A',
 									if_type: 'green'
