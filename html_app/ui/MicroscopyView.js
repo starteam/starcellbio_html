@@ -579,6 +579,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
     	parsed.microscopy.light_on = true;
     }
     $('#lens').remove();
+    save_and_draw_cache_image_list = [];
     scb.ui.static.MainFrame.refresh();
 }
 
