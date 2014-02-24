@@ -1,0 +1,1 @@
+{0: 'BADC', 1: 'CBAD', 2: 'ABDC', 3: 'CDAB', 4: 'CABD', 5: 'DCBA', 6: 'ADCB', 7: 'BACD', 8: 'DBAC', 9: 'DCAB', 10: 'CDBA', 11: 'ACDB', 12: 'BDAC', 13: 'DBCA', 14: 'DABC', 15: 'ACBD', 16: 'BCDA', 17: 'DACB', 18: 'BDCA', 19: 'ADBC', 20: 'CBDA', 21: 'ABCD', 22: 'CADB', 23: 'BCAD'}
