@@ -282,45 +282,45 @@ background-image:url('../../images/western_blot/scb_gray_right_arrow_hover.png')
 }
 
 .scb_assignments_bottom_arrow_left{
-border-top-left-radius: 5px;
-border-bottom-left-radius: 5px;
-border: 1px solid gray;
-border-right: none;
-display: inline-block !important;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border: 1px solid gray;
+	border-right: none;
+	display: inline-block !important;
 }
 
 
 .scb_assignments_bottom_arrow_right{
-border-top-right-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 1px solid gray;
-border-left: none;
-display: inline-block !important;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border: 1px solid gray;
+	border-left: none;
+	display: inline-block !important;
 
 }
 
 .scb_s_assignments_gray_bar{
-width: 657px;
-height: 25px;
-background: #f4f6f8;
-position: absolute;
-top: 81px;
-left: 0;
+	width: 657px;
+	height: 25px;
+	background: #f4f6f8;
+	position: absolute;
+	top: 81px;
+	left: 0;
 }
 
 .scb_s_assignments_button_divider{
-position: absolute;
-display: inline;
-width: 1px;
-background: gray;
-height: 41px;
-z-index: 1;
+	position: absolute;
+	display: inline;
+	width: 1px;
+	background: gray;
+	height: 41px;
+	z-index: 1;
 }
 
 .scb_s_assignments_print_assignment{
-float:left !important;
-background: none;
-background-image: url('../../images/header/scb_print.png');
+	float:left !important;
+	background: none;
+	background-image: url('../../images/header/scb_print.png');
 }
 
 .assignement_experiment_list {

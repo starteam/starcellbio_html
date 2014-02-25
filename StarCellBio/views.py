@@ -95,6 +95,7 @@ def get_courses(request, **kwargs):
 		usercourse = UserCourse.objects.filter(user=request.user)[0]
 		course = Course.objects.filter(usercourses = usercourse)
 		assignments = course[0].assignments.all()
+		#pudb.set_trace()
 		if(course[0].sassignments.filter(student=request.user).count() == 0 or course[0].sassignments.count() == 0):
 			for a in assignments:
 				original_assignment_data = a.data
@@ -165,6 +166,8 @@ def get_courses(request, **kwargs):
 				sa.save()
 			assignments = course[0].sassignments.filter(student=request.user)
 		else:
+			if(len(course[0].sassignments.filter(student=request.user)) != len(assignments)):
+				print 'added assignment'
 			token1 = course[0].sassignments.filter(student=request.user)[0].token
 			assignments = course[0].sassignments.filter(student=request.user)
 		for a in assignments:

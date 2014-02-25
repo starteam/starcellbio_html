@@ -47,8 +47,8 @@
 }
 
 #scb_s_micro_slide{
-height: 60px;
-position:relative;
+	height: 60px;
+	position:relative;
 }
 .circle_lens{
 	height: 13px !important;
@@ -59,24 +59,24 @@ position:relative;
 
 
 #scb_s_micro_slide >img{
-height: 60px;
+	height: 60px;
 }
 
 .scb_s_microscopy_conditions{
-width: 242px;
+	width: 242px;
 	padding-left: 22px;
 }
 
 .scb_s_microscopy_sample_checkbox{
-width: 64px;
+	width: 64px;
 }
 
 .scb_s_microscopy_sample_name{
-width: 329px;
+	width: 329px;
 }
 
 .scb_s_microscopy_sample_type{
-width: 161px;
+	width: 161px;
 }
 
 .m_sample_prep_select{
@@ -292,10 +292,10 @@ width: 161px;
 
 
 .scb_s_microscopy_samples_area {
-margin-bottom: 28px;
-margin-left: 8px;
-margin-top: 161px;
-height: 365px;
+	margin-bottom: 28px;
+	margin-left: 8px;
+	margin-top: 161px;
+	height: 365px;
 }
 
 .scb_space_control {
@@ -309,10 +309,10 @@ height: 365px;
 }
 
 .scb_s_microscopy_samples_select_all_abs{
-  bottom: 0;
-  position:absolute;
-  border-top: #27956c solid 2px;
-  padding-top: 2px;
+	bottom: 0;
+	position:absolute;
+	border-top: #27956c solid 2px;
+	padding-top: 2px;
 }
 
 .scb_s_microscopy_blank_space1{
@@ -434,8 +434,8 @@ body.dragging, body.dragging * {
 	border: 2px solid #189689;
 	border-radius: 250px;
 	position: absolute;
-right: 243px;
-bottom: 33px;
+	right: 243px;
+	bottom: 33px;
 }
 
 
@@ -514,88 +514,88 @@ input[type=radio].scb_s_microscopy_if:checked:before{
 }
 
 .scb_f_microscopy_blue{
-height: 30px !important;
-width: 30px !important;
-right: 35px !important;
-bottom: 130px !important;
-position: absolute !important;
-z-index: 60;
-border: none !important;
-border-radius: 0px !important;
-background-color: transparent !important;
-background-image: url(../../../images/microscopy/Unselected/Filter_Blue_Unselected.png);
-background-repeat: no-repeat;
-opacity: 1 !important;
+	height: 30px !important;
+	width: 30px !important;
+	right: 35px !important;
+	bottom: 130px !important;
+	position: absolute !important;
+	z-index: 60;
+	border: none !important;
+	border-radius: 0px !important;
+	background-color: transparent !important;
+	background-image: url(../../../images/microscopy/Unselected/Filter_Blue_Unselected.png);
+	background-repeat: no-repeat;
+	opacity: 1 !important;
 }
 
 .scb_f_microscopy_all{
-height: 30px !important;
-width: 30px !important;
-right: 6px !important;
-position: absolute !important;
-bottom: 130px !important;
-z-index: 60;
-border: none !important;
-border-radius: 0px !important;
-background-color: transparent !important;
-background-image: url(../../../images/microscopy/Unselected/Filter_All_Unselected.png);
-background-repeat: no-repeat;
-opacity: 1 !important;
+	height: 30px !important;
+	width: 30px !important;
+	right: 6px !important;
+	position: absolute !important;
+	bottom: 130px !important;
+	z-index: 60;
+	border: none !important;
+	border-radius: 0px !important;
+	background-color: transparent !important;
+	background-image: url(../../../images/microscopy/Unselected/Filter_All_Unselected.png);
+	background-repeat: no-repeat;
+	opacity: 1 !important;
 }
 
 .scb_f_microscopy_red:disabled{
-background-image: url(../../../images/microscopy/Unavailable/Filter_Red_Unavailable.png) !important;
-background-repeat: no-repeat !important;
+	background-image: url(../../../images/microscopy/Unavailable/Filter_Red_Unavailable.png) !important;
+	background-repeat: no-repeat !important;
 }
 .scb_f_microscopy_green:disabled{
-background-image: url(../../../images/microscopy/Unavailable/Filter_Green_Unavailable.png) !important;
-background-repeat: no-repeat !important;
+	background-image: url(../../../images/microscopy/Unavailable/Filter_Green_Unavailable.png) !important;
+	background-repeat: no-repeat !important;
 }
 
 .scb_f_microscopy_blue:disabled{
-background-image: url(../../../images/microscopy/Unavailable/Filter_Blue_Unavailable.png) !important;
-background-repeat: no-repeat !important;
+	background-image: url(../../../images/microscopy/Unavailable/Filter_Blue_Unavailable.png) !important;
+	background-repeat: no-repeat !important;
 }
 
 
 .scb_f_microscopy_all:disabled{
-background-image: url(../../../images/microscopy/Unavailable/Filter_All_Unavailable.png) !important;
-background-repeat: no-repeat !important;
+	background-image: url(../../../images/microscopy/Unavailable/Filter_All_Unavailable.png) !important;
+	background-repeat: no-repeat !important;
 }
 
 
 .scb_f_microscopy_red:checked{
-background-image: url(../../../images/microscopy/Selected/Filter_Red_Selected.png) !important;
-background-repeat: no-repeat !important;
+	background-image: url(../../../images/microscopy/Selected/Filter_Red_Selected.png) !important;
+	background-repeat: no-repeat !important;
 }
 .scb_f_microscopy_green:checked{
-background-image: url(../../../images/microscopy/Selected/Filter_Green_Selected.png) !important;
-background-repeat: no-repeat !important;
+	background-image: url(../../../images/microscopy/Selected/Filter_Green_Selected.png) !important;
+	background-repeat: no-repeat !important;
 }
 
 .scb_f_microscopy_blue:checked{
-background-image: url(../../../images/microscopy/Selected/Filter_Blue_Selected.png) !important;
-background-repeat: no-repeat !important;
+	background-image: url(../../../images/microscopy/Selected/Filter_Blue_Selected.png) !important;
+	background-repeat: no-repeat !important;
 }
 
 
 .scb_f_microscopy_all:checked{
-background-image: url(../../../images/microscopy/Selected/Filter_All_Selected.png) !important;
-background-repeat: no-repeat !important;
+	background-image: url(../../../images/microscopy/Selected/Filter_All_Selected.png) !important;
+	background-repeat: no-repeat !important;
 }
 
 
 
 .scb_s_microscopy_filter_label{	
-left: 11px;
-position: absolute;
-top: 195px;
+	left: 11px;
+	position: absolute;
+	top: 195px;
 }
 
 .scb_s_microscopy_focus_label{
-position: absolute;
-left: 10px;
-bottom: 70px;
+	position: absolute;
+	left: 10px;
+	bottom: 70px;
 }
 
 .scb_s_microscopy_lens_controls_section_1{
@@ -603,44 +603,44 @@ bottom: 70px;
 }
 
 .scb_s_microscopy_lens_controls_section_2{
-height: 36px;
-background: #f6f6f6;
+	height: 36px;
+	background: #f6f6f6;
 }
 
 .scb_s_microscopy_lens_controls_section_3{
-height: 58px;
-background: #f6f6f6;
+	height: 58px;
+	background: #f6f6f6;
 }
 
 .scb_s_microscopy_lens_controls_section_4{
-height: 36px;
+	height: 36px;
 
 }
 
 .scb_s_microscopy_lens_controls_section_5{
-height: 68px;
-background: #f6f6f6;
+	height: 68px;
+	background: #f6f6f6;
 }
 
 .scb_s_microscopy_lens_controls_section_6{
-height: 63px;
+	height: 63px;
 
 }
 
 .scb_s_microscopy_lens_controls_section_7{
-height: 48px;
-background: #f6f6f6;
+	height: 48px;
+	background: #f6f6f6;
 }
 
 .scb_s_microscopy_slide_prep_instructions{
-font-family: sourcesanspro-regular;
-font-size: 12px;
-position: relative;
-left: 14px;
-height: 106px;
-width: 603px;
-top:84px;
-z-index: 56;
+	font-family: sourcesanspro-regular;
+	font-size: 12px;
+	position: relative;
+	left: 14px;
+	height: 106px;
+	width: 603px;
+	top:84px;
+	z-index: 56;
 }
 
 
@@ -679,9 +679,9 @@ z-index: 56;
 
 .scb_f_save_button{
 	position: absolute;
-right: 210px;
-bottom: 12px;
-width: 89px;
+	right: 210px;
+	bottom: 12px;
+	width: 89px;
 }
 
 .scb_f_wb_anti_body_select_primary {
@@ -1028,98 +1028,97 @@ width: 89px;
 
 
 #blurup:hover{
-background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Hover.png');
+	background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Hover.png');
 
 }
 
 
 #blurdown:hover{
-background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Hover.png');
+	background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Hover.png');
 
 }
 
 
 #fblurup:hover{
 
-background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Hover.png');
+	background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Hover.png');
 
 }
 
 
 #fblurdown:hover{
-background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Hover.png');
+	background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Hover.png');
 
 }
 
 #blurup:disabled{
-background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Gray.png');
+	background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Gray.png');
 
 }
 
 
 #blurdown:disabled{
-background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Gray.png');
+	background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Gray.png');
 
 }
 
 
 #fblurup:disabled{
 
-background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Gray.png');
+	background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Gray.png');
 
 }
 
 
 #fblurdown:disabled{
-background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Gray.png');
+	background-image: url('../../../images/microscopy/Tight_Focus/BottomArrow_Gray.png');
 
 }
 
 #blurup{
-position: absolute;
-right: 93px;
-bottom: 83px;
-background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Normal.png');
-background-repeat: no-repeat;
-background-origin: content-box;
-height: 18px;
-width: 25px;
-outline: none;
+	position: absolute;
+	right: 93px;
+	bottom: 83px;
+	background-image: url('../../../images/microscopy/Loose_Focus/TopArrow_Normal.png');
+	background-repeat: no-repeat;
+	background-origin: content-box;
+	height: 18px;
+	width: 25px;
+	outline: none;
 }
 
 
 #blurdown{
-position: absolute;
-right: 92px;
-bottom: 57px;
-background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Normal.png');
-background-repeat: no-repeat;
-background-origin: content-box;
-height: 18px;
-width: 25px;
-outline: none;
-
+	position: absolute;
+	right: 92px;
+	bottom: 57px;
+	background-image: url('../../../images/microscopy/Loose_Focus/BottomArrow_Normal.png');
+	background-repeat: no-repeat;
+	background-origin: content-box;
+	height: 18px;
+	width: 25px;
+	outline: none;
 }
 
 
 #lens_pending{
 	margin-left: 50%;
-position: absolute;
-bottom: 238px;
-left: 36px;
+	position: absolute;
+	bottom: 238px;
+	left: 36px;
 
 }
 
 #fblurup{
-position: absolute;
-right: 7px;
-bottom: 83px;
-background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Normal.png');
-background-repeat: no-repeat;
-background-origin: content-box;
-height: 18px;
-width: 25px;
-outline: none;
+	position: absolute;
+	right: 7px;
+	bottom: 83px;
+	background-image: url('../../../images/microscopy/Tight_Focus/TopArrow_Normal.png');
+	background-repeat: no-repeat;
+	background-origin: content-box;
+	height: 18px;
+	width: 25px;
+	outline: none;
 
 }
 

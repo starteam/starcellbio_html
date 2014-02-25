@@ -7,6 +7,66 @@
   top: 23px;
   left: 33px;
 }
+.scb_s_wb_gel_type_followup {
+  display: none;
+  left: 283px;
+  position: absolute;
+  width: 205px;
+  background: #f4f6f8;
+  border-radius: 14px;
+  padding: 4px;
+  border: 4px solid white;
+  bottom: 387px;
+  z-index: 100;
+  text-align: left;
+  font-size: 10pt;
+}
+.scb_s_wb_marker_followup {
+  display: none;
+  left: 283px;
+  position: absolute;
+  width: 205px;
+  background: #f4f6f8;
+  border-radius: 14px;
+  padding: 4px;
+  border: 4px solid white;
+  bottom: 97px;
+  z-index: 100;
+  text-align: left;
+  font-size: 10pt;
+}
+.scb_s_western_blot_marker_info {
+  left: 270px;
+  bottom: 78px;
+  position: absolute;
+  background: none;
+  border: none;
+  height: 23px;
+  width: 23px;
+  color: white;
+  letter-spacing: 1px;
+  font-size: 10pt;
+  font-family: 'sourcesanspro-regular';
+  cursor: pointer;
+  background-image: url('../../images/header/scb_info.png');
+  background-repeat: no-repeat;
+}
+.scb_s_western_blot_gel_type_info {
+  left: 270px;
+  bottom: 367px;
+  position: absolute;
+  background: none;
+  border: none;
+  height: 23px;
+  width: 23px;
+  color: white;
+  letter-spacing: 1px;
+  font-size: 10pt;
+  font-family: 'sourcesanspro-regular';
+  cursor: pointer;
+  background-image: url('../../images/header/scb_info.png');
+  background-repeat: no-repeat;
+}
 .scb_s_western_blot_container {
   background: white;
   padding-bottom: 115px;
