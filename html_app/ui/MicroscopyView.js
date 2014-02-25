@@ -707,33 +707,37 @@ function draw_lens(param, addition, state, canvas){
 			$('#down').prop('disabled', false);
 
 	}
-	var context = canvas.getContext('2d');
-	clear_canvas(context, canvas);
+	if(canvas){
 		switch(param)
-	{
-		case 'x':
-		  state.xparam = state.xparam + addition;
-		  break;
-		case 'y':
-		  state.yparam = state.yparam + addition;
-		  break;
-		default:
-		  break;
+		{
+			case 'x':
+			  state.xparam = state.xparam + addition;
+			  break;
+			case 'y':
+			  state.yparam = state.yparam + addition;
+			  break;
+			default:
+			  break;
+		}
+	
+		var context = canvas.getContext('2d');
+		clear_canvas(context, canvas);
+
+		context.fillStyle="#000000";
+		context.fillRect(0,0, canvas.width, canvas.height);
+		if(state.cache_brightness != state.brightness|| state.cache_blur != state.blur){
+			save_and_draw_cache_image(canvas,state);
+		}
+		else
+			context.drawImage(reset_image(state.cache), state.xparam, state.yparam);
 	}
-	context.fillStyle="#000000";
-	context.fillRect(0,0, canvas.width, canvas.height);
-	if(state.cache_brightness != state.brightness|| state.cache_blur != state.blur){
-		save_and_draw_cache_image(canvas,state);
-	}
-	else
-		context.drawImage(reset_image(state.cache), state.xparam, state.yparam);
 
 
 }
 
 
 function draw(state){
-	var canvas=document.getElementsByTagName("canvas")[0];
+	var canvas=document.getElementById("lens");
 	
 	
 	document.onkeydown=function (e) {
@@ -745,26 +749,26 @@ function draw(state){
 			if (e.keyCode == '37' && $('#left').prop('disabled') == false) {
 				// l arrow
 				e.preventDefault();
-				draw_lens('x', 10, state, document.getElementsByTagName("canvas")[0]);
+				draw_lens('x', 10, state, document.getElementById("lens"));
 				console.log('left')
 			}
 			else if (e.keyCode == '38' && $('#up').prop('disabled')== false) {
 				// u arrow
 				e.preventDefault();
-				draw_lens('y', 10, state, document.getElementsByTagName("canvas")[0]);
+				draw_lens('y', 10, state,document.getElementById("lens"));
 				console.log('up');
 			}
 			else if (e.keyCode == '39' && $('#right').prop('disabled')== false) {
 				// r arrow
 				e.preventDefault();
-				draw_lens('x', -10, state, document.getElementsByTagName("canvas")[0]);
+				draw_lens('x', -10, state, document.getElementById("lens"));
 
 				console.log('right');
 			}
 			else if (e.keyCode == '40' && $('#down').prop('disabled')== false) {
 				// d arrow
 				e.preventDefault();
-				draw_lens('y', -10, state, document.getElementsByTagName("canvas")[0]);
+				draw_lens('y', -10, state, document.getElementById("lens"));
 				
 				console.log('down');
 			}
@@ -774,7 +778,7 @@ function draw(state){
 			if(caman_lock){
 			}
 			else{
-				draw_lens('y', 10, state, document.getElementsByTagName("canvas")[0]);
+				draw_lens('y', 10, state, document.getElementById("lens"));
 				console.log('up');
 			}
 
@@ -783,7 +787,7 @@ function draw(state){
 			if(caman_lock){
 			}
 			else{
-				draw_lens('y', -10, state, document.getElementsByTagName("canvas")[0]);
+				draw_lens('y', -10, state, document.getElementById("lens"));
 				console.log('down');
 			}
 	});
@@ -791,7 +795,7 @@ function draw(state){
 			if(caman_lock){
 			}
 			else{
-				draw_lens('x', 10, state, document.getElementsByTagName("canvas")[0]);
+				draw_lens('x', 10, state, document.getElementById("lens"));
 				console.log('left')
 			}
 	});
@@ -799,7 +803,7 @@ function draw(state){
 			if(caman_lock){
 			}
 			else{
-				draw_lens('x', -10, state, document.getElementsByTagName("canvas")[0]);
+				draw_lens('x', -10, state, document.getElementById("lens"));
 				console.log('right');
 			}
 	});
@@ -1138,7 +1142,7 @@ function save_and_draw_cache_image(canvas, state){
 			state.cache_brightness = state.brightness;
 			state.cache_blur = state.blur;
 			document.documentElement.style.overflow='scroll';
-			draw_lens('y', 0, state, document.getElementsByTagName("canvas")[0]);			
+			draw_lens('y', 0, state, document.getElementById('lens'));			
 			if(save_and_draw_cache_image_list.length > 1)
 			{
 				console.info( "save_and_draw_cache_image_list.length: "+ save_and_draw_cache_image_list.length, save_and_draw_cache_image_list);
@@ -1476,7 +1480,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					parsed.microscopy.green_enabled = false;
 					parsed.microscopy.merge_enabled = false;
 					parsed.microscopy.selected_lane.lens_map.if_type = 'red';
-					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
+					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementById("lens"));
 					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
 					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[current_slides[x].hash])
 					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[current_slides[x].hash]);
@@ -1519,7 +1523,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					parsed.microscopy.green_enabled = false;
 					parsed.microscopy.merge_enabled = false;
 					parsed.microscopy.selected_lane.lens_map.if_type = 'blue';
-					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
+					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementById("lens"));
 					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
 					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[current_slides[x].hash])
 					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[current_slides[x].hash]);
@@ -1562,7 +1566,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					parsed.microscopy.green_enabled = true;
 					parsed.microscopy.merge_enabled = false;
 					parsed.microscopy.selected_lane.lens_map.if_type = 'green';
-					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
+					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementById("lens"));
 					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
 					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[current_slides[x].hash])
 					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[current_slides[x].hash]);
@@ -1605,7 +1609,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					parsed.microscopy.green_enabled = false;
 					parsed.microscopy.merge_enabled = true;
 					parsed.microscopy.selected_lane.lens_map.if_type = 'merge';
-					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
+					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementById("lens"));
 					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
 					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[current_slides[x].hash])
 					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[current_slides[x].hash]);
