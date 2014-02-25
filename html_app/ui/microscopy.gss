@@ -474,43 +474,43 @@ input[type=radio].scb_s_microscopy_if:checked:before{
 
 .scb_s_microscopy_filter{
 	position: absolute !important;
-bottom: 117px !important;
-right: 12px !important;
-z-index: 5;
+	bottom: 117px !important;
+	right: 12px !important;
+	z-index: 5;
 }
 
 .scb_s_microscopy_dim_conditions{
-opacity: 0.5;
+	opacity: 0.5;
 }
 
 .scb_f_microscopy_red{
-height: 30px !important;
-width: 30px !important;
-right: 94px !important;
-bottom: 130px !important;
-position: absolute !important;
-z-index: 60;
-border: none !important;
-border-radius: 0px !important;
-background-color: transparent !important;
-background-image: url(../../../images/microscopy/Unselected/Filter_Red_Unselected.png);
-background-repeat: no-repeat;
-opacity: 1 !important;
+	height: 30px !important;
+	width: 30px !important;
+	right: 94px !important;
+	bottom: 130px !important;
+	position: absolute !important;
+	z-index: 60;
+	border: none !important;
+	border-radius: 0px !important;
+	background-color: transparent !important;
+	background-image: url(../../../images/microscopy/Unselected/Filter_Red_Unselected.png);
+	background-repeat: no-repeat;
+	opacity: 1 !important;
 }
 
 .scb_f_microscopy_green{
-height: 30px !important;
-width: 30px !important;
-right: 64px !important;
-bottom: 130px !important;
-position: absolute !important;
-z-index: 60;
-border: none !important;
-border-radius: 0px !important;
-background-color: transparent !important;
-background-image: url(../../../images/microscopy/Unselected/Filter_Green_Unselected.png);
-background-repeat: no-repeat;
-opacity: 1 !important;
+	height: 30px !important;
+	width: 30px !important;
+	right: 64px !important;
+	bottom: 130px !important;
+	position: absolute !important;
+	z-index: 60;
+	border: none !important;
+	border-radius: 0px !important;
+	background-color: transparent !important;
+	background-image: url(../../../images/microscopy/Unselected/Filter_Green_Unselected.png);
+	background-repeat: no-repeat;
+	opacity: 1 !important;
 }
 
 .scb_f_microscopy_blue{

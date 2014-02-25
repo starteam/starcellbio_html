@@ -587,6 +587,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select =
         $('li', $(element).parent()).removeClass('scb_s_microscopy_sample_selected');
         $(element).addClass('scb_s_microscopy_sample_selected');
         parsed.microscopy.lane_selected = parsed.microscopy_lane.id;
+        parsed.microscopy.scroll = $('.scb_s_microscopy_choose_samples_order_list').scrollTop();
         scb.ui.static.MainFrame.refresh();
    }
 }
@@ -730,6 +731,10 @@ function draw_lens(param, addition, state, canvas){
 		}
 		else
 			context.drawImage(reset_image(state.cache), state.xparam, state.yparam);
+	}
+	else{
+		console.error( "CANVAS IS ERROR! " , canvas ); 
+		debugger;
 	}
 
 
@@ -1028,6 +1033,8 @@ function init(state, isNew, isIF, draw, image_source){
 				initialize_state(state, img2string, img.src);
 				var randomblur = Math.round(Math.ceil(Math.random()*16) / 4) * 4;
 				var randomside = Math.round(Math.ceil(Math.random()*2));
+				var randomxparam = Math.ceil(Math.random() * (350 - -img_width) + -img_width);
+				var randomyparam = Math.ceil(Math.random() * (350 - -img_height) + -img_height);
 				if(randomside == 1)
 					isLeft = false;
 				else
@@ -1035,6 +1042,8 @@ function init(state, isNew, isIF, draw, image_source){
 				console.log(randomblur);
 				state.blur = randomblur;
 				state.src = img.src;
+				state.xparam = randomxparam;
+				state.yparam = randomyparam;
 			}
 			else{
 				state.orig =img2string;
@@ -1829,7 +1838,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             }
         }
         if (state.microscopy.samples_finished) {
-            debugger;
+            //debugger;
             if(!state.microscopy.warning_fired){
 				$('.scb_s_microscopy_load_followup').show();
 				$('.scb_s_microscopy_load_followup>.scb_f_controls_close_button').click(function(){
@@ -1848,6 +1857,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         
         if (state.microscopy.samples_finished) {
         	scb.ui.static.MicroscopyView.draw_slides(workarea);
+        	$('.scb_s_microscopy_choose_samples_order_list').scrollTop(state.microscopy.scroll);
         	    
         }
         else{

@@ -119,7 +119,7 @@ Progress bar
 
 					<select role='list' aria-label='Experiments' alt='' onchange="location = this.value;">
 						{foreach $e in $assignment.experiments.list}
-							<option role='listitem' aria-label='{$e.name}' value='#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$e.id}' model_id='{$assignment.id}' sub_model_id='{ $experiment.id }' 
+							<option role='listitem' aria-label='{$e.name}' value="#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$e.id}{if $e.last_view == 'microscopy'}&microscopy_id={$e.microscopy_list.selected_id}{elseif $e.last_view == 'facs'}&facs_id={$e.facs_list.selected_id}{elseif $e.last_view == 'western_blot' or $e.last_view == 'western_blot_gel'}&western_blot_id={$e.western_blot_list.selected_id}{/if}" model_id='{$assignment.id}' sub_model_id='{ $experiment.id }' 
 								{if  $experiment.id  == $e.id}selected="selected"{/if}> 
 								{$e.name}&nbsp;&nbsp;
 								

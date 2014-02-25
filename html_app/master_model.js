@@ -5665,7 +5665,7 @@ $(function () {
 					width: '1035px',
 					height: '540px',
 					left: '31px',
-					top: '000px'
+					top: '15%'
 				}
 			});
 			get_courses_result.list[x] = assignment_706_2014;
@@ -5725,10 +5725,10 @@ $(function () {
         name: 'ADD SAMPLES',
         open: 'mit706s14.setup',
         css: {
-            width: '880px',
-            height: '540px',
-            left: '100px',
-            top: '000px'
+			width: '1035px',
+			height: '540px',
+			left: '31px',
+			top: '50%'
         }
     });
 	

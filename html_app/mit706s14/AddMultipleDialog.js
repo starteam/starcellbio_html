@@ -90,6 +90,6 @@ mit706s14.setup = function (state) {
         dialog.css(k,v);
     });
 
-    $('.scb_mit706s16_dialog').draggable({handle:'.scb_mit706s16_inner_dialog_title'})
+    $('.scb_mit706s14_dialog').draggable({handle:'.scb_mit706s16_inner_dialog_title'})
 
 }

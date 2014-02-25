@@ -97,6 +97,7 @@ def get_courses(request, **kwargs):
 		assignments = course[0].assignments.all()
 		if(course[0].sassignments.filter(student=request.user).count() == 0 or course[0].sassignments.count() == 0):
 			for a in assignments:
+				original_assignment_data = a.data
 				if(a.assignmentName == 'StarCellBio Problem 1'):
 					#pudb.set_trace()
 					import hashlib
@@ -106,7 +107,6 @@ def get_courses(request, **kwargs):
 					encoded_number = int(encoded_email, 16)%24
 					order = random_mapping[encoded_number]
 					order = list(order)
-					original_assignment_data = a.data
 					assignment_data = ast.literal_eval(original_assignment_data)
 					#replace A
 					assignment_data['template']['ui']['add_multiple_dialog']['gfp1']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[0]+""
@@ -175,7 +175,8 @@ def get_courses(request, **kwargs):
 		all =[]
 		for a in Assignment.objects.all():
 			dictionary = ast.literal_eval(a.data)
-			all.append(dictionary)
+			if(a.assignmentID == 'decusability' or a.assignmentID == 'microscopy_test' or a.assignmentID == 'assignment_706_2014'):
+				all.append(dictionary)
 		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
 	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
 	response.set_cookie("scb_username", request.user.username)
