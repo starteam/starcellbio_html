@@ -731,6 +731,10 @@ function draw_lens(param, addition, state, canvas){
 		else
 			context.drawImage(reset_image(state.cache), state.xparam, state.yparam);
 	}
+	else{
+		console.error( "CANVAS IS ERROR! " , canvas ); 
+		debugger;
+	}
 
 
 }
