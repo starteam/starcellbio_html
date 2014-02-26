@@ -6560,7 +6560,1162 @@ var __assignment_706_2014 = {
 		};
 
 
+var __assignment_706_2015 = {
+        id: 'assignment_706_2015',
+        name: 'StarCellBio Problem 2',
+        course: '7.06_Spring_2014',
+    	course_name: 'Class',
+        description: 'Microscopy Test of images',
+        experiments: {},
+        template: {
+            instructions: [
+            	['Goal & Introduction','Here come instructions when we build them']
+            	],
+            ui: {
+                experimental_design: {
+                    techniques: [ 'wb' ,  'micro']
+                },
+                experiment_setup: {
+                    table: [ 
+                        {kind: "cell_plate", title: " ", editable: false},
+                        {kind: 'cell_line', title: 'Strain', editable: true}, 
+                        {kind: 'treatments',
+                            children: [
+                                {kind: 'drug', title: 'Treatment', editable: true},
+                                {kind: 'concentration', title: 'Treatment Concentration/Dose', editable: false},
+                        		{kind: "start", title: "Treatment Start Time", editable: false},
+                        		{kind: "collection", title: "Collection Timepoints", editable: false}
+                            ]
+                        },
+                        {kind: 'actions', title: 'Actions'}
+                    ],
+                    actions: [
+                    ], 
+                	new_row_is_disabled: {
+						title: 'New row',
+						cell_line: 'p+',
+						treatment_list: {list: [
+							{schedule_value: 0, collection_id: '0', drug_list: {list: [
+								{drug_id: 'ac', concentration_id: '100'}
+							]},  temperature: '22'
+							}
+						]}
+                	}
+                },
+            western_blot: {
+            	format: "%CELL_LINE%, %TREATMENT%",
+                keys: {
+                    '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']}
+                }
+            },
+            add_multiple_dialog: {
+            	order: ['gfp', 'gfp1', 'gfp2', 'gfp3', 'gfp4', 'gfpK', 'gfpH', 'gfp100', 'gfpTD'],
+				headings: [
+					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+               			],
+            	'gfp':{
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'WT-GFP'},
+                                    {kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+                                ],
+                               
+                                cell_treatments: {
+                                    G: [
+                                        {cell_line: 'gfp',
+                                         	treatment_id: 'media_only',
+                                            treatment_list: {list: [
+                                            	{collection_id: 'default',
+                                            		drug_list: {list: [
+                                                    	{drug_id: 'gm', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], L: [
+                                        {cell_line: 'gfp',
+                                        	treatment_id: 'ligand_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gml', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], I: [
+                                        {cell_line: 'gfp',
+                                        	treatment_id: 'inhibitor_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], A: [
+                                        {cell_line: 'gfp',
+                                        	treatment_id: 'ligand_media_inhibitor',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+				'gfp1':{
+                    rows: [
+                    {
+                                cells: [
+                                    {kind: 'text', text: 'WT-GFP-Protein A'},
+                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+                                ],
+                               
+                                cell_treatments: {
+                                    G: [
+                                        {cell_line: 'gfp1',
+                                         	treatment_id: 'media_only',
+                                            treatment_list: {list: [
+                                            	{collection_id: 'default',
+                                            		drug_list: {list: [
+                                                    	{drug_id: 'gm', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], L: [
+                                        {cell_line: 'gfp1',
+                                        	treatment_id: 'ligand_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gml', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], I: [
+                                        {cell_line: 'gfp1',
+                                        	treatment_id: 'inhibitor_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], A: [
+                                        {cell_line: 'gfp1',
+                                        	treatment_id: 'ligand_media_inhibitor',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ]
+                                }
+                            }
+                    ]
+				},
+				'gfp2':{
+                    rows: [ {
+                                cells: [
+                                    {kind: 'text', text: 'WT-GFP-Protein B'},
+                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+                                ],
+                               
+                                cell_treatments: {
+                                    G: [
+                                        {cell_line: 'gfp2',
+                                         	treatment_id: 'media_only',
+                                            treatment_list: {list: [
+                                            	{collection_id: 'default',
+                                            		drug_list: {list: [
+                                                    	{drug_id: 'gm', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], L: [
+                                        {cell_line: 'gfp2',
+                                        	treatment_id: 'ligand_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gml', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], I: [
+                                        {cell_line: 'gfp2',
+                                        	treatment_id: 'inhibitor_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], A: [
+                                        {cell_line: 'gfp2',
+                                        	treatment_id: 'ligand_media_inhibitor',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ]
+                                }
+                            }
+                    ]
+				},
+				'gfp3':{
+                    rows: [
+                    {
+                                cells: [
+                                    {kind: 'text', text: 'WT-GFP-Protein C'},
+                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+                                ],
+                               
+                                cell_treatments: {
+                                    G: [
+                                        {cell_line: 'gfp3',
+                                         	treatment_id: 'media_only',
+                                            treatment_list: {list: [
+                                            	{collection_id: 'default',
+                                            		drug_list: {list: [
+                                                    	{drug_id: 'gm', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], L: [
+                                        {cell_line: 'gfp3',
+                                        	treatment_id: 'ligand_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gml', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], I: [
+                                        {cell_line: 'gfp3',
+                                        	treatment_id: 'inhibitor_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], A: [
+                                        {cell_line: 'gfp3',
+                                        	treatment_id: 'ligand_media_inhibitor',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ]
+                                }
+                            }
+                    ]
+				},
+				'gfp4':{
+                    rows: [{
+                                cells: [
+                                    {kind: 'text', text: 'WT-GFP-Protein D'},
+                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+                                ],
+                               
+                                cell_treatments: {
+                                    G: [
+                                        {cell_line: 'gfp4',
+                                         	treatment_id: 'media_only',
+                                            treatment_list: {list: [
+                                            	{collection_id: 'default',
+                                            		drug_list: {list: [
+                                                    	{drug_id: 'gm', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], L: [
+                                        {cell_line: 'gfp4',
+                                        	treatment_id: 'ligand_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gml', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], I: [
+                                        {cell_line: 'gfp4',
+                                        	treatment_id: 'inhibitor_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], A: [
+                                        {cell_line: 'gfp4',
+                                        	treatment_id: 'ligand_media_inhibitor',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ]
+                                }
+                            }
+                    ]
+				},
+				'gfpK':{				
+                    rows: [{
+                                cells: [
+                                    {kind: 'text', text: 'WT-GFP-Kinase'},
+                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+                                ],
+                               
+                                cell_treatments: {
+                                    G: [
+                                        {cell_line: 'gfpK',
+                                         	treatment_id: 'media_only',
+                                            treatment_list: {list: [
+                                            	{collection_id: 'default',
+                                            		drug_list: {list: [
+                                                    	{drug_id: 'gm', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], L: [
+                                        {cell_line: 'gfpK',
+                                        	treatment_id: 'ligand_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gml', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], I: [
+                                        {cell_line: 'gfpK',
+                                        	treatment_id: 'inhibitor_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], A: [
+                                        {cell_line: 'gfpK',
+                                        	treatment_id: 'ligand_media_inhibitor',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ]
+                                }
+                            }
+                    ]
+				},
+				'gfpH':{					
+                    rows: [{
+                                cells: [
+                                    {kind: 'text', text: 'WT-GFP-Histone H2B'},
+                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+                                ],
+                               
+                                cell_treatments: {
+                                    G: [
+                                        {cell_line: 'gfpH',
+                                         	treatment_id: 'media_only',
+                                            treatment_list: {list: [
+                                            	{collection_id: 'default',
+                                            		drug_list: {list: [
+                                                    	{drug_id: 'gm', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], L: [
+                                        {cell_line: 'gfpH',
+                                        	treatment_id: 'ligand_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gml', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], I: [
+                                        {cell_line: 'gfpH',
+                                        	treatment_id: 'inhibitor_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], A: [
+                                        {cell_line: 'gfpH',
+                                        	treatment_id: 'ligand_media_inhibitor',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ]
+                                }
+                            }
+                    ]
+				
+				},
+				'gfp100':{
+                    rows: [
+                     {
+                                cells: [
+                                    {kind: 'text', text: 'WT-GFP-p100'},
+                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+                                ],
+                               
+                                cell_treatments: {
+                                    G: [
+                                        {cell_line: 'gfp100',
+                                         	treatment_id: 'media_only',
+                                            treatment_list: {list: [
+                                            	{collection_id: 'default',
+                                            		drug_list: {list: [
+                                                    	{drug_id: 'gm', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], L: [
+                                        {cell_line: 'gfp100',
+                                        	treatment_id: 'ligand_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gml', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], I: [
+                                        {cell_line: 'gfp100',
+                                        	treatment_id: 'inhibitor_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], A: [
+                                        {cell_line: 'gfp100',
+                                        	treatment_id: 'ligand_media_inhibitor',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ]
+                                }
+                            }
+                    ]
+				
+				},
+				'gfpTD':{
+                    rows: [{
+                                cells: [
+                                    {kind: 'text', text: 'WT-GFP-pTD'},
+                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+                                ],
+                               
+                                cell_treatments: {
+                                    G: [
+                                        {cell_line: 'gfpTD',
+                                         	treatment_id: 'media_only',
+                                            treatment_list: {list: [
+                                            	{collection_id: 'default',
+                                            		drug_list: {list: [
+                                                    	{drug_id: 'gm', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], L: [
+                                        {cell_line: 'gfpTD',
+                                        	treatment_id: 'ligand_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gml', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], I: [
+                                        {cell_line: 'gfpTD',
+                                        	treatment_id: 'inhibitor_media',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmi', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ], A: [
+                                        {cell_line: 'gfpTD',
+                                        	treatment_id: 'ligand_media_inhibitor',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default',
+                                                	drug_list: {list: [
+                                                    	{drug_id: 'gmil', concentration_id: '100'}
+                                                	]}, temperature: '22'}
+                                            ]}}
+                                    ]
+                                }
+                            }
 
+                    ]
+				
+				}
+                    
+                }
+                
+        },
+       			
+        add_new_row_instructions: 'On this page, set up your experiment to treat the wild-type worms with the four new drugs',
+		collections:{
+			'': {
+				name: ''
+			}
+		},
+		concentrations: {
+			100: {
+				name: '',
+				value: 100
+			}
+		},
+		drugs: {
+			'gm': {
+				name: 'Growth media only',
+				concentrations: ['100']
+			},
+			'gml': {
+				name:'Growth media + ligand',
+				concentrations: ['100']
+			},
+			'gmi': {
+				name: 'Growth media + inhibitor',
+				concentrations: ['100']
+			},
+			'gmil': {
+				name: 'Growth media + ligand + inhibitor',
+				concentrations: ['100']
+			}
+		},
+		experiment_temperatures: {
+			'22': {
+				name: "22" + degreeEntity + "C"
+			}
+		},
+		cell_lines: {
+			'gfp': {
+				name: 'WT-GFP'
+			},
+			'gfp1': {
+				name: 'WT-GFP-Protein A'
+			},
+			'gfp2': {
+				name: 'WT-GFP-Protein B'
+			},
+			'gfp3': {
+				name: 'WT-GFP-Protein C'
+			},
+			'gfp4': {
+				name: 'WT-GFP-Protein D'
+			},
+			'gfpK': {
+				name: 'WT-GFP-Kinase'
+			},
+			'gfpH': {
+				name: 'WT-GFP-Histone H2B'
+			},
+			'gfp100': {
+				name: 'WT-GFP-p100'
+			},
+			'gfpTD': {
+				name: 'WT-GFP-pTD'
+			}
+
+		},
+		time_unit: {
+			kind: 'minutes'
+		},
+		primary_anti_body: {
+			order:['mp1', 'mp2', 'mp3', 'mp4', 'mpX', 'mpAG'],
+			'mp1': {
+				name: 'mouse anti-phospho-protein A',
+				secondary: ['m'],
+				marks: [
+					{weight: 46, intensity: 0}
+				],
+				gel_name: 'P-Protein A'
+			},
+			'mp2': {
+				name: 'mouse anti-phospho-protein B',
+				secondary: ['m'],
+				marks: [
+					{weight: 134, intensity: 0},
+				],
+				gel_name: 'P-Protein B'
+			},
+			'mp3': {
+				name: 'mouse anti-phospho-protein C',
+				secondary: ['m'],
+				marks: [
+					{weight: 44, intensity: 0},
+				],
+				gel_name: 'P-Protein C'
+			},
+			'mp4': {
+				name: 'mouse anti-phospho-protein D',
+				secondary: ['m'],
+				marks: [
+					{weight: 67, intensity: 0},
+				],
+				gel_name: 'P-Protein D'
+			},
+			'mpX': {
+				name: 'mouse anti-phospho-kinase X',
+				secondary: ['m'],
+				marks: [
+					{weight: 74, intensity: 0},
+				],
+				gel_name: 'P-Kinase X'
+			},
+			'mpAG': {
+				name: 'rabbit anti-GAPDH',
+				secondary: ['r'],
+				marks: [
+					{weight: 37, intensity: 0},
+				],
+				gel_name: 'GAPDH'
+			}
+		},//
+		secondary_anti_body: {
+			'm': {
+				name: 'rabbit anti-mouse'
+			},
+			'r': {
+				name: 'goat anti-rabbit'
+			}
+		},//
+		lysate_kinds: {
+			'whole': {
+				name: 'Whole Cell'
+			}
+		},            
+		micro_kinds: {
+			'IF':{
+				name:'Fluorescence',
+				conditions: {
+					'rgb': {name: 'GFP (green)',
+					short_name: 'Fluorescence: GFP'} 
+				}
+			}
+		},
+		slides:{
+			'img1': 'images/microscopy/assignment_706_2014/c1.jpg',
+			'img2': 'images/microscopy/assignment_706_2014/c4.jpg',
+			'img3': 'images/microscopy/assignment_706_2014/c7.jpg',
+			'img4': 'images/microscopy/assignment_706_2014/c10.jpg',
+			'img40': 'images/microscopy/assignment_706_2014/c15-1.jpg',
+			'img41': 'images/microscopy/assignment_706_2014/c15-2.jpg',
+			'img5': 'images/microscopy/assignment_706_2014/c16.jpg',
+			'img6': 'images/microscopy/assignment_706_2014/c17.jpg',
+			'img42': 'images/microscopy/assignment_706_2014/c25.jpg',
+			'img7': 'images/microscopy/assignment_706_2014/c26.jpg',
+			'img8': 'images/microscopy/assignment_706_2014/c29.jpg',
+			
+			
+			'img9': 'images/microscopy/assignment_706_2014/cn2.jpg',
+			'img10': 'images/microscopy/assignment_706_2014/cn3.jpg',
+			'img11': 'images/microscopy/assignment_706_2014/cn5.jpg',
+			'img12': 'images/microscopy/assignment_706_2014/cn6.jpg',
+			'img13': 'images/microscopy/assignment_706_2014/cn7.jpg',
+			'img14': 'images/microscopy/assignment_706_2014/cn8.jpg',
+			'img15': 'images/microscopy/assignment_706_2014/cn9.jpg',
+			'img16': 'images/microscopy/assignment_706_2014/cn11.jpg',
+			'img17': 'images/microscopy/assignment_706_2014/cn12.jpg',
+			'img18': 'images/microscopy/assignment_706_2014/cn15.jpg',
+			'img19': 'images/microscopy/assignment_706_2014/cn17.jpg',
+			'img20': 'images/microscopy/assignment_706_2014/cn20.jpg',
+			
+			'img21': 'images/microscopy/assignment_706_2014/n1.jpg',
+			'img22': 'images/microscopy/assignment_706_2014/n2.jpg',
+			'img23': 'images/microscopy/assignment_706_2014/n8.jpg',
+			'img24': 'images/microscopy/assignment_706_2014/n9.jpg',
+			'img25': 'images/microscopy/assignment_706_2014/n11.jpg',
+			'img26': 'images/microscopy/assignment_706_2014/n18.jpg',
+			'img29': 'images/microscopy/assignment_706_2014/n34.jpg',
+			'img30': 'images/microscopy/assignment_706_2014/n43.jpg',
+			'img31': 'images/microscopy/assignment_706_2014/n47.jpg',
+			'img32': 'images/microscopy/assignment_706_2014/n60.jpg',
+			'img46': 'images/microscopy/assignment_706_2014/n64.jpg',
+			
+			
+			'img36': 'images/microscopy/assignment_706_2014/pm2.jpg',
+			'img37': 'images/microscopy/assignment_706_2014/pm3.jpg',
+			'img38': 'images/microscopy/assignment_706_2014/pm15.jpg',
+			'img43': 'images/microscopy/assignment_706_2014/pm17.jpg',
+			'img39': 'images/microscopy/assignment_706_2014/pm22.jpg',
+			'img44': 'images/microscopy/assignment_706_2014/pm34-1.jpg',
+			'img45': 'images/microscopy/assignment_706_2014/pm34-2.jpg'
+		},
+		slide_parser:{
+				'default':{
+					'IF':{
+						'rgb':{ 
+							'cytoplasm':{
+								'1': [{
+									hash: 'img1',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'2': [{
+									hash: 'img2',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'3': [{
+									hash: 'img3',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'4': [{
+									hash: 'img4',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'5': [{
+									hash: 'img40',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'6': [{
+									hash: 'img41',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'7': [{
+									hash: 'img5',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'8': [{
+									hash: 'img6',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'9': [{
+									hash: 'img42',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'10': [{
+									hash: 'img7',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'11': [{
+									hash: 'img8',
+									mag: 'N/A',
+									if_type: 'green'
+								}]
+							},
+							'plasma_membrane': {
+								'1': [{
+									hash: 'img36',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'2': [{
+									hash: 'img37',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'3': [{
+									hash: 'img38',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'4': [{
+									hash: 'img43',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'5': [{
+									hash: 'img39',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'6': [{
+									hash: 'img44',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'7': [{
+									hash: 'img45',
+									mag: 'N/A',
+									if_type: 'green'
+								}]
+							
+							},
+							'nucleus': {
+								'1': [{
+									hash: 'img21',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'2': [{
+									hash: 'img22',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'3': [{
+									hash: 'img23',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'4': [{
+									hash: 'img24',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'5': [{
+									hash: 'img25',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'6': [{
+									hash: 'img26',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'7': [{
+									hash: 'img29',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'8': [{
+									hash: 'img30',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'9': [{
+									hash: 'img31',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'10': [{
+									hash: 'img32',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'11': [{
+									hash: 'img46',
+									mag: 'N/A',
+									if_type: 'green'
+								}]
+							
+							
+							},
+							'cytoplasm_nucleus': {									
+								'1': [{
+									hash: 'img9',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'2': [{
+									hash: 'img10',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'3': [{
+									hash: 'img11',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'4': [{
+									hash: 'img12',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'5': [{
+									hash: 'img13',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'6': [{
+									hash: 'img14',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'7': [{
+									hash: 'img15',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'8': [{
+									hash: 'img16',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'9': [{
+									hash: 'img17',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'10': [{
+									hash: 'img18',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'11': [{
+									hash: 'img19',
+									mag: 'N/A',
+									if_type: 'green'
+								}],									
+								'12': [{
+									hash: 'img20',
+									mag: 'N/A',
+									if_type: 'green'
+								}]
+							
+							}
+						}
+					}
+				}
+		},
+        model: { // models
+                western_blot: {
+                    'cyto': {
+                        'parser_fixed': [
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gm',
+                                cell_line: '*ANY*',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gml',
+                                cell_line: '*ANY*',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'kinase X',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpX']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmi',
+                                cell_line: '*ANY*',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmil',
+                                cell_line: '*ANY*',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'kinase X',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpX']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            }
+                            
+                        ]
+                    }
+                },
+                microscopy: {
+                	'valid': ['pfl', 'ac'],
+                	'slide': {
+                	
+                		'complex_parser':[
+                		{
+                			match: [],
+                			
+                		},
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfp',
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
+                			phenotype: 'cytoplasm_nucleus'
+                		},             		
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfpH',
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
+                			phenotype: 'nucleus'
+                		},             		
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfp100',
+                			drug_id:['gm', 'gml', 'gmi', 'gmil'],
+                			phenotype: 'cytoplasm'
+                		},               		
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfpTD',
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
+                			phenotype: 'plasma_membrane'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfp1',
+                			drug_id: ['gm', 'gmi'],
+                			phenotype: 'cytoplasm'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfp1',
+                			drug_id: ['gml',  'gmil'],
+                			phenotype: 'plasma_membrane'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfp2',
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
+                			phenotype: 'plasma_membrane'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfp3',
+                			drug_id: ['gm',  'gmi', 'gmil'],
+                			phenotype: 'cytoplasm'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfp3',
+                			drug_id: ['gml'],
+                			phenotype: 'nucleus'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfp4',
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
+                			phenotype: 'cytoplasm'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id'],
+                			cell_line: 'gfpK',
+                			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
+                			phenotype: 'cytoplasm'
+                		}
+                			
+                		]
+                		
+                	}
+                }
+                
+		}
+		}
+		}
+    ;
 
 
 
@@ -6589,6 +7744,7 @@ $(function () {
 	var assignment_tufts = {};	
 	var microscopy_test ={};
 	var assignment_706_2014 ={};
+	var assignment_706_2015 ={};
 	for (var x = 0; x < get_courses_result.list.length; x++){
 		if(get_courses_result.list[x].id == 'usability_test'){
 			usability_test = get_courses_result.list[x];
@@ -6656,7 +7812,28 @@ $(function () {
 			});
 			get_courses_result.list[x] = assignment_706_2014;
 		}
-		
+		if(get_courses_result.list[x].id == 'assignment_706_2014'){
+			assignment_706_2015 = get_courses_result.list[x];
+			assignment_706_2015.template.instructions = [
+				['Introduction', scb_assignment_specific_mit706s14.introduction()],
+				['Background Information',scb_assignment_specific_mit706s14.background_information()],
+				['Question 1', scb_assignment_specific_mit706s14.question_1()],
+				['Question 2', scb_assignment_specific_mit706s14.question_2()]
+				];
+			assignment_706_2015.template.experiment_setup = scb_assignment_specific_mit706s14.experiment_setup();
+
+			assignment_706_2015.template.ui.experiment_setup.actions.push({
+				name: 'ADD SAMPLES',
+				open: 'mit706s14.setup',
+				css: {
+					width: '1035px',
+					height: '540px',
+					left: '31px',
+					top: '000px'
+				}
+			});
+			get_courses_result.list[x] = assignment_706_2015;
+		}
 		if(get_courses_result.list[x].id == 'decusability'){
 			decusability = get_courses_result.list[x];
     		decusability.template.instructions = [
@@ -6717,6 +7894,27 @@ $(function () {
             top: '000px'
         }
     });
+    
+    	
+	__assignment_706_2015.template.instructions = [
+		['Introduction', scb_assignment_specific_mit706s14.introduction()],
+		['Background Information',scb_assignment_specific_mit706s14.background_information()],
+		['Question 1', scb_assignment_specific_mit706s14.question_1()],
+		['Question 2', scb_assignment_specific_mit706s14.question_2()]
+		];
+	__assignment_706_2015.template.experiment_setup = scb_assignment_specific_mit706s13.experiment_setup();
+
+    __assignment_706_2015.template.ui.experiment_setup.actions.push({
+        name: 'ADD SAMPLES',
+        open: 'mit706s14.setup',
+        css: {
+            width: '880px',
+            height: '540px',
+            left: '100px',
+            top: '000px'
+        }
+    });
+	
 	
     __usability_test.description = scb_model_usability.abstract();
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
