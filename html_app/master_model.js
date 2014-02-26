@@ -3678,6 +3678,10 @@ var __microscopy_test = {
 						]}
                 	}
                 },
+                microscopy: {
+					disable_blur: false,
+					disable_brightness: false
+				},
             western_blot: {
             	format: "%CELL_LINE%, %TREATMENT%, %COLLECTION%",
                 keys: {
@@ -4499,6 +4503,10 @@ var __assignment_706_2014 = {
 						'%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
 						'%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']}
 					}
+				},
+				microscopy: {
+					disable_blur: true,
+					disable_brightness: true
 				},
 				add_multiple_dialog: {
 					order: ['gfp', 'gfp1', 'gfp2', 'gfp3', 'gfp4', 'gfp5', 'gfpH', 'gfp100', 'gfpTD'],
@@ -6550,8 +6558,6 @@ var __assignment_706_2014 = {
 		}
 		}
 		};
-
-
 
 
 
