@@ -4454,7 +4454,7 @@ var __assignment_706_2014 = {
         id: 'assignment_706_2014',
         name: 'StarCellBio Problem 1',
         course: '7.06_Spring_2014',
-    	course_name: 'Prototypes',
+    	course_name: 'Class',
         description: 'Microscopy Test of images',
         experiments: {},
         template: {
@@ -4493,496 +4493,496 @@ var __assignment_706_2014 = {
 						]}
                 	}
                 },
-            western_blot: {
-            	format: "%CELL_LINE%, %TREATMENT%",
-                keys: {
-                    '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
-                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']}
-                }
-            },
-            add_multiple_dialog: {
-            	order: ['gfp', 'gfp1', 'gfp2', 'gfp3', 'gfp4', 'gfpK', 'gfpH', 'gfp100', 'gfpTD'],
-				headings: [
-					'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
-               			],
-            	'gfp':{
-                        rows: [
-                            {
-                                cells: [
-                                    {kind: 'text', text: 'WT-GFP'},
-                                    {kind: 'checkbox', name: "G", treatment_id: 'media_only'},
-                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
-                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
-                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
-                                ],
-                               
-                                cell_treatments: {
-                                    G: [
-                                        {cell_line: 'gfp',
-                                         	treatment_id: 'media_only',
-                                            treatment_list: {list: [
-                                            	{collection_id: 'default',
-                                            		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], L: [
-                                        {cell_line: 'gfp',
-                                        	treatment_id: 'ligand_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], I: [
-                                        {cell_line: 'gfp',
-                                        	treatment_id: 'inhibitor_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], A: [
-                                        {cell_line: 'gfp',
-                                        	treatment_id: 'ligand_media_inhibitor',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ]
-                                }
-                            }
-                        ]
-                    },
-				'gfp1':{
-                    rows: [
-                    {
-                                cells: [
-                                    {kind: 'text', text: 'WT-GFP-Protein A'},
-                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
-                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
-                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
-                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
-                                ],
-                               
-                                cell_treatments: {
-                                    G: [
-                                        {cell_line: 'gfp1',
-                                         	treatment_id: 'media_only',
-                                            treatment_list: {list: [
-                                            	{collection_id: 'default',
-                                            		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], L: [
-                                        {cell_line: 'gfp1',
-                                        	treatment_id: 'ligand_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], I: [
-                                        {cell_line: 'gfp1',
-                                        	treatment_id: 'inhibitor_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], A: [
-                                        {cell_line: 'gfp1',
-                                        	treatment_id: 'ligand_media_inhibitor',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ]
-                                }
-                            }
-                    ]
+				western_blot: {
+					format: "%CELL_LINE%, %TREATMENT%",
+					keys: {
+						'%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+						'%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']}
+					}
 				},
-				'gfp2':{
-                    rows: [ {
-                                cells: [
-                                    {kind: 'text', text: 'WT-GFP-Protein B'},
-                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
-                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
-                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
-                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
-                                ],
-                               
-                                cell_treatments: {
-                                    G: [
-                                        {cell_line: 'gfp2',
-                                         	treatment_id: 'media_only',
-                                            treatment_list: {list: [
-                                            	{collection_id: 'default',
-                                            		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], L: [
-                                        {cell_line: 'gfp2',
-                                        	treatment_id: 'ligand_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], I: [
-                                        {cell_line: 'gfp2',
-                                        	treatment_id: 'inhibitor_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], A: [
-                                        {cell_line: 'gfp2',
-                                        	treatment_id: 'ligand_media_inhibitor',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ]
-                                }
-                            }
-                    ]
-				},
-				'gfp3':{
-                    rows: [
-                    {
-                                cells: [
-                                    {kind: 'text', text: 'WT-GFP-Protein C'},
-                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
-                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
-                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
-                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
-                                ],
-                               
-                                cell_treatments: {
-                                    G: [
-                                        {cell_line: 'gfp3',
-                                         	treatment_id: 'media_only',
-                                            treatment_list: {list: [
-                                            	{collection_id: 'default',
-                                            		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], L: [
-                                        {cell_line: 'gfp3',
-                                        	treatment_id: 'ligand_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], I: [
-                                        {cell_line: 'gfp3',
-                                        	treatment_id: 'inhibitor_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], A: [
-                                        {cell_line: 'gfp3',
-                                        	treatment_id: 'ligand_media_inhibitor',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ]
-                                }
-                            }
-                    ]
-				},
-				'gfp4':{
-                    rows: [{
-                                cells: [
-                                    {kind: 'text', text: 'WT-GFP-Protein D'},
-                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
-                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
-                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
-                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
-                                ],
-                               
-                                cell_treatments: {
-                                    G: [
-                                        {cell_line: 'gfp4',
-                                         	treatment_id: 'media_only',
-                                            treatment_list: {list: [
-                                            	{collection_id: 'default',
-                                            		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], L: [
-                                        {cell_line: 'gfp4',
-                                        	treatment_id: 'ligand_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], I: [
-                                        {cell_line: 'gfp4',
-                                        	treatment_id: 'inhibitor_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], A: [
-                                        {cell_line: 'gfp4',
-                                        	treatment_id: 'ligand_media_inhibitor',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ]
-                                }
-                            }
-                    ]
-				},
-				'gfpK':{				
-                    rows: [{
-                                cells: [
-                                    {kind: 'text', text: 'WT-GFP-Kinase'},
-                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
-                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
-                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
-                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
-                                ],
-                               
-                                cell_treatments: {
-                                    G: [
-                                        {cell_line: 'gfpK',
-                                         	treatment_id: 'media_only',
-                                            treatment_list: {list: [
-                                            	{collection_id: 'default',
-                                            		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], L: [
-                                        {cell_line: 'gfpK',
-                                        	treatment_id: 'ligand_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], I: [
-                                        {cell_line: 'gfpK',
-                                        	treatment_id: 'inhibitor_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], A: [
-                                        {cell_line: 'gfpK',
-                                        	treatment_id: 'ligand_media_inhibitor',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ]
-                                }
-                            }
-                    ]
-				},
-				'gfpH':{					
-                    rows: [{
-                                cells: [
-                                    {kind: 'text', text: 'WT-GFP-Histone H2B'},
-                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
-                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
-                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
-                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
-                                ],
-                               
-                                cell_treatments: {
-                                    G: [
-                                        {cell_line: 'gfpH',
-                                         	treatment_id: 'media_only',
-                                            treatment_list: {list: [
-                                            	{collection_id: 'default',
-                                            		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], L: [
-                                        {cell_line: 'gfpH',
-                                        	treatment_id: 'ligand_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], I: [
-                                        {cell_line: 'gfpH',
-                                        	treatment_id: 'inhibitor_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], A: [
-                                        {cell_line: 'gfpH',
-                                        	treatment_id: 'ligand_media_inhibitor',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ]
-                                }
-                            }
-                    ]
+				add_multiple_dialog: {
+					order: ['gfp', 'gfp1', 'gfp2', 'gfp3', 'gfp4', 'gfp5', 'gfpH', 'gfp100', 'gfpTD'],
+					headings: [
+						'Strain', 'Growth media only', 'Growth media + ligand', 'Growth media + inhibitor', 'Growth media + ligand + inhibitor'
+							],
+					'gfp':{
+							rows: [
+								{
+									cells: [
+										{kind: 'text', text: 'GFP'},
+										{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+										{kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+										{kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+										{kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+									],
+							   
+									cell_treatments: {
+										G: [
+											{cell_line: 'gfp',
+												treatment_id: 'media_only',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gm', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], L: [
+											{cell_line: 'gfp',
+												treatment_id: 'ligand_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gml', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], I: [
+											{cell_line: 'gfp',
+												treatment_id: 'inhibitor_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmi', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], A: [
+											{cell_line: 'gfp',
+												treatment_id: 'ligand_media_inhibitor',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmil', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										]
+									}
+								}
+							]
+						},
+					'gfp1':{
+						rows: [
+						{
+									cells: [
+										{kind: 'text', text: 'GFP-Protein A'},
+										{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+										{kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+										{kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+										{kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+									],
+							   
+									cell_treatments: {
+										G: [
+											{cell_line: 'gfp1',
+												treatment_id: 'media_only',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gm', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], L: [
+											{cell_line: 'gfp1',
+												treatment_id: 'ligand_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gml', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], I: [
+											{cell_line: 'gfp1',
+												treatment_id: 'inhibitor_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmi', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], A: [
+											{cell_line: 'gfp1',
+												treatment_id: 'ligand_media_inhibitor',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmil', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										]
+									}
+								}
+						]
+					},
+					'gfp2':{
+						rows: [ {
+									cells: [
+										{kind: 'text', text: 'GFP-Protein B'},
+										{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+										{kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+										{kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+										{kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+									],
+							   
+									cell_treatments: {
+										G: [
+											{cell_line: 'gfp2',
+												treatment_id: 'media_only',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gm', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], L: [
+											{cell_line: 'gfp2',
+												treatment_id: 'ligand_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gml', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], I: [
+											{cell_line: 'gfp2',
+												treatment_id: 'inhibitor_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmi', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], A: [
+											{cell_line: 'gfp2',
+												treatment_id: 'ligand_media_inhibitor',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmil', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										]
+									}
+								}
+						]
+					},
+					'gfp3':{
+						rows: [
+						{
+									cells: [
+										{kind: 'text', text: 'GFP-Protein C'},
+										{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+										{kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+										{kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+										{kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+									],
+							   
+									cell_treatments: {
+										G: [
+											{cell_line: 'gfp3',
+												treatment_id: 'media_only',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gm', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], L: [
+											{cell_line: 'gfp3',
+												treatment_id: 'ligand_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gml', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], I: [
+											{cell_line: 'gfp3',
+												treatment_id: 'inhibitor_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmi', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], A: [
+											{cell_line: 'gfp3',
+												treatment_id: 'ligand_media_inhibitor',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmil', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										]
+									}
+								}
+						]
+					},
+					'gfp4':{
+						rows: [{
+									cells: [
+										{kind: 'text', text: 'GFP-Protein D'},
+										{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+										{kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+										{kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+										{kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+									],
+							   
+									cell_treatments: {
+										G: [
+											{cell_line: 'gfp4',
+												treatment_id: 'media_only',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gm', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], L: [
+											{cell_line: 'gfp4',
+												treatment_id: 'ligand_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gml', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], I: [
+											{cell_line: 'gfp4',
+												treatment_id: 'inhibitor_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmi', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], A: [
+											{cell_line: 'gfp4',
+												treatment_id: 'ligand_media_inhibitor',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmil', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										]
+									}
+								}
+						]
+					},
+					'gfp5':{				
+						rows: [{
+									cells: [
+										{kind: 'text', text: 'GFP-Protein E'},
+										{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+										{kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+										{kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+										{kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+									],
+							   
+									cell_treatments: {
+										G: [
+											{cell_line: 'gfp5',
+												treatment_id: 'media_only',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gm', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], L: [
+											{cell_line: 'gfp5',
+												treatment_id: 'ligand_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gml', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], I: [
+											{cell_line: 'gfp5',
+												treatment_id: 'inhibitor_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmi', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], A: [
+											{cell_line: 'gfp5',
+												treatment_id: 'ligand_media_inhibitor',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmil', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										]
+									}
+								}
+						]
+					},
+					'gfpH':{					
+						rows: [{
+									cells: [
+										{kind: 'text', text: 'GFP-Histone H2B'},
+										{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+										{kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+										{kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+										{kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+									],
+							   
+									cell_treatments: {
+										G: [
+											{cell_line: 'gfpH',
+												treatment_id: 'media_only',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gm', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], L: [
+											{cell_line: 'gfpH',
+												treatment_id: 'ligand_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gml', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], I: [
+											{cell_line: 'gfpH',
+												treatment_id: 'inhibitor_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmi', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], A: [
+											{cell_line: 'gfpH',
+												treatment_id: 'ligand_media_inhibitor',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmil', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										]
+									}
+								}
+						]
 				
-				},
-				'gfp100':{
-                    rows: [
-                     {
-                                cells: [
-                                    {kind: 'text', text: 'WT-GFP-p100'},
-                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
-                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
-                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
-                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
-                                ],
-                               
-                                cell_treatments: {
-                                    G: [
-                                        {cell_line: 'gfp100',
-                                         	treatment_id: 'media_only',
-                                            treatment_list: {list: [
-                                            	{collection_id: 'default',
-                                            		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], L: [
-                                        {cell_line: 'gfp100',
-                                        	treatment_id: 'ligand_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], I: [
-                                        {cell_line: 'gfp100',
-                                        	treatment_id: 'inhibitor_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], A: [
-                                        {cell_line: 'gfp100',
-                                        	treatment_id: 'ligand_media_inhibitor',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ]
-                                }
-                            }
-                    ]
+					},
+					'gfp100':{
+						rows: [
+						 {
+									cells: [
+										{kind: 'text', text: 'GFP-p100'},
+										{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+										{kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+										{kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+										{kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+									],
+							   
+									cell_treatments: {
+										G: [
+											{cell_line: 'gfp100',
+												treatment_id: 'media_only',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gm', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], L: [
+											{cell_line: 'gfp100',
+												treatment_id: 'ligand_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gml', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], I: [
+											{cell_line: 'gfp100',
+												treatment_id: 'inhibitor_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmi', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], A: [
+											{cell_line: 'gfp100',
+												treatment_id: 'ligand_media_inhibitor',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmil', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										]
+									}
+								}
+						]
 				
-				},
-				'gfpTD':{
-                    rows: [{
-                                cells: [
-                                    {kind: 'text', text: 'WT-GFP-pTD'},
-                  					{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
-                                    {kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
-                                    {kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
-                                    {kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
-                                ],
-                               
-                                cell_treatments: {
-                                    G: [
-                                        {cell_line: 'gfpTD',
-                                         	treatment_id: 'media_only',
-                                            treatment_list: {list: [
-                                            	{collection_id: 'default',
-                                            		drug_list: {list: [
-                                                    	{drug_id: 'gm', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], L: [
-                                        {cell_line: 'gfpTD',
-                                        	treatment_id: 'ligand_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gml', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], I: [
-                                        {cell_line: 'gfpTD',
-                                        	treatment_id: 'inhibitor_media',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmi', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ], A: [
-                                        {cell_line: 'gfpTD',
-                                        	treatment_id: 'ligand_media_inhibitor',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default',
-                                                	drug_list: {list: [
-                                                    	{drug_id: 'gmil', concentration_id: '100'}
-                                                	]}, temperature: '22'}
-                                            ]}}
-                                    ]
-                                }
-                            }
+					},
+					'gfpTD':{
+						rows: [{
+									cells: [
+										{kind: 'text', text: 'GFP-pTD'},
+										{kind: 'checkbox', name: "G", treatment_id: 'media_only'},
+										{kind: 'checkbox', name: 'L', treatment_id: 'ligand_media' },
+										{kind: 'checkbox', name: 'I', treatment_id: 'inhibitor_media'},
+										{kind: 'checkbox', name: 'A', treatment_id: 'ligand_media_inhibitor'}
+									],
+							   
+									cell_treatments: {
+										G: [
+											{cell_line: 'gfpTD',
+												treatment_id: 'media_only',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gm', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], L: [
+											{cell_line: 'gfpTD',
+												treatment_id: 'ligand_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gml', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], I: [
+											{cell_line: 'gfpTD',
+												treatment_id: 'inhibitor_media',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmi', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										], A: [
+											{cell_line: 'gfpTD',
+												treatment_id: 'ligand_media_inhibitor',
+												treatment_list: {list: [
+													{collection_id: 'default',
+														drug_list: {list: [
+															{drug_id: 'gmil', concentration_id: '100'}
+														]}, temperature: '22'}
+												]}}
+										]
+									}
+								}
 
-                    ]
+						]
 				
+					}
+					
 				}
-                    
-                }
                 
         },
        			
@@ -5023,31 +5023,31 @@ var __assignment_706_2014 = {
 		},
 		cell_lines: {
 			'gfp': {
-				name: 'WT-GFP'
+				name: 'GFP'
 			},
 			'gfp1': {
-				name: 'WT-GFP-Protein A'
+				name: 'GFP-Protein A'
 			},
 			'gfp2': {
-				name: 'WT-GFP-Protein B'
+				name: 'GFP-Protein B'
 			},
 			'gfp3': {
-				name: 'WT-GFP-Protein C'
+				name: 'GFP-Protein C'
 			},
 			'gfp4': {
-				name: 'WT-GFP-Protein D'
+				name: 'GFP-Protein D'
 			},
-			'gfpK': {
-				name: 'WT-GFP-Kinase'
+			'gfp5': {
+				name: 'GFP-Protein E'
 			},
 			'gfpH': {
-				name: 'WT-GFP-Histone H2B'
+				name: 'GFP-Histone H2B'
 			},
 			'gfp100': {
-				name: 'WT-GFP-p100'
+				name: 'GFP-p100'
 			},
 			'gfpTD': {
-				name: 'WT-GFP-pTD'
+				name: 'GFP-pTD'
 			}
 
 		},
@@ -5055,7 +5055,7 @@ var __assignment_706_2014 = {
 			kind: 'minutes'
 		},
 		primary_anti_body: {
-			order:['mp1', 'mp2', 'mp3', 'mp4', 'mpX', 'mpAG'],
+			order:['mp1', 'mp2', 'mp3', 'mp4', 'mp5', 'mpAG'],
 			'mp1': {
 				name: 'mouse anti-phospho-protein A',
 				secondary: ['m'],
@@ -5088,13 +5088,13 @@ var __assignment_706_2014 = {
 				],
 				gel_name: 'P-Protein D'
 			},
-			'mpX': {
-				name: 'mouse anti-phospho-kinase X',
+			'mp5': {
+				name: 'mouse anti-phospho-protein E',
 				secondary: ['m'],
 				marks: [
 					{weight: 74, intensity: 0},
 				],
-				gel_name: 'P-Kinase X'
+				gel_name: 'P-Protein E'
 			},
 			'mpAG': {
 				name: 'rabbit anti-GAPDH',
@@ -5368,11 +5368,12 @@ var __assignment_706_2014 = {
                 western_blot: {
                     'cyto': {
                         'parser_fixed': [
+                        //CELL GFP
                         	{
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'gm',
-                                cell_line: '*ANY*',
+                                cell_line: 'gfp',
                                 above_marks: [
                                     {
                                         name: 'protein C',
@@ -5389,35 +5390,35 @@ var __assignment_706_2014 = {
                                 ],
                                 below_marks: []
                             },
-                            {
+                        	{
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'gml',
-                                cell_line: '*ANY*',
+                                cell_line: 'gfp',
                                 above_marks: [
-                                    {
+                                	{
                                         name: 'protein B',
                                         weight: 134, // 34&35
                                         intensity: 2,
                                         primary_anti_body: ['mp2']
                                     },
-                                    {
+                                	{
                                         name: 'protein C',
                                         weight: 44, // 34&35
                                         intensity: 2,
                                         primary_anti_body: ['mp3']
                                     },
-                                    {
+                                	{
                                         name: 'protein D',
                                         weight: 67, // 34&35
                                         intensity: 2,
                                         primary_anti_body: ['mp4']
                                     },
                                     {
-                                        name: 'kinase X',
+                                        name: 'protein E',
                                         weight: 74, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['mpX']
+                                        primary_anti_body: ['mp5']
                                     },
                                     {
                                         name: 'anti-GAPDH',
@@ -5432,7 +5433,7 @@ var __assignment_706_2014 = {
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'gmi',
-                                cell_line: '*ANY*',
+                                cell_line: 'gfp',
                                 above_marks: [
                                     {
                                         name: 'protein C',
@@ -5449,11 +5450,11 @@ var __assignment_706_2014 = {
                                 ],
                                 below_marks: []
                             },
-                            {
+                        	{
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'gmil',
-                                cell_line: '*ANY*',
+                                cell_line: 'gfp',
                                 above_marks: [
                                     {
                                         name: 'protein B',
@@ -5461,6 +5462,34 @@ var __assignment_706_2014 = {
                                         intensity: 2,
                                         primary_anti_body: ['mp2']
                                     },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                            //CELL GFP H
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gm',
+                                cell_line: 'gfpH',
+                                above_marks: [
                                     {
                                         name: 'protein C',
                                         weight: 44, // 34&35
@@ -5468,10 +5497,956 @@ var __assignment_706_2014 = {
                                         primary_anti_body: ['mp3']
                                     },
                                     {
-                                        name: 'kinase X',
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gml',
+                                cell_line: 'gfpH',
+                                above_marks: [
+                                	{
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                	{
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'protein E',
                                         weight: 74, // 34&35
                                         intensity: 2,
-                                        primary_anti_body: ['mpX']
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmi',
+                                cell_line: 'gfpH',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmil',
+                                cell_line: 'gfpH',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                            //CELL GFP p100
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gm',
+                                cell_line: 'gfp100',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gml',
+                                cell_line: 'gfp100',
+                                above_marks: [
+                                	{
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                	{
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmi',
+                                cell_line: 'gfp100',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmil',
+                                cell_line: 'gfp100',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            }, 
+                        	//CELL GFP TD
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gm',
+                                cell_line: 'gfpTD',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gml',
+                                cell_line: 'gfpTD',
+                                above_marks: [
+                                	{
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                	{
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmi',
+                                cell_line: 'gfpTD',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmil',
+                                cell_line: 'gfpTD',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                            //CELL GFP A
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gm',
+                                cell_line: 'gfp1',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gml',
+                                cell_line: 'gfp1',
+                                above_marks: [
+                                	{
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                	{
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmi',
+                                cell_line: 'gfp1',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmil',
+                                cell_line: 'gfp1',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        //CELL LINE GFPB
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gm',
+                                cell_line: 'gfp2',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gml',
+                                cell_line: 'gfp2',
+                                above_marks: [
+                                	{
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein B',
+                                        weight: 161, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                	{
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmi',
+                                cell_line: 'gfp2',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmil',
+                                cell_line: 'gfp2',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein B',
+                                        weight: 161, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                            //CELL GFPC
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gm',
+                                cell_line: 'gfp3',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein C',
+                                        weight: 71, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gml',
+                                cell_line: 'gfp3',
+                                above_marks: [
+                                	{
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein C',
+                                        weight: 71, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                	{
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmi',
+                                cell_line: 'gfp3',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein C',
+                                        weight: 71, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmil',
+                                cell_line: 'gfp3',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein C',
+                                        weight: 71, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                            //CELL GFP D
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gm',
+                                cell_line: 'gfp4',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gml',
+                                cell_line: 'gfp4',
+                                above_marks: [
+                                	{
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                	{
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'protein D',
+                                        weight: 94, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmi',
+                                cell_line: 'gfp4',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmil',
+                                cell_line: 'gfp4',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                            //CELL GFP E
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gm',
+                                cell_line: 'gfp5',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gml',
+                                cell_line: 'gfp5',
+                                above_marks: [
+                                	{
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                	{
+                                        name: 'protein D',
+                                        weight: 67, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp4']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 101, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmi',
+                                cell_line: 'gfp5',
+                                above_marks: [
+                                    {
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'anti-GAPDH',
+                                        weight: 37, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mpAG']
+                                    }
+                                ],
+                                below_marks: []
+                            },
+                        	{
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'gmil',
+                                cell_line: 'gfp5',
+                                above_marks: [
+                                    {
+                                        name: 'protein B',
+                                        weight: 134, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp2']
+                                    },
+                                	{
+                                        name: 'protein C',
+                                        weight: 44, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp3']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 74, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
+                                    },
+                                    {
+                                        name: 'protein E',
+                                        weight: 101, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['mp5']
                                     },
                                     {
                                         name: 'anti-GAPDH',
@@ -5482,6 +6457,11 @@ var __assignment_706_2014 = {
                                 ],
                                 below_marks: []
                             }
+                            
+                            
+                            
+                            
+                            
                             
                         ]
                     }
@@ -5557,7 +6537,7 @@ var __assignment_706_2014 = {
                 		},
                 		{
                 			match: ['cell_line', 'drug_id'],
-                			cell_line: 'gfpK',
+                			cell_line: 'gfp5',
                 			drug_id: ['gm', 'gml', 'gmi', 'gmil'],
                 			phenotype: 'cytoplasm'
                 		}
