@@ -3685,6 +3685,10 @@ var __microscopy_test = {
                     '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
                     '%COLLECTION%': {attr: ['treatment_list', 'list', '0', 'collection_id'], map:['collections', '%KEY%', 'name']}
                 }
+            },
+            microscopy: {
+            	disable_blur: false,
+            	disable_brightness: false
             }
                 
                 },
@@ -4499,6 +4503,10 @@ var __assignment_706_2014 = {
                     '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                     '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']}
                 }
+            },
+            microscopy: {
+            	disable_blur: true,
+            	disable_brightness: true
             },
             add_multiple_dialog: {
             	order: ['gfp', 'gfp1', 'gfp2', 'gfp3', 'gfp4', 'gfpK', 'gfpH', 'gfp100', 'gfpTD'],

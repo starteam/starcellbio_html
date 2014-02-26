@@ -76,7 +76,14 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'blue_enabled', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'green_enabled', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'merge_enabled', false, null, context);
-
+    
+    var template = context.template;
+    
+    self.disable_blur = template.ui.microscopy.disable_blur;
+    self.disable_brightness = template.ui.microscopy.disable_brightness;
+    
+  	
+  	
     scb.Utils.initialize_accessor_field(self, data, 'light_on', false, null, context);	
 	scb.utils.accessor2_custom(self, 'selected_lane', function () {
         if (self.lane_selected) {
