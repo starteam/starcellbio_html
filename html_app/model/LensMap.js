@@ -22,6 +22,13 @@ scb.LensMap = function scb_LensMap(data, context, parent) {
         scb.Utils.initialize_accessor_field(self, data, 'mag', null, null, context);
         scb.Utils.initialize_accessor_field(self, data, 'if_type', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'yparam', null, null, context);
+    
+    var template = context.template;
+    
+    self.disable_blur = template.ui.microscopy.disable_blur;
+        self.disable_brightness = template.ui.microscopy.disable_brightness;
+
+    
 	scb.utils.accessor2_custom(self, 'orig', function () {
             return scb.LensMapProxy.original;
     }, function (d) {
