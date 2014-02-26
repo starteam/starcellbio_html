@@ -622,49 +622,46 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
    			
    			
    			
-   			$(document).mouseup(function (e)
-			{
-				var container = $(".scb_s_controls_note");
-
-				if (!container.is(e.target) // if the target of the click isn't the container...
-					&& container.has(e.target).length === 0) // ... nor a descendant of the container
-				{
-					container.slideUp();
-				}
-				else
-					container.slideDown();
-			});
-   			
-   			
-   			var show_gel_type_note = false;
-   			$('.scb_s_western_blot_gel_type_info').click(function(){
-   				if(!show_gel_type_note){
-   					$('.scb_s_wb_gel_type_followup').slideDown();
-   					show_gel_type_note = true;
-   				}
-   				else{
-   					$('.scb_s_wb_gel_type_followup').slideUp();
-   					show_gel_type_note = false;
-   				}
-   				
-   			});
-   			
-   			var show_marker_note = false;
-   			$('.scb_s_western_blot_marker_info').click(function(){
-   				if(!show_marker_note){
-   					$('.scb_s_wb_marker_followup').slideDown();
-   					show_marker_note = true;
-   				}
-   				else{
-   					$('.scb_s_wb_marker_followup').slideUp();
-   					show_marker_note = false;
-   				}
-   				
-   			});
+//    			$(document).mouseup(function (e)
+// 			{
+// 				var container = $(".scb_s_controls_note");
+// 
+// 				if (!container.is(e.target) // if the target of the click isn't the container...
+// 					&& container.has(e.target).length === 0) // ... nor a descendant of the container
+// 				{
+// 					container.slideUp();
+// 				}
+// 				else
+// 					container.slideDown();
+// 			});
 //    			
-//    			$('.scb_f_controls_close_button').click(function(){
-//    				$(".scb_s_controls_note").hide();
+//    			
+//    			var show_gel_type_note = false;
+//    			$('.scb_s_western_blot_gel_type_info').click(function(){
+//    				if(!show_gel_type_note){
+//    					$('.scb_s_wb_gel_type_followup').slideDown();
+//    					show_gel_type_note = true;
+//    				}
+//    				else{
+//    					$('.scb_s_wb_gel_type_followup').slideUp();
+//    					show_gel_type_note = false;
+//    				}
+//    				
 //    			});
+//    			
+//    			var show_marker_note = false;
+//    			$('.scb_s_western_blot_marker_info').click(function(){
+//    				if(!show_marker_note){
+//    					$('.scb_s_wb_marker_followup').slideDown();
+//    					show_marker_note = true;
+//    				}
+//    				else{
+//    					$('.scb_s_wb_marker_followup').slideUp();
+//    					show_marker_note = false;
+//    				}
+//    				
+//    			});
+
         }
 
         if (state.western_blot.gel_type == null) {
