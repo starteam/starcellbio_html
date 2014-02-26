@@ -177,6 +177,8 @@ def get_courses(request, **kwargs):
 							assignment_data['template']['ui']['add_multiple_dialog']['order'][3] = key
 						if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein D'):
 							assignment_data['template']['ui']['add_multiple_dialog']['order'][4] = key
+						if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein E'):
+							assignment_data['template']['ui']['add_multiple_dialog']['order'][5] = key
 					for key, value in assignment_data['template']['primary_anti_body'].iteritems():
 						if(key != 'order' and value['gel_name'] == 'P-Protein A'):
 							assignment_data['template']['primary_anti_body']['order'][0] = key
@@ -186,6 +188,8 @@ def get_courses(request, **kwargs):
 							assignment_data['template']['primary_anti_body']['order'][2] = key
 						if(key != 'order' and value['gel_name'] == 'P-Protein D'):
 							assignment_data['template']['primary_anti_body']['order'][3] = key
+						if(key != 'order' and value['gel_name'] == 'P-Protein E'):
+							assignment_data['template']['primary_anti_body']['order'][4] = key
 					
 					
 					original_assignment_data = repr(assignment_data)
@@ -263,6 +267,8 @@ def get_courses(request, **kwargs):
 								assignment_data['template']['ui']['add_multiple_dialog']['order'][3] = key
 							if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein D'):
 								assignment_data['template']['ui']['add_multiple_dialog']['order'][4] = key
+							if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein E'):
+								assignment_data['template']['ui']['add_multiple_dialog']['order'][5] = key
 						for key, value in assignment_data['template']['primary_anti_body'].iteritems():
 							if(key != 'order' and value['gel_name'] == 'P-Protein A'):
 								assignment_data['template']['primary_anti_body']['order'][0] = key
@@ -272,6 +278,8 @@ def get_courses(request, **kwargs):
 								assignment_data['template']['primary_anti_body']['order'][2] = key
 							if(key != 'order' and value['gel_name'] == 'P-Protein D'):
 								assignment_data['template']['primary_anti_body']['order'][3] = key
+							if(key != 'order' and value['gel_name'] == 'P-Protein E'):
+								assignment_data['template']['primary_anti_body']['order'][4] = key
 						original_assignment_data = repr(assignment_data)
 					sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = original_assignment_data)
 					sa.save()
