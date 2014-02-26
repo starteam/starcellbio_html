@@ -193,7 +193,88 @@ def get_courses(request, **kwargs):
 				sa.save()
 			assignments = course[0].sassignments.filter(student=request.user)
 		else:
+			#pudb.set_trace()
 			if(len(course[0].sassignments.filter(student=request.user)) != len(assignments)):
+				list_of_extras = []
+				for a in assignments:
+					list_of_extras.append(a.assignmentID)
+				for a in assignments:
+					for sa in course[0].sassignments.filter(student=request.user):
+						if a.assignmentID == sa.assignmentID:
+							list_of_extras.remove(a.assignmentID)
+				for x in list_of_extras:
+					a = Assignment.objects.filter(assignmentID=x)
+					a = a[0]
+					original_assignment_data = a.data
+					if(a.assignmentName == 'StarCellBio Problem 1'):
+						#pudb.set_trace()
+						import hashlib
+						md5 = hashlib.md5()
+						md5.update(str(request.user.email).lower())
+						encoded_email = md5.hexdigest()
+						encoded_number = int(encoded_email, 16)%120
+						order = random_mapping[encoded_number]
+						order = list(order)
+						assignment_data = ast.literal_eval(original_assignment_data)
+						#replace A
+						assignment_data['template']['ui']['add_multiple_dialog']['gfp1']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[0]+""
+						assignment_data['template']['cell_lines']['gfp1']['name'] = "WT-GFP-Protein "+order[0]+""
+						assignment_data['template']['primary_anti_body']['mp1']['name'] = "mouse anti-phospho-protein "+order[0]+""
+						assignment_data['template']['primary_anti_body']['mp1']['gel_name'] = "P-Protein "+order[0]+""
+						#replace B
+						assignment_data['template']['ui']['add_multiple_dialog']['gfp2']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[1]+""
+						assignment_data['template']['cell_lines']['gfp2']['name'] = "WT-GFP-Protein "+order[1]+""
+						assignment_data['template']['primary_anti_body']['mp2']['name'] = "mouse anti-phospho-protein "+order[1]+""
+						assignment_data['template']['primary_anti_body']['mp2']['gel_name'] = "P-Protein "+order[1]+""
+						array_b = [(1,0), (3,0), (5,0), (7,0), (9,0), (11,0), (13,0), (15,0), (17,0), (19,0), (21,0), (21,1), (23,0), (23,1), (25,0), (27,0), (29,0), (31,0), (33,0), (35,0)]
+						for x in array_b:
+							assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][x[0]]['above_marks'][x[1]]['name'] = "protein "+order[1]+""
+						#replace C
+						assignment_data['template']['ui']['add_multiple_dialog']['gfp3']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[2]+""
+						assignment_data['template']['cell_lines']['gfp3']['name'] = "WT-GFP-Protein "+order[2]+""
+						assignment_data['template']['primary_anti_body']['mp3']['name'] = "mouse anti-phospho-protein "+order[2]+""
+						assignment_data['template']['primary_anti_body']['mp3']['gel_name'] = "P-Protein "+order[2]+""
+						array_c = [(0,0),(1,1), (2,0), (3,1), (4,0), (5,1), (6,0), (7,1), (8,0), (9,1), (10,0), (11,1), (12,0), (13,1), (14,0), (15,1), (16,0), (17,1), (18,0), (19,1), (20,0), (21,2), (22,0), (23,2), (24,0), (24,1), (25,1), (25,2), (26,0), (26,1), (27,1), (27,2), (28,0), (29,1), (30,0), (31,1), (32,0), (33,1), (34,0), (35,1)]
+						for x in array_c:
+							assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][x[0]]['above_marks'][x[1]]['name'] = "protein "+order[2]+""
+						#replace D
+						assignment_data['template']['ui']['add_multiple_dialog']['gfp4']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[3]+""
+						assignment_data['template']['cell_lines']['gfp4']['name'] = "WT-GFP-Protein "+order[3]+""
+						assignment_data['template']['primary_anti_body']['mp4']['name'] = "mouse anti-phospho-protein "+order[3]+""
+						assignment_data['template']['primary_anti_body']['mp4']['gel_name'] = "P-Protein "+order[3]+""
+						array_d = [(1,2), (5,2), (9,2), (13,2), (17,2), (21,3), (25,3), (29,2), (29,3), (33,2)]
+						for x in array_d:
+							assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][x[0]]['above_marks'][x[1]]['name'] = "protein "+order[3]+""
+						#replace E
+						assignment_data['template']['ui']['add_multiple_dialog']['gfp5']['rows'][0]['cells'][0]['text'] = "WT-GFP-Protein "+order[4]+""
+						assignment_data['template']['cell_lines']['gfp5']['name'] = "WT-GFP-Protein "+order[4]+""
+						assignment_data['template']['primary_anti_body']['mp5']['name'] = "mouse anti-phospho-protein "+order[4]+""
+						assignment_data['template']['primary_anti_body']['mp5']['gel_name'] = "P-Protein "+order[4]+""
+						array_e = [(1,3), (3,2), (5,3), (7,2), (9,3), (11,2), (13,3), (15,2), (17,3), (19,2), (21,4), (23,3), (25,4), (27,3), (29,4), (31,2), (33,3), (33,4), (35,2), (35,3)]
+						for x in array_e:
+							assignment_data['template']['model']['western_blot']['cyto']['parser_fixed'][x[0]]['above_marks'][x[1]]['name'] = "protein "+order[4]+""
+						
+						for key, value in assignment_data['template']['ui']['add_multiple_dialog'].iteritems():
+							if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein A'):
+								assignment_data['template']['ui']['add_multiple_dialog']['order'][1] = key
+							if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein B'):
+								assignment_data['template']['ui']['add_multiple_dialog']['order'][2] = key
+							if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein C'):
+								assignment_data['template']['ui']['add_multiple_dialog']['order'][3] = key
+							if(key != 'order' and key != 'headings' and value['rows'][0]['cells'][0]['text'] == 'WT-GFP-Protein D'):
+								assignment_data['template']['ui']['add_multiple_dialog']['order'][4] = key
+						for key, value in assignment_data['template']['primary_anti_body'].iteritems():
+							if(key != 'order' and value['gel_name'] == 'P-Protein A'):
+								assignment_data['template']['primary_anti_body']['order'][0] = key
+							if(key != 'order' and value['gel_name'] == 'P-Protein B'):	
+								assignment_data['template']['primary_anti_body']['order'][1] = key
+							if(key != 'order' and value['gel_name'] == 'P-Protein C'):
+								assignment_data['template']['primary_anti_body']['order'][2] = key
+							if(key != 'order' and value['gel_name'] == 'P-Protein D'):
+								assignment_data['template']['primary_anti_body']['order'][3] = key
+						original_assignment_data = repr(assignment_data)
+					sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = original_assignment_data)
+					sa.save()
 				print 'added assignment'
 			token1 = course[0].sassignments.filter(student=request.user)[0].token
 			assignments = course[0].sassignments.filter(student=request.user)
@@ -205,7 +286,7 @@ def get_courses(request, **kwargs):
 		all =[]
 		for a in Assignment.objects.all():
 			dictionary = ast.literal_eval(a.data)
-			if(a.assignmentID == 'decusability' or a.assignmentID == 'microscopy_test' or a.assignmentID == 'assignment_706_2014'):
+			if(a.assignmentID == 'decusability' or a.assignmentID == 'assignment_706_2014'):
 				all.append(dictionary)
 		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
 	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
