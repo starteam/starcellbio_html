@@ -407,6 +407,21 @@ scb.ui.static.FacsView.register = function (workarea) {
         scb.ui.static.FacsView.scb_f_facs_apply_to_all(this);
     });
 
+	scb.utils.off_on(workarea, 'mouseup', document, function(e,ui){
+    	var container = $(".scb_f_controls_note");
+		container.slideUp(); // hide
+    });
+    scb.utils.off_on(workarea, 'click','.scb_f_controls_note', function(e,ui){
+    	e.stopPropagation();
+    });
+    scb.utils.off_on(workarea, 'click','.scb_f_info_icon', function(e,ui){
+    	e.stopPropagation();
+    	var note = $(this).attr('note');
+    	note = '.' +note;
+    	if($(note).is(":visible"))
+    		$(note).slideUp();
+    	else $(note).slideDown();
+    });
 }
 
 scb.ui.static.FacsView.reevaluate_metadata = function (state) {
