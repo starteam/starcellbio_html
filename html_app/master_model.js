@@ -7804,15 +7804,15 @@ $(function () {
 				name: 'ADD SAMPLES',
 				open: 'mit706s14.setup',
 				css: {
-					width: '1035px',
+					width: '885px',
 					height: '540px',
-					left: '31px',
-					top: '000px'
+					left: '92px',
+					top: '15%'
 				}
 			});
 			get_courses_result.list[x] = assignment_706_2014;
 		}
-		if(get_courses_result.list[x].id == 'assignment_706_2014'){
+		if(get_courses_result.list[x].id == 'assignment_706_2015'){
 			assignment_706_2015 = get_courses_result.list[x];
 			assignment_706_2015.template.instructions = [
 				['Introduction', scb_assignment_specific_mit706s14.introduction()],
@@ -7826,7 +7826,7 @@ $(function () {
 				name: 'ADD SAMPLES',
 				open: 'mit706s14.setup',
 				css: {
-					width: '1035px',
+					width: '885px',
 					height: '540px',
 					left: '31px',
 					top: '000px'
@@ -7888,10 +7888,10 @@ $(function () {
         name: 'ADD SAMPLES',
         open: 'mit706s14.setup',
         css: {
-            width: '880px',
+            width: '885px',
             height: '540px',
-            left: '100px',
-            top: '000px'
+            left: '92px',
+            top: '15%'
         }
     });
     
@@ -7908,7 +7908,7 @@ $(function () {
         name: 'ADD SAMPLES',
         open: 'mit706s14.setup',
         css: {
-            width: '880px',
+            width: '885px',
             height: '540px',
             left: '100px',
             top: '000px'

@@ -591,6 +591,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select =
         $('li', $(element).parent()).removeClass('scb_s_microscopy_sample_selected');
         $(element).addClass('scb_s_microscopy_sample_selected');
         parsed.microscopy.lane_selected = parsed.microscopy_lane.id;
+        parsed.microscopy.scroll = $('.scb_s_microscopy_choose_samples_order_list').scrollTop();
         scb.ui.static.MainFrame.refresh();
    }
 }
@@ -1046,6 +1047,10 @@ function init(state, isNew, isIF, draw, image_source){
 					console.log(randomblur);
 					state.blur = randomblur;
 				}
+				var randomxparam = Math.ceil(Math.random() * (350 - -img_width) + -img_width);
+				var randomyparam = Math.ceil(Math.random() * (350 - -img_height) + -img_height);
+				state.xparam = randomxparam;
+				state.yparam = randomyparam;
 				state.src = img.src;
 			}
 			else{
@@ -1875,7 +1880,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         
         if (state.microscopy.samples_finished) {
         	scb.ui.static.MicroscopyView.draw_slides(workarea);
-        	    
+        $('.scb_s_microscopy_choose_samples_order_list').scrollTop(state.microscopy.scroll);
         }
         else{
         init_wb('../images/microscopy/black.jpg');

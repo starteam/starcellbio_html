@@ -192,7 +192,26 @@
   bottom: 1px;
   background: #e9edf1;
 }
-.scb_s_western_blot_gel_tab, .scb_s_microscopy_slide_tab {
+.scb_s_western_blot_gel_tab {
+  width: 127px;
+  vertical-align: middle;
+  position: relative;
+  height: 17px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  margin-right: 2px;
+  margin-left: 2px;
+  font-size: 9pt;
+  font-family: 'sourcesanspro-semibold';
+  background: #e9edf1;
+  text-align: center;
+  top: 4px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer !important;
+  color: black;
+}
+.scb_s_microscopy_slide_tab {
   width: 127px;
   vertical-align: middle;
   position: relative;

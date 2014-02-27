@@ -167,6 +167,7 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
 	        	
         return {rows:rows, valid:count};
     }
+    self.rows_state_count = self.rows_state().valid;
 
 
 }

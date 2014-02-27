@@ -14,11 +14,15 @@
   vertical-align: middle;
 }
 .scb_s_2014_samples {
-  left: 496px;
+  left: 373px;
+  position: relative;
+}
+.scb_s_2014_cancel {
+  left: 368px;
   position: relative;
 }
 .scb_s_experiment_setup_special {
-  width: 734px !important;
+  width: 621px !important;
 }
 .scb_s_experiment_setup_table_heading_strain {
   width: 125px;

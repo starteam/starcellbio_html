@@ -26,6 +26,18 @@
     box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
+
+.scb_s_microscopy_choose_samples_order_list::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+.scb_s_microscopy_choose_samples_order_list::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+
 .scb_f_microscopy_sample_remove{
 	outline: none;
 	border: none;
@@ -72,7 +84,7 @@
 }
 
 .scb_s_microscopy_sample_name{
-	width: 329px;
+	width: 340px;
 }
 
 .scb_s_microscopy_sample_type{
