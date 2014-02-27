@@ -688,7 +688,7 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   background-color: rgba(255,255,255,0);
   display: none;
 }
-.scb_s_controls_note {
+.scb_f_controls_note {
   font-size: 9pt;
 }
 .scb_s_micro_arrows {

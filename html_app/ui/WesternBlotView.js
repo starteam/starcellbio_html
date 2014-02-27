@@ -534,7 +534,24 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'mouseup', '.scb_s_western_blot_choose_samples_list_item', function(e, ui){
     	scb.ui.static.WesternBlotView.scb_s_western_blot_choose_samples_list_item(this);
     });
+    
+    scb.utils.off_on(workarea, 'mouseup', document, function(e,ui){
+    	var container = $(".scb_f_controls_note");
+		container.slideUp(); // hide
+    });
+    scb.utils.off_on(workarea, 'click','.scb_f_controls_note', function(e,ui){
+    	e.stopPropagation();
+    });
+    scb.utils.off_on(workarea, 'click','.scb_f_info_icon', function(e,ui){
+    	e.stopPropagation();
+    	var note = $(this).attr('note');
+    	note = '.' +note;
+    	if($(note).is(":visible"))
+    		$(note).slideUp();
+    	else $(note).slideDown();
+    });
 }
+
 
 scb.ui.static.WesternBlotView.MAX_ROWS = 15;
 
@@ -620,47 +637,6 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
    			else
         		scb.ui.static.WesternBlotView.draw_wells(rows_state.rows, state);
    			
-   			
-   			
-//    			$(document).mouseup(function (e)
-// 			{
-// 				var container = $(".scb_s_controls_note");
-// 
-// 				if (!container.is(e.target) // if the target of the click isn't the container...
-// 					&& container.has(e.target).length === 0) // ... nor a descendant of the container
-// 				{
-// 					container.slideUp();
-// 				}
-// 				else
-// 					container.slideDown();
-// 			});
-//    			
-//    			
-//    			var show_gel_type_note = false;
-//    			$('.scb_s_western_blot_gel_type_info').click(function(){
-//    				if(!show_gel_type_note){
-//    					$('.scb_s_wb_gel_type_followup').slideDown();
-//    					show_gel_type_note = true;
-//    				}
-//    				else{
-//    					$('.scb_s_wb_gel_type_followup').slideUp();
-//    					show_gel_type_note = false;
-//    				}
-//    				
-//    			});
-//    			
-//    			var show_marker_note = false;
-//    			$('.scb_s_western_blot_marker_info').click(function(){
-//    				if(!show_marker_note){
-//    					$('.scb_s_wb_marker_followup').slideDown();
-//    					show_marker_note = true;
-//    				}
-//    				else{
-//    					$('.scb_s_wb_marker_followup').slideUp();
-//    					show_marker_note = false;
-//    				}
-//    				
-//    			});
 
         }
 

@@ -16,7 +16,7 @@
 	left: 33px;
 }
 
-.scb_s_wb_gel_type_followup{
+.scb_f_wb_gel_type_followup{
 	display:none;
 	left: 283px;
 	position: absolute;
@@ -32,7 +32,7 @@
 
 }
 
-.scb_s_wb_marker_followup{
+.scb_f_wb_marker_followup{
 	display:none;
 	left: 283px;
 	position: absolute;

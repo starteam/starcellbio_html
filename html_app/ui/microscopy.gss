@@ -886,7 +886,7 @@ input[type=radio].scb_s_microscopy_if:checked:before{
 	display:none;
 }
 
-.scb_s_controls_note{
+.scb_f_controls_note{
 	font-size: 9pt;
 }
 .scb_s_micro_arrows{
