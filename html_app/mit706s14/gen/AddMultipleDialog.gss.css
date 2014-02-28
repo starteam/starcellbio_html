@@ -26,6 +26,7 @@
 }
 .scb_s_experiment_setup_table_heading_strain {
   width: 125px;
+  text-align: left !important;
 }
 .scb_mit706s16_inner_dialog_title_close {
   padding-top: 0;
