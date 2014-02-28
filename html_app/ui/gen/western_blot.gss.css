@@ -599,13 +599,14 @@
   white-space: nowrap;
   overflow: hidden;
   list-style-position: inside;
+  cursor: default;
 }
 .scb_s_western_blot_sortable_item {
   background: #d9dadb;
   border-radius: 5px;
   margin: 3px;
   border: 1px solid gray;
-  cursor: move;
+  cursor: move !important;
 }
 .scb_s_movable_item:hover {
   background: darkgray;
