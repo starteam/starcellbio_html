@@ -542,6 +542,22 @@ input[type=radio]:disabled {
   background-image: url('../../images/header/scb_help.png');
   background-repeat: no-repeat;
 }
+.scb_s_facs_tools_samples_followup_toggle {
+  bottom: 11px;
+  position: relative;
+  left: 84px;
+  background: none;
+  border: none;
+  height: 23px;
+  width: 23px;
+  color: white;
+  letter-spacing: 1px;
+  font-size: 10pt;
+  font-family: 'sourcesanspro-regular';
+  cursor: pointer;
+  background-image: url('../../images/header/scb_help.png');
+  background-repeat: no-repeat;
+}
 .scb_f_facs_dna_followup {
   display: none;
   right: -90px;
@@ -575,7 +591,6 @@ input[type=radio]:disabled {
   z-index: 6;
 }
 .scb_s_facs_tools_instructions_followup {
-  display: none;
   left: 536px;
   position: absolute;
   width: 205px;
@@ -584,6 +599,19 @@ input[type=radio]:disabled {
   padding: 4px;
   border: 4px solid white;
   bottom: 331px;
+  z-index: 1;
+  text-align: left;
+  font-size: 10pt;
+}
+.scb_s_facs_tools_samples_followup {
+  left: 105px;
+  bottom: 405px;
+  position: absolute;
+  width: 205px;
+  background: #f4f6f8;
+  border-radius: 14px;
+  padding: 4px;
+  border: 4px solid white;
   z-index: 1;
   text-align: left;
   font-size: 10pt;
@@ -651,4 +679,7 @@ input[type=radio]:disabled {
   background-image: url('../../images/header/scb_info.png');
   background-repeat: no-repeat;
   z-index: 6;
+}
+.scb_s_hidden_note {
+  display: none;
 }

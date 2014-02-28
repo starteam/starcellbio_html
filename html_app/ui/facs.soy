@@ -314,7 +314,7 @@ FACS Main View
                 {/if}
             </td>
             <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:185px;'>
-                <input type="radio" checked="checked" class='facs_locked'><span class='facs_locked'>Fixed</span></input>
+                <input type="radio" checked="checked" class='{if $r.is_valid}{else}facs_locked{/if}'><span class='{if $r.is_valid}{else}facs_locked{/if}'>Fixed</span></input>
 
             </td>
             <td class=' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:267px;'>
@@ -432,12 +432,12 @@ FACS Main View
 {template .display_lysate_types}
 {if length(keys($kinds)) ==1}
 		{foreach $k in keys($kinds)}
-		<span class="scb_f_facs_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
+		<span class="scb_f_facs_select_lysate_type {if $lane.is_valid}{else}facs_locked{/if}" cell_treatment_id='{$cell_treatment.id}'
 				facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="{$k}"
 				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$kinds[$k].name}</span>
 		{/foreach}
 {else}
-	<select class="scb_f_facs_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
+	<select class="scb_f_facs_select_lysate_type {if $lane.is_valid}{else}facs_locked{/if}" cell_treatment_id='{$cell_treatment.id}'
 			facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
 			lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
 	{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
@@ -484,6 +484,18 @@ FACS Main View
         <div class='scb_s_facs_samples_heading'>
             Samples
         </div>
+        {if $facs.samples_finished}
+        <button class='scb_f_facs_tools_toggle scb_s_facs_tools_samples_followup_toggle'  note='scb_s_facs_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             facs_id='{$facs.id}'></button>
+    	{/if}
+    		<div class='scb_s_facs_tools_samples_followup {if $facs.samples_show_state}{else}scb_s_hidden_note{/if}' >
+
+				<button class='scb_f_note_close_button' aria-label='Close' note='scb_s_facs_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             facs_id='{$facs.id}'><span>&#215;</span></button>
+							
+							To display the flow cytometry data for a sample, select the sample name from the list below.
+	 
+			</div>
         <div class='{if $facs.samples_finished}scb_s_facs_choose_samples_order {else}scb_s_facs_choose_samples_order_border{/if}'>
             <ol class='scb_s_facs_choose_samples_order_list'>
                 {foreach $r in $rows}
@@ -548,35 +560,34 @@ FACS Main View
         {if $facs_line_id}facs_lane_id='{$facs_line_id}'{/if}>
     </div>
 </div>
-<div class='scb_s_facs_tools_instructions_followup'>
+			<div class='scb_s_facs_tools_instructions_followup {if $facs.instructions_show_state}{else}scb_s_hidden_note{/if}' >
 
-  	<button class='scb_f_note_close_button' aria-label='Close'><span>&#215;</span></button>
-  	
-	  	
-				Click and drag within the histogram to draw a segment. The % of cells within the segment will be calculated. 
-				  <p/>
-				Repeat to add another segment. Then, select <b>Apply to All</b> to apply the analysis parameters to all samples.
-     
-     </div>
-     					<button class='scb_f_info_icon scb_s_facs_histogram_info' note='scb_f_facs_histogram_followup'> </button>
-					<div class='scb_f_facs_histogram_followup scb_f_controls_note'>
-		<!-- 
-						<button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
-		 -->
-								The histogram displays the number of cells (Y-axis) 
-								for each particular fluorescent emission level of 
-								Propidium Iodide (PI) (X-axis) of each cell within the sample. 
-								<a href="static/ref_lib/full_library.html#FCAnalyze" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
-		
-					 </div>
+				<button class='scb_f_note_close_button' aria-label='Close' note='scb_s_facs_tools_instructions_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             facs_id='{$facs.id}'><span>&#215;</span></button>
+							
+							Select the <img src="images/header/scb_histogram_icon.png"> histogram icon. Click and drag your cursor within the histogram to draw a segment. The % of cells within the segment will be calculated. 
+ 							<p/>
+							Repeat to add another segment. Then, select <b>Apply to All</b> to apply the analysis parameters to all samples.
+	 
+			</div>
+<button class='scb_f_info_icon scb_s_facs_histogram_info' note='scb_f_facs_histogram_followup'> </button>
+<div class='scb_f_facs_histogram_followup scb_f_controls_note'>
+<!-- 
+<button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
+-->
+The histogram displays the number of cells (Y-axis) 
+for each particular fluorescent emission level of 
+Propidium Iodide (PI) (X-axis) of each cell within the sample. 
+<a href="static/ref_lib/full_library.html#FCAnalyze" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+
+</div>
 <div class='scb_s_facs_tools'>
 
     {if $facs.show_analysis}
     <h1>Analysis Tools</h1>
 
-    <button class='scb_s_facs_tools_instructions_followup_toggle'>
-        ?
-    </button>
+    <button class='scb_f_facs_tools_toggle scb_s_facs_tools_instructions_followup_toggle'  note='scb_s_facs_tools_instructions_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             facs_id='{$facs.id}'> </button>
     <input class='scb_s_facs_single_range_button' assignment_id='{$assignment.id}'
             experiment_id='{$experiment.id}'
             facs_id='{$facs.id}' id="scb_facs_check" type='checkbox' {if $facs.sample_analysis}checked{/if}><label class="scb_s_facs_label" for="scb_facs_check">

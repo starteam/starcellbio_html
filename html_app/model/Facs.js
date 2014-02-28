@@ -70,6 +70,8 @@ scb.Facs = function scb_Facs(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'show_analysis', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'apply_dna_analysis_to_all', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'instructions_show_state', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'samples_show_state', false, null, context);
 
     scb.utils.accessor2_custom(self, 'selected_lane', function () {
         if (self.lane_selected) {
