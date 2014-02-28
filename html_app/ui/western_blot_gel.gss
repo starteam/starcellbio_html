@@ -299,4 +299,5 @@ font-family: 'sourcesanspro-regular';
 
 .scb_s_wb_exposure_time_value {
     font-family: 'sourcesanspro-regular';
+    height: 16px;
 }
