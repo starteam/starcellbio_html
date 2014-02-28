@@ -212,7 +212,7 @@ scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
 // }
 
 
-scb.ui.static.FacsView.scb_f_note_close_button= function (element) {
+scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
 		var parsed = scb.ui.static.FacsView.parse(element);
 	    var note = $(element).attr('note');
     	note = '.' +note;	
@@ -394,8 +394,8 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_tools_toggle', function (e) {
         scb.ui.static.FacsView.scb_f_facs_tools_toggle(this);
     });
-    scb.utils.off_on(workarea, 'click', '.scb_f_note_close_button', function (e) {
-    	scb.ui.static.FacsView.scb_f_note_close_button(this);
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_note_close_button', function (e) {
+    	scb.ui.static.FacsView.scb_f_facs_note_close_button(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_analyze_remove_point', function (e) {
         scb.ui.static.FacsView.scb_f_facs_analyze_remove_point(this);

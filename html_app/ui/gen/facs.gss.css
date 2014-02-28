@@ -477,7 +477,7 @@ input[type=radio]:disabled {
   font-family: sourcesanspro-regular;
   font-size: 12pt;
 }
-.scb_f_note_close_button, .scb_f_controls_close_button {
+.scb_f_note_close_button, .scb_f_controls_close_button, .scb_f_facs_note_close_button, .scb_f_western_blot_note_close_button, .scb_f_microscopy_note_close_button {
   padding-top: 0;
   float: right;
   -webkit-appearance: none;

@@ -452,6 +452,21 @@
 <div class='scb_s_microscopy_samples_area'>
 	<div class='scb_s_microscopy_samples_heading'>
         Samples
+         {if $microscopy.samples_finished}
+    	 
+            <button class='scb_f_microscopy_tools_toggle scb_s_microscopy_tools_samples_followup_toggle'  note='scb_s_microscopy_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             microscopy_id='{$microscopy.id}'></button>
+    		<div class='scb_s_microscopy_tools_samples_followup {if $microscopy.samples_show_state}{else}scb_s_hidden_note{/if}' >
+
+				<button class='scb_f_microscopy_note_close_button' aria-label='Close' note='scb_s_microscopy_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             microscopy_id='{$microscopy.id}'><span>&#215;</span></button>
+							
+							 To view the sample on the microscope, select the sample name 
+							 from the Samples window. Then at the right, select the tab 
+							 that represents the appropriate type of microscopy analysis.
+	 
+			</div>
+		{/if}
     </div>
 
     
@@ -678,7 +693,18 @@
     
     </div>
 			
-				  
+			<button class='scb_f_microscopy_tools_toggle scb_s_microscopy_tools_navigation_followup_toggle'  note='scb_s_microscopy_tools_navigation_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             microscopy_id='{$microscopy.id}'></button>
+    		<div class='scb_s_microscopy_tools_navigation_followup {if $microscopy.navigation_show_state}{else}scb_s_hidden_note{/if}' >
+
+				<button class='scb_f_microscopy_note_close_button' aria-label='Close' note='scb_s_microscopy_tools_navigation_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             microscopy_id='{$microscopy.id}'><span>&#215;</span></button>
+							
+							 Click the appropriate the navigation arrows or 
+							 use the arrows on your computer to 
+							 move the microscope lens across the image.
+	 
+			</div>
 
 				
 <!-- 				<button class='scb_f_save_button scb_s_gray_button'>SAVE IMAGE</button> -->

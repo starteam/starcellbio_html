@@ -269,6 +269,20 @@
             <div class='scb_f_vslider'></div>
             <div class='scb_f_vslider_value'></div>
         </div>
+          <button class='scb_f_western_blot_tools_toggle scb_s_western_blot_tools_measure_followup_toggle'  note='scb_s_western_blot_tools_measure_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             western_blot_id='{$western_blot.id}'></button>
+    		<div class='scb_s_western_blot_tools_measure_followup {if $western_blot.measure_show_state}{else}scb_s_hidden_note{/if}' >
+
+				<button class='scb_f_western_blot_note_close_button' aria-label='Close' note='scb_s_western_blot_tools_measure_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             western_blot_id='{$western_blot.id}'><span>&#215;</span></button>
+							
+							To measure the size of the proteins within a 
+							band on a western blot, hover your cursor 
+							over the band of interest on the blot. Vertical 
+							and horizontal red lines will appear and the size 
+							of the protein will be displayed in the red box 
+							to the right of the blot.	 
+			</div>
         {else}
         <img class='scb_s_western_blot_gel_membrane'
              src='images/western_blot/SCB_WesternBlotting_Membrane.png'>

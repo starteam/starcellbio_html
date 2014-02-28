@@ -75,7 +75,10 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'canvas_metadata', null, null, context);
 
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
-	
+	scb.Utils.initialize_accessor_field(self, data, 'samples_show_state', false, null, context);
+
+    scb.Utils.initialize_accessor_field(self, data, 'measure_show_state', false, null, context);
+
     self.rows_state = function (exp) {
         var skip_placeholders = false;
         if (_.keys(context.template.lysate_kinds).length == 1) {

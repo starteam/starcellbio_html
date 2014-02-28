@@ -632,6 +632,30 @@ input[type=radio]:disabled{
 	
 }
 
+
+.scb_f_facs_note_close_button, .scb_f_western_blot_note_close_button, .scb_f_microscopy_note_close_button {
+
+	
+	padding-top: 0px;
+	float:right;
+	-webkit-appearance: none;
+	font-family:'sourcesanspro-semibold';
+	outline:none;
+	height: 26px;
+	width: 26px;
+	cursor:pointer;
+	border: none;
+	border-radius: 12px;
+	font-size: 14pt;
+	color: transparent;
+	background: transparent;
+	background-image: url('../../images/header/scb_close_button.png');
+	padding-right: 4px;
+	padding-left: 5px;
+	
+}
+
+
 .scb_s_facs_apply{
 	position: absolute;
 	top: 320px;

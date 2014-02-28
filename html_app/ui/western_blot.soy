@@ -408,6 +408,19 @@
     <div class='scb_s_western_blot_samples_heading'>
         Samples 
         {if $western_blot.wells_loaded == false} 
+        
+                <button class='scb_f_western_blot_tools_toggle scb_s_western_blot_tools_samples_followup_toggle'  note='scb_s_western_blot_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             western_blot_id='{$western_blot.id}'></button>
+    		<div class='scb_s_western_blot_tools_samples_followup {if $western_blot.samples_show_state}{else}scb_s_hidden_note{/if}' >
+
+				<button class='scb_f_western_blot_note_close_button' aria-label='Close' note='scb_s_western_blot_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             western_blot_id='{$western_blot.id}'><span>&#215;</span></button>
+							
+							To re-order the samples, either (1) click and drag the 
+							samples or (2) select a sample and use the 
+							up and down arrows to move the samples into the desired order.
+	 
+			</div>
         <span class='scb_s_wb_button_wrapper'>
         <button class='scb_f_wb_up_button'>&#x25B2;</button>
 		&nbsp;
