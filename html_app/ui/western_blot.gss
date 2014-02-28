@@ -47,6 +47,13 @@
  	font-size:10pt;
 
 }
+.scb_f_wb_up_button:hover {
+	color: black !important;
+}
+
+.scb_f_wb_down_button:hover {
+	color: black !important;
+}
 
 
 .scb_s_western_blot_tools_samples_followup{
