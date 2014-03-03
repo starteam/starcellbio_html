@@ -661,6 +661,7 @@ var caman;
 scb.ui.static.MicroscopyView.ARC =  150;
 
 scb.ui.static.MicroscopyView.LENS =  300;
+scb.ui.static.MicroscopyView.PICTURE_LIM =  400;
 
 var difference;
 
@@ -982,6 +983,8 @@ function reset_canvas(){
 	return [new_canvas, ctx];	
 }
 
+
+
 //This function will initialize the image and serialize the data of the 
 //original unprocessed image to a string
 function init(state, isNew, isIF, draw, image_source){
@@ -1018,7 +1021,7 @@ function init(state, isNew, isIF, draw, image_source){
 		img.src = image_source;
 		img.onload= function (){
 			ctx.save();
-			if(Math.floor(img.width/500) <= 1 || Math.floor(img.height/500) <= 1){
+			if(Math.ceil(img.width/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1 || Math.ceil(img.height/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1){
 				
 			img_width = img.width;
 			img_height = img.height;	
@@ -1026,11 +1029,13 @@ function init(state, isNew, isIF, draw, image_source){
 			canvas.height = img.height;
 			}
 			else{
+			img_width = scb.ui.static.MicroscopyView.PICTURE_LIM;
+			canvas.width = scb.ui.static.MicroscopyView.PICTURE_LIM;                 
+			
+			var height_proportion = Math.ceil((scb.ui.static.MicroscopyView.PICTURE_LIM*img.height)/img.width);
 				
-			img_width = img.width/2;
-			img_height = img.height/2;	
-			canvas.width = img.width/2;
-			canvas.height = img.height/2;
+			img_height = height_proportion;
+			canvas.height = height_proportion;
 			}
 			ctx.drawImage(img, 0, 0, img_width, img_height);	
 			var img2string=canvas.toDataURL(0,0, img.width, img.height);
@@ -1048,8 +1053,8 @@ function init(state, isNew, isIF, draw, image_source){
 					console.log(randomblur);
 					state.blur = randomblur;
 				}
-				var randomxparam = Math.ceil(Math.random() * (350 - -img_width) + -img_width);
-				var randomyparam = Math.ceil(Math.random() * (350 - -img_height) + -img_height);
+				var randomxparam = Math.ceil(Math.random() * (150 - -(img_width-150)) + -(img_width-150));
+				var randomyparam = Math.ceil(Math.random() * (150 - -(img_height-150)) + -(img_height-150));
 				state.xparam = randomxparam;
 				state.yparam = randomyparam;
 				state.src = img.src;
