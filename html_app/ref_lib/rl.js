@@ -91,9 +91,25 @@ $.get( "ref_library.html", function(data) {
 		}
 	}
 	
-	
-	
-	
+	var footnote_links = $('a[href="#_ftn1"]')
+	for(var x=0; x< footnote_links.length; x++){
+		var anchor_node = $(footnote_links[x]);
+		if($(anchor_node).text() == '[1]')
+			$(anchor_node).attr('href', '#_ftn1');
+		else if($(anchor_node).text() == '[2]')
+			$(anchor_node).attr('href', '#_ftn2');
+	}
+			
+	var footnote_links = $('a[href="#_ftn2"]')
+	for(var x=0; x< footnote_links.length; x++){
+		var anchor_node = $(footnote_links[x]);
+		if($(anchor_node).text() == '[1]')
+			$(anchor_node).attr('href', '#_ftn1');
+		else if($(anchor_node).text() == '[2]')
+			$(anchor_node).attr('href', '#_ftn2');
+		else if($(anchor_node).text() == '[3]')
+			$(anchor_node).attr('href', '#_ftn3');
+	}
 
 	//indent bullets
 	for(var x = 0; x < lists.length; x++){
@@ -103,6 +119,16 @@ $.get( "ref_library.html", function(data) {
 	var footnotes = $('.SCB-Footer');
 	for(var x=0; x< footnotes.length; x++){
 		var anchor_node = $(footnotes[x]).children('a')[0];
+		if($(anchor_node).text() == '[1]')
+			$(anchor_node).attr('href', '#_ftnref1');
+		else if($(anchor_node).text() == '[2]')
+			$(anchor_node).attr('href', '#_ftnref2');
+		else if($(anchor_node).text() == '[3]')
+			$(anchor_node).attr('href', '#_ftnref3');
+		else if($(anchor_node).text() == '[4]')
+			$(anchor_node).attr('href', '#_ftnref4');
+		else if($(anchor_node).text() == '[5]')
+			$(anchor_node).attr('href', '#_ftnref5');
 		$(anchor_node).css('text-decoration', 'none');
 		$(anchor_node).css('color', 'black');
 		$(anchor_node).attr('name', $(anchor_node).attr('href').replace(/\#|(ref)/g, ''));
@@ -127,6 +153,9 @@ $.get( "ref_library.html", function(data) {
 	var x = window.location.hash; 
 	window.location.hash = ''; 
 	setTimeout( function() { window.location.hash = x ;} , 20); 
+	fixImages();
+	
+	
 }).done(function() { window.hash = window.location.hash});
 
 }
@@ -141,6 +170,8 @@ function addHyperlink(parent){
 				$(element).parent().attr('name', 'WB'+$(element).parent().attr('name'));
 		if($(element).parent().parent().parent().first().children().first().text().indexOf('Flow') > -1 && $(element).text().indexOf('Experimental')==-1)
 				$(element).parent().attr('name', 'FC'+$(element).parent().attr('name'));
+// 		if($(element).parent().parent().parent().first().children().first().text().indexOf('Microscopy') > -1 && $(element).text().indexOf('Experimental')==-1)
+// 				$(element).parent().attr('name', 'M'+$(element).parent().attr('name'));
 
 }
 
@@ -153,6 +184,8 @@ function addHyperlink5(parent){
 	
 	if($(element).parent().parent().parent().first().children().first().text().indexOf('Flow') > -1)
 			$(element).parent().attr('name', 'FC'+$(element).parent().attr('name'));
+// 	if($(element).parent().parent().parent().first().children().first().text().indexOf('Microscopy') > -1)
+// 			$(element).parent().attr('name', 'M'+$(element).parent().attr('name'));
 
 
 }
@@ -164,4 +197,17 @@ function bindToggle(item){
 	});
 
 
+}
+
+
+
+function fixImages(){
+	$('img[src="../media/uploads/principle_of_high_resolution_sds_gel_electrophoresis.png"]').after('<p/>');
+	$('img[src="../media/uploads/principle_of_high_resolution_sds_gel_electrophoresis.png"]').attr('src', '../../../images/ref_lib/principle_of_high_resolution_sds_gel_electrophoresis.png');
+	$('img[src="../media/uploads/gel_blue_coomassie.jpg"]').after('<p/>');
+	$('img[src="../media/uploads/gel_blue_coomassie.jpg"]').attr('src', '../../../images/ref_lib/gel_blue_coomassie.jpg');
+	$('img[src="../media/uploads/antibody.png"]').after('<p/>');
+	$('img[src="../media/uploads/antibody.png"]').attr('src', '../../../images/ref_lib/antibody.png');
+	$('img[src="../media/uploads/sds-page.jpg"]').after('<p/>');
+	$('img[src="../media/uploads/sds-page.jpg"]').attr('src', '../../../images/ref_lib/sds-page.jpg');
 }
