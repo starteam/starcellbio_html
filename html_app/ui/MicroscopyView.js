@@ -432,6 +432,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_sample_active = function (element,
     $('.scb_f_microscopy_select_slide_type', $(element).parent().parent()).each(function (e) {
         scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type(this);
     });
+    parsed.microscopy.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
     if (event) {
         var rows_count = parsed.microscopy.rows_state();
         scb.ui.static.MainFrame.refresh();
@@ -1781,11 +1782,11 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         
         state.experiment.last_technique_view = 'microscopy';
 		
-			var x = 0;
-        if($('.scb_s_western_blot_samples_table').length ==0)
-        	x=100;
-        else
-        	x = $('.scb_s_western_blot_samples_table')[0].scrollTop;
+// 			var x = 0;
+//         if($('.scb_s_western_blot_samples_table').length ==0)
+//         	x=100;
+//         else
+//         	x = $('.scb_s_western_blot_samples_table')[0].scrollTop;
         	
 		
         workarea.html(scb_microscopy.main({
@@ -1805,7 +1806,8 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             can_prepare_slide: can_prepare_slide
         }));
         if (kind == 'sample_prep'){
-        	$('.scb_s_western_blot_samples_table')[0].scrollTop = x;
+        	$('.scb_s_western_blot_samples_table').scrollTop(state.microscopy.prep_scroll);
+        	//$('.scb_s_western_blot_samples_table')[0].scrollTop = x;
         }
         state.experiment.prev_step=6;
         

@@ -121,6 +121,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (eleme
     $('.scb_f_western_blot_select_lysate_type', $(element).parent().parent()).each(function (e) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type(this);
     });
+    parsed.western_blot.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
     if (event) {
         var rows_count = parsed.western_blot.rows_state();
         scb.ui.static.MainFrame.refresh();
@@ -555,11 +556,11 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         var can_prepare_lysate = rows_state.valid > 0;
 		
 		state.experiment.last_technique_view = 'western_blot';
-		var x = 0;
-        if($('.scb_s_western_blot_samples_table').length ==0)
-        	x=100;
-        else
-        	x = $('.scb_s_western_blot_samples_table')[0].scrollTop;
+// 		var x = 0;
+//         if($('.scb_s_western_blot_samples_table').length ==0)
+//         	x=100;
+//         else
+//         	x = $('.scb_s_western_blot_samples_table')[0].scrollTop;
         	
 		
         workarea.html(scb_western_blot.main({
@@ -578,7 +579,8 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             can_prepare_lysate: can_prepare_lysate
         }));
         if (kind == 'sample_prep'){
-        	$('.scb_s_western_blot_samples_table')[0].scrollTop = x;
+        	 $('.scb_s_western_blot_samples_table').scrollTop(state.western_blot.prep_scroll);
+        	//$('.scb_s_western_blot_samples_table')[0].scrollTop = x;
         }
         state.experiment.prev_step=4;
         if(state.experiment.last_step >= scb.ui.static.WesternBlotView.TOTAL_STEPS)
