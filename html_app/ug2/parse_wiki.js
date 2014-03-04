@@ -102,6 +102,7 @@ $.get( "user_guide.html", function(data) {
 	$('.body strong').css('color', 'black !important');
 	$('.body').prepend('<span class="ug_main_title">User Guide</span><br/>');
 
+	$('a[href="#scb-s-help-sublink-23"]').next().remove();
 	var x = window.location.hash; 
 	window.location.hash = ''; 
 	setTimeout( function() { window.location.hash = x ;} , 20); 
@@ -117,54 +118,83 @@ function bindToggle(item){
 }
 
 function fixImages(){
-	$('img[src="../media/uploads/scb_icon_trash.png"]').addClass('resize_icon_popout');
-	$('img[src="../media/uploads/scb_icon_trash.png"]').attr('src', '../../../images/user_guide/scb_ug_trash.png');
+	$('img[src="../media/uploads/starcellbio/scb_icon_trash.png"]').addClass('resize_icon_popout');
+	$('img[src="../media/uploads/starcellbio/scb_icon_trash.png"]').attr('src', '../../../images/user_guide/scb_ug_trash.png');
 	
-	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0000_18-envelope.png"]').addClass('resize_icon_popout');
-	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0000_18-envelope.png"]').attr('src', '../../../images/user_guide/scb_ug_envelope.png');
+	$('img[src="../media/uploads/starcellbio/scb_all_homepage_f_test_0000s_0000s_0000s_0000_18-envelope.png"]').addClass('resize_icon_popout');
+	$('img[src="../media/uploads/starcellbio/scb_all_homepage_f_test_0000s_0000s_0000s_0000_18-envelope.png"]').attr('src', '../../../images/user_guide/scb_ug_envelope.png');
 			
-	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0003_33-cabinet.png"]').addClass('resize_icon_popout');
-	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0003_33-cabinet.png"]').attr('src', '../../../images/user_guide/scb_ug_cabinet.png');
+	$('img[src="../media/uploads/starcellbio/scb_all_homepage_f_test_0000s_0000s_0000s_0003_33-cabinet.png"]').addClass('resize_icon_popout');
+	$('img[src="../media/uploads/starcellbio/scb_all_homepage_f_test_0000s_0000s_0000s_0003_33-cabinet.png"]').attr('src', '../../../images/user_guide/scb_ug_cabinet.png');
 	
-	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0006_96-book.png"]').addClass('resize_icon_popout');
-	$('img[src="../media/uploads/scb_all_homepage_f_test_0000s_0000s_0000s_0006_96-book.png"]').attr('src', '../../../images/user_guide/scb_ug_book.png');
+	$('img[src="../media/uploads/starcellbio/scb_all_homepage_f_test_0000s_0000s_0000s_0006_96-book.png"]').addClass('resize_icon_popout');
+	$('img[src="../media/uploads/starcellbio/scb_all_homepage_f_test_0000s_0000s_0000s_0006_96-book.png"]').attr('src', '../../../images/user_guide/scb_ug_book.png');
 	
-	$('img[src="../media/uploads/scb_icons_copy.png"]').addClass('resize_icon_popout');
-	$('img[src="../media/uploads/scb_icons_copy.png"]').attr('src', '../../../images/user_guide/scb_ug_copy.png');
+	$('img[src="../media/uploads/starcellbio/scb_icons_copy.png"]').addClass('resize_icon_popout');
+	$('img[src="../media/uploads/starcellbio/scb_icons_copy.png"]').attr('src', '../../../images/user_guide/scb_ug_copy.png');
 	
 	//screenshots
-	$('img[src="../media/uploads/scb_homepage_-_try_an_experiment.png"]').attr('src', '../../../images/user_guide/scb_homepage_try.png');
-	$('img[src="../media/uploads/scb_sign_in_window.png"]').attr('src', '../../../images/user_guide/scb_sign_in.png');
-	$('img[src="../media/uploads/scb_sign_up_window.png"]').attr('src', '../../../images/user_guide/scb_sign_up.png');
-	$('img[src="../media/uploads/scb_top_menu_bar.png"]').attr('src', '../../../images/user_guide/scb_top_menu_bar.png');
+	$('img[src="../media/uploads/starcellbio/scb_homepage_.png"]').attr('src', '../../../images/user_guide/SCB_Homepage.png');
 	
+	$('img[src="../media/uploads/starcellbio/scb_sign_in_window_.png"]').attr('src', '../../../images/user_guide/SCB_Sign_In_Window.png');
 	
-	$('img[src="../media/uploads/scb_assignments_page_-_usability_test.png"]').attr('src', '../../../images/user_guide/scb_assignments_page_usability_test.png');
-	$('img[src="../media/uploads/scb_navigation_tool_bar_-_select_technique_western_blotting_selected.png"]').attr('src', '../../../images/user_guide/scb_nav_toolbar_western.png');
+	$('img[src="../media/uploads/starcellbio/scb_sign_up_window_.png"]').attr('src', '../../../images/user_guide/SCB_Sign_Up_Window.png');
 	
+	$('img[src="../media/uploads/starcellbio/scb_top_menu_bar_.png"]').attr('src', '../../../images/user_guide/SCB_Top_Menu_bar.png');
 	
-	$('img[src="../media/uploads/scb_experiments_design_page.png"]').attr('src', '../../../images/user_guide/scb_design.png');
-	$('img[src="../media/uploads/scb_setup_page_-_add_multiple_rows_window_with_samples_selected.png"]').attr('src', '../../../images/user_guide/scb_setup_add_multiple_rows.png');
-	$('img[src="../media/uploads/scb_setup_page_-_with_samples_in_setup_table-2.png"]').attr('src', '../../../images/user_guide/scb_setup_with_samples.png');
+	$('img[src="../media/uploads/starcellbio/scb_assignments_page_-_usability_test_.png"]').attr('src', '../../../images/user_guide/SCB_Assignments_Page_-_Usability_Test.png');
 	
+	$('img[src="../media/uploads/starcellbio/scb_navigation_-_microscopy_active.png"]').attr('src', '../../../images/user_guide/SCB_Navigation_-_Microscopy_active.png');
 	
-	$('img[src="../media/uploads/scb_select_techniques_page-2.png"]').attr('src', '../../../images/user_guide/scb_select_techniques.png');
-	$('img[src="../media/uploads/scb_experiment_dropdown_menu-2-cropped.png"]').attr('src', '../../../images/user_guide/scb_dropdown_western.png');
-	$('img[src="../media/uploads/scb_western_progress_bar.png"]').attr('src', '../../../images/user_guide/scb_western_progress_bar.png');
-	$('img[src="../media/uploads/scb_western_sample_prep.png"]').attr('src', '../../../images/user_guide/scb_western_sample_prep.png');
-	$('img[src="../media/uploads/scb_western_samples_window.png"]').attr('src', '../../../images/user_guide/scb_western_samples_window.png');
+	$('img[src="../media/uploads/starcellbio/scb_experiments_design_page_.png"]').attr('src', '../../../images/user_guide/SCB_Experiments_Design_Page.png');
 	
-	$('img[src="../media/uploads/scb_western_blotting_step.png"]').attr('src', '../../../images/user_guide/scb_western_step.png');
-	$('img[src="../media/uploads/scb_western_develop_step.png"]').attr('src', '../../../images/user_guide/scb_western_develop.png');
-	$('img[src="../media/uploads/scb_western_protein_measurement_tool_tip-cropped.png"]').attr('src', '../../../images/user_guide/scb_western_protein_tool_tip.png');
-	$('img[src="../media/uploads/scb_western_reprobing.png"]').attr('src', '../../../images/user_guide/scb_western_probing.png');
-	$('img[src="../media/uploads/scb_experiment_dropdown_menu_-flow-cropped.png"]').attr('src', '../../../images/user_guide/scb_dropdown_flow.png');
-	$('img[src="../media/uploads/scb_flow_progress_bar.png"]').attr('src', '../../../images/user_guide/scb_flow_progress.png');
-	$('img[src="../media/uploads/scb_flow_sample_prep.png"]').attr('src', '../../../images/user_guide/scb_flow_sample_prep.png');
-	$('img[src="../media/uploads/scb_flow_samples_window_and_run_samples_step.png"]').attr('src', '../../../images/user_guide/scb_flow_run_samples.png');
-	$('img[src="../media/uploads/scb_flow_analysis_step_with_segments_drawn_-_whole_page.png"]').attr('src', '../../../images/user_guide/scb_flow_analysis.png');
+	$('img[src="../media/uploads/starcellbio/scb_add_samples_window_-_samples_selected.png"]').attr('src', '../../../images/user_guide/SCB_Add_Samples_window_-_samples_selected.png');
 	
+	$('img[src="../media/uploads/starcellbio/scb_setup_page.png"]').attr('src', '../../../images/user_guide/SCB_Setup_Page.png');
 	
+	$('img[src="../media/uploads/starcellbio/scb_confirm_set-up_window.png"]').attr('src', '../../../images/user_guide/SCB_Confirm_Set-up_window.png');
 	
+	$('img[src="../media/uploads/starcellbio/scb_select_techniques_page.png"]').attr('src', '../../../images/user_guide/SCB_Select_Techniques_page.png');
 	
+	$('img[src="../media/uploads/starcellbio/scb_experiment_dropdown_menu_-_western_-_cropped__.png"]').attr('src', '../../../images/user_guide/SCB_Experiment_dropdown_menu_-_western_-_cropped.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_western_sample_prep.png"]').attr('src', '../../../images/user_guide/SCB_Western_Sample_prep.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_western_sample_prep_-_option_2.png"]').attr('src', '../../../images/user_guide/SCB_Western_Sample_Prep_-_Option_2.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_western_samples_window_.png"]').attr('src', '../../../images/user_guide/SCB_Western_Samples_window.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_western_samples_window_-_marker_added_and_re-ordered.png"]').attr('src', '../../../images/user_guide/SCB_Western_Samples_window_-_Marker_added_and_re-ordered.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_western_load.png"]').attr('src', '../../../images/user_guide/SCB_Western_load.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_western_blot_cropped.png"]').attr('src', '../../../images/user_guide/SCB_Western_blot_cropped.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_western_develop.png"]').attr('src', '../../../images/user_guide/SCB_Western_Develop.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_western_protein_measurement_tool_tip_-_cropped_-_small_tabbed_window_.png"]').attr('src', '../../../images/user_guide/SCB_Western_protein_measurement_tool_tip_-_cropped_-_small_tabbed_window.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_western_reprobing_-_small_tabbed_window_.png"]').attr('src', '../../../images/user_guide/SCB_Western_reprobing_-_small_tabbed_window1.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_flow_sample_prep_-_2.png"]').attr('src', '../../../images/user_guide/SCB_Flow_Sample_Prep_-_2.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_flow_sample_prep_-_samples_selected.png"]').attr('src', '../../../images/user_guide/SCB_Flow_Sample_Prep_-_samples_selected.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_flow_samples_window.png"]').attr('src', '../../../images/user_guide/SCB_Flow_Samples_window.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_flow_analyze_-_large_tabbed_window.png"]').attr('src', '../../../images/user_guide/SCB_Flow_Analyze_-_large_tabbed_window.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_flow_analysis_tool.png"]').attr('src', '../../../images/user_guide/SCB_Flow_Analysis_Tool.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_select_techniques_page_-_microscopy_available.png"]').attr('src', '../../../images/user_guide/SCB_Select_Techniques_Page_-_microscopy_available.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_microscopy_sample_prep_page_-_large_tabbed_window.png"]').attr('src', '../../../images/user_guide/SCB_Microscopy_Sample_Prep_page_-_large_tabbed_window.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_microscopy_sample_prep_page_-_samples_selected_-_whole_page.png"]').attr('src', '../../../images/user_guide/SCB_Microscopy_Sample_Prep_page_-_samples_selected_-_whole_page.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_microscopy_analyze_-_with_note.png"]').attr('src', '../../../images/user_guide/SCB_Microscopy_Analyze_-_with_note.png');
+	
+	$('img[src="../media/uploads/starcellbio/scb_microscopy_small_tabbed_window_only.png"]').attr('src', '../../../images/user_guide/SCB_Microscopy_small_tabbed_window_only.png');
+
+
 }
