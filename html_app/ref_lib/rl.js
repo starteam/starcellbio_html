@@ -51,7 +51,7 @@ $.get( "ref_library.html", function(data) {
 								while(next5N !=null && next5N.className!='heading5' && next5N.className!='heading3' && next5N.className!='subheading' && next5N.className!='heading'){
 									console.log('********'+next5N.className+'***********')
 									var temp5=next5N.nextElementSibling;
-									next5N.style.marginLeft = '75px';
+									//next5N.style.marginLeft = '75px';
 									$(next3N).append(next5N);
 									next5N = temp5;
 									temp3 = temp5;
@@ -62,7 +62,8 @@ $.get( "ref_library.html", function(data) {
 							}
 							else{
 								var temp3 = next3N.nextElementSibling;
-								next3N.style.marginLeft = '50px';
+								//next3N.style.marginLeft = '50px';
+								
 								$(nextL).append(next3N);
 								next3N = temp3;
 							}
@@ -202,12 +203,16 @@ function bindToggle(item){
 
 
 function fixImages(){
-	$('img[src="../media/uploads/principle_of_high_resolution_sds_gel_electrophoresis.png"]').after('<p/>');
+	//$('img[src="../media/uploads/principle_of_high_resolution_sds_gel_electrophoresis.png"]').after('<p/>');
+	$('img[src="../media/uploads/principle_of_high_resolution_sds_gel_electrophoresis.png"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
 	$('img[src="../media/uploads/principle_of_high_resolution_sds_gel_electrophoresis.png"]').attr('src', '../../../images/ref_lib/principle_of_high_resolution_sds_gel_electrophoresis.png');
-	$('img[src="../media/uploads/gel_blue_coomassie.jpg"]').after('<p/>');
+	//$('img[src="../media/uploads/gel_blue_coomassie.jpg"]').after('<p/>');
+	$('img[src="../media/uploads/gel_blue_coomassie.jpg"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
 	$('img[src="../media/uploads/gel_blue_coomassie.jpg"]').attr('src', '../../../images/ref_lib/gel_blue_coomassie.jpg');
-	$('img[src="../media/uploads/antibody.png"]').after('<p/>');
+	//$('img[src="../media/uploads/antibody.png"]').after('<p/>');
+	$('img[src="../media/uploads/antibody.png"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
 	$('img[src="../media/uploads/antibody.png"]').attr('src', '../../../images/ref_lib/antibody.png');
-	$('img[src="../media/uploads/sds-page.jpg"]').after('<p/>');
+	//$('img[src="../media/uploads/sds-page.jpg"]').after('<p/>');
+	$('img[src="../media/uploads/sds-page.jpg"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
 	$('img[src="../media/uploads/sds-page.jpg"]').attr('src', '../../../images/ref_lib/sds-page.jpg');
 }

@@ -68,6 +68,7 @@ text-transform:uppercase;
 	font-weight:normal;
 }
 
+/* 
 .heading3 >a >p {
 	margin-left: 50px;
 }
@@ -75,7 +76,16 @@ text-transform:uppercase;
 .heading5 >a >p {
 	margin-left: 75px;
 }
+ */
 
+
+.figure{
+position: relative;
+width: 356px;
+display: inline-block;
+vertical-align: top;
+margin: 10px;
+}
 
 .body > p{
 	margin:0px;
