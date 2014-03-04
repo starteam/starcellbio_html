@@ -6559,7 +6559,6 @@ var __assignment_706_2014 = {
 		}
 		};
 
-
 var __assignment_706_2015 = {
         id: 'assignment_706_2015',
         name: 'StarCellBio Problem 2',
@@ -7714,8 +7713,7 @@ var __assignment_706_2015 = {
                 
 		}
 		}
-		}
-    ;
+		};
 
 
 
