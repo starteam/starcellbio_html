@@ -79,7 +79,7 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
  	scb.Utils.initialize_accessor_field(self, data, 'scroll', 0, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'samples_show_state', false, null, context);
         scb.Utils.initialize_accessor_field(self, data, 'navigation_show_state', false, null, context);
-
+scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, context);
     var template = context.template;
     
     self.disable_blur = template.ui.microscopy.disable_blur;
