@@ -8,19 +8,21 @@
      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 
     <h2>Goal</h2>
-The goal of this assignment is to increase understanding of cell biology techniques and their application by 
-providing you with the opportunity to conduct and analyze data from your own cell biology experiments.
+The goal of this assignment is to increase understanding of cell biology techniques and 
+their application by providing you with the opportunity to conduct and analyze 
+data from your own cell biology experiments.
 
     <h2>StarCellBio</h2>
 
     <p>
-To conduct your cell biology experiments, you will use StarCellBio, a cell and molecular
- experiment simulator launched from the 7.06r MITx website.
+To conduct your cell biology experiments, you will use StarCellBio, 
+a cell and molecular experiment simulator launched from the 7.06r MITx website.
     </p>
     
      <h2>Due Date & Points</h2>
-Your answers to the questions on the 7.06r MITx website will be due on <b>Friday, March 14th by 11 AM</b>. <br/><br/>
-This assignment is worth a total of _____ points. 
+Your answers to the questions on the 7.06r MITx website will be due on <b>Friday, March 14th by 11 AM</b>.<p/> 
+
+This assignment is worth a total of 30 points. 
 
 
 </div>
@@ -34,57 +36,130 @@ This assignment is worth a total of _____ points.
      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 
 	<p>
-You are characterizing a newly identified serine/threonine kinase, <b>Kinase X</b>, involved in cellular growth and differentiation. This kinase is part of a pathway that is activated by the binding of an extracellular ligand to a receptor.</p>
+You have identified a new signaling pathway that promotes cellular growth and is 
+expressed in all mammalian cells. This pathway is activated by the addition of 
+an extracellular ligand.
+</p>
+
 <p>
-You have identified four potential substrates (<b>Proteins A-D</b>) of Kinase X through an siRNA screen in mammalian cells and you would like to further characterize them. To this end, you conduct experiments in a mammalian cell line in which this pathway can be easily activated by the addition of the extracellular ligand.</p>
+Using an RNAi-based screen, you have identified five components of this pathway (<b>Proteins A-E</b>). 
+To further characterize this pathway and determine the order of the signal transduction cascade 
+downstream of the extracellular ligand, you test the effect of pathway activation on behavior 
+of Proteins A-E.
+</p>
+
+
 <p>
 
-First, you monitor the protein levels of Proteins A-D upon addition of the activating extracellular ligand and compare them with those in which only growth media is added. You observe that within the time frame in which your experiment is conducted, the levels of Proteins A-D do not change upon the addition of ligand. Next, you decide to further investigate the effect of ligand addition and pathway activation by monitoring changes in Proteins A-D's phosphorylation and subcellular localization. To do this, you are provided with the following reagents:</p>
+A. You first test the relative protein levels of Proteins A-E before and after pathway 
+activation. You observe that within the time frame in which your experiment is conducted, 
+the levels of Proteins A-E do not change upon the addition of extracellular ligand.
+</p>
+
+<p>
+
+B. You next monitor changes in the subcellular localization of Proteins A-E. To do this, you are provided with the following reagents:<p/>
 
 <ol >
-	<li>The ligand that activates Kinase X's signaling pathway as well as an inhibitor of this pathway.
-	</li>
+
+<li>The extracellular ligand that activates this signaling pathway.
+</li>
 <p/>
-	<li>Commercially available protein-specific phospho antibodies generated against specific phosphorylation sites in Proteins A-D and Kinase X. These phosphorylation sites were previously identified in a proteomic analysis that uncovered sites commonly phosphorylated upon activation of various signaling pathways. The protein-specific phospho antibodies only recognize the phosphorylated form of these protein residues. You also have access to an antibody against a protein, GAPDH, which is not a substrate of Kinase X and is not affected by activation of this pathway.
-	<p/>
-	
-	<table class='scb_s_objective_table'>
-            <thead>
-            <td>Antibodies
+<li>Mammalian cell lines, each stably expressing a fusion protein in 
+which Green Fluorescent Protein (GFP) is fused in frame to one of 
+the five proteins (called "GFP-Protein A", "GFP-Protein B", etc.).
+</li>
+<p/>
+<li>In addition, the following stably-expressing cell lines have been 
+provided to you as controls to assess different localization 
+behaviors. The subcellular localization of these 
+control proteins does not change upon pathway activation.<p/>
+	<ul>
+		<li>
+			GFP = a mammalian cell line stably expressing GFP.
+		</li>
+		
+		<li>GFP-Histone H2B = a mammalian cell line stably 
+		expressing Histone H2B (a component of the nucleosome) 
+		fused to GFP.
+		</li>
+		
+		<li>GFP-p100 = a mammalian cell line stably expressing a 
+		protein with a molecular weight of 100 kDa 
+		(but lacking any other signal sequences) fused to GFP.
+		</li>
+		
+		<li>GFP-pTD = a mammalian cell line stably 
+		expressing a protein with a transmembrane 
+		domain fused to GFP.
+		</li>
+		
+	</ul>
+</li>
+</ol>
+</p>
+
+<p>
+C. In addition to localization, you also want to test the 
+phosphorylation status of Proteins A-E. As the signaling pathway 
+that you identified is new, you have not yet defined the critical 
+phosphorylation events required for signal transduction. However, 
+broad-based proteomic screens have identified a wide range of phosphorylation 
+sites in each of these proteins. You are fortunate in that there is a 
+commercially available phospho-specific antibody available for one site 
+(out of multiple mapped sites) in each protein. These phospho-antibodies 
+only recognize the phosphorylated form of each protein at that site, but 
+there is no guarantee that this phosphorylation site is relevant to your 
+signal transduction pathway. You also have an antibody against the control 
+protein, GAPDH, which is not affected by activation of this pathway.<p/>
+
+<table class="scb_s_objective_table">
+			<thead>
+            <td><b>Antibodies</b>
 
             </td>
-            <td>Protein Detected
+            <td><b>Protein Detected</b>
 
             </td>
-            <td>Expected Molecular Weight (kDa)
+            <td><b>Expected Molecular Weight (kDa)</b>
 
             </td>
             </thead>
             <tbody>
             <tr>
                 <td>anti-phospho-protein A</td>
-                <td>Protein A phosphorylated at specific sites</td>
-                <td>46</td>
+                <td>Protein A phosphorylated at a specific site</td>
+                <td>46: endogenous protein<br/>
+					73: GFP-Protein A fusion
+					</td>
             </tr>
             <tr>
                 <td>anti-phospho-protein B</td>
-                <td>Protein B phosphorylated at specific sites</td>
-                <td>134</td>
+                <td>Protein B phosphorylated at a specific site</td>
+                <td>134: endogenous protein<br/>
+				161: GFP-Protein B fusion
+				</td>
             </tr>
             <tr>
                 <td>anti-phospho-protein C</td>
-                <td>Protein C phosphorylated at specific sites</td>
-                <td>44</td>
+                <td>Protein C phosphorylated at a specific site</td>
+                <td>44: endogenous protein<br/>
+					71: GFP-Protein C fusion
+					</td>
             </tr>
             <tr>
                 <td>anti-phospho-protein D</td>
-                <td>Protein D phosphorylated at specific sites</td>
-                <td>67</td>
+                <td>Protein D phosphorylated at a specific site</td>
+                <td>67: endogenous protein<br/>
+				94: GFP-Protein D fusion
+				</td>
             </tr>
             <tr>
-                <td>anti-phospho-kinase X</td>
-                <td>Kinase X phosphorylated at specific sites</td>
-                <td>74</td>
+                <td>anti-phospho-protein E</td>
+                <td>Protein E phosphorylated at a specific site</td>
+                <td>74: endogenous protein<br/>
+					101: GFP-Protein E fusion
+					</td>
             </tr>
             <tr>
                 <td>anti-GAPDH</td>
@@ -92,42 +167,21 @@ First, you monitor the protein levels of Proteins A-D upon addition of the activ
                 <td>37</td>
             </tr>
             </tbody>
-
-        </table>
-	
-	</li>
-<p/>
-
-	<li> 
-	Wild-type mammalian cell lines, each stably expressing a fusion protein where the Green Fluorescent Protein (GFP) is fused to a potential substrate (called "WT-GFP-Protein A", "WT-GFP-Protein B", etc.). In addition, the following stably-expressing cell lines have also been provided to you, in which the subcellular localization of the protein being stably expressed in each of these cell lines does not change upon the addition of ligand or inhibitor. 
-	<p/>
-		<ul type='disc'>
-		<li>
-			WT-GFP = a wild-type mammalian cell line stably expressing GFP.
-		</li>
-		<li>
-			WT-GFP-Kinase = a wild-type mammalian cell line stably expressing the Kinase X protein fused to GFP.
-		</li>
-		<li>
-			WT-GFP-Histone H2B = a wild-type mammalian cell line stably expressing the Histone H2B protein fused to GFP.
-		</li>
-		<li>
-			WT-GFP-p100 = a wild-type mammalian cell line stably expressing a protein with a molecular weight of 100 kDa fused to GFP.
-		</li>
-		<li>
-			WT-GFP-pTD = a wild-type mammalian cell line stably expressing a protein with a transmembrane domain and an internal signal sequence, fused to GFP.
-		</li>
-		</ul>
-	</li>
-	</ol>
-<p>
-NOTE: All of the cell lines provided express all of the components of this signal transduction pathway. 
-</p>
-	
-<p>
-Conduct the appropriate experiments within StarCellBio to determine the effect of pathway activation on the phosphorylation and subcellular localization of Proteins A-D. Using the results that you obtain from these experiments, answer the following questions concerning Proteins A-D and the signal transduction pathway in question.
+</table>
 </p>
 
+<p>
+D. Finally, working with the chemists at the Broad, you manage to obtain a small molecule 
+inhibitor of this signal transduction pathway. This inhibitor can be used for experiments 
+testing protein localization and phosphorylation and to order the components of this 
+signal transduction pathway.<p/>
+Conduct the appropriate experiments within StarCellBio to determine the 
+effect of pathway activation on the phosphorylation and subcellular 
+localization of Proteins A-E. Using the results that you obtain from 
+these experiments, answer the following questions concerning Proteins 
+A-E and the order of the signal transduction pathway in question.
+
+</p>
 
 </div>
 {/template}
@@ -143,11 +197,14 @@ Conduct the appropriate experiments within StarCellBio to determine the effect o
 </div>
 <div class='scb_objective_text'>
 <p>
-Using the conclusions from the data you generated, describe the effect of pathway activation on each potential substrate by indicating 1) whether the substrate is phosphorylated, and 2) the substrate’s subcellular localization.
-</p>
+Using the conclusions from the data you generated, 
+describe the effect of pathway activation on each 
+potential substrate by indicating 1) whether the 
+substrate is phosphorylated, and 2) the substrate’s 
+subcellular localization.</p>
 
 <p>
-Answer Question 1 within the 7.06r MITx website.
+Answer Question 1 within the MITx 7.06r website.
 </p>
 </div>
 </div>
@@ -167,25 +224,30 @@ Answer Question 1 within the 7.06r MITx website.
  <h2>Part A</h2>
  
  <p>
-Addition of ligand results in the activation of the signal transduction pathway in question and in the expression of genes important for cellular growth and differentiation. Given your experimental results, suggest the most likely order for Proteins A-D and Kinase X within this signal transduction pathway, beginning with the addition of ligand and ending with gene expression. </p>
-
+Addition of ligand results in the activation of the signal transduction 
+pathway in question and in the expression of genes important for cellular 
+growth and differentiation. Given your experimental results, suggest the 
+most likely order for Proteins A-E within this signal transduction pathway, 
+beginning with the addition of ligand and ending with the resulting gene expression.
 <p>
-Answer Question 2 Part A within the 7.06r MITx website.</p>
+Answer Question 2 Part A within the MITx 7.06r website.</p>
  
  
   <h2>Part B</h2>
   <p>
 At which point within the pathway does the inhibitor act?  </p>
 <p>
-Answer Question 2 Part B within the 7.06r MITx website.</p>
+Answer Question 2 Part B within the MITx 7.06r website.</p>
   
    <h2>Part C</h2>
    
 <p>
-Explain the reasoning by which you ordered the signal transduction pathway. Be sure to use your experimental results in your justification of your explanation.   
-</p>
+Explain the reasoning by which you ordered the signal transduction pathway. 
+Be sure to use your experimental results in the justification 
+of your explanation.</p>
+
 <p>
-Answer Question 2 Part C within the 7.06r MITx website.
+Answer Question 2 Part C within the MITx 7.06r website.
 </p>
 </div>
 <br/>

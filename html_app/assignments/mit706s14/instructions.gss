@@ -59,3 +59,8 @@ top: 16px;
 top: 21px;
 position: relative;
 }
+
+
+.scb_s_mit706s14_assignment_overview ul li{
+list-style-type: disc;
+}

@@ -519,15 +519,16 @@
 
 <div class='scb_s_microscopy_load_followup scb_s_controls_note'>
 			<button class='scb_f_controls_close_button' aria-label='Close'><span>&#215;</span></button>
-	
-						The first slide has been loaded. Every time you switch samples, a new slide will be automatically loaded. You may need to use the arrow keys or navigation arrows to move around the slide.<p/>
-						Please note that the&nbsp;
+						Your slides have been loaded. Every time you switch samples, the chosen slide will be automatically loaded. <p/>
+
+						You may need to use the arrow keys or navigation arrows to find the image present within each slide. <p/>
+
 						{if $microscopy.disable_blur and $microscopy.disable_brightness}
-							brightness and focus microscope controls have been disabled.
+							Please note that the brightness and focus microscope controls have been disabled.
 						{elseif $microscopy.disable_blur}
-							focus microscopy controls have been disabled.
+							Please note that the focus microscope controls have been disabled.
 						{elseif $microscopy.disable_brightness}
-							brightness microscope controls have been disabled.
+							Please note that the brightness microscope controls have been disabled.
 						{/if}
 						
 						
