@@ -745,7 +745,6 @@ function draw_lens(param, addition, state, canvas){
 
 }
 
-
 function draw(state){
 	var canvas=document.getElementById("lens");
 	
@@ -1385,10 +1384,9 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_microscopy_instructions_followup_toggle', function (e) {
         scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_followup_toggle(this);
     });
-        scb.utils.off_on(workarea, 'click', '.scb_f_controls_close_button', function (e) {
+    scb.utils.off_on(workarea, 'click', '.scb_f_controls_close_button', function (e) {
     	scb.ui.static.MicroscopyView.scb_f_controls_close_button(this);
     });
-
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_select_slide_type', function (e) {
         scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type(this, e);
     });
@@ -1440,7 +1438,6 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 		        scb.ui.static.MainFrame.refresh();
 
     });
-    
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_light', function (e) {
     	
         var parsed = scb.ui.static.MicroscopyView.parse(this);
@@ -1468,7 +1465,6 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 		        scb.ui.static.MainFrame.refresh();
 
     });
-
     scb.utils.off_on(workarea, 'click', '.scb_s_microscopy_choose_samples_order_list>li', function (e) {
         scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select(this, e);
     });
@@ -1807,7 +1803,6 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 			prev_step: state.experiment.prev_step,
             kind: kind,
             kinds: template.micro_kinds,
-
             can_prepare_slide: can_prepare_slide
         }));
         if (kind == 'sample_prep'){
@@ -1849,7 +1844,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         }
         else{
 			$('.scb_s_western_blot_progress_gray_bar').children().each(function () { console.log($(this).css('left'));
-    				$(this).css('left', parseInt($(this).css('left'))-5+'px');
+    			$(this).css('left', parseInt($(this).css('left'))-5+'px');
 			});
 			$('.scb_s_western_blot_progress_bar').css('top', '30px');
 		}
