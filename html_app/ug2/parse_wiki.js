@@ -166,7 +166,7 @@ function fixImages(){
 	
 	$('img[src="../media/uploads/starcellbio/scb_western_samples_window_-_marker_added_and_re-ordered.png"]').attr('src', '../../../images/user_guide/SCB_Western_Samples_window_-_Marker_added_and_re-ordered.png');
 	
-	$('img[src="../media/uploads/starcellbio/scb_western_load.png"]').attr('src', '../../../images/user_guide/SCB_Western_load.png');
+	$('img[src="../media/uploads/starcellbio/scb_western_load.png"]').attr('src', '../../../images/user_guide/SCB_Western_load1.png');
 	
 	$('img[src="../media/uploads/starcellbio/scb_western_blot_cropped.png"]').attr('src', '../../../images/user_guide/SCB_Western_blot_cropped.png');
 	
