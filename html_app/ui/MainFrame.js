@@ -450,7 +450,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				}
 			});
 			
-			
+			console.info('clicked main popout', $('.main_popout'));
 			
 			$(".main_popout").click(function(){
 					var popout_string = "";
