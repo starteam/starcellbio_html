@@ -306,7 +306,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 
 					$('.contact_overlay').remove();
         });
-		$('iframe').load(function(){
+		$('.scb_s_contact_iframe', workarea).load(function(){
 				$('.scb_s_contact_dialog').draggable({ handle:'.scb_s_feedback_form'});
 				var iframe = document.getElementsByTagName('iframe')[0];
 				var content = (iframe.contentDocument || iframe.contentWindow);
@@ -324,9 +324,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			
 				var fieldset = content.querySelectorAll('fieldset');
 				$(fieldset).css('border', '0');
-				$('iframe').contents().find(".scb_f_contact_submit_button").click(function(e){
-					$('iframe').load(function(){
-						  var profile = $('iframe').contents();
+				$('.scb_s_contact_iframe', workarea).contents().find(".scb_f_contact_submit_button").click(function(e){
+					$('.scb_s_contact_iframe', workarea).load(function(){
+						  var profile = $('.scb_s_contact_iframe', workarea).contents();
 						  if(profile[0].body.textContent.indexOf('you for your feedback.') >0){
 							  parent.document.location.reload();
 							  }
@@ -364,22 +364,22 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			});
    		 });
    		 
-		$('iframe').load(function(){
-			$('.scb_f_ug_help_search_bar').width($('iframe').contents().find('.scb_f_help_display').width()+20);
-			$('iframe').width($('iframe').contents().find('.scb_f_help').width()+20);
-			$('iframe').height($('iframe').contents().find('.scb_f_help').height()+20);
+		$('iframe.scb_s_ug_dialog', workarea).load(function(){
+			$('.scb_f_ug_help_search_bar').width($('iframe.scb_s_ug_dialog', workarea).contents().find('.scb_f_help_display').width()+20);
+			$('iframe.scb_s_ug_dialog', workarea).width($('iframe.scb_s_ug_dialog', workarea).contents().find('.scb_f_help').width()+20);
+			$('iframe.scb_s_ug_dialog', workarea).height($('iframe.scb_s_ug_dialog', workarea).contents().find('.scb_f_help').height()+20);
 			$('.scb_f_ug_help_search_bar').draggable({ handle:'.user_guide_title'});
-			$('iframe').contents().find('body').css('font-family', "Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
-			$('iframe').contents().find("#popout").hide();
-			$('iframe').contents().click(function(event) {
+			$('iframe.scb_s_ug_dialog', workarea).contents().find('body').css('font-family', "Trebuchet MS, Helvetica, Arial, Verdana, sans-serif");
+			$('iframe.scb_s_ug_dialog', workarea).contents().find("#popout").hide();
+			$('iframe.scb_s_ug_dialog', workarea).contents().click(function(event) {
 				if(event.target.className !='scb_s_ug_home' && event.target.id !='search'){
 				if(iframe_history.length ==0){
 					iframe_history=['#'];
 				}
 				$(".scb_s_ug_home").removeClass('scb_s_ug_home_disabled');
     			$('.scb_s_ug_home').removeAttr('disabled');
-				if($('iframe').contents().find("#popout").length >0){
-					$('iframe').contents().find("#popout").hide();
+				if($('iframe.scb_s_ug_dialog', workarea).contents().find("#popout").length >0){
+					$('iframe.scb_s_ug_dialog', workarea).contents().find("#popout").hide();
 				}
 				var anchor_element = $(event.target).closest('.anchors')
 				if(event.target.className == 'intextlink')
@@ -397,10 +397,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			});
 			
 			$('#search').click(function(){
-					$('iframe').ready(function(){
+					$('iframe.scb_s_ug_dialog', workarea).ready(function(){
     					$("#closesearch").show();
-						$('iframe').contents().find(".help_search_input").val($(".help_search_input").val());
-						$('iframe').contents().find("#search").click();
+						$('iframe.scb_s_ug_dialog', workarea).contents().find(".help_search_input").val($(".help_search_input").val());
+						$('iframe.scb_s_ug_dialog', workarea).contents().find("#search").click();
 					});
 			});
 			
@@ -417,7 +417,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			$(".scb_s_ug_home").click(function(){
 				iframe_history.push('#');
 				currentPush = true;
-				$('iframe').contents().find(".scb_s_ug_home").click();
+				$('iframe.scb_s_ug_dialog', workarea).contents().find(".scb_s_ug_home").click();
 				$(".scb_s_ug_home").addClass('scb_s_ug_home_disabled');
     			$('.scb_s_ug_home').attr('disabled', 'disabled');
     			$(".scb_s_ug_back").removeClass('scb_s_ug_back_disabled');
@@ -436,9 +436,9 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     			
     			if(back_url){
     				if(back_url =="#")
-    					$('iframe').contents().find(".scb_s_ug_home").click();
+    					$('iframe.scb_s_ug_dialog', workarea).contents().find(".scb_s_ug_home").click();
     				else
-    					$('iframe').contents().find('a[href="'+back_url+'"]').click();
+    					$('iframe.scb_s_ug_dialog', workarea).contents().find('a[href="'+back_url+'"]').click();
 // 					$('iframe')[0].contentWindow.location.hash =back_url;
 				}
 				else{
@@ -454,20 +454,20 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 			
 			$(".main_popout").click(function(){
 					var popout_string = "";
-					var visible=	$('iframe').contents().find('.scb_s_section_inactive:visible');
+					var visible=	$('iframe.scb_s_ug_dialog', workarea).contents().find('.scb_s_section_inactive:visible');
 					if(visible.length ==1)
 					{	
 						if($(visible).attr('class') == 'scb_s_section_inactive')
-							popout_string = $('iframe').contents().find('*:visible ').closest('.scb_s_help_sublink').attr('class').split(' ')[1];
+							popout_string = $('iframe.scb_s_ug_dialog', workarea).contents().find('*:visible ').closest('.scb_s_help_sublink').attr('class').split(' ')[1];
 						else
 							popout_string = $(visible).attr('class');
 					}
 					else{
-						popout_string = $($('iframe').contents().find('span:visible')[0]).attr('class');
+						popout_string = $($('iframe.scb_s_ug_dialog', workarea).contents().find('span:visible')[0]).attr('class');
 					}
 	
 					popout_string = popout_string.replace(/_/g, '-');
-					if($('iframe').contents().find('.scb_s_section_inactive').length ==0)
+					if($('iframe.scb_s_ug_dialog', workarea).contents().find('.scb_s_section_inactive').length ==0)
 						popout_string ="";
 					try
  					 {
