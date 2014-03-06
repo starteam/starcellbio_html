@@ -68,11 +68,11 @@ label{
 
                   <label>Your name (optional):</label> <br><input name="name" size="25/" type="text">
                 <br>
-                	<label>Email (optional):</label> <br><input name="email" type="text">
+                	<label>Email (optional):</label> <br><input onkeyup="changeCheck()"  id='scb_f_contact_email' name="email" type="text">
 				<br>
 				<span>
                   <label>May we contact you via email?</label>
-                  <input checked="checked" name="subscribe" type="checkbox"></span><br><br>
+                  <input id='scb_f_check_email' name="subscribe" type="checkbox"></span><br><br>
 
                   <label>Report type:</label><br>
                   <div class='radios'><br>
@@ -89,5 +89,13 @@ label{
               </fieldset>
             </form>
 </body>
+<script>
+function changeCheck(){
+	if(document.getElementById('scb_f_contact_email').value.length > 0)
+		document.getElementById('scb_f_check_email').checked = true;
+
+}
+
+</script>
 
 </html>
