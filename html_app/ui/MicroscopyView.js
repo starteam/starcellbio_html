@@ -29,15 +29,17 @@ scb.ui.static.MicroscopyView.parse = function (element) {
     return parsed;
 }
 
-var current_slides = [];
+
 scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	
 	var model = new scb.components.ModelFactory(state.context.template);
 	model.microscopy.compute(state);
 	var img_sample = state.slides[0].hash;
-	current_slides = state.slides;
 	var disableSlider = false;
 	var enableIFSlider = false;
+	if(state.microscopy_lane.current_slides.length == 0){
+		state.microscopy_lane.current_slides = state.slides;
+	}
 	if(state.slide_type == 'Dye'){
 	$('.scb_s_microscopy_if').prop('disabled', false);
 	}
@@ -46,131 +48,77 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	}
 	else if(state.slide_type == 'IF'){
 		if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type ) || (!state.microscopy_lane.lens_map.action  && state.slides.length > 1 )){
-			$('.scb_s_microscopy_if').prop('disabled', false);
-			$('.scb_f_microscopy_'+state.slides[0].if_type).prop('checked', 'checked');
-			if($('.scb_s_microscopy_if[checked="checked"]').length > 0){
-				$('.scb_f_microscopy_'+$('.scb_s_microscopy_if[checked="checked"]').prop('title').toLowerCase()).prop('checked', 'checked');
-			}
-			else{
-				if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'red') ){
-					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
-					state.microscopy.red_enabled = true;
-					state.microscopy.blue_enabled = false;
-					state.microscopy.green_enabled = false;
-					state.microscopy.merge_enabled = false;
-					}
-				else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'green')){
-					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
-					state.microscopy.red_enabled = false;
-					state.microscopy.blue_enabled = false;
-					state.microscopy.green_enabled = true;
-					state.microscopy.merge_enabled = false;
-					}
-				else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'blue')){
-					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
-					state.microscopy.red_enabled = false;
-					state.microscopy.blue_enabled = true;
-					state.microscopy.green_enabled = false;
-					state.microscopy.merge_enabled = false;
-					}
-				else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'merge')){
-					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
-					state.microscopy.red_enabled = false;
-					state.microscopy.blue_enabled = false;
-					state.microscopy.green_enabled = false;
-					state.microscopy.merge_enabled = true;
-					}
-				else if (state.slides[0].if_type =='red'){
-					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
-					state.microscopy_lane.lens_map.if_type = 'red';
-
-					state.microscopy.red_enabled = true;
-					state.microscopy.blue_enabled = false;
-					state.microscopy.green_enabled = false;
-					state.microscopy.merge_enabled = false;
-				}
-				else if (state.slides[0].if_type =='green'){
-					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
-					state.microscopy_lane.lens_map.if_type = 'green';
-					state.microscopy.red_enabled = false;
-					state.microscopy.blue_enabled = false;
-					state.microscopy.green_enabled = true;
-					state.microscopy.merge_enabled = false;
-				}
-				else if (state.slides[0].if_type =='blue'){
-					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
-					state.microscopy_lane.lens_map.if_type = 'blue';
-					state.microscopy.red_enabled = false;
-					state.microscopy.blue_enabled = true;
-					state.microscopy.green_enabled = false;
-					state.microscopy.merge_enabled = false;
-				}
-				else if (state.slides[0].if_type =='merge'){
-					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
-					state.microscopy_lane.lens_map.if_type = 'merge';
-					state.microscopy.red_enabled = false;
-					state.microscopy.blue_enabled = false;
-					state.microscopy.green_enabled = false;
-					state.microscopy.merge_enabled = true;
-				
+			if(state.microscopy_lane.current_slides.length != 1){
+				$('.scb_s_microscopy_if').prop('disabled', false);
+				if($('.scb_s_microscopy_if[checked="checked"]').length > 0){
+					var selected_filter = $('.scb_s_microscopy_if[checked="checked"]').prop('title').toLowerCase();
+						$('.scb_f_microscopy_'+selected_filter).prop('checked', 'checked');
+						state.microscopy.red_enabled = false;
+						state.microscopy.blue_enabled = false;
+						state.microscopy.green_enabled = false;
+						state.microscopy.merge_enabled = false;
+						if(selected_filter == 'all')
+							selected_filter = 'merge';
+						state.microscopy[selected_filter+'_enabled'] = true;
+						state.microscopy_lane.lens_map.if_type = selected_filter;
+						img_sample = $.grep(state.microscopy_lane.current_slides, function(e){ return e.if_type == selected_filter; })[0].hash;
 				}
 				else{
-					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
-					state.microscopy_lane.lens_map.if_type = 'red';
-					state.microscopy.red_enabled = true;
-					state.microscopy.blue_enabled = false;
-					state.microscopy.green_enabled = false;
-					state.microscopy.merge_enabled = false;
+					if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'red') ){
+							set_filters('red', state);
+						}
+					else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'green')){
+							set_filters('green', state);
+						}
+					else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'blue')){
+							set_filters('blue', state);
+						}
+					else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'merge')){
+							set_filters('all', state);
+						}
+					else if (state.slides[0].if_type =='red'){
+							set_filters('red',state);
+							state.microscopy_lane.lens_map.if_type = 'red';
+					}
+					else if (state.slides[0].if_type =='green'){
+							set_filters('green',state);
+							state.microscopy_lane.lens_map.if_type = 'green';
+					}
+					else if (state.slides[0].if_type =='blue'){
+							set_filters('blue',state);
+							state.microscopy_lane.lens_map.if_type = 'blue';
+					}
+					else if (state.slides[0].if_type =='merge'){
+							set_filters('all',state);
+							state.microscopy_lane.lens_map.if_type = 'merge';
+					}
+					else{
+							set_filters('red',state);
+							state.microscopy_lane.lens_map.if_type = 'red';
+					}
 				}
 			}
 		}
 		else{
-			current_slides = []
 			if(state.slides[0].if_type == 'red' ){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
-				state.microscopy.red_enabled = true;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = false;
-				
-			$('.scb_f_microscopy_red').prop('checked', 'checked');
-			
-			
-			$('.scb_s_microscopy_red').prop('disabled', false);
-				
+				set_filters('red',state);
+				state.microscopy_lane.lens_map.if_type = 'red';
+				$('.scb_s_microscopy_red').prop('disabled', false);
 				}
 			else if(state.slides[0].if_type == 'green'){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
-				state.microscopy.red_enabled = false;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = true;
-				state.microscopy.merge_enabled = false;
-				
-			$('.scb_f_microscopy_green').prop('checked', 'checked');
+				set_filters('green',state);
+				state.microscopy_lane.lens_map.if_type = 'green';
 				$('.scb_s_microscopy_green').prop('disabled', false);
-
 				}
 			else if(state.slides[0].if_type == 'blue'){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
-				state.microscopy.red_enabled = false;
-				state.microscopy.blue_enabled = true;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = false;
-				
-			$('.scb_f_microscopy_blue').prop('checked', 'checked');
+				set_filters('blue',state);
+				state.microscopy_lane.lens_map.if_type = 'blue';
 				$('.scb_s_microscopy_blue').prop('disabled', false);
-
 				}
 			else if(state.slides[0].if_type == 'merge'){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
-				state.microscopy.red_enabled = false;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = true;
-				
-			$('.scb_f_microscopy_all').prop('checked', 'checked');
+				set_filters('all',state);
+				state.microscopy_lane.lens_map.if_type = 'merge';
 				$('.scb_s_microscopy_all').prop('disabled', false);
-
 			}
 		}
 	}
@@ -185,11 +133,9 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	}
 	
 	if(state.slide_type != 'IF' && !state.microscopy.light_on && !state.microscopy.laser_on){
-		current_slides = [];
 		init_wb('../images/microscopy/black.jpg');
 	}
 	else if(state.slide_type != 'IF' && state.microscopy.light_on && !state.microscopy.laser_on){
-		current_slides = [];
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, false, draw, state.microscopy_lane.lens_map.src );
@@ -202,46 +148,37 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 			}
 	}
 	else if(state.slide_type != 'IF' && !state.microscopy.light_on && state.microscopy.laser_on){
-		current_slides = [];
 		init_wb('../images/microscopy/black.jpg');
-
 	}
 	else if(state.slide_type != 'IF' && state.microscopy.light_on && state.microscopy.laser_on){
-		current_slides = [];
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, false, draw, state.microscopy_lane.lens_map.src );
 			}
 			else{
-				//state.microscopy_lane.lens_map = new Object();
 				state.microscopy_lane.lens_map.mag = state.slides[0].mag;
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, true, false,  draw, state.assignment.template.slides[img_sample]);
 			}
-		
 	}
 	else if(state.slide_type == 'IF' && !state.microscopy.light_on && !state.microscopy.laser_on){
 			init_wb('../images/microscopy/black.jpg');
 			disableSlider = true;
-			
 	}
 	else if(state.slide_type == 'IF' && state.microscopy.light_on && !state.microscopy.laser_on){
 		if(state.microscopy_lane.lens_map.brightness >0 ||state.microscopy_lane.lens_map.cache_brightness >0)
 			init_wb_mod(state.microscopy_lane.lens_map, '../images/microscopy/white.jpg');
 		else
 			init_wb_mod(state.microscopy_lane.lens_map, '../images/microscopy/black.jpg');
-	
 	}
 	else if(state.slide_type == 'IF' && !state.microscopy.light_on && state.microscopy.laser_on){
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
-				
 				state.microscopy_lane.lens_map.brightness = 0;
 				state.microscopy_lane.lens_map.cache_brightness = 0;
 				init(state.microscopy_lane.lens_map, false, true, draw, state.microscopy_lane.lens_map.src );
 			}
 			else{
-				//state.microscopy_lane.lens_map = new Object();
 				state.microscopy_lane.lens_map.mag = state.slides[0].mag;
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				state.microscopy_lane.lens_map.brightness = 0;
@@ -249,11 +186,8 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 				init(state.microscopy_lane.lens_map, true, true, draw, state.assignment.template.slides[img_sample]);
 			}
 			disableSlider = true;
-			
-			
 	}
 	else if(state.slide_type == 'IF' && state.microscopy.light_on && state.microscopy.laser_on){
-		//init_wb('../images/microscopy/white.jpg');
 		enableIFSlider = true;
 		$('#brightdown').prop('disabled', true);
 		if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
@@ -265,35 +199,41 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 				init(state.microscopy_lane.lens_map, false, true, draw, state.microscopy_lane.lens_map.src );
 		}
 		else{
-			//state.microscopy_lane.lens_map = new Object();
 			state.microscopy_lane.lens_map.mag = state.slides[0].mag;
 			state.microscopy_lane.lens_map.brightness = 0;
 			state.microscopy_lane.lens_map.cache_brightness = 0;
 			$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 			init(state.microscopy_lane.lens_map, true, true, draw, state.assignment.template.slides[img_sample]);
 		}
-		
 		min_brightness=0;
 		max_brightness=100;
 	}
-	
-	
 	if(!disableSlider  && !enableIFSlider){
 		min_brightness = -100;
 		max_brightness = 100;
 	}
-	
 	if(state.microscopy.disable_blur){
-				$('#fblurup').prop('disabled', true);
-				$('#fblurdown').prop('disabled', true);
-				$('#blurup').prop('disabled', true);
-				$('#blurdown').prop('disabled', true);
+			$('#fblurup').prop('disabled', true);
+			$('#fblurdown').prop('disabled', true);
+			$('#blurup').prop('disabled', true);
+			$('#blurdown').prop('disabled', true);
 	}
 	if(state.microscopy.disable_brightness){
 	 		$('#brightup').prop('disabled', true);
 			$('#brightdown').prop('disabled', true);
 	}
+}
 
+function set_filters(name, state){
+		state.microscopy.red_enabled = false;
+		state.microscopy.blue_enabled = false;
+		state.microscopy.green_enabled = false;
+		state.microscopy.merge_enabled = false;
+		$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_'+name.charAt(0).toUpperCase() + name.slice(1)+'.png');
+		$('.scb_f_microscopy_'+name).prop('checked', 'checked');
+		if(name == 'all')
+			name = 'merge';
+		state.microscopy[name+'_enabled'] = true;		
 }
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (element, event) {
@@ -302,15 +242,12 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
     var slide_type = $(element).attr('value');
     if (slide_type == '') {
         return;
     }
-    
     var matches_list = [];
     var keys_list = [];
-    
     var slide_id = $(element).attr('lane_id');
     if (slide_id == '') {
        var cell_treatment_id = $(element).attr('cell_treatment_id');
@@ -320,14 +257,9 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 				keys_list = _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type])
 				matches_list.push(lane.slide_conditions)
 			}
-			
 		}
-		
-			
-			//if((lane.kind == slide_type && lane.cell_treatment_id == cell_treatment_id && _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type]).length == 1 )){
 		matches_list = jQuery.unique( matches_list );
 		keys_list = jQuery.unique( keys_list );
-				
 		if(keys_list.length > 0 && $(matches_list).not(keys_list).length == 0 && $(keys_list).not(matches_list).length == 0){
 				
 				$('html').css('overflow', 'hidden');
@@ -375,7 +307,6 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (elem
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
     var slide_conditions = $(element).attr('value');
     if (slide_conditions == '') {
         return;
@@ -1502,7 +1433,6 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 			return;
 		}
 		else if(parsed.microscopy_lane.kind == 'IF' && !parsed.microscopy_lane.lens_map.if_type){
-		current_slides = [];
 			$('html').css('overflow', 'hidden');
 				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
@@ -1516,8 +1446,8 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 				return;
 		}
 		else{
-			for(var x = 0; x < current_slides.length; x ++){
-				if(current_slides[x].if_type == 'red'){
+			for(var x = 0; x < parsed.microscopy.selected_lane.current_slides.length; x ++){
+				if(parsed.microscopy.selected_lane.current_slides[x].if_type == 'red'){
 					parsed.microscopy.red_enabled = true;
 					parsed.microscopy.blue_enabled = false;
 					parsed.microscopy.green_enabled = false;
@@ -1525,8 +1455,8 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					parsed.microscopy.selected_lane.lens_map.if_type = 'red';
 					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementById("lens"));
 					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
-					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[current_slides[x].hash])
-					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[current_slides[x].hash]);
+					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[parsed.microscopy.selected_lane.current_slides[x].hash])
+					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[parsed.microscopy.selected_lane.current_slides[x].hash]);
 					break;
 				}
 			}
@@ -1545,7 +1475,6 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 			return;
 		}
 		else if(parsed.microscopy_lane.kind == 'IF' && !parsed.microscopy_lane.lens_map.if_type){
-		current_slides = [];
 			$('html').css('overflow', 'hidden');
 				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
@@ -1559,8 +1488,8 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 				return;
 		}
 		else{
-	    	for(var x = 0; x < current_slides.length; x ++){
-				if(current_slides[x].if_type == 'blue'){
+	    	for(var x = 0; x < parsed.microscopy.selected_lane.current_slides.length; x ++){
+				if(parsed.microscopy.selected_lane.current_slides[x].if_type == 'blue'){
 					parsed.microscopy.red_enabled = false;
 					parsed.microscopy.blue_enabled = true;
 					parsed.microscopy.green_enabled = false;
@@ -1568,8 +1497,8 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					parsed.microscopy.selected_lane.lens_map.if_type = 'blue';
 					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementById("lens"));
 					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
-					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[current_slides[x].hash])
-					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[current_slides[x].hash]);
+					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[parsed.microscopy.selected_lane.current_slides[x].hash])
+					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[parsed.microscopy.selected_lane.current_slides[x].hash]);
 					break;
 				}
 			}
@@ -1588,7 +1517,6 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 			return;
 		}
 		else if(parsed.microscopy_lane.kind == 'IF' && !parsed.microscopy_lane.lens_map.if_type){
-		current_slides = [];
 			$('html').css('overflow', 'hidden');
 				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
@@ -1602,8 +1530,8 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 				return;
 		}
 		else{
-	    	for(var x = 0; x < current_slides.length; x ++){
-				if(current_slides[x].if_type == 'green'){
+	    	for(var x = 0; x < parsed.microscopy.selected_lane.current_slides.length; x ++){
+				if(parsed.microscopy.selected_lane.current_slides[x].if_type == 'green'){
 					parsed.microscopy.red_enabled = false;
 					parsed.microscopy.blue_enabled = false;
 					parsed.microscopy.green_enabled = true;
@@ -1611,8 +1539,8 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					parsed.microscopy.selected_lane.lens_map.if_type = 'green';
 					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementById("lens"));
 					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
-					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[current_slides[x].hash])
-					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[current_slides[x].hash]);
+					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[parsed.microscopy.selected_lane.current_slides[x].hash])
+					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[parsed.microscopy.selected_lane.current_slides[x].hash]);
 					break;
 				}
 			}    
@@ -1631,7 +1559,6 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 			return;
 		}
 		else if(parsed.microscopy_lane.kind == 'IF' && !parsed.microscopy_lane.lens_map.if_type){
-		current_slides = [];
 			$('html').css('overflow', 'hidden');
 				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
@@ -1645,8 +1572,8 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 				return;
 		}
 		else{
-	    	for(var x = 0; x < current_slides.length; x ++){
-				if(current_slides[x].if_type == 'merge'){
+	    	for(var x = 0; x < parsed.microscopy.selected_lane.current_slides.length; x ++){
+				if(parsed.microscopy.selected_lane.current_slides[x].if_type == 'merge'){
 					parsed.microscopy.red_enabled = false;
 					parsed.microscopy.blue_enabled = false;
 					parsed.microscopy.green_enabled = false;
@@ -1654,8 +1581,8 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					parsed.microscopy.selected_lane.lens_map.if_type = 'merge';
 					draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementById("lens"));
 					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
-					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[current_slides[x].hash])
-					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[current_slides[x].hash]);
+					var new_state = copy_state(parsed.microscopy_lane.lens_map, scb.LensMap, parsed.assignment.template.slides[parsed.microscopy.selected_lane.current_slides[x].hash])
+					init(parsed.microscopy_lane.lens_map, false, true, draw, parsed.assignment.template.slides[parsed.microscopy.selected_lane.current_slides[x].hash]);
 					break;
 				}
 			}
@@ -1791,14 +1718,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         }
         
         state.experiment.last_technique_view = 'microscopy';
-		
-// 			var x = 0;
-//         if($('.scb_s_western_blot_samples_table').length ==0)
-//         	x=100;
-//         else
-//         	x = $('.scb_s_western_blot_samples_table')[0].scrollTop;
-        	
-		
+        
         workarea.html(scb_microscopy.main({
             global_template: gstate.context.master_model,
             assignment: state.assignment,
@@ -1817,7 +1737,6 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         }));
         if (kind == 'sample_prep'){
         	$('.scb_s_western_blot_samples_table').scrollTop(state.microscopy.prep_scroll);
-        	//$('.scb_s_western_blot_samples_table')[0].scrollTop = x;
         }
         state.experiment.prev_step=6;
         
