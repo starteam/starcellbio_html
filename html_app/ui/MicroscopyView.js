@@ -48,75 +48,80 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type ) || (!state.microscopy_lane.lens_map.action  && state.slides.length > 1 )){
 			$('.scb_s_microscopy_if').prop('disabled', false);
 			$('.scb_f_microscopy_'+state.slides[0].if_type).prop('checked', 'checked');
-			if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'red') ){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
-				state.microscopy.red_enabled = true;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = false;
-				}
-			else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'green')){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
-				state.microscopy.red_enabled = false;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = true;
-				state.microscopy.merge_enabled = false;
-				}
-			else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'blue')){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
-				state.microscopy.red_enabled = false;
-				state.microscopy.blue_enabled = true;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = false;
-				}
-			else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'merge')){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
-				state.microscopy.red_enabled = false;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = true;
-				}
-			else if (state.slides[0].if_type =='red'){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
-				state.microscopy_lane.lens_map.if_type = 'red';
-
-				state.microscopy.red_enabled = true;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = false;
-			}
-			else if (state.slides[0].if_type =='green'){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
-				state.microscopy_lane.lens_map.if_type = 'green';
-				state.microscopy.red_enabled = false;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = true;
-				state.microscopy.merge_enabled = false;
-			}
-			else if (state.slides[0].if_type =='blue'){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
-				state.microscopy_lane.lens_map.if_type = 'blue';
-				state.microscopy.red_enabled = false;
-				state.microscopy.blue_enabled = true;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = false;
-			}
-			else if (state.slides[0].if_type =='merge'){
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
-				state.microscopy_lane.lens_map.if_type = 'merge';
-				state.microscopy.red_enabled = false;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = true;
-				
+			if($('.scb_s_microscopy_if[checked="checked"]').length > 0){
+				$('.scb_f_microscopy_'+$('.scb_s_microscopy_if[checked="checked"]').prop('title').toLowerCase()).prop('checked', 'checked');
 			}
 			else{
-				$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
-				state.microscopy_lane.lens_map.if_type = 'red';
-				state.microscopy.red_enabled = true;
-				state.microscopy.blue_enabled = false;
-				state.microscopy.green_enabled = false;
-				state.microscopy.merge_enabled = false;
+				if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'red') ){
+					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
+					state.microscopy.red_enabled = true;
+					state.microscopy.blue_enabled = false;
+					state.microscopy.green_enabled = false;
+					state.microscopy.merge_enabled = false;
+					}
+				else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'green')){
+					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
+					state.microscopy.red_enabled = false;
+					state.microscopy.blue_enabled = false;
+					state.microscopy.green_enabled = true;
+					state.microscopy.merge_enabled = false;
+					}
+				else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'blue')){
+					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
+					state.microscopy.red_enabled = false;
+					state.microscopy.blue_enabled = true;
+					state.microscopy.green_enabled = false;
+					state.microscopy.merge_enabled = false;
+					}
+				else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'merge')){
+					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
+					state.microscopy.red_enabled = false;
+					state.microscopy.blue_enabled = false;
+					state.microscopy.green_enabled = false;
+					state.microscopy.merge_enabled = true;
+					}
+				else if (state.slides[0].if_type =='red'){
+					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
+					state.microscopy_lane.lens_map.if_type = 'red';
+
+					state.microscopy.red_enabled = true;
+					state.microscopy.blue_enabled = false;
+					state.microscopy.green_enabled = false;
+					state.microscopy.merge_enabled = false;
+				}
+				else if (state.slides[0].if_type =='green'){
+					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Green.png');
+					state.microscopy_lane.lens_map.if_type = 'green';
+					state.microscopy.red_enabled = false;
+					state.microscopy.blue_enabled = false;
+					state.microscopy.green_enabled = true;
+					state.microscopy.merge_enabled = false;
+				}
+				else if (state.slides[0].if_type =='blue'){
+					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Blue.png');
+					state.microscopy_lane.lens_map.if_type = 'blue';
+					state.microscopy.red_enabled = false;
+					state.microscopy.blue_enabled = true;
+					state.microscopy.green_enabled = false;
+					state.microscopy.merge_enabled = false;
+				}
+				else if (state.slides[0].if_type =='merge'){
+					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_All.png');
+					state.microscopy_lane.lens_map.if_type = 'merge';
+					state.microscopy.red_enabled = false;
+					state.microscopy.blue_enabled = false;
+					state.microscopy.green_enabled = false;
+					state.microscopy.merge_enabled = true;
+				
+				}
+				else{
+					$('.scb_s_microscopy_filter').prop('src', 'images/microscopy/Filter_Slider_Red.png');
+					state.microscopy_lane.lens_map.if_type = 'red';
+					state.microscopy.red_enabled = true;
+					state.microscopy.blue_enabled = false;
+					state.microscopy.green_enabled = false;
+					state.microscopy.merge_enabled = false;
+				}
 			}
 		}
 		else{
@@ -1868,7 +1873,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             }
         }
         if (state.microscopy.samples_finished) {
-            debugger;
+            //debugger;
             if(!state.microscopy.warning_fired){
 				$('.scb_s_microscopy_load_followup').show();
 				$('.scb_s_microscopy_load_followup>.scb_f_controls_close_button').click(function(){

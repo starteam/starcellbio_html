@@ -502,7 +502,6 @@ input[type=radio]:disabled{
 }
 
 .facs_locked{
-	opacity:0.5;
 }
 .scb_s_facs_samples_area {
 	margin-top:28px;

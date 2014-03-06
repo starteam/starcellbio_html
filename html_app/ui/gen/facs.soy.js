@@ -87,7 +87,7 @@ scb_facs.sample_prep = function(opt_data, opt_sb) {
   var rListLen264 = rList264.length;
   for (var rIndex264 = 0; rIndex264 < rListLen264; rIndex264++) {
     var rData264 = rList264[rIndex264];
-    output.append('<tr class=\'scb_s_facs_samples_table_tr \'><td class=\'scb_s_facs_samples_table_td scb_s_experiment_setup_table_border\' style=\'width:73px;\'>', (rData264.display_sample) ? '<input type="checkbox" class="scb_f_facs_sample_active" facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' cell_treatment_id=\'' + soy.$$escapeHtml(rData264.cell_treatment.id) + '\'' + ((rData264.is_sample_enabled) ? 'checked="checked"' : '') + '>' : '', '</td><td class=\'scb_s_facs_samples_table_td scb_s_experiment_setup_table_border\' style=\'width:343px;\'>', (rData264.display_sample) ? soy.$$escapeHtml(rData264.display_text) : '', '</td><td class=\'scb_s_facs_samples_table_td scb_s_experiment_setup_table_border\' style=\'width:185px;\'><input type="radio" checked="checked" class=\'facs_locked\'><span class=\'facs_locked\'>Fixed</span></input></td><td class=\' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border\' style=\'width:267px;\'>');
+    output.append('<tr class=\'scb_s_facs_samples_table_tr \'><td class=\'scb_s_facs_samples_table_td scb_s_experiment_setup_table_border\' style=\'width:73px;\'>', (rData264.display_sample) ? '<input type="checkbox" class="scb_f_facs_sample_active" facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' cell_treatment_id=\'' + soy.$$escapeHtml(rData264.cell_treatment.id) + '\'' + ((rData264.is_sample_enabled) ? 'checked="checked"' : '') + '>' : '', '</td><td class=\'scb_s_facs_samples_table_td scb_s_experiment_setup_table_border\' style=\'width:343px;\'>', (rData264.display_sample) ? soy.$$escapeHtml(rData264.display_text) : '', '</td><td class=\'scb_s_facs_samples_table_td scb_s_experiment_setup_table_border\' style=\'width:185px;\'><input type="radio" checked="checked" class=\'facs_locked\'><span class=\'', (rData264.is_sample_enabled) ? 'facs_locked' : 'scb_s_microscopy_dim_conditions', '\'>Fixed</span></input></td><td class=\' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border\' style=\'width:267px;\'>');
     scb_facs.display_lysate_types({assignment: opt_data.assignment, experiment: opt_data.experiment, facs: opt_data.facs, cell_treatment: rData264.cell_treatment, kinds: opt_data.kinds, lane: rData264}, output);
     output.append('</td><td class=\'scb_s_facs_samples_table_td scb_s_experiment_setup_table_border\'>', (rData264.kind == 'existing') ? '<button class="scb_f_facs_sample_remove" facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' lane_id=\'' + soy.$$escapeHtml(rData264.lane.id) + '\'' + ((rData264.is_sample_enabled) ? '' : 'disabled="disabled"') + '>&#215;</button>' : '<button class="scb_f_facs_sample_remove" disabled="disabled">&#215;</button>', '</td></tr>');
   }
@@ -106,28 +106,28 @@ scb_facs.display_facs_progress = function(opt_data, opt_sb) {
 scb_facs.display_lysate_types = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   if (soy.$$getMapKeys(opt_data.kinds).length == 1) {
-    var kList340 = soy.$$getMapKeys(opt_data.kinds);
-    var kListLen340 = kList340.length;
-    for (var kIndex340 = 0; kIndex340 < kListLen340; kIndex340++) {
-      var kData340 = kList340[kIndex340];
-      output.append('<span class="scb_f_facs_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" value="', soy.$$escapeHtml(kData340), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '">', soy.$$escapeHtml(opt_data.kinds[kData340].name), '</span>');
+    var kList346 = soy.$$getMapKeys(opt_data.kinds);
+    var kListLen346 = kList346.length;
+    for (var kIndex346 = 0; kIndex346 < kListLen346; kIndex346++) {
+      var kData346 = kList346[kIndex346];
+      output.append('<span class="scb_f_facs_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" value="', soy.$$escapeHtml(kData346), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '">', soy.$$escapeHtml(opt_data.kinds[kData346].name), '</span>');
     }
   } else {
     output.append('<select class="scb_f_facs_select_lysate_type" cell_treatment_id=\'', soy.$$escapeHtml(opt_data.cell_treatment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' assignment_id="', soy.$$escapeHtml(opt_data.assignment.id), '" experiment_id="', soy.$$escapeHtml(opt_data.experiment.id), '" lane_kind="', soy.$$escapeHtml(opt_data.lane.kind), '" lane_id="', (opt_data.lane.kind == 'existing') ? soy.$$escapeHtml(opt_data.lane.lane.id) : '', '"', (opt_data.lane.is_sample_enabled) ? '' : 'disabled="disabled"', '>');
     if (opt_data.lane.kind == 'existing') {
-      var kList384 = soy.$$getMapKeys(opt_data.kinds);
-      var kListLen384 = kList384.length;
-      for (var kIndex384 = 0; kIndex384 < kListLen384; kIndex384++) {
-        var kData384 = kList384[kIndex384];
-        output.append('<option value=\'', soy.$$escapeHtml(kData384), '\'', (opt_data.lane.lane.kind == kData384) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData384].name), '</option>');
+      var kList390 = soy.$$getMapKeys(opt_data.kinds);
+      var kListLen390 = kList390.length;
+      for (var kIndex390 = 0; kIndex390 < kListLen390; kIndex390++) {
+        var kData390 = kList390[kIndex390];
+        output.append('<option value=\'', soy.$$escapeHtml(kData390), '\'', (opt_data.lane.lane.kind == kData390) ? 'selected="selected"' : '', '>', soy.$$escapeHtml(opt_data.kinds[kData390].name), '</option>');
       }
     } else {
       output.append((soy.$$getMapKeys(opt_data.kinds).length != 1) ? '<option selected="selected" disabled="disabled" value=\'\'>Pick Lysate Type</option>' : '');
-      var kList399 = soy.$$getMapKeys(opt_data.kinds);
-      var kListLen399 = kList399.length;
-      for (var kIndex399 = 0; kIndex399 < kListLen399; kIndex399++) {
-        var kData399 = kList399[kIndex399];
-        output.append('<option value=\'', soy.$$escapeHtml(kData399), '\'>', soy.$$escapeHtml(opt_data.kinds[kData399].name), '</option>');
+      var kList405 = soy.$$getMapKeys(opt_data.kinds);
+      var kListLen405 = kList405.length;
+      for (var kIndex405 = 0; kIndex405 < kListLen405; kIndex405++) {
+        var kData405 = kList405[kIndex405];
+        output.append('<option value=\'', soy.$$escapeHtml(kData405), '\'>', soy.$$escapeHtml(opt_data.kinds[kData405].name), '</option>');
       }
     }
     output.append('</select>');
@@ -145,11 +145,11 @@ scb_facs.analyze = function(opt_data, opt_sb) {
     scb_facs.display_facs_progress({step: 2}, output);
   }
   output.append('<div class=\'scb_s_facs_samples_area\'><div class=\'scb_s_facs_samples_heading\'>Samples</div><div class=\'', (opt_data.facs.samples_finished) ? 'scb_s_facs_choose_samples_order ' : 'scb_s_facs_choose_samples_order_border', '\'><ol class=\'scb_s_facs_choose_samples_order_list\'>');
-  var rList423 = opt_data.rows;
-  var rListLen423 = rList423.length;
-  for (var rIndex423 = 0; rIndex423 < rListLen423; rIndex423++) {
-    var rData423 = rList423[rIndex423];
-    output.append((rData423.is_valid) ? '<li facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id="' + soy.$$escapeHtml(opt_data.assignment.id) + '" experiment_id="' + soy.$$escapeHtml(opt_data.experiment.id) + '" facs_lane_id=\'' + soy.$$escapeHtml(rData423.lane.id) + '\'' + ((opt_data.facs.lane_selected == rData423.lane.id) ? 'class=\'scb_s_facs_sample_selected\'' : '') + '>&nbsp;&nbsp;' + soy.$$escapeHtml(rData423.display_text) + ' - ' + soy.$$escapeHtml(rData423.lane.kinds[rData423.lane.kind].name) + '</li>' : '');
+  var rList429 = opt_data.rows;
+  var rListLen429 = rList429.length;
+  for (var rIndex429 = 0; rIndex429 < rListLen429; rIndex429++) {
+    var rData429 = rList429[rIndex429];
+    output.append((rData429.is_valid) ? '<li facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id="' + soy.$$escapeHtml(opt_data.assignment.id) + '" experiment_id="' + soy.$$escapeHtml(opt_data.experiment.id) + '" facs_lane_id=\'' + soy.$$escapeHtml(rData429.lane.id) + '\'' + ((opt_data.facs.lane_selected == rData429.lane.id) ? 'class=\'scb_s_facs_sample_selected\'' : '') + '>&nbsp;&nbsp;' + soy.$$escapeHtml(rData429.display_text) + ' - ' + soy.$$escapeHtml(rData429.lane.kinds[rData429.lane.kind].name) + '</li>' : '');
   }
   output.append('</ol></div>', (opt_data.facs.samples_finished) ? '' : '<button class=\'' + ((opt_data.rows_valid > 9) ? 'scb_f_facs_run_samples' : 'scb_f_facs_run_samples_short') + '  scb_s_navigation_button\' facs_id=\'' + soy.$$escapeHtml(opt_data.facs.id) + '\' assignment_id="' + soy.$$escapeHtml(opt_data.assignment.id) + '" experiment_id="' + soy.$$escapeHtml(opt_data.experiment.id) + '">RUN SAMPLES</button>', '</div><div class=\'scb_s_facs_samples_graph_area\'><div class=\'scb_s_western_blot_gel_tabs\'><span class=\'scb_s_western_blot_gel_active scb_s_western_blot_gel_tab\'><div class=\'scb_s_facs_gel_tab_selected\'>PI</div></span></div>');
   scb_facs.display_graph({assignment: opt_data.assignment, experiment: opt_data.experiment, facs: opt_data.facs, facs_line_id: opt_data.facs.lane_selected, lane: opt_data.facs.selected_lane}, output);
@@ -167,11 +167,11 @@ scb_facs.display_graph = function(opt_data, opt_sb) {
       if (opt_data.lane.canvas_metadata_analysis.ranges) {
         if (opt_data.lane.canvas_metadata_analysis.ranges.length > 0) {
           output.append('<table class=\'scb_s_facs_tools_analyze_data\'><thead><tr><td></td><td>PI Fluorescence</td><td>% Cells</td><td></td></tr></thead><tbody>');
-          var rangeList503 = opt_data.lane.canvas_metadata_analysis.ranges;
-          var rangeListLen503 = rangeList503.length;
-          for (var rangeIndex503 = 0; rangeIndex503 < rangeListLen503; rangeIndex503++) {
-            var rangeData503 = rangeList503[rangeIndex503];
-            output.append('<tr><td><div style=\'background-color:', soy.$$escapeHtml(rangeData503.color), '; width:12px; height:12px\'></div></td><td>', soy.$$escapeHtml(rangeData503.from), ' - ', soy.$$escapeHtml(rangeData503.to), '</td><td>', soy.$$escapeHtml(rangeData503.percentage), '</td><td><img class=\'scb_f_facs_analyze_remove_point\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' facs_lane_id=\'', soy.$$escapeHtml(opt_data.lane.id), '\' from=\'', soy.$$escapeHtml(rangeData503.from), '\' to=\'', soy.$$escapeHtml(rangeData503.to), '\' alt="Delete" title="Delete" src="images/setup/scb_remove.png"></td></tr>');
+          var rangeList509 = opt_data.lane.canvas_metadata_analysis.ranges;
+          var rangeListLen509 = rangeList509.length;
+          for (var rangeIndex509 = 0; rangeIndex509 < rangeListLen509; rangeIndex509++) {
+            var rangeData509 = rangeList509[rangeIndex509];
+            output.append('<tr><td><div style=\'background-color:', soy.$$escapeHtml(rangeData509.color), '; width:12px; height:12px\'></div></td><td>', soy.$$escapeHtml(rangeData509.from), ' - ', soy.$$escapeHtml(rangeData509.to), '</td><td>', soy.$$escapeHtml(rangeData509.percentage), '</td><td><img class=\'scb_f_facs_analyze_remove_point\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' facs_lane_id=\'', soy.$$escapeHtml(opt_data.lane.id), '\' from=\'', soy.$$escapeHtml(rangeData509.from), '\' to=\'', soy.$$escapeHtml(rangeData509.to), '\' alt="Delete" title="Delete" src="images/setup/scb_remove.png"></td></tr>');
           }
           output.append('</tbody></table><span class=\'scb_s_facs_apply\'><input type="checkbox" assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' facs_id=\'', soy.$$escapeHtml(opt_data.facs.id), '\' facs_lane_id=\'', soy.$$escapeHtml(opt_data.lane.id), '\' class=\'scb_f_facs_apply_to_all\'', (opt_data.facs.apply_dna_analysis_to_all) ? 'checked=\'checked\'' : '', '> Apply to all</span>');
         }

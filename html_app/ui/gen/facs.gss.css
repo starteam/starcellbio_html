@@ -384,9 +384,6 @@ input[type=radio]:disabled {
   width: 100%;
   border-collapse: collapse;
 }
-.facs_locked {
-  opacity: .5;
-}
 .scb_s_facs_samples_area {
   margin-top: 28px;
   height: 358px;
