@@ -294,7 +294,7 @@ def get_courses(request, **kwargs):
 		all =[]
 		for a in Assignment.objects.all():
 			dictionary = ast.literal_eval(a.data)
-			if(a.assignmentID == 'decusability' or a.assignmentID == 'assignment_706_2014'):
+			if(a.assignmentID == 'decusability' ):
 				all.append(dictionary)
 		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
 	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
