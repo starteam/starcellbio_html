@@ -522,7 +522,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 						
 						$('.scb_s_login_form > div').text('Sign Up');
 						$('.scb_s_login_dialog').addClass('scb_s_signup_dialog');
-						$('.iframe').css('height', '482px'); 
+						$('.iframe').css('height', '490px'); 
 					});
 				});
 				iframe.find('a:contains("Password")').click(function(){

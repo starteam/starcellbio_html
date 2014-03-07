@@ -35,7 +35,7 @@
     background: #f4f6f8;
     border-radius: 5px;
     padding: 10px;
-    height: 482px;
+    height: 490px;
     width: 398px;
     border-bottom-right-radius: 9px;
 	border-bottom-left-radius: 9px;
@@ -93,7 +93,7 @@
 
 
 .scb_s_signup_dialog {
-    height: 535px !important;
+    height: 543px !important;
     z-index: 99;
     position: absolute;
     background: white;
