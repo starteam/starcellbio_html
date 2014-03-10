@@ -80,7 +80,7 @@ scb_western_blot_gel.display_gel = function(opt_data, opt_sb) {
     var rListLen266 = rList266.length;
     for (var rIndex266 = 0; rIndex266 < rListLen266; rIndex266++) {
       var rData266 = rList266[rIndex266];
-      output.append((rData266.is_marker && opt_data.western_blot.marker_loaded) ? '<img style=\'position:relative;top: -220px;left: ' + ((opt_data.western_blot.rows_state_count == 1) ? '44px' : soy.$$escapeHtml(20 + 22 * rIndex266) + 'px') + '\' class=\'scb_s_western_blot_gel_membrane\' src="' + ((opt_data.western_blot.gel_type == '.10') ? 'images/western_blot/SCB_WB_Markers_Lane_10.png' : (opt_data.western_blot.gel_type == '.12') ? ' images/western_blot/SCB_WB_Markers_Lane_12.png' : (opt_data.western_blot.gel_type == '.15') ? 'images/western_blot/SCB_WB_Markers_Lane_15.png' : '') + '">' : '');
+      output.append((rData266.is_marker && opt_data.western_blot.marker_loaded) ? '<img style=\'position:relative;top: -247px;left: ' + ((opt_data.western_blot.rows_state_count == 1) ? '44px' : soy.$$escapeHtml(20 + 22 * rIndex266) + 'px') + '\' class=\'scb_s_western_blot_gel_membrane\' src="' + ((opt_data.western_blot.gel_type == '.10') ? 'images/western_blot/SCB_WB_Markers_Lane_10.png' : (opt_data.western_blot.gel_type == '.12') ? ' images/western_blot/SCB_WB_Markers_Lane_12.png' : (opt_data.western_blot.gel_type == '.15') ? 'images/western_blot/SCB_WB_Markers_Lane_15.png' : '') + '">' : '');
     }
   }
   output.append('</div><div class=\'scb_s_western_blot_tools\'>');

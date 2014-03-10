@@ -121,6 +121,20 @@ scb.ui.HomepageView = function scb_ui_HomepageView(gstate) {
 		}));
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(),gstate.workarea,false);
         document.title = "Home - StarCellBio";
+            $('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+			});
+        $(window).resize(function(){
+
+			$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+			});
+
+		});
 	}
 
 }

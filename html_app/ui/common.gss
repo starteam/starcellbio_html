@@ -15,9 +15,6 @@ body {
 
 div#main {
 	position: relative;
-	width:100px;
-	left: 20px;
-	right: 20px;
 }
 
 .scb_f_assignments_step_link{

@@ -940,6 +940,19 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
             $('.scb_s_experiment_setup_table_add_samples_dialog').dialog({autoOpen: false})
 
         }
+        $('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+		});
+		$(window).resize(function(){
 
+			$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+			});
+
+		});
 	 };
 };

@@ -1906,5 +1906,19 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});	
+    	$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+		});
+    	$(window).resize(function(){
+
+			$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+			});
+
+		});
     }
 }
