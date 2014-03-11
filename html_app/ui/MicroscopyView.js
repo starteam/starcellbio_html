@@ -665,9 +665,13 @@ function draw_lens(param, addition, state, canvas){
 		var context = canvas.getContext('2d');
 		clear_canvas(context, canvas);
 
-		context.fillStyle="#000000";
-		context.fillRect(0,0, canvas.width, canvas.height);
+// 		context.fillStyle="#000000";
+// 		context.fillRect(0,0, canvas.width, canvas.height);
+// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
+// 		context.putImageData(filter_data, state.xparam, state.yparam );
+		
 		if(state.cache_brightness != state.brightness|| state.cache_blur != state.blur){
+			//save_draw_cache_new(canvas, state);
 			save_and_draw_cache_image(canvas,state);
 		}
 		else
@@ -799,6 +803,12 @@ function draw(state){
 				$('#blurup').prop('disabled', false);
 				$('#blurdown').prop('disabled', false);
 			}
+// 		var canvas = document.getElementById("lens");
+// 		var ctx = canvas.getContext('2d');
+// 		state.blur = state.blur + 4;
+// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
+// 		ctx.putImageData(filter_data, state.xparam, state.yparam );
+		
 		modify_state_blur(4, state, 'up');
 		}
 	});
@@ -816,6 +826,11 @@ function draw(state){
 				$('#blurup').prop('disabled', false);
 				$('#blurdown').prop('disabled', false);
 			}
+// 		var canvas = document.getElementById("lens");
+// 		var ctx = canvas.getContext('2d');
+// 		state.blur = state.blur - 4;
+// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
+// 		ctx.putImageData(filter_data, state.xparam, state.yparam );
 		modify_state_blur(-4, state, 'down');
 		}
 	});
@@ -834,6 +849,11 @@ function draw(state){
 				$('#blurup').prop('disabled', false);
 				$('#blurdown').prop('disabled', false);
 			}
+// 		var canvas = document.getElementById("lens");
+// 		var ctx = canvas.getContext('2d');
+// 		state.blur = state.blur + 1;
+// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
+// 		ctx.putImageData(filter_data, state.xparam, state.yparam );
 		modify_state_blur(1, state, 'up');
 		}
 	});
@@ -852,6 +872,11 @@ function draw(state){
 				$('#blurup').prop('disabled', false);
 				$('#blurdown').prop('disabled', false);
 			}
+// 		var canvas = document.getElementById("lens");
+// 		var ctx = canvas.getContext('2d');
+// 		state.blur = state.blur - 1;
+// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
+// 		ctx.putImageData(filter_data, state.xparam, state.yparam );
 		modify_state_blur(-1, state, 'down');
 		}
 	});
@@ -871,7 +896,6 @@ function full_modify_cache(state){
 	context.fillRect(0,0, canvas.width, canvas.height);
 	save_and_draw_cache_image(canvas, state)
 }
-
 function clear_canvas(ctx, canvas){
  	ctx.save()
 	// Use the identity matrix while clearing the canvas
@@ -921,7 +945,103 @@ function reset_canvas(){
 	return [new_canvas, ctx];	
 }
 
+var Filters = {};
+Filters.getPixels = function(img) { 
 
+  var c = this.getCanvas(img.width, img.height);
+  var ctx = c.getContext('2d');
+  ctx.fillRect(0,0, c.width, c.height);
+
+	ctx.save();
+	ctx.drawImage(img,0,0);
+	return ctx.getImageData(0,0,c.width,c.height);
+
+};
+Filters.getCanvas = function(w,h) {
+  var c = document.createElement('canvas');
+  c.id = 'lens';
+  c.width = w;
+  c.height = h; 
+  //$('.head')[0].appendChild(c);
+  return c;
+};
+Filters.filterImage = function(filter, image, var_args) {
+  var args = [this.getPixels(image)];
+  for (var i=2; i<arguments.length; i++) {
+	args.push(arguments[i]);
+  }
+  return filter.apply(null, args);
+};
+Filters.brightness = function(pixels, adjustment) {
+  var d = pixels.data;
+  for (var i=0; i<d.length; i+=4) {
+	d[i] += adjustment;
+	d[i+1] += adjustment;
+	d[i+2] += adjustment;
+  }
+  return pixels;
+};
+Filters.tmpCanvas = document.createElement('canvas');
+Filters.tmpCtx = Filters.tmpCanvas.getContext('2d');
+Filters.createImageData = function(w,h) {
+  return this.tmpCtx.createImageData(w,h);
+};
+Filters.convolute = function(pixels, weights, opaque) {
+  var side = Math.round(Math.sqrt(weights.length));
+  var halfSide = Math.floor(side/2);
+  var src = pixels.data;
+  var sw = pixels.width;
+  var sh = pixels.height;
+  // pad output by the convolution matrix
+  var w = sw;
+  var h = sh;
+  var output = Filters.createImageData(w, h);
+  var dst = output.data;
+  // go through the destination image pixels
+  var alphaFac = opaque ? 1 : 0;
+  for (var y=0; y<h; y++) {
+	for (var x=0; x<w; x++) {
+	  var sy = y;
+	  var sx = x;
+	  var dstOff = (y*w+x)*4;
+	  // calculate the weighed sum of the source image pixels that
+	  // fall under the convolution matrix
+	  var r=0, g=0, b=0, a=0;
+	  for (var cy=0; cy<side; cy++) {
+		for (var cx=0; cx<side; cx++) {
+		  var scy = sy + cy - halfSide;
+		  var scx = sx + cx - halfSide;
+		  if (scy >= 0 && scy < sh && scx >= 0 && scx < sw) {
+			var srcOff = (scy*sw+scx)*4;
+			var wt = weights[cy*side+cx];
+			r += src[srcOff] * wt;
+			g += src[srcOff+1] * wt;
+			b += src[srcOff+2] * wt;
+			a += src[srcOff+3] * wt;
+		  }
+		}
+	  }
+	  dst[dstOff] = r;
+	  dst[dstOff+1] = g;
+	  dst[dstOff+2] = b;
+	  dst[dstOff+3] = a + alphaFac*(255-a);
+	}
+  }
+  return output;
+};
+function generateFilter(number){
+			var filter = [];
+			var square = number * number;
+			for(var x = 0; x<number; x++){
+				for(var y = 0; y<number; y++){
+					filter.push(1/square);
+				}
+			}
+		
+		console.log(filter.length);
+		return filter;
+		
+	}
 
 //This function will initialize the image and serialize the data of the 
 //original unprocessed image to a string
@@ -983,7 +1103,7 @@ function init(state, isNew, isIF, draw, image_source){
 			if(isNew){
 				initialize_state(state, img2string, img.src);
 				if(!state.disable_blur){
-					var randomblur = Math.round(Math.ceil(Math.random()*16) / 4) * 4;
+					var randomblur = Math.round(Math.ceil(Math.random()*12) / 4) * 4;
 					var randomside = Math.round(Math.ceil(Math.random()*2));
 					if(randomside == 1)
 						isLeft = false;
@@ -1010,108 +1130,12 @@ function init(state, isNew, isIF, draw, image_source){
 				state.cache = img2string;
 			}
 			state.action = 'initialized';
-			//ctx.putImageData(Filters.getPixels(img), state.xparam, state.yparam);
-			var Filters = {};
-			Filters.getPixels = function() { 
-		
-			  var c = this.getCanvas(img.width, img.height);
-			  var ctx = c.getContext('2d');
-			  ctx.fillRect(0,0, c.width, c.height);
 
-				ctx.save();
-				ctx.drawImage(img,0,0);
-				return ctx.getImageData(0,0,c.width,c.height);
-	  
-			};
-			Filters.getCanvas = function(w,h) {
-			  var c = document.createElement('canvas');
-			  c.id = 'lens';
-			  c.width = w;
-			  c.height = h; 
-			  //$('.head')[0].appendChild(c);
-			  return c;
-			};
-			Filters.filterImage = function(filter, image, var_args) {
-			  var args = [this.getPixels()];
-			  for (var i=2; i<arguments.length; i++) {
-				args.push(arguments[i]);
-			  }
-			  return filter.apply(null, args);
-			};
-			Filters.brightness = function(pixels, adjustment) {
-			  var d = pixels.data;
-			  for (var i=0; i<d.length; i+=4) {
-				d[i] += adjustment;
-				d[i+1] += adjustment;
-				d[i+2] += adjustment;
-			  }
-			  return pixels;
-			};
-			Filters.tmpCanvas = document.createElement('canvas');
-			Filters.tmpCtx = Filters.tmpCanvas.getContext('2d');
-			Filters.createImageData = function(w,h) {
-			  return this.tmpCtx.createImageData(w,h);
-			};
-			Filters.convolute = function(pixels, weights, opaque) {
-			  var side = Math.round(Math.sqrt(weights.length));
-			  var halfSide = Math.floor(side/2);
-			  var src = pixels.data;
-			  var sw = pixels.width;
-			  var sh = pixels.height;
-			  // pad output by the convolution matrix
-			  var w = sw;
-			  var h = sh;
-			  var output = Filters.createImageData(w, h);
-			  var dst = output.data;
-			  // go through the destination image pixels
-			  var alphaFac = opaque ? 1 : 0;
-			  for (var y=0; y<h; y++) {
-				for (var x=0; x<w; x++) {
-				  var sy = y;
-				  var sx = x;
-				  var dstOff = (y*w+x)*4;
-				  // calculate the weighed sum of the source image pixels that
-				  // fall under the convolution matrix
-				  var r=0, g=0, b=0, a=0;
-				  for (var cy=0; cy<side; cy++) {
-					for (var cx=0; cx<side; cx++) {
-					  var scy = sy + cy - halfSide;
-					  var scx = sx + cx - halfSide;
-					  if (scy >= 0 && scy < sh && scx >= 0 && scx < sw) {
-						var srcOff = (scy*sw+scx)*4;
-						var wt = weights[cy*side+cx];
-						r += src[srcOff] * wt;
-						g += src[srcOff+1] * wt;
-						b += src[srcOff+2] * wt;
-						a += src[srcOff+3] * wt;
-					  }
-					}
-				  }
-				  dst[dstOff] = r;
-				  dst[dstOff+1] = g;
-				  dst[dstOff+2] = b;
-				  dst[dstOff+3] = a + alphaFac*(255-a);
-				}
-			  }
-			  return output;
-			};
-	
-		function generateFilter(number){
-		var filter = [];
-		var square = number * number;
-		for(var x = 0; x<number; x++){
-			for(var y = 0; y<number; y++){
-				filter.push(1/square);
-			}
-		}
-		
-		console.log(filter.length);
-		return filter;
-		
-	};
-			var grayscale = Filters.filterImage(Filters.convolute, img,generateFilter(1));
-			ctx.putImageData(grayscale, state.xparam, state.yparam );
-			//save_and_draw_cache_image(canvas,state);
+// 			var filter_data = Filters.filterImage(Filters.convolute, img,generateFilter(1));
+// 			ctx.fillStyle="#000000";
+// 			ctx.fillRect(0,0, canvas.width, canvas.height);
+// 			ctx.putImageData(filter_data, state.xparam, state.yparam );
+			save_and_draw_cache_image(canvas,state);
 
 			draw(state);
 
@@ -1127,7 +1151,7 @@ function initialize_state(state, img2string, image_source){
 	state.brightness= 0;
 	state.xparam = -250;
 	state.yparam =-250;
-	state.blur = 0;
+	state.blur = 1;
 	state.action = 'start';
 	state.cache_brightness = 0;
 	state.cache_blur = 0;
@@ -1157,6 +1181,39 @@ function copy_state(current_state, new_state, new_state_source){
 //////////////////ORIGINAL FUNCTIONS/////////////////////////
 
 var caman_lock = false;
+
+
+function save_draw_cache_new(canvas, state){
+	var ctx = canvas.getContext('2d');
+	if(state.disable_blur && state.disable_brightness){
+	}
+	else{
+		caman_lock = true;
+		var elements = reset_cache();
+		var canvas_hidden = elements[0]; 
+		var spy_ctx = elements[1];
+		var spy_img;
+		var my_img = reset_image(state.display);
+		spy_ctx.drawImage(my_img, 0, 0);
+		var filter_data = Filters.filterImage(Filters.convolute, my_img,generateFilter(state.blur));
+		spy_ctx.putImageData(filter_data, 0, 0 );
+		spy_img= Canvas2Image.saveAsPNG(canvas_hidden, true); 
+		state.cache = spy_img.src ;
+		var hidden_canvas = canvas_hidden;
+		hidden_canvas.width= 0;
+		hidden_canvas.height=0;
+		state.cache_brightness = state.brightness;
+		state.cache_blur = state.blur;
+		document.documentElement.style.overflow='scroll';
+		draw_lens('y', 0, state, document.getElementById('lens'));
+// 		var progress_icon = document.createElement('img');
+// 		progress_icon.src = '../../../images/homepage/ajax_loader.gif';
+// 		progress_icon.style.marginLeft = '50%';
+// 		progress_icon.id = 'lens_pending';
+// 		$('.scb_s_microscopy_samples_slide_area').append(progress_icon);
+		caman_lock = false;
+	}
+}
 
 var save_and_draw_cache_image_list = [];
 function save_and_draw_cache_image(canvas, state){
