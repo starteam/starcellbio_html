@@ -335,12 +335,11 @@ body.dragging, body.dragging * {
   padding-bottom: 20px;
 }
 #lens {
-  display: inline-block;
-  border: 2px solid #189689;
-  border-radius: 250px;
-  position: absolute;
-  right: 243px;
-  bottom: 33px;
+  position: relative;
+  left: -50px;
+  top: -50px;
+  margin: 50px;
+  border-radius: 50%;
 }
 .scb_s_list_slides {
   font-size: 11pt;
@@ -1013,6 +1012,17 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   z-index: 1;
   text-align: left;
   font-size: 10pt;
+}
+.scb_s_microscopy_slide_content_lens_outline {
+  margin: 50px;
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 2px solid #189689;
+  position: absolute;
+  right: 183px;
+  bottom: -23px;
 }
 .scb_s_microscopy_instructions_followup_toggle {
   left: 79px;

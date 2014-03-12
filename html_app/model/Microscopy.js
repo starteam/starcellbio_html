@@ -78,6 +78,7 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'merge_enabled', false, null, context);
  	scb.Utils.initialize_accessor_field(self, data, 'scroll', 0, null, context);
  	scb.Utils.initialize_accessor_field(self, data, 'prep_scroll', 0, null, context);
+
     
     var template = context.template;
     
