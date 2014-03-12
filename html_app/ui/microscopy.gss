@@ -1344,9 +1344,10 @@ top: 49px;
  	height: 300px;
  	border-radius: 50%;
  	border: 2px solid #189689;
- 		position: absolute;
+ 	position: absolute;
 	right: 183px;
 	bottom: -23px;
+	overflow:hidden;
 }
 
 .scb_s_microscopy_instructions_followup_toggle{

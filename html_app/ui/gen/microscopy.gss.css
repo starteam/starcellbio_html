@@ -1023,6 +1023,7 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   position: absolute;
   right: 183px;
   bottom: -23px;
+  overflow: hidden;
 }
 .scb_s_microscopy_instructions_followup_toggle {
   left: 79px;

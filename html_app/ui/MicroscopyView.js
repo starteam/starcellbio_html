@@ -165,7 +165,8 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 			disableSlider = true;
 	}
 	else if(state.slide_type == 'IF' && state.microscopy.light_on && !state.microscopy.laser_on){
-		if(state.microscopy_lane.lens_map.brightness >0 ||state.microscopy_lane.lens_map.cache_brightness >0)
+		if(state.microscopy_lane.lens_map.composite_operation == 'lighter')
+// 		if(state.microscopy_lane.lens_map.brightness >0 ||state.microscopy_lane.lens_map.cache_brightness >0)
 			init_wb_mod(state.microscopy_lane.lens_map, '../images/microscopy/white.jpg');
 		else
 			init_wb_mod(state.microscopy_lane.lens_map, '../images/microscopy/black.jpg');
@@ -173,15 +174,23 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	else if(state.slide_type == 'IF' && !state.microscopy.light_on && state.microscopy.laser_on){
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
-				state.microscopy_lane.lens_map.brightness = 0;
-				state.microscopy_lane.lens_map.cache_brightness = 0;
+				state.microscopy_lane.lens_map.color = '#000000';
+				state.microscopy_lane.lens_map.global_alpha1 =1;
+				state.microscopy_lane.lens_map.global_alpha2 =1;
+				state.microscopy_lane.lens_map.composite_operation = '';
+// 				state.microscopy_lane.lens_map.brightness = 0;
+// 				state.microscopy_lane.lens_map.cache_brightness = 0;
 				init(state.microscopy_lane.lens_map, false, true, draw, state.microscopy_lane.lens_map.src );
 			}
 			else{
 				state.microscopy_lane.lens_map.mag = state.slides[0].mag;
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
-				state.microscopy_lane.lens_map.brightness = 0;
-				state.microscopy_lane.lens_map.cache_brightness = 0;
+				state.microscopy_lane.lens_map.color = '#000000';
+				state.microscopy_lane.lens_map.global_alpha1 =1;
+				state.microscopy_lane.lens_map.global_alpha2 =1;
+				state.microscopy_lane.lens_map.composite_operation = '';
+// 				state.microscopy_lane.lens_map.brightness = 0;
+// 				state.microscopy_lane.lens_map.cache_brightness = 0;
 				init(state.microscopy_lane.lens_map, true, true, draw, state.assignment.template.slides[img_sample]);
 			}
 			disableSlider = true;
@@ -190,17 +199,26 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		enableIFSlider = true;
 		$('#brightdown').prop('disabled', true);
 		if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
-				if(state.microscopy_lane.lens_map.brightness <0 || state.microscopy_lane.lens_map.cache_brightness<0){
-					state.microscopy_lane.lens_map.brightness = 0;
-					state.microscopy_lane.lens_map.cache_brightness = 0;
+				if(state.microscopy_lane.lens_map.composite_operation != 'lighter'){
+// 				if(state.microscopy_lane.lens_map.brightness <0 || state.microscopy_lane.lens_map.cache_brightness<0){
+// 					state.microscopy_lane.lens_map.brightness = 0;
+// 					state.microscopy_lane.lens_map.cache_brightness = 0;
+					state.microscopy_lane.lens_map.color = '#000000';
+					state.microscopy_lane.lens_map.global_alpha1 =1;
+					state.microscopy_lane.lens_map.global_alpha2 =1;
+					state.microscopy_lane.lens_map.composite_operation = '';
 				}
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, true, draw, state.microscopy_lane.lens_map.src );
 		}
 		else{
 			state.microscopy_lane.lens_map.mag = state.slides[0].mag;
-			state.microscopy_lane.lens_map.brightness = 0;
-			state.microscopy_lane.lens_map.cache_brightness = 0;
+// 			state.microscopy_lane.lens_map.brightness = 0;
+// 			state.microscopy_lane.lens_map.cache_brightness = 0;
+			state.microscopy_lane.lens_map.color = '#000000';
+			state.microscopy_lane.lens_map.global_alpha1 =1;
+			state.microscopy_lane.lens_map.global_alpha2 =1;
+			state.microscopy_lane.lens_map.composite_operation = '';
 			$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 			init(state.microscopy_lane.lens_map, true, true, draw, state.assignment.template.slides[img_sample]);
 		}
