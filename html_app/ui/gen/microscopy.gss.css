@@ -340,6 +340,7 @@ body.dragging, body.dragging * {
   top: -50px;
   margin: 50px;
   border-radius: 50%;
+  filter: url("#lensfilter");
 }
 .scb_s_list_slides {
   font-size: 11pt;
@@ -1021,9 +1022,8 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   border-radius: 50%;
   border: 2px solid #189689;
   position: absolute;
-  right: 183px;
-  bottom: -23px;
-  overflow: hidden;
+  right: 191px;
+  bottom: -17px;
 }
 .scb_s_microscopy_instructions_followup_toggle {
   left: 79px;

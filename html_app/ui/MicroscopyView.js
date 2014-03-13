@@ -28,7 +28,6 @@ scb.ui.static.MicroscopyView.parse = function (element) {
     return parsed;
 }
 
-
 scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	
 	var model = new scb.components.ModelFactory(state.context.template);
@@ -518,7 +517,6 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
     	parsed.microscopy.light_on = true;
     }
     $('#lens').remove();
-    save_and_draw_cache_image_list = [];
     scb.ui.static.MainFrame.refresh();
 }
 
@@ -639,8 +637,8 @@ function add_sample_lens_brightness(gco, ga1, ga2, color, state){
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		var ctx = canvas.getContext('2d');
 		if(samples_area){
-			outline.appendChild(canvas);
-			samples_area.appendChild(controls);
+			$(outline).append(canvas);
+			$(samples_area).append(controls);
 
 			canvas.width = scb.ui.static.MicroscopyView.LENS;
 			canvas.height = scb.ui.static.MicroscopyView.LENS;
@@ -718,25 +716,14 @@ function draw_lens(param, addition, state, canvas){
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		var context = canvas.getContext('2d');
 		if(samples_area){
-			outline.appendChild(canvas);
-			samples_area.appendChild(controls);
+			$(outline).append(canvas);
+			$(samples_area).append(controls);
 
 			canvas.width = scb.ui.static.MicroscopyView.LENS;
 			canvas.height = scb.ui.static.MicroscopyView.LENS;
 			context.fillStyle='#000000';
 			context.fillRect(0,0, canvas.width, canvas.height);
 		}
-// 		context.fillStyle="#000000";
-// 		context.fillRect(0,0, canvas.width, canvas.height);
-// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
-// 		context.putImageData(filter_data, state.xparam, state.yparam );
-		
-// 		if(state.cache_brightness != state.brightness|| state.cache_blur != state.blur){
-// 			//save_draw_cache_new(canvas, state);
-// 			save_and_draw_cache_image(canvas,state);
-// 		}
-// 		else
-// 			context.drawImage(reset_image(state.cache), state.xparam, state.yparam);
 
 			
 			clear_canvas(context, canvas);
@@ -843,7 +830,6 @@ function draw(state){
 				$('#brightdown').prop('disabled', false);
 
 		}
-		//modify_state_brightness(5, state);
 		
 			state.composite_operation = "";
 			state.color = "";
@@ -946,10 +932,6 @@ function draw(state){
 			}	
 		
 		
-		
-		
-		
-		//modify_state_brightness(-5, state);
 		}
 	});
 	$('#blurup').click(function(){
@@ -966,13 +948,7 @@ function draw(state){
 				$('#blurup').prop('disabled', false);
 				$('#blurdown').prop('disabled', false);
 			}
-// 		var canvas = document.getElementById("lens");
-// 		var ctx = canvas.getContext('2d');
-// 		state.blur = state.blur + 4;
-// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
-// 		ctx.putImageData(filter_data, state.xparam, state.yparam );
-		
-		//modify_state_blur(4, state, 'up');
+
 		modify_state_blur(1, state, 'up');
 		}
 	});
@@ -990,13 +966,7 @@ function draw(state){
 				$('#blurup').prop('disabled', false);
 				$('#blurdown').prop('disabled', false);
 			}
-// 		var canvas = document.getElementById("lens");
-// 		var ctx = canvas.getContext('2d');
-// 		state.blur = state.blur - 4;
-// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
-// 		ctx.putImageData(filter_data, state.xparam, state.yparam );
 		
-		//modify_state_blur(-4, state, 'down');
 		modify_state_blur(-1, state, 'down');
 		}
 	});
@@ -1015,13 +985,7 @@ function draw(state){
 				$('#blurup').prop('disabled', false);
 				$('#blurdown').prop('disabled', false);
 			}
-// 		var canvas = document.getElementById("lens");
-// 		var ctx = canvas.getContext('2d');
-// 		state.blur = state.blur + 1;
-// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
-// 		ctx.putImageData(filter_data, state.xparam, state.yparam );
-		
-		//modify_state_blur(1, state, 'up');
+			
 		modify_state_blur(0.25, state, 'up');
 		}
 	});
@@ -1040,13 +1004,7 @@ function draw(state){
 				$('#blurup').prop('disabled', false);
 				$('#blurdown').prop('disabled', false);
 			}
-// 		var canvas = document.getElementById("lens");
-// 		var ctx = canvas.getContext('2d');
-// 		state.blur = state.blur - 1;
-// 		var filter_data = Filters.filterImage(Filters.convolute, reset_image(state.orig),generateFilter(state.blur));
-// 		ctx.putImageData(filter_data, state.xparam, state.yparam );
 		
-		//modify_state_blur(-1, state, 'down');
 		modify_state_blur(-0.25, state, 'down');
 		}
 	});
@@ -1144,22 +1102,14 @@ function init(state, isNew, isIF, draw, image_source){
 	var outline =  $('body').find('.scb_s_microscopy_slide_content_lens_outline')[0];
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	if(samples_area){
-		outline.appendChild(canvas);
-	
-		samples_area.appendChild(controls);
+					$(outline).append(canvas);
+			$(samples_area).append(controls);
 
 		var ctx = canvas.getContext('2d');
 		canvas.width = scb.ui.static.MicroscopyView.LENS;
 		canvas.height = scb.ui.static.MicroscopyView.LENS;
 		ctx.fillRect(0,0, canvas.width, canvas.height);
 
-// 		var canvas_hidden = document.createElement('canvas');
-// 		canvas_hidden.id = 'spy';
-// 		canvas_hidden.style.visibility='hidden';
-// 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
-// 		document.body.appendChild(canvas_hidden);
-// 		state.action = 'loading image';
-// 		$('.scb_s_microscope_status').text(state.action);
 		if(!state.disable_blur && !state.disable_brightness)
 			caman = Caman("#lens");
 		else
@@ -1223,13 +1173,7 @@ function init(state, isNew, isIF, draw, image_source){
 				state.cache = img2string;
 			}
 			state.action = 'initialized';
-
-// 			var filter_data = Filters.filterImage(Filters.convolute, img,generateFilter(1));
-// 			ctx.fillStyle="#000000";
-// 			ctx.fillRect(0,0, canvas.width, canvas.height);
-// 			ctx.putImageData(filter_data, state.xparam, state.yparam );
 			
-			//clear_canvas();
 			
 			ctx.fillStyle=state.color;
 			ctx.fillRect(0,0, canvas.width, canvas.height);
@@ -1240,9 +1184,6 @@ function init(state, isNew, isIF, draw, image_source){
 			ctx.globalAlpha =state.global_alpha2;
 			ctx.drawImage(reset_image(state.orig),state.xparam,state.yparam+1);
 			canvas.style.webkitFilter="blur("+state.blur+"px)";
-
-
-			//save_and_draw_cache_image(canvas,state);
 
 			draw(state);
 
@@ -1258,7 +1199,7 @@ function initialize_state(state, img2string, image_source){
 	state.brightness= 0;
 	state.xparam = -250;
 	state.yparam =-250;
-	state.blur = 1;
+	state.blur = 0;
 	state.action = 'start';
 	state.cache_brightness = 0;
 	state.cache_blur = 0;
@@ -1289,163 +1230,11 @@ function copy_state(current_state, new_state, new_state_source){
 
 var caman_lock = false;
 
-var save_and_draw_cache_image_list = [];
-function save_and_draw_cache_image(canvas, state){
-	var ctx = canvas.getContext('2d');
-	if(state.disable_blur && state.disable_brightness){
-	}
-	else{
-		caman_lock = true;
-		save_and_draw_cache_image_list.push({ canvas:canvas, state:state });
-		if(save_and_draw_cache_image_list.length != 1)
-		{
-			return;
-		}
-		var elements = reset_cache();
-		var canvas_hidden = elements[0]; 
-		var spy_ctx = elements[1];
-		var spy_img;
-		var my_img = reset_image(state.display);
-		Caman(canvas_hidden, my_img, function () {
-		//PROBLEM FOR LOURDES STARTS HERE
-		//HOUDINI
-			if(!state.disable_brightness){
-			this.brightness(state.brightness);
-			console.log('bright');
-			}
-			if(!state.disable_blur){
-				this.stackBlur(state.blur);
-				if(state.blur >0){
-					this.stackBlur(state.blur);
-					console.log('blur');
-				}
-			}
-			this.render(function(){
-				console.log('before image');
-				state.action ='before image saved';
-				spy_img= Canvas2Image.saveAsPNG(canvas_hidden, true); 
-				if( spy_img.src == 'data:,' ) { 
-					console.error( "SPY IMAGE IS ERROR! " , spy_img ); 
-					debugger;
-				}
-				state.action = 'rendered';
-				console.log('rendered'); 
-				var hidden_canvas = canvas_hidden;
-				hidden_canvas.width= 0;
-				hidden_canvas.height=0;
-				$('#lens_pending').remove();
-			
-				$('.scb_s_microscope_status').text(state.action);
-				state.cache = spy_img.src ;
-				state.cache_brightness = state.brightness;
-				state.cache_blur = state.blur;
-				document.documentElement.style.overflow='scroll';
-				draw_lens('y', 0, state, document.getElementById('lens'));			
-				if(save_and_draw_cache_image_list.length > 1)
-				{
-					console.info( "save_and_draw_cache_image_list.length: "+ save_and_draw_cache_image_list.length, save_and_draw_cache_image_list);
-					var last = save_and_draw_cache_image_list.pop();
-					save_and_draw_cache_image_list = [];
-					save_and_draw_cache_image( last.canvas, last.state);
-				}
-				save_and_draw_cache_image_list = [];
-				caman_lock = false;
-			});
-			console.log('rendering...');
-			state.action = 'rendering';
-			var progress_icon = document.createElement('img');
-			progress_icon.src = '../../../images/homepage/ajax_loader.gif';
-			progress_icon.style.marginLeft = '50%';
-			progress_icon.id = 'lens_pending';
-			$('.scb_s_microscopy_samples_slide_area').append(progress_icon);
-			$('.scb_s_microscope_status').text(state['action']);	
-
-		});
-	
-		spy_ctx.drawImage(my_img, 0, 0);
-	}
-	canvas.width = scb.ui.static.MicroscopyView.LENS;
-	canvas.height = scb.ui.static.MicroscopyView.LENS;
-	ctx.beginPath();
-	ctx.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
-	ctx.clip();	
-
-	ctx.fillStyle="#000000";
-	ctx.fillRect(0,0, canvas.width, canvas.height);
-	ctx.drawImage(reset_image(state.cache), state.xparam, state.yparam);
-
-}
 
 var min_brightness = -100;
 var max_brightness = 100;
 
-function modify_state_brightness(addition, state){
-	if(!state.disable_brightness){
-		caman_lock = true;
-// 		var elements = reset_canvas();
-// 		var canvas = elements[0]; 
-// 		var context = elements[1];
-		//state['brightness'] = state['brightness'] + addition;
-	
-		state.brightness =  state.brightness + addition;
-		if(state.brightness >= max_brightness)
-			state.brightness = max_brightness;
-		else if (state.brightness <=min_brightness)
-			state.brightness = min_brightness;
-		console.log('brightness');
-		console.log(state.brightness);
-		if(!state.disable_blur){
-			console.log('blur');
-			console.log(state.blur);
-		}
-		console.log('addition');
-		console.log(addition);
-		var my_img = reset_image(state.display);
-		Caman(canvas, my_img, function () {
-			this.brightness(state.brightness);
-			if(!state.disable_blur)
-				this.stackBlur(state.blur);
-			this.render(function(){
-				state.action = 'bright';
-
-				console.log('bright');
-			
-				$('.scb_s_microscope_status').text(state.action);
-			
-				$('#lens_pending').remove();
-				caman_lock = false;
-			});
-		
-			console.log('rendering...');
-			state.action = 'rendering';
-			var progress_icon = document.createElement('img');
-			progress_icon.src = '../../../images/homepage/ajax_loader.gif';
-			progress_icon.style.marginLeft = '50%';
-			progress_icon.id = 'lens_pending';
-
-			$('.scb_s_microscopy_samples_slide_area').append(progress_icon);
-			$('.scb_s_microscope_status').text(state.action);
-
-		});
-		context.beginPath();
-		context.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
-		context.clip();	
-		context.drawImage(my_img, state.xparam, state.yparam);
-		caman_lock = false;
-	}
-
-}
-
 function modify_state_blur(addition, state, direction){
-//function modify_state_blur(addition,  direction){
-// 	var elements = reset_canvas();
-// 	var canvas = elements[0]; 
-// 	var context = elements[1];
-// 	console.log('blur');
-// 	console.log(state.blur);
-// 	console.log('addition');
-// 	console.log(addition);
-// 	
 	caman_lock = true;
 	if(state.blur >scb.ui.static.MicroscopyView.MAX_BLUR){
 		state.blur = scb.ui.static.MicroscopyView.MAX_BLUR;
@@ -1457,27 +1246,27 @@ function modify_state_blur(addition, state, direction){
 		isLeft = false;
 		var canvas = document.getElementById('lens');
 		state.blur = state.blur +  Math.abs(addition);
-		canvas.style.webkitFilter="blur("+ state.blur+"px)";		
-		//blur_helper(state, context, canvas, Math.abs(addition));
+		canvas.style.webkitFilter="blur("+ state.blur+"px)";
+		$('#lensfilter feGaussianBlur').attr('stdDeviation', state.blur+'');		
 	}
 	else if (state.blur == 0 && direction =='down'){
 		isLeft = true;
 		var canvas = document.getElementById('lens');
 		state.blur = state.blur +  Math.abs(addition);
 		canvas.style.webkitFilter="blur("+ state.blur+"px)";
-		//blur_helper(state, context, canvas, Math.abs(addition));
+		$('#lensfilter feGaussianBlur').attr('stdDeviation', state.blur+'');
 	}
 	else if(isLeft){
 		var canvas = document.getElementById('lens');
 		state.blur = state.blur +  -addition;
-		canvas.style.webkitFilter="blur("+ state.blur+"px)";		
-		//blur_helper(state,context, canvas, -addition);
+		canvas.style.webkitFilter="blur("+ state.blur+"px)";
+		$('#lensfilter feGaussianBlur').attr('stdDeviation', state.blur+'');		
 	}
 	else {
 		var canvas = document.getElementById('lens');
 		state.blur = state.blur +  addition;
 		canvas.style.webkitFilter="blur("+ state.blur+"px)";
-		//blur_helper(state,context, canvas, addition);
+		$('#lensfilter feGaussianBlur').attr('stdDeviation', state.blur+'');
 	}
 	caman_lock = false;
 }
@@ -1487,177 +1276,10 @@ function reset_image(img2string){
 	image.src = img2string;
 	return image;
 }
-
-function blur_helper(state, context, canvas, addition){
-	if(!state.disable_blur){
-		caman_lock = true;
-		state.display = state.orig;
-		state.blur = state.blur + addition;
-		Caman(canvas, reset_image(state.display), function () {
-			if(!state.disable_brightness){
-				this.brightness(state.brightness);
-			}
-			this.stackBlur(state.blur);
-			this.render(function(){
-				state.action = 'blur';
-				console.log('stackblur');
-				$('.scb_s_microscope_status').text(state.action);
-				$('#lens_pending').remove();
-				caman_lock = false;
-			});
-			console.log('rendering...');
-			state.action = 'rendering';
-			var progress_icon = document.createElement('img');
-			progress_icon.src = '../../../images/homepage/ajax_loader.gif';
-			progress_icon.style.marginLeft = '50%';
-			progress_icon.id = 'lens_pending';
-
-			$('.scb_s_microscopy_samples_slide_area').append(progress_icon);
-		
-			$('.scb_s_microscope_status').text(state.action);
-		});
-		context.fillStyle="#000000";
-		context.fillRect(0,0, canvas.width, canvas.height);
-		context.beginPath();
-		context.arc(scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.LENS/2 , scb.ui.static.MicroscopyView.ARC , 0, Math.PI *2, false);
-		context.clip();	
-		context.drawImage(reset_image(state.orig), state.xparam, state.yparam);
-	}
-}
 ////////////////////
 ////////////////////
 ////////////////////
 ////////////////////
-
-
-function save_draw_cache_new(canvas, state){
-	var ctx = canvas.getContext('2d');
-	if(state.disable_blur && state.disable_brightness){
-	}
-	else{
-		caman_lock = true;
-		var elements = reset_cache();
-		var canvas_hidden = elements[0]; 
-		var spy_ctx = elements[1];
-		var spy_img;
-		var my_img = reset_image(state.display);
-		spy_ctx.drawImage(my_img, 0, 0);
-		var filter_data = Filters.filterImage(Filters.convolute, my_img,generateFilter(state.blur));
-		spy_ctx.putImageData(filter_data, 0, 0 );
-		spy_img= Canvas2Image.saveAsPNG(canvas_hidden, true); 
-		state.cache = spy_img.src ;
-		var hidden_canvas = canvas_hidden;
-		hidden_canvas.width= 0;
-		hidden_canvas.height=0;
-		state.cache_brightness = state.brightness;
-		state.cache_blur = state.blur;
-		document.documentElement.style.overflow='scroll';
-		draw_lens('y', 0, state, document.getElementById('lens'));
-// 		var progress_icon = document.createElement('img');
-// 		progress_icon.src = '../../../images/homepage/ajax_loader.gif';
-// 		progress_icon.style.marginLeft = '50%';
-// 		progress_icon.id = 'lens_pending';
-// 		$('.scb_s_microscopy_samples_slide_area').append(progress_icon);
-		caman_lock = false;
-	}
-}
-
-var Filters = {};
-Filters.getPixels = function(img) { 
-
-  var c = this.getCanvas(img.width, img.height);
-  var ctx = c.getContext('2d');
-  ctx.fillRect(0,0, c.width, c.height);
-
-	ctx.save();
-	ctx.drawImage(img,0,0);
-	return ctx.getImageData(0,0,c.width,c.height);
-
-};
-Filters.getCanvas = function(w,h) {
-  var c = document.createElement('canvas');
-  c.id = 'lens';
-  c.width = w;
-  c.height = h; 
-  //$('.head')[0].appendChild(c);
-  return c;
-};
-Filters.filterImage = function(filter, image, var_args) {
-  var args = [this.getPixels(image)];
-  for (var i=2; i<arguments.length; i++) {
-	args.push(arguments[i]);
-  }
-  return filter.apply(null, args);
-};
-Filters.brightness = function(pixels, adjustment) {
-  var d = pixels.data;
-  for (var i=0; i<d.length; i+=4) {
-	d[i] += adjustment;
-	d[i+1] += adjustment;
-	d[i+2] += adjustment;
-  }
-  return pixels;
-};
-Filters.tmpCanvas = document.createElement('canvas');
-Filters.tmpCtx = Filters.tmpCanvas.getContext('2d');
-Filters.createImageData = function(w,h) {
-  return this.tmpCtx.createImageData(w,h);
-};
-Filters.convolute = function(pixels, weights, opaque) {
-  var side = Math.round(Math.sqrt(weights.length));
-  var halfSide = Math.floor(side/2);
-  var src = pixels.data;
-  var sw = pixels.width;
-  var sh = pixels.height;
-  // pad output by the convolution matrix
-  var w = sw;
-  var h = sh;
-  var output = Filters.createImageData(w, h);
-  var dst = output.data;
-  // go through the destination image pixels
-  var alphaFac = opaque ? 1 : 0;
-  for (var y=0; y<h; y++) {
-	for (var x=0; x<w; x++) {
-	  var sy = y;
-	  var sx = x;
-	  var dstOff = (y*w+x)*4;
-	  // calculate the weighed sum of the source image pixels that
-	  // fall under the convolution matrix
-	  var r=0, g=0, b=0, a=0;
-	  for (var cy=0; cy<side; cy++) {
-		for (var cx=0; cx<side; cx++) {
-		  var scy = sy + cy - halfSide;
-		  var scx = sx + cx - halfSide;
-		  if (scy >= 0 && scy < sh && scx >= 0 && scx < sw) {
-			var srcOff = (scy*sw+scx)*4;
-			var wt = weights[cy*side+cx];
-			r += src[srcOff] * wt;
-			g += src[srcOff+1] * wt;
-			b += src[srcOff+2] * wt;
-			a += src[srcOff+3] * wt;
-		  }
-		}
-	  }
-	  dst[dstOff] = r;
-	  dst[dstOff+1] = g;
-	  dst[dstOff+2] = b;
-	  dst[dstOff+3] = a + alphaFac*(255-a);
-	}
-  }
-  return output;
-};
-
-
-
-
-
-
-
-
-/////////////////////////////////////
-/////////////////////////////////////
-/////////////////////////////////////
-
 scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show = function (show) {
     var jqDiv = $('.scb_s_microscopy_instructions_followup');
     scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state = show;
@@ -1730,12 +1352,6 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_microscopy_add_microscopy', function (e, ui) {
         scb.ui.static.MicroscopyView.scb_s_microscopy_add_microscopy(this);
     });
-//    scb.utils.off_on(workarea, 'click', '.scb_f_save_button', function (e, ui) {
-//    var parsed = scb.ui.static.MicroscopyView.parse(this);
-//        	parsed.experiment.last_scroll=document.body.scrollTop;
-//        draw_lens('x', 0,parsed.microscopy.selected_lane.lens_map, document.getElementsByTagName("canvas")[0]);
-//    });
-    
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_laser', function (e) {
     	
         var parsed = scb.ui.static.MicroscopyView.parse(this);
@@ -1995,9 +1611,8 @@ function init_wb(image_source){
 	var outline =  $('body').find('.scb_s_microscopy_slide_content_lens_outline')[0];
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	if(samples_area){
-		outline.appendChild(canvas);
-	
-		samples_area.appendChild(controls);
+					$(outline).append(canvas);
+			$(samples_area).append(controls);
 		var ctx = canvas.getContext('2d');
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';
@@ -2047,9 +1662,8 @@ function init_wb_mod(state, image_source){
 	var outline =  $('body').find('.scb_s_microscopy_slide_content_lens_outline')[0];
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	if(samples_area){
-		outline.appendChild(canvas);
-	
-		samples_area.appendChild(controls);
+					$(outline).append(canvas);
+			$(samples_area).append(controls);
 		var ctx = canvas.getContext('2d');
 		var canvas_hidden = document.createElement('canvas');
 		canvas_hidden.id = 'spy';

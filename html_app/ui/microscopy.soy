@@ -542,6 +542,12 @@
 		
 	 <div class='scb_s_microscope_status'></div>
 			 </div>
+<svg height="0" xmlns="http://www.w3.org/2000/svg" viewBox='0 0 233 176'>
+  <filter id="lensfilter" x="-5%" y="-5%"  width='110%' height='110%'  >
+  	<feGaussianBlur in="SourceGraphic" stdDeviation="5"/>
+
+  </filter>
+</svg>
 <div class='scb_s_microscopy_slide_content' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 			 microscopy_id='{$microscopy.id}'
 			{if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>									
