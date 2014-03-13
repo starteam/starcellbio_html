@@ -1,0 +1,10 @@
+<svg version="1.1" height="0" xmlns="http://www.w3.org/2000/svg">
+    <filter id="lensfilter">
+      <feGaussianBlur stdDeviation="5"/>
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="1"/>
+        <feFuncG type="linear" slope="1"/>
+        <feFuncB type="linear" slope="1"/>
+      </feComponentTransfer>
+    </filter>
+</svg>

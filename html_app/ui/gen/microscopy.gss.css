@@ -271,7 +271,7 @@
   vertical-align: top;
   width: 568px;
   height: 400px;
-  padding-top: 156px;
+  padding-top: 137px;
   margin-left: 8px;
 }
 .scb_s_microscopy_tools {
@@ -336,11 +336,8 @@ body.dragging, body.dragging * {
 }
 #lens {
   position: relative;
-  left: -50px;
-  top: -50px;
-  margin: 50px;
-  border-radius: 50%;
-  filter: url("#lensfilter");
+  filter: url("../../../images/filters.svg#lensfilter");
+  -webkit-filter: url("../../../images/filters.svg#lensfilter");
 }
 .scb_s_list_slides {
   font-size: 11pt;
@@ -1024,6 +1021,8 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   position: absolute;
   right: 191px;
   bottom: -17px;
+  overflow: hidden;
+  background: black;
 }
 .scb_s_microscopy_instructions_followup_toggle {
   left: 79px;
