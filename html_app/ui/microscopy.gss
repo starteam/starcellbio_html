@@ -443,8 +443,7 @@ body.dragging, body.dragging * {
 
 #lens{
 	position: relative;
-	filter: url("../../../images/filters.svg#lensfilter");
-	-webkit-filter:  url("../../../images/filters.svg#lensfilter");
+
 }
 
 

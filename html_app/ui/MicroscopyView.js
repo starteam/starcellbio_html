@@ -626,38 +626,6 @@ you pass a callback function to the method so that it calls the draw method imme
 
 
 */
-
-function add_sample_lens_brightness(gco, ga1, ga2, color, state){
-		$('#lens').remove();
-		var canvas = document.createElement('canvas');
-		var controls = document.getElementById('scb_s_microscopy_lens_controls');
-	
-		canvas.id = 'lens';
-		var outline =  $('body').find('.scb_s_microscopy_slide_content_lens_outline')[0];
-		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
-		var ctx = canvas.getContext('2d');
-		if(samples_area){
-			$(outline).append(canvas);
-			$(samples_area).append(controls);
-
-			canvas.width = scb.ui.static.MicroscopyView.LENS;
-			canvas.height = scb.ui.static.MicroscopyView.LENS;
-			ctx.fillStyle='#000000';
-			ctx.fillRect(0,0, canvas.width, canvas.height);
-		}
-		
-		clear_canvas(ctx, canvas);
-		ctx.fillStyle=color;
-		ctx.fillRect(state.xparam,state.yparam, reset_image(state.orig).width, reset_image(state.orig).height);
- 		ctx.save();
- 		
- 		ctx.globalAlpha =ga1;
-		ctx.drawImage(reset_image(state.orig),state.xparam,state.yparam);
-		ctx.globalCompositeOperation =gco;
-		ctx.globalAlpha =ga2;
-		ctx.drawImage(reset_image(state.orig),state.xparam,state.yparam);
-		canvas.style.webkitFilter="blur("+state.blur+"px)";
-	}
 	
 
 
@@ -712,10 +680,10 @@ function draw_lens(param, addition, state, canvas){
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 		$('#lens').css('top', state.yparam+'px');
 		$('#lens').css('left', state.xparam+'px');
-		if(samples_area){
-			$(outline).append(img);
-			$(samples_area).append(controls);
-		}
+// 		if(samples_area){
+// 			$('#svg', outline).append(img);
+// 			$(samples_area).append(controls);
+// 		}
 
 	}
 	else{
@@ -1093,7 +1061,7 @@ function init(state, isNew, isIF, draw, image_source){
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	if(samples_area){
 		img.src = image_source;
-		$(outline).append(img);
+		$('#svg',outline).append(img);
 		$(samples_area).append(controls);
 		img.onload= function (){
 			if(Math.ceil(img.width/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1 || Math.ceil(img.height/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1){	
@@ -1103,6 +1071,7 @@ function init(state, isNew, isIF, draw, image_source){
 			}
 			img.style.top =  0+'px';
 			img.style.left = 0+'px';
+			$(img).attr('filter', "url(#lensfilter)");
 			if(isNew){
 				initialize_state(state, img.src);
 				if(!state.disable_blur){
@@ -1554,7 +1523,8 @@ function init_wb(image_source){
 	var outline =  $('body').find('.scb_s_microscopy_slide_content_lens_outline')[0];
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	if(samples_area){
-		$(outline).append(img);
+		$('#svg',outline).append(img);
+		$(img).attr('filter', "url(#lensfilter)");
 		$(samples_area).append(controls);
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content_lens_outline')[0];
 		img.src = image_source;
@@ -1584,7 +1554,8 @@ function init_wb_mod(state, image_source){
 	var outline =  $('body').find('.scb_s_microscopy_slide_content_lens_outline')[0];
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	if(samples_area){
-		$(outline).append(img);
+		$('#svg',outline).append(img);
+		$(img).attr('filter', "url(#lensfilter)");
 		$(samples_area).append(controls);
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content_lens_outline')[0];
 		img.src = image_source;

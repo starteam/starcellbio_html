@@ -461,8 +461,8 @@
 </div>
 
 	<div class='scb_s_microscopy_samples_slide_area'>
-	<embed id="sv" src="images/filters.svg" width=0 height=0>
-</embed>
+	
+
         <div class='scb_s_western_blot_gel_tabs'>
                     {if $microscopy.samples_finished}
         			{foreach $r in $rows}
@@ -552,7 +552,19 @@
 			
 			
 			
-			<div class = 'scb_s_microscopy_slide_content_lens_outline'></div>
+			<div class = 'scb_s_microscopy_slide_content_lens_outline'>
+<svg id = 'svg' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="400px" height="400px" viewBox="0 0 400 400">
+    <filter id="lensfilter" width= '100%' height='100%' >
+      <feGaussianBlur in="SourceGraphic"  stdDeviation="5"/>
+      <feComponentTransfer >
+        <feFuncR type="linear" slope="1"/>
+        <feFuncG type="linear" slope="1"/>
+        <feFuncB type="linear" slope="1"/>
+      </feComponentTransfer>
+    </filter>
+</svg>
+			</div>
 			
 			
 			

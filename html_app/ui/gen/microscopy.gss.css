@@ -336,8 +336,6 @@ body.dragging, body.dragging * {
 }
 #lens {
   position: relative;
-  filter: url("../../../images/filters.svg#lensfilter");
-  -webkit-filter: url("../../../images/filters.svg#lensfilter");
 }
 .scb_s_list_slides {
   font-size: 11pt;
