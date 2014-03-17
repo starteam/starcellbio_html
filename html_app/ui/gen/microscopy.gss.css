@@ -271,7 +271,7 @@
   vertical-align: top;
   width: 568px;
   height: 400px;
-  padding-top: 137px;
+  padding-top: 156px;
   margin-left: 8px;
 }
 .scb_s_microscopy_tools {
@@ -334,8 +334,10 @@ body.dragging, body.dragging * {
   padding: 5px;
   padding-bottom: 20px;
 }
-#lens {
+#svg {
   position: relative;
+  width: 500px;
+  height: 500px;
 }
 .scb_s_list_slides {
   font-size: 11pt;
