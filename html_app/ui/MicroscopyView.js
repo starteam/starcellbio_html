@@ -1374,6 +1374,7 @@ function init_wb(image_source){
 		$(samples_area).append(controls);
 		$('#svg image').attr('width', '400px');
 		$('#svg image').attr('height', '400px');
+		$('#svg').css('top', '-50px');
 		$('#svg image').attr('xlink:href', image_source);
 
 	}

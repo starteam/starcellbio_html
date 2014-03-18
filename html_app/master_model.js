@@ -3782,6 +3782,51 @@ var __microscopy_test = {
             time_unit: {
                 kind: 'minutes'
             },
+            primary_anti_body: {
+            	order: ['cdk2', 'cyclin', 'cyclinE', 'pgk1'],
+                'cdk2': {
+                    name: 'rabbit anti-cdk2',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 33, intensity: 0},
+                        {weight: 34, intensity: 0},
+                        {weight: 35, intensity: 0}
+                    ],
+                    gel_name: 'cdk2'
+                },
+                'cyclin': {
+                    name: 'mouse anti-cyclin B',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 58, intensity: 0},
+                    ],
+                    gel_name: 'cyclin B'
+                },
+                'cyclinE': {
+                    name: 'mouse anti-cyclin E',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 48, intensity: 0},
+                    ],
+                    gel_name: 'cyclin E'
+                },
+                'pgk1': {
+                    name: 'rabbit anti-pgk1',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 45, intensity: 0},
+                    ],
+                    gel_name: 'pgk1'
+                }
+            },//
+            secondary_anti_body: {
+                'm': {
+                    name: 'rabbit anti-mouse'
+                },
+                'r': {
+                    name: 'goat anti-rabbit'
+                }
+            },//
             lysate_kinds: {
                 'whole': {
                     name: 'Whole Cell'
@@ -7714,8 +7759,7 @@ var __assignment_706_2015 = {
                 
 		}
 		}
-		}
-    ;
+		};
 
 
 
