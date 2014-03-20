@@ -3,8 +3,7 @@ body {
 }
 div#main {
   position: relative;
-  left: 20px;
-  right: 20px;
+  width: inherit;
 }
 .scb_f_assignments_step_link {
   width: 202px !important;
