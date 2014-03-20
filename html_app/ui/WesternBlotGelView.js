@@ -354,6 +354,30 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_right_western_blot = fun
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
+scb.ui.static.WesternBlotGelView.scb_f_western_blot_note_close_button= function (element) {
+		var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	    var note = $(element).attr('note');
+    	note = '.' +note;	
+		$(note).slideUp('400', function(){
+			parsed.western_blot.measure_show_state  = $('.scb_s_western_blot_tools_measure_followup').is(":visible");
+			parsed.western_blot.samples_show_state  = $('.scb_s_western_blot_tools_samples_followup').is(":visible");
+			scb.ui.static.MainFrame.refresh();
+		});
+		
+}
+
+scb.ui.static.WesternBlotGelView.scb_f_western_blot_tools_toggle = function (element) {
+	var parsed = scb.ui.static.WesternBlotGelView.parse(element);
+	var note = $(element).attr('note');
+    note = '.' +note;	
+	$(note).slideDown('400', function(){
+		parsed.western_blot.measure_show_state  = $('.scb_s_western_blot_tools_measure_followup').is(":visible");
+		parsed.western_blot.samples_show_state  = $('.scb_s_western_blot_tools_samples_followup').is(":visible");
+		scb.ui.static.MainFrame.refresh();
+	});
+	
+}
+
 
 scb.ui.static.WesternBlotGelView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_wb_anti_body_select_primary', function (e) {
@@ -381,8 +405,33 @@ scb.ui.static.WesternBlotGelView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_s_western_blot_tab_select_many', function (e) {
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many(this, e);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_tools_toggle', function (e) {
+        scb.ui.static.WesternBlotGelView.scb_f_western_blot_tools_toggle(this);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_note_close_button', function (e) {
+    	scb.ui.static.WesternBlotGelView.scb_f_western_blot_note_close_button(this);
+    });
+	scb.utils.off_on(workarea, 'mouseup', document, function(e,ui){
+    	var container = $(".scb_f_controls_note");
+		container.slideUp(); // hide
+    });
+    scb.utils.off_on(workarea, 'click','.scb_f_controls_note', function(e,ui){
+    	e.stopPropagation();
+    });
+    scb.utils.off_on(workarea, 'click','.scb_f_info_icon', function(e,ui){
+    	e.stopPropagation();
+    	var note = $(this).attr('note');
+    	note = '.' +note;
+    	if($(note).is(":visible"))
+    		$(note).slideUp();
+    	else $(note).slideDown();
+    });
 
 }
+
+
+
+
 
 scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
     var self = this;

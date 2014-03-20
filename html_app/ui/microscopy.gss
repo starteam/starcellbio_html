@@ -886,7 +886,7 @@ input[type=radio].scb_s_microscopy_if:checked:before{
 	display:none;
 }
 
-.scb_s_controls_note{
+.scb_f_controls_note{
 	font-size: 9pt;
 }
 .scb_s_micro_arrows{
@@ -1350,7 +1350,7 @@ letter-spacing: 1px;
 font-size: 10pt;
 font-family: 'sourcesanspro-regular';
 cursor: pointer;
-background-image: url('../../images/header/scb_info.png');
+background-image: url('../../images/header/scb_help.png');
 background-repeat: no-repeat;
 
 }
@@ -1491,3 +1491,152 @@ background-image: url('../../../images/microscopy/Left_Arrow_Gray.png');
 #right:disabled{
 background-image: url('../../../images/microscopy/Right_Arrow_Gray.png');
 }
+
+
+
+.scb_f_microscopy_slide_type_followup{
+	display:none;
+	right: 107px;
+	position: absolute;
+	width: 205px;
+	background: #f4f6f8;
+	border-radius: 14px;
+	padding: 4px;
+	border: 4px solid white;
+	bottom: 24px;
+	z-index: 100;
+ 	text-align: left;
+ 	font-size:10pt;
+ 	font-family: 'sourcesanspro-regular';
+
+}
+
+.scb_s_microscopy_slide_type_info{
+	right: 310px;
+	bottom: -1px;
+	position: absolute;
+	background: none;
+	border: none;
+	height: 23px;
+	width: 23px;
+	color: white;
+	letter-spacing: 1px;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	cursor: pointer;
+	background-image: url('../../images/header/scb_info.png');
+	background-repeat: no-repeat;
+	z-index: 6;
+}
+
+
+
+.scb_f_microscopy_conditions_followup{
+	display:none;
+	right: -30px;
+	position: absolute;
+	width: 205px;
+	background: #f4f6f8;
+	border-radius: 14px;
+	padding: 4px;
+	border: 4px solid white;
+	bottom: 24px;
+	z-index: 100;
+ 	text-align: left;
+ 	font-size:10pt;
+ 	font-family: 'sourcesanspro-regular';
+
+}
+
+.scb_s_microscopy_conditions_info{
+	right: 175px;
+	bottom: -1px;
+	position: absolute;
+	background: none;
+	border: none;
+	height: 23px;
+	width: 23px;
+	color: white;
+	letter-spacing: 1px;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	cursor: pointer;
+	background-image: url('../../images/header/scb_info.png');
+	background-repeat: no-repeat;
+	z-index: 6;
+}
+
+
+
+.scb_s_microscopy_tools_samples_followup{
+	left: 105px;
+	bottom: 402px;
+	position: absolute;
+	width: 205px;
+	background: #f4f6f8;
+	border-radius: 14px;
+	padding: 4px;
+	border: 4px solid white;
+	z-index: 4;
+ 	text-align: left;
+ 	font-size:10pt;
+ 	font-family: 'sourcesanspro-regular' !important;
+}
+
+
+.scb_s_microscopy_tools_samples_followup_toggle{
+	bottom: -4px;
+	position: relative;
+	left: 7px;
+	background: none;
+	border: none;
+	height: 23px;
+	width: 23px;
+	color: white;
+	letter-spacing: 1px;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	cursor: pointer;
+	background-image: url('../../images/header/scb_help.png');
+	background-repeat: no-repeat;
+}
+
+
+
+
+.scb_s_microscopy_tools_navigation_followup{
+	left: -14px;
+	bottom: 351px;
+	position: absolute;
+	width: 205px;
+	background: #f4f6f8;
+	border-radius: 14px;
+	padding: 4px;
+	border: 4px solid white;
+	z-index: 4;
+ 	text-align: left;
+ 	font-size:10pt;
+ 	font-family: 'sourcesanspro-regular' !important;
+}
+
+
+.scb_s_microscopy_tools_navigation_followup_toggle{
+	bottom: 348px;
+	position: relative;
+	right: 110px;
+	background: none;
+	border: none;
+	height: 23px;
+	width: 23px;
+	color: white;
+	letter-spacing: 1px;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	cursor: pointer;
+	background-image: url('../../images/header/scb_help.png');
+	background-repeat: no-repeat;
+}
+
+
+
+

@@ -191,37 +191,49 @@ scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
     scb.ui.static.MainFrame.refresh();
 };
 
-scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
-    var jqDiv = $('.scb_s_facs_tools_instructions_followup');
-    scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
-    if (show)  jqDiv.slideDown(); else  jqDiv.slideUp();
-    
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
-        $('.scb_s_facs_tools_instructions_followup_toggle').blur();
+// scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
+//     var jqDiv = $('.scb_s_facs_tools_instructions_followup');
+//     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
+//     if (show)  jqDiv.slideDown(); else  jqDiv.slideUp();
+//     
+//         $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
+//         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
+// }
+// 
+// //called status because state is already used, maintains open/close state of instructions
+// scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status = function (show) {
+//     var jqDiv = $('.scb_s_facs_tools_instructions_followup');
+//     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
+//     if (show)  jqDiv.show(); else  jqDiv.hide();
+//     
+//     
+//         $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
+//         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
+// }
+
+
+scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
+		var parsed = scb.ui.static.FacsView.parse(element);
+	    var note = $(element).attr('note');
+    	note = '.' +note;	
+		$(note).slideUp('400', function(){
+			parsed.facs.instructions_show_state  = $('.scb_s_facs_tools_instructions_followup').is(":visible");
+			parsed.facs.samples_show_state  = $('.scb_s_facs_tools_samples_followup').is(":visible");
+			scb.ui.static.MainFrame.refresh();
+		});
+		
 }
 
-//called status because state is already used, maintains open/close state of instructions
-scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status = function (show) {
-    var jqDiv = $('.scb_s_facs_tools_instructions_followup');
-    scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
-    if (show)  jqDiv.show(); else  jqDiv.hide();
-    
-    
-        $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
-        $('.scb_s_facs_tools_instructions_followup_toggle').blur();
-}
-
-
-scb.ui.static.FacsView.scb_f_note_close_button= function (element) {
-	    scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = false;
-	    var jqDiv = $('.scb_s_facs_tools_instructions_followup');
-
-	    jqDiv.slideUp();
-
-}
-
-scb.ui.static.FacsView.scb_s_facs_tools_instructions_followup_toggle = function (element) {
-    scb.ui.static.FacsView.scb_s_facs_tools_instructions_show($('.scb_s_facs_tools_instructions_followup').is(':hidden'));
+scb.ui.static.FacsView.scb_f_facs_tools_toggle = function (element) {
+	var parsed = scb.ui.static.FacsView.parse(element);
+	var note = $(element).attr('note');
+    note = '.' +note;	
+	$(note).slideDown('400', function(){
+		parsed.facs.instructions_show_state  = $('.scb_s_facs_tools_instructions_followup').is(":visible");
+		parsed.facs.samples_show_state  = $('.scb_s_facs_tools_samples_followup').is(":visible");
+		scb.ui.static.MainFrame.refresh();
+	});
+	
 }
 
 scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
@@ -290,9 +302,6 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
-
-
-
 scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
 	parsed.experiment.last_scroll=document.body.scrollTop;
@@ -346,42 +355,30 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
     });
-    scb.utils.off_on(workarea, 'click', '.scb_f_note_close_button', function (e) {
-    	scb.ui.static.FacsView.scb_f_note_close_button(this);
-    });
-    
+   
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples_short', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
     });
-    
-    
-   scb.utils.off_on(workarea, 'click', '.scb_f_facs_remove', function (e) {
+	scb.utils.off_on(workarea, 'click', '.scb_f_facs_remove', function (e) {
         scb.ui.static.FacsView.scb_f_facs_remove(this);
     });
-
     scb.utils.off_on(workarea, 'click', '.scb_s_facs_choose_samples_order_list>li', function (e) {
         scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select(this, e);
     });
     scb.utils.off_on(workarea, 'blur', '.scb_s_facs_selected', function (e) {
-
     	$('.scb_s_facs_selected').text($('.scb_s_facs_selected').attr('value'));
         scb.ui.static.FacsView.scb_s_facs_selected(this);
-    });
-    
+    });    
     scb.utils.off_on(workarea, 'keydown', '.scb_s_facs_selected', function (e) {
     	if ($('.scb_s_facs_selected').text().length<= 10) {
-
     	}
     	else{    		 
     		$('.scb_s_facs_selected').text();
     		e.preventDefault();
     		 this.textContent= this.textContent.substring(0, this.textContent.length-1)
-    		 return false;
-    		 
-    	}
-	
-    });
-    
+    		 return false;    		 
+    	}	
+    });    
 	scb.utils.off_on(workarea, 'click', '.scb_s_facs_left_facs', function (e) {
         scb.ui.static.FacsView.scb_s_facs_left_facs(this);
     });
@@ -394,19 +391,33 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_tools_start_analysis', function (e) {
         scb.ui.static.FacsView.scb_f_facs_tools_start_analysis(this, e);
     });
-
-    scb.utils.off_on(workarea, 'click', '.scb_s_facs_tools_instructions_followup_toggle', function (e) {
-        scb.ui.static.FacsView.scb_s_facs_tools_instructions_followup_toggle(this);
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_tools_toggle', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_tools_toggle(this);
     });
-
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_note_close_button', function (e) {
+    	scb.ui.static.FacsView.scb_f_facs_note_close_button(this);
+    });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_analyze_remove_point', function (e) {
         scb.ui.static.FacsView.scb_f_facs_analyze_remove_point(this);
     });
-
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_apply_to_all', function (e) {
         scb.ui.static.FacsView.scb_f_facs_apply_to_all(this);
     });
-
+	scb.utils.off_on(workarea, 'mouseup', document, function(e,ui){
+    	var container = $(".scb_f_controls_note");
+		container.slideUp(); // hide
+    });
+    scb.utils.off_on(workarea, 'click','.scb_f_controls_note', function(e,ui){
+    	e.stopPropagation();
+    });
+    scb.utils.off_on(workarea, 'click','.scb_f_info_icon', function(e,ui){
+    	e.stopPropagation();
+    	var note = $(this).attr('note');
+    	note = '.' +note;
+    	if($(note).is(":visible"))
+    		$(note).slideUp();
+    	else $(note).slideDown();
+    });
 }
 
 scb.ui.static.FacsView.reevaluate_metadata = function (state) {
@@ -695,6 +706,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             kinds: template.facs_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
+
+        
         if (kind == 'sample_prep'){
         	$('.scb_s_facs_samples_table')[0].scrollTop = scroll_num;
         }
@@ -704,27 +717,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 		state.experiment.last_technique = 'FLOW CYTOMETRY';
 		state.experiment.last_id = state.facs.id;
 		state.experiment.last_param = 'facs_id';
-        $('.scb_f_facs_sample_active', $('.scb_s_facs_samples_table')).each(function (e) {
-        		var element = $('input[type="radio"][checked="checked"]', $(this).parent().parent());
-        	if($(this).attr('checked'))
-        		$(element).css('opacity', '1');
-        		
-        	else{
-        		$(element).css('opacity', '0.5');
-        		$('span', $(element)).css('opacity', '0.5');
-        	}
-    	});
-        
-       $('.scb_f_facs_sample_active', $('.scb_s_facs_samples_table')).each(function (e) {
-        		var element = $('.scb_f_facs_select_lysate_type', $(this).parent().parent());
-        	if($(this).attr('checked'))
-        		$(element).css('opacity', '1');
-        		
-        	else{
-        		$(element).css('opacity', '0.5');
-        	}
-    	});
-        
+
+
 
         document.title = "FACS - StarCellBio";
 		
@@ -757,23 +751,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             $('.scb_s_facs_samples_graph_area').css('opacity', '.25');
         }
 
-        if (scb.utils.isDefined(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state)) {
-            if (!scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state) {
-                $('.scb_s_facs_tools_instructions_followup').hide();
-                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status(false);
-            } else {
-                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
-            }
-        }
-        if (state.facs.selected_lane && state.facs.selected_lane.canvas_metadata_analysis.points.length > 0) {
-        	if (!scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state) {
-                $('.scb_s_facs_tools_instructions_followup').hide();
-                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status(false);
-            } else {
-                scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status(scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state);
-            }
-        }
 		
+
 		_.each($(".scb_s_experiment_step_button"), function (e) {
 			if(!$(e).hasClass('scb_s_experiment_step_visited')) 
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');

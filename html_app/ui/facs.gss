@@ -632,6 +632,30 @@ input[type=radio]:disabled{
 	
 }
 
+
+.scb_f_facs_note_close_button, .scb_f_western_blot_note_close_button, .scb_f_microscopy_note_close_button {
+
+	
+	padding-top: 0px;
+	float:right;
+	-webkit-appearance: none;
+	font-family:'sourcesanspro-semibold';
+	outline:none;
+	height: 26px;
+	width: 26px;
+	cursor:pointer;
+	border: none;
+	border-radius: 12px;
+	font-size: 14pt;
+	color: transparent;
+	background: transparent;
+	background-image: url('../../images/header/scb_close_button.png');
+	padding-right: 4px;
+	padding-left: 5px;
+	
+}
+
+
 .scb_s_facs_apply{
 	position: absolute;
 	top: 320px;
@@ -687,12 +711,64 @@ input[type=radio]:disabled{
 	background-repeat: no-repeat;
 }
 
+.scb_s_facs_tools_samples_followup_toggle{
+	bottom: 11px;
+	position: relative;
+	left: 84px;
+	background: none;
+	border: none;
+	height: 23px;
+	width: 23px;
+	color: white;
+	letter-spacing: 1px;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	cursor: pointer;
+	background-image: url('../../images/header/scb_help.png');
+	background-repeat: no-repeat;
+}
+
+
+
+.scb_f_facs_dna_followup{
+	display:none;
+	right: -90px;
+	position: absolute;
+	width: 205px;
+	background: #f4f6f8;
+	border-radius: 14px;
+	padding: 4px;
+	border: 4px solid white;
+	bottom: 22px;
+	z-index: 100;
+ 	text-align: left;
+ 	font-size:10pt;
+ 	font-family: 'sourcesanspro-regular';
+
+}
+
+.scb_s_facs_dna_info{
+	right: 113px;
+	bottom: -3px;
+	position: absolute;
+	background: none;
+	border: none;
+	height: 23px;
+	width: 23px;
+	color: white;
+	letter-spacing: 1px;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	cursor: pointer;
+	background-image: url('../../images/header/scb_info.png');
+	background-repeat: no-repeat;
+	z-index: 6;
+}
 
 
 
 
 .scb_s_facs_tools_instructions_followup{
-	display:none;
 	left: 536px;
 	position: absolute;
 	width: 205px;
@@ -705,4 +781,100 @@ input[type=radio]:disabled{
  	text-align: left;
  	font-size:10pt;
 }
+
+.scb_s_facs_tools_samples_followup{
+	left: 105px;
+	bottom: 405px;
+	position: absolute;
+	width: 205px;
+	background: #f4f6f8;
+	border-radius: 14px;
+	padding: 4px;
+	border: 4px solid white;
+	z-index: 1;
+ 	text-align: left;
+ 	font-size:10pt;
+}
+
+.scb_f_facs_cell_followup{
+	display:none;
+	right: 144px;
+	position: absolute;
+	width: 205px;
+	background: #f4f6f8;
+	border-radius: 14px;
+	padding: 4px;
+	border: 4px solid white;
+	bottom: 22px;
+	z-index: 100;
+ 	text-align: left;
+ 	font-size:10pt;
+ 	font-family: 'sourcesanspro-regular';
+
+}
+
+.scb_s_facs_cell_info{
+	right: 349px;
+	bottom: -3px;
+	position: absolute;
+	background: none;
+	border: none;
+	height: 23px;
+	width: 23px;
+	color: white;
+	letter-spacing: 1px;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	cursor: pointer;
+	background-image: url('../../images/header/scb_info.png');
+	background-repeat: no-repeat;
+	z-index: 6;
+}
+
+
+.scb_f_facs_histogram_followup{
+	display:none;
+	right: -4px;
+	position: absolute;
+	width: 205px;
+	background: #f4f6f8;
+	border-radius: 14px;
+	padding: 4px;
+	border: 4px solid white;
+	bottom: 22px;
+	z-index: 100;
+ 	text-align: left;
+ 	font-size:10pt;
+ 	font-family: 'sourcesanspro-regular';
+
+}
+
+.scb_s_facs_histogram_info{
+	right: 200px;
+	bottom: 2px;
+	position: absolute;
+	background: none;
+	border: none;
+	height: 23px;
+	width: 23px;
+	color: white;
+	letter-spacing: 1px;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	cursor: pointer;
+	background-image: url('../../images/header/scb_info.png');
+	background-repeat: no-repeat;
+	z-index: 6;
+}
+
+.scb_s_hidden_note{
+display:none;
+}
+
+
+
+
+
+
+
 
