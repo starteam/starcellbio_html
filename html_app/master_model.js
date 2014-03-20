@@ -413,25 +413,9 @@ var __assigment_tufts = {
                     {kind: 'actions', title: 'Actions'}//
                 ],//
                 actions: [],//
-                //new_row: {
-                //    title: 'New Row',
-                //    cell_line: 'wt',
-                //    treatment_list: {list: [
-                //        {drug_list: {list: [
-                //            {drug_id: '1', concentration_id: '0'}
-                //        ]}
-                //        }
-                //    ]}
-                //}
+
             },
-//            western_blot: {format: "%CELL_LINE%, %TREATMENT% (%CONCENTRATION%)",
-//                keys: {
-//                    '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
-//                    '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
-//                    '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
-//                    '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']}
-//                }
-//            },
+
             western_blot: {},
             add_multiple_dialog: {
                 'wt': {
@@ -1607,7 +1591,6 @@ var __usability_test = {
                     title: "Actions"
                 }
             ], actions: [
-                //{kind:"add_protocol", title:"Add Treatment Protocol"}
             ],
                 new_row: {
                     title: 'New row',
@@ -3782,6 +3765,51 @@ var __microscopy_test = {
             time_unit: {
                 kind: 'minutes'
             },
+            primary_anti_body: {
+            	order: ['cdk2', 'cyclin', 'cyclinE', 'pgk1'],
+                'cdk2': {
+                    name: 'rabbit anti-cdk2',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 33, intensity: 0},
+                        {weight: 34, intensity: 0},
+                        {weight: 35, intensity: 0}
+                    ],
+                    gel_name: 'cdk2'
+                },
+                'cyclin': {
+                    name: 'mouse anti-cyclin B',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 58, intensity: 0},
+                    ],
+                    gel_name: 'cyclin B'
+                },
+                'cyclinE': {
+                    name: 'mouse anti-cyclin E',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 48, intensity: 0},
+                    ],
+                    gel_name: 'cyclin E'
+                },
+                'pgk1': {
+                    name: 'rabbit anti-pgk1',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 45, intensity: 0},
+                    ],
+                    gel_name: 'pgk1'
+                }
+            },//
+            secondary_anti_body: {
+                'm': {
+                    name: 'rabbit anti-mouse'
+                },
+                'r': {
+                    name: 'goat anti-rabbit'
+                }
+            },//
             lysate_kinds: {
                 'whole': {
                     name: 'Whole Cell'
@@ -4476,10 +4504,6 @@ var __assignment_706_2014 = {
                         {kind: 'treatments',
                             children: [
                                 {kind: 'drug', title: 'Treatment', editable: true}
-//                                 ,
-//                                 {kind: 'concentration', title: 'Treatment Concentration/Dose', editable: false},
-//                         		{kind: "start", title: "Treatment Start Time", editable: false},
-//                         		{kind: "collection", title: "Collection Timepoints", editable: false}
                             ]
                         },
                         {kind: 'actions', title: 'Actions'}

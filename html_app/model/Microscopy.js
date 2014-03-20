@@ -79,6 +79,7 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
  	scb.Utils.initialize_accessor_field(self, data, 'scroll', 0, null, context);
 <<<<<<< HEAD
  	scb.Utils.initialize_accessor_field(self, data, 'prep_scroll', 0, null, context);
+
     
 =======
     scb.Utils.initialize_accessor_field(self, data, 'samples_show_state', false, null, context);

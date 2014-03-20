@@ -807,7 +807,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         }
         if (state.view == 'western_blot_gel') {
-
+			if(parsed.western_blot.last_gel && parsed.western_blot.gel_list.list.length == 1)
+                parsed.western_blot.last_gel = parsed.western_blot.gel_list.list[0].id;
             if (!parsed.western_blot) {
                 state.onhashchange = false;
                 state.view = 'select_technique';
@@ -827,6 +828,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                     parsed.western_blot.last_gel = gel.id;
                     gel_id = gel.id;
                 }
+                
                 state.western_blot_gel_id = gel_id;
                 state.onhashchange = false;
                 self.show(state);
