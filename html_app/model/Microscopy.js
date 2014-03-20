@@ -77,15 +77,10 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'green_enabled', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'merge_enabled', false, null, context);
  	scb.Utils.initialize_accessor_field(self, data, 'scroll', 0, null, context);
-<<<<<<< HEAD
  	scb.Utils.initialize_accessor_field(self, data, 'prep_scroll', 0, null, context);
-
-    
-=======
     scb.Utils.initialize_accessor_field(self, data, 'samples_show_state', false, null, context);
         scb.Utils.initialize_accessor_field(self, data, 'navigation_show_state', false, null, context);
 scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, context);
->>>>>>> feature/help_icons
     var template = context.template;
     
     self.disable_blur = template.ui.microscopy.disable_blur;
