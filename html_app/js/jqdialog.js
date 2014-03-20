@@ -190,9 +190,9 @@
 			//1042 is the width of the StarCellBio page
 			object.css({
 				top: ( (($(window).height() / 2) - ( object.height() / 2 ) )) + ($(document).scrollTop()) + 'px',
-				left: ( ((1042 / 2) - ( object.width() / 2 ) )) + ($(document).scrollLeft()) + 'px'
+				//left: ( ((1042 / 2) - ( object.width() / 2 ) )) + ($(document).scrollLeft()) + 'px'
 				//top: ( (($(window).height() / 2) - ( object.height() / 2 ) )) + ($(document).scrollTop()) + 'px',
-				//left: ( (($(window).width() / 2) - ( object.width() / 2 ) )) + ($(document).scrollLeft()) + 'px'			
+				left: ( (($(window).width() / 2) - ( object.width() / 2 ) )) + ($(document).scrollLeft()) + 'px'			
 			});
 		},
 		maintainPosition: function(object) {
