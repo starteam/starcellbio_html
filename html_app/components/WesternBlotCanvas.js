@@ -272,7 +272,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
                 g.stroke();
 
             }
-            g.fillText("kDa", lane_width * (LANE_OFFSET_0), 22);
+            g.fillText("kDa", lane_width * (LANE_OFFSET_0), 15);
 //		for(var lane = 0; lane < lanes; lane++) {
 //			g.fillText("Lane " + (lane + 1), lane_width * (lane + LANE_OFFSET_1A ) - g.lineWidth / 2, 15);
 //		}
@@ -286,7 +286,12 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
     self.weight_to_position = function(weight) {
         var h = self.h;
         var height = self.height;
-        var position = h + 26 / (weight + 10) * (height - h);
+        if(state.gel.parent.parent.gel_type == '.10')
+	        var position = h + 26 / (weight + 10) * (height - h);
+	    else if( state.gel.parent.parent.gel_type == '.12')
+	    	var position = 930*Math.pow(weight,-0.582);
+		else if (state.gel.parent.parent.gel_type == '.15')
+			var position = 1385.1*Math.pow(weight,-0.765);
         return position;
     }
 
@@ -295,7 +300,12 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         var height = self.height;
         if( position != h )
         {
-            var weight = 26 * (height-h)/(position-h) - 10;
+        	if(state.gel.parent.parent.gel_type == '.10')
+            	var weight = 26 * (height-h)/(position-h) - 10;
+            else if( state.gel.parent.parent.gel_type == '.12')
+                var weight = Math.pow(930/position,1/0.582);
+			else if (state.gel.parent.parent.gel_type == '.15')
+				var weight = Math.pow(930/position,1/0.582);
             return weight;
         }
         else

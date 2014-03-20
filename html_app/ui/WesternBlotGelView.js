@@ -514,5 +514,20 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
 			else $(e).removeAttr('title');
     	});
     	$('.scb_s_western_blot_sortable_item').removeClass('scb_s_western_blot_sortable_item');
+    	$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+		});
+
+    	$(window).resize(function(){
+
+			$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+			});
+
+		});
     }
 };

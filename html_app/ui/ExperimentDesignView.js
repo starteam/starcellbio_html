@@ -147,5 +147,20 @@ scb.ui.ExperimentDesignView = function scb_ui_ExperimentDesignView(gstate) {
       if(state.experiment.last_step < scb.ui.static.ExperimentDesignView.TOTAL_STEPS)
 			state.experiment.last_step = 3;
       document.title = state.experiment.name + " - StarCellBio" ;
+      
+        $('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+		});
+      $(window).resize(function(){
+
+			$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+			});
+
+		});
 	}
 }

@@ -722,6 +722,19 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 				$('.markedLi').removeClass('markedLi');
 		});
 		}
+		$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+		});
+		$(window).resize(function(){
 
+			$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+			});
+
+		});
     }
 }

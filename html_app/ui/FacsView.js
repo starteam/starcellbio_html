@@ -771,5 +771,20 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 		
         
 		document.body.scrollTop = state.experiment.last_scroll;
+		
+		$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+			});
+		$(window).resize(function(){
+
+			$('#main').css({
+				position:'absolute',
+				left: ($(window).width() - $('#main').outerWidth())/2,
+				top: ($(window).height() - $('#main').outerHeight())/2
+			});
+
+		});
     }
 }
