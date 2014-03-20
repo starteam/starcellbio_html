@@ -294,6 +294,8 @@ def get_courses(request, **kwargs):
 		all =[]
 		for a in Assignment.objects.all():
 			dictionary = ast.literal_eval(a.data)
+			import pudb
+			pudb.set_trace()
 			if(a.assignmentID == 'decusability' or a.assignmentID == 'microscopy_test'):
 				all.append(dictionary)
 		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
