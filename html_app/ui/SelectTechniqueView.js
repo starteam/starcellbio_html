@@ -67,7 +67,7 @@ scb.ui.static.SelectTechniqueView.disable_techniques = function (state) {
     var template = state.template;
     var workarea = state.workarea;
 
-    var techniques = template.ui.experimental_design.techniques;
+    var techniques = template.ui.select_technique.techniques;
 
     $('.scb_f_select_technique').addClass('scb_s_select_technique_disabled');
     _.each(techniques, function (e) {
@@ -85,7 +85,7 @@ scb.ui.static.SelectTechniqueView.disable_techniques = function (state) {
     $('a','.scb_s_select_technique_disabled').removeAttr('href').css('cursor','default');
 }
 
-//SAIYAAN
+
 scb.ui.static.SelectTechniqueView.scb_s_select_technique_open_western_blot = function(element, event){
 	var parsed = scb.ui.static.SelectTechniqueView.wbparse(element);
 	var blot = $.grep(parsed.experiment.western_blot_list.list, function(e){ return e.id == $(element).attr('western_blot_id'); });

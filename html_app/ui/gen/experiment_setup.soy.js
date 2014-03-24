@@ -43,7 +43,7 @@ scb_experiment_setup.display_details = function(opt_data, opt_sb) {
     var cListLen104 = cList104.length;
     for (var cIndex104 = 0; cIndex104 < cListLen104; cIndex104++) {
       var cData104 = cList104[cIndex104];
-      output.append('<td class=\'scb_s_experiment_setup_table_element ', (cData104.first_row) ? 'scb_s_experiment_setup_table_border' : '', '\' kind=\'', soy.$$escapeHtml(cData104.kind), '\' rowspan="', soy.$$escapeHtml(cData104.rows), '">', (cData104.kind == 'actions') ? (opt_data.kind == 'readwrite') ? ((opt_data.assignment.id == 'assignment_706_2014') ? '' : '<button class=\'scb_f_experiment_setup_duplicate_sample\' cell_treatment_id=\'' + soy.$$escapeHtml(rData94.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'><img alt="Copy" title="Copy" src="images/setup/scb_copy.png"></button>') + '<button class=\'scb_f_experiment_setup_remove_sample\' cell_treatment_id=\'' + soy.$$escapeHtml(rData94.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'><img alt="Delete" title="Delete" src="images/setup/scb_remove.png"></button>' : '' : ((cData104.kind == 'cell_plate') ? '<img src="images/setup/scb_cell_plate.png">' : '') + ((cData104.kind == 'collection' && cData104.title == 'default') ? '' : soy.$$escapeHtml(cData104.title)), '</td>');
+      output.append('<td class=\'scb_s_experiment_setup_table_element ', (cData104.first_row) ? 'scb_s_experiment_setup_table_border' : '', '\' kind=\'', soy.$$escapeHtml(cData104.kind), '\' rowspan="', soy.$$escapeHtml(cData104.rows), '">', (cData104.kind == 'actions') ? (opt_data.kind == 'readwrite') ? ((opt_data.assignment.id == 'assignment_706_2014') ? '' : '<button class=\'scb_f_experiment_setup_duplicate_sample\' cell_treatment_id=\'' + soy.$$escapeHtml(rData94.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'><img alt="Copy" title="Copy" src="images/setup/scb_copy.png"></button>') + '<button class=\'scb_f_experiment_setup_remove_sample\' cell_treatment_id=\'' + soy.$$escapeHtml(rData94.id) + '\' assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\'><img alt="Delete" title="Delete" src="images/setup/scb_remove.png"></button>' : '' : ((cData104.kind == 'cell_plate') ? '<img src="images/setup/scb_cell_plate.png">' : '') + ((cData104.kind == 'collection' && ! cData104.hidden && cData104.title == 'default') ? '' : soy.$$escapeHtml(cData104.title)), '</td>');
     }
     output.append('</tr>');
   }
@@ -62,21 +62,21 @@ scb_experiment_setup.display_details = function(opt_data, opt_sb) {
           output.append((opt_data.kind == 'readwrite') ? '' : '');
         } else {
           output.append((cData155.kind == 'cell_plate') ? '<img src="images/setup/scb_cell_plate.png">' : '');
-          if (cData155.kind == 'drug' && soy.$$getMapKeys(opt_data.t.drugs).length > 1) {
+          if (cData155.kind == 'drug' && ! cData155.hidden && soy.$$getMapKeys(opt_data.t.drugs).length > 1) {
             output.append('<span><span class=\'scb_concentration_edit_new\'>&nbsp;</span>');
             scb_experiment_setup.drug_edit({template: opt_data.t, assignment: opt_data.assignment, experiment: opt_data.experiment, drug_id: rData149.treatment.drug_list.list[0].drug_id, disabled: true}, output);
             output.append('</span>');
-          } else if (cData155.kind == 'concentration' && soy.$$getMapKeys(opt_data.t.concentrations).length > 1) {
+          } else if (cData155.kind == 'concentration' && ! cData155.hidden && soy.$$getMapKeys(opt_data.t.concentrations).length > 1) {
             output.append('<span><span class=\'scb_concentration_edit_new\'>&nbsp;</span>');
             scb_experiment_setup.concentration_edit({template: opt_data.t, assignment: opt_data.assignment, experiment: opt_data.experiment, drug_id: rData149.treatment.drug_list.list[0].drug_id, concentration_id: rData149.treatment.drug_list.list[0].concentration_id, concentrations: opt_data.t.drugs[rData149.treatment.drug_list.list[0].drug_id].concentrations, disabled: true}, output);
             output.append('</span>');
-          } else if (cData155.kind == 'cell_line' && soy.$$getMapKeys(opt_data.t.cell_lines).length > 1) {
+          } else if (cData155.kind == 'cell_line' && ! cData155.hidden && soy.$$getMapKeys(opt_data.t.cell_lines).length > 1) {
             output.append('<span><span class=\'scb_concentration_edit_new\'>&nbsp;</span>');
             scb_experiment_setup.cell_lines_edit({template: opt_data.t, assignment: opt_data.assignment, experiment: opt_data.experiment, cell_line_id: opt_data.t.cell_lines['p+'], disabled: true}, output);
             output.append('</span>');
-          } else if (cData155.kind == 'collection' && soy.$$getMapKeys(opt_data.t.collections).length > 1) {
+          } else if (cData155.kind == 'collection_time' && ! cData155.hidden && soy.$$getMapKeys(opt_data.t.collection_times).length > 1) {
             output.append('<span><span class=\'scb_concentration_edit_new\'>&nbsp;</span>');
-            scb_experiment_setup.collection_edit({template: opt_data.t, assignment: opt_data.assignment, experiment: opt_data.experiment, collection_id: opt_data.t.collections['3 m'], disabled: true}, output);
+            scb_experiment_setup.collection_edit({template: opt_data.t, assignment: opt_data.assignment, experiment: opt_data.experiment, collection_id: opt_data.t.collection_times['3 m'], disabled: true}, output);
             output.append('</span>');
           } else {
             output.append(soy.$$escapeHtml(cData155.title));
@@ -142,11 +142,11 @@ scb_experiment_setup.cell_lines_edit = function(opt_data, opt_sb) {
 scb_experiment_setup.collection_edit = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<select title=\'collection\' size=\'1\' row=\'0\' class=\'scb_f_experiment_setup_collection_edit\' ', (opt_data.disabled) ? 'disabled=\'disabled\'' : '', '><option value=\'\' disabled="disabled">Please select</option>');
-  var tList322 = soy.$$getMapKeys(opt_data.template.collections);
+  var tList322 = soy.$$getMapKeys(opt_data.template.collection_times);
   var tListLen322 = tList322.length;
   for (var tIndex322 = 0; tIndex322 < tListLen322; tIndex322++) {
     var tData322 = tList322[tIndex322];
-    output.append('<option value=\'', soy.$$escapeHtml(tData322), '\' ', (tData322 == opt_data.collection_id) ? 'selected=\'selected\'' : '', '>', soy.$$escapeHtml(opt_data.template.collections[tData322].name), '</option>');
+    output.append('<option value=\'', soy.$$escapeHtml(tData322), '\' ', (tData322 == opt_data.collection_id) ? 'selected=\'selected\'' : '', '>', soy.$$escapeHtml(opt_data.template.collection_times[tData322].name), '</option>');
   }
   output.append('</select>');
   return opt_sb ? '' : output.toString();

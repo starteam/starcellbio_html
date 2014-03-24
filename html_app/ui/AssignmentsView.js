@@ -163,11 +163,6 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_assignments_print_assignment', function (e) {
      	 var pdfwindow = window.open("../../pdf/decusability_assignment.pdf", '_blank', false);
-        $(pdfwindow.document).load(function(){
-                //if (navigator.appName == 'Microsoft Internet Explorer') window.print();                                                                                              
-                //else pdfwindow.print();                                                                                                                                              
-		//alert('loaded');                                                                                                                                                     
-            });
     });
 };
 
@@ -197,7 +192,7 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item').first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
         $('.scb_assignments_header_link_wrapper').css('width' , 
-        	(scb.ui.static.AssignmentsView.HEADER_WIDTH/assignments.selected.template.instructions.length)-scb.ui.static.AssignmentsView.HEADER_OFFSET+ 'px');
+        	(scb.ui.static.AssignmentsView.HEADER_WIDTH/assignments.selected.template.ui.assignment.instructions.length)-scb.ui.static.AssignmentsView.HEADER_OFFSET+ 'px');
        	$('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/scb.ui.static.AssignmentsView.ARROW_DIVISION)-scb.ui.static.AssignmentsView.ARROW_OFFSET+'px');
         
         $('.scb_s_ref_info_link').click(function(){

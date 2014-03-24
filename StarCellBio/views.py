@@ -58,17 +58,18 @@ def get_model(request):
     return response
     
 def create_courses(request, **kwargs):# 
-# 	import pudb
-# 	pudb.set_trace()
+ 	import pudb
+ 	#pudb.set_trace()
 	if(request.method == 'POST'):
 
 		jstr=request.raw_post_data
+		#pudb.set_trace()
 		jsondata = json.loads(jstr)
 		if(jsondata):
 			#make more complex later 
 			for x in jsondata['assignments']['list']:
 				assign_id = x["id"]
-				course_code = x["course"]
+				course_code = x["course_code"]
 				assign_name = x["name"]
 				course_name = x["course_name"]
 				c = Course(code = course_code, course_name = course_name)
@@ -80,6 +81,7 @@ def create_courses(request, **kwargs):#
 		response = HttpResponse("var create_courses_result = {0};".format( ''))
 		response.set_cookie("scb_username", request.user.username)
 		response['Content-Type'] = 'text/javascript'
+		#pudb.set_trace()
 		return response
 		
 def get_courses(request, **kwargs):
@@ -294,7 +296,7 @@ def get_courses(request, **kwargs):
 		all =[]
 		for a in Assignment.objects.all():
 			dictionary = ast.literal_eval(a.data)
-			if(a.assignmentID == 'decusability' or a.assignmentID == 'microscopy_test'):
+			if(a.assignmentID == 'newmodeltest' or a.assignmentID == 'microscopy_test' or a.assignmentID == 'decusability'):
 				all.append(dictionary)
 		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
 	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))

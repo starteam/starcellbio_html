@@ -7738,13 +7738,289 @@ var __decusability = {
             }
         }
     };
+    
+var __new_model_test = {
+		id: 'newmodeltest',
+		course: 'usability',
+		course_name:'December 2013 Usability Testing',
+		course_code: 'newmodeltest',
+		name: 'StarCellBio Usability Test NM',
+		description: 'FACS and Western Blot for temperature sensitive mutants',
+        experiments: {},
+        template: {
+            ui: {
+            	assignment: {
+            		instructions: [
+            			['Goal & Introduction','Here come instructions when we build them']
+            		]
+            	},
+                experimental_design: {
+                },
+                experiment_setup: {
+               		advanced_selection: false,
+				   	selected_on: 'temperatures',
+				   	actions: [
+
+                    ],//
+				   	table: [
+						{kind: "cell_plate", title: " ", editable: false, hidden: true},
+						{kind: "cell_line", title: "Strain", editable: false, hidden: false},
+						{kind: 'treatments',
+							   children: [
+										 {kind: "drug", title: "Treatment", editable: false,hidden: false},
+										 {kind: "concentration", title: "Concentration", editable: false, hidden: true},
+										 {kind: "start_time", title: "Start Time", editable: false, hidden: true},
+										 {kind: "duration", title: "Duration", editable: false, hidden: true}
+									 ]
+						},
+						{kind: "temperature", title: "Temperature", editable: false, hidden: false},
+						{kind: "collection_time", title: "Collection Time", editable: false, hidden: true},
+						{kind: "actions", title: "Actions", editable: false, hidden: true}
+				   	]
+                },
+                select_technique: {
+                    techniques: [ 'wb' , 'facs', 'micro']
+                },
+                add_multiple_dialog: {
+                    'wt': {
+                        title: '<b>Strain:</b> Wild Type',
+                        headings: ['Treatment', 'Temperature', ''],
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'wt',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            }
+
+                        ]
+                    },
+                    'm1': {
+                        title: '<b>Strain:</b> Mutant 1',
+
+                        headings: ['Treatment', 'Temperature', ''],
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm1',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            }
+                        ]
+
+                    },
+                    'm2': {
+                        title: '<b>Strain:</b> Mutant 2',
+
+                        headings: [ 'Treatment', 'Temperature', ''],
+                        rows: [
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "30 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,25',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                    {kind: 'text', text: 'Growth Media'},
+                                    {kind: 'text', text: "37 " + degreeEntity + "C"},
+                                    {kind: 'checkbox', name: 'NOPP1'}
+                                ],
+                                treatment_id: 'media_only,40',
+                                cell_treatments: {
+                                    PP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'},
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ], NOPP1: [
+                                        {cell_line: 'm2',
+                                            treatment_list: {list: [
+                                                {drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '0'}
+                                                ]}, temperature: '40'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            }
+                        ]
+
+                    }
+                }
+            },
+            add_new_row_instructions: 'add new row instructions',
+            cell_lines: {
+                'wt': {
+                    name: 'Wild Type'
+                },
+                'm1': {
+                    name: 'Mutant 1'
+                },
+                'm2': {
+                    name: 'Mutant 2'
+                }
+
+            },
+            concentrations: {
+                '0': {
+                    name: '',
+                    value: 0
+                }
+            },
+             drugs: {
+                'nc': {
+                    name: 'Growth Media',
+                    concentrations: [0]
+                }
+            },
+            experiment_temperatures: {
+                '25': {
+                    name: "30" + degreeEntity + "C"
+                },
+                '40': {
+                    name: "37" + degreeEntity + "C"
+                }
+            },
+			collection_times:{
+				'3 m': {
+						name: ''
+       			}
+			},
+            time_unit: {
+                kind: 'minutes'
+            }
+        }
+    };    
+    
+    
 
 master_model_data = {
     app_title: 'StarCellBio',
     app_description: 'StarCellBio Placeholder',
     assignments: {
         list: [ 
-        __assigment_facs, __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability, __microscopy_test, __assignment_706_2014 //, __assignment_706_2015
+        __new_model_test
         ]
     },
     ui: {}
@@ -7761,11 +8037,35 @@ $(function () {
 	var usability_test = {};
 	var assignment_706 = {};
 	var decusability = {};
+	var new_model_test = {};
 	var assignment_tufts = {};	
 	var microscopy_test ={};
 	var assignment_706_2014 ={};
 	var assignment_706_2015 ={};
 	for (var x = 0; x < get_courses_result.list.length; x++){
+		if(get_courses_result.list[x].id == 'newmodeltest'){
+			new_model_test = get_courses_result.list[x];
+    		new_model_test.template.ui.assignment.instructions = [
+    			['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
+				['Introduction',scb_assignment_specific_decusability.intro()],
+				['Reference Material',scb_assignment_specific_decusability.ref()],
+    			['Question 1', scb_assignment_specific_decusability.question_1()],
+    			['Question 2', scb_assignment_specific_decusability.question_2()]
+    			];
+    		new_model_test.template.experiment_setup = scb_assignment_specific_decusability.experiment_setup();
+
+			new_model_test.template.ui.experiment_setup.actions.push({
+				name: 'ADD SAMPLES',
+				open: 'add_multiple_dialog.setup',
+				css: {
+					width: '800px',
+					height: '700px',
+					left: '100px',
+					top: '000px'
+				}
+			});
+			get_courses_result.list[x] = new_model_test;
+		}
 		if(get_courses_result.list[x].id == 'usability_test'){
 			usability_test = get_courses_result.list[x];
 			usability_test.description = scb_model_microscopy.abstract();
@@ -7896,6 +8196,28 @@ $(function () {
 		}
 	}
 	
+	__new_model_test.template.instructions = [
+		['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
+		['Introduction',scb_assignment_specific_decusability.intro()],
+		['Reference Material',scb_assignment_specific_decusability.ref()],
+		['Question 1', scb_assignment_specific_decusability.question_1()],
+		['Question 2', scb_assignment_specific_decusability.question_2()]
+		];
+	__new_model_test.template.experiment_setup = scb_assignment_specific_decusability.experiment_setup();
+
+	__new_model_test.template.ui.experiment_setup.actions.push({
+		name: 'ADD SAMPLES',
+		open: 'add_multiple_dialog.setup',
+		css: {
+			width: '800px',
+			height: '700px',
+			left: '100px',
+			top: '000px'
+		}
+	});
+
+
+
 	__assignment_706_2014.template.instructions = [
 		['Introduction', scb_assignment_specific_mit706s14.introduction()],
 		['Background Information',scb_assignment_specific_mit706s14.background_information()],
@@ -7913,9 +8235,7 @@ $(function () {
             left: '92px',
             top: '15%'
         }
-    });
-    
-    	
+    });	
 	__assignment_706_2015.template.instructions = [
 		['Introduction', scb_assignment_specific_mit706s14.introduction()],
 		['Background Information',scb_assignment_specific_mit706s14.background_information()],
@@ -7934,8 +8254,6 @@ $(function () {
             top: '000px'
         }
     });
-	
-	
     __usability_test.description = scb_model_usability.abstract();
     __usability_test.template.setup_video_box = scb_model_usability.setup_video_box();
     __usability_test.template.experiment_setup = scb_model_usability.experiment_setup();
@@ -7964,7 +8282,6 @@ $(function () {
             top: '000px'
         }
     });
-    
    __decusability.template.instructions = [
 		['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
 		['Introduction',scb_assignment_specific_decusability.intro()],
@@ -7984,10 +8301,6 @@ $(function () {
 			top: '000px'
 		}
 	});
-
-    
-    
-
     __assigment_tufts.template.ui.experiment_setup.actions.push({
         name: 'ADD SAMPLES',
         open: 'mit706s13.setup',
