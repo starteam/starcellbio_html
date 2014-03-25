@@ -25,11 +25,15 @@ class SignupForm(forms.Form):
 
 
 
-def create_course_records(usr, course_code):
-	if(Course.objects.filter(code = course_code).count()>0):
-		course = Course.objects.get(code = course_code)
-		user_course = UserCourse(course_name=course_code, user=usr, courseID = course)
-		user_course.save()
-		print course_code
+def create_course_records(usr, input):
+	import pudb
+	pudb.set_trace()
+	course_codes = input.split(';')
+	for course_code in course_codes:
+		if(Course.objects.filter(code = course_code).count()>0):
+			course = Course.objects.get(code = course_code)
+			user_course = UserCourse(course_name=course_code, user=usr, courseID = course)
+			user_course.save()
+			print course_code
 
 	# get the data

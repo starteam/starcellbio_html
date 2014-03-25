@@ -94,47 +94,22 @@ def get_courses(request, **kwargs):
 	retval = []
 	token1 = random.randrange(0, 1000000)
 	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
-		usercourse = UserCourse.objects.filter(user=request.user)[0]
-		course = Course.objects.filter(usercourses = usercourse)
-		assignments = course[0].assignments.all()
-		#pudb.set_trace()
-		if(course[0].sassignments.filter(student=request.user).count() == 0 or course[0].sassignments.count() == 0):
-			for a in assignments:
-				original_assignment_data = a.data
-				assignment_data = ast.literal_eval(original_assignment_data)
-				if(a.assignmentName == 'StarCellBio Problem 2' or assignment_data['template']['random_choose']):
-					import hashlib
-					md5 = hashlib.md5()
-					md5.update(str(request.user.email).lower())
-					encoded_email = md5.hexdigest()
-					encoded_number = int(encoded_email, 16)%20
-					order = random_mapping_ps2[encoded_number]
-					order = list(order)
-					#pudb.set_trace()
-					assignment_data['template']['random_order'] = order
-					original_assignment_data = repr(assignment_data)
-					print order
-				if(a.assignmentName == 'StarCellBio Problem 1' or assignment_data['template']['randomize_all']):
-					original_assignment_data = randomize_706_2014_ps1(request, assignment_data)
-				sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = original_assignment_data)
-				sa.save()
-			assignments = course[0].sassignments.filter(student=request.user)
-		else:
+		usercourses = UserCourse.objects.filter(user=request.user)
+		courses = []
+		for usercourse in usercourses:
+			for c in Course.objects.filter(usercourses = usercourse):
+				courses.append(c)
+		assignments=[]
+		#for course in courses:
+		#	assignments.append(course.assignments.all())
+		for course in courses:
+			course_assignments = course.assignments.all()
 			#pudb.set_trace()
-			if(len(course[0].sassignments.filter(student=request.user)) != len(assignments)):
-				list_of_extras = []
-				for a in assignments:
-					list_of_extras.append(a.assignmentID)
-				for a in assignments:
-					for sa in course[0].sassignments.filter(student=request.user):
-						if a.assignmentID == sa.assignmentID:
-							list_of_extras.remove(a.assignmentID)
-				for x in list_of_extras:
-					a = Assignment.objects.filter(assignmentID=x)
-					a = a[0]
+			if(course.sassignments.filter(student=request.user).count() == 0 or course.sassignments.count() == 0):
+				for a in course_assignments:
 					original_assignment_data = a.data
 					assignment_data = ast.literal_eval(original_assignment_data)
-					if(a.assignmentName == 'StarCellBio Problem 2' or assignment_data['template']['random_choose']):
+					if(a.assignmentName == 'StarCellBio Problem 2' ):
 						import hashlib
 						md5 = hashlib.md5()
 						md5.update(str(request.user.email).lower())
@@ -142,15 +117,50 @@ def get_courses(request, **kwargs):
 						encoded_number = int(encoded_email, 16)%20
 						order = random_mapping_ps2[encoded_number]
 						order = list(order)
+						#pudb.set_trace()
 						assignment_data['template']['random_order'] = order
+						original_assignment_data = repr(assignment_data)
 						print order
-					if(a.assignmentName == 'StarCellBio Problem 1' or assignment_data['template']['randomize_all']):
+					if(a.assignmentName == 'StarCellBio Problem 1'):
 						original_assignment_data = randomize_706_2014_ps1(request, assignment_data)
-					sa = StudentAssignment(student = request.user, course = course[0], assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = original_assignment_data)
+					sa = StudentAssignment(student = request.user, course = course, assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = original_assignment_data)
 					sa.save()
-				print 'added assignment'
-			token1 = course[0].sassignments.filter(student=request.user)[0].token
-			assignments = course[0].sassignments.filter(student=request.user)
+				for x in course.sassignments.filter(student=request.user):
+					assignments.append(x)
+			else:
+				#pudb.set_trace()
+				#assignments =[]
+				if(len(course.sassignments.filter(student=request.user)) != len(course_assignments)):
+					list_of_extras = []
+					for a in course_assignments:
+						list_of_extras.append(a.assignmentID)
+					for a in course_assignments:
+						for sa in course.sassignments.filter(student=request.user):
+							if a.assignmentID == sa.assignmentID:
+								list_of_extras.remove(a.assignmentID)
+					for x in list_of_extras:
+						a = Assignment.objects.filter(assignmentID=x)
+						a = a[0]
+						original_assignment_data = a.data
+						assignment_data = ast.literal_eval(original_assignment_data)
+						if(a.assignmentName == 'StarCellBio Problem 2' or assignment_data['template']['random_choose']):
+							import hashlib
+							md5 = hashlib.md5()
+							md5.update(str(request.user.email).lower())
+							encoded_email = md5.hexdigest()
+							encoded_number = int(encoded_email, 16)%20
+							order = random_mapping_ps2[encoded_number]
+							order = list(order)
+							assignment_data['template']['random_order'] = order
+							print order
+						if(a.assignmentName == 'StarCellBio Problem 1' or assignment_data['template']['randomize_all']):
+							original_assignment_data = randomize_706_2014_ps1(request, assignment_data)
+						sa = StudentAssignment(student = request.user, course = course, assignmentID = a.assignmentID, assignmentName= a.assignmentName, token = token1, data = original_assignment_data)
+						sa.save()
+					print 'added assignment'
+				token1 = course.sassignments.filter(student=request.user)[0].token
+				for x in course.sassignments.filter(student=request.user):
+					assignments.append(x)
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
 			alist.append(dictionary)
@@ -177,18 +187,22 @@ def post_state(request, **kwargs):
 	import random
 	token2 = random.randrange(0, 1000000)
 	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
-		usercourse = UserCourse.objects.filter(user=request.user)[0]
-		course = Course.objects.filter(usercourses = usercourse)
-		sassignments = course[0].sassignments.all()
-		retval = {'is_anonymous': False, 'valid_token':False, 'token': token2}
-		for sa in sassignments:
-			for x in jsondata['model']['assignments']['list']:
-				#pudb.set_trace()
-				if(sa.token == jsondata['token'] and sa.assignmentID == x['id']):
-						sa.data = json.loads(json.dumps(x))
-						sa.token = token2
-						sa.save()
-						retval = {'is_anonymous': False, 'valid_token': True, 'token': token2}
+		usercourses = UserCourse.objects.filter(user=request.user)
+		courses = []
+		for usercourse in usercourses:
+			for c in Course.objects.filter(usercourses = usercourse):
+				courses.append(c)
+		for course in courses:
+			sassignments = course.sassignments.all()
+			retval = {'is_anonymous': False, 'valid_token':False, 'token': token2}
+			for sa in sassignments:
+				for x in jsondata['model']['assignments']['list']:
+					#pudb.set_trace()
+					if(sa.token == jsondata['token'] and sa.assignmentID == x['id']):
+							sa.data = json.loads(json.dumps(x))
+							sa.token = token2
+							sa.save()
+							retval = {'is_anonymous': False, 'valid_token': True, 'token': token2}
 	else:
 		retval = {'is_anonymous': True, 'valid_token': False, 'token': token2}
 	response = HttpResponse("var post_state_result = {0};".format(json.dumps(retval)))
