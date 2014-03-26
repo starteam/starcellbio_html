@@ -1045,40 +1045,6 @@ function reset_image(img2string){
 	image.src = img2string;
 	return image;
 }
-////////////////////
-////////////////////
-////////////////////
-////////////////////
-scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show = function (show) {
-    var jqDiv = $('.scb_s_microscopy_instructions_followup');
-    scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state = show;
-    if (show)  jqDiv.slideDown(); else  jqDiv.slideUp();
-    
-        $('.scb_s_microscopy_instructions_followup_toggle').blur();
-}
-
-//called status because state is already used, maintains open/close state of instructions
-scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_status = function (show) {
-    var jqDiv = $('.scb_s_microscopy_instructions_followup');
-    scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state = show;
-    if (show)  jqDiv.show(); else  jqDiv.hide();
-    
-    
-        $('.scb_s_microscopy_instructions_followup_toggle').blur();
-}
-
-
-scb.ui.static.MicroscopyView.scb_f_controls_close_button= function (element) {
-	    scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state = false;
-	    var jqDiv = $('.scb_s_microscopy_instructions_followup');
-
-	    jqDiv.slideUp();
-
-}
-
-scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_followup_toggle = function (element) {
-    scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show($('.scb_s_microscopy_instructions_followup').is(':hidden'));
-}
 
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_note_close_button= function (element) {
@@ -1105,13 +1071,12 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_tools_toggle = function (element) 
 	
 }
 
+////////////////////
+////////////////////
+////////////////////
+////////////////////
+
 scb.ui.static.MicroscopyView.register = function (workarea) {
-    scb.utils.off_on(workarea, 'click', '.scb_s_microscopy_instructions_followup_toggle', function (e) {
-        scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_followup_toggle(this);
-    });
-    scb.utils.off_on(workarea, 'click', '.scb_f_controls_close_button', function (e) {
-    	scb.ui.static.MicroscopyView.scb_f_controls_close_button(this);
-    });
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_select_slide_type', function (e) {
         scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type(this, e);
     });
@@ -1519,15 +1484,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 			
 			$('#brightdown').prop('disabled', true);
 		}
-		
-		if (scb.utils.isDefined(scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state)) {
-            if (!scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state) {
-                $('.scb_s_microscopy_instructions_followup').hide();
-                scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_status(false);
-            } else {
-                scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_status(scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state);
-            }
-        }
+
         if (state.microscopy.samples_finished) {
             //debugger;
             if(!state.microscopy.warning_fired){
@@ -1538,12 +1495,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 				});
 				state.microscopy.warning_fired = true;
 			}
-        	if (!scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state) {
-                $('.scb_s_microscopy_instructions_followup').hide();
-                scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_status(false);
-            } else {
-                scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_status(scb.ui.static.MicroscopyView.scb_s_microscopy_instructions_show_state);
-            }
+
         }
         
         

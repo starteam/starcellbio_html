@@ -673,7 +673,9 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
         }
 
         if (state.western_blot.gel_type == null) {
-            $('.scb_s_western_blot_samples_area').children().not('.scb_s_western_blot_choose_gel_type').css('opacity', '.25');
+            $('.scb_s_western_blot_samples_area').children().not('.scb_s_western_blot_choose_gel_type').not('.scb_s_western_blot_gel_type_info').not('.scb_f_wb_gel_type_followup').css('opacity', '.25');
+            $('.scb_s_western_blot_samples_area button').not('.scb_s_western_blot_gel_type_info').prop('disabled', true);
+            $('.scb_s_western_blot_samples_area button').not('.scb_s_western_blot_gel_type_info').css('cursor', 'default');
             $('.scb_s_western_blot_samples_gel_area').css('opacity', '.25');
             $('canvas', $('.scb_s_western_blot_samples_gel_area')).hide();
         }

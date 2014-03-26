@@ -134,7 +134,7 @@
 			 -->
 						Gel type refers to the percentage of acrylamide that is used to make the gel. 
 						Lower acrylamide concentrations are used to separate large proteins, 
-						while high acrylamide concentrations are used to separate small proteins. 
+						while high acrylamide concentrations are used to separate small proteins. &nbsp;
 						<a href="static/ref_lib/full_library.html#GelPreparation" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
 		
 			 </div>
@@ -298,14 +298,37 @@
         {/if}
     </div>
     <div class='scb_s_western_blot_tools'>
-                    	<button class='scb_f_info_icon scb_s_western_blot_primary_info' note='scb_f_wb_primary_followup'> </button>
+                    
+    
+        {if $western_blot_gel.is_developed}
+        			<button class='scb_f_info_icon scb_s_western_blot_exposure_info' note='scb_f_wb_exposure_followup'> </button>
+					<div class='scb_f_wb_exposure_followup scb_f_controls_note'>
+		<!-- 
+						<button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
+		 -->
+								The exposure slider represents the length of time a piece of film 
+								is exposed on a blot to detect a protein of interest. To increase 
+								the exposure time, move the slider to the right. To decrease the 
+								exposure time, move the slider to the left. &nbsp;
+								<a href="static/ref_lib/full_library.html#Develop" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+		
+					 </div>
+        {call .developed_gel}
+        {param assignment:$assignment/}
+        {param experiment:$experiment /}
+        {param western_blot:$western_blot /}
+        {param western_blot_gel:$western_blot_gel /}
+        {/call}
+        {else}
+
+			<button class='scb_f_info_icon scb_s_western_blot_primary_info' note='scb_f_wb_primary_followup'> </button>
 					<div class='scb_f_wb_primary_followup scb_f_controls_note'>
 		<!-- 
 						<button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
 		 -->
 								A primary antibody is a Y-shaped protein that is designed to bind specifically 
 								to the protein of interest. A primary antibody called "rabbit protein-X" was 
-								raised in a rabbit to specifically detect protein X. 
+								raised in a rabbit to specifically detect protein X. &nbsp;
 								<a href="static/ref_lib/full_library.html#Blot" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
 		
 					 </div>
@@ -318,33 +341,10 @@
 								to the primary antibody. A secondary antibody called "goat anti-rabbit" 
 								was raised in a goat to detect a rabbit's primary antibody. When selecting 
 								a secondary antibody, ensure that the secondary antibody recognizes the species 
-								in which a primary antibody was raised. 
+								in which a primary antibody was raised. &nbsp;
 								<a href="static/ref_lib/full_library.html#Blot" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
 		
 					 </div>
-
-    
-        {if $western_blot_gel.is_developed}
-        			<button class='scb_f_info_icon scb_s_western_blot_exposure_info' note='scb_f_wb_exposure_followup'> </button>
-					<div class='scb_f_wb_exposure_followup scb_f_controls_note'>
-		<!-- 
-						<button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
-		 -->
-								The exposure slider represents the length of time a piece of film 
-								is exposed on a blot to detect a protein of interest. To increase 
-								the exposure time, move the slider to the right. To decrease the 
-								exposure time, move the slider to the left. 
-								<a href="static/ref_lib/full_library.html#Develop" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
-		
-					 </div>
-        {call .developed_gel}
-        {param assignment:$assignment/}
-        {param experiment:$experiment /}
-        {param western_blot:$western_blot /}
-        {param western_blot_gel:$western_blot_gel /}
-        {/call}
-        {else}
-
 
         {call .undeveloped_gel}
         {param t:$t/}

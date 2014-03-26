@@ -85,12 +85,12 @@ background-image:url('../../images/western_blot/scb_gray_right_arrow_inactive.pn
 }
 
 
-.scb_s_assignment_header_img_left:hover{
+.scb_s_assignment_header_img_left:hover:not(.scb_s_assignment_header_img_left_inactive){
 background-image: url('../../images/western_blot/scb_gray_left_arrow_hover.png') !important;
 
 }
 
-.scb_s_assignment_header_img_right:hover{
+.scb_s_assignment_header_img_right:hover:not(.scb_s_assignment_header_img_right_inactive){
 background-image:url('../../images/western_blot/scb_gray_right_arrow_hover.png') !important;
 
 }

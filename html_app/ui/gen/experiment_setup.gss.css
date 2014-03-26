@@ -258,6 +258,10 @@ nav ul li.on {
   right: 3px;
   bottom: 16px;
 }
+.scb_s_experiment_setup_radio_text {
+  position: absolute;
+  top: 2px;
+}
 .scb_s_experiment_setup_table_heading {
   font-family: 'sourcesanspro-semibold';
   font-size: 10pt;

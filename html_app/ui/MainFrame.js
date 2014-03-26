@@ -95,16 +95,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                     }
                     else {
                         // if experiment_id is invalid go to assignment
-                        $('html').css('overflow', 'hidden');
-                        
-    					$('body').prepend(scb_experiment_setup.general_error_overlay());
-
-					
-                        $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	
-                        		$('html').css('overflow', 'visible');
-                        		$('.error_overlay').remove();/* callback function for 'OK' button*/ });
-                        $('.jqDialog_header').remove();
-                        $('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+//                         $('html').css('overflow', 'hidden');
+//     					$('body').prepend(scb_experiment_setup.general_error_overlay());
+//                         $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	
+//                         		$('html').css('overflow', 'visible');
+//                         		$('.error_overlay').remove();/* callback function for 'OK' button*/ });
+//                         $('.jqDialog_header').remove();
+//                         $('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
                         state.onhashchange = false;
                         state.view = 'assignments';
@@ -117,15 +114,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             }
             else {
                 // if assignment_id is invalid go to assignments
-                $('html').css('overflow', 'hidden');
-                
-    				$('body').prepend(scb_experiment_setup.general_error_overlay());
-
-                $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	
-                	$('html').css('overflow', 'visible');
-					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
-            	$('.jqDialog_header').remove();
-            	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+//                 $('html').css('overflow', 'hidden');
+//     				$('body').prepend(scb_experiment_setup.general_error_overlay());
+//                 $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	
+//                 	$('html').css('overflow', 'visible');
+// 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
+//             	$('.jqDialog_header').remove();
+//             	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
                 state.onhashchange = false;
                 state.view = 'assignments';
@@ -493,84 +488,44 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 	//HANDLER FOR LOGIN BUTTON AND IFRAME
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
         scb.ui.static.MainFrame.ensure_auth_context();
-        if (get_courses_result.is_auth) {
-        	
-        	window.location = '/accounts/logout/';
-        }
-        else {
-            $(workarea).append(scb_auth.login({}));
-            scb.utils.off_on(workarea, 'click', '.scb_f_login_close_button', function () {
-                $('.scb_s_login_dialog').detach();
-            });
-            $('.iframe').load(function(){
-				var iframe = document.getElementsByTagName('iframe')[0];
-				var content = (iframe.contentDocument || iframe.contentWindow);
-				content.body.style.fontSize = '90%';
-				content.body.style.fontFamily = 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif';
-			    var inputs = content.getElementsByTagName('button');
- 				$(inputs).css('font-family', 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
-				var fieldset = content.querySelectorAll('fieldset');
-				$(fieldset).children().wrap('<p></p>');
-				var texts = content.querySelectorAll('input');
-				$(texts).attr('placeholder', '');
-				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
-				
-				var iframe = $('.iframe').contents();
-				iframe.find('input[type="checkbox"]').css('height', '12px');
-				iframe.find('a:contains("Member")').click(function(){
-					$('.iframe').load(function(){
-						
-						$('.scb_s_login_form > div').text('Sign Up');
-						$('.scb_s_login_dialog').addClass('scb_s_signup_dialog');
-						$('.iframe').css('height', '490px'); 
-					});
-				});
-				iframe.find('a:contains("Password")').click(function(){
-					$('.iframe').load(function(){
-						
-						$('.scb_s_login_form > div').text('Reset Password');
-					});
-				});
-				
-				iframe.find('a:contains("Back")').click(function(){
-					$('.iframe').load(function(){
-						
-						$('.scb_s_login_form > div').text('Sign In');
-					});
-				});
-				
-				iframe.find(".auth_submit_button").click(function(){
-						   var mask = document.createElement('div');
-						   mask.className='overlay';
-						   $(mask).css({'width': '100%','height': '100%','position': 'fixed', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
-					       $('body').prepend(mask);
-					       var progress_icon = document.createElement('img');
-					       progress_icon.src = '../../../images/homepage/ajax_loader.gif';
-					       progress_icon.style.marginLeft = '50%';
-					       progress_icon.style.marginTop= '50%';
+        if(assignments.selected && !get_courses_result.is_auth){
+				$('html').css('overflow', 'hidden');
+				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
-					       $('.overlay').append(progress_icon);
-							
-						   $('.iframe').hide();
-						   $('.iframe').load(function(){
-						   	  var profile = $('.iframe').contents();
-						   	  if(profile[0].body.textContent.indexOf('confirmed') >0){
-						   	  	  parent.document.location.reload();
-									
-							   	  }
-							   	  
-							   	  else{
-							   	 		 $(mask).remove();
-							   	  	   $('.iframe').show();
-							   	  	   if($('.iframe').contents().find('.login_submit').length >0)
-							   	  	   	$('.iframe').contents().find('#errorMsg').html('Incorrect username or password. Try again');
-							   	  	   
-							   	  }
-						   });
-					});
-			});
+
+				$.jqDialog.confirm("If you sign in to your account, you will lose your current work as a guest. Would you like to continue?",
+					function() {
+						$('html').css('overflow', 'visible');
+						$('.error_overlay').remove();
+						if (get_courses_result.is_auth) {
+			
+							window.location = '/accounts/logout/';
+						}
+						else {
+							add_login_script(workarea);
+						}
+						evt.preventDefault();
+					},// callback function for 'YES' button
+					function() {
+							$('.error_overlay').remove();
+							$('html').css('overflow', 'visible');
+							return;
+					}		// callback function for 'NO' button
+				);
+				$('.jqDialog_header').remove();
+				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				evt.preventDefault();
         }
-        evt.preventDefault();
+        else{
+			if (get_courses_result.is_auth) {
+			
+				window.location = '/accounts/logout/';
+			}
+			else {
+				add_login_script(workarea);
+			}
+			evt.preventDefault();
+		}
     });
 
 
@@ -627,6 +582,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
 
     self.show = function (state) {
+    	scb.ui.static.MainFrame.ensure_auth_context();
+    	context.auth.logged_in = get_courses_result.is_auth; 
         state = state || {
             view: 'homepage'
         }
@@ -1045,4 +1002,79 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             });
         })
     });
+};
+
+function add_login_script(workarea){
+
+				$(workarea).append(scb_auth.login({}));
+				scb.utils.off_on(workarea, 'click', '.scb_f_login_close_button', function () {
+					$('.scb_s_login_dialog').detach();
+				});
+				$('.iframe').load(function(){
+					var iframe = document.getElementsByTagName('iframe')[0];
+					var content = (iframe.contentDocument || iframe.contentWindow);
+					content.body.style.fontSize = '90%';
+					content.body.style.fontFamily = 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif';
+					var inputs = content.getElementsByTagName('button');
+					$(inputs).css('font-family', 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif');
+					var fieldset = content.querySelectorAll('fieldset');
+					$(fieldset).children().wrap('<p></p>');
+					var texts = content.querySelectorAll('input');
+					$(texts).attr('placeholder', '');
+					$(texts).css('font-family', 'Trebuchet MS, sans-serif');
+				
+					var iframe = $('.iframe').contents();
+					iframe.find('input[type="checkbox"]').css('height', '12px');
+					iframe.find('a:contains("Member")').click(function(){
+						$('.iframe').load(function(){
+						
+							$('.scb_s_login_form > div').text('Sign Up');
+							$('.scb_s_login_dialog').addClass('scb_s_signup_dialog');
+							$('.iframe').css('height', '490px'); 
+						});
+					});
+					iframe.find('a:contains("Password")').click(function(){
+						$('.iframe').load(function(){
+						
+							$('.scb_s_login_form > div').text('Reset Password');
+						});
+					});
+				
+					iframe.find('a:contains("Back")').click(function(){
+						$('.iframe').load(function(){
+						
+							$('.scb_s_login_form > div').text('Sign In');
+						});
+					});
+				
+					iframe.find(".auth_submit_button").click(function(){
+							   var mask = document.createElement('div');
+							   mask.className='overlay';
+							   $(mask).css({'width': '100%','height': '100%','position': 'fixed', 'z-index': '993', 'background': 'rgba(125,125,125,0.7)', 'visibility': 'visible'});
+							   $('body').prepend(mask);
+							   var progress_icon = document.createElement('img');
+							   progress_icon.src = '../../../images/homepage/ajax_loader.gif';
+							   progress_icon.style.marginLeft = '50%';
+							   progress_icon.style.marginTop= '50%';
+
+							   $('.overlay').append(progress_icon);
+							
+							   $('.iframe').hide();
+							   $('.iframe').load(function(){
+								  var profile = $('.iframe').contents();
+								  if(profile[0].body.textContent.indexOf('confirmed') >0){
+									  parent.document.location.reload();
+									
+									  }
+								  
+									  else{
+											 $(mask).remove();
+										   $('.iframe').show();
+										   if($('.iframe').contents().find('.login_submit').length >0)
+											$('.iframe').contents().find('#errorMsg').html('Incorrect username or password. Try again');
+									   
+									  }
+							   });
+						});
+				});
 };

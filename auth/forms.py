@@ -27,7 +27,8 @@ class SignupForm(forms.Form):
 
 def create_course_records(usr, input):
 	import pudb
-	pudb.set_trace()
+	#pudb.set_trace()
+	input = input.replace(' ', '')
 	course_codes = input.split(';')
 	for course_code in course_codes:
 		if(Course.objects.filter(code = course_code).count()>0):

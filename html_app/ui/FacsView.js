@@ -749,6 +749,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         }
         else {
             $('.scb_s_facs_samples_graph_area').css('opacity', '.25');
+            $('.scb_s_facs_samples_graph_area button').prop('disabled', true);
         }
 
 		

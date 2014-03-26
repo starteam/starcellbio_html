@@ -276,21 +276,20 @@
 								specifically detect a protein of interest using a colorimetric reaction. 
 								Antibody-labeling Immunofluorescence (IF) uses a series of antibodies, 
 								including a fluorescently-labeled secondary antibody, to specifically 
-								detect the protein(s) of interest. 
+								detect the protein(s) of interest. &nbsp;
 								<a href="static/ref_lib/full_library.html#" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
 		
 					 </div>
         </td>
         <td class='scb_s_microscopy_samples_table_heading m_sample_prep_blank scb_s_experiment_setup_table_border'>Conditions
+<!-- 
         		<button class='scb_f_info_icon scb_s_microscopy_conditions_info' note='scb_f_microscopy_conditions_followup'> </button>
 					<div class='scb_f_microscopy_conditions_followup scb_f_controls_note'>
-		<!-- 
-						<button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
-		 -->
-								TBD
+								TBD &nbsp;
 								<a href="static/ref_lib/full_library.html#" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
 		
 					 </div>
+ -->
         
         </td>
         </thead>
@@ -577,13 +576,27 @@
 		
 	 <div class='scb_s_microscope_status'></div>
 			 </div>
-<div class='scb_s_microscopy_instructions_followup scb_s_controls_note'>
-			<button class='scb_f_controls_close_button' aria-label='Close'><span>&#215;</span></button>
-	
-						Note: Use the arrows keys or the navigation arrows to move around the slide.
-		
-	 <div class='scb_s_microscope_status'></div>
-			 </div>
+			 
+			 
+			 
+
+    		<div class='scb_s_microscopy_tools_navigation_followup {if $microscopy.navigation_show_state}{else}scb_s_hidden_note{/if}' >
+
+				<button class='scb_f_microscopy_note_close_button' aria-label='Close' note='scb_s_microscopy_tools_navigation_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             microscopy_id='{$microscopy.id}'><span>&#215;</span></button>
+							
+							 Click the appropriate the navigation arrows or 
+							 use the arrows on your computer to 
+							 move the microscope lens across the image.
+	 
+			</div>			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 
 <div class='scb_s_microscopy_slide_content' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 			 microscopy_id='{$microscopy.id}'
@@ -612,7 +625,11 @@
 			<div id='scb_s_microscopy_lens_controls'>
 			<div class = 'scb_s_microscopy_lens_controls_section_1'>
 			 		<span class="scb_s_microscopy_title_label">Microscope Controls</span>
+			 		<button class='scb_f_microscopy_tools_toggle scb_s_microscopy_tools_navigation_followup_toggle'  note='scb_s_microscopy_tools_navigation_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+             microscopy_id='{$microscopy.id}'></button>
+<!-- 
     			<button class='scb_s_microscopy_instructions_followup_toggle'> </button>
+ -->
    			 </div>
     
     <div class = 'scb_s_microscopy_lens_controls_section_2'>
@@ -680,7 +697,7 @@
     			<span class='scb_s_microscopy_filter_label'>Filters:</span>
     					<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}' title='Red'  name='IF' type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.red_enabled}checked='checked'{/if}>
-				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' title='Blue' name='IF' type="radio" type="radio" assignment_id='{$assignment.id}'
+				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' title='Blue' name='IF' type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.blue_enabled}checked='checked'{/if}>
 				<input class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' title='Green' name='IF' type="radio" assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.green_enabled}checked='checked'{/if}>
@@ -717,6 +734,7 @@
     
     </div>
 			
+<!-- 
 			<button class='scb_f_microscopy_tools_toggle scb_s_microscopy_tools_navigation_followup_toggle'  note='scb_s_microscopy_tools_navigation_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              microscopy_id='{$microscopy.id}'></button>
     		<div class='scb_s_microscopy_tools_navigation_followup {if $microscopy.navigation_show_state}{else}scb_s_hidden_note{/if}' >
@@ -729,6 +747,7 @@
 							 move the microscope lens across the image.
 	 
 			</div>
+ -->
 
 				
 <!-- 				<button class='scb_f_save_button scb_s_gray_button'>SAVE IMAGE</button> -->

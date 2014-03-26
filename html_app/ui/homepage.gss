@@ -112,11 +112,19 @@
 	margin-right:-15px;
 }
 
-.scb_s_cabinet_icon, .scb_s_pencil_icon{
+.scb_s_cabinet_icon{
 	margin-left: 5px;
 }
  
-.scb_s_cabinet_text, .scb_s_pencil_text {
+.scb_s_cabinet_text{
+	padding-right: 0 !important;
+}
+
+.scb_s_pencil_icon{
+	margin-left: 5px;
+}
+
+.scb_s_pencil_text {
 	margin-right:5px;
 }
 
@@ -176,12 +184,12 @@
 .scb_s_envelope_icon {
     vertical-align: middle;
     position: relative;
-    top:-14px;
+    top:-10px;
 }
 
 .scb_s_envelope_text {
     position: relative;
-    top:-12px;
+    top:-9px;
 }
 
 .scb_s_new_homepage_experiment{

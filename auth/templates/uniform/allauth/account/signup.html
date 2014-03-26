@@ -121,6 +121,7 @@ function setStatus(){
 
 function changeStatus(){
 	var input = document.getElementById('course_code_input').value.toLowerCase();
+	input = input.replace(/ /g,'');
 	input = input.split(';');
 	var code_values = ['starx', '7.02', '7.06', 'bio52', 'usability', '7.06_spring_2014'];
 	for(var x = 0; x < code_values.length; x++){

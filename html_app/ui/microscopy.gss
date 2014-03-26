@@ -1299,22 +1299,7 @@ top: 49px;
 
 
 
-.scb_s_microscopy_instructions_followup{
-	display:none;
-	left: 855px;
-	position: absolute;
-	width: 205px;
-	background: #f4f6f8;
-	border-radius: 14px;
-	padding: 4px;
-	border: 4px solid white;
-	bottom: 387px;
-	z-index: 1;
-	
- text-align: left;
- font-size:10pt;
 
-}
 
 
 .scb_s_microscopy_load_followup{
@@ -1349,23 +1334,7 @@ top: 49px;
 	background:black;
 }
 
-.scb_s_microscopy_instructions_followup_toggle{
-left: 79px;
-bottom: -10px;
-position: relative;
-background: none;
-border: none;
-height: 23px;
-width: 23px;
-color: white;
-letter-spacing: 1px;
-font-size: 10pt;
-font-family: 'sourcesanspro-regular';
-cursor: pointer;
-background-image: url('../../images/header/scb_help.png');
-background-repeat: no-repeat;
 
-}
 
 .scb_s_microscopy_brightness_label{
 position: absolute;
@@ -1524,6 +1493,7 @@ background-image: url('../../../images/microscopy/Right_Arrow_Gray.png');
 }
 
 .scb_s_microscopy_slide_type_info{
+	outline: none;
 	right: 310px;
 	bottom: -1px;
 	position: absolute;
@@ -1561,6 +1531,7 @@ background-image: url('../../../images/microscopy/Right_Arrow_Gray.png');
 }
 
 .scb_s_microscopy_conditions_info{
+	outline: none;
 	right: 175px;
 	bottom: -1px;
 	position: absolute;
@@ -1597,6 +1568,7 @@ background-image: url('../../../images/microscopy/Right_Arrow_Gray.png');
 
 
 .scb_s_microscopy_tools_samples_followup_toggle{
+	outline: none;
 	bottom: -4px;
 	position: relative;
 	left: 7px;
@@ -1613,19 +1585,16 @@ background-image: url('../../../images/microscopy/Right_Arrow_Gray.png');
 	background-repeat: no-repeat;
 }
 
-
-
-
 .scb_s_microscopy_tools_navigation_followup{
-	left: -14px;
-	bottom: 351px;
+	left: 685px;
 	position: absolute;
-	width: 205px;
+	width: 158px;
 	background: #f4f6f8;
 	border-radius: 14px;
 	padding: 4px;
 	border: 4px solid white;
-	z-index: 4;
+	bottom: 394px;
+	z-index: 1;
  	text-align: left;
  	font-size:10pt;
  	font-family: 'sourcesanspro-regular' !important;
@@ -1633,20 +1602,22 @@ background-image: url('../../../images/microscopy/Right_Arrow_Gray.png');
 
 
 .scb_s_microscopy_tools_navigation_followup_toggle{
-	bottom: 348px;
-	position: relative;
-	right: 110px;
-	background: none;
-	border: none;
-	height: 23px;
-	width: 23px;
-	color: white;
-	letter-spacing: 1px;
-	font-size: 10pt;
-	font-family: 'sourcesanspro-regular';
-	cursor: pointer;
-	background-image: url('../../images/header/scb_help.png');
-	background-repeat: no-repeat;
+outline: none;
+left: 79px;
+bottom: -10px;
+position: relative;
+background: none;
+border: none;
+height: 23px;
+width: 23px;
+color: white;
+letter-spacing: 1px;
+font-size: 10pt;
+font-family: 'sourcesanspro-regular';
+cursor: pointer;
+background-image: url('../../images/header/scb_help.png');
+background-repeat: no-repeat;
+
 }
 
 
