@@ -25,39 +25,6 @@ scb.ui.static.WesternBlotView.parse = function (element) {
     return parsed;
 }
 
-scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (element, event) {
-    var parsed = scb.ui.static.WesternBlotView.parse(element);
-    parsed.experiment.last_scroll=document.body.scrollTop;
-    if (parsed.redisplay) {
-        alert("INVALID ELEMENT!");
-    }
-	
-	var lysate_type = ''
-	if($(element).attr('kind')){
-		lysate_type=$(element).attr('kind');
-	}
-	else{
-		lysate_type= $(element).attr('value');
-    }
-    if (lysate_type == '') {
-        return;
-    }
-    var lysate_id = $(element).attr('lane_id');
-    if (lysate_id == '') {
-        var cell_treatment_id = $(element).attr('cell_treatment_id');
-        parsed.western_blot.lanes_list.start({
-            kind: lysate_type,
-            cell_treatment_id: cell_treatment_id,
-            experiment_id: parsed.experiment.id
-        });
-    }
-    else {
-        parsed.western_blot.lanes_list.get(lysate_id).kind = lysate_type;
-    }
-    if (event) {
-        scb.ui.static.MainFrame.refresh();
-    }
-}
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
@@ -106,6 +73,40 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
 
 }
 
+scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type = function (element, event) {
+    var parsed = scb.ui.static.WesternBlotView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    if($(element).attr('kind')){
+		lysate_type=$(element).attr('kind');
+	}
+	else{
+		var lysate_type = $(element).attr('value');
+		if (lysate_type == '') {
+			return;
+		}
+	}
+
+    var lysate_id = $(element).attr('lane_id');
+    if (lysate_id == '') {
+        var cell_treatment_id = $(element).attr('cell_treatment_id');
+        parsed.western_blot.lanes_list.start({
+            kind: lysate_type,
+            cell_treatment_id: cell_treatment_id,
+            experiment_id: parsed.experiment.id
+        });
+		if (event) {
+       		scb.ui.static.MainFrame.refresh();
+   		}
+    }
+    else {
+        parsed.western_blot.lanes_list.get(lysate_id).kind = lysate_type;
+    }
+
+}
+
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (element, event) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
@@ -118,13 +119,15 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_active = function (eleme
     var cell_treatment_id = $(element).attr('cell_treatment_id');
 
     parsed.western_blot.is_cell_treatment_enabled[cell_treatment_id] = val;
+   
     $('.scb_f_western_blot_select_lysate_type', $(element).parent().parent()).each(function (e) {
         scb.ui.static.WesternBlotView.scb_f_western_blot_select_lysate_type(this);
     });
     parsed.western_blot.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
     if (event) {
-        var rows_count = parsed.western_blot.rows_state();
+    		
         scb.ui.static.MainFrame.refresh();
+        var rows_count = parsed.western_blot.rows_state();
         if (rows_count.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
             var element = $('.scb_f_western_blot_sample_active[cell_treatment_id="' + cell_treatment_id + '"]');
             var parent = $(element).parent();

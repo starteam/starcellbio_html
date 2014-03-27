@@ -25,12 +25,14 @@
   margin-bottom: 21px;
 }
 .scb_s_facs_choose_samples_order {
-  min-height: 289px;
+  min-height: 284px;
+  position: absolute;
+  bottom: 113px;
 }
 .scb_s_facs_choose_samples_order_border {
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 3px 3px -3px black;
-  min-height: 289px;
+  min-height: 284px;
 }
 .scb_s_facs_chart_yaxis {
   position: absolute;
@@ -221,21 +223,33 @@ scb_s_facs_single_range_button:checked>label {
   top: 55px;
   left: 622px;
 }
+.scb_s_facs_cell_treatment {
+  position: relative;
+}
+.scb_s_facs_cell_treatment_radio {
+  position: absolute;
+  top: 4px;
+}
+.scb_s_facs_cell_treatment_text {
+  position: absolute;
+  top: 6px;
+  left: 23px;
+}
 .scb_s_facs_vertical_line_1_top {
   position: absolute;
   z-index: 5;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 30px;
+  height: 17px;
+  left: 18px;
   top: 2px;
 }
 .scb_s_facs_vertical_line_4_top {
   position: absolute;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 304px;
+  height: 17px;
+  left: 292px;
   z-index: 5;
   top: 2px;
 }
@@ -243,8 +257,8 @@ scb_s_facs_single_range_button:checked>label {
   position: absolute;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 577px;
+  height: 17px;
+  left: 565px;
   z-index: 5;
   top: 2px;
 }
@@ -422,6 +436,7 @@ input[type=radio]:disabled {
 }
 .scb_s_facs_samples_table_td {
   font-size: 10pt;
+  height: 25px;
 }
 .scb_f_facs_run_samples {
   border: none;

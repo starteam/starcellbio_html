@@ -131,7 +131,7 @@ div#main {
   color: #316f94 !important;
 }
 .scb_s_experiment_step_labels {
-  width: 440px;
+  width: 460px;
   display: inline-block;
 }
 .scb_s_experiment_step_number {
@@ -222,10 +222,10 @@ div#main {
   border-bottom-left-radius: 8px;
 }
 .scb_s_experiment_step_setup_and_run {
-  width: 125px;
+  width: 137px;
 }
 .scb_s_experiment_step_select_technique {
-  width: 178px;
+  width: 186px;
 }
 .scb_s_experiment_step_text>a {
   color: white;
@@ -259,22 +259,22 @@ div#main {
 .arrow-design-outer {
   width: 0;
   height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 8px solid white;
-  left: 98px;
-  top: 0;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-left: 11px solid white;
+  left: 97px;
+  top: -1px;
   z-index: 56;
   position: absolute;
 }
 .arrow-setup-outer {
   width: 0;
   height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 8px solid white;
-  left: 146px;
-  top: 0;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-left: 11px solid white;
+  left: 157px;
+  top: -1px;
   z-index: 56;
   position: absolute;
 }
@@ -284,7 +284,7 @@ div#main {
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 9px solid #d5dce4;
-  left: -10px;
+  left: -12px;
   top: -20px;
   position: absolute;
   z-index: 56;
@@ -295,7 +295,7 @@ div#main {
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 9px solid #4690c1 !important;
-  left: -10px;
+  left: -12px;
   top: -20px;
   position: absolute;
   z-index: 56;
@@ -306,7 +306,7 @@ div#main {
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 9px solid #59bbf2 !important;
-  left: -10px;
+  left: -12px;
   top: -20px;
   position: absolute;
   z-index: 56;
@@ -317,7 +317,7 @@ div#main {
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 9px solid #59bbf2 !important;
-  left: -10px;
+  left: -12px;
   top: -20px;
   z-index: 56;
   position: absolute;
@@ -328,7 +328,7 @@ div#main {
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 9px solid #4690c1 !important;
-  left: -10px;
+  left: -12px;
   top: -20px;
   z-index: 56;
   position: absolute;

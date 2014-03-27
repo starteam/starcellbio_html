@@ -333,7 +333,7 @@ top: 2px;
     font-family: 'sourcesanspro-semibold';
     font-size:10pt;
     width: 127px;
-    text-align: center;
+    text-align: left;
 }
 
 .scb_s_experiment_setup_choose_template_kind_disabled {

@@ -313,8 +313,13 @@ FACS Main View
                 {$r.display_text}
                 {/if}
             </td>
-            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:185px;'>
-			 <input type="radio" checked="checked" class='facs_locked'><span class='{if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
+            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border scb_s_facs_cell_treatment' style='width:185px;'>
+            {if $r.is_sample_enabled}			 
+            	<input type="radio"  checked class='scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
+			{else}
+				<input type="radio"  class='scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
+
+			{/if}
 
             </td>
             <td class=' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:267px;'>
@@ -395,8 +400,8 @@ FACS Main View
 			<div class='scb_s_facs_vertical_line_7_top'></div>
 			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
-						{if $step== 1}32px;{/if}
-				{if $step== 2} 301px;{/if}
+						{if $step== 1}20px;{/if}
+				{if $step== 2} 289px;{/if}
 				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
 			</div>
 		</div>

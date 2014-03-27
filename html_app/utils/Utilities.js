@@ -254,7 +254,7 @@ scb.utils.accessor2_with_setter = function (obj, field, source, setter) {
         setter(d);
     }});
 }
-
+//JSON getter 
 scb.utils.accessor2_getter_only = function (obj, field, source) {
     Object.defineProperty(obj, field, { get:function () {
         return source[field];

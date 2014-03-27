@@ -30,13 +30,13 @@
   border-radius: 14px;
   padding: 4px;
   border: 4px solid white;
-  bottom: 93px;
+  bottom: 103px;
   z-index: 100;
   text-align: left;
   font-size: 10pt;
 }
 .scb_f_wb_up_button:hover, .scb_f_wb_down_button:hover {
-  color: black !important;
+  background: #555 !important;
 }
 .scb_s_western_blot_tools_samples_followup {
   left: 105px;
@@ -72,10 +72,32 @@
 .scb_s_updown_image {
   vertical-align: middle;
 }
+.scb_s_western_blot_radio_wrapper {
+  position: relative;
+  display: inline;
+}
+.scb_s_western_blot_radio_wrapper>* {
+  position: absolute;
+}
+.scb_s_western_blot_gel_type_text_ten {
+  left: 21px;
+}
+.scb_s_western_blot_gel_type_radio_twelve {
+  left: 55px;
+}
+.scb_s_western_blot_gel_type_text_twelve {
+  left: 78px;
+}
+.scb_s_western_blot_gel_type_radio_fifteen {
+  left: 110px;
+}
+.scb_s_western_blot_gel_type_text_fifteen {
+  left: 131px;
+}
 .scb_s_western_blot_marker_info {
   outline: none;
   left: 160px;
-  bottom: 74px;
+  bottom: 84px;
   position: absolute;
   background: none;
   border: none;
@@ -531,16 +553,16 @@
   z-index: 5;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 30px;
+  height: 17px;
+  left: 18px;
   top: 2px;
 }
 .scb_s_western_blot_vertical_line_2_top {
   position: absolute;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 121px;
+  height: 17px;
+  left: 109px;
   z-index: 5;
   top: 2px;
 }
@@ -548,8 +570,8 @@
   position: absolute;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 212px;
+  height: 17px;
+  left: 200px;
   z-index: 5;
   top: 2px;
 }
@@ -557,8 +579,8 @@
   position: absolute;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 303px;
+  height: 17px;
+  left: 291px;
   z-index: 5;
   top: 2px;
 }
@@ -566,8 +588,8 @@
   position: absolute;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 394px;
+  height: 17px;
+  left: 382px;
   z-index: 5;
   top: 2px;
 }
@@ -575,8 +597,8 @@
   position: absolute;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 485px;
+  height: 17px;
+  left: 473px;
   z-index: 5;
   top: 2px;
 }
@@ -584,8 +606,8 @@
   position: absolute;
   width: 2px;
   background-color: rgba(225,226,228,0.3);
-  height: 19px;
-  left: 577px;
+  height: 17px;
+  left: 565px;
   z-index: 5;
   top: 2px;
 }
@@ -614,14 +636,18 @@
   left: 188px;
 }
 .scb_s_western_blot_choose_samples_order_list {
-  -webkit-padding-start: 21px;
+  -webkit-padding-start: 18px;
+}
+.scb_s_western_blot_choose_samples_order {
+  position: relative;
+  bottom: 12px;
 }
 .scb_s_western_blot_sortable_list {
   overflow-y: auto;
   max-height: 198px;
 }
 .scb_s_western_blot_static_list {
-  -webkit-padding-start: 25px !important;
+  -webkit-padding-start: 20px !important;
   margin-top: 33px;
 }
 .scb_s_western_blot_choose_samples_marker {
@@ -639,6 +665,7 @@
   overflow: hidden;
   list-style-position: inside;
   cursor: default;
+  margin-right: 18px;
 }
 .scb_s_western_blot_sortable_item {
   background: #d9dadb;
@@ -658,10 +685,12 @@
   padding: 0 !important;
   left: 242px;
   color: white;
-  background: gray;
+  background: #a8a8a8;
   cursor: pointer !important;
-  border: 1px solid black;
+  border: 1px solid gray;
   outline: none;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
 }
 .scb_f_wb_down_button {
   -webkit-appearance: none;
@@ -670,11 +699,30 @@
   width: 19px;
   padding-left: 3px !important;
   padding-top: 1px !important;
-  background: gray;
+  background: #a8a8a8;
   cursor: pointer !important;
-  border: 1px solid black;
+  border: 1px solid gray;
   left: 264px;
   color: white;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.scb_s_western_blot_load_gel_divider {
+  height: 9px;
+  width: 291px;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 3px 3px -3px black;
+  position: relative;
+  top: 8px;
+}
+.scb_s_wb_button_divider {
+  position: absolute;
+  display: inline;
+  width: 1px;
+  background: gray;
+  height: 18px;
+  z-index: 1;
+  margin-top: 3px;
 }
 .scb_s_wb_button_wrapper {
   float: right;
@@ -739,7 +787,7 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 .scb_s_western_blot_add_marker_wrapper {
   font-size: 10pt;
   font-family: 'sourcesanspro-semibold';
-  bottom: 69px;
+  bottom: 78px;
   position: absolute;
 }
 .scb_s_western_blot_add_marker_text {

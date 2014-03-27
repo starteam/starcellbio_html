@@ -58,7 +58,6 @@
 }
 .scb_s_microscopy_conditions {
   width: 242px;
-  padding-left: 22px;
 }
 .scb_s_microscopy_sample_checkbox {
   width: 64px;
@@ -1192,6 +1191,21 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   text-align: left;
   font-size: 10pt;
   font-family: 'sourcesanspro-regular' !important;
+}
+.scb_s_microscopy_conditions {
+  position: relative;
+  padding: 2px;
+}
+.scb_s_microscopy_conditions>div {
+  position: relative;
+  margin-left: 20px;
+}
+.scb_s_microscopy_conditions>div>input {
+  position: absolute;
+}
+.scb_s_microscopy_conditions>div>span {
+  margin-left: 20px;
+  padding: 2px;
 }
 .scb_s_microscopy_tools_samples_followup_toggle {
   outline: none;

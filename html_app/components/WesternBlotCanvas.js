@@ -260,19 +260,22 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         if (state.gel.parent.parent.marker_loaded) {
             var weights = [10, 15, 20, 25, 37, 50, 75, 100, 150, 250];
             for (var weigth_index in weights) {
-                var weight = weights[weigth_index];
-                var position = self.weight_to_position(weight);
-//                h + 26 / (weight + 10) * (height - h);
-				g.font="9px Arial";
-                g.fillText("" + weight, lane_width * (LANE_OFFSET_0) +1, position + 3);
-                g.beginPath();
-                g.moveTo((lane_width * (LANE_OFFSET_0) - g.lineWidth / 2)+1, position);
-                g.lineTo((lane_width * (LANE_OFFSET_0A) + g.lineWidth / 2)+1, position);
-                g.closePath();
-                g.stroke();
-
+            	if(state.gel.parent.parent.gel_type == '.10' && weights[weigth_index]==20){} 
+            	else
+            	{
+					var weight = weights[weigth_index];
+					var position = self.weight_to_position(weight);
+	//                h + 26 / (weight + 10) * (height - h);
+					g.font="9px Arial";
+					g.fillText("" + weight, lane_width * (LANE_OFFSET_0) +1, position + 3);
+					g.beginPath();
+					g.moveTo((lane_width * (LANE_OFFSET_0) - g.lineWidth / 2)+1, position);
+					g.lineTo((lane_width * (LANE_OFFSET_0A) + g.lineWidth / 2)+1, position);
+					g.closePath();
+					g.stroke();
+                }
             }
-            g.fillText("kDa", lane_width * (LANE_OFFSET_0), 15);
+            g.fillText("kDa", lane_width * (LANE_OFFSET_0), 10);
 //		for(var lane = 0; lane < lanes; lane++) {
 //			g.fillText("Lane " + (lane + 1), lane_width * (lane + LANE_OFFSET_1A ) - g.lineWidth / 2, 15);
 //		}

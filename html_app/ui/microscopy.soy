@@ -321,6 +321,7 @@
             {if $r.lane}
 				{if $r.lane.kind == 'IHC'}
 					  {foreach $k in keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])}
+					  	<div>
 					  	{if $k == 'secondary'}
 						  <input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="secondary" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
@@ -336,40 +337,47 @@
 							   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
 							   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'NFIB'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.NFIB.name}</span>
 						{/if}
+						</div>
 					{/foreach}
-					{elseif $assignment.id =='assignment_706_2014'}			
+					{elseif $assignment.id =='assignment_706_2014'}
+					<div>			
 					 <input class="scb_f_microscopy_select_conditions {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
 						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
-
+					</div>
 				{elseif $r.lane.kind == 'IF' and not ($assignment.id =='assignment_706_2014')}
 					
 					{foreach $k in keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])}
+					
+					<div>
 					{if $k == 'rgb' and not ($assignment.id =='assignment_706_2014')}
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
 						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
-
 					{/if}
+					</div>
 					{/foreach}
 				{elseif $r.lane.kind == 'Dye'}
 					{foreach $k in keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])}
+					<div>
 					{if $k == 'HnE'}
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="HnE" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
 						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.Dye.conditions.HnE.name}</span>
 					{/if}
+					</div>
 					{/foreach}
 				{/if}
-			{elseif $assignment.id =='assignment_706_2014'}			
+			{elseif $assignment.id =='assignment_706_2014'}	
+				<div>
 					 <input class="scb_f_microscopy_select_conditions {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
 						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_microscopy_dim_conditions">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
-
+				</div>
 			{/if}
             </td>
 			<td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
@@ -662,24 +670,120 @@
 						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
 						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
 						{else}
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
-						<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+							{if $microscopy.selected_lane and $microscopy.selected_lane.lens_map.brightness}
+								{if $microscopy.selected_lane.lens_map.brightness > 0 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if} 
+								{if $microscopy.selected_lane.lens_map.brightness > 0.1 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 0.2 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 0.3 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 0.4 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 0.5 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 0.6 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 0.7 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 0.8 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								
+								
+								{if $microscopy.selected_lane.lens_map.brightness > 0.9 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 1 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 1.5 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 2 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 3 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 5 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 7 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 9 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+								{if $microscopy.selected_lane.lens_map.brightness > 11 }
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								{else}
+									<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
+								{/if}
+							{else}
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/> 
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+						
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+								<img src = 'images/microscopy/Brightness/Brightness_Line_Green.png'/>
+							{/if}
 						{/if}
 
     				</div>
@@ -845,8 +949,8 @@
 			<div class='scb_s_facs_vertical_line_7_top'></div>
 			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
-						{if $step== 1}32px;{/if}
-				{if $step== 2} 301px;{/if}
+						{if $step== 1}20px;{/if}
+				{if $step== 2} 289px;{/if}
 				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
 			</div>
 		</div>

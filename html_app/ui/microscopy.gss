@@ -1567,6 +1567,23 @@ background-image: url('../../../images/microscopy/Right_Arrow_Gray.png');
 }
 
 
+.scb_s_microscopy_conditions{
+	position:relative;
+	padding: 2px;
+}
+
+.scb_s_microscopy_conditions > div{
+	position:relative;
+	margin-left: 20px;
+}
+.scb_s_microscopy_conditions > div >input{	
+	position: absolute;
+}
+.scb_s_microscopy_conditions > div >span{
+	margin-left: 20px;
+	padding: 2px;
+}
+
 .scb_s_microscopy_tools_samples_followup_toggle{
 	outline: none;
 	bottom: -4px;

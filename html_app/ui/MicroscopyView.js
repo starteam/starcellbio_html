@@ -777,6 +777,7 @@ function draw(state){
 				$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
 				$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 				$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
+				// scb.ui.static.MainFrame.refresh();
 		}
 	});
 	$('#brightdown').click(function(){
@@ -817,6 +818,7 @@ function draw(state){
 			$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
+			 //scb.ui.static.MainFrame.refresh();
 		}
 	});
 	$('#blurup').click(function(){
@@ -912,10 +914,11 @@ function init(state, isNew, isIF, draw, image_source){
 	var outline =  $('body').find('.scb_s_microscopy_slide_content_lens_outline')[0];
 	var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 	if(samples_area){
-		$('#svg image').attr('xlink:href', image_source);
+		
 		$(samples_area).append(controls);
 
 		image_dimensions.onload= function (){
+			$('#svg image').attr('xlink:href', image_source);
 			if(Math.ceil(image_dimensions.width/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1 || Math.ceil(image_dimensions.height/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1){
 				$('#svg image').attr('width',image_dimensions.width+'px'); 
 				$('#svg image').attr('height', image_dimensions.height+'px'); 	
@@ -1054,7 +1057,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_note_close_button= function (eleme
 		$(note).slideUp('400', function(){
 			parsed.microscopy.navigation_show_state  = $('.scb_s_microscopy_tools_navigation_followup').is(":visible");
 			parsed.microscopy.samples_show_state  = $('.scb_s_microscopy_tools_samples_followup').is(":visible");
-			scb.ui.static.MainFrame.refresh();
+			//scb.ui.static.MainFrame.refresh();
 		});
 		
 }
@@ -1066,7 +1069,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_tools_toggle = function (element) 
 	$(note).slideDown('400', function(){
 		parsed.microscopy.navigation_show_state  = $('.scb_s_microscopy_tools_navigation_followup').is(":visible");
 		parsed.microscopy.samples_show_state  = $('.scb_s_microscopy_tools_samples_followup').is(":visible");
-		scb.ui.static.MainFrame.refresh();
+		//scb.ui.static.MainFrame.refresh();
 	});
 	
 }

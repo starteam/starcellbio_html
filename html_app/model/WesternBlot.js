@@ -170,7 +170,11 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
 	        	
         return {rows:rows, valid:count};
     }
-    self.rows_state_count = self.rows_state().valid;
+    
+    scb.utils.accessor2_custom(self, 'rows_state_count', function(){
+    	return self.rows_state().valid;
+    }, scb.utils.read_only_exception);
+    //self.rows_state_count = self.rows_state().valid;
 
 
 }
