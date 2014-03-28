@@ -138,3 +138,18 @@ scb.ui.HomepageView = function scb_ui_HomepageView(gstate) {
 	}
 
 }
+
+function inConstructionError(){
+				$('html').css('overflow', 'hidden');
+				$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+				$.jqDialog.alert("In Construction", 
+					function() {	
+							$('html').css('overflow', 'visible');
+							$('.error_overlay').remove();
+							scb.ui.static.MainFrame.refresh();
+					/* callback function for 'OK' button*/ });
+				$('.jqDialog_header').remove();		
+				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				return;
+}

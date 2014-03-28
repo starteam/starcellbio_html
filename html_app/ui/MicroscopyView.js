@@ -40,9 +40,11 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	}
 	if(state.slide_type == 'Dye'){
 	$('.scb_s_microscopy_if').prop('disabled', false);
+	set_filters('red', state);
 	}
 	else if(state.slide_type == 'IHC'){
 	$('.scb_s_microscopy_if').prop('disabled', false);
+	set_filters('red', state);
 	}
 	else if(state.slide_type == 'IF'){
 		if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type ) || (!state.microscopy_lane.lens_map.action  && state.slides.length > 1 )){
@@ -64,16 +66,16 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 				else{
 					if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'red') ){
 							set_filters('red', state);
-						}
+					}
 					else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'green')){
 							set_filters('green', state);
-						}
+					}
 					else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'blue')){
 							set_filters('blue', state);
-						}
+					}
 					else if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type == 'merge')){
 							set_filters('all', state);
-						}
+					}
 					else if (state.slides[0].if_type =='red'){
 							set_filters('red',state);
 							state.microscopy_lane.lens_map.if_type = 'red';
@@ -232,6 +234,7 @@ function set_filters(name, state){
 scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
 	parsed.experiment.last_scroll=document.body.scrollTop;
+    parsed.microscopy.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -297,6 +300,8 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
 	parsed.experiment.last_scroll=document.body.scrollTop;
+	        parsed.microscopy.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -336,6 +341,8 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (elem
 scb.ui.static.MicroscopyView.scb_f_microscopy_sample_remove = function (element) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
     parsed.experiment.last_scroll=document.body.scrollTop;
+        parsed.microscopy.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -705,39 +712,118 @@ function draw(state){
 			}
 		}
 	};
-	$('#up').click(function(){
+
+	var mouseStillDown_up = false;
+	var mouseStillDown_down = false;
+	var mouseStillDown_left = false;
+	var mouseStillDown_right = false;
+	$('#up').mousedown(function(){
 			if(caman_lock){
 			}
 			else{
-				draw_lens('y', 10, state, document.getElementById("lens"));
-				console.log('up');
+				mouseStillDown_up = true;
+				moveUp();
 			}
 
 	});
-	$('#down').click(function(){
+	$('#down').mousedown(function(){
 			if(caman_lock){
 			}
 			else{
+				mouseStillDown_down = true;
+				moveDown();
+			}
+	});
+	$('#left').mousedown(function(){
+			if(caman_lock){
+			}
+			else{
+				mouseStillDown_left = true;
+				moveLeft();
+			}
+	});
+	$('#right').mousedown(function(){
+			if(caman_lock){
+			}
+			else{
+				mouseStillDown_right = true;
+				moveRight();
+			}
+	});
+	
+
+
+
+	$('#up').mouseup(function(event) {
+		mouseStillDown_up = false;
+	});
+	
+	$('#down').mouseup(function(event) {
+		mouseStillDown_down = false;
+	});
+	
+	$('#left').mouseup(function(event) {
+		mouseStillDown_left = false;
+	});
+	
+	$('#right').mouseup(function(event) {
+		mouseStillDown_right = false;
+	});
+	
+	
+	function moveUp() {
+		if (!mouseStillDown_up) { return; } // we could have come back from
+										 // SetInterval and the mouse is no longer down
+		
+				draw_lens('y', 10, state, document.getElementById("lens"));
+				console.log('up');
+
+		if (mouseStillDown_up) { setTimeout(moveUp, 100); }
+	}
+	
+	function moveDown() {
+		if (!mouseStillDown_down) { return; } // we could have come back from
+										 // SetInterval and the mouse is no longer down
+		
 				draw_lens('y', -10, state, document.getElementById("lens"));
 				console.log('down');
-			}
-	});
-	$('#left').click(function(){
-			if(caman_lock){
-			}
-			else{
+
+		if (mouseStillDown_down) { setTimeout(moveDown, 100); }
+	}
+
+
+	
+	function moveLeft() {
+		if (!mouseStillDown_left) { return; } // we could have come back from
+										 // SetInterval and the mouse is no longer down
+		
 				draw_lens('x', 10, state, document.getElementById("lens"));
-				console.log('left')
-			}
-	});
-	$('#right').click(function(){
-			if(caman_lock){
-			}
-			else{
+				console.log('left');
+
+		if (mouseStillDown_left) { setTimeout(moveLeft, 100); }
+	}
+
+
+	
+	function moveRight() {
+		if (!mouseStillDown_right) { return; } // we could have come back from
+										 // SetInterval and the mouse is no longer down
+		
 				draw_lens('x', -10, state, document.getElementById("lens"));
 				console.log('right');
-			}
-	});
+
+		if (mouseStillDown_right) { setTimeout(moveRight, 100); }
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
 	$('#brightup').click(function(){
 		if(caman_lock){
 				console.log('nope');
@@ -777,7 +863,7 @@ function draw(state){
 				$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
 				$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 				$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
-				// scb.ui.static.MainFrame.refresh();
+				change_brightness_lines(state.brightness);
 		}
 	});
 	$('#brightdown').click(function(){
@@ -818,7 +904,7 @@ function draw(state){
 			$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
-			 //scb.ui.static.MainFrame.refresh();
+			change_brightness_lines(state.brightness);
 		}
 	});
 	$('#blurup').click(function(){
@@ -898,13 +984,97 @@ function draw(state){
 
 	console.log('draw');
 }
+
+
+function change_brightness_lines(brightness_value){
+			var list_of_lines = $('.scb_s_microscopy_brightness_focus_middle').children();		
+			if (brightness_value > 0)
+				$(list_of_lines[0]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[0]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 0.1 )
+				$(list_of_lines[1]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[1]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 0.2 )
+				$(list_of_lines[2]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[2]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 0.3 )
+				$(list_of_lines[3]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[3]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 0.4 )
+				$(list_of_lines[4]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[4]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 0.5 )
+				$(list_of_lines[5]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[5]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 0.6 )
+				$(list_of_lines[6]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[6]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 0.7 )
+				$(list_of_lines[7]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[7]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 0.8 )
+				$(list_of_lines[8]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[8]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			
+			
+			if (brightness_value > 0.9 )
+				$(list_of_lines[9]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[9]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 1 )
+				$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 1.5 )
+				$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 2 )
+				$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 3 )
+				$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 5 )
+				$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 7 )
+				$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 9 )
+				$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if (brightness_value > 11 )
+				$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+			else
+				$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+}
 ///////////////////////////////////////////////////////////////////////////////////////////
 	
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+
 //This function will initialize the image and serialize the data of the 
 //original unprocessed image to a string
 function init(state, isNew, isIF, draw, image_source){
+	
+
+
+
 	$('#spy').remove();
 	var controls = document.getElementById('scb_s_microscopy_lens_controls');
 	var image_dimensions = document.createElement('img');
@@ -916,8 +1086,9 @@ function init(state, isNew, isIF, draw, image_source){
 	if(samples_area){
 		
 		$(samples_area).append(controls);
-
+		//scb_s_microscopy_slide_content_lens_outline
 		image_dimensions.onload= function (){
+			
 			$('#svg image').attr('xlink:href', image_source);
 			if(Math.ceil(image_dimensions.width/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1 || Math.ceil(image_dimensions.height/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1){
 				$('#svg image').attr('width',image_dimensions.width+'px'); 
@@ -961,12 +1132,61 @@ function init(state, isNew, isIF, draw, image_source){
 			}
 			if(isIF){
 			}
+			
+			Raphael.st.draggable = function() {
+				var me = this,
+					lx = 0,
+					ly = 0,
+					ox = 0,
+					oy = 0,
+					moveFnc = function(dx, dy) {
+						lx = dx + ox;  // add the new change in x to the drag origin
+						ly = dy + oy;  // do the same for y
+						me.transform('t' + lx + ',' + ly);
+					},
+					startFnc = function() {},
+					endFnc = function() {
+						ox = lx;
+						oy = ly;
+					};
+
+				this.drag(moveFnc, startFnc, endFnc);
+			};
+
+			var paper = Raphael(document.getElementById('scb_f_lens_outline'));
+			var mySet=paper.set();
+			var filter = paper.createFilter();
+			var effect = new FRaphael.FilterEffect("feComponentTransfer", {id: "brightness"});
+			var r = document.createElement('fefuncr');
+			r.id = 'b_red';
+			r.setAttribute('type', 'linear');
+			r.setAttribute('slope', '11');
+			var g = document.createElement('fefuncg');
+			g.id = 'b_green';
+			g.setAttribute('type', 'linear');
+			g.setAttribute('slope', '11');
+			var b = document.createElement('fefuncb');
+			b.id = 'b_blue';
+			b.setAttribute('type', 'linear');
+			b.setAttribute('slope', '11');
+			effect.element.appendChild(r);
+			effect.element.appendChild(g);
+			effect.element.appendChild(b);
+			filter.element.appendChild(effect.element);
+			filter.addBlur(5);
+			var image = paper.image(image_source, state.xparam, state.yparam,image_dimensions.width, image_dimensions.height);
+			image.filter(filter);
+			mySet.push(image);
+			mySet.draggable();
+			
+			
 			state.action = 'initialized';
 			$('#svg').css('left',state.xparam+'px');
 			$('#svg').css('top',state.yparam+'px');
 			$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
+			change_brightness_lines(state.brightness);
 			$('#lensfilter #focus')[0].setAttribute('stdDeviation', state.blur);
 			draw(state);	
 			   
@@ -975,6 +1195,38 @@ function init(state, isNew, isIF, draw, image_source){
 	}
 
 }
+
+    function drawImage(imageObj) { 
+        var stage = new Kinetic.Stage({
+          container: "container",
+          width: 578,
+          height: 200
+        });
+        var layer = new Kinetic.Layer();
+
+        // darth vader
+        var darthVaderImg = new Kinetic.Image({
+          image: imageObj,
+          x: 100,
+          y: 30,
+          width: 200,
+          height: 137,
+          draggable: true
+        });
+
+        // add cursor styling
+        darthVaderImg.on('mouseover', function() {
+          document.body.style.cursor = 'pointer';
+        });
+        darthVaderImg.on('mouseout', function() {
+          document.body.style.cursor = 'default';
+        });
+
+        layer.add(darthVaderImg);
+        stage.add(layer);
+      }
+
+
 
 function initialize_state(state, image_source){
 
@@ -1424,7 +1676,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         }
         
         state.experiment.last_technique_view = 'microscopy';
-        
+        var warning_visible = $('.scb_s_microscopy_load_followup').is(":visible");
         workarea.html(scb_microscopy.main({
             global_template: gstate.context.master_model,
             assignment: state.assignment,
@@ -1440,6 +1692,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
             kinds: template.micro_kinds,
             can_prepare_slide: can_prepare_slide
         }));
+        
         if (kind == 'sample_prep'){
         	$('.scb_s_western_blot_samples_table').scrollTop(state.microscopy.prep_scroll);
         }
@@ -1490,7 +1743,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 
         if (state.microscopy.samples_finished) {
             //debugger;
-            if(!state.microscopy.warning_fired){
+            if(!state.microscopy.warning_fired || warning_visible){
 				$('.scb_s_microscopy_load_followup').show();
 				$('.scb_s_microscopy_load_followup>.scb_f_controls_close_button').click(function(){
 					$('.scb_s_microscopy_load_followup').fadeOut();

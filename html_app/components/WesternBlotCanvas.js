@@ -260,7 +260,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         if (state.gel.parent.parent.marker_loaded) {
             var weights = [10, 15, 20, 25, 37, 50, 75, 100, 150, 250];
             for (var weigth_index in weights) {
-            	if(state.gel.parent.parent.gel_type == '.10' && weights[weigth_index]==20){} 
+            	if(state.gel.parent.parent.gel_type == '.10' && weights[weigth_index]<=20){} 
             	else
             	{
 					var weight = weights[weigth_index];

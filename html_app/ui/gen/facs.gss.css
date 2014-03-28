@@ -507,9 +507,6 @@ input[type=radio]:disabled {
   padding-right: 4px;
   padding-left: 5px;
 }
-.scb_f_facs_note_close_button:hover, .scb_f_western_blot_note_close_button:hover, .scb_f_microscopy_note_close_button:hover {
-  background-color: #e58986;
-}
 .scb_s_facs_apply {
   position: absolute;
   top: 320px;

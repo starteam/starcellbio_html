@@ -345,6 +345,15 @@ top: -21px;
     background:white;
 }
 
+.scb_f_facs_note_close_button:hover, .scb_f_western_blot_note_close_button:hover, .scb_f_microscopy_note_close_button:hover {
+	background-color: #e58986;
+}
+
+.scb_f_controls_close_button:hover{
+	background-color: #e58986;
+}
+
+
 .scb_s_western_blot_samples_area, .scb_s_facs_samples_area{
     width:290px;
     border:1px solid #e0e0e0;

@@ -610,10 +610,13 @@
 			 microscopy_id='{$microscopy.id}'
 			{if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>									
 			
-
+			<div id='scb_f_lens_outline'></div>
 			
 			<div class = 'scb_s_microscopy_slide_content_lens_outline'>
-				<svg id = 'svg'>
+				<svg id = 'svg' >
+<!-- 
+				onload='Init(evt)' onmousedown='Grab(evt)' onmousemove='Drag(evt)' onmouseup='Drop(evt)'
+ -->
     <filter id="lensfilter" x="0" y="0" width= '100%' height='100%' >
       <fegaussianBlur id='focus' in="SourceGraphic"  stdDeviation="2"/>
       <fecomponenttransfer id='brightness' >
