@@ -272,11 +272,11 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 				return;
 				
 			}
-       if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1)
+       if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1 || _.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])==1)
        {
        			parsed.microscopy.lanes_list.start({
        				kind: slide_type,
-            		slide_conditions: _.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)[0],
+            		slide_conditions: _.keys(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])[0], //_.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)[0],
             		cell_treatment_id: cell_treatment_id,
            			experiment_id: parsed.experiment.id
         		});
@@ -665,6 +665,9 @@ function draw_lens(param, addition, state, canvas){
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content')[0];
 			$('#svg').css('left',state.xparam+'px');
 			$('#svg').css('top',state.yparam+'px');
+			
+			$('#scb_s_microscopy_slide_content_lens_outline svg image').attr('transform',"matrix(1,0,0,1,"+state.xparam+","+state.yparam+")" );
+			//$('#scb_s_microscopy_slide_content_lens_outline svg image').attr('transform',state.yparam);
 	}
 	else{
 		console.error( "ERROR IN DRAW! "); 
@@ -717,6 +720,7 @@ function draw(state){
 	var mouseStillDown_down = false;
 	var mouseStillDown_left = false;
 	var mouseStillDown_right = false;
+
 	$('#up').mousedown(function(){
 			if(caman_lock){
 			}
@@ -863,6 +867,10 @@ function draw(state){
 				$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
 				$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 				$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
+				
+				$('#filter1 #svgfilterop2 #b_red').attr('slope', state.brightness+'');
+				$('#filter1 #svgfilterop2 #b_green').attr('slope', state.brightness+'');
+				$('#filter1 #svgfilterop2 #b_blue').attr('slope', state.brightness+'');
 				change_brightness_lines(state.brightness);
 		}
 	});
@@ -904,6 +912,10 @@ function draw(state){
 			$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
+			
+			$('#filter1 #svgfilterop2 #b_red').attr('slope', state.brightness+'');
+			$('#filter1 #svgfilterop2 #b_green').attr('slope', state.brightness+'');
+			$('#filter1 #svgfilterop2 #b_blue').attr('slope', state.brightness+'');
 			change_brightness_lines(state.brightness);
 		}
 	});
@@ -1132,50 +1144,74 @@ function init(state, isNew, isIF, draw, image_source){
 			}
 			if(isIF){
 			}
-			
 			Raphael.st.draggable = function() {
 				var me = this,
 					lx = 0,
 					ly = 0,
-					ox = 0,
-					oy = 0,
+					ox = state.xparam,
+					oy = state.yparam,
 					moveFnc = function(dx, dy) {
 						lx = dx + ox;  // add the new change in x to the drag origin
 						ly = dy + oy;  // do the same for y
 						me.transform('t' + lx + ',' + ly);
 					},
-					startFnc = function() {},
+					startFnc = function() {	
+						if(state.isFirstDrag){
+							state.isFirstDrag = false;
+						}
+						else{
+							//if first time, then 0 otherwise make it state.xparam
+							ox = state.xparam;
+							oy = state.yparam;
+						}
+						//me.transform('t' + state.xparam + ',' + state.yparam);
+					},
 					endFnc = function() {
 						ox = lx;
 						oy = ly;
+						state.xparam = lx;
+						state.yparam = ly;
 					};
 
 				this.drag(moveFnc, startFnc, endFnc);
 			};
 
-			var paper = Raphael(document.getElementById('scb_f_lens_outline'));
+			var paper = Raphael(document.getElementById('scb_s_microscopy_slide_content_lens_outline'));
 			var mySet=paper.set();
-			var filter = paper.createFilter();
-			var effect = new FRaphael.FilterEffect("feComponentTransfer", {id: "brightness"});
-			var r = document.createElement('fefuncr');
-			r.id = 'b_red';
-			r.setAttribute('type', 'linear');
-			r.setAttribute('slope', '11');
-			var g = document.createElement('fefuncg');
-			g.id = 'b_green';
-			g.setAttribute('type', 'linear');
-			g.setAttribute('slope', '11');
-			var b = document.createElement('fefuncb');
-			b.id = 'b_blue';
-			b.setAttribute('type', 'linear');
-			b.setAttribute('slope', '11');
-			effect.element.appendChild(r);
-			effect.element.appendChild(g);
-			effect.element.appendChild(b);
-			filter.element.appendChild(effect.element);
-			filter.addBlur(5);
-			var image = paper.image(image_source, state.xparam, state.yparam,image_dimensions.width, image_dimensions.height);
-			image.filter(filter);
+			var filter1 = paper.filterCreate("filter1");
+			var blur1 = Raphael.filterOps.feGaussianBlur({stdDeviation: state.blur, "in": "SourceGraphic"});
+			filter1.appendOperation(blur1);
+			var ct1 = Raphael.filterOps.feComponentTransfer({
+				feFuncR: {type: "linear", slope: state.brightness, id: 'b_red'},
+				feFuncG: {type: "linear", slope: state.brightness, id: 'b_green'}, 
+				feFuncB: {type: "linear", slope:state.brightness, id: 'b_blue'}	
+			}); 
+			filter1.appendOperation(ct1);
+			var image = paper.image(image_source, 0, 0,image_dimensions.width, image_dimensions.height);
+			
+			image.filterInstall(filter1);
+			
+// 			var filter = paper.createFilter();
+// 			var effect = new FRaphael.FilterEffect("feComponentTransfer", {id: "brightness"});
+// 			var r = document.createElement('fefuncr');
+// 			r.id = 'b_red';
+// 			r.setAttribute('type', 'linear');
+// 			r.setAttribute('slope', '11');
+// 			var g = document.createElement('fefuncg');
+// 			g.id = 'b_green';
+// 			g.setAttribute('type', 'linear');
+// 			g.setAttribute('slope', '11');
+// 			var b = document.createElement('fefuncb');
+// 			b.id = 'b_blue';
+// 			b.setAttribute('type', 'linear');
+// 			b.setAttribute('slope', '11');
+// 			effect.element.appendChild(r);
+// 			effect.element.appendChild(g);
+// 			effect.element.appendChild(b);
+// 			filter.element.appendChild(effect.element);
+// 			filter.addBlur(5);
+			
+// 			image.filter(filter);
 			mySet.push(image);
 			mySet.draggable();
 			
@@ -1183,11 +1219,13 @@ function init(state, isNew, isIF, draw, image_source){
 			state.action = 'initialized';
 			$('#svg').css('left',state.xparam+'px');
 			$('#svg').css('top',state.yparam+'px');
+			$('#scb_s_microscopy_slide_content_lens_outline svg image').attr('transform',"matrix(1,0,0,1,"+state.xparam+","+state.yparam+")" );
+
 			$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
 			change_brightness_lines(state.brightness);
-			$('#lensfilter #focus')[0].setAttribute('stdDeviation', state.blur);
+			//$('#lensfilter #focus')[0].setAttribute('stdDeviation', state.blur);
 			draw(state);	
 			   
 
@@ -1291,7 +1329,8 @@ function modify_state_blur(addition, state, direction){
 		state.blur = state.blur +  addition;
 		
 	}
-	$('#lensfilter #focus')[0].setAttribute('stdDeviation', state.blur);
+// 	$('#lensfilter #focus')[0].setAttribute('stdDeviation', state.blur);
+	$('#filter1 #svgfilterop1')[0].setAttribute('stdDeviation', state.blur);
 	caman_lock = false;
 }
 

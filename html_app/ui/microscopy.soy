@@ -325,17 +325,17 @@
 					  	{if $k == 'secondary'}
 						  <input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="secondary" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'secondary'}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.secondary.name}</span>
+								   {if $r.is_sample_enabled and ($r.lane.slide_conditions == 'secondary' or length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1)}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.secondary.name}</span>
 							&nbsp;&nbsp;
 						{elseif $k == 'ki67'}
 							<input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="ki67" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-								   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'ki67'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.ki67.name}</span>
+								   {if $r.is_sample_enabled and ($r.lane.slide_conditions == 'ki67' or length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1)}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.ki67.name}</span>
 							&nbsp;
 						{elseif $k == 'NFIB'}
 							<input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="NFIB" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
 							   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-							   {if $r.is_sample_enabled and $r.lane.slide_conditions == 'NFIB'}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.NFIB.name}</span>
+							   {if $r.is_sample_enabled and ($r.lane.slide_conditions == 'NFIB' or length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1)}checked='checked'{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IHC.conditions.NFIB.name}</span>
 						{/if}
 						</div>
 					{/foreach}
@@ -344,7 +344,7 @@
 					 <input class="scb_f_microscopy_select_conditions {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+						{if $r.is_sample_enabled and length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
 					</div>
 				{elseif $r.lane.kind == 'IF' and not ($assignment.id =='assignment_706_2014')}
 					
@@ -355,7 +355,7 @@
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+						{if $r.is_sample_enabled and length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
 					{/if}
 					</div>
 					{/foreach}
@@ -366,7 +366,7 @@
 					 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="HnE" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.Dye.conditions.HnE.name}</span>
+						{if $r.is_sample_enabled and length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.Dye.conditions.HnE.name}</span>
 					{/if}
 					</div>
 					{/foreach}
@@ -376,7 +376,7 @@
 					 <input class="scb_f_microscopy_select_conditions {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_microscopy_dim_conditions">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+						{if $r.is_sample_enabled and length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text scb_s_microscopy_dim_conditions">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
 				</div>
 			{/if}
             </td>
@@ -610,25 +610,27 @@
 			 microscopy_id='{$microscopy.id}'
 			{if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>									
 			
-			<div id='scb_f_lens_outline'></div>
+			<div id='scb_s_microscopy_slide_content_lens_outline'></div>
 			
+<!-- 
 			<div class = 'scb_s_microscopy_slide_content_lens_outline'>
 				<svg id = 'svg' >
-<!-- 
+<!~~ 
 				onload='Init(evt)' onmousedown='Grab(evt)' onmousemove='Drag(evt)' onmouseup='Drop(evt)'
- -->
-    <filter id="lensfilter" x="0" y="0" width= '100%' height='100%' >
-      <fegaussianBlur id='focus' in="SourceGraphic"  stdDeviation="2"/>
-      <fecomponenttransfer id='brightness' >
-        <fefuncr id='b_red' type="linear" slope="1"/>
-        <fefuncg id='b_green' type="linear" slope="1"/>
-        <fefuncb id='b_blue' type="linear" slope="1"/>
-      </fecomponenttransfer>
-    </filter>
-    <image xlink:href="" x="0" y="0" filter="url(#lensfilter)" width="300px" height="300px"/>
-</svg>
+ ~~>
+					<filter id="lensfilter" x="0" y="0" width= '100%' height='100%' >
+					  <fegaussianBlur id='focus' in="SourceGraphic"  stdDeviation="2"/>
+					  <fecomponenttransfer id='brightness' >
+						<fefuncr id='b_red' type="linear" slope="1"/>
+						<fefuncg id='b_green' type="linear" slope="1"/>
+						<fefuncb id='b_blue' type="linear" slope="1"/>
+					  </fecomponenttransfer>
+					</filter>
+					<image xlink:href="" x="0" y="0" filter="url(#lensfilter)" width="300px" height="300px"/>
+				</svg>
 
 			</div>
+ -->
 			
 			
 			

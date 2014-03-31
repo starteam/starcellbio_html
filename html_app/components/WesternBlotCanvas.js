@@ -292,7 +292,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         if(state.gel.parent.parent.gel_type == '.10')
 	        var position = h + 26 / (weight + 10) * (height - h);
 	    else if( state.gel.parent.parent.gel_type == '.12')
-	    	var position = 930*Math.pow(weight,-0.582);
+	    	var position = 930   *Math.pow(weight,-0.582);
 		else if (state.gel.parent.parent.gel_type == '.15')
 			var position = 1385.1*Math.pow(weight,-0.765);
         return position;
@@ -306,9 +306,9 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
         	if(state.gel.parent.parent.gel_type == '.10')
             	var weight = 26 * (height-h)/(position-h) - 10;
             else if( state.gel.parent.parent.gel_type == '.12')
-                var weight = Math.pow(930/position,1/0.582);
+                var weight = Math.pow(930   /position,1/0.582);
 			else if (state.gel.parent.parent.gel_type == '.15')
-				var weight = Math.pow(930/position,1/0.582);
+				var weight = Math.pow(1385.1/position,1/0.765);
             return weight;
         }
         else

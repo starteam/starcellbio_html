@@ -712,8 +712,8 @@
   width: 291px;
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 3px 3px -3px black;
-  position: relative;
-  top: 8px;
+  position: absolute;
+  bottom: 75px;
 }
 .scb_s_wb_button_divider {
   position: absolute;

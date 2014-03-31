@@ -108,19 +108,6 @@
   background-image: url('../images/western_blot/scb_gray_right_arrow_inactive.png');
   height: 41px;
 }
-#scb_f_lens_outline {
-  margin: 50px;
-  display: inline-block;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 2px solid #189689;
-  position: absolute;
-  right: 191px;
-  bottom: -17px;
-  overflow: hidden;
-  background: black;
-}
 .scb_s_microscopy_left_microscopy:hover {
   background-image: url('../images/western_blot/scb_gray_left_arrow_hover.png') !important;
 }
@@ -1009,7 +996,7 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   text-align: left;
   font-size: 10pt;
 }
-.scb_s_microscopy_slide_content_lens_outline {
+#scb_s_microscopy_slide_content_lens_outline, #scb_f_lens_outline {
   margin: 50px;
   display: inline-block;
   width: 300px;
