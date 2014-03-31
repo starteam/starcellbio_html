@@ -98,6 +98,12 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 					}
 				}
 			}
+			else{
+				var color = state.microscopy_lane.current_slides[0].if_type;
+				if(color =='merge')
+					color = 'all';
+				set_filters(color, state);
+			}
 		}
 		else{
 			if(state.slides[0].if_type == 'red' ){
@@ -868,9 +874,9 @@ function draw(state){
 				$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 				$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
 				
-				$('#filter1 #svgfilterop2 #b_red').attr('slope', state.brightness+'');
-				$('#filter1 #svgfilterop2 #b_green').attr('slope', state.brightness+'');
-				$('#filter1 #svgfilterop2 #b_blue').attr('slope', state.brightness+'');
+				$('#filter1  #b_red').attr('slope', state.brightness+'');
+				$('#filter1  #b_green').attr('slope', state.brightness+'');
+				$('#filter1  #b_blue').attr('slope', state.brightness+'');
 				change_brightness_lines(state.brightness);
 		}
 	});
@@ -913,17 +919,13 @@ function draw(state){
 			$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
 			$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
 			
-			$('#filter1 #svgfilterop2 #b_red').attr('slope', state.brightness+'');
-			$('#filter1 #svgfilterop2 #b_green').attr('slope', state.brightness+'');
-			$('#filter1 #svgfilterop2 #b_blue').attr('slope', state.brightness+'');
+			$('#filter1  #b_red').attr('slope', state.brightness+'');
+			$('#filter1  #b_green').attr('slope', state.brightness+'');
+			$('#filter1  #b_blue').attr('slope', state.brightness+'');
 			change_brightness_lines(state.brightness);
 		}
 	});
 	$('#blurup').click(function(){
-		if(caman_lock){
-				console.log('nope');
-		}
-		else{
 			if(state.blur >=scb.ui.static.MicroscopyView.MAX_BLUR && !isLeft){
 				$('#blurup').prop('disabled', true);
 			}
@@ -935,13 +937,8 @@ function draw(state){
 			}
 
 		modify_state_blur(1, state, 'up');
-		}
 	});
 	$('#blurdown').click(function(){
-		if(caman_lock){
-				console.log('nope');
-		}
-		else{
 			if(state.blur >=scb.ui.static.MicroscopyView.MAX_BLUR && isLeft){
 				$('#blurdown').prop('disabled', true);
 			}
@@ -953,13 +950,8 @@ function draw(state){
 			}
 		
 		modify_state_blur(-1, state, 'down');
-		}
 	});
 	$('#fblurup').click(function(){
-		if(caman_lock){
-				console.log('nope');
-		}
-		else{
 			if(state.blur >=scb.ui.static.MicroscopyView.MAX_BLUR && !isLeft){
 				$('#fblurup').prop('disabled', true);
 				$('#blurup').prop('disabled', true);
@@ -972,13 +964,8 @@ function draw(state){
 			}
 			
 		modify_state_blur(0.25, state, 'up');
-		}
 	});
 	$('#fblurdown').click(function(){
-		if(caman_lock){
-				console.log('nope');
-		}
-		else{
 			if(state.blur >=scb.ui.static.MicroscopyView.MAX_BLUR && isLeft){
 				$('#fblurdown').prop('disabled', true);
 				$('#blurdown').prop('disabled', true);
@@ -991,7 +978,6 @@ function draw(state){
 			}
 		
 		modify_state_blur(-0.25, state, 'down');
-		}
 	});
 
 	console.log('draw');
@@ -1179,7 +1165,7 @@ function init(state, isNew, isIF, draw, image_source){
 			var paper = Raphael(document.getElementById('scb_s_microscopy_slide_content_lens_outline'));
 			var mySet=paper.set();
 			var filter1 = paper.filterCreate("filter1");
-			var blur1 = Raphael.filterOps.feGaussianBlur({stdDeviation: state.blur, "in": "SourceGraphic"});
+			var blur1 = Raphael.filterOps.feGaussianBlur({id: 'blur', stdDeviation: state.blur, "in": "SourceGraphic"});
 			filter1.appendOperation(blur1);
 			var ct1 = Raphael.filterOps.feComponentTransfer({
 				feFuncR: {type: "linear", slope: state.brightness, id: 'b_red'},
@@ -1220,10 +1206,10 @@ function init(state, isNew, isIF, draw, image_source){
 			$('#svg').css('left',state.xparam+'px');
 			$('#svg').css('top',state.yparam+'px');
 			$('#scb_s_microscopy_slide_content_lens_outline svg image').attr('transform',"matrix(1,0,0,1,"+state.xparam+","+state.yparam+")" );
-
-			$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
-			$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
-			$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
+// 
+// 			$('#lensfilter #brightness #b_red').attr('slope', state.brightness+'');
+// 			$('#lensfilter #brightness #b_green').attr('slope', state.brightness+'');
+// 			$('#lensfilter #brightness #b_blue').attr('slope', state.brightness+'');
 			change_brightness_lines(state.brightness);
 			//$('#lensfilter #focus')[0].setAttribute('stdDeviation', state.blur);
 			draw(state);	
@@ -1330,7 +1316,7 @@ function modify_state_blur(addition, state, direction){
 		
 	}
 // 	$('#lensfilter #focus')[0].setAttribute('stdDeviation', state.blur);
-	$('#filter1 #svgfilterop1')[0].setAttribute('stdDeviation', state.blur);
+	$('#filter1 *[in="SourceGraphic"]')[0].setAttribute('stdDeviation', state.blur);
 	caman_lock = false;
 }
 
