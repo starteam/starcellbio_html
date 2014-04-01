@@ -86,7 +86,7 @@ div#main {
 .scb_s_experiment_step {
   position: relative;
   display: inline-block;
-  right: 2px;
+  right: -7px;
 }
 .scb_s_experiment_step_circle {
   box-shadow: 0 0 6px #a9a9a9;

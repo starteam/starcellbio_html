@@ -109,7 +109,7 @@ div#main {
 .scb_s_experiment_step {
     position: relative;
     display: inline-block;
-    right: 2px;
+    right: -7px;
 
 }
 
@@ -265,28 +265,28 @@ div#main {
 }
 
 .scb_s_experiment_step_tech_steps{
-height: 66px;
-width: 887px;
-font-size: 13pt;
-letter-spacing: 1px;
-background: white;
-border-bottom-left-radius: 8px;
-border-bottom-right-radius: 8px;
-position: absolute;
-z-index: 4;
-top: 99px;
+	height: 66px;
+	width: 887px;
+	font-size: 13pt;
+	letter-spacing: 1px;
+	background: white;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+	position: absolute;
+	z-index: 4;
+	top: 99px;
 }
 
 .scb_s_experiment_step_tech_steps > div{
 		display: inline-block;
 }
 .scb_s_experiment_step_main_steps{
-background: #e9ecf1;
-height: 42px;
-border-radius: 8px;
-width: 887px;
-position: absolute;
-z-index: 5;
+	background: #e9ecf1;
+	height: 42px;
+	border-radius: 8px;
+	width: 887px;
+	position: absolute;
+	z-index: 5;
 }
 
 .scb_s_experiment_step_selected{
@@ -296,39 +296,39 @@ z-index: 5;
 
 
 .arrow-design-outer{
-width: 0;
-height: 0;
-border-top: 22px solid transparent;
-border-bottom: 22px solid transparent;
-border-left: 11px solid white;
-left: 97px;
-top: -1px;
-z-index: 56;
-position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 22px solid transparent;
+	border-bottom: 22px solid transparent;
+	border-left: 11px solid white;
+	left: 97px;
+	top: -1px;
+	z-index: 56;
+	position: absolute;
 }
 
 .arrow-setup-outer{
-width: 0;
-height: 0;
-border-top: 22px solid transparent;
-border-bottom: 22px solid transparent;
-border-left: 11px solid white;
-left: 157px;
-top: -1px;
-z-index: 56;
-position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 22px solid transparent;
+	border-bottom: 22px solid transparent;
+	border-left: 11px solid white;
+	left: 157px;
+	top: -1px;
+	z-index: 56;
+	position: absolute;
 }
 
 
 .arrow-down-design{
 
-width: 0;
-height: 0;
-border-top: 20px solid transparent;
-border-bottom: 20px solid transparent;
-border-left: 9px solid #d5dce4;
-left: -12px;
-top: -20px;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 9px solid #d5dce4;
+	left: -12px;
+	top: -20px;
 	position: absolute;
 	z-index: 56;
 }
@@ -336,13 +336,13 @@ top: -20px;
 
 .arrow-down-setup{
 
-width: 0;
-height: 0;
-border-top: 20px solid transparent;
-border-bottom: 20px solid transparent;
-border-left: 9px solid #d5dce4;
-left: -12px;
-top: -20px;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 9px solid #d5dce4;
+	left: -12px;
+	top: -20px;
 	position: absolute;
 	z-index: 56;
 }
@@ -353,13 +353,13 @@ top: -20px;
 
 .arrow-down-design-selected{
 
-width: 0;
-height: 0;
-border-top: 20px solid transparent;
-border-bottom: 20px solid transparent;
-border-left: 9px solid #4690c1 !important;
-left: -12px;
-top: -20px;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 9px solid #4690c1 !important;
+	left: -12px;
+	top: -20px;
 	position: absolute;
 	z-index: 56;
 }
@@ -367,40 +367,40 @@ top: -20px;
 
 .arrow-down-design-visited{
 
-width: 0;
-height: 0;
-border-top: 20px solid transparent;
-border-bottom: 20px solid transparent;
-border-left: 9px solid #59bbf2 !important;
-left: -12px;
-top: -20px;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 9px solid #59bbf2 !important;
+	left: -12px;
+	top: -20px;
 	position: absolute;
 	z-index: 56;
 }
 
 
 .arrow-down-setup-visited{
-width: 0;
-height: 0;
-border-top: 20px solid transparent;
-border-bottom: 20px solid transparent;
-border-left: 9px solid #59bbf2 !important;
-left: -12px;
-top: -20px;
-z-index: 56;
-position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 9px solid #59bbf2 !important;
+	left: -12px;
+	top: -20px;
+	z-index: 56;
+	position: absolute;
 } 
 
 .arrow-down-setup-selected{
-width: 0;
-height: 0;
-border-top: 20px solid transparent;
-border-bottom: 20px solid transparent;
-border-left: 9px solid #4690c1 !important;
-left: -12px;
-top: -20px;
-z-index: 56;
-position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 9px solid #4690c1 !important;
+	left: -12px;
+	top: -20px;
+	z-index: 56;
+	position: absolute;
 } 
 
 
@@ -477,13 +477,13 @@ position: absolute;
 	
 	width: 219px;
 	
-  height: 21px;
-  padding-top: 4px;
-padding-bottom: 3px;
-  padding-left: 10px;
-  overflow: hidden;
-  background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
-  box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+	height: 21px;
+	padding-top: 4px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+	overflow: hidden;
+	background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
+	box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
 }
 
 .custom-select select {
