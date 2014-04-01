@@ -402,7 +402,7 @@ left: 131px;
 .scb_s_western_blot_samples_area {
 	margin-top:28px;
 	height:358px;
-	margin-left: 13px;
+	margin-left: 8px;
 }
 
 .scb_s_western_blot_gel_tabs {
