@@ -222,7 +222,15 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
                     // if(intensity < 10) {
                     // intensity = 12;
                     // }
-                    var blur_position = h + 26 / (blur + 10) * (height - h);
+                    if(state.gel.parent.parent.gel_type == '.10')
+						var blur_position = h + 26 / (blur + 10) * (height - h);
+					else if( state.gel.parent.parent.gel_type == '.12')
+						var blur_position = 930   *Math.pow(blur,-0.582);
+					else if (state.gel.parent.parent.gel_type == '.15')
+						var blur_position = 1385.1*Math.pow(blur,-0.765);
+                    
+                    
+                    //var blur_position = h + 26 / (blur + 10) * (height - h);
                     var lineWidth = Math.log(intensity / 10);
                     g.strokeStyle = '#c0c0c0';
                     g.shadowBlur = 2;
