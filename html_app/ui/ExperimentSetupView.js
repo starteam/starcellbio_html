@@ -619,7 +619,8 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
     var treatment_line = parsed.treatment.drug_list.list[0];
     var drug_id = treatment_line.drug_id;
     var concentration_id = treatment_line.concentration_id;
-    var collection_id = parsed.cell_treatment.collection_id;
+    //var collection_id = parsed.cell_treatment.collection_id;
+     var collection_id = parsed.cell_treatment.treatment_list.list[0].collection_id;
     var temperature = parsed.treatment.temperature;
 
 
