@@ -255,15 +255,15 @@ left: 221px;
 
 #closesearch{
 	font-size: 12pt;
-padding:0px 3px 15px;
-border-radius: 60px;
-height: 18px;
-width: 18px;
-top: 8px !important;
-right: 0;
-left: 281px;
-border: none;
-position: absolute;
+	padding:0px 3px 15px;
+	border-radius: 60px;
+	height: 18px;
+	width: 18px;
+	top: 8px !important;
+	right: 0;
+	left: 281px;
+	border: none;
+	position: absolute;
 	background: none;
 	color:black;
 }

@@ -200,10 +200,6 @@ var __assigment_facs = {
 //////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////
-
-
 
 ///NEW ASSIGNMENTS//////////
 var __assignment2 = {
@@ -7752,7 +7748,7 @@ master_model_data = {
     app_description: 'StarCellBio Placeholder',
     assignments: {
         list: [ 
-         __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability, __microscopy_test, __assignment_706_2014, __assignment_706_2014_ps2 
+         __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability, __microscopy_test, __assignment_706_2014 //, __assignment_706_2014_ps2 
         ]
     },
     ui: {}

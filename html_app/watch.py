@@ -50,6 +50,7 @@ def update_index_html():
 
 def processor( path ): 
     global global_update_index, css, js
+    import time
     update_index = False
     path = path.replace("//","/")
     url = path.replace(root,"")
@@ -63,12 +64,12 @@ def processor( path ):
         update_index = True
     if( path.endswith(".soy") ):
         infile = path
-        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".js"
+        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + '_' + str(int(time.time())) + ".js"
         call(["java", "-jar" , "../tools/SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
         print "compile soy %s " % (path)
     if( path.endswith(".gss") ):
         infile = path
-        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".css"
+        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + str(int(time.time())) +".css"
         call(["java", "-jar" , "../tools/closure-stylesheets-20111230.jar" , "--pretty-print" , infile , "-o" , outfile])
         print "compile gss %s to %s " % (infile,outfile)
     if( path.endswith(".touch_index" ) ):

@@ -865,7 +865,7 @@ function draw(state){
 			}	
 
 				if(state.brightness >=1)
-					 state.brightness = state.brightness + 0.5;
+					 state.brightness = state.brightness + 1;
 				else state.brightness = state.brightness + 0.1;
 
 				console.log(state.brightness);
@@ -912,7 +912,7 @@ function draw(state){
 
 			if(state.brightness <=1)
 				 state.brightness = state.brightness - 0.1;
-			else state.brightness = state.brightness - 0.5;
+			else state.brightness = state.brightness - 1;
 
 			console.log(state.brightness);
 			console.log('brightdown');
@@ -1036,15 +1036,15 @@ function change_brightness_lines(brightness_value){
 				$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
 			else
 				$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 1.5 )
+			if (brightness_value >2)
 				$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
 			else
 				$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 2 )
+			if (brightness_value >3 )
 				$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
 			else
 				$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 3 )
+			if (brightness_value > 4 )
 				$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
 			else
 				$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
@@ -1052,15 +1052,15 @@ function change_brightness_lines(brightness_value){
 				$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
 			else
 				$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 7 )
+			if (brightness_value > 6 )
 				$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
 			else
 				$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 9 )
+			if (brightness_value > 7 )
 				$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
 			else
 				$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 11 )
+			if (brightness_value > 8 )
 				$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
 			else
 				$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
