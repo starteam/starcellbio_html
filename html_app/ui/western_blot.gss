@@ -18,7 +18,7 @@
 
 .scb_f_wb_gel_type_followup{
 	display:none;
-	left: 283px;
+	left: 275px;
 	position: absolute;
 	width: 205px;
 	background: #f4f6f8;
@@ -34,7 +34,7 @@
 
 .scb_f_wb_marker_followup{
 	display:none;
-	left: 173px;
+	left: 155px;
 	position: absolute;
 	width: 205px;
 	background: #f4f6f8;
@@ -57,7 +57,7 @@
 
 
 .scb_s_western_blot_tools_samples_followup{
-	left: 105px;
+	left: 101px;
 	bottom: 346px;
 	position: absolute;
 	width: 205px;
@@ -126,7 +126,7 @@ left: 131px;
 
 .scb_s_western_blot_marker_info{
 	outline: none;
-	left: 160px;
+	left: 147px;
 	bottom: 84px;
 	position: absolute;
 	background: none;
@@ -144,7 +144,7 @@ left: 131px;
 
 .scb_s_western_blot_gel_type_info{
 	outline: none;
-	left: 270px;
+	left: 262px;
 	bottom: 367px;
 	position: absolute;
 	background: none;
@@ -402,7 +402,7 @@ left: 131px;
 .scb_s_western_blot_samples_area {
 	margin-top:28px;
 	height:358px;
-	margin-left: 8px;
+	margin-left: 13px;
 }
 
 .scb_s_western_blot_gel_tabs {
@@ -789,6 +789,7 @@ left: 131px;
 .scb_s_western_blot_choose_samples_order{
 position: relative;
 bottom: 12px;
+left: -4px;
 }
 
 .scb_s_western_blot_sortable_list{
@@ -892,6 +893,8 @@ margin-top: 3px;
 
 .scb_s_wb_button_wrapper{
 	float:right;
+	position:relative;
+	right: 22px;
 }
 
 .scb_s_western_blot_choose_samples_marker > li{
@@ -936,7 +939,7 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
     font-size: 11pt;
     color: black;
     text-align: left;
-    left: 23px;
+    left: 18px;
     display: inline-block;
     position: relative;
     font-family: 'sourcesanspro-semibold';
@@ -978,6 +981,7 @@ ol.scb_s_western_blot_choose_samples_order_list li.placeholder:before {
 	font-family: 'sourcesanspro-semibold';
 	bottom: 78px;
 	position: absolute;
+	left: 9px;
 }
 
 .scb_s_western_blot_add_marker_text{

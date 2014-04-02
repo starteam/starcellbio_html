@@ -253,8 +253,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
     var slide_id = $(element).attr('lane_id');
     if (slide_id == '') {
        var cell_treatment_id = $(element).attr('cell_treatment_id');
-       for(var index = 0; index < parsed.microscopy.lanes_list.list.length; index++){
-			var lane = parsed.microscopy.lanes_list.list[index];
+       for(var lane in parsed.microscopy.lanes_list.list){
 			if(lane.kind == slide_type && cell_treatment_id == lane.cell_treatment_id){
 				keys_list = _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type])
 				matches_list.push(lane.slide_conditions)

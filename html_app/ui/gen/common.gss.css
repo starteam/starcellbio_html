@@ -1,5 +1,5 @@
 #main button, #main *[role=button], input[type=radio] {
-  outline: none;
+  outline: none !important;
 }
 body {
   background-color: #e9edf1;

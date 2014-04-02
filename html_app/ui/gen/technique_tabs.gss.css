@@ -300,7 +300,15 @@
   overflow-x: hidden;
   background-color: white;
 }
-.scb_s_western_blot_samples_heading, .scb_s_facs_samples_heading, .scb_s_microscopy_samples_heading {
+.scb_s_western_blot_samples_heading {
+  font-size: 11pt;
+  font-family: 'sourcesanspro-semibold';
+  text-align: left;
+  padding-top: 15px;
+  margin-bottom: -10px;
+  padding-left: 17px;
+}
+.scb_s_facs_samples_heading, .scb_s_microscopy_samples_heading {
   font-size: 11pt;
   font-family: 'sourcesanspro-semibold';
   text-align: left;

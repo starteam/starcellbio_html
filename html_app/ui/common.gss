@@ -10,7 +10,7 @@
 }
 
 #main button, #main *[role=button], input[type=radio] {
-	outline:none;
+	outline:none !important;
 }
 
 body {
