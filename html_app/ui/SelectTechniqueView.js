@@ -181,7 +181,7 @@ scb.ui.SelectTechniqueView = function scb_ui_SelectTechniqueView(gstate) {
     	$('#main').css({
 				position:'absolute',
 				left: ($(window).width() - $('#main').outerWidth())/2,
-				top: ($(window).height() - $('#main').outerHeight())/2
+				top: 0
 		});
     	$(window).resize(function(){
 

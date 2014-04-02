@@ -776,7 +776,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 		$('#main').css({
 				position:'absolute',
 				left: ($(window).width() - $('#main').outerWidth())/2,
-				top: ($(window).height() - $('#main').outerHeight())/2
+				top: 0
 			});
 		$(window).resize(function(){
 

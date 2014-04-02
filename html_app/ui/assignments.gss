@@ -52,17 +52,6 @@
 	display: inline-block;
 }
 
-.scb_s_assignment_header_img_right{
-	position:relative;
-	margin-right: -10px;
-	cursor: pointer;
-	display:inline;
-	width:39px;
-	height: 41px;
-	background-image: url('../../images/western_blot/scb_gray_right_arrow_active.png');
-
-}
-
 .scb_s_assignment_header_img_left{
 	position:relative;
 	margin-left: -10px;
@@ -73,6 +62,17 @@
 	background-image: url('../../images/western_blot/scb_gray_left_arrow_active.png');
 
 	
+}
+
+.scb_s_assignment_header_img_right{
+	position:relative;
+	margin-right: -10px;
+	cursor: pointer;
+	display:inline;
+	width:39px;
+	height: 41px;
+	background-image: url('../../images/western_blot/scb_gray_right_arrow_active.png');
+
 }
 
 .scb_s_assignment_header_img_left_inactive{
