@@ -319,8 +319,8 @@ background-image:url('../../images/western_blot/scb_gray_right_arrow_hover.png')
 
 .scb_s_assignments_print_assignment{
 	float:left !important;
-	background: none;
-	background-image: url('../../images/header/scb_print.png');
+	background: none !important;
+	background-image: url('../../images/header/scb_print.png') !important;
 }
 
 .assignement_experiment_list {

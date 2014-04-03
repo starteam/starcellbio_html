@@ -48,7 +48,6 @@
     bottom: 5px;
     right: 29px;
 	top: 2px;
-	float:left;
 	position:relative;
 }
 

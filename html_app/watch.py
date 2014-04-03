@@ -11,7 +11,7 @@ root = os.environ['VIRTUAL_ENV']+'/starcellbio_html/html_app/'
 global_update_index = True
 js = dict();
 css = dict();
-
+time = '?_='+str(int(time.time()))
 
 css_prefix = '<link type="text/css" href="/static/'
 css_suffix = '" rel="Stylesheet" />\n'
@@ -36,8 +36,8 @@ def index_html():
     if( js.has_key( 'swipe/Gruntfile.js' )):
         js.pop('swipe/Gruntfile.js')
     
-    css_join = css_prefix + (css_suffix+css_prefix).join(css.keys()) + css_suffix
-    js_join = js_prefix + (js_suffix+js_prefix).join(js.keys()) + js_suffix
+    css_join = css_prefix + (time+css_suffix+css_prefix).join(css.keys())+ time + css_suffix
+    js_join = js_prefix + (time+js_suffix+js_prefix).join(js.keys())  + js_suffix
     js_join = js_prefix + "starcellbio.app.js" + js_suffix + js_join
     js_join = js_prefix + "js/jquery-1.7.2.min.js" + js_suffix + js_join
     return html_prefix + css_join + js_join + html_suffix 
@@ -50,7 +50,6 @@ def update_index_html():
 
 def processor( path ): 
     global global_update_index, css, js
-    import time
     update_index = False
     path = path.replace("//","/")
     url = path.replace(root,"")
@@ -64,12 +63,12 @@ def processor( path ):
         update_index = True
     if( path.endswith(".soy") ):
         infile = path
-        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + '_' + str(int(time.time())) + ".js"
+        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".js"
         call(["java", "-jar" , "../tools/SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
         print "compile soy %s " % (path)
     if( path.endswith(".gss") ):
         infile = path
-        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + str(int(time.time())) +".css"
+        outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".css"
         call(["java", "-jar" , "../tools/closure-stylesheets-20111230.jar" , "--pretty-print" , infile , "-o" , outfile])
         print "compile gss %s to %s " % (infile,outfile)
     if( path.endswith(".touch_index" ) ):
@@ -98,4 +97,3 @@ try:
     observer.run()
 except:
     observer.stop()
-
