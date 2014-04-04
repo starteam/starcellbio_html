@@ -28,12 +28,15 @@ scb.ui.static.MicroscopyView.parse = function (element) {
     return parsed;
 }
 
+var if_light_on_and_laser_on = false;
+var disableSlider = false;
+
 scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	
 	var model = new scb.components.ModelFactory(state.context.template);
 	model.microscopy.compute(state);
 	var img_sample = state.slides[0].hash;
-	var disableSlider = false;
+	
 	var enableIFSlider = false;
 	if(state.microscopy_lane.current_slides.length == 0){
 		state.microscopy_lane.current_slides = state.slides;
@@ -140,7 +143,10 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	
 	if(state.slide_type != 'IF' && !state.microscopy.light_on && !state.microscopy.laser_on){
 		init_wb('/images/microscopy/black.jpg');
+		disableSlider = true;
+		if_light_on_and_laser_on = false;
 	}
+	
 	else if(state.slide_type != 'IF' && state.microscopy.light_on && !state.microscopy.laser_on){
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
@@ -152,10 +158,16 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, true, false, draw, state.assignment.template.slides[img_sample]);
 			}
+			disableSlider = false;
+			if_light_on_and_laser_on = false;
 	}
+	
 	else if(state.slide_type != 'IF' && !state.microscopy.light_on && state.microscopy.laser_on){
 		init_wb('/images/microscopy/black.jpg');
+		disableSlider = true;
+		if_light_on_and_laser_on = false;
 	}
+	
 	else if(state.slide_type != 'IF' && state.microscopy.light_on && state.microscopy.laser_on){
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
@@ -167,21 +179,32 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, true, false,  draw, state.assignment.template.slides[img_sample]);
 			}
+			disableSlider = false;
+			if_light_on_and_laser_on = false;
 	}
+	
 	else if(state.slide_type == 'IF' && !state.microscopy.light_on && !state.microscopy.laser_on){
 			init_wb('/images/microscopy/black.jpg');
 			disableSlider = true;
+			if_light_on_and_laser_on = false;
 	}
+	
 	else if(state.slide_type == 'IF' && state.microscopy.light_on && !state.microscopy.laser_on){
 		if(state.microscopy_lane.lens_map.brightness >1 )
 			init_wb_mod(state.microscopy_lane.lens_map, '/images/microscopy/white.jpg');
 		else
 			init_wb_mod(state.microscopy_lane.lens_map, '/images/microscopy/black.jpg');
+		disableSlider = false;
+		enableIFSlider = true;
+		min_brightness = 1;
+		max_brightness = 11;
+		if_light_on_and_laser_on = true;
 	}
+	
 	else if(state.slide_type == 'IF' && !state.microscopy.light_on && state.microscopy.laser_on){
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
-				//state.microscopy_lane.lens_map.brightness = 1;
+				state.microscopy_lane.lens_map.brightness = 1;
 				
 				init(state.microscopy_lane.lens_map, false, true, draw, state.microscopy_lane.current_slides.length != 1 ? state.assignment.template.slides[img_sample]: state.microscopy_lane.lens_map.src );
 				//init(state.microscopy_lane.lens_map, false, true, draw, state.assignment.template.slides[img_sample]);
@@ -189,16 +212,19 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 			else{
 				state.microscopy_lane.lens_map.mag = state.slides[0].mag;
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
-				//state.microscopy_lane.lens_map.brightness = 1;
+				state.microscopy_lane.lens_map.brightness = 1;
 				init(state.microscopy_lane.lens_map, true, true, draw, state.assignment.template.slides[img_sample]);
 			}
-			disableSlider = true;
-			min_brightness=1;
-			max_brightness=11;
+		disableSlider = true;
+		min_brightness=1;
+		max_brightness=11;
+		if_light_on_and_laser_on = true;
 	}
+	
 	else if(state.slide_type == 'IF' && state.microscopy.light_on && state.microscopy.laser_on){
+	disableSlider = false;
 		enableIFSlider = true;
-		$('#brightdown').prop('disabled', true);
+		//$('#brightdown').prop('disabled', true);
 		if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
  				if(state.microscopy_lane.lens_map.brightness <1){
  					//state.microscopy_lane.lens_map.brightness = 1;
@@ -215,6 +241,8 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		}
 		min_brightness=1;
 		max_brightness=11;
+		if_light_on_and_laser_on = true;
+		
 	}
 	if(!disableSlider  && !enableIFSlider){
 		min_brightness = 0;
@@ -997,85 +1025,164 @@ function draw(state){
 
 
 function change_brightness_lines(brightness_value, brightness_disabled){
-		if(brightness_disabled){
+		if(brightness_disabled && disableSlider){
 			$('.scb_s_microscopy_brightness_focus_middle').children().attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
 		}
 		else{
-			var list_of_lines = $('.scb_s_microscopy_brightness_focus_middle').children();		
-			if (brightness_value > 0)
-				$(list_of_lines[0]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[0]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 0.1 )
-				$(list_of_lines[1]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[1]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 0.2 )
-				$(list_of_lines[2]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[2]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 0.3 )
-				$(list_of_lines[3]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[3]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 0.4 )
-				$(list_of_lines[4]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[4]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 0.5 )
-				$(list_of_lines[5]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[5]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 0.6 )
-				$(list_of_lines[6]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[6]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 0.7 )
-				$(list_of_lines[7]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[7]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 0.8 )
-				$(list_of_lines[8]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[8]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			if(if_light_on_and_laser_on){
+				var list_of_lines = $('.scb_s_microscopy_brightness_focus_middle').children();		
+				if (brightness_value > 1)
+					$(list_of_lines[0]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[0]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value >1.5)
+					$(list_of_lines[1]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[1]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 2 )
+					$(list_of_lines[2]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[2]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value >2.5 )
+					$(list_of_lines[3]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[3]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 3 )
+					$(list_of_lines[4]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[4]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 3.5 )
+					$(list_of_lines[5]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[5]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value >4 )
+					$(list_of_lines[6]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[6]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value >4.5)
+					$(list_of_lines[7]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[7]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 5)
+					$(list_of_lines[8]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[8]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
 			
 			
-			if (brightness_value > 0.9 )
-				$(list_of_lines[9]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[9]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 1 )
-				$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value >2)
-				$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value >3 )
-				$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 4 )
-				$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 5 )
-				$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 6 )
-				$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 7 )
-				$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
-			if (brightness_value > 8 )
-				$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
-			else
-				$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value >5.5)
+					$(list_of_lines[9]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[9]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 6 )
+					$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value >6.5)
+					$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value >7 )
+					$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 7.5 )
+					$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 8 )
+					$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 8.5)
+					$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 9 )
+					$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 9.5 )
+					$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			}
+			else{
+				var list_of_lines = $('.scb_s_microscopy_brightness_focus_middle').children();		
+				if (brightness_value > 0)
+					$(list_of_lines[0]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[0]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 0.1 )
+					$(list_of_lines[1]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[1]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 0.2 )
+					$(list_of_lines[2]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[2]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 0.3 )
+					$(list_of_lines[3]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[3]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 0.4 )
+					$(list_of_lines[4]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[4]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 0.5 )
+					$(list_of_lines[5]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[5]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 0.6 )
+					$(list_of_lines[6]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[6]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 0.7 )
+					$(list_of_lines[7]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[7]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 0.8 )
+					$(list_of_lines[8]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[8]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			
+			
+				if (brightness_value > 0.9 )
+					$(list_of_lines[9]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[9]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 1 )
+					$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[10]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value >2)
+					$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[11]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value >3 )
+					$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[12]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 4 )
+					$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[13]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 5 )
+					$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[14]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 6 )
+					$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[15]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 7 )
+					$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[16]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+				if (brightness_value > 8 )
+					$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Green.png');
+				else
+					$(list_of_lines[17]).attr('src', 'images/microscopy/Brightness/Brightness_Line_Gray.png');
+			}
 		}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
