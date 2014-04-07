@@ -66,7 +66,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
         self.shape_to_data = function (state) {
             var shape = state.shape;
 
-            function g0g1(x) {
+			function g0g1(x) {
                 return 4 * Math.exp(-((x - 1) * (x - 1)) * 30);
             }
 
@@ -85,6 +85,36 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             function s_block(x) {
                 return Math.exp(-((2 - x) * Math.exp(2 - x) - .9) * ((2 - x) * Math.exp(2 - x) - .9) / .4);
             }
+            
+
+            function g2m_0_400(x) {
+                return 1 / 2 * Math.exp(-((x - 1.5) * (x - 1.5) * 2));
+            }
+            function s_block_50_400(x) {
+                return Math.exp(-((0.7 - x) * Math.exp(0.7 - x) - .7) * ((0.7 - x) * Math.exp(0.7 - x) - .7) / .4)-0.1;
+            }
+			   function g2m_50_400(x) {
+                return 1 / 2 * Math.exp(-((x - 0.4) * (x - 0.4) * 2));
+        	   }
+            function g0g1_400(x) {
+                return 4 * Math.exp(-((x - 0.35) * (x - 0.35)) * 30);
+            }
+            function g2m_400(x) {
+                return 1 / 2 * Math.exp(-((x - 0.8) * (x - 0.8) * 15));
+            }
+            function g2m_100_400(x) {
+                return 1 / 2 * Math.exp(-((x - 0.7) * (x - 0.7) * 15));
+            }
+
+
+//             function g2m_rna3(x) {
+//                 return 1 / 2 * Math.exp(-((x - 2) * (x - 2) * 10));
+//             }
+// 			   function s_block_50_rna2(x) {
+// 				   return Math.exp(-((1.5 - x) * Math.exp(1.5 - x) - .9) * ((1.5 - x) * Math.exp(1.5 - x) - .9) / .4);
+// 			   }
+
+
 
             function normalize(data, factor) {
                 var factor = factor || .05;
@@ -108,11 +138,12 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     });
                 }
                 _.each(data, function (s, index) {
-                    data[index][0] = data[index][0] * 50;
+                    data[index][0] = data[index][0] * 133;
 
                 });
 
             }
+
 
             var options = {
                 series: {
@@ -124,8 +155,8 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 	show: true,
                 	color: '#000000',
                     min: 0,
-                    max: 150,
-                    ticks: [50, 100],
+                    max: template.model.facs.max ? template.model.facs.max:  100,
+                    ticks:  template.model.facs.ticks ? template.model.facs.ticks: [50, 100],
                     tickLength: 0,
                     font: {
                         family: 'sourcesanspro-regular',
@@ -144,10 +175,48 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     }
 
                 },
-                grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: 150 }, 
+                grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: template.model.facs.max ? template.model.facs.max:  100 }, 
                 			yaxis: { from: 0, to: 0 }, color: "#000" },
                        { xaxis: { from: 0, to: 0 }, yaxis: { from: 0, to: 100 }, color: "#000" }]},
             };
+            
+//            	var options = {
+//                 series: {
+//                     lines: {show: true, fill: true, steps: true, lineWidth: 1},
+//                     points: {show: false, radius: .5, fill: false},
+//                     color: '#808080'
+//                 },
+//                 xaxis: {
+//                 	show: true,
+//                 	color: '#000000',
+//                     min: 0,
+//                     max: 150,
+//                     ticks: [50, 100],
+//                     tickLength: 0,
+//                     font: {
+//                         family: 'sourcesanspro-regular',
+//                         size: 11,
+//                     }
+//                 },
+//                 yaxis: {
+//                 	show: true,
+//                 	color: '#000000',
+//                     min: 0,
+//                     max: 100,
+//                     tickLength:0,
+//                     font: {
+//                         family: 'sourcesanspro-regular',
+//                         size: 11
+//                     }
+// 
+//                 },
+//                 grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: 150 }, 
+//                 			yaxis: { from: 0, to: 0 }, color: "#000" },
+//                        { xaxis: { from: 0, to: 0 }, yaxis: { from: 0, to: 100 }, color: "#000" }]},
+//             };
+            
+            
+            
             if (('' + shape).toLowerCase() == 'normal') {
                 var data = [];
                 var bias = (Math.random() - .5) * .10;
@@ -216,6 +285,91 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     options: options
                 };
             }
+            
+            
+           if (('' + shape).toLowerCase() == 'normal-400') {
+                var data = [];
+                var bias = (Math.random() - .5) * .10;
+                for (var x = 0; x < 3; x += .01) {
+                    var y = g0g1_400(x + bias) + 3 * g2m_400(x + bias) + near_zero(x + bias) + s(x + bias);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        { data: data},
+//                        {label: 'phase 1', data:[[0,0.01],[0.8,0.01]],lines:{fill:false}},
+//                        {label: 'phase 2', data:[[0.8,0.011],[1.2,0.011]],lines:{fill:false}},
+//                        {label: 'phase 3', data:[[1.2,0.01],[1.8,0.01]],lines:{fill:false}},
+//                        {label: 'phase 4', data:[[1.8,0.011],[2.3,0.011]],lines:{fill:false}}
+
+                    ],
+                    options: options
+                };
+            }
+            if (('' + shape).toLowerCase() == 's-block-400') {
+                var data = [];
+                for (var x = 0; x < 3; x += .01) {
+                    var y = s_block_50_400(x);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        { data: data}
+                    ],
+                    options: options
+                };
+            }
+            if (('' + shape).toLowerCase() == 'g2-block-100-400') {
+                var data = [];
+                for (var x = 0; x < 3; x += .01) {
+                    var y = g2m_100_400(x);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        { data: data}
+                    ],
+                    options: options
+                };
+            }
+            if (('' + shape).toLowerCase() == 'g2-block-50-400') {
+                var data = [];
+                for (var x = 0; x < 3; x += .01) {
+                    var y = g2m_50_400(x);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        { data: data}
+                    ],
+                    options: options
+                };
+            }
+           if (('' + shape).toLowerCase() == 'g2-block-400') {
+                var data = [];
+                for (var x = 0; x < 3; x += .01) {
+                    var y = g2m_0_400(x);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        { data: data}
+                    ],
+                    options: options
+                };
+            }
+            
+            
 
         }
     }
