@@ -1,0 +1,88 @@
+{namespace mit706s14ps2}
+
+/**
+@param template
+@param assignment
+@param experiment
+*/
+{template .dialog}
+<div class='scb_mit706s16_inner_dialog'>
+    <h1 class='scb_mit706s16_inner_dialog_title'>
+        <span class='scb_mit706s16_inner_dialog_title_close'>&#215;</span>
+        Add Samples </h1>
+
+    <div class='scb_mit706s16_inner_dialog_body'>
+        
+<!--headings-->
+        <table class="scb_s_experiment_setup_table scb_s_experiment_setup_special">
+            <thead class="scb_s_experiment_setup_table_head">
+            {foreach $heading in $template.ui.add_multiple_dialog.headings}
+            <td class="scb_s_experiment_setup_table_heading {if $heading == 'Strain'}scb_s_experiment_setup_table_heading_strain{/if}" >
+                {$heading}
+            </td>
+            {/foreach}
+            </thead>
+            {foreach $cell_line in $template.ui.add_multiple_dialog.order}
+            {if $cell_line == 'headings' or $cell_line =='order'}
+            {else}
+            <tbody class="scb_s_experiment_setup_table_body">
+            {foreach $rows in $template.ui.add_multiple_dialog[$cell_line].rows}
+            <tr>
+                {foreach $cell in $rows.cells}
+                <td class="scb_s_experiment_setup_table_border {if $cell.kind == 'checkbox'}scb_s_experiment_setup_center_cell {/if}">
+                    {if $cell.kind == 'text'}
+                    {$cell.text}
+                    {/if}
+                    {if $cell.kind == 'select'}
+                    HERE GOES SELECT
+                    <select assignment='{$assignment.id}' experiment_id='{$experiment.id}'
+                            treatment_id='{$cell.treatment_id}' cell_line='{$cell_line}' cell_line='{$cell_line}'>
+                        <option disabled="disabled">Please select</option>
+                        {foreach $key in keys($template[$cell.field])}
+                        <option value='{$template[$cell.field][$key]}'>{$template[$cell.field][$key].name}</option>
+                        {/foreach}
+                    </select>
+                    {/if}
+                    {if $cell.kind == 'checkbox'}
+                    <input type="checkbox" name="{$cell.name}" assignment_id='{$assignment.id}'
+                           experiment_id='{$experiment.id}' treatment_id='{$cell.treatment_id}' cell_line='{$cell_line}'>
+                    {/if}
+                </td>
+                {/foreach}
+            </tr>
+            {if isLast($cell_line)}
+            <tr>
+<!-- 
+                {foreach $cell in $rows.cells}
+                <td class='scb_s_experiment_setup_table_border scb_s_experiment_setup_center_cell'>
+                    {if $cell.kind == 'checkbox'}
+                    <button class='scb_s_gray_button scb_mit706s16_inner_dialog_select' name="{$cell.name}" assignment_id='{$assignment.id}' cell_line='{$cell_line}'>SELECT ALL</button>
+                    {/if}
+                </td>
+                {/foreach}
+ -->
+
+            </tr>
+
+            {/if}
+            {/foreach}
+<!--            <tr>
+                <td colspan='{$template.ui.add_multiple_dialog.headings.length}'>
+                    <div class='scb_s_experiment_design_green_line'></div>
+                    <button class='scb_mit706s16_inner_dialog_cancel scb_s_gray_button'>CANCEL</button>
+                    <button class='scb_mit706s16_inner_dialog_add scb_s_gray_button'>ADD MULTIPLE TREATMENTS</button>
+                </td>
+-->            </tr>
+            </tbody>
+            {/if}
+        {/foreach}
+        </table>
+                <button class='scb_mit706s16_inner_dialog_select_all scb_s_gray_button'>SELECT ALL</button><br>
+       
+        <div class='scb_mit706s16_button_float'>
+        <button class='scb_mit706s16_inner_dialog_cancel scb_s_gray_button scb_s_2014_cancel'>CANCEL</button>
+        <button class='scb_mit706s16_inner_dialog_add scb_s_gray_button scb_s_2014_samples'>ADD SAMPLES</button>
+        </div>
+    </div>
+</div>
+{/template}

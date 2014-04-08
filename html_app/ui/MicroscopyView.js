@@ -197,7 +197,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		disableSlider = false;
 		enableIFSlider = true;
 		min_brightness = 1;
-		max_brightness = 11;
+		max_brightness = 10;
 		if_light_on_and_laser_on = true;
 	}
 	
@@ -205,7 +205,6 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 			if(state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src){
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				state.microscopy_lane.lens_map.brightness = 1;
-				
 				init(state.microscopy_lane.lens_map, false, true, draw, state.microscopy_lane.current_slides.length != 1 ? state.assignment.template.slides[img_sample]: state.microscopy_lane.lens_map.src );
 				//init(state.microscopy_lane.lens_map, false, true, draw, state.assignment.template.slides[img_sample]);
 			}
@@ -217,7 +216,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 			}
 		disableSlider = true;
 		min_brightness=1;
-		max_brightness=11;
+		max_brightness=10;
 		if_light_on_and_laser_on = true;
 	}
 	
@@ -229,6 +228,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
  				if(state.microscopy_lane.lens_map.brightness <1){
  					//state.microscopy_lane.lens_map.brightness = 1;
 				}
+				$('#brightdown').prop('disabled', true);
 				$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 				init(state.microscopy_lane.lens_map, false, true, draw, state.microscopy_lane.current_slides.length != 1 ? state.assignment.template.slides[img_sample]: state.microscopy_lane.lens_map.src );
 				//init(state.microscopy_lane.lens_map, false, true, draw, state.assignment.template.slides[img_sample]);
@@ -236,17 +236,18 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		else{
 			state.microscopy_lane.lens_map.mag = state.slides[0].mag;
  			//state.microscopy_lane.lens_map.brightness = 1;
+			$('#brightdown').prop('disabled', true);
 			$('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);
 			init(state.microscopy_lane.lens_map, true, true, draw, state.assignment.template.slides[img_sample]);
 		}
 		min_brightness=1;
-		max_brightness=11;
+		max_brightness=10;
 		if_light_on_and_laser_on = true;
 		
 	}
 	if(!disableSlider  && !enableIFSlider){
 		min_brightness = 0;
-		max_brightness = 11;
+		max_brightness = 8.5;
 	}
 	disableBlur = state.microscopy.disable_blur;
 	disableBrightness = state.microscopy.disable_brightness;
@@ -643,7 +644,7 @@ var disableBrightness = false;
 
 var caman_lock = false;
 var min_brightness = 0;
-var max_brightness = 11;
+var max_brightness = 8.5;
 
 /*
 

@@ -2977,8 +2977,6 @@ var __assigment_706 = {
                     }
                 },
                 facs: {
-                	'ticks': [50, 100, 200, 400],
-                	'max': 400,
                     'dna': {
                         'parser_simple': [
                             {
@@ -6590,38 +6588,36 @@ var __assignment_706_2014_ps2 = {
                                 {kind: 'duration', title: 'Time', editable: false},
                             ]
                         },//
-                        {kind: 'temperature', title: 'Temperature', editable: false},//
                         {kind: 'actions', title: 'Actions'}//
                     ],//
                     actions: [
 
                     ]
                 },
-                western_blot: {format: "%CELL_LINE%, %TREATMENT%, %PP1% %TEMPERATURE%",
+                western_blot: {format: "%CELL_LINE%, %TREATMENT%",
                     keys: {
                         '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                         '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
-                        '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']},
                     }
                 },
                 add_multiple_dialog: {	
-                	order: ['hela'],
+                	order: ['S2'],
 					headings: [
 							'','Strain', 'Treatment', 'Treatment Duration'
 							],
-                    'hela': {
+                    'S2': {
                         rows: [
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "B", treatment_id: 'buffer'},
-                                    {kind: 'text', text: 'HeLa'},
+                                    {kind: 'text', text: 'S2'},
                                     {kind: 'text', text: 'Buffer Only (untreated)'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'buffer',
                                 cell_treatments: {
                                     B: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
                                                 {
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
@@ -6636,19 +6632,19 @@ var __assignment_706_2014_ps2 = {
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "R1", treatment_id: 'rna1'},
-                                    {kind: 'text', text: 'HeLa'},
-                                    {kind: 'text', text: 'RNAi #1'},
+                                    {kind: 'text', text: 'S2'},
+                                    {kind: 'text', text: 'siRNA #1'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'rna1',
                                 cell_treatments: {
                                     R1: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
                                                 {
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
-                                                    {drug_id: 'nc', concentration_id: '100'},
+                                                    {drug_id: 'rna1', concentration_id: '100'},
                                                 ]}, temperature: '25'
                                                 }
                                             ]}}
@@ -6658,19 +6654,19 @@ var __assignment_706_2014_ps2 = {
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "R2", treatment_id: 'rna2'},
-                                    {kind: 'text', text: 'HeLa'},
-                                    {kind: 'text', text: 'RNAi #2'},
+                                    {kind: 'text', text: 'S2'},
+                                    {kind: 'text', text: 'siRNA #2'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'rna2',
                                 cell_treatments: {
                                     R2: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
                                                 {
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
-                                                    {drug_id: 'nc', concentration_id: '100'},
+                                                    {drug_id: 'rna2', concentration_id: '100'},
                                                 ]}, temperature: '25'
                                                 }
                                             ]}}
@@ -6680,19 +6676,19 @@ var __assignment_706_2014_ps2 = {
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "R3", treatment_id: 'rna3'},
-                                    {kind: 'text', text: 'HeLa'},
-                                    {kind: 'text', text: 'RNAi #3'},
+                                    {kind: 'text', text: 'S2'},
+                                    {kind: 'text', text: 'siRNA #3'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'rna3',
                                 cell_treatments: {
                                     R3: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
                                                 {
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
-                                                    {drug_id: 'nc', concentration_id: '100'},
+                                                    {drug_id: 'rna3', concentration_id: '100'},
                                                 ]}, temperature: '25'
                                                 }
                                             ]}}
@@ -6702,19 +6698,19 @@ var __assignment_706_2014_ps2 = {
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "R4", treatment_id: 'rna4'},
-                                    {kind: 'text', text: 'HeLa'},
-                                    {kind: 'text', text: 'RNAi #4'},
+                                    {kind: 'text', text: 'S2'},
+                                    {kind: 'text', text: 'siRNA #4'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'rna4',
                                 cell_treatments: {
                                     R4: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
                                                 {
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
-                                                    {drug_id: 'nc', concentration_id: '100'},
+                                                    {drug_id: 'rna4', concentration_id: '100'},
                                                 ]}, temperature: '25'
                                                 }
                                             ]}}
@@ -6724,19 +6720,85 @@ var __assignment_706_2014_ps2 = {
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "R5", treatment_id: 'rna5'},
-                                    {kind: 'text', text: 'HeLa'},
-                                    {kind: 'text', text: 'RNAi #5'},
+                                    {kind: 'text', text: 'S2'},
+                                    {kind: 'text', text: 'siRNA #5'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'rna5',
                                 cell_treatments: {
                                     R5: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
                                                 {
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
-                                                    {drug_id: 'nc', concentration_id: '100'},
+                                                    {drug_id: 'rna5', concentration_id: '100'},
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                	{kind: 'checkbox', name: "A", treatment_id: 'alpha_factor'},
+                                    {kind: 'text', text: 'S2'},
+                                    {kind: 'text', text: 'Alpha factor'},
+                                    {kind: 'text', text: "3 days"}
+                                ],
+                                treatment_id: 'alpha_factor',
+                                cell_treatments: {
+                                    A: [
+                                        {cell_line: 'S2',
+                                            treatment_list: {list: [
+                                                {
+                                                duration_value: 3600 * 24 * 3, duration: '3 d',
+                                                drug_list: {list: [
+                                                    {drug_id: 'Alpha', concentration_id: '100'},
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                	{kind: 'checkbox', name: "H", treatment_id: 'hydroxyurea'},
+                                    {kind: 'text', text: 'S2'},
+                                    {kind: 'text', text: 'Hydroxyurea'},
+                                    {kind: 'text', text: "3 days"}
+                                ],
+                                treatment_id: 'hydroxyurea',
+                                cell_treatments: {
+                                    H: [
+                                        {cell_line: 'S2',
+                                            treatment_list: {list: [
+                                                {
+                                                duration_value: 3600 * 24 * 3, duration: '3 d',
+                                                drug_list: {list: [
+                                                    {drug_id: 'Hydroxyurea', concentration_id: '100'},
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            },
+                            {
+                                cells: [
+                                	{kind: 'checkbox', name: "N", treatment_id: 'nocodazole'},
+                                    {kind: 'text', text: 'S2'},
+                                    {kind: 'text', text: 'Nocodazole'},
+                                    {kind: 'text', text: "3 days"}
+                                ],
+                                treatment_id: 'nocodazole',
+                                cell_treatments: {
+                                    N: [
+                                        {cell_line: 'S2',
+                                            treatment_list: {list: [
+                                                {
+                                                duration_value: 3600 * 24 * 3, duration: '3 d',
+                                                drug_list: {list: [
+                                                    {drug_id: 'Nocodazole', concentration_id: '100'},
                                                 ]}, temperature: '25'
                                                 }
                                             ]}}
@@ -6761,23 +6823,35 @@ var __assignment_706_2014_ps2 = {
                     concentrations: [100]
                 },
                 'rna1': {
-                    name: 'RNAi #1',
+                    name: 'siRNA #1',
                     concentrations: [100]
                 },
                 'rna2': {
-                    name: 'RNAi #2',
+                    name: 'siRNA #2',
                     concentrations: [100]
                 },
                 'rna3': {
-                    name: 'RNAi #3',
+                    name: 'siRNA #3',
                     concentrations: [100]
                 },
                 'rna4': {
-                    name: 'RNAi #4',
+                    name: 'siRNA #4',
                     concentrations: [100]
                 },
                 'rna5': {
-                    name: 'RNAi #5',
+                    name: 'siRNA #5',
+                    concentrations: [100]
+                },
+                'Nocodazole': {
+                    name: 'Nocodazole',
+                    concentrations: [100]
+                },
+                'Alpha': {
+                    name: 'Alpha Factor',
+                    concentrations: [100]
+                },
+                'Hydroxyurea': {
+                    name: 'Hydroxyurea',
                     concentrations: [100]
                 }
 
@@ -6788,8 +6862,8 @@ var __assignment_706_2014_ps2 = {
                 }
             },
             cell_lines: {
-                'hela': {
-                    name: 'HeLa'
+                'S2': {
+                    name: 'S2'
                 }
 
             },
@@ -6797,34 +6871,16 @@ var __assignment_706_2014_ps2 = {
                 kind: 'minutes'
             },
             primary_anti_body: {
-            	order: ['cdk1', 'cdk2', 'cdt1', 'cyclin', 'cyclinE', 'pgk1', 'rad21', 'securin'],
-                'cdk1': {
-                    name: 'rabbit anti-cdk1',
+            	order: ['chk1', 'rad21', 'cyclin', 'cyclinE', 'pgk1'],
+            	'chk1': {
+                    name: 'rabbit anti-chk1',
                     secondary: ['r'],
                     marks: [
-                        {weight: 34, intensity: 0},
-                        {weight: 35, intensity: 0},
-                        {weight: 36, intensity: 0}
+                        {weight: 54, intensity: 0},
+                        {weight: 55, intensity: 0},
+                        {weight: 58, intensity: 0}
                     ],
-                    gel_name: 'cdk1'
-                },
-                'cdk2': {
-                    name: 'rabbit anti-cdk2',
-                    secondary: ['r'],
-                    marks: [
-                        {weight: 33, intensity: 0},
-                        {weight: 34, intensity: 0},
-                        {weight: 35, intensity: 0}
-                    ],
-                    gel_name: 'cdk2'
-                },
-                'cdt1': {
-                    name: 'rabbit anti-cdt1',
-                    secondary: ['r'],
-                    marks: [
-                        {weight: 65, intensity: 0},
-                    ],
-                    gel_name: 'cdt1'
+                    gel_name: 'chk1'
                 },
                 'cyclin': {
                     name: 'mouse anti-cyclin B',
@@ -6851,20 +6907,14 @@ var __assignment_706_2014_ps2 = {
                     gel_name: 'pgk1'
                 },
                 'rad21': {
-                    name: 'rabbit anti-rad21',
+                    name: 'rabbit anti-rad21/scc1',
                     secondary: ['r'],
                     marks: [
                         {weight: 68, intensity: 0},
+                        {weight: 29.5, intensity: 0},
+                        {weight: 19.9, intensity: 0}
                     ],
                     gel_name: 'rad21'
-                },
-                'securin': {
-                    name: 'rabbit anti-securin',
-                    secondary: ['r'],
-                    marks: [
-                        {weight: 41.8, intensity: 0},
-                    ],
-                    gel_name: 'securin'
                 }
             },//
             secondary_anti_body: {
@@ -6890,31 +6940,35 @@ var __assignment_706_2014_ps2 = {
                     'cyto': {
                         'parser_fixed': [
                             {
-                                transfer_function: 'static',
-                                cutoff: -1,
+                                transfer_function: 'delta',
+                                cutoff: 1,
                                 drug: 'nc',
-                                cell_line: '*ANY*',
-                                marks: [
-                                    {
-                                        name: 'Cdt1',
-                                        weight: 65,
-                                        intensity: 1,
-                                        primary_anti_body: ['cdt1']
+                                cell_line: 'S2',
+                                above_marks: [
+                                	{
+                                        name: 'Rad21',
+                                        weight: 68, // 34&35
+                                        intensity: 4,
+                                        primary_anti_body: ['rad21']
                                     },
-
+                                	 {
+                                        name: 'Rad21',
+                                        weight: 29.5,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['rad21']
+                                    }, 
+                                    {
+                                        name: 'Rad21',
+                                        weight: 19.9,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['rad21']
+                                    },
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 2,
+                                        intensity: 4,
                                         primary_anti_body: ['cyclin']
                                     },
-                                    {
-                                        name: 'Securin',
-                                        weight: 41.8,
-                                        intensity: 1,
-                                        primary_anti_body: ['securin']
-                                    },
-
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
@@ -6922,15 +6976,15 @@ var __assignment_706_2014_ps2 = {
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
-                                        name: 'rad21',
-                                        weight: 68,
-                                        intensity: 1,
-                                        primary_anti_body: ['rad21']
+                                        name: 'Chk1',
+                                        weight: 54,
+                                        intensity: 2,
+                                        primary_anti_body: ['chk1']
                                     },
                                     {
                                         name: 'pgk1',
                                         weight: 45,
-                                        intensity: 10,
+                                        intensity: 0.5,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -6939,206 +6993,244 @@ var __assignment_706_2014_ps2 = {
                             {
                                 transfer_function: 'delta',
                                 cutoff: 1,
-                                drug: 'pp1',
-                                cell_line: '*ANY*',
+                                drug: 'rna1',
+                                cell_line: 'S2',
                                 above_marks: [
-                                    {
-                                        name: 'Cdk1',
-                                        weight: 34, //35&36
-                                        intensity: .5,
-                                        primary_anti_body: ['cdk1']
+                                	{
+                                        name: 'Rad21',
+                                        weight: 68, // 34&35
+                                        intensity: 4,
+                                        primary_anti_body: ['rad21']
                                     },
+                                	 {
+                                        name: 'Rad21',
+                                        weight: 29.5,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['rad21']
+                                    }, 
                                     {
-                                        name: 'Cdk2',
-                                        weight: 33, // 34&35
-                                        intensity: .3,
-                                        primary_anti_body: ['cdk2']
-                                    }
-                                ],
-                                below_marks: [
-                                    {
-                                        name: 'Cdk1',
-                                        weight: 35, //35&36
-                                        intensity: .5,
-                                        primary_anti_body: ['cdk1']
-                                    },
-                                    {
-                                        name: 'Cdk1',
-                                        weight: 36, //35&36
-                                        intensity: .5,
-                                        primary_anti_body: ['cdk1']
-                                    },
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 34, // 34&35
-                                        intensity: .3,
-                                        primary_anti_body: ['cdk2']
-                                    },
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: .3,
-                                        primary_anti_body: ['cdk2']
-                                    }
-                                ]
-                            },
-                            {
-                                transfer_function: 'static',
-                                cutoff: -1,
-                                drug: 'nc',
-                                cell_line: 'm1',
-                                temperature: '40',
-                                marks: [
-                                    {
-                                        name: 'Cdt1',
-                                        weight: 65,
-                                        intensity: -1,
-                                        primary_anti_body: ['cdt1']
-                                    },
-                                    {
-                                        name: 'Cdk1',
-                                        weight: 36, //35&36
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk1']
-                                    },
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
+                                        name: 'Rad21',
+                                        weight: 19.9,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['rad21']
                                     },
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: -2,
+                                        intensity: 4,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: -4,
+                                        intensity: 4,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
-                                        name: 'Securin',
-                                        weight: 41.8,
-                                        intensity: -1,
-                                        primary_anti_body: ['securin']
+                                        name: 'Chk1',
+                                        weight: 54,
+                                        intensity: 2,
+                                        primary_anti_body: ['chk1']
                                     },
                                     {
-                                        name: 'Rad21',
-                                        weight: 68, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['rad21']
-                                    },
-                                    {
-                                        name: 'Rad21',
-                                        weight: 29.5, // 34&35
-                                        intensity: 1,
-                                        primary_anti_body: ['rad21']
-                                    },
-                                    {
-                                        name: 'Rad21',
-                                        weight: 19.9, // 34&35
-                                        intensity: 1,
-                                        primary_anti_body: ['rad21']
+                                        name: 'pgk1',
+                                        weight: 45,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['pgk1']
                                     }
+
                                 ]
                             },
                             {
-                                transfer_function: 'static',
-                                cutoff: -1,
-                                drug: 'nc',
-                                cell_line: 'm2',
-                                temperature: '40',
-                                marks: [
-                                    {
-                                        name: 'Cdt1',
-                                        weight: 65,
-                                        intensity: -.8,
-                                        primary_anti_body: ['cdt1']
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'rna2',
+                                cell_line: 'S2',
+                                above_marks: [
+                                	{
+                                        name: 'Rad21',
+                                        weight: 68, // 34&35
+                                        intensity: 2,
+                                        primary_anti_body: ['rad21']
                                     },
+                                	 {
+                                        name: 'Rad21',
+                                        weight: 29.5,
+                                        intensity: 2,
+                                        primary_anti_body: ['rad21']
+                                    }, 
                                     {
-                                        name: 'Cdk1',
-                                        weight: 35, //35&36
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk1']
-                                    },
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
+                                        name: 'Rad21',
+                                        weight: 19.9,
+                                        intensity: 2,
+                                        primary_anti_body: ['rad21']
                                     },
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: -2,
+                                        intensity: 4,
                                         primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: 2,
+                                        primary_anti_body: ['cyclinE']
+                                    },
+                                    {
+                                        name: 'Chk1',
+                                        weight: 57,
+                                        intensity: 2,
+                                        primary_anti_body: ['chk1']
+                                    },
+                                    {
+                                        name: 'pgk1',
+                                        weight: 45,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['pgk1']
                                     }
+
                                 ]
                             },
                             {
-                                transfer_function: 'static',
-                                cutoff: -1,
-                                drug: 'nc',
-                                cell_line: 'wt',
-                                marks: [
-                                    {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'rna3',
+                                cell_line: 'S2',
+                                above_marks: [
+                                	{
                                         name: 'Rad21',
-                                        weight: 29.5, // 34&35
-                                        intensity: .1,
+                                        weight: 68, // 34&35
+                                        intensity: 0.5,
                                         primary_anti_body: ['rad21']
                                     },
                                     {
-                                        name: 'Rad21',
-                                        weight: 19.9, // 34&35
-                                        intensity: .1,
-                                        primary_anti_body: ['rad21']
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Chk1',
+                                        weight: 54,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['chk1']
+                                    },
+                                    {
+                                        name: 'pgk1',
+                                        weight: 45,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['pgk1']
                                     }
+
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'rna4',
+                                cell_line: 'S2',
+                                above_marks: [
+                                	{
+                                        name: 'Rad21',
+                                        weight: 68, // 34&35
+                                        intensity: 4,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Chk1',
+                                        weight: 54,
+                                        intensity: 2,
+                                        primary_anti_body: ['chk1']
+                                    },
+                                    {
+                                        name: 'pgk1',
+                                        weight: 45,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['pgk1']
+                                    }
+
+                                ]
+                            },
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'rna5',
+                                cell_line: 'S2',
+                                above_marks: [
+                                	{
+                                        name: 'Rad21',
+                                        weight: 68, // 34&35
+                                        intensity: 4,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                	 {
+                                        name: 'Rad21',
+                                        weight: 29.5,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['rad21']
+                                    }, 
+                                    {
+                                        name: 'Rad21',
+                                        weight: 19.9,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: 4,
+                                        primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: 4,
+                                        primary_anti_body: ['cyclinE']
+                                    },
+                                    {
+                                        name: 'Chk1',
+                                        weight: 54,
+                                        intensity: 2,
+                                        primary_anti_body: ['chk1']
+                                    },
+                                    {
+                                        name: 'pgk1',
+                                        weight: 45,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['pgk1']
+                                    }
+
                                 ]
                             },
                             {
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'Nocodazole',
-                                cell_line: 'wt',
+                                cell_line: 'S2',
                                 above_marks: [
-                                    {
-                                        name: 'Cdt1',
-                                        weight: 65,
-                                        intensity: -2,
-                                        primary_anti_body: ['cdt1']
+                                	{
+                                        name: 'Pgk1',
+                                        weight: 45,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['pgk1']
+                                    },
+            						{
+                                        name: 'Chk1',
+                                        weight: 54,
+                                        intensity: 2,
+                                        primary_anti_body: ['chk1']
                                     },
                                     {
-                                        name: 'Cdk1',
-                                        weight: 36, //35&36
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk1']
-                                    },
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
-                                    },
-                                    {
-                                        name: 'Cyclin E',
-                                        weight: 48,
-                                        intensity: -4,
-                                        primary_anti_body: ['cyclinE']
-                                    },
-                                    ,
-                                    {
-                                        name: 'Rad21',
-                                        weight: 29.5, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['rad21']
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: 4,
+                                        primary_anti_body: ['cyclin']
                                     },
                                     {
                                         name: 'Rad21',
-                                        weight: 19.9, // 34&35
-                                        intensity: -1,
+                                        weight: 68, // 34&35
+                                        intensity: 4,
                                         primary_anti_body: ['rad21']
                                     }
                                 ]
@@ -7147,42 +7239,30 @@ var __assignment_706_2014_ps2 = {
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'Hydroxyurea',
-                                cell_line: 'wt',
+                                cell_line: 'S2',
                                 above_marks: [
-                                    {
-                                        name: 'Cdt1',
-                                        weight: 65,
-                                        intensity: -.8,
-                                        primary_anti_body: ['cdt1']
+                                	{
+                                        name: 'Pgk1',
+                                        weight: 45,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['pgk1']
                                     },
                                     {
-                                        name: 'Cdk1',
-                                        weight: 35, //35&36
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk1']
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: 4,
+                                        primary_anti_body: ['cyclinE']
                                     },
                                     {
-                                        name: 'Cdk2',
-                                        weight: 35, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
-                                    },
-                                    {
-                                        name: 'Cyclin B',
-                                        weight: 58,
-                                        intensity: -2,
-                                        primary_anti_body: ['cyclin']
+                                        name: 'Chk1',
+                                        weight: 57,
+                                        intensity: 2,
+                                        primary_anti_body: ['chk1']
                                     },
                                     {
                                         name: 'Rad21',
-                                        weight: 29.5, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['rad21']
-                                    },
-                                    {
-                                        name: 'Rad21',
-                                        weight: 19.9, // 34&35
-                                        intensity: -1,
+                                        weight: 68, // 34&35
+                                        intensity: 4,
                                         primary_anti_body: ['rad21']
                                     }
                                 ]
@@ -7191,42 +7271,30 @@ var __assignment_706_2014_ps2 = {
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'Alpha',
-                                cell_line: 'wt',
+                                cell_line: 'S2',
                                 above_marks: [
-                                    {
-                                        name: 'Cdt1',
-                                        weight: 65,
-                                        intensity: 0,
-                                        primary_anti_body: ['cdt1']
+                                	{
+                                        name: 'Pgk1',
+                                        weight: 45,
+                                        intensity: 0.5,
+                                        primary_anti_body: ['pgk1']
+                                    },
+            						{
+                                        name: 'Chk1',
+                                        weight: 54,
+                                        intensity: 2,
+                                        primary_anti_body: ['chk1']
                                     },
                                     {
-                                        name: 'Cdk1',
-                                        weight: 35, //35&36
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk1']
-                                    },
-                                    {
-                                        name: 'Cdk2',
-                                        weight: 34, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['cdk2']
-                                    },
-                                    {
-                                        name: 'Cyclin B',
-                                        weight: 58,
-                                        intensity: -2,
-                                        primary_anti_body: ['cyclin']
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: 4,
+                                        primary_anti_body: ['cyclinE']
                                     },
                                     {
                                         name: 'Rad21',
-                                        weight: 29.5, // 34&35
-                                        intensity: -1,
-                                        primary_anti_body: ['rad21']
-                                    },
-                                    {
-                                        name: 'Rad21',
-                                        weight: 19.9, // 34&35
-                                        intensity: -1,
+                                        weight: 68, // 34&35
+                                        intensity: 4,
                                         primary_anti_body: ['rad21']
                                     }
                                 ]
@@ -7235,6 +7303,8 @@ var __assignment_706_2014_ps2 = {
                     }
                 },
                 facs: {
+                	'ticks': [50, 100, 200, 400],
+                	'max': 400,
                     'dna': {
                         'parser_simple': [
                             {
@@ -7260,6 +7330,21 @@ var __assignment_706_2014_ps2 = {
                                 match: ['drug_id'],
                                 drug_id: 'rna5',
                                 shape: 'g2-block-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'Hydroxyurea',
+                                shape: 's-block-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'Nocodazole',
+                                shape: 'g2-block-100-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'Alpha',
+                                shape: 'g2-block-50-400'
                             }
                         ]
 
@@ -7565,7 +7650,7 @@ $(function () {
 		}
 		if(get_courses_result.list[x].id == 'assignment_706_2014_ps2'){
 			assignment_706_2014_ps2 = get_courses_result.list[x];
-			assignment_706_2014_ps2 = choose_n_mutant_strains(assignment_706_2014_ps2.template.random_order, ['m1', 'm2'], assignment_706_2014_ps2);
+			//assignment_706_2014_ps2 = choose_n_mutant_strains(assignment_706_2014_ps2.template.random_order, ['m1', 'm2'], assignment_706_2014_ps2);
 			assignment_706_2014_ps2.template.instructions = [
 				['Introduction', scb_assignment_specific_mit706s14.introduction()],
 				['Background Information',scb_assignment_specific_mit706s14.background_information()],
@@ -7576,10 +7661,10 @@ $(function () {
 
 			assignment_706_2014_ps2.template.ui.experiment_setup.actions.push({
 				name: 'ADD SAMPLES',
-				open: 'mit706s14.setup',
+				open: 'mit706s14ps2.setup',
 				css: {
-					width: '800px',
-					height: '900px',
+					width: '885px',
+					height: '600px',
 					left: '100px',
 					top: '000px'
 				}

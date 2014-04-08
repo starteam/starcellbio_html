@@ -91,11 +91,11 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 return 1 / 2 * Math.exp(-((x - 1.5) * (x - 1.5) * 2));
             }
             function s_block_50_400(x) {
-                return Math.exp(-((0.7 - x) * Math.exp(0.7 - x) - .7) * ((0.7 - x) * Math.exp(0.7 - x) - .7) / .4)-0.1;
+                return Math.exp(-((0.8 - x) * Math.exp(0.8 - x) - .7) * ((0.8 - x) * Math.exp(0.8 - x) - .7) / .4)-0.1;
             }
-			   function g2m_50_400(x) {
-                return 1 / 2 * Math.exp(-((x - 0.4) * (x - 0.4) * 2));
-        	   }
+			function g2m_50_400(x) {
+				return 1 / 2 * Math.exp(-((x - 0.4) * (x - 0.4) * 15));
+			}
             function g0g1_400(x) {
                 return 4 * Math.exp(-((x - 0.35) * (x - 0.35)) * 30);
             }
@@ -178,43 +178,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: template.model.facs.max ? template.model.facs.max:  100 }, 
                 			yaxis: { from: 0, to: 0 }, color: "#000" },
                        { xaxis: { from: 0, to: 0 }, yaxis: { from: 0, to: 100 }, color: "#000" }]},
-            };
-            
-//            	var options = {
-//                 series: {
-//                     lines: {show: true, fill: true, steps: true, lineWidth: 1},
-//                     points: {show: false, radius: .5, fill: false},
-//                     color: '#808080'
-//                 },
-//                 xaxis: {
-//                 	show: true,
-//                 	color: '#000000',
-//                     min: 0,
-//                     max: 150,
-//                     ticks: [50, 100],
-//                     tickLength: 0,
-//                     font: {
-//                         family: 'sourcesanspro-regular',
-//                         size: 11,
-//                     }
-//                 },
-//                 yaxis: {
-//                 	show: true,
-//                 	color: '#000000',
-//                     min: 0,
-//                     max: 100,
-//                     tickLength:0,
-//                     font: {
-//                         family: 'sourcesanspro-regular',
-//                         size: 11
-//                     }
-// 
-//                 },
-//                 grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: 150 }, 
-//                 			yaxis: { from: 0, to: 0 }, color: "#000" },
-//                        { xaxis: { from: 0, to: 0 }, yaxis: { from: 0, to: 100 }, color: "#000" }]},
-//             };
-            
+            };            
             
             
             if (('' + shape).toLowerCase() == 'normal') {
