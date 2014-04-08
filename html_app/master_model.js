@@ -6611,7 +6611,7 @@ var __assignment_706_2014_ps2 = {
                                 cells: [
                                 	{kind: 'checkbox', name: "B", treatment_id: 'buffer'},
                                     {kind: 'text', text: 'S2'},
-                                    {kind: 'text', text: 'Buffer Only (untreated)'},
+                                    {kind: 'text', text: 'Control siRNA'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'buffer',
@@ -6819,7 +6819,7 @@ var __assignment_706_2014_ps2 = {
             },
             drugs: {
                 'nc': {
-                    name: 'Buffer Only (untreated)',
+                    name: 'Control siRNA',
                     concentrations: [100]
                 },
                 'rna1': {
@@ -6984,7 +6984,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'pgk1',
                                         weight: 45,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -7035,7 +7035,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'pgk1',
                                         weight: 45,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -7086,7 +7086,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'pgk1',
                                         weight: 45,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -7101,25 +7101,25 @@ var __assignment_706_2014_ps2 = {
                                 	{
                                         name: 'Rad21',
                                         weight: 68, // 34&35
-                                        intensity: 0.5,
+                                        intensity: 4,
                                         primary_anti_body: ['rad21']
                                     },
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
                                         name: 'Chk1',
                                         weight: 54,
-                                        intensity: 0.5,
+                                        intensity: 2,
                                         primary_anti_body: ['chk1']
                                     },
                                     {
                                         name: 'pgk1',
                                         weight: 45,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -7146,7 +7146,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'pgk1',
                                         weight: 45,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -7197,7 +7197,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'pgk1',
                                         weight: 45,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     }
 
@@ -7212,7 +7212,7 @@ var __assignment_706_2014_ps2 = {
                                 	{
                                         name: 'Pgk1',
                                         weight: 45,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     },
             						{
@@ -7244,7 +7244,7 @@ var __assignment_706_2014_ps2 = {
                                 	{
                                         name: 'Pgk1',
                                         weight: 45,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     },
                                     {
@@ -7276,7 +7276,7 @@ var __assignment_706_2014_ps2 = {
                                 	{
                                         name: 'Pgk1',
                                         weight: 45,
-                                        intensity: 0.5,
+                                        intensity: 10,
                                         primary_anti_body: ['pgk1']
                                     },
             						{
