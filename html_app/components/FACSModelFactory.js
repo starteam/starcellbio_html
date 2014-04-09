@@ -94,7 +94,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 return Math.exp(-((0.8 - x) * Math.exp(0.8 - x) - .7) * ((0.8 - x) * Math.exp(0.8 - x) - .7) / .4)-0.1;
             }
 			function g2m_50_400(x) {
-				return 1 / 2 * Math.exp(-((x - 0.4) * (x - 0.4) * 15));
+				return  1000/100  * Math.exp(-((x - 0.35) * (x - 0.35) * 80)) -0.03;
 			}
             function g0g1_400(x) {
                 return 4 * Math.exp(-((x - 0.35) * (x - 0.35)) * 30);
@@ -103,7 +103,8 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 return 1 / 2 * Math.exp(-((x - 0.8) * (x - 0.8) * 15));
             }
             function g2m_100_400(x) {
-                return 1 / 2 * Math.exp(-((x - 0.7) * (x - 0.7) * 15));
+                //return 1 / 2 * Math.exp(-((x - 0.7) * (x - 0.7) * 15));
+                return Math.exp(-((x - 0.4) * Math.exp(x - 0.4) - .7) * ((x - 0.4) * Math.exp(x - 0.4) - .7) / .4)-0.1;
             }
 
 

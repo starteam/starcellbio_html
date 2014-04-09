@@ -7620,7 +7620,7 @@ $(function () {
 				css: {
 					width: '800px',
 					height: '900px',
-					left: '100px',
+					left: 'inherit',
 					top: '000px'
 				}
 			});
@@ -7642,7 +7642,7 @@ $(function () {
 				css: {
 					width: '885px',
 					height: '540px',
-					left: '92px',
+					left: 'inherit',
 					top: '15%'
 				}
 			});
@@ -7665,7 +7665,7 @@ $(function () {
 				css: {
 					width: '885px',
 					height: '600px',
-					left: '100px',
+					left: 'inherit',
 					top: '000px'
 				}
 			});
@@ -7688,7 +7688,7 @@ $(function () {
 				css: {
 					width: '800px',
 					height: '700px',
-					left: '100px',
+					left: 'inherit',
 					top: '000px'
 				}
 			});
@@ -7702,7 +7702,7 @@ $(function () {
 				css: {
 					width: '600px',
 					height: '400px',
-					left: '300px',
+					left: 'inherit',
 					top: '000px'
 				}
 			});
