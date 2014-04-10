@@ -6966,7 +6966,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 0.5,
+                                        intensity: 1,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -6999,19 +6999,19 @@ var __assignment_706_2014_ps2 = {
                                 	 {
                                         name: 'Rad21',
                                         weight: 29.5,
-                                        intensity: 0.5,
+                                        intensity: 2,
                                         primary_anti_body: ['rad21']
                                     }, 
                                     {
                                         name: 'Rad21',
                                         weight: 19.9,
-                                        intensity: 0.5,
+                                        intensity: 2,
                                         primary_anti_body: ['rad21']
                                     },
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 1,
+                                        intensity: 5,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -7038,25 +7038,25 @@ var __assignment_706_2014_ps2 = {
                                 	{
                                         name: 'Rad21',
                                         weight: 68, // 34&35
-                                        intensity: 2,
+                                        intensity: 4,
                                         primary_anti_body: ['rad21']
                                     },
                                 	 {
                                         name: 'Rad21',
                                         weight: 29.5,
-                                        intensity: 2,
+                                        intensity: 0.5,
                                         primary_anti_body: ['rad21']
                                     }, 
                                     {
                                         name: 'Rad21',
                                         weight: 19.9,
-                                        intensity: 2,
+                                        intensity: 0.5,
                                         primary_anti_body: ['rad21']
                                     },
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 0.5,
+                                        intensity: 1,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -7134,7 +7134,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 6,
+                                        intensity: 12,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -7173,7 +7173,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 0.5,
+                                        intensity: 1,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -7218,7 +7218,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 0.5,
+                                        intensity: 5,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -7282,7 +7282,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 4,
+                                        intensity: 12,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -7303,6 +7303,16 @@ var __assignment_706_2014_ps2 = {
                         'parser_simple': [
                             {
                                 match: [],
+                                shape: 'normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'nc',
+                                shape: 'normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'rna1',
                                 shape: 'normal-400'
                             },
                             {

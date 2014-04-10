@@ -75,7 +75,11 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             }
 
             function s(x) {
-                return .05 * (5 * (x > .8 && x < 1 ? x - .8 : 0) + (x > 1 & x < 2 ? (.8 + (2 - x) / 5) : 0) / .6 + 1.3 * (x > 2 & x < 2.3 ? (2.3 - x) / .3 : 0));
+            	var lower_bound = .8;
+            	var middle_bound_1 = 1;
+            	var middle_bound_2 = 2;
+            	var upper_bound = 2.3;
+                return .05 * (5 * (x > lower_bound && x < middle_bound_1 ? x - lower_bound : 0) + (x > middle_bound_1 & x < middle_bound_2 ? (lower_bound + (middle_bound_2 - x) / 5) : 0) / .6 + 1.3 * (x > middle_bound_2 & x < upper_bound ? (upper_bound - x) / .3 : 0));
             }
 
             function g2m(x) {
@@ -96,66 +100,28 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			function g2m_50_400(x) {
 				return 7 / 9 * Math.exp(-((x - 0.35) * (x - 0.35) * 30));
 			}
-            function g0g1_400(x) {
-                return normal_dist(x, 0.8, 0.05, 1, false);
+            function g3(x) {
+				return normal_dist(x, 0.95, 0.10, 1, false);
             }
-            function g2m_400(x) {
-				return normal_dist(x, 0.35, 0.12, 1, false);
+            
+            function g2(x) {
+                return normal_dist(x, 0.85, 0.14, 3, true);
+            }
+            function g1(x) {
+				return normal_dist(x, 0.33, 0.12, 1, false);
+            }
+			function g4(x) {
+                return normal_dist(x, 0.3, 0.10, 1, false);
             }
             function g2m_100_400(x) {
             	return normal_dist(x, 0.8, 0.12, 0.5, false);
                 //return Math.exp(-((x-0.3) * Math.exp(x-0.3) - .7) * ((x-0.3) * Math.exp(x-0.3) - .7) / .13)-0.005;
             }
 
-
-//////////////////////
-/////////////////////
-/////////////////////
-
-
-//             function g2m_0_400(x) {
-//                 return 1 / 2 * Math.exp(-((x - 1.5) * (x - 1.5) * 2));
-//             }
-//             function s_block_50_400(x) {
-//                 //return Math.exp(-((0.8 - x) * Math.exp(0.8 - x) - .7) * ((0.8 - x) * Math.exp(0.8 - x) - .7) / .4)-0.1;
-//                 return Math.exp(-((0.8 - x) * Math.exp(0.8 - x) - .7) * ((0.8 - x) * Math.exp(0.8 - x) - .7) / .13)-0.005;
-//             }
-// 			function g2m_50_400(x) {
-// 				// var std = 0.05;
-// // 				var another = 0.35;
-// // 				return (1/(Math.sqrt(Math.PI*2)*std))* Math.exp(-((x - another) * (x - another))/(2*std*std));
-// 			
-// 			
-// 			
-// 				return 7 / 9 * Math.exp(-((x - 0.35) * (x - 0.35) * 30));
-// 				//return  1000/100  * Math.exp(-((x - 0.35) * (x - 0.35) * 80)) -0.03;
-// 			}
-//             function g0g1_400(x) {
-//                 //return 4 * Math.exp(-((x - 0.35) * (x - 0.35)) * 30);
-//                 return 2 * Math.exp(-((x - 0.35) * (x - 0.35)) * 25);
-//                 // var std = 0.05;
-// // 				var another = 0.35;
-// // 				return (1/(Math.sqrt(Math.PI*2)*std))* Math.exp(-((x - another) * (x - another))/(2*std*std));
-//             }
-//             function g2m_400(x) {
-//             	//return 1 / 2 * Math.exp(-((x - 0.8) * (x - 0.8) * 15));
-// 				return 0.5 * Math.exp(-((x - 0.8) * (x - 0.8) * 15));
-//                 //return 0.9 * Math.exp(-((x - 0.8) * (x - 0.8) * 25));
-//                 // var std = 0.05;
-// // 				var another = 0.35;
-// // 				return (1/(Math.sqrt(Math.PI*2)*std))* Math.exp(-((x - another) * (x - another))/(2*std*std));
-//             }
-//             function g2m_100_400(x) {
-//                 //return 1 / 2 * Math.exp(-((x - 0.7) * (x - 0.7) * 15));
-//                 //return Math.exp(-((x - 0.4) * Math.exp(x - 0.4) - .7) * ((x - 0.4) * Math.exp(x - 0.4) - .7) / .4)-0.1;
-//                 return Math.exp(-((x-0.3) * Math.exp(x-0.3) - .7) * ((x-0.3) * Math.exp(x-0.3) - .7) / .13)-0.005;
-//             }
-
-
 ////////////////////
 ////////////////////
 /////////////////////
-
+			var number_of_curves = 1;
 			
 			function erfc(x) {
 			  // save the sign of x
@@ -185,7 +151,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 				return (term1*term2)/term3 ;
 			}
 
-            function normalize(data, factor) {
+            function normalize(data, factor, y_scale) {
                 var factor = factor || .05;
                 var sum = 0;
                 _.each(data, function (s) {
@@ -202,7 +168,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 if (sum != 0) {
                     _.each(data, function (s, index) {
-                        data[index][1] = data[index][1] / sum * (2750 );
+                        data[index][1] = data[index][1] / sum * (template.model.facs.max ? ((2750*100)/template.model.facs.max)*number_of_curves: 2750  );
 
                     });
                 }
@@ -324,7 +290,8 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 var data = [];
                 var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
-                    var y = g0g1_400(x + bias) + 3 * g2m_400(x + bias) + near_zero(x + bias) + s(x + bias);
+	                number_of_curves = 4;
+                    var y = 1.5 * g4(x + bias) + 6* g1(x + bias) + 3 *g2(x + bias) + g3(x + bias) ; 
                     data.push([x, y]);
 
                 }
@@ -332,26 +299,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 state.data = {
                     data: [
                         { data: data},
-//                        {label: 'phase 1', data:[[0,0.01],[0.8,0.01]],lines:{fill:false}},
-//                        {label: 'phase 2', data:[[0.8,0.011],[1.2,0.011]],lines:{fill:false}},
-//                        {label: 'phase 3', data:[[1.2,0.01],[1.8,0.01]],lines:{fill:false}},
-//                        {label: 'phase 4', data:[[1.8,0.011],[2.3,0.011]],lines:{fill:false}}
 
-                    ],
-                    options: options
-                };
-            }
-            if (('' + shape).toLowerCase() == 's-block-400') {
-                var data = [];
-                for (var x = 0; x < 3; x += .01) {
-                    var y = s_block_50_400(x);
-                    data.push([x, y]);
-
-                }
-                normalize(data);
-                state.data = {
-                    data: [
-                        { data: data}
                     ],
                     options: options
                 };
@@ -359,6 +307,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             if (('' + shape).toLowerCase() == 'g2-block-100-400') {
                 var data = [];
                 for (var x = 0; x < 3; x += .01) {
+                	number_of_curves = 1;
                     var y = g2m_100_400(x);
                     data.push([x, y]);
 
@@ -372,34 +321,10 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 };
             }
             if (('' + shape).toLowerCase() == 'g2-block-50-400') {
-                var data = [];
-                for (var x = 0; x < 3; x += .01) {
-                    var y = g2m_50_400(x);
-                    data.push([x, y]);
-
-                }
-                normalize(data);
-                state.data = {
-                    data: [
-                        { data: data}
-                    ],
-                    options: options
-                };
             }
            if (('' + shape).toLowerCase() == 'g2-block-400') {
-                var data = [];
-                for (var x = 0; x < 3; x += .01) {
-                    var y = g2m_0_400(x);
-                    data.push([x, y]);
-
-                }
-                normalize(data);
-                state.data = {
-                    data: [
-                        { data: data}
-                    ],
-                    options: options
-                };
+            }
+           if (('' + shape).toLowerCase() == 's-block-400') {
             }
             
             
