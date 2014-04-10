@@ -6741,20 +6741,20 @@ var __assignment_706_2014_ps2 = {
                             },
                             {
                                 cells: [
-                                	{kind: 'checkbox', name: "A", treatment_id: 'alpha_factor'},
+                                	{kind: 'checkbox', name: "GM", treatment_id: 'serum_growth_media'},
                                     {kind: 'text', text: 'S2'},
-                                    {kind: 'text', text: 'Alpha factor'},
+                                    {kind: 'text', text: 'Serum-free growth media'},
                                     {kind: 'text', text: "3 days"}
                                 ],
-                                treatment_id: 'alpha_factor',
+                                treatment_id: 'serum_growth_media',
                                 cell_treatments: {
-                                    A: [
+                                    GM: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
                                                 {
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
-                                                    {drug_id: 'Alpha', concentration_id: '100'},
+                                                    {drug_id: 'Serum', concentration_id: '100'},
                                                 ]}, temperature: '25'
                                                 }
                                             ]}}
@@ -6846,8 +6846,8 @@ var __assignment_706_2014_ps2 = {
                     name: 'Nocodazole',
                     concentrations: [100]
                 },
-                'Alpha': {
-                    name: 'Alpha Factor',
+                'Serum': {
+                    name: 'Serum-free growth media',
                     concentrations: [100]
                 },
                 'Hydroxyurea': {
@@ -6996,12 +6996,6 @@ var __assignment_706_2014_ps2 = {
                                 drug: 'rna1',
                                 cell_line: 'S2',
                                 above_marks: [
-                                	{
-                                        name: 'Rad21',
-                                        weight: 68, // 34&35
-                                        intensity: 4,
-                                        primary_anti_body: ['rad21']
-                                    },
                                 	 {
                                         name: 'Rad21',
                                         weight: 29.5,
@@ -7017,14 +7011,8 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 0.5,
+                                        intensity: 1,
                                         primary_anti_body: ['cyclin']
-                                    },
-                                    {
-                                        name: 'Cyclin E',
-                                        weight: 48,
-                                        intensity: 4,
-                                        primary_anti_body: ['cyclinE']
                                     },
                                     {
                                         name: 'Chk1',
@@ -7074,7 +7062,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 2,
+                                        intensity: 4,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -7142,6 +7130,12 @@ var __assignment_706_2014_ps2 = {
                                         weight: 54,
                                         intensity: 2,
                                         primary_anti_body: ['chk1']
+                                    },
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: 6,
+                                        primary_anti_body: ['cyclinE']
                                     },
                                     {
                                         name: 'pgk1',
@@ -7270,7 +7264,7 @@ var __assignment_706_2014_ps2 = {
                             {
                                 transfer_function: 'delta',
                                 cutoff: 1,
-                                drug: 'Alpha',
+                                drug: 'Serum',
                                 cell_line: 'S2',
                                 above_marks: [
                                 	{
@@ -7303,8 +7297,8 @@ var __assignment_706_2014_ps2 = {
                     }
                 },
                 facs: {
-                	'ticks': [50, 100, 200, 400],
-                	'max': 400,
+                	'ticks': [50, 100, 150, 250],
+                	'max': 250,
                     'dna': {
                         'parser_simple': [
                             {
@@ -7343,7 +7337,7 @@ var __assignment_706_2014_ps2 = {
                             },
                             {
                                 match: ['drug_id'],
-                                drug_id: 'Alpha',
+                                drug_id: 'Serum',
                                 shape: 'g2-block-50-400'
                             }
                         ]

@@ -91,31 +91,99 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 return 1 / 2 * Math.exp(-((x - 1.5) * (x - 1.5) * 2));
             }
             function s_block_50_400(x) {
-                return Math.exp(-((0.8 - x) * Math.exp(0.8 - x) - .7) * ((0.8 - x) * Math.exp(0.8 - x) - .7) / .4)-0.1;
+                return Math.exp(-((0.8 - x) * Math.exp(0.8 - x) - .7) * ((0.8 - x) * Math.exp(0.8 - x) - .7) / .13)-0.005;
             }
 			function g2m_50_400(x) {
-				return  1000/100  * Math.exp(-((x - 0.35) * (x - 0.35) * 80)) -0.03;
+				return 7 / 9 * Math.exp(-((x - 0.35) * (x - 0.35) * 30));
 			}
             function g0g1_400(x) {
-                return 4 * Math.exp(-((x - 0.35) * (x - 0.35)) * 30);
+                return normal_dist(x, 0.8, 0.05, 1, false);
             }
             function g2m_400(x) {
-                return 1 / 2 * Math.exp(-((x - 0.8) * (x - 0.8) * 15));
+				return normal_dist(x, 0.35, 0.12, 1, false);
             }
             function g2m_100_400(x) {
-                //return 1 / 2 * Math.exp(-((x - 0.7) * (x - 0.7) * 15));
-                return Math.exp(-((x - 0.4) * Math.exp(x - 0.4) - .7) * ((x - 0.4) * Math.exp(x - 0.4) - .7) / .4)-0.1;
+            	return normal_dist(x, 0.8, 0.12, 0.5, false);
+                //return Math.exp(-((x-0.3) * Math.exp(x-0.3) - .7) * ((x-0.3) * Math.exp(x-0.3) - .7) / .13)-0.005;
             }
 
 
-//             function g2m_rna3(x) {
-//                 return 1 / 2 * Math.exp(-((x - 2) * (x - 2) * 10));
+//////////////////////
+/////////////////////
+/////////////////////
+
+
+//             function g2m_0_400(x) {
+//                 return 1 / 2 * Math.exp(-((x - 1.5) * (x - 1.5) * 2));
 //             }
-// 			   function s_block_50_rna2(x) {
-// 				   return Math.exp(-((1.5 - x) * Math.exp(1.5 - x) - .9) * ((1.5 - x) * Math.exp(1.5 - x) - .9) / .4);
-// 			   }
+//             function s_block_50_400(x) {
+//                 //return Math.exp(-((0.8 - x) * Math.exp(0.8 - x) - .7) * ((0.8 - x) * Math.exp(0.8 - x) - .7) / .4)-0.1;
+//                 return Math.exp(-((0.8 - x) * Math.exp(0.8 - x) - .7) * ((0.8 - x) * Math.exp(0.8 - x) - .7) / .13)-0.005;
+//             }
+// 			function g2m_50_400(x) {
+// 				// var std = 0.05;
+// // 				var another = 0.35;
+// // 				return (1/(Math.sqrt(Math.PI*2)*std))* Math.exp(-((x - another) * (x - another))/(2*std*std));
+// 			
+// 			
+// 			
+// 				return 7 / 9 * Math.exp(-((x - 0.35) * (x - 0.35) * 30));
+// 				//return  1000/100  * Math.exp(-((x - 0.35) * (x - 0.35) * 80)) -0.03;
+// 			}
+//             function g0g1_400(x) {
+//                 //return 4 * Math.exp(-((x - 0.35) * (x - 0.35)) * 30);
+//                 return 2 * Math.exp(-((x - 0.35) * (x - 0.35)) * 25);
+//                 // var std = 0.05;
+// // 				var another = 0.35;
+// // 				return (1/(Math.sqrt(Math.PI*2)*std))* Math.exp(-((x - another) * (x - another))/(2*std*std));
+//             }
+//             function g2m_400(x) {
+//             	//return 1 / 2 * Math.exp(-((x - 0.8) * (x - 0.8) * 15));
+// 				return 0.5 * Math.exp(-((x - 0.8) * (x - 0.8) * 15));
+//                 //return 0.9 * Math.exp(-((x - 0.8) * (x - 0.8) * 25));
+//                 // var std = 0.05;
+// // 				var another = 0.35;
+// // 				return (1/(Math.sqrt(Math.PI*2)*std))* Math.exp(-((x - another) * (x - another))/(2*std*std));
+//             }
+//             function g2m_100_400(x) {
+//                 //return 1 / 2 * Math.exp(-((x - 0.7) * (x - 0.7) * 15));
+//                 //return Math.exp(-((x - 0.4) * Math.exp(x - 0.4) - .7) * ((x - 0.4) * Math.exp(x - 0.4) - .7) / .4)-0.1;
+//                 return Math.exp(-((x-0.3) * Math.exp(x-0.3) - .7) * ((x-0.3) * Math.exp(x-0.3) - .7) / .13)-0.005;
+//             }
 
 
+////////////////////
+////////////////////
+/////////////////////
+
+			
+			function erfc(x) {
+			  // save the sign of x
+			  var sign = (x >= 0) ? 1 : -1;
+			  x = Math.abs(x);
+
+			  // constants
+			  var a1 =  0.254829592;
+			  var a2 = -0.284496736;
+			  var a3 =  1.421413741;
+			  var a4 = -1.453152027;
+			  var a5 =  1.061405429;
+			  var p  =  0.3275911;
+
+			  // A&S formula 7.1.26
+			  var t = 1.0/(1.0 + p*x);
+			  var y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+			  return sign * y+1; // erf(-x) = -erf(x);
+			}
+
+
+
+			function normal_dist(x_val,location, scale, shape, haserror){
+				var term1 = Math.exp(-((x_val - location) * (x_val - location))/(2*scale*scale));
+				var term2 = haserror ? erfc(-(shape*(x_val-location))/(Math.sqrt(2)*scale)): 1;
+				var term3 = Math.sqrt(Math.PI*2)*scale;
+				return (term1*term2)/term3 ;
+			}
 
             function normalize(data, factor) {
                 var factor = factor || .05;
@@ -134,12 +202,12 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 if (sum != 0) {
                     _.each(data, function (s, index) {
-                        data[index][1] = data[index][1] / sum * 2750;
+                        data[index][1] = data[index][1] / sum * (2750 );
 
                     });
                 }
                 _.each(data, function (s, index) {
-                    data[index][0] = data[index][0] * 133;
+                    data[index][0] = data[index][0] * (template.model.facs.max ? ((template.model.facs.max*50)/100): 50 ) ;
 
                 });
 
