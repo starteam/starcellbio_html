@@ -1,3 +1,4 @@
+drop database starcellbio;
 create database starcellbio;
 grant usage on starcellbio.* to starcellbio@localhost identified by '136a411ed9e8592089444b7164ffaf84' ;
 grant all privileges on starcellbio.* to starcellbio@localhost;

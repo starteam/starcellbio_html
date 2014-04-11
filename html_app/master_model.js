@@ -6972,7 +6972,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 4,
+                                        intensity: 2,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -7011,7 +7011,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 5,
+                                        intensity: 25,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -7062,7 +7062,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 4,
+                                        intensity: 2,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -7095,7 +7095,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 1,
+                                        intensity: 25,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -7134,7 +7134,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 12,
+                                        intensity: 32,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -7179,7 +7179,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 4,
+                                        intensity: 2,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -7218,7 +7218,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 5,
+                                        intensity: 25,
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
@@ -7244,7 +7244,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 4,
+                                        intensity: 2,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
@@ -7282,7 +7282,7 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 12,
+                                        intensity: 32,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
