@@ -188,7 +188,7 @@ scb_microscopy.display_lens = function(opt_data, opt_sb) {
 
 scb_microscopy.display_slide_types = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  if (soy.$$getMapKeys(opt_data.kinds).length == 1 && soy.$$getMapKeys(opt_data.kinds.IF.conditions).length == 1) {
+  if (soy.$$getMapKeys(opt_data.kinds).length == 1) {
     var kList1109 = soy.$$getMapKeys(opt_data.kinds);
     var kListLen1109 = kList1109.length;
     for (var kIndex1109 = 0; kIndex1109 < kListLen1109; kIndex1109++) {
