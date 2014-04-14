@@ -121,6 +121,63 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 					});
 					state.slides = imgs;
 					state.slide_type = slide_type;
+				}
+				else if(m.conditions_parser){
+					var microscopy_lane = state.microscopy_lane;
+					var cell_line = microscopy_lane.cell_treatment.cell_line;
+					var collection_id= microscopy_lane.cell_treatment.treatment_list.list[0].collection_id;
+					var slide_type = microscopy_lane.kind;	
+					var conditions = microscopy_lane.slide_conditions;
+					var drug_id = microscopy_lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id;
+					//add phenotype property
+					var imgs = []
+					var micro_state = {
+						drug_id: function (arr) {
+							var hasVal = false;
+							for(var x = 0; x < arr.length; x++){
+								if(arr[x] == drug_id)
+									hasVal = true;
+							}
+							return hasVal;
+						},
+						cell_line: function (str) {
+							//make it a list and you compare to each one in list not just str
+							return str == cell_line;
+						},
+						conditions: function (str) {
+							return str == conditions;
+						}
+					}
+					var isFound = false;
+					_.each(m.conditions_parser, function (rule) {
+						if (rule.match.length == 0) {
+							img_str = '../images/microscopy/black.jpg'
+						}
+						else {
+							var matches = true;
+							_.each(rule.match, function (property) {
+								if (micro_state[property]) {
+									matches &= micro_state[property](rule[property]);
+								}
+								else {
+									console.info("UNDEFINED PROPERTY: " + property);
+								}
+							});
+							if(!isFound){
+								if(matches){
+									var phenotype = rule.phenotype;
+									var max = _.size(template.slide_parser[collection_id][slide_type][conditions][phenotype]);
+									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+									var slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
+									imgs=slide_array;
+									isFound = true;
+								}
+							}
+						}
+					});
+					state.slides = imgs;
+					state.slide_type = slide_type;
+				
 				}			
  			}
     	}

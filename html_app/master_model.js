@@ -6576,7 +6576,7 @@ var __assignment_706_2014_ps2 = {
             	],
             ui: {
                 experimental_design: {
-                    techniques: [ 'wb' , 'facs' ]
+                    techniques: [ 'wb' , 'facs', 'micro' ]
                 },
                 experiment_setup: {
                     table: [ //
@@ -6600,6 +6600,10 @@ var __assignment_706_2014_ps2 = {
                         '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
                     }
                 },
+                microscopy: {
+					disable_blur: true,
+					disable_brightness: true
+				},
                 add_multiple_dialog: {	
                 	order: ['S2'],
 					headings: [
@@ -6619,7 +6623,7 @@ var __assignment_706_2014_ps2 = {
                                     B: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {
+                                                {collection_id: 'default', microscope: ['rgb', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'nc', concentration_id: '100'},
@@ -6641,7 +6645,7 @@ var __assignment_706_2014_ps2 = {
                                     R1: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {
+                                                {collection_id: 'default',microscope: ['g'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna1', concentration_id: '100'},
@@ -6663,7 +6667,7 @@ var __assignment_706_2014_ps2 = {
                                     R2: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {
+                                                {collection_id: 'default',microscope: ['gr', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna2', concentration_id: '100'},
@@ -6685,7 +6689,7 @@ var __assignment_706_2014_ps2 = {
                                     R3: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {
+                                                {collection_id: 'default',microscope: ['rgb', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna3', concentration_id: '100'},
@@ -6707,7 +6711,7 @@ var __assignment_706_2014_ps2 = {
                                     R4: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {
+                                                {collection_id: 'default',microscope: ['rgb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna4', concentration_id: '100'},
@@ -6729,7 +6733,7 @@ var __assignment_706_2014_ps2 = {
                                     R5: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {
+                                                {collection_id: 'default',microscope: ['rgb', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna5', concentration_id: '100'},
@@ -6751,7 +6755,7 @@ var __assignment_706_2014_ps2 = {
                                     GM: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {
+                                                {collection_id: 'default',microscope: ['rgb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'Serum', concentration_id: '100'},
@@ -6773,7 +6777,7 @@ var __assignment_706_2014_ps2 = {
                                     H: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {
+                                                {collection_id: 'default', microscope: ['rgb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'Hydroxyurea', concentration_id: '100'},
@@ -6795,7 +6799,7 @@ var __assignment_706_2014_ps2 = {
                                     N: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {
+                                                {collection_id: 'default', microscope: ['rgb', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'Nocodazole', concentration_id: '100'},
@@ -6811,6 +6815,11 @@ var __assignment_706_2014_ps2 = {
                 }
             },
             add_new_row_instructions: 'add new row instructions',
+            collections:{
+				'': {
+					name: ''
+				}
+			},
             concentrations: {
                 100: {
                     name: '',
@@ -6935,6 +6944,281 @@ var __assignment_706_2014_ps2 = {
                     name: 'PI'
                 }
             },
+            micro_kinds: {
+            	'IF':{
+            		name:'Antibody-labeling IF',
+            		conditions: {
+            			'rgb': {name: 'γ-tubulin (red), α-tubulin (green), DAPI (blue)',
+            			short_name: 'IF: RGB'},
+            			'g': {name: 'H2B (green)',
+            			short_name: 'IF: G'},
+            			'gr': {name: 'H2B (green), α-tubulin(red)',
+            			short_name: 'IF: GR'},
+            			'rb': {name: 'Mad2 (red), DAPI (blue)',
+            			short_name: 'IF: RB'}
+            		}
+            	}
+        	},
+        	slides: {
+        		'img100': 'images/microscopy/black.jpg',
+        	
+        		'img9': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_DNA-blue_Mad2-red/Mad2_off_kinetochores/Mad2_Cytoplasm_cropped.jpg',
+        		'img11': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_DNA-blue_Mad2-red/Mad2_on_kinetochore/Mad2_kinetochore_cropped.jpg', 
+        		'img10': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_DNA-blue_Mad2-red/Mad2_on_kinetochore/Mad2_kinetochore_2_cropped.jpg', 
+        		
+        		'img8': 'images/microscopy/assignment_706_2014_ps2/Antibody Labeling_IF_H2B-green_tubulin-red/Unequal_Chromosome_Distribution/Unequal_chromosome_distribution_2.jpg', 
+        		'img3': 'images/microscopy/assignment_706_2014_ps2/Antibody Labeling_IF_H2B-green_tubulin-red/Anaphase/Normal_Anaphase.jpg', 
+        		'img7': 'images/microscopy/assignment_706_2014_ps2/Antibody Labeling_IF_H2B-green_tubulin-red/Metaphase/Normal_Metaphase_2.jpg', 
+        		'img6': 'images/microscopy/assignment_706_2014_ps2/Antibody Labeling_IF_H2B-green_tubulin-red/Interphase/Normal_Interphase_Color.jpg', 
+        		'img5': 'images/microscopy/assignment_706_2014_ps2/Antibody Labeling_IF_H2B-green_tubulin-red/Interphase/Normal_Interphase_2_Color.jpg', 
+        		'img4': 'images/microscopy/assignment_706_2014_ps2/Antibody Labeling_IF_H2B-green_tubulin-red/Chromosome_Bridges/Chromosome_Bridges_Color.jpg', 
+        		
+        		'img22': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Anaphase/Normal_Anaphase_5.jpg', 
+        		'img23': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Anaphase/Normal_Anaphase_6.jpg', 
+        		'img20': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Anaphase/Normal_Anaphase_3.jpg', 
+        		'img21': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Anaphase/Normal_Anaphase_4.jpg',
+        		'img19': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Anaphase/Normal_Anaphase_2.jpg', 
+        		'img18': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Anaphase/Normal_Anaphase_1.jpg', 
+        		 
+        		'img26': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_5.jpg', 
+        		'img27': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_6.jpg', 
+        		'img24': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_10.jpg', 
+        		'img25': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_4.jpg', 
+        		'img28': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_7.jpg', 
+        		'img29': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_8.jpg', 
+        		'img30': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_9.jpg', 
+        		
+        		'img31': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution.jpg', 
+        		'img33': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_3.jpg', 
+        		'img32': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_2.jpg', 
+        		'img34': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_4.jpg', 
+        		
+        		'img17': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Interphase/Maybe_Interphase_3.jpg', 
+        		'img16': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Interphase/Maybe_Interphase_2.jpg', 
+        		'img15': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Interphase/Maybe_Interphase_1.jpg', 
+        		'img14': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Interphase/Interphase_13.jpg', 
+        		'img13': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Interphase/Interphase_12.jpg', 
+        		'img12': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Interphase/Interphase_10.jpg', 
+        		
+        		'img35': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_H2B-green/Premature_Sister_Chromatid_Separation/Premature_Sister_Chromatid_Separation_1.jpg', 
+        		'img37': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_H2B-green/Premature_Sister_Chromatid_Separation/Premature_Sister_Chromatid_Separation_4.jpg', 
+        		'img36': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_H2B-green/Premature_Sister_Chromatid_Separation/Premature_Sister_Chromatid_Separation_3.jpg'
+        	},
+        	slide_parser: {
+				'default':{
+					'IF':{
+						'rgb':{ 
+							'interphase':{
+								'1': [{
+									hash: 'img12',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'2': [{
+									hash: 'img13',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'3': [{
+									hash: 'img14',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'4': [{
+									hash: 'img15',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'5': [{
+									hash: 'img16',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'6': [{
+									hash: 'img17',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							},
+							'metaphase':{
+								'1': [{
+									hash: 'img24',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'2': [{
+									hash: 'img25',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'3': [{
+									hash: 'img26',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'4': [{
+									hash: 'img27',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'5': [{
+									hash: 'img28',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'6': [{
+									hash: 'img29',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'7': [{
+									hash: 'img30',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							},
+							'anaphase':{
+								'1': [{
+									hash: 'img18',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'2': [{
+									hash: 'img19',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'3': [{
+									hash: 'img20',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'4': [{
+									hash: 'img21',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'5': [{
+									hash: 'img22',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'6': [{
+									hash: 'img23',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							},
+							'unequal':{
+								'1': [{
+									hash: 'img31',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'2': [{
+									hash: 'img32',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'3': [{
+									hash: 'img33',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'4': [{
+									hash: 'img34',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							}
+						},
+						'g':{
+							'premature':{
+								'1': [{
+									hash: 'img35',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'2': [{
+									hash: 'img36',
+									mag: 'N/A',
+									if_type: 'green'
+								}],
+								'3': [{
+									hash: 'img37',
+									mag: 'N/A',
+									if_type: 'green'
+								}]
+							},
+							
+							
+						},
+						'gr':{
+							'interphase':{
+								'1': [{
+									hash: 'img5',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'2': [{
+									hash: 'img6',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							},
+							'metaphase':{
+								'1': [{
+									hash: 'img7',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							},
+							'anaphase':{
+								'1': [{
+									hash: 'img3',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							},
+							'unequal':{
+								'1': [{
+									hash: 'img8',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							},
+							'bridges':{
+								'1': [{
+									hash: 'img4',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							}
+						},
+						'rb':{
+							'off':{
+								'1': [{
+									hash: 'img9',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							},
+							'on':{
+								'1': [{
+									hash: 'img10',
+									mag: 'N/A',
+									if_type: 'merge'
+								}],
+								'2': [{
+									hash: 'img11',
+									mag: 'N/A',
+									if_type: 'merge'
+								}]
+							}
+						}
+					}
+				}
+		},
             model: { // models
                 western_blot: {
                     'cyto': {
@@ -7303,57 +7587,163 @@ var __assignment_706_2014_ps2 = {
                         'parser_simple': [
                             {
                                 match: [],
-                                shape: 'normal-400'
+                                shape: '2-peak-normal-400'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'nc',
-                                shape: 'normal-400'
+                                shape: '2-peak-normal-400'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna1',
-                                shape: 'normal-400'
+                                shape: 'peak-100-normal-400'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna2',
-                                shape: 's-block-400'
+                                shape: '2-peak-uneven-normal-400'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna3',
-                                shape: 'g2-block-100-400'
+                                shape: 'peak-100-normal-400'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna4',
-                                shape: 'g2-block-50-400'
+                                shape: 'peak-50-normal-400'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna5',
-                                shape: 'g2-block-400'
+                                shape: '4-peak-normal-400'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'Hydroxyurea',
-                                shape: 's-block-400'
+                                shape: 's-block-normal-400'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'Nocodazole',
-                                shape: 'g2-block-100-400'
+                                shape: 'peak-100-normal-400'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'Serum',
-                                shape: 'g2-block-50-400'
+                                shape: 'peak-50-normal-400'
                             }
                         ]
 
                     }
+                },
+                microscopy: {
+                	'valid': ['pfl', 'ac'],
+                	'slide': {
+                	
+                		'conditions_parser':[
+                		{
+                			match: [],
+                			
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['nc'],
+                			conditions: 'rgb',
+                			phenotype: 'interphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['nc'],
+                			conditions: 'rb',
+                			phenotype: 'off'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna1'],
+                			conditions: 'g',
+                			phenotype: 'premature'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna2'],
+                			conditions: 'gr',
+                			phenotype: 'interphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna2'],
+                			conditions: 'rb',
+                			phenotype: 'off'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna3'],
+                			conditions: 'rgb',
+                			phenotype: 'metaphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna3'],
+                			conditions: 'rb',
+                			phenotype: 'on'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna4'],
+                			conditions: 'rgb',
+                			phenotype: 'interphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna5'],
+                			conditions: 'rgb',
+                			phenotype: 'interphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['Serum'],
+                			conditions: 'rgb',
+                			phenotype: 'interphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['Hydroxurea'],
+                			conditions: 'rgb',
+                			phenotype: 'interphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['Nocodazole'],
+                			conditions: 'rgb',
+                			phenotype: 'metaphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['Nocodazole'],
+                			conditions: 'rb',
+                			phenotype: 'on'
+                		}
+                			
+                		]
+                		
+                	}
                 }
+                
             }
         }
     };

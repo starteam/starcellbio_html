@@ -296,7 +296,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 		var i = lanes.length; //or 10
 		while(i--){
 			var lane = lanes[i];
-			keys_list = _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type])
+			keys_list = parsed.assignment.id == 'assignment_706_2014_ps2' ? lane.cell_treatment.treatment_list.list[0].microscope : _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type])
 			matches_list.push(lane.slide_conditions)
 		}
 		matches_list = jQuery.unique( matches_list );

@@ -67,7 +67,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             var shape = state.shape;
 
 			function g0g1(x) {
-                return 4 * Math.exp(-((x - 1) * (x - 1)) * 30);
+                return normal_dist(x, 0.8, 0.1, 1, false)*3;
             }
 
             function near_zero(x) {
@@ -83,39 +83,55 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             }
 
             function g2m(x) {
-                return 1 / 2 * Math.exp(-((x - 2) * (x - 2) * 15));
+                return normal_dist(x, 0.38, 0.07, 1, false) ;
             }
 
             function s_block(x) {
                 return Math.exp(-((2 - x) * Math.exp(2 - x) - .9) * ((2 - x) * Math.exp(2 - x) - .9) / .4);
             }
             
-
-            function g2m_0_400(x) {
-                return 1 / 2 * Math.exp(-((x - 1.5) * (x - 1.5) * 2));
-            }
-            function s_block_50_400(x) {
-                return Math.exp(-((0.8 - x) * Math.exp(0.8 - x) - .7) * ((0.8 - x) * Math.exp(0.8 - x) - .7) / .13)-0.005;
-            }
-			function g2m_50_400(x) {
-				return 7 / 9 * Math.exp(-((x - 0.35) * (x - 0.35) * 30));
+			function peak2g1(x){
+				return normal_dist(x, 0.78, 0.08, 4, false)*2;
 			}
-            function g3(x) {
-				return normal_dist(x, 0.95, 0.10, 1, false);
+			
+			function peak2g2(x){
+				 return normal_dist(x, 0.39, 0.08, 1, false)*3 ;
+			}
+			
+			function peak2Ug1(x){
+				return normal_dist(x, 0.83, 0.165, 3, true)*4.1;
+			}
+			
+			function peak2Ug2(x){
+				  return normal_dist(x, 0.31, 0.14, -2, true)*6;
+			}
+			
+			function g1(x){
+				  return normal_dist(x, 0.2, 0.27, -25, true)* 0.7;
+			}
+			
+			function g2(x){
+				  return normal_dist(x, 0.38, 0.09, 1, false)*0.85;
+			}
+			
+			function g3(x){
+				  return normal_dist(x, 0.85, 0.14, 3, true)*0.5;
+			}
+			
+			function g4(x){
+				   return normal_dist(x, 1, 0.32, 1, false)*0.77;
+			}
+			
+			function sblockg1(x){
+				   return normal_dist(x, 0.24, 0.2, -6, true)-0.17; 
+			}
+            
+            function peak100(x){
+            	return normal_dist(x, 0.8, 0.05, 0.5, false);
             }
             
-            function g2(x) {
-                return normal_dist(x, 0.85, 0.14, 3, true);
-            }
-            function g1(x) {
-				return normal_dist(x, 0.33, 0.12, 1, false);
-            }
-			function g4(x) {
-                return normal_dist(x, 0.3, 0.10, 1, false);
-            }
-            function g2m_100_400(x) {
-            	return normal_dist(x, 0.8, 0.12, 0.5, false);
-                //return Math.exp(-((x-0.3) * Math.exp(x-0.3) - .7) * ((x-0.3) * Math.exp(x-0.3) - .7) / .13)-0.005;
+            function peak50(x){
+            	return normal_dist(x, 0.4, 0.05, 0.5, false);
             }
 
 ////////////////////
@@ -220,6 +236,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 var data = [];
                 var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
+                	number_of_curves = 1;
                     var y = g0g1(x + bias) + 3 * g2m(x + bias) + near_zero(x + bias) + s(x + bias);
                     data.push([x, y]);
 
@@ -240,6 +257,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             if (('' + shape).toLowerCase() == 's-block') {
                 var data = [];
                 for (var x = 0; x < 3; x += .01) {
+                	number_of_curves = 1;
                     var y = s_block(x);
                     data.push([x, y]);
 
@@ -258,6 +276,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             if (('' + shape).toLowerCase() == 'g2-block') {
                 var data = [];
                 for (var x = 0; x < 3; x += .01) {
+                	number_of_curves = 1;
                     var y = g2m(x);
                     data.push([x, y]);
 
@@ -273,6 +292,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             if (('' + shape).toLowerCase() == 'alpha-block') {
                 var data = [];
                 for (var x = 0; x < 3; x += .01) {
+                	number_of_curves = 1;
                     var y = g0g1(x);
                     data.push([x, y]);
                 }
@@ -286,12 +306,12 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             }
             
             
-           if (('' + shape).toLowerCase() == 'normal-400') {
+           if (('' + shape).toLowerCase() == '2-peak-normal-400') {
                 var data = [];
                 var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
-	                number_of_curves = 4;
-                    var y = 1.5 * g4(x + bias) + 6* g1(x + bias) + 3 *g2(x + bias) + g3(x + bias) ; 
+	                number_of_curves = 2;
+                    var y = peak2g1(x + bias) + peak2g2(x + bias);
                     data.push([x, y]);
 
                 }
@@ -303,29 +323,108 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     ],
                     options: options
                 };
-            }
-            if (('' + shape).toLowerCase() == 'g2-block-100-400') {
+            
+           }
+           
+           if (('' + shape).toLowerCase() == 'peak-100-normal-400') {
                 var data = [];
+                var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
-                	number_of_curves = 1;
-                    var y = g2m_100_400(x);
+	                number_of_curves = 1;
+                    var y = peak100(x+bias);
                     data.push([x, y]);
 
                 }
                 normalize(data);
                 state.data = {
                     data: [
-                        { data: data}
+                        { data: data},
+
                     ],
                     options: options
                 };
-            }
-            if (('' + shape).toLowerCase() == 'g2-block-50-400') {
-            }
-           if (('' + shape).toLowerCase() == 'g2-block-400') {
-            }
-           if (('' + shape).toLowerCase() == 's-block-400') {
-            }
+            
+           }
+           
+           if (('' + shape).toLowerCase() == '2-peak-uneven-normal-400') {
+                var data = [];
+                var bias = (Math.random() - .5) * .10;
+                for (var x = 0; x < 3; x += .01) {
+	                number_of_curves = 2;
+                    var y = peak2Ug1(x + bias) + peak2Ug2(x + bias);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        { data: data},
+
+                    ],
+                    options: options
+                };
+            
+           }
+           
+           if (('' + shape).toLowerCase() == 'peak-50-normal-400') {
+                var data = [];
+                var bias = (Math.random() - .5) * .10;
+                for (var x = 0; x < 3; x += .01) {
+	                number_of_curves = 1;
+                    var y = peak50(x+bias);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        { data: data},
+
+                    ],
+                    options: options
+                };
+            
+           }
+           
+           if (('' + shape).toLowerCase() == '4-peak-normal-400') {
+                var data = [];
+                var bias = (Math.random() - .5) * .10;
+                for (var x = 0; x < 3; x += .01) {
+	                number_of_curves = 4;
+                    var y = g1(x + bias) + g2(x + bias) + g3(x + bias) + g4(x + bias);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        { data: data},
+
+                    ],
+                    options: options
+                };
+            
+           }
+           
+           if (('' + shape).toLowerCase() == 's-block-normal-400') {
+                var data = [];
+                var bias = (Math.random() - .5) * .10;
+                for (var x = 0; x < 3; x += .01) {
+	                number_of_curves = 1;
+                    var y = sblockg1(x + bias) ;
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+                state.data = {
+                    data: [
+                        { data: data},
+
+                    ],
+                    options: options
+                };
+            
+           }
             
             
 

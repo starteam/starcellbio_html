@@ -24,6 +24,8 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self, data, 'drug_list', {}, scb.DrugList, context);
 	scb.Utils.initialize_accessor_field(self, data, 'temperature', "20", null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'collection_id', "0", null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'microscope', [], null, context);
+
 	// should be getter only
 	scb.Utils.initialize_accessor_field(self, data, 'schedule_value', "0", null, context);
 	// should be getter only
