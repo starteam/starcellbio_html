@@ -7713,6 +7713,13 @@ var __assignment_706_2014_ps2 = {
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
+                			drug_id: ['rna5'],
+                			conditions: 'rb',
+                			phenotype: 'off'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
                 			drug_id: ['Serum'],
                 			conditions: 'rgb',
                 			phenotype: 'interphase'
@@ -7720,7 +7727,7 @@ var __assignment_706_2014_ps2 = {
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
-                			drug_id: ['Hydroxurea'],
+                			drug_id: ['Hydroxyurea'],
                 			conditions: 'rgb',
                 			phenotype: 'interphase'
                 		},
