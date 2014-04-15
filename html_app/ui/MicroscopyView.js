@@ -674,11 +674,19 @@ you pass a callback function to the method so that it calls the draw method imme
 
 */
 
+
+
+	var mouseStillDown_up = false;
+	var mouseStillDown_down = false;
+	var mouseStillDown_left = false;
+	var mouseStillDown_right = false;
 function draw_lens(param, addition, state, canvas){
 	console.log(state.xparam);
 	console.log(state.yparam);
 	if(state.xparam > 350){
 		$('#left').prop('disabled', true);
+		mouseStillDown_left = false;
+
 	}
 	else{
 		$('#left').prop('disabled', false);
@@ -686,6 +694,8 @@ function draw_lens(param, addition, state, canvas){
 	}
 	if(state.xparam < -img_width){
 		$('#right').prop('disabled', true);
+		mouseStillDown_right = false;
+
 	}
 	else{
 		$('#right').prop('disabled', false);
@@ -693,6 +703,8 @@ function draw_lens(param, addition, state, canvas){
 	}
 	if(state.yparam > 350){
 		$('#up').prop('disabled', true);
+		mouseStillDown_up = false;
+
 	}
 	else{
 		$('#up').prop('disabled', false);
@@ -700,6 +712,8 @@ function draw_lens(param, addition, state, canvas){
 	}
 	if(state.yparam < -img_height){
 		$('#down').prop('disabled', true);
+		mouseStillDown_down = false;
+
 	}
 	else{
 		$('#down').prop('disabled', false);
@@ -775,11 +789,6 @@ function draw(state){
 			}
 		}
 	};
-
-	var mouseStillDown_up = false;
-	var mouseStillDown_down = false;
-	var mouseStillDown_left = false;
-	var mouseStillDown_right = false;
 
 	$('#up').mousedown(function(){
 			if(caman_lock){
