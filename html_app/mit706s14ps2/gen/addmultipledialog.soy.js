@@ -30,7 +30,7 @@ mit706s14ps2.dialog = function(opt_data, opt_sb) {
         var cellListLen21 = cellList21.length;
         for (var cellIndex21 = 0; cellIndex21 < cellListLen21; cellIndex21++) {
           var cellData21 = cellList21[cellIndex21];
-          output.append('<td class="scb_s_experiment_setup_table_border ', (cellData21.kind == 'checkbox') ? 'scb_s_experiment_setup_center_cell ' : '', '">', (cellData21.kind == 'text') ? soy.$$escapeHtml(cellData21.text) : '');
+          output.append('<td class="scb_s_experiment_setup_table_border ', (cellData21.kind == 'checkbox') ? ' ' : '', '">', (cellData21.kind == 'text') ? soy.$$escapeHtml(cellData21.text) : '');
           if (cellData21.kind == 'select') {
             output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(cellData21.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData14), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData14), '\'><option disabled="disabled">Please select</option>');
             var keyList43 = soy.$$getMapKeys(opt_data.template[cellData21.field]);

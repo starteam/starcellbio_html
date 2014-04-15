@@ -124,14 +124,19 @@ function changeStatus(){
 	input = input.replace(/ /g,'');
 	input = input.split(';');
 	var code_values = ['starx', '7.02', '7.06', 'bio52', 'usability', '7.06_spring_2014'];
+	outer_loop:
 	for(var x = 0; x < code_values.length; x++){
 		for(var y = 0; y< input.length; y++){
 			if(input[y] == code_values[x]){
 				document.getElementById('code_status').innerHTML = "<span style='color:green'>&#9745; </span>&nbsp; This is a valid code. You may create an account."
 				document.getElementById('auth_submit_button').disabled=false;
-				break;
+				break outer_loop;
 			}
+			else{
 			document.getElementById('code_status').innerHTML = "<span style='color:red'>&#215; </span>&nbsp; This is not a valid code. You cannot create an account."
+			document.getElementById('auth_submit_button').disabled=true;
+			}
+			
 		}
 	}
 }

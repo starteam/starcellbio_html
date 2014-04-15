@@ -3,7 +3,7 @@ import random
 list = []
 indices =[]
 counter = 0
-while len(indices) <20:
+while len(indices) <120:
 	indices.append(counter)
 	counter+=1
 
@@ -11,20 +11,20 @@ while len(indices) <20:
 
 f = open('706_2014_ps2_mapping.txt','w')
 
-while len(list) < 20:
+while len(list) < 120:
 	string = ""
-	while len(string) != 2 :
+	while len(string) != 5 :
 		num = random.randint(1, 5)
-		if num == 1 and not ('A' in string):
-			string+='A'
-		elif num == 2 and not ('B' in string):
-			string+='B'
-		elif num == 3 and not ('C' in string):
-			string+='C'
-		elif num == 4 and not ('D' in string):
-			string+='D'
-		elif num == 5 and not ('E' in string):
-			string+='E'
+		if num == 1 and not ('1' in string):
+			string+='1'
+		elif num == 2 and not ('2' in string):
+			string+='2'
+		elif num == 3 and not ('3' in string):
+			string+='3'
+		elif num == 4 and not ('4' in string):
+			string+='4'
+		elif num == 5 and not ('5' in string):
+			string+='5'
 	if string in list:
 		print 'alreadythere'
 	else:

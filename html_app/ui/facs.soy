@@ -437,12 +437,12 @@ FACS Main View
 {template .display_lysate_types}
 {if length(keys($kinds)) ==1}
 		{foreach $k in keys($kinds)}
-		<span class="scb_f_facs_select_lysate_type {if $lane.is_valid}{else}facs_locked{/if}" cell_treatment_id='{$cell_treatment.id}'
+		<span class="scb_f_facs_select_lysate_type {if $lane.is_valid}{else}scb_s_microscopy_dim_conditions{/if}" cell_treatment_id='{$cell_treatment.id}'
 				facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="{$k}"
 				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$kinds[$k].name}</span>
 		{/foreach}
 {else}
-	<select class="scb_f_facs_select_lysate_type {if $lane.is_valid}{else}facs_locked{/if}" cell_treatment_id='{$cell_treatment.id}'
+	<select class="scb_f_facs_select_lysate_type {if $lane.is_valid}{else}scb_s_microscopy_dim_conditions{/if}" cell_treatment_id='{$cell_treatment.id}'
 			facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
 			lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
 	{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}

@@ -100,7 +100,7 @@ scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, c
     
     self.rows_state = function (exp) {
         var skip_placeholders = false;
-        if (_.keys(context.template.micro_kinds).length == 1) {
+        if (_.keys(context.template.micro_kinds).length == 1 && _.keys(context.template.micro_kinds[Object.keys(context.template.micro_kinds)[0]].conditions).length == 1) {
             skip_placeholders = true;
         }
         var experiment = exp || self.parent.parent;

@@ -29,7 +29,7 @@
             {foreach $rows in $template.ui.add_multiple_dialog[$cell_line].rows}
             <tr>
                 {foreach $cell in $rows.cells}
-                <td class="scb_s_experiment_setup_table_border {if $cell.kind == 'checkbox'}scb_s_experiment_setup_center_cell {/if}">
+                <td class="scb_s_experiment_setup_table_border {if $cell.kind == 'checkbox'} {/if}">
                     {if $cell.kind == 'text'}
                     {$cell.text}
                     {/if}

@@ -296,7 +296,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 		var i = lanes.length; //or 10
 		while(i--){
 			var lane = lanes[i];
-			keys_list = parsed.assignment.id == 'assignment_706_2014_ps2' ? lane.cell_treatment.treatment_list.list[0].microscope : _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type])
+			keys_list = parsed.assignment.id == 'assignment_706_2014_ps2' ? _.keys(lane.cell_treatment.treatment_list.list[0].microscope) : _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.list[0].collection_id][slide_type])
 			matches_list.push(lane.slide_conditions)
 		}
 		matches_list = jQuery.unique( matches_list );
@@ -1848,7 +1848,7 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 		else $('.scb_s_microscopy_right_microscopy').prop('disabled', false);
 
         if (kind == 'sample_prep') {
-            if (_.keys(template.micro_kinds).length == 1) {
+            if (_.keys(template.micro_kinds).length == 1 && _.keys(template.micro_kinds[Object.keys(template.micro_kinds)[0]].conditions).length == 1) {
                 $('button.scb_f_microscopy_sample_remove').hide();
             }
 
