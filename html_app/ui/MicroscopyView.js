@@ -322,9 +322,19 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
        	  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope) == 1
        	  )
        {
+       		var slide_conditions_val = ''
+       		if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1 ){
+       			slide_conditions_val = _.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)[0]
+       		}
+       		else if(  _.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])==1){
+       			slide_conditions_val = _.keys(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])[0]
+       		}
+       		else if(  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope) == 1){
+       			slide_conditions_val = _.keys(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope)[0]
+       		}
        			parsed.microscopy.lanes_list.start({
        				kind: slide_type,
-            		slide_conditions: _.keys(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])[0], //_.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)[0],
+            		slide_conditions: slide_conditions_val,
             		cell_treatment_id: cell_treatment_id,
            			experiment_id: parsed.experiment.id
         		});
@@ -808,21 +818,24 @@ function draw(state){
 
 
 
-	$('#up').mouseup(function(event) {
+	$(document).mouseup(function(event) {
 		mouseStillDown_up = false;
-	});
-	
-	$('#down').mouseup(function(event) {
 		mouseStillDown_down = false;
-	});
-	
-	$('#left').mouseup(function(event) {
 		mouseStillDown_left = false;
-	});
-	
-	$('#right').mouseup(function(event) {
 		mouseStillDown_right = false;
 	});
+	
+// 	$('#down').mouseup(function(event) {
+// 		
+// 	});
+// 	
+// 	$('#left').mouseup(function(event) {
+// 		
+// 	});
+// 	
+// 	$('#right').mouseup(function(event) {
+// 		
+// 	});
 	
 	
 	function moveUp() {
