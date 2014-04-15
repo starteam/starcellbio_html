@@ -388,10 +388,16 @@
   width: 90px;
   margin-left: 6px;
 }
-.scb_s_facs_gel_tab_selected, .scb_s_microscopy_gel_tab_selected {
+.scb_s_facs_gel_tab_selected {
   display: inline-block;
   font-family: 'sourcesanspro-bold';
   font-size: 11pt;
+  text-align: center;
+}
+.scb_s_microscopy_gel_tab_selected {
+  display: inline-block;
+  font-family: 'sourcesanspro-bold';
+  font-size: 8pt;
   text-align: center;
 }
 .scb_f_western_blot_gel_remove {

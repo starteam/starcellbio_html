@@ -165,7 +165,13 @@ def get_courses(request, **kwargs):
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
 			alist.append(dictionary)
-		retval = {'list': alist, 'is_auth': True, 'is_selected': alist[0]['id'], 'token': token1}
+		#pudb.set_trace()
+		is_selected_val = alist[0]['id']
+		if (alist[0]['course'] == '7.06_Spring_2014' and len(alist) == 2):
+			is_selected_val = 'assignment_706_2014_ps2'
+		else:
+			is_selected_val = alist[0]['id']
+		retval = {'list': alist, 'is_auth': True, 'is_selected': is_selected_val, 'token': token1}
 	else:
 		#pudb.set_trace()
 		all =[]

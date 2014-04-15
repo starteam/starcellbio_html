@@ -317,7 +317,10 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 				return;
 				
 		}
-       if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1 || _.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])==1)
+       if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1 || 
+       	  _.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])==1 || 
+       	  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope) == 1
+       	  )
        {
        			parsed.microscopy.lanes_list.start({
        				kind: slide_type,
@@ -1215,8 +1218,9 @@ function init(state, isNew, isIF, draw, image_source){
 			$('#svg image').attr('xlink:href', image_source);
 			if(Math.ceil(image_dimensions.width/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1 || Math.ceil(image_dimensions.height/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1){
 				$('#svg image').attr('width',image_dimensions.width+'px'); 
-				$('#svg image').attr('height', image_dimensions.height+'px'); 	
-				
+				$('#svg image').attr('height', image_dimensions.height+'px'); 
+				img_width =image_dimensions.width;	
+				img_height =image_dimensions.height;
 				}
 			else{			
 				img_width = scb.ui.static.MicroscopyView.PICTURE_LIM;

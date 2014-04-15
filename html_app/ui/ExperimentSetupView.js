@@ -204,8 +204,19 @@ scb.ui.static.ExperimentSetupView.register = function (workarea) {
         scb.ui.static.ExperimentSetupView.scb_f_open_select_technique(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_create_new_set_up', function(e){
+    	 var experiment_id = $('.scb_s_experiment_setup_create_new_set_up').attr('experiment_id');
+        var assignment_id = $('.scb_s_experiment_setup_create_new_set_up').attr('assignment_id');
+        var state = {
+            experiment_id: experiment_id,
+            assignment_id: assignment_id,
+            view: 'experiment_setup',
+            skip_hash_update: true
+        };
+        var parsed = scb.ui.static.MainFrame.validate_state(state);
     	$('.scb_f_experiment_setup_new_set_up').attr('checked', 'checked');
     	$('.scb_s_experiment_setup_new_set_up').css('visibility', 'visible');
+    	parsed.experiment.setup_visible = true;
+    	scb.ui.static.MainFrame.refresh();
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_s_experiment_setup_new_row', function (e) {
@@ -928,7 +939,7 @@ scb.ui.ExperimentSetupView = function scb_ui_ExperimentSetupView(gstate) {
     	}
       if(state.experiment.last_step < scb.ui.static.ExperimentSetupView.TOTAL_STEPS )
 			state.experiment.last_step = 4;
-        if (rows.length > 0){
+        if (rows.length > 0 || state.experiment.setup_visible){
         	$('.scb_s_experiment_setup_new_set_up').css('visibility', 'visible');
 			$('.scb_f_experiment_setup_new_set_up').prop('checked','checked');
         }

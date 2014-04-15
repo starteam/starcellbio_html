@@ -1,4 +1,4 @@
-.scb_s_objective_table {
+.scb_s_mit706s14ps2_assignment_overview .scb_s_objective_table {
   border: 1px solid #27956c;
   border-radius: 5px;
   border-spacing: 0;
@@ -6,24 +6,20 @@
   background-color: white;
   margin-bottom: 20px;
 }
-.scb_s_objective_table>tbody {
+.scb_s_mit706s14ps2_assignment_overview .scb_s_objective_table>tbody {
   background-color: #edeef2;
 }
-.scb_s_objective_table>thead>tr>td:first-child {
+.scb_s_mit706s14ps2_assignment_overview .scb_s_objective_table>thead>tr>td:first-child {
   border: 1px solid #e0e0e0;
-  border-right-color: black;
-  border-bottom-color: black;
 }
-.scb_s_objective_table>thead>tr>td {
+.scb_s_mit706s14ps2_assignment_overview .scb_s_objective_table>thead>tr>td {
   border: 1px solid #e0e0e0;
-  border-bottom-color: black;
   padding-left: 8px;
 }
-.scb_s_objective_table>tbody>tr>td:first-child {
+.scb_s_mit706s14ps2_assignment_overview .scb_s_objective_table>tbody>tr>td:first-child {
   border: 1px solid #e0e0e0;
-  border-right-color: black;
 }
-.scb_s_objective_table>tbody>tr>td {
+.scb_s_mit706s14ps2_assignment_overview .scb_s_objective_table>tbody>tr>td {
   border: 1px solid #e0e0e0;
   padding-left: 8px;
 }

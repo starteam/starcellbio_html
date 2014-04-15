@@ -386,25 +386,25 @@
 								 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rgb" cell_treatment_id='{$r.cell_treatment.id}'
 								   lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-								   {if $r.is_sample_enabled and ($r.lane.slide_conditions == 'rgb' or length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1)}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
+								   {if $r.is_sample_enabled and ($r.lane.slide_conditions == 'rgb' or length(keys($r.lane.cell_treatment.treatment_list.list[0].microscope)) == 1)}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.rgb.name}</span>
 							{/if}
 							{if $k == 'g'}
 								 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="g" cell_treatment_id='{$r.cell_treatment.id}'
 								   lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-									{if $r.is_sample_enabled and ($r.lane.slide_conditions == 'g' or length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1)}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.g.name}</span>
+									{if $r.is_sample_enabled and ($r.lane.slide_conditions == 'g' or length(keys($r.lane.cell_treatment.treatment_list.list[0].microscope)) == 1)}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.g.name}</span>
 							{/if}
 							{if $k == 'gr'}
 								 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="gr" cell_treatment_id='{$r.cell_treatment.id}'
 								   lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-									{if $r.is_sample_enabled and ($r.lane.slide_conditions == 'gr' or length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1)}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.gr.name}</span>
+									{if $r.is_sample_enabled and ($r.lane.slide_conditions == 'gr' or length(keys($r.lane.cell_treatment.treatment_list.list[0].microscope)) == 1)}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.gr.name}</span>
 							{/if}
 							{if $k == 'rb'}
 								 <input class="scb_f_microscopy_select_conditions" microscopy_id='{$microscopy.id}'
 								   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="rb" cell_treatment_id='{$r.cell_treatment.id}'
 								   lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-									{if $r.is_sample_enabled and ($r.lane.slide_conditions == 'rb' or length(keys($assignment.template.slide_parser[$r.lane.cell_treatment.treatment_list.list[0].collection_id][$r.lane.kind])) == 1)}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.rb.name}</span>
+									{if $r.is_sample_enabled and ($r.lane.slide_conditions == 'rb' or length(keys($r.lane.cell_treatment.treatment_list.list[0].microscope)) == 1)}checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds.IF.conditions.rb.name}</span>
 							{/if}
 
 						{/if}

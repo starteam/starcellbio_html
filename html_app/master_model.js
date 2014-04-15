@@ -6949,13 +6949,13 @@ var __assignment_706_2014_ps2 = {
             		name:'Antibody-labeling IF',
             		conditions: {
             			'rgb': {name: 'γ-tubulin (red), α-tubulin (green), DAPI (blue)',
-            			short_name: 'IF: RGB'},
+            			short_name: 'R:γ-tub, G:α-tub, B:DAPI'},
             			'g': {name: 'H2B (green)',
-            			short_name: 'IF: G'},
+            			short_name: 'G:H2B'},
             			'gr': {name: 'H2B (green), α-tubulin(red)',
-            			short_name: 'IF: GR'},
+            			short_name: 'G:H2B, R:α-tub'},
             			'rb': {name: 'Mad2 (red), DAPI (blue)',
-            			short_name: 'IF: RB'}
+            			short_name: 'R:Mad2, B:DAPI'}
             		}
             	}
         	},
