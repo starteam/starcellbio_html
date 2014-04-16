@@ -48,13 +48,13 @@ decusability.dialog = function(opt_data, opt_sb) {
         var cellListLen69 = cellList69.length;
         for (var cellIndex69 = 0; cellIndex69 < cellListLen69; cellIndex69++) {
           var cellData69 = cellList69[cellIndex69];
-          output.append('<td class=\'scb_s_experiment_setup_table_border\'>', (cellData69.kind == 'checkbox') ? '<button class=\'scb_s_gray_button scb_mit706s16_inner_dialog_select\' name="' + soy.$$escapeHtml(cellData69.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData4) + '\'>SELECT ALL</button>' : '', '</td>');
+          output.append('<td class=\'scb_s_experiment_setup_table_border\'>', (cellData69.kind == 'checkbox') ? '<button class=\'scb_s_gray_button scb_mit706s16_inner_dialog_select\' name="' + soy.$$escapeHtml(cellData69.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData4) + '\' aria-label=\'Select All\' role=\'button\'>SELECT ALL</button>' : '', '</td>');
         }
         output.append('</tr>');
       }
     }
-    output.append('<!--            <tr><td colspan=\'', soy.$$escapeHtml(opt_data.template.ui.add_multiple_dialog[cell_lineData4].headings.length), '\'><div class=\'scb_s_experiment_design_green_line\'></div><button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button\'>ADD MULTIPLE TREATMENTS</button></td>-->            </tr></tbody></table>');
+    output.append('</tr></tbody></table>');
   }
-  output.append('<!--<button class=\'scb_mit706s16_inner_dialog_select_all scb_s_gray_button\'>SELECT ALL</button><br>--><div class=\'scb_mit706s16_button_float\'><button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button\'>ADD SAMPLES</button></div></div></div>');
+  output.append('<div class=\'scb_mit706s16_button_float\'><button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button\' aria-label=\'Cancel\' role=\'button\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button\' aria-label=\'Add Samples\' role=\'button\'>ADD SAMPLES</button></div></div></div>');
   return opt_sb ? '' : output.toString();
 };

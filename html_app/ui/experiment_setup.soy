@@ -68,12 +68,12 @@ Experiment active area
         {/call}
     	<div class='scb_s_experiment_setup_top'>
         <div class='scb_s_experiment_setup_choose_template'>
-            <div class='scb_s_experiment_setup_create_new_set_up' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'><input class='scb_s_experiment_setup_choose_template_kind scb_f_experiment_setup_new_set_up' type="radio" name="setup_kind"/><span class='scb_s_experiment_setup_radio_text'>Create new set-up</span><br></div>
+            <div class='scb_s_experiment_setup_create_new_set_up' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' aria-label='Create New Set-up' role='radio'><input class='scb_s_experiment_setup_choose_template_kind scb_f_experiment_setup_new_set_up' type="radio" name="setup_kind"/><span class='scb_s_experiment_setup_radio_text'>Create new set-up</span><br></div>
 <!-- <div class='scb_s_experiment_setup_choose_existing_template'><input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind" disabled="disabled" /><span class='scb_s_experiment_setup_choose_template_kind_disabled'>Select pre-existing set-up as a template</span></div>-->
 
             <br>
         </div>
-        <div class='scb_s_experiment_setup_video_box_wrapper'>
+        <div class='scb_s_experiment_setup_video_box_wrapper'  alt='Video Player Background'  aria-label='Video Player Background'>
             <div class='scb_s_experiment_setup_video_box_wrapper_title'>
                 IN THE LAB
             </div>
@@ -93,7 +93,7 @@ Experiment active area
         {/call}
         <div class='scb_s_experiment_setup_top'>
         {if $experiment.setup_finished}
-        <div class='scb_s_warning'>
+        <div class='scb_s_warning' role='note'>
 
         <h1>NOTE!</h1>
         <p>Below is a summary of your set-up for {$experiment.name}.<br>
@@ -105,7 +105,7 @@ Experiment active area
         </p>
         </div>
         {else}
-			<div class='scb_s_warning_dialog'>
+			<div class='scb_s_warning_dialog' role='note'>
             <h1>CONFIRM SET-UP</h1>
             <p>Below is your set-up for '{$experiment.name}'.<br>
             
@@ -116,13 +116,13 @@ Experiment active area
 			
 			<a class="scb_s_navigation_button scb_f_open_select_technique"
 			   href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>SELECT TECHNIQUE &nbsp; &#9654;</a><br/>
+			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' aria-label='Select Technique' role='button' >SELECT TECHNIQUE &nbsp; &#9654;</a><br/>
 			<a class="scb_s_navigation_button scb_f_open_experiment_setup"
-			   href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; EDIT SET-UP
+			   href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}" aria-label='Edit Set-Up' role='button'>&#9664; &nbsp; EDIT SET-UP
 				</a>
 				</div>
         {/if}
- 		<div class='scb_s_experiment_setup_video_box_wrapper'>
+ 		<div class='scb_s_experiment_setup_video_box_wrapper' alt='Video Player Background'  aria-label='Video Player Background'>
             <div class='scb_s_experiment_setup_video_box_wrapper_title'>
                 IN THE LAB
             </div>
@@ -142,7 +142,7 @@ Experiment active area
             	{$t.experiment_setup|noAutoescape}
         </div>
         <br>
-		<table class="scb_s_experiment_setup_table {if $kind == 'readwrite'}scb_s_experiment_setup_table_editable{else}scb_s_experiment_setup_table_readonly{/if}">
+		<table class="scb_s_experiment_setup_table {if $kind == 'readwrite'}scb_s_experiment_setup_table_editable{else}scb_s_experiment_setup_table_readonly{/if}" aria-label='Table of Samples' role='grid'>
 			<thead class='scb_s_experiment_setup_table_head'>
 			{foreach $h in $headings}
 				<td class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
@@ -178,7 +178,7 @@ Experiment active area
 						{/if}
 					{else}
 						{if $c.kind=='cell_plate'}
-							<img src="images/setup/scb_cell_plate.png">
+							<img src="images/setup/scb_cell_plate.png" role='presentation'>
 						{/if}
 						{if $c.kind =='collection' and $c.title =='default'}
 						{else}

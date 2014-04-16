@@ -58,7 +58,7 @@ Experiment active area
 			{/call} <br/>
 				<div class='scb_s_experiment_design_objective_text experiment_name_header' >Experiment Name: </div>
 
-				<input type='text' class='scb_s_experiment_name_edit' maxlength="30" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}' aria-label='Experiment Name' title='{$experiment.name}' role='textbox'>
+				<input type='text' class='scb_s_experiment_name_edit' maxlength="30" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'  title='{$experiment.name}' aria-label='Experiment Name' role='textbox'>
 			<br/>
 			<br/>
 
@@ -105,7 +105,7 @@ Experiment active area
 {template .display_techniques}
 {foreach $tech in $techniques}
 {if $tech == 'wb'}
-<span class='scb_s_experiment_design_technique_wb scb_s_experiment_design_unselected'>
+<span class='scb_s_experiment_design_technique_wb scb_s_experiment_design_unselected' aria-label='Western Blot Summary' role='presentation'>
 	<div class='scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_wb_cb' role="button" >
     <span class='scb_s_homepage_technique_title_image'>
        Western Blot</span>
@@ -117,7 +117,7 @@ Experiment active area
 {/if}
 
 {if $tech == 'fc'}
-<span class='scb_s_experiment_design_technique_flow scb_s_experiment_design_unselected'>
+<span class='scb_s_experiment_design_technique_flow scb_s_experiment_design_unselected' aria-label='Western Blot Summary' role='presentation'>
     <div class='scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_fc_cb' role="button" >
     <span class='scb_s_homepage_technique_title_image'>
         Flow Cytometry</span>
@@ -130,7 +130,7 @@ Experiment active area
 {/if}
 
 {if $tech == 'fc'}
-<span class='scb_s_experiment_design_technique_micro scb_s_experiment_design_unselected'>
+<span class='scb_s_experiment_design_technique_micro scb_s_experiment_design_unselected' aria-label='Western Blot Summary' role='presentation'>
     <div role='button' class = 'scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_mi_cb' role="button" >
     	<span class='scb_s_homepage_technique_title_image'>
          Microscopy</span>

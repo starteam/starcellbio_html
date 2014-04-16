@@ -50,14 +50,14 @@ mit706s14.dialog = function(opt_data, opt_sb) {
           var cellListLen70 = cellList70.length;
           for (var cellIndex70 = 0; cellIndex70 < cellListLen70; cellIndex70++) {
             var cellData70 = cellList70[cellIndex70];
-            output.append('<td class=\'scb_s_experiment_setup_table_border scb_s_experiment_setup_center_cell\'>', (cellData70.kind == 'checkbox') ? '<button class=\'scb_s_gray_button scb_mit706s16_inner_dialog_select\' name="' + soy.$$escapeHtml(cellData70.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData14) + '\'>SELECT ALL</button>' : '', '</td>');
+            output.append('<td class=\'scb_s_experiment_setup_table_border scb_s_experiment_setup_center_cell\'>', (cellData70.kind == 'checkbox') ? '<button class=\'scb_s_gray_button scb_mit706s16_inner_dialog_select\' name="' + soy.$$escapeHtml(cellData70.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData14) + '\' aria-label=\'Select All\' role=\'button\'>SELECT ALL</button>' : '', '</td>');
           }
           output.append('</tr>');
         }
       }
-      output.append('<!--            <tr><td colspan=\'', soy.$$escapeHtml(opt_data.template.ui.add_multiple_dialog.headings.length), '\'><div class=\'scb_s_experiment_design_green_line\'></div><button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button\'>ADD MULTIPLE TREATMENTS</button></td>-->            </tr></tbody>');
+      output.append('</tr></tbody>');
     }
   }
-  output.append('</table><!--<button class=\'scb_mit706s16_inner_dialog_select_all scb_s_gray_button\'>SELECT ALL</button><br>--><div class=\'scb_mit706s16_button_float\'><button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button scb_s_2014_cancel\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button scb_s_2014_samples\'>ADD SAMPLES</button></div></div></div>');
+  output.append('</table><div class=\'scb_mit706s16_button_float\'><button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button scb_s_2014_cancel\' aria-label=\'Cancel\' role=\'button\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button scb_s_2014_samples\' aria-label=\'Add Samples\' role=\'button\'>ADD SAMPLES</button></div></div></div>');
   return opt_sb ? '' : output.toString();
 };
