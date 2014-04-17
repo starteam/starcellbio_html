@@ -151,5 +151,6 @@ function inConstructionError(){
 					/* callback function for 'OK' button*/ });
 				$('.jqDialog_header').remove();		
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				return;
 }

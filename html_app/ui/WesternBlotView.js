@@ -174,6 +174,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
 					$('.error_overlay').remove()/* callback function for 'OK' button*/ });
 		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+		$('#jqDialog_box').attr('role', 'alertdialog');
     }
     else if (rows_state.valid < 1) {
     	$('html').css('overflow', 'hidden');
@@ -185,6 +186,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
 		});
  		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+		$('#jqDialog_box').attr('role', 'alertdialog');
     }
     else {
         parsed.western_blot.lysate_prepared = true;
@@ -488,6 +490,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
 		);
 		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+		$('#jqDialog_box').attr('role', 'alertdialog');
 		
 
     }
@@ -741,5 +744,7 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 			});
 
 		});
+		
+		
     }
 }

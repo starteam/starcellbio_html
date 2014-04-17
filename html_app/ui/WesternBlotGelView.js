@@ -90,6 +90,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
     		/* callback function for 'OK' button*/ });
 		$('.jqDialog_header').remove();		
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+		$('#jqDialog_box').attr('role', 'alertdialog');
     }
     $('.scb_f_wb_exposure_slider').detach();
     var state = {
@@ -529,5 +530,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
 			});
 
 		});
+		
+		$('.scb_f_wb_exposure_slider').attr('role', 'slider');
     }
 };

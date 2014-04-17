@@ -4,10 +4,10 @@
 * Login
 */
 {template .login}
-<div class='scb_s_login_dialog'>
+<div class='scb_s_login_dialog' role='dialog' aria-label='Sign In'>
 	<div class='scb_s_login_form'> <div>Sign In</div>
-  	<button class='scb_f_login_close_button' aria-label='Close'><span>&#215;</span></button></div>
-	<iframe src='/accounts/login/' class='iframe'>
+  	<button class='scb_f_login_close_button' aria-label='Close' role='button'><span>&#215;</span></button></div>
+	<iframe  role='presentation' src='/accounts/login/' class='iframe'>
 	</iframe>
 </div>
 {/template}
@@ -16,10 +16,10 @@
 * Signup
 */
 {template .signup}
-<div class='scb_s_signup_dialog'>
+<div class='scb_s_signup_dialog'  role='dialog' aria-label='Sign Up'>
 	<div class='scb_s_signup_form'> <div>Sign Up</div>
-  	<button class='scb_f_signup_close_button' aria-label='Close'><span>&#215;</span></button></div>
-	<iframe src='/accounts/signup/' class='iframe'>
+  	<button class='scb_f_signup_close_button' aria-label='Close' role='button'><span>&#215;</span></button></div>
+	<iframe  role='presentation' src='/accounts/signup/' class='iframe'>
 	</iframe>
 </div>
 {/template}
@@ -28,8 +28,8 @@
 * Login
 */
 {template .logout}
-<div class='scb_s_logout_dialog'>
-    <button class='scb_f_logout_close_button' aria-label='Close'><span>&#215;</span></button>
+<div class='scb_s_logout_dialog' role='dialog' aria-label='Log In'>
+    <button class='scb_f_logout_close_button' aria-label='Close' role='button'><span>&#215;</span></button>
     <button class='scb_f_logout_button'>Logout</button>
 
 </div>

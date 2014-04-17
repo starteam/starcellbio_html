@@ -314,6 +314,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 					/* callback function for 'OK' button*/ });
 				$('.jqDialog_header').remove();		
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				return;
 				
 		}
@@ -384,6 +385,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (elem
 				scb.ui.static.MainFrame.refresh();});
 				$('.jqDialog_header').remove();		
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				return;
 				
 			}
@@ -502,6 +504,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
 		}
 		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+		$('#jqDialog_box').attr('role', 'alertdialog');
     }
     else{
         parsed.microscopy.slide_prepared = true;
@@ -1583,6 +1586,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					/* callback function for 'OK' button*/ });
 				$('.jqDialog_header').remove();		
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				return;
 		}
 		else{
@@ -1625,6 +1629,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					/* callback function for 'OK' button*/ });
 				$('.jqDialog_header').remove();		
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				return;
 		}
 		else{
@@ -1667,6 +1672,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					/* callback function for 'OK' button*/ });
 				$('.jqDialog_header').remove();		
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				return;
 		}
 		else{
@@ -1709,6 +1715,7 @@ scb.ui.static.MicroscopyView.register = function (workarea) {
 					/* callback function for 'OK' button*/ });
 				$('.jqDialog_header').remove();		
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				return;
 		}
 		else{

@@ -290,6 +290,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 					function() {	$('html').css('overflow', 'visible');
 					 $('.error_overlay').remove();/* callback function for 'OK' button*/ });
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				event.preventDefault();
 			}
 			else{
@@ -297,6 +298,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 				$(element).attr('href', 'javascript:void(0)');
 				
 				$.jqDialog.content(scb_experiment_setup.experiment_setup_dialog({assignment: parsed.assignment, experiment: parsed.experiment}));
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				//$('#jqDialog_box').prepend(scb_experiment_setup.experiment_confirm());
 				$('.scb_f_open_experiment_setup').click( function () {
 					if($('.scb_s_warning_dialog').length >0){

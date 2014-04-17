@@ -243,6 +243,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });;
 			$('.jqDialog_header').remove();
 			$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error:</h1>");
+			$('#jqDialog_box').attr('role', 'alertdialog');
 
         }
     }
@@ -284,6 +285,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 		);
 		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Delete experiment?</h1>");
+		$('#jqDialog_box').attr('role', 'alertdialog');
 
     });
     
@@ -514,6 +516,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				);
 				$('.jqDialog_header').remove();
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				evt.preventDefault();
         }
         else{
@@ -814,6 +817,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
             	$('.jqDialog_header').remove();
             	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+            	$('#jqDialog_box').attr('role', 'alertdialog');
                 if (parsed.assignment) {
                     self.show({
                         view: 'assignments',

@@ -6,7 +6,7 @@ if (typeof mit706s14 == 'undefined') { var mit706s14 = {}; }
 
 mit706s14.dialog = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_mit706s16_inner_dialog\'><h1 class=\'scb_mit706s16_inner_dialog_title\'><span class=\'scb_mit706s16_inner_dialog_title_close\'>&#215;</span>Add Samples </h1><div class=\'scb_mit706s16_inner_dialog_body\'><!--headings--><table class="scb_s_experiment_setup_table scb_s_experiment_setup_special"><thead class="scb_s_experiment_setup_table_head">');
+  output.append('<div class=\'scb_mit706s16_inner_dialog\' role=\'dialog\' aria-label=\'Add Samples\'><h1 class=\'scb_mit706s16_inner_dialog_title\' role=\'presentation\' aria-label=\'Add Samples\'><span class=\'scb_mit706s16_inner_dialog_title_close\' role=\'button\' aria-label=\'Close Add Samples\'>&#215;</span>Add Samples </h1><div class=\'scb_mit706s16_inner_dialog_body\'><table class="scb_s_experiment_setup_table scb_s_experiment_setup_special"><thead class="scb_s_experiment_setup_table_head">');
   var headingList4 = opt_data.template.ui.add_multiple_dialog.headings;
   var headingListLen4 = headingList4.length;
   for (var headingIndex4 = 0; headingIndex4 < headingListLen4; headingIndex4++) {

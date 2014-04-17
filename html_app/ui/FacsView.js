@@ -97,6 +97,7 @@ scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
     	$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+		$('#jqDialog_box').attr('role', 'alertdialog');
     }
     else{
     	parsed.facs.sample_prepared = true;
