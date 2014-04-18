@@ -278,7 +278,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (elemen
         }
         else {
             slider.show();
-            slider_value.show();
+            //slider_value.show();
         }
     }
     function set_vslider(x) {

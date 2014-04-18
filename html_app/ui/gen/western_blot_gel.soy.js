@@ -18,7 +18,7 @@ scb_western_blot_gel.main = function(opt_data, opt_sb) {
 
 scb_western_blot_gel.display_details = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_western_blot_container\'><div class=\'scb_western_blot_details_view\'>');
+  output.append('<div class=\'scb_s_western_blot_container\'><div class=\'scb_western_blot_details_view\' >');
   scb_common.experiment_step({step: 5, last_step: 6, assignment: opt_data.assignment, experiment: opt_data.experiment}, output);
   output.append('<div class=\'scb_s_western_blot_all_tabs\'><div class=\'scb_western_blot_details_view_inner\'>');
   scb_western_blot_gel.display_tabs(opt_data, output);
@@ -80,7 +80,7 @@ scb_western_blot_gel.display_gel = function(opt_data, opt_sb) {
     var rListLen283 = rList283.length;
     for (var rIndex283 = 0; rIndex283 < rListLen283; rIndex283++) {
       var rData283 = rList283[rIndex283];
-      output.append((rData283.is_marker && opt_data.western_blot.marker_loaded) ? '<img style=\'position:relative;top: -247px;left: ' + ((opt_data.western_blot.rows_state_count == 1) ? '44px' : soy.$$escapeHtml(20 + 22 * rIndex283) + 'px') + '\' class=\'scb_s_western_blot_gel_membrane\' src="' + ((opt_data.western_blot.gel_type == '.10') ? 'images/western_blot/SCB_WB_Markers_Lane_10.png' : (opt_data.western_blot.gel_type == '.12') ? ' images/western_blot/SCB_WB_Markers_Lane_12.png' : (opt_data.western_blot.gel_type == '.15') ? 'images/western_blot/SCB_WB_Markers_Lane_15.png' : '') + '">' : '');
+      output.append((rData283.is_marker && opt_data.western_blot.marker_loaded) ? '<img role=\'presentation\' style=\'position:relative;top: -247px;left: ' + ((opt_data.western_blot.rows_state_count == 1) ? '44px' : soy.$$escapeHtml(20 + 22 * rIndex283) + 'px') + '\' class=\'scb_s_western_blot_gel_membrane\' src="' + ((opt_data.western_blot.gel_type == '.10') ? 'images/western_blot/SCB_WB_Markers_Lane_10.png' : (opt_data.western_blot.gel_type == '.12') ? ' images/western_blot/SCB_WB_Markers_Lane_12.png' : (opt_data.western_blot.gel_type == '.15') ? 'images/western_blot/SCB_WB_Markers_Lane_15.png' : '') + '">' : '');
     }
   }
   output.append('</div><div class=\'scb_s_western_blot_tools\'>');

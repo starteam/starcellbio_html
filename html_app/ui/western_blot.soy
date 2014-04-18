@@ -16,7 +16,7 @@
 * @param can_prepare_lysate
 */
 {template .main}
-<div class='scb_s_western_blot_view'>
+<div class='scb_s_western_blot_view' role='main'>
 
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
@@ -162,7 +162,7 @@
 		{foreach $wb in $experiment.western_blot_list.list}
 		{if $western_blot.id == $wb.id}
 		<span class='scb_s_western_blot_active'>
-		<input class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+		<input role='input' class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
 			  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
 		<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}' 
@@ -197,7 +197,7 @@
 				
 					{if $western_blot.id == $wb.id}
 					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
-					<input class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+					<input  role='input' class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
 			  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
 					<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
 							experiment_id='{$experiment.id}'>| &#215;
@@ -222,7 +222,7 @@
 				
 					{if $western_blot.id == $wb.id}
 					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
-					<input class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+					<input role='input' class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
 			  			experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
 					<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
 							experiment_id='{$experiment.id}'>| &#215;

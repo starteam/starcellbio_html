@@ -6,7 +6,7 @@ if (typeof scb_experiment_setup == 'undefined') { var scb_experiment_setup = {};
 
 scb_experiment_setup.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_experiment_setup_view\'>');
+  output.append('<div class=\'scb_s_experiment_setup_view\' role=\'main\'>');
   scb_homepage.display_header(opt_data, output);
   scb_common.assignment_step({step: 4, assignment_name: opt_data.assignment.name, experiment_name: opt_data.experiment.name, last_step: opt_data.last_step, prev_step: opt_data.prev_step, assignment: opt_data.assignment, experiment: opt_data.experiment}, output);
   scb_experiment_setup.display_details(opt_data, output);

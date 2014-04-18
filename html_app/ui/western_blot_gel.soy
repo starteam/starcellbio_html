@@ -67,7 +67,7 @@
 {template .display_details}
 <div class='scb_s_western_blot_container'>
 
-<div class='scb_western_blot_details_view'>
+<div class='scb_western_blot_details_view' >
 	{call scb_common.experiment_step}
         {param step:5/}
         {param last_step: 6/}
@@ -288,7 +288,7 @@
              src='images/western_blot/SCB_WesternBlotting_Membrane.png'>
         {foreach $r in $rows}
         	 {if $r.is_marker and $western_blot.marker_loaded}
-        	 <img style='position:relative;top: -247px;left: {if $western_blot.rows_state_count ==1}44px{else}{20+22*(index($r))}px{/if}' class='scb_s_western_blot_gel_membrane'
+        	 <img role='presentation' style='position:relative;top: -247px;left: {if $western_blot.rows_state_count ==1}44px{else}{20+22*(index($r))}px{/if}' class='scb_s_western_blot_gel_membrane'
              src="{if $western_blot.gel_type == '.10'}images/western_blot/SCB_WB_Markers_Lane_10.png 
              {elseif $western_blot.gel_type == '.12'} images/western_blot/SCB_WB_Markers_Lane_12.png
              {elseif $western_blot.gel_type == '.15'}images/western_blot/SCB_WB_Markers_Lane_15.png{/if}">

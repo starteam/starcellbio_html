@@ -15,7 +15,7 @@ FACS Main View
 @param rows
 */
 {template .main}
-<div class='scb_s_facs_view'>
+<div class='scb_s_facs_view' role='main'>
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
     {param context:$context /}
@@ -157,12 +157,11 @@ FACS Main View
 		{if $facs.id == $wb.id}
 		<span class='scb_s_facs_active'>
 
-		<input class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+		<input role='input' class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
 			  experiment_id='{$experiment.id}' value='{$wb.name}' type='text' maxlength=10></input>
 
 		<button class='scb_f_facs_remove' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
 				experiment_id='{$experiment.id}'>| &#215;
-		<!--             <img src="images/setup/scb_remove.png"> -->
 		</button>
 		</span>
 		{else}
@@ -190,7 +189,7 @@ FACS Main View
 						{if $facs.id == $wb.id}
 						<span class='scb_s_facs_active scb_s_facs_more_open_facs'>
 
-						<input class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+						<input role='input' class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
 			 			 experiment_id='{$experiment.id}' value='{$wb.name}' type='text' maxlength=10></input>
 
 
@@ -218,7 +217,7 @@ FACS Main View
 						{if $facs.id == $wb.id}
 						<span class='scb_s_facs_active scb_s_facs_more_open_facs'>
 
-						<input class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
+						<input role='input' class='scb_s_facs_selected' facs_id='{$wb.id}' assignment_id='{$assignment.id}'
 			  experiment_id='{$experiment.id}' value='{$wb.name}' type='text' maxlength=10></input>
 
 
@@ -302,7 +301,7 @@ FACS Main View
         {foreach $r in $rows}
         <tr class='scb_s_facs_samples_table_tr '>
             <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:73px;'>{if $r.display_sample}
-                <input type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'
+                <input  type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
                        cell_treatment_id='{$r.cell_treatment.id}'
                 {if $r.is_sample_enabled}checked="checked"{/if}

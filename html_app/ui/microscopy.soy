@@ -16,7 +16,7 @@
 * @param can_prepare_slide
 */
 {template .main}
-<div class='scb_s_microscopy_view'>
+<div class='scb_s_microscopy_view' role='main'>
 
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
@@ -183,7 +183,7 @@
 						{if $microscopy.id == $m.id}
 						<span class='scb_s_microscopy_active'>
 							  
-						<input class='scb_s_microscopy_selected' facs_id='{$m.id}' assignment_id='{$assignment.id}'
+						<input role='input' class='scb_s_microscopy_selected' facs_id='{$m.id}' assignment_id='{$assignment.id}'
 			 			 experiment_id='{$experiment.id}' value='{$m.name}' type='text' maxlength=10></input>
 
 						<button class='scb_s_microscopy_remove scb_f_microscopy_remove' microscopy_id='{$m.id}' assignment_id='{$assignment.id}'
@@ -209,7 +209,7 @@
 						{if $microscopy.id == $m.id}
 						<span class='scb_s_microscopy_active'>
 							  
-						<input class='scb_s_microscopy_selected' facs_id='{$m.id}' assignment_id='{$assignment.id}'
+						<input role='input' class='scb_s_microscopy_selected' facs_id='{$m.id}' assignment_id='{$assignment.id}'
 			 			 experiment_id='{$experiment.id}' value='{$m.name}' type='text' maxlength=10></input>
 
 						<button class='scb_s_microscopy_remove scb_f_microscopy_remove' microscopy_id='{$m.id}' assignment_id='{$assignment.id}'

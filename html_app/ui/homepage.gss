@@ -73,6 +73,11 @@
     src: url("../fonts/SourceSansPro-SemiboldIt.otf") format("opentype");
 }
 
+
+#jqDialog_options button{
+	outline: none !important;
+}
+
 .scb_s_homepage_view {
     width: 1002px;
     height: 688px;

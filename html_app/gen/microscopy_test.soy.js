@@ -20,7 +20,7 @@ scb_model_microscopy.instructions = function(opt_data, opt_sb) {
 
 scb_model_microscopy.setup_video_box = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div id=\'slider\'><div class="slides_container"><a target="_blank"><img class=\'scb_s_experiment_setup_video_box_img\' src=\'static/usability_test/Wild-type.jpg\'><span>Vulva phenotypes in <i>C. elegans</i></span></a><a target="_blank"><img class=\'scb_s_experiment_setup_video_box_img\' src=\'static/usability_test/Multivulva.jpg\' ><span>Vulva phenotypes in <i>C. elegans</i></span></a><a target="_blank"><img class=\'scb_s_experiment_setup_video_box_img\'  src=\'static/usability_test/Vulvaless.jpg\' ><span>Vulva phenotypes in <i>C. elegans</i></span></a></div></div>');
+  output.append('<div id=\'slider\'><div class="slides_container"><a target="_blank"><img role=\'presentation\' class=\'scb_s_experiment_setup_video_box_img\' src=\'static/usability_test/Wild-type.jpg\'><span>Vulva phenotypes in <i>C. elegans</i></span></a><a target="_blank"><img role=\'presentation\' class=\'scb_s_experiment_setup_video_box_img\' src=\'static/usability_test/Multivulva.jpg\' ><span>Vulva phenotypes in <i>C. elegans</i></span></a><a target="_blank"><img  role=\'presentation\' class=\'scb_s_experiment_setup_video_box_img\'  src=\'static/usability_test/Vulvaless.jpg\' ><span>Vulva phenotypes in <i>C. elegans</i></span></a></div></div>');
   return opt_sb ? '' : output.toString();
 };
 

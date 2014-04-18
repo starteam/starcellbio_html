@@ -6,7 +6,7 @@ if (typeof scb_assignments == 'undefined') { var scb_assignments = {}; }
 
 scb_assignments.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_assignments_view\'>');
+  output.append('<div class=\'scb_s_assignments_view\' role=\'main\'>');
   scb_homepage.display_header(opt_data, output);
   scb_common.assignment_step({step: 1, last_step: opt_data.last_step, prev_step: opt_data.prev_step, assignments: assignments}, output);
   output.append('<div class=\'scb_s_assignments_container\'>');

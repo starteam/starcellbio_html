@@ -7,7 +7,7 @@
 * @param context
 */
 {template .main}
-<div class='scb_s_homepage_view'>
+<div class='scb_s_homepage_view' role='main'>
     {call .display_header}
     {param global_template:$global_template /}
     {param context:$context /}
@@ -34,7 +34,7 @@ Assignment title
 
     <h1 class='scb_s_logo_h1' aria-label='StarCellBio Home Page Link' ><a aria-hidden='true' href='{if $context.auth and $context.auth.logged_in}#view=assignments{else}#view=homepage{/if}'>StarCellBio<img class='scb_s_logo'
                                                                        src='images/header/scb_logo.png' 
-                                                                       role='presentation'></a></h1>
+                                                                       role='banner'></a></h1>
     <span class='scb_s_header_tools'>
         <span class='scb_f_contact' target='_blank' role='link'  aria-label='Contact'>
             <img class='scb_s_envelope_icon' src='images/header/scb_envelope_icon.png' alt='' role='presentation'>
