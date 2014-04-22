@@ -11,7 +11,7 @@
 * @param experiment Experiment model
 */
 {template .main}
-<div class='scb_s_experiment_design_view' id='scb_s_experiment_design_view' role='main' >
+<div class='scb_s_experiment_design_view' id='scb_s_experiment_design_view'  >
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
     {param context:$context /}
@@ -46,7 +46,7 @@ Experiment active area
 @param experiment
 */
 {template .display_details}
-<div class='scb_s_experiment_design_container'  aria-live="assertive" role='alert' >
+<div class='scb_s_experiment_design_container' role='main' aria-live="assertive" >
 
 	<div class='scb_s_design_description'>
 
@@ -106,13 +106,13 @@ Experiment active area
 {foreach $tech in $techniques}
 {if $tech == 'wb'}
 <span class='scb_s_experiment_design_technique_wb scb_s_experiment_design_unselected' aria-label='Western Blot Summary' role='presentation'>
-	<div class='scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_wb_cb' role="button" >
+	<div class='scb_s_experiment_design_technique' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_wb_cb' role="button" >
     <span class='scb_s_homepage_technique_title_image'>
        Western Blot</span>
-    Western blotting detects overall changes in the amount or chemical modifications of a particular protein. <a href="static/ref_lib/full_library.html#WesternBlotting" class='scb_s_design_technique_learn_more ' target='_blank'>Learn more &gt;&gt;</a></div>
+    Western blotting detects overall changes in the amount or chemical modifications of a particular protein. <a href="static/ref_lib/full_library.html#WesternBlotting" class='scb_s_design_technique_learn_more ' role='link' target='_blank'>Learn more &gt;&gt;</a></div>
 
 </span>
-<div class='scb_s_experiment_design_divider_1'></div>
+<div class='scb_s_experiment_design_divider_1' role='presentation'></div>
 
 {/if}
 
@@ -122,11 +122,11 @@ Experiment active area
     <span class='scb_s_homepage_technique_title_image'>
         Flow Cytometry</span>
     Flow cytometry is used to count and analyze the size, shape and properties of
-    individual cells within a heterogeneous population of cells.     <a href="static/ref_lib/full_library.html#FlowCytometry" class='scb_s_design_technique_learn_more ' target='_blank'>Learn more &gt;&gt;</a>
+    individual cells within a heterogeneous population of cells.     <a href="static/ref_lib/full_library.html#FlowCytometry" class='scb_s_design_technique_learn_more ' target='_blank'  role='link'>Learn more &gt;&gt;</a>
 </div>
 </span>
 
-<div class='scb_s_experiment_design_divider_2'></div>
+<div class='scb_s_experiment_design_divider_2' role='presentation'></div>
 {/if}
 
 {if $tech == 'micro'}
@@ -135,7 +135,7 @@ Experiment active area
     	<span class='scb_s_homepage_technique_title_image'>
          Microscopy</span>
     Microscopy is used to study the shape, morphology and properties of cells,
-    tissues or organisms that otherwise cannot be observed by eye.     <a href="static/ref_lib/full_library.html#Microscopy" class='scb_s_design_technique_learn_more ' target='_blank'>Learn more &gt;&gt;</a>
+    tissues or organisms that otherwise cannot be observed by eye.     <a href="static/ref_lib/full_library.html#Microscopy" class='scb_s_design_technique_learn_more ' target='_blank' role='link'>Learn more &gt;&gt;</a>
 </div>
 
 </span>

@@ -15,7 +15,7 @@ FACS Main View
 @param rows
 */
 {template .main}
-<div class='scb_s_facs_view' role='main'>
+<div class='scb_s_facs_view' >
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
     {param context:$context /}
@@ -61,7 +61,7 @@ FACS Main View
 @param can_prepare_lysate
 */
 {template .display_details}
-<div class='scb_s_facs_container'>
+<div class='scb_s_facs_container' role='main'>
 <div class='scb_facs_details_view'>
 	{call scb_common.experiment_step}
         {param step:6/}
@@ -301,7 +301,7 @@ FACS Main View
         {foreach $r in $rows}
         <tr class='scb_s_facs_samples_table_tr '>
             <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:73px;'>{if $r.display_sample}
-                <input  type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'
+                <input  type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'  aria-checked='{if $r.is_sample_enabled}true{else}false{/if}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
                        cell_treatment_id='{$r.cell_treatment.id}'
                 {if $r.is_sample_enabled}checked="checked"{/if}
@@ -593,7 +593,7 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
     <button class='scb_f_facs_tools_toggle scb_s_facs_tools_instructions_followup_toggle'  note='scb_s_facs_tools_instructions_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              facs_id='{$facs.id}'> </button>
     <input class='scb_s_facs_single_range_button' assignment_id='{$assignment.id}'
-            experiment_id='{$experiment.id}'
+            experiment_id='{$experiment.id}' aria-checked='{if $facs.sample_analysis}true{else}false{/if}'
             facs_id='{$facs.id}' id="scb_facs_check" type='checkbox' {if $facs.sample_analysis}checked{/if}><label class="scb_s_facs_label" for="scb_facs_check">
             	<img src="images/header/scb_histogram_icon.png"></label> </input>
     {if $lane.canvas_metadata_analysis}
@@ -630,7 +630,7 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
     </table>
     <span class='scb_s_facs_apply'>
     <input type="checkbox" assignment_id='{$assignment.id}'
-           experiment_id='{$experiment.id}'
+           experiment_id='{$experiment.id}' aria-checked='{if $facs.apply_dna_analysis_to_all}true{else}false{/if}'
            facs_id='{$facs.id}' facs_lane_id='{$lane.id}' class='scb_f_facs_apply_to_all'
     {if $facs.apply_dna_analysis_to_all}checked='checked'{/if}> Apply to all
 	</span>

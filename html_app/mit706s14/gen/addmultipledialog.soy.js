@@ -41,7 +41,7 @@ mit706s14.dialog = function(opt_data, opt_sb) {
             }
             output.append('</select>');
           }
-          output.append((cellData23.kind == 'checkbox') ? '<input type="checkbox"  role=\'checkbox\'  name="' + soy.$$escapeHtml(cellData23.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(cellData23.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData16) + '\'>' : '', '</td>');
+          output.append((cellData23.kind == 'checkbox') ? '<input class=\'scb_f_experiment_setup_dialog_checkbox\' type="checkbox"  role=\'checkbox\'  name="' + soy.$$escapeHtml(cellData23.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(cellData23.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData16) + '\' aria-checked=\'false\'>' : '', '</td>');
         }
         output.append('</tr>');
         if (cell_lineIndex16 == cell_lineListLen16 - 1) {

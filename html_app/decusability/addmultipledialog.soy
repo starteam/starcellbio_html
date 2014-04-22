@@ -45,8 +45,8 @@
                     </select>
                     {/if}
                     {if $cell.kind == 'checkbox'}
-                    <input type="checkbox" role='checkbox' name="{$cell.name}" assignment_id='{$assignment.id}'
-                           experiment_id='{$experiment.id}' treatment_id='{$rows.treatment_id}' cell_line='{$cell_line}'>
+                    <input class='scb_f_experiment_setup_dialog_checkbox' type="checkbox" role='checkbox' name="{$cell.name}" assignment_id='{$assignment.id}'
+                           experiment_id='{$experiment.id}' treatment_id='{$rows.treatment_id}' cell_line='{$cell_line}' aria-checked='false'>
                     {/if}
                 </td>
                 {/foreach}

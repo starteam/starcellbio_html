@@ -9,6 +9,8 @@ scb.ui.static.HomepageView = scb.ui.static.HomepageView || {} ;
 scb.ui.static.HomepageView.select_list_item = function(element,workarea,aria)
 {
 	$('.learn_more_dynamic').attr('value', $(element).attr('value'));
+	$('.scb_s_homepage_experimental_design_bullet_item').attr('aria-selected', false);
+	$(element).attr('aria-selected', true);
     var name = 'experimental_design_'+$(element).attr('data-id');
     var template =  scb_homepage[name];
         if( template )

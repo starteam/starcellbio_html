@@ -16,7 +16,7 @@
 * @param can_prepare_lysate
 */
 {template .main}
-<div class='scb_s_western_blot_view' role='main'>
+<div class='scb_s_western_blot_view' >
 
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
@@ -65,7 +65,7 @@
 @param can_prepare_lysate
 */
 {template .display_details}
-<div class='scb_s_western_blot_container'>
+<div class='scb_s_western_blot_container' role='main'>
 <div class='scb_western_blot_details_view'>
 		{call scb_common.experiment_step}
         {param step:5/}
@@ -104,7 +104,7 @@
 @param can_prepare_lysate
 */
 {template .display_tabs}
-<div class='scb_s_western_blot_tab_content {if $kind == 'sample_prep'}scb_s_western_blot_tab_content_sample_prep{/if}'>
+<div class='scb_s_western_blot_tab_content {if $kind == "sample_prep"}scb_s_western_blot_tab_content_sample_prep{/if}' role='tabpanel'>
 
 {call .display_tabs_selector}
     {param assignment:$assignment/}
@@ -144,7 +144,7 @@
 	
 	</div>
     {/if}
-    <a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_western_blot"
+    <a role='button' class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_western_blot"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 
@@ -156,25 +156,24 @@
 @param western_blot
 */
 {template .display_tabs_selector}
-<div class='{if $experiment.western_blot_list.list.length >= 5}scb_s_western_blot_tabs_more {else} scb_s_western_blot_tabs{/if}'>
+<div class='{if $experiment.western_blot_list.list.length >= 5}scb_s_western_blot_tabs_more {else} scb_s_western_blot_tabs{/if}' role='tablist'>
 	{if $experiment.western_blot_list.list.length < 5}
 
 		{foreach $wb in $experiment.western_blot_list.list}
-		{if $western_blot.id == $wb.id}
-		<span class='scb_s_western_blot_active'>
-		<input role='input' class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-			  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
-		<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' 
-				>
-					  | &#215;
-		</button>
-		</span>
-		{else}
-		<a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' 
-		   href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
-		   western_blot_id='{$wb.id}'>{$wb.name}</a>
-		{/if}
+			{if $western_blot.id == $wb.id}
+			<span class='scb_s_western_blot_active' role='tab'>
+			<input role='input' class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+				  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
+			<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+					experiment_id='{$experiment.id}' >
+						  | &#215;
+			</button>
+			</span>
+			{else}
+			<a role='tab' class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' 
+			   href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
+			   western_blot_id='{$wb.id}'>{$wb.name}</a>
+			{/if}
 		{/foreach}
 		<span class='scb_s_western_blot_add_western_blot' assignment_id='{$assignment.id}'
              			experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> 
@@ -273,7 +272,7 @@
         <tr class='scb_s_western_blot_samples_table_tr'>
             <td class='scb_s_western_blot_samples_table_td scb_s_experiment_setup_table_border' style='width:96px;'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_western_blot_sample_active" western_blot_id='{$western_blot.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' aria-checked='{if $r.is_sample_enabled}true{else}false{/if}'
                        cell_treatment_id='{$r.cell_treatment.id}'
                 {if $r.is_sample_enabled}checked="checked"{/if}
                 >

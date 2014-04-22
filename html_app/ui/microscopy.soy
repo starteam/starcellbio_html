@@ -16,7 +16,7 @@
 * @param can_prepare_slide
 */
 {template .main}
-<div class='scb_s_microscopy_view' role='main'>
+<div class='scb_s_microscopy_view' >
 
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
@@ -64,7 +64,7 @@
 @param can_prepare_slide
 */
 {template .display_details}
-<div class='scb_s_microscopy_container'>
+<div class='scb_s_microscopy_container' role='main'>
 <div class='scb_microscopy_details_view'>
 	{call scb_common.experiment_step}
         {param step:7/}
@@ -289,7 +289,7 @@
                 <input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id='{$microscopy.id}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' cell_treatment_id='{$r.cell_treatment.id}'
                        
-                {if $r.is_sample_enabled}checked="checked"{/if}
+                {if $r.is_sample_enabled}checked='checked'{/if} aria-checked='{if $r.is_sample_enabled}true{else}false{/if}'
                 >
                 {/if}
             </td>
@@ -655,7 +655,7 @@
     
     <div class = 'scb_s_microscopy_lens_controls_section_2'>
     <span class="scb_s_microscopy_lens_label">Light:</span> <input type="checkbox" class="scb_f_microscopy_light" microscopy_id='{$microscopy.id}'
-			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.light_on}checked='checked'{else}{/if} >
+			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.light_on}checked='checked'{else}{/if}   aria-checked='{if $microscopy.light_on}true{else}false{/if}'>
     </div>
     <div class = 'scb_s_microscopy_lens_controls_section_3'>
     				<span class="scb_s_microscopy_brightness_label"></span>
@@ -805,7 +805,7 @@
     
     <div class = 'scb_s_microscopy_lens_controls_section_4'>
     <span class="scb_s_microscopy_laser_label">Laser:</span>	 
-    	<input type="checkbox" class="scb_f_microscopy_laser" microscopy_id='{$microscopy.id}'
+    	<input type="checkbox" class="scb_f_microscopy_laser" microscopy_id='{$microscopy.id}' aria-checked='{if $microscopy.laser_on}true{else}false{/if}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.laser_on}checked='checked'{else}{/if}>	 		 	 
 			 
     </div>

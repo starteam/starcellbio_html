@@ -55,6 +55,6 @@ scb_assignment_specific_mit706s13.assignment_detail = function(opt_data, opt_sb)
 
 scb_assignment_specific_mit706s13.experiment_setup = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<ul class=\'scb_assignment_specific_tufts_experiment_setup\'><li>To setup your experiment, select <b>Add Samples</b> in the experimental set-up table below. <br></li><li>Select all of the treatment protocols for your experiment within the <b>Add Samples</b> pop up window, and then click <b>Add Samples</b>.<!--        Select all of the treatment protocols for your experiment and then click <b>Add Multiple Treatments</b>. --></li></ul>');
+  output.append('<ul role=\'list\' class=\'scb_assignment_specific_tufts_experiment_setup\'><li role=\'listitem\'>To setup your experiment, select <b role=\'presentation\' >Add Samples</b> in the experimental set-up table below. <br></li><li role=\'listitem\'>Select all of the treatment protocols for your experiment within the <b role=\'presentation\' >Add Samples</b> pop up window, and then click <b role=\'presentation\' >Add Samples</b>.</li></ul>');
   return opt_sb ? '' : output.toString();
 };

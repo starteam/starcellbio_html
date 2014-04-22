@@ -34,6 +34,6 @@ scb_model_microscopy.setup_video_text = function(opt_data, opt_sb) {
 
 scb_model_microscopy.experiment_setup = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<ul class=\'scb_s_experiment_setup_list\'><li>For each treatment protocol, select the treatment and treatment dose.</li><li>Once you finish setting up your experiment treatment, select Run Experiment.</li></ul>');
+  output.append('<ul role=\'list\' class=\'scb_s_experiment_setup_list\'><li role=\'listitem\'>For each treatment protocol, select the treatment and treatment dose.</li><li role=\'listitem\'>Once you finish setting up your experiment treatment, select Run Experiment.</li></ul>');
   return opt_sb ? '' : output.toString();
 };

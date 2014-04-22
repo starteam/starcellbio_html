@@ -18,7 +18,7 @@ scb_western_blot_gel.main = function(opt_data, opt_sb) {
 
 scb_western_blot_gel.display_details = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_western_blot_container\'><div class=\'scb_western_blot_details_view\' >');
+  output.append('<div class=\'scb_s_western_blot_container\' role=\'main\'><div class=\'scb_western_blot_details_view\' >');
   scb_common.experiment_step({step: 5, last_step: 6, assignment: opt_data.assignment, experiment: opt_data.experiment}, output);
   output.append('<div class=\'scb_s_western_blot_all_tabs\'><div class=\'scb_western_blot_details_view_inner\'>');
   scb_western_blot_gel.display_tabs(opt_data, output);

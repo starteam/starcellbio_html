@@ -6,7 +6,7 @@ if (typeof scb_select_technique == 'undefined') { var scb_select_technique = {};
 
 scb_select_technique.main = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_select_technique_view\' role=\'main\' xmlns="http://www.w3.org/1999/html">');
+  output.append('<div class=\'scb_s_select_technique_view\' xmlns="http://www.w3.org/1999/html">');
   scb_homepage.display_header(opt_data, output);
   scb_common.assignment_step({step: 5, last_step: opt_data.last_step, prev_step: opt_data.prev_step, assignment_name: opt_data.assignment.name, experiment_name: opt_data.experiment.name, assignment: opt_data.assignment, experiment: opt_data.experiment}, output);
   scb_select_technique.display_details(opt_data, output);
@@ -18,7 +18,7 @@ scb_select_technique.main = function(opt_data, opt_sb) {
 
 scb_select_technique.display_details = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_select_technique_container\'><div class=\'scb_s_select_technique_details_view\'>');
+  output.append('<div class=\'scb_s_select_technique_container\' role=\'main\'><div class=\'scb_s_select_technique_details_view\'>');
   scb_common.experiment_step({step: 4, last_step: opt_data.last_step, assignment: opt_data.assignment, experiment: opt_data.experiment}, output);
   output.append('<div class=\'scb_s_select_technique_western_blot scb_f_select_technique\'><h1 class=\'scb_s_select_technique_header\'>Western Blot Analyses:</h1><div class=\'scb_s_select_technique_western_blot_available\' aria-label=\'List of Western Blot Experiments\'>');
   var wList32 = opt_data.experiment.western_blot_list.list;

@@ -39,7 +39,7 @@ decusability.dialog = function(opt_data, opt_sb) {
           }
           output.append('</select>');
         }
-        output.append((cellData28.kind == 'checkbox') ? '<input type="checkbox" role=\'checkbox\' name="' + soy.$$escapeHtml(cellData28.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(rowsData26.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData4) + '\'>' : '', '</td>');
+        output.append((cellData28.kind == 'checkbox') ? '<input class=\'scb_f_experiment_setup_dialog_checkbox\' type="checkbox" role=\'checkbox\' name="' + soy.$$escapeHtml(cellData28.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(rowsData26.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData4) + '\' aria-checked=\'false\'>' : '', '</td>');
       }
       output.append('</tr>');
       if (rowsIndex26 == rowsListLen26 - 1) {
