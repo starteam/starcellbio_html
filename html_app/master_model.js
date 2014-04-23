@@ -6880,7 +6880,7 @@ var __assignment_706_2014_ps2 = {
                 kind: 'minutes'
             },
             primary_anti_body: {
-            	order: ['chk1', 'rad21', 'cyclin', 'cyclinE', 'pgk1'],
+            	order: ['chk1', 'rad21', 'cyclin', 'cyclinE', 'mad2', 'pgk1'],
             	'chk1': {
                     name: 'rabbit anti-chk1',
                     secondary: ['r'],
@@ -6906,6 +6906,14 @@ var __assignment_706_2014_ps2 = {
                         {weight: 48, intensity: 0},
                     ],
                     gel_name: 'cyclin E'
+                },
+                'mad2': {
+                    name: 'rabbit anti-Mad2',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 25, intensity: 0},
+                    ],
+                    gel_name: 'mad2'
                 },
                 'pgk1': {
                     name: 'rabbit anti-pgk1',
@@ -7271,6 +7279,12 @@ var __assignment_706_2014_ps2 = {
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
+                                        name: 'Mad2',
+                                        weight: 25,
+                                        intensity: 2,
+                                        primary_anti_body: ['mad2']
+                                    },
+                                    {
                                         name: 'Cyclin E',
                                         weight: 48,
                                         intensity: 2,
@@ -7310,6 +7324,12 @@ var __assignment_706_2014_ps2 = {
                                         primary_anti_body: ['rad21']
                                     },
                                     {
+                                        name: 'Mad2',
+                                        weight: 25,
+                                        intensity: 2,
+                                        primary_anti_body: ['mad2']
+                                    },
+                                    {
                                         name: 'Cyclin B',
                                         weight: 58,
                                         intensity: 25,
@@ -7347,6 +7367,12 @@ var __assignment_706_2014_ps2 = {
                                         weight: 29.5,
                                         intensity: 0.5,
                                         primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Mad2',
+                                        weight: 25,
+                                        intensity: 2,
+                                        primary_anti_body: ['mad2']
                                     }, 
                                     {
                                         name: 'Rad21',
@@ -7400,6 +7426,12 @@ var __assignment_706_2014_ps2 = {
                                         primary_anti_body: ['cyclin']
                                     },
                                     {
+                                        name: 'Mad2',
+                                        weight: 25,
+                                        intensity: 2,
+                                        primary_anti_body: ['mad2']
+                                    },
+                                    {
                                         name: 'Chk1',
                                         weight: 54,
                                         intensity: 2,
@@ -7431,6 +7463,12 @@ var __assignment_706_2014_ps2 = {
                                         weight: 54,
                                         intensity: 2,
                                         primary_anti_body: ['chk1']
+                                    },
+                                    {
+                                        name: 'Mad2',
+                                        weight: 25,
+                                        intensity: 2,
+                                        primary_anti_body: ['mad2']
                                     },
                                     {
                                         name: 'Cyclin E',
@@ -7517,6 +7555,12 @@ var __assignment_706_2014_ps2 = {
                                         primary_anti_body: ['chk1']
                                     },
                                     {
+                                        name: 'Mad2',
+                                        weight: 25,
+                                        intensity: 2,
+                                        primary_anti_body: ['mad2']
+                                    },
+                                    {
                                         name: 'Cyclin B',
                                         weight: 58,
                                         intensity: 25,
@@ -7549,6 +7593,12 @@ var __assignment_706_2014_ps2 = {
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
+                                        name: 'Mad2',
+                                        weight: 25,
+                                        intensity: 2,
+                                        primary_anti_body: ['mad2']
+                                    },
+                                    {
                                         name: 'Chk1',
                                         weight: 57,
                                         intensity: 2,
@@ -7579,6 +7629,12 @@ var __assignment_706_2014_ps2 = {
                                         weight: 54,
                                         intensity: 2,
                                         primary_anti_body: ['chk1']
+                                    },
+                                    {
+                                        name: 'Mad2',
+                                        weight: 25,
+                                        intensity: 2,
+                                        primary_anti_body: ['mad2']
                                     },
                                     {
                                         name: 'Cyclin E',
