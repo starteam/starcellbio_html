@@ -1,0 +1,4 @@
+{'1': [{'hash': 'img0030', 'if_type': 'merge', 'mag': 'N/A'}],
+ '2': [{'hash': 'img0031', 'if_type': 'merge', 'mag': 'N/A'}],
+ '3': [{'hash': 'img0032', 'if_type': 'merge', 'mag': 'N/A'}],
+ '4': [{'hash': 'img0033', 'if_type': 'merge', 'mag': 'N/A'}]}

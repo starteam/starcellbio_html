@@ -296,11 +296,14 @@
         {foreach $r in $rows}
         <tr class='scb_s_microscopy_samples_table_tr {if $r.display_sample} scb_s_microscopy_row_border{/if}'>
             <td class='scb_s_microscopy_sample_checkbox scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' >{if $r.display_sample}
-                <input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id='{$microscopy.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' cell_treatment_id='{$r.cell_treatment.id}'
-                       
-                {if $r.is_sample_enabled}checked="checked"{/if}
-                >
+					{if $r.cell_treatment.treatment_list.list[0].microscope.na}
+					{else}
+					<input type="checkbox" class="scb_f_microscopy_sample_active" microscopy_id='{$microscopy.id}'
+						   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' cell_treatment_id='{$r.cell_treatment.id}'
+					   
+					{if $r.is_sample_enabled}checked="checked"{/if}
+					>
+					{/if}
                 {/if}
             </td>
             <td class='scb_s_microscopy_sample_name scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' >{if $r.display_sample}
@@ -930,6 +933,10 @@
 				microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="{$k}"
 				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$kinds[$k].name}</span>
 		{/foreach}
+{elseif length(keys($lane.cell_treatment.treatment_list.list[0].microscope)) == 1 and $lane.cell_treatment.treatment_list.list[0].microscope.na }
+		<span class="scb_f_microscopy_select_slide_type {if $lane.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" cell_treatment_id='{$cell_treatment.id}'
+				microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="IF"
+				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$assignment.template.micro_kinds.IF.conditions.na.name}</span>
 {else}
 	<select class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}'
 			microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
