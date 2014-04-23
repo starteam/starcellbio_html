@@ -107,7 +107,8 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			}
 			
 			function g1(x){
-				  return normal_dist(x, 0.2, 0.27, -25, true)* 0.7;
+				  // return normal_dist(x, 0.2, 0.27, -25, true)* 0.7;
+				  return normal_dist(x, 0.15, 0.22, -26, true)* 0.3;
 			}
 			
 			function g2(x){
