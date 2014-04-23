@@ -6733,7 +6733,7 @@ var __assignment_706_2014_ps2 = {
                                     R5: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'rgb':1, 'rb':1},
+                                                {collection_id: 'default',microscope: {'rgb':1},
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna5', concentration_id: '100'},
@@ -7795,13 +7795,6 @@ var __assignment_706_2014_ps2 = {
                 			drug_id: ['rna5'],
                 			conditions: 'rgb',
                 			phenotype: 'unequal'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna5'],
-                			conditions: 'rb',
-                			phenotype: 'off'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
