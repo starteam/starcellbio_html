@@ -7389,13 +7389,13 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Chk1',
                                         weight: 57,
-                                        intensity: 7,
+                                        intensity: 4,
                                         primary_anti_body: ['chk1']
                                     },
                                     {
                                         name: 'Chk1',
                                         weight: 54,
-                                        intensity: 2,
+                                        intensity: 0.5,
                                         primary_anti_body: ['chk1']
                                     },
                                     {
