@@ -7004,9 +7004,7 @@ var __assignment_706_2014_ps2 = {
 				 'img0027': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_7.jpg',
 				 'img0028': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_8.jpg',
 				 'img0029': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_9.jpg',
-				 
-				 'img0031': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_2.jpg',
-				 
+				 				 
 				 'img0034': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_H2B-green/Normal_Metaphase/PSSC_control_Barren.jpg',
 				 
 				 'img0035': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_H2B-green/Premature_Sister_Chromatid_Separation/PSSC_1.jpg',
@@ -7064,7 +7062,13 @@ var __assignment_706_2014_ps2 = {
 				 'img0081': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_3_composite.jpg',
 				 'img0082': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_4_composite.jpg',
 				 'img0083': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_5_composite.jpg',
-				 'img0084': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_6_composite.jpg'
+				 'img0084': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_6_composite.jpg',
+				 
+				 'img0085': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_2.jpg',
+				 'img0086': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_4.jpg',
+				 'img0087': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_5.jpg',
+				 'img0088': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_6.jpg',
+				 'img0089': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_7.jpg'
 				 },
         	slide_parser: {
 				'default':{
@@ -7105,7 +7109,11 @@ var __assignment_706_2014_ps2 = {
 								 '6': [{'hash': 'img0022', 'if_type': 'merge', 'mag': 'N/A'}]
 								 },
 							'unequal':{
-								 '1': [{'hash': 'img0031', 'if_type': 'merge', 'mag': 'N/A'}]},
+								 '1': [{'hash': 'img0085', 'if_type': 'merge', 'mag': 'N/A'}],
+								 '2': [{'hash': 'img0086', 'if_type': 'merge', 'mag': 'N/A'}],
+								 '3': [{'hash': 'img0087', 'if_type': 'merge', 'mag': 'N/A'}],
+								 '4': [{'hash': 'img0088', 'if_type': 'merge', 'mag': 'N/A'}],
+								 '5': [{'hash': 'img0089', 'if_type': 'merge', 'mag': 'N/A'}]},
 							'composite5':{
 								 '1': [{'hash': 'img0043', 'if_type': 'merge', 'mag': 'N/A'}],
 								 '10': [{'hash': 'img0052', 'if_type': 'merge', 'mag': 'N/A'}],

@@ -9,7 +9,7 @@ from pprint import pprint
 	
 object = {}
 	
-for x in range(30, 34):
+for x in range(85, 90):
 	slides = slides + 1
 	object[str(slides)] = [{'hash': 'img'+str("%04d" % (x,)) ,'mag': 'N/A', 'if_type': 'merge'}]
 

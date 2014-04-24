@@ -3,7 +3,7 @@ from pprint import pprint
 
 object = {}
 sorted_object = {}
-slides = 0
+slides = 84
 
 for(dirpath, dirnames, filenames) in os.walk(os.getcwd()):
 	for filename in filenames:
@@ -16,5 +16,5 @@ for(dirpath, dirnames, filenames) in os.walk(os.getcwd()):
 for key in sorted(object.iterkeys()):
     sorted_object[key] =  object[key]
 
-with open('slides_composites.txt','wt') as out:
+with open('slides_composites2.txt','wt') as out:
 	pprint(sorted_object, stream=out)
