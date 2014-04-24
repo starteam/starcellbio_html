@@ -6667,7 +6667,7 @@ var __assignment_706_2014_ps2 = {
                                     R2: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'gr':1, 'rb': 1},
+                                                {collection_id: 'default',microscope: {'gr':1, 'g':1, 'rb': 1},
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna2', concentration_id: '100'},
@@ -6689,7 +6689,7 @@ var __assignment_706_2014_ps2 = {
                                     R3: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'rgb':1, 'rb':1},
+                                                {collection_id: 'default',microscope: {'rgb':1, 'g':1, 'rb':1},
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna3', concentration_id: '100'},
@@ -6733,7 +6733,7 @@ var __assignment_706_2014_ps2 = {
                                     R5: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'rgb':1},
+                                                {collection_id: 'default',microscope: {'rgb':1, 'g':1},
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna5', concentration_id: '100'},
@@ -7005,10 +7005,7 @@ var __assignment_706_2014_ps2 = {
 				 'img0028': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_8.jpg',
 				 'img0029': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Normal_Metaphase/Normal_Metaphase_9.jpg',
 				 
-				 'img0030': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution.jpg',
 				 'img0031': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_2.jpg',
-				 'img0032': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_3.jpg',
-				 'img0033': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_4.jpg',
 				 
 				 'img0034': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_H2B-green/Normal_Metaphase/PSSC_control_Barren.jpg',
 				 
@@ -7108,10 +7105,7 @@ var __assignment_706_2014_ps2 = {
 								 '6': [{'hash': 'img0022', 'if_type': 'merge', 'mag': 'N/A'}]
 								 },
 							'unequal':{
-								'1': [{'hash': 'img0030', 'if_type': 'merge', 'mag': 'N/A'}],
-								 '2': [{'hash': 'img0031', 'if_type': 'merge', 'mag': 'N/A'}],
-								 '3': [{'hash': 'img0032', 'if_type': 'merge', 'mag': 'N/A'}],
-								 '4': [{'hash': 'img0033', 'if_type': 'merge', 'mag': 'N/A'}]},
+								 '1': [{'hash': 'img0031', 'if_type': 'merge', 'mag': 'N/A'}]},
 							'composite5':{
 								 '1': [{'hash': 'img0043', 'if_type': 'merge', 'mag': 'N/A'}],
 								 '10': [{'hash': 'img0052', 'if_type': 'merge', 'mag': 'N/A'}],
@@ -7395,6 +7389,12 @@ var __assignment_706_2014_ps2 = {
                                     {
                                         name: 'Chk1',
                                         weight: 57,
+                                        intensity: 7,
+                                        primary_anti_body: ['chk1']
+                                    },
+                                    {
+                                        name: 'Chk1',
+                                        weight: 54,
                                         intensity: 2,
                                         primary_anti_body: ['chk1']
                                     },
@@ -7772,8 +7772,22 @@ var __assignment_706_2014_ps2 = {
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
+                			drug_id: ['rna2'],
+                			conditions: 'g',
+                			phenotype: 'normal_metaphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
                 			drug_id: ['rna3'],
                 			conditions: 'rgb',
+                			phenotype: 'normal_metaphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna3'],
+                			conditions: 'g',
                 			phenotype: 'normal_metaphase'
                 		},
                 		{
@@ -7795,6 +7809,13 @@ var __assignment_706_2014_ps2 = {
                 			drug_id: ['rna5'],
                 			conditions: 'rgb',
                 			phenotype: 'unequal'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna5'],
+                			conditions: 'g',
+                			phenotype: 'normal_metaphase'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
