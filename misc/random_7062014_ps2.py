@@ -1,9 +1,9 @@
 import random
 
-list = []
+listing = []
 indices =[]
 counter = 0
-while len(indices) <120:
+while len(indices) <24:
 	indices.append(counter)
 	counter+=1
 
@@ -11,27 +11,28 @@ while len(indices) <120:
 
 f = open('706_2014_ps2_mapping.txt','w')
 
-while len(list) < 120:
+while len(listing) < 24:
 	string = ""
-	while len(string) != 5 :
-		num = random.randint(1, 5)
+	while len(string) != 4 :
+		num = random.randint(1, 4)
 		if num == 1 and not ('1' in string):
 			string+='1'
-		elif num == 2 and not ('2' in string):
-			string+='2'
-		elif num == 3 and not ('3' in string):
+		elif num == 2 and not ('3' in string):
 			string+='3'
-		elif num == 4 and not ('4' in string):
+		elif num == 3 and not ('4' in string):
 			string+='4'
-		elif num == 5 and not ('5' in string):
+		elif num == 4 and not ('5' in string):
 			string+='5'
-	if string in list:
+	if string in listing:
 		print 'alreadythere'
 	else:
-		list.append(string)
+		string=list(string)
+		string.insert(1, '2')
+		string = ''.join(string)
+		listing.append(string)
 
-print list
-dict_list = zip(indices,list)
+print listing
+dict_list = zip(indices,listing)
 dict_list = dict(dict_list)
 print dict_list
 f.write(str(dict_list))

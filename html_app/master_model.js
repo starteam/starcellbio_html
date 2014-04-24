@@ -6789,20 +6789,20 @@ var __assignment_706_2014_ps2 = {
                             },
                             {
                                 cells: [
-                                	{kind: 'checkbox', name: "N", treatment_id: 'nocodazole'},
+                                	{kind: 'checkbox', name: "C", treatment_id: 'colchicine'},
                                     {kind: 'text', text: 'S2'},
-                                    {kind: 'text', text: 'Nocodazole'},
+                                    {kind: 'text', text: 'Colchicine'},
                                     {kind: 'text', text: "3 days"}
                                 ],
-                                treatment_id: 'nocodazole',
+                                treatment_id: 'colchicine',
                                 cell_treatments: {
-                                    N: [
+                                    C: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
                                                 {collection_id: 'default', microscope: {'na':1},
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
-                                                    {drug_id: 'Nocodazole', concentration_id: '100'},
+                                                    {drug_id: 'Colchicine', concentration_id: '100'},
                                                 ]}, temperature: '25'
                                                 }
                                             ]}}
@@ -6851,8 +6851,8 @@ var __assignment_706_2014_ps2 = {
                     name: 'siRNA #5',
                     concentrations: [100]
                 },
-                'Nocodazole': {
-                    name: 'Nocodazole',
+                'Colchicine': {
+                    name: 'Colchicine',
                     concentrations: [100]
                 },
                 'Serum': {
@@ -7065,10 +7065,7 @@ var __assignment_706_2014_ps2 = {
 				 'img0084': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_6_composite.jpg',
 				 
 				 'img0085': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_2.jpg',
-				 'img0086': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_4.jpg',
-				 'img0087': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_5.jpg',
-				 'img0088': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_6.jpg',
-				 'img0089': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_7.jpg'
+				 'img0087': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_5.jpg'
 				 },
         	slide_parser: {
 				'default':{
@@ -7110,10 +7107,7 @@ var __assignment_706_2014_ps2 = {
 								 },
 							'unequal':{
 								 '1': [{'hash': 'img0085', 'if_type': 'merge', 'mag': 'N/A'}],
-								 '2': [{'hash': 'img0086', 'if_type': 'merge', 'mag': 'N/A'}],
-								 '3': [{'hash': 'img0087', 'if_type': 'merge', 'mag': 'N/A'}],
-								 '4': [{'hash': 'img0088', 'if_type': 'merge', 'mag': 'N/A'}],
-								 '5': [{'hash': 'img0089', 'if_type': 'merge', 'mag': 'N/A'}]},
+								 '2': [{'hash': 'img0087', 'if_type': 'merge', 'mag': 'N/A'}]},
 							'composite5':{
 								 '1': [{'hash': 'img0043', 'if_type': 'merge', 'mag': 'N/A'}],
 								 '10': [{'hash': 'img0052', 'if_type': 'merge', 'mag': 'N/A'}],
@@ -7547,7 +7541,7 @@ var __assignment_706_2014_ps2 = {
                             {
                                 transfer_function: 'delta',
                                 cutoff: 1,
-                                drug: 'Nocodazole',
+                                drug: 'Colchicine',
                                 cell_line: 'S2',
                                 above_marks: [
                                 	{
@@ -7707,7 +7701,7 @@ var __assignment_706_2014_ps2 = {
                             },
                             {
                                 match: ['drug_id'],
-                                drug_id: 'Nocodazole',
+                                drug_id: 'Colchicine',
                                 shape: 'peak-100-normal-400'
                             },
                             {
@@ -7840,7 +7834,7 @@ var __assignment_706_2014_ps2 = {
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
-                			drug_id: ['Nocodazole'],
+                			drug_id: ['Colchicine'],
                 			conditions: 'na'
                 		}
                 			
