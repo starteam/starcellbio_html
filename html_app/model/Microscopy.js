@@ -107,7 +107,7 @@ scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, c
         var grouped_rows = self.lanes_list.grouped_list;
         var rows = [];
         _.each(experiment.cell_treatment_list.list, function (e) {
-            if (grouped_rows[e.id] && !e.treatment_list.list[0].microscope.na) {
+            if (grouped_rows[e.id] && _.filter(e.treatment_list.list[0].microscope, function(x){return x=='na';}).length == 0) {
                 _.each(grouped_rows[e.id], function (ee, index) {
                     rows.push({
                         kind:'existing',

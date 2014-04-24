@@ -381,7 +381,7 @@
 						</div>
 						{/foreach}
 					{else}
-						{foreach $k in keys($r.lane.cell_treatment.treatment_list.list[0].microscope)}
+						{foreach $k in $r.lane.cell_treatment.treatment_list.list[0].microscope}
 					
 						<div>
 						{if not ($assignment.id =='assignment_706_2014')}
@@ -933,7 +933,7 @@
 				microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="{$k}"
 				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$kinds[$k].name}</span>
 		{/foreach}
-{elseif length(keys($lane.cell_treatment.treatment_list.list[0].microscope)) == 1 and $lane.cell_treatment.treatment_list.list[0].microscope.na }
+{elseif length($lane.cell_treatment.treatment_list.list[0].microscope) == 1 and $lane.cell_treatment.treatment_list.list[0].microscope[0] == 'na'}
 		<span class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}'
 				microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="IF"
 				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$assignment.template.micro_kinds.IF.conditions.na.name}</span>

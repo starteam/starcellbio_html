@@ -6623,7 +6623,7 @@ var __assignment_706_2014_ps2 = {
                                     B: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default', microscope: {'rgb': 1, 'g': 1, 'gr': 1, 'rb': 1},
+                                                {collection_id: 'default', microscope: ['rgb', 'g', 'gr', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'nc', concentration_id: '100'},
@@ -6645,7 +6645,7 @@ var __assignment_706_2014_ps2 = {
                                     R1: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'g': 1},
+                                                {collection_id: 'default',microscope: ['g'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna1', concentration_id: '100'},
@@ -6667,7 +6667,7 @@ var __assignment_706_2014_ps2 = {
                                     R2: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'gr':1, 'g':1, 'rb': 1},
+                                                {collection_id: 'default',microscope: ['gr', 'g', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna2', concentration_id: '100'},
@@ -6689,7 +6689,7 @@ var __assignment_706_2014_ps2 = {
                                     R3: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'rgb':1, 'g':1, 'rb':1},
+                                                {collection_id: 'default',microscope: ['rgb', 'g', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna3', concentration_id: '100'},
@@ -6711,7 +6711,7 @@ var __assignment_706_2014_ps2 = {
                                     R4: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'na':1},
+                                                {collection_id: 'default',microscope: ['na'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna4', concentration_id: '100'},
@@ -6733,7 +6733,7 @@ var __assignment_706_2014_ps2 = {
                                     R5: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'rgb':1, 'g':1},
+                                                {collection_id: 'default',microscope: ['rgb', 'g'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna5', concentration_id: '100'},
@@ -6755,7 +6755,7 @@ var __assignment_706_2014_ps2 = {
                                     GM: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: {'na':1},
+                                                {collection_id: 'default',microscope: ['na'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'Serum', concentration_id: '100'},
@@ -6777,7 +6777,7 @@ var __assignment_706_2014_ps2 = {
                                     H: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default', microscope: {'na':1},
+                                                {collection_id: 'default', microscope: ['na'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'Hydroxyurea', concentration_id: '100'},
@@ -6799,7 +6799,7 @@ var __assignment_706_2014_ps2 = {
                                     C: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default', microscope: {'na':1},
+                                                {collection_id: 'default', microscope: ['na'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'Colchicine', concentration_id: '100'},
@@ -7390,7 +7390,7 @@ var __assignment_706_2014_ps2 = {
                                     },
                                     {
                                         name: 'Chk1',
-                                        weight: 57,
+                                        weight: 59,
                                         intensity: 4,
                                         primary_anti_body: ['chk1']
                                     },
