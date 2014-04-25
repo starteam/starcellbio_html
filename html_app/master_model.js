@@ -6571,6 +6571,7 @@ var __assignment_706_2014_ps2 = {
         	random_choose: true,
         	randomize_all: false,
         	random_order: [],
+        	finished_random: false,
             instructions: [
             	['Goal & Introduction','Here come instructions when we build them']
             	],
@@ -6667,7 +6668,7 @@ var __assignment_706_2014_ps2 = {
                                     R2: [
                                         {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: ['gr', 'g', 'rb'],
+                                                {collection_id: 'default',microscope: ['g', 'gr', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna2', concentration_id: '100'},
@@ -8144,7 +8145,8 @@ $(function () {
 		if(get_courses_result.list[x].id == 'assignment_706_2014_ps2'){
 			assignment_706_2014_ps2 = get_courses_result.list[x];
 			//assignment_706_2014_ps2 = choose_n_mutant_strains(assignment_706_2014_ps2.template.random_order, ['m1', 'm2'], assignment_706_2014_ps2);
-			
+			if(assignment_706_2014_ps2.template.finished_random){}
+			else{
 			var element1 = assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[1];
 			var element2 = assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[2];
 			var element3 = assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[3];
@@ -8179,7 +8181,8 @@ $(function () {
 			assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[4].cells[2].text = 'siRNA #4' ;
 			assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[5].cells[2].text = 'siRNA #5';
 			replace_names(assignment_706_2014_ps2.template.drugs, order_array, ['siRNA #1', 'siRNA #2', 'siRNA #3', 'siRNA #4' , 'siRNA #5']);
-			
+			assignment_706_2014_ps2.template.finished_random = true;
+			}
 			
 			assignment_706_2014_ps2.template.instructions = [
 				['Getting Started', scb_assignment_specific_mit706s14ps2.page1()],

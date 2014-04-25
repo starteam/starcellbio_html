@@ -330,7 +330,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
        			slide_conditions_val = _.keys(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])[0]
        		}
        		else if(  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope) == 1){
-       			slide_conditions_val = _.keys(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope)[0]
+       			slide_conditions_val = _.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope[0];
        		}
        			parsed.microscopy.lanes_list.start({
        				kind: slide_type,
