@@ -162,6 +162,8 @@ def get_courses(request, **kwargs):
 				token1 = course.sassignments.filter(student=request.user)[0].token
 				for x in course.sassignments.filter(student=request.user):
 					assignments.append(x)
+					x.token = token1
+					x.save()
 		for a in assignments:
 			dictionary = ast.literal_eval(a.data)
 			alist.append(dictionary)
@@ -193,6 +195,7 @@ def post_state(request, **kwargs):
 	jsonmodel = jsondata['model']
 	import random
 	token2 = random.randrange(0, 1000000)
+	#pudb.set_trace()
 	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
 		usercourses = UserCourse.objects.filter(user=request.user)
 		courses = []
