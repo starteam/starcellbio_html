@@ -62,7 +62,7 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
                 lane_yslope[lane] = yslope;
             }
         }
-
+		
         self.background = background;
         self.lane_yslope = lane_yslope;
 
@@ -124,8 +124,14 @@ scb.components.WesternBlot = function scb_components_WesternBlot(state, context)
             });
             tab.lanes.push(lane);
         }
-
+		var round_number = 100000;
+		for(var index = 0 ; index < self.background.length; index++){
+			self.background[index] = Math.round(self.background[index] * round_number)/round_number; 
+		}
         tab.background = self.background;
+		for(var index = 0 ; index < self.lane_yslope.length; index++){
+			self.lane_yslope[index] = Math.round(self.lane_yslope[index] * round_number)/round_number; 
+		}
         tab.lane_yslope = self.lane_yslope;
 
         self.tab = tab;

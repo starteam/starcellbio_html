@@ -160,7 +160,14 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			}
 
 
-
+			function roundData(input){
+				var round_number = 10000;
+                for(var index = 0 ; index < input.length; index++){
+                	input[index][0] = Math.round(input[index][0] * round_number)/round_number; 
+                	input[index][1] = Math.round(input[index][1] * round_number)/round_number;
+                }
+				return input;
+			}
 			function normal_dist(x_val,location, scale, shape, haserror){
 				var term1 = Math.exp(-((x_val - location) * (x_val - location))/(2*scale*scale));
 				var term2 = haserror ? erfc(-(shape*(x_val-location))/(Math.sqrt(2)*scale)): 1;
@@ -243,6 +250,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data},
@@ -264,6 +272,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data}
@@ -283,6 +292,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data}
@@ -298,6 +308,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     data.push([x, y]);
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data}
@@ -317,6 +328,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data},
@@ -337,6 +349,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data},
@@ -357,6 +370,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data},
@@ -377,6 +391,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data},
@@ -397,6 +412,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data},
@@ -412,11 +428,12 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
 	                number_of_curves = 1;
-                    var y = sblockg1(x + bias) ;
+                    var y = sblockg1(x + bias);
                     data.push([x, y]);
 
                 }
                 normalize(data);
+				roundData(data);
                 state.data = {
                     data: [
                         { data: data},
