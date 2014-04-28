@@ -253,6 +253,10 @@
   background: none !important;
   background-image: url('../../images/header/scb_print.png') !important;
 }
+.scb_s_assignments_print_assignment:hover {
+  background-color: darkgray !important;
+  padding-right: 13px;
+}
 .assignement_experiment_list {
   font-size: 11px;
 }
