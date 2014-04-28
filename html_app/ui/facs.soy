@@ -180,7 +180,7 @@ FACS Main View
 	{else}
 		<button class='scb_s_facs_left_facs' facs_id='{$facs.id}'
              			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}'>
+             			experiment_id='{$experiment.id}' role='button'  aria-label='Previous Tab'>
     	</button>
     	{if $experiment.facs_list.list.length -1 == $experiment.facs_list.start_tabs_index + 3}
 			{foreach $wb in $experiment.facs_list.list}
@@ -237,7 +237,7 @@ FACS Main View
 		{/if}
 		<button class='scb_s_facs_right_facs' facs_id='{$facs.id}'
              			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}' >
+             			experiment_id='{$experiment.id}' role='button'  aria-label='Next Tab'>
     	</button>
 	
 	{/if}
@@ -303,7 +303,7 @@ FACS Main View
             <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:73px;'>{if $r.display_sample}
                 <input  type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'  aria-checked='{if $r.is_sample_enabled}true{else}false{/if}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-                       cell_treatment_id='{$r.cell_treatment.id}'
+                       cell_treatment_id='{$r.cell_treatment.id}'  role='checkbox'
                 {if $r.is_sample_enabled}checked="checked"{/if}
                 >
                 {/if}
@@ -376,7 +376,7 @@ FACS Main View
     </table>
 </div>
 	{if length($rows) >=10}
-    	<div class="scb_s_western_blot_green_line"></div>
+    	<div class="scb_s_western_blot_green_line" role='presentation'></div>
     {/if}
 </div>
 {/template}

@@ -51,7 +51,7 @@
 {/let}
 
 {if $step >0}
-<div class='scb_s_assignment_step' role='menu' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<div class='scb_s_assignment_step' role='menu' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" role='navigation'>
     <a class='scb_s_assignment_step_link scb_f_assignments_step_link {if $step < 2 and $step >0}scb_s_assignment_step_link_active{/if}' href='#view=assignments' aria-label='Assignments' role='menuitem' >
         <div class='scb_s_assignment_step_wrapper' style='position: absolute; left: 29px; bottom: 20px;' aria-hidden='true'>
 			<div class='{if $step < 2 and $step >0}scb_s_assignments_link_img_active{else}scb_s_assignments_link_img {/if}' role='presentation' ></div>
@@ -109,7 +109,7 @@ Progress bar
 @param experiment
 */
 {template .experiment_step}
-<div class='scb_s_experiment_step'>
+<div class='scb_s_experiment_step' role='navigation'>
 	
 	<div id='scb_s_experiment_step_progress_label_for_assignment' class = 'scb_s_experiment_step_progress_label' role='presentation'> {$assignment.name}:</div>
 	

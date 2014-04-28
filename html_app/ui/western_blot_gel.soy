@@ -94,7 +94,7 @@
 
 <a class="scb_s_navigation_button scb_s_western_blot_open_select_technique scb_s_select_technique_at_western_blot scb_f_open_select_technique"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
+       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' role='button'>&#9664; SELECT TECHNIQUE</a><br/>
 </div>
 {/template}
 
@@ -127,7 +127,7 @@
     {/call}
     {/if}
     <div class='scb_s_western_blot_samples_area'>
-        	<button class='scb_f_info_icon scb_s_western_blot_gel_type_info'  note='scb_f_wb_gel_type_followup'> </button>
+        	<button class='scb_f_info_icon scb_s_western_blot_gel_type_info' role='button' note='scb_f_wb_gel_type_followup'> </button>
 			<div class='scb_f_wb_gel_type_followup scb_f_controls_note'>
 			<!-- 
 							<button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
@@ -135,7 +135,7 @@
 						Gel type refers to the percentage of acrylamide that is used to make the gel. 
 						Lower acrylamide concentrations are used to separate large proteins, 
 						while high acrylamide concentrations are used to separate small proteins. &nbsp;
-						<a href="static/ref_lib/full_library.html#GelPreparation" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+						<a href="static/ref_lib/full_library.html#GelPreparation" target='_blank' role='link' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
 		
 			 </div>
         <div class='scb_s_western_blot_choose_gel_type'>
@@ -179,7 +179,7 @@
 						{if $gel.is_developed}
 							<button class='scb_f_western_blot_gel_remove' western_blot_id='{$western_blot.id}'
 							assignment_id='{$assignment.id}'
-							experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}'>| &#215;
+							experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}' aria-label='Close Tab' role='button'>| &#215;
 							</button>
 						{/if}
        					</span>
@@ -193,7 +193,7 @@
         		{/foreach}
         	{else}
         		<button class='scb_s_western_blot_gel_left_western_blot' western_blot_id='{$western_blot.id}'
-             			assignment_id='{$assignment.id}'
+             			assignment_id='{$assignment.id}' role='button'  aria-label='Previous Tab'
              			experiment_id='{$experiment.id}'>
     			</button>
     			{foreach $gel in $western_blot.gel_list.list}
@@ -208,7 +208,7 @@
 							{if $gel.is_developed}
 								<button class='scb_f_western_blot_gel_remove' western_blot_id='{$western_blot.id}'
 								assignment_id='{$assignment.id}'
-								experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}'>| &#215;
+								experiment_id='{$experiment.id}' western_blot_gel_id='{$gel.id}' aria-label='Close Tab' role='button'>| &#215;
 								</button>
 							{/if}
 							</span>
@@ -224,7 +224,7 @@
         		{/foreach}
         		<button class='scb_s_western_blot_gel_right_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}' >
+             			experiment_id='{$experiment.id}' role='button'  aria-label='Next Tab'>
     			</button>
         	{/if}
     	</div>
@@ -263,18 +263,18 @@
         {/call}
         <div class='scb_s_western_blot_gel_canvas_wrapper'>
             <canvas id="{$western_blot_gel.id}" class='scb_s_western_blot_gel_canvas' style="width:346px;height:247px"
-                    width='375' height='247'></canvas>
-            <div class='scb_f_slider'></div>
-            <div class='scb_f_slider_value'></div>
-            <div class='scb_f_vslider'></div>
-            <div class='scb_f_vslider_value'></div>
+                    width='375' height='247' role='presentation'></canvas>
+            <div class='scb_f_slider'        role='presentation'></div>
+            <div class='scb_f_slider_value'  aria-label='Horizontal Slider Label'></div>
+            <div class='scb_f_vslider'       role='presentation'></div>
+            <div class='scb_f_vslider_value'  aria-label='Vertical Slider Label'></div>
         </div>
           <button class='scb_f_western_blot_tools_toggle scb_s_western_blot_tools_measure_followup_toggle'  note='scb_s_western_blot_tools_measure_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-             western_blot_id='{$western_blot.id}'></button>
+             western_blot_id='{$western_blot.id}' role='button'></button>
     		<div class='scb_s_western_blot_tools_measure_followup {if $western_blot.measure_show_state}{else}scb_s_hidden_note{/if}' >
 
 				<button class='scb_f_western_blot_note_close_button' aria-label='Close' note='scb_s_western_blot_tools_measure_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-             western_blot_id='{$western_blot.id}'><span>&#215;</span></button>
+             western_blot_id='{$western_blot.id}' role='button'><span role='presentation'>&#215;</span></button>
 							
 							To measure the size of the proteins within a 
 							band on a western blot, hover your cursor 
@@ -285,7 +285,7 @@
 			</div>
         {else}
         <img class='scb_s_western_blot_gel_membrane'
-             src='images/western_blot/SCB_WesternBlotting_Membrane.png'>
+             src='images/western_blot/SCB_WesternBlotting_Membrane.png' role='presentation'>
         {foreach $r in $rows}
         	 {if $r.is_marker and $western_blot.marker_loaded}
         	 <img role='presentation' style='position:relative;top: -247px;left: {if $western_blot.rows_state_count ==1}44px{else}{20+22*(index($r))}px{/if}' class='scb_s_western_blot_gel_membrane'
@@ -301,14 +301,14 @@
                     
     
         {if $western_blot_gel.is_developed}
-        			<button class='scb_f_info_icon scb_s_western_blot_exposure_info' note='scb_f_wb_exposure_followup'> </button>
+        			<button class='scb_f_info_icon scb_s_western_blot_exposure_info' note='scb_f_wb_exposure_followup' role='button'> </button>
 					<div class='scb_f_wb_exposure_followup scb_f_controls_note'>
 
 								The exposure slider represents the length of time a piece of film 
 								is exposed on a blot to detect a protein of interest. To increase 
 								the exposure time, move the slider to the right. To decrease the 
 								exposure time, move the slider to the left. &nbsp;
-								<a href="static/ref_lib/full_library.html#Develop" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+								<a href="static/ref_lib/full_library.html#Develop" target='_blank' class='scb_s_select_technique_learn_more ' role='link'>Learn more &gt;&gt;</a>
 		
 					 </div>
         {call .developed_gel}
@@ -319,16 +319,16 @@
         {/call}
         {else}
 
-			<button class='scb_f_info_icon scb_s_western_blot_primary_info' note='scb_f_wb_primary_followup'> </button>
+			<button class='scb_f_info_icon scb_s_western_blot_primary_info' note='scb_f_wb_primary_followup' role='button'> </button>
 					<div class='scb_f_wb_primary_followup scb_f_controls_note'>
 
 								A primary antibody is a Y-shaped protein that is designed to bind specifically 
 								to the protein of interest. A primary antibody called "rabbit protein-X" was 
 								raised in a rabbit to specifically detect protein X. &nbsp;
-								<a href="static/ref_lib/full_library.html#Blot" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+								<a href="static/ref_lib/full_library.html#Blot" target='_blank' class='scb_s_select_technique_learn_more ' role='link'>Learn more &gt;&gt;</a>
 		
 					 </div>
-					<button class='scb_f_info_icon scb_s_western_blot_secondary_info' note='scb_f_wb_secondary_followup'> </button>
+					<button class='scb_f_info_icon scb_s_western_blot_secondary_info' note='scb_f_wb_secondary_followup' role='button'> </button>
 					<div class='scb_f_wb_secondary_followup scb_f_controls_note'>
 
 								A secondary antibody is a Y-shaped protein that is designed to bind specifically
@@ -336,7 +336,7 @@
 								was raised in a goat to detect a rabbit's primary antibody. When selecting 
 								a secondary antibody, ensure that the secondary antibody recognizes the species 
 								in which a primary antibody was raised. &nbsp;
-								<a href="static/ref_lib/full_library.html#Blot" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+								<a href="static/ref_lib/full_library.html#Blot" target='_blank' class='scb_s_select_technique_learn_more ' role='link'>Learn more &gt;&gt;</a>
 		
 					 </div>
 
@@ -360,22 +360,22 @@
 @param western_blot_gel
 */
 {template .undeveloped_gel}
-<h1>
+<h1 role='heading'>
     Choose Blotting <br/> Conditions
 </h1>
 <div class='scb_s_wb_primary_antibody'>
     Primary antibody:
     
-    <label class="custom-select_gel">
+    <label class="custom-select_gel" role='presentation'>
     <select class='scb_f_wb_anti_body_select_primary' western_blot_id='{$western_blot.id}'
-            assignment_id='{$assignment.id}'
+            assignment_id='{$assignment.id}' role='list'  aria-label='Primary Antibody'
             experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>
         {foreach $pab in $t.primary_anti_body.order}
-        <option class='scb_f_wb_anti_body_select_primary_option' model_id='{$pab}'
+        <option  role='listitem' aria-label='{$t.primary_anti_body[$pab].name}' class='scb_f_wb_anti_body_select_primary_option' model_id='{$pab}'
         {if $western_blot_gel.primary_anti_body ==
         $pab}selected='selected'{/if}>{$t.primary_anti_body[$pab].name}</option>
         {/foreach}
-        <option value="Please select..." model_id=''
+        <option value="Please select..." model_id='' role='listitem' aria-label='Please select...'
         {if $western_blot_gel.primary_anti_body}{else}selected="selected"{/if} disabled="disabled">Please
         select...</option>
     </select>
@@ -384,16 +384,16 @@
 </div>
 <div class='scb_s_wb_secondary_antibody'>
     Secondary antibody:
-    <label class="custom-select_gel">
+    <label class="custom-select_gel" role='presentation'>
     <select class='scb_f_wb_anti_body_select_secondary' western_blot_id='{$western_blot.id}'
-            assignment_id='{$assignment.id}'
+            assignment_id='{$assignment.id}'  role='list'  aria-label='Secondary Antibody'
             experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>
         {foreach $pab in keys($t.secondary_anti_body)}
-        <option class='scb_f_wb_anti_body_select_secondary_option' model_id='{$pab}'
+        <option class='scb_f_wb_anti_body_select_secondary_option' model_id='{$pab}' role='listitem' aria-label='{$t.secondary_anti_body[$pab].name}'
         {if $western_blot_gel.secondary_anti_body ==
         $pab}selected='selected'{/if}>{$t.secondary_anti_body[$pab].name}</option>
         {/foreach}
-        <option value="Please select..." model_id=''
+        <option value="Please select..." model_id='' role='listitem' aria-label='Please select...'
         {if $western_blot_gel.secondary_anti_body}{else}selected="selected"{/if} disabled="disabled">Please
         select...</option>
     </select>
@@ -401,7 +401,7 @@
 </div>
 
 <a class='scb_s_western_blot_blot_and_develop scb_s_navigation_button'
-   western_blot_id='{$western_blot.id}'
+   western_blot_id='{$western_blot.id}' role='button'
    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>BLOT &
     DEVELOP</a>
 {/template}
@@ -414,7 +414,7 @@
 @param western_blot_gel
 */
 {template .developed_gel}
-<h1>Blotting Conditions</h1>
+<h1 role='heading' >Blotting Conditions</h1>
 <div class='scb_s_wb_primary_antibody'>
     Primary antibody:
     <div>{$t.primary_anti_body[$western_blot_gel.primary_anti_body].name}</div>
@@ -423,7 +423,7 @@
     Secondary antibody:
     <div>{$t.secondary_anti_body[$western_blot_gel.secondary_anti_body].name}</div>
 </div>
-<h1 class='scb_s_wb_analysis_tools_title'>Analysis Tools</h1>
+<h1 class='scb_s_wb_analysis_tools_title' role='heading'>Analysis Tools</h1>
 <div class='scb_s_wb_exposure_time'>
     Exposure time:
     <div class='scb_s_wb_exposure_time_value'></div>
@@ -432,5 +432,5 @@
          western_blot_gel_id='{$western_blot_gel.id}'></div>
 </div>
 <a class='scb_s_western_blot_reprobe scb_s_navigation_button' western_blot_id='{$western_blot.id}'
-   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>RE-PROBE</a>
+   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}' role='button'>RE-PROBE</a>
 {/template}
