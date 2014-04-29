@@ -34,10 +34,10 @@
                     {if $cell.kind == 'select'}
                     HERE GOES SELECT
                     <select assignment='{$assignment.id}' experiment_id='{$experiment.id}'
-                            treatment_id='{$cell.treatment_id}' cell_line='{$cell_line}' role='listbox'  cell_line='{$cell_line}'>
-                        <option disabled="disabled">Please select</option>
+                            treatment_id='{$cell.treatment_id}' cell_line='{$cell_line}' role='select'  cell_line='{$cell_line}'>
+                        <option disabled="disabled" role='option'>Please select</option>
                         {foreach $key in keys($template[$cell.field])}
-                        <option value='{$template[$cell.field][$key]}'>{$template[$cell.field][$key].name}</option>
+                        <option  role='option' value='{$template[$cell.field][$key]}'>{$template[$cell.field][$key].name}</option>
                         {/foreach}
                     </select>
                     {/if}

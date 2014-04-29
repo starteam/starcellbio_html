@@ -321,9 +321,9 @@ Experiment active area
      assignment_id='{$assignment.id}' role='dialog' aria-label='Add Sample Dialog'>
     <div class='scb_s_experiment_setup_dialog_cell_lines'>
         Choose Your Cell Line:
-        <select  role='list' aria-label='Cell Strains' class='scb_s_experiment_setup_dialog_cell_lines_select' multiple='multiple'>
+        <select  role='select' aria-label='Cell Strains' class='scb_s_experiment_setup_dialog_cell_lines_select' multiple='multiple'>
             {foreach $cell_line in $t.experiment_setup_actions.cell_lines}
-            <option role='listitem' class='scb_s_experiment_setup_dialog_cell_lines_select_option' value='{$cell_line.id}'>
+            <option role='option' class='scb_s_experiment_setup_dialog_cell_lines_select_option' value='{$cell_line.id}'>
                 {$cell_line.title}
             </option>
             {/foreach}
@@ -331,18 +331,18 @@ Experiment active area
     </div>
     <div class='scb_s_experiment_setup_dialog_treatments'>
         Choose Your Treatment Line<br>
-        <select role='list' aria-label='Treatment Line' class='scb_s_experiment_setup_dialog_treatments_select' multiple='multiple'>
+        <select role='select' aria-label='Treatment Line' class='scb_s_experiment_setup_dialog_treatments_select' multiple='multiple'>
             {foreach $treat in $t.experiment_setup_actions.treatment_protocol_list}
-            <option role='listitem' class='scb_s_experiment_setup_dialog_treatments_select_option' value='{$treat.id}'>{$treat.title}
+            <option role='option' class='scb_s_experiment_setup_dialog_treatments_select_option' value='{$treat.id}'>{$treat.title}
             </option>
             {/foreach}
         </select>
     </div>
     <div class='scb_s_experiment_setup_dialog_collection'>
         Choose Your Treatment Line<br>
-        <select role='list' aria-label='Treatment Line' class='scb_s_experiment_setup_dialog_collection_select' multiple='multiple'>
+        <select role='select' aria-label='Treatment Line' class='scb_s_experiment_setup_dialog_collection_select' multiple='multiple'>
             {foreach $collect in $t.experiment_setup_actions.collection_schedule_list}
-            <option role='listitem' class='scb_s_experiment_setup_dialog_collection_select_option' value='{$collect.id}'>
+            <option role='option' class='scb_s_experiment_setup_dialog_collection_select_option' value='{$collect.id}'>
                 {$collect.title}
             </option>
             {/foreach}
@@ -363,10 +363,10 @@ Experiment active area
 * @param disabled
 */
 {template .cell_lines_edit}
-    <select role='list'  aria-label='Cell Strains' title='cell_line' size='1' row='0' class='scb_f_experiment_setup_cell_line_edit' {if $disabled}disabled='disabled'{/if}>
-        <option role='listitem' value='' disabled="disabled">Please select</option>
+    <select role='select'  aria-label='Cell Strains' title='cell_line' size='1' row='0' class='scb_f_experiment_setup_cell_line_edit' {if $disabled}disabled='disabled'{/if}>
+        <option role='option' value='' disabled="disabled">Please select</option>
 		{foreach $t in keys($template.cell_lines)}
-			<option role='listitem'  value='{$t}' {if $t==$cell_line_id}selected='selected'{/if}>{$template.cell_lines[$t].name}</option>
+			<option role='option'  value='{$t}' {if $t==$cell_line_id}selected='selected'{/if}>{$template.cell_lines[$t].name}</option>
 		{/foreach}
 	</select>
 {/template}
@@ -381,10 +381,10 @@ Experiment active area
 * @param disabled
 */
 {template .collection_edit}
-    <select role='list'  aria-label='Collection Time'   title='collection' size='1' row='0' class='scb_f_experiment_setup_collection_edit' {if $disabled}disabled='disabled'{/if}>
-        <option role='listitem' value='' disabled="disabled">Please select</option>
+    <select role='select'  aria-label='Collection Time'   title='collection' size='1' row='0' class='scb_f_experiment_setup_collection_edit' {if $disabled}disabled='disabled'{/if}>
+        <option role='option' value='' disabled="disabled">Please select</option>
 		{foreach $t in keys($template.collections)}
-			<option role='listitem' value='{$t}' {if $t==$collection_id}selected='selected'{/if}>{$template.collections[$t].name}</option>
+			<option role='option' value='{$t}' {if $t==$collection_id}selected='selected'{/if}>{$template.collections[$t].name}</option>
 		{/foreach}
 	</select>
 {/template}
@@ -399,10 +399,10 @@ Experiment active area
 * @param disabled
 */
 {template .drug_edit}
-    <select role='list'  aria-label='Drug' title='drug' size='1' row='0' class='scb_f_experiment_setup_drug_edit' {if $disabled}disabled='disabled'{/if}>
-        <option role='listitem' value='' disabled="disabled">Please select</option>
+    <select role='select'  aria-label='Drug' title='drug' size='1' row='0' class='scb_f_experiment_setup_drug_edit' {if $disabled}disabled='disabled'{/if}>
+        <option role='option' value='' disabled="disabled">Please select</option>
 		{foreach $t in keys($template.drugs)}
-			<option role='listitem' value='{$t}' {if $t==$drug_id}selected='selected'{/if}>{$template.drugs[$t].name}</option>
+			<option role='option' value='{$t}' {if $t==$drug_id}selected='selected'{/if}>{$template.drugs[$t].name}</option>
 		{/foreach}
 	</select>
 {/template}
@@ -417,10 +417,10 @@ Experiment active area
 * @param disabled
 */
 {template .concentration_edit}
-    <select role='list'  aria-label='Concentration'  title='concentration' size='1' row='0' class='scb_f_experiment_setup_concentration_edit' {if $disabled}disabled='disabled'{/if}>
-        <option role='listitem' value=''>Please select</option>
+    <select role='select'  aria-label='Concentration'  title='concentration' size='1' row='0' class='scb_f_experiment_setup_concentration_edit' {if $disabled}disabled='disabled'{/if}>
+        <option role='option' value=''>Please select</option>
         {foreach $t in $concentrations}
-	        <option role='listitem' value='{$t}' {if $t==$concentration_id}selected='true'{/if}>{$template.concentrations[$t].name}</option>
+	        <option role='option' value='{$t}' {if $t==$concentration_id}selected='true'{/if}>{$template.concentrations[$t].name}</option>
         {/foreach}
     </select>
 {/template}
@@ -435,10 +435,10 @@ Experiment active area
 * @param disabled
 */
 {template .temperature_edit}
-    <select role='list'  aria-label='Temperature' title='temperature' size='1' row='0' class='scb_f_experiment_setup_temperature_edit' {if $disabled}disabled='disabled'{/if}>
-        <option role='listitem' value='' disabled="disabled">Please select</option>
+    <select role='select'  aria-label='Temperature' title='temperature' size='1' row='0' class='scb_f_experiment_setup_temperature_edit' {if $disabled}disabled='disabled'{/if}>
+        <option role='option' value='' disabled="disabled">Please select</option>
         {foreach $t in keys($template.experiment_temperatures)}
-	        <option role='listitem' value='{$t}' {if $t==$temperature}selected='true'{/if}>{$template.experiment_temperatures[$t].name}</option>
+	        <option role='option' value='{$t}' {if $t==$temperature}selected='true'{/if}>{$template.experiment_temperatures[$t].name}</option>
         {/foreach}
     </select>
 {/template}

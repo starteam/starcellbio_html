@@ -32,12 +32,12 @@ mit706s14ps2.dialog = function(opt_data, opt_sb) {
           var cellData23 = cellList23[cellIndex23];
           output.append('<td class="scb_s_experiment_setup_table_border ', (cellData23.kind == 'checkbox') ? ' ' : '', '">', (cellData23.kind == 'text') ? soy.$$escapeHtml(cellData23.text) : '');
           if (cellData23.kind == 'select') {
-            output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(cellData23.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData16), '\'  role=\'listbox\'  cell_line=\'', soy.$$escapeHtml(cell_lineData16), '\'><option disabled="disabled">Please select</option>');
+            output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(cellData23.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData16), '\'  role=\'select\'  cell_line=\'', soy.$$escapeHtml(cell_lineData16), '\'><option role=\'option\' disabled="disabled">Please select</option>');
             var keyList45 = soy.$$getMapKeys(opt_data.template[cellData23.field]);
             var keyListLen45 = keyList45.length;
             for (var keyIndex45 = 0; keyIndex45 < keyListLen45; keyIndex45++) {
               var keyData45 = keyList45[keyIndex45];
-              output.append('<option value=\'', soy.$$escapeHtml(opt_data.template[cellData23.field][keyData45]), '\'>', soy.$$escapeHtml(opt_data.template[cellData23.field][keyData45].name), '</option>');
+              output.append('<option role=\'option\' value=\'', soy.$$escapeHtml(opt_data.template[cellData23.field][keyData45]), '\'>', soy.$$escapeHtml(opt_data.template[cellData23.field][keyData45].name), '</option>');
             }
             output.append('</select>');
           }

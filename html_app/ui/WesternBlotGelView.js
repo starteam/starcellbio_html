@@ -499,14 +499,24 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
             max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length-1,
             value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
-            change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider
+            change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
+            create: function(event, ui){
+            	$('.scb_f_wb_exposure_slider').attr('role', 'slider');
+				$('.scb_f_wb_exposure_slider .ui-slider-handle').attr({
+				  'aria-labelledby': "scb_s_wb_exposure_time_value",
+				  'aria-valuemin': "0",
+				  'aria-valuemax': "100",
+				  'aria-valuenow': "0",
+				  'aria-valuetext': "1 minute"
+				});
+				$('.scb_f_wb_exposure_slider > .ui-slider-range').width( $('.scb_f_wb_exposure_slider > .ui-slider-range').width() - 6);
+				if($('.scb_s_wb_exposure_time_value').text() == '1 h') {
+					$('.ui-slider-handle').css('left', $('.ui-slider-handle').position().left-10+'px')
+					console.log('fix');
+				}
+            }
         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
-        $('.scb_f_wb_exposure_slider > .ui-slider-range').width( $('.scb_f_wb_exposure_slider > .ui-slider-range').width() - 6);
-       	if($('.scb_s_wb_exposure_time_value').text() == '1 h') {
-        	$('.ui-slider-handle').css('left', $('.ui-slider-handle').position().left-10+'px')
-        	console.log('fix');
-        }
-
+        
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all(workarea, gstate, state);
         
 		_.each($(".scb_s_experiment_step_button"), function (e) {
@@ -522,15 +532,13 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
 		});
 
     	$(window).resize(function(){
-
 			$('#main').css({
 				position:'absolute',
 				left: ($(window).width() - $('#main').outerWidth())/2,
 				top: ($(window).height() - $('#main').outerHeight())/2
 			});
-
 		});
 		
-		$('.scb_f_wb_exposure_slider').attr('role', 'slider');
+		
     }
 };

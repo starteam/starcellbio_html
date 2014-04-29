@@ -168,7 +168,7 @@
 		{/foreach}
 		<span class='scb_s_microscopy_add_microscopy' assignment_id='{$assignment.id}' role='tab'
 							experiment_id='{$experiment.id}' microscopy_id='{$experiment.microscopy_list.list[length($experiment.microscopy_list.list)-1].id}'>
-							 <a class='scb_f_open_microscopy scb_s_microscopy_open_microscopy' href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
+							 <a class='scb_f_open_microscopy scb_s_microscopy_open_microscopy' href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}' role='presentation'>ADD 
 					<span class='scb_s_microscopy_add_cross_microscopy'>| + </span></a>
 		</span>
 	{else}
@@ -199,7 +199,7 @@
 				{/foreach}
 		<span class='scb_s_microscopy_add_microscopy' assignment_id='{$assignment.id}' role='tab'
 							experiment_id='{$experiment.id}' microscopy_id='{$experiment.microscopy_list.list[length($experiment.microscopy_list.list)-1].id}'>
-							 <a class='scb_f_open_microscopy scb_s_microscopy_open_microscopy' href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>ADD 
+							 <a class='scb_f_open_microscopy scb_s_microscopy_open_microscopy' href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}' role='presentation'>ADD 
 					<span class='scb_s_microscopy_add_cross_microscopy'>| + </span></a>
 		</span>
 		{else}
@@ -267,8 +267,8 @@
         <td  role='columnheader' class='scb_s_microscopy_samples_table_heading m_sample_prep_select scb_s_experiment_setup_table_border'>Select</td>
         <td  role='columnheader' class='scb_s_microscopy_samples_table_heading m_sample_prep_samples scb_s_experiment_setup_table_border'>Samples</td>
         <td  role='columnheader' class='scb_s_microscopy_samples_table_heading m_sample_prep_lysate scb_s_experiment_setup_table_border'>Microscopy Analysis
-        		<button class='scb_f_info_icon scb_s_microscopy_slide_type_info' note='scb_f_microscopy_slide_type_followup'> </button>
-					<div class='scb_f_microscopy_slide_type_followup scb_f_controls_note'>
+        		<button class='scb_f_info_icon scb_s_microscopy_slide_type_info' note='scb_f_microscopy_slide_type_followup' role='button' aria-label='Slide Type Info'> </button>
+					<div class='scb_f_microscopy_slide_type_followup scb_f_controls_note' role='note'>
 		
 								Antibody-labeling Immunohistochemistry (IHC) uses a series of antibodies to 
 								specifically detect a protein of interest using a colorimetric reaction. 
@@ -503,11 +503,11 @@
         Samples
          {if $microscopy.samples_finished}
     	 
-            <button class='scb_f_microscopy_tools_toggle scb_s_microscopy_tools_samples_followup_toggle'  note='scb_s_microscopy_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+            <button class='scb_f_microscopy_tools_toggle scb_s_microscopy_tools_samples_followup_toggle' role='button' aria-label='Samples Info' note='scb_s_microscopy_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              microscopy_id='{$microscopy.id}'></button>
-    		<div class='scb_s_microscopy_tools_samples_followup {if $microscopy.samples_show_state}{else}scb_s_hidden_note{/if}' >
+    		<div class='scb_s_microscopy_tools_samples_followup {if $microscopy.samples_show_state}{else}scb_s_hidden_note{/if}' role='note'>
 
-				<button class='scb_f_microscopy_note_close_button' aria-label='Close' note='scb_s_microscopy_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+				<button class='scb_f_microscopy_note_close_button' aria-label='Close' role='button' note='scb_s_microscopy_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              microscopy_id='{$microscopy.id}'><span>&#215;</span></button>
 							
 							 To view the sample on the microscope, select the sample name 
@@ -520,11 +520,11 @@
 
     
     <div class='{if $microscopy.samples_finished} scb_s_microscopy_choose_samples_order_no_border{else}scb_s_microscopy_choose_samples_order{/if}'>
-        <ol class='scb_s_microscopy_choose_samples_order_list' >
+        <ol role='list' class='scb_s_microscopy_choose_samples_order_list' >
             {foreach $r in $rows}
             {if $r.is_valid}
             	{if $r.index == 0}
-					<li 
+					<li role='listitem' 
 					microscopy_lane_id='{$r.lane.id}'
 					assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' 
 					microscopy_id='{$microscopy.id}' 
@@ -543,7 +543,7 @@
     {if $microscopy.samples_finished}
     {else}
     <button class='scb_f_microscopy_load_slides scb_s_navigation_button' microscopy_id='{$microscopy.id}' 
-                assignment_id="{$assignment.id}"
+                assignment_id="{$assignment.id}" role='button'
                 experiment_id="{$experiment.id}">LOAD
 	</button>
 	{/if}
@@ -608,8 +608,8 @@
 */
 {template .display_lens}
 
-<div class='scb_s_microscopy_load_followup scb_s_controls_note'>
-			<button class='scb_f_controls_close_button' aria-label='Close'><span>&#215;</span></button>
+<div class='scb_s_microscopy_load_followup scb_s_controls_note' role='note'>
+			<button class='scb_f_controls_close_button' aria-label='Close' role='button'><span>&#215;</span></button>
 						Your slides have been loaded. Every time you switch samples, the chosen slide will be automatically loaded. <p/>
 
 						You may need to use the arrow keys or navigation arrows to find the image present within each slide. <p/>
@@ -627,9 +627,10 @@
 	 <div class='scb_s_microscope_status'></div>
 			 </div>
 
-    		<div class='scb_s_microscopy_tools_navigation_followup {if $microscopy.navigation_show_state}{else}scb_s_hidden_note{/if}' >
+    		<div class='scb_s_microscopy_tools_navigation_followup {if $microscopy.navigation_show_state}{else}scb_s_hidden_note{/if}' role='note'>
 
-				<button class='scb_f_microscopy_note_close_button' aria-label='Close' note='scb_s_microscopy_tools_navigation_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+				<button class='scb_f_microscopy_note_close_button' aria-label='Close' role='button'	 
+						note='scb_s_microscopy_tools_navigation_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              microscopy_id='{$microscopy.id}'><span>&#215;</span></button>
 							
 							 Click the appropriate the navigation arrows or 
@@ -879,7 +880,7 @@
 				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$kinds[$k].name}</span>
 		{/foreach}
 {else}
-	<select class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}'
+	<select class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}' role='select'
 			microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
 			lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
 	{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
@@ -887,12 +888,12 @@
 	{if $lane.kind == 'existing'}
 		{if $lane.cell_treatment.cell_line == $assignment.template.model.microscopy.valid[0] and $lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id == $assignment.template.model.microscopy.valid[1]}
 			{foreach $k in keys($assignment.template.slide_parser[$lane.cell_treatment.treatment_list.list[0].collection_id])}	
-			<option value='{$k}'
+			<option value='{$k}' role='option'
 			{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
 			{/foreach}
 		{else}
 			{foreach $k in keys($assignment.template.slide_parser.default)}
-			<option value='{$k}'
+			<option value='{$k}' role='option'
 			{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
 			{/foreach}
 		{/if}
@@ -900,15 +901,15 @@
 	{else}
 	IF.conditions
 	{if length(keys($kinds)) != 1 or length(keys($kinds.IF.conditions)) != 1 }
-	<option selected="selected" disabled="disabled" value=''>Select Analysis</option>
+	<option  role='option' selected="selected" disabled="disabled" value=''>Select Analysis</option>
 	{/if}
 	{if $lane.cell_treatment.cell_line == $assignment.template.model.microscopy.valid[0] and $lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id == $assignment.template.model.microscopy.valid[1]}
 		{foreach $k in keys($assignment.template.slide_parser[$lane.cell_treatment.treatment_list.list[0].collection_id])}	
-		<option value='{$k}'>{$kinds[$k].name}</option>
+		<option role='option' value='{$k}'>{$kinds[$k].name}</option>
 		{/foreach}
 	{else}
 		{foreach $k in keys($assignment.template.slide_parser.default)}
-		<option value='{$k}'>{$kinds[$k].name}</option>
+		<option role='option' value='{$k}'>{$kinds[$k].name}</option>
 		{/foreach}
 	{/if}
 	{/if}
@@ -934,15 +935,15 @@
 	 </div>
     
     
-    <div class='scb_s_microscopy_vertical_line_1'></div>
-    <div class='scb_s_microscopy_vertical_line_4'></div>
-	<div class='scb_s_microscopy_vertical_line_7'></div>
+    <div class='scb_s_microscopy_vertical_line_1' role='presentation' ></div>
+    <div class='scb_s_microscopy_vertical_line_4' role='presentation'></div>
+	<div class='scb_s_microscopy_vertical_line_7' role='presentation'></div>
     <div class='scb_s_western_blot_progress_bar'>
 
-		<div class = 'scb_s_western_blot_progress_gray_bar'>
-			<div class='scb_s_facs_vertical_line_1_top'></div>
-			<div class='scb_s_facs_vertical_line_4_top'></div>
-			<div class='scb_s_facs_vertical_line_7_top'></div>
+		<div class = 'scb_s_western_blot_progress_gray_bar' role='progressbar'>
+			<div class='scb_s_facs_vertical_line_1_top' role='presentation'></div>
+			<div class='scb_s_facs_vertical_line_4_top'role='presentation'></div>
+			<div class='scb_s_facs_vertical_line_7_top' ></div>
 			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
 						{if $step== 1}20px;{/if}

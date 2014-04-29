@@ -30,12 +30,12 @@ decusability.dialog = function(opt_data, opt_sb) {
         var cellData28 = cellList28[cellIndex28];
         output.append('<td class=\'scb_s_experiment_setup_table_border\'>', (cellData28.kind == 'text') ? soy.$$escapeHtml(cellData28.text) : '');
         if (cellData28.kind == 'select') {
-          output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(rowsData26.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\' role=\'listbox\'  cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\'><option disabled="disabled">Please select</option>');
+          output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(rowsData26.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\' role=\'select\'  cell_line=\'', soy.$$escapeHtml(cell_lineData4), '\'><option disabled="disabled" role=\'option\'>Please select</option>');
           var keyList46 = soy.$$getMapKeys(opt_data.template[cellData28.field]);
           var keyListLen46 = keyList46.length;
           for (var keyIndex46 = 0; keyIndex46 < keyListLen46; keyIndex46++) {
             var keyData46 = keyList46[keyIndex46];
-            output.append('<option value=\'', soy.$$escapeHtml(opt_data.template[cellData28.field][keyData46]), '\'>', soy.$$escapeHtml(opt_data.template[cellData28.field][keyData46].name), '</option>');
+            output.append('<option role=\'option\' value=\'', soy.$$escapeHtml(opt_data.template[cellData28.field][keyData46]), '\'>', soy.$$escapeHtml(opt_data.template[cellData28.field][keyData46].name), '</option>');
           }
           output.append('</select>');
         }
