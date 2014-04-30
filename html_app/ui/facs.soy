@@ -282,7 +282,7 @@ FACS Main View
         
         
         </td>
-        <td class='scb_s_facs_samples_table_heading sample_prep_dna_facs'>DNA Content Treatment
+        <td role='columnheader' class='scb_s_facs_samples_table_heading sample_prep_dna_facs'>DNA Content Treatment
         			<button class='scb_f_info_icon scb_s_facs_dna_info' note='scb_f_facs_dna_followup' role='button' aria-label='DNA Treatment Info'> </button>
 					<div class='scb_f_facs_dna_followup scb_f_controls_note' role='note'>
 		<!-- 
@@ -296,7 +296,7 @@ FACS Main View
 					 </div>
         
         </td>
-        <td class='scb_s_facs_samples_table_heading sample_prep_blank_facs'>&nbsp;</td>
+        <td role='columnheader' class='scb_s_facs_samples_table_heading sample_prep_blank_facs'>&nbsp;</td>
         </thead>
         {foreach $r in $rows}
         <tr class='scb_s_facs_samples_table_tr '  role='row' >
@@ -346,9 +346,9 @@ FACS Main View
             </td>
         </tr>
         {/foreach}
-        <tr>
+        <tr >
         	{if length($rows) >= 10}
-			<tr class='scb_s_western_blot_samples_select_all_rel'>
+			<tr class='scb_s_western_blot_samples_select_all_rel' role='row'>
 				<td colspan='2' class='scb_f_facs_sample_active_all_td' >
 					<button class='scb_f_facs_sample_active_all' role='button' aria-label='Select All'>SELECT ALL</button>
 				</td>
@@ -357,7 +357,7 @@ FACS Main View
 				</td>
 			</tr>
 			{else}
-			<tr class='scb_s_facs_samples_select_all_abs'>
+			<tr class='scb_s_facs_samples_select_all_abs' role='row'>
 				<td colspan='1'>
 					<button class='scb_f_facs_sample_active_all' role='button' aria-label='Select All'>SELECT ALL</button>
 				</td>
@@ -401,11 +401,18 @@ FACS Main View
 
 						{if $step== 1}20px;{/if}
 				{if $step== 2} 289px;{/if}
-				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
+				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'
+				 
+				 aria-label='
+				{if $step== 1}Sample Prep{/if}
+				{if $step== 2}Run{/if}
+				{if $step== 3}Analyze{/if}'
+				
+				>
 			</div>
 		</div>
 	
-		<div class='scb_s_facs_progress_rest'>
+		<div class='scb_s_facs_progress_rest' role='presentation'>
 			<div class='scb_s_western_blot_progress_item scb_facs_progress_1'>
 				1. Sample Prep
 			</div>
@@ -523,8 +530,8 @@ FACS Main View
         {/if}
     </div>
     <div class='scb_s_facs_samples_graph_area'>
-        <div class='scb_s_western_blot_gel_tabs'>
-                    <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'>
+        <div class='scb_s_western_blot_gel_tabs' role='tablist'>
+                    <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab' role='tab'>
 
                     <div class='scb_s_facs_gel_tab_selected'>PI
                     </div>
@@ -600,18 +607,18 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
     {if $lane.canvas_metadata_analysis}
     {if $lane.canvas_metadata_analysis.ranges}
     {if $lane.canvas_metadata_analysis.ranges.length > 0}
-    <table class='scb_s_facs_tools_analyze_data'>
+    <table class='scb_s_facs_tools_analyze_data' role='grid'>
         <thead>
         <tr>
-            <td></td>
-            <td>PI Fluorescence</td>
-            <td>% Cells</td>
-            <td></td>
+            <td role='columnheader'></td>
+            <td role='columnheader'>PI Fluorescence</td>
+            <td role='columnheader'>% Cells</td>
+            <td role='columnheader'></td>
         </tr>
         </thead>
         <tbody>
         {foreach $range in $lane.canvas_metadata_analysis.ranges}
-        <tr>
+        <tr role='row'>
             <td>
                 <div style='background-color:{$range.color}; width:12px; height:12px'></div>
             </td>
@@ -630,7 +637,7 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
         </tbody>
     </table>
     <span class='scb_s_facs_apply'>
-    <input type="checkbox" assignment_id='{$assignment.id}'
+    <input type="checkbox" assignment_id='{$assignment.id}' role='checkbox'
            experiment_id='{$experiment.id}' aria-checked='{if $facs.apply_dna_analysis_to_all}true{else}false{/if}'
            facs_id='{$facs.id}' facs_lane_id='{$lane.id}' class='scb_f_facs_apply_to_all'
     {if $facs.apply_dna_analysis_to_all}checked='checked'{/if}> Apply to all
@@ -645,7 +652,7 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
         -->
     </div>
     <button class='scb_f_facs_tools_start_analysis scb_s_navigation_button' assignment_id='{$assignment.id}'
-            experiment_id='{$experiment.id}'
+            experiment_id='{$experiment.id}' role='button'
             facs_id='{$facs.id}'>ANALYZE DATA
     </button>
     {/if}

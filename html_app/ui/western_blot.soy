@@ -455,8 +455,8 @@
    	{/if}
 </div>
 <div class='scb_s_western_blot_samples_gel_area'>
-    <div class='scb_s_western_blot_gel_tabs'>
-        <div class='scb_s_western_blot_gel_tab scb_s_western_blot_gel_active' contenteditable="true">GEL</div>
+    <div class='scb_s_western_blot_gel_tabs' role='tablist'>
+        <div class='scb_s_western_blot_gel_tab scb_s_western_blot_gel_active' contenteditable="true" role='tab'>GEL</div>
     </div>
     <div class='scb_s_western_blot_gel_content'>
 
@@ -602,10 +602,21 @@
         {if $step== 4}293px;{/if}
         {if $step== 5}384px;{/if}
         {if $step== 6}475px;{/if}
-        {if $step== 7}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
+        {if $step== 7}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'
+        
+        aria-label='
+        {if $step== 1}Sample Prep{/if}
+        {if $step== 2}Prepare Gel{/if}
+        {if $step== 3}Load Gel{/if}
+        {if $step== 4}Run{/if}
+        {if $step== 5}Transfer{/if}
+        {if $step== 6}Blot{/if}
+        {if $step== 7}Develop{/if}'
+        
+        >
 		</div>
 	</div>
-    <div class='scb_s_western_blot_progress_rest'>
+    <div class='scb_s_western_blot_progress_rest' role='presentation'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 '>
             1. Sample Prep</div>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2 '>

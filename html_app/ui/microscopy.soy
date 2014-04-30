@@ -551,24 +551,24 @@
 
 	<div class='scb_s_microscopy_samples_slide_area'>
 
-        <div class='scb_s_western_blot_gel_tabs'>
+        <div class='scb_s_western_blot_gel_tabs' role='tablist'>
                     {if $microscopy.samples_finished}
         			{foreach $r in $rows}
         				{if $r.is_valid and $r.lane.id == $microscopy.selected_lane.id}
-        				<span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab '>
+        				<span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab ' role='tab'>
 
 						<div class='scb_s_microscopy_gel_tab_selected'>{$microscopy.selected_lane.kinds[$microscopy.selected_lane.kind].conditions[$microscopy.selected_lane.slide_conditions].short_name}
 						</div>
 						</span>
         				{elseif $r.is_valid and $r.cell_treatment.id == $microscopy.selected_lane.cell_treatment_id}
 							<div class='scb_s_microscopy_slide_tab' microscopy_id='{$microscopy.id}' 
-							assignment_id='{$assignment.id}'
+							assignment_id='{$assignment.id}' role='tab'
 							experiment_id='{$experiment.id}' microscopy_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name}
 							</div>
 						{/if}
 					{/foreach}
 					{else}
-					<span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab'>
+					<span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab'  role='tab'>
 
                     <div class='scb_s_microscopy_gel_tab_selected'>SLIDE
                     </div>
@@ -643,19 +643,19 @@
 			 microscopy_id='{$microscopy.id}'
 			{if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}>									
 			
-			<div id='scb_s_microscopy_slide_content_lens_outline'></div>
+			<div id='scb_s_microscopy_slide_content_lens_outline' role='widget' aria-label='Slide Lens, assistance needed to use'></div>
 
 			
 			
 			<div id='scb_s_microscopy_lens_controls'>
 			<div class = 'scb_s_microscopy_lens_controls_section_1'>
-			 		<span class="scb_s_microscopy_title_label">Microscope Controls</span>
+			 		<span class="scb_s_microscopy_title_label" role='heading'>Microscope Controls</span>
 			 		<button class='scb_f_microscopy_tools_toggle scb_s_microscopy_tools_navigation_followup_toggle'  note='scb_s_microscopy_tools_navigation_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-             microscopy_id='{$microscopy.id}'></button>
+             microscopy_id='{$microscopy.id}' role='button' ></button>
    			 </div>
     
     <div class = 'scb_s_microscopy_lens_controls_section_2'>
-    <span class="scb_s_microscopy_lens_label">Light:</span> <input type="checkbox" class="scb_f_microscopy_light" microscopy_id='{$microscopy.id}'
+    <span class="scb_s_microscopy_lens_label" id='scb_s_light_label' >Light:</span> <input aria-labelledby='scb_s_light_label' type="checkbox" class="scb_f_microscopy_light" microscopy_id='{$microscopy.id}'
 			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.light_on}checked='checked'{else}{/if}   aria-checked='{if $microscopy.light_on}true{else}false{/if}'>
     </div>
     <div class = 'scb_s_microscopy_lens_controls_section_3'>
@@ -805,8 +805,8 @@
     </div>
     
     <div class = 'scb_s_microscopy_lens_controls_section_4'>
-    <span class="scb_s_microscopy_laser_label">Laser:</span>	 
-    	<input type="checkbox" class="scb_f_microscopy_laser" microscopy_id='{$microscopy.id}' aria-checked='{if $microscopy.laser_on}true{else}false{/if}'
+    <span class="scb_s_microscopy_laser_label" id='scb_s_laser_label'>Laser:</span>	 
+    	<input type="checkbox" class="scb_f_microscopy_laser" aria-labelledby='scb_s_laser_label' microscopy_id='{$microscopy.id}' aria-checked='{if $microscopy.laser_on}true{else}false{/if}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.laser_on}checked='checked'{else}{/if}>	 		 	 
 			 
     </div>
@@ -846,15 +846,15 @@
     
 	<div class = 'scb_s_microscopy_lens_controls_section_7'>
 	
-			  <span class='scb_s_microscopy_obj_label'>Objective:</span> <span class='scb_s_microscopy_mag'></span><br/>
+			  <span class='scb_s_microscopy_obj_label' id='scb_s_obj_label' >Objective:</span> <span class='scb_s_microscopy_mag' aria-labelledby='scb_s_obj_label'></span><br/>
     
     </div>
 			
 
-					<button class ='scb_s_micro_arrows' id='up'></button>
-					<button class ='scb_s_micro_arrows' id='down'></button>
-					<button class ='scb_s_micro_arrows' id='left'></button>
-					<button class ='scb_s_micro_arrows' id='right'></button>
+					<button class ='scb_s_micro_arrows' id='up' aria-label='Slide Up' role='button' ></button>
+					<button class ='scb_s_micro_arrows' id='down' aria-label='Slide Down' role='button'></button>
+					<button class ='scb_s_micro_arrows' id='left' aria-label='Slide Left' role='button'></button>
+					<button class ='scb_s_micro_arrows' id='right' aria-label='Slide Right' role='button'></button>
 
 			</div>
 			
@@ -948,11 +948,18 @@
 
 						{if $step== 1}20px;{/if}
 				{if $step== 2} 289px;{/if}
-				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
+				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'
+				
+				 aria-label='
+				{if $step== 1}Microscopy Prep{/if}
+				{if $step== 2}Load{/if}
+				{if $step== 3}Analyze{/if}'
+								
+				>
 			</div>
 		</div>
 	
-		<div class='scb_s_facs_progress_rest'>
+		<div class='scb_s_facs_progress_rest' role='presentation'>
 			<div class='scb_s_western_blot_progress_item scb_microscopy_progress_1'>
 				1. Microscopy Prep
 			</div>
