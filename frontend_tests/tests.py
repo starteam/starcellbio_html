@@ -51,37 +51,41 @@ class SimpleTest(TestCase):
     def test_assignment_navigation_tests(self):
         self.load_website()
         self.assert_on_assignments_page()
-        self.select_assignment('basic_tests', title='SCB Basic Tests',
+        #pudb.set_trace()
+        self.select_assignment('decusability', title='StarCellBio Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.open_assignment('basic_tests', title='SCB Basic Tests',
+        self.open_assignment('decusability', title='StarCellBio Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.assert_on_assignment_page()
-        self.navigate_via(' ASSIGNMENTS')
-        self.assert_on_assignments_page()
-        self.open_assignment('basic_tests', title='SCB Basic Tests',
-            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.assert_on_assignment_page()
-        self.assert_experiments([])
-        self.navigate_via('New Experiment')
+#         self.navigate_via(' ASSIGNMENTS')
+#         self.assert_on_assignments_page()
+#         self.open_assignment('decusability', title='StarCellBio Usability Test',
+#             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+#         self.assert_on_assignment_page()
+#         self.assert_experiments([])
+#         self.navigate_via('New Experiment')
         self.assert_on_experiment_design_page()
         experiment_title = 'Test Experiment'
         experiment_hypo = 'Sample hypothesis ABC'
         experiment_obj = 'Sample objective ABC'
         self.set_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
-        self.navigate_via('COMPLETE ASSIGNMENT')
-        self.assert_on_assignment_page()
-        self.assert_experiments(['Test Experiment'])
-        self.navigate_via(experiment_title)
+        self.navigate_via('ASSIGNMENTS')
+        self.assert_on_assignments_page()
+#         self.assert_experiments(['Test Experiment'])
+        self.select_assignment('decusability', title='StarCellBio Usability Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.navigate_via('EXPERIMENTS')
         self.assert_on_experiment_design_page()
         self.assert_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
         self.navigate_via('EXPERIMENT SETUP')
         self.assert_on_experiment_setup_page()
+        self.select_new_set_up()
         self.assert_samples([])
-        sample1 = {'cell_line_id': 'wt', 'treatment_id': 'P1', 'collection_id': '3 d'}
-        sample2 = {'cell_line_id': 'wt', 'treatment_id': 'P6', 'collection_id': '3 d'}
-        sample3 = {'cell_line_id': 'wt', 'treatment_id': 'P2', 'collection_id': '3 d'}
-        sample4 = {'cell_line_id': 'wt', 'treatment_id': 'P3', 'collection_id': '3 d'}
-        sample5 = {'cell_line_id': 'wt', 'treatment_id': 'P4', 'collection_id': '3 d'}
+        sample1 = {'cell_line': 'wt', 'treatment_id': 'media_only,25'}
+        sample2 = {'cell_line': 'wt', 'treatment_id': 'media_only,40'}
+        sample3 = {'cell_line': 'm1', 'treatment_id': 'media_only,25'}
+        sample4 = {'cell_line': 'm1', 'treatment_id': 'media_only,40'}
+        sample5 = {'cell_line': 'm2', 'treatment_id': 'media_only,25'}
+        pudb.set_trace()
         self.add_sample(sample1)
         self.assert_samples([sample1])
         self.add_sample(sample2)
@@ -254,10 +258,10 @@ class SimpleTest(TestCase):
     def add_sample(self, sample):
         add_button = self.find_by_class_name('scb_f_experiment_setup_action_open_add_samples_dialog')
         add_button.click()
-        self.find_by_class_name('scb_s_experiment_setup_table_add_samples_dialog')
-        self.select_option(sample['cell_line_id'], 'value', 'scb_s_experiment_setup_dialog_cell_lines_select_option')
-        self.select_option(sample['treatment_id'], 'value', 'scb_s_experiment_setup_dialog_treatments_select_option')
-        self.select_option(sample['collection_id'], 'value','scb_s_experiment_setup_dialog_collection_select_option')
+        self.find_by_class_name('scb_mit706s16_dialog')
+        self.select_option(sample['cell_line'], 'value', 'scb_f_experiment_setup_dialog_checkbox')
+        self.select_option(sample['treatment_id'], 'value', 'scb_f_experiment_setup_dialog_checkbox')
+#         self.select_option(sample['collection_id'], 'value','scb_s_experiment_setup_dialog_collection_select_option')
         add_dialog_button = self.find_by_class_name('scb_f_experiment_setup_dialog_apply')
         add_dialog_button.click()
 
@@ -288,6 +292,11 @@ class SimpleTest(TestCase):
         e_title.clear()
         e_title.send_keys(title)
         e_title.send_keys("\n")
+        
+    def select_new_set_up(self):
+    	e_class = self.find_by_class_name('scb_f_experiment_setup_new_set_up')
+    	e_class.click()
+
 
     def select_wb_antibody(self,sample):
         time.sleep(1)
@@ -338,9 +347,10 @@ class SimpleTest(TestCase):
         self.assertEqual(assignment.tag_name, u'a')
         assignment.click()
         assignment = self.find_by_link_text(title)
+        #pudb.set_trace()
         cls = assignment.get_attribute('class')
         self.assertRegexpMatches(cls, 'scb_f_open_assignment')
-        new_exp = self.find_by_link_text('New Experiment')
+        new_exp = self.find_by_class_name('scb_assignments_new_experiment')
         new_exp_href = new_exp.get_attribute('href')
         self.assertRegexpMatches(new_exp_href, "assignment_id=%s" % name)
         self.assertRegexpMatches(new_exp_href, "view=experiment_design")
@@ -349,9 +359,10 @@ class SimpleTest(TestCase):
 
 
     def open_assignment(self, name, title, description, **map):
-        assignment = self.find_by_link_text(title)
+        assignment = self.find_by_class_name('scb_assignments_new_experiment')
         cls = assignment.get_attribute('class')
-        self.assertRegexpMatches(cls, 'scb_f_open_assignment')
+        #pudb.set_trace()
+        self.assertRegexpMatches(cls, 'scb_f_open_experiment')
         assignment.click()
 
 
