@@ -133,7 +133,7 @@ class SimpleTest(TestCase):
         self.navigate_via('NEW WESTERN BLOT')
         self.assert_on_western_blot_page()
         self.assert_western_blot_tabs('W. B. 3', ['W. B. 1', 'W. B. 2', 'ADD\n| +'])
-        pudb.set_trace()
+        #pudb.set_trace()
         self.remove_western_blot()
         
         self.assert_western_blot_tabs('W. B. 2', ['W. B. 1', 'ADD\n| +'])
@@ -142,7 +142,7 @@ class SimpleTest(TestCase):
         self.assert_on_select_technique_page()
         self.navigate_via('Exp. 1')
         self.assert_western_blot_tabs('Exp. 1', ['W. B. 1', 'ADD\n| +'])
-        #pudb.set_trace()
+        
         self.select_lysates()
         self.navigate_via('PREPARE LYSATES')
         #pudb.set_trace()
@@ -172,7 +172,8 @@ class SimpleTest(TestCase):
         	#self.assert_order_same(new_order, gel_order)
 		print 'gel_order'
 		print gel_order
-        wb_sample1 = { 'primary_antibody':'1' , 'secondary_antibody':'2' }
+		pudb.set_trace()
+        wb_sample1 = { 'primary_antibody':'cdk2' , 'secondary_antibody':'r' }
         self.select_wb_antibody(wb_sample1)
         self.navigate_via('BLOT')
         #pudb.set_trace()
@@ -323,6 +324,8 @@ class SimpleTest(TestCase):
         e_class.click()
     
     def select_gel_and_transfer(self):
+    	e_class = self.find_by_class_name('scb_s_western_blot_load_all')
+    	e_class.click()
     	e_class = self.find_by_class_name('scb_s_western_blot_run_gel_and_transfer')
     	e_class.click()
 
@@ -333,7 +336,7 @@ class SimpleTest(TestCase):
             cb = checkboxes[i]
             cb.click()
             select = self.driver.find_elements_by_css_selector('.scb_f_western_blot_select_lysate_type')
-            options = select[2*i].find_elements_by_tag_name('option')
+            options = select[i].find_elements_by_tag_name('option')
             option = [x for x in options if x.get_attribute('value') == 'whole']
             if(option.__len__() > 0 ):
                 option[0].click()
