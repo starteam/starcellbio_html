@@ -23,7 +23,7 @@ class SimpleTest(TestCase):
         self.driver = webdriver.Chrome(settings.rel('../../mac/chromedriver'))
         #print settings.rel('../../ubuntu/chromedriver')
         #self.driver = webdriver.Chrome(settings.rel('../../ubuntu/chromedriver'))
-        self.base_url = 'http://localhost:8000/static/index.html#view=assignments'
+        self.base_url = 'http://localhost:8000/static/index.html'
 
     @classmethod
     def tearDownClass(self):
@@ -40,9 +40,9 @@ class SimpleTest(TestCase):
     This tests that website opening website leads to Assignments page
     """
 
-    def test_assignments_page(self):
+    def test_homepage_page(self):
         self.load_website()
-        self.assert_on_assignments_page()
+        self.assert_on_homepage_page()
 
     """
         This tests that one can go to navigation page and back
@@ -50,19 +50,37 @@ class SimpleTest(TestCase):
 
     def test_assignment_navigation_tests(self):
         self.load_website()
+        #HOMEPAGE
+        self.assert_on_homepage_page()
+        self.navigate_via('SIGN IN')
+        self.close_popup_window('scb_f_login_close_button')
+#         pudb.set_trace()
+        self.navigate_via_button('scb_f_create_student_account')
+        self.close_popup_window('scb_f_signup_close_button')
+        contact_button = self.find_by_class_name('scb_s_envelope_text')
+        contact_button.click()
+        self.close_popup_window('scb_f_contact_close_button')
+        ##Check learn more links and dynamic info section
+        
+        
+        
+        #ASSIGNMENTS PAGE
+        self.navigate_via('Try an Experiment')
+#         pudb.set_trace()
         self.assert_on_assignments_page()
-        #pudb.set_trace()
+        self.navigate_via('LIBRARY')
+        self.driver.switch_to_window(self.driver.window_handles[1])
+        self.driver.close()
+        self.driver.switch_to_window(self.driver.window_handles[0])
+#         pudb.set_trace()
+        self.select_assignment('decusability', title='StarCellBio Usability Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.select_assignment('decusability', title='StarCellBio Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.open_assignment('decusability', title='StarCellBio Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-#         self.navigate_via(' ASSIGNMENTS')
-#         self.assert_on_assignments_page()
-#         self.open_assignment('decusability', title='StarCellBio Usability Test',
-#             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-#         self.assert_on_assignment_page()
-#         self.assert_experiments([])
-#         self.navigate_via('New Experiment')
         self.assert_on_experiment_design_page()
         experiment_title = 'Test Experiment'
         experiment_hypo = 'Sample hypothesis ABC'
@@ -77,6 +95,8 @@ class SimpleTest(TestCase):
         self.assert_on_experiment_design_page()
         self.assert_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
         self.navigate_via('EXPERIMENT SETUP')
+        self.navigate_via('1. DESIGN')
+        self.navigate_via('2. SETUP & RUN')
         self.assert_on_experiment_setup_page()
         self.select_new_set_up()
         self.assert_samples([])
@@ -92,8 +112,6 @@ class SimpleTest(TestCase):
         self.remove_sample([sample1])
         self.assert_samples([sample2])
         self.add_sample(sample1)
-        
-        #pudb.set_trace()
         self.assert_samples([sample2,sample1])
         self.add_sample(sample3)
         self.assert_samples([sample2,sample1,sample3])
@@ -109,6 +127,7 @@ class SimpleTest(TestCase):
         self.navigate_via('RUN EXPERIMENT')
         
         self.assert_on_experiment_setup_page()
+        time.sleep(3)
         self.navigate_via('CONFIRM SET-UP')
         self.assert_on_select_technique_page()
         self.assert_western_blots([])
@@ -125,7 +144,7 @@ class SimpleTest(TestCase):
         self.navigate_via('W. B. 2')
         self.assert_on_western_blot_page()
         self.assert_western_blot_tabs('W. B. 2', ['W. B. 1', 'ADD\n| +'])
-        #pudb.set_trace()
+
         self.navigate_via('W. B. 1')
         self.assert_western_blot_tabs('W. B. 1', ['W. B. 2', 'ADD\n| +'])
         self.navigate_via('SELECT TECHNIQUE')
@@ -133,7 +152,7 @@ class SimpleTest(TestCase):
         self.navigate_via('NEW WESTERN BLOT')
         self.assert_on_western_blot_page()
         self.assert_western_blot_tabs('W. B. 3', ['W. B. 1', 'W. B. 2', 'ADD\n| +'])
-        #pudb.set_trace()
+
         self.remove_western_blot()
         
         self.assert_western_blot_tabs('W. B. 2', ['W. B. 1', 'ADD\n| +'])
@@ -145,11 +164,9 @@ class SimpleTest(TestCase):
         
         self.select_lysates()
         self.navigate_via('PREPARE LYSATES')
-        #pudb.set_trace()
         self.select_gel_type()
         old_order = self.read_list()
         #The drag and drop command in selenium does not work on the Mac OSX, only the linux
-        #if(self.driver.name == u'chrome'):
         print 'old order'
         print old_order
         if(platform.mac_ver()[0] != ''):
@@ -158,33 +175,37 @@ class SimpleTest(TestCase):
         	new_order = self.read_list()
         	print 'new order:'
         	print new_order
-        	#self.assert_order_different(old_order, new_order)
         self.select_load_marker()
         if(platform.mac_ver()[0] != ''):
         	load_order = self.read_list()
-        	#self.assert_order_different(old_order, load_order)
         	print 'load_order'
         	print load_order
         self.select_gel_and_transfer()
         if(platform.mac_ver()[0] != ''):
         	gel_order = self.read_list()
-        	#self.assert_order_different(old_order, gel_order)
-        	#self.assert_order_same(new_order, gel_order)
 		print 'gel_order'
 		print gel_order
-		pudb.set_trace()
         wb_sample1 = { 'primary_antibody':'cdk2' , 'secondary_antibody':'r' }
         self.select_wb_antibody(wb_sample1)
         self.navigate_via('BLOT')
-        #pudb.set_trace()
         self.navigate_via('RE-PROBE')
-        self.navigate_via('anti-let-23')
+        self.navigate_via('cdk2')
         self.navigate_via('BLOT')
         self.navigate_via('SELECT TECHNIQUE')
+        self.navigate_via('NEW FLOW CYTOMETRY')
+        self.select_lysates_facs()
+        self.navigate_via('PREPARE SAMPLES')
+        time.sleep(2)
+        pudb.set_trace()
+        self.navigate_via_button('RUN SAMPLES')
+        
 
     ## navigation helpers and assertions
     def assert_on_assignments_page(self):
         self.find_by_class_name('scb_s_assignments_view')
+        
+    def assert_on_homepage_page(self):
+    	self.find_by_class_name('scb_s_homepage_view')
 
     def assert_on_assignment_page(self):
         self.find_by_class_name('scb_s_assignment_view')
@@ -221,7 +242,12 @@ class SimpleTest(TestCase):
         for e in elements:
         	array.append(e.get_attribute('id'))
         return array
-
+    
+    
+    def close_popup_window(self, class_name):
+    	close_button = self.find_by_class_name(class_name)
+    	close_button.click()
+    
     def assert_experiments(self, experiment_list):
         web_experiment_list = self.driver.find_elements_by_class_name('scb_f_open_assignment_experiment')
         self.assertEqual(experiment_list.__len__(), web_experiment_list.__len__())
@@ -340,6 +366,18 @@ class SimpleTest(TestCase):
             option = [x for x in options if x.get_attribute('value') == 'whole']
             if(option.__len__() > 0 ):
                 option[0].click()
+    
+    def select_lysates_facs(self):
+        cbs = self.driver.find_elements_by_css_selector('.scb_f_facs_sample_active')
+        for i in range(0,cbs.__len__()):
+            checkboxes = self.driver.find_elements_by_css_selector('.scb_f_facs_sample_active')
+            cb = checkboxes[i]
+            cb.click()
+            select = self.driver.find_elements_by_css_selector('.scb_f_facs_select_lysate_type')
+            options = select[i].find_elements_by_tag_name('option')
+            option = [x for x in options if x.get_attribute('value') == 'PI']
+            if(option.__len__() > 0 ):
+                option[0].click()
 
     def load_website(self):
         self.driver.get(self.base_url)
@@ -374,6 +412,10 @@ class SimpleTest(TestCase):
     def navigate_via(self, title):
         back = self.find_by_link_text(title)
         back.click()
+        
+    def navigate_via_button(self, title):
+    	e_class = self.find_by_class_name(title)
+        e_class.click()
 
     ## WebDriver helpers
     def find_by_class_name(self, class_name):
