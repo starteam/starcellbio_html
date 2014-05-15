@@ -501,7 +501,7 @@ FACS Main View
     	{/if}
     		<div class='scb_s_facs_tools_samples_followup {if $facs.samples_show_state}{else}scb_s_hidden_note{/if}' role='note' >
 
-				<button class='scb_f_facs_note_close_button' aria-label='Close' role='button' note='scb_s_facs_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+				<button class='scb_f_facs_note_close_button scb_s_samples_close' aria-label='Close' role='button' note='scb_s_facs_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              facs_id='{$facs.id}'><span>&#215;</span></button>
 							
 							To display the flow cytometry data for a sample, select the sample name from the list below.
@@ -573,7 +573,7 @@ FACS Main View
 </div>
 			<div class='scb_s_facs_tools_instructions_followup {if $facs.instructions_show_state}{else}scb_s_hidden_note{/if}' role='note'>
 
-				<button class='scb_f_facs_note_close_button' aria-label='Close' role='button' note='scb_s_facs_tools_instructions_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+				<button class='scb_f_facs_note_close_button scb_s_instructions_close' aria-label='Close' role='button' note='scb_s_facs_tools_instructions_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              facs_id='{$facs.id}'><span>&#215;</span></button>
 							
 							Click the <img src="images/header/scb_histogram_icon.png"> gate icon then click and drag your cursor within the graph to draw a gate. The % of cells within the gate will be calculated. 

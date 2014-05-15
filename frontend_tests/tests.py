@@ -196,8 +196,26 @@ class SimpleTest(TestCase):
         self.select_lysates_facs()
         self.navigate_via('PREPARE SAMPLES')
         time.sleep(2)
-        pudb.set_trace()
-        self.navigate_via_button('RUN SAMPLES')
+        self.navigate_via_button('scb_f_facs_run_samples_short')
+        self.navigate_via_button('scb_f_facs_tools_start_analysis')
+        self.navigate_via_button('scb_s_facs_tools_instructions_followup_toggle')
+        time.sleep(5)
+        self.navigate_via_button('scb_s_instructions_close')
+        self.navigate_via_button('scb_s_facs_histogram_info')
+        time.sleep(2)
+        self.navigate_via_button('scb_s_facs_histogram_info')
+        self.navigate_via_button('scb_s_facs_histogram_info')
+        time.sleep(2)
+        self.navigate_via_button('scb_s_facs_single_range_button')
+        self.navigate_via_button('scb_s_facs_tools_samples_followup_toggle')
+        time.sleep(5)
+        self.navigate_via_button('scb_s_samples_close')
+        time.sleep(2)
+        #can't see graph in test, so cannot test facs graph with this selenium 
+        #need to test microscopy in sample usability test, in same problem set
+        
+    	
+        
         
 
     ## navigation helpers and assertions
