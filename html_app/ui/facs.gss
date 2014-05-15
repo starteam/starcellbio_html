@@ -163,7 +163,7 @@ background-color:lightgray !important;
 }
 
 .scb_s_facs_double_range_button{
-background-image: url('../../images/header/scb_histogram_icon.png') !important;
+background-image: url('../../images/header/scb_bisector_icon.png') !important;
 height: 16px;
 width: 26px;
 background-repeat: no-repeat !important;
@@ -173,7 +173,7 @@ background-color:lightgray !important;
 
 .scb_s_facs_double_range_button:active{
 border-style:inset;
-background-image: url('../../images/header/scb_histogram_icon.png') !important;
+background-image: url('../../images/header/scb_bisector_icon.png') !important;
 height: 16px;
 width: 26px;
 background-repeat: no-repeat !important;
