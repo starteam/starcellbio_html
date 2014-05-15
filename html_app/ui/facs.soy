@@ -498,6 +498,8 @@ FACS Main View
         {if $facs.samples_finished}
         <button class='scb_f_facs_tools_toggle scb_s_facs_tools_samples_followup_toggle'  role='button' aria-label='Samples Info' note='scb_s_facs_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              facs_id='{$facs.id}'></button>
+             
+    	
     	{/if}
     		<div class='scb_s_facs_tools_samples_followup {if $facs.samples_show_state}{else}scb_s_hidden_note{/if}' role='note' >
 
@@ -604,6 +606,14 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
             experiment_id='{$experiment.id}' aria-checked='{if $facs.sample_analysis}true{else}false{/if}'
             facs_id='{$facs.id}' id="scb_facs_check" type='checkbox' {if $facs.sample_analysis}checked{/if}><label class="scb_s_facs_label" for="scb_facs_check">
             	<img src="images/header/scb_histogram_icon.png"></label> </input>
+
+       <input class='scb_s_facs_double_range_button' assignment_id='{$assignment.id}'
+            experiment_id='{$experiment.id}' aria-checked='{if $facs.sample_analysis}true{else}false{/if}'
+            facs_id='{$facs.id}' id="scb_facs_check2" type='checkbox' {if $facs.sample_analysis}checked{/if}><label class="scb_s_facs_label" for="scb_facs_check2">
+            	<img src="images/header/scb_histogram_icon.png"></label> </input>
+
+
+
     {if $lane.canvas_metadata_analysis}
     {if $lane.canvas_metadata_analysis.ranges}
     {if $lane.canvas_metadata_analysis.ranges.length > 0}
