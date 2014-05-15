@@ -199,7 +199,7 @@ scb.ui.static.FacsView.scb_s_facs_double_range_button= function(element, event){
         alert("INVALID ELEMENT!");
     }
 
-    parsed.facs.sample_analysis =  !parsed.facs.sample_analysis;
+    parsed.facs.double_analysis =  !parsed.facs.double_analysis;
     scb.ui.static.MainFrame.refresh();
 };
 
