@@ -214,20 +214,20 @@ scb_microscopy.display_slide_types = function(opt_data, opt_sb) {
         }
       }
     } else {
-      output.append('IF.conditions', (soy.$$getMapKeys(opt_data.kinds).length != 1 || soy.$$getMapKeys(opt_data.kinds.IF.conditions).length != 1) ? '<option  role=\'option\' selected="selected" disabled="disabled" value=\'\'>Select Analysis</option>' : '');
+      output.append((soy.$$getMapKeys(opt_data.kinds).length != 1 || soy.$$getMapKeys(opt_data.kinds.IF.conditions).length != 1) ? '<option  role=\'option\' selected="selected" disabled="disabled" value=\'\'>Select Analysis</option>' : '');
       if (opt_data.lane.cell_treatment.cell_line == opt_data.assignment.template.model.microscopy.valid[0] && opt_data.lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id == opt_data.assignment.template.model.microscopy.valid[1]) {
-        var kList1179 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser[opt_data.lane.cell_treatment.treatment_list.list[0].collection_id]);
-        var kListLen1179 = kList1179.length;
-        for (var kIndex1179 = 0; kIndex1179 < kListLen1179; kIndex1179++) {
-          var kData1179 = kList1179[kIndex1179];
-          output.append('<option role=\'option\' value=\'', soy.$$escapeHtml(kData1179), '\'>', soy.$$escapeHtml(opt_data.kinds[kData1179].name), '</option>');
+        var kList1178 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser[opt_data.lane.cell_treatment.treatment_list.list[0].collection_id]);
+        var kListLen1178 = kList1178.length;
+        for (var kIndex1178 = 0; kIndex1178 < kListLen1178; kIndex1178++) {
+          var kData1178 = kList1178[kIndex1178];
+          output.append('<option role=\'option\' value=\'', soy.$$escapeHtml(kData1178), '\'>', soy.$$escapeHtml(opt_data.kinds[kData1178].name), '</option>');
         }
       } else {
-        var kList1187 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser['default']);
-        var kListLen1187 = kList1187.length;
-        for (var kIndex1187 = 0; kIndex1187 < kListLen1187; kIndex1187++) {
-          var kData1187 = kList1187[kIndex1187];
-          output.append('<option role=\'option\' value=\'', soy.$$escapeHtml(kData1187), '\'>', soy.$$escapeHtml(opt_data.kinds[kData1187].name), '</option>');
+        var kList1186 = soy.$$getMapKeys(opt_data.assignment.template.slide_parser['default']);
+        var kListLen1186 = kList1186.length;
+        for (var kIndex1186 = 0; kIndex1186 < kListLen1186; kIndex1186++) {
+          var kData1186 = kList1186[kIndex1186];
+          output.append('<option role=\'option\' value=\'', soy.$$escapeHtml(kData1186), '\'>', soy.$$escapeHtml(opt_data.kinds[kData1186].name), '</option>');
         }
       }
     }

@@ -189,6 +189,7 @@ scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
     }
 
     parsed.facs.sample_analysis =  !parsed.facs.sample_analysis;
+    parsed.facs.double_analysis = false;
     scb.ui.static.MainFrame.refresh();
 };
 
@@ -200,29 +201,9 @@ scb.ui.static.FacsView.scb_s_facs_double_range_button= function(element, event){
     }
 
     parsed.facs.double_analysis =  !parsed.facs.double_analysis;
+    parsed.facs.sample_analysis = false;
     scb.ui.static.MainFrame.refresh();
 };
-
-
-// scb.ui.static.FacsView.scb_s_facs_tools_instructions_show = function (show) {
-//     var jqDiv = $('.scb_s_facs_tools_instructions_followup');
-//     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
-//     if (show)  jqDiv.slideDown(); else  jqDiv.slideUp();
-//     
-//         $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
-//         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
-// }
-// 
-// //called status because state is already used, maintains open/close state of instructions
-// scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_status = function (show) {
-//     var jqDiv = $('.scb_s_facs_tools_instructions_followup');
-//     scb.ui.static.FacsView.scb_s_facs_tools_instructions_show_state = show;
-//     if (show)  jqDiv.show(); else  jqDiv.hide();
-//     
-//     
-//         $('.scb_s_facs_tools_instructions_followup_toggle').html('?');
-//         $('.scb_s_facs_tools_instructions_followup_toggle').blur();
-// }
 
 
 scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
@@ -460,6 +441,9 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     function range(pts) {
         var carray = _.difference(colors, _.pluck(points, 'c'));
         var c = carray.length > 0 ? carray[0] : colors[0];
+        if(_.size(state.facs.midpoint) != 0){
+        	c = state.facs.midpoint.color;
+        }
         var from = pts.from;
         var to = pts.to;
         var horizontal = pts.y;
@@ -479,6 +463,7 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
                 percentage += element[1];
             }
         });
+
         range.percentage = Math.round(percentage / total * 100);
         //data.push({data: series, color: pts.c });
         data.push({data: [
@@ -578,6 +563,90 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 
                 }
             }
+            if (state.facs.double_analysis) {
+            	console.log('click double analysis')
+            	if(state.facs.gate_count == 0){
+            		state.facs.midpoint = {};
+            		console.log('click gate_count')
+						console.info("SET FROM " + px);
+						from = px;
+						from = from > 0 ? from : 0;
+						fromy= py;
+						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
+							left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
+
+						var point = match(px, py);
+						point_to_edit = point;
+						state.facs.gate_count++;
+
+                }
+                else if(state.facs.gate_count == 1){
+                	console.log('onsecondgate')
+                	if (!isNaN(from)) {
+						var to = px;
+						to = to > 0 ? to : 0;
+						if (point_to_edit) {
+							if (Math.abs(point_to_edit.from - from) < sensitivity) {
+								point_to_edit.from = to;
+							} else {
+								point_to_edit.to = to;
+							}
+						}
+						else {
+							state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
+						}
+						point_to_edit = null;
+						scb.ui.static.FacsView.reevaluate_metadata(state);
+						state.facs.gate_count++;
+						state.facs.apply_dna_analysis_to_all = false;
+						$('.scb_s_facs_chart_helper').text('');
+
+						state.facs.midpoint.from = px;
+						state.facs.midpoint.from = state.facs.midpoint.from > 0 ? state.facs.midpoint.from : 0;
+						state.facs.midpoint.fromy= py-5;
+						state.facs.midpoint.from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
+							left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
+
+						var point = match(px, py-5);
+						state.facs.midpoint.point_to_edit = point;
+						state.facs.midpoint.color = match(px, py).c;
+						console.log(from);
+						scb.ui.static.MainFrame.refresh();
+						
+						
+					}
+                }
+                 else if(state.facs.gate_count == 2){
+                	console.log('onthirdgate')
+                	state.facs.gate_count=0;
+                	if (!isNaN(from)) {
+						var to = px;
+						to = to > 0 ? to : 0;
+						if (point_to_edit) {
+							if (Math.abs(point_to_edit.from - from) < sensitivity) {
+								point_to_edit.from = to;
+							} else {
+								point_to_edit.to = to;
+							}
+						}
+						else {
+							state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
+						}
+						point_to_edit = null;
+						scb.ui.static.FacsView.reevaluate_metadata(state);
+						state.facs.gate_count=0;
+						state.facs.midpoint = {};
+						state.facs.apply_dna_analysis_to_all = false;
+						from = NaN;
+						$('.scb_s_facs_chart_helper').text('');
+
+						scb.ui.static.MainFrame.refresh();
+						
+						
+						
+					}
+                }
+            }
         };
         var match = function (px, py) {
             var point = _.find(state.facs_lane.canvas_metadata_analysis.points, function (e) {
@@ -663,6 +732,100 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     from = NaN;
                     scb.ui.static.MainFrame.refresh();
                 }
+            }
+            else if(state.facs.double_analysis){
+            	console.log('double.analysis for move');
+                window._dump_event = e;
+                console.log(state.facs.gate_count);
+                console.log(from);
+                if(state.facs.gate_count == 2){
+                		from = state.facs.midpoint.from;
+                		fromy = state.facs.midpoint.fromy;
+                		from_point = state.facs.midpoint.from_point;
+                		point_to_edit = state.facs.midpoint.point_to_edit;
+                	}
+                if(button == 0 && !isNaN(from) && (state.facs.gate_count ==1 || state.facs.gate_count ==2)){
+                    var to_point = {
+                        top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
+                    };
+                    var left = from_point.left > to_point.left;
+                    var styles = {
+                        position: 'absolute',
+                        top: from_point.top+'px',
+                        left: Math.min(from_point.left, to_point.left) + "px",
+                        height: '5px',
+                        color:point_to_edit? point_to_edit.c : '#808080',
+                        background: (point_to_edit ? ( left ? point_to_edit.c : 'white' ) : '#a0a0a0'),
+                        width: Math.abs(from_point.left - to_point.left) + "px",
+                        'border-left': (point_to_edit ? ( left ? '2px solid ' + point_to_edit.c : '1px solid white' ) : '2px dotted #a0a0a0'),
+                        'border-right': (point_to_edit ? ( !left ? '2px solid ' + point_to_edit.c : '1px solid white') : '2px dotted #a0a0a0'),
+                        'vertical-align': 'center',
+                    }
+                    console.info(styles);
+                    $('.scb_s_facs_chart_helper').css(styles);
+                    if (point_to_edit) {
+                        console.info("ew" + px);
+                        $(plot.getPlaceholder()).css('cursor', 'ew-resize');
+                    }
+                    else {
+                        console.info("pt" + px);
+                        $(plot.getPlaceholder()).css('cursor', 'pointer');
+                    }
+                }
+               	//if buttons is released and there is not a starting point, just browsing the screen
+                if (button == 0 && isNaN(from)) {
+                    // is it over line?
+                    var point = match(px, py);
+                    if (point) {
+                        console.info("ew" + px);
+                        $(plot.getPlaceholder()).css('cursor', 'ew-resize');
+                    }
+                    else {
+                        console.info("pt" + px);
+                        $(plot.getPlaceholder()).css('cursor', 'pointer');
+                    }
+                    console.info(point);
+                }
+                //if button depressed and there is a starting point 
+                if (button == 1 && !isNaN(from) && (state.facs.gate_count ==0)) {
+                    var to_point = {
+                        top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
+                    };
+                    var left = from_point.left > to_point.left;
+                    var styles = {
+                        position: 'absolute',
+                        top: from_point.top+'px',
+                        left: Math.min(from_point.left, to_point.left) + "px",
+                        height: '5px',
+                        color:point_to_edit? point_to_edit.c : '#808080',
+                        background: (point_to_edit ? ( left ? point_to_edit.c : 'white' ) : '#a0a0a0'),
+                        width: Math.abs(from_point.left - to_point.left) + "px",
+                        'border-left': (point_to_edit ? ( left ? '2px solid ' + point_to_edit.c : '1px solid white' ) : '2px dotted #a0a0a0'),
+                        'border-right': (point_to_edit ? ( !left ? '2px solid ' + point_to_edit.c : '1px solid white') : '2px dotted #a0a0a0'),
+                        'vertical-align': 'center',
+                    }
+                    console.info(styles);
+                    $('.scb_s_facs_chart_helper').css(styles);
+                    if (point_to_edit) {
+                        console.info("ew" + px);
+                        $(plot.getPlaceholder()).css('cursor', 'ew-resize');
+                    }
+                    else {
+                        console.info("pt" + px);
+                        $(plot.getPlaceholder()).css('cursor', 'pointer');
+                    }
+                }
+                
+//                 //if button is depressed and there is not a starting point, you have not drawn a line yet. 
+//                 if (button == 1 && isNaN(from)) 
+
+//                 //if buttons is released and there is not a starting point, just browsing the screen
+//                 if (button == 0 && isNaN(from)) 
+
+//                 //if button is released and there is a starting point, you are finishing the segment 
+//                 if (button == 0 && !isNaN(from)) 
             }
         }
         eventHolder.click(click);

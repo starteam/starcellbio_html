@@ -501,23 +501,27 @@ input[type=radio]:disabled{
 }
 
 .sample_prep_select_facs{
-	width: 75px;
+	width: 63px;
 }
 
 .sample_prep_samples_facs{
-	width: 342px;
+	width: 324px;
 }
 
 .sample_prep_cellt_facs{
-	width: 195px;
+	width: 168px;
 }
 
 .sample_prep_dna_facs{
-	width: 279px;
+	width: 311px;
 }
 
 .sample_prep_blank_facs{
 	width:10px;
+}
+
+.sample_prep_cond_facs{
+	width: 296px;
 }
 
 .scb_s_facs_samples_table {
@@ -774,7 +778,7 @@ input[type=radio]:disabled{
 
 .scb_f_facs_dna_followup{
 	display:none;
-	right: -66px;
+	right: 98px;
 	position: absolute;
 	width: 181px;
 	background: #f4f6f8;
@@ -791,7 +795,7 @@ input[type=radio]:disabled{
 
 .scb_s_facs_dna_info{
 	outline: none;
-	right: 113px;
+	right: 277px;
 	bottom: -3px;
 	position: absolute;
 	background: none;
@@ -841,7 +845,7 @@ input[type=radio]:disabled{
 
 .scb_f_facs_cell_followup{
 	display:none;
-	right: 144px;
+	right: 257px;
 	position: absolute;
 	width: 205px;
 	background: #f4f6f8;
@@ -858,7 +862,7 @@ input[type=radio]:disabled{
 
 .scb_s_facs_cell_info{
 	outline: none;
-	right: 349px;
+	right: 462px;
 	bottom: -3px;
 	position: absolute;
 	background: none;
