@@ -115,6 +115,7 @@ scb.FacsLane = function scb_FacsLane(data, context, parent) {
     self.parent = parent;
     scb.ModelHelpers.common_entry_code(self, data, context);
     scb.Utils.initialize_accessor_field(self, data, 'kind', _.keys(context.template.facs_kinds)[0], null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'conditions', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'cell_treatment_id', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'canvas_metadata', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'canvas_metadata_analysis', {points: [], ranges: []}, null, context);

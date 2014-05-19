@@ -352,13 +352,15 @@ FACS Main View
             <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border'>
                 {if $r.kind == 'existing'}
                 <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
-                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}' role='button' aria-label='Close Tab'
-                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>&#215;
-                </button>
+						assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}' role='button' aria-label='Delete Sample'
+				{if $r.is_sample_enabled}{else}disabled="disabled"{/if}><img alt="Delete" title="Delete" src="images/setup/scb_remove.png">
+				</button>
                 {else}
+<!-- 
                 <button class="scb_f_facs_sample_remove" role='button' aria-label='Close Tab'
                         disabled="disabled">&#215;
                 </button>
+ -->
 
                 {/if}
             </td>
@@ -459,6 +461,7 @@ FACS Main View
 @param kinds
 */
 {template .display_lysate_types}
+
 {if length(keys($kinds)) ==1}
 		{foreach $k in keys($kinds)}
 		<span class="scb_f_facs_select_lysate_type {if $lane.is_valid}{else}scb_s_microscopy_dim_conditions{/if}" cell_treatment_id='{$cell_treatment.id}'

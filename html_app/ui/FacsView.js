@@ -59,24 +59,89 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
     if (sample_kind == '') {
         return;
     }
+     var matches_list = [];
+    var keys_list = [];
     var lane_id = $(element).attr('lane_id');
     if (lane_id == '') {
         var cell_treatment_id = $(element).attr('cell_treatment_id');
-        var lane = parsed.facs.lanes_list.start({
-            kind: sample_kind,
-            cell_treatment_id: cell_treatment_id,
-            experiment_id: parsed.experiment.id
-        });
-        $(element).attr('lane_id', lane.id);
-        $(element).attr('lane_kind', 'existing');
-        if (event) {
-            scb.ui.static.MainFrame.refresh();
+        var lanes = _.filter(parsed.facs.lanes_list.list, function(lane) {return cell_treatment_id == lane.cell_treatment_id});
+		//lane.kind == sample_kind && 
+		
+		var i = lanes.length; //or 10
+		while(i--){
+			var lane = lanes[i];
+			_.each(parsed.assignment.template.facs_kinds, function(x){ keys_list = keys_list.concat(_.keys(x.conditions));});
+			matches_list.push(lane.conditions)
+		}
+        
+        matches_list = jQuery.unique( matches_list );
+		keys_list = jQuery.unique( keys_list );
+        
+       if(keys_list.length > 0 && $(matches_list).not(keys_list).length == 0 && $(keys_list).not(matches_list).length == 0){
+				
+				$('html').css('overflow', 'hidden');
+				$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+				$.jqDialog.alert("You've already selected this slide option.", 
+					function() {	
+							$('html').css('overflow', 'visible');
+							$('.error_overlay').remove();
+							scb.ui.static.MainFrame.refresh();
+					/* callback function for 'OK' button*/ });
+				$('.jqDialog_header').remove();		
+				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
+				return;
+				
+		}
+        
+        
+       if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 //|| 
+       	  //_.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])==1 || 
+       	  //_.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope) == 1
+       	  )
+       {
+       		var slide_conditions_val = ''
+       		if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 ){
+       			slide_conditions_val = _.keys(parsed.assignment.template.facs_kinds[sample_kind].conditions)[0]
+       		}
+//        		else if(  _.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])==1){
+//        			slide_conditions_val = _.keys(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.list[0].collection_id][slide_type])[0]
+//        		}
+//        		else if(  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope) == 1){
+//        			slide_conditions_val = _.keys(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope)[0]
+//        		}
+       			parsed.facs.lanes_list.start({
+       				kind: sample_kind,
+            		conditions: slide_conditions_val,
+            		cell_treatment_id: cell_treatment_id,
+           			experiment_id: parsed.experiment.id
+        		});
+       }
+       else{
+        	parsed.facs.lanes_list.start({
+           		kind: sample_kind,
+            	cell_treatment_id: cell_treatment_id,
+            	experiment_id: parsed.experiment.id
+        	});
         }
+        
+        
+
+//         var lane = parsed.facs.lanes_list.start({
+//             kind: sample_kind,
+//             cell_treatment_id: cell_treatment_id,
+//             experiment_id: parsed.experiment.id
+//         });
+//         $(element).attr('lane_id', lane.id);
+//         $(element).attr('lane_kind', 'existing');
     }
     else {
         parsed.facs.lanes_list.get(lane_id).kind = sample_kind;
     }
-
+		 if (event) {
+            scb.ui.static.MainFrame.refresh();
+        }
 }
 
 scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
@@ -218,6 +283,23 @@ scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
 		
 }
 
+
+scb.ui.static.FacsView.scb_f_facs_sample_remove = function (element) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed.experiment.last_scroll=document.body.scrollTop;
+//         parsed.facs.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
+
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    var lysate_id = $(element).attr('lane_id');
+    if (lysate_id != '') {
+        parsed.facs.lanes_list.remove(lysate_id);
+    }
+    scb.ui.static.MainFrame.refresh();
+}
+
 scb.ui.static.FacsView.scb_f_facs_tools_toggle = function (element) {
 	var parsed = scb.ui.static.FacsView.parse(element);
 	var note = $(element).attr('note');
@@ -351,6 +433,9 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
+    });
+   scb.utils.off_on(workarea, 'click', '.scb_f_facs_sample_remove', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_sample_remove(this);
     });
    
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples_short', function (e) {
@@ -565,7 +650,70 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             }
             if (state.facs.double_analysis) {
             	console.log('click double analysis')
-            	if(state.facs.gate_count == 0){
+            	if( state.facs.gate_count== 100){
+					console.info("Click on: " + px + " " + py);
+					var point = Math.round(px);
+					if (!isNaN(from)) {
+						var to = px;
+						to = to > 0 ? to : 0;
+						var second_point = {};
+						_.each(state.facs_lane.canvas_metadata_analysis.ranges, function(x){
+								if((point_to_edit.from == x.to || point_to_edit.to == x.from)&& point_to_edit.c == x.color){
+									second_point = x;
+								}
+						});
+						if (point_to_edit) {
+							if (Math.abs(point_to_edit.from - from) < sensitivity) {
+								point_to_edit.from = to;
+							} else {
+								point_to_edit.to = to;
+							}
+						}
+						
+						if (_.size(second_point)!=0) {
+							second_point = {from: second_point.from, to: second_point.to, y: point_to_edit.y, c: point_to_edit.c};
+							if (Math.abs(point_to_edit.from - from) < sensitivity) {
+								second_point.to = to;
+							} else {
+								second_point.from = to;
+							}
+						}
+						
+						
+						
+						
+						point_to_edit = null;
+						second_point = null;
+						scb.ui.static.FacsView.reevaluate_metadata(state);
+						state.facs.apply_dna_analysis_to_all = false;
+						from = NaN;
+						$('.scb_s_facs_chart_helper').text('');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						scb.ui.static.MainFrame.refresh();
+
+					}
+            
+            		 state.facs.gate_count= 0;
+            	}
+            	else if(state.facs.gate_count == 0){
             		state.facs.midpoint = {};
             		console.log('click gate_count')
 						console.info("SET FROM " + px);
@@ -788,7 +936,19 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     console.info(point);
                 }
                 //if button depressed and there is a starting point 
+                if (button == 1 && isNaN(from) && (state.facs.gate_count ==0)) {
+                    console.info("SET FROM " + px);
+                    from = px;
+                    from = from > 0 ? from : 0;
+                    fromy= py;
+                    from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
+
+                    var point = match(px, py);
+                    point_to_edit = point;
+                }
                 if (button == 1 && !isNaN(from) && (state.facs.gate_count ==0)) {
+                state.facs.gate_count= 100;
                     var to_point = {
                         top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
                         left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
@@ -925,8 +1085,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 		else $('.scb_s_facs_right_facs').prop('disabled', false);
 			
         if (kind == 'sample_prep') {
-            if (_.keys(template.lysate_kinds).length == 1) {
-                $('button.scb_f_facs_sample_remove').hide();
+            if (_.keys(template.lysate_kinds).length == 1 && _.keys(template.facs_kinds[Object.keys(template.facs_kinds)[0]].conditions).length == 1) {
+                //$('button.scb_f_facs_sample_remove').hide();
             }
 
         }

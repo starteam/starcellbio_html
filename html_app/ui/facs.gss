@@ -477,6 +477,14 @@ input[type=radio]:disabled{
     font-size: 9pt;
 }
 
+
+.scb_f_facs_sample_remove{
+	outline: none;
+	border: none;
+	background: none;
+	cursor:pointer;
+}
+
 .scb_s_facs_tab_content {
 	margin-top: -27px;
  	background-color: #FFFFFF;

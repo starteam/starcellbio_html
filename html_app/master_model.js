@@ -3884,7 +3884,7 @@ var __microscopy_test = {
 		}
 		};		
 
-var __decusability2 = {
+var __decusability_old = {
         id: 'decusability',
         name: 'StarCellBio Usability Test',
         course: 'usability',
