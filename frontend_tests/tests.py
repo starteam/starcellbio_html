@@ -211,6 +211,12 @@ class SimpleTest(TestCase):
         time.sleep(5)
         self.navigate_via_button('scb_s_samples_close')
         time.sleep(2)
+        self.navigate_via('ASSIGNMENTS')
+        self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.open_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        time.sleep(5)
         #can't see graph in test, so cannot test facs graph with this selenium 
         #need to test microscopy in sample usability test, in same problem set
         
