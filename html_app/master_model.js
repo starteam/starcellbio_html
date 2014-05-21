@@ -11237,12 +11237,15 @@ $(function () {
 			assignment_706_2014_ps2 = get_courses_result.list[x];
 			//assignment_706_2014_ps2 = choose_n_mutant_strains(assignment_706_2014_ps2.template.random_order, ['m1', 'm2'], assignment_706_2014_ps2);
 			
+			//save in temporary variables the 5 treatments
 			var element1 = assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[1];
 			var element2 = assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[2];
 			var element3 = assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[3];
 			var element4 = assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[4];
 			var element5 = assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[5];
 			
+			
+			//based on the random order, reinsert the elements in the appropriate spot
 			for(var y = 0; y < assignment_706_2014_ps2.template.random_order.length; y++){
 				var element = null;
 				if(assignment_706_2014_ps2.template.random_order[y] == 1){
@@ -11263,13 +11266,19 @@ $(function () {
 				assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[y+1] = element;
 				
 			}
+			
+			//In the order I replace each of the numbers with their corresponding rna name
 			var order_array = ps2_change(assignment_706_2014_ps2.template.random_order);
 			
+			
+			//rename the 5 proteins to their new order, determined by the for loop above
 			assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[1].cells[2].text = 'siRNA #1';
 			assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[2].cells[2].text =  'siRNA #2';
 			assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[3].cells[2].text = 'siRNA #3';
 			assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[4].cells[2].text = 'siRNA #4' ;
 			assignment_706_2014_ps2.template.ui.add_multiple_dialog.S2.rows[5].cells[2].text = 'siRNA #5';
+			
+			//replace the names of the drugs in the template with the new order array.
 			replace_names(assignment_706_2014_ps2.template.drugs, order_array, ['siRNA #1', 'siRNA #2', 'siRNA #3', 'siRNA #4' , 'siRNA #5']);
 			
 			
