@@ -71,7 +71,6 @@
 <script type="text/javascript" src="/static/components/WesternBlotCanvas.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/HomepageView.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/test/gen/test.soy.js?_=1400679332" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/js/jquery-1.7.2.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/Drugs.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/Microscopy.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/assignments/mit706s14ps2/gen/instructions.soy.js?_=1400679332" charset="UTF-8"></script>
@@ -91,7 +90,6 @@
 <script type="text/javascript" src="/static/components/ModelFactory.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/CollectionSchedule.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/LensMap.js?_=1400679332" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/base64.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/ui/gen/contact.soy.js?_=1400679332" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/model/FacsLanes.js?_=1400679332" charset="UTF-8"></script>
@@ -171,4 +169,9 @@
 <script type="text/javascript" src="/static/ui/ExperimentDesignView.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/../scb/get_courses.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/../scb/get_model.js" charset="UTF-8"></script>
-</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid="invalid"'};</script></body><script src='//cdn.ravenjs.com/1.1.11/jquery,native/raven.min.js'></script> <script> Raven.config('https://7845856fc975496e8dc2130b7140b19c@app.getsentry.com/19461', { whitelistUrls: ['starcellbio.mit.edu'] }).install(); </script>
+
+</head><body><div id='main'></div><script>$(function(){
+  var jquery = $.noConflict();
+  if(! window.$ ) { window.$ = jquery; } 
+  starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid="invalid"'};</script></body>
+

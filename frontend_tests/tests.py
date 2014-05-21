@@ -211,6 +211,7 @@ class SimpleTest(TestCase):
         time.sleep(5)
         self.navigate_via_button('scb_s_samples_close')
         time.sleep(2)
+        pudb.set_trace()
         self.navigate_via('ASSIGNMENTS')
         self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
@@ -233,6 +234,17 @@ class SimpleTest(TestCase):
         self.navigate_via('2. SETUP & RUN')
         self.assert_on_experiment_setup_page()
         self.select_new_set_up()
+        button = self.find_by_class_name('scb_s_experiment_setup_table_element')
+        button.click()
+        time.sleep(3)
+        
+        self.navigate_via('RUN EXPERIMENT')
+        self.navigate_via('RUN EXPERIMENT')
+        print 'after run experiment click'
+        
+        time.sleep(5)
+        self.navigate_via('CONFIRM SET-UP')
+        self.assert_on_select_technique_page()
         time.sleep(5)
         #can't see graph in test, so cannot test facs graph with this selenium 
         #need to test microscopy in sample usability test, in same problem set
@@ -478,16 +490,16 @@ class SimpleTest(TestCase):
         
         
     def test_sortable(self):
-    	with open(settings.rel('../html_app/js/jquery-1.7.2.js')) as jquery_js_2:
-    		jquery = jquery_js_2.read()
-    	self.driver.execute_script(jquery)
-    	with open(settings.rel('jquery.simulate.drag-sortable.js')) as jquery_js_3:
-    		jquery_drag = jquery_js_3.read()
-    	self.driver.execute_script(jquery_drag)
+#    	with open(settings.rel('../html_app/js/jquery-1.7.2.js')) as jquery_js_2:
+#    		jquery = jquery_js_2.read()
+#    	self.driver.execute_script(jquery)
+#    	with open(settings.rel('jquery.simulate.drag-sortable.js')) as jquery_js_3:
+#    		jquery_drag = jquery_js_3.read()
+#    	self.driver.execute_script(jquery_drag)
     	#Need this library to be injected beyond the jquery to make sure you don't get errors for the other selectors
-    	with open(settings.rel('../html_app/js/jquery.ba-bbq.min.js')) as jquery_js_4:
-    		jquery_bbq = jquery_js_4.read()
-    	self.driver.execute_script(jquery_bbq)
+#    	with open(settings.rel('../html_app/js/jquery.ba-bbq.min.js')) as jquery_js_4:
+#    		jquery_bbq = jquery_js_4.read()
+#    	self.driver.execute_script(jquery_bbq)
     	script = "$($('.scb_s_western_blot_choose_samples_list_item')[0]).simulateDragSortable({ move: 1 });"
     	success = self.driver.execute_script(script)
     	
