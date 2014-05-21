@@ -216,6 +216,23 @@ class SimpleTest(TestCase):
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.open_assignment('microscopy_test', title='StarCellBio Microscopy Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.assert_on_experiment_design_page()
+        experiment_title = 'Test Experiment'
+        experiment_hypo = 'Sample hypothesis ABC'
+        experiment_obj = 'Sample objective ABC'
+        self.set_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
+        self.navigate_via('ASSIGNMENTS')
+        self.assert_on_assignments_page()
+        self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.navigate_via('EXPERIMENTS')
+        self.assert_on_experiment_design_page()
+        self.assert_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
+        self.navigate_via('EXPERIMENT SETUP')
+        self.navigate_via('1. DESIGN')
+        self.navigate_via('2. SETUP & RUN')
+        self.assert_on_experiment_setup_page()
+        self.select_new_set_up()
         time.sleep(5)
         #can't see graph in test, so cannot test facs graph with this selenium 
         #need to test microscopy in sample usability test, in same problem set
