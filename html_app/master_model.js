@@ -3892,7 +3892,7 @@ var __microscopy_test = {
 		}
 		};		
 
-var __decusability_old = {
+var __decusability = {
         id: 'decusability',
         name: 'StarCellBio Usability Test',
         course: 'usability',
@@ -10528,9 +10528,9 @@ var ps2_strain_E = {
                             
                     };
 
-var __decusability = {
-        id: 'decusability',
-        name: 'StarCellBio Usability Test',
+var __decusability_newfacs = {
+        id: 'decusability2',
+        name: 'StarCellBio Usability Test2',
         course: 'usability',
     	course_name: 'December 2013 Usability Testing',
         description: 'FACS and Western Blot for temperature sensitive mutants',
@@ -11145,7 +11145,7 @@ master_model_data = {
     app_description: 'StarCellBio Placeholder',
     assignments: {
         list: [ 
-         __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability, __microscopy_test, __assignment_706_2014  , __assignment_706_2014_ps2 
+         __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability,  __microscopy_test, __assignment_706_2014  , __assignment_706_2014_ps2, __decusability_newfacs 
         ]
     },
     ui: {}
@@ -11162,6 +11162,7 @@ $(function () {
 	var usability_test = {};
 	var assignment_706 = {};
 	var decusability = {};
+	var decusability_newfacs = {};
 	var assignment_tufts = {};	
 	var microscopy_test ={};
 	var assignment_706_2014 ={};
@@ -11323,6 +11324,30 @@ $(function () {
 				}
 			});
 			get_courses_result.list[x] = decusability;
+		}
+		
+		if(get_courses_result.list[x].id == 'decusability2'){
+			decusability_newfacs = get_courses_result.list[x];
+    		decusability_newfacs.template.instructions = [
+    			['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
+				['Introduction',scb_assignment_specific_decusability.intro()],
+				['Reference Material',scb_assignment_specific_decusability.ref()],
+    			['Question 1', scb_assignment_specific_decusability.question_1()],
+    			['Question 2', scb_assignment_specific_decusability.question_2()]
+    			];
+    		decusability_newfacs.template.experiment_setup = scb_assignment_specific_decusability.experiment_setup();
+
+			decusability_newfacs.template.ui.experiment_setup.actions.push({
+				name: 'ADD SAMPLES',
+				open: 'decusability.setup',
+				css: {
+					width: '800px',
+					height: '700px',
+					left: 'inherit',
+					top: '000px'
+				}
+			});
+			get_courses_result.list[x] = decusability_newfacs;
 		}
 		if(get_courses_result.list[x].id == 'assignment_tufts'){
 			assignment_tufts = get_courses_result.list[x];
