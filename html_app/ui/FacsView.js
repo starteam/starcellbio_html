@@ -30,7 +30,7 @@ scb.ui.static.FacsView.parse = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -50,7 +50,7 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
 
 scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -70,7 +70,6 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
 				while(i--){
 					var lane = lanes[i];
 			
-// 					keys_list = _.keys(lane.cell_treatment.treatment_list.list[0].facs);
 					_.each(parsed.assignment.template.facs_kinds, function(x){ keys_list = keys_list.concat(_.keys(x.conditions));});
 					matches_list.push(lane.conditions);
 				}
@@ -97,17 +96,12 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
 				}
 		
 		
-			   if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 //|| 
-				  //_.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope) == 1
-				  )
+			   if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 				  )
 			   {
 					var slide_conditions_val = ''
 					if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 ){
 						slide_conditions_val = _.keys(parsed.assignment.template.facs_kinds[sample_kind].conditions)[0]
 					}
-		//        		else if(  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope) == 1){
-		//        			slide_conditions_val = _.keys(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.list[0].microscope)[0]
-		//        		}
 						parsed.facs.lanes_list.start({
 							kind: sample_kind,
 							conditions: slide_conditions_val,
@@ -135,7 +129,7 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
 
 scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -183,7 +177,7 @@ scb.ui.static.FacsView.scb_f_facs_sample_inactive_all = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -196,7 +190,7 @@ scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
 
 scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -211,7 +205,7 @@ scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (e
 scb.ui.static.FacsView.scb_s_facs_selected = function (element) {
     
     var parsed = scb.ui.static.FacsView.parse(element);
-    parsed.experiment.last_scroll=document.body.scrollTop;
+    parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -225,7 +219,7 @@ scb.ui.static.FacsView.scb_s_facs_selected = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -237,7 +231,7 @@ scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, even
 
 scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -249,7 +243,7 @@ scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
 
 scb.ui.static.FacsView.scb_s_facs_double_range_button= function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -275,7 +269,7 @@ scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_sample_remove = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
-    parsed.experiment.last_scroll=document.body.scrollTop;
+    parsed = resetScrollValue(parsed);
 //         parsed.facs.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
 
     if (parsed.redisplay) {
@@ -303,7 +297,7 @@ scb.ui.static.FacsView.scb_f_facs_tools_toggle = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -322,7 +316,7 @@ scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -344,21 +338,21 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
 
 scb.ui.static.FacsView.scb_s_facs_left_facs = function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 	parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index -1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
 scb.ui.static.FacsView.scb_s_facs_right_facs = function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 	parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index +1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
 scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 	if(parsed.facs.parent.list.length==scb.ui.static.FacsView.TOTAL_TABS){
 		parsed.facs.parent.start_tabs_index = 1;
 	}
@@ -369,7 +363,7 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 
 scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -700,8 +694,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						from = px;
 						from = from > 0 ? from : 0;
 						fromy= py;
-						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
-							left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
+						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+							left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
 
 						var point = match(px, py);
 						point_to_edit = point;
@@ -732,8 +726,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						state.facs.midpoint.from = px;
 						state.facs.midpoint.from = state.facs.midpoint.from > 0 ? state.facs.midpoint.from : 0;
 						state.facs.midpoint.fromy= py-5;
-						state.facs.midpoint.from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
-							left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
+						state.facs.midpoint.from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+							left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
 
 						var point = match(px, py-5);
 						state.facs.midpoint.point_to_edit = point;
@@ -801,16 +795,16 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     from = px;
                     from = from > 0 ? from : 0;
                     fromy= py;
-                    from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
-                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
+                    from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
 
                     var point = match(px, py);
                     point_to_edit = point;
                 }
                 if (button == 1 && !isNaN(from)) {
                     var to_point = {
-                        top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
-                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
+                        top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left)
                     };
                     var left = from_point.left > to_point.left;
                     var styles = {
@@ -874,8 +868,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 	}
                 if(button == 0 && !isNaN(from) && (state.facs.gate_count ==1 || state.facs.gate_count ==2)){
                     var to_point = {
-                        top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
-                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
+                        top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left)
                     };
                     var left = from_point.left > to_point.left;
                     var styles = {
@@ -921,8 +915,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     from = px;
                     from = from > 0 ? from : 0;
                     fromy= py;
-                    from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
-                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left) };
+                    from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
 
                     var point = match(px, py);
                     point_to_edit = point;
@@ -930,8 +924,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 if (button == 1 && !isNaN(from) && (state.facs.gate_count ==0)) {
                 state.facs.gate_count= 100;
                     var to_point = {
-                        top: (e.clientY - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().top),
-                        left: (e.clientX - $('.scb_s_facs_chart_wrapper')[0].getBoundingClientRect().left)
+                        top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left)
                     };
                     var left = from_point.left > to_point.left;
                     var styles = {
@@ -986,7 +980,7 @@ scb.ui.static.FacsView.charts = function (workarea) {
 
         var chart = $(this);
         var parsed = scb.ui.static.FacsView.parse(this);
-        parsed.experiment.last_scroll=document.body.scrollTop;
+        parsed = resetScrollValue(parsed);
 
         parsed.chart = chart;
         scb.ui.static.FacsView.evaluate_chart(parsed);
@@ -1015,7 +1009,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         if($('.scb_s_facs_samples_table').length ==0)
         	scroll_num=scb.ui.static.FacsView.TOTAL_SCROLL;
         else
-        	scroll_num = $('.scb_s_facs_samples_table')[0].scrollTop;
+        	scroll_num = $('.scb_s_facs_samples_table', '.scb_s_facs_view').get(0).scrollTop;
         	
         workarea.html(scb_facs.main({
             global_template: gstate.context.master_model,
@@ -1035,7 +1029,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 
         
         if (kind == 'sample_prep'){
-        	$('.scb_s_facs_samples_table')[0].scrollTop = scroll_num;
+        	$('.scb_s_facs_samples_table', '.scb_s_facs_view').get(0).scrollTop = scroll_num;
         }
         state.experiment.prev_step=scb.ui.static.FacsView.TOTAL_STEPS;
         if(state.experiment.last_step >= scb.ui.static.FacsView.TOTAL_STEPS)
@@ -1065,9 +1059,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 		else $('.scb_s_facs_right_facs').prop('disabled', false);
 			
         if (kind == 'sample_prep') {
-//             if (_.keys(template.lysate_kinds).length == 1 && _.keys(template.facs_kinds[Object.keys(template.facs_kinds)[0]].conditions).length == 1) {
-//                 //$('button.scb_f_facs_sample_remove').hide();
-//             }
+
 
         }
         if (state.facs.samples_finished) {

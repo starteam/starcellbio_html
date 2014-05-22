@@ -47,8 +47,8 @@ scb.ui.static.HomepageView.register = function(workarea) {
             scb.utils.off_on(workarea, 'click', '.scb_f_signup_close_button', function () {
                 $('.scb_s_signup_dialog').detach();
             });
-            $('.iframe').load(function(){
-				var iframe = document.getElementsByTagName('iframe')[0];
+            $('.scb_f_signup_iframe').load(function(){
+				var iframe = $('.scb_f_signup_iframe').get(0);
 				var content = (iframe.contentDocument || iframe.contentWindow);
 				content.body.style.fontSize = '90%';
 				content.body.style.fontFamily = 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif';
@@ -60,7 +60,7 @@ scb.ui.static.HomepageView.register = function(workarea) {
 				$(texts).attr('placeholder', '');
 				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
 				
-				var iframe = $('.iframe').contents();
+				var iframe = $('.scb_f_signup_iframe').contents();
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 
 				iframe.find(".auth_submit_button").click(function(){
@@ -75,19 +75,19 @@ scb.ui.static.HomepageView.register = function(workarea) {
 
 					       $('.overlay').append(progress_icon);
 							
-						   $('.iframe').hide();
-						   $('.iframe').load(function(){
-						   	  var profile = $('.iframe').contents();
-						   	  if(profile[0].body.textContent.indexOf('confirmed') >0){
+						   $('.scb_f_signup_iframe').hide();
+						   $('.scb_f_signup_iframe').load(function(){
+						   	  var profile = $('.scb_f_signup_iframe').contents().get(0);
+						   	  if(profile.body.textContent.indexOf('confirmed') >0){
 						   	  	  parent.document.location.reload();
 									
 							   	  }
 							   	  
 							   	  else{
 							   	 		 $(mask).remove();
-							   	  	   $('.iframe').show();
-							   	  	   if($('.iframe').contents().find('.login_submit').length >0)
-							   	  	   	$('.iframe').contents().find('#errorMsg').html('Incorrect username or password. Try again');
+							   	  	   $('.scb_f_signup_iframe').show();
+							   	  	   if($('.scb_f_signup_iframe').contents().find('.login_submit').length >0)
+							   	  	   	$('.scb_f_signup_iframe').contents().find('#errorMsg').html('Incorrect username or password. Try again');
 							   	  	   
 							   	  }
 						   });

@@ -723,7 +723,7 @@ input[type=radio]:disabled{
     border-radius: 5px;
     border-spacing: 0;
     width:189px;
-    max-height:200px;
+    max-height:240px;
     display:block;
     background-color: white;
     margin-bottom: 20px;

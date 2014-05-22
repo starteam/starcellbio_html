@@ -38,7 +38,7 @@ scb.ui.static.WesternBlotGelView.parse = function (element) {
 
 scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -52,7 +52,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_primary = function (e
 
 scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -62,7 +62,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_anti_body_select_secondary = function 
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -107,7 +107,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_blot_and_develop = function 
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -124,7 +124,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_reprobe = function (element)
 
 scb.ui.static.WesternBlotGelView.scb_f_western_blot_gel_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -153,7 +153,7 @@ scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array = [0, 0,1, 2, 5,
 scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider = function (e, ui) {
     var element = this;
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -200,7 +200,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all = function (wo
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint = function (element, gstate, state) {
     var parsed = scb.ui.static.WesternBlotGelView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -341,7 +341,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_tab_select_many = function (
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_left_western_blot = function(element, event){
 	var parsed = scb.ui.static.WesternBlotGelView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
 	parsed.western_blot.gel_list.start_tabs_index = parsed.western_blot.gel_list.start_tabs_index -1;
 	scb.ui.static.MainFrame.refresh(parsed.state);
@@ -349,7 +349,7 @@ scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_left_western_blot = func
 
 scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_right_western_blot = function(element, event){
 	var parsed = scb.ui.static.WesternBlotGelView.parse(element);
-	parsed.experiment.last_scroll=document.body.scrollTop;
+	parsed = resetScrollValue(parsed);
 
 	parsed.western_blot.gel_list.start_tabs_index = parsed.western_blot.gel_list.start_tabs_index +1;
 	scb.ui.static.MainFrame.refresh(parsed.state);

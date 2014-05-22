@@ -23,7 +23,7 @@ html_prefix = "<!DOCTYPE html><html><head><META http-equiv='Content-Type' conten
 #html_prefix += '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=SourceSansPro">'
 html_suffix = js_prefix + "../scb/get_courses.js" + js_suffix
 html_suffix += js_prefix + "../scb/get_model.js" + js_suffix
-html_suffix += "</head><body><div id='main'></div><script>$(function(){starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid=\"invalid\"'};</script></body>"
+html_suffix += "</head><body><div id='main'></div><script>$(function(){ var jquery = $.noConflict();if(! window.$ ) { window.$ = jquery; } starcellbio('#main',{});}); window.clearCookie = function() { document.cookie='sessionid=\"invalid\"'};</script></body>"
 # add raven
 html_suffix += "<script src='//cdn.ravenjs.com/1.1.11/jquery,native/raven.min.js'></script> <script> Raven.config('https://7845856fc975496e8dc2130b7140b19c@app.getsentry.com/19461', { whitelistUrls: ['starcellbio.mit.edu'] }).install(); </script>"
 
