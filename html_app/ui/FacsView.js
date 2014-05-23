@@ -217,6 +217,20 @@ scb.ui.static.FacsView.scb_s_facs_selected = function (element) {
     }
 }
 
+scb.ui.static.FacsView.scb_s_western_blot_gel_tab = function (element){
+	
+	var parsed = scb.ui.static.FacsView.parse(element);
+	parsed = resetScrollValue(parsed);
+	
+	if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    
+    parsed.facs.lane_selected = parsed.facs_lane.id;
+    scb.ui.static.MainFrame.refresh();
+
+}
+
 scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
 	parsed = resetScrollValue(parsed);
@@ -417,6 +431,9 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_tab', function (e) {
+        scb.ui.static.FacsView.scb_s_western_blot_gel_tab(this);
+    });
    scb.utils.off_on(workarea, 'click', '.scb_f_facs_sample_remove', function (e) {
         scb.ui.static.FacsView.scb_f_facs_sample_remove(this);
     });
@@ -484,7 +501,7 @@ scb.ui.static.FacsView.register = function (workarea) {
     	else $(note).slideDown();
     });
 }
-
+var exp_id  = 0;
 scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     var facs_lane = state.facs_lane;
     facs_lane.canvas_metadata_analysis.points = facs_lane.canvas_metadata_analysis.points ? facs_lane.canvas_metadata_analysis.points : [];
@@ -496,30 +513,54 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     points = points.sort(function (a, b) {
         return a.from > b.from;
     });
-
-    var colors = [
-        "#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed", 'orange' , 'black' , 'green' , 'violet' , 'purple' , 'pink'
-    ];
+    
+    
+//     var colors = [
+//         "#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed", 'orange' , 'black' , 'green' , 'violet' , 'purple' , 'pink'
+//     ];
+    colors = ['#000000']
 
     var total = 0;
     _.each(raw_data.data, function (e) {
         total += e[1];
     });
-
+	
     function range(pts) {
         var carray = _.difference(colors, _.pluck(points, 'c'));
         var c = carray.length > 0 ? carray[0] : colors[0];
 //         if(_.size(state.facs.midpoint) != 0){
 //         	c = state.facs.midpoint.color;
 //         }
+		
         var from = pts.from;
         var to = pts.to;
         var horizontal = pts.y;
+        var new_id  = 0;
+        var bisector_id ='';
+        if(_.size(state.facs.midpoint) != 0 ){
+        	new_id = state.facs.midpoint.display_id;
+        	bisector_id = 'b';
+        }
+        else{
+        	if(!pts.display_id){
+        			
+	        	//new_id = Math.floor(Math.random()*1000000000).toString(27);
+	        	exp_id = exp_id +1;
+	        	new_id = exp_id;
+        		gates_id = new_id;
+        		bisector_id ='a';
+        	}
+        }
         pts.c = pts.c || c;
+        pts.display_id= pts.display_id || new_id;
+        pts.bisector_id = pts.bisector_id || bisector_id;
+        //Math.floor(Math.random()*1000000000).toString(27)
         var range = {
             from: pts.from,
             to: pts.to,
             color: pts.c,
+            display_id: pts.display_id,
+            bisector_id: pts.bisector_id,
             percentage: 0
         };
         var series = [];
@@ -558,12 +599,18 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
         }
         range(pts);
     }
+    ranges = _.sortBy(ranges, function(obj){ return obj.display_id; });
+	state.facs_lane.canvas_metadata_analysis.ranges =  _.sortBy(state.facs_lane.canvas_metadata_analysis.ranges, function(obj){ return obj.display_id; });
+	
+	var count_of_gates_per_id = _.countBy(state.facs_lane.canvas_metadata_analysis.ranges, function(obj) {
+	  return obj.display_id;
+	});
     data.push({data: raw_data.data, grid: {show:false}, xaxis: {tickSize: 5}, lines: {show: true, fill: false}});
     if (facs_lane.canvas_metadata) {
         facs_lane.canvas_metadata.data = data;
     }
 }
-
+var gates_id = 0;
 scb.ui.static.FacsView.evaluate_chart = function (state) {
     if (!state.facs_lane.canvas_metadata) {
         var canvas_metadata = {
@@ -664,23 +711,6 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						$('.scb_s_facs_chart_helper').text('');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 						scb.ui.static.MainFrame.refresh();
 
 					}
@@ -752,7 +782,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 							}
 						}
 						else {
-							state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy-5)});
+							state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(state.facs.midpoint.fromy)});
 						}
 						point_to_edit = null;
 						scb.ui.static.FacsView.reevaluate_metadata(state);
@@ -865,6 +895,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 		fromy = state.facs.midpoint.fromy;
                 		from_point = state.facs.midpoint.from_point;
                 		point_to_edit = state.facs.midpoint.point_to_edit;
+                		state.facs.midpoint.display_id = gates_id;
+
                 	}
                 if(button == 0 && !isNaN(from) && (state.facs.gate_count ==1 || state.facs.gate_count ==2)){
                     var to_point = {
@@ -1010,6 +1042,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         	scroll_num=scb.ui.static.FacsView.TOTAL_SCROLL;
         else
         	scroll_num = $('.scb_s_facs_samples_table', '.scb_s_facs_view').get(0).scrollTop;
+        	
+        
         	
         workarea.html(scb_facs.main({
             global_template: gstate.context.master_model,

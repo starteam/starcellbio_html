@@ -89,7 +89,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
     self.rows_state = function (exp) {
         var skip_placeholders = false;
-        if (_.keys(context.template.facs_kinds).length == 1 && _.keys(context.template.facs_kinds[Object.keys(context.template.facs_kinds)[0]].conditions).length == 1) {
+        if ( _.keys(context.template.facs_kinds).length == 1  && _.keys(context.template.facs_kinds[Object.keys(context.template.facs_kinds)[0]].conditions).length == 1) {
             skip_placeholders = true;
         }
         var experiment = exp || self.parent.parent;
@@ -135,6 +135,8 @@ scb.Facs = function scb_Facs(data, context, parent) {
         _.each(rows, function (r, index, rows) {
             r.display_text = r.cell_treatment.format_row();
         });
+        
+        rows = _.sortBy(rows, function(obj){ if(obj.kind=='existing')return obj.lane.order_id; else return;});
         return {rows: rows, valid: count};
     }
 

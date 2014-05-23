@@ -562,7 +562,7 @@ input[type=radio]:disabled {
   font-family: 'sourcesanspro-semibold';
   font-size: 10pt;
   padding-left: 5px;
-  border-right: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
 }
 .scb_s_facs_tools_instructions_followup_toggle {
   outline: none;

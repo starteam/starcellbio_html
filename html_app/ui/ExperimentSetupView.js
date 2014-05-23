@@ -634,7 +634,7 @@ scb.ui.static.ExperimentSetupView.row_edit = function (element) {
     var drug_id = treatment_line.drug_id;
     var concentration_id = treatment_line.concentration_id;
     //var collection_id = parsed.cell_treatment.collection_id;
-     var collection_id = parsed.cell_treatment.treatment_list.list[0].collection_id;
+     var collection_id = parsed.cell_treatment.treatment_list.first.collection_id;
     var temperature = parsed.treatment.temperature;
 
 
@@ -782,12 +782,12 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
 
     if (_.keys(parsed.experiment.new_row).length == 0) {
         parsed.experiment.new_row.cell_line = template.ui.experiment_setup.new_row.cell_line || _.keys(template.cell_lines)[0];
-        parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].drug_id || _.keys(template.drugs)[0];
-        parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
-        parsed.experiment.new_row.schedule_value = template.ui.experiment_setup.new_row.treatment_list.list[0].schedule_value || 0;
-        parsed.experiment.new_row.collection_id = template.ui.experiment_setup.new_row.treatment_list.list[0].collection_id ||  0;
-        parsed.experiment.new_row.duration_value = template.ui.experiment_setup.new_row.treatment_list.list[0].duration_value || 0;
-        parsed.experiment.new_row.temperature = template.ui.experiment_setup.new_row.treatment_list.list[0].temperature || 0;
+        parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.first.drug_list.list[0].drug_id || _.keys(template.drugs)[0];
+        parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.first.drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
+        parsed.experiment.new_row.schedule_value = template.ui.experiment_setup.new_row.treatment_list.first.schedule_value || 0;
+        parsed.experiment.new_row.collection_id = template.ui.experiment_setup.new_row.treatment_list.first.collection_id ||  0;
+        parsed.experiment.new_row.duration_value = template.ui.experiment_setup.new_row.treatment_list.first.duration_value || 0;
+        parsed.experiment.new_row.temperature = template.ui.experiment_setup.new_row.treatment_list.first.temperature || 0;
 
     }
     $('.scb_s_experiment_setup_td', element).each(function (index) {
@@ -825,7 +825,7 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
                 });
             }
             else {
-                parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].drug_id || _.keys(template.drugs)[0];
+                parsed.experiment.new_row.drug_id = template.ui.experiment_setup.new_row.treatment_list.first.drug_list.list[0].drug_id || _.keys(template.drugs)[0];
             }
         }
         if (kind == 'collection') {
@@ -844,7 +844,7 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
                 });
             }
             else {
-                parsed.experiment.new_row.collection_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].collection_id || _.keys(template.collections)[0];
+                parsed.experiment.new_row.collection_id = template.ui.experiment_setup.new_row.treatment_list.first.drug_list.list[0].collection_id || _.keys(template.collections)[0];
             }
         }
         if (kind == 'concentration') {
@@ -870,7 +870,7 @@ scb.ui.static.ExperimentSetupView.new_row_edit = function (element) {
                     $(element).html("Select drug first");
                 }
             } else {
-                parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.list[0].drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
+                parsed.experiment.new_row.concentration_id = template.ui.experiment_setup.new_row.treatment_list.first.drug_list.list[0].concentration_id || _.keys(template.concentrations)[0];
             }
         }
         if (kind == 'actions') {

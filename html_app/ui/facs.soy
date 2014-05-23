@@ -308,12 +308,12 @@ FACS Main View
                 {if $r.is_sample_enabled}checked="checked"{/if}
                 >
                 {/if}
-            </td>
-            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:245px;'>{if $r.display_sample}
+            </td> {if $r.kind == 'existing' and length(keys($kinds)) > 1}{/if}
+            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:230px;{else}width:204px;{/if}">{if $r.display_sample}
                 {$r.display_text}
                 {/if}
             </td>
-            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border scb_s_facs_cell_treatment' style='width:135px;'>
+            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border scb_s_facs_cell_treatment' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:171px;{else}width:152px;{/if}">
             {if $r.is_sample_enabled}			 
             	<input type="radio"  checked class='scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
 			{else}
@@ -322,7 +322,7 @@ FACS Main View
 			{/if}
 
             </td>
-            <td class=' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:239px;'>
+            <td class=' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:215px;'>
                 {call .display_lysate_types}
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
@@ -332,7 +332,7 @@ FACS Main View
                 {param lane:$r/}
                 {/call}
             </td>
-            <td class=' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:227px;'>
+            <td class=' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:232px;'>
             	{if $r.lane and length(keys($kinds)) > 1}
             		{if $r.lane.kind == 'Dye'}
             			<input class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
@@ -350,7 +350,7 @@ FACS Main View
                 {/if}
             </td>
             <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border'>
-                {if $r.kind == 'existing'}
+                {if $r.kind == 'existing' and length(keys($kinds)) > 1}
                 <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
 						assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}' role='button' aria-label='Delete Sample'
 				{if $r.is_sample_enabled}{else}disabled="disabled"{/if}><img alt="Delete" title="Delete" src="images/setup/scb_remove.png">
@@ -481,7 +481,7 @@ FACS Main View
 	{/foreach}
 	{else}
 	{if length(keys($kinds)) != 1}
-	<option selected="selected" disabled="disabled" role='option' value=''>Pick Lysate Type</option>
+	<option selected="selected" disabled="disabled" role='option' value=''>Select Analysis</option>
 	{/if}
 	{foreach $k in keys($kinds)}
 	<option role='option' value='{$k}'>{$kinds[$k].name}</option>
@@ -534,11 +534,18 @@ FACS Main View
             <ol role='list'  class='scb_s_facs_choose_samples_order_list'>
                 {foreach $r in $rows}
                 {if $r.is_valid}
-                <li role='listitem'  facs_id='{$facs.id}' assignment_id="{$assignment.id}"
-                    experiment_id="{$experiment.id}" facs_lane_id='{$r.lane.id}'
-                {if $facs.lane_selected == $r.lane.id}class='scb_s_facs_sample_selected'{/if}>
-                &nbsp;&nbsp;{$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
-                </li>
+            		{if $r.index == 0}
+						<li role='listitem'  
+							facs_id='{$facs.id}' 
+							assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" 
+							facs_lane_id='{$r.lane.id}'
+							lane_kind = '{$r.lane.kind}'
+							conditions = '{$r.lane.conditions}'
+							title='{$r.display_text}'
+							{if $facs.selected_lane and $r.cell_treatment.id == $facs.selected_lane.cell_treatment_id}class='scb_s_facs_sample_selected'{/if}>
+							&nbsp;&nbsp;{$r.display_text}
+						</li>
+               		{/if}
                 {/if}
 
                 {/foreach}
@@ -554,11 +561,29 @@ FACS Main View
     </div>
     <div class='scb_s_facs_samples_graph_area'>
         <div class='scb_s_western_blot_gel_tabs' role='tablist'>
-                    <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab' role='tab'>
+        			{if $facs.samples_finished}
+        			{foreach $r in $rows}
+        				{if $r.is_valid and $r.lane.id == $facs.selected_lane.id}
+        				<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab ' role='tab'>
+
+						<div class='scb_s_facs_gel_tab_selected'>{$facs.selected_lane.kinds[$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].short_name}
+						</div>
+						</span>
+        				{elseif $r.is_valid and $r.cell_treatment.id == $facs.selected_lane.cell_treatment_id}
+							<div class='scb_s_western_blot_gel_tab' facs_id='{$facs.id}'
+							assignment_id='{$assignment.id}' role='tab'
+							experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].conditions[$r.lane.conditions].short_name}
+							</div>
+						{/if}
+					{/foreach}
+					{else}
+					<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'  role='tab'>
 
                     <div class='scb_s_facs_gel_tab_selected'>PI
                     </div>
                     </span>
+					{/if}        
+
         </div>
         {call .display_graph}
         {param assignment:$assignment/}
@@ -583,7 +608,7 @@ FACS Main View
 
     <div class='scb_s_facs_chart_wrapper'>
         <div class='scb_s_facs_chart_xaxis'>
-            PI Fluorescence
+            {if $lane}{$lane.kinds[$lane.kind].conditions[$lane.conditions].short_name}{else}PI{/if} Fluorescence
         </div>
         <div class='scb_s_facs_chart_yaxis'>
             Number of cells (thousands)
@@ -642,7 +667,8 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
         <thead>
         <tr>
             <td role='columnheader'></td>
-            <td role='columnheader'>PI Fluorescence</td>
+            <td role='columnheader'></td>
+            <td role='columnheader'>{if $lane}{$lane.kinds[$lane.kind].conditions[$lane.conditions].short_name}{else}PI{/if} Fluorescence</td>
             <td role='columnheader'>% Cells</td>
             <td role='columnheader'></td>
         </tr>
@@ -651,7 +677,10 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
         {foreach $range in $lane.canvas_metadata_analysis.ranges}
         <tr role='row'>
             <td>
-                <div style='background-color:{$range.color}; width:12px; height:12px'></div>
+                {$range.display_id}
+            </td>
+            <td>
+                {$range.bisector_id}
             </td>
             <td>{$range.from} - {$range.to}</td>
             <td>{$range.percentage}</td>

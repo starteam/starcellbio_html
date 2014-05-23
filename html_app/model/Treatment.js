@@ -2,9 +2,15 @@
 
 scb.TreatmentList = function scb_TreatmentList(data, context) {
 	var self = this;
-
+	
 	scb.ModelHelpers.common_list_code(self, data, scb.Treatment, context);
-
+	self.first_state = function(){
+		if(self.list.length ==1){
+			return self.list[0];
+		}
+		else return null;
+	}
+	self.first = self.first_state();
 	self.start = function(d) {
 		d = ( typeof (d) == 'undefined' ? _.clone(scb.utils.get(context, ['template', 'experiment_templates', 'default', 'treatment'], {})) : d);
 		var ret = new scb.Treatment(d, context, self);

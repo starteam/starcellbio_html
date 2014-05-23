@@ -10703,13 +10703,15 @@ var __decusability_newfacs = {
                 'Dye':{
             		name:'Dye/Stain',
             		conditions: {
-            			'whole': {name: 'PI'}
+            			'whole': {name: 'PI',
+            			short_name: 'PI'}
             		}
             	},
             	'Anti':{
             		name:'Antibody-labeling ',
             		conditions: {
-            			'a': {name: 'example antibody'}
+            			'a': {name: 'example antibody',
+            			short_name: 'Antibody'}
             		}
             	}
             },
