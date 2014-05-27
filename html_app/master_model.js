@@ -9304,156 +9304,6 @@ var __june_2014_usability = {
                                 ]
                             },
                             {
-                                match: ['drug_id'],
-                                drug_id: 'Colchicine',
-                                shape: 'peak-100-normal-400'
-                            },
-                            {
-                                match: ['drug_id'],
-                                drug_id: 'Serum',
-                                shape: 'peak-50-normal-400'
-                            }
-                        ]
-
-                    }
-                },
-                microscopy: {
-                	'valid': ['S2', 'nc'],
-                	'slide': {
-                	
-                		'conditions_parser':[
-                		{
-                			match: [],
-                			
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['nc'],
-                			conditions: 'rgb',
-                			phenotype: 'composite5'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['nc'],
-                			conditions: 'g',
-                			phenotype: 'normal_metaphase'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['nc'],
-                			conditions: 'gr',
-                			phenotype: 'anaphase'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['nc'],
-                			conditions: 'rb',
-                			phenotype: 'off'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna1'],
-                			conditions: 'g',
-                			phenotype: 'premature'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna2'],
-                			conditions: 'gr',
-                			phenotype: 'bridges'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna2'],
-                			conditions: 'rb',
-                			phenotype: 'off'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna2'],
-                			conditions: 'g',
-                			phenotype: 'normal_metaphase'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna3'],
-                			conditions: 'rgb',
-                			phenotype: 'normal_metaphase'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna3'],
-                			conditions: 'g',
-                			phenotype: 'normal_metaphase'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna3'],
-                			conditions: 'rb',
-                			phenotype: 'on'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna4'],
-                			conditions: 'na'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna5'],
-                			conditions: 'rgb',
-                			phenotype: 'unequal'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['rna5'],
-                			conditions: 'g',
-                			phenotype: 'normal_metaphase'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['Serum'],
-                			conditions: 'na'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['Hydroxyurea'],
-                			conditions: 'na'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['Colchicine'],
-                			conditions: 'na'
-                		}
-                			
-                		]
-                		
-                	}
-                }
-                
-            }
-        }
-    };
-    
-var ps2_strain_A = {
-				'western_blot': 
-							 {
                                 transfer_function: 'static',
                                 cutoff: -1,
                                 drug: 'nc',
@@ -9679,6 +9529,208 @@ var ps2_strain_A = {
 		}
 		}
 		};	
+
+    
+var ps2_strain_A = {
+				'western_blot': 
+							 {
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: '',
+                                temperature: '40',
+                                marks: [
+                                    {
+                                        name: 'Cdt1',
+                                        weight: 65,
+                                        intensity: -1,
+                                        primary_anti_body: ['cdt1']
+                                    },
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 36, //35&36
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -2,
+                                        primary_anti_body: ['cyclin']
+                                    },
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 48,
+                                        intensity: -4,
+                                        primary_anti_body: ['cyclinE']
+                                    },
+                                    {
+                                        name: 'Securin',
+                                        weight: 41.8,
+                                        intensity: -1,
+                                        primary_anti_body: ['securin']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 68, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 29.5, // 34&35
+                                        intensity: 1,
+                                        primary_anti_body: ['rad21']
+                                    },
+                                    {
+                                        name: 'Rad21',
+                                        weight: 19.9, // 34&35
+                                        intensity: 1,
+                                        primary_anti_body: ['rad21']
+                                    }
+                                ]
+                            }, 
+                        'facs':
+                        	{
+                                match: ['cell_line', 'temperature'],
+                                cell_line: '',
+                                temperature: 40,
+                                shape: 'g2-block'
+                            }                     
+                            
+                	};
+
+var ps2_strain_B = {    
+				'western_blot': 
+							{
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: '',
+                                temperature: '40',
+                                marks: [
+                                    {
+                                        name: 'Cdt1',
+                                        weight: 65,
+                                        intensity: -.8,
+                                        primary_anti_body: ['cdt1']
+                                    },
+                                    {
+                                        name: 'Cdk1',
+                                        weight: 35, //35&36
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk1']
+                                    },
+                                    {
+                                        name: 'Cdk2',
+                                        weight: 35, // 34&35
+                                        intensity: -1,
+                                        primary_anti_body: ['cdk2']
+                                    },
+                                    {
+                                        name: 'Cyclin B',
+                                        weight: 58,
+                                        intensity: -2,
+                                        primary_anti_body: ['cyclin']
+                                    }
+                                ]
+                            }, 
+                        'facs':               
+                        	{
+                                match: ['cell_line', 'temperature'],
+                                cell_line: '',
+                                temperature: 40,
+                                shape: 'S-block'
+                            }
+					};
+
+var ps2_strain_C = {
+				'western_blot': 
+							{
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: '',
+                                temperature: '40',
+                                marks: [
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 148,
+                                        intensity: 4,
+                                        primary_anti_body: ['cyclinE']
+                                    }
+                                ]
+                            }, 
+                        'facs':
+                        	{
+                                match: ['cell_line', 'temperature'],
+                                cell_line: '',
+                                temperature: 40,
+                                shape: 'g1-block'
+                            }                     
+                            
+                    };
+
+var ps2_strain_D = {						
+				'western_blot': 
+							{
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: '',
+                                temperature: '40',
+                                marks: [
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 25,
+                                        intensity: 4,
+                                        primary_anti_body: ['cyclinE']
+                                    }
+                                ]
+                            }, 
+                        'facs':
+                        	{
+                                match: ['cell_line', 'temperature'],
+                                cell_line: '',
+                                temperature: 40,
+                                shape: 'alpha-block'
+                            }                     
+                                                
+                            
+                    };
+
+var ps2_strain_E = {						
+				'western_blot': 
+							{
+                                transfer_function: 'static',
+                                cutoff: -1,
+                                drug: 'nc',
+                                cell_line: '',
+                                temperature: '40',
+                                marks: [
+                                    {
+                                        name: 'Cyclin E',
+                                        weight: 15,
+                                        intensity: 4,
+                                        primary_anti_body: ['cyclinE']
+                                    }
+                                ]
+                            }, 
+                        'facs':
+                        	{
+                                match: ['cell_line', 'temperature'],
+                                cell_line: '',
+                                temperature: 40,
+                                shape: 'g2-block'
+                            }                       
+                            
+                    };
 
 
 master_model_data = {
