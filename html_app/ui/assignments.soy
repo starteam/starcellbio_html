@@ -10,7 +10,7 @@
 * @param courses // group Assignments by Course
 */
 {template .main}
-<div class='scb_s_assignments_view'>
+<div class='scb_s_assignments_view' >
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
     {param context:$context /}
@@ -22,7 +22,7 @@
         {param prev_step: $prev_step/}
         {param assignments:assignments/}
     {/call}
-    <div class='scb_s_assignments_container'>
+    <div class='scb_s_assignments_container' role='main'>
     {call .display_assignments}
         {param assignments:$assignments/}
         {param courses:$courses/}
@@ -72,13 +72,13 @@ Assignment description
         </div>
 		
 	<div class='scb_s_assignments_slider_header'>
-		<div class = 'scb_s_assignment_header_img_left scb_s_assignment_header_img_left_inactive'  assignment_id='{$assignments.selected.id}'  role='button' aria-label='Move one section to the left'></div>
+		<div class = 'scb_s_assignment_header_img_left scb_s_assignment_header_img_left_inactive'  assignment_id='{$assignments.selected.id}'  role='button' aria-label='Previous Section'></div>
 		 
 		 
 		 {foreach $section in $assignments.selected.template.instructions}
 		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == $assignments.selected.last_instruction}scb_assignments_header_link_selected{/if}' assignment_id='{$assignments.selected.id}' role='link' title='{$section[0]}'   value='{$section[0]}' aria-controls='scb_s_assignment_scroll' aria-atomic='true' ><span>{$section[0]}</span>{if index($section) == $assignments.selected.last_instruction}<div class="arrow-down-blue"></div>{/if}</div>
 		{/foreach}	 
-		<div class = 'scb_s_assignment_header_img_right ' assignment_id='{$assignments.selected.id}' role='button' aria-label='Move one section to the right'></div>
+		<div class = 'scb_s_assignment_header_img_right '  assignment_id='{$assignments.selected.id}' role='button' aria-label='Next Section' ></div>
 	</div>
 	<div class='scb_s_assignments_gray_bar'></div>
         <div class='scb_s_assignment_scroll' id ='scb_s_assignment_scroll'  aria-live="assertive">
@@ -87,9 +87,9 @@ Assignment description
 				{$section[1] |noAutoescape}</div>   
         	{/foreach} 
         	<div class='scb_s_assignments_bottom_scroll'>
-   				<div class = 'scb_s_assignment_header_img_left scb_assignments_bottom_arrow_left scb_s_assignment_header_img_left_inactive'  assignment_id='{$assignments.selected.id}'   role='button' aria-label='Move one section to the left'></div>
+   				<div class = 'scb_s_assignment_header_img_left scb_assignments_bottom_arrow_left scb_s_assignment_header_img_left_inactive'  assignment_id='{$assignments.selected.id}'   role='button' aria-label='Previous Section'></div>
    				<div class='scb_s_assignments_button_divider'></div>
-				<div class = 'scb_s_assignment_header_img_right scb_assignments_bottom_arrow_right'  assignment_id='{$assignments.selected.id}'  role='button' aria-label='Move one section to the right'></div>
+				<div class = 'scb_s_assignment_header_img_right scb_assignments_bottom_arrow_right'  assignment_id='{$assignments.selected.id}'  role='button' aria-label='Next Section'></div>
 			</div>
     
         </div>
@@ -110,22 +110,22 @@ Assignment assignments
 {template .display_assignments}
 <div class='scb_s_assignments_sidebar'>
     <h1 class='scb_s_assignments_sidebar_title'>Assignments: <div class="arrow-down"></div></h1>
-    <ul role="listbox" aria-label="Assignments"  >
+    <ul aria-label="Assignments"  >
         {foreach $course in keys($courses)}
             <div class='scb_s_assignments_sidebar_course_block'>
             {if $course == '7.06_Spring_2014'}
-            <div class='scb_s_assignments_sidebar_course'>7.06 Spring 2014</div>
+            <div class='scb_s_assignments_sidebar_course' role='heading'>7.06 Spring 2014</div>
             {else}
-            <div class='scb_s_assignments_sidebar_course'>{$course}</div>
+            <div class='scb_s_assignments_sidebar_course' role='heading'>{$course}</div>
             {/if}
         {foreach $assignment in $courses[$course]}
 
-			<li role="listitem" class='scb_s_assignments_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_assignments_sidebar_name_selected{/if}'   >
-				<a href='#view=assignments&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}
+			<li role="link" class='scb_s_assignments_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_assignments_sidebar_name_selected{/if}' aria-selected='{if $assignments.selected.id == $assignment.id}true{else}false{/if}'  >
+				<a role='presentation' href='#view=assignments&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}
 
 				</a>
 				{if $assignments.selected.id == $assignment.id}
-					<img class='scb_s_selection_arrow_img'  src='../../images/homepage/selection_arrow.png' >
+					<img role='presentation' class='scb_s_selection_arrow_img'  src='../../images/homepage/selection_arrow.png' >
 				{/if}
 			</li>
         {/foreach}

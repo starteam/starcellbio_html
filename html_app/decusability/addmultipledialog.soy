@@ -6,29 +6,29 @@
 @param experiment
 */
 {template .dialog}
-<div class='scb_mit706s16_inner_dialog'>
-    <h1 class='scb_mit706s16_inner_dialog_title'>
-        <span class='scb_mit706s16_inner_dialog_title_close'>&#215;</span>
+<div class='scb_mit706s16_inner_dialog' role='dialog' aria-label='Add Samples'>
+    <h1 class='scb_mit706s16_inner_dialog_title' role='presentation' aria-label='Add Samples'>
+        <span class='scb_mit706s16_inner_dialog_title_close' role='button' aria-label='Close Add Samples'>&#215;</span>
         Add Samples </h1>
 
     <div class='scb_mit706s16_inner_dialog_body'>
         {foreach $cell_line in keys($template.ui.add_multiple_dialog)}
         {if $template.ui.add_multiple_dialog[$cell_line].title}
-        <h1>{$template.ui.add_multiple_dialog[$cell_line].title|noAutoescape}</h1>
+        <h1 role='heading'>{$template.ui.add_multiple_dialog[$cell_line].title|noAutoescape}</h1>
         {else}
-        <h1>{$template.cell_lines[$cell_line].name}</h1>
+        <h1 role='heading'>{$template.cell_lines[$cell_line].name}</h1>
         {/if}
-        <table class="scb_s_experiment_setup_table">
-            <thead class="scb_s_experiment_setup_table_head">
+        <table class="scb_s_experiment_setup_table" role='grid' aria-label='{$template.cell_lines[$cell_line].name}'>
+            <thead class="scb_s_experiment_setup_table_head" >
             {foreach $heading in $template.ui.add_multiple_dialog[$cell_line].headings}
-            <td class='scb_s_experiment_setup_table_heading'>
+            <td role='columnheader' aria-label='{$heading}' class='scb_s_experiment_setup_table_heading'>
                 {$heading}
             </td>
             {/foreach}
             </thead>
-            <tbody class="scb_s_experiment_setup_table_body">
+            <tbody class="scb_s_experiment_setup_table_body" >
             {foreach $rows in $template.ui.add_multiple_dialog[$cell_line].rows}
-            <tr>
+            <tr role='row' aria-label='Sample'>
                 {foreach $cell in $rows.cells}
                 <td class='scb_s_experiment_setup_table_border'>
                     {if $cell.kind == 'text'}
@@ -37,26 +37,26 @@
                     {if $cell.kind == 'select'}
                     HERE GOES SELECT
                     <select assignment='{$assignment.id}' experiment_id='{$experiment.id}'
-                            treatment_id='{$rows.treatment_id}' cell_line='{$cell_line}' cell_line='{$cell_line}'>
-                        <option disabled="disabled">Please select</option>
+                            treatment_id='{$rows.treatment_id}' cell_line='{$cell_line}' role='select'  cell_line='{$cell_line}'>
+                        <option disabled="disabled" role='option'>Please select</option>
                         {foreach $key in keys($template[$cell.field])}
-                        <option value='{$template[$cell.field][$key]}'>{$template[$cell.field][$key].name}</option>
+                        <option role='option' value='{$template[$cell.field][$key]}'>{$template[$cell.field][$key].name}</option>
                         {/foreach}
                     </select>
                     {/if}
                     {if $cell.kind == 'checkbox'}
-                    <input type="checkbox" name="{$cell.name}" assignment_id='{$assignment.id}'
-                           experiment_id='{$experiment.id}' treatment_id='{$rows.treatment_id}' cell_line='{$cell_line}'>
+                    <input class='scb_f_experiment_setup_dialog_checkbox' type="checkbox" role='checkbox' name="{$cell.name}" assignment_id='{$assignment.id}'
+                           experiment_id='{$experiment.id}' treatment_id='{$rows.treatment_id}' cell_line='{$cell_line}' aria-checked='false'>
                     {/if}
                 </td>
                 {/foreach}
             </tr>
             {if isLast($rows)}
-            <tr>
+            <tr role='row' aria-label='Button'>
                 {foreach $cell in $rows.cells}
                 <td class='scb_s_experiment_setup_table_border'>
                     {if $cell.kind == 'checkbox'}
-                    <button class='scb_s_gray_button scb_mit706s16_inner_dialog_select' name="{$cell.name}" assignment_id='{$assignment.id}' cell_line='{$cell_line}'>SELECT ALL</button>
+                    <button class='scb_s_gray_button scb_mit706s16_inner_dialog_select' name="{$cell.name}" assignment_id='{$assignment.id}' cell_line='{$cell_line}' aria-label='Select All' role='button'>SELECT ALL</button>
                     {/if}
                 </td>
                 {/foreach}
@@ -65,22 +65,13 @@
 
             {/if}
             {/foreach}
-<!--            <tr>
-                <td colspan='{$template.ui.add_multiple_dialog[$cell_line].headings.length}'>
-                    <div class='scb_s_experiment_design_green_line'></div>
-                    <button class='scb_mit706s16_inner_dialog_cancel scb_s_gray_button'>CANCEL</button>
-                    <button class='scb_mit706s16_inner_dialog_add scb_s_gray_button'>ADD MULTIPLE TREATMENTS</button>
-                </td>
--->            </tr>
+            </tr>
             </tbody>
         </table>
         {/foreach}
-        <!--
-        <button class='scb_mit706s16_inner_dialog_select_all scb_s_gray_button'>SELECT ALL</button><br>
-        -->
         <div class='scb_mit706s16_button_float'>
-        <button class='scb_mit706s16_inner_dialog_cancel scb_s_gray_button'>CANCEL</button>
-        <button class='scb_mit706s16_inner_dialog_add scb_s_gray_button'>ADD SAMPLES</button>
+        <button class='scb_mit706s16_inner_dialog_cancel scb_s_gray_button' aria-label='Cancel' role='button'>CANCEL</button>
+        <button class='scb_mit706s16_inner_dialog_add scb_s_gray_button' aria-label='Add Samples' role='button'>ADD SAMPLES</button>
         </div>
     </div>
 </div>

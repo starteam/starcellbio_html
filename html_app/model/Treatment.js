@@ -2,9 +2,15 @@
 
 scb.TreatmentList = function scb_TreatmentList(data, context) {
 	var self = this;
-
+	
 	scb.ModelHelpers.common_list_code(self, data, scb.Treatment, context);
-
+	self.first_state = function(){
+		if(self.list.length ==1){
+			return self.list[0];
+		}
+		else return null;
+	}
+	self.first = self.first_state();
 	self.start = function(d) {
 		d = ( typeof (d) == 'undefined' ? _.clone(scb.utils.get(context, ['template', 'experiment_templates', 'default', 'treatment'], {})) : d);
 		var ret = new scb.Treatment(d, context, self);
@@ -24,7 +30,8 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self, data, 'drug_list', {}, scb.DrugList, context);
 	scb.Utils.initialize_accessor_field(self, data, 'temperature', "20", null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'collection_id', "0", null, context);
-	scb.Utils.initialize_accessor_field(self, data, 'microscope', [], null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'microscope', {}, null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'facs', [], null, context);
 
 	// should be getter only
 	scb.Utils.initialize_accessor_field(self, data, 'schedule_value', "0", null, context);
@@ -58,7 +65,7 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 		},
 		set : function(v) {
 			var time = scb.Utils.parse_time(v, context.template.time_unit.kind);
-			data.schedule_value = time;
+			data.schedule_value = time;å
 			data.schedule = self.schedule;
 		}
 	});

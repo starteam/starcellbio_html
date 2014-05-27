@@ -67,6 +67,10 @@ scb.Facs = function scb_Facs(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'samples_finished', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'sample_prepared', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'sample_analysis', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'double_analysis', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'gate_count', 0, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'midpoint', {}, null, context);
+
     scb.Utils.initialize_accessor_field(self, data, 'show_analysis', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'apply_dna_analysis_to_all', false, null, context);
@@ -85,7 +89,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
     self.rows_state = function (exp) {
         var skip_placeholders = false;
-        if (_.keys(context.template.lysate_kinds).length == 1) {
+        if ( _.keys(context.template.facs_kinds).length == 1  && _.keys(context.template.facs_kinds[Object.keys(context.template.facs_kinds)[0]].conditions).length == 1) {
             skip_placeholders = true;
         }
         var experiment = exp || self.parent.parent;
@@ -101,7 +105,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
                         display_sample: index == 0,
                         is_sample_enabled: self.is_cell_treatment_enabled[e.id],
                         index: index,
-                        is_valid: self.is_cell_treatment_enabled[e.id] && ee
+                        is_valid: self.is_cell_treatment_enabled[e.id] && ee && ee.conditions
                     });
                 });
                 if (!skip_placeholders) {
@@ -131,6 +135,8 @@ scb.Facs = function scb_Facs(data, context, parent) {
         _.each(rows, function (r, index, rows) {
             r.display_text = r.cell_treatment.format_row();
         });
+        
+        rows = _.sortBy(rows, function(obj){ if(obj.kind=='existing')return obj.lane.order_id; else return;});
         return {rows: rows, valid: count};
     }
 

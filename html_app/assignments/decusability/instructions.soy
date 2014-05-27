@@ -6,7 +6,7 @@
 {template .welcome_usability}
 <div class='scb_s_mit706s13_assignment_overview' xmlns="http://www.w3.org/1999/html"
      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-<h2 style='margin-top:0px;'>Welcome</h2>
+<h2 style='margin-top:0px;' role='heading'>Welcome</h2>
 <p>
     Welcome to StarCellBio’s Usability Evaluation!
 </p>
@@ -15,7 +15,7 @@
     The educational goal of StarCellBio is to teach fundamental concepts of cell and molecular biology, experimental
     design, and analysis.
 </p>
-<h2>
+<h2 role='heading'>
     Brief Description of StarCellBio’s Usability Test
 </h2>
 <p>
@@ -56,7 +56,7 @@
 {template .question_1}
 <div>
 <br/>
-<div class='scb_objective_number scb_objective_design'>
+<div class='scb_objective_number scb_objective_design' role='heading'>
     <div>1</div>
 </div>
 <div class='scb_objective_text'>
@@ -87,7 +87,7 @@
 {template .question_2}
 <div>
 <br/>
-<div class='scb_objective_number scb_objective_design'>
+<div class='scb_objective_number scb_objective_design' role='heading'>
     <div>2</div>
 </div>
 <div class='scb_objective_text'>
@@ -121,7 +121,7 @@
 {template .intro}
 <div>
 
-<h2 style='margin-top:0px;'>Introduction</h2>
+<h2 style='margin-top:0px;' role='heading'>Introduction</h2>
 <div class='scb_s_mit706s13_assignment_overview' >
     <p>
         The lab in which you are completing a UROP, studies the cell cycle in a newly identified budding yeast strain,
@@ -157,7 +157,7 @@
 */
 {template .ref}
 <div>
-	<h2 style='margin-top:0px;'>
+	<h2 style='margin-top:0px;' role='heading'>
     Reference Material
 </h2>
 <div class='scb_s_mit706s13_assignment_overview' >
@@ -186,29 +186,29 @@ that are available to you and the molecular weight of the proteins to
 which they bind. The following antibodies are available to you in StarCellBio: <br/><br/>
 
 
-<table class='scb_s_objective_table'>
+<table class='scb_s_objective_table' role='grid'>
             <thead>
-            <td>Protein Name
+            <td role='columnheader'>Protein Name
 
             </td>
-            <td>Molecular Weight (kDa)
+            <td role='columnheader'>Molecular Weight (kDa)
 
             </td>
             </thead>
             <tbody>
-            <tr>
+            <tr role='row'>
                 <td>Cdk2</td>
                 <td>33</td>
             </tr>
-            <tr>
+            <tr role='row'>
                 <td>Cyclin B</td>
                 <td>58</td>
             </tr>
-            <tr>
+            <tr role='row'>
                 <td>Cyclin E</td>
                 <td>48</td>
             </tr>
-            <tr>
+            <tr role='row'>
                 <td>Pgk1 (loading control)</td>
                 <td>45</td>
             </tr>
@@ -227,13 +227,13 @@ which they bind. The following antibodies are available to you in StarCellBio: <
 
 */
 {template .experiment_setup}
-<ul class='scb_assignment_specific_tufts_experiment_setup'>
-    <li>
-        To setup your experiment, select <b>Add Samples</b> in the experimental set-up table below. <br>
+<ul role='list' class='scb_assignment_specific_tufts_experiment_setup'>
+    <li role='listitem'>
+        To setup your experiment, select <b role='presentation' >Add Samples</b> in the experimental set-up table below. <br>
     </li>
-    <li>
-        Select all of the treatment protocols for your experiment within the <b>Add Samples</b> pop up window, and
-        then click <b>Add Samples</b>.
+    <li  role='listitem'>
+        Select all of the treatment protocols for your experiment within the <b role='presentation'>Add Samples</b> pop up window, and
+        then click <b role='presentation'>Add Samples</b>.
     </li>
 </ul>
 {/template}

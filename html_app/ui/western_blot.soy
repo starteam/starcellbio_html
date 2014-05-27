@@ -16,7 +16,7 @@
 * @param can_prepare_lysate
 */
 {template .main}
-<div class='scb_s_western_blot_view'>
+<div class='scb_s_western_blot_view' >
 
     {call scb_homepage.display_header}
     {param global_template:$global_template /}
@@ -65,7 +65,7 @@
 @param can_prepare_lysate
 */
 {template .display_details}
-<div class='scb_s_western_blot_container'>
+<div class='scb_s_western_blot_container' role='main'>
 <div class='scb_western_blot_details_view'>
 		{call scb_common.experiment_step}
         {param step:5/}
@@ -104,7 +104,7 @@
 @param can_prepare_lysate
 */
 {template .display_tabs}
-<div class='scb_s_western_blot_tab_content {if $kind == 'sample_prep'}scb_s_western_blot_tab_content_sample_prep{/if}'>
+<div class="scb_s_western_blot_tab_content {if $kind == 'sample_prep'}scb_s_western_blot_tab_content_sample_prep{/if}" role='tabpanel'>
 
 {call .display_tabs_selector}
     {param assignment:$assignment/}
@@ -144,7 +144,7 @@
 	
 	</div>
     {/if}
-    <a class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_western_blot"
+    <a role='button' class="scb_s_navigation_button scb_f_open_select_technique scb_s_select_technique_at_western_blot"
        href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>&#9664; SELECT TECHNIQUE</a><br/>
 
@@ -156,30 +156,29 @@
 @param western_blot
 */
 {template .display_tabs_selector}
-<div class='{if $experiment.western_blot_list.list.length >= 5}scb_s_western_blot_tabs_more {else} scb_s_western_blot_tabs{/if}'>
+<div class='{if $experiment.western_blot_list.list.length >= 5}scb_s_western_blot_tabs_more {else} scb_s_western_blot_tabs{/if}' role='tablist'>
 	{if $experiment.western_blot_list.list.length < 5}
 
 		{foreach $wb in $experiment.western_blot_list.list}
-		{if $western_blot.id == $wb.id}
-		<span class='scb_s_western_blot_active'>
-		<input class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-			  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
-		<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' 
-				>
-					  | &#215;
-		</button>
-		</span>
-		{else}
-		<a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' 
-		   href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
-		   western_blot_id='{$wb.id}'>{$wb.name}</a>
-		{/if}
+			{if $western_blot.id == $wb.id}
+			<span class='scb_s_western_blot_active' role='tab'>
+			<input role='input' class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+				  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
+			<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+					experiment_id='{$experiment.id}' role='button' >
+						  | &#215;
+			</button>
+			</span>
+			{else}
+			<a role='tab' class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' 
+			   href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
+			   western_blot_id='{$wb.id}'>{$wb.name}</a>
+			{/if}
 		{/foreach}
 		<span class='scb_s_western_blot_add_western_blot' assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> 
+             			experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'  role='tab'> 
              			<a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' 
-             			href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
+             			href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}' role='presentation'>
              			<span class='scb_s_add_tab'>ADD </span>
 				<span class='scb_s_western_blot_add_cross_western_blot'>| + </span></a>
 		</span>
@@ -188,7 +187,7 @@
 	{else}
 		<button class='scb_s_western_blot_left_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}'>
+             			experiment_id='{$experiment.id}' role='button'  aria-label='Previous Tab'>
     	</button>
     	{if $experiment.western_blot_list.list.length -1 == $experiment.western_blot_list.start_tabs_index +3}
     	
@@ -196,23 +195,23 @@
 				{if index($wb) >= $experiment.western_blot_list.start_tabs_index and index($wb) < $experiment.western_blot_list.start_tabs_index +4}     				
 				
 					{if $western_blot.id == $wb.id}
-					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
-					<input class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-			  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
-					<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-							experiment_id='{$experiment.id}'>| &#215;
-					</button>
+					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot' role='tab'>
+						<input  role='input' class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+				  experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
+						<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+								experiment_id='{$experiment.id}' role='button' aria-label='Close Tab'>| &#215;
+						</button>
 					</span>
 					{else}
 					<a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot scb_s_western_blot_more_open_western_blot'
 					   href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
-					   western_blot_id='{$wb.id}'>{$wb.name}</a>
+					   western_blot_id='{$wb.id}' role='tab'>{$wb.name}</a>
 					{/if}
 				{/if}
 			{/foreach}
 			<span class='scb_s_western_blot_add_western_blot scb_s_western_blot_more_open_western_blot' assignment_id='{$assignment.id}'
-										 experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}'> 
-										 <a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
+										 experiment_id='{$experiment.id}' western_blot_id='{$experiment.western_blot_list.list[length($experiment.western_blot_list.list)-1].id}' role='tab'> 
+										 <a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}' role='presentation'>
 										 <span class='scb_s_add_tab'>ADD </span>
 									<span class='scb_s_western_blot_add_cross_western_blot'>| + </span></a>
 					</span>
@@ -221,17 +220,17 @@
 				{if index($wb) >= $experiment.western_blot_list.start_tabs_index and index($wb) < $experiment.western_blot_list.start_tabs_index +5}     				
 				
 					{if $western_blot.id == $wb.id}
-					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'>
-					<input class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-			  			experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
-					<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
-							experiment_id='{$experiment.id}'>| &#215;
-					</button>
+					<span class='scb_s_western_blot_active scb_s_western_blot_more_open_western_blot'  role='tab'>
+						<input role='input' class='scb_s_western_blot_selected' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+							experiment_id='{$experiment.id}' value ='{$wb.name}' type='text' maxlength=10 ></input>
+						<button class='scb_s_western_blot_remove scb_f_western_blot_remove' western_blot_id='{$wb.id}' assignment_id='{$assignment.id}'
+								experiment_id='{$experiment.id}' role='button' aria-label='Close Tab'>| &#215;
+						</button>
 					</span>
 					{else}
 					<a class='scb_f_open_western_blot scb_s_western_blot_open_western_blot scb_s_western_blot_more_open_western_blot'
 					   href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$wb.id}'
-					   western_blot_id='{$wb.id}'>{$wb.name}</a>
+					   western_blot_id='{$wb.id}' role='tab'>{$wb.name}</a>
 					{/if}
 				{/if}
 			{/foreach}
@@ -240,7 +239,7 @@
 		{/if}
 		<button class='scb_s_western_blot_right_western_blot' western_blot_id='{$western_blot.id}'
              			assignment_id='{$assignment.id}'
-             			experiment_id='{$experiment.id}' >
+             			experiment_id='{$experiment.id}' role='button'  aria-label='Next Tab'>
     	</button>
 		
 	{/if}
@@ -262,19 +261,19 @@
 {/call}
 <div class='scb_s_western_blot_samples_container' style='{if length($rows) >=12}  height: 306px;	{else} 	height:auto;{/if}'>
 <div class='scb_s_western_blot_samples_table'  style='{if length($rows) >=12} height: 216px;   min-height: 300px;  {else} 	height:auto;{/if}'>
-    <table>
+    <table  role='grid'>
         <thead class='scb_s_western_blot_samples_table_head'>
-        <td class='scb_s_western_blot_samples_table_heading sample_prep_select scb_s_experiment_setup_table_border'>Select</td>
-        <td class='scb_s_western_blot_samples_table_heading sample_prep_samples scb_s_experiment_setup_table_border'>Samples</td>
-        <td class='scb_s_western_blot_samples_table_heading sample_prep_lysate scb_s_experiment_setup_table_border'>Lysate type</td>
-        <td class='scb_s_western_blot_samples_table_heading sample_prep_blank scb_s_experiment_setup_table_border'>&nbsp;</td>
+        <td class='scb_s_western_blot_samples_table_heading sample_prep_select  scb_s_experiment_setup_table_border' role='columnheader'>Select</td>
+        <td class='scb_s_western_blot_samples_table_heading sample_prep_samples scb_s_experiment_setup_table_border' role='columnheader'>Samples</td>
+        <td class='scb_s_western_blot_samples_table_heading sample_prep_lysate  scb_s_experiment_setup_table_border' role='columnheader'>Lysate type</td>
+        <td class='scb_s_western_blot_samples_table_heading sample_prep_blank   scb_s_experiment_setup_table_border' role='columnheader'>&nbsp;</td>
         </thead>
         {foreach $r in $rows}
-        <tr class='scb_s_western_blot_samples_table_tr'>
+        <tr  role='row' class='scb_s_western_blot_samples_table_tr'>
             <td class='scb_s_western_blot_samples_table_td scb_s_experiment_setup_table_border' style='width:96px;'>{if $r.display_sample}
                 <input type="checkbox" class="scb_f_western_blot_sample_active" western_blot_id='{$western_blot.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-                       cell_treatment_id='{$r.cell_treatment.id}'
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' aria-checked='{if $r.is_sample_enabled}true{else}false{/if}'
+                       cell_treatment_id='{$r.cell_treatment.id}' role='checkbox'
                 {if $r.is_sample_enabled}checked="checked"{/if}
                 >
                 {/if}
@@ -296,12 +295,12 @@
             <td class='scb_s_western_blot_samples_table_td scb_s_experiment_setup_table_border scb_s_experiment_setup_table_border'>
                 {if $r.kind == 'existing'}
                 <button class="scb_f_western_blot_sample_remove" western_blot_id='{$western_blot.id}'
-                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}'
-                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}>&#215;
+                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}' role='button' aria-label='Close Tab'
+                {if $r.is_sample_enabled}{else}disabled="disabled"{/if} >&#215;
                 </button>
                 {else}
-                <button class="scb_f_western_blot_sample_remove"
-                disabled="disabled">&#215;
+                <button  role='button' class="scb_f_western_blot_sample_remove"
+                disabled="disabled"  aria-label='Close Tab'>&#215;
                 </button>
 
                 {/if}
@@ -309,23 +308,23 @@
         </tr>
         {/foreach}
         {if length($rows) >= 10}
-        <tr class='scb_s_western_blot_samples_select_all_rel'>
+        <tr role='row' class='scb_s_western_blot_samples_select_all_rel'>
         	<td class='scb_f_western_blot_sample_active_all_td' colspan='2'>
-                <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
+                <button  role='button' class='scb_f_western_blot_sample_active_all'  aria-label='Select All'>SELECT ALL</button>
             </td>
         	<td class='scb_f_western_blot_sample_inactive_all_td' colspan='2' align='right'>
-                <button class='scb_f_western_blot_sample_inactive_all'>CLEAR ALL</button>
+                <button   role='button' class='scb_f_western_blot_sample_inactive_all'  aria-label='Clear All'>CLEAR ALL</button>
             </td>
         </tr>
         {else}
-        <tr class='scb_s_western_blot_samples_select_all_abs'>
+        <tr role='row' class='scb_s_western_blot_samples_select_all_abs'>
         	<td colspan='1'>
-                <button class='scb_f_western_blot_sample_active_all'>SELECT ALL</button>
+                <button  role='button' class='scb_f_western_blot_sample_active_all'  aria-label='Select All'>SELECT ALL</button>
             </td>
             <td colspan='1' class='scb_s_western_blot_blank_space1'>
             </td>
             <td colspan='1'>
-                <button class='scb_f_western_blot_sample_inactive_all'>CLEAR ALL</button>
+                <button  role='button' class='scb_f_western_blot_sample_inactive_all'  aria-label='Clear All'>CLEAR ALL</button>
             </td>
             <td colspan='1' >&nbsp;
             </td>
@@ -335,14 +334,14 @@
 
 </div>
 	{if length($rows) >=10}
-    	<div class="scb_s_western_blot_green_line"></div>
+    	<div class="scb_s_western_blot_green_line" role='presentation'></div>
     {/if}
 </div>
 
 </div>
 <a class='scb_s_navigation_button scb_f_western_blot_prepare_lysates' western_blot_id='{$western_blot.id}'
    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE LYSATES  &nbsp; &#9654;
+{if $can_prepare_lysate}{else}disabled='disabled'{/if}  role='button'  aria-label='Prepare Lysates'> PREPARE LYSATES  &nbsp; &#9654;
 </a>
 {/template}
 
@@ -357,31 +356,27 @@
     {param step:$western_blot.gel_type?3:2/}
 {/call}
 <div class='scb_s_western_blot_samples_area'>
-        	<button class='scb_f_info_icon  scb_s_western_blot_gel_type_info' note='scb_f_wb_gel_type_followup'> </button>
-			<div class='scb_f_wb_gel_type_followup scb_f_controls_note'>
-<!-- 
-				<button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
- -->
+        	<button class='scb_f_info_icon  scb_s_western_blot_gel_type_info' note='scb_f_wb_gel_type_followup' role='button' aria-label='Gel Type Info'> </button>
+			<div class='scb_f_wb_gel_type_followup scb_f_controls_note' role='note'>
+
 						Gel type refers to the percentage of acrylamide that is used to make the gel. 
 						Lower acrylamide concentrations are used to separate large proteins, 
 						while high acrylamide concentrations are used to separate small proteins. &nbsp;
-						<a href="static/ref_lib/full_library.html#GelPreparation" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+						<a href="static/ref_lib/full_library.html#GelPreparation" target='_blank' class='scb_s_select_technique_learn_more ' role='link'>Learn more &gt;&gt;</a>
 		
 			 </div>
 
 			{if $western_blot.marker_loaded}
 			{else}
-			<button class='scb_f_info_icon scb_s_western_blot_marker_info' note='scb_f_wb_marker_followup'> </button>
+			<button class='scb_f_info_icon scb_s_western_blot_marker_info' note='scb_f_wb_marker_followup' role='button' aria-label='Marker Info'> </button>
 
-			<div class='scb_f_wb_marker_followup scb_f_controls_note'>
-<!-- 
-				<button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
- -->
+			<div class='scb_f_wb_marker_followup scb_f_controls_note' role='note'>
+
 						A protein marker or ladder consisting of multiple proteins of known sizes 
 						is loaded into one of the gel's wells that serves as a measurement tool 
 						against which you can measure the protein of interest. The protein marker 
 						usually consists of wide range of protein sizes, ranging from 10-250 kilodaltons (kDa).  &nbsp;
-						 <a href="static/ref_lib/full_library.html#LoadGel" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+						 <a href="static/ref_lib/full_library.html#LoadGel" target='_blank' class='scb_s_select_technique_learn_more ' role='link'>Learn more &gt;&gt;</a>
 		
 			 </div>
 
@@ -409,9 +404,11 @@
         Samples 
         {if $western_blot.wells_loaded == false} 
         
-                <button class='scb_f_western_blot_tools_toggle scb_s_western_blot_tools_samples_followup_toggle'  note='scb_s_western_blot_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                <button class='scb_f_western_blot_tools_toggle scb_s_western_blot_tools_samples_followup_toggle'  
+                	role='button' aria-label='Samples Info'
+                	note='scb_s_western_blot_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              western_blot_id='{$western_blot.id}'></button>
-    		<div class='scb_s_western_blot_tools_samples_followup {if $western_blot.samples_show_state}{else}scb_s_hidden_note{/if}' >
+    		<div class='scb_s_western_blot_tools_samples_followup {if $western_blot.samples_show_state}{else}scb_s_hidden_note{/if}'  role='note'> 
 
 				<button class='scb_f_western_blot_note_close_button' aria-label='Close' note='scb_s_western_blot_tools_samples_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              western_blot_id='{$western_blot.id}'><span>&#215;</span></button>
@@ -429,14 +426,14 @@
     </div>
     <div class='scb_s_western_blot_choose_samples_order'>
     	{if $western_blot.gel_type}{else}<div class='order_overlay'></div>{/if}
-        <ol class='{if not $western_blot.wells_loaded} scb_s_western_blot_sortable_list  {else} scb_s_western_blot_static_list {/if} scb_s_western_blot_choose_samples_order_list' >
+        <ol role='list' class='{if not $western_blot.wells_loaded} scb_s_western_blot_sortable_list  {else} scb_s_western_blot_static_list {/if} scb_s_western_blot_choose_samples_order_list' >
             {foreach $r in $rows}
             {if $r.kind =='existing' and  $western_blot.marker_loaded == true and $r.lane.id == 'marker' }
-                	<li class="scb_s_western_blot_marker scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>Marker</li>
+                	<li role='listitem' class="scb_s_western_blot_marker scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}'>Marker</li>
             {/if}
             {if $r.is_valid}
 
-				<li class="scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}' title='{$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}'>
+				<li role='listitem'  class="scb_s_western_blot_choose_samples_list_item scb_s_western_blot_sortable_item scb_s_movable_item" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' id='{$r.lane.id}' title='{$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}'>
 					{$r.display_text} - {$r.lane.kinds[$r.lane.kind].name}
 				</li>
             {/if}
@@ -458,8 +455,8 @@
    	{/if}
 </div>
 <div class='scb_s_western_blot_samples_gel_area'>
-    <div class='scb_s_western_blot_gel_tabs'>
-        <div class='scb_s_western_blot_gel_tab scb_s_western_blot_gel_active' contenteditable="true">GEL</div>
+    <div class='scb_s_western_blot_gel_tabs' role='tablist'>
+        <div class='scb_s_western_blot_gel_tab scb_s_western_blot_gel_active' contenteditable="true" role='tab'>GEL</div>
     </div>
     <div class='scb_s_western_blot_gel_content'>
 
@@ -525,22 +522,22 @@
 
 	{/foreach}
 {else}
-	<select class="scb_f_western_blot_select_lysate_type" cell_treatment_id='{$cell_treatment.id}'
+	<select class="scb_f_western_blot_select_lysate_type" cell_treatment_id='{$cell_treatment.id}' role='select'
 			western_blot_id='{$western_blot.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
 			lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}"
 	{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
 	>
 	{if $lane.kind == 'existing'}
 		{foreach $k in keys($kinds)}
-		<option value='{$k}'
+		<option role='option' value='{$k}'
 		{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
 		{/foreach}
 	{else}
 		{if length(keys($kinds)) != 1}
-		<option selected="selected" disabled="disabled" value=''>Pick Lysate Type</option>
+		<option role='option' selected="selected" disabled="disabled" value=''>Pick Lysate Type</option>
 		{/if}
-		{foreach $k in keys($kinds)}
-			<option value='{$k}'>{$kinds[$k].name}</option>
+		{foreach  $k in keys($kinds)}
+			<option role='option' value='{$k}'>{$kinds[$k].name}</option>
 		{/foreach}
 	{/if}
 	</select>
@@ -557,7 +554,6 @@
             <div class='scb_s_western_blot_video_box_wrapper_title'>
                  IN THE LAB
             </div>
-            
             <div id='slider' class='scb_s_western_blot_video_box swipe'>
 				<div  class='slides_container swipe-wrap'>
 					<div>
@@ -565,16 +561,13 @@
 						<span class='scb_s_western_blot_video_heading'>Reminder:&nbsp;&nbsp;</span>
 						<span class='scb_s_western_blot_video_text'>The gel only has 15 lanes and one&nbsp;</span><br/>
 						<span class='scb_s_western_blot_video_text_second'>lane must be reserved for the protein marker.&nbsp;</span><br/>
-						
 					</div>
 					<div>
 							<iframe height='124' width='187' class='scb_s_experiment_setup_video_box_vid'  src="//www.youtube.com/embed/u7VwmJw9Gbc" frameborder="0" allowfullscreen></iframe>
-
 					</div>
 				</div>
 			</div>
 				<div class='slider_controls' style='text-align:center;'>
-  
 			  		<button onclick='mySwipe.prev()'>&#x25c0;</button> 
 					  <nav id = 'nav'>
 						<ul class='slider_dots'>
@@ -582,68 +575,64 @@
 						<li ></li>
 						</ul>
 						</nav>
-
 			  		<button onclick='mySwipe.next()'>&#x25b6;</button>
-
 				</div> 
-            
-
     </div>
-               
-     <div class='scb_s_western_blot_vertical_line_1'></div>
-    <div class='scb_s_western_blot_vertical_line_2'></div>
-    <div class='scb_s_western_blot_vertical_line_3'></div>
-    <div class='scb_s_western_blot_vertical_line_4'></div>
-    <div class='scb_s_western_blot_vertical_line_5'></div>
-	<div class='scb_s_western_blot_vertical_line_6'></div>
-	<div class='scb_s_western_blot_vertical_line_7'></div>
-    <div class='scb_s_western_blot_progress_bar'>
+    <div class='scb_s_western_blot_vertical_line_1'  role='presentation'></div>
+    <div class='scb_s_western_blot_vertical_line_2'  role='presentation'></div>
+    <div class='scb_s_western_blot_vertical_line_3'  role='presentation'></div>
+    <div class='scb_s_western_blot_vertical_line_4'  role='presentation'></div>
+    <div class='scb_s_western_blot_vertical_line_5'  role='presentation'></div>
+	<div class='scb_s_western_blot_vertical_line_6'  role='presentation'></div>
+	<div class='scb_s_western_blot_vertical_line_7'  role='presentation'></div>
+    <div class='scb_s_western_blot_progress_bar' role='progressbar'>
 
 	<div class = 'scb_s_western_blot_progress_gray_bar'>
-		<div class='scb_s_western_blot_vertical_line_1_top'></div>
-        <div class='scb_s_western_blot_vertical_line_2_top'></div>
-    	<div class='scb_s_western_blot_vertical_line_3_top'></div>
-        <div class='scb_s_western_blot_vertical_line_4_top'></div>
-        <div class='scb_s_western_blot_vertical_line_5_top'></div>
-        <div class='scb_s_western_blot_vertical_line_6_top'></div>
-        <div class='scb_s_western_blot_vertical_line_7_top'></div>
+		<div class='scb_s_western_blot_vertical_line_1_top' role='presentation'></div>
+        <div class='scb_s_western_blot_vertical_line_2_top' role='presentation'></div>
+    	<div class='scb_s_western_blot_vertical_line_3_top' role='presentation'></div>
+        <div class='scb_s_western_blot_vertical_line_4_top' role='presentation'></div>
+        <div class='scb_s_western_blot_vertical_line_5_top' role='presentation'></div>
+        <div class='scb_s_western_blot_vertical_line_6_top' role='presentation'></div>
+        <div class='scb_s_western_blot_vertical_line_7_top' role='presentation'></div>
 		<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
-
-                {if $step== 1}20px;{/if}
+        {if $step== 1}20px;{/if}
         {if $step== 2}111px;{/if}
         {if $step== 3}202px;{/if}
         {if $step== 4}293px;{/if}
         {if $step== 5}384px;{/if}
         {if $step== 6}475px;{/if}
-        {if $step== 7}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'>
+        {if $step== 7}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'
+        
+        aria-label='
+        {if $step== 1}Sample Prep{/if}
+        {if $step== 2}Prepare Gel{/if}
+        {if $step== 3}Load Gel{/if}
+        {if $step== 4}Run{/if}
+        {if $step== 5}Transfer{/if}
+        {if $step== 6}Blot{/if}
+        {if $step== 7}Develop{/if}'
+        
+        >
 		</div>
 	</div>
-    <div class='scb_s_western_blot_progress_rest'>
+    <div class='scb_s_western_blot_progress_rest' role='presentation'>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_1 '>
-            1. Sample Prep
-        </div>
+            1. Sample Prep</div>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_2 '>
-            2. Prepare Gel
-        </div>
+            2. Prepare Gel</div>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_3'>
-            3. Load Gel
-        </div>
+            3. Load Gel</div>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_4 '>
-            4. Run
-        </div>
+            4. Run</div>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_5 '>
-            5. Transfer
-        </div>
+            5. Transfer</div>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_6 '>
-            6. Blot
-        </div>
+            6. Blot</div>
         <div class='scb_s_western_blot_progress_item scb_s_western_blot_progress_7 '>
-            7. Develop
-        </div>
+            7. Develop</div>
     </div>
-
     </div>
-
 </div>
 {/template}
 

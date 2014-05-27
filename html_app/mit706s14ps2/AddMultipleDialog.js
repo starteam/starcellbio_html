@@ -10,7 +10,7 @@ mit706s14ps2.static.scb_mit706s16_inner_dialog_add = function (element, dialog, 
         var treatment_id = $(element).attr('treatment_id');
         var cell_line = $(element).attr('cell_line');
         var name = $(element).attr('name');
-
+		$(element).attr('aria-checked',true);
         var parsed = scb.ui.static.MainFrame.validate_state({
             experiment_id: experiment_id,
             assignment_id: assignment_id,
@@ -51,9 +51,12 @@ mit706s14ps2.register = function (dialog, state) {
         mit706s14ps2.static.scb_mit706s16_inner_dialog_add(this, dialog, state);
         $(this).focus();
     });
-
+	scb.utils.off_on(dialog.parent(), 'change', '.scb_f_experiment_setup_dialog_checkbox', function (e) {
+		$(this, dialog).attr('aria-checked',$(this, dialog).attr('aria-checked') =='false' ? true : false);
+	});
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_select_all', function (e) {
         $('input[type=checkbox]' , dialog).attr('checked','checked');
+         $('input[type=checkbox]' , dialog).attr('aria-checked',true);
     });
 
     scb.utils.off_on(dialog.parent(), 'click', '.scb_mit706s16_inner_dialog_title_close', function (e) {
@@ -64,6 +67,7 @@ mit706s14ps2.register = function (dialog, state) {
         var cell_line = $(this).attr('cell_line');
         var name = $(this).attr('name');
         $('input[type=checkbox][name="'+name+'"]' , dialog).attr('checked','checked');
+        $('input[type=checkbox][name="'+name+'"]' , dialog).attr('aria-checked',true);
     });
 
 }

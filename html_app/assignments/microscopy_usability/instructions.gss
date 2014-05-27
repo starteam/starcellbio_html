@@ -1,0 +1,55 @@
+.scb_s_objective_table_microscopy_usability {
+    border: 1px solid #27956c;
+       border-radius:5px;
+       border-spacing: 0px;
+       width:100%;
+       background-color: white;
+       margin-bottom:20px;
+}
+
+.scb_s_objective_table_microscopy_usability > tbody {
+    background-color: #edeef2;
+}
+
+.scb_s_objective_table_microscopy_usability > thead > tr > td:first-child {
+    border: 1px solid #e0e0e0;
+    border-right-color:black;
+    border-bottom-color:black;
+
+}
+.scb_s_objective_table_microscopy_usability > thead > tr > td:last-child{
+    border: 1px solid #e0e0e0;
+    border-left-color:black;
+    border-bottom-color:black;
+}
+
+
+.scb_s_objective_table_microscopy_usability > thead > tr > td {
+    border: 1px solid #e0e0e0;
+    border-bottom-color:black;
+    padding-left: 8px;
+}
+
+.scb_s_objective_table_microscopy_usability > tbody > tr > td:first-child {
+    border: 1px solid #e0e0e0;
+}
+
+.scb_s_objective_table_microscopy_usability > tbody > tr > td {
+    border: 1px solid #e0e0e0;
+    padding-left: 8px;
+}
+
+.scb_s_mit706s13_assignment_overview {
+    font-family: 'SourceSansPro-Regular';
+    font-size:11pt;
+    text-align: left;
+    
+}
+.scb_s_mit706s13_assignment_overview h2{
+color: #316f94;
+font-family: sourcesanspro-semibold;
+}
+
+.scb_s_mit706s13_assignment_detail {
+    text-align: left;
+}

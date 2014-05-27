@@ -23,7 +23,7 @@ class SimpleTest(TestCase):
         self.driver = webdriver.Chrome(settings.rel('../../mac/chromedriver'))
         #print settings.rel('../../ubuntu/chromedriver')
         #self.driver = webdriver.Chrome(settings.rel('../../ubuntu/chromedriver'))
-        self.base_url = 'http://localhost:8000/static/index.html#view=assignments'
+        self.base_url = 'http://localhost:8000/static/index.html'
 
     @classmethod
     def tearDownClass(self):
@@ -40,9 +40,9 @@ class SimpleTest(TestCase):
     This tests that website opening website leads to Assignments page
     """
 
-    def test_assignments_page(self):
+    def test_homepage_page(self):
         self.load_website()
-        self.assert_on_assignments_page()
+        self.assert_on_homepage_page()
 
     """
         This tests that one can go to navigation page and back
@@ -50,38 +50,61 @@ class SimpleTest(TestCase):
 
     def test_assignment_navigation_tests(self):
         self.load_website()
+        #HOMEPAGE
+        self.assert_on_homepage_page()
+        self.navigate_via('SIGN IN')
+        self.close_popup_window('scb_f_login_close_button')
+#         pudb.set_trace()
+        self.navigate_via_button('scb_f_create_student_account')
+        self.close_popup_window('scb_f_signup_close_button')
+        contact_button = self.find_by_class_name('scb_s_envelope_text')
+        contact_button.click()
+        self.close_popup_window('scb_f_contact_close_button')
+        ##Check learn more links and dynamic info section
+        
+        
+        
+        #ASSIGNMENTS PAGE
+        self.navigate_via('Try an Experiment')
+#         pudb.set_trace()
         self.assert_on_assignments_page()
-        self.select_assignment('basic_tests', title='SCB Basic Tests',
+        self.navigate_via('LIBRARY')
+        self.driver.switch_to_window(self.driver.window_handles[1])
+        self.driver.close()
+        self.driver.switch_to_window(self.driver.window_handles[0])
+#         pudb.set_trace()
+        self.select_assignment('decusability', title='StarCellBio Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.open_assignment('basic_tests', title='SCB Basic Tests',
+        self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.assert_on_assignment_page()
-        self.navigate_via(' ASSIGNMENTS')
-        self.assert_on_assignments_page()
-        self.open_assignment('basic_tests', title='SCB Basic Tests',
+        self.select_assignment('decusability', title='StarCellBio Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.assert_on_assignment_page()
-        self.assert_experiments([])
-        self.navigate_via('New Experiment')
+        self.open_assignment('decusability', title='StarCellBio Usability Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.assert_on_experiment_design_page()
         experiment_title = 'Test Experiment'
         experiment_hypo = 'Sample hypothesis ABC'
         experiment_obj = 'Sample objective ABC'
         self.set_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
-        self.navigate_via('COMPLETE ASSIGNMENT')
-        self.assert_on_assignment_page()
-        self.assert_experiments(['Test Experiment'])
-        self.navigate_via(experiment_title)
+        self.navigate_via('ASSIGNMENTS')
+        self.assert_on_assignments_page()
+#         self.assert_experiments(['Test Experiment'])
+        self.select_assignment('decusability', title='StarCellBio Usability Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.navigate_via('EXPERIMENTS')
         self.assert_on_experiment_design_page()
         self.assert_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
         self.navigate_via('EXPERIMENT SETUP')
+        self.navigate_via('1. DESIGN')
+        self.navigate_via('2. SETUP & RUN')
         self.assert_on_experiment_setup_page()
+        self.select_new_set_up()
         self.assert_samples([])
-        sample1 = {'cell_line_id': 'wt', 'treatment_id': 'P1', 'collection_id': '3 d'}
-        sample2 = {'cell_line_id': 'wt', 'treatment_id': 'P6', 'collection_id': '3 d'}
-        sample3 = {'cell_line_id': 'wt', 'treatment_id': 'P2', 'collection_id': '3 d'}
-        sample4 = {'cell_line_id': 'wt', 'treatment_id': 'P3', 'collection_id': '3 d'}
-        sample5 = {'cell_line_id': 'wt', 'treatment_id': 'P4', 'collection_id': '3 d'}
+        sample1 = {'cell_line': 'wt', 'treatment_id': 'media_only,25'}
+        sample2 = {'cell_line': 'wt', 'treatment_id': 'media_only,40'}
+        sample3 = {'cell_line': 'm1', 'treatment_id': 'media_only,25'}
+        sample4 = {'cell_line': 'm1', 'treatment_id': 'media_only,40'}
+        sample5 = {'cell_line': 'm2', 'treatment_id': 'media_only,25'}
         self.add_sample(sample1)
         self.assert_samples([sample1])
         self.add_sample(sample2)
@@ -102,48 +125,48 @@ class SimpleTest(TestCase):
         self.assert_on_experiment_setup_page()
         self.assert_samples([sample2,sample1,sample3,sample4,sample5])
         self.navigate_via('RUN EXPERIMENT')
-        self.assert_on_experiment_run_page()
-        self.navigate_via('SELECT TECHNIQUE')
+        
+        self.assert_on_experiment_setup_page()
+        time.sleep(3)
+        self.navigate_via('CONFIRM SET-UP')
         self.assert_on_select_technique_page()
         self.assert_western_blots([])
         self.navigate_via('NEW WESTERN BLOT')
         self.assert_on_western_blot_page()
         self.navigate_via('SELECT TECHNIQUE')
         self.assert_on_select_technique_page()
-        self.assert_western_blots(['W.B. 1'])
+        self.assert_western_blots(['W. B. 1'])
         self.navigate_via('NEW WESTERN BLOT')
         self.assert_on_western_blot_page()
         self.navigate_via('SELECT TECHNIQUE')
         self.assert_on_select_technique_page()
-        self.assert_western_blots(['W.B. 1','W.B. 2'])
-        self.navigate_via('W.B. 2')
+        self.assert_western_blots(['W. B. 1','W. B. 2'])
+        self.navigate_via('W. B. 2')
         self.assert_on_western_blot_page()
-        self.assert_western_blot_tabs('W.B. 2', ['W.B. 1'])
-        #pudb.set_trace()
-        self.navigate_via('W.B. 1')
-        self.assert_western_blot_tabs('W.B. 1', ['W.B. 2'])
+        self.assert_western_blot_tabs('W. B. 2', ['W. B. 1', 'ADD\n| +'])
+
+        self.navigate_via('W. B. 1')
+        self.assert_western_blot_tabs('W. B. 1', ['W. B. 2', 'ADD\n| +'])
         self.navigate_via('SELECT TECHNIQUE')
         self.assert_on_select_technique_page()
         self.navigate_via('NEW WESTERN BLOT')
         self.assert_on_western_blot_page()
-        self.assert_western_blot_tabs('W.B. 3', ['W.B. 1', 'W.B. 2'])
+        self.assert_western_blot_tabs('W. B. 3', ['W. B. 1', 'W. B. 2', 'ADD\n| +'])
+
         self.remove_western_blot()
-        self.assert_on_select_technique_page()
-        self.navigate_via('W.B. 1')
-        self.assert_western_blot_tabs('W.B. 1', ['W.B. 2'])
+        
+        self.assert_western_blot_tabs('W. B. 2', ['W. B. 1', 'ADD\n| +'])
         self.rename_western_blot('Exp. 1')
         self.navigate_via('SELECT TECHNIQUE')
         self.assert_on_select_technique_page()
         self.navigate_via('Exp. 1')
-        self.assert_western_blot_tabs('Exp. 1', ['W.B. 2'])
-        #pudb.set_trace()
+        self.assert_western_blot_tabs('Exp. 1', ['W. B. 1', 'ADD\n| +'])
+        
         self.select_lysates()
         self.navigate_via('PREPARE LYSATES')
-        #pudb.set_trace()
         self.select_gel_type()
         old_order = self.read_list()
         #The drag and drop command in selenium does not work on the Mac OSX, only the linux
-        #if(self.driver.name == u'chrome'):
         print 'old order'
         print old_order
         if(platform.mac_ver()[0] != ''):
@@ -152,32 +175,90 @@ class SimpleTest(TestCase):
         	new_order = self.read_list()
         	print 'new order:'
         	print new_order
-        	#self.assert_order_different(old_order, new_order)
         self.select_load_marker()
         if(platform.mac_ver()[0] != ''):
         	load_order = self.read_list()
-        	#self.assert_order_different(old_order, load_order)
         	print 'load_order'
         	print load_order
         self.select_gel_and_transfer()
         if(platform.mac_ver()[0] != ''):
         	gel_order = self.read_list()
-        	#self.assert_order_different(old_order, gel_order)
-        	#self.assert_order_same(new_order, gel_order)
 		print 'gel_order'
 		print gel_order
-        wb_sample1 = { 'primary_antibody':'1' , 'secondary_antibody':'2' }
+        wb_sample1 = { 'primary_antibody':'cdk2' , 'secondary_antibody':'r' }
         self.select_wb_antibody(wb_sample1)
         self.navigate_via('BLOT')
-        #pudb.set_trace()
         self.navigate_via('RE-PROBE')
-        self.navigate_via('anti-let-23')
+        self.navigate_via('cdk2')
         self.navigate_via('BLOT')
         self.navigate_via('SELECT TECHNIQUE')
+        self.navigate_via('NEW FLOW CYTOMETRY')
+        self.select_lysates_facs()
+        self.navigate_via('PREPARE SAMPLES')
+        time.sleep(2)
+        self.navigate_via_button('scb_f_facs_run_samples_short')
+        self.navigate_via_button('scb_f_facs_tools_start_analysis')
+        self.navigate_via_button('scb_s_facs_tools_instructions_followup_toggle')
+        time.sleep(5)
+        self.navigate_via_button('scb_s_instructions_close')
+        self.navigate_via_button('scb_s_facs_histogram_info')
+        time.sleep(2)
+        self.navigate_via_button('scb_s_facs_histogram_info')
+        self.navigate_via_button('scb_s_facs_histogram_info')
+        time.sleep(2)
+        #self.navigate_via_button('scb_s_facs_single_range_button')
+        self.navigate_via_button('scb_s_facs_tools_samples_followup_toggle')
+        time.sleep(5)
+        self.navigate_via_button('scb_s_samples_close')
+        time.sleep(2)
+        #pudb.set_trace()
+        self.navigate_via('ASSIGNMENTS')
+        self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.open_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.assert_on_experiment_design_page()
+        experiment_title = 'Test Experiment'
+        experiment_hypo = 'Sample hypothesis ABC'
+        experiment_obj = 'Sample objective ABC'
+        self.set_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
+        self.navigate_via('ASSIGNMENTS')
+        self.assert_on_assignments_page()
+        self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+            description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
+        self.navigate_via('EXPERIMENTS')
+        self.assert_on_experiment_design_page()
+        self.assert_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
+        self.navigate_via('EXPERIMENT SETUP')
+        self.navigate_via('1. DESIGN')
+        self.navigate_via('2. SETUP & RUN')
+        self.assert_on_experiment_setup_page()
+        self.select_new_set_up()
+        button = self.find_by_class_name('scb_s_experiment_setup_table_element')
+        button.click()
+        time.sleep(3)
+        
+        self.navigate_via('RUN EXPERIMENT')
+        self.navigate_via('RUN EXPERIMENT')
+        print 'after run experiment click'
+        
+        time.sleep(5)
+        self.navigate_via('CONFIRM SET-UP')
+        self.assert_on_select_technique_page()
+        time.sleep(5)
+        #can't see graph in test, so cannot test facs graph with this selenium 
+        #need to test microscopy in sample usability test, in same problem set
+        
+    	
+        
+        
 
     ## navigation helpers and assertions
     def assert_on_assignments_page(self):
         self.find_by_class_name('scb_s_assignments_view')
+        
+    def assert_on_homepage_page(self):
+    	self.find_by_class_name('scb_s_homepage_view')
 
     def assert_on_assignment_page(self):
         self.find_by_class_name('scb_s_assignment_view')
@@ -214,7 +295,12 @@ class SimpleTest(TestCase):
         for e in elements:
         	array.append(e.get_attribute('id'))
         return array
-
+    
+    
+    def close_popup_window(self, class_name):
+    	close_button = self.find_by_class_name(class_name)
+    	close_button.click()
+    
     def assert_experiments(self, experiment_list):
         web_experiment_list = self.driver.find_elements_by_class_name('scb_f_open_assignment_experiment')
         self.assertEqual(experiment_list.__len__(), web_experiment_list.__len__())
@@ -254,11 +340,11 @@ class SimpleTest(TestCase):
     def add_sample(self, sample):
         add_button = self.find_by_class_name('scb_f_experiment_setup_action_open_add_samples_dialog')
         add_button.click()
-        self.find_by_class_name('scb_s_experiment_setup_table_add_samples_dialog')
-        self.select_option(sample['cell_line_id'], 'value', 'scb_s_experiment_setup_dialog_cell_lines_select_option')
-        self.select_option(sample['treatment_id'], 'value', 'scb_s_experiment_setup_dialog_treatments_select_option')
-        self.select_option(sample['collection_id'], 'value','scb_s_experiment_setup_dialog_collection_select_option')
-        add_dialog_button = self.find_by_class_name('scb_f_experiment_setup_dialog_apply')
+        self.find_by_class_name('scb_mit706s16_dialog')
+        self.select_option(sample['cell_line'], 'cell_line', 'scb_f_experiment_setup_dialog_checkbox')
+#         self.select_option(sample['treatment_id'], 'treatment_id', 'scb_f_experiment_setup_dialog_checkbox')
+#         self.select_option(sample['collection_id'], 'value','scb_s_experiment_setup_dialog_collection_select_option')
+        add_dialog_button = self.find_by_class_name('scb_mit706s16_inner_dialog_add')
         add_dialog_button.click()
 
     def remove_sample(self,sample):
@@ -273,7 +359,7 @@ class SimpleTest(TestCase):
 
     def assert_western_blot_tabs(self, western_blot_active, western_blot_titles):
         web_active_western_blot = self.find_by_class_name('scb_s_western_blot_selected')
-        self.assertEqual(western_blot_active,web_active_western_blot.text)
+        self.assertEqual(western_blot_active, (web_active_western_blot.text if len(web_active_western_blot.text)>0 else web_active_western_blot.get_attribute('value')))
         web_wb_rows = self.driver.find_elements_by_class_name('scb_f_open_western_blot');
         self.assertEqual(western_blot_titles.__len__(), web_wb_rows.__len__())
         web_wb_list = [x.text for x in web_wb_rows]
@@ -288,6 +374,11 @@ class SimpleTest(TestCase):
         e_title.clear()
         e_title.send_keys(title)
         e_title.send_keys("\n")
+        
+    def select_new_set_up(self):
+    	e_class = self.find_by_class_name('scb_f_experiment_setup_new_set_up')
+    	e_class.click()
+
 
     def select_wb_antibody(self,sample):
         time.sleep(1)
@@ -312,6 +403,8 @@ class SimpleTest(TestCase):
         e_class.click()
     
     def select_gel_and_transfer(self):
+    	e_class = self.find_by_class_name('scb_s_western_blot_load_all')
+    	e_class.click()
     	e_class = self.find_by_class_name('scb_s_western_blot_run_gel_and_transfer')
     	e_class.click()
 
@@ -322,8 +415,20 @@ class SimpleTest(TestCase):
             cb = checkboxes[i]
             cb.click()
             select = self.driver.find_elements_by_css_selector('.scb_f_western_blot_select_lysate_type')
-            options = select[2*i].find_elements_by_tag_name('option')
+            options = select[i].find_elements_by_tag_name('option')
             option = [x for x in options if x.get_attribute('value') == 'whole']
+            if(option.__len__() > 0 ):
+                option[0].click()
+    
+    def select_lysates_facs(self):
+        cbs = self.driver.find_elements_by_css_selector('.scb_f_facs_sample_active')
+        for i in range(0,cbs.__len__()):
+            checkboxes = self.driver.find_elements_by_css_selector('.scb_f_facs_sample_active')
+            cb = checkboxes[i]
+            cb.click()
+            select = self.driver.find_elements_by_css_selector('.scb_f_facs_select_lysate_type')
+            options = select[i].find_elements_by_tag_name('option')
+            option = [x for x in options if x.get_attribute('value') == 'PI']
             if(option.__len__() > 0 ):
                 option[0].click()
 
@@ -338,9 +443,10 @@ class SimpleTest(TestCase):
         self.assertEqual(assignment.tag_name, u'a')
         assignment.click()
         assignment = self.find_by_link_text(title)
+        #pudb.set_trace()
         cls = assignment.get_attribute('class')
         self.assertRegexpMatches(cls, 'scb_f_open_assignment')
-        new_exp = self.find_by_link_text('New Experiment')
+        new_exp = self.find_by_class_name('scb_assignments_new_experiment')
         new_exp_href = new_exp.get_attribute('href')
         self.assertRegexpMatches(new_exp_href, "assignment_id=%s" % name)
         self.assertRegexpMatches(new_exp_href, "view=experiment_design")
@@ -349,15 +455,20 @@ class SimpleTest(TestCase):
 
 
     def open_assignment(self, name, title, description, **map):
-        assignment = self.find_by_link_text(title)
+        assignment = self.find_by_class_name('scb_assignments_new_experiment')
         cls = assignment.get_attribute('class')
-        self.assertRegexpMatches(cls, 'scb_f_open_assignment')
+        #pudb.set_trace()
+        self.assertRegexpMatches(cls, 'scb_f_open_experiment')
         assignment.click()
 
 
     def navigate_via(self, title):
         back = self.find_by_link_text(title)
         back.click()
+        
+    def navigate_via_button(self, title):
+    	e_class = self.find_by_class_name(title)
+        e_class.click()
 
     ## WebDriver helpers
     def find_by_class_name(self, class_name):
@@ -379,16 +490,16 @@ class SimpleTest(TestCase):
         
         
     def test_sortable(self):
-    	with open(settings.rel('../html_app/js/jquery-1.7.2.js')) as jquery_js_2:
-    		jquery = jquery_js_2.read()
-    	self.driver.execute_script(jquery)
-    	with open(settings.rel('jquery.simulate.drag-sortable.js')) as jquery_js_3:
-    		jquery_drag = jquery_js_3.read()
-    	self.driver.execute_script(jquery_drag)
+#    	with open(settings.rel('../html_app/js/jquery-1.7.2.js')) as jquery_js_2:
+#    		jquery = jquery_js_2.read()
+#    	self.driver.execute_script(jquery)
+#    	with open(settings.rel('jquery.simulate.drag-sortable.js')) as jquery_js_3:
+#    		jquery_drag = jquery_js_3.read()
+#    	self.driver.execute_script(jquery_drag)
     	#Need this library to be injected beyond the jquery to make sure you don't get errors for the other selectors
-    	with open(settings.rel('../html_app/js/jquery.ba-bbq.min.js')) as jquery_js_4:
-    		jquery_bbq = jquery_js_4.read()
-    	self.driver.execute_script(jquery_bbq)
+#    	with open(settings.rel('../html_app/js/jquery.ba-bbq.min.js')) as jquery_js_4:
+#    		jquery_bbq = jquery_js_4.read()
+#    	self.driver.execute_script(jquery_bbq)
     	script = "$($('.scb_s_western_blot_choose_samples_list_item')[0]).simulateDragSortable({ move: 1 });"
     	success = self.driver.execute_script(script)
     	

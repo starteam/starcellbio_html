@@ -13,8 +13,8 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
     			if (m.parser_simple){
 					var microscopy_lane = state.microscopy_lane;
 					var cell_line = microscopy_lane.cell_treatment.cell_line;
-					var collection_id= microscopy_lane.cell_treatment.treatment_list.list[0].collection_id;
-					var drug_id = microscopy_lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id;
+					var collection_id= microscopy_lane.cell_treatment.treatment_list.first.collection_id;
+					var drug_id = microscopy_lane.cell_treatment.treatment_list.first.drug_list.list[0].drug_id;
 					var slide_type = microscopy_lane.kind;	
 					var conditions = microscopy_lane.slide_conditions;
 					var imgs = []
@@ -72,10 +72,10 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 				else if (m.complex_parser){
 					var microscopy_lane = state.microscopy_lane;
 					var cell_line = microscopy_lane.cell_treatment.cell_line;
-					var collection_id= microscopy_lane.cell_treatment.treatment_list.list[0].collection_id;
+					var collection_id= microscopy_lane.cell_treatment.treatment_list.first.collection_id;
 					var slide_type = microscopy_lane.kind;	
 					var conditions = microscopy_lane.slide_conditions;
-					var drug_id = microscopy_lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id;
+					var drug_id = microscopy_lane.cell_treatment.treatment_list.first.drug_list.list[0].drug_id;
 					//add phenotype property
 					var imgs = []
 					var micro_state = {
@@ -125,10 +125,10 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 				else if(m.conditions_parser){
 					var microscopy_lane = state.microscopy_lane;
 					var cell_line = microscopy_lane.cell_treatment.cell_line;
-					var collection_id= microscopy_lane.cell_treatment.treatment_list.list[0].collection_id;
+					var collection_id= microscopy_lane.cell_treatment.treatment_list.first.collection_id;
 					var slide_type = microscopy_lane.kind;	
 					var conditions = microscopy_lane.slide_conditions;
-					var drug_id = microscopy_lane.cell_treatment.treatment_list.list[0].drug_list.list[0].drug_id;
+					var drug_id = microscopy_lane.cell_treatment.treatment_list.first.drug_list.list[0].drug_id;
 					//add phenotype property
 					var imgs = []
 					var micro_state = {

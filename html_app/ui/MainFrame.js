@@ -243,6 +243,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });;
 			$('.jqDialog_header').remove();
 			$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error:</h1>");
+			$('#jqDialog_box').attr('role', 'alertdialog');
 
         }
     }
@@ -284,6 +285,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 		);
 		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Delete experiment?</h1>");
+		$('#jqDialog_box').attr('role', 'alertdialog');
 
     });
     
@@ -303,7 +305,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         });
 		$('.scb_s_contact_iframe', workarea).load(function(){
 				$('.scb_s_contact_dialog').draggable({ handle:'.scb_s_feedback_form'});
-				var iframe = document.getElementsByTagName('iframe')[0];
+				var iframe = $('.scb_s_contact_iframe').get(0);
 				var content = (iframe.contentDocument || iframe.contentWindow);
 				content.body.style.fontSize = '90%';
 				content.body.style.fontFamily = 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif';
@@ -314,15 +316,15 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				$(texts).attr('placeholder', '');
 				$(texts).css('font-family', 'Trebuchet MS, sans-serif');
 				
-				var iframe = $('.iframe').contents();
+				var iframe = $('.scb_s_contact_iframe').contents();
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 			
 				var fieldset = content.querySelectorAll('fieldset');
 				$(fieldset).css('border', '0');
 				$('.scb_s_contact_iframe', workarea).contents().find(".scb_f_contact_submit_button").click(function(e){
 					$('.scb_s_contact_iframe', workarea).load(function(){
-						  var profile = $('.scb_s_contact_iframe', workarea).contents();
-						  if(profile[0].body.textContent.indexOf('you for your feedback.') >0){
+						  var profile = $('.scb_s_contact_iframe', workarea).contents().get(0);
+						  if(profile.body.textContent.indexOf('you for your feedback.') >0){
 							  parent.document.location.reload();
 							  }
 					});
@@ -378,10 +380,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				}
 				var anchor_element = $(event.target).closest('.anchors')
 				if(event.target.className == 'intextlink')
-					anchor_element = $(event.target)
+					anchor_element = $(event.target).get(0);
 				var anchor_hash = $(anchor_element).attr('href');
 				var window_location=window.location.toString()+'/static/ug2/help.html'+anchor_hash;
-						hashchange_function(anchor_hash, anchor_element[0]);
+						hashchange_function(anchor_hash, anchor_element);
 						iframe_history.push(anchor_hash);
 						currentPush=true;
 						//console.log(iframe_history);
@@ -434,7 +436,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     					$('iframe.scb_s_ug_dialog').contents().find(".scb_s_ug_home").click();
     				else
     					$('iframe.scb_s_ug_dialog').contents().find('a[href="'+back_url+'"]').click();
-// 					$('iframe')[0].contentWindow.location.hash =back_url;
 				}
 				else{
 					$(".scb_s_ug_back").addClass('scb_s_ug_back_disabled');
@@ -458,7 +459,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 							popout_string = $(visible).attr('class');
 					}
 					else{
-						popout_string = $($('iframe.scb_s_ug_dialog').contents().find('span:visible')[0]).attr('class');
+						popout_string = $($('iframe.scb_s_ug_dialog').contents().find('span:visible').get(0)).attr('class');
 					}
 	
 					popout_string = popout_string.replace(/_/g, '-');
@@ -514,6 +515,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				);
 				$('.jqDialog_header').remove();
 				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
 				evt.preventDefault();
         }
         else{
@@ -814,6 +816,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
             	$('.jqDialog_header').remove();
             	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
+            	$('#jqDialog_box').attr('role', 'alertdialog');
                 if (parsed.assignment) {
                     self.show({
                         view: 'assignments',
@@ -1010,8 +1013,8 @@ function add_login_script(workarea){
 				scb.utils.off_on(workarea, 'click', '.scb_f_login_close_button', function () {
 					$('.scb_s_login_dialog').detach();
 				});
-				$('.iframe').load(function(){
-					var iframe = document.getElementsByTagName('iframe')[0];
+				$('.scb_f_login_iframe').load(function(){
+					var iframe = $('.scb_f_login_iframe').get(0);
 					var content = (iframe.contentDocument || iframe.contentWindow);
 					content.body.style.fontSize = '90%';
 					content.body.style.fontFamily = 'Trebuchet MS, Helvetica, Arial, Verdana, sans-serif';
@@ -1023,25 +1026,25 @@ function add_login_script(workarea){
 					$(texts).attr('placeholder', '');
 					$(texts).css('font-family', 'Trebuchet MS, sans-serif');
 				
-					var iframe = $('.iframe').contents();
+					var iframe = $('.scb_f_login_iframe').contents();
 					iframe.find('input[type="checkbox"]').css('height', '12px');
 					iframe.find('a:contains("Member")').click(function(){
-						$('.iframe').load(function(){
+						$('.scb_f_login_iframe').load(function(){
 						
 							$('.scb_s_login_form > div').text('Sign Up');
 							$('.scb_s_login_dialog').addClass('scb_s_signup_dialog');
-							$('.iframe').css('height', '490px'); 
+							$('.scb_f_login_iframe').css('height', '490px'); 
 						});
 					});
 					iframe.find('a:contains("Password")').click(function(){
-						$('.iframe').load(function(){
+						$('.scb_f_login_iframe').load(function(){
 						
 							$('.scb_s_login_form > div').text('Reset Password');
 						});
 					});
 				
 					iframe.find('a:contains("Back")').click(function(){
-						$('.iframe').load(function(){
+						$('.scb_f_login_iframe').load(function(){
 						
 							$('.scb_s_login_form > div').text('Sign In');
 						});
@@ -1059,19 +1062,19 @@ function add_login_script(workarea){
 
 							   $('.overlay').append(progress_icon);
 							
-							   $('.iframe').hide();
-							   $('.iframe').load(function(){
-								  var profile = $('.iframe').contents();
-								  if(profile[0].body.textContent.indexOf('confirmed') >0){
+							   $('.scb_f_login_iframe').hide();
+							   $('.scb_f_login_iframe').load(function(){
+								  var profile = $('.scb_f_login_iframe').contents().get(0);
+								  if(profile.body.textContent.indexOf('confirmed') >0){
 									  parent.document.location.reload();
 									
 									  }
 								  
 									  else{
 											 $(mask).remove();
-										   $('.iframe').show();
-										   if($('.iframe').contents().find('.login_submit').length >0)
-											$('.iframe').contents().find('#errorMsg').html('Incorrect username or password. Try again');
+										   $('.scb_f_login_iframe').show();
+										   if($('.scb_f_login_iframe').contents().find('.login_submit').length >0)
+											$('.scb_f_login_iframe').contents().find('#errorMsg').html('Incorrect username or password. Try again');
 									   
 									  }
 							   });

@@ -121,6 +121,23 @@
   border-radius: 5px;
   background-color: lightgray !important;
 }
+.scb_s_facs_double_range_button {
+  background-image: url('../../images/header/scb_bisector_icon.png') !important;
+  height: 16px;
+  width: 26px;
+  background-repeat: no-repeat !important;
+  border-radius: 5px;
+  background-color: lightgray !important;
+}
+.scb_s_facs_double_range_button:active {
+  border-style: inset;
+  background-image: url('../../images/header/scb_bisector_icon.png') !important;
+  height: 16px;
+  width: 26px;
+  background-repeat: no-repeat !important;
+  border-radius: 5px;
+  background-color: #676767 !important;
+}
 .scb_s_facs_single_range_button:active {
   border-style: inset;
   background-image: url('../../images/header/scb_histogram_icon.png') !important;
@@ -136,7 +153,7 @@
 .scb_s_facs_label>.ui-button-text {
   padding: 0 6px !important;
 }
-scb_s_facs_single_range_button:checked>label {
+.scb_s_facs_single_range_button:checked>label, .scb_s_facs_double_range_button:checked>label {
   background-color: #676767 !important;
 }
 .scb_s_facs_left_facs {
@@ -345,6 +362,12 @@ input[type=radio]:disabled {
   margin-top: 3px;
   font-size: 9pt;
 }
+.scb_f_facs_sample_remove {
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
 .scb_s_facs_tab_content {
   margin-top: -27px;
   background-color: #fff;
@@ -367,19 +390,22 @@ input[type=radio]:disabled {
   background: #edeef2;
 }
 .sample_prep_select_facs {
-  width: 75px;
+  width: 63px;
 }
 .sample_prep_samples_facs {
-  width: 342px;
+  width: 324px;
 }
 .sample_prep_cellt_facs {
-  width: 195px;
+  width: 168px;
 }
 .sample_prep_dna_facs {
-  width: 279px;
+  width: 311px;
 }
 .sample_prep_blank_facs {
   width: 10px;
+}
+.sample_prep_cond_facs {
+  width: 296px;
 }
 .scb_s_facs_samples_table {
   border-radius: 5px;
@@ -521,7 +547,7 @@ input[type=radio]:disabled {
   border-radius: 5px;
   border-spacing: 0;
   width: 189px;
-  max-height: 200px;
+  max-height: 240px;
   display: block;
   background-color: white;
   margin-bottom: 20px;
@@ -536,7 +562,7 @@ input[type=radio]:disabled {
   font-family: 'sourcesanspro-semibold';
   font-size: 10pt;
   padding-left: 5px;
-  border-right: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
 }
 .scb_s_facs_tools_instructions_followup_toggle {
   outline: none;
@@ -574,7 +600,7 @@ input[type=radio]:disabled {
 }
 .scb_f_facs_dna_followup {
   display: none;
-  right: -66px;
+  right: 98px;
   position: absolute;
   width: 181px;
   background: #f4f6f8;
@@ -589,7 +615,7 @@ input[type=radio]:disabled {
 }
 .scb_s_facs_dna_info {
   outline: none;
-  right: 113px;
+  right: 277px;
   bottom: -3px;
   position: absolute;
   background: none;
@@ -633,7 +659,7 @@ input[type=radio]:disabled {
 }
 .scb_f_facs_cell_followup {
   display: none;
-  right: 144px;
+  right: 257px;
   position: absolute;
   width: 205px;
   background: #f4f6f8;
@@ -648,7 +674,7 @@ input[type=radio]:disabled {
 }
 .scb_s_facs_cell_info {
   outline: none;
-  right: 349px;
+  right: 462px;
   bottom: -3px;
   position: absolute;
   background: none;

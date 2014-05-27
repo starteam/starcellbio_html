@@ -54,7 +54,7 @@ TODO: new facs
 @param experiment
 */
 {template .display_details}
-<div class='scb_s_select_technique_container'>
+<div class='scb_s_select_technique_container' role='main'>
 
 <div class='scb_s_select_technique_details_view'>
 	{call scb_common.experiment_step}
@@ -65,9 +65,9 @@ TODO: new facs
     {/call}
     <div class='scb_s_select_technique_western_blot scb_f_select_technique'>
         <h1 class='scb_s_select_technique_header'>Western Blot Analyses:</h1>
-        <div class='scb_s_select_technique_western_blot_available'>
+        <div class='scb_s_select_technique_western_blot_available' aria-label='List of Western Blot Experiments'>
         {foreach $w in $experiment.western_blot_list.list}
-            <a class='scb_f_open_western_blot scb_s_select_technique_open_western_blot' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$w.id}' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$w.id}'>{$w.name}</a><br>
+            <a role='link' class='scb_f_open_western_blot scb_s_select_technique_open_western_blot' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$w.id}' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}&western_blot_id={$w.id}'>{$w.name}</a><br>
         {/foreach}
         {if $experiment.western_blot_list.length == 0}
         	<ul class='scb_s_select_technique_list'>
@@ -76,20 +76,20 @@ TODO: new facs
             </ul>
         {/if}
         </div>
-        <a class='scb_s_navigation_button scb_f_new_western_blot ' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>NEW WESTERN BLOT &nbsp; &#9654;</a>
+        <a role='button' class='scb_s_navigation_button scb_f_new_western_blot ' href='#view=western_blot&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>NEW WESTERN BLOT &nbsp; &#9654;</a>
         <p class='scb_s_select_technique_para'>
             <span class='scb_s_select_technique_reminder'>Reminder:</span><br>
             Western blotting detects overall changes in the amount or chemical modifications of a particular protein. &nbsp;
-            <a href="static/ref_lib/full_library.html#WesternBlotting" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+            <a role='link' href="static/ref_lib/full_library.html#WesternBlotting" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
         </p>
     </div>
 
 
     <div class='scb_s_select_technique_flow scb_f_select_technique'>
         <h1 class='scb_s_select_technique_header'>Flow Cytometry Analyses:</h1>
-        <div class='scb_s_select_technique_western_blot_available'>
+        <div class='scb_s_select_technique_western_blot_available' aria-label='List of Flow Cytometry Experiments'>
             {foreach $w in $experiment.facs_list.list}
-                <a class='scb_f_open_facs scb_s_select_technique_open_facs' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'  facs_id='{$w.id}' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$w.id}'>{$w.name}</a><br>
+                <a role='link' class='scb_f_open_facs scb_s_select_technique_open_facs' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'  facs_id='{$w.id}' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}&facs_id={$w.id}'>{$w.name}</a><br>
             {/foreach}
             {if $experiment.facs_list.length == 0}
             	<ul class='scb_s_select_technique_list'>
@@ -99,20 +99,20 @@ TODO: new facs
             {/if}
 
         </div>
-        <a class='scb_s_navigation_button scb_f_new_flow_cytometry' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>NEW FLOW CYTOMETRY &nbsp; &#9654;</a>
+        <a role='button' class='scb_s_navigation_button scb_f_new_flow_cytometry' href='#view=facs&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>NEW FLOW CYTOMETRY &nbsp; &#9654;</a>
         <p class='scb_s_select_technique_para scb_s_facs_select_technique'>
             <span class='scb_s_select_technique_reminder'>Reminder:</span><br>
             Flow cytometry is used to count and analyze the size, shape and properties of individual cells within a heterogeneous population of cells. &nbsp;
-            <a href="static/ref_lib/full_library.html#FlowCytometry"target='_blank'  class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+            <a role='link' href="static/ref_lib/full_library.html#FlowCytometry"target='_blank'  class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
         </p>
     </div>
 
 
     <div class='scb_s_select_technique_micro scb_f_select_technique'>
         <h1 class='scb_s_select_technique_header'>Microscopy Analyses:</h1>
-        <div class='scb_s_select_technique_western_blot_available'>
+        <div class='scb_s_select_technique_western_blot_available' aria-label='List of Microscopy Experiments'>
         	{foreach $w in $experiment.microscopy_list.list}
-                <a class='scb_f_open_microscopy scb_s_select_technique_open_microscopy' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' microscopy_id='{$w.id}' href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}&microscopy_id={$w.id}'>{$w.name}</a><br>
+                <a role='link' class='scb_f_open_microscopy scb_s_select_technique_open_microscopy' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' microscopy_id='{$w.id}' href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}&microscopy_id={$w.id}'>{$w.name}</a><br>
             {/foreach}
             {if $experiment.microscopy_list.length == 0}
             	<ul class='scb_s_select_technique_list'>
@@ -121,16 +121,16 @@ TODO: new facs
                 </ul>
             {/if}
         </div>
-        <a class='scb_s_navigation_button scb_f_new_microscopy ' href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>NEW MICROSCOPY &nbsp; &#9654;</a>
+        <a role='button' class='scb_s_navigation_button scb_f_new_microscopy ' href='#view=microscopy&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>NEW MICROSCOPY &nbsp; &#9654;</a>
         <p class='scb_s_select_technique_para'>
             <span class='scb_s_select_technique_reminder'>Reminder:</span><br>
             Microscopy is used to study the shape, morphology and properties of cells, tissues or organisms that otherwise cannot be observed by eye. &nbsp;
-            <a href="static/ref_lib/full_library.html#Microscopy" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
+            <a role='link' href="static/ref_lib/full_library.html#Microscopy" target='_blank' class='scb_s_select_technique_learn_more '>Learn more &gt;&gt;</a>
         </p>
     </div>
 </div>
     <a class="scb_s_navigation_button scb_f_open_experiment_setup_readonly"
-       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}">&#9664; &nbsp; REVIEW SET-UP</a><br/>
+       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}" role='button' >&#9664; &nbsp; REVIEW SET-UP</a><br/>
 
 </div>
 {/template}

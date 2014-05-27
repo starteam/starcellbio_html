@@ -6,7 +6,6 @@
   /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
 }
 .scb_s_assignments_view {
-    height: 100%;
     width: 1002px;
     background-color: #f4f6f8;
 }
@@ -321,6 +320,11 @@ background-image:url('../../images/western_blot/scb_gray_right_arrow_hover.png')
 	float:left !important;
 	background: none !important;
 	background-image: url('../../images/header/scb_print.png') !important;
+}
+
+.scb_s_assignments_print_assignment:hover{
+	background-color: darkgray !important;
+	padding-right: 13px;
 }
 
 .assignement_experiment_list {
