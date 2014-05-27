@@ -736,6 +736,10 @@ input[type=radio]:disabled{
     padding-left:5px;
 }
 
+.scb_s_facs_analyze_remove_point{
+	cursor:pointer;
+}
+
 .scb_s_facs_tools_analyze_data > tbody >tr>td{
     background-color: #edeef2;
 }

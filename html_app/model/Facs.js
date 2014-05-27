@@ -70,7 +70,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'double_analysis', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'gate_count', 0, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'midpoint', {}, null, context);
-
+	scb.Utils.initialize_accessor_field(self, data, 'prep_scroll', 0, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'show_analysis', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'apply_dna_analysis_to_all', false, null, context);

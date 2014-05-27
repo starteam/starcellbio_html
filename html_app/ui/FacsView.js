@@ -41,8 +41,8 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
     parsed.facs.is_cell_treatment_enabled[cell_treatment_id] = val;
     $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
         scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
-    })
-    
+    });
+    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
     if (event) {
         scb.ui.static.MainFrame.refresh();
     }
@@ -51,6 +51,7 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
 scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
 	parsed = resetScrollValue(parsed);
+	parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -284,7 +285,7 @@ scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
 scb.ui.static.FacsView.scb_f_facs_sample_remove = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
     parsed = resetScrollValue(parsed);
-//         parsed.facs.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
+        parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -841,7 +842,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                         position: 'absolute',
                         top: from_point.top+'px',
                         left: Math.min(from_point.left, to_point.left) + "px",
-                        height: '5px',
+                        height: (310-from_point.top)+'px', //'5px',
                         color:point_to_edit? point_to_edit.c : '#808080',
                         background: (point_to_edit ? ( left ? point_to_edit.c : 'white' ) : '#a0a0a0'),
                         width: Math.abs(from_point.left - to_point.left) + "px",
@@ -908,7 +909,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                         position: 'absolute',
                         top: from_point.top+'px',
                         left: Math.min(from_point.left, to_point.left) + "px",
-                        height: '5px',
+                        height: (310-from_point.top)+'px',//'5px',
                         color:point_to_edit? point_to_edit.c : '#808080',
                         background: (point_to_edit ? ( left ? point_to_edit.c : 'white' ) : '#a0a0a0'),
                         width: Math.abs(from_point.left - to_point.left) + "px",
@@ -964,12 +965,12 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                         position: 'absolute',
                         top: from_point.top+'px',
                         left: Math.min(from_point.left, to_point.left) + "px",
-                        height: '5px',
+                        height: (310-from_point.top)+'px',//'5px',
                         color:point_to_edit? point_to_edit.c : '#808080',
                         background: (point_to_edit ? ( left ? point_to_edit.c : 'white' ) : '#a0a0a0'),
                         width: Math.abs(from_point.left - to_point.left) + "px",
-                        'border-left': (point_to_edit ? ( left ? '2px solid ' + point_to_edit.c : '1px solid white' ) : '2px dotted #a0a0a0'),
-                        'border-right': (point_to_edit ? ( !left ? '2px solid ' + point_to_edit.c : '1px solid white') : '2px dotted #a0a0a0'),
+                        'border-left': (point_to_edit ? ( left ? '2px solid ' + point_to_edit.c : '1px solid white' ) : '2px dashed #a0a0a0'),
+                        'border-right': (point_to_edit ? ( !left ? '2px solid ' + point_to_edit.c : '1px solid white') : '2px dashed #a0a0a0'),
                         'vertical-align': 'center',
                     }
                     console.info(styles);
@@ -1063,7 +1064,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 
         
         if (kind == 'sample_prep'){
-        	$('.scb_s_facs_samples_table', '.scb_s_facs_view').get(0).scrollTop = scroll_num;
+        	$('.scb_s_facs_samples_table', '.scb_s_facs_view').scrollTop(state.facs.prep_scroll);
         }
         state.experiment.prev_step=scb.ui.static.FacsView.TOTAL_STEPS;
         if(state.experiment.last_step >= scb.ui.static.FacsView.TOTAL_STEPS)

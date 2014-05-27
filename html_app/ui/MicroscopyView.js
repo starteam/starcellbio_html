@@ -1246,23 +1246,23 @@ function init(state, isNew, isIF, draw, image_source){
 		
 			
 
-		if(isNew){
-			$('html').css('overflow', 'hidden');
-			$('body').prepend(scb_experiment_setup.general_error_overlay());
-			$.jqDialog.notify("The image is still loading because of the slow connection. Please wait until image loads...", 10*60);
-			$('.jqDialog_header').remove();		
-			$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-			$('#jqDialog_box').attr('role', 'alertdialog');
-		}
+// 		if(isNew){
+// 			$('html').css('overflow', 'hidden');
+// 			$('body').prepend(scb_experiment_setup.general_error_overlay());
+// 			$.jqDialog.notify("The image is still loading because of the slow connection. Please wait until image loads...", 10*60);
+// 			$('.jqDialog_header').remove();		
+// 			$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+// 			$('#jqDialog_box').attr('role', 'alertdialog');
+// 		}
 		
 		
 		
 		
 		
 		image_dimensions.onload= function (){
-					$('#jqDialog_box').hide();
-					$('html').css('overflow', 'visible');
-					$('.error_overlay').remove();
+// 					$('#jqDialog_box').hide();
+// 					$('html').css('overflow', 'visible');
+// 					$('.error_overlay').remove();
 			if(Math.ceil(image_dimensions.width/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1 || Math.ceil(image_dimensions.height/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1){
 				img_width =image_dimensions.width;	
 				img_height =image_dimensions.height;
