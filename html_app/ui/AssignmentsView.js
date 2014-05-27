@@ -32,8 +32,8 @@ scb.ui.static.AssignmentsView.parse = function (element) {
 
 scb.ui.static.AssignmentsView.scb_assignments_header_link_wrapper = function (element, workarea) {
 		var parsed = scb.ui.static.AssignmentsView.parse(element);
-		var first_element =  $('.scb_s_assignments_slider_header' ,workarea).children().first().next().get(0);
-		var last_element =  $('.scb_s_assignments_slider_header',workarea).children().last().prev().get(0);
+		var first_element =  $('.scb_s_assignments_slider_header' ,'.scb_s_assignments_view').children().first().next().get(0);
+		var last_element =  $('.scb_s_assignments_slider_header','.scb_s_assignments_view').children().last().prev().get(0);
 
         var section = $(element).attr('value');
         $('.scb_assignments_header_link_wrapper').removeClass('scb_assignments_header_link_selected');
@@ -61,7 +61,7 @@ scb.ui.static.AssignmentsView.scb_assignments_header_link_wrapper = function (el
         parsed.assignment.last_instruction = $('.scb_assignments_header_link_selected').index()-1;
        		console.log(parsed.assignment.last_instruction);
 
-     	var assignment_window = $('.scb_s_assignment_scroll',workarea).get(0);
+     	var assignment_window = $('.scb_s_assignment_scroll','.scb_s_assignments_view').get(0);
         if(assignment_window.scrollHeight == assignment_window.clientHeight)
 				$('.scb_s_assignments_bottom_scroll').addClass('scb_s_assignments_bottom_scroll_abs');
 		else $('.scb_s_assignments_bottom_scroll').removeClass('scb_s_assignments_bottom_scroll_abs');
@@ -71,9 +71,9 @@ scb.ui.static.AssignmentsView.scb_assignments_header_link_wrapper = function (el
 
 scb.ui.static.AssignmentsView.scb_s_assignment_header_img_left = function (element, workarea) {
 		   var parsed = scb.ui.static.AssignmentsView.parse(element);
-		   var first_element =  $('.scb_s_assignments_slider_header',workarea).children().first().next().get(0);
+		   var first_element =  $('.scb_s_assignments_slider_header','.scb_s_assignments_view').children().first().next().get(0);
 		   var selected_element;
-		   if($('.scb_assignments_header_link_selected',workarea).get(0)  == first_element || $('.scb_assignments_header_link_selected',workarea).get(0)  == $(first_element,workarea).next().get(0)){
+		   if($('.scb_assignments_header_link_selected','.scb_s_assignments_view').get(0)  == first_element || $('.scb_assignments_header_link_selected','.scb_s_assignments_view').get(0)  == $(first_element,'.scb_s_assignments_view').next().get(0)){
 		   		 selected_element = first_element;
 		   		 
       			$('.scb_s_assignment_header_img_right').removeClass('scb_s_assignment_header_img_right_inactive');
@@ -100,7 +100,7 @@ scb.ui.static.AssignmentsView.scb_s_assignment_header_img_left = function (eleme
 			parsed.assignment.last_instruction = $('.scb_assignments_header_link_selected').index()-1-1;
 					console.log(parsed.assignment.last_instruction);
 
-			var assignment_window = $('.scb_s_assignment_scroll',workarea).get(0);
+			var assignment_window = $('.scb_s_assignment_scroll','.scb_s_assignments_view').get(0);
 			if(assignment_window.scrollHeight == assignment_window.clientHeight)
 				$('.scb_s_assignments_bottom_scroll').addClass('scb_s_assignments_bottom_scroll_abs');
 			else $('.scb_s_assignments_bottom_scroll').removeClass('scb_s_assignments_bottom_scroll_abs');
@@ -111,9 +111,9 @@ scb.ui.static.AssignmentsView.scb_s_assignment_header_img_left = function (eleme
 
 scb.ui.static.AssignmentsView.scb_s_assignment_header_img_right = function (element, workarea) {
 	var parsed = scb.ui.static.AssignmentsView.parse(element);
-	var last_element =  $('.scb_s_assignments_slider_header',workarea).children().last().prev().get(0);
+	var last_element =  $('.scb_s_assignments_slider_header','.scb_s_assignments_view').children().last().prev().get(0);
 	var selected_element;
-       if ($('.scb_assignments_header_link_selected',workarea).get(0)  == last_element || $('.scb_assignments_header_link_selected',workarea).get(0)  == $(last_element,workarea).prev().get(0)){
+       if ($('.scb_assignments_header_link_selected','.scb_s_assignments_view').get(0)  == last_element || $('.scb_assignments_header_link_selected','.scb_s_assignments_view').get(0)  == $(last_element,'.scb_s_assignments_view').prev().get(0)){
        		selected_element = last_element;
        		$('.scb_s_assignment_header_img_right').addClass('scb_s_assignment_header_img_right_inactive');
        		$('.scb_s_assignment_header_img_left').removeClass('scb_s_assignment_header_img_left_inactive');
@@ -196,17 +196,17 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
         
         scb.ui.static.HomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item',workarea).first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
-        $('.scb_assignments_header_link_wrapper',workarea).css('width' , 
+        $('.scb_assignments_header_link_wrapper','.scb_s_assignments_view').css('width' , 
         	(scb.ui.static.AssignmentsView.HEADER_WIDTH/assignments.selected.template.instructions.length)-scb.ui.static.AssignmentsView.HEADER_OFFSET+ 'px');
-       	$('.arrow-down-blue',workarea).css('left', ($('.arrow-down-blue',workarea).parent().width()/scb.ui.static.AssignmentsView.ARROW_DIVISION)-scb.ui.static.AssignmentsView.ARROW_OFFSET+'px');
+       	$('.arrow-down-blue','.scb_s_assignments_view').css('left', ($('.arrow-down-blue','.scb_s_assignments_view').parent().width()/scb.ui.static.AssignmentsView.ARROW_DIVISION)-scb.ui.static.AssignmentsView.ARROW_OFFSET+'px');
         
         $('.scb_s_ref_info_link').click(function(){
         	$('.scb_assignments_header_link_wrapper[value="Reference Material"]').click();
         });
-        var assignment_window = $('.scb_s_assignment_scroll',workarea).get(0);
+        var assignment_window = $('.scb_s_assignment_scroll','.scb_s_assignments_view').get(0);
 		if(assignment_window.scrollHeight == assignment_window.clientHeight)
-        	$('.scb_s_assignments_bottom_scroll',workarea).addClass('scb_s_assignments_bottom_scroll_abs');
-        else $('.scb_s_assignments_bottom_scroll',workarea).removeClass('scb_s_assignments_bottom_scroll_abs');
+        	$('.scb_s_assignments_bottom_scroll','.scb_s_assignments_view').addClass('scb_s_assignments_bottom_scroll_abs');
+        else $('.scb_s_assignments_bottom_scroll','.scb_s_assignments_view').removeClass('scb_s_assignments_bottom_scroll_abs');
     
 
 		$('#main').css({
