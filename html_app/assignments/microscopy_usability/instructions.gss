@@ -53,3 +53,21 @@ font-family: sourcesanspro-semibold;
 .scb_s_mit706s13_assignment_detail {
     text-align: left;
 }
+
+.scb_s_microscopy_usability_list{
+	font-weight:bolder; 
+	margin-left:-18px;
+	counter-reset: list;
+	position:relative;
+	right: 22px;
+}
+
+.scb_s_microscopy_usability_list li{
+list-style: none;
+}
+
+.scb_s_microscopy_usability_list > li:before{
+	content: counter(list, lower-alpha) ") ";
+	counter-increment: list;
+	margin-right: 3px;
+}

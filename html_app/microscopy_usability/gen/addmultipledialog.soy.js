@@ -11,46 +11,46 @@ microscopy_usability.dialog = function(opt_data, opt_sb) {
   var headingListLen4 = headingList4.length;
   for (var headingIndex4 = 0; headingIndex4 < headingListLen4; headingIndex4++) {
     var headingData4 = headingList4[headingIndex4];
-    output.append('<td role=\'columnheader\' aria-label=\'', soy.$$escapeHtml(headingData4), '\' class="scb_s_experiment_setup_table_heading ', (headingData4 == 'Strain') ? 'scb_s_experiment_setup_table_heading_strain' : '', '" >', soy.$$escapeHtml(headingData4), '</td>');
+    output.append('<td role=\'columnheader\' aria-label=\'', soy.$$escapeHtml(headingData4), '\' class="scb_s_experiment_setup_table_heading ', (headingData4 == 'Strain') ? 'scb_s_experiment_setup_table_heading_strain' : '', ' ', (headingData4 == '') ? 'scb_s_experiment_setup_table_heading_checkbox' : '', '" >', soy.$$escapeHtml(headingData4), '</td>');
   }
   output.append('</thead>');
-  var cell_lineList16 = opt_data.template.ui.add_multiple_dialog.order;
-  var cell_lineListLen16 = cell_lineList16.length;
-  for (var cell_lineIndex16 = 0; cell_lineIndex16 < cell_lineListLen16; cell_lineIndex16++) {
-    var cell_lineData16 = cell_lineList16[cell_lineIndex16];
-    if (cell_lineData16 == 'headings' || cell_lineData16 == 'order') {
+  var cell_lineList20 = opt_data.template.ui.add_multiple_dialog.order;
+  var cell_lineListLen20 = cell_lineList20.length;
+  for (var cell_lineIndex20 = 0; cell_lineIndex20 < cell_lineListLen20; cell_lineIndex20++) {
+    var cell_lineData20 = cell_lineList20[cell_lineIndex20];
+    if (cell_lineData20 == 'headings' || cell_lineData20 == 'order') {
     } else {
       output.append('<tbody class="scb_s_experiment_setup_table_body">');
-      var rowsList21 = opt_data.template.ui.add_multiple_dialog[cell_lineData16].rows;
-      var rowsListLen21 = rowsList21.length;
-      for (var rowsIndex21 = 0; rowsIndex21 < rowsListLen21; rowsIndex21++) {
-        var rowsData21 = rowsList21[rowsIndex21];
+      var rowsList25 = opt_data.template.ui.add_multiple_dialog[cell_lineData20].rows;
+      var rowsListLen25 = rowsList25.length;
+      for (var rowsIndex25 = 0; rowsIndex25 < rowsListLen25; rowsIndex25++) {
+        var rowsData25 = rowsList25[rowsIndex25];
         output.append('<tr role=\'row\' aria-label=\'Sample\'>');
-        var cellList23 = rowsData21.cells;
-        var cellListLen23 = cellList23.length;
-        for (var cellIndex23 = 0; cellIndex23 < cellListLen23; cellIndex23++) {
-          var cellData23 = cellList23[cellIndex23];
-          output.append('<td class="scb_s_experiment_setup_table_border ', (cellData23.kind == 'checkbox') ? 'scb_s_microscopy_usability_checkbox ' : '', '">', (cellData23.kind == 'text') ? soy.$$escapeHtml(cellData23.text) : '');
-          if (cellData23.kind == 'select') {
-            output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(cellData23.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData16), '\' role=\'select\'  cell_line=\'', soy.$$escapeHtml(cell_lineData16), '\'><option disabled="disabled" role=\'option\'>Please select</option>');
-            var keyList45 = soy.$$getMapKeys(opt_data.template[cellData23.field]);
-            var keyListLen45 = keyList45.length;
-            for (var keyIndex45 = 0; keyIndex45 < keyListLen45; keyIndex45++) {
-              var keyData45 = keyList45[keyIndex45];
-              output.append('<option  role=\'option\' value=\'', soy.$$escapeHtml(opt_data.template[cellData23.field][keyData45]), '\'>', soy.$$escapeHtml(opt_data.template[cellData23.field][keyData45].name), '</option>');
+        var cellList27 = rowsData25.cells;
+        var cellListLen27 = cellList27.length;
+        for (var cellIndex27 = 0; cellIndex27 < cellListLen27; cellIndex27++) {
+          var cellData27 = cellList27[cellIndex27];
+          output.append('<td class="scb_s_experiment_setup_table_border ', (cellData27.kind == 'checkbox') ? 'scb_s_microscopy_usability_checkbox ' : '', '" style="padding-right: 50px;">', (cellData27.kind == 'text') ? soy.$$escapeHtml(cellData27.text) : '');
+          if (cellData27.kind == 'select') {
+            output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(cellData27.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData20), '\' role=\'select\'  cell_line=\'', soy.$$escapeHtml(cell_lineData20), '\'><option disabled="disabled" role=\'option\'>Please select</option>');
+            var keyList49 = soy.$$getMapKeys(opt_data.template[cellData27.field]);
+            var keyListLen49 = keyList49.length;
+            for (var keyIndex49 = 0; keyIndex49 < keyListLen49; keyIndex49++) {
+              var keyData49 = keyList49[keyIndex49];
+              output.append('<option  role=\'option\' value=\'', soy.$$escapeHtml(opt_data.template[cellData27.field][keyData49]), '\'>', soy.$$escapeHtml(opt_data.template[cellData27.field][keyData49].name), '</option>');
             }
             output.append('</select>');
           }
-          output.append((cellData23.kind == 'checkbox') ? '<input class=\'scb_f_experiment_setup_dialog_checkbox \' type="checkbox"  role=\'checkbox\'  name="' + soy.$$escapeHtml(cellData23.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(cellData23.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData16) + '\' aria-checked=\'false\'>' : '', '</td>');
+          output.append((cellData27.kind == 'checkbox') ? '<input class=\'scb_f_experiment_setup_dialog_checkbox \' type="checkbox"  role=\'checkbox\'  name="' + soy.$$escapeHtml(cellData27.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(cellData27.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData20) + '\' aria-checked=\'false\'>' : '', '</td>');
         }
         output.append('</tr><!--');
-        if (cell_lineIndex16 == cell_lineListLen16 - 1) {
+        if (cell_lineIndex20 == cell_lineListLen20 - 1) {
           output.append('<tr role=\'row\' aria-label=\'Button\'>');
-          var cellList72 = rowsData21.cells;
-          var cellListLen72 = cellList72.length;
-          for (var cellIndex72 = 0; cellIndex72 < cellListLen72; cellIndex72++) {
-            var cellData72 = cellList72[cellIndex72];
-            output.append('<td class=\'scb_s_experiment_setup_table_border scb_s_experiment_setup_center_cell\'>', (cellData72.kind == 'checkbox') ? '<button class=\'scb_s_gray_button scb_mit706s16_inner_dialog_select\' name="' + soy.$$escapeHtml(cellData72.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData16) + '\' aria-label=\'Select All\' role=\'button\'>SELECT ALL</button>' : '', '</td>');
+          var cellList76 = rowsData25.cells;
+          var cellListLen76 = cellList76.length;
+          for (var cellIndex76 = 0; cellIndex76 < cellListLen76; cellIndex76++) {
+            var cellData76 = cellList76[cellIndex76];
+            output.append('<td class=\'scb_s_experiment_setup_table_border scb_s_experiment_setup_center_cell\'>', (cellData76.kind == 'checkbox') ? '<button class=\'scb_s_gray_button scb_mit706s16_inner_dialog_select\' name="' + soy.$$escapeHtml(cellData76.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData20) + '\' aria-label=\'Select All\' role=\'button\'>SELECT ALL</button>' : '', '</td>');
           }
           output.append('</tr>');
         }

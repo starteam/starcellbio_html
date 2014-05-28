@@ -15,7 +15,7 @@
         <table class="scb_s_experiment_setup_table scb_s_experiment_setup_microscopy_usability" role='grid' >
             <thead class="scb_s_experiment_setup_table_head" >
             {foreach $heading in $template.ui.add_multiple_dialog.headings}
-            <td role='columnheader' aria-label='{$heading}' class="scb_s_experiment_setup_table_heading {if $heading == 'Strain'}scb_s_experiment_setup_table_heading_strain{/if}" >
+            <td role='columnheader' aria-label='{$heading}' class="scb_s_experiment_setup_table_heading {if $heading == 'Strain'}scb_s_experiment_setup_table_heading_strain{/if} {if $heading == ''}scb_s_experiment_setup_table_heading_checkbox{/if}" >
                 {$heading}
             </td>
             {/foreach}
@@ -27,7 +27,7 @@
             {foreach $rows in $template.ui.add_multiple_dialog[$cell_line].rows}
             <tr role='row' aria-label='Sample'>
                 {foreach $cell in $rows.cells}
-                <td class="scb_s_experiment_setup_table_border {if $cell.kind == 'checkbox'}scb_s_microscopy_usability_checkbox {/if}">
+                <td class="scb_s_experiment_setup_table_border {if $cell.kind == 'checkbox'}scb_s_microscopy_usability_checkbox {/if}" style="padding-right: 50px;">
                     {if $cell.kind == 'text'}
                     {$cell.text}
                     {/if}

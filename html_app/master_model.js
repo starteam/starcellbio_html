@@ -9776,7 +9776,7 @@ master_model_data = {
     app_description: 'StarCellBio Placeholder',
     assignments: {
         list: [ 
-         __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability,  __microscopy_test, __assignment_706_2014  , __assignment_706_2014_ps2, __decusability_newfacs, __june_2014_usability 
+         __assignment2, __usability_test, __basic_tests, __assigment_706, __assigment_tufts, __decusability,  __microscopy_test, __assignment_706_2014  , __assignment_706_2014_ps2, __june_2014_usability //,__decusability_newfacs  
         ]
     },
     ui: {}
@@ -9972,7 +9972,7 @@ $(function () {
 				name: 'ADD SAMPLES',
 				open: 'microscopy_usability.setup',
 				css: {
-					width: '500px',
+					width: '680px',
 					height: '566px',
 					left: 'inherit',
 					top: '000px'

@@ -38,13 +38,17 @@
     
 }
 
+.scb_s_experiment_setup_table_heading_checkbox{
+	width: 60px;
+}
+
 .scb_s_microscopy_usability_samples {
-left: 98px;
+left: 231px;
 position: relative;
 }
 
 .scb_s_microscopy_usability_cancel {
-left: 94px;
+left: 229px;
 position: relative;
 }
 
@@ -55,7 +59,7 @@ position: relative;
 
 
 .scb_s_experiment_setup_microscopy_usability{
-	width: 334px !important;
+	width: 468px !important;
 }
 
 .scb_s_microscopy_usability_checkbox{
