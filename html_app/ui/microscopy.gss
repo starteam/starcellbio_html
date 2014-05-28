@@ -1285,6 +1285,17 @@ right: 15px;
 }
 
 
+.scb_s_microscopy_choose_samples_order_list li:before {
+    counter-increment: item;
+    position: absolute;
+    left: -2.5em;
+    display: block;
+    width: 2em; 
+    text-align: right; 
+}
+
+
+
 .scb_s_microscopy_brightness_slider >a{
 -webkit-appearance: none;
 background: url('../../../images/microscopy/Brightness_Slider_BTN.png') no-repeat !important;

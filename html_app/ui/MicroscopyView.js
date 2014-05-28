@@ -1249,7 +1249,7 @@ function init(state, isNew, isIF, draw, image_source){
 // 		if(isNew){
 // 			$('html').css('overflow', 'hidden');
 // 			$('body').prepend(scb_experiment_setup.general_error_overlay());
-// 			$.jqDialog.notify("The image is still loading because of the slow connection. Please wait until image loads...", 10*60);
+// 			$.jqDialog.notify("The image is still loading because of a slow internet connection. Please wait while the image loads.", (1*60)/20);
 // 			$('.jqDialog_header').remove();		
 // 			$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
 // 			$('#jqDialog_box').attr('role', 'alertdialog');

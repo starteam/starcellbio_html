@@ -8895,7 +8895,7 @@ var __june_2014_usability = {
             		name:'Antibody-labeling IF',
             		conditions: {
             			'rgb': {name: 'Nfib (red), DAPI (blue), control (green)',
-            			short_name: 'IF: RGB'} 
+            			short_name: 'R:Nfib, G:control, B:DAPI'} 
             		}
             	},
             	'IHC':{
