@@ -492,7 +492,6 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_sample_active = function (element,
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_remove = function (element) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
-	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }

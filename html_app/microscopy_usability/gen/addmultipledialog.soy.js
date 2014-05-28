@@ -6,7 +6,7 @@ if (typeof microscopy_usability == 'undefined') { var microscopy_usability = {};
 
 microscopy_usability.dialog = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_mit706s16_inner_dialog\' role=\'dialog\' aria-label=\'Add Samples\'><h1 class=\'scb_mit706s16_inner_dialog_title\' role=\'presentation\' aria-label=\'Add Samples\'><span class=\'scb_mit706s16_inner_dialog_title_close\' role=\'button\' aria-label=\'Close Add Samples\'>&#215;</span>Add Samples </h1><div class=\'scb_mit706s16_inner_dialog_body\'><table class="scb_s_experiment_setup_table scb_s_experiment_setup_special" role=\'grid\' ><thead class="scb_s_experiment_setup_table_head" >');
+  output.append('<div class=\'scb_mit706s16_inner_dialog\' role=\'dialog\' aria-label=\'Add Samples\'><h1 class=\'scb_mit706s16_inner_dialog_title\' role=\'presentation\' aria-label=\'Add Samples\'><span class=\'scb_mit706s16_inner_dialog_title_close\' role=\'button\' aria-label=\'Close Add Samples\'>&#215;</span>Add Samples </h1><div class=\'scb_mit706s16_inner_dialog_body\'><table class="scb_s_experiment_setup_table scb_s_experiment_setup_microscopy_usability" role=\'grid\' ><thead class="scb_s_experiment_setup_table_head" >');
   var headingList4 = opt_data.template.ui.add_multiple_dialog.headings;
   var headingListLen4 = headingList4.length;
   for (var headingIndex4 = 0; headingIndex4 < headingListLen4; headingIndex4++) {
@@ -30,7 +30,7 @@ microscopy_usability.dialog = function(opt_data, opt_sb) {
         var cellListLen23 = cellList23.length;
         for (var cellIndex23 = 0; cellIndex23 < cellListLen23; cellIndex23++) {
           var cellData23 = cellList23[cellIndex23];
-          output.append('<td class="scb_s_experiment_setup_table_border ', (cellData23.kind == 'checkbox') ? 'scb_s_experiment_setup_center_cell ' : '', '">', (cellData23.kind == 'text') ? soy.$$escapeHtml(cellData23.text) : '');
+          output.append('<td class="scb_s_experiment_setup_table_border ', (cellData23.kind == 'checkbox') ? 'scb_s_microscopy_usability_checkbox ' : '', '">', (cellData23.kind == 'text') ? soy.$$escapeHtml(cellData23.text) : '');
           if (cellData23.kind == 'select') {
             output.append('HERE GOES SELECT<select assignment=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' treatment_id=\'', soy.$$escapeHtml(cellData23.treatment_id), '\' cell_line=\'', soy.$$escapeHtml(cell_lineData16), '\' role=\'select\'  cell_line=\'', soy.$$escapeHtml(cell_lineData16), '\'><option disabled="disabled" role=\'option\'>Please select</option>');
             var keyList45 = soy.$$getMapKeys(opt_data.template[cellData23.field]);
@@ -41,7 +41,7 @@ microscopy_usability.dialog = function(opt_data, opt_sb) {
             }
             output.append('</select>');
           }
-          output.append((cellData23.kind == 'checkbox') ? '<input class=\'scb_f_experiment_setup_dialog_checkbox\' type="checkbox"  role=\'checkbox\'  name="' + soy.$$escapeHtml(cellData23.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(cellData23.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData16) + '\' aria-checked=\'false\'>' : '', '</td>');
+          output.append((cellData23.kind == 'checkbox') ? '<input class=\'scb_f_experiment_setup_dialog_checkbox \' type="checkbox"  role=\'checkbox\'  name="' + soy.$$escapeHtml(cellData23.name) + '" assignment_id=\'' + soy.$$escapeHtml(opt_data.assignment.id) + '\' experiment_id=\'' + soy.$$escapeHtml(opt_data.experiment.id) + '\' treatment_id=\'' + soy.$$escapeHtml(cellData23.treatment_id) + '\' cell_line=\'' + soy.$$escapeHtml(cell_lineData16) + '\' aria-checked=\'false\'>' : '', '</td>');
         }
         output.append('</tr><!--');
         if (cell_lineIndex16 == cell_lineListLen16 - 1) {
@@ -59,6 +59,6 @@ microscopy_usability.dialog = function(opt_data, opt_sb) {
       output.append('</tr></tbody>');
     }
   }
-  output.append('</table><button class=\'scb_mit706s16_inner_dialog_select_all scb_s_gray_button\' aria-label=\'Select All\' role=\'button\'>SELECT ALL</button><br><div class=\'scb_mit706s16_button_float\'><button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button scb_s_2014_cancel\' aria-label=\'Cancel\' role=\'button\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button scb_s_2014_samples\' aria-label=\'Add Samples\' role=\'button\'>ADD SAMPLES</button></div></div></div>');
+  output.append('</table><button class=\'scb_mit706s16_inner_dialog_select_all scb_s_gray_button\' aria-label=\'Select All\' role=\'button\'>SELECT ALL</button><br><div class=\'scb_mit706s16_button_float\'><button class=\'scb_mit706s16_inner_dialog_cancel scb_s_gray_button scb_s_microscopy_usability_cancel\' aria-label=\'Cancel\' role=\'button\'>CANCEL</button><button class=\'scb_mit706s16_inner_dialog_add scb_s_gray_button scb_s_microscopy_usability_samples\' aria-label=\'Add Samples\' role=\'button\'>ADD SAMPLES</button></div></div></div>');
   return opt_sb ? '' : output.toString();
 };

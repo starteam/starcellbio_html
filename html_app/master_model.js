@@ -8431,7 +8431,7 @@ var __decusability_newfacs = {
 
 var __june_2014_usability = {
         id: 'microscopy_usability',
-        name: 'StarCellBio Microscopy Usability Test',
+        name: 'Microscopy Usability Test',
         course: 'usability',
     	course_name: 'StarCellBio Usability Testing',
         description: 'Microscopy Test of images',
@@ -8806,11 +8806,11 @@ var __june_2014_usability = {
             },
             drugs: {
 				'ac': {
-					name: 'Adenovirus-Cre',
+					name: 'Cre Virus',
 					concentrations: ['108']
 				},
 				'ae': {
-					name: 'Adenovirus-Empty',
+					name: 'Control Virus',
 					concentrations: ['108']
 				}
             },
@@ -8822,10 +8822,12 @@ var __june_2014_usability = {
 
             cell_lines: {
 				'wt': {
-					name: 'Wild Type (p53+/+;Rb+/+)'
+					name: 'Wild Type',
+					full_name: 'Wild Type'
 				},
 				'cko': {
-					name: 'Conditional KO (p53fl/fl;Rbfl/fl)'
+					name: 'Conditional KO',
+					full_name: 'Conditional KO'
 				}
 
             },
@@ -8903,8 +8905,8 @@ var __june_2014_usability = {
             		conditions: {
             			'ki67': {name: 'Ki-67 (brown), hematoxylin (blue)',
             			short_name: 'IHC: Ki-67'},
-            			'secondary': {name: 'Secondary only control, hematoxylin (blue)',
-            			short_name: 'IHC: Secondary'}   
+            			'cgrp': {name: 'CGRP (brown), hematoxylin (blue)',
+            			short_name: 'IHC: CGRP'}   
             		}
             	},
             	'Dye':{
@@ -8975,7 +8977,19 @@ var __june_2014_usability = {
         		'img53': 'images/microscopy/microscopy_test/lung_1yr/IF/Sample_5/J5J5_60X_merge.jpeg',
         		'img54': 'images/microscopy/microscopy_test/lung_1yr/IF/Sample_5/J5J5_60X_red.jpeg',
         		'img55': 'images/microscopy/microscopy_test/lung_1yr/match/Sample_1/AD1017_NFIB_20X.jpg',
-        		'img56': 'images/microscopy/microscopy_test/lung_1yr/match/Sample_2/AD3587E_NFIB_20X-1.jpg'
+        		'img56': 'images/microscopy/microscopy_test/lung_1yr/match/Sample_2/AD3587E_NFIB_20X-1.jpg',
+        		
+        		'img60': 'images/microscopy/microscopy_test/lung_1yr/CGRP_IHC/35873587E_advanced_strong_10X.jpg',
+        		'img61': 'images/microscopy/microscopy_test/lung_1yr/CGRP_IHC/AD3172E_Nfib_10X_strong-2-0001.jpg', 
+        		'img62': 'images/microscopy/microscopy_test/lung_1yr/CGRP_IHC/35883588E_advanced_strong_20X.jpg',
+        		
+        		'img63': 'images/microscopy/microscopy_test/lung_6m/CGRP_IHC/31723172E_early_strong_20X-2.jpg', 
+        		'img64': 'images/microscopy/microscopy_test/lung_6m/CGRP_IHC/AD1017_NFIB_20X.jpg', 
+        		'img65': 'images/microscopy/microscopy_test/lung_6m/CGRP_IHC/35253525E_early_weak_20X.jpg',
+        		'img66': 'images/microscopy/microscopy_test/lung_6m/CGRP_IHC/35873587E_early_strong_20X.jpg', 
+        		'img67': 'images/microscopy/microscopy_test/lung_6m/CGRP_IHC/AD3587E_NFIB_20X-1.jpg'
+        		
+        		
         	},
             slide_parser:{
                 	'default':{
@@ -9084,26 +9098,26 @@ var __june_2014_usability = {
                 			}
                 		},
                 		'IHC':{
-                			'secondary':{
+                			'cgrp':{
 								'1':[{
-									hash: 'img23',
+									hash: 'img63',
 									mag:'20x'
 									}],
 								'2':[{
-									hash: 'img27',
-									mag: '40x'
+									hash: 'img64',
+									mag: '20x'
 									}],
 								'3':[{
-									hash: 'img29',
+									hash: 'img65',
 									mag:'20x'
 									}],
 								'4':[{
-									hash: 'img30',
-									mag: '40x'
+									hash: 'img66',
+									mag: '20x'
 									}],
 								'5': [{
-									hash: 'img24',
-									mag: '40x'
+									hash: 'img67',
+									mag: '20x'
 									}]
                 			},
                 			'ki67':{
@@ -9239,6 +9253,22 @@ var __june_2014_usability = {
 									if_type: 'merge', 
 									mag:'60x'
 								}]
+                			}
+                		},
+                		'IHC':{
+                			'cgrp':{
+								'1':[{
+									hash: 'img60',
+									mag:'10x'
+									}],
+								'2':[{
+									hash: 'img61',
+									mag: '10x'
+									}],
+								'3':[{
+									hash: 'img62',
+									mag:'20x'
+									}]
                 			}
                 		}
                 	
@@ -9494,7 +9524,15 @@ var __june_2014_usability = {
                 			drug_id: 'ac',
                 			collection_id: '6 m',
                 			kind: 'IHC',
-                			conditions: 'secondary'
+                			conditions: 'cgrp'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'cko',
+                			drug_id: 'ac',
+                			collection_id: '1 yr',
+                			kind: 'IHC',
+                			conditions: 'cgrp'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
@@ -9934,7 +9972,7 @@ $(function () {
 				name: 'ADD SAMPLES',
 				open: 'microscopy_usability.setup',
 				css: {
-					width: '880px',
+					width: '500px',
 					height: '566px',
 					left: 'inherit',
 					top: '000px'

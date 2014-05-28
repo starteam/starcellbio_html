@@ -49,7 +49,6 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_sample_remove = function (eleme
 
 scb.ui.static.WesternBlotView.scb_f_western_blot_remove = function (element) {
     var parsed = scb.ui.static.WesternBlotView.parse(element);
-    parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }

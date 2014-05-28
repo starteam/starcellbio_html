@@ -32,6 +32,7 @@ scb.ui.static.AssignmentsView.parse = function (element) {
 
 scb.ui.static.AssignmentsView.scb_assignments_header_link_wrapper = function (element, workarea) {
 		var parsed = scb.ui.static.AssignmentsView.parse(element);
+		$('.scb_s_assignment_scroll','.scb_s_assignments_view').scrollTop(0);
 		var first_element =  $('.scb_s_assignments_slider_header' ,'.scb_s_assignments_view').children().first().next().get(0);
 		var last_element =  $('.scb_s_assignments_slider_header','.scb_s_assignments_view').children().last().prev().get(0);
 
@@ -71,6 +72,7 @@ scb.ui.static.AssignmentsView.scb_assignments_header_link_wrapper = function (el
 
 scb.ui.static.AssignmentsView.scb_s_assignment_header_img_left = function (element, workarea) {
 		   var parsed = scb.ui.static.AssignmentsView.parse(element);
+		   $('.scb_s_assignment_scroll','.scb_s_assignments_view').scrollTop(0);
 		   var first_element =  $('.scb_s_assignments_slider_header','.scb_s_assignments_view').children().first().next().get(0);
 		   var selected_element;
 		   if($('.scb_assignments_header_link_selected','.scb_s_assignments_view').get(0)  == first_element || $('.scb_assignments_header_link_selected','.scb_s_assignments_view').get(0)  == $(first_element,'.scb_s_assignments_view').next().get(0)){
@@ -111,6 +113,7 @@ scb.ui.static.AssignmentsView.scb_s_assignment_header_img_left = function (eleme
 
 scb.ui.static.AssignmentsView.scb_s_assignment_header_img_right = function (element, workarea) {
 	var parsed = scb.ui.static.AssignmentsView.parse(element);
+	$('.scb_s_assignment_scroll','.scb_s_assignments_view').scrollTop(0);
 	var last_element =  $('.scb_s_assignments_slider_header','.scb_s_assignments_view').children().last().prev().get(0);
 	var selected_element;
        if ($('.scb_assignments_header_link_selected','.scb_s_assignments_view').get(0)  == last_element || $('.scb_assignments_header_link_selected','.scb_s_assignments_view').get(0)  == $(last_element,'.scb_s_assignments_view').prev().get(0)){

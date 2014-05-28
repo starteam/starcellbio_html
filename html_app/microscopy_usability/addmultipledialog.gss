@@ -38,13 +38,30 @@
     
 }
 
+.scb_s_microscopy_usability_samples {
+left: 98px;
+position: relative;
+}
+
+.scb_s_microscopy_usability_cancel {
+left: 94px;
+position: relative;
+}
+
 
 .scb_mit706s16_inner_dialog_title_close:hover{
 	background-color: #e58986;
 }
 
 
+.scb_s_experiment_setup_microscopy_usability{
+	width: 334px !important;
+}
 
+.scb_s_microscopy_usability_checkbox{
+	text-align: left !important;
+	vertical-align: middle;
+}
 
 
 

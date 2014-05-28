@@ -378,7 +378,6 @@ scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
 
 scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
