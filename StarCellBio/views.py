@@ -203,12 +203,13 @@ def post_state(request, **kwargs):
 			for c in Course.objects.filter(usercourses = usercourse):
 				courses.append(c)
 		for course in courses:
-			sassignments = course.sassignments.all()
+			sassignments = course.sassignments.filter(student=request.user)
 			retval = {'is_anonymous': False, 'valid_token':False, 'token': token2}
 			for sa in sassignments:
 				for x in jsondata['model']['assignments']['list']:
 					#pudb.set_trace()
-					if(sa.token == jsondata['token'] and sa.assignmentID == x['id']):
+					#if(sa.token == jsondata['token'] and sa.assignmentID == x['id']):
+					if( sa.assignmentID == x['id']):
 							sa.data = json.loads(json.dumps(x))
 							sa.token = token2
 							sa.save()

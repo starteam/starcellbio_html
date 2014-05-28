@@ -839,7 +839,53 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     }
     
-    scb.ui.static.MainFrame.pending_save = function(parsed){
+    scb.ui.static.MainFrame.pending_save_queue = [];
+    scb.ui.static.MainFrame.pending_save_inajax = false; 
+     scb.ui.static.MainFrame.pending_save = function(parsed){
+       scb.ui.static.MainFrame.pending_save_queue.push( (new Date()).getTime() );
+       setTimeout( function() {
+               scb.ui.static.MainFrame.pending_save_process(parsed);
+       }, 5000 ) ;
+    }
+
+    scb.ui.static.MainFrame.pending_save_process = function(parsed) {
+       if( scb.ui.static.MainFrame.pending_save_inajax ) { 
+       console.info( "In ajax - skipping save" ) ;
+       return ; }
+       if( scb.ui.static.MainFrame.pending_save_queue.length > 0 ) {
+       console.info( "Ajax save - clear Queue" ) ;
+       scb.ui.static.MainFrame.pending_save_queue = [];
+       if(typeof post_state_result === 'undefined')
+                  token = get_courses_result.token;
+        else
+                  token = post_state_result.token;
+       post_obj = {'token': token, 'model': parsed.context.master_model}
+        console.log(post_obj);
+        scb.ui.static.MainFrame.pending_save_inajax = true;
+       console.info( "Ajax save - start request " ) ;
+       $.ajax({
+            type: "POST",
+            url: 'scb/post_state.js',
+            data: JSON.stringify(post_obj),
+            success: function (data){
+       console.info( "Ajax save - request success " ) ;
+               scb.ui.static.MainFrame.pending_save_inajax = false;
+                console.log(data)  ;
+               setTimeout( function() {
+                       scb.ui.static.MainFrame.pending_save_process(parsed);
+               },5000);
+            },
+           error: function(data) {
+       console.info( "Ajax save - request failed, retry... " ) ;
+                scb.ui.static.MainFrame.pending_save_inajax = false;
+               scb.ui.static.MainFrame.pending_save(parsed);
+           }
+        });
+       }
+    }
+
+    
+    scb.ui.static.MainFrame.pending_save_orig = function(parsed){
     	if(!pending_save){
     		setTimeout(function() {
     			pending_save = false;
