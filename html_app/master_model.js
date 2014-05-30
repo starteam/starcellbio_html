@@ -8201,7 +8201,7 @@ var __decusability_newfacs = {
             	'Anti':{
             		name:'Antibody-labeling ',
             		conditions: {
-            			'a': {name: 'example antibody',
+            			'a': {name: 'Antibody',
             			short_name: 'Antibody'}
             		}
             	}

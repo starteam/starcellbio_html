@@ -117,10 +117,23 @@ scb.FacsLane = function scb_FacsLane(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'kind', _.keys(context.template.facs_kinds)[0], null, context);
     scb.Utils.initialize_accessor_field(self, data, 'conditions', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'cell_treatment_id', null, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'bisector_gate_created', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'canvas_metadata', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'canvas_metadata_analysis', {points: [], ranges: []}, null, context);
-	
+    scb.Utils.initialize_accessor_field(self, data, 'gate_selected', null, null, context);
     scb.Utils.initialize_field(data, 'experiment_id', self.parent.parent.parent.parent);
+
+	scb.utils.accessor2_custom(self, 'selected_gate', function () {
+        if (self.gate_selected) {
+            return _.find(self.canvas_metadata_analysis.points, function(e) { 
+            	return self.gate_selected == e.unique_id;
+            });
+        }
+        else {
+            return null;
+        }
+    }, scb.utils.noop);
+
 
     scb.utils.accessor2_custom(self, 'experiment', function () {
         var assignment = context.js_model.current_assignment;

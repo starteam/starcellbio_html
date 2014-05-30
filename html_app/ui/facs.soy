@@ -566,13 +566,13 @@ FACS Main View
         				{if $r.is_valid and $r.lane.id == $facs.selected_lane.id}
         				<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab ' role='tab'>
 
-						<div class='scb_s_facs_gel_tab_selected'>{$facs.selected_lane.kinds[$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].short_name}
+						<div class='scb_s_facs_gel_tab_selected'>{$facs.selected_lane.kinds[$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].name}
 						</div>
 						</span>
         				{elseif $r.is_valid and $r.cell_treatment.id == $facs.selected_lane.cell_treatment_id}
 							<div class='scb_s_western_blot_gel_tab' facs_id='{$facs.id}'
 							assignment_id='{$assignment.id}' role='tab'
-							experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].conditions[$r.lane.conditions].short_name}
+							experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].conditions[$r.lane.conditions].name}
 							</div>
 						{/if}
 					{/foreach}
@@ -608,12 +608,13 @@ FACS Main View
 
     <div class='scb_s_facs_chart_wrapper'>
         <div class='scb_s_facs_chart_xaxis'>
-            {if $lane}{$lane.kinds[$lane.kind].conditions[$lane.conditions].short_name}{else}PI{/if} Fluorescence
+            {if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence
         </div>
         <div class='scb_s_facs_chart_yaxis'>
             Number of cells (thousands)
         </div>
         <div class='scb_s_facs_chart_helper'></div>
+        <div class='scb_s_facs_chart_guider'></div>
         <div class='scb_s_facs_chart' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
              facs_id='{$facs.id}'
         {if $facs_line_id}facs_lane_id='{$facs_line_id}'{/if}>
@@ -668,7 +669,7 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
         <tr>
             <td role='columnheader'></td>
             <td role='columnheader'></td>
-            <td role='columnheader'>{if $lane}{$lane.kinds[$lane.kind].conditions[$lane.conditions].short_name}{else}PI{/if} Fluorescence</td>
+            <td role='columnheader'>{if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence</td>
             <td role='columnheader'>% Cells</td>
             <td role='columnheader'></td>
         </tr>
