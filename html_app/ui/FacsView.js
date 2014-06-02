@@ -561,6 +561,7 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
         pts.display_id= pts.display_id || new_id;
         pts.bisector_id = pts.bisector_id || bisector_id;
         pts.unique_id = pts.unique_id || Math.floor(Math.random()*1000000000).toString(27);
+        
         //Math.floor(Math.random()*1000000000).toString(27)
         var range = {
             from: pts.from,
@@ -580,9 +581,26 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
             }
         });
 
+		var bisector_points =  _.filter(points, function(x){return x.display_id == pts.display_id && state.facs_lane.bisector_gate_created; });
+		
+		_.each(points, function (p){
+			if(bisector_points.length == 2){
+				if(p != bisector_points[0] && p != bisector_points[1])
+					p.bisector_id = '' ; 
+			}
+			else if(!state.facs_lane.bisector_gate_created){
+				p.bisector_id = '' ; 
+			}
+				
+		});
+
+			
+
         range.percentage = Math.round(percentage / total * 100);
         //data.push({data: series, color: pts.c });
-        data.push({data: [
+        data.push({
+        	label: pts.display_id + ' ' + pts.bisector_id,
+        	data: [
             [from, horizontal],
             [from, horizontal+5],
             [from, horizontal+2.5],
@@ -636,6 +654,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             grid: {show:false},
             xaxis: {tickSize: 5},
             options: {
+            	
                 series: {
                     lines: { show: true },
                     points: { show: true }
@@ -655,22 +674,58 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
         
         if(state.facs.samples_finished && state.facs_lane.selected_gate){
 				var selected_gate = state.facs.selected_lane.selected_gate;
-				var from_val = Math.round(xaxes.p2c(selected_gate.from));
-                	var to_val  = Math.round(xaxes.p2c(selected_gate.to));
-                	var height_val = Math.round(yaxes.p2c(selected_gate.y));
-                	var styles_guider = {
-                        position: 'absolute',
-                        top: height_val+16+ 'px',
-                        left: from_val +53 + "px",
-                        height: '6px', //'5px',
-                        color:'black',
-                        background: 'transparent',
-                        width: Math.abs(to_val - from_val) - 6 + "px",
-                        'border-left': '5px solid ' + 'black',
-                        'border-right': '5px solid ' + 'black',
-                        'vertical-align': 'center',
-                    }
+				var number_of_gates = _.filter(state.facs_lane.canvas_metadata_analysis.points, function (e) { return e.display_id == selected_gate.display_id  });
+                	
+				var isdoublegate = number_of_gates.length ==2;
+			
+				if(isdoublegate){
+					var selected_gate = null;
+					if(number_of_gates[0].from < number_of_gates[1].from){
+						selected_gate = number_of_gates[0];
+					}
+					else{
+						selected_gate = number_of_gates[1];
+					}
+				
+						var from_val = Math.round(xaxes.p2c(selected_gate.from));
+						var to_val  = Math.round(xaxes.p2c(selected_gate.to));
+						var height_val = Math.round(yaxes.p2c(selected_gate.y));
+						var styles_guider = {
+							position: 'absolute',
+							top: height_val+24+ 'px',
+							left: to_val +53 + "px",
+							height: '6px', //'5px',
+							color:'black',
+							background: 'black',
+							width: "5px",
+							'border-left': 'none',
+							'border-right': 'none',
+							'vertical-align': 'center',
+						}
+							$('.scb_s_facs_chart_guider').css(styles_guider);
+				}	
+				else{
+					if(selected_gate.from ){
+					
+						var from_val = Math.round(xaxes.p2c(selected_gate.from));
+						var to_val  = Math.round(xaxes.p2c(selected_gate.to));
+						var height_val = Math.round(yaxes.p2c(selected_gate.y));
+						var styles_guider = {
+							position: 'absolute',
+							top: height_val+16+ 'px',
+							left: from_val +53 + "px",
+							height: '6px', //'5px',
+							color:'black',
+							background: 'transparent',
+							width: Math.abs(to_val - from_val) - 6 + "px",
+							'border-left': '5px solid ' + 'black',
+							'border-right': '5px solid ' + 'black',
+							'vertical-align': 'center',
+						}
+						
                     $('.scb_s_facs_chart_guider').css(styles_guider);
+					}
+				}
 		}
 
         var click = function (e) {
@@ -679,7 +734,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             var py = yaxes.c2p(e.offsetY);
             var fromy = py;
             px = Math.round(px);
-            if (state.facs.sample_analysis) {
+            if (!state.facs.double_analysis) {
                 console.info("Click on: " + px + " " + py);
                 var point = Math.round(px);
                 if (!isNaN(from)) {
@@ -702,23 +757,59 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                             point_to_edit.to = to;
                         }
                         
-                        var from_val = Math.round(xaxes.p2c(point_to_edit.from));
-						var to_val  = Math.round(xaxes.p2c(point_to_edit.to));
-						var height_val = Math.round(yaxes.p2c(point_to_edit.y));
-						var styles_guider = {
-							position: 'absolute',
-							top: height_val+16+ 'px',
-							left: from_val +53 + "px",
-							height: '6px', //'5px',
-							color:'black',
-							background: 'transparent',
-							width: Math.abs(to_val - from_val) - 6 + "px",
-							'border-left': '5px solid ' + 'black',
-							'border-right': '5px solid ' + 'black',
-							'vertical-align': 'center',
+                	var number_of_gates = _.filter(state.facs_lane.canvas_metadata_analysis.points, function (e) { return e.display_id == point_to_edit.display_id  });
+                	
+                	var isdoublegate = number_of_gates.length ==2;
+                	
+                	if(isdoublegate){
+                			var selected_gate = null;
+							if(number_of_gates[0].from < number_of_gates[1].from){
+								selected_gate = number_of_gates[0];
+							}
+							else{
+								selected_gate = number_of_gates[1];
+							}
+				
+							var from_val = Math.round(xaxes.p2c(selected_gate.from));
+							var to_val  = Math.round(xaxes.p2c(selected_gate.to));
+							var height_val = Math.round(yaxes.p2c(selected_gate.y));
+							var styles_guider = {
+								position: 'absolute',
+								top: height_val+24+ 'px',
+								left: to_val +53 + "px",
+								height: '6px', //'5px',
+								color:'black',
+								background: 'black',
+								width: "5px",
+								'border-left': 'none',
+								'border-right': 'none',
+								'vertical-align': 'center',
+							}
+                   			 $('.scb_s_facs_chart_guider').css(styles_guider);
+                		}	
+                		else{
+                        	if(selected_gate.from ){
+				
+							var from_val = Math.round(xaxes.p2c(point_to_edit.from));
+							var to_val  = Math.round(xaxes.p2c(point_to_edit.to));
+							var height_val = Math.round(yaxes.p2c(point_to_edit.y));
+							var styles_guider = {
+								position: 'absolute',
+								top: height_val+16+ 'px',
+								left: from_val +53 + "px",
+								height: '6px', //'5px',
+								color:'black',
+								background: 'transparent',
+								width: Math.abs(to_val - from_val) - 6 + "px",
+								'border-left': '5px solid ' + 'black',
+								'border-right': '5px solid ' + 'black',
+								'vertical-align': 'center',
+							}
+							state.facs_lane.gate_selected = point_to_edit.unique_id;
+							$('.scb_s_facs_chart_guider').css(styles_guider);
+							}
 						}
-						state.facs_lane.gate_selected = point_to_edit.unique_id;
-						$('.scb_s_facs_chart_guider').css(styles_guider);
+						
                     }
                     else {
                     	state.facs.sample_analysis = false;
@@ -734,28 +825,64 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 
                 }
                 else{
-                	var selected_gate = _.filter(state.facs_lane.canvas_metadata_analysis.points, function (e) { console.log(e.to + ' ' + e.from + ' ' + e.y + ' ' );return px <= e.to && px >= e.from && Math.abs(e.y - py) <=sensitivity  })
+                	var selected_gate = _.filter(state.facs_lane.canvas_metadata_analysis.points, function (e) { console.log(e.to + ' ' + e.from + ' ' + e.y + ' ' );return px <= e.to && px >= e.from && Math.abs(e.y - py) <=sensitivity  });
                 	if(selected_gate.length >=1){
                 		selected_gate = selected_gate[0];
                 		state.facs_lane.gate_selected = selected_gate.unique_id;
                 	}
-                		
-                	var from_val = Math.round(xaxes.p2c(selected_gate.from));
-                	var to_val  = Math.round(xaxes.p2c(selected_gate.to));
-                	var height_val = Math.round(yaxes.p2c(selected_gate.y));
-                	var styles_guider = {
-                        position: 'absolute',
-                        top: height_val+16+ 'px',
-                        left: from_val +53 + "px",
-                        height: '6px', //'5px',
-                        color:'black',
-                        background: 'transparent',
-                        width: Math.abs(to_val - from_val) - 6 + "px",
-                        'border-left': '5px solid ' + 'black',
-                        'border-right': '5px solid ' + 'black',
-                        'vertical-align': 'center',
+                	var number_of_gates = _.filter(state.facs_lane.canvas_metadata_analysis.points, function (e) { return e.display_id == selected_gate.display_id  });
+                	
+                	var isdoublegate = number_of_gates.length ==2;
+                	
+                	if(isdoublegate){
+                		if(number_of_gates[0].from < number_of_gates[1].from){
+                			selected_gate = number_of_gates[0];
+                		}
+                		else{
+                			selected_gate = number_of_gates[1];
+                		}
+				
+                		var from_val = Math.round(xaxes.p2c(selected_gate.from));
+						var to_val  = Math.round(xaxes.p2c(selected_gate.to));
+						var height_val = Math.round(yaxes.p2c(selected_gate.y));
+						var styles_guider = {
+							position: 'absolute',
+							top: height_val+24+ 'px',
+							left: to_val +53 + "px",
+							height: '6px', //'5px',
+							color:'black',
+							background: 'black',
+							width: "5px",
+							'border-left': 'none',
+							'border-right': 'none',
+							'vertical-align': 'center',
+						}
+                		$('.scb_s_facs_chart_guider').css(styles_guider);
+
+                	}	
+                	else{	
+                		if(selected_gate.from ){
+				
+						var from_val = Math.round(xaxes.p2c(selected_gate.from));
+						var to_val  = Math.round(xaxes.p2c(selected_gate.to));
+						var height_val = Math.round(yaxes.p2c(selected_gate.y));
+						var styles_guider = {
+							position: 'absolute',
+							top: height_val+16+ 'px',
+							left: from_val +53 + "px",
+							height: '6px', //'5px',
+							color:'black',
+							background: 'transparent',
+							width: Math.abs(to_val - from_val) - 6 + "px",
+							'border-left': '5px solid ' + 'black',
+							'border-right': '5px solid ' + 'black',
+							'vertical-align': 'center',
+						}
+						$('.scb_s_facs_chart_guider').css(styles_guider);
+						}
+
                     }
-                    $('.scb_s_facs_chart_guider').css(styles_guider);
+                    
                 	
                 }
             }
@@ -790,6 +917,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 							state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
 						}
 						point_to_edit = null;
+						state.facs_lane.bisector_gate_created = true; 
 						scb.ui.static.FacsView.reevaluate_metadata(state);
 						
 						state.facs.apply_dna_analysis_to_all = false;
@@ -830,6 +958,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 							state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
 						}
 						point_to_edit = null;
+						
 						scb.ui.static.FacsView.reevaluate_metadata(state);
 						state.facs.gate_count=0;
 						state.facs.midpoint = {};
@@ -837,7 +966,6 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						from = NaN;
 						$('.scb_s_facs_chart_helper').text('');
 						state.facs.double_analysis = false; 
-						state.facs_lane.bisector_gate_created = true; 
 						$('.scb_s_facs_double_range_button').button('disable');
 						scb.ui.static.MainFrame.refresh();
 
@@ -848,7 +976,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
         };
         var match = function (px, py) {
             var point = _.find(state.facs_lane.canvas_metadata_analysis.points, function (e) {
-                var overlap = (Math.abs(px - e.from) < 4 || Math.abs(px - e.to) < sensitivity) && (Math.abs(py - e.y) < 3);
+                var overlap = (Math.abs(px - e.from) < 4 || Math.abs(px - e.to) < sensitivity) && (Math.abs(py - e.y) < 3) && e == state.facs_lane.selected_gate;
                 return overlap;
             });
             return point;
@@ -864,21 +992,37 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             px = Math.round(px);
             var button = scb.utils.isDefined(e.buttons) ? e.buttons : e.which;
             console.info(px + " " + from + " " + point_to_edit + " cb=" + button + " b=" + e.button + " bs=" + e.buttons);
-            if (state.facs.sample_analysis) {
+            
+            
+            
+            if (!state.facs.double_analysis) {
                 window._dump_event = e;
-                if (button == 1 && isNaN(from)) {
-                    console.info("SET FROM " + px);
-                    from = px;
-                    from = from > 0 ? from : 0;
-                    from = from > 100 ? 100 : from;
-                    from = from < 0 ? 0 : from;
-                    fromy= py;
-                    from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
-                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
+				if (button == 1 && isNaN(from)) {
+					console.info("SET FROM " + px);
+					from = px;
+					from = from > 0 ? from : 0;
+					from = from > 100 ? 100 : from;
+					from = from < 0 ? 0 : from;
+					fromy= py;
+					from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+						left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
 
-                    var point = match(px, py);
-                    point_to_edit = point;
-                }
+					var point = match(px, py);
+					point_to_edit = point;
+				}
+				if (button == 0 && isNaN(from)) {
+					// is it over line?
+					var point = match(px, py);
+					if (point) {
+						console.info("ew" + px);
+						$(plot.getPlaceholder()).css('cursor', 'ew-resize');
+					}
+					else {
+						console.info("pt" + px);
+						$(plot.getPlaceholder()).css('cursor', 'pointer');
+					}
+					console.info(point);
+				}
                 if (button == 1 && !isNaN(from)) {
                     var to_point = {
                         top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -920,19 +1064,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                         $(plot.getPlaceholder()).css('cursor', 'pointer');
                     }
                 }
-                if (button == 0 && isNaN(from)) {
-                    // is it over line?
-                    var point = match(px, py);
-                    if (point) {
-                        console.info("ew" + px);
-                        $(plot.getPlaceholder()).css('cursor', 'ew-resize');
-                    }
-                    else {
-                        console.info("pt" + px);
-                        $(plot.getPlaceholder()).css('cursor', 'pointer');
-                    }
-                    console.info(point);
-                }
+
                 if (button == 0 && !isNaN(from)) {
                     // is it over line?
                     console.info("SET TO " + px);
@@ -987,7 +1119,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 	var styles = {
                         position: 'absolute',
                         top: '0px',
-                        left: e.clientX-325 +"px",
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) +"px",
                         height: (310)+'px', //'5px',
                         background: 'black',
                         width: "2px",
@@ -1043,6 +1175,22 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
         eventHolder.mousemove(move);
 
     }
+    ], 
+    
+    draw: [ function(plot, canvascontext){	
+    	var xaxes = plot.getXAxes()[0];
+        var yaxes = plot.getYAxes()[0];
+        
+        var points = state.facs_lane.canvas_metadata_analysis.points.length > 0 ? state.facs_lane.canvas_metadata_analysis.points : [];
+        _.each(points, function(p){
+        	var y_coord = yaxes.p2c(p.y);
+        	var x_coord = xaxes.p2c((p.to - p.from)/2 + p.from);
+        	canvascontext.fillText(p.display_id + ' ' + p.bisector_id, x_coord+20, y_coord-2);
+        });
+    	console.log('draw_overlay');
+	
+	
+	}    
     ]
     };
     scb.ui.static.FacsView.reevaluate_metadata(state);
@@ -1067,6 +1215,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
     var self = this;
 
     self.show = function (state) {
+
         var workarea = gstate.workarea;
         var template = state.assignment.template;
         var rows_state = state.facs.rows_state();

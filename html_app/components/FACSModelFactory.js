@@ -234,6 +234,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     }
 
                 },
+                legend: {
+                	show: false
+                }, 
                 grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: template.model.facs.max ? template.model.facs.max:  100 }, 
                 			yaxis: { from: 0, to: 0 }, color: "#000" },
                        { xaxis: { from: 0, to: 0 }, yaxis: { from: 0, to: 100 }, color: "#000" }]},
