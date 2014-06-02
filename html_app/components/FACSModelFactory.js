@@ -67,7 +67,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             var shape = state.shape;
 
 			function g0g1(x) {
-                return normal_dist(x, 0.8, 0.1, 1, false)*3;
+                return 4 * Math.exp(-((x - 1) * (x - 1)) * 30);
             }
 
             function near_zero(x) {
@@ -75,19 +75,15 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             }
 
             function s(x) {
-            	var lower_bound = .8;
-            	var middle_bound_1 = 1;
-            	var middle_bound_2 = 2;
-            	var upper_bound = 2.3;
-                return .05 * (5 * (x > lower_bound && x < middle_bound_1 ? x - lower_bound : 0) + (x > middle_bound_1 & x < middle_bound_2 ? (lower_bound + (middle_bound_2 - x) / 5) : 0) / .6 + 1.3 * (x > middle_bound_2 & x < upper_bound ? (upper_bound - x) / .3 : 0));
+            	return .05 * (5 * (x > .8 && x < 1 ? x - .8 : 0) + (x > 1 & x < 2 ? (.8 + (2 - x) / 5) : 0) / .6 + 1.3 * (x > 2 & x < 2.3 ? (2.3 - x) / .3 : 0));
             }
 
             function g2m(x) {
-                return normal_dist(x, 0.38, 0.07, 1, false) ;
+                return 1 / 2 * Math.exp(-((x - 2) * (x - 2) * 15));
             }
 
             function s_block(x) {
-                return Math.exp(-((2 - x) * Math.exp(2 - x) - .9) * ((2 - x) * Math.exp(2 - x) - .9) / .4);
+				return Math.exp(-((2 - x) * Math.exp(2 - x) - .9) * ((2 - x) * Math.exp(2 - x) - .9) / .4);
             }
             
 			function peak2g1(x){
@@ -214,7 +210,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 	show: true,
                 	color: '#000000',
                     min: 0,
-                    max: template.model.facs.max ? template.model.facs.max:  100,
+                    max: template.model.facs.max ? template.model.facs.max:  150,
                     ticks:  template.model.facs.ticks ? template.model.facs.ticks: [50, 100],
                     tickLength: 0,
                     font: {
@@ -225,7 +221,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 yaxis: {
                 	show: true,
                 	color: '#000000',
-                    min: 0,
+                    min: template.model.facs.max ? 0: -1 ,
                     max: 100,
                     tickLength:0,
                     font: {
@@ -237,7 +233,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 legend: {
                 	show: false
                 }, 
-                grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: template.model.facs.max ? template.model.facs.max:  100 }, 
+                grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: template.model.facs.max ? template.model.facs.max:  150 }, 
                 			yaxis: { from: 0, to: 0 }, color: "#000" },
                        { xaxis: { from: 0, to: 0 }, yaxis: { from: 0, to: 100 }, color: "#000" }]},
             };            
