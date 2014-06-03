@@ -1167,34 +1167,40 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 }
                 //if button depressed and there is a starting point 
                 if (button == 1 && isNaN(from) && (state.facs.gate_count ==0)) {
-                    console.info("SET FROM " + px);
-                    from = px;
-                    from = from > 0 ? from : 0;
-                    from = from > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : from;
-                    from = from < 0 ? 0 : from;
-                    fromy= py > 16 ? py: 16;
-                    fromy = fromy > 90 ? 90: fromy;
-                    from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
-                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
-
-                    var point = match(px, py);
-                    point_to_edit = point;
+                
+//                     console.info("SET FROM " + px);
+//                     from = px;
+//                     from = from > 0 ? from : 0;
+//                     from = from > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : from;
+//                     from = from < 0 ? 0 : from;
+//                     fromy= py > 16 ? py: 16;
+//                     fromy = fromy > 90 ? 90: fromy;
+//                     from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+//                         left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
+// 
+//                     var point = match(px, py);
+//                     point_to_edit = point;
+                    
                 }
                 if (button == 1 && !isNaN(from) && (state.facs.gate_count ==0)) {
-                	state.facs.gate_count= scb.ui.static.FacsView.MAX_GATE ;
-                    var to_point = {
-                        top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
-                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left)
-                    };
-                    var left = from_point.left > to_point.left;
-                    if (point_to_edit) {
-                        console.info("ew" + px);
-                        $(plot.getPlaceholder()).css('cursor', 'ew-resize');
-                    }
-                    else {
-                        console.info("pt" + px);
-                        $(plot.getPlaceholder()).css('cursor', 'pointer');
-                    }
+                
+                
+//                 	state.facs.gate_count= scb.ui.static.FacsView.MAX_GATE ;
+//                     var to_point = {
+//                         top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+//                         left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left)
+//                     };
+//                     var left = from_point.left > to_point.left;
+//                     if (point_to_edit) {
+//                         console.info("ew" + px);
+//                         $(plot.getPlaceholder()).css('cursor', 'ew-resize');
+//                     }
+//                     else {
+//                         console.info("pt" + px);
+//                         $(plot.getPlaceholder()).css('cursor', 'pointer');
+//                     }
+                    
+                    
                 }
             }
         }
