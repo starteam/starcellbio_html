@@ -683,15 +683,15 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
         <tbody>
         {foreach $range in $lane.canvas_metadata_analysis.ranges}
         <tr role='row'>
-            <td>
+            <td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">
                 {$range.display_id}
             </td>
-            <td>
+            <td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">
                 {$range.bisector_id}
             </td>
-            <td>{$range.from} - {$range.to}</td>
-            <td>{$range.percentage}</td>
-            <td>
+            <td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">{$range.from} - {$range.to}</td>
+            <td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">{$range.percentage}</td>
+            <td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">
                 <img class='scb_f_facs_analyze_remove_point scb_s_facs_analyze_remove_point' assignment_id='{$assignment.id}'
                      experiment_id='{$experiment.id}'
                      facs_id='{$facs.id}' facs_lane_id='{$lane.id}' from='{$range.from}' to='{$range.to}'

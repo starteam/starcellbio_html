@@ -6,6 +6,8 @@ scb.ui.static.FacsView.TOTAL_STEPS =  5;
 scb.ui.static.FacsView.TOTAL_SCROLL =  5;
 
 
+scb.ui.static.FacsView.MAX_GATE = 150;
+
 
 
 scb.ui.static.FacsView.parse = function (element) {
@@ -743,7 +745,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 if (!isNaN(from)) {
                     var to = px;
                     to = to > 0 ? to : 0;
-                    to = to > 100 ? 100 : to;
+                    to = to > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : to;
                     to = to < 0 ? 0 : to;
                     if (point_to_edit) {
                     			_.each(state.facs_lane.canvas_metadata_analysis.points, function(x){
@@ -901,7 +903,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 		console.info("SET FROM " + px);
 						from = 0;
 						from = from > 0 ? from : 0;
-						from = from > 100 ? 100 : from;
+						from = from > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : from;
 						from = from < 0 ? 0 : from;
 						fromy= py;
 						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -912,7 +914,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 	if (!isNaN(from)) {
 						var to = px;
 						to = to > 0 ? to : 0;
-						to = to > 100 ? 100 : to;
+						to = to > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : to;
 						to = to < 0 ? 0 : to;
 						if (point_to_edit) {
 							if (Math.abs(point_to_edit.from - from) < sensitivity) {
@@ -943,7 +945,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						console.info("SET FROM " + px);
 						from = px;
 						from = from > 0 ? from : 0;
-						from = from > 100 ? 100 : from;
+						from = from > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : from;
 						from = from < 0 ? 0 : from;
 						fromy= py-5;
 						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -952,9 +954,9 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						var point = match(px, py-5);
 						point_to_edit = point;
 
-						var to = 100;
+						var to = scb.ui.static.FacsView.MAX_GATE ;
 						to = to > 0 ? to : 0;
-						to = to > 100 ? 100 : to;
+						to = to > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : to;
 						to = to < 0 ? 0 : to;
 						if (point_to_edit) {
 							if (Math.abs(point_to_edit.from - from) < sensitivity) {
@@ -1012,11 +1014,12 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             
             if (!state.facs.double_analysis) {
                 window._dump_event = e;
-				if (button == 1 && isNaN(from)) {
+                var point = match(px, py);
+				if (button == 1 && isNaN(from) && (state.facs.sample_analysis || point) ) {
 					console.info("SET FROM " + px);
 					from = px;
 					from = from > 0 ? from : 0;
-					from = from > 100 ? 100 : from;
+					from = from > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : from;
 					from = from < 0 ? 0 : from;
 					fromy= py;
 					from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -1085,7 +1088,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     console.info("SET TO " + px);
                     var to = px;
                     to = to > 0 ? to : 0;
-                    to = to > 100 ? 100 : to;
+                    to = to > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : to;
                     to = to < 0 ? 0 : to;
                     state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
                     scb.ui.static.FacsView.reevaluate_metadata(state);
@@ -1159,7 +1162,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     console.info("SET FROM " + px);
                     from = px;
                     from = from > 0 ? from : 0;
-                    from = from > 100 ? 100 : from;
+                    from = from > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : from;
                     from = from < 0 ? 0 : from;
                     fromy= py;
                     from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -1169,7 +1172,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     point_to_edit = point;
                 }
                 if (button == 1 && !isNaN(from) && (state.facs.gate_count ==0)) {
-                	state.facs.gate_count= 100;
+                	state.facs.gate_count= scb.ui.static.FacsView.MAX_GATE ;
                     var to_point = {
                         top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
                         left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left)
