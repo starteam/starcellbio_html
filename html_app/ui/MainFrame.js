@@ -45,7 +45,12 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
             if (assignment) {
                 assignments.selected_id = assignment.id;
                 ret.assignment = assignment;
-
+				if(state.notebook_id){
+					var notebook = assignment.notebook;
+					if (notebook) {
+						ret.notebook = notebook;
+					}
+				}
                 if (state.experiment_id) {
                     var experiment = assignment.experiments.get(state.experiment_id);
                     if (experiment) {
@@ -156,6 +161,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     scb.ui.static.ExperimentSetupView.register(workarea);
     scb.ui.static.WesternBlotView.register(workarea);
     scb.ui.static.MicroscopyView.register(workarea);
+    scb.ui.static.NotebookView.register(workarea);
     scb.ui.static.WesternBlotGelView.register(workarea);
     scb.ui.static.SelectTechniqueView.register(workarea);
     scb.ui.static.FacsView.register(workarea);
@@ -570,6 +576,11 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     	workarea: workarea,
     	context: context
     });
+    
+	self.sections.notebook = new scb.ui.NotebookView({
+    	workarea: workarea,
+    	context: context
+    });
 
     self.sections.western_blot_gel = new scb.ui.WesternBlotGelView({
         workarea: workarea,
@@ -619,6 +630,33 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 assignments: assignments
             });
         }
+    	if (state.view == 'notebook') {
+            if (!parsed.notebook) {
+                delete state.onhashchange;
+                var experiment = '';
+                if(!parsed.assignment.experiments.selected){
+                	experiment = parsed.assignment.experiments.start({});
+                }
+                else{
+                	experiment = parsed.assignment.experiments.selected;
+                }
+                
+                state.experiment_id = experiment.id;
+                var notebook = assignments.get(state.assignment_id).notebook;
+                state.notebook_id = notebook.id;
+                state.onhashchange = true;
+                self.show(state);
+                return;
+            }
+            scb.ui.static.MainFrame.update_hash(state);
+            self.sections.notebook.show({
+                workarea: workarea,
+                assignment: parsed.assignment,
+                experiment: parsed.experiment,
+                notebook: parsed.notebook
+            });
+        }
+        
         if (state.view == 'experiment_design') {
             if (!parsed.experiment) {
                 delete state.onhashchange;
@@ -751,7 +789,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					state.microscopy_id = microscopy.id;
 					var History = window.History;
 					if (History.enabled) {
-						History.replaceState("New FACS", "New FACS", '#' + $.param(state));
+						History.replaceState("New Microscopy", "New Microscopy", '#' + $.param(state));
 					}
 					state.onhashchange = true;
 					self.show(state);
@@ -995,7 +1033,14 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         	session_list: session_list,
         	templates: master_model.templates
         }, context);
-        context.microscopy=self.sections.microscopy
+        context.microscopy=self.sections.microscopy;
+        
+        self.sections.notebook = new scb.NotebookView({
+        	workarea: workarea,
+        	session_list: session_list,
+        	templates: master_model.templates
+        }, context);
+        context.notebook=self.sections.notebook;
 
         sidebar.show();
         /* click on sidebar to display DASHBOARD */

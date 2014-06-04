@@ -18,6 +18,7 @@ scb.Assignment = function scb_Assignment(data, context, parent) {
 	self.parent = parent;
 	scb.ModelHelpers.common_entry_code(self, data, context);
 
+	scb.Utils.initialize_accessor_field(self,data,'notebook',{},scb.Notebook,context);
 	scb.Utils.initialize_accessor_field(self,data,'experiments',{},scb.ExperimentList,context);
 	scb.Utils.initialize_accessor_field(self,data,'template',{},null,context);
 	scb.Utils.initialize_accessor_field(self,data,'course','',null,context);

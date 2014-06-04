@@ -1,0 +1,120 @@
+{namespace scb_notebook}
+
+/**
+* Assignment selector
+* @param t template
+* @param global_template
+* @param last_step
+* @param prev_step
+* @param context
+* @param assignment AssignmentView
+* @param experiment
+* @param notebook NotebookView
+*/
+{template .main}
+<div class='scb_s_notebook_view' >
+
+    {call scb_homepage.display_header}
+    {param global_template:$global_template /}
+    {param context:$context /}
+    {/call}
+    {call scb_common.assignment_step}
+        {param step:10/}
+        {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
+        {param assignment_name:$assignment.name/}
+        {param experiment_name:$experiment.name/}
+        {param assignment:$assignment/}
+        {param experiment:$experiment/}
+    {/call}
+    {call .display_details}
+    {param t:$t/}
+    {param assignment:$assignment/}
+    {param experiment:$experiment/}
+    {}
+    {/call}
+    {call scb_homepage.display_footer}
+    {param global_template:$t /}
+    {param assignment:$assignment/}
+    {/call}
+</div>
+{/template}
+
+/** Display Notebook main screen
+
+@/param t template
+@param assignment
+@param experiment
+*/
+{template .display_details}
+<div class='scb_s_notebook_container' role='main'>
+<div class='scb_notebook_details_view'>
+
+	<div class='scb_s_notebook_all_tabs'>
+    <div class='scb_notebook_details_view_inner'>
+
+        {call .display_tabs}
+        {param assignment:$assignment/}
+        {param experiment:$experiment /}
+        {param kind:$kind /}
+        {/call}
+    </div>
+	</div>
+
+</div>
+</div>
+{/template}
+
+
+
+
+
+
+
+
+/**
+@param kind
+*/
+{template .display_tabs}
+
+
+<div class="scb_s_notebook_tab_content" role='tabpanel'>
+
+    {if $kind == 'sample_prep'}
+    {call .sample_prep}
+    {/call}
+    </div>
+    {/if}
+
+{/template}
+
+
+
+
+/**
+*/
+{template .sample_prep}
+
+
+
+<div class = 'scb_s_notebook_slide_prep_instructions'>
+
+
+   </div>
+
+
+<div class='scb_s_notebook_samples_container' style=' height: 342px;'>
+
+
+
+
+</div>
+</div>        
+
+{/template}
+
+
+
+
+
+
