@@ -31,7 +31,7 @@
     {param t:$t/}
     {param assignment:$assignment/}
     {param experiment:$experiment/}
-    {}
+	{param notebook:$notebook /}
     {/call}
     {call scb_homepage.display_footer}
     {param global_template:$t /}
@@ -45,20 +45,20 @@
 @/param t template
 @param assignment
 @param experiment
+@param notebook
 */
 {template .display_details}
 <div class='scb_s_notebook_container' role='main'>
 <div class='scb_notebook_details_view'>
 
 	<div class='scb_s_notebook_all_tabs'>
-    <div class='scb_notebook_details_view_inner'>
-
-        {call .display_tabs}
-        {param assignment:$assignment/}
-        {param experiment:$experiment /}
-        {param kind:$kind /}
-        {/call}
-    </div>
+		<div class='scb_notebook_details_view_inner'>
+			{call .display_tabs}
+			{param assignment:$assignment/}
+			{param experiment:$experiment /}
+			{param notebook:$notebook /}
+			{/call}
+		</div>
 	</div>
 
 </div>
@@ -73,45 +73,21 @@
 
 
 /**
-@param kind
+@/param assignment
+@/param experiment
+@/param notebook
 */
 {template .display_tabs}
 
 
-<div class="scb_s_notebook_tab_content" role='tabpanel'>
+<div class="scb_s_notebook_section">
 
-    {if $kind == 'sample_prep'}
-    {call .sample_prep}
-    {/call}
-    </div>
-    {/if}
-
-{/template}
-
-
-
-
-/**
-*/
-{template .sample_prep}
-
-
-
-<div class = 'scb_s_notebook_slide_prep_instructions'>
-
-
-   </div>
-
-
-<div class='scb_s_notebook_samples_container' style=' height: 342px;'>
-
-
-
-
+<textarea></textarea>
 </div>
-</div>        
 
 {/template}
+
+
 
 
 

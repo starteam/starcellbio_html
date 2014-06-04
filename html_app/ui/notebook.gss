@@ -131,6 +131,7 @@
     padding-left: 10px;
     padding-top: 25px;
     position: relative;
+ 	min-height: 676px;
 }
 
 .scb_s_notebook_sample_selected {
@@ -279,6 +280,7 @@
 	background: white;
 	box-shadow: 0 4px 14px -1px gray;
 	position: relative;
+	padding-bottom: 20px;
 	z-index: 1;
 }
 
@@ -478,13 +480,13 @@ input[type=radio].scb_s_notebook_if:checked:before{
     width:1002px;
 }
 
-.scb_s_notebook_tab_content {
+.scb_s_notebook_section {
 	margin-top: -60px;
  	background-color: #FFFFFF;
  	background-image: none;
  	
  	width: 895px !important;
- 	min-height: 676px;
+ 	min-height: 315px;
  	padding: 0px;
  	
  	border: 1px solid #97a4ad;
