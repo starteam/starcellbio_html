@@ -73,14 +73,20 @@
 
 
 /**
-@/param assignment
-@/param experiment
+@param assignment
+@param experiment
 @/param notebook
 */
 {template .display_tabs}
 
 
 <div class="scb_s_notebook_section">
+<input type='text' class='scb_s_notebook_section_name_edit' maxlength="30" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'  title='{$experiment.name}' aria-label='Section Name' role='textbox'>
+<br/>
+<br/>
+<button class='scb_f_notebook_text_button'>Text</button>
+
+<button class='scb_f_notebook_image_button'>Image</button>
 
 <textarea></textarea>
 </div>

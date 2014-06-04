@@ -284,88 +284,15 @@
 	z-index: 1;
 }
 
-
-.scb_s_notebook_slide_content{
-	height:345px;
-    width:563px;
-    position: relative;
-    border: 1px solid #97a4ad;
-    background-color: white;
-    padding-left: 5px;
-	padding-top: 5px;
-}
-
-
-.scb_s_notebook_tab_content_slide{
-	padding:5px;
-    padding-bottom:20px;
-}
-.scb_s_notebook_if{
-	opacity: .10;
-}
-
-input[type=radio].scb_s_notebook_if:checked:before{
-	content:none!important;
-	bottom: 1px;
+.scb_s_notebook_section_name_edit{
+    font-family: 'sourcesanspro-semibold';
+    font-size:11pt;
+    left: 11px;
 	position: relative;
-	right: 2px;
-}
-
-.scb_s_notebook_filter{
-	position: absolute !important;
-	bottom: 117px !important;
-	right: 12px !important;
-	z-index: 5;
-}
-
-.scb_s_notebook_dim_conditions{
-	opacity: 0.5;
-}
-
-.scb_s_notebook_slide_prep_instructions{
-	font-family: sourcesanspro-regular;
-	font-size: 12px;
-	position: relative;
-	left: 14px;
-	height: 106px;
-	width: 603px;
-	top:84px;
-	z-index: 56;
+	width: 396px;
 }
 
 
-
-.scb_s_notebook_prepare_slide_instructions{
-	font-family: sourcesanspro-regular;
-	font-size: 12px;
-	position: relative;
-	left: 19px;
-	height: 106px;
-	z-index: 50;
-	width: 604px;
-	top:87px;
-}
-
-.scb_s_notebook_slide_prep_instructions > b, .scb_s_notebook_prepare_slide_instructions > b{
-	font-family: sourcesanspro-semibold;
-}
-
-#scb_s_notebook_lens_controls{
-	width: 199px;
-	font-size: 10pt;
-	color: black;
-	text-align: center;
-	display: inline-block;
-	font-family: 'sourcesanspro-semibold';
-	margin-left: 15px;
-	background-color: white;
-	margin-bottom: 15px;
-	position: absolute;
-	left: 353px;
-	border-left: 1px solid gray;
-	top: 0px;
-	height: 350px;
-}
 
 
 .scb_f_notebook_remove {
@@ -378,49 +305,9 @@ input[type=radio].scb_s_notebook_if:checked:before{
 	margin-top: 3px;
 }
 
-.scb_s_notebook_tab_content>.scb_f_open_select_technique {
-    position: relative;
-    bottom: 10px;
-    left: 10px;
-    display:inline-block;
-    margin-top:30px;
-}
 
 
 
-
-
-.scb_s_notebook_samples_table > table {
-    width:100%;
-	border-collapse: collapse;
-}
-
-.scb_s_notebook_samples_table_head {
-    background-color: white;
-    font-family: 'sourcesanspro-semibold';
-    font-size:10pt;
-    border-spacing: 0;
-    border:0;
-}
-
-.scb_s_notebook_samples_table_head > tr{
-	position:absolute;
-	top: 0px;
-	background: white;
-	
-}
-
-.scb_s_notebook_samples_table_heading {
-    font-family: 'sourcesanspro-semibold';
-    font-size:10pt;
-    border-bottom: 1px solid black;
-}
-
-.scb_s_notebook_samples_table_td {
-    margin: 0px;
-    font-size:10pt;
-
-}
 
 
 .scb_s_notebook_active {

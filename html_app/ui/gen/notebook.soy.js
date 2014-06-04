@@ -27,6 +27,6 @@ scb_notebook.display_details = function(opt_data, opt_sb) {
 
 scb_notebook.display_tabs = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class="scb_s_notebook_section"><textarea></textarea></div>');
+  output.append('<div class="scb_s_notebook_section"><input type=\'text\' class=\'scb_s_notebook_section_name_edit\' maxlength="30" assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' experiment_id=\'', soy.$$escapeHtml(opt_data.experiment.id), '\' value=\'', soy.$$escapeHtml(opt_data.experiment.name), '\'  title=\'', soy.$$escapeHtml(opt_data.experiment.name), '\' aria-label=\'Section Name\' role=\'textbox\'><br/><br/><button class=\'scb_f_notebook_text_button\'>Text</button><button class=\'scb_f_notebook_image_button\'>Image</button><textarea></textarea></div>');
   return opt_sb ? '' : output.toString();
 };
