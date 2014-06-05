@@ -10,6 +10,7 @@
 * @param assignment AssignmentView
 * @param experiment
 * @param notebook NotebookView
+* @param section
 */
 {template .main}
 <div class='scb_s_notebook_view' >
@@ -32,6 +33,7 @@
     {param assignment:$assignment/}
     {param experiment:$experiment/}
 	{param notebook:$notebook /}
+	{param section: $section /}
     {/call}
     {call scb_homepage.display_footer}
     {param global_template:$t /}
@@ -46,6 +48,7 @@
 @param assignment
 @param experiment
 @param notebook
+@param section
 */
 {template .display_details}
 <div class='scb_s_notebook_container' role='main'>
@@ -53,11 +56,13 @@
 
 	<div class='scb_s_notebook_all_tabs'>
 		<div class='scb_notebook_details_view_inner'>
-			{call .display_tabs}
+			{call .display_sections}
 			{param assignment:$assignment/}
 			{param experiment:$experiment /}
 			{param notebook:$notebook /}
+			{param section: $section /}
 			{/call}
+			<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' class='scb_f_notebook_add_section_button scb_s_notebook_add_section_button scb_s_notebook_image_insert_button'>Add Section +</button>
 		</div>
 	</div>
 
@@ -75,26 +80,145 @@
 /**
 @param assignment
 @param experiment
-@/param notebook
+@param notebook
+@param section
 */
-{template .display_tabs}
+{template .display_sections}
+<div assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}'>
+{foreach $section in $notebook.sections.list}
+	<div class="scb_s_notebook_section" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}'>
+	<input type='text' class='scb_s_notebook_section_name_edit' maxlength="30" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'  title='{$experiment.name}' aria-label='Section Name' role='textbox'>
+	<br/>
+	<br/>
+	{foreach $element in $section.elements}
+		{if $element.type == 'text'}
+			<div class='scb_s_notebook_text_section'>
+			{$element.data |noAutoescape}
+			</div>
+		{/if}
+
+	{/foreach}
+
+	{if $section.id == $notebook.sections.selected_id}
+		<div class='scb_s_notebook_section_button_wrapper'>
+		<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}' class='scb_f_notebook_text_button scb_s_notebook_text_button scb_s_navigation_button'>Text</button>
+
+		<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}' class='scb_f_notebook_image_button scb_s_notebook_image_button scb_s_navigation_button'>Image</button>
+		</div>
+		{if $notebook.edit_text}
+		{call .text_edit}
+			{param assignment:$assignment/}
+			{param experiment:$experiment /}
+			{param notebook:$notebook /}
+			{param section: $section /}
+		{/call}
+		{/if}
+		{if $notebook.edit_image}
+
+		{call .image_edit}
+			{param assignment:$assignment/}
+			{param experiment:$experiment /}
+			{param notebook:$notebook /}
+			{param section: $section /}
+		{/call}
+		{/if}
+	{/if}
+
+	</div>
+{/foreach}
+
+</div>
+{/template}
 
 
-<div class="scb_s_notebook_section">
-<input type='text' class='scb_s_notebook_section_name_edit' maxlength="30" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'  title='{$experiment.name}' aria-label='Section Name' role='textbox'>
-<br/>
-<br/>
-<button class='scb_f_notebook_text_button'>Text</button>
-
-<button class='scb_f_notebook_image_button'>Image</button>
-
-<textarea></textarea>
+/**
+@param assignment
+@param experiment
+@param notebook
+@param section
+*/
+{template .text_edit}
+<div assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' class='scb_s_notebook_element_edit_wrapper'>
+	<textarea class='scb_s_notebook_text_edit'></textarea>
+	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_f_notebook_save_text_button scb_s_notebook_save_text_button scb_s_navigation_button'>SAVE</button>
 </div>
 
 {/template}
 
 
+/**
+@param assignment
+@param experiment
+@param notebook
+@param section
+*/
+{template .image_edit}
+<div  assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_s_notebook_element_edit_wrapper'>
+	{foreach $e in $assignment.experiments.list}
+		{$e.name}<br/>
+		Experiment Design <br/>
+		{if length($e.cell_treatment_list.list) > 0}
+		Experiment Setup<br/>
+		{/if}
+		{foreach $wb in $e.western_blot_list.list}
+			{if $wb.is_transfered}
+				{$wb.name}<br/>
+				{foreach $gel in $wb.gel_list.list}
+					{if $gel.is_developed}
+						{$gel.name}<br/>
+					{/if}
+				{/foreach}
+			{/if}
+		{/foreach}	
+		
+		{foreach $f in $e.facs_list.list}
+			{if $f.samples_finished}
+				{$f.name}<br/>
+				{foreach $sample in $f.lanes_list.list}
+					{if $sample.canvas_metadata}
+						{$sample.id}<br/>
+					{/if}
+				{/foreach}
+			{/if}
+		{/foreach}
+		
+		{foreach $m in $e.microscopy_list.list}
+			{if $m.samples_finished}
+				{$m.name}<br/>
+				{foreach $sample in $m.lanes_list.list}
+					{if $sample.lens_map.src}
+						{$sample.id}<br/>
+					{/if}
+				{/foreach}
+			{/if}
+		{/foreach}
+		
+		
+					
+	{/foreach}
 
+
+
+	<div class='scb_s_notebook_image_dialog_button_wrapper'>
+	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_f_notebook_image_insert_open_button scb_s_notebook_image_insert_open_button scb_s_notebook_image_insert_button'>Insert and Open</button>
+
+	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_f_notebook_image_insert_close_button scb_s_notebook_image_insert_close_button scb_s_notebook_image_insert_button'>Insert and Close</button>
+
+	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}' class='scb_f_notebook_image_close_button scb_s_notebook_image_close_button scb_s_notebook_image_insert_button'>Close</button>
+	</div>
+</div>
+
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param notebook
+@param section
+*/
+{template .experiment_design}
+	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_f_notebook_image_insert_close_button scb_s_notebook_image_insert_close_button scb_s_notebook_image_insert_button'>Insert and Close</button>
+{/template}
 
 
 

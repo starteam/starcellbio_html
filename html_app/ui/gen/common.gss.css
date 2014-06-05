@@ -83,6 +83,9 @@ div#main {
   bottom: 8px;
   top: 1px;
 }
+.scb_s_navigation_button:hover {
+  background: #0a694a;
+}
 .scb_s_experiment_step {
   position: relative;
   display: inline-block;

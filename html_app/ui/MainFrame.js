@@ -49,6 +49,13 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					var notebook = assignment.notebook;
 					if (notebook) {
 						ret.notebook = notebook;
+						if(state.section_id){
+							var section = notebook.sections.get(state.section_id); 
+							if(section){
+								assignment.notebook.sections.selected_id = section.id
+								ret.section = section;
+							}
+						}
 					}
 				}
                 if (state.experiment_id) {
@@ -643,7 +650,22 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 
                 state.experiment_id = experiment.id;
                 var notebook = assignments.get(state.assignment_id).notebook;
+                
+                var section  = '';
+                
+            	if(!notebook.sections.selected){
+                	section = notebook.sections.start({});
+                	var History = window.History;
+					if (History.enabled) {
+						History.replaceState("New Notebook Section", "New Notebook Section", '#' + $.param(state));
+					}
+                }
+                else{
+                	section = notebook.sections.selected;
+                }
+                
                 state.notebook_id = notebook.id;
+                state.section_id = section.id;
                 state.onhashchange = true;
                 self.show(state);
                 return;
@@ -653,7 +675,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 workarea: workarea,
                 assignment: parsed.assignment,
                 experiment: parsed.experiment,
-                notebook: parsed.notebook
+                notebook: parsed.notebook,
+                section: parsed.section
             });
         }
         
