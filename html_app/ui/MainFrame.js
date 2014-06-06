@@ -666,7 +666,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 
                 state.notebook_id = notebook.id;
                 state.section_id = section.id;
-                state.onhashchange = true;
+                //state.onhashchange = true;
                 self.show(state);
                 return;
             }

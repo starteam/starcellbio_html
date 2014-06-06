@@ -533,3 +533,6 @@ label.custom-select {
   font-family: 'sourcesanspro-regular';
   cursor: pointer;
 }
+.scb_s_gray_button:hover {
+  background-color: #464747;
+}

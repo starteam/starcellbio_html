@@ -144,4 +144,6 @@ scb.MicroscopyLane = function scb_MicroscopyLane(data, context, parent) {
         return context.template.micro_kinds;
     }, scb.utils.noop);
 
+	self.display_text = self.parent.parent.parent.parent.cell_treatment_list.get(self.cell_treatment_id).format_row();
+
 }

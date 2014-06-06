@@ -74,7 +74,7 @@
   box-shadow: 0 0 0 0;
   border-radius: 8px;
   margin: 25px;
-  height: 215px;
+  min-height: 215px;
 }
 .scb_s_notebook_image_insert_button:hover {
   background: #407d9e;
@@ -137,6 +137,32 @@
   border: none;
   height: 25px;
 }
-.scb_s_notebook_text_section {
+.scb_s_notebook_western_blot {
+  display: inline !important;
+}
+.scb_s_notebook_text_section, .scb_s_notebook_image_section {
   margin: 15px;
+  background: white;
+  border: 2px solid black;
+  padding: 5px;
+}
+.scb_s_notebook_experiment_design_techniques {
+  min-height: 0 !important;
+}
+.scb_s_notebook_experiment_setup_table {
+  font-size: 12px;
+}
+.scb_s_notebook_image_section_link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.scb_s_notebook_experiment_head_link {
+  padding-left: 10px;
+}
+.scb_s_notebook_experiment_design_link, .scb_s_notebook_experiment_setup_link, .scb_s_notebook_wb_head_link, .scb_s_notebook_facs_head_link, .scb_s_notebook_micro_head_link {
+  padding-left: 25px;
+}
+.scb_s_notebook_wb_link, .scb_s_notebook_facs_link, .scb_s_notebook_micro_link {
+  padding-left: 50px;
 }

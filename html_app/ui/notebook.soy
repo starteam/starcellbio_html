@@ -96,14 +96,52 @@
 			{$element.data |noAutoescape}
 			</div>
 		{/if}
+		{if $element.type == 'image'}
+			<div class='scb_s_notebook_text_section'>
+			{if $element.view == 'experiment_design'}
+				{call .experiment_design}	
+					{param assignment:$assignment/}
+					{param experiment:$notebook.selected_experiment /}
+				{/call}
+			{/if}
+			{if $element.view == 'experiment_setup'}
+				{call .experiment_setup}	
+					{param assignment:$assignment/}
+					{param experiment:$notebook.selected_experiment /}
+					{param headings: $element.headings/}
+					{param rows: $element.rows/}
+				{/call}
+			{/if}
+			{if $element.view == 'western_blot'}
+				{call .wb_lane}	
+					{param assignment:$assignment/}
+					{param experiment:$notebook.selected_experiment /}
+					{param western_blot: $notebook.selected_western_blot /}
+					{param western_blot_gel: $notebook.selected_western_blot_gel /}
+					{param rows: $element.rows/}
+					{param exposure_time: $element.exposure_time /}
+				{/call}
+			{/if}
+			{if $element.view == 'facs'}
+				{call .facs_lane}	
+					{param assignment:$assignment/}
+					{param experiment:$notebook.selected_experiment /}
+					{param facs: $notebook.selected_facs /}
+					{param lane: $notebook.selected_facs_lane /}
+				{/call}
+			{/if}
+			</div>
+		{/if}
 
 	{/foreach}
 
 	{if $section.id == $notebook.sections.selected_id}
 		<div class='scb_s_notebook_section_button_wrapper'>
-		<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}' class='scb_f_notebook_text_button scb_s_notebook_text_button scb_s_navigation_button'>Text</button>
+		<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  
+			section_id='{$section.id}' class='scb_f_notebook_text_button scb_s_notebook_text_button scb_s_navigation_button'>Text</button>
 
-		<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}' class='scb_f_notebook_image_button scb_s_notebook_image_button scb_s_navigation_button'>Image</button>
+		<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  
+			section_id='{$section.id}' class='scb_f_notebook_image_button scb_s_notebook_image_button scb_s_navigation_button'>Image</button>
 		</div>
 		{if $notebook.edit_text}
 		{call .text_edit}
@@ -140,7 +178,8 @@
 {template .text_edit}
 <div assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' class='scb_s_notebook_element_edit_wrapper'>
 	<textarea class='scb_s_notebook_text_edit'></textarea>
-	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_f_notebook_save_text_button scb_s_notebook_save_text_button scb_s_navigation_button'>SAVE</button>
+	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' 
+		class='scb_f_notebook_save_text_button scb_s_notebook_save_text_button scb_s_navigation_button'>SAVE</button>
 </div>
 
 {/template}
@@ -155,17 +194,28 @@
 {template .image_edit}
 <div  assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_s_notebook_element_edit_wrapper'>
 	{foreach $e in $assignment.experiments.list}
-		{$e.name}<br/>
-		Experiment Design <br/>
+		<span class='scb_s_notebook_experiment_head_link'>{$e.name}</span><br/>
+		
+		
+		<span class='scb_f_notebook_experiment_design_link scb_s_notebook_experiment_design_link scb_s_notebook_image_section_link' 
+			image_id='{$e.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' 
+			section_id='{$section.id}'>Experiment Design</span> <br/>
+		
 		{if length($e.cell_treatment_list.list) > 0}
-		Experiment Setup<br/>
+		<span class='scb_f_notebook_experiment_setup_link scb_s_notebook_experiment_setup_link scb_s_notebook_image_section_link' 
+		image_id='{$e.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' 
+		section_id='{$section.id}'>Experiment Setup</span><br/>
 		{/if}
+		
 		{foreach $wb in $e.western_blot_list.list}
 			{if $wb.is_transfered}
-				{$wb.name}<br/>
+				<span class='scb_s_notebook_wb_head_link'>{$wb.name}</span><br/>
 				{foreach $gel in $wb.gel_list.list}
 					{if $gel.is_developed}
-						{$gel.name}<br/>
+						<span class='scb_f_notebook_wb_link scb_s_notebook_wb_link scb_s_notebook_image_section_link' 
+							e_id='{$e.id}' wb_id='{$wb.id}' image_id='{$gel.id}' assignment_id='{$assignment.id}' 
+							experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}'>
+							{$gel.name}</span><br/>
 					{/if}
 				{/foreach}
 			{/if}
@@ -173,10 +223,14 @@
 		
 		{foreach $f in $e.facs_list.list}
 			{if $f.samples_finished}
-				{$f.name}<br/>
+				<span class='scb_s_notebook_facs_head_link'>{$f.name}</span><br/>
 				{foreach $sample in $f.lanes_list.list}
 					{if $sample.canvas_metadata}
-						{$sample.id}<br/>
+						<span class='scb_f_notebook_facs_link scb_s_notebook_facs_link scb_s_notebook_image_section_link'
+						 e_id='{$e.id}' facs_id='{$f.id}'  image_id='{$sample.id}' assignment_id='{$assignment.id}' 
+						 experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}'>
+						 {$sample.display_text} - {$assignment.template.facs_kinds[$sample.kind].name} - {$assignment.template.facs_kinds[$sample.kind].conditions[$sample.conditions].name}
+						 </span><br/>
 					{/if}
 				{/foreach}
 			{/if}
@@ -184,10 +238,13 @@
 		
 		{foreach $m in $e.microscopy_list.list}
 			{if $m.samples_finished}
-				{$m.name}<br/>
+				<span class='scb_s_notebook_micro_head_link'>{$m.name}</span><br/>
 				{foreach $sample in $m.lanes_list.list}
 					{if $sample.lens_map.src}
-						{$sample.id}<br/>
+						<span class='scb_f_notebook_micro_link scb_s_notebook_micro_link scb_s_notebook_image_section_link' e_id='{$e.id}' 
+						micro_id='{$m.id}' image_id='{$sample.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' 
+						notebook_id='{$notebook.id}' section_id='{$section.id}'>
+							{$sample.display_text} - {$assignment.template.micro_kinds[$sample.kind].name} - {$assignment.template.micro_kinds[$sample.kind].conditions[$sample.slide_conditions].name}</span><br/>
 					{/if}
 				{/foreach}
 			{/if}
@@ -200,9 +257,11 @@
 
 
 	<div class='scb_s_notebook_image_dialog_button_wrapper'>
+<!-- 
 	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_f_notebook_image_insert_open_button scb_s_notebook_image_insert_open_button scb_s_notebook_image_insert_button'>Insert and Open</button>
 
 	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_f_notebook_image_insert_close_button scb_s_notebook_image_insert_close_button scb_s_notebook_image_insert_button'>Insert and Close</button>
+ -->
 
 	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}' class='scb_f_notebook_image_close_button scb_s_notebook_image_close_button scb_s_notebook_image_insert_button'>Close</button>
 	</div>
@@ -213,14 +272,271 @@
 /**
 @param assignment
 @param experiment
-@param notebook
-@param section
 */
 {template .experiment_design}
-	<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}' section_id='{$section.id}' class='scb_f_notebook_image_insert_close_button scb_s_notebook_image_insert_close_button scb_s_notebook_image_insert_button'>Insert and Close</button>
+	<span class='scb_s_experiment_name_edit' maxlength="30" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' title='{$experiment.name}' aria-label='Experiment Name' role='textbox'>
+	{$experiment.name}
+	</span>
+	<br/>
+	<br/>
+
+	<div class='scb_s_experiment_design_objective_container'>
+	
+		<div class='scb_s_experiment_design_objective_text' id='scb_s_experiment_design_objective_text_label'><span class='design_numbers'>1.&nbsp;&nbsp;&nbsp;</span>What question is your experiment going to address?</div>
+		<div aria-labelledby="scb_s_experiment_design_objective_text_label" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.objective}</div>
+	</div>
+	<br/>
+
+	<div class='scb_s_experiment_design_hypothesis_container'>
+		<div class='scb_s_experiment_design_hypothesis_text' id="scb_s_experiment_design_hypothesis_label"><span class='design_numbers'>2.&nbsp;&nbsp;&nbsp;</span>Do you have a hypothesis for this experiment? If so, please write it below.</div>
+	<div aria-labelledby="scb_s_experiment_design_hypothesis_label"  assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.hypothesis}</div>
+	</div>
+	<br/>
+
+	<div class='scb_s_experiment_design_techniques_container scb_s_notebook_experiment_design_techniques'>
+		<div class='scb_s_experiment_design_techniques_text'><span class='design_numbers'>3.&nbsp;&nbsp;&nbsp;</span>What technique(s) might be best suited for the analysis of this experiment?</div>
+
+		<div aria-labelledby="scb_s_experiment_design_technique_label" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$experiment.technique}</div>
+	</div>
 {/template}
 
 
+/**
+@param assignment
+@param experiment
+@param headings
+@param rows
+*/
+{template .experiment_setup}
+<table class=" scb_s_notebook_experiment_setup_table scb_s_experiment_setup_table scb_s_experiment_setup_table_readonly" aria-label='Table of Samples' role='grid'>
+			<thead class='scb_s_experiment_setup_table_head' >
+			{foreach $h in $headings}
+				<td role='columnheader' aria-label='{$h.title}' class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
+					{if $h.kind == 'actions'}
+					{else}
+					{$h.title}
+					{/if}
+				</td>
+			{/foreach}
+			</thead>
+			<tbody class='scb_s_experiment_setup_table_body'>
+			{foreach $r in $rows}
+			<tr class='scb_s_experiment_setup_table_row' role='row' aria-label='Sample' cell_treatment_id='{$r.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' >
+				{foreach $c in $r.columns}
+				<td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if}'  rowspan="{$c.rows}">
+						{if $c.kind=='cell_plate'}
+							<img src="images/setup/scb_cell_plate.png" role='presentation'>
+						{/if}
+						{if ($c.kind =='collection' and $c.title =='default') or $c.kind == 'actions'}
+						{else}
+						{$c.title}
+						{/if}
+				</td>
+				{/foreach}
+			</tr>
+			{/foreach}
+
+			</tbody>
+		</table>
+{/template}
+
+
+/**
+@param assignment
+@param experiment
+@param western_blot
+@param western_blot_gel
+@param rows
+@param exposure_time
+*/
+{template .wb_lane}
+
+<div class='scb_s_notebook_western_blot'>
+<div class='scb_s_western_blot_samples_area'>
+        <div class='scb_s_western_blot_choose_gel_type'>
+            Gel Type:
+            {if $western_blot.gel_type =='.10'}&nbsp;&nbsp;&nbsp;10%{/if}
+            {if $western_blot.gel_type =='.12'}&nbsp;&nbsp;&nbsp;12%{/if}
+            {if $western_blot.gel_type =='.15'}&nbsp;&nbsp;&nbsp;15%{/if}
+        </div>
+        <div class='scb_s_western_blot_samples_heading' role='heading'>
+            Samples
+        </div>
+        <div id='scb_s_western_blot_choose_samples_order' class='scb_s_western_blot_choose_samples_order'>
+            <ol class='scb_s_western_blot_choose_samples_order_list scb_s_western_blot_static_list' role='list' aria-labelledby='scb_s_western_blot_choose_samples_order'>
+                {foreach $r in $rows}
+                {if  $r.kind =='existing' and  $western_blot.marker_loaded == true and $r.lane_id == 'marker'}
+                	<li role='listitem' class="scb_s_western_blot_marker scb_s_western_blot_choose_samples_list" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' western_blot_id='{$western_blot.id}' >Marker</li>
+            	{/if}
+                {if $r.is_valid}
+                <li role='listitem' class="scb_s_western_blot_choose_samples_list" title='{$r.display_text} - {$r.lane_name}' id="{$r.lane_id}">
+                	{$r.display_text} - {$r.lane_name}
+                </li>
+                {/if}
+                {/foreach}
+            </ol>
+        </div>
+        {if $western_blot.marker_loaded == false}
+        <div class='scb_s_western_blot_marker scb_s_western_blot_marker_not'>No marker loaded.</div>
+        {/if}
+    </div>
+    
+    <div class='scb_s_western_blot_samples_gel_area' style='width:536px;'>
+        <div class='scb_s_western_blot_gel_tabs' role='tablist'>
+                		<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab' role='tab'>
+
+                		<div class='scb_s_western_blot_gel_tab_selected' western_blot_id='{$western_blot.id}'
+                     		assignment_id='{$assignment.id}'
+                     		experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}' >{$western_blot_gel.name}
+        				</div>
+       					</span>
+        	
+    	</div>
+<div class='scb_s_western_blot_gel_content' style='width: 527px;'>
+    <div class='scb_s_western_blot_gel' is_developed='{$western_blot_gel.is_developed}'
+         western_blot_id='{$western_blot.id}'
+         assignment_id='{$assignment.id}'
+         experiment_id='{$experiment.id}' western_blot_gel_id='{$western_blot_gel.id}'>
+        {call scb_western_blot.display_western_blot_numbers}
+        {/call}
+        <div class='scb_s_western_blot_gel_canvas_wrapper'>
+            <canvas id="{$western_blot_gel.id}" class='scb_s_western_blot_gel_canvas' style="width:346px;height:247px"
+                    width='375' height='247' role='presentation'></canvas>
+        </div>
+    </div>
+    <div class='scb_s_western_blot_tools'>
+        <h1 role='heading' >Blotting Conditions</h1>
+		<div class='scb_s_wb_primary_antibody'>
+			Primary antibody:
+			<div>{$assignment.template.primary_anti_body[$western_blot_gel.primary_anti_body].name}</div>
+		</div>
+		<div class='scb_s_wb_secondary_antibody'>
+			Secondary antibody:
+			<div>{$assignment.template.secondary_anti_body[$western_blot_gel.secondary_anti_body].name}</div>
+		</div>
+		<h1 class='scb_s_wb_analysis_tools_title' role='heading'>Analysis Tools</h1>
+		<div class='scb_s_wb_exposure_time'>
+			Exposure time:
+			<div id='scb_s_wb_exposure_time_value' class='scb_s_wb_exposure_time_value'>{$exposure_time}</div>
+		</div>
+    </div>
+</div>
+    	
+    	</div>
+    	
+</div>
+{/template}
+
+
+/**
+@param assignment
+@param experiment
+@param facs
+@param lane
+*/
+{template .facs_lane}
+    <div class='scb_s_facs_samples_graph_area'>
+        <div class='scb_s_western_blot_gel_tabs' role='tablist'>
+        				<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab ' role='tab'>
+
+						<div class='scb_s_facs_gel_tab_selected'>{$lane.display_text} - {$assignment.template.facs_kinds[$lane.kind].name} - {$assignment.template.facs_kinds[$lane.kind].conditions[$lane.conditions].name}
+						</div>
+						</span>
+        </div>
+        <div class='scb_s_western_blot_gel_content'>
+
+			<div class='scb_s_facs_chart_wrapper'>
+				<div class='scb_s_facs_chart_xaxis'>
+					{if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence
+				</div>
+				<div class='scb_s_facs_chart_yaxis'>
+					Number of cells (thousands)
+				</div>
+				<div class='scb_s_facs_chart_helper'></div>
+				<div class='scb_s_facs_chart_guider'></div>
+				<div class='scb_s_facs_chart' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+					 facs_id='{$facs.id}'
+				{if $facs.lane_selected}facs_lane_id='{$facs.lane_selected}'{/if}>
+			</div>
+		</div>
+					
+
+		<div class='scb_s_facs_tools'>
+			{if $lane.canvas_metadata_analysis}
+				{if $lane.canvas_metadata_analysis.ranges}
+					{if $lane.canvas_metadata_analysis.ranges.length > 0}
+					<table class='scb_s_facs_tools_analyze_data' role='grid'>
+						<thead>
+						<tr>
+							<td role='columnheader'></td>
+							<td role='columnheader'></td>
+							<td role='columnheader'>{if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence</td>
+							<td role='columnheader'>% Cells</td>
+							<td role='columnheader'></td>
+						</tr>
+						</thead>
+						<tbody>
+						{foreach $range in $lane.canvas_metadata_analysis.ranges}
+						<tr role='row'>
+							<td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">
+								{$range.display_id}
+							</td>
+							<td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">
+								{$range.bisector_id}
+							</td>
+							<td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">{$range.from} - {$range.to}</td>
+							<td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">{$range.percentage}</td>
+							<td class="{if $range.bisector_id == 'b'}scb_s_facs_tools_analyze_bisector_border{/if}">
+								<img class='scb_f_facs_analyze_remove_point scb_s_facs_analyze_remove_point' assignment_id='{$assignment.id}'
+									 experiment_id='{$experiment.id}'
+									 facs_id='{$facs.id}' facs_lane_id='{$lane.id}' from='{$range.from}' to='{$range.to}'
+									 alt="Delete" title="Delete" src="images/setup/scb_remove.png">
+
+ 
+							</td>
+						</tr>
+						{/foreach}
+						</tbody>
+					</table>
+			
+					{/if}
+				{/if}
+			{/if}
+		</div>
+		</div>
+    </div>
+{/template}
+
+/**
+@param assignment
+@param experiment
+@param microscopy
+@param lane
+@param microscopy_line_id
+*/
+{template .micro_lane}
+<div class='scb_s_microscopy_samples_slide_area'>
+
+        <div class='scb_s_western_blot_gel_tabs' role='tablist'>
+        				<span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab ' role='tab'>
+
+						<div class='scb_s_microscopy_gel_tab_selected'>{$lane.display_text} - {$assignment.template.micro_kinds[$lane.kind].name} - {$assignment.template.micro_kinds[$lane.kind].conditions[$lane.slide_conditions].name}
+						</div>
+						</span>
+
+       	</div>
+    				<div class='scb_s_microscopy_slide_content' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+							 microscopy_id='{$microscopy.id}'
+							{if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+							
+							>									
+
+							<div id='scb_s_microscopy_slide_content_lens_outline' role='widget' aria-label='Slide Lens, assistance needed to use'></div>
+
+					</div>	
+ 		</div>
+
+{/template}
 
 
 
