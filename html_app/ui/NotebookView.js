@@ -243,36 +243,24 @@ scb.ui.static.NotebookView.scb_f_notebook_micro_link = function (element) {
         alert("INVALID ELEMENT!");
     }
     var image_id = $(element).attr('image_id');
-    var wb_id = $(element).attr('wb_id');
+    var microscopy_id = $(element).attr('micro_id');
     var e_id = $(element).attr('e_id');
     
-    var western_blot = parsed.experiment.western_blot_list.get(wb_id);
-    var gel = parsed.experiment.western_blot_list.get(wb_id).gel_list.get(image_id);
+    var microscopy = parsed.experiment.microscopy_list.get(microscopy_id);
+    var lane = parsed.experiment.microscopy_list.get(microscopy_id).lanes_list.get(image_id);
     var current_experiment = parsed.assignment.experiments.get(e_id);
     
-    parsed.notebook.image_western_blot_id = western_blot.id;
+    parsed.notebook.image_microscopy_id = microscopy.id;
     parsed.notebook.image_experiment_id = current_experiment.id;
-    parsed.notebook.image_western_blot_gel_id = gel.id;
+    parsed.notebook.image_microscopy_lane_id = lane.id;
     
-    
-    
-	var rows = western_blot.rows_state().rows;
-	_.each(rows, function(e){
-		delete e.cell_treatment;
-		e.lane_id = e.lane.id;
-		e.lane_name = e.lane.kinds[e.lane.kind].name;
-		e.is_valid = e.is_valid ? true: false;
-		delete e.lane;
-	
-	});
+
 	    
     parsed.section.elements.push({'type': 'image',
-		'view': 'western_blot',
+		'view': 'microscopy',
 		'experiment_id': current_experiment.id,
-		'western_blot_id': western_blot.id,
-		'gel_id': gel.id,
-		'rows': rows,
-		'exposure_time': scb.utils.print_time_w_seconds(gel.exposure_time)
+		'microscopy_id': microscopy.id,
+		'lane_id': lane.id
 	 });
     
     scb.ui.static.MainFrame.refresh();

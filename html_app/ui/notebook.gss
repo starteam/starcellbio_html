@@ -186,6 +186,10 @@
 	display: inline !important;
 }
 
+.scb_s_notebook_text_section > .scb_s_microscopy_samples_slide_area{
+	padding-top: 0 !important; 
+}
+
 .scb_s_notebook_text_section, .scb_s_notebook_image_section{
 	margin: 15px;
 	background:white;

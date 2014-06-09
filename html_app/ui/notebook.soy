@@ -130,6 +130,14 @@
 					{param lane: $notebook.selected_facs_lane /}
 				{/call}
 			{/if}
+			{if $element.view == 'microscopy'}
+				{call .micro_lane}	
+					{param assignment:$assignment/}
+					{param experiment:$notebook.selected_experiment /}
+					{param microscopy: $notebook.selected_microscopy /}
+					{param lane: $notebook.selected_microscopy_lane /}
+				{/call}
+			{/if}
 			</div>
 		{/if}
 
@@ -512,7 +520,6 @@
 @param experiment
 @param microscopy
 @param lane
-@param microscopy_line_id
 */
 {template .micro_lane}
 <div class='scb_s_microscopy_samples_slide_area'>
@@ -527,7 +534,7 @@
        	</div>
     				<div class='scb_s_microscopy_slide_content' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 							 microscopy_id='{$microscopy.id}'
-							{if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+							{if $microscopy.lane_selected}microscopy_lane_id='{$microscopy.lane_selected}'{/if}
 							
 							>									
 
