@@ -1331,7 +1331,10 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             $('.scb_s_facs_samples_graph_area button').prop('disabled', true);
         }
 
-		
+		$("label[for='scb_facs_check']", '.scb_s_facs_view').attr('title', 'Single gate');
+		$("label[for='scb_facs_check2']", '.scb_s_facs_view').attr('title', 'Bisector gate');
+
+		$("label[class='scb_s_facs_label']", '.scb_s_facs_view').tooltip();
 
 		_.each($(".scb_s_experiment_step_button"), function (e) {
 			if(!$(e).hasClass('scb_s_experiment_step_visited')) 

@@ -115,16 +115,16 @@
 }
 .scb_s_facs_single_range_button {
   background-image: url('../../images/header/scb_histogram_icon.png') !important;
-  height: 16px;
-  width: 26px;
+  height: 23px;
+  width: 31px;
   background-repeat: no-repeat !important;
   border-radius: 5px;
   background-color: lightgray !important;
 }
 .scb_s_facs_double_range_button {
   background-image: url('../../images/header/scb_bisector_icon.png') !important;
-  height: 16px;
-  width: 26px;
+  height: 23px;
+  width: 31px;
   background-repeat: no-repeat !important;
   border-radius: 5px;
   background-color: lightgray !important;
@@ -316,18 +316,18 @@
 .scb_s_facs_active>span {
   color: black;
 }
-input[type=radio] {
+#main input[type=radio] {
   margin-right: 7px;
   -webkit-appearance: none;
   margin-bottom: 0;
   height: 13px;
   width: 12px;
-  border: 1px solid #c0c0c0;
-  background-color: #d0d0d0;
+  border: 1px solid #000;
+  background-color: #fff;
   border-radius: 6px;
   cursor: pointer;
 }
-input[type=radio]:checked {
+#main input[type=radio]:checked {
   margin-right: 7px;
   -webkit-appearance: none;
   margin-bottom: 0;

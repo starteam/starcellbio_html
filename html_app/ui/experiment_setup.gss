@@ -115,7 +115,7 @@ table.scb_s_experiment_setup_table {
 .scb_s_experiment_setup_new_set_up{
 	visibility: hidden;	
 	position: relative;
-	margin-top: 51px;
+	margin-top: 79px;
 	margin-bottom: 10px;
 	left: 8px;
 }

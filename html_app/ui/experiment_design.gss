@@ -219,7 +219,6 @@
 
 .scb_s_experiment_design_unselected {
     opacity: .75;
-    cursor: pointer;
 
 }
 

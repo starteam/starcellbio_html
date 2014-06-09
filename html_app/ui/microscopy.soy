@@ -661,22 +661,23 @@
 
 			
 			
-			<div id='scb_s_microscopy_lens_controls'>
+			<div id='scb_s_microscopy_lens_controls' class='{if $microscopy.samples_finished}{else}scb_s_microscopy_lens_controls_disabled{/if}'>
 			<div class = 'scb_s_microscopy_lens_controls_section_1'>
 			 		<span class="scb_s_microscopy_title_label" role='heading'>Microscope Controls</span>
 			 		<button class='scb_f_microscopy_tools_toggle scb_s_microscopy_tools_navigation_followup_toggle'  note='scb_s_microscopy_tools_navigation_followup' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-             microscopy_id='{$microscopy.id}' role='button' ></button>
+             microscopy_id='{$microscopy.id}' role='button' {if $microscopy.samples_finished}{else}disabled{/if} ></button>
    			 </div>
     
     <div class = 'scb_s_microscopy_lens_controls_section_2'>
     <span class="scb_s_microscopy_lens_label" id='scb_s_light_label' >Light:</span> <input aria-labelledby='scb_s_light_label' type="checkbox" class="scb_f_microscopy_light" microscopy_id='{$microscopy.id}'
-			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.light_on}checked='checked'{else}{/if}   aria-checked='{if $microscopy.light_on}true{else}false{/if}'>
+			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} 
+			   {if $microscopy.light_on}checked='checked'{else}{/if}   aria-checked='{if $microscopy.light_on}true{else}false{/if}' {if $microscopy.samples_finished}{else}disabled{/if}>
     </div>
     <div class = 'scb_s_microscopy_lens_controls_section_3'>
     				<span class="scb_s_microscopy_brightness_label"></span>
     				<img class='scb_s_microscopy_black_icon' src='images/microscopy/Brightness/Brightness_Dark.png'/>
     				<img class='scb_s_microscopy_white_icon' src='images/microscopy/Brightness/Brightness_Light.png'/>
-    				<button class ='scb_s_micro_arrows' id='brightdown'></button>
+    				<button class ='scb_s_micro_arrows' id='brightdown' {if $microscopy.samples_finished}{else}disabled{/if}></button>
     				<div class='scb_s_microscopy_brightness_focus_middle'>
     					{if $microscopy.disable_brightness}
 						<img src = 'images/microscopy/Brightness/Brightness_Line_Gray.png'/>
@@ -815,26 +816,27 @@
 						{/if}
 
     				</div>
-					<button class ='scb_s_micro_arrows' id='brightup'></button>
+					<button class ='scb_s_micro_arrows' id='brightup' {if $microscopy.samples_finished}{else}disabled{/if}></button>
     </div>
     
     <div class = 'scb_s_microscopy_lens_controls_section_4'>
     <span class="scb_s_microscopy_laser_label" id='scb_s_laser_label'>Laser:</span>	 
     	<input type="checkbox" class="scb_f_microscopy_laser" aria-labelledby='scb_s_laser_label' microscopy_id='{$microscopy.id}' aria-checked='{if $microscopy.laser_on}true{else}false{/if}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.laser_on}checked='checked'{else}{/if}>	 		 	 
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.laser_on}checked='checked'{else}{/if}
+                       {if $microscopy.samples_finished}{else}disabled{/if}>	 		 	 
 			 
     </div>
     
 	<div class = 'scb_s_microscopy_lens_controls_section_5'>
     			<span class='scb_s_microscopy_filter_label'>Filters:</span>
     					<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}' title='Red'  name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.red_enabled}checked='checked'{/if}>
+				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.red_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
 				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' title='Blue' name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.blue_enabled}checked='checked'{/if}>
+				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.blue_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
 				<input class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' title='Green' name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.green_enabled}checked='checked'{/if}>
+				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.green_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
 				<input class='scb_f_microscopy_all scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}'  title='All' name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.merge_enabled}checked='checked'{/if}>
+				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.merge_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
 				<br/>
 
 				<br/>
@@ -844,15 +846,15 @@
 	<div class = 'scb_s_microscopy_lens_controls_section_6'>
 				<span class='scb_s_microscopy_focus_label'>Focus:</span>
 				
-					<button class ='scb_s_micro_arrows' id='fblurup'></button>
+					<button class ='scb_s_micro_arrows' id='fblurup' {if $microscopy.samples_finished}{else}disabled{/if}></button>
 					<img class='scb_s_microscopy_tight_focus_middle' src = 'images/microscopy/Tight_Focus/Focus_Tight_Middle.png'/>
-					<button class ='scb_s_micro_arrows' id='fblurdown'></button>
+					<button class ='scb_s_micro_arrows' id='fblurdown' {if $microscopy.samples_finished}{else}disabled{/if}></button>
 
 					<img class='scb_s_microscopy_focus_knob' src = 'images/microscopy/Focus_Knob.png'/>
 					
-					<button class ='scb_s_micro_arrows' id='blurup'></button>
+					<button class ='scb_s_micro_arrows' id='blurup' {if $microscopy.samples_finished}{else}disabled{/if}></button>
 					<img class='scb_s_microscopy_rough_focus_middle' src = 'images/microscopy/Loose_Focus/Focus_Loose_Middle.png'/>
-					<button class ='scb_s_micro_arrows' id='blurdown'></button>
+					<button class ='scb_s_micro_arrows' id='blurdown' {if $microscopy.samples_finished}{else}disabled{/if}></button>
 					
     
     
@@ -865,10 +867,10 @@
     </div>
 			
 
-					<button class ='scb_s_micro_arrows' id='up' aria-label='Slide Up' role='button' ></button>
-					<button class ='scb_s_micro_arrows' id='down' aria-label='Slide Down' role='button'></button>
-					<button class ='scb_s_micro_arrows' id='left' aria-label='Slide Left' role='button'></button>
-					<button class ='scb_s_micro_arrows' id='right' aria-label='Slide Right' role='button'></button>
+					<button class ='scb_s_micro_arrows' id='up' aria-label='Slide Up' role='button' {if $microscopy.samples_finished}{else}disabled{/if} ></button>
+					<button class ='scb_s_micro_arrows' id='down' aria-label='Slide Down' role='button' {if $microscopy.samples_finished}{else}disabled{/if}></button>
+					<button class ='scb_s_micro_arrows' id='left' aria-label='Slide Left' role='button' {if $microscopy.samples_finished}{else}disabled{/if}></button>
+					<button class ='scb_s_micro_arrows' id='right' aria-label='Slide Right' role='button' {if $microscopy.samples_finished}{else}disabled{/if}></button>
 
 			</div>
 			

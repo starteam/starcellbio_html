@@ -979,6 +979,12 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   width: 2em;
   text-align: right;
 }
+.scb_s_microscopy_lens_controls_disabled {
+  opacity: .5;
+}
+#scb_s_microscopy_slide_content_lens_outline>svg {
+  cursor: pointer;
+}
 .scb_s_microscopy_brightness_slider>a {
   -webkit-appearance: none;
   background: url('../../../images/microscopy/Brightness_Slider_BTN.png') no-repeat !important;

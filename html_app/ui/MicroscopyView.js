@@ -616,7 +616,12 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_slide_tab = function(element){
 	if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    
+    if(parsed.microscopy_lane.kind == 'IF'){
+    	parsed.microscopy.laser_on = true; 
+    }
+    else{
+    	parsed.microscopy.laser_on = false;
+    }
     parsed.microscopy.lane_selected = parsed.microscopy_lane.id;
     scb.ui.static.MainFrame.refresh();
 }
@@ -629,6 +634,12 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select =
 			alert("INVALID ELEMENT!");
 		}
 	   if (parsed.microscopy.samples_finished) {
+	   		    if(parsed.microscopy_lane.kind == 'IF'){
+	   		    	parsed.microscopy.laser_on = true; 
+				}
+				else{
+					parsed.microscopy.laser_on = false; 
+				}
 			$('li', $(element).parent()).removeClass('scb_s_microscopy_sample_selected');
 			$(element).addClass('scb_s_microscopy_sample_selected');
 			parsed.microscopy.lane_selected = parsed.microscopy_lane.id;
@@ -1235,7 +1246,7 @@ function init(state, isNew, isIF, draw, image_source){
 		var controls = document.getElementById('scb_s_microscopy_lens_controls', '.scb_s_microscopy_view');
 		var image_dimensions = document.createElement('img');
 		image_dimensions.src = image_source;
-		image_dimensions.style.visibility = 'hidden';
+// 		image_dimensions.style.visibility = 'hidden';
 		$(document).append(image_dimensions);
 		var outline =  $('body').find('.scb_s_microscopy_slide_content_lens_outline', '.scb_s_microscopy_view').get(0);
 		var samples_area =  $('body').find('.scb_s_microscopy_slide_content', '.scb_s_microscopy_view').get(0);
@@ -1245,23 +1256,26 @@ function init(state, isNew, isIF, draw, image_source){
 		
 			
 
-// 		if(isNew){
-// 			$('html').css('overflow', 'hidden');
-// 			$('body').prepend(scb_experiment_setup.general_error_overlay());
-// 			$.jqDialog.notify("The image is still loading because of a slow internet connection. Please wait while the image loads.", (1*60)/20);
-// 			$('.jqDialog_header').remove();		
-// 			$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-// 			$('#jqDialog_box').attr('role', 'alertdialog');
-// 		}
-		
+		if(isNew || !state.src){
+			$('html').css('overflow', 'hidden');
+			$('body').prepend(scb_experiment_setup.general_error_overlay());
+			$.jqDialog.notify("The image is still loading because of a slow internet connection. Please wait while the image loads.", 10);
+			$('.jqDialog_header').remove();		
+			$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+			$('#jqDialog_box').attr('role', 'alertdialog');
+// 			$(".scb_s_microscopy_choose_samples_order_list > li[microscopy_lane_id='"+state.parent.id+"']", '.scb_s_microscopy_view').click();
+	
+// 			$(".scb_s_microscopy_slide_tab[microscopy_lane_id='"+state.parent.id+"']", '.scb_s_microscopy_view').click();
+
+		}
 		
 		
 		
 		
 		image_dimensions.onload= function (){
-// 					$('#jqDialog_box').hide();
-// 					$('html').css('overflow', 'visible');
-// 					$('.error_overlay').remove();
+					$('#jqDialog_box').hide();
+					$('html').css('overflow', 'visible');
+					$('.error_overlay').remove();
 			if(Math.ceil(image_dimensions.width/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1 || Math.ceil(image_dimensions.height/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1){
 				img_width =image_dimensions.width;	
 				img_height =image_dimensions.height;
@@ -1277,7 +1291,9 @@ function init(state, isNew, isIF, draw, image_source){
 				image_dimensions.width =img_width;	
 			}
 			if(isNew){
-				initialize_state(state, image_source);
+				state.brightness= 1;
+				state.action = 'start';
+				//initialize_state(state, image_source);
 				if(!disableBlur){
 					var randomblur = Math.round(Math.ceil(Math.random()*scb.ui.static.MicroscopyView.MAX_BLUR) / 1) * 1;
 					var randomside = Math.round(Math.ceil(Math.random()*2));
@@ -1366,9 +1382,6 @@ function init(state, isNew, isIF, draw, image_source){
 function initialize_state(state, image_source){
 
 	state.brightness= scb.ui.static.MicroscopyView.WHITE_MIN_BRIGHTNESS;
-	state.xparam = -scb.ui.static.MicroscopyView.MAX_BRIGHTNESS;
-	state.yparam =-scb.ui.static.MicroscopyView.MAX_BRIGHTNESS;
-	state.blur = 0;
 	state.action = 'start';
 
 	$('.scb_s_microscope_status', '.scb_s_microscopy_view').text(state.action);
@@ -1897,6 +1910,8 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         init_wb('../images/microscopy/black.jpg');
 
         }
+        
+        
 
 		_.each($(".scb_s_experiment_step_button"), function (e) {
 			if(!$(e).hasClass('scb_s_experiment_step_visited')) 

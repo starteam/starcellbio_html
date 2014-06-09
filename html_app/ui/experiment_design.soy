@@ -83,7 +83,7 @@ Experiment active area
 				<span class='scb_s_experiment_design_techniques_tq'>
 
 			{call .display_techniques}
-				{param techniques:['wb','fc','micro'] /} /* t.ui.experimental_design.techniques */
+				{param techniques: $assignment.template.ui.experimental_design.techniques /}
 				{param experiment:$experiment /}
 				{param assignment:$assignment /}
 			{/call}
@@ -116,7 +116,7 @@ Experiment active area
 
 {/if}
 
-{if $tech == 'fc'}
+{if $tech == 'facs'}
 <span class='scb_s_experiment_design_technique_flow scb_s_experiment_design_unselected' aria-label='Western Blot Summary' role='presentation'>
     <div class='scb_s_experiment_design_technique ' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' data-key='design_fc_cb' role="button" >
     <span class='scb_s_homepage_technique_title_image'>
