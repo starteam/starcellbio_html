@@ -25,5 +25,8 @@ scb.NotebookSection = function scb_NotebookSection(data, context, parent) {
     scb.Utils.initialize_accessor_field(self,data,'objective','',null,context);
     scb.Utils.initialize_accessor_field(self,data,'technique','',null,context);
     scb.Utils.initialize_accessor_field(self,data,'order_id',0,null,context);
-	scb.Utils.initialize_accessor_field(self,data,'elements',[],null,context);
+	scb.Utils.initialize_accessor_field(self,data,'elements',{},scb.NotebookElementList,context);
+	
+	
+	
 }

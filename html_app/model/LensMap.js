@@ -23,7 +23,8 @@ scb.LensMap = function scb_LensMap(data, context, parent) {
         scb.Utils.initialize_accessor_field(self, data, 'if_type', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'yparam', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'isFirstDrag', true, null, context);
-
+    
+	self.lane_id = self.parent.id;
     var template = context.template;
     
     self.disable_blur = template.ui.microscopy.disable_blur;

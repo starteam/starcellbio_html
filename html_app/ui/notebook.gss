@@ -67,6 +67,15 @@
  	padding-bottom: 10px;
 }
 
+.scb_s_notebook_section:hover{
+	border: 5px solid blue;
+}
+
+.scb_s_notebook_section_selected{
+	border: 5px solid green;
+}
+
+
 .scb_s_notebook_section_name_edit{
     font-family: 'sourcesanspro-semibold';
     font-size:11pt;

@@ -86,11 +86,11 @@
 {template .display_sections}
 <div assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}'>
 {foreach $section in $notebook.sections.list}
-	<div class="scb_s_notebook_section" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}'>
+	<div class="scb_s_notebook_section scb_f_notebook_section {if $section.id == $notebook.section_selected}scb_s_notebook_section_selected{/if}" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  section_id='{$section.id}'>
 	<input type='text' class='scb_s_notebook_section_name_edit' maxlength="30" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' value='{$experiment.name}'  title='{$experiment.name}' aria-label='Section Name' role='textbox'>
 	<br/>
 	<br/>
-	{foreach $element in $section.elements}
+	{foreach $element in $section.elements.list}
 		{if $element.type == 'text'}
 			<div class='scb_s_notebook_text_section'>
 			{$element.data |noAutoescape}
@@ -101,13 +101,13 @@
 			{if $element.view == 'experiment_design'}
 				{call .experiment_design}	
 					{param assignment:$assignment/}
-					{param experiment:$notebook.selected_experiment /}
+					{param experiment:$element.selected_experiment /}
 				{/call}
 			{/if}
 			{if $element.view == 'experiment_setup'}
 				{call .experiment_setup}	
 					{param assignment:$assignment/}
-					{param experiment:$notebook.selected_experiment /}
+					{param experiment:$element.selected_experiment /}
 					{param headings: $element.headings/}
 					{param rows: $element.rows/}
 				{/call}
@@ -116,8 +116,8 @@
 				{call .wb_lane}	
 					{param assignment:$assignment/}
 					{param experiment:$notebook.selected_experiment /}
-					{param western_blot: $notebook.selected_western_blot /}
-					{param western_blot_gel: $notebook.selected_western_blot_gel /}
+					{param western_blot: $element.selected_western_blot /}
+					{param western_blot_gel: $element.selected_western_blot_gel /}
 					{param rows: $element.rows/}
 					{param exposure_time: $element.exposure_time /}
 				{/call}
@@ -125,17 +125,18 @@
 			{if $element.view == 'facs'}
 				{call .facs_lane}	
 					{param assignment:$assignment/}
-					{param experiment:$notebook.selected_experiment /}
-					{param facs: $notebook.selected_facs /}
-					{param lane: $notebook.selected_facs_lane /}
+					{param experiment:$element.selected_experiment /}
+					{param facs: $element.selected_facs /}
+					{param lane: $element.selected_facs_lane /}
 				{/call}
 			{/if}
 			{if $element.view == 'microscopy'}
 				{call .micro_lane}	
 					{param assignment:$assignment/}
-					{param experiment:$notebook.selected_experiment /}
-					{param microscopy: $notebook.selected_microscopy /}
-					{param lane: $notebook.selected_microscopy_lane /}
+					{param experiment:$element.selected_experiment /}
+					{param microscopy: $element.selected_microscopy /}
+					{param lane: $element.selected_microscopy_lane /}
+					{param id: $element.id /}
 				{/call}
 			{/if}
 			</div>
@@ -143,7 +144,7 @@
 
 	{/foreach}
 
-	{if $section.id == $notebook.sections.selected_id}
+	{if $section.id == $notebook.section_selected}
 		<div class='scb_s_notebook_section_button_wrapper'>
 		<button assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' notebook_id='{$notebook.id}'  
 			section_id='{$section.id}' class='scb_f_notebook_text_button scb_s_notebook_text_button scb_s_navigation_button'>Text</button>
@@ -464,7 +465,8 @@
 				<div class='scb_s_facs_chart_guider'></div>
 				<div class='scb_s_facs_chart' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 					 facs_id='{$facs.id}'
-				{if $facs.lane_selected}facs_lane_id='{$facs.lane_selected}'{/if}>
+					 facs_lane_id='{$lane.id}'
+					 >
 			</div>
 		</div>
 					
@@ -520,6 +522,7 @@
 @param experiment
 @param microscopy
 @param lane
+@param id
 */
 {template .micro_lane}
 <div class='scb_s_microscopy_samples_slide_area'>
@@ -534,11 +537,11 @@
        	</div>
     				<div class='scb_s_microscopy_slide_content' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 							 microscopy_id='{$microscopy.id}'
-							{if $microscopy.lane_selected}microscopy_lane_id='{$microscopy.lane_selected}'{/if}
-							
+							microscopy_lane_id='{$lane.id}'
+							i_want='scb_s_microscopy_slide_content_lens_outline_notebook_{$id}'
 							>									
 
-							<div id='scb_s_microscopy_slide_content_lens_outline' role='widget' aria-label='Slide Lens, assistance needed to use'></div>
+							<div id='scb_s_microscopy_slide_content_lens_outline_notebook_{$id}' class='scb_s_microscopy_slide_content_lens_outline_{$lane.id} scb_s_microscopy_slide_content_lens_outline' role='widget' aria-label='Slide Lens, assistance needed to use'></div>
 
 					</div>	
  		</div>
