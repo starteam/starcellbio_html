@@ -97,6 +97,10 @@ scb.Facs = function scb_Facs(data, context, parent) {
         var rows = [];
         _.each(experiment.cell_treatment_list.list, function (e) {
             if (grouped_rows[e.id]) {
+            	if( _.keys(context.template.facs_kinds).length == 1 || _.isEqual(_.map(grouped_rows[e.id], function(z){return z.conditions}).sort(), _.keys(e.treatment_list.list[0].facs).sort()))
+            		skip_placeholders=true;
+            	else
+            		skip_placeholders=false;
                 _.each(grouped_rows[e.id], function (ee, index) {
                     rows.push({
                         kind: 'existing',

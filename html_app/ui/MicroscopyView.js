@@ -1011,6 +1011,8 @@ function draw(state){
 		}
 	});
 	$('#blurup', '.scb_s_microscopy_view').click(function(){
+		console.log(state.blur);
+		console.log(scb.ui.static.MicroscopyView.MAX_BLUR);
 			if(state.blur >=scb.ui.static.MicroscopyView.MAX_BLUR && !isLeft){
 				$('#blurup', '.scb_s_microscopy_view').prop('disabled', true);
 			}
@@ -1022,8 +1024,12 @@ function draw(state){
 			}
 
 		modify_state_blur(scb.ui.static.MicroscopyView.BLUR_COARSE_INCREMENT, state, 'up');
+		console.log(state.blur)
+		console.log('*');
 	});
 	$('#blurdown', '.scb_s_microscopy_view').click(function(){
+		console.log(state.blur);
+		console.log(scb.ui.static.MicroscopyView.MAX_BLUR);
 			if(state.blur >=scb.ui.static.MicroscopyView.MAX_BLUR && isLeft){
 				$('#blurdown', '.scb_s_microscopy_view').prop('disabled', true);
 			}
@@ -1035,8 +1041,12 @@ function draw(state){
 			}
 		
 		modify_state_blur(-scb.ui.static.MicroscopyView.BLUR_COARSE_INCREMENT, state, 'down');
+			console.log(state.blur)
+		console.log('*');
 	});
 	$('#fblurup', '.scb_s_microscopy_view').click(function(){
+		console.log(state.blur);
+		console.log(scb.ui.static.MicroscopyView.MAX_BLUR);
 			if(state.blur >=scb.ui.static.MicroscopyView.MAX_BLUR && !isLeft){
 				$('#fblurup', '.scb_s_microscopy_view').prop('disabled', true);
 				$('#blurup', '.scb_s_microscopy_view').prop('disabled', true);
@@ -1049,8 +1059,12 @@ function draw(state){
 			}
 			
 		modify_state_blur(scb.ui.static.MicroscopyView.BLUR_FINE_INCREMENT, state, 'up');
+			console.log(state.blur)
+		console.log('*');
 	});
 	$('#fblurdown', '.scb_s_microscopy_view').click(function(){
+		console.log(state.blur);
+		console.log(scb.ui.static.MicroscopyView.MAX_BLUR);
 			if(state.blur >=scb.ui.static.MicroscopyView.MAX_BLUR && isLeft){
 				$('#fblurdown', '.scb_s_microscopy_view').prop('disabled', true);
 				$('#blurdown', '.scb_s_microscopy_view').prop('disabled', true);
@@ -1063,6 +1077,8 @@ function draw(state){
 			}
 		
 		modify_state_blur(-scb.ui.static.MicroscopyView.BLUR_FINE_INCREMENT, state, 'down');
+			console.log(state.blur)
+		console.log('*');
 	});
 
 	console.log('draw');
@@ -1240,8 +1256,16 @@ function change_brightness_lines(brightness_value, brightness_disabled){
 function init(state, isNew, isIF, draw, image_source){
 	
 
-
-
+		if(isIF){
+			$('#scb_s_microscopy_slide_content_lens_outline svg').remove();
+			$( "#brightup" ).unbind( "click");
+			$( "#brightdown" ).unbind( "click");
+			$( "#blurup" ).unbind( "click");
+			$( "#blurdown" ).unbind( "click");
+			$( "#fblurup" ).unbind( "click");
+			$( "#fblurdown" ).unbind( "click");
+		}
+		
 		$('#spy').remove();
 		var controls = document.getElementById('scb_s_microscopy_lens_controls', '.scb_s_microscopy_view');
 		var image_dimensions = document.createElement('img');
@@ -1257,8 +1281,8 @@ function init(state, isNew, isIF, draw, image_source){
 			
 
 		if(isNew || !state.src){
-			$('html').css('overflow', 'hidden');
-			$('body').prepend(scb_experiment_setup.general_error_overlay());
+// 			$('html').css('overflow', 'hidden');
+// 			$('body').prepend(scb_experiment_setup.general_error_overlay());
 			$.jqDialog.notify("The image is still loading because of a slow internet connection. Please wait while the image loads.", 10);
 			$('.jqDialog_header').remove();		
 			$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
@@ -1274,8 +1298,8 @@ function init(state, isNew, isIF, draw, image_source){
 		
 		image_dimensions.onload= function (){
 					$('#jqDialog_box').hide();
-					$('html').css('overflow', 'visible');
-					$('.error_overlay').remove();
+// 					$('html').css('overflow', 'visible');
+// 					$('.error_overlay').remove();
 			if(Math.ceil(image_dimensions.width/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1 || Math.ceil(image_dimensions.height/scb.ui.static.MicroscopyView.PICTURE_LIM) <= 1){
 				img_width =image_dimensions.width;	
 				img_height =image_dimensions.height;

@@ -7874,7 +7874,9 @@ var __decusability_newfacs = {
                                     PP1: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {drug_list: {list: [
+                                                {
+                                                facs: {'whole': 1, 'a': 1},
+                                                drug_list: {list: [
                                                     {drug_id: 'nc', concentration_id: '0'},
                                                     {drug_id: 'pp1', concentration_id: '1u'}
                                                 ]}, temperature: '25'
@@ -7883,7 +7885,9 @@ var __decusability_newfacs = {
                                     ], NOPP1: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {drug_list: {list: [
+                                                {
+                                                facs: {'whole': 1, 'a': 1},
+                                                drug_list: {list: [
                                                     {drug_id: 'nc', concentration_id: '0'}
                                                 ]}, temperature: '25'
                                                 }
@@ -7902,7 +7906,9 @@ var __decusability_newfacs = {
                                     PP1: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {drug_list: {list: [
+                                                {
+                                                facs: {'whole': 1, 'a': 1},
+                                                drug_list: {list: [
                                                     {drug_id: 'nc', concentration_id: '0'},
                                                     {drug_id: 'pp1', concentration_id: '1u'}
                                                 ]}, temperature: '40'
@@ -7911,7 +7917,9 @@ var __decusability_newfacs = {
                                     ], NOPP1: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {drug_list: {list: [
+                                                {
+                                                facs: {'whole': 1, 'a': 1},
+                                                drug_list: {list: [
                                                     {drug_id: 'nc', concentration_id: '0'}
                                                 ]}, temperature: '40'
                                                 }
@@ -8732,7 +8740,7 @@ var __june_2014_usability = {
                                     cre: [
                                         {cell_line: 'cko',
                                             treatment_list: {list: [
-                                                {collection_id: '6 m', microscope: {'HnE': 1, 'ki67': 1, 'secondary': 1},
+                                                {collection_id: '6 m', microscope: {'HnE': 1, 'ki67': 1, 'cgrp': 1},
                                                 drug_list: {list: [
                                                     {drug_id: 'ac', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8760,7 +8768,7 @@ var __june_2014_usability = {
                                     cre: [
                                         {cell_line: 'cko',
                                             treatment_list: {list: [
-                                                {collection_id: '1 yr', microscope: {'HnE': 1, 'rgb': 1},
+                                                {collection_id: '1 yr', microscope: {'HnE': 1, 'cgrp': 1, 'rgb': 1},
                                                 drug_list: {list: [
                                                     {drug_id: 'ac', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8768,12 +8776,6 @@ var __june_2014_usability = {
                                             ]}}
                                     ]
                                 }
-                            
-                            
-                            
-                            
-                            
-                            
                             }
 
                         ]
