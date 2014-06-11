@@ -11,6 +11,15 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 //     			console.log('state');
 //     			console.log(state);
     			if (m.parser_simple){
+    				var hash_list = []; 
+    				_.each(state.microscopy.lanes_list.list, function(x){
+							if(x.current_slides.length > 0){
+								_.each(x.current_slides, function(slide){
+									hash_list.push(slide.hash);
+								});
+							}
+			
+						});
 					var microscopy_lane = state.microscopy_lane;
 					var cell_line = microscopy_lane.cell_treatment.cell_line;
 					var collection_id= microscopy_lane.cell_treatment.treatment_list.first.collection_id;
@@ -52,9 +61,25 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 							});
 							if(!isFound){
 								if(matches){
+									console.info(hash_list)
 									var max = _.size(template.slide_parser[collection_id][slide_type][conditions]);
 									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+									console.info(template.slide_parser[collection_id][slide_type][conditions][index]);
+									console.info(template.slide_parser[collection_id][slide_type][conditions]);
 									var slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
+									var alreadySelected = false; 
+									_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
+									});
+									var number_of_comparisons = 0;
+									while(alreadySelected && number_of_comparisons < max){
+										console.info(number_of_comparisons);
+										index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+										slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
+										alreadySelected = false;
+										_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
+										});
+										number_of_comparisons=number_of_comparisons+1;
+									}
 									imgs=slide_array;
 									isFound = true;
 								}
@@ -70,6 +95,15 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 					state.slide_type = slide_type;
 				}	
 				else if (m.complex_parser){
+					var hash_list = []; 
+    				_.each(state.microscopy.lanes_list.list, function(x){
+							if(x.current_slides.length > 0){
+								_.each(x.current_slides, function(slide){
+									hash_list.push(slide.hash);
+								});
+							}
+			
+						});
 					var microscopy_lane = state.microscopy_lane;
 					var cell_line = microscopy_lane.cell_treatment.cell_line;
 					var collection_id= microscopy_lane.cell_treatment.treatment_list.first.collection_id;
@@ -113,6 +147,19 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 									var max = _.size(template.slide_parser[collection_id][slide_type][conditions][phenotype]);
 									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
 									var slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
+									var alreadySelected = false; 
+									_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
+									});
+									var number_of_comparisons = 0;
+									while(alreadySelected && number_of_comparisons < max){
+										console.info(number_of_comparisons);
+										index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+										slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
+										alreadySelected = false;
+										_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
+										});
+										number_of_comparisons=number_of_comparisons+1;
+									}
 									imgs=slide_array;
 									isFound = true;
 								}
@@ -123,6 +170,15 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 					state.slide_type = slide_type;
 				}
 				else if(m.conditions_parser){
+					var hash_list = []; 
+    				_.each(state.microscopy.lanes_list.list, function(x){
+							if(x.current_slides.length > 0){
+								_.each(x.current_slides, function(slide){
+									hash_list.push(slide.hash);
+								});
+							}
+			
+						});
 					var microscopy_lane = state.microscopy_lane;
 					var cell_line = microscopy_lane.cell_treatment.cell_line;
 					var collection_id= microscopy_lane.cell_treatment.treatment_list.first.collection_id;
@@ -169,6 +225,19 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 									var max = _.size(template.slide_parser[collection_id][slide_type][conditions][phenotype]);
 									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
 									var slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
+									var alreadySelected = false; 
+									_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
+									});
+									var number_of_comparisons = 0;
+									while(alreadySelected && number_of_comparisons < max){
+										console.info(number_of_comparisons);
+										index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+										slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
+										alreadySelected = false;
+										_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
+										});
+										number_of_comparisons=number_of_comparisons+1;
+									}
 									imgs=slide_array;
 									isFound = true;
 								}

@@ -258,9 +258,9 @@ FACS Main View
 {call .display_facs_progress}
 {param step:1/}
 {/call}
-<div class='scb_s_facs_samples_container' style='{if length($rows) >=12}  height: 306px;	{else} 	height:auto;{/if}'>
+<div class='scb_s_facs_samples_container' >
 
-<div class='scb_s_facs_samples_table' style='{if length($rows) >=12} height: 216px;   min-height: 300px;  {else} 	height:auto;{/if}'>
+<div class='scb_s_facs_samples_table' >
     <table role='grid'>
         <thead class='scb_s_facs_samples_table_head'>
         <td class='scb_s_facs_samples_table_heading sample_prep_select_facs'  role='columnheader'>Select</td>
@@ -300,8 +300,8 @@ FACS Main View
         <td role='columnheader' class='scb_s_facs_samples_table_heading sample_prep_blank_facs'>&nbsp;</td>
         </thead>
         {foreach $r in $rows}
-        <tr class='scb_s_facs_samples_table_tr '  role='row' >
-            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:56px;'>{if $r.display_sample}
+        <tr class='scb_s_facs_samples_table_tr {if $r.display_sample} scb_s_microscopy_row_border{/if}'  role='row' >
+            <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} ' style='width:56px;'>{if $r.display_sample}
                 <input  type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'  aria-checked='{if $r.is_sample_enabled}true{else}false{/if}'
                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
                        cell_treatment_id='{$r.cell_treatment.id}'  role='checkbox'
@@ -309,11 +309,11 @@ FACS Main View
                 >
                 {/if}
             </td> {if $r.kind == 'existing' and length(keys($kinds)) > 1}{/if}
-            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:230px;{else}width:224px;{/if}">{if $r.display_sample}
+            <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:230px;{else}width:224px;{/if}">{if $r.display_sample}
                 {$r.display_text}
                 {/if}
             </td>
-            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border scb_s_facs_cell_treatment' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:171px;{else}width:136px;{/if}">
+            <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} scb_s_facs_cell_treatment' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:171px;{else}width:136px;{/if}">
             {if $r.is_sample_enabled}			 
             	<input type="radio"  checked class='scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
 			{else}
@@ -322,7 +322,7 @@ FACS Main View
 			{/if}
 
             </td>
-            <td class=' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:215px;'>
+            <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:215px;'>
                 {call .display_lysate_types}
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
@@ -332,7 +332,7 @@ FACS Main View
                 {param lane:$r/}
                 {/call}
             </td>
-            <td class=' scb_s_facs_samples_table_td scb_s_experiment_setup_table_border' style='width:232px;'>
+            <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:232px;'>
             	{if $r.lane and length(keys($kinds)) > 1}
             		{if $r.lane.kind == 'Dye'}
             			<input class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
@@ -349,7 +349,7 @@ FACS Main View
             		{/if}
                 {/if}
             </td>
-            <td class='scb_s_facs_samples_table_td scb_s_experiment_setup_table_border'>
+            <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
                 {if $r.kind == 'existing' and length(keys($kinds)) > 1}
                 <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
 						assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}' role='button' aria-label='Delete Sample'

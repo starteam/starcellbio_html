@@ -85,14 +85,14 @@ table.scb_s_experiment_setup_table {
 .scb_s_experiment_setup_new_set_up {
   visibility: hidden;
   position: relative;
-  margin-top: 79px;
+  margin-top: 109px;
   margin-bottom: 10px;
   left: 8px;
 }
 .scb_s_experiment_setup_instructions {
   width: 600px;
   display: block;
-  bottom: 18px;
+  bottom: 85px;
   position: relative;
 }
 .scb_s_experiment_setup_video_text {

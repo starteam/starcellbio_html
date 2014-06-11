@@ -257,11 +257,11 @@
    </div>
 
 
-<div class='scb_s_microscopy_samples_container' style='{if length($rows) >=12}  height: 342px;	{else} height: 342px;		{/if}'>
+<div class='scb_s_microscopy_samples_container' >
 
 
 
-<div class='scb_s_western_blot_samples_table'  style='{if length($rows) >=12} height: 330px;   min-height: 330px;  {else} 	height: 330px; {/if}'>
+<div class='scb_s_western_blot_samples_table'  >
     <table role='grid'>
         <thead class='scb_s_microscopy_samples_table_head'>
         <td  role='columnheader' class='scb_s_microscopy_samples_table_heading m_sample_prep_select scb_s_experiment_setup_table_border'>Select</td>
@@ -559,7 +559,7 @@
 	{/if}
 </div>
 
-	<div class='scb_s_microscopy_samples_slide_area'>
+	<div class='scb_s_microscopy_samples_slide_area {if $microscopy.samples_finished}{else}scb_s_microscopy_lens_controls_disabled{/if}'>
 
         <div class='scb_s_western_blot_gel_tabs' role='tablist'>
                     {if $microscopy.samples_finished}

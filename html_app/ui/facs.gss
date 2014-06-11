@@ -730,6 +730,22 @@ input[type=radio]:disabled{
 }
 
 
+.ui-tooltip{
+	 position: absolute !important;
+     width: 80px !important;
+     height: 13px !important;
+     line-height: 10px !important;
+     padding: 3px 2px 0px 2px !important;
+     font-size: 10px !important;
+     text-align: left !important;
+     color: rgb(0, 0, 0) !important;
+     background: rgb(255, 255, 203) !important;
+     border: 1px solid rgb(238, 238, 238) !important;
+     border-radius: 0 !important;
+     box-shadow: none !important;
+     margin-top: 0px !important;
+}
+
 .scb_s_facs_tools_analyze_data > thead >tr>td{
     font-family: 'sourcesanspro-semibold';
     font-size: 10pt;
