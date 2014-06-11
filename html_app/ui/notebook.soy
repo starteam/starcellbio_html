@@ -101,12 +101,14 @@
 			{if $element.view == 'experiment_design'}
 				{call .experiment_design}	
 					{param assignment:$assignment/}
+					{param element: $element/}
 					{param experiment:$element.selected_experiment /}
 				{/call}
 			{/if}
 			{if $element.view == 'experiment_setup'}
 				{call .experiment_setup}	
 					{param assignment:$assignment/}
+					{param element: $element/}
 					{param experiment:$element.selected_experiment /}
 					{param headings: $element.headings/}
 					{param rows: $element.rows/}
@@ -115,7 +117,8 @@
 			{if $element.view == 'western_blot'}
 				{call .wb_lane}	
 					{param assignment:$assignment/}
-					{param experiment:$notebook.selected_experiment /}
+					{param element: $element/}
+					{param experiment:$element.selected_experiment /}
 					{param western_blot: $element.selected_western_blot /}
 					{param western_blot_gel: $element.selected_western_blot_gel /}
 					{param rows: $element.rows/}
@@ -125,6 +128,7 @@
 			{if $element.view == 'facs'}
 				{call .facs_lane}	
 					{param assignment:$assignment/}
+					{param element: $element/}
 					{param experiment:$element.selected_experiment /}
 					{param facs: $element.selected_facs /}
 					{param lane: $element.selected_facs_lane /}
@@ -133,10 +137,10 @@
 			{if $element.view == 'microscopy'}
 				{call .micro_lane}	
 					{param assignment:$assignment/}
+					{param element: $element/}
 					{param experiment:$element.selected_experiment /}
 					{param microscopy: $element.selected_microscopy /}
 					{param lane: $element.selected_microscopy_lane /}
-					{param id: $element.id /}
 				{/call}
 			{/if}
 			</div>
@@ -281,6 +285,7 @@
 /**
 @param assignment
 @param experiment
+@/param element
 */
 {template .experiment_design}
 	<span class='scb_s_experiment_name_edit' maxlength="30" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' title='{$experiment.name}' aria-label='Experiment Name' role='textbox'>
@@ -315,6 +320,7 @@
 @param experiment
 @param headings
 @param rows
+@/param element
 */
 {template .experiment_setup}
 <table class=" scb_s_notebook_experiment_setup_table scb_s_experiment_setup_table scb_s_experiment_setup_table_readonly" aria-label='Table of Samples' role='grid'>
@@ -357,6 +363,7 @@
 @param western_blot_gel
 @param rows
 @param exposure_time
+@/param element
 */
 {template .wb_lane}
 
@@ -442,6 +449,7 @@
 @param experiment
 @param facs
 @param lane
+@/param element
 */
 {template .facs_lane}
     <div class='scb_s_facs_samples_graph_area'>
@@ -522,7 +530,7 @@
 @param experiment
 @param microscopy
 @param lane
-@param id
+@param element
 */
 {template .micro_lane}
 <div class='scb_s_microscopy_samples_slide_area'>
@@ -538,10 +546,10 @@
     				<div class='scb_s_microscopy_slide_content' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 							 microscopy_id='{$microscopy.id}'
 							microscopy_lane_id='{$lane.id}'
-							i_want='scb_s_microscopy_slide_content_lens_outline_notebook_{$id}'
+							i_want='scb_s_microscopy_slide_content_lens_outline_notebook_{$element.id}'
 							>									
 
-							<div id='scb_s_microscopy_slide_content_lens_outline_notebook_{$id}' class='scb_s_microscopy_slide_content_lens_outline_{$lane.id} scb_s_microscopy_slide_content_lens_outline' role='widget' aria-label='Slide Lens, assistance needed to use'></div>
+							<div id='scb_s_microscopy_slide_content_lens_outline_notebook_{$element.id}' class='scb_s_microscopy_slide_content_lens_outline_{$lane.id} scb_s_microscopy_slide_content_lens_outline' role='widget' aria-label='Slide Lens, assistance needed to use'></div>
 
 					</div>	
  		</div>
