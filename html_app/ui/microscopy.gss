@@ -1297,7 +1297,10 @@ right: 15px;
 
 .scb_s_microscopy_lens_controls_disabled, .scb_s_microscopy_slide_disabled{
 	opacity: 0.5;
+	
 }
+
+
 
 
 #scb_s_microscopy_slide_content_lens_outline > svg > image{	
@@ -1312,7 +1315,7 @@ height: 13px !important;
 width: 13px !important;
 top: -6px !important;
 border: none !important;
-cursor:pointer !important;
+cursor:pointer;
 }
 
 
@@ -1409,7 +1412,7 @@ height: 30px;
 position: absolute;
 right: 8px;
 top: 43px;
-cursor:pointer !important;
+cursor:pointer ;
 outline: none !important;
 
 }
@@ -1423,7 +1426,7 @@ height: 30px;
 position: absolute;
 right: 8px;
 top: 138px;
-cursor:pointer !important;
+cursor:pointer ;
 outline: none !important;
 }
 
@@ -1684,4 +1687,6 @@ background-repeat: no-repeat;
 
 
 
-
+.scb_s_microscopy_slide_disabled *, .scb_s_microscopy_lens_controls_disabled *{
+	cursor: default !important;
+}

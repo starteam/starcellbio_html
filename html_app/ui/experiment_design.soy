@@ -112,6 +112,8 @@ Experiment active area
     Western blotting detects overall changes in the amount or chemical modifications of a particular protein. <a href="static/ref_lib/full_library.html#WesternBlotting" class='scb_s_design_technique_learn_more ' role='link' target='_blank'>Learn more &gt;&gt;</a></div>
 
 </span>
+{/if}
+{if $tech == 'wb' and not (length($techniques)==1)}
 <div class='scb_s_experiment_design_divider_1' role='presentation'></div>
 
 {/if}
@@ -125,7 +127,8 @@ Experiment active area
     individual cells within a heterogeneous population of cells.     <a href="static/ref_lib/full_library.html#FlowCytometry" class='scb_s_design_technique_learn_more ' target='_blank'  role='link'>Learn more &gt;&gt;</a>
 </div>
 </span>
-
+{/if}
+{if $tech == 'micro' and not (length($techniques)==1)}
 <div class='scb_s_experiment_design_divider_2' role='presentation'></div>
 {/if}
 

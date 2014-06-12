@@ -504,7 +504,7 @@ scb.ui.static.ExperimentSetupView.ensure_save = function () {
 scb.ui.static.ExperimentSetupView.save_row = function (element) {
     var parsed = scb.ui.static.ExperimentSetupView.parse(element);
 
-    $(element).attr('data-is_editing', false);
+    $(element).attr('data-is_editing', true);
 
     var template = parsed.context.template;
     var cell_line_id = parsed.experiment.new_row.cell_line;

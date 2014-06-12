@@ -992,7 +992,7 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   width: 13px !important;
   top: -6px !important;
   border: none !important;
-  cursor: pointer !important;
+  cursor: pointer;
 }
 .scb_s_microscopy_obj_label {
   position: absolute;
@@ -1055,7 +1055,7 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   position: absolute;
   right: 8px;
   top: 43px;
-  cursor: pointer !important;
+  cursor: pointer;
   outline: none !important;
 }
 .scb_f_microscopy_laser {
@@ -1066,7 +1066,7 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   position: absolute;
   right: 8px;
   top: 138px;
-  cursor: pointer !important;
+  cursor: pointer;
   outline: none !important;
 }
 .scb_f_microscopy_light:checked, .scb_f_microscopy_laser:checked {
@@ -1277,4 +1277,7 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   cursor: pointer;
   background-image: url('../../images/header/scb_help.png');
   background-repeat: no-repeat;
+}
+.scb_s_microscopy_slide_disabled *, .scb_s_microscopy_lens_controls_disabled * {
+  cursor: default !important;
 }

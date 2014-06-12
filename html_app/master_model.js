@@ -235,19 +235,7 @@ var __basic_tests = {
                 }
             ], actions: [
                 {kind: "add_protocol", title: "Add Treatment Protocol"}
-            ], new_row: {
-                title: 'New row',
-                cell_line: 'wt',
-                treatment_list: {list: [
-                    {schedule_value: 0, duration_value: 3600 * 24 * 3, duration: '3 d', drug_list: {list: [
-                        {drug_id: 'nc', concentration_id: '0'}
-                    ]}
-                    }
-                ]},
-                collection_schedule_list: {list: [
-                    {schedule: "18h", schedule_value: 18 * 3600, id: '3'}
-                ]}
-            }
+            ]
             },
             western_blot: {format: "%CELL_LINE%, %TREATMENT%, %CONCENTRATION%",
                 keys: {
@@ -1600,20 +1588,7 @@ var __usability_test = {
                     title: "Actions"
                 }
             ], actions: [
-            ],
-                new_row: {
-                    title: 'New row',
-                    cell_line: 'wt',
-                    treatment_list: {list: [
-                        {schedule_value: 0, duration_value: 3600 * 24 * 3, duration: '3 d', drug_list: {list: [
-                            {drug_id: 'nc', concentration_id: '0'}
-                        ]}
-                        }
-                    ]},
-                    collection_schedule_list: {list: [
-                        {schedule: "18h", schedule_value: 18 * 3600, id: '3'}
-                    ]}
-                }
+            ]
             },
             western_blot: {format: "%CELL_LINE%, %TREATMENT%, %CONCENTRATION%",
                 keys: {
@@ -3056,17 +3031,7 @@ var __microscopy_test = {
                         {kind: 'actions', title: 'Actions'}
                     ],
                     actions: [
-                    ], 
-                	new_row: {
-						title: 'New row',
-						cell_line: 'p+',
-						treatment_list: {list: [
-							{schedule_value: 3600*24*7*7, collection_id: '6 m', drug_list: {list: [
-								{drug_id: 'ac', concentration_id: '108'}
-							]},  temperature: '22'
-							}
-						]}
-                	}
+                    ]
                 },
                 microscopy: {
 					disable_blur: false,

@@ -174,9 +174,10 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
     if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
     	$('html').css('overflow', 'hidden');
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
-
+		
+		$('#jqDialog_box').css('width', '450px');
     	$.jqDialog.alert(scb_western_blot.wb_sample_error(), 
-    	function() {	$('html').css('overflow', 'visible');
+    	function() {	$('html').css('overflow', 'visible');  $('#jqDialog_box').css('width', '');
 					$('.error_overlay').remove()/* callback function for 'OK' button*/ });
 		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
