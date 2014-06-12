@@ -129,7 +129,7 @@ scb.ui.static.NotebookView.scb_f_notebook_experiment_design_link = function (ele
 		view: 'experiment_design',
 		experiment_id: current_experiment.id
 	 });
-    
+    parsed.experiment.last_view = 'notebook';
     scb.ui.static.MainFrame.refresh();
 }
 
@@ -148,7 +148,7 @@ scb.ui.static.NotebookView.scb_f_notebook_experiment_setup_link = function (elem
     
 	
 	var headings = scb.ui.static.ExperimentSetupView.headings(parsed.assignment.template.ui.experiment_setup.table);
-	var rows = scb.ui.static.ExperimentSetupView.rows(parsed.experiment.cell_treatment_list.list, headings, parsed.assignment.template);
+	var rows = scb.ui.static.ExperimentSetupView.rows(current_experiment.cell_treatment_list.list, headings, parsed.assignment.template);
 	_.each(rows, function(e){delete e.treatment });
 	
 	parsed.section.elements.start({type: 'image',
@@ -157,7 +157,7 @@ scb.ui.static.NotebookView.scb_f_notebook_experiment_setup_link = function (elem
 		headings: headings,
 		rows: rows
 	 });
-    
+     parsed.experiment.last_view = 'notebook';
     scb.ui.static.MainFrame.refresh();
 }
 
@@ -171,10 +171,10 @@ scb.ui.static.NotebookView.scb_f_notebook_wb_link = function (element) {
     var image_id = $(element).attr('image_id');
     var wb_id = $(element).attr('wb_id');
     var e_id = $(element).attr('e_id');
-    
-    var western_blot = parsed.experiment.western_blot_list.get(wb_id);
-    var gel = parsed.experiment.western_blot_list.get(wb_id).gel_list.get(image_id);
     var current_experiment = parsed.assignment.experiments.get(e_id);
+    var western_blot = current_experiment.western_blot_list.get(wb_id);
+    var gel = current_experiment.western_blot_list.get(wb_id).gel_list.get(image_id);
+    
     
     parsed.notebook.image_western_blot_id = western_blot.id;
     parsed.notebook.image_experiment_id = current_experiment.id;
@@ -200,7 +200,7 @@ scb.ui.static.NotebookView.scb_f_notebook_wb_link = function (element) {
 		rows: rows,
 		exposure_time: scb.utils.print_time_w_seconds(gel.exposure_time)
 	 });
-    
+     parsed.experiment.last_view = 'notebook';
     scb.ui.static.MainFrame.refresh();
 }
 
@@ -213,10 +213,9 @@ scb.ui.static.NotebookView.scb_f_notebook_facs_link = function (element) {
     var image_id = $(element).attr('image_id');
     var facs_id = $(element).attr('facs_id');
     var e_id = $(element).attr('e_id');
-    
-    var facs = parsed.experiment.facs_list.get(facs_id);
-    var lane = parsed.experiment.facs_list.get(facs_id).lanes_list.get(image_id);
     var current_experiment = parsed.assignment.experiments.get(e_id);
+    var facs = current_experiment.facs_list.get(facs_id);
+    var lane = current_experiment.facs_list.get(facs_id).lanes_list.get(image_id);
     
     parsed.notebook.image_facs_id = facs.id;
     parsed.notebook.image_experiment_id = current_experiment.id;
@@ -230,7 +229,7 @@ scb.ui.static.NotebookView.scb_f_notebook_facs_link = function (element) {
 		facs_id: facs.id,
 		facs_lane_id: lane.id
 	 });
-    
+     parsed.experiment.last_view = 'notebook';
     scb.ui.static.MainFrame.refresh();
 }
 
@@ -245,10 +244,9 @@ scb.ui.static.NotebookView.scb_f_notebook_micro_link = function (element) {
     var image_id = $(element).attr('image_id');
     var microscopy_id = $(element).attr('micro_id');
     var e_id = $(element).attr('e_id');
-    
-    var microscopy = parsed.experiment.microscopy_list.get(microscopy_id);
-    var lane = parsed.experiment.microscopy_list.get(microscopy_id).lanes_list.get(image_id);
     var current_experiment = parsed.assignment.experiments.get(e_id);
+    var microscopy = current_experiment.microscopy_list.get(microscopy_id);
+    var lane = current_experiment.microscopy_list.get(microscopy_id).lanes_list.get(image_id);
     
     parsed.notebook.image_microscopy_id = microscopy.id;
     parsed.notebook.image_experiment_id = current_experiment.id;
@@ -262,7 +260,7 @@ scb.ui.static.NotebookView.scb_f_notebook_micro_link = function (element) {
 		microscopy_id: microscopy.id,
 		microscopy_lane_id: lane.id
 	 });
-    
+     parsed.experiment.last_view = 'notebook';
     scb.ui.static.MainFrame.refresh();
 }
 
