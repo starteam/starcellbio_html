@@ -8463,7 +8463,7 @@ var __june_2014_usability = {
                                     control: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {collection_id: '3 m', microscope: {'HnE': 1},
+                                                {collection_id: '3 m', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ae', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8484,7 +8484,7 @@ var __june_2014_usability = {
                                     control: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {collection_id: '6 m', microscope: {'HnE': 1},
+                                                {collection_id: '6 m', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ae', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8506,7 +8506,7 @@ var __june_2014_usability = {
                                     control: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {collection_id: '1 yr', microscope: {'HnE': 1},
+                                                {collection_id: '1 yr', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ae', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8528,7 +8528,7 @@ var __june_2014_usability = {
                                     cre: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {collection_id: '3 m', microscope: {'HnE': 1},
+                                                {collection_id: '3 m', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ac', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8551,7 +8551,7 @@ var __june_2014_usability = {
                                     cre: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {collection_id: '6 m', microscope: {'HnE': 1},
+                                                {collection_id: '6 m', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ac', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8575,7 +8575,7 @@ var __june_2014_usability = {
                                     cre: [
                                         {cell_line: 'wt',
                                             treatment_list: {list: [
-                                                {collection_id: '1 yr', microscope: {'HnE': 1},
+                                                {collection_id: '1 yr', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ac', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8603,7 +8603,7 @@ var __june_2014_usability = {
                                     control: [
                                         {cell_line: 'cko',
                                             treatment_list: {list: [
-                                                {collection_id: '3 m', microscope: {'HnE': 1},
+                                                {collection_id: '3 m', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ae', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8626,7 +8626,7 @@ var __june_2014_usability = {
                                     control: [
                                         {cell_line: 'cko',
                                             treatment_list: {list: [
-                                                {collection_id: '6 m', microscope: {'HnE': 1},
+                                                {collection_id: '6 m', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ae', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8651,7 +8651,7 @@ var __june_2014_usability = {
                                     control: [
                                         {cell_line: 'cko',
                                             treatment_list: {list: [
-                                                {collection_id: '1 yr', microscope: {'HnE': 1},
+                                                {collection_id: '1 yr', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ae', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8678,7 +8678,7 @@ var __june_2014_usability = {
                                     cre: [
                                         {cell_line: 'cko',
                                             treatment_list: {list: [
-                                                {collection_id: '3 m', microscope: {'HnE': 1},
+                                                {collection_id: '3 m', microscope: ['HnE'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ac', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8705,7 +8705,7 @@ var __june_2014_usability = {
                                     cre: [
                                         {cell_line: 'cko',
                                             treatment_list: {list: [
-                                                {collection_id: '6 m', microscope: {'HnE': 1, 'ki67': 1, 'cgrp': 1},
+                                                {collection_id: '6 m', microscope: ['HnE', 'ki67', 'cgrp'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ac', concentration_id: '108'},
                                                 ]}, temperature: '22'
@@ -8733,7 +8733,7 @@ var __june_2014_usability = {
                                     cre: [
                                         {cell_line: 'cko',
                                             treatment_list: {list: [
-                                                {collection_id: '1 yr', microscope: {'HnE': 1, 'cgrp': 1, 'rgb': 1},
+                                                {collection_id: '1 yr', microscope: ['HnE', 'cgrp', 'rgb'],
                                                 drug_list: {list: [
                                                     {drug_id: 'ac', concentration_id: '108'},
                                                 ]}, temperature: '22'

@@ -1431,6 +1431,11 @@ outline: none !important;
 }
 
 
+.scb_s_microscopy_switch_disabled{
+	background: url('../../../images/microscopy/On_BTN_Gray.png') no-repeat !important;
+}
+
+
 .scb_f_microscopy_light:checked , .scb_f_microscopy_laser:checked{
 background: url('../../../images/microscopy/On_BTN.png') no-repeat;
 -webkit-appearance: none;

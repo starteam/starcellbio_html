@@ -108,7 +108,7 @@ scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, c
         var rows = [];
         _.each(experiment.cell_treatment_list.list, function (e) {
             if (grouped_rows[e.id] && _.filter(e.treatment_list.list[0].microscope, function(x){return x=='na';}).length == 0) {
-            	if( _.keys(context.template.micro_kinds).length > 1 && _.isEqual(_.map(grouped_rows[e.id], function(z){return z.slide_conditions}).sort(), _.keys(e.treatment_list.list[0].microscope).sort()))
+            	if( (_.keys(context.template.micro_kinds).length == 1 && _.keys(context.template.micro_kinds[Object.keys(context.template.micro_kinds)[0]].conditions).length == 1)|| (_.keys(context.template.micro_kinds).length >= 1 && _.isEqual(_.map(grouped_rows[e.id], function(z){return z.slide_conditions}).sort(), e.treatment_list.list[0].microscope.sort())))
             		skip_placeholders=true;
             	else
             		skip_placeholders=false;
