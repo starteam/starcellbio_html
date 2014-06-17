@@ -8886,7 +8886,6 @@ var __june_2014_usability = {
             	}
         	},
         	slides:{
-        		//'img1': 'images/microscopy/microscopy_test/Normal_lung/HnE/Sample_1/AD20E1_20x.jpg',
         		'img2': 'images/microscopy/microscopy_test/Normal_lung/HnE/Sample_2/AD20E2_20x.jpg',
         		'img3': 'images/microscopy/microscopy_test/Normal_lung/HnE/Sample_3/AD22E1_20x.jpg',
         		'img4': 'images/microscopy/microscopy_test/Normal_lung/HnE/Sample_3/AD22E1_40x.jpg',
@@ -8962,10 +8961,6 @@ var __june_2014_usability = {
                 	'default':{
                 		'Dye':{
 							'HnE':{
-			// 				'1': [{
-// 									hash: 'img1',
-// 									mag: '20x'
-// 								}],
 							'1': [{
 									hash: 'img2',
 									mag: '20x'
