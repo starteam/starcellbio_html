@@ -14,6 +14,8 @@ from django.core.files.base import ContentFile
 import StarCellBio.settings
 import os
 import StarCellBio.supplements as supplements
+from django.contrib.auth.models import User, Group, Permission
+from django.contrib.contenttypes.models import ContentType
 
 random_mapping = {0: 'DEBAC', 1: 'DABEC', 2: 'CABED', 3: 'ACDEB', 4: 'EBADC', 5: 'BDECA', 6: 'EBCAD', 7: 'ADBCE', 8: 'CBAED', 9: 'DEACB', 10: 'ECDAB', 11: 'EDACB', 12: 'EBACD', 13: 'EADBC', 14: 'CBDEA', 15: 'CEDBA', 16: 'AEDCB', 17: 'DCBEA', 18: 'EDCAB', 19: 'ECBDA', 20: 'ABDCE', 21: 'BCAED', 22: 'ADECB', 23: 'BCADE', 24: 'BACED', 25: 'AEDBC', 26: 'EADCB', 27: 'AEBCD', 28: 'DBECA', 29: 'CAEBD', 30: 'ABECD', 31: 'CDAEB', 32: 'EABDC', 33: 'BDCEA', 34: 'CADEB', 35: 'DEABC', 36: 'BDACE', 37: 'AEBDC', 38: 'EBDAC', 39: 'ABCED', 40: 'EBCDA', 41: 'DACBE', 42: 'DCBAE', 43: 'BDCAE', 44: 'AECBD', 45: 'DCEBA', 46: 'ACEDB', 47: 'BCEAD', 48: 'CDEAB', 49: 'ECDBA', 50: 'DAECB', 51: 'BEACD', 52: 'CDBEA', 53: 'ACEBD', 54: 'DBEAC', 55: 'ACBED', 56: 'CBDAE', 57: 'ABCDE', 58: 'ADCBE', 59: 'BAECD', 60: 'DECAB', 61: 'ADCEB', 62: 'BCDAE', 63: 'CBADE', 64: 'CEADB', 65: 'CEBDA', 66: 'EACDB', 67: 'DBAEC', 68: 'EDCBA', 69: 'DEBCA', 70: 'CDEBA', 71: 'BAEDC', 72: 'CAEDB', 73: 'EDBCA', 74: 'ABDEC', 75: 'EDABC', 76: 'CADBE', 77: 'DCABE', 78: 'ADBEC', 79: 'ABEDC', 80: 'EBDCA', 81: 'DCAEB', 82: 'BEDCA', 83: 'CEBAD', 84: 'CBEDA', 85: 'DABCE', 86: 'BECDA', 87: 'EDBAC', 88: 'CBEAD', 89: 'BADEC', 90: 'BDAEC', 91: 'ADEBC', 92: 'CEABD', 93: 'DBCAE', 94: 'BECAD', 95: 'BCDEA', 96: 'BCEDA', 97: 'ECBAD', 98: 'DBCEA', 99: 'AECDB', 100: 'DCEAB', 101: 'BADCE', 102: 'DBACE', 103: 'EACBD', 104: 'CDABE', 105: 'BACDE', 106: 'ACDBE', 107: 'ECABD', 108: 'CDBAE', 109: 'DACEB', 110: 'BEADC', 111: 'EABCD', 112: 'CABDE', 113: 'BDEAC', 114: 'CEDAB', 115: 'DECBA', 116: 'DAEBC', 117: 'ECADB', 118: 'ACBDE', 119: 'BEDAC'}
 
@@ -61,9 +63,19 @@ def get_model(request):
     return response
     
 def create_courses(request, **kwargs):# 
-# 	import pudb
+	import pudb
 # 	pudb.set_trace()
 	if(request.method == 'POST'):
+		#pudb.set_trace()
+		g= Group(name='instructor')
+		s = Group(name='student')
+		content_type = ContentType.objects.get_for_model(User)
+		p = Permission(codename='is_instructor', name='Is instructor', content_type=content_type)
+		p.save()
+		g.save()
+		s.save()
+		g.permissions.add(p)
+		g.save()
 
 		jstr=request.raw_post_data
 		jsondata = json.loads(jstr)

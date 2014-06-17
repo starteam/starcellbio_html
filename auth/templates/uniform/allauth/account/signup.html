@@ -106,8 +106,8 @@ Your instructor should have provided you with a code that you need to enter belo
   <fieldset class="inlineLabels">
   	<div  class='account_input'>
   	 <label>ACCOUNT TYPE </label>
-    <input id='account_input'type='radio' id='course_code_student' value='student' name="account_type" /> <span>Student</span>
-    <input id='account_input' type='radio' id='course_code_student' value='instructor' name="account_type"  /> <span>Instructor</span>
+    <input onclick='showCourseCode()' id='account_input_student' type='radio' value='student' name="account_type" /> <span>Student</span>
+    <input onclick='hideCourseCode()' id='account_input_instructor' type='radio'  value='instructor' name="account_type"  /> <span>Instructor</span>
     </div>
 
     {{ form|as_uni_form }}
@@ -133,6 +133,7 @@ Your instructor should have provided you with a code that you need to enter belo
 
 
 <script>
+
 if(document.getElementById('div_id_email').className != 'ctrlHolder error ')
 document.getElementById('div_id_email').children[0].textContent='E-MAIL';
 if(document.getElementById('div_id_password2').children[0] != 'ctrlHolder error ')
@@ -159,10 +160,21 @@ function changeStatus(){
 			document.getElementById('code_status').innerHTML = "<span style='color:red'>&#215; </span>&nbsp; This is not a valid code. You cannot create an account."
 			document.getElementById('auth_submit_button').disabled=true;
 			}
-			
 		}
 	}
 }
+
+
+function hideCourseCode(){
+		document.getElementsByClassName('course_code')[0].style.display = 'none';
+		document.getElementById('auth_submit_button').disabled=false;
+}
+
+function showCourseCode(){
+		document.getElementsByClassName('course_code')[0].style.display = '';
+		document.getElementById('auth_submit_button').disabled=true;
+}
+
 
 </script>
 

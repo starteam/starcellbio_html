@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from django import forms
 
 from backend.models import UserCourse, Course, Assignment
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 import StarCellBio.settings as settings
 
@@ -13,6 +13,7 @@ class SignupForm(forms.Form):
 		import os
 		import pudb
 		create_course_records(request,self.data.get('CC'))
+		add_to_group(request, self.data.get('account_type'))
         """
         An extension point for subclasses.
         """
@@ -38,3 +39,11 @@ def create_course_records(usr, input):
 			print course_code
 
 	# get the data
+	
+def add_to_group(usr, input):
+	import pudb
+	#pudb.set_trace()
+	g = Group.objects.filter(name=input)
+	usr.groups.add(g[0])
+	usr.save()
+	
