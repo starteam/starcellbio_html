@@ -1341,7 +1341,7 @@ function init(state, isNew, isIF, draw, image_source){
 		}
 		
 		$('#spy').remove();
-		if(isNew || !state.src){
+		if(isNew || !state.src || state.width == 0 || state.height == 0){
 // 			var image_dimensions = document.createElement('img');
 // 			image_dimensions.src = image_source;
 // 			$('.scb_s_microscopy_view')[0].appendChild(image_dimensions);
