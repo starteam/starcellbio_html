@@ -1079,7 +1079,7 @@ function add_login_script(workarea){
 						
 							$('.scb_s_login_form > div').text('Sign Up');
 							$('.scb_s_login_dialog').addClass('scb_s_signup_dialog');
-							$('.scb_f_login_iframe').css('height', '490px'); 
+							$('.scb_f_login_iframe').css('height', '560px'); 
 						});
 					});
 					iframe.find('a:contains("Password")').click(function(){

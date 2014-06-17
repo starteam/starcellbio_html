@@ -61,6 +61,23 @@ input{
 	text-transform: uppercase;
 }
 
+.account_input > label{
+	color: #316f94;
+	font-size: 9pt;
+	letter-spacing: 1px;
+	font-weight: bold;
+	display:block;
+	margin-bottom: 5px;
+	text-transform: uppercase;
+}
+
+
+.account_input > span, .account_input > input{
+	display: inline;
+	vertical-align: middle;
+}
+
+
 #div_id_email > input, #div_id_password1 > input, #div_id_password2 > input, .course_code > input{
 
 	display: block;
@@ -87,6 +104,12 @@ Your instructor should have provided you with a code that you need to enter belo
 <form class="signup uniForm" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
   <fieldset class="inlineLabels">
+  	<div  class='account_input'>
+  	 <label>ACCOUNT TYPE </label>
+    <input id='account_input'type='radio' id='course_code_student' value='student' name="account_type" /> <span>Student</span>
+    <input id='account_input' type='radio' id='course_code_student' value='instructor' name="account_type"  /> <span>Instructor</span>
+    </div>
+
     {{ form|as_uni_form }}
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
