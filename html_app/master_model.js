@@ -8886,7 +8886,7 @@ var __june_2014_usability = {
             	}
         	},
         	slides:{
-        		'img1': 'images/microscopy/microscopy_test/Normal_lung/HnE/Sample_1/AD20E1_20x.jpg',
+        		//'img1': 'images/microscopy/microscopy_test/Normal_lung/HnE/Sample_1/AD20E1_20x.jpg',
         		'img2': 'images/microscopy/microscopy_test/Normal_lung/HnE/Sample_2/AD20E2_20x.jpg',
         		'img3': 'images/microscopy/microscopy_test/Normal_lung/HnE/Sample_3/AD22E1_20x.jpg',
         		'img4': 'images/microscopy/microscopy_test/Normal_lung/HnE/Sample_3/AD22E1_40x.jpg',
@@ -8962,43 +8962,43 @@ var __june_2014_usability = {
                 	'default':{
                 		'Dye':{
 							'HnE':{
+			// 				'1': [{
+// 									hash: 'img1',
+// 									mag: '20x'
+// 								}],
 							'1': [{
-									hash: 'img1',
-									mag: '20x'
-								}],
-							'2': [{
 									hash: 'img2',
 									mag: '20x'
 								}],
-							'3': [{
+							'2': [{
 									hash: 'img3',
 									mag: '20x'
 								}],
-							'4': [{
+							'3': [{
 									hash: 'img5',
 									mag: '20x'
 								}],
-							'5': [{
+							'4': [{
 									hash: 'img6',
 									mag: '20x'
 								}],
-							'6': [{
+							'5': [{
 									hash: 'img7',
 									mag: '4x'
 								}],
-							'7': [{
+							'6': [{
 									hash: 'img8',
 									mag: '4x'
 								}],
-							'8': [{
+							'7': [{
 									hash: 'img9',
 									mag: '4x'
 								}],
-							'9': [{
+							'8': [{
 									hash: 'img10',
 									mag: '20x'
 								}],
-							'10':[{
+							'9':[{
 									hash: 'img4',
 									mag: '40x'
 								}]
