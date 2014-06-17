@@ -7680,14 +7680,28 @@ var __assignment_706_2014_ps2 = {
                 			cell_line: 'S2',
                 			drug_id: ['nc'],
                 			conditions: 'rgb',
-                			phenotype: 'composite3'
+                			phenotype: 'composite5'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['nc'],
+                			conditions: 'g',
+                			phenotype: 'normal_metaphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['nc'],
+                			conditions: 'gr',
+                			phenotype: 'anaphase'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
                 			drug_id: ['nc'],
                 			conditions: 'rb',
-                			phenotype: 'composite'
+                			phenotype: 'off'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
@@ -7701,21 +7715,35 @@ var __assignment_706_2014_ps2 = {
                 			cell_line: 'S2',
                 			drug_id: ['rna2'],
                 			conditions: 'gr',
-                			phenotype: 'composite'
+                			phenotype: 'bridges'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
                 			drug_id: ['rna2'],
                 			conditions: 'rb',
-                			phenotype: 'composite'
+                			phenotype: 'off'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna2'],
+                			conditions: 'g',
+                			phenotype: 'normal_metaphase'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
                 			drug_id: ['rna3'],
                 			conditions: 'rgb',
-                			phenotype: 'metaphase'
+                			phenotype: 'normal_metaphase'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna3'],
+                			conditions: 'g',
+                			phenotype: 'normal_metaphase'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
@@ -7728,50 +7756,39 @@ var __assignment_706_2014_ps2 = {
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
                 			drug_id: ['rna4'],
-                			conditions: 'rgb',
-                			phenotype: 'interphase'
+                			conditions: 'na'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
                 			drug_id: ['rna5'],
                 			conditions: 'rgb',
-                			phenotype: 'composite4'
+                			phenotype: 'unequal'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
                 			drug_id: ['rna5'],
-                			conditions: 'rb',
-                			phenotype: 'off'
+                			conditions: 'g',
+                			phenotype: 'normal_metaphase'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
                 			drug_id: ['Serum'],
-                			conditions: 'rgb',
-                			phenotype: 'interphase'
+                			conditions: 'na'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
                 			drug_id: ['Hydroxyurea'],
-                			conditions: 'rgb',
-                			phenotype: 'interphase'
+                			conditions: 'na'
                 		},
                 		{
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'S2',
-                			drug_id: ['Nocodazole'],
-                			conditions: 'rgb',
-                			phenotype: 'metaphase'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
-                			cell_line: 'S2',
-                			drug_id: ['Nocodazole'],
-                			conditions: 'rb',
-                			phenotype: 'on'
+                			drug_id: ['Colchicine'],
+                			conditions: 'na'
                 		}
                 			
                 		]

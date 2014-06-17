@@ -269,6 +269,10 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	}
 	
 	else if(state.slide_type == 'IF' && state.microscopy.light_on && !state.microscopy.laser_on){
+		$('.scb_f_microscopy_light').addClass('scb_s_microscopy_switch_disabled');
+		$('.scb_f_microscopy_light').prop('disabled', true);
+		$('#brightdown').prop('disabled', true);
+		$('#brightup').prop('disabled', true);
 		if(state.microscopy_lane.lens_map.brightness >1 )
 			init_wb_mod(state.microscopy_lane.lens_map, '/images/microscopy/white.jpg');
 		else
@@ -415,7 +419,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
        		}
 
        		else if(  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope) == 1){
-       			slide_conditions_val = _.keys(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope)[0]
+       			slide_conditions_val = _.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope[0];
        		}
        			parsed.microscopy.lanes_list.start({
        				kind: slide_type,

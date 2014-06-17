@@ -559,7 +559,7 @@ FACS Main View
         </button>
         {/if}
     </div>
-    <div class='scb_s_facs_samples_graph_area'>
+    <div class='scb_s_facs_samples_graph_area {if $facs.samples_finished}{else}scb_s_facs_dim{/if}'>
         <div class='scb_s_western_blot_gel_tabs' role='tablist'>
         			{if $facs.samples_finished}
         			{foreach $r in $rows}
@@ -636,7 +636,7 @@ FACS Main View
 							
 	 
 			</div>
-<button class='scb_f_info_icon scb_s_facs_histogram_info' note='scb_f_facs_histogram_followup' role='button' aria-label='Histogram Info'> </button>
+<button class='scb_f_info_icon scb_s_facs_histogram_info {if $facs.samples_finished}{else}scb_s_facs_dim{/if}' note='scb_f_facs_histogram_followup' role='button' aria-label='Histogram Info'> </button>
 <div class='scb_f_facs_histogram_followup scb_f_controls_note' role='note'>
 <!-- 
 <button class='scb_f_controls_close_button' aria-label='Close'>&#215;</button>	
@@ -718,7 +718,7 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
         To view the flow cytometry data for each sample, select the sample name in the Samples window to the left.
         -->
     </div>
-    <button class='scb_f_facs_tools_start_analysis scb_s_navigation_button' assignment_id='{$assignment.id}'
+    <button class='scb_f_facs_tools_start_analysis scb_s_navigation_button {if $facs.samples_finished}{else}scb_s_facs_dim{/if}' assignment_id='{$assignment.id}'
             experiment_id='{$experiment.id}' role='button'
             facs_id='{$facs.id}'>ANALYZE DATA
     </button>

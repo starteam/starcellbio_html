@@ -162,6 +162,10 @@ border-radius: 5px;
 background-color:lightgray !important;
 }
 
+.scb_s_facs_dim{
+	cursor: default !important;
+}
+
 .scb_s_facs_double_range_button{
 background-image: url('../../images/header/scb_bisector_icon.png') !important;
 height: 23px;
