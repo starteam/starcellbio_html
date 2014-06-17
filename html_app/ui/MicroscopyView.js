@@ -1354,7 +1354,12 @@ function init(state, isNew, isIF, draw, image_source){
 					 var img = new Image();
 						img.src = image_source;
 						 var int = setInterval(function() {
+							$.jqDialog.notify("The slide is being loaded. Please wait while the image loads.", 2);
+							$('.jqDialog_header').remove();		
+							$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+							$('#jqDialog_box').attr('role', 'alertdialog');
 							if (img.complete) {
+								$('#jqDialog_box').hide()
 								clearInterval(int);
 								 var naturalDimension={};
 								 naturalDimension.oWidth = img.width; naturalDimension.oHeight = img.height;									
@@ -1379,7 +1384,7 @@ function init(state, isNew, isIF, draw, image_source){
 									initialize_state(state, isNew, isIF, draw, image_source, naturalDimension)
 
 							}
-						}, 50);
+						}, 1000);
 					
 			}
 			else{
