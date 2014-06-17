@@ -1354,7 +1354,7 @@ function init(state, isNew, isIF, draw, image_source){
 					 var img = new Image();
 						img.src = image_source;
 						 var int = setInterval(function() {
-							$.jqDialog.notify("The slide is being loaded. Please wait while the image loads.", 2);
+							$.jqDialog.notify("The image is still loading because of a slow internet connection. Please wait while the image loads.", 2);
 							$('.jqDialog_header').remove();		
 							$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
 							$('#jqDialog_box').attr('role', 'alertdialog');
