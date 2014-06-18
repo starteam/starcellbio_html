@@ -12,7 +12,9 @@ class SignupForm(forms.Form):
 		import sys
 		import os
 		import pudb
-		create_course_records(request,self.data.get('CC'))
+		if(self.data.get('account_type') == 'student'):
+			create_course_records(request,self.data.get('CC'))
+# 		elif(self.data.get('account_type') == 'instructor'):
 		add_to_group(request, self.data.get('account_type'))
         """
         An extension point for subclasses.

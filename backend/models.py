@@ -21,7 +21,7 @@ class Assignment(models.Model):
 	assignmentName = models.TextField(max_length = 50)
 	data = models.TextField()
 	ownerID = models.ForeignKey(User, related_name='owner', default=1)
-	access = models.CharField(max_length=50, default='')
+	access = models.CharField(max_length=50, default='public')
 
 
 class StudentAssignment(models.Model):

@@ -9790,8 +9790,8 @@ $.ajax({
 	data: JSON.stringify(master_model_data)
 });
 
-$(function () {
-	console.log(get_courses_result);
+var fix_assignment_models =  function () {
+	console.log(get_student_courses_result);
 	var usability_test = {};
 	var assignment_706 = {};
 	var decusability = {};
@@ -9801,29 +9801,29 @@ $(function () {
 	var assignment_706_2014 ={};
 	var assignment_706_2014_ps2 ={};
 	var june_2014_usability = {};
-	for (var x = 0; x < get_courses_result.list.length; x++){
-		if(get_courses_result.list[x].id == 'usability_test'){
-			usability_test = get_courses_result.list[x];
+	for (var x = 0; x < get_student_courses_result.list.length; x++){
+		if(get_student_courses_result.list[x].id == 'usability_test'){
+			usability_test = get_student_courses_result.list[x];
 			usability_test.description = scb_model_microscopy.abstract();
 			usability_test.template.setup_video_box = scb_model_microscopy.setup_video_box();
 			usability_test.template.setup_video_box_kind = 'coin-slider';
 
 			usability_test.template.experiment_setup = scb_model_usability.experiment_setup();
 			
-			get_courses_result.list[x] = usability_test;
+			get_student_courses_result.list[x] = usability_test;
 		}
-		if(get_courses_result.list[x].id == 'microscopy_test'){
-			microscopy_test = get_courses_result.list[x];
+		if(get_student_courses_result.list[x].id == 'microscopy_test'){
+			microscopy_test = get_student_courses_result.list[x];
 			microscopy_test.description = scb_model_microscopy.abstract();
 			microscopy_test.template.setup_video_box = scb_model_microscopy.setup_video_box();
 			microscopy_test.template.setup_video_box_kind = 'coin-slider';
 
 			microscopy_test.template.experiment_setup = scb_model_microscopy.experiment_setup();
 			
-			get_courses_result.list[x] = microscopy_test;
+			get_student_courses_result.list[x] = microscopy_test;
 		}
-		if(get_courses_result.list[x].id == 'mit_7_06_0313'){
-			assignment_706 = get_courses_result.list[x];
+		if(get_student_courses_result.list[x].id == 'mit_7_06_0313'){
+			assignment_706 = get_student_courses_result.list[x];
 			assignment_706.description = scb_assignment_specific_mit706s13.assignment_overview();
     		assignment_706.template.instructions = [
     			['Goal & Introduction', scb_assignment_specific_mit706s13.goal_and_introduction()],
@@ -9844,10 +9844,10 @@ $(function () {
 					top: '000px'
 				}
 			});
-			get_courses_result.list[x] = assignment_706;
+			get_student_courses_result.list[x] = assignment_706;
 		}
-		if(get_courses_result.list[x].id == 'assignment_706_2014'){
-			assignment_706_2014 = get_courses_result.list[x];
+		if(get_student_courses_result.list[x].id == 'assignment_706_2014'){
+			assignment_706_2014 = get_student_courses_result.list[x];
 			assignment_706_2014.template.instructions = [
 				['Introduction', scb_assignment_specific_mit706s14.introduction()],
 				['Background Information',scb_assignment_specific_mit706s14.background_information()],
@@ -9866,10 +9866,10 @@ $(function () {
 					top: '15%'
 				}
 			});
-			get_courses_result.list[x] = assignment_706_2014;
+			get_student_courses_result.list[x] = assignment_706_2014;
 		}
-		if(get_courses_result.list[x].id == 'assignment_706_2014_ps2'){
-			assignment_706_2014_ps2 = get_courses_result.list[x];
+		if(get_student_courses_result.list[x].id == 'assignment_706_2014_ps2'){
+			assignment_706_2014_ps2 = get_student_courses_result.list[x];
 			//assignment_706_2014_ps2 = choose_n_mutant_strains(assignment_706_2014_ps2.template.random_order, ['m1', 'm2'], assignment_706_2014_ps2);
 			if(assignment_706_2014_ps2.template.finished_random){}
 			else{
@@ -9935,10 +9935,10 @@ $(function () {
 					top: '000px'
 				}
 			});
-			get_courses_result.list[x] = assignment_706_2014_ps2;
+			get_student_courses_result.list[x] = assignment_706_2014_ps2;
 		}
-		if(get_courses_result.list[x].id == 'decusability'){
-			decusability = get_courses_result.list[x];
+		if(get_student_courses_result.list[x].id == 'decusability'){
+			decusability = get_student_courses_result.list[x];
     		decusability.template.instructions = [
     			['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
 				['Introduction',scb_assignment_specific_decusability.intro()],
@@ -9958,10 +9958,10 @@ $(function () {
 					top: '000px'
 				}
 			});
-			get_courses_result.list[x] = decusability;
+			get_student_courses_result.list[x] = decusability;
 		}
-		if(get_courses_result.list[x].id == 'microscopy_usability'){
-			june_2014_usability = get_courses_result.list[x];
+		if(get_student_courses_result.list[x].id == 'microscopy_usability'){
+			june_2014_usability = get_student_courses_result.list[x];
     		june_2014_usability.template.instructions = [
     			['Welcome to the Usability Evaluation', scb_assignment_specific_microscopy_usability.welcome_usability()],
 				['Introduction',scb_assignment_specific_microscopy_usability.intro()],
@@ -9980,10 +9980,10 @@ $(function () {
 					top: '000px'
 				}
 			});
-			get_courses_result.list[x] = june_2014_usability;
+			get_student_courses_result.list[x] = june_2014_usability;
 		}
-		if(get_courses_result.list[x].id == 'decusability2'){
-			decusability_newfacs = get_courses_result.list[x];
+		if(get_student_courses_result.list[x].id == 'decusability2'){
+			decusability_newfacs = get_student_courses_result.list[x];
     		decusability_newfacs.template.instructions = [
     			['Welcome to the Usability Evaluation', scb_assignment_specific_decusability.welcome_usability()],
 				['Introduction',scb_assignment_specific_decusability.intro()],
@@ -10003,10 +10003,10 @@ $(function () {
 					top: '000px'
 				}
 			});
-			get_courses_result.list[x] = decusability_newfacs;
+			get_student_courses_result.list[x] = decusability_newfacs;
 		}
-		if(get_courses_result.list[x].id == 'assignment_tufts'){
-			assignment_tufts = get_courses_result.list[x];
+		if(get_student_courses_result.list[x].id == 'assignment_tufts'){
+			assignment_tufts = get_student_courses_result.list[x];
 			assignment_tufts.template.ui.experiment_setup.actions.push({
 				name: 'ADD SAMPLES',
 				open: 'mit706s13.setup',
@@ -10019,11 +10019,11 @@ $(function () {
 			});
 			assignment_tufts.template.experiment_setup = scb_assignment_specific_tufts.experiment_setup();
 			assignment_tufts.description = scb_assignment_specific_tufts.assignment_overview();
-			get_courses_result.list[x] = assignment_tufts;
+			get_student_courses_result.list[x] = assignment_tufts;
 			
 		}
 	}
-});
+};
 
 
 

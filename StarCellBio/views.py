@@ -62,6 +62,19 @@ def get_model(request):
     response['Content-Type'] = 'text/javascript'
     return response
     
+def get_user(request, **kwargs):
+	import pudb
+# 	pudb.set_trace()	
+	if(request.user.id):
+		account_type = Group.objects.filter(id=request.user.id)[0].name
+	else:
+		account_type = ''
+	retval = {'account_type': account_type, 'name': request.user.username}
+	response = HttpResponse("var get_user_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response
+    
 def create_courses(request, **kwargs):# 
 	import pudb
 # 	pudb.set_trace()
@@ -97,15 +110,21 @@ def create_courses(request, **kwargs):#
 		response['Content-Type'] = 'text/javascript'
 		return response
 		
-def get_courses(request, **kwargs):
+#This view gets the courses for a student for their account
+#For the instructor, it gets the courses it can view		
+def get_student_courses(request, **kwargs):
 	import ast
 	import random
 	import pudb
-	#pudb.set_trace()
+# 	pudb.set_trace()
+	if(request.user.id):
+		account_type = Group.objects.filter(id=request.user.id)[0].name
+	else:
+		account_type = ''
 	alist = []
 	retval = []
 	token1 = random.randrange(0, 1000000)
-	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
+	if(UserCourse.objects.filter(user__username = request.user.username).count()>0 and account_type == 'student'):
 		usercourses = UserCourse.objects.filter(user=request.user)
 		courses = []
 		for usercourse in usercourses:
@@ -185,16 +204,19 @@ def get_courses(request, **kwargs):
 			is_selected_val = 'assignment_706_2014_ps2'
 		else:
 			is_selected_val = alist[0]['id']
-		retval = {'list': alist, 'is_auth': True, 'is_selected': is_selected_val, 'token': token1}
+		retval = {'is_student': True, 'list': alist, 'is_auth': True, 'is_selected': is_selected_val, 'token': token1}
 	else:
 		#pudb.set_trace()
-		all =[]
-		for a in Assignment.objects.all():
-			dictionary = ast.literal_eval(a.data)
-			if(a.assignmentID == 'decusability' or a.assignmentID == 'decusability2' or a.assignmentID == 'microscopy_usability'):  # or a.assignmentID == 'microscopy_test' ): #or a.assignmentID == 'assignment_706_2014_ps2'):
-				all.append(dictionary)
-		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
-	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
+		if(account_type == 'instructor'):
+			retval = {'is_student': False, 'list': [], 'is_auth': True, 'is_selected': '', 'token': token1}
+		else:
+			all =[]
+			for a in Assignment.objects.all():
+				dictionary = ast.literal_eval(a.data)
+				if(a.assignmentID == 'decusability' or a.assignmentID == 'decusability2' or a.assignmentID == 'microscopy_usability'):  # or a.assignmentID == 'microscopy_test' ): #or a.assignmentID == 'assignment_706_2014_ps2'):
+					all.append(dictionary)
+			retval = {'is_student': True, 'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
+	response = HttpResponse("var get_student_courses_result = {0};".format(json.dumps(retval)))
 	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'
 	return response
@@ -337,3 +359,40 @@ def randomize_706_2014_ps1(request, assignment_data):
 	return repr(assignment_data)
 					
 			
+def get_instructor_assignments(request, **kwargs):
+	import ast
+	import random
+	import pudb
+	retval = []
+	token1 = random.randrange(0, 1000000)
+	if(request.user.id):
+		account_type = Group.objects.filter(id=request.user.id)[0].name
+	else:
+		account_type = ''
+	if(account_type == 'instructor'):
+		retval = {'is_instructor': True, 'view_list': all, 'edit_list': False, 'token': token1}
+	elif(account_type == 'student'):
+		retval = {'is_instructor': False,'view_list': all, 'edit_list': False, 'token': token1}
+# 	all = []
+# 	for a in Assignment.objects.filter(access=='public'):
+# 		dictionary = ast.literal_eval(a.data)
+# 		all.append(dictionary)	
+	retval = {'is_instructor': True, 'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
+	response = HttpResponse("var get_instructor_assignments_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response
+	
+def edit_assignment(request, **kwargs):
+	retval = []
+	response = HttpResponse("var get_instructor_assignments_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response
+	
+def edit_assignment_metadata(request, **kwargs):
+	retval = []
+	response = HttpResponse("var get_instructor_assignments_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response

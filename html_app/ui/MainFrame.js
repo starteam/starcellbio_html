@@ -489,7 +489,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 	//HANDLER FOR LOGIN BUTTON AND IFRAME
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
         scb.ui.static.MainFrame.ensure_auth_context();
-        if(assignments.selected && !get_courses_result.is_auth){
+        if(assignments.selected && !get_student_courses_result.is_auth){
 				$('html').css('overflow', 'hidden');
 				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
@@ -498,7 +498,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					function() {
 						$('html').css('overflow', 'visible');
 						$('.error_overlay').remove();
-						if (get_courses_result.is_auth) {
+						if (get_student_courses_result.is_auth) {
 			
 							window.location = '/accounts/logout/';
 						}
@@ -519,7 +519,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				evt.preventDefault();
         }
         else{
-			if (get_courses_result.is_auth) {
+			if (get_student_courses_result.is_auth) {
 			
 				window.location = '/accounts/logout/';
 			}
@@ -585,7 +585,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     self.show = function (state) {
     	scb.ui.static.MainFrame.ensure_auth_context();
-    	context.auth.logged_in = get_courses_result.is_auth; 
+    	context.auth.logged_in = get_student_courses_result.is_auth; 
         state = state || {
             view: 'homepage'
         }
@@ -606,7 +606,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'assignments') {
             if (!parsed.assignment) {
-                state.assignment_id = assignments.selected_id ? assignments.selected_id : get_courses_result.is_selected;
+                state.assignment_id = assignments.selected_id ? assignments.selected_id : get_student_courses_result.is_selected;
                 state.onhashchange = false;
                 self.show(state);
                 return;
@@ -830,7 +830,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 }
             }
         }
-        if (get_courses_result.is_auth) {
+        if (get_student_courses_result.is_auth) {
             $('.scb_s_login_status').text('SIGN OUT');
             $('.scb_f_try_an_experiment').click();
         }
@@ -856,7 +856,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
        console.info( "Ajax save - clear Queue" ) ;
        scb.ui.static.MainFrame.pending_save_queue = [];
        if(typeof post_state_result === 'undefined')
-                  token = get_courses_result.token;
+                  token = get_student_courses_result.token;
         else
                   token = post_state_result.token;
        post_obj = {'token': token, 'model': parsed.context.master_model}
@@ -892,7 +892,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     			console.log('believe');
     			var token = 0;
     			if(typeof post_state_result === 'undefined')
-    				token = get_courses_result.token;
+    				token = get_student_courses_result.token;
     			else
     				token = post_state_result.token;
     			post_obj = {'token': token, 'model': parsed.context.master_model}
