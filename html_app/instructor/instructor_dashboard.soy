@@ -1,0 +1,73 @@
+{namespace scb_instructor_dashboard}
+
+/**
+* Assignment selector
+* @param global_template
+* @param last_step
+* @param prev_step
+* @param assignments AssignmentsView
+* @param context
+* @param courses // group Assignments by Course
+*/
+{template .main}
+<div class='scb_s_dashboard_view' >
+    {call scb_homepage.display_header}
+    {param global_template:$global_template /}
+    {param context:$context /}
+    {/call}
+    
+    {call scb_common.assignment_step}
+        {param step:1/}
+        {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
+        {param assignments:assignments/}
+    {/call}
+    <div class='scb_s_dashboard_container' role='main'>
+    {call .display_assignments}
+        {param assignments:$assignments/}
+        {param courses: $courses/}
+        {param sections:['Current Assignments', 'Assignment Drafts', 'Archived Assignments', 'Public Assignments']/}
+    {/call}
+    </div>
+    {call scb_homepage.display_footer}
+    {param global_template:$global_template /}
+    {/call}
+</div>
+{/template}
+
+
+/**
+Assignment assignments
+@param assignments
+@param courses
+@/param sections
+*/
+{template .display_assignments}
+<div class='scb_s_dashboard_sidebar'>
+    <h1 class='scb_s_dashboard_sidebar_title'>Your Assignments: <div class="arrow-down"></div></h1>
+    <ul aria-label="Assignments"  >
+    	<button class="scb_s_dashboard_new_course_button scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignments.selected.id}" aria-label='New Experiment' role='button'> Create A New Course &nbsp; &#9654;</button>
+		<br/>
+        {foreach $course in keys($courses)}
+            <div class='scb_s_dashboard_sidebar_course_block'>
+            {if $course == '7.06_Spring_2014'}
+            <div class='scb_s_dashboard_sidebar_course' role='heading'>7.06 Spring 2014</div>
+            {else}
+            <div class='scb_s_dashboard_sidebar_course' role='heading'>{$course}</div>
+            {/if}
+        {foreach $assignment in $courses[$course]}
+
+			<li role="link" class='scb_s_dashboard_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_dashboard_sidebar_name_selected{/if}' aria-selected='{if $assignments.selected.id == $assignment.id}true{else}false{/if}'  >
+				<a role='presentation' href='#view=assignments&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}
+
+				</a>
+				{if $assignments.selected.id == $assignment.id}
+					<img role='presentation' class='scb_s_selection_arrow_img'  src='../../images/homepage/selection_arrow.png' >
+				{/if}
+			</li>
+        {/foreach}
+        </div>
+        {/foreach}
+    </ul>
+</div>
+{/template}

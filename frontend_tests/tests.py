@@ -42,6 +42,7 @@ class SimpleTest(TestCase):
 
     def test_homepage_page(self):
         self.load_website()
+        pudb.set_trace()
         self.assert_on_homepage_page()
 
     """
@@ -51,6 +52,7 @@ class SimpleTest(TestCase):
     def test_assignment_navigation_tests(self):
         self.load_website()
         #HOMEPAGE
+#         pudb.set_trace()
         self.assert_on_homepage_page()
         self.navigate_via('SIGN IN')
         self.close_popup_window('scb_f_login_close_button')
@@ -75,7 +77,7 @@ class SimpleTest(TestCase):
 #         pudb.set_trace()
         self.select_assignment('decusability', title='StarCellBio Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+        self.select_assignment('microscopy_usability', title='Microscopy Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.select_assignment('decusability', title='StarCellBio Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
@@ -98,7 +100,7 @@ class SimpleTest(TestCase):
         self.navigate_via('1. DESIGN')
         self.navigate_via('2. SETUP & RUN')
         self.assert_on_experiment_setup_page()
-        self.select_new_set_up()
+#         self.select_new_set_up()
         self.assert_samples([])
         sample1 = {'cell_line': 'wt', 'treatment_id': 'media_only,25'}
         sample2 = {'cell_line': 'wt', 'treatment_id': 'media_only,40'}
@@ -213,9 +215,9 @@ class SimpleTest(TestCase):
         time.sleep(2)
         #pudb.set_trace()
         self.navigate_via('ASSIGNMENTS')
-        self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+        self.select_assignment('microscopy_usability', title='Microscopy Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
-        self.open_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+        self.open_assignment('microscopy_usability', title='Microscopy Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.assert_on_experiment_design_page()
         experiment_title = 'Test Experiment'
@@ -224,7 +226,7 @@ class SimpleTest(TestCase):
         self.set_experiment_design_values(experiment_title, experiment_hypo,experiment_obj)
         self.navigate_via('ASSIGNMENTS')
         self.assert_on_assignments_page()
-        self.select_assignment('microscopy_test', title='StarCellBio Microscopy Test',
+        self.select_assignment('microscopy_usability', title='Microscopy Usability Test',
             description='$DISPLAY_ASSIGNMENT_INSTRUCTIONS$')
         self.navigate_via('EXPERIMENTS')
         self.assert_on_experiment_design_page()
@@ -233,9 +235,9 @@ class SimpleTest(TestCase):
         self.navigate_via('1. DESIGN')
         self.navigate_via('2. SETUP & RUN')
         self.assert_on_experiment_setup_page()
-        self.select_new_set_up()
-        button = self.find_by_class_name('scb_s_experiment_setup_table_element')
-        button.click()
+#         self.select_new_set_up()
+#         button = self.find_by_class_name('scb_s_experiment_setup_table_element')
+#         button.click()
         time.sleep(3)
         
         self.navigate_via('RUN EXPERIMENT')
@@ -258,6 +260,7 @@ class SimpleTest(TestCase):
         self.find_by_class_name('scb_s_assignments_view')
         
     def assert_on_homepage_page(self):
+#     	pudb.set_trace()
     	self.find_by_class_name('scb_s_homepage_view')
 
     def assert_on_assignment_page(self):

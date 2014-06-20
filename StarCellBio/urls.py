@@ -19,18 +19,15 @@ urlpatterns = patterns('',
                        url(r'^scb/get_instructor_assignments.js$', "StarCellBio.views.get_instructor_assignments", name='get_instructor_assignments'),
                        url(r'^scb/get_user.js$', "StarCellBio.views.get_user", name='get_user'),
                        url(r'^scb/post_state.js$', "StarCellBio.views.post_state", name='post_state'),
-                       # url(r'^StarCellBio/', include('StarCellBio.foo.urls')),
                        # Uncomment the admin/doc line below to enable admin documentation:
                        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
                        # Uncomment the next line to enable the admin:
                        url(r'^admin/', include(admin.site.urls)),
-                       #url(r'^scb_rest/', include('rest_framework.urls', namespace='rest_framework')),
                        url(r'^images/(?P<path>.*)$', 'django.views.static.serve',
                            {'document_root': 'html_app/images/'}),
                        url(r'^pdf/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'html_app/pdf/'}),
                        url(r'^js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'html_app/js/'}),
-                       #url(r'^api/', include(user_resources.urls)),
                        
 )
 # add authentication URL patterns

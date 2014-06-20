@@ -1,0 +1,120 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
+.scb_s_dashboard_view {
+    width: 1002px;
+    background-color: #f4f6f8;
+}
+.scb_s_dashboard_container{
+	background: white;
+	padding-bottom: 51px;
+	position: relative;
+	z-index: 1;
+}
+
+
+.scb_s_dashboard_description>.scb_f_open_experiment {
+    bottom: 5px;
+    float:right;
+    margin-top: 25px;
+}
+
+
+
+.scb_s_dashboard_sidebar_title {
+    font-size: 13pt;
+    padding: 11px 0px 6px 17px;
+    font-family: "sourcesanspro-semibold";
+    text-align: left;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	color: white;
+	background: #27956c;
+	margin: -5px;
+}
+
+.scb_s_dashboard_sidebar {
+    margin-top: 22px;
+    font-size: 12px;
+    text-align: justify;
+    display: inline-block;
+    vertical-align: top;
+    width:247px;
+    margin-right:10px;
+    padding:5px;
+    background-color: #f4f6f8;
+    margin-left: 33px;
+    border: 1px solid #d8eee7;
+	box-shadow: 0 0 0 0;
+	border-radius: 8px;
+}
+
+.scb_s_dashboard_sidebar > ul {
+    margin-left:-28px;
+    list-style:none;
+    margin-top: 22px;
+
+}
+
+
+.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid #27956c;
+	left: 121px;
+	position: absolute;
+	
+}
+
+.scb_s_dashboard_sidebar_name_selected{
+	background: #c9cdd0;
+}
+
+.scb_s_dashboard_sidebar_name {
+    font-size: 10pt;
+    margin-top: 3px;
+    font-family: 'sourcesanspro-semibold';
+    position: relative;
+	left: -18px;
+	width: 221px;
+	padding: 7px 3px 3px 33px;
+	height: 20px;
+	color: #010101;
+}
+
+.scb_s_dashboard_new_course_button{
+	border: none;
+	width: 236px;
+	height: 24px;
+	margin: 1px;
+	font-size: 13pt;
+	font-family: 'sourcesanspro-semibold';
+	text-transform: initial;
+	padding-top: 2px;
+	text-align: left;
+}
+
+
+
+
+
+
+
+.scb_s_dashboard_sidebar_course {
+    font-size:14pt;
+    font-weight: bold;
+    font-family: 'sourcesanspro-semibold';
+	color: #316f94;
+	text-transform: capitalize;
+}
+
+.scb_s_dashboard_sidebar_course_block {
+    padding-top:12pt;
+    margin:1px;
+}

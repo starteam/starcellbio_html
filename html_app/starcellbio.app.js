@@ -28,7 +28,7 @@ function starcellbio(jquery_selector_main, master_model) {
         if(get_user_result.account_type == '' || get_user_result.account_type == 'student'){
         $.ajax({
 			type: "GET",
-			url: 'scb/get_student_courses.js',
+			url: '../scb/get_student_courses.js',
 		}).done(function() {
 			get_student_courses_result.list = fix_assignment_models(get_student_courses_result.list);
 		   	master_model.assignments = get_student_courses_result;
@@ -83,7 +83,7 @@ function starcellbio(jquery_selector_main, master_model) {
 				scb.utils.accessor2_custom(context, 'template', function () {
 					return context.js_model.current_assignment.template;
 				}, scb.utils.read_only_exception);
-				var main_frame = new scb.ui.MainFrame(init_model, context);
+				var main_frame = new scb.ui.InstructorFrame(init_model, context);
 			});
         }
        
