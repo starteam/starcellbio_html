@@ -28,8 +28,28 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     var pending_save = false;
     context.main_frame = self;
     self.sections = {};
+    var assignment = null;
+	if(get_user_result.account_type != 'instructor')
+    	 assignments = new scb.AssignmentList(master_model.assignments, context);
+    else{ 
+    	master_model.assignments.list = []
+    	 _.each(master_model.assignments.edit_list, function (e) {
+			e.permission = 'edit';
+			master_model.assignments.list.push(e);
+    	});
+    	_.each(master_model.assignments.view_list, function (e) {
+			e.permission = 'view';
+			master_model.assignments.list.push(e);
+    	});
+    	delete master_model.assignments.edit_list;
+    	delete master_model.assignments.view_list;
+    	 assignments = new scb.AssignmentList(master_model.assignments, context);
+    }
+    
+    user_is_auth = typeof get_student_courses_result != "undefined" ? get_student_courses_result.is_auth : get_instructor_assignments_result.is_auth;
 
-    var assignments = new scb.AssignmentList(master_model.assignments, context);
+    user_token = typeof get_student_courses_result != "undefined" ? get_student_courses_result.token : get_instructor_assignments_result.token;
+
 
     scb.ui.static.MainFrame.ensure_auth_context = function () {
         context = context || {};
@@ -489,7 +509,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 	//HANDLER FOR LOGIN BUTTON AND IFRAME
     scb.utils.off_on(workarea.parent(), 'click', '.scb_f_login', function (evt) {
         scb.ui.static.MainFrame.ensure_auth_context();
-        if(assignments.selected && !get_student_courses_result.is_auth){
+        if(assignments.selected && !user_is_auth){
 				$('html').css('overflow', 'hidden');
 				$('body').prepend(scb_experiment_setup.general_error_overlay());
 
@@ -498,7 +518,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 					function() {
 						$('html').css('overflow', 'visible');
 						$('.error_overlay').remove();
-						if (get_student_courses_result.is_auth) {
+						if (user_is_auth) {
 			
 							window.location = '/accounts/logout/';
 						}
@@ -519,7 +539,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 				evt.preventDefault();
         }
         else{
-			if (get_student_courses_result.is_auth) {
+			if (user_is_auth) {
 			
 				window.location = '/accounts/logout/';
 			}
@@ -585,7 +605,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
 
     self.show = function (state) {
     	scb.ui.static.MainFrame.ensure_auth_context();
-    	context.auth.logged_in = get_student_courses_result.is_auth; 
+    	context.auth.logged_in = user_is_auth; 
         state = state || {
             view: 'homepage'
         }
@@ -604,6 +624,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 workarea: workarea
             });
         }
+        //INSTRUCTOR SHOULD NOT GO HERE
         if (state.view == 'assignments') {
             if (!parsed.assignment) {
                 state.assignment_id = assignments.selected_id ? assignments.selected_id : get_student_courses_result.is_selected;
@@ -830,7 +851,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 }
             }
         }
-        if (get_student_courses_result.is_auth) {
+        if (user_is_auth) {
             $('.scb_s_login_status').text('SIGN OUT');
             $('.scb_f_try_an_experiment').click();
         }
@@ -856,7 +877,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
        console.info( "Ajax save - clear Queue" ) ;
        scb.ui.static.MainFrame.pending_save_queue = [];
        if(typeof post_state_result === 'undefined')
-                  token = get_student_courses_result.token;
+                  token = user_token;
         else
                   token = post_state_result.token;
        post_obj = {'token': token, 'model': parsed.context.master_model}
@@ -892,7 +913,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     			console.log('believe');
     			var token = 0;
     			if(typeof post_state_result === 'undefined')
-    				token = get_student_courses_result.token;
+    				token = user_token;
     			else
     				token = post_state_result.token;
     			post_obj = {'token': token, 'model': parsed.context.master_model}

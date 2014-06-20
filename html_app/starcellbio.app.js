@@ -18,7 +18,6 @@ function starcellbio(jquery_selector_main, master_model) {
             master_model = master_model_local;
         }
         
-        ///SHLOKA
         //Here is where you make the request for a particular type of assignment 
 //         $.ajax({
 // 			type: "POST",
@@ -26,12 +25,12 @@ function starcellbio(jquery_selector_main, master_model) {
 // 			data: JSON.stringify(master_model_data)
 // 		});
         ////
-        if(get_user_result.account_type != null){
+        if(get_user_result.account_type == '' || get_user_result.account_type == 'student'){
         $.ajax({
 			type: "GET",
 			url: 'scb/get_student_courses.js',
 		}).done(function() {
-			fix_assignment_models();
+			get_student_courses_result.list = fix_assignment_models(get_student_courses_result.list);
 		   	master_model.assignments = get_student_courses_result;
 			var init_model = master_model.assignments ? master_model : master_model_data;
 			window.master_model = init_model;
@@ -56,6 +55,36 @@ function starcellbio(jquery_selector_main, master_model) {
 			var main_frame = new scb.ui.MainFrame(init_model, context);
 		});
         	
+        }
+        else if(get_user_result.account_type == 'instructor'){
+        	 $.ajax({
+			type: "GET",
+			url: '../scb/get_instructor_assignments.js',
+			}).done(function() {
+				get_instructor_assignments_result.view_list = fix_assignment_models(get_instructor_assignments_result.view_list);
+				master_model.assignments = get_instructor_assignments_result;
+				var init_model = master_model.assignments ? master_model : master_model_data;
+				window.master_model = init_model;
+				for (var i in init_model.assignments.list) {
+					if (_.keys(init_model.assignments.list[i].template).length == 0) {
+						init_model.assignments.list[i].template = MASTER_TEMPLATE;
+					}
+				}
+				scb.Utils.initialize_field(init_model, 'templates', [MASTER_TEMPLATE]);
+				scb.Utils.initialize_field(init_model, 'sessions', {});
+
+				var context = new scb.Context();
+				context.ui = workarea;
+				context.master_model = init_model;
+
+				window.master_context = context;
+
+				scb.Utils.initialize_field(context, 'js_model', {});
+				scb.utils.accessor2_custom(context, 'template', function () {
+					return context.js_model.current_assignment.template;
+				}, scb.utils.read_only_exception);
+				var main_frame = new scb.ui.MainFrame(init_model, context);
+			});
         }
        
     } catch (err) {

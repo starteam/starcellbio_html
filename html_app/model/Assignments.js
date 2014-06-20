@@ -22,5 +22,7 @@ scb.Assignment = function scb_Assignment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'template',{},null,context);
 	scb.Utils.initialize_accessor_field(self,data,'course','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'last_instruction',0,null,context);
+	scb.Utils.initialize_accessor_field(self,data,'permission','',null,context);
+
 
 }

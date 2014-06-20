@@ -10,6 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        # Examples:
                        url(r'^$', "StarCellBio.views.home", name='home'),
+                       url(r'^instructor/', "StarCellBio.views.home", name='home'),
                        url(r'^index.html$', "StarCellBio.views.home"),
                        url(r'^scb/contact$', "StarCellBio.views.contact", name='contact'),
                        url(r'^scb/get_model.js$', "StarCellBio.views.get_model", name='get_model'),
@@ -30,7 +31,7 @@ urlpatterns = patterns('',
                        url(r'^pdf/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'html_app/pdf/'}),
                        url(r'^js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'html_app/js/'}),
                        #url(r'^api/', include(user_resources.urls)),
-                       url(r'^instructor/', include('instructor.urls', namespace="instructor", app_name="instructor")),
+                       
 )
 # add authentication URL patterns
 urlpatterns += auth.urls.urlpatterns

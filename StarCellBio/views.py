@@ -66,7 +66,7 @@ def get_user(request, **kwargs):
 	import pudb
 # 	pudb.set_trace()	
 	if(request.user.id):
-		account_type = Group.objects.filter(id=request.user.id)[0].name
+		account_type = request.user.groups.all()[0].name
 	else:
 		account_type = ''
 	retval = {'account_type': account_type, 'name': request.user.username}
@@ -118,7 +118,7 @@ def get_student_courses(request, **kwargs):
 	import pudb
 # 	pudb.set_trace()
 	if(request.user.id):
-		account_type = Group.objects.filter(id=request.user.id)[0].name
+		account_type = request.user.groups.all()[0].name
 	else:
 		account_type = ''
 	alist = []
@@ -363,21 +363,33 @@ def get_instructor_assignments(request, **kwargs):
 	import ast
 	import random
 	import pudb
+# 	pudb.set_trace()
 	retval = []
 	token1 = random.randrange(0, 1000000)
+	view_list = []
+	edit_list = []
+	return_view_list = []
+	return_edit_list = []
 	if(request.user.id):
-		account_type = Group.objects.filter(id=request.user.id)[0].name
+		account_type = request.user.groups.all()[0].name
 	else:
 		account_type = ''
 	if(account_type == 'instructor'):
-		retval = {'is_instructor': True, 'view_list': all, 'edit_list': False, 'token': token1}
-	elif(account_type == 'student'):
-		retval = {'is_instructor': False,'view_list': all, 'edit_list': False, 'token': token1}
+		view_list = Assignment.objects.filter(access='public')
+		for v in view_list: 
+			dictionary = ast.literal_eval(v.data)
+			return_view_list.append(dictionary)
+		edit_list = Assignment.objects.filter(ownerID=request.user.id)
+		for e in edit_list: 
+			dictionary = ast.literal_eval(e.data)
+			return_edit_list.append(dictionary)
+		retval = {'is_auth': True, 'is_student': False, 'view_list': return_view_list, 'edit_list': return_edit_list, 'token': token1}
+	else:
+		retval = {'is_auth': True, 'is_student': True,'view_list': [], 'edit_list': [], 'token': token1}
 # 	all = []
 # 	for a in Assignment.objects.filter(access=='public'):
 # 		dictionary = ast.literal_eval(a.data)
 # 		all.append(dictionary)	
-	retval = {'is_instructor': True, 'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
 	response = HttpResponse("var get_instructor_assignments_result = {0};".format(json.dumps(retval)))
 	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'

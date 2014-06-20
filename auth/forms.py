@@ -12,6 +12,7 @@ class SignupForm(forms.Form):
 		import sys
 		import os
 		import pudb
+# 		pudb.set_trace()
 		if(self.data.get('account_type') == 'student'):
 			create_course_records(request,self.data.get('CC'))
 # 		elif(self.data.get('account_type') == 'instructor'):
