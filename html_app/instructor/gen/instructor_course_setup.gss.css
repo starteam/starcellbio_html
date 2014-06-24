@@ -23,6 +23,15 @@
   padding-bottom: 14px;
   margin-left: 11px;
 }
+.scb_s_course_setup_title {
+  font-size: 16pt;
+  font-weight: bold;
+  font-family: 'sourcesanspro-semibold';
+  color: #316f94;
+  text-transform: capitalize;
+  padding-top: 15px;
+  padding-left: 10px;
+}
 .scb_s_abstract_title {
   color: white;
   background: #27956c;

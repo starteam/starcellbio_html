@@ -375,11 +375,12 @@ def get_instructor_assignments(request, **kwargs):
 	else:
 		account_type = ''
 	if(account_type == 'instructor'):
+# 		pudb.set_trace()
 		view_list = Assignment.objects.filter(access='public')
 		for v in view_list: 
 			dictionary = ast.literal_eval(v.data)
 			return_view_list.append(dictionary)
-		edit_list = Assignment.objects.filter(ownerID=request.user.id)
+		edit_list = Assignment.objects.filter(ownerID=request.user.id).exclude(access='public')
 		for e in edit_list: 
 			dictionary = ast.literal_eval(e.data)
 			return_edit_list.append(dictionary)
@@ -395,9 +396,37 @@ def get_instructor_assignments(request, **kwargs):
 	response['Content-Type'] = 'text/javascript'
 	return response
 	
-def edit_assignment(request, **kwargs):
+	
+def create_new_assignment(request, **kwargs):
 	retval = []
 	response = HttpResponse("var get_instructor_assignments_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response
+		
+	
+def edit_assignment(request, **kwargs):
+# 	pudb.set_trace()
+	jstr = request.raw_post_data
+	jsondata = json.loads(jstr)
+	jsonmodel = jsondata['model']
+	import random
+	if(Assignment.objects.filter(ownerID = request.user.id).count()>0):
+		my_assignments = Assignment.objects.filter(ownerID=request.user.id).exclude(access='public')
+		for assignment in my_assignments:
+			retval = {'is_anonymous': False, 'valid_token':False}
+			for x in jsondata['model']['assignments']['list']:
+				if( Assignment.objects.filter(assignmentID=x['id']).count() > 0):
+					assignment.data = json.loads(json.dumps(x))
+					assignment.save()
+					retval = {'is_anonymous': False, 'valid_token': True}
+				else:
+					c = Course.objects.filter(code=x['course'])[0]
+					a = Assignment(courseID=c, assignmentID=x['id'], assignmentName=x['name'], data = x, ownerID=request.user, access='private')
+					a.save() 
+	else:
+		retval = {'is_anonymous': True, 'valid_token': False}
+	response = HttpResponse("var post_state_result = {0};".format(json.dumps(retval)))
 	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'
 	return response

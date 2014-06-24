@@ -1,0 +1,243 @@
+{namespace scb_instructor_common}
+
+/**
+* Progress bar
+@param step
+@param assignment
+@param assignments
+@param experiment
+*/
+{template .assignment_step}
+{let $eid} 
+		{if $assignments}
+			{$assignments.selected.experiments.selected_id}
+		{elseif $assignment}
+			 {$assignment.experiments.selected_id}
+		{elseif $experiment}
+		   	{$experiment.id}
+		{/if} 
+{/let}
+
+{let $aid} 
+		{if $assignments}
+			{$assignments.selected_id}
+		{elseif $assignment}
+			 {$assignment.id}
+		{/if} 
+{/let}
+{let $wbid} 
+		{if $assignments and $assignments.selected.experiments.selected}
+			{$assignments.selected.experiments.selected.western_blot_list.selected_id}
+		{elseif $assignment}
+			 {$assignment.experiments.selected.western_blot_list.selected_id}
+		{/if} 
+{/let}
+
+{let $fid} 
+		{if $assignments and $assignments.selected.experiments.selected}
+			{$assignments.selected.experiments.selected.facs_list.selected_id}
+		{elseif $assignment}
+			 {$assignment.experiments.selected.facs_list.selected_id}
+		{/if} 
+{/let}
+
+{let $mid} 
+		{if $assignments and $assignments.selected.experiments.selected}
+			{$assignments.selected.experiments.selected.microscopy_list.selected_id}
+		{elseif $assignment}
+			 {$assignment.experiments.selected.microscopy_list.selected_id}
+		{/if} 
+{/let}
+
+{if $step >0}
+<div class='scb_s_assignment_step' role='menu' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" role='navigation'>
+    <a class='scb_s_assignment_step_link scb_f_assignments_step_link {if $step < 2 and $step >0}scb_s_assignment_step_link_active{/if}' href='#view=dashboard' aria-label='Assignments' role='menuitem' >
+        <div class='scb_s_assignment_step_wrapper' style='position: absolute; left: 29px; bottom: 20px;' aria-hidden='true'>
+			<div class='{if $step < 2 and $step >0}scb_s_assignments_link_img_active{else}scb_s_assignments_link_img {/if}' role='presentation' ></div>
+			DASHBOARD
+        </div>
+    </a>
+
+    <div role='menuitem' class='scb_s_assignment_step_link scb_f_lab_notebook_link' aria-label='Lab Notebook' aria-disabled='true' onclick='inConstructionError()'>
+    	<div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
+			<div class='scb_s_lab_notebook_link_img' role='presentation' ></div>
+			Problem Set Builder
+        </div>
+    </div>
+</div>
+{/if}
+{/template}
+/**
+Progress bar
+@param step
+@param last_step
+@param assignment
+@param experiment
+*/
+{template .experiment_step}
+<div class='scb_s_experiment_step' role='navigation'>
+	
+	<div id='scb_s_experiment_step_progress_label_for_assignment' class = 'scb_s_experiment_step_progress_label' role='presentation'> {$assignment.name}:</div>
+	
+		<div class='scb_s_assignment_step_experiment' aria-labelledby='scb_s_experiment_step_progress_label_for_assignment'>
+			
+				<label role='presentation' class="custom-select">
+
+					<select role='select'  aria-label='Experiments' alt='' onchange="location = this.value;">
+						{foreach $e in $assignment.experiments.list}
+							<option role='option' aria-label='{$e.name}' value="#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$e.id}{if $e.last_view == 'microscopy'}&microscopy_id={$e.microscopy_list.selected_id}{elseif $e.last_view == 'facs'}&facs_id={$e.facs_list.selected_id}{elseif $e.last_view == 'western_blot' or $e.last_view == 'western_blot_gel'}&western_blot_id={$e.western_blot_list.selected_id}{/if}" 
+								model_id='{$assignment.id}' sub_model_id='{ $experiment.id }' 
+								{if  $experiment.id  == $e.id}selected="selected"{/if}> 
+								{$e.name}&nbsp;&nbsp;
+								
+							</option>
+						{/foreach}
+					</select>
+					
+				</label>
+			</div>
+			<a class="scb_f_open_experiment scb_f_open_experiment_top scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignment.id}" aria-label='New Experiment' role='button'> NEW EXPERIMENT &nbsp; <span aria-hidden="true" tabindex="-1">+</span></a>
+
+	
+	<br/>
+	<br/>
+    <div class="scb_s_experiment_step_div " role='presentation' style='height:{if $step>3 or   $last_step >4} 112px {else} 112px{/if}' >
+    	
+    	<div class='scb_s_experiment_step_main_steps '>
+			<div class='scb_s_experiment_step_labels' aria-live='polite'>
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_design {if $step>1 or  $last_step > 0}scb_s_experiment_step_visited{/if} {if $step==1 }scb_s_experiment_step_selected{/if}' aria-label='Experiment Design' aria-disabled='{if $step > 1 or  $last_step > 0 or $step==1 }false{else}true{/if}' role ='button'>
+
+					{if $step>1 or  $last_step > 0}
+					<a href='#view=experiment_design&assignment_id={$assignment.id}&experiment_id={$experiment.id}'  role='presentation' >1. DESIGN</a>
+
+					{else}
+					1. DESIGN
+					{/if}
+					
+					
+				<div class="arrow-design-outer" role='presentation' >
+						<div role='presentation'  class="arrow-down-design {if $step==1 }arrow-down-design-selected{elseif $step>1 or  $last_step > 0}arrow-down-design-visited {/if}"></div>
+				</div>
+					{if $step==1 } 
+
+					{/if}	
+				</div>
+		
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_setup_and_run {if $step>2 or $last_step > 3}scb_s_experiment_step_visited{/if} {if $step==2 or $step==3 }scb_s_experiment_step_selected{/if}' aria-label='Setup and Run Experiment'  aria-disabled='{if $step>2 or $last_step > 3 or $step==2 or $step==3}false{else}true{/if}' role ='button' >
+
+					
+					
+					{if $step>2 or $last_step > 3}
+					<a href='#view=experiment_setup&assignment_id={$assignment.id}&experiment_id={$experiment.id}' role='presentation' >2. SETUP & RUN</a>
+						
+					{else}
+					2. SETUP & RUN
+					{/if}
+					<div class="arrow-setup-outer" role='presentation' >
+						<div role='presentation'  class="arrow-down-setup {if $step>2 or $last_step > 3}arrow-down-setup-visited{/if} {if $step==2 or $step==3 }arrow-down-setup-selected{/if}"></div>
+					
+					</div>
+					{if $step==2 or $step==3 }
+					{/if}
+				
+				</div>
+		
+				<div class='scb_s_experiment_step_text scb_s_experiment_step_select_technique {if $step>3 or   $last_step >4}scb_s_experiment_step_visited{/if} {if $step>3 }scb_s_experiment_step_selected{/if}'   aria-label='Select Experiment Technique' aria-disabled='{if $step>3 or   $last_step >4  or $step>3}false{else}true{/if}' role ='button'>
+
+					
+					{if $step>3 or   $last_step >4}
+					<a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}' role='presentation' >3. SELECT TECHNIQUE</a>
+
+					{else}
+					3. SELECT TECHNIQUE
+					{/if}
+					{if $step>3 }
+						<div class="arrow-down-select" role='presentation' ></div>
+					{/if}
+					
+				</div>
+			</div>
+        </div>
+        <div class='scb_s_experiment_step_tech_steps ' role='presentation'  style='{if length($experiment.western_blot_list) > 0 or length($experiment.facs_list) > 0 or length($experiment.microscopy_list) > 0}{else}display:none;{/if}'>
+			<div class='scb_s_experiment_step_buttons_title scb_s_experiment_step_active_title'>Perform Your Technique: </div>
+						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_wb {if length($experiment.western_blot_list) > 0}scb_s_experiment_step_visited{/if} {if $step==5 }scb_s_experiment_step_selected{/if}'  aria-disabled='{if length($experiment.western_blot_list) > 0 or $step==5}false{else}true{/if}' role ='button' aria-label='Start Western Blotting'>
+							{if length($experiment.western_blot_list) <= 0 or  $step==5 }
+							Western Blotting
+							{else}
+							<a role='presentation'  href='#view=western_blot&assignment_id={$assignment.id}&experiment_id={$experiment.id}&western_blot_id={$experiment.western_blot_list.selected_id}'>Western Blotting</a>
+							{/if}
+						</div>
+						<div class=' scb_s_experiment_step_button scb_s_experiment_step_button_facs {if length($experiment.facs_list) > 0}scb_s_experiment_step_visited{/if} {if $step==6 }scb_s_experiment_step_selected{/if}'  aria-disabled='{if length($experiment.facs_list) > 0 or $step==6}false{else}true{/if}' role ='button'  aria-label='Start Flow Cytometry'>
+							
+							{if length($experiment.facs_list) <= 0 or $step==6 }
+							Flow Cytometry
+							{else}
+							<a role='presentation'  href='#view=facs&assignment_id={$assignment.id}&experiment_id={$experiment.id}&facs_id={$experiment.facs_list.selected_id}'>Flow Cytometry</a>
+							{/if}
+						</div>
+						<div class='scb_s_experiment_step_button scb_s_experiment_step_button_micro {if length($experiment.microscopy_list) > 0}scb_s_experiment_step_visited{/if} {if $step==7 }scb_s_experiment_step_selected{/if}'  aria-disabled='{if length($experiment.microscopy_list) > 0 or $step==7}false{else}true{/if}' role ='button' aria-label='Start Microscopy'>
+							{if length($experiment.microscopy_list) <= 0 or $step==7}
+							Microscopy	
+							{else}
+							<a role='presentation'  href='#view=microscopy&assignment_id={$assignment.id}&experiment_id={$experiment.id}&microscopy_id={$experiment.microscopy_list.selected_id}'>Microscopy</a>
+							{/if}
+						</div>
+
+			
+       		 </div>
+
+    	</div>
+</div>
+
+
+
+{/template}
+/**
+* Contact  Overlay
+*/
+{template .contact_overlay}
+<div class='contact_overlay' role='presentation'></div>
+
+{/template}
+
+
+/**
+* Format time - from parts
+* @param days days
+* @param hours hours
+* @param minutes minutes
+* @param seconds seconds
+* @param now is less than one minute from now
+*/
+{template .format_time_detailed_w_sec}
+{if $days ==0 and $hours ==0 and $minutes ==0 and$seconds == 0}
+{else}
+{if $days != 0} {$days} {if $days > 1}d{else}d{/if}{/if}
+{if $hours != 0} {$hours} {if $hours > 1}h{else}h{/if}{/if}
+{if $minutes != 0} {$minutes} {if $minutes > 1}min{else}min{/if}{/if}
+{if $seconds != 0} {$seconds} {if $seconds > 1}sec{else}sec{/if}{/if}
+{if $now}0 sec{/if}
+{/if}
+{/template}
+
+
+/**
+* Format time - from parts
+* @param days days
+* @param hours hours
+* @param minutes minutes
+* @param weeks weeks
+* @param months months
+* @param now is less than one minute from now
+*/
+{template .format_time_detailed}
+{if $weeks==0 and $months == 0 and $days ==0 and $hours ==0 and $minutes ==0 }
+{else}
+{if $months != 0} {$months} {if $months >1}mths{else}mth{/if}{/if}
+{if $weeks != 0} {$weeks} {if $weeks > 1}wks{else}wk{/if}{/if}
+{if $days != 0} {$days} {if $days > 1}d{else}d{/if}{/if}
+{if $hours != 0} {$hours} {if $hours > 1}h{else}h{/if}{/if}
+{if $minutes != 0} {$minutes} {if $minutes > 1}min{else}min{/if}{/if}
+{if $now}0 sec{/if}
+{/if}
+{/template}

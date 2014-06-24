@@ -124,7 +124,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
 //                         $('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
                         state.onhashchange = false;
-                        state.view = 'assignments';
+                        state.view = 'course_setup';
                         delete state.experiment_id;
                         scb.ui.static.InstructorFrame.update_hash(state);
                         ret.redisplay = true;
@@ -143,7 +143,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
 //             	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
                 state.onhashchange = false;
-                state.view = 'assignments';
+                state.view = 'course_setup';
                 delete state.assignment_id;
                 scb.ui.static.InstructorFrame.update_hash(state);
                 ret.redisplay = true;
@@ -169,9 +169,9 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
     workarea.css({
         'height': '100%'
     });
-
+	
     scb.ui.static.InstructorDashboardView.register(workarea);
-	scb.ui.static.InstructorAssignmentsView.register(workarea);
+	scb.ui.static.InstructorCourseSetupView.register(workarea);
     scb.ui.static.ExperimentDesignView.register(workarea);
     scb.ui.static.ExperimentSetupView.register(workarea);
     scb.ui.static.WesternBlotView.register(workarea);
@@ -239,7 +239,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
 
     scb.ui.static.InstructorFrame.clear_NO_PROMPT = function () {
         $.ajax({url: '/accounts/logout/', async: false, timeout: 5 });
-        self.show({view: 'assignments'});
+        self.show({view: 'dashboard'});
         master_model = master_model_data;
         scb.ui.static.InstructorFrame.save();
         starcellbio(context.ui, master_model);
@@ -248,7 +248,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
     scb.ui.static.InstructorFrame.clear = function () {
         var r = prompt("This will restart whole assignment. Your saved data will be lost. Type: 'YES' to proceed.");
         if (r == 'YES') {
-            self.show({view: 'assignments'});
+            self.show({view: 'dashboard'});
             master_model = master_model_data;
             scb.ui.static.InstructorFrame.save();
             starcellbio(context.ui, master_model);
@@ -551,11 +551,12 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
     });
 
 
+
     self.sections.dashboard = new scb.ui.InstructorDashboardView({
         workarea: workarea,
         context: context
     });
-    self.sections.assignments = new scb.ui.InstructorAssignmentsView({
+    self.sections.course_setup = new scb.ui.InstructorCourseSetupView({
         workarea: workarea,
         context: context
     });
@@ -619,6 +620,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
             self.show(parsed.redisplay_state);
             return;
         }
+
         if (state.view == 'dashboard') {
             if (!parsed.assignment) {
                 state.assignment_id = assignments.list[0].id;
@@ -634,8 +636,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
                 assignments: assignments
             });
         }
-        //INSTRUCTOR SHOULD NOT GO HERE
-        if (state.view == 'assignments') {
+        if (state.view == 'course_setup') {
             if (!parsed.assignment) {
                 state.assignment_id = assignments.list[0].id;
                 state.onhashchange = false;
@@ -645,7 +646,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
 
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.InstructorFrame.update_hash(state);
-            self.sections.assignments.show({
+            self.sections.course_setup.show({
                 workarea: workarea,
                 assignments: assignments
             });
@@ -850,20 +851,19 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
             	$('#jqDialog_box').attr('role', 'alertdialog');
                 if (parsed.assignment) {
                     self.show({
-                        view: 'assignments',
+                        view: 'dashboard',
                         assignment: parsed.assignment
                     });
                 }
                 else {
                     self.show({
-                        view: 'assignments'
+                        view: 'dashboard'
                     });
                 }
             }
         }
         if (user_is_auth) {
             $('.scb_s_login_status').text('SIGN OUT');
-            $('.scb_f_try_an_experiment').click();
         }
         scb.ui.static.InstructorFrame.pending_save(parsed);
         scb.ui.static.InstructorFrame.in_ajax_display();
@@ -896,7 +896,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
        console.info( "Ajax save - start request " ) ;
        $.ajax({
             type: "POST",
-            url: 'scb/post_state.js',
+            url: 'scb/edit_assignment.js',
             data: JSON.stringify(post_obj),
             success: function (data){
        console.info( "Ajax save - request success " ) ;
@@ -961,127 +961,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         self.show(state);
     })();
 
-    // init is really not used any more I'll need to move on...
-    self.init = function () {
-
-        /* initialize UI for workarea */
-        var workarea = context.ui;
-        workarea.css({
-            'height': '100%'
-        });
-
-        workarea.html(scb_ui.main_frame());
-
-        workarea.layout({
-            applyDefaultStyles: true,
-            north__minSize: 50,
-            center__paneSelector: '.inner-center',
-            west__paneSelector: '.inner-west',
-            east__paneSelector: '.inner-east'
-        });
-
-        var sidebar = new scb.Sidebar({
-            sections: self.sections,
-            session_list: session_list,
-            workarea: workarea
-        }, context);
-        context.sidebar = sidebar;
-
-        /* initialize DASHBOARD tab */
-        self.sections.dashboard = new scb.DashboardView({
-            workarea: workarea,
-            session_list: session_list,
-            templates: master_model.templates
-        }, context);
-
-        context.dashboard = self.sections.dashboard;
-        /* initialize EXPERIMENT SETUP tab */
-        self.sections.experiment = new scb.ExperimentView({
-            workarea: workarea,
-            session_list: session_list,
-            templates: master_model.templates
-        }, context);
-        context.experiment = self.sections.experiment;
-
-        /* initialize MAKING LYSATES tab */
-        self.sections.making_lysates = new scb.MakingLysatesView({
-            workarea: workarea,
-            session_list: session_list,
-            templates: master_model.templates
-        }, context);
-        context.making_lysates = self.sections.making_lysates
-
-        /* initialize WESTERN BLOT tab */
-        self.sections.western_blot = new scb.WesternBlotView({
-            workarea: workarea,
-            session_list: session_list,
-            templates: master_model.templates
-        }, context);
-        context.western_blot = self.sections.western_blot;
-        
-        /* initialize MICROSCOPY tab */
-
-        self.sections.microscopy = new scb.MicroscopyView({
-        	workarea: workarea,
-        	session_list: session_list,
-        	templates: master_model.templates
-        }, context);
-        context.microscopy=self.sections.microscopy
-
-        sidebar.show();
-        /* click on sidebar to display DASHBOARD */
-        $('.sidebar_accordian>h3>.a_accordian_dashboard', workarea).click(function (e) {
-            self.current_tab.hide(function () {
-                self.sections.dashboard.show(function () {
-                    self.current_tab = self.sections.dashboard;
-                });
-            });
-        });
-        /* click on sidebar to display EXPERIMENT_SETUP */
-        $('.sidebar_accordian>h3>.a_accordian_experiment_setup', workarea).click(function (e) {
-            self.current_tab.hide(function () {
-                self.sections.experiment.show(function () {
-                    self.current_tab = self.sections.experiment;
-                });
-            })
-        });
-        /* click on sidebar to display MAKING_LYSATES */
-        $('.sidebar_accordian>h3>.a_accordian_making_lysates', workarea).click(function (e) {
-            self.current_tab.hide(function () {
-                self.sections.making_lysates.show(function () {
-                    self.current_tab = self.sections.making_lysates;
-                });
-            })
-        });
-        /* click on sidebar to display WESTERN_BLOT */
-        $('.sidebar_accordian>h3>.a_accordian_western_blot', workarea).click(function (e) {
-            self.current_tab.hide(function () {
-                self.sections.western_blot.show(function () {
-                    self.current_tab = self.sections.western_blot;
-                });
-            })
-        });
-        /* as part of init display DASHBOARD tab */
-        self.sections.dashboard.show(function () {
-            self.current_tab = self.sections.dashboard;
-        });
-    };
-    /* register with context SHOW_EXPERIMENT event */
-    context.register('show_experiment', function () {
-        self.current_tab.hide(function () {
-            self.sections.experiment.show(function () {
-                self.current_tab = self.sections.experiment;
-            });
-        })
-    });
-    /* register with context SHOW_MAKING_LYSATES event */
-    context.register('show_making_lysates', function () {
-        self.current_tab.hide(function () {
-            self.sections.making_lysates.show(function () {
-                self.current_tab = self.sections.making_lysates;
-            });
-        })
-    });
+   
 };
 
 function add_login_script(workarea){

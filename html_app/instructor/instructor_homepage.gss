@@ -243,7 +243,7 @@
 .scb_s_instructor_homepage_top_left {
     vertical-align: top;
     display: inline-block;
-    background-image: url('../images/homepage/SCB_Homepage_HeroImage.png');
+    background-image: url('../../images/homepage/SCB_Homepage_HeroImage.png');
     height: 318px;
     width: 678px;
     margin-left:7px

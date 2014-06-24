@@ -188,7 +188,7 @@ scb.ui.InstructorHomepageView = function scb_ui_InstructorHomepageView(gstate) {
 	var self = this;
 	self.show = function(state) {
 		var workarea = gstate.workarea;
-		workarea.html(scb_instructor_dashboard.main({
+		workarea.html(scb_instructor_homepage.main({
 			global_template : gstate.context.master_model,
 			context: gstate.context
 		}));

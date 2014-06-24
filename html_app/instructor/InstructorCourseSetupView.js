@@ -6,17 +6,17 @@ if (typeof (scb.ui ) == 'undefined') {
 
 
 scb.ui.static = scb.ui.static || {};
-scb.ui.static.InstructorAssignmentsView = scb.ui.static.InstructorAssignmentsView || {};
+scb.ui.static.InstructorCourseSetupView = scb.ui.static.InstructorCourseSetupView || {};
 
 
-scb.ui.static.InstructorAssignmentsView.ARROW_OFFSET =  15;
-scb.ui.static.InstructorAssignmentsView.ARROW_DIVISION =  2;
-scb.ui.static.InstructorAssignmentsView.HEADER_WIDTH = 579;
-scb.ui.static.InstructorAssignmentsView.HEADER_OFFSET = 34;
+scb.ui.static.InstructorCourseSetupView.ARROW_OFFSET =  15;
+scb.ui.static.InstructorCourseSetupView.ARROW_DIVISION =  2;
+scb.ui.static.InstructorCourseSetupView.HEADER_WIDTH = 579;
+scb.ui.static.InstructorCourseSetupView.HEADER_OFFSET = 34;
 
 
 
-scb.ui.static.InstructorAssignmentsView.parse = function (element) {
+scb.ui.static.InstructorCourseSetupView.parse = function (element) {
     var assignment_id = $(element).attr('assignment_id');
 
 
@@ -30,8 +30,8 @@ scb.ui.static.InstructorAssignmentsView.parse = function (element) {
     return parsed;
 }
 
-scb.ui.static.InstructorAssignmentsView.scb_assignments_header_link_wrapper = function (element, workarea) {
-		var parsed = scb.ui.static.InstructorAssignmentsView.parse(element);
+scb.ui.static.InstructorCourseSetupView.scb_assignments_header_link_wrapper = function (element, workarea) {
+		var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
 		$('.scb_s_assignment_scroll','.scb_s_assignments_view').scrollTop(0);
 		var first_element =  $('.scb_s_assignments_slider_header' ,'.scb_s_assignments_view').children().first().next().get(0);
 		var last_element =  $('.scb_s_assignments_slider_header','.scb_s_assignments_view').children().last().prev().get(0);
@@ -44,7 +44,7 @@ scb.ui.static.InstructorAssignmentsView.scb_assignments_header_link_wrapper = fu
         $('.scb_s_display_section').hide()
         $('.scb_s_display_section[value="'+section+'"]').show();
         $('.arrow-down-blue').css('left', 
-        	($('.arrow-down-blue').parent().width()/scb.ui.static.InstructorAssignmentsView.ARROW_DIVISION)-scb.ui.static.InstructorAssignmentsView.ARROW_OFFSET+'px');
+        	($('.arrow-down-blue').parent().width()/scb.ui.static.InstructorCourseSetupView.ARROW_DIVISION)-scb.ui.static.InstructorCourseSetupView.ARROW_OFFSET+'px');
         
 
         if(element == first_element){
@@ -70,8 +70,8 @@ scb.ui.static.InstructorAssignmentsView.scb_assignments_header_link_wrapper = fu
 }
 
 
-scb.ui.static.InstructorAssignmentsView.scb_s_assignment_header_img_left = function (element, workarea) {
-		   var parsed = scb.ui.static.InstructorAssignmentsView.parse(element);
+scb.ui.static.InstructorCourseSetupView.scb_s_assignment_header_img_left = function (element, workarea) {
+		   var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
 		   $('.scb_s_assignment_scroll','.scb_s_assignments_view').scrollTop(0);
 		   var first_element =  $('.scb_s_assignments_slider_header','.scb_s_assignments_view').children().first().next().get(0);
 		   var selected_element;
@@ -93,7 +93,7 @@ scb.ui.static.InstructorAssignmentsView.scb_s_assignment_header_img_left = funct
 			$('.arrow-down-blue').detach();
 			$(selected_element).append('<div class="arrow-down-blue"></div>');
 			var section = $(selected_element).attr('value');
-			$('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/scb.ui.static.InstructorAssignmentsView.ARROW_DIVISION)-scb.ui.static.InstructorAssignmentsView.ARROW_OFFSET+'px');
+			$('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/scb.ui.static.InstructorCourseSetupView.ARROW_DIVISION)-scb.ui.static.InstructorCourseSetupView.ARROW_OFFSET+'px');
 
 			
 			$('.scb_s_display_section').hide()
@@ -111,8 +111,8 @@ scb.ui.static.InstructorAssignmentsView.scb_s_assignment_header_img_left = funct
 
 
 
-scb.ui.static.InstructorAssignmentsView.scb_s_assignment_header_img_right = function (element, workarea) {
-	var parsed = scb.ui.static.InstructorAssignmentsView.parse(element);
+scb.ui.static.InstructorCourseSetupView.scb_s_assignment_header_img_right = function (element, workarea) {
+	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
 	$('.scb_s_assignment_scroll','.scb_s_assignments_view').scrollTop(0);
 	var last_element =  $('.scb_s_assignments_slider_header','.scb_s_assignments_view').children().last().prev().get(0);
 	var selected_element;
@@ -134,7 +134,7 @@ scb.ui.static.InstructorAssignmentsView.scb_s_assignment_header_img_right = func
 		$('.arrow-down-blue').detach();
 		$(selected_element).append('<div class="arrow-down-blue"></div>');
 		var section = $(selected_element).attr('value');
-       	$('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/scb.ui.static.InstructorAssignmentsView.ARROW_DIVISION)-scb.ui.static.InstructorAssignmentsView.ARROW_OFFSET+'px');
+       	$('.arrow-down-blue').css('left', ($('.arrow-down-blue').parent().width()/scb.ui.static.InstructorCourseSetupView.ARROW_DIVISION)-scb.ui.static.InstructorCourseSetupView.ARROW_OFFSET+'px');
 
        	
        	$('.scb_s_display_section').hide()
@@ -149,17 +149,17 @@ scb.ui.static.InstructorAssignmentsView.scb_s_assignment_header_img_right = func
 
 }
 
-scb.ui.static.InstructorAssignmentsView.register = function(workarea) {
+scb.ui.static.InstructorCourseSetupView.register = function(workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_assignments_header_link_wrapper', function (e) {
-    	scb.ui.static.InstructorAssignmentsView.scb_assignments_header_link_wrapper(this, e);
+    	scb.ui.static.InstructorCourseSetupView.scb_assignments_header_link_wrapper(this, e);
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_s_assignment_header_img_left', function (e) {
-    		scb.ui.static.InstructorAssignmentsView.scb_s_assignment_header_img_left(this, e);
+    		scb.ui.static.InstructorCourseSetupView.scb_s_assignment_header_img_left(this, e);
     });
     
     scb.utils.off_on(workarea, 'click', '.scb_s_assignment_header_img_right', function (e) {
-    	 scb.ui.static.InstructorAssignmentsView.scb_s_assignment_header_img_right(this, e);
+    	 scb.ui.static.InstructorCourseSetupView.scb_s_assignment_header_img_right(this, e);
     });
     scb.utils.off_on(workarea, 'click', '.scb_assignments_new_experiment', function (e) {
 		 $('.scb_f_experiments_step_link').get(0).click();
@@ -174,7 +174,7 @@ scb.ui.static.InstructorAssignmentsView.register = function(workarea) {
     });
 };
 
-scb.ui.InstructorAssignmentsView = function scb_ui_InstructorAssignmentsView(gstate) {
+scb.ui.InstructorCourseSetupView = function scb_ui_InstructorCourseSetupView(gstate) {
     var self = this;
     var assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
     var courses = _.groupBy(assignments.list, function (assignment) {
@@ -199,14 +199,10 @@ scb.ui.InstructorAssignmentsView = function scb_ui_InstructorAssignmentsView(gst
         
         scb.ui.static.InstructorHomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item',workarea).first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
-        $('.scb_assignments_header_link_wrapper','.scb_s_assignments_view').css('width' , 
-        	(scb.ui.static.InstructorAssignmentsView.HEADER_WIDTH/assignments.selected.template.instructions.length)-scb.ui.static.InstructorAssignmentsView.HEADER_OFFSET+ 'px');
-       	$('.arrow-down-blue','.scb_s_assignments_view').css('left', ($('.arrow-down-blue','.scb_s_assignments_view').parent().width()/scb.ui.static.InstructorAssignmentsView.ARROW_DIVISION)-scb.ui.static.InstructorAssignmentsView.ARROW_OFFSET+'px');
-        
-        $('.scb_s_ref_info_link').click(function(){
+            $('.scb_s_ref_info_link').click(function(){
         	$('.scb_assignments_header_link_wrapper[value="Reference Material"]').click();
         });
-s
+
 
 		$('#main').css({
 				position:'absolute',

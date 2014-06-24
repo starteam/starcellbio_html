@@ -100,8 +100,23 @@
 	text-align: left;
 }
 
+.scb_s_dashboard_button_wrapper{
+	height: 37px;
+}
 
+.scb_s_dashboard_new_assignment_button{
+	border: none;
+	width: 193px;
+	height: 30px;
+	margin: 1px;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-semibold';
+	text-transform: initial;
+	padding-top: 2px;
+	text-align: left;
+	margin-right: 19px;
 
+}
 
 
 

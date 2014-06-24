@@ -29,22 +29,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     context.main_frame = self;
     self.sections = {};
     var assignment = null;
-	if(get_user_result.account_type != 'instructor')
-    	 assignments = new scb.AssignmentList(master_model.assignments, context);
-    else{ 
-    	master_model.assignments.list = []
-    	 _.each(master_model.assignments.edit_list, function (e) {
-			e.permission = 'edit';
-			master_model.assignments.list.push(e);
-    	});
-    	_.each(master_model.assignments.view_list, function (e) {
-			e.permission = 'view';
-			master_model.assignments.list.push(e);
-    	});
-    	delete master_model.assignments.edit_list;
-    	delete master_model.assignments.view_list;
-    	 assignments = new scb.AssignmentList(master_model.assignments, context);
-    }
+    assignments = new scb.AssignmentList(master_model.assignments, context);
     
     user_is_auth = typeof get_student_courses_result != "undefined" ? get_student_courses_result.is_auth : get_instructor_assignments_result.is_auth;
 
@@ -624,7 +609,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 workarea: workarea
             });
         }
-        //INSTRUCTOR SHOULD NOT GO HERE
         if (state.view == 'assignments') {
             if (!parsed.assignment) {
                 state.assignment_id = assignments.selected_id ? assignments.selected_id : get_student_courses_result.is_selected;

@@ -11,6 +11,13 @@ scb.AssignmentList = function scb_AssignmentList(data, context) {
 	scb.ModelHelpers.common_list_code(self, data, proto, context, self);
 
 	self.selected_id = data.selected_id;
+	
+	self.start = function (d) {
+        d = ( typeof (d) == 'undefined' ? {} : d);
+        var ret = new scb.Assignment(d, context, self);
+        data.list.push(d);
+        return ret;
+    }
 }
 
 scb.Assignment = function scb_Assignment(data, context, parent) {

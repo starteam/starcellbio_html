@@ -10,13 +10,14 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        # Examples:
                        url(r'^$', "StarCellBio.views.home", name='home'),
-                       url(r'^instructor/', "StarCellBio.views.home", name='home'),
+#                        url(r'^instructor/', "StarCellBio.views.home", name='home'),
                        url(r'^index.html$', "StarCellBio.views.home"),
                        url(r'^scb/contact$', "StarCellBio.views.contact", name='contact'),
                        url(r'^scb/get_model.js$', "StarCellBio.views.get_model", name='get_model'),
                        url(r'^scb/create_courses.js$', "StarCellBio.views.create_courses", name='create_courses'),
                        url(r'^scb/get_student_courses.js$', "StarCellBio.views.get_student_courses", name='get_student_courses'),
                        url(r'^scb/get_instructor_assignments.js$', "StarCellBio.views.get_instructor_assignments", name='get_instructor_assignments'),
+                       url(r'^scb/edit_assignment.js$', "StarCellBio.views.edit_assignment", name='edit_assignment'),
                        url(r'^scb/get_user.js$', "StarCellBio.views.get_user", name='get_user'),
                        url(r'^scb/post_state.js$', "StarCellBio.views.post_state", name='post_state'),
                        # Uncomment the admin/doc line below to enable admin documentation:
