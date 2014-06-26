@@ -28,23 +28,8 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
     var pending_save = false;
     context.main_frame = self;
     self.sections = {};
-    var assignment = null;
-	if(get_user_result.account_type != 'instructor')
-    	 assignments = new scb.AssignmentList(master_model.assignments, context);
-    else{ 
-    	master_model.assignments.list = []
-    	 _.each(master_model.assignments.edit_list, function (e) {
-			e.permission = 'edit';
-			master_model.assignments.list.push(e);
-    	});
-    	_.each(master_model.assignments.view_list, function (e) {
-			e.permission = 'view';
-			master_model.assignments.list.push(e);
-    	});
-    	delete master_model.assignments.edit_list;
-    	delete master_model.assignments.view_list;
-    	 assignments = new scb.AssignmentList(master_model.assignments, context);
-    }
+    
+    var assignments = new scb.AssignmentList(master_model.assignments, context);
     
     user_is_auth = typeof get_student_courses_result != "undefined" ? get_student_courses_result.is_auth : get_instructor_assignments_result.is_auth;
 
@@ -833,7 +818,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
                 western_blot_gel: parsed.western_blot_gel
             });
         }
-        if (state.view == 'experiment_last') {
+        if (state.view == 'assignment_last') {
 
             if (parsed.experiment) {
                 state.view = parsed.experiment.last_view ? parsed.experiment.last_view : 'experiment_design';

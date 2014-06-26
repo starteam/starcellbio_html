@@ -37,7 +37,7 @@ scb.ui.static.InstructorDashboardView.scb_f_dashboard_new_assignment_button = fu
 		
 		var new_assignment_data = {
 				id: Math.random().toString(36).substring(7),
-				name: 'Shloka',
+				name: '',
 				course: '',
 				course_name: '',
 				description: '',
@@ -114,15 +114,8 @@ scb.ui.InstructorDashboardView = function scb_ui_InstructorDashboardView(gstate)
             courses: courses,
         }));
         
-        scb.ui.static.InstructorHomepageView.select_list_item($('.scb_s_homepage_experimental_design_bullet_item',workarea).first(), gstate.workarea);
         document.title = "Assignments - StarCellBio"
-        $('.scb_assignments_header_link_wrapper','.scb_s_assignments_view').css('width' , 
-        	(scb.ui.static.InstructorDashboardView.HEADER_WIDTH/assignments.selected.template.instructions.length)-scb.ui.static.InstructorDashboardView.HEADER_OFFSET+ 'px');
-       	$('.arrow-down-blue','.scb_s_assignments_view').css('left', ($('.arrow-down-blue','.scb_s_assignments_view').parent().width()/scb.ui.static.InstructorDashboardView.ARROW_DIVISION)-scb.ui.static.InstructorDashboardView.ARROW_OFFSET+'px');
         
-        $('.scb_s_ref_info_link').click(function(){
-        	$('.scb_assignments_header_link_wrapper[value="Reference Material"]').click();
-        });
     
 
 		$('#main').css({

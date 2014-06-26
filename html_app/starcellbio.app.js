@@ -18,13 +18,7 @@ function starcellbio(jquery_selector_main, master_model) {
             master_model = master_model_local;
         }
         
-        //Here is where you make the request for a particular type of assignment 
-//         $.ajax({
-// 			type: "POST",
-// 			url: 'scb/create_courses.js',
-// 			data: JSON.stringify(master_model_data)
-// 		});
-        ////
+        
         if(get_user_result.account_type == '' || get_user_result.account_type == 'student'){
         $.ajax({
 			type: "GET",
@@ -61,8 +55,27 @@ function starcellbio(jquery_selector_main, master_model) {
 			type: "GET",
 			url: '../scb/get_instructor_assignments.js',
 			}).done(function() {
-				get_instructor_assignments_result.view_list = fix_assignment_models(get_instructor_assignments_result.view_list);
+				get_instructor_assignments_result.view_list = fix_assignment_models(get_instructor_assignments_result.list);
+				var assignment = null;
+				var new_assignments_list = []
+				 _.each(get_instructor_assignments_result.list, function (e) {
+				 	if(e.access = 'public'){
+						e.data.permission = 'view';
+						new_assignments_list.push(e.data);
+				 	}
+				 	else if(e.access = 'private'){
+						e.data.permission = 'edit';
+						new_assignments_list.push(e.data);
+				 	}
+				 	else if(e.access = 'archive'){
+						e.data.permission = 'view';
+						new_assignments_list.push(e.data);
+				 	}
+				});
+				get_instructor_assignments_result.list= new_assignments_list;
+
 				master_model.assignments = get_instructor_assignments_result;
+				
 				var init_model = master_model.assignments ? master_model : master_model_data;
 				window.master_model = init_model;
 				for (var i in init_model.assignments.list) {

@@ -74,9 +74,17 @@
 }
 
 
-#jqDialog_options button{
-	outline: none !important;
+.scb_s_instructor_account_title{
+	width: 1002px;
+	height: 20px;
+	color: white;
+	background: #27956c;
+	text-align: center;
+	font-family: "sourcesanspro-semibold";
+	font-size: 11pt;
 }
+
+
 
 .scb_s_instructor_homepage_view {
     width: 1002px;
@@ -84,54 +92,18 @@
     background-color: white;
 }
 
-.scb_s_header {
+.scb_s_instructor_header {
     height: 80px;
     width: 1002px;
     padding-top: 0px;
     background-color: #F4F6F8;
     display: block;
     position: relative;
-    box-shadow: 0 9px 9px -2px #939aa3;
-}
-
-.scb_s_header_line_top {
-    display: block;
-    width: inherit;
-    height: 8px;
-	background: #27956c;
-}
-
-.scb_s_logo {
-    float: left;
-    padding: 15px;
-    display: block;
-    width:25%;
+    box-shadow: 0 3px 9px -2px #939aa3;
 }
 
 
-.scb_s_user_guide_icon{
-	margin-left: 5px;
-}
- 
-.scb_s_user_guide_text {
-	margin-right:-15px;
-}
 
-.scb_s_cabinet_icon{
-	margin-left: 5px;
-}
- 
-.scb_s_cabinet_text{
-	padding-right: 0 !important;
-}
-
-.scb_s_pencil_icon{
-	margin-left: 5px;
-}
-
-.scb_s_pencil_text {
-	margin-right:5px;
-}
 
 .scb_s_instructor_homepage_see_more_button{
 	cursor: pointer;
@@ -145,40 +117,6 @@
 	position: absolute;
 }
 
-.scb_s_new_assignments_experiment{
-	left: 750px;
-	width: 150px;
-	bottom: 27px;
-	position: absolute;
-}
-
-.scb_s_logo_h1 {
-    display:inline;
-    font-size: 0px;
-}
-
-.scb_s_header_tools {
-    float: rigth;
-    vertical-align: top;
-    display: block;
-    text-align: right;
-    margin-top: -10px;
-}
-
-.scb_f_contact, .scb_f_reference, .scb_f_user_guide, .scb_f_login{
-	cursor: pointer;
-}
-
-.scb_f_login{
-	width: 80px;
-	height: 15px;
-	font-size: 20px;
-	position: relative;
-	bottom: 6px;
-	font-family: 'sourcesanspro-semibold';
-	color: #316f94;
-}
-
 
 
 .scb_s_instructor_homepage_content{
@@ -186,53 +124,13 @@
 	margin-left: 20px;
 }
 
-.scb_s_envelope_icon {
-    vertical-align: middle;
-    position: relative;
-    top:-10px;
-}
-
-.scb_s_envelope_text {
-    position: relative;
-    top:-9px;
-}
 
 .scb_s_new_instructor_homepage_experiment{
 	position: relative;
 	bottom: 10px;
 }
 
-.scb_s_cabinet_text {
-    position: relative;
-    top: -9px;
-}
 
-.scb_s_user_guide_text {
-    position: relative;
-    top:-2px;
-}
-
-.scb_s_header_tools_text {
-    text-align: left;;
-    display: inline-block;
-    font-size: 7.5pt;
-    color: black;
-    width:40px;
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-}
-
-.scb_s_header_vertical_line {
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-.scb_s_login_status {
-    padding-right: 15px;
-    margin-bottom: 8px;
-}
 
 .scb_s_instructor_homepage_top {
     display: block;
@@ -298,21 +196,6 @@
 .scb_s_instructor_homepage_blue_line {
     margin-left: 5px;
     width: 200px;
-}
-
-.scb_s_instructor_resources {
-    background: #4690C1;
-    border-width: 0px;
-    background-size: 210px 33px;
-    background-position: center;
-    height: 33px;
-    width: 210px;
-    border-radius: 6px;
-    margin-left: 8px;
-    font-family: 'sourcesanspro-bold';
-    color: white;
-    font-size: 10pt;
-    margin-top: 4px;
 }
 
 
@@ -529,15 +412,7 @@
     margin-left: 20px;
 }
 
-.scb_s_footer {
-    padding: 20px;
-    width: 962px;
-    background-color: #d5dce4;
-    display: block;
-	box-shadow: 0 9px 9px -2px #939aa3 inset;
-    position:relative;
-    z-index: 0;
-}
+
 
 .scb_s_instructor_homepage_footer_divider {
     padding-left: 7px;
@@ -553,31 +428,6 @@
     top:17px;
     color: #727272;
 }
-
-.scb_no_underline {
-    text-decoration: none;
-}
-
-a {
-    text-decoration: none;
-}
-
-#saving {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    font-size:10pt;
-    background-color:green;
-    color:white;
-    display:inline;
-}
-
-#saving_message {
-    display: inline-block;
-    font-size:8pt;
-    background-color:red;
-}
-
 .scb_s_instructor_homepage_top_left_text {
 	color: black;
 	font-size: 11pt;

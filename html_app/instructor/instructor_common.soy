@@ -49,6 +49,7 @@
 		{/if} 
 {/let}
 
+<div class='scb_s_instructor_account_title'>Instructor Account</div>
 {if $step >0}
 <div class='scb_s_assignment_step' role='menu' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" role='navigation'>
     <a class='scb_s_assignment_step_link scb_f_assignments_step_link {if $step < 2 and $step >0}scb_s_assignment_step_link_active{/if}' href='#view=dashboard' aria-label='Assignments' role='menuitem' >
@@ -58,12 +59,7 @@
         </div>
     </a>
 
-    <div role='menuitem' class='scb_s_assignment_step_link scb_f_lab_notebook_link' aria-label='Lab Notebook' aria-disabled='true' onclick='inConstructionError()'>
-    	<div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
-			<div class='scb_s_lab_notebook_link_img' role='presentation' ></div>
-			Problem Set Builder
-        </div>
-    </div>
+
 </div>
 {/if}
 {/template}
@@ -85,7 +81,7 @@ Progress bar
 
 					<select role='select'  aria-label='Experiments' alt='' onchange="location = this.value;">
 						{foreach $e in $assignment.experiments.list}
-							<option role='option' aria-label='{$e.name}' value="#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$e.id}{if $e.last_view == 'microscopy'}&microscopy_id={$e.microscopy_list.selected_id}{elseif $e.last_view == 'facs'}&facs_id={$e.facs_list.selected_id}{elseif $e.last_view == 'western_blot' or $e.last_view == 'western_blot_gel'}&western_blot_id={$e.western_blot_list.selected_id}{/if}" 
+							<option role='option' aria-label='{$e.name}' value="#view=assignment_last&assignment_id={$assignment.id}&experiment_id={$e.id}{if $e.last_view == 'microscopy'}&microscopy_id={$e.microscopy_list.selected_id}{elseif $e.last_view == 'facs'}&facs_id={$e.facs_list.selected_id}{elseif $e.last_view == 'western_blot' or $e.last_view == 'western_blot_gel'}&western_blot_id={$e.western_blot_list.selected_id}{/if}" 
 								model_id='{$assignment.id}' sub_model_id='{ $experiment.id }' 
 								{if  $experiment.id  == $e.id}selected="selected"{/if}> 
 								{$e.name}&nbsp;&nbsp;

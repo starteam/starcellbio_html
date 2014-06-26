@@ -21,6 +21,7 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: white;
+  height: 40px;
   background: #27956c;
   margin: -5px;
 }
@@ -30,11 +31,11 @@
   text-align: justify;
   display: inline-block;
   vertical-align: top;
-  width: 247px;
+  width: 964px;
   margin-right: 10px;
   padding: 5px;
   background-color: #f4f6f8;
-  margin-left: 33px;
+  margin-left: 14px;
   border: 1px solid #d8eee7;
   box-shadow: 0 0 0 0;
   border-radius: 8px;
@@ -44,14 +45,15 @@
   list-style: none;
   margin-top: 22px;
 }
-.arrow-down {
+.arrow-down-instructor {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 20px solid #27956c;
   left: 121px;
-  position: absolute;
+  top: 24px;
+  position: relative;
 }
 .scb_s_dashboard_sidebar_name_selected {
   background: #c9cdd0;
@@ -80,10 +82,50 @@
 }
 .scb_s_dashboard_button_wrapper {
   height: 37px;
+  display: inline;
+}
+.scb_s_dashboard_table_row:hover {
+  background: #ff9;
+}
+.scb_s_dashboard_table_border {
+  border-top: 1px solid #e0e0e0;
+}
+.scb_s_dashboard_table_row {
+  height: 34px;
+}
+.scb_s_dashboard_student_assignment {
+  width: 100px;
+}
+.scb_s_dashboard_assignment_name {
+  width: 200px;
+}
+.scb_s_dashboard_course_name {
+  width: 170px;
+}
+.scb_s_dashboard_course_code, .scb_s_dashboard_permission {
+  width: 120px;
+}
+.scb_s_dashboard_table_heading {
+  font-family: 'sourcesanspro-semibold';
+  font-size: 10pt;
+  text-align: left;
+}
+.scb_s_dashboard_table_body {
+  background-color: #edeef2;
+}
+table.scb_s_dashboard_table {
+  border: 1px solid #27956c;
+  border-radius: 5px;
+  border-spacing: 0;
+  width: 98%;
+  background-color: white;
+  padding-bottom: 2px;
+  margin-top: 50px;
+  margin-left: 10px;
 }
 .scb_s_dashboard_new_assignment_button {
   border: none;
-  width: 193px;
+  width: 211px;
   height: 30px;
   margin: 1px;
   font-size: 10pt;
@@ -92,6 +134,7 @@
   padding-top: 2px;
   text-align: left;
   margin-right: 19px;
+  background: #c82e3e !important;
 }
 .scb_s_dashboard_sidebar_course {
   font-size: 14pt;

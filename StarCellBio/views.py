@@ -74,24 +74,40 @@ def get_user(request, **kwargs):
 	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'
 	return response
+	
+def create_course(request, **kwargs):#
+# 	pudb.set_trace()
+	jstr=request.raw_post_data
+	jsondata = json.loads(jstr)
+	
+	course_code = jsondata['course_code']
+	
+	if(Course.objects.filter(code=course_code).count()==0):
+		c = Course(code = course_code, course_name = jsondata['course_name'])
+		c.save()
+		return HttpResponse('created')
+	else:
+		return HttpResponse('already_exists')
+	
     
-def create_courses(request, **kwargs):# 
+def initialize_courses(request, **kwargs):# 
 	import pudb
 # 	pudb.set_trace()
+	jstr=request.raw_post_data
+	jsondata = json.loads(jstr)
 	if(request.method == 'POST'):
 		#pudb.set_trace()
 		g= Group(name='instructor')
 		s = Group(name='student')
 		content_type = ContentType.objects.get_for_model(User)
-		p = Permission(codename='is_instructor', name='Is instructor', content_type=content_type)
-		p.save()
-		g.save()
-		s.save()
-		g.permissions.add(p)
-		g.save()
+		if(Permission.objects.filter(codename='is_instructor').count() <= 0):
+			p = Permission(codename='is_instructor', name='Is instructor', content_type=content_type)
+			p.save()
+			g.save()
+			s.save()
+			g.permissions.add(p)
+			g.save()
 
-		jstr=request.raw_post_data
-		jsondata = json.loads(jstr)
 		if(jsondata):
 			#make more complex later 
 			for x in jsondata['assignments']['list']:
@@ -366,31 +382,28 @@ def get_instructor_assignments(request, **kwargs):
 # 	pudb.set_trace()
 	retval = []
 	token1 = random.randrange(0, 1000000)
-	view_list = []
-	edit_list = []
-	return_view_list = []
-	return_edit_list = []
+	return_list = []
 	if(request.user.id):
 		account_type = request.user.groups.all()[0].name
 	else:
 		account_type = ''
 	if(account_type == 'instructor'):
 # 		pudb.set_trace()
-		view_list = Assignment.objects.filter(access='public')
-		for v in view_list: 
+		public_list = Assignment.objects.filter(access='public')
+		for v in public_list: 
 			dictionary = ast.literal_eval(v.data)
-			return_view_list.append(dictionary)
-		edit_list = Assignment.objects.filter(ownerID=request.user.id).exclude(access='public')
-		for e in edit_list: 
-			dictionary = ast.literal_eval(e.data)
-			return_edit_list.append(dictionary)
-		retval = {'is_auth': True, 'is_student': False, 'view_list': return_view_list, 'edit_list': return_edit_list, 'token': token1}
+			return_list.append({'access': 'public', 'data': dictionary})
+		private_list = Assignment.objects.filter(ownerID=request.user.id).filter(access='private')
+		for v in private_list: 
+			dictionary = ast.literal_eval(v.data)
+			return_list.append({'access': 'private', 'data': dictionary})
+		archive_list = Assignment.objects.filter(ownerID=request.user.id).filter(access='archive')
+		for v in private_list: 
+			dictionary = ast.literal_eval(v.data)
+			return_list.append({'access': 'archive', 'data': dictionary})
+		retval = {'is_auth': True, 'is_student': False, 'list': return_list, 'token': token1}
 	else:
-		retval = {'is_auth': True, 'is_student': True,'view_list': [], 'edit_list': [], 'token': token1}
-# 	all = []
-# 	for a in Assignment.objects.filter(access=='public'):
-# 		dictionary = ast.literal_eval(a.data)
-# 		all.append(dictionary)	
+		retval = {'is_auth': True, 'is_student': True,'list': [],  'token': token1}	
 	response = HttpResponse("var get_instructor_assignments_result = {0};".format(json.dumps(retval)))
 	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'

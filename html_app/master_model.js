@@ -9600,7 +9600,7 @@ master_model_data = {
 window.master_model_data = master_model_data;
 $.ajax({
 	type: "POST",
-	url: 'scb/create_courses.js',
+	url: 'scb/initialize_courses.js',
 	data: JSON.stringify(master_model_data)
 });
 
