@@ -6,17 +6,11 @@ if (typeof (scb.ui ) == 'undefined') {
 
 
 scb.ui.static = scb.ui.static || {};
-scb.ui.static.InstructorCourseSetupView = scb.ui.static.InstructorCourseSetupView || {};
-
-
-scb.ui.static.InstructorCourseSetupView.ARROW_OFFSET =  15;
-scb.ui.static.InstructorCourseSetupView.ARROW_DIVISION =  2;
-scb.ui.static.InstructorCourseSetupView.HEADER_WIDTH = 579;
-scb.ui.static.InstructorCourseSetupView.HEADER_OFFSET = 34;
+scb.ui.static.InstructorExperimentSetupView = scb.ui.static.InstructorExperimentSetupView || {};
 
 
 
-scb.ui.static.InstructorCourseSetupView.parse = function (element) {
+scb.ui.static.InstructorExperimentSetupView.parse = function (element) {
     var assignment_id = $(element).attr('assignment_id');
 
 
@@ -32,13 +26,13 @@ scb.ui.static.InstructorCourseSetupView.parse = function (element) {
 
 
 
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_assignment_name_value = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_assignment_name_value = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 // 	parsed.assignment.course_name = $(element).val();
 	
 	var state = {
              assignment_id: parsed.assignment.id,
-             view:'course_setup',
+             view:'experiment_setup',
              skip_hash_update: true
          };
          var parsed = scb.ui.static.InstructorFrame.validate_state(state);
@@ -58,13 +52,13 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_assignment_name_value
 
 
 
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_name_value = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_course_name_value = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 // 	parsed.assignment.course_name = $(element).val();
 	
 	var state = {
              assignment_id: parsed.assignment.id,
-             view:'course_setup',
+             view:'experiment_setup',
              skip_hash_update: true
          };
          var parsed = scb.ui.static.InstructorFrame.validate_state(state);
@@ -82,12 +76,12 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_name_value = f
 
 }
 
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_code_value = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_course_code_value = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 	parsed.assignment.course = $(element).val();
 		var state = {
              assignment_id: parsed.assignment.id,
-             view:'course_setup',
+             view:'experiment_setup',
              skip_hash_update: true
          };
          var parsed = scb.ui.static.InstructorFrame.validate_state(state);
@@ -104,8 +98,8 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_code_value = f
 
 }
 
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_save_course_button = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_save_course_button = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
     if(parsed.assignment.course && parsed.assignment.course_name != ''){
     	parsed.assignment.course_prepared = true;
     }
@@ -136,8 +130,8 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_save_course_button = 
 	
 
 }
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_save_assignment_button = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_save_assignment_button = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 	if(parsed.assignment.name != ''){
 		parsed.assignment.assignment_prepared = true;
 	}
@@ -146,11 +140,11 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_save_assignment_butto
 		$.ajax({
 			type: "POST",
 			url: '../scb/create_new_assignment.js',
-			data: JSON.stringify({assignment: parsed.assignment.__data__})
+			data: JSON.stringify({assignment: JSON.stringify(parsed.assignment.__data__)})
 		}).done(function(e) {
 			if(e == 'created'){
 				var state = {
-					assignment_id: parsed.assignment.id,
+					assignment_id: new_assignment.id,
 					view: 'experiment_setup',
 					skip_hash_update: true
 				};
@@ -178,8 +172,8 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_save_assignment_butto
 
 
 	
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_create_new_assignment = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_create_new_assignment = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 	parsed.assignment.is_new_assignment = true;
 	//GOODNESSGRACIOUS ME
 	//INCLUDE ARCHIVED ASSIGNMENTS -- fix the request to one list
@@ -200,15 +194,15 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_create_new_assignment
 
 }
 
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_choose_existing_course = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_choose_existing_course = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 	parsed.assignment.is_new_course = false;	
 	scb.ui.static.InstructorFrame.refresh();
 
 }
 
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_create_new_course = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_create_new_course = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 	parsed.assignment.is_new_course = true;	
 	scb.ui.static.InstructorFrame.refresh();
 
@@ -216,15 +210,15 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_create_new_course = f
 
 
 
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_choose_existing_template = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_choose_existing_template = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 	parsed.assignment.is_new_assignment = false;	
 	scb.ui.static.InstructorFrame.refresh();
 
 }
 
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_template_select = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_template_select = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 	parsed.assignment.is_new_assignment = false;
 	
 	var template_id = $(element).val();
@@ -241,8 +235,8 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_template_select = fun
 
 }
 
-scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_select = function(element, workarea){
-	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_course_select = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupView.parse(element);
 	parsed.assignment.is_new_course = false;
 	
 	var template_id = $(element).val();
@@ -257,48 +251,48 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_select = funct
 
 }
 
-scb.ui.static.InstructorCourseSetupView.register = function(workarea) {
-    scb.utils.off_on(workarea, 'change', '.scb_f_course_setup_course_name_value', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_name_value(this, e);
+scb.ui.static.InstructorExperimentSetupView.register = function(workarea) {
+    scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_course_name_value', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_course_name_value(this, e);
     });
-    scb.utils.off_on(workarea, 'change', '.scb_f_course_setup_course_code_value', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_code_value(this, e);
-    });
-    
-    scb.utils.off_on(workarea, 'change', '.scb_f_course_setup_assignment_name_value', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_assignment_name_value(this, e);
+    scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_course_code_value', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_course_code_value(this, e);
     });
     
-    scb.utils.off_on(workarea, 'click', '.scb_f_course_setup_save_course_button', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_save_course_button(this, e);
+    scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_assignment_name_value', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_assignment_name_value(this, e);
     });
     
-     scb.utils.off_on(workarea, 'click', '.scb_f_course_setup_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_save_assignment_button(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_save_course_button', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_save_course_button(this, e);
     });
     
-    scb.utils.off_on(workarea, 'click', '.scb_f_course_setup_create_new_assignment', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_create_new_assignment(this, e);
+     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_save_assignment_button(this, e);
     });
     
-    scb.utils.off_on(workarea, 'click', '.scb_f_course_setup_create_new_course', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_create_new_course(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_create_new_assignment', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_create_new_assignment(this, e);
     });
     
-    scb.utils.off_on(workarea, 'click', '.scb_f_course_setup_choose_existing_template', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_choose_existing_template(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_create_new_course', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_create_new_course(this, e);
     });
     
-    scb.utils.off_on(workarea, 'click', '.scb_f_course_setup_choose_existing_course', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_choose_existing_course(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_choose_existing_template', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_choose_existing_template(this, e);
     });
     
-    scb.utils.off_on(workarea, 'change', '.scb_s_course_setup_assignment_list  select', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_template_select(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_choose_existing_course', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_choose_existing_course(this, e);
     });
     
-    scb.utils.off_on(workarea, 'change', '.scb_s_course_setup_course_list  select', function (e) {
-    	scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_select(this, e);
+    scb.utils.off_on(workarea, 'change', '.scb_s_experiment_setup_assignment_list  select', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_template_select(this, e);
+    });
+    
+    scb.utils.off_on(workarea, 'change', '.scb_s_experiment_setup_course_list  select', function (e) {
+    	scb.ui.static.InstructorExperimentSetupView.scb_f_experiment_setup_course_select(this, e);
     });
    
     
@@ -309,7 +303,7 @@ scb.ui.static.InstructorCourseSetupView.register = function(workarea) {
   
 };
 
-scb.ui.InstructorCourseSetupView = function scb_ui_InstructorCourseSetupView(gstate) {
+scb.ui.InstructorExperimentSetupView = function scb_ui_InstructorExperimentSetupView(gstate) {
     var self = this;
     var assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
     var courses = _.groupBy(assignments.list, function (assignment) {
@@ -333,7 +327,7 @@ scb.ui.InstructorCourseSetupView = function scb_ui_InstructorCourseSetupView(gst
         else prev_step = null;
         
         
-        workarea.html(scb_instructor_course_setup.main({
+        workarea.html(scb_instructor_experiment_setup.main({
             global_template: gstate.context.master_model,
             assignments: assignments,
             last_step: last_step,

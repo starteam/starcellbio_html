@@ -33,7 +33,7 @@
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	color: white;
-	height: 40px;
+	height: 22px;
 	background: #27956c;
 	margin: -5px;
 }
@@ -63,17 +63,7 @@
 }
 
 
-.arrow-down-instructor {
-	width: 0;
-height: 0;
-border-left: 20px solid transparent;
-border-right: 20px solid transparent;
-border-top: 20px solid #27956c;
-left: 121px;
-top: 24px;
-position: relative;
-	
-}
+
 
 .scb_s_dashboard_sidebar_name_selected{
 	background: #c9cdd0;
@@ -108,20 +98,57 @@ position: relative;
 	display: inline;
 }
 
+.scb_s_dashboard_link{
+	color: #27956c;
+	display:none;
+}
+
+
+.scb_s_dashboard_remove_assignment{
+	 border:0px;
+    width:24px;
+    background: transparent;
+    height: 20px;
+    cursor: pointer;
+    top:0px;
+}
+
+
+.scb_s_dashboard_duplicate_assignment{
+	 border:0px;
+    width:24px;
+    background: transparent;
+    height: 20px;
+    cursor: pointer;
+    top:0px;
+}
+
 .scb_s_dashboard_table_row:hover {
-    background: #ffff99;
+    background: #e3eaf3;
 }
 
 .scb_s_dashboard_table_element {
+	text-align: center;
+	font-family: 'sourcesanspro-bold';	
 }
 
 .scb_s_dashboard_table_border {
-    border-top: 1px solid #e0e0e0;
+    border-top: 3px solid #d5dce4;
 }
 
-.scb_s_dashboard_table_border {
-    border-top: 1px solid #e0e0e0;
+.scb_s_dashboard_copy{
+	width: 46px;
 }
+
+.scb_s_dashboard_trash{
+	width: 57px;
+}
+
+.scb_s_dashboard_archive{
+
+}
+
+
 
 .scb_s_dashboard_table_row{
 	height: 34px;
@@ -129,7 +156,7 @@ position: relative;
 
 
 .scb_s_dashboard_student_assignment{
-	width: 100px;
+	width: 124px;
 }
 
 .scb_s_dashboard_assignment_name{
@@ -148,29 +175,32 @@ position: relative;
 }
 
 .scb_s_dashboard_actions{
+	border-right: 0 !important;
 }
 
 
 
 .scb_s_dashboard_table_heading {
     font-family: 'sourcesanspro-semibold';
-    font-size:10pt;
-    text-align: left;
+    font-size:12pt;
+    text-align: center;
+    background: #f5f6f8;
+    font-weight: bold;
+	color: #316f94;
+	text-transform: capitalize;
 }
 
 .scb_s_dashboard_table_body {
-    background-color: #edeef2;
+    background-color: #FFFFFF;
 }
 
 
 table.scb_s_dashboard_table {
-    border: 1px solid #27956c;
-    border-radius:5px;
+    border: 3px solid #d5dce4;
     border-spacing: 0px;
     width:98%;
     background-color: white;
-    padding-bottom: 2px;
-    margin-top: 50px;
+    margin-top: 70px;
     margin-left: 10px;
 }
 
@@ -184,22 +214,18 @@ table.scb_s_dashboard_table {
 	text-transform: initial;
 	padding-top: 2px;
 	text-align: left;
-	margin-right: 19px;
-	background: #c82e3e !important;
-	
+	position:relative;
+	float: left;
+	left: 10px;	
+	top: 20px;
 
 }
 
 
-
-
-.scb_s_dashboard_sidebar_course {
-    font-size:14pt;
-    font-weight: bold;
-    font-family: 'sourcesanspro-semibold';
-	color: #316f94;
-	text-transform: capitalize;
+table.scb_s_dashboard_table td{
+    border-right: 3px solid #d5dce4;
 }
+
 
 .scb_s_dashboard_sidebar_course_block {
     padding-top:12pt;

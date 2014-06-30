@@ -379,7 +379,7 @@ def get_instructor_assignments(request, **kwargs):
 	import ast
 	import random
 	import pudb
-# 	pudb.set_trace()
+	pudb.set_trace()
 	retval = []
 	token1 = random.randrange(0, 1000000)
 	return_list = []
@@ -389,18 +389,21 @@ def get_instructor_assignments(request, **kwargs):
 		account_type = ''
 	if(account_type == 'instructor'):
 # 		pudb.set_trace()
-		public_list = Assignment.objects.filter(access='public')
+		public_list = Assignment.objects.filter(access='Public')
 		for v in public_list: 
 			dictionary = ast.literal_eval(v.data)
-			return_list.append({'access': 'public', 'data': dictionary})
-		private_list = Assignment.objects.filter(ownerID=request.user.id).filter(access='private')
+			students = StudentAssignment.objects.filter(assignmentID=v.assignmentID).count()
+			return_list.append({'access': 'Public', 'students': students, 'data': dictionary})
+		private_list = Assignment.objects.filter(ownerID=request.user.id).filter(access='Private')
 		for v in private_list: 
 			dictionary = ast.literal_eval(v.data)
-			return_list.append({'access': 'private', 'data': dictionary})
-		archive_list = Assignment.objects.filter(ownerID=request.user.id).filter(access='archive')
+			students = StudentAssignment.objects.filter(assignmentID=v.assignmentID).count()
+			return_list.append({'access': 'Private', 'students': students, 'data': dictionary})
+		archive_list = Assignment.objects.filter(ownerID=request.user.id).filter(access='Archived')
 		for v in private_list: 
 			dictionary = ast.literal_eval(v.data)
-			return_list.append({'access': 'archive', 'data': dictionary})
+			students = StudentAssignment.objects.filter(assignmentID=v.assignmentID).count()
+			return_list.append({'access': 'Archived', 'students': students, 'data': dictionary})
 		retval = {'is_auth': True, 'is_student': False, 'list': return_list, 'token': token1}
 	else:
 		retval = {'is_auth': True, 'is_student': True,'list': [],  'token': token1}	
@@ -411,11 +414,19 @@ def get_instructor_assignments(request, **kwargs):
 	
 	
 def create_new_assignment(request, **kwargs):
-	retval = []
-	response = HttpResponse("var get_instructor_assignments_result = {0};".format(json.dumps(retval)))
-	response.set_cookie("scb_username", request.user.username)
-	response['Content-Type'] = 'text/javascript'
-	return response
+	pudb.set_trace()
+	jstr=request.raw_post_data
+	assignment_data = json.loads(jstr)['assignment']
+	
+	assign_id = assignment_data['id']
+	assign_name = assignment_data['name']
+	
+	if(Assignment.objects.filter(assignmentID=assign_id).count()==0):
+		a = Assignment(courseID=Course.objects.get(code=assignment_data['course']), assignmentID=assign_id, assignmentName=assign_name, data = assignment_data, ownerID=request.user, access=assignment_data['permission'])
+		a.save()
+		return HttpResponse('created')
+	else:
+		return HttpResponse('already_exists')
 		
 	
 def edit_assignment(request, **kwargs):

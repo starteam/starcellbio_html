@@ -31,9 +31,16 @@ scb.Assignment = function scb_Assignment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'course_name','',null,context);
 
 	scb.Utils.initialize_accessor_field(self,data,'last_instruction',0,null,context);
+	scb.Utils.initialize_accessor_field(self,data,'operation','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'permission','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'is_new_assignment',true,null,context);
+	scb.Utils.initialize_accessor_field(self,data,'is_new_course',true,null,context);
 	scb.Utils.initialize_accessor_field(self,data,'template_id',null,null,context);
+	scb.Utils.initialize_accessor_field(self,data,'students',0,null,context);
+	
+	scb.Utils.initialize_accessor_field(self,data,'course_prepared',null,null,context);
+	scb.Utils.initialize_accessor_field(self,data,'assignment_prepared',null,null,context);
+
 	
 	
 

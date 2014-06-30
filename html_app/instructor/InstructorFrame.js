@@ -158,7 +158,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
     scb.ui.static.InstructorDashboardView.register(workarea);
 	scb.ui.static.InstructorCourseSetupView.register(workarea);
     scb.ui.static.ExperimentDesignView.register(workarea);
-    scb.ui.static.ExperimentSetupView.register(workarea);
+    scb.ui.static.InstructorExperimentSetupView.register(workarea);
     scb.ui.static.WesternBlotView.register(workarea);
     scb.ui.static.MicroscopyView.register(workarea);
     scb.ui.static.WesternBlotGelView.register(workarea);
@@ -552,7 +552,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         context: context
     });
 
-    self.sections.experiment_setup = new scb.ui.ExperimentSetupView({
+    self.sections.experiment_setup = new scb.ui.InstructorExperimentSetupView({
         workarea: workarea,
         context: context
     });
@@ -636,32 +636,20 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
                 assignments: assignments
             });
         }
-        if (state.view == 'experiment_design') {
-            if (!parsed.experiment) {
-                delete state.onhashchange;
-                var experiment = parsed.assignment.experiments.start({});
-                state.experiment_id = experiment.id;
-                var History = window.History;
-                if (History.enabled) {
-                    History.replaceState("New Experiment", "New Experiment", '#' + $.param(state));
-                }
-                state.onhashchange = true;
+        if (state.view == 'experiment_design') {}
+        if (state.view == 'experiment_setup') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
                 self.show(state);
                 return;
             }
-            self.sections.experiment_design.show({
-                workarea: workarea,
-                assignment: parsed.assignment,
-                experiment: parsed.experiment
-            });
-        }
-        if (state.view == 'experiment_setup') {
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
             self.sections.experiment_setup.show({
                 workarea: workarea,
-                assignment: parsed.assignment,
-                experiment: parsed.experiment,
-                mode: 'readwrite',
-                last_view: 'experiment_setup',
+                assignments: assignments
             });
         }
         if (state.view == 'experiment_run') {

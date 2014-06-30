@@ -43,7 +43,8 @@ scb.ui.static.InstructorDashboardView.scb_f_dashboard_new_assignment_button = fu
 				description: '',
 				experiments: {},
 				template: {},
-				permission: 'edit'
+				permission: 'Private',
+				operation: 'edit'
 		};
 		
 		
@@ -54,10 +55,7 @@ scb.ui.static.InstructorDashboardView.scb_f_dashboard_new_assignment_button = fu
 			skip_hash_update: true
 		};   
      scb.ui.static.InstructorFrame.refresh(state);
-		
-// 		var new_assignment = new scb.Assignment(new_assignment_data, context, parent);
-		// assignments = new scb.AssignmentList(master_model.assignments, context);
-// 		scb.ui.static.InstructorFrame.refresh();
+
 }
 
 
@@ -115,8 +113,10 @@ scb.ui.InstructorDashboardView = function scb_ui_InstructorDashboardView(gstate)
         }));
         
         document.title = "Assignments - StarCellBio"
-        
-    
+       
+		    $('.scb_s_dashboard_table_row').hover(function(){
+					$('.scb_s_dashboard_link', this).toggle();        
+       		 });
 
 		$('#main').css({
 				position:'absolute',

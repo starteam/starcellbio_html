@@ -44,29 +44,38 @@ Assignment assignments
 {template .display_assignments}
 <div class='scb_s_dashboard_sidebar'>
     <h1 class='scb_s_dashboard_sidebar_title'>Your Assignments: <div class='scb_s_dashboard_sidebar_name scb_s_dashboard_button_wrapper'>
-       		<button assignment_id='{$assignments.selected.id}' class=" scb_f_dashboard_new_assignment_button scb_s_dashboard_new_assignment_button scb_s_navigation_button" href="#view=course_setup" aria-label='New Experiment' role='button'> Create a New Assignment &nbsp; &#43;</button> <div class="arrow-down-instructor"></div> 
 			</div>  </h1>
+	
+	       		<button assignment_id='{$assignments.selected.id}' class=" scb_f_dashboard_new_assignment_button scb_s_dashboard_new_assignment_button scb_s_navigation_button" href="#view=course_setup" aria-label='New Experiment' role='button'> Create a New Assignment &nbsp; &#43;</button> 
+
     
    <table class="scb_s_dashboard_table " aria-label='Table of Samples' role='grid'>
 			<thead class='scb_s_dashboard_table_head' >
-				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_assignment_name' >Assignment Name
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_assignment_name ' >Assignment Name
 				</td>
-				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_course_name' >Course Name
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_course_name ' >Course Name
 				</td>
-				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_course_code' >Code
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_course_code ' >Course Code
 				</td>
-				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_permission' >Permission
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_permission ' >Permission
 				</td>
-				<td role='columnheader'  class='scb_s_dashboard_table_heading  scb_s_dashboard_student_assignment' >Student <br/> Assignments
+				<td role='columnheader'  class='scb_s_dashboard_table_heading  scb_s_dashboard_student_assignment ' >Student <br/> Assignments
 				</td>
-				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_actions' >Actions
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_actions ' colspan='3' >Actions
 				</td>
 			</thead>
 			<tbody class='scb_s_dashboard_table_body'>
 				{foreach $assignment in $assignments.list}
 				<tr class='scb_s_dashboard_table_row' role='row' aria-label='Sample'assignment_id='{$assignment.id}' >
 					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border' rowspan="1">
-					{$assignment.name}	
+					{$assignment.name}<br/>
+					{if $assignment.operation == 'view'}
+					<a class='scb_s_dashboard_link' href='#view=course_setup'>View</a>
+					{else}
+					<a class='scb_s_dashboard_link' href='#view=course_setup'>Edit</a>
+					{/if}
+										
+					<span class='scb_s_dashboard_link'  > | Preview</span>
 					</td>
 					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border' rowspan="1">
 					{$assignment.course_name}	
@@ -78,67 +87,23 @@ Assignment assignments
 					{$assignment.permission}	
 					</td>
 					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_student_assignment' rowspan="1" >
-					0
+					{$assignment.students}
 					</td>
-					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border' rowspan="1" >
-					Buttons here	
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_trash'  >	
+						<button role='button' aria-label='Delete'  class='scb_f_dashboard_remove_assignment scb_s_dashboard_remove_assignment' 
+							assignment_id='{$assignment.id}' ><img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+						</button>
+					</td>
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_copy' >	
+						<button role='button' aria-label='Copy'  class='scb_f_dashboard_duplicate_assignment scb_s_dashboard_duplicate_assignment' 
+								assignment_id='{$assignment.id}' ><img alt="" title="Copy" role='presentation' src="images/setup/scb_copy.png">
+						</button>
+					</td>
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_actions scb_s_dashboard_archive' >	
 					</td>
 				  </tr>
 				{/foreach}
 			</tbody>
 		</table> 
-    
-    
-    
-    
-    
-    
-    
-    <ul aria-label="Assignments"  >
-<!-- 
-    	<button class="scb_s_dashboard_new_course_button scb_s_navigation_button" href="#view=experiment_design&assignment_id={$assignments.selected.id}" aria-label='New Experiment' role='button'> Create A New Course</button>
- -->
-        
-        <div class='scb_s_dashboard_sidebar_course_block'>
-            
-            <div class='scb_s_assignments_sidebar_course' role='heading'>Edit Assignments</div>
-            
-            
-        {foreach $assignment in $assignments.list}
-			{if $assignment.permission == 'edit'}
-			<li role="link" class='scb_s_dashboard_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_dashboard_sidebar_name_selected{/if}' aria-selected='{if $assignments.selected.id == $assignment.id}true{else}false{/if}'  >
-				<a role='presentation' href='#view=course_setup&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}
-
-				</a>
-				{if $assignments.selected.id == $assignment.id}
-					<img role='presentation' class='scb_s_selection_arrow_img'  src='../../images/homepage/selection_arrow.png' >
-				{/if}
-			</li>
-			{/if}
-        {/foreach}
-        </div>
-
-
-		
-            <div class='scb_s_dashboard_sidebar_course_block'>
-            
-            <div class='scb_s_assignments_sidebar_course' role='heading'>View Assignments</div>
-        {foreach $assignment in $assignments.list}
-			{if $assignment.permission == 'view'}
-			<li role="link" class='scb_s_dashboard_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_dashboard_sidebar_name_selected{/if}' aria-selected='{if $assignments.selected.id == $assignment.id}true{else}false{/if}'  >
-				<a role='presentation' href='#view=course_setup&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}
-
-				</a>
-				{if $assignments.selected.id == $assignment.id}
-					<img role='presentation' class='scb_s_selection_arrow_img'  src='../../images/homepage/selection_arrow.png' >
-				{/if}
-			</li>
-			{/if}
-        {/foreach}
-        </div>
-        
-        
-        
-    </ul>
 </div>
 {/template}

@@ -95,6 +95,11 @@
 	margin-left: 28px;
 }
 
+.scb_s_course_setup_course_list{
+	display: inline-block;
+	margin-left: 28px;
+}
+
 .scb_s_course_setup_save_button{
 	border: none;
 	width: 193px;

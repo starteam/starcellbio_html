@@ -4511,7 +4511,234 @@ var __assigment_706 = {
 ///NEW ASSIGNMENTS//////////
 
 		
+var blank_model = {
+        id: '',
+        name: '',
+        course: '',
+    	course_name: '',
+        description: '',
+        experiments: {},
+        template: {
+        	random_choose: true,
+        	randomize_all: false,
+        	random_order: [],
+        	finished_random: false,
+            instructions: [
+            	['','']
+            	],
+            ui: {
+                experimental_design: {
+                    techniques: [ 'wb' , 'facs', 'micro' ]
+                },
+                experiment_setup: {
+                    table: [ //
+                        {kind: "cell_plate", title: " ", editable: false},
+                        {kind: 'cell_line', title: 'Strain', editable: false}, //
+                        {kind: 'treatments',
+                            children: [//
+                                {kind: 'drug', title: 'Treatment', editable: false},//
+                                {kind: 'duration', title: 'Time', editable: false},
+                            ]
+                        },//
+                        {kind: 'actions', title: 'Actions'}//
+                    ],//
+                    actions: [
 
+                    ]
+                },
+                western_blot: {format: "%CELL_LINE%, %TREATMENT%",
+                    keys: {
+                        '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+                        '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
+                    }
+                },
+                microscopy: {
+					disable_blur: true,
+					disable_brightness: true
+				},
+                add_multiple_dialog: {	
+                	order: ['S2'],
+					headings: [
+							'','Strain', 'Treatment', 'Treatment Duration'
+							],
+                    'S2': {
+                        rows: [
+                            {
+                                cells: [
+                                	{kind: 'checkbox', name: "B", treatment_id: 'buffer'},
+                                    {kind: 'text', text: 'S2'},
+                                    {kind: 'text', text: 'Control siRNA'},
+                                    {kind: 'text', text: "3 days"}
+                                ],
+                                treatment_id: 'buffer',
+                                cell_treatments: {
+                                    B: [
+                                        {cell_line: 'S2',
+                                            treatment_list: {list: [
+                                                {collection_id: 'default', microscope: ['rgb', 'g', 'gr', 'rb'],
+                                                duration_value: 3600 * 24 * 3, duration: '3 d',
+                                                drug_list: {list: [
+                                                    {drug_id: 'nc', concentration_id: '100'},
+                                                ]}, temperature: '25'
+                                                }
+                                            ]}}
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            add_new_row_instructions: 'add new row instructions',
+            collections:{
+				'': {
+					name: ''
+				}
+			},
+            concentrations: {
+                100: {
+                    name: '',
+                    value: 100
+                }
+            },
+            drugs: {
+                'nc': {
+                    name: 'Control siRNA',
+                    concentrations: [100]
+                }
+
+            },
+            experiment_temperatures: {
+                '25': {
+                    name: "30" + degreeEntity + "C"
+                }
+            },
+            cell_lines: {
+                'S2': {
+                    name: 'S2'
+                }
+
+            },
+            time_unit: {
+                kind: 'minutes'
+            },
+            primary_anti_body: {
+            	order: ['chk1'],
+            	'chk1': {
+                    name: 'rabbit anti-chk1',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 54, intensity: 0}
+                    ],
+                    gel_name: 'chk1'
+                },
+            },//
+            secondary_anti_body: {
+                'm': {
+                    name: 'rabbit anti-mouse'
+                }
+            },//
+            lysate_kinds: {
+                'whole': {
+                    name: 'Whole Cell'
+                }
+            },
+            facs_kinds: {
+                'whole':{
+            		name:'PI',
+            		conditions: {
+            			'whole': {name: 'PI'}
+            		}
+            	}
+            },
+            micro_kinds: {
+            	'IF':{
+            		name:'Antibody-labeling IF',
+            		conditions: {
+            			'rgb': {name: 'γ-tubulin (red), α-tubulin (green), DAPI (blue)',
+            			short_name: 'R:γ-tub, G:α-tub, B:DAPI'},
+            			'g': {name: 'H2B (green)',
+            			short_name: 'G:H2B'}
+            		}
+            	}
+        	},
+        	slides: {
+				 'img0001': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_DNA-blue_Mad2-red/Mad2_off_kinetochores/Mad2_Cytoplasm_cropped.jpg'
+			},	 
+        	slide_parser: {
+				'default':{
+					'IF':{
+						'rgb':{ 
+							'interphase':[
+								 [{'hash': 'img0004', 'if_type': 'merge', 'mag': 'N/A'}]
+							]
+						}
+					}
+				}
+		},
+            model: { // models
+                western_blot: {
+                    'cyto': {
+                        'parser_fixed': [
+                            {
+                                transfer_function: 'delta',
+                                cutoff: 1,
+                                drug: 'nc',
+                                cell_line: 'S2',
+                                above_marks: [
+                                	{
+                                        name: 'Rad21',
+                                        weight: 68, // 34&35
+                                        intensity: 4,
+                                        primary_anti_body: ['rad21']
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                facs: {
+                	'ticks': [50, 100, 150, 250],
+                	'max': 250,
+                    'dna': {
+                        'parser_simple': [
+                            {
+                                match: [],
+                                shape: '2-peak-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'nc',
+                                shape: '2-peak-normal-400'
+                            }
+                        ]
+
+                    }
+                },
+                microscopy: {
+                	'valid': ['S2', 'nc'],
+                	'slide': {
+                	
+                		'conditions_parser':[
+                		{
+                			match: [],
+                			
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['nc'],
+                			conditions: 'rgb',
+                			phenotype: 'composite3'
+                		}
+                		]
+                		
+                	}
+                }
+                
+            }
+        }
+    } 
     
 		
 

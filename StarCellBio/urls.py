@@ -20,6 +20,9 @@ urlpatterns = patterns('',
                        url(r'^scb/edit_assignment.js$', "StarCellBio.views.edit_assignment", name='edit_assignment'),
 
                        url(r'^scb/create_course.js$', "StarCellBio.views.create_course", name='create_course'),
+                       url(r'^scb/create_new_assignment.js$', "StarCellBio.views.create_new_assignment", name='create_new_assignment'),
+
+                       
                        url(r'^scb/get_user.js$', "StarCellBio.views.get_user", name='get_user'),
                        url(r'^scb/post_state.js$', "StarCellBio.views.post_state", name='post_state'),
                        # Uncomment the admin/doc line below to enable admin documentation:

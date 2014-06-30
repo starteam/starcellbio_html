@@ -10,7 +10,7 @@
 */
 {template .main}
 <div class='scb_s_experiment_setup_view' >
-    {call scb_homepage.display_header}
+    {call scb_instructor_homepage.display_header}
     {param global_template:$global_template /}
     {param context:$context /}
     {/call}
@@ -27,7 +27,7 @@
     {param view: 'select_course'/}
     {/call}
     </div>
-    {call scb_homepage.display_footer}
+    {call scb_instructor_homepage.display_footer}
     {param global_template:$global_template /}
     {/call}
 </div>
@@ -36,7 +36,6 @@
 
 /**
 Assignment description
-@param view
 */
 {template .display_assignment}
 
@@ -44,13 +43,8 @@ Assignment description
     	<div class='scb_s_abstract_title'>
             Assignment Editor
         </div>
-    {if $view == 'select_course'}
-    <div class='scb_s_experiment_setup_title'>Course Setup</div>
+    <div class='scb_s_experiment_setup_title'>Experiment Setup</div>
     
-    
-    {elseif $view == 'create_assignment'}
-    
-    {/if}
     
 
 </div>

@@ -73,7 +73,7 @@
   margin-left: 7px;
   padding-top: 10px;
 }
-.scb_s_course_setup_assignment_list {
+.scb_s_course_setup_assignment_list, .scb_s_course_setup_course_list {
   display: inline-block;
   margin-left: 28px;
 }
