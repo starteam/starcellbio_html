@@ -1,0 +1,119 @@
+{namespace scb_instructor_experiment_setup_page1}
+
+/**
+* Assignment selector
+* @param global_template
+* @param last_step
+* @param prev_step
+* @param assignments AssignmentsView
+* @param assignment
+* @param context
+*/
+{template .main}
+<div class='scb_s_experiment_setup_view' >
+    {call scb_instructor_homepage.display_header}
+    {param global_template:$global_template /}
+    {param context:$context /}
+    {/call}
+        {call scb_instructor_common.assignment_step}
+        {param step:2/}
+        {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
+        {param assignments:assignments/}
+    {/call}
+    <div class='scb_s_experiment_setup_container' role='main'>
+    {call scb_instructor_homepage.display_assignment_navigation}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
+    {call .display_assignment}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
+    </div>
+    {call scb_instructor_homepage.display_footer}
+    {param global_template:$global_template /}
+    {/call}
+</div>
+{/template}
+
+
+/**
+Assignment description
+@param assignments
+@param assignment
+*/
+{template .display_assignment}
+<div class='scb_s_course_setup_description '>
+    	<div class='scb_s_abstract_title'>
+            Assignment Editor
+        </div>
+    <div class='scb_s_experiment_setup_title'>Experiment Setup</div>
+    <div class='scb_s_experiment_setup_subtitle'>In this section, you will specify the strains and treatments available for experimentation.</div>
+    <br/>
+	{call .display_experiment_setup}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
+</div>
+{/template}
+
+
+/**
+Experiment Setup Description
+@param assignment
+*/
+{template .display_experiment_setup}
+    
+    <div class='scb_s_assignment_setup_course_name_heading'>1. Name the strains available for experimentation.</div><br/>
+
+    <div class='scb_s_experiment_setup_strains_list_container'>
+    a) Name the strains available for experimentation. 
+
+    		{if not $assignment.template.cell_lines}
+    		<ol class='scb_s_experiment_setup_list'>
+    			<li class='scb_s_experiment_setup_list_item'>
+    				<input type='text' class='scb_s_experiment_setup_text_field ' placeholder="Strain A" value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+    			</li>
+    			<li class='scb_s_experiment_setup_list_item'>
+				<button class='scb_s_gray_button scb_s_experiment_setup_add_button'>
+				ADD
+				</button>
+				</li>
+    		</ol>
+    			
+    		{else}
+    		<ol class='scb_s_experiment_setup_list'>
+				{foreach $strain in keys($assignment.template.cell_lines)}
+					<li class='scb_s_experiment_setup_list_item'>
+						<input type='text' class='scb_s_experiment_setup_text_field ' placeholder="Strain A" value='{$strain}'  title='{$strain}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+					</li>
+				{/foreach}
+				<li class='scb_s_experiment_setup_list_item'>
+				<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button'>
+				ADD
+				</button>
+				</li>
+			</ol>
+    		{/if}
+    </div>
+    
+    
+    <br/>
+        <div class='scb_s_assignment_setup_course_name_heading'>2. Select the experimental variables you wish to define for your treatment protocols. Select all that apply.</div><br/>
+        <div class='scb_s_experiment_setup_checkbox_container'>
+        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" disabled='disabled' checked='checked' aria-checked="false"> <span>Treatment Concentration</span></div>
+        	
+        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}"  disabled='disabled' checked='checked' aria-checked="false"> <span>Temperature</span></div>
+
+        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>Treatment Start Time</span></div>
+
+        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>Treatment Duration</span></div>
+        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>Collection Time</span></div>
+
+        </div>
+
+{/template}
+

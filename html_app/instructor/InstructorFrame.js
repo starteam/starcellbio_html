@@ -157,8 +157,9 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
 	
     scb.ui.static.InstructorDashboardView.register(workarea);
 	scb.ui.static.InstructorCourseSetupView.register(workarea);
+	scb.ui.static.InstructorAssignmentSetupView.register(workarea);
     scb.ui.static.ExperimentDesignView.register(workarea);
-    scb.ui.static.InstructorExperimentSetupView.register(workarea);
+    scb.ui.static.InstructorExperimentSetupPage1View.register(workarea);
     scb.ui.static.WesternBlotView.register(workarea);
     scb.ui.static.MicroscopyView.register(workarea);
     scb.ui.static.WesternBlotGelView.register(workarea);
@@ -545,6 +546,11 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         workarea: workarea,
         context: context
     });
+    
+    self.sections.assignment_setup = new scb.ui.InstructorAssignmentSetupView({
+        workarea: workarea,
+        context: context
+    });
 	
 
     self.sections.experiment_design = new scb.ui.ExperimentDesignView({
@@ -552,7 +558,7 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         context: context
     });
 
-    self.sections.experiment_setup = new scb.ui.InstructorExperimentSetupView({
+    self.sections.experiment_setup_page1 = new scb.ui.InstructorExperimentSetupPage1View({
         workarea: workarea,
         context: context
     });
@@ -636,8 +642,8 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
                 assignments: assignments
             });
         }
-        if (state.view == 'experiment_design') {}
-        if (state.view == 'experiment_setup') {
+        
+        if (state.view == 'assignment_setup') {
             if (!parsed.assignment) {
                 state.assignment_id = assignments.list[0].id;
                 state.onhashchange = false;
@@ -647,7 +653,22 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
 
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.InstructorFrame.update_hash(state);
-            self.sections.experiment_setup.show({
+            self.sections.assignment_setup.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+        if (state.view == 'experiment_setup_page1') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.experiment_setup_page1.show({
                 workarea: workarea,
                 assignments: assignments
             });

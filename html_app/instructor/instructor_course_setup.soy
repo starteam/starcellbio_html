@@ -5,7 +5,6 @@
 * @param global_template
 * @param last_step
 * @param prev_step
-* @param kind
 * @param assignments AssignmentsView
 * @param assignment
 * @param context
@@ -23,11 +22,15 @@
         {param assignments:assignments/}
     {/call}
     <div class='scb_s_course_setup_container' role='main'>
+    {call scb_instructor_homepage.display_assignment_navigation}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
     {call .display_assignment}
     {param global_template:$global_template /}
     {param assignments:$assignments/}
     {param assignment: $assignment/}
-    {param view: $kind/}
     {/call}
     </div>
     {call scb_instructor_homepage.display_footer}
@@ -39,7 +42,6 @@
 
 /**
 Assignment description
-@param view
 @param assignment
 @param assignments
 */
@@ -49,21 +51,13 @@ Assignment description
     	<div class='scb_s_abstract_title'>
             Assignment Editor
         </div>
-    {if $view == 'select_course'}
 		{call .select_course}
 		{param assignment: $assignment/}
 		{param assignments:$assignments/}
 		{/call}
-    {elseif $view == 'create_assignment'}
-		{call .create_assignment}
-		{param assignment: $assignment/}
-		{param assignments:$assignments/}
-		{/call}
-    {/if}
-    
-
 </div>
 {/template}
+
 
 
 /**
@@ -99,10 +93,7 @@ Assignment Course Setup
 </div>
 
 
-
-
-
-
+{if $assignment.is_new_course}
 
 <div class='scb_s_course_setup_course_name_heading'>1. What is the name of your course?</div>
 <input type='text' class='scb_s_course_setup_text_field scb_f_course_setup_course_name_value' placeholder="Course Name"  value='{$assignment.course_name}'  title='{$assignment.course_name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
@@ -112,54 +103,11 @@ Assignment Course Setup
 <div class='scb_s_course_setup_course_name_heading'>2. What course code would you like to provide to your students?</div>
 <input type='text' class='scb_s_course_setup_text_field scb_f_course_setup_course_code_value' placeholder="Course Code" value='{$assignment.course}'  title='{$assignment.course}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
 
+{/if}
 
+<p/>
 <button assignment_id='{$assignment.id}' class=" scb_f_course_setup_save_course_button scb_s_course_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
 
-
 {/template}
 
-
-
-/**
-Assignment Create Assignment
-@param assignment
-@param assignments
-*/
-{template .create_assignment}
-<div class='scb_s_course_setup_title'>Assignment Setup</div>
-<div class='scb_s_course_setup_radio_choice scb_f_course_setup_create_new_assignment' assignment_id='{$assignment.id}' aria-label='Create New Assignment' ><input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"  {if $assignment.is_new_assignment}checked{/if} /><span class='scb_s_course_setup_radio_text'>Create new assignment OR</span></div>
-<div class='scb_s_course_setup_radio_choice scb_f_course_setup_choose_existing_template' assignment_id='{$assignment.id}'><input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"  {if not $assignment.is_new_assignment}checked{/if} /><span class='scb_s_course_setup_radio_text'>Use an existing assignment as a template.</span>
-<br/>
-	
-</div>
-<div class="scb_s_course_setup_assignment_list" assignment_id='{$assignment.id}'  aria-labelledby="scb_s_experiment_step_progress_label_for_assignment">
-		<label role="presentation" class="custom-select">
-		<select role="select" aria-label="Experiments" alt="" assignment_id='{$assignment.id}'>
-			{foreach $a in $assignments.list}
-				{if $a.operation =='view'}
-				<option role='option' aria-label='{$a.name}' value="{$a.id}" 
-					assignment_id='{$assignment.id}'
-					{if  $assignment.template_id  == $a.id}selected="selected"{/if}> 
-					{$a.name}&nbsp;&nbsp;
-					
-				</option>
-				{/if}
-			{/foreach}
-		</select>
-		</label>
-		
-
-	</div>
-<br/>
-<br/>
-
-
-<div class='scb_s_course_setup_course_name_heading'>3. What is the name of the assignment?</div>
-<input type='text' class='scb_s_course_setup_text_field scb_f_course_setup_assignment_name_value' placeholder="Assignment Name" value='{$assignment.name}'  title='{$assignment.name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
-
-
-<button assignment_id='{$assignment.id}' class=" scb_f_course_setup_save_assignment_button scb_s_course_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
-
-
-{/template}
 

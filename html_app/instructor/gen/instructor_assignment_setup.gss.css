@@ -1,14 +1,14 @@
-.scb_s_course_setup_view {
+.scb_s_assignment_setup_view {
   width: 1002px;
   background-color: #f4f6f8;
 }
-.scb_s_course_setup_container {
+.scb_s_assignment_setup_container {
   background: white;
   padding-bottom: 51px;
   position: relative;
   z-index: 1;
 }
-.scb_s_course_setup_title {
+.scb_s_assignment_setup_title {
   font-size: 16pt;
   font-weight: bold;
   font-family: 'sourcesanspro-semibold';
@@ -17,7 +17,7 @@
   padding-top: 15px;
   padding-left: 10px;
 }
-.scb_s_course_setup_course_name_heading {
+.scb_s_assignment_setup_course_name_heading {
   font-size: 12pt;
   font-weight: bold;
   font-family: 'sourcesanspro-semibold';
@@ -25,7 +25,7 @@
   padding-top: 15px;
   padding-left: 10px;
 }
-.scb_s_course_setup_text_field {
+.scb_s_assignment_setup_text_field {
   font-size: 10pt;
   font-family: 'sourcesanspro-regular';
   color: black;
@@ -34,22 +34,22 @@
   margin-top: 10px;
   padding: 5px;
 }
-.scb_s_course_setup_text_field::-webkit-input-placeholder {
+.scb_s_assignment_setup_text_field::-webkit-input-placeholder {
   color: #999;
 }
-.scb_s_course_setup_radio_text {
+.scb_s_assignment_setup_radio_text {
   position: relative;
   top: -1px;
 }
-.scb_s_course_setup_radio_choice {
+.scb_s_assignment_setup_radio_choice {
   margin-left: 7px;
   padding-top: 10px;
 }
-.scb_s_course_setup_assignment_list, .scb_s_course_setup_course_list {
+.scb_s_assignment_setup_assignment_list {
   display: inline-block;
   margin-left: 28px;
 }
-.scb_s_course_setup_save_button {
+.scb_s_assignment_setup_save_button {
   border: none;
   width: 193px;
   height: 30px;
@@ -61,7 +61,7 @@
   text-align: left;
   margin-right: 19px;
 }
-.scb_s_course_setup_back_button {
+.scb_s_assignment_setup_back_button {
   border: none;
   width: 193px;
   height: 30px;

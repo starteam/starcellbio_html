@@ -32,6 +32,45 @@
   padding-top: 15px;
   padding-left: 10px;
 }
+.scb_s_experiment_setup_subtitle {
+  font-size: 10pt;
+  font-weight: bold;
+  font-family: 'sourcesanspro-semibold';
+  color: #316f94;
+  padding-left: 10px;
+}
+.scb_s_experiment_setup_strains_list_container {
+  position: relative;
+  top: -1px;
+  left: 28px;
+}
+.scb_s_experiment_setup_list {
+  margin-left: -10px;
+  margin-top: -5px;
+}
+.scb_s_experiment_setup_checkbox_container {
+  position: relative;
+  left: 7px;
+}
+.scb_s_experiment_setup_wrapper {
+  padding-bottom: 0;
+  margin-bottom: 7px;
+}
+.scb_s_experiment_setup_list_item {
+  margin-bottom: 10px;
+}
+.scb_s_experiment_setup_add_button {
+  width: 104px;
+}
+.scb_s_experiment_setup_text_field {
+  font-size: 10pt;
+  font-family: 'sourcesanspro-regular';
+  color: black;
+  font-style: italic;
+  width: 90px;
+  margin-top: 10px;
+  padding: 5px;
+}
 .scb_s_abstract_title {
   color: white;
   background: #27956c;

@@ -379,7 +379,7 @@ def get_instructor_assignments(request, **kwargs):
 	import ast
 	import random
 	import pudb
-	pudb.set_trace()
+# 	pudb.set_trace()
 	retval = []
 	token1 = random.randrange(0, 1000000)
 	return_list = []
@@ -400,7 +400,7 @@ def get_instructor_assignments(request, **kwargs):
 			students = StudentAssignment.objects.filter(assignmentID=v.assignmentID).count()
 			return_list.append({'access': 'Private', 'students': students, 'data': dictionary})
 		archive_list = Assignment.objects.filter(ownerID=request.user.id).filter(access='Archived')
-		for v in private_list: 
+		for v in archive_list: 
 			dictionary = ast.literal_eval(v.data)
 			students = StudentAssignment.objects.filter(assignmentID=v.assignmentID).count()
 			return_list.append({'access': 'Archived', 'students': students, 'data': dictionary})
@@ -414,7 +414,7 @@ def get_instructor_assignments(request, **kwargs):
 	
 	
 def create_new_assignment(request, **kwargs):
-	pudb.set_trace()
+# 	pudb.set_trace()
 	jstr=request.raw_post_data
 	assignment_data = json.loads(jstr)['assignment']
 	

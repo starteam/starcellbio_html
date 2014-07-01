@@ -59,19 +59,19 @@ function starcellbio(jquery_selector_main, master_model) {
 				var assignment = null;
 				var new_assignments_list = []
 				 _.each(get_instructor_assignments_result.list, function (e) {
-				 	if(e.access = 'Public'){
+				 	if(e.access == 'Public'){
 						e.data.permission = 'Public';
 						e.data.operation = 'view';
 						e.data.students = e.students;
 						new_assignments_list.push(e.data);
 				 	}
-				 	else if(e.access = 'Private'){
+				 	else if(e.access == 'Private'){
 						e.data.permission = 'Private';
 						e.data.operation = 'edit';
 						e.data.students = e.students;
 						new_assignments_list.push(e.data);
 				 	}
-				 	else if(e.access = 'Archived'){
+				 	else if(e.access == 'Archived'){
 						e.data.permission = 'Archived';
 						e.data.operation = 'view';
 						e.data.students = e.students;

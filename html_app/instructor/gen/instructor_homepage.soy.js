@@ -16,3 +16,10 @@ scb_instructor_homepage.display_footer = function(opt_data, opt_sb) {
   output.append('<div class=\'scb_s_footer\' role=\'footer\'><a href="http://web.mit.edu/" role=\'link\'><img class=\'scb_s_instructor_homepage_footer_logo\' src=\'images/homepage/mit_logo.png\' alt=\'MIT Logo\'></a><img class=\'scb_s_instructor_homepage_footer_divider\' role=\'presentation\'  src=\'images/homepage/small_divider.png\' alt=\'\'><a href=\'http://star.mit.edu/about.html\' role=\'link\'  aria-label=\'About Star\' target=\'_blank\'><span aria-hidden=\'true\' class=\'scb_s_instructor_homepage_footer_about\' src=\'images/homepage/about_star.png\'>About STAR</span></a><img class=\'scb_s_instructor_homepage_footer_divider\' role=\'presentation\'  src=\'images/homepage/small_divider.png\' alt=\'\'><a href=\'http://star.mit.edu/cellbio/support.html\' role=\'link\' aria-label=\'Funding\'   target=\'_blank\'><span aria-hidden=\'true\' class=\'scb_s_instructor_homepage_footer_support\' src=\'images/homepage/support.png\'>Funding</span></a></div>');
   return opt_sb ? '' : output.toString();
 };
+
+
+scb_instructor_homepage.display_assignment_navigation = function(opt_data, opt_sb) {
+  var output = opt_sb || new soy.StringBuilder();
+  output.append('<div class=\'scb_s_assignment_outline_description \'><div class=\'scb_s_outline_title\'>Builder Outline:</div></div>');
+  return opt_sb ? '' : output.toString();
+};
