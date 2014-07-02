@@ -160,6 +160,8 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
 	scb.ui.static.InstructorAssignmentSetupView.register(workarea);
     scb.ui.static.ExperimentDesignView.register(workarea);
     scb.ui.static.InstructorExperimentSetupPage1View.register(workarea);
+    scb.ui.static.InstructorExperimentSetupPage2View.register(workarea);
+
     scb.ui.static.WesternBlotView.register(workarea);
     scb.ui.static.MicroscopyView.register(workarea);
     scb.ui.static.WesternBlotGelView.register(workarea);
@@ -563,6 +565,11 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         context: context
     });
 
+	self.sections.experiment_setup_page2 = new scb.ui.InstructorExperimentSetupPage2View({
+        workarea: workarea,
+        context: context
+    });
+
     self.sections.facs = new scb.ui.FacsView({
         workarea: workarea,
         context: context
@@ -669,6 +676,21 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
             assignments.selected_id = state.assignment_id ? state.assignment_id : null;
             scb.ui.static.InstructorFrame.update_hash(state);
             self.sections.experiment_setup_page1.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+        if (state.view == 'experiment_setup_page2') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.experiment_setup_page2.show({
                 workarea: workarea,
                 assignments: assignments
             });
@@ -859,7 +881,6 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         if (user_is_auth) {
             $('.scb_s_login_status').text('SIGN OUT');
         }
-        scb.ui.static.InstructorFrame.pending_save(parsed);
         scb.ui.static.InstructorFrame.in_ajax_display();
 
     }

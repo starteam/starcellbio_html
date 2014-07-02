@@ -44,6 +44,34 @@
   top: -1px;
   left: 28px;
 }
+.scb_s_experiment_setup_remove_treatment {
+  border: 0;
+  width: 24px;
+  background: transparent;
+  height: 20px;
+  cursor: pointer;
+  top: 0;
+  position: relative;
+  left: 175px;
+}
+.scb_s_experiment_setup_remove_temperature {
+  border: 0;
+  width: 24px;
+  background: transparent;
+  height: 20px;
+  cursor: pointer;
+  top: 0;
+  position: relative;
+  left: 16px;
+}
+.scb_s_experiment_setup_course_name_heading {
+  font-size: 12pt;
+  font-weight: bold;
+  font-family: 'sourcesanspro-semibold';
+  color: #27956c;
+  padding-top: 15px;
+  padding-left: 10px;
+}
 .scb_s_experiment_setup_list {
   margin-left: -10px;
   margin-top: -5px;
@@ -61,6 +89,26 @@
 }
 .scb_s_experiment_setup_add_button {
   width: 104px;
+}
+.scb_s_experiment_setup_treatment_name_title {
+  position: relative;
+  left: 61px;
+}
+.scb_s_experiment_setup_treatment_concentration_title {
+  position: relative;
+  left: 192px;
+}
+.scb_s_experiment_setup_treatment_concentration_unit_title {
+  position: relative;
+  left: 283px;
+}
+.scb_s_experiment_setup_treatment_concentration_edit {
+  position: relative;
+  left: 78px;
+}
+.scb_s_experiment_setup_treatment_concentration_unit_edit {
+  position: relative;
+  left: 157px;
 }
 .scb_s_experiment_setup_text_field {
   font-size: 10pt;

@@ -72,13 +72,14 @@ Experiment Setup Description
     <div class='scb_s_experiment_setup_strains_list_container'>
     a) Name the strains available for experimentation. 
 
-    		{if not $assignment.template.cell_lines}
+    		{if length(keys($assignment.template.cell_lines)) <=0}
     		<ol class='scb_s_experiment_setup_list'>
-    			<li class='scb_s_experiment_setup_list_item'>
-    				<input type='text' class='scb_s_experiment_setup_text_field ' placeholder="Strain A" value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+    			<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+    				<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item' placeholder="Strain A" 
+    					value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
     			</li>
-    			<li class='scb_s_experiment_setup_list_item'>
-				<button class='scb_s_gray_button scb_s_experiment_setup_add_button'>
+    			<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+				<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
 				ADD
 				</button>
 				</li>
@@ -87,12 +88,13 @@ Experiment Setup Description
     		{else}
     		<ol class='scb_s_experiment_setup_list'>
 				{foreach $strain in keys($assignment.template.cell_lines)}
-					<li class='scb_s_experiment_setup_list_item'>
-						<input type='text' class='scb_s_experiment_setup_text_field ' placeholder="Strain A" value='{$strain}'  title='{$strain}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+					<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+						<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item' placeholder="Strain A" 
+							strain_id='{$strain}' value='{$assignment.template.cell_lines[$strain].name}'  title='{$assignment.template.cell_lines[$strain].name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
 					</li>
 				{/foreach}
-				<li class='scb_s_experiment_setup_list_item'>
-				<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button'>
+				<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+				<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
 				ADD
 				</button>
 				</li>
@@ -106,12 +108,16 @@ Experiment Setup Description
         <div class='scb_s_experiment_setup_checkbox_container'>
         	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" disabled='disabled' checked='checked' aria-checked="false"> <span>Treatment Concentration</span></div>
         	
-        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}"  disabled='disabled' checked='checked' aria-checked="false"> <span>Temperature</span></div>
+        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox scb_f_experiment_setup_select_temperature" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false" {if $assignment.has_temperature}checked{/if}> <span>Temperature</span></div>
 
-        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>Treatment Start Time</span></div>
+        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox scb_f_experiment_setup_select_start_time" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false" {if $assignment.has_start_time}checked{/if}> <span>Treatment Start Time</span></div>
 
-        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>Treatment Duration</span></div>
-        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>Collection Time</span></div>
+        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox scb_f_experiment_setup_select_duration" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false" {if $assignment.has_duration}checked{/if}> <span>Treatment Duration</span></div>
+        	<div class='scb_s_experiment_setup_wrapper'><input class="scb_s_experiment_setup_checkbox scb_f_experiment_setup_select_collection_time" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false" {if $assignment.has_collection_time}checked{/if}> <span>Collection Time</span></div>
+
+        </div>
+        <div>
+        <button assignment_id='{$assignment.id}' class=" scb_f_experiment_setup_page1_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
 
         </div>
 

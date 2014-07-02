@@ -58,11 +58,13 @@ scb.ui.static.InstructorAssignmentSetupView.scb_f_assignment_setup_assignment_na
 
 scb.ui.static.InstructorAssignmentSetupView.scb_f_assignment_setup_save_assignment_button = function(element, workarea){
 	var parsed = scb.ui.static.InstructorAssignmentSetupView.parse(element);
+	scb.ui.static.InstructorFrame.pending_save(parsed);
 	if(parsed.assignment.name != ''){
 		parsed.assignment.assignment_prepared = true;
 	}
 	else parsed.assignment.assignment_prepared = false;
 	if(parsed.assignment.assignment_prepared){
+		parsed.assignment.template = MASTER_TEMPLATE;
 		$.ajax({
 			type: "POST",
 			url: '../scb/create_new_assignment.js',
@@ -90,9 +92,6 @@ scb.ui.static.InstructorAssignmentSetupView.scb_f_assignment_setup_save_assignme
 			}
 		});
 	}
-
-
-	
 
 }
 

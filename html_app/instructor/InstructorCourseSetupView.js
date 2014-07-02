@@ -82,6 +82,7 @@ scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_course_code_value = f
 
 scb.ui.static.InstructorCourseSetupView.scb_f_course_setup_save_course_button = function(element, workarea){
 	var parsed = scb.ui.static.InstructorCourseSetupView.parse(element);
+	scb.ui.static.InstructorFrame.pending_save(parsed);
     if(parsed.assignment.course && parsed.assignment.course_name != ''){
     	parsed.assignment.course_prepared = true;
     }

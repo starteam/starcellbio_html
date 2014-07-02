@@ -23,237 +23,181 @@ scb.ui.static.InstructorExperimentSetupPage1View.parse = function (element) {
 }
 
 
-scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_assignment_name_value = function(element, workarea){
+scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_page1_save_assignment_button = function(element, workarea){
 	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-// 	parsed.assignment.course_name = $(element).val();
+	
+	scb.ui.static.InstructorFrame.pending_save(parsed);
 	
 	var state = {
-             assignment_id: parsed.assignment.id,
-             view:'experiment_setup',
-             skip_hash_update: true
-         };
-         var parsed = scb.ui.static.InstructorFrame.validate_state(state);
-         if( parsed.redisplay )
-         {
-             alert( "INVALID ELEMENT!");
-         }
-         if( parsed.assignment )
-         {
-             parsed.assignment.name = $(element).val();
-         }
-	
-// 	scb.ui.static.InstructorFrame.refresh();
-	
-
-}
-
-scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_course_name_value = function(element, workarea){
-	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-// 	parsed.assignment.course_name = $(element).val();
-	
-	var state = {
-             assignment_id: parsed.assignment.id,
-             view:'experiment_setup',
-             skip_hash_update: true
-         };
-         var parsed = scb.ui.static.InstructorFrame.validate_state(state);
-         if( parsed.redisplay )
-         {
-             alert( "INVALID ELEMENT!");
-         }
-         if( parsed.assignment )
-         {
-             parsed.assignment.course_name = $(element).val();
-         }
-	
-// 	scb.ui.static.InstructorFrame.refresh();
-	
-
-}
-
-scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_course_code_value = function(element, workarea){
-	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-	parsed.assignment.course = $(element).val();
-		var state = {
-             assignment_id: parsed.assignment.id,
-             view:'experiment_setup',
-             skip_hash_update: true
-         };
-         var parsed = scb.ui.static.InstructorFrame.validate_state(state);
-         if( parsed.redisplay )
-         {
-             alert( "INVALID ELEMENT!");
-         }
-         if( parsed.assignment )
-         {
-				parsed.assignment.course = $(element).val();
-         }
-	
-// 	scb.ui.static.InstructorFrame.refresh();
-
-}
-
-scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_save_course_button = function(element, workarea){
-	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-    if(parsed.assignment.course && parsed.assignment.course_name != ''){
-    	parsed.assignment.course_prepared = true;
-    }
-    else parsed.assignment.course_prepared = false;
-	if(parsed.assignment.course_prepared){
-	$.ajax({
-			type: "POST",
-			url: '../scb/create_course.js',
-			data: JSON.stringify({course_code: parsed.assignment.course, course_name: parsed.assignment.course_name})
-		}).done(function(e) {
-			if(e == 'created'){
-				scb.ui.static.InstructorFrame.refresh();
-			}
-			else{
-				$('html').css('overflow', 'hidden');
-				$('body').prepend(scb_experiment_setup.general_error_overlay());
-
-				$.jqDialog.alert('This course has already been created. Select an already created course.', 
-				function() {	$('html').css('overflow', 'visible');
-							$('.error_overlay').remove()/* callback function for 'OK' button*/ });
-				$('.jqDialog_header').remove();
-				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-				$('#jqDialog_box').attr('role', 'alertdialog');
-			}
-		});
-	}
-
-	
-
-}
-
-scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_save_assignment_button = function(element, workarea){
-	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-	if(parsed.assignment.name != ''){
-		parsed.assignment.assignment_prepared = true;
-	}
-	else parsed.assignment.assignment_prepared = false;
-	if(parsed.assignment.assignment_prepared){
-		$.ajax({
-			type: "POST",
-			url: '../scb/create_new_assignment.js',
-			data: JSON.stringify({assignment: JSON.stringify(parsed.assignment.__data__)})
-		}).done(function(e) {
-			if(e == 'created'){
-				var state = {
-					assignment_id: new_assignment.id,
-					view: 'experiment_setup',
-					skip_hash_update: true
-				};
+		assignment_id: parsed.assignment.id,
+		view: 'experiment_setup_page2',
+		skip_hash_update: true
+	};
 				   
-			 	scb.ui.static.InstructorFrame.refresh(state);
-			}
-			else{
-				$('html').css('overflow', 'hidden');
-				$('body').prepend(scb_experiment_setup.general_error_overlay());
-
-				$.jqDialog.alert('This assignment has already been created. Create a new assignment.', 
-				function() {	$('html').css('overflow', 'visible');
-							$('.error_overlay').remove()/* callback function for 'OK' button*/ });
-				$('.jqDialog_header').remove();
-				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-				$('#jqDialog_box').attr('role', 'alertdialog');
-			}
-		});
-	}
-
-
-	
-
+	scb.ui.static.InstructorFrame.refresh(state);
 }
 
-scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_create_new_assignment = function(element, workarea){
-	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-	parsed.assignment.is_new_assignment = true;
-	//GOODNESSGRACIOUS ME
-	//INCLUDE ARCHIVED ASSIGNMENTS -- fix the request to one list
-	//ROWS FOR PUBLIC PRIVATE FUNCTIONALITY
-	//MANAGEABLE
-	
-	//ASSIGNMENT ROWS
-	//TABLE FOR LAYOUT
-	//FIX COURSE SETUP
-	
-	
-		parsed.assignment.description = assignment_template.description;
-	parsed.assignment.last_instruction = assignment_template.last_instruction;
-	parsed.assignment.name = assignment_template.name;
-	parsed.assignment.template = assignment_template.template;
-	parsed.assignment.template_id = assignment_template.id;
-	scb.ui.static.InstructorFrame.refresh();
 
-}
-
-scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_choose_existing_course = function(element, workarea){
-	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-	parsed.assignment.is_new_course = false;	
-	scb.ui.static.InstructorFrame.refresh();
-
-}
-
-scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_create_new_course = function(element, workarea){
-	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-	parsed.assignment.is_new_course = true;	
-	scb.ui.static.InstructorFrame.refresh();
-
-}
-
-scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_choose_existing_template = function(element, workarea){
-	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-	parsed.assignment.is_new_assignment = false;	
-	scb.ui.static.InstructorFrame.refresh();
-
-}
 
 scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_add_strain = function(element, workarea){
 	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-	parsed.assignment.is_new_course = false;	
+	var strain_id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	parsed.assignment.template.cell_lines[strain_id] = {name: $(element).val()};
+// 	if(!_.contains(parsed.assignment.template.ui.add_multiple_dialog.order, strain_id))
+// 		parsed.assignment.template.ui.add_multiple_dialog.order.push(strain_id);
+// 	var treatment_id = Math.random().toString(16).substring(4);
+// 	parsed.assignment.template.ui.add_multiple_dialog[strain_id] = {
+// 		rows: [
+// 			{
+// 				cells: [
+// 					{kind: 'checkbox', name: "X", treatment_id: treatment_id},
+// 					{kind: 'text', text: ''},
+// 					{kind: 'text', text: ''}
+// 				],
+// 				treatment_id: treatment_id,
+// 				cell_treatments: {
+// 					'X': [
+// 						{cell_line: '',
+// 							treatment_list: {list: [
+// 								{temperature: ''
+// 								}
+// 							]}}
+// 					]
+// 				}
+// 			}
+// 		]
+// 	};
+	scb.ui.static.InstructorFrame.refresh();
+
+}
+
+scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_list_item = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
+	var strain_id = $(element).attr('strain_id') ? $(element).attr('strain_id'):  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	parsed.assignment.template.cell_lines[strain_id] = {name: $(element).val()};
+// 	if(!_.contains(parsed.assignment.template.ui.add_multiple_dialog.order, strain_id))
+// 		parsed.assignment.template.ui.add_multiple_dialog.order.push(strain_id);
+// 	var treatment_id = Math.random().toString(16).substring(4);
+// 	parsed.assignment.template.ui.add_multiple_dialog[strain_id] = {
+// 		rows: [
+// 			{
+// 				cells: [
+// 					{kind: 'checkbox', name: "X", treatment_id: treatment_id},
+// 					{kind: 'text', text: ''},
+// 					{kind: 'text', text: ''}
+// 				],
+// 				treatment_id: treatment_id,
+// 				cell_treatments: {
+// 					"X": [
+// 						{cell_line: '',
+// 							treatment_list: {list: [
+// 								{temperature: '',
+// 									drug_list: {
+// 										list: [
+// 											{drug_id: '', concentration_id: ''},
+// 										]
+// 									}           
+// 								}
+// 							]}}
+// 					]
+// 				}
+// 			}
+// 		]
+// 	};
+	
+	
+	scb.ui.static.InstructorFrame.refresh();
+
+}
+
+scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_temperature = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
+	parsed.assignment.has_temperature = !parsed.assignment.has_temperature;
+// 	_.each(parsed.assignment.template.ui.add_multiple_dialog, function(value, key, list){
+// 		if(parsed.assignment.has_temperature){
+// 			if(key == 'headings' || key == 'order'){
+// 			}
+// 			else{
+// 				var cell_treatment_hash = _.keys(value.rows[0].cell_treatments)[0];
+// 				value.rows[0].cell_treatments[cell_treatment_hash]
+// 				value.rows[0].cell_treatments[cell_treatment_hash][0].treatment_list.list[0].temperature = "";
+// 			}
+// 		}
+// 		else{
+// 			if(key == 'headings' || key == 'order'){
+// 			}
+// 			else{
+// 				var cell_treatment_hash = _.keys(value.rows[0].cell_treatments)[0];
+// 				value.rows[0].cell_treatments[cell_treatment_hash]
+// 				delete value.rows[0].cell_treatments[cell_treatment_hash][0].treatment_list.list[0].temperature;
+// 			}
+// 			
+// 		}
+// 	});
+
+	scb.ui.static.InstructorFrame.refresh();
+
+}
+
+scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_start_time = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
+	parsed.assignment.has_start_time = !parsed.assignment.has_start_time;
+	//schedule_value: 0, schedule: 'immediately'
+	
+		
+	scb.ui.static.InstructorFrame.refresh();
+
+}
+
+scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_duration = function(element, workarea){
+	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
+	
+	//duration_value: 3600 * 24 * 3, duration: '3 d',
+	
+	parsed.assignment.has_duration = !parsed.assignment.has_duration;	
+	scb.ui.static.InstructorFrame.refresh();
+
+}
+
+scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_collection_time = function(element, workarea){
+	//collection_id: 'default'
+	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
+	parsed.assignment.has_collection_time = !parsed.assignment.has_collection_time;	
 	scb.ui.static.InstructorFrame.refresh();
 
 }
 
 
 scb.ui.static.InstructorExperimentSetupPage1View.register = function(workarea) {
-    scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_course_name_value', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_course_name_value(this, e);
+	scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_list_item', function (e) {
+    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_list_item(this, e);
     });
-    scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_course_code_value', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_course_code_value(this, e);
-    });
-    
-    scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_assignment_name_value', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_assignment_name_value(this, e);
-    });
-    
-    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_save_course_button', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_save_course_button(this, e);
-    });
-    
-     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_save_assignment_button(this, e);
-    });
-    
-    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_create_new_assignment', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_create_new_assignment(this, e);
-    });
-    
-    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_create_new_course', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_create_new_course(this, e);
-    });
-    
-    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_choose_existing_template', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_choose_existing_template(this, e);
-    });
-    
-    
-    
     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_add_strain', function (e) {
     	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_add_strain(this, e);
     });
+    
+    
+	
+	scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_select_temperature', function (e) {
+    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_temperature(this, e);
+    });
+    scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_select_start_time', function (e) {
+    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_start_time(this, e);
+    });
+    scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_select_duration', function (e) {
+    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_duration(this, e);
+    });
+    scb.utils.off_on(workarea, 'change', '.scb_f_experiment_setup_select_collection_time', function (e) {
+    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_collection_time(this, e);
+    });
+    
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_page1_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_page1_save_assignment_button(this, e);
+    });
+
+
+    
+    
 
   
 };

@@ -6,6 +6,7 @@
 * @param last_step
 * @param prev_step
 * @param assignments AssignmentsView
+* @param assignment
 * @param context
 */
 {template .main}
@@ -21,10 +22,15 @@
         {param assignments:assignments/}
     {/call}
     <div class='scb_s_experiment_setup_container' role='main'>
+    {call scb_instructor_homepage.display_assignment_navigation}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
     {call .display_assignment}
     {param global_template:$global_template /}
     {param assignments:$assignments/}
-    {param view: 'select_course'/}
+    {param assignment: $assignment/}
     {/call}
     </div>
     {call scb_instructor_homepage.display_footer}
@@ -36,22 +42,306 @@
 
 /**
 Assignment description
+@param assignments
+@param assignment
 */
 {template .display_assignment}
-<div class='scb_s_assignment_outline_description '>
-    	<div class='scb_s_outline_title'>
-            Builder Outline: 
-        </div>
-</div>
-
 <div class='scb_s_course_setup_description '>
     	<div class='scb_s_abstract_title'>
             Assignment Editor
         </div>
     <div class='scb_s_experiment_setup_title'>Experiment Setup</div>
-    
-    
-
+    <div class='scb_s_experiment_setup_subtitle'>In this section, you will specify the strains and treatments available for experimentation.</div>
+    <br/>
+	{call .display_experiment_setup}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
 </div>
 {/template}
 
+
+
+/**
+Experiment Setup Description
+@param assignment
+@param assignments
+*/
+{template .display_experiment_setup}
+    
+    <div class='scb_s_assignment_setup_course_name_heading'>3. Define the treatment protocols available for experimentation.</div><br/>
+
+    <div class='scb_s_experiment_setup_strains_list_container'>
+    a) Name and define your treatment variables. 
+			{call .display_treatment_edit}
+			{param assignment: $assignment/}
+			{param assignments:$assignments/}
+			{/call}
+			{if $assignment.has_temperature}
+			{call .display_temperature_edit}
+			{param assignment: $assignment/}
+			{/call}
+			{/if}
+			{if $assignment.has_duration}
+			{call .display_duration_edit}
+			{param assignment: $assignment/}
+			{/call}
+			{/if}
+			{if $assignment.has_collection_time}
+			{call .display_collection_edit}
+			{param assignment: $assignment/}
+			{/call}
+			{/if}
+			{if $assignment.has_start_time}
+			{call .display_start_time_edit}
+			{param assignment: $assignment/}
+			{/call}
+			{/if}
+			
+			
+			
+    </div>
+    
+
+
+{/template}
+
+
+/**
+Treatment Setup Description
+@param assignment
+@param assignments
+*/
+{template .display_treatment_edit}
+	<div>
+	<span class='scb_s_experiment_setup_treatment_name_title'>Name</span>
+	<span class='scb_s_experiment_setup_treatment_concentration_title'>Concentration</span>
+	<span class='scb_s_experiment_setup_treatment_concentration_unit_title'>Concentration Units</span>
+	</div>	
+	{if length(keys($assignment.template.drugs)) <=0}
+	<ol class='scb_s_experiment_setup_list'>
+		<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+			<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+				value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+			<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_concentration_edit' placeholder="Strain A" 
+				value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+			<div class="scb_s_course_setup_course_list" assignment_id='{$assignment.id}'  aria-labelledby="scb_s_experiment_step_progress_label_for_course">
+					<label role="presentation" class="custom-select">
+					<select role="select" aria-label="Experiments" alt="" assignment_id='{$assignment.id}'>
+						{foreach $a in $assignments.list}
+							{if not ($a.course == '')}
+							<option role='option' aria-label='{$a.name}' value="{$a.id}" 
+								assignment_id='{$assignment.id}'
+								{if $assignment.id == $a.id}selected="selected"{/if}> 
+								{$a.course_name}&nbsp;&nbsp;
+					
+							</option>
+							{/if}
+						{/foreach}
+					</select>
+					</label>
+			</div>
+		</li>
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+	{else}
+	<ol class='scb_s_experiment_setup_list'>
+		{foreach $strain in keys($assignment.template.drugs)}
+			<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+				<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+					strain_id='{$strain}' value='{$assignment.template.cell_lines[$strain].name}'  title='{$assignment.template.cell_lines[$strain].name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+				<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_concentration_edit' placeholder="Strain A" 
+					strain_id='{$strain}' value='{$assignment.template.cell_lines[$strain].name}'  title='{$assignment.template.cell_lines[$strain].name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+
+				<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_concentration_unit_edit' placeholder="Strain A" 
+					strain_id='{$strain}' value='{$assignment.template.cell_lines[$strain].name}'  title='{$assignment.template.cell_lines[$strain].name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+				<button role='button' aria-label='Delete'  class='scb_f_dashboard_remove_assignment scb_s_experiment_setup_remove_treatment' 
+					assignment_id='{$assignment.id}' ><img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+				</button>
+			</li>
+		{/foreach}
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+	{/if}
+{/template}
+
+
+/**
+Temperature Setup Description
+@param assignment
+*/
+{template .display_temperature_edit}
+	<div>
+	<span class='scb_s_experiment_setup_treatment_name_title'>Temperature</span>
+	</div>	
+	{if length(keys($assignment.template.experiment_temperatures)) <=0}
+	<ol class='scb_s_experiment_setup_list'>
+		<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+			<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+				value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+			<span class='scb_s_experiment_setup_course_name_heading'>°C</span>
+		</li>
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+		
+	{else}
+	<ol class='scb_s_experiment_setup_list'>
+		{foreach $strain in keys($assignment.template.experiment_temperatures)}
+			<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+				<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+					strain_id='{$strain}' value='{$assignment.template.cell_lines[$strain].name}'  title='{$assignment.template.cell_lines[$strain].name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+					
+			<span class='scb_s_experiment_setup_course_name_heading'>°C</span>
+
+				<button role='button' aria-label='Delete'  class='scb_f_dashboard_remove_assignment scb_s_experiment_setup_remove_temperature' 
+					assignment_id='{$assignment.id}' ><img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+				</button>
+			</li>
+		{/foreach}
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+	{/if}
+{/template}
+
+
+/**
+Duration Setup Description
+@param assignment
+*/
+{template .display_duration_edit}
+	<div>
+	<span class='scb_s_experiment_setup_treatment_name_title'>Duration</span>
+	</div>	
+	{if length(keys($assignment.template.duration)) <=0}
+	<ol class='scb_s_experiment_setup_list'>
+		<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+			<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+				value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+		</li>
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+		
+	{else}
+	<ol class='scb_s_experiment_setup_list'>
+		{foreach $strain in keys($assignment.template.duration)}
+			<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+				<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+					strain_id='{$strain}' value='{$assignment.template.cell_lines[$strain].name}'  title='{$assignment.template.cell_lines[$strain].name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+				<button role='button' aria-label='Delete'  class='scb_f_dashboard_remove_assignment scb_s_experiment_setup_remove_temperature' 
+					assignment_id='{$assignment.id}' ><img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+				</button>
+			</li>
+		{/foreach}
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+	{/if}
+{/template}
+
+
+/**
+Collection Setup Description
+@param assignment
+*/
+{template .display_collection_edit}
+	<div>
+	<span class='scb_s_experiment_setup_treatment_name_title'>Collection Time</span>
+	</div>	
+	{if length(keys($assignment.template.collections)) <=0}
+	<ol class='scb_s_experiment_setup_list'>
+		<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+			<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+				value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+		</li>
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+		
+	{else}
+	<ol class='scb_s_experiment_setup_list'>
+		{foreach $strain in keys($assignment.template.collections)}
+			<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+				<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+					strain_id='{$strain}' value='{$assignment.template.cell_lines[$strain].name}'  title='{$assignment.template.cell_lines[$strain].name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+					
+
+				<button role='button' aria-label='Delete'  class='scb_f_dashboard_remove_assignment scb_s_experiment_setup_remove_temperature' 
+					assignment_id='{$assignment.id}' ><img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+				</button>
+			</li>
+		{/foreach}
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+	{/if}
+{/template}
+
+/**
+Treatment Start Time Setup Description
+@param assignment
+*/
+{template .display_start_time_edit}
+	<div>
+	<span class='scb_s_experiment_setup_treatment_name_title'>Treatment Start Time</span>
+	</div>	
+	{if length(keys($assignment.template.start_times)) <=0}
+	<ol class='scb_s_experiment_setup_list'>
+		<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+			<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+				value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+		</li>
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+		
+	{else}
+	<ol class='scb_s_experiment_setup_list'>
+		{foreach $strain in keys($assignment.template.start_times)}
+			<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+				<input type='text' class='scb_s_experiment_setup_text_field scb_f_experiment_setup_list_item scb_s_experiment_setup_treatment_name_edit' placeholder="Strain A" 
+					strain_id='{$strain}' value='{$assignment.template.cell_lines[$strain].name}'  title='{$assignment.template.cell_lines[$strain].name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+				<button role='button' aria-label='Delete'  class='scb_f_dashboard_remove_assignment scb_s_experiment_setup_remove_temperature' 
+					assignment_id='{$assignment.id}' ><img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+				</button>
+			</li>
+		{/foreach}
+		<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+		<button class='scb_s_gray_button scb_f_experiment_setup_add_strain scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+		ADD
+		</button>
+		</li>
+	</ol>
+	{/if}
+{/template}

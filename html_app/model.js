@@ -1,11 +1,4 @@
 var MASTER_TEMPLATE={
-        id: '',
-        name: '',
-        course: '',
-    	course_name: '',
-        description: '',
-        experiments: {},
-        template: {
         	random_choose: true,
         	randomize_all: false,
         	random_order: [],
@@ -23,7 +16,12 @@ var MASTER_TEMPLATE={
                         {kind: 'cell_line', title: 'Strain', editable: false}, //
                         {kind: 'treatments',
                             children: [//
-                                {kind: 'concentration', title: 'Concentration', editable: false}//
+                            	 {kind: 'drug', title: 'Treatment', editable: false},
+                                {kind: 'concentration', title: 'Treatment Concentration', editable: false},                        		{kind: "start", title: "Treatment Start Time", editable: false},
+								{kind: "start", title: "Treatment Start Time", editable: false},
+								{kind: "duration", title: "Duration", editable: false},
+								{kind: "collection", title: "Collection Timepoints", editable: false}
+
                             ]
                         },//
                         {kind: 'temperature', title: 'Temperature', editable: false},//
@@ -44,62 +42,21 @@ var MASTER_TEMPLATE={
 					disable_brightness: true
 				},
                 add_multiple_dialog: {	
-                	order: [''],
+                	order: [],
 					headings: [
 							'','Strain', 'Treatment', 'Treatment Concentration'
 							],
-                    '': {
-                        rows: [
-                            {
-                                cells: [
-                                	{kind: 'checkbox', name: "", treatment_id: ''},
-                                    {kind: 'text', text: ''},
-                                    {kind: 'text', text: ''}
-                                ],
-                                treatment_id: '',
-                                cell_treatments: {
-                                    '': [
-                                        {cell_line: '',
-                                            treatment_list: {list: [
-                                                {temperature: ''
-                                                }
-                                            ]}}
-                                    ]
-                                }
-                            }
-                        ]
-                    }
                 }
             },
-            collections:{
-				'': {
-					name: ''
-				}
-			},
-            concentrations: {
-                '': {
-                    name: '',
-                    value: ''
-                }
-            },
-            drugs: {
-                '': {
-                    name: '',
-                    concentrations: ['']
-                }
-
-            },
-            experiment_temperatures: {
-                '': {
-                    name: ""
-                }
-            },
-            cell_lines: {
-                '': {
-                    name: ''
-                }
-
-            },
+            collections:{},
+            concentrations: {},
+            drugs: {},
+            experiment_temperatures: {},
+            cell_lines: {},
+            duration:{},
+            start_times:{},
+            
+            
             time_unit: {
                 kind: ''
             },
@@ -220,7 +177,7 @@ var MASTER_TEMPLATE={
                 }
                 
             }
-        }
+        
     
 
 }

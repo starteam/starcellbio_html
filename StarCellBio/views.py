@@ -440,14 +440,10 @@ def edit_assignment(request, **kwargs):
 		for assignment in my_assignments:
 			retval = {'is_anonymous': False, 'valid_token':False}
 			for x in jsondata['model']['assignments']['list']:
-				if( Assignment.objects.filter(assignmentID=x['id']).count() > 0):
+				if( assignment.assignmentID==x['id']):
 					assignment.data = json.loads(json.dumps(x))
 					assignment.save()
 					retval = {'is_anonymous': False, 'valid_token': True}
-				else:
-					c = Course.objects.filter(code=x['course'])[0]
-					a = Assignment(courseID=c, assignmentID=x['id'], assignmentName=x['name'], data = x, ownerID=request.user, access='private')
-					a.save() 
 	else:
 		retval = {'is_anonymous': True, 'valid_token': False}
 	response = HttpResponse("var post_state_result = {0};".format(json.dumps(retval)))
