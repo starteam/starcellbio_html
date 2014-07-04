@@ -69,6 +69,82 @@
 	left: 175px;
 }
 
+
+.scb_s_experiment_setup_treatment_list{
+	display: inline-block;
+	position: relative;
+	top: 10px;
+
+}
+
+label.custom-select-treatment {
+    position: relative;
+    display: inline-block;
+	height: 19px;
+}
+
+.custom-select-treatment:hover{
+  background: url("../../images/setup/scb_experiment_dropdown_hover.png") no-repeat right #FFF;
+
+}
+
+.custom-select-treatment {  
+	
+	width: 60px;
+	
+	height: 21px;
+	padding-top: 4px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+	overflow: hidden;
+	background: url("../../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
+	box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+
+.custom-select-treatment-concentration {  
+	
+	width: 55px;
+	
+	height: 21px;
+	padding-top: 4px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+	overflow: hidden;
+	background: url("../../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
+	box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+label.custom-select-treatment, label.custom-select-treatment-concentration {
+    position: relative;
+    display: inline-block;
+	height: 19px;
+}
+
+.custom-select-treatment:hover, .custom-select-treatment-concentration:hover{
+  background: url("../../images/setup/scb_experiment_dropdown_hover.png") no-repeat right #FFF;
+
+}
+
+
+.custom-select-treatment select, .custom-select-treatment-concentration select {  
+
+	background: transparent;
+   width: 268px;
+   color: #316f94;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 8pt;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 22px;
+   -webkit-appearance: none;
+   bottom: 1px;
+
+}
+
+
 .scb_s_experiment_setup_remove_temperature{
 	border:0px;
     width:24px;
@@ -121,8 +197,20 @@ left: 61px;
 
 .scb_s_experiment_setup_treatment_concentration_title{
 	position: relative;
-left: 192px;
+left: 152px;
 }
+
+.scb_s_experiment_setup_treatment_start_time_title{
+	position: relative;
+	left: 253px;
+}
+
+.scb_s_experiment_setup_treatment_duration_title{
+	position: relative;
+	left: 346px;
+
+}
+
 
 .scb_s_experiment_setup_treatment_concentration_unit_title{
 	position: relative;
@@ -136,7 +224,6 @@ left: 283px;
 
 .scb_s_experiment_setup_treatment_concentration_edit{
 position: relative;
-left: 78px;
 }
 
 .scb_s_experiment_setup_treatment_concentration_unit_edit{
@@ -155,6 +242,17 @@ left: 157px;
 	
 }
 
+.scb_s_experiment_setup_treatment_text_field{
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	color: black;
+	font-style: italic;
+	width: 70px;
+	margin-top: 10px;
+	padding: 3px;
+	margin-left: 10px;
+	top: 1px;
+}
 
 .scb_s_abstract_title {
     color: white;

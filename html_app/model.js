@@ -53,8 +53,6 @@ var MASTER_TEMPLATE={
             drugs: {},
             experiment_temperatures: {},
             cell_lines: {},
-            duration:{},
-            start_times:{},
             
             
             time_unit: {
