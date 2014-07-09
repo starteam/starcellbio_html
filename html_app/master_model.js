@@ -7445,14 +7445,23 @@ var __assignment_706_2014_ps2 = {
                                 cell_treatments: {
                                     H: [
                                         {cell_line: 'S2',
-                                            treatment_list: {list: [
-                                                {collection_id: 'default', microscope: ['na'],
-                                                duration_value: 3600 * 24 * 3, duration: '3 d',
-                                                drug_list: {list: [
+                                            treatment_list: {
+                                            	list: [
+                                                {
+                                                collection_id: 'default', 
+                                                microscope: ['na'],
+                                                duration_value: 3600 * 24 * 3, 
+                                                duration: '3 d',
+                                                drug_list: {
+                                                	list: [
                                                     {drug_id: 'Hydroxyurea', concentration_id: '100'},
-                                                ]}, temperature: '25'
+                                                	]
+                                                }, 
+                                                temperature: '25'
                                                 }
-                                            ]}}
+                                            ]
+                                            
+                                            }}
                                     ]
                                 }
                             },

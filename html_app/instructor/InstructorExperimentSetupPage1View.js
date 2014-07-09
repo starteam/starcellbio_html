@@ -113,28 +113,6 @@ scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_list_ite
 scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_temperature = function(element, workarea){
 	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
 	parsed.assignment.has_temperature = !parsed.assignment.has_temperature;
-// 	_.each(parsed.assignment.template.ui.add_multiple_dialog, function(value, key, list){
-// 		if(parsed.assignment.has_temperature){
-// 			if(key == 'headings' || key == 'order'){
-// 			}
-// 			else{
-// 				var cell_treatment_hash = _.keys(value.rows[0].cell_treatments)[0];
-// 				value.rows[0].cell_treatments[cell_treatment_hash]
-// 				value.rows[0].cell_treatments[cell_treatment_hash][0].treatment_list.list[0].temperature = "";
-// 			}
-// 		}
-// 		else{
-// 			if(key == 'headings' || key == 'order'){
-// 			}
-// 			else{
-// 				var cell_treatment_hash = _.keys(value.rows[0].cell_treatments)[0];
-// 				value.rows[0].cell_treatments[cell_treatment_hash]
-// 				delete value.rows[0].cell_treatments[cell_treatment_hash][0].treatment_list.list[0].temperature;
-// 			}
-// 			
-// 		}
-// 	});
-
 	scb.ui.static.InstructorFrame.refresh();
 
 }
@@ -142,25 +120,18 @@ scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_t
 scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_start_time = function(element, workarea){
 	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
 	parsed.assignment.has_start_time = !parsed.assignment.has_start_time;
-	//schedule_value: 0, schedule: 'immediately'
-	
-		
 	scb.ui.static.InstructorFrame.refresh();
 
 }
 
 scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_duration = function(element, workarea){
-	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
-	
-	//duration_value: 3600 * 24 * 3, duration: '3 d',
-	
+	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);	
 	parsed.assignment.has_duration = !parsed.assignment.has_duration;	
 	scb.ui.static.InstructorFrame.refresh();
 
 }
 
 scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_select_collection_time = function(element, workarea){
-	//collection_id: 'default'
 	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
 	parsed.assignment.has_collection_time = !parsed.assignment.has_collection_time;	
 	scb.ui.static.InstructorFrame.refresh();

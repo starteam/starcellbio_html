@@ -17,14 +17,10 @@ var MASTER_TEMPLATE={
                         {kind: 'treatments',
                             children: [//
                             	 {kind: 'drug', title: 'Treatment', editable: false},
-                                {kind: 'concentration', title: 'Treatment Concentration', editable: false},                        		{kind: "start", title: "Treatment Start Time", editable: false},
-								{kind: "start", title: "Treatment Start Time", editable: false},
-								{kind: "duration", title: "Duration", editable: false},
-								{kind: "collection", title: "Collection Timepoints", editable: false}
+                                {kind: 'concentration', title: 'Treatment Concentration', editable: false}
 
                             ]
                         },//
-                        {kind: 'temperature', title: 'Temperature', editable: false},//
                         {kind: 'actions', title: 'Actions'}//
                     ],//
                     actions: [
@@ -53,7 +49,8 @@ var MASTER_TEMPLATE={
             drugs: {},
             experiment_temperatures: {},
             cell_lines: {},
-            
+            start_times:{},
+            durations: {},
             
             time_unit: {
                 kind: ''

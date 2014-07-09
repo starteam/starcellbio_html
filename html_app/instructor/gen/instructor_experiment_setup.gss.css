@@ -39,6 +39,23 @@
   color: #316f94;
   padding-left: 10px;
 }
+.scb_s_experiment_setup_page3_table {
+  border-radius: 5px;
+  border-spacing: 0;
+  width: 599px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #edeef2;
+}
+.scb_s_experiment_setup_subtitle_page_3 {
+  font-size: 9pt;
+  font-weight: bold;
+  font-family: 'sourcesanspro-semibold';
+  color: #316f94;
+  padding-left: 10px;
+  position: relative;
+  bottom: 10px;
+}
 .scb_s_experiment_setup_strains_list_container {
   position: relative;
   top: -1px;
