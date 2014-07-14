@@ -99,14 +99,6 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
 
                     }
                     else {
-                        // if experiment_id is invalid go to assignment
-//                         $('html').css('overflow', 'hidden');
-//     					$('body').prepend(scb_experiment_setup.general_error_overlay());
-//                         $.jqDialog.alert('Experiment ' + state.experiment_id + ' does not exist.', function() {	
-//                         		$('html').css('overflow', 'visible');
-//                         		$('.error_overlay').remove();/* callback function for 'OK' button*/ });
-//                         $('.jqDialog_header').remove();
-//                         $('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
                         state.onhashchange = false;
                         state.view = 'course_setup';
@@ -118,14 +110,6 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
                 }
             }
             else {
-                // if assignment_id is invalid go to assignments
-//                 $('html').css('overflow', 'hidden');
-//     				$('body').prepend(scb_experiment_setup.general_error_overlay());
-//                 $.jqDialog.alert('Assignment ' + state.assignment_id + ' does not exist.', function() {	
-//                 	$('html').css('overflow', 'visible');
-// 					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
-//             	$('.jqDialog_header').remove();
-//             	$('#jqDialog_box').prepend("<h1 class='jqDialog_header'>Error</h1>");
 
                 state.onhashchange = false;
                 state.view = 'course_setup';
@@ -164,10 +148,16 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
     scb.ui.static.InstructorExperimentSetupPage3View.register(workarea);
     scb.ui.static.InstructorExperimentSetupPage4View.register(workarea);
 
-    scb.ui.static.WesternBlotView.register(workarea);
+    scb.ui.static.InstructorWesternBlotPage1View.register(workarea);
+    scb.ui.static.InstructorWesternBlotPage2View.register(workarea);
+    scb.ui.static.InstructorWesternBlotPage3View.register(workarea);
+    scb.ui.static.InstructorWesternBlotPage4View.register(workarea);
+    scb.ui.static.InstructorWesternBlotPage5View.register(workarea);
+
+
     scb.ui.static.MicroscopyView.register(workarea);
     scb.ui.static.WesternBlotGelView.register(workarea);
-    scb.ui.static.SelectTechniqueView.register(workarea);
+    scb.ui.static.InstructorSelectTechniqueView.register(workarea);
     scb.ui.static.FacsView.register(workarea);
 
     scb.ui.static.InstructorFrame.in_ajax = false;
@@ -586,15 +576,32 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         context: context
     });
 
-    self.sections.select_technique = new scb.ui.SelectTechniqueView({
+    self.sections.select_technique = new scb.ui.InstructorSelectTechniqueView({
         workarea: workarea,
         context: context
     });
 
-    self.sections.western_blot = new scb.ui.WesternBlotView({
+    self.sections.western_blot_page1 = new scb.ui.InstructorWesternBlotPage1View({
         workarea: workarea,
         context: context
-    })
+    });
+    
+    self.sections.western_blot_page2 = new scb.ui.InstructorWesternBlotPage2View({
+        workarea: workarea,
+        context: context
+    });
+    self.sections.western_blot_page3 = new scb.ui.InstructorWesternBlotPage3View({
+        workarea: workarea,
+        context: context
+    });
+    self.sections.western_blot_page4 = new scb.ui.InstructorWesternBlotPage4View({
+        workarea: workarea,
+        context: context
+    });
+    self.sections.western_blot_page5 = new scb.ui.InstructorWesternBlotPage5View({
+        workarea: workarea,
+        context: context
+    });
     
     self.sections.microscopy = new scb.ui.MicroscopyView({
     	workarea: workarea,
@@ -736,18 +743,103 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
                 assignments: assignments
             });
         }
-        
-        if (state.view == 'experiment_run') {
 
-            self.sections.experiment_setup.show({
+       
+        if (state.view == 'select_technique') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.select_technique.show({
                 workarea: workarea,
-                assignment: parsed.assignment,
-                experiment: parsed.experiment,
-                mode: 'readonly',
-                last_view: 'experiment_run',
+                assignments: assignments
             });
         }
-        if (state.view == 'facs') {
+        if (state.view == 'western_blot_page1') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.western_blot_page1.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+        
+        if (state.view == 'western_blot_page2') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.western_blot_page2.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+        
+        if (state.view == 'western_blot_page3') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.western_blot_page3.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+        
+        if (state.view == 'western_blot_page4') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.western_blot_page4.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+        
+        if (state.view == 'western_blot_page5') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.western_blot_page5.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+         if (state.view == 'facs') {
 			var id_list = [];
 			for( var x=0; x < parsed.experiment.facs_list.list.length; x++){id_list.push(parsed.experiment.facs_list.list[x].id);}
 			
@@ -774,54 +866,6 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
                 assignment: parsed.assignment,
                 experiment: parsed.experiment,
                 facs: parsed.facs
-            });
-        }
-        if (state.view == 'select_technique') {
-
-            self.sections.select_technique.show({
-                workarea: workarea,
-                assignment: parsed.assignment,
-                experiment: parsed.experiment
-            });
-
-        }
-        if (state.view == 'western_blot') {
-			
-			var id_list = [];
-			for( var x=0; x < parsed.experiment.western_blot_list.list.length; x++){id_list.push(parsed.experiment.western_blot_list.list[x].id);}
-
-            if ( !parsed.western_blot ) {
-            	if(state.western_blot_id && id_list.indexOf(state.western_blot_id)<0 && parsed.experiment.western_blot_list.list.length >0){
-            		parsed.western_blot = parsed.experiment.western_blot_list.list[state.index];
-
-            	}
-            	else{
-					var western_blot = parsed.experiment.western_blot_list.start({});
-					state.western_blot_id = western_blot.id;
-					var History = window.History;
-					if (History.enabled) {
-						History.replaceState("New WB", "New WB", '#' + $.param(state));
-					}
-
-					state.onhashchange = true;
-					self.show(state);
-					return;
-                }
-            } 
-            
-            if (parsed.western_blot.is_transfered) {
-                state.view = 'western_blot_gel';
-                state.onhashchange = false;
-                self.show(state);
-                return;
-            }
-            
-            
-            self.sections.western_blot.show({
-                workarea: workarea,
-                assignment: parsed.assignment,
-                experiment: parsed.experiment,
-                western_blot: parsed.western_blot
             });
         }
         if (state.view == 'microscopy'){
@@ -853,42 +897,6 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
                 assignment: parsed.assignment,
                 experiment: parsed.experiment,
                 microscopy: parsed.microscopy
-            });
-        }
-        if (state.view == 'western_blot_gel') {
-			if(parsed.western_blot.last_gel && parsed.western_blot.gel_list.list.length == 1)
-                parsed.western_blot.last_gel = parsed.western_blot.gel_list.list[0].id;
-            if (!parsed.western_blot) {
-                state.onhashchange = false;
-                state.view = 'select_technique';
-                self.show(state);
-                return;
-            }
-            if (!parsed.western_blot.is_transfered) {
-                state.view = 'western_blot';
-                state.onhashchange = false;
-                self.show(state);
-                return;
-            }
-            if (!parsed.western_blot_gel) {
-                var gel_id = parsed.western_blot.last_gel;
-                if (!gel_id) {
-                    gel = parsed.western_blot.gel_list.start({});
-                    parsed.western_blot.last_gel = gel.id;
-                    gel_id = gel.id;
-                }
-                
-                state.western_blot_gel_id = gel_id;
-                state.onhashchange = false;
-                self.show(state);
-                return;
-            }
-            self.sections.western_blot_gel.show({
-                workarea: workarea,
-                assignment: parsed.assignment,
-                experiment: parsed.experiment,
-                western_blot: parsed.western_blot,
-                western_blot_gel: parsed.western_blot_gel
             });
         }
         if (state.view == 'assignment_last') {

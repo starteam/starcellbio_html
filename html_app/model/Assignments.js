@@ -34,6 +34,7 @@ scb.Assignment = function scb_Assignment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'permission','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'template_id',null,null,context);
 	scb.Utils.initialize_accessor_field(self,data,'students',0,null,context);
+	scb.Utils.initialize_accessor_field(self,data,'sort',[],null,context);
 	
 	
 	scb.Utils.initialize_accessor_field(self,data,'is_new_assignment',true,null,context);

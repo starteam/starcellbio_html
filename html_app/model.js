@@ -72,9 +72,6 @@ var MASTER_TEMPLATE={
                 }
             },//
             lysate_kinds: {
-                '': {
-                    name: ''
-                }
             },
             facs_kinds: {
                 '':{

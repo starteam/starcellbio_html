@@ -8,6 +8,7 @@ if (typeof (scb.ui ) == 'undefined') {
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.InstructorExperimentSetupPage3View = scb.ui.static.InstructorExperimentSetupPage3View || {};
 
+scb.ui.static.InstructorExperimentSetupPage3View.SORT_TOTAL =  4;
 
 
 scb.ui.static.InstructorExperimentSetupPage3View.parse = function (element) {
@@ -60,6 +61,52 @@ scb.ui.static.InstructorExperimentSetupPage3View.scb_f_experiment_setup_page3_sa
 	scb.ui.static.InstructorFrame.refresh(state);
 }
 
+scb.ui.static.InstructorExperimentSetupPage3View.scb_f_experiment_setup_sort_button = function(element, workarea){
+		var parsed = scb.ui.static.InstructorExperimentSetupPage3View.parse(element);
+	  $.jqDialog.content(scb_instructor_experiment_setup_page3.sort_window({assignment: parsed.assignment}));
+	  $('.scb_f_sort_close_button').click(function(){
+	  if($('.scb_s_sort_dialog').length >0){
+			$('.scb_s_sort_dialog').remove();
+			$('.overlay').remove();
+			$('#jqDialog_box').hide();
+		}
+	  });
+	  
+	  $('.scb_f_experiment_setup_page3_sort').click(function(){
+	  	parsed.assignment.sort = [];
+	  	_.each($('.scb_f_experiment_setup_page3_sort_row'), function(key,value,list){
+	  		var index = value+1;
+	  		if($('.scb_f_experiment_setup_page3_checkbox_sort'+index, key).attr('checked')){
+	  			var sort_object = {}
+	  			sort_object['sort'] = $('.scb_f_experiment_setup_page3_field_sort'+index, key).val();
+	  			sort_object['sort_type'] = $('.scb_f_experiment_setup_page3_type_sort'+index, key).val();
+	  			parsed.assignment.sort.push(sort_object);
+	  		}
+	  	});
+		if($('.scb_s_sort_dialog').length >0){
+			$('.scb_s_sort_dialog').remove();
+			$('.overlay').remove();
+			$('#jqDialog_box').hide();
+		}
+	  	
+	  	scb.ui.static.InstructorFrame.refresh();
+	  });
+	  
+	  
+
+
+}
+
+scb.ui.static.InstructorExperimentSetupPage3View.scb_f_sort_close_button = function(element, workarea){
+		var parsed = scb.ui.static.InstructorExperimentSetupPage3View.parse(element);
+
+		
+}
+
+scb.ui.static.InstructorExperimentSetupPage3View.scb_f_experiment_setup_page3_sort = function(element, workarea){
+		var parsed = scb.ui.static.InstructorExperimentSetupPage3View.parse(element);
+
+}
 
 scb.ui.static.InstructorExperimentSetupPage3View.register = function(workarea) {
 
@@ -72,11 +119,28 @@ scb.ui.static.InstructorExperimentSetupPage3View.register = function(workarea) {
     });
     
     
+    scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_sort_button', function (e) {
+    	scb.ui.static.InstructorExperimentSetupPage3View.scb_f_experiment_setup_sort_button(this, e);
+    });
+    
+   
+    
+   
     
 };
 
-scb.ui.static.InstructorExperimentSetupPage3View.rows = function(dialog){
+scb.ui.static.InstructorExperimentSetupPage3View.rows = function(dialog, sort_order){
 	var rows =[];
+	var headings = dialog.headings;
+	var sorting_conditions = [];
+	for(var x = 0 ; x < sort_order.length ; x++){
+		for(var y = 0; y < headings.length; y++){
+			if(sort_order[x]['sort'] == headings[y]){
+				sorting_conditions.push([y-1, sort_order[x]['sort_type']]);
+			}
+		}
+	}
+	
 	_.each(dialog.order, function(strain){
 		_.each(dialog[strain].rows, function(row){
 			var insert_row = {treatment_id:row.treatment_id, row: []};
@@ -90,9 +154,34 @@ scb.ui.static.InstructorExperimentSetupPage3View.rows = function(dialog){
 	});
 	rows = rows.sort(
 		function(a, b){
-			if( a.row[0] > b.row[0]) return 1;
-			if( a.row[0] < b.row[0]) return -1;
-			if(a.row[0] == b.row[0]) return 0;
+			if(a.treatment_id == 'zh1zia4i'|| b.treatment_id =='zh1zia4i'){
+				console.log('foundit');
+			}
+			if(sort_order.length <=0){
+				if( a.row[0] > b.row[0]) return  1;
+				if( a.row[0] < b.row[0]) return -1;
+				if(a.row[0] == b.row[0]) return 0;
+			}
+			if(sort_order.length >=1){
+				if( a.row[sorting_conditions[0][0]] > b.row[sorting_conditions[0][0]]) return sorting_conditions[0][1] == 'Ascending'? 1: -1;
+				if( a.row[sorting_conditions[0][0]] < b.row[sorting_conditions[0][0]]) return sorting_conditions[0][1] == 'Ascending' ? -1: 1;
+// 				if(a.row[sorting_conditions[0][0]] == b.row[sorting_conditions[0][0]]) return 0;
+			}
+			if(sort_order.length >=2){
+				if( a.row[sorting_conditions[1][0]] > b.row[sorting_conditions[1][0]]) return sorting_conditions[1][1] == 'Ascending'? 1: -1;
+				if( a.row[sorting_conditions[1][0]] < b.row[sorting_conditions[1][0]]) return sorting_conditions[1][1] == 'Ascending' ? -1: 1;
+// 				if(a.row[sorting_conditions[1][0]] == b.row[sorting_conditions[1][0]]) return 0;
+			}
+			if(sort_order.length >=3){
+				if( a.row[sorting_conditions[2][0]] > b.row[sorting_conditions[2][0]]) return sorting_conditions[2][1] == 'Ascending'? 1: -1;
+				if( a.row[sorting_conditions[2][0]] < b.row[sorting_conditions[2][0]]) return sorting_conditions[2][1] == 'Ascending' ? -1: 1;
+// 				if(a.row[sorting_conditions[2][0]] == b.row[sorting_conditions[2][0]]) return 0;
+			}
+			if(sort_order.length >=4){
+				if( a.row[sorting_conditions[3][0]] > b.row[sorting_conditions[3][0]]) return sorting_conditions[3][1] == 'Ascending'? 1: -1;
+				if( a.row[sorting_conditions[3][0]] < b.row[sorting_conditions[3][0]]) return sorting_conditions[3][1] == 'Ascending' ? -1: 1;
+// 				if(a.row[sorting_conditions[3][0]] == b.row[sorting_conditions[3][0]]) return 0;
+			}
 		}
 	);
 	return rows;
@@ -121,7 +210,7 @@ scb.ui.InstructorExperimentSetupPage3View = function scb_ui_InstructorExperiment
         	prev_step=assignments.selected.experiments.selected.prev_step;
         else prev_step = null;
         
-        var rows = scb.ui.static.InstructorExperimentSetupPage3View.rows(assignments.selected.template.ui.add_multiple_dialog);
+        var rows = scb.ui.static.InstructorExperimentSetupPage3View.rows(assignments.selected.template.ui.add_multiple_dialog, assignments.selected.sort);
         
         
         
@@ -142,7 +231,8 @@ scb.ui.InstructorExperimentSetupPage3View = function scb_ui_InstructorExperiment
             $('.scb_s_ref_info_link').click(function(){
         	$('.scb_assignments_header_link_wrapper[value="Reference Material"]').click();
         });
-
+        
+   
 
 		$('#main').css({
 				position:'absolute',

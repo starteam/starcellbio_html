@@ -4755,7 +4755,8 @@ var __decusability = {
             	],
             ui: {
                 experimental_design: {
-                    techniques: [ 'wb' , 'facs']
+                    techniques: [ 'wb' , 'facs'],
+                    gel_types: ['.10', '.12', '.15']
                 },
                 experiment_setup: {
                     table: [ //
@@ -5149,7 +5150,8 @@ var __assignment_706_2014 = {
             	],
             ui: {
                 experimental_design: {
-                    techniques: [ 'wb' ,  'micro']
+                    techniques: [ 'wb' ,  'micro'],
+                    gel_types: ['.10', '.12', '.15']
                 },
                 experiment_setup: {
                     table: [ 
@@ -7245,7 +7247,8 @@ var __assignment_706_2014_ps2 = {
             	],
             ui: {
                 experimental_design: {
-                    techniques: [ 'wb' , 'facs', 'micro' ]
+                    techniques: [ 'wb' , 'facs', 'micro' ],
+                    gel_types: ['.10', '.12', '.15']
                 },
                 experiment_setup: {
                     table: [ //
@@ -8500,7 +8503,8 @@ var __june_2014_usability = {
             	],
             ui: {
                 experimental_design: {
-                    techniques: [ 'micro']
+                    techniques: [ 'micro'],
+                    gel_types: ['.10', '.12', '.15']
                 },
                 experiment_setup: {
                     table: [ 

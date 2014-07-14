@@ -1,0 +1,102 @@
+{namespace scb_instructor_western_blot_page1}
+
+/**
+* Assignment selector
+* @param global_template
+* @param last_step
+* @param prev_step
+* @param assignments AssignmentsView
+* @param assignment
+* @param context
+*/
+{template .main}
+<div class='scb_s_western_blot_view' >
+    {call scb_instructor_homepage.display_header}
+    {param global_template:$global_template /}
+    {param context:$context /}
+    {/call}
+        {call scb_instructor_common.assignment_step}
+        {param step:1/}
+        {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
+        {param assignments:assignments/}
+    {/call}
+    <div class='scb_s_western_blot_container' role='main'>
+    {call scb_instructor_homepage.display_assignment_navigation}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
+    {call .display_assignment}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
+    </div>
+    {call scb_instructor_homepage.display_footer}
+    {param global_template:$global_template /}
+    {/call}
+</div>
+{/template}
+
+
+/**
+Assignment description
+@param assignment
+*/
+{template .display_assignment}
+
+<div class='scb_s_course_setup_description '>
+    	<div class='scb_s_abstract_title'>
+            Assignment Editor
+        </div>
+    <div class='scb_s_western_blot_title'>Western Blotting</div>
+        <div class='scb_s_assignment_setup_course_name_heading'><i>Sample Prep</i></div>
+    <div class='scb_s_assignment_setup_course_name_heading'>1. What lysate types are available?</div>
+	{call .sample_prep}
+	{param assignment: $assignment/}
+	{/call}
+	<div class='scb_s_assignment_setup_course_name_heading'><i>Prepare Gel</i></div>
+
+	<div class='scb_s_assignment_setup_course_name_heading'>2. What percentages of acrylamide are available?</div>
+	{call .prepare_gel}
+	{param assignment: $assignment/}
+	{/call}
+	<div>
+        <button assignment_id='{$assignment.id}' class=" scb_f_western_blot_page1_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
+
+    </div>
+</div>
+{/template}
+
+
+/**
+Sample Prep
+@param assignment
+*/
+{template .sample_prep}
+
+	<div class='scb_s_select_technique_wrapper'><input class="scb_s_experiment_setup_checkbox scb_s_select_technique_select_western_blot  scb_f_western_blot_select_whole_cell_lysate" type="checkbox" role="checkbox" assignment_id="{$assignment.id}"  aria-checked="false"> <span>Whole Cell Lysate</span></div>
+        	
+    <div class='scb_s_select_technique_wrapper'><input class="scb_s_experiment_setup_checkbox scb_s_select_technique_select_facs scb_f_western_blot_select_nuclear" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>Nuclear Fractionation</span></div>
+
+    <div class='scb_s_select_technique_wrapper'><input class="scb_s_experiment_setup_checkbox scb_s_select_technique_select_microscopy scb_f_western_blot_select_cytoplasmic" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>Cytoplasmic Fractionation</span></div>
+	
+{/template}
+
+
+/**
+Prepare Gel
+@param assignment
+*/
+{template .prepare_gel}
+
+	<div class='scb_s_select_technique_wrapper'><input class="scb_s_experiment_setup_checkbox scb_s_select_technique_select_western_blot  scb_f_western_blot_select_ten" type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>10%</span></div>
+        	
+    <div class='scb_s_select_technique_wrapper'><input class="scb_s_experiment_setup_checkbox scb_s_select_technique_select_facs          scb_f_western_blot_select_twelve"         type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>12%</span></div>
+
+    <div class='scb_s_select_technique_wrapper'><input class="scb_s_experiment_setup_checkbox scb_s_select_technique_select_microscopy    scb_f_western_blot_select_fifteen"   type="checkbox" role="checkbox" assignment_id="{$assignment.id}" aria-checked="false"> <span>15%</span></div>
+
+    
+{/template}
+

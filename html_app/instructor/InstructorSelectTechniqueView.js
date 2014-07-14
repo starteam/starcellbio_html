@@ -6,11 +6,11 @@ if (typeof (scb.ui ) == 'undefined') {
 
 
 scb.ui.static = scb.ui.static || {};
-scb.ui.static.InstructorExperimentSetupPage4View = scb.ui.static.InstructorExperimentSetupPage4View || {};
+scb.ui.static.InstructorSelectTechniqueView = scb.ui.static.InstructorSelectTechniqueView || {};
 
 
 
-scb.ui.static.InstructorExperimentSetupPage4View.parse = function (element) {
+scb.ui.static.InstructorSelectTechniqueView.parse = function (element) {
     var assignment_id = $(element).attr('assignment_id');
 
 
@@ -23,32 +23,61 @@ scb.ui.static.InstructorExperimentSetupPage4View.parse = function (element) {
 
     return parsed;
 }
-scb.ui.static.InstructorExperimentSetupPage4View.scb_f_experiment_setup_page4_save_assignment_button = function(element, workarea){
 
-	var parsed = scb.ui.static.InstructorExperimentSetupPage4View.parse(element);
+
+
+scb.ui.static.InstructorSelectTechniqueView.scb_f_select_technique_save_assignment_button = function(element, workarea){
+
+	var parsed = scb.ui.static.InstructorSelectTechniqueView.parse(element);
+	parsed.assignment.template.ui.experimental_design['techniques'] = [];
+	
+//                     techniques: [ 'wb' , 'facs', 'micro' ]
+	if($('.scb_f_select_technique_select_western_blot').attr('checked')){
+		parsed.assignment.template.ui.experimental_design.techniques.push('wb');
+	}
+	
+	if($('.scb_f_select_technique_select_facs').attr('checked')){
+		parsed.assignment.template.ui.experimental_design.techniques.push('facs');
+	}
+	
+	if($('.scb_f_select_technique_select_microscopy').attr('checked')){
+		parsed.assignment.template.ui.experimental_design.techniques.push('micro');
+	}
+	
 	
 	scb.ui.static.InstructorFrame.pending_save(parsed);
 	
+	var view = '';
+	if(_.contains(parsed.assignment.template.ui.experimental_design.techniques, 'wb'))
+		view = 'western_blot_page1';
+	else if(_.contains(parsed.assignment.template.ui.experimental_design.techniques, 'facs'))
+		view = 'facs_page1';
+	else if(_.contains(parsed.assignment.template.ui.experimental_design.techniques, 'micro'))
+		view = 'micro_page1';
+
 	
 	var state = {
 		assignment_id: parsed.assignment.id,
-		view: 'select_technique',
+		view: view,
 		skip_hash_update: true
 	};
 				   
 	scb.ui.static.InstructorFrame.refresh(state);
 }
 
-scb.ui.static.InstructorExperimentSetupPage4View.register = function(workarea) {
-     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_page4_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage4View.scb_f_experiment_setup_page4_save_assignment_button(this, e);
+
+
+
+scb.ui.static.InstructorSelectTechniqueView.register = function(workarea) {
+    scb.utils.off_on(workarea, 'click', '.scb_f_select_technique_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorSelectTechniqueView.scb_f_select_technique_save_assignment_button(this, e);
     });
-  
+
 };
 
 
 
-scb.ui.static.InstructorExperimentSetupPage4View.rows = function(dialog){
+scb.ui.static.InstructorSelectTechniqueView.rows = function(dialog){
 	var rows =[];
 	var headings = dialog.headings;
 	_.each(dialog.order, function(strain){
@@ -68,7 +97,7 @@ scb.ui.static.InstructorExperimentSetupPage4View.rows = function(dialog){
 	return rows;
 }
 
-scb.ui.InstructorExperimentSetupPage4View = function scb_ui_InstructorExperimentSetupPage4View(gstate) {
+scb.ui.InstructorSelectTechniqueView = function scb_ui_InstructorSelectTechniqueView(gstate) {
     var self = this;
     var assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
     var courses = _.groupBy(assignments.list, function (assignment) {
@@ -91,9 +120,9 @@ scb.ui.InstructorExperimentSetupPage4View = function scb_ui_InstructorExperiment
         	prev_step=assignments.selected.experiments.selected.prev_step;
         else prev_step = null;
         
-        var rows = scb.ui.static.InstructorExperimentSetupPage4View.rows(assignments.selected.template.ui.add_multiple_dialog);
+        var rows = scb.ui.static.InstructorSelectTechniqueView.rows(assignments.selected.template.ui.add_multiple_dialog);
 
-        workarea.html(scb_instructor_experiment_setup_page4.main({
+        workarea.html(scb_instructor_select_technique.main({
             global_template: gstate.context.master_model,
             assignments: assignments,
             last_step: last_step,

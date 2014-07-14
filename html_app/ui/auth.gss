@@ -110,7 +110,7 @@
     
 }
 
-.scb_f_login_close_button, .scb_f_signup_close_button, .scb_f_logout_close_button{
+.scb_f_login_close_button, .scb_f_signup_close_button, .scb_f_logout_close_button, .scb_f_sort_close_button{
 
 	
 	padding-top: 0px;
@@ -134,12 +134,12 @@
 
 
 
-.scb_f_login_close_button>span, .scb_f_signup_close_button>span, .scb_f_logout_close_button>span{
+.scb_f_login_close_button>span, .scb_f_sort_close_button>span,  .scb_f_signup_close_button>span, .scb_f_logout_close_button>span{
 	position: relative;
 	bottom: 2px;
 	right: 1px;
 }
 
-.scb_f_login_close_button:hover, .scb_f_signup_close_button:hover, .scb_f_logout_close_button:hover{
+.scb_f_login_close_button:hover, .scb_f_sort_close_button:hover, .scb_f_signup_close_button:hover, .scb_f_logout_close_button:hover{
 	background-color: #e58986;
 }

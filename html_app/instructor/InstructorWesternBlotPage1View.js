@@ -6,11 +6,11 @@ if (typeof (scb.ui ) == 'undefined') {
 
 
 scb.ui.static = scb.ui.static || {};
-scb.ui.static.InstructorExperimentSetupPage4View = scb.ui.static.InstructorExperimentSetupPage4View || {};
+scb.ui.static.InstructorWesternBlotPage1View = scb.ui.static.InstructorWesternBlotPage1View || {};
 
 
 
-scb.ui.static.InstructorExperimentSetupPage4View.parse = function (element) {
+scb.ui.static.InstructorWesternBlotPage1View.parse = function (element) {
     var assignment_id = $(element).attr('assignment_id');
 
 
@@ -23,52 +23,68 @@ scb.ui.static.InstructorExperimentSetupPage4View.parse = function (element) {
 
     return parsed;
 }
-scb.ui.static.InstructorExperimentSetupPage4View.scb_f_experiment_setup_page4_save_assignment_button = function(element, workarea){
 
-	var parsed = scb.ui.static.InstructorExperimentSetupPage4View.parse(element);
+
+
+scb.ui.static.InstructorWesternBlotPage1View.scb_f_western_blot_page1_save_assignment_button = function(element, workarea){
+
+	var parsed = scb.ui.static.InstructorWesternBlotPage1View.parse(element);
 	
 	scb.ui.static.InstructorFrame.pending_save(parsed);
+	
+	if($('.scb_f_western_blot_select_whole_cell_lysate').attr('checked')){
+		parsed.assignment.template.lysate_kinds['whole'] = ({name: 'Whole Cell' });
+
+	}
+	if($('.scb_f_western_blot_select_nuclear').attr('checked')){
+		parsed.assignment.template.lysate_kinds['cyto'] = ({name: 'Cytoplasm' });
+	
+	}
+	if($('.scb_f_western_blot_select_cytoplasmic').attr('checked')){
+		parsed.assignment.template.lysate_kinds['nuclear'] = ({name: 'Nuclear' });
+			
+	}
+	
+	parsed.assignment.template.ui.experimental_design.gel_types = [];
+	
+	if($('.scb_f_western_blot_select_ten').attr('checked')){
+		parsed.assignment.template.ui.experimental_design.gel_types.push('.10');
+	}
+	if($('.scb_f_western_blot_select_twelve').attr('checked')){
+		parsed.assignment.template.ui.experimental_design.gel_types.push('.12');
+	}
+	if($('.scb_f_western_blot_select_fifteen').attr('checked')){
+		parsed.assignment.template.ui.experimental_design.gel_types.push('.15');
+	}
 	
 	
 	var state = {
 		assignment_id: parsed.assignment.id,
-		view: 'select_technique',
+		view: 'western_blot_page2',
 		skip_hash_update: true
 	};
 				   
 	scb.ui.static.InstructorFrame.refresh(state);
 }
 
-scb.ui.static.InstructorExperimentSetupPage4View.register = function(workarea) {
-     scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_page4_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorExperimentSetupPage4View.scb_f_experiment_setup_page4_save_assignment_button(this, e);
+
+
+
+scb.ui.static.InstructorWesternBlotPage1View.register = function(workarea) {
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page1_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage1View.scb_f_western_blot_page1_save_assignment_button(this, e);
     });
+    
+    
+    
+    
+    
+    
   
 };
 
 
-
-scb.ui.static.InstructorExperimentSetupPage4View.rows = function(dialog){
-	var rows =[];
-	var headings = dialog.headings;
-	_.each(dialog.order, function(strain){
-		_.each(dialog[strain].rows, function(row){
-			var insert_row = {treatment_id:row.treatment_id, row: []};
-			_.each(row.cells, function(cell){
-				if(cell.kind=='text')
-					insert_row.row.push(cell.text);
-				else
-					insert_row.row.push('cell_plate');
-				
-			});
-			rows.push(insert_row);
-		});
-	});
-
-	return rows;
-}
-
-scb.ui.InstructorExperimentSetupPage4View = function scb_ui_InstructorExperimentSetupPage4View(gstate) {
+scb.ui.InstructorWesternBlotPage1View = function scb_ui_InstructorWesternBlotPage1View(gstate) {
     var self = this;
     var assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
     var courses = _.groupBy(assignments.list, function (assignment) {
@@ -91,16 +107,14 @@ scb.ui.InstructorExperimentSetupPage4View = function scb_ui_InstructorExperiment
         	prev_step=assignments.selected.experiments.selected.prev_step;
         else prev_step = null;
         
-        var rows = scb.ui.static.InstructorExperimentSetupPage4View.rows(assignments.selected.template.ui.add_multiple_dialog);
 
-        workarea.html(scb_instructor_experiment_setup_page4.main({
+        workarea.html(scb_instructor_western_blot_page1.main({
             global_template: gstate.context.master_model,
             assignments: assignments,
             last_step: last_step,
             prev_step: prev_step,
             kind: kind,
             headings: assignments.selected.template.ui.add_multiple_dialog.headings, 
-            rows: rows,
             assignment: assignments.selected,
             context: gstate.context,
             courses: courses,

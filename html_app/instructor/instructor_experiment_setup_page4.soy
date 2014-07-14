@@ -6,7 +6,10 @@
 * @param last_step
 * @param prev_step
 * @param assignments AssignmentsView
+* @param assignment
 * @param context
+* @param rows
+* @param headings
 */
 {template .main}
 <div class='scb_s_experiment_setup_view' >
@@ -21,9 +24,17 @@
         {param assignments:assignments/}
     {/call}
     <div class='scb_s_experiment_setup_container' role='main'>
+    {call scb_instructor_homepage.display_assignment_navigation}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
     {call .display_assignment}
     {param global_template:$global_template /}
     {param assignments:$assignments/}
+    {param headings: $headings/}
+    {param assignment: $assignment/}
+    {param rows: $rows/}
     {param view: 'select_course'/}
     {/call}
     </div>
@@ -36,21 +47,51 @@
 
 /**
 Assignment description
+@param headings
+@param rows
+@param assignment
 */
 {template .display_assignment}
-<div class='scb_s_assignment_outline_description '>
-    	<div class='scb_s_outline_title'>
-            Builder Outline: 
-        </div>
-</div>
+
 
 <div class='scb_s_course_setup_description '>
     	<div class='scb_s_abstract_title'>
             Assignment Editor
         </div>
-    <div class='scb_s_experiment_setup_title'>Experiment Setup</div>
+    <div class='scb_s_assignment_setup_course_name_heading'>5. Please confirm your experimental setup before continuing:</div>
     
-    
+    <div>
+    <table class="scb_s_experiment_setup_table " aria-label='Table of Samples' role='grid'>
+			<thead class='scb_s_experiment_setup_table_head' >
+			{foreach $h in $headings}
+				<td role='columnheader'  class='scb_s_experiment_setup_table_heading' >
+					{$h}
+				</td>
+			{/foreach}
+			</thead>
+			<tbody class='scb_s_experiment_setup_table_body'>
+			{foreach $r in $rows}
+			<tr class='scb_s_experiment_setup_table_row' role='row' aria-label='Sample' assignment_id='{$assignment.id}' >
+				{foreach $c in $r.row}
+				<td class='scb_s_experiment_setup_table_element ' >
+						{if $c == 'cell_plate'}
+							<img src="images/setup/scb_cell_plate.png" role='presentation'>
+						{else}
+							{$c}
+						{/if}
+				</td>
+				{/foreach}
+			</tr>
+			{/foreach}
+			
+			</tbody>
+		</table>
+	</div>
+    <div>
+        <button assignment_id='{$assignment.id}' class=" scb_f_experiment_setup_page4_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
+
+    </div>
+
 
 </div>
 {/template}

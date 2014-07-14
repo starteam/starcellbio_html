@@ -8,6 +8,11 @@
   position: relative;
   z-index: 1;
 }
+.scb_s_experiment_setup_page3_sort {
+  width: 102px;
+  position: relative;
+  right: 206px;
+}
 .scb_s_experiment_setup_description {
   margin-top: 22px;
   text-align: justify;
@@ -76,8 +81,29 @@
   position: relative;
   top: 10px;
 }
-label.custom-select-treatment {
-  display: inline-block;
+.scb_s_sort_header {
+  width: 413px !important;
+}
+.scb_s_sort_dialog {
+  background: #f5f5f5;
+  overflow: visible;
+  width: 425px;
+  height: 225px;
+  border-radius: 14px;
+  font-family: sourcesanspro-regular;
+  font-weight: normal !important;
+}
+.custom-select-sort {
+  width: 100px;
+  height: 21px;
+  padding-top: 4px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  overflow: hidden;
+  background: url("../../images/setup/scb_experiment_dropdown.png") no-repeat right #fff;
+  box-shadow: inset 1px 1px 3px 1px rgba(0,0,0,0.3);
+  margin-left: 55px;
+  margin-right: 30px;
 }
 .custom-select-treatment {
   width: 60px;
@@ -99,15 +125,15 @@ label.custom-select-treatment {
   background: url("../../images/setup/scb_experiment_dropdown.png") no-repeat right #fff;
   box-shadow: inset 1px 1px 3px 1px rgba(0,0,0,0.3);
 }
-label.custom-select-treatment, label.custom-select-treatment-concentration {
+label.custom-select-treatment, label.custom-select-treatment-concentration, label.custom-select-sort {
   position: relative;
   display: inline-block;
   height: 19px;
 }
-.custom-select-treatment:hover, .custom-select-treatment-concentration:hover {
+.custom-select-treatment:hover, .custom-select-treatment-concentration:hover, .custom-select-sort:hover {
   background: url("../../images/setup/scb_experiment_dropdown_hover.png") no-repeat right #fff;
 }
-.custom-select-treatment select, .custom-select-treatment-concentration select {
+.custom-select-treatment select, .custom-select-treatment-concentration select, .custom-select-sort select {
   background: transparent;
   width: 268px;
   color: #316f94;
