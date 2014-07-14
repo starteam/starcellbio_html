@@ -10,25 +10,31 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        # Examples:
                        url(r'^$', "StarCellBio.views.home", name='home'),
+#                        url(r'^instructor/', "StarCellBio.views.home", name='home'),
                        url(r'^index.html$', "StarCellBio.views.home"),
                        url(r'^scb/contact$', "StarCellBio.views.contact", name='contact'),
                        url(r'^scb/get_model.js$', "StarCellBio.views.get_model", name='get_model'),
-                       url(r'^scb/create_courses.js$', "StarCellBio.views.create_courses", name='create_courses'),
-                       url(r'^scb/get_courses.js$', "StarCellBio.views.get_courses", name='get_courses'),
+                       url(r'^scb/initialize_courses.js$', "StarCellBio.views.initialize_courses", name='initialize_courses'),
+                       url(r'^scb/get_student_courses.js$', "StarCellBio.views.get_student_courses", name='get_student_courses'),
+                       url(r'^scb/get_instructor_assignments.js$', "StarCellBio.views.get_instructor_assignments", name='get_instructor_assignments'),
+                       url(r'^scb/edit_assignment.js$', "StarCellBio.views.edit_assignment", name='edit_assignment'),
+
+                       url(r'^scb/create_course.js$', "StarCellBio.views.create_course", name='create_course'),
+                       url(r'^scb/create_new_assignment.js$', "StarCellBio.views.create_new_assignment", name='create_new_assignment'),
+
+                       
+                       url(r'^scb/get_user.js$', "StarCellBio.views.get_user", name='get_user'),
                        url(r'^scb/post_state.js$', "StarCellBio.views.post_state", name='post_state'),
-                       # url(r'^StarCellBio/', include('StarCellBio.foo.urls')),
                        # Uncomment the admin/doc line below to enable admin documentation:
                        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
                        # Uncomment the next line to enable the admin:
                        url(r'^admin/', include(admin.site.urls)),
-                       #url(r'^scb_rest/', include('rest_framework.urls', namespace='rest_framework')),
                        url(r'^images/(?P<path>.*)$', 'django.views.static.serve',
                            {'document_root': 'html_app/images/'}),
                        url(r'^pdf/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'html_app/pdf/'}),
                        url(r'^js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'html_app/js/'}),
-                       #url(r'^api/', include(user_resources.urls)),
-                       url(r'^instructor/', include('instructor.urls', namespace="instructor", app_name="instructor")),
+                       
 )
 # add authentication URL patterns
 urlpatterns += auth.urls.urlpatterns

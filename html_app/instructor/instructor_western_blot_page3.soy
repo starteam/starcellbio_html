@@ -1,0 +1,64 @@
+{namespace scb_instructor_western_blot_page3}
+
+/**
+* Assignment selector
+* @param global_template
+* @param last_step
+* @param prev_step
+* @param assignments AssignmentsView
+* @param assignment
+* @param context
+*/
+{template .main}
+<div class='scb_s_western_blot_view' >
+    {call scb_instructor_homepage.display_header}
+    {param global_template:$global_template /}
+    {param context:$context /}
+    {/call}
+        {call scb_instructor_common.assignment_step}
+        {param step:1/}
+        {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
+        {param assignments:assignments/}
+    {/call}
+    <div class='scb_s_western_blot_container' role='main'>
+    {call scb_instructor_homepage.display_assignment_navigation}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
+    {call .display_assignment}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param view: 'select_course'/}
+    {/call}
+    </div>
+    {call scb_instructor_homepage.display_footer}
+    {param global_template:$global_template /}
+    {/call}
+</div>
+{/template}
+
+
+/**
+Assignment description
+@param view
+*/
+{template .display_assignment}
+
+<div class='scb_s_course_setup_description '>
+    	<div class='scb_s_abstract_title'>
+            Assignment Editor
+        </div>
+    {if $view == 'select_course'}
+    <div class='scb_s_western_blot_title'>Course Setup</div>
+    
+    
+    {elseif $view == 'create_assignment'}
+    
+    {/if}
+    
+
+</div>
+{/template}
+

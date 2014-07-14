@@ -1,0 +1,108 @@
+{namespace scb_instructor_assignment_setup}
+
+/**
+* Assignment selector
+* @param global_template
+* @param last_step
+* @param prev_step
+* @param assignments AssignmentsView
+* @param assignment
+* @param context
+*/
+{template .main}
+<div class='scb_s_assignment_setup_view' >
+    {call scb_instructor_homepage.display_header}
+    {param global_template:$global_template /}
+    {param context:$context /}
+    {/call}
+        {call scb_instructor_common.assignment_step}
+        {param step:2/}
+        {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
+        {param assignments:assignments/}
+    {/call}
+    <div class='scb_s_assignment_setup_container' role='main'>
+    {call scb_instructor_homepage.display_assignment_navigation}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
+    {call .display_assignment}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
+    </div>
+    {call scb_instructor_homepage.display_footer}
+    {param global_template:$global_template /}
+    {/call}
+</div>
+{/template}
+
+
+/**
+Assignment description
+@param assignment
+@param assignments
+*/
+{template .display_assignment}
+
+<div class='scb_s_course_setup_description '>
+    	<div class='scb_s_abstract_title'>
+            Assignment Editor
+        </div>
+		{call .create_assignment}
+		{param assignment: $assignment/}
+		{param assignments:$assignments/}
+		{/call}
+</div>
+{/template}
+
+
+
+/**
+Assignment Create Assignment
+@param assignment
+@param assignments
+*/
+{template .create_assignment}
+<div class='scb_s_assignment_setup_title'>Assignment Setup</div>
+<div class='scb_s_assignment_setup_radio_choice scb_f_assignment_setup_create_new_assignment' assignment_id='{$assignment.id}' aria-label='Create New Assignment' ><input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"  {if $assignment.is_new_assignment}checked{/if} /><span class='scb_s_assignment_setup_radio_text'>Create new assignment OR</span></div>
+<div class='scb_s_assignment_setup_radio_choice scb_f_assignment_setup_choose_existing_template' assignment_id='{$assignment.id}'><input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"  {if not $assignment.is_new_assignment}checked{/if} /><span class='scb_s_assignment_setup_radio_text'>Use an existing assignment as a template.</span>
+<br/>
+	
+</div>
+<div class="scb_s_assignment_setup_assignment_list" assignment_id='{$assignment.id}'  aria-labelledby="scb_s_experiment_step_progress_label_for_assignment">
+		<label role="presentation" class="custom-select">
+		<select role="select" aria-label="Experiments" alt="" assignment_id='{$assignment.id}'>
+			{foreach $a in $assignments.list}
+				{if $a.operation =='view'}
+				<option role='option' aria-label='{$a.name}' value="{$a.id}" 
+					assignment_id='{$assignment.id}'
+					{if  $assignment.template_id  == $a.id}selected="selected"{/if}> 
+					{$a.name}&nbsp;&nbsp;
+					
+				</option>
+				{/if}
+			{/foreach}
+		</select>
+		</label>
+		
+
+	</div>
+<br/>
+<br/>
+
+
+<div class='scb_s_assignment_setup_course_name_heading'>3. What is the name of the assignment?</div>
+<input type='text' class='scb_s_assignment_setup_text_field scb_f_assignment_setup_assignment_name_value' placeholder="Assignment Name" value='{$assignment.name}'  title='{$assignment.name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+<p/>
+
+<!-- <button assignment_id='{$assignment.id}' class=" scb_f_assignment_setup_back_button scb_s_assignment_setup_back_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>&#9664; &nbsp; BACK</button> -->
+
+
+<button assignment_id='{$assignment.id}' class=" scb_f_assignment_setup_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
+
+
+{/template}
+

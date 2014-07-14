@@ -61,6 +61,23 @@ input{
 	text-transform: uppercase;
 }
 
+.account_input > label{
+	color: #316f94;
+	font-size: 9pt;
+	letter-spacing: 1px;
+	font-weight: bold;
+	display:block;
+	margin-bottom: 5px;
+	text-transform: uppercase;
+}
+
+
+.account_input > span, .account_input > input{
+	display: inline;
+	vertical-align: middle;
+}
+
+
 #div_id_email > input, #div_id_password1 > input, #div_id_password2 > input, .course_code > input{
 
 	display: block;
@@ -87,6 +104,12 @@ Your instructor should have provided you with a code that you need to enter belo
 <form class="signup uniForm" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
   <fieldset class="inlineLabels">
+  	<div  class='account_input'>
+  	 <label>ACCOUNT TYPE </label>
+    <input onclick='showCourseCode()' id='account_input_student' type='radio' value='student' name="account_type" /> <span>Student</span>
+    <input onclick='hideCourseCode()' id='account_input_instructor' type='radio'  value='instructor' name="account_type"  /> <span>Instructor</span>
+    </div>
+
     {{ form|as_uni_form }}
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
@@ -110,6 +133,7 @@ Your instructor should have provided you with a code that you need to enter belo
 
 
 <script>
+
 if(document.getElementById('div_id_email').className != 'ctrlHolder error ')
 document.getElementById('div_id_email').children[0].textContent='E-MAIL';
 if(document.getElementById('div_id_password2').children[0] != 'ctrlHolder error ')
@@ -136,10 +160,21 @@ function changeStatus(){
 			document.getElementById('code_status').innerHTML = "<span style='color:red'>&#215; </span>&nbsp; This is not a valid code. You cannot create an account."
 			document.getElementById('auth_submit_button').disabled=true;
 			}
-			
 		}
 	}
 }
+
+
+function hideCourseCode(){
+		document.getElementsByClassName('course_code')[0].style.display = 'none';
+		document.getElementById('auth_submit_button').disabled=false;
+}
+
+function showCourseCode(){
+		document.getElementsByClassName('course_code')[0].style.display = '';
+		document.getElementById('auth_submit_button').disabled=true;
+}
+
 
 </script>
 

@@ -1,0 +1,109 @@
+{namespace scb_instructor_dashboard}
+
+/**
+* Assignment selector
+* @param global_template
+* @param last_step
+* @param prev_step
+* @param assignments AssignmentsView
+* @param context
+* @param courses // group Assignments by Course
+*/
+{template .main}
+<div class='scb_s_dashboard_view' >
+    {call scb_instructor_homepage.display_header}
+    {param global_template:$global_template /}
+    {param context:$context /}
+    {/call}
+    
+    {call scb_instructor_common.assignment_step}
+        {param step:1/}
+        {param last_step: $last_step/}
+        {param prev_step: $prev_step/}
+        {param assignments:assignments/}
+    {/call}
+    <div class='scb_s_dashboard_container' role='main'>
+    {call .display_assignments}
+        {param assignments:$assignments/}
+        {param courses: $courses/}
+        {param sections:['Current Assignments', 'Assignment Drafts', 'Archived Assignments', 'Public Assignments']/}
+    {/call}
+    </div>
+    {call scb_instructor_homepage.display_footer}
+    {param global_template:$global_template /}
+    {/call}
+</div>
+{/template}
+
+
+/**
+Assignment assignments
+@param assignments
+@/param sections
+*/
+{template .display_assignments}
+<div class='scb_s_dashboard_sidebar'>
+    <h1 class='scb_s_dashboard_sidebar_title'>Your Assignments: <div class='scb_s_dashboard_sidebar_name scb_s_dashboard_button_wrapper'>
+			</div>  </h1>
+	
+	       		<button assignment_id='{$assignments.selected.id}' class=" scb_f_dashboard_new_assignment_button scb_s_dashboard_new_assignment_button scb_s_navigation_button" href="#view=course_setup" aria-label='New Experiment' role='button'> Create a New Assignment &nbsp; &#43;</button> 
+
+    
+   <table class="scb_s_dashboard_table " aria-label='Table of Samples' role='grid'>
+			<thead class='scb_s_dashboard_table_head' >
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_assignment_name ' >Assignment Name
+				</td>
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_course_name ' >Course Name
+				</td>
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_course_code ' >Course Code
+				</td>
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_permission ' >Permission
+				</td>
+				<td role='columnheader'  class='scb_s_dashboard_table_heading  scb_s_dashboard_student_assignment ' >Student <br/> Assignments
+				</td>
+				<td role='columnheader'  class='scb_s_dashboard_table_heading scb_s_dashboard_actions ' colspan='3' >Actions
+				</td>
+			</thead>
+			<tbody class='scb_s_dashboard_table_body'>
+				{foreach $assignment in $assignments.list}
+				<tr class='scb_s_dashboard_table_row' role='row' aria-label='Sample'assignment_id='{$assignment.id}' >
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border' rowspan="1">
+					{$assignment.name}<br/>
+					{if $assignment.operation == 'view'}
+					<a class='scb_s_dashboard_link' href='#view=course_setup'>View</a>
+					{else}
+					<a class='scb_s_dashboard_link' href='#view=course_setup'>Edit</a>
+					{/if}
+										
+					<span class='scb_s_dashboard_link'  > | Preview</span>
+					</td>
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border' rowspan="1">
+					{$assignment.course_name}	
+					</td>
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border' rowspan="1">
+					{$assignment.course}	
+					</td>
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border' rowspan="1" >
+					{$assignment.permission}	
+					</td>
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_student_assignment' rowspan="1" >
+					{$assignment.students}
+					</td>
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_trash'  >	
+						<button role='button' aria-label='Delete'  class='scb_f_dashboard_remove_assignment scb_s_dashboard_remove_assignment' 
+							assignment_id='{$assignment.id}' ><img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+						</button>
+					</td>
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_copy' >	
+						<button role='button' aria-label='Copy'  class='scb_f_dashboard_duplicate_assignment scb_s_dashboard_duplicate_assignment' 
+								assignment_id='{$assignment.id}' ><img alt="" title="Copy" role='presentation' src="images/setup/scb_copy.png">
+						</button>
+					</td>
+					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_actions scb_s_dashboard_archive' >	
+					</td>
+				  </tr>
+				{/foreach}
+			</tbody>
+		</table> 
+</div>
+{/template}

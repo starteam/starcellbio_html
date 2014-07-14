@@ -14,6 +14,8 @@ from django.core.files.base import ContentFile
 import StarCellBio.settings
 import os
 import StarCellBio.supplements as supplements
+from django.contrib.auth.models import User, Group, Permission
+from django.contrib.contenttypes.models import ContentType
 
 random_mapping = {0: 'DEBAC', 1: 'DABEC', 2: 'CABED', 3: 'ACDEB', 4: 'EBADC', 5: 'BDECA', 6: 'EBCAD', 7: 'ADBCE', 8: 'CBAED', 9: 'DEACB', 10: 'ECDAB', 11: 'EDACB', 12: 'EBACD', 13: 'EADBC', 14: 'CBDEA', 15: 'CEDBA', 16: 'AEDCB', 17: 'DCBEA', 18: 'EDCAB', 19: 'ECBDA', 20: 'ABDCE', 21: 'BCAED', 22: 'ADECB', 23: 'BCADE', 24: 'BACED', 25: 'AEDBC', 26: 'EADCB', 27: 'AEBCD', 28: 'DBECA', 29: 'CAEBD', 30: 'ABECD', 31: 'CDAEB', 32: 'EABDC', 33: 'BDCEA', 34: 'CADEB', 35: 'DEABC', 36: 'BDACE', 37: 'AEBDC', 38: 'EBDAC', 39: 'ABCED', 40: 'EBCDA', 41: 'DACBE', 42: 'DCBAE', 43: 'BDCAE', 44: 'AECBD', 45: 'DCEBA', 46: 'ACEDB', 47: 'BCEAD', 48: 'CDEAB', 49: 'ECDBA', 50: 'DAECB', 51: 'BEACD', 52: 'CDBEA', 53: 'ACEBD', 54: 'DBEAC', 55: 'ACBED', 56: 'CBDAE', 57: 'ABCDE', 58: 'ADCBE', 59: 'BAECD', 60: 'DECAB', 61: 'ADCEB', 62: 'BCDAE', 63: 'CBADE', 64: 'CEADB', 65: 'CEBDA', 66: 'EACDB', 67: 'DBAEC', 68: 'EDCBA', 69: 'DEBCA', 70: 'CDEBA', 71: 'BAEDC', 72: 'CAEDB', 73: 'EDBCA', 74: 'ABDEC', 75: 'EDABC', 76: 'CADBE', 77: 'DCABE', 78: 'ADBEC', 79: 'ABEDC', 80: 'EBDCA', 81: 'DCAEB', 82: 'BEDCA', 83: 'CEBAD', 84: 'CBEDA', 85: 'DABCE', 86: 'BECDA', 87: 'EDBAC', 88: 'CBEAD', 89: 'BADEC', 90: 'BDAEC', 91: 'ADEBC', 92: 'CEABD', 93: 'DBCAE', 94: 'BECAD', 95: 'BCDEA', 96: 'BCEDA', 97: 'ECBAD', 98: 'DBCEA', 99: 'AECDB', 100: 'DCEAB', 101: 'BADCE', 102: 'DBACE', 103: 'EACBD', 104: 'CDABE', 105: 'BACDE', 106: 'ACDBE', 107: 'ECABD', 108: 'CDBAE', 109: 'DACEB', 110: 'BEADC', 111: 'EABCD', 112: 'CABDE', 113: 'BDEAC', 114: 'CEDAB', 115: 'DECBA', 116: 'DAEBC', 117: 'ECADB', 118: 'ACBDE', 119: 'BEDAC'}
 
@@ -60,13 +62,52 @@ def get_model(request):
     response['Content-Type'] = 'text/javascript'
     return response
     
-def create_courses(request, **kwargs):# 
-# 	import pudb
+def get_user(request, **kwargs):
+	import pudb
+# 	pudb.set_trace()	
+	if(request.user.id):
+		account_type = request.user.groups.all()[0].name
+	else:
+		account_type = ''
+	retval = {'account_type': account_type, 'name': request.user.username}
+	response = HttpResponse("var get_user_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response
+	
+def create_course(request, **kwargs):#
 # 	pudb.set_trace()
+	jstr=request.raw_post_data
+	jsondata = json.loads(jstr)
+	
+	course_code = jsondata['course_code']
+	
+	if(Course.objects.filter(code=course_code).count()==0):
+		c = Course(code = course_code, course_name = jsondata['course_name'])
+		c.save()
+		return HttpResponse('created')
+	else:
+		return HttpResponse('already_exists')
+	
+    
+def initialize_courses(request, **kwargs):# 
+	import pudb
+# 	pudb.set_trace()
+	jstr=request.raw_post_data
+	jsondata = json.loads(jstr)
 	if(request.method == 'POST'):
+		#pudb.set_trace()
+		g= Group(name='instructor')
+		s = Group(name='student')
+		content_type = ContentType.objects.get_for_model(User)
+		if(Permission.objects.filter(codename='is_instructor').count() <= 0):
+			p = Permission(codename='is_instructor', name='Is instructor', content_type=content_type)
+			p.save()
+			g.save()
+			s.save()
+			g.permissions.add(p)
+			g.save()
 
-		jstr=request.raw_post_data
-		jsondata = json.loads(jstr)
 		if(jsondata):
 			#make more complex later 
 			for x in jsondata['assignments']['list']:
@@ -85,15 +126,21 @@ def create_courses(request, **kwargs):#
 		response['Content-Type'] = 'text/javascript'
 		return response
 		
-def get_courses(request, **kwargs):
+#This view gets the courses for a student for their account
+#For the instructor, it gets the courses it can view		
+def get_student_courses(request, **kwargs):
 	import ast
 	import random
 	import pudb
-	#pudb.set_trace()
+# 	pudb.set_trace()
+	if(request.user.id):
+		account_type = request.user.groups.all()[0].name
+	else:
+		account_type = ''
 	alist = []
 	retval = []
 	token1 = random.randrange(0, 1000000)
-	if(UserCourse.objects.filter(user__username = request.user.username).count()>0):
+	if(UserCourse.objects.filter(user__username = request.user.username).count()>0 and account_type == 'student'):
 		usercourses = UserCourse.objects.filter(user=request.user)
 		courses = []
 		for usercourse in usercourses:
@@ -173,16 +220,19 @@ def get_courses(request, **kwargs):
 			is_selected_val = 'assignment_706_2014_ps2'
 		else:
 			is_selected_val = alist[0]['id']
-		retval = {'list': alist, 'is_auth': True, 'is_selected': is_selected_val, 'token': token1}
+		retval = {'is_student': True, 'list': alist, 'is_auth': True, 'is_selected': is_selected_val, 'token': token1}
 	else:
 		#pudb.set_trace()
-		all =[]
-		for a in Assignment.objects.all():
-			dictionary = ast.literal_eval(a.data)
-			if(a.assignmentID == 'decusability' or a.assignmentID == 'decusability2' or a.assignmentID == 'microscopy_usability'):  # or a.assignmentID == 'microscopy_test' ): #or a.assignmentID == 'assignment_706_2014_ps2'):
-				all.append(dictionary)
-		retval = {'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
-	response = HttpResponse("var get_courses_result = {0};".format(json.dumps(retval)))
+		if(account_type == 'instructor'):
+			retval = {'is_student': False, 'list': [], 'is_auth': True, 'is_selected': '', 'token': token1}
+		else:
+			all =[]
+			for a in Assignment.objects.all():
+				dictionary = ast.literal_eval(a.data)
+				if(a.assignmentID == 'decusability' or a.assignmentID == 'decusability2' or a.assignmentID == 'microscopy_usability'):  # or a.assignmentID == 'microscopy_test' ): #or a.assignmentID == 'assignment_706_2014_ps2'):
+					all.append(dictionary)
+			retval = {'is_student': True, 'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
+	response = HttpResponse("var get_student_courses_result = {0};".format(json.dumps(retval)))
 	response.set_cookie("scb_username", request.user.username)
 	response['Content-Type'] = 'text/javascript'
 	return response
@@ -325,3 +375,85 @@ def randomize_706_2014_ps1(request, assignment_data):
 	return repr(assignment_data)
 					
 			
+def get_instructor_assignments(request, **kwargs):
+	import ast
+	import random
+	import pudb
+# 	pudb.set_trace()
+	retval = []
+	token1 = random.randrange(0, 1000000)
+	return_list = []
+	if(request.user.id):
+		account_type = request.user.groups.all()[0].name
+	else:
+		account_type = ''
+	if(account_type == 'instructor'):
+# 		pudb.set_trace()
+		public_list = Assignment.objects.filter(access='Public')
+		for v in public_list: 
+			dictionary = ast.literal_eval(v.data)
+			students = StudentAssignment.objects.filter(assignmentID=v.assignmentID).count()
+			return_list.append({'access': 'Public', 'students': students, 'data': dictionary})
+		private_list = Assignment.objects.filter(ownerID=request.user.id).filter(access='Private')
+		for v in private_list: 
+			dictionary = ast.literal_eval(v.data)
+			students = StudentAssignment.objects.filter(assignmentID=v.assignmentID).count()
+			return_list.append({'access': 'Private', 'students': students, 'data': dictionary})
+		archive_list = Assignment.objects.filter(ownerID=request.user.id).filter(access='Archived')
+		for v in archive_list: 
+			dictionary = ast.literal_eval(v.data)
+			students = StudentAssignment.objects.filter(assignmentID=v.assignmentID).count()
+			return_list.append({'access': 'Archived', 'students': students, 'data': dictionary})
+		retval = {'is_auth': True, 'is_student': False, 'list': return_list, 'token': token1}
+	else:
+		retval = {'is_auth': True, 'is_student': True,'list': [],  'token': token1}	
+	response = HttpResponse("var get_instructor_assignments_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response
+	
+	
+def create_new_assignment(request, **kwargs):
+# 	pudb.set_trace()
+	jstr=request.raw_post_data
+	assignment_data = json.loads(jstr)['assignment']
+	
+	assign_id = assignment_data['id']
+	assign_name = assignment_data['name']
+	
+	if(Assignment.objects.filter(assignmentID=assign_id).count()==0):
+		a = Assignment(courseID=Course.objects.get(code=assignment_data['course']), assignmentID=assign_id, assignmentName=assign_name, data = assignment_data, ownerID=request.user, access=assignment_data['permission'])
+		a.save()
+		return HttpResponse('created')
+	else:
+		return HttpResponse('already_exists')
+		
+	
+def edit_assignment(request, **kwargs):
+# 	pudb.set_trace()
+	jstr = request.raw_post_data
+	jsondata = json.loads(jstr)
+	jsonmodel = jsondata['model']
+	import random
+	if(Assignment.objects.filter(ownerID = request.user.id).count()>0):
+		my_assignments = Assignment.objects.filter(ownerID=request.user.id).exclude(access='public')
+		for assignment in my_assignments:
+			retval = {'is_anonymous': False, 'valid_token':False}
+			for x in jsondata['model']['assignments']['list']:
+				if( assignment.assignmentID==x['id']):
+					assignment.data = json.loads(json.dumps(x))
+					assignment.save()
+					retval = {'is_anonymous': False, 'valid_token': True}
+	else:
+		retval = {'is_anonymous': True, 'valid_token': False}
+	response = HttpResponse("var post_state_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response
+	
+def edit_assignment_metadata(request, **kwargs):
+	retval = []
+	response = HttpResponse("var get_instructor_assignments_result = {0};".format(json.dumps(retval)))
+	response.set_cookie("scb_username", request.user.username)
+	response['Content-Type'] = 'text/javascript'
+	return response

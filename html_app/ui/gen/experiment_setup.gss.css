@@ -82,6 +82,9 @@ table.scb_s_experiment_setup_table {
 .scb_s_experiment_setup_table_body {
   background-color: #edeef2;
 }
+.scb_s_experiment_setup_table_border {
+  border-top: 1px solid #e0e0e0;
+}
 .scb_s_experiment_setup_new_set_up {
   visibility: hidden;
   position: relative;
@@ -101,9 +104,6 @@ table.scb_s_experiment_setup_table {
   font-family: 'sourcesanspro-regular';
   display: inline-block;
   margin-left: 15px;
-}
-.scb_s_experiment_setup_table_border {
-  border-top: 1px solid #e0e0e0;
 }
 .scb_f_experiment_setup_remove_sample, .scb_f_experiment_setup_duplicate_sample {
   border: 0;

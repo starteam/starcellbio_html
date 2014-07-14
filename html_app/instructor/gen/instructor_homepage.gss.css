@@ -1,0 +1,390 @@
+@font-face {
+  font-family: 'SourceSansPro-Black';
+  src: url("../fonts/SourceSansPro-Black.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-BlackIt';
+  src: url("../fonts/SourceSansPro-BlackIt.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-Bold';
+  src: url("../fonts/SourceSansPro-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-BoldIt';
+  src: url("../fonts/SourceSansPro-BoldIt.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-ExtraLight';
+  src: url("../fonts/SourceSansPro-ExtraLight.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-ExtraLightIt';
+  src: url("fonts/SourceSansPro-ExtraLight.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-Light';
+  src: url("../fonts/SourceSansPro-Light.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-LightIt';
+  src: url("../fonts/SourceSansPro-Light.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-Regular';
+  src: url("../fonts/SourceSansPro-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url("../fonts/SourceSansPro-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-RegularIt';
+  src: url("../fonts/SourceSansPro-It.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-Semibold';
+  src: url("../fonts/SourceSansPro-Semibold.otf") format("opentype");
+}
+@font-face {
+  font-family: 'SourceSansPro-SemiboldIt';
+  src: url("../fonts/SourceSansPro-SemiboldIt.otf") format("opentype");
+}
+.scb_s_instructor_account_title {
+  width: 1002px;
+  height: 20px;
+  color: white;
+  background: #27956c;
+  text-align: center;
+  font-family: "sourcesanspro-semibold";
+  font-size: 11pt;
+}
+.scb_s_abstract_title {
+  color: white;
+  background: #27956c;
+  font-size: 13pt;
+  padding: 12px 0 6px 17px;
+  font-family: 'sourcesanspro-semibold';
+  margin-top: -10px;
+  margin-left: -10px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  margin-right: -10px;
+  letter-spacing: .9px;
+}
+.scb_s_course_setup_description {
+  margin-top: 22px;
+  text-align: justify;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 350px;
+  background: #e9ecf1;
+  border-radius: 8px;
+  padding: 10px;
+  width: 637px;
+  position: relative;
+  font-size: 10pt;
+  padding-bottom: 14px;
+  margin-left: 11px;
+}
+.scb_s_assignment_outline_description {
+  margin-top: 22px;
+  font-size: 12px;
+  text-align: justify;
+  display: inline-block;
+  vertical-align: top;
+  width: 247px;
+  margin-right: 10px;
+  padding: 5px;
+  background-color: #f4f6f8;
+  margin-left: 33px;
+  border: 1px solid #d8eee7;
+  min-height: 361px;
+  box-shadow: 0 0 0 0;
+  border-radius: 8px;
+}
+.scb_s_outline_title {
+  font-size: 13pt;
+  padding: 11px 0 6px 17px;
+  font-family: "sourcesanspro-semibold";
+  text-align: left;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: white;
+  background: #27956c;
+  margin: -5px;
+}
+.scb_s_instructor_homepage_view {
+  width: 1002px;
+  height: 688px;
+  background-color: white;
+}
+.scb_s_instructor_header {
+  height: 80px;
+  width: 1002px;
+  padding-top: 0;
+  background-color: #f4f6f8;
+  display: block;
+  position: relative;
+  box-shadow: 0 3px 9px -2px #939aa3;
+}
+.scb_s_instructor_homepage_see_more_button {
+  cursor: pointer;
+}
+.scb_s_instructor_homepage_new_experiment {
+  left: 750px;
+  width: 150px;
+  bottom: 18px;
+  position: absolute;
+}
+.scb_s_instructor_homepage_content {
+  margin-top: 12px;
+  margin-left: 20px;
+}
+.scb_s_new_instructor_homepage_experiment {
+  position: relative;
+  bottom: 10px;
+}
+.scb_s_instructor_homepage_top {
+  display: block;
+  height: 322px;
+  padding-left: 5px;
+}
+.scb_s_instructor_homepage_top_left {
+  vertical-align: top;
+  display: inline-block;
+  background-image: url('../../images/homepage/SCB_Homepage_HeroImage.png');
+  height: 318px;
+  width: 678px;
+  margin-left: 7px;
+}
+.scb_s_instructor_homepage_top_left_image {
+  padding: 40px 12px 15px;
+}
+.scb_s_instructor_homepage_see_more_button {
+  left: 80px;
+  top: 80px;
+  position: relative;
+}
+.scb_s_instructor_homepage_top_right {
+  display: inline-block;
+  vertical-align: top;
+  background-color: white;
+  border-color: black;
+  border-width: 1px;
+  height: 316px;
+  width: 245px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #a0a0a0;
+  margin-top: 1px;
+  margin-left: 9px;
+  margin-right: -10px;
+  font-size: 10px;
+}
+.scb_s_instructor_homepage_video_player {
+  display: block;
+  width: 240px;
+  margin-left: 2px;
+  margin-top: 4px;
+  margin-bottom: 5px;
+}
+.scb_s_instructor_homepage_blue_actions {
+  font-family: 'SourceSansPro-Bold';
+  color: #316f94;
+  margin-left: 10px;
+  margin-bottom: -8px;
+  margin-top: -5px;
+  font-size: 12pt;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+}
+.scb_s_instructor_homepage_blue_line {
+  margin-left: 5px;
+  width: 200px;
+}
+.scb_s_instructor_homepage_bottom {
+  display: block;
+  height: 207px;
+  margin-top: 15px;
+  border-radius: 5px;
+  margin-left: 11px;
+  width: 936px;
+  margin-bottom: 10px;
+  background-image: url('../images/homepage/SCB_Homepage_LowerBG.png');
+}
+.scb_s_instructor_homepage_experimental_design {
+  display: inline-block;
+  background-image: url('../images/homepage/bottom_bg.png');
+  height: 207px;
+  width: 440px;
+}
+.scb_s_instructor_homepage_experimental_design_text {
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 13px;
+  margin-right: 4px;
+  position: relative;
+  top: -2px;
+}
+.scb_s_instructor_homepage_experimental_design_bar {
+  display: inline-block;
+  margin-left: 5px;
+  top: 14px;
+}
+.scb_s_instructor_homepage_experimental_design_list {
+  width: 400px;
+  height: 200px;
+  display: inline-block;
+  position: relative;
+}
+.scb_s_instructor_homepage_experimental_design_list_title {
+  width: 400px;
+  display: block;
+  vertical-align: top;
+  font-family: 'sourcesanspro-regular';
+  font-size: 11pt;
+  color: black;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.scb_s_instructor_homepage_experimental_design_list_items {
+  width: 155px;
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 8px;
+}
+.scb_s_instructor_homepage_experimental_design_list_bar {
+  display: inline-block;
+  margin-left: 5px;
+  margin-top: 8px;
+  height: 160px;
+}
+.scb_s_instructor_homepage_experimental_design_list_info {
+  width: 200px;
+  display: inline-block;
+  font-family: 'sourcesanspro-regular';
+  vertical-align: top;
+  height: 124px;
+  font-size: 11pt;
+  padding-left: 8px;
+  position: relative;
+  top: 12px;
+}
+.scb_s_instructor_homepage_experimental_design_bullet_item {
+  display: block;
+  font-family: 'sourcesanspro-bold';
+  font-size: 10pt;
+  vertical-align: top;
+  margin-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 3.25px;
+  padding-left: 8px;
+  cursor: pointer;
+}
+.scb_s_instructor_homepage_experimental_design_bullet {
+  display: inline-block;
+  color: black;
+  margin-right: 5px;
+}
+.scb_s_instructor_homepage_experimental_design_item {
+  display: inline-block;
+}
+.scb_s_instructor_homepage_experimental_design_bullet_item_selected {
+  background-color: #27956c;
+  border-radius: 5px;
+}
+.scb_s_instructor_homepage_learn_more {
+  position: absolute;
+  top: 143px;
+  left: 165px;
+}
+.scb_s_instructor_homepage_technique {
+  display: inline-block;
+  height: 200px;
+  vertical-align: top;
+  position: relative;
+  left: 15px;
+}
+.scb_s_instructor_homepage_technique_title {
+  display: block;
+  margin-top: 12px;
+  font-family: 'sourcesanspro-bold';
+  font-size: 14pt;
+}
+.scb_s_instructor_homepage_technique_title_image {
+  display: block;
+  margin-top: -4px;
+  margin-bottom: 5px;
+  font-family: 'sourcesanspro-bold';
+  font-size: 12pt;
+}
+.scb_s_instructor_homepage_technique_wb, .scb_s_instructor_homepage_technique_flow, .scb_s_instructor_homepage_technique_micro {
+  display: inline-block;
+  font-family: 'sourcesanspro-regular';
+  font-size: 9pt;
+  width: 140px;
+  vertical-align: top;
+}
+.scb_s_instructor_homepage_technique_bar {
+  height: 158px;
+  padding-left: 10px;
+  padding-right: 14px;
+}
+.scb_s_instructor_homepage_technique_learn_more {
+  display: block;
+  background: #27956c;
+  border-width: 0;
+  border-radius: 9px;
+  background-size: 110px 33px;
+  background-position: center;
+  height: 24px;
+  width: 95px;
+  margin-top: 20px;
+  margin-left: 0;
+  font-family: 'sourcesanspro-semibold';
+  font-size: 10.5pt;
+  position: absolute;
+  color: white;
+  top: 146px;
+  padding-left: 15px;
+  padding-top: 9px;
+  background-position-x: 0;
+  background-position-y: 1px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.scb_s_instructor_homepage_technique_more {
+  vertical-align: top;
+  margin-top: 50px;
+  display: inline-block;
+  margin-left: 20px;
+}
+.scb_s_instructor_homepage_footer_divider {
+  padding-left: 7px;
+  padding-right: 7px;
+  vertical-align: top;
+  margin-top: 17px;
+}
+.scb_s_instructor_homepage_footer_support, .scb_s_instructor_homepage_footer_about {
+  vertical-align: top;
+  font-size: 9pt;
+  position: relative;
+  top: 17px;
+  color: #727272;
+}
+.scb_s_instructor_homepage_top_left_text {
+  color: black;
+  font-size: 11pt;
+  display: block;
+  padding: 15px;
+  position: relative;
+  top: 50px;
+  left: 20px;
+  width: 215px;
+  background: rgba(255,255,255,0.8);
+  line-height: 18pt;
+}
+.scb_s_instructor_homepage_top_left_text b {
+  font-size: 14pt;
+}

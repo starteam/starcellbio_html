@@ -62,8 +62,8 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 							if(!isFound){
 								if(matches){
 									console.info(hash_list)
-									var max = _.size(template.slide_parser[collection_id][slide_type][conditions]);
-									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+									var max = template.slide_parser[collection_id][slide_type][conditions].length;
+									var index =  Math.floor(Math.random() * (max - 1 + 1));
 									console.info(template.slide_parser[collection_id][slide_type][conditions][index]);
 									console.info(template.slide_parser[collection_id][slide_type][conditions]);
 									var slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
@@ -73,7 +73,7 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 									var number_of_comparisons = 0;
 									while(alreadySelected && number_of_comparisons < max){
 										console.info(number_of_comparisons);
-										index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+										index =  Math.floor(Math.random() * (max - 1 + 1));
 										slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
 										alreadySelected = false;
 										_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
@@ -84,8 +84,8 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 									isFound = true;
 								}
 								else{
-									var max = _.size(template.slide_parser['default']['Dye']['HnE']);
-									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+									var max = template.slide_parser['default']['Dye']['HnE'].length;
+									var index =  Math.floor(Math.random() * (max - 1 + 1));
 									imgs = template.slide_parser['default']['Dye']['HnE'][index];
 								}
 							}
@@ -144,8 +144,8 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 							if(!isFound){
 								if(matches){
 									var phenotype = rule.phenotype;
-									var max = _.size(template.slide_parser[collection_id][slide_type][conditions][phenotype]);
-									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+									var max = template.slide_parser[collection_id][slide_type][conditions][phenotype].length;
+									var index =  Math.floor(Math.random() * (max - 1 + 1));
 									var slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
 									var alreadySelected = false; 
 									_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
@@ -153,7 +153,7 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 									var number_of_comparisons = 0;
 									while(alreadySelected && number_of_comparisons < max){
 										console.info(number_of_comparisons);
-										index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+										index =  Math.floor(Math.random() * (max - 1 + 1));
 										slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
 										alreadySelected = false;
 										_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
@@ -222,8 +222,8 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 							if(!isFound){
 								if(matches){
 									var phenotype = rule.phenotype;
-									var max = _.size(template.slide_parser[collection_id][slide_type][conditions][phenotype]);
-									var index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+									var max = template.slide_parser[collection_id][slide_type][conditions][phenotype].length;
+									var index =  Math.floor(Math.random() * (max - 1 + 1));
 									var slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
 									var alreadySelected = false; 
 									_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
@@ -231,7 +231,7 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 									var number_of_comparisons = 0;
 									while(alreadySelected && number_of_comparisons < max){
 										console.info(number_of_comparisons);
-										index =  Math.floor(Math.random() * (max - 1 + 1)) + 1;
+										index =  Math.floor(Math.random() * (max - 1 + 1));
 										slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
 										alreadySelected = false;
 										_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
