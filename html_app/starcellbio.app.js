@@ -3,6 +3,8 @@
 
 var console = console || {
     info: function () {
+    },
+    log: function (){
     }
 };
 var scb = scb || {};

@@ -30,17 +30,17 @@ scb.ui.static.InstructorWesternBlotPage1View.scb_f_western_blot_page1_save_assig
 
 	var parsed = scb.ui.static.InstructorWesternBlotPage1View.parse(element);
 	
-	scb.ui.static.InstructorFrame.pending_save(parsed);
+	parsed.assignment.template.lysate_kinds = {};
 	
 	if($('.scb_f_western_blot_select_whole_cell_lysate').attr('checked')){
 		parsed.assignment.template.lysate_kinds['whole'] = ({name: 'Whole Cell' });
 
 	}
-	if($('.scb_f_western_blot_select_nuclear').attr('checked')){
+	if($('.scb_f_western_blot_select_cytoplasmic').attr('checked')){
 		parsed.assignment.template.lysate_kinds['cyto'] = ({name: 'Cytoplasm' });
 	
 	}
-	if($('.scb_f_western_blot_select_cytoplasmic').attr('checked')){
+	if($('.scb_f_western_blot_select_nuclear').attr('checked')){
 		parsed.assignment.template.lysate_kinds['nuclear'] = ({name: 'Nuclear' });
 			
 	}
@@ -56,7 +56,7 @@ scb.ui.static.InstructorWesternBlotPage1View.scb_f_western_blot_page1_save_assig
 	if($('.scb_f_western_blot_select_fifteen').attr('checked')){
 		parsed.assignment.template.ui.experimental_design.gel_types.push('.15');
 	}
-	
+	scb.ui.static.InstructorFrame.pending_save(parsed);
 	
 	var state = {
 		assignment_id: parsed.assignment.id,
@@ -82,6 +82,24 @@ scb.ui.static.InstructorWesternBlotPage1View.register = function(workarea) {
     
   
 };
+
+
+scb.ui.static.InstructorWesternBlotPage1View.enable_checkboxes = function(lysate_kinds, gel_types){
+	if(_.contains(_.keys(assignments.selected.template.lysate_kinds), 'whole'))
+		$('.scb_f_western_blot_select_whole_cell_lysate').attr('checked', true);
+	if(_.contains(_.keys(assignments.selected.template.lysate_kinds), 'nuclear'))
+		$('.scb_f_western_blot_select_nuclear').attr('checked', true);
+	if(_.contains(_.keys(assignments.selected.template.lysate_kinds), 'cyto'))
+		$('.scb_f_western_blot_select_cytoplasmic').attr('checked', true);
+		
+	if(_.contains(gel_types, '.10'))
+		$('.scb_f_western_blot_select_ten').attr('checked', true);
+	if(_.contains(gel_types, '.12'))
+		$('.scb_f_western_blot_select_twelve').attr('checked', true);
+	if(_.contains(gel_types, '.15'))
+		$('.scb_f_western_blot_select_fifteen').attr('checked', true);
+}
+
 
 
 scb.ui.InstructorWesternBlotPage1View = function scb_ui_InstructorWesternBlotPage1View(gstate) {
@@ -124,6 +142,8 @@ scb.ui.InstructorWesternBlotPage1View = function scb_ui_InstructorWesternBlotPag
             $('.scb_s_ref_info_link').click(function(){
         	$('.scb_assignments_header_link_wrapper[value="Reference Material"]').click();
         });
+
+        var techniques = scb.ui.static.InstructorWesternBlotPage1View.enable_checkboxes( assignments.selected.template.lysate_kinds, assignments.selected.template.ui.experimental_design.gel_types);
 
 
 		$('#main').css({

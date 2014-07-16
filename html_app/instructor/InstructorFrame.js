@@ -155,11 +155,16 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
     scb.ui.static.InstructorWesternBlotPage5View.register(workarea);
 
 
-    scb.ui.static.MicroscopyView.register(workarea);
-    scb.ui.static.WesternBlotGelView.register(workarea);
-    scb.ui.static.InstructorSelectTechniqueView.register(workarea);
-    scb.ui.static.FacsView.register(workarea);
+    scb.ui.static.InstructorMicroscopyPage1View.register(workarea);
+    scb.ui.static.InstructorMicroscopyPage2View.register(workarea);
+    scb.ui.static.InstructorMicroscopyPage3View.register(workarea);
 
+    scb.ui.static.InstructorSelectTechniqueView.register(workarea);
+    
+    scb.ui.static.InstructorFacsPage1View.register(workarea);
+    scb.ui.static.InstructorFacsPage2View.register(workarea);
+    
+    
     scb.ui.static.InstructorFrame.in_ajax = false;
     scb.ui.static.InstructorFrame.show_in_ajax = false;
     scb.ui.static.InstructorFrame.show_in_ajax_message = '';
@@ -545,12 +550,6 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         workarea: workarea,
         context: context
     });
-	
-
-    self.sections.experiment_design = new scb.ui.ExperimentDesignView({
-        workarea: workarea,
-        context: context
-    });
 
     self.sections.experiment_setup_page1 = new scb.ui.InstructorExperimentSetupPage1View({
         workarea: workarea,
@@ -571,10 +570,6 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         context: context
     });
 
-    self.sections.facs = new scb.ui.FacsView({
-        workarea: workarea,
-        context: context
-    });
 
     self.sections.select_technique = new scb.ui.InstructorSelectTechniqueView({
         workarea: workarea,
@@ -603,21 +598,29 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
         context: context
     });
     
-    self.sections.microscopy = new scb.ui.MicroscopyView({
+    self.sections.microscopy_page1 = new scb.ui.InstructorMicroscopyPage1View({
+    	workarea: workarea,
+    	context: context
+    });
+    
+    self.sections.microscopy_page2 = new scb.ui.InstructorMicroscopyPage2View({
     	workarea: workarea,
     	context: context
     });
 
-    self.sections.western_blot_gel = new scb.ui.WesternBlotGelView({
+	self.sections.microscopy_page3 = new scb.ui.InstructorMicroscopyPage3View({
+    	workarea: workarea,
+    	context: context
+    });
+
+    self.sections.facs_page1 = new scb.ui.InstructorFacsPage1View({
         workarea: workarea,
         context: context
-    })
-
-
-    self.sections.workarea = new scb.ui.WorkspaceView({
+    });
+    self.sections.facs_page2 = new scb.ui.InstructorFacsPage2View({
         workarea: workarea,
         context: context
-    })
+    });
 
 
     self.show = function (state) {
@@ -839,66 +842,83 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
                 assignments: assignments
             });
         }
-         if (state.view == 'facs') {
-			var id_list = [];
-			for( var x=0; x < parsed.experiment.facs_list.list.length; x++){id_list.push(parsed.experiment.facs_list.list[x].id);}
-			
-            if (!parsed.facs) {
-            	if(state.facs_id && id_list.indexOf(state.facs_id)<0 && parsed.experiment.facs_list.list.length >0){
-            		parsed.facs = parsed.experiment.facs_list.list[state.index];
-
-            	}
-            	else{
-					delete state.onhashchange;
-					var facs = parsed.experiment.facs_list.start({});
-					state.facs_id = facs.id;
-					var History = window.History;
-					if (History.enabled) {
-						History.replaceState("New FACS", "New FACS", '#' + $.param(state));
-					}
-					state.onhashchange = true;
-					self.show(state);
-					return;
-                }
+        
+         if (state.view == 'facs_page1') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
             }
-            self.sections.facs.show({
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.facs_page1.show({
                 workarea: workarea,
-                assignment: parsed.assignment,
-                experiment: parsed.experiment,
-                facs: parsed.facs
+                assignments: assignments
             });
         }
-        if (state.view == 'microscopy'){
-
-
-			var id_list = [];
-			for( var x=0; x < parsed.experiment.microscopy_list.list.length; x++){id_list.push(parsed.experiment.microscopy_list.list[x].id);}
-			
-            if (!parsed.microscopy) {
-            	if(state.microscopy_id && id_list.indexOf(state.microscopy_id)<0 && parsed.experiment.microscopy_list.list.length >0){
-            		parsed.microscopy = parsed.experiment.microscopy_list.list[state.index];
-
-            	}
-            	else{
-					delete state.onhashchange;
-					var microscopy = parsed.experiment.microscopy_list.start({});
-					state.microscopy_id = microscopy.id;
-					var History = window.History;
-					if (History.enabled) {
-						History.replaceState("New FACS", "New FACS", '#' + $.param(state));
-					}
-					state.onhashchange = true;
-					self.show(state);
-					return;
-                }
+         if (state.view == 'facs_page2') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
             }
-            self.sections.microscopy.show({
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.facs_page2.show({
                 workarea: workarea,
-                assignment: parsed.assignment,
-                experiment: parsed.experiment,
-                microscopy: parsed.microscopy
+                assignments: assignments
             });
         }
+         if (state.view == 'microscopy_page1') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.microscopy_page1.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+         if (state.view == 'microscopy_page2') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.microscopy_page2.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+         if (state.view == 'microscopy_page3') {
+            if (!parsed.assignment) {
+                state.assignment_id = assignments.list[0].id;
+                state.onhashchange = false;
+                self.show(state);
+                return;
+            }
+
+            assignments.selected_id = state.assignment_id ? state.assignment_id : null;
+            scb.ui.static.InstructorFrame.update_hash(state);
+            self.sections.microscopy_page3.show({
+                workarea: workarea,
+                assignments: assignments
+            });
+        }
+        
         if (state.view == 'assignment_last') {
 
             if (parsed.experiment) {
@@ -1021,7 +1041,9 @@ scb.ui.InstructorFrame = function scb_ui_InstructorFrame(master_model, context) 
 
     (function () {
         var state = $.deparam(location.hash.replace(/^#/, ''), true);
-        state.onhashchange = true;
+//         if(state.assignment_id)
+//         	delete state.assignment_id;
+        state.onhashchange = false;
         state.view = state.view || 'dashboard';
         self.show(state);
     })();

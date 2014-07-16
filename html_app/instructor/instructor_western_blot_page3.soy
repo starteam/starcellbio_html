@@ -30,7 +30,7 @@
     {call .display_assignment}
     {param global_template:$global_template /}
     {param assignments:$assignments/}
-    {param view: 'select_course'/}
+    {param assignment: $assignment/}
     {/call}
     </div>
     {call scb_instructor_homepage.display_footer}
@@ -42,7 +42,7 @@
 
 /**
 Assignment description
-@param view
+@param assignment
 */
 {template .display_assignment}
 
@@ -50,13 +50,43 @@ Assignment description
     	<div class='scb_s_abstract_title'>
             Assignment Editor
         </div>
-    {if $view == 'select_course'}
-    <div class='scb_s_western_blot_title'>Course Setup</div>
+    <div class='scb_s_assignment_setup_course_name_heading'>4. Define the size of the 
+    	protein bands in kilodaltons (kDa) detected by each primary and secondary 
+    	antibody combination.</div><p/>
+    <span class='scb_s_western_blot_antibody_heading'>Note: When multiple bands
+    	are detected by a particular antibody combination, separate the sizes of the 
+    	bands by a comma. For example: 13, 42, 60. Do not include the units in the text box.</span>
+	<div class='scb_s_western_blot_antibody_size_wrapper'>
+        <span class='scb_s_assignment_setup_course_name_heading '>Primary antibody</span>
+    	<span class='scb_s_assignment_setup_course_name_heading '>Corresponding Secondary antibody</span>
+    	<div class='scb_s_western_blot_primary_anti_body_wrapper'>
+    		<ol class='scb_s_experiment_setup_list'>
+				{foreach $strain in keys($assignment.template.primary_anti_body)}
+					{if not ($strain == 'order')}
+					<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+						<span class='scb_s_experiment_setup_text_field scb_s_western_blot_page3_primary_antibody scb_f_western_blot_primary_anti_body_list_item' 
+							anti_body_id='{$strain}' assignment_id='{$assignment.id}'>{$assignment.template.primary_anti_body[$strain].name}</span>
+						<span type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_secondary_anti_body_list_item' placeholder="Secondary Antibody 1" 
+							anti_body_id='{$strain}' secondary_id = '{if length($assignment.template.primary_anti_body[$strain].secondary) > 0 }{$assignment.template.primary_anti_body[$strain].secondary[0]}{/if}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+							{$assignment.template.secondary_anti_body[$assignment.template.primary_anti_body[$strain].secondary[0]].name}
+							</span>
+						<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_antibody_size_list_item' placeholder="Band Sizes" 
+							anti_body_id='{$strain}' secondary_id = '{if length($assignment.template.primary_anti_body[$strain].secondary) > 0 }{$assignment.template.primary_anti_body[$strain].secondary[0]}{/if}' value='{if length($assignment.template.primary_anti_body[$strain].secondary) > 0 }{$assignment.template.secondary_anti_body[$assignment.template.primary_anti_body[$strain].secondary[0]].name}{/if}'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+						
+				
+					</li>
+					{/if}
+				{/foreach}
+				<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+				<button class='scb_s_gray_button scb_f_western_blot_add_primary_anti_body scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+				ADD
+				</button>
+				</li>
+			</ol>
+    	</div>
+	
+	</div>
     
-    
-    {elseif $view == 'create_assignment'}
-    
-    {/if}
     
 
 </div>

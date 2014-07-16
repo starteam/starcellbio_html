@@ -77,24 +77,13 @@ scb.ui.static.InstructorSelectTechniqueView.register = function(workarea) {
 
 
 
-scb.ui.static.InstructorSelectTechniqueView.rows = function(dialog){
-	var rows =[];
-	var headings = dialog.headings;
-	_.each(dialog.order, function(strain){
-		_.each(dialog[strain].rows, function(row){
-			var insert_row = {treatment_id:row.treatment_id, row: []};
-			_.each(row.cells, function(cell){
-				if(cell.kind=='text')
-					insert_row.row.push(cell.text);
-				else
-					insert_row.row.push('cell_plate');
-				
-			});
-			rows.push(insert_row);
-		});
-	});
-
-	return rows;
+scb.ui.static.InstructorSelectTechniqueView.enable_techniques = function(techniques){
+	if(_.contains(techniques, 'wb'))
+		$('.scb_f_select_technique_select_western_blot').attr('checked', true);
+	if(_.contains(techniques, 'facs'))
+		$('.scb_f_select_technique_select_facs').attr('checked', true);
+	if(_.contains(techniques, 'micro'))
+		$('.scb_f_select_technique_select_microscopy').attr('checked', true);
 }
 
 scb.ui.InstructorSelectTechniqueView = function scb_ui_InstructorSelectTechniqueView(gstate) {
@@ -120,7 +109,6 @@ scb.ui.InstructorSelectTechniqueView = function scb_ui_InstructorSelectTechnique
         	prev_step=assignments.selected.experiments.selected.prev_step;
         else prev_step = null;
         
-        var rows = scb.ui.static.InstructorSelectTechniqueView.rows(assignments.selected.template.ui.add_multiple_dialog);
 
         workarea.html(scb_instructor_select_technique.main({
             global_template: gstate.context.master_model,
@@ -129,12 +117,12 @@ scb.ui.InstructorSelectTechniqueView = function scb_ui_InstructorSelectTechnique
             prev_step: prev_step,
             kind: kind,
             headings: assignments.selected.template.ui.add_multiple_dialog.headings, 
-            rows: rows,
             assignment: assignments.selected,
             context: gstate.context,
             courses: courses,
         }));
-        
+                var techniques = scb.ui.static.InstructorSelectTechniqueView.enable_techniques(assignments.selected.template.ui.experimental_design.techniques);
+
         document.title = "Assignments - StarCellBio"
             $('.scb_s_ref_info_link').click(function(){
         	$('.scb_assignments_header_link_wrapper[value="Reference Material"]').click();

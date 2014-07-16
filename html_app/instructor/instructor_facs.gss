@@ -5,17 +5,17 @@
   /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
   /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
 }
-.scb_s_western_blot_view {
+.scb_s_facs_view {
     width: 1002px;
     background-color: #f4f6f8;
 }
-.scb_s_western_blot_container{
+.scb_s_facs_container{
 	background: white;
 	padding-bottom: 51px;
 	position: relative;
 	z-index: 1;
 }
-.scb_s_western_blot_description {
+.scb_s_facs_description {
     margin-top: 22px;
     text-align: justify;
     display: inline-block;
@@ -32,7 +32,7 @@
 }
 
 
-.scb_s_western_blot_title{
+.scb_s_facs_title{
 	font-size: 16pt;
 	font-weight: bold;
 	font-family: 'sourcesanspro-semibold';
@@ -56,22 +56,14 @@
 	letter-spacing: 0.9px;
 }
 
-.scb_s_western_blot_anti_body_wrapper{
+.scb_s_facs_anti_body_wrapper{
 	display: flex;
 }
 
-.scb_s_western_blot_primary_anti_body_wrapper{
+.scb_s_facs_primary_anti_body_wrapper{
 	width: 520px;
 }
 
-.scb_s_western_blot_page3_primary_antibody{
+.scb_s_facs_page3_primary_antibody{
 	margin-right: 50px;
-}
-
-.scb_s_western_blot_antibody_heading{
-	font-size: 10pt;
-	font-family: 'sourcesanspro-semibold';
-	color: #316f94;
-	padding-top: 15px;
-	padding-left: 10px;
 }

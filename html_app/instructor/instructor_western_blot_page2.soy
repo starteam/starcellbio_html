@@ -30,6 +30,7 @@
     {call .display_assignment}
     {param global_template:$global_template /}
     {param assignments:$assignments/}
+    {param assignment:$assignment/}
     {param view: 'select_course'/}
     {/call}
     </div>
@@ -42,7 +43,7 @@
 
 /**
 Assignment description
-@param view
+@param assignment
 */
 {template .display_assignment}
 
@@ -50,15 +51,65 @@ Assignment description
     	<div class='scb_s_abstract_title'>
             Assignment Editor
         </div>
-    {if $view == 'select_course'}
-    <div class='scb_s_western_blot_title'>Course Setup</div>
-    
-    
-    {elseif $view == 'create_assignment'}
-    
-    {/if}
-    
+        <div class='scb_s_assignment_setup_course_name_heading'><i>Blotting</i></div>
+    <div class='scb_s_assignment_setup_course_name_heading'>3. Name the primary antibodies available and their corresponding secondary antibody.</div>
+	<div class='scb_s_western_blot_anti_body_wrapper'>   
+    <div class='scb_s_western_blot_primary_anti_body_wrapper'>
+        <span class='scb_s_assignment_setup_course_name_heading '>Primary antibody</span>
+    	<span class='scb_s_assignment_setup_course_name_heading '>Corresponding Secondary antibody</span>
 
+    {if length(keys($assignment.template.primary_anti_body)) <=0}
+    
+    
+    
+    
+    		<ol class='scb_s_experiment_setup_list'>
+    			<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+    				<input type='text' class='scb_s_experiment_setup_text_field scb_s_western_blot_page3_primary_antibody scb_f_western_blot_primary_anti_body_list_item' placeholder="Primary Antibody 1" 
+    					value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+    				
+					<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_secondary_anti_body_list_item' placeholder="Secondary Antibody 1" 
+						value=''  title='' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+    			</li>
+    			<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+				<button class='scb_s_gray_button scb_f_western_blot_add_primary_anti_body scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+				ADD
+				</button>
+				</li>
+    		</ol>
+    			
+    	</div>
+	
+    		
+    {else}
+    		<ol class='scb_s_experiment_setup_list'>
+				{foreach $strain in keys($assignment.template.primary_anti_body)}
+					{if not ($strain == 'order')}
+					<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
+						<input type='text' class='scb_s_experiment_setup_text_field scb_s_western_blot_page3_primary_antibody scb_f_western_blot_primary_anti_body_list_item' placeholder="Primary Antibody 1" 
+							anti_body_id='{$strain}' value='{$assignment.template.primary_anti_body[$strain].name}'  title='{$assignment.template.primary_anti_body[$strain].name}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+						<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_secondary_anti_body_list_item' placeholder="Secondary Antibody 1" 
+							anti_body_id='{$strain}' secondary_id = '{if length($assignment.template.primary_anti_body[$strain].secondary) > 0 }{$assignment.template.primary_anti_body[$strain].secondary[0]}{/if}' value='{if length($assignment.template.primary_anti_body[$strain].secondary) > 0 }{$assignment.template.secondary_anti_body[$assignment.template.primary_anti_body[$strain].secondary[0]].name}{/if}'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+						<button role='button' aria-label='Delete'  class='scb_f_western_blot_page2_remove_row scb_s_experiment_setup_remove_temperature' 
+						 anti_body_id='{$strain}' assignment_id='{$assignment.id}' ><img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+						</button>
+				
+					</li>
+					{/if}
+				{/foreach}
+				<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
+				<button class='scb_s_gray_button scb_f_western_blot_add_primary_anti_body scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+				ADD
+				</button>
+				</li>
+			</ol>
+    	</div>
+	{/if}
+	</div>
+	<div>
+        <button assignment_id='{$assignment.id}' class=" scb_f_western_blot_page2_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
+
+    </div>
 </div>
 {/template}
 

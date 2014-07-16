@@ -26,7 +26,7 @@ scb.ui.static.InstructorWesternBlotPage2View.parse = function (element) {
 
 
 
-scb.ui.static.InstructorWesternBlotPage2View.scb_f_select_technique_save_assignment_button = function(element, workarea){
+scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_page2_save_assignment_button = function(element, workarea){
 
 	var parsed = scb.ui.static.InstructorWesternBlotPage2View.parse(element);
 	
@@ -35,23 +35,127 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_select_technique_save_assignm
 	
 	var state = {
 		assignment_id: parsed.assignment.id,
-		view: 'western_blot_page1',
+		view: 'western_blot_page3',
 		skip_hash_update: true
 	};
 				   
 	scb.ui.static.InstructorFrame.refresh(state);
 }
 
+scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_primary_anti_body_list_item = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage2View.parse(element);
+	var anti_body_id = $(element).attr('anti_body_id') ? $(element).attr('anti_body_id'):  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+		if(!parsed.assignment.template.primary_anti_body[anti_body_id]){
+		
+		parsed.assignment.template.primary_anti_body[anti_body_id] = {
+                    name: $(element).val(),
+                    secondary: [],
+                    marks: [],
+                    gel_name: $(element).val()
+                };
+        }
+        else{
+        parsed.assignment.template.primary_anti_body[anti_body_id] = {
+                    name: $(element).val(),
+                    secondary: parsed.assignment.template.primary_anti_body[anti_body_id].secondary,
+                    marks: parsed.assignment.template.primary_anti_body[anti_body_id].marks,
+                    gel_name: $(element).val()
+                };
+        }
+
+	scb.ui.static.InstructorFrame.refresh();
+
+}
+
+scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_secondary_anti_body_list_item = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage2View.parse(element);
+	var idExists=false; 
+	var existing_id = '';
+	_.each(parsed.assignment.template.secondary_anti_body, function(key, value, list){ 
+		if(key.name==$.trim($(element).val())){
+			 existing_id = value;
+			idExists=true;
+		}
+	});
+	var secondary_id = idExists ? existing_id:  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	var anti_body_id = $(element).attr('anti_body_id') ? $(element).attr('anti_body_id'):  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	
+	parsed.assignment.template.secondary_anti_body[secondary_id] = {name: $(element).val()};;
+
+	
+	
+	
+	if(!parsed.assignment.template.primary_anti_body[anti_body_id]){
+		
+		parsed.assignment.template.primary_anti_body[anti_body_id] = {
+                    name: '',
+                    secondary: [secondary_id],
+                    marks: [],
+                    gel_name: ''
+                };
+        }
+        else{
+        parsed.assignment.template.primary_anti_body[anti_body_id] = {
+                    name: parsed.assignment.template.primary_anti_body[anti_body_id].name,
+                    secondary:[secondary_id],
+                    marks: parsed.assignment.template.primary_anti_body[anti_body_id].marks,
+                    gel_name: parsed.assignment.template.primary_anti_body[anti_body_id].gel_name
+                };
+        }
+        
+        	scb.ui.static.InstructorFrame.refresh();
+
+}
+scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_add_primary_anti_body = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage2View.parse(element);
+	var anti_body_id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	
+	parsed.assignment.template.primary_anti_body[anti_body_id] = {
+                    name: '',
+                    secondary: [],
+                    marks: [],
+                    gel_name: ''
+                };
+    	scb.ui.static.InstructorFrame.refresh();
+
+}
 
 
+scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_page2_remove_row = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage2View.parse(element);
+	var anti_body_id = $(element).attr('anti_body_id');
+	delete parsed.assignment.template.primary_anti_body[anti_body_id];
+
+	
+	scb.ui.static.InstructorFrame.refresh();
+
+}
 
 scb.ui.static.InstructorWesternBlotPage2View.register = function(workarea) {
-    scb.utils.off_on(workarea, 'change', '.scb_f_select_technique_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorWesternBlotPage2View.scb_f_select_technique_save_assignment_button(this, e);
+
+    
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page2_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_page2_save_assignment_button(this, e);
+    });
+    
+    scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_primary_anti_body_list_item', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_primary_anti_body_list_item(this, e);
+    });
+    
+    scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_secondary_anti_body_list_item', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_secondary_anti_body_list_item(this, e);
     });
     
     
     
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_add_primary_anti_body', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_add_primary_anti_body(this, e);
+    });
+    
+    
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page2_remove_row', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_page2_remove_row(this, e);
+    });
     
     
     
