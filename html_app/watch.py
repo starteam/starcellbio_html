@@ -33,6 +33,10 @@ def index_html():
     global css,js
     if( js.has_key( 'js/jquery-1.7.2.min.js' )):
         js.pop('js/jquery-1.7.2.min.js')
+    if( js.has_key( 'js/tinymce.min.js' )):
+        js.pop('js/tinymce.min.js')
+    if( js.has_key( 'js/jquery.tinymce.min.js' )):
+        js.pop('js/jquery.tinymce.min.js')
     if( js.has_key( 'starcellbio.app.js' )):
         js.pop('starcellbio.app.js')
     if( js.has_key( 'swipe/Gruntfile.js' )):
@@ -42,7 +46,10 @@ def index_html():
     js_join = js_prefix + (time+js_suffix+js_prefix).join(js.keys())  + js_suffix
     js_join = js_prefix + "../scb/get_user.js" + js_suffix + js_join
     js_join = js_prefix + "starcellbio.app.js" + js_suffix + js_join
+    js_join = js_prefix + "js/tinymce.min.js" + js_suffix + js_join
+    js_join = js_prefix + "js/jquery.tinymce.min.js" + js_suffix + js_join
     js_join = js_prefix + "js/jquery-1.7.2.min.js" + js_suffix + js_join
+
     return html_prefix + css_join + js_join + html_suffix 
 
 def update_index_html():

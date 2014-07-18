@@ -58,11 +58,11 @@
 			ASSIGNMENTS
         </div>
     </a>
-    <a role='menuitem' class='scb_s_assignment_step_link scb_f_experiments_step_link {if $step >= 2}scb_s_assignment_step_link_active{/if}'
+    <a role='menuitem' class='scb_s_assignment_step_link scb_f_experiments_step_link {if $step >= 2 and $step < 10 }scb_s_assignment_step_link_active{/if}'
        href=
        {if $assignments and  not $assignments.selected.experiments.selected}
        '#view=experiment_design&assignment_id={$aid}'
-       {elseif $prev_step == 1}
+       {elseif $prev_step == 1 or $prev_step == 10}
        '#view=experiment_design&assignment_id={$aid}&experiment_id={$eid}' 
        {elseif $prev_step == 2}
        '#view=experiment_setup&assignment_id={$aid}&experiment_id={$eid}' 
@@ -88,16 +88,16 @@
        aria-label='Experiments' >
        <div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
 
-		   <div class='{if $step >= 2}scb_s_experiments_link_img_active{else}scb_s_experiments_link_img {/if}' role='presentation' ></div>
+		   <div class='{if $step >= 2 and $step < 10 }scb_s_experiments_link_img_active{else}scb_s_experiments_link_img {/if}' role='presentation' ></div>
 				EXPERIMENTS
     	</div>
     </a>
-    <div role='menuitem' class='scb_s_assignment_step_link scb_f_lab_notebook_link' aria-label='Lab Notebook' aria-disabled='true' onclick='inConstructionError()'>
+    <a role='menuitem' class='scb_s_assignment_step_link scb_f_lab_notebook_link {if $step == 10 }scb_s_assignment_step_link_active{/if}' aria-label='Lab Notebook' aria-disabled='true' href='#view=notebook&assignment_id={$aid}'>
     	<div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
-			<div class='scb_s_lab_notebook_link_img' role='presentation' ></div>
+			<div class='{if $step == 10 }scb_s_lab_notebook_link_img_active{else}scb_s_lab_notebook_link_img {/if}    ' role='presentation' ></div>
 			LAB NOTEBOOK
         </div>
-    </div>
+    </a>
 </div>
 {/if}
 {/template}

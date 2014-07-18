@@ -8,6 +8,7 @@ var __assigment_facs = {
     course: 'StarX',    
     course_name: 'Prototypes',
     description: 'FACS prototype assignment.',
+    notebook: {},
     experiments: {
     },
     template: {
@@ -202,6 +203,7 @@ var __basic_tests = {
     course: 'StarX',
     course_name: 'Prototypes',
     description: 'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
+    notebook: {},
     experiments: {},
     template: {
         instructions: [
@@ -681,6 +683,7 @@ var __assignment2 = {
     course_name: 'MIT Course 7.02',
     name: 'StarCellBio Prototype Assignment',
     description: 'Biochemical approach to analyzing vulva development in <i>C. elegans.</i>',
+    notebook: {},
     experiments: {},
     template: {
         instructions: [
@@ -1062,6 +1065,7 @@ var __assigment_tufts = {
     course:'Bio52',
     course_name: 'Tufts Bio52',
     description: 'Bio52 Homework Assignment.',
+    notebook: {},
     experiments: {
     },
     template: {
@@ -1553,7 +1557,8 @@ var __decusability_newfacs = {
         course: 'usability',
     	course_name: 'December 2013 Usability Testing',
         description: 'FACS and Western Blot for temperature sensitive mutants',
-        experiments: {},
+        notebook: {},
+    experiments: {},
         template: {
             instructions: [
             	['Goal & Introduction','Here come instructions when we build them']
@@ -2172,6 +2177,7 @@ var __usability_test = {
     course: 'StarX',
     course_name: 'Prototypes',
     description: "Placeholder",
+    notebook: {},
     experiments: {},
     template: {
         instructions: [['Placeholder', 'Usability test']],
@@ -2633,7 +2639,8 @@ var __microscopy_test = {
         course: 'StarX',
     	course_name: 'Prototypes',
         description: 'Microscopy Test of images',
-        experiments: {},
+        notebook: {},
+    experiments: {},
         template: {
             instructions: [
             	['Goal & Introduction','Here come instructions when we build them']
@@ -3489,7 +3496,8 @@ var __assigment_706 = {
         course: '7.06',
     	course_name: 'MIT Course 7.06',
         description: 'FACS and Western Blot for temperature sensitive mutants',
-        experiments: {},
+        notebook: {},
+    experiments: {},
         template: {
             instructions: [
             	['Goal & Introduction','Here come instructions when we build them']
@@ -4482,7 +4490,8 @@ var blank_model = {
         course: '',
     	course_name: '',
         description: '',
-        experiments: {},
+        notebook: {},
+    experiments: {},
         template: {
         	random_choose: true,
         	randomize_all: false,
@@ -4713,7 +4722,8 @@ var __decusability = {
         course: 'usability',
     	course_name: 'December 2013 Usability Testing',
         description: 'FACS and Western Blot for temperature sensitive mutants',
-        experiments: {},
+        notebook: {},
+    experiments: {},
         template: {
             instructions: [
             	['Goal & Introduction','Here come instructions when we build them']
@@ -5108,7 +5118,8 @@ var __assignment_706_2014 = {
         course: '7.06_Spring_2014',
     	course_name: 'Class',
         description: 'Microscopy Test of images',
-        experiments: {},
+        notebook: {},
+    experiments: {},
         template: {
             instructions: [
             	['Goal & Introduction','Here come instructions when we build them']
@@ -7201,7 +7212,8 @@ var __assignment_706_2014_ps2 = {
         course: '7.06_Spring_2014',
     	course_name: 'Class2',
         description: 'FACS and Western Blot for temperature sensitive mutants',
-        experiments: {},
+        notebook: {},
+    experiments: {},
         template: {
         	random_choose: true,
         	randomize_all: false,
@@ -8461,7 +8473,8 @@ var __june_2014_usability = {
         course: 'usability',
     	course_name: 'StarCellBio Usability Testing',
         description: 'Microscopy Test of images',
-        experiments: {},
+       notebook: {},
+     experiments: {},
         template: {
             instructions: [
             	['Goal & Introduction','Here come instructions when we build them']

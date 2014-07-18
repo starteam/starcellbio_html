@@ -83,6 +83,9 @@ div#main {
   bottom: 8px;
   top: 1px;
 }
+.scb_s_navigation_button:hover {
+  background: #0a694a;
+}
 .scb_s_experiment_step {
   position: relative;
   display: inline-block;
@@ -492,6 +495,9 @@ label.custom-select {
   float: right;
   padding-right: 7px;
 }
+.scb_f_open_experiment_top:hover {
+  background-color: #8a1825 !important;
+}
 .scb_s_assignment_step_link {
   width: 140px;
   height: 60px;
@@ -529,4 +535,7 @@ label.custom-select {
   font-size: 10pt;
   font-family: 'sourcesanspro-regular';
   cursor: pointer;
+}
+.scb_s_gray_button:hover {
+  background-color: #464747;
 }
