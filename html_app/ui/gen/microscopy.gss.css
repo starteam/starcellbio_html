@@ -1019,7 +1019,7 @@ input[type=radio].scb_s_microscopy_if:checked:before {
   text-align: left;
   font-size: 10pt;
 }
-#scb_s_microscopy_slide_content_lens_outline, #scb_f_lens_outline {
+.scb_s_microscopy_slide_content_lens_outline, #scb_s_microscopy_slide_content_lens_outline, #scb_f_lens_outline {
   margin: 50px;
   display: inline-block;
   width: 300px;

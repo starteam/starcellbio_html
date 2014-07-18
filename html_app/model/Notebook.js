@@ -13,12 +13,19 @@ scb.Notebook = function scb_Notebook(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self, data, 'image_experiment_id', false, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'image_western_blot_id', false, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'image_western_blot_gel_id', false, null, context);
-
 	scb.Utils.initialize_accessor_field(self, data, 'image_facs_id', false, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'image_facs_lane_id', false, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'image_microscopy_id', false, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'image_microscopy_lane_id', false, null, context);
-
+	scb.Utils.initialize_accessor_field(self, data, 'section_selected', null, null, context);
+    scb.utils.accessor2_custom(self, 'selected_section', function () {
+        if (self.section_selected) {
+            return self.sections.get(self.section_selected);
+        }
+        else {
+            return null;
+        }
+    }, scb.utils.noop);
 
     scb.utils.accessor2_custom(self, 'selected_experiment', function () {
         var selected_id = self.image_experiment_id;
