@@ -37,6 +37,13 @@ sys.path.append(STARCELLBIO_PATH)
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
+from django.conf import settings
+
+if(getattr(settings, 'DEBUG', False)):
+    import StarCellBio.monitor
+    StarCellBio.monitor.start(interval=1)
+
+
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)
