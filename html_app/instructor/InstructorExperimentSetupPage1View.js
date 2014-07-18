@@ -43,30 +43,7 @@ scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_add_stra
 	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
 	var strain_id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 	parsed.assignment.template.cell_lines[strain_id] = {name: $(element).val()};
-// 	if(!_.contains(parsed.assignment.template.ui.add_multiple_dialog.order, strain_id))
-// 		parsed.assignment.template.ui.add_multiple_dialog.order.push(strain_id);
-// 	var treatment_id = Math.random().toString(16).substring(4);
-// 	parsed.assignment.template.ui.add_multiple_dialog[strain_id] = {
-// 		rows: [
-// 			{
-// 				cells: [
-// 					{kind: 'checkbox', name: "X", treatment_id: treatment_id},
-// 					{kind: 'text', text: ''},
-// 					{kind: 'text', text: ''}
-// 				],
-// 				treatment_id: treatment_id,
-// 				cell_treatments: {
-// 					'X': [
-// 						{cell_line: '',
-// 							treatment_list: {list: [
-// 								{temperature: ''
-// 								}
-// 							]}}
-// 					]
-// 				}
-// 			}
-// 		]
-// 	};
+
 	scb.ui.static.InstructorFrame.refresh();
 
 }
@@ -75,36 +52,7 @@ scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_list_ite
 	var parsed = scb.ui.static.InstructorExperimentSetupPage1View.parse(element);
 	var strain_id = $(element).attr('strain_id') ? $(element).attr('strain_id'):  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 	parsed.assignment.template.cell_lines[strain_id] = {name: $(element).val()};
-// 	if(!_.contains(parsed.assignment.template.ui.add_multiple_dialog.order, strain_id))
-// 		parsed.assignment.template.ui.add_multiple_dialog.order.push(strain_id);
-// 	var treatment_id = Math.random().toString(16).substring(4);
-// 	parsed.assignment.template.ui.add_multiple_dialog[strain_id] = {
-// 		rows: [
-// 			{
-// 				cells: [
-// 					{kind: 'checkbox', name: "X", treatment_id: treatment_id},
-// 					{kind: 'text', text: ''},
-// 					{kind: 'text', text: ''}
-// 				],
-// 				treatment_id: treatment_id,
-// 				cell_treatments: {
-// 					"X": [
-// 						{cell_line: '',
-// 							treatment_list: {list: [
-// 								{temperature: '',
-// 									drug_list: {
-// 										list: [
-// 											{drug_id: '', concentration_id: ''},
-// 										]
-// 									}           
-// 								}
-// 							]}}
-// 					]
-// 				}
-// 			}
-// 		]
-// 	};
-	
+
 	
 	scb.ui.static.InstructorFrame.refresh();
 

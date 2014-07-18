@@ -58,35 +58,56 @@ Assignment description
     	bands by a comma. For example: 13, 42, 60. Do not include the units in the text box.</span>
 	<div class='scb_s_western_blot_antibody_size_wrapper'>
         <span class='scb_s_assignment_setup_course_name_heading '>Primary antibody</span>
-    	<span class='scb_s_assignment_setup_course_name_heading '>Corresponding Secondary antibody</span>
+    	<div class='scb_s_assignment_setup_course_name_heading scb_s_western_blot_page3_secondary_antibody '>Corresponding Secondary antibody</div>
+    	<span class='scb_s_assignment_setup_course_name_heading scb_s_western_blot_page3_sizes_heading'>Sizes by Lysate Type</span><p/>
+			{foreach $type in keys($assignment.template.lysate_kinds)}
+					{if $type == 'whole'}
+					<span class='scb_s_western_blot_antibody_heading scb_s_western_blot_size_lysate_input_wcl'>WCL</span>
+					{/if}
+					{if $type == 'nuclear'}
+					<span class='scb_s_western_blot_antibody_heading scb_s_western_blot_size_lysate_input_nuc'>Nuc</span>
+					{/if}
+					{if $type == 'cyto'}
+					<span class='scb_s_western_blot_antibody_heading scb_s_western_blot_size_lysate_input_cyto'>Cyto</span>
+					{/if}
+			{/foreach}
     	<div class='scb_s_western_blot_primary_anti_body_wrapper'>
     		<ol class='scb_s_experiment_setup_list'>
 				{foreach $strain in keys($assignment.template.primary_anti_body)}
 					{if not ($strain == 'order')}
 					<li class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
-						<span class='scb_s_experiment_setup_text_field scb_s_western_blot_page3_primary_antibody scb_f_western_blot_primary_anti_body_list_item' 
-							anti_body_id='{$strain}' assignment_id='{$assignment.id}'>{$assignment.template.primary_anti_body[$strain].name}</span>
-						<span type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_secondary_anti_body_list_item' placeholder="Secondary Antibody 1" 
+						<div class='scb_s_western_blot_page3_field  scb_s_western_blot_page3_primary_antibody scb_f_western_blot_primary_anti_body_list_item' 
+							anti_body_id='{$strain}' assignment_id='{$assignment.id}'>{$assignment.template.primary_anti_body[$strain].name}</div>
+						<div type='text' class='scb_s_western_blot_page3_field  scb_f_western_blot_secondary_anti_body_list_item' placeholder="Secondary Antibody 1" 
 							anti_body_id='{$strain}' secondary_id = '{if length($assignment.template.primary_anti_body[$strain].secondary) > 0 }{$assignment.template.primary_anti_body[$strain].secondary[0]}{/if}' maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
 							{$assignment.template.secondary_anti_body[$assignment.template.primary_anti_body[$strain].secondary[0]].name}
-							</span>
-						<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_antibody_size_list_item' placeholder="Band Sizes" 
-							anti_body_id='{$strain}' secondary_id = '{if length($assignment.template.primary_anti_body[$strain].secondary) > 0 }{$assignment.template.primary_anti_body[$strain].secondary[0]}{/if}' value='{if length($assignment.template.primary_anti_body[$strain].secondary) > 0 }{$assignment.template.secondary_anti_body[$assignment.template.primary_anti_body[$strain].secondary[0]].name}{/if}'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
-						
+							</div>
+						{foreach $type in keys($assignment.template.lysate_kinds)}
+						{if $type == 'whole'}
+						<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_whole_antibody_size_list_item' placeholder="Band Sizes" 
+							anti_body_id='{$strain}' secondary_id = '{$assignment.template.primary_anti_body[$strain].secondary[0]}' value='{if length($assignment.template.primary_anti_body[$strain].whole_marks) > 0 }{$assignment.template.primary_anti_body[$strain].whole_marks_string}{/if}'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+						{/if}
+						{if $type == 'nuclear'}
+						<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_nuclear_antibody_size_list_item' placeholder="Band Sizes" 
+							anti_body_id='{$strain}' secondary_id = '{$assignment.template.primary_anti_body[$strain].secondary[0]}' value='{if length($assignment.template.primary_anti_body[$strain].nuclear_marks) > 0 }{$assignment.template.primary_anti_body[$strain].nuclear_marks_string}{/if}'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+						{/if}
+						{if $type == 'cyto'}
+						<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_cyto_antibody_size_list_item' placeholder="Band Sizes" 
+							anti_body_id='{$strain}' secondary_id = '{$assignment.template.primary_anti_body[$strain].secondary[0]}' value='{if length($assignment.template.primary_anti_body[$strain].cyto_marks) > 0 }{$assignment.template.primary_anti_body[$strain].cyto_marks_string}{/if}'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+						{/if}
+						{/foreach}
 				
 					</li>
 					{/if}
 				{/foreach}
-				<li class='scb_s_experiment_setup_list_item' assignment_id='{$assignment.id}'>
-				<button class='scb_s_gray_button scb_f_western_blot_add_primary_anti_body scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
-				ADD
-				</button>
-				</li>
 			</ol>
     	</div>
 	
 	</div>
-    
+    <div>
+        <button assignment_id='{$assignment.id}' class=" scb_f_western_blot_page3_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
+
+    </div>
     
 
 </div>

@@ -61,7 +61,7 @@
 }
 
 .scb_s_western_blot_primary_anti_body_wrapper{
-	width: 520px;
+	width: 637px;
 }
 
 .scb_s_western_blot_page3_primary_antibody{
@@ -75,3 +75,74 @@
 	padding-top: 15px;
 	padding-left: 10px;
 }
+
+.scb_s_western_blot_table_antibody_heading{
+	font-size: 10pt;
+	font-family: 'sourcesanspro-semibold';
+	color: black;
+	padding-top: 15px;
+	width: 250px;
+	display:inline-block;
+	padding-left: 10px;
+}
+
+.scb_s_western_blot_page4_list_order{
+	font-size: 10pt;
+	font-family: 'sourcesanspro-semibold';
+	
+}
+
+.scb_s_western_blot_page3_field{
+	display: inline-block;
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+	color: black;
+	font-style: italic;
+	width: 110px;
+	margin-top: 10px;
+	padding: 5px;
+}
+
+.scb_s_western_blot_page3_secondary_antibody{
+	display: inline-block;
+	width: 159px;
+	height: 50px;
+	text-align: center;
+}
+
+.scb_s_western_blot_size_lysate_input_wcl{
+	position: absolute;
+	left: 361px;
+	top: 190px;
+}
+
+.scb_s_western_blot_size_lysate_input_nuc{
+	position: absolute;
+	left: 463px;
+	top: 190px;
+}
+
+.scb_s_western_blot_size_lysate_input_cyto{
+	position: absolute;
+	left: 565px;
+	top: 190px;
+}
+
+.scb_s_western_blot_page3_sizes_heading{
+	padding-left: 80px !important;
+}
+.scb_s_western_blot_page4_table{
+	border-spacing: 0;
+	width: 592px;
+	background-color: #edeef2;
+	padding-bottom: 2px;
+	position: relative;
+	left: 7px;
+}
+
+.scb_s_western_blot_page4_table_body{
+	font-size: 10pt;
+	font-family: 'sourcesanspro-regular';
+}
+
+

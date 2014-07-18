@@ -10,7 +10,8 @@ scb_instructor_western_blot_page5.main = function(opt_data, opt_sb) {
   scb_instructor_homepage.display_header(opt_data, output);
   scb_instructor_common.assignment_step({step: 1, last_step: opt_data.last_step, prev_step: opt_data.prev_step, assignments: assignments}, output);
   output.append('<div class=\'scb_s_western_blot_container\' role=\'main\'>');
-  scb_instructor_western_blot_page5.display_assignment({global_template: opt_data.global_template, assignments: opt_data.assignments, view: 'select_course'}, output);
+  scb_instructor_homepage.display_assignment_navigation(opt_data, output);
+  scb_instructor_western_blot_page5.display_assignment(opt_data, output);
   output.append('</div>');
   scb_instructor_homepage.display_footer(opt_data, output);
   output.append('</div>');

@@ -6,6 +6,7 @@
 * @param last_step
 * @param prev_step
 * @param assignments AssignmentsView
+* @param rows
 * @param assignment
 * @param context
 */
@@ -30,7 +31,8 @@
     {call .display_assignment}
     {param global_template:$global_template /}
     {param assignments:$assignments/}
-    {param view: 'select_course'/}
+    {param assignment: $assignment/}
+    {param rows: $rows/}
     {/call}
     </div>
     {call scb_instructor_homepage.display_footer}
@@ -42,7 +44,8 @@
 
 /**
 Assignment description
-@param view
+@param assignment
+@param rows
 */
 {template .display_assignment}
 
@@ -50,14 +53,76 @@ Assignment description
     	<div class='scb_s_abstract_title'>
             Assignment Editor
         </div>
-    {if $view == 'select_course'}
-    <div class='scb_s_western_blot_title'>Course Setup</div>
-    
-    
-    {elseif $view == 'create_assignment'}
-    
-    {/if}
-    
+        <div class='scb_s_assignment_setup_course_name_heading'>5. Define which bands will 
+        appear and their relative intensity for each of your samples in your experiment setup.</div>
+       
+        <div>
+        <ol type='A' class='scb_s_western_blot_page4_list_order'>
+        {foreach $antibody_combo in keys($assignment.template.primary_anti_body)}
+        <li>
+         	<div>
+         		<div class='scb_s_western_blot_table_antibody_heading'>{$assignment.template.primary_anti_body[$antibody_combo].name}, {$assignment.template.secondary_anti_body[$assignment.template.primary_anti_body[$antibody_combo].secondary[0]].name}</div>
+        		<button class='scb_s_gray_button  scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}'>
+				PREVIEW FILM
+				</button>
+			</div>
+				<table class="scb_s_western_blot_page4_table " aria-label='Table of Samples' role='grid'>
+				<thead class='scb_s_experiment_setup_table_head' >
+					<td role='columnheader'  class='scb_s_experiment_setup_table_heading' >
+					Sample
+					</td>
+					<td role='columnheader'  class='scb_s_experiment_setup_table_heading' >
+					Size (kDa)
+					</td>
+					<td role='columnheader'  class='scb_s_experiment_setup_table_heading' >
+					Relative band intensity
+					</td>
+				</thead>
+				
+				<tbody class='scb_s_western_blot_page4_table_body'>
+				{foreach $r in $rows}
+					{foreach $mark in $assignment.template.primary_anti_body[$antibody_combo].whole_marks}
+						<tr class='scb_s_experiment_setup_table_row' role='row' aria-label='Sample' assignment_id='{$assignment.id}' >
+							<td class='scb_s_experiment_setup_table_element ' >{$r.row}
+							</td>
+							<td>{$mark.weight}
+							</td>
+							<td> Slider here
+							</td>
+						</tr>
+					{/foreach}
+					{foreach $mark in $assignment.template.primary_anti_body[$antibody_combo].nuclear_marks}
+						<tr class='scb_s_experiment_setup_table_row' role='row' aria-label='Sample' assignment_id='{$assignment.id}' >
+							<td class='scb_s_experiment_setup_table_element ' >{$r.row}
+							</td>
+							<td>{$mark.weight}
+							</td>
+							<td> Slider here
+							</td>
+						</tr>
+					{/foreach}
+					{foreach $mark in $assignment.template.primary_anti_body[$antibody_combo].cyto_marks}
+						<tr class='scb_s_experiment_setup_table_row' role='row' aria-label='Sample' assignment_id='{$assignment.id}' >
+							<td class='scb_s_experiment_setup_table_element ' >{$r.row}
+							</td>
+							<td>{$mark.weight}
+							</td>
+							<td> Slider here
+							</td>
+						</tr>
+					{/foreach}
+				{/foreach}
+				</tbody>
+			</table>
+		</li>
+		{/foreach}
+		</ol>
+        </div>
+    	
+    <div>
+        <button assignment_id='{$assignment.id}' class=" scb_f_western_blot_page4_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
+
+    </div>
 
 </div>
 {/template}

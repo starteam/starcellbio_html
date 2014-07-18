@@ -26,7 +26,7 @@ scb.ui.static.InstructorWesternBlotPage3View.parse = function (element) {
 
 
 
-scb.ui.static.InstructorWesternBlotPage3View.scb_f_select_technique_save_assignment_button = function(element, workarea){
+scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_page3_save_assignment_button = function(element, workarea){
 
 	var parsed = scb.ui.static.InstructorWesternBlotPage3View.parse(element);
 	
@@ -42,9 +42,49 @@ scb.ui.static.InstructorWesternBlotPage3View.scb_f_select_technique_save_assignm
 	scb.ui.static.InstructorFrame.refresh(state);
 }
 
-scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_antibody_size_list_item = function(element, workarea){
+scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_whole_antibody_size_list_item = function(element, workarea){
 	var parsed = scb.ui.static.InstructorWesternBlotPage3View.parse(element);
+	var anti_body_id = $(element).attr('anti_body_id');
+	parsed.assignment.template.primary_anti_body[anti_body_id].whole_marks_string = $(element).val();
+	var marks = $(element).val().split(',');
+	parsed.assignment.template.primary_anti_body[anti_body_id].whole_marks = [];
+	_.each(marks, function(mark){
+		var value = $.trim(mark);
+		parsed.assignment.template.primary_anti_body[anti_body_id].whole_marks.push({weight: value, intensity: 0});
+	});
 	
+	
+	scb.ui.static.InstructorFrame.refresh();
+
+}
+
+
+scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_nuclear_antibody_size_list_item = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage3View.parse(element);
+	var anti_body_id = $(element).attr('anti_body_id');
+	parsed.assignment.template.primary_anti_body[anti_body_id].nuclear_marks_string = $(element).val();
+	var marks = $(element).val().split(',');
+	parsed.assignment.template.primary_anti_body[anti_body_id].nuclear_marks = [];
+	_.each(marks, function(mark){
+		var value = $.trim(mark);
+		parsed.assignment.template.primary_anti_body[anti_body_id].nuclear_marks.push({weight: value, intensity: 0});
+	});
+	
+	
+	scb.ui.static.InstructorFrame.refresh();
+
+}
+
+scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_cyto_antibody_size_list_item = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage3View.parse(element);
+	var anti_body_id = $(element).attr('anti_body_id');
+	parsed.assignment.template.primary_anti_body[anti_body_id].cyto_marks_string = $(element).val();
+	var marks = $(element).val().split(',');
+	parsed.assignment.template.primary_anti_body[anti_body_id].cyto_marks = []
+	_.each(marks, function(mark){
+		var value = $.trim(mark);
+		parsed.assignment.template.primary_anti_body[anti_body_id].cyto_marks.push({weight: value, intensity: 0});
+	});
 	
 	
 	scb.ui.static.InstructorFrame.refresh();
@@ -52,14 +92,22 @@ scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_antibody_size_li
 }
 
 scb.ui.static.InstructorWesternBlotPage3View.register = function(workarea) {
-    scb.utils.off_on(workarea, 'change', '.scb_f_select_technique_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorWesternBlotPage3View.scb_f_select_technique_save_assignment_button(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page3_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_page3_save_assignment_button(this, e);
     });
     
-    scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_antibody_size_list_item', function (e) {
-    	scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_antibody_size_list_item(this, e);
+    scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_whole_antibody_size_list_item', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_whole_antibody_size_list_item(this, e);
     });
     
+    
+     scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_nuclear_antibody_size_list_item', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_nuclear_antibody_size_list_item(this, e);
+    });
+    
+     scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_cyto_antibody_size_list_item', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_cyto_antibody_size_list_item(this, e);
+    });
     
     
     

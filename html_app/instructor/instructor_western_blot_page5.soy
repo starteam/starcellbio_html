@@ -5,6 +5,7 @@
 * @param global_template
 * @param last_step
 * @param prev_step
+* @param assignment
 * @param assignments AssignmentsView
 * @param context
 */
@@ -21,10 +22,16 @@
         {param assignments:assignments/}
     {/call}
     <div class='scb_s_western_blot_container' role='main'>
+       {call scb_instructor_homepage.display_assignment_navigation}
+    {param global_template:$global_template /}
+    {param assignments:$assignments/}
+    {param assignment: $assignment/}
+    {/call}
     {call .display_assignment}
     {param global_template:$global_template /}
     {param assignments:$assignments/}
-    {param view: 'select_course'/}
+    {param assignment: $assignment/}
+
     {/call}
     </div>
     {call scb_instructor_homepage.display_footer}

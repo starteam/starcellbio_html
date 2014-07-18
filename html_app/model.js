@@ -55,22 +55,8 @@ var MASTER_TEMPLATE={
             time_unit: {
                 kind: ''
             },
-            primary_anti_body: {
-            	order: [''],
-            	'': {
-                    name: '',
-                    secondary: [''],
-                    marks: [
-                        {weight: 0, intensity: 0}
-                    ],
-                    gel_name: ''
-                },
-            },//
-            secondary_anti_body: {
-                '': {
-                    name: ''
-                }
-            },//
+            primary_anti_body: {},//
+            secondary_anti_body: {},//
             lysate_kinds: {
             },
             facs_kinds: {

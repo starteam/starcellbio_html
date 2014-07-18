@@ -51,6 +51,9 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_primary_anti_bod
                     name: $(element).val(),
                     secondary: [],
                     marks: [],
+                    whole_marks:[],
+                    nuclear_marks: [],
+                    cyto_marks: [],
                     gel_name: $(element).val()
                 };
         }
@@ -59,6 +62,9 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_primary_anti_bod
                     name: $(element).val(),
                     secondary: parsed.assignment.template.primary_anti_body[anti_body_id].secondary,
                     marks: parsed.assignment.template.primary_anti_body[anti_body_id].marks,
+                    whole_marks:parsed.assignment.template.primary_anti_body[anti_body_id].whole_marks,
+                    nuclear_marks: parsed.assignment.template.primary_anti_body[anti_body_id].nuclear_marks,
+                    cyto_marks: parsed.assignment.template.primary_anti_body[anti_body_id].cyto_marks,
                     gel_name: $(element).val()
                 };
         }
@@ -91,6 +97,9 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_secondary_anti_b
                     name: '',
                     secondary: [secondary_id],
                     marks: [],
+                    whole_marks:[],
+                    nuclear_marks: [],
+                    cyto_marks: [],
                     gel_name: ''
                 };
         }
@@ -99,6 +108,9 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_secondary_anti_b
                     name: parsed.assignment.template.primary_anti_body[anti_body_id].name,
                     secondary:[secondary_id],
                     marks: parsed.assignment.template.primary_anti_body[anti_body_id].marks,
+                    whole_marks:parsed.assignment.template.primary_anti_body[anti_body_id].whole_marks,
+                    nuclear_marks: parsed.assignment.template.primary_anti_body[anti_body_id].nuclear_marks,
+                    cyto_marks: parsed.assignment.template.primary_anti_body[anti_body_id].cyto_marks,
                     gel_name: parsed.assignment.template.primary_anti_body[anti_body_id].gel_name
                 };
         }
@@ -114,6 +126,9 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_add_primary_anti
                     name: '',
                     secondary: [],
                     marks: [],
+                    whole_marks:[],
+                    nuclear_marks: [],
+                    cyto_marks: [],
                     gel_name: ''
                 };
     	scb.ui.static.InstructorFrame.refresh();

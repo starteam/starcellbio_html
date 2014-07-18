@@ -26,7 +26,28 @@ scb.ui.static.InstructorWesternBlotPage4View.parse = function (element) {
 
 
 
-scb.ui.static.InstructorWesternBlotPage4View.scb_f_select_technique_save_assignment_button = function(element, workarea){
+scb.ui.static.InstructorWesternBlotPage4View.rows = function(dialog){
+	var rows =[];
+	var headings = dialog.headings;
+	_.each(dialog.order, function(strain){
+		_.each(dialog[strain].rows, function(row){
+			var insert_row = {treatment_id:row.treatment_id, row: []};
+			_.each(row.cells, function(cell){
+				if(cell.kind=='text')
+					insert_row.row.push(cell.text);
+				else
+					insert_row.row.push('cell_plate');
+				
+			});
+			rows.push(insert_row);
+		});
+	});
+
+	return rows;
+}
+
+
+scb.ui.static.InstructorWesternBlotPage4View.scb_f_western_blot_page4_save_assignment_button = function(element, workarea){
 
 	var parsed = scb.ui.static.InstructorWesternBlotPage4View.parse(element);
 	
@@ -35,7 +56,7 @@ scb.ui.static.InstructorWesternBlotPage4View.scb_f_select_technique_save_assignm
 	
 	var state = {
 		assignment_id: parsed.assignment.id,
-		view: 'western_blot_page1',
+		view: 'western_blot_page5',
 		skip_hash_update: true
 	};
 				   
@@ -46,8 +67,8 @@ scb.ui.static.InstructorWesternBlotPage4View.scb_f_select_technique_save_assignm
 
 
 scb.ui.static.InstructorWesternBlotPage4View.register = function(workarea) {
-    scb.utils.off_on(workarea, 'change', '.scb_f_select_technique_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorWesternBlotPage4View.scb_f_select_technique_save_assignment_button(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page4_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage4View.scb_f_western_blot_page4_save_assignment_button(this, e);
     });
     
     
@@ -65,12 +86,11 @@ scb.ui.static.InstructorWesternBlotPage4View.rows = function(dialog){
 	var headings = dialog.headings;
 	_.each(dialog.order, function(strain){
 		_.each(dialog[strain].rows, function(row){
-			var insert_row = {treatment_id:row.treatment_id, row: []};
+			var insert_row = {treatment_id:row.treatment_id, row: ''};
+// 			insert_row.row=row.cells.join(',');
 			_.each(row.cells, function(cell){
 				if(cell.kind=='text')
-					insert_row.row.push(cell.text);
-				else
-					insert_row.row.push('cell_plate');
+					insert_row.row= insert_row.row+','+cell.text.replace(/\s+/g, '');;
 				
 			});
 			rows.push(insert_row);
