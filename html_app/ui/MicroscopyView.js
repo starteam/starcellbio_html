@@ -83,29 +83,7 @@ scb.ui.static.MicroscopyView.parse = function (element) {
 
 
 scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
-	
-// 	var laser_on_light_on_default = scb.ui.static.MicroscopyView.WHITE_MIN_BRIGHTNESS;
-// 	var mapping={
-// 		0.1:1.5, 
-// 		0.2:2, 
-// 		0.3:2.5, 
-// 		0.4:3, 
-// 		0.5:3.5, 
-// 		0.6:4, 
-// 		0.7:4.5, 
-// 		0.8:5, 
-// 		0.9:5.5, 
-// 		1:6, 
-// 		2:6.5, 
-// 		3:7, 
-// 		4:7.5, 
-// 		5:8, 
-// 		6:8.5, 
-// 		7:9, 
-// 		8:9.5, 
-// 		9:10}
-// 	if(state.microscopy.light_on && state.microscopy.laser_on && state.microscopy_lane.lens_map.brightness && state.microscopy_lane.kind == 'IF')
-// 		laser_on_light_on_default = mapping[state.microscopy_lane.lens_map.brightness]
+
 	
 	var model = new scb.components.ModelFactory(state.context.template);
 	model.microscopy.compute(state);
@@ -120,12 +98,10 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		state.microscopy_lane.current_slides = state.slides;
 	}
 	if(state.slide_type == 'Dye'){
-// 	$('.scb_s_microscopy_if').prop('disabled', false);
 		$('.scb_s_microscopy_if').prop('disabled', true);
 	$('.scb_s_microscopy_if').prop('checked', false);
 	}
 	else if(state.slide_type == 'IHC'){
-// 	$('.scb_s_microscopy_if').prop('disabled', false);
 		$('.scb_s_microscopy_if').prop('disabled', true);
 	$('.scb_s_microscopy_if').prop('checked', false);
 	}

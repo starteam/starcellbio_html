@@ -70,9 +70,9 @@ Assignment assignments
 					<td class='scb_s_dashboard_table_element scb_s_dashboard_table_border' rowspan="1">
 					{$assignment.name}<br/>
 					{if $assignment.operation == 'view'}
-					<a class='scb_s_dashboard_link' href='#view=course_setup'>View</a>
+					<a class='scb_s_dashboard_link' href='#view=course_setup&assignment_id={$assignment.id}'>View</a>
 					{else}
-					<a class='scb_s_dashboard_link' href='#view=course_setup'>Edit</a>
+					<a class='scb_s_dashboard_link' href='#view=course_setup&assignment_id={$assignment.id}'>Edit</a>
 					{/if}
 										
 					<span class='scb_s_dashboard_link'  > | Preview</span>

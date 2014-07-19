@@ -51,6 +51,7 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_primary_anti_bod
                     name: $(element).val(),
                     secondary: [],
                     marks: [],
+                    total_marks: [],
                     whole_marks:[],
                     nuclear_marks: [],
                     cyto_marks: [],
@@ -63,6 +64,7 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_primary_anti_bod
                     secondary: parsed.assignment.template.primary_anti_body[anti_body_id].secondary,
                     marks: parsed.assignment.template.primary_anti_body[anti_body_id].marks,
                     whole_marks:parsed.assignment.template.primary_anti_body[anti_body_id].whole_marks,
+                    total_marks: parsed.assignment.template.primary_anti_body[anti_body_id].total_marks,
                     nuclear_marks: parsed.assignment.template.primary_anti_body[anti_body_id].nuclear_marks,
                     cyto_marks: parsed.assignment.template.primary_anti_body[anti_body_id].cyto_marks,
                     gel_name: $(element).val()
@@ -98,6 +100,7 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_secondary_anti_b
                     secondary: [secondary_id],
                     marks: [],
                     whole_marks:[],
+                    total_marks: [],
                     nuclear_marks: [],
                     cyto_marks: [],
                     gel_name: ''
@@ -109,6 +112,7 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_secondary_anti_b
                     secondary:[secondary_id],
                     marks: parsed.assignment.template.primary_anti_body[anti_body_id].marks,
                     whole_marks:parsed.assignment.template.primary_anti_body[anti_body_id].whole_marks,
+                    total_marks: parsed.assignment.template.primary_anti_body[anti_body_id].total_marks,
                     nuclear_marks: parsed.assignment.template.primary_anti_body[anti_body_id].nuclear_marks,
                     cyto_marks: parsed.assignment.template.primary_anti_body[anti_body_id].cyto_marks,
                     gel_name: parsed.assignment.template.primary_anti_body[anti_body_id].gel_name
@@ -127,6 +131,7 @@ scb.ui.static.InstructorWesternBlotPage2View.scb_f_western_blot_add_primary_anti
                     secondary: [],
                     marks: [],
                     whole_marks:[],
+                    total_marks: [],
                     nuclear_marks: [],
                     cyto_marks: [],
                     gel_name: ''

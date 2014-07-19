@@ -340,7 +340,7 @@ scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
 }
 
 scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
-	//BOL BOL BOL BACHCHAN - ADD APPLY ALL BISECTOR_GATE_CREATED GATE CREATED
+	//ADD APPLY ALL BISECTOR_GATE_CREATED GATE CREATED
     var parsed = scb.ui.static.FacsView.parse(element);
 	parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {

@@ -45,6 +45,22 @@ scb.ui.static.InstructorWesternBlotPage1View.scb_f_western_blot_page1_save_assig
 			
 	}
 	
+	
+	if(_.contains(_.keys(parsed.assignment.template.lysate_kinds), 'nuclear')){
+		parsed.assignment.template.model.western_blot['nuclear'] = {parser_fixed: []};
+	}
+	if(_.contains(_.keys(parsed.assignment.template.lysate_kinds), 'cyto')){
+		parsed.assignment.template.model.western_blot['cyto'] = {parser_fixed: []};
+	}
+	if(_.contains(_.keys(parsed.assignment.template.lysate_kinds), 'whole')  && 
+		!_.contains(_.keys(parsed.assignment.template.lysate_kinds), 'nuclear') && 
+		!_.contains(_.keys(parsed.assignment.template.lysate_kinds), 'cyto')){
+		parsed.assignment.template.model.western_blot['cyto'] = {parser_fixed: []};
+		
+	}
+	
+	
+	
 	parsed.assignment.template.ui.experimental_design.gel_types = [];
 	
 	if($('.scb_f_western_blot_select_ten').attr('checked')){
@@ -56,6 +72,7 @@ scb.ui.static.InstructorWesternBlotPage1View.scb_f_western_blot_page1_save_assig
 	if($('.scb_f_western_blot_select_fifteen').attr('checked')){
 		parsed.assignment.template.ui.experimental_design.gel_types.push('.15');
 	}
+	
 	scb.ui.static.InstructorFrame.pending_save(parsed);
 	
 	var state = {

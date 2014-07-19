@@ -35,19 +35,19 @@ scb_instructor_western_blot_page4.display_assignment = function(opt_data, opt_sb
       var markListLen37 = markList37.length;
       for (var markIndex37 = 0; markIndex37 < markListLen37; markIndex37++) {
         var markData37 = markList37[markIndex37];
-        output.append('<tr class=\'scb_s_experiment_setup_table_row\' role=\'row\' aria-label=\'Sample\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' ><td class=\'scb_s_experiment_setup_table_element \' >', soy.$$escapeHtml(rData36.row), '</td><td>', soy.$$escapeHtml(markData37.weight), '</td><td> Slider here</td></tr>');
+        output.append('<tr class=\'scb_s_experiment_setup_table_row\' role=\'row\' aria-label=\'Sample\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' ><td class=\'scb_s_experiment_setup_table_element \' >', soy.$$escapeHtml(rData36.row), '</td><td>', soy.$$escapeHtml(markData37.weight), '</td><td>Whole Cell</td><td><div class="scb_f_western_blot_page4_exposure_slider" treatment_id=\'', soy.$$escapeHtml(rData36.treatment_id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' weight=\'', soy.$$escapeHtml(markData37.weight), '\' antibody_id=\'', soy.$$escapeHtml(antibody_comboData28), '\' ></div></td></tr>');
       }
-      var markList46 = opt_data.assignment.template.primary_anti_body[antibody_comboData28].nuclear_marks;
-      var markListLen46 = markList46.length;
-      for (var markIndex46 = 0; markIndex46 < markListLen46; markIndex46++) {
-        var markData46 = markList46[markIndex46];
-        output.append('<tr class=\'scb_s_experiment_setup_table_row\' role=\'row\' aria-label=\'Sample\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' ><td class=\'scb_s_experiment_setup_table_element \' >', soy.$$escapeHtml(rData36.row), '</td><td>', soy.$$escapeHtml(markData46.weight), '</td><td> Slider here</td></tr>');
+      var markList54 = opt_data.assignment.template.primary_anti_body[antibody_comboData28].nuclear_marks;
+      var markListLen54 = markList54.length;
+      for (var markIndex54 = 0; markIndex54 < markListLen54; markIndex54++) {
+        var markData54 = markList54[markIndex54];
+        output.append('<tr class=\'scb_s_experiment_setup_table_row\' role=\'row\' aria-label=\'Sample\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' ><td class=\'scb_s_experiment_setup_table_element \' >', soy.$$escapeHtml(rData36.row), '</td><td>', soy.$$escapeHtml(markData54.weight), '</td><td>Nuclear</td><td><div class="scb_f_western_blot_page4_exposure_slider" treatment_id=\'', soy.$$escapeHtml(rData36.treatment_id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' weight=\'', soy.$$escapeHtml(markData54.weight), '\' antibody_id=\'', soy.$$escapeHtml(antibody_comboData28), '\' ></div></td></tr>');
       }
-      var markList55 = opt_data.assignment.template.primary_anti_body[antibody_comboData28].cyto_marks;
-      var markListLen55 = markList55.length;
-      for (var markIndex55 = 0; markIndex55 < markListLen55; markIndex55++) {
-        var markData55 = markList55[markIndex55];
-        output.append('<tr class=\'scb_s_experiment_setup_table_row\' role=\'row\' aria-label=\'Sample\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' ><td class=\'scb_s_experiment_setup_table_element \' >', soy.$$escapeHtml(rData36.row), '</td><td>', soy.$$escapeHtml(markData55.weight), '</td><td> Slider here</td></tr>');
+      var markList71 = opt_data.assignment.template.primary_anti_body[antibody_comboData28].cyto_marks;
+      var markListLen71 = markList71.length;
+      for (var markIndex71 = 0; markIndex71 < markListLen71; markIndex71++) {
+        var markData71 = markList71[markIndex71];
+        output.append('<tr class=\'scb_s_experiment_setup_table_row\' role=\'row\' aria-label=\'Sample\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' ><td class=\'scb_s_experiment_setup_table_element \' >', soy.$$escapeHtml(rData36.row), '</td><td>', soy.$$escapeHtml(markData71.weight), '</td><td>Cytoplasmic</td><td><div class="scb_f_western_blot_page4_exposure_slider" treatment_id=\'', soy.$$escapeHtml(rData36.treatment_id), '\' assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' weight=\'', soy.$$escapeHtml(markData71.weight), '\' antibody_id=\'', soy.$$escapeHtml(antibody_comboData28), '\' ></div></td></tr>');
       }
     }
     output.append('</tbody></table></li>');

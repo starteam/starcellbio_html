@@ -34,15 +34,20 @@ scb.ui.static.InstructorSelectTechniqueView.scb_f_select_technique_save_assignme
 //                     techniques: [ 'wb' , 'facs', 'micro' ]
 	if($('.scb_f_select_technique_select_western_blot').attr('checked')){
 		parsed.assignment.template.ui.experimental_design.techniques.push('wb');
+		parsed.assignment.template.model['western_blot'] = {};
 	}
 	
 	if($('.scb_f_select_technique_select_facs').attr('checked')){
 		parsed.assignment.template.ui.experimental_design.techniques.push('facs');
+		parsed.assignment.template.model['facs'] = {};
 	}
 	
 	if($('.scb_f_select_technique_select_microscopy').attr('checked')){
 		parsed.assignment.template.ui.experimental_design.techniques.push('micro');
+		parsed.assignment.template.model['microscopy'] = {};
 	}
+	
+	
 	
 	
 	scb.ui.static.InstructorFrame.pending_save(parsed);

@@ -100,6 +100,73 @@ scb.ui.static.InstructorWesternBlotPage4View.rows = function(dialog){
 	return rows;
 }
 
+
+scb.ui.static.InstructorWesternBlotPage4View.scb_f_western_blot_page4_exposure_slider = function (e, ui) {
+    var element = this;
+    if($(this).hasClass('scb_f_western_blot_page4_exposure_slider')){
+		var parsed = scb.ui.static.InstructorWesternBlotPage4View.parse(element);
+		var antibody_id = $(element).attr('antibody_id');
+		var treatment_id = $(element).attr('treatment_id');
+		var drug_id = '';
+		var cell_line_id = '';
+		_.each(parsed.assignment.template.ui.add_multiple_dialog, function(cell_line, value, list){
+			if(value != 'order'){
+				_.each(cell_line.rows, function(row){
+					if(row.treatment_id == treatment_id){
+						cell_line_id = row.cell_treatments.X[0].cell_line
+						drug_id =  row.cell_treatments.X[0].treatment_list.list[0].drug_list.list[0].drug_id;
+					}
+				});
+			}
+		});
+	
+	
+	
+		_.each(parsed.assignment.template.model.western_blot, function(parser){
+				var parser_exists = false;
+			_.each(parser.parser_fixed, function(cell_parser){
+				if(cell_parser.cell_line == cell_line_id && cell_parser.drug == drug_id){
+					parser_exists = true;
+					var marker_exists = false;
+					_.each(cell_parser.above_marks, function(mark){
+						if(mark.primary_anti_body[0] == antibody_id){
+							marker_exists = true;
+							mark.intensity = ui.value;
+						}
+					});
+					if(!marker_exists){
+						cell_parser.above_marks.push({
+							name: parsed.assignment.template.primary_anti_body[antibody_id].name,
+							weight: $(element).attr('weight'),
+							intensity: ui.value,
+							primary_anti_body: [antibody_id]
+						});
+					}
+				
+				}
+			
+			});
+			if(!parser_exists){
+					parser.parser_fixed.push({
+						transfer_function: 'delta',
+						cutoff: 1,
+						drug: drug_id,
+						cell_line: cell_line_id,
+						above_marks: [{
+							name: parsed.assignment.template.primary_anti_body[antibody_id].name,
+							weight:$(this).attr('weight'),
+							intensity: ui.value,
+							primary_anti_body: [antibody_id]
+						}]
+					});
+			}
+		});
+	
+	}
+
+    
+}
+
 scb.ui.InstructorWesternBlotPage4View = function scb_ui_InstructorWesternBlotPage4View(gstate) {
     var self = this;
     var assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
@@ -142,7 +209,39 @@ scb.ui.InstructorWesternBlotPage4View = function scb_ui_InstructorWesternBlotPag
             $('.scb_s_ref_info_link').click(function(){
         	$('.scb_assignments_header_link_wrapper[value="Reference Material"]').click();
         });
-
+		$('.scb_f_western_blot_page4_exposure_slider').slider({
+			  range: "min",
+			  value:15,
+			  min: 0,
+			  max: 30,
+			  step: 3,
+           	  stop: scb.ui.static.InstructorWesternBlotPage4View.scb_f_western_blot_page4_exposure_slider
+		});
+		
+// 		$('.scb_f_wb_exposure_slider').slider({
+//             orientation: "horizontal",
+//             range: "min",
+//             min: 1,
+//             max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length-1,
+//             value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
+//             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
+//             change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
+//             create: function(event, ui){
+//             	$('.scb_f_wb_exposure_slider').attr('role', 'slider');
+// 				$('.scb_f_wb_exposure_slider .ui-slider-handle').attr({
+// 				  'aria-labelledby': "scb_s_wb_exposure_time_value",
+// 				  'aria-valuemin': "0",
+// 				  'aria-valuemax': "100",
+// 				  'aria-valuenow': "0",
+// 				  'aria-valuetext': "1 minute"
+// 				});
+// 				$('.scb_f_wb_exposure_slider > .ui-slider-range').width( $('.scb_f_wb_exposure_slider > .ui-slider-range').width() - 6);
+// 				if($('.scb_s_wb_exposure_time_value').text() == '1 h') {
+// 					$('.ui-slider-handle').css('left', $('.ui-slider-handle').position().left-10+'px')
+// 					console.log('fix');
+// 				}
+//             }
+//         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
 
 		$('#main').css({
 				position:'absolute',

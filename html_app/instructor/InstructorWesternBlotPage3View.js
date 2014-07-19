@@ -30,6 +30,26 @@ scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_page3_save_assig
 
 	var parsed = scb.ui.static.InstructorWesternBlotPage3View.parse(element);
 	
+	
+	
+	_.each(parsed.assignment.template.primary_anti_body, function(antibody){
+			_.each(antibody.whole_marks, function(whole){
+				antibody.total_marks.push(whole.weight);
+			});
+			_.each(antibody.nuclear_marks, function(nuclear){
+				antibody.total_marks.push(nuclear.weight);
+			});
+			_.each(antibody.cyto_marks, function(cyto){
+				antibody.total_marks.push(cyto.weight);
+			});
+			antibody.total_marks = _.uniq(antibody.total_marks);
+
+	});
+
+	
+
+	
+	
 	scb.ui.static.InstructorFrame.pending_save(parsed);
 	
 	
@@ -51,8 +71,8 @@ scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_whole_antibody_s
 	_.each(marks, function(mark){
 		var value = $.trim(mark);
 		parsed.assignment.template.primary_anti_body[anti_body_id].whole_marks.push({weight: value, intensity: 0});
+
 	});
-	
 	
 	scb.ui.static.InstructorFrame.refresh();
 
@@ -70,7 +90,6 @@ scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_nuclear_antibody
 		parsed.assignment.template.primary_anti_body[anti_body_id].nuclear_marks.push({weight: value, intensity: 0});
 	});
 	
-	
 	scb.ui.static.InstructorFrame.refresh();
 
 }
@@ -85,7 +104,6 @@ scb.ui.static.InstructorWesternBlotPage3View.scb_f_western_blot_cyto_antibody_si
 		var value = $.trim(mark);
 		parsed.assignment.template.primary_anti_body[anti_body_id].cyto_marks.push({weight: value, intensity: 0});
 	});
-	
 	
 	scb.ui.static.InstructorFrame.refresh();
 
