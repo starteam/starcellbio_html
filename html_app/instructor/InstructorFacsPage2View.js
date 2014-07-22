@@ -26,18 +26,27 @@ scb.ui.static.InstructorFacsPage2View.parse = function (element) {
 
 
 
-scb.ui.static.InstructorFacsPage2View.scb_f_select_technique_save_assignment_button = function(element, workarea){
+scb.ui.static.InstructorFacsPage2View.scb_f_facs_page2_save_assignment_button = function(element, workarea){
 
 	var parsed = scb.ui.static.InstructorFacsPage2View.parse(element);
 	
 	scb.ui.static.InstructorFrame.pending_save(parsed);
 	
 	
+	
+	
+	var view = '';
+	if(_.contains(parsed.assignment.template.ui.experimental_design.techniques, 'micro'))
+		view = 'microscopy_page1';
+	else view = 'dashboard';
+
+	
 	var state = {
 		assignment_id: parsed.assignment.id,
-		view: 'western_blot_page1',
+		view: view,
 		skip_hash_update: true
 	};
+	
 				   
 	scb.ui.static.InstructorFrame.refresh(state);
 }
@@ -46,8 +55,8 @@ scb.ui.static.InstructorFacsPage2View.scb_f_select_technique_save_assignment_but
 
 
 scb.ui.static.InstructorFacsPage2View.register = function(workarea) {
-    scb.utils.off_on(workarea, 'change', '.scb_f_select_technique_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorFacsPage2View.scb_f_select_technique_save_assignment_button(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_page2_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorFacsPage2View.scb_f_facs_page2_save_assignment_button(this, e);
     });
     
     
@@ -60,25 +69,6 @@ scb.ui.static.InstructorFacsPage2View.register = function(workarea) {
 
 
 
-scb.ui.static.InstructorFacsPage2View.rows = function(dialog){
-	var rows =[];
-	var headings = dialog.headings;
-	_.each(dialog.order, function(strain){
-		_.each(dialog[strain].rows, function(row){
-			var insert_row = {treatment_id:row.treatment_id, row: []};
-			_.each(row.cells, function(cell){
-				if(cell.kind=='text')
-					insert_row.row.push(cell.text);
-				else
-					insert_row.row.push('cell_plate');
-				
-			});
-			rows.push(insert_row);
-		});
-	});
-
-	return rows;
-}
 
 scb.ui.InstructorFacsPage2View = function scb_ui_InstructorFacsPage2View(gstate) {
     var self = this;
@@ -103,7 +93,6 @@ scb.ui.InstructorFacsPage2View = function scb_ui_InstructorFacsPage2View(gstate)
         	prev_step=assignments.selected.experiments.selected.prev_step;
         else prev_step = null;
         
-        var rows = scb.ui.static.InstructorFacsPage2View.rows(assignments.selected.template.ui.add_multiple_dialog);
 
         workarea.html(scb_instructor_facs_page2.main({
             global_template: gstate.context.master_model,
@@ -112,7 +101,6 @@ scb.ui.InstructorFacsPage2View = function scb_ui_InstructorFacsPage2View(gstate)
             prev_step: prev_step,
             kind: kind,
             headings: assignments.selected.template.ui.add_multiple_dialog.headings, 
-            rows: rows,
             assignment: assignments.selected,
             context: gstate.context,
             courses: courses,

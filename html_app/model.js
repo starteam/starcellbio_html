@@ -96,24 +96,6 @@ var MASTER_TEMPLATE={
 		},
             model: { // models
                 western_blot: {
-                    'cyto': {
-                        'parser_fixed': [
-                            {
-                                transfer_function: 'delta',
-                                cutoff: 1,
-                                drug: '',
-                                cell_line: '',
-                                above_marks: [
-                                	{
-                                        name: '',
-                                        weight: 0, // 34&35
-                                        intensity: 0,
-                                        primary_anti_body: ['']
-                                    }
-                                ]
-                            }
-                        ]
-                    }
                 },
                 facs: {
                 	'ticks': [],

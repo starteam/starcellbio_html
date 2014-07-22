@@ -1308,7 +1308,7 @@ function getDimensions(url){
 
 //This function will initialize the image and serialize the data of the 
 //original unprocessed image to a string
-function init(state, isNew, isIF, draw, image_source){
+function init(state, isNew, isIF, draw, image_source, notebook_id){
 	
 
 		if(isIF){
@@ -1363,19 +1363,19 @@ function init(state, isNew, isIF, draw, image_source){
 										state.width = naturalDimension.oWidth;
 										state.height = naturalDimension.oHeight;
 									}
-									initialize_state(state, isNew, isIF, draw, image_source, naturalDimension)
+									initialize_state(state, isNew, isIF, draw, image_source, naturalDimension, notebook_id)
 
 							}
 						}, 1000);
 					
 			}
 			else{
-				initialize_state(state, isNew, isIF, draw, image_source)
+				initialize_state(state, isNew, isIF, draw, image_source, notebook_id)
 			}
 
 }
 
-function initialize_state(state, isNew, isIF, draw, image_source, naturalDimension){
+function initialize_state(state, isNew, isIF, draw, image_source, naturalDimension, notebook_id){
 		var controls = document.getElementById('scb_s_microscopy_lens_controls', '.scb_s_microscopy_view');
 
 		var outline =  $('body').find('.scb_s_microscopy_slide_content_lens_outline', '#main').get(0);

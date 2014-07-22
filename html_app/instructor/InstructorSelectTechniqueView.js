@@ -58,7 +58,7 @@ scb.ui.static.InstructorSelectTechniqueView.scb_f_select_technique_save_assignme
 	else if(_.contains(parsed.assignment.template.ui.experimental_design.techniques, 'facs'))
 		view = 'facs_page1';
 	else if(_.contains(parsed.assignment.template.ui.experimental_design.techniques, 'micro'))
-		view = 'micro_page1';
+		view = 'microscopy_page1';
 
 	
 	var state = {

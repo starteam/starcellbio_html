@@ -7,6 +7,7 @@
 * @param assignment
 * @param prev_step
 * @param assignments AssignmentsView
+* @param assignment
 * @param context
 */
 {template .main}
@@ -42,7 +43,7 @@
 
 /**
 Assignment description
-@param view
+@param assignment
 */
 {template .display_assignment}
 
@@ -50,13 +51,13 @@ Assignment description
     	<div class='scb_s_abstract_title'>
             Assignment Editor
         </div>
-    {if $view == 'select_course'}
-    <div class='scb_s_facs_title'>Course Setup</div>
+    <div class='scb_s_experiment_setup_title'>Flow Cytometry Page2</div>
     
     
-    {elseif $view == 'create_assignment'}
-    
-    {/if}
+    <div>
+        <button assignment_id='{$assignment.id}' class=" scb_f_facs_page2_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
+
+    </div>
     
 
 </div>

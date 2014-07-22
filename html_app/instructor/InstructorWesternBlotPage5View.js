@@ -26,16 +26,23 @@ scb.ui.static.InstructorWesternBlotPage5View.parse = function (element) {
 
 
 
-scb.ui.static.InstructorWesternBlotPage5View.scb_f_select_technique_save_assignment_button = function(element, workarea){
+scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_save_assignment_button = function(element, workarea){
 
-	var parsed = scb.ui.static.InstructorWesternBlotPage5View.parse(element);
+	var parsed = scb.ui.static.InstructorWesternBlotPage4View.parse(element);
 	
 	scb.ui.static.InstructorFrame.pending_save(parsed);
-	
+		
+	var view = '';
+	if(_.contains(parsed.assignment.template.ui.experimental_design.techniques, 'facs'))
+		view = 'facs_page1';
+	else if(_.contains(parsed.assignment.template.ui.experimental_design.techniques, 'micro'))
+		view = 'microscopy_page1';
+	else view = 'dashboard';
+
 	
 	var state = {
 		assignment_id: parsed.assignment.id,
-		view: 'western_blot_page1',
+		view: view,
 		skip_hash_update: true
 	};
 				   
@@ -44,14 +51,132 @@ scb.ui.static.InstructorWesternBlotPage5View.scb_f_select_technique_save_assignm
 
 
 
+scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_radio_no = function(element, workarea){
+
+	var parsed = scb.ui.static.InstructorWesternBlotPage5View.parse(element);
+	
+	parsed.assignment.has_background_bands = false;
+				   
+	scb.ui.static.InstructorFrame.refresh();
+}
+
+scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_radio_yes = function(element, workarea){
+
+	var parsed = scb.ui.static.InstructorWesternBlotPage5View.parse(element);
+	
+	parsed.assignment.has_background_bands = true;
+				   
+	scb.ui.static.InstructorFrame.refresh();
+}
+
+
+scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_antibody_checkbox = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage5View.parse(element);
+	var antibody_id = $(element).attr('anti_body_id');	
+	
+	if($(element).attr('checked')){
+		parsed.assignment.background_band_list[antibody_id] = 1;
+	
+// 		parsed.assignment.background_band_list = _.uniq(parsed.assignment.background_band_list);
+	}
+	else{
+		delete parsed.assignment.background_band_list[antibody_id];
+	}
+	scb.ui.static.InstructorFrame.refresh();
+}
+
+
+scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_antibody_weight_edit = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage5View.parse(element);
+	var antibody_id = $(element).attr('anti_body_id');
+	var marks =	parsed.assignment.template.primary_anti_body[antibody_id].marks;
+	var mark_id = $(element).attr('mark_id') ? $(element).attr('mark_id'): Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	
+	var markExists = false;
+	_.each(marks, function(mark){
+		if(mark_id == mark.id){
+			mark.weight = $(element).val();
+			markExists = true;
+		}
+	});
+	
+	if(!markExists){
+		marks.push({id: mark_id, weight: $(element).val(), intensity: 0});
+	}
+	
+	scb.ui.static.InstructorFrame.refresh();
+		
+}
+
+
+scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_antibody_intensity_edit = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage5View.parse(element);
+	var antibody_id = $(element).attr('anti_body_id');
+	var marks =	parsed.assignment.template.primary_anti_body[antibody_id].marks;
+	var mark_id = $(element).attr('mark_id') ? $(element).attr('mark_id'): Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	
+	var markExists = false;
+	_.each(marks, function(mark){
+		if(mark_id == mark.id){
+			mark.intensity = $(element).val();
+			markExists = true;
+		}
+	});
+	
+	if(!markExists){
+		marks.push({id: mark_id, weight: 0, intensity: $(element).val()});
+	}
+	
+	scb.ui.static.InstructorFrame.refresh();
+		
+}
+
+scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_add_background_band = function(element, workarea){
+	var parsed = scb.ui.static.InstructorWesternBlotPage5View.parse(element);
+	var antibody_id = $(element).attr('anti_body_id');
+	var mark_id =  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+
+	var marks =	parsed.assignment.template.primary_anti_body[antibody_id].marks;
+
+	marks.push({id: mark_id, weight: 0, intensity: 0});
+	scb.ui.static.InstructorFrame.refresh();
+
+
+}
+
+
+
+
 
 scb.ui.static.InstructorWesternBlotPage5View.register = function(workarea) {
-    scb.utils.off_on(workarea, 'change', '.scb_f_select_technique_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorWesternBlotPage5View.scb_f_select_technique_save_assignment_button(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page5_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_save_assignment_button(this, e);
     });
     
     
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page5_radio_no', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_radio_no(this, e);
+    });
     
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page5_radio_yes', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_radio_yes(this, e);
+    });
+
+	scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page5_antibody_checkbox', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_antibody_checkbox(this, e);
+    });    
+    
+    scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_page5_antibody_intensity_edit', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_antibody_intensity_edit(this, e);
+    }); 
+    
+    scb.utils.off_on(workarea, 'change', '.scb_f_western_blot_page5_antibody_weight_edit', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_antibody_weight_edit(this, e);
+    });
+    
+    scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_page5_add_background_band', function (e) {
+    	scb.ui.static.InstructorWesternBlotPage5View.scb_f_western_blot_page5_add_background_band(this, e);
+    });
     
     
     
@@ -97,6 +222,9 @@ scb.ui.InstructorWesternBlotPage5View = function scb_ui_InstructorWesternBlotPag
         if(assignments.selected.course_prepared){
         	kind = 'create_assignment';
         }
+        
+        
+       
         
         
         if(assignments.selected.experiments.selected !=null)

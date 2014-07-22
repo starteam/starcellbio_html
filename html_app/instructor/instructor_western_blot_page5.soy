@@ -53,24 +53,26 @@ Assignment description
         </div>
         <div class='scb_s_assignment_setup_course_name_heading'>6. Would you
         like background bands to appear?</div>
-		<div>
-		<div class='scb_s_western_blot_page5_radio_yes' assignment_id='{$assignment.id}'  role='radio'>
-			<input type="radio" name="wb_background_bands"/>
+		<div class="scb_s_western_blot_page5_wrapper">
+		<div class='scb_s_western_blot_page5_radio_yes scb_f_western_blot_page5_radio_yes' assignment_id='{$assignment.id}'  role='radio'>
+			<input type="radio" name="wb_background_bands" {if $assignment.has_background_bands}checked='checked'{/if} />
 			<span class='scb_s_western_blot_page5_radio_yes_text' role='presentation'>Yes</span>
-		<br></div>
-		<div class='scb_s_western_blot_page5_radio_no' assignment_id='{$assignment.id}' role='radio'>
-			<input type="radio" name="wb_background_bands"/>
+		<br/>
+		</div>
+		<div class='scb_s_western_blot_page5_radio_no scb_f_western_blot_page5_radio_no' assignment_id='{$assignment.id}' role='radio'>
+			<input type="radio" name="wb_background_bands"  {if not $assignment.has_background_bands}checked='checked'{/if} />
 			<span class='scb_s_western_blot_page5_radio_no_text' role='presentation'>No</span>
-		<br></div>
-		
+		<br/>
+		</div>
+		{if $assignment.has_background_bands}
 		<ol type='a'>
 			<li class='scb_s_western_blot_page5_heading'>If yes, which antibody
 				combination(s) should yield background bands?</li>
 				
 				{foreach $strain in keys($assignment.template.primary_anti_body)}
 					{if not ($strain == 'order')}
-					<div class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
-						<input class="scb_s_experiment_setup_checkbox scb_s_select_technique_select_western_blot" type="checkbox" role="checkbox" assignment_id="{$assignment.id}"> 
+					<div class='scb_s_experiment_setup_list_item  scb_f_western_blot_page5_list_item ' assignment_id='{$assignment.id}' anti_body_id='{$strain}'>
+						<input anti_body_id='{$strain}' class="scb_s_experiment_setup_checkbox scb_s_select_technique_select_western_blot scb_f_western_blot_page5_antibody_checkbox" {if $assignment.background_band_list[$strain]}checked='checked' {/if} type="checkbox" role="checkbox" assignment_id="{$assignment.id}"> 
 
 						<div class='  scb_s_western_blot_page5_primary_antibody ' 
 							anti_body_id='{$strain}' assignment_id='{$assignment.id}'>
@@ -81,7 +83,7 @@ Assignment description
 				
 				
 			<li class='scb_s_western_blot_page5_heading'>Define the size and intensity of each desired background band: </li>
-				{foreach $strain in keys($assignment.template.primary_anti_body)}
+				{foreach $strain in keys($assignment.background_band_list)}
 					{if not ($strain == 'order')}
 					<div class='scb_s_experiment_setup_list_item ' assignment_id='{$assignment.id}'>
 						<div class='  scb_s_western_blot_page5_primary_antibody ' 
@@ -89,11 +91,74 @@ Assignment description
 							{$assignment.template.primary_anti_body[$strain].name}, {$assignment.template.secondary_anti_body[$assignment.template.primary_anti_body[$strain].secondary[0]].name}:</div>
 				
 					</div>
+					<table class="scb_s_western_blot_page4_table " aria-label='Table of Samples' role='grid'>
+						<thead class='scb_s_experiment_setup_table_head' >
+							<td role='columnheader'  class='scb_s_experiment_setup_table_heading' >
+							Size (kDa)
+							</td>
+							<td role='columnheader'  class='scb_s_experiment_setup_table_heading' >
+							Intensity
+							</td>
+						</thead>
+				
+						<tbody class='scb_s_western_blot_page4_table_body'>
+							{if length($assignment.template.primary_anti_body[$strain].marks) <=0}
+								<tr class='scb_s_experiment_setup_table_row scb_f_western_blot_page5_list' role='row' aria-label='Sample' assignment_id='{$assignment.id}' anti_body_id='{$strain}'>
+									<td>
+									<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_page5_antibody_weight_edit' placeholder="Band Sizes" 
+							anti_body_id='{$strain}' secondary_id = '{$assignment.template.primary_anti_body[$strain].secondary[0]}' value='0'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+
+									</td>
+									<td>
+									<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_page5_antibody_intensity_edit' placeholder="Band Sizes" 
+							anti_body_id='{$strain}' secondary_id = '{$assignment.template.primary_anti_body[$strain].secondary[0]}' value='0'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<button class='scb_s_gray_button scb_f_western_blot_page5_add_background_band scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}' anti_body_id='{$strain}'>
+											ADD
+											</button>
+									</td>
+									<td></td>
+								</tr>
+							{else}
+						
+								{foreach $mark in $assignment.template.primary_anti_body[$strain].marks}
+									<tr class='scb_s_experiment_setup_table_row' role='row' aria-label='Sample' assignment_id='{$assignment.id}' anti_body_id='{$strain}'>
+										<td>
+										<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_page5_antibody_weight_edit' placeholder="Band Sizes" 
+								anti_body_id='{$strain}' mark_id='{$mark.id}' secondary_id = '{$assignment.template.primary_anti_body[$strain].secondary[0]}' value='{$mark.weight}'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+
+										</td>
+										<td>
+										<input type='text' class='scb_s_experiment_setup_text_field scb_f_western_blot_page5_antibody_intensity_edit' placeholder="Band Sizes" 
+								anti_body_id='{$strain}' mark_id='{$mark.id}'  secondary_id = '{$assignment.template.primary_anti_body[$strain].secondary[0]}' value='{$mark.intensity}'   maxlength="30" assignment_id='{$assignment.id}' role='textbox'>
+										</td>
+									</tr>
+								{/foreach}
+								<tr>
+									<td>
+										<button class='scb_s_gray_button scb_f_western_blot_page5_add_background_band scb_s_experiment_setup_add_button' assignment_id='{$assignment.id}' anti_body_id='{$strain}' >
+											ADD
+											</button>
+									</td>
+									<td></td>
+								</tr>
+							{/if}
+					
+						</tbody>
+					</table>
 					{/if}
 				{/foreach}
 		</ol>
+		{/if}
 		</div>
-    
+      	
+    <div>
+        <button assignment_id='{$assignment.id}' class=" scb_f_western_blot_page5_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label='Save and Continue' role='button'>SAVE AND CONTINUE &nbsp; &#9654;</button>
+
+    </div>
     
 
 </div>

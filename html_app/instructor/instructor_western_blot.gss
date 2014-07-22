@@ -221,3 +221,7 @@
 	margin-right: 50px;
 
 }
+
+.scb_s_western_blot_page5_wrapper{
+	margin-bottom: 30px;
+}

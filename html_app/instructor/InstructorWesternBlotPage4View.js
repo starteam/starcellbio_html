@@ -87,12 +87,11 @@ scb.ui.static.InstructorWesternBlotPage4View.rows = function(dialog){
 	_.each(dialog.order, function(strain){
 		_.each(dialog[strain].rows, function(row){
 			var insert_row = {treatment_id:row.treatment_id, row: ''};
-// 			insert_row.row=row.cells.join(',');
-			_.each(row.cells, function(cell){
-				if(cell.kind=='text')
-					insert_row.row= insert_row.row+','+cell.text.replace(/\s+/g, '');;
-				
-			});
+
+			var cells = _.filter(row.cells, function(cell){ return cell.kind=='text'; }); 
+			cells = _.map(cells, function(cell){ return cell.text.replace(/\s+/g, ''); });
+			insert_row.row = cells.join();
+
 			rows.push(insert_row);
 		});
 	});
@@ -167,6 +166,45 @@ scb.ui.static.InstructorWesternBlotPage4View.scb_f_western_blot_page4_exposure_s
     
 }
 
+scb.ui.static.InstructorWesternBlotPage4View.scb_f_western_blot_page4_adjust_sliders = function(assignment) {
+	console.log(assignment);
+	var strain_combos = [];
+	
+	_.each(assignment.template.ui.add_multiple_dialog, function(cell_line, value, list){
+		if(value != 'order'){
+			_.each(cell_line.rows, function(row){
+				strain_combos.push({
+					treatment_id: row.treatment_id, 
+					cell_line: row.cell_treatments.X[0].cell_line, 
+					drug: row.cell_treatments.X[0].treatment_list.list[0].drug_list.list[0].drug_id
+				});
+				console.log(row.treatment_id);
+			});
+		}
+	});
+	_.each($('.scb_f_western_blot_page4_exposure_slider'), function(slider){ 
+		var treatment_id = $(slider).attr('treatment_id'); 
+		var antibody_id = $(slider).attr('antibody_id');
+		_.each(strain_combos, function(combo){
+			if(treatment_id == combo.treatment_id){
+				_.each(assignment.template.model.western_blot, function(parser){
+					_.each(parser.parser_fixed, function(cell_parser){
+						if(cell_parser.cell_line == combo.cell_line && cell_parser.drug == combo.drug){
+							_.each(cell_parser.above_marks, function(mark){
+								if(mark.primary_anti_body[0] == antibody_id){
+									$(slider).slider('value', mark.intensity);
+								}
+							});				
+						}
+			
+					});
+				});
+				/////
+			}
+		});
+	});
+}
+
 scb.ui.InstructorWesternBlotPage4View = function scb_ui_InstructorWesternBlotPage4View(gstate) {
     var self = this;
     var assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
@@ -218,30 +256,7 @@ scb.ui.InstructorWesternBlotPage4View = function scb_ui_InstructorWesternBlotPag
            	  stop: scb.ui.static.InstructorWesternBlotPage4View.scb_f_western_blot_page4_exposure_slider
 		});
 		
-// 		$('.scb_f_wb_exposure_slider').slider({
-//             orientation: "horizontal",
-//             range: "min",
-//             min: 1,
-//             max: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_array.length-1,
-//             value: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider_index(state.western_blot_gel.exposure_time),
-//             slide: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
-//             change: scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider,
-//             create: function(event, ui){
-//             	$('.scb_f_wb_exposure_slider').attr('role', 'slider');
-// 				$('.scb_f_wb_exposure_slider .ui-slider-handle').attr({
-// 				  'aria-labelledby': "scb_s_wb_exposure_time_value",
-// 				  'aria-valuemin': "0",
-// 				  'aria-valuemax': "100",
-// 				  'aria-valuenow': "0",
-// 				  'aria-valuetext': "1 minute"
-// 				});
-// 				$('.scb_f_wb_exposure_slider > .ui-slider-range').width( $('.scb_f_wb_exposure_slider > .ui-slider-range').width() - 6);
-// 				if($('.scb_s_wb_exposure_time_value').text() == '1 h') {
-// 					$('.ui-slider-handle').css('left', $('.ui-slider-handle').position().left-10+'px')
-// 					console.log('fix');
-// 				}
-//             }
-//         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
+		scb.ui.static.InstructorWesternBlotPage4View.scb_f_western_blot_page4_adjust_sliders(assignments.selected);
 
 		$('#main').css({
 				position:'absolute',

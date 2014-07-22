@@ -21,6 +21,6 @@ scb_instructor_microscopy_page2.main = function(opt_data, opt_sb) {
 
 scb_instructor_microscopy_page2.display_assignment = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class=\'scb_s_course_setup_description \'><div class=\'scb_s_abstract_title\'>Assignment Editor</div>', (opt_data.view == 'select_course') ? '<div class=\'scb_s_microscopy_title\'>Course Setup</div>' : (opt_data.view == 'create_assignment') ? '' : '', '</div>');
+  output.append('<div class=\'scb_s_course_setup_description \'><div class=\'scb_s_abstract_title\'>Assignment Editor</div><div class=\'scb_s_experiment_setup_title\'>Microscopy Page2</div><div><button assignment_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' class=" scb_f_microscopy_page2_save_assignment_button scb_s_assignment_setup_save_button scb_s_navigation_button"  aria-label=\'Save and Continue\' role=\'button\'>SAVE AND CONTINUE &nbsp; &#9654;</button></div></div>');
   return opt_sb ? '' : output.toString();
 };

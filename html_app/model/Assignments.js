@@ -41,6 +41,10 @@ scb.Assignment = function scb_Assignment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'is_new_assignment',true,null,context);
 	scb.Utils.initialize_accessor_field(self,data,'is_new_course',true,null,context);
 
+	scb.Utils.initialize_accessor_field(self,data,'has_background_bands',false,null,context);
+	scb.Utils.initialize_accessor_field(self,data,'background_band_list',{},null,context);
+
+
 	scb.Utils.initialize_accessor_field(self,data,'course_prepared',null,null,context);
 	scb.Utils.initialize_accessor_field(self,data,'assignment_prepared',null,null,context);
 

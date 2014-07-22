@@ -26,7 +26,7 @@ scb.ui.static.InstructorMicroscopyPage3View.parse = function (element) {
 
 
 
-scb.ui.static.InstructorMicroscopyPage3View.scb_f_select_technique_save_assignment_button = function(element, workarea){
+scb.ui.static.InstructorMicroscopyPage3View.scb_f_microscopy_page3_save_assignment_button = function(element, workarea){
 
 	var parsed = scb.ui.static.InstructorMicroscopyPage3View.parse(element);
 	
@@ -35,7 +35,7 @@ scb.ui.static.InstructorMicroscopyPage3View.scb_f_select_technique_save_assignme
 	
 	var state = {
 		assignment_id: parsed.assignment.id,
-		view: 'western_blot_page1',
+		view: 'dashboard',
 		skip_hash_update: true
 	};
 				   
@@ -46,8 +46,8 @@ scb.ui.static.InstructorMicroscopyPage3View.scb_f_select_technique_save_assignme
 
 
 scb.ui.static.InstructorMicroscopyPage3View.register = function(workarea) {
-    scb.utils.off_on(workarea, 'change', '.scb_f_select_technique_save_assignment_button', function (e) {
-    	scb.ui.static.InstructorMicroscopyPage3View.scb_f_select_technique_save_assignment_button(this, e);
+    scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_page3_save_assignment_button', function (e) {
+    	scb.ui.static.InstructorMicroscopyPage3View.scb_f_microscopy_page3_save_assignment_button(this, e);
     });
     
     
@@ -60,25 +60,7 @@ scb.ui.static.InstructorMicroscopyPage3View.register = function(workarea) {
 
 
 
-scb.ui.static.InstructorMicroscopyPage3View.rows = function(dialog){
-	var rows =[];
-	var headings = dialog.headings;
-	_.each(dialog.order, function(strain){
-		_.each(dialog[strain].rows, function(row){
-			var insert_row = {treatment_id:row.treatment_id, row: []};
-			_.each(row.cells, function(cell){
-				if(cell.kind=='text')
-					insert_row.row.push(cell.text);
-				else
-					insert_row.row.push('cell_plate');
-				
-			});
-			rows.push(insert_row);
-		});
-	});
 
-	return rows;
-}
 
 scb.ui.InstructorMicroscopyPage3View = function scb_ui_InstructorMicroscopyPage3View(gstate) {
     var self = this;
@@ -103,7 +85,6 @@ scb.ui.InstructorMicroscopyPage3View = function scb_ui_InstructorMicroscopyPage3
         	prev_step=assignments.selected.experiments.selected.prev_step;
         else prev_step = null;
         
-        var rows = scb.ui.static.InstructorMicroscopyPage3View.rows(assignments.selected.template.ui.add_multiple_dialog);
 
         workarea.html(scb_instructor_microscopy_page3.main({
             global_template: gstate.context.master_model,
@@ -112,7 +93,6 @@ scb.ui.InstructorMicroscopyPage3View = function scb_ui_InstructorMicroscopyPage3
             prev_step: prev_step,
             kind: kind,
             headings: assignments.selected.template.ui.add_multiple_dialog.headings, 
-            rows: rows,
             assignment: assignments.selected,
             context: gstate.context,
             courses: courses,
