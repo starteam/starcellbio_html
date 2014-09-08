@@ -6,7 +6,7 @@ import time
 from threading import Timer
 from subprocess import call
 
-root = os.environ['VIRTUAL_ENV']+'/starcellbio_html/html_app/'
+root = os.environ['PROJECT_HOME']+'/html_app/'
 
 global_update_index = True
 js = dict();
@@ -41,7 +41,7 @@ def index_html():
         js.pop('starcellbio.app.js')
     if( js.has_key( 'swipe/Gruntfile.js' )):
         js.pop('swipe/Gruntfile.js')
-    
+
     css_join = css_prefix + (time+css_suffix+css_prefix).join(css.keys())+ time + css_suffix
     js_join = js_prefix + (time+js_suffix+js_prefix).join(js.keys())  + js_suffix
     js_join = js_prefix + "../scb/get_user.js" + js_suffix + js_join
@@ -50,7 +50,7 @@ def index_html():
     js_join = js_prefix + "js/jquery.tinymce.min.js" + js_suffix + js_join
     js_join = js_prefix + "js/jquery-1.7.2.min.js" + js_suffix + js_join
 
-    return html_prefix + css_join + js_join + html_suffix 
+    return html_prefix + css_join + js_join + html_suffix
 
 def update_index_html():
     f = open(root+"index.html","w")
@@ -58,7 +58,7 @@ def update_index_html():
     f.close()
     print "new index.html"
 
-def processor( path ): 
+def processor( path ):
     global global_update_index, css, js
     update_index = False
     path = path.replace("//","/")
@@ -74,7 +74,7 @@ def processor( path ):
     if( path.endswith(".soy") ):
         infile = path
         outfile = os.path.dirname(infile) + "/gen/" + os.path.basename(infile) + ".js"
-        call(["java", "-jar" , "../tools/SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ]) 
+        call(["java", "-jar" , "../tools/SoyToJsSrcCompiler.jar" , "--outputPathFormat" , outfile , infile ])
         print "compile soy %s " % (path)
     if( path.endswith(".gss") ):
         infile = path
