@@ -431,7 +431,7 @@ div#main {
     padding: 10px;
     text-align: center;
     vertical-align: top;
-    font-size: 13pt;
+    font-size: 12pt;
     letter-spacing: 1px;
 	background: #d5dce4;
 }
