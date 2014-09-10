@@ -144,7 +144,6 @@ INSTALLED_APPS = (
      'django.contrib.admindocs',
      'frontend_tests',
      'rest_framework',
-     'scb_rest',
      'backend',
      'instructor',
 ) + auth.settings.INSTALLED_APPS
