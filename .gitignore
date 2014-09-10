@@ -2,3 +2,5 @@ chromedriver.log
 *.pyc
 .idea/*
 *~
+build
+scbU
