@@ -176,11 +176,11 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
 
 scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
     var self = this;
-    var assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
-    var courses = _.groupBy(assignments.list, function (assignment) {
-        return (assignment.course);
-    });
     self.show = function (state) {
+        var assignments = new scb.AssignmentList(gstate.context.master_model.assignments, gstate.context);
+        var courses = _.groupBy(assignments.list, function (assignment) {
+            return (assignment.course);
+        });
         window.assignments = assignments;
         var workarea = gstate.workarea;
         var last_step=1;

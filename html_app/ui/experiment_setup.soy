@@ -142,16 +142,16 @@ Experiment active area
     </div>
     <div class="scb_s_experiment_setup_new_set_up">
     	<div class="scb_s_experiment_setup_instructions" aria-label='Setup Instructions' role='textbox'>
-<!-- 
-    		<img src='images/setup/setup_line.png' role='presentation'/>
- -->
             	{$t.experiment_setup|noAutoescape}
         </div>
         <br>
-		<table class="scb_s_experiment_setup_table {if $kind == 'readwrite'}scb_s_experiment_setup_table_editable{else}scb_s_experiment_setup_table_readonly{/if}" aria-label='Table of Samples' role='grid'>
+		<table class="scb_s_experiment_setup_table
+		{if $kind == 'readwrite'}scb_s_experiment_setup_table_editable{else}scb_s_experiment_setup_table_readonly{/if}
+		" aria-label='Table of Samples' role='grid'>
 			<thead class='scb_s_experiment_setup_table_head' >
 			{foreach $h in $headings}
 				<td role='columnheader' aria-label='{$h.title}' class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
+
 					{if $kind == 'readonly'}
 						{if $h.kind != 'actions'}
 							{$h.title}

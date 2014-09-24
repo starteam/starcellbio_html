@@ -21,7 +21,8 @@ function starcellbio(jquery_selector_main, master_model) {
         }
         
         
-        if(get_user_result.account_type == '' || get_user_result.account_type == 'student'){
+        if(get_user_result.account_type == '' || get_user_result.account_type == 'student')
+        {
         $.ajax({
 			type: "GET",
 			url: '../scb/get_student_courses.js',

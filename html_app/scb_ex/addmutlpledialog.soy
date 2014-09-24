@@ -1,0 +1,46 @@
+{namespace scb_ex}
+
+/**
+@param template
+@param assignment
+@param experiment
+*/
+{template .dialog}
+<div class='scb_ex_inner_dialog' role='dialog' aria-label='Add Samples'>
+    <h1 class='scb_ex_inner_dialog_title' role='presentation' aria-label='Add Samples'>
+        <span class='scb_ex_inner_dialog_title_close' role='button' aria-label='Close Add Samples'>&#215;</span>
+        Add multiple rows </h1>
+
+    <div class='scb_ex_inner_dialog_body'>
+
+        <table class="scb_s_experiment_setup_table" role='grid' aria-label='Cell Lines'>
+            <thead class="scb_s_experiment_setup_table_head">
+            <td role='columnheader' aria-label='selected' class='scb_s_experiment_setup_table_heading' style='width:80px'>
+                Selected
+            </td>
+            <td role='columnheader' aria-label='cell line' class='scb_s_experiment_setup_table_heading'>
+                Cell Line
+            </td>
+            </thead>
+            <tbody class="scb_s_experiment_setup_table_body">
+            {foreach $cell_line in keys($template.cell_lines)}
+                <tr role='row' aria-label='Sample'>
+                    <td class='scb_s_experiment_setup_table_border'>
+                        <input class='scb_f_experiment_setup_dialog_checkbox' type="checkbox" role='checkbox'  name="{$cell_line}" assignment_id='{$assignment.id}'
+                           experiment_id='{$experiment.id}' treatment_id='{$cell_line}' cell_line='{$cell_line}' aria-checked='false'>
+                    </td>
+                    <td class='scb_s_experiment_setup_table_border'>
+                            {$template.cell_lines[$cell_line].name}
+                    </td>
+                </tr>
+            {/foreach}
+            </tr>
+            </tbody>
+        </table>
+        <div class='scb_ex_button_float'>
+        <button class='scb_ex_inner_dialog_cancel scb_s_gray_button' aria-label='Cancel' role='button'>CANCEL</button>
+        <button class='scb_ex_inner_dialog_add scb_s_gray_button' aria-label='Add Samples' role='button'>ADD SAMPLES</button>
+        </div>
+    </div>
+</div>
+{/template}

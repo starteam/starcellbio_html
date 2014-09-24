@@ -62,6 +62,10 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 							if(!isFound){
 								if(matches){
 									console.info(hash_list)
+                                    if(collection_id == '%CELL_LINE%')
+                                    {
+                                        collection_id = cell_line;
+                                    }
 									var max = template.slide_parser[collection_id][slide_type][conditions].length;
 									var index =  Math.floor(Math.random() * (max - 1 + 1));
 									console.info(template.slide_parser[collection_id][slide_type][conditions][index]);
@@ -84,9 +88,11 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 									isFound = true;
 								}
 								else{
-									var max = template.slide_parser['default']['Dye']['HnE'].length;
-									var index =  Math.floor(Math.random() * (max - 1 + 1));
-									imgs = template.slide_parser['default']['Dye']['HnE'][index];
+                                    try {
+                                        var max = template.slide_parser['default']['Dye']['HnE'].length;
+                                        var index = Math.floor(Math.random() * (max - 1 + 1));
+                                        imgs = template.slide_parser['default']['Dye']['HnE'][index];
+                                    } catch(e){}
 								}
 							}
 						}

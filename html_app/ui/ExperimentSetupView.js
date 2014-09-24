@@ -41,7 +41,7 @@ scb.ui.static.ExperimentSetupView.scb_f_experiment_setup_action_open_add_samples
         workarea: workarea,
         assignment: parsed.assignment,
         experiment: parsed.experiment,
-        template: parsed.template,
+        template: template,
         element: element,
         close: scb.ui.static.MainFrame.refresh,
         source_state: scb.utils.get(template, ['ui', 'experiment_setup', 'actions' , 0])
