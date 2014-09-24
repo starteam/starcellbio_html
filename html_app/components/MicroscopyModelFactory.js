@@ -66,6 +66,11 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
                                     {
                                         collection_id = cell_line;
                                     }
+                                    if( scb.utils.isDefined(rule['use_collection_id']))
+                                    {
+                                        console.info( "Pull collection_id from rule");
+                                        collection_id = rule['use_collection_id'];
+                                    }
 									var max = template.slide_parser[collection_id][slide_type][conditions].length;
 									var index =  Math.floor(Math.random() * (max - 1 + 1));
 									console.info(template.slide_parser[collection_id][slide_type][conditions][index]);

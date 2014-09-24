@@ -9,7 +9,6 @@ if (typeof (scb_ex1.static) == 'undefined') {
 
 scb_ex1.static.scb_ex_inner_dialog_add = function (element, dialog, state) {
 
-    debugger;
     $('input[type="checkbox"]:checked', dialog).each(function (e) {
         var element = $(this);
         var experiment_id = $(element).attr('experiment_id');

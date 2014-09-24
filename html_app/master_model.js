@@ -10410,6 +10410,12 @@ var __scb_sample_1 = {
         },
 
         cell_lines: {
+            'bo': {
+                name: 'No GFP'
+            },
+            'gfp': {
+                name: 'GFP'
+            },
             'gfp-pa': {
                 name: 'GFP-Protein A'
             },
@@ -10422,20 +10428,11 @@ var __scb_sample_1 = {
             'gfp-pd': {
                 name: 'GFP-Protein D'
             },
-            'gfp-pe': {
-                name: 'GFP-Protein E'
-            },
             'gfp-ma': {
                 name: 'GFP-Mutant A'
             },
             'gfp-mb': {
                 name: 'GFP-Mutant B'
-            },
-            'bo': {
-                name: 'Buffer Only'
-            },
-            'gfp': {
-                name: 'GFP'
             },
             'gfp-nuc': {
                 name: 'GFP-Nuc'
@@ -10449,14 +10446,8 @@ var __scb_sample_1 = {
             'gfp-er': {
                 name: 'GFP-ER'
             },
-            'gfp-golgi': {
-                name: 'GFP-Gogli'
-            },
             'gfp-nm': {
                 name: 'GFP-NM'
-            },
-            'gfp-mito': {
-                name: 'GFP-Mito'
             }
         },
         time_unit: {
@@ -10505,6 +10496,23 @@ var __scb_sample_1 = {
             'gfp-pd_8': 'images/microscopy/SCB_EX1/cyto_final/c15-2.jpg',
             'gfp-pd_9': 'images/microscopy/SCB_EX1/cyto_final/c17.jpg',
             'gfp-pd_10': 'images/microscopy/SCB_EX1/cyto_final/c29.jpg',
+            'gfp-nm_1': 'images/microscopy/SCB_EX1/nm_final/NM1crop.jpg',
+            'gfp-nm_2': 'images/microscopy/SCB_EX1/nm_final/nm2crop.jpg',
+            'gfp-nm_3': 'images/microscopy/SCB_EX1/nm_final/nm3crop1.jpg',
+            'gfp-nm_4': 'images/microscopy/SCB_EX1/nm_final/nm3crop2.jpg',
+            'gfp-nm_5': 'images/microscopy/SCB_EX1/nm_final/nm5crop.jpg',
+            'gfp_1': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn2.jpg',
+            'gfp_2': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn3.jpg',
+            'gfp_3': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn5.jpg',
+            'gfp_4': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn6.jpg',
+            'gfp_5': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn7.jpg',
+            'gfp_6': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn8.jpg',
+            'gfp_7': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn11.jpg',
+            'gfp_8': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn12.jpg',
+            'gfp_9': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn15.jpg',
+            'gfp_10': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn17.jpg',
+            'gfp_11': 'images/microscopy/SCB_EX1/nuc_and_cyto/cn20.jpg',
+            'bo': 'images/microscopy/SCB_EX1/negative_control.jpg',
             'dummy': 'dummy'
         },
         slide_parser: {
@@ -10661,7 +10669,9 @@ var __scb_sample_1 = {
                                 mag: '20x'
                             }
                         ]
-                    ] } },
+                    ]
+                }
+            },
             'gfp-pd': {
                 'IF': {
                     'rgb': [
@@ -10725,6 +10735,122 @@ var __scb_sample_1 = {
                                 mag: '20x'
                             }
                         ],
+                    ] } },
+            'gfp-nm': {
+                'IF': {
+                    'rgb': [
+                        [
+                            {
+                                hash: 'gfp-nm_1',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp-nm_2',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp-nm_3',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp-nm_4',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp-nm_5',
+                                mag: '20x'
+                            }
+                        ]
+                    ] } },
+            'bo': {
+                'IF': {
+                    'rgb': [
+                        [
+                            {
+                                hash: 'bo',
+                                mag: '20x'
+                            }
+                        ]
+
+                    ] } },
+            'gfp': {
+                'IF': {
+                    'rgb': [
+                        [
+                            {
+                                hash: 'gfp_1',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_2',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_3',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_4',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_5',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_6',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_7',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_8',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_9',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_10',
+                                mag: '20x'
+                            }
+                        ],
+                        [
+                            {
+                                hash: 'gfp_11',
+                                mag: '20x'
+                            }
+                        ]
+
                     ] } }
 
         },
@@ -10734,7 +10860,8 @@ var __scb_sample_1 = {
                 'slide': {
                     'parser_simple': [
                         {
-                            match: []
+                            match: ['cell_line'],
+                            cell_line: 'bo'
                         },
                         {
                             match: ['cell_line'],
@@ -10751,6 +10878,46 @@ var __scb_sample_1 = {
                         {
                             match: ['cell_line'],
                             cell_line: 'gfp-pd'
+                        },
+                        {
+                            match: ['cell_line'],
+                            cell_line: 'gfp-ma',
+                            use_collection_id: 'gfp-pc'
+                        },
+                        {
+                            match: ['cell_line'],
+                            cell_line: 'gfp-mb',
+                            use_collection_id: 'gfp-pb'
+                        },
+                        {
+                            match: ['cell_line'],
+                            cell_line: 'gfp-nuc',
+                            use_collection_id: 'gfp-pb'
+                        },
+                        {
+                            match: ['cell_line'],
+                            cell_line: 'gfp-cyto',
+                            use_collection_id: 'gfp-pd'
+                        },
+                        {
+                            match: ['cell_line'],
+                            cell_line: 'gfp-pm',
+                            use_collection_id: 'gfp-pc'
+                        },
+                        {
+                            match: ['cell_line'],
+                            cell_line: 'gfp-er',
+                            use_collection_id: 'gfp-pa'
+                        },
+                        {
+                            match: ['cell_line'],
+                            cell_line: 'gfp-nm',
+                            use_collection_id: 'gfp-nm'
+                        },
+                        {
+                            match: ['cell_line'],
+                            cell_line: 'gfp',
+                            use_collection_id: 'gfp'
                         },
                     ]
                 }
