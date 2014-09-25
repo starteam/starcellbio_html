@@ -252,6 +252,7 @@
     padding-bottom:8px;
     padding-top: 44px;
     margin-left: 13px;
+    margin-bottom: 20px;
     width: 932px;
 }
 

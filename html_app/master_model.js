@@ -1090,7 +1090,7 @@ var __assigment_tufts = {
                     },//
                     {kind: 'actions', title: 'Actions'}//
                 ],//
-                actions: [],//
+                actions: []//
 
             },
 
@@ -1488,7 +1488,7 @@ var __assigment_tufts = {
                                     weight: 42,
                                     intensity: -.1,
                                     primary_anti_body: [1]
-                                },
+                                }
                             ]
                         },
                         {
@@ -4646,7 +4646,7 @@ var blank_model = {
                                             {collection_id: 'default', microscope: ['rgb', 'g', 'gr', 'rb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
-                                                    {drug_id: 'nc', concentration_id: '100'},
+                                                    {drug_id: 'nc', concentration_id: '100'}
                                                 ]}, temperature: '25'
                                             }
                                         ]}}
@@ -5048,7 +5048,7 @@ var __decusability = {
                 name: 'mouse anti-cyclin B',
                 secondary: ['m'],
                 marks: [
-                    {weight: 58, intensity: 0},
+                    {weight: 58, intensity: 0}
                 ],
                 gel_name: 'cyclin B'
             },
@@ -5056,7 +5056,7 @@ var __decusability = {
                 name: 'mouse anti-cyclin E',
                 secondary: ['m'],
                 marks: [
-                    {weight: 48, intensity: 0},
+                    {weight: 48, intensity: 0}
                 ],
                 gel_name: 'cyclin E'
             },
@@ -5064,7 +5064,7 @@ var __decusability = {
                 name: 'rabbit anti-pgk1',
                 secondary: ['r'],
                 marks: [
-                    {weight: 45, intensity: 0},
+                    {weight: 45, intensity: 0}
                 ],
                 gel_name: 'pgk1'
             }
@@ -10201,9 +10201,13 @@ var __scb_sample_1 = {
     notebook: {},
     experiments: {},
     template: {
-        instructions: [
-            ['Goal & Introduction', 'Here come instructions when we build them']
-        ],
+        instructions:[
+                ["Goal & Learning Objectives", scb_ex1_text.goal({})],
+                ["Introduction",scb_ex1_text.intro({})],
+                ["Background Information",scb_ex1_text.bg_info({})],
+                ["Questions",scb_ex1_text.questions({})]
+
+            ],
         ui: {
             experimental_design: {
                 techniques: [ 'micro' ]
@@ -10382,10 +10386,10 @@ var __scb_sample_1 = {
                     ]
 
                 }
-            }
+            },
         },
         add_new_row_instructions: 'add new row instructions',
-        experiment_setup: "Experiment Setup Text",
+        experiment_setup: scb_ex1_text.experiment_setup({}),
 
         concentrations: {
             '0': {

@@ -41,11 +41,14 @@ def index_html():
         js.pop('starcellbio.app.js')
     if( js.has_key( 'swipe/Gruntfile.js' )):
         js.pop('swipe/Gruntfile.js')
+    if( js.has_key( 'js/soyutils.js' )):
+        js.pop('js/soyutils.js')
 
     css_join = css_prefix + (time+css_suffix+css_prefix).join(css.keys())+ time + css_suffix
     js_join = js_prefix + (time+js_suffix+js_prefix).join(js.keys())  + js_suffix
     js_join = js_prefix + "../scb/get_user.js" + js_suffix + js_join
     js_join = js_prefix + "starcellbio.app.js" + js_suffix + js_join
+    js_join = js_prefix + "js/soyutils.js" + js_suffix + js_join
     js_join = js_prefix + "js/tinymce.min.js" + js_suffix + js_join
     js_join = js_prefix + "js/jquery.tinymce.min.js" + js_suffix + js_join
     js_join = js_prefix + "js/jquery-1.7.2.min.js" + js_suffix + js_join
