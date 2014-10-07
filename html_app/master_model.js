@@ -10224,7 +10224,7 @@ var __scb_sample_1 = {
                     {kind: 'actions', title: 'Actions'}//
                 ],//
                 actions: [
-                    {kind: "add_many", name: "Add Multiple", open: 'scb_ex1.setup', css: {
+                    {kind: "add_many", name: "Add Samples", open: 'scb_ex1.setup', css: {
                         width: '885px',
                         height: '600px',
                         left: 'inherit',

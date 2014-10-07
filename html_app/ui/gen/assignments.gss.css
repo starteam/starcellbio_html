@@ -112,6 +112,7 @@
 }
 .scb_s_display_section {
   display: none;
+  font-size: 11pt;
 }
 .scb_s_display_section[value='assignment_overview'] {
   display: block;

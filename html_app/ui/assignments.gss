@@ -144,6 +144,7 @@ background-image:url('../../images/western_blot/scb_gray_right_arrow_hover.png')
 
 .scb_s_display_section{
 	display:none;
+	font-size:11pt;
 }
 
 .scb_s_display_section[value='assignment_overview']{

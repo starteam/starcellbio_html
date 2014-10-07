@@ -3,13 +3,13 @@
 /**
 */
 {template .goal}
-<h1>Goal</h1>
+<h2>Goal</h2>
 <p>
 In this exercise, you will use StarCellBio, a cell and molecular experiment simulator, to examine the subcellular localization of different proteins using fluorescence microscopy.
 </p>
-<h1>
+<h2>
 Learning Objectives
-</h1>
+</h2>
 <p>
 After completing this exercise, you will be able to:
 <ol>
@@ -24,7 +24,7 @@ After completing this exercise, you will be able to:
 /**
 */
 {template .intro}
-<h1>Introduction</h1>
+<h2>Introduction</h2>
 <p>
 You are completing a summer research project in a lab that studies various signal transduction pathways involved in human diseases. Your advisor has asked you to determine the subcellular localization of a newly discovered set of proteins, called Protein A, B, C, and D within human cells. These proteins are components of a signal transduction pathway that regulates cell proliferation. Mutations in other known components of this pathway result in increased proliferation and tumorigenesis. To characterize the roles of Proteins A-D in this signal transduction pathway, you first investigate their subcellular localization. To do this, you generate human cell lines, each stably expressing a fusion protein in which Green Fluorescent Protein (GFP) is fused in frame to one of the five proteins. These fusion cell lines are called GFP-ProA, GFP-ProB, etc. You then look at the localization of these fusion proteins using fluorescence microscopy.
 </p>
@@ -37,12 +37,12 @@ Your collaborator in a clinical cancer lab has identified two cancer patients wi
 /**
 */
 {template .bg_info}
-<h1>
-Background Information
-</h1>
 <h2>
-Cell Lines
+Background Information
 </h2>
+<h3>
+Cell Lines
+</h3>
 You are provided with the following cell lines:
 <style>
 table.scb_ex1_text_table td {lb}
@@ -55,7 +55,7 @@ border-collapse: collapse;
 </style>
  <table class='scb_ex1_text_table'>
  <thead>
-<td>Strain</td><td>Description</td>
+<td style='width:75pt'>Strain</td><td>Description</td>
  </thead>
  <tbody>
  <tr><td>
@@ -99,7 +99,7 @@ GFP-NM</td><td>	A human cell line stably expressing LAMIN B1, a protein that loc
  </td></tr>
 </table>
 
-<h2>Microscopy</h2>
+<h3>Microscopy</h3>
 You are provided with the following conditions for fluorescence microscopy experiments:
  <table>
  <thead>
@@ -111,9 +111,9 @@ Condition</td><td>Description
 GFP (green)</td><td>	Fluorescence microscopy image captured using the green channel 1,2.
 </td></tr></tbody></table>
 
-<h2>
+<h3>
 Notes:
-</h2>
+</h3>
 <p>
 <sup>1</sup>When GFP is excited with a laser emitting the appropriate wavelength of light, it fluoresces, emitting green light. A scientist can view the green light emitted by GFP molecules in the cells through a microscope’s viewfinder when the appropriate emission filter is used on the microscope.
 </p><p>
@@ -125,16 +125,16 @@ Notes:
 /**
 */
 {template .questions}
-<h1>Question 1</h1>
+<h2>Question 1</h2>
 Conduct the appropriate fluorescence microscopy experiments to determine the subcellular localization of each protein, Proteins A-D. Ensure you perform any relevant control experiments.
 Answer the following two questions for each of Proteins A-D:
 i. Where is the protein localized within human cells? For each protein, choose the answer that best describes its subcellular localization: plasma membrane, cytoplasm, endoplasmic reticulum (ER), nucleus, or nuclear membrane.
 ii. Explain how you arrived at your answer. Your answer should reference your experimental results and include the relevant controls that you used to arrive at your conclusion.
-<h1>Question 2</h1>
+<h2>Question 2</h2>
 Perform the appropriate microscopy experiments to determine the subcellular localization of the mutant Protein A in the GFP-Mut ProA cell line. Ensure you perform any relevant controls experiments.
 a) Where is the mutant Protein A located in the GFP-Mut ProA cell line? Does the mutant Protein A localize to the same place as wild-type Protein A? Explain how you arrived at your answer using your experimental results.
 b) Propose a hypothesis that would explain how a mutation in the gene encoding Protein A would result in the change in subcellular localization, if any, identified in Question 2 (a).
-<h1>Question 3</h1>
+<h2>Question 3</h2>
 Conduct the appropriate properly controlled microscopy experiments within StarCellBio to determine the subcellular localization of the mutant Protein B in the GFP-Mut ProB cell line. Ensure you perform any relevant controls experiments.
 a) Where is the mutant Protein B located in the GFP-Mut ProB cell line? Does the mutant Protein B localize to the same place as wild-type Protein B? Explain how you arrived at your answer using your experimental results.
 b) Propose a hypothesis that would explain how a mutation in the gene encoding Protein B would result in the change in subcellular localization, if any, identified in Question 3 (a).
