@@ -113,11 +113,7 @@ Assignment assignments
     <ul aria-label="Assignments"  >
         {foreach $course in keys($courses)}
             <div class='scb_s_assignments_sidebar_course_block'>
-            {if $course == '7.06_Spring_2014'}
-            <div class='scb_s_assignments_sidebar_course' role='heading'>7.06 Spring 2014</div>
-            {else}
-            <div class='scb_s_assignments_sidebar_course' role='heading'>{$course}</div>
-            {/if}
+            <div class='scb_s_assignments_sidebar_course' role='heading'>{$courses[$course].name}</div>
         {foreach $assignment in $courses[$course]}
 
 			<li role="link" class='scb_s_assignments_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_assignments_sidebar_name_selected{/if}' aria-selected='{if $assignments.selected.id == $assignment.id}true{else}false{/if}'  >

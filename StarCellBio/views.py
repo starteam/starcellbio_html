@@ -257,11 +257,16 @@ def get_student_courses(request, **kwargs):
             retval = {'is_student': False, 'list': [], 'is_auth': True, 'is_selected': '', 'token': token1}
         else:
             all = []
-            for a in Assignment.objects.all():
+            # sample courses
+            for a in Assignment.objects.filter(courseID=Course.objects.filter(code='SCB_SampleExercises')):
                 dictionary = ast.literal_eval(a.data)
-                if (
-                            a.assignmentID == 'decusability' or a.assignmentID == 'scb_ex1' or a.assignmentID == 'microscopy_usability'):  # or a.assignmentID == 'microscopy_test' ): #or a.assignmentID == 'assignment_706_2014_ps2'):
-                    all.append(dictionary)
+                all.append(dictionary)
+
+            # for a in Assignment.objects.all():
+            #     dictionary = ast.literal_eval(a.data)
+            #     if (
+            #                 a.assignmentID == 'decusability' or a.assignmentID == 'scb_ex1' or a.assignmentID == 'microscopy_usability'):  # or a.assignmentID == 'microscopy_test' ): #or a.assignmentID == 'assignment_706_2014_ps2'):
+            #         all.append(dictionary)
             retval = {'is_student': True, 'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
     response = HttpResponse("var get_student_courses_result = {0};".format(json.dumps(retval)))
     response.set_cookie("scb_username", request.user.username)

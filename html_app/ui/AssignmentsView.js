@@ -181,6 +181,15 @@ scb.ui.AssignmentsView = function scb_ui_AssignmentsView(gstate) {
         var courses = _.groupBy(assignments.list, function (assignment) {
             return (assignment.course);
         });
+        _.each( courses, function(v,k) {
+            try {
+                v.name = v[0].course_name
+            } catch(e)
+            {
+                console.info(e);
+            };
+        });
+        window.courses = courses;
         window.assignments = assignments;
         var workarea = gstate.workarea;
         var last_step=1;

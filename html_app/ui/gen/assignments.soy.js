@@ -65,12 +65,12 @@ scb_assignments.display_assignments = function(opt_data, opt_sb) {
   var courseListLen89 = courseList89.length;
   for (var courseIndex89 = 0; courseIndex89 < courseListLen89; courseIndex89++) {
     var courseData89 = courseList89[courseIndex89];
-    output.append('<div class=\'scb_s_assignments_sidebar_course_block\'>', (courseData89 == '7.06_Spring_2014') ? '<div class=\'scb_s_assignments_sidebar_course\' role=\'heading\'>7.06 Spring 2014</div>' : '<div class=\'scb_s_assignments_sidebar_course\' role=\'heading\'>' + soy.$$escapeHtml(courseData89) + '</div>');
-    var assignmentList98 = opt_data.courses[courseData89];
-    var assignmentListLen98 = assignmentList98.length;
-    for (var assignmentIndex98 = 0; assignmentIndex98 < assignmentListLen98; assignmentIndex98++) {
-      var assignmentData98 = assignmentList98[assignmentIndex98];
-      output.append('<li role="link" class=\'scb_s_assignments_sidebar_name ', (opt_data.assignments.selected.id == assignmentData98.id) ? 'scb_s_assignments_sidebar_name_selected' : '', '\' aria-selected=\'', (opt_data.assignments.selected.id == assignmentData98.id) ? 'true' : 'false', '\'  ><a role=\'presentation\' href=\'#view=assignments&assignment_id=', soy.$$escapeHtml(assignmentData98.id), '\' model_id=\'', soy.$$escapeHtml(assignmentData98.id), '\' class=\'scb_s_assignment_sidebar_link ', (assignmentData98.id == opt_data.assignments.selected_id) ? 'scb_f_open_assignment' : 'scb_f_select_assignment', '\'>', soy.$$escapeHtml(assignmentData98.name), '</a>', (opt_data.assignments.selected.id == assignmentData98.id) ? '<img role=\'presentation\' class=\'scb_s_selection_arrow_img\'  src=\'../../images/homepage/selection_arrow.png\' >' : '', '</li>');
+    output.append('<div class=\'scb_s_assignments_sidebar_course_block\'><div class=\'scb_s_assignments_sidebar_course\' role=\'heading\'>', soy.$$escapeHtml(opt_data.courses[courseData89].name), '</div>');
+    var assignmentList93 = opt_data.courses[courseData89];
+    var assignmentListLen93 = assignmentList93.length;
+    for (var assignmentIndex93 = 0; assignmentIndex93 < assignmentListLen93; assignmentIndex93++) {
+      var assignmentData93 = assignmentList93[assignmentIndex93];
+      output.append('<li role="link" class=\'scb_s_assignments_sidebar_name ', (opt_data.assignments.selected.id == assignmentData93.id) ? 'scb_s_assignments_sidebar_name_selected' : '', '\' aria-selected=\'', (opt_data.assignments.selected.id == assignmentData93.id) ? 'true' : 'false', '\'  ><a role=\'presentation\' href=\'#view=assignments&assignment_id=', soy.$$escapeHtml(assignmentData93.id), '\' model_id=\'', soy.$$escapeHtml(assignmentData93.id), '\' class=\'scb_s_assignment_sidebar_link ', (assignmentData93.id == opt_data.assignments.selected_id) ? 'scb_f_open_assignment' : 'scb_f_select_assignment', '\'>', soy.$$escapeHtml(assignmentData93.name), '</a>', (opt_data.assignments.selected.id == assignmentData93.id) ? '<img role=\'presentation\' class=\'scb_s_selection_arrow_img\'  src=\'../../images/homepage/selection_arrow.png\' >' : '', '</li>');
     }
     output.append('</div>');
   }
@@ -83,11 +83,11 @@ scb_assignments.display_experiments = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<ul class=\'scb_s_assignment_experiment_list\'>');
   if (opt_data.experiments.list.length != 0) {
-    var experimentList134 = opt_data.experiments.list;
-    var experimentListLen134 = experimentList134.length;
-    for (var experimentIndex134 = 0; experimentIndex134 < experimentListLen134; experimentIndex134++) {
-      var experimentData134 = experimentList134[experimentIndex134];
-      output.append('<li class=\'scb_s_assignment_experiment_list_item\'><a class=\'scb_f_open_assignment_experiment\' href=\'#view=experiment_last&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&experiment_id=', soy.$$escapeHtml(experimentData134.id), '\' model_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' sub_model_id=\'', soy.$$escapeHtml(experimentData134.id), '\'>', soy.$$escapeHtml(experimentData134.name), '</a></li>');
+    var experimentList129 = opt_data.experiments.list;
+    var experimentListLen129 = experimentList129.length;
+    for (var experimentIndex129 = 0; experimentIndex129 < experimentListLen129; experimentIndex129++) {
+      var experimentData129 = experimentList129[experimentIndex129];
+      output.append('<li class=\'scb_s_assignment_experiment_list_item\'><a class=\'scb_f_open_assignment_experiment\' href=\'#view=experiment_last&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '&experiment_id=', soy.$$escapeHtml(experimentData129.id), '\' model_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\' sub_model_id=\'', soy.$$escapeHtml(experimentData129.id), '\'>', soy.$$escapeHtml(experimentData129.name), '</a></li>');
     }
   }
   output.append('</ul><div class=\'scb_s_assignment_experiment_list_item_new_experiment\'><span aria-hidden="true" tabindex="-1">+</span><a class=\'scb_f_new_assignment_experiment scb_s_new_assignment_experiment\' href=\'#view=experiment_design&assignment_id=', soy.$$escapeHtml(opt_data.assignment.id), '\' model_id=\'', soy.$$escapeHtml(opt_data.assignment.id), '\'>New Experiment</a></div>');

@@ -10194,8 +10194,8 @@ var ps2_strain_E = {
 
 var __scb_sample_1 = {
     id: 'scb_ex1',
-    name: 'StarCellBio Exercise 1 – Protein localization',
-    course: 'usability',
+    name: 'Exercise 1',
+    course: 'SCB_SampleExercises',
     course_name: 'Sample Exercises',
     description: 'StarCellBio Exercise 1 – Protein localization',
     notebook: {},
