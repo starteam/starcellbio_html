@@ -27,7 +27,7 @@ scb.Assignment = function scb_Assignment(data, context, parent) {
 
 	scb.Utils.initialize_accessor_field(self,data,'notebook',{},scb.Notebook,context);
 	scb.Utils.initialize_accessor_field(self,data,'experiments',{},scb.ExperimentList,context);
-	scb.Utils.initialize_accessor_field(self,data,'template',{},null,context);
+	scb.Utils.initialize_accessor_field(self,data,'template',{},scb.Template,context);
 	scb.Utils.initialize_accessor_field(self,data,'course','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'course_name','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'last_instruction',0,null,context);
@@ -36,8 +36,7 @@ scb.Assignment = function scb_Assignment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'template_id',null,null,context);
 	scb.Utils.initialize_accessor_field(self,data,'students',0,null,context);
 	scb.Utils.initialize_accessor_field(self,data,'sort',[],null,context);
-	
-	
+
 	scb.Utils.initialize_accessor_field(self,data,'is_new_assignment',true,null,context);
 	scb.Utils.initialize_accessor_field(self,data,'is_new_course',true,null,context);
 

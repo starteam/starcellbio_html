@@ -243,7 +243,7 @@ scb.utils.accessor2 = function (obj, field, source) {
         return source[field];
     }, set:function (d) {
         source[field] = d;
-    }});
+    },enumerable:true});
 }
 
 scb.utils.accessor2_with_setter = function (obj, field, source, setter) {
