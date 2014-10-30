@@ -53,8 +53,4 @@ scb.Assignment = function scb_Assignment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'has_duration',false,null,context);
 	scb.Utils.initialize_accessor_field(self,data,'has_collection_time',false,null,context);
 
-	
-	
-
-
 }
