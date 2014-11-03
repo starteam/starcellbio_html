@@ -53,7 +53,7 @@ scb.ui.static.InstructorExperimentSetupPage1View.scb_f_experiment_setup_list_ite
 	var strain_id = $(element).attr('strain_id') ? $(element).attr('strain_id'):  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 	parsed.assignment.template.cell_lines[strain_id] = {name: $(element).val()};
 
-	
+
 	scb.ui.static.InstructorFrame.refresh();
 
 }

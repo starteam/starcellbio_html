@@ -262,7 +262,8 @@ def get_student_courses(request, **kwargs):
         else:
             all = []
             # sample courses
-            for a in Assignment.objects.filter(courseID=Course.objects.filter(code='SCB_SampleExercises')):
+            #for a in Assignment.objects.filter(courseID=Course.objects.filter(code='SCB_SampleExercises')):
+            for a in Assignment.objects.all():
                 dictionary = ast.literal_eval(a.data)
                 all.append(dictionary)
 
