@@ -4,12 +4,12 @@ if (typeof (scb.template ) == 'undefined') {
     scb.template = {};
 }
 
-scb.template.DEBUGGER = function scb_template_DEBUGGER(self, data , name) {
+scb.template.DEBUGGER = function scb_template_DEBUGGER(self, data, name) {
     _.each(data, function (value, key) {
         if (!_.contains(_.keys(self), key)) {
             scb.utils.accessor2_custom(self, key, function () {
                 try {
-                    throw new Error( name + " Read field " + key);
+                    throw new Error(name + " Read field " + key);
                 } catch (e) {
                     console.info(e.message, e.stack);
                 }
@@ -23,8 +23,8 @@ scb.template.DEBUGGER = function scb_template_DEBUGGER(self, data , name) {
 
 scb.TemplateWrapper = function scb_Template(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, key) {
         scb.Utils.initialize_accessor_field(self, data, key, value, null, context);
     });
@@ -33,8 +33,8 @@ scb.TemplateWrapper = function scb_Template(data, context, parent) {
 
 scb.template.ui_experiment_setup = function scb_template_ui_experiment_setup(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     /*
      table - format of table - array - kind, title, editable, children: [table]
      */
@@ -47,52 +47,51 @@ scb.template.ui_experiment_setup = function scb_template_ui_experiment_setup(dat
 //    scb.Utils.initialize_accessor_field(self, data, 'techniques', [], null, context);
 //    scb.Utils.initialize_accessor_field(self, data, 'gel_types', [], null, context);
 
-    scb.template.DEBUGGER( self, data, "scb.template.ui_experiment_setup");
+    scb.template.DEBUGGER(self, data, "scb.template.ui_experiment_setup");
 }
 
 scb.template.ui_experimental_design = function scb_template_ui_experimental_design(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'techniques', [], null, context);
     scb.Utils.initialize_accessor_field(self, data, 'gel_types', [], null, context);
-    scb.template.DEBUGGER(self,data,"scb.template.ui_experimental_design" );
+    scb.template.DEBUGGER(self, data, "scb.template.ui_experimental_design");
 
 }
-scb.template.WesternBlot = function scb_TemplateUI_WesternBlot(data,context,parent)
-{
+scb.template.WesternBlot = function scb_TemplateUI_WesternBlot(data, context, parent) {
     /* this is used to format cell lines */
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'format', '', null, context);
     scb.Utils.initialize_accessor_field(self, data, 'keys', {}, null, context);
-    scb.template.DEBUGGER(self,data,"scb.template.WesternBlot" );
+    scb.template.DEBUGGER(self, data, "scb.template.WesternBlot");
 }
 
-scb.template.Microscopy = function scb_template_Microscopy( data,context,parent )
-{
+scb.template.Microscopy = function scb_template_Microscopy(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
-    scb.template.DEBUGGER(self,data,"scb.template.Microscopy" );
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
+    scb.Utils.initialize_accessor_field(self, data, 'disable_brightness', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'disable_blur', false, null, context);
+    scb.template.DEBUGGER(self, data, "scb.template.Microscopy");
 
 }
 
 scb.template.UI = function scb_TemplateUI(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'experimental_design', {}, scb.template.ui_experimental_design, context);
     scb.Utils.initialize_accessor_field(self, data, 'experiment_setup', {}, scb.template.ui_experiment_setup, context);
     scb.Utils.initialize_accessor_field(self, data, 'microscopy', {}, scb.template.Microscopy, context);
-microscopy
     /**
      add_multiple_dialog
      */
-     scb.Utils.initialize_accessor_field(self, data, 'add_multiple_dialog', {}, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'add_multiple_dialog', {}, null, context);
     /*
-    western_blot
+     western_blot
      */
     scb.Utils.initialize_accessor_field(self, data, 'western_blot', {}, scb.template.WesternBlot, context);
 
@@ -116,8 +115,8 @@ microscopy
 scb.Instructions = function scb_Instructions(data, context, parent) {
     //TODO: make this accessors (custom)
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, index) {
         self[index] = value;
     })
@@ -129,8 +128,8 @@ scb.Instructions = function scb_Instructions(data, context, parent) {
 scb.InstructionsList = function scb_InstructionsList(data, context, parent) {
     var self = this;
     //TODO: make this accessors (custom)
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, index) {
         self[index] = value;
     })
@@ -139,16 +138,16 @@ scb.InstructionsList = function scb_InstructionsList(data, context, parent) {
 
 scb.template.CellLine = function scb_CellLine(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'name', '', null, context);
-    scb.template.DEBUGGER(self,data,"scb.template.CellLine");
+    scb.template.DEBUGGER(self, data, "scb.template.CellLine");
 }
 
 scb.template.CellLines = function scb_CellLines(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, key) {
         scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.CellLine, context);
     });
@@ -156,18 +155,18 @@ scb.template.CellLines = function scb_CellLines(data, context, parent) {
 
 scb.template.Drug = function scb_CellLine(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'name', '', null, context);
     scb.Utils.initialize_accessor_field(self, data, 'concentrations', [], null, context);
-    scb.template.DEBUGGER(self,data,"scb.template.Drug");
+    scb.template.DEBUGGER(self, data, "scb.template.Drug");
 }
 
 
 scb.template.Drugs = function scb_Drugs(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, key) {
         scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.Drug, context);
     });
@@ -176,110 +175,132 @@ scb.template.Drugs = function scb_Drugs(data, context, parent) {
 
 scb.template.LysateKind = function scb_LysateKind(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'name', '', null, context);
-    scb.template.DEBUGGER(self,data,"scb.template.LysateKind");
+    scb.template.DEBUGGER(self, data, "scb.template.LysateKind");
 }
 
 
 scb.template.LysateKinds = function scb_LysateKinds(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, key) {
         scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.LysateKind, context);
     });
 }
 
-scb.template.PrimaryAntiBody = function scb_template_PrimaryAntiBody(data,context,parent) {
+scb.template.PrimaryAntiBody = function scb_template_PrimaryAntiBody(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'name', '', null, context);
     scb.Utils.initialize_accessor_field(self, data, 'secondary', '', null, context);
     scb.Utils.initialize_accessor_field(self, data, 'marks', [], null, context);
     scb.Utils.initialize_accessor_field(self, data, 'gel_name', '', null, context);
-    scb.template.DEBUGGER(self,data,"scb.template.PrimaryAntiBody");
+    scb.template.DEBUGGER(self, data, "scb.template.PrimaryAntiBody");
 }
 
-scb.template.PrimaryAntiBodies = function scb_template_PrimaryAntiBodies(data,context,parent) {
+scb.template.PrimaryAntiBodies = function scb_template_PrimaryAntiBodies(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'order', [], null, context);
     _.each(data, function (value, key) {
-        if( key != 'order') {
+        if (key != 'order') {
             scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.PrimaryAntiBody, context);
         }
     });
 }
 
-scb.template.SecondaryAntiBody = function scb_template_SecondaryAntiBody(data,context,parent) {
+scb.template.SecondaryAntiBody = function scb_template_SecondaryAntiBody(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'name', '', null, context);
-    scb.template.DEBUGGER(self,data,"scb.template.SecondaryAntiBody");
+    scb.template.DEBUGGER(self, data, "scb.template.SecondaryAntiBody");
 }
 
-scb.template.SecondaryAntiBodies = function scb_template_SecondaryAntiBodies(data,context,parent) {
+scb.template.SecondaryAntiBodies = function scb_template_SecondaryAntiBodies(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, key) {
-        if( key != 'order') {
+        if (key != 'order') {
             scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.SecondaryAntiBody, context);
         }
     });
 }
 
-scb.template.Concentration = function scb_template_Concentration(data,context,parent) {
+scb.template.Concentration = function scb_template_Concentration(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'name', '', null, context);
     scb.Utils.initialize_accessor_field(self, data, 'value', 0, null, context);
 
 }
-scb.template.Concentrations = function scb_template_Concentrations(data,context,parent) {
+scb.template.Concentrations = function scb_template_Concentrations(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, key) {
-            scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.Concentration, context);
+        scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.Concentration, context);
     });
 }
 
-scb.template.MicroscopyKind = function scb_template_MicroscopyKind(data,context,parent) {
+scb.template.MicroscopyKindCondition = scb_template_MicroscopyKindCondition(data,context, parent ) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
+    scb.Utils.initialize_accessor_field(self, data, 'name', null, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'short_name', null, null, context);
+    scb.template.DEBUGGER(self, data, "scb.template.MicroscopyKindCondition");
+
+}
+
+scb.template.MicroscopyKindConditions = scb_template_MicroscopyKindConditions(data, context, parent)
+{
+    var self = this;
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
+    _.each(data, function (value, key) {
+        scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.MicroscopyKindCondition, context);
+    });
+}
+
+scb.template.MicroscopyKind = function scb_template_MicroscopyKind(data, context, parent) {
+    var self = this;
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
+    scb.Utils.initialize_accessor_field(self, data, 'name', '', null , context);
+    scb.Utils.initialize_accessor_field(self, data, 'conditions', {}, scb.template.MicroscopyKindConditions, context);
     scb.template.DEBUGGER(self, data, "scb.template.MicroscopyKind");
 }
 
-scb.template.MicroscopyKinds = function scb_template_MicroscopyKinds(data,context,parent) {
+scb.template.MicroscopyKinds = function scb_template_MicroscopyKinds(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, key) {
-            scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.MicroscopyKind, context);
+        scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.MicroscopyKind, context);
     });
 }
 
-scb.template.Slides = function scb_template_Slides(data,context,parent) {
+scb.template.Slides = function scb_template_Slides(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     _.each(data, function (value, key) {
-            scb.Utils.initialize_accessor_field(self, data, key, '', null, context);
+        scb.Utils.initialize_accessor_field(self, data, key, '', null, context);
     });
 }
 
 scb.Template = function scb_Template(data, context, parent) {
     var self = this;
-    scb.utils.value_hidden(self,'__data__',data);
-    scb.utils.value_hidden(self,'parent',parent);
+    scb.utils.value_hidden(self, '__data__', data);
+    scb.utils.value_hidden(self, 'parent', parent);
     scb.Utils.initialize_accessor_field(self, data, 'instructions', [], scb.InstructionsList, context);
     scb.Utils.initialize_accessor_field(self, data, 'ui', {}, scb.template.UI, context);
 
@@ -296,39 +317,37 @@ scb.Template = function scb_Template(data, context, parent) {
      */
     scb.Utils.initialize_accessor_field(self, data, 'drugs', {}, scb.template.Drugs, context);
     /*
-    lysate_kinds
+     lysate_kinds
      */
     scb.Utils.initialize_accessor_field(self, data, 'lysate_kinds', {}, scb.template.LysateKinds, context);
     /*
-    primary_anti_body
+     primary_anti_body
      */
     scb.Utils.initialize_accessor_field(self, data, 'primary_anti_body', {}, scb.template.PrimaryAntiBodies, context);
     /*
-    secondary_anti_body
+     secondary_anti_body
      */
     scb.Utils.initialize_accessor_field(self, data, 'secondary_anti_body', {}, scb.template.SecondaryAntiBodies, context);
     /*
-    concentrations
+     concentrations
      */
     scb.Utils.initialize_accessor_field(self, data, 'concentrations', {}, scb.template.Concentrations, context);
     /*
-    micro_kinds
+     micro_kinds
      */
     scb.Utils.initialize_accessor_field(self, data, 'micro_kinds', {}, scb.template.MicroscopyKinds, context);
     /*
-        slide_parser
-        TODO: understand slide_parser
-        scb_components_MicroscopyModelFactory.self.slide
-    */
+     slide_parser
+     TODO: understand slide_parser
+     scb_components_MicroscopyModelFactory.self.slide
+     */
 //    scb.Utils.initialize_accessor_field(self, data, 'slide_parser', {}, scb.template.MicroscopyKinds, context);
     /*
-        slides
-    */
-    scb.Utils.initialize_accessor_field(self, data, 'slides', {}, scb.template.MicroscopySlides, context);
-
+     slides
      */
+    scb.Utils.initialize_accessor_field(self, data, 'slides', {}, scb.template.MicroscopySlides, context);
     /*
-        model - TODO: this will be a big one!
+     model - TODO: this will be a big one!
      */
     scb.Utils.initialize_accessor_field(self, data, 'model', {}, null, context);
     _.each(data, function (value, key) {
