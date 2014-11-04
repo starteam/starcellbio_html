@@ -223,6 +223,25 @@ scb.template.SecondaryAntiBodies = function scb_template_SecondaryAntiBodies(dat
     });
 }
 
+scb.template.Concentration = function scb_template_Concentration(data,context,parent) {
+    var self = this;
+    scb.utils.value_hidden(self,'__data__',data);
+    scb.utils.value_hidden(self,'parent',parent);
+    scb.Utils.initialize_accessor_field(self, data, 'name', '', null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'value', 0, null, context);
+
+}
+scb.template.Concentrations = function scb_template_Concentrations(data,context,parent) {
+    var self = this;
+    scb.utils.value_hidden(self,'__data__',data);
+    scb.utils.value_hidden(self,'parent',parent);
+    _.each(data, function (value, key) {
+        if( key != 'order') {
+            scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.Concentration, context);
+        }
+    });
+}
+
 scb.Template = function scb_Template(data, context, parent) {
     var self = this;
     scb.utils.value_hidden(self,'__data__',data);
@@ -254,6 +273,11 @@ scb.Template = function scb_Template(data, context, parent) {
     secondary_anti_body
      */
     scb.Utils.initialize_accessor_field(self, data, 'secondary_anti_body', {}, scb.template.SecondaryAntiBodies, context);
+    /*
+    concentrations
+     */
+    scb.Utils.initialize_accessor_field(self, data, 'concentrations', {}, scb.template.Concentrations, context);
+
     /*
         model - TODO: this will be a big one!
      */
