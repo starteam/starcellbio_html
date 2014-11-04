@@ -70,12 +70,23 @@ scb.template.WesternBlot = function scb_TemplateUI_WesternBlot(data,context,pare
     scb.template.DEBUGGER(self,data,"scb.template.WesternBlot" );
 }
 
+scb.template.Microscopy = function scb_template_Microscopy( data,context,parent )
+{
+    var self = this;
+    scb.utils.value_hidden(self,'__data__',data);
+    scb.utils.value_hidden(self,'parent',parent);
+    scb.template.DEBUGGER(self,data,"scb.template.Microscopy" );
+
+}
+
 scb.template.UI = function scb_TemplateUI(data, context, parent) {
     var self = this;
     scb.utils.value_hidden(self,'__data__',data);
     scb.utils.value_hidden(self,'parent',parent);
     scb.Utils.initialize_accessor_field(self, data, 'experimental_design', {}, scb.template.ui_experimental_design, context);
     scb.Utils.initialize_accessor_field(self, data, 'experiment_setup', {}, scb.template.ui_experiment_setup, context);
+    scb.Utils.initialize_accessor_field(self, data, 'microscopy', {}, scb.template.Microscopy, context);
+microscopy
     /**
      add_multiple_dialog
      */
@@ -236,9 +247,32 @@ scb.template.Concentrations = function scb_template_Concentrations(data,context,
     scb.utils.value_hidden(self,'__data__',data);
     scb.utils.value_hidden(self,'parent',parent);
     _.each(data, function (value, key) {
-        if( key != 'order') {
             scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.Concentration, context);
-        }
+    });
+}
+
+scb.template.MicroscopyKind = function scb_template_MicroscopyKind(data,context,parent) {
+    var self = this;
+    scb.utils.value_hidden(self,'__data__',data);
+    scb.utils.value_hidden(self,'parent',parent);
+    scb.template.DEBUGGER(self, data, "scb.template.MicroscopyKind");
+}
+
+scb.template.MicroscopyKinds = function scb_template_MicroscopyKinds(data,context,parent) {
+    var self = this;
+    scb.utils.value_hidden(self,'__data__',data);
+    scb.utils.value_hidden(self,'parent',parent);
+    _.each(data, function (value, key) {
+            scb.Utils.initialize_accessor_field(self, data, key, {}, scb.template.MicroscopyKind, context);
+    });
+}
+
+scb.template.Slides = function scb_template_Slides(data,context,parent) {
+    var self = this;
+    scb.utils.value_hidden(self,'__data__',data);
+    scb.utils.value_hidden(self,'parent',parent);
+    _.each(data, function (value, key) {
+            scb.Utils.initialize_accessor_field(self, data, key, '', null, context);
     });
 }
 
@@ -277,7 +311,22 @@ scb.Template = function scb_Template(data, context, parent) {
     concentrations
      */
     scb.Utils.initialize_accessor_field(self, data, 'concentrations', {}, scb.template.Concentrations, context);
+    /*
+    micro_kinds
+     */
+    scb.Utils.initialize_accessor_field(self, data, 'micro_kinds', {}, scb.template.MicroscopyKinds, context);
+    /*
+        slide_parser
+        TODO: understand slide_parser
+        scb_components_MicroscopyModelFactory.self.slide
+    */
+//    scb.Utils.initialize_accessor_field(self, data, 'slide_parser', {}, scb.template.MicroscopyKinds, context);
+    /*
+        slides
+    */
+    scb.Utils.initialize_accessor_field(self, data, 'slides', {}, scb.template.MicroscopySlides, context);
 
+     */
     /*
         model - TODO: this will be a big one!
      */
