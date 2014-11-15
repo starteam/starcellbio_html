@@ -58,7 +58,6 @@ scb.ui.static.InstructorDashboardView.scb_f_dashboard_new_assignment_button = fu
 
 }
 
-
 scb.ui.static.InstructorDashboardView.scb_s_assignment_header_img_left = function (element, workarea) {
 		   var parsed = scb.ui.static.InstructorDashboardView.parse(element);
 
