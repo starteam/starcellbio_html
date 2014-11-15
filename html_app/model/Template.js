@@ -250,7 +250,8 @@ scb.template.Concentrations = function scb_template_Concentrations(data, context
     });
 }
 
-scb.template.MicroscopyKindCondition = scb_template_MicroscopyKindCondition(data,context, parent ) {
+scb.template.MicroscopyKindCondition = scb_template_MicroscopyKindCondition(data,context, parent )
+{
     var self = this;
     scb.utils.value_hidden(self, '__data__', data);
     scb.utils.value_hidden(self, 'parent', parent);

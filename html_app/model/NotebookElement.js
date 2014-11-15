@@ -26,7 +26,7 @@ scb.NotebookElement = function scb_NotebookElement(data, context, parent) {
     scb.Utils.initialize_accessor_field(self,data,'view','',null,context);
     scb.Utils.initialize_accessor_field(self,data,'experiment_id','',null,context);
 
-    scb.Utils.initialize_accessor_field(self,data,'headings',null,null,context);
+        scb.Utils.initialize_accessor_field(self,data,'headings',null,null,context);
     scb.Utils.initialize_accessor_field(self,data,'rows',[],null,context);
 
     scb.Utils.initialize_accessor_field(self,data,'western_blot_id','',null,context);

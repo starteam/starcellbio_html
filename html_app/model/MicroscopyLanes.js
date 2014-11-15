@@ -17,7 +17,7 @@ scb.MicroscopyLaneList = function scb_MicroscopyLaneList(data, context, parent) 
         }
     });
 
-    self.start = function (d) {
+        self.start = function (d) {
         d = ( typeof (d) == 'undefined' ? {} : d);
         var ret = new scb.MicroscopyLane(d, context, self);
         data.list.push(d);
