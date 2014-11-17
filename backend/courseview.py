@@ -27,17 +27,18 @@ def create(request, template_name='courses/form.html'):
         c.ownerID = request.user
         c.save()
         return redirect('course_list')
-    return render(request, template_name, {'form': form})
+    return render(request, template_name, {'form': form,'create':True})
 
 
 @login_required
 def update(request, pk, template_name='courses/form.html'):
     server = get_object_or_404(Course, pk=pk, ownerID=request.user)
     form = CourseForm(request.POST or None, instance=server)
+    form.fields['code'].widget.attrs['readonly'] = True
     if form.is_valid():
         form.save()
         return redirect('course_list')
-    return render(request, template_name, {'form': form})
+    return render(request, template_name, {'form': form,'create':False})
 
 
 @login_required

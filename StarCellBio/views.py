@@ -83,14 +83,25 @@ def get_model(request):
     response['Content-Type'] = 'text/javascript'
     return response
 
+def get_account_type(request):
+    account_type = ''
+    if (request.user.id):
+        groups = request.user.groups
+        if groups.count() != 0:
+            account_type = groups.all()[0].name
+    return account_type
 
 def get_user(request, **kwargs):
+<<<<<<< HEAD
     import pudb
     # pudb.set_trace()
     if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
+    #added by Ivan
+    account_type = get_account_type(request)
+    
     retval = {'account_type': account_type, 'name': request.user.username}
     response = HttpResponse("var get_user_result = {0};".format(json.dumps(retval)))
     response.set_cookie("scb_username", request.user.username)
@@ -160,10 +171,14 @@ def get_student_courses(request, **kwargs):
     obj.domain='starcellbio.mit.edu'
     obj.save()
 
+<<<<<<< HEAD
     if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
+=======
+    account_type = get_account_type(request)
+>>>>>>> CourseEdit finish
     alist = []
     retval = []
     token1 = random.randrange(0, 1000000)
@@ -449,10 +464,14 @@ def get_instructor_assignments(request, **kwargs):
     retval = []
     token1 = random.randrange(0, 1000000)
     return_list = []
+<<<<<<< HEAD
     if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
+=======
+    account_type = get_account_type(request)
+>>>>>>> CourseEdit finish
     if (account_type == 'instructor'):
         # 		pudb.set_trace()
         public_list = Assignment.objects.filter(access='Public')

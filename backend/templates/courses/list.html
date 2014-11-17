@@ -2,8 +2,8 @@
 <ul>
     {% for course in object_list %}
     <li>{{ course.course_name }} ({{ course.code }})  :
-    <a href="{% url course_edit pk=course.id %}">edit</a>
-    <a href="{% url course_delete pk=course.id %}">delete</a>
+    <a class="scb_f_dashboard_course_management_button_edit" href="{% url course_edit pk=course.code %}">edit</a>
+    <a class="scb_f_dashboard_course_management_button_delete" href="{% url course_delete pk=course.code %}">delete</a>
     </li>
     {% endfor %}
 </ul>

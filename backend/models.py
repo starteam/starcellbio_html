@@ -9,7 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 
 
 class Course(models.Model):
-    code = models.CharField(max_length=50, unique=True)
+    code = models.CharField(max_length=50, primary_key=True)
     course_name = models.TextField()
     ownerID = models.ForeignKey(User, related_name='course_owner', default=1)
 
