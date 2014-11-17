@@ -51,6 +51,15 @@ urlpatterns += patterns('',
                         url(r'^courses/edit/(?P<pk>.+)$', 'backend.courseview.update', name='course_edit'),
                         url(r'^courses/delete/(?P<pk>.+)$', 'backend.courseview.delete', name='course_delete'),
 )
+
+urlpatterns += patterns('',
+                        url(r'^assignments/$', 'backend.assignmentview.list', name='assignment_list'),
+                        url(r'^assignments/new$', 'backend.assignmentview.create', name='assignment_new'),
+                        url(r'^assignments/edit/(?P<pk>.+)$', 'backend.assignmentview.update', name='assignment_edit'),
+                        url(r'^assignments/delete/(?P<pk>.+)$', 'backend.assignmentview.delete', name='assignment_delete'),
+)
+
+
 from tastypie.api import Api
 from backend.services import UserResource, CourseResource, AssignmentResource, StudentAssignmentResource
 

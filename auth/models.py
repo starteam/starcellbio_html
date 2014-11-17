@@ -11,7 +11,7 @@ class UserCourse(models.Model):
     
 class Course(models.Model):
 	course_name = models.CharField(max_length=12)
-# 	
+#
 # class Assignment(models.Model):
 # 	courseID = models.ForeignKey(Course)
 # 	course_name = models.CharField(max_length=12)

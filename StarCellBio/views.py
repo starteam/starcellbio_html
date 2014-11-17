@@ -153,6 +153,8 @@ def initialize_courses(request, **kwargs):  #
                 c.save()
                 a = Assignment(courseID=c, assignmentID=assign_id, assignmentName=assign_name, data=x)
                 a.save()
+                a.basedOn=a
+                a.save()
             return HttpResponse('got it')
     else:
         response = HttpResponse("var create_courses_result = {0};".format(''))
