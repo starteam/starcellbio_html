@@ -52,11 +52,17 @@ urlpatterns += patterns('',
                         url(r'^courses/delete/(?P<pk>.+)$', 'backend.courseview.delete', name='course_delete'),
 )
 
+from instructor import common as instructor_common
+
 urlpatterns += patterns('',
                         url(r'^assignments/$', 'backend.assignmentview.list', name='assignment_list'),
                         url(r'^assignments/new$', 'backend.assignmentview.create', name='assignment_new'),
                         url(r'^assignments/edit/(?P<pk>.+)$', 'backend.assignmentview.update', name='assignment_edit'),
                         url(r'^assignments/delete/(?P<pk>.+)$', 'backend.assignmentview.delete', name='assignment_delete'),
+
+                        url(r'^ab/courses/$', instructor_common.courses, name="common_courses"),
+                        url(r'^ab/courses/delete/(?P<pk>.+)$', instructor_common.course_delete, name="common_courses_delete"),
+
 )
 
 
