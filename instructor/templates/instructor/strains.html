@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    Assignment: {{ assignment.name }} - Edit Strains
+    {% if message %}
+        {{ messsage }}
+    {% endif %}
+    <div>
+        <form method="post">{% csrf_token %}
+            {{ formset.management_form }}
+
+            {% for form in formset %}
+                {{ form.as_p }}
+
+                {% if form.instance.id %}
+
+{#                Instance: <form method='post' action='{% url common_courses_delete pk=form.instance.id %}'>#}
+{#                    <input type="submit" name="Submit"#}
+
+                {% endif %}
+            {% endfor %}
+            <input type="submit" value="Submit Questions"/>
+        </form>
+
+    </div>
+{% endblock %}

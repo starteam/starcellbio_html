@@ -1,0 +1,103 @@
+{% extends "instructor/base.html" %}
+
+{% block content %}
+    <h1 class="scb_s_dashboard_sidebar_title">Your Courses:
+        <div class="scb_s_dashboard_sidebar_name scb_s_dashboard_button_wrapper"></div>
+    </h1>
+
+    <a class='scb_s_navigation_button scb_s_dashboard_new_assignment_button' href="{% url common_courses %}">Courses</a>
+    <a class='scb_s_navigation_button scb_s_dashboard_new_assignment_button' href="{% url common_assignments %}">Assignments</a>
+
+    <div class="scb_s_dashboard_table_wrapper scb_s_dashboard_table_pos">
+        {% if message %}
+            {{ messsage }}
+        {% endif %}
+        <form method="post">{% csrf_token %}
+            {{ formset.management_form }}
+
+            <table class="scb_s_dashboard_table " aria-label="Table of Samples" role="grid">
+                <thead class="scb_s_dashboard_table_head">
+                <tr>
+                    <td role="columnheader"
+                        class="scb_s_dashboard_table_heading scb_s_dashboard_assignment_name ">Assignment Name
+                    </td>
+                    <td role="columnheader"
+                        class="scb_s_dashboard_table_heading scb_s_dashboard_assignment_name ">Assignment Code
+                    </td>
+
+                    <td role="columnheader"
+                        class="scb_s_dashboard_table_heading scb_s_dashboard_assignment_name ">Course
+                    </td>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_course_name ">
+                        Access
+                    </td>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_course_name ">
+                        Based On
+                    </td>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_course_name ">
+                        Group By
+                    </td>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_actions "
+                        colspan="3">Actions
+                    </td>
+                </tr>
+                </thead>
+                <tbody class="scb_s_dashboard_table_body">
+
+
+                {% for form in formset %}
+
+                    <tr class="scb_s_dashboard_table_row" role="row" aria-label="Sample"
+                        assignment_id="decusability">
+                        {{ form.non_field_errors }}
+
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {{ form.name }}
+                        </td>
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {{ form.assignment_id }}
+                        </td>
+
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {{ form.course }}
+                        </td>
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {{ form.access }}
+                        </td>
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {% if form.instance.id %}
+
+                                {{ form.instance.basedOn }}
+                            {% else %}
+                                {{ form.basedOn }}
+                            {% endif %}
+                        </td>
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {{ form.group_by }}
+                        </td>
+
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_copy">
+                            {{ form.DELETE }}
+                            {{ form.DELETE.label_tag }}
+
+                            {{ form.id }}
+                            {% if form.instance.id %}
+                                <button>
+                                    <a href="{% url common_assignments_edit_strains pk=form.instance.id %}">Edit</a>
+                                </button>
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <input class='scb_s_navigation_button scb_s_dashboard_new_assignment_button' type="submit"
+                   value="Save Courses">
+        </form>
+
+        <div style="height:60px;width:10px;">
+        </div>
+    </div>
+{% endblock %}

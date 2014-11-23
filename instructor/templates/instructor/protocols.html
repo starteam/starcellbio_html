@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    Assignment: {{ assignment.name }} - Edit Protocols
+    {% if message %}
+        {{ messsage }}
+    {% endif %}
+    <div>
+        <form method="post">{% csrf_token %}
+            {{ formset.management_form }}
+
+            {% for form in formset %}
+                {{ form.as_p }}
+
+                {% if form.instance.id %}
+
+                    {#                Instance: <form method='post' action='{% url common_courses_delete pk=form.instance.id %}'>#}
+                    {#                    <input type="submit" name="Submit"#}
+                    <a href="{% url common_treatments assignment=assignment.id protocol=form.instance.id %}">Expand</a>
+                {% endif %}
+            {% endfor %}
+            <input type="submit" value="Submit Questions"/>
+        </form>
+        <a href="{% url common_strain_protocols assignment=assignment.id %}">Edit Strain/Protocols</a>
+    </div>
+{% endblock %}

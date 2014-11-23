@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    You only get 5 questions so ask wisely.
+    {% if message %}
+        {{ messsage }}
+    {% endif %}
+    <div>
+        <form method="post">{% csrf_token %}
+            {{ formset.management_form }}
+
+            {% for form in formset %}
+                {{ form.instance.strain }} {{ form.instance.protocol }}
+                {{ form.as_p }}
+            {% endfor %}
+            <input type="submit" value="Submit Questions"/>
+        </form>
+    </div>
+{% endblock %}
