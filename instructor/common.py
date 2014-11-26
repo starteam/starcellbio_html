@@ -116,12 +116,15 @@ def treatments_edit(request, assignment, protocol):
     a = models.Assignment.objects.get(id=assignment)
     p = models.Protocol.objects.get(id=protocol)
     message = ''
-    TreatmentsFormSet = modelformset_factory(models.Treatments, extra=1, can_delete=True, exclude=['protocol'])
+    TreatmentsFormSet = modelformset_factory(models.Treatments, extra=1, can_delete=True, exclude=['protocol', 'order'],
+                                             can_order=True)
     if request.method == "POST":
         formset = TreatmentsFormSet(request.POST)
         formset.clean()
         if ( formset.is_valid()):
             message = "Thank you"
+            for form in formset.ordered_forms:
+                form.instance.order = form.cleaned_data['ORDER']
             entries = formset.save(commit=False)
             for form in entries:
                 form.protocol = p
@@ -131,7 +134,7 @@ def treatments_edit(request, assignment, protocol):
 
     return render_to_response('instructor/treatments.html',
                               {'formset': TreatmentsFormSet(
-                                  queryset=models.Treatments.objects.filter(protocol=p)),
+                                  queryset=models.Treatments.objects.filter(protocol=p).order_by('order')),
                                'message': message,
                                'assignment': a
                               },
@@ -146,9 +149,9 @@ def strain_treatments_edit(request, assignment):
     for s in strains:
         for p in protocols:
             (sp, created) = models.StrainProtocol.objects.get_or_create(strain=s, protocol=p, assignment=a)
-            print s,p,a,created
+            print s, p, a, created
             sp.save()
-    STFormSet = modelformset_factory(models.StrainProtocol, extra=0, exclude=['assignment','strain','protocol'])
+    STFormSet = modelformset_factory(models.StrainProtocol, extra=0, exclude=['assignment', 'strain', 'protocol'])
     if request.method == "POST":
         formset = STFormSet(request.POST)
         formset.clean()
@@ -168,3 +171,9 @@ def strain_treatments_edit(request, assignment):
                               },
                               context_instance=RequestContext(request))
 
+
+def preview(request, assignment):
+    a = models.Assignment.objects.get(id=assignment)
+    return render_to_response('instructor/preview.html',
+                              {'assignment': a},
+                              context_instance=RequestContext(request))

@@ -43,7 +43,7 @@ urlpatterns = patterns('',
 )
 # add authentication URL patterns
 urlpatterns += auth.urls.urlpatterns
-#urlpatterns += courseview.urlpatterns
+# urlpatterns += courseview.urlpatterns
 
 urlpatterns += patterns('',
                         url(r'^courses/$', 'backend.courseview.list', name='course_list'),
@@ -58,23 +58,31 @@ urlpatterns += patterns('',
                         url(r'^assignments/$', 'backend.assignmentview.list', name='assignment_list'),
                         url(r'^assignments/new$', 'backend.assignmentview.create', name='assignment_new'),
                         url(r'^assignments/edit/(?P<pk>.+)$', 'backend.assignmentview.update', name='assignment_edit'),
-                        url(r'^assignments/delete/(?P<pk>.+)$', 'backend.assignmentview.delete', name='assignment_delete'),
+                        url(r'^assignments/delete/(?P<pk>.+)$', 'backend.assignmentview.delete',
+                            name='assignment_delete'),
 
-                       url(r'^ab/.*/images/(?P<path>.*)$', 'django.views.static.serve',
-                           {'document_root': 'html_app/images/'}),
+                        url(r'^ab/.*/images/(?P<path>.*)$', 'django.views.static.serve',
+                            {'document_root': 'html_app/images/'}),
 
                         url(r'^ab/courses/$', instructor_common.courses, name="common_courses"),
-                        url(r'^ab/courses/delete/(?P<pk>.+)$', instructor_common.course_delete, name="common_courses_delete"),
+                        url(r'^ab/courses/delete/(?P<pk>.+)$', instructor_common.course_delete,
+                            name="common_courses_delete"),
                         url(r'^ab/assignments/$', instructor_common.assignments, name="common_assignments"),
-                        url(r'^ab/assignments/delete/(?P<pk>.+)$', instructor_common.assignments_delete, name="common_assignments_delete"),
-                        url(r'^ab/assignments/edit_strains/(?P<pk>.+)$', instructor_common.assignments_edit_strains, name="common_assignments_edit_strains"),
-                        url(r'^ab/assignments/edit_protocols/(?P<pk>.+)$', instructor_common.assignments_edit_protocols, name="common_assignments_edit_protocols"),
-                        url(r'^ab/assignments/edit_treatments/(?P<assignment>[^/]+)/(?P<protocol>.+)$', instructor_common.treatments_edit, name="common_treatments"),
-                        url(r'^ab/assignments/edit_strain_treatments/(?P<assignment>[^/]+)$', instructor_common.strain_treatments_edit, name="common_strain_protocols"),
+                        url(r'^ab/assignments/delete/(?P<pk>.+)$', instructor_common.assignments_delete,
+                            name="common_assignments_delete"),
+                        url(r'^ab/assignments/edit_strains/(?P<pk>.+)$', instructor_common.assignments_edit_strains,
+                            name="common_assignments_edit_strains"),
+                        url(r'^ab/assignments/edit_protocols/(?P<pk>.+)$', instructor_common.assignments_edit_protocols,
+                            name="common_assignments_edit_protocols"),
+                        url(r'^ab/assignments/edit_treatments/(?P<assignment>[^/]+)/(?P<protocol>.+)$',
+                            instructor_common.treatments_edit, name="common_treatments"),
+                        url(r'^ab/assignments/edit_strain_treatments/(?P<assignment>[^/]+)$',
+                            instructor_common.strain_treatments_edit, name="common_strain_protocols"),
+                        url(r'^ab/assignments/preview/(?P<assignment>[^/]+)$', instructor_common.preview,
+                            name="common_preview"),
 
 
 )
-
 
 from tastypie.api import Api
 from backend.services import UserResource, CourseResource, AssignmentResource, StudentAssignmentResource

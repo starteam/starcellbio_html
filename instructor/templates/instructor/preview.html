@@ -1,4 +1,3 @@
-{% load url from future %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +75,6 @@
 <link type="text/css" href="/static/ui/gen/notebook.gss.css?_=1416084641" rel="Stylesheet"/>
 <link type="text/css" href="/static/js/plugins/visualblocks/css/visualblocks.css?_=1416084641" rel="Stylesheet"/>
 <link type="text/css" href="/static/instructor/gen/instructor_microscopy.gss.css?_=1416084641" rel="Stylesheet"/>
-<title>{% block head_title %}{% endblock %}</title>
 <script type="text/javascript" src="/static/js/jquery-1.7.2.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery.tinymce.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/tinymce.min.js" charset="UTF-8"></script>
@@ -343,104 +341,22 @@
 <script type="text/javascript" src="/static/ui/ExperimentDesignView.js?_=1416084641" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/plugins/textcolor/plugin.min.js?_=1416084641" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/plugins/save/plugin.min.js" charset="UTF-8"></script>
-{% block extra_head %}
-{% endblock %}
 </head>
 <body>
+<div id='main'></div>
+<script>$(function () {
+    get_user_result = {'account_type': 'preview', name: 'admin'};
+    get_student_courses_result = { is_auth: false, token: null };
+    var list = master_model_data.assignments.list;
+    master_model_preview = master_model_data;
+    master_model_preview
+            .assignments.list = [list[4]];
 
-<body>
-<div id="main" style="height: 100%; position: absolute; left: 126.5px; top: 0px;">
-<div class="scb_s_dashboard_view">
-<div class="scb_s_instructor_header" role="header">
-    <div alt="" class="scb_s_header_line_top"></div>
-    <h1 class="scb_s_logo_h1" aria-label="StarCellBio Home Page Link"><a aria-hidden="true"
-                                                                         href="#view=assignments">StarCellBio<img
-            class="scb_s_logo" src="images/header/scb_logo.png" role="banner"></a></h1><span
-        class="scb_s_header_tools"><span class="scb_f_contact" target="_blank" role="link" aria-label="Contact"><img
-        class="scb_s_envelope_icon" src="images/header/scb_envelope_icon.png" alt="" role="presentation"><span
-        class="scb_s_envelope_text scb_s_header_tools_text" role="presentation">CONTACT</span></span><img
-        class="scb_s_header_vertical_line" src="images/header/scb_vertical_divider.png" alt=""
-        role="presentation"><a class="scb_f_reference" href="/static/ref_lib/full_library.html#"
-                               aria-label="Library" target="_blank"><img class="scb_s_cabinet_icon"
-                                                                         src="images/header/scb_cabinet_icon.png"
-                                                                         alt="" role="presentation"><span
-        class="scb_s_cabinet_text scb_s_header_tools_text">LIBRARY</span></a><img
-        class="scb_s_header_vertical_line" src="images/header/scb_vertical_divider.png" role="presentation"><!--href='pdf/StarCellBio%20User%20Guide.pdf' target='_blank'--><span
-        class="scb_f_user_guide" role="link" aria-label="User Guide"><img class="scb_s_user_guide_icon"
-                                                                          src="images/header/scb_user_guide_icon.png"
-                                                                          role="presentation"><span
-        class="scb_s_user_guide_text scb_s_header_tools_text" role="presentation">USER GUIDE</span></span><img
-        class="scb_s_header_vertical_line" src="images/header/scb_vertical_divider.png" alt=""
-        role="presentation"><a class="scb_f_login" href="#view=assignments" role="presentation"
-                               aria-label="Sign In link"><span class="scb_s_login_status"
-                                                               aria-hidden="true">SIGN OUT</span></a></span>
-</div>
-<div class="scb_s_instructor_account_title">Instructor Account: Problem Set Builder</div>
-<div class="scb_s_assignment_step" role="menu" xmlns="http://www.w3.org/1999/html"><a
-        class="scb_s_assignment_step_link scb_f_assignments_step_link scb_s_assignment_step_link_active"
-        href="#view=dashboard" aria-label="Assignments" role="menuitem">
-    <div class="scb_s_assignment_step_wrapper" style="position: absolute; left: 29px; bottom: 20px;"
-         aria-hidden="true">
-        <div class="scb_s_assignments_link_img_active" role="presentation"></div>
-        DASHBOARD
-    </div>
-</a></div>
-<div class="scb_s_dashboard_container" role="main">
-<div class="scb_s_dashboard_sidebar">
-
-{% block body %}
-    {% if messages %}
-        <div>
-            <strong>Messages:</strong>
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-
-{#    <div>#}
-{#        <strong>Menu:</strong>#}
-{#        <ul>#}
-{#            {% if user.is_authenticated %}#}
-{#                <li><a href="{% url 'account_email' %}">Change E-mail</a></li>#}
-{#                <li><a href="{% url 'account_logout' %}">Sign Out</a></li>#}
-{#            {% else %}#}
-{#                <li><a href="{% url 'account_login' %}">Sign In</a></li>#}
-{#                <li><a href="{% url 'account_signup' %}">Sign Up</a></li>#}
-{#            {% endif %}#}
-{#        </ul>#}
-{#    </div>#}
-    {% block sidebar %}
-    {% endblock %}
-    {% block content %}
-    {% endblock %}
-{% endblock %}
-{% block extra_body %}
-{% endblock %}
-
-</div>
-</div>
-</div>
-<div class="scb_s_footer" role="footer"><a href="http://web.mit.edu/" role="link"><img
-        class="scb_s_instructor_homepage_footer_logo" src="images/homepage/mit_logo.png" alt="MIT Logo"></a><img
-        class="scb_s_instructor_homepage_footer_divider" role="presentation"
-        src="images/homepage/small_divider.png" alt=""><a href="http://star.mit.edu/about.html" role="link"
-                                                          aria-label="About Star" target="_blank"><span
-        aria-hidden="true" class="scb_s_instructor_homepage_footer_about" src="images/homepage/about_star.png">About STAR</span></a><img
-        class="scb_s_instructor_homepage_footer_divider" role="presentation"
-        src="images/homepage/small_divider.png" alt=""><a href="http://star.mit.edu/cellbio/support.html"
-                                                          role="link" aria-label="Funding" target="_blank"><span
-        aria-hidden="true" class="scb_s_instructor_homepage_footer_support"
-        src="images/homepage/support.png">Funding</span></a>
-</div>
-</div>
-</div>
-<script src="//cdn.ravenjs.com/1.1.11/jquery,native/raven.min.js"></script>
+    starcellbio('#main', master_model_data);
+});
+window.clearCookie = function () {
+    document.cookie = 'sessionid="invalid"'
+};</script>
+</body>
+<script src='//cdn.ravenjs.com/1.1.11/jquery,native/raven.min.js'></script>
 <script> Raven.config('https://7845856fc975496e8dc2130b7140b19c@app.getsentry.com/19461', { whitelistUrls: ['starcellbio.mit.edu'] }).install(); </script>
-</body>
-
-
-</body>
-</html>

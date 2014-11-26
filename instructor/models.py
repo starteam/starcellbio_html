@@ -38,7 +38,9 @@ class Assignment(models.Model):
     access = models.CharField(max_length=50, choices=ACCESS, default=PUBLIC)
     basedOn = models.ForeignKey("Assignment", null=True, blank=True)
     group_by = models.CharField(max_length=50, choices=GROUP_BY, default=STRAIN)
-
+    has_wb = models.BooleanField(default=False)
+    has_fc = models.BooleanField(default=False)
+    has_micro = models.BooleanField(default=False)
 
 # Experiment setup
 
@@ -76,8 +78,8 @@ class Treatments(models.Model):
     end_time = models.CharField(max_length=50)
     temperature = models.CharField(max_length=50)
     collection_time = models.CharField(max_length=50)
-
-
+    class Meta:
+        ordering = ['order',]
 admin.site.register(Course)
 admin.site.register(Assignment)
 admin.site.register(Protocol)

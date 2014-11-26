@@ -37,6 +37,9 @@
                     <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_course_name ">
                         Group By
                     </td>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_course_name ">
+                        Techniques
+                    </td>
                     <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_actions "
                         colspan="3">Actions
                     </td>
@@ -76,6 +79,13 @@
                             {{ form.group_by }}
                         </td>
 
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" style="text-align: left" rowspan="1">
+                            {{ form.has_wb }} Western Blot <br/>
+                            {{ form.has_fc }} FACS <br/>
+                            {{ form.has_micro }} Microscopy <br/>
+
+                        </td>
+
                         <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_copy">
                             {{ form.DELETE }}
                             {{ form.DELETE.label_tag }}
@@ -85,6 +95,10 @@
                                 <button>
                                     <a href="{% url common_assignments_edit_strains pk=form.instance.id %}">Edit</a>
                                 </button>
+                                <button>
+                                    <a href="{% url common_preview assignment=form.instance.id %}#view=assignments">Preview</a>
+                                </button>
+
                             {% endif %}
 
                         </td>

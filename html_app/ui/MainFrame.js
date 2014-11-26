@@ -33,7 +33,13 @@ scb.ui.static.MainFrame.update_hash = function (state) {
         }
         History.discardedState();
         History.discardedState();
-        History.pushState(state, 2, "/#" + $.param(state));
+        if( get_user_result && get_user_result.account_type == 'preview')
+        {
+            // skip
+        }
+        else {
+            History.pushState(state, 2, "/#" + $.param(state));
+        }
     }
 }
 
@@ -640,6 +646,10 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         if (state.view == 'assignments') {
             if (!parsed.assignment) {
                 state.assignment_id = assignments.selected_id ? assignments.selected_id : get_student_courses_result.is_selected;
+                if( state.assignment_id == null || state.assignment_id == 'null' )
+                {
+                    state.assignment_id = assignments.list[0].id;
+                }
                 state.onhashchange = false;
                 self.show(state);
                 return;
