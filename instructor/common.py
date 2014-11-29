@@ -2,8 +2,9 @@ from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django import forms
 from django.forms.models import modelformset_factory, inlineformset_factory
-
+from django.forms.models import modelform_factory
 from instructor import models
+from instructor import compiler
 
 
 def courses(request):
@@ -59,6 +60,27 @@ def assignments(request):
 def assignments_delete(request, pk):
     models.Assignment.objects.get(id=pk).delete()
     return redirect('common_assignments')
+
+def assignments_edit_meta(request,pk):
+    assignment = models.Assignment.objects.get(id=pk)
+    AssignmentForm = modelform_factory(models.Assignment, fields=['has_concentration','has_temperature',
+                                                                  'has_start_time','has_duration','has_collection_time'])
+    message = ''
+    if request.method == "POST":
+        form = AssignmentForm(request.POST, instance=assignment)
+        if ( form.is_valid()):
+            message = "Thank you"
+            form.save()
+        else:
+            message = "Something went wrong"
+    else:
+        form = AssignmentForm(instance=assignment)
+    return render_to_response('instructor/assignment_meta.html',
+                              {'form': form,
+                               'message': message,
+                               'assignment': assignment
+                              },
+                              context_instance=RequestContext(request))
 
 
 def assignments_edit_strains(request, pk):
@@ -116,8 +138,21 @@ def treatments_edit(request, assignment, protocol):
     a = models.Assignment.objects.get(id=assignment)
     p = models.Protocol.objects.get(id=protocol)
     message = ''
+    treatments_set = []
+    if a.has_concentration:
+        treatments_set.append('concentration')
+        treatments_set.append('concentration_unit')
+    if a.has_temperature:
+        treatments_set.append('temperature')
+    if a.has_start_time:
+        treatments_set.append('start_time')
+    if a.has_duration:
+        treatments_set.append('end_time')
+    if a.has_collection_time:
+        treatments_set.append('collection_time')
+
     TreatmentsFormSet = modelformset_factory(models.Treatments, extra=1, can_delete=True, exclude=['protocol', 'order'],
-                                             can_order=True)
+                                             can_order=True, fields=treatments_set)
     if request.method == "POST":
         formset = TreatmentsFormSet(request.POST)
         formset.clean()
@@ -175,5 +210,6 @@ def strain_treatments_edit(request, assignment):
 def preview(request, assignment):
     a = models.Assignment.objects.get(id=assignment)
     return render_to_response('instructor/preview.html',
-                              {'assignment': a},
+                              {'assignment': a,
+                               'assignment_json': compiler.preview_as_json(a.id)},
                               context_instance=RequestContext(request))

@@ -38,10 +38,16 @@ class Assignment(models.Model):
     access = models.CharField(max_length=50, choices=ACCESS, default=PUBLIC)
     basedOn = models.ForeignKey("Assignment", null=True, blank=True)
     group_by = models.CharField(max_length=50, choices=GROUP_BY, default=STRAIN)
+    # tecniques
     has_wb = models.BooleanField(default=False)
     has_fc = models.BooleanField(default=False)
     has_micro = models.BooleanField(default=False)
-
+    # protocol parts
+    has_concentration = models.BooleanField(default=True)
+    has_temperature = models.BooleanField(default=True)
+    has_start_time = models.BooleanField(default=True)
+    has_duration = models.BooleanField(default=True)
+    has_collection_time = models.BooleanField(default=True)
 # Experiment setup
 
 

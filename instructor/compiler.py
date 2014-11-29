@@ -14,11 +14,10 @@ def preview(assignment_id):
     return ret
 
 
-
 def compile(assignment_id):
     a = Assignment.objects.get(id=assignment_id)
     ret = {
-        'id': a.id,
+        'id': 'a_{}'.format(a.id),
         'name': a.name,
         'course': a.course.code,
         'course_name': a.course.name,
@@ -28,7 +27,17 @@ def compile(assignment_id):
         'template': {
             # instructions
             'ui': {
-                'techniques': compile_techniques(a)
+                'experimental_design': {
+                    'techniques': compile_techniques(a)
+                },
+                'experiment_setup': {
+                    'table': [
+                        {'kind': "cell_line",
+                         'title': "Strain",
+                         'editable': 'false'
+                        },
+                    ]
+                }
             },
             'cell_lines': compile_cell_lines(a.strains.all()),
             'time_unit': {
@@ -44,6 +53,7 @@ def compile_cell_lines(cell_lines):
     for c in cell_lines:
         ret[str(c.id)] = c.name
     return ret
+
 
 def compile_techniques(a):
     ret = []

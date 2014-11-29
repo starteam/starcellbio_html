@@ -74,10 +74,15 @@ urlpatterns += patterns('',
                             name="common_assignments_edit_strains"),
                         url(r'^ab/assignments/edit_protocols/(?P<pk>.+)$', instructor_common.assignments_edit_protocols,
                             name="common_assignments_edit_protocols"),
+
                         url(r'^ab/assignments/edit_treatments/(?P<assignment>[^/]+)/(?P<protocol>.+)$',
                             instructor_common.treatments_edit, name="common_treatments"),
+
                         url(r'^ab/assignments/edit_strain_treatments/(?P<assignment>[^/]+)$',
                             instructor_common.strain_treatments_edit, name="common_strain_protocols"),
+
+                        url(r'^ab/assignments/assignments_edit_meta/(?P<pk>[^/]+)$',
+                            instructor_common.assignments_edit_meta, name="common_assignments_edit_meta"),
                         url(r'^ab/assignments/preview/(?P<assignment>[^/]+)$', instructor_common.preview,
                             name="common_preview"),
 
