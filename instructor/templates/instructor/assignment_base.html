@@ -6,6 +6,7 @@
         <br> <a class='' href="{% url common_courses %}">Courses</a>
         <br> <a class='' href="{% url common_assignments %}">Assignments</a>
         <br> <a class='' href="{% url common_assignments_edit_meta pk=assignment.id %}">Assignment metadata</a>
+        <br> <a href="{% url common_assignments_edit_text pk=assignment.id %}">Edit Text</a>
         <br> <a href="{% url common_assignments_edit_strains pk=assignment.id %}">Edit Strains</a>
         <br> <a href="{% url common_assignments_edit_protocols pk=assignment.id %}">Edit Protocols</a>
         {% for pd in assignment.protocols.all %}

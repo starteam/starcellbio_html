@@ -86,7 +86,8 @@ urlpatterns += patterns('',
                         url(r'^ab/assignments/preview/(?P<assignment>[^/]+)$', instructor_common.preview,
                             name="common_preview"),
 
-
+                        url(r'^ab/assignments/edit_text/(?P<pk>.+)$', instructor_common.assignments_edit_text,
+                            name="common_assignments_edit_text"),
 )
 
 from tastypie.api import Api

@@ -83,6 +83,31 @@ def assignments_edit_meta(request,pk):
                               context_instance=RequestContext(request))
 
 
+def assignments_edit_text(request, pk):
+    assignment = models.Assignment.objects.get(id=pk)
+    # strains = models.Strains.objects.filter(assignment=assignment)
+    user = request.user
+    message = ''
+    StrainsFormSet = modelformset_factory(models.AssignmentText, extra=1, fields=['title','text'], can_delete=True)
+    if request.method == "POST":
+        formset = StrainsFormSet(request.POST)
+        formset.clean()
+        if ( formset.is_valid()):
+            message = "Thank you"
+            entries = formset.save(commit=False)
+            for form in entries:
+                form.assignment = assignment
+                form.save()
+        else:
+            message = "Something went wrong"
+
+    return render_to_response('instructor/assignment_text.html',
+                              {'formset': StrainsFormSet(queryset=models.AssignmentText.objects.filter(assignment=assignment)),
+                               'message': message,
+                               'assignment': assignment
+                              },
+                              context_instance=RequestContext(request))
+
 def assignments_edit_strains(request, pk):
     assignment = models.Assignment.objects.get(id=pk)
     # strains = models.Strains.objects.filter(assignment=assignment)
@@ -138,7 +163,7 @@ def treatments_edit(request, assignment, protocol):
     a = models.Assignment.objects.get(id=assignment)
     p = models.Protocol.objects.get(id=protocol)
     message = ''
-    treatments_set = []
+    treatments_set = ['treatment']
     if a.has_concentration:
         treatments_set.append('concentration')
         treatments_set.append('concentration_unit')

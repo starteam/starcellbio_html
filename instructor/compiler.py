@@ -25,7 +25,6 @@ def compile(assignment_id):
         'notebook': {},
         'experiments': {},
         'template': {
-            # instructions
             'ui': {
                 'experimental_design': {
                     'techniques': compile_techniques(a)
@@ -36,7 +35,9 @@ def compile(assignment_id):
                          'title': "Strain",
                          'editable': 'false'
                         },
-                    ]
+                    ], 'actions': [
+                    {'kind': 'add_protocol', 'name': 'Add Protocol'}
+                ]
                 }
             },
             'cell_lines': compile_cell_lines(a.strains.all()),
@@ -45,6 +46,24 @@ def compile(assignment_id):
             }
         }
     }
+    treatments = [{'kind': "drug", 'title': "Treatments", 'editable': False}, ]
+    if a.has_concentration:
+        treatments.append({'kind': "concentration", 'title': "Concentration", 'editable': False})
+    if a.has_temperature:
+        treatments.append({'kind': "temperature", 'title': "Temperature", 'editable': False})
+    if a.has_start_time:
+        treatments.append({'kind': "start", 'title': "Start", 'editable': False})
+    if a.has_duration:
+        treatments.append({'kind': "duration", 'title': "Duration", 'editable': False})
+    if a.has_collection_time:
+        treatments.append({'kind': "collection", 'title': "Collection Time", 'editable': False})
+    table = ret['template']['ui']['experiment_setup']['table']
+    table.append({'kind': "treatments", 'children': treatments})
+
+    instructions = []
+    for t in a.assignment_text.all():
+        instructions.append( [t.title , t.text ])
+    ret['template']['instructions'] = instructions
     return ret
 
 

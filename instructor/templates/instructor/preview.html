@@ -352,8 +352,15 @@
     {% autoescape off %}
     var a = {{ assignment_json }};
     {% endautoescape %}
-    master_model_preview
-            .assignments.list = [list[4], a.assignments.list[0]];
+    try {
+        window.xyz = function() {
+            confirm("Hello");
+        }
+        a.assignments.list[0].template.ui.experiment_setup.actions[0].open = 'window.xyz';
+    } catch(e) {
+
+    }
+    master_model_preview.assignments.list = [list[4], a.assignments.list[0]];
 
     starcellbio('#main', master_model_data);
 });

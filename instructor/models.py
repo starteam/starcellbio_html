@@ -50,6 +50,10 @@ class Assignment(models.Model):
     has_collection_time = models.BooleanField(default=True)
 # Experiment setup
 
+class AssignmentText(models.Model):
+    assignment = models.ForeignKey(Assignment, related_name='assignment_text')
+    title = models.CharField(max_length=40)
+    text = models.TextField()
 
 class Strains(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='strains')
