@@ -120,6 +120,7 @@ def add_multiple_dialog(a):
         protocol = sp.protocol
         row = {
             'id': "SP_ID_{}".format(str(sp.id)),
+            'identifier': "SP_ID_{}".format(str(sp.id)),
             'protocol': protocol.name,
             'strain': strain.name,
             'cell_line': str(strain.id),

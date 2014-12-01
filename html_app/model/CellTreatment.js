@@ -41,6 +41,7 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'treatment_list',{},scb.TreatmentList,context);
 	scb.Utils.initialize_accessor_field(self,data,'stimulation_time','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'collection_schedule_list',{},scb.CollectionScheduleList, context);
+	scb.Utils.initialize_accessor_field(self,data,'identifier','',null,context);
 
     self.format_row = function()
     {

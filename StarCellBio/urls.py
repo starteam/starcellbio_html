@@ -88,6 +88,13 @@ urlpatterns += patterns('',
 
                         url(r'^ab/assignments/edit_text/(?P<pk>.+)$', instructor_common.assignments_edit_text,
                             name="common_assignments_edit_text"),
+                        url(r'^ab/assignments/wb_edit/(?P<assignment>.+)$', instructor_common.western_blot_edit,
+                            name="common_western_blot_meta"),
+                        url(r'^ab/assignments/wba_edit/(?P<assignment>.+)$', instructor_common.western_blot_antibody_edit,
+                            name="western_blot_antibody_edit"),
+                        url(r'^ab/assignments/wbab_edit/(?P<assignment>.+)/(?P<antibody>.+)/$', instructor_common.western_blot_antibody_band_edit,
+                            name="common_western_blot_antibody_bands_edit"),
+
 )
 
 from tastypie.api import Api

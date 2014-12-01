@@ -90,12 +90,47 @@ class Treatments(models.Model):
     collection_time = models.CharField(max_length=50)
     class Meta:
         ordering = ['order',]
+
+
+class WesternBlot(models.Model):
+    assignment = models.OneToOneField(Assignment, primary_key=True, related_name='western_blot')
+    # lysate types
+    has_whole_cell_lysate = models.BooleanField(default=True)
+    has_nuclear_fractination = models.BooleanField(default=True)
+    has_cytoplasmic_fractination = models.BooleanField(default=True)
+    # gel types
+    has_gel_10 = models.BooleanField(default=True)
+    has_gel_12 = models.BooleanField(default=True)
+    has_gel_15 = models.BooleanField(default=True)
+
+
+
+class WesternBlotAntibody(models.Model):
+    western_blot = models.ForeignKey(WesternBlot,related_name='antibodies')
+    primary = models.CharField(max_length=50)
+    secondary = models.CharField(max_length=50)
+
+
+class WesternBlotAntibodyBands(models.Model):
+    antibody = models.ForeignKey(WesternBlotAntibody,related_name='bands')
+    wcl_weight = models.FloatField(default=0.00)
+    wcl_intensity = models.FloatField(default=0.00)
+    nuc_weight = models.FloatField(default=0.00)
+    nuc_intensity = models.FloatField(default=0.00)
+    cyto_weight = models.FloatField(default=0.00)
+    cyto_intensity = models.FloatField(default=0.00)
+    is_background = models.BooleanField(default=False)
+
+
 admin.site.register(Course)
 admin.site.register(Assignment)
 admin.site.register(Protocol)
 admin.site.register(Strains)
 admin.site.register(StrainProtocol)
 admin.site.register(Treatments)
+admin.site.register(WesternBlot)
+admin.site.register(WesternBlotAntibody)
+admin.site.register(WesternBlotAntibodyBands)
 
 
 

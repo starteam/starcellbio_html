@@ -14,5 +14,12 @@
             <a href="{% url common_treatments assignment=assignment.id protocol=pd.id %}">{{ pd.name }}</a>
         {% endfor %}
         <br> <a href="{% url common_strain_protocols assignment=assignment.id %}">Edit Strain Protocols</a>
+        <br> <a href="{% url common_western_blot_meta assignment=assignment.id %}">Edit Western Blot Meta</a>
+        <br> <a href="{% url western_blot_antibody_edit assignment=assignment.id %}">Edit Western Blot Antibody</a>
+        {% for pd in assignment.western_blot.antibodies.all %}
+            <br>&nbsp; &nbsp;
+            <a href="{% url common_western_blot_antibody_bands_edit assignment=assignment.id antibody=pd.id %}">{{ pd.primary }}/{{ pd.secondary }}</a>
+        {% endfor %}
+
     </div>
 {% endblock %}

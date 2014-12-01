@@ -1,0 +1,14 @@
+{% extends "instructor/assignment_base.html" %}
+
+{% block content %}
+    Assignment: {{ assignment.name }} - {{ title }}
+    {% if message %}
+        {{ messsage }}
+    {% endif %}
+    <div>
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit Questions"/>
+        </form>
+    </div>
+{% endblock %}

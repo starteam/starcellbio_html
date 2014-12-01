@@ -61,10 +61,12 @@ def assignments_delete(request, pk):
     models.Assignment.objects.get(id=pk).delete()
     return redirect('common_assignments')
 
-def assignments_edit_meta(request,pk):
+
+def assignments_edit_meta(request, pk):
     assignment = models.Assignment.objects.get(id=pk)
-    AssignmentForm = modelform_factory(models.Assignment, fields=['has_concentration','has_temperature',
-                                                                  'has_start_time','has_duration','has_collection_time'])
+    AssignmentForm = modelform_factory(models.Assignment, fields=['has_concentration', 'has_temperature',
+                                                                  'has_start_time', 'has_duration',
+                                                                  'has_collection_time'])
     message = ''
     if request.method == "POST":
         form = AssignmentForm(request.POST, instance=assignment)
@@ -88,7 +90,7 @@ def assignments_edit_text(request, pk):
     # strains = models.Strains.objects.filter(assignment=assignment)
     user = request.user
     message = ''
-    StrainsFormSet = modelformset_factory(models.AssignmentText, extra=1, fields=['title','text'], can_delete=True)
+    StrainsFormSet = modelformset_factory(models.AssignmentText, extra=1, fields=['title', 'text'], can_delete=True)
     if request.method == "POST":
         formset = StrainsFormSet(request.POST)
         formset.clean()
@@ -102,11 +104,13 @@ def assignments_edit_text(request, pk):
             message = "Something went wrong"
 
     return render_to_response('instructor/assignment_text.html',
-                              {'formset': StrainsFormSet(queryset=models.AssignmentText.objects.filter(assignment=assignment)),
+                              {'formset': StrainsFormSet(
+                                  queryset=models.AssignmentText.objects.filter(assignment=assignment)),
                                'message': message,
                                'assignment': assignment
                               },
                               context_instance=RequestContext(request))
+
 
 def assignments_edit_strains(request, pk):
     assignment = models.Assignment.objects.get(id=pk)
@@ -226,6 +230,84 @@ def strain_treatments_edit(request, assignment):
     return render_to_response('instructor/strain_protocols.html',
                               {'formset': STFormSet(
                                   queryset=models.StrainProtocol.objects.filter(assignment=a)),
+                               'message': message,
+                               'assignment': a
+                              },
+                              context_instance=RequestContext(request))
+
+
+def western_blot_edit(request, assignment):
+    a = models.Assignment.objects.get(id=assignment)
+    (wb, created) = models.WesternBlot.objects.get_or_create(assignment=a)
+    WesternBlotForm = modelform_factory(models.WesternBlot, exclude=['assignment'])
+    message = ''
+    if request.method == "POST":
+        form = WesternBlotForm(request.POST, instance=wb)
+        if form.is_valid():
+            message = "Thank you"
+            form.save()
+        else:
+            message = "Something went wrong"
+    else:
+        form = WesternBlotForm(instance=wb)
+    return render_to_response('instructor/generic_form.html',
+                              {'form': form,
+                               'message': message,
+                               'assignment': a,
+                               'title': 'Western Blot - Meta'
+                              },
+                              context_instance=RequestContext(request))
+
+
+def western_blot_antibody_edit(request, assignment):
+    a = models.Assignment.objects.get(id=assignment)
+    (wb, created) = models.WesternBlot.objects.get_or_create(assignment=a)
+    wb.save()
+    WesternBlotAntibodyFormset = modelformset_factory(models.WesternBlotAntibody, extra=1, can_delete=True,
+                                                      exclude=['western_blot'])
+    message = ''
+    if request.method == "POST":
+        formset = WesternBlotAntibodyFormset(request.POST)
+        formset.clean()
+        if ( formset.is_valid()):
+            message = "Thank you"
+            entries = formset.save(commit=False)
+            for form in entries:
+                form.western_blot = wb
+                form.save()
+        else:
+            message = "Something went wrong"
+    return render_to_response('instructor/generic_formset.html',
+                              {'formset': WesternBlotAntibodyFormset(
+                                  queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb)),
+                               'message': message,
+                               'assignment': a
+                              },
+                              context_instance=RequestContext(request))
+
+
+def western_blot_antibody_band_edit(request, assignment, antibody):
+    a = models.Assignment.objects.get(id=assignment)
+    (wb, created) = models.WesternBlot.objects.get_or_create(assignment=a)
+    wb.save()
+    ab = models.WesternBlotAntibody.objects.get(id=antibody)
+    WesternBlotAntibodyBandFormset = modelformset_factory(models.WesternBlotAntibodyBands, extra=1, can_delete=True,
+                                                          exclude=['antibody'])
+    message = ''
+    if request.method == "POST":
+        formset = WesternBlotAntibodyBandFormset(request.POST)
+        formset.clean()
+        if ( formset.is_valid()):
+            message = "Thank you"
+            entries = formset.save(commit=False)
+            for form in entries:
+                form.antibody = ab
+                form.save()
+        else:
+            message = "Something went wrong"
+    return render_to_response('instructor/generic_formset.html',
+                              {'formset': WesternBlotAntibodyBandFormset(
+                                  queryset=models.WesternBlotAntibodyBands.objects.filter(antibody=ab)),
                                'message': message,
                                'assignment': a
                               },
