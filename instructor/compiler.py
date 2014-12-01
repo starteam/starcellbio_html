@@ -25,6 +25,7 @@ def compile(assignment_id):
         'notebook': {},
         'experiments': {},
         'template': {
+            'experiment_setup': 'Experiment Setup',
             'ui': {
                 'experimental_design': {
                     'techniques': compile_techniques(a)
@@ -62,15 +63,97 @@ def compile(assignment_id):
 
     instructions = []
     for t in a.assignment_text.all():
-        instructions.append( [t.title , t.text ])
+        instructions.append([t.title, t.text])
     ret['template']['instructions'] = instructions
+
+    ret['template']['ui']['add_multiple_dialog'] = add_multiple_dialog(a)
+    ret['template']['drugs'] = drugs(a)
+    ret['template']['concentrations'] = concentrations(a)
+    ret['template']['experiment_temperatures'] = experiment_temperatures(a)
+
+    return ret
+
+
+def drugs(a):
+    ret = {}
+    for sp in a.strain_protocol.filter(enabled=True):
+        strain = sp.strain
+        protocol = sp.protocol
+        for t in protocol.treatments.all():
+            tr = t.treatment
+            ret[str(tr)] = { 'name': str(tr) }
+    return ret
+
+
+def concentrations(a):
+    ret = {}
+    for sp in a.strain_protocol.filter(enabled=True):
+        strain = sp.strain
+        protocol = sp.protocol
+        for t in protocol.treatments.all():
+            tr = t.concentration
+            ret[str(tr)] = {
+                'name': str(tr),
+                'value': tr
+            }
+    return ret
+
+
+def experiment_temperatures(a):
+    ret = {}
+    for sp in a.strain_protocol.filter(enabled=True):
+        strain = sp.strain
+        protocol = sp.protocol
+        for t in protocol.treatments.all():
+            tr = t.temperature
+            ret[str(tr)] = {
+                'name': str(tr),
+                'value': tr
+            }
+    return ret
+
+
+def add_multiple_dialog(a):
+    ret = []
+    for sp in a.strain_protocol.filter(enabled=True):
+        strain = sp.strain
+        protocol = sp.protocol
+        row = {
+            'id': "SP_ID_{}".format(str(sp.id)),
+            'protocol': protocol.name,
+            'strain': strain.name,
+            'cell_line': str(strain.id),
+            'treatment_list': {
+                'list': compile_treatments(protocol.treatments.all())
+            }
+        }
+        ret.append(row)
+    return ret
+
+
+def compile_treatments(treatments):
+    ret = []
+    for t in treatments:
+        row = {
+            'id': 'treatment_{}'.format(t.id),
+            'drug_list': {'list': [{
+                                       'drug_id': t.treatment,
+                                       'drug_name': t.treatment,
+                                       'concentration_id': t.concentration
+                                   }]},
+            'start_time': t.start_time,
+            'end_time': t.end_time,
+            'temperature': t.temperature,
+            'collection_time': t.collection_time
+        }
+        ret.append(row)
     return ret
 
 
 def compile_cell_lines(cell_lines):
     ret = {}
     for c in cell_lines:
-        ret[str(c.id)] = c.name
+        ret[str(c.id)] = {'name': c.name}
     return ret
 
 

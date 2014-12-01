@@ -6,6 +6,47 @@ if (typeof (scb_ex1.static) == 'undefined') {
     scb_ex1.static = {};
 }
 
+scb_ex1.static.scb_ex_inner_dialog_add_assignment_builder = function (element, dialog, state) {
+
+    $('input[type="checkbox"]:checked', dialog).each(function (e) {
+        var element = $(this);
+        var experiment_id = $(element).attr('experiment_id');
+        var assignment_id = $(element).attr('assignment_id');
+        var spid = $(element).attr('spid');
+        $(element).attr('aria-checked', true);
+
+        var parsed = scb.ui.static.MainFrame.validate_state({
+            experiment_id: experiment_id,
+            assignment_id: assignment_id,
+            view: 'add_many_dialog_box',
+            skip_hash_update: true
+        });
+
+        var template = parsed.assignment.template;
+
+        var cell_treatments_array = [_.find( template.ui.add_multiple_dialog , function(e) {return e.id == spid })];
+
+
+//        var cell_treatments_array = [
+//            {
+//                cell_line: cell_line,
+//                treatment_list: {list: [
+//                    {drug_list: {list: [
+//                        {drug_id: 'nc', concentration_id: '0'}
+//                    ]}, temperature: '40', collection_id: state.source_state.collection_id, condition: state.source_state.condition}
+//                ]}}
+//        ];
+
+        _.each(cell_treatments_array, function (eh) {
+            parsed.experiment.cell_treatment_list.start(scb.utils.clone_and_clear(eh));
+        });
+    });
+
+    $(dialog).detach();
+    $('.contact_overlay').remove();
+    scb.utils.call_back(state.close);
+
+}
 
 if (typeof (scb_ex2) == 'undefined') {
     scb_ex2 = {};
@@ -115,6 +156,11 @@ scb_ex1.register = function (dialog, state) {
         $('input[type=checkbox][name="' + name + '"][cell_line="' + cell_line + '"]', dialog).attr('aria-checked', true);
     });
 
+    scb.utils.off_on(dialog.parent(), 'click', '.scb_ex_inner_dialog_add_assignment_builder', function (e) {
+        scb_ex1.static.scb_ex_inner_dialog_add_assignment_builder(this, dialog, state);
+        $(this).focus();
+    });
+
 }
 
 scb_ex1.setup = function (state) {
@@ -177,6 +223,22 @@ scb_ex3.setup=function(state){
         experiment: experiment,
         template: template
     }));
+/*Ivan's version*/
+scb_ex1.assignment_builder_add_multiple = function (state) {
+    console.info(state);
+    var workarea = state.workarea;
+    var assignment = state.assignment;
+    var experiment = state.experiment;
+    var template = state.template;
+    var onClose = state.close;
+
+    var dialog = $("<div class='scb_ex_dialog'></div>");
+    dialog.html(scb_ex.dialog_assignment_builder({
+        assignment: assignment,
+        experiment: experiment,
+        template: template
+    }));
+
     dialog.appendTo($(workarea));
     scb_ex1.register($(dialog), state);
 

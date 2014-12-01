@@ -44,3 +44,50 @@
     </div>
 </div>
 {/template}
+
+
+
+/**
+@param template
+@param assignment
+@param experiment
+*/
+{template .dialog_assignment_builder}
+<div class='scb_ex_inner_dialog' role='dialog' aria-label='Add Samples'>
+    <h1 class='scb_ex_inner_dialog_title' role='presentation' aria-label='Add Samples'>
+        <span class='scb_ex_inner_dialog_title_close' role='button' aria-label='Close Add Samples'>&#215;</span>
+        Add Samples (AB) </h1>
+
+    <div class='scb_ex_inner_dialog_body'>
+
+        <table class="scb_s_experiment_setup_table" role='grid' aria-label='Cell Lines'>
+            <thead class="scb_s_experiment_setup_table_head">
+            <td role='columnheader' aria-label='selected' class='scb_s_experiment_setup_table_heading' style='width:80px'>
+                Selected
+            </td>
+            <td role='columnheader' aria-label='cell line' class='scb_s_experiment_setup_table_heading'>
+                Label
+            </td>
+            </thead>
+            <tbody class="scb_s_experiment_setup_table_body">
+            {foreach $element in $template.ui.add_multiple_dialog}
+                <tr role='row' aria-label='Sample'>
+                    <td class='scb_s_experiment_setup_table_border'>
+                        <input class='scb_f_experiment_setup_dialog_checkbox_assignment_builder' type="checkbox" role='checkbox' assignment_id='{$assignment.id}'
+                           experiment_id='{$experiment.id}' spid="{$element.id}" aria-checked='false'>
+                    </td>
+                    <td class='scb_s_experiment_setup_table_border'>
+                            {$element.strain} {$element.protocol}
+                    </td>
+                </tr>
+            {/foreach}
+            </tr>
+            </tbody>
+        </table>
+        <div class='scb_ex_button_float'>
+        <button class='scb_ex_inner_dialog_cancel scb_s_gray_button' aria-label='Cancel' role='button'>CANCEL</button>
+        <button class='scb_ex_inner_dialog_add_assignment_builder scb_s_gray_button' aria-label='Add Samples' role='button'>ADD SAMPLES</button>
+        </div>
+    </div>
+</div>
+{/template}

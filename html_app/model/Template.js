@@ -348,6 +348,10 @@ scb.Template = function scb_Template(data, context, parent) {
      */
     scb.Utils.initialize_accessor_field(self, data, 'slides', {}, scb.template.MicroscopySlides, context);
     /*
+    experiment_temperatures !!!
+    */
+     */
+    /*
      model - TODO: this will be a big one!
      */
     scb.Utils.initialize_accessor_field(self, data, 'model', {}, null, context);
