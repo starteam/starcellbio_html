@@ -60,7 +60,7 @@ def compile(assignment_id):
         treatments.append({'kind': "collection", 'title': "Collection Time", 'editable': False})
     table = ret['template']['ui']['experiment_setup']['table']
     table.append({'kind': "treatments", 'children': treatments})
-
+    table.append({'kind': 'actions', 'title': 'Actions'});
     instructions = []
     for t in a.assignment_text.all():
         instructions.append([t.title, t.text])
