@@ -92,7 +92,7 @@ urlpatterns += patterns('',
                             name="common_western_blot_meta"),
                         url(r'^ab/assignments/wba_edit/(?P<assignment>.+)$', instructor_common.western_blot_antibody_edit,
                             name="western_blot_antibody_edit"),
-                        url(r'^ab/assignments/wbab_edit/(?P<assignment>.+)/(?P<antibody>.+)/$', instructor_common.western_blot_antibody_band_edit,
+                        url(r'^ab/assignments/wbab_edit/(?P<assignment>.+)/(?P<antibody>.+)/(?P<sp>.+)/$', instructor_common.western_blot_antibody_band_edit,
                             name="common_western_blot_antibody_bands_edit"),
 
 )

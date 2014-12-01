@@ -286,13 +286,18 @@ def western_blot_antibody_edit(request, assignment):
                               context_instance=RequestContext(request))
 
 
-def western_blot_antibody_band_edit(request, assignment, antibody):
+def western_blot_antibody_band_edit(request, assignment, antibody, sp):
     a = models.Assignment.objects.get(id=assignment)
+
     (wb, created) = models.WesternBlot.objects.get_or_create(assignment=a)
     wb.save()
+
+    (protocol, created) = models.StrainProtocol.objects.get_or_create(id=sp)
+    protocol.save()
+
     ab = models.WesternBlotAntibody.objects.get(id=antibody)
     WesternBlotAntibodyBandFormset = modelformset_factory(models.WesternBlotAntibodyBands, extra=1, can_delete=True,
-                                                          exclude=['antibody'])
+                                                          exclude=['antibody','strain_protocol'])
     message = ''
     if request.method == "POST":
         formset = WesternBlotAntibodyBandFormset(request.POST)
@@ -302,12 +307,13 @@ def western_blot_antibody_band_edit(request, assignment, antibody):
             entries = formset.save(commit=False)
             for form in entries:
                 form.antibody = ab
+                form.strain_protocol = protocol
                 form.save()
         else:
             message = "Something went wrong"
     return render_to_response('instructor/generic_formset.html',
                               {'formset': WesternBlotAntibodyBandFormset(
-                                  queryset=models.WesternBlotAntibodyBands.objects.filter(antibody=ab)),
+                                  queryset=models.WesternBlotAntibodyBands.objects.filter(antibody=ab, strain_protocol=protocol)),
                                'message': message,
                                'assignment': a
                               },

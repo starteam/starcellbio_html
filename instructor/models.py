@@ -113,6 +113,7 @@ class WesternBlotAntibody(models.Model):
 
 class WesternBlotAntibodyBands(models.Model):
     antibody = models.ForeignKey(WesternBlotAntibody,related_name='bands')
+    strain_protocol = models.ForeignKey(StrainProtocol,related_name='bands')
     wcl_weight = models.FloatField(default=0.00)
     wcl_intensity = models.FloatField(default=0.00)
     nuc_weight = models.FloatField(default=0.00)
