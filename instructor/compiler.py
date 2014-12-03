@@ -108,6 +108,8 @@ def generate_western_blot_model(a):
         ret[k] = {'parser_ab': []}
 
     cyto = []
+    nuclear = []
+    whole = []
     for antibodies in a.western_blot.antibodies.all():
         for ps in a.strain_protocol.filter(enabled=True):
             bands = WesternBlotAntibodyBands.objects.filter(antibody=antibodies, strain_protocol=ps)
@@ -135,7 +137,19 @@ def generate_western_blot_model(a):
                 'identifier': "SP_ID_{}".format(ps.id),
                 'marks': cyto_marks
             })
+            nuclear.append({
+                'identifier': "SP_ID_{}".format(ps.id),
+                'marks': nuc_marks
+            })
+            whole.append({
+                'identifier': "SP_ID_{}".format(ps.id),
+                'marks': nuc_marks
+            })
+
     ret['cyto']['parser_ab'] = cyto
+    ret['nuclear']['parser_ab'] = nuclear
+    ret['whole']['parser_ab'] = whole
+
     return ret
 
 

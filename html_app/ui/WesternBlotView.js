@@ -230,7 +230,8 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element
             id: 'marker',
             name: 'Marker',
             cell_treatment_id: "marker_treatment",
-            experiment_id: parsed.experiment.id
+            experiment_id: parsed.experiment.id,
+            kind: 'marker'
     });
     parsed.western_blot.marker_loaded = true;
     scb.ui.static.MainFrame.refresh();
