@@ -81,7 +81,7 @@ urlpatterns += patterns('',
                         url(r'^ab/assignments/edit_strain_treatments/(?P<assignment>[^/]+)$',
                             instructor_common.strain_treatments_edit, name="common_strain_protocols"),
 
-                        url(r'^ab/assignments/assignments_edit_meta/(?P<pk>[^/]+)$',
+                        url(r'^ab/assignments/assignments_edit_meta/(?P<assignment>[^/]+)$',
                             instructor_common.assignments_edit_meta, name="common_assignments_edit_meta"),
                         url(r'^ab/assignments/preview/(?P<assignment>[^/]+)$', instructor_common.preview,
                             name="common_preview"),
@@ -94,6 +94,11 @@ urlpatterns += patterns('',
                             name="western_blot_antibody_edit"),
                         url(r'^ab/assignments/wbab_edit/(?P<assignment>.+)/(?P<antibody>.+)/(?P<sp>.+)/$', instructor_common.western_blot_antibody_band_edit,
                             name="common_western_blot_antibody_bands_edit"),
+                        url(r'^ab/assignments/microscopy_sample_prep/(?P<assignment>.+)$', instructor_common.microscopy_sample_prep,
+                            name="microscopy_sample_prep"),
+                        url(r'^ab/assignments/microscopy_images_edit/(?P<assignment>.+)/(?P<sample_prep>.+)/(?P<sp>.+)/$', instructor_common.microscopy_images_edit,
+                            name="microscopy_images_edit"),
+
 
 )
 

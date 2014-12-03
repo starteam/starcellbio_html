@@ -122,6 +122,21 @@ class WesternBlotAntibodyBands(models.Model):
     cyto_intensity = models.FloatField(default=0.00)
     is_background = models.BooleanField(default=False)
 
+class MicroscopySamplePrep(models.Model):
+    assignment = models.ForeignKey(Assignment, related_name='microscopy_sample_prep')
+    analysis = models.CharField(max_length=50)
+    condition = models.CharField(max_length=50)
+    order = models.IntegerField(default=0)
+
+
+class MicroscopyImages(models.Model):
+    sample_prep = models.ForeignKey(MicroscopySamplePrep, related_name='microscopy_sample_prep')
+    strain_protocol = models.ForeignKey(StrainProtocol,related_name='microscopy_images')
+    order = models.IntegerField(default=0)
+    objective = models.CharField(max_length=50)
+    url = models.URLField(max_length=300)
+    image = models.FileField(max_length=300,upload_to='microscopy_images',null=True)
+
 
 admin.site.register(Course)
 admin.site.register(Assignment)

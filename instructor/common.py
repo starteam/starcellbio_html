@@ -62,8 +62,8 @@ def assignments_delete(request, pk):
     return redirect('common_assignments')
 
 
-def assignments_edit_meta(request, pk):
-    assignment = models.Assignment.objects.get(id=pk)
+def assignments_edit_meta(request, assignment):
+    assignment = models.Assignment.objects.get(id=assignment)
     AssignmentForm = modelform_factory(models.Assignment, fields=['has_concentration', 'has_temperature',
                                                                   'has_start_time', 'has_duration',
                                                                   'has_collection_time'])
@@ -297,7 +297,7 @@ def western_blot_antibody_band_edit(request, assignment, antibody, sp):
 
     ab = models.WesternBlotAntibody.objects.get(id=antibody)
     WesternBlotAntibodyBandFormset = modelformset_factory(models.WesternBlotAntibodyBands, extra=1, can_delete=True,
-                                                          exclude=['antibody','strain_protocol'])
+                                                          exclude=['antibody', 'strain_protocol'])
     message = ''
     if request.method == "POST":
         formset = WesternBlotAntibodyBandFormset(request.POST)
@@ -313,7 +313,68 @@ def western_blot_antibody_band_edit(request, assignment, antibody, sp):
             message = "Something went wrong"
     return render_to_response('instructor/generic_formset.html',
                               {'formset': WesternBlotAntibodyBandFormset(
-                                  queryset=models.WesternBlotAntibodyBands.objects.filter(antibody=ab, strain_protocol=protocol)),
+                                  queryset=models.WesternBlotAntibodyBands.objects.filter(antibody=ab,
+                                                                                          strain_protocol=protocol)),
+                               'message': message,
+                               'assignment': a
+                              },
+                              context_instance=RequestContext(request))
+
+
+def microscopy_sample_prep(request, assignment):
+    a = models.Assignment.objects.get(id=assignment)
+    message = ''
+    MicroSamplePrepFormset = modelformset_factory(models.MicroscopySamplePrep, extra=1, can_delete=True,
+                                                  can_order=True, exclude=['assignment', 'order'])
+    if request.method == "POST":
+        formset = MicroSamplePrepFormset(request.POST)
+        formset.clean()
+        if ( formset.is_valid()):
+            message = "Thank you"
+            for form in formset.ordered_forms:
+                form.instance.order = form.cleaned_data['ORDER']
+            entries = formset.save(commit=False)
+            for form in entries:
+                form.assignment = a
+                form.save()
+        else:
+            message = "Something went wrong"
+
+    return render_to_response('instructor/generic_formset.html',
+                              {'formset': MicroSamplePrepFormset(
+                                  queryset=models.MicroscopySamplePrep.objects.filter(assignment=assignment)),
+                               'message': message,
+                               'assignment': a
+                              },
+                              context_instance=RequestContext(request))
+
+
+def microscopy_images_edit(request, assignment, sample_prep, sp):
+    a = models.Assignment.objects.get(id=assignment)
+    sample = models.MicroscopySamplePrep.objects.get(id=sample_prep)
+    protocol = models.StrainProtocol.objects.get(id=sp)
+    MicroImagesFormset = modelformset_factory(models.MicroscopyImages, extra=1, can_delete=True, can_order=True,
+                                              exclude=['sample_prep', 'strain_protocol','order','image'])
+    message = ''
+    if request.method == "POST":
+        formset = MicroImagesFormset(request.POST)
+        formset.clean()
+        if ( formset.is_valid()):
+            message = 'Thank you'
+            for form in formset.ordered_forms:
+                form.instance.order = form.cleaned_data['ORDER']
+            entries = formset.save(commit=False)
+            for form in entries:
+                form.sample_prep = sample
+                form.strain_protocol=protocol
+                form.save()
+        else:
+            message = "Something went wrong"
+
+    return render_to_response('instructor/generic_formset.html',
+                              {'formset': MicroImagesFormset(
+                                  queryset=models.MicroscopyImages.objects.filter(sample_prep=sample,
+                                                                                  strain_protocol=protocol)),
                                'message': message,
                                'assignment': a
                               },
