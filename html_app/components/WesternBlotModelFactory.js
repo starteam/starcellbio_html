@@ -164,15 +164,45 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                     }
                 }
                 //END parser Fixed
-                
+                else if (scb.utils.isDefined(model.cyto.parser_ab)) {
+                    var rules = model.cyto.parser_ab;
+                    for (var rule_index in rules) {
+                        var rule = rules[rule_index];
+                        console.info( "rule.identity",rule.identifier);
+                        console.info( "lane.cell_treatment.identifier",lane.cell_treatment.identifier);
+
+                        if (rule.identifier == lane.cell_treatment.identifier) {
+                            var rule_marks = rule.marks;
+                            for (var rule_mark_index in rule_marks) {
+                                var rule_mark = rule_marks[rule_mark_index];
+                                if (anti_body_match(rule_mark.primary_anti_body, gel, template)) {
+                                    var intensity = rule_mark.intensity;
+                                    var update_mark = _.find(lane_marks, function (e) {
+                                        return e.weight == rule_mark.weight
+                                    });
+                                    if (scb.utils.isDefined(update_mark)) {
+                                        update_mark.intensity += intensity;
+                                    } else {
+                                        lane_marks.push({
+                                            weight: rule_mark.weight,
+                                            intensity: intensity
+                                        });
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                }
                 lane.marks = lane_marks;
             }
         }
-        
+
         self.nuclear = function (lane, gel, lane_marks) {
             if (lane.kind == 'whole' || lane.kind == 'nuclear' || lane.kind == 'whole_cell') {
-            	if(lane.id == 'marker')
-            		lane_marks.push({ weight: 0, intensity: 0});
+                if (lane.id == 'marker')
+                    lane_marks.push({ weight: 0, intensity: 0});
                 else if (scb.utils.isDefined(model.nuclear.parser_1)) {
                     var rules = model.nuclear.parser_1;
                     for (var rule_index in rules) {
@@ -290,11 +320,11 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                     }
                 }
                 //END parser Fixed
-                
+
                 lane.marks = lane_marks;
             }
         }
-    
+
     }
 
     self.compute = function (lane, gel, lane_marks) {

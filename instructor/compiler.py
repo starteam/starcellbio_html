@@ -3,7 +3,8 @@ import json
 
 
 def preview_as_json(assignment_id):
-    return json.dumps(preview(assignment_id))
+    ret = preview(assignment_id)
+    return json.dumps(ret)
 
 
 def preview(assignment_id):
@@ -28,7 +29,8 @@ def compile(assignment_id):
             'experiment_setup': 'Experiment Setup',
             'ui': {
                 'experimental_design': {
-                    'techniques': compile_techniques(a)
+                    'techniques': compile_techniques(a),
+                    'gel_types': gel_types(a)
                 },
                 'experiment_setup': {
                     'table': [
@@ -65,12 +67,147 @@ def compile(assignment_id):
     for t in a.assignment_text.all():
         instructions.append([t.title, t.text])
     ret['template']['instructions'] = instructions
+    ret['template']['model'] = {}
 
     ret['template']['ui']['add_multiple_dialog'] = add_multiple_dialog(a)
     ret['template']['drugs'] = drugs(a)
     ret['template']['concentrations'] = concentrations(a)
     ret['template']['experiment_temperatures'] = experiment_temperatures(a)
 
+    ret['template']['ui']['western_blot'] = {'format': "%CELL_LINE%, %TREATMENT%, %PP1% %TEMPERATURE%",
+                                             'keys': {
+                                                 '%CELL_LINE%': {'attr': ['cell_line'],
+                                                                 'map': ['cell_lines', '%KEY%', 'name']},
+                                                 '%TREATMENT%': {
+                                                     'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '0',
+                                                              'drug_id'], 'map': ['drugs', '%KEY%', 'name']},
+                                                 '%CONCENTRATION%': {
+                                                     'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '0',
+                                                              'concentration_id'],
+                                                     'map': ['concentrations', '%KEY%', 'name']},
+                                                 '%TEMPERATURE%': {
+                                                     'attr': ['treatment_list', 'list', '0', 'temperature'],
+                                                     'map': ['experiment_temperatures', '%KEY%', 'name']},
+                                                 '%PP1%': {
+                                                     'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '1',
+                                                              'drug_id'], 'map': ['drugs', '%KEY%', 'short_name'],
+                                                     'default': ''}
+                                             }}
+    ret['template']['primary_anti_body'] = primary_anti_body(a)
+    ret['template']['secondary_anti_body'] = secondary_anti_body(a)
+    ret['template']['lysate_kinds'] = lysate_kinds(a)
+
+    ret['template']['model']['western_blot'] = generate_western_blot_model(a)
+
+    return ret
+
+
+def generate_western_blot_model(a):
+    ret = {}
+    for k in lysate_kinds(a).keys():
+        ret[k] = {'parser_ab': []}
+
+    cyto = []
+    for antibodies in a.western_blot.antibodies.all():
+        for ps in a.strain_protocol.filter(enabled=True):
+            bands = WesternBlotAntibodyBands.objects.filter(antibody=antibodies, strain_protocol=ps)
+            cyto_marks = []
+            wcl_marks = []
+            nuc_marks = []
+            for band in bands:
+                if band.is_background is False:
+                    cyto_marks.append({
+                        'weight': band.cyto_weight,
+                        'intensity': band.cyto_intensity,
+                        'primary_anti_body': ['AB_{}'.format(antibodies.id)]
+                    })
+                    wcl_marks.append({
+                        'weight': band.wcl_weight,
+                        'intensity': band.wcl_intensity,
+                        'primary_anti_body': ['AB_{}'.format(antibodies.id)]
+                    })
+                    nuc_marks.append({
+                        'weight': band.nuc_weight,
+                        'intensity': band.nuc_intensity,
+                        'primary_anti_body': ['AB_{}'.format(antibodies.id)]
+                    })
+            cyto.append({
+                'identifier': "SP_ID_{}".format(ps.id),
+                'marks': cyto_marks
+            })
+    ret['cyto']['parser_ab'] = cyto
+    return ret
+
+
+def gel_types(a):
+    ret = []
+    if a.western_blot.has_gel_10:
+        ret.append('.10')
+    if a.western_blot.has_gel_12:
+        ret.append('.12')
+    if a.western_blot.has_gel_15:
+        ret.append('.15')
+    return ret
+
+
+def lysate_kinds(a):
+    ret = {}
+    if a.western_blot.has_whole_cell_lysate:
+        ret['whole'] = {'name': 'Whole Cell'}
+    if a.western_blot.has_cytoplasmic_fractination:
+        ret['cyto'] = {'name': 'Cytoplasm'}
+    if a.western_blot.has_nuclear_fractination:
+        ret['nuclear'] = {'name': 'Nuclear'}
+    return ret
+
+
+def secondary_anti_body(assignment):
+    western_blot = assignment.western_blot
+    secondary = {}
+    for a in western_blot.antibodies.all():
+        secondary[a.secondary] = {
+            'name': a.secondary
+        }
+    return secondary
+
+
+def primary_anti_body(assignment):
+    ret = {}
+    western_blot = assignment.western_blot
+    primary = {}
+    for a in western_blot.antibodies.all():
+        if primary.has_key(a.primary):
+            primary[a.primary].append(a.secondary)
+        else:
+            primary[a.primary] = [a.secondary]
+    order = {}
+    for a in western_blot.antibodies.all():
+        pk = 'AB_{}'.format(a.id)
+        order[pk] = 1
+        marks = []
+        for band in a.bands.all():
+            if western_blot.has_whole_cell_lysate:
+                marks.append({
+                    'weight': band.wcl_weight,
+                    'intensity': 0
+                })
+            if western_blot.has_cytoplasmic_fractination:
+                marks.append({
+                    'weight': band.cyto_weight,
+                    'intensity': 0
+                })
+            if western_blot.has_nuclear_fractination:
+                marks.append({
+                    'weight': band.nuc_weight,
+                    'intensity': 0
+                })
+        ret[pk] = {
+            'name': a.primary,
+            'secondary': primary[a.primary],
+            'marks': marks,
+            'gel_name': a.primary
+        }
+    ret['order'] = order.keys()
     return ret
 
 
@@ -81,7 +218,7 @@ def drugs(a):
         protocol = sp.protocol
         for t in protocol.treatments.all():
             tr = t.treatment
-            ret[str(tr)] = { 'name': str(tr) }
+            ret[str(tr)] = {'name': str(tr)}
     return ret
 
 
