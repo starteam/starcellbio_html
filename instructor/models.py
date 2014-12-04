@@ -19,6 +19,9 @@ GROUP_BY = (
 
 STRAIN = 'strain'
 
+FIELDS = ( ('Red','Red'), ('Green','Green'), ('Blue','Blue'), ('All','All'))
+ALL = 'All'
+
 # Common Models
 
 
@@ -127,7 +130,7 @@ class MicroscopySamplePrep(models.Model):
     analysis = models.CharField(max_length=50)
     condition = models.CharField(max_length=50)
     order = models.IntegerField(default=0)
-
+    has_filters = models.BooleanField(default=False)
 
 class MicroscopyImages(models.Model):
     sample_prep = models.ForeignKey(MicroscopySamplePrep, related_name='microscopy_sample_prep')
@@ -136,6 +139,7 @@ class MicroscopyImages(models.Model):
     objective = models.CharField(max_length=50)
     url = models.URLField(max_length=300)
     image = models.FileField(max_length=300,upload_to='microscopy_images',null=True)
+    filter = models.CharField(max_length=50,choices=FIELDS, default=ALL)
 
 
 admin.site.register(Course)

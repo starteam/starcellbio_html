@@ -96,9 +96,16 @@ def compile(assignment_id):
     ret['template']['primary_anti_body'] = primary_anti_body(a)
     ret['template']['secondary_anti_body'] = secondary_anti_body(a)
     ret['template']['lysate_kinds'] = lysate_kinds(a)
+    ret['template']['micro_kinds'] = micro_kinds(a)
 
     ret['template']['model']['western_blot'] = generate_western_blot_model(a)
-
+    ret['template']['ui']['microscopy'] = {}
+    ret['template']['ui']['microscopy']['disable_blur'] = True  # # is this right?
+    ret['template']['ui']['microscopy']['disable_brightness'] = True  # # is this right?
+    ret['template']['model']['microscopy'] = {'is_ab': True}
+    ret['template']['slide_parser'] = {
+        'collection_ab': micro_kinds(a)
+    }
     return ret
 
 
@@ -161,6 +168,25 @@ def gel_types(a):
         ret.append('.12')
     if a.western_blot.has_gel_15:
         ret.append('.15')
+    return ret
+
+
+def micro_kinds(a):
+    ret = {}
+    for sp in a.microscopy_sample_prep.all():
+        analysis = sp.analysis
+        condition = sp.condition
+        if not ret.has_key(analysis):
+            ret[analysis] = {
+                'name': analysis,
+                'conditions': {
+
+                }
+            }
+        ret[analysis]['conditions'][condition] = {
+            'name': condition,
+            'short_name': condition
+        }
     return ret
 
 
@@ -296,7 +322,9 @@ def compile_treatments(treatments):
             'start_time': t.start_time,
             'end_time': t.end_time,
             'temperature': t.temperature,
-            'collection_time': t.collection_time
+            'collection_time': t.collection_time,
+            'microscope': ['rgb', 'g', 'gr', 'rb'],  # # microscope?!
+            'collection_id': 'collection_ab'
         }
         ret.append(row)
     return ret

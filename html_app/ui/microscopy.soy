@@ -316,6 +316,15 @@
             <!-- want to hide this column if there are no conditions-->
             <td class=' scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} scb_s_microscopy_conditions'>
             {if $r.lane}
+                {if $assignment.template.model.microscopy.is_ab}
+			        {foreach $k in keys($assignment.template.micro_kinds[$r.lane.kind].conditions)}
+					    <input class='scb_f_microscopy_select_conditions' type="radio" name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="{$k}" microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
+					        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+						    {if $r.is_sample_enabled and ($r.lane.slide_conditions == $k)}checked='checked'{/if}/><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.micro_kinds[$r.lane.kind].conditions[$k].name}</span>
+							&nbsp;&nbsp;
+					{/foreach}
+                {/if}
+
                 {foreach $condition in $r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]}
                     <!--If there is only one condition, radio button is already checked-->
                     <div class="scb_s_microscopy_condition_wrapper">
@@ -850,8 +859,23 @@
 */
 {template .display_slide_types}
 
+{if $assignment.template.model.microscopy.is_ab}
+    <select class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}' role='select'
+        microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
+        lane_kind="{$row.kind}" lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}"
+        {if $row.is_sample_enabled}{else}disabled="disabled"{/if}
+    >
+        {if $row.kind != 'existing'}
+            <option  role='option' selected="selected" disabled="disabled" value=''>Select Analysis</option>
+            {/if}
+                {foreach $k in keys($assignment.template.micro_kinds)}
+                <option value='{$k}' role='option'
+                    {if $row.kind == 'existing' and $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+                {/foreach}
+    </select>
 
-{if length(keys($cell_treatment.treatment_list.list[0].conditions)) == 1}
+{else}
+    {if length(keys($cell_treatment.treatment_list.list[0].conditions)) == 1}
 
         {foreach $k in keys($cell_treatment.treatment_list.list[0].conditions)}
             <span
@@ -867,34 +891,36 @@
                 {$kinds[$k].name}
             </span>
         {/foreach}
-{else}
-	<select class="scb_f_microscopy_select_slide_type"
-	    cell_treatment_id='{$cell_treatment.id}' role='select'
-	    microscopy_id='{$microscopy.id}'
-	    assignment_id="{$assignment.id}"
-	    experiment_id="{$experiment.id}"
-	    lane_kind="{$row.kind}"
-	    lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}"
-	    {if $row.is_sample_enabled}{else}disabled="disabled"{/if}
-	>
-	    {if $row.kind == 'existing'}
-	        {foreach $k in keys($row.cell_treatment.treatment_list.first.conditions)}
-	            <option value='{$k}' role='option'{if $row.lane.kind == $k}selected="selected"{/if}>
-	                {$kinds[$k].name}
-	            </option>
-	        {/foreach}
-	    {else}
-	        <!--row not existing, want to show Select Analysis option-->
-	        <option  role='option' selected="selected" disabled="disabled" value=''>Select Analysis</option>
+    {else}
+	    <select class="scb_f_microscopy_select_slide_type"
+	        cell_treatment_id='{$cell_treatment.id}' role='select'
+	        microscopy_id='{$microscopy.id}'
+	        assignment_id="{$assignment.id}"
+	        experiment_id="{$experiment.id}"
+	        lane_kind="{$row.kind}"
+	        lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}"
+	        {if $row.is_sample_enabled}{else}disabled="disabled"{/if}
+	    >
+	        {if $row.kind == 'existing'}
+	            {foreach $k in keys($row.cell_treatment.treatment_list.first.conditions)}
+	                <option value='{$k}' role='option'{if $row.lane.kind == $k}selected="selected"{/if}>
+	                    {$kinds[$k].name}
+	                </option>
+	            {/foreach}
+	        {else}
+	            <!--row not existing, want to show Select Analysis option-->
+	            <option  role='option' selected="selected" disabled="disabled" value=''>Select Analysis</option>
 
-	        {foreach $k in keys($row.cell_treatment.treatment_list.first.conditions)}
+	            {foreach $k in keys($row.cell_treatment.treatment_list.first.conditions)}
 	            <option role='option' value='{$k}'>{$kinds[$k].name}</option>
-	        {/foreach}
-	    {/if}
-	</select>
+	            {/foreach}
+	        {/if}
+	     </select>
+    {/if}
 {/if}
 
 {/template}
+
 
 
 /**
