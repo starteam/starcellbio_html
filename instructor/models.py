@@ -19,10 +19,10 @@ GROUP_BY = (
 
 STRAIN = 'strain'
 
-FIELDS = ( ('red','Red'), ('green','Green'), ('blue','Blue'), ('merge','All'))
+FIELDS = ( ('red', 'Red'), ('green', 'Green'), ('blue', 'Blue'), ('merge', 'All'))
 ALL = 'merge'
 
-MICRO = ( ('Dye','Dye/Stain'),('IF','Antibody-labeling IF'),('IHC','Antibody-labeling IHC'))
+MICRO = ( ('Dye', 'Dye/Stain'), ('IF', 'Antibody-labeling IF'), ('IHC', 'Antibody-labeling IHC'))
 
 MICRO_DYE = 'Dye'
 
@@ -56,12 +56,15 @@ class Assignment(models.Model):
     has_start_time = models.BooleanField(default=True)
     has_duration = models.BooleanField(default=True)
     has_collection_time = models.BooleanField(default=True)
+
+
 # Experiment setup
 
 class AssignmentText(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='assignment_text')
     title = models.CharField(max_length=40)
     text = models.TextField()
+
 
 class Strains(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='strains')
@@ -96,8 +99,9 @@ class Treatments(models.Model):
     end_time = models.CharField(max_length=50)
     temperature = models.CharField(max_length=50)
     collection_time = models.CharField(max_length=50)
+
     class Meta:
-        ordering = ['order',]
+        ordering = ['order', ]
 
 
 class WesternBlot(models.Model):
@@ -112,16 +116,15 @@ class WesternBlot(models.Model):
     has_gel_15 = models.BooleanField(default=True)
 
 
-
 class WesternBlotAntibody(models.Model):
-    western_blot = models.ForeignKey(WesternBlot,related_name='antibodies')
+    western_blot = models.ForeignKey(WesternBlot, related_name='antibodies')
     primary = models.CharField(max_length=50)
     secondary = models.CharField(max_length=50)
 
 
 class WesternBlotAntibodyBands(models.Model):
-    antibody = models.ForeignKey(WesternBlotAntibody,related_name='bands')
-    strain_protocol = models.ForeignKey(StrainProtocol,related_name='bands')
+    antibody = models.ForeignKey(WesternBlotAntibody, related_name='bands')
+    strain_protocol = models.ForeignKey(StrainProtocol, related_name='bands')
     wcl_weight = models.FloatField(default=0.00)
     wcl_intensity = models.FloatField(default=0.00)
     nuc_weight = models.FloatField(default=0.00)
@@ -130,22 +133,53 @@ class WesternBlotAntibodyBands(models.Model):
     cyto_intensity = models.FloatField(default=0.00)
     is_background = models.BooleanField(default=False)
 
+
 class MicroscopySamplePrep(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='microscopy_sample_prep')
-    analysis = models.CharField(max_length=50,choices=MICRO, default=MICRO_DYE)
+    analysis = models.CharField(max_length=50, choices=MICRO, default=MICRO_DYE)
     condition = models.CharField(max_length=50)
     order = models.IntegerField(default=0)
     has_filters = models.BooleanField(default=False)
 
+
 class MicroscopyImages(models.Model):
     sample_prep = models.ForeignKey(MicroscopySamplePrep, related_name='microscopy_images')
-    strain_protocol = models.ForeignKey(StrainProtocol,related_name='microscopy_images')
+    strain_protocol = models.ForeignKey(StrainProtocol, related_name='microscopy_images')
     order = models.IntegerField(default=0)
-    objective = models.CharField(max_length=50,default='N/A')
+    objective = models.CharField(max_length=50, default='N/A')
     url = models.URLField(max_length=300)
-    image = models.FileField(max_length=300,upload_to='microscopy_images',null=True)
-    filter = models.CharField(max_length=50,choices=FIELDS, default=ALL)
+    image = models.FileField(max_length=300, upload_to='microscopy_images', null=True)
+    filter = models.CharField(max_length=50, choices=FIELDS, default=ALL)
 
+
+FACS_CT = (( 'Fixed', 'Fixed Cells'), ('Live', 'Live Cells'))
+
+FACS_FIXED = 'Fixed'
+
+FACS_KINDS = (( 'Dye', 'Dye/Stain' ), ('Anti', 'Antibody-labeling'))
+
+FACS_DYE = 'Dye'
+
+
+class FlowCytometrySamplePrep(models.Model):
+    assignment = models.ForeignKey(Assignment, related_name='facs_sample_prep')
+    treatment = models.CharField(max_length=50, choices=FACS_CT, default=FACS_FIXED)
+    analysis = models.CharField(max_length=50, choices=FACS_KINDS, default=FACS_DYE)
+    condition = models.CharField(max_length=50)
+    order = models.IntegerField(default=0)
+
+
+HISTOGRAMS = (( 'gauss', 'Gauss'), ('custom', 'Custom'))
+
+GAUSS = 'gauss'
+
+
+class FlowCytometryHistogram(models.Model):
+    sample_prep = models.ForeignKey(FlowCytometrySamplePrep, related_name='histograms')
+    strain_protocol = models.ForeignKey(StrainProtocol, related_name='histograms')
+    kind = models.CharField(max_length=50, choices=HISTOGRAMS, default=GAUSS)
+    data = models.TextField(null=True,blank=True)
+    enabled = models.BooleanField(default=False)
 
 admin.site.register(Course)
 admin.site.register(Assignment)

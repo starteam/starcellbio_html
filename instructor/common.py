@@ -354,7 +354,7 @@ def microscopy_images_edit(request, assignment, sample_prep, sp):
     sample = models.MicroscopySamplePrep.objects.get(id=sample_prep)
     protocol = models.StrainProtocol.objects.get(id=sp)
     MicroImagesFormset = modelformset_factory(models.MicroscopyImages, extra=1, can_delete=True, can_order=True,
-                                              exclude=['sample_prep', 'strain_protocol','order','image'])
+                                              exclude=['sample_prep', 'strain_protocol', 'order', 'image'])
     message = ''
     if request.method == "POST":
         formset = MicroImagesFormset(request.POST)
@@ -366,7 +366,7 @@ def microscopy_images_edit(request, assignment, sample_prep, sp):
             entries = formset.save(commit=False)
             for form in entries:
                 form.sample_prep = sample
-                form.strain_protocol=protocol
+                form.strain_protocol = protocol
                 form.save()
         else:
             message = "Something went wrong"
@@ -377,6 +377,62 @@ def microscopy_images_edit(request, assignment, sample_prep, sp):
                                                                                   strain_protocol=protocol)),
                                'message': message,
                                'assignment': a
+                              },
+                              context_instance=RequestContext(request))
+
+
+def flowcytometry_sample_prep_edit(request, assignment):
+    a = models.Assignment.objects.get(id=assignment)
+    message = ''
+    FACSSamplePrepFormset = modelformset_factory(models.FlowCytometrySamplePrep, extra=1, can_delete=True,
+                                                 can_order=True, exclude=['assignment', 'order'])
+    if request.method == "POST":
+        formset = FACSSamplePrepFormset(request.POST)
+        formset.clean()
+        if formset.is_valid():
+            message = "Thank you"
+            for form in formset.ordered_forms:
+                form.instance.order = form.cleaned_data['ORDER']
+            entries = formset.save(commit=False)
+            for form in entries:
+                form.assignment = a
+                form.save()
+        else:
+            message = "Something went wrong"
+
+    return render_to_response('instructor/generic_formset.html',
+                              {'formset': FACSSamplePrepFormset(
+                                  queryset=models.FlowCytometrySamplePrep.objects.filter(assignment=assignment)),
+                               'message': message,
+                               'assignment': a
+                              },
+                              context_instance=RequestContext(request))
+
+
+def facs_histograms_edit(request, assignment, sample_prep, sp):
+    a = models.Assignment.objects.get(id=assignment)
+    sample = models.FlowCytometrySamplePrep.objects.get(id=sample_prep)
+    protocol = models.StrainProtocol.objects.get(id=sp)
+    (model, created) = models.FlowCytometryHistogram.objects.get_or_create(sample_prep=sample, strain_protocol=protocol)
+    model.save()
+
+    FlowCytometryHistogramForm = modelform_factory(models.FlowCytometryHistogram,
+                                                   exclude=['sample_prep', 'strain_protocol'])
+    message = ''
+    if request.method == "POST":
+        form = FlowCytometryHistogramForm(request.POST, instance=model)
+        if form.is_valid():
+            message = "Thank you"
+            form.save()
+        else:
+            message = "Something went wrong"
+    else:
+        form = FlowCytometryHistogramForm(instance=model)
+    return render_to_response('instructor/generic_form.html',
+                              {'form': form,
+                               'message': message,
+                               'assignment': a,
+                               'title': 'Flow Cyto Histogram'
                               },
                               context_instance=RequestContext(request))
 
