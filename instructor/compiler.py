@@ -102,12 +102,36 @@ def compile(assignment_id):
     ret['template']['ui']['microscopy'] = {}
     ret['template']['ui']['microscopy']['disable_blur'] = True  # # is this right?
     ret['template']['ui']['microscopy']['disable_brightness'] = True  # # is this right?
-    ret['template']['model']['microscopy'] = {'is_ab': True}
+    ret['template']['model']['microscopy'] = micro_model(a)
     ret['template']['slide_parser'] = {
         'collection_ab': micro_kinds(a)
     }
+    ret['template']['slides'] = generate_slides(a)
     return ret
 
+def micro_model(a):
+    ret = {
+        'is_ab':True
+    }
+    for sp in a.microscopy_sample_prep.all():
+        for i in sp.microscopy_images.all():
+            key = "{}%%{}%%{}".format(sp.analysis, sp.condition, "SP_ID_{}".format(i.strain_protocol_id))
+            ret[key] = {
+                'slides':[{
+                    'hash': "IMAGE_{}".format(i.pk),
+                    'if_type': 'merge',
+                    'mag': 'N/A'
+                }],
+                'slide_type': sp.analysis
+            }
+    return ret
+
+def generate_slides(a):
+    ret = {}
+    for sp in a.microscopy_sample_prep.all():
+        for i in sp.microscopy_images.all():
+            ret['IMAGE_{}'.format(i.pk)] = i.url
+    return ret
 
 def generate_western_blot_model(a):
     ret = {}
@@ -181,12 +205,19 @@ def micro_kinds(a):
                 'name': analysis,
                 'conditions': {
 
-                }
+                },
+                'identifiers': {}
             }
         ret[analysis]['conditions'][condition] = {
             'name': condition,
             'short_name': condition
         }
+        if not ret[analysis]['conditions'][condition].has_key('identifiers'):
+            ret[analysis]['conditions'][condition]['identifiers'] = {}
+        identifiers = {}
+        for p in sp.microscopy_images.all():
+            ret[analysis]['identifiers']["SP_ID_{}".format(p.strain_protocol_id)] = 1
+            ret[analysis]['conditions'][condition]['identifiers']["SP_ID_{}".format(p.strain_protocol_id)] = 1
     return ret
 
 

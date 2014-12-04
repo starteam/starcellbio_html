@@ -200,6 +200,19 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 				}
  			}
     	}
+
+        if(scb.utils.isDefined(model.is_ab)){
+            self.slide = function(state) {
+                var kind = state.microscopy_lane.kind;
+                var conditions = state.microscopy_lane.slide_conditions;
+                var identifier = state.microscopy_lane.cell_treatment.identifier;
+                var key = kind+"%%"+conditions+"%%" + identifier;
+                var image_state = model[key];
+                state.slides = image_state['slides'];
+                state.slide_type = image_state['slide_type'];
+            }
+        }
+
     self.compute = function (state) {
         return self.slide(state);
     }

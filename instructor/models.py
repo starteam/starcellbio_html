@@ -22,6 +22,11 @@ STRAIN = 'strain'
 FIELDS = ( ('Red','Red'), ('Green','Green'), ('Blue','Blue'), ('All','All'))
 ALL = 'All'
 
+MICRO = ( ('Dye','Dye/Stain'),('IF','Antibody-labeling IF'),('IHC','Antibody-labeling IHC'))
+
+MICRO_DYE = 'Dye'
+
+
 # Common Models
 
 
@@ -127,13 +132,13 @@ class WesternBlotAntibodyBands(models.Model):
 
 class MicroscopySamplePrep(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='microscopy_sample_prep')
-    analysis = models.CharField(max_length=50)
+    analysis = models.CharField(max_length=50,choices=MICRO, default=MICRO_DYE)
     condition = models.CharField(max_length=50)
     order = models.IntegerField(default=0)
     has_filters = models.BooleanField(default=False)
 
 class MicroscopyImages(models.Model):
-    sample_prep = models.ForeignKey(MicroscopySamplePrep, related_name='microscopy_sample_prep')
+    sample_prep = models.ForeignKey(MicroscopySamplePrep, related_name='microscopy_images')
     strain_protocol = models.ForeignKey(StrainProtocol,related_name='microscopy_images')
     order = models.IntegerField(default=0)
     objective = models.CharField(max_length=50)
