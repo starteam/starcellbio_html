@@ -19,8 +19,8 @@ GROUP_BY = (
 
 STRAIN = 'strain'
 
-FIELDS = ( ('Red','Red'), ('Green','Green'), ('Blue','Blue'), ('All','All'))
-ALL = 'All'
+FIELDS = ( ('red','Red'), ('green','Green'), ('blue','Blue'), ('merge','All'))
+ALL = 'merge'
 
 MICRO = ( ('Dye','Dye/Stain'),('IF','Antibody-labeling IF'),('IHC','Antibody-labeling IHC'))
 
@@ -141,7 +141,7 @@ class MicroscopyImages(models.Model):
     sample_prep = models.ForeignKey(MicroscopySamplePrep, related_name='microscopy_images')
     strain_protocol = models.ForeignKey(StrainProtocol,related_name='microscopy_images')
     order = models.IntegerField(default=0)
-    objective = models.CharField(max_length=50)
+    objective = models.CharField(max_length=50,default='N/A')
     url = models.URLField(max_length=300)
     image = models.FileField(max_length=300,upload_to='microscopy_images',null=True)
     filter = models.CharField(max_length=50,choices=FIELDS, default=ALL)

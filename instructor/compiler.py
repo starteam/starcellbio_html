@@ -109,22 +109,31 @@ def compile(assignment_id):
     ret['template']['slides'] = generate_slides(a)
     return ret
 
+
 def micro_model(a):
     ret = {
-        'is_ab':True
+        'is_ab': True
     }
     for sp in a.microscopy_sample_prep.all():
         for i in sp.microscopy_images.all():
             key = "{}%%{}%%{}".format(sp.analysis, sp.condition, "SP_ID_{}".format(i.strain_protocol_id))
-            ret[key] = {
-                'slides':[{
+            if not ret.has_key(key):
+                ret[key] = {
+                    'slides': [{
+                                   'hash': "IMAGE_{}".format(i.pk),
+                                   'if_type': i.filter,
+                                   'mag': i.objective
+                               }],
+                    'slide_type': sp.analysis
+                }
+            else:
+                ret[key]['slides'].append({
                     'hash': "IMAGE_{}".format(i.pk),
-                    'if_type': 'merge',
-                    'mag': 'N/A'
-                }],
-                'slide_type': sp.analysis
-            }
+                    'if_type': i.filter,
+                    'mag': i.objective
+                })
     return ret
+
 
 def generate_slides(a):
     ret = {}
@@ -132,6 +141,7 @@ def generate_slides(a):
         for i in sp.microscopy_images.all():
             ret['IMAGE_{}'.format(i.pk)] = i.url
     return ret
+
 
 def generate_western_blot_model(a):
     ret = {}
