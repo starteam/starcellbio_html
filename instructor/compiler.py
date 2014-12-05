@@ -107,6 +107,51 @@ def compile(assignment_id):
         'collection_ab': micro_kinds(a)
     }
     ret['template']['slides'] = generate_slides(a)
+
+    ret['template']['facs_kinds'] = facs_kinds(a)
+    ret['template']['model']['facs'] = {'is_ab': True}
+    return ret
+
+
+def facs_kinds(a):
+    ret = {}
+    for sp in a.facs_sample_prep.all():
+        treatment = sp.treatment
+        analysis = sp.analysis
+        condition = sp.condition or ''
+
+        if not ret.has_key(analysis):
+            ret[analysis] = {
+                'name': sp.get_analysis_display(),
+                'conditions': {
+
+                },
+                'Live':{},
+                'Fixed':{}
+            }
+        if not ret[analysis].has_key(treatment):
+            ret[analysis][treatment] = {}
+
+        for histogram in sp.histograms.all():
+            enabled = histogram.enabled
+            if enabled:
+                kind = histogram.kind
+                data = histogram.data
+                strain_protocol = histogram.strain_protocol
+                sp_id = 'SP_ID_{}'.format(strain_protocol.id)
+                ret[analysis][treatment][sp_id] = 1
+                if not ret[analysis]['conditions'].has_key(condition):
+                    ret[analysis]['conditions'][condition] = {
+                        'name': condition,
+                        'short_name': condition,
+                        'identity': {}
+                    }
+                ret[analysis]['conditions'][condition]['identity'][sp_id] = {
+                    'kind': kind,
+                    'data': data,
+                    'treatment': treatment
+                }
+
     return ret
 
 

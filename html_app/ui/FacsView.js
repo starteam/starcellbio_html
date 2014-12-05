@@ -1,13 +1,12 @@
 scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 scb.ui.static.FacsView = scb.ui.static.FacsView || {};
-scb.ui.static.FacsView.TOTAL_TABS =  4;
-scb.ui.static.FacsView.TOTAL_STEPS =  5;
-scb.ui.static.FacsView.TOTAL_SCROLL =  5;
+scb.ui.static.FacsView.TOTAL_TABS = 4;
+scb.ui.static.FacsView.TOTAL_STEPS = 5;
+scb.ui.static.FacsView.TOTAL_SCROLL = 5;
 
 
 scb.ui.static.FacsView.MAX_GATE = 150;
-
 
 
 scb.ui.static.FacsView.parse = function (element) {
@@ -33,11 +32,11 @@ scb.ui.static.FacsView.parse = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+    parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-	
+
     var val = $(element).attr('checked');
     var cell_treatment_id = $(element).attr('cell_treatment_id');
 
@@ -56,15 +55,34 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
         });
     }
     parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
+    scb.ui.static.MainFrame.refresh();
+}
+
+scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function (element, event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    //parsed = resetScrollValue(parsed);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+
+    var val = $(element).attr('checked');
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
+
+    parsed.facs.is_cell_treatment_live[cell_treatment_id] = val;
+    $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
+        scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
+    });
+    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
     if (event) {
         scb.ui.static.MainFrame.refresh();
     }
 }
 
+
 scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
-	parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
+    parsed = resetScrollValue(parsed);
+    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -136,7 +154,7 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
     else {
         parsed.facs.lanes_list.get(lane_id).kind = slide_type;
     }
-	if (event) {
+    if (event) {
         scb.ui.static.MainFrame.refresh();
     }
 }
@@ -239,27 +257,29 @@ scb.ui.static.FacsView.scb_f_facs_select_conditions = function (element, event) 
 
 scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+    parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
     var rows_state = parsed.facs.rows_state();
     if (rows_state && rows_state.valid < 1) {
-        	$('html').css('overflow', 'hidden');
+        $('html').css('overflow', 'hidden');
 
-    	$('body').prepend(scb_experiment_setup.general_error_overlay());
+        $('body').prepend(scb_experiment_setup.general_error_overlay());
 
 
-    	$.jqDialog.alert("Please select at least 1 sample to prepare.", function() {	
-    	$('html').css('overflow', 'visible');
-					$('.error_overlay').remove();/* callback function for 'OK' button*/ });
-    	$('.jqDialog_header').remove();
-		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-		$('#jqDialog_box').attr('role', 'alertdialog');
+        $.jqDialog.alert("Please select at least 1 sample to prepare.", function () {
+            $('html').css('overflow', 'visible');
+            $('.error_overlay').remove();
+            /* callback function for 'OK' button*/
+        });
+        $('.jqDialog_header').remove();
+        $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+        $('#jqDialog_box').attr('role', 'alertdialog');
     }
-    else{
-    	parsed.facs.sample_prepared = true;
-    	scb.ui.static.MainFrame.refresh();
+    else {
+        parsed.facs.sample_prepared = true;
+        scb.ui.static.MainFrame.refresh();
     }
 }
 
@@ -275,11 +295,11 @@ scb.ui.static.FacsView.scb_f_facs_sample_active_all = function (element, event) 
 
 
 scb.ui.static.FacsView.scb_f_facs_sample_inactive_all = function (element) {
-	$('.scb_f_facs_sample_active').each(function(e){
-		var element = this;
-		$(element).attr('checked', false);
-		scb.ui.static.FacsView.scb_f_facs_sample_active(element);
-	});    
+    $('.scb_f_facs_sample_active').each(function (e) {
+        var element = this;
+        $(element).attr('checked', false);
+        scb.ui.static.FacsView.scb_f_facs_sample_active(element);
+    });
     scb.ui.static.MainFrame.refresh();
 
 }
@@ -287,7 +307,7 @@ scb.ui.static.FacsView.scb_f_facs_sample_inactive_all = function (element) {
 
 scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+    parsed = resetScrollValue(parsed);
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -300,7 +320,7 @@ scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
 
 scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+    parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -314,29 +334,29 @@ scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (e
 }
 
 scb.ui.static.FacsView.scb_s_facs_selected = function (element) {
-    
+
     var parsed = scb.ui.static.FacsView.parse(element);
     parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    if($(element).text().length <=1){
-    	 scb.ui.static.MainFrame.refresh();
+    if ($(element).text().length <= 1) {
+        scb.ui.static.MainFrame.refresh();
     }
-    else{
-    parsed.facs.name = $(element).val();
+    else {
+        parsed.facs.name = $(element).val();
     }
 }
 
-scb.ui.static.FacsView.scb_s_western_blot_gel_tab = function (element){
-	
-	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
-	
-	if (parsed.redisplay) {
+scb.ui.static.FacsView.scb_s_western_blot_gel_tab = function (element) {
+
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed = resetScrollValue(parsed);
+
+    if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-    
+
     parsed.facs.lane_selected = parsed.facs_lane.id;
     parsed.facs.is_tab_selected[parsed.facs.selected_lane.cell_treatment_id] = parsed.facs.lane_selected;
     scb.ui.static.MainFrame.refresh();
@@ -345,7 +365,7 @@ scb.ui.static.FacsView.scb_s_western_blot_gel_tab = function (element){
 
 scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+    parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -356,9 +376,9 @@ scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, even
 
 }
 
-scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
-	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+scb.ui.static.FacsView.scb_s_facs_single_range_button = function (element, event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -368,9 +388,9 @@ scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
     scb.ui.static.MainFrame.refresh();
 };
 
-scb.ui.static.FacsView.scb_s_facs_double_range_button= function(element, event){
-	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+scb.ui.static.FacsView.scb_s_facs_double_range_button = function (element, event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -455,15 +475,17 @@ scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
     var element = _.find(parsed.facs_lane.canvas_metadata_analysis.points, function (e) {
         return e.from == from && e.to == to;
     });
-	var elements = _.filter(parsed.facs_lane.canvas_metadata_analysis.points, function (e) { return e.display_id == element.display_id;})
-	if(elements.length > 1){
-		parsed.facs_lane.bisector_gate_created = false;
-		parsed.facs_lane.canvas_metadata_analysis.points = _.without(parsed.facs_lane.canvas_metadata_analysis.points, elements[0]);
-		parsed.facs_lane.canvas_metadata_analysis.points = _.without(parsed.facs_lane.canvas_metadata_analysis.points, elements[1]);
-	}
-	//delete two gates for bisector
-	else
-    	parsed.facs_lane.canvas_metadata_analysis.points = _.without(parsed.facs_lane.canvas_metadata_analysis.points, element);
+    var elements = _.filter(parsed.facs_lane.canvas_metadata_analysis.points, function (e) {
+        return e.display_id == element.display_id;
+    })
+    if (elements.length > 1) {
+        parsed.facs_lane.bisector_gate_created = false;
+        parsed.facs_lane.canvas_metadata_analysis.points = _.without(parsed.facs_lane.canvas_metadata_analysis.points, elements[0]);
+        parsed.facs_lane.canvas_metadata_analysis.points = _.without(parsed.facs_lane.canvas_metadata_analysis.points, elements[1]);
+    }
+    //delete two gates for bisector
+    else
+        parsed.facs_lane.canvas_metadata_analysis.points = _.without(parsed.facs_lane.canvas_metadata_analysis.points, element);
     scb.ui.static.FacsView.reevaluate_metadata(parsed);
     parsed.facs.apply_dna_analysis_to_all = false;
     scb.ui.static.MainFrame.refresh();
@@ -471,9 +493,9 @@ scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
 }
 
 scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
-	//ADD APPLY ALL BISECTOR_GATE_CREATED GATE CREATED
+    //ADD APPLY ALL BISECTOR_GATE_CREATED GATE CREATED
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+    parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -495,29 +517,29 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
 
 }
 
-scb.ui.static.FacsView.scb_s_facs_left_facs = function(element, event){
-	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
-	parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index -1;
-	scb.ui.static.MainFrame.refresh(parsed.state);
+scb.ui.static.FacsView.scb_s_facs_left_facs = function (element, event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed = resetScrollValue(parsed);
+    parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index - 1;
+    scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
-scb.ui.static.FacsView.scb_s_facs_right_facs = function(element, event){
-	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
-	parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index +1;
-	scb.ui.static.MainFrame.refresh(parsed.state);
+scb.ui.static.FacsView.scb_s_facs_right_facs = function (element, event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed = resetScrollValue(parsed);
+    parsed.facs.parent.start_tabs_index = parsed.facs.parent.start_tabs_index + 1;
+    scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
-scb.ui.static.FacsView.scb_s_facs_add_facs= function(element, event){
-	var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
-	if(parsed.facs.parent.list.length==scb.ui.static.FacsView.TOTAL_TABS){
-		parsed.facs.parent.start_tabs_index = 1;
-	}
-	else if (parsed.facs.parent.list.length >scb.ui.static.FacsView.TOTAL_TABS)
-		parsed.facs.parent.start_tabs_index = parsed.facs.parent.length-(scb.ui.static.FacsView.TOTAL_TABS-1);
-	scb.ui.static.MainFrame.refresh(parsed.state);
+scb.ui.static.FacsView.scb_s_facs_add_facs = function (element, event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed = resetScrollValue(parsed);
+    if (parsed.facs.parent.list.length == scb.ui.static.FacsView.TOTAL_TABS) {
+        parsed.facs.parent.start_tabs_index = 1;
+    }
+    else if (parsed.facs.parent.list.length > scb.ui.static.FacsView.TOTAL_TABS)
+        parsed.facs.parent.start_tabs_index = parsed.facs.parent.length - (scb.ui.static.FacsView.TOTAL_TABS - 1);
+    scb.ui.static.MainFrame.refresh(parsed.state);
 }
 
 scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
@@ -525,24 +547,26 @@ scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-	
-	var id_list = [];
- 	for( var x=0; x < parsed.experiment.facs_list.list.length; x++){id_list.push(parsed.experiment.facs_list.list[x].id);}
-    parsed.state.index= id_list.indexOf(parsed.facs.id);
-	
-	
+
+    var id_list = [];
+    for (var x = 0; x < parsed.experiment.facs_list.list.length; x++) {
+        id_list.push(parsed.experiment.facs_list.list[x].id);
+    }
+    parsed.state.index = id_list.indexOf(parsed.facs.id);
+
+
     parsed.experiment.facs_list.remove(parsed.facs.id);
-    
-       
-    if(parsed.state.index == parsed.experiment.facs_list.list.length){
-    	parsed.state.index = parsed.state.index -1 ;
+
+
+    if (parsed.state.index == parsed.experiment.facs_list.list.length) {
+        parsed.state.index = parsed.state.index - 1;
     }
     //fix tab indexing for display
-    if(parsed.state.index > parsed.experiment.facs_list.list.length -scb.ui.static.FacsView.TOTAL_TABS) {
-    	
-    	if((parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS+1 || parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS+2) && parsed.experiment.facs_list.start_tabs_index <=1)
-    		parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index+1;
-    	else parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index-1;
+    if (parsed.state.index > parsed.experiment.facs_list.list.length - scb.ui.static.FacsView.TOTAL_TABS) {
+
+        if ((parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS + 1 || parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS + 2) && parsed.experiment.facs_list.start_tabs_index <= 1)
+            parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index + 1;
+        else parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index - 1;
     }
     delete parsed.state.skip_hash_update;
     scb.ui.static.MainFrame.refresh(parsed.state);
@@ -584,34 +608,34 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_gel_tab', function (e) {
         scb.ui.static.FacsView.scb_s_western_blot_gel_tab(this);
     });
-   scb.utils.off_on(workarea, 'click', '.scb_f_facs_sample_remove', function (e) {
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_sample_remove', function (e) {
         scb.ui.static.FacsView.scb_f_facs_sample_remove(this);
     });
-   
+
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples_short', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
     });
-	scb.utils.off_on(workarea, 'click', '.scb_f_facs_remove', function (e) {
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_remove', function (e) {
         scb.ui.static.FacsView.scb_f_facs_remove(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_facs_choose_samples_order_list>li', function (e) {
         scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select(this, e);
     });
     scb.utils.off_on(workarea, 'blur', '.scb_s_facs_selected', function (e) {
-    	$('.scb_s_facs_selected').text($('.scb_s_facs_selected').attr('value'));
+        $('.scb_s_facs_selected').text($('.scb_s_facs_selected').attr('value'));
         scb.ui.static.FacsView.scb_s_facs_selected(this);
-    });    
+    });
     scb.utils.off_on(workarea, 'keydown', '.scb_s_facs_selected', function (e) {
-    	if ($('.scb_s_facs_selected').text().length<= 10) {
-    	}
-    	else{    		 
-    		$('.scb_s_facs_selected').text();
-    		e.preventDefault();
-    		 this.textContent= this.textContent.substring(0, this.textContent.length-1)
-    		 return false;    		 
-    	}	
-    });    
-	scb.utils.off_on(workarea, 'click', '.scb_s_facs_left_facs', function (e) {
+        if ($('.scb_s_facs_selected').text().length <= 10) {
+        }
+        else {
+            $('.scb_s_facs_selected').text();
+            e.preventDefault();
+            this.textContent = this.textContent.substring(0, this.textContent.length - 1)
+            return false;
+        }
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_s_facs_left_facs', function (e) {
         scb.ui.static.FacsView.scb_s_facs_left_facs(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_facs_right_facs', function (e) {
@@ -627,7 +651,7 @@ scb.ui.static.FacsView.register = function (workarea) {
         scb.ui.static.FacsView.scb_f_facs_tools_toggle(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_note_close_button', function (e) {
-    	scb.ui.static.FacsView.scb_f_facs_note_close_button(this);
+        scb.ui.static.FacsView.scb_f_facs_note_close_button(this);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_analyze_remove_point', function (e) {
         scb.ui.static.FacsView.scb_f_facs_analyze_remove_point(this);
@@ -635,20 +659,23 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_apply_to_all', function (e) {
         scb.ui.static.FacsView.scb_f_facs_apply_to_all(this);
     });
-	scb.utils.off_on(workarea, 'mouseup', document, function(e,ui){
-    	var container = $(".scb_f_controls_note");
-		container.slideUp(); // hide
+    scb.utils.off_on(workarea, 'mouseup', document, function (e, ui) {
+        var container = $(".scb_f_controls_note");
+        container.slideUp(); // hide
     });
-    scb.utils.off_on(workarea, 'click','.scb_f_controls_note', function(e,ui){
-    	e.stopPropagation();
+    scb.utils.off_on(workarea, 'click', '.scb_f_controls_note', function (e, ui) {
+        e.stopPropagation();
     });
-    scb.utils.off_on(workarea, 'click','.scb_f_info_icon', function(e,ui){
-    	e.stopPropagation();
-    	var note = $(this).attr('note');
-    	note = '.' +note;
-    	if($(note).is(":visible"))
-    		$(note).slideUp();
-    	else $(note).slideDown();
+    scb.utils.off_on(workarea, 'click', '.scb_f_info_icon', function (e, ui) {
+        e.stopPropagation();
+        var note = $(this).attr('note');
+        note = '.' + note;
+        if ($(note).is(":visible"))
+            $(note).slideUp();
+        else $(note).slideDown();
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_cell_treatment_radio', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio(this);
     });
 }
 
@@ -664,8 +691,8 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     points = points.sort(function (a, b) {
         return a.from > b.from;
     });
-    
-    
+
+
 //     var colors = [
 //         "#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed", 'orange' , 'black' , 'green' , 'violet' , 'purple' , 'pink'
 //     ];
@@ -675,35 +702,35 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     _.each(raw_data.data, function (e) {
         total += e[1];
     });
-	
+
     function range(pts) {
         var carray = _.difference(colors, _.pluck(points, 'c'));
         var c = carray.length > 0 ? carray[0] : colors[0];
 //         if(_.size(state.facs.midpoint) != 0){
 //         	c = state.facs.midpoint.color;
 //         }
-		
+
         var from = pts.from;
         var to = pts.to;
         var horizontal = pts.y;
-        var new_id  = 0;
-        var bisector_id ='';
-        if(_.size(state.facs.midpoint) != 0 ){
-        	new_id = state.facs.midpoint.display_id;
-        	bisector_id = 'b';
+        var new_id = 0;
+        var bisector_id = '';
+        if (_.size(state.facs.midpoint) != 0) {
+            new_id = state.facs.midpoint.display_id;
+            bisector_id = 'b';
         }
-        else{
-        	if(!pts.display_id){
-        			
-	        	//new_id = Math.floor(Math.random()*1000000000).toString(27);
-	        	state.facs_lane.exp_id = state.facs_lane.exp_id +1;
-	        	new_id = state.facs_lane.exp_id;
-        		state.facs_lane.gates_id = new_id;
-        		bisector_id ='a';
-        	}
+        else {
+            if (!pts.display_id) {
+
+                //new_id = Math.floor(Math.random()*1000000000).toString(27);
+                state.facs_lane.exp_id = state.facs_lane.exp_id + 1;
+                new_id = state.facs_lane.exp_id;
+                state.facs_lane.gates_id = new_id;
+                bisector_id = 'a';
+            }
         }
         pts.c = pts.c || c;
-        pts.display_id= pts.display_id || new_id;
+        pts.display_id = pts.display_id || new_id;
         pts.bisector_id = pts.bisector_id || bisector_id;
         pts.unique_id = pts.unique_id || Math.floor(Math.random()*1000000000).toString(27);
 
@@ -736,39 +763,43 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
             }
         });
 
-		var bisector_points =  _.filter(points, function(x){return x.display_id == pts.display_id && state.facs_lane.bisector_gate_created; });
-		
-		_.each(points, function (p){
-			if(bisector_points.length == 2){
-				if(p != bisector_points[0] && p != bisector_points[1])
-					p.bisector_id = '' ; 
-			}
-			else if(!state.facs_lane.bisector_gate_created){
-				p.bisector_id = '' ; 
-			}
-				
-		});
+        var bisector_points = _.filter(points, function (x) {
+            return x.display_id == pts.display_id && state.facs_lane.bisector_gate_created;
+        });
 
-			
-		if(range.bisector_id == 'b'){
-			range.percentage = 100 - _.find(ranges, function(x){ return x.bisector_id == 'a'}).percentage;
-		}
-		else
-	        range.percentage = Math.round(percentage / total * 100);
+        _.each(points, function (p) {
+            if (bisector_points.length == 2) {
+                if (p != bisector_points[0] && p != bisector_points[1])
+                    p.bisector_id = '';
+            }
+            else if (!state.facs_lane.bisector_gate_created) {
+                p.bisector_id = '';
+            }
+
+        });
+
+
+        if (range.bisector_id == 'b') {
+            range.percentage = 100 - _.find(ranges, function (x) {
+                return x.bisector_id == 'a'
+            }).percentage;
+        }
+        else
+            range.percentage = Math.round(percentage / total * 100);
         //data.push({data: series, color: pts.c });
         data.push({
-        	label: pts.display_id + ' ' + pts.bisector_id,
-        	data: [
-            [from, horizontal],
-            [from, horizontal+5],
-            [from, horizontal+2.5],
-            [to, horizontal+2.5],
-            [to, horizontal+5],
-            [to, horizontal]
-        ], grid: {show:false},
-        	xaxis: {tickSize: 5},
-        	color: pts.c,
-            lines: {show: true, fill: false, steps: true, lineWidth: 1},
+            label: pts.display_id + ' ' + pts.bisector_id,
+            data: [
+                [from, horizontal],
+                [from, horizontal + 5],
+                [from, horizontal + 2.5],
+                [to, horizontal + 2.5],
+                [to, horizontal + 5],
+                [to, horizontal]
+            ], grid: {show: false},
+            xaxis: {tickSize: 5},
+            color: pts.c,
+            lines: {show: true, fill: false, steps: true, lineWidth: 1}
         });
         ranges.push(range);
     }
@@ -782,13 +813,17 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
         }
         range(pts);
     }
-    ranges = _.sortBy(ranges, function(obj){ return obj.display_id; });
-	state.facs_lane.canvas_metadata_analysis.ranges =  _.sortBy(state.facs_lane.canvas_metadata_analysis.ranges, function(obj){ return obj.display_id; });
-	
-	var count_of_gates_per_id = _.countBy(state.facs_lane.canvas_metadata_analysis.ranges, function(obj) {
-	  return obj.display_id;
-	});
-    data.push({data: raw_data.data, grid: {show:false}, xaxis: {tickSize: 5}, lines: {show: true, fill: false}});
+    ranges = _.sortBy(ranges, function (obj) {
+        return obj.display_id;
+    });
+    state.facs_lane.canvas_metadata_analysis.ranges = _.sortBy(state.facs_lane.canvas_metadata_analysis.ranges, function (obj) {
+        return obj.display_id;
+    });
+
+    var count_of_gates_per_id = _.countBy(state.facs_lane.canvas_metadata_analysis.ranges, function (obj) {
+        return obj.display_id;
+    });
+    data.push({data: raw_data.data, grid: {show: false}, xaxis: {tickSize: 5}, lines: {show: true, fill: false}});
     if (facs_lane.canvas_metadata) {
         facs_lane.canvas_metadata.data = data;
     }
@@ -809,10 +844,10 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     [30, Math.random() * -7]
                 ] }
             ],
-            grid: {show:false},
+            grid: {show: false},
             xaxis: {tickSize: 5},
             options: {
-            	
+
                 series: {
                     lines: { show: true },
                     points: { show: true }
@@ -833,68 +868,70 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
         var max_x = state.assignment.template.model.facs.max;
         max_x = max_x ? max_x : 150;
         
-        if(state.facs.samples_finished && state.facs_lane.selected_gate){
-				var selected_gate = state.facs.selected_lane.selected_gate;
-				var number_of_gates = _.filter(state.facs_lane.canvas_metadata_analysis.points, function (e) { return e.display_id == selected_gate.display_id  });
-                	
-				var isdoublegate = number_of_gates.length ==2;
-			
-				if(isdoublegate){
-					var selected_gate = null;
-					if(number_of_gates[0].from < number_of_gates[1].from){
-						selected_gate = number_of_gates[0];
-					}
-					else{
-						selected_gate = number_of_gates[1];
-					}
-				
-						var from_val = Math.round(xaxes.p2c(selected_gate.from));
-						var to_val  = Math.round(xaxes.p2c(selected_gate.to));
-						var height_val = Math.round(yaxes.p2c(selected_gate.y));
-						var styles_guider = {
-							position: 'absolute',
-							top: height_val+24+ 'px',
-							left: to_val +53 + "px",
-							height: '6px', //'5px',
-							color:'black',
-							background: 'black',
-							width: "5px",
-							'border-left': 'none',
-							'border-right': 'none',
-							'vertical-align': 'center',
-						}
-							$('.scb_s_facs_chart_guider').css(styles_guider);
-				}	
-				else{
-					if(selected_gate.from ){
-					
-						var from_val = Math.round(xaxes.p2c(selected_gate.from));
-						var to_val  = Math.round(xaxes.p2c(selected_gate.to));
-						var height_val = Math.round(yaxes.p2c(selected_gate.y));
-						var styles_guider = {
-							position: 'absolute',
-							top: height_val+16+ 'px',
-							left: from_val +53 + "px",
-							height: '6px', //'5px',
-							color:'black',
-							background: 'transparent',
-							width: Math.abs(to_val - from_val) - 6 + "px",
-							'border-left': '5px solid ' + 'black',
-							'border-right': '5px solid ' + 'black',
-							'vertical-align': 'center',
-						}
-						
+        if (state.facs.samples_finished && state.facs_lane.selected_gate) {
+            var selected_gate = state.facs.selected_lane.selected_gate;
+            var number_of_gates = _.filter(state.facs_lane.canvas_metadata_analysis.points, function (e) {
+                return e.display_id == selected_gate.display_id
+            });
+
+            var isdoublegate = number_of_gates.length == 2;
+
+            if (isdoublegate) {
+                var selected_gate = null;
+                if (number_of_gates[0].from < number_of_gates[1].from) {
+                    selected_gate = number_of_gates[0];
+                }
+                else {
+                    selected_gate = number_of_gates[1];
+                }
+
+                var from_val = Math.round(xaxes.p2c(selected_gate.from));
+                var to_val = Math.round(xaxes.p2c(selected_gate.to));
+                var height_val = Math.round(yaxes.p2c(selected_gate.y));
+                var styles_guider = {
+                    position: 'absolute',
+                    top: height_val + 24 + 'px',
+                    left: to_val + 53 + "px",
+                    height: '6px', //'5px',
+                    color: 'black',
+                    background: 'black',
+                    width: "5px",
+                    'border-left': 'none',
+                    'border-right': 'none',
+                    'vertical-align': 'center'
+                }
+                $('.scb_s_facs_chart_guider').css(styles_guider);
+            }
+            else {
+                if (selected_gate.from) {
+
+                    var from_val = Math.round(xaxes.p2c(selected_gate.from));
+                    var to_val = Math.round(xaxes.p2c(selected_gate.to));
+                    var height_val = Math.round(yaxes.p2c(selected_gate.y));
+                    var styles_guider = {
+                        position: 'absolute',
+                        top: height_val + 16 + 'px',
+                        left: from_val + 53 + "px",
+                        height: '6px', //'5px',
+                        color: 'black',
+                        background: 'transparent',
+                        width: Math.abs(to_val - from_val) - 6 + "px",
+                        'border-left': '5px solid ' + 'black',
+                        'border-right': '5px solid ' + 'black',
+                        'vertical-align': 'center',
+                    }
+
                     $('.scb_s_facs_chart_guider').css(styles_guider);
-					}
-				}
-		}
+                }
+            }
+        }
 
         var click = function (e) {
             var srcElement = e.srcElement || e.target;
             var px = xaxes.c2p(e.clientX - srcElement.getBoundingClientRect().left - plot.pointOffset({x: 0, y: 0}).left);
             var py = yaxes.c2p(e.offsetY);
-            var fromy = py > 16 ? py: 16;
-           	fromy = fromy > 90 ? 90: fromy;
+            var fromy = py > 16 ? py : 16;
+            fromy = fromy > 90 ? 90 : fromy;
             px = Math.round(px);
             if (!state.facs.double_analysis) {
                 console.info("Click on: " + px + " " + py);
@@ -968,7 +1005,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                                     width: Math.abs(to_val - from_val) - 6 + "px",
                                     'border-left': '5px solid ' + 'black',
                                     'border-right': '5px solid ' + 'black',
-                                    'vertical-align': 'center',
+                                    'vertical-align': 'center'
                                 }
                                 state.facs_lane.gate_selected = point_to_edit.unique_id;
                                 $('.scb_s_facs_chart_guider').css(styles_guider);
@@ -1075,100 +1112,95 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             if (state.facs.double_analysis) {
             	console.log('click double analysis')
                 if(state.facs.gate_count == 0){
-                
-                		console.info("SET FROM " + px);
-						from = 0;
-						fromy= py > 16 ? py: 16;
-						fromy = fromy > 90 ? 90: fromy;
-						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
-							left: ($('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
+			from = 0;
+			fromy= py > 16 ? py: 16;
+			fromy = fromy > 90 ? 90: fromy;
+			from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+			left: ($('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
 
-						var point = match(px, py);
-						point_to_edit = point;
+			var point = match(px, py);
+			point_to_edit = point;
                 	if (!isNaN(from)) {
-						var to = px;
-						if(to < 0){
-						    to = 0;
-						}else if(to > max_x){
-						    to = max_x;
-						}
-						if (point_to_edit) {
-							if (Math.abs(point_to_edit.from - from) < sensitivity) {
-								point_to_edit.from = to;
-							} else {
-								point_to_edit.to = to;
-							}
-						}
-						else {
-							state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
-						}
-						
-						point_to_edit = null;
-						state.facs_lane.bisector_gate_created = true; 
-						scb.ui.static.FacsView.reevaluate_metadata(state);
-						
-						state.facs.apply_dna_analysis_to_all = false;
-						$('.scb_s_facs_chart_helper').text('');
-						state.facs.midpoint.from = px;
-						state.facs.midpoint.from = state.facs.midpoint.from > 0 ? state.facs.midpoint.from : 0;
-						state.facs.midpoint.fromy= (py > 16 ? py: 16);
-						state.facs.midpoint.fromy = (state.facs.midpoint.fromy > 90 ? 90: state.facs.midpoint.fromy) -5 ;
-						state.facs.midpoint.from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
-							left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
-						state.facs.midpoint.display_id = state.facs_lane.gates_id;
-
-						
-						//second gate starts
-						console.info("SET FROM " + px);
-						from = px;
-						if(from < 0){
-						    from = 0;
-						}else if(from > max_x){
-						    from = max_x;
-						}
-						fromy= (py > 16 ? py: 16);
-						fromy = (fromy > 90 ? 90: fromy)-5;
-						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
-							left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
-
-						var point = match(px, py-5);
-						point_to_edit = point;
-
-						var to = max_x ;
-						if(to < 0){
-						    to = 0;
-						}else if(to > max_x){
-						    to = max_x;
-						}
-						if (point_to_edit) {
-							if (Math.abs(point_to_edit.from - from) < sensitivity) {
-								point_to_edit.from = to;
-							} else {
-								point_to_edit.to = to;
-							}
-						}
-						else {
-							state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
-						}
-						var unique_id = null;
-						if(point_to_edit){
-							unique_id = point_to_edit.unique_id;
-						}
-						point_to_edit = null;
-						
-						scb.ui.static.FacsView.reevaluate_metadata(state);
-						state.facs_lane.gate_selected = _.find(state.facs_lane.canvas_metadata_analysis.points, function(e){ return (e.from == from && e.to == to) || (unique_id && unique_id == e.unique_id) }).unique_id;
-
-						state.facs.gate_count=0;
-						state.facs.midpoint = {};
-						state.facs.apply_dna_analysis_to_all = false;
-						from = NaN;
-						$('.scb_s_facs_chart_helper').text('');
-						state.facs.double_analysis = false; 
-						$('.scb_s_facs_double_range_button').button('disable');
-						scb.ui.static.MainFrame.refresh();
-
+				var to = px;
+				if(to < 0){
+					to = 0;
+				}else if(to > max_x){
+					to = max_x;
+				}
+				if (point_to_edit) {
+					if (Math.abs(point_to_edit.from - from) < sensitivity) {
+						point_to_edit.from = to;
+					} else {
+						point_to_edit.to = to;
 					}
+				}else {
+					state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
+				}
+				point_to_edit = null;
+				state.facs_lane.bisector_gate_created = true; 
+				scb.ui.static.FacsView.reevaluate_metadata(state);
+						
+				state.facs.apply_dna_analysis_to_all = false;
+				$('.scb_s_facs_chart_helper').text('');
+				state.facs.midpoint.from = px;
+				state.facs.midpoint.from = state.facs.midpoint.from > 0 ? state.facs.midpoint.from : 0;
+				state.facs.midpoint.fromy= (py > 16 ? py: 16);
+				state.facs.midpoint.fromy = (state.facs.midpoint.fromy > 90 ? 90: state.facs.midpoint.fromy) -5 ;
+				state.facs.midpoint.from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+				left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
+				state.facs.midpoint.display_id = state.facs_lane.gates_id;
+
+						
+				//second gate starts
+				console.info("SET FROM " + px);
+				from = px;
+				if(from < 0){
+				    from = 0;
+				}else if(from > max_x){
+				    from = max_x;
+				}
+				fromy= (py > 16 ? py: 16);
+				fromy = (fromy > 90 ? 90: fromy)-5;
+				from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+				left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
+
+				var point = match(px, py-5);
+				point_to_edit = point;
+
+				var to = max_x ;
+				if(to < 0){
+				    to = 0;
+				}else if(to > max_x){
+				    to = max_x;
+				}
+				if (point_to_edit) {
+					if (Math.abs(point_to_edit.from - from) < sensitivity) {
+						point_to_edit.from = to;
+					} else {
+						point_to_edit.to = to;
+					}
+				}else {
+					state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
+				}
+				var unique_id = null;
+				if(point_to_edit){
+					unique_id = point_to_edit.unique_id;
+				}
+				point_to_edit = null;
+						
+				scb.ui.static.FacsView.reevaluate_metadata(state);
+				state.facs_lane.gate_selected = _.find(state.facs_lane.canvas_metadata_analysis.points, function(e){ return (e.from == from && e.to == to) || (unique_id && unique_id == e.unique_id) }).unique_id;
+
+				state.facs.gate_count=0;
+				state.facs.midpoint = {};
+				state.facs.apply_dna_analysis_to_all = false;
+				from = NaN;
+				$('.scb_s_facs_chart_helper').text('');
+				state.facs.double_analysis = false; 
+				$('.scb_s_facs_double_range_button').button('disable');
+				scb.ui.static.MainFrame.refresh();
+
+			}
                 }
 
             }
@@ -1191,39 +1223,38 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
             px = Math.round(px);
             var button = scb.utils.isDefined(e.buttons) ? e.buttons : e.which;
             console.info(px + " " + from + " " + point_to_edit + " cb=" + button + " b=" + e.button + " bs=" + e.buttons);
-            
-            
-            
+
+
             if (!state.facs.double_analysis) {
                 window._dump_event = e;
                 var point = match(px, py);
                 /* button is one if mouse is clicked and dragged */
-				if (button == 1 && isNaN(from) && (state.facs.sample_analysis || point) ) {
-					console.info("SET FROM " + px);
+                if (button == 1 && isNaN(from) && (state.facs.sample_analysis || point)) {
+                    console.info("SET FROM " + px);
                     /* from is set here after mouse down */
-					from = px;
-					if(from < 0){
-					    from = 0;
-					}else if(from > max_x){
-					    from = max_x;
-					}
-					fromy= py > 16 ? py: 16;
-					fromy = fromy > 90 ? 90: fromy;
-					from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
-						left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
+                    from = px;
+                    if(from < 0){
+                        from=0;
+                    }else if(from> max_x){
+                        from=max_x;
+                    }
+                    fromy = py > 16 ? py : 16;
+                    fromy = fromy > 90 ? 90 : fromy;
+                    from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
 
-					point = match(px, py);
-					point_to_edit = point;
-				}
-				/* Hovering over the canvas */
-				if (button == 0 && isNaN(from)) {
-					point = match(px, py);
-					if (point) { /* hover over gate endpoint */
-						$(plot.getPlaceholder()).css('cursor', 'ew-resize');
-					}
-					else {
-						$(plot.getPlaceholder()).css('cursor', 'pointer');
-					}
+		    point = match(px, py);
+		    point_to_edit = point;
+		}
+		/* Hovering over the canvas */
+		if (button == 0 && isNaN(from)) {
+		    point = match(px, py);
+		    if (point) { /* hover over gate endpoint */
+		        $(plot.getPlaceholder()).css('cursor', 'ew-resize');
+		    }
+		    else {
+			$(plot.getPlaceholder()).css('cursor', 'pointer');
+		    }
 				}
                 /* Changing width of already existing gate*/
                 if (button == 1 && !isNaN(from)) {
@@ -1234,22 +1265,22 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     var left = from_point.left > to_point.left;
                     var styles = {
                         position: 'absolute',
-                        top: from_point.top+'px',
+                        top: from_point.top + 'px',
                         left: Math.min(from_point.left, to_point.left) + "px",
-                        height: (310-from_point.top)+'px', //'5px',
-                        color:point_to_edit? point_to_edit.c : 'black',
-                        background: (point_to_edit ? ( left ? 'white'  : 'white' ) : 'transparent'),
+                        height: (310 - from_point.top) + 'px', //'5px',
+                        color: point_to_edit ? point_to_edit.c : 'black',
+                        background: (point_to_edit ? ( left ? 'white' : 'white' ) : 'transparent'),
                         width: Math.abs(from_point.left - to_point.left) + "px",
                         'vertical-align': 'center',
                     }
-                    
+
                     var styles_guider = {
                         position: 'absolute',
                         top: '0px',
                         left: Math.min(from_point.left, to_point.left) + "px",
-                        height: 310+'px', //'5px',
-                        color:point_to_edit? point_to_edit.c : 'black',
-                        background: (point_to_edit ? ( left ? 'white'  : 'white' ) : 'transparent'),
+                        height: 310 + 'px', //'5px',
+                        color: point_to_edit ? point_to_edit.c : 'black',
+                        background: (point_to_edit ? ( left ? 'white' : 'white' ) : 'transparent'),
                         width: Math.abs(from_point.left - to_point.left) + "px",
                         'border-left': (point_to_edit ? ( left ? '2px solid ' + 'black' : '1px solid black' ) : '2px dashed black'),
                         'border-right': (point_to_edit ? ( !left ? '2px solid ' + 'black' : '1px solid black' ) : '2px dashed black'),
@@ -1284,13 +1315,13 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     scb.ui.static.MainFrame.refresh();
                 }
             }
-            else if(state.facs.double_analysis){
-            	console.log('double.analysis for move');
+            else if (state.facs.double_analysis) {
+                console.log('double.analysis for move');
                 window._dump_event = e;
                 console.log(state.facs.gate_count);
                 console.log(from);
-                console.info('stats:' + button + '  '+isNaN(from));
-                if(button == 0 && !isNaN(from) && (state.facs.gate_count ==1 || state.facs.gate_count ==2)){
+                console.info('stats:' + button + '  ' + isNaN(from));
+                if (button == 0 && !isNaN(from) && (state.facs.gate_count == 1 || state.facs.gate_count == 2)) {
                     var to_point = {
                         top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
                         left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left)
@@ -1298,11 +1329,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     var left = from_point.left > to_point.left;
                     var styles = {
                         position: 'absolute',
-                        top: from_point.top+'px',
+                        top: from_point.top + 'px',
                         left: Math.min(from_point.left, to_point.left) + "px",
-                        height: (310-from_point.top)+'px', //'5px',
-                        color:point_to_edit? point_to_edit.c : 'black',
-                        background: (point_to_edit ? ( left ? 'white'  : 'white' ) : '#808080'),
+                        height: (310 - from_point.top) + 'px', //'5px',
+                        color: point_to_edit ? point_to_edit.c : 'black',
+                        background: (point_to_edit ? ( left ? 'white' : 'white' ) : '#808080'),
                         width: Math.abs(from_point.left - to_point.left) + "px",
                         'border-left': (point_to_edit ? ( left ? '2px solid ' + 'black' : '1px solid black' ) : '2px solid black'),
                         'border-right': (point_to_edit ? ( !left ? '2px solid ' + 'black' : '1px solid black' ) : '2px solid black'),
@@ -1319,19 +1350,19 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                         $(plot.getPlaceholder()).css('cursor', 'pointer');
                     }
                 }
-               	//if buttons is released and there is not a starting point, just browsing the screen
+                //if buttons is released and there is not a starting point, just browsing the screen
                 if (button == 0 && isNaN(from)) {
-                	var styles = {
+                    var styles = {
                         position: 'absolute',
                         top: '0px',
-                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) +"px",
-                        height: (310)+'px', //'5px',
+                        left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) + "px",
+                        height: (310) + 'px', //'5px',
                         background: 'black',
                         width: "2px",
                         'vertical-align': 'center',
-                	};
-                	
-                	$('.scb_s_facs_chart_helper').css(styles);
+                    };
+
+                    $('.scb_s_facs_chart_helper').css(styles);
                     // is it over line?
                     var point = match(px, py);
                     if (point) {
@@ -1345,8 +1376,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     console.info(point);
                 }
                 //if button depressed and there is a starting point 
-                if (button == 1 && isNaN(from) && (state.facs.gate_count ==0)) {
-                
+                if (button == 1 && isNaN(from) && (state.facs.gate_count == 0)) {
+
 //                     console.info("SET FROM " + px);
 //                     from = px;
 //                     from = from > 0 ? from : 0;
@@ -1359,11 +1390,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 // 
 //                     var point = match(px, py);
 //                     point_to_edit = point;
-                    
+
                 }
-                if (button == 1 && !isNaN(from) && (state.facs.gate_count ==0)) {
-                
-                
+                if (button == 1 && !isNaN(from) && (state.facs.gate_count == 0)) {
+
+
 //                 	state.facs.gate_count= scb.ui.static.FacsView.MAX_GATE ;
 //                     var to_point = {
 //                         top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -1378,8 +1409,8 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 //                         console.info("pt" + px);
 //                         $(plot.getPlaceholder()).css('cursor', 'pointer');
 //                     }
-                    
-                    
+
+
                 }
             }
         }
@@ -1387,27 +1418,27 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
         eventHolder.mousemove(move);
 
     }
-    ], 
-    
-    draw: [ function(plot, canvascontext){	
-    	var xaxes = plot.getXAxes()[0];
-        var yaxes = plot.getYAxes()[0];
-        
-        var points = state.facs_lane.canvas_metadata_analysis.points.length > 0 ? state.facs_lane.canvas_metadata_analysis.points : [];
-        _.each(points, function(p){
-        	var y_coord = yaxes.p2c(p.y);
-        	var x_coord = xaxes.p2c((p.to - p.from)/2 + p.from);
-        	canvascontext.fillText(p.display_id + ' ' + p.bisector_id, x_coord+20, y_coord-2);
-        });
-    	console.log('draw_overlay');
-	
-	
-	}    
-    ]
+    ],
+
+        draw: [ function (plot, canvascontext) {
+            var xaxes = plot.getXAxes()[0];
+            var yaxes = plot.getYAxes()[0];
+
+            var points = state.facs_lane.canvas_metadata_analysis.points.length > 0 ? state.facs_lane.canvas_metadata_analysis.points : [];
+            _.each(points, function (p) {
+                var y_coord = yaxes.p2c(p.y);
+                var x_coord = xaxes.p2c((p.to - p.from) / 2 + p.from);
+                canvascontext.fillText(p.display_id + ' ' + p.bisector_id, x_coord + 20, y_coord - 2);
+            });
+            console.log('draw_overlay');
+
+
+        }
+        ]
     };
     scb.ui.static.FacsView.reevaluate_metadata(state);
     if (state.chart) {
-    	//Canvas is drawn here
+        //Canvas is drawn here
         $.plot(state.chart, state.facs_lane.canvas_metadata.data, state.facs_lane.canvas_metadata.options);
     }
 };
@@ -1447,13 +1478,12 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 
         state.experiment.last_technique_view = 'facs';
         var scroll_num = 0;
-        if($('.scb_s_facs_samples_table').length ==0)
-        	scroll_num=scb.ui.static.FacsView.TOTAL_SCROLL;
+        if ($('.scb_s_facs_samples_table').length == 0)
+            scroll_num = scb.ui.static.FacsView.TOTAL_SCROLL;
         else
-        	scroll_num = $('.scb_s_facs_samples_table', '.scb_s_facs_view').get(0).scrollTop;
-        	
-        
-        	
+            scroll_num = $('.scb_s_facs_samples_table', '.scb_s_facs_view').get(0).scrollTop;
+
+
         workarea.html(scb_facs.main({
             global_template: gstate.context.master_model,
             assignment: state.assignment,
@@ -1464,8 +1494,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             rows: rows_state.rows,
             rows_valid: rows_state.valid,
             kind: kind,
-			last_step: state.experiment.last_step,
-			prev_step: state.experiment.prev_step,
+            last_step: state.experiment.last_step,
+            prev_step: state.experiment.prev_step,
             kinds: template.facs_kinds,
             can_prepare_lysate: can_prepare_lysate
         }));
@@ -1476,13 +1506,12 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         }else{
             $('.scb_s_facs_choose_samples_order_list', '.scb_s_facs_view').scrollTop(state.facs.samples_scroll);
         }
-        state.experiment.prev_step=scb.ui.static.FacsView.TOTAL_STEPS;
-        if(state.experiment.last_step >= scb.ui.static.FacsView.TOTAL_STEPS)
-			state.experiment.last_step = 6;
-		state.experiment.last_technique = 'FLOW CYTOMETRY';
-		state.experiment.last_id = state.facs.id;
-		state.experiment.last_param = 'facs_id';
-
+        state.experiment.prev_step = scb.ui.static.FacsView.TOTAL_STEPS;
+        if (state.experiment.last_step >= scb.ui.static.FacsView.TOTAL_STEPS)
+            state.experiment.last_step = 6;
+        state.experiment.last_technique = 'FLOW CYTOMETRY';
+        state.experiment.last_id = state.facs.id;
+        state.experiment.last_param = 'facs_id';
 
 
         document.title = "FACS - StarCellBio";
@@ -1502,7 +1531,6 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 			$('.scb_s_facs_left_facs').prop('disabled', false);
 		}
 		else $('.scb_s_facs_right_facs').prop('disabled', false);
-
         if (state.facs.samples_finished) {
             scb.ui.static.FacsView.charts(workarea);
         }
@@ -1511,51 +1539,51 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
             $('.scb_s_facs_samples_graph_area button').prop('disabled', true);
         }
 
-		$("label[for='scb_facs_check']", '.scb_s_facs_view').attr('title', 'Single gate');
-		$("label[for='scb_facs_check2']", '.scb_s_facs_view').attr('title', 'Bisector gate');
+        $("label[for='scb_facs_check']", '.scb_s_facs_view').attr('title', 'Single gate');
+        $("label[for='scb_facs_check2']", '.scb_s_facs_view').attr('title', 'Bisector gate');
 
-		$("label[class='scb_s_facs_label']", '.scb_s_facs_view').tooltip();
+        $("label[class='scb_s_facs_label']", '.scb_s_facs_view').tooltip();
 
-		_.each($(".scb_s_experiment_step_button"), function (e) {
-			if(!$(e).hasClass('scb_s_experiment_step_visited')) 
-				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
-			else $(e).removeAttr('title');
-    	});
-		$(".scb_s_facs_selected").keypress(function(e){ return e.which != 13; });
-		
-		if(kind == 'analyze'){
-			$('.scb_s_facs_single_range_button').button();
-			$('.scb_s_facs_double_range_button').button();
-			if(state.facs.samples_finished && state.facs.selected_lane.bisector_gate_created) 
-				$('.scb_s_facs_double_range_button').button('disable');
-			
-		}
+        _.each($(".scb_s_experiment_step_button"), function (e) {
+            if (!$(e).hasClass('scb_s_experiment_step_visited'))
+                $(e).attr('title', 'To use this button, start a new ' + $(e).text() + ' Experiment.');
+            else $(e).removeAttr('title');
+        });
+        $(".scb_s_facs_selected").keypress(function (e) {
+            return e.which != 13;
+        });
+
+        if (kind == 'analyze') {
+            $('.scb_s_facs_single_range_button').button();
+            $('.scb_s_facs_double_range_button').button();
+            if (state.facs.samples_finished && state.facs.selected_lane.bisector_gate_created)
+                $('.scb_s_facs_double_range_button').button('disable');
+
+        }
 
         var elem = document.getElementById('slider');
-		window.mySwipe = Swipe(elem, {
-  			continuous: false,
-  			disableScroll: true,
-  			transitionEnd: function(index, element) {
-					$('.slider_dots li').attr('class','');
-					$($('.slider_dots li')[index]).attr('class','on');}
-		});
-		
-        
-		document.body.scrollTop = state.experiment.last_scroll;
-		
-		$('#main').css({
-				position:'absolute',
-				left: ($(window).width() - $('#main').outerWidth())/2,
-				top: 0
-			});
-		$(window).resize(function(){
+            window.mySwipe = Swipe(elem, {
+                continuous: false,
+                disableScroll: true,
+                transitionEnd: function(index, element) {
+                  $('.slider_dots li').attr('class','');
+                  $($('.slider_dots li')[index]).attr('class','on');}
+                });
+        document.body.scrollTop = state.experiment.last_scroll;
 
-			$('#main').css({
-				position:'absolute',
-				left: ($(window).width() - $('#main').outerWidth())/2,
-				top: ($(window).height() - $('#main').outerHeight())/2
-			});
+        $('#main').css({
+            position: 'absolute',
+            left: ($(window).width() - $('#main').outerWidth()) / 2,
+            top: 0
+        });
+        $(window).resize(function () {
 
-		});
+            $('#main').css({
+                position: 'absolute',
+                left: ($(window).width() - $('#main').outerWidth()) / 2,
+                top: ($(window).height() - $('#main').outerHeight()) / 2
+            });
+
+        });
     }
 }
