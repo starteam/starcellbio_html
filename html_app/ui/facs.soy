@@ -323,31 +323,31 @@ FACS Main View
             <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border {/if}
                 scb_s_facs_cell_treatment'>
                 <div style="position:relative">
-                    {if $r.is_sample_enabled}
-                        {if $r.has_fixed}
-                          <span style='display:block; position:absolute;left:0px;top:0px'>
-            	            <input type="radio"
-            	              assignment_id="{$assignment.id}"
-            	              experiment_id = "{$experiment.id}"
-            	              facs_id = "{$facs.id}"
-            	              cell_treatment_id="{$r.cell_treatment.id}"
-            	              name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}" value="fixed" {if $r.live}checked {/if}
-            	              class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'>
-                            <span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
-                            </span>
-                        {/if}
-            	        {if $r.has_live}
-            	        <span style='display:block; position:absolute; left:60px;top:0px'>
-            	          <input type="radio"
-            	            assignment_id="{$assignment.id}"
-            	            experiment_id = "{$experiment.id}"
-            	            facs_id = "{$facs.id}"
-            	            cell_treatment_id="{$r.cell_treatment.id}"
-            	            name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
-            	            value="live" {if not $r.live}checked {/if}
-            	            class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Live</span></input>
-                        </span>
-                        {/if}
+            {if $r.is_sample_enabled}
+            	{if $r.has_fixed}
+            	<span style='display:block; position:absolute;left:0px;top:0px'>
+            	<input type="radio"
+            	assignment_id="{$assignment.id}"
+            	experiment_id = "{$experiment.id}"
+            	facs_id = "{$facs.id}"
+            	cell_treatment_id="{$r.cell_treatment.id}"
+            	name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}" value="fixed" 
+            	{if $r.live == 'fixed'}checked {/if}
+            	class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
+                </span>
+                {/if}
+            	{if $r.has_live}
+            	<span style='display:block; position:absolute; left:60px;top:0px'>
+            	<input type="radio"
+            	assignment_id="{$assignment.id}"
+            	experiment_id = "{$experiment.id}"
+            	facs_id = "{$facs.id}"
+            	cell_treatment_id="{$r.cell_treatment.id}"
+            	name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
+            	value="live" {if $r.live == 'live'}checked {/if}
+            	class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Live</span></input>
+                </span>
+                {/if}
                     {else}
                         <input type="radio" disabled>
                             <span class='scb_s_facs_cell_treatment_text scb_s_microscopy_dim_conditions'>Fixed</span>
@@ -363,6 +363,7 @@ FACS Main View
                 {param cell_treatment:$r.cell_treatment/}
                 {param kinds:$kinds/}
                 {param row:$r/}
+                {param live:$r.live/}
                 {/call}
             </td>
             
@@ -559,6 +560,7 @@ FACS Main View
 @param cell_treatment
 @param row
 @param kinds
+@param live
 */
 {template .display_lysate_types}
 
@@ -586,22 +588,35 @@ FACS Main View
 	{if $assignment.template.model.facs.is_ab}
         {if $row.kind == 'existing'}
         {foreach $k in keys($kinds)}
-            {if $row.has_live and $kinds[$k]['Live'][$cell_treatment.id]}
+            {if $live == 'live' and $row.has_live and $kinds[$k]['Live'][$cell_treatment.id]}
                 <option value='{$k}' role='option'
             {if $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
             {/if}
-            {if $row.has_fixed and $kinds[$k]['Fixed'][$cell_treatment.id]}
+
+            {if $live == 'fixed' and $row.has_fixed and $kinds[$k]['Fixed'][$cell_treatment.id]}
                 <option value='{$k}' role='option'
             {if $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
             {/if}
         {/foreach}
         {else}
-        {if length(keys($kinds)) != 1}
-        <option selected="selected" disabled="disabled" role='option' value=''>Select Analysis</option>
-        {/if}
-        {foreach $k in keys($kinds)}
-        <option role='option' value='{$k}'>{$kinds[$k].name}</option>
-        {/foreach}
+            {if length(keys($kinds)) != 1}
+            <option selected="selected" disabled="disabled" role='option' value=''>Select Analysis</option>
+            {/if}
+            {if $live == 'live' and $row.has_live and $row.lysate_types['Live']}
+                {foreach $k in $row.lysate_types['Live']}
+                <option value='{$k}' role='option'
+            {if $row.lane and $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+                {/foreach}
+            {/if}
+            {if $live == 'fixed' and $row.has_fixed and $row.lysate_types['Fixed']}
+                {foreach $k in $row.lysate_types['Fixed']}
+                <option value='{$k}' role='option'
+            {if $row.lane and $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+                {/foreach}
+            {/if}
+//            {foreach $k in keys($kinds)}
+//            <option role='option' value='{$k}'>{$kinds[$k].name}</option>
+//            {/foreach}
 	    {/if}
 	{else}
         {if $row.kind == 'existing'}

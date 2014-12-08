@@ -65,14 +65,16 @@ scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function (element, even
         alert("INVALID ELEMENT!");
     }
 
-    var val = $(element).attr('checked');
+    var val = $(element).val();
     var cell_treatment_id = $(element).attr('cell_treatment_id');
 
     parsed.facs.is_cell_treatment_live[cell_treatment_id] = val;
+
     $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
         scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
     });
     parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
+    event = true;
     if (event) {
         scb.ui.static.MainFrame.refresh();
     }
