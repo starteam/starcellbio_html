@@ -166,7 +166,8 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
                 kind: slide_type,
                 conditions: slide_conditions_val,
                 cell_treatment_id: cell_treatment_id,
-                experiment_id: parsed.experiment.id
+                experiment_id: parsed.experiment.id,
+                live: parsed.facs.is_cell_treatment_live[cell_treatment_id+'_']
             });
             var cell_treatment_id = $(element).attr('cell_treatment_id');
             var map_key = cell_treatment_id + '_' + line.id;
@@ -177,7 +178,8 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
             parsed.facs.lanes_list.start({
                 kind: slide_type,
                 cell_treatment_id: cell_treatment_id,
-                experiment_id: parsed.experiment.id
+                experiment_id: parsed.experiment.id,
+                live: parsed.facs.is_cell_treatment_live[cell_treatment_id+'_']
             });
             var cell_treatment_id = $(element).attr('cell_treatment_id');
             var map_key = cell_treatment_id + '_' + line.id;

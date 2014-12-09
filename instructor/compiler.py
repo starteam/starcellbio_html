@@ -109,8 +109,43 @@ def compile(assignment_id):
     ret['template']['slides'] = generate_slides(a)
 
     ret['template']['facs_kinds'] = facs_kinds(a)
-    ret['template']['model']['facs'] = {'is_ab': True}
+    ret['template']['model']['facs'] = facs_model(a)
     return ret
+
+def csv_custom(data):
+    ret = []
+    import StringIO
+    import csv
+    f = StringIO.StringIO(data)
+    reader = csv.reader(f, delimiter=',')
+    for row in reader:
+        ret.append(row)
+    return ret
+
+def facs_model(a):
+    ab_parser = []
+    for sp in a.facs_sample_prep.all():
+        for h in sp.histograms.all():
+            if h.enabled:
+                protocol_id = h.strain_protocol_id
+                kind = h.kind
+                custom_data = h.data
+                identifier = "SP_ID_{}".format(protocol_id)
+                analysis = sp.analysis
+                treatment = sp.treatment
+                condition = sp.condition
+                if kind == 'custom':
+                    custom_data = csv_custom(custom_data)
+                ab_parser.append({
+                    'identifier': identifier,
+                    'analysis': analysis,
+                    'treatment': treatment,
+                    'condition': condition,
+                    'kind': kind,
+                    'shape': kind,
+                    'custom_data': custom_data
+                })
+    return {'is_ab': True, 'ab_parser': ab_parser}
 
 
 def facs_kinds(a):
@@ -126,8 +161,8 @@ def facs_kinds(a):
                 'conditions': {
 
                 },
-                'Live':{},
-                'Fixed':{}
+                'Live': {},
+                'Fixed': {}
             }
         if not ret[analysis].has_key(treatment):
             ret[analysis][treatment] = {}

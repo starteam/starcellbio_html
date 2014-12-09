@@ -169,9 +169,20 @@ class FlowCytometrySamplePrep(models.Model):
     order = models.IntegerField(default=0)
 
 
-HISTOGRAMS = (( 'gauss', 'Gauss'), ('custom', 'Custom'))
+HISTOGRAMS = (( 'normal', 'Normal'),
+              ('s-block','s-block'),
+              ('g1-block','g1-block'),
+              ('g2-block','g2-block'),
+              ('alpha-block','alpha-block'),
+              ('2-peak-normal-400','2-peak-normal-400'),
+              ('peak-100-normal-400','peak-100-normal-400'),
+              ('2-peak-uneven-normal-400','2-peak-uneven-normal-400'),
+              ('peak-50-normal-400','peak-50-normal-400'),
+              ('4-peak-normal-400','4-peak-normal-400'),
+              ('s-block-normal-400','s-block-normal-400'),
+              ('custom', 'Custom'))
 
-GAUSS = 'gauss'
+GAUSS = 'normal'
 
 
 class FlowCytometryHistogram(models.Model):
