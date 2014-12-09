@@ -1,10 +1,10 @@
 // This file was automatically generated from addmutlpledialog.soy.
 // Please don't edit this file by hand.
 
-if (typeof scb_ex == 'undefined') { var scb_ex = {}; }
+if (typeof scb_ex_old == 'undefined') { var scb_ex_old = {}; }
 
 
-scb_ex.dialog = function(opt_data, opt_sb) {
+scb_ex_old.dialog = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
   output.append('<div class=\'scb_ex_inner_dialog\' role=\'dialog\' aria-label=\'Add Samples\'><h1 class=\'scb_ex_inner_dialog_title\' role=\'presentation\' aria-label=\'Add Samples\'><span class=\'scb_ex_inner_dialog_title_close\' role=\'button\' aria-label=\'Close Add Samples\'>&#215;</span>Add Samples </h1><div class=\'scb_ex_inner_dialog_body\'><table class="scb_s_experiment_setup_table" role=\'grid\' aria-label=\'Cell Lines\'><thead class="scb_s_experiment_setup_table_head"><td role=\'columnheader\' aria-label=\'selected\' class=\'scb_s_experiment_setup_table_heading\' style=\'width:80px\'>Selected</td><td role=\'columnheader\' aria-label=\'cell line\' class=\'scb_s_experiment_setup_table_heading\'>Cell Line</td></thead><tbody class="scb_s_experiment_setup_table_body">');
   var cell_lineList4 = soy.$$getMapKeys(opt_data.template.cell_lines);

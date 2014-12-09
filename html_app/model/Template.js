@@ -24,7 +24,7 @@ scb.template.ui_experiment_setup = function scb_template_ui_experiment_setup(dat
                 try {
                     throw new Error("scb.template.scb_template_ui_experiment_setup Read field " + key);
                 } catch (e) {
-                    console.info(e.message, e.stack);
+                    //console.info(e.message, e.stack);
                 }
                 return data[key];
             }, function (v) {
@@ -46,7 +46,7 @@ scb.template.ui_experimental_design = function scb_template_ui_experimental_desi
                 try {
                     throw new Error("scb.template.ui_experimental_design Read field " + key);
                 } catch (e) {
-                    console.info(e.message, e.stack);
+                    //console.info(e.message, e.stack);
                 }
                 return data[key];
             }, function (v) {
@@ -69,7 +69,7 @@ scb.template.UI = function scb_TemplateUI(data, context, parent) {
                 try {
                     throw new Error("scb.template.UI Read field '" + key + "'");
                 } catch (e) {
-                    console.info(e.message, e.stack,_.keys(self));
+                    //console.info(e.message, e.stack,_.keys(self));
                 }
                 return data[key];
             }, function (v) {
@@ -114,7 +114,7 @@ scb.Template = function scb_Template(data, context, parent) {
                 try {
                     throw new Error("scb.Template Read field " + key);
                 } catch (e) {
-                    console.info(e.message, e.stack);
+                   // console.info(e.message, e.stack);
                 }
                 return data[key];
             }, function (v) {

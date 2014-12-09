@@ -35,6 +35,8 @@ scb.Drug = function scb_Drug(data, context,parent) {
 	var self = this;
 	self.parent = parent;
 	scb.ModelHelpers.common_entry_code(self, data, context);
+//    console.log("Inside Drug");
+//    console.log(data);
 
 	scb.Utils.initialize_field(data, 'drug_id', null);
 	scb.Utils.initialize_field(data, 'concentration_id', null);
@@ -45,6 +47,8 @@ scb.Drug = function scb_Drug(data, context,parent) {
 	scb.Utils.initialize_accessor_field(self, data, 'collection_id', null, null, context);
 
 	scb.utils.accessor2_custom(self, 'drug_name', function() {
+//        console.log(data.drug_id);
+//        console.log(context.template.drugs[data.drug_id]);
 		return data.drug_id != null ? context.template.drugs[data.drug_id].name : '';
 	}, scb.utils.read_only_exception);
 

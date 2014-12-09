@@ -165,7 +165,16 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
 		 $('.scb_f_experiments_step_link').get(0).click();
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_assignments_print_assignment', function (e) {
-     	 var pdfwindow = window.open("../../pdf/decusability_assignment.pdf", '_blank', false);
+        console.log("assignment_id"+ this.id);
+        var pdf_file;
+        if(this.id=="scb_ex1"){
+            pdf_file="SCB Exercise 1_ver 7_questions.pdf";
+
+        }else if(this.id="decusability"){
+            pdf_file="decusability_assignment.pdf";
+
+        }
+     	 var pdfwindow = window.open("../../pdf/"+pdf_file, '_blank', false);
         $(pdfwindow.document).load(function(){
                 //if (navigator.appName == 'Microsoft Internet Explorer') window.print();                                                                                              
                 //else pdfwindow.print();                                                                                                                                              

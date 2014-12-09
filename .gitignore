@@ -4,3 +4,4 @@ chromedriver.log
 *~
 build
 scbU
+*.DS_Store

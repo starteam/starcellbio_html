@@ -23,6 +23,7 @@ microscopy_usability.static.scb_mit706s16_inner_dialog_add = function (element, 
         var row = _.find(rows, function (eh) {
             return eh.treatment_id == treatment_id;
         });
+
         var cell_treatments_array = row.cell_treatments[name];
         _.each(cell_treatments_array, function (eh) {
             parsed.experiment.cell_treatment_list.start(scb.utils.clone_and_clear(eh));

@@ -56,6 +56,7 @@ scb.utils.print = function (data) {
 
 scb.utils.initialize_accessor_field = function (self, data, name, default_value, proto, context) {
     scb.utils.initialize_field(data, name, default_value);
+
     if (proto == null) {
         scb.Utils.accessor2(self, name, data);
     }
@@ -238,29 +239,29 @@ scb.utils.isDefined = function (a) {
     return typeof (a) != 'undefined';
 }
 
+/**
+ * Define accessor descriptors
+ * @param obj       The object on which to define the property.
+ * @param field     The name of the property to be defined or modified.
+ * @param source    ?
+ */
 scb.utils.accessor2 = function (obj, field, source) {
-    Object.defineProperty(obj, field, { get:function () {
-        return source[field];
-    }, set:function (d) {
-        source[field] = d;
-    },enumerable:true});
+    Object.defineProperty(obj, field, {
+        get:function () {return source[field];},
+        set:function (d) { source[field] = d;},
+        enumerable:true});
 }
 
 scb.utils.accessor2_with_setter = function (obj, field, source, setter) {
-    Object.defineProperty(obj, field, { get:function () {
-        return source[field];
-    }, set:function (d) {
-        source[field] = d;
-        setter(d);
-    }});
+    Object.defineProperty(obj, field, {
+        get:function () { return source[field];},
+        set:function (d) { source[field] = d; setter(d);}});
 }
 //JSON getter 
 scb.utils.accessor2_getter_only = function (obj, field, source) {
-    Object.defineProperty(obj, field, { get:function () {
-        return source[field];
-    }, set:function (d) {
-        throw "READ ONLY FIELD";
-    }});
+    Object.defineProperty(obj, field, {
+        get:function () {return source[field];},
+        set:function (d) {throw "READ ONLY FIELD";}});
 }
 
 scb.utils.accessor2_custom = function (obj, field, getter, setter) {

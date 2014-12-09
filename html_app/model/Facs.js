@@ -78,7 +78,10 @@ scb.Facs = function scb_Facs(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
     scb.utils.accessor2_custom(self, 'selected_lane', function () {
         if (self.lane_selected) {
+            console.log('Print lane selected');
+            console.log(self.lane_selected);
             return self.lanes_list.get(self.lane_selected);
+
         }
         else {
             return null;
@@ -86,29 +89,53 @@ scb.Facs = function scb_Facs(data, context, parent) {
     }, scb.utils.noop);
 
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
+
     self.rows_state = function (exp) {
         var skip_placeholders = false;
-        if ( _.keys(context.template.facs_kinds).length == 1  && _.keys(context.template.facs_kinds[Object.keys(context.template.facs_kinds)[0]].conditions).length == 1) {
+//        console.log("Printing Conditions");
+//        console.log(context.template.facs_kinds[Object.keys(context.template.facs_kinds)[0]].conditions);
+
+        //if there is 1 kind 'Anti' and if there is 1 condition
+        if ( _.keys(context.template.facs_kinds).length == 1  &&
+             _.keys(context.template.facs_kinds[Object.keys(context.template.facs_kinds)[0]].conditions).length == 1) {
             skip_placeholders = true;
         }
         var experiment = exp || self.parent.parent;
         var grouped_rows = self.lanes_list.grouped_list;
         var rows = [];
+        /* Iterating through cell treatments */
         _.each(experiment.cell_treatment_list.list, function (e) {
             if (grouped_rows[e.id]) {
-            	if( _.keys(context.template.facs_kinds).length == 1 || _.isEqual(_.map(grouped_rows[e.id], function(z){return z.conditions}).sort(), _.keys(e.treatment_list.list[0].facs).sort()))
-            		skip_placeholders=true;
+                console.log("Printing treatment list");
+                console.log(_.keys(e.treatment_list.list[0].facs));//[]
+                console.log(_.map(grouped_rows[e.id], function(z){return z.conditions}));//[null]
+                console.log(grouped_rows);// a dictionary of CellTreatments, keys are id
+                console.log(grouped_rows[e.id][0]['conditions']);
+
+            	if( _.keys(context.template.facs_kinds).length == 1 ||
+                    _.isEqual(_.map(grouped_rows[e.id], function(z){return z.conditions}).sort(), _.keys(e.treatment_list.list[0].facs).sort()))
+                    skip_placeholders=true;
             	else
-            		skip_placeholders=false;
+            	        skip_placeholders=false;
+
+                //grouped_rows is a dictionary key: CellTreatment id , value: [FacsLanes] array
                 _.each(grouped_rows[e.id], function (ee, index) {
+//                    if( _.keys(ee.conditions).length == 1)
+//            		    skip_placeholders=true;
+//            	    else
+//            	        skip_placeholders=false;
+
+                    console.log('Existing');
+                    console.log(ee);
+
                     rows.push({
                         kind: 'existing',
                         cell_treatment: e,
-                        lane: ee,
+                        lane: ee, //scb_FacsLane
                         display_sample: index == 0,
                         is_sample_enabled: self.is_cell_treatment_enabled[e.id],
                         index: index,
-                        is_valid: self.is_cell_treatment_enabled[e.id] && ee && ee.conditions
+                        is_valid: self.is_cell_treatment_enabled[e.id] && ee && ee.conditions ///here conditions ==null
                     });
                 });
                 if (!skip_placeholders) {

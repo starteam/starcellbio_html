@@ -14,8 +14,8 @@
 {template .main}
 <div class='scb_s_experiment_setup_view' >
     {call scb_homepage.display_header}
-    {param global_template:$global_template /}
-    {param context:$context /}
+        {param global_template:$global_template /}
+        {param context:$context /}
     {/call}
     {call scb_common.assignment_step}
         {param step:4/}
@@ -27,15 +27,15 @@
         {param experiment:$experiment/}
     {/call}
     {call .display_details}
-    {param t:$t/}
-    {param last_step: $last_step/}
-    {param global_template:$global_template /}
-    {param assignment:$assignment/}
-    {param new_rows:$new_rows/}
+        {param t:$t/}
+        {param last_step: $last_step/}
+        {param global_template:$global_template /}
+        {param assignment:$assignment/}
+        {param new_rows:$new_rows/}
     {/call}
     {call scb_homepage.display_footer}
-    {param global_template:$t /}
-    {param assignment:$assignment/}
+        {param global_template:$t /}
+        {param assignment:$assignment/}
     {/call}
 </div>
 {/template}
@@ -146,7 +146,7 @@ Experiment active area
         </div>
         <br>
 		<table class="scb_s_experiment_setup_table
-		{if $kind == 'readwrite'}scb_s_experiment_setup_table_editable{else}scb_s_experiment_setup_table_readonly{/if}
+		{if $kind == 'readwrite'} scb_s_experiment_setup_table_editable{else} scb_s_experiment_setup_table_readonly{/if}
 		" aria-label='Table of Samples' role='grid'>
 			<thead class='scb_s_experiment_setup_table_head' >
 			{foreach $h in $headings}
@@ -197,7 +197,8 @@ Experiment active area
 			{/foreach}
 			{if $kind == 'readwrite'}
 			{foreach $r in $new_rows}
-			<tr role='row' aria-label='Sample' class='scb_s_experiment_setup_new_row scb_s_experiment_setup_new_row_gray' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
+			<tr role='row' aria-label='Sample' class='scb_s_experiment_setup_new_row scb_s_experiment_setup_new_row_gray'
+			    assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
 				{foreach $c in $r.columns}
 				<td style='z-index:99' class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_td' kind='{$c.kind}' rowspan="1">
 					{if $c.kind == 'actions'}
@@ -412,6 +413,7 @@ Experiment active area
 		{/foreach}
 	</select>
 {/template}
+
 
 /**
 * Concentration Edit

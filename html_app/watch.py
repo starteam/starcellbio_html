@@ -43,6 +43,8 @@ def index_html():
         js.pop('swipe/Gruntfile.js')
     if( js.has_key( 'js/soyutils.js' )):
         js.pop('js/soyutils.js')
+    if( js.has_key( 'master_model.js' )):
+        js.pop('master_model.js')
 
     css_join = css_prefix + (time+css_suffix+css_prefix).join(css.keys())+ time + css_suffix
     js_join = js_prefix + (time+js_suffix+js_prefix).join(js.keys())  + js_suffix
@@ -52,6 +54,7 @@ def index_html():
     js_join = js_prefix + "js/tinymce.min.js" + js_suffix + js_join
     js_join = js_prefix + "js/jquery.tinymce.min.js" + js_suffix + js_join
     js_join = js_prefix + "js/jquery-1.7.2.min.js" + js_suffix + js_join
+    js_join = js_join + js_prefix + "master_model.js" + js_suffix
 
     return html_prefix + css_join + js_join + html_suffix
 
