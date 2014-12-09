@@ -5,3 +5,5 @@ chromedriver.log
 build
 scbU
 *.DS_Store
+html_app/cellbio
+cellbio/
