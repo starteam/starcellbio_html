@@ -81,6 +81,31 @@ scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function (element, even
 }
 
 
+scb.ui.static.FacsView.scb_f_microscopy_select_conditions = function (element, event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+    //parsed = resetScrollValue(parsed);
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    var val = $(element).val();
+    parsed.facs_lane.conditions = val;
+//    var map_key = $(element).attr('map_key');
+//    parsed.facs.is_cell_treatment_live[map_key] = val;
+
+//    $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
+//        scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
+//    });
+//    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
+    event = true;
+    if (event) {
+        scb.ui.static.MainFrame.refresh();
+    }
+}
+
+
+
+
+
 scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
     parsed = resetScrollValue(parsed);
@@ -687,6 +712,11 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_cell_treatment_radio', function (e) {
         scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio(this);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_select_conditions', function (e) {
+        scb.ui.static.FacsView.scb_f_microscopy_select_conditions(this);
+    });
+
+
 }
 
 scb.ui.static.FacsView.reevaluate_metadata = function (state) {

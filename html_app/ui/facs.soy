@@ -381,9 +381,9 @@ FACS Main View
             	        <input
             	        name="SQ_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
             	        class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="$q" cell_treatment_id='{$r.cell_treatment.id}'
-                       lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
-						{if $r.is_sample_enabled}checked="checked"{/if}
+                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="{$q}" cell_treatment_id='{$r.cell_treatment.id}'
+                       lane_kind="{$r.kind}" facs_lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+						{if $r.is_sample_enabled and $r.lane.conditions == $q }checked="checked"{/if}
 						/><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.facs_kinds[$r.lane.kind].conditions[$q].name}</span>
                         {/if}
                     {/foreach}
@@ -685,8 +685,8 @@ FACS Main View
             <ol role='list'  class='scb_s_facs_choose_samples_order_list'>
                 {foreach $r in $rows}
                 {if $r.is_valid}
-            		{if $r.is_tab_selected}
-						<li role='listitem'  
+            		{if$r.is_tab_selected or $assignment.template.model.is_ab}
+						<li role='listitem'
 							facs_id='{$facs.id}' 
 							assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" 
 							facs_lane_id='{$r.lane.id}'
@@ -698,7 +698,6 @@ FACS Main View
 						</li>
                		{/if}
                 {/if}
-
                 {/foreach}
             </ol>
         </div>
