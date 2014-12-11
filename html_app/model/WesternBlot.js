@@ -90,6 +90,8 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
         _.each(experiment.cell_treatment_list.list, function (e) {
             if (grouped_rows[e.id]) {
                 _.each(grouped_rows[e.id], function (ee, index) {
+                    console.log("Printing ee");
+                    console.log(ee);
                     rows.push({
                         kind:'existing',
                         cell_treatment:e,

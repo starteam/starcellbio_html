@@ -56,7 +56,7 @@ function starcellbio(jquery_selector_main, master_model) {
         else if(get_user_result.account_type == 'instructor'){
         	 $.ajax({
 			type: "GET",
-			url: '../scb/get_instructor_assignments.js',
+			url: '../scb/get_instructor_assignments.js'
 			}).done(function() {
 				get_instructor_assignments_result.view_list = fix_assignment_models(get_instructor_assignments_result.list);
 				var assignment = null;

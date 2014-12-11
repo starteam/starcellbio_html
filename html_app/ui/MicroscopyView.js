@@ -349,6 +349,8 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
         alert("INVALID ELEMENT!");
     }
     var slide_type = $(element).attr('value');
+    console.log('slide_type');
+    console.log(slide_type);
     if (slide_type == '') {
         return;
     }

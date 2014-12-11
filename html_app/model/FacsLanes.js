@@ -9,8 +9,10 @@ scb.FacsLaneList = function scb_FacsLaneList(data, context, parent) {
     Object.defineProperty(self, "list", {
         get: function () {
             var ret = [];
+//            console.log("List");
             for (var i in data.list) {
                 var d = data.list[i];
+//                console.log(d);
                 ret.push(new scb.FacsLane(d, context, self));
             }
             return ret;
@@ -115,7 +117,9 @@ scb.FacsLane = function scb_FacsLane(data, context, parent) {
     self.parent = parent;
     scb.ModelHelpers.common_entry_code(self, data, context);
     scb.Utils.initialize_accessor_field(self, data, 'kind', _.keys(context.template.facs_kinds)[0], null, context);
-    scb.Utils.initialize_accessor_field(self, data, 'conditions', null, null, context);
+//    scb.Utils.initialize_accessor_field(self, data, 'conditions',context.template.facs_kinds[_.keys(context.template.facs_kinds)[0]].conditions, null, context);// originally is set to null
+    scb.Utils.initialize_accessor_field(self, data, 'conditions',null, null, context);// originally is set to null
+
     scb.Utils.initialize_accessor_field(self, data, 'cell_treatment_id', null, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'gates_id', 0, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'exp_id', 0, null, context);

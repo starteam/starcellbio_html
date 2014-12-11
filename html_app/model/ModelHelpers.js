@@ -45,14 +45,12 @@ scb.ModelHelpers.common_list_code = function (self, data, proto, context) {
 
 }
 
-scb.ModelHelpers.grouped_list = function(self,childs_field) {
+scb.ModelHelpers.grouped_list = function(self,childs_field) {// is called from FacsLanes, childs_field == 'cell_treatment_id'
     scb.utils.accessor2_custom(self, 'grouped_list', function () {
         var list = self.list;
-        var ret = _.groupBy(_.sortBy(list, function (e) {
-            return e.created_at;
-        }), function (e) {
-            return e[childs_field];
-        });
+        var ret = _.groupBy(_.sortBy(list,
+            function (e) {return e.created_at; }),
+            function (e) {return e[childs_field];});
         return ret;
     }, scb.utils.read_only_exception);
 }

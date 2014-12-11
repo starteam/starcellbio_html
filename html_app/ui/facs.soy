@@ -313,6 +313,7 @@ FACS Main View
                 {$r.display_text}
                 {/if}
             </td>
+            /* Cell Treatment*/
             <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} scb_s_facs_cell_treatment' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:171px;{else}width:136px;{/if}">
             {if $r.is_sample_enabled}			 
             	<input type="radio"  checked class='scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
@@ -332,23 +333,70 @@ FACS Main View
                 {param lane:$r/}
                 {/call}
             </td>
+            /* Flow Cytometry Analysis */
             <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:232px;'>
-            	{if $r.lane and length(keys($kinds)) > 1}
-            		{if $r.lane.kind == 'Dye'}
-            			<input class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="whole" cell_treatment_id='{$r.cell_treatment.id}'
-                       lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled }checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.facs_kinds.Dye.conditions.whole.name}</span>
 
-            		{elseif $r.lane.kind == 'Anti'}
-            			<input class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="a" cell_treatment_id='{$r.cell_treatment.id}'
-                       lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled }checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.facs_kinds.Anti.conditions.a.name}</span>
+            	{if $r.lane and length(keys($kinds)) == 1}
+//
+//            		{if $r.lane.kind == 'Dye'}
+//            			<input class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
+//                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="whole" cell_treatment_id='{$r.cell_treatment.id}'
+//                       lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+//						{if $r.is_sample_enabled }checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.facs_kinds.Dye.conditions.whole.name}</span>
+//
+//            		{elseif $r.lane.kind == 'Anti'}
+//            			<input class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
+//                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="a" cell_treatment_id='{$r.cell_treatment.id}'
+//                       lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+//						{if $r.is_sample_enabled }checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.facs_kinds.Anti.conditions.a.name}</span>
+//
+//            		{/if}
+//
+//
+//            	{elseif $r.lane and length(keys($kinds)) >= 1}
+            	    <select class="scb_f_facs_select_conditions" role='select'
+			        facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
+			        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+	                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}
+	                >
 
-            		{/if}
+
+	                {if $r.kind == 'existing'}
+
+//		                {if $lane.cell_treatment.cell_line == $assignment.template.model.microscopy.valid[0] and $lane.cell_treatment.treatment_list.first.drug_list.list[0].drug_id == $assignment.template.model.microscopy.valid[1]}
+			                {foreach $k in keys($kinds)}
+			                    {foreach $c in keys($kinds[$k].conditions)}
+			                    <option value='{$c}' role='option' {if $r.lane.conditions == $c}selected="selected"{/if}>
+			                         //{$kinds[$k].name}
+//			                        {$r.lane.kind}
+//                                    {$r.lane.conditions}
+                                    {$kinds[$k].conditions[$c].name}
+
+                                </option>
+                                {/foreach}
+                                 {if length(keys($kinds[$k].conditions)) >= 1}
+                                  {if not $r.lane.conditions}
+	                                <option  role='option'selected="selected" disabled="disabled" value=''>Select Condition</option>
+	                                {/if}
+	                            {/if}
+			                {/foreach}
+//		                {else}
+//			                {foreach $k in keys($assignment.template.slide_parser.default)}
+//			                    <option value='{$k}' role='option'
+//			                        {if $r.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
+//			                {/foreach}
+//		                {/if}
+//                	{else}
+//                	    {print 'else of existing'}
+////	                    {if length(keys($kinds)) != 1}
+//	                    <option  role='option' selected="selected" disabled="disabled" value=''>Select Analysis</option>
+////	                    {/if}
+	                {/if}
                 {/if}
             </td>
+
+
+
             <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
                 {if $r.kind == 'existing' and length(keys($kinds)) > 1}
                 <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
@@ -566,13 +614,19 @@ FACS Main View
         				{if $r.is_valid and $r.lane.id == $facs.selected_lane.id}
         				<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab ' role='tab'>
 
-						<div class='scb_s_facs_gel_tab_selected'>{$facs.selected_lane.kinds[$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].name}
+						<div class='scb_s_facs_gel_tab_selected'>
+//						{$facs.selected_lane.kind}
+//						{$facs.selected_lane.conditions}
+						{$facs.selected_lane.kinds[$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].name}
 						</div>
 						</span>
         				{elseif $r.is_valid and $r.cell_treatment.id == $facs.selected_lane.cell_treatment_id}
 							<div class='scb_s_western_blot_gel_tab' facs_id='{$facs.id}'
 							assignment_id='{$assignment.id}' role='tab'
-							experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].conditions[$r.lane.conditions].name}
+							experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>
+							{$r.lane.kinds[$r.lane.kind].conditions[$r.lane.conditions].name}
+//						{$r.lane.conditions}
+
 							</div>
 						{/if}
 					{/foreach}
@@ -607,7 +661,7 @@ FACS Main View
 <div class='scb_s_western_blot_gel_content'>
 
     <div class='scb_s_facs_chart_wrapper'>
-        <div class='scb_s_facs_chart_xaxis'>
+        <div class='scb_s_facs_chart_xaxis'> //$lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name
             {if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence
         </div>
         <div class='scb_s_facs_chart_yaxis'>
