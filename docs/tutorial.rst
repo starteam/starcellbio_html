@@ -1,6 +1,8 @@
 Tutorial: StarCellBio Tutorial
 ==============================================
 
+see: docs/Evernotes/Combined_Notes_on_the_Assignment_Builder.pdf
+
 The starcellbio_html is .
 
 pip install -r requirements.txt (found in starcellbio_html folder)
