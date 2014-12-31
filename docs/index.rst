@@ -6,7 +6,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   tutorial
+   DeveloperGuide
    using_selenium
    cmd_line_tools
    license
