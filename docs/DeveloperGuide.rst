@@ -1,9 +1,60 @@
-Tutorial: StarCellBio Tutorial
-==============================================
+Developer Guide: StarCellBio
+============================
+
+The intent of this guide is to:
+
+    * Describe the Architecture of StarCellBio
+    * Create a Virtual Environment for developing StarCellBio
+    * Setup starcellbio_html
+    * Deploy StarCellBio server to localhost
+    * Use StarCellBio server on localhost
+    * Deploy StarCellBio server to Heroku
+    * Use StarCellBio server on Heroku
+    * Modify/Deploy/Use StarCellBio html_app
+    * Modify/Deploy/Use StarCellBio instructor
+    * Create/Modify/Deploy/Use StarCellBio AssignmentBuilder
+    * Create/Modify/Deploy/Use StarCellBio Lab Notebook
+
+
+Describe the Architecture of StarCellBio
+---------------------------
+
+    :download:`StarCellBio Architecture <StarCellBio.pdf>`
+
+Create a Virtual Environment for developing StarCellBio
+-------------------------------------------------------
+
+Setup starcellbio_html
+----------------------
+
+Deploy StarCellBio server to localhost
+--------------------------------------
+
+Use StarCellBio server on localhost
+-----------------------------------
+
+Deploy StarCellBio server to Heroku
+-----------------------------------
+
+Use StarCellBio server on Heroku
+--------------------------------
+
+Modify/Deploy/Use StarCellBio html_app
+--------------------------------------
+
+Modify/Deploy/Use StarCellBio instructor
+----------------------------------------
+
+Create/Modify/Deploy/Use StarCellBio AssignmentBuilder
+------------------------------------------------------
+
+Create/Modify/Deploy/Use StarCellBio Lab Notebook
+-------------------------------------------------
+
+
+
 
 see: docs/Evernotes/Combined_Notes_on_the_Assignment_Builder.pdf
-
-The starcellbio_html is .
 
 pip install -r requirements.txt (found in starcellbio_html folder)
 
@@ -50,5 +101,4 @@ Other issues:
     * Has backend database from starcellbio.mit.edu
     * Stores student state but doesn't let instructor see it.
     * Student writes a report outside of starcellbio.
-    * Move pdfs to docs folder - maybe subfolder of specifications.
 
