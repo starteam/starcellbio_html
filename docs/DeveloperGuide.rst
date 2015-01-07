@@ -57,20 +57,30 @@ Setup starcellbio_html
 ----------------------
 You may also need to install Homebrew and pip as these are required.
 
-.. note:: this example uses the o
+.. note:: This example uses assumes that PROJECT_HOME is ~/starcellbio/starcellbio_html.
+You will need to adjust PROJECT_HOME to the location of your starcellbio_html project.
 
 In a terminal window execute the following commands::
 
     $ source ~/PyVENV/bin/activate
-    (PyVENV) $ cd $VIRTUAL_ENV # watch.py needs repo in this location
+    (PyVENV) $ export PROJECT_HOME="/Users/Anna/starcellbio/starcellbio_html" # watch.py needs repo at PROJECT_HOME
+    (PyVENV) $ cd $PROJECT_HOME # watch.py needs repo in this location
     (PyVENV) $ git clone git://github.com/starteam/starcellbio_html
-    (PyVENV) $ cd starcellbio_html
     (PyVENV) $ sudo pip install -r requirements.txt
-
 
 
 Using watch.py to compile .soy and .gss files into .js and .css files
 ---------------------------------------------------------------------
+After any changes to .soy or .gss files you need to compile them into .js and .css files for your changes to work.
+The following assumes that the PROJECT_HOME environment variable is setup as above.
+
+.. note:: This repo was built before PyCharm was the default project IDE. It is now possible to create a File Watcher
+in PyCharm that will automatically run the transpilers as .soy and .gss files are changed.  This will require minor
+modifications to watch.py.
+
+In a terminal window execute the following commands::
+
+    (PyVENV) $ python $PROJECT_HOME/html_app/watch.py
 
 Deploy StarCellBio server to localhost
 --------------------------------------
@@ -81,8 +91,8 @@ To ``START`` the starcellbio_html server::
 Notes from Shloka: mysql may not work due to some error.
 To ``FIX this error``::
 
-    (PyVENV) $ ls /usr/local/Cellar/mysql (will give you the mysql ``version #``)
-    (PyVENV) $ launchctl load -w /usr/local/Cellar/mysql/``version #``/homebrew.mxcl.mysql.plist
+    (PyVENV) $ ls /usr/local/Cellar/mysql # shows foldername (a number) to use in the next command
+    (PyVENV) $ launchctl load -w /usr/local/Cellar/mysql/5.6.22/homebrew.mxcl.mysql.plist
 
 Use StarCellBio server on localhost
 -----------------------------------
