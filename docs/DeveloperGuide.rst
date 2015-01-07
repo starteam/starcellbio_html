@@ -6,7 +6,7 @@ The intent of this guide is to:
     * Describe the Architecture of StarCellBio
     * Create a Virtual Environment for developing StarCellBio
     * Setup starcellbio_html
-    * Configure PyCharm Preferences for Closure Templates
+    * Using watch.py to compile .soy and .gss files into .js and .css files
     * Deploy StarCellBio server to localhost
     * Use StarCellBio server on localhost
     * Deploy StarCellBio server to Heroku
@@ -57,46 +57,20 @@ Setup starcellbio_html
 ----------------------
 You may also need to install Homebrew and pip as these are required.
 
+.. note:: this example uses the o
+
 In a terminal window execute the following commands::
 
-    $ cd ``starcellbio_html folder``
     $ source ~/PyVENV/bin/activate
+    (PyVENV) $ cd $VIRTUAL_ENV # watch.py needs repo in this location
+    (PyVENV) $ git clone git://github.com/starteam/starcellbio_html
+    (PyVENV) $ cd starcellbio_html
     (PyVENV) $ sudo pip install -r requirements.txt
 
 
-Configure PyCharm Preferences for Closure Templates
----------------------------------------------------
-StarCellBio uses .soy files to generate html for the StarCellBio UI. The .soy files are compiled by the Google Closure Compiler.
-Reference: 'https://developers.google.com/closure/ <https://developers.google.com/closure/>'
 
-To ``CONFIGURE PyCharm`` for compiling .soy files::
-
-    Open the starcellbio_html project in PyCharm.
-    Click-on ``PyCharm->Preferences->Plugins`` and check for the ``Non-Dairy Soy Plugin``.  If missing,
-        click ``Browse Repositories``, find the ``Non-Dairy Soy Plugin``, click ``Install plugin``
-    Click-on ``PyCharm->Preferences->File Types`` and confirm ``Closure template file`` has ``*.soy`` as a ``Registered Pattern`` If missing,
-        add ``Closure template file`` and ``*.soy`` to its ``Registered Patterns``.
-    Click-on ``PyCharm->Preferences->File Watchers`` and confirm ``Soy2RequireJS`` exists.  If missing,
-        add (+) "Soy2RequireJS":
-            Description:
-                Watches for .soy file changes
-                Invokes StarX Closure compiler to create .js files
-            File type:
-                Closure template File
-            Program:
-            <path_to_your_starx_location>/soy2js.py
-        Arguments:
-            $FileDir$/$FileName$
-        Working directory:
-            $ProjectFileDir$
-        Output paths:
-            $FileDir$/$FileName$.js
-
-
-
-StarCellBio uses .gss to generate correct .css files or errors describing syntax flaws.
-
-    Need to document setting up file watcher in PyCharm to handle this
+Using watch.py to compile .soy and .gss files into .js and .css files
+---------------------------------------------------------------------
 
 Deploy StarCellBio server to localhost
 --------------------------------------
