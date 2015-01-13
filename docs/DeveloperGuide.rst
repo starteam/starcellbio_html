@@ -5,12 +5,11 @@ The intent of this guide is to:
 
     * Describe the Architecture of StarCellBio
     * Create a Virtual Environment for developing StarCellBio
-    * Setup starcellbio_html
+    * Clone starcellbio_html
+    * Setup Development Environment
     * Using watch.py to compile .soy and .gss files into .js and .css files
-    * Deploy StarCellBio server to localhost
+    * Start the StarCellBio development server on localhost
     * Use StarCellBio server on localhost
-    * Deploy StarCellBio server to Heroku
-    * Use StarCellBio server on Heroku
     * Modify/Deploy/Use StarCellBio html_app
     * Modify/Deploy/Use StarCellBio instructor
     * Create/Modify/Deploy/Use StarCellBio AssignmentBuilder
@@ -53,7 +52,7 @@ To ``DESTROY`` it::
 You may also want to install Virtualenvwrapper to help manage Virtual Environments although it is not required.
 Reference: 'https://vitualenvwrapper.readthedocs.org/ <https://vitualenvwrapper.readthedocs.org/>'
 
-Setup starcellbio_html
+Clone starcellbio_html
 ----------------------
 You may also need to install Homebrew and pip as these are required.
 
@@ -63,45 +62,83 @@ You will need to adjust PROJECT_HOME to the location of your starcellbio_html pr
 In a terminal window execute the following commands::
 
     $ source ~/PyVENV/bin/activate
-    (PyVENV) $ export PROJECT_HOME="/Users/Anna/starcellbio/starcellbio_html" # watch.py needs repo at PROJECT_HOME
-    (PyVENV) $ cd $PROJECT_HOME # watch.py needs repo in this location
     (PyVENV) $ git clone git://github.com/starteam/starcellbio_html
+
+
+Setup Development Environment
+-----------------------------
+
+Using PyCharm
+    View->Tool Windows->Database + Data Source -> MySQL
+    Install the database drivers if prompted
+
+
+mysqld command starts database
+
+Reference: `Installing MySQL on Mac OS X <https://rtcamp.com/tutorials/mac/osx-brew-php-mysql-nginx/>`_
+
+If you need to install MySQL on Mac OS X, execute the following command::
+
+    $ brew install mysql --enable-debugging
+
+In a terminal window execute the following commands::
+
+    $ source ~/PyVENV/bin/activate
+    (PyVENV) $ ls /usr/local/Cellar/mysql # shows foldername (a number) to use in the next command
+    (PyVENV) $ sudo cp /usr/local/Cellar/mysql/5.6.22/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/
+
+To Start mysql::
+
+    (PyVENV) $ sudo launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+    (PyVENV) $ sudo launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+
+To Stop mysql::
+
+    (PyVENV) $ sudo launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+
+To pip install
+
+    (PyVENV) $ cd starcellbio_html
     (PyVENV) $ sudo pip install -r requirements.txt
 
 
 Using watch.py to compile .soy and .gss files into .js and .css files
 ---------------------------------------------------------------------
 After any changes to .soy or .gss files you need to compile them into .js and .css files for your changes to work.
-The following assumes that the PROJECT_HOME environment variable is setup as above.
 
 .. note:: This repo was built before PyCharm was the default project IDE. It is now possible to create a File Watcher
 in PyCharm that will automatically run the transpilers as .soy and .gss files are changed.  This will require minor
 modifications to watch.py.
 
-In a terminal window execute the following commands::
+In new terminal window execute the following commands::
 
-    (PyVENV) $ python $PROJECT_HOME/html_app/watch.py
+    $ source ~/PyVENV/bin/activate
+    (PyVENV) $ cd starcellbio_html
+    (PyVENV) $ sudo pip install -r requirements.txt
 
-Deploy StarCellBio server to localhost
---------------------------------------
-To ``START`` the starcellbio_html server::
+    (PyVENV) $ export PROJECT_HOME="/Users/starcellbio/starcellbio_html" # watch.py needs repo at PROJECT_HOME
+    (PyVENV) $ cd $PROJECT_HOME/html_app # watch.py needs repo in this location
+    (PyVENV) $ python watch.py
 
+Start the StarCellBio development server on localhost
+-----------------------------------------------------
+
+To ``START`` the starcellbio_html development server in a new Terminal Window::
+
+    $ source ~/PyVENV/bin/activate
+
+.. note:: Django may not work due to an error starting mysql. The first two lines that follow get mysql up
+and running. The second two lines start the StarCellBio Django server. If you don't have mysql installed,
+you'll need to do that.
+
+
+    (PyVENV) $ cd $PROJECT_HOME
+
+    (PyVENV) $ sudo ./manage.py collectstatic
+    (PyVENV) $ sudo ./manage.py loaddata backend statuses courses assignments studentassignments
     (PyVENV) $ sudo ./manage.py runserver
 
-Notes from Shloka: mysql may not work due to some error.
-To ``FIX this error``::
-
-    (PyVENV) $ ls /usr/local/Cellar/mysql # shows foldername (a number) to use in the next command
-    (PyVENV) $ launchctl load -w /usr/local/Cellar/mysql/5.6.22/homebrew.mxcl.mysql.plist
-
-Use StarCellBio server on localhost
------------------------------------
-
-Deploy StarCellBio server to Heroku
------------------------------------
-
-Use StarCellBio server on Heroku
---------------------------------
+./manage.py loaddata backend statuses courses assignments studentassignments
 
 Modify/Deploy/Use StarCellBio html_app
 --------------------------------------
