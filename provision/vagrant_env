@@ -1,0 +1,3 @@
+source virtualenvwrapper.sh
+workon starcellbio
+cd /vagrant

@@ -4,3 +4,5 @@ chromedriver.log
 *~
 build
 scbU
+.vagrant/
+static/

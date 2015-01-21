@@ -140,6 +140,33 @@ you'll need to do that.
 
 ./manage.py loaddata backend statuses courses assignments studentassignments
 
+
+Development Using Vagrant
+=========================
+
+There is a convenient ``Vagrantfile`` and ansible playbook for
+building and setting up a development environment inside an Ubuntu
+virtual machine.  To do this, you will need to install `Virtual
+Box <https://www.virtualbox.org/wiki/Downloads>`_,
+`Vagrant <https://www.vagrantup.com/downloads.html>`_, and
+`Ansible <http://docs.ansible.com/intro_installation.html>`_. on your
+local machine.  After that is done, clone the repository using the
+earlier instructions, and while in the repository directory just run
+``vagrant up``.
+
+This will download everything needed and take you right up to the part
+you need to get to before running the server.  After everything is
+completed, just run:
+
+..code-block:: bash
+
+  vagrant ssh
+  ./manage.py runserver 0.0.0.0:8000
+
+If that all works, you should be able to open a browser to
+http://192.168.33.200:8000 and be greeted with the Star Cell Bio home
+screen.
+
 Modify/Deploy/Use StarCellBio html_app
 --------------------------------------
     :download:`StarCellBio Notes on Assignment Builder <Evernotes/Combined_Notes_on_the_Assignment_Builder.pdf>`
