@@ -366,6 +366,10 @@ scb.ui.static.ExperimentSetupView.row = function (sample, headings, template, ro
             var row = [];
             _.each(headings, function (part) {
                 if (drug_index == 0 && treatment_index == 0 && part.kind == 'cell_line') {
+                    console.log(sample.cell_line);
+                                        console.log(template.cell_lines);
+                    console.log(template.cell_lines[sample.cell_line]);
+
                     row.push({
                         kind: 'cell_line',
                         title: template.cell_lines[sample.cell_line].name,

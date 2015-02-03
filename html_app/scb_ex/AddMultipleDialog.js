@@ -7,6 +7,12 @@ if (typeof (scb_ex1.static) == 'undefined') {
 }
 
 
+if (typeof (scb_ex2) == 'undefined') {
+    scb_ex2 = {};
+}
+if (typeof (scb_ex2.static) == 'undefined') {
+    scb_ex2.static = {};
+}
 scb_ex1.static.scb_ex_inner_dialog_add = function (element, dialog, state) {
 
     $('input[type="checkbox"]:checked', dialog).each(function (e) {
@@ -24,15 +30,40 @@ scb_ex1.static.scb_ex_inner_dialog_add = function (element, dialog, state) {
         });
 
         var template = parsed.assignment.template;
-        var cell_treatments_array = [
-            {
-                cell_line: cell_line,
-                treatment_list: {list: [
-                    {drug_list: {list: [
-                        {drug_id: 'nc', concentration_id: '0'}
-                    ]}, temperature: '40', collection_id: state.source_state.collection_id, condition: state.source_state.condition}
-                ]}}
-        ];
+        
+//         var cell_treatments_array = [
+//             {
+//                 cell_line: cell_line,
+//                 treatment_list: {list: [
+//                     {drug_list: {list: [
+//                         {drug_id: 'nc', concentration_id: '0'}
+//                     ]}, temperature: '40', collection_id: state.source_state.collection_id, condition: state.source_state.condition}
+//                 ]}}
+//         ];
+//         
+
+
+//ANNA
+        console.log("Element");
+        console.log(element);
+        console.log(name);
+        console.log(cell_line);
+        console.log("Cell Treatments Array");
+
+        var treatment_id=$(element).attr('treatment_id');
+
+        var rows = template.ui.add_multiple_dialog[cell_line].rows;
+        console.log("Rows");
+        console.log(rows);
+        var row = _.find(rows, function (eh) {
+            console.log(eh.treatment_id);
+            console.log(treatment_id);
+            return eh.treatment_id == treatment_id;
+        });
+
+//        console.log(row.cell_treatments);
+        var cell_treatments_array = row.cell_treatments[name];
+//ANNA
 
         _.each(cell_treatments_array, function (eh) {
             parsed.experiment.cell_treatment_list.start(scb.utils.clone_and_clear(eh));
@@ -110,5 +141,31 @@ scb_ex1.setup = function (state) {
     });
 
     $('.scb_ex_dialog').draggable({handle: '.scb_ex_inner_dialog_title'})
+
+}
+
+scb_ex2.setup=function(state){
+    var workarea = state.workarea;
+    var assignment=state.assignment;
+    var experiment=state.experiment;
+    var  template = state.template;
+    var dialog=$("<div class='scb_ex_dialog'></div>");
+    dialog.html(scb_ex.dialog({
+       assignment: assignment,
+        experiment: experiment,
+        template: template
+    }));
+    dialog.appendTo($(workarea));
+    scb_ex1.register($(dialog), state);
+
+    var css = scb.utils.get(state, ['source_state', 'css']);
+    _.each(css, function (v, k) {
+        dialog.css(k, v);
+    });
+
+    $('.scb_ex_dialog').draggable({handle: '.scb_ex_inner_dialog_title'})
+
+
+
 
 }

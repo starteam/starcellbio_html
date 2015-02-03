@@ -332,6 +332,10 @@ FACS Main View
                 {param lane:$r/}
                 {/call}
             </td>
+            
+            
+            
+<!-- 
             <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:232px;'>
             	{if $r.lane and length(keys($kinds)) > 1}
             		{if $r.lane.kind == 'Dye'}
@@ -349,6 +353,36 @@ FACS Main View
             		{/if}
                 {/if}
             </td>
+ -->
+            
+            <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:232px;'>
+            	{if $r.lane and length(keys($kinds)) == 1}
+            	    <select class="scb_f_facs_select_conditions" role='select'
+			        facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
+			        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+	                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}
+	                >
+	                {if $r.kind == 'existing'}
+			                {foreach $k in keys($kinds)}
+			                    {foreach $c in keys($kinds[$k].conditions)}
+			                    <option value='{$c}' role='option' {if $r.lane.conditions == $c}selected="selected"{/if}>
+                                    {$kinds[$k].conditions[$c].name}
+                                </option>
+                                {/foreach}
+                                 {if length(keys($kinds[$k].conditions)) >= 1}
+                                  {if not $r.lane.conditions}
+	                                <option  role='option'selected="selected" disabled="disabled" value=''>Select Condition</option>
+	                                {/if}
+	                            {/if}
+			                {/foreach}
+	                {/if}
+                {/if}
+            </td>
+
+            
+            
+            
+            
             <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
                 {if $r.kind == 'existing' and length(keys($kinds)) > 1}
                 <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
@@ -608,7 +642,11 @@ FACS Main View
 
     <div class='scb_s_facs_chart_wrapper'>
         <div class='scb_s_facs_chart_xaxis'>
+                    {if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence
+
+<!-- 
             {if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence
+ -->
         </div>
         <div class='scb_s_facs_chart_yaxis'>
             Number of cells (thousands)

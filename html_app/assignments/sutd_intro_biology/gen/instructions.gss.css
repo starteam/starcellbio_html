@@ -1,0 +1,51 @@
+.scb_s_sutd_intro_biology_assignment_overview .scb_s_objective_table {
+  border: 1px solid #27956c;
+  border-radius: 5px;
+  border-spacing: 0;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 20px;
+}
+.scb_s_sutd_intro_biology_assignment_overview .scb_s_objective_table>tbody {
+  background-color: #edeef2;
+}
+.scb_s_sutd_intro_biology_assignment_overview .scb_s_objective_table>thead>tr>td:first-child {
+  border: 1px solid #e0e0e0;
+}
+.scb_s_sutd_intro_biology_assignment_overview .scb_s_objective_table>thead>tr>td {
+  border: 1px solid #e0e0e0;
+  padding-left: 8px;
+}
+.scb_s_sutd_intro_biology_assignment_overview .scb_s_objective_table>tbody>tr>td:first-child {
+  border: 1px solid #e0e0e0;
+}
+.scb_s_sutd_intro_biology_assignment_overview .scb_s_objective_table>tbody>tr>td {
+  border: 1px solid #e0e0e0;
+  padding-left: 8px;
+}
+.ps2_bold {
+  font-family: 'SourceSansPro-Semibold';
+}
+.scb_s_sutd_intro_biology_assignment_overview {
+  font-family: 'SourceSansPro-Regular';
+  font-size: 11pt;
+  text-align: left;
+}
+.scb_s_sutd_intro_biology_assignment_overview h2 {
+  color: #316f94;
+  font-family: sourcesanspro-semibold;
+}
+.scb_s_sutd_intro_biology_assignment_detail {
+  text-align: left;
+}
+.scb_s_2014_circle_1 {
+  position: relative;
+  top: 16px;
+}
+.scb_s_2014_circle_2 {
+  top: 21px;
+  position: relative;
+}
+.scb_s_sutd_intro_biology_assignment_overview ul li {
+  list-style-type: disc;
+}

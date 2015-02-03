@@ -65,7 +65,7 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 		},
 		set : function(v) {
 			var time = scb.Utils.parse_time(v, context.template.time_unit.kind);
-			data.schedule_value = time;å
+			data.schedule_value = time;
 			data.schedule = self.schedule;
 		}
 	});

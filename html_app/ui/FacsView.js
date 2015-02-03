@@ -99,9 +99,9 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
 				}
 		
 		
-			   if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 				  )
+			   if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1) 				  )
 			   {
-					var slide_conditions_val = ''
+					var slide_conditions_val = '';
 					if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 ){
 						slide_conditions_val = _.keys(parsed.assignment.template.facs_kinds[sample_kind].conditions)[0]
 					}
@@ -128,6 +128,51 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
 		 if (event) {
             scb.ui.static.MainFrame.refresh();
         }
+}
+
+scb.ui.static.FacsView.scb_f_facs_select_conditions = function (element, event) {
+    var parsed = scb.ui.static.FacsView.parse(element);
+	parsed = resetScrollValue(parsed);
+	        parsed.facs.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
+
+    if (parsed.redisplay) {
+        alert("INVALID ELEMENT!");
+    }
+    var lane_conditions = $(element).attr('value');
+    console.log("Lane Conditions");
+    console.log(lane_conditions);
+
+    if (lane_conditions == '') {
+        return;
+    }
+    var lane_id = $(element).attr('lane_id');
+       var cell_treatment_id = $(element).attr('cell_treatment_id');
+       for( var index = 0; index < parsed.facs.lanes_list.list.length; index++){
+			var lane = parsed.facs.lanes_list.list[index];
+			if(lane.conditions == lane_conditions && lane.kind == parsed.facs.lanes_list.get(lane_id).kind && lane.cell_treatment_id == cell_treatment_id){
+				$('html').css('overflow', 'hidden');
+				$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+				$.jqDialog.alert("You've already selected this slide option.",
+					function() {	$('html').css('overflow', 'visible');
+
+							$('.error_overlay').remove();
+							parsed.facs.lanes_list.remove(lane_id);
+					/* callback function for 'OK' button*/
+				scb.ui.static.MainFrame.refresh();});
+				$('.jqDialog_header').remove();
+				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+				$('#jqDialog_box').attr('role', 'alertdialog');
+				return;
+
+			}
+
+       }
+    	parsed.facs.lanes_list.get(lane_id).conditions = lane_conditions;
+
+    if (event) {
+        scb.ui.static.MainFrame.refresh();
+    }
 }
 
 scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
@@ -438,6 +483,9 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'change', '.scb_f_facs_select_lysate_type', function (e) {
         scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this, e);
+    });
+    scb.utils.off_on(workarea, 'change', '.scb_f_facs_select_conditions', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_select_conditions(this, e);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
@@ -792,7 +840,7 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 								width: "5px",
 								'border-left': 'none',
 								'border-right': 'none',
-								'vertical-align': 'center',
+								'vertical-align': 'center'
 							}
                    			 $('.scb_s_facs_chart_guider').css(styles_guider);
                 		}	

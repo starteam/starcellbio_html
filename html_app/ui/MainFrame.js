@@ -624,7 +624,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
         if (state.view == 'homepage') {
             self.sections.homepage.show({
-                workarea: workarea
+                workarea: x
             });
         }
         if (state.view == 'assignments') {
