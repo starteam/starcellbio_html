@@ -101,10 +101,10 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             function s_block(x) {
 				return Math.exp(-((2 - x) * Math.exp(2 - x) - .9) * ((2 - x) * Math.exp(2 - x) - .9) / .4);
             }
-//            function s_block_C(x){
-//                return Math.exp(-((1.3 - x) * Math.exp(1.3 - x) - .9) * ((1.3 - x) * Math.exp(1.3 - x) - .9)/ 0.4);
-//            }
             function s_block_C(x){
+                return Math.exp(-((0.8 - x) * Math.exp(1 - x) - .9) * ((0.8 - x) * Math.exp(1 - x) - .9)/ 0.4);
+            }
+            /*function s_block_C(x){
                 if(x<0.13) {
                     return 1 / Math.pow((x - 1.2), 20);
                 }else if(x<0.23){
@@ -118,8 +118,8 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 }else{
                     return 2/Math.pow((2*x-0.45),2);
                 }
-                return 0.5;
-            }
+
+            }*/
 //            function graph_A(x){
 //                return 0.0011*Math.pow(x,6) - 0.0326*Math.pow(x,5) + 0.3626*Math.pow(x,4) - 1.9649*Math.pow(x,3)
 //                    + 5.4036*Math.pow(x,2) - 6.9832*x + 3.2189;
@@ -146,7 +146,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			function peak2Ug1(x){
 				return normal_dist(x, 0.83, 0.165, 3, true)*4.1;
 			}
-			
+
 			function peak2Ug2(x){
 				  return normal_dist(x, 0.31, 0.14, -2, true)*6;
 			}
@@ -182,7 +182,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
 ////////////////////
 ////////////////////
-/////////////////////
+////////////////////
 			var number_of_curves = 1;
 			
 			function erfc(x) {
@@ -220,7 +220,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 				return (term1*term2)/term3 ;
 			}
 
-            function normalize(data, big_const, y_scale) {
+            function normalize(data, big_const, factor, y_scale) {
                 var factor = factor || .05;
                 var big_const=big_const || 2750;
                 var sum = 0;
@@ -228,6 +228,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     sum += s[1];
                 });
                 _.each(data, function (s) {
+                    // y= y/ sum(y_i)
                     s[1] = s[1] / sum * (1 - factor + 2 * factor * Math.random())
                 });
 
@@ -235,19 +236,17 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 _.each(data, function (s) {
                     sum += s[1];
                 });
-                console.log("Sum: "+sum);
+                console.log("Sum of normalized data: "+sum);
                 //
 
                 //want to change this
                 var tick1=template.model.facs.ticks[2];//last point on the scale
 
                // console.log("Ticks: "+tick1);
-
                 if (sum != 0) {
                     _.each(data, function (s, index) {
                         data[index][1] = data[index][1] / sum * (template.model.facs.max ? ((big_const*tick1)/template.model.facs.max)*number_of_curves: 2750  );
                         console.log("y= "+data[index][1]);
-
                     });
                 }
                 _.each(data, function (s, index) {
@@ -274,11 +273,11 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     //only for exercise 2
                     transform:  function(v) {
 //                        return (v>100?Math.log(v+0.0001)/Math.LN10:v);
-
+                        console.log("x_trans="+Math.log(v+0.0001)/Math.LN10);
                         return Math.log(v+0.0001)/Math.LN10; /*move away from zero*/
                     },
 
-                    tickFormatter: function (v, axis) {return "10^" + (Math.round( Math.log(v)/Math.LN10)).toString();}, //(Math.round( Math.log(v)/Math.LN10)).toString().sup();},
+//                    tickFormatter: function (v, axis) {return "10^" + (Math.round( Math.log(v)/Math.LN10)).toString();}, //(Math.round( Math.log(v)/Math.LN10)).toString().sup();},
 
                     font: {
                         family: 'sourcesanspro-regular',
@@ -295,6 +294,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                         family: 'sourcesanspro-regular',
                         size: 11
                     }
+
 
                 },
 //                '': { ticks: [0.001,0.01,0.1,1,10,100],
@@ -337,11 +337,17 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 var data = [];
                 for (var x = 0; x < 3; x += .01) {
                 	number_of_curves = 1;
-                    var y = s_block_C(x);
-                    data.push([x, y]);
+//                    var log_x=Math.log(x+0.0001)/Math.LN10(0);
+                    var log_x=x;
+                    console.log("x="+x);
+
+                    var y = s_block_C(log_x);
+                    data.push([log_x, y]);
 
                 }
-                normalize(data);
+
+                normalize(data);//, 7750);
+
 				roundData(data);
                 state.data = {
                     data: [

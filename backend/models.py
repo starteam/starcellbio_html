@@ -1,4 +1,3 @@
-from django.db import models
 from django.contrib import admin
 from django.forms import ModelForm
 
@@ -9,10 +8,9 @@ from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
 
-
 class Course(models.Model):
-	code = models.CharField(max_length=50, primary_key=True)
-	course_name = models.TextField()
+    code = models.CharField(max_length=50, primary_key=True)
+    course_name = models.TextField()
 	
 #data refers to JSON for information
 class Assignment(models.Model):
