@@ -1,8 +1,0 @@
-_fsevents.c
-fsevents.py
-setup.cfg
-pip-egg-info/MacFSEvents.egg-info/PKG-INFO
-pip-egg-info/MacFSEvents.egg-info/SOURCES.txt
-pip-egg-info/MacFSEvents.egg-info/dependency_links.txt
-pip-egg-info/MacFSEvents.egg-info/not-zip-safe
-pip-egg-info/MacFSEvents.egg-info/top_level.txt
