@@ -17,6 +17,7 @@ import os
 import StarCellBio.supplements as supplements
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
 
 random_mapping = {0: 'DEBAC', 1: 'DABEC', 2: 'CABED', 3: 'ACDEB', 4: 'EBADC', 5: 'BDECA', 6: 'EBCAD', 7: 'ADBCE',
                   8: 'CBAED', 9: 'DEACB', 10: 'ECDAB', 11: 'EDACB', 12: 'EBACD', 13: 'EADBC', 14: 'CBDEA', 15: 'CEDBA',
@@ -155,6 +156,10 @@ def initialize_courses(request, **kwargs):  #
 def get_student_courses(request, **kwargs):
     import ast
     import random
+    obj=Site.objects.get(id=1)
+    obj.name='starcellbio.mit.edu'
+    obj.domain='starcellbio.mit.edu'
+    obj.save()
 
     if (request.user.id):
         account_type = request.user.groups.all()[0].name

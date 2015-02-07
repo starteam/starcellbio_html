@@ -170,7 +170,14 @@ scb.ui.static.AssignmentsView.register = function(workarea) {
         if(this.id=="scb_ex1"){
             pdf_file="SCB Exercise 1_ver 7_questions.pdf";
 
-        }else if(this.id="decusability"){
+        }
+        else if(this.id=="scb_ex2"){
+        	pdf_file="SCB Exercise 2_ver 10 questions.pdf";
+        }
+        else if(this.id=="scb_ex3"){
+        	pdf_file="SCB Exercise 3_ver17_questions.pdf";
+        }
+        else if(this.id=="decusability"){
             pdf_file="decusability_assignment.pdf";
 
         }

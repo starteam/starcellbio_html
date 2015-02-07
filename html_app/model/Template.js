@@ -102,24 +102,24 @@ scb.InstructionsList = function scb_InstructionsList(data, context, parent) {
     self.length = data.length;
 }
 
-scb.Template = function scb_Template(data, context, parent) {
-    var self = this;
-    self.parent = parent;
-    scb.Utils.initialize_accessor_field(self, data, 'instructions', [], scb.InstructionsList, context);
-    scb.Utils.initialize_accessor_field(self, data, 'ui', {}, scb.template.UI, context);
-    _.each(data, function (value, key) {
-//    	scb.Utils.initialize_accessor_field(self,data,key,null,null,context);
-        if (!_.contains(_.keys(self), key)) {
-            scb.utils.accessor2_custom(self, key, function () {
-                try {
-                    throw new Error("scb.Template Read field " + key);
-                } catch (e) {
-                    console.info(e.message, e.stack);
-                }
-                return data[key];
-            }, function (v) {
-                data[key] = v;
-            });
-        }
-    });
-}
+// scb.Template = function scb_Template(data, context, parent) {
+//     var self = this;
+//     self.parent = parent;
+//     scb.Utils.initialize_accessor_field(self, data, 'instructions', [], scb.InstructionsList, context);
+//     scb.Utils.initialize_accessor_field(self, data, 'ui', {}, scb.template.UI, context);
+//     _.each(data, function (value, key) {
+// //    	scb.Utils.initialize_accessor_field(self,data,key,null,null,context);
+//         if (!_.contains(_.keys(self), key)) {
+//             scb.utils.accessor2_custom(self, key, function () {
+//                 try {
+//                     throw new Error("scb.Template Read field " + key);
+//                 } catch (e) {
+//                     console.info(e.message, e.stack);
+//                 }
+//                 return data[key];
+//             }, function (v) {
+//                 data[key] = v;
+//             });
+//         }
+//     });
+// }

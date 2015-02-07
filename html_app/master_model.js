@@ -12315,6 +12315,11 @@ var __scb_sample_1 = {
         },
         add_new_row_instructions: 'add new row instructions',
         experiment_setup: scb_ex1_text.experiment_setup({}),
+		collections:{
+       			'6 m': {
+						name: '6 months'
+       			}
+       		},
 
         concentrations: {
             '0': {
@@ -12787,64 +12792,77 @@ var __scb_sample_1 = {
             microscopy: {
                 'valid': [],
                 'slide': {
-                    'parser_simple': [
+                    'complex_parser': [
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'bo'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-pa'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-pb'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-pc'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-pd'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-ma',
                             use_collection_id: 'gfp-pc'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-mb',
                             use_collection_id: 'gfp-pb'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-nuc',
                             use_collection_id: 'gfp-pb'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-cyto',
                             use_collection_id: 'gfp-pd'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-pm',
                             use_collection_id: 'gfp-pc'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-er',
                             use_collection_id: 'gfp-pa'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp-nm',
                             use_collection_id: 'gfp-nm'
                         },
                         {
-                            match: ['cell_line'],
+                            match: ['cell_line', 'collection_id'],
+                            collection_id: '6 m',
                             cell_line: 'gfp',
                             use_collection_id: 'gfp'
                         },
@@ -13322,413 +13340,8 @@ var __scb_sample_2 = {
             }
         },
 
-        slide_parser: {
-            'gfp-pa': {
-                'IF': {
-                    'rgb': [
-                        [
-                            {
-                                hash: 'gfp-pa_1',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pa_2',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pa_3',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pa_4',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pa_5',
-                                mag: '20x'
-                            }
-                        ]
-                    ]
-                }
-            },
-            'gfp-pb': {
-                'IF': {
-                    'rgb': [
-                        [
-                            {
-                                hash: 'gfp-pb_1',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_2',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_3',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_4',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_5',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_6',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_7',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_8',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_9',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_10',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_11',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pb_12',
-                                mag: '20x'
-                            }
-                        ]
-                    ]
-                }
-            },
-            'gfp-pc': {
-                'IF': {
-                    'rgb': [
-                        [
-                            {
-                                hash: 'gfp-pc_1',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pc_2',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pc_3',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pc_4',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pc_5',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pc_6',
-                                mag: '20x'
-                            }
-                        ]
-                    ]
-                }
-            },
-            'gfp-pd': {
-                'IF': {
-                    'rgb': [
-                        [
-                            {
-                                hash: 'gfp-pd_1',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pd_2',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pd_3',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pd_4',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pd_5',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pd_6',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pd_7',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pd_8',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pd_9',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-pd_10',
-                                mag: '20x'
-                            }
-                        ],
-                    ] } },
-            'gfp-nm': {
-                'IF': {
-                    'rgb': [
-                        [
-                            {
-                                hash: 'gfp-nm_1',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-nm_2',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-nm_3',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-nm_4',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp-nm_5',
-                                mag: '20x'
-                            }
-                        ]
-                    ] } },
-            'bo': {
-                'IF': {
-                    'rgb': [
-                        [
-                            {
-                                hash: 'bo',
-                                mag: '20x'
-                            }
-                        ]
-
-                    ] } },
-            'gfp': {
-                'IF': {
-                    'rgb': [
-                        [
-                            {
-                                hash: 'gfp_1',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_2',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_3',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_4',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_5',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_6',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_7',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_8',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_9',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_10',
-                                mag: '20x'
-                            }
-                        ],
-                        [
-                            {
-                                hash: 'gfp_11',
-                                mag: '20x'
-                            }
-                        ]
-
-                    ] } }
-
-        },
+        slide_parser: {},
         model: { // models
-            microscopy: {
-                'valid': [],
-                'slide': {
-                    'parser_simple': [
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'bo'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-pa'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-pb'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-pc'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-pd'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-ma',
-                            use_collection_id: 'gfp-pc'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-mb',
-                            use_collection_id: 'gfp-pb'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-nuc',
-                            use_collection_id: 'gfp-pb'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-cyto',
-                            use_collection_id: 'gfp-pd'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-pm',
-                            use_collection_id: 'gfp-pc'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-er',
-                            use_collection_id: 'gfp-pa'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp-nm',
-                            use_collection_id: 'gfp-nm'
-                        },
-                        {
-                            match: ['cell_line'],
-                            cell_line: 'gfp',
-                            use_collection_id: 'gfp'
-                        },
-                    ]
-                }
-            },
             western_blot: {
                 'cyto': {
                     'parser_fixed': [
@@ -14169,61 +13782,61 @@ var __scb_sample_2 = {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'nt',
                             drug_id: 'gmBuf',
-                            shape: 'S-block-C'
+                            shape: 's-block-c'
                         },
                         {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'nt',
                             drug_id: 'gmProK',
-                            shape: 'S-block'
+                            shape: 's-block'
                         },
                         {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'proX-Null',
                             drug_id: 'gmBuf',
-                            shape: 'S-block-C'
+                            shape: 's-block-c'
                         },
                         {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'proX-Null',
                             drug_id: 'gmProK',
-                            shape: 'S-block-C'
+                            shape: 's-block-c'
                         },
                         {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'proY-Null',
                             drug_id: 'gmBuf',
-                            shape: 'S-block-C'
+                            shape: 's-block-c'
                         },
                         {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'proY-Null',
                             drug_id: 'gmProK',
-                            shape: 'S-block-C'
+                            shape: 's-block-c'
                         },
                         {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'HproX-FLAG',
                             drug_id: 'gmBuf',
-                            shape: 'S-block-C'
+                            shape: 's-block-c'
                         },
                         {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'HproX-FLAG',
                             drug_id: 'gmProK',
-                            shape: 'S-block-C'
+                            shape: 's-block-c'
                         },
                         {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'HproY-FLAG',
                             drug_id: 'gmBuf',
-                            shape: 'graph-A'
+                            shape: 'graph-a'
                         },
                         {
                             match: ['cell_line', 'drug_id'],
                             cell_line: 'HproY-FLAG',
                             drug_id: 'gmProK',
-                            shape: 'S-block-C'
+                            shape: 's-block-c'
                         }
 
                     ]
@@ -14233,6 +13846,1554 @@ var __scb_sample_2 = {
         }
     }
 };
+
+
+
+var __scb_sample_3 = {
+        id: 'scb_ex3',
+        name: 'Exercise 3',
+        course: 'SCB_SampleExercises',
+    	course_name: 'Sample Exercises',
+        description: 'StarCellBio Exercise 3',
+        notebook: {},
+    experiments: {},
+        template: {
+            instructions: [
+            	['Goal & Introduction','Here come instructions when we build them']
+            	],
+            ui: {
+                experimental_design: {
+                    techniques: [ 'wb' , 'facs', 'micro' ],
+                    gel_types: ['.10', '.12', '.15']
+                },
+                experiment_setup: {
+                    table: [ //
+                        {kind: "cell_plate", title: " ", editable: false},
+                        {kind: 'cell_line', title: 'Strain', editable: false}, //
+                        {kind: 'treatments',
+                            children: [//
+                                {kind: 'drug', title: 'Treatment', editable: false},//
+                                {kind: 'duration', title: 'Time', editable: false},
+                            ]
+                        },//
+                        {kind: 'actions', title: 'Actions'}//
+                    ],//
+                    actions: [
+
+                    ]
+                },
+                western_blot: {format: "%CELL_LINE%, %TREATMENT%",
+                    keys: {
+                        '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
+                        '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
+                    }
+                },
+                microscopy: {
+					disable_blur: false,
+					disable_brightness: false
+				},
+                add_multiple_dialog: {	
+                	order: ['WT-EGFR', 'EGFR Null', 'EGFR-M1', 'EGFR-M2', 'NoUB', 'ConstActive', 'His-EGFR-FLAG', 'His-EGFR-M1-FLAG', 'His-EGFR-M2-FLAG'],
+					headings: [
+							'','Strain', 'Treatment', 'Treatment Duration'
+							],
+                    'WT-EGFR': {
+                        rows: [
+                        {   'cell_treatments': {   'gm30': [   {   'cell_line': 'WT-EGFR',
+                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
+                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                  'drug_id': 'growth_media'}]},
+                                                                                 'duration': '30 '
+                                                                                             'sec',
+                                                                                 'duration_value': 30,
+                                                                                 'microscope': [   'g'],
+                                                                                 'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gm30',
+                     'treatment_id': 'growth_media'},
+                 {'kind': 'text', 'text': 'WT-EGFR'},
+                 {'kind': 'text', 'text': 'Growth media only'},
+                 {'kind': 'text', 'text': '30 sec'}],
+    'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'WT-EGFR',
+																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																										 'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		  'drug_id': 'growth_media'}]},
+																										 'duration': '1 '
+																													 'min',
+																										 'duration_value': 60,
+																										 'microscope': [   'g'],
+																										 'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm60',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'WT-EGFR'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'WT-EGFR',
+																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		 'drug_id': 'growth_media'}]},
+																										'duration': '6 '
+																													'hrs',
+																										'duration_value': 21600,
+																										'microscope': [   'g'],
+																										'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm6',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'WT-EGFR'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'WT-EGFR',
+																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '30 '
+																														'sec',
+																											'duration_value': 30,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF30',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'WT-EGFR'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '30 sec'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'WT-EGFR',
+																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '1 '
+																														'min',
+																											'duration_value': 60,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF60',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'WT-EGFR'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'WT-EGFR',
+																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			'drug_id': 'growth_mediaEGF'}]},
+																										   'duration': '6 '
+																													   'hrs',
+																										   'duration_value': 21600,
+																										   'microscope': [   'g'],
+																										   'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF6',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'WT-EGFR'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'WT-EGFR',
+																	 'treatment_list': {   'list': [   {   'collection_id': '30 m',
+																										   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			'drug_id': 'growth_mediaBuff'}]},
+																										   'duration': '30 '
+																													   'min',
+																										   'duration_value': 1800,
+																										   'microscope': [   'g'],
+																										   'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmBuff',
+											 'treatment_id': 'growth_mediaBuff'},
+										 {'kind': 'text', 'text': 'WT-EGFR'},
+										 {'kind': 'text', 'text': 'Growth media + buffer'},
+										 {'kind': 'text', 'text': '30 min'}],
+							'treatment_id': 'growth_mediaBuff'},
+						{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'WT-EGFR',
+																	 'treatment_list': {   'list': [   {   'collection_id': '30 m',
+																										   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			'drug_id': 'growth_mediaProK'}]},
+																										   'duration': '30 '
+																													   'min',
+																										   'duration_value': 1800,
+																										   'microscope': [   'g'],
+																										   'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmProK',
+											 'treatment_id': 'growth_mediaProK'},
+										 {'kind': 'text', 'text': 'WT-EGFR'},
+										 {'kind': 'text', 'text': 'Growth media + ProK'},
+										 {'kind': 'text', 'text': '30 min'}],
+							'treatment_id': 'growth_mediaProK'}]
+                    },
+                    'EGFR Null':{
+                    	rows: [
+                    	{   'cell_treatments': {   'gm30': [   {   'cell_line': 'EGFR Null',
+                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
+                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                  'drug_id': 'growth_media'}]},
+                                                                                 'duration': '30 '
+                                                                                             'sec',
+                                                                                 'duration_value': 30,
+                                                                                 'microscope': [   'g'],
+                                                                                 'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gm30',
+                     'treatment_id': 'growth_media'},
+                 {'kind': 'text', 'text': 'EGFR Null'},
+                 {'kind': 'text', 'text': 'Growth media only'},
+                 {'kind': 'text', 'text': '30 sec'}],
+    'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'EGFR Null',
+																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																										 'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		  'drug_id': 'growth_media'}]},
+																										 'duration': '1 '
+																													 'min',
+																										 'duration_value': 60,
+																										 'microscope': [   'g'],
+																										 'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm60',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'EGFR Null'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'EGFR Null',
+																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		 'drug_id': 'growth_media'}]},
+																										'duration': '6 '
+																													'hrs',
+																										'duration_value': 21600,
+																										'microscope': [   'g'],
+																										'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm6',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'EGFR Null'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'EGFR Null',
+																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '30 '
+																														'sec',
+																											'duration_value': 30,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF30',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'EGFR Null'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '30 sec'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'EGFR Null',
+																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '1 '
+																														'min',
+																											'duration_value': 60,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF60',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'EGFR Null'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'EGFR Null',
+																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			'drug_id': 'growth_mediaEGF'}]},
+																										   'duration': '6 '
+																													   'hrs',
+																										   'duration_value': 21600,
+																										   'microscope': [   'g'],
+																										   'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF6',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'EGFR Null'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'EGFR Null',
+																	 'treatment_list': {   'list': [   {   'collection_id': '30 m',
+																										   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			'drug_id': 'growth_mediaBuff'}]},
+																										   'duration': '30 '
+																													   'min',
+																										   'duration_value': 1800,
+																										   'microscope': [   'g'],
+																										   'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmBuff',
+											 'treatment_id': 'growth_mediaBuff'},
+										 {'kind': 'text', 'text': 'EGFR Null'},
+										 {'kind': 'text', 'text': 'Growth media + buffer'},
+										 {'kind': 'text', 'text': '30 min'}],
+							'treatment_id': 'growth_mediaBuff'},
+						{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'EGFR Null',
+																	 'treatment_list': {   'list': [   {   'collection_id': '30 m',
+																										   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			'drug_id': 'growth_mediaProK'}]},
+																										   'duration': '30 '
+																													   'min',
+																										   'duration_value': 1800,
+																										   'microscope': [   'g'],
+																										   'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmProK',
+											 'treatment_id': 'growth_mediaProK'},
+										 {'kind': 'text', 'text': 'EGFR Null'},
+										 {'kind': 'text', 'text': 'Growth media + ProK'},
+										 {'kind': 'text', 'text': '30 min'}],
+							'treatment_id': 'growth_mediaProK'}
+
+                    	]
+                    },
+                    'EGFR-M1': {
+                    	rows: [
+                    	{   'cell_treatments': {   'gm30': [   {   'cell_line': 'EGFR-M1',
+                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
+                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                  'drug_id': 'growth_media'}]},
+                                                                                 'duration': '30 '
+                                                                                             'sec',
+                                                                                 'duration_value': 30,
+                                                                                 'microscope': [   'g'],
+                                                                                 'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gm30',
+                     'treatment_id': 'growth_media'},
+                 {'kind': 'text', 'text': 'EGFR-M1'},
+                 {'kind': 'text', 'text': 'Growth media only'},
+                 {'kind': 'text', 'text': '30 sec'}],
+    'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'EGFR-M1',
+																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																										 'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		  'drug_id': 'growth_media'}]},
+																										 'duration': '1 '
+																													 'min',
+																										 'duration_value': 60,
+																										 'microscope': [   'g'],
+																										 'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm60',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'EGFR-M1'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'EGFR-M1',
+																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		 'drug_id': 'growth_media'}]},
+																										'duration': '6 '
+																													'hrs',
+																										'duration_value': 21600,
+																										'microscope': [   'g'],
+																										'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm6',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'EGFR-M1'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'EGFR-M1',
+																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '30 '
+																														'sec',
+																											'duration_value': 30,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF30',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'EGFR-M1'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '30 sec'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'EGFR-M1',
+																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '1 '
+																														'min',
+																											'duration_value': 60,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF60',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'EGFR-M1'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'EGFR-M1',
+																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			'drug_id': 'growth_mediaEGF'}]},
+																										   'duration': '6 '
+																													   'hrs',
+																										   'duration_value': 21600,
+																										   'microscope': [   'g'],
+																										   'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF6',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'EGFR-M1'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_mediaEGF'}
+                    	]
+                    },
+                    'EGFR-M2': {
+                    	rows: [
+                    		{   'cell_treatments': {   'gm30': [   {   'cell_line': 'EGFR-M2',
+                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
+                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                  'drug_id': 'growth_media'}]},
+                                                                                 'duration': '30 '
+                                                                                             'sec',
+                                                                                 'duration_value': 30,
+                                                                                 'microscope': [   'g'],
+                                                                                 'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gm30',
+                     'treatment_id': 'growth_media'},
+                 {'kind': 'text', 'text': 'EGFR-M2'},
+                 {'kind': 'text', 'text': 'Growth media only'},
+                 {'kind': 'text', 'text': '30 sec'}],
+    'treatment_id': 'growth_media'},
+							{   'cell_treatments': {   'gm60': [   {   'cell_line': 'EGFR-M2',
+																	   'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																											 'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			  'drug_id': 'growth_media'}]},
+																											 'duration': '1 '
+																														 'min',
+																											 'duration_value': 60,
+																											 'microscope': [   'g'],
+																											 'temperature': '25'}]}}]},
+								'cells': [   {   'kind': 'checkbox',
+												 'name': 'gm60',
+												 'treatment_id': 'growth_media'},
+											 {'kind': 'text', 'text': 'EGFR-M2'},
+											 {'kind': 'text', 'text': 'Growth media only'},
+											 {'kind': 'text', 'text': '1 min'}],
+								'treatment_id': 'growth_media'},
+							{   'cell_treatments': {   'gm6': [   {   'cell_line': 'EGFR-M2',
+																	  'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_media'}]},
+																											'duration': '6 '
+																														'hrs',
+																											'duration_value': 21600,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+								'cells': [   {   'kind': 'checkbox',
+												 'name': 'gm6',
+												 'treatment_id': 'growth_media'},
+											 {'kind': 'text', 'text': 'EGFR-M2'},
+											 {'kind': 'text', 'text': 'Growth media only'},
+											 {'kind': 'text', 'text': '6 hrs'}],
+								'treatment_id': 'growth_media'},
+							{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'EGFR-M2',
+																		  'treatment_list': {   'list': [   {   'collection_id': '30 s',
+																												'drug_list': {   'list': [   {   'concentration_id': '100',
+																																				 'drug_id': 'growth_mediaEGF'}]},
+																												'duration': '30 '
+																															'sec',
+																												'duration_value': 30,
+																												'microscope': [   'g'],
+																												'temperature': '25'}]}}]},
+								'cells': [   {   'kind': 'checkbox',
+												 'name': 'gmEGF30',
+												 'treatment_id': 'growth_mediaEGF'},
+											 {'kind': 'text', 'text': 'EGFR-M2'},
+											 {'kind': 'text', 'text': 'Growth media + EGF'},
+											 {'kind': 'text', 'text': '30 sec'}],
+								'treatment_id': 'growth_mediaEGF'},
+							{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'EGFR-M2',
+																		  'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																												'drug_list': {   'list': [   {   'concentration_id': '100',
+																																				 'drug_id': 'growth_mediaEGF'}]},
+																												'duration': '1 '
+																															'min',
+																												'duration_value': 60,
+																												'microscope': [   'g'],
+																												'temperature': '25'}]}}]},
+								'cells': [   {   'kind': 'checkbox',
+												 'name': 'gmEGF60',
+												 'treatment_id': 'growth_mediaEGF'},
+											 {'kind': 'text', 'text': 'EGFR-M2'},
+											 {'kind': 'text', 'text': 'Growth media + EGF'},
+											 {'kind': 'text', 'text': '1 min'}],
+								'treatment_id': 'growth_mediaEGF'},
+							{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'EGFR-M2',
+																		 'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																											   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																				'drug_id': 'growth_mediaEGF'}]},
+																											   'duration': '6 '
+																														   'hrs',
+																											   'duration_value': 21600,
+																											   'microscope': [   'g'],
+																											   'temperature': '25'}]}}]},
+								'cells': [   {   'kind': 'checkbox',
+												 'name': 'gmEGF6',
+												 'treatment_id': 'growth_mediaEGF'},
+											 {'kind': 'text', 'text': 'EGFR-M2'},
+											 {'kind': 'text', 'text': 'Growth media + EGF'},
+											 {'kind': 'text', 'text': '6 hrs'}],
+								'treatment_id': 'growth_mediaEGF'}
+                    	]
+                    }
+                    'NoUB': {
+                    	rows: [
+                    	{   'cell_treatments': {   'gm30': [   {   'cell_line': 'NoUB',
+                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
+                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                  'drug_id': 'growth_media'}]},
+                                                                                 'duration': '30 '
+                                                                                             'sec',
+                                                                                 'duration_value': 30,
+                                                                                 'microscope': [   'g'],
+                                                                                 'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gm30',
+                     'treatment_id': 'growth_media'},
+                 {'kind': 'text', 'text': 'NoUB'},
+                 {'kind': 'text', 'text': 'Growth media only'},
+                 {'kind': 'text', 'text': '30 sec'}],
+    'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'NoUB',
+																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																										 'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		  'drug_id': 'growth_media'}]},
+																										 'duration': '1 '
+																													 'min',
+																										 'duration_value': 60,
+																										 'microscope': [   'g'],
+																										 'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm60',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'NoUB'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'NoUB',
+																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		 'drug_id': 'growth_media'}]},
+																										'duration': '6 '
+																													'hrs',
+																										'duration_value': 21600,
+																										'microscope': [   'g'],
+																										'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm6',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'NoUB'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'NoUB',
+																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '30 '
+																														'sec',
+																											'duration_value': 30,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF30',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'NoUB'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '30 sec'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'NoUB',
+																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '1 '
+																														'min',
+																											'duration_value': 60,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF60',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'NoUB'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'NoUB',
+																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			'drug_id': 'growth_mediaEGF'}]},
+																										   'duration': '6 '
+																													   'hrs',
+																										   'duration_value': 21600,
+																										   'microscope': [   'g'],
+																										   'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF6',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'NoUB'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_mediaEGF'}
+
+                    	]
+                    },
+                    'ConstActive': {
+                    	rows: [
+                    	{   'cell_treatments': {   'gm30': [   {   'cell_line': 'ConstActive',
+                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
+                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                  'drug_id': 'growth_media'}]},
+                                                                                 'duration': '30 '
+                                                                                             'sec',
+                                                                                 'duration_value': 30,
+                                                                                 'microscope': [   'g'],
+                                                                                 'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gm30',
+                     'treatment_id': 'growth_media'},
+                 {'kind': 'text', 'text': 'ConstActive'},
+                 {'kind': 'text', 'text': 'Growth media only'},
+                 {'kind': 'text', 'text': '30 sec'}],
+    'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'ConstActive',
+																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																										 'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		  'drug_id': 'growth_media'}]},
+																										 'duration': '1 '
+																													 'min',
+																										 'duration_value': 60,
+																										 'microscope': [   'g'],
+																										 'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm60',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'ConstActive'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'ConstActive',
+																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										'drug_list': {   'list': [   {   'concentration_id': '100',
+																																		 'drug_id': 'growth_media'}]},
+																										'duration': '6 '
+																													'hrs',
+																										'duration_value': 21600,
+																										'microscope': [   'g'],
+																										'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gm6',
+											 'treatment_id': 'growth_media'},
+										 {'kind': 'text', 'text': 'ConstActive'},
+										 {'kind': 'text', 'text': 'Growth media only'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_media'},
+						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'ConstActive',
+																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '30 '
+																														'sec',
+																											'duration_value': 30,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF30',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'ConstActive'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '30 sec'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'ConstActive',
+																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
+																											'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			 'drug_id': 'growth_mediaEGF'}]},
+																											'duration': '1 '
+																														'min',
+																											'duration_value': 60,
+																											'microscope': [   'g'],
+																											'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF60',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'ConstActive'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '1 min'}],
+							'treatment_id': 'growth_mediaEGF'},
+						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'ConstActive',
+																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
+																										   'drug_list': {   'list': [   {   'concentration_id': '100',
+																																			'drug_id': 'growth_mediaEGF'}]},
+																										   'duration': '6 '
+																													   'hrs',
+																										   'duration_value': 21600,
+																										   'microscope': [   'g'],
+																										   'temperature': '25'}]}}]},
+							'cells': [   {   'kind': 'checkbox',
+											 'name': 'gmEGF6',
+											 'treatment_id': 'growth_mediaEGF'},
+										 {'kind': 'text', 'text': 'ConstActive'},
+										 {'kind': 'text', 'text': 'Growth media + EGF'},
+										 {'kind': 'text', 'text': '6 hrs'}],
+							'treatment_id': 'growth_mediaEGF'}
+                    	]
+                    },
+                    'His-EGFR-FLAG': {
+                    	rows: [
+                    	{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'His-EGFR-FLAG',
+                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
+                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                    'drug_id': 'growth_mediaBuff'}]},
+                                                                                   'duration': '30 '
+                                                                                               'min',
+                                                                                   'duration_value': 1800,
+                                                                                   'microscope': [   'g'],
+                                                                                   'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gmBuff',
+                     'treatment_id': 'growth_mediaBuff'},
+                 {'kind': 'text', 'text': 'His-EGFR-FLAG'},
+                 {'kind': 'text', 'text': 'Growth media + buffer'},
+                 {'kind': 'text', 'text': '30 min'}],
+    'treatment_id': 'growth_mediaBuff'},
+						{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'His-EGFR-FLAG',
+                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
+                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                    'drug_id': 'growth_mediaProK'}]},
+                                                                                   'duration': '30 '
+                                                                                               'min',
+                                                                                   'duration_value': 1800,
+                                                                                   'microscope': [   'g'],
+                                                                                   'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gmProK',
+                     'treatment_id': 'growth_mediaProK'},
+                 {'kind': 'text', 'text': 'His-EGFR-FLAG'},
+                 {'kind': 'text', 'text': 'Growth media + ProK'},
+                 {'kind': 'text', 'text': '30 min'}],
+    'treatment_id': 'growth_mediaProK'}
+
+                    	]
+                    },
+                    'His-EGFR-M1-FLAG': {
+                    	rows: [
+                    	{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'His-EGFR-M1-FLAG',
+                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
+                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                    'drug_id': 'growth_mediaBuff'}]},
+                                                                                   'duration': '30 '
+                                                                                               'min',
+                                                                                   'duration_value': 1800,
+                                                                                   'microscope': [   'g'],
+                                                                                   'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gmBuff',
+                     'treatment_id': 'growth_mediaBuff'},
+                 {'kind': 'text', 'text': 'His-EGFR-M1-FLAG'},
+                 {'kind': 'text', 'text': 'Growth media + buffer'},
+                 {'kind': 'text', 'text': '30 min'}],
+    'treatment_id': 'growth_mediaBuff'},
+						{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'His-EGFR-M1-FLAG',
+                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
+                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                    'drug_id': 'growth_mediaProK'}]},
+                                                                                   'duration': '30 '
+                                                                                               'min',
+                                                                                   'duration_value': 1800,
+                                                                                   'microscope': [   'g'],
+                                                                                   'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gmProK',
+                     'treatment_id': 'growth_mediaProK'},
+                 {'kind': 'text', 'text': 'His-EGFR-M1-FLAG'},
+                 {'kind': 'text', 'text': 'Growth media + ProK'},
+                 {'kind': 'text', 'text': '30 min'}],
+    'treatment_id': 'growth_mediaProK'}
+
+                    	]
+                    },
+                    'His-EGFR-M2-FLAG': {
+                    	rows: [
+                    		{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'His-EGFR-M2-FLAG',
+                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
+                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                    'drug_id': 'growth_mediaBuff'}]},
+                                                                                   'duration': '30 '
+                                                                                               'min',
+                                                                                   'duration_value': 1800,
+                                                                                   'microscope': [   'g'],
+                                                                                   'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gmBuff',
+                     'treatment_id': 'growth_mediaBuff'},
+                 {'kind': 'text', 'text': 'His-EGFR-M2-FLAG'},
+                 {'kind': 'text', 'text': 'Growth media + buffer'},
+                 {'kind': 'text', 'text': '30 min'}],
+    'treatment_id': 'growth_mediaBuff'},
+							{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'His-EGFR-M2-FLAG',
+                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
+                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
+                                                                                                                    'drug_id': 'growth_mediaProK'}]},
+                                                                                   'duration': '30 '
+                                                                                               'min',
+                                                                                   'duration_value': 1800,
+                                                                                   'microscope': [   'g'],
+                                                                                   'temperature': '25'}]}}]},
+    'cells': [   {   'kind': 'checkbox',
+                     'name': 'gmProK',
+                     'treatment_id': 'growth_mediaProK'},
+                 {'kind': 'text', 'text': 'His-EGFR-M2-FLAG'},
+                 {'kind': 'text', 'text': 'Growth media + ProK'},
+                 {'kind': 'text', 'text': '30 min'}],
+    'treatment_id': 'growth_mediaProK'}
+
+                    	]
+                    }
+                }
+            },
+            add_new_row_instructions: 'add new row instructions',
+            collections:{
+				'30 s': {
+					name: '30 seconds'
+				},
+				'60 s': {
+					name: '1 minute'
+				},
+				'6 h': {
+					name: '6 hours'
+				},
+				'30 m': {
+					name '30 minutes'
+				}
+			},
+            concentrations: {
+                100: {
+                    name: '',
+                    value: 100
+                }
+            },
+            drugs: {
+                'growth_media': {
+                    name: 'Growth media only',
+                    concentrations: [100]
+                },
+                'growth_mediaEGF': {
+                    name: 'Growth media + EGF',
+                    concentrations: [100]
+                },
+                'growth_mediaBuff': {
+                    name: 'Growth media + buffer',
+                    concentrations: [100]
+                },
+                'growth_mediaProK': {
+                    name: 'Growth media + ProK',
+                    concentrations: [100]
+                }
+
+            },
+            experiment_temperatures: {
+                '25': {
+                    name: "30" + degreeEntity + "C"
+                }
+            },
+            cell_lines: {
+                'WT-EGFR': {
+                    name: 'WT-EGFR'
+                }, 
+                'EGFR Null': {
+                	name: 'EGFR-Null'
+                },
+                'EGFR-M1': {
+                	name: 'EGFR-M1'
+                },
+                'EGFR-M2': {
+                	name: 'EGFR-M2'
+                },
+                'NoUB':{
+                	name: 'NoUB'
+                },
+                'ConstActive':{
+                	name: 'ConstActive'
+                },
+                'His-EGFR-FLAG':{
+                	name: 'His-EGFR-FLAG'
+                },
+                'His-EGFR-M1-FLAG':{
+                	name: 'His-EGFR-M1-FLAG'
+                },
+                'His-EGFR-M2-FLAG':{
+                	name: 'His-EGFR-M2-FLAG'
+                }
+                
+                
+
+            },
+            time_unit: {
+                kind: 'minutes'
+            },
+            primary_anti_body: {
+            	order: ['chk1', 'rad21', 'cyclin', 'cyclinE', 'mad2', 'pgk1'],
+            	'egfr': {
+                    name: 'Mouse anti-EGFR',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 54, intensity: 0}
+                    ],
+                    gel_name: 'egfr'
+                },
+                'pegfr': {
+                    name: 'Mouse anti-pEGFR',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 58, intensity: 0},
+                    ],
+                    gel_name: 'pegfr'
+                },
+                'pmek': {
+                    name: 'Mouse anti-pMEK',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 48, intensity: 0},
+                    ],
+                    gel_name: 'pmek'
+                },
+                'praf': {
+                    name: 'Mouse anti-pRAF',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 25, intensity: 0},
+                    ],
+                    gel_name: 'praf'
+                },
+                'pgk1': {
+                    name: 'Mouse anti-PGK1',
+                    secondary: ['m'],
+                    marks: [
+                        {weight: 45, intensity: 0},
+                    ],
+                    gel_name: 'pgk1'
+                },
+                '6xhis': {
+                    name: 'Rabbit anti-6xHis',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 68, intensity: 0}
+                    ],
+                    gel_name: '6xhis'
+                },
+                'flag': {
+                    name: 'Rabbit anti-FLAG',
+                    secondary: ['r'],
+                    marks: [
+                        {weight: 68, intensity: 0}
+                    ],
+                    gel_name: 'flag'
+                }
+            },//
+            secondary_anti_body: {
+                'm': {
+                    name: 'rabbit anti-mouse'
+                },
+                'r': {
+                    name: 'goat anti-rabbit'
+                }
+            },//
+            lysate_kinds: {
+                'whole': {
+                    name: 'Whole Cell'
+                }
+            },
+            facs_kinds: {
+                'Anti':{
+            		name:'Antibody-labeling',
+            		conditions: {
+            			'EGFR': {name: 'EGFR A488'}
+            		}
+            	}
+            },
+            micro_kinds: {
+            	'IF':{
+            		name:'Antibody-labeling IF',
+            		conditions: {
+            			'g': {name: 'H2B (green)',
+            			short_name: 'G:H2B'}
+            		}
+            	}
+        	},
+        	slides: {
+            'gfp-pa_1': 'images/microscopy/scb_ex3/er_final/er1crop.jpg',
+            'gfp-pa_2': 'images/microscopy/scb_ex3/er_final/er2crop.jpg',
+            'gfp-pa_3': 'images/microscopy/scb_ex3/er_final/er3crop1.jpg',
+            'gfp-pa_4': 'images/microscopy/scb_ex3/er_final/er3crop2.jpg',
+            'gfp-pa_5': 'images/microscopy/scb_ex3/er_final/er5crop1.jpg',
+            'gfp-pb_1': 'images/microscopy/scb_ex3/nucleus_final/n2.jpg',
+            'gfp-pb_2': 'images/microscopy/scb_ex3/nucleus_final/n8.jpg',
+            'gfp-pb_3': 'images/microscopy/scb_ex3/nucleus_final/n9.jpg',
+            'gfp-pb_4': 'images/microscopy/scb_ex3/nucleus_final/n18.jpg',
+            'gfp-pb_5': 'images/microscopy/scb_ex3/nucleus_final/n34.jpg',
+            'gfp-pb_6': 'images/microscopy/scb_ex3/nucleus_final/n43.jpg',
+            'gfp-pb_7': 'images/microscopy/scb_ex3/nucleus_final/n47.jpg',
+            'gfp-pb_8': 'images/microscopy/scb_ex3/nucleus_final/n60.jpg',
+            'gfp-pb_9': 'images/microscopy/scb_ex3/nucleus_final/n64.jpg',
+            'gfp-pb_10': 'images/microscopy/scb_ex3/nucleus_final/nuc-a.jpg',
+            'gfp-pb_11': 'images/microscopy/scb_ex3/nucleus_final/nuc-b.jpg',
+            'gfp-pb_12': 'images/microscopy/scb_ex3/nucleus_final/nuc-c.jpg',
+            'gfp-pc_1': 'images/microscopy/scb_ex3/pm_final/pm-b.jpg',
+            'gfp-pc_2': 'images/microscopy/scb_ex3/pm_final/pm-c.jpg',
+            'gfp-pc_3': 'images/microscopy/scb_ex3/pm_final/pm2b.jpg',
+            'gfp-pc_4': 'images/microscopy/scb_ex3/pm_final/pm3b.jpg',
+            'gfp-pc_5': 'images/microscopy/scb_ex3/pm_final/pm34-1.jpg',
+            'gfp-pc_6': 'images/microscopy/scb_ex3/pm_final/pm34-2.jpg',
+            'gfp-pd_1': 'images/microscopy/scb_ex3/cyto_final/c-a.jpg',
+            'gfp-pd_2': 'images/microscopy/scb_ex3/cyto_final/c-b.jpg',
+            'gfp-pd_3': 'images/microscopy/scb_ex3/cyto_final/c-c.jpg',
+            'gfp-pd_4': 'images/microscopy/scb_ex3/cyto_final/c-d.jpg',
+            'gfp-pd_5': 'images/microscopy/scb_ex3/cyto_final/c1.jpg',
+            'gfp-pd_6': 'images/microscopy/scb_ex3/cyto_final/c7.jpg',
+            'gfp-pd_7': 'images/microscopy/scb_ex3/cyto_final/c15-1.jpg',
+            'gfp-pd_8': 'images/microscopy/scb_ex3/cyto_final/c15-2.jpg',
+            'gfp-pd_9': 'images/microscopy/scb_ex3/cyto_final/c17.jpg',
+            'gfp-pd_10': 'images/microscopy/scb_ex3/cyto_final/c29.jpg',
+            'gfp-nm_1': 'images/microscopy/scb_ex3/nm_final/NM1crop.jpg',
+            'gfp-nm_2': 'images/microscopy/scb_ex3/nm_final/nm2crop.jpg',
+            'gfp-nm_3': 'images/microscopy/scb_ex3/nm_final/nm3crop1.jpg',
+            'gfp-nm_4': 'images/microscopy/scb_ex3/nm_final/nm3crop2.jpg',
+            'gfp-nm_5': 'images/microscopy/scb_ex3/nm_final/nm5crop.jpg',
+            'gfp_1': 'images/microscopy/scb_ex3/nuc_and_cyto/cn2.jpg',
+            'gfp_2': 'images/microscopy/scb_ex3/nuc_and_cyto/cn3.jpg',
+            'gfp_3': 'images/microscopy/scb_ex3/nuc_and_cyto/cn5.jpg',
+            'gfp_4': 'images/microscopy/scb_ex3/nuc_and_cyto/cn6.jpg',
+            'gfp_5': 'images/microscopy/scb_ex3/nuc_and_cyto/cn7.jpg',
+            'gfp_6': 'images/microscopy/scb_ex3/nuc_and_cyto/cn8.jpg',
+            'gfp_7': 'images/microscopy/scb_ex3/nuc_and_cyto/cn11.jpg',
+            'gfp_8': 'images/microscopy/scb_ex3/nuc_and_cyto/cn12.jpg',
+            'gfp_9': 'images/microscopy/scb_ex3/nuc_and_cyto/cn15.jpg',
+            'gfp_10': 'images/microscopy/scb_ex3/nuc_and_cyto/cn17.jpg',
+            'gfp_11': 'images/microscopy/scb_ex3/nuc_and_cyto/cn20.jpg',
+            'bo': 'images/microscopy/scb_ex3/negative_control.jpg',
+            'dummy': 'dummy'
+        },
+        	slide_parser: {},
+            model: { // models
+                western_blot: {
+                'cyto': {
+                    'parser_fixed': [
+
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmBuf',
+                            cell_line: 'nt',
+                            marks: [
+                                {    //antibody 1
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,
+                                    intensity:'low',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 84,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {    //antibody 2
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,
+                                    intensity:'low',
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 232,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                {    //antibody 3
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 84,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 232,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                {   //antibody 4
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 232,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                {    //antibody 5
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmProK',
+                            cell_line: 'nt',
+                            temperature: '40',
+                            marks: [
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,
+                                    intensity:'low',
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmBuf',
+                            cell_line: 'proX-Null',
+                            temperature: '40',
+                            marks: [
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,//84
+                                    intensity:'none',//none
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,//232
+                                    intensity:'low',//none
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,//84,323
+                                    intensity:'none',//none,none
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmProK',
+                            cell_line: 'proX-Null',
+                            temperature: '40',
+                            marks: [
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,//84
+                                    intensity:'none',//none
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,//84,232
+                                    intensity:'none',//none,none
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmBuf',
+                            cell_line: 'proY-Null',
+                            temperature: '40',
+                            marks: [
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,//84
+                                    intensity:'low',//none
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,//84,323
+                                    intensity:'none',//none, none
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmProK',
+                            cell_line: 'proY-Null',
+                            temperature: '40',
+                            marks: [
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,//84
+                                    intensity:'none',//none
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,//84,232
+                                    intensity:'none',//none,none
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmBuf',
+                            cell_line: 'HproX-FLAG',
+                            temperature: '40',
+                            marks: [
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,//84
+                                    intensity:'low',//high
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,//232
+                                    intensity:'low',//none
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,//84, 232
+                                    intensity:'none',//high, none
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'high',//none
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmProK',
+                            cell_line: 'HproX-FLAG',
+                            temperature: '40',
+                            marks: [
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,//84
+                                    intensity:'none',//none
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,//84,232
+                                    intensity:'med',//none,none
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmBuf',
+                            cell_line: 'HproY-FLAG',
+                            temperature: '40',
+                            marks: [
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,//84
+                                    intensity:'low',//none
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,//232
+                                    intensity:'low',//high
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,//84, 232
+                                    intensity:'none',//none, high
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'none',//high
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            drug: 'gmProK',
+                            cell_line: 'HproY-FLAG',
+                            temperature: '40',
+                            marks: [
+                                {
+                                    name:'Mouse anti-Protein X',
+                                    weight: 82,//84
+                                    intensity:'none',//none
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Rabbit anti-Protein Y',
+                                    weight: 230,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['2']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 40,//84,232
+                                    intensity:'none',//none,none
+                                    primary_anti_body:['3']
+                                },
+                                {
+                                    name:'Rabbit anti-FLAG',
+                                    weight: 84,//232
+                                    intensity:'none',//none
+                                    primary_anti_body:['4']
+                                },
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity:'med',
+                                    primary_anti_body:['5']
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+                facs: {
+                	'ticks': [50, 100, 150, 250],
+                	'max': 250,
+                    'dna': {
+                        'parser_simple': [
+                            {
+                                match: [],
+                                shape: '2-peak-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'nc',
+                                shape: '2-peak-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'rna1',
+                                shape: 'peak-100-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'rna2',
+                                shape: '2-peak-uneven-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'rna3',
+                                shape: 'peak-100-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'rna4',
+                                shape: 'peak-50-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'rna5',
+                                shape: '4-peak-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'Hydroxyurea',
+                                shape: 's-block-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'Nocodazole',
+                                shape: 'peak-100-normal-400'
+                            },
+                            {
+                                match: ['drug_id'],
+                                drug_id: 'Serum',
+                                shape: 'peak-50-normal-400'
+                            }
+                        ]
+
+                    }
+                },
+                microscopy: {}
+                
+            }
+        }
+    };
+
+
+
+
+
 
 master_model_data = {
     app_title: 'StarCellBio',
