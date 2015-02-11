@@ -11,6 +11,7 @@
       - python-virtualenv
       - libncurses5-dev
       - python-mysqldb
+      - openjdk-6-jre
     pip_packages:
       - virtualenvwrapper
     venv_name: starcellbio
@@ -67,6 +68,12 @@
         executable=/bin/bash
         chdir=/vagrant
         {{ venv_path }}/bin/python manage.py collectstatic --noinput
+
+    - name: Compile files
+      shell: >
+        exceutable=/bin/bash
+        chdir=/vagrant/html_app
+        {{ venv_path }}/bin/python watch.py
 
     - name: Drop profile
       shell: >

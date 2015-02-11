@@ -1,3 +1,4 @@
 source virtualenvwrapper.sh
 workon starcellbio
 cd /vagrant
+export PROJECT_HOME=/vagrant
