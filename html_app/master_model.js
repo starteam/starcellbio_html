@@ -11922,7 +11922,7 @@ var __scb_sample_1 = {
                     {kind: 'cell_line', title: 'Strain', editable: false}, //
                     {kind: 'treatments',
                         children: [//
-                            {kind: 'drug', title: 'Treatment', editable: false},//
+                            {kind: 'drug', title: 'Treatment', editable: false}
                         ]
                     },//
                     {kind: 'actions', title: 'Actions'}//
@@ -12912,10 +12912,10 @@ var __scb_sample_2 = {
                         left: 'inherit',
                         top: '15%'
                     },
-                        'collection_id': '%CELL_LINE%',
+                        'collection_id': '%CELL_LINE%'
                     }
 
-                ],
+                ]
             },
             microscopy: {
                 disable_blur: false,
@@ -13894,784 +13894,1098 @@ var __scb_sample_3 = {
 				},
                 add_multiple_dialog: {	
                 	order: ['WT-EGFR', 'EGFR Null', 'EGFR-M1', 'EGFR-M2', 'NoUB', 'ConstActive', 'His-EGFR-FLAG', 'His-EGFR-M1-FLAG', 'His-EGFR-M2-FLAG'],
-					headings: [
-							'','Strain', 'Treatment', 'Treatment Duration'
-							],
+					headings: ['','Strain', 'Treatment', 'Treatment Duration'],
                     'WT-EGFR': {
                         rows: [
-                        {   'cell_treatments': {   'gm30': [   {   'cell_line': 'WT-EGFR',
-                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
-                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                  'drug_id': 'growth_media'}]},
-                                                                                 'duration': '30 '
-                                                                                             'sec',
-                                                                                 'duration_value': 30,
-                                                                                 'microscope': [   'g'],
-                                                                                 'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gm30',
-                     'treatment_id': 'growth_media'},
-                 {'kind': 'text', 'text': 'WT-EGFR'},
-                 {'kind': 'text', 'text': 'Growth media only'},
-                 {'kind': 'text', 'text': '30 sec'}],
-    'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'WT-EGFR',
-																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																										 'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		  'drug_id': 'growth_media'}]},
-																										 'duration': '1 '
-																													 'min',
-																										 'duration_value': 60,
-																										 'microscope': [   'g'],
-																										 'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm60',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'WT-EGFR'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'WT-EGFR',
-																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		 'drug_id': 'growth_media'}]},
-																										'duration': '6 '
-																													'hrs',
-																										'duration_value': 21600,
-																										'microscope': [   'g'],
-																										'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm6',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'WT-EGFR'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'WT-EGFR',
-																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '30 '
-																														'sec',
-																											'duration_value': 30,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF30',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'WT-EGFR'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '30 sec'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'WT-EGFR',
-																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '1 '
-																														'min',
-																											'duration_value': 60,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF60',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'WT-EGFR'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'WT-EGFR',
-																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			'drug_id': 'growth_mediaEGF'}]},
-																										   'duration': '6 '
-																													   'hrs',
-																										   'duration_value': 21600,
-																										   'microscope': [   'g'],
-																										   'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF6',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'WT-EGFR'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'WT-EGFR',
-																	 'treatment_list': {   'list': [   {   'collection_id': '30 m',
-																										   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			'drug_id': 'growth_mediaBuff'}]},
-																										   'duration': '30 '
-																													   'min',
-																										   'duration_value': 1800,
-																										   'microscope': [   'g'],
-																										   'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmBuff',
-											 'treatment_id': 'growth_mediaBuff'},
-										 {'kind': 'text', 'text': 'WT-EGFR'},
-										 {'kind': 'text', 'text': 'Growth media + buffer'},
-										 {'kind': 'text', 'text': '30 min'}],
-							'treatment_id': 'growth_mediaBuff'},
-						{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'WT-EGFR',
-																	 'treatment_list': {   'list': [   {   'collection_id': '30 m',
-																										   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			'drug_id': 'growth_mediaProK'}]},
-																										   'duration': '30 '
-																													   'min',
-																										   'duration_value': 1800,
-																										   'microscope': [   'g'],
-																										   'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmProK',
-											 'treatment_id': 'growth_mediaProK'},
-										 {'kind': 'text', 'text': 'WT-EGFR'},
-										 {'kind': 'text', 'text': 'Growth media + ProK'},
-										 {'kind': 'text', 'text': '30 min'}],
-							'treatment_id': 'growth_mediaProK'}]
+                        {   'cell_treatments': {   'gm30': [   {
+                            'cell_line': 'WT-EGFR',
+                            'treatment_list': {   'list': [   {
+                                'collection_id': '30 s',
+                                'drug_list': {   'list': [   {
+                                    'concentration_id': '100',
+                                    'drug_id': 'growth_media'}]},
+                                'duration': '30 sec',
+                                'duration_value': 30,
+                                'microscope': [   'g'],
+                                'temperature': '25'}]}}]},
+                            'cells': [   { 'kind': 'checkbox','name': 'gm30','treatment_id': 'growth_media'},
+                                {'kind': 'text', 'text': 'WT-EGFR'},
+                                {'kind': 'text', 'text': 'Growth media only'},
+                                {'kind': 'text', 'text': '30 sec'}],
+                            'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm60': [
+                                {   'cell_line': 'WT-EGFR',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm60',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'WT-EGFR'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm6': [
+                                {   'cell_line': 'WT-EGFR',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm6',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'WT-EGFR'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gmEGF30': [
+                                {   'cell_line': 'WT-EGFR',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF30',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'WT-EGFR'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF60': [
+                                {   'cell_line': 'WT-EGFR',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF60',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'WT-EGFR'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF6': [
+                                {   'cell_line': 'WT-EGFR',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF6',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'WT-EGFR'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmBuff': [
+                                {   'cell_line': 'WT-EGFR',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaBuff'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmBuff',
+                                        'treatment_id': 'growth_mediaBuff'},
+                                    {'kind': 'text', 'text': 'WT-EGFR'},
+                                    {'kind': 'text', 'text': 'Growth media + buffer'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaBuff'},
+                            {   'cell_treatments': {   'gmProK': [
+                                {   'cell_line': 'WT-EGFR',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaProK'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmProK',
+                                        'treatment_id': 'growth_mediaProK'},
+                                    {'kind': 'text', 'text': 'WT-EGFR'},
+                                    {'kind': 'text', 'text': 'Growth media + ProK'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaProK'}
+                        ]
                     },
-                    'EGFR Null':{
-                    	rows: [
-                    	{   'cell_treatments': {   'gm30': [   {   'cell_line': 'EGFR Null',
-                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
-                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                  'drug_id': 'growth_media'}]},
-                                                                                 'duration': '30 '
-                                                                                             'sec',
-                                                                                 'duration_value': 30,
-                                                                                 'microscope': [   'g'],
-                                                                                 'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gm30',
-                     'treatment_id': 'growth_media'},
-                 {'kind': 'text', 'text': 'EGFR Null'},
-                 {'kind': 'text', 'text': 'Growth media only'},
-                 {'kind': 'text', 'text': '30 sec'}],
-    'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'EGFR Null',
-																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																										 'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		  'drug_id': 'growth_media'}]},
-																										 'duration': '1 '
-																													 'min',
-																										 'duration_value': 60,
-																										 'microscope': [   'g'],
-																										 'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm60',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'EGFR Null'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'EGFR Null',
-																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		 'drug_id': 'growth_media'}]},
-																										'duration': '6 '
-																													'hrs',
-																										'duration_value': 21600,
-																										'microscope': [   'g'],
-																										'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm6',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'EGFR Null'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'EGFR Null',
-																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '30 '
-																														'sec',
-																											'duration_value': 30,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF30',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'EGFR Null'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '30 sec'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'EGFR Null',
-																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '1 '
-																														'min',
-																											'duration_value': 60,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF60',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'EGFR Null'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'EGFR Null',
-																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			'drug_id': 'growth_mediaEGF'}]},
-																										   'duration': '6 '
-																													   'hrs',
-																										   'duration_value': 21600,
-																										   'microscope': [   'g'],
-																										   'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF6',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'EGFR Null'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'EGFR Null',
-																	 'treatment_list': {   'list': [   {   'collection_id': '30 m',
-																										   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			'drug_id': 'growth_mediaBuff'}]},
-																										   'duration': '30 '
-																													   'min',
-																										   'duration_value': 1800,
-																										   'microscope': [   'g'],
-																										   'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmBuff',
-											 'treatment_id': 'growth_mediaBuff'},
-										 {'kind': 'text', 'text': 'EGFR Null'},
-										 {'kind': 'text', 'text': 'Growth media + buffer'},
-										 {'kind': 'text', 'text': '30 min'}],
-							'treatment_id': 'growth_mediaBuff'},
-						{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'EGFR Null',
-																	 'treatment_list': {   'list': [   {   'collection_id': '30 m',
-																										   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			'drug_id': 'growth_mediaProK'}]},
-																										   'duration': '30 '
-																													   'min',
-																										   'duration_value': 1800,
-																										   'microscope': [   'g'],
-																										   'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmProK',
-											 'treatment_id': 'growth_mediaProK'},
-										 {'kind': 'text', 'text': 'EGFR Null'},
-										 {'kind': 'text', 'text': 'Growth media + ProK'},
-										 {'kind': 'text', 'text': '30 min'}],
-							'treatment_id': 'growth_mediaProK'}
+                    'EGFR Null': {
+                        rows: [
+                            {   'cell_treatments': {   'gm30': [
+                                {   'cell_line': 'EGFR Null',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm30',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'EGFR Null'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm60': [
+                                {   'cell_line': 'EGFR Null',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm60',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'EGFR Null'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm6': [
+                                {   'cell_line': 'EGFR Null',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm6',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'EGFR Null'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gmEGF30': [
+                                {   'cell_line': 'EGFR Null',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF30',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'EGFR Null'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF60': [
+                                {   'cell_line': 'EGFR Null',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF60',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'EGFR Null'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF6': [
+                                {   'cell_line': 'EGFR Null',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF6',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'EGFR Null'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmBuff': [
+                                {   'cell_line': 'EGFR Null',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaBuff'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmBuff',
+                                        'treatment_id': 'growth_mediaBuff'},
+                                    {'kind': 'text', 'text': 'EGFR Null'},
+                                    {'kind': 'text', 'text': 'Growth media + buffer'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaBuff'},
+                            {   'cell_treatments': {   'gmProK': [
+                                {   'cell_line': 'EGFR Null',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaProK'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmProK',
+                                        'treatment_id': 'growth_mediaProK'},
+                                    {'kind': 'text', 'text': 'EGFR Null'},
+                                    {'kind': 'text', 'text': 'Growth media + ProK'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaProK'}
 
-                    	]
+                        ]
                     },
                     'EGFR-M1': {
-                    	rows: [
-                    	{   'cell_treatments': {   'gm30': [   {   'cell_line': 'EGFR-M1',
-                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
-                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                  'drug_id': 'growth_media'}]},
-                                                                                 'duration': '30 '
-                                                                                             'sec',
-                                                                                 'duration_value': 30,
-                                                                                 'microscope': [   'g'],
-                                                                                 'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gm30',
-                     'treatment_id': 'growth_media'},
-                 {'kind': 'text', 'text': 'EGFR-M1'},
-                 {'kind': 'text', 'text': 'Growth media only'},
-                 {'kind': 'text', 'text': '30 sec'}],
-    'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'EGFR-M1',
-																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																										 'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		  'drug_id': 'growth_media'}]},
-																										 'duration': '1 '
-																													 'min',
-																										 'duration_value': 60,
-																										 'microscope': [   'g'],
-																										 'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm60',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'EGFR-M1'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'EGFR-M1',
-																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		 'drug_id': 'growth_media'}]},
-																										'duration': '6 '
-																													'hrs',
-																										'duration_value': 21600,
-																										'microscope': [   'g'],
-																										'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm6',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'EGFR-M1'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'EGFR-M1',
-																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '30 '
-																														'sec',
-																											'duration_value': 30,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF30',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'EGFR-M1'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '30 sec'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'EGFR-M1',
-																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '1 '
-																														'min',
-																											'duration_value': 60,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF60',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'EGFR-M1'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'EGFR-M1',
-																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			'drug_id': 'growth_mediaEGF'}]},
-																										   'duration': '6 '
-																													   'hrs',
-																										   'duration_value': 21600,
-																										   'microscope': [   'g'],
-																										   'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF6',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'EGFR-M1'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_mediaEGF'}
-                    	]
+                        rows: [
+                            {   'cell_treatments': {   'gm30': [
+                                {   'cell_line': 'EGFR-M1',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm30',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'EGFR-M1'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm60': [
+                                {   'cell_line': 'EGFR-M1',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm60',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'EGFR-M1'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm6': [
+                                {   'cell_line': 'EGFR-M1',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm6',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'EGFR-M1'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gmEGF30': [
+                                {   'cell_line': 'EGFR-M1',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF30',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'EGFR-M1'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF60': [
+                                {   'cell_line': 'EGFR-M1',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF60',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'EGFR-M1'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF6': [
+                                {   'cell_line': 'EGFR-M1',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF6',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'EGFR-M1'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'}
+                        ]
                     },
                     'EGFR-M2': {
-                    	rows: [
-                    		{   'cell_treatments': {   'gm30': [   {   'cell_line': 'EGFR-M2',
-                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
-                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                  'drug_id': 'growth_media'}]},
-                                                                                 'duration': '30 '
-                                                                                             'sec',
-                                                                                 'duration_value': 30,
-                                                                                 'microscope': [   'g'],
-                                                                                 'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gm30',
-                     'treatment_id': 'growth_media'},
-                 {'kind': 'text', 'text': 'EGFR-M2'},
-                 {'kind': 'text', 'text': 'Growth media only'},
-                 {'kind': 'text', 'text': '30 sec'}],
-    'treatment_id': 'growth_media'},
-							{   'cell_treatments': {   'gm60': [   {   'cell_line': 'EGFR-M2',
-																	   'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																											 'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			  'drug_id': 'growth_media'}]},
-																											 'duration': '1 '
-																														 'min',
-																											 'duration_value': 60,
-																											 'microscope': [   'g'],
-																											 'temperature': '25'}]}}]},
-								'cells': [   {   'kind': 'checkbox',
-												 'name': 'gm60',
-												 'treatment_id': 'growth_media'},
-											 {'kind': 'text', 'text': 'EGFR-M2'},
-											 {'kind': 'text', 'text': 'Growth media only'},
-											 {'kind': 'text', 'text': '1 min'}],
-								'treatment_id': 'growth_media'},
-							{   'cell_treatments': {   'gm6': [   {   'cell_line': 'EGFR-M2',
-																	  'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_media'}]},
-																											'duration': '6 '
-																														'hrs',
-																											'duration_value': 21600,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-								'cells': [   {   'kind': 'checkbox',
-												 'name': 'gm6',
-												 'treatment_id': 'growth_media'},
-											 {'kind': 'text', 'text': 'EGFR-M2'},
-											 {'kind': 'text', 'text': 'Growth media only'},
-											 {'kind': 'text', 'text': '6 hrs'}],
-								'treatment_id': 'growth_media'},
-							{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'EGFR-M2',
-																		  'treatment_list': {   'list': [   {   'collection_id': '30 s',
-																												'drug_list': {   'list': [   {   'concentration_id': '100',
-																																				 'drug_id': 'growth_mediaEGF'}]},
-																												'duration': '30 '
-																															'sec',
-																												'duration_value': 30,
-																												'microscope': [   'g'],
-																												'temperature': '25'}]}}]},
-								'cells': [   {   'kind': 'checkbox',
-												 'name': 'gmEGF30',
-												 'treatment_id': 'growth_mediaEGF'},
-											 {'kind': 'text', 'text': 'EGFR-M2'},
-											 {'kind': 'text', 'text': 'Growth media + EGF'},
-											 {'kind': 'text', 'text': '30 sec'}],
-								'treatment_id': 'growth_mediaEGF'},
-							{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'EGFR-M2',
-																		  'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																												'drug_list': {   'list': [   {   'concentration_id': '100',
-																																				 'drug_id': 'growth_mediaEGF'}]},
-																												'duration': '1 '
-																															'min',
-																												'duration_value': 60,
-																												'microscope': [   'g'],
-																												'temperature': '25'}]}}]},
-								'cells': [   {   'kind': 'checkbox',
-												 'name': 'gmEGF60',
-												 'treatment_id': 'growth_mediaEGF'},
-											 {'kind': 'text', 'text': 'EGFR-M2'},
-											 {'kind': 'text', 'text': 'Growth media + EGF'},
-											 {'kind': 'text', 'text': '1 min'}],
-								'treatment_id': 'growth_mediaEGF'},
-							{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'EGFR-M2',
-																		 'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																											   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																				'drug_id': 'growth_mediaEGF'}]},
-																											   'duration': '6 '
-																														   'hrs',
-																											   'duration_value': 21600,
-																											   'microscope': [   'g'],
-																											   'temperature': '25'}]}}]},
-								'cells': [   {   'kind': 'checkbox',
-												 'name': 'gmEGF6',
-												 'treatment_id': 'growth_mediaEGF'},
-											 {'kind': 'text', 'text': 'EGFR-M2'},
-											 {'kind': 'text', 'text': 'Growth media + EGF'},
-											 {'kind': 'text', 'text': '6 hrs'}],
-								'treatment_id': 'growth_mediaEGF'}
-                    	]
-                    }
+                        rows: [
+                            {   'cell_treatments': {   'gm30': [
+                                {   'cell_line': 'EGFR-M2',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm30',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'EGFR-M2'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm60': [
+                                {   'cell_line': 'EGFR-M2',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm60',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'EGFR-M2'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm6': [
+                                {   'cell_line': 'EGFR-M2',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm6',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'EGFR-M2'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gmEGF30': [
+                                {   'cell_line': 'EGFR-M2',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF30',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'EGFR-M2'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF60': [
+                                {   'cell_line': 'EGFR-M2',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF60',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'EGFR-M2'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF6': [
+                                {   'cell_line': 'EGFR-M2',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF6',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'EGFR-M2'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'}
+                        ]
+                    },
                     'NoUB': {
-                    	rows: [
-                    	{   'cell_treatments': {   'gm30': [   {   'cell_line': 'NoUB',
-                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
-                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                  'drug_id': 'growth_media'}]},
-                                                                                 'duration': '30 '
-                                                                                             'sec',
-                                                                                 'duration_value': 30,
-                                                                                 'microscope': [   'g'],
-                                                                                 'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gm30',
-                     'treatment_id': 'growth_media'},
-                 {'kind': 'text', 'text': 'NoUB'},
-                 {'kind': 'text', 'text': 'Growth media only'},
-                 {'kind': 'text', 'text': '30 sec'}],
-    'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'NoUB',
-																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																										 'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		  'drug_id': 'growth_media'}]},
-																										 'duration': '1 '
-																													 'min',
-																										 'duration_value': 60,
-																										 'microscope': [   'g'],
-																										 'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm60',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'NoUB'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'NoUB',
-																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		 'drug_id': 'growth_media'}]},
-																										'duration': '6 '
-																													'hrs',
-																										'duration_value': 21600,
-																										'microscope': [   'g'],
-																										'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm6',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'NoUB'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'NoUB',
-																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '30 '
-																														'sec',
-																											'duration_value': 30,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF30',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'NoUB'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '30 sec'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'NoUB',
-																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '1 '
-																														'min',
-																											'duration_value': 60,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF60',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'NoUB'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'NoUB',
-																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			'drug_id': 'growth_mediaEGF'}]},
-																										   'duration': '6 '
-																													   'hrs',
-																										   'duration_value': 21600,
-																										   'microscope': [   'g'],
-																										   'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF6',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'NoUB'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_mediaEGF'}
+                        rows: [
+                            {   'cell_treatments': {   'gm30': [
+                                {   'cell_line': 'NoUB',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm30',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'NoUB'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm60': [
+                                {   'cell_line': 'NoUB',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm60',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'NoUB'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm6': [
+                                {   'cell_line': 'NoUB',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm6',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'NoUB'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gmEGF30': [
+                                {   'cell_line': 'NoUB',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF30',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'NoUB'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF60': [
+                                {   'cell_line': 'NoUB',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF60',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'NoUB'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF6': [
+                                {   'cell_line': 'NoUB',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF6',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'NoUB'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'}
 
-                    	]
+                        ]
                     },
                     'ConstActive': {
-                    	rows: [
-                    	{   'cell_treatments': {   'gm30': [   {   'cell_line': 'ConstActive',
-                                           'treatment_list': {   'list': [   {   'collection_id': '30 s',
-                                                                                 'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                  'drug_id': 'growth_media'}]},
-                                                                                 'duration': '30 '
-                                                                                             'sec',
-                                                                                 'duration_value': 30,
-                                                                                 'microscope': [   'g'],
-                                                                                 'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gm30',
-                     'treatment_id': 'growth_media'},
-                 {'kind': 'text', 'text': 'ConstActive'},
-                 {'kind': 'text', 'text': 'Growth media only'},
-                 {'kind': 'text', 'text': '30 sec'}],
-    'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm60': [   {   'cell_line': 'ConstActive',
-																   'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																										 'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		  'drug_id': 'growth_media'}]},
-																										 'duration': '1 '
-																													 'min',
-																										 'duration_value': 60,
-																										 'microscope': [   'g'],
-																										 'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm60',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'ConstActive'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gm6': [   {   'cell_line': 'ConstActive',
-																  'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										'drug_list': {   'list': [   {   'concentration_id': '100',
-																																		 'drug_id': 'growth_media'}]},
-																										'duration': '6 '
-																													'hrs',
-																										'duration_value': 21600,
-																										'microscope': [   'g'],
-																										'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gm6',
-											 'treatment_id': 'growth_media'},
-										 {'kind': 'text', 'text': 'ConstActive'},
-										 {'kind': 'text', 'text': 'Growth media only'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_media'},
-						{   'cell_treatments': {   'gmEGF30': [   {   'cell_line': 'ConstActive',
-																	  'treatment_list': {   'list': [   {   'collection_id': '30 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '30 '
-																														'sec',
-																											'duration_value': 30,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF30',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'ConstActive'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '30 sec'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF60': [   {   'cell_line': 'ConstActive',
-																	  'treatment_list': {   'list': [   {   'collection_id': '60 s',
-																											'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			 'drug_id': 'growth_mediaEGF'}]},
-																											'duration': '1 '
-																														'min',
-																											'duration_value': 60,
-																											'microscope': [   'g'],
-																											'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF60',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'ConstActive'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '1 min'}],
-							'treatment_id': 'growth_mediaEGF'},
-						{   'cell_treatments': {   'gmEGF6': [   {   'cell_line': 'ConstActive',
-																	 'treatment_list': {   'list': [   {   'collection_id': '6 h',
-																										   'drug_list': {   'list': [   {   'concentration_id': '100',
-																																			'drug_id': 'growth_mediaEGF'}]},
-																										   'duration': '6 '
-																													   'hrs',
-																										   'duration_value': 21600,
-																										   'microscope': [   'g'],
-																										   'temperature': '25'}]}}]},
-							'cells': [   {   'kind': 'checkbox',
-											 'name': 'gmEGF6',
-											 'treatment_id': 'growth_mediaEGF'},
-										 {'kind': 'text', 'text': 'ConstActive'},
-										 {'kind': 'text', 'text': 'Growth media + EGF'},
-										 {'kind': 'text', 'text': '6 hrs'}],
-							'treatment_id': 'growth_mediaEGF'}
-                    	]
+                        rows: [
+                            {   'cell_treatments': {   'gm30': [
+                                {   'cell_line': 'ConstActive',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm30',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'ConstActive'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm60': [
+                                {   'cell_line': 'ConstActive',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm60',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'ConstActive'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm6': [
+                                {   'cell_line': 'ConstActive',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gm6',
+                                        'treatment_id': 'growth_media'},
+                                    {'kind': 'text', 'text': 'ConstActive'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gmEGF30': [
+                                {   'cell_line': 'ConstActive',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF30',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'ConstActive'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF60': [
+                                {   'cell_line': 'ConstActive',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '60 s',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '1 min',
+                                            'duration_value': 60,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF60',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'ConstActive'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '1 min'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'},
+                            {   'cell_treatments': {   'gmEGF6': [
+                                {   'cell_line': 'ConstActive',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '6 h',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaEGF'}
+                                            ]},
+                                            'duration': '6 hrs',
+                                            'duration_value': 21600,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmEGF6',
+                                        'treatment_id': 'growth_mediaEGF'},
+                                    {'kind': 'text', 'text': 'ConstActive'},
+                                    {'kind': 'text', 'text': 'Growth media + EGF'},
+                                    {'kind': 'text', 'text': '6 hrs'}
+                                ],
+                                'treatment_id': 'growth_mediaEGF'}
+                        ]
                     },
                     'His-EGFR-FLAG': {
-                    	rows: [
-                    	{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'His-EGFR-FLAG',
-                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
-                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                    'drug_id': 'growth_mediaBuff'}]},
-                                                                                   'duration': '30 '
-                                                                                               'min',
-                                                                                   'duration_value': 1800,
-                                                                                   'microscope': [   'g'],
-                                                                                   'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gmBuff',
-                     'treatment_id': 'growth_mediaBuff'},
-                 {'kind': 'text', 'text': 'His-EGFR-FLAG'},
-                 {'kind': 'text', 'text': 'Growth media + buffer'},
-                 {'kind': 'text', 'text': '30 min'}],
-    'treatment_id': 'growth_mediaBuff'},
-						{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'His-EGFR-FLAG',
-                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
-                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                    'drug_id': 'growth_mediaProK'}]},
-                                                                                   'duration': '30 '
-                                                                                               'min',
-                                                                                   'duration_value': 1800,
-                                                                                   'microscope': [   'g'],
-                                                                                   'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gmProK',
-                     'treatment_id': 'growth_mediaProK'},
-                 {'kind': 'text', 'text': 'His-EGFR-FLAG'},
-                 {'kind': 'text', 'text': 'Growth media + ProK'},
-                 {'kind': 'text', 'text': '30 min'}],
-    'treatment_id': 'growth_mediaProK'}
+                        rows: [
+                            {   'cell_treatments': {   'gmBuff': [
+                                {   'cell_line': 'His-EGFR-FLAG',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaBuff'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmBuff',
+                                        'treatment_id': 'growth_mediaBuff'},
+                                    {'kind': 'text', 'text': 'His-EGFR-FLAG'},
+                                    {'kind': 'text', 'text': 'Growth media + buffer'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaBuff'},
+                            {   'cell_treatments': {   'gmProK': [
+                                {   'cell_line': 'His-EGFR-FLAG',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaProK'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmProK',
+                                        'treatment_id': 'growth_mediaProK'},
+                                    {'kind': 'text', 'text': 'His-EGFR-FLAG'},
+                                    {'kind': 'text', 'text': 'Growth media + ProK'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaProK'}
 
-                    	]
+                        ]
                     },
                     'His-EGFR-M1-FLAG': {
-                    	rows: [
-                    	{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'His-EGFR-M1-FLAG',
-                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
-                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                    'drug_id': 'growth_mediaBuff'}]},
-                                                                                   'duration': '30 '
-                                                                                               'min',
-                                                                                   'duration_value': 1800,
-                                                                                   'microscope': [   'g'],
-                                                                                   'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gmBuff',
-                     'treatment_id': 'growth_mediaBuff'},
-                 {'kind': 'text', 'text': 'His-EGFR-M1-FLAG'},
-                 {'kind': 'text', 'text': 'Growth media + buffer'},
-                 {'kind': 'text', 'text': '30 min'}],
-    'treatment_id': 'growth_mediaBuff'},
-						{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'His-EGFR-M1-FLAG',
-                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
-                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                    'drug_id': 'growth_mediaProK'}]},
-                                                                                   'duration': '30 '
-                                                                                               'min',
-                                                                                   'duration_value': 1800,
-                                                                                   'microscope': [   'g'],
-                                                                                   'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gmProK',
-                     'treatment_id': 'growth_mediaProK'},
-                 {'kind': 'text', 'text': 'His-EGFR-M1-FLAG'},
-                 {'kind': 'text', 'text': 'Growth media + ProK'},
-                 {'kind': 'text', 'text': '30 min'}],
-    'treatment_id': 'growth_mediaProK'}
+                        rows: [
+                            {   'cell_treatments': {   'gmBuff': [
+                                {   'cell_line': 'His-EGFR-M1-FLAG',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaBuff'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmBuff',
+                                        'treatment_id': 'growth_mediaBuff'},
+                                    {'kind': 'text', 'text': 'His-EGFR-M1-FLAG'},
+                                    {'kind': 'text', 'text': 'Growth media + buffer'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaBuff'},
+                            {   'cell_treatments': {   'gmProK': [
+                                {   'cell_line': 'His-EGFR-M1-FLAG',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaProK'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmProK',
+                                        'treatment_id': 'growth_mediaProK'},
+                                    {'kind': 'text', 'text': 'His-EGFR-M1-FLAG'},
+                                    {'kind': 'text', 'text': 'Growth media + ProK'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaProK'}
 
-                    	]
+                        ]
                     },
                     'His-EGFR-M2-FLAG': {
-                    	rows: [
-                    		{   'cell_treatments': {   'gmBuff': [   {   'cell_line': 'His-EGFR-M2-FLAG',
-                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
-                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                    'drug_id': 'growth_mediaBuff'}]},
-                                                                                   'duration': '30 '
-                                                                                               'min',
-                                                                                   'duration_value': 1800,
-                                                                                   'microscope': [   'g'],
-                                                                                   'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gmBuff',
-                     'treatment_id': 'growth_mediaBuff'},
-                 {'kind': 'text', 'text': 'His-EGFR-M2-FLAG'},
-                 {'kind': 'text', 'text': 'Growth media + buffer'},
-                 {'kind': 'text', 'text': '30 min'}],
-    'treatment_id': 'growth_mediaBuff'},
-							{   'cell_treatments': {   'gmProK': [   {   'cell_line': 'His-EGFR-M2-FLAG',
-                                             'treatment_list': {   'list': [   {   'collection_id': '30 m',
-                                                                                   'drug_list': {   'list': [   {   'concentration_id': '100',
-                                                                                                                    'drug_id': 'growth_mediaProK'}]},
-                                                                                   'duration': '30 '
-                                                                                               'min',
-                                                                                   'duration_value': 1800,
-                                                                                   'microscope': [   'g'],
-                                                                                   'temperature': '25'}]}}]},
-    'cells': [   {   'kind': 'checkbox',
-                     'name': 'gmProK',
-                     'treatment_id': 'growth_mediaProK'},
-                 {'kind': 'text', 'text': 'His-EGFR-M2-FLAG'},
-                 {'kind': 'text', 'text': 'Growth media + ProK'},
-                 {'kind': 'text', 'text': '30 min'}],
-    'treatment_id': 'growth_mediaProK'}
+                        rows: [
+                            {   'cell_treatments': {   'gmBuff': [
+                                {   'cell_line': 'His-EGFR-M2-FLAG',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaBuff'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmBuff',
+                                        'treatment_id': 'growth_mediaBuff'},
+                                    {'kind': 'text', 'text': 'His-EGFR-M2-FLAG'},
+                                    {'kind': 'text', 'text': 'Growth media + buffer'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaBuff'},
+                            {   'cell_treatments': {   'gmProK': [
+                                {   'cell_line': 'His-EGFR-M2-FLAG',
+                                    'treatment_list': {   'list': [
+                                        {   'collection_id': '30 m',
+                                            'drug_list': {   'list': [
+                                                {   'concentration_id': '100',
+                                                    'drug_id': 'growth_mediaProK'}
+                                            ]},
+                                            'duration': '30 min',
+                                            'duration_value': 1800,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    {   'kind': 'checkbox',
+                                        'name': 'gmProK',
+                                        'treatment_id': 'growth_mediaProK'},
+                                    {'kind': 'text', 'text': 'His-EGFR-M2-FLAG'},
+                                    {'kind': 'text', 'text': 'Growth media + ProK'},
+                                    {'kind': 'text', 'text': '30 min'}
+                                ],
+                                'treatment_id': 'growth_mediaProK'}
 
-                    	]
+                        ]
                     }
                 }
             },
@@ -14687,7 +15001,7 @@ var __scb_sample_3 = {
 					name: '6 hours'
 				},
 				'30 m': {
-					name '30 minutes'
+					name: '30 minutes'
 				}
 			},
             concentrations: {
