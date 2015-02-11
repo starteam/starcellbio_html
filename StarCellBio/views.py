@@ -267,7 +267,11 @@ def get_student_courses(request, **kwargs):
             #     if (
             #                 a.assignmentID == 'decusability' or a.assignmentID == 'scb_ex1' or a.assignmentID == 'microscopy_usability'):  # or a.assignmentID == 'microscopy_test' ): #or a.assignmentID == 'assignment_706_2014_ps2'):
             #         all.append(dictionary)
-            retval = {'is_student': True, 'list': all, 'is_auth': False, 'is_selected': all[0]['id'], 'token': token1}
+            is_selected = None
+            if len(all) > 0:
+                is_selected = all[0]['id']
+
+            retval = {'is_student': True, 'list': all, 'is_auth': False, 'is_selected': is_selected, 'token': token1}
     response = HttpResponse("var get_student_courses_result = {0};".format(json.dumps(retval)))
     response.set_cookie("scb_username", request.user.username)
     response['Content-Type'] = 'text/javascript'

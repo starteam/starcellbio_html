@@ -1,13 +1,19 @@
 #!/usr/bin/env python
-from fsevents import Observer
-from fsevents import Stream
 import os
 import time
 from threading import Timer
 from subprocess import call
 
-#root = os.environ['PROJECT_HOME']+'/html_app/'
-root = os.environ['VIRTUAL_ENV']+'/starcellbio_html/html_app/'
+have_watcher = True
+try:
+    from fsevents import Observer
+    from fsevents import Stream
+except ImportError:
+    have_watcher = False
+
+
+root = os.environ['PROJECT_HOME'] + '/html_app/'
+# root = os.environ['VIRTUAL_ENV']+'/starcellbio_html/html_app/'
 
 
 global_update_index = True
@@ -109,10 +115,11 @@ for subdir, dir, files in os.walk( root ):
 
 update_index_html()
 
-try:
-    observer = Observer()
-    stream = Stream( callback , root , file_events=True)
-    observer.schedule(stream)
-    observer.run()
-except:
-    observer.stop()
+if have_watcher:
+    try:
+        observer = Observer()
+        stream = Stream( callback , root , file_events=True)
+        observer.schedule(stream)
+        observer.run()
+    except:
+        observer.stop()

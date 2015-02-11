@@ -1,0 +1,82 @@
+---
+- hosts: all
+  vars:
+    apt_packages:
+      - libmysqlclient-dev
+      - mysql-client
+      - mysql-server
+      - python-pip
+      - build-essential
+      - python-dev
+      - python-virtualenv
+      - libncurses5-dev
+      - python-mysqldb
+      - openjdk-6-jre
+    pip_packages:
+      - virtualenvwrapper
+    venv_name: starcellbio
+    venv_path: ~/.virtualenvs/{{ venv_name }}
+    db_name: starcellbio
+    db_user: starcellbio
+    db_pass: 136a411ed9e8592089444b7164ffaf84
+  tasks:
+    - name: Install debian packages
+      sudo: yes
+      apt: name={{ item }} update_cache=yes
+      with_items: apt_packages
+
+    - name: Install pip packages
+      sudo: yes
+      pip: name={{ item }}
+      with_items: pip_packages
+    
+    - name: Create venv
+      shell: >
+        executable=/bin/bash
+        creates={{ venv_path }}
+        . /usr/local/bin/virtualenvwrapper.sh &&
+        mkvirtualenv {{ venv_name }}
+
+    - name: Install requirements
+      pip: requirements='/vagrant/requirements.txt' virtualenv={{ venv_path }}
+
+    - name: Create database
+      sudo: yes
+      mysql_db: name={{ db_name }}
+
+    - name: Create user
+      sudo: yes
+      mysql_user: >
+        name={{ db_user }}
+        password={{ db_pass }}
+        priv={{ db_name }}.*:ALL
+
+    - name: Sync DB
+      shell: >
+        executable=/bin/bash
+        chdir=/vagrant
+        {{ venv_path }}/bin/python manage.py syncdb --noinput
+
+    - name: Load data
+      shell: >
+        executable=/bin/bash
+        chdir=/vagrant
+        {{ venv_path }}/bin/python manage.py loaddata backend statuses courses assignments studentassignments
+
+    - name: Collect Static
+      shell: >
+        executable=/bin/bash
+        chdir=/vagrant
+        {{ venv_path }}/bin/python manage.py collectstatic --noinput
+
+    - name: Compile files
+      shell: >
+        exceutable=/bin/bash
+        chdir=/vagrant/html_app
+        {{ venv_path }}/bin/python watch.py
+
+    - name: Drop profile
+      shell: >
+        creates=~/.ansible-profile
+        cat /vagrant/provision/vagrant_env >> ~/.profile;
+        touch ~/.ansible-profile
