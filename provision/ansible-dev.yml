@@ -74,6 +74,9 @@
         exceutable=/bin/bash
         chdir=/vagrant/html_app
         {{ venv_path }}/bin/python watch.py
+      environment:
+        PROJECT_HOME: "/vagrant"
+        
 
     - name: Drop profile
       shell: >
