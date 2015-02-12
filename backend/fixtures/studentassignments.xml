@@ -2,14 +2,16 @@
 <django-objects version="1.0">
     <object pk="7" model="backend.studentassignment">
         <field to="auth.user" name="student" rel="ManyToOneRel">1</field>
-        <field to="backend.assignment" name="assignment" rel="ManyToOneRel">1</field>
-        <field type="TextField" name="submitted"></field>
-        <field type="TextField" name="current">Assignment A1 for Course 1</field>
+        <field to="backend.assignment" name="assignmentID" rel="ManyToOneRel">1</field>
+        <field type="TextField" name="assignmentName">Assignment A1 for Course 1</field>
+        <field to="backend.course" name="course" rel="ManyToOneRel">C1</field>
+        <field type="IntegerField" name="token">1</field>
     </object>
     <object pk="8" model="backend.studentassignment">
         <field to="auth.user" name="student" rel="ManyToOneRel">1</field>
-        <field to="backend.assignment" name="assignment" rel="ManyToOneRel">3</field>
-        <field type="TextField" name="submitted"></field>
-        <field type="TextField" name="current">Assignment A3 for Course 1</field>
+        <field to="backend.assignment" name="assignmentID" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="assignmentName">Assignment A3 for Course 1</field>
+        <field to="backend.course" name="course" rel="ManyToOneRel">C1</field>
+        <field type="IntegerField" name="token">2</field>
     </object>
 </django-objects>

@@ -61,3 +61,7 @@ scbU
 npm-debug.log
 .DS_Store
 html_app/index.html
+
+
+.vagrant/
+static/

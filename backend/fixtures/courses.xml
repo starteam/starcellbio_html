@@ -2,20 +2,10 @@
 <django-objects version="1.0">
     <object pk="1" model="backend.course">
         <field type="CharField" name="code">C1</field>
-        <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
-        <field to="backend.statuses" name="status" rel="ManyToOneRel">2</field>
-        <field to="auth.user" name="administrators" rel="ManyToManyRel"></field>
-        <field to="auth.user" name="students" rel="ManyToManyRel"></field>
+        <field type="TextField" name="course_name">Course1</field>
     </object>
     <object pk="2" model="backend.course">
         <field type="CharField" name="code">C2</field>
-        <field to="auth.user" name="owner" rel="ManyToOneRel">1</field>
-        <field to="backend.statuses" name="status" rel="ManyToOneRel">1</field>
-        <field to="auth.user" name="administrators" rel="ManyToManyRel">
-            <object pk="1"></object>
-        </field>
-        <field to="auth.user" name="students" rel="ManyToManyRel">
-            <object pk="1"></object>
-        </field>
+        <field type="TextField" name="course_name">Course2</field>
     </object>
 </django-objects>
