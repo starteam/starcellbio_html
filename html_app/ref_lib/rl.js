@@ -132,7 +132,7 @@ $.get( "ref_library.html", function(data) {
 			$(anchor_node).attr('href', '#_ftnref5');
 		$(anchor_node).css('text-decoration', 'none');
 		$(anchor_node).css('color', 'black');
-		$(anchor_node).attr('name', $(anchor_node).attr('href').replace(/\#|(ref)/g, ''));
+		//$(anchor_node).attr('name', $(anchor_node).attr('href').replace(/\#|(ref)/g, ''));
 	}
 	var back_to_top= document.createElement('a');
 	back_to_top.href = "#";
@@ -204,15 +204,15 @@ function bindToggle(item){
 
 function fixImages(){
 	//$('img[src="../media/uploads/principle_of_high_resolution_sds_gel_electrophoresis.png"]').after('<p/>');
-	$('img[src="../media/uploads/principle_of_high_resolution_sds_gel_electrophoresis.png"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
-	$('img[src="../media/uploads/principle_of_high_resolution_sds_gel_electrophoresis.png"]').attr('src', '../../../images/ref_lib/principle_of_high_resolution_sds_gel_electrophoresis.png');
+	$('img[src="../media/uploads/starcellbio/principle_of_high_resolution_sds_gel_electrophoresis.png"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
+	$('img[src="../media/uploads/starcellbio/principle_of_high_resolution_sds_gel_electrophoresis.png"]').attr('src', '../../../images/ref_lib/principle_of_high_resolution_sds_gel_electrophoresis.png');
 	//$('img[src="../media/uploads/gel_blue_coomassie.jpg"]').after('<p/>');
-	$('img[src="../media/uploads/gel_blue_coomassie.jpg"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
-	$('img[src="../media/uploads/gel_blue_coomassie.jpg"]').attr('src', '../../../images/ref_lib/gel_blue_coomassie.jpg');
+	$('img[src="../media/uploads/starcellbio/gel_blue_coomassie.jpg"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
+	$('img[src="../media/uploads/starcellbio/gel_blue_coomassie.jpg"]').attr('src', '../../../images/ref_lib/gel_blue_coomassie.jpg');
 	//$('img[src="../media/uploads/antibody.png"]').after('<p/>');
-	$('img[src="../media/uploads/antibody.png"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
-	$('img[src="../media/uploads/antibody.png"]').attr('src', '../../../images/ref_lib/antibody.png');
+	$('img[src="../media/uploads/starcellbio/antibody.png"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
+	$('img[src="../media/uploads/starcellbio/antibody.png"]').attr('src', '../../../images/ref_lib/antibody.png');
 	//$('img[src="../media/uploads/sds-page.jpg"]').after('<p/>');
-	$('img[src="../media/uploads/sds-page.jpg"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
-	$('img[src="../media/uploads/sds-page.jpg"]').attr('src', '../../../images/ref_lib/sds-page.jpg');
+	$('img[src="../media/uploads/starcellbio/sds-page.jpg"]').nextUntil('.SCB-Normal').wrapAll('<div class="figure"></div>');
+	$('img[src="../media/uploads/starcellbio/sds-page.jpg"]').attr('src', '../../../images/ref_lib/sds-page.jpg');
 }

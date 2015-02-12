@@ -99,7 +99,7 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
 				}
 		
 		
-			   if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1) 				  )
+			   if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1) 				  
 			   {
 					var slide_conditions_val = '';
 					if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 ){

@@ -47,6 +47,24 @@
   font-size: 10pt;
   background-image: url('../../images/header/scb_popout_on.png');
 }
+.main_video {
+  display: inline-block;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  background-repeat: no-repeat;
+  width: 53px;
+  height: 26px;
+  color: black;
+  padding-left: 30px;
+  font-family: 'sourcesanspro-semibold';
+  position: relative;
+  top: 7px;
+  cursor: pointer;
+  left: 39px;
+  font-size: 10pt;
+  background-image: url('../../images/header/scb_video_icon.png');
+}
 .nav_divider {
   display: inline-block;
   height: 24px;
@@ -64,6 +82,15 @@
   top: 10px;
   background: #27956c;
   left: 155px;
+}
+.nav_divider3 {
+  display: inline-block;
+  height: 24px;
+  width: 2px;
+  position: absolute;
+  top: 10px;
+  background: #27956c;
+  left: 245px;
 }
 .scb_s_ug_home {
   display: inline-block;
@@ -239,7 +266,7 @@
   resize: none;
 }
 .nav_buttons {
-  width: 217px;
+  width: 300px;
   position: relative;
   height: 30px;
   left: 4px;

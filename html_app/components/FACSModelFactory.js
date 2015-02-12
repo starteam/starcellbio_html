@@ -223,6 +223,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             function normalize(data, big_const, y_scale) {
                 var factor = factor || .05;
                 var big_const=big_const || 2750;
+                var sum = 0;
                 _.each(data, function (s) {
                     sum += s[1];
                 });
@@ -340,7 +341,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     data.push([x, y]);
 
                 }
-                normalize(data, 7750);
+                normalize(data);
 				roundData(data);
                 state.data = {
                     data: [

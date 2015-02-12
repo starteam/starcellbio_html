@@ -109,6 +109,17 @@
 }
 
 
+.scb_s_video_icon{
+position: relative;
+bottom: 5px;
+}
+
+.scb_s_video_text{
+position: relative;
+bottom: 9px;
+
+}
+
 .scb_s_user_guide_icon{
 	margin-left: 5px;
 }
@@ -165,7 +176,7 @@
     margin-top: -10px;
 }
 
-.scb_f_contact, .scb_f_reference, .scb_f_user_guide, .scb_f_login{
+.scb_f_contact, .scb_f_reference, .scb_f_user_guide, .scb_f_login, .scb_f_video{
 	cursor: pointer;
 }
 

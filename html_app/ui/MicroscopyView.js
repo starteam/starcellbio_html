@@ -2018,7 +2018,14 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
 
         }
         
-        
+        var elem = document.getElementById('slider');
+		window.mySwipe = Swipe(elem, {
+  			continuous: false,
+  			disableScroll: true,
+  			transitionEnd: function(index, element) { 
+					$('.slider_dots li').attr('class','');
+					$($('.slider_dots li')[index]).attr('class','on');}
+		});
 
 		_.each($(".scb_s_experiment_step_button"), function (e) {
 			if(!$(e).hasClass('scb_s_experiment_step_visited')) 
