@@ -270,7 +270,6 @@ def get_student_courses(request, **kwargs):
             is_selected = None
             if len(all) > 0:
                 is_selected = all[0]['id']
-
             retval = {'is_student': True, 'list': all, 'is_auth': False, 'is_selected': is_selected, 'token': token1}
     response = HttpResponse("var get_student_courses_result = {0};".format(json.dumps(retval)))
     response.set_cookie("scb_username", request.user.username)
