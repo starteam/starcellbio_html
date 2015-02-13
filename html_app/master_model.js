@@ -13859,7 +13859,10 @@ var __scb_sample_3 = {
     experiments: {},
         template: {
             instructions: [
-            	['Goal & Introduction','Here come instructions when we build them']
+            	 ["Goal & Learning Objectives", scb_ex3_text.goal({})],
+                ["Introduction",scb_ex3_text.intro({})],
+                ["Background Information",scb_ex3_text.bg_info({})],
+                ["Questions",scb_ex3_text.questions({})]
             	],
             ui: {
                 experimental_design: {
@@ -15715,7 +15718,7 @@ master_model_data = {
     assignments: {
         list: [ 
          __decusability, __assignment_706_2014, __assignment_706_2014_ps2, __june_2014_usability, __sutd_intro_biology,
-               __scb_sample_1, __scb_sample_2
+               __scb_sample_1, __scb_sample_2, __scb_sample_3
         ]
     },
     ui: {}
