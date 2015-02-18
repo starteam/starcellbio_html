@@ -12396,6 +12396,7 @@ var __scb_sample_1 = {
                 }
             }
         },
+       /* for microscopy only*/
         slides: {
             'gfp-pa_1': 'images/microscopy/SCB_EX1/er_final/er1crop.jpg',
             'gfp-pa_2': 'images/microscopy/SCB_EX1/er_final/er2crop.jpg',
@@ -13856,7 +13857,7 @@ var __scb_sample_3 = {
     	course_name: 'Sample Exercises',
         description: 'StarCellBio Exercise 3',
         notebook: {},
-    experiments: {},
+        experiments: {},
         template: {
             instructions: [
             	 ["Goal & Learning Objectives", scb_ex3_text.goal({})],
@@ -13870,25 +13871,34 @@ var __scb_sample_3 = {
                     gel_types: ['.10', '.12', '.15']
                 },
                 experiment_setup: {
-                    table: [ //
+                    table: [
                         {kind: "cell_plate", title: " ", editable: false},
-                        {kind: 'cell_line', title: 'Strain', editable: false}, //
+                        {kind: 'cell_line', title: 'Strain', editable: false},
                         {kind: 'treatments',
-                            children: [//
-                                {kind: 'drug', title: 'Treatment', editable: false},//
-                                {kind: 'duration', title: 'Time', editable: false},
+                            children: [
+                                {kind: 'drug', title: 'Treatment', editable: false},
+                                {kind: 'duration', title: 'Time', editable: false}
                             ]
-                        },//
-                        {kind: 'actions', title: 'Actions'}//
-                    ],//
+                        },
+                        {kind: 'actions', title: 'Actions'}
+                    ],
                     actions: [
+                        {kind: "add_many", name: "Add Samples", open: 'scb_ex3.setup', css: {
+                            width: '885px',
+                            height: '600px',
+                            left: 'inherit',
+                            top: '15%'
+                        },
+                        'collection_id': '%CELL_LINE%'
+                    }
 
                     ]
                 },
-                western_blot: {format: "%CELL_LINE%, %TREATMENT%",
+                western_blot: {format: "%CELL_LINE%, %TREATMENT%, %COLLECTION%",
                     keys: {
                         '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                         '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
+                        '%COLLECTION%': {attr: ['treatment_list', 'list', '0', 'collection_id'], map:['collections', '%KEY%', 'name']}
                     }
                 },
                 microscopy: {
@@ -13900,22 +13910,30 @@ var __scb_sample_3 = {
 					headings: ['','Strain', 'Treatment', 'Treatment Duration'],
                     'WT-EGFR': {
                         rows: [
-                        {   'cell_treatments': {   'gm30': [   {
-                            'cell_line': 'WT-EGFR',
-                            'treatment_list': {   'list': [   {
-                                'collection_id': '30 s',
-                                'drug_list': {   'list': [   {
-                                    'concentration_id': '100',
-                                    'drug_id': 'growth_media'}]},
-                                'duration': '30 sec',
-                                'duration_value': 30,
-                                'microscope': [   'g'],
-                                'temperature': '25'}]}}]},
-                            'cells': [   { 'kind': 'checkbox','name': 'gm30','treatment_id': 'growth_media'},
-                                {'kind': 'text', 'text': 'WT-EGFR'},
-                                {'kind': 'text', 'text': 'Growth media only'},
-                                {'kind': 'text', 'text': '30 sec'}],
-                            'treatment_id': 'growth_media'},
+                            {   'cell_treatments': {   'gm30': [
+                                {
+                                    'cell_line': 'WT-EGFR',
+                                    'treatment_list': {   'list': [
+                                        {
+                                            'collection_id': '30 s',
+                                            'drug_list': {   'list': [
+                                                {
+                                                    'concentration_id': '100',
+                                                    'drug_id': 'growth_media'}
+                                            ]},
+                                            'duration': '30 sec',
+                                            'duration_value': 30,
+                                            'microscope': [   'g'],
+                                            'temperature': '25'}
+                                    ]}}
+                            ]},
+                                'cells': [
+                                    { 'kind': 'checkbox', 'name': 'gm30', 'treatment_id': 'growth_media30'},
+                                    {'kind': 'text', 'text': 'WT-EGFR'},
+                                    {'kind': 'text', 'text': 'Growth media only'},
+                                    {'kind': 'text', 'text': '30 sec'}
+                                ],
+                                'treatment_id': 'growth_media30'},
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
@@ -13933,12 +13951,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm60',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media60'},
                                     {'kind': 'text', 'text': 'WT-EGFR'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media60'},
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
@@ -13956,12 +13974,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm6',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media6'},
                                     {'kind': 'text', 'text': 'WT-EGFR'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media6'},
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
@@ -13979,12 +13997,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF30',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF30'},
                                     {'kind': 'text', 'text': 'WT-EGFR'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF30'},
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
@@ -14002,12 +14020,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF60',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF60'},
                                     {'kind': 'text', 'text': 'WT-EGFR'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF60'},
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
@@ -14025,12 +14043,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF6',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF6'},
                                     {'kind': 'text', 'text': 'WT-EGFR'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF6'},
                             {   'cell_treatments': {   'gmBuff': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
@@ -14098,12 +14116,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm30',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media30'},
                                     {'kind': 'text', 'text': 'EGFR Null'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media30'},
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
@@ -14121,12 +14139,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm60',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media60'},
                                     {'kind': 'text', 'text': 'EGFR Null'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media60'},
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
@@ -14144,12 +14162,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm6',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media6'},
                                     {'kind': 'text', 'text': 'EGFR Null'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media6'},
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
@@ -14167,12 +14185,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF30',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF30'},
                                     {'kind': 'text', 'text': 'EGFR Null'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF30'},
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
@@ -14190,12 +14208,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF60',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF60'},
                                     {'kind': 'text', 'text': 'EGFR Null'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF60'},
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
@@ -14213,12 +14231,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF6',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF6'},
                                     {'kind': 'text', 'text': 'EGFR Null'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF6'},
                             {   'cell_treatments': {   'gmBuff': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
@@ -14287,12 +14305,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm30',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media30'},
                                     {'kind': 'text', 'text': 'EGFR-M1'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media30'},
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
@@ -14310,12 +14328,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm60',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media60'},
                                     {'kind': 'text', 'text': 'EGFR-M1'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media60'},
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
@@ -14333,12 +14351,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm6',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media6'},
                                     {'kind': 'text', 'text': 'EGFR-M1'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media6'},
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
@@ -14356,12 +14374,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF30',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF30'},
                                     {'kind': 'text', 'text': 'EGFR-M1'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF30'},
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
@@ -14379,12 +14397,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF60',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF60'},
                                     {'kind': 'text', 'text': 'EGFR-M1'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF60'},
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
@@ -14402,12 +14420,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF6',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF6'},
                                     {'kind': 'text', 'text': 'EGFR-M1'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'}
+                                'treatment_id': 'growth_mediaEGF6'}
                         ]
                     },
                     'EGFR-M2': {
@@ -14429,12 +14447,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm30',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media30'},
                                     {'kind': 'text', 'text': 'EGFR-M2'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media30'},
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
@@ -14452,12 +14470,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm60',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media60'},
                                     {'kind': 'text', 'text': 'EGFR-M2'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media60'},
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
@@ -14475,12 +14493,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm6',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media6'},
                                     {'kind': 'text', 'text': 'EGFR-M2'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media6'},
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
@@ -14498,12 +14516,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF30',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF30'},
                                     {'kind': 'text', 'text': 'EGFR-M2'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF30'},
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
@@ -14521,12 +14539,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF60',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF60'},
                                     {'kind': 'text', 'text': 'EGFR-M2'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF60'},
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
@@ -14544,12 +14562,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF6',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF6'},
                                     {'kind': 'text', 'text': 'EGFR-M2'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'}
+                                'treatment_id': 'growth_mediaEGF6'}
                         ]
                     },
                     'NoUB': {
@@ -14571,12 +14589,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm30',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media30'},
                                     {'kind': 'text', 'text': 'NoUB'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media30'},
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
@@ -14594,12 +14612,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm60',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media60'},
                                     {'kind': 'text', 'text': 'NoUB'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media60'},
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
@@ -14617,12 +14635,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm6',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media6'},
                                     {'kind': 'text', 'text': 'NoUB'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media6'},
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
@@ -14640,12 +14658,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF30',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF30'},
                                     {'kind': 'text', 'text': 'NoUB'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF30'},
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
@@ -14663,12 +14681,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF60',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF60'},
                                     {'kind': 'text', 'text': 'NoUB'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF60'},
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
@@ -14686,12 +14704,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF6',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF6'},
                                     {'kind': 'text', 'text': 'NoUB'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'}
+                                'treatment_id': 'growth_mediaEGF6'}
 
                         ]
                     },
@@ -14714,12 +14732,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm30',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media30'},
                                     {'kind': 'text', 'text': 'ConstActive'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media30'},
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
@@ -14737,12 +14755,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm60',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media60'},
                                     {'kind': 'text', 'text': 'ConstActive'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media60'},
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
@@ -14760,12 +14778,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gm6',
-                                        'treatment_id': 'growth_media'},
+                                        'treatment_id': 'growth_media6'},
                                     {'kind': 'text', 'text': 'ConstActive'},
                                     {'kind': 'text', 'text': 'Growth media only'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_media'},
+                                'treatment_id': 'growth_media6'},
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
@@ -14783,12 +14801,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF30',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF30'},
                                     {'kind': 'text', 'text': 'ConstActive'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '30 sec'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF30'},
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
@@ -14806,12 +14824,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF60',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF60'},
                                     {'kind': 'text', 'text': 'ConstActive'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '1 min'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'},
+                                'treatment_id': 'growth_mediaEGF60'},
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
@@ -14829,12 +14847,12 @@ var __scb_sample_3 = {
                                 'cells': [
                                     {   'kind': 'checkbox',
                                         'name': 'gmEGF6',
-                                        'treatment_id': 'growth_mediaEGF'},
+                                        'treatment_id': 'growth_mediaEGF6'},
                                     {'kind': 'text', 'text': 'ConstActive'},
                                     {'kind': 'text', 'text': 'Growth media + EGF'},
                                     {'kind': 'text', 'text': '6 hrs'}
                                 ],
-                                'treatment_id': 'growth_mediaEGF'}
+                                'treatment_id': 'growth_mediaEGF6'}
                         ]
                     },
                     'His-EGFR-FLAG': {
@@ -14993,18 +15011,19 @@ var __scb_sample_3 = {
                 }
             },
             add_new_row_instructions: 'add new row instructions',
+            experiment_setup: scb_ex3_text.experiment_setup({}),
             collections:{
 				'30 s': {
-					name: '30 seconds'
+					name: '30 sec'
 				},
 				'60 s': {
-					name: '1 minute'
+					name: '1 min'
 				},
 				'6 h': {
-					name: '6 hours'
+					name: '6 hrs'
 				},
 				'30 m': {
-					name: '30 minutes'
+					name: '30 min'
 				}
 			},
             concentrations: {
