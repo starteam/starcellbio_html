@@ -15175,8 +15175,12 @@ var __scb_sample_3 = {
             	'IF':{
             		name:'Antibody-labeling IF',
             		conditions: {
-            			'g': {name: 'H2B (green)',
-            			short_name: 'G:H2B'}
+                        'egfr': { name: 'EGFR A488', short_name: 'EGFR'},
+                        'pm': { name: 'PM A488', short_name: 'PM'},
+                        'cyto': { name: 'Cyto A488', short_name: 'Cyto'},
+                        'nuc': { name: 'Nuc A488', short_name: 'Nuc'},
+                        'er': { name: 'ER A488', short_name: 'ER'},
+                        'nm': { name: 'NM A488', short_name: 'NM'}
             		}
             	}
         	},
