@@ -62,7 +62,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-#MEDIA_ROOT = '/tmp/static/'
+# MEDIA_ROOT = '/tmp/static/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -92,7 +92,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -102,17 +101,13 @@ SECRET_KEY = 'h0cs_$-8^zp8b%hp%kj5fp@9gje@otv9%xi!o0yftm*#qlo%(5'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = auth.settings.AUTHENTICATION_BACKENDS
@@ -125,7 +120,8 @@ ROOT_URLCONF = 'StarCellBio.urls'
 WSGI_APPLICATION = 'StarCellBio.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Put strings here, like "/home/html/django_templates" or
+    # "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 
@@ -142,10 +138,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-     'django.contrib.admindocs',
-     'rest_framework',
-     'backend',
-     'instructor',
+    'django.contrib.admindocs',
+    'rest_framework',
+    'backend',
+    'instructor',
 ) + auth.settings.INSTALLED_APPS
 
 # A sample logging configuration. The only tangible logging
@@ -176,7 +172,8 @@ LOGGING = {
         },
     }
 }
-## django all-auth config
+
+# django all-auth config
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = "optional"
@@ -184,7 +181,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = 'StarCellBio registration'
 ACCOUNT_SIGNUP_FORM_CLASS = 'auth.forms.SignupForm'
 ACCOUNT_USERNAME_MIN_LENGTH = 6
 ACCOUNT_USERNAME_REQUIRED = False
-EMAIL_HOST='localhost'
+EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'starcellbio@mit.edu'
 DEFAULT_FROM_EMAIL = 'starcellbio-admin@mit.edu'
@@ -196,7 +193,7 @@ CACHES = {
     }
 }
 
-AUTH_USER_MODEL='auth.User'
+AUTH_USER_MODEL = 'auth.User'
 
 
 # Override settings with untracked YAML config
