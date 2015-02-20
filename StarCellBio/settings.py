@@ -3,7 +3,11 @@
 import auth.settings
 import os.path
 import os
+import yaml
+
+
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+YAML_CONFIG = os.path.join(SITE_ROOT, "settings.yml")
 
 rel = lambda p: os.path.join(SITE_ROOT, p)
 
@@ -196,3 +200,21 @@ CACHES = {
 }
 
 AUTH_USER_MODEL='auth.User'
+
+# Override settings with untracked YAML config
+if os.path.isfile(YAML_CONFIG):
+    with open(YAML_CONFIG) as f:
+        y = yaml.load(f)
+        if y is not None:
+            globals().update(y)
+
+# Override settings with SCB_ environment variables
+scb_env_overrides = {
+    key[4:]: value
+    for key, value in os.environ.iteritems()
+    if key.startswith("SCB_")
+}
+
+os.environ['SCB_TEST_ENV'] = "test_env"
+
+globals().update(scb_env_overrides)
