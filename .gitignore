@@ -66,4 +66,5 @@ html_app/index.html
 .vagrant/
 static/
 
-
+*\.soy\.js
+*\.gss\.css
