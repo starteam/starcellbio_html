@@ -1,3 +1,4 @@
+
 # Django settings for StarCellBio project.
 
 import auth.settings
@@ -13,7 +14,6 @@ rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-#TASTYPIE_FULL_DEBUG = False
 
 import platform
 if platform.node() == 'starapp':
@@ -29,16 +29,13 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'starcellbio',                      # Or path to database file if using sqlite3.
-        'USER': 'starcellbio',                      # Not used with sqlite3.
-        'PASSWORD': '136a411ed9e8592089444b7164ffaf84',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
+DB_ENGINE = 'django.db.backends.mysql'
+DB_NAME = 'starcellbio'
+DB_USER = 'starcellbio'
+DB_PASSWORD = '136a411ed9e8592089444b7164ffaf84'
+DB_HOST = ''
+DB_PORT = ''
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -201,6 +198,7 @@ CACHES = {
 
 AUTH_USER_MODEL='auth.User'
 
+
 # Override settings with untracked YAML config
 if os.path.isfile(YAML_CONFIG):
     with open(YAML_CONFIG) as f:
@@ -218,3 +216,26 @@ scb_env_overrides = {
 os.environ['SCB_TEST_ENV'] = "test_env"
 
 globals().update(scb_env_overrides)
+
+
+DATABASES = {
+    'default': {
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': DB_ENGINE,
+
+        # Or path to database file if using sqlite3.
+        'NAME': DB_NAME,
+
+        # Not used with sqlite3.
+        'USER': DB_USER,
+
+        # Not used with sqlite3.
+        'PASSWORD': DB_PASSWORD,
+
+        # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': DB_HOST,
+
+        # Set to empty string for default. Not used with sqlite3.
+        'PORT': DB_PORT,
+    }
+}
