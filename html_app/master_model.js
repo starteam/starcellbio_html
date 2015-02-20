@@ -13340,8 +13340,6 @@ var __scb_sample_2 = {
                 }
             }
         },
-
-        slide_parser: {},
         model: { // models
             western_blot: {
                 'cyto': {
@@ -15175,12 +15173,14 @@ var __scb_sample_3 = {
             	'IF':{
             		name:'Antibody-labeling IF',
             		conditions: {
-                        'egfr': { name: 'EGFR A488', short_name: 'EGFR'},
-                        'pm': { name: 'PM A488', short_name: 'PM'},
-                        'cyto': { name: 'Cyto A488', short_name: 'Cyto'},
-                        'nuc': { name: 'Nuc A488', short_name: 'Nuc'},
-                        'er': { name: 'ER A488', short_name: 'ER'},
-                        'nm': { name: 'NM A488', short_name: 'NM'}
+                        'rgb': {name: 'NFIB (red), DAPI (blue), control (green)',
+                        short_name: 'IF: RGB'}
+//                        'egfr': { name: 'EGFR A488', short_name: 'EGFR'},
+//                        'pm': { name: 'PM A488', short_name: 'PM'},
+//                        'cyto': { name: 'Cyto A488', short_name: 'Cyto'},
+//                        'nuc': { name: 'Nuc A488', short_name: 'Nuc'},
+//                        'er': { name: 'ER A488', short_name: 'ER'},
+//                        'nm': { name: 'NM A488', short_name: 'NM'}
             		}
             	}
         	},
@@ -15202,12 +15202,12 @@ var __scb_sample_3 = {
             'gfp-pb_10': 'images/microscopy/scb_ex3/nucleus_final/nuc-a.jpg',
             'gfp-pb_11': 'images/microscopy/scb_ex3/nucleus_final/nuc-b.jpg',
             'gfp-pb_12': 'images/microscopy/scb_ex3/nucleus_final/nuc-c.jpg',
-            'gfp-pc_1': 'images/microscopy/scb_ex3/pm_final/pm-b.jpg',
-            'gfp-pc_2': 'images/microscopy/scb_ex3/pm_final/pm-c.jpg',
-            'gfp-pc_3': 'images/microscopy/scb_ex3/pm_final/pm2b.jpg',
-            'gfp-pc_4': 'images/microscopy/scb_ex3/pm_final/pm3b.jpg',
-            'gfp-pc_5': 'images/microscopy/scb_ex3/pm_final/pm34-1.jpg',
-            'gfp-pc_6': 'images/microscopy/scb_ex3/pm_final/pm34-2.jpg',
+            'pm_final_1': 'images/microscopy/scb_ex3/pm_final/pm-b.jpg',
+            'pm_final_2': 'images/microscopy/scb_ex3/pm_final/pm-c.jpg',
+            'pm_final_3': 'images/microscopy/scb_ex3/pm_final/pm2b.jpg',
+            'pm_final_4': 'images/microscopy/scb_ex3/pm_final/pm3b.jpg',
+            'pm_final_5': 'images/microscopy/scb_ex3/pm_final/pm34-1.jpg',
+            'pm_final_6': 'images/microscopy/scb_ex3/pm_final/pm34-2.jpg',
             'gfp-pd_1': 'images/microscopy/scb_ex3/cyto_final/c-a.jpg',
             'gfp-pd_2': 'images/microscopy/scb_ex3/cyto_final/c-b.jpg',
             'gfp-pd_3': 'images/microscopy/scb_ex3/cyto_final/c-c.jpg',
@@ -15237,7 +15237,37 @@ var __scb_sample_3 = {
             'bo': 'images/microscopy/scb_ex3/negative_control.jpg',
             'dummy': 'dummy'
         },
-        	slide_parser: {},
+        	slide_parser: {
+                'default':{
+                    'IF': {
+                        'rgb': [
+                            [
+                                {hash: 'pm_final_1', mag:'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_2', mag:'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_3', mag:'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_4', mag:'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_5', mag:'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_6', mag:'N/A'}
+                            ]
+                        ]
+//                        'pm': [],
+//                        'cyto': [],
+//                        'nuc': []
+                    }
+                }
+
+            },
+
             model: { // models
                 western_blot: {
                 'cyto': {
@@ -15724,7 +15754,33 @@ var __scb_sample_3 = {
 
                     }
                 },
-                microscopy: {}
+                microscopy: {
+                    'valid': ['WT-EGFR', 'growth_media'],
+                    'slide': {
+//                        'complex_parser': [
+//                        {
+//                            match: ['cell_line','drug_id', 'conditions'],
+//                            conditions: 'egfr',
+//                            drug_id: 'growth_media',
+//                            cell_line: 'WT-EGFR'
+//                        }
+//
+//                        ]
+                        'conditions_parser':[
+                		{
+                			match: [],
+
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'WT-EGFR',
+                			drug_id: ['growth_media'],
+                			conditions: 'rgb'
+                		}
+                		]
+                    }
+
+                }
                 
             }
         }
