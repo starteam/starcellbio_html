@@ -66,4 +66,4 @@ html_app/index.html
 .vagrant/
 static/
 
-
+gen/
