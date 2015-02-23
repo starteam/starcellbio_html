@@ -73,7 +73,7 @@
       shell: >
         exceutable=/bin/bash
         chdir=/vagrant/html_app
-        {{ venv_path }}/bin/python watch.py
+        {{ venv_path }}/bin/python build.py
       environment:
         PROJECT_HOME: "/vagrant"
         
