@@ -203,17 +203,19 @@ if os.path.isfile(YAML_CONFIG):
         if y is not None:
             globals().update(y)
 
-# Override settings with SCB_ environment variables
-scb_env_overrides = {
-    key[4:]: value
-    for key, value in os.environ.iteritems()
-    if key.startswith("SCB_")
-}
+# Filter for environment variables beginning with our prefix (SCB_)
+scb_env_overrides = filter(
+    lambda x: x[0].startswith("SCB_"),
+    os.environ.iteritems()
+)
 
-os.environ['SCB_TEST_ENV'] = "test_env"
+# Cut off the first four characters
+scb_env_overrides = map(
+    lambda x: (x[0][4:], x[1]),
+    scb_env_overrides
+)
 
-globals().update(scb_env_overrides)
-
+globals().update(dict(scb_env_overrides))
 
 DATABASES = {
     'default': {
