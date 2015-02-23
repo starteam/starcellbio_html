@@ -13896,7 +13896,7 @@ var __scb_sample_3 = {
                     keys: {
                         '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                         '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
-                        '%COLLECTION%': {attr: ['treatment_list', 'list', '0', 'collection_id'], map:['collections', '%KEY%', 'name']}
+                        '%COLLECTION%': {attr: ['treatment_list', 'list', '0', 'duration'],map: ['durations', '%KEY%', 'name']}
                     }
                 },
                 microscopy: {
@@ -13913,7 +13913,7 @@ var __scb_sample_3 = {
                                     'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
                                         {
-                                            'collection_id': '30 s',
+                                            'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {
                                                     'concentration_id': '100',
@@ -13935,7 +13935,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -13958,7 +13958,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -13981,7 +13981,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14004,7 +14004,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14027,7 +14027,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14050,7 +14050,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmBuff': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaBuff'}
@@ -14073,7 +14073,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmProK': [
                                 {   'cell_line': 'WT-EGFR',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaProK'}
@@ -14100,7 +14100,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm30': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14123,7 +14123,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14146,7 +14146,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14169,7 +14169,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14192,7 +14192,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14215,7 +14215,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14238,7 +14238,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmBuff': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaBuff'}
@@ -14261,7 +14261,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmProK': [
                                 {   'cell_line': 'EGFR Null',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaProK'}
@@ -14289,7 +14289,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm30': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14312,7 +14312,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14335,7 +14335,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14358,7 +14358,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14381,7 +14381,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14404,7 +14404,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'EGFR-M1',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14431,7 +14431,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm30': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14454,7 +14454,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14477,7 +14477,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14500,7 +14500,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14523,7 +14523,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14546,7 +14546,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'EGFR-M2',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14573,7 +14573,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm30': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14596,7 +14596,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14619,7 +14619,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14642,7 +14642,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14665,7 +14665,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14688,7 +14688,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'NoUB',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14716,7 +14716,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm30': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14739,7 +14739,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm60': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14762,7 +14762,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gm6': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_media'}
@@ -14785,7 +14785,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF30': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14808,7 +14808,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF60': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '60 s',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14831,7 +14831,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmEGF6': [
                                 {   'cell_line': 'ConstActive',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '6 h',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaEGF'}
@@ -14858,7 +14858,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmBuff': [
                                 {   'cell_line': 'His-EGFR-FLAG',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaBuff'}
@@ -14881,7 +14881,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmProK': [
                                 {   'cell_line': 'His-EGFR-FLAG',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaProK'}
@@ -14909,7 +14909,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmBuff': [
                                 {   'cell_line': 'His-EGFR-M1-FLAG',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaBuff'}
@@ -14932,7 +14932,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmProK': [
                                 {   'cell_line': 'His-EGFR-M1-FLAG',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaProK'}
@@ -14960,7 +14960,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmBuff': [
                                 {   'cell_line': 'His-EGFR-M2-FLAG',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaBuff'}
@@ -14983,7 +14983,7 @@ var __scb_sample_3 = {
                             {   'cell_treatments': {   'gmProK': [
                                 {   'cell_line': 'His-EGFR-M2-FLAG',
                                     'treatment_list': {   'list': [
-                                        {   'collection_id': '30 m',
+                                        {   'collection_id': 'default',
                                             'drug_list': {   'list': [
                                                 {   'concentration_id': '100',
                                                     'drug_id': 'growth_mediaProK'}
@@ -15021,6 +15021,20 @@ var __scb_sample_3 = {
 					name: '6 hrs'
 				},
 				'30 m': {
+					name: '30 min'
+				}
+			},
+            durations:{
+                '30 sec': {
+					name: '30 sec'
+				},
+				'1 min': {
+					name: '1 min'
+				},
+				'6 hrs': {
+					name: '6 hrs'
+				},
+				'30 min': {
 					name: '30 min'
 				}
 			},
@@ -15173,7 +15187,7 @@ var __scb_sample_3 = {
             	'IF':{
             		name:'Antibody-labeling IF',
             		conditions: {
-                        'rgb': {name: 'NFIB (red), DAPI (blue), control (green)',
+                        'g': {name: 'NFIB (red), DAPI (blue), control (green)',
                         short_name: 'IF: RGB'}
 //                        'egfr': { name: 'EGFR A488', short_name: 'EGFR'},
 //                        'pm': { name: 'PM A488', short_name: 'PM'},
@@ -15182,7 +15196,10 @@ var __scb_sample_3 = {
 //                        'er': { name: 'ER A488', short_name: 'ER'},
 //                        'nm': { name: 'NM A488', short_name: 'NM'}
             		}
+
+
             	}
+
         	},
         	slides: {
             'gfp-pa_1': 'images/microscopy/scb_ex3/er_final/er1crop.jpg',
@@ -15240,7 +15257,7 @@ var __scb_sample_3 = {
         	slide_parser: {
                 'default':{
                     'IF': {
-                        'rgb': [
+                        'g': [
                             [
                                 {hash: 'pm_final_1', mag:'N/A'}
                             ],
@@ -15755,7 +15772,7 @@ var __scb_sample_3 = {
                     }
                 },
                 microscopy: {
-                    'valid': ['WT-EGFR', 'growth_media'],
+                    'valid': [],
                     'slide': {
 //                        'complex_parser': [
 //                        {
@@ -15775,7 +15792,7 @@ var __scb_sample_3 = {
                 			match: ['cell_line', 'drug_id', 'conditions'],
                 			cell_line: 'WT-EGFR',
                 			drug_id: ['growth_media'],
-                			conditions: 'rgb'
+                			conditions: 'g'
                 		}
                 		]
                     }

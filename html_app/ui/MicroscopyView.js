@@ -349,8 +349,6 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
         alert("INVALID ELEMENT!");
     }
     var slide_type = $(element).attr('value');
-    console.log('slide_type');
-    console.log(slide_type);
     if (slide_type == '') {
         return;
     }
@@ -385,16 +383,29 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 				return;
 				
 		}
-       if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1 || 
-       	  _.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.first.collection_id][slide_type])==1 || 
+        /*
+        If there is one condition
+         */
+        var cond_num_collection_id= 0, cond_num_default=0;
+        if (parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.first.collection_id]){
+            cond_num_collection_id=_.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.first.collection_id][slide_type]);
+
+        }
+        if(parsed.assignment.template.slide_parser['default'][slide_type]){
+            cond_num_default= _.size(parsed.assignment.template.slide_parser['default'][slide_type]);
+
+        }
+        console.log(cond_num_collection_id);
+       if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1 ||
+           cond_num_collection_id==1 || cond_num_default==1 ||
        	  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope) == 1
        	  )
        {
-       		var slide_conditions_val = ''
+       		var slide_conditions_val = '';
        		if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1 ){
        			slide_conditions_val = _.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)[0]
        		}
-       		else if(  _.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.first.collection_id][slide_type])==1){
+       		else if( cond_num_collection_id == 1){
        			slide_conditions_val = _.keys(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.first.collection_id][slide_type])[0]
        		}
 

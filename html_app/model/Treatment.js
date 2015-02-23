@@ -72,10 +72,8 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 
 	Object.defineProperty(self, 'duration', {
 		get : function() {
-            console.log("Get duration");
 			var time = parseFloat(data.duration_value);
 			var days = Math.floor((time % 604800) / 86400);
-
 			var hours = Math.floor((time % 86400) / 3600);
 			var minutes = Math.floor((time % 3600) / 60);
 			var months = Math.floor(time /2592000);
