@@ -18,7 +18,7 @@
     font-size:10pt;
 }
 
-.suts_ps2_inner_dialog_title_close {
+.sutd_ps2_inner_dialog_title_close {
 	
 	padding-top: 0px;
 	float:right;
@@ -33,7 +33,7 @@
 	font-size: 14pt;
 	color: transparent;
 	background: transparent;
-	background-image: url('../../images/header/scb_close_button.png');
+	background-image: url('../../../images/header/scb_close_button.png');
 	background-repeat: no-repeat;
 
     
@@ -50,7 +50,7 @@
 .sutd_ps2_inner_dialog {
     opacity: 5;
     width: 75%;
-    height: 75%;
+    height: auto;
     overflow: auto;
     margin-top: 12%;
     margin-left: 12%;
