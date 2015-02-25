@@ -150,6 +150,19 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			function peak2Ug2(x){
 				  return normal_dist(x, 0.31, 0.14, -2, true)*6;
 			}
+            function bigpeak50(x){
+				  return normal_dist(x, 1, 0.1, -2, true);
+			}
+            function bump100(x){
+				return normal_dist(x, 2.3, 0.5, 3, true);
+			}
+            function flatbump100(x){
+                var y = -Math.pow(4*x-8,4)+0.5;
+                if(x>1.25 && x<1.75)
+                    y=0.25;
+                return (y>0)?y:0;
+            }
+
 			
 			function g1(x){
 				  // return normal_dist(x, 0.2, 0.27, -25, true)* 0.7;
@@ -175,7 +188,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             function peak100(x){
             	return normal_dist(x, 0.8, 0.05, 0.5, false);
             }
-            
+
             function peak50(x){
             	return normal_dist(x, 0.4, 0.05, 0.5, false);
             }
@@ -237,20 +250,24 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     sum += s[1];
                 });
                 console.log("Sum of normalized data: "+sum);
-                //
 
-                //want to change this
-                var tick1=template.model.facs.ticks[2];//last point on the scale
-
-               // console.log("Ticks: "+tick1);
-                if (sum != 0) {
-                    _.each(data, function (s, index) {
-                        data[index][1] = data[index][1] / sum * (template.model.facs.max ? ((big_const*tick1)/template.model.facs.max)*number_of_curves: 2750  );
-                        console.log("y= "+data[index][1]);
-                    });
-                }
                 _.each(data, function (s, index) {
-                    data[index][0] = data[index][0] * (template.model.facs.max ? ((template.model.facs.max*50)/100): 50 ) ;
+                    if (template.model.facs.scale) {
+                        data[index][1] = data[index][1] / sum * 2750;
+                    } else {
+                        data[index][1] = data[index][1] / sum * (template.model.facs.max ? ((big_const * 100) / template.model.facs.max) * number_of_curves : 2750  );
+                    }
+                });
+
+
+                _.each(data, function (s, index) {
+                    /*to preserve the old excercise scaling*/
+                    if(template.model.facs.scale){
+                        /*this is assuming that the start point is 0 */
+                        data[index][0]= template.model.facs.max * data[index][0] / data[data.length-1][0];
+                    }else {
+                        data[index][0] = data[index][0] * (template.model.facs.max ? ((template.model.facs.max*50)/100): 50 ) ;
+                    }
 
                 });
 
@@ -273,8 +290,12 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     //only for exercise 2
                     transform:  function(v) {
 //                        return (v>100?Math.log(v+0.0001)/Math.LN10:v);
-                        console.log("x_trans="+Math.log(v+0.0001)/Math.LN10);
-                        return Math.log(v+0.0001)/Math.LN10; /*move away from zero*/
+                        if(template.model.facs.scale && template.model.facs.scale.indexOf('log')>-1) {
+                            return Math.log(v + 0.0001) / Math.LN10;
+                            /*move away from zero*/
+                        }else{
+                            return v;
+                        }
                     },
 
 //                    tickFormatter: function (v, axis) {return "10^" + (Math.round( Math.log(v)/Math.LN10)).toString();}, //(Math.round( Math.log(v)/Math.LN10)).toString().sup();},
@@ -339,7 +360,6 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 	number_of_curves = 1;
 //                    var log_x=Math.log(x+0.0001)/Math.LN10(0);
                     var log_x=x;
-                    console.log("x="+x);
 
                     var y = s_block_C(log_x);
                     data.push([log_x, y]);
@@ -470,7 +490,6 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 };
             
            }
-           
            if (('' + shape).toLowerCase() == '2-peak-uneven-normal-400') {
                 var data = [];
                 var bias = (Math.random() - .5) * .10;
@@ -490,6 +509,46 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     options: options
                 };
             
+           }
+            if (('' + shape).toLowerCase() == '1-peak-normal-1-flatbump-400') {
+                var data = [];
+                var bias = (Math.random() - .5) * .10;
+                for (var x = 0; x < 3; x += .01) {
+	                number_of_curves = 2;
+                    var y = flatbump100(x + bias) + bigpeak50(x + bias);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+				roundData(data);
+                state.data = {
+                    data: [
+                        { data: data},
+
+                    ],
+                    options: options
+                };
+
+           }
+             if (('' + shape).toLowerCase() == '1-peak-1-bump-normal-400') {
+                var data = [];
+                var bias = (Math.random() - .5) * .10;
+                for (var x = 0; x < 3; x += .01) {
+	                number_of_curves = 2;
+                    var y = bump100(x + bias) + bigpeak50(x + bias);
+                    data.push([x, y]);
+
+                }
+                normalize(data);
+				roundData(data);
+                state.data = {
+                    data: [
+                        { data: data},
+
+                    ],
+                    options: options
+                };
+
            }
            
            if (('' + shape).toLowerCase() == 'peak-50-normal-400') {
