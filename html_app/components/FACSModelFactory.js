@@ -150,17 +150,22 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			function peak2Ug2(x){
 				  return normal_dist(x, 0.31, 0.14, -2, true)*6;
 			}
-            function bigpeak50(x){
-				  return normal_dist(x, 1, 0.1, -2, true);
-			}
+
+            /*
+            *The following 3 functions describe the asynchronous image
+            * with a tall peak at 50 and a small bump at 100, and flat
+            * middle ground.
+            */
             function bump100(x){
-				return normal_dist(x, 2.3, 0.5, 3, true);
+                return normal_dist(x, 2, 0.2, -2, true)*0.2;
 			}
-            function flatbump100(x){
-                var y = -Math.pow(4*x-8,4)+0.5;
-                if(x>1.25 && x<1.75)
-                    y=0.25;
+            function bigpeak50(x){
+				  return normal_dist(x, 0.9, 0.2, -3, true);
+			}
+            function middlenoise(x){
+                var y= -Math.pow(x-1.6,2)+0.25;
                 return (y>0)?y:0;
+
             }
 
 			
@@ -261,7 +266,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
 
                 _.each(data, function (s, index) {
-                    /*to preserve the old excercise scaling*/
+                    /*to preserve the old exercise scaling*/
                     if(template.model.facs.scale){
                         /*this is assuming that the start point is 0 */
                         data[index][0]= template.model.facs.max * data[index][0] / data[data.length-1][0];
@@ -287,12 +292,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     max: template.model.facs.max ? template.model.facs.max:  150,
                     ticks:  template.model.facs.ticks ? template.model.facs.ticks: [50, 100],
                     tickLength: 0,
-                    //only for exercise 2
                     transform:  function(v) {
-//                        return (v>100?Math.log(v+0.0001)/Math.LN10:v);
                         if(template.model.facs.scale && template.model.facs.scale.indexOf('log')>-1) {
-                            return Math.log(v + 0.0001) / Math.LN10;
-                            /*move away from zero*/
+                            return Math.log(v + 0.0001) / Math.LN10; /*move away from zero*/
                         }else{
                             return v;
                         }
@@ -515,7 +517,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
 	                number_of_curves = 2;
-                    var y = flatbump100(x + bias) + bigpeak50(x + bias);
+                     var y = bigpeak50(x)+bump100(x)+middlenoise(x);
                     data.push([x, y]);
 
                 }
@@ -530,27 +532,6 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 };
 
            }
-             if (('' + shape).toLowerCase() == '1-peak-1-bump-normal-400') {
-                var data = [];
-                var bias = (Math.random() - .5) * .10;
-                for (var x = 0; x < 3; x += .01) {
-	                number_of_curves = 2;
-                    var y = bump100(x + bias) + bigpeak50(x + bias);
-                    data.push([x, y]);
-
-                }
-                normalize(data);
-				roundData(data);
-                state.data = {
-                    data: [
-                        { data: data},
-
-                    ],
-                    options: options
-                };
-
-           }
-           
            if (('' + shape).toLowerCase() == 'peak-50-normal-400') {
                 var data = [];
                 var bias = (Math.random() - .5) * .10;

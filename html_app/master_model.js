@@ -11898,7 +11898,7 @@ var ps2_strain_E = {
 
 var __sutd_intro_biology_ps2 = {
         id: 'sutd_intro_biology_ps2',
-        name: 'Problem 2',
+        name: 'SUTD Problem 2',
         course: 'SUTD_Biology',
     	course_name: 'SUTD Intro Biology',
         description: 'FACS and Western Blot for temperature sensitive mutants',
@@ -12333,7 +12333,7 @@ var __sutd_intro_biology_ps2 = {
                             {
                                 match: ['drug_id'],
                                 drug_id: 'nc',
-                                shape: 'S-block'
+                                shape: '1-peak-normal-1-flatbump-400'
                             },
                             {
                                 match: ['drug_id'],
@@ -12343,12 +12343,12 @@ var __sutd_intro_biology_ps2 = {
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna2',
-                                shape: '1-peak-normal-1-flatbump-400'
+                                shape: 'g2-block'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna3',
-                                shape: '1-peak-1-bump-normal-400'
+                                shape: 'g2-block'
                             }
                         ]
 
