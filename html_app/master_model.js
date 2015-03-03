@@ -13921,7 +13921,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr', 'pm', 'cyto', 'nuc', 'er', 'nm'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -13942,7 +13942,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr', 'pm', 'cyto', 'nuc', 'er', 'nm'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -13965,7 +13965,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr', 'pm', 'cyto', 'nuc', 'er', 'nm'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -13988,7 +13988,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14011,7 +14011,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14034,7 +14034,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14057,7 +14057,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14080,7 +14080,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14107,7 +14107,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14130,7 +14130,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14153,7 +14153,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14176,7 +14176,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14199,7 +14199,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14222,7 +14222,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14245,7 +14245,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14268,7 +14268,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14296,7 +14296,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14319,7 +14319,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14342,7 +14342,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14365,7 +14365,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14388,7 +14388,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14411,7 +14411,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14438,7 +14438,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14461,7 +14461,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14484,7 +14484,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['egfr'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14507,7 +14507,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14530,7 +14530,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14553,7 +14553,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14580,7 +14580,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14603,7 +14603,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14626,7 +14626,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14649,7 +14649,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14672,7 +14672,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14695,7 +14695,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14723,7 +14723,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14746,7 +14746,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14769,7 +14769,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14792,7 +14792,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 sec',
                                             'duration_value': 30,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14815,7 +14815,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '1 min',
                                             'duration_value': 60,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14838,7 +14838,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '6 hrs',
                                             'duration_value': 21600,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14865,7 +14865,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14888,7 +14888,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14916,7 +14916,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14939,7 +14939,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14967,7 +14967,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': ['na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -14990,7 +14990,7 @@ var __scb_sample_3 = {
                                             ]},
                                             'duration': '30 min',
                                             'duration_value': 1800,
-                                            'microscope': [   'g'],
+                                            'microscope': [   'na'],
                                             'temperature': '25'}
                                     ]}}
                             ]},
@@ -15031,7 +15031,7 @@ var __scb_sample_3 = {
 				'1 min': {
 					name: '1 min'
 				},
-				'6 hrs': {
+				'6 h': {
 					name: '6 hrs'
 				},
 				'30 min': {
@@ -15073,7 +15073,7 @@ var __scb_sample_3 = {
                     name: 'WT-EGFR'
                 }, 
                 'EGFR Null': {
-                	name: 'EGFR-Null'
+                	name: 'EGFR Null'
                 },
                 'EGFR-M1': {
                 	name: 'EGFR-M1'
@@ -15104,8 +15104,8 @@ var __scb_sample_3 = {
                 kind: 'minutes'
             },
             primary_anti_body: {
-            	order: ['chk1', 'rad21', 'cyclin', 'cyclinE', 'mad2', 'pgk1'],
-            	'egfr': {
+            	order: ['1', '2', '3', '4', '5', '6', '7'],
+            	'1': {
                     name: 'Mouse anti-EGFR',
                     secondary: ['m'],
                     marks: [
@@ -15113,7 +15113,7 @@ var __scb_sample_3 = {
                     ],
                     gel_name: 'egfr'
                 },
-                'pegfr': {
+                '2': {
                     name: 'Mouse anti-pEGFR',
                     secondary: ['m'],
                     marks: [
@@ -15121,7 +15121,7 @@ var __scb_sample_3 = {
                     ],
                     gel_name: 'pegfr'
                 },
-                'pmek': {
+                '3': {
                     name: 'Mouse anti-pMEK',
                     secondary: ['m'],
                     marks: [
@@ -15129,7 +15129,7 @@ var __scb_sample_3 = {
                     ],
                     gel_name: 'pmek'
                 },
-                'praf': {
+                '4': {
                     name: 'Mouse anti-pRAF',
                     secondary: ['m'],
                     marks: [
@@ -15137,7 +15137,7 @@ var __scb_sample_3 = {
                     ],
                     gel_name: 'praf'
                 },
-                'pgk1': {
+                '5': {
                     name: 'Mouse anti-PGK1',
                     secondary: ['m'],
                     marks: [
@@ -15145,7 +15145,7 @@ var __scb_sample_3 = {
                     ],
                     gel_name: 'pgk1'
                 },
-                '6xhis': {
+                '6': {
                     name: 'Rabbit anti-6xHis',
                     secondary: ['r'],
                     marks: [
@@ -15153,7 +15153,7 @@ var __scb_sample_3 = {
                     ],
                     gel_name: '6xhis'
                 },
-                'flag': {
+                '7': {
                     name: 'Rabbit anti-FLAG',
                     secondary: ['r'],
                     marks: [
@@ -15188,13 +15188,14 @@ var __scb_sample_3 = {
             		name:'Antibody-labeling IF',
             		conditions: {
                         'g': {name: 'NFIB (red), DAPI (blue), control (green)',
-                        short_name: 'IF: RGB'}
-//                        'egfr': { name: 'EGFR A488', short_name: 'EGFR'},
-//                        'pm': { name: 'PM A488', short_name: 'PM'},
-//                        'cyto': { name: 'Cyto A488', short_name: 'Cyto'},
-//                        'nuc': { name: 'Nuc A488', short_name: 'Nuc'},
-//                        'er': { name: 'ER A488', short_name: 'ER'},
-//                        'nm': { name: 'NM A488', short_name: 'NM'}
+                        short_name: 'IF: RGB'},
+                        'egfr': { name: 'EGFR A488', short_name: 'EGFR'},
+                        'pm': { name: 'PM A488', short_name: 'PM'},
+                        'cyto': { name: 'Cyto A488', short_name: 'Cyto'},
+                        'nuc': { name: 'Nuc A488', short_name: 'Nuc'},
+                        'er': { name: 'ER A488', short_name: 'ER'},
+                        'nm': { name: 'NM A488', short_name: 'NM'},
+                        'na': {name: 'None', short_name: 'None'}
             		}
 
 
@@ -15202,44 +15203,44 @@ var __scb_sample_3 = {
 
         	},
         	slides: {
-            'gfp-pa_1': 'images/microscopy/scb_ex3/er_final/er1crop.jpg',
-            'gfp-pa_2': 'images/microscopy/scb_ex3/er_final/er2crop.jpg',
-            'gfp-pa_3': 'images/microscopy/scb_ex3/er_final/er3crop1.jpg',
-            'gfp-pa_4': 'images/microscopy/scb_ex3/er_final/er3crop2.jpg',
-            'gfp-pa_5': 'images/microscopy/scb_ex3/er_final/er5crop1.jpg',
-            'gfp-pb_1': 'images/microscopy/scb_ex3/nucleus_final/n2.jpg',
-            'gfp-pb_2': 'images/microscopy/scb_ex3/nucleus_final/n8.jpg',
-            'gfp-pb_3': 'images/microscopy/scb_ex3/nucleus_final/n9.jpg',
-            'gfp-pb_4': 'images/microscopy/scb_ex3/nucleus_final/n18.jpg',
-            'gfp-pb_5': 'images/microscopy/scb_ex3/nucleus_final/n34.jpg',
-            'gfp-pb_6': 'images/microscopy/scb_ex3/nucleus_final/n43.jpg',
-            'gfp-pb_7': 'images/microscopy/scb_ex3/nucleus_final/n47.jpg',
-            'gfp-pb_8': 'images/microscopy/scb_ex3/nucleus_final/n60.jpg',
-            'gfp-pb_9': 'images/microscopy/scb_ex3/nucleus_final/n64.jpg',
-            'gfp-pb_10': 'images/microscopy/scb_ex3/nucleus_final/nuc-a.jpg',
-            'gfp-pb_11': 'images/microscopy/scb_ex3/nucleus_final/nuc-b.jpg',
-            'gfp-pb_12': 'images/microscopy/scb_ex3/nucleus_final/nuc-c.jpg',
+            'er_final_1': 'images/microscopy/scb_ex3/er_final/er1crop.jpg',
+            'er_final_2': 'images/microscopy/scb_ex3/er_final/er2crop.jpg',
+            'er_final_3': 'images/microscopy/scb_ex3/er_final/er3crop1.jpg',
+            'er_final_4': 'images/microscopy/scb_ex3/er_final/er3crop2.jpg',
+            'er_final_5': 'images/microscopy/scb_ex3/er_final/er5crop1.jpg',
+            'nucleus_final_1': 'images/microscopy/scb_ex3/nucleus_final/n2.jpg',
+            'nucleus_final_2': 'images/microscopy/scb_ex3/nucleus_final/n8.jpg',
+            'nucleus_final_3': 'images/microscopy/scb_ex3/nucleus_final/n9.jpg',
+            'nucleus_final_4': 'images/microscopy/scb_ex3/nucleus_final/n18.jpg',
+            'nucleus_final_5': 'images/microscopy/scb_ex3/nucleus_final/n34.jpg',
+            'nucleus_final_6': 'images/microscopy/scb_ex3/nucleus_final/n43.jpg',
+            'nucleus_final_7': 'images/microscopy/scb_ex3/nucleus_final/n47.jpg',
+            'nucleus_final_8': 'images/microscopy/scb_ex3/nucleus_final/n60.jpg',
+            'nucleus_final_9': 'images/microscopy/scb_ex3/nucleus_final/n64.jpg',
+            'nucleus_final_10': 'images/microscopy/scb_ex3/nucleus_final/nuc-a.jpg',
+            'nucleus_final_11': 'images/microscopy/scb_ex3/nucleus_final/nuc-b.jpg',
+            'nucleus_final_12': 'images/microscopy/scb_ex3/nucleus_final/nuc-c.jpg',
             'pm_final_1': 'images/microscopy/scb_ex3/pm_final/pm-b.jpg',
             'pm_final_2': 'images/microscopy/scb_ex3/pm_final/pm-c.jpg',
             'pm_final_3': 'images/microscopy/scb_ex3/pm_final/pm2b.jpg',
             'pm_final_4': 'images/microscopy/scb_ex3/pm_final/pm3b.jpg',
             'pm_final_5': 'images/microscopy/scb_ex3/pm_final/pm34-1.jpg',
             'pm_final_6': 'images/microscopy/scb_ex3/pm_final/pm34-2.jpg',
-            'gfp-pd_1': 'images/microscopy/scb_ex3/cyto_final/c-a.jpg',
-            'gfp-pd_2': 'images/microscopy/scb_ex3/cyto_final/c-b.jpg',
-            'gfp-pd_3': 'images/microscopy/scb_ex3/cyto_final/c-c.jpg',
-            'gfp-pd_4': 'images/microscopy/scb_ex3/cyto_final/c-d.jpg',
-            'gfp-pd_5': 'images/microscopy/scb_ex3/cyto_final/c1.jpg',
-            'gfp-pd_6': 'images/microscopy/scb_ex3/cyto_final/c7.jpg',
-            'gfp-pd_7': 'images/microscopy/scb_ex3/cyto_final/c15-1.jpg',
-            'gfp-pd_8': 'images/microscopy/scb_ex3/cyto_final/c15-2.jpg',
-            'gfp-pd_9': 'images/microscopy/scb_ex3/cyto_final/c17.jpg',
-            'gfp-pd_10': 'images/microscopy/scb_ex3/cyto_final/c29.jpg',
-            'gfp-nm_1': 'images/microscopy/scb_ex3/nm_final/NM1crop.jpg',
-            'gfp-nm_2': 'images/microscopy/scb_ex3/nm_final/nm2crop.jpg',
-            'gfp-nm_3': 'images/microscopy/scb_ex3/nm_final/nm3crop1.jpg',
-            'gfp-nm_4': 'images/microscopy/scb_ex3/nm_final/nm3crop2.jpg',
-            'gfp-nm_5': 'images/microscopy/scb_ex3/nm_final/nm5crop.jpg',
+            'cyto_final_1': 'images/microscopy/scb_ex3/cyto_final/c-a.jpg',
+            'cyto_final_2': 'images/microscopy/scb_ex3/cyto_final/c-b.jpg',
+            'cyto_final_3': 'images/microscopy/scb_ex3/cyto_final/c-c.jpg',
+            'cyto_final_4': 'images/microscopy/scb_ex3/cyto_final/c-d.jpg',
+            'cyto_final_5': 'images/microscopy/scb_ex3/cyto_final/c1.jpg',
+            'cyto_final_6': 'images/microscopy/scb_ex3/cyto_final/c7.jpg',
+            'cyto_final_7': 'images/microscopy/scb_ex3/cyto_final/c15-1.jpg',
+            'cyto_final_8': 'images/microscopy/scb_ex3/cyto_final/c15-2.jpg',
+            'cyto_final_9': 'images/microscopy/scb_ex3/cyto_final/c17.jpg',
+            'cyto_final_10': 'images/microscopy/scb_ex3/cyto_final/c29.jpg',
+            'nm_final_1': 'images/microscopy/scb_ex3/nm_final/NM1crop.jpg',
+            'nm_final_2': 'images/microscopy/scb_ex3/nm_final/nm2crop.jpg',
+            'nm_final_3': 'images/microscopy/scb_ex3/nm_final/nm3crop1.jpg',
+            'nm_final_4': 'images/microscopy/scb_ex3/nm_final/nm3crop2.jpg',
+            'nm_final_5': 'images/microscopy/scb_ex3/nm_final/nm5crop.jpg',
             'gfp_1': 'images/microscopy/scb_ex3/nuc_and_cyto/cn2.jpg',
             'gfp_2': 'images/microscopy/scb_ex3/nuc_and_cyto/cn3.jpg',
             'gfp_3': 'images/microscopy/scb_ex3/nuc_and_cyto/cn5.jpg',
@@ -15254,32 +15255,159 @@ var __scb_sample_3 = {
             'bo': 'images/microscopy/scb_ex3/negative_control.jpg',
             'dummy': 'dummy'
         },
-        	slide_parser: {
-                'default':{
+            slide_parser: {
+                'default': {
                     'IF': {
-                        'g': [
+                        'egfr': [
                             [
-                                {hash: 'pm_final_1', mag:'N/A'}
+                                {hash: 'pm_final_1', mag: 'N/A'}
                             ],
                             [
-                                {hash: 'pm_final_2', mag:'N/A'}
+                                {hash: 'pm_final_2', mag: 'N/A'}
                             ],
                             [
-                                {hash: 'pm_final_3', mag:'N/A'}
+                                {hash: 'pm_final_3', mag: 'N/A'}
                             ],
                             [
-                                {hash: 'pm_final_4', mag:'N/A'}
+                                {hash: 'pm_final_4', mag: 'N/A'}
                             ],
                             [
-                                {hash: 'pm_final_5', mag:'N/A'}
+                                {hash: 'pm_final_5', mag: 'N/A'}
                             ],
                             [
-                                {hash: 'pm_final_6', mag:'N/A'}
+                                {hash: 'pm_final_6', mag: 'N/A'}
+                            ]
+                        ],
+                        'pm': [
+                            [
+                                {hash: 'pm_final_1', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_2', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_3', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_4', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_5', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'pm_final_6', mag: 'N/A'}
+                            ]
+                        ],
+                        'cyto': [
+                            [
+                                {hash: 'cyto_final_1', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'cyto_final_2', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'cyto_final_3', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'cyto_final_4', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'cyto_final_5', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'cyto_final_6', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'cyto_final_7', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'cyto_final_8', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'cyto_final_9', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'cyto_final_10', mag: 'N/A'}
+                            ]
+                        ],
+                        'nuc': [
+                            [
+                                {hash: 'nuc_final_1', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_2', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_3', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_4', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_5', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_6', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_7', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_8', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_9', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_10', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_11', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'nuc_final_12', mag: 'N/A'}
+                            ]
+
+                        ],
+                        'er': [
+                            [
+                                {hash: 'er_final_1', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'er_final_2', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'er_final_3', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'er_final_4', mag: 'N/A'}
+                            ],
+                            [
+                                {hash: 'er_final_5', mag: 'N/A'}
+                            ]
+                        ],
+                        'nm': [
+                            [
+                                {hash: 'nm_final_1', mag: 'N/A'}
+                            ],
+                             [
+                                {hash: 'nm_final_2', mag: 'N/A'}
+                            ],
+                             [
+                                {hash: 'nm_final_3', mag: 'N/A'}
+                            ],
+                             [
+                                {hash: 'nm_final_4', mag: 'N/A'}
+                            ],
+                             [
+                                {hash: 'nm_final_5', mag: 'N/A'}
+                            ]
+                        ],
+                        'bo': [
+                            [
+                                { hash: 'bo', mag: '20x'}
                             ]
                         ]
-//                        'pm': [],
-//                        'cyto': [],
-//                        'nuc': []
                     }
                 }
 
@@ -15293,423 +15421,572 @@ var __scb_sample_3 = {
                         {
                             transfer_function: 'static',
                             cutoff: -1,
-                            drug: 'gmBuf',
-                            cell_line: 'nt',
+                            cell_line: 'WT-EGFR',
+                            drug: 'growth_media',
+                            duration: '*ANY*',
+                            marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'high',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                 {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            cell_line: 'WT-EGFR',
+                            drug: 'growth_mediaEGF',
+                            duration: '30 sec',
+                            marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'med',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'med',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'med',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'med',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'med',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                         {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            cell_line: 'WT-EGFR',
+                            drug: 'growth_mediaEGF',
+                            duration: '1 min',
+                            marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'high',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'high',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'high',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'high',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            cell_line: 'WT-EGFR',
+                            drug: 'growth_mediaEGF',
+                            duration: '6 hrs',
+                            marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'low',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            cell_line: 'WT-EGFR',
+                            drug: 'growth_mediaBuff',
+                            duration: '30 min',
+                            marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'high',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            cell_line: 'WT-EGFR',
+                            drug: 'growth_mediaProK',
+                            duration: '30 min',
+                            marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            cell_line: 'EGFR Null',
+                            drug: ['growth_media','growth_mediaEGF'],
+                            duration: '30 min',
+                            marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+
+
+
+
+
+
+
+
+                        {
+                            transfer_function: 'static',
+                            cutoff: -1,
+                            cell_line: 'WT-EGFR',
+                            drug: 'growth_media',
+                            duration: "30 min",
                             marks: [
                                 {    //antibody 1
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,
+                                    name:'Mouse anti-EGFR',
+                                    weight: 95,
                                     intensity:'low',
                                     primary_anti_body:['1']
                                 },
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 84,
-                                    intensity:'none',
-                                    primary_anti_body:['1']
-                                },
-                                {    //antibody 2
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,
-                                    intensity:'low',
-                                    primary_anti_body:['2']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 232,
-                                    intensity:'none',
-                                    primary_anti_body:['2']
-                                },
-                                {    //antibody 3
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,
-                                    intensity:'none',
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 84,
-                                    intensity:'none',
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 232,
-                                    intensity:'none',
-                                    primary_anti_body:['3']
-                                },
-                                {   //antibody 4
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 232,
-                                    intensity:'none',
-                                    primary_anti_body:['4']
-                                },
-                                {    //antibody 5
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
+
 
                             ]
                         },
                         {
                             transfer_function: 'static',
                             cutoff: -1,
-                            drug: 'gmProK',
-                            cell_line: 'nt',
-                            temperature: '40',
+                            cell_line: '*ANY*',
+                            drug: 'growth_media',
+                            duration: "30 sec",
                             marks: [
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,
-                                    intensity:'none',
-                                    primary_anti_body:['1']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,
+                                {    //antibody 1
+                                    name:'Mouse anti-6xHis',
+                                    weight: 250,
                                     intensity:'low',
-                                    primary_anti_body:['2']
+                                    primary_anti_body:['7']
                                 },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,
-                                    intensity:'none',
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
+
+
                             ]
                         },
-                        {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            drug: 'gmBuf',
-                            cell_line: 'proX-Null',
-                            temperature: '40',
-                            marks: [
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,//84
-                                    intensity:'none',//none
-                                    primary_anti_body:['1']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity:'low',//none
-                                    primary_anti_body:['2']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,//84,323
-                                    intensity:'none',//none,none
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
-                            ]
-                        },
-                        {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            drug: 'gmProK',
-                            cell_line: 'proX-Null',
-                            temperature: '40',
-                            marks: [
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,//84
-                                    intensity:'none',//none
-                                    primary_anti_body:['1']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['2']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,//84,232
-                                    intensity:'none',//none,none
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
-                            ]
-                        },
-                        {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            drug: 'gmBuf',
-                            cell_line: 'proY-Null',
-                            temperature: '40',
-                            marks: [
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,//84
-                                    intensity:'low',//none
-                                    primary_anti_body:['1']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['2']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,//84,323
-                                    intensity:'none',//none, none
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
-                            ]
-                        },
-                        {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            drug: 'gmProK',
-                            cell_line: 'proY-Null',
-                            temperature: '40',
-                            marks: [
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,//84
-                                    intensity:'none',//none
-                                    primary_anti_body:['1']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['2']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,//84,232
-                                    intensity:'none',//none,none
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
-                            ]
-                        },
-                        {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            drug: 'gmBuf',
-                            cell_line: 'HproX-FLAG',
-                            temperature: '40',
-                            marks: [
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,//84
-                                    intensity:'low',//high
-                                    primary_anti_body:['1']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity:'low',//none
-                                    primary_anti_body:['2']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,//84, 232
-                                    intensity:'none',//high, none
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'high',//none
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
-                            ]
-                        },
-                        {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            drug: 'gmProK',
-                            cell_line: 'HproX-FLAG',
-                            temperature: '40',
-                            marks: [
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,//84
-                                    intensity:'none',//none
-                                    primary_anti_body:['1']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['2']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,//84,232
-                                    intensity:'med',//none,none
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
-                            ]
-                        },
-                        {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            drug: 'gmBuf',
-                            cell_line: 'HproY-FLAG',
-                            temperature: '40',
-                            marks: [
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,//84
-                                    intensity:'low',//none
-                                    primary_anti_body:['1']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity:'low',//high
-                                    primary_anti_body:['2']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,//84, 232
-                                    intensity:'none',//none, high
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'none',//high
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
-                            ]
-                        },
-                        {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            drug: 'gmProK',
-                            cell_line: 'HproY-FLAG',
-                            temperature: '40',
-                            marks: [
-                                {
-                                    name:'Mouse anti-Protein X',
-                                    weight: 82,//84
-                                    intensity:'none',//none
-                                    primary_anti_body:['1']
-                                },
-                                {
-                                    name:'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['2']
-                                },
-                                {
-                                    name:'Mouse anti-6xHis',
-                                    weight: 40,//84,232
-                                    intensity:'none',//none,none
-                                    primary_anti_body:['3']
-                                },
-                                {
-                                    name:'Rabbit anti-FLAG',
-                                    weight: 84,//232
-                                    intensity:'none',//none
-                                    primary_anti_body:['4']
-                                },
-                                {
-                                    name:'Mouse anti-PGK1',
-                                    weight: 44,
-                                    intensity:'med',
-                                    primary_anti_body:['5']
-                                }
-                            ]
-                        }
+
                     ]
                 }
             },
@@ -15774,25 +16051,74 @@ var __scb_sample_3 = {
                 microscopy: {
                     'valid': [],
                     'slide': {
-//                        'complex_parser': [
-//                        {
-//                            match: ['cell_line','drug_id', 'conditions'],
-//                            conditions: 'egfr',
-//                            drug_id: 'growth_media',
-//                            cell_line: 'WT-EGFR'
-//                        }
-//
-//                        ]
-                        'conditions_parser':[
+                        'parser_simple':[
                 		{
                 			match: [],
 
                 		},
-                		{
-                			match: ['cell_line', 'drug_id', 'conditions'],
+                        {
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
                 			cell_line: 'WT-EGFR',
-                			drug_id: ['growth_media'],
-                			conditions: 'g'
+                			drug_id: 'growth_media',
+                			collection_id: 'default',
+                			kind: 'IF',
+                			conditions: 'egfr'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'WT-EGFR',
+                			drug_id: 'growth_media',
+                			collection_id: 'default',
+                			kind: 'IF',
+                			conditions: 'pm'
+                		},
+                        {
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'WT-EGFR',
+                			drug_id: 'growth_media',
+                			collection_id: 'default',
+                			kind: 'IF',
+                			conditions: 'cyto'
+                		},
+                        {
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'WT-EGFR',
+                			drug_id: 'growth_media',
+                			collection_id: 'default',
+                			kind: 'IF',
+                			conditions: 'nuc'
+                		},
+                        {
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'WT-EGFR',
+                			drug_id: 'growth_media',
+                			collection_id: 'default',
+                			kind: 'IF',
+                			conditions: 'er'
+                		},
+                            {
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'WT-EGFR',
+                			drug_id: 'growth_media',
+                			collection_id: 'default',
+                			kind: 'IF',
+                			conditions: 'nm'
+                		},
+                        {
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'EGFR-M1',
+                			drug_id: 'growth_media',
+                			collection_id: 'default',
+                			kind: 'IF',
+                			conditions: 'egfr'
+                		},
+                        {
+                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
+                			cell_line: 'EGFR-M2',
+                			drug_id: 'growth_media',
+                			collection_id: 'default',
+                			kind: 'IF',
+                			conditions: 'egfr'
                 		}
                 		]
                     }
