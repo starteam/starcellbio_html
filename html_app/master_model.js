@@ -15881,15 +15881,13 @@ var fix_assignment_models =  function (assignment_result) {
 		if(assignment_result[x].id == 'sutd_intro_biology'){
 			sutd_intro_biology = assignment_result[x];
 			sutd_intro_biology.template.instructions = [
-				['Getting Started', scb_assignment_sutd_intro_biology.page1()],
-				['Background Information',scb_assignment_sutd_intro_biology.page2()],
-				['Questions', scb_assignment_sutd_intro_biology.page3()]
+				['Getting Started', 'Please refer to your instructor for detailed instructions.']
 				];
 			sutd_intro_biology.template.experiment_setup = scb_assignment_sutd_intro_biology.experiment_setup();
 
 			sutd_intro_biology.template.ui.experiment_setup.actions.push({
 				name: 'ADD SAMPLES',
-				open: 'mit706s14ps2.setup',
+				open: 'mit706s14.setup',
 				css: {
 					width: '885px',
 					height: '600px',
