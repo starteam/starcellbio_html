@@ -11914,7 +11914,7 @@ var __sutd_intro_biology_ps2 = {
             	],
             ui: {
                 experimental_design: {
-                    techniques: [ 'wb' , 'facs'],
+                    techniques: [ 'wb' , 'facs', 'micro'],
                     gel_types: ['.10', '.12', '.15']
                 },
                 experiment_setup: {
@@ -11953,25 +11953,25 @@ var __sutd_intro_biology_ps2 = {
 					disable_brightness: true
 				},
                 add_multiple_dialog: {
-                	order: ['hela'],
+                	order: ['S2'],
 					headings: [
 							'','Strain', 'Treatment', 'Treatment Duration'
 							],
-                    'hela': {
+                    'S2': {
                         rows: [
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "CR", treatment_id: 'nc'},
-                                    {kind: 'text', text: 'HeLa'},
+                                    {kind: 'text', text: 'S2'},
                                     {kind: 'text', text: 'Control siRNA'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'nc',
                                 cell_treatments: {
                                     CR: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default', microscope: ['rgb', 'g', 'gr', 'rb'],
+                                                {collection_id: 'default', microscope: ['rgb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'nc', concentration_id: '100'}
@@ -11984,16 +11984,16 @@ var __sutd_intro_biology_ps2 = {
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "R1", treatment_id: 'rna1'},
-                                    {kind: 'text', text: 'HeLa'},
+                                    {kind: 'text', text: 'S2'},
                                     {kind: 'text', text: 'siRNA #1'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'rna1',
                                 cell_treatments: {
                                     R1: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: ['g'],
+                                                {collection_id: 'default',microscope: ['rgb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna1', concentration_id: '100'}
@@ -12006,16 +12006,16 @@ var __sutd_intro_biology_ps2 = {
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "R2", treatment_id: 'rna2'},
-                                    {kind: 'text', text: 'HeLa'},
+                                    {kind: 'text', text: 'S2'},
                                     {kind: 'text', text: 'siRNA #2'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'rna2',
                                 cell_treatments: {
                                     R2: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: ['g', 'gr', 'rb'],
+                                                {collection_id: 'default',microscope: ['rgb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna2', concentration_id: '100'}
@@ -12028,16 +12028,16 @@ var __sutd_intro_biology_ps2 = {
                             {
                                 cells: [
                                 	{kind: 'checkbox', name: "R3", treatment_id: 'rna3'},
-                                    {kind: 'text', text: 'HeLa'},
+                                    {kind: 'text', text: 'S2'},
                                     {kind: 'text', text: 'siRNA #3'},
                                     {kind: 'text', text: "3 days"}
                                 ],
                                 treatment_id: 'rna3',
                                 cell_treatments: {
                                     R3: [
-                                        {cell_line: 'hela',
+                                        {cell_line: 'S2',
                                             treatment_list: {list: [
-                                                {collection_id: 'default',microscope: ['rgb', 'g', 'rb'],
+                                                {collection_id: 'default',microscope: ['rgb'],
                                                 duration_value: 3600 * 24 * 3, duration: '3 d',
                                                 drug_list: {list: [
                                                     {drug_id: 'rna3', concentration_id: '100'}
@@ -12047,10 +12047,6 @@ var __sutd_intro_biology_ps2 = {
                                     ]
                                 }
                             }
-
-
-
-
                         ]
                     }
                 }
@@ -12093,8 +12089,8 @@ var __sutd_intro_biology_ps2 = {
                 }
             },
             cell_lines: {
-                'hela': {
-                    name: 'HeLa'
+                'S2': {
+                    name: 'S2'
                 }
 
             },
@@ -12161,6 +12157,145 @@ var __sutd_intro_biology_ps2 = {
             		}
             	}
             },
+             micro_kinds: {
+            	'IF':{
+            		name:'Antibody-labeling IF',
+            		conditions: {
+            			'rgb': {name: 'γ-tubulin (red), α-tubulin (green), DAPI (blue)',
+            			short_name: 'R:γ-tub, G:α-tub, B:DAPI'}
+            		}
+            	}
+        	},
+        	slides: {
+				 'img0001': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_4Normal_Anaphase_1_composite.jpg',
+				 'img0002': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_4Normal_Anaphase_2_composite.jpg',
+				 'img0003': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_4Normal_Anaphase_3_composite.jpg',
+				 'img0004': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_4Normal_Anaphase_4_composite.jpg',
+				 'img0005': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_4Normal_Anaphase_5_composite.jpg',
+				 'img0006': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_4Normal_Anaphase_6_composite.jpg',
+				 'img0007': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_5Normal_Anaphase_1_composite.jpg',
+				 'img0008': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_5Normal_Anaphase_2_composite.jpg',
+				 'img0009': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_5Normal_Anaphase_3_composite.jpg',
+				 'img0010': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_5Normal_Anaphase_4_composite.jpg',
+				 'img0011': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_5Normal_Anaphase_5_composite.jpg',
+				 'img0012': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_5Normal_Anaphase_6_composite.jpg',
+				 'img0013': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_6Normal_Anaphase_1_composite.jpg',
+				 'img0014': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_6Normal_Anaphase_2_composite.jpg',
+				 'img0015': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_6Normal_Anaphase_3_composite.jpg',
+				 'img0016': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_6Normal_Anaphase_4_composite.jpg',
+				 'img0017': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_6Normal_Anaphase_5_composite.jpg',
+				 'img0018': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_6Normal_Anaphase_6_composite.jpg',
+				 'img0019': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_7Normal_Anaphase_1_composite.jpg',
+				 'img0020': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_7Normal_Anaphase_2_composite.jpg',
+				 'img0021': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_7Normal_Anaphase_3_composite.jpg',
+				 'img0022': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_7Normal_Anaphase_4_composite.jpg',
+				 'img0024': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_7Normal_Anaphase_5_composite.jpg',
+				 'img0025': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_7Normal_Anaphase_6_composite.jpg',
+				 'img0027': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_8Normal_Anaphase_1_composite.jpg',
+				 'img0028': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_8Normal_Anaphase_2_composite.jpg',
+				 'img0029': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_8Normal_Anaphase_3_composite.jpg',
+				 'img0034': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_8Normal_Anaphase_4_composite.jpg',
+				 'img0035': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_8Normal_Anaphase_5_composite.jpg',
+				 'img0036': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_8Normal_Anaphase_6_composite.jpg',
+				 'img0037': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_9Normal_Anaphase_1_composite.jpg',
+				 'img0038': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_9Normal_Anaphase_2_composite.jpg',
+				 'img0039': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_9Normal_Anaphase_3_composite.jpg',
+				 'img0040': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_9Normal_Anaphase_4_composite.jpg',
+				 'img0041': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_9Normal_Anaphase_5_composite.jpg',
+				 'img0042': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_9Normal_Anaphase_6_composite.jpg',
+                 'img0043': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_10Normal_Anaphase_1_composite.jpg',
+                 'img0044': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_10Normal_Anaphase_2_composite.jpg',
+                 'img0045': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_10Normal_Anaphase_3_composite.jpg',
+                 'img0046': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_10Normal_Anaphase_4_composite.jpg',
+                 'img0047': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_10Normal_Anaphase_5_composite.jpg',
+                 'img0048': 'images/microscopy/sutd_2/cn/Interphase_10Normal_Metaphase_10Normal_Anaphase_6_composite.jpg',
+
+				 'img0049': 'images/microscopy/sutd_2/rna1/Metaphase_arrest1.jpg',
+				 'img0050': 'images/microscopy/sutd_2/rna1/Metaphase_arrest2.jpg',
+				 'img0051': 'images/microscopy/sutd_2/rna1/Metaphase_arrest3.jpg',
+				 'img0052': 'images/microscopy/sutd_2/rna1/Metaphase_arrest4.jpg',
+
+				 'img0053': 'images/microscopy/sutd_2/rna2/MT_instability1.jpg',
+				 'img0054': 'images/microscopy/sutd_2/rna2/MT_instability2.jpg',
+				 'img0055': 'images/microscopy/sutd_2/rna2/MT_instability3.jpg',
+				 'img0056': 'images/microscopy/sutd_2/rna2/MT_instability4.jpg',
+				 'img0057': 'images/microscopy/sutd_2/rna2/MT_instability5.jpg',
+				 'img0058': 'images/microscopy/sutd_2/rna2/MT_instability6.jpg',
+
+				 'img0059': 'images/microscopy/sutd_2/rna3/Interphase_10Normal_UnequalChromsomeDistribution1_composite.jpg',
+				 'img0060': 'images/microscopy/sutd_2/rna3/Interphase_10Normal_UnequalChromsomeDistribution2_composite.jpg',
+				 'img0067': 'images/microscopy/sutd_2/rna3/Interphase_10Normal_UnequalChromsomeDistribution3_composite.jpg',
+				 'img0068': 'images/microscopy/sutd_2/rna3/Interphase_10Normal_UnequalChromsomeDistribution4_composite.jpg',
+				 'img0069': 'images/microscopy/sutd_2/rna3/Interphase_12Normal_UnequalChromsomeDistribution1_composite.jpg',
+				 'img0070': 'images/microscopy/sutd_2/rna3/Interphase_12Normal_UnequalChromsomeDistribution2_composite.jpg',
+				 'img0071': 'images/microscopy/sutd_2/rna3/Interphase_12Normal_UnequalChromsomeDistribution3_composite.jpg',
+				 'img0072': 'images/microscopy/sutd_2/rna3/Interphase_12Normal_UnequalChromsomeDistribution4_composite.jpg',
+				 'img0073': 'images/microscopy/sutd_2/rna3/Interphase_13Normal_UnequalChromsomeDistribution1_composite.jpg',
+				 'img0074': 'images/microscopy/sutd_2/rna3/Interphase_13Normal_UnequalChromsomeDistribution2_composite.jpg',
+				 'img0075': 'images/microscopy/sutd_2/rna3/Interphase_13Normal_UnequalChromsomeDistribution3_composite.jpg',
+				 'img0076': 'images/microscopy/sutd_2/rna3/Interphase_13Normal_UnequalChromsomeDistribution4_composite.jpg',
+
+				 'img0077': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_8Normal_Anaphase_5_composite.jpg',
+				 'img0078': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_8Normal_Anaphase_6_composite.jpg',
+				 'img0079': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_1_composite.jpg',
+				 'img0080': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_2_composite.jpg',
+				 'img0081': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_3_composite.jpg',
+				 'img0082': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_4_composite.jpg',
+				 'img0083': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_5_composite.jpg',
+				 'img0084': 'images/microscopy/assignment_706_2014_ps2/composites/Metaphase_Anaphase-control/Normal_Metaphase_9Normal_Anaphase_6_composite.jpg',
+				 'img0085': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_2.jpg',
+				 'img0087': 'images/microscopy/assignment_706_2014_ps2/Antibody_Labeling_IF_DNA-blue_MT-green_spindle_poles-red/Unequal_Chromosome_Distribution/Unequal_Chromosome_Distribution_6.jpg'
+				 },
+        	slide_parser: {
+				'default':{
+					'IF':{
+						'rgb':{
+
+							'nc':[
+								 [{'hash': 'img0001', 'if_type': 'merge', 'mag': 'N/A'}]
+
+								 ],
+							'rna1':[
+								 [{'hash': 'img0049', 'if_type': 'merge', 'mag': 'N/A'}],
+								 [{'hash': 'img0050', 'if_type': 'merge', 'mag': 'N/A'}],
+                                 [{'hash': 'img0051', 'if_type': 'merge', 'mag': 'N/A'}]
+								 [{'hash': 'img0052', 'if_type': 'merge', 'mag': 'N/A'}]
+
+							],
+							'rna2':[
+								[{'hash': 'img0053', 'if_type': 'merge', 'mag': 'N/A'}],
+							    [{'hash': 'img0054', 'if_type': 'merge', 'mag': 'N/A'}],
+								[{'hash': 'img0055', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0056', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0057', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0058', 'if_type': 'merge', 'mag': 'N/A'}]
+							],
+                            'rna3':[
+								[{'hash': 'img0059', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0060', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0061', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0062', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0063', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0064', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0065', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0066', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0067', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0068', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0069', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0070', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0071', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0072', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0073', 'if_type': 'merge', 'mag': 'N/A'}],
+                                [{'hash': 'img0074', 'if_type': 'merge', 'mag': 'N/A'}],
+								[{'hash': 'img0075', 'if_type': 'merge', 'mag': 'N/A'}],
+								[{'hash': 'img0076', 'if_type': 'merge', 'mag': 'N/A'}]
+
+							]
+						}
+
+					}
+				}
+		},
 
             model: { // models
                 western_blot: {
@@ -12170,7 +12305,7 @@ var __sutd_intro_biology_ps2 = {
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'nc',
-                                cell_line: 'hela',
+                                cell_line: 'S2',
                                 above_marks: [
                                     {
                                         name: 'Cyclin E',
@@ -12215,7 +12350,7 @@ var __sutd_intro_biology_ps2 = {
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'rna1',
-                                cell_line: 'hela',
+                                cell_line: 'S2',
                                 above_marks: [
                                     {
                                         name: 'Cyclin E',
@@ -12248,7 +12383,7 @@ var __sutd_intro_biology_ps2 = {
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'rna2',
-                                cell_line: 'hela',
+                                cell_line: 'S2',
                                 above_marks: [
                                     {
                                         name: 'Cyclin E',
@@ -12281,7 +12416,7 @@ var __sutd_intro_biology_ps2 = {
                                 transfer_function: 'delta',
                                 cutoff: 1,
                                 drug: 'rna3',
-                                cell_line: 'hela',
+                                cell_line: 'S2',
                                 above_marks: [
                                     {
                                         name: 'Cyclin E',
@@ -12353,6 +12488,47 @@ var __sutd_intro_biology_ps2 = {
                         ]
 
                     }
+                },
+                 microscopy: {
+                	'valid': ['S2', 'nc'],
+                	'slide': {
+
+                		'conditions_parser':[
+                		{
+                			match: [],
+
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['nc'],
+                			conditions: 'rgb',
+                			phenotype: 'nc'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna1'],
+                			conditions: 'rgb',
+                			phenotype: 'rna1'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna2'],
+                			conditions: 'rgb',
+                			phenotype: 'rna2'
+                		},
+                		{
+                			match: ['cell_line', 'drug_id', 'conditions'],
+                			cell_line: 'S2',
+                			drug_id: ['rna3'],
+                			conditions: 'rgb',
+                			phenotype: 'rna3'
+                		}
+                		]
+
+                	}
                 }
             }
         }
