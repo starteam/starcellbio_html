@@ -12258,7 +12258,7 @@ var __sutd_intro_biology_ps2 = {
 							'rna1':[
 								 [{'hash': 'img0049', 'if_type': 'merge', 'mag': 'N/A'}],
 								 [{'hash': 'img0050', 'if_type': 'merge', 'mag': 'N/A'}],
-                                 [{'hash': 'img0051', 'if_type': 'merge', 'mag': 'N/A'}]
+                                 [{'hash': 'img0051', 'if_type': 'merge', 'mag': 'N/A'}],
 								 [{'hash': 'img0052', 'if_type': 'merge', 'mag': 'N/A'}]
 
 							],
@@ -12456,8 +12456,8 @@ var __sutd_intro_biology_ps2 = {
                     }
                 },
                 facs: {
-                	'ticks': [50, 100],
-                	'max': 150,
+                	'ticks': [50, 100, 150, 250],
+                	'max': 250,
                     'scale': 'linear',
                     'dna': {
                         'parser_simple': [
@@ -12473,17 +12473,17 @@ var __sutd_intro_biology_ps2 = {
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna1',
-                                shape: 'g2-block'
+                                shape: 'scaled-peak-100'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna2',
-                                shape: 'g2-block'
+                                shape: 'scaled-peak-100'
                             },
                             {
                                 match: ['drug_id'],
                                 drug_id: 'rna3',
-                                shape: 'g2-block'
+                                shape: 'unequal-segregation'
                             }
                         ]
 

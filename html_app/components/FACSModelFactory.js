@@ -157,13 +157,13 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             * middle ground.
             */
             function bump100(x){
-                return normal_dist(x, 2, 0.2, -2, true)*0.2;
+                return normal_dist(x, 1.1, 0.2, -2, true)*0.2;
 			}
             function bigpeak50(x){
-				  return normal_dist(x, 0.9, 0.2, -3, true);
+				  return normal_dist(x, 0.5, 0.1, -3, true);
 			}
             function middlenoise(x){
-                var y= -Math.pow(x-1.6,2)+0.25;
+                var y= -Math.pow(x-0.9,2)+0.25;
                 return (y>0)?y:0;
 
             }
@@ -185,6 +185,25 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			function g4(x){
 				   return normal_dist(x, 1, 0.32, 1, false)*0.77;
 			}
+            /* Four peaks for Unequal segregation image */
+            function h1(x){
+				  return normal_dist(x, 0.3, 0.22, -26, true)* 0.3;
+			}
+
+			function h2(x){
+				  return normal_dist(x, 0.6, 0.11, 1, false);
+			}
+
+			function h3(x){
+				  return normal_dist(x, 1.2, 0.17, 3, true)*0.6;
+			}
+
+			function h4(x){
+				   return normal_dist(x, 1.4, 0.45, 1, false)*0.8;
+			}
+            function scaled_peak100(x){
+            	return normal_dist(x, 1.2, 0.08, 0.5, false);
+            }
 			
 			function sblockg1(x){
 				   return normal_dist(x, 0.24, 0.2, -6, true)-0.17; 
@@ -258,7 +277,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 _.each(data, function (s, index) {
                     if (template.model.facs.scale) {
-                        data[index][1] = data[index][1] / sum * 2750;
+                        data[index][1] = data[index][1] / sum * big_const;
                     } else {
                         data[index][1] = data[index][1] / sum * (template.model.facs.max ? ((big_const * 100) / template.model.facs.max) * number_of_curves : 2750  );
                     }
@@ -492,6 +511,26 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 };
             
            }
+            if (('' + shape).toLowerCase() == 'scaled-peak-100') {
+                var data = [];
+                var bias = (Math.random() - .5) * .10;
+                for (var x = 0; x < 3; x += .01) {
+	                number_of_curves = 1;
+                    var y = scaled_peak100(x+bias);
+                    data.push([x, y]);
+
+                }
+                normalize(data,1500);
+				roundData(data);
+                state.data = {
+                    data: [
+                        { data: data},
+
+                    ],
+                    options: options
+                };
+
+           }
            if (('' + shape).toLowerCase() == '2-peak-uneven-normal-400') {
                 var data = [];
                 var bias = (Math.random() - .5) * .10;
@@ -521,7 +560,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     data.push([x, y]);
 
                 }
-                normalize(data);
+                normalize(data,1700);
 				roundData(data);
                 state.data = {
                     data: [
@@ -572,6 +611,26 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     options: options
                 };
             
+           }
+             if (('' + shape).toLowerCase() == 'unequal-segregation') {
+                var data = [];
+                var bias = (Math.random() - .5) * .10;
+                for (var x = 0; x < 3; x += .01) {
+	                number_of_curves = 4;
+                    var y = h1(x + bias)+ h2(x + bias) + h3(x + bias) + h4(x + bias);
+                    data.push([x, y]);
+
+                }
+                normalize(data,4000);
+				roundData(data);
+                state.data = {
+                    data: [
+                        { data: data},
+
+                    ],
+                    options: options
+                };
+
            }
            
            if (('' + shape).toLowerCase() == 's-block-normal-400') {
