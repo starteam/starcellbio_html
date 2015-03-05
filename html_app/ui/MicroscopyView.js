@@ -349,8 +349,6 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
         alert("INVALID ELEMENT!");
     }
     var slide_type = $(element).attr('value');
-    console.log('slide_type');
-    console.log(slide_type);
     if (slide_type == '') {
         return;
     }
@@ -385,21 +383,35 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 				return;
 				
 		}
-       if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1 || 
-       	  _.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.first.collection_id][slide_type])==1 || 
-       	  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope) == 1
-       	  )
-       {
-       		var slide_conditions_val = ''
-       		if(_.size(parsed.assignment.template.micro_kinds[slide_type].conditions) == 1 ){
-       			slide_conditions_val = _.keys(parsed.assignment.template.micro_kinds[slide_type].conditions)[0]
-       		}
-       		else if(  _.size(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.first.collection_id][slide_type])==1){
-       			slide_conditions_val = _.keys(parsed.assignment.template.slide_parser[parsed.experiment.cell_treatment_list.get(cell_treatment_id).treatment_list.first.collection_id][slide_type])[0]
-       		}
+        /*
+        If there is one condition for this cell_treatment
+         */
+        var template=parsed.assignment.template;
+        var treatment_list=parsed.experiment.cell_treatment_list;
+       /* micro_kinds has all conditions available for this 'kind' or 'slide_type' */
+        var micro_kinds= parsed.assignment.template.micro_kinds[slide_type].conditions;
+        /* Checking to see if collection_id is defined for this treatment*/
+        /* collection_id is not defined in scb_ex1 */
+        var slide_parser = 0;
+        if(template.slide_parser[treatment_list.get(cell_treatment_id).treatment_list.first.collection_id]){
+            slide_parser= template.slide_parser[treatment_list.get(cell_treatment_id).treatment_list.first.collection_id][slide_type];
+        }
+        var microscope = 0;
+        if(_.filter(treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope)
+            microscope = _.filter(treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope;
 
-       		else if(  _.size(_.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope) == 1){
-       			slide_conditions_val = _.filter(parsed.experiment.cell_treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope[0];
+
+       if(_.size(micro_kinds) == 1 || _.size(slide_parser) == 1 || _.size(microscope) == 1)
+       {
+       		var slide_conditions_val = '';
+       		if(_.size(micro_kinds)==1){
+       			slide_conditions_val = _.keys(micro_kinds)[0]
+       		}
+       		else if(_.size(slide_parser) == 1){
+       			slide_conditions_val = _.keys(slide_parser)[0]
+       		}
+       		else if(_.size(microscope) == 1){
+       			slide_conditions_val = microscope[0];
        		}
        			parsed.microscopy.lanes_list.start({
        				kind: slide_type,

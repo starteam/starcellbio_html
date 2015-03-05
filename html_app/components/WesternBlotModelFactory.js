@@ -84,6 +84,10 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                                     var value = scb.utils.get(lane, ["cell_treatment", "treatment_list", "list", 0, "temperature"], null);
                                     keep = ( rule.temperature == value );
                                 }
+                                if(rule.duration){
+                                    var value = scb.utils.get(lane, ["cell_treatment", "treatment_list", "list", 0, "duration"], null);
+                                    keep = keep && ( rule.duration == value || rule.duration == '*ANY*');
+                                }
                                 if (keep) {
                                     var rule_marks = rule.marks;
                                     for (var rule_mark_index in rule_marks) {

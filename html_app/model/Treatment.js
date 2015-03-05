@@ -73,25 +73,34 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 	Object.defineProperty(self, 'duration', {
 		get : function() {
 			var time = parseFloat(data.duration_value);
-			//var days = Math.floor(time / 86400);
 			var days = Math.floor((time % 604800) / 86400);
-
 			var hours = Math.floor((time % 86400) / 3600);
-			var minutes = Math.round((time % 3600) / 60);
-			
+			var minutes = Math.floor((time % 3600) / 60);
 			var months = Math.floor(time /2592000);
-			
 			var weeks = Math.floor((time % 2592000) / 604800);
-			var now = (time < 60 );
+			var now = (time < 30 );
             if( time < 0 ) return '' ;
-			return scb_common.format_time_detailed({
-				weeks: weeks,
-				days : days,
-				hours : hours,
-				minutes : minutes,
-				months: months,
-				now : now
-			}).trim();
+            if(time < 60){
+                var seconds= Math.round(time%60);
+                return scb_common.format_time_detailed_w_sec({
+                    days : days,
+                    hours : hours,
+                    minutes : minutes,
+                    seconds: seconds,
+                    now : now
+			    }).trim();
+
+            }else {
+                return scb_common.format_time_detailed({
+                    weeks: weeks,
+                    days: days,
+                    hours: hours,
+                    minutes: minutes,
+                    seconds: seconds,
+                    months: months,
+                    now: now
+                }).trim();
+            }
 		},
 		set : function(v) {
 			var time = scb.Utils.parse_time(v, context.template.time_unit.kind);
