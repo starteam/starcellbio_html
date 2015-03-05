@@ -274,22 +274,22 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     sum += s[1];
                 });
                 console.log("Sum of normalized data: "+sum);
+                if(sum!=0) { /*normalizing the y values*/
+                    _.each(data, function (s, index) {
+                        if (template.model.facs.scale) {
+                            data[index][1] = data[index][1] / sum * big_const;
+                        } else {
+                            data[index][1] = data[index][1] / sum * (template.model.facs.max ? ((big_const * 100) / template.model.facs.max) * number_of_curves : 2750  );
+                        }
+                    });
+                }
 
-                _.each(data, function (s, index) {
-                    if (template.model.facs.scale) {
-                        data[index][1] = data[index][1] / sum * big_const;
-                    } else {
-                        data[index][1] = data[index][1] / sum * (template.model.facs.max ? ((big_const * 100) / template.model.facs.max) * number_of_curves : 2750  );
-                    }
-                });
-
-
-                _.each(data, function (s, index) {
-                    /*to preserve the old exercise scaling*/
+                _.each(data, function (s, index) {/*normalizing x values*/
+                    /* new exercises will now have attribute 'scale' */
                     if(template.model.facs.scale){
                         /*this is assuming that the start point is 0 */
                         data[index][0]= template.model.facs.max * data[index][0] / data[data.length-1][0];
-                    }else {
+                    }else { /*to preserve the old exercise scaling, keeping old code*/
                         data[index][0] = data[index][0] * (template.model.facs.max ? ((template.model.facs.max*50)/100): 50 ) ;
                     }
 
