@@ -1494,7 +1494,7 @@ function initialize_state(state, isNew, isIF, draw, image_source, naturalDimensi
 			
 			state.action = 'initialized';
 			$('#scb_s_microscopy_slide_content_lens_outline_'+state.lane_id+' svg image').attr('transform',"matrix(1,0,0,1,"+state.xparam+","+state.yparam+")" );
-			
+			$('svg').css('position', 'static'); //or initial
 			if($('.scb_s_notebook_view').length > 0 ){
 			}
 			else{
