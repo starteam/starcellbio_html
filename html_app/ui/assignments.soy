@@ -78,19 +78,21 @@ Assignment description
 		 {foreach $section in $assignments.selected.template.instructions}
 		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == $assignments.selected.last_instruction}scb_assignments_header_link_selected{/if}' assignment_id='{$assignments.selected.id}' role='link' title='{$section[0]}'   value='{$section[0]}' aria-controls='scb_s_assignment_scroll' aria-atomic='true' ><span>{$section[0]}</span>{if index($section) == $assignments.selected.last_instruction}<div class="arrow-down-blue"></div>{/if}</div>
 		{/foreach}	 
-		<div class = 'scb_s_assignment_header_img_right '  assignment_id='{$assignments.selected.id}' role='button' aria-label='Next Section' ></div>
+		<div class = 'scb_s_assignment_header_img_right {if length($assignments.selected.template.instructions)<2}scb_s_assignment_header_img_right_inactive{/if}'  assignment_id='{$assignments.selected.id}' role='button' aria-label='Next Section' ></div>
 	</div>
 	<div class='scb_s_assignments_gray_bar'></div>
         <div class='scb_s_assignment_scroll' id ='scb_s_assignment_scroll'  aria-live="assertive">
         	{foreach $section in $assignments.selected.template.instructions}
 				<div class='scb_s_display_section' style='display:{if index($section) == $assignments.selected.last_instruction}block;{/if}' value='{$section[0]}' >
 				{$section[1] |noAutoescape}</div>   
-        	{/foreach} 
+        	{/foreach}
+        	{if length($assignments.selected.template.instructions)>1}
         	<div class='scb_s_assignments_bottom_scroll'>
    				<div class = 'scb_s_assignment_header_img_left scb_assignments_bottom_arrow_left scb_s_assignment_header_img_left_inactive'  assignment_id='{$assignments.selected.id}'   role='button' aria-label='Previous Section'></div>
    				<div class='scb_s_assignments_button_divider'></div>
 				<div class = 'scb_s_assignment_header_img_right scb_assignments_bottom_arrow_right'  assignment_id='{$assignments.selected.id}'  role='button' aria-label='Next Section'></div>
 			</div>
+			{/if}
     
         </div>
     <br/>
