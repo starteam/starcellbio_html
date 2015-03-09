@@ -12098,7 +12098,7 @@ var __sutd_intro_biology_ps2 = {
                 kind: 'minutes'
             },
             primary_anti_body: {
-            	order: ['cyclinB', 'cyclinE', 'scc1', 'pkg1'],
+            	order: ['cyclinB', 'cyclinE', 'scc1', 'pgk1'],
 
                 'cyclinB': {
                     name: 'mouse anti-cyclin B',
@@ -12126,13 +12126,13 @@ var __sutd_intro_biology_ps2 = {
                     ],
                     gel_name: 'Scc1'
                 },
-                'pkg1': {
-                    name: 'rabbit anti-pkg1',
+                'pgk1': {
+                    name: 'rabbit anti-pgk1',
                     secondary: ['r'],
                     marks: [
                         {weight: 25, intensity: 0}
                     ],
-                    gel_name: 'pkg1'
+                    gel_name: 'pgk1'
                 }
 
             },
