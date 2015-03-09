@@ -1,23 +1,22 @@
+"""Views for StarCellBio"""
+
 __author__ = 'ceraj'
 __author__ = 'skini'
-
-# Create your views here.
-
-from django.http import HttpResponse
-import datetime
-
-from django.shortcuts import redirect
 import json
-import pudb
-from backend.models import Assignment, StudentAssignment, Course, UserCourse
-import StringIO
-from django.core.files.base import ContentFile
-import StarCellBio.settings
-import os
-import StarCellBio.supplements as supplements
+
+from django.conf import settings
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
+from django.core.mail import send_mail
+from django.http import HttpResponse
+
+from django.template.loader import render_to_string
+
+from backend.models import Assignment, StudentAssignment, Course, UserCourse
+from StarCellBio.forms import ContactForm
+import StarCellBio.settings
+
 
 random_mapping = {0: 'DEBAC', 1: 'DABEC', 2: 'CABED', 3: 'ACDEB', 4: 'EBADC', 5: 'BDECA', 6: 'EBCAD', 7: 'ADBCE',
                   8: 'CBAED', 9: 'DEACB', 10: 'ECDAB', 11: 'EDACB', 12: 'EBACD', 13: 'EADBC', 14: 'CBDEA', 15: 'CEDBA',
@@ -319,21 +318,25 @@ def post_state(request, **kwargs):
 
 
 def contact(request, **kwargs):
-    print "Content-Type: text/html"  # HTML is following
-    print  # blank line, end of headers
-    #pudb.set_trace()
-    #method = os.environ['REQUEST_METHOD']
+    """Contact form handler."""
     if request.method == "POST":
-        try:
-            post = supplements.get_post_dict(request)
-        except supplements.MissingData, e:
-            print "<h1>Error: %s</h1>" % e.value
-            return
-        supplements.send_feedback(post)
-        return HttpResponse(supplements.success(post))
-    else:
-        return HttpResponse('POST-only cgi')
-
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            clean = form.cleaned_data
+            send_mail(
+                'WebFeedback- StarCellBio: {0}...'.format(
+                    clean['note'][:10]
+                ),
+                render_to_string('contact.txt', {'form': clean}),
+                '{0} <{1}>'.format(clean['name'], clean['email']),
+                [getattr(settings, 'FEEDBACK_EMAIL', 'star@mit.edu')],
+            )
+            return HttpResponse('<h1>Thank you for your feedback.')
+        else:
+            return HttpResponse(
+                '<h1>Errors in contact form</h1> {}'.format(
+                    form.errors)
+            )
 
 def randomize_706_2014_ps1(request, assignment_data):
     import random
