@@ -58,7 +58,7 @@ sutd_ps2.register = function (dialog, state) {
          $('input[type=checkbox]' , dialog).attr('aria-checked',true);
     });
 
-    scb.utils.off_on(dialog.parent(), 'click', '.suts_ps2_inner_dialog_title_close', function (e) {
+    scb.utils.off_on(dialog.parent(), 'click', '.sutd_ps2_inner_dialog_title_close', function (e) {
         $(dialog).detach();
         $('.contact_overlay').remove();
     });
