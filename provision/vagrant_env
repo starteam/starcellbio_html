@@ -2,3 +2,4 @@ source virtualenvwrapper.sh
 workon starcellbio
 cd /vagrant
 export PROJECT_HOME=/vagrant
+export PATH=$PATH:/vagrant/node_modules/.bin

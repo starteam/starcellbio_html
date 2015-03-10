@@ -68,3 +68,5 @@ static/
 gen/
 
 settings.yml
+
+node_modules/
