@@ -92,9 +92,16 @@
 				EXPERIMENTS
     	</div>
     </a>
-    <a role='menuitem' class='scb_s_assignment_step_link scb_f_lab_notebook_link {if $step == 10 }scb_s_assignment_step_link_active{/if}' aria-label='Lab Notebook' aria-disabled='true'> <!--href='#view=notebook&assignment_id={$aid}'-->
+    <!-- Enable LAB REPORT button -->
+    <!--<a role='menuitem' class='scb_s_assignment_step_link scb_f_lab_notebook_link {if $step == 10 }scb_s_assignment_step_link_active{/if}' aria-label='Lab Notebook' aria-disabled='true' href='#view=notebook&assignment_id={$aid}'>
     	<div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
 			<div class='{if $step == 10 }scb_s_lab_notebook_link_img_active{else}scb_s_lab_notebook_link_img {/if}    ' role='presentation' ></div>
+			LAB REPORT
+        </div>
+    </a>-->
+    <a role='menuitem' class='scb_s_assignment_step_link scb_f_lab_notebook_link {if $step == 10 }scb_s_assignment_step_link_active{/if}' aria-label='Lab Notebook' aria-disabled='true' style="color:white"> <!--href='#view=notebook&assignment_id={$aid}'-->
+    	<div class='scb_s_assignment_step_wrapper'  aria-hidden='true'>
+			<div class='scb_s_lab_notebook_link_img_active' role='presentation' ></div>
 			LAB REPORT
         </div>
     </a>
@@ -120,7 +127,7 @@ Progress bar
 					<select role='select'  aria-label='Experiments' alt='' onchange="location = this.value;">
 						{foreach $e in $assignment.experiments.list}
 							<option role='option' aria-label='{$e.name}' value="#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$e.id}{if $e.last_view == 'microscopy'}&microscopy_id={$e.microscopy_list.selected_id}{elseif $e.last_view == 'facs'}&facs_id={$e.facs_list.selected_id}{elseif $e.last_view == 'western_blot' or $e.last_view == 'western_blot_gel'}&western_blot_id={$e.western_blot_list.selected_id}{/if}" 
-								model_id='{$assignment.id}' sub_model_id='{ $experiment.id }' 
+								model_id='{$assignment.id}' sub_model_id='{$experiment.id}'
 								{if  $experiment.id  == $e.id}selected="selected"{/if}> 
 								{$e.name}&nbsp;&nbsp;
 								
