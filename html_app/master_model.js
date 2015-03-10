@@ -16942,9 +16942,6 @@ var fix_assignment_models =  function (assignment_result) {
 		}
 		if(assignment_result[x].id == 'sutd_intro_biology'){
 			sutd_intro_biology = assignment_result[x];
-//			sutd_intro_biology.template.instructions = [
-//				['Getting Started', 'Please refer to your instructor for detailed instructions.']
-//				];
 			sutd_intro_biology.template.experiment_setup = scb_assignment_sutd_intro_biology.experiment_setup();
 
 			sutd_intro_biology.template.ui.experiment_setup.actions.push({
