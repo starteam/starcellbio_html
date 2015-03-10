@@ -1,0 +1,9 @@
+Star Web Feedback
+Time: {% now "SHORT_DATETIME_FORMAT" %}
+Name: {{ form.name }}
+Project: StarCellBio
+Source: App
+Report: {{ form.report }}
+Email: {{ form.email }}
+Subscribe: {{ form.subscribe }}
+Note: {{ form.note }}

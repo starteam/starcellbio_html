@@ -7,6 +7,7 @@ import os
 import yaml
 
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 YAML_CONFIG = os.path.join(SITE_ROOT, "settings.yml")
 
@@ -124,7 +125,7 @@ TEMPLATE_DIRS = (
     # "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-
+    os.path.join(BASE_DIR, 'StarCellBio', 'templates'),
 ) + auth.settings.TEMPLATE_DIRS
 
 
