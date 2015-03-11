@@ -32,6 +32,7 @@
 	box-shadow: 0 4px 14px -1px gray;
 	position: relative;
 	z-index: 1;
+	top: 20px;
 }
 
 .scb_s_facs_choose_samples_order{
