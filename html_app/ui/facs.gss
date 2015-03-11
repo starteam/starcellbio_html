@@ -26,14 +26,12 @@
 	margin-left: -20px;
 }
 
-.scb_s_facs_container{
+.scb_s_facs_container_student{
 	background: white;
 	padding-bottom: 115px;
 	box-shadow: 0 4px 14px -1px gray;
 	position: relative;
 	z-index: 1;
-	top: 20px;
-	margin-bottom: 21px;
 }
 
 .scb_s_facs_choose_samples_order{
