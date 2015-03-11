@@ -25,3 +25,5 @@ urwid==1.1.1
 wsgiref==0.1.2
 watchdog>=0.8.3
 docopt>=0.6.2
+ordereddict>=1.1
+sh>=1.11

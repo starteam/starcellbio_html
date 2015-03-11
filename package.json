@@ -1,0 +1,18 @@
+{
+  "name": "starcellbio",
+  "version": "0.0.0",
+  "description": "StarCellBio",
+  "dependencies": {
+    "clean-css": "~3.1.5",
+    "uglify-js": "~2.4.16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/starteam/starcellbio_html"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/starteam/starcellbio_html/issues"
+  }
+}

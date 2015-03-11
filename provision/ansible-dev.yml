@@ -12,6 +12,8 @@
       - libncurses5-dev
       - python-mysqldb
       - openjdk-6-jre
+      - npm
+      - nodejs-legacy
     pip_packages:
       - virtualenvwrapper
     venv_name: starcellbio
@@ -39,6 +41,9 @@
 
     - name: Install requirements
       pip: requirements='/vagrant/requirements.txt' virtualenv={{ venv_path }}
+
+    - name: Install node packages
+      npm: path=/vagrant
 
     - name: Create database
       sudo: yes
@@ -76,6 +81,7 @@
         {{ venv_path }}/bin/python build.py
       environment:
         PROJECT_HOME: "/vagrant"
+        PATH: "/vagrant/node_modules/.bin:{{ ansible_env.PATH }}"
         
 
     - name: Drop profile

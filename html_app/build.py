@@ -5,28 +5,36 @@
 Usage:
   build.py
   build.py watch
+  build.py -p | --prod
   build.py -h | --help
 
+
 Options:
+  -p --prod       Do production javascript/css pipelining
   -h --help       Show this help screen.
 
 """
 
 import logging
 import os
+import sh
+from subprocess import call
 import time
 
 from docopt import docopt
-from subprocess import call
+from ordereddict import OrderedDict  # For 2.6 compatibility
 from watchdog.observers import Observer
 from watchdog.events import RegexMatchingEventHandler
-
+import yaml
 
 ROOT = os.environ['PROJECT_HOME'] + '/html_app/'
+JAVASCRIPT_REQUIREMENTS = 'javascript_requirements.yml'
 
+prod_minify = False
 global_update_index = True
 js = dict()
 css = dict()
+
 TIME = '?_=' + str(int(time.time()))
 
 CSS_PREFIX = '<link type="text/css" href="/static/'
@@ -69,40 +77,62 @@ HTML_SUFFIX += """
 """
 
 
-def index_html():
-    global css, js
-    if js.has_key('js/jquery-1.7.2.min.js'):
-        js.pop("js/jquery-1.7.2.min.js")
-    if js.has_key("js/tinymce.min.js"):
-        js.pop("js/tinymce.min.js")
-    if js.has_key("js/jquery.tinymce.min.js"):
-        js.pop("js/jquery.tinymce.min.js")
-    if js.has_key("starcellbio.app.js"):
-        js.pop("starcellbio.app.js")
-    if js.has_key("swipe/Gruntfile.js"):
-        js.pop("swipe/Gruntfile.js")
-    if js.has_key("js/soyutils.js"):
-        js.pop("js/soyutils.js")
-    if js.has_key("master_model.js"):
-        js.pop("master_model.js")
+def minify_all_js(js):
+    """Concatenates and then minifies each file passed in"""
+    all_file_packed = os.path.join(ROOT, 'gen', 'all.packed.js')
+    dynamic_scripts = []
+    uglify_params = []
+    for file_name in js:
+        path = os.path.join(ROOT, file_name)
+        if os.path.isfile(path):
+            uglify_params.append(path)
+        else:
+            dynamic_scripts.append(file_name)
+    sh.uglifyjs(
+        *uglify_params, o=all_file_packed
+    )
+    dynamic_scripts.append(os.path.join(
+        'gen',
+        os.path.basename(all_file_packed)
+    ))
+    return dynamic_scripts
 
+
+def minify_all_css(css):
+    """Concatenate and minify all css"""
+    all_file_packed = os.path.join(ROOT, 'gen', 'all.packed.css')
+    css_paths = [os.path.join(ROOT, x) for x in css]
+    sh.cleancss(o=all_file_packed, *css_paths)
+    return [os.path.join('gen', os.path.basename(all_file_packed))]
+
+
+def index_html():
+    # Concatenate all the CSS includes
+    css_list = css.keys()
+    if prod_minify:
+        css_list = minify_all_css(css_list)
     css_join = (
         CSS_PREFIX +
-        (TIME + CSS_SUFFIX + CSS_PREFIX).join(css.keys()) +
+        (TIME + CSS_SUFFIX + CSS_PREFIX).join(css_list) +
         TIME + CSS_SUFFIX
     )
+    # Concatenate all the js files
+    # Load yaml file of javascript deps
+    with open(os.path.join(
+            os.environ['PROJECT_HOME'],
+            JAVASCRIPT_REQUIREMENTS
+    )) as yaml_file:
+        js = yaml.load(yaml_file)['javascripts']
+    # Remove duplicates
+    js = list(OrderedDict.fromkeys(js))
+    # If production, then minify everything
+    if prod_minify:
+        js = minify_all_js(js)
     js_join = (
         JS_PREFIX +
-        (TIME + JS_SUFFIX + JS_PREFIX).join(js.keys()) +
+        (TIME + JS_SUFFIX + JS_PREFIX).join(js) +
         JS_SUFFIX
     )
-    js_join = JS_PREFIX + "../scb/get_user.js" + JS_SUFFIX + js_join
-    js_join = JS_PREFIX + "starcellbio.app.js" + JS_SUFFIX + js_join
-    js_join = JS_PREFIX + "js/soyutils.js" + JS_SUFFIX + js_join
-    js_join = JS_PREFIX + "js/tinymce.min.js" + JS_SUFFIX + js_join
-    js_join = JS_PREFIX + "js/jquery.tinymce.min.js" + JS_SUFFIX + js_join
-    js_join = JS_PREFIX + "js/jquery-1.7.2.min.js" + JS_SUFFIX + js_join
-    js_join = js_join + JS_PREFIX + "master_model.js" + JS_SUFFIX
 
     return HTML_PREFIX + css_join + js_join + HTML_SUFFIX
 
@@ -125,12 +155,11 @@ def processor(path):
 
     """
 
-    global global_update_index, css, js
+    global global_update_index
     update_index = False
     path = path.replace("//", "/")
     url = path.replace(ROOT, "")
     if path.endswith(".js"):
-        js[url] = 1
         update_index = True
     if path.endswith(".css"):
         css[url] = 1
@@ -161,8 +190,6 @@ def processor(path):
             "-o", outfile
         ])
         print "compile gss {} to {} ".format(infile, outfile)
-    if path.endswith(".touch_index"):
-        update_index_html()
     if update_index:
         global_update_index = True
         os.utime("{}.touch_index".format(ROOT), None)
@@ -239,7 +266,8 @@ if __name__ == "__main__":
         format='[%(asctime)s] %(levelname)s: %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
-
+    if args['--prod']:
+        prod_minify = True
     if args['watch']:
         watch(".")
     else:
