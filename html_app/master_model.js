@@ -9604,7 +9604,7 @@ var __june_2014_usability = {
 
 var __sutd_intro_biology = {
         id: 'sutd_intro_biology',
-        name: 'SUTD Introductory Biology',
+        name: 'StarCellBio Assignment 1 (CC13)',
         course: 'SUTD_Biology',
     	course_name: 'Class',
         description: 'Microscopy Test of images',
@@ -11898,7 +11898,7 @@ var ps2_strain_E = {
 
 var __sutd_intro_biology_ps2 = {
         id: 'sutd_intro_biology_ps2',
-        name: 'SUTD Problem 2',
+        name: 'StarCellBio Assignment 2 (CC14)',
         course: 'SUTD_Biology',
     	course_name: 'SUTD Intro Biology',
         description: 'FACS and Western Blot for temperature sensitive mutants',
