@@ -307,7 +307,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 xaxis: {
                 	show: true,
                 	color: '#000000',
-                    min: 9,
+                    min: 0,
                     max: template.model.facs.max ? template.model.facs.max:  150,
                     ticks:  template.model.facs.ticks ? template.model.facs.ticks: [50, 100],
                     tickLength: 0,
