@@ -9612,7 +9612,9 @@ var __sutd_intro_biology = {
     experiments: {},
         template: {
             instructions: [
-           	    ['Goal & Introduction','Please refer to your instructor for detailed instructions.']
+           	    ['Goal & Introduction', scb_assignment_sutd_intro_biology.goal()],
+                ["Background Information", scb_assignment_sutd_intro_biology.bg_info({})],
+                ["Questions",scb_assignment_sutd_intro_biology.questions({})]
             	],
             ui: {
                 experimental_design: {
