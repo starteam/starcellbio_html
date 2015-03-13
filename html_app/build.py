@@ -28,7 +28,7 @@ from watchdog.events import RegexMatchingEventHandler
 import yaml
 
 ROOT = os.environ['PROJECT_HOME'] + '/html_app/'
-JAVASCRIPT_REQUIREMENTS = 'javascript_requirements.yml'
+STATIC_ASSETS = 'static_assets.yml'
 
 prod_minify = False
 global_update_index = True
@@ -107,22 +107,25 @@ def minify_all_css(css):
 
 
 def index_html():
-    # Concatenate all the CSS includes
-    css_list = css.keys()
-    if prod_minify:
-        css_list = minify_all_css(css_list)
-    css_join = (
-        CSS_PREFIX +
-        (TIME + CSS_SUFFIX + CSS_PREFIX).join(css_list) +
-        TIME + CSS_SUFFIX
-    )
-    # Concatenate all the js files
     # Load yaml file of javascript deps
     with open(os.path.join(
             os.environ['PROJECT_HOME'],
-            JAVASCRIPT_REQUIREMENTS
+            STATIC_ASSETS
     )) as yaml_file:
-        js = yaml.load(yaml_file)['javascripts']
+        static_assets = yaml.load(yaml_file)
+        js = static_assets['javascripts']
+        css = static_assets['css']
+
+    # Concatenate all the CSS includes
+    css = list(OrderedDict.fromkeys(css))
+    if prod_minify:
+        css = minify_all_css(css)
+    css_join = (
+        CSS_PREFIX +
+        (TIME + CSS_SUFFIX + CSS_PREFIX).join(css) +
+        TIME + CSS_SUFFIX
+    )
+    # Concatenate all the js files
     # Remove duplicates
     js = list(OrderedDict.fromkeys(js))
     # If production, then minify everything
@@ -158,11 +161,9 @@ def processor(path):
     global global_update_index
     update_index = False
     path = path.replace("//", "/")
-    url = path.replace(ROOT, "")
     if path.endswith(".js"):
         update_index = True
     if path.endswith(".css"):
-        css[url] = 1
         update_index = True
     if path.endswith(".soy"):
         infile = path
