@@ -1,259 +1,200 @@
 {namespace scb_assignment_sutd_intro_biology}
 
 /**
-
 */
-{template .page1}
-<div class='scb_s_sutd_intro_biology_assignment_overview' xmlns="http://www.w3.org/1999/html"
-     xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-
-<!-- 
-    <h2 role='heading'>SHLOKA</h2>
-The goal of this assignment is to increase understanding of cell biology 
-techniques and their application by providing you with the opportunity to 
-conduct and analyze data from your own cell biology experiments.
-
-    <h2 role='heading'>StarCellBio</h2>
-
-    <p>
-To conduct your cell biology experiments, you will use StarCellBio, 
-a cell and molecular experiment simulator, launched from the MITx 7.06r course website.
-    </p>
-    
-     <h2 role='heading'>Due Date & Points</h2>
-Your answers to the questions on the MITx 7.06r website will be due on <b>Friday, May 5nd by 11 AM</b>.<p/> 
-
-This assignment contains five questions. To obtain full credit, 
-you will need to select and submit answers to <strong>three out of the five</strong> questions 
-for a total of <strong>30 points</strong>.  <p/>
-
-You have the opportunity to submit the two remaining questions 
-for extra credit. Each remaining extra credit question is 
-worth a total of <strong>5 points</strong>. For a question to be considered 
-for extra credit, it must be completed in its entirety. 
-Remaining questions that are partially answered will not be 
-graded for extra credit. <p/>
-
-At the top of each question, you will be asked to 
-indicate whether you would like your answers to that 
-question to be considered for full credit, extra credit or neither.
- -->
-
-</div>
+{template .goal}
+<h2>Goal</h2>
+<p>
+The goal of this worksheet is to increase understanding of <b>signal transduction</b> pathways and <b>cell biology
+techniques</b> by providing you with the opportunity to conduct and analyze data from your own cell biology
+experiments using StarCellBio. </p>
 {/template}
 
 /**
-
 */
-{template .page2}
-<div class='scb_s_sutd_intro_biology_assignment_overview' xmlns="http://www.w3.org/1999/html"
-     xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-<!-- 
-<h2 role='heading'>Background Information</h2>
-	<p>
-Your graduate thesis research is focused on the identification 
-and characterization of novel regulators of the mitotic cell cycle. 
-To identify such novel cycle cell regulators, you initiate a 
-collaboration with the Broad Institute, which will provide 
-access to their extensive RNAi library for an RNAi-based screen.  
-</p>
-<p>
-Before you screen all of the library’s siRNA constructs, 
-you decide to perform a preliminary screen by treating 
-Drosophila Schneider 2 (S2) cells, a cell line originally 
-derived from Drosophila melanogaster embryos, with a subset 
-of the RNAi library. You identify 5 different siRNA constructs 
-(<b>siRNA #1-5</b>) that result in a cell cycle phenotype and that you 
-would like to further characterize their effect on cell cycle progression.
-</p>
-<p>
-For your experimental analyses, you have the following cell cycle 
-specific drugs that provide known, expected results under appropriate 
-conditions to which you may wish to compare your experimental samples 
-involving the RNAi treatments.
+{template .bg_info}
+<h2>
+Background Information
+</h2>
 
-<ul>
-		<li>
-			<i>Serum-free media</i> = S2 cells grown in media that lacks serum, and therefore lacks all growth factors, which results in a cell cycle arrest in G1.
-		</li>
-		
-		<li><i>Hydroxyurea</i> = a drug that depletes the cell of deoxyribonucleotides (dNTPs), which results in a cell cycle arrest in S-phase.
-		</li>
-		
-		<li><i>Colchicine</i> = a drug that inhibits polymerization of microtubules, which results in a cell cycle arrest in mitosis.
-		</li>
-		
-	</ul>
-</p>
+<p>You have discovered a new signaling pathway that promotes cell activities and is expressed in all mammalian cells.
+This pathway is activated by the addition of an extracellular ligand. </p>
+<p>You have identified five components of this pathway in a human cell line, Proteins A-E, which have not been
+previously characterized. First, you test the relative protein levels of Proteins A-E before and after pathway activation.
+You observe that within the time frame in which your experiment is conducted, the levels of Proteins A-E do not
+change upon the addition of extracellular ligand. Therefore, you determine that within this pathway, Proteins A-E are
+not regulated through changes in their protein levels.</p>
+<p>To further characterize this pathway you would like to determine the order of Proteins A-E within this signal
+transduction cascade by testing the effect of pathway activation on the behavior of Proteins A-E. To do this, you are
+being asked to perform a series of experiments that will allow you to determine the following features about Proteins
+A-E: </p>
+<ol>
+<li>Location within the cell </li>
+<li>Regulation of protein activity through changes in phosphorylation </li>
+</ol>
+<p>To perform these experiments you are provided with the activating ligand as well as a small molecule inhibitor of
+this signal transduction pathway. This inhibitor can be used for experiments testing the location of the protein within
+the cell, phosphorylation and to order the components of this signal transduction. The following is a summary of the
+available conditions/treatments: </p>
 
 
-<h2 role='heading'>Experimental Analyses</h2>
+<style>
+table.sutd1_text_table td {lb}
+    border: 1px solid black;
+{rb}
+table.sutd1_text_table {lb}
+border-collapse: collapse;
+{rb}
+</style>
 
-<p>
-To characterize the effects of siRNA #1-5 on cell cycle progression, 
-you perform the following analyses after each RNAi treatment: 
-</p>
-
-<p>I. You first analyze DNA content by flow cytometry using propidium iodide (PI), a fluorescent dye that binds, or intercalates, DNA.
-</p>
-
-<p>II. Next, you analyze several key cell cycle proteins by western blot. For the western blotting analysis, you have the following antibodies available to you, including an antibody against Pgk1, a protein whose levels do not change throughout the cell cycle. 
-
-<table class="scb_s_objective_table" role='grid'>
-			<thead>
-            <td><b>Antibody</b>
-
-            </td>
-            <td><b>Protein Detected</b>
-
-            </td>
-            <td><b>Expected Molecular Weight (kDa)</b>
-            </td>
-            </thead>
-            <tbody>
-            <tr>
-                <td>anti-Chk1</td>
-                <td>Chk1</td>
-                <td>54</td>
-            </tr>
-            <tr>
-                <td>anti-Cyclin B</td>
-                <td>Cyclin B</td>
-                <td>58</td>
-            </tr>
-            <tr>
-                <td>anti-Cyclin E</td>
-                <td>Cyclin E</td>
-                <td>48</td>
-            </tr>
-            <tr>
-                <td>anti-Mad2</td>
-                <td>Mad2</td>
-                <td>25</td>
-            </tr>
-            <tr>
-                <td>anti-Pgk1</td>
-                <td>Pgk1</td>
-                <td>45</td>
-            </tr>
-            <tr>
-                <td>anti-Rad21/Scc1*</td>
-                <td>Rad21/Scc1 (subunit of cohesin)</td>
-                <td>68</td>
-
-            </tr>
-            </tbody>
-</table>
-</p>
-<p>
-<b>NOTE</b>: You can assume that all of these antibodies recognize the phosphorylated and unphosphorylated forms, if applicable, of each of the proteins. You will be able to see an appropriate shift in size for phosphorylated proteins on the western blot under the appropriate experimental conditions.</p>
-
-<p>*The Rad21/Scc1 antibody recognizes a fragment of the Rad21 protein containing amino acids 423 – 501. Here is a schematic of the full length Rad21 protein (631 amino acids) with arrows indicating the amino acid positions of the two Separase cleavage sites:</p>
-<img style ='width:100%' src='images/homepage/ps2_assignment.jpg'/>
-
-
-<p>
-III. Then, you visualize the cells’ DNA using immunofluorescence microscopy. Within StarCellBio, you will be able to perform one of the three following immunofluorescence analyses, as indicated within the microscopy setup page. For the siRNA #1-5 treatments, <b>only mitotic</b> images that are informative for the analysis of siRNA phenotypes have been provided. When analyzing microscopy images, make sure that you are comparing images generated by the same immunofluorescence microscopy analysis.
-
-<table class="scb_s_objective_table" role='grid'>
-			<thead>
-            <td role='columnheader'><b>Immunofluorescence Analysis</b>
-
-            </td>
-            <td role='columnheader'><b>Description</b>
-
-            </td>
-            <td><b>Note</b>
-
-            </td>
-            </thead>
-            <tbody>
-            <tr>
-                <td>DAPI (blue), α-tubulin (green), γ-tubulin (red)</td>
-                <td>DAPI (4',6-diamidino-2-phenylindole, a fluorescent stain that binds to DNA), α-tubulin antibody (a marker of microtubules), and γ-tubulin antibody (a marker of spindle poles)</td>
-                <td>The image available for control siRNA treated cells is a composite of representative images of cells in metaphase AND anaphase.</td>
-            </tr>
-            <tr>
-                <td>H2B (green), α-tubulin (red)</td>
-                <td>Histone 2B (H2B, a protein that co-localizes with DNA) antibody and an antibody to α-tubulin (a marker of microtubules)</td>
-                <td>The image available for control siRNA treated cells is of a cell in the same cell cycle stage as that of the siRNA experimental treatment images provided.</td>
-            </tr>
-            <tr>
-                <td>H2B (green)</td>
-                <td>Histone 2B (H2B, a protein that co-localizes with DNA) antibody</td>
-                <td>This immunofluorescence analysis is performed on metaphase cells after gently squashing the cells to enable attachments between sister chromatids to be visualized more readily.</td>
-
-            </tr>
-            </tbody>
+ <table class='sutd1_text_table'>
+ <thead>
+<td style='width:75pt'>Treatment</td><td>Description</td>
+ </thead>
+ <tbody>
+<tr><td>Growth media only </td><td>Cells are cultured in growth media only and collected. </td></tr>
+<tr><td>Growth media + ligand</td><td>Cells, previously cultured in growth media only, are grown in growth media
+containing the activating ligand for a given period of time and collected for
+further analysis.  </td></tr>
+<tr><td>Growth media + inhibitor</td><td>Cells, previously cultured in growth media only, are grown in growth media
+containing an inhibitor of the signaling pathway for a given period of time
+and collected for further analysis.  </td></tr>
+<tr><td>Growth media only + ligand + inhibitor</td><td>Cells, previously cultured in growth media only, are grown in growth media
+containing the activating ligand and inhibitor of the signaling pathway for a
+given period of time and collected for further analysis. </td></tr>
+</tbody>
 </table>
 
-</p>
 
-<p>IV. Last, you visualize the expression and localization of the Mad2 protein. In StarCellBio, you may be able to perform the following immunofluorescence microscopy analysis, as indicated within the microscopy setup page. For the Mad2 microscopy analysis, only images of cells in <b>metaphase</b> have been provided.
-<table class="scb_s_objective_table">
-			<thead>
-            <td><b>Immunofluorescence Analysis</b>
 
-            </td>
-            <td><b>Description</b>
 
-            </td>
 
-            </thead>
-            <tbody>
-            <tr>
-                <td>Mad2 (red), DAPI (blue)</td>
-                <td>An antibody to the Mad2 protein and DAPI (a fluorescent stain that binds to DNA)</td>
+<h3>1. Microscopy</h3>
+<p>First, you decide to determine the location of Proteins A-E in the cell prior to and after pathway activation. To do this,
+you generate human cell lines, each stably expressing a fusion protein in which Green Fluorescent Protein (GFP) is
+fused in frame to one of the five proteins. These fusion cell lines are called GFP-Protein A, GFP-Protein B, etc. You
+then look at the localization of these fusion proteins using fluorescence microscopy and the cell culturing conditions
+you have been provided. In addition, you are provided with a series of cell lines that can be used as controls to
+assess the location of proteins in the cell. In these control cell lines the protein fused to GFP has a known location,
+which does not change upon the addition of the extracellular ligand that activates the signal transduction pathway in
+question. </p>
+<p>Below is a summary of cell lines provided to you: </p>
 
-            </tr>
-            </tbody>
+<table class='sutd1_text_table'>
+<thead>
+<td style='width:75pt'>Strain</td><td>Description</td>
+</thead>
+<tbody>
+<tr><td>GFP-Protein A</td><td>	A human cell line stably expressing Protein A fused to GFP. </td></tr>
+<tr><td>GFP-Protein B</td><td>	A human cell line stably expressing Protein B fused to GFP. </td></tr>
+<tr><td>GFP-Protein C</td><td>	A human cell line stably expressing Protein C fused to GFP. </td></tr>
+<tr><td>GFP-Protein D</td><td>	A human cell line stably expressing Protein D fused to GFP. </td></tr>
+<tr><td>GFP-Protein E</td><td>	A human cell line stably expressing Protein E fused to GFP. </td></tr>
+<tr><td>GFP</td><td>A human cell line stably expressing GFP, which localizes to both the
+nucleus and cytoplasm.</td></tr>
+<tr><td>GFP-Histone H2B</td><td> A human cell line stably expressing Histone H2B, a protein that localizes to
+the nucleus, fused to GFP. </td></tr>
+<tr><td>GFP-p100</td><td>A human cell line stably expressing p100, a protein that localizes to the
+cytoplasm, fused to GFP.  </td></tr>
+<tr><td>GFP-pTD</td><td>A human cell line stably expressing a pTD, a protein that localizes to the
+plasma membrane, fused to GFP.  </td></tr>
+ </tbody>
 </table>
-</p>
-
-<p>
-Conduct the appropriate experiments within StarCellBio to characterize the effect of each RNAi treatment, siRNA #1-5, on cell cycle progression. Using the results that you obtain from these experiments, answer the following questions.</p>
 
 
-<p>
-<b>NOTE:</b> Remember that to obtain full credit for this assignment, you are only required to submit answers to three questions of your choice out of the total five questions provided. Question 1 addresses the effect of siRNA #1, Question 2 addresses the effect of siRNA #2, etc. In addition, you are allowed to submit the two remaining questions for extra credit if they are completed in their entirety. For more information, see the “Getting Started” page of this assignment.
-</p>
- -->
+<h3>2. Western Blotting</h3>
+<p>In addition to location in cell, you also want to test the phosphorylation status of proteins A-E. As the signaling
+pathway that you identified is new, you have not yet defined the critical phosphorylation events required for signal
+transduction. You are fortunate in that there is a commercially available phospho-specific antibody available for one
+site in each of your proteins. These phospho-antibodies only recognize the phosphorylated form of each protein at
+that site, but there is no guarantee that this phosphorylation site is relevant to your signal transduction pathway. You
+also have an antibody against the control protein, GAPDH, which is not affected by activation of this pathway. </p>
 
-</div>
+ <table class='sutd1_text_table'>
+ <thead>
+<td style='width:75pt'>Antibody</td><td>Description</td><td>Expected molecular weight of detected band(s) (kDa) </td>
+ </thead>
+ <tbody>
+ <tr><td>Anti-phospho-proteinA </td><td>Primary antibody recognizing Protein A phosphorylated at a
+specific site. Can recognize endogenous and GFP-Protein A fusion proteins. </td><td>46 (Endogenous Protein A) <br>
+73 (GFP tagged Protein A) </td></tr>
+
+<tr><td>Anti-phospho-protein B </td><td>Primary antibody recognizing Protein B phosphorylated at a
+specific site. Can recognize endogenous and GFP-Protein B fusion proteins. </td><td>134 (Endogenous Protein B) <br>
+161 (GPF tagged Protein B) </td></tr>
+
+<tr><td>Anti-phospho-protein C </td><td>Primary antibody recognizing Protein C phosphorylated at a
+specific site. Can recognize endogenous and GFP-Protein C fusion proteins.  </td><td> 44 (Endogenous Protein C)<br>
+71.(GFP tagged Protein C) </td></tr>
+
+<tr><td>Anti-phospho-protein D </td><td>Primary antibody recognizing Protein D phosphorylated at a
+specific site. Can recognize endogenous and GFP-Protein D fusion proteins.  </td><td> 67 (Endogenous Protein D)<br>
+94 (GFP tagged Protein D) </td></tr>
+
+<tr><td>Anti-phospho-protein E </td><td>Primary antibody recognizing Protein E phosphorylated at a
+specific site. Can recognize endogenous and GFP-Protein E fusion proteins. </td><td>74 (Endogenous Protein E)<br>
+101 (GFP tagged Protein E)  </td></tr>
+
+<tr><td>anti-GAPDH</td><td>Primary antibody recognizing GAPDH. </td><td>37</td></tr>
+<tr><td>Rabbit antimouse</td><td>Secondary antibody recognizing mouse primary antibodies. </td><td>N/A</td></tr>
+<tr><td>Goat antirabbit</td><td>Secondary antibody recognizing rabbit primary antibodies. </td><td>N/A</td></tr>
+</tbody>
+</table>
+
+<p>Conduct the appropriate experiments within StarCellBio to determine the effect of pathway activation and inhibition
+on the location (within a cell) and phosphorylation of Proteins A-E. Using the results that you obtain from these
+experiments, answer the following questions concerning Proteins A-E and the order of the signal transduction
+pathway in question. </p>
+
 {/template}
+
 
 /**
-
 */
-{template .page3}
-<div class='scb_s_sutd_intro_biology_assignment_overview' xmlns="http://www.w3.org/1999/html"
-     xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-<!-- 
-<h2>Questions 1-5</h2>
-<p>Using your experimental results, answer the following questions within the MITx 7.06r website. Part A of this question will require you to consider only your flow cytometry experimental results, but for Parts B-E of this question, you should take into consideration all of your existing data when interpreting your experimental results for each individual part.</p>
+{template .questions}
+<h2>Question 1</h2>
+<p>Using your experimental results, describe the effect of pathway activation on each of the five proteins in the table
+below by indicating 1) whether the protein is phosphorylated (by answering “Yes” or “No”), and 2) location of the
+protein in the cell. Please answer this question on your worksheet. </p>
+
+<table class='sutd1_text_table'>
+<thead>
+<td style='width:75pt'></td><td></td><td>No pathway activation <br>(-Ligand) </td><td>Pathway activation <br>(+ Ligand) </td>
+</thead>
+<tbody>
+<tr><td rowspan="2">Protein A</td><td>Phosphorylation</td><td></td><td></td></tr>
+<tr><td>Location in the cell</td><td></td><td></td></tr>
+<tr><td rowspan="2">Protein B</td><td>Phosphorylation</td><td></td><td></td></tr>
+<tr><td>Location in the cell</td><td></td><td></td></tr>
+<tr><td rowspan="2">Protein C</td><td>Phosphorylation</td><td></td><td></td></tr>
+<tr><td>Location in the cell</td><td></td><td></td></tr>
+<tr><td rowspan="2">Protein D</td><td>Phosphorylation</td><td></td><td></td></tr>
+<tr><td>Location in the cell</td><td></td><td></td></tr>
+<tr><td rowspan="2">Protein E</td><td>Phosphorylation</td><td></td><td></td></tr>
+<tr><td>Location in the cell</td><td></td><td></td></tr>
+</tbody>
+</table>
 
 
-<p>NOTE (for Question 2 only): Your advisor is concerned that one of the RNAi treatments, siRNA #2, actually contains two different siRNA constructs targeting two different gene products. Keep this potential concern in mind when analyzing the results following siRNA #2 treatment.</p>
+<h2>Question 2. Part A</h2>
 
-<p><b class='ps2_bold'>a)</b> Using only your flow cytometry data, indicate the cell cycle progression phenotype(s), if any, you observe in siRNA treated cells relative to control siRNA treated cells.</p>
+<p>For the current experiment, we do not know the relationship between Proteins A-E and the exercise simply suggests
+their relative position within the signal transduction pathway. Hence, addition of ligand results in the activation of the
+pathway and in the expression of genes important for cell activities. Given your experimental results, suggest the
+most likely order for Proteins A-E within this pathway, starting with the addition of ligand and ending with the resulting
+gene expression. Please answer this question on your worksheet. </p>
 
-<p><b class='ps2_bold'>b)</b> Indicate the following for each protein in the table on the 7.06r website after siRNA treatment: (a) relative expression level in comparison to control siRNA treated cells, (b) the cleavage status, and (c) the phosphorylation status.</p>
+<p>ligand _____ _____ _____ ______ _____ gene expression</p>
 
-<p><b class='ps2_bold'>c)</b> Indicate the chromosome phenotype that best describes what you observe in siRNA treated cells.</p>
+<h2>Questions 2. Part B</h2>
 
-<p><b class='ps2_bold'>d)</b> Indicate the Mad2 expression and localization phenotype that best describes what you observe in siRNA treated cells.</p>
+<p>At which point within the pathway does the inhibitor act? Please answer this question on your worksheet. </p>
+<p>Downstream of _____ and upstream of or inhibiting _____</p>
 
-<p><b class='ps2_bold'>e)</b> Using all of your experimental results and answers from parts A-D, describe the phenotype you observe in siRNA treated cells. Your answer should include (i) the conclusion that you reached from analyzing ALL of your experimental results following siRNA treatment and (ii) the function of a potential gene product target for the siRNA. Be sure to explain the reasoning by which you arrived at your conclusion and reference your experimental results in your explanations.</p>
-<br/>
-<br/>
-<br/>
- -->
-
-</div>
+<h2>Question 2. Part C</h2>
+<p>Explain the reasoning by which you ordered the signal transduction pathway using your experimental results to
+justify your explanation.</p>
 {/template}
-
-
-
 
 /**
 
