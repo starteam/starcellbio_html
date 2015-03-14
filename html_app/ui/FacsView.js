@@ -396,6 +396,8 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
         _.each(parsed.facs.lanes_list.list, function (facs_lane) {
             facs_lane.canvas_metadata_analysis.points = JSON.parse(JSON.stringify(parsed.facs_lane.canvas_metadata_analysis.points));
 
+            facs_lane.bisector_gate_created = parsed.facs_lane.bisector_gate_created;
+
             scb.ui.static.FacsView.evaluate_chart({
                 facs: parsed.facs,
                 facs_lane: facs_lane,
