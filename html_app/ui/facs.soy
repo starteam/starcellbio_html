@@ -454,6 +454,33 @@ FACS Main View
 */
 {template .display_facs_progress}
 <div class='scb_s_facs_progress'>
+    {if $step == 1}
+    <div class='scb_s_facs_video_box_wrapper'>
+        <div class='scb_s_facs_video_box_wrapper_title'>
+            IN THE LAB
+        </div>
+        <div id='slider' class='scb_s_facs_video_box swipe'>
+            <div  class='slides_container swipe-wrap'>
+	    		<div>
+				    <iframe height="124" width="187" controls="0" class='scb_s_experiment_setup_video_box_vid' src="https://www.youtube.com/embed/2P7YsJ0Zkio" frameborder="0"></iframe>
+				</div>
+				<div>
+				    <iframe height="124" width="187" controls="0" class='scb_s_experiment_setup_video_box_vid' src="https://www.youtube.com/embed/pFtO0xxJL9s" frameborder="0"></iframe>
+				</div>
+			</div>
+		</div>
+		<div class='slider_controls' style='text-align:center;'>
+	  		<button onclick='mySwipe.prev()'>&#x25c0;</button>
+	  	    <nav id = 'nav'>
+				<ul class='slider_dots'>
+					<li class='on'></li>
+					<li ></li>
+				</ul>
+			</nav>
+		    <button onclick='mySwipe.next()'>&#x25b6;</button>
+		</div>
+    </div>
+    {/if}
 	
 	<div class='scb_s_facs_vertical_line_1' role='presentation'></div>
     <div class='scb_s_facs_vertical_line_4' role='presentation'></div>
@@ -467,7 +494,7 @@ FACS Main View
 			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
 						{if $step== 1}20px;{/if}
-				{if $step== 2} 289px;{/if}
+				{if $step== 2} 294px;{/if}
 				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'
 				 
 				 aria-label='
