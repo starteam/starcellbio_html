@@ -1,6 +1,185 @@
 {namespace scb_assignment_sutd_intro_biology_ps2}
 
 /**
+*/
+{template .goal}
+<h2>Goal</h2>
+<p>The goal of this assignment is to increase your understanding of cell cycle regulation by providing you with the
+opportunity to conduct and analyze data from a set of complementary cell biology experiments in a simulated environment.</p>
+{/template}
+
+/**
+*/
+{template .bg_info}
+<h2>Background Information</h2>
+<p>You are studying novel regulators of the cell cycle. Your lab mate has conducted an RNAi screen in Drosophila
+Schneider 2 (S2) cells, a cell line originally derived from Drosophila melanogaster embryos, and identified candidate
+siRNAs (siRNAs 1-3) that result in a cell cycle phenotype by decreasing the expression of unknown cellular targets genes.
+You are asked to design a series of experiments that will further characterize the cell cycle phenotypes resulting after
+siRNAs 1-3 treatment and determine the role of their corresponding targets in cell cycle progression. To do this you will
+use three different complementary techniques: flow cytometry, western blotting and microscopy. In addition to siRNAs 1-3,
+you are provided with an siRNA (called “Control”) that does not affect cell cycle progression and which you can use to
+compare the results of siRNAs 1-3 treatments. For the purpose of this particular exercise you can assume that each siRNA
+(siRNAs 1-3) targets only a single gene product.</p>
+
+<p>Within StarCellBio, you will first set up an experiment by adding one siRNA at a time to the provided S2 cells.
+The experiment will then be run and the resulting samples can be used for any of the given experimental techniques.</p>
+
+<h4>1. Flow Cytometry</h4>
+<p>Your lab recently acquired an easy-to-use, bench-top flow cytometer. To further characterize the cell cycle progression
+phenotypes observed when cells are treated with the provided siRNAs, you decide to conduct a DNA content analysis after
+siRNA treatment by using propidium iodine (PI), a fluorescent dye that binds to DNA. The amount of fluorescence signal
+that is detected by the flow cytometer within a cell is proportional to the amount of DNA present. Since the flow
+cytometer allows for the quantitation of DNA content of each cell within population, analysis of the resulting fluorescent
+ signals will allow you to determine the percentage of cells within each stage of the cell cycle within the given population.
+ After running your samples through the flow cytometer in StarCellBio, you will be able to generate a histogram of PI
+ fluorescence, where the X-axis represents the intensity of PI fluorescence and the Y-axis represents the number of cells
+ detected within each PI intensity. Note that cells in which their DNA has not yet been replicated (cells found in the
+ G0/G1 stages of the cell cycle) will contain half the amount of DNA and therefore half the fluorescence as cells that
+ have replicated their DNA (cells found in late S and G2/M stages of the cell cycle). </p>
+
+<h4>2. Western Blotting</h4>
+<p>In addition to analyzing the DNA content in siRNAs 1-3 treated S2 cells, you decide to determine the relative
+expression of several key cell cycle regulators by using western blotting, an experimental technique that allows
+for the detection of a specific protein or peptide after cells are lysed and proteins are isolated from the rest
+of the cell’s components. The intensity of the band on the western blot film for a given protein is proportional
+to the amount this protein present inside cells. Using the samples you previously collected, conduct a series of
+western blotting experiments to determine the relative levels of the key cell cycle regulators for which reagents
+are available.</p>
+<p>For the western blotting analysis, you have the following antibodies available to you, including an antibody against
+Pgk1, a protein whose levels do not change throughout the cell cycle.</p>
+
+<style>
+table.sutd2_text_table td {lb}
+    border: 1px solid black;
+{rb}
+table.sutd2_text_table {lb}
+border-collapse: collapse;
+{rb}
+</style>
+
+<table class="sutd2_text_table">
+<thead>
+</thead>
+<td>Antibody</td><td>Description</td><td>Expected molecular weight of detected band(s) (kDa)</td>
+<tbody>
+<tr><td>Mouse anti-cyclin B</td><td>Primary antibody recognizing Cyclin B.</td><td>58</td></tr>
+<tr><td>Mouse anti-cyclin E</td><td>Primary antibody recognizing Cyclin E.</td><td>48</td></tr>
+<tr><td>Rabbit anti-Scc1</td><td>Primary antibody recognizing Scc1 (subunit of cohesin)<sup>*</sup></td><td>68 (full length)</td></tr>
+<tr><td>Rabbit anti-pgk1</td><td>Primary antibody recognizing Pgk1.</td><td></td></tr>
+<tr><td>Goat anti-rabbit </td><td>Secondary antibody recognizing rabbit primary antibodies.</td><td>N/A</td></tr>
+<tr><td>Rabbit anti-mouse</td><td>Secondary antibody recognizing mouse primary antibodies.</td><td>N/A</td></tr>
+
+</tbody>
+</table>
+<p><sup>*</sup>The Scc1 antibody recognizes a fragment of the Scc1 protein containing amino acids 423 – 501. Here is a
+schematic of the full length Scc1 protein (631 amino acids) with arrows indicating the amino acid positions of the
+two Separase cleavage sites:</p>
+
+<img src="../../images/sutd2_text.png" alt="img" width="100%">
+
+<h4>3. Microscopy</h4>
+<p>Finally, you visualize the cells’ DNA and spindles using the following immunofluorescence analyses, as indicated
+within the microscopy setup page. You take images at a magnification and resolution that allows the chromosomes and
+mitotic spindles within the nucleus to be discerned. For siRNA conditions in which multiple cell cycle stages are
+present, you take a representative set of images from each of the cell cycle stages that you see.</p>
+
+<table class="sutd2_text_table">
+<thead>
+</thead>
+<td>Immunofluorescence Analysis</td><td>Description</td><td>Note</td>
+<tbody>
+<tr><td>DAPI (blue), α-tubulin (green), γ-tubulin (red)</td><td>DAPI → 4',6-diamidino-2-phenylindole, a fluorescent stain that binds to DNA<br>
+α-tubulin antibody → a marker of microtubules<br>
+ γ-tubulin antibody → a marker of spindle poles
+</td><td>For some siRNA treated cells the image provided represents a composite image of representative images of cells
+in the various stages of the cell cycle present in that sample. For each siRNA condition, make sure to scroll left and
+right on the microscope’s view finder to ascertain if a composite image is present for that sample</td></tr>
+</tbody>
+</table>
+
+<p>Conduct the appropriate experiments within StarCellBio to characterize the effect of each siRNA treatment, siRNAs #1-3,
+on cell cycle progression. Using the results that you obtain from these experiments, answer the following questions.</p>
+
+{/template}
+/**
+*/
+{template .questions}
+<h2>Question 1</h2>
+<h4>Part A</h4>
+<p>Using your flow cytometry experimental data, for each siRNA treatment, indicate the percentage of cells within each
+stage of the cell cycle using the following table: [3 points]</p>
+
+<table class="sutd2_text_table">
+<thead>
+</thead>
+<td></td><td>% of cells in G1</td><td>% of cells in S</td><td>% of cells in G2/M</td>
+<tbody>
+<tr><td>S2 + siRNA Control</td><td></td><td></td><td></td></tr>
+<tr><td>S2 + siRNA #1</td><td></td><td></td><td></td></tr>
+<tr><td>S2 + siRNA #2</td><td></td><td></td><td></td></tr>
+<tr><td>S2 + siRNA #3</td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+
+<h4>Part B</h4>
+<p>Describe the differences in cell distribution between siRNA Control and siRNAs 1-3 treated cells. [3 points]</p>
+<h4>Part C</h4>
+<p>Using only on your flow cytometry data, how is each of the siRNA treatment affecting cell cycle progression? Please
+describe. [2 points] </p>
+<h4>Part D</h4>
+<p>Suggest a reason why the G2 and M cell cycle phases cannot be discerned in your flow cytometry set-up. [2 points]</p>
+
+<h2>Question 2</h2>
+<h4>Part A</h4>
+
+
+<p>Using your experimental results, for siRNAs 1-3 treatments, indicate whether cyclin E and B are expressed less,
+more or about the same relative to the siRNA Control treated cells in the following table. [3 points]</p>
+
+<table class="sutd2_text_table">
+<thead>
+</thead>
+<td></td><td>Cyclin E</td><td>Cyclin B</td>
+<tbody>
+<tr><td>S2 + siRNA #1</td><td></td><td></td></tr>
+<tr><td>S2 + siRNA #2</td><td></td><td></td></tr>
+<tr><td>S2 + siRNA #3</td><td></td><td></td></tr>
+</tbody>
+</table>
+
+<p>Suggest a reason for including Scc1 in your western blotting analysis. [1 point] </p>
+
+<h4>Part B</h4>
+<p>Based on the results you obtained in your western blotting analysis, what additional information can you gather about
+the cell cycle progression phenotypes you observe in the siRNAs 1-3 treated cells. [3 points]</p>
+
+
+<h2>Question 3</h2>
+<h4>Part A</h4>
+<p>Looking at your fluorescence microscopy images, what do you observe about the chromosome structure and spindle assembly
+in siRNAs 1-3 treated cells as compared to siRNA Control cells? [3 points]</p>
+
+<table class="sutd2_text_table">
+<thead>
+</thead>
+<td></td><td>Chromosome Structure</td><td>Spindle Assembly</td>
+<tbody>
+<tr><td>S2 + siRNA #1</td><td></td><td></td></tr>
+<tr><td>S2 + siRNA #2</td><td></td><td></td></tr>
+<tr><td>S2 + siRNA #3</td><td></td><td></td></tr>
+</tbody>
+</table>
+
+<h4>Part B</h4>
+<p>Propose a hypothesis that could explain how each of the siRNA treatments affects cell cycle progression. Explain your
+reasoning and be sure to use your combined experimental results from flow cytometry, western blotting and microscopy
+analyses in your justification. [4 points]</p>
+<h4>Part C</h4>
+<p>Suggest a possible target for each of the siRNA treatments. [3 points]</p>
+
+{/template}
+/**
 
 */
 {template .experiment_setup}
