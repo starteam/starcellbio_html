@@ -12472,7 +12472,7 @@ var __sutd_intro_biology_ps2 = {
                                     {
                                         name: 'Cyclin E',
                                         weight: 48,
-                                        intensity: 0,
+                                        intensity: 4,
                                         primary_anti_body: ['cyclinE']
                                     },
                                     {
