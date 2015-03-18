@@ -1394,17 +1394,21 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 		$(".scb_s_facs_selected").keypress(function(e){ return e.which != 13; });
 		
 		if(kind == 'analyze'){
-			//correct offset caused in FACS to align all parts of progress bar correctly
-			$('.scb_s_western_blot_progress_gray_bar').children().each(function () { console.log($(this).css('left'));
-    				$(this).css('left', parseInt($(this).css('left'))-5+'px');
-			});
-			$('.scb_s_western_blot_progress_bar').addClass('scb_s_facs_bar');
 			$('.scb_s_facs_single_range_button').button();
 			$('.scb_s_facs_double_range_button').button();
 			if(state.facs.samples_finished && state.facs.selected_lane.bisector_gate_created) 
 				$('.scb_s_facs_double_range_button').button('disable');
 			
 		}
+
+        var elem = document.getElementById('slider');
+		window.mySwipe = Swipe(elem, {
+  			continuous: false,
+  			disableScroll: true,
+  			transitionEnd: function(index, element) {
+					$('.slider_dots li').attr('class','');
+					$($('.slider_dots li')[index]).attr('class','on');}
+		});
 		
         
 		document.body.scrollTop = state.experiment.last_scroll;
