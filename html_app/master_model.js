@@ -12412,7 +12412,7 @@ var __sutd_intro_biology_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 5,
+                                        intensity: 9,
                                         primary_anti_body: ['cyclinB']
                                     },
                                     {
@@ -12445,7 +12445,7 @@ var __sutd_intro_biology_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 5,
+                                        intensity: 9,
                                         primary_anti_body: ['cyclinB']
                                     },
                                     {
@@ -12478,8 +12478,14 @@ var __sutd_intro_biology_ps2 = {
                                     {
                                         name: 'Cyclin B',
                                         weight: 58,
-                                        intensity: 5,
+                                        intensity: 4,
                                         primary_anti_body: ['cyclinB']
+                                    },
+                                    {
+                                        name: 'Scc1',
+                                        weight: 68,
+                                        intensity: 2,
+                                        primary_anti_body: ['scc1']
                                     },
                                     {
                                         name: 'Scc1',
