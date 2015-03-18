@@ -14,6 +14,8 @@
       - openjdk-6-jre
       - npm
       - nodejs-legacy
+      - git
+      - emacs24-nox
     pip_packages:
       - virtualenvwrapper
     venv_name: starcellbio
