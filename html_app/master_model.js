@@ -9612,7 +9612,7 @@ var __sutd_intro_biology = {
     experiments: {},
         template: {
             instructions: [
-           	    ['Goal & Introduction', scb_assignment_sutd_intro_biology.goal()],
+           	    ['Goal', scb_assignment_sutd_intro_biology.goal()],
                 ["Background Information", scb_assignment_sutd_intro_biology.bg_info({})],
                 ["Questions",scb_assignment_sutd_intro_biology.questions({})]
             	],
@@ -11912,7 +11912,7 @@ var __sutd_intro_biology_ps2 = {
         	random_order: [],
         	finished_random: false,
             instructions: [
-                ["Goal & Learning Objectives", scb_assignment_sutd_intro_biology_ps2.goal({})],
+                ["Goal", scb_assignment_sutd_intro_biology_ps2.goal({})],
                 ["Background Information",scb_assignment_sutd_intro_biology_ps2.bg_info({})],
                 ["Questions",scb_assignment_sutd_intro_biology_ps2.questions({})]
             	],
