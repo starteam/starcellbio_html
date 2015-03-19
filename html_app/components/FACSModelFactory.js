@@ -32,7 +32,6 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 }
 
                 _.each(m.parser_simple, function (rule) {
-                    console.info(rule);
                     if (rule.match.length == 0) {
                         shape = rule.shape;
                     }
@@ -64,7 +63,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
              */
         }
         self.shape_to_data = function (state) {
-            var shape = state.shape;
+            var shape = ('' + state.shape).toLowerCase();
 
 			function g0g1(x) {
                 return 4 * Math.exp(-((x - 1) * (x - 1)) * 30);
@@ -124,13 +123,6 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 //                return 0.0011*Math.pow(x,6) - 0.0326*Math.pow(x,5) + 0.3626*Math.pow(x,4) - 1.9649*Math.pow(x,3)
 //                    + 5.4036*Math.pow(x,2) - 6.9832*x + 3.2189;
 ////                y = 0.0011x6 - 0.0326x5 + 0.3626x4 - 1.9649x3 + 5.4036x2 - 6.9832x + 3.2189
-////                if(x<0.8){
-////
-////                }else if(x<1.2){
-////
-////                }else{
-////
-////                }
 
 
 //            }
@@ -201,8 +193,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			function h4(x){
 				   return normal_dist(x, 1.4, 0.45, 1, false)*0.8;
 			}
-            function scaled_peak100(x){
-            	return normal_dist(x, 1.2, 0.08, 0.5, false);
+            /*Single narrow peak */
+            function scaled_peak(x, mean){
+            	return normal_dist(x, mean, 0.08, 0.5, false);
             }
 			
 			function sblockg1(x){
@@ -286,6 +279,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
                 _.each(data, function (s, index) {/*normalizing x values*/
                     /* new exercises will now have attribute 'scale' */
+                    /* Using scale to distinguish old exercises and preserve the old normalization way*/
                     if(template.model.facs.scale){
                         /*this is assuming that the start point is 0 */
                         data[index][0]= template.model.facs.max * data[index][0] / data[data.length-1][0];
@@ -319,7 +313,17 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                         }
                     },
 
-//                    tickFormatter: function (v, axis) {return "10^" + (Math.round( Math.log(v)/Math.LN10)).toString();}, //(Math.round( Math.log(v)/Math.LN10)).toString().sup();},
+                    tickFormatter: function (v, axis) {
+                        if (template.model.facs.scale && template.model.facs.scale.indexOf('pseudo') > -1) {
+                                return "10^"+Math.round(v/template.model.facs.ticks[0]);
+                        } else if (template.model.facs.scale && template.model.facs.scale.indexOf('log') > -1) {
+                            return "10^" + (Math.round(Math.log(v) / Math.LN10)).toString(); //(Math.round( Math.log(v)/Math.LN10)).toString().sup();},
+                        }
+                        else{
+                            return v;
+                        }
+
+                    },
 
                     font: {
                         family: 'sourcesanspro-regular',
@@ -350,7 +354,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 			yaxis: { from: 0, to: 0 }, color: "#000" },
                        { xaxis: { from: 0, to: 0 }, yaxis: { from: 0, to: 100 }, color: "#000" }]},
             };            
-            
+            var step= template.model.facs.ticks[1]-template.model.facs.ticks[0];
             
             if (('' + shape).toLowerCase() == 'normal') {
                 var data = [];
@@ -379,11 +383,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 var data = [];
                 for (var x = 0; x < 3; x += .01) {
                 	number_of_curves = 1;
-//                    var log_x=Math.log(x+0.0001)/Math.LN10(0);
-                    var log_x=x;
 
-                    var y = s_block_C(log_x);
-                    data.push([log_x, y]);
+                    var y = s_block_C(x);
+                    data.push([x, y]);
 
                 }
 
@@ -511,12 +513,22 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 };
             
            }
-            if (('' + shape).toLowerCase() == 'scaled-peak-100') {
+            /* Single thin peak function scaled according to max value*/
+            /* can locate peaks at any multiple of 'step' (so far has been always 50)*/
+            if (shape.indexOf('scaled-peak')>-1) {
                 var data = [];
+                var mean=0;
+
+                /*assuming that 150 is the third point on the scale*/
+                if(shape.indexOf('3')>-1){
+                    mean=3/(template.model.facs.max/step) *3;
+                }else if(shape.indexOf('1')>-1){
+                    mean=3/(template.model.facs.max/step);
+                }
                 var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
 	                number_of_curves = 1;
-                    var y = scaled_peak100(x+bias);
+                    var y = scaled_peak(x+bias, mean);
                     data.push([x, y]);
 
                 }
