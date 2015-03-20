@@ -39,6 +39,9 @@ urlpatterns = patterns('',
 # add authentication URL patterns
 urlpatterns += auth.urls.urlpatterns
 
+if settings.DEBUG:
+    urlpatterns += include('django_jasmine.urls')
+
 from tastypie.api import Api
 from backend.services import UserResource, CourseResource, AssignmentResource, StudentAssignmentResource
 

@@ -10,6 +10,8 @@ import yaml
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 YAML_CONFIG = os.path.join(SITE_ROOT, "settings.yml")
+TEST_ROOT = os.path.join(BASE_DIR, "test_root")
+JASMINE_TEST_DIRECTORY = os.path.join(TEST_ROOT, "jasmine")
 
 rel = lambda p: os.path.join(SITE_ROOT, p)
 
@@ -144,6 +146,9 @@ INSTALLED_APPS = (
     'backend',
     'instructor',
 ) + auth.settings.INSTALLED_APPS
+
+if DEBUG:
+    INSTALLED_APPS += ('django_jasmine',)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
