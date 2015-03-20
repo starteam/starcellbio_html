@@ -10,7 +10,6 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             if (m.parser_simple) {
                 var facs_lane = state.facs_lane;
                 var cell_treatment = facs_lane.cell_treatment;
-                var cell_line = cell_treatment.cell_line;
                 var drug_treatments = cell_treatment.treatment_list.list;
                 var shape = '';
                 var facs_state = {
@@ -19,6 +18,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     },
                     temperature: function (str) {
                         return str == drug_treatments[0].temperature
+                    },
+                    condition: function (str){
+                        return str == facs_lane.conditions;
                     },
                     drug_id: function (str) {
                         var any = false;
@@ -68,22 +70,6 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			function g0g1(x) {
                 return 4 * Math.exp(-((x - 1) * (x - 1)) * 30);
             }
-            function graph_A(x){
-//                return  Math.exp(-((x - 1.5) * (x - 1.5)) * 60)+0.1;
-                if(x<0.3){
-                    return Math.pow(x,1/6)/15;
-                }else
-                if(x<1.4) {
-                    return 1/Math.pow((11*x-17.5),2)+0.05;
-
-                }else if(x<1.61){
-                    return 0.8-Math.pow((8*x-12),4);
-
-                }else{
-
-                    return 1/Math.pow((15*x-22.2),2);
-                }
-            }
 
             function near_zero(x) {
                 return 1 / 2 * ( x > 0 && x < 1 ? (.08 - x / 50) : 0 );
@@ -100,33 +86,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             function s_block(x) {
 				return Math.exp(-((2 - x) * Math.exp(2 - x) - .9) * ((2 - x) * Math.exp(2 - x) - .9) / .4);
             }
-            function s_block_C(x){
-                return Math.exp(-((0.8 - x) * Math.exp(1 - x) - .9) * ((0.8 - x) * Math.exp(1 - x) - .9)/ 0.4);
-            }
-            /*function s_block_C(x){
-                if(x<0.13) {
-                    return 1 / Math.pow((x - 1.2), 20);
-                }else if(x<0.23){
-                    return 1.3-Math.pow(1.3*x-1.2,2);
 
-                }else if(x<0.7) {
-                    return 0.8 - 0.7*Math.pow((1.3 * x - 0.97), 2);
-
-                }else if(x<1.07){
-                    return 0.8- 0.5*Math.pow((1.3*x-0.6),7);
-                }else{
-                    return 2/Math.pow((2*x-0.45),2);
-                }
-
-            }*/
-//            function graph_A(x){
-//                return 0.0011*Math.pow(x,6) - 0.0326*Math.pow(x,5) + 0.3626*Math.pow(x,4) - 1.9649*Math.pow(x,3)
-//                    + 5.4036*Math.pow(x,2) - 6.9832*x + 3.2189;
-////                y = 0.0011x6 - 0.0326x5 + 0.3626x4 - 1.9649x3 + 5.4036x2 - 6.9832x + 3.2189
-
-
-//            }
-            
 			function peak2g1(x){
 				return normal_dist(x, 0.78, 0.08, 4, false)*2;
 			}
@@ -159,6 +119,24 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 return (y>0)?y:0;
 
             }
+            /* These two functions are added for graph B */
+            /* The peak is between 0 an 1, trailing background noise from the right */
+            function peak021(x){
+				  return normal_dist(x, 0.15, 0.25, -3, true);
+			}
+            function tail(x){
+                return normal_dist(x, 0.45, 0.3, -2, true)*0.2;
+			}
+
+            /* graph C*/
+            function graph_C(x, mean){
+                 return normal_dist(x, mean, 0.27, 0.5, false);
+            }
+            /*Single narrow peak */
+            function scaled_peak(x, mean){
+            	return normal_dist(x, mean, 0.08, 0.5, false);
+            }
+
 
 			
 			function g1(x){
@@ -193,11 +171,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 			function h4(x){
 				   return normal_dist(x, 1.4, 0.45, 1, false)*0.8;
 			}
-            /*Single narrow peak */
-            function scaled_peak(x, mean){
-            	return normal_dist(x, mean, 0.08, 0.5, false);
-            }
-			
+
 			function sblockg1(x){
 				   return normal_dist(x, 0.24, 0.2, -6, true)-0.17; 
 			}
@@ -379,18 +353,17 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     options: options
                 };
             }
-            if (('' + shape).toLowerCase() == 's-block-c') {
+            if (shape == 'graph-c') {
                 var data = [];
+                /* 2 is location of the peak in terms of steps*/
+                var mean=3/(template.model.facs.max/step)*2;
+                var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
                 	number_of_curves = 1;
-
-                    var y = s_block_C(x);
+                    var y = graph_C(x + bias, mean);
                     data.push([x, y]);
-
                 }
-
-                normalize(data);//, 7750);
-
+                normalize(data);
 				roundData(data);
                 state.data = {
                     data: [
@@ -399,11 +372,12 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     options: options
                 };
             }
-            if (('' + shape).toLowerCase() == 'graph-a') {
+            if ( shape == 'graph-b') {
                 var data = [];
+                var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
                 	number_of_curves = 1;
-                    var y = graph_A(x);
+                    var y= peak021(x + bias)+tail(x + bias);
                     data.push([x, y]);
 
                 }
@@ -434,6 +408,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     options: options
                 };
             }
+
             if (('' + shape).toLowerCase() == 'g1-block') {
 
             }
@@ -568,7 +543,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 var bias = (Math.random() - .5) * .10;
                 for (var x = 0; x < 3; x += .01) {
 	                number_of_curves = 2;
-                     var y = bigpeak50(x)+bump100(x)+middlenoise(x);
+                     var y = bigpeak50(x+bias)+bump100(x+bias)+middlenoise(x+bias);
                     data.push([x, y]);
 
                 }

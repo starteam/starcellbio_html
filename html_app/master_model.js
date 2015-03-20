@@ -13590,7 +13590,7 @@ var __scb_sample_2 = {
             ],
         ui: {
             experimental_design: {
-                techniques: [ 'facs','wb'], //remove micro
+                techniques: [ 'facs','wb'],
                 gel_types: ['.10', '.12', '.15']
             },
             experiment_setup: {
@@ -13620,13 +13620,10 @@ var __scb_sample_2 = {
                 disable_blur: false,
                 disable_brightness: false
             },
-            western_blot: {format: "%CELL_LINE%, %TREATMENT%, %PP1% %TEMPERATURE%",
+            western_blot: {format: "%CELL_LINE%, %TREATMENT%",
                 keys: {
                     '%CELL_LINE%': {attr: ['cell_line'], map: ['cell_lines', '%KEY%', 'name']},
                     '%TREATMENT%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'], map: ['drugs', '%KEY%', 'name']},
-                    '%CONCENTRATION%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'concentration_id'], map: ['concentrations', '%KEY%', 'name']},
-                    '%TEMPERATURE%': {attr: ['treatment_list', 'list', '0', 'temperature'], map: ['experiment_temperatures', '%KEY%', 'name']},
-                    '%PP1%': {attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '1', 'drug_id'], map: ['drugs', '%KEY%', 'short_name'], default: ''}
                 }
             },
             add_multiple_dialog: {
@@ -13922,7 +13919,6 @@ var __scb_sample_2 = {
             }
 
         },
-//        not used
         experiment_temperatures: {
             '25': {
                 name: "30" + degreeEntity + "C"
@@ -14019,18 +14015,9 @@ var __scb_sample_2 = {
         },
 
         facs_kinds: {
-//            'Dye': {
-//                name: 'Dye/Stain',
-//                conditions: {
-//                    'whole': {name: 'PI',
-//                        short_name: 'PI'}
-//                }
-//            },
             'Anti': {
                 name: 'Antibody-labeling ',
                 conditions: {
-//                    'a': {name: 'Antibody',
-//                        short_name: 'Antibody'},
                     'His_488':{name: 'His 488'},
                     'FLAG_488':{name:'FLAG 488'},
                     'proX_488':{name: 'ProX 488'},
@@ -14467,9 +14454,9 @@ var __scb_sample_2 = {
                 }
             },
             facs: {
-                'ticks': [10,100 ,1000],
-                'max': 1300,
-                'scale': 'log',
+                'ticks': [50, 100 ,150],
+                'max': 200,
+                'scale': 'pseudo',
                 'dna': {
                     'parser_simple': [
                         {
@@ -14477,64 +14464,152 @@ var __scb_sample_2 = {
                             shape: 'normal'
                         },
                         {
-                            match: ['cell_line', 'drug_id'],
+                            match: ['drug_id'],
+                            drug_id: 'gmProK',
+                            shape: 'graph-b'
+                        },
+                        { //His 488
+                            match: ['cell_line', 'drug_id','condition'],
                             cell_line: 'nt',
                             drug_id: 'gmBuf',
-                            shape: 's-block-c'
+                            condition: 'His_488',
+                            shape: 'graph-b'
                         },
                         {
-                            match: ['cell_line', 'drug_id'],
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'proX-Null',
+                            drug_id: 'gmBuf',
+                            condition: 'His_488',
+                            shape: 'graph-b'
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'proY-Null',
+                            drug_id: 'gmBuf',
+                            condition: 'His_488',
+                            shape: 'graph-b'
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'HproX-FLAG',
+                            drug_id: 'gmBuf',
+                            condition: 'His_488',
+                            shape: 'graph-b'
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'HproY-FLAG',
+                            drug_id: 'gmBuf',
+                            condition: 'His_488',
+                            shape: 'scaled-peak-3'
+                        },
+                        //FLAG 488
+                        {
+                            match: ['cell_line', 'drug_id','condition'],
                             cell_line: 'nt',
-                            drug_id: 'gmProK',
-                            shape: 's-block'
+                            drug_id: 'gmBuf',
+                            condition: 'FLAG_488',
+                            shape: 'graph-b'
                         },
                         {
-                            match: ['cell_line', 'drug_id'],
+                            match: ['cell_line', 'drug_id', 'condition'],
                             cell_line: 'proX-Null',
                             drug_id: 'gmBuf',
-                            shape: 's-block-c'
+                            condition: 'FLAG_488',
+                            shape: 'graph-b'
                         },
                         {
-                            match: ['cell_line', 'drug_id'],
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'proY-Null',
+                            drug_id: 'gmBuf',
+                            condition: 'FLAG_488',
+                            shape: 'graph-b'
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'HproX-FLAG',
+                            drug_id: 'gmBuf',
+                            condition: 'FLAG_488',
+                            shape: 'scaled-peak-3'
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'HproY-FLAG',
+                            drug_id: 'gmBuf',
+                            condition: 'FLAG_488',
+                            shape: 'scaled-peak-3'
+                        },
+                        //ProX 488
+                        {
+                            match: ['cell_line', 'drug_id','condition'],
+                            cell_line: 'nt',
+                            drug_id: 'gmBuf',
+                            condition: 'proX_488',
+                            shape: 'graph-c'
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'condition'],
                             cell_line: 'proX-Null',
-                            drug_id: 'gmProK',
-                            shape: 's-block-c'
+                            drug_id: 'gmBuf',
+                            condition: 'proX_488',
+                            shape: 'graph-b'
                         },
                         {
-                            match: ['cell_line', 'drug_id'],
+                            match: ['cell_line', 'drug_id', 'condition'],
                             cell_line: 'proY-Null',
                             drug_id: 'gmBuf',
-                            shape: 's-block-c'
+                            condition: 'proX_488',
+                            shape: 'graph-c'
                         },
                         {
-                            match: ['cell_line', 'drug_id'],
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'HproX-FLAG',
+                            drug_id: 'gmBuf',
+                            condition: 'proX_488',
+                            shape: 'scaled-peak-3'
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'HproY-FLAG',
+                            drug_id: 'gmBuf',
+                            condition: 'proX_488',
+                            shape: 'graph-c'
+                        },
+                        //ProY 488
+                        {
+                            match: ['cell_line', 'drug_id','condition'],
+                            cell_line: 'nt',
+                            drug_id: 'gmBuf',
+                            condition: 'proY_488',
+                            shape: 'graph-c'
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'condition'],
+                            cell_line: 'proX-Null',
+                            drug_id: 'gmBuf',
+                            condition: 'proY_488',
+                            shape: 'graph-c'
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'condition'],
                             cell_line: 'proY-Null',
-                            drug_id: 'gmProK',
-                            shape: 's-block-c'
+                            drug_id: 'gmBuf',
+                            condition: 'proY_488',
+                            shape: 'graph-b'
                         },
                         {
-                            match: ['cell_line', 'drug_id'],
+                            match: ['cell_line', 'drug_id', 'condition'],
                             cell_line: 'HproX-FLAG',
                             drug_id: 'gmBuf',
-                            shape: 's-block-c'
+                            condition: 'proY_488',
+                            shape: 'graph-c'
                         },
                         {
-                            match: ['cell_line', 'drug_id'],
-                            cell_line: 'HproX-FLAG',
-                            drug_id: 'gmProK',
-                            shape: 's-block-c'
-                        },
-                        {
-                            match: ['cell_line', 'drug_id'],
+                            match: ['cell_line', 'drug_id', 'condition'],
                             cell_line: 'HproY-FLAG',
                             drug_id: 'gmBuf',
-                            shape: 'graph-a'
-                        },
-                        {
-                            match: ['cell_line', 'drug_id'],
-                            cell_line: 'HproY-FLAG',
-                            drug_id: 'gmProK',
-                            shape: 's-block-c'
+                            condition: 'proY_488',
+                            shape: 'scaled-peak-3'
                         }
 
                     ]
