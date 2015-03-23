@@ -87,7 +87,7 @@ def get_model(request):
 def get_user(request, **kwargs):
     import pudb
     # pudb.set_trace()
-    if (request.user.id):
+    if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
@@ -160,7 +160,7 @@ def get_student_courses(request, **kwargs):
     obj.domain='starcellbio.mit.edu'
     obj.save()
 
-    if (request.user.id):
+    if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
@@ -448,7 +448,7 @@ def get_instructor_assignments(request, **kwargs):
     retval = []
     token1 = random.randrange(0, 1000000)
     return_list = []
-    if (request.user.id):
+    if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
