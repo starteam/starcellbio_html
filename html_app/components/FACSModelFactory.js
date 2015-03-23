@@ -11,6 +11,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 var facs_lane = state.facs_lane;
                 var cell_treatment = facs_lane.cell_treatment;
                 var drug_treatments = cell_treatment.treatment_list.list;
+                var duration= drug_treatments[0].duration;
                 var shape = '';
                 var facs_state = {
                     cell_line: function (str) {
@@ -21,6 +22,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     },
                     condition: function (str){
                         return str == facs_lane.conditions;
+                    },
+                    duration: function(str){
+                        return str == duration;
                     },
                     drug_id: function (str) {
                         var any = false;
