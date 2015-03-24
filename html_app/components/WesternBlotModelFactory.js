@@ -122,7 +122,13 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                                     /* if rule.drug is ANY, set drug_concentration to any value >= cutoff*/
                                     drug_concentration=(rule.drug == '*ANY*')? 1 :drug_concentration;
                                     var marks_list = (drug_concentration >= rule.cutoff) ? rule.above_marks : rule.below_marks;
-                                    if (scb.utils.isDefined(marks_list)) {
+                                    var keep = true;
+
+                                    if(rule.duration){
+                                        var value = scb.utils.get(lane, ["cell_treatment", "treatment_list", "list", 0, "duration"], null);
+                                        keep = keep && ( rule.duration == value || rule.duration == '*ANY*');
+                                    }
+                                    if (scb.utils.isDefined(marks_list) && keep) {
 
                                         for (var mark_index in marks_list) {
                                             var rule_mark = marks_list[mark_index];
