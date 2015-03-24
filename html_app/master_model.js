@@ -15413,23 +15413,23 @@ var __scb_sample_3 = {
 
             },
 
-            model: { // models
+            model: {
                 western_blot: {
                 'cyto': {
                     'parser_fixed': [
-
+                        /* WT-EGFR */
                         {
-                            transfer_function: 'static',
-                            cutoff: -1,
+                            transfer_function: 'delta',
+                            cutoff: 1,
                             cell_line: 'WT-EGFR',
                             drug: 'growth_media',
                             duration: '*ANY*',
-                            marks: [
+                            above_marks: [
                                 //antibody 1
                                 {
                                     name:'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity:'high',
+                                    intensity: 8,
                                     primary_anti_body:['1']
                                 },
                                  {
@@ -15501,23 +15501,23 @@ var __scb_sample_3 = {
                             ]
                         },
                         {
-                            transfer_function: 'static',
-                            cutoff: -1,
+                            transfer_function: 'delta',
+                            cutoff: 1,
                             cell_line: 'WT-EGFR',
                             drug: 'growth_mediaEGF',
                             duration: '30 sec',
-                            marks: [
+                            above_marks: [
                                 //antibody 1
                                 {
                                     name:'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity:'med',
+                                    intensity:5,
                                     primary_anti_body:['1']
                                 },
                                  {
                                     name:'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity:'med',
+                                    intensity: 5,
                                     primary_anti_body:['1']
                                 },
                                 {
@@ -15530,21 +15530,21 @@ var __scb_sample_3 = {
                                 {
                                     name:'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity:'med',
+                                    intensity: 5,
                                     primary_anti_body:['2']
                                 },
                                 //antibody 3
                                 {
                                     name:'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity:'med',
+                                    intensity: 5,
                                     primary_anti_body:['3']
                                 },
                                  //antibody 4
                                 {
                                     name:'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity:'med',
+                                    intensity: 5,
                                     primary_anti_body:['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -15582,13 +15582,13 @@ var __scb_sample_3 = {
                                 }
                             ]
                         },
-                         {
-                            transfer_function: 'static',
-                            cutoff: -1,
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
                             cell_line: 'WT-EGFR',
                             drug: 'growth_mediaEGF',
                             duration: '1 min',
-                            marks: [
+                            above_marks: [
                                 //antibody 1
                                 {
                                     name:'Mouse anti-EGFR',
@@ -15599,7 +15599,7 @@ var __scb_sample_3 = {
                                  {
                                     name:'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity:'high',
+                                    intensity: 8,
                                     primary_anti_body:['1']
                                 },
                                 {
@@ -15612,21 +15612,21 @@ var __scb_sample_3 = {
                                 {
                                     name:'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity:'high',
+                                    intensity: 8,
                                     primary_anti_body:['2']
                                 },
                                 //antibody 3
                                 {
                                     name:'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity:'high',
+                                    intensity: 8,
                                     primary_anti_body:['3']
                                 },
                                  //antibody 4
                                 {
                                     name:'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity:'high',
+                                    intensity: 8,
                                     primary_anti_body:['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -15665,17 +15665,17 @@ var __scb_sample_3 = {
                             ]
                         },
                         {
-                            transfer_function: 'static',
-                            cutoff: -1,
+                            transfer_function: 'delta',
+                            cutoff: 1,
                             cell_line: 'WT-EGFR',
                             drug: 'growth_mediaEGF',
-                            duration: '6 hrs',
-                            marks: [
+                            duration: '6 h',
+                            above_marks: [
                                 //antibody 1
                                 {
                                     name:'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity:'low',
+                                    intensity: 0.5, //low
                                     primary_anti_body:['1']
                                 },
                                  {
@@ -15715,7 +15715,19 @@ var __scb_sample_3 = {
                                 //antibody 6
                                 {
                                     name:'Mouse anti-6xHis',
-                                    weight: 45,
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
                                     intensity:'none',
                                     primary_anti_body:['6']
                                 },
@@ -15735,12 +15747,260 @@ var __scb_sample_3 = {
                             ]
                         },
                         {
-                            transfer_function: 'static',
-                            cutoff: -1,
+                            transfer_function: 'delta',
+                            cutoff: 1,
                             cell_line: 'WT-EGFR',
                             drug: 'growth_mediaBuff',
                             duration: '30 min',
-                            marks: [
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 10,
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                               {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'WT-EGFR',
+                            drug: 'growth_mediaProK',
+                            duration: '30 min',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        /* EGFR Null */
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'EGFR Null',
+                            drug: '*ANY*',
+                            duration: '*ANY*',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        /* EGFR-M1 */
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'EGFR-M1',
+                            drug: '*ANY*',
+                            duration: '*ANY*',
+                            above_marks: [
                                 //antibody 1
                                 {
                                     name:'Mouse anti-EGFR',
@@ -15785,7 +16045,102 @@ var __scb_sample_3 = {
                                 //antibody 6
                                 {
                                     name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        /*EGFR-M2*/
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'EGFR-M2',
+                            drug: 'growth_media',
+                            duration: '*ANY*',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 8,
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
                                     weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
                                     intensity:'none',
                                     primary_anti_body:['6']
                                 },
@@ -15805,12 +16160,747 @@ var __scb_sample_3 = {
                             ]
                         },
                         {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            cell_line: 'WT-EGFR',
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'EGFR-M2',
+                            drug: 'growth_mediaEGF',
+                            duration: '30 sec',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 5,
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity: 5,
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity: 5,
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity: 5,
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity: 5,
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'EGFR-M2',
+                            drug: 'growth_mediaEGF',
+                            duration: '1 min',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity: 8,
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity: 8,
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'EGFR-M2',
+                            drug: 'growth_mediaEGF',
+                            duration: '6 h',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity: 8,
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity: 8,
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        /*NoUB*/
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'NoUB',
+                            drug: 'growth_media',
+                            duration: '*ANY*',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 8,
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'NoUB',
+                            drug: 'growth_mediaEGF',
+                            duration: '30 sec',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 5,
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity: 5,
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity: 5,
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity: 5,
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity: 5,
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'NoUB',
+                            drug: 'growth_mediaEGF',
+                            duration: '1 min',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity: 8,
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity: 8,
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'NoUB',
+                            drug: 'growth_mediaEGF',
+                            duration: '6 h',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity: 8,
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity: 8,
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        /*ConstActive*/
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'ConstActive',
+                            drug: '*ANY*',
+                            duration: '*ANY*',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity: 8,
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity: 8,
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity: 8,
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        /* His-EGFR-FLAG*/
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'His-EGFR-FLAG',
+                            drug: 'growth_mediaBuff',
+                            duration: '30 min',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity: 8,
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                               {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:8,
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity: 8,
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'His-EGFR-FLAG',
                             drug: 'growth_mediaProK',
                             duration: '30 min',
-                            marks: [
+                            above_marks: [
                                 //antibody 1
                                 {
                                     name:'Mouse anti-EGFR',
@@ -15855,7 +16945,13 @@ var __scb_sample_3 = {
                                 //antibody 6
                                 {
                                     name:'Mouse anti-6xHis',
-                                    weight: 45,
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
                                     intensity:'none',
                                     primary_anti_body:['6']
                                 },
@@ -15869,23 +16965,24 @@ var __scb_sample_3 = {
                                 {
                                     name:'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity:'none',
+                                    intensity: 5,
                                     primary_anti_body:['7']
                                 }
                             ]
                         },
+                        /*His-EGFR-M1-FLAG */
                         {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            cell_line: 'EGFR Null',
-                            drug: ['growth_media','growth_mediaEGF'],
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'His-EGFR-M1-FLAG',
+                            drug: 'growth_mediaBuff',
                             duration: '30 min',
-                            marks: [
+                            above_marks: [
                                 //antibody 1
                                 {
                                     name:'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity:'none',
+                                    intensity: 8,
                                     primary_anti_body:['1']
                                 },
                                  {
@@ -15923,10 +17020,92 @@ var __scb_sample_3 = {
                                 },
                                 //antibody 5 is included in *ANY* cell_line
                                 //antibody 6
+                               {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity: 8,
+                                    primary_anti_body:['6']
+                                },
                                 {
                                     name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity: 8,
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'His-EGFR-M1-FLAG',
+                            drug: 'growth_mediaProK',
+                            duration: '30 min',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity: 5,
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
                                     weight: 45,
                                     intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity: 5,
                                     primary_anti_body:['6']
                                 },
                                 //antibody 7
@@ -15944,49 +17123,178 @@ var __scb_sample_3 = {
                                 }
                             ]
                         },
-
-
-
-
-
-
-
-
+                        /* His-EGFR-M2-FLAG*/
                         {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            cell_line: 'WT-EGFR',
-                            drug: 'growth_media',
-                            duration: "30 min",
-                            marks: [
-                                {    //antibody 1
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'His-EGFR-M2-FLAG',
+                            drug: 'growth_mediaBuff',
+                            duration: '30 min',
+                            above_marks: [
+                                //antibody 1
+                                {
                                     name:'Mouse anti-EGFR',
-                                    weight: 95,
-                                    intensity:'low',
+                                    weight: 120,
+                                    intensity: 8,
                                     primary_anti_body:['1']
                                 },
-
-
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                               {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 120,
+                                    intensity: 8,
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity: 8,
+                                    primary_anti_body:['7']
+                                },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity:'none',
+                                    primary_anti_body:['7']
+                                }
                             ]
                         },
                         {
-                            transfer_function: 'static',
-                            cutoff: -1,
-                            cell_line: '*ANY*',
-                            drug: 'growth_media',
-                            duration: "30 sec",
-                            marks: [
-                                {    //antibody 1
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: 'His-EGFR-M2-FLAG',
+                            drug: 'growth_mediaProK',
+                            duration: '30 min',
+                            above_marks: [
+                                //antibody 1
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                 {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['1']
+                                },
+                                {
+                                    name:'Mouse anti-EGFR',
+                                    weight: 65,
+                                    intensity: 'none',
+                                    primary_anti_body:['1']
+                                },
+                                //antibody 2
+                                {
+                                    name:'Mouse anti-pEGFR',
+                                    weight: 140,
+                                    intensity:'none',
+                                    primary_anti_body:['2']
+                                },
+                                //antibody 3
+                                {
+                                    name:'Mouse anti-pRAF',
+                                    weight: 75,
+                                    intensity:'none',
+                                    primary_anti_body:['3']
+                                },
+                                 //antibody 4
+                                {
+                                    name:'Mouse anti-pMEK',
+                                    weight: 45,
+                                    intensity:'none',
+                                    primary_anti_body:['4']
+                                },
+                                //antibody 5 is included in *ANY* cell_line
+                                //antibody 6
+                                {
                                     name:'Mouse anti-6xHis',
-                                    weight: 250,
-                                    intensity:'low',
+                                    weight: 120,
+                                    intensity:'none',
+                                    primary_anti_body:['6']
+                                },
+                                {
+                                    name:'Mouse anti-6xHis',
+                                    weight: 65,
+                                    intensity: 'none',
+                                    primary_anti_body:['6']
+                                },
+                                //antibody 7
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 120,
+                                    intensity:'none',
                                     primary_anti_body:['7']
                                 },
+                                {
+                                    name:'Mouse anti-FLAG',
+                                    weight: 51,
+                                    intensity: 5,
+                                    primary_anti_body:['7']
+                                }
+                            ]
+                        },
+                        /*ANY cell_line*/
+                        {
+                            transfer_function: 'delta',
+                            cutoff: 1,
+                            cell_line: '*ANY*',
+                            drug: '*ANY*',
+                            duration: '*ANY*',
+                            above_marks: [
+                                //antibody 5 is the same for all treatments
+                                {
+                                    name:'Mouse anti-PGK1',
+                                    weight: 44,
+                                    intensity: 5,
+                                    primary_anti_body:['5']
+                                }
 
 
                             ]
-                        },
-
+                        }
                     ]
                 }
             },
