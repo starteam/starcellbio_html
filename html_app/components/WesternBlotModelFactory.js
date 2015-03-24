@@ -119,6 +119,8 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                                         return d.drug_id == rule.drug;
                                     });
                                     var drug_concentration = drug ? parseFloat(template.concentrations[drug.concentration_id].value) : 0;
+                                    /* if rule.drug is ANY, set drug_concentration to any value >= cutoff*/
+                                    drug_concentration=(rule.drug == '*ANY*')? 1 :drug_concentration;
                                     var marks_list = (drug_concentration >= rule.cutoff) ? rule.above_marks : rule.below_marks;
                                     if (scb.utils.isDefined(marks_list)) {
 
