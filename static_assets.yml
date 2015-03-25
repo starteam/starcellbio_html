@@ -125,7 +125,6 @@ javascripts:
   - js/plugins/bbcode/plugin.min.js
   - instructor/InstructorFacsPage2View.js
   - js/plugins/media/plugin.min.js
-  - coin-slider/coin-slider.min.js
   - components/ModelFactory.js
   - assignments/tufts/gen/instructions.soy.js
   - ui/SelectTechniqueView.js
@@ -206,7 +205,6 @@ javascripts:
   - ui/gen/experiment_design.soy.js
   - instructor/InstructorWesternBlotPage5View.js
   - ui_old/ExperimentView.js
-  - coin-slider/coin-slider.js
   - decusability/gen/addmultipledialog.soy.js
   - js/plugins/example_dependency/plugin.min.js
   - ui_old/gen/experiment_setup.soy.js
@@ -254,7 +252,6 @@ css:
   - ui/gen/experiment_design.gss.css
   - assignments/tufts/gen/instructions.gss.css
   - assignments/mit706s14ps2/gen/instructions.gss.css
-  - coin-slider/coin-slider-styles.css
   - css/smoothness/jquery-ui.min.css
   - ui/gen/microscopy.gss.css
   - css/jqdialog.css
