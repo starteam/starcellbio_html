@@ -16844,7 +16844,7 @@ var __scb_sample_3 = {
                             {
                                 match: ['cell_line', 'drug_id'],
                                 cell_line: 'ConstActive',
-                                drug_id: 'growth_mediaEGF',
+                                drug_id: 'growth_media',
                                 shape: 'scaled-peak-3'
                             },
                             {
