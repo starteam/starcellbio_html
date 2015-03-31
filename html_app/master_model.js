@@ -18073,59 +18073,148 @@ var __scb_sample_3 = {
                 }
             },
                 facs: {
-                	'ticks': [50, 100, 150, 250],
-                	'max': 250,
+                	'ticks': [50, 100, 150],
+                	'max': 200,
+                    'scale': 'pseudo',
                     'dna': {
                         'parser_simple': [
                             {
                                 match: [],
                                 shape: '2-peak-normal-400'
                             },
+                            /*The same graph for all treatments for EGFR Null*/
                             {
-                                match: ['drug_id'],
-                                drug_id: 'nc',
-                                shape: '2-peak-normal-400'
+                                match: ['cell_line'],
+                                cell_line: 'EGFR Null',
+                                shape: 'graph-b'
+                            },
+                            /*The same graph for all treatments for EGFR-M1*/
+                            {
+                                match: ['cell_line'],
+                                cell_line: 'EGFR-M1',
+                                shape: 'graph-b'
+                            },
+                            /*The same graph for all treatments for EGFR-M2*/
+                            {
+                                match: ['cell_line'],
+                                cell_line: 'EGFR-M2',
+                                shape: 'scaled-peak-3'
+                            },
+                            /*The same graph for all treatments for NoUB*/
+                            {
+                                match: ['cell_line'],
+                                cell_line: 'NoUB',
+                                shape: 'scaled-peak-3'
+                            },
+                            /*WT-EGFR*/
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'WT-EGFR',
+                                drug_id: 'growth_media',
+                                shape: 'scaled-peak-3'
                             },
                             {
-                                match: ['drug_id'],
-                                drug_id: 'rna1',
-                                shape: 'peak-100-normal-400'
+                                match: ['cell_line', 'drug_id', 'duration'],
+                                cell_line: 'WT-EGFR',
+                                drug_id: 'growth_mediaEGF',
+                                duration: '30 sec',
+                                shape: 'scaled-peak-3'
                             },
                             {
-                                match: ['drug_id'],
-                                drug_id: 'rna2',
-                                shape: '2-peak-uneven-normal-400'
+                                match: ['cell_line', 'drug_id', 'duration'],
+                                cell_line: 'WT-EGFR',
+                                drug_id: 'growth_mediaEGF',
+                                duration: '1 min',
+                                shape: 'scaled-peak-3'
                             },
                             {
-                                match: ['drug_id'],
-                                drug_id: 'rna3',
-                                shape: 'peak-100-normal-400'
+                                match: ['cell_line', 'drug_id', 'duration'],
+                                cell_line: 'WT-EGFR',
+                                drug_id: 'growth_mediaEGF',
+                                duration: '6 h',
+                                shape: 'graph-c'
                             },
                             {
-                                match: ['drug_id'],
-                                drug_id: 'rna4',
-                                shape: 'peak-50-normal-400'
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'WT-EGFR',
+                                drug_id: 'growth_mediaBuff',
+                                shape: 'scaled-peak-3'
                             },
                             {
-                                match: ['drug_id'],
-                                drug_id: 'rna5',
-                                shape: '4-peak-normal-400'
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'WT-EGFR',
+                                drug_id: 'growth_mediaProK',
+                                shape: 'graph-b'
+                            },
+
+
+                            /*ConstActive*/
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'ConstActive',
+                                drug_id: 'growth_media',
+                                shape: 'scaled-peak-3'
                             },
                             {
-                                match: ['drug_id'],
-                                drug_id: 'Hydroxyurea',
-                                shape: 's-block-normal-400'
+                                match: ['cell_line', 'drug_id', 'duration'],
+                                cell_line: 'ConstActive',
+                                drug_id: 'growth_mediaEGF',
+                                duration: '30 sec',
+                                shape: 'scaled-peak-3'
                             },
                             {
-                                match: ['drug_id'],
-                                drug_id: 'Nocodazole',
-                                shape: 'peak-100-normal-400'
+                                match: ['cell_line', 'drug_id', 'duration'],
+                                cell_line: 'ConstActive',
+                                drug_id: 'growth_mediaEGF',
+                                duration: '1 min',
+                                shape: 'scaled-peak-3'
                             },
                             {
-                                match: ['drug_id'],
-                                drug_id: 'Serum',
-                                shape: 'peak-50-normal-400'
-                            }
+                                match: ['cell_line', 'drug_id', 'duration'],
+                                cell_line: 'ConstActive',
+                                drug_id: 'growth_mediaEGF',
+                                duration: '6 h',
+                                shape: 'graph-c'
+                            },
+                            /*His-EGFR-FLAG*/
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'His-EGFR-FLAG',
+                                drug_id: 'growth_mediaBuff',
+                                shape: 'scaled-peak-3'
+                            },
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'His-EGFR-FLAG',
+                                drug_id: 'growth_mediaProK',
+                                shape: 'graph-b'
+                            },
+                            /*His-EGFR-M1-FLAG*/
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'His-EGFR-M1-FLAG',
+                                drug_id: 'growth_mediaBuff',
+                                shape: 'graph-b'
+                            },
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'His-EGFR-M1-FLAG',
+                                drug_id: 'growth_mediaProK',
+                                shape: 'graph-b'
+                            },
+                            /*His-EGFR-M2-FLAG*/
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'His-EGFR-M2-FLAG',
+                                drug_id: 'growth_mediaBuff',
+                                shape: 'scaled-peak-3'
+                            },
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'His-EGFR-M2-FLAG',
+                                drug_id: 'growth_mediaProK',
+                                shape: 'graph-b'
+                            },
                         ]
 
                     }
