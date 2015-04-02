@@ -140,8 +140,6 @@ scb.ui.static.FacsView.scb_f_facs_select_conditions = function (element, event) 
         alert("INVALID ELEMENT!");
     }
     var lane_conditions = $(element).attr('value');
-    console.log("Lane Conditions");
-    console.log(lane_conditions);
 
     if (lane_conditions == '') {
         return;
@@ -572,6 +570,7 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     var points = facs_lane.canvas_metadata_analysis.points;
     var raw_data = scb.utils.get(facs_lane, ['canvas_metadata_analysis', 'raw_data', 0], []);
     var data = [];
+    var template=state.assignment.template;
     points = points.sort(function (a, b) {
         return a.from > b.from;
     });
@@ -617,11 +616,21 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
         pts.display_id= pts.display_id || new_id;
         pts.bisector_id = pts.bisector_id || bisector_id;
         pts.unique_id = pts.unique_id || Math.floor(Math.random()*1000000000).toString(27);
+
+        var scaled_from=pts.from;
+        var scaled_to=pts.to;
+        if(template.model.facs.scale && (template.model.facs.scale.indexOf("pseudo") > -1)){
+            scaled_from = Math.round(Math.pow(10, pts.from/50.0));//50 is a step size
+            scaled_to = Math.round(Math.pow(10, pts.to/50.0));
+        }
         
-        //Math.floor(Math.random()*1000000000).toString(27)
+        /*display_from and display_to represent the value of the gate that will be displayed in the template.
+        * For pseudo-logarithmic scale their values are modified to replicate logarithmic scale values */
         var range = {
             from: pts.from,
             to: pts.to,
+            display_from: scaled_from,
+            display_to: scaled_to,
             color: pts.c,
             display_id: pts.display_id,
             bisector_id: pts.bisector_id,
@@ -730,7 +739,6 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
         var xaxes = plot.getXAxes()[0];
         var yaxes = plot.getYAxes()[0];
         var sensitivity = 4;
-
         /* Old assignments do not have max value given, they were using the value of a constant MAX_VALUE=150*/
         var max_x = state.assignment.template.model.facs.max;
         max_x = max_x ? max_x : 150;
@@ -803,9 +811,13 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 var point = Math.round(px);
                 if (!isNaN(from)) {
                     var to = px;
-                    to = to > 0 ? to : 0;
-                    to = to > max_x ? max_x  : to;
-                    to = to < 0 ? 0 : to; //not sure why this is needed?
+
+                    if(to < 0){
+                        to = 0;
+                    }else if(to > max_x){
+                        to = max_x;
+                    }
+
                     if (point_to_edit) {
                     			_.each(state.facs_lane.canvas_metadata_analysis.points, function(x){
 									if(point_to_edit.from == x.to &&  Math.abs(point_to_edit.y- x.y) == 5 && Math.abs(from- x.to) < sensitivity){
@@ -970,8 +982,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						point_to_edit = point;
                 	if (!isNaN(from)) {
 						var to = px;
-						to = to > 0 ? to : 0;
-						to = to > max_x ? max_x  : to;
+						if(to < 0){
+						    to = 0;
+						}else if(to > max_x){
+						    to = max_x;
+						}
 						if (point_to_edit) {
 							if (Math.abs(point_to_edit.from - from) < sensitivity) {
 								point_to_edit.from = to;
@@ -1001,8 +1016,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						//second gate starts
 						console.info("SET FROM " + px);
 						from = px;
-						from = from > 0 ? from : 0;
-						from = from > max_x  ? max_x : from;
+						if(from < 0){
+						    from = 0;
+						}else if(from > max_x){
+						    from = max_x;
+						}
 						fromy= (py > 16 ? py: 16);
 						fromy = (fromy > 90 ? 90: fromy)-5;
 						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -1012,8 +1030,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						point_to_edit = point;
 
 						var to = max_x ;
-						to = to > 0 ? to : 0;
-						to = to > max_x  ? max_x  : to;
+						if(to < 0){
+						    to = 0;
+						}else if(to > max_x){
+						    to = max_x;
+						}
 						if (point_to_edit) {
 							if (Math.abs(point_to_edit.from - from) < sensitivity) {
 								point_to_edit.from = to;
@@ -1074,8 +1095,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 				if (button == 1 && isNaN(from) && (state.facs.sample_analysis || point) ) {
 					console.info("SET FROM " + px);
 					from = px;
-					from = from > 0 ? from : 0;
-					from = from > max_x  ? max_x  : from;
+					if(from < 0){
+					    from = 0;
+					}else if(from > max_x){
+					    from = max_x;
+					}
 					fromy= py > 16 ? py: 16;
 					fromy = fromy > 90 ? 90: fromy;
 					from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -1143,8 +1167,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     // is it over line?
                     console.info("SET TO " + px);
                     var to = px;
-                    to = to > 0 ? to : 0;
-                    to = to > max_x  ? max_x  : to;
+                    if(to < 0){
+                        to = 0;
+                    }else if(to > max_x){
+                        to = max_x;
+                    }
                     state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
                     scb.ui.static.FacsView.reevaluate_metadata(state);
                     state.facs.apply_dna_analysis_to_all = false;
@@ -1306,7 +1333,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         if (state.facs.sample_prepared) {
             kind = 'analyze';
             if (state.facs && state.facs.selected_lane) {
-                scb.ui.static.FacsView.reevaluate_metadata({facs: state.facs, facs_lane: state.facs.selected_lane});
+                scb.ui.static.FacsView.reevaluate_metadata({facs: state.facs, facs_lane: state.facs.selected_lane, assignment: state.assignment});
             }
         }
         
