@@ -124,7 +124,7 @@ below:{% endblocktrans %}</p>
 <form class="login uniForm" method="POST" action="{% url 'account_login' %}">
  	{% csrf_token %}
   <fieldset class="inlineLabels">
-  {{ form|as_uni_form }}
+    {{ form|as_uni_form }}
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
@@ -138,13 +138,12 @@ below:{% endblocktrans %}</p>
     	
   </fieldset>
 </form>
-
-{% endblock %}
-
-
-
 <script>
 document.getElementById('div_id_login').children[0].textContent='USERNAME';
 document.getElementById('div_id_password').children[0].textContent='PASSWORD';
 </script>
+
+{% endblock %}
+
+
 
