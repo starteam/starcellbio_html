@@ -600,11 +600,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     })
 
 
-    self.sections.workarea = new scb.ui.WorkspaceView({
-        workarea: workarea,
-        context: context
-    })
-
 
     self.show = function (state) {
     	scb.ui.static.MainFrame.ensure_auth_context();
@@ -996,118 +991,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         self.show(state);
     })();
 
-    // init is really not used any more I'll need to move on...
-    self.init = function () {
-
-        /* initialize UI for workarea */
-        var workarea = context.ui;
-        workarea.css({
-            'height': '100%'
-        });
-
-        workarea.html(scb_ui.main_frame());
-
-        workarea.layout({
-            applyDefaultStyles: true,
-            north__minSize: 50,
-            center__paneSelector: '.inner-center',
-            west__paneSelector: '.inner-west',
-            east__paneSelector: '.inner-east'
-        });
-
-        var sidebar = new scb.Sidebar({
-            sections: self.sections,
-            session_list: session_list,
-            workarea: workarea
-        }, context);
-        context.sidebar = sidebar;
-
-        /* initialize DASHBOARD tab */
-        self.sections.dashboard = new scb.DashboardView({
-            workarea: workarea,
-            session_list: session_list,
-            templates: master_model.templates
-        }, context);
-
-        context.dashboard = self.sections.dashboard;
-        /* initialize EXPERIMENT SETUP tab */
-        self.sections.experiment = new scb.ExperimentView({
-            workarea: workarea,
-            session_list: session_list,
-            templates: master_model.templates
-        }, context);
-        context.experiment = self.sections.experiment;
-
-        /* initialize MAKING LYSATES tab */
-        self.sections.making_lysates = new scb.MakingLysatesView({
-            workarea: workarea,
-            session_list: session_list,
-            templates: master_model.templates
-        }, context);
-        context.making_lysates = self.sections.making_lysates
-
-        /* initialize WESTERN BLOT tab */
-        self.sections.western_blot = new scb.WesternBlotView({
-            workarea: workarea,
-            session_list: session_list,
-            templates: master_model.templates
-        }, context);
-        context.western_blot = self.sections.western_blot;
-        
-        /* initialize MICROSCOPY tab */
-
-        self.sections.microscopy = new scb.MicroscopyView({
-        	workarea: workarea,
-        	session_list: session_list,
-        	templates: master_model.templates
-        }, context);
-        context.microscopy=self.sections.microscopy;
-        
-        self.sections.notebook = new scb.NotebookView({
-        	workarea: workarea,
-        	session_list: session_list,
-        	templates: master_model.templates
-        }, context);
-        context.notebook=self.sections.notebook;
-
-        sidebar.show();
-        /* click on sidebar to display DASHBOARD */
-        $('.sidebar_accordian>h3>.a_accordian_dashboard', workarea).click(function (e) {
-            self.current_tab.hide(function () {
-                self.sections.dashboard.show(function () {
-                    self.current_tab = self.sections.dashboard;
-                });
-            });
-        });
-        /* click on sidebar to display EXPERIMENT_SETUP */
-        $('.sidebar_accordian>h3>.a_accordian_experiment_setup', workarea).click(function (e) {
-            self.current_tab.hide(function () {
-                self.sections.experiment.show(function () {
-                    self.current_tab = self.sections.experiment;
-                });
-            })
-        });
-        /* click on sidebar to display MAKING_LYSATES */
-        $('.sidebar_accordian>h3>.a_accordian_making_lysates', workarea).click(function (e) {
-            self.current_tab.hide(function () {
-                self.sections.making_lysates.show(function () {
-                    self.current_tab = self.sections.making_lysates;
-                });
-            })
-        });
-        /* click on sidebar to display WESTERN_BLOT */
-        $('.sidebar_accordian>h3>.a_accordian_western_blot', workarea).click(function (e) {
-            self.current_tab.hide(function () {
-                self.sections.western_blot.show(function () {
-                    self.current_tab = self.sections.western_blot;
-                });
-            })
-        });
-        /* as part of init display DASHBOARD tab */
-        self.sections.dashboard.show(function () {
-            self.current_tab = self.sections.dashboard;
-        });
-    };
     /* register with context SHOW_EXPERIMENT event */
     context.register('show_experiment', function () {
         self.current_tab.hide(function () {
