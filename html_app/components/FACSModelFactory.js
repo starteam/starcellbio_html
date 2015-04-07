@@ -331,8 +331,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 grid: {clickable: true, hoverable: true, borderWidth: 0, aboveData: true, autoHighlight: false,  markings: [ { xaxis: { from: 0, to: template.model.facs.max ? template.model.facs.max:  150 }, 
                 			yaxis: { from: 0, to: 0 }, color: "#000" },
                        { xaxis: { from: 0, to: 0 }, yaxis: { from: 0, to: 100 }, color: "#000" }]},
-            };            
-            var step= template.model.facs.ticks[1]-template.model.facs.ticks[0];
+            };
+            /* Old assignments do not have ticks */
+            var step= template.model.facs.ticks?(template.model.facs.ticks[1]-template.model.facs.ticks[0]) : 50;
             
             if (('' + shape).toLowerCase() == 'normal') {
                 var data = [];
