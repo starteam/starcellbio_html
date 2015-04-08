@@ -16,6 +16,7 @@
       - nodejs-legacy
       - git
       - emacs24-nox
+      - postfix
     pip_packages:
       - virtualenvwrapper
     venv_name: starcellbio
