@@ -133,7 +133,6 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'rest_framework',
     'backend',
     'instructor',
 ) + auth.settings.INSTALLED_APPS
