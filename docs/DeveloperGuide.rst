@@ -1,149 +1,22 @@
+============================
 Developer Guide: StarCellBio
 ============================
 
-The intent of this guide is to:
+* `Running StarCellBio with Vagrant`_
 
-    * Describe the Architecture of StarCellBio
-    * Create a Virtual Environment for developing StarCellBio
-    * Clone starcellbio_html
-    * Setup Development Environment
-    * Using watch.py to compile .soy and .gss files into .js and .css files
-    * Start the StarCellBio development server on localhost
-    * Use StarCellBio server on localhost
-    * Modify/Deploy/Use StarCellBio html_app
-    * Modify/Deploy/Use StarCellBio instructor
-    * Create/Modify/Deploy/Use StarCellBio AssignmentBuilder
-    * Create/Modify/Deploy/Use StarCellBio Lab Notebook
+* `Creating a "Hello World" assignment`_
+
+* `Architecture of StarCellBio`_
+
+  - `URL routes`_
+
+  - `Page Templates`_
+  
+  - `Experiment model`_
 
 
-Describe the Architecture of StarCellBio
-----------------------------------------
-
-    :download:`StarCellBio Architecture <StarCellBio.pdf>`
-
-Create a Virtual Environment for developing StarCellBio
--------------------------------------------------------
-"A Virtual Environment ... is an isolated working copy of Python which allows
-you to work on a specific project without worry of affecting other project."
-
-Reference: `http://docs.python-guide.org/en/latest/dev/vertualenvs/ <http://docs.python-guide.org/en/latest/dev/vertualenvs/>`_
-
-This sample expects the ``PyVENV`` folder to contain the Virtual Environment for the sample.
-
-To ``CREATE`` the PyVENV Virtual Environment::
-
-    $ cd ~
-    $ pip install virtualenv
-    $ virtualenv PyVENV
-
-To ``ACTIVATE`` it::
-
-    $ source ~/PyVENV/bin/activate
-
-To ``DEACTIVATE`` it::
-
-    (PyVENV) $ deactivate
-
-To ``DESTROY`` it::
-
-    (PyVENV) $ deactivate
-    $ rm -Rv ~/PyVENV
-
-You may also want to install Virtualenvwrapper to help manage Virtual Environments although it is not required.
-Reference: 'https://vitualenvwrapper.readthedocs.org/ <https://vitualenvwrapper.readthedocs.org/>'
-
-Clone starcellbio_html
-----------------------
-You may also need to install Homebrew and pip as these are required.
-
-.. note:: This example uses assumes that PROJECT_HOME is ~/starcellbio/starcellbio_html.
-You will need to adjust PROJECT_HOME to the location of your starcellbio_html project.
-
-In a terminal window execute the following commands::
-
-    $ source ~/PyVENV/bin/activate
-    (PyVENV) $ git clone git://github.com/starteam/starcellbio_html
-
-
-Setup Development Environment
------------------------------
-
-Using PyCharm
-    View->Tool Windows->Database + Data Source -> MySQL
-    Install the database drivers if prompted
-
-
-mysqld command starts database
-
-Reference: `Installing MySQL on Mac OS X <https://rtcamp.com/tutorials/mac/osx-brew-php-mysql-nginx/>`_
-
-If you need to install MySQL on Mac OS X, execute the following command::
-
-    $ brew install mysql --enable-debugging
-
-In a terminal window execute the following commands::
-
-    $ source ~/PyVENV/bin/activate
-    (PyVENV) $ ls /usr/local/Cellar/mysql # shows foldername (a number) to use in the next command
-    (PyVENV) $ sudo cp /usr/local/Cellar/mysql/5.6.22/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/
-
-To Start mysql::
-
-    (PyVENV) $ sudo launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-    (PyVENV) $ sudo launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-
-To Stop mysql::
-
-    (PyVENV) $ sudo launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-
-To pip install
-
-    (PyVENV) $ cd starcellbio_html
-    (PyVENV) $ sudo pip install -r requirements.txt
-
-
-Using watch.py to compile .soy and .gss files into .js and .css files
----------------------------------------------------------------------
-After any changes to .soy or .gss files you need to compile them into .js and .css files for your changes to work.
-
-.. note:: This repo was built before PyCharm was the default project IDE. It is now possible to create a File Watcher
-in PyCharm that will automatically run the transpilers as .soy and .gss files are changed.  This will require minor
-modifications to watch.py.
-
-In new terminal window execute the following commands::
-
-    $ source ~/PyVENV/bin/activate
-    (PyVENV) $ cd starcellbio_html
-    (PyVENV) $ sudo pip install -r requirements.txt
-
-    (PyVENV) $ export PROJECT_HOME="/Users/starcellbio/starcellbio_html" # watch.py needs repo at PROJECT_HOME
-    (PyVENV) $ cd $PROJECT_HOME/html_app # watch.py needs repo in this location
-    (PyVENV) $ python watch.py
-
-Start the StarCellBio development server on localhost
------------------------------------------------------
-
-To ``START`` the starcellbio_html development server in a new Terminal Window::
-
-    $ source ~/PyVENV/bin/activate
-
-.. note:: Django may not work due to an error starting mysql. The first two lines that follow get mysql up
-and running. The second two lines start the StarCellBio Django server. If you don't have mysql installed,
-you'll need to do that.
-
-
-    (PyVENV) $ cd $PROJECT_HOME
-
-    (PyVENV) $ sudo ./manage.py collectstatic
-    (PyVENV) $ sudo ./manage.py loaddata backend statuses courses assignments studentassignments
-    (PyVENV) $ sudo ./manage.py runserver
-
-./manage.py loaddata backend statuses courses assignments studentassignments
-
-
-Development Using Vagrant
-=========================
-
+Running StarCellBio with Vagrant
+================================
 There is a convenient ``Vagrantfile`` and ansible playbook for
 building and setting up a development environment inside an Ubuntu
 virtual machine.  To do this, you will need to install `Virtual
@@ -154,56 +27,123 @@ local machine.  After that is done, clone the repository using the
 earlier instructions, and while in the repository directory just run
 ``vagrant up``.
 
-This will download everything needed and take you right up to the part
-you need to get to before running the server.  After everything is
-completed, just run:
+.. code-block:: bash
 
-..code-block:: bash
+	git clone git://github.com/starteam/starcellbio_html
+	cd starcellbio_html/html_app
+	vagrant up
+	vagrant ssh
+	
+And then within the Vagrant VM
 
-  vagrant ssh
-  ./manage.py runserver 0.0.0.0:8000
+	cd /vagrant
+	./manage.py runserver 0.0.0.0:8100
 
 If that all works, you should be able to open a browser to
-http://192.168.33.200:8000 and be greeted with the Star Cell Bio home
+http://localhost:8100 and be greeted with the Star Cell Bio home
 screen.
 
-Modify/Deploy/Use StarCellBio html_app
---------------------------------------
-    :download:`StarCellBio Notes on Assignment Builder <Evernotes/Combined_Notes_on_the_Assignment_Builder.pdf>`
+
+Creating a "hello world" assignment
+===================================
+Assignment configuration and content are currently stored in ``html/master_model.js``, 
+until a web-based assignment builder can be implemented. 
+
+To create a minimal new assignment in master_model.js,
+
+1. create a global javascript object with the following attributes
+
+.. code-block:: javascript
+
+	id: "usability_test", // assignmentID
+	name: "SCB Usability Test", // assignmentName
+	course: "scb_sampleexercises", // courseID
+	course_name: "Hello World", // course name
+	description: "Placeholder Description", // course description
+	template: { // template dictionary
+		instructions: [] // instructions array, each element is a tab
+	}
+
+(For your convenience, there is a ``blank_model`` object that can be used as a 
+template.)
+		
+2. Add your object to ``master_model_data.assignments.list`` in the same 
+   javascript file.
+		
+3. If you set ``course`` (courseID) to ``scb_sampleexercises`` your assignment 
+   will be available to unauthenticated users. If you set a different value for 
+   ``course`` you will also have to add it to ``code_values`` on line 150 of the 
+   ``signup.html`` template.
+
+4. For the instructions to render, you will need a .soy template in sub-folder 
+   of /ui that corresponds to you assignmentID. 
+
+A complete assignment will have additional dictionaries, to configure the
+experimental setup and the available experiment types (western_blot, flots or 
+microscopy)
 
 
-Modify/Deploy/Use StarCellBio instructor
-----------------------------------------
+Architecture of StarCellBio
+===========================
 
-Create/Modify/Deploy/Use StarCellBio AssignmentBuilder
-------------------------------------------------------
+Page templates
+--------------
+Templates used to build the user interface are in the html_app/ui folder. They 
+use the `Google Closure template language (.soy)`_
 
-Create/Modify/Deploy/Use StarCellBio Lab Notebook
--------------------------------------------------
+.. _Google Closure template language (.soy): https://developers.google.com/closure/templates/docs/concepts
 
+To compile templates, run the ``build.py`` script located in ``html_app`` 
+folder:: 
 
+    cd html_app
+    python build.py 
 
+This script can also be run as a watcher that will automatically recompile any 
+templates when they are changed. ``build.py`` includes a ``--prod`` option for 
+concatenating and minifying the javascript and css files. This makes browser 
+access more efficient, but may slow down the developer. 
 
+URL routes
+----------
+StarCellBio uses RESTful URLs to represent state in the browser, and the 
+browser URL fully defines which view will be rendered, including  parameters. 
+As a matter of coding standard this name is the same as name of the file that 
+renders this view in ``html_app/ui`` folder. Templates are named similarly, with 
+a ``.soy`` extension. 
 
-Important places for development (``html_app`` and ``instructor``):
+All the views' methods are in the scb namespace with the view name, and the scb 
+name space contains a class that implements at least a `show` method that is
+invoked to render this view. Namespace also contains static method register with 
+registers all required handlers for the view (scb_f_classes). 
 
-    * login through the starcellbio account
-    * auth - contains login/authorization
-    * backend` - contains database for front end
-    * django-allauth - login/authorization library
-    * frontend_test - contains selenium tests
-    * ``html_app`` - Front end lives in html app - static web site - javascript
-    * ``instructor`` - the assignment builder - work in progress
-    * misc - how to make a database
-    * scb_rest - ???
-    * tools - closure/soy
-    * zip-js - probably junk
+Server side URLS
+~~~~~~~~~~~~~~~~
+Views are exposed at the following URLs:
 
+-  index.html main page to load all the SCB runtime
+-  scb/contact – views.contact – sends email to starcellbio@mit.edu
+   email
+-  scb/get_model.js – views.get_model – returns model from the server
+   that is appropriate for the user (authenticated and guest)
+-  scb/ get_student_courses.js - views.get_student_courses - This
+   view gets the courses for a student for their account. For the
+   instructor, it gets the courses it can view
+-  scb/get_instructor_assignments.js -
+   views.get_instructor_assignments – get list of assignments
+   instructor can view
+-  scb/edit_assignment.js – views.edit_assignment
+-  scb/create_course.js – views.create_course
+-  scb/create_new_assignment.js – views.create_new_assignment
+-  scb/get_user.js – views.get_user
+-  scb/post_state.js – views.post_state – save student state
 
-Other issues:
+This structure allows for easy code navigation and any new
+code should follow these conventions.
 
-    * Currently served up from starcellbio.mit.edu
-    * Has backend database from starcellbio.mit.edu
-    * Stores student state but doesn't let instructor see it.
-    * Student writes a report outside of starcellbio.
+Experiment model
+----------------
+
+For more on the JavaScript data model, see the `StarCellBio-Architecture 
+documentation <StarCellBio-Architecture.rst>`_
 
