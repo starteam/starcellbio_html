@@ -63,15 +63,6 @@ scb.ui.static.HomepageView.register = function(workarea) {
 				var iframe = $('.scb_f_signup_iframe').contents();
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 				iframe.find('input[type="radio"][value="student"]').attr('checked', 'checked');
-
-// 				var iframe = $('.scb_f_login_iframe').contents();
-				if(iframe.find('#account_input_student').attr('checked')){
-					iframe.find('#auth_submit_button').prop('disabled', true);
-				}
-				if(iframe.find('#account_input_instructor').attr('checked')){
-					iframe.find('#auth_submit_button').prop('disabled', false);
-				}
-
 				
 				iframe.find(".auth_submit_button").click(function(){
 						   var mask = document.createElement('div');
@@ -136,13 +127,6 @@ scb.ui.static.HomepageView.register = function(workarea) {
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 				iframe.find('input[type="radio"][value="instructor"]').attr('checked', 'checked');
 				iframe.find('.course_code').hide();
-// 				var iframe = $('.scb_f_login_iframe').contents();
-				if(iframe.find('#account_input_student').attr('checked')){
-					iframe.find('#auth_submit_button').prop('disabled', true);
-				}
-				if(iframe.find('#account_input_instructor').attr('checked')){
-					iframe.find('#auth_submit_button').prop('disabled', false);
-				}
 				iframe.find(".auth_submit_button").click(function(){
 						   var mask = document.createElement('div');
 						   mask.className='overlay';

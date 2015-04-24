@@ -1035,12 +1035,6 @@ function add_login_script(workarea){
 					iframe.find('a:contains("Member")').click(function(){
 						$('.scb_f_login_iframe').load(function(){
 							var iframe = $('.scb_f_login_iframe').contents();
-							if(iframe.find('#account_input_student').attr('checked')){
-								iframe.find('#auth_submit_button').prop('disabled', true);
-							}
-							if(iframe.find('#account_input_instructor').attr('checked')){
-								iframe.find('#auth_submit_button').prop('disabled', false);
-							}
 							$('.scb_s_login_form > div').text('Sign Up');
 							$('.scb_s_login_dialog').addClass('scb_s_signup_dialog');
 							$('.scb_f_login_iframe').css('height', '560px'); 
