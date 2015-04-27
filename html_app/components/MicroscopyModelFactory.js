@@ -23,43 +23,40 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
             var imgs = [];
             var isFound = false;
             var max;
-            var index;
+            var index, slide_array, alreadySelected, number_of_comparisons;
             var parser = model.slide;
 
             if (parser.parser_simple){
 
 
-					var micro_state = {
-						kind: function (str) {
-							return str == slide_type;
-						},
-						collection_id: function (str) {
-							return str == collection_id;
-						},
-						drug_id: function (str) {
-							return str == drug_id;
-						},
-						cell_line: function (str) {
-							return str == cell_line;
-						},
-						conditions: function (str) {
-							return str == conditions;
-						}
-					};
-					_.each(parser.parser_simple, function (rule) {
-						if (rule.match.length == 0) {
-							img_str = '../images/microscopy/black.jpg'
-						}else {
-							var matches = true;
-							_.each(rule.match, function (property) {
-								if (micro_state[property]) {
-									matches &= micro_state[property](rule[property]);
-								}else {
-									console.info("UNDEFINED PROPERTY: " + property);
-								}
-							});
-							if(!isFound){
-								if(matches){
+                    var micro_state = {
+                        kind: function (str) {
+                            return str == slide_type;
+                        },
+                        collection_id: function (str) {
+                            return str == collection_id;
+                        },
+                        drug_id: function (str) {
+                            return str == drug_id;
+                        },
+                        cell_line: function (str) {
+                            return str == cell_line;
+                        },
+                        conditions: function (str) {
+                            return str == conditions;
+                        }
+                    };
+                    _.each(parser.parser_simple, function (rule) {
+                            var matches = true;
+                            _.each(rule.match, function (property) {
+                                if (micro_state[property]) {
+                            	    matches &= micro_state[property](rule[property]);
+                                }else {
+                            	    console.info("UNDEFINED PROPERTY: " + property);
+                                }
+                            });
+                            if(!isFound){
+                                if(matches){
                                     if(collection_id == '%CELL_LINE%'){
                                         collection_id = cell_line;
                                     }
@@ -67,45 +64,37 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
                                         collection_id = rule['use_collection_id'];
                                     }
                                     max = template.slide_parser[collection_id][slide_type][conditions].length;
-                                    index = Math.floor(Math.random() * (max - 1 + 1));
-									var slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
-									var alreadySelected = false;
-									_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
-									});
-									var number_of_comparisons = 0;
-									while(alreadySelected && number_of_comparisons < max){
-										index =  Math.floor(Math.random() * (max - 1 + 1));
-										slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
-										alreadySelected = false;
-										_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
-										});
-										number_of_comparisons=number_of_comparisons+1;
-									}
-									imgs=slide_array;
-									isFound = true;
-								}
-								else{
+                                    number_of_comparisons = 0;
+                                    do{
+                                        /*Math.random returns num in [0,1) so no need to worry about subtracting 1 from index*/
+                                        index =  Math.floor(Math.random() * (max));
+                                        slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
+                                        alreadySelected = false;
+                                        _.each(slide_array, function(x){
+                                            if(_.contains(hash_list, x.hash)) {
+                                                alreadySelected = true;
+                                            }
+                                        });
+                                        number_of_comparisons += 1;
+                                    }while(alreadySelected && number_of_comparisons < max);
+                                    imgs=slide_array;
+                                    isFound = true;
+                                }else{
                                     try {
                                         max = template.slide_parser['default']['Dye']['HnE'].length;
-                                        index = Math.floor(Math.random() * (max - 1 + 1));
+                                        index = Math.floor(Math.random() * (max));
                                         imgs = template.slide_parser['default']['Dye']['HnE'][index];
                                     } catch(e){}
 								}
 							}
-						}
 					});
 					state.slides = imgs;
 					state.slide_type = slide_type;
 				}
 			else if (parser.complex_parser){
 					var micro_state = {
-						drug_id: function (arr) {
-							var hasVal = false;
-							for(var x = 0; x < arr.length; x++){
-								if(arr[x] == drug_id)
-									hasVal = true;
-							}
-							return hasVal;
+						drug_id: function (drug_list) {
+							return drug_list.indexOf(drug_id) > -1;
 						},
 						cell_line: function (str) {
 							//make it a list and you compare to each one in list not just str
@@ -122,30 +111,23 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
 							_.each(rule.match, function (property) {
 								if (micro_state[property]) {
 									matches &= micro_state[property](rule[property]);
-								}
-								else {
+								}else {
 									console.info("UNDEFINED PROPERTY: " + property);
 								}
 							});
 							if(!isFound){
 								if(matches){
 									var phenotype = rule.phenotype;
-									var max = template.slide_parser[collection_id][slide_type][conditions][phenotype].length;
-									var index =  Math.floor(Math.random() * (max - 1 + 1));
-									var slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
-									var alreadySelected = false;
-									_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
-									});
-									var number_of_comparisons = 0;
-									while(alreadySelected && number_of_comparisons < max){
-										console.info(number_of_comparisons);
+									max = template.slide_parser[collection_id][slide_type][conditions][phenotype].length;
+									number_of_comparisons = 0;
+									do{
 										index =  Math.floor(Math.random() * (max - 1 + 1));
 										slide_array = template.slide_parser[collection_id][slide_type][conditions][phenotype][index];
 										alreadySelected = false;
 										_.each(slide_array, function(x){if(_.contains(hash_list, x.hash)) alreadySelected=true;
 										});
 										number_of_comparisons=number_of_comparisons+1;
-									}
+									}while(alreadySelected && number_of_comparisons < max);
 									imgs=slide_array;
 									isFound = true;
 								}
