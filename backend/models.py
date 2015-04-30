@@ -18,7 +18,7 @@ class Course(models.Model):
 # data refers to JSON for information
 class Assignment(models.Model):
     courseID = models.ForeignKey(Course, related_name='assignments')
-    assignmentID = models.CharField(max_length=50, unique=True)
+    assignmentID = models.CharField(max_length=50, primary_key=True)
     assignmentName = models.TextField(max_length=50)
     data = models.TextField()
     ownerID = models.ForeignKey(User, related_name='owner', default=1)

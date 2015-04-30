@@ -1,4 +1,4 @@
-console.info("SCB_EX/ADD_MULTIPLE_DIALOG");
+
 if (typeof (scb_ex1) == 'undefined') {
     scb_ex1 = {};
 }
@@ -209,45 +209,46 @@ scb_ex2.setup=function(state){
         dialog.css(k, v);
     });
 
-    $('.scb_ex_dialog').draggable({handle: '.scb_ex_inner_dialog_title'})
+    $('.scb_ex_dialog').draggable({handle: '.scb_ex_inner_dialog_title'});
 
 }
-scb_ex3.setup=function(state){
-    var workarea = state.workarea;
-    var assignment=state.assignment;
-    var experiment=state.experiment;
-    var  template = state.template;
-    var dialog=$("<div class='scb_ex_dialog'></div>");
-    dialog.html(scb_ex.dialog({
-       assignment: assignment,
-        experiment: experiment,
-        template: template
-    }));
-/*Ivan's version*/
-scb_ex1.assignment_builder_add_multiple = function (state) {
-    console.info(state);
+scb_ex3.setup=function(state) {
     var workarea = state.workarea;
     var assignment = state.assignment;
     var experiment = state.experiment;
     var template = state.template;
-    var onClose = state.close;
-
     var dialog = $("<div class='scb_ex_dialog'></div>");
-    dialog.html(scb_ex.dialog_assignment_builder({
+    dialog.html(scb_ex.dialog({
         assignment: assignment,
         experiment: experiment,
         template: template
     }));
-
-    dialog.appendTo($(workarea));
-    scb_ex1.register($(dialog), state);
-
-    var css = scb.utils.get(state, ['source_state', 'css']);
-    _.each(css, function (v, k) {
-        dialog.css(k, v);
-    });
-
-    $('.scb_ex_dialog').draggable({handle: '.scb_ex_inner_dialog_title'})
-
 }
+/*Ivan's version*/
+//scb_ex1.assignment_builder_add_multiple = function (state) {
+//    console.info(state);
+//    var workarea = state.workarea;
+//    var assignment = state.assignment;
+//    var experiment = state.experiment;
+//    var template = state.template;
+//    var onClose = state.close;
+//
+//    var dialog = $("<div class='scb_ex_dialog'></div>");
+//    dialog.html(scb_ex.dialog_assignment_builder({
+//        assignment: assignment,
+//        experiment: experiment,
+//        template: template
+//    }));
+//
+//    dialog.appendTo($(workarea));
+//    scb_ex1.register($(dialog), state);
+//
+//    var css = scb.utils.get(state, ['source_state', 'css']);
+//    _.each(css, function (v, k) {
+//        dialog.css(k, v);
+//    });
+//
+//    $('.scb_ex_dialog').draggable({handle: '.scb_ex_inner_dialog_title'})
+//
+//}
 

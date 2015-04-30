@@ -92,7 +92,6 @@ def get_account_type(request):
     return account_type
 
 def get_user(request, **kwargs):
-<<<<<<< HEAD
     import pudb
     # pudb.set_trace()
     if request.user.id and len(request.user.groups.all()) > 0:
@@ -173,14 +172,14 @@ def get_student_courses(request, **kwargs):
     obj.domain='starcellbio.mit.edu'
     obj.save()
 
-<<<<<<< HEAD
+
     if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
-=======
-    account_type = get_account_type(request)
->>>>>>> CourseEdit finish
+# Ivan's*/
+#     account_type = get_account_type(request)
+
     alist = []
     retval = []
     token1 = random.randrange(0, 1000000)
@@ -466,14 +465,13 @@ def get_instructor_assignments(request, **kwargs):
     retval = []
     token1 = random.randrange(0, 1000000)
     return_list = []
-<<<<<<< HEAD
     if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
-=======
-    account_type = get_account_type(request)
->>>>>>> CourseEdit finish
+#Ivan's
+#    account_type = get_account_type(request)
+
     if (account_type == 'instructor'):
         # 		pudb.set_trace()
         public_list = Assignment.objects.filter(access='Public')
