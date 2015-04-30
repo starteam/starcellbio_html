@@ -63,7 +63,7 @@
       shell: >
         executable=/bin/bash
         chdir=/vagrant
-        {{ venv_path }}/bin/python manage.py syncdb --noinput
+        {{ venv_path }}/bin/python manage.py migrate --noinput
 
     - name: Load data
       shell: >
