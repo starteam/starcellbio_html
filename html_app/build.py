@@ -57,7 +57,7 @@ HTML_SUFFIX = """
   <div id='main'></div>
   <script>
     $(function() {
-      starcellbio('#main', {});
+      init_scb('#main', {});
     });
     window.clearCookie = function() {
       document.cookie = 'sessionid="invalid"'

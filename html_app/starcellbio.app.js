@@ -9,6 +9,17 @@ var console = console || {
 };
 var scb = scb || {};
 
+function init_scb(jquery_selector_main, master_model){
+
+    $.ajax({
+        type: "POST",
+        url: 'scb/initialize_courses.js',
+        data: JSON.stringify(master_model_data),
+        async: false
+    }).done(starcellbio(jquery_selector_main, master_model));
+
+}
+
 function starcellbio(jquery_selector_main, master_model) {
     try {
         var workarea = $(jquery_selector_main);

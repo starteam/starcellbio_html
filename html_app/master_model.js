@@ -18317,11 +18317,7 @@ master_model_data = {
     ui: {}
 };
 window.master_model_data = master_model_data;
-$.ajax({
-	type: "POST",
-	url: 'scb/initialize_courses.js',
-	data: JSON.stringify(master_model_data)
-});
+
 
 var fix_assignment_models =  function (assignment_result) {
 	console.log(assignment_result);
