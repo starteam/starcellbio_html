@@ -69,7 +69,7 @@
       shell: >
         executable=/bin/bash
         chdir=/vagrant
-        {{ venv_path }}/bin/python manage.py loaddata backend courses assignments studentassignments
+        {{ venv_path }}/bin/python manage.py loaddata backend auth
 
     - name: Collect Static
       shell: >
