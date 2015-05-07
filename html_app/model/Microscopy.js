@@ -67,6 +67,8 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
     scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.MicroscopyLaneList, context);
     scb.Utils.initialize_accessor_field(self, data, 'samples_finished', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
+    /* Has a dict of all lane_ids and corresponding value: 'checked' or 'undefined'
+    * it is set in MicroscopyView*/
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
 
     scb.Utils.initialize_accessor_field(self, data, 'warning_fired', false, null, context);
@@ -99,19 +101,26 @@ scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, c
     }, scb.utils.noop);
     
     self.rows_state = function (exp) {
-        var skip_placeholders = false;
-        if (_.keys(context.template.micro_kinds).length == 1 && _.keys(context.template.micro_kinds[Object.keys(context.template.micro_kinds)[0]].conditions).length == 1) {
-            skip_placeholders = true;
-        }
         var experiment = exp || self.parent.parent;
         var grouped_rows = self.lanes_list.grouped_list;
         var rows = [];
         _.each(experiment.cell_treatment_list.list, function (e) {
-            if (grouped_rows[e.id] && _.filter(e.treatment_list.list[0].microscope, function(x){return x=='na';}).length == 0) {
-            	if( (_.keys(context.template.micro_kinds).length == 1 && _.keys(context.template.micro_kinds[Object.keys(context.template.micro_kinds)[0]].conditions).length == 1)|| (_.keys(context.template.micro_kinds).length >= 1 && _.isEqual(_.map(grouped_rows[e.id], function(z){return z.slide_conditions}).sort(), e.treatment_list.list[0].microscope.sort())))
-            		skip_placeholders=true;
-            	else
-            		skip_placeholders=false;
+            if (grouped_rows[e.id] && !('na' in e.treatment_list.list[0].conditions)) {
+                /*find all conditions already chosen for this lane*/
+                var chosen_conditions= _.map(grouped_rows[e.id], function(z){return z.slide_conditions}).sort();
+                /*find all conditions available for this lane*/
+                var avail_conditions= [];
+                var lane_conditions_dict=e.treatment_list.list[0].conditions;
+                _.each(_.keys(lane_conditions_dict), function(a){
+                    _.each(lane_conditions_dict[a],function(c){
+                        avail_conditions.push(c);
+                    })
+                });
+                var skip_placeholders=false;
+                /* number of chosen conditions should not exceed the number available*/
+            	if(chosen_conditions.length >= avail_conditions.length){
+                    skip_placeholders = true;
+                }
                 _.each(grouped_rows[e.id], function (ee, index) {
                     rows.push({
                         kind:'existing',

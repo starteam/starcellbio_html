@@ -31,6 +31,7 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self, data, 'temperature', "20", null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'collection_id', "0", null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'microscope', {}, null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'conditions', {}, null, context);
 	scb.Utils.initialize_accessor_field(self, data, 'facs', {}, null, context);
 
 	// should be getter only
