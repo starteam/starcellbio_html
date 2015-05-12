@@ -75,6 +75,11 @@ The top level object is a list of assignments, represented by
 defined by common list code (described later). Each element of the list is 
 represented by Assignment object as described in Assignments.js.
 
+.. image:: objectDiagram.png
+            :width: 200
+            
+`full size diagram <objectDiagram.svg>`_
+
 Assignment
 ----------
 
