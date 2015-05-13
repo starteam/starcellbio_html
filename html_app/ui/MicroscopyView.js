@@ -343,7 +343,7 @@ function set_filters(name, state){
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
-	parsed = resetScrollValue(parsed);
+    parsed = resetScrollValue(parsed);
     parsed.microscopy.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -352,65 +352,47 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
     if (slide_type == '') {
         return;
     }
-    var matches_list = [];
-    var keys_list = [];
     var slide_id = $(element).attr('lane_id');
-    if (slide_id == '') {
-       var cell_treatment_id = $(element).attr('cell_treatment_id');
-		var lanes = _.filter(parsed.microscopy.lanes_list.list, function(lane) {return lane.kind == slide_type && cell_treatment_id == lane.cell_treatment_id});
-		var i = lanes.length; //or 10
-		while(i--){
-			var lane = lanes[i];
-			keys_list = parsed.assignment.id == 'assignment_706_2014_ps2' ? _.keys(lane.cell_treatment.treatment_list.first.microscope) : _.keys(parsed.assignment.template.slide_parser[lane.cell_treatment.treatment_list.first.collection_id][slide_type])
-			matches_list.push(lane.slide_conditions)
-		}
-		matches_list = jQuery.unique( matches_list );
-		keys_list = jQuery.unique( keys_list );
-		if(keys_list.length > 0 && $(matches_list).not(keys_list).length == 0 && $(keys_list).not(matches_list).length == 0){
-				
-				$('html').css('overflow', 'hidden');
-				$('body').prepend(scb_experiment_setup.general_error_overlay());
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
+    var lanes = _.filter(parsed.microscopy.lanes_list.list, function(lane) {
+        return lane.kind == slide_type && cell_treatment_id == lane.cell_treatment_id
+    });
+    /* Want to check if there are more conditions available for this analysis type*/
+    if(lanes.length > 0) {
+        /* Find conditions available for this analysis type*/
+        var cond_avail = lanes[0].cell_treatment.treatment_list.first.conditions[slide_type];
 
-				$.jqDialog.alert("You've already selected this slide option.", 
-					function() {	
-							$('html').css('overflow', 'visible');
-							$('.error_overlay').remove();
-							scb.ui.static.MainFrame.refresh();
-					/* callback function for 'OK' button*/ });
-				$('.jqDialog_header').remove();		
-				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-				$('#jqDialog_box').attr('role', 'alertdialog');
-				return;
-				
-		}
-        /*
-        If there is one condition for this cell_treatment
-         */
-        var template=parsed.assignment.template;
-        var treatment_list=parsed.experiment.cell_treatment_list;
-       /* micro_kinds has all conditions available for this 'kind' or 'slide_type' */
-        var micro_kinds= parsed.assignment.template.micro_kinds[slide_type].conditions;
-        /* Checking to see if collection_id is defined for this treatment*/
-        /* collection_id is not defined in scb_ex1 */
-        var slide_parser = 0;
-        if(template.slide_parser[treatment_list.get(cell_treatment_id).treatment_list.first.collection_id]){
-            slide_parser= template.slide_parser[treatment_list.get(cell_treatment_id).treatment_list.first.collection_id][slide_type];
+        /* If the number of existing lanes is equal to num of conditions available */
+        if (lanes.length >= cond_avail.length) {
+
+            $('html').css('overflow', 'hidden');
+            $('body').prepend(scb_experiment_setup.general_error_overlay());
+
+            $.jqDialog.alert("You've already selected this slide option.",
+                function () {
+                    $('html').css('overflow', 'visible');
+                    $('.error_overlay').remove();
+                    scb.ui.static.MainFrame.refresh();
+                    /* callback function for 'OK' button*/
+                });
+            $('.jqDialog_header').remove();
+            $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+            $('#jqDialog_box').attr('role', 'alertdialog');
+            return;
         }
-        var microscope = 0;
-        if(_.filter(treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope)
-            microscope = _.filter(treatment_list.list , function(lane){ return lane.id == cell_treatment_id; })[0].treatment_list.first.microscope;
+    }
+    /* Since there are more conditions available, we can:
+       1) create a new MicroscopyLane, or
+       2) change the the 'kind' of this existing Lane
+     */
+    if (slide_id == '') {/*This means that the Lane does not 'exist' yet*/
+        var cell_treatment_list=parsed.experiment.cell_treatment_list;
+        /* Want to find the number of conditions available for this cell_treatment */
+        var conditions = _.filter(cell_treatment_list.list , function(lane){
+            return lane.id == cell_treatment_id; })[0].treatment_list.first.conditions;
 
-        if (_.size(micro_kinds) == 1 || _.size(slide_parser) == 1 || _.size(microscope) == 1) {
-            var slide_conditions_val = '';
-            if (_.size(micro_kinds) == 1) {
-                slide_conditions_val = _.keys(micro_kinds)[0]
-            }
-            else if (_.size(slide_parser) == 1) {
-                slide_conditions_val = _.keys(slide_parser)[0]
-            }
-            else if (_.size(microscope) == 1) {
-                slide_conditions_val = microscope[0];
-            }
+        if ( _.size(conditions[slide_type]) == 1) {
+            var slide_conditions_val = conditions[slide_type][0];
             /* Create MicroscopyLane*/
             parsed.microscopy.lanes_list.start({
                 kind: slide_type,
@@ -418,8 +400,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
                 cell_treatment_id: cell_treatment_id,
                 experiment_id: parsed.experiment.id
             });
-        }
-        else {
+        }else {
             /*If there many kinds or conditions slide_condition will be selected later*/
             parsed.microscopy.lanes_list.start({
                 kind: slide_type,
@@ -427,8 +408,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
                 experiment_id: parsed.experiment.id
             });
         }
-    }
-    else {
+    }else {
     	parsed.microscopy.lanes_list.get(slide_id).kind = slide_type;
     }
 
@@ -439,8 +419,8 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
 
 scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
-	parsed = resetScrollValue(parsed);
-	        parsed.microscopy.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
+    parsed = resetScrollValue(parsed);
+    parsed.microscopy.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -473,7 +453,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (elem
             $('body').prepend(scb_experiment_setup.general_error_overlay());
 
 
-            $.jqDialog.alert("You've already selected this slide option.",
+            $.jqDialog.alert("You've already selected this condition option.",
                 function () {
                     $('html').css('overflow', 'visible');
                     $('.error_overlay').remove();
