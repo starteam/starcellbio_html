@@ -8,9 +8,34 @@ from django.contrib.auth.models import Group
 
 class SignupForm(forms.Form):
 
+    account_type = forms.ChoiceField(
+        choices=(('student', 'Student'), ('instructor', 'Instructor')),
+        required=True, label="Account Type",
+        widget=forms.RadioSelect
+    )
+
+    def clean(self):
+        super(SignupForm, self).clean()
+        form_course_codes = self.data.get('course_code').replace(' ', '')
+        course_codes = form_course_codes.split(';')
+        # Instructors do not have course codes
+        if self.data.get('account_type') == 'instructor':
+            return
+        for course_code in course_codes:
+            # Allow empty course codes in list
+            if not course_code:
+                raise forms.ValidationError('Empty course code.')
+            try:
+                Course.objects.get(code=course_code)
+            except Course.DoesNotExist:
+                raise forms.ValidationError('No course match the entered code.')
+            # Later we could have the admin assign a unique code to an
+            # instructor for registering
+            # and compare that value against form's course_code
+
     def save(self, request):
         if self.data.get('account_type') == 'student':
-            create_course_records(request, self.data.get('CC'))
+            create_course_records(request, self.data.get('course_code'))
         add_to_group(request, self.data.get('account_type'))
 
 
