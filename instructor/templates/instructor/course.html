@@ -2,8 +2,8 @@ Hello World!
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-    <a href='{% url instructor:instructor_index %}'>Home</a>
-    Course: <a href='{% url instructor:instructor_course course_id=course.id %}'>{{ course.code }}</a>
+    <a href='{% url "instructor:instructor_index" %}'>Home</a>
+    Course: <a href='{% url "instructor:instructor_course" course_id=course.id %}'>{{ course.code }}</a>
 
     <form method='POST'>
 

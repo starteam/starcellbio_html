@@ -5,8 +5,8 @@
         <div class="scb_s_dashboard_sidebar_name scb_s_dashboard_button_wrapper"></div>
     </h1>
 
-    <a class='scb_s_navigation_button scb_s_dashboard_new_assignment_button' href="{% url common_courses %}">Courses</a>
-    <a class='scb_s_navigation_button scb_s_dashboard_new_assignment_button' href="{% url common_assignments %}">Assignments</a>
+    <a class='scb_s_navigation_button scb_s_dashboard_new_assignment_button' href="{% url "common_courses" %}">Courses</a>
+    <a class='scb_s_navigation_button scb_s_dashboard_new_assignment_button' href="{% url "common_assignments" %}">Assignments</a>
 
     <div class="scb_s_dashboard_table_wrapper scb_s_dashboard_table_pos">
         {% if message %}
@@ -93,10 +93,10 @@
                             {{ form.id }}
                             {% if form.instance.id %}
                                 <button>
-                                    <a href="{% url common_assignments_edit_strains pk=form.instance.id %}">Edit</a>
+                                    <a href="{% url "common_assignments_edit_strains" pk=form.instance.id %}">Edit</a>
                                 </button>
                                 <button>
-                                    <a href="{% url common_preview assignment=form.instance.id %}#view=assignments">Preview</a>
+                                    <a href="{% url "common_preview" assignment=form.instance.id %}#view=assignments">Preview</a>
                                 </button>
 
                             {% endif %}

@@ -14,7 +14,7 @@
             {% endfor %}
             <input type="submit" value="Submit Questions"/>
         </form>
-        <a href="{% url common_strain_protocols assignment=assignment.id %}">Edit Strain/Protocols</a>
+        <a href="{% url "common_strain_protocols" assignment=assignment.id %}">Edit Strain/Protocols</a>
 
     </div>
 {% endblock %}

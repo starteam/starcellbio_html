@@ -3,44 +3,44 @@
 {% block sidebar %}
     <div style="width:200px; display:block;float:left">
         <h3>{{ assignment.name }}</h3>
-        <br> <a class='' href="{% url common_courses %}">Courses</a>
-        <br> <a class='' href="{% url common_assignments %}">Assignments</a>
-        <br> <a class='' href="{% url common_assignments_edit_meta assignment=assignment.id %}">Assignment metadata</a>
-        <br> <a href="{% url common_assignments_edit_text pk=assignment.id %}">Edit Text</a>
-        <br> <a href="{% url common_assignments_edit_strains pk=assignment.id %}">Edit Strains</a>
-        <br> <a href="{% url common_assignments_edit_protocols pk=assignment.id %}">Edit Protocols</a>
+        <br> <a class='' href="{% url "common_courses" %}">Courses</a>
+        <br> <a class='' href="{% url "common_assignments" %}">Assignments</a>
+        <br> <a class='' href="{% url "common_assignments_edit_meta" assignment=assignment.id %}">Assignment metadata</a>
+        <br> <a href="{% url "common_assignments_edit_text" pk=assignment.id %}">Edit Text</a>
+        <br> <a href="{% url "common_assignments_edit_strains" pk=assignment.id %}">Edit Strains</a>
+        <br> <a href="{% url "common_assignments_edit_protocols" pk=assignment.id %}">Edit Protocols</a>
         {% for pd in assignment.protocols.all %}
             <br>&nbsp; &nbsp;
-            <a href="{% url common_treatments assignment=assignment.id protocol=pd.id %}">{{ pd.name }}</a>
+            <a href="{% url "common_treatments" assignment=assignment.id protocol=pd.id %}">{{ pd.name }}</a>
         {% endfor %}
-        <br> <a href="{% url common_strain_protocols assignment=assignment.id %}">Edit Strain Protocols</a>
-        <br> <a href="{% url common_western_blot_meta assignment=assignment.id %}">Edit Western Blot Meta</a>
-        <br> <a href="{% url western_blot_antibody_edit assignment=assignment.id %}">Edit Western Blot Antibody</a>
+        <br> <a href="{% url "common_strain_protocols" assignment=assignment.id %}">Edit Strain Protocols</a>
+        <br> <a href="{% url "common_western_blot_meta" assignment=assignment.id %}">Edit Western Blot Meta</a>
+        <br> <a href="{% url "western_blot_antibody_edit" assignment=assignment.id %}">Edit Western Blot Antibody</a>
         {% for ab in assignment.western_blot.antibodies.all %}
             {% for pd in assignment.strain_protocol.all %}
                 {% if pd.enabled %}
                     <br>&nbsp; &nbsp;
-                    <a href="{% url common_western_blot_antibody_bands_edit assignment=assignment.id antibody=ab.id sp=pd.id %}">{{ pd.strain.name }}/{{ pd.protocol.name }}
+                    <a href="{% url "common_western_blot_antibody_bands_edit" assignment=assignment.id antibody=ab.id sp=pd.id %}">{{ pd.strain.name }}/{{ pd.protocol.name }}
                         - {{ ab.primary }}/{{ ab.secondary }}</a>
                 {% endif %}
             {% endfor %}
         {% endfor %}
-        <br> <a href="{% url microscopy_sample_prep assignment=assignment.id %}">Edit Microscopy Sample Prep</a>
+        <br> <a href="{% url "microscopy_sample_prep" assignment=assignment.id %}">Edit Microscopy Sample Prep</a>
         {% for ab in assignment.microscopy_sample_prep.all %}
             {% for pd in assignment.strain_protocol.all %}
                 {% if pd.enabled %}
                     <br>&nbsp; &nbsp;
-                    <a href="{% url microscopy_images_edit assignment=assignment.id sample_prep=ab.id sp=pd.id %}">{{ pd.strain.name }}/{{ pd.protocol.name }}
+                    <a href="{% url "microscopy_images_edit" assignment=assignment.id sample_prep=ab.id sp=pd.id %}">{{ pd.strain.name }}/{{ pd.protocol.name }}
                         - {{ ab.analysis }} / {{ ab.condition }}</a>
                 {% endif %}
             {% endfor %}
         {% endfor %}
-        <br> <a href="{% url flowcytometry_sample_prep_edit assignment=assignment.id %}">Edit Flowcytometery Sample Prep</a>
+        <br> <a href="{% url "flowcytometry_sample_prep_edit" assignment=assignment.id %}">Edit Flowcytometery Sample Prep</a>
         {% for ab in assignment.facs_sample_prep.all %}
             {% for pd in assignment.strain_protocol.all %}
                 {% if pd.enabled %}
                     <br>&nbsp; &nbsp;
-                    <a href="{% url facs_histograms_edit assignment=assignment.id sample_prep=ab.id sp=pd.id %}">{{ pd.strain.name }}/{{ pd.protocol.name }}
+                    <a href="{% url "facs_histograms_edit" assignment=assignment.id sample_prep=ab.id sp=pd.id %}">{{ pd.strain.name }}/{{ pd.protocol.name }}
                         - {{ ab.analysis }} / {{ ab.condition }}</a>
                 {% endif %}
             {% endfor %}
