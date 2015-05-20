@@ -87,6 +87,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	
 	var model = new scb.components.ModelFactory(state.context.template);
 	model.microscopy.compute(state);
+    /* state.slides contains the computed image hash */
 	var img_sample = state.slides[0].hash;
 	
 	$('.scb_s_microscopy_switch_disabled').removeClass('scb_s_microscopy_switch_disabled');
@@ -94,6 +95,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 	if(state.i_want)
 		notebook_id = state.i_want;
 	var enableIFSlider = false;
+    /* If the slide already assigned, don't change it */
 	if(state.microscopy_lane.current_slides.length == 0){
 		state.microscopy_lane.current_slides = state.slides;
 	}

@@ -9254,289 +9254,6 @@ var __june_2014_usability = {
         		
         		
         	},
-            slide_parser:{
-                	'default':{
-                		'Dye':{
-							'HnE':[
-							[{
-									hash: 'img1',
-									mag: '20x'
-								}],
-							[{
-									hash: 'img2',
-									mag: '20x'
-								}],
-							[{
-									hash: 'img3',
-									mag: '20x'
-								}],
-							[{
-									hash: 'img5',
-									mag: '20x'
-								}],
-							[{
-									hash: 'img6',
-									mag: '20x'
-								}],
-							[{
-									hash: 'img7',
-									mag: '4x'
-								}],
-							[{
-									hash: 'img8',
-									mag: '4x'
-								}],
-							[{
-									hash: 'img9',
-									mag: '4x'
-								}],
-							[{
-									hash: 'img10',
-									mag: '20x'
-								}],
-							[{
-									hash: 'img4',
-									mag: '40x'
-								}]
-							]
-                		}
-                	},
-                	'3 m':{
-                		'Dye':{
-                			'HnE':[
-								[{
-										hash: 'img11',
-										mag: '20x'
-									}],
-								[{
-										hash: 'img12',
-										mag:'10x'
-									}],
-								[{
-										hash: 'img13',
-										mag: '20x'
-									}]
-                				]
-                			}
-                	},
-                	'6 m':{
-                		'Dye':{
-                			'HnE':[
-								[{
-									hash: 'img14',
-									mag: '40x'
-									}],
-								[{
-									hash: 'img15',
-									mag:'20x'
-									}],
-								[{
-									hash: 'img17',
-									mag:'40x'
-									}],
-								[{
-									hash: 'img18',
-									mag:'20x'
-									}],
-								[{
-									hash: 'img20',
-									mag: '40x'
-									}],
-								[{
-									hash: 'img21',
-									mag:'20x'
-									}],
-								[{
-									hash: 'img16',	
-									mag: '40x'
-									}],
-								[{
-									hash: 'img22',
-									mag: '40x'
-									}],
-								[{
-									hash: 'img19',
-									mag: '40x'
-									}]
-                			]
-                		},
-                		'IHC':{
-                			'cgrp':[
-								[{
-									hash: 'img63',
-									mag:'20x'
-									}],
-								[{
-									hash: 'img64',
-									mag: '20x'
-									}],
-								[{
-									hash: 'img65',
-									mag:'20x'
-									}],
-								[{
-									hash: 'img66',
-									mag: '20x'
-									}],
-								 [{
-									hash: 'img67',
-									mag: '20x'
-									}]
-                			],
-                			'ki67':[
-								[{
-									hash: 'img25',
-									mag:'20x'
-									}],
-								[{
-									hash: 'img28',
-									mag: '40x'
-									}],
-								[{
-									hash: 'img31',
-									mag:'20x'
-									}],
-								[{
-									hash: 'img26',
-									mag: '40x'
-									}],
-								[{
-									hash: 'img32',
-									mag: '40x'
-									}]
-                			]
-                		}
-                	},
-                	'1 yr':{
-                		'Dye':{
-                			'HnE':[
-								[{
-									hash: 'img33',
-									mag:'20x'
-								}],
-								 [{
-									hash: 'img34',
-									mag:'20x'
-								}],
-								[{
-									hash: 'img35',
-									mag:'4x'
-								}],
-								[{
-									hash: 'img38',
-									mag:'20x'
-								}],
-								[{
-									hash: 'img39',
-									mag:'20x'
-								}],
-								[{
-									hash: 'img40',
-									mag:'20x'
-								}],
-								 [{
-									hash: 'img36',
-									mag:'10x'
-								}],
-								 [{
-									hash: 'img37',
-									mag:'20x'
-								}]
-                			]
-                		},
-                		'IF': {
-                			'rgb':[
-								[{
-									hash: 'img44',
-									if_type: 'red', 
-									mag:'60x'
-								},
-								{
-									hash: 'img41',
-									if_type: 'blue', 
-									mag:'60x'
-								},
-								{
-									hash: 'img42',
-									if_type: 'green', 
-									mag:'60x'
-								},
-								{
-									hash: 'img43',
-									if_type: 'merge', 
-									mag:'60x'
-								}],
-								[{
-									hash: 'img45',
-									if_type: 'merge', 
-									mag:'60x'
-								}],
-								[{
-									hash: 'img46',
-									if_type: 'merge', 
-									mag:'60x'
-								}],
-								[{
-									hash: 'img50',
-									if_type: 'red', 
-									mag:'60x'
-								},
-								{
-									hash: 'img47',
-									if_type: 'blue', 
-									mag:'60x'
-								},
-								{
-									hash: 'img48',
-									if_type: 'green', 
-									mag:'60x'
-								},
-								{	
-									hash: 'img49',
-									if_type: 'merge', 
-									mag:'60x'
-								}],
-								[{
-									hash: 'img54',
-									if_type: 'red', 
-									mag:'60x'
-								},
-								{
-									hash: 'img51',
-									if_type: 'blue', 
-									mag:'60x'
-								},
-								{
-									hash: 'img52',
-									if_type: 'green', 
-									mag:'60x'
-								},
-								{
-									hash: 'img53',
-									if_type: 'merge', 
-									mag:'60x'
-								}]
-                			]
-                		},
-                		'IHC':{
-                			'cgrp':[
-								[{
-									hash: 'img60',
-									mag:'10x'
-									}],
-								[{
-									hash: 'img61',
-									mag: '10x'
-									}],
-								[{
-									hash: 'img62',
-									mag:'20x'
-									}]
-                			]
-                		}
-                	
-                	}
-			},
             model: { // models
                 western_blot: {
                     'cyto': {
@@ -9757,74 +9474,91 @@ var __june_2014_usability = {
                     }
                 },
                 microscopy: {
-                	'valid': ['cko', 'ac'],
-                	'slide': {
-                	
-                		'parser_simple':[
-                		{
-                			match: [],
-                			
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'cko',
-                			drug_id: 'ac',
-                			collection_id: '3 m',
-                			kind: 'Dye',
-                			conditions: 'HnE'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'cko',
-                			drug_id: 'ac',
-                			collection_id: '6 m',
-                			kind: 'Dye',
-                			conditions: 'HnE'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'cko',
-                			drug_id: 'ac',
-                			collection_id: '6 m',
-                			kind: 'IHC',
-                			conditions: 'cgrp'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'cko',
-                			drug_id: 'ac',
-                			collection_id: '1 yr',
-                			kind: 'IHC',
-                			conditions: 'cgrp'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'cko',
-                			drug_id: 'ac',
-                			collection_id: '6 m',
-                			kind: 'IHC',
-                			conditions: 'ki67'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'cko',
-                			drug_id: 'ac',
-                			collection_id: '1 yr',
-                			kind: 'Dye',
-                			conditions: 'HnE'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'cko',
-                			drug_id: 'ac',
-                			collection_id: '1 yr',
-                			kind: 'IF',
-                			conditions: 'rgb'
-                		}
-                			
-                		]
-                		
-                	}
+                    'valid': ['cko', 'ac'],
+                    'slide': {
+                        'parser_simple': [
+                            {
+                                match: ['cell_line'],
+                                cell_line: 'wt',
+                                imgs_hash: [ 'img2', 'img3', 'img4', 'img5', 'img6', 'img7', 'img8', 'img9', 'img10']
+                            },
+                            /* Conditional KO */
+                            {
+                                match: ['cell_line', 'drug_id'],
+                                cell_line: 'cko',
+                                drug_id: 'ae',
+                                imgs_hash: [ 'img2', 'img3', 'img4', 'img5', 'img6', 'img7', 'img8', 'img9', 'img10']
+                            },
+
+                            { /* 3 months*/
+                                match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
+                                cell_line: 'cko',
+                                drug_id: 'ac',
+                                collection_id: '3 m',
+                                kind: 'Dye',
+                                conditions: 'HnE',
+                                imgs_hash: ['img11', 'img12', 'img13']
+                            },
+                            { /* 6 months*/
+                                match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
+                                cell_line: 'cko',
+                                drug_id: 'ac',
+                                collection_id: '6 m',
+                                kind: 'Dye',
+                                conditions: 'HnE',
+                                imgs_hash: ['img14', 'img15', 'img16', 'img17', 'img18', 'img19', 'img20', 'img21', 'img22']
+                            },
+                            {
+                                match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
+                                cell_line: 'cko',
+                                drug_id: 'ac',
+                                collection_id: '6 m',
+                                kind: 'IHC',
+                                conditions: 'cgrp',
+                                imgs_hash: ['img63', 'img64', 'img65', 'img66', 'img67']
+                            },
+                            {
+                                match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
+                                cell_line: 'cko',
+                                drug_id: 'ac',
+                                collection_id: '6 m',
+                                kind: 'IHC',
+                                conditions: 'ki67',
+                                imgs_hash: ['img25', 'img26', 'img28', 'img32', 'img31']
+                            },
+                            /* 1 year */
+                            {
+                                match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
+                                cell_line: 'cko',
+                                drug_id: 'ac',
+                                collection_id: '1 yr',
+                                kind: 'IHC',
+                                conditions: 'cgrp',
+                                imgs_hash: ['img60', 'img61', 'img62']
+                            },
+
+                            {
+                                match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
+                                cell_line: 'cko',
+                                drug_id: 'ac',
+                                collection_id: '1 yr',
+                                kind: 'Dye',
+                                conditions: 'HnE',
+                                imgs_hash: ['img33', 'img34', 'img35', 'img36', 'img37', 'img38', 'img39', 'img40']
+                            },
+                            {
+                                match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
+                                cell_line: 'cko',
+                                drug_id: 'ac',
+                                collection_id: '1 yr',
+                                kind: 'IF',
+                                conditions: 'rgb',
+                                imgs_hash: ['img41', 'img42', 'img43', 'img44', 'img45', 'img46', 'img47', 'img48', 'img49', 'img50']
+                            }
+
+                        ]
+
+                    }
                 }
                 
 		}
@@ -16374,217 +16108,55 @@ var __scb_sample_3 = {
                 }
 
         	},
-        	slides: {
-            'er_final_1': 'images/microscopy/scb_ex3/er_final/er1crop.jpg',
-            'er_final_2': 'images/microscopy/scb_ex3/er_final/er2crop.jpg',
-            'er_final_3': 'images/microscopy/scb_ex3/er_final/er3crop1.jpg',
-            'er_final_4': 'images/microscopy/scb_ex3/er_final/er3crop2.jpg',
-            'er_final_5': 'images/microscopy/scb_ex3/er_final/er5crop1.jpg',
-            'nucleus_final_1': 'images/microscopy/scb_ex3/nucleus_final/n2.jpg',
-            'nucleus_final_2': 'images/microscopy/scb_ex3/nucleus_final/n8.jpg',
-            'nucleus_final_3': 'images/microscopy/scb_ex3/nucleus_final/n9.jpg',
-            'nucleus_final_4': 'images/microscopy/scb_ex3/nucleus_final/n18.jpg',
-            'nucleus_final_5': 'images/microscopy/scb_ex3/nucleus_final/n34.jpg',
-            'nucleus_final_6': 'images/microscopy/scb_ex3/nucleus_final/n43.jpg',
-            'nucleus_final_7': 'images/microscopy/scb_ex3/nucleus_final/n47.jpg',
-            'nucleus_final_8': 'images/microscopy/scb_ex3/nucleus_final/n60.jpg',
-            'nucleus_final_9': 'images/microscopy/scb_ex3/nucleus_final/n64.jpg',
-            'nucleus_final_10': 'images/microscopy/scb_ex3/nucleus_final/nuc-a.jpg',
-            'nucleus_final_11': 'images/microscopy/scb_ex3/nucleus_final/nuc-b.jpg',
-            'nucleus_final_12': 'images/microscopy/scb_ex3/nucleus_final/nuc-c.jpg',
-            'pm_final_1': 'images/microscopy/scb_ex3/pm_final/pm-b.jpg',
-            'pm_final_2': 'images/microscopy/scb_ex3/pm_final/pm-c.jpg',
-            'pm_final_3': 'images/microscopy/scb_ex3/pm_final/pm2b.jpg',
-            'pm_final_4': 'images/microscopy/scb_ex3/pm_final/pm3b.jpg',
-            'pm_final_5': 'images/microscopy/scb_ex3/pm_final/pm34-1.jpg',
-            'pm_final_6': 'images/microscopy/scb_ex3/pm_final/pm34-2.jpg',
-            'cyto_final_1': 'images/microscopy/scb_ex3/cyto_final/c-a.jpg',
-            'cyto_final_2': 'images/microscopy/scb_ex3/cyto_final/c-b.jpg',
-            'cyto_final_3': 'images/microscopy/scb_ex3/cyto_final/c-c.jpg',
-            'cyto_final_4': 'images/microscopy/scb_ex3/cyto_final/c-d.jpg',
-            'cyto_final_5': 'images/microscopy/scb_ex3/cyto_final/c1.jpg',
-            'cyto_final_6': 'images/microscopy/scb_ex3/cyto_final/c7.jpg',
-            'cyto_final_7': 'images/microscopy/scb_ex3/cyto_final/c15-1.jpg',
-            'cyto_final_8': 'images/microscopy/scb_ex3/cyto_final/c15-2.jpg',
-            'cyto_final_9': 'images/microscopy/scb_ex3/cyto_final/c17.jpg',
-            'cyto_final_10': 'images/microscopy/scb_ex3/cyto_final/c29.jpg',
-            'nm_final_1': 'images/microscopy/scb_ex3/nm_final/NM1crop.jpg',
-            'nm_final_2': 'images/microscopy/scb_ex3/nm_final/nm2crop.jpg',
-            'nm_final_3': 'images/microscopy/scb_ex3/nm_final/nm3crop1.jpg',
-            'nm_final_4': 'images/microscopy/scb_ex3/nm_final/nm3crop2.jpg',
-            'nm_final_5': 'images/microscopy/scb_ex3/nm_final/nm5crop.jpg',
-            'gfp_1': 'images/microscopy/scb_ex3/nuc_and_cyto/cn2.jpg',
-            'gfp_2': 'images/microscopy/scb_ex3/nuc_and_cyto/cn3.jpg',
-            'gfp_3': 'images/microscopy/scb_ex3/nuc_and_cyto/cn5.jpg',
-            'gfp_4': 'images/microscopy/scb_ex3/nuc_and_cyto/cn6.jpg',
-            'gfp_5': 'images/microscopy/scb_ex3/nuc_and_cyto/cn7.jpg',
-            'gfp_6': 'images/microscopy/scb_ex3/nuc_and_cyto/cn8.jpg',
-            'gfp_7': 'images/microscopy/scb_ex3/nuc_and_cyto/cn11.jpg',
-            'gfp_8': 'images/microscopy/scb_ex3/nuc_and_cyto/cn12.jpg',
-            'gfp_9': 'images/microscopy/scb_ex3/nuc_and_cyto/cn15.jpg',
-            'gfp_10': 'images/microscopy/scb_ex3/nuc_and_cyto/cn17.jpg',
-            'gfp_11': 'images/microscopy/scb_ex3/nuc_and_cyto/cn20.jpg',
-            'bo': 'images/microscopy/scb_ex3/negative_control.jpg',
-            'dummy': 'dummy'
-        },
-            slide_parser: {
-                'default': {
-                    'IF': {
-                        'egfr': [
-                            [
-                                {hash: 'pm_final_1', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_2', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_3', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_4', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_5', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_6', mag: 'N/A'}
-                            ]
-                        ],
-                        'pm': [
-                            [
-                                {hash: 'pm_final_1', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_2', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_3', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_4', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_5', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'pm_final_6', mag: 'N/A'}
-                            ]
-                        ],
-                        'cyto': [
-                            [
-                                {hash: 'cyto_final_1', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'cyto_final_2', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'cyto_final_3', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'cyto_final_4', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'cyto_final_5', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'cyto_final_6', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'cyto_final_7', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'cyto_final_8', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'cyto_final_9', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'cyto_final_10', mag: 'N/A'}
-                            ]
-                        ],
-                        'nuc': [
-                            [
-                                {hash: 'nuc_final_1', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_2', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_3', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_4', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_5', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_6', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_7', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_8', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_9', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_10', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_11', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'nuc_final_12', mag: 'N/A'}
-                            ]
+            slides: {
 
-                        ],
-                        'er': [
-                            [
-                                {hash: 'er_final_1', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'er_final_2', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'er_final_3', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'er_final_4', mag: 'N/A'}
-                            ],
-                            [
-                                {hash: 'er_final_5', mag: 'N/A'}
-                            ]
-                        ],
-                        'nm': [
-                            [
-                                {hash: 'nm_final_1', mag: 'N/A'}
-                            ],
-                             [
-                                {hash: 'nm_final_2', mag: 'N/A'}
-                            ],
-                             [
-                                {hash: 'nm_final_3', mag: 'N/A'}
-                            ],
-                             [
-                                {hash: 'nm_final_4', mag: 'N/A'}
-                            ],
-                             [
-                                {hash: 'nm_final_5', mag: 'N/A'}
-                            ]
-                        ],
-                        'bo': [
-                            [
-                                { hash: 'bo', mag: '20x'}
-                            ]
-                        ]
-                    }
-                }
+                '1': 'images/microscopy/scb_ex3/pm_final/pm-b.jpg',
+                '2': 'images/microscopy/scb_ex3/pm_final/pm-c.jpg',
+                '3': 'images/microscopy/scb_ex3/pm_final/pm2b.jpg',
+                '4': 'images/microscopy/scb_ex3/pm_final/pm3b.jpg',
+                '5': 'images/microscopy/scb_ex3/pm_final/pm34-1.jpg',
+                '6': 'images/microscopy/scb_ex3/pm_final/pm34-2.jpg',
 
+                '7': 'images/microscopy/scb_ex3/cyto_final/c-a.jpg',
+                '8': 'images/microscopy/scb_ex3/cyto_final/c-b.jpg',
+                '9': 'images/microscopy/scb_ex3/cyto_final/c-c.jpg',
+                '10': 'images/microscopy/scb_ex3/cyto_final/c-d.jpg',
+                '11': 'images/microscopy/scb_ex3/cyto_final/c1.jpg',
+                '12': 'images/microscopy/scb_ex3/cyto_final/c7.jpg',
+                '13': 'images/microscopy/scb_ex3/cyto_final/c15-1.jpg',
+                '14': 'images/microscopy/scb_ex3/cyto_final/c15-2.jpg',
+                '15': 'images/microscopy/scb_ex3/cyto_final/c17.jpg',
+                '16': 'images/microscopy/scb_ex3/cyto_final/c29.jpg',
+
+                '17': 'images/microscopy/scb_ex3/nucleus_final/n2.jpg',
+                '18': 'images/microscopy/scb_ex3/nucleus_final/n8.jpg',
+                '19': 'images/microscopy/scb_ex3/nucleus_final/n9.jpg',
+                '20': 'images/microscopy/scb_ex3/nucleus_final/n18.jpg',
+                '21': 'images/microscopy/scb_ex3/nucleus_final/n34.jpg',
+                '22': 'images/microscopy/scb_ex3/nucleus_final/n43.jpg',
+                '23': 'images/microscopy/scb_ex3/nucleus_final/n47.jpg',
+                '24': 'images/microscopy/scb_ex3/nucleus_final/n60.jpg',
+                '25': 'images/microscopy/scb_ex3/nucleus_final/n64.jpg',
+                '26': 'images/microscopy/scb_ex3/nucleus_final/nuc-a.jpg',
+                '27': 'images/microscopy/scb_ex3/nucleus_final/nuc-b.jpg',
+                '28': 'images/microscopy/scb_ex3/nucleus_final/nuc-c.jpg',
+
+                '29': 'images/microscopy/scb_ex3/er_final/er1crop.jpg',
+                '30': 'images/microscopy/scb_ex3/er_final/er2crop.jpg',
+                '31': 'images/microscopy/scb_ex3/er_final/er3crop1.jpg',
+                '32': 'images/microscopy/scb_ex3/er_final/er3crop2.jpg',
+                '33': 'images/microscopy/scb_ex3/er_final/er5crop1.jpg',
+
+
+                '34': 'images/microscopy/scb_ex3/nm_final/NM1crop.jpg',
+                '35': 'images/microscopy/scb_ex3/nm_final/nm2crop.jpg',
+                '36': 'images/microscopy/scb_ex3/nm_final/nm3crop1.jpg',
+                '37': 'images/microscopy/scb_ex3/nm_final/nm3crop2.jpg',
+                '38': 'images/microscopy/scb_ex3/nm_final/nm5crop.jpg',
+
+                'bo': 'images/microscopy/scb_ex3/negative_control.jpg',
+                'dummy': 'dummy'
             },
-
             model: {
                 western_blot: {
                 'cyto': {
@@ -18618,77 +18190,72 @@ var __scb_sample_3 = {
                     }
                 },
                 microscopy: {
-                    'valid': [],
                     'slide': {
                         'parser_simple':[
+                        {
+                            match: ['cell_line', 'drug_id', 'kind','conditions'],
+                            cell_line: 'WT-EGFR',
+                            drug_id: 'growth_media',
+                            kind: 'IF',
+                            conditions: 'egfr',
+                            imgs_hash:['1','2','3','4','5','6']
+                        },
                 		{
-                			match: [],
-
-                		},
+                            match: ['cell_line', 'drug_id', 'kind','conditions'],
+                            cell_line: 'WT-EGFR',
+                            drug_id: 'growth_media',
+                            kind: 'IF',
+                            conditions: 'pm',
+                            imgs_hash:['1','2','3','4','5','6']
+                        },
                         {
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'WT-EGFR',
-                			drug_id: 'growth_media',
-                			collection_id: 'default',
-                			kind: 'IF',
-                			conditions: 'egfr'
-                		},
-                		{
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'WT-EGFR',
-                			drug_id: 'growth_media',
-                			collection_id: 'default',
-                			kind: 'IF',
-                			conditions: 'pm'
-                		},
+                            match: ['cell_line', 'drug_id', 'kind','conditions'],
+                            cell_line: 'WT-EGFR',
+                            drug_id: 'growth_media',
+                            kind: 'IF',
+                            conditions: 'cyto',
+                            imgs_hash: ['7','8','9','10','11','12','13','14','15','16']
+                        },
                         {
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'WT-EGFR',
-                			drug_id: 'growth_media',
-                			collection_id: 'default',
-                			kind: 'IF',
-                			conditions: 'cyto'
-                		},
+                            match: ['cell_line', 'drug_id', 'kind','conditions'],
+                            cell_line: 'WT-EGFR',
+                            drug_id: 'growth_media',
+                            kind: 'IF',
+                            conditions: 'nuc',
+                            imgs_hash:['17','18','19','20','21','22','23','24','25','26','27','28']
+                        },
                         {
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'WT-EGFR',
-                			drug_id: 'growth_media',
-                			collection_id: 'default',
-                			kind: 'IF',
-                			conditions: 'nuc'
-                		},
+                            match: ['cell_line', 'drug_id', 'kind','conditions'],
+                            cell_line: 'WT-EGFR',
+                            drug_id: 'growth_media',
+                            kind: 'IF',
+                            conditions: 'er',
+                            imgs_hash:['29','30','31','32','33']
+                        },
                         {
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'WT-EGFR',
-                			drug_id: 'growth_media',
-                			collection_id: 'default',
-                			kind: 'IF',
-                			conditions: 'er'
-                		},
-                            {
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'WT-EGFR',
-                			drug_id: 'growth_media',
-                			collection_id: 'default',
-                			kind: 'IF',
-                			conditions: 'nm'
-                		},
+                            match: ['cell_line', 'drug_id', 'kind','conditions'],
+                            cell_line: 'WT-EGFR',
+                            drug_id: 'growth_media',
+                            kind: 'IF',
+                            conditions: 'nm',
+                            imgs_hash:['34','35','36','37','38']
+                        },
                         {
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'EGFR-M1',
-                			drug_id: 'growth_media',
-                			collection_id: 'default',
-                			kind: 'IF',
-                			conditions: 'egfr'
-                		},
+                            match: ['cell_line', 'drug_id', 'kind','conditions'],
+                            cell_line: 'EGFR-M1',
+                            drug_id: 'growth_media',
+                            kind: 'IF',
+                            conditions: 'egfr',
+                            imgs_hash:['1','2','3','4','5','6']
+                        },
                         {
-                			match: ['cell_line', 'drug_id', 'collection_id', 'kind','conditions'],
-                			cell_line: 'EGFR-M2',
-                			drug_id: 'growth_media',
-                			collection_id: 'default',
-                			kind: 'IF',
-                			conditions: 'egfr'
-                		}
+                            match: ['cell_line', 'drug_id', 'kind','conditions'],
+                            cell_line: 'EGFR-M2',
+                            drug_id: 'growth_media',
+                            kind: 'IF',
+                            conditions: 'egfr',
+                            imgs_hash:['1','2','3','4','5','6']
+                        }
                 		]
                     }
 
