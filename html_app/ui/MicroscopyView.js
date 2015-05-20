@@ -526,9 +526,19 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_sample_active = function (element,
     var cell_treatment_id = $(element).attr('cell_treatment_id');
 
     parsed.microscopy.is_cell_treatment_enabled[cell_treatment_id] = val;
-    $('.scb_f_microscopy_select_slide_type', $(element).parent().parent()).each(function (e) {
-        scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type(this);
-    });
+    if(val === 'checked') {
+        $('.scb_f_microscopy_select_slide_type', $(element).parent().parent()).each(function (e) {
+            scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type(this);
+        });
+    }else{
+        /*want to remove the MicroscopyLane*/
+        var lanes = _.filter(parsed.microscopy.lanes_list.list, function (lane) {
+            return cell_treatment_id == lane.cell_treatment_id
+        });
+        _.each(lanes,function(lane){
+            parsed.microscopy.lanes_list.remove(lane.id);
+        });
+    }
     parsed.microscopy.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
     if (event) {
         var rows_count = parsed.microscopy.rows_state();
