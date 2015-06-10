@@ -1,25 +1,63 @@
-{% extends "instructor/assignment_base.html" %}
+{% extends "instructor/assignment_sidebar.html" %}
 
-{% block content %}
-    Assignment: {{ assignment.name }} - Edit Strains
+{% block right_side %}
     {% if message %}
         {{ messsage }}
     {% endif %}
-    <div>
-        <form method="post">{% csrf_token %}
-            {{ formset.management_form }}
 
-            {% for form in formset %}
-                {{ form.as_p }}
+<style>
+.scb_s_strains_list{
+    position:relative;
+    list-style-type: none;
+    left:12px;
 
-                {% if form.instance.id %}
+}
+.scb_s_strains_list>li{
+    display:inline;
+}
+.scb_s_delete_strain{
+    border:0px;
+    width:24px;
+    background: transparent;
+    height: 20px;
+    cursor: pointer;
+    top:0px;
+    position: relative;
+	left: 16px;
 
-{#                Instance: <form method='post' action='{% url common_courses_delete pk=form.instance.id %}'>#}
-{#                    <input type="submit" name="Submit"#}
+}
+</style>
+<div class='scb_s_experiment_setup_title'>Experiment Setup</div>
+<div class='scb_s_experiment_setup_subtitle'>In this section, you will specify the strains and treatments available for experimentation.</div>
+<br/>
 
-                {% endif %}
-            {% endfor %}
-            <input type="submit" value="Submit Questions"/>
+<div class='scb_s_assignment_setup_course_name_heading'>1. Name the strains available for experimentation.</div><br/>
+
+<div class='scb_s_experiment_setup_strains_list_container'>
+    a) Name the strains available for experimentation.
+    <form method="post">{% csrf_token %}
+        {{ formset.management_form }}
+
+        {% for form in formset %}
+            <ul class="scb_s_strains_list">
+                <li>{{ forloop.counter }}.</li>
+                <li>{{ form.name }}</li>
+                <li>{{ form.id }}</li>
+                <li>
+                    <button role="button" class="scb_f_delete_strain scb_s_delete_strain">
+                        <img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+                    </button>
+                </li>
+            </ul>
+        {% endfor %}
+        <ul class="scb_s_strains_list">
+            <li>{{ add_btn_num }}.</li>
+            <li>
+                <input type="submit" name="add" class='scb_s_gray_button scb_s_experiment_setup_add_button' value="ADD">
+            </li>
+
+        </ul>
+            <input type="submit" name="continue" class="scb_s_assignment_setup_save_button scb_s_navigation_button" value="SAVE AND CONTINUE &nbsp; &#9654;">
         </form>
 
     </div>

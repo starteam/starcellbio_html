@@ -1,6 +1,6 @@
-{% extends "instructor/assignment_base.html" %}
+{% extends "instructor/assignment_sidebar.html" %}
 
-{% block content %}
+{% block right_side %}
     {% if message %}
         {{ messsage }}
     {% endif %}
@@ -11,7 +11,7 @@
             {% for form in formset %}
                 {{ form.as_p }}
             {% endfor %}
-            <input type="submit" value="Submit Questions"/>
+            <input type="submit" class="scb_s_assignment_setup_save_button scb_s_navigation_button" value="Submit Questions"/>
         </form>
     </div>
 {% endblock %}

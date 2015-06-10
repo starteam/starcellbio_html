@@ -5,6 +5,10 @@ from django.forms.models import modelformset_factory, inlineformset_factory
 from django.forms.models import modelform_factory
 from instructor import models
 from instructor import compiler
+from django.contrib.auth.models import User
+import datetime
+
+from backend.models import Assignment, StudentAssignment
 
 
 def courses(request):
@@ -34,26 +38,20 @@ def course_delete(request, pk):
     return redirect('common_course')
 
 
+def get_account_type(request):
+    account_type = ''
+    if request.user.id and len(request.user.groups.all()) > 0:
+        account_type = request.user.groups.all()[0].name
+    return account_type
+
+
 def assignments(request):
-    user = request.user
-    message = ''
-    AssignmentCourseSet = modelformset_factory(models.Assignment, extra=1, can_delete=True)
-    if request.method == "POST":
-        formset = AssignmentCourseSet(request.POST)
-        formset.clean()
-        if ( formset.is_valid()):
-            message = "Thank you"
-            entries = formset.save(commit=False)
-            for form in entries:
-                form.save()
-        else:
-            message = "Something went wrong"
+
+    account_type = get_account_type(request)
+    public_list = models.Assignment.objects.filter(access='Public')
 
     return render_to_response('instructor/assignments.html',
-                              {'formset': AssignmentCourseSet(
-                                  queryset=models.Assignment.objects.filter(course__owner=user)),
-                               'message': message
-                              },
+                              {'assignments': public_list},
                               context_instance=RequestContext(request))
 
 
@@ -61,9 +59,153 @@ def assignments_delete(request, pk):
     models.Assignment.objects.get(id=pk).delete()
     return redirect('common_assignments')
 
+def create_new_assignment(request):
+    request.session['new'] = True
+    request.session['assignment_name'] = ''
+    request.session['based_on'] = ''
+    return redirect('common_assignment_setup')
 
-def assignments_edit_meta(request, assignment):
-    assignment = models.Assignment.objects.get(id=assignment)
+
+def assignment_setup(request):
+    if request.method == "POST":
+        #Have to give error for empty name
+        request.session['assignment_name'] = request.POST['name']
+        if request.POST['based_on']:
+            request.session['based_on'] = request.POST['based_on']
+
+        if 'continue' in request.POST:
+            return redirect('common_course_setup')
+
+    all_assignments = models.Assignment.objects.all()
+    return render_to_response('instructor/assignment_setup.html',
+                              {'assignments': all_assignments,
+                               'assignment_name': request.session['assignment_name'],
+                               'based_on': request.session['based_on'],
+                               'new': request.session['new']},
+                                context_instance=RequestContext(request))
+
+
+def course_setup(request):
+    CourseForm = modelform_factory(models.Course, fields=['code', 'name'])
+
+    if request.method == "POST":
+        if 'back' in request.POST:
+            return redirect("common_assignment_setup")
+        elif 'course_pk' in request.POST:
+            '''Adding to an existing course'''
+            course = models.Course.objects.get(pk=request.POST['course_pk'])
+        else:
+            '''Create a new course'''
+            user = User.objects.get(username=request.user)
+            form = CourseForm(request.POST)
+            course = form.save(commit=False)
+            course.owner_id = user.id
+            course.save()
+
+        '''Create a new assignment'''
+        assignment_name = request.session['assignment_name']
+        assignment_id = assignment_name + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+
+        if request.session['based_on']:
+            a = models.Assignment(course=course,
+                              name=assignment_name,
+                              assignment_id=assignment_id,
+                              basedOn=request.session['based_on'])
+        else:
+            a = models.Assignment(course=course,
+                              name=assignment_name,
+                              assignment_id=assignment_id)
+        a.save()
+        request.session['assignment_id'] = a.id
+        request.session['new'] = False
+
+        if 'save' in request.POST:
+            return redirect("common_course_modify")
+        else:
+            '''Continue'''
+            return redirect('common_assignments_edit_strains')
+
+    else:
+        all_courses = models.Course.objects.all()
+        form = CourseForm()
+        return render_to_response('instructor/course_setup.html',
+                                  {'courses': all_courses,
+                                   'form': form,
+                                   'new': request.session['new']},
+                                  context_instance=RequestContext(request))
+
+
+def assignments_edit(request, assignment_pk):
+    assignment = models.Assignment.objects.get(pk=assignment_pk)
+    if assignment.basedOn is not None:
+        request.session['based_on'] = assignment.basedOn.id
+    else:
+        request.session['based_on'] = ''
+    request.session['assignment_id'] = assignment_pk
+
+    request.session['new'] = False
+
+    return redirect('common_assignment_modify')
+
+
+def assignment_modify(request):
+    assignment_id = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(pk=assignment_id)
+    AssignmentForm = modelform_factory(models.Assignment, fields=['name'])
+
+    if request.method == "POST":
+
+            form = AssignmentForm(request.POST, instance=assignment)
+            form.save()
+
+    all_assignments = models.Assignment.objects.all()
+    if 'continue' in request.POST:
+        return redirect("common_course_modify")
+
+    form = AssignmentForm(instance=assignment)
+    return render_to_response('instructor/assignment_modify.html',
+                              {'assignments': all_assignments,
+                               'form': form,
+                               'based_on': request.session['based_on'],
+                               'new': request.session['new']},
+                              context_instance=RequestContext(request))
+
+def course_modify(request):
+    assignment_id = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(pk=assignment_id)
+    CourseForm = modelform_factory(models.Course, fields=['name', 'code'])
+
+    if request.method == 'POST':
+        if 'back' in request.POST:
+            return redirect('common_assignment_modify')
+
+        if 'course_pk' in request.POST:
+            '''change the course for this assignment'''
+            new_course = models.Course.objects.get(pk=request.POST['course_pk'])
+            assignment.course = new_course
+            assignment.save()
+        else:
+            '''change this course's name or code'''
+            form = CourseForm(request.POST, instance=assignment.course)
+            form.save()
+
+        if 'continue' in request.POST:
+            return redirect("common_assignments_edit_strains")
+
+    all_courses = models.Course.objects.all()
+
+    form = CourseForm(instance=assignment.course)
+    return render_to_response('instructor/course_setup.html',
+                              {'courses': all_courses,
+                               'form': form,
+                               'new':  request.session['new']},
+                              context_instance=RequestContext(request))
+
+
+
+def assignments_edit_meta(request):
+    assignment_id = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=assignment_id)
     AssignmentForm = modelform_factory(models.Assignment, fields=['has_concentration', 'has_temperature',
                                                                   'has_start_time', 'has_duration',
                                                                   'has_collection_time'])
@@ -85,10 +227,9 @@ def assignments_edit_meta(request, assignment):
                               context_instance=RequestContext(request))
 
 
-def assignments_edit_text(request, pk):
+def assignments_edit_text(request):
+    pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
-    # strains = models.Strains.objects.filter(assignment=assignment)
-    user = request.user
     message = ''
     StrainsFormSet = modelformset_factory(models.AssignmentText, extra=1, fields=['title', 'text'], can_delete=True)
     if request.method == "POST":
@@ -112,16 +253,21 @@ def assignments_edit_text(request, pk):
                               context_instance=RequestContext(request))
 
 
-def assignments_edit_strains(request, pk):
+def assignments_edit_strains(request):
+    pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
-    # strains = models.Strains.objects.filter(assignment=assignment)
-    user = request.user
     message = ''
-    StrainsFormSet = modelformset_factory(models.Strains, extra=1, fields=['name'], can_delete=True)
+    extra_fields = 0
+    if 'add' in request.POST:
+        extra_fields = 1
+
+    StrainsFormSet = modelformset_factory(models.Strains, extra=extra_fields, fields=['name'])
+
     if request.method == "POST":
         formset = StrainsFormSet(request.POST)
         formset.clean()
-        if ( formset.is_valid()):
+
+        if formset.is_valid():
             message = "Thank you"
             entries = formset.save(commit=False)
             for form in entries:
@@ -130,15 +276,28 @@ def assignments_edit_strains(request, pk):
         else:
             message = "Something went wrong"
 
+        if 'continue' in request.POST:
+            return redirect('common_assignments_edit_protocols')
+
+    formset = StrainsFormSet(queryset=models.Strains.objects.filter(assignment=assignment))
+    add_btn_num = formset.total_form_count()+1
     return render_to_response('instructor/strains.html',
-                              {'formset': StrainsFormSet(queryset=models.Strains.objects.filter(assignment=assignment)),
-                               'message': message,
-                               'assignment': assignment
-                              },
-                              context_instance=RequestContext(request))
+                                  {'formset': formset,
+                                   'message': message,
+                                   'new':  request.session['new'],
+                                   'add_btn_num': add_btn_num,
+                                   'assignment': assignment
+                                  },
+                                  context_instance=RequestContext(request))
 
 
-def assignments_edit_protocols(request, pk):
+def assignments_delete_strain(request):
+    models.Strains.objects.get(id=request.POST['pk']).delete()
+    return redirect('common_assignments_edit_strains')
+
+
+def assignments_edit_protocols(request):
+    pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
     message = ''
     ProtocolsFormSet = modelformset_factory(models.Protocol, extra=1, can_delete=True, exclude=['assignment'])

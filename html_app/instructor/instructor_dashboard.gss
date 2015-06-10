@@ -145,6 +145,7 @@
 }
 
 .scb_s_dashboard_archive{
+    width: 57px;
 
 }
 

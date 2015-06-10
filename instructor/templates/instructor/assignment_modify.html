@@ -1,0 +1,55 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+
+    <div class='scb_s_assignment_setup_title'>Assignment Setup</div>
+    <div class='scb_s_assignment_setup_radio_choice' aria-label='Create New Assignment'>
+        <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"
+               {% if not based_on %}checked{% endif %} disabled/>
+        <span class='scb_s_assignment_setup_radio_text'>Create new assignment OR</span>
+    </div>
+
+    <div class='scb_s_assignment_setup_radio_choice'>
+        <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"
+               {% if based_on %}checked{% endif %} disabled/>
+        <span class='scb_s_assignment_setup_radio_text'>Use an existing assignment as a template.</span>
+        <br/>
+
+    </div>
+    <div class="scb_s_assignment_setup_assignment_list"
+         aria-labelledby="scb_s_experiment_step_progress_label_for_assignment">
+        <label role="presentation" class="custom-select">
+            <select role="select" id="scb_f_select_base_assignment" disabled>
+                {% for a in assignments %}
+                    <option role='option' aria-label='{{ a.name }}' value="{{ a.id }}"
+                            {% if a.id == based_on %}selected{% endif %}>
+                        {{ a.name }}&nbsp;&nbsp;
+
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+    <br/>
+    <br/>
+
+
+    <div class='scb_s_assignment_setup_course_name_heading'>Change name of this assignment</div>
+
+    <form method="post">{% csrf_token %}
+        {{ form.name }}
+
+        <div class="">
+            <input type="submit"
+                   name="continue"
+                   class=" scb_s_navigation_button"
+                   value="SAVE AND CONTINUE &nbsp; &#9654;"/>
+            <input type="submit"
+                   name="save"
+                   class="scb_s_navigation_button "
+                   value="SAVE"/>
+        </div>
+    </form>
+
+
+{% endblock %}

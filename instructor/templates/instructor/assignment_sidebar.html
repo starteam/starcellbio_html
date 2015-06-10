@@ -1,0 +1,131 @@
+{% extends "instructor/assignment_edit_base.html" %}
+
+{% block sidebar %}
+    <div style="width:200px; display:block;float:left">
+
+        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Assignment Setup</div>
+
+        {% if new %}
+            <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+                <a class='scb_s_assignment_sidebar_link' href="{% url "common_assignment_setup" %}">
+                    Assignment setup
+                </a>
+            </div>
+            <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+                <a class='scb_s_assignment_sidebar_link' href="{% url "common_course_setup" %}">
+                    Course setup
+                </a>
+            </div>
+        {% else %}
+            <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+                <a class='scb_s_assignment_sidebar_link' href="{% url "common_assignment_modify" %}">
+                    Assignment setup
+                </a>
+            </div>
+            <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+                <a class='scb_s_assignment_sidebar_link' href="{% url "common_course_modify" %}">
+                    Course setup
+                </a>
+            </div>
+        {% endif %}
+
+        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Experiment Setup</div>
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link" href="{% url "common_assignments_edit_strains" %}">
+                Strains
+            </a>
+        </div>
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class='scb_s_assignment_sidebar_link'
+               href="{% if not new %}{% url "common_assignments_edit_meta" %}{% endif %}">
+                Experimental variables
+            </a>
+        </div>
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link"
+               href="{% if not new %}{% url "common_assignments_edit_text" %}{% endif %}">
+                Text
+            </a>
+        </div>
+
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link"
+               href="{% if not new %}{% url "common_assignments_edit_protocols" %}{% endif %}">
+                Protocols
+            </a>
+        </div>
+
+        {% for pd in assignment.protocols.all %}
+            <div role="link" class='scb_s_sidebar_link_sub_heading '>
+                <a class="scb_s_assignment_sidebar_link"
+                   href="{% url "common_treatments" assignment=assignment.id protocol=pd.id %}">
+                    {{ pd.name }}
+                </a>
+            </div>
+        {% endfor %}
+
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link" href="{% if new == 'False' %}
+        {% url "common_strain_protocols" assignment=assignment.id %}{% endif %}">
+                Edit Strain Protocols
+            </a>
+        </div>
+        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Western Blotting</div>
+
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link" href="{% if new == 'False' %}
+        {% url "common_western_blot_meta" assignment=assignment.id %}{% endif %}">Edit Western Blot Meta</a>
+        </div>
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link" href="{% if new == 'False' %}
+        {% url "western_blot_antibody_edit" assignment=assignment.id %}{% endif %}">Edit Western Blot Antibody</a>
+        </div>
+        {% for ab in assignment.western_blot.antibodies.all %}
+            {% for pd in assignment.strain_protocol.all %}
+                {% if pd.enabled %}
+                    <br>&nbsp; &nbsp;
+                    <a href="{% url "common_western_blot_antibody_bands_edit" assignment=assignment.id antibody=ab.id sp=pd.id %}">
+                        {{ pd.strain.name }}/{{ pd.protocol.name }}
+                        - {{ ab.primary }}/{{ ab.secondary }}</a>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Microscopy</div>
+
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link" href="{% if new == 'False' %}
+        {% url "microscopy_sample_prep" assignment=assignment.id %}{% endif %}">Edit Microscopy Sample Prep</a>
+        </div>
+        {% for ab in assignment.microscopy_sample_prep.all %}
+            {% for pd in assignment.strain_protocol.all %}
+                {% if pd.enabled %}
+                    <br>&nbsp; &nbsp;
+                    <a href="{% url "microscopy_images_edit" assignment=assignment.id sample_prep=ab.id sp=pd.id %}">
+                        {{ pd.strain.name }}/{{ pd.protocol.name }}
+                        - {{ ab.analysis }} / {{ ab.condition }}</a>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Flow Cytometry</div>
+
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link" href="{% if new == 'False' %}
+        {% url "flowcytometry_sample_prep_edit" assignment=assignment.id %}{% endif %}">Edit Flowcytometery Sample
+                Prep</a>
+        </div>
+        {% for ab in assignment.facs_sample_prep.all %}
+            {% for pd in assignment.strain_protocol.all %}
+                {% if pd.enabled %}
+                    <br>&nbsp; &nbsp;
+                    <a href="{% url "facs_histograms_edit" assignment=assignment.id sample_prep=ab.id sp=pd.id %}">
+                        {{ pd.strain.name }}/{{ pd.protocol.name }}
+                        - {{ ab.analysis }} / {{ ab.condition }}</a>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+
+    </div>
+{% endblock %}

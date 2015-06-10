@@ -1,4 +1,4 @@
- 'use strict';
+'use strict';
 scb.ModelHelpers = {};
 scb.ModelHelpers.common_list_code = function (self, data, proto, context) {
 

@@ -1,6 +1,10 @@
-{% extends "instructor/assignment_base.html" %}
+{% extends "instructor/assignment_sidebar.html" %}
 
-{% block content %}
+{% block right_side %}
+
+
+
+
     You only get 5 questions so ask wisely.
     {% if message %}
         {{ messsage }}
@@ -12,7 +16,7 @@
             {% for form in formset %}
                 {{ form.as_p }}
             {% endfor %}
-            <input type="submit" value="Submit Questions"/>
+            <input type="submit" class="scb_s_assignment_setup_save_button scb_s_navigation_button" value="Submit Questions"/>
         </form>
         <a href="{% url "common_strain_protocols" assignment=assignment.id %}">Edit Strain/Protocols</a>
 

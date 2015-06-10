@@ -424,7 +424,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                     hashchange_function(anchor_hash, anchor_element);
                     iframe_history.push(anchor_hash);
                     currentPush = true;
-                    //console.log(iframe_history);
                     $(".scb_s_ug_back").removeClass('scb_s_ug_back_disabled');
                     $('.scb_s_ug_back').removeAttr('disabled');
                     event.preventDefault();

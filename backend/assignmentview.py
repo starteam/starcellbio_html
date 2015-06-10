@@ -31,7 +31,6 @@ def create(request, template_name='courses/form.html'):
 def update(request, pk, template_name='courses/form.html'):
     server = get_object_or_404(Assignment, pk=pk, ownerID=request.user)
     form = AssignmentForm(request.POST or None, instance=server)
-    #form.fields['basedOn'].widget.attrs['disabled'] = True
 
     if form.is_valid():
         form.save()

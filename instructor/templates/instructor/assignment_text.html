@@ -1,10 +1,15 @@
-{% extends "instructor/assignment_base.html" %}
+{% extends "instructor/assignment_sidebar.html" %}
 
-{% block content %}
-    Assignment: {{ assignment.name }} - Edit Assignment Text
+{% block right_side %}
+    <div class='scb_s_experiment_setup_title'>Experiment Setup</div>
+    <div class='scb_s_experiment_setup_subtitle'>In this section, you will specify the strains and treatments available
+        for experimentation.
+    </div>
+    <br/>
     {% if message %}
         {{ messsage }}
     {% endif %}
+
     <div>
         <form method="post">{% csrf_token %}
             {{ formset.management_form }}

@@ -60,7 +60,6 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
 
 scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-    //parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -83,19 +82,11 @@ scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function (element, even
 
 scb.ui.static.FacsView.scb_f_microscopy_select_conditions = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
-    //parsed = resetScrollValue(parsed);
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
     var val = $(element).val();
     parsed.facs_lane.conditions = val;
-//    var map_key = $(element).attr('map_key');
-//    parsed.facs.is_cell_treatment_live[map_key] = val;
-
-//    $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
-//        scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
-//    });
-//    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
     event = true;
     if (event) {
         scb.ui.static.MainFrame.refresh();
@@ -517,8 +508,12 @@ scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
     })
     if (elements.length > 1) {
         parsed.facs_lane.bisector_gate_created = false;
-        parsed.facs_lane.canvas_metadata_analysis.points = _.without(parsed.facs_lane.canvas_metadata_analysis.points, elements[0]);
-        parsed.facs_lane.canvas_metadata_analysis.points = _.without(parsed.facs_lane.canvas_metadata_analysis.points, elements[1]);
+        parsed.facs_lane.canvas_metadata_analysis.points = _.without(
+            parsed.facs_lane.canvas_metadata_analysis.points, elements[0]
+        );
+        parsed.facs_lane.canvas_metadata_analysis.points = _.without(
+            parsed.facs_lane.canvas_metadata_analysis.points, elements[1]
+        );
     }
     //delete two gates for bisector
     else
@@ -601,7 +596,13 @@ scb.ui.static.FacsView.scb_f_facs_remove = function (element) {
     //fix tab indexing for display
     if (parsed.state.index > parsed.experiment.facs_list.list.length - scb.ui.static.FacsView.TOTAL_TABS) {
 
-        if ((parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS + 1 || parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS + 2) && parsed.experiment.facs_list.start_tabs_index <= 1)
+        if (
+            (
+                parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS + 1 ||
+                parsed.experiment.facs_list.list.length == scb.ui.static.FacsView.TOTAL_TABS + 2
+            ) &&
+            parsed.experiment.facs_list.start_tabs_index <= 1
+           )
             parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index + 1;
         else parsed.experiment.facs_list.start_tabs_index = parsed.experiment.facs_list.start_tabs_index - 1;
     }
@@ -734,10 +735,6 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
         return a.from > b.from;
     });
 
-
-//     var colors = [
-//         "#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed", 'orange' , 'black' , 'green' , 'violet' , 'purple' , 'pink'
-//     ];
     colors = ['#000000']
 
     var total = 0;
@@ -989,10 +986,19 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     /* Last point to hover over */
                     if (point_to_edit) {
                         _.each(state.facs_lane.canvas_metadata_analysis.points, function (x) {
-                            if (point_to_edit.from == x.to && Math.abs(point_to_edit.y - x.y) == 5 && Math.abs(from - x.to) < sensitivity) {
+                            if (
+                                point_to_edit.from == x.to &&
+                                Math.abs(point_to_edit.y - x.y) == 5 &&
+                                Math.abs(from - x.to) < sensitivity
+                               )
+                            {
                                 x.to = to;
-                            }
-                            else if (point_to_edit.to == x.from && Math.abs(point_to_edit.y - x.y) < 16 && Math.abs(from - x.from) < sensitivity) {
+                            } else if (
+                                point_to_edit.to == x.from &&
+                                Math.abs(point_to_edit.y - x.y) < 16 &&
+                                Math.abs(from - x.from) < sensitivity
+                                )
+                            {
                                 x.from = to;
                             }
                         });

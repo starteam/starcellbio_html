@@ -26,17 +26,6 @@ scb_ex1.static.scb_ex_inner_dialog_add_assignment_builder = function (element, d
 
         var cell_treatments_array = [_.find( template.ui.add_multiple_dialog , function(e) {return e.id == spid })];
 
-
-//        var cell_treatments_array = [
-//            {
-//                cell_line: cell_line,
-//                treatment_list: {list: [
-//                    {drug_list: {list: [
-//                        {drug_id: 'nc', concentration_id: '0'}
-//                    ]}, temperature: '40', collection_id: state.source_state.collection_id, condition: state.source_state.condition}
-//                ]}}
-//        ];
-
         _.each(cell_treatments_array, function (eh) {
             parsed.experiment.cell_treatment_list.start(scb.utils.clone_and_clear(eh));
         });
@@ -224,31 +213,30 @@ scb_ex3.setup=function(state) {
         template: template
     }));
 }
-/*Ivan's version*/
-//scb_ex1.assignment_builder_add_multiple = function (state) {
-//    console.info(state);
-//    var workarea = state.workarea;
-//    var assignment = state.assignment;
-//    var experiment = state.experiment;
-//    var template = state.template;
-//    var onClose = state.close;
-//
-//    var dialog = $("<div class='scb_ex_dialog'></div>");
-//    dialog.html(scb_ex.dialog_assignment_builder({
-//        assignment: assignment,
-//        experiment: experiment,
-//        template: template
-//    }));
-//
-//    dialog.appendTo($(workarea));
-//    scb_ex1.register($(dialog), state);
-//
-//    var css = scb.utils.get(state, ['source_state', 'css']);
-//    _.each(css, function (v, k) {
-//        dialog.css(k, v);
-//    });
-//
-//    $('.scb_ex_dialog').draggable({handle: '.scb_ex_inner_dialog_title'})
-//
-//}
+scb_ex1.assignment_builder_add_multiple = function (state) {
+    console.info(state);
+    var workarea = state.workarea;
+    var assignment = state.assignment;
+    var experiment = state.experiment;
+    var template = state.template;
+    var onClose = state.close;
+
+    var dialog = $("<div class='scb_ex_dialog'></div>");
+    dialog.html(scb_ex.dialog_assignment_builder({
+        assignment: assignment,
+        experiment: experiment,
+        template: template
+    }));
+
+    dialog.appendTo($(workarea));
+    scb_ex1.register($(dialog), state);
+
+    var css = scb.utils.get(state, ['source_state', 'css']);
+    _.each(css, function (v, k) {
+        dialog.css(k, v);
+    });
+
+    $('.scb_ex_dialog').draggable({handle: '.scb_ex_inner_dialog_title'})
+
+}
 

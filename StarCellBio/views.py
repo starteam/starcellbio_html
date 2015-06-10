@@ -83,22 +83,19 @@ def get_model(request):
     response['Content-Type'] = 'text/javascript'
     return response
 
+
 def get_account_type(request):
+    """ Get user account type """
     account_type = ''
-    if (request.user.id):
+    if request.user.id:
         groups = request.user.groups
         if groups.count() != 0:
             account_type = groups.all()[0].name
     return account_type
 
+
 def get_user(request, **kwargs):
-    import pudb
-    # pudb.set_trace()
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    else:
-        account_type = ''
-    #added by Ivan
+
     account_type = get_account_type(request)
     
     retval = {'account_type': account_type, 'name': request.user.username}
@@ -172,16 +169,9 @@ def get_student_courses(request, **kwargs):
     obj.domain='starcellbio.mit.edu'
     obj.save()
 
-
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    else:
-        account_type = ''
-# Ivan's*/
-#     account_type = get_account_type(request)
+    account_type = get_account_type(request)
 
     alist = []
-    retval = []
     token1 = random.randrange(0, 1000000)
     if (UserCourse.objects.filter(user__username=request.user.username).count() > 0 and account_type == 'student'):
         usercourses = UserCourse.objects.filter(user=request.user)
@@ -460,17 +450,10 @@ def randomize_706_2014_ps1(request, assignment_data):
 def get_instructor_assignments(request, **kwargs):
     import ast
     import random
-    import pudb
-    # 	pudb.set_trace()
-    retval = []
     token1 = random.randrange(0, 1000000)
     return_list = []
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    else:
-        account_type = ''
-#Ivan's
-#    account_type = get_account_type(request)
+
+    account_type = get_account_type(request)
 
     if (account_type == 'instructor'):
         # 		pudb.set_trace()

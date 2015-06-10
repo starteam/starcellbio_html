@@ -94,23 +94,6 @@ scb.ui.static.InstructorDashboardView.register = function(workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_assignments_new_experiment', function (e) {
 		 $('.scb_f_experiments_step_link').get(0).click();
     });
-//    scb.utils.off_on(workarea, 'click', '.scb_f_dashboard_course_management_button', function (e) {
-//		 return scb.ui.static.InstructorDashboardView.scb_f_dashboard_course_management_button(this,workarea);
-//    });
-//    scb.utils.off_on(workarea, 'click', '.scb_f_dashboard_course_management_button_edit', function (e) {
-//		 return scb.ui.static.InstructorDashboardView.scb_f_dashboard_course_management_button(this,workarea);
-//    });
-//    scb.utils.off_on(workarea, 'click', '.scb_f_dashboard_course_management_button_delete', function (e) {
-//		 return scb.ui.static.InstructorDashboardView.scb_f_dashboard_course_management_button(this,workarea);
-//    });
-
-//     scb.utils.off_on(workarea, 'click', '.scb_f_dashboard_remove_assignment', function (e) {
-//     	 var parsed = scb.ui.static.InstructorDashboardView.parse(this);
-//     	 delete parsed.assignment;
-//     	 scb.ui.static.InstructorFrame.refresh();
-		 //Need to also update on server, as with all the other actions
-//     });
-
 };
 
 scb.ui.InstructorDashboardView = function scb_ui_InstructorDashboardView(gstate) {

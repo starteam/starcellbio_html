@@ -44,9 +44,6 @@ scb.template.ui_experiment_setup = function scb_template_ui_experiment_setup(dat
      */
     scb.Utils.initialize_accessor_field(self, data, 'actions', [], null, context);
 
-//    scb.Utils.initialize_accessor_field(self, data, 'techniques', [], null, context);
-//    scb.Utils.initialize_accessor_field(self, data, 'gel_types', [], null, context);
-
     scb.template.DEBUGGER(self, data, "scb.template.ui_experiment_setup");
 }
 
@@ -153,7 +150,7 @@ scb.template.CellLines = function scb_CellLines(data, context, parent) {
     });
 }
 
-scb.template.Drug = function scb_CellLine(data, context, parent) {
+scb.template.Drug = function scb_Drug(data, context, parent) {
     var self = this;
     scb.utils.value_hidden(self, '__data__', data);
     scb.utils.value_hidden(self, 'parent', parent);
@@ -342,7 +339,6 @@ scb.Template = function scb_Template(data, context, parent) {
      TODO: understand slide_parser
      scb_components_MicroscopyModelFactory.self.slide
      */
-//    scb.Utils.initialize_accessor_field(self, data, 'slide_parser', {}, scb.template.MicroscopyKinds, context);
     /*
      slides
      */
@@ -356,7 +352,6 @@ scb.Template = function scb_Template(data, context, parent) {
      */
     scb.Utils.initialize_accessor_field(self, data, 'model', {}, null, context);
     _.each(data, function (value, key) {
-//    	scb.Utils.initialize_accessor_field(self,data,key,null,null,context);
         if (!_.contains(_.keys(self), key)) {
             scb.utils.accessor2_custom(self, key, function () {
                 try {

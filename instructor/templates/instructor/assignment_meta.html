@@ -1,14 +1,44 @@
-{% extends "instructor/assignment_base.html" %}
+{% extends "instructor/assignment_sidebar.html" %}
 
-{% block content %}
-    Assignment: {{ assignment.name }} - Edit Meta
+{% block right_side %}
     {% if message %}
         {{ messsage }}
     {% endif %}
-    <div>
+    <div class='scb_s_experiment_setup_title'>Experiment Setup</div>
+    <div class='scb_s_experiment_setup_subtitle'>In this section, you will specify the strains and treatments available
+        for experimentation.
+    </div>
+    <br/>
+
+
+    <div class='scb_s_assignment_setup_course_name_heading'>2. Select the experimental variables you wish to define for
+        your treatment protocols. Select all that apply.
+    </div>
+    <br/>
+    <div class='scb_s_experiment_setup_checkbox_container'>
         <form method="post">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit Questions"/>
+            <div class='scb_s_experiment_setup_wrapper'>
+                {{ form.has_concentration }}Treatment Concentration
+            </div>
+            <div class='scb_s_experiment_setup_wrapper'>
+                {{ form.has_temperature }}Temperature
+
+            </div>
+            <div class='scb_s_experiment_setup_wrapper'>
+                {{ form.has_start_time }}Start Time
+
+            </div>
+            <div class='scb_s_experiment_setup_wrapper'>
+                {{ form.has_duration }} Treatment Duration
+
+            </div>
+            <div class='scb_s_experiment_setup_wrapper'>
+                {{ form.has_collection_time }} Collection Time
+            </div>
+
+            <input type="submit" class="scb_s_assignment_setup_save_button scb_s_navigation_button"
+                   value="SAVE AND CONTINUE &nbsp; &#9654;">
+
         </form>
     </div>
 {% endblock %}

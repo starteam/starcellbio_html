@@ -121,9 +121,7 @@ function starcellbio(jquery_selector_main, master_model) {
         }
         else if(get_user_result.account_type == 'preview') {
             master_model = master_model_preview;
-            $(jquery_selector_main).html( "This is preview" ) ;
-            //get_student_courses_result.list = fix_assignment_models(get_student_courses_result.list);
-		   	//master_model.assignments = get_student_courses_result;
+            $(jquery_selector_main).html( "This is preview" );
 			var init_model = master_model.assignments ? master_model : master_model_data;
 			window.master_model = init_model;
 			for (var i in init_model.assignments.list) {
