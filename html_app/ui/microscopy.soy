@@ -287,7 +287,7 @@
         <tr  role='row'  class='scb_s_microscopy_samples_table_tr {if $r.display_sample} scb_s_microscopy_row_border{/if}'>
             <td class='scb_s_microscopy_sample_checkbox scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' >
             {if $r.display_sample}
-                {if $r.cell_treatment.treatment_list.first.microscope[0] == 'na'}
+                {if $r.cell_treatment.treatment_list.first.conditions['na']}
                 {else}
                     <input
                         type="checkbox" class="scb_f_microscopy_sample_active"
