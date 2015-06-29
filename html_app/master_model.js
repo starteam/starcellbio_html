@@ -12661,7 +12661,7 @@ var __scb_sample_1 = {
                                                 drug_list: {list: [ {drug_id: 'nc', concentration_id: '0'}]},
                                                 temperature: '0',
                                                 conditions: {
-                                                    'na': ['na']
+                                                    'FLUOR': ['gfp']
                                                 }
                                             }
                                         ]
