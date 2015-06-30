@@ -107,7 +107,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		$('.scb_s_microscopy_if').prop('disabled', true);
 	$('.scb_s_microscopy_if').prop('checked', false);
 	}
-	else if(state.slide_type == 'IF'){
+	else if(state.slide_type == 'IF' || state.slide_type == 'FLUOR'){
 		if((state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.if_type ) || (!state.microscopy_lane.lens_map.action  && state.slides.length > 1 )){
 			if(state.microscopy_lane.current_slides.length != 1){
 				$('.scb_s_microscopy_if').prop('disabled', false);

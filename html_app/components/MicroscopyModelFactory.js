@@ -69,9 +69,14 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
                                 if (template.slide_parser) {
                                     slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
                                 } else {
-                                    slide_array = [
+                                    if (rule.if_type){
+                                        microscopy_lane.lens_map.if_type = rule.if_type;
+                                        slide_array=[{hash: rule.imgs_hash[index], if_type: rule.if_type}];
+                                    }else{
+                                        slide_array = [
                                         {hash: rule.imgs_hash[index]}
                                     ];
+                                    }
                                 }
 
                                 alreadySelected = false;

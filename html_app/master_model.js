@@ -13190,66 +13190,79 @@ var __scb_sample_1 = {
                         {
                             match: ['cell_line'],
                             cell_line: 'no-gfp',
+                            if_type: 'green',
                             imgs_hash: ['bo']
                         },
                         { //nuc and cyto
                             match: ['cell_line'],
                             cell_line: 'gfp',
+                            if_type: 'green',
                             imgs_hash:['1','2','3','4','5','6','7','8','9','10','11']
                         },
                         {//er
                             match: ['cell_line'],
                             cell_line: 'gfp-pa',
+                            if_type: 'green',
                             imgs_hash:['12','13','14','15','16']
                         },
                         {//nucleus
                             match: ['cell_line'],
                             cell_line: 'gfp-pb',
+                            if_type: 'green',
                             imgs_hash:['17','18','19','20','21','22','23','24','25','26','27','28']
                         },
                         {//pm
                             match: ['cell_line'],
                             cell_line: 'gfp-pc',
+                            if_type: 'green',
                             imgs_hash:['29','30','31','32','33','34','35']
                         },
                         {//cyto
                             match: ['cell_line'],
                             cell_line: 'gfp-pd',
+                            if_type: 'green',
                             imgs_hash:['36','37','38','39','40','41','42','45']
                         },
                         {//pm
                             match: ['cell_line'],
                             cell_line: 'gfp-ma',
+                            if_type: 'green',
                             imgs_hash:['29','30','31','32','33','34','35']
                         },
                         {//nucleus
                             match: ['cell_line'],
                             cell_line: 'gfp-mb',
+                            if_type: 'green',
                             imgs_hash:['17','18','19','20','21','22','23','24','25','26','27','28']
                         },
                         {//nucleus
                             match: ['cell_line'],
                             cell_line: 'gfp-nuc',
+                            if_type: 'green',
                             imgs_hash:['17','18','19','20','21','22','23','24','25','26','27','28']
                         },
                         {//cyto
                             match: ['cell_line'],
                             cell_line: 'gfp-cyto',
+                            if_type: 'green',
                             imgs_hash:['36','37','38','39','40','41','42','45']
                         },
                         {//pm
                             match: ['cell_line'],
                             cell_line: 'gfp-pm',
+                            if_type: 'green',
                             imgs_hash:['29','30','31','32','33','34','35']
                         },
                         {//er
                             match: ['cell_line'],
                             cell_line: 'gfp-er',
+                            if_type: 'green',
                             imgs_hash:['12','13','14','15','16']
                         },
                         {//nm
                             match: ['cell_line'],
                             cell_line: 'gfp-nm',
+                            if_type: 'green',
                             imgs_hash:['46','47','48','49','50']
                         }
 
@@ -17895,6 +17908,7 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'egfr',
+                            if_type: 'green',
                             imgs_hash:['1','2','3','4','5','6']
                         },
                 		{
@@ -17903,6 +17917,7 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'pm',
+                            if_type: 'green',
                             imgs_hash:['1','2','3','4','5','6']
                         },
                         {
@@ -17911,6 +17926,7 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'cyto',
+                            if_type: 'green',
                             imgs_hash: ['7','8','9','10','11','12','13','14','15','16']
                         },
                         {
@@ -17919,6 +17935,7 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'nuc',
+                            if_type: 'green',
                             imgs_hash:['17','18','19','20','21','22','23','24','25','26','27','28']
                         },
                         {
@@ -17927,6 +17944,7 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'er',
+                            if_type: 'green',
                             imgs_hash:['29','30','31','32','33']
                         },
                         {
@@ -17935,6 +17953,7 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'nm',
+                            if_type: 'green',
                             imgs_hash:['34','35','36','37','38']
                         },
                         {
@@ -17943,6 +17962,7 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'egfr',
+                            if_type: 'green',
                             imgs_hash:['1','2','3','4','5','6']
                         },
                         {
@@ -17951,6 +17971,7 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'egfr',
+                            if_type: 'green',
                             imgs_hash:['1','2','3','4','5','6']
                         }
                 		]
