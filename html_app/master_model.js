@@ -9480,14 +9480,32 @@ var __june_2014_usability = {
                             {
                                 match: ['cell_line'],
                                 cell_line: 'wt',
-                                imgs_hash: [ 'img2', 'img3', 'img4', 'img5', 'img6', 'img7', 'img8', 'img9', 'img10']
+                                imgs_hash: [
+                                    [{hash: 'img2', mag: '20x' }],
+                                    [{hash: 'img3', mag: '20x' }],
+                                    [{hash: 'img4', mag: '40x' }],
+                                    [{hash: 'img5', mag: '20x' }],
+                                    [{hash: 'img6', mag: '20x' }],
+                                    [{hash: 'img7', mag: '4x' }],
+                                    [{hash: 'img8', mag: '4x' }],
+                                    [{hash: 'img9', mag: '4x' }]
+                                ]
                             },
                             /* Conditional KO */
                             {
                                 match: ['cell_line', 'drug_id'],
                                 cell_line: 'cko',
                                 drug_id: 'ae',
-                                imgs_hash: [ 'img2', 'img3', 'img4', 'img5', 'img6', 'img7', 'img8', 'img9', 'img10']
+                                imgs_hash: [
+                                    [{hash: 'img2', mag: '20x' }],
+                                    [{hash: 'img3', mag: '20x' }],
+                                    [{hash: 'img4', mag: '40x' }],
+                                    [{hash: 'img5', mag: '20x' }],
+                                    [{hash: 'img6', mag: '20x' }],
+                                    [{hash: 'img7', mag: '4x' }],
+                                    [{hash: 'img8', mag: '4x' }],
+                                    [{hash: 'img9', mag: '4x' }]
+                                ]
                             },
 
                             { /* 3 months*/
@@ -9497,7 +9515,11 @@ var __june_2014_usability = {
                                 collection_id: '3 m',
                                 kind: 'Dye',
                                 conditions: 'HnE',
-                                imgs_hash: ['img11', 'img12', 'img13']
+                                imgs_hash: [
+                                    [{hash: 'img11', mag: '20x' }],
+                                    [{hash: 'img12', mag: '10x' }],
+                                    [{hash: 'img13', mag: '20x' }]
+                                ]
                             },
                             { /* 6 months*/
                                 match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
@@ -9506,7 +9528,17 @@ var __june_2014_usability = {
                                 collection_id: '6 m',
                                 kind: 'Dye',
                                 conditions: 'HnE',
-                                imgs_hash: ['img14', 'img15', 'img16', 'img17', 'img18', 'img19', 'img20', 'img21', 'img22']
+                                imgs_hash: [
+                                    [{hash: 'img14', mag: '40x' }],
+                                    [{hash: 'img15', mag: '20x' }],
+                                    [{hash: 'img16', mag: '40x' }],
+                                    [{hash: 'img17', mag: '40x' }],
+                                    [{hash: 'img18', mag: '20x' }],
+                                    [{hash: 'img19', mag: '40x' }],
+                                    [{hash: 'img20', mag: '40x' }],
+                                    [{hash: 'img21', mag: '20x' }],
+                                    [{hash: 'img22', mag: '40x' }]
+                                ]
                             },
                             {
                                 match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
@@ -9515,7 +9547,13 @@ var __june_2014_usability = {
                                 collection_id: '6 m',
                                 kind: 'IHC',
                                 conditions: 'cgrp',
-                                imgs_hash: ['img63', 'img64', 'img65', 'img66', 'img67']
+                                imgs_hash: [
+                                    [{hash: 'img63', mag: '20x' }],
+                                    [{hash: 'img64', mag: '20x' }],
+                                    [{hash: 'img65', mag: '20x' }],
+                                    [{hash: 'img66', mag: '20x' }],
+                                    [{hash: 'img67', mag: '20x' }]
+                                ]
                             },
                             {
                                 match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
@@ -9524,7 +9562,13 @@ var __june_2014_usability = {
                                 collection_id: '6 m',
                                 kind: 'IHC',
                                 conditions: 'ki67',
-                                imgs_hash: ['img25', 'img26', 'img28', 'img32', 'img31']
+                                imgs_hash: [
+                                    [{hash: 'img25', mag: '20x' }],
+                                    [{hash: 'img26', mag: '40x' }],
+                                    [{hash: 'img28', mag: '40x' }],
+                                    [{hash: 'img31', mag: '20x' }],
+                                    [{hash: 'img32', mag: '40x' }]
+                                ]
                             },
                             /* 1 year */
                             {
@@ -9534,7 +9578,11 @@ var __june_2014_usability = {
                                 collection_id: '1 yr',
                                 kind: 'IHC',
                                 conditions: 'cgrp',
-                                imgs_hash: ['img60', 'img61', 'img62']
+                                imgs_hash: [
+                                    [{hash: 'img60', mag: '10x' }],
+                                    [{hash: 'img61', mag: '10x' }],
+                                    [{hash: 'img62', mag: '20x' }]
+                                ]
                             },
 
                             {
@@ -9544,7 +9592,16 @@ var __june_2014_usability = {
                                 collection_id: '1 yr',
                                 kind: 'Dye',
                                 conditions: 'HnE',
-                                imgs_hash: ['img33', 'img34', 'img35', 'img36', 'img37', 'img38', 'img39', 'img40']
+                                imgs_hash: [
+                                    [{hash: 'img33', mag: '20x' }],
+                                    [{hash: 'img34', mag: '20x' }],
+                                    [{hash: 'img35', mag: '4x' }],
+                                    [{hash: 'img36', mag: '10x' }],
+                                    [{hash: 'img37', mag: '20x' }],
+                                    [{hash: 'img38', mag: '20x' }],
+                                    [{hash: 'img39', mag: '20x' }],
+                                    [{hash: 'img40', mag: '20x' }]
+                                ]
                             },
                             {
                                 match: ['cell_line', 'drug_id', 'collection_id', 'kind', 'conditions'],
@@ -9553,7 +9610,23 @@ var __june_2014_usability = {
                                 collection_id: '1 yr',
                                 kind: 'IF',
                                 conditions: 'rgb',
-                                imgs_hash: ['img41', 'img42', 'img43', 'img44', 'img45', 'img46', 'img47', 'img48', 'img49', 'img50']
+                                imgs_hash: [
+                                    [{hash: 'img41', mag: '60x', if_type: 'blue' },
+                                     {hash: 'img42', mag: '60x', if_type: 'green' },
+                                     {hash: 'img43', mag: '60x', if_type: 'merge' },
+                                     {hash: 'img44', mag: '60x', if_type: 'red' }],
+                                    [{hash: 'img45', mag: '60x', if_type: 'merge' }],
+                                    [{hash: 'img46', mag: '60x', if_type: 'merge' }],
+                                    [{hash: 'img47', mag: '60x', if_type: 'blue' },
+                                     {hash: 'img48', mag: '60x', if_type: 'green' },
+                                     {hash: 'img49', mag: '60x', if_type: 'merge' },
+                                     {hash: 'img50', mag: '60x', if_type: 'red' }],
+                                    [{hash: 'img51', mag: '60x', if_type: 'blue' },
+                                     {hash: 'img52', mag: '60x', if_type: 'green' },
+                                     {hash: 'img53', mag: '60x', if_type: 'merge' },
+                                     {hash: 'img54', mag: '60x', if_type: 'red' }]
+
+                                ]
                             }
 
                         ]
@@ -13190,80 +13263,178 @@ var __scb_sample_1 = {
                         {
                             match: ['cell_line'],
                             cell_line: 'no-gfp',
-                            if_type: 'green',
-                            imgs_hash: ['bo']
+                            imgs_hash: [[{hash: 'bo'}]]
                         },
                         { //nuc and cyto
                             match: ['cell_line'],
                             cell_line: 'gfp',
-                            if_type: 'green',
-                            imgs_hash:['1','2','3','4','5','6','7','8','9','10','11']
+                            imgs_hash:[
+                                [{hash: '1', if_type:'green'}],
+                                [{hash: '2', if_type:'green'}],
+                                [{hash: '3', if_type:'green'}],
+                                [{hash: '4', if_type:'green'}],
+                                [{hash: '5', if_type:'green'}],
+                                [{hash: '6', if_type:'green'}],
+                                [{hash: '7', if_type:'green'}],
+                                [{hash: '8', if_type:'green'}],
+                                [{hash: '9', if_type:'green'}],
+                                [{hash: '10', if_type:'green'}],
+                                [{hash: '11', if_type:'green'}]
+                            ]
                         },
                         {//er
                             match: ['cell_line'],
                             cell_line: 'gfp-pa',
-                            if_type: 'green',
-                            imgs_hash:['12','13','14','15','16']
+                            imgs_hash: [
+                                [{hash: '12', if_type:'green'}],
+                                [{hash: '13', if_type:'green'}],
+                                [{hash: '14', if_type:'green'}],
+                                [{hash: '15', if_type:'green'}],
+                                [{hash: '16', if_type:'green'}]
+                            ]
                         },
                         {//nucleus
                             match: ['cell_line'],
                             cell_line: 'gfp-pb',
-                            if_type: 'green',
-                            imgs_hash:['17','18','19','20','21','22','23','24','25','26','27','28']
+                            imgs_hash: [
+                                [{hash: '17', if_type:'green'}],
+                                [{hash: '18', if_type:'green'}],
+                                [{hash: '19', if_type:'green'}],
+                                [{hash: '20', if_type:'green'}],
+                                [{hash: '21', if_type:'green'}],
+                                [{hash: '22', if_type:'green'}],
+                                [{hash: '23', if_type:'green'}],
+                                [{hash: '24', if_type:'green'}],
+                                [{hash: '25', if_type:'green'}],
+                                [{hash: '26', if_type:'green'}],
+                                [{hash: '27', if_type:'green'}],
+                                [{hash: '28', if_type:'green'}]
+                            ]
                         },
                         {//pm
                             match: ['cell_line'],
                             cell_line: 'gfp-pc',
-                            if_type: 'green',
-                            imgs_hash:['29','30','31','32','33','34','35']
+                            imgs_hash: [
+                                [{hash: '29', if_type:'green'}],
+                                [{hash: '30', if_type:'green'}],
+                                [{hash: '31', if_type:'green'}],
+                                [{hash: '32', if_type:'green'}],
+                                [{hash: '33', if_type:'green'}],
+                                [{hash: '34', if_type:'green'}],
+                                [{hash: '35', if_type:'green'}]
+                            ]
                         },
                         {//cyto
                             match: ['cell_line'],
                             cell_line: 'gfp-pd',
-                            if_type: 'green',
-                            imgs_hash:['36','37','38','39','40','41','42','45']
+                            imgs_hash: [
+                                [{hash: '36', if_type:'green'}],
+                                [{hash: '37', if_type:'green'}],
+                                [{hash: '38', if_type:'green'}],
+                                [{hash: '39', if_type:'green'}],
+                                [{hash: '40', if_type:'green'}],
+                                [{hash: '41', if_type:'green'}],
+                                [{hash: '42', if_type:'green'}]
+                                [{hash: '45', if_type:'green'}]
+                            ]
                         },
                         {//pm
                             match: ['cell_line'],
                             cell_line: 'gfp-ma',
-                            if_type: 'green',
-                            imgs_hash:['29','30','31','32','33','34','35']
+                            imgs_hash: [
+                                [{hash: '29', if_type:'green'}],
+                                [{hash: '30', if_type:'green'}],
+                                [{hash: '31', if_type:'green'}],
+                                [{hash: '32', if_type:'green'}],
+                                [{hash: '33', if_type:'green'}],
+                                [{hash: '34', if_type:'green'}],
+                                [{hash: '35', if_type:'green'}]
+                            ]
                         },
                         {//nucleus
                             match: ['cell_line'],
                             cell_line: 'gfp-mb',
-                            if_type: 'green',
-                            imgs_hash:['17','18','19','20','21','22','23','24','25','26','27','28']
+                            imgs_hash:[
+                                [{hash: '17', if_type:'green'}],
+                                [{hash: '18', if_type:'green'}],
+                                [{hash: '19', if_type:'green'}],
+                                [{hash: '20', if_type:'green'}],
+                                [{hash: '21', if_type:'green'}],
+                                [{hash: '22', if_type:'green'}],
+                                [{hash: '23', if_type:'green'}],
+                                [{hash: '24', if_type:'green'}],
+                                [{hash: '25', if_type:'green'}],
+                                [{hash: '26', if_type:'green'}],
+                                [{hash: '27', if_type:'green'}],
+                                [{hash: '28', if_type:'green'}]
+                            ]
                         },
                         {//nucleus
                             match: ['cell_line'],
                             cell_line: 'gfp-nuc',
-                            if_type: 'green',
-                            imgs_hash:['17','18','19','20','21','22','23','24','25','26','27','28']
+                            imgs_hash:[
+                                [{hash: '17', if_type:'green'}],
+                                [{hash: '18', if_type:'green'}],
+                                [{hash: '19', if_type:'green'}],
+                                [{hash: '20', if_type:'green'}],
+                                [{hash: '21', if_type:'green'}],
+                                [{hash: '22', if_type:'green'}],
+                                [{hash: '23', if_type:'green'}],
+                                [{hash: '24', if_type:'green'}],
+                                [{hash: '25', if_type:'green'}],
+                                [{hash: '26', if_type:'green'}],
+                                [{hash: '27', if_type:'green'}],
+                                [{hash: '28', if_type:'green'}]
+                            ]
                         },
                         {//cyto
                             match: ['cell_line'],
                             cell_line: 'gfp-cyto',
-                            if_type: 'green',
-                            imgs_hash:['36','37','38','39','40','41','42','45']
+                            imgs_hash: [
+                                [{hash: '36', if_type:'green'}],
+                                [{hash: '37', if_type:'green'}],
+                                [{hash: '38', if_type:'green'}],
+                                [{hash: '39', if_type:'green'}],
+                                [{hash: '40', if_type:'green'}],
+                                [{hash: '41', if_type:'green'}],
+                                [{hash: '42', if_type:'green'}]
+                                [{hash: '45', if_type:'green'}]
+                            ]
                         },
                         {//pm
                             match: ['cell_line'],
                             cell_line: 'gfp-pm',
-                            if_type: 'green',
-                            imgs_hash:['29','30','31','32','33','34','35']
+                            imgs_hash: [
+                                [{hash: '29', if_type:'green'}],
+                                [{hash: '30', if_type:'green'}],
+                                [{hash: '31', if_type:'green'}],
+                                [{hash: '32', if_type:'green'}],
+                                [{hash: '33', if_type:'green'}],
+                                [{hash: '34', if_type:'green'}],
+                                [{hash: '35', if_type:'green'}]
+                            ]
                         },
                         {//er
                             match: ['cell_line'],
                             cell_line: 'gfp-er',
-                            if_type: 'green',
-                            imgs_hash:['12','13','14','15','16']
+                            imgs_hash: [
+                                [{hash: '12', if_type:'green'}],
+                                [{hash: '13', if_type:'green'}],
+                                [{hash: '14', if_type:'green'}],
+                                [{hash: '15', if_type:'green'}],
+                                [{hash: '16', if_type:'green'}]
+                            ]
                         },
                         {//nm
                             match: ['cell_line'],
                             cell_line: 'gfp-nm',
-                            if_type: 'green',
-                            imgs_hash:['46','47','48','49','50']
+                            imgs_hash: [
+                                [{hash: '46', if_type:'green'}],
+                                [{hash: '47', if_type:'green'}],
+                                [{hash: '48', if_type:'green'}],
+                                [{hash: '49', if_type:'green'}],
+                                [{hash: '50', if_type:'green'}]
+                            ]
                         }
 
                     ]
@@ -17894,7 +18065,7 @@ var __scb_sample_3 = {
                                 cell_line: 'His-EGFR-M2-FLAG',
                                 drug_id: 'growth_mediaProK',
                                 shape: 'graph-b'
-                            },
+                            }
                         ]
 
                     }
@@ -17904,12 +18075,28 @@ var __scb_sample_3 = {
                         'parser_simple':[
                         {
                             match: ['cell_line', 'drug_id', 'kind','conditions'],
+                            cell_line: 'EGFR Null',
+                            drug_id: 'growth_media',
+                            kind: 'IF',
+                            conditions: 'egfr',
+                            imgs_hash:[
+                                [{hash:'bo', if_type: 'green'}]
+                            ]
+                        },
+                        {
+                            match: ['cell_line', 'drug_id', 'kind','conditions'],
                             cell_line: 'WT-EGFR',
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'egfr',
-                            if_type: 'green',
-                            imgs_hash:['1','2','3','4','5','6']
+                            imgs_hash:[
+                                [{hash:'1', if_type: 'green'}],
+                                [{hash:'2', if_type: 'green'}],
+                                [{hash:'3', if_type: 'green'}],
+                                [{hash:'4', if_type: 'green'}],
+                                [{hash:'5', if_type: 'green'}],
+                                [{hash:'6', if_type: 'green'}]
+                            ]
                         },
                 		{
                             match: ['cell_line', 'drug_id', 'kind','conditions'],
@@ -17917,8 +18104,14 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'pm',
-                            if_type: 'green',
-                            imgs_hash:['1','2','3','4','5','6']
+                            imgs_hash:[
+                                [{hash:'1', if_type: 'green'}],
+                                [{hash:'2', if_type: 'green'}],
+                                [{hash:'3', if_type: 'green'}],
+                                [{hash:'4', if_type: 'green'}],
+                                [{hash:'5', if_type: 'green'}],
+                                [{hash:'6', if_type: 'green'}]
+                            ]
                         },
                         {
                             match: ['cell_line', 'drug_id', 'kind','conditions'],
@@ -17926,8 +18119,19 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'cyto',
-                            if_type: 'green',
-                            imgs_hash: ['7','8','9','10','11','12','13','14','15','16']
+                            imgs_hash: [
+                                [{hash:'7', if_type: 'green'}],
+                                [{hash:'8', if_type: 'green'}],
+                                [{hash:'9', if_type: 'green'}],
+                                [{hash:'10', if_type: 'green'}],
+                                [{hash:'11', if_type: 'green'}],
+                                [{hash:'12', if_type: 'green'}],
+                                [{hash:'13', if_type: 'green'}],
+                                [{hash:'14', if_type: 'green'}],
+                                [{hash:'15', if_type: 'green'}],
+                                [{hash:'16', if_type: 'green'}]
+
+                            ]
                         },
                         {
                             match: ['cell_line', 'drug_id', 'kind','conditions'],
@@ -17935,8 +18139,18 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'nuc',
-                            if_type: 'green',
-                            imgs_hash:['17','18','19','20','21','22','23','24','25','26','27','28']
+                            imgs_hash:[
+                                [{hash:'17', if_type: 'green'}],
+                                [{hash:'18', if_type: 'green'}],
+                                [{hash:'19', if_type: 'green'}],
+                                [{hash:'20', if_type: 'green'}],
+                                [{hash:'21', if_type: 'green'}],
+                                [{hash:'22', if_type: 'green'}],
+                                [{hash:'23', if_type: 'green'}],
+                                [{hash:'24', if_type: 'green'}],
+                                [{hash:'25', if_type: 'green'}]
+                            ]
+
                         },
                         {
                             match: ['cell_line', 'drug_id', 'kind','conditions'],
@@ -17944,8 +18158,13 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'er',
-                            if_type: 'green',
-                            imgs_hash:['29','30','31','32','33']
+                            imgs_hash: [
+                                [{hash:'29', if_type: 'green'}],
+                                [{hash:'30', if_type: 'green'}],
+                                [{hash:'31', if_type: 'green'}],
+                                [{hash:'32', if_type: 'green'}],
+                                [{hash:'33', if_type: 'green'}]
+                            ]
                         },
                         {
                             match: ['cell_line', 'drug_id', 'kind','conditions'],
@@ -17953,8 +18172,14 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'nm',
-                            if_type: 'green',
-                            imgs_hash:['34','35','36','37','38']
+                            imgs_hash: [
+                                [{hash:'34', if_type: 'green'}],
+                                [{hash:'35', if_type: 'green'}],
+                                [{hash:'36', if_type: 'green'}],
+                                [{hash:'37', if_type: 'green'}],
+                                [{hash:'38', if_type: 'green'}]
+                            ]
+
                         },
                         {
                             match: ['cell_line', 'drug_id', 'kind','conditions'],
@@ -17962,8 +18187,14 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'egfr',
-                            if_type: 'green',
-                            imgs_hash:['1','2','3','4','5','6']
+                            imgs_hash:[
+                                [{hash:'1', if_type: 'green'}],
+                                [{hash:'2', if_type: 'green'}],
+                                [{hash:'3', if_type: 'green'}],
+                                [{hash:'4', if_type: 'green'}],
+                                [{hash:'5', if_type: 'green'}],
+                                [{hash:'6', if_type: 'green'}]
+                            ]
                         },
                         {
                             match: ['cell_line', 'drug_id', 'kind','conditions'],
@@ -17971,8 +18202,14 @@ var __scb_sample_3 = {
                             drug_id: 'growth_media',
                             kind: 'IF',
                             conditions: 'egfr',
-                            if_type: 'green',
-                            imgs_hash:['1','2','3','4','5','6']
+                            imgs_hash:[
+                                [{hash:'1', if_type: 'green'}],
+                                [{hash:'2', if_type: 'green'}],
+                                [{hash:'3', if_type: 'green'}],
+                                [{hash:'4', if_type: 'green'}],
+                                [{hash:'5', if_type: 'green'}],
+                                [{hash:'6', if_type: 'green'}]
+                            ]
                         }
                 		]
                     }
