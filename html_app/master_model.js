@@ -5931,7 +5931,7 @@ var __assignment_706_2014 = {
 				name:'Fluorescence',
 				conditions: {
 					'rgb': {name: 'GFP (green)',
-					short_name: 'Fluorescence: GFP'} 
+					short_name: 'G:GFP'}
 				}
 			},
             'na': {
@@ -10232,7 +10232,7 @@ var __sutd_intro_biology = {
 				name:'Fluorescence',
 				conditions: {
 					'rgb': {name: 'GFP (green)',
-					short_name: 'Fluorescence: GFP'} 
+					short_name: 'G:GFP'}
 				}
 			},
             'na': {
@@ -13116,7 +13116,7 @@ var __scb_sample_1 = {
                 name: 'Fluorescence',
                 conditions: {
                     'gfp': {name: 'GFP (green)',
-                        short_name: 'GFP:green'}
+                        short_name: 'G:GFP'}
                 }
             },
             'na': {
