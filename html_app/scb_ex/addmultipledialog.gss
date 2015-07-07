@@ -50,7 +50,7 @@
 .scb_ex_inner_dialog {
     opacity: 5;
     width: 75%;
-    height: 75%;
+    max-height: 75%;
     overflow: auto;
     margin-top: 12%;
     margin-left: 12%;
@@ -74,7 +74,7 @@
 
 
 .scb_ex_inner_dialog_body {
-    padding:20px;
+    padding: 20px;
     padding-top: 0px;
 }
 
@@ -88,15 +88,26 @@
     font-family: sourcesanspro-semibold;
 }
 
-
-.scb_ex_inner_dialog_cancel {
-    width:115px;
-    margin-left: 10px;
-    margin-right:10px;
+.scb_ex_inner_dialog_body .scb_s_gray_button {
+    width: 115px;
     margin-top: 10px;
-
 }
 
+.scb_ex_inner_dialog_add, .scb_ex_inner_dialog_cancel {
+    margin: 0 10px 10px 10px;
+
+}
+.scb_add_samples_add{
+    float: right;
+    position: relative;
+}
+.scb_add_samples_cancel{
+    float: right;
+    position: relative;
+}
+
+
 .scb_ex_button_float {
-    display:block;
+    position: relative;
+    left: 0;
 }
