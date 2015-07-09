@@ -12649,7 +12649,7 @@ var __scb_sample_1 = {
                             treatment_id:'nc',
                             cells: [
                                 {kind: 'checkbox', name: "growth_media", treatment_id: 'nc'},
-                                {kind: 'text', text: 'No GFP'},
+                                {kind: 'text', text: 'No-GFP'},
                                 {kind: 'text', text: 'Growth Media'}
                             ],
                             cell_treatments: {
@@ -12709,7 +12709,7 @@ var __scb_sample_1 = {
                             treatment_id:'nc',
                             cells: [
                                 {kind: 'checkbox', name: "growth_media", treatment_id: 'nc'},
-                                {kind: 'text', text: 'GFP-Protein A'},
+                                {kind: 'text', text: 'GFP-ProA'},
                                 {kind: 'text', text: 'Growth Media'}
                             ],
                             cell_treatments: {
@@ -12739,7 +12739,7 @@ var __scb_sample_1 = {
                             treatment_id:'nc',
                             cells: [
                                 {kind: 'checkbox', name: "growth_media", treatment_id: 'nc'},
-                                {kind: 'text', text: 'GFP-Protein B'},
+                                {kind: 'text', text: 'GFP-ProB'},
                                 {kind: 'text', text: 'Growth Media'}
                             ],
                             cell_treatments: {
@@ -12769,7 +12769,7 @@ var __scb_sample_1 = {
                             treatment_id:'nc',
                             cells: [
                                 {kind: 'checkbox', name: "growth_media", treatment_id: 'nc'},
-                                {kind: 'text', text: 'GFP-Protein C'},
+                                {kind: 'text', text: 'GFP-ProC'},
                                 {kind: 'text', text: 'Growth Media'}
                             ],
                             cell_treatments: {
@@ -12799,7 +12799,7 @@ var __scb_sample_1 = {
                             treatment_id:'nc',
                             cells: [
                                 {kind: 'checkbox', name: "growth_media", treatment_id: 'nc'},
-                                {kind: 'text', text: 'GFP-Protein D'},
+                                {kind: 'text', text: 'GFP-ProD'},
                                 {kind: 'text', text: 'Growth Media'}
                             ],
                             cell_treatments: {
@@ -12829,7 +12829,7 @@ var __scb_sample_1 = {
                             treatment_id:'nc',
                             cells: [
                                 {kind: 'checkbox', name: "growth_media", treatment_id: 'nc'},
-                                {kind: 'text', text: 'GFP-Mutant A'},
+                                {kind: 'text', text: 'GFP-Mut ProA'},
                                 {kind: 'text', text: 'Growth Media'}
                             ],
                             cell_treatments: {
@@ -12859,7 +12859,7 @@ var __scb_sample_1 = {
                             treatment_id:'nc',
                             cells: [
                                 {kind: 'checkbox', name: "growth_media", treatment_id: 'nc'},
-                                {kind: 'text', text: 'GFP-Mutant B'},
+                                {kind: 'text', text: 'GFP-Mut ProB'},
                                 {kind: 'text', text: 'Growth Media'}
                             ],
                             cell_treatments: {
@@ -13069,28 +13069,28 @@ var __scb_sample_1 = {
 
         cell_lines: {
             'no-gfp': {
-                name: 'No GFP'
+                name: 'No-GFP'
             },
             'gfp': {
                 name: 'GFP'
             },
             'gfp-pa': {
-                name: 'GFP-Protein A'
+                name: 'GFP-ProA'
             },
             'gfp-pb': {
-                name: 'GFP-Protein B'
+                name: 'GFP-ProB'
             },
             'gfp-pc': {
-                name: 'GFP-Protein C'
+                name: 'GFP-ProC'
             },
             'gfp-pd': {
-                name: 'GFP-Protein D'
+                name: 'GFP-ProD'
             },
             'gfp-ma': {
-                name: 'GFP-Mutant A'
+                name: 'GFP-Mut ProA'
             },
             'gfp-mb': {
-                name: 'GFP-Mutant B'
+                name: 'GFP-Mut ProB'
             },
             'gfp-nuc': {
                 name: 'GFP-Nuc'
