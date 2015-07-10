@@ -793,8 +793,10 @@ var __scb_sample_1 = {
                                 ],
                                 [
                                     {hash: '42', if_type: 'green'}
+                                ],
+                                [
+                                    {hash: '45', if_type: 'green'}
                                 ]
-                                    [{hash: '45', if_type: 'green'}]
                             ]
                         },
                         {//pm
@@ -932,8 +934,10 @@ var __scb_sample_1 = {
                                 ],
                                 [
                                     {hash: '42', if_type: 'green'}
+                                ],
+                                [
+                                    {hash: '45', if_type: 'green'}
                                 ]
-                                    [{hash: '45', if_type: 'green'}]
                             ]
                         },
                         {//pm
@@ -1413,11 +1417,8 @@ var __scb_sample_2 = {
                 name: 'Mouse anti-Protein X',
                 secondary: ['r'],
                 marks: [
-
-                    {weight: 82, intensity: 'low'},
-                    {weight: 82, intensity: 'none'},
-                    {weight: 84, intensity: 'high'},
-                    {weight: 84, intensity: 'none'}
+                    {weight: 82, intensity: 0},
+                    {weight: 84, intensity: 0}
                 ],
                 gel_name: 'apX'
             },
@@ -1487,424 +1488,437 @@ var __scb_sample_2 = {
 
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmBuf',
                             cell_line: 'nt',
                             marks: [
                                 {    //antibody 1
                                     name: 'Mouse anti-Protein X',
-                                    weight: 82,
-                                    intensity: 'low',
+                                    weight: 82,//84
+                                    intensity: 0.5,//none
                                     primary_anti_body: ['1']
                                 },
-                                {
-                                    name: 'Mouse anti-Protein X',
-                                    weight: 84,
-                                    intensity: 'none',
-                                    primary_anti_body: ['1']
-                                },
+
                                 {    //antibody 2
                                     name: 'Rabbit anti-Protein Y',
-                                    weight: 230,
-                                    intensity: 'low',
-                                    primary_anti_body: ['2']
-                                },
-                                {
-                                    name: 'Rabbit anti-Protein Y',
-                                    weight: 232,
-                                    intensity: 'none',
+                                    weight: 230,//232
+                                    intensity: 0.5,//none
                                     primary_anti_body: ['2']
                                 },
                                 {    //antibody 3
                                     name: 'Mouse anti-6xHis',
-                                    weight: 40,
-                                    intensity: 'none',
+                                    weight: 40,//84,232
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
-                                {
-                                    name: 'Mouse anti-6xHis',
-                                    weight: 84,
-                                    intensity: 'none',
-                                    primary_anti_body: ['3']
-                                },
-                                {
-                                    name: 'Mouse anti-6xHis',
-                                    weight: 232,
-                                    intensity: 'none',
-                                    primary_anti_body: ['3']
-                                },
+
                                 {   //antibody 4
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'none',//none
-                                    primary_anti_body: ['4']
-                                },
-                                {
-                                    name: 'Rabbit anti-FLAG',
-                                    weight: 232,
-                                    intensity: 'none',
+                                    intensity: 0,//none
                                     primary_anti_body: ['4']
                                 },
                                 {    //antibody 5
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
 
                             ]
                         },
+
+
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmProK',
                             cell_line: 'nt',
-                            temperature: '40',
                             marks: [
                                 {
                                     name: 'Mouse anti-Protein X',
-                                    weight: 82,
-                                    intensity: 'none',
+                                    weight: 82,//84
+                                    intensity: 0,//none
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Rabbit anti-Protein Y',
-                                    weight: 230,
-                                    intensity: 'low',
+                                    weight: 230,//232
+                                    intensity: 0,//none
                                     primary_anti_body: ['2']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
-                                    weight: 40,
-                                    intensity: 'none',
+                                    weight: 40,//84,232
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 {
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['4']
                                 },
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
                             ]
                         },
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmBuf',
                             cell_line: 'proX-Null',
-                            temperature: '40',
                             marks: [
                                 {
                                     name: 'Mouse anti-Protein X',
                                     weight: 82,//84
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Rabbit anti-Protein Y',
                                     weight: 230,//232
-                                    intensity: 'low',//none
+                                    intensity: 0.5,//none
                                     primary_anti_body: ['2']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 40,//84,323
-                                    intensity: 'none',//none,none
+                                    intensity: 0,//none,none
                                     primary_anti_body: ['3']
                                 },
                                 {
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['4']
                                 },
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
                             ]
                         },
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmProK',
                             cell_line: 'proX-Null',
-                            temperature: '40',
                             marks: [
                                 {
                                     name: 'Mouse anti-Protein X',
                                     weight: 82,//84
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Rabbit anti-Protein Y',
                                     weight: 230,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['2']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 40,//84,232
-                                    intensity: 'none',//none,none
+                                    intensity: 0,//none,none
                                     primary_anti_body: ['3']
                                 },
                                 {
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['4']
                                 },
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
                             ]
                         },
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmBuf',
                             cell_line: 'proY-Null',
-                            temperature: '40',
                             marks: [
                                 {
                                     name: 'Mouse anti-Protein X',
                                     weight: 82,//84
-                                    intensity: 'low',//none
+                                    intensity: 0.5,//none
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Rabbit anti-Protein Y',
                                     weight: 230,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['2']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 40,//84,323
-                                    intensity: 'none',//none, none
+                                    intensity: 0,//none, none
                                     primary_anti_body: ['3']
                                 },
                                 {
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['4']
                                 },
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
                             ]
                         },
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmProK',
                             cell_line: 'proY-Null',
-                            temperature: '40',
                             marks: [
                                 {
                                     name: 'Mouse anti-Protein X',
                                     weight: 82,//84
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Rabbit anti-Protein Y',
                                     weight: 230,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['2']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 40,//84,232
-                                    intensity: 'none',//none,none
+                                    intensity: 0,//none,none
                                     primary_anti_body: ['3']
                                 },
                                 {
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['4']
                                 },
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 0.5,
                                     primary_anti_body: ['5']
                                 }
                             ]
                         },
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmBuf',
                             cell_line: 'HproX-FLAG',
-                            temperature: '40',
                             marks: [
+                                /* Antibody 1 */
                                 {
                                     name: 'Mouse anti-Protein X',
                                     weight: 82,//84
-                                    intensity: 'low',//high
+                                    intensity: 0.5,//high
                                     primary_anti_body: ['1']
                                 },
                                 {
+                                    name: 'Mouse anti-Protein X',
+                                    weight: 84,
+                                    intensity: 2,
+                                    primary_anti_body: ['1']
+                                },
+                                /* Antibody 2 */
+                                {
                                     name: 'Rabbit anti-Protein Y',
                                     weight: 230,//232
-                                    intensity: 'low',//none
+                                    intensity: 2,//none
                                     primary_anti_body: ['2']
                                 },
+                                /* Antibody 3 */
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 40,//84, 232
-                                    intensity: 'none',//high, none
+                                    intensity: 0,//high, none
                                     primary_anti_body: ['3']
                                 },
                                 {
+                                    name: 'Mouse anti-6xHis',
+                                    weight: 84,
+                                    intensity: 2,
+                                    primary_anti_body: ['3']
+                                },
+                                /* Antibody 4 */
+                                {
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'high',//none
+                                    intensity: 2,//none
                                     primary_anti_body: ['4']
                                 },
+                                /* Antibody 5 */
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
                             ]
                         },
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmProK',
                             cell_line: 'HproX-FLAG',
-                            temperature: '40',
                             marks: [
                                 {
                                     name: 'Mouse anti-Protein X',
                                     weight: 82,//84
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Rabbit anti-Protein Y',
                                     weight: 230,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['2']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 40,//84,232
-                                    intensity: 'med',//none,none
+                                    intensity: 1,//none,none
                                     primary_anti_body: ['3']
                                 },
                                 {
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['4']
                                 },
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
                             ]
                         },
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmBuf',
                             cell_line: 'HproY-FLAG',
-                            temperature: '40',
                             marks: [
+                                /* Antibody 1 */
                                 {
                                     name: 'Mouse anti-Protein X',
                                     weight: 82,//84
-                                    intensity: 'low',//none
+                                    intensity: 0.5,//none
                                     primary_anti_body: ['1']
                                 },
+                                /* Antibody 2 */
                                 {
                                     name: 'Rabbit anti-Protein Y',
                                     weight: 230,//232
-                                    intensity: 'low',//high
+                                    intensity: 0.5,//high
                                     primary_anti_body: ['2']
                                 },
+                                {
+                                    name: 'Rabbit anti-Protein Y',
+                                    weight: 232,
+                                    intensity: 2,
+                                    primary_anti_body: ['2']
+                                },
+                                /* Antibody 3 */
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 40,//84, 232
-                                    intensity: 'none',//none, high
+                                    intensity: 0,//none, high
                                     primary_anti_body: ['3']
                                 },
                                 {
+                                    name: 'Mouse anti-6xHis',
+                                    weight: 232,
+                                    intensity: 2,
+                                    primary_anti_body: ['3']
+                                },
+                                /* Antibody 4 */
+                                {
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'none',//high
+                                    intensity: 0,//high
                                     primary_anti_body: ['4']
                                 },
                                 {
+                                    name: 'Rabbit anti-FLAG',
+                                    weight: 232,
+                                    intensity: 2,
+                                    primary_anti_body: ['4']
+                                },
+                                /* Antibody 5 */
+                                {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
                             ]
                         },
                         {
                             transfer_function: 'static',
-                            cutoff: -1,
                             drug: 'gmProK',
                             cell_line: 'HproY-FLAG',
-                            temperature: '40',
                             marks: [
+                                /* Antibody 1 */
                                 {
                                     name: 'Mouse anti-Protein X',
                                     weight: 82,//84
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['1']
                                 },
                                 {
+                                    name: 'Mouse anti-Protein X',
+                                    weight: 84,
+                                    intensity: 0,
+                                    primary_anti_body: ['1']
+                                },
+                                /* Antibody 2 */
+                                {
                                     name: 'Rabbit anti-Protein Y',
                                     weight: 230,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['2']
                                 },
                                 {
+                                    name: 'Rabbit anti-Protein Y',
+                                    weight: 232,
+                                    intensity: 0,
+                                    primary_anti_body: ['2']
+                                },
+                                /* Antibody 3 */
+                                {
                                     name: 'Mouse anti-6xHis',
                                     weight: 40,//84,232
-                                    intensity: 'none',//none,none
+                                    intensity: 0,//none,none
                                     primary_anti_body: ['3']
                                 },
+                                /* Antibody 4 */
                                 {
                                     name: 'Rabbit anti-FLAG',
                                     weight: 84,//232
-                                    intensity: 'none',//none
+                                    intensity: 0,//none
                                     primary_anti_body: ['4']
                                 },
+                                /* Antibody 5 */
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 'med',
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
                             ]
                         }
+
                     ]
                 }
             },
@@ -2126,7 +2140,8 @@ var __scb_sample_3 = {
                     '%TREATMENT%': {
                         attr: ['treatment_list', 'list', '0', 'drug_list', 'list', '0', 'drug_id'],
                         map: ['drugs', '%KEY%', 'name']},
-                    '%COLLECTION%': {attr: ['treatment_list', 'list', '0', 'duration'],
+                    '%COLLECTION%': {
+                        attr: ['treatment_list', 'list', '0', 'duration'],
                         map: ['durations', '%KEY%', 'name']}
                 }
             },
@@ -3638,40 +3653,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -3679,32 +3694,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -3720,40 +3735,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 5,
+                                    intensity: 1,//med
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -3761,32 +3776,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -3802,40 +3817,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -3843,32 +3858,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -3890,34 +3905,34 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -3925,32 +3940,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -3966,40 +3981,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 10,
+                                    intensity: 2,//high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4007,32 +4022,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4048,40 +4063,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4089,32 +4104,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4131,40 +4146,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4172,32 +4187,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4214,40 +4229,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'high',
+                                    intensity: 2, //high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4255,32 +4270,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4297,40 +4312,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2,//high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4338,32 +4353,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4379,26 +4394,26 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
@@ -4412,7 +4427,7 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 5,
+                                    intensity: 1,//med
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4420,32 +4435,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4461,40 +4476,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4502,32 +4517,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4543,40 +4558,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4584,32 +4599,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4626,40 +4641,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4667,32 +4682,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4708,40 +4723,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4749,32 +4764,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4790,40 +4805,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 8,
+                                    intensity: 2, //high
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4831,32 +4846,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4872,19 +4887,19 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
@@ -4898,14 +4913,14 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4913,32 +4928,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -4955,40 +4970,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -4996,32 +5011,32 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -5038,40 +5053,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -5079,26 +5094,26 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -5114,40 +5129,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -5155,26 +5170,26 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -5191,40 +5206,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -5232,26 +5247,26 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -5267,40 +5282,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -5308,26 +5323,26 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -5344,40 +5359,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -5385,26 +5400,26 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 8,
+                                    intensity: 2, // high
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -5420,40 +5435,40 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 {
                                     name: 'Mouse anti-EGFR',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['1']
                                 },
                                 //antibody 2
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
                                 {
                                     name: 'Mouse anti-pMEK',
                                     weight: 45,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['4']
                                 },
                                 //antibody 5 is included in *ANY* cell_line
@@ -5461,26 +5476,26 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 {
                                     name: 'Mouse anti-6xHis',
                                     weight: 65,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['6']
                                 },
                                 //antibody 7
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 120,
-                                    intensity: 'none',
+                                    intensity: 0,
                                     primary_anti_body: ['7']
                                 },
                                 {
                                     name: 'Mouse anti-FLAG',
                                     weight: 51,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['7']
                                 }
                             ]
@@ -5497,7 +5512,7 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 5,
+                                    intensity: 1, //med
                                     primary_anti_body: ['5']
                                 }
 
@@ -5771,9 +5786,6 @@ var __scb_sample_3 = {
                             conditions: 'nuc',
                             imgs_hash: [
                                 [
-                                    {hash: '17', if_type: 'green'}
-                                ],
-                                [
                                     {hash: '18', if_type: 'green'}
                                 ],
                                 [
@@ -5798,7 +5810,6 @@ var __scb_sample_3 = {
                                     {hash: '25', if_type: 'green'}
                                 ]
                             ]
-
                         },
                         {
                             match: ['cell_line', 'drug_id', 'kind', 'conditions'],
@@ -5847,7 +5858,6 @@ var __scb_sample_3 = {
                                     {hash: '38', if_type: 'green'}
                                 ]
                             ]
-
                         },
                         {
                             match: ['cell_line', 'drug_id', 'kind', 'conditions'],
