@@ -214,16 +214,19 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
             if_light_on_and_laser_on = false;
         }
     } else { /* Fluorescent */
+        /* Disable the light_on button for Fluorescent images */
+        $('.scb_f_microscopy_light').addClass('scb_s_microscopy_switch_disabled');
+        $('.scb_f_microscopy_light').prop('disabled', true);
+        $('#brightdown').prop('disabled', true);
+        $('#brightup').prop('disabled', true);
+
         if (!state.microscopy.light_on && !state.microscopy.laser_on) {
             init_wb('/images/microscopy/black.jpg');
             disableSlider = true;
             if_light_on_and_laser_on = true;
             change_brightness_lines(state.microscopy_lane.lens_map.brightness, true);
         } else if (state.microscopy.light_on && !state.microscopy.laser_on) {
-            $('.scb_f_microscopy_light').addClass('scb_s_microscopy_switch_disabled');
-            $('.scb_f_microscopy_light').prop('disabled', true);
-            $('#brightdown').prop('disabled', true);
-            $('#brightup').prop('disabled', true);
+
             if (state.microscopy_lane.lens_map.brightness > 1)
                 init_wb_mod(state.microscopy_lane.lens_map, '/images/microscopy/white.jpg');
             else
@@ -254,10 +257,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
         } else if (state.microscopy.light_on && state.microscopy.laser_on) {
             disableSlider = false;
             enableIFSlider = true;
-            $('.scb_f_microscopy_light').addClass('scb_s_microscopy_switch_disabled');
-            $('.scb_f_microscopy_light').prop('disabled', true);
-            $('#brightdown').prop('disabled', true);
-            $('#brightup').prop('disabled', true);
+
 
             if (state.microscopy_lane.lens_map && state.microscopy_lane.lens_map.src) {
                 $('.scb_s_microscopy_mag').text(state.microscopy_lane.lens_map.mag);

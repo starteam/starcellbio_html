@@ -1437,6 +1437,9 @@ outline: none !important;
 	background: url('../../../images/microscopy/On_BTN_Gray.png') no-repeat !important;
 	cursor: default;
 }
+.scb_s_micro_arrows:disabled{
+    cursor: default;
+}
 
 
 .scb_f_microscopy_light:checked , .scb_f_microscopy_laser:checked{
