@@ -1304,8 +1304,8 @@ right: 15px;
 
 
 
-#scb_s_microscopy_slide_content_lens_outline > svg > image{	
-	cursor: pointer;
+.scb_s_microscopy_slide_content_lens_outline > svg > image{
+
 }
 
 
@@ -1368,6 +1368,7 @@ top: 49px;
 	bottom: -17px;
 	overflow:hidden;
 	background:black;
+	cursor: pointer;
 }
 
 
