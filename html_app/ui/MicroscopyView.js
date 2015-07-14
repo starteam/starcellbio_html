@@ -96,6 +96,7 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lens_draw_slide = function(state){
 		notebook_id = state.i_want;
 	var enableIFSlider = false;
     /* If the slide already assigned, don't change it */
+    /* Why is this done only after compute? */
 	if(state.microscopy_lane.current_slides.length == 0){
 		state.microscopy_lane.current_slides = state.slides;
 	}

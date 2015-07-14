@@ -69,13 +69,11 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
                                 if (template.slide_parser) {
                                     slide_array = template.slide_parser[collection_id][slide_type][conditions][index];
                                 } else {
-                                    if (rule.if_type){
-                                        microscopy_lane.lens_map.if_type = rule.if_type;
-                                        slide_array=[{hash: rule.imgs_hash[index], if_type: rule.if_type}];
-                                    }else{
-                                        slide_array = [
-                                        {hash: rule.imgs_hash[index]}
-                                    ];
+                                    slide_array = rule.imgs_hash[index];
+                                    for( var x= 0; x < slide_array.length; x++){
+                                        if(!slide_array[x].hasOwnProperty('mag')){
+                                            slide_array[x].mag = "N/A"
+                                        }
                                     }
                                 }
 
