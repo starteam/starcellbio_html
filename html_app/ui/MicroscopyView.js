@@ -601,7 +601,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 		if($('.scb_f_microscopy_sample_active:checked').length > 0){
 		
-		$.jqDialog.alert("Please select a slide type for at least one sample.", function() {	
+		$.jqDialog.alert("Please select microscopy analysis and/or conditions for at least one sample.", function() {
     	$('html').css('overflow', 'visible');
 					$('.error_overlay').remove();/* callback function for 'OK' button*/ return;});
 
