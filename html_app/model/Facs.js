@@ -87,19 +87,43 @@ scb.Facs = function scb_Facs(data, context, parent) {
 
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
     self.rows_state = function (exp) {
-        var skip_placeholders = false;
-        if ( _.keys(context.template.facs_kinds).length == 1  && _.keys(context.template.facs_kinds[Object.keys(context.template.facs_kinds)[0]].conditions).length == 1) {
-            skip_placeholders = true;
-        }
         var experiment = exp || self.parent.parent;
+        var template = context.template;
         var grouped_rows = self.lanes_list.grouped_list;
         var rows = [];
         _.each(experiment.cell_treatment_list.list, function (e) {
             if (grouped_rows[e.id]) {
-            	if( _.keys(context.template.facs_kinds).length == 1 || _.isEqual(_.map(grouped_rows[e.id], function(z){return z.conditions}).sort(), _.keys(e.treatment_list.list[0].facs).sort()))
-            		skip_placeholders=true;
-            	else
-            		skip_placeholders=false;
+                /* a list of already chosen conditions for this sample */
+                var chosen_conditions = _.map(grouped_rows[e.id], function(z){return z.conditions}).sort();
+                var avail_conditions = [];
+                /* the conditions available for this sample can be
+                   specified in two ways:
+                   1) In the cell_treatment list under 'facs'
+                   2) or in 'facs_kinds', that applies to all samples
+                 */
+                var facs_kinds= e.treatment_list.list[0].facs;
+                if (_.isEmpty(facs_kinds)){
+                    facs_kinds = template.facs_kinds;
+                    _.each(_.keys(facs_kinds), function (a) {
+                        _.each(_.keys(facs_kinds[a].conditions), function (c) {
+                            avail_conditions.push(c);
+                        });
+                    });
+                }else {
+                    /* Make a list of all conditions available for this sample */
+                    _.each(_.keys(facs_kinds), function (a) {
+                        _.each(facs_kinds[a], function (c) {
+                            avail_conditions.push(c);
+                        });
+                    });
+                }
+
+                var skip_placeholders = false;
+                /* if there are more conditions available add a placeholder */
+                if(chosen_conditions.length >= avail_conditions.length) {
+                    skip_placeholders = true;
+                }
+
                 _.each(grouped_rows[e.id], function (ee, index) {
                     rows.push({
                         kind: 'existing',

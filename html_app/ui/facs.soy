@@ -329,66 +329,37 @@ FACS Main View
                 {param facs:$facs/}
                 {param cell_treatment:$r.cell_treatment/}
                 {param kinds:$kinds/}
-                {param lane:$r/}
+                {param row:$r/}
                 {/call}
             </td>
             
-            
-            
-<!-- 
-            <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:232px;'>
-            	{if $r.lane and length(keys($kinds)) > 1}
-            		{if $r.lane.kind == 'Dye'}
-            			<input class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="whole" cell_treatment_id='{$r.cell_treatment.id}'
-                       lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled }checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.facs_kinds.Dye.conditions.whole.name}</span>
 
-            		{elseif $r.lane.kind == 'Anti'}
-            			<input class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="a" cell_treatment_id='{$r.cell_treatment.id}'
-                       lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}" 
-						{if $r.is_sample_enabled }checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.facs_kinds.Anti.conditions.a.name}</span>
-
-            		{/if}
-                {/if}
-            </td>
- -->
             
-            <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:232px;'>
-            	{if $r.lane and length(keys($kinds)) >= 1}
-            	   {if $r.lane.kind != 'whole'}
-            	        {if length(keys($kinds[$r.lane.kind].conditions)) > 1}
-                            <select class="scb_f_facs_select_conditions" role='select'
-                            facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
-                            lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
-                            {if $r.is_sample_enabled}{else}disabled="disabled"{/if}
-                            >
-                            {if $r.kind == 'existing'}
-                                {foreach $k in keys($kinds)}
-                                    {foreach $c in keys($kinds[$k].conditions)}
-                                    <option value='{$c}' role='option' {if $r.lane.conditions == $c}selected="selected"{/if}>
-                                        {$kinds[$k].conditions[$c].name}
-                                    </option>
-                                    {/foreach}
-                                    {if length(keys($kinds[$k].conditions)) >= 1}
-                                       {if not $r.lane.conditions}
-                                       <option  role='option'selected="selected" disabled="disabled" value=''>Select Condition</option>
-                                       {/if}
-                                    {/if}
-                                {/foreach}
-                            {/if}
-                        {else}
-                        {foreach $k in keys($kinds)}
-                            {foreach $c in keys($kinds[$k].conditions)}
-                            <input class="scb_f_facs_select_conditions" facs_id='{$facs.id}'
-                           assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="{$c}" cell_treatment_id='{$r.cell_treatment.id}'
-                           lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
-                            {if $r.is_sample_enabled }checked="checked"{/if} /><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.facs_kinds[$k].conditions[$c].name}</span>
-                            {/foreach}
-                        {/foreach}
-                        {/if}
-	                {/if}
+            <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'
+            style='width:232px;'>
+            	{if $r.lane}
+                    {foreach $c in keys($kinds[$r.lane.kind].conditions)}
+                    <div>
+                        <input class="scb_f_facs_select_conditions
+                        {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+                        facs_id='{$facs.id}'
+                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                        type="radio" value="{$c}" cell_treatment_id='{$r.cell_treatment.id}'
+                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+                        {if $r.is_sample_enabled and
+                                (
+                                    $r.lane.conditions == $c or
+                                    length(keys($kinds[$r.lane.kind].conditions)) == 1
+                                )
+                            }checked="checked"{/if}
+                        />
+                        <span class="scb_s_western_blot_choose_gel_type_input_text
+                            {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+                        >
+                            {$assignment.template.facs_kinds[$r.lane.kind].conditions[$c].name}
+                        </span>
+                    </div>
+                    {/foreach}
                 {/if}
             </td>
 
@@ -531,36 +502,45 @@ FACS Main View
 @param experiment
 @param facs
 @param cell_treatment
-@param lane
+@param row
 @param kinds
 */
 {template .display_lysate_types}
 
 {if length(keys($kinds)) ==1}
 		{foreach $k in keys($kinds)}
-		<span class="scb_f_facs_select_lysate_type {if $lane.is_valid}{else}scb_s_microscopy_dim_conditions{/if}" cell_treatment_id='{$cell_treatment.id}'
-				facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" value="{$k}" 
-				lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}">{$kinds[$k].name}</span>
+		<span class="scb_f_facs_select_lysate_type {if $row.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+		cell_treatment_id='{$cell_treatment.id}'
+		facs_id='{$facs.id}'
+		assignment_id="{$assignment.id}"
+		experiment_id="{$experiment.id}" value="{$k}"
+		lane_kind="{$row.kind}" lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}"
+		>
+		    {$kinds[$k].name}
+		</span>
 		{/foreach}
 {else}
-	<select class="scb_f_facs_select_lysate_type {if $lane.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}" cell_treatment_id='{$cell_treatment.id}'
-			facs_id='{$facs.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
-			lane_kind="{$lane.kind}" lane_id="{if $lane.kind == 'existing'}{$lane.lane.id}{/if}" role='select'
-	{if $lane.is_sample_enabled}{else}disabled="disabled"{/if}
+	<select class="scb_f_facs_select_lysate_type {if $row.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+	cell_treatment_id='{$cell_treatment.id}'
+	facs_id='{$facs.id}' assignment_id="{$assignment.id}"
+	experiment_id="{$experiment.id}" lane_kind="{$row.kind}"
+	lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}" role='select'
+	{if $row.is_sample_enabled}{else}disabled="disabled"{/if}
 	>
-	{if $lane.kind == 'existing'}
-	{foreach $k in keys($kinds)}
-	<option value='{$k}' role='option'
-	{if $lane.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
-	{/foreach}
-	{else}
-	{if length(keys($kinds)) != 1}
-	<option selected="selected" disabled="disabled" role='option' value=''>Select Analysis</option>
-	{/if}
-	{foreach $k in keys($kinds)}
-	<option role='option' value='{$k}'>{$kinds[$k].name}</option>
-	{/foreach}
-	{/if}
+        {if $row.kind == 'existing'}
+            {foreach $k in keys($kinds)}
+                <option value='{$k}' role='option' {if $row.lane.kind == $k}selected="selected"{/if}>
+                    {$kinds[$k].name}
+                </option>
+            {/foreach}
+        {else}
+            {if length(keys($kinds)) != 1}
+                <option selected="selected" disabled="disabled" role='option' value=''>Select Analysis</option>
+            {/if}
+            {foreach $k in keys($kinds)}
+                <option role='option' value='{$k}'>{$kinds[$k].name}</option>
+            {/foreach}
+        {/if}
 	</select>
 {/if}
 {/template}
