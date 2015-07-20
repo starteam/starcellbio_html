@@ -134,11 +134,11 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
             /* graph C*/
             function graph_C(x, mean){
-                 return normal_dist(x, mean, 0.27, 0.5, false);
+                 return normal_dist(x, mean, 0.2, 0.5, false);
             }
             /*Single narrow peak */
             function scaled_peak(x, mean){
-            	return normal_dist(x, mean, 0.08, 0.5, false);
+            	return normal_dist(x, mean, 0.13, 0.5, false);
             }
 
 
@@ -512,7 +512,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                     data.push([x, y]);
 
                 }
-                normalize(data,1500);
+                normalize(data);
 				roundData(data);
                 state.data = {
                     data: [
