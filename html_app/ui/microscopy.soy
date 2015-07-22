@@ -590,9 +590,16 @@
    			 </div>
     
     <div class = 'scb_s_microscopy_lens_controls_section_2'>
-    <span class="scb_s_microscopy_lens_label" id='scb_s_light_label' >Light:</span> <input aria-labelledby='scb_s_light_label' type="checkbox" class="scb_f_microscopy_light {if $microscopy.samples_finished}{else}scb_s_microscopy_switch_disabled{/if}" microscopy_id='{$microscopy.id}'
-			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} 
-			   {if $microscopy.light_on}checked='checked'{else}{/if}   aria-checked='{if $microscopy.light_on}true{else}false{/if}' {if $microscopy.samples_finished}{else}disabled{/if}>
+        <span class="scb_s_microscopy_lens_label" id='scb_s_light_label' >Light:</span>
+        <input aria-labelledby='scb_s_light_label' type="checkbox"
+            class="scb_f_microscopy_light
+            {if $microscopy.samples_finished}{else}scb_s_microscopy_switch_disabled{/if}"
+            microscopy_id='{$microscopy.id}'
+            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+            {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+            {if $microscopy.light_on}checked='checked'{else}{/if}
+            aria-checked='{if $microscopy.light_on}true{else}false{/if}'
+            {if $microscopy.samples_finished}{else}disabled{/if}>
     </div>
     <div class = 'scb_s_microscopy_lens_controls_section_3'>
     				<span class="scb_s_microscopy_brightness_label"></span>
