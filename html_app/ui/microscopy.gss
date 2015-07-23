@@ -1702,3 +1702,57 @@ background-repeat: no-repeat;
 .scb_s_microscopy_slide_disabled *, .scb_s_microscopy_lens_controls_disabled *{
 	cursor: default !important;
 }
+
+.scb_s_microscopy_lane_left{
+    border:inherit;
+    background: 0;
+    vertical-align: text-top;
+    width:22px;
+    height: 22px;
+    background-image: url("../../images/western_blot/scb_mini_gray_left_arrow_inactive.png");
+    background-repeat: no-repeat;
+    top: 4px;
+    position: relative;
+    margin-left: -9px;
+}
+
+.scb_s_microscopy_lane_right{
+
+    border:inherit;
+    background: 0;
+    vertical-align: text-top;
+    width:22px;
+    height: 22px;
+    background-image: url("../../images/western_blot/scb_mini_gray_right_arrow_inactive.png");
+    background-repeat: no-repeat;
+    top: 4px;
+    position: relative;
+}
+
+.scb_s_microscopy_lane_left:enabled:hover{
+    background-image: url('../images/western_blot/scb_mini_gray_left_arrow_hover.png') !important;
+}
+.scb_s_microscopy_lane_right:enabled:hover{
+    background-image: url('../images/western_blot/scb_mini_gray_right_arrow_hover.png') !important;
+}
+
+.scb_s_microscopy_lane_left:enabled{
+    cursor: pointer;
+    color: #29a592;
+    background-image: url("../../images/western_blot/scb_mini_gray_left_arrow_active.png");
+}
+
+.scb_s_microscopy_lane_right:enabled{
+    cursor: pointer;
+    color: #29a592;
+    background-image: url("../../images/western_blot/scb_mini_gray_right_arrow_active.png");
+}
+
+
+.scb_s_microscopy_lane_tabs {
+    width: 575px;
+    height:25px;
+    border-top: 1px solid transparent;
+    margin-top: -1px;
+    margin-left: 9px;
+}

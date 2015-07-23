@@ -81,8 +81,12 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
  	scb.Utils.initialize_accessor_field(self, data, 'scroll', 0, null, context);
  	scb.Utils.initialize_accessor_field(self, data, 'prep_scroll', 0, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'samples_show_state', false, null, context);
-        scb.Utils.initialize_accessor_field(self, data, 'navigation_show_state', false, null, context);
-scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'navigation_show_state', false, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, context);
+    /* The total number of lanes for the currently selected sample (cell_treatment_id),
+     * used for display and navigation through the small tabs */
+    scb.Utils.initialize_accessor_field(self, data, 'total_num_tabs', 0, null, context);
+
     var template = context.template;
     
     self.disable_blur = template.ui.microscopy.disable_blur;
@@ -121,7 +125,17 @@ scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, c
             	if(chosen_conditions.length >= avail_conditions.length){
                     skip_placeholders = true;
                 }
+                /* find total number of tabs for this sample*/
+                /* the number of valid lanes for this CellTreatment*/
+                var num_tabs=0;
+                _.each(grouped_rows[e.id], function(ee){
+                    if(self.is_cell_treatment_enabled[e.id] && ee && ee.slide_conditions){
+                        num_tabs+=1;
+                    }
+                });
+                var is_valid;
                 _.each(grouped_rows[e.id], function (ee, index) {
+                    is_valid = self.is_cell_treatment_enabled[e.id] && ee && ee.slide_conditions;
                     rows.push({
                         kind:'existing',
                         cell_treatment:e,
@@ -129,8 +143,10 @@ scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, c
                         display_sample:index == 0,
                         is_sample_enabled:self.is_cell_treatment_enabled[e.id],
                         index:index,
-                        is_valid:self.is_cell_treatment_enabled[e.id] && ee && ee.slide_conditions,
-                        display_text: e.format_row()
+                        is_valid: is_valid,
+                        display_text: e.format_row(),
+                        display_tab: false, /* small tabs in analyze*/
+                        num_tabs: num_tabs
                     });
                 	
                 });
@@ -155,6 +171,26 @@ scb.Utils.initialize_accessor_field(self, data, 'enable_samples', false, null, c
                 })
             }
         });
+        var valid_lane_index=0;
+        /* for each valid lane check if it is withing the bound of 4 tabs */
+        if(self.samples_finished) {
+            _.each(rows, function (e) {
+                /* Make sure that lane e is complete and belongs to the selected cell_treatment */
+                if (e.is_valid && e.cell_treatment.id == self.selected_lane.cell_treatment_id) {
+                    if (valid_lane_index >= self.lanes_list.start_tabs_index &&
+                        valid_lane_index < self.lanes_list.start_tabs_index + 4) {
+                        e.display_tab = true;
+                    }
+                    valid_lane_index++;
+                    /* total number of tabs for this sample */
+                    if (e.lane.id === self.lane_selected) {
+                        self.total_num_tabs = e.num_tabs;
+                    }
+                }
+
+            });
+        }
+
         var count = 0;
         _.each(rows, function (e) {
             if (e.is_valid) count++;
