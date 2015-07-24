@@ -5,6 +5,7 @@ scb.MicroscopyLaneList = function scb_MicroscopyLaneList(data, context, parent) 
     self.parent = parent;
 
     scb.Utils.initialize_field(data, 'list', []);
+    scb.Utils.initialize_accessor_field(self, data, 'start_tabs_index', 0, null, context);
 
     Object.defineProperty(self, "list", {
         get: function () {

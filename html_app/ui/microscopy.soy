@@ -482,29 +482,44 @@
 
 	<div class='scb_s_microscopy_samples_slide_area {if $microscopy.samples_finished}{else}scb_s_microscopy_lens_controls_disabled{/if}'>
 
-        <div class='scb_s_western_blot_gel_tabs' role='tablist'>
-                    {if $microscopy.samples_finished}
-        			{foreach $r in $rows}
-        				{if $r.is_valid and $r.lane.id == $microscopy.selected_lane.id}
-        				<span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab ' role='tab'>
-
-						<div class='scb_s_microscopy_gel_tab_selected'>{$microscopy.selected_lane.kinds[$microscopy.selected_lane.kind].conditions[$microscopy.selected_lane.slide_conditions].short_name}
-						</div>
-						</span>
-        				{elseif $r.is_valid and $r.cell_treatment.id == $microscopy.selected_lane.cell_treatment_id}
-							<div class='scb_s_microscopy_slide_tab' microscopy_id='{$microscopy.id}' 
-							assignment_id='{$assignment.id}' role='tab'
-							experiment_id='{$experiment.id}' microscopy_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name}
-							</div>
-						{/if}
-					{/foreach}
-					{else}
-					<span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab'  role='tab'>
-
-                    <div class='scb_s_microscopy_gel_tab_selected'>SLIDE
-                    </div>
-                    </span>
-					{/if}
+        <div class='scb_s_microscopy_lane_tabs' role='tablist'>
+            {if $microscopy.samples_finished}
+                {if $microscopy.total_num_tabs > 4}
+                    <button class='scb_s_microscopy_lane_left' microscopy_id='{$microscopy.id}'
+                            assignment_id='{$assignment.id}' role='button'  aria-label='Previous Tab'
+                            experiment_id='{$experiment.id}'>
+                    </button>
+                {/if}
+                {foreach $r in $rows}
+                    {if $r.is_valid and $r.display_tab}
+                        {if $r.lane.id == $microscopy.selected_lane.id}
+                            <span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab ' role='tab'>
+                                <div class='scb_s_microscopy_gel_tab_selected'>
+                                    {$microscopy.selected_lane.kinds[$microscopy.selected_lane.kind]
+                                    .conditions[$microscopy.selected_lane.slide_conditions].short_name}
+                                </div>
+                            </span>
+                        <!--unselected lanes for this cell_treatment-->
+                        {elseif $r.cell_treatment.id == $microscopy.selected_lane.cell_treatment_id}
+                            <div class='scb_s_microscopy_slide_tab' microscopy_id='{$microscopy.id}'
+                                assignment_id='{$assignment.id}' role='tab'
+                                experiment_id='{$experiment.id}' microscopy_lane_id='{$r.lane.id}'>
+                                {$r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name}
+                            </div>
+                        {/if}
+                    {/if}
+                {/foreach}
+                {if $microscopy.total_num_tabs > 4}
+                    <button class='scb_s_microscopy_lane_right' microscopy_id='{$microscopy.id}'
+                        assignment_id='{$assignment.id}'
+                        experiment_id='{$experiment.id}' role='button'  aria-label='Next Tab'>
+                    </button>
+                {/if}
+            {else}
+                <span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab' role='tab'>
+                    <div class='scb_s_microscopy_gel_tab_selected'>SLIDE</div>
+                </span>
+            {/if}
        	</div>
        	{if $microscopy.samples_finished}
        	  {foreach $r in $rows}
