@@ -264,6 +264,7 @@ scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (e
         alert("INVALID ELEMENT!");
     }
     if (parsed.facs.samples_finished) {
+        parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
         $('li', $(element).parent()).removeClass('scb_s_facs_sample_selected');
         $(element).addClass('scb_s_facs_sample_selected');
         parsed.facs.lane_selected = parsed.facs_lane.id;
@@ -306,6 +307,7 @@ scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, even
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
 
     parsed.facs.show_analysis = true;
     scb.ui.static.MainFrame.refresh();
@@ -318,7 +320,7 @@ scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
     parsed.facs.sample_analysis =  !parsed.facs.sample_analysis;
     parsed.facs.double_analysis = false;
     scb.ui.static.MainFrame.refresh();
@@ -330,7 +332,7 @@ scb.ui.static.FacsView.scb_s_facs_double_range_button= function(element, event){
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
     parsed.facs.double_analysis =  !parsed.facs.double_analysis;
     parsed.facs.sample_analysis = false;
     scb.ui.static.MainFrame.refresh();
@@ -338,14 +340,15 @@ scb.ui.static.FacsView.scb_s_facs_double_range_button= function(element, event){
 
 
 scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
-		var parsed = scb.ui.static.FacsView.parse(element);
-	    var note = $(element).attr('note');
-    	note = '.' +note;	
-		$(note).slideUp('400', function(){
-			parsed.facs.instructions_show_state  = $('.scb_s_facs_tools_instructions_followup').is(":visible");
-			parsed.facs.samples_show_state  = $('.scb_s_facs_tools_samples_followup').is(":visible");
-			scb.ui.static.MainFrame.refresh();
-		});
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
+    var note = $(element).attr('note');
+    note = '.' + note;
+    $(note).slideUp('400', function () {
+        parsed.facs.instructions_show_state = $('.scb_s_facs_tools_instructions_followup').is(":visible");
+        parsed.facs.samples_show_state = $('.scb_s_facs_tools_samples_followup').is(":visible");
+        scb.ui.static.MainFrame.refresh();
+    });
 		
 }
 
@@ -384,20 +387,23 @@ scb.ui.static.FacsView.scb_f_facs_sample_remove = function (element) {
 }
 
 scb.ui.static.FacsView.scb_f_facs_tools_toggle = function (element) {
-	var parsed = scb.ui.static.FacsView.parse(element);
-	var note = $(element).attr('note');
-    note = '.' +note;	
-	$(note).slideDown('400', function(){
-		parsed.facs.instructions_show_state  = $('.scb_s_facs_tools_instructions_followup').is(":visible");
-		parsed.facs.samples_show_state  = $('.scb_s_facs_tools_samples_followup').is(":visible");
-		scb.ui.static.MainFrame.refresh();
-	});
-	
+    var parsed = scb.ui.static.FacsView.parse(element);
+    var note = $(element).attr('note');
+    note = '.' + note;
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
+
+    $(note).slideDown('400', function () {
+        parsed.facs.instructions_show_state = $('.scb_s_facs_tools_instructions_followup').is(":visible");
+        parsed.facs.samples_show_state = $('.scb_s_facs_tools_samples_followup').is(":visible");
+        scb.ui.static.MainFrame.refresh();
+    });
 }
 
 scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+    parsed = resetScrollValue(parsed);
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -1375,7 +1381,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
                 scb.ui.static.FacsView.reevaluate_metadata({facs: state.facs, facs_lane: state.facs.selected_lane, assignment: state.assignment});
             }
         }
-        
+
         state.experiment.last_technique_view = 'facs';
         var scroll_num = 0;
         if($('.scb_s_facs_samples_table').length ==0)
@@ -1404,6 +1410,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         
         if (kind == 'sample_prep'){
         	$('.scb_s_facs_samples_table', '.scb_s_facs_view').scrollTop(state.facs.prep_scroll);
+        }else{
+            $('.scb_s_facs_choose_samples_order_list', '.scb_s_facs_view').scrollTop(state.facs.samples_scroll);
         }
         state.experiment.prev_step=scb.ui.static.FacsView.TOTAL_STEPS;
         if(state.experiment.last_step >= scb.ui.static.FacsView.TOTAL_STEPS)
@@ -1431,11 +1439,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 			$('.scb_s_facs_left_facs').prop('disabled', false);
 		}
 		else $('.scb_s_facs_right_facs').prop('disabled', false);
-			
-        if (kind == 'sample_prep') {
 
-
-        }
         if (state.facs.samples_finished) {
             scb.ui.static.FacsView.charts(workarea);
         }
