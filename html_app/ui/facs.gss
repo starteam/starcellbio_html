@@ -389,17 +389,6 @@ background-color:#676767 !important;
 	position: relative;
 }
 
-.scb_s_facs_cell_treatment_radio{
-	position: absolute;
-	top: 4px;
-}
-
-.scb_s_facs_cell_treatment_text{
-	position: absolute;
-	top: 6px;
-	left: 23px;
-}
-
 .scb_s_facs_vertical_line_1_top {
     position:absolute;
     z-index: 5;

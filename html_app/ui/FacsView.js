@@ -42,9 +42,19 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
     var cell_treatment_id = $(element).attr('cell_treatment_id');
 
     parsed.facs.is_cell_treatment_enabled[cell_treatment_id] = val;
-    $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
-        scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
-    });
+    if(val === 'checked') {
+        $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
+            scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
+        });
+    }else{
+        /*want to remove the FacsLane*/
+        var lanes = _.filter(parsed.facs.lanes_list.list, function (lane) {
+            return cell_treatment_id == lane.cell_treatment_id
+        });
+        _.each(lanes,function(lane){
+            parsed.facs.lanes_list.remove(lane.id);
+        });
+    }
     parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
     if (event) {
         scb.ui.static.MainFrame.refresh();
@@ -59,82 +69,82 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
         alert("INVALID ELEMENT!");
     }
 
-    var sample_kind = $(element).attr('value');
-    if (sample_kind == '') {
+    var slide_type = $(element).attr('value');
+    if (slide_type == '') {
         return;
     }
-     var matches_list = [];
-    var keys_list = [];
+    var avail_conditions = [];
     var lane_id = $(element).attr('lane_id');
-    if (lane_id == '') {
-			var cell_treatment_id = $(element).attr('cell_treatment_id');
-				var lanes = _.filter(parsed.facs.lanes_list.list, function(lane) {return cell_treatment_id == lane.cell_treatment_id});
-		
-				var i = lanes.length; //or 10
-				while(i--){
-					var lane = lanes[i];
-			
-					_.each(parsed.assignment.template.facs_kinds, function(x){ keys_list = keys_list.concat(_.keys(x.conditions));});
-					matches_list.push(lane.conditions);
-				}
-		
-				matches_list = jQuery.unique( matches_list );
-				keys_list = jQuery.unique( keys_list );
-		
-			   if((keys_list.length > 0 && $(matches_list).not(keys_list).length == 0 && $(keys_list).not(matches_list).length == 0) || (_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 &&  _.contains(matches_list, _.keys(parsed.assignment.template.facs_kinds[sample_kind].conditions)[0]) )){
-				
-						$('html').css('overflow', 'hidden');
-						$('body').prepend(scb_experiment_setup.general_error_overlay());
+    /* cell_treatment_id identifies the sample (analysis, conditions are not involved) */
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
+    var lanes = _.filter(parsed.facs.lanes_list.list, function(lane) {
+        return lane.kind == slide_type && cell_treatment_id == lane.cell_treatment_id
+    });
 
-						$.jqDialog.alert("You've already selected this option.", 
-							function() {	
-									$('html').css('overflow', 'visible');
-									$('.error_overlay').remove();
-									scb.ui.static.MainFrame.refresh();
-							/* callback function for 'OK' button*/ });
-						$('.jqDialog_header').remove();		
-						$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-						$('#jqDialog_box').attr('role', 'alertdialog');
-						return;
-				
-				}
-		
-		
-			   if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1) 				  
-			   {
-					var slide_conditions_val = '';
-					if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 ){
-						slide_conditions_val = _.keys(parsed.assignment.template.facs_kinds[sample_kind].conditions)[0]
-					}
-						parsed.facs.lanes_list.start({
-							kind: sample_kind,
-							conditions: slide_conditions_val,
-							cell_treatment_id: cell_treatment_id,
-							experiment_id: parsed.experiment.id
-						});
-			   }
-			   else{
-					parsed.facs.lanes_list.start({
-						kind: sample_kind,
-						cell_treatment_id: cell_treatment_id,
-						experiment_id: parsed.experiment.id
-					});
-				}
+    var cell_treatment_list = parsed.experiment.cell_treatment_list;
+    /* Want to find the number of conditions available for this cell_treatment */
+    var facs_kinds = _.filter(cell_treatment_list.list , function(lane){
+        return lane.id == cell_treatment_id; })[0].treatment_list.first.facs;
 
-// 		}
+    /* Find a list of available conditions for this slide type */
+    if (_.isEmpty(facs_kinds)) {
+        avail_conditions = _.keys(parsed.assignment.template.facs_kinds[slide_type].conditions);
+    } else {
+        avail_conditions = facs_kinds[slide_type];
+
+    }
+
+    /* Want to check if there are more (than already chosen) conditions available for this sample) */
+    if (lanes.length >= avail_conditions.length) {
+
+        $('html').css('overflow', 'hidden');
+        $('body').prepend(scb_experiment_setup.general_error_overlay());
+
+        $.jqDialog.alert("You've already selected this option.",
+            function () {
+                $('html').css('overflow', 'visible');
+                $('.error_overlay').remove();
+                scb.ui.static.MainFrame.refresh();
+                /* callback function for 'OK' button*/
+            });
+        $('.jqDialog_header').remove();
+        $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+        $('#jqDialog_box').attr('role', 'alertdialog');
+        return;
+    }
+
+
+    if (lane_id == '') {/*This means that the Lane does not 'exist' yet*/
+        if (_.size(avail_conditions) == 1) {
+            var slide_conditions_val = avail_conditions[0];
+            parsed.facs.lanes_list.start({
+                kind: slide_type,
+                conditions: slide_conditions_val,
+                cell_treatment_id: cell_treatment_id,
+                experiment_id: parsed.experiment.id
+            });
+        }
+        else {
+            parsed.facs.lanes_list.start({
+                kind: slide_type,
+                cell_treatment_id: cell_treatment_id,
+                experiment_id: parsed.experiment.id
+            });
+        }
+
     }
     else {
-        parsed.facs.lanes_list.get(lane_id).kind = sample_kind;
+        parsed.facs.lanes_list.get(lane_id).kind = slide_type;
     }
-		 if (event) {
-            scb.ui.static.MainFrame.refresh();
-        }
+	if (event) {
+        scb.ui.static.MainFrame.refresh();
+    }
 }
 
 scb.ui.static.FacsView.scb_f_facs_select_conditions = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
 	parsed = resetScrollValue(parsed);
-	        parsed.facs.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
+	parsed.facs.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
@@ -145,29 +155,41 @@ scb.ui.static.FacsView.scb_f_facs_select_conditions = function (element, event) 
         return;
     }
     var lane_id = $(element).attr('lane_id');
-       var cell_treatment_id = $(element).attr('cell_treatment_id');
-       for( var index = 0; index < parsed.facs.lanes_list.list.length; index++){
-			var lane = parsed.facs.lanes_list.list[index];
-			if(lane.conditions == lane_conditions && lane.kind == parsed.facs.lanes_list.get(lane_id).kind && lane.cell_treatment_id == cell_treatment_id){
-				$('html').css('overflow', 'hidden');
-				$('body').prepend(scb_experiment_setup.general_error_overlay());
+    var current_lane = parsed.facs.lanes_list.get(lane_id);
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
 
-				$.jqDialog.alert("You've already selected this slide option.",
-					function() {	$('html').css('overflow', 'visible');
+    var lanes_list= _.filter(parsed.facs.lanes_list.list, function(lane){
+        return lane.kind == current_lane.kind && cell_treatment_id == lane.cell_treatment_id;
+    });
 
-							$('.error_overlay').remove();
-							parsed.facs.lanes_list.remove(lane_id);
-					/* callback function for 'OK' button*/
-				scb.ui.static.MainFrame.refresh();});
-				$('.jqDialog_header').remove();
-				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-				$('#jqDialog_box').attr('role', 'alertdialog');
-				return;
+    for (var index = 0; index < lanes_list.length; index++) {
+        if (lanes_list[index].conditions == lane_conditions) {
+            $('html').css('overflow', 'hidden');
+            $('body').prepend(scb_experiment_setup.general_error_overlay());
 
-			}
+            $.jqDialog.alert("You've already selected this condition option.",
+                function () {
+                    $('html').css('overflow', 'visible');
+                    $('.error_overlay').remove();
+                    /* callback function for 'OK' button*/
+                    scb.ui.static.MainFrame.refresh();
+                });
+            $('.jqDialog_header').remove();
+            $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+            $('#jqDialog_box').attr('role', 'alertdialog');
+            return;
 
-       }
-    	parsed.facs.lanes_list.get(lane_id).conditions = lane_conditions;
+        }
+
+    }
+    current_lane.conditions = lane_conditions;
+
+    /* When condition selected for this Lane, want to enable conditions for the placeholder below*/
+    var placeholder=$('span.scb_f_facs_select_lysate_type[cell_treatment_id="' + cell_treatment_id + '"][lane_kind="placeholder"]');
+    /* Want to check if there is a placeholder*/
+    if(placeholder.length>0) {
+        scb.ui.static.FacsView.scb_f_facs_select_lysate_type(placeholder);
+    }
 
     if (event) {
         scb.ui.static.MainFrame.refresh();
@@ -331,15 +353,32 @@ scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
 scb.ui.static.FacsView.scb_f_facs_sample_remove = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
     parsed = resetScrollValue(parsed);
-        parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
+    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+    var cell_treatment_id = '';
     var lysate_id = $(element).attr('lane_id');
-    if (lysate_id != '') {
-        parsed.facs.lanes_list.remove(lysate_id);
+
+     /* Find cell_treatment_id for this sample*/
+    _.each(parsed.facs.lanes_list.list, function (lane) {
+        if (lysate_id == lane.id) {
+            cell_treatment_id = lane.cell_treatment_id;
+        }
+    });
+    /* Delete this Lane from the lanes_list*/
+    parsed.facs.lanes_list.remove(lysate_id);
+
+    /*
+     * If this is the only Lane for this CellTreatment,
+     * then remove it from the list of enabled samples
+     */
+    var lanes = _.filter(parsed.facs.lanes_list.list, function (lane) {
+        return cell_treatment_id == lane.cell_treatment_id
+    });
+    if (lanes.length < 1) {
+        parsed.facs.is_cell_treatment_enabled[cell_treatment_id] = false;
     }
     scb.ui.static.MainFrame.refresh();
 }
