@@ -433,10 +433,10 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
     if (parsed.facs.apply_dna_analysis_to_all) {
         _.each(parsed.facs.lanes_list.list, function (facs_lane) {
             facs_lane.canvas_metadata_analysis.points = JSON.parse(JSON.stringify(parsed.facs_lane.canvas_metadata_analysis.points));
-
+            facs_lane.exp_id = parsed.facs_lane.exp_id;
             facs_lane.bisector_gate_created = parsed.facs_lane.bisector_gate_created;
-
             scb.ui.static.FacsView.evaluate_chart({
+                assignment: parsed.assignment,
                 facs: parsed.facs,
                 facs_lane: facs_lane,
                 context: parsed.context
@@ -1372,7 +1372,11 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         if (state.facs.sample_prepared) {
             kind = 'analyze';
             if (state.facs && state.facs.selected_lane) {
-                scb.ui.static.FacsView.reevaluate_metadata({facs: state.facs, facs_lane: state.facs.selected_lane, assignment: state.assignment});
+                scb.ui.static.FacsView.reevaluate_metadata({
+                    facs: state.facs,
+                    facs_lane: state.facs.selected_lane,
+                    assignment: state.assignment
+                });
             }
         }
         
