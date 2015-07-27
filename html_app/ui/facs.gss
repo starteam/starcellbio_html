@@ -490,7 +490,9 @@ background-color:#676767 !important;
 	border-radius:6px;
 	cursor:pointer;
 }
-
+#main input[type=radio]:disabled{
+    cursor: default;
+}
 
 #main input[type=radio]:checked{
 	margin-right: 7px;
@@ -612,8 +614,6 @@ input[type=radio]:disabled{
 	border-collapse: collapse;
 }
 
-.facs_locked{
-}
 .scb_s_facs_samples_area {
 	margin-top:28px;
 	height:360px;
