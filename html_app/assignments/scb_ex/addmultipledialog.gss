@@ -17,7 +17,31 @@
     font-family: 'sourcesanspro-regular';
     font-size:10pt;
 }
+.scb_ex_samples_table_wrapper{
+    max-height:300px;
+    overflow:auto;
+    position:relative;
+    border: 1px solid #27956c;
+    border-radius: 5px;
+    background-color: #edeef2;
 
+}
+.scb_ex_samples_table_wrapper::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+.scb_ex_samples_table_wrapper::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+.scb_ex_samples_table_wrapper > table.scb_s_experiment_setup_table {
+    border: 0;
+    border-spacing: 0px;
+    width:100%;
+    background-color: white;
+    padding-bottom: 2px;
+}
 .scb_ex_inner_dialog_title_close {
 	
 	padding-top: 0px;
@@ -33,7 +57,7 @@
 	font-size: 14pt;
 	color: transparent;
 	background: transparent;
-	background-image: url('../../images/header/scb_close_button.png');
+	background-image: url('../../../images/header/scb_close_button.png');
 	background-repeat: no-repeat;
 
     
@@ -74,8 +98,8 @@
 
 
 .scb_ex_inner_dialog_body {
-    padding: 20px;
-    padding-top: 0px;
+    padding: 0 20px;
+    height: 390px;
 }
 
 .scb_ex_inner_dialog_body > h1 {

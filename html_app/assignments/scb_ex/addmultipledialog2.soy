@@ -12,6 +12,7 @@
         Add Samples </h1>
 
     <div class='scb_ex_inner_dialog_body'>
+        <div class='scb_ex_samples_table_wrapper'>
         <table class="scb_s_experiment_setup_table" role='grid' >
             <thead class="scb_s_experiment_setup_table_head" >
                 {foreach $heading in $template.ui.add_multiple_dialog.headings}
@@ -60,14 +61,15 @@
                 </tbody>
             {/foreach}
         </table>
+        </div>
         <button class='scb_ex_inner_dialog_select_all scb_s_gray_button scb_add_samples_all'
             aria-label='Select All' role='button'>SELECT ALL</button><br>
 
         <div class='scb_ex_button_float'>
-            <button class='scb_ex_inner_dialog_cancel scb_s_gray_button scb_add_samples_cancel'
-                aria-label='Cancel' role='button'>CANCEL</button>
             <button class='scb_ex_inner_dialog_add scb_s_gray_button scb_add_samples_add'
                 aria-label='Add Samples' role='button'>ADD SAMPLES</button>
+            <button class='scb_ex_inner_dialog_cancel scb_s_gray_button scb_add_samples_cancel'
+                aria-label='Cancel' role='button'>CANCEL</button>
         </div>
     </div>
 </div>

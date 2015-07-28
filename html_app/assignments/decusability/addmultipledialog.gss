@@ -33,7 +33,7 @@
 	font-size: 14pt;
 	color: transparent;
 	background: transparent;
-	background-image: url('../../images/header/scb_close_button.png');
+	background-image: url('../../../images/header/scb_close_button.png');
 	background-repeat: no-repeat;
     
 }
