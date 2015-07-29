@@ -615,29 +615,29 @@ FACS Main View
     </div>
     <div class='scb_s_facs_samples_graph_area {if $facs.samples_finished}{else}scb_s_facs_dim{/if}'>
         <div class='scb_s_western_blot_gel_tabs' role='tablist'>
-        			{if $facs.samples_finished}
-        			{foreach $r in $rows}
-        				{if $r.is_valid and $r.lane.id == $facs.selected_lane.id}
-        				<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab ' role='tab'>
-
-						<div class='scb_s_facs_gel_tab_selected'>{$facs.selected_lane.kinds[$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].name}
-						</div>
-						</span>
-        				{elseif $r.is_valid and $r.cell_treatment.id == $facs.selected_lane.cell_treatment_id}
-							<div class='scb_s_western_blot_gel_tab' facs_id='{$facs.id}'
-							assignment_id='{$assignment.id}' role='tab'
-							experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>{$r.lane.kinds[$r.lane.kind].conditions[$r.lane.conditions].name}
-							</div>
-						{/if}
-					{/foreach}
-					{else}
-					<span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'  role='tab'>
-
-                    <div class='scb_s_facs_gel_tab_selected'>PI
+            {if $facs.samples_finished}
+                {foreach $r in $rows}
+                    {if $r.is_valid and $r.lane.id == $facs.selected_lane.id}
+                        <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab ' role='tab'>
+                            <div class='scb_s_facs_gel_tab_selected'>
+                            {$facs.selected_lane.kinds[$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].name}
+                            </div>
+                        </span>
+                    {elseif $r.is_valid and $r.cell_treatment.id == $facs.selected_lane.cell_treatment_id}
+                        <div class='scb_s_western_blot_gel_tab' facs_id='{$facs.id}'
+                            assignment_id='{$assignment.id}' role='tab'
+                            experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>
+                            {$r.lane.kinds[$r.lane.kind].conditions[$r.lane.conditions].name}
+                        </div>
+                    {/if}
+                {/foreach}
+            {else}
+                <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'  role='tab'>
+                    <div class='scb_s_facs_gel_tab_selected'>
+                        {$rows[0].lane.kinds[$rows[0].lane.kind].conditions[$rows[0].lane.conditions].name}
                     </div>
-                    </span>
-					{/if}        
-
+                </span>
+            {/if}
         </div>
         {call .display_graph}
         {param assignment:$assignment/}
