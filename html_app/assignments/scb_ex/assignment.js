@@ -1500,8 +1500,8 @@ var __scb_sample_2 = {
 
                                 {    //antibody 2
                                     name: 'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity: 0.5,//none
+                                    weight: 210,//230
+                                    intensity: 0.5,
                                     primary_anti_body: ['2']
                                 },
                                 {    //antibody 3
@@ -1578,7 +1578,7 @@ var __scb_sample_2 = {
                                 },
                                 {
                                     name: 'Rabbit anti-Protein Y',
-                                    weight: 230,//232
+                                    weight: 210,//232
                                     intensity: 0.5,//none
                                     primary_anti_body: ['2']
                                 },
@@ -1708,7 +1708,7 @@ var __scb_sample_2 = {
                                 {
                                     name: 'Mouse anti-PGK1',
                                     weight: 44,
-                                    intensity: 0.5,
+                                    intensity: 1,
                                     primary_anti_body: ['5']
                                 }
                             ]
@@ -1727,15 +1727,15 @@ var __scb_sample_2 = {
                                 },
                                 {
                                     name: 'Mouse anti-Protein X',
-                                    weight: 84,
+                                    weight: 86,
                                     intensity: 2,
                                     primary_anti_body: ['1']
                                 },
                                 /* Antibody 2 */
                                 {
                                     name: 'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity: 2,//none
+                                    weight: 210,//230
+                                    intensity: 0.5,
                                     primary_anti_body: ['2']
                                 },
                                 /* Antibody 3 */
@@ -1819,13 +1819,13 @@ var __scb_sample_2 = {
                                 /* Antibody 2 */
                                 {
                                     name: 'Rabbit anti-Protein Y',
-                                    weight: 230,//232
-                                    intensity: 0.5,//high
+                                    weight: 210,//230
+                                    intensity: 0.5,
                                     primary_anti_body: ['2']
                                 },
                                 {
                                     name: 'Rabbit anti-Protein Y',
-                                    weight: 232,
+                                    weight: 240,//232
                                     intensity: 2,
                                     primary_anti_body: ['2']
                                 },
