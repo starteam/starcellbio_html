@@ -3507,20 +3507,20 @@ var __scb_sample_3 = {
                 gel_name: 'anti-pEGFR'
             },
             '3': {
-                name: 'Mouse anti-pMEK',
+                name: 'Mouse anti-pRAF',
                 secondary: ['m'],
                 marks: [
                     {weight: 48, intensity: 0}
                 ],
-                gel_name: 'anti-pMEK'
+                gel_name: 'anti-pRAF'
             },
             '4': {
-                name: 'Mouse anti-pRAF',
+                name: 'Mouse anti-pMEK',
                 secondary: ['m'],
                 marks: [
                     {weight: 25, intensity: 0}
                 ],
-                gel_name: 'anti-pRAF'
+                gel_name: 'anti-pMEK'
             },
             '5': {
                 name: 'Mouse anti-PGK1',
@@ -4906,7 +4906,7 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-pEGFR',
                                     weight: 140,
-                                    intensity: 8,
+                                    intensity: 2,
                                     primary_anti_body: ['2']
                                 },
                                 //antibody 3
