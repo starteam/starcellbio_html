@@ -368,18 +368,16 @@ FACS Main View
             
             
             <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
-                {if $r.kind == 'existing' and length(keys($kinds)) > 1}
-                <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
-						assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' lane_id='{$r.lane.id}' role='button' aria-label='Delete Sample'
-				{if $r.is_sample_enabled}{else}disabled="disabled"{/if}><img alt="Delete" title="Delete" src="images/setup/scb_remove.png">
-				</button>
-                {else}
-<!-- 
-                <button class="scb_f_facs_sample_remove" role='button' aria-label='Close Tab'
-                        disabled="disabled">&#215;
-                </button>
- -->
-
+                {if $r.kind == 'existing' }
+                    {if length(keys($kinds)) > 1 or length(keys($kinds[$r.lane.kind].conditions)) > 1}
+                        <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
+                            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                            lane_id='{$r.lane.id}' role='button' aria-label='Delete Sample'
+                            {if $r.is_sample_enabled}{else}disabled="disabled"{/if}
+                            >
+                            <img alt="Delete" title="Delete" src="images/setup/scb_remove.png">
+                        </button>
+                    {/if}
                 {/if}
             </td>
         </tr>
