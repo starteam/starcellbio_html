@@ -86,6 +86,8 @@ scb.Facs = function scb_Facs(data, context, parent) {
     }, scb.utils.noop);
 
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
+    /* to save selected lane for each cell_treatment */
+    scb.Utils.initialize_accessor_field(self, data, 'is_tab_selected', {}, null, context);
     self.rows_state = function (exp) {
         var experiment = exp || self.parent.parent;
         var template = context.template;
@@ -123,8 +125,17 @@ scb.Facs = function scb_Facs(data, context, parent) {
                 if(chosen_conditions.length >= avail_conditions.length) {
                     skip_placeholders = true;
                 }
-
+                /*
+                    after samples were prepared want to initialize dict with
+                    first lane for each cell_treatment
+                */
+                if(self.sample_prepared){
+                    if(!self.is_tab_selected.hasOwnProperty(e.id)){
+                        self.is_tab_selected[e.id]= grouped_rows[e.id][0].id;
+                    }
+                }
                 _.each(grouped_rows[e.id], function (ee, index) {
+
                     rows.push({
                         kind: 'existing',
                         cell_treatment: e,
@@ -132,7 +143,8 @@ scb.Facs = function scb_Facs(data, context, parent) {
                         display_sample: index == 0,
                         is_sample_enabled: self.is_cell_treatment_enabled[e.id],
                         index: index,
-                        is_valid: self.is_cell_treatment_enabled[e.id] && ee && ee.conditions
+                        is_valid: self.is_cell_treatment_enabled[e.id] && ee && ee.conditions,
+                        is_tab_selected: self.is_tab_selected[e.id] === ee.id
                     });
                 });
                 if (!skip_placeholders) {

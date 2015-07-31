@@ -588,7 +588,7 @@ FACS Main View
             <ol role='list'  class='scb_s_facs_choose_samples_order_list'>
                 {foreach $r in $rows}
                 {if $r.is_valid}
-            		{if $r.index == 0}
+            		{if $r.is_tab_selected}
 						<li role='listitem'  
 							facs_id='{$facs.id}' 
 							assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" 
