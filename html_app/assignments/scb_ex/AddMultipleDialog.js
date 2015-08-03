@@ -96,6 +96,9 @@ scb_ex1.register = function (dialog, state) {
         $('input[type=checkbox]', dialog).attr('checked', 'checked');
         $('input[type=checkbox]', dialog).attr('aria-checked', true);
     });
+    scb.utils.off_on(dialog.parent(), 'click', '.scb_ex_inner_dialog_clear_all', function (e) {
+        $('input[type=checkbox]', dialog).attr('checked', false);
+    });
     scb.utils.off_on(dialog.parent(), 'change', '.scb_f_experiment_setup_dialog_checkbox', function (e) {
         $(this, dialog).attr('aria-checked', $(this, dialog).attr('aria-checked') == 'false' ? true : false);
     });

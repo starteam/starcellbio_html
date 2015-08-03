@@ -118,8 +118,11 @@
 }
 
 .scb_ex_inner_dialog_add, .scb_ex_inner_dialog_cancel {
-    margin: 0 10px 10px 10px;
+    margin-left: 10px;
 
+}
+.scb_s_clear_all{
+    float: right;
 }
 .scb_add_samples_add{
     float: right;
