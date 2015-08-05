@@ -11,11 +11,13 @@ $(function(){
         $(".scb_f_create_course_form").show();
         $('.scb_f_course_setup_choose_existing_course input').prop('checked', false);
         $(".scb_f_use_existing_course").hide();
+        $(".scb_s_course_setup_course_list label select").prop('disabled', true);
     });
     $(".scb_f_course_setup_choose_existing_course input").click(function(){
         $(".scb_f_create_course_form").hide();
         $('.scb_f_course_setup_create_new_course_option input').prop('checked', false);
-        $(".scb_f_use_existing_course").show();
+        $(".scb_f_use_existing_course").css('display','inline-block');
+        $(".scb_s_course_setup_course_list label select").prop('disabled', false);
     });
     /**
      * Assignment setup
@@ -57,8 +59,6 @@ $(function(){
             url:'/ab/assignments/delete_strain/',
             type:'POST',
             data: { pk: pk }
-
-
         });
         return false;
     });

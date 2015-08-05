@@ -84,19 +84,18 @@ def get_model(request):
     return response
 
 
-def get_account_type(request):
+def get_account_type(user):
     """ Get user account type """
     account_type = ''
-    if request.user.id:
-        groups = request.user.groups
-        if groups.count() != 0:
-            account_type = groups.all()[0].name
+    if user.id:
+        if user.groups.count() == 1:
+            account_type = user.groups.all()[0].name
     return account_type
 
 
 def get_user(request, **kwargs):
 
-    account_type = get_account_type(request)
+    account_type = get_account_type(request.user)
     
     retval = {'account_type': account_type, 'name': request.user.username}
     response = HttpResponse("var get_user_result = {0};".format(json.dumps(retval)))
@@ -169,7 +168,7 @@ def get_student_courses(request, **kwargs):
     obj.domain='starcellbio.mit.edu'
     obj.save()
 
-    account_type = get_account_type(request)
+    account_type = get_account_type(request.user)
 
     alist = []
     token1 = random.randrange(0, 1000000)
@@ -453,7 +452,7 @@ def get_instructor_assignments(request, **kwargs):
     token1 = random.randrange(0, 1000000)
     return_list = []
 
-    account_type = get_account_type(request)
+    account_type = get_account_type(request.user)
 
     if (account_type == 'instructor'):
         # 		pudb.set_trace()

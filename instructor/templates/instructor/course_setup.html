@@ -37,7 +37,7 @@
     </div>
     <div class="scb_s_course_setup_course_list" aria-labelledby="scb_s_experiment_step_progress_label_for_course">
         <label role="presentation" class="custom-select">
-            <select role="select" aria-label="Experiments" alt="">
+            <select role="select" aria-label="Experiments" disabled>
                 {% for a in courses %}
 
                     <option role='option' aria-label="{{ a.name }}" value="{{ a.id }}">
@@ -51,18 +51,26 @@
     <div class='scb_s_course_setup_radio_choice scb_f_course_setup_create_new_course_option'
          aria-label='Create New Assignment'>
         <input class='scb_s_experiment_setup_choose_template_kind' type="radio" checked/>
-        <span class='scb_s_course_setup_radio_text'>Create new course.</span>
+        <span class='scb_s_course_setup_radio_text'>
+            {% if new %}Create new course.
+            {% else %}Change name or code of this course.
+            {% endif %}
+        </span>
     </div>
 
     <div class="scb_f_create_course_form">
         <form method="post">{% csrf_token %}
-            <div class='scb_s_course_setup_course_name_heading'>1. What is the name of your course?</div>
+            <div class='scb_s_course_setup_course_name_heading'>
+                1. What is the name of your course?
+            </div>
             {{ form.name }}
+            <div class="scb_s_assignment_setup_errors">{{ form.name.errors }}</div>
 
             <div class='scb_s_course_setup_course_name_heading'>2. What course code would you like to provide to your
                 students?
             </div>
             {{ form.code }}
+            <div class="scb_s_assignment_setup_errors">{{ form.code.errors }}</div>
             <div class="">
                 <input type="submit"
                        name="continue"
@@ -72,24 +80,23 @@
                        name="save"
                        class="scb_s_navigation_button "
                        value="SAVE"/>
-                <input type="submit"
-                       name="back"
-                       class="scb_s_navigation_button"
-                       value="&#9664; &nbsp; BACK"/>
             </div>
 
         </form>
     </div>
-    <div class="scb_f_use_existing_course">
+    <div>
+        <a href="{% if new %}{% url "common_assignment_setup" %}{% else %}{% url "common_assignment_modify" %}{% endif %}">
+            <button class="scb_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+        </a>
+    </div>
+    <div class="scb_f_use_existing_course" style="">
         <button class="scb_f_course_setup_save_continue_course_button  scb_s_navigation_button"
                 aria-label='Save and Continue' name="continue" role='button'>SAVE AND CONTINUE &nbsp; &#9654;
         </button>
         <button class="scb_f_course_setup_save_continue_course_button  scb_s_navigation_button"
                 aria-label='Save' name ="save" role='button'>SAVE
         </button>
-        <a href="{% if new %}{% url "common_assignment_setup" %}{% else %}{% url "common_assignment_modify" %}{% endif %}">
-            <button class="scb_s_navigation_button" role='button'>&#9664; &nbsp; BACK</button>
-        </a>
+
     </div>
 
 {% endblock %}

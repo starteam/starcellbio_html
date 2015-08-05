@@ -4,6 +4,7 @@ scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 
 scb.ui.static.MainFrame = scb.ui.static.MainFrame || {};
+scb.ui.static.MainFrame.LOGOUT_URL = '/accounts/logout/';
 
 scb.ui.static.MainFrame.update_hash = function (state) {
 	
@@ -256,7 +257,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
     }
 
     scb.ui.static.MainFrame.clear_NO_PROMPT = function () {
-        $.ajax({url: '/accounts/logout/', async: false, timeout: 5 });
+        $.ajax({url: scb.ui.static.MainFrame.LOGOUT_URL, async: false, timeout: 5 });
         self.show({view: 'assignments'});
         master_model = master_model_data;
         scb.ui.static.MainFrame.save();
@@ -442,7 +443,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
                 if (key == 13) {
                     e.preventDefault();
-                    console.log($(".help_search_input").val());
                     $('#search').click();
                 }
             });
@@ -483,7 +483,6 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                 }
             });
 
-            console.info('clicked main popout', $('.main_popout'));
 
             $(".main_popout").click(function () {
                 var popout_string = "";
@@ -534,18 +533,18 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
                     $('.error_overlay').remove();
                     if (user_is_auth) {
 
-                        window.location = '/accounts/logout/';
+                        window.location = scb.ui.static.MainFrame.LOGOUT_URL;
                     }
                     else {
                         add_login_script(workarea);
                     }
                     evt.preventDefault();
-                },// callback function for 'YES' button
+                },  // callback function for 'YES' button
                 function () {
                     $('.error_overlay').remove();
                     $('html').css('overflow', 'visible');
                     return;
-                }		// callback function for 'NO' button
+                }  // callback function for 'NO' button
             );
             $('.jqDialog_header').remove();
             $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
@@ -555,7 +554,7 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         else {
             if (user_is_auth) {
 
-                window.location = '/accounts/logout/';
+                window.location = scb.ui.static.MainFrame.LOGOUT_URL;
             }
             else {
                 add_login_script(workarea);

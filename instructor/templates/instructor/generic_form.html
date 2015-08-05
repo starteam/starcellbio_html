@@ -8,7 +8,8 @@
     <div>
         <form method="post">{% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" class="scb_s_assignment_setup_save_button scb_s_navigation_button" value="Submit Questions"/>
+            <input type="submit" class="scb_s_assignment_setup_save_button scb_s_navigation_button"
+                   value="Submit Questions"/>
         </form>
     </div>
 {% endblock %}

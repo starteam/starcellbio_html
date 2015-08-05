@@ -3,16 +3,14 @@ import json
 
 
 def preview_as_json(assignment_id):
-    ret = preview(assignment_id)
-    return json.dumps(ret)
-
-
-def preview(assignment_id):
     ret = dict()
     ret['app_title'] = 'StarCellBio Preview'
     ret['app_description'] = 'StarCellBio Instructor Preview'
     ret['assignments'] = {'list': [compile(assignment_id)]}
-    return ret
+    return json.dumps(ret)
+
+
+
 
 
 def compile(assignment_id):
@@ -196,8 +194,8 @@ def micro_model(a):
     }
     for sp in a.microscopy_sample_prep.all():
         for i in sp.microscopy_images.all():
-            key = "{}%%{}%%{}".format(sp.analysis, sp.condition, "SP_ID_{}".format(i.strain_protocol_id))
-            if not ret.has_key(key):
+            key = "{sp.analysis}%%{sp.condition}%%SP_ID{protocol}".format(sp=sp, protocol=i.strain_protocol_id)
+            if not key in ret:
                 ret[key] = {
                     'slides': [{
                                    'hash': "IMAGE_{}".format(i.pk),
@@ -311,13 +309,13 @@ def micro_kinds(a):
     return ret
 
 
-def lysate_kinds(a):
+def lysate_kinds(assignment):
     ret = {}
-    if a.western_blot.has_whole_cell_lysate:
+    if assignment.western_blot.has_whole_cell_lysate:
         ret['whole'] = {'name': 'Whole Cell'}
-    if a.western_blot.has_cytoplasmic_fractination:
+    if assignment.western_blot.has_cytoplasmic_fractination:
         ret['cyto'] = {'name': 'Cytoplasm'}
-    if a.western_blot.has_nuclear_fractination:
+    if assignment.western_blot.has_nuclear_fractination:
         ret['nuclear'] = {'name': 'Nuclear'}
     return ret
 
@@ -372,22 +370,22 @@ def primary_anti_body(assignment):
     return ret
 
 
-def drugs(a):
+def drugs(assignment):
     ret = {}
-    for sp in a.strain_protocol.filter(enabled=True):
-        strain = sp.strain
-        protocol = sp.protocol
+    for strain_protocol in assignment.strain_protocol.filter(enabled=True):
+        strain = strain_protocol.strain
+        protocol = strain_protocol.protocol
         for t in protocol.treatments.all():
             tr = t.treatment
             ret[str(tr)] = {'name': str(tr)}
     return ret
 
 
-def concentrations(a):
+def concentrations(assignment):
     ret = {}
-    for sp in a.strain_protocol.filter(enabled=True):
-        strain = sp.strain
-        protocol = sp.protocol
+    for strain_protocol in assignment.strain_protocol.filter(enabled=True):
+        strain = strain_protocol.strain
+        protocol = strain_protocol.protocol
         for t in protocol.treatments.all():
             tr = t.concentration
             ret[str(tr)] = {
@@ -397,11 +395,11 @@ def concentrations(a):
     return ret
 
 
-def experiment_temperatures(a):
+def experiment_temperatures(assignment):
     ret = {}
-    for sp in a.strain_protocol.filter(enabled=True):
-        strain = sp.strain
-        protocol = sp.protocol
+    for strain_protocol in assignment.strain_protocol.filter(enabled=True):
+        strain = strain_protocol.strain
+        protocol = strain_protocol.protocol
         for t in protocol.treatments.all():
             tr = t.temperature
             ret[str(tr)] = {
@@ -411,14 +409,14 @@ def experiment_temperatures(a):
     return ret
 
 
-def add_multiple_dialog(a):
+def add_multiple_dialog(assignment):
     ret = []
-    for sp in a.strain_protocol.filter(enabled=True):
-        strain = sp.strain
-        protocol = sp.protocol
+    for strain_protocol in assignment.strain_protocol.filter(enabled=True):
+        strain = strain_protocol.strain
+        protocol = strain_protocol.protocol
         row = {
-            'id': "SP_ID_{}".format(str(sp.id)),
-            'identifier': "SP_ID_{}".format(str(sp.id)),
+            'id': "SP_ID_{}".format(str(strain_protocol.id)),
+            'identifier': "SP_ID_{}".format(str(strain_protocol.id)),
             'protocol': protocol.name,
             'strain': strain.name,
             'cell_line': str(strain.id),
@@ -432,18 +430,18 @@ def add_multiple_dialog(a):
 
 def compile_treatments(treatments):
     ret = []
-    for t in treatments:
+    for treatment in treatments:
         row = {
-            'id': 'treatment_{}'.format(t.id),
+            'id': 'treatment_{}'.format(treatment.id),
             'drug_list': {'list': [{
-                                       'drug_id': t.treatment,
-                                       'drug_name': t.treatment,
-                                       'concentration_id': t.concentration
+                                       'drug_id': treatment.treatment,
+                                       'drug_name': treatment.treatment,
+                                       'concentration_id': treatment.concentration
                                    }]},
-            'start_time': t.start_time,
-            'end_time': t.end_time,
-            'temperature': t.temperature,
-            'collection_time': t.collection_time,
+            'start_time': treatment.start_time,
+            'end_time': treatment.end_time,
+            'temperature': treatment.temperature,
+            'collection_time': treatment.collection_time,
             'microscope': ['rgb', 'g', 'gr', 'rb'],  # # microscope?!
             'collection_id': 'collection_ab'
         }
@@ -453,17 +451,17 @@ def compile_treatments(treatments):
 
 def compile_cell_lines(cell_lines):
     ret = {}
-    for c in cell_lines:
-        ret[str(c.id)] = {'name': c.name}
+    for cell_line in cell_lines:
+        ret[str(cell_line.id)] = {'name': cell_line.name}
     return ret
 
 
-def compile_techniques(a):
+def compile_techniques(assignment):
     ret = []
-    if a.has_fc:
+    if assignment.has_fc:
         ret.append('facs')
-    if a.has_micro:
+    if assignment.has_micro:
         ret.append('micro')
-    if a.has_wb:
+    if assignment.has_wb:
         ret.append('wb')
     return ret

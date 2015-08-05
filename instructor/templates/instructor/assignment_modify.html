@@ -20,11 +20,10 @@
          aria-labelledby="scb_s_experiment_step_progress_label_for_assignment">
         <label role="presentation" class="custom-select">
             <select role="select" id="scb_f_select_base_assignment" disabled>
-                {% for a in assignments %}
-                    <option role='option' aria-label='{{ a.name }}' value="{{ a.id }}"
-                            {% if a.id == based_on %}selected{% endif %}>
-                        {{ a.name }}&nbsp;&nbsp;
-
+                {% for asgmt in assignments %}
+                    <option role='option' aria-label='{{ asgmt.name }}' value="{{ asgmt.id }}"
+                            {% if asgmt.id == based_on %}selected{% endif %}>
+                        {{ asgmt.name }}
                     </option>
                 {% endfor %}
             </select>
@@ -38,6 +37,10 @@
 
     <form method="post">{% csrf_token %}
         {{ form.name }}
+        <div class="scb_s_assignment_setup_errors">
+            {{ form.name.errors }}
+        </div>
+
 
         <div class="">
             <input type="submit"

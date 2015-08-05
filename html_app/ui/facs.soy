@@ -619,9 +619,6 @@ FACS Main View
             {if $row.lane and $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
                 {/foreach}
             {/if}
-//            {foreach $k in keys($kinds)}
-//            <option role='option' value='{$k}'>{$kinds[$k].name}</option>
-//            {/foreach}
 	    {/if}
 	{else}
         {if $row.kind == 'existing'}
@@ -685,7 +682,7 @@ FACS Main View
             <ol role='list'  class='scb_s_facs_choose_samples_order_list'>
                 {foreach $r in $rows}
                 {if $r.is_valid}
-            		{if$r.is_tab_selected or $assignment.template.model.is_ab}
+            		{if $r.is_tab_selected or $assignment.template.model.is_ab}
 						<li role='listitem'
 							facs_id='{$facs.id}' 
 							assignment_id="{$assignment.id}" experiment_id="{$experiment.id}" 

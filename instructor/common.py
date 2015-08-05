@@ -7,17 +7,20 @@ from instructor import models
 from instructor import compiler
 from django.contrib.auth.models import User
 import datetime
+from django.http import Http404
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from StarCellBio.views import get_account_type
 
 from backend.models import Assignment, StudentAssignment
 
-
+@login_required
 def courses(request):
-    user = request.user
     message = ''
     CourseFormSet = modelformset_factory(models.Course, extra=1, fields=['name', 'code'], can_delete=True)
     if request.method == "POST":
         formset = CourseFormSet(request.POST)
-        if ( formset.is_valid()):
+        if formset.is_valid():
             message = "Thank you"
             entries = formset.save(commit=False)
             for form in entries:
@@ -27,36 +30,34 @@ def courses(request):
             message = "Something went wrong"
 
     return render_to_response('instructor/courses_new.html',
-                              {'formset': CourseFormSet(queryset=models.Course.objects.filter(owner=user)),
+                              {'formset': CourseFormSet(queryset=models.Course.objects.filter(owner=request.user)),
                                'message': message},
                               context_instance=RequestContext(request))
 
-
+@login_required
 def course_delete(request, pk):
-    print "DELETE {}".format(pk)
-    models.Course.objects.get(id=pk).delete()
+    try:
+        models.Course.objects.get(id=pk).delete()
+    except models.Course.DoesNotExist:
+        raise Http404('Course does not exist')
+
     return redirect('common_course')
 
 
-def get_account_type(request):
-    account_type = ''
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    return account_type
-
-
 def assignments(request):
-
-    account_type = get_account_type(request)
     public_list = models.Assignment.objects.filter(access='Public')
 
     return render_to_response('instructor/assignments.html',
                               {'assignments': public_list},
                               context_instance=RequestContext(request))
 
+@login_required
+def assignment_delete(request, pk):
+    try:
+        models.Assignment.objects.get(id=pk).delete()
+    except models.Assignment.DoesNotExist:
+        raise Http404('Object does not exist')
 
-def assignments_delete(request, pk):
-    models.Assignment.objects.get(id=pk).delete()
     return redirect('common_assignments')
 
 def create_new_assignment(request):
@@ -68,7 +69,7 @@ def create_new_assignment(request):
 
 def assignment_setup(request):
     if request.method == "POST":
-        #Have to give error for empty name
+        # Have to give error for empty name
         request.session['assignment_name'] = request.POST['name']
         if request.POST['based_on']:
             request.session['based_on'] = request.POST['based_on']
@@ -84,37 +85,35 @@ def assignment_setup(request):
                                'new': request.session['new']},
                                 context_instance=RequestContext(request))
 
-
+@login_required
 def course_setup(request):
     CourseForm = modelform_factory(models.Course, fields=['code', 'name'])
 
     if request.method == "POST":
-        if 'back' in request.POST:
-            return redirect("common_assignment_setup")
-        elif 'course_pk' in request.POST:
-            '''Adding to an existing course'''
+        if 'course_pk' in request.POST:
+            # Adding to an existing course
             course = models.Course.objects.get(pk=request.POST['course_pk'])
         else:
-            '''Create a new course'''
+            # Create a new course
             user = User.objects.get(username=request.user)
             form = CourseForm(request.POST)
             course = form.save(commit=False)
             course.owner_id = user.id
             course.save()
 
-        '''Create a new assignment'''
+        # Create a new assignment
         assignment_name = request.session['assignment_name']
         assignment_id = assignment_name + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
 
         if request.session['based_on']:
             a = models.Assignment(course=course,
-                              name=assignment_name,
-                              assignment_id=assignment_id,
-                              basedOn=request.session['based_on'])
+                                  name=assignment_name,
+                                  assignment_id=assignment_id,
+                                  basedOn=request.session['based_on'])
         else:
             a = models.Assignment(course=course,
-                              name=assignment_name,
-                              assignment_id=assignment_id)
+                                  name=assignment_name,
+                                  assignment_id=assignment_id)
         a.save()
         request.session['assignment_id'] = a.id
         request.session['new'] = False
@@ -122,7 +121,7 @@ def course_setup(request):
         if 'save' in request.POST:
             return redirect("common_course_modify")
         else:
-            '''Continue'''
+            # Continue
             return redirect('common_assignments_edit_strains')
 
     else:
@@ -134,9 +133,9 @@ def course_setup(request):
                                    'new': request.session['new']},
                                   context_instance=RequestContext(request))
 
-
+@login_required
 def assignments_edit(request, assignment_pk):
-    assignment = models.Assignment.objects.get(pk=assignment_pk)
+    assignment = get_object_or_404(models.Assignment, pk=assignment_pk)
     if assignment.basedOn is not None:
         request.session['based_on'] = assignment.basedOn.id
     else:
@@ -147,22 +146,23 @@ def assignments_edit(request, assignment_pk):
 
     return redirect('common_assignment_modify')
 
-
+@login_required
 def assignment_modify(request):
     assignment_id = request.session['assignment_id']
-    assignment = models.Assignment.objects.get(pk=assignment_id)
+    assignment = get_object_or_404(models.Assignment, pk=assignment_id)
     AssignmentForm = modelform_factory(models.Assignment, fields=['name'])
 
     if request.method == "POST":
-
-            form = AssignmentForm(request.POST, instance=assignment)
+        form = AssignmentForm(request.POST, instance=assignment)
+        if form.is_valid():
             form.save()
+            if 'continue' in request.POST:
+                return redirect("common_course_modify")
+    else:
+        form = AssignmentForm(instance=assignment)
 
     all_assignments = models.Assignment.objects.all()
-    if 'continue' in request.POST:
-        return redirect("common_course_modify")
 
-    form = AssignmentForm(instance=assignment)
     return render_to_response('instructor/assignment_modify.html',
                               {'assignments': all_assignments,
                                'form': form,
@@ -170,31 +170,33 @@ def assignment_modify(request):
                                'new': request.session['new']},
                               context_instance=RequestContext(request))
 
+
+@login_required
 def course_modify(request):
     assignment_id = request.session['assignment_id']
-    assignment = models.Assignment.objects.get(pk=assignment_id)
+    assignment = get_object_or_404(models.Assignment, pk=assignment_id)
     CourseForm = modelform_factory(models.Course, fields=['name', 'code'])
 
+    form = CourseForm(instance=assignment.course)
     if request.method == 'POST':
-        if 'back' in request.POST:
-            return redirect('common_assignment_modify')
-
         if 'course_pk' in request.POST:
-            '''change the course for this assignment'''
+            # change the course for this assignment
             new_course = models.Course.objects.get(pk=request.POST['course_pk'])
             assignment.course = new_course
             assignment.save()
+            if 'continue' in request.POST:
+                return redirect("common_assignments_edit_strains")
         else:
-            '''change this course's name or code'''
+            # change this course's name or code
             form = CourseForm(request.POST, instance=assignment.course)
-            form.save()
+            if form.is_valid():
+                form.save()
+                if 'continue' in request.POST:
+                    return redirect("common_assignments_edit_strains")
 
-        if 'continue' in request.POST:
-            return redirect("common_assignments_edit_strains")
+
 
     all_courses = models.Course.objects.all()
-
-    form = CourseForm(instance=assignment.course)
     return render_to_response('instructor/course_setup.html',
                               {'courses': all_courses,
                                'form': form,
@@ -212,7 +214,7 @@ def assignments_edit_meta(request):
     message = ''
     if request.method == "POST":
         form = AssignmentForm(request.POST, instance=assignment)
-        if ( form.is_valid()):
+        if form.is_valid():
             message = "Thank you"
             form.save()
         else:
@@ -229,13 +231,13 @@ def assignments_edit_meta(request):
 
 def assignments_edit_text(request):
     pk = request.session['assignment_id']
-    assignment = models.Assignment.objects.get(id=pk)
+    assignment = get_object_or_404(models.Assignment, id=pk)
     message = ''
     StrainsFormSet = modelformset_factory(models.AssignmentText, extra=1, fields=['title', 'text'], can_delete=True)
     if request.method == "POST":
         formset = StrainsFormSet(request.POST)
         formset.clean()
-        if ( formset.is_valid()):
+        if formset.is_valid():
             message = "Thank you"
             entries = formset.save(commit=False)
             for form in entries:
@@ -252,11 +254,10 @@ def assignments_edit_text(request):
                               },
                               context_instance=RequestContext(request))
 
-
+@login_required
 def assignments_edit_strains(request):
     pk = request.session['assignment_id']
-    assignment = models.Assignment.objects.get(id=pk)
-    message = ''
+    assignment = get_object_or_404(models.Assignment, id=pk)
     extra_fields = 0
     if 'add' in request.POST:
         extra_fields = 1
@@ -268,43 +269,43 @@ def assignments_edit_strains(request):
         formset.clean()
 
         if formset.is_valid():
-            message = "Thank you"
             entries = formset.save(commit=False)
             for form in entries:
                 form.assignment = assignment
                 form.save()
-        else:
-            message = "Something went wrong"
 
         if 'continue' in request.POST:
             return redirect('common_assignments_edit_protocols')
 
     formset = StrainsFormSet(queryset=models.Strains.objects.filter(assignment=assignment))
     add_btn_num = formset.total_form_count()+1
+
     return render_to_response('instructor/strains.html',
-                                  {'formset': formset,
-                                   'message': message,
-                                   'new':  request.session['new'],
-                                   'add_btn_num': add_btn_num,
-                                   'assignment': assignment
-                                  },
-                                  context_instance=RequestContext(request))
+                              {'formset': formset,
+                               'new':  request.session['new'],
+                               'add_btn_num': add_btn_num,
+                               'assignment': assignment
+                              },
+                              context_instance=RequestContext(request))
 
-
+@login_required
 def assignments_delete_strain(request):
-    models.Strains.objects.get(id=request.POST['pk']).delete()
+    try:
+        models.Strains.objects.get(id=request.POST['pk']).delete()
+    except models.Strains.DoesNotExist:
+        raise Http404('Strain does not exist')
     return redirect('common_assignments_edit_strains')
 
 
 def assignments_edit_protocols(request):
     pk = request.session['assignment_id']
-    assignment = models.Assignment.objects.get(id=pk)
+    assignment = get_object_or_404(models.Assignment, id=pk)
     message = ''
     ProtocolsFormSet = modelformset_factory(models.Protocol, extra=1, can_delete=True, exclude=['assignment'])
     if request.method == "POST":
         formset = ProtocolsFormSet(request.POST)
         formset.clean()
-        if ( formset.is_valid()):
+        if formset.is_valid():
             message = "Thank you"
             entries = formset.save(commit=False)
             for form in entries:
@@ -323,20 +324,20 @@ def assignments_edit_protocols(request):
 
 
 def treatments_edit(request, assignment, protocol):
-    a = models.Assignment.objects.get(id=assignment)
-    p = models.Protocol.objects.get(id=protocol)
+    assignment = models.Assignment.objects.get(id=assignment)
+    protocol = models.Protocol.objects.get(id=protocol)
     message = ''
     treatments_set = ['treatment']
-    if a.has_concentration:
+    if assignment.has_concentration:
         treatments_set.append('concentration')
         treatments_set.append('concentration_unit')
-    if a.has_temperature:
+    if assignment.has_temperature:
         treatments_set.append('temperature')
-    if a.has_start_time:
+    if assignment.has_start_time:
         treatments_set.append('start_time')
-    if a.has_duration:
+    if assignment.has_duration:
         treatments_set.append('end_time')
-    if a.has_collection_time:
+    if assignment.has_collection_time:
         treatments_set.append('collection_time')
 
     TreatmentsFormSet = modelformset_factory(models.Treatments, extra=1, can_delete=True, exclude=['protocol', 'order'],
@@ -344,60 +345,58 @@ def treatments_edit(request, assignment, protocol):
     if request.method == "POST":
         formset = TreatmentsFormSet(request.POST)
         formset.clean()
-        if ( formset.is_valid()):
+        if formset.is_valid():
             message = "Thank you"
             for form in formset.ordered_forms:
                 form.instance.order = form.cleaned_data['ORDER']
             entries = formset.save(commit=False)
             for form in entries:
-                form.protocol = p
+                form.protocol = protocol
                 form.save()
         else:
             message = "Something went wrong"
 
+    formset = TreatmentsFormSet(queryset=models.Treatments.objects.filter(protocol=protocol).order_by('order'))
     return render_to_response('instructor/treatments.html',
-                              {'formset': TreatmentsFormSet(
-                                  queryset=models.Treatments.objects.filter(protocol=p).order_by('order')),
+                              {'formset': formset,
                                'message': message,
-                               'assignment': a
+                               'assignment': assignment
                               },
                               context_instance=RequestContext(request))
 
 
 def strain_treatments_edit(request, assignment):
-    a = models.Assignment.objects.get(id=assignment)
-    strains = models.Strains.objects.filter(assignment=a)
-    protocols = models.Protocol.objects.filter(assignment=a)
+    assignment = models.Assignment.objects.get(id=assignment)
+    strains = models.Strains.objects.filter(assignment=assignment)
+    protocols = models.Protocol.objects.filter(assignment=assignment)
     message = ''
     for s in strains:
         for p in protocols:
-            (sp, created) = models.StrainProtocol.objects.get_or_create(strain=s, protocol=p, assignment=a)
-            print s, p, a, created
+            sp, created = models.StrainProtocol.objects.get_or_create(strain=s, protocol=p, assignment=assignment)
             sp.save()
     STFormSet = modelformset_factory(models.StrainProtocol, extra=0, exclude=['assignment', 'strain', 'protocol'])
     if request.method == "POST":
         formset = STFormSet(request.POST)
         formset.clean()
-        if ( formset.is_valid()):
+        if formset.is_valid():
             message = "Thank you"
             entries = formset.save(commit=False)
             for form in entries:
                 form.save()
         else:
             message = "Something went wrong"
-
+    formset = STFormSet(queryset=models.StrainProtocol.objects.filter(assignment=assignment))
     return render_to_response('instructor/strain_protocols.html',
-                              {'formset': STFormSet(
-                                  queryset=models.StrainProtocol.objects.filter(assignment=a)),
+                              {'formset': formset,
                                'message': message,
-                               'assignment': a
+                               'assignment': assignment
                               },
                               context_instance=RequestContext(request))
 
 
 def western_blot_edit(request, assignment):
     a = models.Assignment.objects.get(id=assignment)
-    (wb, created) = models.WesternBlot.objects.get_or_create(assignment=a)
+    wb, created = models.WesternBlot.objects.get_or_create(assignment=a)
     WesternBlotForm = modelform_factory(models.WesternBlot, exclude=['assignment'])
     message = ''
     if request.method == "POST":
@@ -420,7 +419,7 @@ def western_blot_edit(request, assignment):
 
 def western_blot_antibody_edit(request, assignment):
     a = models.Assignment.objects.get(id=assignment)
-    (wb, created) = models.WesternBlot.objects.get_or_create(assignment=a)
+    wb, created = models.WesternBlot.objects.get_or_create(assignment=a)
     wb.save()
     WesternBlotAntibodyFormset = modelformset_factory(models.WesternBlotAntibody, extra=1, can_delete=True,
                                                       exclude=['western_blot'])
@@ -428,7 +427,7 @@ def western_blot_antibody_edit(request, assignment):
     if request.method == "POST":
         formset = WesternBlotAntibodyFormset(request.POST)
         formset.clean()
-        if ( formset.is_valid()):
+        if formset.is_valid():
             message = "Thank you"
             entries = formset.save(commit=False)
             for form in entries:
@@ -448,10 +447,10 @@ def western_blot_antibody_edit(request, assignment):
 def western_blot_antibody_band_edit(request, assignment, antibody, sp):
     a = models.Assignment.objects.get(id=assignment)
 
-    (wb, created) = models.WesternBlot.objects.get_or_create(assignment=a)
+    wb, created = models.WesternBlot.objects.get_or_create(assignment=a)
     wb.save()
 
-    (protocol, created) = models.StrainProtocol.objects.get_or_create(id=sp)
+    protocol, created = models.StrainProtocol.objects.get_or_create(id=sp)
     protocol.save()
 
     ab = models.WesternBlotAntibody.objects.get(id=antibody)
@@ -461,7 +460,7 @@ def western_blot_antibody_band_edit(request, assignment, antibody, sp):
     if request.method == "POST":
         formset = WesternBlotAntibodyBandFormset(request.POST)
         formset.clean()
-        if ( formset.is_valid()):
+        if formset.is_valid():
             message = "Thank you"
             entries = formset.save(commit=False)
             for form in entries:
@@ -488,7 +487,7 @@ def microscopy_sample_prep(request, assignment):
     if request.method == "POST":
         formset = MicroSamplePrepFormset(request.POST)
         formset.clean()
-        if ( formset.is_valid()):
+        if formset.is_valid():
             message = "Thank you"
             for form in formset.ordered_forms:
                 form.instance.order = form.cleaned_data['ORDER']
@@ -518,7 +517,7 @@ def microscopy_images_edit(request, assignment, sample_prep, sp):
     if request.method == "POST":
         formset = MicroImagesFormset(request.POST)
         formset.clean()
-        if ( formset.is_valid()):
+        if formset.is_valid():
             message = 'Thank you'
             for form in formset.ordered_forms:
                 form.instance.order = form.cleaned_data['ORDER']
@@ -572,7 +571,7 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
     a = models.Assignment.objects.get(id=assignment)
     sample = models.FlowCytometrySamplePrep.objects.get(id=sample_prep)
     protocol = models.StrainProtocol.objects.get(id=sp)
-    (model, created) = models.FlowCytometryHistogram.objects.get_or_create(sample_prep=sample, strain_protocol=protocol)
+    model, created = models.FlowCytometryHistogram.objects.get_or_create(sample_prep=sample, strain_protocol=protocol)
     model.save()
 
     FlowCytometryHistogramForm = modelform_factory(models.FlowCytometryHistogram,

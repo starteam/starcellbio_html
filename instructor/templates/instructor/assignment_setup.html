@@ -22,9 +22,9 @@
          aria-labelledby="scb_s_experiment_step_progress_label_for_assignment">
         <label role="presentation" class="custom-select">
             <select role="select" id="scb_f_select_base_assignment" {% if not based_on %}disabled{% endif %}>
-                {% for a in assignments %}
-                    <option role='option' aria-label='{{ a.name }}' value="{{ a.id }}">
-                        {{ a.name }}&nbsp;&nbsp;
+                {% for asgmt in assignments %}
+                    <option role='option' aria-label='{{ asgmt.name }}' value="{{ asgmt.id }}">
+                        {{ asgmt.name }}
 
                     </option>
                 {% endfor %}
