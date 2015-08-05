@@ -1250,7 +1250,7 @@ var __scb_sample_2 = {
                             treatment_id: 'gmBuf',
                             cells: [
                                 {kind: 'checkbox', name: "GrowthMediaBuffer", treatment_id: 'gmBuf'},
-                                {kind: 'text', text: 'HisProX-FLAG'},
+                                {kind: 'text', text: 'His-ProX-FLAG'},
                                 {kind: 'text', text: 'Growth Media + Buffer'}
                             ],
                             cell_treatments: {
@@ -1276,7 +1276,7 @@ var __scb_sample_2 = {
                             treatment_id: 'gmProK',
                             cells: [
                                 {kind: 'checkbox', name: "GrowthMediaProK", treatment_id: 'gmProK'},
-                                {kind: 'text', text: 'HisProX-FLAG'},
+                                {kind: 'text', text: 'His-ProX-FLAG'},
                                 {kind: 'text', text: 'Growth Media + ProK'}
                             ],
                             cell_treatments: {
@@ -1306,7 +1306,7 @@ var __scb_sample_2 = {
                             treatment_id: 'gmBuf',
                             cells: [
                                 {kind: 'checkbox', name: "GrowthMediaBuffer", treatment_id: 'gmBuf'},
-                                {kind: 'text', text: 'HisProY-FLAG'},
+                                {kind: 'text', text: 'His-ProY-FLAG'},
                                 {kind: 'text', text: 'Growth Media + Buffer'}
                             ],
                             cell_treatments: {
@@ -1332,7 +1332,7 @@ var __scb_sample_2 = {
                             treatment_id: 'gmProK',
                             cells: [
                                 {kind: 'checkbox', name: "GrowthMediaProK", treatment_id: 'gmProK'},
-                                {kind: 'text', text: 'HisProY-FLAG'},
+                                {kind: 'text', text: 'His-ProY-FLAG'},
                                 {kind: 'text', text: 'Growth Media + ProK'}
                             ],
                             cell_treatments: {
