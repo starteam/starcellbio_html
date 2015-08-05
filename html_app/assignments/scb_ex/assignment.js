@@ -1420,7 +1420,7 @@ var __scb_sample_2 = {
                     {weight: 82, intensity: 0},
                     {weight: 84, intensity: 0}
                 ],
-                gel_name: 'apX'
+                gel_name: 'anti-Protein X'
             },
             '2': {
                 name: 'Rabbit anti-Protein Y',
@@ -1428,7 +1428,7 @@ var __scb_sample_2 = {
                 marks: [
                     {weight: 58, intensity: 0}
                 ],
-                gel_name: 'apY'
+                gel_name: 'anti-Protein Y'
             },
             '3': {
                 name: 'Mouse anti-6xHis',
@@ -1436,7 +1436,7 @@ var __scb_sample_2 = {
                 marks: [
                     {weight: 48, intensity: 0}
                 ],
-                gel_name: 'a6xH'
+                gel_name: 'anti-6xHis'
             },
             '4': {
                 name: 'Rabbit anti-FLAG',
@@ -1444,7 +1444,7 @@ var __scb_sample_2 = {
                 marks: [
                     {weight: 45, intensity: 0}
                 ],
-                gel_name: 'aFLAG'
+                gel_name: 'anti-FLAG'
             },
             '5': {
                 name: 'Mouse anti-PGK1',
@@ -1452,7 +1452,7 @@ var __scb_sample_2 = {
                 marks: [
                     {weight: 45, intensity: 0}
                 ],
-                gel_name: 'aPGK1'
+                gel_name: 'anti-PGK1'
             }
         },
         secondary_anti_body: {
@@ -3496,7 +3496,7 @@ var __scb_sample_3 = {
                 marks: [
                     {weight: 54, intensity: 0}
                 ],
-                gel_name: 'egfr'
+                gel_name: 'anti-EGFR'
             },
             '2': {
                 name: 'Mouse anti-pEGFR',
@@ -3504,7 +3504,7 @@ var __scb_sample_3 = {
                 marks: [
                     {weight: 58, intensity: 0}
                 ],
-                gel_name: 'pegfr'
+                gel_name: 'anti-pEGFR'
             },
             '3': {
                 name: 'Mouse anti-pMEK',
@@ -3512,7 +3512,7 @@ var __scb_sample_3 = {
                 marks: [
                     {weight: 48, intensity: 0}
                 ],
-                gel_name: 'pmek'
+                gel_name: 'anti-pMEK'
             },
             '4': {
                 name: 'Mouse anti-pRAF',
@@ -3520,7 +3520,7 @@ var __scb_sample_3 = {
                 marks: [
                     {weight: 25, intensity: 0}
                 ],
-                gel_name: 'praf'
+                gel_name: 'anti-pRAF'
             },
             '5': {
                 name: 'Mouse anti-PGK1',
@@ -3528,7 +3528,7 @@ var __scb_sample_3 = {
                 marks: [
                     {weight: 45, intensity: 0}
                 ],
-                gel_name: 'pgk1'
+                gel_name: 'anti-PGK1'
             },
             '6': {
                 name: 'Rabbit anti-6xHis',
@@ -3536,7 +3536,7 @@ var __scb_sample_3 = {
                 marks: [
                     {weight: 68, intensity: 0}
                 ],
-                gel_name: '6xhis'
+                gel_name: 'anti-6xHis'
             },
             '7': {
                 name: 'Rabbit anti-FLAG',
@@ -3544,9 +3544,9 @@ var __scb_sample_3 = {
                 marks: [
                     {weight: 68, intensity: 0}
                 ],
-                gel_name: 'flag'
+                gel_name: 'anti-FLAG'
             }
-        },//
+        },
         secondary_anti_body: {
             'm': {
                 name: 'rabbit anti-mouse'
@@ -3554,7 +3554,7 @@ var __scb_sample_3 = {
             'r': {
                 name: 'goat anti-rabbit'
             }
-        },//
+        },
         lysate_kinds: {
             'whole': {
                 name: 'Whole Cell'
