@@ -799,6 +799,15 @@ position: relative;
 bottom: 12px;
 left: -4px;
 }
+.scb_s_western_blot_static_list::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+.scb_s_western_blot_static_list::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
 
 .scb_s_western_blot_sortable_list{
 
@@ -809,6 +818,8 @@ left: -4px;
 .scb_s_western_blot_static_list{
 	-webkit-padding-start: 20px !important;
 	margin-top: 33px;
+	overflow-y: auto;
+	height: 250px;
 }
 
 .scb_s_western_blot_choose_samples_marker {
