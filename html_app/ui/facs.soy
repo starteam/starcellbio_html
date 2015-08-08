@@ -315,11 +315,14 @@ FACS Main View
             </td>
             <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} scb_s_facs_cell_treatment' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:171px;{else}width:136px;{/if}">
             {if $r.is_sample_enabled}			 
-            	<input type="radio"  checked class='scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
-			{else}
-				<input type="radio"  class='scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
-
-			{/if}
+            	<input type="radio"  checked>
+            	    <span class='scb_s_facs_cell_treatment_text'>Fixed</span>
+            	</input>
+            {else}
+                <input type="radio" disabled>
+                    <span class='scb_s_facs_cell_treatment_text scb_s_microscopy_dim_conditions'>Fixed</span>
+                </input>
+            {/if}
 
             </td>
             <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:215px;'>
