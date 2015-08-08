@@ -297,6 +297,7 @@ scb.ui.static.FacsView.scb_s_western_blot_gel_tab = function (element){
     }
     
     parsed.facs.lane_selected = parsed.facs_lane.id;
+    parsed.facs.is_tab_selected[parsed.facs.selected_lane.cell_treatment_id] = parsed.facs.lane_selected;
     scb.ui.static.MainFrame.refresh();
 
 }
