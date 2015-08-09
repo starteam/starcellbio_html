@@ -456,21 +456,20 @@
     <div class='{if $microscopy.samples_finished} scb_s_microscopy_choose_samples_order_no_border{else}scb_s_microscopy_choose_samples_order{/if}'>
         <ol role='list' class='scb_s_microscopy_choose_samples_order_list' >
             {foreach $r in $rows}
-            {if $r.is_valid}
-            	{if $r.index == 0}
-					<li role='listitem' 
-					microscopy_lane_id='{$r.lane.id}'
-					assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' 
-					microscopy_id='{$microscopy.id}' 
-					lane_kind = '{$r.lane.kind}' 
-					slide_conditions = '{$r.lane.slide_conditions}'
-					title='{$r.display_text} '
-					{if $microscopy.selected_lane and $r.cell_treatment.id == $microscopy.selected_lane.cell_treatment_id}class='scb_s_microscopy_sample_selected'{/if}>
-
-					 &nbsp;&nbsp;{$r.display_text} 
-					</li>
-            	{/if}
-            {/if}
+                {if $r.is_valid and $r.is_tab_selected}
+                    <li role='listitem'
+                        microscopy_lane_id='{$r.lane.id}'
+                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                        microscopy_id='{$microscopy.id}'
+                        lane_kind = '{$r.lane.kind}'
+                        slide_conditions = '{$r.lane.slide_conditions}'
+                        title='{$r.display_text} '
+                        {if $microscopy.selected_lane and $r.cell_treatment.id == $microscopy.selected_lane.cell_treatment_id}
+                        class='scb_s_microscopy_sample_selected'{/if}
+                    >
+                        &nbsp;&nbsp;{$r.display_text}
+                    </li>
+                {/if}
             {/foreach}
             </ol>
     </div>

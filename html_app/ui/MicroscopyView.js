@@ -580,6 +580,12 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
 		$('#jqDialog_box').attr('role', 'alertdialog');
     }
     else{
+        /* want to find the first lane in the list that valid
+           and select it */
+        var valid_lane = _.find(rows_state.rows, function(r){
+            return r.is_valid ;
+        });
+        parsed.microscopy.lane_selected =valid_lane.lane.id;
         parsed.microscopy.slide_prepared = true;
         window.scrollTo(0, 0);
         scb.ui.static.MainFrame.refresh();
@@ -626,8 +632,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_load_slides = function(element){
     }
     parsed.microscopy.samples_finished = true;
     parsed.microscopy.enable_samples = true;
-    parsed.microscopy.lane_selected = scb.utils.get(parsed.microscopy.lanes_list.list, [0, 'id']);
-    var lane_kind = parsed.microscopy.lanes_list.list[0].kind;
+    var lane_kind = parsed.microscopy.selected_lane.kind;
     if(lane_kind=='IF' || lane_kind == 'FLUOR' ){
     	parsed.microscopy.laser_on = true;
     	parsed.microscopy.light_on =false;
@@ -654,6 +659,8 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_slide_tab = function(element){
     	parsed.microscopy.laser_on = false;
     }
     parsed.microscopy.lane_selected = parsed.microscopy_lane.id;
+    parsed.microscopy.is_tab_selected[parsed.microscopy.selected_lane.cell_treatment_id]
+        = parsed.microscopy.lane_selected;
     scb.ui.static.MainFrame.refresh();
 }
 
@@ -674,7 +681,6 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_choose_samples_order_list_select =
             $('li', $(element).parent()).removeClass('scb_s_microscopy_sample_selected');
             $(element).addClass('scb_s_microscopy_sample_selected');
             parsed.microscopy.lane_selected = parsed.microscopy_lane.id;
-            parsed.microscopy.lanes_list.start_tabs_index = 0;
             parsed.microscopy.scroll = $('.scb_s_microscopy_choose_samples_order_list').scrollTop();
             scb.ui.static.MainFrame.refresh();
         }
@@ -699,9 +705,9 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_right_microscopy = function(elemen
 scb.ui.static.MicroscopyView.scb_s_microscopy_lane_left = function(element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
     parsed = resetScrollValue(parsed);
-
-    if (parsed.microscopy.lanes_list.start_tabs_index > 0) {
-        parsed.microscopy.lanes_list.start_tabs_index--;
+    var cell_treatment_id = parsed.microscopy.selected_lane.cell_treatment_id;
+    if (parsed.microscopy.start_tabs_index[cell_treatment_id] > 0) {
+        parsed.microscopy.start_tabs_index[cell_treatment_id]--;
     }
     scb.ui.static.MainFrame.refresh(parsed.state);
 
@@ -710,8 +716,10 @@ scb.ui.static.MicroscopyView.scb_s_microscopy_lane_right = function(element, eve
     var parsed = scb.ui.static.MicroscopyView.parse(element);
   	parsed = resetScrollValue(parsed);
 
-    if (parsed.microscopy.lanes_list.start_tabs_index < parsed.microscopy.total_num_tabs-1) {
-        parsed.microscopy.lanes_list.start_tabs_index++;
+    var cell_treatment_id = parsed.microscopy.selected_lane.cell_treatment_id;
+    var max_tab_index = parsed.microscopy.total_num_tabs - scb.ui.static.MicroscopyView.TOTAL_TABS;
+    if (parsed.microscopy.start_tabs_index[cell_treatment_id] < max_tab_index) {
+        parsed.microscopy.start_tabs_index[cell_treatment_id]++;
     }
     scb.ui.static.MainFrame.refresh(parsed.state);
 
@@ -2028,12 +2036,11 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         if (state.microscopy.samples_finished) {
             $(".scb_s_microscopy_lane_left").prop('disabled', false);
             $(".scb_s_microscopy_lane_right").prop('disabled', false);
-            if(state.microscopy.lanes_list.start_tabs_index <= 0){
-                state.microscopy.lanes_list.start_tabs_index = 0;
+            var cell_treatment_id = state.microscopy.selected_lane.cell_treatment_id;
+            if(state.microscopy.start_tabs_index[cell_treatment_id] <= 0){
                 $(".scb_s_microscopy_lane_left").prop('disabled', true);
-
             }
-            if(state.microscopy.lanes_list.start_tabs_index + scb.ui.static.MicroscopyView.TOTAL_TABS >=
+            if(state.microscopy.start_tabs_index[cell_treatment_id] + scb.ui.static.MicroscopyView.TOTAL_TABS >=
                 state.microscopy.total_num_tabs){
                 $(".scb_s_microscopy_lane_right").prop('disabled', true);
             }

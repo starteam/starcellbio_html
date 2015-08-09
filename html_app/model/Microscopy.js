@@ -65,11 +65,16 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
     scb.ModelHelpers.common_entry_code(self, data, context);
     scb.Utils.initialize_accessor_field(self, data, 'slide_prepared', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'lanes_list', {}, scb.MicroscopyLaneList, context);
+    /* samples_finished is true after LOAD was clicked */
     scb.Utils.initialize_accessor_field(self, data, 'samples_finished', false, null, context);
     scb.Utils.initialize_accessor_field(self, data, 'lane_selected', null, null, context);
     /* Has a dict of all lane_ids and corresponding value: 'checked' or 'undefined'
-    * it is set in MicroscopyView*/
+     * it is set in MicroscopyView */
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
+    /* to save selected lane for each cell_treatment */
+    scb.Utils.initialize_accessor_field(self, data, 'is_tab_selected', {}, null, context);
+    /* for each cell_treatment want to save starting tab */
+    scb.Utils.initialize_accessor_field(self, data, 'start_tabs_index', {}, null, context);
 
     scb.Utils.initialize_accessor_field(self, data, 'warning_fired', false, null, context);
 
@@ -125,6 +130,14 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
             	if(chosen_conditions.length >= avail_conditions.length){
                     skip_placeholders = true;
                 }
+                /* after samples were prepared want to initialize dict with
+                   initial tab value */
+                if(self.slide_prepared){
+                    if(!self.start_tabs_index.hasOwnProperty(e.id)){
+                       self.start_tabs_index[e.id] = 0;
+                    }
+                }
+
                 /* find total number of tabs for this sample*/
                 /* the number of valid lanes for this CellTreatment*/
                 var num_tabs=0;
@@ -135,20 +148,38 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
                 });
                 var is_valid;
                 _.each(grouped_rows[e.id], function (ee, index) {
-                    is_valid = self.is_cell_treatment_enabled[e.id] && ee && ee.slide_conditions;
+                    is_valid=false;
+                    /* identifies a complete lane, an enabled treatment with analysis and condition */
+                    if(
+                        self.is_cell_treatment_enabled.hasOwnProperty(e.id) &&
+                        typeof ee !== 'undefined' &&
+                        ee.slide_conditions !== null)
+                    {
+                        is_valid = true;
+                    }
+                    /*
+                        after samples were prepared want to initialize dict with
+                        first valid lane for each cell_treatment
+                    */
+                    if(self.slide_prepared && !self.is_tab_selected.hasOwnProperty(e.id) && is_valid){
+                        self.is_tab_selected[e.id]= ee.id;
+                    }
                     rows.push({
                         kind:'existing',
                         cell_treatment:e,
                         lane:ee,
+                        /* used in sample prep */
                         display_sample:index == 0,
                         is_sample_enabled:self.is_cell_treatment_enabled[e.id],
                         index:index,
                         is_valid: is_valid,
+                        /* used for displaying the selected lane in the samples list*/
+                        is_tab_selected: self.is_tab_selected[e.id] == ee.id,
                         display_text: e.format_row(),
-                        display_tab: false, /* small tabs in analyze*/
+                        /* at most 4 tabs can be displayed */
+                        display_tab: false,
                         num_tabs: num_tabs
                     });
-                	
                 });
                 if (!skip_placeholders) {
                     rows.push({
@@ -172,13 +203,14 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
             }
         });
         var valid_lane_index=0;
-        /* for each valid lane check if it is withing the bound of 4 tabs */
+        /* for each valid lane, that belongs to the selected cell_treatment,
+           check if it is withing the bound of 4 tabs */
         if(self.samples_finished) {
             _.each(rows, function (e) {
                 /* Make sure that lane e is complete and belongs to the selected cell_treatment */
                 if (e.is_valid && e.cell_treatment.id == self.selected_lane.cell_treatment_id) {
-                    if (valid_lane_index >= self.lanes_list.start_tabs_index &&
-                        valid_lane_index < self.lanes_list.start_tabs_index + 4) {
+                    if (valid_lane_index >= self.start_tabs_index[e.cell_treatment.id] &&
+                        valid_lane_index < self.start_tabs_index[e.cell_treatment.id] + 4) {
                         e.display_tab = true;
                     }
                     valid_lane_index++;
@@ -190,7 +222,6 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
 
             });
         }
-
         var count = 0;
         _.each(rows, function (e) {
             if (e.is_valid) count++;
