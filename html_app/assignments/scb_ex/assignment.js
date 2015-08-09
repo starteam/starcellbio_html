@@ -636,7 +636,7 @@ var __scb_sample_1 = {
                             cell_line: 'no-gfp',
                             imgs_hash: [
                                 [
-                                    {hash: 'bo'}
+                                    {hash: 'bo', if_type: 'green'}
                                 ]
                             ]
                         },
