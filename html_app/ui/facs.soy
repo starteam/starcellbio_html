@@ -262,6 +262,10 @@ FACS Main View
 
 <div class='scb_s_facs_samples_table' >
     <table role='grid'>
+        <col width="53px">
+        <col width="206px">
+        <col width="130px">
+        <col width="175px">
         <thead class='scb_s_facs_samples_table_head'>
         <td class='scb_s_facs_samples_table_heading sample_prep_select_facs'  role='columnheader'>Select</td>
         <td class='scb_s_facs_samples_table_heading sample_prep_samples_facs' role='columnheader'>Samples</td>
@@ -301,31 +305,37 @@ FACS Main View
         </thead>
         {foreach $r in $rows}
         <tr class='scb_s_facs_samples_table_tr {if $r.display_sample} scb_s_microscopy_row_border{/if}'  role='row' >
-            <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} ' style='width:56px;'>{if $r.display_sample}
-                <input  type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'  aria-checked='{if $r.is_sample_enabled}true{else}false{/if}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-                       cell_treatment_id='{$r.cell_treatment.id}'  role='checkbox'
-                {if $r.is_sample_enabled}checked="checked"{/if}
-                >
-                {/if}
-            </td> {if $r.kind == 'existing' and length(keys($kinds)) > 1}{/if}
-            <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:230px;{else}width:224px;{/if}">{if $r.display_sample}
-                {$r.display_text}
+            <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border{/if} '>
+                {if $r.display_sample}
+                    <input  type="checkbox" class="scb_f_facs_sample_active" facs_id='{$facs.id}'
+                        aria-checked='{if $r.is_sample_enabled}true{else}false{/if}'
+                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                        cell_treatment_id='{$r.cell_treatment.id}'  role='checkbox'
+                        {if $r.is_sample_enabled}checked="checked"{/if}
+                    >
                 {/if}
             </td>
-            <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} scb_s_facs_cell_treatment' style="{if $r.kind == 'existing' and length(keys($kinds)) > 1}width:171px;{else}width:136px;{/if}">
-            {if $r.is_sample_enabled}			 
-            	<input type="radio"  checked>
-            	    <span class='scb_s_facs_cell_treatment_text'>Fixed</span>
-            	</input>
-            {else}
-                <input type="radio" disabled>
-                    <span class='scb_s_facs_cell_treatment_text scb_s_microscopy_dim_conditions'>Fixed</span>
-                </input>
-            {/if}
+            <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'>
+                {if $r.display_sample}
+                    {$r.display_text}
+                {/if}
+            </td>
+            <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border {/if}
+                scb_s_facs_cell_treatment'>
+                <div style="position:relative">
+                    {if $r.is_sample_enabled}
+                        <input type="radio"  checked>
+                            <span class='scb_s_facs_cell_treatment_text'>Fixed</span>
+                        </input>
+                    {else}
+                        <input type="radio" disabled>
+                            <span class='scb_s_facs_cell_treatment_text scb_s_microscopy_dim_conditions'>Fixed</span>
+                        </input>
+                    {/if}
+                </div>
 
             </td>
-            <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}' style='width:215px;'>
+            <td class='scb_s_facs_samples_table_td{if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'>
                 {call .display_lysate_types}
                 {param assignment:$assignment/}
                 {param experiment:$experiment/}
@@ -338,11 +348,10 @@ FACS Main View
             
 
             
-            <td class=' scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'
-            style='width:232px;'>
-            	{if $r.lane}
+            <td class='scb_s_facs_samples_table_td{if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'>
+                {if $r.lane}
                     {foreach $c in keys($kinds[$r.lane.kind].conditions)}
-                    <div>
+                    <div class="scb_s_facs_condition_wrapper">
                         <input class="scb_f_facs_select_conditions
                         {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
                         facs_id='{$facs.id}'
@@ -367,10 +376,21 @@ FACS Main View
             </td>
 
             
+            <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'
+                style="width:70px">
+                {if $r.display_sample and $r.is_sample_enabled}
+                    {if length(keys($kinds)) > 1 or length(keys($kinds[$r.lane.kind].conditions)) > 1}
+                        <button class="scb_f_facs_add_all_conditions" facs_id='{$facs.id}'
+                            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                            cell_treatment_id='{$r.cell_treatment.id}'>
+                            Add All
+                        </button>
+                    {/if}
+                {/if}
+            </td>
             
             
-            
-            <td class='scb_s_facs_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
+            <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'>
                 {if $r.kind == 'existing' }
                     {if length(keys($kinds)) > 1 or length(keys($kinds[$r.lane.kind].conditions)) > 1}
                         <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'

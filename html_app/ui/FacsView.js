@@ -141,6 +141,47 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
     }
 }
 
+scb.ui.static.FacsView.scb_f_facs_add_all_conditions = function (element, event) {
+    /* Select all conditions for all types/kinds */
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed = resetScrollValue(parsed);
+    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
+
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
+    var lanes = _.filter(parsed.facs.lanes_list.list, function(lane) {
+        return cell_treatment_id == lane.cell_treatment_id
+    });
+    var facs_kinds = parsed.assignment.template.facs_kinds;
+    _.each(_.keys(facs_kinds), function(kind){
+        var conditions = _.keys(facs_kinds[kind].conditions);
+
+        _.each(conditions, function(condition){
+            /* find if a lane exists with this condition */
+            var lane = _.find(lanes, function(lane){
+                return lane.conditions === condition
+            });
+            if (typeof lane === 'undefined'){
+                parsed.facs.lanes_list.start({
+                    kind: kind,
+                    conditions: condition,
+                    cell_treatment_id: cell_treatment_id,
+                    experiment_id: parsed.experiment.id
+                });
+            }
+        });
+        /* want to remove any lanes that did not have condition selected */
+        var lanes_no_cond = _.filter(lanes, function(lane){
+            return lane.conditions == null
+        });
+        _.each(lanes_no_cond, function(lane){
+            parsed.facs.lanes_list.remove(lane.id);
+        });
+    });
+    if (event) {
+        scb.ui.static.MainFrame.refresh();
+    }
+}
+
 scb.ui.static.FacsView.scb_f_facs_select_conditions = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
 	parsed = resetScrollValue(parsed);
@@ -533,6 +574,9 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'change', '.scb_f_facs_select_conditions', function (e) {
         scb.ui.static.FacsView.scb_f_facs_select_conditions(this, e);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_add_all_conditions', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_add_all_conditions(this, e);
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
