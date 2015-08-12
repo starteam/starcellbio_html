@@ -476,12 +476,6 @@ left: 131px;
 
 }
 
-.scb_s_facs_gel_tab_selected{
-    display:inline-block;
-    font-family: 'sourcesanspro-bold';
-    font-size:11pt;
-    text-align: center;
-}
 
 
 .scb_s_microscopy_gel_tab_selected  {

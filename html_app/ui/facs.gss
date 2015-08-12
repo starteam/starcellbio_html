@@ -1013,6 +1013,13 @@ input[type=radio]:disabled{
 display:none;
 }
 
+.scb_s_facs_gel_tab_selected{
+    display:inline-block;
+    font-size: 9pt;
+    font-family: 'sourcesanspro-bold';
+    text-align: center;
+}
+
 
 
 
