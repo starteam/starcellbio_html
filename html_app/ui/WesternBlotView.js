@@ -171,7 +171,7 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
         alert("INVALID ELEMENT!");
     }
     var rows_state = parsed.western_blot.rows_state();
-    if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS - 1)) {
+    if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS)) {
     	$('html').css('overflow', 'hidden');
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 		
