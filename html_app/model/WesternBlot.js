@@ -156,17 +156,20 @@ scb.WesternBlot = function scb_WesternBlot(data, context, parent) {
 	        	} 
 	        	else return;
 	        });
-	        if(rows[1].is_marker){
-	        	var marker = rows[1];
-				rows.splice(1,1);
-				rows.splice(existing_rows, 0, marker);
-	        }
-	        if(rows[rows.length-1].is_marker){
-	        	var marker = rows[rows.length-1];
-				rows.splice(rows.length-1,1);
-				rows.splice(existing_rows, 0, marker);
-	        }
-	    }
+            if(self.marker_loaded) {
+                if (rows[1].is_marker) {
+                    var marker = rows[1];
+                    rows.splice(1, 1);
+                    rows.splice(existing_rows, 0, marker);
+                }
+                if (rows[rows.length - 1].is_marker) {
+                    var marker = rows[rows.length - 1];
+                    rows.splice(rows.length - 1, 1);
+                    rows.splice(existing_rows, 0, marker);
+                }
+            }
+        }
+
 	        	
         return {rows:rows, valid:count};
     }
