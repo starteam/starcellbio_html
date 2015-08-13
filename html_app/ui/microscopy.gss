@@ -90,11 +90,11 @@
 }
 
 .scb_s_microscopy_sample_checkbox{
-	width: 64px;
+    width: 53px;
 }
 
 .scb_s_microscopy_sample_name{
-	width: 340px;
+    width: 290px;
 }
 
 .scb_s_microscopy_sample_type{
@@ -102,19 +102,19 @@
 }
 
 .m_sample_prep_select{
-	width: 80px;
+    width: 53px;
 }
 
 .m_sample_prep_samples{
-	width: 467px;
+    width: 289px;
 }
 
 .m_sample_prep_lysate{
-	width: 240px;
+    width: 187px;
 }
 
 .m_sample_prep_blank{
-	width: 347px;
+    width: 322px;
 }
 
 .scb_s_microscopy_left_microscopy{
@@ -1554,7 +1554,7 @@ background-image: url('../../../images/microscopy/Right_Arrow_Gray.png');
 
 .scb_s_microscopy_slide_type_info{
 	outline: none;
-	right: 310px;
+	right: 371px;
 	bottom: -1px;
 	position: absolute;
 	background: none;
@@ -1755,4 +1755,8 @@ background-repeat: no-repeat;
     border-top: 1px solid transparent;
     margin-top: -1px;
     margin-left: 9px;
+}
+.scb_s_microscopy_condition_wrapper{
+    display: inline-block;
+    width: 85px;
 }

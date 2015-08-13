@@ -318,7 +318,7 @@
             {if $r.lane}
                 {foreach $condition in $r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]}
                     <!--If there is only one condition, radio button is already checked-->
-                    <div>
+                    <div class="scb_s_microscopy_condition_wrapper">
                         <input
                             class="scb_f_microscopy_select_conditions
                                 {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
@@ -337,7 +337,7 @@
                             }checked="checked"{/if}
                         />
                         <span class="scb_s_western_blot_choose_gel_type_input_text
-                            {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+                            {if not $r.is_sample_enabled} scb_s_microscopy_dim_conditions{/if}"
                         >
                             {$assignment.template.micro_kinds[$r.lane.kind].conditions[$condition].name}
                         </span>
