@@ -14,31 +14,29 @@ javascripts:
   - instructor/gen/instructor_facs_page2.soy.js
   - js/jquery-ui.js
   - ui/WesternBlotGelView.js
-  - ui_old/WorkspaceView.js
   - js/plugins/autosave/plugin.min.js
   - ui/gen/facs.soy.js
-  - scb_ex/gen/ex1_text.soy.js
+  - assignments/scb_ex/gen/ex1_text.soy.js
   - assignments/sutd_intro_biology/gen/instructions.soy.js
   - assignments/mit706s14/gen/instructions.soy.js
   - ui/gen/western_blot_gel.soy.js
   - instructor/gen/instructor_course_setup.soy.js
   - instructor/gen/instructor_microscopy_page2.soy.js
-  - mit706s14ps2/AddMultipleDialog.js
+  - assignments/mit706s14ps2/AddMultipleDialog.js
   - instructor/gen/instructor_facs_page1.soy.js
   - js/jquery.history.js
-  - scb_ex/gen/addmutlpledialog.soy.js
+  - assignments/scb_ex/gen/addmutlpledialog.soy.js
   - model/NotebookElement.js
   - js/plugins/link/plugin.min.js
   - model/Assignments.js
   - ui/gen/userguide.soy.js
   - assignments/microscopy_usability/gen/instructions.soy.js
-  - scb_ex/gen/addmultipledialog2.soy.js
+  - assignments/scb_ex/gen/addmultipledialog2.soy.js
   - model/WesternBlot.js
   - instructor/gen/instructor_assignment_setup.soy.js
   - ui/gen/western_blot.soy.js
   - model/Facs.js
   - components/WesternBlotCanvas.js
-  - ui_old/gen/experiment_edit.soy.js
   - instructor/InstructorExperimentSetupPage1View.js
   - assignments/sutd_intro_biology_ps2/gen/instructions.soy.js
   - instructor/gen/instructor_experiment_setup_page1.soy.js
@@ -52,7 +50,6 @@ javascripts:
   - model/Microscopy.js
   - js/plugins/template/plugin.min.js
   - assignments/mit706s14ps2/gen/instructions.soy.js
-  - ui_old/WesternBlotView.js
   - js/slides.min.jquery.js
   - instructor/InstructorExperimentSetupPage3View.js
   - gen/microscopy_test.soy.js
@@ -66,10 +63,8 @@ javascripts:
   - model/LysateKind.js
   - instructor/InstructorDashboardView.js
   - js/raphael.js
-  - ui_old/gen/dashboard.soy.js
   - ug2/parse_wiki.js
   - utils/Utilities.js
-  - ui_old/FacsOneView.js
   - js/plugins/tabfocus/plugin.min.js
   - assignments/sutd_intro_biology_ps2/AddMultipleDialog.js
   - js/jqdialog.js
@@ -84,25 +79,23 @@ javascripts:
   - js/plugins/hr/plugin.min.js
   - ui/ExperimentSetupView.js
   - js/plugins/anchor/plugin.min.js
-  - ui_old/FacsView.js
   - js/plugins/legacyoutput/plugin.min.js
   - js/plugins/visualchars/plugin.min.js
   - components/FACSModelFactory.js
   - instructor/gen/instructor_microscopy_page3.soy.js
   - ui/MicroscopyView.js
-  - ui_old/Sidebar.js
   - components/WesternBlotModelFactory.js
   - swipe/swipe.js
   - model/WesternBlotGel.js
   - model/Template.js
   - model/Experiment.js
   - ui/gen/auth.soy.js
-  - decusability/AddMultipleDialog.js
+  - assignments/decusability/AddMultipleDialog.js
   - model/WesternBlotExposure.js
   - ui/WesternBlotView.js
   - instructor/gen/instructor_common.soy.js
   - js/plugins/autoresize/plugin.min.js
-  - microscopy_usability/AddMultipleDialog.js
+  - assignments/microscopy_usability/AddMultipleDialog.js
   - instructor/InstructorMicroscopyPage3View.js
   - instructor/InstructorWesternBlotPage4View.js
   - js/jquery.cookie.js
@@ -110,11 +103,11 @@ javascripts:
   - js/jquery.multiselect.js
   - ui/gen/homepage.soy.js
   - js/plugins/print/plugin.min.js
-  - scb_ex/gen/ex3_text.soy.js
+  - assignments/scb_ex/gen/ex3_text.soy.js
   - instructor/InstructorSelectTechniqueView.js
   - js/plugins/directionality/plugin.min.js
   - instructor/InstructorWesternBlotPage1View.js
-  - microscopy_usability/gen/addmultipledialog.soy.js
+  - assignments/microscopy_usability/gen/addmultipledialog.soy.js
   - js/plugins/importcss/plugin.min.js
   - js/plugins/nonbreaking/plugin.min.js
   - assignments/sutd_intro_biology_ps2/gen/addmultipledialog.soy.js
@@ -125,39 +118,33 @@ javascripts:
   - js/plugins/bbcode/plugin.min.js
   - instructor/InstructorFacsPage2View.js
   - js/plugins/media/plugin.min.js
-  - coin-slider/coin-slider.min.js
   - components/ModelFactory.js
   - assignments/tufts/gen/instructions.soy.js
   - ui/SelectTechniqueView.js
   - ui/gen/select_technique.soy.js
   - assignments/decusability/gen/instructions.soy.js
-  - ui_old/WesternBlotGelView.js
   - js/plugins/fullpage/plugin.min.js
   - instructor/InstructorFacsPage1View.js
-  - ui_old/DashboardView.js
   - instructor/gen/instructor_western_blot_page3.soy.js
-  - ui_old/gen/westernblotgel.soy.js
   - instructor/InstructorFrame.js
   - assignments/mit706s13/gen/instructions.soy.js
   - instructor/gen/instructor_experiment_setup_page2.soy.js
   - js/plugins/visualblocks/plugin.min.js
-  - ui_old/gen/workspace.soy.js
   - instructor/InstructorWesternBlotPage2View.js
   - instructor/gen/instructor_western_blot_page2.soy.js
   - js/plugins/paste/plugin.min.js
   - instructor/InstructorWesternBlotPage3View.js
   - instructor/InstructorMicroscopyPage2View.js
-  - mit706s14/gen/addmultipledialog.soy.js
+  - assignments/mit706s14/gen/addmultipledialog.soy.js
   - instructor/gen/instructor_western_blot_page5.soy.js
   - js/plugins/preview/plugin.min.js
   - model/NotebookSection.js
   - js/swipe.js
-  - scb_ex/AddMultipleDialog.js
+  - assignments/scb_ex/AddMultipleDialog.js
   - model/MicroscopyLanes.js
   - instructor/gen/instructor_experiment_setup_page3.soy.js
   - mit706s13/AddMultipleDialog.js
   - instructor/InstructorExperimentSetupPage2View.js
-  - ui_old/gen/facs.soy.js
   - mit706s13/gen/addmultipledialog.soy.js
   - model.js
   - js/plugins/lists/plugin.min.js
@@ -167,11 +154,8 @@ javascripts:
   - js/plugins/advlist/plugin.min.js
   - js/plugins/layer/plugin.min.js
   - js/jstat-1.0.0.js
-  - scb_ex/gen/ex2_text.soy.js
-  - ui_old/MakingLysatesView.js
-  - ui_old/gen/common.soy.js
+  - assignments/scb_ex/gen/ex2_text.soy.js
   - ui/AssignmentsView.js
-  - ui_old/gen/making_lysates.soy.js
   - model/Treatment.js
   - model/Notebook.js
   - js/plugins/code/plugin.min.js
@@ -181,11 +165,9 @@ javascripts:
   - instructor/InstructorAssignmentSetupView.js
   - js/plugins/noneditable/plugin.min.js
   - ui/gen/notebook.soy.js
-  - ui_old/gen/experiment.soy.js
   - instructor/gen/instructor_dashboard.soy.js
   - instructor/InstructorExperimentSetupPage4View.js
   - js/jquery.flot.js
-  - ui_old/gen/western_blots.soy.js
   - js/plugins/contextmenu/plugin.min.js
   - utils/CSFRFix.js
   - model/ModelHelpers.js
@@ -205,89 +187,80 @@ javascripts:
   - instructor/gen/instructor_microscopy_page1.soy.js
   - ui/gen/experiment_design.soy.js
   - instructor/InstructorWesternBlotPage5View.js
-  - ui_old/ExperimentView.js
-  - coin-slider/coin-slider.js
-  - decusability/gen/addmultipledialog.soy.js
+  - assignments/decusability/gen/addmultipledialog.soy.js
   - js/plugins/example_dependency/plugin.min.js
-  - ui_old/gen/experiment_setup.soy.js
   - js/plugins/autolink/plugin.min.js
   - js/plugins/save/plugin.min.js
-  - mit706s14/AddMultipleDialog.js
-  - mit706s14ps2/gen/addmultipledialog.soy.js
+  - assignments/mit706s14/AddMultipleDialog.js
+  - assignments/mit706s14ps2/gen/addmultipledialog.soy.js
   - js/plugins/textcolor/plugin.min.js
   - ui/ExperimentDesignView.js
+  - assignments/scb_ex/assignment.js
+  - assignments/sutd_intro_biology_ps2/assignment.js
+  - assignments/sutd_intro_biology/assignment.js
+  - assignments/mit706s14/assignment.js
+  - assignments/mit706s14ps2/assignment.js
+  - assignments/decusability/assignment.js
+  - assignments/microscopy_usability/assignment.js
   - master_model.js
 
 css:
   - js/skins/lightgray/skin.min.css
-  - ui_old/gen/making_lysates.gss.css
-  - scb_ex/gen/addmultipledialog.gss.css
+  - assignments/scb_ex/gen/addmultipledialog.gss.css
   - ui/gen/technique_tabs.gss.css
   - assignments/microscopy_usability/gen/instructions.gss.css
-  - ui_old/gen/workspace.gss.css
   - assignments/mit706s14/gen/instructions.gss.css
   - ui/gen/contact.gss.css
   - js/skins/lightgray/content.min.css
   - swipe/substyle.css
   - ui/gen/facs.gss.css
   - ug2/ug.css
-  - ui_old/gen/dashboard.gss.css
   - gen/usability_test.gss.css
   - instructor/gen/instructor_homepage.gss.css
-  - ui_old/gen/sidebar.gss.css
   - css/style.css
   - test/gen/test.gss.css
   - ui/gen/experiment_setup.gss.css
-  - mit706s14/gen/addmultipledialog.gss.css
+  - assignments/mit706s14/gen/addmultipledialog.gss.css
   - ui/gen/common.gss.css
   - js/skins/lightgray/content.inline.min.css
-  - ui_old/back_button.css
   - instructor/gen/instructor_dashboard.gss.css
   - instructor/gen/instructor_facs.gss.css
   - instructor/gen/instructor_western_blot.gss.css
   - instructor/gen/instructor_select_technique.gss.css
   - ref_lib/rl.css
-  - ui_old/gen/facs.gss.css
-  - decusability/gen/addmultipledialog.gss.css
+  - assignments/decusability/gen/addmultipledialog.gss.css
   - assignments/mit706s13/gen/instructions.gss.css
   - mit706s13/gen/addmultipledialog.gss.css
   - ui/gen/experiment_design.gss.css
   - assignments/tufts/gen/instructions.gss.css
   - assignments/mit706s14ps2/gen/instructions.gss.css
-  - coin-slider/coin-slider-styles.css
   - css/smoothness/jquery-ui.min.css
   - ui/gen/microscopy.gss.css
   - css/jqdialog.css
   - instructor/gen/instructor_experiment_setup.gss.css
   - assignments/decusability/gen/instructions.gss.css
   - ui/gen/homepage.gss.css
-  - ui_old/gen/experiment.gss.css
   - ui/gen/assignments.gss.css
   - starcellbio.app.css
   - css/jquery.multiselect.css
   - ui/gen/userguide.gss.css
   - instructor/gen/instructor_assignment_setup.gss.css
-  - ui_old/gen/westernblotgel.gss.css
   - assignments/sutd_intro_biology/gen/instructions.gss.css
-  - microscopy_usability/gen/addmultipledialog.gss.css
+  - assignments/microscopy_usability/gen/addmultipledialog.gss.css
   - css/layout-default.css
   - instructor/gen/instructor_course_setup.gss.css
-  - ui_old/gen/common.gss.css
   - assignments/sutd_intro_biology_ps2/gen/addmultipledialog.gss.css
   - ui/gen/select_technique.gss.css
   - ui/gen/auth.gss.css
   - css/smoothness/jquery-ui-1.8.16.custom.css
   - contact/contact.css
-  - ui_old/gen/experiment_setup.gss.css
   - js/skins/lightgray/skin.ie7.min.css
   - ui/gen/western_blot_gel.gss.css
   - gen/microscopy_test.gss.css
   - swipe/style.css
-  - mit706s14ps2/gen/addmultipledialog.gss.css
+  - assignments/mit706s14ps2/gen/addmultipledialog.gss.css
   - ui/gen/western_blot.gss.css
-  - ui_old/button.css
   - ui/gen/assignment.gss.css
-  - ui_old/gen/western_blots.gss.css
   - ui/gen/notebook.gss.css
   - js/plugins/visualblocks/css/visualblocks.css
   - instructor/gen/instructor_microscopy.gss.css

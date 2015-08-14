@@ -1,0 +1,78 @@
+{namespace scb_ex}
+
+/**
+@param template
+@param assignment
+@param experiment
+*/
+{template .dialog}
+<div class='scb_ex_inner_dialog' role='dialog' aria-label='Add Samples'>
+    <h1 class='scb_ex_inner_dialog_title' role='presentation' aria-label='Add Samples'>
+        <span class='scb_ex_inner_dialog_title_close' role='button' aria-label='Close Add Samples'>&#215;</span>
+        Add Samples </h1>
+
+    <div class='scb_ex_inner_dialog_body'>
+        <div class='scb_ex_samples_table_wrapper'>
+        <table class="scb_s_experiment_setup_table" role='grid' >
+            <thead class="scb_s_experiment_setup_table_head" >
+                {foreach $heading in $template.ui.add_multiple_dialog.headings}
+                <td role='columnheader' aria-label='{$heading}'
+                    class="scb_s_experiment_setup_table_heading
+                    {if $heading == 'Strain'} scb_s_experiment_setup_table_heading_strain{/if}
+                    {if $heading == ''} scb_s_experiment_setup_table_heading_checkbox{/if}" >
+                    {$heading}
+                </td>
+                {/foreach}
+            </thead>
+            {foreach $cell_line in $template.ui.add_multiple_dialog.order}
+                <tbody class="scb_s_experiment_setup_table_body">
+                    {foreach $rows in $template.ui.add_multiple_dialog[$cell_line].rows}
+                        <tr role='row' aria-label='Sample'>
+                            {foreach $cell in $rows.cells}
+                            <td class="scb_s_experiment_setup_table_border
+                            {if $cell.kind == 'checkbox'} scb_s_microscopy_usability_checkbox {/if}">
+                                {if $cell.kind == 'text'}
+                                    {$cell.text}
+                                {/if}
+                                {if $cell.kind == 'select'}
+                                    <select assignment='{$assignment.id}'
+                                        experiment_id='{$experiment.id}'
+                                        treatment_id='{$cell.treatment_id}'
+                                        cell_line='{$cell_line}' role='select'>
+                                        <option disabled="disabled" role='option'>Please select</option>
+                                        {foreach $key in keys($template[$cell.field])}
+                                            <option  role='option' value='{$template[$cell.field][$key]}'>
+                                                {$template[$cell.field][$key].name}
+                                            </option>
+                                        {/foreach}
+                                    </select>
+                                {/if}
+                                {if $cell.kind == 'checkbox'}
+                                    <input class='scb_f_experiment_setup_dialog_checkbox '
+                                        type="checkbox"  role='checkbox'
+                                        name="{$cell.name}" assignment_id='{$assignment.id}'
+                                        experiment_id='{$experiment.id}' treatment_id='{$cell.treatment_id}'
+                                        cell_line='{$cell_line}' aria-checked='false'>
+                                {/if}
+                            </td>
+                            {/foreach}
+                        </tr>
+                    {/foreach}
+                </tbody>
+            {/foreach}
+        </table>
+        </div>
+        <button class='scb_ex_inner_dialog_select_all scb_s_gray_button'
+            aria-label='Select All' role='button'>SELECT ALL</button>
+        <button class='scb_ex_inner_dialog_clear_all scb_s_gray_button scb_s_clear_all'
+            aria-label='Clear All' role='button'>CLEAR ALL</button>
+
+        <div class='scb_ex_button_float'>
+            <button class='scb_ex_inner_dialog_add scb_s_gray_button scb_add_samples_add'
+                aria-label='Add Samples' role='button'>ADD SAMPLES</button>
+            <button class='scb_ex_inner_dialog_cancel scb_s_gray_button scb_add_samples_cancel'
+                aria-label='Cancel' role='button'>CANCEL</button>
+        </div>
+    </div>
+</div>
+{/template}

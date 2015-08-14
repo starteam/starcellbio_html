@@ -21,12 +21,13 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
             return true;
         }
     }
-
+    var keep;
     if (scb.utils.isDefined(model.cyto)) {
         self.cyto = function (lane, gel, lane_marks) {
             if (lane.kind == 'whole' || lane.kind == 'cyto' || lane.kind == 'whole_cell') {
             	if(lane.id == 'marker')
             		lane_marks.push({ weight: 0, intensity: 0});
+                /* parser_1 is used only by  __assigment_facs */
                 else if (scb.utils.isDefined(model.cyto.parser_1)) {
                     var rules = model.cyto.parser_1;
                     for (var rule_index in rules) {
@@ -79,10 +80,15 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                         var rule = rules[rule_index];
                         if (rule.transfer_function == 'static') {
                             if (lane.cell_treatment.cell_line == rule.cell_line || rule.cell_line == '*ANY*') {
-                                var keep = true;
+                                treatments = lane.cell_treatment.treatment_list;
+                                keep = true;
+                                if(rule.drug && rule.drug != '*ANY*') {
+                                    /* Check if this lane has rule.drug_id */
+                                    keep = treatments.first.drug_list.list[0].drug_id == rule.drug;
+                                }
                                 if (rule.temperature) {
                                     var value = scb.utils.get(lane, ["cell_treatment", "treatment_list", "list", 0, "temperature"], null);
-                                    keep = ( rule.temperature == value );
+                                    keep = keep && ( rule.temperature == value );
                                 }
                                 if(rule.duration){
                                     var value = scb.utils.get(lane, ["cell_treatment", "treatment_list", "list", 0, "duration"], null);
@@ -111,7 +117,9 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                             }
                         } else if (rule.transfer_function == 'delta') {
                             if (lane.cell_treatment.cell_line == rule.cell_line || rule.cell_line == '*ANY*') {
-                                var treatments = lane.cell_treatment.treatment_list.list;
+                                treatments = lane.cell_treatment.treatment_list.list;
+                                /* Compares only one drug, I guess assuming that out of a list of
+                                   drugs at least one drug is unique per treatment */
                                 for (var treatment_index in treatments) {
                                     var treatment = treatments[treatment_index];
                                     var drugs = treatment.drug_list.list;
@@ -119,8 +127,16 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
                                         return d.drug_id == rule.drug;
                                     });
                                     var drug_concentration = drug ? parseFloat(template.concentrations[drug.concentration_id].value) : 0;
+                                    /* if rule.drug is ANY, set drug_concentration to any value >= cutoff*/
+                                    drug_concentration=(rule.drug == '*ANY*')? 1 :drug_concentration;
                                     var marks_list = (drug_concentration >= rule.cutoff) ? rule.above_marks : rule.below_marks;
-                                    if (scb.utils.isDefined(marks_list)) {
+                                    keep = true;
+
+                                    if(rule.duration){
+                                        var value = scb.utils.get(lane, ["cell_treatment", "treatment_list", "list", 0, "duration"], null);
+                                        keep = keep && ( rule.duration == value || rule.duration == '*ANY*');
+                                    }
+                                    if (scb.utils.isDefined(marks_list) && keep) {
 
                                         for (var mark_index in marks_list) {
                                             var rule_mark = marks_list[mark_index];

@@ -513,11 +513,6 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
 				  'aria-valuenow': "0",
 				  'aria-valuetext': "1 minute"
 				});
-				$('.scb_f_wb_exposure_slider > .ui-slider-range').width( $('.scb_f_wb_exposure_slider > .ui-slider-range').width() - 6);
-				if($('.scb_s_wb_exposure_time_value').text() == '1 h') {
-					$('.ui-slider-handle').css('left', $('.ui-slider-handle').position().left-10+'px')
-					console.log('fix');
-				}
             }
         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
         

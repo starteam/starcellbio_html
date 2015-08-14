@@ -230,8 +230,8 @@ nav ul li.on{
 
 #nav {
 	display:inline-block;
-	margin-left: 56px;
-	margin-right: 56px;
+	margin-left: 30px;
+	margin-right: 30px;
 }
 
 .slider_controls{

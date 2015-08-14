@@ -45,7 +45,7 @@ random_mapping_ps2 = {0: '52341', 1: '32145', 2: '32514', 3: '32451', 4: '12453'
 def home(request):
     file_path = StarCellBio.settings.rel('../html_app/index.html')
     fsock = open(file_path, "r")
-    response = HttpResponse(fsock, mimetype='text/html; charset=utf-8')
+    response = HttpResponse(fsock, content_type='text/html; charset=utf-8')
     return response
     # return redirect('static/index.html')
 
@@ -87,7 +87,7 @@ def get_model(request):
 def get_user(request, **kwargs):
     import pudb
     # pudb.set_trace()
-    if (request.user.id):
+    if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
@@ -100,7 +100,7 @@ def get_user(request, **kwargs):
 
 def create_course(request, **kwargs):  #
     # pudb.set_trace()
-    jstr = request.raw_post_data
+    jstr = request.body
     jsondata = json.loads(jstr)
 
     course_code = jsondata['course_code']
@@ -116,7 +116,7 @@ def create_course(request, **kwargs):  #
 def initialize_courses(request, **kwargs):  #
     import pudb
     # pudb.set_trace()
-    jstr = request.raw_post_data
+    jstr = request.body
     jsondata = json.loads(jstr)
     if (request.method == 'POST'):
         #pudb.set_trace()
@@ -160,7 +160,7 @@ def get_student_courses(request, **kwargs):
     obj.domain='starcellbio.mit.edu'
     obj.save()
 
-    if (request.user.id):
+    if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
@@ -284,7 +284,7 @@ def get_student_courses(request, **kwargs):
 def post_state(request, **kwargs):
     #import pudb
     #print request.user
-    jstr = request.raw_post_data
+    jstr = request.body
     jsondata = json.loads(jstr)
     jsonmodel = jsondata['model']
     import random
@@ -448,7 +448,7 @@ def get_instructor_assignments(request, **kwargs):
     retval = []
     token1 = random.randrange(0, 1000000)
     return_list = []
-    if (request.user.id):
+    if request.user.id and len(request.user.groups.all()) > 0:
         account_type = request.user.groups.all()[0].name
     else:
         account_type = ''
@@ -480,7 +480,7 @@ def get_instructor_assignments(request, **kwargs):
 
 def create_new_assignment(request, **kwargs):
     # 	pudb.set_trace()
-    jstr = request.raw_post_data
+    jstr = request.body
     assignment_data = json.loads(jstr)['assignment']
 
     assign_id = assignment_data['id']
@@ -498,7 +498,7 @@ def create_new_assignment(request, **kwargs):
 
 def edit_assignment(request, **kwargs):
     # 	pudb.set_trace()
-    jstr = request.raw_post_data
+    jstr = request.body
     jsondata = json.loads(jstr)
     jsonmodel = jsondata['model']
     import random

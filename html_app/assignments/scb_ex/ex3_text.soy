@@ -1,0 +1,446 @@
+{namespace scb_ex3_text}
+
+/**
+*/
+{template .goal}
+<h2>Goal</h2>
+<p>
+In this exercise, you will use StarCellBio, a cell and molecular biology experiment simulator, to better understand
+the function of the epidermal growth factor receptor (EGFR) in signaling and cancer. To do this you will characterize
+expression levels, subcellular localization, signaling activity, transmembrane orientation and internalization dynamics
+of two EGFR mutant proteins using western blotting, flow cytometry, and microscopy.In this exercise, you will use
+StarCellBio, a cell and molecular biology experiment simulator, to better understand the function of the epidermal
+growth factor receptor (EGFR) in signaling and cancer. To do this you will characterize expression levels, subcellular
+localization, signaling activity, transmembrane orientation and internalization dynamics of two EGFR mutant proteins
+using western blotting, flow cytometry, and microscopy.</p>
+<h2>
+Learning Objectives
+</h2>
+<p>
+After completing this exercise, you will be able to:
+<ol>
+<li>Use StarCellBio to perform simulated western blot, microscopy, and flow cytometry experiments.</li>
+<li>Design and implement experiments in StarCellBio using the appropriate experimental conditions and the
+relevant positive and/or negative controls.
+</li>
+<li>Analyze the results of several different experimental techniques to determine how a protein’s characteristics
+can be altered by a genetic mutation.</li>
+<li>Hypothesize how genetic mutations alter protein function by assessing specific results gathered from a variety
+of experimental techniques. </li>
+</ol>
+</p>
+{/template}
+
+/**
+*/
+{template .intro}
+<h2>Introduction</h2>
+<p>
+You are doing an undergraduate summer research project in a lab that studies the role of the epidermal growth factor
+receptor (EGFR) in cancer. EGFR is the cell surface receptor for the epidermal growth factor (EGF), a small protein
+ligand that stimulates cell growth, proliferation, and differentiation (Figure 1). Mutations in EGFR or other proteins
+in the EGFR pathway often result in abnormal cell growth and proliferation and are associated with various cancers,
+including some types of lung, breast, and brain tumors.</p>
+<p>
+A graduate student in the lab, who is your mentor for this project, previously identified a series of mutations in the
+human EGFR gene that affect cell growth through two different genetic approaches. She used site directed mutagenesis to
+separately introduce two of these specific mutations (M1 and M2) into a human EGFR gene construct, and engineered mouse
+cell lines to stably express the human EGFR mutant variants. These stably expressing cell lines were created using an
+EGFR-null mouse cell line, which means that they lack endogenous, wild-type EGFR protein and exclusively express one of
+the mutated EGFR versions.  </p>
+<p>
+Your graduate student mentor first confirms that each of the EGFR mutations she identified confers a growth phenotype by
+ comparing the proliferation rate of mutant EGFRs and wild-type EGFR expressing cell lines in growth media lacking
+ serum, which contains a combination of essential amino acids and salts, but no growth factors. The following are the
+ results of her proliferation analysis for these two cell lines, EGFR-M1 and EGFR-M2, and the wild-type EGFR expressing
+ cell line, WT-EGFR:</p>
+ <h3>Table 1: Doubling time for cell lines expressing wild-type and mutant EGFR proteins.</h3>
+ <style>
+table.scb_ex3_text_table td {lb}
+    border: 1px solid black;
+{rb}
+table.scb_ex3_text_table {lb}
+border-collapse: collapse;
+{rb}
+</style>
+ <table class='scb_ex3_text_table'>
+<thead>
+    <td>
+        <strong>Cell line</strong>
+    </td>
+    <td>
+        <strong>Average doubling time in serum free media ± standard deviation (hours) <strong>
+    </td>
+</thead>
+ <tbody>
+<tr><td>WT-EGFR</td><td>32.2 ± 1.5</td></tr>
+<tr><td>EGFR-M1</td><td>60.5 ± 2.3</td></tr>
+<tr><td>EGFR-M2</td><td>17.8 ± 0.9</td></tr>
+
+</tbody>
+</table>
+
+<p>Note: a cell line’s “doubling time” is the duration of time that it takes for a starting population of cells in the
+exponential growth phase to double in number. </p>
+<p>The goal of your summer research project is to analyze the effects that the M1 and M2 mutations have on EGFR function.
+</p>
+<img src="../../images/egfr_pathway.jpg" alt="EGFR Pathway" width="100%">
+<p>Your graduate student mentor suggests that you perform experiments to characterize the following properties and
+functions of the EGFR-M1 and EGFR-M2 mutant proteins:</p>
+<ul>
+<li>Protein size and relative expression levels</li>
+<li>Subcellular localization </li>
+<li>Activation of downstream signaling molecules</li>
+<li>Orientation within the membrane</li>
+<li>Internalization/degradation of the receptor upon EGF stimulation</li>
+</ul>
+
+
+{/template}
+
+
+/**
+*/
+{template .bg_info}
+<h2>
+Background Information
+</h2>
+<h3>
+Cell Lines
+</h3>
+You are provided with the following cell lines:
+
+ <table class='scb_ex3_text_table'>
+
+<thead>
+    <td style='width:75pt'>
+        <strong>Strain</strong>
+    </td>
+    <td>
+        <strong>Description</strong>
+    </td>
+</thead>
+ <tbody>
+ <tr>
+ <td>WT-EGFR	</td><td>	A cell line that expresses the wild-type EGFR protein.</td>
+ </tr>
+ <tr><td>EGFR-Null </td><td>	A cell line that does not express EGFR protein (neither wild-type or mutant).
+ </td>
+ </tr>
+ <tr>
+ <td>EGFR-M1</td>
+<td>A cell line stably expressing a mutant version of EGFR, EGFR-M1, without endogenous expression of the wild-type protein. </td>
+</tr>
+ <tr>
+ <td>EGFR-M2</td><td>	A cell line stably expressing a mutant version of EGFR, EGFR-M2, without endogenous expression
+ of the wild-type protein. </td>
+ </tr>
+ <tr>
+ <td>NoUB</td><td>A cell line stably expressing a mutant version of EGFR where four serine residues that mediate EGFR
+ degradation have been replaced by alanine residues to inhibit degradation upon EGF ligand binding. This cell line does
+ not express the wild-type EGFR protein.</td>
+ </tr>
+ <tr><td>ConstActive</td><td>A cell line stably expressing a mutant version of EGFR that is constitutively active and
+ does not require EGF binding to initiate MAPK signaling. In this cell line, the kinase domain of EGFR is always in its
+ ‘active’ state. However, the mutant protein is internalized and degraded normally upon EGF binding. This cell line does
+ not express wild-type EGFR protein.</td></tr>
+ <tr><td>His-EGFR-FLAG</td><td>A cell line stably expressing an epitope-tagged version of the wild-type EGFR with a 6xHis
+ tag on the N-terminus and a FLAG tag on the C-terminus, without endogenous expression of the wild-type protein.</td></tr>
+ <tr><td>His-EGFR-M1-FLAG</td><td>A cell line stably expressing an epitope-tagged version of the EGFR-M1 protein with a
+ 6xHis tag on the N-terminus and a FLAG tag on the C-terminus, without endogenous expression of the wild-type protein.</td></tr>
+ <tr><td>His-EGFR-M2-FLAG</td><td>A cell line stably expressing an epitope-tagged version of the EGFR-M2 protein with a
+ 6xHis tag on the N-terminus and a FLAG tag on the C-terminus, without endogenous expression of the wild-type protein.</td></tr>
+
+ </tbody>
+
+</table>
+<h3>Treatments</h3>
+You are provided with the following treatments:
+<table class='scb_ex3_text_table'>
+<thead>
+    <td>
+        <strong>Treatment</strong>
+    </td>
+    <td>
+        <strong>Duration</strong>
+    </td>
+    <td>
+        <strong>Description</strong><sup>1</sup>
+    </td>
+</thead>
+<tr><td rowspan="3">Growth Media only</td><td>30 sec</td><td rowspan="3">Cells are cultured in serum-free growth media
+<sup>1</sup> for various periods of time.</td></tr>
+<tr><td>1 min</td></tr>
+<tr><td>6 hrs</td></tr>
+
+<tr><td rowspan="3">Growth media + EGF </td>
+<td>1 hour</td><td>Cells cultured in serum-free growth media<sup>1</sup> are incubated with a high concentration of EGF for
+30 seconds, washed to remove EGF, and collected.</td></tr>
+<tr><td>1 min</td><td>Cells cultured in serum-free growth media<sup>1</sup> are incubated with a high concentration EGF for
+1 minute, washed to remove EGF, and collected.</td></tr>
+<tr><td>6 hrs</td><td>Cells cultured in serum-free growth media<sup>1</sup> are incubated with a high concentration EGF for
+6 hours, washed to remove EGF, and collected.</td></tr>
+<tr><td>Growth media + Buffer</td><td>30 min</td><td>Cells cultured in serum-free growth media<sup>1</sup> are collected. Intact cells
+are then incubated with Proteinase K buffer only for 30 min.</td></tr>
+<tr><td>Growth media + ProK</td><td>30 min</td><td>Cells cultured in serum-free growth media<sup>1</sup> are collected. Intact
+cells are then incubated with the Proteinase K (ProK) enzyme for 30 min to digest any extracellular peptides<sup>2</sup>.</td></tr>
+
+</table>
+
+
+<h3>Western Blotting</h3>
+You are provided with the following antibodies for western blotting experiments:
+<table class='scb_ex3_text_table'>
+<thead>
+    <td>
+        <strong>Antibody</strong>
+    </td>
+    <td>
+        <strong>Description</strong>
+    </td>
+    <td>
+        <strong>Expected Molecular Weight (kDa)</strong>
+    </td>
+</thead>
+<tbody>
+<tr><td>Mouse anti-EGFR </td><td>Primary antibody recognizing both the phosphorylated and unphosphorylated forms of EGFR.
+<br>
+Note: This antibody recognizes an epitope on the N-terminal end of the protein, and can recognize this epitope in
+wild-type and mutant forms of EGFR in all cell lines.
+</td><td>120 – 150 → depending on the extent of phosphorylation and whether the protein is tagged or untagged. </td></tr>
+
+<tr><td>Mouse anti-pEGFR</td><td>Primary antibody recognizing EGFR phosphorylated on tyrosine 1088, an indicator that
+EGFR is ‘active’.<br>
+Note: Tyrosine 1088 is on the C- terminal end of the protein. This antibody can recognize this epitope in wild-type and
+mutant forms of EGFR in all cell lines. </td>
+<td>140 – 150 → depending on the extent of phosphorylation and whether the protein is tagged or untagged.</td></tr>
+
+<tr><td>Mouse anti-pMEK </td><td>Primary antibody recognizing the phosphorylated (active) form of MEK. </td><td>45 </td></tr>
+<tr><td>Mouse anti-pRAF </td><td>Primary antibody recognizing the phosphorylated (active) form of RAF. </td><td>74</td></tr>
+<tr><td>Mouse anti-PGK1 </td><td>Primary antibody recognizing PGK1, a housekeeping protein expressed in all cell
+types at relatively equal levels. </td><td>44</td></tr>
+<tr><td>Rabbit anti-6xHis</td><td>Primary antibody recognizing the 6xHis epitope tag.</td><td>Varies depending on the
+molecular weight of the 6xHis tagged protein. The 6xHis tag adds about 1 kDa to the molecular weight of the tagged protein.</td></tr>
+<tr><td>Rabbit anti-FLAG</td><td>Primary antibody recognizing the FLAG epitope tag.</td><td>Varies depending on the
+molecular weight of the FLAG tagged protein. The FLAG tag adds about 1 kDa to the molecular weight of the tagged protein.</td></tr>
+<tr><td>Rabbit anti-mouse HRP</td><td>Secondary antibody recognizing mouse primary antibodies, conjugated to horseradish
+peroxidase (HRP)<sup>3</sup>.</td><td>Varies, depending on primary antibody used.</td></tr>
+<tr><td>Goat anti-rabbit HRP</td><td>Secondary antibody recognizing rabbit primary antibodies, conjugated to horseradish
+peroxidase (HRP)<sup>3</sup>.</td><td>Varies, depending on primary antibody used.</td></tr>
+
+</tbody></table>
+
+<h3>Flow Cytometry</h3>
+You are provided with the following conditions for flow cytometry experiments:
+<table class='scb_ex3_text_table'>
+<thead>
+    <td>
+        <strong>Condition</strong>
+    </td>
+    <td>
+        <strong>Description</strong>
+    </td>
+</thead>
+
+<tbody>
+<tr><td>EGFR A488 </td><td>Incubation with mouse anti-EGFR primary antibody recognizing the EGFR protein, followed by
+incubation with secondary antibody conjugated to Alexa Fluor 488 fluorophore (green)<sup>4</sup>.<br>
+Note: The anti-EGFR primary antibody recognizes an epitope on the N-terminal end of the protein, and can recognize the
+wild-type and mutant forms of EGFR in all cell lines.
+</td></tr>
+
+</tbody>
+</table>
+
+<h3>Microscopy</h3>
+You are provided with the following conditions for immunofluorescence microscopy experiments:
+<table class="scb_ex3_text_table">
+<thead>
+    <td>
+        <strong>Antibody Conditions</strong>
+    </td>
+    <td>
+        <strong>Description</strong>
+    </dt>
+</thead>
+<tr><td>EGFR A488</td><td>Incubation with mouse anti-EGFR primary antibody recognizing the EGFR protein, followed by
+incubation with secondary antibody conjugated to Alexa Fluor 488 fluorophore (green)<sup>4,5</sup>.<br>
+Note: The anti-EGFR primary antibody recognizes an epitope on the N-terminal end of the protein, and can recognize the
+wild-type and mutant forms of EGFR in all cell lines.
+</td></tr>
+<tr><td>PM A488</td><td>Incubation with primary antibody recognizing LCK, a protein that localizes to the plasma
+membrane (PM), followed by incubation with secondary antibody conjugated to Alexa Fluor 488 fluorophore (green)<sup>4,5</sup>. </td></tr>
+<tr><td>Cyto A488</td><td>Incubation with primary antibody recognizing RPS20, a protein that localizes to the cytoplasm
+(Cyto), followed by incubation with secondary antibody conjugated to Alexa Fluor 488 fluorophore (green)<sup>4,5</sup>. </td></tr>
+<tr><td>Nuc A488</td><td>Incubation with primary antibody recognizing histone H2B, a protein that localizes to the
+nucleus (Nuc), followed by incubation with secondary antibody conjugated to Alexa Fluor 488 fluorophore (green)<sup>4,5</sup>. </td></tr>
+<tr><td>ER A488</td><td>Incubation with primary antibody recognizing calnexin, a protein that localizes to the
+endoplasmic reticulum (ER), followed by incubation with secondary antibody conjugated to Alexa Fluor 488 fluorophore (green)<sup>4,5</sup>.</td></tr>
+<tr><td>NM A488</td><td>Incubation with primary antibody recognizing lamin B1, a protein that localizes to the nuclear
+membrane (NM), followed by incubation with secondary antibody conjugated to Alexa Fluor 488 fluorophore (green)<sup>4,5</sup>.</td></tr>
+</table>
+
+
+
+<h3>Notes: </h3>
+<p>
+<sup>1</sup>Serum-free growth media does not contain growth factors, including EGF.
+</p>
+<p>
+<sup>2</sup>Proteinase K is an enzyme that digests proteins. It cannot penetrate the plasma membrane when the plasma
+membrane is intact, which means that the cell membrane has not been disrupted or permeabilized. As a result, incubating
+intact cells with Proteinase K results in the digestion of extracellular peptides only.
+</p>
+<p><sup>3</sup>
+These secondary antibodies are conjugated to horseradish peroxidase (HRP). Horseradish peroxidase catalyzes a reaction
+that produces light as a by-product, which is detected using photographic film
+</p>
+<p><sup>4</sup>The secondary antibodies used for these experiments are conjugated to fluorescent molecules, or
+fluorophores. In this case, the fluorophore is Alexa Fluor 488 (A488), which fluoresces or emits green light when
+excited by light with a wavelength of 488 nm.
+</p>
+<p><sup>5</sup>When the green channel of the microscope is chosen, the fluorescence emitted by a sample is captured as
+an image taken with a black and white camera.
+</p>
+
+{/template}
+
+
+/**
+*/
+{template .questions}
+<h2>Question 1</h2>
+<p>As a first step, your graduate student mentor advises you to look at whether the M1 and M2 mutations in the EGFR
+gene affect the expression levels and/or size of the corresponding EGFR-M1 and EGFR-M2 proteins.</p>
+<p>To do this, you perform a western blotting experiment to analyze the protein expression levels and molecular weight
+of the mutant EGFR-M1 and -M2 proteins in the absence of EGF (Growth media only treatment), making sure to include any
+relevant controls and using the appropriate primary and secondary antibody combinations. To arrive at your answer, you
+do not need to use all available cell lines, treatments, and antibodies, only those relevant to this experiment.</p>
+
+<ol type="a">
+<li>How does the molecular weight of the EGFR-M1 and EGFR-M2 proteins compare with the wild-type EGFR protein? Explain
+how you arrived at your answer using your experimental results. </li>
+<li>How does the expression of the EGFR-M1 and EGFR-M2 proteins compare to that of wild-type EGFR? Explain how you
+arrived at your answer using your experimental results.</li>
+<li>Can the growth phenotypes observed in EGFR-M1 and EGFR-M2 expressing cells (Table 1) be explained by increased or
+decreased levels of mutant EGFR transcription or translation rates? Explain your answer using your experimental results.</li>
+</ol>
+
+<h2>Question 2</h2>
+<p>To further characterize the mutant cell lines, your mentor suggests you determine whether the mutant EGFR proteins
+localize correctly to the plasma membrane since the correct localization of the receptor is essential for EGF binding
+and proper EGFR signaling.</p>
+<p>To determine if the EGFR-M1 and EGFR-M2 proteins localize to the plasma membrane, you perform an immunofluorescence
+(IF) microscopy experiment, making sure to include any relevant controls. First, you fix and permeabilize cells mounted
+on microscope slides to allow antibodies to cross the plasma membrane and have access to intracellular components.
+Then, you incubate them with the appropriate primary and secondary antibody combinations. To arrive at your answer,
+you do not need to use all available cell lines, treatments, and antibodies, only those relevant to this experiment.
+</p>
+<ol type="a">
+<li>What are the subcellular localizations of the EGFR-M1 and EGFR-M2 proteins? Justify your answer using your
+experimental results.</li>
+<li>Does the localization of either mutant EGFR protein differ from that of wild-type protein?</li>
+</ol>
+
+
+
+<h2>Question 3</h2>
+<p>Next you would like to examine MAPK signaling in EGFR-M1 and EGFR-M2 expressing cells upon EGF stimulation.
+</p>
+<p>To do this, you perform a western blotting experiment to examine the expression and activation of proteins in the
+MAPK signaling pathway following EGF stimulation (see Figure 1), making sure to include any relevant controls. Your
+laboratory has antibodies against several MAPK signaling components, including: 1) phosphorylated (active) EGFR, 2)
+phosphorylated (active) RAF, and 3) phosphorylated (active) MEK. To arrive at your answer, you do not need to use all
+available cell lines, treatments, and antibodies, only those relevant to this experiment.</p>
+
+<ol type="a">
+<li>How does EGF-induced MAPK signaling in the EGFR-M1 cell line compare with the WT-EGFR cell line? Explain using your
+experimental results. If there are differences, include which signaling components are different and how. </li>
+<li>How does EGF-induced MAPK signaling in the EGFR-M2 cell line compare with the WT-EGFR cell line? Explain using your
+experimental results. If there are differences, include which signaling components are different and how.</li>
+</ol>
+<h5>** Answer Questions 4 and 5 for any mutant EGFR proteins that localize to the plasma membrane. For proteins that
+are not localized to the plasma membrane, skip to Question 6. **</h5>
+
+<h2>Question 4</h2>
+<p>The orientation of EGFR is important for its proper functioning and activation of downstream signaling pathways.
+EGFR is a single-pass transmembrane protein with the N-terminus, responsible for ligand binding (EGF), outside the
+cell and the C-terminus, responsible for initiating signaling, inside the cell. Your graduate student mentor advises
+you to perform a western blot experiment to determine the orientation of the mutant EGFR proteins that localize to the
+plasma membrane.</p>
+<p>Before performing the western blotting procedure, you collect His-EGFR-M1-FLAG and/or His-EGFR-M2-FLAG cells and
+incubate intact cells with Proteinase K (ProK), an enzyme that digests proteins. Because Proteinase K cannot penetrate
+the membrane of intact, non-permeablized cells, only intracellular proteins and peptides will remain after incubation
+with Proteinase K. After Proteinase K digestion, you lyse the cells and perform a western blot analysis to determine
+the presence or absence of each epitope tag using the appropriate primary and secondary antibody combinations, while
+ensuring to include any relevant controls. To arrive at your answer, you do not need to use all available cell lines,
+treatments, and antibodies, only those relevant to this experiment.</p>
+<ol type="a">
+<li>What is the orientation of the mutant EGFR protein(s) in the plasma membrane with respect to the N- and C-terminus?
+Justify your answer using your experimental results.</li>
+<li>Does the orientation of the mutant EGFR protein(s) differ from that of the wild-type protein? If so, how? Explain.</li>
+</ol>
+
+
+<h2>Question 5</h2>
+<p>Internalization and degradation of EGFR initiated by EGF binding is an important mode of regulation and is essential
+for proper signaling (Figure 1). The fate of EGFR after internalization (whether it is recycled back to the membrane
+or degraded) depends on the ligand that induces EGFR signaling, the concentration of ligand present, and the length of
+time EGFR is stimulated. For example, the presence of high concentrations of EGF for prolonged periods of time
+(i.e. > 60 min) leads to ubiquitination of EGFR’s intracellular domain, which in turn results in EGFR internalization
+and lysosome-mediated degradation.</p>
+<p>To examine the internalization dynamics of EGFR-M1 and/or EGFR-M2, you perform flow cytometry experiments to measure
+the amount of mutant EGFR protein on the cell surface following stimulation with EGF, making sure to include any
+relevant controls. Prior to flow cytometry, you incubate live cells with EGF for different time periods. After EGF
+stimulation you collect and fix intact cells for flow cytometry analysis, followed by incubation with anti-EGFR primary
+antibody and the appropriate fluorescently-labeled secondary antibody. The primary antibody used in this experiment
+(mouse anti-EGFR) recognizes an epitope on the N-terminal end of the EGFR protein (note that the N-terminal end of
+WT-EGFR is extracellular). Since antibodies cannot cross the plasma membrane of intact, non-permeabilized cells,
+binding to the N-terminal EGFR epitope by the anti-EGFR antibody will only occur for receptors with an extracellular
+N-terminal domain that have not been internalized. To arrive at your answer, you do not need to use all available cell
+lines, treatments, and antibodies, only those relevant to this experiment.</p>
+<p>Note: Assume that the conditions of the experiment, including EGF concentration and incubation time, result in most
+of the internalized EGFR being trafficked to the lysosome-mediated degradation pathway rather than being recycled to
+the membrane. Therefore, the rate of internalization will give you a good estimate of the rate of degradation in these
+mutants. </p>
+<ol type="a">
+<li>Do the internalization dynamics of the mutant EGFR protein(s) differ from that of the wild-type protein? Justify
+your answer using your experimental results.</li>
+<li>After incubating cells with high concentrations of EGF for 6 hours, would you expect the EGFR-M1 and/or
+EGFR-2 cell lines to show higher, lower, or similar levels of EGFR degradation compared to the WT-EGFR cell line?
+What experiment(s) could you perform with the provided reagents to test your hypotheses? Explain.</li>
+</ol>
+
+
+<h2>Question 6</h2>
+<ol type='a'>
+<li>Using all of your experimental results and conclusions from Questions 1-5, propose a hypothesis that explains how
+the EGFR-M1 and EGFR-M2 mutations result in the abnormal growth phenotypes observed in the EGFR-M1 and EGFR-M2
+expressing cell lines, respectively (Table 1). Make sure to include the results that allowed you to arrive at your conclusion.
+<ol type='i'>
+<li> EGFR-M1</li>
+<li> EGFR-M2</li>
+</ol>
+</li>
+<li>A member of your lab studying the same mutant cell lines discovers that when EGF is added to the EGFR-M2 cell line
+at high concentrations for a prolonged period of time, the levels of ubiquitinated EGFR-M2 protein are surprisingly low.</li>
+</ol>
+<p>Does this observation lend support to your hypothesis regarding EGFR-M2 in Question 6a.ii? Explain why or why not.
+If necessary, use Figure 1 to help you answer this question.</p>
+
+{/template}
+
+/**
+
+*/
+{template .experiment_setup}
+<ul role='list' class='scb_assignment_specific_tufts_experiment_setup'>
+    <li role='listitem'>
+        To setup your experiment, select <b role='presentation' >Add Samples</b> in the experimental set-up table below. <br>
+    </li>
+    <li  role='listitem'>
+        Select all of the treatment protocols for your experiment within the <b role='presentation'>Add Samples</b> pop up window, and
+        then click <b role='presentation'>Add Samples</b>.
+    </li>
+</ul>
+{/template}

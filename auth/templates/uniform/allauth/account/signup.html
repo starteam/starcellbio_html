@@ -41,7 +41,7 @@ input{
 		border: 0;
 }
 
-#errorMsg, #error_1_id_email{
+#errorMsg, #error_1_id_email, #error_1_id_course_code, #error_1_id_password1, #error_1_id_password2{
 	color: red;
 }
 
@@ -50,7 +50,8 @@ input{
 	top: 2px;
 }
 
-#div_id_email > label, #div_id_password1 > label, #div_id_password2 > label, .course_code > label{
+#div_id_email > label, #div_id_password1 > label, #div_id_password2 > label,
+#div_id_course_code > label{
 	color: #316f94;
 	font-size: 9pt;
 	letter-spacing: 1px;
@@ -61,7 +62,7 @@ input{
 	text-transform: uppercase;
 }
 
-.account_input > label{
+#div_id_account_type > label{
 	color: #316f94;
 	font-size: 9pt;
 	letter-spacing: 1px;
@@ -71,14 +72,17 @@ input{
 	text-transform: uppercase;
 }
 
-
-.account_input > span, .account_input > input{
-	display: inline;
-	vertical-align: middle;
+#id_account_type >li{
+    text-decoration: none;
+     display: inline;
+}
+#id_account_type >li > label> input{
+    height:14px;
 }
 
 
-#div_id_email > input, #div_id_password1 > input, #div_id_password2 > input, .course_code > input{
+#div_id_email > input, #div_id_password1 > input, #div_id_password2 > input,
+#div_id_course_code > input{
 
 	display: block;
 	width: 373px;
@@ -104,77 +108,50 @@ Your instructor should have provided you with a code that you need to enter belo
 <form class="signup uniForm" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
   <fieldset class="inlineLabels">
-  	<div  class='account_input'>
-  	 <label>ACCOUNT TYPE </label>
-    <input onclick='showCourseCode()' id='account_input_student' type='radio' value='student' name="account_type" /> <span>Student</span>
-    <input onclick='hideCourseCode()' id='account_input_instructor' type='radio'  value='instructor' name="account_type"  /> <span>Instructor</span>
-    </div>
 
     {{ form|as_uni_form }}
+
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
-    
-   <div class='course_code'>
-    <label>COURSE CODE </label>
-    <input autocomplete="off" onfocus='setStatus()' onkeyup="changeStatus()" id='course_code_input' name="CC"  placeholder=''/>
-	</div>
-    
-<div id='code_status' style='visibility:hidden; display:inline'> <span style='color:red'>&#215; </span>&nbsp; This is not a valid code. </div>
+
+  <div id='div_id_course_code'>
+      <label>COURSE CODE </label>
+      <input autocomplete="off" id='id_course_code' name="course_code"  placeholder=''/>
+  </div>
+
+  <div id='code_status' style='visibility:hidden; display:inline'> <span style='color:red'>&#215; </span>&nbsp; This is not a valid code. </div>
   <div class="buttonHolder">
-      <button class="primaryAction auth_submit_button" id='auth_submit_button' type="submit" disabled>{% trans "Create Account" %}</button>
-    </div>
+      <button class="primaryAction auth_submit_button" type="submit">{% trans "Create Account" %}</button>
+  </div>
   </fieldset>
 
 
 </form>
-
-{% endblock %}
-
-
 <script>
+document.addEventListener('DOMContentLoaded', function(){
+    var student_type=document.getElementById('id_account_type_0');
+    student_type.addEventListener('click', showCourseCode);
+    var instructor_type = document.getElementById('id_account_type_1');
+    instructor_type.addEventListener('click', hideCourseCode);
+ });
+
 
 if(document.getElementById('div_id_email').className != 'ctrlHolder error ')
 document.getElementById('div_id_email').children[0].textContent='E-MAIL';
 if(document.getElementById('div_id_password2').children[0] != 'ctrlHolder error ')
 document.getElementById('div_id_password2').children[0].textContent='PASSWORD (AGAIN)';
 
-function setStatus(){
-	document.getElementById('code_status').style.visibility='visible';
-}
-
-function changeStatus(){
-	var input = document.getElementById('course_code_input').value.toLowerCase();
-	input = input.replace(/ /g,'');
-	input = input.split(';');
-	var code_values = ['starx', '7.02', '7.06', 'bio52', 'usability', '7.06_spring_2014', 'sutd_biology', 'scb_sampleexercises'];
-	outer_loop:
-	for(var x = 0; x < code_values.length; x++){
-		for(var y = 0; y< input.length; y++){
-			if(input[y] == code_values[x]){
-				document.getElementById('code_status').innerHTML = "<span style='color:green'>&#9745; </span>&nbsp; This is a valid code. You may create an account."
-				document.getElementById('auth_submit_button').disabled=false;
-				break outer_loop;
-			}
-			else{
-			document.getElementById('code_status').innerHTML = "<span style='color:red'>&#215; </span>&nbsp; This is not a valid code. You cannot create an account."
-			document.getElementById('auth_submit_button').disabled=true;
-			}
-		}
-	}
-}
-
 
 function hideCourseCode(){
-		document.getElementsByClassName('course_code')[0].style.display = 'none';
-		document.getElementById('auth_submit_button').disabled=false;
+    document.getElementById('div_id_course_code').style.display = 'none';
 }
 
 function showCourseCode(){
-		document.getElementsByClassName('course_code')[0].style.display = '';
-		document.getElementById('auth_submit_button').disabled=true;
+    document.getElementById('div_id_course_code').style.display = '';
 }
 
 
 </script>
 
+{% endblock %}

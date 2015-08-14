@@ -1,0 +1,140 @@
+@defmixin gradient(POS, START_COLOR, END_COLOR, FALLBACK_COLOR) {
+  background-color: FALLBACK_COLOR; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(POS, START_COLOR, END_COLOR);               /* Chrome 10+,Safari 5.1+ */
+  /* @alternate */ background-image: -moz-linear-gradient(POS, START_COLOR, END_COLOR); /* FF3.6+ */
+  /* @alternate */ background-image: -ms-linear-gradient(POS, START_COLOR, END_COLOR);  /* IE10 */
+  /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
+}
+
+.scb_ex_dialog {
+    position: absolute;
+    z-index: 999;
+    top:0px;
+    left:0px;
+    width:800px;
+    height:800px;
+    background-color: #80808080;
+    font-family: 'sourcesanspro-regular';
+    font-size:10pt;
+}
+.scb_ex_samples_table_wrapper{
+    max-height:300px;
+    overflow:auto;
+    position:relative;
+    border: 1px solid #27956c;
+    border-radius: 5px;
+    background-color: #edeef2;
+
+}
+.scb_ex_samples_table_wrapper::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+.scb_ex_samples_table_wrapper::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+.scb_ex_samples_table_wrapper > table.scb_s_experiment_setup_table {
+    border: 0;
+    border-spacing: 0px;
+    width:100%;
+    background-color: white;
+    padding-bottom: 2px;
+}
+.scb_ex_inner_dialog_title_close {
+	
+	padding-top: 0px;
+	float:right;
+	-webkit-appearance: none;
+	font-family:'sourcesanspro-semibold';
+	outline:none;
+	height: 26px;
+	width: 26px;
+	cursor:pointer;
+	border: none;
+	border-radius: 12px;
+	font-size: 14pt;
+	color: transparent;
+	background: transparent;
+	background-image: url('../../../images/header/scb_close_button.png');
+	background-repeat: no-repeat;
+
+    
+}
+
+
+.scb_ex_inner_dialog_title_close:hover{
+	background-color: #e58986;
+}
+
+
+
+
+.scb_ex_inner_dialog {
+    opacity: 5;
+    width: 75%;
+    max-height: 75%;
+    overflow: auto;
+    margin-top: 12%;
+    margin-left: 12%;
+    position: relative;
+    border: 5px solid white;
+	border-radius: 9px;
+	background-color: #f5f5f5;
+}
+
+.scb_ex_inner_dialog_title {
+    font-size:12pt;
+    color:white;
+    margin:0px;
+    margin-bottom:5px;
+    padding: 6px;
+    text-align:left;
+    cursor: move;
+    @mixin gradient(top,#27956c,#189689,#27956c);
+    font-family: 'sourcesanspro-bold';
+}
+
+
+.scb_ex_inner_dialog_body {
+    padding: 0 20px;
+    height: 390px;
+}
+
+.scb_ex_inner_dialog_body > h1 {
+    font-size: 12pt;
+    font-family: sourcesanspro-regular;
+}
+
+.scb_ex_inner_dialog_body > h1 > b {
+    font-size: 12pt;
+    font-family: sourcesanspro-semibold;
+}
+
+.scb_ex_inner_dialog_body .scb_s_gray_button {
+    width: 115px;
+    margin-top: 10px;
+}
+
+.scb_ex_inner_dialog_add, .scb_ex_inner_dialog_cancel {
+    margin-left: 10px;
+
+}
+.scb_s_clear_all{
+    float: right;
+}
+.scb_add_samples_add{
+    float: right;
+    position: relative;
+}
+.scb_add_samples_cancel{
+    float: right;
+    position: relative;
+}
+
+
+.scb_ex_button_float {
+    position: relative;
+    left: 0;
+}

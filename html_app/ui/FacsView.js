@@ -11,6 +11,7 @@ scb.ui.static.FacsView.MAX_GATE = 150;
 
 
 scb.ui.static.FacsView.parse = function (element) {
+
     var assignment_id = $(element).attr('assignment_id');
     var experiment_id = $(element).attr('experiment_id');
     var facs_id = $(element).attr('facs_id');
@@ -41,9 +42,19 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
     var cell_treatment_id = $(element).attr('cell_treatment_id');
 
     parsed.facs.is_cell_treatment_enabled[cell_treatment_id] = val;
-    $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
-        scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
-    });
+    if(val === 'checked') {
+        $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
+            scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
+        });
+    }else{
+        /*want to remove the FacsLane*/
+        var lanes = _.filter(parsed.facs.lanes_list.list, function (lane) {
+            return cell_treatment_id == lane.cell_treatment_id
+        });
+        _.each(lanes,function(lane){
+            parsed.facs.lanes_list.remove(lane.id);
+        });
+    }
     parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
     if (event) {
         scb.ui.static.MainFrame.refresh();
@@ -58,117 +69,168 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
         alert("INVALID ELEMENT!");
     }
 
-    var sample_kind = $(element).attr('value');
-    if (sample_kind == '') {
+    var slide_type = $(element).attr('value');
+    if (slide_type == '') {
         return;
     }
-     var matches_list = [];
-    var keys_list = [];
+    var avail_conditions = [];
     var lane_id = $(element).attr('lane_id');
-    if (lane_id == '') {
-			var cell_treatment_id = $(element).attr('cell_treatment_id');
-				var lanes = _.filter(parsed.facs.lanes_list.list, function(lane) {return cell_treatment_id == lane.cell_treatment_id});
-		
-				var i = lanes.length; //or 10
-				while(i--){
-					var lane = lanes[i];
-			
-					_.each(parsed.assignment.template.facs_kinds, function(x){ keys_list = keys_list.concat(_.keys(x.conditions));});
-					matches_list.push(lane.conditions);
-				}
-		
-				matches_list = jQuery.unique( matches_list );
-				keys_list = jQuery.unique( keys_list );
-		
-			   if((keys_list.length > 0 && $(matches_list).not(keys_list).length == 0 && $(keys_list).not(matches_list).length == 0) || (_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 &&  _.contains(matches_list, _.keys(parsed.assignment.template.facs_kinds[sample_kind].conditions)[0]) )){
-				
-						$('html').css('overflow', 'hidden');
-						$('body').prepend(scb_experiment_setup.general_error_overlay());
+    /* cell_treatment_id identifies the sample (analysis, conditions are not involved) */
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
+    var lanes = _.filter(parsed.facs.lanes_list.list, function(lane) {
+        return lane.kind == slide_type && cell_treatment_id == lane.cell_treatment_id
+    });
 
-						$.jqDialog.alert("You've already selected this option.", 
-							function() {	
-									$('html').css('overflow', 'visible');
-									$('.error_overlay').remove();
-									scb.ui.static.MainFrame.refresh();
-							/* callback function for 'OK' button*/ });
-						$('.jqDialog_header').remove();		
-						$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-						$('#jqDialog_box').attr('role', 'alertdialog');
-						return;
-				
-				}
-		
-		
-			   if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1) 				  
-			   {
-					var slide_conditions_val = '';
-					if(_.size(parsed.assignment.template.facs_kinds[sample_kind].conditions) == 1 ){
-						slide_conditions_val = _.keys(parsed.assignment.template.facs_kinds[sample_kind].conditions)[0]
-					}
-						parsed.facs.lanes_list.start({
-							kind: sample_kind,
-							conditions: slide_conditions_val,
-							cell_treatment_id: cell_treatment_id,
-							experiment_id: parsed.experiment.id
-						});
-			   }
-			   else{
-					parsed.facs.lanes_list.start({
-						kind: sample_kind,
-						cell_treatment_id: cell_treatment_id,
-						experiment_id: parsed.experiment.id
-					});
-				}
+    var cell_treatment_list = parsed.experiment.cell_treatment_list;
+    /* Want to find the number of conditions available for this cell_treatment */
+    var facs_kinds = _.filter(cell_treatment_list.list , function(lane){
+        return lane.id == cell_treatment_id; })[0].treatment_list.first.facs;
 
-// 		}
+    /* Find a list of available conditions for this slide type */
+    if (_.isEmpty(facs_kinds)) {
+        avail_conditions = _.keys(parsed.assignment.template.facs_kinds[slide_type].conditions);
+    } else {
+        avail_conditions = facs_kinds[slide_type];
+
+    }
+
+    /* Want to check if there are more (than already chosen) conditions available for this sample) */
+    if (lanes.length >= avail_conditions.length) {
+
+        $('html').css('overflow', 'hidden');
+        $('body').prepend(scb_experiment_setup.general_error_overlay());
+
+        $.jqDialog.alert("You've already selected this option.",
+            function () {
+                $('html').css('overflow', 'visible');
+                $('.error_overlay').remove();
+                scb.ui.static.MainFrame.refresh();
+                /* callback function for 'OK' button*/
+            });
+        $('.jqDialog_header').remove();
+        $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+        $('#jqDialog_box').attr('role', 'alertdialog');
+        return;
+    }
+
+
+    if (lane_id == '') {/*This means that the Lane does not 'exist' yet*/
+        if (_.size(avail_conditions) == 1) {
+            var slide_conditions_val = avail_conditions[0];
+            parsed.facs.lanes_list.start({
+                kind: slide_type,
+                conditions: slide_conditions_val,
+                cell_treatment_id: cell_treatment_id,
+                experiment_id: parsed.experiment.id
+            });
+        }
+        else {
+            parsed.facs.lanes_list.start({
+                kind: slide_type,
+                cell_treatment_id: cell_treatment_id,
+                experiment_id: parsed.experiment.id
+            });
+        }
+
     }
     else {
-        parsed.facs.lanes_list.get(lane_id).kind = sample_kind;
+        parsed.facs.lanes_list.get(lane_id).kind = slide_type;
     }
-		 if (event) {
-            scb.ui.static.MainFrame.refresh();
-        }
+	if (event) {
+        scb.ui.static.MainFrame.refresh();
+    }
+}
+
+scb.ui.static.FacsView.scb_f_facs_add_all_conditions = function (element, event) {
+    /* Select all conditions for all types/kinds */
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed = resetScrollValue(parsed);
+    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
+
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
+    var lanes = _.filter(parsed.facs.lanes_list.list, function(lane) {
+        return cell_treatment_id == lane.cell_treatment_id
+    });
+    var facs_kinds = parsed.assignment.template.facs_kinds;
+    _.each(_.keys(facs_kinds), function(kind){
+        var conditions = _.keys(facs_kinds[kind].conditions);
+
+        _.each(conditions, function(condition){
+            /* find if a lane exists with this condition */
+            var lane = _.find(lanes, function(lane){
+                return lane.conditions === condition
+            });
+            if (typeof lane === 'undefined'){
+                parsed.facs.lanes_list.start({
+                    kind: kind,
+                    conditions: condition,
+                    cell_treatment_id: cell_treatment_id,
+                    experiment_id: parsed.experiment.id
+                });
+            }
+        });
+        /* want to remove any lanes that did not have condition selected */
+        var lanes_no_cond = _.filter(lanes, function(lane){
+            return lane.conditions == null
+        });
+        _.each(lanes_no_cond, function(lane){
+            parsed.facs.lanes_list.remove(lane.id);
+        });
+    });
+    if (event) {
+        scb.ui.static.MainFrame.refresh();
+    }
 }
 
 scb.ui.static.FacsView.scb_f_facs_select_conditions = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
 	parsed = resetScrollValue(parsed);
-	        parsed.facs.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
+	parsed.facs.prep_scroll = $('.scb_s_western_blot_samples_table').scrollTop();
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
     var lane_conditions = $(element).attr('value');
-    console.log("Lane Conditions");
-    console.log(lane_conditions);
 
     if (lane_conditions == '') {
         return;
     }
     var lane_id = $(element).attr('lane_id');
-       var cell_treatment_id = $(element).attr('cell_treatment_id');
-       for( var index = 0; index < parsed.facs.lanes_list.list.length; index++){
-			var lane = parsed.facs.lanes_list.list[index];
-			if(lane.conditions == lane_conditions && lane.kind == parsed.facs.lanes_list.get(lane_id).kind && lane.cell_treatment_id == cell_treatment_id){
-				$('html').css('overflow', 'hidden');
-				$('body').prepend(scb_experiment_setup.general_error_overlay());
+    var current_lane = parsed.facs.lanes_list.get(lane_id);
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
 
-				$.jqDialog.alert("You've already selected this slide option.",
-					function() {	$('html').css('overflow', 'visible');
+    var lanes_list= _.filter(parsed.facs.lanes_list.list, function(lane){
+        return lane.kind == current_lane.kind && cell_treatment_id == lane.cell_treatment_id;
+    });
 
-							$('.error_overlay').remove();
-							parsed.facs.lanes_list.remove(lane_id);
-					/* callback function for 'OK' button*/
-				scb.ui.static.MainFrame.refresh();});
-				$('.jqDialog_header').remove();
-				$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-				$('#jqDialog_box').attr('role', 'alertdialog');
-				return;
+    for (var index = 0; index < lanes_list.length; index++) {
+        if (lanes_list[index].conditions == lane_conditions) {
+            $('html').css('overflow', 'hidden');
+            $('body').prepend(scb_experiment_setup.general_error_overlay());
 
-			}
+            $.jqDialog.alert("You've already selected this condition option.",
+                function () {
+                    $('html').css('overflow', 'visible');
+                    $('.error_overlay').remove();
+                    /* callback function for 'OK' button*/
+                    scb.ui.static.MainFrame.refresh();
+                });
+            $('.jqDialog_header').remove();
+            $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+            $('#jqDialog_box').attr('role', 'alertdialog');
+            return;
 
-       }
-    	parsed.facs.lanes_list.get(lane_id).conditions = lane_conditions;
+        }
+
+    }
+    current_lane.conditions = lane_conditions;
+
+    /* When condition selected for this Lane, want to enable conditions for the placeholder below*/
+    var placeholder=$('span.scb_f_facs_select_lysate_type[cell_treatment_id="' + cell_treatment_id + '"][lane_kind="placeholder"]');
+    /* Want to check if there is a placeholder*/
+    if(placeholder.length>0) {
+        scb.ui.static.FacsView.scb_f_facs_select_lysate_type(placeholder);
+    }
 
     if (event) {
         scb.ui.static.MainFrame.refresh();
@@ -243,6 +305,7 @@ scb.ui.static.FacsView.scb_s_facs_choose_samples_order_list_select = function (e
         alert("INVALID ELEMENT!");
     }
     if (parsed.facs.samples_finished) {
+        parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
         $('li', $(element).parent()).removeClass('scb_s_facs_sample_selected');
         $(element).addClass('scb_s_facs_sample_selected');
         parsed.facs.lane_selected = parsed.facs_lane.id;
@@ -275,6 +338,7 @@ scb.ui.static.FacsView.scb_s_western_blot_gel_tab = function (element){
     }
     
     parsed.facs.lane_selected = parsed.facs_lane.id;
+    parsed.facs.is_tab_selected[parsed.facs.selected_lane.cell_treatment_id] = parsed.facs.lane_selected;
     scb.ui.static.MainFrame.refresh();
 
 }
@@ -285,6 +349,7 @@ scb.ui.static.FacsView.scb_f_facs_tools_start_analysis = function (element, even
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
 
     parsed.facs.show_analysis = true;
     scb.ui.static.MainFrame.refresh();
@@ -297,7 +362,7 @@ scb.ui.static.FacsView.scb_s_facs_single_range_button= function(element, event){
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
     parsed.facs.sample_analysis =  !parsed.facs.sample_analysis;
     parsed.facs.double_analysis = false;
     scb.ui.static.MainFrame.refresh();
@@ -309,7 +374,7 @@ scb.ui.static.FacsView.scb_s_facs_double_range_button= function(element, event){
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
     parsed.facs.double_analysis =  !parsed.facs.double_analysis;
     parsed.facs.sample_analysis = false;
     scb.ui.static.MainFrame.refresh();
@@ -317,14 +382,15 @@ scb.ui.static.FacsView.scb_s_facs_double_range_button= function(element, event){
 
 
 scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
-		var parsed = scb.ui.static.FacsView.parse(element);
-	    var note = $(element).attr('note');
-    	note = '.' +note;	
-		$(note).slideUp('400', function(){
-			parsed.facs.instructions_show_state  = $('.scb_s_facs_tools_instructions_followup').is(":visible");
-			parsed.facs.samples_show_state  = $('.scb_s_facs_tools_samples_followup').is(":visible");
-			scb.ui.static.MainFrame.refresh();
-		});
+    var parsed = scb.ui.static.FacsView.parse(element);
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
+    var note = $(element).attr('note');
+    note = '.' + note;
+    $(note).slideUp('400', function () {
+        parsed.facs.instructions_show_state = $('.scb_s_facs_tools_instructions_followup').is(":visible");
+        parsed.facs.samples_show_state = $('.scb_s_facs_tools_samples_followup').is(":visible");
+        scb.ui.static.MainFrame.refresh();
+    });
 		
 }
 
@@ -332,34 +398,54 @@ scb.ui.static.FacsView.scb_f_facs_note_close_button= function (element) {
 scb.ui.static.FacsView.scb_f_facs_sample_remove = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
     parsed = resetScrollValue(parsed);
-        parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
+    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
 
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+    var cell_treatment_id = '';
     var lysate_id = $(element).attr('lane_id');
-    if (lysate_id != '') {
-        parsed.facs.lanes_list.remove(lysate_id);
+
+     /* Find cell_treatment_id for this sample*/
+    _.each(parsed.facs.lanes_list.list, function (lane) {
+        if (lysate_id == lane.id) {
+            cell_treatment_id = lane.cell_treatment_id;
+        }
+    });
+    /* Delete this Lane from the lanes_list*/
+    parsed.facs.lanes_list.remove(lysate_id);
+
+    /*
+     * If this is the only Lane for this CellTreatment,
+     * then remove it from the list of enabled samples
+     */
+    var lanes = _.filter(parsed.facs.lanes_list.list, function (lane) {
+        return cell_treatment_id == lane.cell_treatment_id
+    });
+    if (lanes.length < 1) {
+        parsed.facs.is_cell_treatment_enabled[cell_treatment_id] = false;
     }
     scb.ui.static.MainFrame.refresh();
 }
 
 scb.ui.static.FacsView.scb_f_facs_tools_toggle = function (element) {
-	var parsed = scb.ui.static.FacsView.parse(element);
-	var note = $(element).attr('note');
-    note = '.' +note;	
-	$(note).slideDown('400', function(){
-		parsed.facs.instructions_show_state  = $('.scb_s_facs_tools_instructions_followup').is(":visible");
-		parsed.facs.samples_show_state  = $('.scb_s_facs_tools_samples_followup').is(":visible");
-		scb.ui.static.MainFrame.refresh();
-	});
-	
+    var parsed = scb.ui.static.FacsView.parse(element);
+    var note = $(element).attr('note');
+    note = '.' + note;
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
+
+    $(note).slideDown('400', function () {
+        parsed.facs.instructions_show_state = $('.scb_s_facs_tools_instructions_followup').is(":visible");
+        parsed.facs.samples_show_state = $('.scb_s_facs_tools_samples_followup').is(":visible");
+        scb.ui.static.MainFrame.refresh();
+    });
 }
 
 scb.ui.static.FacsView.scb_f_facs_analyze_remove_point = function (element) {
     var parsed = scb.ui.static.FacsView.parse(element);
-	parsed = resetScrollValue(parsed);
+    parsed = resetScrollValue(parsed);
+    parsed.facs.samples_scroll = $(".scb_s_facs_choose_samples_order_list").scrollTop();
+
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
@@ -395,10 +481,10 @@ scb.ui.static.FacsView.scb_f_facs_apply_to_all = function (element) {
     if (parsed.facs.apply_dna_analysis_to_all) {
         _.each(parsed.facs.lanes_list.list, function (facs_lane) {
             facs_lane.canvas_metadata_analysis.points = JSON.parse(JSON.stringify(parsed.facs_lane.canvas_metadata_analysis.points));
-
+            facs_lane.exp_id = parsed.facs_lane.exp_id;
             facs_lane.bisector_gate_created = parsed.facs_lane.bisector_gate_created;
-
             scb.ui.static.FacsView.evaluate_chart({
+                assignment: parsed.assignment,
                 facs: parsed.facs,
                 facs_lane: facs_lane,
                 context: parsed.context
@@ -489,6 +575,9 @@ scb.ui.static.FacsView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_facs_select_conditions', function (e) {
         scb.ui.static.FacsView.scb_f_facs_select_conditions(this, e);
     });
+    scb.utils.off_on(workarea, 'click', '.scb_f_facs_add_all_conditions', function (e) {
+        scb.ui.static.FacsView.scb_f_facs_add_all_conditions(this, e);
+    });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_run_samples', function (e) {
         scb.ui.static.FacsView.scb_f_facs_run_samples(this, e);
     });
@@ -571,6 +660,7 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
     var points = facs_lane.canvas_metadata_analysis.points;
     var raw_data = scb.utils.get(facs_lane, ['canvas_metadata_analysis', 'raw_data', 0], []);
     var data = [];
+    var template=state.assignment.template;
     points = points.sort(function (a, b) {
         return a.from > b.from;
     });
@@ -616,11 +706,21 @@ scb.ui.static.FacsView.reevaluate_metadata = function (state) {
         pts.display_id= pts.display_id || new_id;
         pts.bisector_id = pts.bisector_id || bisector_id;
         pts.unique_id = pts.unique_id || Math.floor(Math.random()*1000000000).toString(27);
+
+        var scaled_from=pts.from;
+        var scaled_to=pts.to;
+        if(template.model.facs.scale && (template.model.facs.scale.indexOf("pseudo") > -1)){
+            scaled_from = Math.round(Math.pow(10, pts.from/50.0));//50 is a step size
+            scaled_to = Math.round(Math.pow(10, pts.to/50.0));
+        }
         
-        //Math.floor(Math.random()*1000000000).toString(27)
+        /*display_from and display_to represent the value of the gate that will be displayed in the template.
+        * For pseudo-logarithmic scale their values are modified to replicate logarithmic scale values */
         var range = {
             from: pts.from,
             to: pts.to,
+            display_from: scaled_from,
+            display_to: scaled_to,
             color: pts.c,
             display_id: pts.display_id,
             bisector_id: pts.bisector_id,
@@ -729,6 +829,9 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
         var xaxes = plot.getXAxes()[0];
         var yaxes = plot.getYAxes()[0];
         var sensitivity = 4;
+        /* Old assignments do not have max value given, they were using the value of a constant MAX_VALUE=150*/
+        var max_x = state.assignment.template.model.facs.max;
+        max_x = max_x ? max_x : 150;
         
         if(state.facs.samples_finished && state.facs_lane.selected_gate){
 				var selected_gate = state.facs.selected_lane.selected_gate;
@@ -798,9 +901,13 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 var point = Math.round(px);
                 if (!isNaN(from)) {
                     var to = px;
-                    to = to > 0 ? to : 0;
-                    to = to > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : to;
-                    to = to < 0 ? 0 : to;
+
+                    if(to < 0){
+                        to = 0;
+                    }else if(to > max_x){
+                        to = max_x;
+                    }
+
                     if (point_to_edit) {
                     			_.each(state.facs_lane.canvas_metadata_analysis.points, function(x){
 									if(point_to_edit.from == x.to &&  Math.abs(point_to_edit.y- x.y) == 5 && Math.abs(from- x.to) < sensitivity){
@@ -956,9 +1063,6 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                 
                 		console.info("SET FROM " + px);
 						from = 0;
-						from = from > 0 ? from : 0;
-						from = from > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : from;
-						from = from < 0 ? 0 : from;
 						fromy= py > 16 ? py: 16;
 						fromy = fromy > 90 ? 90: fromy;
 						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -968,9 +1072,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						point_to_edit = point;
                 	if (!isNaN(from)) {
 						var to = px;
-						to = to > 0 ? to : 0;
-						to = to > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : to;
-						to = to < 0 ? 0 : to;
+						if(to < 0){
+						    to = 0;
+						}else if(to > max_x){
+						    to = max_x;
+						}
 						if (point_to_edit) {
 							if (Math.abs(point_to_edit.from - from) < sensitivity) {
 								point_to_edit.from = to;
@@ -1000,9 +1106,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						//second gate starts
 						console.info("SET FROM " + px);
 						from = px;
-						from = from > 0 ? from : 0;
-						from = from > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : from;
-						from = from < 0 ? 0 : from;
+						if(from < 0){
+						    from = 0;
+						}else if(from > max_x){
+						    from = max_x;
+						}
 						fromy= (py > 16 ? py: 16);
 						fromy = (fromy > 90 ? 90: fromy)-5;
 						from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -1011,10 +1119,12 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 						var point = match(px, py-5);
 						point_to_edit = point;
 
-						var to = scb.ui.static.FacsView.MAX_GATE ;
-						to = to > 0 ? to : 0;
-						to = to > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : to;
-						to = to < 0 ? 0 : to;
+						var to = max_x ;
+						if(to < 0){
+						    to = 0;
+						}else if(to > max_x){
+						    to = max_x;
+						}
 						if (point_to_edit) {
 							if (Math.abs(point_to_edit.from - from) < sensitivity) {
 								point_to_edit.from = to;
@@ -1075,9 +1185,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
 				if (button == 1 && isNaN(from) && (state.facs.sample_analysis || point) ) {
 					console.info("SET FROM " + px);
 					from = px;
-					from = from > 0 ? from : 0;
-					from = from > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : from;
-					from = from < 0 ? 0 : from;
+					if(from < 0){
+					    from = 0;
+					}else if(from > max_x){
+					    from = max_x;
+					}
 					fromy= py > 16 ? py: 16;
 					fromy = fromy > 90 ? 90: fromy;
 					from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
@@ -1145,9 +1257,11 @@ scb.ui.static.FacsView.evaluate_chart = function (state) {
                     // is it over line?
                     console.info("SET TO " + px);
                     var to = px;
-                    to = to > 0 ? to : 0;
-                    to = to > scb.ui.static.FacsView.MAX_GATE  ? scb.ui.static.FacsView.MAX_GATE  : to;
-                    to = to < 0 ? 0 : to;
+                    if(to < 0){
+                        to = 0;
+                    }else if(to > max_x){
+                        to = max_x;
+                    }
                     state.facs_lane.canvas_metadata_analysis.points.push({from: Math.round(from), to: Math.round(to), y: Math.round(fromy)});
                     scb.ui.static.FacsView.reevaluate_metadata(state);
                     state.facs.apply_dna_analysis_to_all = false;
@@ -1309,10 +1423,14 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         if (state.facs.sample_prepared) {
             kind = 'analyze';
             if (state.facs && state.facs.selected_lane) {
-                scb.ui.static.FacsView.reevaluate_metadata({facs: state.facs, facs_lane: state.facs.selected_lane});
+                scb.ui.static.FacsView.reevaluate_metadata({
+                    facs: state.facs,
+                    facs_lane: state.facs.selected_lane,
+                    assignment: state.assignment
+                });
             }
         }
-        
+
         state.experiment.last_technique_view = 'facs';
         var scroll_num = 0;
         if($('.scb_s_facs_samples_table').length ==0)
@@ -1341,6 +1459,8 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
         
         if (kind == 'sample_prep'){
         	$('.scb_s_facs_samples_table', '.scb_s_facs_view').scrollTop(state.facs.prep_scroll);
+        }else{
+            $('.scb_s_facs_choose_samples_order_list', '.scb_s_facs_view').scrollTop(state.facs.samples_scroll);
         }
         state.experiment.prev_step=scb.ui.static.FacsView.TOTAL_STEPS;
         if(state.experiment.last_step >= scb.ui.static.FacsView.TOTAL_STEPS)
@@ -1368,11 +1488,7 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
 			$('.scb_s_facs_left_facs').prop('disabled', false);
 		}
 		else $('.scb_s_facs_right_facs').prop('disabled', false);
-			
-        if (kind == 'sample_prep') {
 
-
-        }
         if (state.facs.samples_finished) {
             scb.ui.static.FacsView.charts(workarea);
         }

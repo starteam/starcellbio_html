@@ -70,9 +70,9 @@
 }
 
 .scb_s_facs_choose_samples_order_list{
-	width:200px;
-	overflow: auto;
-	max-height: 275px;
+    width: 250px;
+    overflow: auto;
+    max-height: 275px;
 }
 .scb_s_facs_choose_samples_order_list>li {
 	text-overflow:ellipsis;
@@ -95,6 +95,15 @@
 	min-height: 284px;
 	position: absolute;
 	bottom: 84px;
+}
+ol.scb_s_facs_choose_samples_order_list::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+ol.scb_s_facs_choose_samples_order_list::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
 .scb_s_facs_choose_samples_order_border{
@@ -380,17 +389,6 @@ background-color:#676767 !important;
 	position: relative;
 }
 
-.scb_s_facs_cell_treatment_radio{
-	position: absolute;
-	top: 4px;
-}
-
-.scb_s_facs_cell_treatment_text{
-	position: absolute;
-	top: 6px;
-	left: 23px;
-}
-
 .scb_s_facs_vertical_line_1_top {
     position:absolute;
     z-index: 5;
@@ -492,7 +490,9 @@ background-color:#676767 !important;
 	border-radius:6px;
 	cursor:pointer;
 }
-
+#main input[type=radio]:disabled{
+    cursor: default;
+}
 
 #main input[type=radio]:checked{
 	margin-right: 7px;
@@ -574,15 +574,15 @@ input[type=radio]:disabled{
 }
 
 .sample_prep_samples_facs{
-	width: 324px;
+	width: 296px;
 }
 
 .sample_prep_cellt_facs{
-	width: 168px;
+	width: 160px;
 }
 
 .sample_prep_dna_facs{
-	width: 311px;
+	width: 245px;
 }
 
 .sample_prep_blank_facs{
@@ -590,7 +590,7 @@ input[type=radio]:disabled{
 }
 
 .sample_prep_cond_facs{
-	width: 296px;
+	width: 400px;
 }
 
 .scb_s_facs_samples_table {
@@ -614,11 +614,9 @@ input[type=radio]:disabled{
 	border-collapse: collapse;
 }
 
-.facs_locked{
-}
 .scb_s_facs_samples_area {
 	margin-top:28px;
-	height:358px;
+	height:360px;
 	margin-left: 8px;
 	overflow: hidden;
 }
@@ -667,7 +665,7 @@ input[type=radio]:disabled{
 
 .scb_f_facs_run_samples {
     border:none;
-    margin-top:7px !important; 
+    margin-top:3px !important;
     margin-left:88px !important;
     margin-right:20px !important; 
     float:none !important;
@@ -890,7 +888,7 @@ input[type=radio]:disabled{
 
 .scb_s_facs_dna_info{
 	outline: none;
-	right: 277px;
+	right: 304px;
 	bottom: -3px;
 	position: absolute;
 	background: none;
@@ -955,9 +953,14 @@ input[type=radio]:disabled{
 
 }
 
+.scb_s_facs_condition_wrapper{
+    display: inline-block;
+    width: 85px;
+}
+
 .scb_s_facs_cell_info{
 	outline: none;
-	right: 462px;
+	right: 485px;
 	bottom: -3px;
 	position: absolute;
 	background: none;
@@ -1012,7 +1015,20 @@ input[type=radio]:disabled{
 }
 
 .scb_s_hidden_note{
-display:none;
+    display:none;
+}
+
+.scb_s_facs_cell_treatment_text {
+    position: absolute;
+    top: 2px;
+    left: 23px;
+}
+
+.scb_s_facs_gel_tab_selected{
+    display:inline-block;
+    font-size: 9pt;
+    font-family: 'sourcesanspro-bold';
+    text-align: center;
 }
 
 
