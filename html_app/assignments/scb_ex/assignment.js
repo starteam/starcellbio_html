@@ -594,7 +594,6 @@ var __scb_sample_1 = {
             '21': 'images/microscopy/SCB_EX1/nucleus_final/n34.jpg',
             '22': 'images/microscopy/SCB_EX1/nucleus_final/n43.jpg',
             '23': 'images/microscopy/SCB_EX1/nucleus_final/n47.jpg',
-            '24': 'images/microscopy/SCB_EX1/nucleus_final/n60.jpg',
             '25': 'images/microscopy/SCB_EX1/nucleus_final/n64.jpg',
             '26': 'images/microscopy/SCB_EX1/nucleus_final/nuc-a.jpg',
             '27': 'images/microscopy/SCB_EX1/nucleus_final/nuc-b.jpg',
@@ -726,9 +725,6 @@ var __scb_sample_1 = {
                                     {hash: '23', if_type: 'green'}
                                 ],
                                 [
-                                    {hash: '24', if_type: 'green'}
-                                ],
-                                [
                                     {hash: '25', if_type: 'green'}
                                 ],
                                 [
@@ -852,9 +848,6 @@ var __scb_sample_1 = {
                                     {hash: '23', if_type: 'green'}
                                 ],
                                 [
-                                    {hash: '24', if_type: 'green'}
-                                ],
-                                [
                                     {hash: '25', if_type: 'green'}
                                 ],
                                 [
@@ -892,9 +885,6 @@ var __scb_sample_1 = {
                                 ],
                                 [
                                     {hash: '23', if_type: 'green'}
-                                ],
-                                [
-                                    {hash: '24', if_type: 'green'}
                                 ],
                                 [
                                     {hash: '25', if_type: 'green'}
@@ -3615,7 +3605,6 @@ var __scb_sample_3 = {
             '21': 'images/microscopy/scb_ex3/nucleus_final/n34.jpg',
             '22': 'images/microscopy/scb_ex3/nucleus_final/n43.jpg',
             '23': 'images/microscopy/scb_ex3/nucleus_final/n47.jpg',
-            '24': 'images/microscopy/scb_ex3/nucleus_final/n60.jpg',
             '25': 'images/microscopy/scb_ex3/nucleus_final/n64.jpg',
             '26': 'images/microscopy/scb_ex3/nucleus_final/nuc-a.jpg',
             '27': 'images/microscopy/scb_ex3/nucleus_final/nuc-b.jpg',
@@ -5802,9 +5791,6 @@ var __scb_sample_3 = {
                                 ],
                                 [
                                     {hash: '23', if_type: 'green'}
-                                ],
-                                [
-                                    {hash: '24', if_type: 'green'}
                                 ],
                                 [
                                     {hash: '25', if_type: 'green'}
