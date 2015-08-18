@@ -5,6 +5,7 @@ scb.ui.static = scb.ui.static || {};
 scb.ui.static.MicroscopyView = scb.ui.static.MicroscopyView || {};
 scb.ui.static.MicroscopyView.TOTAL_TABS =  4;
 scb.ui.static.MicroscopyView.TOTAL_STEPS =  5;
+scb.ui.static.MicroscopyView.MAX_CONDITION_CHARS = 11;
 
 
 var if_light_on_and_laser_on = false;
@@ -1990,7 +1991,16 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
         }));
         
         if (kind == 'sample_prep'){
-        	$('.scb_s_western_blot_samples_table', '.scb_s_microscopy_view').scrollTop(state.microscopy.prep_scroll);
+            $('.scb_s_western_blot_samples_table', '.scb_s_microscopy_view').scrollTop(state.microscopy.prep_scroll);
+
+            var conds= $("span.scb_s_western_blot_choose_gel_type_input_text");
+            _.each(conds, function(c){
+                if($(c).text().length > scb.ui.static.MicroscopyView.MAX_CONDITION_CHARS){
+                    $(c).parent().css('width', '200px');
+                }else{
+                    $(c).parent().css('width', '100px');
+                }
+            })
         }
         state.experiment.prev_step=6;
         

@@ -98,7 +98,7 @@
 }
 
 .scb_s_microscopy_sample_type{
-	width: 161px;
+	width: 170px;
 }
 
 .m_sample_prep_select{
@@ -1634,7 +1634,7 @@ background-image: url('../../../images/microscopy/Right_Arrow_Gray.png');
 
 .scb_s_microscopy_conditions > div{
 	position:relative;
-	margin-left: 20px;
+	margin-left: 10px;
 }
 .scb_s_microscopy_conditions > div >input{	
 	position: absolute;
@@ -1758,5 +1758,5 @@ background-repeat: no-repeat;
 }
 .scb_s_microscopy_condition_wrapper{
     display: inline-block;
-    width: 85px;
+    width: 90px;
 }
