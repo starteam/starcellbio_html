@@ -1030,6 +1030,9 @@ input[type=radio]:disabled{
     font-family: 'sourcesanspro-bold';
     text-align: center;
 }
+.scb_f_facs_add_all_conditions:enabled{
+    cursor: pointer;
+}
 
 
 

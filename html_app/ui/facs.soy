@@ -382,7 +382,7 @@ FACS Main View
                     {if length(keys($kinds)) > 1 or length(keys($kinds[$r.lane.kind].conditions)) > 1}
                         <button class="scb_f_facs_add_all_conditions" facs_id='{$facs.id}'
                             assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-                            cell_treatment_id='{$r.cell_treatment.id}'>
+                            cell_treatment_id='{$r.cell_treatment.id}' {if not $r.more_conditions} disabled{/if}>
                             Add All
                         </button>
                     {/if}

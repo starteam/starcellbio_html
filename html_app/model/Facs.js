@@ -146,7 +146,8 @@ scb.Facs = function scb_Facs(data, context, parent) {
                         is_sample_enabled: self.is_cell_treatment_enabled[e.id],
                         index: index,
                         is_valid: self.is_cell_treatment_enabled[e.id] && ee && ee.conditions,
-                        is_tab_selected: self.is_tab_selected[e.id] === ee.id
+                        is_tab_selected: self.is_tab_selected[e.id] === ee.id,
+                        more_conditions: !skip_placeholders
                     });
                 });
                 if (!skip_placeholders) {
