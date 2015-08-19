@@ -4409,7 +4409,7 @@ var __scb_sample_3 = {
                                 {
                                     name: 'Mouse anti-pRAF',
                                     weight: 75,
-                                    intensity: 5,
+                                    intensity: 1,
                                     primary_anti_body: ['3']
                                 },
                                 //antibody 4
