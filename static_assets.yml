@@ -203,7 +203,8 @@ javascripts:
   - assignments/decusability/assignment.js
   - assignments/microscopy_usability/assignment.js
   - master_model.js
-
+  - google-analytics.js
+  
 css:
   - js/skins/lightgray/skin.min.css
   - assignments/scb_ex/gen/addmultipledialog.gss.css

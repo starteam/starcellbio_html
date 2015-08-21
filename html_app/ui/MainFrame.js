@@ -6,9 +6,24 @@ scb.ui.static = scb.ui.static || {};
 scb.ui.static.MainFrame = scb.ui.static.MainFrame || {};
 
 scb.ui.static.MainFrame.update_hash = function (state) {
-    console.info("update_hash " + state.onhashchange);
-    console.info($.bbq.getState());
-    console.info(state);
+	
+	// only send a google page event if the hash changed
+	if (state.onhashchange) {
+	    // construct a url path to use with google analytics
+	    ga_path = '';
+	    if (state.assignment_id) {
+		    ga_path += '/' + state.assignment_id;
+	    }
+	    ga_path += '/' + state.view;
+		// send it
+	    ga('send', {
+            'hitType': 'pageview',
+            'page': ga_path,
+            });
+        // other state fields that we aren't currently tracking:
+        // experiment_id: appears to be a unique identifier
+        // facs_id: appears to be a unique identifier
+	}
 
     if (!state.onhashchange) {
         delete state.onhashchange;
