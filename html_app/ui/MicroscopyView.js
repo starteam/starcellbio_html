@@ -383,6 +383,52 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type = function (elem
     }
 }
 
+scb.ui.static.MicroscopyView.scb_f_microscopy_add_all_conditions = function (element, event) {
+    /* Select all conditions for all types/kinds */
+    var parsed = scb.ui.static.MicroscopyView.parse(element);
+    parsed = resetScrollValue(parsed);
+    parsed.microscopy.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
+
+    var cell_treatment_id = $(element).attr('cell_treatment_id');
+    var lanes = _.filter(parsed.microscopy.lanes_list.list, function (lane) {
+        return cell_treatment_id == lane.cell_treatment_id
+    });
+    /* Need to get available conditions for each cell_treatment*/
+    var cell_treatment_list=parsed.experiment.cell_treatment_list;
+    /* Want to find a dict of kinds and conditions available for this cell_treatment */
+    var micro_kinds = _.filter(cell_treatment_list.list , function(lane){
+        return lane.id == cell_treatment_id; })[0].treatment_list.first.conditions;
+    _.each(_.keys(micro_kinds), function(type){
+        _.each(micro_kinds[type], function(condition){
+            /* find if a lane exists with this condition */
+            var lane = _.find(lanes, function(lane){
+                return lane.slide_conditions === condition
+            });
+            /* if not, create a new MicroscopyLane */
+            if (typeof lane === 'undefined'){
+                parsed.microscopy.lanes_list.start({
+                    kind: type,
+                    slide_conditions: condition,
+                    cell_treatment_id: cell_treatment_id,
+                    experiment_id: parsed.experiment.id
+                });
+            }
+        });
+        /* want to remove any lanes that did not have condition selected */
+        var lanes_no_cond = _.filter(lanes, function(lane){
+            return lane.slide_conditions === null
+        });
+        _.each(lanes_no_cond, function(lane){
+            parsed.microscopy.lanes_list.remove(lane.id);
+        });
+    })
+    if (event) {
+        scb.ui.static.MainFrame.refresh();
+    }
+
+
+}
+
 scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions = function (element, event) {
     var parsed = scb.ui.static.MicroscopyView.parse(element);
     parsed = resetScrollValue(parsed);
@@ -1620,6 +1666,9 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_tools_toggle = function (element) 
 scb.ui.static.MicroscopyView.register = function (workarea) {
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_select_slide_type', function (e) {
         scb.ui.static.MicroscopyView.scb_f_microscopy_select_slide_type(this, e);
+    });
+    scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_add_all_conditions', function (e) {
+        scb.ui.static.MicroscopyView.scb_f_microscopy_add_all_conditions(this, e);
     });
     scb.utils.off_on(workarea, 'change', '.scb_f_microscopy_select_conditions', function (e) {
         scb.ui.static.MicroscopyView.scb_f_microscopy_select_conditions(this, e);

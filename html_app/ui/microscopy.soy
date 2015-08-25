@@ -346,8 +346,24 @@
 			{/if}
 
             </td>
+
+            <td class='scb_s_microscopy_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'
+                style="width:70px">
+                {if $r.kind == 'existing' and $r.display_sample}
+                    {if length(keys($r.lane.cell_treatment.treatment_list.first.conditions)) > 1
+                        or length($r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]) > 1}
+                        <button class="scb_f_microscopy_add_all_conditions" microscopy_id='{$microscopy.id}'
+                            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                            cell_treatment_id='{$r.cell_treatment.id}' {if not $r.more_conditions} disabled{/if}>
+                            Add All
+                        </button>
+                    {/if}
+                {/if}
+            </td>
+
             <!--Remove bucket-->
-            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'>
+            <td class='scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if}'
+                style="width:30px">
                 {if $r.kind == 'existing'}
                     {if length(keys($r.cell_treatment.treatment_list.list[0].conditions)) > 1 or
                        length($r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]) > 1}

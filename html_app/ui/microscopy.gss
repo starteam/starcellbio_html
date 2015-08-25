@@ -106,15 +106,15 @@
 }
 
 .m_sample_prep_samples{
-    width: 289px;
+    width: 282px;
 }
 
 .m_sample_prep_lysate{
-    width: 187px;
+    width: 183px;
 }
 
 .m_sample_prep_blank{
-    width: 322px;
+    width: 331px;
 }
 
 .scb_s_microscopy_left_microscopy{
@@ -1759,4 +1759,7 @@ background-repeat: no-repeat;
 .scb_s_microscopy_condition_wrapper{
     display: inline-block;
     width: 90px;
+}
+.scb_f_microscopy_add_all_conditions:enabled{
+    cursor: pointer;
 }

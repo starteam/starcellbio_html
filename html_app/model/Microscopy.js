@@ -165,11 +165,13 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
                         self.is_tab_selected[e.id]= ee.id;
                     }
                     rows.push({
+                        /* existing means that lane was created */
                         kind:'existing',
                         cell_treatment:e,
                         lane:ee,
                         /* used in sample prep */
                         display_sample:index == 0,
+                        /* if checkbox is checked*/
                         is_sample_enabled:self.is_cell_treatment_enabled[e.id],
                         index:index,
                         is_valid: is_valid,
@@ -178,7 +180,8 @@ scb.Microscopy = function scb_Microscopy(data, context, parent) {
                         display_text: e.format_row(),
                         /* at most 4 tabs can be displayed */
                         display_tab: false,
-                        num_tabs: num_tabs
+                        num_tabs: num_tabs,
+                        more_conditions: !skip_placeholders
                     });
                 });
                 if (!skip_placeholders) {
