@@ -3567,8 +3567,7 @@ var __scb_sample_3 = {
                     'cyto': { name: 'Cyto A488', short_name: 'Cyto'},
                     'nuc': { name: 'Nuc A488', short_name: 'Nuc'},
                     'er': { name: 'ER A488', short_name: 'ER'},
-                    'nm': { name: 'NM A488', short_name: 'NM'},
-                    'na': {name: 'None', short_name: 'None'}
+                    'nm': { name: 'NM A488', short_name: 'NM'}
                 }
 
 

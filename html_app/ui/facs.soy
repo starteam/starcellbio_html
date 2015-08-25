@@ -378,7 +378,7 @@ FACS Main View
             
             <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'
                 style="width:70px">
-                {if $r.display_sample and $r.is_sample_enabled}
+                {if $r.kind == 'existing' and $r.display_sample}
                     {if length(keys($kinds)) > 1 or length(keys($kinds[$r.lane.kind].conditions)) > 1}
                         <button class="scb_f_facs_add_all_conditions" facs_id='{$facs.id}'
                             assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
