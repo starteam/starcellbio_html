@@ -1717,7 +1717,7 @@ var __scb_sample_2 = {
                                 },
                                 {
                                     name: 'Mouse anti-Protein X',
-                                    weight: 86,
+                                    weight: 88,
                                     intensity: 2,
                                     primary_anti_body: ['1']
                                 },
