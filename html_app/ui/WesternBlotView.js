@@ -171,26 +171,44 @@ scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates = function (ele
         alert("INVALID ELEMENT!");
     }
     var rows_state = parsed.western_blot.rows_state();
-    if (rows_state.valid > (scb.ui.static.WesternBlotView.MAX_ROWS)) {
-    	$('html').css('overflow', 'hidden');
-    	$('body').prepend(scb_experiment_setup.general_error_overlay());
-		
-		$('#jqDialog_box').css('width', '450px');
-    	$.jqDialog.alert(scb_western_blot.wb_sample_error(), 
-    	function() {	$('html').css('overflow', 'visible');  $('#jqDialog_box').css('width', '');
-					$('.error_overlay').remove()/* callback function for 'OK' button*/ });
-		$('.jqDialog_header').remove();
-		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-		$('#jqDialog_box').attr('role', 'alertdialog');
-    }
-    else if (rows_state.valid < 1) {
+    if (rows_state.valid > scb.ui.static.WesternBlotView.MAX_ROWS) {
+        $('html').css('overflow', 'hidden');
+        $('body').prepend(scb_experiment_setup.general_error_overlay());
+        $('#jqDialog_box').css('width', '450px');
+        $.jqDialog.alert(scb_western_blot.wb_sample_error(),
+            function() { /* callback function for 'OK' button*/
+                $('#jqDialog_box').css('width', '');
+                $('html').css('overflow', 'visible');
+                $('.error_overlay').remove()});
+        $('.jqDialog_header').remove();
+        $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+        $('#jqDialog_box').attr('role', 'alertdialog');
+
+    } else if(rows_state.valid === scb.ui.static.WesternBlotView.MAX_ROWS){
+        $('#jqDialog_box').css('width', '450px');
+        $.jqDialog.confirm(scb_western_blot.wb_15_samples_error(),
+            function() { /* callback function for 'YES' button */
+                $('html').css('overflow', 'visible');
+                $('.error_overlay').remove();
+                parsed.western_blot.lysate_prepared = true;
+                scb.ui.static.MainFrame.refresh();
+            },
+            function() { /* callback function for 'NO' button */
+                $('.error_overlay').remove();
+                $('html').css('overflow', 'visible');
+            }
+        );
+        $('.jqDialog_header').remove();
+        $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+
+    } else if (rows_state.valid < 1) {
     	$('html').css('overflow', 'hidden');
     	$('body').prepend(scb_experiment_setup.general_error_overlay());
 
-    	$.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {
-				$('html').css('overflow', 'visible');
-					$('.error_overlay').remove(); /* callback function for 'OK' button*/ 
-		});
+        $.jqDialog.alert("Please select at least 1 lysate to prepare.", function() {
+            $('html').css('overflow', 'visible');
+            $('.error_overlay').remove(); /* callback function for 'OK' button*/
+        });
  		$('.jqDialog_header').remove();
 		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
 		$('#jqDialog_box').attr('role', 'alertdialog');
@@ -472,40 +490,40 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_load_marker', function (e) {
         scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker(this);
     });
-    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_load_all', function (e) { 
-    	var parsed = scb.ui.static.WesternBlotView.parse(this);
+    scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_load_all', function (e) {
+        var parsed = scb.ui.static.WesternBlotView.parse(this);
+        var rows_state = parsed.western_blot.rows_state();
+        console.log(rows_state.valid);
+        if (!parsed.western_blot.marker_loaded &&
+            rows_state.valid !== scb.ui.static.WesternBlotView.MAX_ROWS) {
+            $('html').css('overflow', 'hidden');
+            $('body').prepend(scb_experiment_setup.general_error_overlay());
 
-    	 if (!parsed.western_blot.marker_loaded) {
-    	$('html').css('overflow', 'hidden');
-    	$('body').prepend(scb_experiment_setup.general_error_overlay());
+
+            $.jqDialog.confirm("The protein size marker has not been added to your samples. Would you like to continue?",
+                function () {
+                    $('html').css('overflow', 'visible');
+                    $('.error_overlay').remove();
+                    parsed = resetScrollValue(parsed);
+                    scb.ui.static.WesternBlotView.populate_wells(rows_state.rows, parsed);
+
+                    scb.ui.static.MainFrame.refresh();
+                },// callback function for 'YES' button
+                function () {
+                    $('.error_overlay').remove();
+                    $('html').css('overflow', 'visible');
+                    return;
+                } // callback function for 'NO' button
+            );
+            $('.jqDialog_header').remove();
+            $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+            $('#jqDialog_box').attr('role', 'alertdialog');
 
 
-		$.jqDialog.confirm("The protein size marker has not been added to your samples. Would you like to continue?",
-			function() {
-   				$('html').css('overflow', 'visible');
-   				$('.error_overlay').remove();
-				parsed = resetScrollValue(parsed);
-        		scb.ui.static.WesternBlotView.populate_wells(parsed.western_blot.rows_state().rows, parsed);
-        		
-    			scb.ui.static.MainFrame.refresh();
-    		},// callback function for 'YES' button
-			function() {
-					$('.error_overlay').remove();
-					$('html').css('overflow', 'visible');
-					return;
-			}		// callback function for 'NO' button
-		);
-		$('.jqDialog_header').remove();
-		$('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-		$('#jqDialog_box').attr('role', 'alertdialog');
-		
-
-    }
-    else{
-    	
-   		 var parsed = scb.ui.static.WesternBlotView.parse(this);
-		parsed = resetScrollValue(parsed);
-        scb.ui.static.WesternBlotView.populate_wells(parsed.western_blot.rows_state().rows, parsed);
+        } else {
+            var parsed = scb.ui.static.WesternBlotView.parse(this);
+            parsed = resetScrollValue(parsed);
+            scb.ui.static.WesternBlotView.populate_wells(parsed.western_blot.rows_state().rows, parsed);
         }
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_choose_gel_type_input', function (e, ui) {
@@ -671,11 +689,14 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
             }            
         }
         if (kind == 'prepare_gel') {
-        	if(state.western_blot.wells_loaded)
-           	    scb.ui.static.WesternBlotView.populate_wells(rows_state.rows, state);
-   			else
-        		scb.ui.static.WesternBlotView.draw_wells(rows_state.rows, state);
-   			
+            if(state.western_blot.wells_loaded) {
+                scb.ui.static.WesternBlotView.populate_wells(rows_state.rows, state);
+            } else {
+                scb.ui.static.WesternBlotView.draw_wells(rows_state.rows, state);
+            }
+            if(rows_state.valid === scb.ui.static.WesternBlotView.MAX_ROWS){
+                $(".scb_s_western_blot_add_marker_wrapper").css('opacity','.25').children().prop('disabled', true);
+            }
 
         }
 

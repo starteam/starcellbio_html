@@ -432,4 +432,7 @@ font-family: 'sourcesanspro-regular';
 	background-image: url('../../images/header/scb_help.png');
 	background-repeat: no-repeat;
 }
+button:disabled{
+    cursor: default;
+}
 

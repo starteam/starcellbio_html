@@ -450,10 +450,12 @@
             </ol>
     </div>
     {if $western_blot.marker_loaded == false and $western_blot.wells_loaded == false}
-    <div class='scb_s_western_blot_add_marker_wrapper'><button class='scb_s_western_blot_load_marker' western_blot_id='{$western_blot.id}'
+    <div class='scb_s_western_blot_add_marker_wrapper'>
+        <button class='scb_s_western_blot_load_marker'
+            western_blot_id='{$western_blot.id}'
             assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
-    </button>
-    <div class='scb_s_western_blot_add_marker_text'>ADD MARKER +</div>
+        </button>
+        <div class='scb_s_western_blot_add_marker_text'>ADD MARKER +</div>
     </div>
     {/if}
     {if $western_blot.wells_loaded == false} 
@@ -689,4 +691,12 @@
 {template .wb_sample_error}
 You have selected more than 15 samples. The gel only has 15 lanes. Please only select 15
  samples, and remember that one lane is usually reserved for a protein marker.
+{/template}
+
+/**
+* Western Blot 15 samples, no space for marker
+*/
+{template .wb_15_samples_error}
+You have selected 15 samples which means that you have not reserved a lane for the protein marker.
+The gel only has 15 lanes and one lane should be reserved for the protein marker. Would you like to continue?
 {/template}
