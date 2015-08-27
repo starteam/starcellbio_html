@@ -392,7 +392,6 @@ top: -21px;
     font-family: 'sourcesanspro-semibold';
     text-align: left;
     padding-top: 15px;
-    margin-bottom: -10px;
     padding-left: 17px;
 
 } 
