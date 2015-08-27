@@ -724,21 +724,41 @@ scb.ui.WesternBlotView = function scb_ui_WesternBlotView(gstate) {
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');
 			else $(e).removeAttr('title');
     	});
-    	
-		$(".scb_s_western_blot_selected").keypress(function(e){ return e.which != 13; });
-		var elem = document.getElementById('slider');
-		window.mySwipe = Swipe(elem, {
-  			continuous: false,
-  			disableScroll: true,
-  			transitionEnd: function(index, element) { 
-					$('.slider_dots li').attr('class','');
-					$($('.slider_dots li')[index]).attr('class','on');}
-		});
-		$('#nav li').on('click', function () {
-			$('.slider_dots li').attr('class','');
-			$($('.slider_dots li')[$(this).index()]).attr('class','on');
-   			 window.mySwipe.slide($(this).index(), 200);
-		});
+        var stopVideo = function (player) {
+            var vidSrc = player.prop('src');
+            player.prop('src', ''); // to force it to pause
+            player.prop('src', vidSrc);
+        };
+
+
+        $(".scb_s_western_blot_selected").keypress(function (e) {
+            return e.which != 13;
+        });
+        var elem = document.getElementById('slider');
+        window.mySwipe = Swipe(elem, {
+            continuous: false,
+            disableScroll: true,
+            transitionEnd: function (index, element) {
+                var current_video = $($(element).find('iframe')[0]).attr('id');
+                _.each($(element).parent().children(), function (video) {
+                    if ($($(video).find('iframe')[0]).attr('id') !== current_video) {
+                        stopVideo($($(video).find('iframe')[0]));
+                    }
+
+                });
+                $('.slider_dots li').attr('class', '');
+                $($('.slider_dots li')[index]).attr('class', 'on');
+            }
+        });
+        /* Click on the slider dots
+         $('#nav li').on('click', function () {
+         $('.slider_dots li').attr('class','');
+         $($('.slider_dots li')[$(this).index()]).attr('class','on');
+         window.mySwipe.slide($(this).index(), 200);
+         });
+         */
+        $('.slider_dots li').css('cursor', 'default');
+
 
 		if(!state.western_blot.wells_loaded){
 		$('body').mousedown(function(e){
