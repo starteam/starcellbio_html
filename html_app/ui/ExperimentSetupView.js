@@ -297,7 +297,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 			else{
 				$('body').prepend(scb_experiment_setup.experiment_setup_overlay());
 				$(element).attr('href', 'javascript:void(0)');
-				
+				$('#jqDialog_box').css('width', '570px');
 				$.jqDialog.content(scb_experiment_setup.experiment_setup_dialog({assignment: parsed.assignment, experiment: parsed.experiment}));
 				$('#jqDialog_box').attr('role', 'alertdialog');
 				//$('#jqDialog_box').prepend(scb_experiment_setup.experiment_confirm());
