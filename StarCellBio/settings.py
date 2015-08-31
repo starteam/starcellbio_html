@@ -231,3 +231,9 @@ DATABASES = {
         'PORT': DB_PORT,
     }
 }
+
+
+# Ensure that ADMINS is a tuple of tuples. This is necessary because there are
+# no tuples in YAML. When ADMINS is defined in YAML, it's imported as a list of
+# lists.
+ADMINS = tuple(tuple(admin) for admin in ADMINS)
