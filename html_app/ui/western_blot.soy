@@ -366,7 +366,7 @@
 		
 			 </div>
 
-			{if $western_blot.marker_loaded}
+			{if $western_blot.marker_loaded or $western_blot.wells_loaded}
 			{else}
 			<button class='scb_f_info_icon scb_s_western_blot_marker_info' note='scb_f_wb_marker_followup' role='button' aria-label='Marker Info'> </button>
 
