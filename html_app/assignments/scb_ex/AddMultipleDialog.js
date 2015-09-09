@@ -212,6 +212,16 @@ scb_ex3.setup=function(state) {
         experiment: experiment,
         template: template
     }));
+    dialog.appendTo($(workarea));
+    scb_ex1.register($(dialog), state);
+
+    var css = scb.utils.get(state, ['source_state', 'css']);
+    _.each(css, function (v, k) {
+        dialog.css(k, v);
+    });
+
+    $('.scb_ex_dialog').draggable({handle: '.scb_ex_inner_dialog_title'});
+
 }
 scb_ex1.assignment_builder_add_multiple = function (state) {
     console.info(state);

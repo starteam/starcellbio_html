@@ -633,7 +633,7 @@ scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides = function (element
         var valid_lane = _.find(rows_state.rows, function(r){
             return r.is_valid ;
         });
-        parsed.microscopy.lane_selected =valid_lane.lane.id;
+        parsed.microscopy.lane_selected = valid_lane.lane.id;
         parsed.microscopy.slide_prepared = true;
         window.scrollTo(0, 0);
         scb.ui.static.MainFrame.refresh();

@@ -79,24 +79,6 @@ scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function (element, even
     }
 }
 
-
-scb.ui.static.FacsView.scb_f_microscopy_select_conditions = function (element, event) {
-    var parsed = scb.ui.static.FacsView.parse(element);
-    if (parsed.redisplay) {
-        alert("INVALID ELEMENT!");
-    }
-    var val = $(element).val();
-    parsed.facs_lane.conditions = val;
-    event = true;
-    if (event) {
-        scb.ui.static.MainFrame.refresh();
-    }
-}
-
-
-
-
-
 scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
     parsed = resetScrollValue(parsed);
@@ -151,9 +133,10 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
 
 
     if (lane_id == '') {/*This means that the Lane does not 'exist' yet*/
+        var line;
         if (_.size(avail_conditions) == 1) {
             var slide_conditions_val = avail_conditions[0];
-            parsed.facs.lanes_list.start({
+            line = parsed.facs.lanes_list.start({
                 kind: slide_type,
                 conditions: slide_conditions_val,
                 cell_treatment_id: cell_treatment_id,
@@ -166,7 +149,7 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
 
         }
         else {
-            parsed.facs.lanes_list.start({
+            line = parsed.facs.lanes_list.start({
                 kind: slide_type,
                 cell_treatment_id: cell_treatment_id,
                 experiment_id: parsed.experiment.id,
@@ -306,6 +289,12 @@ scb.ui.static.FacsView.scb_f_facs_prepare_lysates = function (element, event) {
         $('#jqDialog_box').attr('role', 'alertdialog');
     }
     else {
+        /* want to find the first lane in the list that is valid
+           and select it */
+        var valid_lane = _.find(rows_state.rows, function(r){
+            return r.is_valid ;
+        });
+        parsed.facs.lane_selected = valid_lane.lane.id;
         parsed.facs.sample_prepared = true;
         scb.ui.static.MainFrame.refresh();
     }
@@ -341,7 +330,6 @@ scb.ui.static.FacsView.scb_f_facs_run_samples = function (element, event) {
         alert("INVALID ELEMENT!");
     }
     parsed.facs.samples_finished = true;
-    parsed.facs.lane_selected = scb.utils.get(parsed.facs.lanes_list.list, [0, 'id']);
     scb.ui.static.MainFrame.refresh();
 }
 
@@ -714,9 +702,6 @@ scb.ui.static.FacsView.register = function (workarea) {
     });
     scb.utils.off_on(workarea, 'click', '.scb_f_facs_cell_treatment_radio', function (e) {
         scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio(this);
-    });
-    scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_select_conditions', function (e) {
-        scb.ui.static.FacsView.scb_f_microscopy_select_conditions(this);
     });
 
 

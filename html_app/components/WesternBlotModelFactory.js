@@ -334,12 +334,18 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
     }
 
     self.compute = function (lane, gel, lane_marks) {
+        var parser_ab = false;
+
         if (
-            scb.utils.isDefined(model.nuclear.parser_ab) ||
-            scb.utils.isDefined(model.cyto.parser_ab) ||
-            scb.utils.isDefined(model.whole.parser_ab)
+            (scb.utils.isDefined(model.cyto) && scb.utils.isDefined(model.cyto.parser_ab)) ||
+            (scb.utils.isDefined(model.whole) && scb.utils.isDefined(model.whole.parser_ab)) ||
+            (scb.utils.isDefined(model.nuclear) &&  scb.utils.isDefined(model.nuclear.parser_ab))
             )
         {
+            parser_ab = true;
+        }
+
+        if (parser_ab){
             ret = undefined;
             if (lane.id != 'marker') {
                 if (lane.kind == 'whole' || lane.kind == 'whole_cell') {
