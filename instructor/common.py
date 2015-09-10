@@ -68,22 +68,38 @@ def create_new_assignment(request):
 
 
 def assignment_setup(request):
+    error = ''
     if request.method == "POST":
-        # Have to give error for empty name
-        request.session['assignment_name'] = request.POST['name']
+        assignment_name = request.POST['name']
         if request.POST['based_on']:
             request.session['based_on'] = request.POST['based_on']
-
-        if 'continue' in request.POST:
-            return redirect('common_course_setup')
+        if assignment_name:
+            request.session['assignment_name'] = assignment_name
+            if 'continue' in request.POST:
+                return redirect('common_course_setup')
+        else:  # Have to give error for empty name
+            error = "*Empty assignment name"
+    else:
+        # giving a default name to the assignment
+        assignment_name = "Assignment"
+        filtered_asgmts = models.Assignment.objects.filter(name__regex=r'Assignment.*')
+        # want to allow index one larger then there are currently assignments
+        for index in xrange(1, len(filtered_asgmts)+2):
+            if not filtered_asgmts.filter(name="Assignment {}".format(index)).count():
+                assignment_name = "Assignment {}".format(index)
+                break
 
     all_assignments = models.Assignment.objects.all()
+
     return render_to_response('instructor/assignment_setup.html',
-                              {'assignments': all_assignments,
-                               'assignment_name': request.session['assignment_name'],
-                               'based_on': request.session['based_on'],
-                               'new': request.session['new']},
-                                context_instance=RequestContext(request))
+                              {
+                                  'assignments': all_assignments,
+                                  'error': error,
+                                  'assignment_name': assignment_name,
+                                  'based_on': request.session['based_on'],
+                                  'new': request.session['new']
+                              },
+                              context_instance=RequestContext(request))
 
 @login_required
 def course_setup(request):

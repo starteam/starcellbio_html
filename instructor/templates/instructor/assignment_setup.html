@@ -39,11 +39,12 @@
 
     <form method="post">{% csrf_token %}
         <input type="text" name="name" class="" value="{{ assignment_name }}">
+        <div class="scb_ab_s_input_error">{{ error }}</div>
         <input type="hidden" name="based_on" id="based_on">
 
         <input type="submit" data-based_on="null"
                name="continue"
-               class="scb_s_navigation_button"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
                value="SAVE AND CONTINUE &nbsp; &#9654;"/>
     </form>
 
