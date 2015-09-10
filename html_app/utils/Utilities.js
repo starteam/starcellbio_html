@@ -246,6 +246,14 @@ scb.utils.accessor2 = function (obj, field, source) {
     },enumerable:true});
 }
 
+scb.utils.value_hidden = function (obj, field, value) {
+    Object.defineProperty(obj, field, { get:function () {
+        return value;
+    }, set:function (d) {
+        value = d;
+    },enumerable:false});
+}
+
 scb.utils.accessor2_with_setter = function (obj, field, source, setter) {
     Object.defineProperty(obj, field, { get:function () {
         return source[field];

@@ -84,13 +84,19 @@ def get_model(request):
     return response
 
 
+def get_account_type(user):
+    """ Get user account type """
+    account_type = ''
+    if user.id:
+        if user.groups.count() == 1:
+            account_type = user.groups.all()[0].name
+    return account_type
+
+
 def get_user(request, **kwargs):
-    import pudb
-    # pudb.set_trace()
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    else:
-        account_type = ''
+
+    account_type = get_account_type(request.user)
+    
     retval = {'account_type': account_type, 'name': request.user.username}
     response = HttpResponse("var get_user_result = {0};".format(json.dumps(retval)))
     response.set_cookie("scb_username", request.user.username)
@@ -142,6 +148,8 @@ def initialize_courses(request, **kwargs):  #
                 c.save()
                 a = Assignment(courseID=c, assignmentID=assign_id, assignmentName=assign_name, data=x)
                 a.save()
+                a.basedOn=a
+                a.save()
             return HttpResponse('got it')
     else:
         response = HttpResponse("var create_courses_result = {0};".format(''))
@@ -160,12 +168,9 @@ def get_student_courses(request, **kwargs):
     obj.domain='starcellbio.mit.edu'
     obj.save()
 
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    else:
-        account_type = ''
+    account_type = get_account_type(request.user)
+
     alist = []
-    retval = []
     token1 = random.randrange(0, 1000000)
     if (UserCourse.objects.filter(user__username=request.user.username).count() > 0 and account_type == 'student'):
         usercourses = UserCourse.objects.filter(user=request.user)
@@ -262,7 +267,8 @@ def get_student_courses(request, **kwargs):
         else:
             all = []
             # sample courses
-            for a in Assignment.objects.filter(courseID=Course.objects.filter(code='SCB_SampleExercises')):
+            #for a in Assignment.objects.filter(courseID=Course.objects.filter(code='SCB_SampleExercises')):
+            for a in Assignment.objects.all():
                 dictionary = ast.literal_eval(a.data)
                 all.append(dictionary)
 
@@ -443,15 +449,11 @@ def randomize_706_2014_ps1(request, assignment_data):
 def get_instructor_assignments(request, **kwargs):
     import ast
     import random
-    import pudb
-    # 	pudb.set_trace()
-    retval = []
     token1 = random.randrange(0, 1000000)
     return_list = []
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    else:
-        account_type = ''
+
+    account_type = get_account_type(request.user)
+
     if (account_type == 'instructor'):
         # 		pudb.set_trace()
         public_list = Assignment.objects.filter(access='Public')

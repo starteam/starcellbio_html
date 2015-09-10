@@ -515,9 +515,7 @@ scb.ui.WesternBlotGelView = function scb_WesternBlotGelView(gstate) {
 				});
             }
         }).each(scb.ui.static.WesternBlotGelView.scb_f_wb_exposure_slider);
-        
         scb.ui.static.WesternBlotGelView.scb_s_western_blot_gel_paint_all(workarea, gstate, state);
-        
 		_.each($(".scb_s_experiment_step_button"), function (e) {
 			if(!$(e).hasClass('scb_s_experiment_step_visited')) 
 				$(e).attr('title', 'To use this button, start a new '+$(e).text()+' Experiment.');

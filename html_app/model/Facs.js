@@ -5,7 +5,7 @@ scb.FacsList = function scb_FacsList(data, context, parent) {
     self.parent = parent;
 
     scb.ModelHelpers.common_list_code(self, data, scb.Facs, context, self);
-	scb.Utils.initialize_accessor_field(self, data, 'start_tabs_index', 0, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'start_tabs_index', 0, null, context);
 
 
     self.start = function (d) {
@@ -88,9 +88,15 @@ scb.Facs = function scb_Facs(data, context, parent) {
     }, scb.utils.noop);
 
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
+    scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_live', {}, null, context);
+
     /* to save selected lane for each cell_treatment */
     scb.Utils.initialize_accessor_field(self, data, 'is_tab_selected', {}, null, context);
     self.rows_state = function (exp) {
+        var skip_placeholders = false;
+        if (_.keys(context.template.facs_kinds).length == 1 && _.keys(context.template.facs_kinds[Object.keys(context.template.facs_kinds)[0]].conditions).length == 1) {
+            skip_placeholders = true;
+        }
         var experiment = exp || self.parent.parent;
         var template = context.template;
         var grouped_rows = self.lanes_list.grouped_list;
@@ -146,6 +152,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
                         is_sample_enabled: self.is_cell_treatment_enabled[e.id],
                         index: index,
                         is_valid: self.is_cell_treatment_enabled[e.id] && ee && ee.conditions,
+                        live: self.is_cell_treatment_live[e.id+'_'+ee.id],
                         is_tab_selected: self.is_tab_selected[e.id] === ee.id,
                         more_conditions: !skip_placeholders
                     });
@@ -156,7 +163,8 @@ scb.Facs = function scb_Facs(data, context, parent) {
                         display_sample: false,
                         cell_treatment: e,
                         is_sample_enabled: self.is_cell_treatment_enabled[e.id],
-                        is_valid: false
+                        is_valid: false,
+                        live: self.is_cell_treatment_live[e.id+'_']
                     });
                 }
             } else {
@@ -166,19 +174,44 @@ scb.Facs = function scb_Facs(data, context, parent) {
                     display_sample: true,
                     cell_treatment: e,
                     is_sample_enabled: self.is_cell_treatment_enabled[e.id],
-                    is_valid: false
+                    is_valid: false,
+                    live: self.is_cell_treatment_live[e.id+'_']
                 })
             }
         });
         var count = 0;
         _.each(rows, function (e) {
             if (e.is_valid) count++;
+            if(!self.is_cell_treatment_live[e.id])
+            {
+                self.is_cell_treatment_live[e.id] = false;
+            }
         });
         _.each(rows, function (r, index, rows) {
             r.display_text = r.cell_treatment.format_row();
         });
-        
-        rows = _.sortBy(rows, function(obj){ if(obj.kind=='existing')return obj.lane.order_id; else return;});
+
+        _.each(rows, function (r, index, rows) {
+            var identifier = r.cell_treatment.identifier;
+            var facs_kinds = context.template.facs_kinds;
+            var list = { 'Live': [], 'Fixed': []};
+            _.each(facs_kinds, function (obj, key) {
+                if (obj['Live'] && obj['Live'][identifier]) {
+                    r.has_live = true;
+                    list['Live'].push(key);
+                }
+                if (obj['Fixed'] && obj['Fixed'][identifier]) {
+                    r.has_fixed = true;
+                    list['Fixed'].push(key);
+                }
+            });
+            r.lysate_types = list;
+        });
+
+        rows = _.sortBy(rows, function (obj) {
+            if (obj.kind == 'existing')return obj.lane.order_id; else return;
+        });
+
         return {rows: rows, valid: count};
     }
 

@@ -1,0 +1,17 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+    {% if message %}
+        {{ messsage }}
+    {% endif %}
+    <div>
+        <form method="post">{% csrf_token %}
+            {{ formset.management_form }}
+
+            {% for form in formset %}
+                {{ form.as_p }}
+            {% endfor %}
+            <input type="submit" class="scb_s_assignment_setup_save_button scb_s_navigation_button" value="Submit Questions"/>
+        </form>
+    </div>
+{% endblock %}

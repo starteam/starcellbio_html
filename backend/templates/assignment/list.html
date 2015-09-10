@@ -1,0 +1,13 @@
+<h1>Assignments</h1>
+<ul>
+    {% for assignment in object_list %}
+        <li>{{ assignment.assignmentName }} ({{ assignment.assignmentID }}) :
+            <a class="scb_f_dashboard_course_management_button_edit"
+               href="{% url assignment_edit pk=assignment.id %}">edit</a>
+            <a class="scb_f_dashboard_course_management_button_delete"
+               href="{% url assignment_delete pk=assignment.id %}">delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url assignment_new %}">New</a>

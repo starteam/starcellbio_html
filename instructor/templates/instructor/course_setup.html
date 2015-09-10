@@ -1,0 +1,102 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+    <style>
+        .scb_f_use_existing_course {
+            display: none;
+        }
+    </style>
+    <script>
+        $(function () {
+            $(".scb_f_course_setup_save_continue_course_button").click(function () {
+                var course_pk = $("option:selected").val();
+                var data = {course_pk: course_pk};
+                if ($(this).attr('name') === 'save') {
+                    data['save'] = 'save';
+                } else {
+                    data['continue'] = 'continue'
+                }
+                var url = '/ab/assignments/course_setup/';
+                if ("{{new}}" === 'False') {
+                    url = '/ab/assignments/course_modify/'
+                }
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: data
+                });
+            });
+        });
+
+    </script>
+    <div class='scb_s_course_setup_title'>Course Setup</div>
+
+    <div class='scb_s_course_setup_radio_choice scb_f_course_setup_choose_existing_course'>
+        <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"/>
+        <span class='scb_s_course_setup_radio_text'>Add to an existing course OR</span>
+    </div>
+    <div class="scb_s_course_setup_course_list" aria-labelledby="scb_s_experiment_step_progress_label_for_course">
+        <label role="presentation" class="custom-select">
+            <select role="select" aria-label="Experiments" disabled>
+                {% for a in courses %}
+
+                    <option role='option' aria-label="{{ a.name }}" value="{{ a.id }}">
+                        {{ a.name }}
+                    </option>
+
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+    <div class='scb_s_course_setup_radio_choice scb_f_course_setup_create_new_course_option'
+         aria-label='Create New Assignment'>
+        <input class='scb_s_experiment_setup_choose_template_kind' type="radio" checked/>
+        <span class='scb_s_course_setup_radio_text'>
+            {% if new %}Create new course.
+            {% else %}Change name or code of this course.
+            {% endif %}
+        </span>
+    </div>
+
+    <div class="scb_f_create_course_form">
+        <form method="post">{% csrf_token %}
+            <div class='scb_s_course_setup_course_name_heading'>
+                1. What is the name of your course?
+            </div>
+            {{ form.name }}
+            <div class="scb_s_assignment_setup_errors">{{ form.name.errors }}</div>
+
+            <div class='scb_s_course_setup_course_name_heading'>2. What course code would you like to provide to your
+                students?
+            </div>
+            {{ form.code }}
+            <div class="scb_s_assignment_setup_errors">{{ form.code.errors }}</div>
+            <div class="">
+                <input type="submit"
+                       name="continue"
+                       class=" scb_s_navigation_button"
+                       value="SAVE AND CONTINUE &nbsp; &#9654;"/>
+                <input type="submit"
+                       name="save"
+                       class="scb_s_navigation_button "
+                       value="SAVE"/>
+            </div>
+
+        </form>
+    </div>
+    <div>
+        <a href="{% if new %}{% url "common_assignment_setup" %}{% else %}{% url "common_assignment_modify" %}{% endif %}">
+            <button class="scb_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+        </a>
+    </div>
+    <div class="scb_f_use_existing_course" style="">
+        <button class="scb_f_course_setup_save_continue_course_button  scb_s_navigation_button"
+                aria-label='Save and Continue' name="continue" role='button'>SAVE AND CONTINUE &nbsp; &#9654;
+        </button>
+        <button class="scb_f_course_setup_save_continue_course_button  scb_s_navigation_button"
+                aria-label='Save' name ="save" role='button'>SAVE
+        </button>
+
+    </div>
+
+{% endblock %}

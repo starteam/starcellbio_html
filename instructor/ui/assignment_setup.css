@@ -1,0 +1,85 @@
+
+.scb_s_instructor_view{
+    width: 1002px;
+    background-color: #f4f6f8;
+}
+
+.scb_s_navigation_button {
+    border: none;
+    width: 185px;
+    height: 30px;
+    margin: 1px;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
+    padding-top: 2px;
+    margin-right: 19px;
+    margin-top: 100px;
+}
+
+.scb_s_back_btn {
+    float: left;
+    margin-left: 20px;
+}
+
+.scb_s_assignment_setup_errors {
+    color: indianred;
+    padding-left: 5px;
+
+}
+
+select:disabled {
+    opacity: 0.4;
+}
+
+.scb_s_instructor_sidebar_section_heading {
+    font-size: 14pt;
+    font-weight: bold;
+    font-family: 'sourcesanspro-semibold';
+    color: #316f94;
+    text-transform: capitalize;
+    padding-top: 5px;
+}
+
+.scb_s_instructor_sidebar_link_heading {
+    font-size: 10pt;
+    margin-top: 3px;
+    font-family: 'sourcesanspro-semibold';
+    position: relative;
+    width: 221px;
+    padding: 7px 3px 3px 33px;
+    height: 12px;
+    color: #010101;
+}
+
+.scb_s_sidebar_link_sub_heading {
+    font-size: 10pt;
+    margin-top: 3px;
+    font-family: 'sourcesanspro-semibold';
+    position: relative;
+    width: 221px;
+    padding: 7px 3px 3px 50px;
+    height: 12px;
+    color: #010101;
+
+}
+
+/* Strains */
+.scb_s_strains_list{
+    position:relative;
+    list-style-type: none;
+    left:12px;
+
+}
+.scb_s_strains_list>li{
+    display:inline;
+}
+.scb_s_delete_strain {
+    border: 0px;
+    width: 24px;
+    background: transparent;
+    height: 20px;
+    cursor: pointer;
+    top: 0px;
+    position: relative;
+    left: 16px;
+}
