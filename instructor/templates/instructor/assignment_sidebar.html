@@ -5,29 +5,20 @@
 
         <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Assignment Setup</div>
 
-        {% if new %}
-            <div role="link" class='scb_s_instructor_sidebar_link_heading '>
-                <a class='scb_s_assignment_sidebar_link' href="{% url "common_assignment_setup" %}">
-                    Assignment setup
-                </a>
-            </div>
-            <div role="link" class='scb_s_instructor_sidebar_link_heading '>
-                <a class='scb_s_assignment_sidebar_link' href="{% url "common_course_setup" %}">
-                    Course setup
-                </a>
-            </div>
-        {% else %}
-            <div role="link" class='scb_s_instructor_sidebar_link_heading '>
-                <a class='scb_s_assignment_sidebar_link' href="{% url "common_assignment_modify" %}">
-                    Assignment setup
-                </a>
-            </div>
-            <div role="link" class='scb_s_instructor_sidebar_link_heading '>
-                <a class='scb_s_assignment_sidebar_link' href="{% url "common_course_modify" %}">
-                    Course setup
-                </a>
-            </div>
-        {% endif %}
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class='scb_s_assignment_sidebar_link'
+               href="{% if new %}{% url "common_assignment_setup" %}
+               {% else %}{% url "common_assignment_modify" %}{% endif %}">
+                 Assignment setup
+            </a>
+        </div>
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class='scb_s_assignment_sidebar_link'
+               href="{% if new %}{% url "common_course_setup" %}
+               {% else %}{% url "common_course_modify" %}{% endif %}">
+                Course setup
+            </a>
+        </div>
 
         <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Experiment Setup</div>
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
@@ -38,7 +29,7 @@
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
             <a class='scb_s_assignment_sidebar_link'
                href="{% if not new %}{% url "common_assignments_variables" %}{% endif %}">
-                Experimental variables
+                Select variables
             </a>
         </div>
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
