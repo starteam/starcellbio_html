@@ -205,25 +205,20 @@ def course_modify(request):
 
 
 
-def assignments_edit_meta(request):
+def assignments_variables(request):
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
     AssignmentForm = modelform_factory(models.Assignment, fields=['has_concentration', 'has_temperature',
                                                                   'has_start_time', 'has_duration',
                                                                   'has_collection_time'])
-    message = ''
     if request.method == "POST":
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
-            message = "Thank you"
             form.save()
-        else:
-            message = "Something went wrong"
     else:
         form = AssignmentForm(instance=assignment)
-    return render_to_response('instructor/assignment_meta.html',
+    return render_to_response('instructor/assignment_select_variables.html',
                               {'form': form,
-                               'message': message,
                                'assignment': assignment
                               },
                               context_instance=RequestContext(request))
@@ -275,7 +270,7 @@ def assignments_edit_strains(request):
                 form.save()
 
         if 'continue' in request.POST:
-            return redirect('common_assignments_edit_protocols')
+            return redirect('common_assignments_variables')
 
     formset = StrainsFormSet(queryset=models.Strains.objects.filter(assignment=assignment))
     add_btn_num = formset.total_form_count()+1
