@@ -259,7 +259,7 @@ def assignments_edit_strains(request):
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
     extra_fields = 0
-    if 'add' in request.POST:
+    if 'add' in request.POST or not models.Strains.objects.filter(assignment=assignment):
         extra_fields = 1
 
     StrainsFormSet = modelformset_factory(models.Strains, extra=extra_fields, fields=['name'])
@@ -278,12 +278,10 @@ def assignments_edit_strains(request):
             return redirect('common_assignments_edit_protocols')
 
     formset = StrainsFormSet(queryset=models.Strains.objects.filter(assignment=assignment))
-    add_btn_num = formset.total_form_count()+1
 
     return render_to_response('instructor/strains.html',
                               {'formset': formset,
                                'new':  request.session['new'],
-                               'add_btn_num': add_btn_num,
                                'assignment': assignment
                               },
                               context_instance=RequestContext(request))
