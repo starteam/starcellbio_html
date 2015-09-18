@@ -113,19 +113,28 @@ def course_setup(request):
             # Create a new course
             user = User.objects.get(username=request.user)
             form = CourseForm(request.POST)
-            course = form.save(commit=False)
-            course.owner_id = user.id
-            course.save()
+            if form.is_valid():
+                course = form.save(commit=False)
+                course.owner_id = user.id
+                course.save()
+            else:
+                all_courses = models.Course.objects.all()
+                return render_to_response('instructor/course_setup.html',
+                                          {'courses': all_courses,
+                                           'form': form,
+                                           'new': request.session['new']},
+                                          context_instance=RequestContext(request))
 
         # Create a new assignment
         assignment_name = request.session['assignment_name']
         assignment_id = assignment_name + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
 
         if request.session['based_on']:
+            based_on = models.Assignment.objects.get(pk=request.session['based_on'])
             a = models.Assignment(course=course,
                                   name=assignment_name,
                                   assignment_id=assignment_id,
-                                  basedOn=request.session['based_on'])
+                                  basedOn=based_on)
         else:
             a = models.Assignment(course=course,
                                   name=assignment_name,
