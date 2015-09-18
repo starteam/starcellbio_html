@@ -21,11 +21,7 @@
                 <li>{{ forloop.counter }}.</li>
                 <li>{{ form.name }}</li>
                 <li>{{ form.id }}</li>
-                <li>
-                    <button role="button" class="scb_f_delete_strain scb_s_delete_strain">
-                        <img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
-                    </button>
-                </li>
+                <li class="delete_checkbox">{{ form.DELETE }}</li>
             </ul>
         {% endfor %}
         <ul class="scb_s_strains_list">

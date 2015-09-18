@@ -125,12 +125,24 @@ select:disabled {
     left: 28px;
 }
 .scb_s_delete_strain {
-    border: 0px;
+    border: 0;
     width: 24px;
     background: transparent;
     height: 20px;
     cursor: pointer;
-    top: 0px;
+    top: 0;
     position: relative;
     left: 16px;
+}
+
+.checkbox_delete_image{
+    background: url('images/setup/scb_remove.png') no-repeat;
+    display:inline-block;
+    height:20px;
+    width: 20px;
+    margin-left:10px;
+    background-position: center;
+}
+.checkbox_image:hover {
+    cursor: pointer;
 }

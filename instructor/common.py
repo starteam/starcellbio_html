@@ -284,13 +284,16 @@ def assignments_edit_strains(request):
     extra_fields = 0
     if 'add' in request.POST or not models.Strains.objects.filter(assignment=assignment):
         extra_fields = 1
-    StrainsFormSet = modelformset_factory(models.Strains, extra=extra_fields, fields=['name'])
+
+    StrainsFormSet = modelformset_factory(models.Strains, extra=extra_fields, fields=['name'], can_delete=True)
 
     if request.method == "POST":
         formset = StrainsFormSet(request.POST)
 
         if formset.is_valid():
             entries = formset.save(commit=False)
+            for obj in formset.deleted_objects:
+                obj.delete()
             for form in entries:
                 form.assignment = assignment
                 form.save()
@@ -306,14 +309,6 @@ def assignments_edit_strains(request):
                                'assignment': assignment
                               },
                               context_instance=RequestContext(request))
-
-@login_required
-def assignments_delete_strain(request):
-    try:
-        models.Strains.objects.get(id=request.POST['pk']).delete()
-    except models.Strains.DoesNotExist:
-        raise Http404('Strain does not exist')
-    return redirect('common_assignments_edit_strains')
 
 
 def assignments_edit_protocols(request):
