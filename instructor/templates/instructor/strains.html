@@ -11,8 +11,8 @@
 
 <div class='scb_s_assignment_setup_course_name_heading'>1. Name the strains available for experimentation.</div><br/>
 
-<div class='scb_s_experiment_setup_strains_list_container'>
-    a) Name the strains available for experimentation.
+<div class='scb_ab_s_strains_form_container'>
+
     <form method="post">{% csrf_token %}
         {{ formset.management_form }}
 
@@ -35,8 +35,17 @@
             </li>
 
         </ul>
-            <input type="submit" name="continue" class="scb_s_assignment_setup_save_button scb_s_navigation_button" value="SAVE AND CONTINUE &nbsp; &#9654;">
-        </form>
-
-    </div>
+        <input type="submit"
+               name="continue"
+               class="scb_s_navigation_button"
+               value="SAVE AND CONTINUE &nbsp; &#9654;">
+        <input type="submit"
+               name="save"
+               class="scb_s_navigation_button"
+               value="SAVE"/>
+    </form>
+</div>
+<a href="{% url "common_course_modify" %}">
+    <button class="scb_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+</a>
 {% endblock %}

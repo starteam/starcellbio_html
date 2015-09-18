@@ -92,6 +92,10 @@ select:disabled {
 .scb_s_strains_list>li{
     display:inline;
 }
+.scb_ab_s_strains_form_container{
+    top: -1px;
+    left: 28px;
+}
 .scb_s_delete_strain {
     border: 0px;
     width: 24px;
