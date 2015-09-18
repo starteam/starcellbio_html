@@ -1,10 +1,10 @@
 
-.scb_s_instructor_view{
+.scb_ab_s_instructor_view{
     width: 1002px;
     background-color: #f4f6f8;
 }
 
-.scb_s_navigation_button {
+.scb_ab_s_navigation_button {
     border: none;
     width: 185px;
     height: 30px;
@@ -13,15 +13,34 @@
     font-family: 'sourcesanspro-semibold';
     padding-top: 2px;
     margin-right: 19px;
+
+    border-radius: 8px;
+    letter-spacing: 1px;
+    background: #27956c;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 13px;
+    padding-right: 9px;
+}
+.scb_ab_s_nav_continue_btn{
+    float: right;
     margin-top: 100px;
+
 }
 
 .scb_s_back_btn {
     float: left;
     margin-left: 20px;
 }
+.scb_ab_s_input_error{
+    color: indianred;
+    display: inline-block;
+    padding-left: 5px;
 
-.scb_s_assignment_setup_errors {
+}
+
+.scb_s_form_errors {
     color: indianred;
     padding-left: 5px;
 
