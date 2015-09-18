@@ -1,5 +1,15 @@
 
-.scb_ab_s_instructor_view{
+.scb_ab_s_input_text_field{
+    font-size: 10pt;
+    font-family: 'sourcesanspro-regular';
+    color: black;
+    font-style: italic;
+    margin-left: 27px;
+    margin-top: 10px;
+    padding: 5px;
+    display:inline-block;
+}
+.scb_s_instructor_view{
     width: 1002px;
     background-color: #f4f6f8;
 }
@@ -30,6 +40,7 @@
 }
 
 .scb_s_back_btn {
+    margin-top: 100px;
     float: left;
     margin-left: 20px;
 }
@@ -79,6 +90,23 @@ select:disabled {
     padding: 7px 3px 3px 50px;
     height: 12px;
     color: #010101;
+
+}
+/* Course */
+.scb_f_use_existing_course {
+    display: none;
+}
+/* Modify Course */
+.scb_ab_s_course_box{
+    background-color: #808080;
+    width: 100px;
+    margin:10px;
+    padding: 5px;
+
+}
+.scb_ab_s_course_edit_headers{
+    display: inline-block;
+    margin: 10px 100px 0 30px;
 
 }
 

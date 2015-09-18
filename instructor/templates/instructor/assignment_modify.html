@@ -37,19 +37,19 @@
 
     <form method="post">{% csrf_token %}
         {{ form.name }}
-        <div class="scb_s_assignment_setup_errors">
+        <div class="scb_s_form_errors">
             {{ form.name.errors }}
         </div>
 
 
-        <div class="">
+        <div>
             <input type="submit"
                    name="continue"
-                   class=" scb_s_navigation_button"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
                    value="SAVE AND CONTINUE &nbsp; &#9654;"/>
             <input type="submit"
                    name="save"
-                   class="scb_s_navigation_button "
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
                    value="SAVE"/>
         </div>
     </form>

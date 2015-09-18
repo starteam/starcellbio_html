@@ -200,9 +200,7 @@ def assignment_modify(request):
 def course_modify(request):
     assignment_id = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
-    CourseForm = modelform_factory(models.Course, fields=['name', 'code'])
-
-    form = CourseForm(instance=assignment.course)
+    CourseFormSet = modelformset_factory(models.Course, extra=1, fields=['name', 'code'])
     if request.method == 'POST':
         if 'course_pk' in request.POST:
             # change the course for this assignment
@@ -213,19 +211,24 @@ def course_modify(request):
                 return redirect("common_assignments_edit_strains")
         else:
             # change this course's name or code
-            form = CourseForm(request.POST, instance=assignment.course)
-            if form.is_valid():
-                form.save()
+            formset = CourseFormSet(request.POST)
+            if formset.is_valid():
+                instances = formset.save(commit=False)
+                for instance in instances:
+                    # need to set the owner
+                    user = User.objects.get(username=request.user)
+                    instance.owner = user
+                    instance.save()
                 if 'continue' in request.POST:
                     return redirect("common_assignments_edit_strains")
 
-
-
+    formset = CourseFormSet(queryset=models.Course.objects.all())
     all_courses = models.Course.objects.all()
-    return render_to_response('instructor/course_setup.html',
-                              {'courses': all_courses,
-                               'form': form,
-                               'new':  request.session['new']},
+    return render_to_response('instructor/course_modify.html',
+                              {
+                                  'courses': all_courses,
+                                  'formset': formset,
+                              },
                               context_instance=RequestContext(request))
 
 
@@ -281,12 +284,10 @@ def assignments_edit_strains(request):
     extra_fields = 0
     if 'add' in request.POST or not models.Strains.objects.filter(assignment=assignment):
         extra_fields = 1
-
     StrainsFormSet = modelformset_factory(models.Strains, extra=extra_fields, fields=['name'])
 
     if request.method == "POST":
         formset = StrainsFormSet(request.POST)
-        formset.clean()
 
         if formset.is_valid():
             entries = formset.save(commit=False)

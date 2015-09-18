@@ -8,16 +8,31 @@ $(function(){
      * Course setup
      */
     $('.scb_f_course_setup_create_new_course_option input').click(function(){
-        $(".scb_f_create_course_form").show();
+        $(".scb_ab_f_course_formset_list").show();
         $('.scb_f_course_setup_choose_existing_course input').prop('checked', false);
         $(".scb_f_use_existing_course").hide();
         $(".scb_s_course_setup_course_list label select").prop('disabled', true);
+
+
     });
     $(".scb_f_course_setup_choose_existing_course input").click(function(){
-        $(".scb_f_create_course_form").hide();
+        $(".scb_ab_f_course_formset_list").hide();
         $('.scb_f_course_setup_create_new_course_option input').prop('checked', false);
         $(".scb_f_use_existing_course").css('display','inline-block');
         $(".scb_s_course_setup_course_list label select").prop('disabled', false);
+    });
+    /* If the user is choosing an existing course want
+    * to pass course pk */
+    $("#course_formset").submit(function(){
+        if($(".scb_ab_f_course_setup_option_choose").attr('checked') === 'checked'){
+            var course_pk = $("option:selected").val();
+            $(this).append($("<input>",{
+                    type: 'hidden',
+                    name: 'course_pk',
+                    value: course_pk
+                }
+            ));
+        }
     });
     /**
      * Assignment setup
@@ -43,9 +58,9 @@ $(function(){
     });
 
     /**
-     * For all text input boxes
+     * For all text input boxes inside a form
      */
-    $("form input[type = 'text']").addClass("scb_s_assignment_setup_text_field");
+    $("form input[type = 'text']").addClass("scb_ab_s_input_text_field");
 
     /**
      * Edit Strains
