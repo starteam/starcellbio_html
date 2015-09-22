@@ -114,7 +114,6 @@ select:disabled {
 .scb_s_strains_list{
     position:relative;
     list-style-type: none;
-    left:12px;
 
 }
 .scb_s_strains_list>li{
@@ -134,7 +133,45 @@ select:disabled {
     position: relative;
     left: 16px;
 }
+.scb_ab_s_experiment_setup_add_button{
+	width: 104px;
+    margin:20px 0 0 58px;
+}
 
+/* Input headers */
+.scb_ab_s_input_headers{
+    position: relative;
+    left: 58px;
+    margin-top:20px;
+}
+.scb_ab_s_input_headers>div{
+    width: 155px;
+    display: inline-block;
+}
+.scb_ab_s_input_headers>div.scb_ab_s_small_header{
+    width: 90px;
+}
+.scb_ab_s_input_headers>div.scb_ab_s_med_header{
+    width: 129px;
+}
+/* Form inputs */
+.scb_ab_s_form_input_list{
+    position: relative;
+    left: 30px;
+}
+.scb_ab_s_form_input_list>div{
+    display: inline-block;
+}
+.scb_ab_s_form_input_list>div>input{
+    margin: 5px 0 0 15px;
+}
+.scb_ab_s_small_input_box>input{
+    width: 60px;
+}
+.scb_ab_s_med_input_box>input{
+    width: 100px;
+}
+/* Delete trash icon*/
 .checkbox_delete_image{
     background: url('images/setup/scb_remove.png') no-repeat;
     display:inline-block;
@@ -146,3 +183,5 @@ select:disabled {
 .checkbox_image:hover {
     cursor: pointer;
 }
+
+

@@ -311,30 +311,60 @@ def assignments_edit_strains(request):
                               context_instance=RequestContext(request))
 
 
-def assignments_edit_protocols(request):
+def assignments_edit_treatments(request):
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
-    message = ''
-    ProtocolsFormSet = modelformset_factory(models.Protocol, extra=1, can_delete=True, exclude=['assignment'])
+    DrugFormSet = modelformset_factory(models.Drug, extra=1, can_delete=True, exclude=['assignment'])
+
+    TemperatureFormSet = modelformset_factory(models.Temperature, extra=1, can_delete=True, exclude=['assignment'])
+    CollectionTimeFormSet = modelformset_factory(models.CollectionTime, extra=1, can_delete=True, exclude=['assignment'])
+
     if request.method == "POST":
-        formset = ProtocolsFormSet(request.POST)
-        formset.clean()
-        if formset.is_valid():
-            message = "Thank you"
-            entries = formset.save(commit=False)
+        drug_formset = DrugFormSet(request.POST, prefix='drug')
+        temperature_formset = TemperatureFormSet(request.POST, prefix='temperature')
+        collection_time_formset = CollectionTimeFormSet(request.POST, prefix='collection_time')
+
+        if drug_formset.is_valid():
+            entries = drug_formset.save(commit=False)
+            for obj in drug_formset.deleted_objects:
+                obj.delete()
             for form in entries:
                 form.assignment = assignment
                 form.save()
-        else:
-            message = "Something went wrong"
+        if temperature_formset.is_valid():
+            entries = temperature_formset.save(commit=False)
+            for obj in temperature_formset.deleted_objects:
+                obj.delete()
+            for form in entries:
+                form.assignment = assignment
+                form.save()
+        if collection_time_formset.is_valid():
+            entries = collection_time_formset.save(commit=False)
+            for obj in collection_time_formset.deleted_objects:
+                obj.delete()
+            for form in entries:
+                form.assignment = assignment
+                form.save()
+    drug_formset = DrugFormSet(
+        queryset=models.Drug.objects.filter(assignment=assignment),
+        prefix='drug')
+    temperature_formset = TemperatureFormSet(
+        queryset=models.Temperature.objects.filter(assignment=assignment),
+        prefix='temperature')
+    collection_time_formset = CollectionTimeFormSet(
+        queryset=models.CollectionTime.objects.filter(assignment=assignment),
+        prefix='collection_time')
 
-    return render_to_response('instructor/protocols.html',
-                              {'formset': ProtocolsFormSet(
-                                  queryset=models.Protocol.objects.filter(assignment=assignment)),
-                               'message': message,
-                               'assignment': assignment
-                              },
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'instructor/protocols.html',
+        {
+            'drug_formset': drug_formset,
+            'temperature_formset': temperature_formset,
+            'collection_time_formset': collection_time_formset,
+            'assignment': assignment
+        },
+        context_instance=RequestContext(request)
+    )
 
 
 def treatments_edit(request, assignment, protocol):
