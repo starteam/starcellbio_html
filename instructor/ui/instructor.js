@@ -65,16 +65,23 @@ $(function(){
     /**
      * Edit Strains
      */
-    $(".scb_f_delete_strain").click(function(){
-        var row = $(this).parent().parent();
-        var input= $(row).find('li input')[0];
-        var id= $(input).attr('id');
-        var pk=id.match(/\d+/)[0];
-        $.ajax({
-            url:'/ab/assignments/delete_strain/',
-            type:'POST',
-            data: { pk: pk }
-        });
-        return false;
+
+    $('.delete_checkbox input').each(function(){
+        $(this).hide().after('<div class="checkbox_delete_image"/>');
+
     });
+    $('.checkbox_delete_image').on('click', function(){
+        /* Check the hidden checkbox */
+        $(this).prev().prop('checked', true);
+        /* Want to disable the input box for the strain */
+        var input_element=$(this).parent().parent().find("input[id$='name']")[0];
+        $(input_element).attr('disabled', true);
+        /* Set opacity for the entire line, ul element */
+        $(this).parent().parent().css('opacity', 0.5);
+        /* Set cursor on the trash image */
+        $(this).css('cursor', 'default');
+    });
+
 });
+
+
