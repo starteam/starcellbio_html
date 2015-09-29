@@ -4,50 +4,44 @@
 {% block right_side %}
 
     <div class='scb_s_course_setup_title'>Course Setup</div>
+    <div class='scb_s_assignment_setup_course_name_heading'>Select course for this assignment, modify an existing course
+        or create a new course (course code has to be unique)</div>
 
-    <div class='scb_s_course_setup_radio_choice scb_f_course_setup_choose_existing_course'>
-        <input class='scb_ab_f_course_setup_option_choose' type="radio" name="setup_kind" checked/>
-        <span class='scb_s_course_setup_radio_text'>Choose a course for this assignment</span>
-    </div>
-    <div class="scb_s_course_setup_course_list" aria-labelledby="scb_s_experiment_step_progress_label_for_course">
-        <label role="presentation" class="custom-select">
-            <select role="select" aria-label="Experiments">
-                {% for a in courses %}
-
-                    <option role='option' aria-label="{{ a.name }}" value="{{ a.id }}">
-                        {{ a.name }}
-                    </option>
-
-                {% endfor %}
-            </select>
-        </label>
-    </div>
-
-    <!-- Rename or create a new course -->
-    <div class='scb_s_course_setup_radio_choice scb_f_course_setup_create_new_course_option'
-         aria-label='Create New Assignment'>
-        <input class='scb_s_experiment_setup_choose_template_kind' type="radio"/>
-        <span class='scb_s_course_setup_radio_text'>
-            Rename or create a new course.
-        </span>
-    </div>
 
     <form id="course_formset" method="post">{% csrf_token %}
         {{ formset.management_form }}
         <!--This div disappears when option is not selected -->
-        <div class="scb_ab_f_course_formset_list" style="display:none">
+        <div class="scb_ab_s_course_list_wrapper">
+            <div class="scb_ab_s_course_edit_headers scb_ab_s_select_course_headers">Select</div>
             <div class="scb_ab_s_course_edit_headers">Name</div>
-            <div class="scb_ab_s_course_edit_headers">Code</div>
-
+            <div class="scb_ab_s_course_edit_headers">Course Code</div>
             {% for form in formset %}
-                <div>
-                    {{ form.name }}
-                    {{ form.code }}
-                    {{ form.id }}
-                    <div class="scb_ab_s_assignment_setup_errors">{{ form.name.errors }}</div>
-                    <div class="scb_ab_s_assignment_setup_errors">{{ form.code.errors }}</div>
+                <div class="scb_ab_s_course_form_list">
+                    <div>
+                        <input  type="radio" class="scb_ab_f_select_course" id="{{ form.id.value}}"
+                                {% if course_selected == form.code.value %}checked{% endif %}
+                                {% if not form.id.value  %}disabled{% endif %}/>
+                    </div>
+                    <div>{{ form.name }}</div>
+                    <div>{{ form.code }}</div>
+                    <div>{{ form.id }}</div>
+                    <div class="delete_checkbox">{{ form.DELETE }}</div>
+                </div>
+
+                <div class="scb_ab_s_course_fields_error_list">
+                    {% for error in form.name.errors %}
+                        <div>* {{ error }} </div>
+                    {% endfor %}
+                </div>
+                <div class="scb_ab_s_course_fields_error_list">
+                    {% for error in form.code.errors %}
+                        <div>* {{ error }} </div>
+                    {% endfor %}
                 </div>
             {% endfor %}
+            <div class="scb_ab_s_add_course_button_position">
+                <input type="submit" name="add" class='scb_s_gray_button scb_s_experiment_setup_add_button' value="ADD">
+            </div>
         </div>
         <div>
             <input type="submit"

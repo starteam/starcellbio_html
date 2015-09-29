@@ -200,34 +200,38 @@ def assignment_modify(request):
 def course_modify(request):
     assignment_id = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
-    CourseFormSet = modelformset_factory(models.Course, extra=1, fields=['name', 'code'])
+    CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
     if request.method == 'POST':
-        if 'course_pk' in request.POST:
+        pk = request.POST['course_pk']
+        if not long(pk) == assignment.course.id:
             # change the course for this assignment
-            new_course = models.Course.objects.get(pk=request.POST['course_pk'])
+            new_course = get_object_or_404(models.Course, pk=int(pk))
             assignment.course = new_course
             assignment.save()
+
+        # change this course's name or code
+        formset = CourseFormSet(request.POST)
+        if formset.is_valid():
+
+            instances = formset.save(commit=False)
+            for obj in formset.deleted_objects:
+                obj.delete()
+            user = User.objects.get(username=request.user)
+            for instance in instances:
+                # need to set the owner
+                instance.owner = user
+                instance.save()
             if 'continue' in request.POST:
                 return redirect("common_assignments_edit_strains")
-        else:
-            # change this course's name or code
-            formset = CourseFormSet(request.POST)
-            if formset.is_valid():
-                instances = formset.save(commit=False)
-                for instance in instances:
-                    # need to set the owner
-                    user = User.objects.get(username=request.user)
-                    instance.owner = user
-                    instance.save()
-                if 'continue' in request.POST:
-                    return redirect("common_assignments_edit_strains")
 
     formset = CourseFormSet(queryset=models.Course.objects.all())
     all_courses = models.Course.objects.all()
+    course_selected = assignment.course.code
     return render_to_response('instructor/course_modify.html',
                               {
                                   'courses': all_courses,
                                   'formset': formset,
+                                  'course_selected': course_selected
                               },
                               context_instance=RequestContext(request))
 
