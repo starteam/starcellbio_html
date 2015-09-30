@@ -25,11 +25,11 @@ $(function(){
     /* If the user is choosing an existing course want
     * to pass course pk */
     $("#course_formset").submit(function(){
-            var course_pk = $("input:checked").attr('id');
-            $(this).append($("<input>",{
-                    type: 'hidden',
-                    name: 'course_pk',
-                    value: course_pk
+        var course_pk = $("input:checked").attr('id');
+        $(this).append($("<input>",{
+                type: 'hidden',
+                name: 'course_pk',
+                value: course_pk
                 }
             ));
     });

@@ -22,7 +22,8 @@
 
         <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Experiment Setup</div>
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
-            <a class="scb_s_assignment_sidebar_link" href="{% url "common_assignments_edit_strains" %}">
+            <a class="scb_s_assignment_sidebar_link"
+               href="{% if not new %}{% url "common_assignments_edit_strains" %}{% endif %}">
                 Strains
             </a>
         </div>

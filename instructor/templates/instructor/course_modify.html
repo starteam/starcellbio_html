@@ -56,9 +56,12 @@
     </form>
 
     <div>
-        <a href="{% url "common_assignment_modify" %}">
+
+        <a href="{% if new %}{% url "common_assignment_setup" %}
+            {% else %}{% url "common_assignment_modify" %}{% endif %}">
             <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
         </a>
+
     </div>
 
 {% endblock %}
