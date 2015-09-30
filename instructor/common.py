@@ -10,6 +10,7 @@ import datetime
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
 from StarCellBio.views import get_account_type
 
 from backend.models import Assignment, StudentAssignment
@@ -97,7 +98,7 @@ def assignment_setup(request):
                                   'error': error,
                                   'assignment_name': assignment_name,
                                   'based_on': request.session['based_on'],
-                                  'new': request.session['new']
+                                  'new': request.session['new'],
                               },
                               context_instance=RequestContext(request))
 
@@ -105,7 +106,7 @@ def assignment_setup(request):
 def course_setup(request):
 
     CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
-    course_selected = 0
+    course_selected = None
     if request.method == 'POST':
 
         # change this course's name or code
@@ -122,7 +123,7 @@ def course_setup(request):
 
     # if there is at least one course
     all_courses = models.Course.objects.all()
-    if not course_selected and len(all_courses) > 0:
+    if len(all_courses) > 0:
         course_selected = all_courses[0]
         create_assignment(request, course_selected)
         if 'continue' in request.POST:
@@ -136,8 +137,9 @@ def course_setup(request):
                               {
                                   'courses': all_courses,
                                   'formset': formset,
-                                  'course_selected': 0,
-                                  'new': request.session['new']
+                                  'course_selected': course_selected,
+                                  'new': request.session['new'],
+                                  'assignment_name': request.session['assignment_name'],
                               },
                               context_instance=RequestContext(request))
 
@@ -196,7 +198,9 @@ def assignment_modify(request):
                               {'assignments': all_assignments,
                                'form': form,
                                'based_on': request.session['based_on'],
-                               'new': request.session['new']},
+                               'new': request.session['new'],
+                               'assignment_name': request.session['assignment_name']
+                              },
                               context_instance=RequestContext(request))
 
 
@@ -209,7 +213,7 @@ def course_modify(request):
         pk = request.POST['course_pk']
         if not long(pk) == assignment.course.id:
             # change the course for this assignment
-            new_course = get_object_or_404(models.Course, pk=int(pk))
+            new_course = get_object_or_404(models.Course, pk=long(pk))
             assignment.course = new_course
             assignment.save()
 
@@ -218,10 +222,13 @@ def course_modify(request):
         if formset.is_valid():
 
             instances = formset.save(commit=False)
-            for obj in formset.deleted_objects:
-                obj.delete()
             user = User.objects.get(username=request.user)
+            for obj in formset.deleted_objects:
+                if obj.owner == user and obj != assignment.course:
+                    obj.delete()
             for instance in instances:
+                if hasattr(instance, 'owner') and instance.owner != user:
+                    raise PermissionDenied
                 # need to set the owner
                 instance.owner = user
                 instance.save()
@@ -235,7 +242,8 @@ def course_modify(request):
                                   'courses': all_courses,
                                   'formset': formset,
                                   'course_selected': course_selected,
-                                  'new': request.session['new']
+                                  'new': request.session['new'],
+                                  'assignment_name': request.session['assignment_name']
                               },
                               context_instance=RequestContext(request))
 
@@ -314,7 +322,7 @@ def assignments_edit_strains(request):
     return render_to_response('instructor/strains.html',
                               {'formset': formset,
                                'new':  request.session['new'],
-                               'assignment': assignment
+                               'assignment_name': request.session['assignment_name']
                               },
                               context_instance=RequestContext(request))
 
