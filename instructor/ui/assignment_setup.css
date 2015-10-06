@@ -51,9 +51,10 @@
 
 }
 
-.scb_s_form_errors {
+.scb_s_form_errors{
     color: indianred;
     padding-left: 5px;
+    width: 100px;
 
 }
 
@@ -97,18 +98,47 @@ select:disabled {
     display: none;
 }
 /* Modify Course */
-.scb_ab_s_course_box{
-    background-color: #808080;
-    width: 100px;
-    margin:10px;
-    padding: 5px;
 
+.scb_ab_s_course_list_wrapper{
+    position: relative;
+    left: 30px;
+    top: 30px;
 }
+
 .scb_ab_s_course_edit_headers{
     display: inline-block;
-    margin: 10px 100px 0 30px;
+    position:relative;
+    width: 171px;
+}
+.scb_ab_s_select_course_headers{
+    width: 58px;
 
 }
+
+.scb_ab_s_course_fields_error_list{
+    position:relative;
+    color: indianred;
+    left:67px;
+    width:165px;
+    display:inline-block;
+    padding:0;
+    margin:0;
+
+}
+.scb_ab_s_course_form_list{
+    position: relative;
+    list-style-type: none;
+    left: 12px;
+}
+.scb_ab_s_course_form_list>div{
+    display: inline;
+}
+.scb_ab_s_add_course_button_position{
+    position: relative;
+    left: 67px;
+    top: 15px;
+}
+
 
 /* Strains */
 .scb_s_strains_list{
@@ -118,7 +148,7 @@ select:disabled {
 
 }
 .scb_s_strains_list>li{
-    display:inline;
+    display: inline;
 }
 .scb_ab_s_strains_form_container{
     top: -1px;

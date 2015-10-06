@@ -21,18 +21,22 @@ $(function(){
         $(".scb_f_use_existing_course").css('display','inline-block');
         $(".scb_s_course_setup_course_list label select").prop('disabled', false);
     });
+    /* Course Modify */
     /* If the user is choosing an existing course want
     * to pass course pk */
     $("#course_formset").submit(function(){
-        if($(".scb_ab_f_course_setup_option_choose").attr('checked') === 'checked'){
-            var course_pk = $("option:selected").val();
-            $(this).append($("<input>",{
-                    type: 'hidden',
-                    name: 'course_pk',
-                    value: course_pk
+        var course_pk = $("input:checked[type='radio']").data('id');
+        $(this).append($("<input>",{
+                type: 'hidden',
+                name: 'course_pk',
+                value: course_pk
                 }
             ));
-        }
+    });
+
+    $(".scb_ab_f_select_course").click(function(){
+        $('input.scb_ab_f_select_course').prop('checked', false);
+        $(this).prop('checked', true);
     });
     /**
      * Assignment setup

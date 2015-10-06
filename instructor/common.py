@@ -10,6 +10,7 @@ import datetime
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
 from StarCellBio.views import get_account_type
 
 from backend.models import Assignment, StudentAssignment
@@ -97,66 +98,71 @@ def assignment_setup(request):
                                   'error': error,
                                   'assignment_name': assignment_name,
                                   'based_on': request.session['based_on'],
-                                  'new': request.session['new']
+                                  'new': request.session['new'],
                               },
                               context_instance=RequestContext(request))
 
 @login_required
 def course_setup(request):
-    CourseForm = modelform_factory(models.Course, fields=['code', 'name'])
 
-    if request.method == "POST":
-        if 'course_pk' in request.POST:
-            # Adding to an existing course
-            course = models.Course.objects.get(pk=request.POST['course_pk'])
-        else:
-            # Create a new course
+    CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
+    course_selected = None
+    if request.method == 'POST':
+
+        # change this course's name or code
+        formset = CourseFormSet(request.POST)
+        if formset.is_valid():
+            courses = formset.save(commit=False)
+            for obj in formset.deleted_objects:
+                obj.delete()
             user = User.objects.get(username=request.user)
-            form = CourseForm(request.POST)
-            if form.is_valid():
-                course = form.save(commit=False)
-                course.owner_id = user.id
+            for course in courses:
+                # need to set the owner
+                course.owner = user
                 course.save()
-            else:
-                all_courses = models.Course.objects.all()
-                return render_to_response('instructor/course_setup.html',
-                                          {'courses': all_courses,
-                                           'form': form,
-                                           'new': request.session['new']},
-                                          context_instance=RequestContext(request))
 
-        # Create a new assignment
-        assignment_name = request.session['assignment_name']
-        assignment_id = assignment_name + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+    # if there is at least one course
+    all_courses = models.Course.objects.all()
+    if len(all_courses) > 0:
+        course_selected = all_courses[0]
+        create_assignment(request, course_selected)
+        if 'continue' in request.POST:
+            return redirect("common_assignments_edit_strains")
 
-        if request.session['based_on']:
-            based_on = models.Assignment.objects.get(pk=request.session['based_on'])
-            a = models.Assignment(course=course,
-                                  name=assignment_name,
-                                  assignment_id=assignment_id,
-                                  basedOn=based_on)
-        else:
-            a = models.Assignment(course=course,
-                                  name=assignment_name,
-                                  assignment_id=assignment_id)
-        a.save()
-        request.session['assignment_id'] = a.id
-        request.session['new'] = False
+    if course_selected:
+        return redirect("common_course_modify")
 
-        if 'save' in request.POST:
-            return redirect("common_course_modify")
-        else:
-            # Continue
-            return redirect('common_assignments_edit_strains')
+    formset = CourseFormSet(queryset=models.Course.objects.all())
+    return render_to_response('instructor/course_modify.html',
+                              {
+                                  'courses': all_courses,
+                                  'formset': formset,
+                                  'course_selected': course_selected,
+                                  'new': request.session['new'],
+                                  'assignment_name': request.session['assignment_name'],
+                              },
+                              context_instance=RequestContext(request))
 
+
+def create_assignment(request, course_selected):
+    # Create a new assignment
+    assignment_name = request.session['assignment_name']
+    assignment_id = assignment_name + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+
+    if request.session['based_on']:
+        based_on = models.Assignment.objects.get(pk=request.session['based_on'])
+        a = models.Assignment(course=course_selected,
+                              name=assignment_name,
+                              assignment_id=assignment_id,
+                              basedOn=based_on)
     else:
-        all_courses = models.Course.objects.all()
-        form = CourseForm()
-        return render_to_response('instructor/course_setup.html',
-                                  {'courses': all_courses,
-                                   'form': form,
-                                   'new': request.session['new']},
-                                  context_instance=RequestContext(request))
+        a = models.Assignment(course=course_selected,
+                              name=assignment_name,
+                              assignment_id=assignment_id)
+    a.save()
+    request.session['assignment_id'] = a.id
+    request.session['new'] = False
+
 
 @login_required
 def assignments_edit(request, assignment_pk):
@@ -192,7 +198,9 @@ def assignment_modify(request):
                               {'assignments': all_assignments,
                                'form': form,
                                'based_on': request.session['based_on'],
-                               'new': request.session['new']},
+                               'new': request.session['new'],
+                               'assignment_name': request.session['assignment_name']
+                              },
                               context_instance=RequestContext(request))
 
 
@@ -200,34 +208,42 @@ def assignment_modify(request):
 def course_modify(request):
     assignment_id = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
-    CourseFormSet = modelformset_factory(models.Course, extra=1, fields=['name', 'code'])
+    CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
     if request.method == 'POST':
-        if 'course_pk' in request.POST:
+        pk = request.POST['course_pk']
+        if not long(pk) == assignment.course.id:
             # change the course for this assignment
-            new_course = models.Course.objects.get(pk=request.POST['course_pk'])
+            new_course = get_object_or_404(models.Course, pk=long(pk))
             assignment.course = new_course
             assignment.save()
+
+        # change this course's name or code
+        formset = CourseFormSet(request.POST)
+        if formset.is_valid():
+
+            instances = formset.save(commit=False)
+            user = User.objects.get(username=request.user)
+            for obj in formset.deleted_objects:
+                if obj.owner == user and obj != assignment.course:
+                    obj.delete()
+            for instance in instances:
+                if hasattr(instance, 'owner') and instance.owner != user:
+                    raise PermissionDenied
+                # need to set the owner
+                instance.owner = user
+                instance.save()
             if 'continue' in request.POST:
                 return redirect("common_assignments_edit_strains")
-        else:
-            # change this course's name or code
-            formset = CourseFormSet(request.POST)
-            if formset.is_valid():
-                instances = formset.save(commit=False)
-                for instance in instances:
-                    # need to set the owner
-                    user = User.objects.get(username=request.user)
-                    instance.owner = user
-                    instance.save()
-                if 'continue' in request.POST:
-                    return redirect("common_assignments_edit_strains")
-
     formset = CourseFormSet(queryset=models.Course.objects.all())
     all_courses = models.Course.objects.all()
+    course_selected = assignment.course.code
     return render_to_response('instructor/course_modify.html',
                               {
                                   'courses': all_courses,
                                   'formset': formset,
+                                  'course_selected': course_selected,
+                                  'new': request.session['new'],
+                                  'assignment_name': request.session['assignment_name']
                               },
                               context_instance=RequestContext(request))
 
@@ -306,7 +322,7 @@ def assignments_edit_strains(request):
     return render_to_response('instructor/strains.html',
                               {'formset': formset,
                                'new':  request.session['new'],
-                               'assignment': assignment
+                               'assignment_name': request.session['assignment_name']
                               },
                               context_instance=RequestContext(request))
 
