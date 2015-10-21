@@ -74,34 +74,45 @@ class Strains(models.Model):
         return self.name
 
 
-class Protocol(models.Model):
-    assignment = models.ForeignKey(Assignment, related_name='protocols')
+class Drug(models.Model):
+    assignment = models.ForeignKey(Assignment, related_name='drug')
     name = models.CharField(max_length=50)
+    concentration = models.CharField(max_length=50, blank=True, null=True)
+    concentration_unit = models.CharField(max_length=50, blank=True, null=True)
+    start_time = models.CharField(max_length=50, blank=True, null=True)
+    duration = models.CharField(max_length=50, blank=True, null=True)
 
     def __unicode__(self):
         return self.name
 
 
-class StrainProtocol(models.Model):
-    assignment = models.ForeignKey(Assignment, related_name='strain_protocol')
-    strain = models.ForeignKey(Strains)
-    protocol = models.ForeignKey(Protocol)
-    enabled = models.BooleanField(default=True)
+class Temperature(models.Model):
+    degrees = models.CharField(max_length=10, blank=True, null=True)
+    assignment = models.ForeignKey(Assignment, related_name='temperature')
 
 
-class Treatments(models.Model):
-    protocol = models.ForeignKey(Protocol, related_name='treatments')
+class CollectionTime(models.Model):
+    time = models.CharField(max_length=20, blank=True, null=True)
+    units = models.CharField(max_length=10, blank=True, null=True)
+    assignment = models.ForeignKey(Assignment, related_name='collection_time')
+
+
+class Treatment(models.Model):
+    assignment = models.ForeignKey(Assignment, related_name='treatment')
     order = models.IntegerField(default=0)
-    treatment = models.CharField(max_length=50)
-    concentration = models.CharField(max_length=50)
-    concentration_unit = models.CharField(max_length=50)
-    start_time = models.CharField(max_length=50)
-    end_time = models.CharField(max_length=50)
-    temperature = models.CharField(max_length=50)
-    collection_time = models.CharField(max_length=50)
+    drug = models.ForeignKey(Drug)
+    temperature = models.ForeignKey(Temperature, blank=True, null=True)
+    collection_time = models.ForeignKey(CollectionTime, blank=True, null=True)
 
     class Meta:
         ordering = ['order', ]
+
+
+class StrainTreatment(models.Model):
+    assignment = models.ForeignKey(Assignment, related_name='strain_treatment')
+    strain = models.ForeignKey(Strains)
+    treatment = models.ForeignKey(Treatment)
+    enabled = models.BooleanField(default=True)
 
 
 class WesternBlot(models.Model):
@@ -124,7 +135,7 @@ class WesternBlotAntibody(models.Model):
 
 class WesternBlotAntibodyBands(models.Model):
     antibody = models.ForeignKey(WesternBlotAntibody, related_name='bands')
-    strain_protocol = models.ForeignKey(StrainProtocol, related_name='bands')
+    strain_protocol = models.ForeignKey(StrainTreatment, related_name='bands')
     wcl_weight = models.FloatField(default=0.00)
     wcl_intensity = models.FloatField(default=0.00)
     nuc_weight = models.FloatField(default=0.00)
@@ -144,7 +155,7 @@ class MicroscopySamplePrep(models.Model):
 
 class MicroscopyImages(models.Model):
     sample_prep = models.ForeignKey(MicroscopySamplePrep, related_name='microscopy_images')
-    strain_protocol = models.ForeignKey(StrainProtocol, related_name='microscopy_images')
+    strain_protocol = models.ForeignKey(StrainTreatment, related_name='microscopy_images')
     order = models.IntegerField(default=0)
     objective = models.CharField(max_length=50, default='N/A')
     url = models.URLField(max_length=300)
@@ -187,17 +198,17 @@ GAUSS = 'normal'
 
 class FlowCytometryHistogram(models.Model):
     sample_prep = models.ForeignKey(FlowCytometrySamplePrep, related_name='histograms')
-    strain_protocol = models.ForeignKey(StrainProtocol, related_name='histograms')
+    strain_protocol = models.ForeignKey(StrainTreatment, related_name='histograms')
     kind = models.CharField(max_length=50, choices=HISTOGRAMS, default=GAUSS)
     data = models.TextField(null=True,blank=True)
     enabled = models.BooleanField(default=False)
 
 admin.site.register(Course)
 admin.site.register(Assignment)
-admin.site.register(Protocol)
+admin.site.register(Drug)
 admin.site.register(Strains)
-admin.site.register(StrainProtocol)
-admin.site.register(Treatments)
+admin.site.register(StrainTreatment)
+admin.site.register(Treatment)
 admin.site.register(WesternBlot)
 admin.site.register(WesternBlotAntibody)
 admin.site.register(WesternBlotAntibodyBands)

@@ -92,8 +92,8 @@ urlpatterns += patterns(
     # Experimental setup
     url(r'^ab/assignments/edit_strains/$', instructor_common.assignments_edit_strains,
         name="common_assignments_edit_strains"),
-    url(r'^ab/assignments/edit_protocols/$', instructor_common.assignments_edit_protocols,
-        name="common_assignments_edit_protocols"),
+    url(r'^ab/assignments/edit_treatments/$', instructor_common.assignments_edit_treatments,
+        name="common_assignments_edit_treatments"),
     url(r'^ab/assignments/edit_treatments/(?P<assignment>[^/]+)/(?P<protocol>.+)$',
         instructor_common.treatments_edit, name="common_treatments"),
     url(r'^ab/assignments/edit_strain_treatments/(?P<assignment>[^/]+)$',
