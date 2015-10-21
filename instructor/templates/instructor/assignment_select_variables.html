@@ -1,9 +1,7 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
-    {% if message %}
-        {{ messsage }}
-    {% endif %}
+
     <div class='scb_s_experiment_setup_title'>Experiment Setup</div>
     <div class='scb_s_experiment_setup_subtitle'>In this section, you will specify the strains and treatments available
         for experimentation.
@@ -12,33 +10,39 @@
 
 
     <div class='scb_s_assignment_setup_course_name_heading'>2. Select the experimental variables you wish to define for
-        your treatment protocols. Select all that apply.
+        your treatment protocols. Select up to 3 variables that apply.
     </div>
     <br/>
-    <div class='scb_s_experiment_setup_checkbox_container'>
+    <div class='scb_ab_s_form_container'>
         <form method="post">{% csrf_token %}
-            <div class='scb_s_experiment_setup_wrapper'>
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
                 {{ form.has_concentration }}Treatment Concentration
             </div>
-            <div class='scb_s_experiment_setup_wrapper'>
-                {{ form.has_temperature }}Temperature
-
-            </div>
-            <div class='scb_s_experiment_setup_wrapper'>
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
                 {{ form.has_start_time }}Start Time
-
             </div>
-            <div class='scb_s_experiment_setup_wrapper'>
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
                 {{ form.has_duration }} Treatment Duration
-
             </div>
-            <div class='scb_s_experiment_setup_wrapper'>
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
+                {{ form.has_temperature }}Temperature
+            </div>
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
                 {{ form.has_collection_time }} Collection Time
             </div>
+            <input type="submit"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE AND CONTINUE &nbsp; &#9654;">
+            <input type="submit"
+               name="save"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE"/>
 
-            <input type="submit" class="scb_s_assignment_setup_save_button scb_s_navigation_button"
-                   value="SAVE AND CONTINUE &nbsp; &#9654;">
 
         </form>
     </div>
+    <a href="{% url "common_assignments_edit_strains" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+</a>
 {% endblock %}

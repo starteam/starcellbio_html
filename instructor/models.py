@@ -51,11 +51,11 @@ class Assignment(models.Model):
     has_fc = models.BooleanField(default=False)
     has_micro = models.BooleanField(default=False)
     # protocol parts
-    has_concentration = models.BooleanField(default=True)
-    has_temperature = models.BooleanField(default=True)
-    has_start_time = models.BooleanField(default=True)
-    has_duration = models.BooleanField(default=True)
-    has_collection_time = models.BooleanField(default=True)
+    has_concentration = models.BooleanField(default=False)
+    has_temperature = models.BooleanField(default=False)
+    has_start_time = models.BooleanField(default=False)
+    has_duration = models.BooleanField(default=False)
+    has_collection_time = models.BooleanField(default=False)
 
 
 # Experiment setup

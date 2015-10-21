@@ -250,17 +250,28 @@ def course_modify(request):
 
 
 def assignments_variables(request):
+    max_num_of_vars = 3
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
-    AssignmentForm = modelform_factory(models.Assignment, fields=['has_concentration', 'has_temperature',
-                                                                  'has_start_time', 'has_duration',
-                                                                  'has_collection_time'])
+    var_fields = ['has_concentration', 'has_temperature', 'has_start_time',
+                  'has_duration', 'has_collection_time']
+    AssignmentForm = modelform_factory(models.Assignment, fields=var_fields)
     if request.method == "POST":
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
-            form.save()
-    else:
-        form = AssignmentForm(instance=assignment)
+            # Want to save the form only if at most 3 vars are selected
+            form.save(commit=False)
+            num_variables = 0
+            for field in var_fields:
+                if getattr(assignment, field):
+                    num_variables += 1
+            if num_variables <= max_num_of_vars:
+                form.save()
+            if 'continue' in request.POST:
+                return redirect("common_assignments_edit_treatments")
+    # Refresh the assignment from the database
+    assignment = models.Assignment.objects.get(id=assignment_id)
+    form = AssignmentForm(instance=assignment)
     return render_to_response('instructor/assignment_select_variables.html',
                               {'form': form,
                                'assignment': assignment
