@@ -178,7 +178,7 @@ select:disabled {
     display: inline-block;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_small_header{
-    width: 90px;
+    width: 80px;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_med_header{
     width: 129px;
@@ -195,7 +195,7 @@ select:disabled {
     margin: 5px 0 0 15px;
 }
 .scb_ab_s_small_input_box>input{
-    width: 60px;
+    width: 50px;
 }
 .scb_ab_s_med_input_box>input{
     width: 100px;
@@ -219,6 +219,16 @@ select:disabled {
 }
 .scb_ab_s_grayed{
     color: grey;
+}
+
+.concentration_unit_box>input, .drug_time_unit_box>input, .collection_time_unit_box>input{
+    width:50px;
+}
+.scb_ab_s_hide_variable{
+    display:none;
+}
+.checkbox_delete_image{
+    cursor: pointer;
 }
 
 

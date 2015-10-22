@@ -5,28 +5,41 @@
 <div class='scb_s_experiment_setup_title'>Experiment Setup</div>
 <div class='scb_s_experiment_setup_subtitle'>In this section, you will specify the strains and treatments available for experimentation.</div>
 <br/>
-    <div class="scb_s_assignment_setup_course_name_heading">3. Define the treatment protocols available for
-        experimentation.
-    </div>
+<div class="scb_s_assignment_setup_course_name_heading">3. Define the treatment protocols available for experimentation.
+</div>
 
-    <div>
+    <div id="select_variables_form">
         <form method="post">{% csrf_token %}
             {{ drug_formset.management_form }}
             <div class="scb_ab_s_input_headers">
                 <div>Name</div>
-                <div class="scb_ab_s_small_header">Concentration</div>
-                <div class="scb_ab_s_small_header">Units</div>
-                <div class="scb_ab_s_small_header">Start Time</div>
-                <div class="scb_ab_s_small_header">Duration</div>
+                {% for header in input_headers %}
+                    <div class="scb_ab_s_small_header">{{ header }}</div>
+                {% endfor %}
             </div>
             {% for form in drug_formset %}
                 <div class="scb_ab_s_form_input_list">
                     <div>{{ forloop.counter }}.</div>
                     <div>{{ form.name }}</div>
-                    <div class="scb_ab_s_small_input_box">{{ form.concentration }}</div>
-                    <div class="scb_ab_s_small_input_box">{{ form.concentration_unit }}</div>
+                    {% if form.concentration %}
+                        <div class="scb_ab_s_small_input_box">{{ form.concentration }}</div>
+                        <div class="concentration_unit_box">{{ form.concentration_unit }}
+                            <datalist id="concentration_unit_list" class="scb_ab_s_select">
+                                {% for unit in concentration_unit_list %}
+                                    <option class="scb_ab_s_option" value="{{ unit }}">
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                    {% endif %}
                     <div class="scb_ab_s_small_input_box">{{ form.start_time }}</div>
                     <div class="scb_ab_s_small_input_box">{{ form.duration }}</div>
+                    <div class="drug_time_unit_box">{{ form.time_unit }}
+                        <datalist id="drug_time_unit_list">
+                            {% for unit in time_unit_list %}
+                                <option value="{{ unit }}">
+                            {% endfor %}
+                        </datalist>
+                    </div>
                     <div>{{ form.id }}</div>
                     <div class="delete_checkbox">{{ form.DELETE }}</div>
                 </div>
@@ -35,40 +48,54 @@
                 <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button'
                        value="ADD">
             </div>
-            <div class="scb_ab_s_input_headers">
-                <div class="scb_ab_s_med_header">Temperature</div>
-            </div>
-            {{ temperature_formset.management_form }}
-            {% for form in temperature_formset %}
-                <div class="scb_ab_s_form_input_list">
-                    <div>{{ forloop.counter }}.</div>
-                    <div class="scb_ab_s_med_input_box">{{ form.degrees }}</div>
-                    <div>{{ form.id }}</div>
-                    <div class="delete_checkbox">{{ form.DELETE }}</div>
-                </div>
+            <div class="{% if not has_temperature %}scb_ab_s_hide_variable{% endif %}">
 
-            {% endfor %}
-            <div>
-                <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button'
-                       value="ADD">
-            </div>
-            <div class="scb_ab_s_input_headers">
-                <div class="scb_ab_s_med_header">Collection time</div>
-            </div>
-            {{ collection_time_formset.management_form }}
-            {% for form in collection_time_formset %}
-                <div class="scb_ab_s_form_input_list">
-                    <div>{{ forloop.counter }}.</div>
-                    <div class="scb_ab_s_med_input_box">{{ form.time }}</div>
-                    <div class="scb_ab_s_med_input_box">{{ form.units}}</div>
-                    <div>{{ form.id }}</div>
-                    <div class="delete_checkbox">{{ form.DELETE }}</div>
+                <div class="scb_ab_s_input_headers">
+                    <div class="scb_ab_s_med_header">Temperature</div>
                 </div>
-            {% endfor %}
-            <div>
-                <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button'
-                       value="ADD">
+                {{ temperature_formset.management_form }}
+                {% for form in temperature_formset %}
+                    <div class="scb_ab_s_form_input_list">
+                        <div>{{ forloop.counter }}.</div>
+                        <div class="scb_ab_s_med_input_box">{{ form.degrees }} &#8451</div>
+                        <div>{{ form.id }}</div>
+                        <div class="delete_checkbox">{{ form.DELETE }}</div>
+                    </div>
+
+                {% endfor %}
+                <div>
+                    <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button'
+                           value="ADD">
+                </div>
             </div>
+
+            <div class="{% if not has_collection %}scb_ab_s_hide_variable{% endif %}">
+                <div class="scb_ab_s_input_headers">
+                    <div class="scb_ab_s_med_header">Collection time</div>
+                    <div class="scb_ab_s_med_header">Units</div>
+                </div>
+                {{ collection_time_formset.management_form }}
+                {% for form in collection_time_formset %}
+                    <div class="scb_ab_s_form_input_list">
+                        <div>{{ forloop.counter }}.</div>
+                        <div class="scb_ab_s_med_input_box">{{ form.time }}</div>
+                        <div class="collection_time_unit_box">{{ form.units }}
+                            <datalist id="collection_time_unit_list">
+                                {% for unit in time_unit_list %}
+                                    <option class="" value="{{ unit }}">
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div>{{ form.id }}</div>
+                        <div class="delete_checkbox">{{ form.DELETE }}</div>
+                    </div>
+                {% endfor %}
+                <div>
+                    <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button'
+                           value="ADD">
+                </div>
+            </div>
+
             <input type="submit"
                    name="continue"
                    class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
@@ -79,7 +106,7 @@
                    value="SAVE"/>
         </form>
     </div>
-<a href="{% url "common_assignments_variables" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-</a>
+    <a href="{% url "common_assignments_variables" %}">
+        <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+    </a>
 {% endblock %}
