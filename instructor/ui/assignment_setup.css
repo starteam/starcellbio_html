@@ -149,9 +149,8 @@ select:disabled {
 .scb_s_strains_list>li{
     display: inline;
 }
-.scb_ab_s_strains_form_container{
-    top: -1px;
-    left: 28px;
+.scb_ab_s_form_container{
+    padding-left: 30px;
 }
 .scb_s_delete_strain {
     border: 0;
@@ -212,6 +211,14 @@ select:disabled {
 }
 .checkbox_image:hover {
     cursor: pointer;
+}
+
+/* select variables */
+.scb_ab_s_variable_wrapper{
+    margin-bottom: 7px;
+}
+.scb_ab_s_grayed{
+    color: grey;
 }
 
 

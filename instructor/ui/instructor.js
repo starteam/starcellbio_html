@@ -85,6 +85,28 @@ $(function(){
         /* Set cursor on the trash image */
         $(this).css('cursor', 'default');
     });
+    /**
+    * Select variables
+    */
+
+    $('.scb_ab_f_select_variable>input').click(function(){
+        select_variables();
+    });
+
+    if($('.scb_ab_f_select_variable').length){
+        select_variables()
+    }
+
+    function select_variables(){
+        var num_checked= $("input:checked[type='checkbox']").length;
+        if(num_checked>=3){
+            /* grey out the rest*/
+            $('input:checkbox:not(:checked)').attr('disabled', true).parent().addClass('scb_ab_s_grayed');
+        }else{
+            $('input:checkbox:not(:checked)').attr('disabled', false).parent().removeClass('scb_ab_s_grayed');
+        }
+    }
+
 
 });
 
