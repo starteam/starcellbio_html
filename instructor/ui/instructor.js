@@ -107,6 +107,25 @@ $(function(){
         }
     }
 
+    if($('#select_variables_form').length){
+        /* Drug concentration unit */
+        var $inputs=$('.concentration_unit_box>input');
+        for(var i=0; i<$inputs.length; i++){
+            $($inputs[i]).attr('list', 'concentration_unit_list');
+        }
+        /* Drug time unit */
+        $inputs= $('.drug_time_unit_box>input');
+        for(i=0; i<$inputs.length; i++){
+            $($inputs[i]).attr('list', 'drug_time_unit_list');
+        }
+        /* Collection time unit */
+        $inputs= $('.collection_time_unit_box>input');
+        for(i=0; i<$inputs.length; i++){
+            $($inputs[i]).attr('list', 'collection_time_unit_list');
+        }
+
+    }
+
 
 });
 

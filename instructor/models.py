@@ -81,6 +81,7 @@ class Drug(models.Model):
     concentration_unit = models.CharField(max_length=50, blank=True, null=True)
     start_time = models.CharField(max_length=50, blank=True, null=True)
     duration = models.CharField(max_length=50, blank=True, null=True)
+    time_unit = models.CharField(max_length=50, blank=True, null=True)
 
     def __unicode__(self):
         return self.name

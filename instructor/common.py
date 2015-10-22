@@ -341,8 +341,29 @@ def assignments_edit_strains(request):
 def assignments_edit_treatments(request):
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
-    DrugFormSet = modelformset_factory(models.Drug, extra=1, can_delete=True, exclude=['assignment'])
 
+    has_start_time = assignment.has_start_time
+    has_duration = assignment.has_duration
+    drug_formset_exclude = ['assignment']
+    input_headers = []
+
+    if not assignment.has_concentration:
+        drug_formset_exclude.extend(['concentration', 'concentration_unit'])
+    else:
+        input_headers.extend(['Concent.', 'Units'])
+
+    if not (has_duration or has_start_time):
+        drug_formset_exclude.extend(['duration', 'start_time', 'time_unit'])
+    elif not has_duration:
+        drug_formset_exclude.append('duration')
+        input_headers.extend(['Start Time', 'Units'])
+    elif not has_start_time:
+        drug_formset_exclude.append('start_time')
+        input_headers.extend(['Duration', 'Units'])
+    else:
+        input_headers.extend(['Start Time', 'Duration', 'Units'])
+
+    DrugFormSet = modelformset_factory(models.Drug, extra=1, can_delete=True, exclude=drug_formset_exclude)
     TemperatureFormSet = modelformset_factory(models.Temperature, extra=1, can_delete=True, exclude=['assignment'])
     CollectionTimeFormSet = modelformset_factory(models.CollectionTime, extra=1, can_delete=True, exclude=['assignment'])
 
@@ -350,7 +371,6 @@ def assignments_edit_treatments(request):
         drug_formset = DrugFormSet(request.POST, prefix='drug')
         temperature_formset = TemperatureFormSet(request.POST, prefix='temperature')
         collection_time_formset = CollectionTimeFormSet(request.POST, prefix='collection_time')
-
         if drug_formset.is_valid():
             entries = drug_formset.save(commit=False)
             for obj in drug_formset.deleted_objects:
@@ -382,12 +402,19 @@ def assignments_edit_treatments(request):
         queryset=models.CollectionTime.objects.filter(assignment=assignment),
         prefix='collection_time')
 
+    time_unit_list = ['sec', 'min', 'hour']
+    concentration_unit_list = ['con', 'con2']
     return render_to_response(
         'instructor/protocols.html',
         {
             'drug_formset': drug_formset,
             'temperature_formset': temperature_formset,
             'collection_time_formset': collection_time_formset,
+            'time_unit_list': time_unit_list,
+            'concentration_unit_list': concentration_unit_list,
+            'input_headers': input_headers,
+            'has_temperature': assignment.has_temperature,
+            'has_collection': assignment.has_collection_time,
             'assignment': assignment
         },
         context_instance=RequestContext(request)
