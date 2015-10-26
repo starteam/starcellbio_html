@@ -1,19 +1,80 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
-    You only get 5 questions so ask wisely.
-    {% if message %}
-        {{ messsage }}
-    {% endif %}
+
+    <div class='scb_s_assignment_setup_course_name_heading'>
+        4. Below are all possible combinations of strains and
+        treatment protocols.
+    </div>
+    <div class='scb_s_experiment_setup_subtitle'>
+        You can delete irrelevant combinations and
+        sort the combinations into the desired order.
+    </div>
+    <div class='scb_s_experiment_setup_subtitle'>
+        If you would like to edit individual experimental variables,
+        go back to the previous page.
+    </div>
+    <div class='scb_s_assignment_setup_course_name_heading'>Samples</div>
+    <br>
     <div>
         <form method="post">{% csrf_token %}
             {{ formset.management_form }}
 
-            {% for form in formset %}
-                {{ form.instance.strain }} {{ form.instance.protocol }}
-                {{ form.as_p }}
+            <div class="scb_ab_s_row">
+            {% for header in headers %}
+                <div>{{ header }}</div>
             {% endfor %}
-            <input type="submit" value="Submit Questions"/>
+            </div>
+
+            {% for form in formset %}
+                <div class="scb_ab_s_row">
+                    <div>{{ form.instance.strain }}</div>
+                    <div>{{ form.instance.treatment.drug.name }}</div>
+                    {% if has_concentration %}
+                        <div>
+                            {{ form.instance.treatment.drug.concentration }}
+                            {{ form.instance.treatment.drug.concentration_unit }}
+                        </div>
+                    {% endif %}
+                    {% if has_start_time %}
+                        <div>
+                            {{ form.instance.treatment.drug.start_time }}
+                            {{ form.instance.treatment.drug.time_unit }}
+                        </div>
+                    {% endif %}
+                    {% if has_duration %}
+                        <div>
+                            {{ form.instance.treatment.drug.duration }}
+                            {{ form.instance.treatment.drug.time_unit }}
+                        </div>
+                    {% endif %}
+                    {% if has_temperature %}
+                        <div>
+                            {{ form.instance.treatment.temperature.degrees }} &#8451;
+                        </div>
+                    {% endif %}
+                    {% if has_collection_time %}
+                        <div>
+                            {{ form.instance.treatment.collection_time.time }}
+                            {{ form.instance.treatment.collection_time.units }}
+                        </div>
+                    {% endif %}
+                    {{ form.id }}
+                    <div class="delete_checkbox">{{ form.DELETE }}</div>
+                </div>
+            {% endfor %}
+            <input type="submit"
+                   name="continue"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE AND CONTINUE &nbsp; &#9654;">
+            <input type="submit"
+                   name="save"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE"/>
         </form>
     </div>
+    <a href="{% url "common_assignments_edit_treatments" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+    </a>
+
 {% endblock %}

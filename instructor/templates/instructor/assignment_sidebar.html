@@ -47,21 +47,13 @@
             </a>
         </div>
 
-        {% for pd in assignment.protocols.all %}
-            <div role="link" class='scb_s_sidebar_link_sub_heading '>
-                <a class="scb_s_assignment_sidebar_link"
-                   href="{% url "common_treatments" assignment=assignment.id protocol=pd.id %}">
-                    {{ pd.name }}
-                </a>
-            </div>
-        {% endfor %}
-
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
-            <a class="scb_s_assignment_sidebar_link" href="{% if new == 'False' %}
-        {% url "common_strain_protocols" assignment=assignment.id %}{% endif %}">
+            <a class="scb_s_assignment_sidebar_link"
+               href="{% if not new %}{% url "common_strain_treatments" %}{% endif %}">
                 Edit Strain Protocols
             </a>
         </div>
+
         <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Western Blotting</div>
 
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>

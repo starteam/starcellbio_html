@@ -105,6 +105,7 @@ class Treatment(models.Model):
     temperature = models.ForeignKey(Temperature, blank=True, null=True)
     collection_time = models.ForeignKey(CollectionTime, blank=True, null=True)
 
+
     class Meta:
         ordering = ['order', ]
 

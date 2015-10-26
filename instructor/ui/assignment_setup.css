@@ -231,4 +231,15 @@ select:disabled {
     cursor: pointer;
 }
 
+.scb_ab_s_row{
+    position: relative;
+}
+
+.scb_ab_s_row>div{
+    display:inline-block;
+    font-weight: bold;
+    width: 100px;
+    text-align: center;
+}
+
 

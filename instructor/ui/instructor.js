@@ -90,7 +90,26 @@ $(function(){
     */
 
     $('.scb_ab_f_select_variable>input').click(function(){
-        select_variables();
+        /* Want to warn the instructor*/
+        var $checkbox= $(this);
+        /* Var created is initialized in select_variables template */
+        if (created) {
+            $('body').prepend("<div class='error_overlay' role='presentation'></div>");
+            $.jqDialog.confirm("Previously generated data will be lost. Would you like to continue?",
+                function () {
+                    $('.error_overlay').remove();
+                    select_variables();
+                },
+                function () {
+                    $('.error_overlay').remove();
+                    $checkbox.prop('checked', !$checkbox.prop('checked'));
+                }
+            );
+            $('.jqDialog_header').remove();
+            $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Warning</h1>");
+        }else{
+            select_variables();
+        }
     });
 
     if($('.scb_ab_f_select_variable').length){

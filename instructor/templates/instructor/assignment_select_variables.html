@@ -1,7 +1,9 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
-
+<script>
+var created = {{ treatments_created }};
+</script>
     <div class='scb_s_experiment_setup_title'>Experiment Setup</div>
     <div class='scb_s_experiment_setup_subtitle'>In this section, you will specify the strains and treatments available
         for experimentation.
