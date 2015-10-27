@@ -97,6 +97,7 @@ def assignment_setup(request):
                                   'assignment_name': assignment_name,
                                   'based_on': request.session['based_on'],
                                   'new': request.session['new'],
+                                  'section_name': 'Assignment Setup'
                               },
                               context_instance=RequestContext(request))
 
@@ -138,6 +139,7 @@ def course_setup(request):
                                   'course_selected': course_selected,
                                   'new': request.session['new'],
                                   'assignment_name': request.session['assignment_name'],
+                                  'section_name': 'Assignment Setup'
                               },
                               context_instance=RequestContext(request))
 
@@ -197,7 +199,8 @@ def assignment_modify(request):
                                'form': form,
                                'based_on': request.session['based_on'],
                                'new': request.session['new'],
-                               'assignment_name': assignment.name
+                               'assignment_name': assignment.name,
+                               'section_name': 'Assignment Setup'
                               },
                               context_instance=RequestContext(request))
 
@@ -241,7 +244,8 @@ def course_modify(request):
                                   'formset': formset,
                                   'course_selected': course_selected,
                                   'new': request.session['new'],
-                                  'assignment_name': assignment.name
+                                  'assignment_name': assignment.name,
+                                  'section_name': 'Assignment Setup'
                               },
                               context_instance=RequestContext(request))
 
@@ -281,7 +285,9 @@ def assignments_variables(request):
     return render_to_response('instructor/assignment_select_variables.html',
                               {'form': form,
                                'treatments_created': json.dumps(treatments_created),
-                               'assignment_name': assignment.name
+                               'assignment_name': assignment.name,
+                               'assignment': assignment,
+                               'section_name': 'Experiment Setup'
                               },
                               context_instance=RequestContext(request))
 
@@ -340,7 +346,8 @@ def assignments_edit_strains(request):
     return render_to_response('instructor/strains.html',
                               {'formset': formset,
                                'new':  request.session['new'],
-                               'assignment_name': assignment.name
+                               'assignment_name': assignment.name,
+                               'section_name': 'Experiment Setup'
                               },
                               context_instance=RequestContext(request))
 
@@ -424,7 +431,8 @@ def assignments_edit_treatments(request):
             'input_headers': input_headers,
             'has_temperature': assignment.has_temperature,
             'has_collection': assignment.has_collection_time,
-            'assignment_name': assignment.name
+            'assignment_name': assignment.name,
+            'section_name': 'Experiment Setup'
         },
         context_instance=RequestContext(request)
     )
@@ -476,7 +484,8 @@ def strain_treatments_edit(request):
                                'has_temperature': assignment.has_temperature,
                                'has_start_time': assignment.has_start_time,
                                'has_duration': assignment.has_duration,
-                               'has_collection_time': assignment.has_collection_time
+                               'has_collection_time': assignment.has_collection_time,
+                               'section_name': 'Experiment Setup'
                               },
                               context_instance=RequestContext(request))
 
