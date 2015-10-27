@@ -352,23 +352,24 @@ def assignments_edit_treatments(request):
     has_start_time = assignment.has_start_time
     has_duration = assignment.has_duration
     drug_formset_exclude = ['assignment']
+    # For Drug form
     input_headers = []
 
     if not assignment.has_concentration:
         drug_formset_exclude.extend(['concentration', 'concentration_unit'])
     else:
-        input_headers.extend(['Concent.', 'Units'])
+        input_headers.extend(['Concen.', 'Concen. Units'])
 
     if not (has_duration or has_start_time):
         drug_formset_exclude.extend(['duration', 'start_time', 'time_unit'])
     elif not has_duration:
         drug_formset_exclude.append('duration')
-        input_headers.extend(['Start Time', 'Units'])
+        input_headers.extend(['Start Time', 'Time Units'])
     elif not has_start_time:
         drug_formset_exclude.append('start_time')
-        input_headers.extend(['Duration', 'Units'])
+        input_headers.extend(['Duration', 'Duration Units'])
     else:
-        input_headers.extend(['Start Time', 'Duration', 'Units'])
+        input_headers.extend(['Start Time', 'Duration', 'Time Units'])
 
     DrugFormSet = modelformset_factory(models.Drug, extra=1, can_delete=True, exclude=drug_formset_exclude)
     TemperatureFormSet = modelformset_factory(models.Temperature, extra=1, can_delete=True, exclude=['assignment'])

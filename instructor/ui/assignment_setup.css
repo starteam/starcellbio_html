@@ -176,9 +176,11 @@ select:disabled {
 .scb_ab_s_input_headers>div{
     width: 155px;
     display: inline-block;
+    font-weight: bold;
+    font-size: 14px ;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_small_header{
-    width: 80px;
+    width: 79px;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_med_header{
     width: 129px;
