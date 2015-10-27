@@ -11,9 +11,7 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
-from StarCellBio.views import get_account_type
-
-from backend.models import Assignment, StudentAssignment
+import json
 
 @login_required
 def courses(request):
@@ -199,7 +197,7 @@ def assignment_modify(request):
                                'form': form,
                                'based_on': request.session['based_on'],
                                'new': request.session['new'],
-                               'assignment_name': request.session['assignment_name']
+                               'assignment_name': assignment.name
                               },
                               context_instance=RequestContext(request))
 
@@ -243,12 +241,11 @@ def course_modify(request):
                                   'formset': formset,
                                   'course_selected': course_selected,
                                   'new': request.session['new'],
-                                  'assignment_name': request.session['assignment_name']
+                                  'assignment_name': assignment.name
                               },
                               context_instance=RequestContext(request))
 
-
-
+@login_required
 def assignments_variables(request):
     max_num_of_vars = 3
     assignment_id = request.session['assignment_id']
@@ -256,9 +253,18 @@ def assignments_variables(request):
     var_fields = ['has_concentration', 'has_temperature', 'has_start_time',
                   'has_duration', 'has_collection_time']
     AssignmentForm = modelform_factory(models.Assignment, fields=var_fields)
+
+    # Want to know if Treatments were already created
+    treatments_created = False
+    if models.Treatment.objects.filter(assignment=assignment).exists():
+        treatments_created = True
     if request.method == "POST":
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
+            # If form has changed want to delete existing Treatments
+            if form.has_changed() and treatments_created:
+                models.StrainTreatment.objects.filter(assignment=assignment).delete()
+                models.Treatment.objects.filter(assignment=assignment).delete()
             # Want to save the form only if at most 3 vars are selected
             form.save(commit=False)
             num_variables = 0
@@ -274,7 +280,8 @@ def assignments_variables(request):
     form = AssignmentForm(instance=assignment)
     return render_to_response('instructor/assignment_select_variables.html',
                               {'form': form,
-                               'assignment': assignment
+                               'treatments_created': json.dumps(treatments_created),
+                               'assignment_name': assignment.name
                               },
                               context_instance=RequestContext(request))
 
@@ -333,11 +340,11 @@ def assignments_edit_strains(request):
     return render_to_response('instructor/strains.html',
                               {'formset': formset,
                                'new':  request.session['new'],
-                               'assignment_name': request.session['assignment_name']
+                               'assignment_name': assignment.name
                               },
                               context_instance=RequestContext(request))
 
-
+@login_required
 def assignments_edit_treatments(request):
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
@@ -392,6 +399,8 @@ def assignments_edit_treatments(request):
             for form in entries:
                 form.assignment = assignment
                 form.save()
+        if 'continue' in request.POST:
+            return redirect('common_strain_treatments')
     drug_formset = DrugFormSet(
         queryset=models.Drug.objects.filter(assignment=assignment),
         prefix='drug')
@@ -415,81 +424,106 @@ def assignments_edit_treatments(request):
             'input_headers': input_headers,
             'has_temperature': assignment.has_temperature,
             'has_collection': assignment.has_collection_time,
-            'assignment': assignment
+            'assignment_name': assignment.name
         },
         context_instance=RequestContext(request)
     )
 
+@login_required
+def strain_treatments_edit(request):
+    pk = request.session['assignment_id']
+    assignment = get_object_or_404(models.Assignment, id=pk)
 
-def treatments_edit(request, assignment, protocol):
-    assignment = models.Assignment.objects.get(id=assignment)
-    protocol = models.Protocol.objects.get(id=protocol)
-    message = ''
-    treatments_set = ['treatment']
-    if assignment.has_concentration:
-        treatments_set.append('concentration')
-        treatments_set.append('concentration_unit')
-    if assignment.has_temperature:
-        treatments_set.append('temperature')
-    if assignment.has_start_time:
-        treatments_set.append('start_time')
-    if assignment.has_duration:
-        treatments_set.append('end_time')
-    if assignment.has_collection_time:
-        treatments_set.append('collection_time')
+    headers = ['Strain', 'Treatment']
+    # Optional headers
+    optional_vars = ['Concentration', 'Start Time',
+                     'Duration', 'Temperature',
+                     'Collection Time']
+    # assignment fields names
+    var_fields = ['has_concentration', 'has_start_time',
+                  'has_duration', 'has_temperature',
+                  'has_collection_time']
 
-    TreatmentsFormSet = modelformset_factory(models.Treatments, extra=1, can_delete=True, exclude=['protocol', 'order'],
-                                             can_order=True, fields=treatments_set)
-    if request.method == "POST":
-        formset = TreatmentsFormSet(request.POST)
-        formset.clean()
-        if formset.is_valid():
-            message = "Thank you"
-            for form in formset.ordered_forms:
-                form.instance.order = form.cleaned_data['ORDER']
-            entries = formset.save(commit=False)
-            for form in entries:
-                form.protocol = protocol
-                form.save()
-        else:
-            message = "Something went wrong"
+    # Adding headers for enabled experimental variables
+    for index, field in enumerate(var_fields):
+        if getattr(assignment, field):
+            headers.append(optional_vars[index])
 
-    formset = TreatmentsFormSet(queryset=models.Treatments.objects.filter(protocol=protocol).order_by('order'))
-    return render_to_response('instructor/treatments.html',
-                              {'formset': formset,
-                               'message': message,
-                               'assignment': assignment
-                              },
-                              context_instance=RequestContext(request))
-
-
-def strain_treatments_edit(request, assignment):
-    assignment = models.Assignment.objects.get(id=assignment)
-    strains = models.Strains.objects.filter(assignment=assignment)
-    protocols = models.Protocol.objects.filter(assignment=assignment)
-    message = ''
-    for s in strains:
-        for p in protocols:
-            sp, created = models.StrainProtocol.objects.get_or_create(strain=s, protocol=p, assignment=assignment)
-            sp.save()
-    STFormSet = modelformset_factory(models.StrainProtocol, extra=0, exclude=['assignment', 'strain', 'protocol'])
+    STFormSet = modelformset_factory(models.StrainTreatment, extra=0,
+                                     exclude=['assignment', 'strain', 'treatment', 'enabled'],
+                                     can_delete=True)
     if request.method == "POST":
         formset = STFormSet(request.POST)
         formset.clean()
         if formset.is_valid():
-            message = "Thank you"
             entries = formset.save(commit=False)
+            for obj in formset.deleted_objects:
+                obj.delete()
             for form in entries:
                 form.save()
-        else:
-            message = "Something went wrong"
-    formset = STFormSet(queryset=models.StrainProtocol.objects.filter(assignment=assignment))
+    else:
+        # If there are no Treatments want to create them
+        if not models.Treatment.objects.filter(assignment=assignment).exists():
+            create_treatments(assignment)
+            create_strain_treatments(assignment)
+
+    formset = STFormSet(queryset=models.StrainTreatment.objects.filter(assignment=assignment))
     return render_to_response('instructor/strain_protocols.html',
                               {'formset': formset,
-                               'message': message,
-                               'assignment': assignment
+                               'assignment_name': assignment.name,
+                               'headers': headers,
+                               'has_concentration': assignment.has_concentration,
+                               'has_temperature': assignment.has_temperature,
+                               'has_start_time': assignment.has_start_time,
+                               'has_duration': assignment.has_duration,
+                               'has_collection_time': assignment.has_collection_time
                               },
                               context_instance=RequestContext(request))
+
+
+def create_treatments(assignment):
+    drugs = models.Drug.objects.filter(assignment=assignment)
+    temperature = models.Temperature.objects.filter(assignment=assignment)
+    collection_times = models.CollectionTime.objects.filter(assignment=assignment)
+    # Creating treatments
+    if assignment.has_temperature and assignment.has_collection_time:
+        for d in drugs:
+            for t in temperature:
+                for c in collection_times:
+                    treatment, created = models.Treatment.objects.get_or_create(
+                        drug=d,
+                        temperature=t,
+                        collection_time=c,
+                        assignment=assignment)
+    elif assignment.has_collection_time:
+        for drug in drugs:
+            for c in collection_times:
+                treatment, created = models.Treatment.objects.get_or_create(
+                    drug=drug,
+                    collection_time=c,
+                    assignment=assignment)
+    elif assignment.has_temperature:
+        for drug in drugs:
+            for temp in temperature:
+                treatment, created = models.Treatment.objects.get_or_create(
+                    drug=drug,
+                    temperature=temp,
+                    assignment=assignment)
+    else:
+        for drug in drugs:
+            treatment, created = models.Treatment.objects.get_or_create(
+                drug=drug,
+                assignment=assignment)
+
+
+def create_strain_treatments(assignment):
+    # Creating StrainTreatments
+    strains = models.Strains.objects.filter(assignment=assignment)
+    treatments = models.Treatment.objects.filter(assignment=assignment)
+    for s in strains:
+        for t in treatments:
+            strain_treatment, created = models.StrainTreatment.objects.get_or_create(
+                strain=s, treatment=t, assignment=assignment)
 
 
 def western_blot_edit(request, assignment):
