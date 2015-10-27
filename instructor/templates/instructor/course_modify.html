@@ -4,8 +4,10 @@
 {% block right_side %}
 
     <div class='scb_s_course_setup_title'>Course Setup</div>
-    <div class='scb_s_assignment_setup_course_name_heading'>Select course for this assignment, modify an existing course
-        or create a new course (course code has to be unique)</div>
+    <div class='scb_s_assignment_setup_course_name_heading'>
+        Assign this assignment to a pre-existing course or create
+        a new course. The course code assigned to the course must be unique.
+    </div>
 
 
     <form id="course_formset" method="post">{% csrf_token %}
