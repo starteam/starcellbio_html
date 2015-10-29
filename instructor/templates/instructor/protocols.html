@@ -12,7 +12,7 @@
         <form method="post">{% csrf_token %}
             {{ drug_formset.management_form }}
             <div class="scb_ab_s_input_headers">
-                <div>Name</div>
+                <div>Treatment Name</div>
                 {% for header in input_headers %}
                     <div class="scb_ab_s_small_header">{{ header }}</div>
                 {% endfor %}
@@ -72,7 +72,7 @@
             <div class="{% if not has_collection %}scb_ab_s_hide_variable{% endif %}">
                 <div class="scb_ab_s_input_headers">
                     <div class="scb_ab_s_med_header">Collection time</div>
-                    <div class="scb_ab_s_med_header">Units</div>
+                    <div class="scb_ab_s_med_header">Time Units</div>
                 </div>
                 {{ collection_time_formset.management_form }}
                 {% for form in collection_time_formset %}
