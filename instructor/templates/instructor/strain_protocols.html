@@ -1,26 +1,34 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
-
-    <div class='scb_s_assignment_setup_course_name_heading'>
-        4. Below are all possible combinations of strains and
-        treatment protocols.
+    <div class="scb_ab_s_heading_div">
+        <div class="scb_ab_s_page_title">Protocols</div>
+        <div class='scb_ab_s_heading_description'>
+            Below are all possible combinations of strains and
+            treatment protocols.
+        </div>
+        <ul>
+            <li class='scb_ab_s_heading_instructions'>
+                You can delete irrelevant combinations and
+                sort the combinations into the desired order.
+            </li>
+            <li class='scb_ab_s_heading_instructions'>
+                If you would like to edit individual experimental variables,
+                go back to the previous page.
+            </li>
+        </ul>
+        <br>
+        <div class='scb_ab_s_heading_description scb_ab_s_samples_heading'>Samples</div>
+        <button class="scb_s_gray_button scb_ab_s_show_protocols_btn toggle_protocols" data-show="false">
+            SHOW ONLY SELECTED
+        </button>
     </div>
-    <div class='scb_s_experiment_setup_subtitle'>
-        You can delete irrelevant combinations and
-        sort the combinations into the desired order.
-    </div>
-    <div class='scb_s_experiment_setup_subtitle'>
-        If you would like to edit individual experimental variables,
-        go back to the previous page.
-    </div>
-    <div class='scb_s_assignment_setup_course_name_heading'>Samples</div>
-    <br>
-    <div>
+    <div class="scb_ab_s_form_container">
         <form method="post">{% csrf_token %}
             {{ formset.management_form }}
 
             <div class="scb_ab_s_row">
+                <div class="scb_ab_s_enable_sample">Select</div>
             {% for header in headers %}
                 <div>{{ header }}</div>
             {% endfor %}
@@ -28,6 +36,7 @@
 
             {% for form in formset %}
                 <div class="scb_ab_s_row">
+                    <div class="scb_ab_s_enable_sample">{{ form.enabled }}</div>
                     <div>{{ form.instance.strain }}</div>
                     <div>{{ form.instance.treatment.drug.name }}</div>
                     {% if has_concentration %}
@@ -60,7 +69,6 @@
                         </div>
                     {% endif %}
                     {{ form.id }}
-                    <div class="delete_checkbox">{{ form.DELETE }}</div>
                 </div>
             {% endfor %}
             <input type="submit"

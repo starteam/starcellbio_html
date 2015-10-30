@@ -100,14 +100,9 @@ class CollectionTime(models.Model):
 
 class Treatment(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='treatment')
-    order = models.IntegerField(default=0)
     drug = models.ForeignKey(Drug)
     temperature = models.ForeignKey(Temperature, blank=True, null=True)
     collection_time = models.ForeignKey(CollectionTime, blank=True, null=True)
-
-
-    class Meta:
-        ordering = ['order', ]
 
 
 class StrainTreatment(models.Model):
