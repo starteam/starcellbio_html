@@ -150,7 +150,8 @@ select:disabled {
     display: inline;
 }
 .scb_ab_s_form_container{
-    padding-left: 30px;
+    padding-left: 20px;
+    padding-top: 10px;
 }
 .scb_s_delete_strain {
     border: 0;
@@ -242,6 +243,36 @@ select:disabled {
     font-weight: bold;
     width: 100px;
     text-align: center;
+}
+.scb_ab_s_row>div.scb_ab_s_enable_sample{
+    width: 50px;
+}
+.scb_ab_s_heading_div{
+    margin: 15px 10px;
+    font-family: 'sourcesanspro-semibold';
+    color: #316f94;
+    font-weight: bold;
+
+}
+.scb_ab_s_page_title{
+    font-size: 16pt;
+    padding-bottom: 10px;
+
+}
+.scb_ab_s_heading_description{
+    font-size: 12pt;
+}
+.scb_ab_s_heading_instructions{
+    font-size: 10pt;
+}
+.scb_ab_s_show_protocols_btn{
+    float: right;
+    margin-right:40px;
+    width: 160px;
+}
+.scb_ab_s_samples_heading{
+    display: inline-block;
+    padding-left: 10px;
 }
 
 

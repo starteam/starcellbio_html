@@ -88,12 +88,12 @@ $(function(){
     /**
     * Select variables
     */
-
+    var showed_warning = false;
     $('.scb_ab_f_select_variable>input').click(function(){
         /* Want to warn the instructor*/
         var $checkbox= $(this);
         /* Var created is initialized in select_variables template */
-        if (created) {
+        if (created && !showed_warning) {
             $('body').prepend("<div class='error_overlay' role='presentation'></div>");
             $.jqDialog.confirm("Previously generated data will be lost. Would you like to continue?",
                 function () {
@@ -107,12 +107,14 @@ $(function(){
             );
             $('.jqDialog_header').remove();
             $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Warning</h1>");
+            showed_warning=true;
         }else{
             select_variables();
         }
     });
 
     if($('.scb_ab_f_select_variable').length){
+
         select_variables()
     }
 
@@ -144,6 +146,16 @@ $(function(){
         }
 
     }
+    $(".toggle_protocols").click(function(){
+        var show= $(".toggle_protocols").data("show");
+        if(show){
+            $(".scb_ab_s_row").show();
+            $(".toggle_protocols").data("show", false).html("SHOW ONLY SELECTED");
+        }else{
+            $("input:checkbox:not(:checked)").parent().parent().hide();
+            $(".toggle_protocols").data("show", true).html("SHOW ALL");
+        }
+    });
 
 
 });

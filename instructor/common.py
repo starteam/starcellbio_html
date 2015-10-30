@@ -265,18 +265,18 @@ def assignments_variables(request):
     if request.method == "POST":
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
-            # If form has changed want to delete existing Treatments
-            if form.has_changed() and treatments_created:
-                models.StrainTreatment.objects.filter(assignment=assignment).delete()
+            if form.has_changed():
                 models.Treatment.objects.filter(assignment=assignment).delete()
-            # Want to save the form only if at most 3 vars are selected
-            form.save(commit=False)
-            num_variables = 0
-            for field in var_fields:
-                if getattr(assignment, field):
-                    num_variables += 1
-            if num_variables <= max_num_of_vars:
-                form.save()
+                models.StrainTreatment.objects.filter(assignment=assignment).delete()
+                create_treatments(assignment)
+                # Want to save the form only if at most 3 vars are selected
+                form.save(commit=False)
+                num_variables = 0
+                for field in var_fields:
+                    if getattr(assignment, field):
+                        num_variables += 1
+                if num_variables <= max_num_of_vars:
+                    form.save()
             if 'continue' in request.POST:
                 return redirect("common_assignments_edit_treatments")
     # Refresh the assignment from the database
@@ -334,9 +334,13 @@ def assignments_edit_strains(request):
             entries = formset.save(commit=False)
             for obj in formset.deleted_objects:
                 obj.delete()
-            for form in entries:
-                form.assignment = assignment
-                form.save()
+            for strain in entries:
+                if strain.id is None:
+                    strain.assignment = assignment
+                    strain.save()
+                    create_strain_treatments(assignment, strains=[strain])
+                else:
+                    strain.save()
 
         if 'continue' in request.POST:
             return redirect('common_assignments_variables')
@@ -377,36 +381,50 @@ def assignments_edit_treatments(request):
         input_headers.extend(['Duration', 'Duration Units'])
     else:
         input_headers.extend(['Start Time', 'Duration', 'Time Units'])
+    # If instructor clicked ADD, add extra form
+    drug_extra_form = 0
+    temperature_extra_form = 0
+    collection_extra_form = 0
+    if 'add_drug' in request.POST or models.Drug.objects.filter(assignment=assignment).exists():
+        drug_extra_form = 1
+    if 'add_temperature' in request.POST or models.Temperature.objects.filter(assignment=assignment).exists():
+        temperature_extra_form = 1
+    if 'add_collection' in request.POST or models.CollectionTime.objects.filter(assignment=assignment).exists():
+        collection_extra_form = 1
 
-    DrugFormSet = modelformset_factory(models.Drug, extra=1, can_delete=True, exclude=drug_formset_exclude)
-    TemperatureFormSet = modelformset_factory(models.Temperature, extra=1, can_delete=True, exclude=['assignment'])
-    CollectionTimeFormSet = modelformset_factory(models.CollectionTime, extra=1, can_delete=True, exclude=['assignment'])
+    DrugFormSet = modelformset_factory(models.Drug,
+                                       extra=drug_extra_form,
+                                       can_delete=True,
+                                       exclude=drug_formset_exclude)
+    TemperatureFormSet = modelformset_factory(models.Temperature,
+                                              extra=temperature_extra_form,
+                                              can_delete=True,
+                                              exclude=['assignment'])
+    CollectionTimeFormSet = modelformset_factory(models.CollectionTime,
+                                                 extra=collection_extra_form,
+                                                 can_delete=True,
+                                                 exclude=['assignment'])
 
     if request.method == "POST":
-        drug_formset = DrugFormSet(request.POST, prefix='drug')
-        temperature_formset = TemperatureFormSet(request.POST, prefix='temperature')
-        collection_time_formset = CollectionTimeFormSet(request.POST, prefix='collection_time')
-        if drug_formset.is_valid():
-            entries = drug_formset.save(commit=False)
-            for obj in drug_formset.deleted_objects:
-                obj.delete()
-            for form in entries:
-                form.assignment = assignment
-                form.save()
-        if temperature_formset.is_valid():
-            entries = temperature_formset.save(commit=False)
-            for obj in temperature_formset.deleted_objects:
-                obj.delete()
-            for form in entries:
-                form.assignment = assignment
-                form.save()
-        if collection_time_formset.is_valid():
-            entries = collection_time_formset.save(commit=False)
-            for obj in collection_time_formset.deleted_objects:
-                obj.delete()
-            for form in entries:
-                form.assignment = assignment
-                form.save()
+        mapping = {
+            'drug': (DrugFormSet, 'drugs'),
+            'temperature': (TemperatureFormSet, 'temperatures'),
+            'collection_time': (CollectionTimeFormSet, 'collection_times')
+        }
+        for prefix, (ModelFormSet, treatment_kw) in mapping.items():
+            formset = ModelFormSet(request.POST, prefix=prefix)
+            if formset.is_valid():
+                entries = formset.save(commit=False)
+                for obj in formset.deleted_objects:
+                    obj.delete()
+                for instance in entries:
+                    if instance.id is None:
+                        instance.assignment = assignment
+                        instance.save()
+                        create_treatments(assignment, **{treatment_kw: [instance]})
+                    else:
+                        instance.save()
+
         if 'continue' in request.POST:
             return redirect('common_strain_treatments')
     drug_formset = DrugFormSet(
@@ -459,24 +477,23 @@ def strain_treatments_edit(request):
             headers.append(optional_vars[index])
 
     STFormSet = modelformset_factory(models.StrainTreatment, extra=0,
-                                     exclude=['assignment', 'strain', 'treatment', 'enabled'],
-                                     can_delete=True)
+                                     exclude=['assignment', 'strain', 'treatment'])
     if request.method == "POST":
         formset = STFormSet(request.POST)
         formset.clean()
         if formset.is_valid():
             entries = formset.save(commit=False)
-            for obj in formset.deleted_objects:
-                obj.delete()
             for form in entries:
                 form.save()
-    else:
-        # If there are no Treatments want to create them
-        if not models.Treatment.objects.filter(assignment=assignment).exists():
-            create_treatments(assignment)
-            create_strain_treatments(assignment)
 
-    formset = STFormSet(queryset=models.StrainTreatment.objects.filter(assignment=assignment))
+    formset = STFormSet(
+        queryset=models.StrainTreatment.objects.filter(assignment=assignment).order_by(
+            'strain',
+            'treatment__drug__name',
+            'treatment__temperature__degrees',
+            'treatment__collection_time__time'
+        )
+    )
     return render_to_response('instructor/strain_protocols.html',
                               {'formset': formset,
                                'assignment_name': assignment.name,
@@ -491,20 +508,24 @@ def strain_treatments_edit(request):
                               context_instance=RequestContext(request))
 
 
-def create_treatments(assignment):
-    drugs = models.Drug.objects.filter(assignment=assignment)
-    temperature = models.Temperature.objects.filter(assignment=assignment)
-    collection_times = models.CollectionTime.objects.filter(assignment=assignment)
+def create_treatments(assignment, drugs=None, temperatures=None, collection_times=None):
+    if drugs is None:
+        drugs = models.Drug.objects.filter(assignment=assignment)
+    if assignment.has_temperature and temperatures is None:
+        temperatures = models.Temperature.objects.filter(assignment=assignment)
+    if assignment.has_collection_time and collection_times is None:
+        collection_times = models.CollectionTime.objects.filter(assignment=assignment)
     # Creating treatments
     if assignment.has_temperature and assignment.has_collection_time:
         for d in drugs:
-            for t in temperature:
+            for t in temperatures:
                 for c in collection_times:
                     treatment, created = models.Treatment.objects.get_or_create(
                         drug=d,
                         temperature=t,
                         collection_time=c,
                         assignment=assignment)
+                    create_strain_treatments(assignment, treatments=[treatment])
     elif assignment.has_collection_time:
         for drug in drugs:
             for c in collection_times:
@@ -512,24 +533,30 @@ def create_treatments(assignment):
                     drug=drug,
                     collection_time=c,
                     assignment=assignment)
+                create_strain_treatments(assignment, treatments=[treatment])
     elif assignment.has_temperature:
         for drug in drugs:
-            for temp in temperature:
+            for temp in temperatures:
                 treatment, created = models.Treatment.objects.get_or_create(
                     drug=drug,
                     temperature=temp,
                     assignment=assignment)
+                create_strain_treatments(assignment, treatments=[treatment])
     else:
         for drug in drugs:
             treatment, created = models.Treatment.objects.get_or_create(
                 drug=drug,
                 assignment=assignment)
+            create_strain_treatments(assignment, treatments=[treatment])
 
 
-def create_strain_treatments(assignment):
+def create_strain_treatments(assignment, strains=None, treatments=None):
     # Creating StrainTreatments
-    strains = models.Strains.objects.filter(assignment=assignment)
-    treatments = models.Treatment.objects.filter(assignment=assignment)
+    if strains is None:
+        strains = models.Strains.objects.filter(assignment=assignment)
+    if treatments is None:
+        treatments = models.Treatment.objects.filter(assignment=assignment)
+
     for s in strains:
         for t in treatments:
             strain_treatment, created = models.StrainTreatment.objects.get_or_create(
