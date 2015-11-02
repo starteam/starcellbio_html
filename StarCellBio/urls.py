@@ -98,8 +98,6 @@ urlpatterns += patterns(
         name="common_strain_treatments"),
     url(r'^ab/assignments/assignments_variables/$',
         instructor_common.assignments_variables, name="common_assignments_variables"),
-    url(r'^ab/assignments/edit_text/$', instructor_common.assignments_edit_text,
-        name="common_assignments_edit_text"),
 
     # Preview
     url(r'^ab/assignments/preview/(?P<assignment>[^/]+)$', instructor_common.preview,

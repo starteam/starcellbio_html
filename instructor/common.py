@@ -292,31 +292,6 @@ def assignments_variables(request):
                               context_instance=RequestContext(request))
 
 
-def assignments_edit_text(request):
-    pk = request.session['assignment_id']
-    assignment = get_object_or_404(models.Assignment, id=pk)
-    message = ''
-    StrainsFormSet = modelformset_factory(models.AssignmentText, extra=1, fields=['title', 'text'], can_delete=True)
-    if request.method == "POST":
-        formset = StrainsFormSet(request.POST)
-        formset.clean()
-        if formset.is_valid():
-            message = "Thank you"
-            entries = formset.save(commit=False)
-            for form in entries:
-                form.assignment = assignment
-                form.save()
-        else:
-            message = "Something went wrong"
-
-    return render_to_response('instructor/assignment_text.html',
-                              {'formset': StrainsFormSet(
-                                  queryset=models.AssignmentText.objects.filter(assignment=assignment)),
-                               'message': message,
-                               'assignment': assignment
-                              },
-                              context_instance=RequestContext(request))
-
 @login_required
 def assignments_edit_strains(request):
     pk = request.session['assignment_id']
