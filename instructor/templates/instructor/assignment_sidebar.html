@@ -1,9 +1,9 @@
 {% extends "instructor/assignment_edit_base.html" %}
 
 {% block sidebar %}
-    <div style="width:200px; display:block;float:left">
+    <div style="width:210px; display:block;float:left">
 
-        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Assignment</div>
+        <div class='scb_ab_s_sidebar_section_heading' role='heading'>Assignment</div>
 
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
             <a class='scb_s_assignment_sidebar_link'
@@ -20,7 +20,7 @@
             </a>
         </div>
 
-        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Experiment Setup</div>
+        <div class='scb_ab_s_sidebar_section_heading' role='heading'>Experiment Setup</div>
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
             <a class="scb_s_assignment_sidebar_link"
                href="{% if not new %}{% url "common_assignments_edit_strains" %}{% endif %}">
@@ -51,6 +51,14 @@
             <a class="scb_s_assignment_sidebar_link"
                href="{% if not new %}{% url "common_strain_treatments" %}{% endif %}">
                 Edit Strain Protocols
+            </a>
+        </div>
+
+        <div class='scb_ab_s_sidebar_section_heading' role='heading'>Experimental Techniques</div>
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link"
+               href="{% if not new %}{% url "common_select_technique" %}{% endif %}">
+                Select Technique
             </a>
         </div>
 

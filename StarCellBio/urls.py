@@ -105,6 +105,10 @@ urlpatterns += patterns(
     url(r'^ab/assignments/preview/(?P<assignment>[^/]+)$', instructor_common.preview,
         name="common_preview"),
 
+    # Select Technique
+    url(r'^ab/assignments/select_technique/$', instructor_common.select_technique,
+        name="common_select_technique"),
+
     # Western Blot
     url(r'^ab/assignments/wb_edit/(?P<assignment>.+)$', instructor_common.western_blot_edit,
         name="common_western_blot_meta"),
