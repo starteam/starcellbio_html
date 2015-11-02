@@ -588,27 +588,25 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
                 strain=s, treatment=t, assignment=assignment)
 
 
-def western_blot_edit(request, assignment):
-    a = models.Assignment.objects.get(id=assignment)
-    wb, created = models.WesternBlot.objects.get_or_create(assignment=a)
+def western_blot_lysate_type(request):
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
+    wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
     WesternBlotForm = modelform_factory(models.WesternBlot, exclude=['assignment'])
-    message = ''
     if request.method == "POST":
         form = WesternBlotForm(request.POST, instance=wb)
         if form.is_valid():
-            message = "Thank you"
             form.save()
-        else:
-            message = "Something went wrong"
     else:
         form = WesternBlotForm(instance=wb)
-    return render_to_response('instructor/generic_form.html',
-                              {'form': form,
-                               'message': message,
-                               'assignment': a,
-                               'title': 'Western Blot - Meta'
-                              },
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'instructor/wb_lysate_type.html',
+        {
+            'form': form,
+            'assignment_name': assignment.name,
+            'section_name': 'Western Blotting'
+        },
+        context_instance=RequestContext(request))
 
 
 def western_blot_antibody_edit(request, assignment):

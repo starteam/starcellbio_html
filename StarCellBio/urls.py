@@ -110,8 +110,8 @@ urlpatterns += patterns(
         name="common_select_technique"),
 
     # Western Blot
-    url(r'^ab/assignments/wb_edit/(?P<assignment>.+)$', instructor_common.western_blot_edit,
-        name="common_western_blot_meta"),
+    url(r'^ab/assignments/wb_lysate_type/$', instructor_common.western_blot_lysate_type,
+        name="western_blot_lysate_type"),
     url(r'^ab/assignments/wba_edit/(?P<assignment>.+)$', instructor_common.western_blot_antibody_edit,
         name="western_blot_antibody_edit"),
     url(r'^ab/assignments/wbab_edit/(?P<assignment>.+)/(?P<antibody>.+)/(?P<sp>.+)/$',

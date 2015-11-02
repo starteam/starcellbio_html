@@ -157,6 +157,11 @@ $(function(){
         }
     });
 
+    /**
+     * Western Blotting: lysate types
+     */
+    $("#id_has_nuclear_fractination").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
+    $("#id_has_cytoplasmic_fractination").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
 
 });
 

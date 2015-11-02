@@ -65,8 +65,10 @@
         <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Western Blotting</div>
 
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
-            <a class="scb_s_assignment_sidebar_link" href="{% if new == 'False' %}
-        {% url "common_western_blot_meta" assignment=assignment.id %}{% endif %}">Edit Western Blot Meta</a>
+            <a class="scb_s_assignment_sidebar_link"
+               href="{% if not new %}{% url "western_blot_lysate_type" %}{% endif %}">
+                Western Blot Lysate Type
+            </a>
         </div>
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
             <a class="scb_s_assignment_sidebar_link" href="{% if new == 'False' %}
