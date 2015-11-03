@@ -116,8 +116,8 @@ class WesternBlot(models.Model):
     assignment = models.OneToOneField(Assignment, primary_key=True, related_name='western_blot')
     # lysate types
     has_whole_cell_lysate = models.BooleanField(default=True)
-    has_nuclear_fractination = models.BooleanField(default=True)
-    has_cytoplasmic_fractination = models.BooleanField(default=True)
+    has_nuclear_fractination = models.BooleanField(default=False)
+    has_cytoplasmic_fractination = models.BooleanField(default=False)
     # gel types
     has_gel_10 = models.BooleanField(default=True)
     has_gel_12 = models.BooleanField(default=True)

@@ -1,0 +1,60 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+    <div class="scb_ab_s_heading_div">
+        <div class="scb_ab_s_page_title">Western Blot - Lysate Types</div>
+    </div>
+    <form method="post">{% csrf_token %}
+        <div class="scb_ab_s_heading_div">
+            <div class='scb_ab_s_heading_description'><i>Sample Prep</i></div>
+            <br>
+
+            <div class='scb_ab_s_heading_description'>
+                What lysate types are available?
+            </div>
+        </div>
+        <div class='scb_ab_s_form_container'>
+            <div class='scb_ab_s_variable_wrapper'>
+                {{ form.has_whole_cell_lysate }} Whole Cell Lysate
+            </div>
+            <div class='scb_ab_s_variable_wrapper'>
+                {{ form.has_nuclear_fractination }} Nuclear Fractionation
+            </div>
+            <div class='scb_ab_s_variable_wrapper'>
+                {{ form.has_cytoplasmic_fractination }} Cytoplasmic Fractionation
+            </div>
+        </div>
+        <div class="scb_ab_s_heading_div">
+            <div class='scb_ab_s_heading_description'><i>Prepare Gel</i></div>
+            <br>
+
+            <div class='scb_ab_s_heading_description'>
+                What percentages of acrylamide are available?
+            </div>
+        </div>
+        <div class='scb_ab_s_form_container'>
+            <div class='scb_ab_s_variable_wrapper'>
+                {{ form.has_gel_10 }} 10%
+            </div>
+            <div class='scb_ab_s_variable_wrapper'>
+                {{ form.has_gel_12 }} 12%
+            </div>
+            <div class='scb_ab_s_variable_wrapper'>
+                {{ form.has_gel_15 }} 15%
+            </div>
+        </div>
+
+        <input type="submit"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE AND CONTINUE &nbsp; &#9654;">
+        <input type="submit"
+               name="save"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE"/>
+
+    </form>
+    <a href="{% url "common_strain_treatments" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+</a>
+{% endblock %}
