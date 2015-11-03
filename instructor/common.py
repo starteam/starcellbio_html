@@ -286,10 +286,33 @@ def assignments_variables(request):
                               {'form': form,
                                'treatments_created': json.dumps(treatments_created),
                                'assignment_name': assignment.name,
-                               'assignment': assignment,
                                'section_name': 'Experiment Setup'
                               },
                               context_instance=RequestContext(request))
+
+@login_required
+def select_technique(request):
+    assignment_id = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=assignment_id)
+    var_fields = ['has_wb', 'has_fc', 'has_micro']
+    AssignmentForm = modelform_factory(models.Assignment, fields=var_fields)
+
+    if request.method == "POST":
+        form = AssignmentForm(request.POST, instance=assignment)
+        if form.is_valid():
+            form.save()
+            if 'continue' in request.POST:
+                return redirect("common_select_technique")
+
+    form = AssignmentForm(instance=assignment)
+    return render_to_response(
+        'instructor/select_technique.html',
+        {
+            'form': form,
+            'assignment_name': assignment.name,
+            'section_name': 'Select Technique',
+
+        })
 
 
 def assignments_edit_text(request):
@@ -485,6 +508,8 @@ def strain_treatments_edit(request):
             entries = formset.save(commit=False)
             for form in entries:
                 form.save()
+            if 'continue' in request.POST:
+                return redirect("common_select_technique")
 
     formset = STFormSet(
         queryset=models.StrainTreatment.objects.filter(assignment=assignment).order_by(
