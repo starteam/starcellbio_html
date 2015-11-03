@@ -4,13 +4,13 @@
     {% if message %}
         {{ messsage }}
     {% endif %}
-
-<div class='scb_s_experiment_setup_title'>Strains</div>
-<div class='scb_s_experiment_setup_subtitle'>In this section, you will specify the strains and treatments available for experimentation.</div>
+<div class="scb_ab_s_heading_div">
+    <div class="scb_ab_s_page_title">Strains</div>
+    <div class='scb_ab_s_heading_description'>
+        Name the strains available for experimentation.
+    </div>
+</div>
 <br/>
-
-<div class='scb_s_assignment_setup_course_name_heading'>1. Name the strains available for experimentation.</div><br/>
-
 <div>
     <form method="post">{% csrf_token %}
         {{ formset.management_form }}
