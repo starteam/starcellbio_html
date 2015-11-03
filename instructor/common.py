@@ -379,27 +379,14 @@ def assignments_edit_treatments(request):
         input_headers.extend(['Duration', 'Duration Units'])
     else:
         input_headers.extend(['Start Time', 'Duration', 'Time Units'])
-    # If instructor clicked ADD, add extra form
-    drug_extra_form = 0
-    temperature_extra_form = 0
-    collection_extra_form = 0
-    if 'add_drug' in request.POST or models.Drug.objects.filter(assignment=assignment).exists():
-        drug_extra_form = 1
-    if 'add_temperature' in request.POST or models.Temperature.objects.filter(assignment=assignment).exists():
-        temperature_extra_form = 1
-    if 'add_collection' in request.POST or models.CollectionTime.objects.filter(assignment=assignment).exists():
-        collection_extra_form = 1
-
+   
     DrugFormSet = modelformset_factory(models.Drug,
-                                       extra=drug_extra_form,
                                        can_delete=True,
                                        exclude=drug_formset_exclude)
     TemperatureFormSet = modelformset_factory(models.Temperature,
-                                              extra=temperature_extra_form,
                                               can_delete=True,
                                               exclude=['assignment'])
     CollectionTimeFormSet = modelformset_factory(models.CollectionTime,
-                                                 extra=collection_extra_form,
                                                  can_delete=True,
                                                  exclude=['assignment'])
 
@@ -425,6 +412,31 @@ def assignments_edit_treatments(request):
 
         if 'continue' in request.POST:
             return redirect('common_strain_treatments')
+
+     # If instructor clicked ADD, add extra form
+    drug_extra_form = 0
+    temperature_extra_form = 0
+    collection_extra_form = 0
+    if 'add_drug' in request.POST or not models.Drug.objects.filter(assignment=assignment).exists():
+        drug_extra_form = 1
+    if 'add_temperature' in request.POST or not models.Temperature.objects.filter(assignment=assignment).exists():
+        temperature_extra_form = 1
+    if 'add_collection' in request.POST or not models.CollectionTime.objects.filter(assignment=assignment).exists():
+        collection_extra_form = 1
+
+    DrugFormSet = modelformset_factory(models.Drug,
+                                       extra=drug_extra_form,
+                                       can_delete=True,
+                                       exclude=drug_formset_exclude)
+    TemperatureFormSet = modelformset_factory(models.Temperature,
+                                              extra=temperature_extra_form,
+                                              can_delete=True,
+                                              exclude=['assignment'])
+    CollectionTimeFormSet = modelformset_factory(models.CollectionTime,
+                                                 extra=collection_extra_form,
+                                                 can_delete=True,
+                                                 exclude=['assignment'])
+
     drug_formset = DrugFormSet(
         queryset=models.Drug.objects.filter(assignment=assignment),
         prefix='drug')
