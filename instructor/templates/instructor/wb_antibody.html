@@ -1,0 +1,45 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+
+<div class="scb_ab_s_heading_div">
+    <div class="scb_ab_s_page_title">Define Antibodies</div>
+    <div class='scb_ab_s_heading_description'>
+        Name the primary antibodies available and their
+        corresponding secondary antibody.
+    </div>
+</div>
+<br/>
+<div>
+    <form method="post">{% csrf_token %}
+        {{ formset.management_form }}
+        <div class="scb_ab_s_input_headers">
+                <div>Primary Antibody</div>
+                <div>Secondary Antibody</div>
+        </div>
+        {% for form in formset %}
+            <div class="scb_ab_s_form_input_list">
+                <div>{{ forloop.counter }}.</div>
+                <div>{{ form.primary }}</div>
+                <div>{{ form.secondary }}</div>
+                <div>{{ form.id }}</div>
+                <div class="delete_checkbox">{{ form.DELETE }}</div>
+            </div>
+        {% endfor %}
+        <div class="scb_s_strains_list">
+            <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button' value="ADD">
+        </div>
+        <input type="submit"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE AND CONTINUE &nbsp; &#9654;">
+        <input type="submit"
+               name="save"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE"/>
+    </form>
+</div>
+<a href="{% url "western_blot_lysate_type" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+</a>
+{% endblock %}

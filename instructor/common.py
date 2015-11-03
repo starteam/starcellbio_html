@@ -302,7 +302,7 @@ def select_technique(request):
         if form.is_valid():
             form.save()
             if 'continue' in request.POST:
-                return redirect("common_select_technique")
+                return redirect("western_blot_lysate_type")
 
     form = AssignmentForm(instance=assignment)
     return render_to_response(
@@ -572,6 +572,8 @@ def western_blot_lysate_type(request):
         form = WesternBlotForm(request.POST, instance=wb)
         if form.is_valid():
             form.save()
+            if 'continue' in request.POST:
+                return redirect('western_blot_antibody')
     else:
         form = WesternBlotForm(instance=wb)
     return render_to_response(
@@ -583,32 +585,45 @@ def western_blot_lysate_type(request):
         },
         context_instance=RequestContext(request))
 
+@login_required
+def western_blot_antibody(request):
+    pk = request.session['assignment_id']
+    assignment = get_object_or_404(models.Assignment, id=pk)
+    wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
 
-def western_blot_antibody_edit(request, assignment):
-    a = models.Assignment.objects.get(id=assignment)
-    wb, created = models.WesternBlot.objects.get_or_create(assignment=a)
-    wb.save()
-    WesternBlotAntibodyFormset = modelformset_factory(models.WesternBlotAntibody, extra=1, can_delete=True,
-                                                      exclude=['western_blot'])
-    message = ''
+    WesternBlotAntibodyFormset = modelformset_factory(
+        models.WesternBlotAntibody,
+        can_delete=True,
+        exclude=['western_blot']
+    )
     if request.method == "POST":
         formset = WesternBlotAntibodyFormset(request.POST)
-        formset.clean()
         if formset.is_valid():
-            message = "Thank you"
             entries = formset.save(commit=False)
+            for obj in formset.deleted_objects:
+                obj.delete()
             for form in entries:
                 form.western_blot = wb
                 form.save()
-        else:
-            message = "Something went wrong"
-    return render_to_response('instructor/generic_formset.html',
-                              {'formset': WesternBlotAntibodyFormset(
-                                  queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb)),
-                               'message': message,
-                               'assignment': a
-                              },
-                              context_instance=RequestContext(request))
+    extra_fields = 0
+    if 'add' in request.POST or not models.WesternBlotAntibody.objects.filter(western_blot=wb).exists():
+        extra_fields = 1
+    WesternBlotAntibodyFormset = modelformset_factory(
+        models.WesternBlotAntibody,
+        extra=extra_fields,
+        can_delete=True,
+        exclude=['western_blot']
+    )
+    formset = WesternBlotAntibodyFormset(
+        queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb))
+    return render_to_response(
+        'instructor/wb_antibody.html',
+        {
+            'formset': formset,
+            'assignment_name': assignment.name,
+            'section_name': 'Western Blotting'
+        },
+        context_instance=RequestContext(request))
 
 
 def western_blot_antibody_band_edit(request, assignment, antibody, sp):
