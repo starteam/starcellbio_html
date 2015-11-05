@@ -65,8 +65,10 @@
             </a>
         </div>
         <div role="link" class='scb_s_instructor_sidebar_link_heading '>
-            <a class="scb_s_assignment_sidebar_link" href="{% if new == 'False' %}
-        {% url "western_blot_antibody_edit" assignment=assignment.id %}{% endif %}">Edit Western Blot Antibody</a>
+            <a class="scb_s_assignment_sidebar_link"
+               href="{% if not new %}{% url "western_blot_antibody" %}{% endif %}">
+                Western Blot Antibody
+            </a>
         </div>
         {% for ab in assignment.western_blot.antibodies.all %}
             {% for pd in assignment.strain_protocol.all %}
