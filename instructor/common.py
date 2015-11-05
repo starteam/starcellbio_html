@@ -454,8 +454,18 @@ def assignments_edit_treatments(request):
         queryset=models.CollectionTime.objects.filter(assignment=assignment),
         prefix='collection_time')
 
-    time_unit_list = ['sec', 'min', 'hour']
-    concentration_unit_list = ['con', 'con2']
+    time_unit_list = ['sec', 'min', 'hour', 'day']
+    concentration_unit_list = [
+        u'ng\\\u03BCL', #ng/uL
+        u'\u03BCg\\\u03BCL', #ug/uL
+        u'\u03BCg/mL', #ug/mL
+        'mg/mL',
+        'g/L',
+        'nM',
+        u'\u03BCM', #uM
+        'mm',
+        'M'
+    ]
     return render_to_response(
         'instructor/protocols.html',
         {
