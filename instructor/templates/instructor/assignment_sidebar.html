@@ -5,14 +5,16 @@
 
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Assignment</div>
 
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "assignment" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class='scb_s_assignment_sidebar_link'
                href="{% if new %}{% url "common_assignment_setup" %}
                {% else %}{% url "common_assignment_modify" %}{% endif %}">
                  Assignment setup
             </a>
         </div>
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "course" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class='scb_s_assignment_sidebar_link'
                href="{% if new %}{% url "common_course_setup" %}
                {% else %}{% url "common_course_modify" %}{% endif %}">
@@ -21,27 +23,31 @@
         </div>
 
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Experiment Setup</div>
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "strains" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class="scb_s_assignment_sidebar_link"
                href="{% if not new %}{% url "common_assignments_edit_strains" %}{% endif %}">
                 Strains
             </a>
         </div>
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "variables" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class='scb_s_assignment_sidebar_link'
                href="{% if not new %}{% url "common_assignments_variables" %}{% endif %}">
                 Select variables
             </a>
         </div>
 
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+        {% if page_name == "treatments" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class="scb_s_assignment_sidebar_link"
                href="{% if not new %}{% url "common_assignments_edit_treatments" %}{% endif %}">
                 Define variables
             </a>
         </div>
 
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "protocols" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class="scb_s_assignment_sidebar_link"
                href="{% if not new %}{% url "common_strain_treatments" %}{% endif %}">
                 Protocols
@@ -49,7 +55,8 @@
         </div>
 
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Experimental Techniques</div>
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "techniques" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class="scb_s_assignment_sidebar_link"
                href="{% if not new %}{% url "common_select_technique" %}{% endif %}">
                 Select Technique
@@ -58,20 +65,23 @@
 
         <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Western Blotting</div>
 
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "wb_lysate_type" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class="scb_s_assignment_sidebar_link"
                href="{% if not new %}{% url "western_blot_lysate_type" %}{% endif %}">
                 Western Blot Lysate Type
             </a>
         </div>
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "wb_antibody" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class="scb_s_assignment_sidebar_link"
                href="{% if not new %}{% url "western_blot_antibody" %}{% endif %}">
                 Western Blot Antibody
             </a>
         </div>
 
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "wb_band_size" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class="scb_s_assignment_sidebar_link"
                href="{% if not new %}{% url "western_blot_band_size" %}{% endif %}">
                 Western Blot Band Sizes
