@@ -27,7 +27,7 @@
         <form method="post">{% csrf_token %}
             {{ formset.management_form }}
 
-            <div class="scb_ab_s_row">
+            <div class="scb_ab_s_row scb_ab_s_col_width">
                 <div class="scb_ab_s_enable_sample">Select</div>
             {% for header in headers %}
                 <div>{{ header }}</div>
@@ -35,7 +35,7 @@
             </div>
 
             {% for form in formset %}
-                <div class="scb_ab_s_row">
+                <div class="scb_ab_s_row scb_ab_s_col_width">
                     <div class="scb_ab_s_enable_sample">{{ form.enabled }}</div>
                     <div>{{ form.instance.strain }}</div>
                     <div>{{ form.instance.treatment.drug.name }}</div>

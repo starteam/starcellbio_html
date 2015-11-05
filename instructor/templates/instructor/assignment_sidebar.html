@@ -70,16 +70,14 @@
                 Western Blot Antibody
             </a>
         </div>
-        {% for ab in assignment.western_blot.antibodies.all %}
-            {% for pd in assignment.strain_protocol.all %}
-                {% if pd.enabled %}
-                    <br>&nbsp; &nbsp;
-                    <a href="{% url "common_western_blot_antibody_bands_edit" assignment=assignment.id antibody=ab.id sp=pd.id %}">
-                        {{ pd.strain.name }}/{{ pd.protocol.name }}
-                        - {{ ab.primary }}/{{ ab.secondary }}</a>
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
+
+        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+            <a class="scb_s_assignment_sidebar_link"
+               href="{% if not new %}{% url "western_blot_band_size" %}{% endif %}">
+                Western Blot Band Sizes
+            </a>
+        </div>
+
 
         <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Microscopy</div>
 

@@ -128,18 +128,20 @@ class WesternBlotAntibody(models.Model):
     western_blot = models.ForeignKey(WesternBlot, related_name='antibodies')
     primary = models.CharField(max_length=50)
     secondary = models.CharField(max_length=50)
+    wc_weight = models.CharField(max_length=50, default="0")
+    nuc_weight = models.CharField(max_length=50, default="0")
+    cyto_weight = models.CharField(max_length=50, default="0")
 
 
-class WesternBlotAntibodyBands(models.Model):
+LYSATE_TYPES = (('wc', 'Whole Cell'), ('nuc', 'Nuclear'), ('cyto', 'Cytoplasmic'))
+
+
+class WesternBlotBands(models.Model):
     antibody = models.ForeignKey(WesternBlotAntibody, related_name='bands')
     strain_protocol = models.ForeignKey(StrainTreatment, related_name='bands')
-    wcl_weight = models.FloatField(default=0.00)
-    wcl_intensity = models.FloatField(default=0.00)
-    nuc_weight = models.FloatField(default=0.00)
-    nuc_intensity = models.FloatField(default=0.00)
-    cyto_weight = models.FloatField(default=0.00)
-    cyto_intensity = models.FloatField(default=0.00)
-    is_background = models.BooleanField(default=False)
+    intensity = models.FloatField(default=0.0)
+    weight = models.FloatField(default=0.0)
+    lysate_type = models.CharField(max_length=50, choices=LYSATE_TYPES)
 
 
 class MicroscopySamplePrep(models.Model):
@@ -208,8 +210,7 @@ admin.site.register(StrainTreatment)
 admin.site.register(Treatment)
 admin.site.register(WesternBlot)
 admin.site.register(WesternBlotAntibody)
-admin.site.register(WesternBlotAntibodyBands)
-
+admin.site.register(WesternBlotBands)
 
 
 
