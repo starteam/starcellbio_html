@@ -236,13 +236,16 @@ select:disabled {
 
 .scb_ab_s_row{
     position: relative;
+
 }
 
 .scb_ab_s_row>div{
     display:inline-block;
     font-weight: bold;
-    width: 100px;
     text-align: center;
+}
+.scb_ab_s_col_width>div{
+    width: 100px;
 }
 .scb_ab_s_row>div.scb_ab_s_enable_sample{
     width: 50px;
@@ -282,5 +285,28 @@ select:disabled {
 	color: #316f94;
 	padding-top: 5px;
 }
+/* Protein size input */
+div.scb_ab_s_antibody_name{
+    text-align: left;
+    width: 155px;
+    font-family: 'sourcesanspro-semibold';
 
+}
+.scb_ab_s_protein_sizes_header{
+    width: 271px;
+    font-family: 'sourcesanspro-semibold';
+
+
+}
+.scb_ab_s_lysate_type_header{
+    display: inline-block;
+    width: 86px;
+}
+.vertical_align_top{
+    vertical-align: top;
+}
+.scb_ab_s_protein_size_input>input{
+   margin: 5px 0 0 5px;
+   width: 68px;
+}
 

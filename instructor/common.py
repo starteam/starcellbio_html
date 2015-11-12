@@ -602,11 +602,11 @@ def western_blot_antibody(request):
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
-
+    exclude_fields = ['western_blot', 'wc_weight', 'nuc_weight', 'cyto_weight']
     WesternBlotAntibodyFormset = modelformset_factory(
         models.WesternBlotAntibody,
         can_delete=True,
-        exclude=['western_blot']
+        exclude=exclude_fields
     )
     if request.method == "POST":
         formset = WesternBlotAntibodyFormset(request.POST)
@@ -617,6 +617,8 @@ def western_blot_antibody(request):
             for form in entries:
                 form.western_blot = wb
                 form.save()
+            if 'continue' in request.POST:
+                return redirect('western_blot_band_size')
     extra_fields = 0
     if 'add' in request.POST or not models.WesternBlotAntibody.objects.filter(western_blot=wb).exists():
         extra_fields = 1
@@ -624,7 +626,7 @@ def western_blot_antibody(request):
         models.WesternBlotAntibody,
         extra=extra_fields,
         can_delete=True,
-        exclude=['western_blot']
+        exclude=exclude_fields
     )
     formset = WesternBlotAntibodyFormset(
         queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb))
@@ -637,40 +639,33 @@ def western_blot_antibody(request):
         },
         context_instance=RequestContext(request))
 
+@login_required
+def western_blot_band_size(request):
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
+    wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
 
-def western_blot_antibody_band_edit(request, assignment, antibody, sp):
-    a = models.Assignment.objects.get(id=assignment)
-
-    wb, created = models.WesternBlot.objects.get_or_create(assignment=a)
-    wb.save()
-
-    protocol, created = models.StrainProtocol.objects.get_or_create(id=sp)
-    protocol.save()
-
-    ab = models.WesternBlotAntibody.objects.get(id=antibody)
-    WesternBlotAntibodyBandFormset = modelformset_factory(models.WesternBlotAntibodyBands, extra=1, can_delete=True,
-                                                          exclude=['antibody', 'strain_protocol'])
-    message = ''
+    AntibodiesFormset = modelformset_factory(
+        models.WesternBlotAntibody,
+        extra=0,
+        exclude=['primary', 'secondary', 'western_blot']
+    )
     if request.method == "POST":
-        formset = WesternBlotAntibodyBandFormset(request.POST)
-        formset.clean()
+        formset = AntibodiesFormset(request.POST)
         if formset.is_valid():
-            message = "Thank you"
             entries = formset.save(commit=False)
             for form in entries:
-                form.antibody = ab
-                form.strain_protocol = protocol
                 form.save()
-        else:
-            message = "Something went wrong"
-    return render_to_response('instructor/generic_formset.html',
-                              {'formset': WesternBlotAntibodyBandFormset(
-                                  queryset=models.WesternBlotAntibodyBands.objects.filter(antibody=ab,
-                                                                                          strain_protocol=protocol)),
-                               'message': message,
-                               'assignment': a
-                              },
-                              context_instance=RequestContext(request))
+    formset = AntibodiesFormset(queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb))
+    return render_to_response(
+        'instructor/wb_band_size.html',
+        {
+            'formset': formset,
+            'assignment_name': assignment.name,
+            'section_name': 'Western Blotting'
+        },
+        context_instance=RequestContext(request))
+
 
 
 def microscopy_sample_prep(request, assignment):
