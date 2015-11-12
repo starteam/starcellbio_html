@@ -163,6 +163,44 @@ $(function(){
     $("#id_has_nuclear_fractination").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
     $("#id_has_cytoplasmic_fractination").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
 
+    /**
+     * Western Blotting: band intensity
+     */
+    $(".intensity_slider").each(function(){
+        var intensity=$($(this).siblings('input')[0]).attr('value');
+        var $intensity_text=$($(this).parent().siblings('.scb_ab_s_intensity_text'));
+        $intensity_text.text(intensity_text(intensity));
+        $(this).slider({
+          min: 0,
+          max: 2,
+          range: "min",
+          value: intensity,
+          step: 0.5,
+          slide: function( event, ui ) {
+              $(this).siblings()[0].value=ui.value;
+              $intensity_text.text(intensity_text(ui.value));
+
+          }
+        });
+
+    });
+    function intensity_text(num){
+        if(num<0.25){
+            return '';
+        }else if(num<0.75){
+            return "low";
+        }else if(num<1.25){
+            return 'med';
+        }else if(num<1.75){
+            return 'high';
+        }else{
+            return 'extra high';
+        }
+    }
+
+
+
+
 });
 
 
