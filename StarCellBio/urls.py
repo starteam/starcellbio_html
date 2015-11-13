@@ -114,6 +114,8 @@ urlpatterns += patterns(
         name="western_blot_antibody"),
     url(r'^ab/assignments/wb_band_size/$', instructor_common.western_blot_band_size,
         name="western_blot_band_size"),
+    url(r'^ab/assignments/wb_band_intensity/$', instructor_common.western_blot_band_intensity,
+        name="western_blot_band_intensity"),
 
     # Microscopy
     url(r'^ab/assignments/microscopy_sample_prep/(?P<assignment>.+)$', instructor_common.microscopy_sample_prep,
