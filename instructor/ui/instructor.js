@@ -1,6 +1,8 @@
 
 $(function(){
-
+    $('.scb_ab_s_sidebar_page_name_selected').append(
+        "<img role='presentation' class='scb_s_selection_arrow_img' " +
+            "src='../../../images/homepage/selection_arrow.png' >");
     $('.scb_s_dashboard_table_row').hover(function(){
 	    $('.scb_s_dashboard_link', this).toggle();
     });

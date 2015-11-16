@@ -97,7 +97,8 @@ def assignment_setup(request):
                                   'assignment_name': assignment_name,
                                   'based_on': request.session['based_on'],
                                   'new': request.session['new'],
-                                  'section_name': 'Assignment Setup'
+                                  'section_name': 'Assignment',
+                                  'page_name': 'assignment'
                               },
                               context_instance=RequestContext(request))
 
@@ -139,7 +140,8 @@ def course_setup(request):
                                   'course_selected': course_selected,
                                   'new': request.session['new'],
                                   'assignment_name': request.session['assignment_name'],
-                                  'section_name': 'Assignment Setup'
+                                  'section_name': 'Assignment',
+                                  'page_name': 'course'
                               },
                               context_instance=RequestContext(request))
 
@@ -200,7 +202,8 @@ def assignment_modify(request):
                                'based_on': request.session['based_on'],
                                'new': request.session['new'],
                                'assignment_name': assignment.name,
-                               'section_name': 'Assignment Setup'
+                               'section_name': 'Assignment',
+                               'page_name': 'assignment'
                               },
                               context_instance=RequestContext(request))
 
@@ -245,7 +248,8 @@ def course_modify(request):
                                   'course_selected': course_selected,
                                   'new': request.session['new'],
                                   'assignment_name': assignment.name,
-                                  'section_name': 'Assignment Setup'
+                                  'section_name': 'Assignment',
+                                  'page_name': 'course'
                               },
                               context_instance=RequestContext(request))
 
@@ -286,7 +290,8 @@ def assignments_variables(request):
                               {'form': form,
                                'treatments_created': json.dumps(treatments_created),
                                'assignment_name': assignment.name,
-                               'section_name': 'Experiment Setup'
+                               'section_name': 'Experiment Setup',
+                               'page_name': 'variables'
                               },
                               context_instance=RequestContext(request))
 
@@ -311,6 +316,7 @@ def select_technique(request):
             'form': form,
             'assignment_name': assignment.name,
             'section_name': 'Select Technique',
+            'page_name': 'techniques'
 
         })
 
@@ -349,7 +355,8 @@ def assignments_edit_strains(request):
                               {'formset': formset,
                                'new':  request.session['new'],
                                'assignment_name': assignment.name,
-                               'section_name': 'Experiment Setup'
+                               'section_name': 'Experiment Setup',
+                               'page_name': 'strains'
                               },
                               context_instance=RequestContext(request))
 
@@ -461,7 +468,8 @@ def assignments_edit_treatments(request):
             'has_temperature': assignment.has_temperature,
             'has_collection': assignment.has_collection_time,
             'assignment_name': assignment.name,
-            'section_name': 'Experiment Setup'
+            'section_name': 'Experiment Setup',
+            'page_name': 'treatments'
         },
         context_instance=RequestContext(request)
     )
@@ -515,7 +523,8 @@ def strain_treatments_edit(request):
                                'has_start_time': assignment.has_start_time,
                                'has_duration': assignment.has_duration,
                                'has_collection_time': assignment.has_collection_time,
-                               'section_name': 'Experiment Setup'
+                               'section_name': 'Experiment Setup',
+                               'page_name': 'protocols'
                               },
                               context_instance=RequestContext(request))
 
@@ -574,7 +583,7 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
             strain_treatment, created = models.StrainTreatment.objects.get_or_create(
                 strain=s, treatment=t, assignment=assignment)
 
-
+@login_required
 def western_blot_lysate_type(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
@@ -593,7 +602,8 @@ def western_blot_lysate_type(request):
         {
             'form': form,
             'assignment_name': assignment.name,
-            'section_name': 'Western Blotting'
+            'section_name': 'Western Blotting',
+            'page_name': 'wb_lysate_type'
         },
         context_instance=RequestContext(request))
 
@@ -635,7 +645,8 @@ def western_blot_antibody(request):
         {
             'formset': formset,
             'assignment_name': assignment.name,
-            'section_name': 'Western Blotting'
+            'section_name': 'Western Blotting',
+            'page_name': 'wb_antibody'
         },
         context_instance=RequestContext(request))
 
@@ -664,7 +675,8 @@ def western_blot_band_size(request):
         {
             'formset': formset,
             'assignment_name': assignment.name,
-            'section_name': 'Western Blotting'
+            'section_name': 'Western Blotting',
+            'page_name': 'wb_band_size'
         },
         context_instance=RequestContext(request))
 
