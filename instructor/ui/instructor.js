@@ -165,6 +165,20 @@ $(function(){
     $("#id_has_nuclear_fractination").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
     $("#id_has_cytoplasmic_fractination").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
 
+    $('.acrylamide_input_checkbox>input').click(function(){
+        var $checkbox=$(this);
+        if($(".acrylamide_input_checkbox>input:checkbox:checked").length<1){
+            $('body').prepend("<div class='error_overlay' role='presentation'></div>");
+            $.jqDialog.alert("You must select at least one percentage of acrylamide to continue.",
+                function () {
+                    $('.error_overlay').remove();
+                     $checkbox.prop('checked', true);
+                }
+            );
+            $('.jqDialog_header').remove();
+            $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Warning</h1>");
+        }
+    });
     /**
      * Western Blotting: band intensity
      */
