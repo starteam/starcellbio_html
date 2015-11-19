@@ -672,11 +672,34 @@ def western_blot_band_size(request):
         exclude=['primary', 'secondary', 'western_blot']
     )
     if request.method == "POST":
+        weights_by_type = ['wc_weight', 'nuc_weight', 'cyto_weight']
         formset = AntibodiesFormset(request.POST)
         if formset.is_valid():
-            entries = formset.save(commit=False)
-            for form in entries:
-                form.save()
+            antibodies = formset.save(commit=False)
+            strain_treatments = models.StrainTreatment.objects.filter(assignment=assignment)
+            for antibody in antibodies:
+                for index, field in enumerate(weights_by_type):
+                    weight_str = getattr(antibody, field)
+                    weights = [float(s) for s in weight_str.split(',')
+                               if is_float(s) and float(s) >= 0]
+                    if antibody.id:
+                        bands = models.WesternBlotBands.objects.filter(
+                            antibody__id=antibody.id,
+                            lysate_type=field.split('_')[0])
+                        for band in bands:
+                            #delete bands that that are not in the string anymore
+                            if band.weight not in weights:
+                                models.WesternBlotBands.objects.filter(id=band.id).delete()
+                    # create new bands
+                    for weight in weights:
+                        for strain_treatment in strain_treatments:
+                            models.WesternBlotBands.objects.get_or_create(
+                                strain_protocol=strain_treatment,
+                                antibody=antibody,
+                                weight=weight,
+                                lysate_type=field.split('_')[0]
+                            )
+                antibody.save()
             if 'continue' in request.POST:
                 return redirect('western_blot_band_intensity')
     formset = AntibodiesFormset(queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb))
@@ -708,23 +731,6 @@ def western_blot_band_intensity(request):
         extra=0,
         exclude=['strain_protocol', 'antibody', 'weight', 'lysate_type']
     )
-    # Create Bands
-    antibodies = models.WesternBlotAntibody.objects.filter(western_blot=wb)
-    strain_treatments = models.StrainTreatment.objects.filter(assignment=assignment)
-    weights_by_type = ['wc_weight', 'nuc_weight', 'cyto_weight']
-    for antibody in antibodies:
-        for strain_treatment in strain_treatments:
-            for index, field in enumerate(weights_by_type):
-                weight_str = getattr(antibody, field)
-                weights = [float(s) for s in weight_str.split(',')
-                           if is_float(s) and float(s) >= 0]
-                for weight in weights:
-                    models.WesternBlotBands.objects.get_or_create(
-                        strain_protocol=strain_treatment,
-                        antibody=antibody,
-                        weight=weight,
-                        lysate_type=field.split('_')[0]
-                    )
     if request.method == 'POST':
         formset = BandsFormset(request.POST)
         if formset.is_valid():
@@ -732,8 +738,10 @@ def western_blot_band_intensity(request):
             for entry in entries:
                 entry.save()
     else:
-        formset = BandsFormset(queryset=models.WesternBlotBands.objects.filter(antibody__western_blot=wb))
+        formset = BandsFormset(queryset=models.WesternBlotBands.objects.filter(
+            antibody__western_blot=wb).order_by('strain_protocol', '-lysate_type'))
 
+    antibodies = models.WesternBlotAntibody.objects.filter(western_blot=wb)
     formset_group = []
     for antibody in antibodies:
         form_list = [form for form in formset
