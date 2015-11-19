@@ -128,9 +128,9 @@ class WesternBlotAntibody(models.Model):
     western_blot = models.ForeignKey(WesternBlot, related_name='antibodies')
     primary = models.CharField(max_length=50)
     secondary = models.CharField(max_length=50)
-    wc_weight = models.CharField(max_length=50, default="0")
-    nuc_weight = models.CharField(max_length=50, default="0")
-    cyto_weight = models.CharField(max_length=50, default="0")
+    wc_weight = models.CharField(max_length=50, default="", blank=True)
+    nuc_weight = models.CharField(max_length=50, default="", blank=True)
+    cyto_weight = models.CharField(max_length=50, default="", blank=True)
 
 
 LYSATE_TYPES = (('wc', 'Whole Cell'), ('nuc', 'Nuclear'), ('cyto', 'Cytoplasmic'))
