@@ -168,37 +168,43 @@ select:disabled {
     margin:20px 0 0 58px;
 }
 
-/* Input headers */
+/* Input headers  in Define variable */
 .scb_ab_s_input_headers{
     position: relative;
-    left: 58px;
+    left: 29px;
     margin-top:20px;
 }
 .scb_ab_s_input_headers>div{
-    width: 155px;
+    width: 144px;
     display: inline-block;
     font-weight: bold;
     font-size: 14px ;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_small_header{
-    width: 79px;
+    width: 70px;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_med_header{
-    width: 129px;
+    width: 130px;
 }
-/* Form inputs */
+.scb_ab_s_input_headers>div.scb_ab_s_units_input_header{
+    width:97px;
+}
+/* Form inputs  in Define variables*/
 .scb_ab_s_form_input_list{
     position: relative;
-    left: 30px;
+    left: 10px;
 }
 .scb_ab_s_form_input_list>div{
     display: inline-block;
 }
 .scb_ab_s_form_input_list>div>input{
-    margin: 5px 0 0 15px;
+    margin: 5px 0 0 5px;
 }
 .scb_ab_s_small_input_box>input{
     width: 50px;
+}
+.scb_ab_s_units_input>input{
+    width: 80px;
 }
 .scb_ab_s_med_input_box>input{
     width: 100px;
@@ -224,9 +230,7 @@ select:disabled {
     color: grey;
 }
 
-.concentration_unit_box>input, .drug_time_unit_box>input, .collection_time_unit_box>input{
-    width:50px;
-}
+
 .scb_ab_s_hide_variable{
     display:none;
 }
