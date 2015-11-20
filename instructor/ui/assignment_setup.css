@@ -307,7 +307,7 @@ div.scb_ab_s_antibody_name{
     font-family: 'sourcesanspro-semibold';
 
 }
-.scb_ab_s_protein_sizes_header{
+.scb_ab_s_protein_sizes_div{
     width: 271px;
     font-family: 'sourcesanspro-semibold';
 }
@@ -317,6 +317,10 @@ div.scb_ab_s_antibody_name{
 }
 .vertical_align_top{
     vertical-align: top;
+}
+.scb_ab_s_protein_size_input{
+    display: inline-block;
+    text-align: center;
 }
 .scb_ab_s_protein_size_input>input {
     margin: 5px 0 0 5px;

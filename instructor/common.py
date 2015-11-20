@@ -665,11 +665,21 @@ def western_blot_band_size(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
-
+    exclude_fields = ['primary', 'secondary', 'western_blot']
+    lysate_types = {
+        'has_whole_cell_lysate': 'wc_weight',
+        'has_nuclear_fractination': 'nuc_weight',
+        'has_cytoplasmic_fractination': 'cyto_weight'
+    }
+    types_selected = {}
+    for wb_field, antibody_field in lysate_types.items():
+        types_selected[wb_field] = getattr(wb, wb_field)
+        if not getattr(wb, wb_field):
+            exclude_fields.append(antibody_field)
     AntibodiesFormset = modelformset_factory(
         models.WesternBlotAntibody,
         extra=0,
-        exclude=['primary', 'secondary', 'western_blot']
+        exclude=exclude_fields
     )
     if request.method == "POST":
         formset = AntibodiesFormset(request.POST)
@@ -684,6 +694,7 @@ def western_blot_band_size(request):
         'instructor/wb_band_size.html',
         {
             'formset': formset,
+            'types_selected': types_selected,
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_band_size'
