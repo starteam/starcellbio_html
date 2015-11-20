@@ -601,12 +601,16 @@ def western_blot_lysate_type(request):
     WesternBlotForm = modelform_factory(models.WesternBlot, exclude=['assignment'])
     if request.method == "POST":
         form = WesternBlotForm(request.POST, instance=wb)
+        field_names = ['has_gel_10', 'has_gel_12', 'has_gel_15']
         if form.is_valid():
-            form.save()
+            form.save(commit=False)
+            # if any percentage is selected
+            if any(getattr(wb, field) for field in field_names):
+                form.save()
             if 'continue' in request.POST:
                 return redirect('western_blot_antibody')
-    else:
-        form = WesternBlotForm(instance=wb)
+    wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
+    form = WesternBlotForm(instance=wb)
     return render_to_response(
         'instructor/wb_lysate_type.html',
         {
