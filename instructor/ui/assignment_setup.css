@@ -246,6 +246,7 @@ select:disabled {
     display:inline-block;
     font-weight: bold;
     text-align: center;
+    vertical-align: top;
 }
 .scb_ab_s_col_width>div{
     width: 100px;
@@ -328,8 +329,11 @@ div.scb_ab_s_antibody_name{
 }
 /* Band intensity*/
 .scb_ab_s_row>.scb_ab_s_col_width_sample{
-    width: 200px;
+    width: 240px;
     text-align: left;
+}
+.scb_ab_s_row>.scb_ab_s_col_width_number{
+    width: 15px;
 }
 .scb_ab_s_col_width_type_size{
     width: 80px;
@@ -340,6 +344,9 @@ div.scb_ab_s_antibody_name{
 }
 .scb_ab_s_col_width_intensity{
     width: 150px;
+}
+.scb_ab_s_intensity_text{
+    width: 30px;
 }
 .intensity_slider {
     border-radius: 7px;
@@ -375,6 +382,17 @@ div.scb_ab_s_antibody_name{
     max-width: 425px;
 }
 
+/* Sample text wrapper with ellipsis */
 
-
+div.block-ellipsis {
+  display: -webkit-box;
+  max-width: 100%;
+  height: 35px;
+  margin: 0 auto;
+  font-size: 14px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 

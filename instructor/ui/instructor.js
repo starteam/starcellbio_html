@@ -228,6 +228,10 @@ $(function(){
 
         }
     }
+    $('.block-ellipsis').each(function(){
+        var text= $(this).text().replace(/\s\s+/g, ' ');
+        $($(this).parent()).prop('title',text);
+    })
 
 });
 

@@ -22,14 +22,17 @@
 
                 <div class="scb_ab_s_row">
                     <div class="scb_ab_s_col_width_sample">Sample</div>
+                    <div class="scb_ab_s_col_width_number"></div>
                     <div class="scb_ab_s_col_width_type_size">Lysate Type</div>
                     <div class="scb_ab_s_col_width_type_size">Size(kDa)</div>
                     <div class="scb_ab_s_col_width_intensity">Relative Band Intensity</div>
                 </div>
+                <br>
                 {% for form in form_list %}
-                <div class="scb_ab_s_row">
+                <div class="scb_ab_s_row vertical_align_top" style="padding-bottom: 5px">
+                    <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
                     <div class="scb_ab_s_col_width_sample">
-                        {{ forloop.counter }}.
+                        <div class="block-ellipsis">
                         {{ form.instance.strain_protocol.strain.name }},
                         {{ form.instance.strain_protocol.treatment.drug.name }}{% if variables.has_concentration %},
                             {{ form.instance.strain_protocol.treatment.drug.concentration }}
@@ -42,6 +45,9 @@
                             {{ form.instance.strain_protocol.treatment.collection_time.time }}
                             {{ form.instance.strain_protocol.treatment.collection_time.units }}
                         {% endif %}
+                        </div>
+
+
                     </div>
                     <div class="scb_ab_s_col_width_type_size">
                         {% if form.instance.lysate_type == 'wc' %} WCL
