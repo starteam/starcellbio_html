@@ -371,6 +371,10 @@ div.scb_ab_s_antibody_name{
     margin: 15px 0 5px 0;
 }
 
+#jqDialog_box{
+    max-width: 425px;
+}
+
 
 
 

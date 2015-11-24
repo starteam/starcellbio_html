@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
 import json
+import re
 
 @login_required
 def courses(request):
@@ -669,6 +670,12 @@ def western_blot_band_size(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
+    error = ''
+    message = "You have entered non-numerical values, " \
+              "including negative numbers, text inputs and/or symbols, " \
+              "in the band size input boxes. The band size input boxes must " \
+              "only contain numerical values."
+    
     exclude_fields = ['primary', 'secondary', 'western_blot']
     lysate_types = {
         'has_whole_cell_lysate': 'wc_weight',
@@ -680,6 +687,7 @@ def western_blot_band_size(request):
         types_selected[wb_field] = getattr(wb, wb_field)
         if not getattr(wb, wb_field):
             exclude_fields.append(antibody_field)
+
     AntibodiesFormset = modelformset_factory(
         models.WesternBlotAntibody,
         extra=0,
@@ -694,6 +702,8 @@ def western_blot_band_size(request):
             for antibody in antibodies:
                 for index, field in enumerate(weights_by_type):
                     weight_str = getattr(antibody, field)
+                    error = message if re.search(r'[a-zA-Z-]+', weight_str) else error
+
                     weights = [float(s) for s in weight_str.split(',')
                                if is_float(s) and float(s) >= 0]
                     if antibody.id:
@@ -723,6 +733,7 @@ def western_blot_band_size(request):
             'formset': formset,
             'types_selected': types_selected,
             'assignment_name': assignment.name,
+            'error': json.dumps(error),
             'section_name': 'Western Blotting',
             'page_name': 'wb_band_size'
         },

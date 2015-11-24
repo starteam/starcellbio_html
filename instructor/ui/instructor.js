@@ -214,8 +214,20 @@ $(function(){
         }
     }
 
+    if($('.scb_ab_s_protein_size_input').length>0){
+        if(error !== ''){
+            $('body').prepend("<div class='error_overlay' role='presentation'></div>");
+            $.jqDialog.alert(error,
+                function () {
+                    $('.error_overlay').remove();
+                }
+            );
+            $('#jqDialog_box').attr('role', 'alertdialog');
+            $('.jqDialog_header').remove();
+            $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Warning</h1>");
 
-
+        }
+    }
 
 });
 
