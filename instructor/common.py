@@ -457,8 +457,8 @@ def assignments_edit_treatments(request):
 
     time_unit_list = ['sec', 'min', 'hour', 'day']
     concentration_unit_list = [
-        u'ng\\\u03BCL', #ng/uL
-        u'\u03BCg\\\u03BCL', #ug/uL
+        u'ng/\u03BCL', #ng/uL
+        u'\u03BCg/\u03BCL', #ug/uL
         u'\u03BCg/mL', #ug/mL
         'mg/mL',
         'g/L',
