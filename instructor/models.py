@@ -139,7 +139,7 @@ LYSATE_TYPES = (('wc', 'Whole Cell'), ('nuc', 'Nuclear'), ('cyto', 'Cytoplasmic'
 class WesternBlotBands(models.Model):
     antibody = models.ForeignKey(WesternBlotAntibody, related_name='bands')
     strain_protocol = models.ForeignKey(StrainTreatment, related_name='bands')
-    intensity = models.FloatField(default=0.0)
+    intensity = models.FloatField(default=1.0)
     weight = models.FloatField(default=0.0)
     lysate_type = models.CharField(max_length=50, choices=LYSATE_TYPES)
 
