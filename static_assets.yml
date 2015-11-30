@@ -31,7 +31,6 @@ javascripts:
   - model/Assignments.js
   - ui/gen/userguide.soy.js
   - assignments/microscopy_usability/gen/instructions.soy.js
-  - assignments/scb_ex/gen/addmultipledialog2.soy.js
   - model/WesternBlot.js
   - instructor/gen/instructor_assignment_setup.soy.js
   - ui/gen/western_blot.soy.js

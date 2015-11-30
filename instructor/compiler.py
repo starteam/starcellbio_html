@@ -333,27 +333,10 @@ def primary_anti_body(assignment):
     for a in western_blot.antibodies.all():
         pk = 'AB_{}'.format(a.id)
         order[pk] = 1
-        marks = []
-        for band in a.bands.all():
-            if western_blot.has_whole_cell_lysate:
-                marks.append({
-                    'weight': band.weight,
-                    'intensity': 0
-                })
-            if western_blot.has_cytoplasmic_fractination:
-                marks.append({
-                    'weight': band.weight,
-                    'intensity': 0
-                })
-            if western_blot.has_nuclear_fractination:
-                marks.append({
-                    'weight': band.weight,
-                    'intensity': 0
-                })
+
         ret[pk] = {
             'name': a.primary,
             'secondary': primary[a.primary],
-            'marks': marks,
             'gel_name': a.primary
         }
     ret['order'] = order.keys()
@@ -363,9 +346,8 @@ def primary_anti_body(assignment):
 def drugs(assignment):
     ret = {}
     for strain_protocol in assignment.strain_treatment.filter(enabled=True):
-        treatment = strain_protocol.treatment
-        tr = treatment.drug.name
-        ret[str(tr)] = {'name': str(tr)}
+        drug = strain_protocol.treatment.drug
+        ret[str(drug.id)] = {'name': str(drug.name)}
     return ret
 
 
@@ -373,10 +355,10 @@ def concentrations(assignment):
     ret = {}
     for strain_protocol in assignment.strain_treatment.filter(enabled=True):
         treatment = strain_protocol.treatment
-        tr = treatment.drug.concentration
-        ret[str(tr)] = {
-            'name': str(tr),
-            'value': tr
+        concentration = treatment.drug.concentration
+        ret[concentration] = {
+            'name': concentration,
+            'value': concentration
         }
     return ret
 
@@ -385,10 +367,9 @@ def experiment_temperatures(assignment):
     ret = {}
     for strain_protocol in assignment.strain_treatment.filter(enabled=True):
         treatment = strain_protocol.treatment
-        t = treatment.temperature
-        tr = t.degrees
-        ret[str(t.id)] = {
-            'name': str(tr)
+        temperature = treatment.temperature
+        ret[str(temperature.id)] = {
+            'name': str(temperature.degrees)
         }
     return ret
 
