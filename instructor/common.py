@@ -765,7 +765,13 @@ def western_blot_band_intensity(request):
                 entry.save()
     else:
         formset = BandsFormset(queryset=models.WesternBlotBands.objects.filter(
-            antibody__western_blot=wb).order_by('strain_protocol', '-lysate_type'))
+            antibody__western_blot=wb).order_by(
+            'strain_protocol__strain',
+            'strain_protocol__treatment__drug__name',
+            'strain_protocol__treatment__temperature__degrees',
+            'strain_protocol__treatment__collection_time__time',
+            '-lysate_type'))
+
 
     antibodies = models.WesternBlotAntibody.objects.filter(western_blot=wb)
     formset_group = []
