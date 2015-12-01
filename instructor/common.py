@@ -43,13 +43,21 @@ def course_delete(request, pk):
 
     return redirect('common_course')
 
-
+@login_required
 def assignments(request):
     assignments = models.Assignment.objects.filter()
 
     return render_to_response('instructor/assignments.html',
                               {'assignments': assignments},
                               context_instance=RequestContext(request))
+@login_required
+def publish_assignment(request, assignment_pk):
+    assignment = get_object_or_404(models.Assignment, pk=assignment_pk)
+    if assignment.access == 'private':
+        assignment.access = 'public'
+        assignment.save()
+    return redirect('common_assignments')
+
 
 @login_required
 def assignment_delete(request, pk):

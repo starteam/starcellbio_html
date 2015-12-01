@@ -12,22 +12,19 @@
             <table class="scb_s_dashboard_table " aria-label="Table of Samples" role="grid">
                 <thead class="scb_s_dashboard_table_head">
                 <tr>
-                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_assignment_name ">
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_names_width ">
                         Assignment Name
                     </td>
-                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_assignment_name ">
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_names_width ">
                         Course Name
                     </td>
-                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_assignment_name ">
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_names_width ">
                         Course Code
                     </td>
-                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_course_name ">
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_access_width ">
                         Access
                     </td>
-                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_course_name ">
-                        Based On
-                    </td>
-                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_actions " colspan="3">
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_ab_s_dashboard_no_right_border" colspan="4">
                         Actions
                     </td>
                 </tr>
@@ -37,10 +34,6 @@
                     <tr class="scb_s_dashboard_table_row" role="row" aria-label="Sample">
                         <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
                             {{ a.name }}<br>
-                            <a class='scb_s_dashboard_link'
-                               href="{% url "common_assignments_edit" assignment_pk=a.id %}">Edit</a>
-                            <a class='scb_s_dashboard_link' target="_blank"
-                               href="{% url "common_preview" assignment=a.id %}#view=assignments"> | Preview</a>
                         </td>
                         <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
                             {{ a.course.name }}
@@ -51,22 +44,24 @@
                         <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
                             {{ a.access }}
                         </td>
-                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
-                            {% if a.basedOn %}{{ a.basedOn.name }}{% else %}{{ a.basedOn }}{% endif %}
+                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
+                            <a class='scb_ab_s_dashboard_action'
+                               href="{% url "common_assignments_edit" assignment_pk=a.id %}">Edit</a>
                         </td>
-                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_trash'>
+                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
+                             <a class='scb_ab_s_dashboard_action'
+                               href="{% url "common_preview" assignment=a.id %}#view=assignments">Preview</a>
+                        </td>
+                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
+                             <a class='scb_ab_s_dashboard_action'
+                               href="{% url "common_publish_assignment" assignment_pk=a.id %}">Publish</a>
+                        </td>
+
+                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_ab_s_dashboard_no_right_border'>
                             <button role='button' aria-label='Delete'
                                     class='scb_f_dashboard_remove_assignment scb_s_dashboard_remove_assignment'>
                                 <img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
                             </button>
-                        </td>
-                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_copy'>
-                            <button role='button' aria-label='Copy'
-                                    class='scb_f_dashboard_duplicate_assignment scb_s_dashboard_duplicate_assignment'>
-                                <img alt="" title="Copy" role='presentation' src="images/setup/scb_copy.png">
-                            </button>
-                        </td>
-                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_s_dashboard_actions scb_s_dashboard_archive'>
                         </td>
                     </tr>
                 {% endfor %}
