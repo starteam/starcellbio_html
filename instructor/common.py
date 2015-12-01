@@ -45,10 +45,10 @@ def course_delete(request, pk):
 
 
 def assignments(request):
-    public_list = models.Assignment.objects.filter(access='Public')
+    assignments = models.Assignment.objects.filter()
 
     return render_to_response('instructor/assignments.html',
-                              {'assignments': public_list},
+                              {'assignments': assignments},
                               context_instance=RequestContext(request))
 
 @login_required
