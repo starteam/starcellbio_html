@@ -252,6 +252,10 @@ select:disabled {
     width: 100px;
 
 }
+
+.scb_ab_s_table_header_text{
+    font-family: 'sourcesanspro-semibold';
+}
 .scb_ab_s_row>div.scb_ab_s_enable_sample{
     width: 50px;
 }
