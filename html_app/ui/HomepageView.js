@@ -126,7 +126,7 @@ scb.ui.static.HomepageView.register = function(workarea) {
 				var iframe = $('.scb_f_signup_iframe').contents();
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 				iframe.find('input[type="radio"][value="instructor"]').attr('checked', 'checked');
-				iframe.find('.course_code').hide();
+				iframe.find('#div_id_course_code').css('display', 'none');
 				iframe.find(".auth_submit_button").click(function(){
 						   var mask = document.createElement('div');
 						   mask.className='overlay';
