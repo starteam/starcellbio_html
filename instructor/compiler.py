@@ -105,7 +105,6 @@ def compile(assignment_id):
         'collection_ab': micro_kinds(a)
     }
     ret['template']['slides'] = generate_slides(a)
-
     ret['template']['facs_kinds'] = facs_kinds(a)
     ret['template']['model']['facs'] = facs_model(a)
     return ret
@@ -222,7 +221,11 @@ def generate_slides(a):
 
 
 def generate_western_blot_model(a):
-    ret = {}
+    ret = {
+        'cyto': {'parser_ab': []},
+        'nuclear': {'parser_ab': []},
+        'whole': {'parser_ab': []}
+    }
     for k in lysate_kinds(a).keys():
         ret[k] = {'parser_ab': []}
 
@@ -230,39 +233,27 @@ def generate_western_blot_model(a):
     nuclear = []
     whole = []
     for antibodies in a.western_blot.antibodies.all():
-        for ps in a.strain_protocol.filter(enabled=True):
-            bands = WesternBlotAntibodyBands.objects.filter(antibody=antibodies, strain_protocol=ps)
-            cyto_marks = []
-            wcl_marks = []
-            nuc_marks = []
+        for ps in a.strain_treatment.filter(enabled=True):
+            bands = WesternBlotBands.objects.filter(antibody=antibodies, strain_protocol=ps)
+            marks = {'cyto': [], 'nuc': [], 'wc': []}
             for band in bands:
-                if band.is_background is False:
-                    cyto_marks.append({
-                        'weight': band.cyto_weight,
-                        'intensity': band.cyto_intensity,
-                        'primary_anti_body': ['AB_{}'.format(antibodies.id)]
-                    })
-                    wcl_marks.append({
-                        'weight': band.wcl_weight,
-                        'intensity': band.wcl_intensity,
-                        'primary_anti_body': ['AB_{}'.format(antibodies.id)]
-                    })
-                    nuc_marks.append({
-                        'weight': band.nuc_weight,
-                        'intensity': band.nuc_intensity,
-                        'primary_anti_body': ['AB_{}'.format(antibodies.id)]
-                    })
+                marks[band.lysate_type].append({
+                    'weight': band.weight,
+                    'intensity': band.intensity,
+                    'primary_anti_body': ['AB_{}'.format(antibodies.id)]
+                })
+
             cyto.append({
                 'identifier': "SP_ID_{}".format(ps.id),
-                'marks': cyto_marks
+                'marks': marks['cyto']
             })
             nuclear.append({
                 'identifier': "SP_ID_{}".format(ps.id),
-                'marks': nuc_marks
+                'marks': marks['nuc']
             })
             whole.append({
                 'identifier': "SP_ID_{}".format(ps.id),
-                'marks': nuc_marks
+                'marks': marks['wc']
             })
 
     ret['cyto']['parser_ab'] = cyto
@@ -302,10 +293,9 @@ def micro_kinds(a):
         }
         if not ret[analysis]['conditions'][condition].has_key('identifiers'):
             ret[analysis]['conditions'][condition]['identifiers'] = {}
-        identifiers = {}
         for p in sp.microscopy_images.all():
-            ret[analysis]['identifiers']["SP_ID_{}".format(p.strain_protocol_id)] = 1
-            ret[analysis]['conditions'][condition]['identifiers']["SP_ID_{}".format(p.strain_protocol_id)] = 1
+            ret[analysis]['identifiers']["SP_ID_{}".format(p.strain_treatment_id)] = 1
+            ret[analysis]['conditions'][condition]['identifiers']["SP_ID_{}".format(p.strain_treatment_id)] = 1
     return ret
 
 
@@ -343,27 +333,10 @@ def primary_anti_body(assignment):
     for a in western_blot.antibodies.all():
         pk = 'AB_{}'.format(a.id)
         order[pk] = 1
-        marks = []
-        for band in a.bands.all():
-            if western_blot.has_whole_cell_lysate:
-                marks.append({
-                    'weight': band.wcl_weight,
-                    'intensity': 0
-                })
-            if western_blot.has_cytoplasmic_fractination:
-                marks.append({
-                    'weight': band.cyto_weight,
-                    'intensity': 0
-                })
-            if western_blot.has_nuclear_fractination:
-                marks.append({
-                    'weight': band.nuc_weight,
-                    'intensity': 0
-                })
+
         ret[pk] = {
             'name': a.primary,
             'secondary': primary[a.primary],
-            'marks': marks,
             'gel_name': a.primary
         }
     ret['order'] = order.keys()
@@ -372,56 +345,48 @@ def primary_anti_body(assignment):
 
 def drugs(assignment):
     ret = {}
-    for strain_protocol in assignment.strain_protocol.filter(enabled=True):
-        strain = strain_protocol.strain
-        protocol = strain_protocol.protocol
-        for t in protocol.treatments.all():
-            tr = t.treatment
-            ret[str(tr)] = {'name': str(tr)}
+    for strain_protocol in assignment.strain_treatment.filter(enabled=True):
+        drug = strain_protocol.treatment.drug
+        ret[str(drug.id)] = {'name': str(drug.name)}
     return ret
 
 
 def concentrations(assignment):
     ret = {}
-    for strain_protocol in assignment.strain_protocol.filter(enabled=True):
-        strain = strain_protocol.strain
-        protocol = strain_protocol.protocol
-        for t in protocol.treatments.all():
-            tr = t.concentration
-            ret[str(tr)] = {
-                'name': str(tr),
-                'value': tr
-            }
+    for strain_protocol in assignment.strain_treatment.filter(enabled=True):
+        treatment = strain_protocol.treatment
+        concentration = treatment.drug.concentration
+        ret[concentration] = {
+            'name': concentration,
+            'value': concentration
+        }
     return ret
 
 
 def experiment_temperatures(assignment):
     ret = {}
-    for strain_protocol in assignment.strain_protocol.filter(enabled=True):
-        strain = strain_protocol.strain
-        protocol = strain_protocol.protocol
-        for t in protocol.treatments.all():
-            tr = t.temperature
-            ret[str(tr)] = {
-                'name': str(tr),
-                'value': tr
-            }
+    for strain_protocol in assignment.strain_treatment.filter(enabled=True):
+        treatment = strain_protocol.treatment
+        temperature = treatment.temperature
+        ret[str(temperature.id)] = {
+            'name': str(temperature.degrees)
+        }
     return ret
 
 
 def add_multiple_dialog(assignment):
     ret = []
-    for strain_protocol in assignment.strain_protocol.filter(enabled=True):
+    for strain_protocol in assignment.strain_treatment.filter(enabled=True):
         strain = strain_protocol.strain
-        protocol = strain_protocol.protocol
+        treatment = strain_protocol.treatment
         row = {
             'id': "SP_ID_{}".format(str(strain_protocol.id)),
             'identifier': "SP_ID_{}".format(str(strain_protocol.id)),
-            'protocol': protocol.name,
+            'protocol': treatment.drug.name,
             'strain': strain.name,
             'cell_line': str(strain.id),
             'treatment_list': {
-                'list': compile_treatments(protocol.treatments.all())
+                'list': compile_treatments([treatment])
             }
         }
         ret.append(row)
@@ -434,13 +399,13 @@ def compile_treatments(treatments):
         row = {
             'id': 'treatment_{}'.format(treatment.id),
             'drug_list': {'list': [{
-                                       'drug_id': treatment.treatment,
-                                       'drug_name': treatment.treatment,
-                                       'concentration_id': treatment.concentration
+                                       'drug_id': treatment.drug.id,
+                                       'drug_name': treatment.drug.name,
+                                       'concentration_id': treatment.drug.concentration
                                    }]},
-            'start_time': treatment.start_time,
-            'end_time': treatment.end_time,
-            'temperature': treatment.temperature,
+            'start_time': treatment.drug.start_time,
+            'duration': treatment.drug.duration,
+            'temperature': treatment.temperature.id,
             'collection_time': treatment.collection_time,
             'microscope': ['rgb', 'g', 'gr', 'rb'],  # # microscope?!
             'collection_id': 'collection_ab'
