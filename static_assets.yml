@@ -25,7 +25,7 @@ javascripts:
   - assignments/mit706s14ps2/AddMultipleDialog.js
   - instructor/gen/instructor_facs_page1.soy.js
   - js/jquery.history.js
-  - assignments/scb_ex/gen/addmutlpledialog.soy.js
+  - assignments/scb_ex/gen/addmultipledialog.soy.js
   - model/NotebookElement.js
   - js/plugins/link/plugin.min.js
   - model/Assignments.js
