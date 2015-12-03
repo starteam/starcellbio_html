@@ -353,12 +353,16 @@ def drugs(assignment):
 def concentrations(assignment):
     ret = {}
     for strain_protocol in assignment.strain_treatment.filter(enabled=True):
-        treatment = strain_protocol.treatment
-        concentration = treatment.drug.concentration
-        ret[str(concentration)] = {
-            'name': str(concentration),
-            'value': concentration
-        }
+        drug = strain_protocol.treatment.drug
+        concentration = drug.concentration
+        if not concentration is None:
+            ret[concentration] = {
+                'name': u"{concentration}{unit}".format(
+                    concentration=concentration,
+                    unit=drug.concentration_unit
+                ),
+                'value': concentration
+            }
     return ret
 
 
@@ -369,7 +373,7 @@ def experiment_temperatures(assignment):
             treatment = strain_protocol.treatment
             temperature = treatment.temperature
             ret[str(temperature.id)] = {
-                'name': str(temperature.degrees)
+                'name': u'{degrees}\u00b0C'.format(degrees=temperature.degrees)
             }
     return ret
 
@@ -403,16 +407,24 @@ def compile_treatments(treatments, assignment):
                                        'drug_name': treatment.drug.name,
                                        'concentration_id': treatment.drug.concentration
                                    }]},
-            'start_time': treatment.drug.start_time,
-            'duration': treatment.drug.duration,
+            'start_time': '{time}{unit}'.format(
+                time=treatment.drug.start_time,
+                unit=treatment.drug.time_unit
+            ),
+            'duration': '{time}{unit}'.format(
+                time=treatment.drug.duration,
+                unit=treatment.drug.time_unit
+            ),
             'microscope': ['rgb', 'g', 'gr', 'rb'],  # # microscope?!
             'collection_id': 'collection_ab'
         }
         if assignment.has_temperature:
             row['temperature'] = treatment.temperature.id
         if assignment.has_collection_time:
-            row['collection_time'] = treatment.collection_time
-
+            row['collection_time'] = "{time}{units}".format(
+                time=treatment.collection_time.time,
+                units=treatment.collection_time.units
+            )
         ret.append(row)
     return ret
 
