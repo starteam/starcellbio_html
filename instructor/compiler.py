@@ -356,8 +356,8 @@ def concentrations(assignment):
     for strain_protocol in assignment.strain_treatment.filter(enabled=True):
         treatment = strain_protocol.treatment
         concentration = treatment.drug.concentration
-        ret[concentration] = {
-            'name': concentration,
+        ret[str(concentration)] = {
+            'name': str(concentration),
             'value': concentration
         }
     return ret

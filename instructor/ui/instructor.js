@@ -66,7 +66,7 @@ $(function(){
     /**
      * For all text input boxes inside a form
      */
-    $("form input[type = 'text']").addClass("scb_ab_s_input_text_field");
+    $("form input[type = 'text'], form input[type = 'number']").addClass("scb_ab_s_input_text_field");
 
     /**
      * Edit Strains
