@@ -414,3 +414,8 @@ div.block-ellipsis {
     width: 80px;
 }
 
+/* Temporarily disable techniques */
+.disabled{
+    opacity: 0.4;
+    cursor: default;
+}

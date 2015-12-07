@@ -231,7 +231,13 @@ $(function(){
     $('.block-ellipsis').each(function(){
         var text= $(this).text().replace(/\s\s+/g, ' ');
         $($(this).parent()).prop('title',text);
-    })
+    });
+
+/* Temporarily disable techniques */
+    $('.disabled').bind('click', false);
+    $("#id_has_fc").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
+    $("#id_has_micro").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
+
 
 });
 
