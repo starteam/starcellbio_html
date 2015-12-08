@@ -763,6 +763,8 @@ def western_blot_band_intensity(request):
             entries = formset.save(commit=False)
             for entry in entries:
                 entry.save()
+            if 'continue' in request.POST:
+                return redirect('common_assignments')
     else:
         formset = BandsFormset(queryset=models.WesternBlotBands.objects.filter(
             antibody__western_blot=wb).order_by(
