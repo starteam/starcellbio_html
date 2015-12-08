@@ -32,13 +32,12 @@ def compile(assignment_id):
                 },
                 'experiment_setup': {
                     'table': [
-                        {'kind': "cell_line",
-                         'title': "Strain",
-                         'editable': 'false'
-                        },
-                    ], 'actions': [
-                    {'kind': 'add_protocol', 'name': 'Add Protocol'}
-                ]
+                        {'kind': "cell_plate", 'title': " ", 'editable': 'false'},
+                        {'kind': "cell_line", 'title': "Strain", 'editable': 'false'},
+                    ],
+                    'actions': [
+                        {'kind': 'add_protocol', 'name': 'ADD SAMPLES'}
+                    ]
                 }
             },
             'cell_lines': compile_cell_lines(a.strains.all()),
@@ -365,12 +364,13 @@ def concentrations(assignment):
 
 def experiment_temperatures(assignment):
     ret = {}
-    for strain_protocol in assignment.strain_treatment.filter(enabled=True):
-        treatment = strain_protocol.treatment
-        temperature = treatment.temperature
-        ret[str(temperature.id)] = {
-            'name': str(temperature.degrees)
-        }
+    if assignment.has_temperature:
+        for strain_protocol in assignment.strain_treatment.filter(enabled=True):
+            treatment = strain_protocol.treatment
+            temperature = treatment.temperature
+            ret[str(temperature.id)] = {
+                'name': str(temperature.degrees)
+            }
     return ret
 
 
@@ -386,14 +386,14 @@ def add_multiple_dialog(assignment):
             'strain': strain.name,
             'cell_line': str(strain.id),
             'treatment_list': {
-                'list': compile_treatments([treatment])
+                'list': compile_treatments([treatment], assignment)
             }
         }
         ret.append(row)
     return ret
 
 
-def compile_treatments(treatments):
+def compile_treatments(treatments, assignment):
     ret = []
     for treatment in treatments:
         row = {
@@ -405,11 +405,14 @@ def compile_treatments(treatments):
                                    }]},
             'start_time': treatment.drug.start_time,
             'duration': treatment.drug.duration,
-            'temperature': treatment.temperature.id,
-            'collection_time': treatment.collection_time,
             'microscope': ['rgb', 'g', 'gr', 'rb'],  # # microscope?!
             'collection_id': 'collection_ab'
         }
+        if assignment.has_temperature:
+            row['temperature'] = treatment.temperature.id
+        if assignment.has_collection_time:
+            row['collection_time'] = treatment.collection_time
+
         ret.append(row)
     return ret
 
