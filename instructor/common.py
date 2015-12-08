@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
 import json
 import re
-
+from instructor.compiler import get_protocol_headers
 @login_required
 def courses(request):
     message = ''
@@ -493,25 +493,15 @@ def assignments_edit_treatments(request):
         context_instance=RequestContext(request)
     )
 
+
+
+
 @login_required
 def strain_treatments_edit(request):
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
 
-    headers = ['Strain', 'Treatment']
-    # Optional headers
-    optional_vars = ['Concentration', 'Start Time',
-                     'Duration', 'Temperature',
-                     'Collection Time']
-    # assignment fields names
-    var_fields = ['has_concentration', 'has_start_time',
-                  'has_duration', 'has_temperature',
-                  'has_collection_time']
-
-    # Adding headers for enabled experimental variables
-    for index, field in enumerate(var_fields):
-        if getattr(assignment, field):
-            headers.append(optional_vars[index])
+    headers = get_protocol_headers(assignment)
 
     STFormSet = modelformset_factory(models.StrainTreatment, extra=0,
                                      exclude=['assignment', 'strain', 'treatment'])

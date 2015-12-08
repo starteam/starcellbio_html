@@ -24,7 +24,7 @@ scb_ex1.static.scb_ex_inner_dialog_add_assignment_builder = function (element, d
 
         var template = parsed.assignment.template;
 
-        var cell_treatments_array = [_.find( template.ui.add_multiple_dialog , function(e) {return e.id == spid })];
+        var cell_treatments_array = [_.find( template.ui.add_multiple_dialog.rows , function(e) {return e.id == spid })];
 
         _.each(cell_treatments_array, function (eh) {
             parsed.experiment.cell_treatment_list.start(scb.utils.clone_and_clear(eh));

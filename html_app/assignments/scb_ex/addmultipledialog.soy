@@ -86,37 +86,76 @@
 <div class='scb_ex_inner_dialog' role='dialog' aria-label='Add Samples'>
     <h1 class='scb_ex_inner_dialog_title' role='presentation' aria-label='Add Samples'>
         <span class='scb_ex_inner_dialog_title_close' role='button' aria-label='Close Add Samples'>&#215;</span>
-        Add Samples (AB) </h1>
+        Add Samples</h1>
 
     <div class='scb_ex_inner_dialog_body'>
-
-        <table class="scb_s_experiment_setup_table" role='grid' aria-label='Cell Lines'>
-            <thead class="scb_s_experiment_setup_table_head">
-            <td role='columnheader' aria-label='selected' class='scb_s_experiment_setup_table_heading' style='width:80px'>
-                Selected
-            </td>
-            <td role='columnheader' aria-label='cell line' class='scb_s_experiment_setup_table_heading'>
-                Label
-            </td>
-            </thead>
-            <tbody class="scb_s_experiment_setup_table_body">
-            {foreach $element in $template.ui.add_multiple_dialog}
-                <tr role='row' aria-label='Sample'>
-                    <td class='scb_s_experiment_setup_table_border'>
-                        <input class='scb_f_experiment_setup_dialog_checkbox_assignment_builder' type="checkbox" role='checkbox' assignment_id='{$assignment.id}'
-                           experiment_id='{$experiment.id}' spid="{$element.id}" aria-checked='false'>
+        <div class='scb_ex_samples_table_wrapper'>
+            <table class="scb_s_experiment_setup_table" role='grid' aria-label='Cell Lines'>
+                <thead class="scb_s_experiment_setup_table_head">
+                {foreach $heading in $template.ui.add_multiple_dialog.headings}
+                    <td role='columnheader' aria-label='{$heading}'
+                        class="scb_s_experiment_setup_table_heading
+                        {if $heading == 'Strain'} scb_s_experiment_setup_table_heading_strain{/if}
+                        {if $heading == ''} scb_s_experiment_setup_table_heading_checkbox{/if}" >
+                        {$heading}
                     </td>
-                    <td class='scb_s_experiment_setup_table_border'>
-                            {$element.strain} {$element.protocol}
-                    </td>
+                {/foreach}
+                </thead>
+                <tbody class="scb_s_experiment_setup_table_body">
+                {foreach $element in $template.ui.add_multiple_dialog.rows}
+                    <tr role='row' aria-label='Sample'>
+                        <td class='scb_s_experiment_setup_table_border'>
+                            <input class='scb_f_experiment_setup_dialog_checkbox_assignment_builder' type="checkbox"
+                                role='checkbox' assignment_id='{$assignment.id}'
+                               experiment_id='{$experiment.id}' spid="{$element.id}" aria-checked='false'>
+                        </td>
+                        <td class='scb_s_experiment_setup_table_border'>
+                            {$element.strain}
+                        </td>
+                        <td class='scb_s_experiment_setup_table_border'>
+                            {$element.protocol}
+                        </td>
+                        {if $element.treatment_list.list[0].drug_list.list[0].concentration_id}
+                            <td class='scb_s_experiment_setup_table_border'>
+                              {$element.treatment_list.list[0].drug_list.list[0].concentration_id}
+                            </td>
+                        {/if}
+                        {if $element.treatment_list.list[0].start_time}
+                            <td class='scb_s_experiment_setup_table_border'>
+                                {$element.treatment_list.list[0].start_time}
+                            </td>
+                        {/if}
+                        {if $element.treatment_list.list[0].duration}
+                            <td class='scb_s_experiment_setup_table_border'>
+                                {$element.treatment_list.list[0].duration}
+                            </td>
+                        {/if}
+                        {if $element.treatment_list.list[0].temperature}
+                            <td class='scb_s_experiment_setup_table_border'>
+                                {$template.experiment_temperatures[$element.treatment_list.list[0].temperature].name}
+                            </td>
+                        {/if}
+                        {if $element.treatment_list.list[0].collection_time}
+                            <td class='scb_s_experiment_setup_table_border'>
+                                {$element.treatment_list.list[0].collection_time}
+                            </td>
+                        {/if}
+                    </tr>
+                {/foreach}
                 </tr>
-            {/foreach}
-            </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <button class='scb_ex_inner_dialog_select_all scb_s_gray_button'
+            aria-label='Select All' role='button'>SELECT ALL</button>
+        <button class='scb_ex_inner_dialog_clear_all scb_s_gray_button scb_s_clear_all'
+            aria-label='Clear All' role='button'>CLEAR ALL</button>
+
         <div class='scb_ex_button_float'>
-        <button class='scb_ex_inner_dialog_cancel scb_s_gray_button' aria-label='Cancel' role='button'>CANCEL</button>
-        <button class='scb_ex_inner_dialog_add_assignment_builder scb_s_gray_button' aria-label='Add Samples' role='button'>ADD SAMPLES</button>
+            <button class='scb_ex_inner_dialog_add_assignment_builder scb_s_gray_button scb_add_samples_add'
+                aria-label='Add Samples' role='button'>ADD SAMPLES</button>
+            <button class='scb_ex_inner_dialog_cancel scb_s_gray_button scb_add_samples_cancel'
+                aria-label='Cancel' role='button'>CANCEL</button>
         </div>
     </div>
 </div>

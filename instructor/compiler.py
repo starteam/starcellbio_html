@@ -11,6 +11,21 @@ def preview_as_json(assignment_id):
 
 
 
+def get_protocol_headers(assignment):
+    headers = ['Strain', 'Treatment']
+    # Optional headers
+    optional_vars = [('Concentration', 'has_concentration'),
+                     ('Start Time', 'has_start_time'),
+                     ('Duration', 'has_duration'),
+                     ('Temperature', 'has_temperature'),
+                     ('Collection Time', 'has_collection_time')]
+
+    # Adding headers for enabled experimental variables
+    for var_name, field_name in optional_vars:
+        if getattr(assignment, field_name):
+            headers.append(var_name)
+
+    return headers
 
 
 def compile(assignment_id):
@@ -375,7 +390,10 @@ def experiment_temperatures(assignment):
 
 
 def add_multiple_dialog(assignment):
-    ret = []
+    ret = {'rows': []}
+    ret['headings'] = get_protocol_headers(assignment)
+    ret['headings'].insert(0, '')
+
     for strain_protocol in assignment.strain_treatment.filter(enabled=True):
         strain = strain_protocol.strain
         treatment = strain_protocol.treatment
@@ -389,7 +407,7 @@ def add_multiple_dialog(assignment):
                 'list': compile_treatments([treatment], assignment)
             }
         }
-        ret.append(row)
+        ret['rows'].append(row)
     return ret
 
 
