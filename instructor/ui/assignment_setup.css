@@ -400,3 +400,17 @@ div.block-ellipsis {
   text-overflow: ellipsis;
 }
 
+/* Dashboard */
+.scb_ab_s_dashboard_action{
+    color: #27956c;
+}
+.scb_ab_s_dashboard_no_right_border{
+    border-right: 0 !important;
+}
+.scb_s_dashboard_names_width{
+    width: 200px;
+}
+.scb_s_dashboard_access_width{
+    width: 80px;
+}
+
