@@ -529,6 +529,9 @@ def strain_treatments_edit(request):
         queryset=models.StrainTreatment.objects.filter(assignment=assignment).order_by(
             'strain',
             'treatment__drug__name',
+            'treatment__drug__concentration',
+            'treatment__drug__start_time',
+            'treatment__drug__duration',
             'treatment__temperature__degrees',
             'treatment__collection_time__time'
         )

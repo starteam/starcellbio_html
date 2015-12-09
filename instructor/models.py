@@ -76,10 +76,10 @@ class Strains(models.Model):
 class Drug(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='drug')
     name = models.CharField(max_length=50)
-    concentration = models.CharField(max_length=50, blank=True, null=True)
+    concentration = models.IntegerField(max_length=50, blank=True, null=True)
     concentration_unit = models.CharField(max_length=50, blank=True, null=True)
-    start_time = models.CharField(max_length=50, blank=True, null=True)
-    duration = models.CharField(max_length=50, blank=True, null=True)
+    start_time = models.IntegerField(max_length=50, blank=True, null=True)
+    duration = models.IntegerField(max_length=50, blank=True, null=True)
     time_unit = models.CharField(max_length=50, blank=True, null=True)
 
     def __unicode__(self):
