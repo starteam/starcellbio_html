@@ -281,7 +281,9 @@ def assignments_variables(request):
             if form.has_changed():
                 models.Treatment.objects.filter(assignment=assignment).delete()
                 models.StrainTreatment.objects.filter(assignment=assignment).delete()
+                models.WesternBlotBands.objects.filter(antibody__western_blot__assignment=assignment).delete()
                 create_treatments(assignment)
+                update_wb_bands(assignment)
                 # Want to save the form only if at most 3 vars are selected
                 form.save(commit=False)
                 num_variables = 0
@@ -520,9 +522,13 @@ def strain_treatments_edit(request):
         formset.clean()
         if formset.is_valid():
             entries = formset.save(commit=False)
-            for form in entries:
-                form.save()
+            for strain_treatment in entries:
+                strain_treatment.save()
+                if not strain_treatment.enabled:
+                    models.WesternBlotBands.objects.filter(strain_protocol=strain_treatment).delete()
+            update_wb_bands(assignment)
             if 'continue' in request.POST:
+
                 return redirect("common_select_technique")
 
     formset = STFormSet(
@@ -604,6 +610,8 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
         for t in treatments:
             strain_treatment, created = models.StrainTreatment.objects.get_or_create(
                 strain=s, treatment=t, assignment=assignment)
+            update_wb_bands(assignment, strain_treatments=[strain_treatment])
+
 
 @login_required
 def western_blot_lysate_type(request):
@@ -682,11 +690,6 @@ def western_blot_band_size(request):
     assignment = models.Assignment.objects.get(id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
     error = ''
-    message = "You have entered non-numerical values, " \
-              "including negative numbers, text inputs and/or symbols, " \
-              "in the band size input boxes. The band size input boxes must " \
-              "only contain numerical values."
-    
     exclude_fields = ['primary', 'secondary', 'western_blot']
     lysate_types = {
         'has_whole_cell_lysate': 'wc_weight',
@@ -708,33 +711,9 @@ def western_blot_band_size(request):
         weights_by_type = ['wc_weight', 'nuc_weight', 'cyto_weight']
         formset = AntibodiesFormset(request.POST)
         if formset.is_valid():
-            antibodies = formset.save(commit=False)
-            strain_treatments = models.StrainTreatment.objects.filter(assignment=assignment)
-            for antibody in antibodies:
-                for index, field in enumerate(weights_by_type):
-                    weight_str = getattr(antibody, field)
-                    error = message if re.search(r'[a-zA-Z-]+', weight_str) else error
+            antibodies = formset.save()
+            update_wb_bands(assignment, antibodies=antibodies)
 
-                    weights = [float(s) for s in weight_str.split(',')
-                               if is_float(s) and float(s) >= 0]
-                    if antibody.id:
-                        bands = models.WesternBlotBands.objects.filter(
-                            antibody__id=antibody.id,
-                            lysate_type=field.split('_')[0])
-                        for band in bands:
-                            #delete bands that that are not in the string anymore
-                            if band.weight not in weights:
-                                models.WesternBlotBands.objects.filter(id=band.id).delete()
-                    # create new bands
-                    for weight in weights:
-                        for strain_treatment in strain_treatments:
-                            models.WesternBlotBands.objects.get_or_create(
-                                strain_protocol=strain_treatment,
-                                antibody=antibody,
-                                weight=weight,
-                                lysate_type=field.split('_')[0]
-                            )
-                antibody.save()
             if 'continue' in request.POST:
                 return redirect('western_blot_band_intensity')
     formset = AntibodiesFormset(queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb))
@@ -750,6 +729,49 @@ def western_blot_band_size(request):
         },
         context_instance=RequestContext(request))
 
+
+def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
+    error = ''
+    if models.WesternBlot.objects.filter(assignment=assignment).exists():
+
+        message = "You have entered non-numerical values, " \
+                  "including negative numbers, text inputs and/or symbols, " \
+                  "in the band size input boxes. The band size input boxes must " \
+                  "only contain numerical values."
+
+        weights_by_type = ['wc_weight', 'nuc_weight', 'cyto_weight']
+        antibodies_updated = True
+        if antibodies is None:
+            antibodies_updated = False
+            antibodies = models.WesternBlotAntibody.objects.filter(western_blot=assignment.western_blot)
+        if strain_treatments is None:
+            strain_treatments = models.StrainTreatment.objects.filter(assignment=assignment, enabled=True)
+
+        for antibody in antibodies:
+            for index, field in enumerate(weights_by_type):
+                weight_str = getattr(antibody, field)
+                error = message if re.search(r'[a-zA-Z-]+', weight_str) else error
+
+                weights = [float(s) for s in weight_str.split(',')
+                           if is_float(s) and float(s) >= 0]
+                if antibodies_updated and antibody.id:
+                    bands = models.WesternBlotBands.objects.filter(
+                        antibody__id=antibody.id,
+                        lysate_type=field.split('_')[0])
+                    for band in bands:
+                        #delete bands that are not in the string anymore
+                        if band.weight not in weights:
+                            models.WesternBlotBands.objects.filter(id=band.id).delete()
+                # create new bands
+                for weight in weights:
+                    for strain_treatment in strain_treatments:
+                        models.WesternBlotBands.objects.get_or_create(
+                            strain_protocol=strain_treatment,
+                            antibody=antibody,
+                            weight=weight,
+                            lysate_type=field.split('_')[0]
+                        )
+    return error
 
 def is_float(txt):
     try:
