@@ -41,20 +41,20 @@
                     <div>{{ form.instance.treatment.drug.name }}</div>
                     {% if has_concentration %}
                         <div>
-                            {{ form.instance.treatment.drug.concentration }}
-                            {{ form.instance.treatment.drug.concentration_unit }}
+                            {{ form.instance.treatment.drug.concentration|default_if_none:'' }}
+                            {{ form.instance.treatment.drug.concentration_unit|default_if_none:'' }}
                         </div>
                     {% endif %}
                     {% if has_start_time %}
                         <div>
-                            {{ form.instance.treatment.drug.start_time }}
-                            {{ form.instance.treatment.drug.time_unit }}
+                            {{ form.instance.treatment.drug.start_time|default_if_none:'' }}
+                            {{ form.instance.treatment.drug.time_unit|default_if_none:'' }}
                         </div>
                     {% endif %}
                     {% if has_duration %}
                         <div>
-                            {{ form.instance.treatment.drug.duration }}
-                            {{ form.instance.treatment.drug.time_unit }}
+                            {{ form.instance.treatment.drug.duration|default_if_none:'' }}
+                            {{ form.instance.treatment.drug.time_unit|default_if_none:'' }}
                         </div>
                     {% endif %}
                     {% if has_temperature %}

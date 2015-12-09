@@ -34,11 +34,11 @@
                     <div class="scb_ab_s_col_width_sample">
                         <div class="block-ellipsis">
                         {{ form.instance.strain_protocol.strain.name }},
-                        {{ form.instance.strain_protocol.treatment.drug.name }}{% if variables.has_concentration %},
+                        {{ form.instance.strain_protocol.treatment.drug.name }}{% if variables.has_concentration and form.instance.strain_protocol.treatment.drug.concentration != None %},
                             {{ form.instance.strain_protocol.treatment.drug.concentration }}
-                            {{ form.instance.strain_protocol.treatment.drug.concentration_unit }}{% endif %}{% if variables.has_start_time %},
+                            {{ form.instance.strain_protocol.treatment.drug.concentration_unit }}{% endif %}{% if variables.has_start_time and form.instance.strain_protocol.treatment.drug.start_time != None %},
                             {{ form.instance.strain_protocol.treatment.drug.start_time }}
-                            {{ form.instance.strain_protocol.treatment.drug.time_unit }}{% endif %}{% if variables.has_duration %},
+                            {{ form.instance.strain_protocol.treatment.drug.time_unit }}{% endif %}{% if variables.has_duration and form.instance.strain_protocol.treatment.drug.duration != None %},
                             {{ form.instance.strain_protocol.treatment.drug.duration }}
                             {{ form.instance.strain_protocol.treatment.drug.time_unit }}{% endif %}{% if variables.has_temperature %},
                             {{ form.instance.strain_protocol.treatment.temperature.degrees }} &#8451;{% endif %}{% if variables.has_collection_time %},
