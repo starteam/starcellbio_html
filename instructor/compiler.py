@@ -397,13 +397,21 @@ def add_multiple_dialog(assignment):
     ret = {'rows': []}
     ret['headings'] = get_protocol_headers(assignment)
     ret['headings'].insert(0, '')
-
-    for strain_protocol in assignment.strain_treatment.filter(enabled=True):
-        strain = strain_protocol.strain
-        treatment = strain_protocol.treatment
+    strain_treatments=assignment.strain_treatment.filter(enabled=True).order_by(
+        'strain',
+        'treatment__drug__name',
+        'treatment__drug__concentration',
+        'treatment__drug__start_time',
+        'treatment__drug__duration',
+        'treatment__temperature__degrees',
+        'treatment__collection_time__time'
+    )
+    for strain_treatment in strain_treatments:
+        strain = strain_treatment.strain
+        treatment = strain_treatment.treatment
         row = {
-            'id': "SP_ID_{}".format(str(strain_protocol.id)),
-            'identifier': "SP_ID_{}".format(str(strain_protocol.id)),
+            'id': "SP_ID_{}".format(str(strain_treatment.id)),
+            'identifier': "SP_ID_{}".format(str(strain_treatment.id)),
             'protocol': treatment.drug.name,
             'strain': strain.name,
             'cell_line': str(strain.id),
