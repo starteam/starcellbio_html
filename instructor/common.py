@@ -14,38 +14,11 @@ from django.core.exceptions import PermissionDenied
 import json
 import re
 from instructor.compiler import get_protocol_headers
-@login_required
-def courses(request):
-    message = ''
-    CourseFormSet = modelformset_factory(models.Course, extra=1, fields=['name', 'code'], can_delete=True)
-    if request.method == "POST":
-        formset = CourseFormSet(request.POST)
-        if formset.is_valid():
-            message = "Thank you"
-            entries = formset.save(commit=False)
-            for form in entries:
-                form.owner = request.user
-                form.save()
-        else:
-            message = "Something went wrong"
 
-    return render_to_response('instructor/courses_new.html',
-                              {'formset': CourseFormSet(queryset=models.Course.objects.filter(owner=request.user)),
-                               'message': message},
-                              context_instance=RequestContext(request))
-
-@login_required
-def course_delete(request, pk):
-    try:
-        models.Course.objects.get(id=pk).delete()
-    except models.Course.DoesNotExist:
-        raise Http404('Course does not exist')
-
-    return redirect('common_course')
 
 @login_required
 def assignments(request):
-    assignments = models.Assignment.objects.filter()
+    assignments = models.Assignment.objects.filter(course__owner=request.user)
 
     return render_to_response('instructor/assignments.html',
                               {'assignments': assignments},
@@ -90,14 +63,14 @@ def assignment_setup(request):
     else:
         # giving a default name to the assignment
         assignment_name = "Assignment"
-        filtered_asgmts = models.Assignment.objects.filter(name__regex=r'Assignment.*')
+        filtered_asgmts = models.Assignment.objects.filter(course__owner=request.user, name__regex=r'Assignment.*')
         # want to allow index one larger then there are currently assignments
         for index in xrange(1, len(filtered_asgmts)+2):
             if not filtered_asgmts.filter(name="Assignment {}".format(index)).count():
                 assignment_name = "Assignment {}".format(index)
                 break
 
-    all_assignments = models.Assignment.objects.all()
+    all_assignments = models.Assignment.objects.filter(course__owner=request.user)
 
     return render_to_response('instructor/assignment_setup.html',
                               {
@@ -131,7 +104,7 @@ def course_setup(request):
                 course.save()
 
     # if there is at least one course
-    all_courses = models.Course.objects.all()
+    all_courses = models.Course.objects.filter(owner=request.user)
     if len(all_courses) > 0:
         course_selected = all_courses[0]
         create_assignment(request, course_selected)
@@ -141,7 +114,7 @@ def course_setup(request):
     if course_selected:
         return redirect("common_course_modify")
 
-    formset = CourseFormSet(queryset=models.Course.objects.all())
+    formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
     return render_to_response('instructor/course_modify.html',
                               {
                                   'courses': all_courses,
@@ -203,7 +176,7 @@ def assignment_modify(request):
     else:
         form = AssignmentForm(instance=assignment)
 
-    all_assignments = models.Assignment.objects.all()
+    all_assignments = models.Assignment.objects.filter(course__owner=request.user)
 
     return render_to_response('instructor/assignment_modify.html',
                               {'assignments': all_assignments,
@@ -247,8 +220,8 @@ def course_modify(request):
                 instance.save()
             if 'continue' in request.POST:
                 return redirect("common_assignments_edit_strains")
-    formset = CourseFormSet(queryset=models.Course.objects.all())
-    all_courses = models.Course.objects.all()
+    formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
+    all_courses = models.Course.objects.filter(owner=request.user)
     course_selected = assignment.course.code
     return render_to_response('instructor/course_modify.html',
                               {

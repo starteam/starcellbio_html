@@ -64,10 +64,6 @@ urlpatterns += patterns(
     url(r'^ab/.*/images/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': 'html_app/images/'}),
 
-    url(r'^ab/courses/$', instructor_common.courses, name="common_courses"),
-    url(r'^ab/courses/delete/(?P<pk>.+)$', instructor_common.course_delete,
-        name="common_courses_delete"),
-
     # Dashboard
     url(r'^ab/assignments/$', instructor_common.assignments, name="common_assignments"),
     url(r'^ab/assignments/delete/(?P<pk>.+)$', instructor_common.assignment_delete,
