@@ -270,7 +270,6 @@
 <script>$(function () {
     get_user_result = {'account_type': 'preview', name: 'admin'};
     get_student_courses_result = { is_auth: false, token: null };
-    var list = master_model_data.assignments.list;
     master_model_preview = master_model_data;
     {% autoescape off %}
     var a = {{ assignment_json }};
@@ -280,7 +279,7 @@
     } catch(e) {
 
     }
-    master_model_preview.assignments.list = [list[4], a.assignments.list[0]];
+    master_model_preview.assignments.list = [a.assignments.list[0]];
 
     starcellbio('#main', master_model_data);
 });
