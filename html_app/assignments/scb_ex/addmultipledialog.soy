@@ -115,27 +115,27 @@
                         <td class='scb_s_experiment_setup_table_border'>
                             {$element.protocol}
                         </td>
-                        {if $element.treatment_list.list[0].drug_list.list[0].concentration_id}
+                        {if $template.ui.add_multiple_dialog.has_variables['concentration']}
                             <td class='scb_s_experiment_setup_table_border'>
                               {$element.treatment_list.list[0].drug_list.list[0].concentration_id}
                             </td>
                         {/if}
-                        {if $element.treatment_list.list[0].start_time}
+                        {if $template.ui.add_multiple_dialog.has_variables['start_time']}
                             <td class='scb_s_experiment_setup_table_border'>
                                 {$element.treatment_list.list[0].start_time}
                             </td>
                         {/if}
-                        {if $element.treatment_list.list[0].duration}
+                        {if $template.ui.add_multiple_dialog.has_variables['duration']}
                             <td class='scb_s_experiment_setup_table_border'>
                                 {$element.treatment_list.list[0].duration}
                             </td>
                         {/if}
-                        {if $element.treatment_list.list[0].temperature}
+                        {if $template.ui.add_multiple_dialog.has_variables['temperature']}
                             <td class='scb_s_experiment_setup_table_border'>
                                 {$template.experiment_temperatures[$element.treatment_list.list[0].temperature].name}
                             </td>
                         {/if}
-                        {if $element.treatment_list.list[0].collection_time}
+                        {if $template.ui.add_multiple_dialog.has_variables['collection_time']}
                             <td class='scb_s_experiment_setup_table_border'>
                                 {$element.treatment_list.list[0].collection_time}
                             </td>

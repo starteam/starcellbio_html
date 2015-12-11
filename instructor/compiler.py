@@ -374,12 +374,12 @@ def concentrations(assignment):
         drug = strain_protocol.treatment.drug
         concentration = drug.concentration
         if not concentration is None:
-            ret[concentration] = {
+            ret[str(concentration)] = {
                 'name': u"{concentration}{unit}".format(
                     concentration=concentration,
                     unit=drug.concentration_unit
                 ),
-                'value': concentration
+                'value': str(concentration)
             }
     return ret
 
@@ -400,6 +400,13 @@ def add_multiple_dialog(assignment):
     ret = {'rows': []}
     ret['headings'] = get_protocol_headers(assignment)
     ret['headings'].insert(0, '')
+    ret['has_variables']={
+        'concentration': assignment.has_concentration,
+        'start_time': assignment.has_start_time,
+        'duration': assignment.has_duration,
+        'temperature': assignment.has_temperature,
+        'collection_time': assignment.has_collection_time
+    }
     strain_treatments=assignment.strain_treatment.filter(enabled=True).order_by(
         'strain',
         'treatment__drug__name',
@@ -431,16 +438,24 @@ def compile_treatments(treatments, assignment):
     for treatment in treatments:
         row = {
             'id': 'treatment_{}'.format(treatment.id),
-            'drug_list': {'list': [{
-                                       'drug_id': treatment.drug.id,
-                                       'drug_name': treatment.drug.name,
-                                       'concentration_id': treatment.drug.concentration
-                                   }]},
-            'start_time': '{time}{unit}'.format(
+            'drug_list': {'list': [
+                {
+                    'drug_id': treatment.drug.id,
+                    'drug_name': treatment.drug.name,
+                    'concentration_id': ''
+                    if treatment.drug.concentration is None
+                    else treatment.drug.concentration
+                }
+            ]},
+            'start_time': ''
+            if treatment.drug.start_time is None
+            else '{time}{unit}'.format(
                 time=treatment.drug.start_time,
                 unit=treatment.drug.time_unit
             ),
-            'duration': '{time}{unit}'.format(
+            'duration': ''
+            if treatment.drug.duration is None
+            else '{time}{unit}'.format(
                 time=treatment.drug.duration,
                 unit=treatment.drug.time_unit
             ),

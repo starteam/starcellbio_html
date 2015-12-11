@@ -49,7 +49,11 @@ scb.Drug = function scb_Drug(data, context,parent) {
 	}, scb.utils.read_only_exception);
 
     scb.utils.accessor2_custom(self, 'drug_concentration' , function() {
-		return data.concentration_id != null ? context.template.concentrations[data.concentration_id].name : '';
+        if(data.concentration_id != null && data.concentration_id != '' ) {
+            return context.template.concentrations[data.concentration_id].name;
+        }else{
+            return '';
+        }
 	}, scb.utils.read_only_exception);
 
 	scb.Utils.accessor_toString(self.drug_id);
