@@ -821,7 +821,8 @@ def western_blot_band_intensity(request):
             'antibodies': antibodies,
             'variables': variables,
             'assignment_name': assignment.name,
-            'section_name': 'Western Blotting'
+            'section_name': 'Western Blotting',
+            'page_name': 'wb_band_intensity'
         },
         context_instance=RequestContext(request))
 
