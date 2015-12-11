@@ -67,19 +67,21 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
                     }
                 });
                 var text = template;
-                _.each(value.map,function(e){
-                    if(!_.isUndefined(text[e]))
-                    {
-                        text = text[e];
-                    }
-                    if(e=='%KEY%' && !_.isUndefined(text[ret]))
-                    {
-                        text = text[ret];
-                    }
-                    else
-                    {
-                    }
-                })
+                if(value.hasOwnProperty('map')){
+                    _.each(value.map,function(e){
+                        if(!_.isUndefined(text[e]))
+                        {
+                            text = text[e];
+                        }
+                        if(e=='%KEY%' && !_.isUndefined(text[ret]))
+                        {
+                            text = text[ret];
+                        }
+                    });
+                }else{
+                    text = ret;
+                }
+
                 if(! success && scb.utils.isDefined(value.default) )
                 {
                     text = value.default;

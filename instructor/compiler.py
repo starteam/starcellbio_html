@@ -89,25 +89,7 @@ def compile(assignment_id):
     ret['template']['concentrations'] = concentrations(a)
     ret['template']['experiment_temperatures'] = experiment_temperatures(a)
 
-    ret['template']['ui']['western_blot'] = {'format': "%CELL_LINE%, %TREATMENT%, %PP1% %TEMPERATURE%",
-                                             'keys': {
-                                                 '%CELL_LINE%': {'attr': ['cell_line'],
-                                                                 'map': ['cell_lines', '%KEY%', 'name']},
-                                                 '%TREATMENT%': {
-                                                     'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '0',
-                                                              'drug_id'], 'map': ['drugs', '%KEY%', 'name']},
-                                                 '%CONCENTRATION%': {
-                                                     'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '0',
-                                                              'concentration_id'],
-                                                     'map': ['concentrations', '%KEY%', 'name']},
-                                                 '%TEMPERATURE%': {
-                                                     'attr': ['treatment_list', 'list', '0', 'temperature'],
-                                                     'map': ['experiment_temperatures', '%KEY%', 'name']},
-                                                 '%PP1%': {
-                                                     'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '1',
-                                                              'drug_id'], 'map': ['drugs', '%KEY%', 'short_name'],
-                                                     'default': ''}
-                                             }}
+    ret['template']['ui']['western_blot'] = format_table(a)
     ret['template']['primary_anti_body'] = primary_anti_body(a)
     ret['template']['secondary_anti_body'] = secondary_anti_body(a)
     ret['template']['lysate_kinds'] = lysate_kinds(a)
@@ -135,6 +117,44 @@ def csv_custom(data):
     for row in reader:
         ret.append(row)
     return ret
+
+
+def format_table(assignment):
+    wb_table = {}
+    headers = "%CELL_LINE%, %TREATMENT%"
+
+    keys = {
+        '%CELL_LINE%': {'attr': ['cell_line'],
+                        'map': ['cell_lines', '%KEY%', 'name']},
+        '%TREATMENT%': {'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '0','drug_id'],
+                        'map': ['drugs', '%KEY%', 'name']},}
+
+    if assignment.has_concentration:
+        headers += ', %CONCENTRATION%'
+        keys['%CONCENTRATION%'] = {
+            'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '0','concentration_id'],
+            'map': ['concentrations', '%KEY%', 'name']
+        }
+    if assignment.has_start_time:
+        headers += ', %START_TIME%'
+        keys['%START_TIME%'] = {'attr': ['treatment_list', 'list', '0', 'start_time']}
+    if assignment.has_duration:
+        headers += ', %DURATION%'
+        keys['%DURATION%'] = {'attr': ['treatment_list', 'list', '0', 'duration']}
+    if assignment.has_temperature:
+        headers += ', %TEMPERATURE%'
+        keys['%TEMPERATURE%'] = {
+            'attr': ['treatment_list', 'list', '0', 'temperature'],
+            'map': ['experiment_temperatures', '%KEY%', 'name']
+        }
+    if assignment.has_collection_time:
+        headers += ', %COLLECTION_TIME%'
+        keys['%COLLECTION_TIME%'] = {
+            'attr': ['treatment_list', 'list', '0', 'collection_time']
+        }
+    wb_table = {'format': headers, 'keys': keys}
+    return wb_table
+
 
 def facs_model(a):
     ab_parser = []
@@ -444,7 +464,7 @@ def compile_treatments(treatments, assignment):
                     'drug_name': treatment.drug.name,
                     'concentration_id': ''
                     if treatment.drug.concentration is None
-                    else treatment.drug.concentration
+                    else str(treatment.drug.concentration)
                 }
             ]},
             'start_time': ''
