@@ -417,7 +417,7 @@ scb.ui.static.ExperimentSetupView.row = function (sample, headings, template, ro
                 else if (drug_index == 0 && part.kind == 'collection') {
                     row.push({
                         kind: 'collection',
-                        title: treatment.collection_id,
+                        title: treatment.collection_time,
                         rows: drug_list.length,
                         first_row: drug_index == 0 && treatment_index == 0,
                         treatment: treatment.id
