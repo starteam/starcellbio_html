@@ -75,10 +75,13 @@ def compile(assignment_id):
     table = ret['template']['ui']['experiment_setup']['table']
     table.append({'kind': "treatments", 'children': treatments})
     table.append({'kind': 'actions', 'title': 'Actions'});
-    instructions = []
-    for t in a.assignment_text.all():
-        instructions.append([t.title, t.text])
-    ret['template']['instructions'] = instructions
+
+    ret['template']['instructions'] = [
+        [
+            'Assignment',
+            'Please contact your instructor for your StarCellBio assignment.'
+        ]
+    ]
     ret['template']['model'] = {}
 
     ret['template']['ui']['add_multiple_dialog'] = add_multiple_dialog(a)
