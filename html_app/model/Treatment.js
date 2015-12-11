@@ -35,85 +35,91 @@ scb.Treatment = function scb_Treatment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self, data, 'facs', {}, null, context);
 
 	// should be getter only
-	scb.Utils.initialize_accessor_field(self, data, 'schedule_value', "0", null, context);
+	scb.Utils.initialize_accessor_field(self, data, 'start_time_value', "0", null, context);
 	// should be getter only
 	scb.Utils.initialize_accessor_field(self, data, 'duration_value', "0", null, context);
+    if(data.start_time_value !== "0"){
+        scb.Utils.initialize_field(data, 'start_time', self.schedule_value);
+        Object.defineProperty(self, 'start_time', {
+            get : function() {
+                var time = parseFloat(data.schedule_value);
+                var days = Math.floor((time % 604800) / 86400);
 
-	scb.Utils.initialize_field(data, 'schedule', self.schedule_value);
-	scb.Utils.initialize_field(data, 'duration', self.duration_value);
+                var hours = Math.floor((time % 86400) / 3600);
+                var minutes = Math.round((time % 3600) / 60);
 
-	Object.defineProperty(self, 'schedule', {
-		get : function() {
-			var time = parseFloat(data.schedule_value);
-			//var days = Math.floor(time / 86400);
-			var days = Math.floor((time % 604800) / 86400);
+                var months = Math.floor(time /2592000);
 
-			var hours = Math.floor((time % 86400) / 3600);
-			var minutes = Math.round((time % 3600) / 60);
-			
-			var months = Math.floor(time /2592000);
-			
-			var weeks = Math.floor((time % 2592000) / 604800);
-			var now = (time < 60 );
-			return scb_common.format_time_detailed({
-				weeks: weeks,
-				days : days,
-				hours : hours,
-				minutes : minutes,
-				months: months,
-				now : now
-			}).trim();
-		},
-		set : function(v) {
-			var time = scb.Utils.parse_time(v, context.template.time_unit.kind);
-			data.schedule_value = time;
-			data.schedule = self.schedule;
-		}
-	});
-
-	Object.defineProperty(self, 'duration', {
-		get : function() {
-			var time = parseFloat(data.duration_value);
-			var days = Math.floor((time % 604800) / 86400);
-			var hours = Math.floor((time % 86400) / 3600);
-			var minutes = Math.floor((time % 3600) / 60);
-			var months = Math.floor(time /2592000);
-			var weeks = Math.floor((time % 2592000) / 604800);
-			var now = (time < 30 );
-            if( time < 0 ) return '' ;
-            if(time < 60){
-                var seconds= Math.round(time%60);
-                return scb_common.format_time_detailed_w_sec({
+                var weeks = Math.floor((time % 2592000) / 604800);
+                var now = (time < 60 );
+                return scb_common.format_time_detailed({
+                    weeks: weeks,
                     days : days,
                     hours : hours,
                     minutes : minutes,
-                    seconds: seconds,
-                    now : now
-			    }).trim();
-
-            }else {
-                return scb_common.format_time_detailed({
-                    weeks: weeks,
-                    days: days,
-                    hours: hours,
-                    minutes: minutes,
-                    seconds: seconds,
                     months: months,
-                    now: now
+                    now : now
                 }).trim();
+            },
+            set : function(v) {
+                var time = scb.Utils.parse_time(v, context.template.time_unit.kind);
+                data.schedule_value = time;
+                data.schedule = self.schedule;
             }
-		},
-		set : function(v) {
-			var time = scb.Utils.parse_time(v, context.template.time_unit.kind);
-			data.duration_value = time;
-			data.duration = self.duration;
-		}
-	});
+        });
+    }else{
+        scb.Utils.initialize_accessor_field(self, data, 'start_time', "", null, context);
+    }
+    if(data.duration_value !== "0"){
+        scb.Utils.initialize_field(data, 'duration', self.duration_value);
+        Object.defineProperty(self, 'duration', {
+            get : function() {
+                var time = parseFloat(data.duration_value);
+                var days = Math.floor((time % 604800) / 86400);
+                var hours = Math.floor((time % 86400) / 3600);
+                var minutes = Math.floor((time % 3600) / 60);
+                var months = Math.floor(time /2592000);
+                var weeks = Math.floor((time % 2592000) / 604800);
+                var now = (time < 30 );
+                if( time < 0 ) return '' ;
+                if(time < 60){
+                    var seconds= Math.round(time%60);
+                    return scb_common.format_time_detailed_w_sec({
+                        days : days,
+                        hours : hours,
+                        minutes : minutes,
+                        seconds: seconds,
+                        now : now
+                    }).trim();
+
+                }else {
+                    return scb_common.format_time_detailed({
+                        weeks: weeks,
+                        days: days,
+                        hours: hours,
+                        minutes: minutes,
+                        seconds: seconds,
+                        months: months,
+                        now: now
+                    }).trim();
+                }
+            },
+            set : function(v) {
+                var time = scb.Utils.parse_time(v, context.template.time_unit.kind);
+                data.duration_value = time;
+                data.duration = self.duration;
+            }
+        });
+
+    }else{
+        scb.Utils.initialize_accessor_field(self, data, 'duration', "", null, context);
+    }
+
+
 
 	self.temperature_name = function() {
 		return context.template.experiment_temperatures[data.temperature].name;
 	}
 
 	scb.Utils.accessor_toString(self.temperature);
-	scb.Utils.accessor_toString(self.schedule);
 }
