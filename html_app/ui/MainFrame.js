@@ -4,7 +4,7 @@ scb.ui = scb.ui || {};
 scb.ui.static = scb.ui.static || {};
 
 scb.ui.static.MainFrame = scb.ui.static.MainFrame || {};
-scb.ui.static.MainFrame.LOGOUT_URL = '/accounts/logout/';
+scb.ui.static.MainFrame.LOGOUT_URL = '/scb/logout/';
 
 scb.ui.static.MainFrame.update_hash = function (state) {
 	

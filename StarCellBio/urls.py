@@ -10,6 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     # Examples:
+    url(r'^scb/logout/$', "StarCellBio.views.logout_view", name='logout_view'),
     url(r'^$', "StarCellBio.views.home", name='home'),
     url(r'^index.html$', "StarCellBio.views.home"),
     url(r'^scb/contact$', "StarCellBio.views.contact", name='contact'),
