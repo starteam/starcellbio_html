@@ -766,9 +766,13 @@ def western_blot_band_intensity(request):
             antibody__western_blot=wb).order_by(
             'strain_protocol__strain',
             'strain_protocol__treatment__drug__name',
+            'strain_protocol__treatment__drug__concentration',
+            'strain_protocol__treatment__drug__start_time',
+            'strain_protocol__treatment__drug__duration',
             'strain_protocol__treatment__temperature__degrees',
             'strain_protocol__treatment__collection_time__time',
-            '-lysate_type'))
+            '-lysate_type',
+            'weight'))
 
 
     antibodies = models.WesternBlotAntibody.objects.filter(western_blot=wb)
