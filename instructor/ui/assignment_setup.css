@@ -121,7 +121,7 @@ select:disabled {
     left:67px;
     width:165px;
     display:inline-block;
-    padding:0;
+    padding:5px 0 0 0;
     margin:0;
 
 }

@@ -220,12 +220,11 @@ def course_modify(request):
                 instance.save()
             if 'continue' in request.POST:
                 return redirect("common_assignments_edit_strains")
-    formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
-    all_courses = models.Course.objects.filter(owner=request.user)
+    else:
+        formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
     course_selected = assignment.course.code
     return render_to_response('instructor/course_modify.html',
                               {
-                                  'courses': all_courses,
                                   'formset': formset,
                                   'course_selected': course_selected,
                                   'new': request.session['new'],
