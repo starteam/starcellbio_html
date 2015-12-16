@@ -14,16 +14,18 @@
 <div>
     <form method="post">{% csrf_token %}
         {{ formset.management_form }}
-
+        <div class="scb_ab_s_input_headers">
+            <div>Strain Name</div>
+        </div>
         {% for form in formset %}
-            <ul class="scb_s_strains_list">
-                <li>{{ forloop.counter }}.</li>
-                <li>{{ form.name }}</li>
-                <li>{{ form.id }}</li>
-                <li class="delete_checkbox">{{ form.DELETE }}</li>
-            </ul>
+            <div class="scb_ab_s_form_input_list">
+                <div>{{ forloop.counter }}.</div>
+                <div>{{ form.name }}</div>
+                <div>{{ form.id }}</div>
+                <div class="delete_checkbox">{{ form.DELETE }}</div>
+            </div>
         {% endfor %}
-        <div class="scb_s_strains_list">
+        <div>
             <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button' value="ADD">
         </div>
         <input type="submit"
