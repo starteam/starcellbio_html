@@ -180,6 +180,15 @@ $(function(){
         }
     });
     /**
+     * Western Blotting: Antibodies
+     */
+    if($("#id_form-0-primary").length){
+        if($(".scb_ab_s_form_input_list").length < 2){
+            $("#id_form-0-primary").attr('placeholder', 'goat anti-protein');
+            $("#id_form-0-secondary").attr('placeholder', 'rabbit anti-goat');
+        }
+    }
+    /**
      * Western Blotting: band intensity
      */
     $(".intensity_slider").each(function(){
