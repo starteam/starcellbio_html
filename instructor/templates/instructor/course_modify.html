@@ -9,11 +9,19 @@
         a new course. The course code assigned to the course must be unique.
     </div>
 
-
+    <br>
+    <div class="scb_ab_s_top_error_list scb_ab_s_error_list">
+            {% for error in errors %}
+                <div>* {{ error }} </div>
+            {% endfor %}
+        </div>
     <form id="course_formset" method="post">{% csrf_token %}
+
         {{ formset.management_form }}
         <!--This div disappears when option is not selected -->
+
         <div class="scb_ab_s_course_list_wrapper">
+
             <div class="scb_ab_s_course_edit_headers scb_ab_s_select_course_headers">Select</div>
             <div class="scb_ab_s_course_edit_headers">Name</div>
             <div class="scb_ab_s_course_edit_headers">Course Code</div>
@@ -30,12 +38,12 @@
                     <div class="delete_checkbox">{{ form.DELETE }}</div>
                 </div>
 
-                <div class="scb_ab_s_course_fields_error_list">
+                <div class="scb_ab_s_error_list scb_ab_s_course_fields_error_list">
                     {% for error in form.name.errors %}
                         <div>* {{ error }} </div>
                     {% endfor %}
                 </div>
-                <div class="scb_ab_s_course_fields_error_list" style="width:auto">
+                <div class=" scb_ab_s_error_list scb_ab_s_course_fields_error_list" style="width:auto">
                     {% for error in form.code.errors %}
                         <div>* {{ error }} </div>
                     {% endfor %}

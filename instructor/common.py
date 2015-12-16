@@ -195,6 +195,7 @@ def assignment_modify(request):
 
 @login_required
 def course_modify(request):
+    errors = []
     assignment_id = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
     CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
@@ -213,8 +214,13 @@ def course_modify(request):
             instances = formset.save(commit=False)
             user = User.objects.get(username=request.user)
             for obj in formset.deleted_objects:
-                if obj.owner == user and obj != assignment.course:
-                    obj.delete()
+                if obj.owner == user:
+                    if obj == assignment.course:
+                        errors.append('Cannot delete selected course for this assignment.')
+                    elif not models.Assignment.objects.filter(course=obj).exists():
+                        obj.delete()
+                    else:
+                        errors.append('Cannot delete course with assignments.')
             for instance in instances:
                 if hasattr(instance, 'owner') and instance.owner != user:
                     raise PermissionDenied
@@ -223,11 +229,14 @@ def course_modify(request):
                 instance.save()
             if 'continue' in request.POST:
                 return redirect("common_assignments_edit_strains")
+            # if no errors want to update formset
+            formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
     else:
         formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
     course_selected = assignment.course.code
     return render_to_response('instructor/course_modify.html',
                               {
+                                  'errors': errors,
                                   'formset': formset,
                                   'course_selected': course_selected,
                                   'new': request.session['new'],
