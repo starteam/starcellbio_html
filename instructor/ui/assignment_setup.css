@@ -141,14 +141,6 @@ select:disabled {
 
 
 /* Strains */
-.scb_s_strains_list{
-    position:relative;
-    list-style-type: none;
-
-}
-.scb_s_strains_list>li{
-    display: inline;
-}
 .scb_ab_s_form_container{
     padding-left: 20px;
     padding-top: 10px;
@@ -177,7 +169,7 @@ select:disabled {
 .scb_ab_s_input_headers>div{
     width: 144px;
     display: inline-block;
-    font-weight: bold;
+    font-family: 'sourcesanspro-semibold';
     font-size: 14px ;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_small_header{
