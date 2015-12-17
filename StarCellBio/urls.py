@@ -67,7 +67,7 @@ urlpatterns += patterns(
 
     # Dashboard
     url(r'^ab/assignments/$', instructor_common.assignments, name="common_assignments"),
-    url(r'^ab/assignments/delete/(?P<pk>.+)$', instructor_common.assignment_delete,
+    url(r'^ab/assignments/delete/(?P<assignment_pk>.+)$', instructor_common.assignment_delete,
         name="common_assignment_delete"),
     url(r'^ab/assignments/publish/(?P<assignment_pk>[^/]+)$', instructor_common.publish_assignment,
         name="common_publish_assignment"),

@@ -58,10 +58,9 @@
                         </td>
 
                         <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_ab_s_dashboard_no_right_border'>
-                            <button role='button' aria-label='Delete'
-                                    class='scb_f_dashboard_remove_assignment scb_s_dashboard_remove_assignment'>
+                            <a href="{% url "common_assignment_delete" assignment_pk=a.id %}" class='scb_s_dashboard_remove_assignment'>
                                 <img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}

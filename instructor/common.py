@@ -26,20 +26,23 @@ def assignments(request):
 @login_required
 def publish_assignment(request, assignment_pk):
     assignment = get_object_or_404(models.Assignment, pk=assignment_pk)
-    if assignment.access == 'private':
+    if request.user == assignment.course.owner and assignment.access == 'private':
         assignment.access = 'public'
         assignment.save()
     return redirect('common_assignments')
 
 
 @login_required
-def assignment_delete(request, pk):
-    try:
-        models.Assignment.objects.get(id=pk).delete()
-    except models.Assignment.DoesNotExist:
-        raise Http404('Object does not exist')
+def assignment_delete(request, assignment_pk):
+    assignment = models.Assignment.objects.get(id=assignment_pk)
+    if request.user == assignment.course.owner:
+        try:
+            assignment.delete()
+        except models.Assignment.DoesNotExist:
+            raise Http404('Object does not exist')
 
     return redirect('common_assignments')
+
 
 def create_new_assignment(request):
     request.session['new'] = True
