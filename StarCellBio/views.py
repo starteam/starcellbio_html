@@ -16,7 +16,8 @@ from django.template.loader import render_to_string
 from backend.models import Assignment, StudentAssignment, Course, UserCourse
 from StarCellBio.forms import ContactForm
 import StarCellBio.settings
-
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 random_mapping = {0: 'DEBAC', 1: 'DABEC', 2: 'CABED', 3: 'ACDEB', 4: 'EBADC', 5: 'BDECA', 6: 'EBCAD', 7: 'ADBCE',
                   8: 'CBAED', 9: 'DEACB', 10: 'ECDAB', 11: 'EDACB', 12: 'EBACD', 13: 'EADBC', 14: 'CBDEA', 15: 'CEDBA',
@@ -40,6 +41,11 @@ random_mapping_ps2 = {0: '52341', 1: '32145', 2: '32514', 3: '32451', 4: '12453'
                       8: '12543', 9: '52341', 10: '52431', 11: '42153', 12: '12354', 13: '52314', 14: '32514',
                       15: '32514', 16: '52413', 17: '32541', 18: '32145', 19: '42315', 20: '12435', 21: '52341',
                       22: '12354', 23: '52143'}
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 def home(request):
