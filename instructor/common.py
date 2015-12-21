@@ -74,23 +74,24 @@ def assignment_setup(request):
                 break
 
     all_assignments = models.Assignment.objects.filter(course__owner=request.user)
-
-    return render_to_response('instructor/assignment_setup.html',
-                              {
-                                  'assignments': all_assignments,
-                                  'access': 'private',
-                                  'error': error,
-                                  'assignment_name': assignment_name,
-                                  'based_on': request.session['based_on'],
-                                  'new': request.session['new'],
-                                  'section_name': 'Assignment',
-                                  'page_name': 'assignment'
-                              },
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'instructor/assignment_setup.html',
+        {
+            'assignments': all_assignments,
+            'access': 'private',
+            'error': error,
+            'assignment_name': assignment_name,
+            'based_on': request.session['based_on'],
+            'new': request.session['new'],
+            'section_name': 'Assignment',
+            'page_name': 'assignment',
+            'last_page_number':  1
+        },
+        context_instance=RequestContext(request))
 
 @login_required
 def course_setup(request):
-
+    page_number = 2
     CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
     course_selected = None
     if request.method == 'POST':
@@ -111,26 +112,30 @@ def course_setup(request):
     all_courses = models.Course.objects.filter(owner=request.user)
     if len(all_courses) > 0:
         course_selected = all_courses[0]
-        create_assignment(request, course_selected)
+        assignment = create_assignment(request, course_selected)
         if 'continue' in request.POST:
+            assignment.last_enabled_page = page_number+1
+            assignment.save()
             return redirect("common_assignments_edit_strains")
 
     if course_selected:
         return redirect("common_course_modify")
 
     formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
-    return render_to_response('instructor/course_modify.html',
-                              {
-                                  'courses': all_courses,
-                                  'access': 'private',
-                                  'formset': formset,
-                                  'course_selected': course_selected,
-                                  'new': request.session['new'],
-                                  'assignment_name': request.session['assignment_name'],
-                                  'section_name': 'Assignment',
-                                  'page_name': 'course'
-                              },
-                              context_instance=RequestContext(request))
+
+    return render_to_response(
+        'instructor/course_modify.html',
+        {
+            'access': 'private',
+            'formset': formset,
+            'course_selected': course_selected,
+            'new': request.session['new'],
+            'assignment_name': request.session['assignment_name'],
+            'section_name': 'Assignment',
+            'page_name': 'course',
+            'last_page_number':  page_number
+        },
+        context_instance=RequestContext(request))
 
 
 def create_assignment(request, course_selected):
@@ -151,6 +156,7 @@ def create_assignment(request, course_selected):
     a.save()
     request.session['assignment_id'] = a.id
     request.session['new'] = False
+    return a
 
 
 @login_required
@@ -185,22 +191,26 @@ def assignment_modify(request):
 
     all_assignments = models.Assignment.objects.filter(course__owner=request.user)
 
-    return render_to_response('instructor/assignment_modify.html',
-                              {'assignments': all_assignments,
-                               'form': form,
-                               'access': json.dumps(assignment.access),
-                               'based_on': request.session['based_on'],
-                               'new': request.session['new'],
-                               'assignment_name': assignment.name,
-                               'section_name': 'Assignment',
-                               'page_name': 'assignment'
-                              },
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'instructor/assignment_modify.html',
+        {
+            'assignments': all_assignments,
+            'form': form,
+            'access': json.dumps(assignment.access),
+            'based_on': request.session['based_on'],
+            'new': request.session['new'],
+            'assignment_name': assignment.name,
+            'section_name': 'Assignment',
+            'page_name': 'assignment',
+            'last_page_number':  assignment.last_enabled_page
+        },
+        context_instance=RequestContext(request))
 
 
 @login_required
 def course_modify(request):
     errors = []
+    page_number = 2
     assignment_id = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
     CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
@@ -231,6 +241,9 @@ def course_modify(request):
                 instance.owner = user
                 instance.save()
             if 'continue' in request.POST:
+                if assignment.last_enabled_page <= page_number:
+                    assignment.last_enabled_page = page_number+1
+                    assignment.save()
                 return redirect("common_assignments_edit_strains")
             # if no errors want to update formset
             formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
@@ -241,21 +254,25 @@ def course_modify(request):
         formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
 
     course_selected = assignment.course.code
-    return render_to_response('instructor/course_modify.html',
-                              {
-                                  'errors': errors,
-                                  'formset': formset,
-                                  'access': json.dumps(assignment.access),
-                                  'course_selected': course_selected,
-                                  'new': request.session['new'],
-                                  'assignment_name': assignment.name,
-                                  'section_name': 'Assignment',
-                                  'page_name': 'course'
-                              },
-                              context_instance=RequestContext(request))
+
+    return render_to_response(
+        'instructor/course_modify.html',
+        {
+            'errors': errors,
+            'formset': formset,
+            'access': json.dumps(assignment.access),
+            'course_selected': course_selected,
+            'new': request.session['new'],
+            'assignment_name': assignment.name,
+            'section_name': 'Assignment',
+            'page_name': 'course',
+            'last_page_number':  assignment.last_enabled_page
+        },
+        context_instance=RequestContext(request))
 
 @login_required
 def assignments_variables(request):
+    page_number = 4
     max_num_of_vars = 3
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
@@ -285,6 +302,9 @@ def assignments_variables(request):
                 if num_variables <= max_num_of_vars:
                     form.save()
             if 'continue' in request.POST:
+                if assignment.last_enabled_page <= page_number:
+                    assignment.last_enabled_page = page_number+1
+                    assignment.save()
                 return redirect("common_assignments_edit_treatments")
     # For published assignment
     elif request.method == "POST" and 'continue' in request.POST:
@@ -293,18 +313,24 @@ def assignments_variables(request):
     # Refresh the assignment from the database
     assignment = models.Assignment.objects.get(id=assignment_id)
     form = AssignmentForm(instance=assignment)
-    return render_to_response('instructor/assignment_select_variables.html',
-                              {'form': form,
-                               'access': json.dumps(assignment.access),
-                               'treatments_created': json.dumps(treatments_created),
-                               'assignment_name': assignment.name,
-                               'section_name': 'Experiment Setup',
-                               'page_name': 'variables'
-                              },
-                              context_instance=RequestContext(request))
+
+    return render_to_response(
+        'instructor/assignment_select_variables.html',
+        {
+            'form': form,
+            'access': json.dumps(assignment.access),
+            'treatments_created': json.dumps(treatments_created),
+            'assignment_name': assignment.name,
+            'section_name': 'Experiment Setup',
+            'page_name': 'variables',
+            'last_page_number':  assignment.last_enabled_page
+        },
+        context_instance=RequestContext(request))
+
 
 @login_required
 def select_technique(request):
+    page_number = 7
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
     var_fields = ['has_wb', 'has_fc', 'has_micro']
@@ -315,7 +341,12 @@ def select_technique(request):
         if form.is_valid():
             form.save()
             if 'continue' in request.POST:
-                return redirect("western_blot_lysate_type")
+                if assignment.has_wb:
+                    if assignment.last_enabled_page <= page_number:
+                        assignment.last_enabled_page = page_number+1
+                        assignment.save()
+                    return redirect("western_blot_lysate_type")
+                # will add more cases for micro and facs later
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("western_blot_lysate_type")
 
@@ -327,13 +358,15 @@ def select_technique(request):
             'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Select Technique',
-            'page_name': 'techniques'
+            'page_name': 'techniques',
+            'last_page_number':  assignment.last_enabled_page
 
         })
 
 
 @login_required
 def assignments_edit_strains(request):
+    page_number = 3
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
     extra_fields = 0
@@ -357,25 +390,32 @@ def assignments_edit_strains(request):
                 else:
                     strain.save()
         if 'continue' in request.POST:
+            if assignment.last_enabled_page <= page_number:
+                assignment.last_enabled_page = page_number+1
+                assignment.save()
             return redirect('common_assignments_variables')
 
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_assignments_variables")
 
     formset = StrainsFormSet(queryset=models.Strains.objects.filter(assignment=assignment))
+    return render_to_response(
+        'instructor/strains.html',
+        {
+            'formset': formset,
+            'access': json.dumps(assignment.access),
+            'new': request.session['new'],
+            'assignment_name': assignment.name,
+            'section_name': 'Experiment Setup',
+            'page_name': 'strains',
+            'last_page_number':  assignment.last_enabled_page
+        },
+        context_instance=RequestContext(request))
 
-    return render_to_response('instructor/strains.html',
-                              {'formset': formset,
-                               'access': json.dumps(assignment.access),
-                               'new':  request.session['new'],
-                               'assignment_name': assignment.name,
-                               'section_name': 'Experiment Setup',
-                               'page_name': 'strains'
-                              },
-                              context_instance=RequestContext(request))
 
 @login_required
 def assignments_edit_treatments(request):
+    page_number = 5
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
 
@@ -431,6 +471,9 @@ def assignments_edit_treatments(request):
                     else:
                         instance.save()
         if 'continue' in request.POST:
+            if assignment.last_enabled_page <= page_number:
+                assignment.last_enabled_page = page_number+1
+                assignment.save()
             return redirect('common_strain_treatments')
 
     elif request.method == "POST" and 'continue' in request.POST:
@@ -496,7 +539,8 @@ def assignments_edit_treatments(request):
             'has_collection': assignment.has_collection_time,
             'assignment_name': assignment.name,
             'section_name': 'Experiment Setup',
-            'page_name': 'treatments'
+            'page_name': 'treatments',
+            'last_page_number':  assignment.last_enabled_page
         },
         context_instance=RequestContext(request)
     )
@@ -506,6 +550,7 @@ def assignments_edit_treatments(request):
 
 @login_required
 def strain_treatments_edit(request):
+    page_number = 6
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
 
@@ -524,7 +569,9 @@ def strain_treatments_edit(request):
                     models.WesternBlotBands.objects.filter(strain_protocol=strain_treatment).delete()
             update_wb_bands(assignment)
             if 'continue' in request.POST:
-
+                if assignment.last_enabled_page <= page_number:
+                    assignment.last_enabled_page = page_number+1
+                    assignment.save()
                 return redirect("common_select_technique")
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_select_technique")
@@ -551,7 +598,8 @@ def strain_treatments_edit(request):
                                'has_duration': assignment.has_duration,
                                'has_collection_time': assignment.has_collection_time,
                                'section_name': 'Experiment Setup',
-                               'page_name': 'protocols'
+                               'page_name': 'protocols',
+                               'last_page_number':  assignment.last_enabled_page
                               },
                               context_instance=RequestContext(request))
 
@@ -614,6 +662,7 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
 
 @login_required
 def western_blot_lysate_type(request):
+    page_number = 8
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
@@ -628,6 +677,9 @@ def western_blot_lysate_type(request):
             if any(getattr(wb, field) for field in field_names):
                 form.save()
             if 'continue' in request.POST:
+                if assignment.last_enabled_page <= page_number:
+                    assignment.last_enabled_page = page_number+1
+                    assignment.save()
                 return redirect('western_blot_antibody')
 
     elif request.method == "POST" and 'continue' in request.POST:
@@ -642,12 +694,14 @@ def western_blot_lysate_type(request):
             'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
-            'page_name': 'wb_lysate_type'
+            'page_name': 'wb_lysate_type',
+            'last_page_number':  assignment.last_enabled_page
         },
         context_instance=RequestContext(request))
 
 @login_required
 def western_blot_antibody(request):
+    page_number = 9
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
@@ -667,6 +721,9 @@ def western_blot_antibody(request):
                 form.western_blot = wb
                 form.save()
             if 'continue' in request.POST:
+                if assignment.last_enabled_page <= page_number:
+                    assignment.last_enabled_page = page_number+1
+                    assignment.save()
                 return redirect('western_blot_band_size')
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("western_blot_band_size")
@@ -689,12 +746,14 @@ def western_blot_antibody(request):
             'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
-            'page_name': 'wb_antibody'
+            'page_name': 'wb_antibody',
+            'last_page_number':  assignment.last_enabled_page
         },
         context_instance=RequestContext(request))
 
 @login_required
 def western_blot_band_size(request):
+    page_number = 10
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
@@ -722,6 +781,9 @@ def western_blot_band_size(request):
             antibodies = formset.save()
             update_wb_bands(assignment, antibodies=antibodies)
             if 'continue' in request.POST:
+                if assignment.last_enabled_page <= page_number:
+                    assignment.last_enabled_page = page_number+1
+                    assignment.save()
                 return redirect('western_blot_band_intensity')
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("western_blot_band_intensity")
@@ -736,7 +798,8 @@ def western_blot_band_size(request):
             'assignment_name': assignment.name,
             'error': json.dumps(error),
             'section_name': 'Western Blotting',
-            'page_name': 'wb_band_size'
+            'page_name': 'wb_band_size',
+            'last_page_number':  assignment.last_enabled_page
         },
         context_instance=RequestContext(request))
 
@@ -839,7 +902,6 @@ def western_blot_band_intensity(request):
         'has_temperature': assignment.has_temperature,
         'has_collection_time': assignment.has_collection_time
     }
-
     return render_to_response(
         'instructor/wb_band_intensity.html',
         {
@@ -850,7 +912,8 @@ def western_blot_band_intensity(request):
             'variables': variables,
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
-            'page_name': 'wb_band_intensity'
+            'page_name': 'wb_band_intensity',
+            'last_page_number':  assignment.last_enabled_page
         },
         context_instance=RequestContext(request))
 

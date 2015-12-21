@@ -15,9 +15,12 @@
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "course" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class='scb_s_assignment_sidebar_link'
-               href="{% if new %}{% url "common_course_setup" %}
-               {% else %}{% url "common_course_modify" %}{% endif %}">
+            <a class='scb_s_assignment_sidebar_link {% if last_page_number < 2 %} disabled {% endif %}'
+                {% if last_page_number >= 2 %}
+                    href="{% if new %}{% url "common_course_setup" %}
+                    {% else %}{% url "common_course_modify" %}{% endif %}"
+                {% endif %}
+            >
                 Course setup
             </a>
         </div>
@@ -25,31 +28,43 @@
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Experiment Setup</div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "strains" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link"
-               href="{% if not new %}{% url "common_assignments_edit_strains" %}{% endif %}">
+            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 3 %} disabled {% endif %}"
+                {% if last_page_number >= 3 %}
+                    href="{% url "common_assignments_edit_strains" %}"
+                {% endif %}
+            >
                 Strains
             </a>
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "variables" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class='scb_s_assignment_sidebar_link'
-               href="{% if not new %}{% url "common_assignments_variables" %}{% endif %}">
+            <a class='scb_s_assignment_sidebar_link {% if last_page_number < 4 %} disabled {% endif %}'
+               {% if last_page_number >= 4 %}
+               href="{% url "common_assignments_variables" %}"
+               {% endif %}
+            >
                 Select variables
             </a>
         </div>
 
         <div role="link" class='scb_ab_s_sidebar_page_link
         {% if page_name == "treatments" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link"
-               href="{% if not new %}{% url "common_assignments_edit_treatments" %}{% endif %}">
+            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 5 %} disabled {% endif %}"
+                {% if last_page_number >= 5  %}
+                href="{% url "common_assignments_edit_treatments" %}"
+                {% endif %}
+            >
                 Define variables
             </a>
         </div>
 
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "protocols" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link"
-               href="{% if not new %}{% url "common_strain_treatments" %}{% endif %}">
+            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 6 %} disabled {% endif %}"
+               {% if last_page_number >= 6 %}
+               href="{% url "common_strain_treatments" %}"
+               {% endif %}
+            >
                 Protocols
             </a>
         </div>
@@ -57,8 +72,11 @@
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Experimental Techniques</div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "techniques" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link"
-               href="{% if not new %}{% url "common_select_technique" %}{% endif %}">
+            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 7 %} disabled {% endif %}"
+                {% if last_page_number >= 7 %}
+                    href="{% url "common_select_technique" %}"
+                {% endif %}
+            >
                 Select Technique
             </a>
         </div>
@@ -67,30 +85,42 @@
 
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "wb_lysate_type" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link"
-               href="{% if not new %}{% url "western_blot_lysate_type" %}{% endif %}">
+            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 8 %} disabled {% endif %}"
+                {% if last_page_number >= 8 %}
+                    href="{% url "western_blot_lysate_type" %}"
+                {% endif %}
+            >
                 Western Blot Lysate Type
             </a>
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "wb_antibody" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link"
-               href="{% if not new %}{% url "western_blot_antibody" %}{% endif %}">
+            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 9 %} disabled {% endif %}"
+                {% if last_page_number >= 9 %}
+                    href="{% url "western_blot_antibody" %}"
+                {% endif %}
+            >
                 Western Blot Antibody
             </a>
         </div>
 
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "wb_band_size" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link"
-               href="{% if not new %}{% url "western_blot_band_size" %}{% endif %}">
+            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 10 %} disabled {% endif %}"
+                {% if last_page_number >= 10 %}
+                    href="{% url "western_blot_band_size" %}"
+                {% endif %}
+            >
                 Western Blot Band Sizes
             </a>
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "wb_band_intensity" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link"
-               href="{% if not new %}{% url "western_blot_band_intensity" %}{% endif %}">
+            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 11 %} disabled {% endif %}"
+                {% if last_page_number >= 11 %}
+                    href="{% url "western_blot_band_intensity" %}"
+                {% endif %}
+            >
                 Western Blot Band Intensity
             </a>
         </div>
