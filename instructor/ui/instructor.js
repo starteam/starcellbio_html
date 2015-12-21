@@ -76,7 +76,7 @@ $(function(){
         $(this).hide().after('<div class="checkbox_delete_image"/>');
 
     });
-    if(access === 'private') {
+    if(typeof(access) !== 'undefined' && access === 'private') {
         $('.checkbox_delete_image').on('click', function () {
             /* Check the hidden checkbox */
             $(this).prev().prop('checked', true);
@@ -271,7 +271,7 @@ $(function(){
         $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Confirmation</h1>");
     }
 /* View assignment, when assignment is public */
-    if(access !=='private'){
+    if(typeof(access) !== 'undefined' && access !=='private'){
         $('input[type="text"],input[type="number"],input[type="checkbox"],input[type="radio"]')
             .attr('disabled', true);
         $('input[type="checkbox"],input[type="radio"]').addClass('disabled');

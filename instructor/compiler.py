@@ -51,7 +51,9 @@ def compile(assignment_id):
                         {'kind': "cell_line", 'title': "Strain", 'editable': 'false'},
                     ],
                     'actions': [
-                        {'kind': 'add_protocol', 'name': 'ADD SAMPLES'}
+                        {'kind': 'add_protocol',
+                         'name': 'ADD SAMPLES',
+                         'open': 'scb_ex1.assignment_builder_add_multiple'}
                     ]
                 }
             },
