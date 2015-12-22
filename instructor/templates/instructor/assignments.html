@@ -46,7 +46,11 @@
                         </td>
                         <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
                             <a class='scb_ab_s_dashboard_action'
-                               href="{% url "common_assignments_edit" assignment_pk=a.id %}">Edit</a>
+                               href="{% url "common_assignments_edit" assignment_pk=a.id %}">
+                                {% if a.access == 'private' %}Edit
+                                {% else %} View
+                                {% endif %}
+                            </a>
                         </td>
                         <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
                              <a class='scb_ab_s_dashboard_action' target="_blank"

@@ -418,6 +418,9 @@ div.block-ellipsis {
     cursor: default;
 }
 
-span.scb_ab_s_dashboard_action{
+span.scb_ab_s_dashboard_action {
     cursor: pointer;
+}
+input[type="checkbox"].disabled{
+    opacity: 1;
 }
