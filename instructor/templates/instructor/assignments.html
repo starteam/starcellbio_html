@@ -53,8 +53,9 @@
                                href="{% url "common_preview" assignment=a.id %}#view=assignments">Preview</a>
                         </td>
                         <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
-                             <a class='scb_ab_s_dashboard_action'
-                               href="{% url "common_publish_assignment" assignment_pk=a.id %}">Publish</a>
+                             <span class='scb_ab_s_dashboard_action scb_ab_f_publish' data-assignment-pk="{{ a.id }}">
+                                 Publish
+                             </span>
                         </td>
 
                         <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_ab_s_dashboard_no_right_border'>

@@ -411,3 +411,7 @@ div.block-ellipsis {
     opacity: 0.4;
     cursor: default;
 }
+
+span.scb_ab_s_dashboard_action{
+    cursor: pointer;
+}
