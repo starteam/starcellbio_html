@@ -259,8 +259,16 @@ $(function(){
             "Would you like to continue?";
         var assignment_pk=$(this).data("assignment-pk");
         var confirm_publish = function(){
-            $('.error_overlay').remove();
-            window.location = "publish/"+assignment_pk;
+            $.ajax({
+                type: "POST",
+                url: "publish/",
+                data: {pk: assignment_pk}
+            }).then(function(){
+                window.location="/ab/assignments/";
+            }).fail(function(response){
+                show_alert(response.responseText);
+
+            });
         };
         var cancel_publish = function(){
             $('.error_overlay').remove();
@@ -269,12 +277,27 @@ $(function(){
 
     });
 
+    /* Preview assignment*/
+    $(".scb_ab_f_preview").click(function(){
+        var assignment_pk=$(this).data("assignment-pk");
+        $.ajax({
+            type: "POST",
+            url: "assignment_complete/",
+            data: {pk:assignment_pk}
+        }).then(function(){
+            window.open('preview/'+assignment_pk+"#view=assignments", '_blank');
+        }).fail(function(response){
+            show_alert(response.responseText);
+        });
+    });
+
     function show_message(message, confirm_func, cancel_func) {
         $('body').prepend("<div class='error_overlay' role='presentation'></div>");
         $.jqDialog.confirm(message, confirm_func, cancel_func);
         $('.jqDialog_header').remove();
         $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Confirmation</h1>");
     }
+
 /* View assignment, when assignment is public */
     if(typeof(access) !== 'undefined' && access !=='private'){
         $('input[type="text"],input[type="number"],input[type="checkbox"],input[type="radio"]')
@@ -283,6 +306,19 @@ $(function(){
         $('input[value="ADD"]').attr('disabled', true).addClass('disabled');
         $('.checkbox_delete_image').addClass('disabled');
     }
+
+    function show_alert(error) {
+        $('body').prepend("<div class='error_overlay' role='presentation'></div>");
+        $.jqDialog.alert(error,
+            function () {
+                $('.error_overlay').remove();
+            }
+        );
+        $('#jqDialog_box').attr('role', 'alertdialog');
+        $('.jqDialog_header').remove();
+        $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Error</h1>");
+    }
+
 
 });
 

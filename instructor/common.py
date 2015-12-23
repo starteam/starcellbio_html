@@ -15,18 +15,26 @@ import backend.models
 import json
 import re
 from instructor.compiler import get_protocol_headers
-
+from django.http import HttpResponse, HttpResponseBadRequest
 
 @login_required
 def assignments(request):
     assignments = models.Assignment.objects.filter(course__owner=request.user)
+    return render_to_response(
+        'instructor/assignments.html',
+        {
+            'assignments': assignments
+        },
+        context_instance=RequestContext(request))
 
-    return render_to_response('instructor/assignments.html',
-                              {'assignments': assignments},
-                              context_instance=RequestContext(request))
 @login_required
-def publish_assignment(request, assignment_pk):
+def publish_assignment(request):
+    assignment_pk = request.POST.get('pk')
     assignment = get_object_or_404(models.Assignment, pk=assignment_pk)
+    assignment_ready = is_assignment_complete(assignment)
+    if not assignment_ready:
+        return HttpResponseBadRequest("Cannot publish unfinished assignment.")
+
     if request.user == assignment.course.owner and assignment.access == 'private':
         assignment.access = 'public'
         assignment.save()
@@ -41,7 +49,10 @@ def publish_assignment(request, assignment_pk):
             access=assignment.access
         )
         backend_assignment.save()
-    return redirect('common_assignments')
+    return HttpResponse('complete')
+
+
+
 
 
 @login_required
@@ -1047,10 +1058,37 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
                               },
                               context_instance=RequestContext(request))
 
+@login_required
+def preview(request, assignment_pk):
+    a = models.Assignment.objects.get(id=assignment_pk)
+    return render_to_response(
+        'instructor/preview.html',
+        {
+            'assignment': a,
+            'assignment_json': compiler.preview_as_json(a.id)
+        },
+        context_instance=RequestContext(request))
 
-def preview(request, assignment):
-    a = models.Assignment.objects.get(id=assignment)
-    return render_to_response('instructor/preview.html',
-                              {'assignment': a,
-                               'assignment_json': compiler.preview_as_json(a.id)},
-                              context_instance=RequestContext(request))
+
+@login_required
+def assignment_complete(request):
+    assignment_pk = request.POST.get('pk')
+    a = models.Assignment.objects.get(id=assignment_pk)
+    if is_assignment_complete(a):
+        return HttpResponse('complete')
+    else:
+        return HttpResponseBadRequest(
+            "You must define your experimental setup and the variables "
+            "for at least one experimental technique before you can preview "
+            "the assignment."
+        )
+
+
+def is_assignment_complete(assignment):
+    can_preview = False
+    if models.StrainTreatment.objects.filter(assignment=assignment, enabled=True).exists():
+        if assignment.has_wb and models.WesternBlotBands.objects.filter(
+                antibody__western_blot__assignment=assignment).exists():
+            can_preview = True
+        # Add more techniques later when they are done
+    return can_preview
