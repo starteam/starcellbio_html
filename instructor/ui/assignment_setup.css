@@ -173,20 +173,24 @@ select:disabled {
     margin-top:20px;
 }
 .scb_ab_s_input_headers>div{
-    width: 144px;
+    width: 148px;
     display: inline-block;
     font-family: 'sourcesanspro-semibold';
     font-size: 14px ;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_small_header{
-    width: 70px;
+    width: 58px;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_med_header{
     width: 130px;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_units_input_header{
-    width:97px;
+    width:77px;
 }
+.scb_ab_s_input_headers>div.scb_ab_s_time_units_input_header{
+    width: 72px;
+}
+
 /* Form inputs  in Define variables*/
 .scb_ab_s_form_input_list{
     position: relative;
@@ -199,21 +203,23 @@ select:disabled {
     margin: 5px 0 0 5px;
 }
 .scb_ab_s_small_input_box>input{
-    width: 50px;
+    width: 40px;
 }
 .scb_ab_s_units_input>input{
-    width: 80px;
+    width: 60px;
+}
+.scb_ab_s_time_units_input>input{
+    width: 53px;
 }
 .scb_ab_s_med_input_box>input{
-    width: 100px;
+    width: 108px;
 }
 /* Delete trash icon*/
 .checkbox_delete_image{
     background: url('images/setup/scb_remove.png') no-repeat;
     display:inline-block;
     height:20px;
-    width: 20px;
-    margin-left:10px;
+    width: 15px;
     background-position: center;
 }
 .checkbox_image:hover {

@@ -140,6 +140,11 @@ $(function(){
         for(i=0; i<$inputs.length; i++){
             $($inputs[i]).attr('list', 'drug_time_unit_list');
         }
+        /* Drug duration time unit */
+        $inputs= $('.drug_duration_unit_box>input');
+        for(i=0; i<$inputs.length; i++){
+            $($inputs[i]).attr('list', 'drug_duration_unit_list');
+        }
         /* Collection time unit */
         $inputs= $('.collection_time_unit_box>input');
         for(i=0; i<$inputs.length; i++){

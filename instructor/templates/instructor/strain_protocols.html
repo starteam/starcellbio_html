@@ -54,7 +54,7 @@
                     {% if has_duration %}
                         <div>
                             {{ form.instance.treatment.drug.duration|default_if_none:'' }}
-                            {{ form.instance.treatment.drug.time_unit|default_if_none:'' }}
+                            {{ form.instance.treatment.drug.duration_unit|default_if_none:'' }}
                         </div>
                     {% endif %}
                     {% if has_temperature %}

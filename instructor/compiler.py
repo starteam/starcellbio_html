@@ -478,7 +478,7 @@ def compile_treatments(treatments, assignment):
             if treatment.drug.duration is None
             else '{time}{unit}'.format(
                 time=treatment.drug.duration,
-                unit=treatment.drug.time_unit
+                unit=treatment.drug.duration_unit
             ),
             'microscope': ['rgb', 'g', 'gr', 'rb'],  # # microscope?!
             'collection_id': 'collection_ab'
