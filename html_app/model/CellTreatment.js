@@ -93,6 +93,7 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
                 new_text = new_text.replace( regexp , resolve(value));
             });
             display_text = new_text == orig_template ? display_text : new_text;
+            display_text = display_text.replace(/(, *)+/g, ", ");
         }
         return display_text;
     };

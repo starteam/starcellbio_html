@@ -120,7 +120,6 @@ def csv_custom(data):
 
 
 def format_table(assignment):
-    wb_table = {}
     headers = "%CELL_LINE%, %TREATMENT%"
 
     keys = {
@@ -389,7 +388,7 @@ def drugs(assignment):
 
 
 def concentrations(assignment):
-    ret = {}
+    ret = {'': {'name': ''}}
     for strain_protocol in assignment.strain_treatment.filter(enabled=True):
         drug = strain_protocol.treatment.drug
         concentration = drug.concentration
