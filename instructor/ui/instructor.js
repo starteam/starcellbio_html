@@ -96,19 +96,16 @@ $(function(){
         var $checkbox= $(this);
         /* Var created is initialized in select_variables template */
         if (created && !showed_warning) {
-            $('body').prepend("<div class='error_overlay' role='presentation'></div>");
-            $.jqDialog.confirm("Previously generated data will be lost. Would you like to continue?",
-                function () {
-                    $('.error_overlay').remove();
-                    select_variables();
-                },
-                function () {
-                    $('.error_overlay').remove();
-                    $checkbox.prop('checked', !$checkbox.prop('checked'));
-                }
-            );
-            $('.jqDialog_header').remove();
-            $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Warning</h1>");
+            var message = "Previously generated data will be lost. Would you like to continue?";
+            var confirm_func = function () {
+                $('.error_overlay').remove();
+                select_variables();
+            };
+            var cancel_func = function () {
+                $('.error_overlay').remove();
+                $checkbox.prop('checked', !$checkbox.prop('checked'));
+            };
+            show_message(message, confirm_func, cancel_func);
             showed_warning=true;
         }else{
             select_variables();
@@ -247,6 +244,30 @@ $(function(){
     $("#id_has_fc").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
     $("#id_has_micro").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
 
+    $(".scb_ab_f_publish").click(function(){
+        var message = "Please confirm that you would like to publish your assignment. " +
+            "Once an assignment is published, the assignment will no longer be able " +
+            "to be edited in the Assignment Builder. Users will be able to access the " +
+            "assignment using the provided course code on the StarCellBio website. " +
+            "Would you like to continue?";
+        var assignment_pk=$(this).data("assignment-pk");
+        var confirm_publish = function(){
+            $('.error_overlay').remove();
+            window.location = "publish/"+assignment_pk;
+        };
+        var cancel_publish = function(){
+            $('.error_overlay').remove();
+        };
+        show_message(message, confirm_publish, cancel_publish);
+
+    });
+
+    function show_message(message, confirm_func, cancel_func){
+        $('body').prepend("<div class='error_overlay' role='presentation'></div>");
+            $.jqDialog.confirm(message, confirm_func, cancel_func);
+            $('.jqDialog_header').remove();
+            $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Confirmation</h1>");
+    }
 
 });
 
