@@ -24,7 +24,7 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
 
     var keep;
 
-    self.parser_ab = function (lane, rules, lane_marks) {
+    self.parser_ab = function (lane, gel, rules, lane_marks) {
 
         for (var rule_index in rules) {
             var rule = rules[rule_index];
@@ -350,7 +350,7 @@ scb.components.WesternBlotModelFactory = function scb_components_WesternBlotMode
             if (lane.id != 'marker') {
                 if (lane.kind == 'whole' || lane.kind == 'whole_cell') {
                     var rules = model.whole.parser_ab;
-                    self.parser_ab(lane, rules, lane_marks);
+                    self.parser_ab(lane, gel, rules, lane_marks);
                 }
                 if (lane.kind == 'nuclear') {
                     var rules = model.nuclear.parser_ab;
