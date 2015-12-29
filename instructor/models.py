@@ -41,6 +41,7 @@ class Course(models.Model):
 class Assignment(models.Model):
     course = models.ForeignKey(Course, related_name='assignments')
     assignment_id = models.CharField(max_length=50, unique=True)
+    last_enabled_page = models.IntegerField(max_length=5, default=2)
     name = models.CharField(max_length=50)
     access = models.CharField(max_length=50, choices=ACCESS, default='private')
     basedOn = models.ForeignKey("Assignment", null=True, blank=True)
