@@ -76,17 +76,19 @@ $(function(){
         $(this).hide().after('<div class="checkbox_delete_image"/>');
 
     });
-    $('.checkbox_delete_image').on('click', function(){
-        /* Check the hidden checkbox */
-        $(this).prev().prop('checked', true);
-        /* Want to disable the input box for the strain */
-        var input_element=$(this).parent().parent().find("input[id$='name']")[0];
-        $(input_element).attr('disabled', true);
-        /* Set opacity for the entire line, ul element */
-        $(this).parent().parent().css('opacity', 0.5);
-        /* Set cursor on the trash image */
-        $(this).css('cursor', 'default');
-    });
+    if(access === 'private') {
+        $('.checkbox_delete_image').on('click', function () {
+            /* Check the hidden checkbox */
+            $(this).prev().prop('checked', true);
+            /* Want to disable the input box for the strain */
+            var input_element = $(this).parent().parent().find("input[id$='name']")[0];
+            $(input_element).attr('disabled', true);
+            /* Set opacity for the entire line, ul element */
+            $(this).parent().parent().css('opacity', 0.5);
+            /* Set cursor on the trash image */
+            $(this).css('cursor', 'default');
+        });
+    }
     /**
     * Select variables
     */
@@ -262,11 +264,19 @@ $(function(){
 
     });
 
-    function show_message(message, confirm_func, cancel_func){
+    function show_message(message, confirm_func, cancel_func) {
         $('body').prepend("<div class='error_overlay' role='presentation'></div>");
-            $.jqDialog.confirm(message, confirm_func, cancel_func);
-            $('.jqDialog_header').remove();
-            $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Confirmation</h1>");
+        $.jqDialog.confirm(message, confirm_func, cancel_func);
+        $('.jqDialog_header').remove();
+        $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Confirmation</h1>");
+    }
+/* View assignment, when assignment is public */
+    if(access !=='private'){
+        $('input[type="text"],input[type="number"],input[type="checkbox"],input[type="radio"]')
+            .attr('disabled', true);
+        $('input[type="checkbox"],input[type="radio"]').addClass('disabled');
+        $('input[value="ADD"]').attr('disabled', true).addClass('disabled');
+        $('.checkbox_delete_image').addClass('disabled');
     }
 
 });

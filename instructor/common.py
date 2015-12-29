@@ -78,6 +78,7 @@ def assignment_setup(request):
     return render_to_response('instructor/assignment_setup.html',
                               {
                                   'assignments': all_assignments,
+                                  'access': 'private',
                                   'error': error,
                                   'assignment_name': assignment_name,
                                   'based_on': request.session['based_on'],
@@ -121,6 +122,7 @@ def course_setup(request):
     return render_to_response('instructor/course_modify.html',
                               {
                                   'courses': all_courses,
+                                  'access': 'private',
                                   'formset': formset,
                                   'course_selected': course_selected,
                                   'new': request.session['new'],
@@ -170,12 +172,14 @@ def assignment_modify(request):
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
     AssignmentForm = modelform_factory(models.Assignment, fields=['name'])
 
-    if request.method == "POST":
+    if request.method == "POST" and assignment.access == 'private':
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
             form.save()
             if 'continue' in request.POST:
                 return redirect("common_course_modify")
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("common_course_modify")
     else:
         form = AssignmentForm(instance=assignment)
 
@@ -184,6 +188,7 @@ def assignment_modify(request):
     return render_to_response('instructor/assignment_modify.html',
                               {'assignments': all_assignments,
                                'form': form,
+                               'access': json.dumps(assignment.access),
                                'based_on': request.session['based_on'],
                                'new': request.session['new'],
                                'assignment_name': assignment.name,
@@ -199,18 +204,16 @@ def course_modify(request):
     assignment_id = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
     CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
-    if request.method == 'POST':
+    if request.method == 'POST' and assignment.access == 'private':
         pk = request.POST['course_pk']
         if not long(pk) == assignment.course.id:
             # change the course for this assignment
             new_course = get_object_or_404(models.Course, pk=long(pk))
             assignment.course = new_course
             assignment.save()
-
         # change this course's name or code
         formset = CourseFormSet(request.POST)
         if formset.is_valid():
-
             instances = formset.save(commit=False)
             user = User.objects.get(username=request.user)
             for obj in formset.deleted_objects:
@@ -231,13 +234,18 @@ def course_modify(request):
                 return redirect("common_assignments_edit_strains")
             # if no errors want to update formset
             formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
+    # for view mode
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("common_assignments_edit_strains")
     else:
         formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
+
     course_selected = assignment.course.code
     return render_to_response('instructor/course_modify.html',
                               {
                                   'errors': errors,
                                   'formset': formset,
+                                  'access': json.dumps(assignment.access),
                                   'course_selected': course_selected,
                                   'new': request.session['new'],
                                   'assignment_name': assignment.name,
@@ -259,7 +267,7 @@ def assignments_variables(request):
     treatments_created = False
     if models.Treatment.objects.filter(assignment=assignment).exists():
         treatments_created = True
-    if request.method == "POST":
+    if request.method == "POST" and assignment.access == 'private':
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
             if form.has_changed():
@@ -278,11 +286,16 @@ def assignments_variables(request):
                     form.save()
             if 'continue' in request.POST:
                 return redirect("common_assignments_edit_treatments")
+    # For published assignment
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("common_assignments_edit_treatments")
+
     # Refresh the assignment from the database
     assignment = models.Assignment.objects.get(id=assignment_id)
     form = AssignmentForm(instance=assignment)
     return render_to_response('instructor/assignment_select_variables.html',
                               {'form': form,
+                               'access': json.dumps(assignment.access),
                                'treatments_created': json.dumps(treatments_created),
                                'assignment_name': assignment.name,
                                'section_name': 'Experiment Setup',
@@ -297,18 +310,21 @@ def select_technique(request):
     var_fields = ['has_wb', 'has_fc', 'has_micro']
     AssignmentForm = modelform_factory(models.Assignment, fields=var_fields)
 
-    if request.method == "POST":
+    if request.method == "POST" and assignment.access == 'private':
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
             form.save()
             if 'continue' in request.POST:
                 return redirect("western_blot_lysate_type")
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("western_blot_lysate_type")
 
     form = AssignmentForm(instance=assignment)
     return render_to_response(
         'instructor/select_technique.html',
         {
             'form': form,
+            'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Select Technique',
             'page_name': 'techniques'
@@ -326,7 +342,7 @@ def assignments_edit_strains(request):
 
     StrainsFormSet = modelformset_factory(models.Strains, extra=extra_fields, fields=['name'], can_delete=True)
 
-    if request.method == "POST":
+    if request.method == "POST" and assignment.access == 'private':
         formset = StrainsFormSet(request.POST)
 
         if formset.is_valid():
@@ -340,14 +356,17 @@ def assignments_edit_strains(request):
                     create_strain_treatments(assignment, strains=[strain])
                 else:
                     strain.save()
-
         if 'continue' in request.POST:
             return redirect('common_assignments_variables')
+
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("common_assignments_variables")
 
     formset = StrainsFormSet(queryset=models.Strains.objects.filter(assignment=assignment))
 
     return render_to_response('instructor/strains.html',
                               {'formset': formset,
+                               'access': json.dumps(assignment.access),
                                'new':  request.session['new'],
                                'assignment_name': assignment.name,
                                'section_name': 'Experiment Setup',
@@ -392,7 +411,7 @@ def assignments_edit_treatments(request):
                                                  can_delete=True,
                                                  exclude=['assignment'])
 
-    if request.method == "POST":
+    if request.method == "POST" and assignment.access == 'private':
         mapping = {
             'drug': (DrugFormSet, 'drugs'),
             'temperature': (TemperatureFormSet, 'temperatures'),
@@ -411,9 +430,11 @@ def assignments_edit_treatments(request):
                         create_treatments(assignment, **{treatment_kw: [instance]})
                     else:
                         instance.save()
-
         if 'continue' in request.POST:
             return redirect('common_strain_treatments')
+
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("common_strain_treatments")
 
      # If instructor clicked ADD, add extra form
     drug_extra_form = 0
@@ -464,6 +485,7 @@ def assignments_edit_treatments(request):
     return render_to_response(
         'instructor/protocols.html',
         {
+            'access': json.dumps(assignment.access),
             'drug_formset': drug_formset,
             'temperature_formset': temperature_formset,
             'collection_time_formset': collection_time_formset,
@@ -491,7 +513,7 @@ def strain_treatments_edit(request):
 
     STFormSet = modelformset_factory(models.StrainTreatment, extra=0,
                                      exclude=['assignment', 'strain', 'treatment'])
-    if request.method == "POST":
+    if request.method == "POST" and assignment.access == 'private':
         formset = STFormSet(request.POST)
         formset.clean()
         if formset.is_valid():
@@ -504,6 +526,8 @@ def strain_treatments_edit(request):
             if 'continue' in request.POST:
 
                 return redirect("common_select_technique")
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("common_select_technique")
 
     formset = STFormSet(
         queryset=models.StrainTreatment.objects.filter(assignment=assignment).order_by(
@@ -518,6 +542,7 @@ def strain_treatments_edit(request):
     )
     return render_to_response('instructor/strain_protocols.html',
                               {'formset': formset,
+                               'access': json.dumps(assignment.access),
                                'assignment_name': assignment.name,
                                'headers': headers,
                                'has_concentration': assignment.has_concentration,
@@ -593,7 +618,8 @@ def western_blot_lysate_type(request):
     assignment = models.Assignment.objects.get(id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
     WesternBlotForm = modelform_factory(models.WesternBlot, exclude=['assignment'])
-    if request.method == "POST":
+
+    if request.method == "POST" and assignment.access == 'private':
         form = WesternBlotForm(request.POST, instance=wb)
         field_names = ['has_gel_10', 'has_gel_12', 'has_gel_15']
         if form.is_valid():
@@ -603,12 +629,17 @@ def western_blot_lysate_type(request):
                 form.save()
             if 'continue' in request.POST:
                 return redirect('western_blot_antibody')
+
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("western_blot_antibody")
+
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
     form = WesternBlotForm(instance=wb)
     return render_to_response(
         'instructor/wb_lysate_type.html',
         {
             'form': form,
+            'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_lysate_type'
@@ -626,7 +657,7 @@ def western_blot_antibody(request):
         can_delete=True,
         exclude=exclude_fields
     )
-    if request.method == "POST":
+    if request.method == "POST" and assignment.access == 'private':
         formset = WesternBlotAntibodyFormset(request.POST)
         if formset.is_valid():
             entries = formset.save(commit=False)
@@ -637,6 +668,9 @@ def western_blot_antibody(request):
                 form.save()
             if 'continue' in request.POST:
                 return redirect('western_blot_band_size')
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("western_blot_band_size")
+
     extra_fields = 0
     if 'add' in request.POST or not models.WesternBlotAntibody.objects.filter(western_blot=wb).exists():
         extra_fields = 1
@@ -652,6 +686,7 @@ def western_blot_antibody(request):
         'instructor/wb_antibody.html',
         {
             'formset': formset,
+            'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_antibody'
@@ -681,20 +716,22 @@ def western_blot_band_size(request):
         extra=0,
         exclude=exclude_fields
     )
-    if request.method == "POST":
-        weights_by_type = ['wc_weight', 'nuc_weight', 'cyto_weight']
+    if request.method == "POST" and assignment.access == 'private':
         formset = AntibodiesFormset(request.POST)
         if formset.is_valid():
             antibodies = formset.save()
             update_wb_bands(assignment, antibodies=antibodies)
-
             if 'continue' in request.POST:
                 return redirect('western_blot_band_intensity')
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("western_blot_band_intensity")
+
     formset = AntibodiesFormset(queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb))
     return render_to_response(
         'instructor/wb_band_size.html',
         {
             'formset': formset,
+            'access': json.dumps(assignment.access),
             'types_selected': types_selected,
             'assignment_name': assignment.name,
             'error': json.dumps(error),
@@ -764,7 +801,7 @@ def western_blot_band_intensity(request):
         extra=0,
         exclude=['strain_protocol', 'antibody', 'weight', 'lysate_type']
     )
-    if request.method == 'POST':
+    if request.method == 'POST' and assignment.access == 'private':
         formset = BandsFormset(request.POST)
         if formset.is_valid():
             entries = formset.save(commit=False)
@@ -772,6 +809,8 @@ def western_blot_band_intensity(request):
                 entry.save()
             if 'continue' in request.POST:
                 return redirect('common_assignments')
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("common_assignments")
     else:
         formset = BandsFormset(queryset=models.WesternBlotBands.objects.filter(
             antibody__western_blot=wb).order_by(
@@ -805,6 +844,7 @@ def western_blot_band_intensity(request):
         'instructor/wb_band_intensity.html',
         {
             'formset': formset,
+            'access': json.dumps(assignment.access),
             'formset_group': formset_group,
             'antibodies': antibodies,
             'variables': variables,
