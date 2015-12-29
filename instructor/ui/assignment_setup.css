@@ -102,7 +102,6 @@ select:disabled {
 .scb_ab_s_course_list_wrapper{
     position: relative;
     left: 30px;
-    top: 30px;
 }
 
 .scb_ab_s_course_edit_headers{
@@ -114,15 +113,22 @@ select:disabled {
     width: 58px;
 
 }
-
-.scb_ab_s_course_fields_error_list{
+.scb_ab_s_error_list{
     position:relative;
     color: indianred;
+    display:inline-block;
+
+}
+.scb_ab_s_course_fields_error_list{
     left:67px;
     width:165px;
     display:inline-block;
     padding:5px 0 0 0;
     margin:0;
+}
+.scb_ab_s_top_error_list{
+    left:30px;
+    margin-bottom: 10px;
 
 }
 .scb_ab_s_course_form_list{
