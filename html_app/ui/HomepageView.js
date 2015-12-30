@@ -63,7 +63,12 @@ scb.ui.static.HomepageView.register = function(workarea) {
 				var iframe = $('.scb_f_signup_iframe').contents();
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 				iframe.find('input[type="radio"][value="student"]').attr('checked', 'checked');
-				
+                iframe.find('#toggle_message').html(
+                        'Your instructor should have provided you with a code that you need ' +
+                        'to enter below to register and use this StarCellBio tool. Please contact ' +
+                        'your instructor if you have not received this code. You will receive an ' +
+                        'email to confirm your account. <br/><br/>Your work will be saved in this account.'
+                );
 				iframe.find(".auth_submit_button").click(function(){
 						   var mask = document.createElement('div');
 						   mask.className='overlay';
@@ -127,6 +132,13 @@ scb.ui.static.HomepageView.register = function(workarea) {
 				iframe.find('input[type="checkbox"]').css('height', '12px');
 				iframe.find('input[type="radio"][value="instructor"]').attr('checked', 'checked');
 				iframe.find('#div_id_course_code').css('display', 'none');
+                iframe.find('#toggle_message').text(
+                        "In the instructor account, instructors set up and customize " +
+                        "their own StarCellBio assignments and experiments. The email address " +
+                        "for the instructor account must be different from those used to set " +
+                        "up other StarCellBio accounts. To set up an instructor account, enter " +
+                        "your email and password below and then click Create Account."
+                );
 				iframe.find(".auth_submit_button").click(function(){
 						   var mask = document.createElement('div');
 						   mask.className='overlay';
