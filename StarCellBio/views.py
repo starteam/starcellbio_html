@@ -273,16 +273,10 @@ def get_student_courses(request, **kwargs):
         else:
             all = []
             # sample courses
-            #for a in Assignment.objects.filter(courseID=Course.objects.filter(code='SCB_SampleExercises')):
-            for a in Assignment.objects.all():
+            for a in Assignment.objects.filter(courseID=Course.objects.filter(code='SCB_SampleExercises')):
                 dictionary = ast.literal_eval(a.data)
                 all.append(dictionary)
 
-            # for a in Assignment.objects.all():
-            #     dictionary = ast.literal_eval(a.data)
-            #     if (
-            #                 a.assignmentID == 'decusability' or a.assignmentID == 'scb_ex1' or a.assignmentID == 'microscopy_usability'):  # or a.assignmentID == 'microscopy_test' ): #or a.assignmentID == 'assignment_706_2014_ps2'):
-            #         all.append(dictionary)
             is_selected = None
             if len(all) > 0:
                 is_selected = all[0]['id']

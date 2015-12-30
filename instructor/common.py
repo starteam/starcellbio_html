@@ -11,6 +11,7 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
+import backend.models
 import json
 import re
 from instructor.compiler import get_protocol_headers
@@ -29,6 +30,17 @@ def publish_assignment(request, assignment_pk):
     if request.user == assignment.course.owner and assignment.access == 'private':
         assignment.access = 'public'
         assignment.save()
+        course, created = backend.models.Course.objects.get_or_create(code=assignment.course.code)
+        assignment_json = compiler.compile(assignment.id)
+        backend_assignment = backend.models.Assignment(
+            courseID=course,
+            assignmentID=assignment.id,
+            assignmentName=assignment.name,
+            data=assignment_json,
+            ownerID=assignment.course.owner,
+            access=assignment.access
+        )
+        backend_assignment.save()
     return redirect('common_assignments')
 
 
@@ -78,7 +90,7 @@ def assignment_setup(request):
         'instructor/assignment_setup.html',
         {
             'assignments': all_assignments,
-            'access': 'private',
+            'access': json.dumps('private'),
             'error': error,
             'assignment_name': assignment_name,
             'based_on': request.session['based_on'],
@@ -126,7 +138,7 @@ def course_setup(request):
     return render_to_response(
         'instructor/course_modify.html',
         {
-            'access': 'private',
+            'access': json.dumps('private'),
             'formset': formset,
             'course_selected': course_selected,
             'new': request.session['new'],
