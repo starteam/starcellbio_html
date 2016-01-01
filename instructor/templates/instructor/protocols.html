@@ -13,12 +13,13 @@
             <div class="scb_ab_s_input_headers">
                 <div>Treatment Name</div>
                 {% for header in input_headers %}
-                    {% if header == 'Concen. Units' or header == 'Time Units' %}
+                    {% if header == 'Concen. Units' %}
                         <div class="scb_ab_s_units_input_header">{{ header }}</div>
+                    {% elif header == 'Time Units' %}
+                        <div class="scb_ab_s_time_units_input_header">{{ header }}</div>
                     {% else %}
                         <div class="scb_ab_s_small_header">{{ header }}</div>
                     {% endif %}
-
                 {% endfor %}
             </div>
             {% for form in drug_formset %}
@@ -35,16 +36,27 @@
                             </datalist>
                         </div>
                     {% endif %}
-                    <div class="scb_ab_s_small_input_box">{{ form.start_time }}</div>
-                    <div class="scb_ab_s_small_input_box">{{ form.duration }}</div>
-                    <div class="scb_ab_s_units_input drug_time_unit_box">{{ form.time_unit }}
-                        <datalist id="drug_time_unit_list">
-                            {% for unit in time_unit_list %}
-                                <option value="{{ unit }}">
-                            {% endfor %}
-                        </datalist>
-                    </div>
-                    <div>{{ form.id }}</div>
+                    {% if form.start_time %}
+                        <div class="scb_ab_s_small_input_box">{{ form.start_time }}</div>
+                        <div class="scb_ab_s_time_units_input drug_time_unit_box">{{ form.time_unit }}
+                            <datalist id="drug_time_unit_list">
+                                {% for unit in time_unit_list %}
+                                    <option value="{{ unit }}">
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                    {% endif %}
+                    {% if form.duration %}
+                        <div class="scb_ab_s_small_input_box">{{ form.duration }}</div>
+                        <div class="scb_ab_s_time_units_input drug_duration_unit_box">{{ form.duration_unit }}
+                            <datalist id="drug_duration_unit_list">
+                                {% for unit in time_unit_list %}
+                                    <option value="{{ unit }}">
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div>{{ form.id }}</div>
+                    {% endif %}
                     <div class="delete_checkbox">{{ form.DELETE }}</div>
                 </div>
             {% endfor %}

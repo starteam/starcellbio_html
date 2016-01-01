@@ -40,7 +40,7 @@
                             {{ form.instance.strain_protocol.treatment.drug.start_time }}
                             {{ form.instance.strain_protocol.treatment.drug.time_unit }}{% endif %}{% if variables.has_duration and form.instance.strain_protocol.treatment.drug.duration != None %},
                             {{ form.instance.strain_protocol.treatment.drug.duration }}
-                            {{ form.instance.strain_protocol.treatment.drug.time_unit }}{% endif %}{% if variables.has_temperature %},
+                            {{ form.instance.strain_protocol.treatment.drug.duration_unit }}{% endif %}{% if variables.has_temperature %},
                             {{ form.instance.strain_protocol.treatment.temperature.degrees }} &#8451;{% endif %}{% if variables.has_collection_time %},
                             {{ form.instance.strain_protocol.treatment.collection_time.time }}
                             {{ form.instance.strain_protocol.treatment.collection_time.units }}

@@ -442,16 +442,17 @@ def assignments_edit_treatments(request):
     else:
         input_headers.extend(['Concen.', 'Concen. Units'])
 
-    if not (has_duration or has_start_time):
-        drug_formset_exclude.extend(['duration', 'start_time', 'time_unit'])
-    elif not has_duration:
+    if has_duration and has_start_time:
+        input_headers.extend(['Start Time', 'Time Units', 'Duration', 'Time Units'])
+    elif has_start_time:
         drug_formset_exclude.append('duration')
         input_headers.extend(['Start Time', 'Time Units'])
-    elif not has_start_time:
+    elif has_duration:
         drug_formset_exclude.append('start_time')
         input_headers.extend(['Duration', 'Duration Units'])
     else:
-        input_headers.extend(['Start Time', 'Duration', 'Time Units'])
+        drug_formset_exclude.extend(['duration','duration_unit' 'start_time', 'time_unit'])
+
    
     DrugFormSet = modelformset_factory(models.Drug,
                                        can_delete=True,
@@ -534,7 +535,7 @@ def assignments_edit_treatments(request):
         'g/L',
         'nM',
         u'\u03BCM', #uM
-        'mm',
+        'mM',
         'M'
     ]
     return render_to_response(
