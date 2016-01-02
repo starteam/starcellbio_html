@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('instructor', '0012_change_variables_to_int'),
+        ('instructor', '0013_assignment_last_enabled_page'),
     ]
 
     operations = [
