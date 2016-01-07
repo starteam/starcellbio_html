@@ -396,7 +396,7 @@ def concentrations(assignment):
         concentration = drug.concentration
         if not concentration is None:
             ret[str(concentration)] = {
-                'name': u"{concentration}{unit}".format(
+                'name': u"{concentration} {unit}".format(
                     concentration=concentration,
                     unit=drug.concentration_unit
                 ),
@@ -470,13 +470,13 @@ def compile_treatments(treatments, assignment):
             ]},
             'start_time': ''
             if treatment.drug.start_time is None
-            else '{time}{unit}'.format(
+            else '{time} {unit}'.format(
                 time=treatment.drug.start_time,
                 unit=treatment.drug.time_unit
             ),
             'duration': ''
             if treatment.drug.duration is None
-            else '{time}{unit}'.format(
+            else '{time} {unit}'.format(
                 time=treatment.drug.duration,
                 unit=treatment.drug.duration_unit
             ),
@@ -486,7 +486,7 @@ def compile_treatments(treatments, assignment):
         if assignment.has_temperature:
             row['temperature'] = treatment.temperature.id
         if assignment.has_collection_time:
-            row['collection_time'] = "{time}{units}".format(
+            row['collection_time'] = "{time} {units}".format(
                 time=treatment.collection_time.time,
                 units=treatment.collection_time.units
             )
