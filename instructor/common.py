@@ -451,7 +451,7 @@ def assignments_edit_treatments(request):
         drug_formset_exclude.append('start_time')
         input_headers.extend(['Duration', 'Duration Units'])
     else:
-        drug_formset_exclude.extend(['duration','duration_unit' 'start_time', 'time_unit'])
+        drug_formset_exclude.extend(['duration', 'duration_unit', 'start_time', 'time_unit'])
 
    
     DrugFormSet = modelformset_factory(models.Drug,
