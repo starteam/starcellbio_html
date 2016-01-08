@@ -278,17 +278,37 @@ $(function(){
     });
 
     /* Preview assignment*/
-    $(".scb_ab_f_preview").click(function(){
-        var assignment_pk=$(this).data("assignment-pk");
+    $(".scb_ab_f_preview").click(function() {
+        var assignment_pk = $(this).data("assignment-pk");
         $.ajax({
             type: "POST",
             url: "assignment_complete/",
-            data: {pk:assignment_pk}
-        }).then(function(){
-            window.open('preview/'+assignment_pk+"#view=assignments", '_blank');
-        }).fail(function(response){
+            data: {pk: assignment_pk}
+        }).then(function () {
+            window.open('preview/' + assignment_pk + "#view=assignments", '_blank');
+        }).fail(function (response) {
             show_alert(response.responseText);
         });
+    });
+
+    /* Delete assignment*/
+    $(".scb_ab_f_delete_assignment").click(function(){
+        var assignment_pk = $(this).data("assignment-pk");
+        var message = "Your assignment will be removed permanently from your dashboard. " +
+            "Would you like to continue?";
+        if($(this).data("access") === 'published'){
+            message = "Your assignment will be removed permanently from your dashboard " +
+                "and students will no longer be able to access this assignment within this " +
+                "course and their work will be deleted. Would you like to continue?"
+        }
+        var confirm_publish = function(){
+            $('.error_overlay').remove();
+            window.location = "delete/"+assignment_pk;
+        };
+        var cancel_publish = function(){
+            $('.error_overlay').remove();
+        };
+        show_message(message, confirm_publish, cancel_publish);
     });
 
     function show_message(message, confirm_func, cancel_func) {
