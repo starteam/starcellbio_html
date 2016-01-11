@@ -231,7 +231,7 @@ select:disabled {
     margin-bottom: 7px;
 }
 .scb_ab_s_grayed{
-    color: grey;
+    color: grey !important;
 }
 
 
@@ -421,7 +421,7 @@ div.block-ellipsis {
 /* Temporarily disable techniques */
 .disabled{
     opacity: 0.4;
-    cursor: default;
+    cursor: default !important;
 }
 
 span.scb_ab_s_dashboard_action {
