@@ -117,7 +117,7 @@
                         </td>
                         {if $template.ui.add_multiple_dialog.has_variables['concentration']}
                             <td class='scb_s_experiment_setup_table_border'>
-                              {$element.treatment_list.list[0].drug_list.list[0].concentration_id}
+                              {$template.concentrations[$element.treatment_list.list[0].drug_list.list[0].concentration_id].name}
                             </td>
                         {/if}
                         {if $template.ui.add_multiple_dialog.has_variables['start_time']}
