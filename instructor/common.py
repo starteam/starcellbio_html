@@ -245,7 +245,13 @@ def course_modify(request):
                     elif not models.Assignment.objects.filter(course=obj).exists():
                         obj.delete()
                     else:
-                        errors.append('Cannot delete course with assignments.')
+                        errors.append(
+                            'This course cannot be deleted as there are other '
+                            'assignments within this course. If you would like '
+                            'to delete all of the assignments within the course, '
+                            'please delete the assignments individually using '
+                            'the trash can icon on the dashboard.'
+                        )
             for instance in instances:
                 if hasattr(instance, 'owner') and instance.owner != user:
                     raise PermissionDenied
