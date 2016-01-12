@@ -58,7 +58,9 @@
                              </span>
                         </td>
                         <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
-                             <span class='scb_ab_s_dashboard_action scb_ab_f_publish' data-assignment-pk="{{ a.id }}">
+                             <span class='scb_ab_s_dashboard_action
+                                {% if a.access == 'private' %} scb_ab_f_publish{% else %} disabled scb_ab_s_grayed{% endif %}'
+                                   data-assignment-pk="{{ a.id }}">
                                  Publish
                              </span>
                         </td>
