@@ -5,7 +5,7 @@ from django.contrib import admin
 # Constants
 
 ACCESS = (
-    ('public', 'Public'),
+    ('published', 'Published'),
     ('private', 'Private'),
     ('archived', 'Archived')
 )

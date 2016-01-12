@@ -36,7 +36,7 @@ def publish_assignment(request):
         return HttpResponseBadRequest("Cannot publish unfinished assignment.")
 
     if request.user == assignment.course.owner and assignment.access == 'private':
-        assignment.access = 'public'
+        assignment.access = 'published'
         assignment.save()
         course, created = backend.models.Course.objects.get_or_create(code=assignment.course.code)
         assignment_json = compiler.compile(assignment.id)
