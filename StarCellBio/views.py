@@ -229,23 +229,7 @@ def get_student_courses(request, **kwargs):
                         a = Assignment.objects.filter(assignmentID=x)
                         a = a[0]
                         original_assignment_data = a.data
-                        assignment_data = ast.literal_eval(original_assignment_data)
-                        if (a.assignmentName == 'StarCellBio Problem 2' or assignment_data['template'][
-                            'random_choose']):
-                            import hashlib
 
-                            md5 = hashlib.md5()
-                            md5.update(str(request.user.email).lower())
-                            encoded_email = md5.hexdigest()
-                            encoded_number = int(encoded_email, 16) % 24
-                            order = random_mapping_ps2[encoded_number]
-                            order = list(order)
-                            assignment_data['template']['random_order'] = order
-                            original_assignment_data = repr(assignment_data)
-                            print order
-                        if (a.assignmentName == 'StarCellBio Problem 1' or assignment_data['template'][
-                            'randomize_all']):
-                            original_assignment_data = randomize_706_2014_ps1(request, assignment_data)
                         sa = StudentAssignment(student=request.user, course=course, assignmentID=a.assignmentID,
                                                assignmentName=a.assignmentName, token=token1,
                                                data=original_assignment_data)
