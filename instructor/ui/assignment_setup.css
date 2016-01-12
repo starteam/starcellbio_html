@@ -428,6 +428,16 @@ div.block-ellipsis {
 span.scb_ab_s_dashboard_action {
     cursor: pointer;
 }
-input[type="checkbox"].disabled{
+input[type="checkbox"].disabled {
     opacity: 1;
+}
+.scb_ab_s_navigation_button.scb_ab_s_dashboard_new_assignment_button{
+    font-size: 10pt;
+    padding: 9px 20px 0 20px;
+    font-family: 'sourcesanspro-semibold';
+    position:relative;
+    float: left;
+    left: 10px;
+    top: 20px;
+
 }

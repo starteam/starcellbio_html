@@ -69,7 +69,7 @@ urlpatterns += patterns(
     url(r'^ab/assignments/$', instructor_common.assignments, name="common_assignments"),
     url(r'^ab/assignments/delete/(?P<assignment_pk>.+)$', instructor_common.assignment_delete,
         name="common_assignment_delete"),
-    url(r'^ab/assignments/publish/(?P<assignment_pk>[^/]+)$', instructor_common.publish_assignment,
+    url(r'^ab/assignments/publish/$', instructor_common.publish_assignment,
         name="common_publish_assignment"),
 
     # Creating assignment
@@ -99,8 +99,11 @@ urlpatterns += patterns(
         instructor_common.assignments_variables, name="common_assignments_variables"),
 
     # Preview
-    url(r'^ab/assignments/preview/(?P<assignment>[^/]+)$', instructor_common.preview,
+    url(r'^ab/assignments/preview/(?P<assignment_pk>[^/]+)$', instructor_common.preview,
         name="common_preview"),
+    # Check if assignment is complete
+    url(r'^ab/assignments/assignment_complete/$', instructor_common.assignment_complete,
+        name="common_assignment_complete"),
 
     # Select Technique
     url(r'^ab/assignments/select_technique/$', instructor_common.select_technique,

@@ -4,7 +4,7 @@
     <div class='scb_s_dashboard_sidebar'>
         <h1 class="scb_s_dashboard_sidebar_title">Your Assignments: </h1>
 
-        <a class='scb_ab_s_navigation_button scb_s_dashboard_new_assignment_button'
+        <a class='scb_ab_s_navigation_button scb_ab_s_dashboard_new_assignment_button'
            href="{% url "common_create_new_assignment" %}">Create a New Assignment&nbsp; +</a>
 
         <div class="scb_s_dashboard_table_wrapper scb_s_dashboard_table_pos">
@@ -53,8 +53,9 @@
                             </a>
                         </td>
                         <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
-                             <a class='scb_ab_s_dashboard_action' target="_blank"
-                               href="{% url "common_preview" assignment=a.id %}#view=assignments">Preview</a>
+                             <span class='scb_ab_s_dashboard_action scb_ab_f_preview' data-assignment-pk="{{ a.id }}">
+                                 Preview
+                             </span>
                         </td>
                         <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
                              <span class='scb_ab_s_dashboard_action scb_ab_f_publish' data-assignment-pk="{{ a.id }}">
