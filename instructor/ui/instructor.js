@@ -251,6 +251,7 @@ $(function(){
     $("#id_has_fc").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
     $("#id_has_micro").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
 
+    /* Publish assignment on the dashboard */
     $(".scb_ab_f_publish").click(function(){
         var message = "Please confirm that you would like to publish your assignment. " +
             "Once an assignment is published, the assignment will no longer be able " +

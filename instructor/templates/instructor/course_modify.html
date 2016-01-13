@@ -29,8 +29,7 @@
                 <div class="scb_ab_s_course_form_list">
                     <div>
                         <input  type="radio" class="scb_ab_f_select_course" data-id="{{ form.id.value}}"
-                                {% if form.id.value and course_selected == form.code.value %}checked{% endif %}
-                                {% if not form.id.value  %}disabled{% endif %}/>
+                                {% if form.id.value and course_selected == form.code.value %}checked{% endif %}/>
                     </div>
                     <div>{{ form.name }}</div>
                     <div>{{ form.code }}</div>

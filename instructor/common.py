@@ -238,15 +238,10 @@ def course_modify(request):
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
     CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
     if request.method == 'POST' and assignment.access == 'private':
-        pk = request.POST['course_pk']
-        if not long(pk) == assignment.course.id:
-            # change the course for this assignment
-            new_course = get_object_or_404(models.Course, pk=long(pk))
-            assignment.course = new_course
-            assignment.save()
         # change this course's name or code
         formset = CourseFormSet(request.POST)
         if formset.is_valid():
+            new_course_pk = assignment.course.id
             instances = formset.save(commit=False)
             user = User.objects.get(username=request.user)
             for obj in formset.deleted_objects:
@@ -266,16 +261,27 @@ def course_modify(request):
             for instance in instances:
                 if hasattr(instance, 'owner') and instance.owner != user:
                     raise PermissionDenied
-                # need to set the owner
-                instance.owner = user
-                instance.save()
+                if not instance.id:
+                    # need to set the owner
+                    instance.owner = user
+                    instance.save()
+                    new_course_pk = instance.id
+            # Select course
+            pk = request.POST['course_pk']
+            # if selected the new course
+            if not is_long(pk):
+                pk = new_course_pk
+            if not long(pk) == assignment.course.id:
+                # change the course for this assignment
+                new_course = get_object_or_404(models.Course, pk=long(pk))
+                assignment.course = new_course
+                assignment.save()
             if 'continue' in request.POST:
                 if assignment.last_enabled_page <= page_number:
                     assignment.last_enabled_page = page_number+1
                     assignment.save()
                 return redirect("common_assignments_edit_strains")
-            # if no errors want to update formset
-            formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
+            return redirect("common_course_modify")
     # for view mode
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_assignments_edit_strains")
@@ -298,6 +304,8 @@ def course_modify(request):
             'last_page_number':  assignment.last_enabled_page
         },
         context_instance=RequestContext(request))
+
+
 
 @login_required
 def assignments_variables(request):
@@ -574,7 +582,6 @@ def assignments_edit_treatments(request):
         },
         context_instance=RequestContext(request)
     )
-
 
 
 
@@ -877,12 +884,6 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
                         )
     return error
 
-def is_float(txt):
-    try:
-        float(txt)
-        return True
-    except ValueError:
-        return False
 
 @login_required
 def western_blot_band_intensity(request):
@@ -1098,3 +1099,19 @@ def is_assignment_complete(assignment):
             can_preview = True
         # Add more techniques later when they are done
     return can_preview
+
+
+def is_float(txt):
+    try:
+        float(txt)
+        return True
+    except ValueError:
+        return False
+
+
+def is_long(s):
+    try:
+        long(s)
+        return True
+    except ValueError:
+        return False
