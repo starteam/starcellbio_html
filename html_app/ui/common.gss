@@ -609,8 +609,11 @@ div#main {
 }
 
 .scb_s_selection_arrow_img{
-	float:right;
-	padding-right:7px;
+    background-image:url('../images/homepage/selection_arrow.png');
+    background-repeat: no-repeat;
+    float:right;
+    height: 15px;
+    width: 22px;
 }
 
 .scb_f_open_experiment_top:hover{
