@@ -141,8 +141,22 @@ Experiment active area
     {/if}
     </div>
     <div class="scb_s_experiment_setup_new_set_up">
-    	<div class="scb_s_experiment_setup_instructions" aria-label='Setup Instructions' role='textbox'>
-            	{$t.experiment_setup|noAutoescape}
+        <div class="scb_s_experiment_setup_instructions" aria-label='Setup Instructions' role='textbox'>
+            {if $t.experiment_setup}
+                {$t.experiment_setup|noAutoescape}
+            {else}
+                <ul role='list' class='scb_assignment_specific_tufts_experiment_setup'>
+                    <li role='listitem'>
+                        To setup your experiment, select <b role='presentation' >Add Samples </b>
+                        in the experimental set-up table below. <br>
+                    </li>
+                    <li  role='listitem'>
+                        Select all of the treatment protocols for your experiment within the
+                        <b role='presentation'> Add Samples</b> pop up window, and
+                        then click <b role='presentation'>Add Samples</b>.
+                    </li>
+                </ul>
+            {/if}
         </div>
         <br>
 		<table class="scb_s_experiment_setup_table 
