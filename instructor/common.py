@@ -16,6 +16,7 @@ import json
 import re
 from instructor.compiler import get_protocol_headers
 from django.http import HttpResponse, HttpResponseBadRequest
+from functools import wraps
 
 @login_required
 def assignments(request):
@@ -195,6 +196,20 @@ def assignments_edit(request, assignment_pk):
 
     return redirect('common_assignment_modify')
 
+
+def check_assignment_owner(func):
+    @wraps(func)
+    def check_owner(*args, **kwargs):
+        request = args[0]
+        assignment_id = request.session['assignment_id']
+        assignment = models.Assignment.objects.get(id=assignment_id)
+        user = get_object_or_404(User, username=request.user)
+        if assignment.course.owner != user:
+            raise PermissionDenied
+        return func(*args, **kwargs)
+    return check_owner
+
+@check_assignment_owner
 @login_required
 def assignment_modify(request):
     assignment_id = request.session['assignment_id']
@@ -229,7 +244,7 @@ def assignment_modify(request):
         },
         context_instance=RequestContext(request))
 
-
+@check_assignment_owner
 @login_required
 def course_modify(request):
     errors = []
@@ -242,7 +257,7 @@ def course_modify(request):
         formset = CourseFormSet(request.POST)
         if formset.is_valid():
             new_course_pk = assignment.course.id
-            instances = formset.save(commit=False)
+            course_instances = formset.save(commit=False)
             user = User.objects.get(username=request.user)
             for obj in formset.deleted_objects:
                 if obj.owner == user:
@@ -258,14 +273,14 @@ def course_modify(request):
                             'please delete the assignments individually using '
                             'the trash can icon on the dashboard.'
                         )
-            for instance in instances:
-                if hasattr(instance, 'owner') and instance.owner != user:
+            for course in course_instances:
+                if hasattr(course, 'owner') and course.owner != user:
                     raise PermissionDenied
-                if not instance.id:
+                if not course.id:
                     # need to set the owner
-                    instance.owner = user
-                    instance.save()
-                    new_course_pk = instance.id
+                    course.owner = user
+                    course.save()
+                    new_course_pk = course.id
             # Select course
             pk = request.POST['course_pk']
             # if selected the new course
@@ -307,6 +322,7 @@ def course_modify(request):
 
 
 
+@check_assignment_owner
 @login_required
 def assignments_variables(request):
     page_number = 4
@@ -364,7 +380,7 @@ def assignments_variables(request):
         },
         context_instance=RequestContext(request))
 
-
+@check_assignment_owner
 @login_required
 def select_technique(request):
     page_number = 7
@@ -400,7 +416,7 @@ def select_technique(request):
 
         })
 
-
+@check_assignment_owner
 @login_required
 def assignments_edit_strains(request):
     page_number = 3
@@ -449,7 +465,7 @@ def assignments_edit_strains(request):
         },
         context_instance=RequestContext(request))
 
-
+@check_assignment_owner
 @login_required
 def assignments_edit_treatments(request):
     page_number = 5
@@ -584,7 +600,7 @@ def assignments_edit_treatments(request):
     )
 
 
-
+@check_assignment_owner
 @login_required
 def strain_treatments_edit(request):
     page_number = 6
@@ -696,7 +712,7 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
                 strain=s, treatment=t, assignment=assignment)
             update_wb_bands(assignment, strain_treatments=[strain_treatment])
 
-
+@check_assignment_owner
 @login_required
 def western_blot_lysate_type(request):
     page_number = 8
@@ -736,6 +752,7 @@ def western_blot_lysate_type(request):
         },
         context_instance=RequestContext(request))
 
+@check_assignment_owner
 @login_required
 def western_blot_antibody(request):
     page_number = 9
@@ -788,6 +805,7 @@ def western_blot_antibody(request):
         },
         context_instance=RequestContext(request))
 
+@check_assignment_owner
 @login_required
 def western_blot_band_size(request):
     page_number = 10
@@ -884,7 +902,7 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
                         )
     return error
 
-
+@check_assignment_owner
 @login_required
 def western_blot_band_intensity(request):
     pk = request.session['assignment_id']
