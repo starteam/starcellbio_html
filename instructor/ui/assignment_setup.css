@@ -431,13 +431,18 @@ span.scb_ab_s_dashboard_action {
 input[type="checkbox"].disabled {
     opacity: 1;
 }
-.scb_ab_s_navigation_button.scb_ab_s_dashboard_new_assignment_button{
-    font-size: 10pt;
-    padding: 9px 20px 0 20px;
+.scb_ab_s_dashboard_new_assignment_button{
+    font-size: 9pt;
     font-family: 'sourcesanspro-semibold';
     position:relative;
     float: left;
-    left: 10px;
+    left: 12px;
     top: 20px;
+    margin-right: 19px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    background: #c82e3e;
+    color: white;
+    padding: 5px 9px 5px 13px;
 
 }
