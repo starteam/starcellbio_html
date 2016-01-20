@@ -525,6 +525,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
             var parsed = scb.ui.static.WesternBlotView.parse(this);
             parsed = resetScrollValue(parsed);
             scb.ui.static.WesternBlotView.populate_wells(parsed.western_blot.rows_state().rows, parsed);
+            scb.ui.static.MainFrame.refresh();
         }
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_choose_gel_type_input', function (e, ui) {
