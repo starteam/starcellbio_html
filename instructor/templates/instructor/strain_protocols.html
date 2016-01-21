@@ -27,7 +27,7 @@
         <form method="post">{% csrf_token %}
             {{ formset.management_form }}
 
-            <div class="scb_ab_s_row scb_ab_s_col_width">
+            <div class="scb_ab_s_row scb_ab_s_col_width scb_ab_s_table_header_text">
                 <div class="scb_ab_s_enable_sample">Select</div>
             {% for header in headers %}
                 <div>{{ header }}</div>
