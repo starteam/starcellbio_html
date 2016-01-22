@@ -32,12 +32,8 @@ var __scb_sample_1 = {
                     {kind: 'actions', title: 'Actions'}
                 ],
                 actions: [
-                    {kind: "add_many", name: "ADD SAMPLES", open: 'scb_ex1.setup', css: {
-                        width: '885px',
-                        height: '600px',
-                        left: 'inherit',
-                        top: '15%'
-                    },
+                    {
+                        kind: "add_many", name: "ADD SAMPLES", open: 'scb_ex1.setup',
                         'collection_id': '%CELL_LINE%'
                     }
 
@@ -1040,12 +1036,8 @@ var __scb_sample_2 = {
                     {kind: 'actions', title: 'Actions'}
                 ],
                 actions: [
-                    {kind: "add_many", name: "ADD SAMPLES", open: 'scb_ex2.setup', css: {
-                        width: '885px',
-                        height: '600px',
-                        left: 'inherit',
-                        top: '15%'
-                    },
+                    {
+                        kind: "add_many", name: "ADD SAMPLES", open: 'scb_ex2.setup',
                         'collection_id': '%CELL_LINE%'
                     }
 
@@ -2113,12 +2105,8 @@ var __scb_sample_3 = {
                     {kind: 'actions', title: 'Actions'}
                 ],
                 actions: [
-                    {kind: "add_many", name: "ADD SAMPLES", open: 'scb_ex3.setup', css: {
-                        width: '885px',
-                        height: '600px',
-                        left: 'inherit',
-                        top: '15%'
-                    },
+                    {
+                        kind: "add_many", name: "ADD SAMPLES", open: 'scb_ex3.setup',
                         'collection_id': '%CELL_LINE%'
                     }
 
