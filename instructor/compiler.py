@@ -39,7 +39,6 @@ def compile(assignment_id):
         'notebook': {},
         'experiments': {},
         'template': {
-            'experiment_setup': 'Experiment Setup',
             'ui': {
                 'experimental_design': {
                     'techniques': compile_techniques(a),
