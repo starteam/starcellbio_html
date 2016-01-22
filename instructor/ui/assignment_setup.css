@@ -105,6 +105,7 @@ select:disabled {
 }
 
 .scb_ab_s_course_edit_headers{
+    font-family: 'sourcesanspro-semibold';
     display: inline-block;
     position:relative;
     width: 171px;
@@ -249,7 +250,6 @@ select:disabled {
 
 .scb_ab_s_row>div{
     display:inline-block;
-    font-weight: bold;
     text-align: center;
     vertical-align: top;
 }
@@ -360,7 +360,7 @@ div.scb_ab_s_antibody_name{
 .intensity_slider {
     border-radius: 7px;
     height: 8px;
-    margin-top: 7px;
+    margin-top: 5px;
     width:130px;
     display: inline-block;
     background: #ebebeb;
