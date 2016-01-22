@@ -88,6 +88,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
     }, scb.utils.noop);
 
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
+    /* Values are 'fixed' or 'live' */
     scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_live', {}, null, context);
 
     /* to save selected lane for each cell_treatment */
@@ -196,11 +197,11 @@ scb.Facs = function scb_Facs(data, context, parent) {
             var facs_kinds = context.template.facs_kinds;
             var list = { 'Live': [], 'Fixed': []};
             _.each(facs_kinds, function (obj, key) {
-                if (obj['Live'] && obj['Live'][identifier]) {
+                if (obj['Live'] && obj['Live'].indexOf(identifier)>=0) {
                     r.has_live = true;
                     list['Live'].push(key);
                 }
-                if (obj['Fixed'] && obj['Fixed'][identifier]) {
+                if (obj['Fixed'] && obj['Fixed'].indexOf(identifier)>=0) {
                     r.has_fixed = true;
                     list['Fixed'].push(key);
                 }
