@@ -1,7 +1,7 @@
 {% extends "instructor/assignment_edit_base.html" %}
 
 {% block sidebar %}
-    <div style="width:210px; display:block;float:left">
+    <div style="width:220px; display:block;float:left">
 
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Assignment</div>
 
@@ -81,7 +81,7 @@
             </a>
         </div>
 
-        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Western Blotting</div>
+        <div class='scb_ab_s_sidebar_section_heading' role='heading'>Western Blotting</div>
 
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "wb_lysate_type" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
@@ -126,18 +126,18 @@
         </div>
 
 
-        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Microscopy</div>
+        <div class='scb_ab_s_sidebar_section_heading' role='heading'>Microscopy</div>
 
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link'>
             <a class="scb_s_assignment_sidebar_link disabled" href="{% if new == 'False' %}
                 {% url "microscopy_sample_prep" assignment=assignment.id %}{% endif %}">
                 Edit Microscopy Sample Prep
             </a>
         </div>
 
-        <div class='scb_s_instructor_sidebar_section_heading' role='heading'>Flow Cytometry</div>
+        <div class='scb_ab_s_sidebar_section_heading' role='heading'>Flow Cytometry</div>
 
-        <div role="link" class='scb_s_instructor_sidebar_link_heading '>
+        <div role="link" class='scb_ab_s_sidebar_page_link'>
             <a class="scb_s_assignment_sidebar_link disabled" href="{% if new == 'False' %}
                 {% url "flowcytometry_sample_prep_edit" assignment=assignment.id %}{% endif %}">
                 Edit Flowcytometery Sample Prep
