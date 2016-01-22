@@ -77,11 +77,11 @@ class Strains(models.Model):
 class Drug(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='drug')
     name = models.CharField(max_length=50)
-    concentration = models.IntegerField(max_length=50, blank=True, null=True)
+    concentration = models.PositiveIntegerField(max_length=50, blank=True, null=True)
     concentration_unit = models.CharField(max_length=50, blank=True, null=True)
-    start_time = models.IntegerField(max_length=50, blank=True, null=True)
+    start_time = models.PositiveIntegerField(max_length=50, blank=True, null=True)
     time_unit = models.CharField(max_length=50, blank=True, null=True)
-    duration = models.IntegerField(max_length=50, blank=True, null=True)
+    duration = models.PositiveIntegerField(max_length=50, blank=True, null=True)
     duration_unit = models.CharField(max_length=50, blank=True, null=True)
 
 
@@ -95,7 +95,7 @@ class Temperature(models.Model):
 
 
 class CollectionTime(models.Model):
-    time = models.CharField(max_length=20, blank=True, null=True)
+    time = models.PositiveIntegerField(max_length=20, blank=True, null=True)
     units = models.CharField(max_length=10, blank=True, null=True)
     assignment = models.ForeignKey(Assignment, related_name='collection_time')
 
