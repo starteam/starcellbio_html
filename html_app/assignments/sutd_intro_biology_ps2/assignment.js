@@ -277,7 +277,7 @@ var __sutd_intro_biology_ps2 = {
         },
         facs_kinds: {
             'whole': {
-                name: 'PI',
+                name: 'Dye/Stain',
                 conditions: {
                     'whole': {name: 'PI'}
                 }

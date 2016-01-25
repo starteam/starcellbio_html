@@ -315,50 +315,57 @@ FACS Main View
                     >
                 {/if}
             </td>
+            <!-- Sample -->
             <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'>
                 {if $r.display_sample}
                     {$r.display_text}
                 {/if}
             </td>
+            <!-- Cell Treatment: Fixed or Live -->
             <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border {/if}
                 scb_s_facs_cell_treatment'>
-                <div style="position:relative">
-            {if $r.is_sample_enabled}
-            	{if $r.has_fixed}
-            	<span style='display:block; position:absolute;left:0px;top:0px'>
-            	<input type="radio"
-            	assignment_id="{$assignment.id}"
-            	experiment_id = "{$experiment.id}"
-            	facs_id = "{$facs.id}"
-            	{if $r.kind=='existing'}facs_lane_id="{$r.lane.id}"{/if}
-            	cell_treatment_id="{$r.cell_treatment.id}"
-            	name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}_{index($r)}" value="fixed"
-                map_key="{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
-            	{if $r.live == 'fixed'}checked {/if}
-            	class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Fixed</span></input>
-                </span>
-                {/if}
-            	{if $r.has_live}
-            	<span style='display:block; position:absolute; left:60px;top:0px'>
-            	<input type="radio"
-            	assignment_id="{$assignment.id}"
-            	experiment_id = "{$experiment.id}"
-            	facs_id = "{$facs.id}"
-            	cell_treatment_id="{$r.cell_treatment.id}"
-            	{if $r.kind=='existing'}facs_lane_id="{$r.lane.id}"{/if}
-            	name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}_{index($r)}"
-                map_key="{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
-            	value="live" {if $r.live == 'live'}checked {/if}
-            	class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'><span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>Live</span></input>
-                </span>
-                {/if}
+                <div class="scb_s_cell_treatment_wrapper">
+                {if $r.is_sample_enabled}
+                    {if $assignment.template.model.facs.is_ab }
+                        {if $r.has_fixed}
+                            <input type="radio" style='left:0px'
+                                assignment_id="{$assignment.id}" experiment_id = "{$experiment.id}"
+                                facs_id = "{$facs.id}" {if $r.kind=='existing'}facs_lane_id="{$r.lane.id}"{/if}
+                                cell_treatment_id="{$r.cell_treatment.id}"
+                                name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}_{index($r)}"
+                                value="fixed" map_key="{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
+                                {if $r.live == 'fixed'}checked {/if}
+                                class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'/>
+                            <span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>
+                                Fixed
+                            </span>
+                        {/if}
+                        {if $r.has_live}
+                            <input style='left:60px' type="radio" assignment_id="{$assignment.id}" experiment_id = "{$experiment.id}"
+                                facs_id = "{$facs.id}" cell_treatment_id="{$r.cell_treatment.id}"
+                                {if $r.kind=='existing'}facs_lane_id="{$r.lane.id}"{/if}
+                                name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}_{index($r)}"
+                                map_key="{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
+                                value="live" {if $r.live == 'live'}checked {/if}
+                                class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'
+                                />
+                            <span style='left:83px' class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>
+                                Live
+                            </span>
+                        {/if}
                     {else}
-                        <input type="radio" disabled>
-                            <span class='scb_s_facs_cell_treatment_text scb_s_microscopy_dim_conditions'>Fixed</span>
+                        <input type="radio"  checked>
+                            <span class='scb_s_facs_cell_treatment_text'>Fixed</span>
                         </input>
                     {/if}
+                {else}
+                    <input type="radio" disabled>
+                        <span class='scb_s_facs_cell_treatment_text scb_s_microscopy_dim_conditions'>Fixed</span>
+                    </input>
+                {/if}
                 </div>
             </td>
+            <!-- Flow Cytometry Analysis type -->
             <td class='scb_s_facs_samples_table_td{if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'>
                 {call .display_lysate_types}
                 {param assignment:$assignment/}
@@ -372,7 +379,7 @@ FACS Main View
             </td>
             
 
-            
+            <!-- Conditions -->
             <td class='scb_s_facs_samples_table_td{if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'>
                 {if $r.lane}
                 {if $assignment.template.model.facs.is_ab}

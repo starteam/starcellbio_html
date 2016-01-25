@@ -39,7 +39,6 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
 
     var val = $(element).attr('checked');
     var cell_treatment_id = $(element).attr('cell_treatment_id');
-
     parsed.facs.is_cell_treatment_enabled[cell_treatment_id] = val;
     if(val === 'checked') {
         $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function (e) {
@@ -60,12 +59,15 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function (element, event) {
 
 scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function (element, event) {
     var parsed = scb.ui.static.FacsView.parse(element);
+    parsed = resetScrollValue(parsed);
+    parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
     if (parsed.redisplay) {
         alert("INVALID ELEMENT!");
     }
-
+    /* val is 'fixed' or 'live' */
     var val = $(element).val();
     var cell_treatment_id = $(element).attr('cell_treatment_id');
+    /* map_key is "cell_treatment.id_[lane.id]" */
     var map_key = $(element).attr('map_key');
     parsed.facs.is_cell_treatment_live[map_key] = val;
 
@@ -143,23 +145,19 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function (element, event)
                 experiment_id: parsed.experiment.id,
                 live: parsed.facs.is_cell_treatment_live[cell_treatment_id+'_']
             });
-            var cell_treatment_id = $(element).attr('cell_treatment_id');
-            var map_key = cell_treatment_id + '_' + line.id;
-            parsed.facs.is_cell_treatment_live[map_key] = parsed.facs.is_cell_treatment_live[cell_treatment_id+'_'];
-
         }
         else {
             line = parsed.facs.lanes_list.start({
                 kind: slide_type,
                 cell_treatment_id: cell_treatment_id,
                 experiment_id: parsed.experiment.id,
-                live: parsed.facs.is_cell_treatment_live[cell_treatment_id+'_']
+                live: parsed.facs.is_cell_treatment_live[cell_treatment_id + '_']
             });
-            var cell_treatment_id = $(element).attr('cell_treatment_id');
-            var map_key = cell_treatment_id + '_' + line.id;
-            parsed.facs.is_cell_treatment_live[map_key] = parsed.facs.is_cell_treatment_live[cell_treatment_id+'_'];
-
         }
+        var cell_treatment_id = $(element).attr('cell_treatment_id');
+        var map_key = cell_treatment_id + '_' + line.id;
+        parsed.facs.is_cell_treatment_live[map_key] = parsed.facs.is_cell_treatment_live[cell_treatment_id + '_'];
+
 
     }
     else {
