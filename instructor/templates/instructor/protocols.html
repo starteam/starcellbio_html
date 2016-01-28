@@ -24,7 +24,7 @@
             </div>
             {% for form in drug_formset %}
                 <div class="scb_ab_s_form_input_list">
-                    <div>{{ forloop.counter }}.</div>
+                    <div class="scb_ab_s_counter_margin">{{ forloop.counter }}.</div>
                     <div>{{ form.name }}</div>
                     {% if form.concentration %}
                         <div class="scb_ab_s_small_input_box">{{ form.concentration }}</div>
@@ -72,7 +72,7 @@
                 {{ temperature_formset.management_form }}
                 {% for form in temperature_formset %}
                     <div class="scb_ab_s_form_input_list">
-                        <div>{{ forloop.counter }}.</div>
+                        <div class="scb_ab_s_counter_margin">{{ forloop.counter }}.</div>
                         <div class="scb_ab_s_med_input_box">{{ form.degrees }} &#8451</div>
                         <div>{{ form.id }}</div>
                         <div class="delete_checkbox">{{ form.DELETE }}</div>
@@ -93,7 +93,7 @@
                 {{ collection_time_formset.management_form }}
                 {% for form in collection_time_formset %}
                     <div class="scb_ab_s_form_input_list">
-                        <div>{{ forloop.counter }}.</div>
+                        <div class="scb_ab_s_counter_margin">{{ forloop.counter }}.</div>
                         <div class="scb_ab_s_med_input_box">{{ form.time }}</div>
                         <div class="scb_ab_s_units_input collection_time_unit_box">{{ form.units }}
                             <datalist id="collection_time_unit_list">

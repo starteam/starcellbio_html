@@ -18,6 +18,10 @@ from instructor.compiler import get_protocol_headers
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 
+page_order = ['assignment', 'course', 'strains', 'variables', 'treatments',
+              'protocols', 'techniques', 'wb_lysate_type', 'wb_antibody',
+              'wb_band_size', 'wb_band_intensity', 'facs_sample_prep']
+
 @login_required
 def assignments(request):
     assignments = models.Assignment.objects.filter(course__owner=request.user)
@@ -109,13 +113,13 @@ def assignment_setup(request):
             'new': request.session['new'],
             'section_name': 'Assignment',
             'page_name': 'assignment',
-            'last_page_number':  1
+            'last_page_number':  0
         },
         context_instance=RequestContext(request))
 
 @login_required
 def course_setup(request):
-    page_number = 2
+    page_number = page_order.index('course')
     CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
     course_selected = None
     if request.method == 'POST':
@@ -248,7 +252,7 @@ def assignment_modify(request):
 @login_required
 def course_modify(request):
     errors = []
-    page_number = 2
+    page_number = page_order.index('course')
     assignment_id = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
     CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
@@ -325,7 +329,7 @@ def course_modify(request):
 @check_assignment_owner
 @login_required
 def assignments_variables(request):
-    page_number = 4
+    page_number = page_order.index('variables')
     max_num_of_vars = 3
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
@@ -383,7 +387,7 @@ def assignments_variables(request):
 @check_assignment_owner
 @login_required
 def select_technique(request):
-    page_number = 7
+    page_number = page_order.index('techniques')
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
     var_fields = ['has_wb', 'has_fc', 'has_micro']
@@ -419,7 +423,7 @@ def select_technique(request):
 @check_assignment_owner
 @login_required
 def assignments_edit_strains(request):
-    page_number = 3
+    page_number = page_order.index('strains')
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
     extra_fields = 0
@@ -468,7 +472,7 @@ def assignments_edit_strains(request):
 @check_assignment_owner
 @login_required
 def assignments_edit_treatments(request):
-    page_number = 5
+    page_number = page_order.index('treatments')
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
 
@@ -603,7 +607,7 @@ def assignments_edit_treatments(request):
 @check_assignment_owner
 @login_required
 def strain_treatments_edit(request):
-    page_number = 6
+    page_number = page_order.index('protocols')
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
 
@@ -715,7 +719,7 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
 @check_assignment_owner
 @login_required
 def western_blot_lysate_type(request):
-    page_number = 8
+    page_number = page_order.index('wb_lysate_type')
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
@@ -755,7 +759,7 @@ def western_blot_lysate_type(request):
 @check_assignment_owner
 @login_required
 def western_blot_antibody(request):
-    page_number = 9
+    page_number = page_order.index('wb_antibody')
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
@@ -808,7 +812,7 @@ def western_blot_antibody(request):
 @check_assignment_owner
 @login_required
 def western_blot_band_size(request):
-    page_number = 10
+    page_number = page_order.index('wb_band_size')
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
@@ -905,8 +909,14 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
 @check_assignment_owner
 @login_required
 def western_blot_band_intensity(request):
+    page_number = page_order.index('wb_band_intensity')
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
+    next_view = 'common_assignments'
+    if assignment.has_micro:
+        next_view = 'micro_sample_prep'
+    elif assignment.has_fc:
+        next_view = 'facs_sample_prep'
     wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
     BandsFormset = modelformset_factory(
         models.WesternBlotBands,
@@ -920,9 +930,12 @@ def western_blot_band_intensity(request):
             for entry in entries:
                 entry.save()
             if 'continue' in request.POST:
-                return redirect('common_assignments')
+                if assignment.last_enabled_page <= page_number:
+                    assignment.last_enabled_page = page_number+1
+                    assignment.save()
+                return redirect(next_view)
     elif request.method == "POST" and 'continue' in request.POST:
-        return redirect("common_assignments")
+        return redirect(next_view)
     else:
         formset = BandsFormset(queryset=models.WesternBlotBands.objects.filter(
             antibody__western_blot=wb).order_by(
@@ -1027,33 +1040,61 @@ def microscopy_images_edit(request, assignment, sample_prep, sp):
                               },
                               context_instance=RequestContext(request))
 
+@check_assignment_owner
+@login_required
+def facs_sample_prep(request):
+    page_number = page_order.index('facs_sample_prep')
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
 
-def flowcytometry_sample_prep_edit(request, assignment):
-    a = models.Assignment.objects.get(id=assignment)
-    message = ''
-    FACSSamplePrepFormset = modelformset_factory(models.FlowCytometrySamplePrep, extra=1, can_delete=True,
-                                                 can_order=True, exclude=['assignment', 'order'])
-    if request.method == "POST":
+    FACSSamplePrepFormset = modelformset_factory(
+        models.FlowCytometrySamplePrep,
+        can_delete=True,
+        can_order=True,
+        exclude=['assignment']
+    )
+    if request.method == "POST" and assignment.access == 'private':
         formset = FACSSamplePrepFormset(request.POST)
-        formset.clean()
         if formset.is_valid():
-            message = "Thank you"
-            for form in formset.ordered_forms:
-                form.instance.order = form.cleaned_data['ORDER']
             entries = formset.save(commit=False)
-            for form in entries:
-                form.assignment = a
-                form.save()
-        else:
-            message = "Something went wrong"
+            for obj in formset.deleted_objects:
+                obj.delete()
+            for facs_sample in entries:
+                facs_sample.assignment = assignment
+                facs_sample.save()
+            if 'continue' in request.POST:
+                if assignment.last_enabled_page <= page_number:
+                    assignment.last_enabled_page = page_number+1
+                    assignment.save()
+                return redirect('common_assignments')
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("common_assignments")
 
-    return render_to_response('instructor/generic_formset.html',
-                              {'formset': FACSSamplePrepFormset(
-                                  queryset=models.FlowCytometrySamplePrep.objects.filter(assignment=assignment)),
-                               'message': message,
-                               'assignment': a
-                              },
-                              context_instance=RequestContext(request))
+    extra_fields = 0
+    if 'add' in request.POST or not models.FlowCytometrySamplePrep.objects.filter(assignment=assignment).exists():
+        extra_fields = 1
+    FACSSamplePrepFormset = modelformset_factory(
+        models.FlowCytometrySamplePrep,
+        extra=extra_fields,
+        can_delete=True,
+        can_order=True,
+        exclude=['assignment']
+    )
+    back_url = 'western_blot_band_intensity' if assignment.has_wb else 'common_select_technique'
+
+    formset = FACSSamplePrepFormset(queryset=models.FlowCytometrySamplePrep.objects.filter(assignment=assignment))
+    return render_to_response(
+        'instructor/facs_sample_prep.html',
+        {
+            'formset': formset,
+            'access': json.dumps(assignment.access),
+            'back_url': back_url,
+            'assignment_name': assignment.name,
+            'section_name': 'Flow Cytometry',
+            'page_name': 'facs_sample_prep',
+            'last_page_number':  assignment.last_enabled_page
+        },
+        context_instance=RequestContext(request))
 
 
 def facs_histograms_edit(request, assignment, sample_prep, sp):

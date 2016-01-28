@@ -41,7 +41,7 @@ class Course(models.Model):
 class Assignment(models.Model):
     course = models.ForeignKey(Course, related_name='assignments')
     assignment_id = models.CharField(max_length=50, unique=True)
-    last_enabled_page = models.IntegerField(max_length=5, default=2)
+    last_enabled_page = models.IntegerField(max_length=5, default=1)
     name = models.CharField(max_length=50)
     access = models.CharField(max_length=50, choices=ACCESS, default='private')
     basedOn = models.ForeignKey("Assignment", null=True, blank=True)
@@ -166,19 +166,15 @@ class MicroscopyImages(models.Model):
 
 FACS_CT = (( 'Fixed', 'Fixed Cells'), ('Live', 'Live Cells'))
 
-FACS_FIXED = 'Fixed'
-
-FACS_KINDS = (( 'Dye', 'Dye/Stain' ), ('Anti', 'Antibody-labeling'))
-
-FACS_DYE = 'Dye'
+FACS_KINDS = (('', 'Select Analysis'), ('Anti', 'Antibody-labeling'), ('Dye', 'Dye/Stain'))
 
 
 class FlowCytometrySamplePrep(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='facs_sample_prep')
-    treatment = models.CharField(max_length=50, choices=FACS_CT, default=FACS_FIXED)
-    analysis = models.CharField(max_length=50, choices=FACS_KINDS, default=FACS_DYE)
+    fixed = models.BooleanField(default=False)
+    live = models.BooleanField(default=False)
+    analysis = models.CharField(max_length=50, choices=FACS_KINDS)
     condition = models.CharField(max_length=50)
-    order = models.IntegerField(default=0)
 
 
 HISTOGRAMS = (( 'normal', 'Normal'),
