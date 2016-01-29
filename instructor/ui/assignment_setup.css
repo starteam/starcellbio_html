@@ -1,0 +1,430 @@
+
+.scb_ab_s_input_text_field{
+    font-size: 10pt;
+    font-family: 'sourcesanspro-regular';
+    color: black;
+    font-style: italic;
+    margin-left: 27px;
+    margin-top: 10px;
+    padding: 5px;
+    display:inline-block;
+}
+.scb_s_instructor_view{
+    width: 1002px;
+    background-color: #f4f6f8;
+}
+
+.scb_ab_s_navigation_button {
+    border: none;
+    width: 185px;
+    height: 30px;
+    margin: 1px;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-semibold';
+    padding-top: 2px;
+    margin-right: 19px;
+
+    border-radius: 8px;
+    letter-spacing: 1px;
+    background: #27956c;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 13px;
+    padding-right: 9px;
+}
+.scb_ab_s_nav_continue_btn{
+    float: right;
+    margin-top: 100px;
+
+}
+
+.scb_s_back_btn {
+    margin-top: 100px;
+    float: left;
+    margin-left: 20px;
+}
+.scb_ab_s_input_error{
+    color: indianred;
+    display: inline-block;
+    padding-left: 5px;
+
+}
+
+.scb_s_form_errors{
+    color: indianred;
+    padding-left: 5px;
+    width: 200px;
+
+}
+
+select:disabled {
+    opacity: 0.4;
+}
+
+
+.scb_s_sidebar_link_sub_heading {
+    font-size: 10pt;
+    margin-top: 3px;
+    font-family: 'sourcesanspro-semibold';
+    position: relative;
+    width: 221px;
+    padding: 7px 3px 3px 50px;
+    height: 12px;
+    color: #010101;
+
+}
+/* Course */
+.scb_f_use_existing_course {
+    display: none;
+}
+/* Modify Course */
+
+.scb_ab_s_course_list_wrapper{
+    position: relative;
+    left: 30px;
+}
+
+.scb_ab_s_course_edit_headers{
+    font-family: 'sourcesanspro-semibold';
+    display: inline-block;
+    position:relative;
+    width: 171px;
+}
+.scb_ab_s_select_course_headers{
+    width: 58px;
+
+}
+.scb_ab_s_error_list{
+    position:relative;
+    color: indianred;
+    display:inline-block;
+
+}
+.scb_ab_s_course_fields_error_list{
+    left:67px;
+    width:165px;
+    display:inline-block;
+    padding:5px 0 0 0;
+    margin:0;
+}
+.scb_ab_s_top_error_list{
+    left:30px;
+    margin-bottom: 10px;
+    width: 550px;
+}
+.scb_ab_s_course_form_list{
+    position: relative;
+    list-style-type: none;
+    left: 12px;
+}
+.scb_ab_s_course_form_list>div{
+    display: inline;
+}
+.scb_ab_s_add_course_button_position{
+    position: relative;
+    left: 67px;
+    top: 15px;
+}
+
+
+/* Strains */
+.scb_ab_s_form_container{
+    padding-left: 20px;
+    padding-top: 10px;
+}
+.scb_s_delete_strain {
+    border: 0;
+    width: 24px;
+    background: transparent;
+    height: 20px;
+    cursor: pointer;
+    top: 0;
+    position: relative;
+    left: 16px;
+}
+.scb_ab_s_experiment_setup_add_button{
+	width: 104px;
+    margin:20px 0 0 58px;
+}
+
+/* Input headers  in Define variable */
+.scb_ab_s_input_headers{
+    position: relative;
+    left: 29px;
+    margin-top:20px;
+}
+.scb_ab_s_input_headers>div{
+    width: 148px;
+    display: inline-block;
+    font-family: 'sourcesanspro-semibold';
+    font-size: 14px ;
+}
+.scb_ab_s_input_headers>div.scb_ab_s_small_header{
+    width: 58px;
+}
+.scb_ab_s_input_headers>div.scb_ab_s_med_header{
+    width: 130px;
+}
+.scb_ab_s_input_headers>div.scb_ab_s_units_input_header{
+    width:77px;
+}
+.scb_ab_s_input_headers>div.scb_ab_s_time_units_input_header{
+    width: 72px;
+}
+
+/* Form inputs  in Define variables*/
+.scb_ab_s_form_input_list{
+    position: relative;
+    left: 10px;
+}
+.scb_ab_s_form_input_list>div{
+    display: inline-block;
+}
+.scb_ab_s_form_input_list>div>input{
+    margin: 5px 0 0 5px;
+}
+.scb_ab_s_small_input_box>input{
+    width: 40px;
+}
+.scb_ab_s_units_input>input{
+    width: 60px;
+}
+.scb_ab_s_time_units_input>input{
+    width: 53px;
+}
+.scb_ab_s_med_input_box>input{
+    width: 108px;
+}
+/* Delete trash icon*/
+.checkbox_delete_image{
+    background: url('images/setup/scb_remove.png') no-repeat;
+    display:inline-block;
+    height:20px;
+    width: 15px;
+    background-position: center;
+    margin-left: 8px;
+}
+.checkbox_image:hover {
+    cursor: pointer;
+}
+
+/* select variables */
+.scb_ab_s_variable_wrapper{
+    margin-bottom: 7px;
+}
+.scb_ab_s_grayed{
+    color: grey !important;
+}
+
+
+.scb_ab_s_hide_variable{
+    display:none;
+}
+.checkbox_delete_image{
+    cursor: pointer;
+}
+
+.scb_ab_s_row{
+    position: relative;
+}
+
+.scb_ab_s_row>div{
+    display:inline-block;
+    text-align: center;
+    vertical-align: top;
+}
+.scb_ab_s_col_width>div{
+    width: 100px;
+
+}
+
+.scb_ab_s_table_header_text{
+    font-family: 'sourcesanspro-semibold';
+}
+.scb_ab_s_row>div.scb_ab_s_enable_sample{
+    width: 50px;
+}
+.scb_ab_s_heading_div{
+    margin: 15px 10px;
+    font-family: 'sourcesanspro-semibold';
+    color: #316f94;
+    font-weight: bold;
+
+}
+.scb_ab_s_page_title{
+    font-size: 16pt;
+    padding-bottom: 10px;
+
+}
+.scb_ab_s_heading_description{
+    font-size: 12pt;
+}
+.scb_ab_s_heading_instructions{
+    font-size: 10pt;
+}
+.scb_ab_s_show_protocols_btn{
+    float: right;
+    margin-right:40px;
+    width: 160px;
+}
+.scb_ab_s_samples_heading{
+    display: inline-block;
+    padding-left: 10px;
+}
+/* Sidebar */
+.scb_ab_s_sidebar_section_heading{
+    padding-left: 12px;
+    font-size: 14pt;
+    font-weight: bold;
+    font-family: 'sourcesanspro-semibold';
+    color: #316f94;
+    padding-top: 5px;
+}
+.scb_ab_s_sidebar_page_name_selected{
+	background: #c9cdd0;
+}
+.scb_ab_s_sidebar_page_link{
+	font-size: 10pt;
+	margin: 0 0 0 -5px;
+	font-family: 'sourcesanspro-semibold';
+	width: 221px;
+	padding: 7px 3px 5px 33px;
+	color: #010101;
+}
+/* Protein size input */
+div.scb_ab_s_antibody_name{
+    text-align: left;
+    width: 155px;
+    font-family: 'sourcesanspro-semibold';
+
+}
+.scb_ab_s_protein_sizes_div{
+    width: 271px;
+    font-family: 'sourcesanspro-semibold';
+}
+.scb_ab_s_lysate_type_header{
+    display: inline-block;
+    width: 86px;
+}
+.vertical_align_top{
+    vertical-align: top;
+}
+.scb_ab_s_protein_size_input{
+    display: inline-block;
+    text-align: center;
+}
+.scb_ab_s_protein_size_input>input {
+    margin: 5px 0 0 5px;
+    width: 68px;
+}
+/* Band intensity*/
+.scb_ab_s_row>.scb_ab_s_col_width_sample{
+    width: 240px;
+    text-align: left;
+}
+.scb_ab_s_row>.scb_ab_s_col_width_number{
+    width: 15px;
+}
+.scb_ab_s_col_width_type_size{
+    width: 80px;
+}
+
+.scb_ab_s_col_width_intensity>input{
+    display:none;
+}
+.scb_ab_s_col_width_intensity{
+    width: 150px;
+}
+.scb_ab_s_intensity_text{
+    width: 30px;
+}
+.intensity_slider {
+    border-radius: 7px;
+    height: 8px;
+    margin-top: 5px;
+    width:130px;
+    display: inline-block;
+    background: #ebebeb;
+}
+
+.intensity_slider > .ui-slider-range{
+    height: 3px;
+    top:3px;
+    border-radius: 2px;
+    left: 3px;
+    margin-right:15px;
+    background: #92beba;
+}
+
+.intensity_slider > .ui-slider-handle {
+    border-radius: 13px;
+    height:15px;
+    width:15px;
+    border: 1px solid grey;
+}
+.scb_ab_s_antibody_header{
+    font-size: 17px;
+    font-family: 'sourcesanspro-semibold';
+    margin: 15px 0 5px 0;
+}
+
+#jqDialog_box{
+    max-width: 425px;
+}
+
+/* Sample text wrapper with ellipsis */
+
+div.block-ellipsis {
+  display: -webkit-box;
+  max-width: 100%;
+  height: 35px;
+  margin: 0 auto;
+  font-size: 14px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dashboard */
+.scb_ab_s_dashboard_action{
+    color: #27956c;
+}
+.scb_ab_s_dashboard_no_right_border{
+    border-right: 0 !important;
+}
+.scb_s_dashboard_names_width{
+    width: 200px;
+}
+.scb_s_dashboard_access_width{
+    width: 80px;
+}
+
+/* Temporarily disable techniques */
+.disabled{
+    opacity: 0.4;
+    cursor: default !important;
+}
+
+span.scb_ab_s_dashboard_action {
+    cursor: pointer;
+}
+input[type="checkbox"].disabled {
+    opacity: 1;
+}
+.scb_ab_s_dashboard_new_assignment_button{
+    font-size: 9pt;
+    font-family: 'sourcesanspro-semibold';
+    position:relative;
+    float: left;
+    left: 12px;
+    top: 20px;
+    margin-right: 19px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    background: #c82e3e;
+    color: white;
+    padding: 5px 9px 5px 13px;
+
+}

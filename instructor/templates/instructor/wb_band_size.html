@@ -1,0 +1,69 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+    <script>
+    var error = {{ error|safe }};
+    </script>
+    <div class="scb_ab_s_heading_div">
+        <div class="scb_ab_s_page_title">Band Size</div>
+        <div class='scb_ab_s_heading_description'>
+            Define the size of the protein bands in kilodaltons (kDa)
+            detected by each primary and secondary antibody combination.
+        </div>
+        <div class="scb_ab_s_heading_instructions">Note:
+            <ul style="margin-top: 0">
+                <li>If multiple bands are detected, separate them by a comma. For ex: 13, 45, 60.</li>
+                <li>If no band is detected, leave the text box blank.</li>
+                <li>Do not include units in the text box.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="scb_ab_s_form_container">
+        <form method="post">{% csrf_token %}
+            {{ formset.management_form }}
+
+
+            <div class="scb_ab_s_row">
+                <div class="scb_ab_s_antibody_name vertical_align_top">Primary Antibody</div>
+                <div class="scb_ab_s_antibody_name vertical_align_top">Secondary Antibody</div>
+                <div class="scb_ab_s_protein_sizes_div">
+                    <div>Size(s) by Lysate Type</div>
+                    {% if types_selected.has_whole_cell_lysate %}
+                    <div class="scb_ab_s_lysate_type_header">WCL</div>
+                    {% endif %}
+                    {% if types_selected.has_nuclear_fractination %}
+                    <div class="scb_ab_s_lysate_type_header">Nuc</div>
+                    {% endif %}
+                    {% if types_selected.has_cytoplasmic_fractination %}
+                    <div class="scb_ab_s_lysate_type_header">Cyto</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% for form in formset %}
+                <div class="scb_ab_s_row">
+                    <div class="scb_ab_s_antibody_name">{{ form.instance.primary }}</div>
+                    <div class="scb_ab_s_antibody_name">{{ form.instance.secondary }}</div>
+                    <div class="scb_ab_s_protein_sizes_div">
+                        <div class="scb_ab_s_protein_size_input">{{ form.wc_weight }}</div>
+                        <div class="scb_ab_s_protein_size_input">{{ form.nuc_weight }}</div>
+                        <div class="scb_ab_s_protein_size_input">{{ form.cyto_weight }}</div>
+                    </div>
+                    {{ form.id }}
+                </div>
+            {% endfor %}
+            <input type="submit"
+                   name="continue"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE AND CONTINUE &nbsp; &#9654;">
+            <input type="submit"
+                   name="save"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE"/>
+        </form>
+    </div>
+    <a href="{% url "western_blot_antibody" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+    </a>
+
+{% endblock %}

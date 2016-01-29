@@ -1,0 +1,27 @@
+{% extends "instructor/base.html" %}
+
+{% block content %}
+    <script>
+    var access = {{ access|safe }};
+    </script>
+    <div class='scb_s_experiment_setup_container' role='main'>
+        <div class='scb_s_assignment_outline_description '>
+            <div class='scb_s_outline_title'>
+                {{ assignment_name }}
+            </div>
+            {% block sidebar %}
+            {% endblock %}
+        </div>
+
+        <div class='scb_s_course_setup_description '>
+            <div class='scb_s_abstract_title'>
+                {{ section_name }}
+            </div>
+
+            {% block right_side %}
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}
+

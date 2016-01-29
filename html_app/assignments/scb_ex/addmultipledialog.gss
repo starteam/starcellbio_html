@@ -7,10 +7,10 @@
 }
 
 .scb_ex_dialog {
-    position: absolute;
+    position: fixed;
     z-index: 999;
     top:0px;
-    left:0px;
+    left: 300px;
     width:800px;
     height:800px;
     background-color: #80808080;
@@ -76,8 +76,7 @@
     width: 75%;
     max-height: 75%;
     overflow: auto;
-    margin-top: 12%;
-    margin-left: 12%;
+    margin: 12% auto auto auto;
     position: relative;
     border: 5px solid white;
 	border-radius: 9px;

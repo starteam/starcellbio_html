@@ -1,0 +1,42 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+
+<div class="scb_ab_s_heading_div">
+    <div class="scb_ab_s_page_title">Strains</div>
+    <div class='scb_ab_s_heading_description'>
+        Name the strains available for experimentation.
+    </div>
+</div>
+<br/>
+<div>
+    <form method="post">{% csrf_token %}
+        {{ formset.management_form }}
+        <div class="scb_ab_s_input_headers">
+            <div>Strain Name</div>
+        </div>
+        {% for form in formset %}
+            <div class="scb_ab_s_form_input_list">
+                <div>{{ forloop.counter }}.</div>
+                <div>{{ form.name }}</div>
+                <div>{{ form.id }}</div>
+                <div class="delete_checkbox">{{ form.DELETE }}</div>
+            </div>
+        {% endfor %}
+        <div>
+            <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button' value="ADD">
+        </div>
+        <input type="submit"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE AND CONTINUE &nbsp; &#9654;">
+        <input type="submit"
+               name="save"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE"/>
+    </form>
+</div>
+<a href="{% url "common_course_modify" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+</a>
+{% endblock %}

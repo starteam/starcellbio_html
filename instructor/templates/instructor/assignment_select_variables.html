@@ -1,0 +1,47 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+<script>
+var created = {{ treatments_created }};
+</script>
+    <div class="scb_ab_s_heading_div">
+        <div class="scb_ab_s_page_title">Select Variables</div>
+        <div class='scb_ab_s_heading_description'>
+            Select up to three experimental variables, in addition
+            to strains and treatments, that you wish to define for your treatment protocols.
+        </div>
+    </div>
+    <br/>
+    <div class='scb_ab_s_form_container'>
+        <form method="post">{% csrf_token %}
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
+                {{ form.has_concentration }} Treatment Concentration
+            </div>
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
+                {{ form.has_start_time }} Start Time
+            </div>
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
+                {{ form.has_duration }} Treatment Duration
+            </div>
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
+                {{ form.has_temperature }} Temperature
+            </div>
+            <div class='scb_ab_f_select_variable scb_ab_s_variable_wrapper'>
+                {{ form.has_collection_time }} Collection Time
+            </div>
+            <input type="submit"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE AND CONTINUE &nbsp; &#9654;">
+            <input type="submit"
+               name="save"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE"/>
+
+
+        </form>
+    </div>
+    <a href="{% url "common_assignments_edit_strains" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+</a>
+{% endblock %}

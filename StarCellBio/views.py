@@ -16,7 +16,8 @@ from django.template.loader import render_to_string
 from backend.models import Assignment, StudentAssignment, Course, UserCourse
 from StarCellBio.forms import ContactForm
 import StarCellBio.settings
-
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 random_mapping = {0: 'DEBAC', 1: 'DABEC', 2: 'CABED', 3: 'ACDEB', 4: 'EBADC', 5: 'BDECA', 6: 'EBCAD', 7: 'ADBCE',
                   8: 'CBAED', 9: 'DEACB', 10: 'ECDAB', 11: 'EDACB', 12: 'EBACD', 13: 'EADBC', 14: 'CBDEA', 15: 'CEDBA',
@@ -40,6 +41,11 @@ random_mapping_ps2 = {0: '52341', 1: '32145', 2: '32514', 3: '32451', 4: '12453'
                       8: '12543', 9: '52341', 10: '52431', 11: '42153', 12: '12354', 13: '52314', 14: '32514',
                       15: '32514', 16: '52413', 17: '32541', 18: '32145', 19: '42315', 20: '12435', 21: '52341',
                       22: '12354', 23: '52143'}
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 def home(request):
@@ -84,13 +90,19 @@ def get_model(request):
     return response
 
 
+def get_account_type(user):
+    """ Get user account type """
+    account_type = ''
+    if user.id:
+        if user.groups.count() == 1:
+            account_type = user.groups.all()[0].name
+    return account_type
+
+
 def get_user(request, **kwargs):
-    import pudb
-    # pudb.set_trace()
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    else:
-        account_type = ''
+
+    account_type = get_account_type(request.user)
+    
     retval = {'account_type': account_type, 'name': request.user.username}
     response = HttpResponse("var get_user_result = {0};".format(json.dumps(retval)))
     response.set_cookie("scb_username", request.user.username)
@@ -142,6 +154,8 @@ def initialize_courses(request, **kwargs):  #
                 c.save()
                 a = Assignment(courseID=c, assignmentID=assign_id, assignmentName=assign_name, data=x)
                 a.save()
+                a.basedOn=a
+                a.save()
             return HttpResponse('got it')
     else:
         response = HttpResponse("var create_courses_result = {0};".format(''))
@@ -160,12 +174,9 @@ def get_student_courses(request, **kwargs):
     obj.domain='starcellbio.mit.edu'
     obj.save()
 
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    else:
-        account_type = ''
+    account_type = get_account_type(request.user)
+
     alist = []
-    retval = []
     token1 = random.randrange(0, 1000000)
     if (UserCourse.objects.filter(user__username=request.user.username).count() > 0 and account_type == 'student'):
         usercourses = UserCourse.objects.filter(user=request.user)
@@ -218,23 +229,7 @@ def get_student_courses(request, **kwargs):
                         a = Assignment.objects.filter(assignmentID=x)
                         a = a[0]
                         original_assignment_data = a.data
-                        assignment_data = ast.literal_eval(original_assignment_data)
-                        if (a.assignmentName == 'StarCellBio Problem 2' or assignment_data['template'][
-                            'random_choose']):
-                            import hashlib
 
-                            md5 = hashlib.md5()
-                            md5.update(str(request.user.email).lower())
-                            encoded_email = md5.hexdigest()
-                            encoded_number = int(encoded_email, 16) % 24
-                            order = random_mapping_ps2[encoded_number]
-                            order = list(order)
-                            assignment_data['template']['random_order'] = order
-                            original_assignment_data = repr(assignment_data)
-                            print order
-                        if (a.assignmentName == 'StarCellBio Problem 1' or assignment_data['template'][
-                            'randomize_all']):
-                            original_assignment_data = randomize_706_2014_ps1(request, assignment_data)
                         sa = StudentAssignment(student=request.user, course=course, assignmentID=a.assignmentID,
                                                assignmentName=a.assignmentName, token=token1,
                                                data=original_assignment_data)
@@ -266,11 +261,6 @@ def get_student_courses(request, **kwargs):
                 dictionary = ast.literal_eval(a.data)
                 all.append(dictionary)
 
-            # for a in Assignment.objects.all():
-            #     dictionary = ast.literal_eval(a.data)
-            #     if (
-            #                 a.assignmentID == 'decusability' or a.assignmentID == 'scb_ex1' or a.assignmentID == 'microscopy_usability'):  # or a.assignmentID == 'microscopy_test' ): #or a.assignmentID == 'assignment_706_2014_ps2'):
-            #         all.append(dictionary)
             is_selected = None
             if len(all) > 0:
                 is_selected = all[0]['id']
@@ -443,15 +433,11 @@ def randomize_706_2014_ps1(request, assignment_data):
 def get_instructor_assignments(request, **kwargs):
     import ast
     import random
-    import pudb
-    # 	pudb.set_trace()
-    retval = []
     token1 = random.randrange(0, 1000000)
     return_list = []
-    if request.user.id and len(request.user.groups.all()) > 0:
-        account_type = request.user.groups.all()[0].name
-    else:
-        account_type = ''
+
+    account_type = get_account_type(request.user)
+
     if (account_type == 'instructor'):
         # 		pudb.set_trace()
         public_list = Assignment.objects.filter(access='Public')

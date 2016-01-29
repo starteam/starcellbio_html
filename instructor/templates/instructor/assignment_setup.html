@@ -1,0 +1,52 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+
+    <div class='scb_s_assignment_setup_title'>Assignment Setup</div>
+    <div class='scb_s_assignment_setup_radio_choice' aria-label='Create New Assignment'>
+        <input class='scb_s_experiment_setup_choose_template_kind scb_f_assignment_setup_radio_new' type="radio"
+               name="setup_kind"
+               {% if not based_on %}checked{% endif %}/>
+        <span class='scb_s_assignment_setup_radio_text'>Create new assignment OR</span>
+    </div>
+
+    <div class='scb_s_assignment_setup_radio_choice'>
+        <input class='scb_s_experiment_setup_choose_template_kind scb_f_assignment_setup_radio_existing' type="radio"
+               name="setup_kind"
+               {% if based_on %}checked{% endif %}/>
+        <span class='scb_s_assignment_setup_radio_text'>Use an existing assignment as a template.</span>
+        <br/>
+
+    </div>
+    <div class="scb_s_assignment_setup_assignment_list"
+         aria-labelledby="scb_s_experiment_step_progress_label_for_assignment">
+        <label role="presentation" class="custom-select">
+            <select role="select" id="scb_f_select_base_assignment" {% if not based_on %}disabled{% endif %}>
+                {% for asgmt in assignments %}
+                    <option role='option' aria-label='{{ asgmt.name }}' value="{{ asgmt.id }}">
+                        {{ asgmt.name }}
+
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+    <br/>
+    <br/>
+
+
+    <div class='scb_s_assignment_setup_course_name_heading'>3. What is the name of the assignment?</div>
+
+    <form method="post">{% csrf_token %}
+        <input type="text" name="name" class="" value="{{ assignment_name }}">
+        <div class="scb_ab_s_input_error">{{ error }}</div>
+        <input type="hidden" name="based_on" id="based_on">
+
+        <input type="submit" data-based_on="null"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE AND CONTINUE &nbsp; &#9654;"/>
+    </form>
+
+
+{% endblock %}

@@ -366,7 +366,7 @@
 		
 			 </div>
 
-			{if $western_blot.marker_loaded}
+			{if $western_blot.marker_loaded or $western_blot.wells_loaded}
 			{else}
 			<button class='scb_f_info_icon scb_s_western_blot_marker_info' note='scb_f_wb_marker_followup' role='button' aria-label='Marker Info'> </button>
 
@@ -429,7 +429,7 @@
         <span class='scb_s_wb_button_wrapper'>
         <button class='scb_f_wb_up_button'>&#x25B2;</button>
 		<div class="scb_s_wb_button_divider"></div>
-		<button class='scb_f_wb_down_button'>&#x25BC;</button></span><br/><br/>
+		<button class='scb_f_wb_down_button'>&#x25BC;</button></span>
 		{/if}
     </div>
     <div class='scb_s_western_blot_choose_samples_order'>
@@ -573,20 +573,28 @@
                     <span class='scb_s_western_blot_video_text_second'>lane must be reserved for the protein marker.&nbsp;</span><br/>
                 </div>
                 <div>
-                    <iframe height='124' id="wb_video1" width='187' class='scb_s_experiment_setup_video_box_vid'
-                        src="https://www.youtube.com/embed/Xs9z8Zy3hv8" frameborder="0"></iframe>
+                    <iframe height='124' id="wb_video1" width='187'
+                        class='scb_s_experiment_setup_video_box_vid'
+                        src="https://www.youtube.com/embed/GJJGNOdhP8w" frameborder="0">
+                    </iframe>
                 </div>
                 <div>
-                    <iframe height='124' id="wb_video_2" width='187' class='scb_s_experiment_setup_video_box_vid'
-                        src="https://www.youtube.com/embed/A7HdGFl22ws" frameborder="0"></iframe>
+                    <iframe height='124' id="wb_video_2" width='187'
+                        class='scb_s_experiment_setup_video_box_vid'
+                        src="https://www.youtube.com/embed/JcN0EkcHrKk" frameborder="0">
+                    </iframe>
                 </div>
                 <div>
-                    <iframe height='124' id="wb_video_3" width='187' class='scb_s_experiment_setup_video_box_vid'
-                        src="https://www.youtube.com/embed/iFxiXlh29Xc" frameborder="0"></iframe>
+                    <iframe height='124' id="wb_video_3" width='187'
+                        class='scb_s_experiment_setup_video_box_vid'
+                        src="https://www.youtube.com/embed/IoVzpL_heFo" frameborder="0">
+                    </iframe>
                 </div>
                 <div>
-                    <iframe height='124' id="wb_video_4" width='187' class='scb_s_experiment_setup_video_box_vid'
-                        src="//www.youtube.com/embed/u7VwmJw9Gbc" frameborder="0"></iframe>
+                    <iframe height='124' id="wb_video_4" width='187'
+                        class='scb_s_experiment_setup_video_box_vid'
+                        src="//www.youtube.com/embed/u7VwmJw9Gbc" frameborder="0">
+                    </iframe>
                 </div>
             </div>
         </div>

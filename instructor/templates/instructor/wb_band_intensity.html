@@ -1,0 +1,84 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+    <div class="scb_ab_s_heading_div">
+        <div class="scb_ab_s_page_title">Band Intensity</div>
+        <div class='scb_ab_s_heading_description'>
+            Define which bands will appear and their relative intensity for each of your samples in your experiment setup.
+        </div>
+
+
+    </div>
+    <div class="scb_ab_s_form_container">
+        <form method="post">{% csrf_token %}
+            {{ formset.management_form }}
+
+
+            {% for antibody, form_list in formset_group %}
+
+                <div class="scb_ab_s_antibody_header">
+                    {{ antibody.primary }}, {{ antibody.secondary }}
+                </div>
+
+                <div class="scb_ab_s_row scb_ab_s_table_header_text">
+                    <div class="scb_ab_s_col_width_sample">Sample</div>
+                    <div class="scb_ab_s_col_width_number"></div>
+                    <div class="scb_ab_s_col_width_type_size">Lysate Type</div>
+                    <div class="scb_ab_s_col_width_type_size">Size (kDa)</div>
+                    <div class="scb_ab_s_col_width_intensity">Relative Band Intensity</div>
+                </div>
+                <br>
+                {% for form in form_list %}
+                <div class="scb_ab_s_row vertical_align_top" style="padding-bottom: 5px">
+                    <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
+                    <div class="scb_ab_s_col_width_sample">
+                        <div class="block-ellipsis">
+                        {{ form.instance.strain_protocol.strain.name }},
+                        {{ form.instance.strain_protocol.treatment.drug.name }}{% if variables.has_concentration and form.instance.strain_protocol.treatment.drug.concentration != None %},
+                            {{ form.instance.strain_protocol.treatment.drug.concentration }}
+                            {{ form.instance.strain_protocol.treatment.drug.concentration_unit }}{% endif %}{% if variables.has_start_time and form.instance.strain_protocol.treatment.drug.start_time != None %},
+                            {{ form.instance.strain_protocol.treatment.drug.start_time }}
+                            {{ form.instance.strain_protocol.treatment.drug.time_unit }}{% endif %}{% if variables.has_duration and form.instance.strain_protocol.treatment.drug.duration != None %},
+                            {{ form.instance.strain_protocol.treatment.drug.duration }}
+                            {{ form.instance.strain_protocol.treatment.drug.duration_unit }}{% endif %}{% if variables.has_temperature %},
+                            {{ form.instance.strain_protocol.treatment.temperature.degrees }} &#8451;{% endif %}{% if variables.has_collection_time %},
+                            {{ form.instance.strain_protocol.treatment.collection_time.time }}
+                            {{ form.instance.strain_protocol.treatment.collection_time.units }}
+                        {% endif %}
+                        </div>
+
+
+                    </div>
+                    <div class="scb_ab_s_col_width_type_size">
+                        {% if form.instance.lysate_type == 'wc' %} WCL
+                        {% elif form.instance.lysate_type == 'nuc'%} Nuc
+                        {% else %} Cyto
+                        {% endif %}
+                    </div>
+                    <div class="scb_ab_s_col_width_type_size">
+                        {{ form.instance.weight|floatformat:"-2" }}
+                    </div>
+                    <div class="scb_ab_s_col_width_intensity">
+                        <div class="intensity_slider"></div>
+                        {{ form.intensity }}
+                    </div>
+                    <div class="scb_ab_s_intensity_text"></div>
+                    {{ form.id }}
+                </div>
+                {% endfor %}
+            {% endfor %}
+            <input type="submit"
+                   name="continue"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE AND FINISH &nbsp; &#9654;">
+            <input type="submit"
+                   name="save"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE"/>
+        </form>
+    </div>
+    <a href="{% url "western_blot_band_size" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+    </a>
+
+{% endblock %}

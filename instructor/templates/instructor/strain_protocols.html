@@ -1,0 +1,88 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+    <div class="scb_ab_s_heading_div">
+        <div class="scb_ab_s_page_title">Protocols</div>
+        <div class='scb_ab_s_heading_description'>
+            Below are all possible combinations of strains and
+            treatment protocols.
+        </div>
+        <ul>
+            <li class='scb_ab_s_heading_instructions'>
+                Unselect irrelevant combinations that you don't need.
+                Only the selected samples will be used in the experiment setup for this assignment.
+            </li>
+            <li class='scb_ab_s_heading_instructions'>
+                If you would like to edit individual experimental variables,
+                go back to the previous page.
+            </li>
+        </ul>
+        <br>
+        <div class='scb_ab_s_heading_description scb_ab_s_samples_heading'>Samples</div>
+        <button class="scb_s_gray_button scb_ab_s_show_protocols_btn toggle_protocols" data-show="false">
+            SHOW ONLY SELECTED
+        </button>
+    </div>
+    <div class="scb_ab_s_form_container">
+        <form method="post">{% csrf_token %}
+            {{ formset.management_form }}
+
+            <div class="scb_ab_s_row scb_ab_s_col_width scb_ab_s_table_header_text">
+                <div class="scb_ab_s_enable_sample">Select</div>
+            {% for header in headers %}
+                <div>{{ header }}</div>
+            {% endfor %}
+            </div>
+
+            {% for form in formset %}
+                <div class="scb_ab_s_row scb_ab_s_col_width">
+                    <div class="scb_ab_s_enable_sample">{{ form.enabled }}</div>
+                    <div>{{ form.instance.strain }}</div>
+                    <div>{{ form.instance.treatment.drug.name }}</div>
+                    {% if has_concentration %}
+                        <div>
+                            {{ form.instance.treatment.drug.concentration|default_if_none:'' }}
+                            {{ form.instance.treatment.drug.concentration_unit|default_if_none:'' }}
+                        </div>
+                    {% endif %}
+                    {% if has_start_time %}
+                        <div>
+                            {{ form.instance.treatment.drug.start_time|default_if_none:'' }}
+                            {{ form.instance.treatment.drug.time_unit|default_if_none:'' }}
+                        </div>
+                    {% endif %}
+                    {% if has_duration %}
+                        <div>
+                            {{ form.instance.treatment.drug.duration|default_if_none:'' }}
+                            {{ form.instance.treatment.drug.duration_unit|default_if_none:'' }}
+                        </div>
+                    {% endif %}
+                    {% if has_temperature %}
+                        <div>
+                            {{ form.instance.treatment.temperature.degrees }} &#8451;
+                        </div>
+                    {% endif %}
+                    {% if has_collection_time %}
+                        <div>
+                            {{ form.instance.treatment.collection_time.time }}
+                            {{ form.instance.treatment.collection_time.units }}
+                        </div>
+                    {% endif %}
+                    {{ form.id }}
+                </div>
+            {% endfor %}
+            <input type="submit"
+                   name="continue"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE AND CONTINUE &nbsp; &#9654;">
+            <input type="submit"
+                   name="save"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE"/>
+        </form>
+    </div>
+    <a href="{% url "common_assignments_edit_treatments" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+    </a>
+
+{% endblock %}

@@ -25,13 +25,12 @@ javascripts:
   - assignments/mit706s14ps2/AddMultipleDialog.js
   - instructor/gen/instructor_facs_page1.soy.js
   - js/jquery.history.js
-  - assignments/scb_ex/gen/addmutlpledialog.soy.js
+  - assignments/scb_ex/gen/addmultipledialog.soy.js
   - model/NotebookElement.js
   - js/plugins/link/plugin.min.js
   - model/Assignments.js
   - ui/gen/userguide.soy.js
   - assignments/microscopy_usability/gen/instructions.soy.js
-  - assignments/scb_ex/gen/addmultipledialog2.soy.js
   - model/WesternBlot.js
   - instructor/gen/instructor_assignment_setup.soy.js
   - ui/gen/western_blot.soy.js

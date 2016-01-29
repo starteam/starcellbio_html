@@ -40,7 +40,8 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
 	scb.Utils.initialize_accessor_field(self,data,'cell_line','',null,context);
 	scb.Utils.initialize_accessor_field(self,data,'treatment_list',{},scb.TreatmentList,context);
 	scb.Utils.initialize_accessor_field(self,data,'stimulation_time','',null,context);
-	scb.Utils.initialize_accessor_field(self,data,'collection_schedule_list','',null, context);
+	scb.Utils.initialize_accessor_field(self,data,'collection_schedule_list',{},scb.CollectionScheduleList, context);
+	scb.Utils.initialize_accessor_field(self,data,'identifier','',null,context);
 
     self.format_row = function()
     {
@@ -66,19 +67,21 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
                     }
                 });
                 var text = template;
-                _.each(value.map,function(e){
-                    if(!_.isUndefined(text[e]))
-                    {
-                        text = text[e];
-                    }
-                    if(e=='%KEY%' && !_.isUndefined(text[ret]))
-                    {
-                        text = text[ret];
-                    }
-                    else
-                    {
-                    }
-                })
+                if(value.hasOwnProperty('map')){
+                    _.each(value.map,function(e){
+                        if(!_.isUndefined(text[e]))
+                        {
+                            text = text[e];
+                        }
+                        if(e=='%KEY%' && !_.isUndefined(text[ret]))
+                        {
+                            text = text[ret];
+                        }
+                    });
+                }else{
+                    text = ret;
+                }
+
                 if(! success && scb.utils.isDefined(value.default) )
                 {
                     text = value.default;
@@ -90,6 +93,7 @@ scb.CellTreatment = function scb_CellTreatment(data, context, parent) {
                 new_text = new_text.replace( regexp , resolve(value));
             });
             display_text = new_text == orig_template ? display_text : new_text;
+            display_text = display_text.replace(/(, *)+/g, ", ");
         }
         return display_text;
     };

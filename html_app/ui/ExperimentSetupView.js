@@ -297,7 +297,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
 			else{
 				$('body').prepend(scb_experiment_setup.experiment_setup_overlay());
 				$(element).attr('href', 'javascript:void(0)');
-				
+				$('#jqDialog_box').css('width', '570px');
 				$.jqDialog.content(scb_experiment_setup.experiment_setup_dialog({assignment: parsed.assignment, experiment: parsed.experiment}));
 				$('#jqDialog_box').attr('role', 'alertdialog');
 				//$('#jqDialog_box').prepend(scb_experiment_setup.experiment_confirm());
@@ -399,7 +399,7 @@ scb.ui.static.ExperimentSetupView.row = function (sample, headings, template, ro
                 else if (drug_index == 0 && part.kind == 'start') {
                     row.push({
                         kind: 'start',
-                        title: treatment.schedule,
+                        title: treatment.start_time,
                         rows: drug_list.length,
                         first_row: drug_index == 0 && treatment_index == 0,
                         treatment: treatment.id
@@ -417,7 +417,7 @@ scb.ui.static.ExperimentSetupView.row = function (sample, headings, template, ro
                 else if (drug_index == 0 && part.kind == 'collection') {
                     row.push({
                         kind: 'collection',
-                        title: treatment.collection_id,
+                        title: treatment.collection_time,
                         rows: drug_list.length,
                         first_row: drug_index == 0 && treatment_index == 0,
                         treatment: treatment.id

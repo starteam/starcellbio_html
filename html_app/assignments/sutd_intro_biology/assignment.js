@@ -66,37 +66,59 @@ var __sutd_intro_biology = {
                                     {cell_line: 'gfp',
                                         treatment_id: 'media_only',
                                         treatment_list: {list: [
-                                            {collection_id: 'default',
+                                            {
+                                                collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gm', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]},
+                                                temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], L: [
                                     {cell_line: 'gfp',
                                         treatment_id: 'ligand_media',
                                         treatment_list: {list: [
-                                            {collection_id: 'default',
+                                            {
+                                                collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gml', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]},
+                                                temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], I: [
                                     {cell_line: 'gfp',
                                         treatment_id: 'inhibitor_media',
                                         treatment_list: {list: [
-                                            {collection_id: 'default',
+                                            {
+                                                collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmi', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]},
+                                                temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], A: [
                                     {cell_line: 'gfp',
                                         treatment_id: 'ligand_media_inhibitor',
                                         treatment_list: {list: [
-                                            {collection_id: 'default',
+                                            {
+                                                collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmil', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }}
                                         ]}}
                                 ]
                             }
@@ -119,10 +141,15 @@ var __sutd_intro_biology = {
                                     {cell_line: 'gfp1',
                                         treatment_id: 'media_only',
                                         treatment_list: {list: [
-                                            {collection_id: 'default',
+                                            {
+                                                collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gm', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], L: [
                                     {cell_line: 'gfp1',
@@ -131,7 +158,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gml', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], I: [
                                     {cell_line: 'gfp1',
@@ -140,7 +171,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmi', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], A: [
                                     {cell_line: 'gfp1',
@@ -149,7 +184,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmil', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ]
                             }
@@ -175,7 +214,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gm', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], L: [
                                     {cell_line: 'gfp2',
@@ -184,7 +227,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gml', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], I: [
                                     {cell_line: 'gfp2',
@@ -193,7 +240,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmi', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], A: [
                                     {cell_line: 'gfp2',
@@ -202,7 +253,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmil', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ]
                             }
@@ -228,7 +283,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gm', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], L: [
                                     {cell_line: 'gfp3',
@@ -237,7 +296,10 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gml', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }}
                                         ]}}
                                 ], I: [
                                     {cell_line: 'gfp3',
@@ -246,7 +308,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmi', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], A: [
                                     {cell_line: 'gfp3',
@@ -255,7 +321,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmil', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ]
                             }
@@ -281,7 +351,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gm', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], L: [
                                     {cell_line: 'gfp4',
@@ -290,7 +364,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gml', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], I: [
                                     {cell_line: 'gfp4',
@@ -299,7 +377,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmi', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], A: [
                                     {cell_line: 'gfp4',
@@ -308,7 +390,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmil', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ]
                             }
@@ -334,7 +420,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gm', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], L: [
                                     {cell_line: 'gfp5',
@@ -343,7 +433,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gml', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], I: [
                                     {cell_line: 'gfp5',
@@ -352,7 +446,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmi', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], A: [
                                     {cell_line: 'gfp5',
@@ -361,7 +459,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmil', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ]
                             }
@@ -387,7 +489,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gm', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], L: [
                                     {cell_line: 'gfpH',
@@ -396,7 +502,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gml', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], I: [
                                     {cell_line: 'gfpH',
@@ -405,7 +515,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmi', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], A: [
                                     {cell_line: 'gfpH',
@@ -414,7 +528,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmil', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ]
                             }
@@ -441,7 +559,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gm', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], L: [
                                     {cell_line: 'gfp100',
@@ -450,7 +572,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gml', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], I: [
                                     {cell_line: 'gfp100',
@@ -459,7 +585,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmi', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], A: [
                                     {cell_line: 'gfp100',
@@ -468,7 +598,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmil', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ]
                             }
@@ -495,7 +629,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gm', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], L: [
                                     {cell_line: 'gfpTD',
@@ -504,7 +642,10 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gml', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }}
                                         ]}}
                                 ], I: [
                                     {cell_line: 'gfpTD',
@@ -513,7 +654,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmi', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ], A: [
                                     {cell_line: 'gfpTD',
@@ -522,7 +667,11 @@ var __sutd_intro_biology = {
                                             {collection_id: 'default',
                                                 drug_list: {list: [
                                                     {drug_id: 'gmil', concentration_id: '100'}
-                                                ]}, temperature: '22'}
+                                                ]}, temperature: '22',
+                                                conditions: {
+                                                    'IF': ['rgb']
+                                                }
+                                            }
                                         ]}}
                                 ]
                             }

@@ -785,13 +785,12 @@ left: 131px;
 }
 
 .scb_s_western_blot_choose_samples_order_list {
-	-webkit-padding-start: 18px;
+	-webkit-padding-start: 15px;
 } 
 
 .scb_s_western_blot_choose_samples_order{
-position: relative;
-bottom: 12px;
-left: -4px;
+    bottom: 12px;
+    left: -4px;
 }
 .scb_s_western_blot_static_list::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -804,14 +803,13 @@ left: -4px;
 }
 
 .scb_s_western_blot_sortable_list{
-
-	overflow-y: auto;
-	max-height: 198px;
+    margin: 10px 0;
+    overflow-y: auto;
+    max-height: 198px;
 }
 
 .scb_s_western_blot_static_list{
-	-webkit-padding-start: 20px !important;
-	margin-top: 33px;
+	margin: 10px 0;
 	overflow-y: auto;
 	height: 250px;
 }

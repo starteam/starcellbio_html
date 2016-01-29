@@ -230,7 +230,8 @@ scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker = function (element
             id: 'marker',
             name: 'Marker',
             cell_treatment_id: "marker_treatment",
-            experiment_id: parsed.experiment.id
+            experiment_id: parsed.experiment.id,
+            kind: 'marker'
     });
     parsed.western_blot.marker_loaded = true;
     scb.ui.static.MainFrame.refresh();
@@ -524,6 +525,7 @@ scb.ui.static.WesternBlotView.register = function (workarea) {
             var parsed = scb.ui.static.WesternBlotView.parse(this);
             parsed = resetScrollValue(parsed);
             scb.ui.static.WesternBlotView.populate_wells(parsed.western_blot.rows_state().rows, parsed);
+            scb.ui.static.MainFrame.refresh();
         }
     });
     scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_choose_gel_type_input', function (e, ui) {

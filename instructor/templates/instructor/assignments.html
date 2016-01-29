@@ -1,0 +1,80 @@
+{% extends "instructor/base.html" %}
+
+{% block content %}
+    <div class='scb_s_dashboard_sidebar'>
+        <h1 class="scb_s_dashboard_sidebar_title">Your Assignments: </h1>
+
+        <a class='scb_ab_s_dashboard_new_assignment_button'
+           href="{% url "common_create_new_assignment" %}">NEW ASSIGNMENT&nbsp; +</a>
+
+        <div class="scb_s_dashboard_table_wrapper scb_s_dashboard_table_pos">
+
+            <table class="scb_s_dashboard_table " aria-label="Table of Samples" role="grid">
+                <thead class="scb_s_dashboard_table_head">
+                <tr>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_names_width ">
+                        Assignment Name
+                    </td>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_names_width ">
+                        Course Name
+                    </td>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_names_width ">
+                        Course Code
+                    </td>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_s_dashboard_access_width ">
+                        Access
+                    </td>
+                    <td role="columnheader" class="scb_s_dashboard_table_heading scb_ab_s_dashboard_no_right_border" colspan="4">
+                        Actions
+                    </td>
+                </tr>
+                </thead>
+                <tbody class="scb_s_dashboard_table_body">
+                {% for a in assignments %}
+                    <tr class="scb_s_dashboard_table_row" role="row" aria-label="Sample">
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {{ a.name }}<br>
+                        </td>
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {{ a.course.name }}
+                        </td>
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {{ a.course.code }}
+                        </td>
+                        <td class="scb_s_dashboard_table_element scb_s_dashboard_table_border" rowspan="1">
+                            {{ a.access }}
+                        </td>
+                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
+                            <a class='scb_ab_s_dashboard_action'
+                               href="{% url "common_assignments_edit" assignment_pk=a.id %}">
+                                {% if a.access == 'private' %}Edit
+                                {% else %} View
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
+                             <span class='scb_ab_s_dashboard_action scb_ab_f_preview' data-assignment-pk="{{ a.id }}">
+                                 Preview
+                             </span>
+                        </td>
+                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border'>
+                             <span class='scb_ab_s_dashboard_action
+                                {% if a.access == 'private' %} scb_ab_f_publish{% else %} disabled scb_ab_s_grayed{% endif %}'
+                                   data-assignment-pk="{{ a.id }}">
+                                 Publish
+                             </span>
+                        </td>
+
+                        <td class='scb_s_dashboard_table_element scb_s_dashboard_table_border scb_ab_s_dashboard_no_right_border'>
+                            <span class='scb_ab_f_delete_assignment scb_s_dashboard_remove_assignment'
+                                  data-assignment-pk="{{ a.id }}" data-access="{{ a.access }}">
+                                <img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+                            </span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+
+    <div class='scb_s_course_setup_title'>Course Setup</div>
+    <div class='scb_s_assignment_setup_course_name_heading'>
+        Assign this assignment to a pre-existing course or create
+        a new course. The course code assigned to the course must be unique.
+    </div>
+
+    <br>
+    <div class="scb_ab_s_top_error_list scb_ab_s_error_list">
+            {% for error in errors %}
+                <div>* {{ error }} </div>
+            {% endfor %}
+        </div>
+    <form id="course_formset" method="post">{% csrf_token %}
+
+        {{ formset.management_form }}
+        <!--This div disappears when option is not selected -->
+
+        <div class="scb_ab_s_course_list_wrapper">
+
+            <div class="scb_ab_s_course_edit_headers scb_ab_s_select_course_headers">Select</div>
+            <div class="scb_ab_s_course_edit_headers">Name</div>
+            <div class="scb_ab_s_course_edit_headers">Course Code</div>
+            {% for form in formset %}
+                <div class="scb_ab_s_course_form_list">
+                    <div>
+                        <input  type="radio" class="scb_ab_f_select_course" data-id="{{ form.id.value}}"
+                                {% if form.id.value and course_selected == form.code.value %}checked{% endif %}/>
+                    </div>
+                    <div>{{ form.name }}</div>
+                    <div>{{ form.code }}</div>
+                    <div>{{ form.id }}</div>
+                    <div class="delete_checkbox">{{ form.DELETE }}</div>
+                </div>
+
+                <div class="scb_ab_s_error_list scb_ab_s_course_fields_error_list">
+                    {% for error in form.name.errors %}
+                        <div>* {{ error }} </div>
+                    {% endfor %}
+                </div>
+                <div class=" scb_ab_s_error_list scb_ab_s_course_fields_error_list" style="width:auto">
+                    {% for error in form.code.errors %}
+                        <div>* {{ error }} </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="scb_ab_s_add_course_button_position">
+                <input type="submit" name="add" class='scb_s_gray_button scb_s_experiment_setup_add_button' value="ADD">
+            </div>
+        </div>
+        <div>
+            <input type="submit"
+                   name="continue"
+                   class=" scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE AND CONTINUE &nbsp; &#9654;"/>
+            <input type="submit"
+                   name="save"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE"/>
+        </div>
+    </form>
+
+    <div>
+
+        <a href="{% if new %}{% url "common_assignment_setup" %}
+            {% else %}{% url "common_assignment_modify" %}{% endif %}">
+            <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+        </a>
+
+    </div>
+
+{% endblock %}
