@@ -808,12 +808,12 @@ var __sutd_intro_biology_ps2 = {
                         {
                             match: ['drug_id'],
                             drug_id: 'rna1',
-                            shape: 'scaled-peak-100'
+                            shape: 'scaled-peak-2'
                         },
                         {
                             match: ['drug_id'],
                             drug_id: 'rna2',
-                            shape: 'scaled-peak-100'
+                            shape: 'scaled-peak-2'
                         },
                         {
                             match: ['drug_id'],
