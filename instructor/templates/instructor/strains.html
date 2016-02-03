@@ -20,7 +20,9 @@
                 <div>{{ forloop.counter }}.</div>
                 <div>{{ form.name }}</div>
                 <div>{{ form.id }}</div>
-                <div class="delete_checkbox">{{ form.DELETE }}</div>
+                {% if forloop.counter > 1 %}
+                    <div class="delete_checkbox">{{ form.DELETE }}</div>
+                {% endif %}
             </div>
         {% endfor %}
         <div>
@@ -28,8 +30,10 @@
         </div>
         <input type="submit"
                name="continue"
-               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-               value="SAVE AND CONTINUE &nbsp; &#9654;">
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn
+               {% if formset.0.id.value == None %}disabled{% endif %}"
+               value="SAVE AND CONTINUE &nbsp; &#9654;"
+               {% if formset.0.id.value == None %}disabled{% endif %}>
         <input type="submit"
                name="save"
                class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
