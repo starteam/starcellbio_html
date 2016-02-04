@@ -132,7 +132,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 return normal_dist(x, 0.45, 0.3, -2, true)*0.2;
 			}
 
-            /* graph C*/
+            /* graph C */
             function graph_C(x, mean){
                  return normal_dist(x, mean, 0.2, 0.5, false);
             }
@@ -502,6 +502,8 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
                 /*assuming that 150 is the third point on the scale*/
                 if(shape.indexOf('3')>-1){
                     mean=3/(template.model.facs.max/step) *3;
+                }else if(shape.indexOf('2')>-1){
+                    mean=3/(template.model.facs.max/step)*2;
                 }else if(shape.indexOf('1')>-1){
                     mean=3/(template.model.facs.max/step);
                 }
