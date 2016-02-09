@@ -38,6 +38,14 @@ DB_HOST = ''
 DB_PORT = ''
 
 
+# Default logging configuration
+LOG_LEVEL = 'DEBUG'
+DJANGO_LOG_LEVEL = 'DEBUG'
+# For logging to a syslog host
+LOG_HOST = 'localhost'
+LOG_HOST_PORT = 514
+
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -138,34 +146,6 @@ INSTALLED_APPS = (
     'instructor',
 ) + auth.settings.INSTALLED_APPS
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
 
 # django all-auth config
 ACCOUNT_EMAIL_REQUIRED = True
@@ -238,3 +218,62 @@ DATABASES = {
 # no tuples in YAML. When ADMINS is defined in YAML, it's imported as a list of
 # lists.
 ADMINS = tuple(tuple(admin) for admin in ADMINS)
+
+
+HOSTNAME = platform.node().split('.')[0]
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        }
+    },
+    'formatters': {
+        'verbose': {
+            'format': (
+                '[%(asctime)s] %(levelname)s %(process)d [%(name)s] '
+                '%(filename)s:%(lineno)d - '
+                '[{hostname}] - %(message)s'
+            ).format(hostname=HOSTNAME),
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'syslog': {
+            'level': LOG_LEVEL,
+            'class': 'logging.handlers.SysLogHandler',
+            'facility': 'local7',
+            'formatter': 'verbose',
+            'address': (LOG_HOST, LOG_HOST_PORT)
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+    },
+    'loggers': {
+        'root': {
+            'handlers': ['console', 'syslog'],
+            'level': LOG_LEVEL,
+        },
+        'requests': {
+            'handlers': ['console', 'syslog'],
+            'level': LOG_LEVEL,
+        },
+        'django': {
+            'propagate': True,
+            'level': DJANGO_LOG_LEVEL,
+            'handlers': ['console', 'syslog', 'mail_admins'],
+        },
+        'urllib3': {
+            'level': 'INFO',
+        }
+    },
+}
