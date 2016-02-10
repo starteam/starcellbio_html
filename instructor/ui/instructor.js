@@ -1,8 +1,7 @@
 
 $(function(){
     $('.scb_ab_s_sidebar_page_name_selected').append(
-        "<img role='presentation' class='scb_s_selection_arrow_img' " +
-            "src='../../../images/homepage/selection_arrow.png' >");
+        "<div class='scb_s_selection_arrow_img'></div>");
     $('.scb_s_dashboard_table_row').hover(function(){
 	    $('.scb_s_dashboard_link', this).toggle();
     });
@@ -67,7 +66,7 @@ $(function(){
      * For all text input boxes inside a form
      */
     $("form input[type = 'text'], form input[type = 'number']").addClass("scb_ab_s_input_text_field");
-
+    $("form select").addClass("scb_ab_s_from_select_field");
     /**
      * Edit Strains
      */
@@ -193,6 +192,16 @@ $(function(){
         }
     }
     /**
+     * Facs: Sample Prep
+     */
+    if($("#id_form-0-fixed").length){
+        if($(".scb_ab_s_form_input_list").length < 2){
+            $("#id_form-0-condition").attr('placeholder', 'Condition Name');
+        }
+        $("option:first").attr('disabled', true);
+    }
+
+    /**
      * Western Blotting: band intensity
      */
     $(".intensity_slider").each(function(){
@@ -248,7 +257,6 @@ $(function(){
 
 /* Temporarily disable techniques */
     $('.disabled').bind('click', false);
-    $("#id_has_fc").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
     $("#id_has_micro").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
 
     /* Publish assignment on the dashboard */

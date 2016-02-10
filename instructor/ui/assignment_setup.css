@@ -9,6 +9,19 @@
     padding: 5px;
     display:inline-block;
 }
+.scb_ab_s_from_select_field{
+    font-family: 'sourcesanspro-regular';
+    width: 141px;
+    background: white;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    height: 31px;
+    padding:5px;
+    border-radius: 0;
+    font-style: italic;
+    -webkit-appearance: none;
+}
+
 .scb_s_instructor_view{
     width: 1002px;
     background-color: #f4f6f8;
@@ -145,7 +158,7 @@ select:disabled {
 }
 .scb_ab_s_experiment_setup_add_button{
 	width: 104px;
-    margin:20px 0 0 58px;
+    margin:20px 0 0 29px;
 }
 
 /* Input headers  in Define variable */
@@ -153,6 +166,7 @@ select:disabled {
     position: relative;
     left: 29px;
     margin-top:20px;
+
 }
 .scb_ab_s_input_headers>div{
     width: 148px;
@@ -173,10 +187,11 @@ select:disabled {
     width: 72px;
 }
 
+
 /* Form inputs  in Define variables*/
 .scb_ab_s_form_input_list{
     position: relative;
-    left: 10px;
+    left: 29px;
 }
 .scb_ab_s_form_input_list>div{
     display: inline-block;
@@ -184,6 +199,11 @@ select:disabled {
 .scb_ab_s_form_input_list>div>input{
     margin: 5px 0 0 5px;
 }
+
+.scb_ab_s_form_input_list>.scb_ab_s_counter_margin{
+    margin-left: -19px;
+}
+
 .scb_ab_s_small_input_box>input{
     width: 40px;
 }
@@ -400,19 +420,6 @@ div.block-ellipsis {
 .scb_s_dashboard_access_width{
     width: 80px;
 }
-
-/* Temporarily disable techniques */
-.disabled{
-    opacity: 0.4;
-    cursor: default !important;
-}
-
-span.scb_ab_s_dashboard_action {
-    cursor: pointer;
-}
-input[type="checkbox"].disabled {
-    opacity: 1;
-}
 .scb_ab_s_dashboard_new_assignment_button{
     font-size: 9pt;
     font-family: 'sourcesanspro-semibold';
@@ -428,3 +435,38 @@ input[type="checkbox"].disabled {
     padding: 5px 9px 5px 13px;
 
 }
+span.scb_ab_s_dashboard_action {
+    cursor: pointer;
+}
+
+
+/* Temporarily disable techniques */
+.disabled{
+    opacity: 0.4;
+    cursor: default !important;
+}
+input[type="checkbox"].disabled {
+    opacity: 1;
+}
+
+/* FACS Sample Prep */
+.scb_ab_s_input_headers>div.scb_ab_s_facs_cell_treatment_header{
+    width: 162px;
+
+}
+.scb_ab_s_input_headers>div.scb_ab_center_input_header{
+    margin-left: 5px;
+    width: 138px;
+    text-align: center;
+}
+.scb_ab_s_form_input_list>.scb_ab_s_fixed>input{
+    margin-left: 0;
+}
+.scb_ab_s_form_input_list>.scb_ab_s_live{
+    margin-right: 20px;
+}
+.vertical_align_bottom{
+    vertical-align: bottom;
+}
+
+
