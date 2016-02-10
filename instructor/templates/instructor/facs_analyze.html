@@ -1,36 +1,34 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
-    <div class="scb_ab_s_heading_div">
-        <div class="scb_ab_s_page_title">Band Intensity</div>
-        <div class='scb_ab_s_heading_description'>
-            Define which bands will appear and their relative intensity for each of your samples in your experiment setup.
-        </div>
 
-
+<div class="scb_ab_s_heading_div">
+    <div class="scb_ab_s_page_title">Analyze</div>
+    <div class='scb_ab_s_heading_description'>
+        Define the flow cytometry histogram for each sample.
     </div>
-    <div class="scb_ab_s_form_container">
+</div>
+<div class="scb_ab_s_form_container">
         <form method="post">{% csrf_token %}
             {{ formset.management_form }}
 
 
-            {% for antibody, form_list in formset_group %}
+            {% for cell_treatment, analysis, condition, form_list in formset_group %}
 
-                <div class="scb_ab_s_antibody_header scb_ab_s_grouping_header_row">
-                    {{ antibody.primary }}, {{ antibody.secondary }}
+                <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
+                    <div class="scb_ab_s_facs_condition_header">
+                        {{ cell_treatment }}, {{ analysis }}, {{ condition }}
+                    </div>
+                    {% if forloop.counter == 1 %}
+                        <div class="scb_ab_col_edit">Edit</div>
+                        <div class="scb_ab_s_col_copy">Copy to another sample(s)</div>
+                    {% endif %}
                 </div>
 
-                <div class="scb_ab_s_row scb_ab_s_table_header_text">
-                    <div class="scb_ab_s_col_width_wb_sample">Sample</div>
-                    <div class="scb_ab_s_col_width_number"></div>
-                    <div class="scb_ab_s_col_width_type_size">Lysate Type</div>
-                    <div class="scb_ab_s_col_width_type_size">Size (kDa)</div>
-                    <div class="scb_ab_s_col_width_intensity">Relative Band Intensity</div>
-                </div>
                 {% for form in form_list %}
-                <div class="scb_ab_s_row vertical_align_top" style="padding-bottom: 5px">
+                <div class="scb_ab_s_row">
                     <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
-                    <div class="scb_ab_s_col_width_wb_sample">
+                    <div class="scb_ab_s_col_width_facs_sample">
                         <div class="block-ellipsis">
                         {{ form.instance.strain_protocol.strain.name }},
                         {{ form.instance.strain_protocol.treatment.drug.name }}{% if variables.has_concentration and form.instance.strain_protocol.treatment.drug.concentration != None %},
@@ -45,24 +43,22 @@
                             {{ form.instance.strain_protocol.treatment.collection_time.units }}
                         {% endif %}
                         </div>
-
-
                     </div>
-                    <div class="scb_ab_s_col_width_type_size">
-                        {% if form.instance.lysate_type == 'wc' %} WCL
-                        {% elif form.instance.lysate_type == 'nuc'%} Nuc
-                        {% else %} Cyto
-                        {% endif %}
-                    </div>
-                    <div class="scb_ab_s_col_width_type_size">
-                        {{ form.instance.weight|floatformat:"-2" }}
-                    </div>
-                    <div class="scb_ab_s_col_width_intensity">
-                        <div class="intensity_slider"></div>
-                        {{ form.intensity }}
-                    </div>
-                    <div class="scb_ab_s_intensity_text"></div>
                     {{ form.id }}
+                </div>
+                <div class="scb_ab_s_row" style="padding: 3px 0 8px 0">
+                    <div class="scb_ab_s_col_width_number"></div>
+                    <div class="scb_ab_s_col_width_facs_sample">
+                        <button class="scb_s_gray_button">
+                            Select Histogram
+                        </button>
+                    </div>
+                    <div class="scb_ab_col_edit">
+                        <div class="scb_ab_s_histogram_edit_grey_img"></div>
+                    </div>
+                    <div class="scb_ab_s_col_copy" style="margin-top: 8px;">
+                        <input type="checkbox">
+                    </div>
                 </div>
                 {% endfor %}
             {% endfor %}
@@ -76,8 +72,7 @@
                    value="SAVE"/>
         </form>
     </div>
-    <a href="{% url "western_blot_band_size" %}">
+<a href="{% url "facs_sample_prep" %}">
     <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-    </a>
-
+</a>
 {% endblock %}

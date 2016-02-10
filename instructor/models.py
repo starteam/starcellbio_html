@@ -197,8 +197,8 @@ class FlowCytometryHistogram(models.Model):
     sample_prep = models.ForeignKey(FlowCytometrySamplePrep, related_name='histograms')
     strain_protocol = models.ForeignKey(StrainTreatment, related_name='histograms')
     kind = models.CharField(max_length=50, choices=HISTOGRAMS, default=GAUSS)
-    data = models.TextField(null=True,blank=True)
-    enabled = models.BooleanField(default=False)
+    fixed_data=models.TextField(null=True,blank=True)
+    live_data=models.TextField(null=True,blank=True)
 
 admin.site.register(Course)
 admin.site.register(Assignment)

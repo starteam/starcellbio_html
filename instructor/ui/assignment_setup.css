@@ -261,6 +261,7 @@ select:disabled {
 
 .scb_ab_s_table_header_text{
     font-family: 'sourcesanspro-semibold';
+    margin: 5px 0 10px 0;
 }
 .scb_ab_s_row>div.scb_ab_s_enable_sample{
     width: 50px;
@@ -315,6 +316,8 @@ select:disabled {
 /* Protein size input */
 div.scb_ab_s_antibody_name{
     text-align: left;
+    vertical-align: middle;
+    margin-top: 10px;
     width: 155px;
     font-family: 'sourcesanspro-semibold';
 
@@ -339,7 +342,7 @@ div.scb_ab_s_antibody_name{
     width: 68px;
 }
 /* Band intensity*/
-.scb_ab_s_row>.scb_ab_s_col_width_sample{
+.scb_ab_s_row>.scb_ab_s_col_width_wb_sample{
     width: 240px;
     text-align: left;
 }
@@ -347,7 +350,7 @@ div.scb_ab_s_antibody_name{
     width: 15px;
 }
 .scb_ab_s_col_width_type_size{
-    width: 80px;
+    width: 75px;
 }
 
 .scb_ab_s_col_width_intensity>input{
@@ -385,8 +388,6 @@ div.scb_ab_s_antibody_name{
 }
 .scb_ab_s_antibody_header{
     font-size: 17px;
-    font-family: 'sourcesanspro-semibold';
-    margin: 15px 0 5px 0;
 }
 
 #jqDialog_box{
@@ -398,7 +399,7 @@ div.scb_ab_s_antibody_name{
 div.block-ellipsis {
   display: -webkit-box;
   max-width: 100%;
-  height: 35px;
+  max-height: 35px;
   margin: 0 auto;
   font-size: 14px;
   -webkit-line-clamp: 2;
@@ -467,6 +468,33 @@ input[type="checkbox"].disabled {
 }
 .vertical_align_bottom{
     vertical-align: bottom;
+}
+/* FACS Analyze */
+.scb_ab_s_col_copy{
+    width: 200px;
+}
+.scb_ab_col_edit{
+    width: 50px;
+    text-align: center;
+}
+.scb_ab_s_row>.scb_ab_s_col_width_facs_sample{
+    width: 320px;
+    text-align: left;
+}
+.scb_ab_s_row>.scb_ab_s_facs_condition_header{
+    font-size: 17px;
+    width: 339px;
+    text-align: left;
+
+}
+.scb_ab_s_grouping_header_row{
+    margin: 15px 0 5px 0;
+    font-family: 'sourcesanspro-semibold';
+}
+.scb_ab_s_histogram_edit_grey_img{
+    background: url('../images/DrawHistogram_Gray.png') no-repeat;
+    background-size: 40px;
+    height: 30px;
 }
 
 
