@@ -129,6 +129,8 @@ urlpatterns += patterns(
     # Flow Cytometry
     url(r'^ab/assignments/facs_sample_prep/$', instructor_common.facs_sample_prep,
         name="facs_sample_prep"),
+    url(r'^ab/assignments/facs_analyze/$', instructor_common.facs_analyze,
+        name="facs_analyze"),
     url(r'^ab/assignments/facs_histograms_edit/(?P<assignment>.+)/(?P<sample_prep>.+)/(?P<sp>.+)/$',
         instructor_common.facs_histograms_edit,
         name="facs_histograms_edit"),

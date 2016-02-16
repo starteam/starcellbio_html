@@ -20,7 +20,7 @@ from functools import wraps
 
 page_order = ['assignment', 'course', 'strains', 'variables', 'treatments',
               'protocols', 'techniques', 'wb_lysate_type', 'wb_antibody',
-              'wb_band_size', 'wb_band_intensity', 'facs_sample_prep']
+              'wb_band_size', 'wb_band_intensity', 'facs_sample_prep', 'facs_analyze']
 
 @login_required
 def assignments(request):
@@ -213,6 +213,19 @@ def check_assignment_owner(func):
         return func(*args, **kwargs)
     return check_owner
 
+
+def assignment_selected(func):
+    @wraps(func)
+    def check_assignment_id(request, *args, **kwargs):
+        try:
+            request.session['assignment_id']
+        except KeyError:
+            return redirect('common_assignments')
+        else:
+            return func(request, *args, **kwargs)
+    return check_assignment_id
+
+@assignment_selected
 @check_assignment_owner
 @login_required
 def assignment_modify(request):
@@ -248,6 +261,7 @@ def assignment_modify(request):
         },
         context_instance=RequestContext(request))
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def course_modify(request):
@@ -325,7 +339,7 @@ def course_modify(request):
         context_instance=RequestContext(request))
 
 
-
+@assignment_selected
 @check_assignment_owner
 @login_required
 def assignments_variables(request):
@@ -384,6 +398,7 @@ def assignments_variables(request):
         },
         context_instance=RequestContext(request))
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def select_technique(request):
@@ -420,6 +435,7 @@ def select_technique(request):
 
         })
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def assignments_edit_strains(request):
@@ -469,6 +485,7 @@ def assignments_edit_strains(request):
         },
         context_instance=RequestContext(request))
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def assignments_edit_treatments(request):
@@ -603,7 +620,7 @@ def assignments_edit_treatments(request):
         context_instance=RequestContext(request)
     )
 
-
+@assignment_selected
 @check_assignment_owner
 @login_required
 def strain_treatments_edit(request):
@@ -716,6 +733,7 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
                 strain=s, treatment=t, assignment=assignment)
             update_wb_bands(assignment, strain_treatments=[strain_treatment])
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def western_blot_lysate_type(request):
@@ -756,6 +774,7 @@ def western_blot_lysate_type(request):
         },
         context_instance=RequestContext(request))
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def western_blot_antibody(request):
@@ -809,6 +828,7 @@ def western_blot_antibody(request):
         },
         context_instance=RequestContext(request))
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def western_blot_band_size(request):
@@ -906,6 +926,7 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
                         )
     return error
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def western_blot_band_intensity(request):
@@ -970,7 +991,6 @@ def western_blot_band_intensity(request):
             'formset': formset,
             'access': json.dumps(assignment.access),
             'formset_group': formset_group,
-            'antibodies': antibodies,
             'variables': variables,
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
@@ -1040,6 +1060,7 @@ def microscopy_images_edit(request, assignment, sample_prep, sp):
                               },
                               context_instance=RequestContext(request))
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def facs_sample_prep(request):
@@ -1060,15 +1081,19 @@ def facs_sample_prep(request):
             for obj in formset.deleted_objects:
                 obj.delete()
             for facs_sample in entries:
-                facs_sample.assignment = assignment
-                facs_sample.save()
+                if facs_sample.id is None:
+                    facs_sample.assignment = assignment
+                    facs_sample.save()
+                    create_facs_histograms(assignment, facs_sample)
+                else:
+                    facs_sample.save()
             if 'continue' in request.POST:
                 if assignment.last_enabled_page <= page_number:
                     assignment.last_enabled_page = page_number+1
                     assignment.save()
-                return redirect('common_assignments')
+                return redirect('facs_analyze')
     elif request.method == "POST" and 'continue' in request.POST:
-        return redirect("common_assignments")
+        return redirect("facs_analyze")
 
     extra_fields = 0
     if 'add' in request.POST or not models.FlowCytometrySamplePrep.objects.filter(assignment=assignment).exists():
@@ -1095,6 +1120,105 @@ def facs_sample_prep(request):
             'last_page_number':  assignment.last_enabled_page
         },
         context_instance=RequestContext(request))
+
+
+def create_facs_histograms(assignment, facs_sample):
+    '''
+    Create FlowCytometryHistogram objects, all combinations of
+    this 'facs_sample' (i.e. cell_treatment, analysis, condition)
+    and all strain protocols defined for this assignment
+    Args:
+        assignment: current assignment
+        facs_sample: newly created FlowCytometrySamplePrep object
+    '''
+    strain_protocols = models.StrainTreatment.objects.filter(assignment=assignment)
+    for strain_protocol in strain_protocols:
+        histogram, created = models.FlowCytometryHistogram.objects.get_or_create(
+            sample_prep=facs_sample,
+            strain_protocol=strain_protocol,
+        )
+
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def facs_analyze(request):
+    '''
+    List all combinations of samples, cell treatments,
+    analysis types, and conditions. Let the user assign a
+    histogram to each combination.
+    '''
+    page_number = page_order.index('facs_analyze')
+    pk = request.session['assignment_id']
+
+    assignment = models.Assignment.objects.get(id=pk)
+
+    HistogramFormset = modelformset_factory(
+        models.FlowCytometryHistogram,
+        extra=0,
+        exclude=['sample_prep', 'strain_protocol']
+    )
+    if request.method == 'POST' and assignment.access == 'private':
+        formset = HistogramFormset(request.POST)
+        if formset.is_valid():
+            entries = formset.save(commit=False)
+            for entry in entries:
+                entry.save()
+            if 'continue' in request.POST:
+                if assignment.last_enabled_page <= page_number:
+                    assignment.last_enabled_page = page_number+1
+                    assignment.save()
+                return redirect('common_assignments')
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect('common_assignments')
+    else:
+        formset = HistogramFormset(queryset=models.FlowCytometryHistogram.objects.filter(
+            sample_prep__assignment=assignment).order_by(
+            'strain_protocol__strain',
+            'strain_protocol__treatment__drug__name',
+            'strain_protocol__treatment__drug__concentration',
+            'strain_protocol__treatment__drug__start_time',
+            'strain_protocol__treatment__drug__duration',
+            'strain_protocol__treatment__temperature__degrees',
+            'strain_protocol__treatment__collection_time__time'
+        ))
+    grouped_forms = []
+    samples = models.FlowCytometrySamplePrep.objects.filter(assignment=assignment)
+    for sample in samples.iterator():
+
+        form_list = [
+            form for form in formset
+            if form.instance.sample_prep.analysis == sample.analysis and
+                form.instance.sample_prep.condition == sample.condition
+        ]
+        if sample.fixed:
+            grouped_forms.append(('fixed', sample.analysis, sample.condition, form_list))
+        if sample.live:
+            grouped_forms.append(('live', sample.analysis, sample.condition, form_list))
+    variables = {
+        'has_concentration': assignment.has_concentration,
+        'has_start_time': assignment.has_start_time,
+        'has_duration': assignment.has_duration,
+        'has_temperature': assignment.has_temperature,
+        'has_collection_time': assignment.has_collection_time
+    }
+    return render_to_response(
+        'instructor/facs_analyze.html',
+        {
+            'formset': formset,
+            'access': json.dumps(assignment.access),
+            'formset_group': grouped_forms,
+            'variables': variables,
+            'assignment_name': assignment.name,
+            'section_name': 'Flow Cytometry',
+            'page_name': 'facs_analyze',
+            'last_page_number':  assignment.last_enabled_page
+        },
+        context_instance=RequestContext(request))
+
+
+
 
 
 def facs_histograms_edit(request, assignment, sample_prep, sp):

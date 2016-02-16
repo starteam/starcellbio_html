@@ -147,6 +147,16 @@
                 Sample Prep
             </a>
         </div>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "facs_analyze" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
+            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 12 %} disabled {% endif %}"
+                {% if last_page_number >= 12 %}
+                    href="{% url "facs_analyze"  %}"
+                {% endif %}
+            >
+                Analyze
+            </a>
+        </div>
 
     </div>
 {% endblock %}
