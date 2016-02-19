@@ -1,0 +1,7 @@
+pre-commit
+flake8
+ipdb
+ipython
+pudb
+selenium==2.35.0
+-r requirements.txt

@@ -1,0 +1,15 @@
+language: python
+python:
+  - "2.7"
+services:
+  - mysql
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq libmysqlclient-dev mysql-client build-essential libncurses5-dev openjdk-6-jre npm nodejs git postfix phantomjs
+install:
+  - pip install -r requirements.dev.txt
+  - npm install
+before_script:
+  - sh -c "mysql -uroot -e \"grant all on *.* to 'starcellbio'@'localhost' identified by '136a411ed9e8592089444b7164ffaf84'\""
+script:
+  - ./manage.py test
