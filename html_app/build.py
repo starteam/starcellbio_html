@@ -27,7 +27,8 @@ from watchdog.observers import Observer
 from watchdog.events import RegexMatchingEventHandler
 import yaml
 
-ROOT = os.environ['PROJECT_HOME'] + '/html_app/'
+ROOT = os.path.dirname(os.path.realpath(__file__))
+REPO_ROOT = os.path.dirname(ROOT)
 STATIC_ASSETS = 'static_assets.yml'
 
 prod_minify = False
@@ -109,7 +110,7 @@ def minify_all_css(css):
 def index_html():
     # Load yaml file of javascript deps
     with open(os.path.join(
-            os.environ['PROJECT_HOME'],
+            os.path.dirname(ROOT),
             STATIC_ASSETS
     )) as yaml_file:
         static_assets = yaml.load(yaml_file)
@@ -142,7 +143,7 @@ def index_html():
 
 def update_index_html():
     f = open(
-        "{}index.html".format(ROOT),
+        os.path.join(ROOT, "index.html"),
         "w"
     )
     f.write(index_html())
@@ -173,7 +174,7 @@ def processor(path):
         )
         call([
             "java",
-            "-jar", "../tools/SoyToJsSrcCompiler.jar",
+            "-jar", os.path.join(REPO_ROOT, "tools/SoyToJsSrcCompiler.jar"),
             "--outputPathFormat", outfile,
             infile
         ])
@@ -186,14 +187,14 @@ def processor(path):
         )
         call([
             "java",
-            "-jar", "../tools/closure-stylesheets-20111230.jar",
+            "-jar", os.path.join(REPO_ROOT, "tools/closure-stylesheets-20111230.jar"),
             "--pretty-print", infile,
             "-o", outfile
         ])
         print "compile gss {} to {} ".format(infile, outfile)
     if update_index:
         global_update_index = True
-        os.utime("{}.touch_index".format(ROOT), None)
+        os.utime(os.path.join(ROOT, ".touch_index"), None)
 
 
 def process_all():
