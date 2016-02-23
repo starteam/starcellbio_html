@@ -188,7 +188,7 @@ def get_student_courses(request, **kwargs):
                 courses.append(c)
         assignments = []
         #for course in courses:
-        #	assignments.append(course.assignments.all())
+        #    assignments.append(course.assignments.all())
         for course in courses:
             course_assignments = course.assignments.all()
             #pudb.set_trace()
@@ -441,7 +441,7 @@ def get_instructor_assignments(request, **kwargs):
     account_type = get_account_type(request.user)
 
     if (account_type == 'instructor'):
-        # 		pudb.set_trace()
+        #         pudb.set_trace()
         public_list = Assignment.objects.filter(access='Public')
         for v in public_list:
             dictionary = ast.literal_eval(v.data)
@@ -467,7 +467,7 @@ def get_instructor_assignments(request, **kwargs):
 
 
 def create_new_assignment(request, **kwargs):
-    # 	pudb.set_trace()
+    #     pudb.set_trace()
     jstr = request.body
     assignment_data = json.loads(jstr)['assignment']
 
@@ -485,7 +485,7 @@ def create_new_assignment(request, **kwargs):
 
 
 def edit_assignment(request, **kwargs):
-    # 	pudb.set_trace()
+    #     pudb.set_trace()
     jstr = request.body
     jsondata = json.loads(jstr)
     jsonmodel = jsondata['model']
