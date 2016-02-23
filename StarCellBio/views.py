@@ -61,8 +61,6 @@ def home(request):
 
 def get_model(request):
     json_response = {'user': None, 'authenticated': False}
-    # import pudb
-    #pudb.set_trace()
     print request.user
     if request.user.is_authenticated():
         json_assignments = [];
@@ -82,8 +80,6 @@ def get_model(request):
         else:
             return HttpResponse("var get_model_result = {0};".format(json.dumps("not working yet")))
     else:
-        #import pudb
-        #pudb.set_trace()
         #json_object = json.loads(request.body)
         pass
         # Do something for anonymous users.
@@ -114,7 +110,6 @@ def get_user(request, **kwargs):
 
 
 def create_course(request, **kwargs):  #
-    # pudb.set_trace()
     jstr = request.body
     jsondata = json.loads(jstr)
 
@@ -191,7 +186,6 @@ def get_student_courses(request, **kwargs):
         #    assignments.append(course.assignments.all())
         for course in courses:
             course_assignments = course.assignments.all()
-            #pudb.set_trace()
             if (course.sassignments.filter(student=request.user).count() == 0 or course.sassignments.count() == 0):
                 for a in course_assignments:
                     original_assignment_data = a.data
@@ -205,7 +199,6 @@ def get_student_courses(request, **kwargs):
                         encoded_number = int(encoded_email, 16) % 24
                         order = random_mapping_ps2[encoded_number]
                         order = list(order)
-                        #pudb.set_trace()
                         assignment_data['template']['random_order'] = order
                         original_assignment_data = repr(assignment_data)
                         print order
@@ -217,7 +210,6 @@ def get_student_courses(request, **kwargs):
                 for x in course.sassignments.filter(student=request.user):
                     assignments.append(x)
             else:
-                #pudb.set_trace()
                 assignments = []
                 if (len(course.sassignments.filter(student=request.user)) != len(course_assignments)):
                     list_of_extras = []
@@ -245,7 +237,6 @@ def get_student_courses(request, **kwargs):
         for a in assignments:
             dictionary = ast.literal_eval(a.data)
             alist.append(dictionary)
-        #pudb.set_trace()
         is_selected_val = alist[0]['id']
         if (alist[0]['course'] == '7.06_Spring_2014' and len(alist) == 2):
             is_selected_val = 'assignment_706_2014_ps2'
@@ -253,7 +244,6 @@ def get_student_courses(request, **kwargs):
             is_selected_val = alist[0]['id']
         retval = {'is_student': True, 'list': alist, 'is_auth': True, 'is_selected': is_selected_val, 'token': token1}
     else:
-        #pudb.set_trace()
         if (account_type == 'instructor'):
             retval = {'is_student': False, 'list': [], 'is_auth': True, 'is_selected': '', 'token': token1}
         else:
@@ -274,7 +264,6 @@ def get_student_courses(request, **kwargs):
 
 
 def post_state(request, **kwargs):
-    #import pudb
     #print request.user
     jstr = request.body
     jsondata = json.loads(jstr)
@@ -282,7 +271,6 @@ def post_state(request, **kwargs):
     import random
 
     token2 = random.randrange(0, 1000000)
-    #pudb.set_trace()
     if (UserCourse.objects.filter(user__username=request.user.username).count() > 0):
         usercourses = UserCourse.objects.filter(user=request.user)
         courses = []
@@ -294,7 +282,6 @@ def post_state(request, **kwargs):
             retval = {'is_anonymous': False, 'valid_token': False, 'token': token2}
             for sa in sassignments:
                 for x in jsondata['model']['assignments']['list']:
-                    #pudb.set_trace()
                     #if(sa.token == jsondata['token'] and sa.assignmentID == x['id']):
                     if ( sa.assignmentID == x['id']):
                         sa.data = json.loads(json.dumps(x))
@@ -332,7 +319,6 @@ def contact(request, **kwargs):
 
 def randomize_706_2014_ps1(request, assignment_data):
     import random
-    #pudb.set_trace()
     import hashlib
 
     md5 = hashlib.md5()
@@ -441,7 +427,6 @@ def get_instructor_assignments(request, **kwargs):
     account_type = get_account_type(request.user)
 
     if (account_type == 'instructor'):
-        #         pudb.set_trace()
         public_list = Assignment.objects.filter(access='Public')
         for v in public_list:
             dictionary = ast.literal_eval(v.data)
@@ -467,7 +452,6 @@ def get_instructor_assignments(request, **kwargs):
 
 
 def create_new_assignment(request, **kwargs):
-    #     pudb.set_trace()
     jstr = request.body
     assignment_data = json.loads(jstr)['assignment']
 
@@ -485,7 +469,6 @@ def create_new_assignment(request, **kwargs):
 
 
 def edit_assignment(request, **kwargs):
-    #     pudb.set_trace()
     jstr = request.body
     jsondata = json.loads(jstr)
     jsonmodel = jsondata['model']
