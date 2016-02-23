@@ -2,6 +2,7 @@
 
 __author__ = 'ceraj'
 __author__ = 'skini'
+import logging
 import json
 
 from django.conf import settings
@@ -18,6 +19,8 @@ from StarCellBio.forms import ContactForm
 import StarCellBio.settings
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+
+log = logging.getLogger(__name__)
 
 random_mapping = {0: 'DEBAC', 1: 'DABEC', 2: 'CABED', 3: 'ACDEB', 4: 'EBADC', 5: 'BDECA', 6: 'EBCAD', 7: 'ADBCE',
                   8: 'CBAED', 9: 'DEACB', 10: 'ECDAB', 11: 'EDACB', 12: 'EBACD', 13: 'EADBC', 14: 'CBDEA', 15: 'CEDBA',
@@ -126,35 +129,34 @@ def create_course(request, **kwargs):  #
 
 
 def initialize_courses(request, **kwargs):  #
-    import pudb
-    # pudb.set_trace()
     jstr = request.body
     jsondata = json.loads(jstr)
     if (request.method == 'POST'):
-        #pudb.set_trace()
-        g = Group(name='instructor')
-        s = Group(name='student')
+        g, _ = Group.objects.get_or_create(name='instructor')
+        Group.objects.get_or_create(name='student')
         content_type = ContentType.objects.get_for_model(User)
-        if (Permission.objects.filter(codename='is_instructor').count() <= 0):
-            p = Permission(codename='is_instructor', name='Is instructor', content_type=content_type)
-            p.save()
-            g.save()
-            s.save()
+        if Permission.objects.filter(codename='is_instructor').exists():
+            p, _ = Permission.objects.get_or_create(codename='is_instructor', name='Is instructor', content_type=content_type)
             g.permissions.add(p)
-            g.save()
 
-        if (jsondata):
+        if jsondata:
             #make more complex later
-            for x in jsondata['assignments']['list']:
+            for pos, x in enumerate(jsondata['assignments']['list']):
+                if x is None:
+                    log.error("Weird setup. Currently at position %s in jsondata.assignments.list", pos)
+                    log.error("The values are... \n%s", json.dumps(jsondata['assignments']['list'], indent=2))
+                    continue
                 assign_id = x["id"]
                 course_code = x["course"]
                 assign_name = x["name"]
                 course_name = x["course_name"]
-                c = Course(code=course_code, course_name=course_name)
-                c.save()
-                a = Assignment(courseID=c, assignmentID=assign_id, assignmentName=assign_name, data=x)
-                a.save()
-                a.basedOn=a
+
+                try:
+                    c = Course.objects.get(code=course_code)
+                except Course.DoesNotExist:
+                    c = Course.objects.create(code=course_code, course_name=course_name, ownerID=User.objects.order_by('id').first())
+                a, _ = Assignment.objects.get_or_create(courseID=c, assignmentID=assign_id, assignmentName=assign_name, data=x)
+                a.basedOn = a
                 a.save()
             return HttpResponse('got it')
     else:

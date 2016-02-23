@@ -40,7 +40,7 @@ DB_PORT = ''
 
 # Default logging configuration
 LOG_LEVEL = 'DEBUG'
-DJANGO_LOG_LEVEL = 'DEBUG'
+DJANGO_LOG_LEVEL = 'WARNING'
 # For logging to a syslog host
 LOG_HOST = 'localhost'
 LOG_HOST_PORT = 514
@@ -260,6 +260,10 @@ LOGGING = {
     },
     'loggers': {
         'root': {
+            'handlers': ['console', 'syslog'],
+            'level': LOG_LEVEL,
+        },
+        'StarCellBio': {
             'handlers': ['console', 'syslog'],
             'level': LOG_LEVEL,
         },
