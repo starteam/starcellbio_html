@@ -515,7 +515,7 @@ def assignments_edit_treatments(request):
     else:
         drug_formset_exclude.extend(['duration', 'duration_unit', 'start_time', 'time_unit'])
 
-   
+
     DrugFormSet = modelformset_factory(models.Drug,
                                        can_delete=True,
                                        exclude=drug_formset_exclude)

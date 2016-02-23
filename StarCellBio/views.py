@@ -105,7 +105,7 @@ def get_account_type(user):
 def get_user(request, **kwargs):
 
     account_type = get_account_type(request.user)
-    
+
     retval = {'account_type': account_type, 'name': request.user.username}
     response = HttpResponse("var get_user_result = {0};".format(json.dumps(retval)))
     response.set_cookie("scb_username", request.user.username)

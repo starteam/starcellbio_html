@@ -11,7 +11,7 @@ for(dirpath, dirnames, filenames) in os.walk(os.getcwd()):
             slides = slides+1
             object['img'+str("%04d" % (slides,))] = dirpath.replace('/Users/srkadmin/VE/scb2/starcellbio_html/html_app/', '')+'/'+filename
             print filename
-            
+
 #print object
 for key in sorted(object.iterkeys()):
     sorted_object[key] =  object[key]
