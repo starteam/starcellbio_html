@@ -8,15 +8,15 @@ import sys
 import hashlib
 
 def get_coding(email):
-	md5=hashlib.md5()
-	md5.update(str(email).lower())
-	encoded_email = md5.hexdigest()
-	encoded_number = int(encoded_email, 16)%120
-	encoded_number2 = int(encoded_email, 16)%24
-	order = random_mapping[encoded_number]
-	order2 = random_mapping_ps2[encoded_number2]
-	print order
-	print order2
+    md5=hashlib.md5()
+    md5.update(str(email).lower())
+    encoded_email = md5.hexdigest()
+    encoded_number = int(encoded_email, 16)%120
+    encoded_number2 = int(encoded_email, 16)%24
+    order = random_mapping[encoded_number]
+    order2 = random_mapping_ps2[encoded_number2]
+    print order
+    print order2
 
 
 
