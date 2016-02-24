@@ -1,6 +1,7 @@
 from .object import PageObject
 from .assignments import AssignmentsPage
 
+
 class Homepage(PageObject):
     url_fragment = ""
 

@@ -10,7 +10,8 @@ class SignupForm(forms.Form):
 
     account_type = forms.ChoiceField(
         choices=(('student', 'Student'), ('instructor', 'Instructor')),
-        required=True, label="Account Type",
+        required=True,
+        label="Account Type",
         widget=forms.RadioSelect
     )
 
@@ -28,7 +29,9 @@ class SignupForm(forms.Form):
             try:
                 Course.objects.get(code=course_code)
             except Course.DoesNotExist:
-                raise forms.ValidationError('No course match the entered code.')
+                raise forms.ValidationError(
+                    'No course match the entered code.'
+                )
             # Later we could have the admin assign a unique code to an
             # instructor for registering
             # and compare that value against form's course_code
@@ -45,7 +48,11 @@ def create_course_records(usr, cc_input):
     for course_code in course_codes:
         if Course.objects.filter(code=course_code).count() > 0:
             course = Course.objects.get(code=course_code)
-            user_course = UserCourse(course_name=course_code, user=usr, courseID=course)
+            user_course = UserCourse(
+                course_name=course_code,
+                user=usr,
+                courseID=course
+            )
             user_course.save()
 
 

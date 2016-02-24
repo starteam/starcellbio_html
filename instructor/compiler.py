@@ -10,15 +10,15 @@ def preview_as_json(assignment_id):
     return json.dumps(ret)
 
 
-
 def get_protocol_headers(assignment):
     headers = ['Strain', 'Treatment']
     # Optional headers
-    optional_vars = [('Concentration', 'has_concentration'),
-                     ('Start Time', 'has_start_time'),
-                     ('Duration', 'has_duration'),
-                     ('Temperature', 'has_temperature'),
-                     ('Collection Time', 'has_collection_time')]
+    optional_vars = [
+        ('Concentration', 'has_concentration'),
+        ('Start Time', 'has_start_time'), ('Duration', 'has_duration'),
+        ('Temperature', 'has_temperature'),
+        ('Collection Time', 'has_collection_time')
+    ]
 
     # Adding headers for enabled experimental variables
     for var_name, field_name in optional_vars:
@@ -46,13 +46,23 @@ def compile(assignment_id):
                 },
                 'experiment_setup': {
                     'table': [
-                        {'kind': "cell_plate", 'title': " ", 'editable': 'false'},
-                        {'kind': "cell_line", 'title': "Strain", 'editable': 'false'},
+                        {
+                            'kind': "cell_plate",
+                            'title': " ",
+                            'editable': 'false'
+                        },
+                        {
+                            'kind': "cell_line",
+                            'title': "Strain",
+                            'editable': 'false'
+                        },
                     ],
                     'actions': [
-                        {'kind': 'add_protocol',
-                         'name': 'ADD SAMPLES',
-                         'open': 'scb_ex1.assignment_builder_add_multiple'}
+                        {
+                            'kind': 'add_protocol',
+                            'name': 'ADD SAMPLES',
+                            'open': 'scb_ex1.assignment_builder_add_multiple'
+                        }
                     ]
                 }
             },
@@ -64,18 +74,48 @@ def compile(assignment_id):
     }
     treatments = [{'kind': "drug", 'title': "Treatments", 'editable': False}, ]
     if a.has_concentration:
-        treatments.append({'kind': "concentration", 'title': "Concentration", 'editable': False})
+        treatments.append(
+            {
+                'kind': "concentration",
+                'title': "Concentration",
+                'editable': False
+            }
+        )
     if a.has_temperature:
-        treatments.append({'kind': "temperature", 'title': "Temperature", 'editable': False})
+        treatments.append(
+            {
+                'kind': "temperature",
+                'title': "Temperature",
+                'editable': False
+            }
+        )
     if a.has_start_time:
-        treatments.append({'kind': "start", 'title': "Start", 'editable': False})
+        treatments.append(
+            {
+                'kind': "start",
+                'title': "Start",
+                'editable': False
+            }
+        )
     if a.has_duration:
-        treatments.append({'kind': "duration", 'title': "Duration", 'editable': False})
+        treatments.append(
+            {
+                'kind': "duration",
+                'title': "Duration",
+                'editable': False
+            }
+        )
     if a.has_collection_time:
-        treatments.append({'kind': "collection", 'title': "Collection Time", 'editable': False})
+        treatments.append(
+            {
+                'kind': "collection",
+                'title': "Collection Time",
+                'editable': False
+            }
+        )
     table = ret['template']['ui']['experiment_setup']['table']
     table.append({'kind': "treatments", 'children': treatments})
-    table.append({'kind': 'actions', 'title': 'Actions'});
+    table.append({'kind': 'actions', 'title': 'Actions'})
 
     ret['template']['instructions'] = [
         [
@@ -98,16 +138,19 @@ def compile(assignment_id):
 
     ret['template']['model']['western_blot'] = generate_western_blot_model(a)
     ret['template']['ui']['microscopy'] = {}
-    ret['template']['ui']['microscopy']['disable_blur'] = True  # # is this right?
-    ret['template']['ui']['microscopy']['disable_brightness'] = True  # # is this right?
+    ret['template']['ui']['microscopy'][
+        'disable_blur'
+    ] = True  # # is this right?
+    ret['template']['ui']['microscopy'][
+        'disable_brightness'
+    ] = True  # # is this right?
     ret['template']['model']['microscopy'] = micro_model(a)
-    ret['template']['slide_parser'] = {
-        'collection_ab': micro_kinds(a)
-    }
+    ret['template']['slide_parser'] = {'collection_ab': micro_kinds(a)}
     ret['template']['slides'] = generate_slides(a)
     ret['template']['facs_kinds'] = facs_kinds(a)
     ret['template']['model']['facs'] = facs_model(a)
     return ret
+
 
 def csv_custom(data):
     ret = []
@@ -124,23 +167,42 @@ def format_table(assignment):
     headers = "%CELL_LINE%, %TREATMENT%"
 
     keys = {
-        '%CELL_LINE%': {'attr': ['cell_line'],
-                        'map': ['cell_lines', '%KEY%', 'name']},
-        '%TREATMENT%': {'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '0','drug_id'],
-                        'map': ['drugs', '%KEY%', 'name']},}
+        '%CELL_LINE%': {
+            'attr': ['cell_line'],
+            'map': ['cell_lines', '%KEY%', 'name']
+        },
+        '%TREATMENT%': {
+            'attr': [
+                'treatment_list', 'list', '0', 'drug_list', 'list', '0',
+                'drug_id'
+            ],
+            'map': ['drugs', '%KEY%', 'name']
+        },
+    }
 
     if assignment.has_concentration:
         headers += ', %CONCENTRATION%'
         keys['%CONCENTRATION%'] = {
-            'attr': ['treatment_list', 'list', '0', 'drug_list', 'list', '0','concentration_id'],
+            'attr': [
+                'treatment_list', 'list', '0', 'drug_list', 'list', '0',
+                'concentration_id'
+            ],
             'map': ['concentrations', '%KEY%', 'name']
         }
     if assignment.has_start_time:
         headers += ', %START_TIME%'
-        keys['%START_TIME%'] = {'attr': ['treatment_list', 'list', '0', 'start_time']}
+        keys['%START_TIME%'] = {
+            'attr': [
+                'treatment_list', 'list', '0', 'start_time'
+            ]
+        }
     if assignment.has_duration:
         headers += ', %DURATION%'
-        keys['%DURATION%'] = {'attr': ['treatment_list', 'list', '0', 'duration']}
+        keys['%DURATION%'] = {
+            'attr': [
+                'treatment_list', 'list', '0', 'duration'
+            ]
+        }
     if assignment.has_temperature:
         headers += ', %TEMPERATURE%'
         keys['%TEMPERATURE%'] = {
@@ -170,15 +232,17 @@ def facs_model(a):
                 condition = sp.condition
                 if kind == 'custom':
                     custom_data = csv_custom(custom_data)
-                ab_parser.append({
-                    'identifier': identifier,
-                    'analysis': analysis,
-                    'treatment': treatment,
-                    'condition': condition,
-                    'kind': kind,
-                    'shape': kind,
-                    'custom_data': custom_data
-                })
+                ab_parser.append(
+                    {
+                        'identifier': identifier,
+                        'analysis': analysis,
+                        'treatment': treatment,
+                        'condition': condition,
+                        'kind': kind,
+                        'shape': kind,
+                        'custom_data': custom_data
+                    }
+                )
     return {'is_ab': True, 'ab_parser': ab_parser}
 
 
@@ -193,7 +257,6 @@ def facs_kinds(a):
             ret[analysis] = {
                 'name': sp.get_analysis_display(),
                 'conditions': {
-
                 },
                 'Live': {},
                 'Fixed': {}
@@ -225,27 +288,32 @@ def facs_kinds(a):
 
 
 def micro_model(a):
-    ret = {
-        'is_ab': True
-    }
+    ret = {'is_ab': True}
     for sp in a.microscopy_sample_prep.all():
         for i in sp.microscopy_images.all():
-            key = "{sp.analysis}%%{sp.condition}%%SP_ID{protocol}".format(sp=sp, protocol=i.strain_protocol_id)
+            key = "{sp.analysis}%%{sp.condition}%%SP_ID{protocol}".format(
+                sp=sp,
+                protocol=i.strain_protocol_id
+            )
             if not key in ret:
                 ret[key] = {
-                    'slides': [{
-                                   'hash': "IMAGE_{}".format(i.pk),
-                                   'if_type': i.filter,
-                                   'mag': i.objective
-                               }],
+                    'slides': [
+                        {
+                            'hash': "IMAGE_{}".format(i.pk),
+                            'if_type': i.filter,
+                            'mag': i.objective
+                        }
+                    ],
                     'slide_type': sp.analysis
                 }
             else:
-                ret[key]['slides'].append({
-                    'hash': "IMAGE_{}".format(i.pk),
-                    'if_type': i.filter,
-                    'mag': i.objective
-                })
+                ret[key]['slides'].append(
+                    {
+                        'hash': "IMAGE_{}".format(i.pk),
+                        'if_type': i.filter,
+                        'mag': i.objective
+                    }
+                )
     return ret
 
 
@@ -271,27 +339,38 @@ def generate_western_blot_model(a):
     whole = []
     for antibodies in a.western_blot.antibodies.all():
         for ps in a.strain_treatment.filter(enabled=True):
-            bands = WesternBlotBands.objects.filter(antibody=antibodies, strain_protocol=ps)
+            bands = WesternBlotBands.objects.filter(
+                antibody=antibodies,
+                strain_protocol=ps
+            )
             marks = {'cyto': [], 'nuc': [], 'wc': []}
             for band in bands:
-                marks[band.lysate_type].append({
-                    'weight': band.weight,
-                    'intensity': band.intensity,
-                    'primary_anti_body': ['AB_{}'.format(antibodies.id)]
-                })
+                marks[band.lysate_type].append(
+                    {
+                        'weight': band.weight,
+                        'intensity': band.intensity,
+                        'primary_anti_body': ['AB_{}'.format(antibodies.id)]
+                    }
+                )
 
-            cyto.append({
-                'identifier': "SP_ID_{}".format(ps.id),
-                'marks': marks['cyto']
-            })
-            nuclear.append({
-                'identifier': "SP_ID_{}".format(ps.id),
-                'marks': marks['nuc']
-            })
-            whole.append({
-                'identifier': "SP_ID_{}".format(ps.id),
-                'marks': marks['wc']
-            })
+            cyto.append(
+                {
+                    'identifier': "SP_ID_{}".format(ps.id),
+                    'marks': marks['cyto']
+                }
+            )
+            nuclear.append(
+                {
+                    'identifier': "SP_ID_{}".format(ps.id),
+                    'marks': marks['nuc']
+                }
+            )
+            whole.append(
+                {
+                    'identifier': "SP_ID_{}".format(ps.id),
+                    'marks': marks['wc']
+                }
+            )
 
     ret['cyto']['parser_ab'] = cyto
     ret['nuclear']['parser_ab'] = nuclear
@@ -320,7 +399,6 @@ def micro_kinds(a):
             ret[analysis] = {
                 'name': analysis,
                 'conditions': {
-
                 },
                 'identifiers': {}
             }
@@ -331,8 +409,14 @@ def micro_kinds(a):
         if not ret[analysis]['conditions'][condition].has_key('identifiers'):
             ret[analysis]['conditions'][condition]['identifiers'] = {}
         for p in sp.microscopy_images.all():
-            ret[analysis]['identifiers']["SP_ID_{}".format(p.strain_treatment_id)] = 1
-            ret[analysis]['conditions'][condition]['identifiers']["SP_ID_{}".format(p.strain_treatment_id)] = 1
+            ret[analysis]['identifiers'][
+                "SP_ID_{}".format(
+                    p.strain_treatment_id
+                )
+            ] = 1
+            ret[analysis]['conditions'][condition]['identifiers'][
+                "SP_ID_{}".format(p.strain_treatment_id)
+            ] = 1
     return ret
 
 
@@ -351,9 +435,7 @@ def secondary_anti_body(assignment):
     western_blot = assignment.western_blot
     secondary = {}
     for a in western_blot.antibodies.all():
-        secondary[a.secondary] = {
-            'name': a.secondary
-        }
+        secondary[a.secondary] = {'name': a.secondary}
     return secondary
 
 
@@ -407,7 +489,9 @@ def concentrations(assignment):
 def experiment_temperatures(assignment):
     ret = {}
     if assignment.has_temperature:
-        for strain_protocol in assignment.strain_treatment.filter(enabled=True):
+        for strain_protocol in assignment.strain_treatment.filter(
+            enabled=True
+        ):
             treatment = strain_protocol.treatment
             temperature = treatment.temperature
             ret[str(temperature.id)] = {
@@ -420,21 +504,19 @@ def add_multiple_dialog(assignment):
     ret = {'rows': []}
     ret['headings'] = get_protocol_headers(assignment)
     ret['headings'].insert(0, '')
-    ret['has_variables']={
+    ret['has_variables'] = {
         'concentration': assignment.has_concentration,
         'start_time': assignment.has_start_time,
         'duration': assignment.has_duration,
         'temperature': assignment.has_temperature,
         'collection_time': assignment.has_collection_time
     }
-    strain_treatments=assignment.strain_treatment.filter(enabled=True).order_by(
-        'strain',
-        'treatment__drug__name',
-        'treatment__drug__concentration',
-        'treatment__drug__start_time',
-        'treatment__drug__duration',
-        'treatment__temperature__degrees',
-        'treatment__collection_time__time'
+    strain_treatments = assignment.strain_treatment.filter(
+        enabled=True
+    ).order_by(
+        'strain', 'treatment__drug__name', 'treatment__drug__concentration',
+        'treatment__drug__start_time', 'treatment__drug__duration',
+        'treatment__temperature__degrees', 'treatment__collection_time__time'
     )
     for strain_treatment in strain_treatments:
         strain = strain_treatment.strain
@@ -446,7 +528,9 @@ def add_multiple_dialog(assignment):
             'strain': strain.name,
             'cell_line': str(strain.id),
             'treatment_list': {
-                'list': compile_treatments([treatment], assignment)
+                'list': compile_treatments(
+                    [treatment], assignment
+                )
             }
         }
         ret['rows'].append(row)
@@ -458,24 +542,24 @@ def compile_treatments(treatments, assignment):
     for treatment in treatments:
         row = {
             'id': 'treatment_{}'.format(treatment.id),
-            'drug_list': {'list': [
-                {
-                    'drug_id': treatment.drug.id,
-                    'drug_name': treatment.drug.name,
-                    'concentration_id': ''
-                    if treatment.drug.concentration is None
-                    else str(treatment.drug.concentration)
-                }
-            ]},
-            'start_time': ''
-            if treatment.drug.start_time is None
-            else '{time} {unit}'.format(
+            'drug_list': {
+                'list': [
+                    {
+                        'drug_id': treatment.drug.id,
+                        'drug_name': treatment.drug.name,
+                        'concentration_id': ''
+                        if treatment.drug.concentration is None else
+                        str(treatment.drug.concentration)
+                    }
+                ]
+            },
+            'start_time': '' if treatment.drug.start_time is None else
+            '{time} {unit}'.format(
                 time=treatment.drug.start_time,
                 unit=treatment.drug.time_unit
             ),
-            'duration': ''
-            if treatment.drug.duration is None
-            else '{time} {unit}'.format(
+            'duration': '' if treatment.drug.duration is None else
+            '{time} {unit}'.format(
                 time=treatment.drug.duration,
                 unit=treatment.drug.duration_unit
             ),

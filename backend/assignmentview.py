@@ -8,12 +8,15 @@ from backend.models import Assignment
 class AssignmentForm(ModelForm):
     class Meta:
         model = Assignment
-        fields = ('courseID','assignmentID','assignmentName','access','basedOn')
+        fields = (
+            'courseID', 'assignmentID', 'assignmentName', 'access', 'basedOn'
+        )
+
 
 @login_required
 def list(request, template_name='assignment/list.html'):
     servers = Assignment.objects.filter(ownerID=request.user)
-    return render(request, template_name, {'object_list':servers})
+    return render(request, template_name, {'object_list': servers})
 
 
 @login_required
@@ -24,7 +27,7 @@ def create(request, template_name='courses/form.html'):
         c.ownerID = request.user
         c.save()
         return redirect('assignment_list')
-    return render(request, template_name, {'form': form,'create':True})
+    return render(request, template_name, {'form': form, 'create': True})
 
 
 @login_required
@@ -35,7 +38,7 @@ def update(request, pk, template_name='courses/form.html'):
     if form.is_valid():
         form.save()
         return redirect('assignment_list')
-    return render(request, template_name, {'form': form,'create':False})
+    return render(request, template_name, {'form': form, 'create': False})
 
 
 @login_required
@@ -45,4 +48,3 @@ def delete(request, pk, template_name='courses/confirm_delete.html'):
         server.delete()
         return redirect('assignment_list')
     return render(request, template_name, {'object': server})
-

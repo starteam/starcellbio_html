@@ -11,8 +11,13 @@ object = {}
 
 for x in range(85, 90):
     slides = slides + 1
-    object[str(slides)] = [{'hash': 'img'+str("%04d" % (x,)) ,'mag': 'N/A', 'if_type': 'merge'}]
+    object[str(slides)] = [
+        {
+            'hash': 'img' + str("%04d" % (x, )),
+            'mag': 'N/A',
+            'if_type': 'merge'
+        }
+    ]
 
-
-with open('output.txt','wt') as out:
+with open('output.txt', 'wt') as out:
     pprint(object, stream=out)

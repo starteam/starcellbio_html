@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, Group, Permission
 from django.contrib import admin
 
 # Constants
-
+# yapf: disable
 ACCESS = (
     ('published', 'Published'),
     ('private', 'Private'),
@@ -24,7 +24,7 @@ ALL = 'merge'
 MICRO = ( ('Dye', 'Dye/Stain'), ('IF', 'Antibody-labeling IF'), ('IHC', 'Antibody-labeling IHC'))
 
 MICRO_DYE = 'Dye'
-
+# yapf: enable
 
 # Common Models
 
@@ -45,7 +45,11 @@ class Assignment(models.Model):
     name = models.CharField(max_length=50)
     access = models.CharField(max_length=50, choices=ACCESS, default='private')
     basedOn = models.ForeignKey("Assignment", null=True, blank=True)
-    group_by = models.CharField(max_length=50, choices=GROUP_BY, default=STRAIN)
+    group_by = models.CharField(
+        max_length=50,
+        choices=GROUP_BY,
+        default=STRAIN
+    )
     # tecniques
     has_wb = models.BooleanField(default=False)
     has_fc = models.BooleanField(default=False)
@@ -57,8 +61,8 @@ class Assignment(models.Model):
     has_duration = models.BooleanField(default=False)
     has_collection_time = models.BooleanField(default=False)
 
-
 # Experiment setup
+
 
 class AssignmentText(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='assignment_text')
@@ -77,13 +81,24 @@ class Strains(models.Model):
 class Drug(models.Model):
     assignment = models.ForeignKey(Assignment, related_name='drug')
     name = models.CharField(max_length=50)
-    concentration = models.PositiveIntegerField(max_length=50, blank=True, null=True)
+    concentration = models.PositiveIntegerField(
+        max_length=50,
+        blank=True,
+        null=True
+    )
     concentration_unit = models.CharField(max_length=50, blank=True, null=True)
-    start_time = models.PositiveIntegerField(max_length=50, blank=True, null=True)
+    start_time = models.PositiveIntegerField(
+        max_length=50,
+        blank=True,
+        null=True
+    )
     time_unit = models.CharField(max_length=50, blank=True, null=True)
-    duration = models.PositiveIntegerField(max_length=50, blank=True, null=True)
+    duration = models.PositiveIntegerField(
+        max_length=50,
+        blank=True,
+        null=True
+    )
     duration_unit = models.CharField(max_length=50, blank=True, null=True)
-
 
     def __unicode__(self):
         return self.name
@@ -115,7 +130,11 @@ class StrainTreatment(models.Model):
 
 
 class WesternBlot(models.Model):
-    assignment = models.OneToOneField(Assignment, primary_key=True, related_name='western_blot')
+    assignment = models.OneToOneField(
+        Assignment,
+        primary_key=True,
+        related_name='western_blot'
+    )
     # lysate types
     has_whole_cell_lysate = models.BooleanField(default=True)
     has_nuclear_fractination = models.BooleanField(default=False)
@@ -135,7 +154,9 @@ class WesternBlotAntibody(models.Model):
     cyto_weight = models.CharField(max_length=50, default="", blank=True)
 
 
-LYSATE_TYPES = (('wc', 'Whole Cell'), ('nuc', 'Nuclear'), ('cyto', 'Cytoplasmic'))
+LYSATE_TYPES = (
+    ('wc', 'Whole Cell'), ('nuc', 'Nuclear'), ('cyto', 'Cytoplasmic')
+)
 
 
 class WesternBlotBands(models.Model):
@@ -147,26 +168,46 @@ class WesternBlotBands(models.Model):
 
 
 class MicroscopySamplePrep(models.Model):
-    assignment = models.ForeignKey(Assignment, related_name='microscopy_sample_prep')
-    analysis = models.CharField(max_length=50, choices=MICRO, default=MICRO_DYE)
+    assignment = models.ForeignKey(
+        Assignment,
+        related_name='microscopy_sample_prep'
+    )
+    analysis = models.CharField(
+        max_length=50,
+        choices=MICRO,
+        default=MICRO_DYE
+    )
     condition = models.CharField(max_length=50)
     order = models.IntegerField(default=0)
     has_filters = models.BooleanField(default=False)
 
 
 class MicroscopyImages(models.Model):
-    sample_prep = models.ForeignKey(MicroscopySamplePrep, related_name='microscopy_images')
-    strain_protocol = models.ForeignKey(StrainTreatment, related_name='microscopy_images')
+    sample_prep = models.ForeignKey(
+        MicroscopySamplePrep,
+        related_name='microscopy_images'
+    )
+    strain_protocol = models.ForeignKey(
+        StrainTreatment,
+        related_name='microscopy_images'
+    )
     order = models.IntegerField(default=0)
     objective = models.CharField(max_length=50, default='N/A')
     url = models.URLField(max_length=300)
-    image = models.FileField(max_length=300, upload_to='microscopy_images', null=True)
+    image = models.FileField(
+        max_length=300,
+        upload_to='microscopy_images',
+        null=True
+    )
     filter = models.CharField(max_length=50, choices=FIELDS, default=ALL)
 
 
-FACS_CT = (( 'Fixed', 'Fixed Cells'), ('Live', 'Live Cells'))
+FACS_CT = (('Fixed', 'Fixed Cells'), ('Live', 'Live Cells'))
 
-FACS_KINDS = (('', 'Select Analysis'), ('Anti', 'Antibody-labeling'), ('Dye', 'Dye/Stain'))
+FACS_KINDS = (
+    ('', 'Select Analysis'), ('Anti', 'Antibody-labeling'),
+    ('Dye', 'Dye/Stain')
+)
 
 
 class FlowCytometrySamplePrep(models.Model):
@@ -177,28 +218,39 @@ class FlowCytometrySamplePrep(models.Model):
     condition = models.CharField(max_length=50)
 
 
-HISTOGRAMS = (( 'normal', 'Normal'),
-              ('s-block','s-block'),
-              ('g1-block','g1-block'),
-              ('g2-block','g2-block'),
-              ('alpha-block','alpha-block'),
-              ('2-peak-normal-400','2-peak-normal-400'),
-              ('peak-100-normal-400','peak-100-normal-400'),
-              ('2-peak-uneven-normal-400','2-peak-uneven-normal-400'),
-              ('peak-50-normal-400','peak-50-normal-400'),
-              ('4-peak-normal-400','4-peak-normal-400'),
-              ('s-block-normal-400','s-block-normal-400'),
-              ('custom', 'Custom'))
+# yapf: disable
+HISTOGRAMS = (
+    ('normal', 'Normal'),
+    ('s-block','s-block'),
+    ('g1-block','g1-block'),
+    ('g2-block','g2-block'),
+    ('alpha-block','alpha-block'),
+    ('2-peak-normal-400','2-peak-normal-400'),
+    ('peak-100-normal-400','peak-100-normal-400'),
+    ('2-peak-uneven-normal-400','2-peak-uneven-normal-400'),
+    ('peak-50-normal-400','peak-50-normal-400'),
+    ('4-peak-normal-400','4-peak-normal-400'),
+    ('s-block-normal-400','s-block-normal-400'),
+    ('custom', 'Custom')
+)
+# yapf: enable
 
 GAUSS = 'normal'
 
 
 class FlowCytometryHistogram(models.Model):
-    sample_prep = models.ForeignKey(FlowCytometrySamplePrep, related_name='histograms')
-    strain_protocol = models.ForeignKey(StrainTreatment, related_name='histograms')
+    sample_prep = models.ForeignKey(
+        FlowCytometrySamplePrep,
+        related_name='histograms'
+    )
+    strain_protocol = models.ForeignKey(
+        StrainTreatment,
+        related_name='histograms'
+    )
     kind = models.CharField(max_length=50, choices=HISTOGRAMS, default=GAUSS)
-    fixed_data=models.TextField(null=True,blank=True)
-    live_data=models.TextField(null=True,blank=True)
+    fixed_data = models.TextField(null=True, blank=True)
+    live_data = models.TextField(null=True, blank=True)
+
 
 admin.site.register(Course)
 admin.site.register(Assignment)
@@ -209,6 +261,3 @@ admin.site.register(Treatment)
 admin.site.register(WesternBlot)
 admin.site.register(WesternBlotAntibody)
 admin.site.register(WesternBlotBands)
-
-
-
