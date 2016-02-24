@@ -3,38 +3,46 @@
     var opts = $.extend({}, $.fn.simulateDragSortable.defaults, options);
 
     applyDrag = function(options) {
-      var that = this,
-          options = options || opts, 
-          handle = options.handle ? $(this).find(options.handle)[0] : $(this)[0],
-          listItem = options.listItem,
-          placeHolder = options.placeHolder,
-          sibling = $(this),
-          moveCounter = Math.floor(options.move),
-          direction = moveCounter > 0 ? 'down' : 'up',
-          moveVerticalAmount = 0,
-          initialVerticalPosition = 0,
-          extraDrag = !isNaN(parseInt(options.tolerance, 10)) ? function() { return Number(options.tolerance); } : function(obj) { return ($(obj).outerHeight() / 2) + 5; },
-          dragPastBy = 0, 
-          dropOn = options.dropOn ? $(options.dropOn) : false,
-          center = findCenter(handle),
-          x = Math.floor(center.x),
-          y = Math.floor(center.y),
-          mouseUpAfter = (opts.debug ? 2500 : 10);
+      var that = this;
+      var options = options || opts;
+      var handle = options.handle ? $(this).find(options.handle)[0] : $(this)[0];
+      var listItem = options.listItem;
+      var placeHolder = options.placeHolder;
+      var sibling = $(this);
+      var moveCounter = Math.floor(options.move);
+      var direction = moveCounter > 0 ? 'down' : 'up';
+      var moveVerticalAmount = 0;
+      var initialVerticalPosition = 0;
+      var extraDrag = !isNaN(parseInt(options.tolerance, 10)) ? function() {
+          return Number(options.tolerance);
+        } : function(obj) {
+          return ($(obj).outerHeight() / 2) + 5;
+        };
+      var dragPastBy = 0;
+      var dropOn = options.dropOn ? $(options.dropOn) : false;
+      var center = findCenter(handle);
+      var x = Math.floor(center.x);
+      var y = Math.floor(center.y);
+      var mouseUpAfter = (opts.debug ? 2500 : 10);
 
       if (dropOn) {
         if (dropOn.length === 0) {
-          if (console && console.log) { console.log('simulate.drag-sortable.js ERROR: Drop on target could not be found'); console.log(options.dropOn); }
+          if (console && console.log) {
+            console.log('simulate.drag-sortable.js ERROR: Drop on target could not be found'); console.log(options.dropOn);
+          }
           return;
         }
         sibling = dropOn.find('>*:last');
-        moveCounter = -(dropOn.find('>*').length + 1) + (moveCounter + 1); 
+        moveCounter = -(dropOn.find('>*').length + 1) + (moveCounter + 1);
         if (dropOn.offset().top - $(this).offset().top < 0) {
           initialVerticalPosition = sibling.offset().top - $(this).offset().top - extraDrag(this);
         } else {
           initialVerticalPosition = sibling.offset().top - $(this).offset().top - $(this).height();
         }
       } else if (moveCounter === 0) {
-        if (console && console.log) { console.log('simulate.drag-sortable.js WARNING: Drag with move set to zero has no effect'); }
+        if (console && console.log) {
+          console.log('simulate.drag-sortable.js WARNING: Drag with move set to zero has no effect');
+        }
         return;
       } else {
         while (moveCounter !== 0) {
@@ -54,22 +62,36 @@
         }
       }
 
-      dispatchEvent(handle, 'mousedown', createEvent('mousedown', handle, { clientX: x, clientY: y }));
-      dispatchEvent(document, 'mousemove', createEvent('mousemove', document, { clientX: x+1, clientY: y+1 }));
+      dispatchEvent(handle, 'mousedown', createEvent('mousedown', handle, {
+        clientX: x,
+        clientY: y
+      }));
+      dispatchEvent(document, 'mousemove', createEvent('mousemove', document, {
+        clientX: x + 1,
+        clientY: y + 1
+      }));
 
       if (dropOn) {
         slideUpTo(x, y, initialVerticalPosition);
 
         y += initialVerticalPosition;
 
-        options = jQuery.extend(options, { move: moveCounter });
+        options = jQuery.extend(options, {
+          move: moveCounter
+        });
         delete options.dropOn;
 
         setTimeout(function() {
-          dispatchEvent(document, 'mousemove', createEvent('mousemove', document, { clientX: x, clientY: y }));
+          dispatchEvent(document, 'mousemove', createEvent('mousemove', document, {
+            clientX: x,
+            clientY: y
+          }));
         }, 5);
         setTimeout(function() {
-          dispatchEvent(handle, 'mouseup', createEvent('mouseup', handle, { clientX: x, clientY: y }));
+          dispatchEvent(handle, 'mouseup', createEvent('mouseup', handle, {
+            clientX: x,
+            clientY: y
+          }));
           setTimeout(function() {
             if (options.move) {
               applyDrag.call(that, options);
@@ -107,42 +129,71 @@
       }
 
       setTimeout(function() {
-        dispatchEvent(document, 'mousemove', createEvent('mousemove', document, { clientX: x, clientY: y + moveVerticalAmount }));
+        dispatchEvent(document, 'mousemove', createEvent('mousemove', document, {
+          clientX: x,
+          clientY: y + moveVerticalAmount
+        }));
       }, 5);
       setTimeout(function() {
-        dispatchEvent(handle, 'mouseup', createEvent('mouseup', handle, { clientX: x, clientY: y + moveVerticalAmount }));
+        dispatchEvent(handle, 'mouseup', createEvent('mouseup', handle, {
+          clientX: x,
+          clientY: y + moveVerticalAmount
+        }));
       }, mouseUpAfter);
     };
     return this.each(applyDrag);
   };
 
   function slideUpTo(x, y, targetOffset, goPastBy) {
-    var moveBy, offset;
+    var moveBy;
+    var offset;
 
-    if (!goPastBy) { goPastBy = 0; }
-    if ((targetOffset < 0) && (goPastBy > 0)) { goPastBy = -goPastBy; }
+    if (!goPastBy) {
+      goPastBy = 0;
+    }
+    if ((targetOffset < 0) && (goPastBy > 0)) {
+      goPastBy = -goPastBy;
+    }
 
-    for (offset = 0; Math.abs(offset) + 1 < Math.abs(targetOffset + goPastBy); offset += ((targetOffset + goPastBy - offset)/2) ) {
-      dispatchEvent(document, 'mousemove', createEvent('mousemove', document, { clientX: x, clientY: y + Math.ceil(offset) }));
+    for (offset = 0; Math.abs(offset) + 1 < Math.abs(targetOffset + goPastBy); offset += ((targetOffset + goPastBy - offset) / 2)) {
+      dispatchEvent(document, 'mousemove', createEvent('mousemove', document, {
+        clientX: x,
+        clientY: y + Math.ceil(offset)
+      }));
     }
     offset = targetOffset + goPastBy;
-    dispatchEvent(document, 'mousemove', createEvent('mousemove', document, { clientX: x, clientY: y + offset }));
-    for (; Math.abs(offset) - 1 >= Math.abs(targetOffset); offset += ((targetOffset - offset)/2) ) {
-      dispatchEvent(document, 'mousemove', createEvent('mousemove', document, { clientX: x, clientY: y + Math.ceil(offset) }));
+    dispatchEvent(document, 'mousemove', createEvent('mousemove', document, {
+      clientX: x,
+      clientY: y + offset
+    }));
+    for (; Math.abs(offset) - 1 >= Math.abs(targetOffset); offset += ((targetOffset - offset) / 2)) {
+      dispatchEvent(document, 'mousemove', createEvent('mousemove', document, {
+        clientX: x,
+        clientY: y + Math.ceil(offset)
+      }));
     }
-    dispatchEvent(document, 'mousemove', createEvent('mousemove', document, { clientX: x, clientY: y + targetOffset }));
+    dispatchEvent(document, 'mousemove', createEvent('mousemove', document, {
+      clientX: x,
+      clientY: y + targetOffset
+    }));
   }
 
   function createEvent(type, target, options) {
     var evt;
     var e = $.extend({
       target: target,
-      preventDefault: function() { },
-      stopImmediatePropagation: function() { },
-      stopPropagation: function() { },
-      isPropagationStopped: function() { return true; },
-      isImmediatePropagationStopped: function() { return true; },
-      isDefaultPrevented: function() { return true; },
+      preventDefault: function() {},
+      stopImmediatePropagation: function() {},
+      stopPropagation: function() {},
+      isPropagationStopped: function() {
+        return true;
+      },
+      isImmediatePropagationStopped: function() {
+        return true;
+      },
+      isDefaultPrevented: function() {
+        return true;
+      },
       bubbles: true,
       cancelable: (type != 'mousemove'),
       view: window,
@@ -168,7 +219,11 @@
     } else if (document.createEventObject) {
       evt = document.createEventObject();
       $.extend(evt, e);
-        evt.button = { 0:1, 1:4, 2:2 }[evt.button] || evt.button;
+      evt.button = {
+        0: 1,
+        1: 4,
+        2: 2
+      }[evt.button] || evt.button;
     }
     return evt;
   }
@@ -183,8 +238,8 @@
   }
 
   function findCenter(el) {
-    var elm = $(el),
-        o = elm.offset();
+    var elm = $(el);
+    var o = elm.offset();
     return {
       x: o.left + elm.outerWidth() / 2,
       y: o.top + elm.outerHeight() / 2
