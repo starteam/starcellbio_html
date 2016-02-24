@@ -10,3 +10,7 @@
   sha: master
   hooks:
     - id: eslint
+- repo: https://github.com/pre-commit/mirrors-yapf
+  sha: master
+  hooks:
+    - id: yapf

@@ -13,4 +13,6 @@ class AssignmentsPage(PageObject):
 
     def start_experiment(self):
         self.q(css=".scb_assignments_new_experiment").click()
-        return ExperimentDesignPage(self.browser, self.base_url).wait_for_page()
+        return ExperimentDesignPage(
+            self.browser, self.base_url
+        ).wait_for_page()

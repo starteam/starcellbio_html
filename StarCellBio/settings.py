@@ -1,11 +1,9 @@
-
 # Django settings for StarCellBio project.
 
 import auth.settings
 import os.path
 import os
 import yaml
-
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
@@ -37,14 +35,12 @@ DB_PASSWORD = '136a411ed9e8592089444b7164ffaf84'
 DB_HOST = ''
 DB_PORT = ''
 
-
 # Default logging configuration
 LOG_LEVEL = 'DEBUG'
 DJANGO_LOG_LEVEL = 'WARNING'
 # For logging to a syslog host
 LOG_HOST = 'localhost'
 LOG_HOST_PORT = 514
-
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -146,7 +142,6 @@ INSTALLED_APPS = (
     'instructor',
 ) + auth.settings.INSTALLED_APPS
 
-
 # django all-auth config
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -169,7 +164,6 @@ CACHES = {
 
 AUTH_USER_MODEL = 'auth.User'
 
-
 # Override settings with untracked YAML config
 if os.path.isfile(YAML_CONFIG):
     with open(YAML_CONFIG) as f:
@@ -179,15 +173,11 @@ if os.path.isfile(YAML_CONFIG):
 
 # Filter for environment variables beginning with our prefix (SCB_)
 scb_env_overrides = filter(
-    lambda x: x[0].startswith("SCB_"),
-    os.environ.iteritems()
+    lambda x: x[0].startswith("SCB_"), os.environ.iteritems()
 )
 
 # Cut off the first four characters
-scb_env_overrides = map(
-    lambda x: (x[0][4:], x[1]),
-    scb_env_overrides
-)
+scb_env_overrides = map(lambda x: (x[0][4:], x[1]), scb_env_overrides)
 
 globals().update(dict(scb_env_overrides))
 
@@ -213,12 +203,10 @@ DATABASES = {
     }
 }
 
-
 # Ensure that ADMINS is a tuple of tuples. This is necessary because there are
 # no tuples in YAML. When ADMINS is defined in YAML, it's imported as a list of
 # lists.
 ADMINS = tuple(tuple(admin) for admin in ADMINS)
-
 
 HOSTNAME = platform.node().split('.')[0]
 LOGGING = {

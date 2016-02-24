@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import Select
 from .object import PageObject
 
+
 class ExperimentDesignPage(PageObject):
     url_fragment = "#view=experiment_design"
 
@@ -16,27 +17,37 @@ class ExperimentSetupPage(PageObject):
     url_fragment = "#view=experiment_setup"
 
     def is_browser_on_page(self):
-        return self.q(css='.scb_f_experiment_setup_action_open_add_samples_dialog').visible
+        return self.q(
+            css='.scb_f_experiment_setup_action_open_add_samples_dialog'
+        ).visible
 
     def add_samples(self):
-        self.q(css=".scb_f_experiment_setup_action_open_add_samples_dialog").click()
+        self.q(
+            css=".scb_f_experiment_setup_action_open_add_samples_dialog"
+        ).click()
         return AddSampleModal(self)
 
     def run_experiment(self):
         self.q(css=".scb_f_run_experiment").click()
         self.q(css=".scb_f_open_select_technique").click()
-        return ExperimentSelectTechnique(self.browser, self.base_url).wait_for_page()
+        return ExperimentSelectTechnique(
+            self.browser, self.base_url
+        ).wait_for_page()
+
 
 class AddSampleModal(object):
     """
     Simple modal which is tied to ExperimentSetupPage.
     """
+
     def __init__(self, page):
         self.page = page
 
     def select_sample(self, cell_line, name):
         """treatment_id is a param on the checkbox in the modal"""
-        self.page.q(css="[cell_line={}][name={}]".format(cell_line, name)).click()
+        self.page.q(
+            css="[cell_line={}][name={}]".format(cell_line, name)
+        ).click()
 
     def add_samples(self):
         self.page.q(css=".scb_ex_inner_dialog_add").click()
@@ -60,6 +71,7 @@ class ExperimentSelectTechnique(PageObject):
         self.q(css=".scb_f_new_microscopy").click()
         return Microscopy(self.browser, self.base_url).wait_for_page()
 
+
 class WesternBlot(PageObject):
     url_fragment = "#view=western_blot"
 
@@ -67,7 +79,10 @@ class WesternBlot(PageObject):
     # methods on and some off depending on browser state.
 
     def is_browser_on_page(self):
-        return self.q(css=".scb_s_experiment_step_button_wb.scb_s_experiment_step_selected").visible
+        return self.q(
+            css=
+            ".scb_s_experiment_step_button_wb.scb_s_experiment_step_selected"
+        ).visible
 
     # Stage 1
     def select_all(self):
@@ -101,7 +116,11 @@ class WesternBlot(PageObject):
         dropdown.select_by_visible_text(text)
 
     def set_secondary_antibody(self, text):
-        dropdown = Select(self.q(css=".scb_f_wb_anti_body_select_secondary")[0])
+        dropdown = Select(
+            self.q(css=".scb_f_wb_anti_body_select_secondary")[
+                0
+            ]
+        )
         dropdown.select_by_visible_text(text)
 
     def blot_and_develop(self):
@@ -112,7 +131,10 @@ class FlowCytometry(PageObject):
     url_fragment = "#view=facs"
 
     def is_browser_on_page(self):
-        return self.q(css=".scb_s_experiment_step_button_facs.scb_s_experiment_step_selected").visible
+        return self.q(
+            css=
+            ".scb_s_experiment_step_button_facs.scb_s_experiment_step_selected"
+        ).visible
 
     def select_all(self):
         self.q(css=".scb_f_facs_sample_active_all").click()
@@ -126,11 +148,15 @@ class FlowCytometry(PageObject):
     def analyze_data(self):
         self.q(css=".scb_f_facs_tools_start_analysis").click()
 
+
 class Microscopy(PageObject):
     url_fragment = "#view=microscopy"
 
     def is_browser_on_page(self):
-        return self.q(css=".scb_s_experiment_step_button_micro.scb_s_experiment_step_selected").visible
+        return self.q(
+            css=
+            ".scb_s_experiment_step_button_micro.scb_s_experiment_step_selected"
+        ).visible
 
     def select_all_samples(self):
         self.q(css=".scb_f_microscopy_sample_active_all").click()

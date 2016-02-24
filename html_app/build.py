@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 """The static asset pipeline for StarCellBio.
 
 Usage:
@@ -52,6 +51,7 @@ HTML_PREFIX = """
     <meta http-equiv='content-type' content='text/html; charset=utf-8'>
     <title>StarCellBio Prototype</title>
 """
+
 HTML_SUFFIX = """
 </head>
 <body>
@@ -66,6 +66,7 @@ HTML_SUFFIX = """
   </script>
 </body>
 """
+
 # add raven
 HTML_SUFFIX += """
 <script src='//cdn.ravenjs.com/1.1.11/jquery,native/raven.min.js'></script>
@@ -89,13 +90,12 @@ def minify_all_js(js):
             uglify_params.append(path)
         else:
             dynamic_scripts.append(file_name)
-    sh.uglifyjs(
-        *uglify_params, o=all_file_packed
+    sh.uglifyjs(*uglify_params, o=all_file_packed)
+    dynamic_scripts.append(
+        os.path.join(
+            'gen', os.path.basename(all_file_packed)
+        )
     )
-    dynamic_scripts.append(os.path.join(
-        'gen',
-        os.path.basename(all_file_packed)
-    ))
     return dynamic_scripts
 
 
@@ -109,10 +109,7 @@ def minify_all_css(css):
 
 def index_html():
     # Load yaml file of javascript deps
-    with open(os.path.join(
-            os.path.dirname(ROOT),
-            STATIC_ASSETS
-    )) as yaml_file:
+    with open(os.path.join(os.path.dirname(ROOT), STATIC_ASSETS)) as yaml_file:
         static_assets = yaml.load(yaml_file)
         js = static_assets['javascripts']
         css = static_assets['css']
@@ -123,8 +120,7 @@ def index_html():
         css = minify_all_css(css)
     css_join = (
         CSS_PREFIX +
-        (TIME + CSS_SUFFIX + CSS_PREFIX).join(css) +
-        TIME + CSS_SUFFIX
+        (TIME + CSS_SUFFIX + CSS_PREFIX).join(css) + TIME + CSS_SUFFIX
     )
     # Concatenate all the js files
     # Remove duplicates
@@ -132,20 +128,13 @@ def index_html():
     # If production, then minify everything
     if prod_minify:
         js = minify_all_js(js)
-    js_join = (
-        JS_PREFIX +
-        (TIME + JS_SUFFIX + JS_PREFIX).join(js) +
-        JS_SUFFIX
-    )
+    js_join = (JS_PREFIX + (TIME + JS_SUFFIX + JS_PREFIX).join(js) + JS_SUFFIX)
 
     return HTML_PREFIX + css_join + js_join + HTML_SUFFIX
 
 
 def update_index_html():
-    f = open(
-        os.path.join(ROOT, "index.html"),
-        "w"
-    )
+    f = open(os.path.join(ROOT, "index.html"), "w")
     f.write(index_html())
     f.close()
     print "new index.html"
@@ -169,28 +158,28 @@ def processor(path):
     if path.endswith(".soy"):
         infile = path
         outfile = "{}/gen/{}.js".format(
-            os.path.dirname(infile),
-            os.path.basename(infile)
+            os.path.dirname(infile), os.path.basename(infile)
         )
-        call([
-            "java",
-            "-jar", os.path.join(REPO_ROOT, "tools/SoyToJsSrcCompiler.jar"),
-            "--outputPathFormat", outfile,
-            infile
-        ])
+        call(
+            [
+                "java", "-jar", os.path.join(
+                    REPO_ROOT, "tools/SoyToJsSrcCompiler.jar"
+                ), "--outputPathFormat", outfile, infile
+            ]
+        )
         print "compile soy {} ".format(path)
     if path.endswith(".gss"):
         infile = path
         outfile = "{}/gen/{}.css".format(
-            os.path.dirname(infile),
-            os.path.basename(infile)
+            os.path.dirname(infile), os.path.basename(infile)
         )
-        call([
-            "java",
-            "-jar", os.path.join(REPO_ROOT, "tools/closure-stylesheets-20111230.jar"),
-            "--pretty-print", infile,
-            "-o", outfile
-        ])
+        call(
+            [
+                "java", "-jar", os.path.join(
+                    REPO_ROOT, "tools/closure-stylesheets-20111230.jar"
+                ), "--pretty-print", infile, "-o", outfile
+            ]
+        )
         print "compile gss {} to {} ".format(infile, outfile)
     if update_index:
         global_update_index = True
