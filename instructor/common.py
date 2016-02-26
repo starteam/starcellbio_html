@@ -1,7 +1,6 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from django import forms
-from django.forms.models import modelformset_factory, inlineformset_factory
+from django.forms.models import modelformset_factory
 from django.forms.models import modelform_factory
 from instructor import models
 from instructor import compiler
@@ -45,7 +44,10 @@ def publish_assignment(request):
     if not assignment_ready:
         return HttpResponseBadRequest("Cannot publish unfinished assignment.")
 
-    if request.user == assignment.course.owner and assignment.access == 'private':
+    if (
+        request.user == assignment.course.owner and
+        assignment.access == 'private'
+    ):
         assignment.access = 'published'
         assignment.save()
         course, created = backend.models.Course.objects.get_or_create(
@@ -322,7 +324,8 @@ def course_modify(request):
                 if obj.owner == user:
                     if obj == assignment.course:
                         errors.append(
-                            'Cannot delete selected course for this assignment.'
+                            'Cannot delete selected '
+                            'course for this assignment.'
                         )
                     elif not models.Assignment.objects.filter(
                         course=obj
@@ -330,11 +333,12 @@ def course_modify(request):
                         obj.delete()
                     else:
                         errors.append(
-                            'This course cannot be deleted as there are other '
-                            'assignments within this course. If you would like '
-                            'to delete all of the assignments within the course, '
-                            'please delete the assignments individually using '
-                            'the trash can icon on the dashboard.'
+                            'This course cannot be deleted as there are '
+                            'other assignments within this course. If you '
+                            'would like to delete all of the assignments '
+                            'within the course, please delete the assignments '
+                            'individually using the trash can icon on the '
+                            'dashboard.'
                         )
             for course in course_instances:
                 if hasattr(course, 'owner') and course.owner != user:
@@ -646,13 +650,19 @@ def assignments_edit_treatments(request):
         assignment=assignment
     ).exists():
         drug_extra_form = 1
-    if 'add_temperature' in request.POST or not models.Temperature.objects.filter(
-        assignment=assignment
-    ).exists():
+    if (
+        'add_temperature' in request.POST or
+        not models.Temperature.objects.filter(
+            assignment=assignment
+        ).exists()
+    ):
         temperature_extra_form = 1
-    if 'add_collection' in request.POST or not models.CollectionTime.objects.filter(
-        assignment=assignment
-    ).exists():
+    if (
+        'add_collection' in request.POST or
+        not models.CollectionTime.objects.filter(
+            assignment=assignment
+        ).exists()
+    ):
         collection_extra_form = 1
 
     DrugFormSet = modelformset_factory(
@@ -689,13 +699,17 @@ def assignments_edit_treatments(request):
 
     time_unit_list = ['sec', 'min', 'hour', 'day']
     concentration_unit_list = [
-        u'ng/\u03BCL',  #ng/uL
-        u'\u03BCg/\u03BCL',  #ug/uL
-        u'\u03BCg/mL',  #ug/mL
+        # ng/uL
+        u'ng/\u03BCL',
+        # ug/uL
+        u'\u03BCg/\u03BCL',
+        # ug/mL
+        u'\u03BCg/mL',
         'mg/mL',
         'g/L',
         'nM',
-        u'\u03BCM',  #uM
+        # uM
+        u'\u03BCM',
         'mM',
         'M'
     ]
@@ -756,8 +770,9 @@ def strain_treatments_edit(request):
         return redirect("common_select_technique")
 
     formset = STFormSet(
-        queryset=
-        models.StrainTreatment.objects.filter(assignment=assignment).order_by(
+        queryset=models.StrainTreatment.objects.filter(
+            assignment=assignment
+        ).order_by(
             'strain', 'treatment__drug__name',
             'treatment__drug__concentration', 'treatment__drug__start_time',
             'treatment__drug__duration', 'treatment__temperature__degrees',
@@ -803,11 +818,13 @@ def create_treatments(
         for d in drugs:
             for t in temperatures:
                 for c in collection_times:
-                    treatment, created = models.Treatment.objects.get_or_create(
-                        drug=d,
-                        temperature=t,
-                        collection_time=c,
-                        assignment=assignment
+                    treatment, created = (
+                        models.Treatment.objects.get_or_create(
+                            drug=d,
+                            temperature=t,
+                            collection_time=c,
+                            assignment=assignment
+                        )
                     )
                     create_strain_treatments(
                         assignment,
@@ -849,10 +866,12 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
 
     for s in strains:
         for t in treatments:
-            strain_treatment, created = models.StrainTreatment.objects.get_or_create(
-                strain=s,
-                treatment=t,
-                assignment=assignment
+            strain_treatment, created = (
+                models.StrainTreatment.objects.get_or_create(
+                    strain=s,
+                    treatment=t,
+                    assignment=assignment
+                )
             )
             update_wb_bands(assignment, strain_treatments=[strain_treatment])
 
@@ -1034,8 +1053,8 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
 
         message = "You have entered non-numerical values, " \
                   "including negative numbers, text inputs and/or symbols, " \
-                  "in the band size input boxes. The band size input boxes must " \
-                  "only contain numerical values."
+                  "in the band size input boxes. The band size input " \
+                  "boxes must only contain numerical values."
 
         weights_by_type = ['wc_weight', 'nuc_weight', 'cyto_weight']
         antibodies_updated = True
@@ -1068,7 +1087,7 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
                         lysate_type=field.split('_')[0]
                     )
                     for band in bands:
-                        #delete bands that are not in the string anymore
+                        # delete bands that are not in the string anymore
                         if band.weight not in weights:
                             models.WesternBlotBands.objects.filter(
                                 id=band.id
@@ -1285,9 +1304,12 @@ def facs_sample_prep(request):
         return redirect("facs_analyze")
 
     extra_fields = 0
-    if 'add' in request.POST or not models.FlowCytometrySamplePrep.objects.filter(
-        assignment=assignment
-    ).exists():
+    if (
+        'add' in request.POST or
+        not models.FlowCytometrySamplePrep.objects.filter(
+            assignment=assignment
+        ).exists()
+    ):
         extra_fields = 1
     FACSSamplePrepFormset = modelformset_factory(
         models.FlowCytometrySamplePrep,
@@ -1296,7 +1318,10 @@ def facs_sample_prep(request):
         can_order=True,
         exclude=['assignment']
     )
-    back_url = 'western_blot_band_intensity' if assignment.has_wb else 'common_select_technique'
+    back_url = (
+        'western_blot_band_intensity'
+        if assignment.has_wb else 'common_select_technique'
+    )
 
     formset = FACSSamplePrepFormset(
         queryset=models.FlowCytometrySamplePrep.objects.filter(
@@ -1319,21 +1344,24 @@ def facs_sample_prep(request):
 
 
 def create_facs_histograms(assignment, facs_sample):
-    '''
+    """
     Create FlowCytometryHistogram objects, all combinations of
     this 'facs_sample' (i.e. cell_treatment, analysis, condition)
     and all strain protocols defined for this assignment
     Args:
         assignment: current assignment
         facs_sample: newly created FlowCytometrySamplePrep object
-    '''
+
+    """
     strain_protocols = models.StrainTreatment.objects.filter(
         assignment=assignment
     )
     for strain_protocol in strain_protocols:
-        histogram, created = models.FlowCytometryHistogram.objects.get_or_create(
-            sample_prep=facs_sample,
-            strain_protocol=strain_protocol,
+        histogram, created = (
+            models.FlowCytometryHistogram.objects.get_or_create(
+                sample_prep=facs_sample,
+                strain_protocol=strain_protocol,
+            )
         )
 
 
@@ -1341,72 +1369,59 @@ def create_facs_histograms(assignment, facs_sample):
 @check_assignment_owner
 @login_required
 def facs_analyze(request):
-    '''
+    """
     List all combinations of samples, cell treatments,
     analysis types, and conditions. Let the user assign a
     histogram to each combination.
-    '''
-    page_number = page_order.index('facs_analyze')
+    """
     pk = request.session['assignment_id']
-
     assignment = models.Assignment.objects.get(id=pk)
 
-    HistogramFormset = modelformset_factory(
-        models.FlowCytometryHistogram,
-        extra=0,
-        exclude=['sample_prep', 'strain_protocol']
+    instances = models.FlowCytometryHistogram.objects.filter(
+        sample_prep__assignment=assignment
+    ).order_by(
+        'strain_protocol__strain', 'strain_protocol__treatment__drug__name',
+        'strain_protocol__treatment__drug__concentration',
+        'strain_protocol__treatment__drug__start_time',
+        'strain_protocol__treatment__drug__duration',
+        'strain_protocol__treatment__temperature__degrees',
+        'strain_protocol__treatment__collection_time__time'
     )
-    if request.method == 'POST' and assignment.access == 'private':
-        formset = HistogramFormset(request.POST)
-        if formset.is_valid():
-            entries = formset.save(commit=False)
-            for entry in entries:
-                entry.save()
-            if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number + 1
-                    assignment.save()
-                return redirect('common_assignments')
-    elif request.method == "POST" and 'continue' in request.POST:
+
+    if request.method == "POST" and 'continue' in request.POST:
         return redirect('common_assignments')
-    else:
-        formset = HistogramFormset(
-            queryset=models.FlowCytometryHistogram.objects.filter(
-                sample_prep__assignment=assignment
-            ).order_by(
-                'strain_protocol__strain',
-                'strain_protocol__treatment__drug__name',
-                'strain_protocol__treatment__drug__concentration',
-                'strain_protocol__treatment__drug__start_time',
-                'strain_protocol__treatment__drug__duration',
-                'strain_protocol__treatment__temperature__degrees',
-                'strain_protocol__treatment__collection_time__time'
-            )
-        )
-    grouped_forms = []
+
+    grouped_histograms = []
     samples = models.FlowCytometrySamplePrep.objects.filter(
         assignment=assignment
     )
     for sample in samples.iterator():
-
         form_list = [
-            form
-            for form in formset
-            if form.instance.sample_prep.analysis == sample.analysis and
-            form.instance.sample_prep.condition == sample.condition
+            instance
+            for instance in instances
+            if instance.sample_prep.analysis == sample.analysis and
+            instance.sample_prep.condition == sample.condition
         ]
         if sample.fixed:
-            grouped_forms.append(
+            grouped_histograms.append(
                 (
                     'fixed', sample.analysis, sample.condition, form_list
                 )
             )
         if sample.live:
-            grouped_forms.append(
+            grouped_histograms.append(
                 (
                     'live', sample.analysis, sample.condition, form_list
                 )
             )
+
+    histogram_data = {}
+    for instance in instances:
+        histogram_data[instance.id] = {
+            'fixed': instance.fixed_data,
+            'live': instance.live_data
+        }
+
     variables = {
         'has_concentration': assignment.has_concentration,
         'has_start_time': assignment.has_start_time,
@@ -1417,9 +1432,9 @@ def facs_analyze(request):
     return render_to_response(
         'instructor/facs_analyze.html',
         {
-            'formset': formset,
+            'histograms': json.dumps(histogram_data),
             'access': json.dumps(assignment.access),
-            'formset_group': grouped_forms,
+            'histogram_groups': grouped_histograms,
             'variables': variables,
             'assignment_name': assignment.name,
             'section_name': 'Flow Cytometry',
@@ -1464,6 +1479,25 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
         },
         context_instance=RequestContext(request)
     )
+
+
+@login_required
+def submit_histogram(request):
+    """
+    Save or remove drawn histogram
+    """
+    instance_id = request.POST.get('pk')
+    cell_treatment = request.POST.get('cell_treatment')
+    # if no points data is None
+    data = request.POST.get('points', default=None)
+    instance = get_object_or_404(models.FlowCytometryHistogram, pk=instance_id)
+    if cell_treatment == 'live':
+        instance.live_data = data
+    else:
+        instance.fixed_data = data
+    instance.save()
+
+    return HttpResponse('complete')
 
 
 @login_required

@@ -1,19 +1,51 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
+    <!-- Hidden pop out window for entering the graph -->
+    <div class="scb_ab_s_histogram_dialog" style="visibility:hidden">
+        <div>
+            <h1 class="scb_ex_inner_dialog_title" role="presentation" aria-label="Create Histogram">
+                <span class="scb_ex_inner_dialog_title_close scb_ab_f_close_dialog" role="button"
+                      aria-label="Close Create Histogram">×</span>
+                Create New Histogram
+            </h1>
 
-<div class="scb_ab_s_heading_div">
-    <div class="scb_ab_s_page_title">Analyze</div>
-    <div class='scb_ab_s_heading_description'>
-        Define the flow cytometry histogram for each sample.
+            <div class="scb_ab_s_heading_div">
+                <div class="scb_ab_s_page_title">Draw Histogram</div>
+            </div>
+            <div class="scb_ab_s_row scb_ab_s_grouping_header_row" style="padding-left: 10px">
+                <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
+                </div>
+            </div>
+            <div class="scb_ab_s_row" style="padding-left: 10px">
+                <div class="scb_ab_f_sample_name"></div>
+            </div>
+            <div class="scb_ab_s_histogram_content_wrapper">
+                <div class="scb_ab_s_histogram_canvas">
+                    <canvas id="myCanvas" class="scb_ab_s_draw_histogram_canvas" style=""></canvas>
+                    <button class="scb_s_gray_button scb_ab_f_save_histogram">
+                        SAVE HISTOGRAM
+                    </button>
+                    <button class="scb_s_gray_button reset_histogram">
+                        DISCARD HISTOGRAM
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!-- End of hidden window -->
+
+
+    <div class="scb_ab_s_heading_div">
+        <div class="scb_ab_s_page_title">Analyze</div>
+        <div class='scb_ab_s_heading_description'>
+            Define the flow cytometry histogram for each sample.
+        </div>
     </div>
-</div>
-<div class="scb_ab_s_form_container">
+    <div class="scb_ab_s_form_container">
         <form method="post">{% csrf_token %}
-            {{ formset.management_form }}
 
-
-            {% for cell_treatment, analysis, condition, form_list in formset_group %}
+            <!-- Instances are grouped by cell_treatment, analysis, condition-->
+            {% for cell_treatment, analysis, condition, instance_list in histogram_groups %}
 
                 <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
                     <div class="scb_ab_s_facs_condition_header">
@@ -25,41 +57,68 @@
                     {% endif %}
                 </div>
 
-                {% for form in form_list %}
-                <div class="scb_ab_s_row">
-                    <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
-                    <div class="scb_ab_s_col_width_facs_sample">
-                        <div class="block-ellipsis">
-                        {{ form.instance.strain_protocol.strain.name }},
-                        {{ form.instance.strain_protocol.treatment.drug.name }}{% if variables.has_concentration and form.instance.strain_protocol.treatment.drug.concentration != None %},
-                            {{ form.instance.strain_protocol.treatment.drug.concentration }}
-                            {{ form.instance.strain_protocol.treatment.drug.concentration_unit }}{% endif %}{% if variables.has_start_time and form.instance.strain_protocol.treatment.drug.start_time != None %},
-                            {{ form.instance.strain_protocol.treatment.drug.start_time }}
-                            {{ form.instance.strain_protocol.treatment.drug.time_unit }}{% endif %}{% if variables.has_duration and form.instance.strain_protocol.treatment.drug.duration != None %},
-                            {{ form.instance.strain_protocol.treatment.drug.duration }}
-                            {{ form.instance.strain_protocol.treatment.drug.duration_unit }}{% endif %}{% if variables.has_temperature %},
-                            {{ form.instance.strain_protocol.treatment.temperature.degrees }} &#8451;{% endif %}{% if variables.has_collection_time %},
-                            {{ form.instance.strain_protocol.treatment.collection_time.time }}
-                            {{ form.instance.strain_protocol.treatment.collection_time.units }}
-                        {% endif %}
+                {% for instance in instance_list %}
+
+
+                    <div class="scb_ab_s_row">
+                        <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
+                        <div class="scb_ab_s_col_width_facs_sample">
+                            <div class="block-ellipsis" id="row-{{ cell_treatment }}_{{ instance.id }}">
+                                {{ instance.strain_protocol.strain.name }},
+                                {{ instance.strain_protocol.treatment.drug.name }}
+                                {% if variables.has_concentration and instance.strain_protocol.treatment.drug.concentration != None %}
+                                    , {{ instance.strain_protocol.treatment.drug.concentration }}
+                                    {{ instance.strain_protocol.treatment.drug.concentration_unit }}{% endif %}
+                                {% if variables.has_start_time and instance.strain_protocol.treatment.drug.start_time != None %}
+                                    , {{ instance.strain_protocol.treatment.drug.start_time }}
+                                    {{ instance.strain_protocol.treatment.drug.time_unit }}{% endif %}
+                                {% if variables.has_duration and instance.strain_protocol.treatment.drug.duration != None %}
+                                    , {{ instance.strain_protocol.treatment.drug.duration }}
+                                    {{ instance.strain_protocol.treatment.drug.duration_unit }}{% endif %}
+                                {% if variables.has_temperature %},
+                                    {{ instance.strain_protocol.treatment.temperature.degrees }} &#8451;{% endif %}
+                                {% if variables.has_collection_time %},
+                                    {{ instance.strain_protocol.treatment.collection_time.time }}
+                                    {{ instance.strain_protocol.treatment.collection_time.units }}
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                    {{ form.id }}
-                </div>
-                <div class="scb_ab_s_row" style="padding: 3px 0 8px 0">
-                    <div class="scb_ab_s_col_width_number"></div>
-                    <div class="scb_ab_s_col_width_facs_sample">
-                        <button class="scb_s_gray_button">
-                            Select Histogram
-                        </button>
+                    <!-- display selected histogram, small version  -->
+                    <div class="scb_ab_s_row">
+
                     </div>
-                    <div class="scb_ab_col_edit">
-                        <div class="scb_ab_s_histogram_edit_grey_img"></div>
+                    <div class="scb_ab_s_row" style="padding: 10px 0 8px 0">
+
+                        <div class="scb_ab_s_col_width_number"></div>
+                        <div class="scb_ab_s_col_width_facs_sample">
+                            <div class="scb_ab_s_remove_histogram_icon_position">
+                                <span class="scb_ab_s_remove_histogram_icon scb_ab_f_remove_histogram"
+                                      role="button" data-cell_treatment="{{ cell_treatment }}"
+                                      data-pk="{{ instance.id }}" aria-label="Close Create Histogram">×</span>
+                            </div>
+
+                             <canvas id="canvas-{{ cell_treatment }}_{{ instance.id }}"
+                                class="scb_ab_s_small_canvas">
+                            </canvas>
+                            <button type="button" class="scb_s_gray_button select_histogram_btn"
+                                    data-row_id="row-{{ cell_treatment }}_{{ instance.id }}"
+                                    data-sample_treatment="{{ cell_treatment }}, {{ analysis }}, {{ condition }}">
+                                Select Histogram
+                            </button>
+                        </div>
+                        <div class="scb_ab_s_edit_icon_container">
+                            <div class="scb_ab_col_edit">
+                                <div class="scb_ab_s_histogram_edit_grey_img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scb_ab_s_copy_checkbox_container">
+                            <div class="scb_ab_s_col_copy">
+                                <input type="checkbox">
+                            </div>
+                        </div>
                     </div>
-                    <div class="scb_ab_s_col_copy" style="margin-top: 8px;">
-                        <input type="checkbox">
-                    </div>
-                </div>
                 {% endfor %}
             {% endfor %}
             <input type="submit"
@@ -72,7 +131,12 @@
                    value="SAVE"/>
         </form>
     </div>
-<a href="{% url "facs_sample_prep" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-</a>
+    <a href="{% url "facs_sample_prep" %}">
+        <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+    </a>
+    <script type="text/javascript">
+    histograms = {{ histograms|safe }};
+    paper.install(window);
+
+    </script>
 {% endblock %}
