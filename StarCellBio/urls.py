@@ -127,6 +127,8 @@ urlpatterns += patterns(
         name="microscopy_images_edit"),
 
     # Flow Cytometry
+    url(r'^ab/assignments/submit_histogram/$', instructor_common.submit_histogram,
+        name="submit_histogram"),
     url(r'^ab/assignments/facs_sample_prep/$', instructor_common.facs_sample_prep,
         name="facs_sample_prep"),
     url(r'^ab/assignments/facs_analyze/$', instructor_common.facs_analyze,
