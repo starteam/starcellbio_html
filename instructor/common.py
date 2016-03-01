@@ -20,8 +20,9 @@ from functools import wraps
 page_order = [
     'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
     'techniques', 'wb_lysate_type', 'wb_antibody', 'wb_band_size',
-    'wb_band_intensity', 'facs_sample_prep', 'facs_analyze'
+    'wb_band_intensity'
 ]
+facs_pages = ['facs_sample_prep', 'facs_analyze']
 
 
 @login_required
@@ -85,6 +86,28 @@ def create_new_assignment(request):
     return redirect('common_assignment_setup')
 
 
+def get_pages(assignment):
+    """
+    Return a dictionary of enabled/disabled pages
+    """
+    pages = {}
+    enabled = True
+    for page in page_order:
+        pages[page] = enabled
+        if page == assignment.last_page_name:
+            enabled = False
+
+    if assignment.has_fc:
+        enabled = True
+        for page in facs_pages:
+            pages[page] = enabled
+            if page == assignment.facs_last_enabled_page:
+                enabled = False
+
+    return pages
+
+
+@login_required
 def assignment_setup(request):
     error = ''
     if request.method == "POST":
@@ -126,7 +149,7 @@ def assignment_setup(request):
             'new': request.session['new'],
             'section_name': 'Assignment',
             'page_name': 'assignment',
-            'last_page_number': 0
+            'pages': {}
         },
         context_instance=RequestContext(request)
     )
@@ -134,7 +157,6 @@ def assignment_setup(request):
 
 @login_required
 def course_setup(request):
-    page_number = page_order.index('course')
     CourseFormSet = modelformset_factory(
         models.Course,
         extra=1,
@@ -162,8 +184,9 @@ def course_setup(request):
         course_selected = all_courses[0]
         assignment = create_assignment(request, course_selected)
         if 'continue' in request.POST:
-            assignment.last_enabled_page = page_number + 1
+            assignment.last_page_name = 'strains'
             assignment.save()
+
             return redirect("common_assignments_edit_strains")
 
     if course_selected:
@@ -172,7 +195,7 @@ def course_setup(request):
     formset = CourseFormSet(
         queryset=models.Course.objects.filter(owner=request.user)
     )
-
+    pages = {'assignment': True, 'course': True}
     return render_to_response(
         'instructor/course_modify.html',
         {
@@ -183,7 +206,7 @@ def course_setup(request):
             'assignment_name': request.session['assignment_name'],
             'section_name': 'Assignment',
             'page_name': 'course',
-            'last_page_number': page_number
+            'pages': pages
         },
         context_instance=RequestContext(request)
     )
@@ -293,7 +316,7 @@ def assignment_modify(request):
             'assignment_name': assignment.name,
             'section_name': 'Assignment',
             'page_name': 'assignment',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -359,9 +382,9 @@ def course_modify(request):
                 assignment.course = new_course
                 assignment.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number + 1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'strains'
+                assignment.save()
                 return redirect("common_assignments_edit_strains")
             return redirect("common_course_modify")
     # for view mode
@@ -385,7 +408,7 @@ def course_modify(request):
             'assignment_name': assignment.name,
             'section_name': 'Assignment',
             'page_name': 'course',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -431,9 +454,9 @@ def assignments_variables(request):
                 if num_variables <= max_num_of_vars:
                     form.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number + 1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'treatments'
+                assignment.save()
                 return redirect("common_assignments_edit_treatments")
     # For published assignment
     elif request.method == "POST" and 'continue' in request.POST:
@@ -452,10 +475,22 @@ def assignments_variables(request):
             'assignment_name': assignment.name,
             'section_name': 'Experiment Setup',
             'page_name': 'variables',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
+
+
+def find_next_view(assignment):
+    """ Page to go to on 'continue' """
+    next_view = 'common_assignments'
+    if assignment.has_wb:
+        next_view = 'western_blot_lysate_type'
+    elif assignment.has_micro:
+        next_view = 'micro_sample_prep'
+    elif assignment.has_fc:
+        next_view = 'facs_sample_prep'
+    return next_view
 
 
 @assignment_selected
@@ -471,16 +506,26 @@ def select_technique(request):
     if request.method == "POST" and assignment.access == 'private':
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
+            # if facs was selected want to enable first link
+            if (
+                form.instance.has_fc and
+                form.instance.facs_last_enabled_page == 0
+            ):
+                form.instance.facs_last_enabled_page = 1
+
             form.save()
             if 'continue' in request.POST:
                 if assignment.has_wb:
-                    if assignment.last_enabled_page <= page_number:
-                        assignment.last_enabled_page = page_number + 1
-                        assignment.save()
-                    return redirect("western_blot_lysate_type")
-                # will add more cases for micro and facs later
+                    if (
+                        page_order.index(assignment.last_page_name) <=
+                        page_number
+                    ):
+                        assignment.last_page_name = 'wb_lysate_type'
+                    assignment.save()
+                return redirect(find_next_view(assignment))
+
     elif request.method == "POST" and 'continue' in request.POST:
-        return redirect("western_blot_lysate_type")
+        return redirect(find_next_view(assignment))
 
     form = AssignmentForm(instance=assignment)
     return render_to_response(
@@ -490,7 +535,7 @@ def select_technique(request):
             'assignment_name': assignment.name,
             'section_name': 'Select Technique',
             'page_name': 'techniques',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         }
     )
 
@@ -530,9 +575,9 @@ def assignments_edit_strains(request):
                 else:
                     strain.save()
         if 'continue' in request.POST:
-            if assignment.last_enabled_page <= page_number:
-                assignment.last_enabled_page = page_number + 1
-                assignment.save()
+            if page_order.index(assignment.last_page_name) <= page_number:
+                assignment.last_page_name = 'variables'
+            assignment.save()
             return redirect('common_assignments_variables')
 
     elif request.method == "POST" and 'continue' in request.POST:
@@ -541,6 +586,7 @@ def assignments_edit_strains(request):
     formset = StrainsFormSet(
         queryset=models.Strains.objects.filter(assignment=assignment)
     )
+
     return render_to_response(
         'instructor/strains.html',
         {
@@ -550,7 +596,7 @@ def assignments_edit_strains(request):
             'assignment_name': assignment.name,
             'section_name': 'Experiment Setup',
             'page_name': 'strains',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -634,9 +680,9 @@ def assignments_edit_treatments(request):
                     else:
                         instance.save()
         if 'continue' in request.POST:
-            if assignment.last_enabled_page <= page_number:
-                assignment.last_enabled_page = page_number + 1
-                assignment.save()
+            if page_order.index(assignment.last_page_name) <= page_number:
+                assignment.last_page_name = 'protocols'
+            assignment.save()
             return redirect('common_strain_treatments')
 
     elif request.method == "POST" and 'continue' in request.POST:
@@ -728,7 +774,7 @@ def assignments_edit_treatments(request):
             'assignment_name': assignment.name,
             'section_name': 'Experiment Setup',
             'page_name': 'treatments',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -762,9 +808,9 @@ def strain_treatments_edit(request):
                     ).delete()
             update_wb_bands(assignment)
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number + 1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'techniques'
+                assignment.save()
                 return redirect("common_select_technique")
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_select_technique")
@@ -793,7 +839,7 @@ def strain_treatments_edit(request):
             'has_collection_time': assignment.has_collection_time,
             'section_name': 'Experiment Setup',
             'page_name': 'protocols',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -900,9 +946,9 @@ def western_blot_lysate_type(request):
             if any(getattr(wb, field) for field in field_names):
                 form.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number + 1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'wb_antibody'
+                assignment.save()
                 return redirect('western_blot_antibody')
 
     elif request.method == "POST" and 'continue' in request.POST:
@@ -920,7 +966,7 @@ def western_blot_lysate_type(request):
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_lysate_type',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -952,9 +998,9 @@ def western_blot_antibody(request):
                 form.western_blot = wb
                 form.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number + 1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'wb_band_size'
+                assignment.save()
                 return redirect('western_blot_band_size')
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("western_blot_band_size")
@@ -981,7 +1027,7 @@ def western_blot_antibody(request):
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_antibody',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -1021,9 +1067,9 @@ def western_blot_band_size(request):
             antibodies = formset.save()
             update_wb_bands(assignment, antibodies=antibodies)
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number + 1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'wb_band_intensity'
+                assignment.save()
                 return redirect('western_blot_band_intensity')
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("western_blot_band_intensity")
@@ -1041,7 +1087,7 @@ def western_blot_band_size(request):
             'error': json.dumps(error),
             'section_name': 'Western Blotting',
             'page_name': 'wb_band_size',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -1108,9 +1154,9 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
 @check_assignment_owner
 @login_required
 def western_blot_band_intensity(request):
-    page_number = page_order.index('wb_band_intensity')
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
+    # Page to go to on 'continue'
     next_view = 'common_assignments'
     if assignment.has_micro:
         next_view = 'micro_sample_prep'
@@ -1131,9 +1177,6 @@ def western_blot_band_intensity(request):
             for entry in entries:
                 entry.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number + 1
-                    assignment.save()
                 return redirect(next_view)
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect(next_view)
@@ -1180,7 +1223,7 @@ def western_blot_band_intensity(request):
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_band_intensity',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -1272,7 +1315,6 @@ def microscopy_images_edit(request, assignment, sample_prep, sp):
 @check_assignment_owner
 @login_required
 def facs_sample_prep(request):
-    page_number = page_order.index('facs_sample_prep')
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
 
@@ -1296,9 +1338,12 @@ def facs_sample_prep(request):
                 else:
                     facs_sample.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number + 1
-                    assignment.save()
+                if (
+                    facs_pages.index('facs_sample_prep') <=
+                    facs_pages.index(assignment.facs_last_enabled_page)
+                ):
+                    assignment.facs_last_enabled_page = 'facs_analyze'
+                assignment.save()
                 return redirect('facs_analyze')
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("facs_analyze")
@@ -1337,7 +1382,7 @@ def facs_sample_prep(request):
             'assignment_name': assignment.name,
             'section_name': 'Flow Cytometry',
             'page_name': 'facs_sample_prep',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
@@ -1439,7 +1484,7 @@ def facs_analyze(request):
             'assignment_name': assignment.name,
             'section_name': 'Flow Cytometry',
             'page_name': 'facs_analyze',
-            'last_page_number': assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
