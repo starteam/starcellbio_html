@@ -1,16 +1,9 @@
 /**
  * Sketching tool
  */
-
-function load_sketch_tool() {
-    paper.setup('myCanvas');
-
-    var raster = new Raster({
-        position: view.center
-    });
-    var path, x, y;
-
-    /* grid */
+function draw_graph_background(){
+    var x, y;
+     /* grid */
     for (x = 0.5; x < 600; x += 20) {
         draw_line(x, 0, x, 300, '#eee');
     }
@@ -27,8 +20,15 @@ function load_sketch_tool() {
 
     draw_line(550, 250, 560, 260);
     draw_line(550, 270, 560, 260);
+    paper.view.update();
+}
 
+function load_sketch_tool() {
+    paper.setup('myCanvas');
 
+    draw_graph_background();
+
+    var path;
     var tool = new Tool();
     undostack = [];
 
@@ -38,11 +38,8 @@ function load_sketch_tool() {
         visible: false
     });
 
-    tool.onMouseDown = function (event) {
+    function mouseDownEvent (event) {
         path = new Path();
-        if (undostack.length > 0) {
-            undostack.pop().remove();
-        }
 
         undostack.push(path);
         path.strokeColor = 'blue';
@@ -50,9 +47,8 @@ function load_sketch_tool() {
         path.add(event.point);
         data_points = [];
         data_points.push([event.point.x, event.point.y]);
-    };
-
-    tool.onMouseDrag = function (event) {
+    }
+    function mouseDragEvent(event) {
         $('#myCanvas').css('cursor', 'none');
         var thedistance = 25;
         var lastPoint = path.lastSegment.point;
@@ -68,15 +64,43 @@ function load_sketch_tool() {
             path.add(new_point);
             data_points.push([new_point.x, new_point.y]);
         }
-    };
-
-    tool.onMouseUp = function (event) {
+    }
+    function mouseUpEvent(event) {
         $('#myCanvas').css('cursor', 'inherit');
         path.simplify(5);
         drawvector.visible = false;
-    };
+        tool.off('mousedown', mouseDownEvent);
+        tool.off('mousedrag', mouseDragEvent);
+        tool.off('mouseup', mouseUpEvent);
+    }
+    tool.onMouseDown = mouseDownEvent;
+    tool.onMouseDrag = mouseDragEvent;
+    tool.onMouseUp = mouseUpEvent;
 
+    /* Reset histogram button */
+    $('.reset_histogram').click(function(){
+        reset_canvas();
+    });
+    /* Close draw histogram dialog */
+    $('.scb_ab_f_close_dialog').click(function () {
+        $('.scb_ab_s_histogram_dialog').css('visibility', 'hidden');
+        reset_canvas();
+    });
+    /* Remove drawn graph, enable graphing */
+    function reset_canvas(){
+        if (undostack.length > 0) {
+            undostack.pop().remove();
+            data_points = [];
+        }
+        tool.on('mousedown', mouseDownEvent);
+        tool.on('mousedrag', mouseDragEvent);
+        tool.on('mouseup', mouseUpEvent);
+        paper.view.update();
+
+    }
 }
+
+
 function draw_line(x1 ,y1 ,x2 ,y2, color){
     color = color || 'black';
     var path = new Path.Line(new Point(x1, y1), new Point(x2, y2));

@@ -381,14 +381,7 @@ $(function() {
 
 
     });
-    /* Close draw histogram dialog */
-    $('.scb_ab_f_close_dialog').click(function () {
-        $('.scb_ab_s_histogram_dialog').css('visibility', 'hidden');
-        if (undostack.length > 0) {
-            undostack.pop().remove();
-            data_points = [];
-        }
-    });
+
 
 
     $('.scb_ab_s_histogram_dialog').draggable({handle: '.scb_ex_inner_dialog_title'});
@@ -423,14 +416,18 @@ $(function() {
                 _.each(data, function (point) {
                     path.add(new Point(point[0] / 3, point[1] / 3))
                 });
+                paper.view.update();
                 $("button[data-row_id='row-" + row_id + "']").hide();
             } else {
                 $(canvas).css('display', 'none');
                 $(canvas).siblings('div').css('display', 'none');
             }
         });
+
         load_sketch_tool();
+
     }
+
 });
 
 
