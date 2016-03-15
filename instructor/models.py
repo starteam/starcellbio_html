@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import User
 from django.contrib import admin
 
 # Constants
@@ -18,10 +18,15 @@ GROUP_BY = (
 
 STRAIN = 'strain'
 
-FIELDS = ( ('red', 'Red'), ('green', 'Green'), ('blue', 'Blue'), ('merge', 'All'))
+FIELDS = (
+    ('red', 'Red'), ('green', 'Green'),
+    ('blue', 'Blue'), ('merge', 'All'))
 ALL = 'merge'
 
-MICRO = ( ('Dye', 'Dye/Stain'), ('IF', 'Antibody-labeling IF'), ('IHC', 'Antibody-labeling IHC'))
+MICRO = (
+    ('Dye', 'Dye/Stain'),
+    ('IF', 'Antibody-labeling IF'),
+    ('IHC', 'Antibody-labeling IHC'))
 
 MICRO_DYE = 'Dye'
 # yapf: enable
@@ -41,7 +46,11 @@ class Course(models.Model):
 class Assignment(models.Model):
     course = models.ForeignKey(Course, related_name='assignments')
     assignment_id = models.CharField(max_length=50, unique=True)
-    last_enabled_page = models.IntegerField(max_length=5, default=1)
+    last_page_name = models.CharField(max_length=25, default='course')
+    facs_last_enabled_page = models.CharField(
+        max_length=25,
+        default='facs_sample_prep'
+    )
     name = models.CharField(max_length=50)
     access = models.CharField(max_length=50, choices=ACCESS, default='private')
     basedOn = models.ForeignKey("Assignment", null=True, blank=True)
@@ -221,16 +230,16 @@ class FlowCytometrySamplePrep(models.Model):
 # yapf: disable
 HISTOGRAMS = (
     ('normal', 'Normal'),
-    ('s-block','s-block'),
-    ('g1-block','g1-block'),
-    ('g2-block','g2-block'),
-    ('alpha-block','alpha-block'),
-    ('2-peak-normal-400','2-peak-normal-400'),
-    ('peak-100-normal-400','peak-100-normal-400'),
-    ('2-peak-uneven-normal-400','2-peak-uneven-normal-400'),
-    ('peak-50-normal-400','peak-50-normal-400'),
-    ('4-peak-normal-400','4-peak-normal-400'),
-    ('s-block-normal-400','s-block-normal-400'),
+    ('s-block', 's-block'),
+    ('g1-block', 'g1-block'),
+    ('g2-block', 'g2-block'),
+    ('alpha-block', 'alpha-block'),
+    ('2-peak-normal-400', '2-peak-normal-400'),
+    ('peak-100-normal-400', 'peak-100-normal-400'),
+    ('2-peak-uneven-normal-400', '2-peak-uneven-normal-400'),
+    ('peak-50-normal-400', 'peak-50-normal-400'),
+    ('4-peak-normal-400', '4-peak-normal-400'),
+    ('s-block-normal-400', 's-block-normal-400'),
     ('custom', 'Custom')
 )
 # yapf: enable

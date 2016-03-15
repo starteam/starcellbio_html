@@ -15,8 +15,8 @@
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "course" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class='scb_s_assignment_sidebar_link {% if last_page_number < 1 %} disabled {% endif %}'
-                {% if last_page_number >= 1 %}
+            <a class='scb_s_assignment_sidebar_link {% if not pages.course %} disabled {% endif %}'
+                {% if pages.course %}
                     href="{% if new %}{% url "common_course_setup" %}
                     {% else %}{% url "common_course_modify" %}{% endif %}"
                 {% endif %}
@@ -28,8 +28,8 @@
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Experiment Setup</div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "strains" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 2 %} disabled {% endif %}"
-                {% if last_page_number >= 2 %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.strains %} disabled {% endif %}"
+                {% if pages.strains %}
                     href="{% url "common_assignments_edit_strains" %}"
                 {% endif %}
             >
@@ -38,8 +38,8 @@
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "variables" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class='scb_s_assignment_sidebar_link {% if last_page_number < 3 %} disabled {% endif %}'
-               {% if last_page_number >= 3 %}
+            <a class='scb_s_assignment_sidebar_link {% if not pages.variables %} disabled {% endif %}'
+               {% if pages.variables %}
                href="{% url "common_assignments_variables" %}"
                {% endif %}
             >
@@ -49,8 +49,8 @@
 
         <div role="link" class='scb_ab_s_sidebar_page_link
         {% if page_name == "treatments" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 4 %} disabled {% endif %}"
-                {% if last_page_number >= 4  %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.treatments %} disabled {% endif %}"
+                {% if pages.treatments  %}
                 href="{% url "common_assignments_edit_treatments" %}"
                 {% endif %}
             >
@@ -60,8 +60,8 @@
 
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "protocols" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 5 %} disabled {% endif %}"
-               {% if last_page_number >= 5 %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.protocols %} disabled {% endif %}"
+               {% if pages.protocols %}
                href="{% url "common_strain_treatments" %}"
                {% endif %}
             >
@@ -72,8 +72,8 @@
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Experimental Techniques</div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "techniques" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 6 %} disabled {% endif %}"
-                {% if last_page_number >= 6 %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.techniques %} disabled {% endif %}"
+                {% if pages.techniques %}
                     href="{% url "common_select_technique" %}"
                 {% endif %}
             >
@@ -85,8 +85,8 @@
 
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "wb_lysate_type" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 7 %} disabled {% endif %}"
-                {% if last_page_number >= 7 %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.wb_lysate_type %} disabled {% endif %}"
+                {% if pages.wb_lysate_type %}
                     href="{% url "western_blot_lysate_type" %}"
                 {% endif %}
             >
@@ -95,8 +95,8 @@
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "wb_antibody" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 8 %} disabled {% endif %}"
-                {% if last_page_number >= 8 %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.wb_antibody %} disabled {% endif %}"
+                {% if pages.wb_antibody %}
                     href="{% url "western_blot_antibody" %}"
                 {% endif %}
             >
@@ -106,8 +106,8 @@
 
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "wb_band_size" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 9 %} disabled {% endif %}"
-                {% if last_page_number >= 9 %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.wb_band_size %} disabled {% endif %}"
+                {% if pages.wb_band_size %}
                     href="{% url "western_blot_band_size" %}"
                 {% endif %}
             >
@@ -116,8 +116,8 @@
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "wb_band_intensity" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 10 %} disabled {% endif %}"
-                {% if last_page_number >= 10 %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.wb_band_intensity %} disabled {% endif %}"
+                {% if pages.wb_band_intensity %}
                     href="{% url "western_blot_band_intensity" %}"
                 {% endif %}
             >
@@ -139,8 +139,8 @@
 
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "facs_sample_prep" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 11 %} disabled {% endif %}"
-                {% if last_page_number >= 11 %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.facs_sample_prep %} disabled {% endif %}"
+                {% if pages.facs_sample_prep %}
                     href="{% url "facs_sample_prep"  %}"
                 {% endif %}
             >
@@ -149,8 +149,8 @@
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "facs_analyze" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
-            <a class="scb_s_assignment_sidebar_link {% if last_page_number < 12 %} disabled {% endif %}"
-                {% if last_page_number >= 12 %}
+            <a class="scb_s_assignment_sidebar_link {% if not pages.facs_analyze %} disabled {% endif %}"
+                {% if pages.facs_analyze %}
                     href="{% url "facs_analyze"  %}"
                 {% endif %}
             >
