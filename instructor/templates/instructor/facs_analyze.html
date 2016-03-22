@@ -9,27 +9,26 @@
                       aria-label="Close Create Histogram">×</span>
                 Create New Histogram
             </h1>
-
-            <div class="scb_ab_s_heading_div">
-                <div class="scb_ab_s_page_title">Draw Histogram</div>
+            <div class="scb_ab_s_histogram_tabs">
+                <div class="scb_ab_s_histogram_tab_not_selected">Select Histogram</div>
+                <div class="scb_ab_s_histogram_tab_selected">Draw New Histogram</div>
             </div>
-            <div class="scb_ab_s_row scb_ab_s_grouping_header_row" style="padding-left: 10px">
-                <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
+            <div class="scb_ab_s_draw_new_histogram_content">
+                <div class="scb_ab_s_chosen_sample_heading">
+                    <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
+                        <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
+                        </div>
+                    </div>
+                    <div class="scb_ab_s_row scb_ab_f_sample_name">
+                    </div>
                 </div>
-            </div>
-            <div class="scb_ab_s_row" style="padding-left: 10px">
-                <div class="scb_ab_f_sample_name"></div>
-            </div>
-            <div class="scb_ab_s_histogram_content_wrapper">
-                <div class="scb_ab_s_histogram_canvas">
-                    <canvas id="myCanvas" class="scb_ab_s_draw_histogram_canvas" style=""></canvas>
-                    <button class="scb_s_gray_button scb_ab_f_save_histogram">
-                        SAVE HISTOGRAM
-                    </button>
-                    <button class="scb_s_gray_button reset_histogram">
-                        DISCARD HISTOGRAM
-                    </button>
-                </div>
+                <canvas id="myCanvas" class="scb_ab_s_draw_histogram_canvas"></canvas>
+                <button class="scb_s_gray_button scb_ab_f_save_histogram">
+                    SAVE HISTOGRAM
+                </button>
+                <button class="scb_s_gray_button reset_histogram">
+                    DISCARD HISTOGRAM
+                </button>
             </div>
         </div>
     </div><!-- End of hidden window -->

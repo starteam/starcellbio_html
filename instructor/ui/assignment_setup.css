@@ -516,19 +516,19 @@ input[type="checkbox"].disabled {
 }
 
 /* Draw Histogram View */
-.scb_ab_s_histogram_content_wrapper{
+.scb_ab_s_draw_new_histogram_content{
     margin: 15px;
+    text-align: right;
+    padding-right: 80px;
 }
-.scb_ab_s_histogram_canvas{
-    margin-left: 10%;
-    margin-bottom: 5%;
-}
+
 .scb_ab_s_draw_histogram_canvas{
     width: 600px;
     height: 300px;
     cursor: inherit;
     border: 1px gray solid;
     background: white;
+    margin: 20px 0;
 }
 .scb_ab_s_small_canvas{
     width:200px;
@@ -550,7 +550,7 @@ input[type="checkbox"].disabled {
 .scb_ab_s_histogram_dialog>div{
     max-height: 75%;
     overflow: auto;
-    margin: 12% auto auto;
+    margin: 12% auto auto 0;
     position: relative;
     border: 5px solid white;
     border-radius: 9px;
@@ -586,5 +586,33 @@ input[type="checkbox"].disabled {
     left: 196px;
     margin-top: -6px;
 }
+.scb_ab_s_chosen_sample_heading{
+    padding: 0 0 20px 30px;
+    text-align: left;
+}
 
+/* Choose histogram tabs in the pop-up window */
+.scb_ab_s_histogram_tabs{
+    display:table;
+    width:100%;
+    font-family: 'sourcesanspro-semibold';
+    overflow: hidden;
 
+}
+.scb_ab_s_histogram_tabs>div{
+    display: table-cell;
+    text-align:center;
+    padding: 5px 0;
+
+}
+.scb_ab_s_histogram_tab_not_selected{
+    background: lightgrey;
+    box-shadow: inset 2px 2px 5px grey;
+    color:  #737373;
+    border:1px solid lightgrey;
+}
+.scb_ab_s_histogram_tab_selected{
+    background: #27956c;
+    box-shadow: 0 0 2px 1px grey;
+    color:  white;
+}

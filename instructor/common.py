@@ -1450,13 +1450,15 @@ def facs_analyze(request):
         if sample.fixed:
             grouped_histograms.append(
                 (
-                    'fixed', sample.analysis, sample.condition, form_list
+                    'Fixed', sample.get_analysis_display, sample.condition,
+                    form_list
                 )
             )
         if sample.live:
             grouped_histograms.append(
                 (
-                    'live', sample.analysis, sample.condition, form_list
+                    'Live', sample.get_analysis_display, sample.condition,
+                    form_list
                 )
             )
 
