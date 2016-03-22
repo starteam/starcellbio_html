@@ -507,12 +507,14 @@ input[type="checkbox"].disabled {
 .scb_ab_s_histogram_edit_grey_img {
     background: url('../images/Draw_Histogram_Gray.png') no-repeat;
     height: 45px;
-    background-size: 40px;
+    background-size: 25px;
+    margin-left: 7px;
 }
 .scb_ab_s_histogram_edit_white_img{
     background: url('../images/Draw_Histogram_White.png') no-repeat;
     height: 45px;
-    background-size: 40px;
+    background-size: 25px;
+    margin-left: 7px;
 }
 
 /* Draw Histogram View */
