@@ -196,7 +196,7 @@ select:disabled {
 .scb_ab_s_form_input_list>div{
     display: inline-block;
 }
-.scb_ab_s_form_input_list>div>input{
+.scb_ab_s_form_input_list>div>input, .scb_ab_s_form_input_list>div>select{
     margin: 5px 0 0 5px;
 }
 
@@ -452,7 +452,7 @@ input[type="checkbox"].disabled {
 
 /* FACS Sample Prep */
 .scb_ab_s_input_headers>div.scb_ab_s_facs_cell_treatment_header{
-    width: 162px;
+    width: 167px;
 
 }
 .scb_ab_s_input_headers>div.scb_ab_center_input_header{

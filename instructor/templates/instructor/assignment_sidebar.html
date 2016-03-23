@@ -148,6 +148,16 @@
             </a>
         </div>
         <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "facs_setup" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
+            <a class="scb_s_assignment_sidebar_link {% if not pages.facs_setup %} disabled {% endif %}"
+                {% if pages.facs_setup %}
+                    href="{% url "facs_setup"  %}"
+                {% endif %}
+            >
+                Canvas
+            </a>
+        </div>
+        <div role="link" class='scb_ab_s_sidebar_page_link
             {% if page_name == "facs_analyze" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
             <a class="scb_s_assignment_sidebar_link {% if not pages.facs_analyze %} disabled {% endif %}"
                 {% if pages.facs_analyze %}

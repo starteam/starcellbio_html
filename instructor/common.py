@@ -17,12 +17,12 @@ from instructor.compiler import get_protocol_headers
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 
-page_order = [
+page_order = (
     'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
     'techniques', 'wb_lysate_type', 'wb_antibody', 'wb_band_size',
     'wb_band_intensity'
-]
-facs_pages = ['facs_sample_prep', 'facs_analyze']
+)
+facs_pages = ('facs_sample_prep', 'facs_setup', 'facs_analyze')
 
 
 @login_required
@@ -942,7 +942,7 @@ def western_blot_lysate_type(request):
         field_names = ['has_gel_10', 'has_gel_12', 'has_gel_15']
         if form.is_valid():
             form.save(commit=False)
-            # if any percentage is selected
+            # make sure at least one percentage is selected
             if any(getattr(wb, field) for field in field_names):
                 form.save()
             if 'continue' in request.POST:
@@ -1314,6 +1314,56 @@ def microscopy_images_edit(request, assignment, sample_prep, sp):
 @assignment_selected
 @check_assignment_owner
 @login_required
+def facs_setup(request):
+    """
+    User can set scale, range, and tick values
+    for x axis, for this assignment
+    """
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
+
+    facs, created = models.FlowCytometry.objects.get_or_create(
+        assignment=assignment
+    )
+    FlowCytometryForm = modelform_factory(
+        models.FlowCytometry,
+        exclude=['assignment']
+    )
+
+    if request.method == "POST" and assignment.access == 'private':
+        form = FlowCytometryForm(request.POST, instance=facs)
+        if form.is_valid():
+            form.save()
+        if 'continue' in request.POST:
+            if (
+                facs_pages.index('facs_setup') <=
+                facs_pages.index(assignment.facs_last_enabled_page)
+            ):
+                assignment.facs_last_enabled_page = 'facs_analyze'
+            assignment.save()
+            return redirect('facs_analyze')
+
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("facs_analyze")
+
+    form = FlowCytometryForm(instance=facs)
+    return render_to_response(
+        'instructor/facs_setup.html',
+        {
+            'form': form,
+            'access': json.dumps(assignment.access),
+            'assignment_name': assignment.name,
+            'section_name': 'Flow Cytometry',
+            'page_name': 'facs_setup',
+            'pages': get_pages(assignment)
+        },
+        context_instance=RequestContext(request)
+    )
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
 def facs_sample_prep(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
@@ -1342,11 +1392,11 @@ def facs_sample_prep(request):
                     facs_pages.index('facs_sample_prep') <=
                     facs_pages.index(assignment.facs_last_enabled_page)
                 ):
-                    assignment.facs_last_enabled_page = 'facs_analyze'
+                    assignment.facs_last_enabled_page = 'facs_setup'
                 assignment.save()
-                return redirect('facs_analyze')
+                return redirect('facs_setup')
     elif request.method == "POST" and 'continue' in request.POST:
-        return redirect("facs_analyze")
+        return redirect("facs_setup")
 
     extra_fields = 0
     if (

@@ -1,0 +1,51 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+
+    <div class="scb_ab_s_heading_div">
+        <div class="scb_ab_s_page_title">Flow Cytometry</div>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="scb_ab_s_heading_div">
+            <div class='scb_ab_s_heading_description'><i>Histogram Scale</i></div>
+            <br>
+
+            <div class='scb_ab_s_heading_description'>
+                Choose the scale type for this assignment
+            </div>
+        </div>
+        <div class='scb_ab_s_form_input_list'>
+            <div>
+                {{ form.scale }}
+            </div>
+        </div>
+        <div class="scb_ab_s_heading_div">
+            <div class='scb_ab_s_heading_description'><i>Axis Ranges</i></div>
+            <br>
+            <div class='scb_ab_s_heading_description'>
+                Please set the range for x, tick values for x
+            </div>
+        </div>
+        <div class="scb_ab_s_input_headers">
+            <div class="scb_ab_center_input_header">Upper value for x</div>
+            <div class="scb_ab_center_input_header">Tick values</div>
+        </div>
+        <div class="scb_ab_s_form_input_list">
+            <div>{{ form.xrange }}</div>
+            <div>{{ form.tick_values }}</div>
+        </div>
+
+        <input type="submit"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE AND CONTINUE &nbsp; &#9654;">
+        <input type="submit"
+               name="save"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE"/>
+    </form>
+    <a href="{% url "facs_sample_prep" %}">
+        <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+    </a>
+{% endblock %}
