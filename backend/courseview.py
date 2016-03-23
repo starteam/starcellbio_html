@@ -27,7 +27,7 @@ def create(request, template_name='courses/form.html'):
         c.ownerID = request.user
         c.save()
         return redirect('course_list')
-    return render(request, template_name, {'form': form,'create':True})
+    return render(request, template_name, {'form': form, 'create': True})
 
 
 @login_required
@@ -38,7 +38,7 @@ def update(request, pk, template_name='courses/form.html'):
     if form.is_valid():
         form.save()
         return redirect('course_list')
-    return render(request, template_name, {'form': form,'create':False})
+    return render(request, template_name, {'form': form, 'create': False})
 
 
 @login_required
@@ -48,4 +48,3 @@ def delete(request, pk, template_name='courses/confirm_delete.html'):
         server.delete()
         return redirect('course_list')
     return render(request, template_name, {'object': server})
-

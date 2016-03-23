@@ -1,0 +1,47 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+
+<div class="scb_ab_s_heading_div">
+    <div class="scb_ab_s_page_title">Sample prep</div>
+    <div class='scb_ab_s_heading_description'>
+        Define the flowcytometry cell treatment, analysis and specific conditions
+        available for experimentation.
+    </div>
+</div>
+<br/>
+<div>
+    <form method="post">{% csrf_token %}
+        {{ formset.management_form }}
+        <div class="scb_ab_s_input_headers">
+            <div class="scb_ab_s_facs_cell_treatment_header">Cell Treatments</div>
+            <div class="scb_ab_center_input_header">Analysis</div>
+            <div class="scb_ab_center_input_header">Conditions</div>
+        </div>
+        {% for form in formset %}
+            <div class="scb_ab_s_form_input_list">
+                <div class="scb_ab_s_fixed">{{ form.fixed }} Fixed Cells</div>
+                <div class="scb_ab_s_live">{{ form.live }} Live Cells</div>
+                <div class="vertical_align_bottom">{{ form.analysis }}</div>
+                <div>{{ form.condition }}</div>
+                <div>{{ form.id }}</div>
+                <div class="delete_checkbox">{{ form.DELETE }}</div>
+            </div>
+        {% endfor %}
+        <div>
+            <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button' value="ADD">
+        </div>
+        <input type="submit"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE AND CONTINUE &nbsp; &#9654;">
+        <input type="submit"
+               name="save"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE"/>
+    </form>
+</div>
+<a href="{% url back_url %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+</a>
+{% endblock %}

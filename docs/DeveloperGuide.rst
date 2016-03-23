@@ -44,6 +44,33 @@ http://localhost:8100 and be greeted with the Star Cell Bio home
 screen.
 
 
+Running selenium tests
+======================
+
+To run selenium tests, you need to have a working selenium server. Get
+this by downloading & running one:
+
+    wget http://goo.gl/qTy1IB -O selenium-server-standalone-2.52.0.jar
+    java -jar selenium-server-standalone-2.52.0.jar
+
+This opens up a selenium server running on port 4444.
+
+Now you need to expose that to your guest by setting up an ssh
+tunnel. That looks like the command below. You can find the port by
+looking at the output of ``vagrant ssh-config``.
+
+
+.. code-block:: bash
+
+    ssh -R 14444:localhost:4444 -i .vagrant/machines/default/virtualbox/private_key vagrant@localhost -p 2200
+
+
+From within the vagrant image, you can now run tests by doing:
+
+.. code-block:: bash
+
+    ./manage.py test --liveserver=0.0.0.0:8100
+
 Creating a "hello world" assignment
 ===================================
 Assignment configuration and content are currently stored in ``html/master_model.js``, 

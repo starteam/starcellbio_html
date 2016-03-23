@@ -16,22 +16,21 @@
 
             {% for antibody, form_list in formset_group %}
 
-                <div class="scb_ab_s_antibody_header">
+                <div class="scb_ab_s_antibody_header scb_ab_s_grouping_header_row">
                     {{ antibody.primary }}, {{ antibody.secondary }}
                 </div>
 
                 <div class="scb_ab_s_row scb_ab_s_table_header_text">
-                    <div class="scb_ab_s_col_width_sample">Sample</div>
+                    <div class="scb_ab_s_col_width_wb_sample">Sample</div>
                     <div class="scb_ab_s_col_width_number"></div>
                     <div class="scb_ab_s_col_width_type_size">Lysate Type</div>
                     <div class="scb_ab_s_col_width_type_size">Size (kDa)</div>
                     <div class="scb_ab_s_col_width_intensity">Relative Band Intensity</div>
                 </div>
-                <br>
                 {% for form in form_list %}
                 <div class="scb_ab_s_row vertical_align_top" style="padding-bottom: 5px">
                     <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
-                    <div class="scb_ab_s_col_width_sample">
+                    <div class="scb_ab_s_col_width_wb_sample">
                         <div class="block-ellipsis">
                         {{ form.instance.strain_protocol.strain.name }},
                         {{ form.instance.strain_protocol.treatment.drug.name }}{% if variables.has_concentration and form.instance.strain_protocol.treatment.drug.concentration != None %},

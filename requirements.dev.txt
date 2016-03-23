@@ -1,0 +1,10 @@
+pre-commit
+flake8
+ipdb
+ipython
+pudb
+yapf
+selenium==2.35.0
+bok-choy==0.4.10
+mock
+-r requirements.txt

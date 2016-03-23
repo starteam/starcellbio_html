@@ -49,7 +49,6 @@ javascripts:
   - model/Microscopy.js
   - js/plugins/template/plugin.min.js
   - assignments/mit706s14ps2/gen/instructions.soy.js
-  - js/slides.min.jquery.js
   - instructor/InstructorExperimentSetupPage3View.js
   - gen/microscopy_test.soy.js
   - ui/gen/microscopy.soy.js
