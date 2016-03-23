@@ -416,10 +416,14 @@ def post_state(request, **kwargs):
 
 def contact(request, **kwargs):
     """Contact form handler."""
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            clean = form.cleaned_data
+    if request.method != "POST":
+        return HttpResponse(
+            '<h1>You must POST your contact form.</h1>', status=400)
+
+    form = ContactForm(request.POST)
+    if form.is_valid():
+        clean = form.cleaned_data
+        try:
             send_mail(
                 'WebFeedback- StarCellBio: {0}...'.format(
                     clean['note'][:10]
@@ -428,13 +432,16 @@ def contact(request, **kwargs):
                 '{0} <{1}>'.format(clean['name'], clean['email']),
                 [getattr(settings, 'FEEDBACK_EMAIL', 'star@mit.edu')],
             )
-            return HttpResponse('<h1>Thank you for your feedback.')
-        else:
+        except Exception:
             return HttpResponse(
-                '<h1>Errors in contact form</h1> {}'.format(
-                    form.errors
-                )
+                '<h1>Unable to send the email. Sorry!</h1>', status=500)
+        return HttpResponse('<h1>Thank you for your feedback.</h1>')
+    else:
+        return HttpResponse(
+            '<h1>Errors in contact form</h1> {}'.format(
+                form.errors
             )
+        )
 
 
 # yapf: disable
