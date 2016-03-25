@@ -349,82 +349,133 @@ $(function() {
     $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Error</h1>");
   }
 
-    /* Save or Remove Histogram */
-    $('.scb_ab_f_save_histogram, .scb_ab_f_remove_histogram').click(function(){
-        var cell_treatment = $(this).data('cell_treatment');
-        var instance_id= $(this).data('pk');
-        var data = {
-            cell_treatment: cell_treatment,
-            pk: instance_id
-        };
-        if ($(this).hasClass('scb_ab_f_save_histogram')){
-            data['points'] = JSON.stringify(data_points);
-        }
-        $.ajax({
-            url:'/ab/assignments/submit_histogram/',
-            type: "POST",
-            data: data
-        }).then(function(){
-            window.location.reload();
-        });
-    });
-
-    $(".select_histogram_btn").click(function () {
-        var row_id = $(this).data('row_id');
-        var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
-        var instance_pk = row_id.match(/(\d+)$/)[0];
-        var cell_treatment = $(this).data('sample_treatment').split(',')[0];
-        $('.scb_ab_f_sample_name').text(sample_name);
-        $('.scb_ab_f_treatment_text').text($(this).data('sample_treatment'));
-        $('button.scb_ab_f_save_histogram').data({'cell_treatment': cell_treatment, 'pk': instance_pk});
-        $('.scb_ab_s_histogram_dialog').css('visibility', 'visible');
-
-
-    });
-
-
-
-    $('.scb_ab_s_histogram_dialog').draggable({handle: '.scb_ex_inner_dialog_title'});
-
-
-    /* Facs analyze view */
-    if (typeof(histograms) !== 'undefined') {
-        var canvas_list = $("[id|='canvas']");
-
-        var instance_id, path, data, row_id;
-
-        _.each(canvas_list, function (canvas) {
-            // attribute id has the form 'canvas-live2'
-            instance_id = canvas.id.match(/(\d+)$/)[0];
-            row_id = canvas.id.split('-')[1];
-            paper.setup(canvas.id);
-            /* x axis */
-            draw_line(13, 87, 187, 87);
-            /* y axis */
-            draw_line(13, 7, 13, 87);
-
-            if (canvas.id.indexOf('live') > -1) {
-                data = histograms[instance_id]['live'];
-            } else {
-                data = histograms[instance_id]['fixed'];
-            }
-            if (data) {
-                data = JSON.parse(data);
-                path = new Path();
-                path.strokeColor = 'black';
-                path.strokeWidth = '1';
-                _.each(data, function (point) {
-                    path.add(new Point(point[0] / 3, point[1] / 3))
-                });
-                paper.view.update();
-                $("button[data-row_id='row-" + row_id + "']").hide();
-            } else {
-                $(canvas).css('display', 'none');
-                $(canvas).siblings('div').css('display', 'none');
-            }
-        });
-        load_sketch_tool(x_upper_bound, tick_values);
+  /* Save or Remove Histogram */
+  $('.scb_ab_f_save_histogram, .scb_ab_f_remove_histogram, ' +
+    '.scb_ab_f_save_selected_histogram').click(function () {
+    var data = {};
+    if ($(this).hasClass('scb_ab_f_remove_histogram')) {
+      data['cell_treatment'] = $(this).data('cell_treatment');
+      data['mapping_pk'] = $(this).data('pk');
+    } else {
+      data['cell_treatment'] = $('.scb_ab_s_histogram_dialog').data('cell_treatment');
+      data['mapping_pk'] = $('.scb_ab_s_histogram_dialog').data('pk');
+      if ($(this).hasClass('scb_ab_f_save_histogram')) {
+        data['points'] = JSON.stringify(data_points);
+      } else{
+        data['histogram_pk'] = $('.scb_ab_s_histogram_selected').attr('id').match(/(\d+)$/)[0];
+      }
     }
+    $.ajax({
+      url: '/ab/assignments/submit_histogram/',
+      type: "POST",
+      data: data
+    }).then(function() {
+      window.location.reload();
+    });
+  });
+
+  $(".add_histogram_btn").click(function () {
+    var row_id = $(this).data('row_id');
+    var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
+    var instance_pk = row_id.match(/(\d+)$/)[0];
+    var cell_treatment = $(this).data('sample_treatment').split(',')[0];
+    $('.scb_ab_f_sample_name').text(sample_name);
+    $('.scb_ab_f_treatment_text').text($(this).data('sample_treatment'));
+    $('.scb_ab_s_histogram_dialog')
+      .data({'cell_treatment': cell_treatment, 'pk': instance_pk})
+      .css('visibility', 'visible');
+
+
+  });
+
+  /* Close draw histogram dialog */
+  $('.scb_ab_f_close_dialog').click(function () {
+    $('.scb_ab_s_histogram_dialog').css('visibility', 'hidden');
+    if (undostack.length > 0) {
+      undostack.pop().remove();
+      data_points = [];
+    }
+  });
+  $(".scb_ab_s_histogram_tab_not_selected").click(function () {
+    $(".scb_ab_s_draw_histogram_view").toggle();
+    $(".scb_ab_s_select_histogram_view").toggle();
+    paper.view.update();
+
+
+  });
+
+  $('.scb_ab_s_histogram_dialog').draggable({handle: '.scb_ex_inner_dialog_title'});
+
+  $('.scb_ab_f_select_histogram').click(function(){
+    var canvas_library = $("[id|='library']");
+    _.each(canvas_library, function (canvas) {
+      $(canvas).removeClass("scb_ab_s_histogram_selected");
+    });
+    $(this).addClass("scb_ab_s_histogram_selected");
+  });
+
+
+  /* Facs analyze view */
+  if (typeof(histograms) !== 'undefined') {
+    var canvas_list = $("[id|='canvas']");
+
+    var instance_id, path, data, row_id;
+
+    _.each(canvas_list, function (canvas) {
+      // attribute id has the form 'canvas-live2'
+      instance_id = canvas.id.match(/(\d+)$/)[0];
+      row_id = canvas.id.split('-')[1];
+      paper.setup(canvas.id);
+      /* x axis */
+      draw_line(13, 87, 187, 87);
+      /* y axis */
+      draw_line(13, 7, 13, 87);
+
+      if (canvas.id.indexOf('Live') > -1) {
+        data = histograms[instance_id]['live'];
+      } else {
+        data = histograms[instance_id]['fixed'];
+      }
+      if (data) {
+        data = JSON.parse(data);
+        path = new Path();
+        path.strokeColor = 'black';
+        path.strokeWidth = '1';
+        _.each(data, function (point) {
+          path.add(new Point(point[0] / 3, point[1] / 3))
+        });
+        paper.view.update();
+        $("button[data-row_id='row-" + row_id + "']").hide();
+      } else {
+        $(canvas).css('display', 'none');
+        $(canvas).siblings('div').css('display', 'none');
+      }
+    });
+    var canvas_library = $("[id|='library']");
+    _.each(canvas_library, function (canvas) {
+
+      var histogram_id = canvas.id.match(/(\d+)$/)[0];
+      paper.setup(canvas.id);
+
+      /* x axis */
+      draw_line(20, 130, 260, 130);
+      /* y axis */
+      draw_line(20, 10, 20, 130);
+      data = all_histograms_mapping[histogram_id];
+      data = JSON.parse(data);
+      path = new Path();
+      path.strokeColor = 'black';
+      path.strokeWidth = '1';
+      _.each(data, function (point) {
+        path.add(new Point(point[0] / 2, point[1] / 2))
+      });
+
+      paper.view.update();
+
+    });
+    load_sketch_tool(x_upper_bound, tick_values);
+  }
+
 
 });
 

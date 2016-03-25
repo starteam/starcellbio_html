@@ -241,38 +241,32 @@ class FlowCytometrySamplePrep(models.Model):
     condition = models.CharField(max_length=50)
 
 
-# yapf: disable
-HISTOGRAMS = (
-    ('normal', 'Normal'),
-    ('s-block', 's-block'),
-    ('g1-block', 'g1-block'),
-    ('g2-block', 'g2-block'),
-    ('alpha-block', 'alpha-block'),
-    ('2-peak-normal-400', '2-peak-normal-400'),
-    ('peak-100-normal-400', 'peak-100-normal-400'),
-    ('2-peak-uneven-normal-400', '2-peak-uneven-normal-400'),
-    ('peak-50-normal-400', 'peak-50-normal-400'),
-    ('4-peak-normal-400', '4-peak-normal-400'),
-    ('s-block-normal-400', 's-block-normal-400'),
-    ('custom', 'Custom')
-)
-# yapf: enable
-
-GAUSS = 'normal'
-
-
 class FlowCytometryHistogram(models.Model):
+    facs = models.ForeignKey(FlowCytometry, related_name='histogram')
+    data = models.TextField(null=True, blank=True)
+
+
+class FlowCytometryHistogramMapping(models.Model):
     sample_prep = models.ForeignKey(
         FlowCytometrySamplePrep,
-        related_name='histograms'
+        related_name='histogram_mapping'
     )
     strain_protocol = models.ForeignKey(
         StrainTreatment,
-        related_name='histograms'
+        related_name='histogram_mapping'
     )
-    kind = models.CharField(max_length=50, choices=HISTOGRAMS, default=GAUSS)
-    fixed_data = models.TextField(null=True, blank=True)
-    live_data = models.TextField(null=True, blank=True)
+    fixed_data = models.ForeignKey(
+        FlowCytometryHistogram,
+        related_name='fixed_histogram_mapping',
+        blank=True,
+        null=True
+    )
+    live_data = models.ForeignKey(
+        FlowCytometryHistogram,
+        related_name='live_histogram_mapping',
+        blank=True,
+        null=True
+    )
 
 
 admin.site.register(Course)

@@ -1451,7 +1451,7 @@ def create_facs_histograms(assignment, facs_sample):
     )
     for strain_protocol in strain_protocols:
         histogram, created = (
-            models.FlowCytometryHistogram.objects.get_or_create(
+            models.FlowCytometryHistogramMapping.objects.get_or_create(
                 sample_prep=facs_sample,
                 strain_protocol=strain_protocol,
             )
@@ -1471,7 +1471,7 @@ def facs_analyze(request):
     assignment = models.Assignment.objects.get(id=pk)
     facs, _ = models.FlowCytometry.objects.get_or_create(assignment=assignment)
 
-    instances = models.FlowCytometryHistogram.objects.filter(
+    histogram_mappings = models.FlowCytometryHistogramMapping.objects.filter(
         sample_prep__assignment=assignment
     ).order_by(
         'strain_protocol__strain', 'strain_protocol__treatment__drug__name',
@@ -1485,14 +1485,16 @@ def facs_analyze(request):
     if request.method == "POST" and 'continue' in request.POST:
         return redirect('common_assignments')
 
+    # Grouping HistogramMapping objects by cell_treatment,
+    # analysis, and condition
     grouped_histograms = []
     samples = models.FlowCytometrySamplePrep.objects.filter(
         assignment=assignment
     )
     for sample in samples.iterator():
-        form_list = [
+        filtered_list = [
             instance
-            for instance in instances
+            for instance in histogram_mappings
             if instance.sample_prep.analysis == sample.analysis and
             instance.sample_prep.condition == sample.condition
         ]
@@ -1500,23 +1502,31 @@ def facs_analyze(request):
             grouped_histograms.append(
                 (
                     'Fixed', sample.get_analysis_display, sample.condition,
-                    form_list
+                    filtered_list
                 )
             )
         if sample.live:
             grouped_histograms.append(
                 (
                     'Live', sample.get_analysis_display, sample.condition,
-                    form_list
+                    filtered_list
                 )
             )
 
-    histogram_data = {}
-    for instance in instances:
-        histogram_data[instance.id] = {
-            'fixed': instance.fixed_data,
-            'live': instance.live_data
+    selected_histograms_mapping = {}
+    for instance in histogram_mappings:
+        selected_histograms_mapping[instance.id] = {
+            'fixed': instance.fixed_data.data if instance.fixed_data else None,
+            'live': instance.live_data.data if instance.live_data else None
         }
+    # print selected_histograms_mapping
+    all_histograms = models.FlowCytometryHistogram.objects.exclude(
+        data__isnull=True
+    )
+    all_histogram_mapping = {
+        int(instance.id): instance.data
+        for instance in all_histograms
+    }
 
     variables = {
         'has_concentration': assignment.has_concentration,
@@ -1528,7 +1538,9 @@ def facs_analyze(request):
     return render_to_response(
         'instructor/facs_analyze.html',
         {
-            'histograms': json.dumps(histogram_data),
+            'histograms': json.dumps(selected_histograms_mapping),
+            'all_histograms_mapping': json.dumps(all_histogram_mapping),
+            'all_histograms': all_histograms,
             'access': json.dumps(assignment.access),
             'x_upper_bound': json.dumps(facs.xrange),
             'tick_values': json.dumps(facs.tick_values),
@@ -1584,15 +1596,35 @@ def submit_histogram(request):
     """
     Save or remove drawn histogram
     """
-    instance_id = request.POST.get('pk')
+    mapping_id = request.POST.get('mapping_pk')
     cell_treatment = request.POST.get('cell_treatment')
     # if no points data is None
     data = request.POST.get('points', default=None)
-    instance = get_object_or_404(models.FlowCytometryHistogram, pk=instance_id)
-    if cell_treatment == 'live':
-        instance.live_data = data
+    histogram_pk = request.POST.get('histogram_pk', default=None)
+
+    new_histogram = None
+    # If existing histogram was selected
+    if histogram_pk:
+        new_histogram = get_object_or_404(
+            models.FlowCytometryHistogram,
+            pk=histogram_pk
+        )
+    # Create new histogram
+    elif data:
+        pk = request.session['assignment_id']
+        facs = get_object_or_404(models.FlowCytometry, assignment__id=pk)
+        new_histogram = models.FlowCytometryHistogram(facs=facs, data=data)
+        new_histogram.save()
+
+    # Find HistogramMapping object and update it
+    instance = get_object_or_404(
+        models.FlowCytometryHistogramMapping,
+        pk=mapping_id
+    )
+    if cell_treatment == 'Live':
+        instance.live_data = new_histogram
     else:
-        instance.fixed_data = data
+        instance.fixed_data = new_histogram
     instance.save()
 
     return HttpResponse('complete')
