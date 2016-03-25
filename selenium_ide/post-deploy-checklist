@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://starcellbio.mit.edu/" />
+<title>post-deploy-checklist</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">post-deploy-checklist</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/accounts/signup/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=id_account_type_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_email</td>
+	<td>javascript{&quot;test-user&quot; + (new Date).getTime() + &quot;@example.com&quot;}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_password1</td>
+	<td>asdfasdf</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_password2</td>
+	<td>asdfasdf</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id_course_code</td>
+	<td>usability</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.primaryAction.auth_submit_button</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
