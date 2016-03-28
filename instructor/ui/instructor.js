@@ -423,9 +423,7 @@ $(function() {
                 $(canvas).siblings('div').css('display', 'none');
             }
         });
-
-        load_sketch_tool();
-
+        load_sketch_tool(x_upper_bound, tick_values);
     }
 
 });

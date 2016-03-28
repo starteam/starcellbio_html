@@ -1322,9 +1322,7 @@ def facs_setup(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
 
-    facs, created = models.FlowCytometry.objects.get_or_create(
-        assignment=assignment
-    )
+    facs, _ = models.FlowCytometry.objects.get_or_create(assignment=assignment)
     FlowCytometryForm = modelform_factory(
         models.FlowCytometry,
         exclude=['assignment']
@@ -1471,6 +1469,7 @@ def facs_analyze(request):
     """
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
+    facs, _ = models.FlowCytometry.objects.get_or_create(assignment=assignment)
 
     instances = models.FlowCytometryHistogram.objects.filter(
         sample_prep__assignment=assignment
@@ -1531,6 +1530,8 @@ def facs_analyze(request):
         {
             'histograms': json.dumps(histogram_data),
             'access': json.dumps(assignment.access),
+            'x_upper_bound': json.dumps(facs.xrange),
+            'tick_values': json.dumps(facs.tick_values),
             'histogram_groups': grouped_histograms,
             'variables': variables,
             'assignment_name': assignment.name,
