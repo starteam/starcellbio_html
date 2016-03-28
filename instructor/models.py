@@ -217,6 +217,20 @@ FACS_KINDS = (
     ('', 'Select Analysis'), ('Anti', 'Antibody-labeling'),
     ('Dye', 'Dye/Stain')
 )
+LINEAR = 'linear'
+LOG = 'log'
+FACS_SCALE_TYPES = ((LINEAR, 'Linear'), (LOG, 'Logarithmic Scale'))
+
+
+class FlowCytometry(models.Model):
+    assignment = models.ForeignKey(Assignment, related_name='flow_cytometry')
+    scale = models.CharField(
+        max_length=50,
+        default=LINEAR,
+        choices=FACS_SCALE_TYPES
+    )
+    xrange = models.IntegerField(default=200)
+    tick_values = models.CharField(max_length=50, default='50,100,150')
 
 
 class FlowCytometrySamplePrep(models.Model):
