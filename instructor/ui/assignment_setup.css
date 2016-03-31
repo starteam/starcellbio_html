@@ -618,3 +618,27 @@ input[type="checkbox"].disabled {
     box-shadow: 0 0 2px 1px grey;
     color:  white;
 }
+.scb_ab_s_draw_histogram_view, .scb_ab_s_select_histogram_view{
+    height: 500px;
+}
+.scb_ab_s_canvas_wrapper{
+    display: inline-block;
+    margin: 10px;
+}
+.scb_ab_s_canvas_library{
+    margin: 30px 30px 0;
+    text-align: center;
+    height: 350px;
+    border: 1px solid lightgrey;
+    overflow: scroll;
+    box-shadow: inset 2px 2px 5px grey;
+}
+.scb_ab_s_save_btn_position{
+    right: 30px;
+    position:absolute;
+    bottom: 30px;
+}
+.scb_ab_s_histogram_selected{
+    border: 1px solid indianred;
+    box-shadow: 2px 2px 5px indianred;
+}
