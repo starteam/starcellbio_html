@@ -1,12 +1,14 @@
 /**
  * Sketching tool
  */
+X_ORIGIN = 40;
+Y_ORIGIN = 260;
 X_AXIS_LENGTH_PX = 520;
 Y_AXIS_LENGTH_PX = 240;
 X_AXIS_LENGTH_PX = 560;
 Y_AXIS_LARGEST_PX = 260;
 
-function draw_graph_background(){
+function draw_graph_background(x_upper_bound, tick_values){
     var x, y;
      /* grid */
     for (x = 0.5; x < 600; x += 20) {
@@ -16,22 +18,36 @@ function draw_graph_background(){
         draw_line(0, y, 600, y, '#eee');
     }
     /* x axis */
-    draw_line(40, 260, 560, 260);
+    draw_line(X_ORIGIN, Y_ORIGIN, 560, Y_ORIGIN);
     /* y axis */
-    draw_line(40, 20, 40, 260);
+    draw_line(X_ORIGIN, 20, X_ORIGIN, Y_ORIGIN);
     /* arrows */
-    draw_line(40, 20, 30, 30);
-    draw_line(40, 20, 50, 30);
+    draw_line(X_ORIGIN, 20, 30, 30);
+    draw_line(X_ORIGIN, 20, 50, 30);
 
-    draw_line(550, 250, 560, 260);
-    draw_line(550, 270, 560, 260);
+    draw_line(550, 250, 560, Y_ORIGIN);
+    draw_line(550, 270, 560, Y_ORIGIN);
+
+    /* Calculating axis labels */
+    tick_values=tick_values.split(",").map(function(x){
+        return parseInt(x)
+    });
+    x_upper_bound = parseInt(x_upper_bound);
+    _.each(tick_values, function(value, index){
+        var x_coor = X_AXIS_LENGTH_PX * value / x_upper_bound + X_ORIGIN;
+        var y_coor = Y_AXIS_LARGEST_PX + 13;
+        var text_obj = new paper.PointText(new paper.Point(x_coor, y_coor));
+        text_obj.content = value;
+        // need to subtract half of the width from x
+        text_obj.position.x -= text_obj.bounds.width / 2;
+    });
     paper.view.update();
 }
 
 function load_sketch_tool(x_upper_bound, tick_values) {
     paper.setup('myCanvas');
 
-    draw_graph_background();
+    draw_graph_background(x_upper_bound, tick_values);
 
     var path;
     var tool = new Tool();
@@ -41,20 +57,6 @@ function load_sketch_tool(x_upper_bound, tick_values) {
         strokeColor: 'lightgrey',
         strokeWidth: 2,
         visible: false
-    });
-
-    /* Calculating axis labels */
-    tick_values=tick_values.split(",").map(function(x){
-        return parseInt(x)
-    });
-    x_upper_bound = parseInt(x_upper_bound);
-    _.each(tick_values, function(value, index){
-        var x_coor = X_AXIS_LENGTH_PX * value / x_upper_bound;
-        var y_coor = Y_AXIS_LARGEST_PX + 13;
-        var text_obj = new paper.PointText(new paper.Point(x_coor, y_coor));
-        text_obj.content = value;
-        // need to subtract half of the width from x
-        text_obj.position.x -= text_obj.bounds.width / 2;
     });
 
 
