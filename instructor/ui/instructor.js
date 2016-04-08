@@ -360,7 +360,7 @@ $(function() {
       data['cell_treatment'] = $('.scb_ab_s_histogram_dialog').data('cell_treatment');
       data['mapping_pk'] = $('.scb_ab_s_histogram_dialog').data('pk');
       if ($(this).hasClass('scb_ab_f_save_histogram')) {
-        data['points'] = JSON.stringify(data_points);
+        data['points'] = JSON.stringify(getDataPoints());
       } else{
         data['histogram_pk'] = $('.scb_ab_s_histogram_selected').attr('id').match(/(\d+)$/)[0];
       }
@@ -444,6 +444,7 @@ $(function() {
       }
       if (data) {
         data = JSON.parse(data);
+        convertToCanvas(data);
         path = new Path();
         path.strokeColor = 'black';
         path.strokeWidth = '1';
@@ -469,6 +470,7 @@ $(function() {
       draw_line(20, 10, 20, 130);
       data = all_histograms_mapping[histogram_id];
       data = JSON.parse(data);
+      convertToCanvas(data);
       path = new Path();
       path.strokeColor = 'black';
       path.strokeWidth = '1';

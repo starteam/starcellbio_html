@@ -1519,7 +1519,6 @@ def facs_analyze(request):
             'fixed': instance.fixed_data.data if instance.fixed_data else None,
             'live': instance.live_data.data if instance.live_data else None
         }
-    # print selected_histograms_mapping
     all_histograms = models.FlowCytometryHistogram.objects.exclude(
         data__isnull=True
     )
