@@ -5,7 +5,7 @@ X_ORIGIN = 40;
 Y_ORIGIN = 260;
 X_AXIS_LENGTH_PX = 520;
 Y_AXIS_LENGTH_PX = 240;
-X_AXIS_LENGTH_PX = 560;
+X_AXIS_LARGEST_PX = 560;
 Y_AXIS_LARGEST_PX = 260;
 
 function draw_graph_background(x_upper_bound, tick_values){
@@ -36,10 +36,7 @@ function draw_graph_background(x_upper_bound, tick_values){
     _.each(tick_values, function(value, index){
         var x_coor = X_AXIS_LENGTH_PX * value / x_upper_bound + X_ORIGIN;
         var y_coor = Y_AXIS_LARGEST_PX + 13;
-        var text_obj = new paper.PointText(new paper.Point(x_coor, y_coor));
-        text_obj.content = value;
-        // need to subtract half of the width from x
-        text_obj.position.x -= text_obj.bounds.width / 2;
+        printText(x_coor, y_coor, value);
     });
     paper.view.update();
 }
@@ -128,4 +125,16 @@ function draw_line(x1 ,y1 ,x2 ,y2, color){
     var path = new Path.Line(new Point(x1, y1), new Point(x2, y2));
     path.strokeColor = color;
 
+}
+
+function nameXAxis(condition){
+    printText(X_ORIGIN + X_AXIS_LENGTH_PX, Y_ORIGIN + 25, condition);
+    paper.view.update();
+}
+/* Print PointText */
+function printText(x, y, value){
+    var text_obj = new paper.PointText(new paper.Point(x, y));
+    text_obj.content = value;
+    // need to subtract half of the width from x
+    text_obj.position.x -= text_obj.bounds.width / 2;
 }
