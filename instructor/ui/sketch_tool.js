@@ -1,15 +1,20 @@
 /**
  * Sketching tool
  */
-X_ORIGIN = 40;
+X_ORIGIN = 60;
 Y_ORIGIN = 260;
-X_AXIS_LENGTH_PX = 520;
-Y_AXIS_LENGTH_PX = 240;
-X_AXIS_LARGEST_PX = 560;
-Y_AXIS_LARGEST_PX = 260;
+
+X_AXIS_LAST_VALUE = 560;
+Y_AXIS_LAST_VALUE = 20;
+
+/* Last point on the axis in the direction of the arrow */
+X_AXIS_LENGTH_PX = X_AXIS_LAST_VALUE - X_ORIGIN;
+Y_AXIS_LENGTH_PX = Y_ORIGIN - Y_AXIS_LAST_VALUE;
+
+Y_AXIS_TICKS = [20, 40, 60, 80];
 
 function draw_graph_background(x_upper_bound, tick_values){
-    var x, y;
+    var x, y, x_axis_ticks;
      /* grid */
     for (x = 0.5; x < 600; x += 20) {
         draw_line(x, 0, x, 300, '#eee');
@@ -18,26 +23,33 @@ function draw_graph_background(x_upper_bound, tick_values){
         draw_line(0, y, 600, y, '#eee');
     }
     /* x axis */
-    draw_line(X_ORIGIN, Y_ORIGIN, 560, Y_ORIGIN);
+    draw_line(X_ORIGIN, Y_ORIGIN, X_AXIS_LAST_VALUE, Y_ORIGIN);
     /* y axis */
-    draw_line(X_ORIGIN, 20, X_ORIGIN, Y_ORIGIN);
-    /* arrows */
-    draw_line(X_ORIGIN, 20, 30, 30);
-    draw_line(X_ORIGIN, 20, 50, 30);
-
-    draw_line(550, 250, 560, Y_ORIGIN);
-    draw_line(550, 270, 560, Y_ORIGIN);
+    draw_line(X_ORIGIN, Y_ORIGIN - Y_AXIS_LENGTH_PX, X_ORIGIN, Y_ORIGIN);
+    /* y axis arrows */
+    draw_line(X_ORIGIN, Y_ORIGIN - Y_AXIS_LENGTH_PX, X_ORIGIN - 10, Y_AXIS_LAST_VALUE + 10);
+    draw_line(X_ORIGIN, Y_ORIGIN - Y_AXIS_LENGTH_PX, X_ORIGIN + 10, Y_AXIS_LAST_VALUE + 10);
+    /* x axis arrows */
+    draw_line(X_AXIS_LAST_VALUE - 10, Y_ORIGIN - 10, X_AXIS_LAST_VALUE, Y_ORIGIN);
+    draw_line(X_AXIS_LAST_VALUE - 10, Y_ORIGIN + 10, X_AXIS_LAST_VALUE, Y_ORIGIN);
 
     /* Calculating axis labels */
-    tick_values=tick_values.split(",").map(function(x){
+    x_axis_ticks = tick_values.split(",").map(function(x){
         return parseInt(x)
     });
     x_upper_bound = parseInt(x_upper_bound);
-    _.each(tick_values, function(value, index){
-        var x_coor = X_AXIS_LENGTH_PX * value / x_upper_bound + X_ORIGIN;
-        var y_coor = Y_AXIS_LARGEST_PX + 13;
+    var x_coor, y_coor;
+    _.each(x_axis_ticks, function(value){
+        x_coor = X_AXIS_LENGTH_PX * value / x_upper_bound + X_ORIGIN;
+        y_coor = Y_ORIGIN + 13;
         printText(x_coor, y_coor, value);
     });
+    _.each(Y_AXIS_TICKS, function(value){
+        x_coor = X_ORIGIN - 10;
+        y_coor = Y_ORIGIN - (Y_AXIS_LENGTH_PX * value / 100) + 5;
+        printText(x_coor, y_coor, value);
+    });
+    nameYAxis();
     paper.view.update();
 }
 
@@ -131,10 +143,16 @@ function nameXAxis(condition){
     printText(X_ORIGIN + X_AXIS_LENGTH_PX, Y_ORIGIN + 25, condition);
     paper.view.update();
 }
+function nameYAxis(){
+    var text = printText(X_ORIGIN - 45, Y_ORIGIN - Y_AXIS_LENGTH_PX / 2, "Number of cells (thousands)");
+    /* rotate clockwise */
+    text.rotate(270);
+}
 /* Print PointText */
 function printText(x, y, value){
     var text_obj = new paper.PointText(new paper.Point(x, y));
     text_obj.content = value;
     // need to subtract half of the width from x
     text_obj.position.x -= text_obj.bounds.width / 2;
+    return text_obj;
 }
