@@ -375,15 +375,21 @@ $(function() {
   });
 
   $(".add_histogram_btn").click(function () {
+    /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
+    /* Get name of the sample from the row itself */
     var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
+    /* cell_treatment, analysis, condition */
+    var sample_treatment  = $(this).data('sample_treatment');
+    var sample_treatment_array = sample_treatment.split(',');
     var instance_pk = row_id.match(/(\d+)$/)[0];
-    var cell_treatment = $(this).data('sample_treatment').split(',')[0];
     $('.scb_ab_f_sample_name').text(sample_name);
-    $('.scb_ab_f_treatment_text').text($(this).data('sample_treatment'));
+    $('.scb_ab_f_treatment_text').text(sample_treatment);
     $('.scb_ab_s_histogram_dialog')
-      .data({'cell_treatment': cell_treatment, 'pk': instance_pk})
+      .data({'cell_treatment': sample_treatment_array[0], 'pk': instance_pk})
       .css('visibility', 'visible');
+    /* Label x axis with condition name */
+    nameXAxis(sample_treatment_array[2]);
 
 
   });
