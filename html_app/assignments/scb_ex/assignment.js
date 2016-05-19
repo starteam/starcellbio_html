@@ -2169,22 +2169,50 @@ var __scb_sample_2 = {
         name: 'Whole Cell'
       }
     },
-
     facs_kinds: {
-      'Anti': {
-        name: 'Antibody-labeling ',
-        conditions: {
-          'His_488': {
-            name: 'His 488'
-          },
-          'FLAG_488': {
-            name: 'FLAG 488'
-          },
-          'proX_488': {
-            name: 'ProX 488'
-          },
-          'proY_488': {
-            name: 'ProY 488'
+      'Live': {
+        'Anti': {
+          name: 'Antibody-labeling ',
+          conditions: {
+            'His_488': {
+              name: 'His 488'
+            },
+            'FLAG_488': {
+              name: 'FLAG 488'
+            },
+            'proX_488': {
+              name: 'ProX 488'
+            },
+            'proY_488': {
+              name: 'ProY 488'
+            }
+          }
+        },
+        'Dye': {
+          name: 'Dye/Stain',
+          conditions: {
+            'EGFR': {
+              name: 'EGFR'
+            }
+          }
+        }
+      },
+      'Fixed': {
+        'Anti': {
+          name: 'Antibody-labeling ',
+          conditions: {
+            'His_488': {
+              name: 'His 488'
+            },
+            'FLAG_488': {
+              name: 'FLAG 488'
+            },
+            'proX_488': {
+              name: 'ProX 488'
+            },
+            'proY_488': {
+              name: 'ProY 488'
+            }
           }
         }
       }
@@ -2631,10 +2659,12 @@ var __scb_sample_2 = {
         }
       },
       facs: {
-        'ticks': [50, 100, 150],
-        'max': 200,
-        'scale': 'pseudo',
-        'dna': {
+        is_ab: true,
+        ab_parser: {
+          'ticks': [50, 100, 150],
+          'max': 200,
+          'scale': 'pseudo',
+          'dna': {
           'parser_simple': [
             {
               match: [],
@@ -2791,6 +2821,7 @@ var __scb_sample_2 = {
 
           ]
 
+        }
         }
       }
     }

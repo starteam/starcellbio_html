@@ -3,6 +3,10 @@ scb.components = scb.components || {};
 scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model, template) {
   var self = this;
 
+  if(model.is_ab){
+    model = model.ab_parser;
+  }
+
   if (scb.utils.isDefined(model.dna)) {
     self.dna = function(state) {
       var t = template;

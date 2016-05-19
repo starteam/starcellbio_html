@@ -41,9 +41,10 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function(element, event) {
   var cell_treatment_id = $(element).attr('cell_treatment_id');
   parsed.facs.is_cell_treatment_enabled[cell_treatment_id] = val;
   if (val === 'checked') {
-    $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function(e) {
-      scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
-    });
+    var $cell_treatment_radio_list = $(".scb_f_facs_cell_treatment_radio[data-map_key='"+cell_treatment_id+"_']");
+    if($cell_treatment_radio_list.length === 1){
+      scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio($cell_treatment_radio_list[0]);
+    }
   } else {
     /*want to remove the FacsLane*/
     var lanes = _.filter(parsed.facs.lanes_list.list, function(lane) {
@@ -51,7 +52,10 @@ scb.ui.static.FacsView.scb_f_facs_sample_active = function(element, event) {
     });
     _.each(lanes, function(lane) {
       parsed.facs.lanes_list.remove(lane.id);
+      parsed.facs.is_cell_treatment_live[cell_treatment_id + '_' + lane.id] = null;
+
     });
+    parsed.facs.is_cell_treatment_live[cell_treatment_id + '_'] = null;
   }
   parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
   scb.ui.static.MainFrame.refresh();
@@ -66,14 +70,29 @@ scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function(element, event
   }
   /* val is 'fixed' or 'live' */
   var val = $(element).val();
+  /* if lane does not exist equals to '' */
+  var lane_id = $(element).attr('lane_id');
   var cell_treatment_id = $(element).attr('cell_treatment_id');
   /* map_key is "cell_treatment.id_[lane.id]" */
-  var map_key = $(element).attr('map_key');
-  parsed.facs.is_cell_treatment_live[map_key] = val;
+  var map_key = $(element).attr('data-map_key');
+  if( parsed.facs.is_cell_treatment_live[map_key] !== val ){
+    /* if this lane already exists, want to set analysis type that is
+     * available for the selected cell treatment */
+    if(lane_id && parsed.assignment.template.model.facs.is_ab){
+      parsed.facs.lanes_list.get(lane_id).kind = _.keys(parsed.assignment.template.facs_kinds[val])[0];
+      parsed.facs.lanes_list.get(lane_id).conditions = null;
+    }
+     parsed.facs.is_cell_treatment_live[map_key] = val;
+    /* Check if there is only one slide_type for this cell treatment */
+    var analysis_types = _.keys(parsed.assignment.template.facs_kinds);
+    if(parsed.assignment.template.model.facs.is_ab){
+      analysis_types = _.keys(parsed.assignment.template.facs_kinds[val]);
+    }
+    if( analysis_types.length === 1){
+      scb.ui.static.FacsView.scb_f_facs_select_lysate_type($(element).val(analysis_types[0]));
+    }
+  }
 
-  $('.scb_f_facs_select_lysate_type', $(element).parent().parent()).each(function(e) {
-    scb.ui.static.FacsView.scb_f_facs_select_lysate_type(this);
-  });
   parsed.facs.prep_scroll = $('.scb_s_facs_samples_table').scrollTop();
   event = true;
   if (event) {
@@ -109,10 +128,15 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element, event) 
 
   /* Find a list of available conditions for this slide type */
   if (_.isEmpty(facs_kinds)) {
-    avail_conditions = _.keys(parsed.assignment.template.facs_kinds[slide_type].conditions);
+    if(parsed.assignment.template.model.facs.is_ab){
+      map_key = $(element).attr('data-map_key');
+      var live = parsed.facs.is_cell_treatment_live[map_key];
+      avail_conditions = _.keys(parsed.assignment.template.facs_kinds[live][slide_type].conditions);
+    }else{
+      avail_conditions = _.keys(parsed.assignment.template.facs_kinds[slide_type].conditions);
+    }
   } else {
-    avail_conditions = facs_kinds[slide_type];
-
+      avail_conditions = facs_kinds[slide_type];
   }
 
   /* Want to check if there are more (than already chosen) conditions available for this sample) */
@@ -156,8 +180,8 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element, event) 
     var cell_treatment_id = $(element).attr('cell_treatment_id');
     var map_key = cell_treatment_id + '_' + line.id;
     parsed.facs.is_cell_treatment_live[map_key] = parsed.facs.is_cell_treatment_live[cell_treatment_id + '_'];
-
-
+    /* want to reset cell_treatment value for the old map_key */
+     parsed.facs.is_cell_treatment_live[cell_treatment_id+'_'] = '';
   } else {
     parsed.facs.lanes_list.get(lane_id).kind = slide_type;
   }
@@ -177,31 +201,57 @@ scb.ui.static.FacsView.scb_f_facs_add_all_conditions = function(element, event) 
     return cell_treatment_id == lane.cell_treatment_id
   });
   var facs_kinds = parsed.assignment.template.facs_kinds;
-  _.each(_.keys(facs_kinds), function(kind) {
-    var conditions = _.keys(facs_kinds[kind].conditions);
+  if (parsed.assignment.template.model.facs.is_ab) {
+    _.each(_.keys(facs_kinds), function (cell_treatment) {
+      _.each(_.keys(facs_kinds[cell_treatment]), function (kind) {
+        var conditions = _.keys(facs_kinds[cell_treatment][kind].conditions);
 
-    _.each(conditions, function(condition) {
-      /* find if a lane exists with this condition */
-      var lane = _.find(lanes, function(lane) {
-        return lane.conditions === condition
-      });
-      if (typeof lane === 'undefined') {
-        parsed.facs.lanes_list.start({
-          kind: kind,
-          conditions: condition,
-          cell_treatment_id: cell_treatment_id,
-          experiment_id: parsed.experiment.id
+        _.each(conditions, function (condition) {
+          /* find if a lane exists with this condition */
+          var lane = _.find(lanes, function (lane) {
+            return lane.conditions === condition
+          });
+          if (typeof lane === 'undefined') {
+            lane = parsed.facs.lanes_list.start({
+              kind: kind,
+              conditions: condition,
+              cell_treatment_id: cell_treatment_id,
+              experiment_id: parsed.experiment.id,
+              live: cell_treatment
+            });
+            parsed.facs.is_cell_treatment_live[cell_treatment_id + '_' + lane.id] = cell_treatment;
+          }
         });
-      }
+      });
     });
-    /* want to remove any lanes that did not have condition selected */
-    var lanes_no_cond = _.filter(lanes, function(lane) {
-      return lane.conditions == null
+
+  } else {
+    _.each(_.keys(facs_kinds), function (kind) {
+      var conditions = _.keys(facs_kinds[kind].conditions);
+
+      _.each(conditions, function (condition) {
+        /* find if a lane exists with this condition */
+        var lane = _.find(lanes, function (lane) {
+          return lane.conditions === condition
+        });
+        if (typeof lane === 'undefined') {
+          parsed.facs.lanes_list.start({
+            kind: kind,
+            conditions: condition,
+            cell_treatment_id: cell_treatment_id,
+            experiment_id: parsed.experiment.id
+          });
+        }
+      });
     });
+  }
+  /* want to remove any lanes that did not have condition selected */
+  var lanes_no_cond = _.filter(lanes, function (lane) {
+    return lane.conditions == null
+  });
     _.each(lanes_no_cond, function(lane) {
       parsed.facs.lanes_list.remove(lane.id);
     });
-  });
   if (event) {
     scb.ui.static.MainFrame.refresh();
   }
@@ -223,9 +273,11 @@ scb.ui.static.FacsView.scb_f_facs_select_conditions = function(element, event) {
   var lane_id = $(element).attr('lane_id');
   var current_lane = parsed.facs.lanes_list.get(lane_id);
   var cell_treatment_id = $(element).attr('cell_treatment_id');
+  var map_key = cell_treatment_id + "_" + lane_id;
+  var live = parsed.facs.is_cell_treatment_live[map_key];
 
   var lanes_list = _.filter(parsed.facs.lanes_list.list, function(lane) {
-    return lane.kind == current_lane.kind && cell_treatment_id == lane.cell_treatment_id;
+    return lane.live === live && lane.kind == current_lane.kind && cell_treatment_id == lane.cell_treatment_id;
   });
 
   for (var index = 0; index < lanes_list.length; index++) {
@@ -1459,7 +1511,7 @@ scb.ui.static.FacsView.evaluate_chart = function(state) {
             }
             console.info(point);
           }
-          //if button depressed and there is a starting point 
+          //if button depressed and there is a starting point
           if (button == 1 && isNaN(from) && (state.facs.gate_count == 0)) {
 
             //                     console.info("SET FROM " + px);
@@ -1471,7 +1523,7 @@ scb.ui.static.FacsView.evaluate_chart = function(state) {
             //                     fromy = fromy > 90 ? 90: fromy;
             //                     from_point = {top: (e.clientY - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().top),
             //                         left: (e.clientX - $('.scb_s_facs_chart_wrapper', '.scb_s_facs_view').get(0).getBoundingClientRect().left) };
-            // 
+            //
             //                     var point = match(px, py);
             //                     point_to_edit = point;
 
