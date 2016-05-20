@@ -75,12 +75,19 @@ scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function(element, event
   var cell_treatment_id = $(element).attr('cell_treatment_id');
   /* map_key is "cell_treatment.id_[lane.id]" */
   var map_key = $(element).attr('data-map_key');
+
   if( parsed.facs.is_cell_treatment_live[map_key] !== val ){
     /* if this lane already exists, want to set analysis type that is
      * available for the selected cell treatment */
     if(lane_id && parsed.assignment.template.model.facs.is_ab){
-      parsed.facs.lanes_list.get(lane_id).kind = _.keys(parsed.assignment.template.facs_kinds[val])[0];
-      parsed.facs.lanes_list.get(lane_id).conditions = null;
+      var kind = _.keys(parsed.assignment.template.facs_kinds[val])[0];
+      var lane = parsed.facs.lanes_list.get(lane_id);
+      lane.live = val;
+      lane.kind = kind;
+      lane.conditions = null;
+      if (_.keys(parsed.assignment.template.facs_kinds[val][kind].conditions).length === 1){
+        lane.conditions = _.keys(parsed.assignment.template.facs_kinds[val][kind].conditions)[0];
+      }
     }
      parsed.facs.is_cell_treatment_live[map_key] = val;
     /* Check if there is only one slide_type for this cell treatment */
@@ -107,7 +114,7 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element, event) 
   if (parsed.redisplay) {
     alert("INVALID ELEMENT!");
   }
-
+  var template = parsed.assignment.template;
   var slide_type = $(element).attr('value');
   if (slide_type == '') {
     return;
@@ -128,12 +135,12 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element, event) 
 
   /* Find a list of available conditions for this slide type */
   if (_.isEmpty(facs_kinds)) {
-    if(parsed.assignment.template.model.facs.is_ab){
+    if(template.model.facs.is_ab){
       map_key = $(element).attr('data-map_key');
       var live = parsed.facs.is_cell_treatment_live[map_key];
-      avail_conditions = _.keys(parsed.assignment.template.facs_kinds[live][slide_type].conditions);
+      avail_conditions = _.keys(template.facs_kinds[live][slide_type].conditions);
     }else{
-      avail_conditions = _.keys(parsed.assignment.template.facs_kinds[slide_type].conditions);
+      avail_conditions = _.keys(template.facs_kinds[slide_type].conditions);
     }
   } else {
       avail_conditions = facs_kinds[slide_type];
@@ -183,7 +190,15 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element, event) 
     /* want to reset cell_treatment value for the old map_key */
      parsed.facs.is_cell_treatment_live[cell_treatment_id+'_'] = '';
   } else {
-    parsed.facs.lanes_list.get(lane_id).kind = slide_type;
+    var lane = parsed.facs.lanes_list.get(lane_id);
+    lane.kind = slide_type;
+    lane.conditions = null;
+    if (
+      template.model.facs.is_ab &&
+      _.keys(template.facs_kinds[lane.live][lane.kind].conditions).length === 1)
+    {
+        lane.conditions = _.keys(template.facs_kinds[lane.live][lane.kind].conditions)[0];
+    }
   }
   if (event) {
     scb.ui.static.MainFrame.refresh();
