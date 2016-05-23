@@ -84,7 +84,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
       return null;
     }
   }, scb.utils.noop);
-
+  /* Has value 'checked' for enabled, otherwise undefined */
   scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_enabled', {}, null, context);
   /* Values are 'fixed' or 'live' */
   scb.Utils.initialize_accessor_field(self, data, 'is_cell_treatment_live', {}, null, context);
@@ -92,10 +92,6 @@ scb.Facs = function scb_Facs(data, context, parent) {
   /* to save selected lane for each cell_treatment */
   scb.Utils.initialize_accessor_field(self, data, 'is_tab_selected', {}, null, context);
   self.rows_state = function(exp) {
-    var skip_placeholders = false;
-    if (_.keys(context.template.facs_kinds).length == 1 && _.keys(context.template.facs_kinds[Object.keys(context.template.facs_kinds)[0]].conditions).length == 1) {
-      skip_placeholders = true;
-    }
     var experiment = exp || self.parent.parent;
     var template = context.template;
     var grouped_rows = self.lanes_list.grouped_list;
@@ -113,22 +109,33 @@ scb.Facs = function scb_Facs(data, context, parent) {
            2) or in 'facs_kinds', that applies to all samples
          */
         var facs_kinds = e.treatment_list.list[0].facs;
+
         if (_.isEmpty(facs_kinds)) {
-          facs_kinds = template.facs_kinds;
-          _.each(_.keys(facs_kinds), function(a) {
-            _.each(_.keys(facs_kinds[a].conditions), function(c) {
-              avail_conditions.push(c);
+          if (template.model.facs.is_ab) {
+            facs_kinds = template.facs_kinds;
+            _.each(_.keys(facs_kinds), function (cell_treatment) {
+              _.each(_.keys(facs_kinds[cell_treatment]), function (type) {
+                _.each(_.keys(facs_kinds[cell_treatment][type].conditions), function (c) {
+                  avail_conditions.push(c);
+                });
+              });
             });
-          });
+          } else {
+            facs_kinds = template.facs_kinds;
+            _.each(_.keys(facs_kinds), function (type) {
+                _.each(_.keys(facs_kinds[type].conditions), function (c) {
+                  avail_conditions.push(c);
+                });
+            });
+          }
         } else {
           /* Make a list of all conditions available for this sample */
-          _.each(_.keys(facs_kinds), function(a) {
-            _.each(facs_kinds[a], function(c) {
+          _.each(_.keys(facs_kinds), function (a) {
+            _.each(facs_kinds[a], function (c) {
               avail_conditions.push(c);
             });
           });
         }
-
         var skip_placeholders = false;
         /* if there are more conditions available add a placeholder */
         if (chosen_conditions.length >= avail_conditions.length) {
@@ -150,9 +157,9 @@ scb.Facs = function scb_Facs(data, context, parent) {
             cell_treatment: e,
             lane: ee,
             display_sample: index == 0,
-            is_sample_enabled: self.is_cell_treatment_enabled[e.id],
+            is_sample_enabled: self.is_cell_treatment_enabled[e.id]? true: false,
             index: index,
-            is_valid: self.is_cell_treatment_enabled[e.id] && ee && ee.conditions,
+            is_valid: (self.is_cell_treatment_enabled[e.id] && ee && ee.conditions? true: false),
             live: self.is_cell_treatment_live[e.id + '_' + ee.id],
             is_tab_selected: self.is_tab_selected[e.id] === ee.id,
             more_conditions: !skip_placeholders
@@ -174,7 +181,7 @@ scb.Facs = function scb_Facs(data, context, parent) {
           row_type: 'new',
           display_sample: true,
           cell_treatment: e,
-          is_sample_enabled: self.is_cell_treatment_enabled[e.id],
+          is_sample_enabled: self.is_cell_treatment_enabled[e.id]? true: false,
           is_valid: false,
           live: self.is_cell_treatment_live[e.id + '_']
         })
@@ -189,31 +196,36 @@ scb.Facs = function scb_Facs(data, context, parent) {
         self.is_cell_treatment_live[e.id] = false;
       }
     });
-    _.each(rows, function(r, index, rows) {
+    _.each(rows, function (r, index, rows) {
       r.display_text = r.cell_treatment.format_row();
     });
-
-    _.each(rows, function(r, index, rows) {
-      var identifier = r.cell_treatment.identifier;
+    var has_fixed = context.template.model.facs.is_ab? false: true;
+    _.each(rows, function (r) {
       var facs_kinds = context.template.facs_kinds;
       var list = {
         'Live': [],
         'Fixed': []
       };
-      _.each(facs_kinds, function(obj, key) {
-        if (obj['Live'] && obj['Live'].indexOf(identifier) >= 0) {
-          r.has_live = true;
+      r.has_live = false;
+      r.has_fixed = has_fixed;
+      if ('Live' in facs_kinds) {
+        r.has_live = true;
+        _.each(facs_kinds['Live'], function (obj, key) {
           list['Live'].push(key);
-        }
-        if (obj['Fixed'] && obj['Fixed'].indexOf(identifier) >= 0) {
-          r.has_fixed = true;
+        });
+      }
+
+      if ('Fixed' in facs_kinds) {
+        r.has_fixed = true;
+        _.each(facs_kinds['Fixed'], function (obj, key) {
           list['Fixed'].push(key);
-        }
-      });
+        });
+      }
       r.lysate_types = list;
     });
 
-    rows = _.sortBy(rows, function(obj) {
+
+    rows = _.sortBy(rows, function (obj) {
       if (obj.kind == 'existing') {
         return obj.lane.order_id;
       } else {
