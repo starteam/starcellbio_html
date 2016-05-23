@@ -1,4 +1,4 @@
-from instructor.models import *
+from instructor.models import Assignment, WesternBlotBands
 import json
 
 
@@ -131,12 +131,15 @@ def compile(assignment_id):
     ret['template']['experiment_temperatures'] = experiment_temperatures(a)
 
     ret['template']['ui']['western_blot'] = format_table(a)
-    ret['template']['primary_anti_body'] = primary_anti_body(a)
-    ret['template']['secondary_anti_body'] = secondary_anti_body(a)
-    ret['template']['lysate_kinds'] = lysate_kinds(a)
     ret['template']['micro_kinds'] = micro_kinds(a)
 
-    ret['template']['model']['western_blot'] = generate_western_blot_model(a)
+    if a.has_wb:
+        ret['template']['primary_anti_body'] = primary_anti_body(a)
+        ret['template']['secondary_anti_body'] = secondary_anti_body(a)
+        ret['template']['lysate_kinds'] = lysate_kinds(a)
+        ret['template']['model']['western_blot'] = generate_western_blot_model(
+            a
+        )
     ret['template']['ui']['microscopy'] = {}
     ret['template']['ui']['microscopy'][
         'disable_blur'
@@ -147,19 +150,10 @@ def compile(assignment_id):
     ret['template']['model']['microscopy'] = micro_model(a)
     ret['template']['slide_parser'] = {'collection_ab': micro_kinds(a)}
     ret['template']['slides'] = generate_slides(a)
-    ret['template']['facs_kinds'] = facs_kinds(a)
-    ret['template']['model']['facs'] = facs_model(a)
-    return ret
-
-
-def csv_custom(data):
-    ret = []
-    import StringIO
-    import csv
-    f = StringIO.StringIO(data)
-    reader = csv.reader(f, delimiter=',')
-    for row in reader:
-        ret.append(row)
+    if a.has_fc:
+        ret['template']['facs_kinds'] = facs_kinds(a)
+        ret['template']['facs_histograms'] = facs_histograms(a)
+        ret['template']['model']['facs'] = facs_model(a)
     return ret
 
 
@@ -218,71 +212,91 @@ def format_table(assignment):
     return wb_table
 
 
-def facs_model(a):
-    ab_parser = []
-    for sp in a.facs_sample_prep.all():
-        for h in sp.histograms.all():
-            if h.enabled:
-                protocol_id = h.strain_protocol_id
-                kind = h.kind
-                custom_data = h.data
-                identifier = "SP_ID_{}".format(protocol_id)
-                analysis = sp.analysis
-                treatment = sp.treatment
-                condition = sp.condition
-                if kind == 'custom':
-                    custom_data = csv_custom(custom_data)
-                ab_parser.append(
+def facs_histograms(assignment):
+    histograms = {}
+    for sample_prep in assignment.facs_sample_prep.all():
+        for histogram_mapping in sample_prep.histogram_mapping.all():
+            if histogram_mapping.live_data:
+                histogram = histogram_mapping.live_data
+                histograms[int(histogram.id)] = json.loads(histogram.data)
+            if histogram_mapping.fixed_data:
+                histogram = histogram_mapping.fixed_data
+                histograms[int(histogram.id)] = json.loads(histogram.data)
+    return histograms
+
+
+def facs_model(assignment):
+    facs = assignment.flow_cytometry.first()
+    tick_values = [int(value) for value in facs.tick_values.split(',')]
+    ab_parser = {
+        'ticks': tick_values,
+        'max': facs.xrange,
+        'scale': facs.scale,
+        'dna': {}
+    }
+    simple_parser = []
+    for sample_prep in assignment.facs_sample_prep.all():
+        for mapping in sample_prep.histogram_mapping.all():
+            protocol_id = mapping.strain_protocol.id
+            identifier = "SP_ID_{}".format(protocol_id)
+            analysis = mapping.sample_prep.analysis
+            condition = mapping.sample_prep.condition
+            if mapping.sample_prep.live:
+                cell_treatment = 'Live'
+
+                simple_parser.append(
                     {
                         'identifier': identifier,
+                        'treatment': cell_treatment,
                         'analysis': analysis,
-                        'treatment': treatment,
                         'condition': condition,
-                        'kind': kind,
-                        'shape': kind,
-                        'custom_data': custom_data
+                        'histogram_id': mapping.live_data.id
                     }
                 )
+            if mapping.sample_prep.fixed:
+                cell_treatment = 'Fixed'
+
+                simple_parser.append(
+                    {
+                        'identifier': identifier,
+                        'treatment': cell_treatment,
+                        'analysis': analysis,
+                        'condition': condition,
+                        'histogram_id': mapping.fixed_data.id
+                    }
+                )
+    ab_parser['dna']['parser_simple'] = simple_parser
     return {'is_ab': True, 'ab_parser': ab_parser}
 
 
-def facs_kinds(a):
+def facs_kinds(assignment):
     ret = {}
-    for sp in a.facs_sample_prep.all():
-        treatment = sp.treatment
+    for sp in assignment.facs_sample_prep.all():
         analysis = sp.analysis
         condition = sp.condition or ''
 
-        if not ret.has_key(analysis):
-            ret[analysis] = {
-                'name': sp.get_analysis_display(),
-                'conditions': {
-                },
-                'Live': {},
-                'Fixed': {}
-            }
-        if not ret[analysis].has_key(treatment):
-            ret[analysis][treatment] = {}
-
-        for histogram in sp.histograms.all():
-            enabled = histogram.enabled
-            if enabled:
-                kind = histogram.kind
-                data = histogram.data
-                strain_protocol = histogram.strain_protocol
-                sp_id = 'SP_ID_{}'.format(strain_protocol.id)
-                ret[analysis][treatment][sp_id] = 1
-                if not ret[analysis]['conditions'].has_key(condition):
-                    ret[analysis]['conditions'][condition] = {
-                        'name': condition,
-                        'short_name': condition,
-                        'identity': {}
-                    }
-                ret[analysis]['conditions'][condition]['identity'][sp_id] = {
-                    'kind': kind,
-                    'data': data,
-                    'treatment': treatment
+        if sp.live:
+            if 'Live' not in ret:
+                ret['Live'] = {}
+            if analysis not in ret['Live']:
+                ret['Live'][analysis] = {
+                    'name': sp.get_analysis_display(),
+                    'conditions': {},
                 }
+            ret['Live'][analysis]['conditions'][condition] = {
+                'name': condition
+            }
+        if sp.fixed:
+            if 'Fixed' not in ret:
+                ret['Fixed'] = {}
+            if analysis not in ret['Fixed']:
+                ret['Fixed'][analysis] = {
+                    'name': sp.get_analysis_display(),
+                    'conditions': {},
+                }
+            ret['Fixed'][analysis]['conditions'][condition] = {
+                'name': condition
+            }
 
     return ret
 
@@ -295,7 +309,7 @@ def micro_model(a):
                 sp=sp,
                 protocol=i.strain_protocol_id
             )
-            if not key in ret:
+            if key not in ret:
                 ret[key] = {
                     'slides': [
                         {
@@ -381,12 +395,13 @@ def generate_western_blot_model(a):
 
 def gel_types(a):
     ret = []
-    if a.western_blot.has_gel_10:
-        ret.append('.10')
-    if a.western_blot.has_gel_12:
-        ret.append('.12')
-    if a.western_blot.has_gel_15:
-        ret.append('.15')
+    if a.has_wb:
+        if a.western_blot.has_gel_10:
+            ret.append('.10')
+        if a.western_blot.has_gel_12:
+            ret.append('.12')
+        if a.western_blot.has_gel_15:
+            ret.append('.15')
     return ret
 
 
@@ -395,7 +410,7 @@ def micro_kinds(a):
     for sp in a.microscopy_sample_prep.all():
         analysis = sp.analysis
         condition = sp.condition
-        if not ret.has_key(analysis):
+        if analysis not in ret:
             ret[analysis] = {
                 'name': analysis,
                 'conditions': {
@@ -406,7 +421,7 @@ def micro_kinds(a):
             'name': condition,
             'short_name': condition
         }
-        if not ret[analysis]['conditions'][condition].has_key('identifiers'):
+        if 'identifiers' not in ret[analysis]['conditions'][condition]:
             ret[analysis]['conditions'][condition]['identifiers'] = {}
         for p in sp.microscopy_images.all():
             ret[analysis]['identifiers'][
@@ -444,7 +459,7 @@ def primary_anti_body(assignment):
     western_blot = assignment.western_blot
     primary = {}
     for a in western_blot.antibodies.all():
-        if primary.has_key(a.primary):
+        if a.primary in primary:
             primary[a.primary].append(a.secondary)
         else:
             primary[a.primary] = [a.secondary]
@@ -475,7 +490,7 @@ def concentrations(assignment):
     for strain_protocol in assignment.strain_treatment.filter(enabled=True):
         drug = strain_protocol.treatment.drug
         concentration = drug.concentration
-        if not concentration is None:
+        if concentration is not None:
             ret[str(concentration)] = {
                 'name': u"{concentration} {unit}".format(
                     concentration=concentration,

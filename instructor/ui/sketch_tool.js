@@ -1,17 +1,7 @@
 /**
  * Sketching tool
  */
-X_ORIGIN = 60;
-Y_ORIGIN = 260;
 
-X_AXIS_LAST_VALUE = 560;
-Y_AXIS_LAST_VALUE = 20;
-
-/* Last point on the axis in the direction of the arrow */
-X_AXIS_LENGTH_PX = X_AXIS_LAST_VALUE - X_ORIGIN;
-Y_AXIS_LENGTH_PX = Y_ORIGIN - Y_AXIS_LAST_VALUE;
-
-Y_AXIS_TICKS = [20, 40, 60, 80];
 
 function draw_graph_background(x_upper_bound, tick_values){
     var x, y, x_axis_ticks;
@@ -46,7 +36,7 @@ function draw_graph_background(x_upper_bound, tick_values){
     });
     _.each(Y_AXIS_TICKS, function(value){
         x_coor = X_ORIGIN - 10;
-        y_coor = Y_ORIGIN - (Y_AXIS_LENGTH_PX * value / 100) + 5;
+        y_coor = Y_ORIGIN - (Y_AXIS_LENGTH_PX * value / Y_AXIS_LENGTH_VALUE) + 5;
         printText(x_coor, y_coor, value);
     });
     nameYAxis();
