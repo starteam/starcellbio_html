@@ -167,9 +167,11 @@ function getDataPoints(){
 }
 /*Converts normal points to Canvas's point of reference
 * where origin is at top-left */
-function convertToCanvas(data){
-    _.each(data, function(point){
-      point[0] += X_ORIGIN;
-      point[1] = Y_ORIGIN - point[1];
+function convertToCanvas(data) {
+    return _.map(data, function (point) {
+        var canvas_point=[];
+        canvas_point[0] = point[0] + X_ORIGIN;
+        canvas_point[1] = Y_ORIGIN - point[1];
+        return canvas_point;
     });
-  }
+}

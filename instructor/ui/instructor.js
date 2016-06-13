@@ -425,7 +425,7 @@ $(function() {
   if (typeof(histograms) !== 'undefined') {
     var canvas_list = $("[id|='canvas']");
 
-    var instance_id, path, data, row_id;
+    var instance_id, path, data, row_id, canvas_data;
 
     _.each(canvas_list, function (canvas) {
       // attribute id has the form 'canvas-live2'
@@ -444,11 +444,11 @@ $(function() {
       }
       if (data) {
         data = JSON.parse(data);
-        convertToCanvas(data);
+        canvas_data = convertToCanvas(data);
         path = new Path();
         path.strokeColor = 'black';
         path.strokeWidth = '1';
-        _.each(data, function (point) {
+        _.each(canvas_data, function (point) {
           path.add(new Point(point[0] / 3, point[1] / 3))
         });
         paper.view.update();
@@ -470,11 +470,11 @@ $(function() {
       draw_line(20, 10, 20, 130);
       data = all_histograms_mapping[histogram_id];
       data = JSON.parse(data);
-      convertToCanvas(data);
+      canvas_data = convertToCanvas(data);
       path = new Path();
       path.strokeColor = 'black';
       path.strokeWidth = '1';
-      _.each(data, function (point) {
+      _.each(canvas_data, function (point) {
         path.add(new Point(point[0] / 2, point[1] / 2))
       });
 
