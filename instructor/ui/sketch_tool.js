@@ -156,3 +156,22 @@ function printText(x, y, value){
     text_obj.position.x -= text_obj.bounds.width / 2;
     return text_obj;
 }
+
+/* Translate data points to normal coordinate system */
+function getDataPoints(){
+    var correct_points = [];
+    _.each(data_points, function(point) {
+        correct_points.push([point[0] - X_ORIGIN , Y_ORIGIN - point[1]]);
+    });
+    return correct_points;
+}
+/*Converts normal points to Canvas's point of reference
+* where origin is at top-left */
+function convertToCanvas(data) {
+    return _.map(data, function (point) {
+        var canvas_point=[];
+        canvas_point[0] = point[0] + X_ORIGIN;
+        canvas_point[1] = Y_ORIGIN - point[1];
+        return canvas_point;
+    });
+}
