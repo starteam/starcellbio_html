@@ -79,6 +79,7 @@ javascripts:
   - js/plugins/anchor/plugin.min.js
   - js/plugins/legacyoutput/plugin.min.js
   - js/plugins/visualchars/plugin.min.js
+  - constants.js
   - components/FACSModelFactory.js
   - instructor/gen/instructor_microscopy_page3.soy.js
   - ui/MicroscopyView.js
@@ -202,7 +203,7 @@ javascripts:
   - assignments/microscopy_usability/assignment.js
   - master_model.js
   - google-analytics.js
-  
+
 css:
   - js/skins/lightgray/skin.min.css
   - assignments/scb_ex/gen/addmultipledialog.gss.css

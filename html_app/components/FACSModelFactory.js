@@ -9,58 +9,90 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
   if (scb.utils.isDefined(model.dna)) {
     self.dna = function(state) {
-      var t = template;
       var m = model.dna;
-      if (m.parser_simple) {
-        var facs_lane = state.facs_lane;
-        var cell_treatment = facs_lane.cell_treatment;
-        var drug_treatments = cell_treatment.treatment_list.list;
-        var duration = drug_treatments[0].duration;
-        var shape = '';
-        var facs_state = {
-          cell_line: function(str) {
-            return str == cell_treatment.cell_line
-          },
-          temperature: function(str) {
-            return str == drug_treatments[0].temperature
-          },
-          condition: function(str) {
-            return str == facs_lane.conditions;
-          },
-          duration: function(str) {
-            return str == duration;
-          },
-          drug_id: function(str) {
-            var any = false;
-            _.each(drug_treatments, function(dt) {
-              _.each(dt.drug_list.list, function(drug) {
-                any |= (drug.drug_id == str);
-              });
-            });
-            return any;
-          }
-        }
+      if (template.model.facs.is_ab) {
+        if (m.parser_simple) {
+          var facs_lane = state.facs_lane;
+          var cell_treatment = facs_lane.cell_treatment;
+          var facs_state = {
+            identifier: function (str) {
+              return str == cell_treatment.identifier;
+            },
+            treatment: function (str) {
+              return str == facs_lane.live;
+            },
+            analysis: function (str) {
+              return str == facs_lane.kind;
+            },
+            condition: function (str) {
+              return str == facs_lane.conditions;
+            }
+          };
+          /* Iterating over the rules */
+          var matching_rule = _.find(m.parser_simple, function (rule) {
 
-        _.each(m.parser_simple, function(rule) {
-          if (rule.match.length == 0) {
-            shape = rule.shape;
-          } else {
             var matches = true;
-            _.each(rule.match, function(property) {
-              if (facs_state[property]) {
-                matches &= facs_state[property](rule[property]);
-              } else {
-                console.info("UNDEFINED PROPERTY: " + property);
-              }
+            _.each(facs_state, function (matchFunc, property) {
+              matches &= matchFunc(rule[property]);
             });
-            if (matches) {
-              shape = rule.shape;
+            return matches;
+
+          });
+          state.data_points = template.facs_histograms[matching_rule.histogram_id];
+          state.shape = 'ab';
+          self.shape_to_data(state);
+        }
+      } else {
+        if (m.parser_simple) {
+          facs_lane = state.facs_lane;
+          cell_treatment = facs_lane.cell_treatment;
+          var drug_treatments = cell_treatment.treatment_list.list;
+          var duration = drug_treatments[0].duration;
+          var shape = '';
+          facs_state = {
+            cell_line: function (str) {
+              return str == cell_treatment.cell_line
+            },
+            temperature: function (str) {
+              return str == drug_treatments[0].temperature
+            },
+            condition: function (str) {
+              return str == facs_lane.conditions;
+            },
+            duration: function (str) {
+              return str == duration;
+            },
+            drug_id: function (str) {
+              var any = false;
+              _.each(drug_treatments, function (dt) {
+                _.each(dt.drug_list.list, function (drug) {
+                  any |= (drug.drug_id == str);
+                });
+              });
+              return any;
             }
           }
-        });
-        state.shape = shape;
-        self.shape_to_data(state);
 
+          _.each(m.parser_simple, function (rule) {
+            if (rule.match.length == 0) {
+              shape = rule.shape;
+            } else {
+              var matches = true;
+              _.each(rule.match, function (property) {
+                if (facs_state[property]) {
+                  matches &= facs_state[property](rule[property]);
+                } else {
+                  console.info("UNDEFINED PROPERTY: " + property);
+                }
+              });
+              if (matches) {
+                shape = rule.shape;
+              }
+            }
+          });
+          state.shape = shape;
+          self.shape_to_data(state);
+        }
       }
     // here we need to compute how this actually works
     /* I think:
@@ -214,7 +246,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
         return sign * y + 1; // erf(-x) = -erf(x);
       }
 
-
+      var parameters = template.model.facs.is_ab? template.model.facs.ab_parser : template.model.facs;
       function roundData(input) {
         var round_number = 10000;
         for (var index = 0; index < input.length; index++) {
@@ -271,6 +303,19 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
       }
 
+      /**
+       * Take data point from drawn graph in px
+       * and rescale according to coordinate system values
+       * @param input - List of points
+       */
+      function rescaleData(input){
+        return _.map(input, function(point) {
+          var new_point = [];
+          new_point[0] = point[0] * parameters.max / X_AXIS_LENGTH_PX;
+          new_point[1] = point[1] * Y_AXIS_LENGTH_VALUE / Y_AXIS_LENGTH_PX;
+          return new_point;
+        });
+      }
 
       var options = {
         series: {
@@ -291,11 +336,11 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
           show: true,
           color: '#000000',
           min: 0,
-          max: template.model.facs.max ? template.model.facs.max : 150,
-          ticks: template.model.facs.ticks ? template.model.facs.ticks : [50, 100],
+          max: parameters.max ? parameters.max : 150,
+          ticks: parameters.ticks ? parameters.ticks : [50, 100],
           tickLength: 0,
           transform: function(v) {
-            if (template.model.facs.scale && template.model.facs.scale.indexOf('log') > -1) {
+            if (parameters.scale && parameters.scale.indexOf('log') > -1) {
               return Math.log(v + 0.0001) / Math.LN10; /*move away from zero*/
             } else {
               return v;
@@ -303,9 +348,9 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
           },
 
           tickFormatter: function(v, axis) {
-            if (template.model.facs.scale && template.model.facs.scale.indexOf('pseudo') > -1) {
-              return "10^" + Math.round(v / template.model.facs.ticks[0]);
-            } else if (template.model.facs.scale && template.model.facs.scale.indexOf('log') > -1) {
+            if (parameters.scale && parameters.scale.indexOf('pseudo') > -1) {
+              return "10^" + Math.round(v / parameters.ticks[0]);
+            } else if (parameters.scale && parameters.scale.indexOf('log') > -1) {
               return "10^" + (Math.round(Math.log(v) / Math.LN10)).toString(); //(Math.round( Math.log(v)/Math.LN10)).toString().sup();},
             } else {
               return v;
@@ -321,7 +366,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
         yaxis: {
           show: true,
           color: '#000000',
-          min: template.model.facs.max ? 0 : -1,
+          min: parameters.max ? 0 : -1,
           max: 100,
           tickLength: 0,
           font: {
@@ -347,7 +392,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
           markings: [{
             xaxis: {
               from: 0,
-              to: template.model.facs.max ? template.model.facs.max : 150
+              to: parameters.max ? parameters.max : 150
             },
             yaxis: {
               from: 0,
@@ -387,11 +432,6 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
             {
               data: data
             },
-            //                        {label: 'phase 1', data:[[0,0.01],[0.8,0.01]],lines:{fill:false}},
-            //                        {label: 'phase 2', data:[[0.8,0.011],[1.2,0.011]],lines:{fill:false}},
-            //                        {label: 'phase 3', data:[[1.2,0.01],[1.8,0.01]],lines:{fill:false}},
-            //                        {label: 'phase 4', data:[[1.8,0.011],[2.3,0.011]],lines:{fill:false}}
-
           ],
           options: options
         };
@@ -438,6 +478,23 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
         };
       }
 
+      if (shape == 'ab') {
+        roundData(state.data_points);
+        var scaled_points = rescaleData(state.data_points);
+        var factor = 0.05;
+        _.each(scaled_points, function(point){
+          /* multiply y with random number from 0.95 to 1.05 */
+          point[1] *=(1 - factor + 2 * factor * Math.random());
+        });
+        state.data = {
+          data: [
+            {
+              data: scaled_points
+            }
+          ],
+          options: options
+        };
+      }
       if (('' + shape).toLowerCase() == 's-block') {
         var data = [];
         for (var x = 0; x < 3; x += .01) {

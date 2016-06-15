@@ -49,8 +49,6 @@ def publish_assignment(request):
         request.user == assignment.course.owner and
         assignment.access == 'private'
     ):
-        assignment.access = 'published'
-        assignment.save()
         course, created = backend.models.Course.objects.get_or_create(
             code=assignment.course.code
         )
@@ -64,6 +62,8 @@ def publish_assignment(request):
             access=assignment.access
         )
         backend_assignment.save()
+        assignment.access = 'published'
+        assignment.save()
     return HttpResponse('complete')
 
 
@@ -1665,6 +1665,13 @@ def is_assignment_complete(assignment):
         if assignment.has_wb and models.WesternBlotBands.objects.filter(
             antibody__western_blot__assignment=assignment
         ).exists():
+            can_preview = True
+        if (
+            assignment.has_fc and
+            models.FlowCytometryHistogramMapping.objects.filter(
+                sample_prep__assignment=assignment
+            ).exists()
+        ):
             can_preview = True
         # Add more techniques later when they are done
     return can_preview
