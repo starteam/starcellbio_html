@@ -69,31 +69,50 @@ scb.ui.static.FacsView.scb_f_facs_cell_treatment_radio = function(element, event
     alert("INVALID ELEMENT!");
   }
   /* val is 'fixed' or 'live' */
-  var val = $(element).val();
+  var live = $(element).val();
   /* if lane does not exist equals to '' */
   var lane_id = $(element).attr('lane_id');
   var cell_treatment_id = $(element).attr('cell_treatment_id');
   /* map_key is "cell_treatment.id_[lane.id]" */
-  var map_key = $(element).attr('data-map_key');
-
-  if( parsed.facs.is_cell_treatment_live[map_key] !== val ){
-    /* if this lane already exists, want to set analysis type that is
-     * available for the selected cell treatment */
-    if(lane_id && parsed.assignment.template.model.facs.is_ab){
-      var kind = _.keys(parsed.assignment.template.facs_kinds[val])[0];
-      var lane = parsed.facs.lanes_list.get(lane_id);
-      lane.live = val;
-      lane.kind = kind;
-      lane.conditions = null;
-      if (_.keys(parsed.assignment.template.facs_kinds[val][kind].conditions).length === 1){
-        lane.conditions = _.keys(parsed.assignment.template.facs_kinds[val][kind].conditions)[0];
+  var map_key = $(element).data('map_key');
+  var facs_kinds = parsed.assignment.template.facs_kinds;
+  if (parsed.facs.is_cell_treatment_live[map_key] !== live) {
+    if (parsed.assignment.template.model.facs.is_ab) {
+      /* Want to check if there are more options available for this cell
+       treatment, otherwise don't select */
+      var avail_conditions = [];
+      _.each(facs_kinds[live], function (value, analysis_type) {
+        _.each(value.conditions, function (condition) {
+          avail_conditions.push(condition);
+        });
+      });
+      /* Find number of existing lanes for this cell treatment */
+      var lanes = _.filter(parsed.facs.lanes_list.list, function (lane) {
+        return cell_treatment_id == lane.cell_treatment_id && lane.live == live
+      });
+      if (lanes.length >= avail_conditions.length) {
+        show_message("You've already selected this option.");
+        return;
+      }
+      /* if this lane already exists, want to set analysis type that is
+       * available for the selected cell treatment */
+      if (lane_id) {
+        var kind = _.keys(parsed.assignment.template.facs_kinds[live])[0];
+        var lane = parsed.facs.lanes_list.get(lane_id);
+        lane.live = live;
+        lane.kind = kind;
+        lane.conditions = null;
+        /* If there is only one condition, then set it here as well */
+        if (_.keys(parsed.assignment.template.facs_kinds[live][kind].conditions).length === 1) {
+          lane.conditions = _.keys(parsed.assignment.template.facs_kinds[live][kind].conditions)[0];
+        }
       }
     }
-     parsed.facs.is_cell_treatment_live[map_key] = val;
+    parsed.facs.is_cell_treatment_live[map_key] = live;
     /* Check if there is only one slide_type for this cell treatment */
     var analysis_types = _.keys(parsed.assignment.template.facs_kinds);
     if(parsed.assignment.template.model.facs.is_ab){
-      analysis_types = _.keys(parsed.assignment.template.facs_kinds[val]);
+      analysis_types = _.keys(parsed.assignment.template.facs_kinds[live]);
     }
     if( analysis_types.length === 1){
       scb.ui.static.FacsView.scb_f_facs_select_lysate_type($(element).val(analysis_types[0]));
@@ -121,10 +140,12 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element, event) 
   }
   var avail_conditions = [];
   var lane_id = $(element).attr('lane_id');
+  var map_key = $(element).data('map_key');
+  var live = parsed.facs.is_cell_treatment_live[map_key];
   /* cell_treatment_id identifies the sample (analysis, conditions are not involved) */
   var cell_treatment_id = $(element).attr('cell_treatment_id');
   var lanes = _.filter(parsed.facs.lanes_list.list, function(lane) {
-    return lane.kind == slide_type && cell_treatment_id == lane.cell_treatment_id
+    return lane.kind == slide_type && cell_treatment_id == lane.cell_treatment_id && lane.live == live
   });
 
   var cell_treatment_list = parsed.experiment.cell_treatment_list;
@@ -136,8 +157,6 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element, event) 
   /* Find a list of available conditions for this slide type */
   if (_.isEmpty(facs_kinds)) {
     if(template.model.facs.is_ab){
-      map_key = $(element).attr('data-map_key');
-      var live = parsed.facs.is_cell_treatment_live[map_key];
       avail_conditions = _.keys(template.facs_kinds[live][slide_type].conditions);
     }else{
       avail_conditions = _.keys(template.facs_kinds[slide_type].conditions);
@@ -148,22 +167,9 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element, event) 
 
   /* Want to check if there are more (than already chosen) conditions available for this sample) */
   if (lanes.length >= avail_conditions.length) {
-
-    $('html').css('overflow', 'hidden');
-    $('body').prepend(scb_experiment_setup.general_error_overlay());
-
-    $.jqDialog.alert("You've already selected this option.", function() {
-      $('html').css('overflow', 'visible');
-      $('.error_overlay').remove();
-      scb.ui.static.MainFrame.refresh();
-    /* callback function for 'OK' button*/
-    });
-    $('.jqDialog_header').remove();
-    $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-    $('#jqDialog_box').attr('role', 'alertdialog');
+    show_message("You've already selected this option.");
     return;
   }
-
 
   if (lane_id == '') { /*This means that the Lane does not 'exist' yet*/
     var line;
@@ -184,8 +190,7 @@ scb.ui.static.FacsView.scb_f_facs_select_lysate_type = function(element, event) 
         live: parsed.facs.is_cell_treatment_live[cell_treatment_id + '_']
       });
     }
-    var cell_treatment_id = $(element).attr('cell_treatment_id');
-    var map_key = cell_treatment_id + '_' + line.id;
+    map_key = cell_treatment_id + '_' + line.id;
     parsed.facs.is_cell_treatment_live[map_key] = parsed.facs.is_cell_treatment_live[cell_treatment_id + '_'];
     /* want to reset cell_treatment value for the old map_key */
      parsed.facs.is_cell_treatment_live[cell_treatment_id+'_'] = '';
@@ -297,22 +302,9 @@ scb.ui.static.FacsView.scb_f_facs_select_conditions = function(element, event) {
 
   for (var index = 0; index < lanes_list.length; index++) {
     if (lanes_list[index].conditions == lane_conditions) {
-      $('html').css('overflow', 'hidden');
-      $('body').prepend(scb_experiment_setup.general_error_overlay());
-
-      $.jqDialog.alert("You've already selected this condition option.", function() {
-        $('html').css('overflow', 'visible');
-        $('.error_overlay').remove();
-        /* callback function for 'OK' button*/
-        scb.ui.static.MainFrame.refresh();
-      });
-      $('.jqDialog_header').remove();
-      $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
-      $('#jqDialog_box').attr('role', 'alertdialog');
+      show_message("You've already selected this condition option.");
       return;
-
     }
-
   }
   current_lane.conditions = lane_conditions;
 
@@ -1745,3 +1737,19 @@ scb.ui.FacsView = function scb_ui_FacsView(gstate) {
     });
   }
 }
+
+function show_message(message) {
+  $('html').css('overflow', 'hidden');
+  $('body').prepend(scb_experiment_setup.general_error_overlay());
+
+  $.jqDialog.alert(message, function () {
+    $('html').css('overflow', 'visible');
+    $('.error_overlay').remove();
+    /* callback function for 'OK' button*/
+    scb.ui.static.MainFrame.refresh();
+  });
+  $('.jqDialog_header').remove();
+  $('#jqDialog_box').prepend(scb_experiment_setup.experiment_error());
+  $('#jqDialog_box').attr('role', 'alertdialog');
+}
+
