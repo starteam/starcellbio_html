@@ -441,9 +441,9 @@ $(function() {
       row_id = canvas.id.split('-')[1];
       paper.setup(canvas.id);
       /* x axis */
-      draw_line(13, 87, 187, 87);
+      draw_line(20, 87, 187, 87);
       /* y axis */
-      draw_line(13, 7, 13, 87);
+      draw_line(20, 7, 20, 87);
 
       if (canvas.id.indexOf('Live') > -1) {
         data = histograms[instance_id]['live'];
@@ -473,9 +473,9 @@ $(function() {
       paper.setup(canvas.id);
 
       /* x axis */
-      draw_line(20, 130, 260, 130);
+      draw_line(30, 130, 260, 130);
       /* y axis */
-      draw_line(20, 10, 20, 130);
+      draw_line(30, 10, 30, 130);
       data = all_histograms_mapping[histogram_id];
       data = JSON.parse(data);
       canvas_data = convertToCanvas(data);
