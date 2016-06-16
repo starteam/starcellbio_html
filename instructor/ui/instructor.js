@@ -418,7 +418,7 @@ $(function() {
 
   });
 
-  $('.scb_ab_s_histogram_dialog').draggable({handle: '.scb_ex_inner_dialog_title'});
+  $('.scb_ab_s_histogram_dialog').draggable({handle: '.scb_ab_s_dialog_title'});
 
   $('.scb_ab_f_select_histogram').click(function(){
     var canvas_library = $("[id|='library']");

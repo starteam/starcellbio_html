@@ -642,3 +642,33 @@ input[type="checkbox"].disabled {
     border: 1px solid indianred;
     box-shadow: 2px 2px 5px indianred;
 }
+
+.scb_ab_s_dialog_title {
+    font-size: 12pt;
+    color: white;
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 6px;
+    text-align: left;
+    cursor: move;
+    background-color: #27956c;
+    font-family: 'sourcesanspro-bold';
+}
+
+.scb_ab_s_dialog_title_close {
+    padding-top: 0;
+    float: right;
+    -webkit-appearance: none;
+    font-family: 'sourcesanspro-semibold';
+    outline: none;
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    font-size: 14pt;
+    color: transparent;
+    background: transparent;
+    background-image: url('../../../images/header/scb_close_button.png');
+    background-repeat: no-repeat;
+}
