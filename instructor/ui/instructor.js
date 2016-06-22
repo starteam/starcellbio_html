@@ -382,34 +382,8 @@ $(function() {
     });
   });
 
-  $(".add_histogram_btn").click(function () {
-    /* this btn has the id of the corresponding row */
-    var row_id = $(this).data('row_id');
-    /* Get name of the sample from the row itself */
-    var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
-    /* cell_treatment, analysis, condition */
-    var sample_treatment  = $(this).data('sample_treatment');
-    var sample_treatment_array = sample_treatment.split(',');
-    var instance_pk = row_id.match(/(\d+)$/)[0];
-    $('.scb_ab_f_sample_name').text(sample_name);
-    $('.scb_ab_f_treatment_text').text(sample_treatment);
-    $('.scb_ab_s_histogram_dialog')
-      .data({'cell_treatment': sample_treatment_array[0], 'pk': instance_pk})
-      .css('visibility', 'visible');
-    /* Label x axis with condition name */
-    nameXAxis(sample_treatment_array[2]);
 
 
-  });
-
-  /* Close draw histogram dialog */
-  $('.scb_ab_f_close_dialog').click(function () {
-    $('.scb_ab_s_histogram_dialog').css('visibility', 'hidden');
-    if (undostack.length > 0) {
-      undostack.pop().remove();
-      data_points = [];
-    }
-  });
   $(".scb_ab_s_histogram_tab_not_selected").click(function () {
     $(".scb_ab_s_draw_histogram_view").toggle();
     $(".scb_ab_s_select_histogram_view").toggle();
@@ -420,6 +394,7 @@ $(function() {
 
   $('.scb_ab_s_histogram_dialog').draggable({handle: '.scb_ab_s_dialog_title'});
 
+  /* Mark this histogram for selection from the library */
   $('.scb_ab_f_select_histogram').click(function(){
     var canvas_library = $("[id|='library']");
     _.each(canvas_library, function (canvas) {
@@ -443,6 +418,12 @@ $(function() {
     var canvas_list = $("[id|='canvas']");
 
     var instance_id, path, data, row_id, canvas_data;
+
+    mypapers = [];
+    mypapers[0] = new paper.PaperScope();
+    mypapers[1] = new paper.PaperScope();
+    mypapers[2] = new paper.PaperScope();
+    mypapers[3] = new paper.PaperScope();
 
     _.each(canvas_list, function (canvas) {
       // attribute id has the form 'canvas-live2'
@@ -475,6 +456,10 @@ $(function() {
         $(canvas).siblings('div').css('display', 'none');
       }
     });
+
+    /*
+      Setup the canvas library in the Histogram Tools window
+     */
     var canvas_library = $("[id|='library']");
     _.each(canvas_library, function (canvas) {
 
@@ -498,8 +483,76 @@ $(function() {
       paper.view.update();
 
     });
+
     load_sketch_tool(x_upper_bound, tick_values);
+
+
+    mypapers[3].setup("noise-canvas");
+
+    /*
+      Preview noise for sketched graph
+     */
+    $('.scb_ab_f_add_noise').click(function () {
+      /* Can preview noise, when graph has been plotted */
+      if (typeof(data_points) != 'undefined' && data_points.length > 0) {
+        if ($(".scb_ab_s_preview_canvas_div").css('display') == 'none') {
+          $(".scb_ab_s_preview_canvas_div").show();
+          $(".scb_ab_f_add_noise").text('HIDE PREVIEW');
+          mypapers[3].activate();
+          paper.project.clear();
+          paper.project.view.viewSize.width = CANVAS_NOISE_WIDTH;
+          paper.project.view.viewSize.height = CANVAS_NOISE_HEIGHT;
+          var x_fraction = CANVAS_NOISE_WIDTH / CANVAS_SKETCH_WIDTH;
+          var y_fraction = CANVAS_NOISE_HEIGHT / CANVAS_SKETCH_HEIGHT;
+          /* x axis */
+          draw_line(X_ORIGIN * x_fraction, Y_ORIGIN * y_fraction, X_AXIS_LAST_VALUE * x_fraction, Y_ORIGIN * y_fraction);
+          /* y axis */
+          draw_line(
+            X_ORIGIN * x_fraction,
+            (Y_ORIGIN - Y_AXIS_LENGTH_PX) * y_fraction,
+            X_ORIGIN * x_fraction,
+            Y_ORIGIN * y_fraction
+          );
+          var path = new Path();
+          path.strokeColor = 'black';
+          path.strokeWidth = '1';
+          var noisy_points = addNoise(data_points);
+          _.each(noisy_points, function (point) {
+            path.add(new Point(
+              point[0] * x_fraction,
+              point[1] * y_fraction))
+          });
+          paper.view.update();
+
+        } else {
+          $(".scb_ab_s_preview_canvas_div").hide();
+          $(".scb_ab_f_add_noise").text('SHOW PREVIEW');
+
+        }
+      }
+    });
+
   }
+
+  /* Open Histogram Tools window */
+  $(".add_histogram_btn").click(function () {
+    /* this btn has the id of the corresponding row */
+    var row_id = $(this).data('row_id');
+    /* Get name of the sample from the row itself */
+    var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
+    /* cell_treatment, analysis, condition */
+    var sample_treatment  = $(this).data('sample_treatment');
+    var sample_treatment_array = sample_treatment.split(',');
+    var instance_pk = row_id.match(/(\d+)$/)[0];
+    $('.scb_ab_f_sample_name').text(sample_name);
+    $('.scb_ab_f_treatment_text').text(sample_treatment);
+    $('.scb_ab_s_histogram_dialog')
+      .data({'cell_treatment': sample_treatment_array[0], 'pk': instance_pk})
+      .css('visibility', 'visible');
+    /* Label x axis with condition name */
+    mypapers[2].activate();
+    nameXAxis(sample_treatment_array[2]);
+  });
 
 
 });
