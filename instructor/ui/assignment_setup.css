@@ -672,3 +672,7 @@ input[type="checkbox"].disabled {
     background-image: url('../../../images/header/scb_close_button.png');
     background-repeat: no-repeat;
 }
+/* FACS setup histogram parameters */
+.scb_ab_s_canvas_axis_preview{
+    margin-left: 15px;
+}

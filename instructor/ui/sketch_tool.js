@@ -2,6 +2,7 @@
  * Sketching tool
  */
 
+AXIS_MARK_WIDTH = 3;
 
 function draw_graph_background(x_upper_bound, tick_values){
     var x, y, x_axis_ticks;
@@ -31,12 +32,14 @@ function draw_graph_background(x_upper_bound, tick_values){
     var x_coor, y_coor;
     _.each(x_axis_ticks, function(value){
         x_coor = X_AXIS_LENGTH_PX * value / x_upper_bound + X_ORIGIN;
-        y_coor = Y_ORIGIN + 13;
+        y_coor = Y_ORIGIN + 10;
+        draw_line(x_coor,Y_ORIGIN+AXIS_MARK_WIDTH, x_coor, Y_ORIGIN-AXIS_MARK_WIDTH);
         printText(x_coor, y_coor, value);
     });
     _.each(Y_AXIS_TICKS, function(value){
-        x_coor = X_ORIGIN - 10;
-        y_coor = Y_ORIGIN - (Y_AXIS_LENGTH_PX * value / Y_AXIS_LENGTH_VALUE) + 5;
+        x_coor = X_ORIGIN - 15;
+        y_coor = Y_ORIGIN - (Y_AXIS_LENGTH_PX * value / Y_AXIS_LENGTH_VALUE);
+        draw_line(X_ORIGIN + AXIS_MARK_WIDTH, y_coor, X_ORIGIN - AXIS_MARK_WIDTH, y_coor);
         printText(x_coor, y_coor, value);
     });
     nameYAxis();
@@ -142,8 +145,12 @@ function nameYAxis(){
 function printText(x, y, value){
     var text_obj = new paper.PointText(new paper.Point(x, y));
     text_obj.content = value;
-    // need to subtract half of the width from x
-    text_obj.position.x -= text_obj.bounds.width / 2;
+    // adjusting for the height of the text
+    text_obj.position.y += 5;
+    text_obj.style = {
+        fontSize: 12,
+        justification: 'center'
+    };
     return text_obj;
 }
 

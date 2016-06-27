@@ -35,6 +35,10 @@
             <div>{{ form.xrange }}</div>
             <div>{{ form.tick_values }}</div>
         </div>
+      <div style="display: block">
+         <canvas id="previewXAxis" class=" scb_ab_s_draw_histogram_canvas scb_ab_s_canvas_axis_preview"></canvas>
+      </div>
+
 
         <input type="submit"
                name="continue"
@@ -48,4 +52,7 @@
     <a href="{% url "facs_sample_prep" %}">
         <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
     </a>
+    <script type="text/javascript">
+    paper.install(window);
+    </script>
 {% endblock %}
