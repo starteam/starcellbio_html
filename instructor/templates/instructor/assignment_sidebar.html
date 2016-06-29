@@ -128,10 +128,15 @@
 
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Microscopy</div>
 
-        <div role="link" class='scb_ab_s_sidebar_page_link'>
-            <a class="scb_s_assignment_sidebar_link disabled" href="{% if new == 'False' %}
-                {% url "microscopy_sample_prep" assignment=assignment.id %}{% endif %}">
-                Edit Microscopy Sample Prep
+
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "micro_sample_prep" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
+            <a class="scb_s_assignment_sidebar_link {% if not pages.micro_sample_prep %} disabled {% endif %}"
+                {% if pages.micro_sample_prep %}
+                    href="{% url "microscopy_sample_prep"  %}"
+                {% endif %}
+            >
+                Sample Prep
             </a>
         </div>
 

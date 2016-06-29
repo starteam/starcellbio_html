@@ -5,8 +5,9 @@ from django.contrib import admin
 import auth.urls
 from instructor import common as instructor_common
 from tastypie.api import Api
-from backend.services import UserResource, CourseResource, AssignmentResource, StudentAssignmentResource
-
+from backend.services import (
+    UserResource, CourseResource, AssignmentResource, StudentAssignmentResource
+)
 
 admin.autodiscover()
 
@@ -265,7 +266,7 @@ urlpatterns += patterns(
 
     # Microscopy
     url(
-        r'^ab/assignments/microscopy_sample_prep/(?P<assignment>.+)$',
+        r'^ab/assignments/microscopy_sample_prep/$',
         instructor_common.microscopy_sample_prep,
         name="microscopy_sample_prep"
     ),
@@ -292,7 +293,6 @@ urlpatterns += patterns(
         name="facs_analyze"
     )
 )
-
 
 v1_api = Api(api_name='v1')
 v1_api.register(UserResource())

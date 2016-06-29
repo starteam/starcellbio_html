@@ -261,10 +261,6 @@ $(function() {
     $($(this).parent()).prop('title', text);
   });
 
-  /* Temporarily disable techniques */
-  $('.disabled').bind('click', false);
-  $("#id_has_micro").attr('disabled', true).parent().addClass('scb_ab_s_grayed');
-
   /* Publish assignment on the dashboard */
   $(".scb_ab_f_publish").click(function() {
     var message = "Please confirm that you would like to publish your assignment. " +

@@ -51,6 +51,10 @@ class Assignment(models.Model):
         max_length=25,
         default='facs_sample_prep'
     )
+    micro_last_enabled_page = models.CharField(
+        max_length=25,
+        default='micro_sample_prep'
+    )
     name = models.CharField(max_length=50)
     access = models.CharField(max_length=50, choices=ACCESS, default='private')
     basedOn = models.ForeignKey("Assignment", null=True, blank=True)

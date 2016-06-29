@@ -23,6 +23,7 @@ page_order = (
     'wb_band_intensity'
 )
 facs_pages = ('facs_sample_prep', 'facs_setup', 'facs_analyze')
+micro_pages = ('micro_sample_prep', 'micro_analyze')
 
 
 @login_required
@@ -96,6 +97,13 @@ def get_pages(assignment):
         pages[page] = enabled
         if page == assignment.last_page_name:
             enabled = False
+
+    if assignment.has_micro:
+        enabled = True
+        for page in micro_pages:
+            pages[page] = enabled
+            if page == assignment.micro_last_enabled_page:
+                enabled = False
 
     if assignment.has_fc:
         enabled = True
@@ -487,7 +495,7 @@ def find_next_view(assignment):
     if assignment.has_wb:
         next_view = 'western_blot_lysate_type'
     elif assignment.has_micro:
-        next_view = 'micro_sample_prep'
+        next_view = 'microscopy_sample_prep'
     elif assignment.has_fc:
         next_view = 'facs_sample_prep'
     return next_view
@@ -1229,9 +1237,10 @@ def western_blot_band_intensity(request):
     )
 
 
-def microscopy_sample_prep(request, assignment):
-    a = models.Assignment.objects.get(id=assignment)
-    message = ''
+def microscopy_sample_prep(request):
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
+
     MicroSamplePrepFormset = modelformset_factory(
         models.MicroscopySamplePrep,
         extra=1,
@@ -1239,30 +1248,62 @@ def microscopy_sample_prep(request, assignment):
         can_order=True,
         exclude=['assignment', 'order']
     )
-    if request.method == "POST":
+    if request.method == "POST" and assignment.access == 'private':
         formset = MicroSamplePrepFormset(request.POST)
-        formset.clean()
         if formset.is_valid():
-            message = "Thank you"
-            for form in formset.ordered_forms:
-                form.instance.order = form.cleaned_data['ORDER']
             entries = formset.save(commit=False)
-            for form in entries:
-                form.assignment = a
-                form.save()
-        else:
-            message = "Something went wrong"
+            for obj in formset.deleted_objects:
+                obj.delete()
+            for facs_sample in entries:
+                if facs_sample.id is None:
+                    facs_sample.assignment = assignment
+                facs_sample.save()
+            if 'continue' in request.POST:
+                if (
+                    micro_pages.index('micro_sample_prep') <=
+                    micro_pages.index(assignment.micro_last_enabled_page)
+                ):
+                    assignment.micro_last_enabled_page = 'micro_sample_prep'
+                assignment.save()
+                return redirect('microscopy_sample_prep')
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("microscopy_sample_prep")
 
+    extra_fields = 0
+    if (
+        'add' in request.POST or
+        not models.MicroscopySamplePrep.objects.filter(
+            assignment=assignment
+        ).exists()
+    ):
+        extra_fields = 1
+    MicroSamplePrepFormset = modelformset_factory(
+        models.MicroscopySamplePrep,
+        extra=extra_fields,
+        can_delete=True,
+        can_order=True,
+        exclude=['assignment']
+    )
+    back_url = (
+        'western_blot_band_intensity'
+        if assignment.has_wb else 'common_select_technique'
+    )
+
+    formset = MicroSamplePrepFormset(
+        queryset=models.MicroscopySamplePrep.objects.filter(
+            assignment=assignment
+        )
+    )
     return render_to_response(
-        'instructor/generic_formset.html',
+        'instructor/micro_sample_prep.html',
         {
-            'formset': MicroSamplePrepFormset(
-                queryset=models.MicroscopySamplePrep.objects.filter(
-                    assignment=assignment
-                )
-            ),
-            'message': message,
-            'assignment': a
+            'formset': formset,
+            'access': json.dumps(assignment.access),
+            'back_url': back_url,
+            'assignment_name': assignment.name,
+            'section_name': 'Microscopy',
+            'page_name': 'micro_sample_prep',
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
