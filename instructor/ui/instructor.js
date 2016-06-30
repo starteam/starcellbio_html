@@ -428,6 +428,15 @@ $(function() {
     $(this).addClass("scb_ab_s_histogram_selected");
   });
 
+  /* Facs Histogram setup view */
+  if ($("#previewXAxis").length){
+
+    var x_range = $("#id_xrange").val();
+    var ticks = $("#id_tick_values").val();
+    paper.setup('previewXAxis');
+    draw_graph_background(x_range, ticks);
+    paper.view.update();
+  }
 
   /* Facs analyze view */
   if (typeof(histograms) !== 'undefined') {
