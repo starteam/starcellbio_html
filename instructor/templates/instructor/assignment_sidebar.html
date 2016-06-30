@@ -139,6 +139,16 @@
                 Sample Prep
             </a>
         </div>
+        <div role="link" class='scb_ab_s_sidebar_page_link
+            {% if page_name == "micro_analyze" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
+            <a class="scb_s_assignment_sidebar_link {% if not pages.micro_analyze %} disabled {% endif %}"
+                {% if pages.micro_analyze %}
+                    href="{% url "microscopy_analyze"  %}"
+                {% endif %}
+            >
+                Analyze
+            </a>
+        </div>
 
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Flow Cytometry</div>
 
