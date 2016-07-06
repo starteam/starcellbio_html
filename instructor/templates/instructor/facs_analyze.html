@@ -10,6 +10,10 @@
                 Histogram Tools
             </h1>
             <div class="scb_ab_s_draw_histogram_view" >
+                <!-- Hidden 'noise preview' window -->
+                <div class="scb_ab_s_preview_canvas_div" style="display:none">
+                    <canvas id="noise-canvas" class="scb_ab_s_canvas_noise_preview"></canvas>
+                </div>
                 <div class="scb_ab_s_histogram_tabs">
                     <div class="scb_ab_s_histogram_tab_not_selected">Select Histogram</div>
                     <div class="scb_ab_s_histogram_tab_selected">Draw New Histogram</div>
@@ -20,8 +24,9 @@
                             <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
                             </div>
                         </div>
-                        <div class="scb_ab_s_row scb_ab_f_sample_name">
+                        <div class="scb_ab_s_row scb_ab_f_sample_name" style="display:inline-block">
                         </div>
+                      <button class="scb_s_gray_button scb_ab_f_add_noise scb_ab_s_add_noise_btn">SHOW PREVIEW</button>
                     </div>
                     <canvas id="myCanvas" class="scb_ab_s_draw_histogram_canvas"></canvas>
                     <button class="scb_s_gray_button scb_ab_f_save_histogram">

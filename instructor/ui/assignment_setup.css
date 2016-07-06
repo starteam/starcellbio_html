@@ -538,6 +538,13 @@ input[type="checkbox"].disabled {
     border: 1px gray solid;
     background: white;
 }
+.scb_ab_s_canvas_noise_preview{
+    margin: 25px;
+    width:450px;
+    height: 250px;
+    border: 1px gray solid;
+    background: white;
+}
 
 .scb_ab_s_histogram_dialog{
     position: fixed;
@@ -672,7 +679,23 @@ input[type="checkbox"].disabled {
     background-image: url('../../../images/header/scb_close_button.png');
     background-repeat: no-repeat;
 }
+
+.scb_ab_s_preview_canvas_div{
+    z-index: 1000;
+    position: absolute;
+    left:150px;
+    top: 150px;
+    width:500px;
+    height:300px;
+    background-color:darkgrey;
+}
+
+.scb_ab_s_add_noise_btn{
+    display: inline-block;
+    float: right;
+}
+
 /* FACS setup histogram parameters */
-.scb_ab_s_canvas_axis_preview{
+.scb_ab_s_canvas_axis_preview {
     margin-left: 15px;
 }

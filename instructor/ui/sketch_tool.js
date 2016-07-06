@@ -47,7 +47,8 @@ function draw_graph_background(x_upper_bound, tick_values){
 }
 
 function load_sketch_tool(x_upper_bound, tick_values) {
-    paper.setup('myCanvas');
+
+    mypapers[2].setup('myCanvas');
 
     draw_graph_background(x_upper_bound, tick_values);
 
@@ -64,7 +65,6 @@ function load_sketch_tool(x_upper_bound, tick_values) {
 
     function mouseDownEvent (event) {
         path = new Path();
-
         undostack.push(path);
         path.strokeColor = 'blue';
         path.strokeWidth = '3';
@@ -107,6 +107,7 @@ function load_sketch_tool(x_upper_bound, tick_values) {
     });
     /* Close draw histogram dialog */
     $('.scb_ab_f_close_dialog').click(function () {
+        $(".scb_ab_s_preview_canvas_div").hide();
         $('.scb_ab_s_histogram_dialog').css('visibility', 'hidden');
         reset_canvas();
     });
@@ -143,7 +144,7 @@ function nameYAxis(){
 }
 /* Print PointText */
 function printText(x, y, value){
-    var text_obj = new paper.PointText(new paper.Point(x, y));
+    var text_obj = new PointText(new Point(x, y));
     text_obj.content = value;
     // adjusting for the height of the text
     text_obj.position.y += 5;
@@ -172,3 +173,4 @@ function convertToCanvas(data) {
         return canvas_point;
     });
 }
+
