@@ -1,0 +1,93 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+
+    <div class="scb_ab_s_heading_div">
+        <div class="scb_ab_s_page_title">Analyze</div>
+        <div class='scb_ab_s_heading_description'>
+            Select the image(s) associated with each sample and its corresponding
+            microscopy analysis and conditions.
+        </div>
+    </div>
+    <div class="scb_ab_s_form_container">
+        <form method="post">{% csrf_token %}
+            <!-- Instances are grouped by analysis, condition-->
+            {% for analysis, condition, instance_list in image_groups %}
+
+                <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
+                    <div class="scb_ab_s_facs_condition_header">
+                        {{ analysis }}, {{ condition }}
+                    </div>
+                    {% if forloop.counter == 1 %}
+                      <div class="scb_ab_s_copy_checkbox_container">
+                        <div class="scb_ab_s_col_copy">
+                          Copy to another sample(s)
+                        </div>
+                      </div>
+                    {% endif %}
+                </div>
+
+                {% for instance in instance_list %}
+                    <div class="scb_ab_s_row">
+                        <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
+                        <div class="scb_ab_s_col_width_facs_sample">
+                            <div class="block-ellipsis" id="row-{{ cell_treatment }}_{{ instance.id }}">
+                                {{ instance.strain_protocol.strain.name }},
+                                {{ instance.strain_protocol.treatment.drug.name }}
+                                {% if variables.has_concentration and instance.strain_protocol.treatment.drug.concentration != None %}
+                                    , {{ instance.strain_protocol.treatment.drug.concentration }}
+                                    {{ instance.strain_protocol.treatment.drug.concentration_unit }}{% endif %}
+                                {% if variables.has_start_time and instance.strain_protocol.treatment.drug.start_time != None %}
+                                    , {{ instance.strain_protocol.treatment.drug.start_time }}
+                                    {{ instance.strain_protocol.treatment.drug.time_unit }}{% endif %}
+                                {% if variables.has_duration and instance.strain_protocol.treatment.drug.duration != None %}
+                                    , {{ instance.strain_protocol.treatment.drug.duration }}
+                                    {{ instance.strain_protocol.treatment.drug.duration_unit }}{% endif %}
+                                {% if variables.has_temperature %},
+                                    {{ instance.strain_protocol.treatment.temperature.degrees }} &#8451;{% endif %}
+                                {% if variables.has_collection_time %},
+                                    {{ instance.strain_protocol.treatment.collection_time.time }}
+                                    {{ instance.strain_protocol.treatment.collection_time.units }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- display selected histogram, small version  -->
+                    <div class="scb_ab_s_row">
+
+                    </div>
+                    <div class="scb_ab_s_row" style="padding: 10px 0 8px 0">
+
+                        <div class="scb_ab_s_col_width_number"></div>
+                        <div class="scb_ab_s_col_width_facs_sample">
+
+                            <img src="{{ instance.image.file.url }}" />
+                            <button type="button" class="scb_s_gray_button open_upload_window_btn"
+                                    data-row_id="row-{{ instance.id }}"
+                                    data-sample_treatment="{{ analysis }}, {{ condition }}">
+                                ADD IMAGE
+                            </button>
+                        </div>
+                        <div class="scb_ab_s_copy_checkbox_container">
+                            <div class="scb_ab_s_col_copy">
+                                <input type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            <input type="submit"
+                   name="continue"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE AND FINISH &nbsp; &#9654;">
+            <input type="submit"
+                   name="save"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE"/>
+        </form>
+    </div>
+    <a href="{% url "microscopy_sample_prep" %}">
+        <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+    </a>
+{% endblock %}

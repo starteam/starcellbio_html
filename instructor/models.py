@@ -195,22 +195,28 @@ class MicroscopySamplePrep(models.Model):
     has_filters = models.BooleanField(default=False)
 
 
-class MicroscopyImages(models.Model):
-    sample_prep = models.ForeignKey(
-        MicroscopySamplePrep,
-        related_name='microscopy_images'
-    )
-    strain_protocol = models.ForeignKey(
-        StrainTreatment,
-        related_name='microscopy_images'
-    )
-    order = models.IntegerField(default=0)
-    objective = models.CharField(max_length=50, default='N/A')
-    url = models.URLField(max_length=300)
-    image = models.FileField(
+class MicroscopyImage(models.Model):
+    assignment = models.ForeignKey(Assignment, related_name='image')
+    file = models.ImageField(
         max_length=300,
         upload_to='microscopy_images',
         null=True
+    )
+
+
+class MicroscopyImageMapping(models.Model):
+    sample_prep = models.ForeignKey(
+        MicroscopySamplePrep,
+        related_name='image_mapping'
+    )
+    strain_protocol = models.ForeignKey(
+        StrainTreatment,
+        related_name='image_mapping'
+    )
+    objective = models.CharField(max_length=50, default='N/A')
+    images = models.ManyToManyField(
+        MicroscopyImage,
+        related_name='image_mapping'
     )
     filter = models.CharField(max_length=50, choices=FIELDS, default=ALL)
 

@@ -270,7 +270,11 @@ urlpatterns += patterns(
         instructor_common.microscopy_sample_prep,
         name="microscopy_sample_prep"
     ),
-
+    url(
+        r'^ab/assignments/microscopy_analyze/$',
+        instructor_common.microscopy_analyze,
+        name="microscopy_analyze"
+    ),
     # Flow Cytometry
     url(
         r'^ab/assignments/submit_histogram/$',

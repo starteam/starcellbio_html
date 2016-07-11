@@ -1237,6 +1237,9 @@ def western_blot_band_intensity(request):
     )
 
 
+@assignment_selected
+@check_assignment_owner
+@login_required
 def microscopy_sample_prep(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
@@ -1257,17 +1260,20 @@ def microscopy_sample_prep(request):
             for facs_sample in entries:
                 if facs_sample.id is None:
                     facs_sample.assignment = assignment
-                facs_sample.save()
+                    facs_sample.save()
+                    create_image_mappings(assignment, facs_sample)
+                else:
+                    facs_sample.save()
             if 'continue' in request.POST:
                 if (
                     micro_pages.index('micro_sample_prep') <=
                     micro_pages.index(assignment.micro_last_enabled_page)
                 ):
-                    assignment.micro_last_enabled_page = 'micro_sample_prep'
+                    assignment.micro_last_enabled_page = 'micro_analyze'
                 assignment.save()
-                return redirect('microscopy_sample_prep')
+                return redirect('microscopy_analyze')
     elif request.method == "POST" and 'continue' in request.POST:
-        return redirect("microscopy_sample_prep")
+        return redirect("microscopy_analyze")
 
     extra_fields = 0
     if (
@@ -1309,44 +1315,77 @@ def microscopy_sample_prep(request):
     )
 
 
-def microscopy_images_edit(request, assignment, sample_prep, sp):
-    a = models.Assignment.objects.get(id=assignment)
-    sample = models.MicroscopySamplePrep.objects.get(id=sample_prep)
-    protocol = models.StrainProtocol.objects.get(id=sp)
-    MicroImagesFormset = modelformset_factory(
-        models.MicroscopyImages,
-        extra=1,
-        can_delete=True,
-        can_order=True,
-        exclude=['sample_prep', 'strain_protocol', 'order', 'image']
+def create_image_mappings(assignment, sample):
+    strain_protocols = models.StrainTreatment.objects.filter(
+        assignment=assignment
     )
-    message = ''
-    if request.method == "POST":
-        formset = MicroImagesFormset(request.POST)
-        formset.clean()
-        if formset.is_valid():
-            message = 'Thank you'
-            for form in formset.ordered_forms:
-                form.instance.order = form.cleaned_data['ORDER']
-            entries = formset.save(commit=False)
-            for form in entries:
-                form.sample_prep = sample
-                form.strain_protocol = protocol
-                form.save()
-        else:
-            message = "Something went wrong"
+    for strain_protocol in strain_protocols:
+        histogram, _ = (
+            models.MicroscopyImageMapping.objects.get_or_create(
+                sample_prep=sample,
+                strain_protocol=strain_protocol,
+            )
+        )
 
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def microscopy_analyze(request):
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
+
+    image_mappings = models.MicroscopyImageMapping.objects.filter(
+        sample_prep__assignment=assignment
+    ).order_by(
+        'strain_protocol__strain', 'strain_protocol__treatment__drug__name',
+        'strain_protocol__treatment__drug__concentration',
+        'strain_protocol__treatment__drug__start_time',
+        'strain_protocol__treatment__drug__duration',
+        'strain_protocol__treatment__temperature__degrees',
+        'strain_protocol__treatment__collection_time__time'
+    )
+
+    if request.method == "POST" and 'continue' in request.POST:
+        return redirect('common_assignments')
+
+    # Grouping ImageMapping objects by analysis and condition
+    grouped_images = []
+    sample_preps = models.MicroscopySamplePrep.objects.filter(
+        assignment=assignment
+    )
+
+    for sample_prep in sample_preps.iterator():
+        filtered_list = [
+            instance
+            for instance in image_mappings
+            if instance.sample_prep.analysis == sample_prep.analysis and
+            instance.sample_prep.condition == sample_prep.condition
+        ]
+
+        grouped_images.append(
+            (
+                sample_prep.analysis, sample_prep.condition, filtered_list
+            )
+        )
+
+    variables = {
+        'has_concentration': assignment.has_concentration,
+        'has_start_time': assignment.has_start_time,
+        'has_duration': assignment.has_duration,
+        'has_temperature': assignment.has_temperature,
+        'has_collection_time': assignment.has_collection_time
+    }
     return render_to_response(
-        'instructor/generic_formset.html',
+        'instructor/micro_analyze.html',
         {
-            'formset': MicroImagesFormset(
-                queryset=models.MicroscopyImages.objects.filter(
-                    sample_prep=sample,
-                    strain_protocol=protocol
-                )
-            ),
-            'message': message,
-            'assignment': a
+            'access': json.dumps(assignment.access),
+            'image_groups': grouped_images,
+            'variables': variables,
+            'assignment_name': assignment.name,
+            'section_name': 'Microscopy',
+            'page_name': 'micro_analyze',
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
