@@ -378,20 +378,21 @@ $(function() {
     });
   });
 
-  $('.scb_ab_f_save_image').click(function(){
-    var data={};
+  /* Save selected list of images to an ImageMapping object*/
+  $('.scb_ab_f_save_image').click(function () {
+    var data = {};
     data['mapping_pk'] = $(this).data('pk');
-    data['image_pk_list'] = _.map($('.scb_ab_s_image_selected'), function(element){
+    data['image_pk_list'] = _.map($('.scb_ab_s_image_selected'), function (element) {
       return $(element).attr('id').match(/(\d+)$/)[0];
     });
-    if(data['image_pk_list'].length>0){
+    if (data['image_pk_list'].length > 0) {
       $.ajax({
-      url: '/ab/assignments/select_images/',
-      type: "POST",
-      data: data
-    }).then(function() {
-      window.location.reload();
-    });
+        url: '/ab/assignments/select_images/',
+        type: "POST",
+        data: data
+      }).then(function () {
+        window.location.reload();
+      });
     }
   });
 
@@ -413,7 +414,7 @@ $(function() {
     });
     $(this).addClass("scb_ab_s_histogram_selected");
   });
-
+  /* Handle image selection in the Image Library */
   $('.scb_ab_f_select_image').click(function(){
     if($(this).hasClass("scb_ab_s_image_selected")){
       $(this).removeClass("scb_ab_s_image_selected");
@@ -579,8 +580,9 @@ $(function() {
     }
   });
 
+  /* Open Image Dialog in Microscopy Analyze page */
   $(".open_upload_window_btn").click(function(){
- /* this btn has the id of the corresponding row */
+    /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
     /* Get name of the sample from the row itself */
     var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
@@ -603,8 +605,11 @@ $(function() {
       addImageFormHandler();
     }
   }
+  /*
+    Add a form submit handler. Has to be called when a sample is selected.
+   */
   function addImageFormHandler(){
-    $("#image_form").submit(function () {
+    $("#image_form").unbind('submit').submit(function () {
       var parameters = {};
       parameters['protocol'] = $('.scb_ab_f_sample_name').text();
       parameters['sample_prep'] = $('.scb_ab_f_treatment_text').text();

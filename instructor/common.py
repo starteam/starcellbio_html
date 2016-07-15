@@ -1344,10 +1344,10 @@ def microscopy_analyze(request):
     if request.method == "POST" and 'upload' in request.POST:
         if len(request.FILES) > 0:
             uploaded_file = request.FILES['file']
-
-            new_image = models.MicroscopyImage(file=uploaded_file)
-            new_image.assignment = assignment
-            new_image.save()
+            new_image, _ = models.MicroscopyImage.objects.get_or_create(
+                file=uploaded_file,
+                assignment=assignment
+            )
         # need few variables to keep the dialog open
         dialog_open = True
         if 'mapping_pk' in request.POST:
@@ -1386,7 +1386,7 @@ def microscopy_analyze(request):
             )
         )
 
-    all_images = models.MicroscopyImage.objects.filter()
+    all_images = models.MicroscopyImage.objects.filter(assignment=assignment)
     ImageForm = modelform_factory(models.MicroscopyImage, fields=['file'])
     image_form = ImageForm()
     variables = {
@@ -1698,6 +1698,8 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
     )
 
 
+@assignment_selected
+@check_assignment_owner
 @login_required
 def select_images(request):
     mapping_id = request.POST.get('mapping_pk')
@@ -1712,6 +1714,8 @@ def select_images(request):
     return HttpResponse('complete')
 
 
+@assignment_selected
+@check_assignment_owner
 @login_required
 def submit_histogram(request):
     """
