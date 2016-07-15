@@ -17,6 +17,7 @@ from instructor.compiler import get_protocol_headers
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 
+from django.conf import settings
 page_order = (
     'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
     'techniques', 'wb_lysate_type', 'wb_antibody', 'wb_band_size',
@@ -1334,6 +1335,25 @@ def create_image_mappings(assignment, sample):
 def microscopy_analyze(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
+    chosen_sampleprep = ""
+    chosen_protocol = ""
+    mapping_pk = ""
+    dialog_open = False
+    if request.method == "POST" and 'continue' in request.POST:
+        return redirect('common_assignments')
+    if request.method == "POST" and 'upload' in request.POST:
+        if len(request.FILES) > 0:
+            uploaded_file = request.FILES['file']
+
+            new_image = models.MicroscopyImage(file=uploaded_file)
+            new_image.assignment = assignment
+            new_image.save()
+        # need few variables to keep the dialog open
+        dialog_open = True
+        if 'mapping_pk' in request.POST:
+            chosen_protocol = request.POST.get('protocol')
+            chosen_sampleprep = request.POST.get('sample_prep')
+            mapping_pk = request.POST.get('mapping_pk')
 
     image_mappings = models.MicroscopyImageMapping.objects.filter(
         sample_prep__assignment=assignment
@@ -1345,9 +1365,6 @@ def microscopy_analyze(request):
         'strain_protocol__treatment__temperature__degrees',
         'strain_protocol__treatment__collection_time__time'
     )
-
-    if request.method == "POST" and 'continue' in request.POST:
-        return redirect('common_assignments')
 
     # Grouping ImageMapping objects by analysis and condition
     grouped_images = []
@@ -1369,6 +1386,9 @@ def microscopy_analyze(request):
             )
         )
 
+    all_images = models.MicroscopyImage.objects.filter()
+    ImageForm = modelform_factory(models.MicroscopyImage, fields=['file'])
+    image_form = ImageForm()
     variables = {
         'has_concentration': assignment.has_concentration,
         'has_start_time': assignment.has_start_time,
@@ -1380,6 +1400,13 @@ def microscopy_analyze(request):
         'instructor/micro_analyze.html',
         {
             'access': json.dumps(assignment.access),
+            'all_images': all_images,
+            'MEDIA_ROOT': settings.MEDIA_ROOT,
+            'image_form': image_form,
+            'dialog_open': json.dumps(dialog_open),
+            'protocol_name': chosen_protocol,
+            'sample_prep_name': chosen_sampleprep,
+            'mapping_pk': mapping_pk,
             'image_groups': grouped_images,
             'variables': variables,
             'assignment_name': assignment.name,
@@ -1669,6 +1696,20 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
         },
         context_instance=RequestContext(request)
     )
+
+
+@login_required
+def select_images(request):
+    mapping_id = request.POST.get('mapping_pk')
+    image_pk_list = request.POST.getlist('image_pk_list[]')
+    instance = get_object_or_404(models.MicroscopyImageMapping, pk=mapping_id)
+    for image_pk in image_pk_list:
+        selected_image = get_object_or_404(models.MicroscopyImage, pk=image_pk)
+
+        instance.images.add(selected_image)
+    instance.save()
+
+    return HttpResponse('complete')
 
 
 @login_required

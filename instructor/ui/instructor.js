@@ -361,8 +361,8 @@ $(function() {
       data['cell_treatment'] = $(this).data('cell_treatment');
       data['mapping_pk'] = $(this).data('pk');
     } else {
-      data['cell_treatment'] = $('.scb_ab_s_histogram_dialog').data('cell_treatment');
-      data['mapping_pk'] = $('.scb_ab_s_histogram_dialog').data('pk');
+      data['cell_treatment'] = $('.scb_ab_s_analyze_dialog').data('cell_treatment');
+      data['mapping_pk'] = $('.scb_ab_s_analyze_dialog').data('pk');
       if ($(this).hasClass('scb_ab_f_save_histogram')) {
         data['points'] = JSON.stringify(getDataPoints());
       } else{
@@ -378,7 +378,22 @@ $(function() {
     });
   });
 
-
+  $('.scb_ab_f_save_image').click(function(){
+    var data={};
+    data['mapping_pk'] = $(this).data('pk');
+    data['image_pk_list'] = _.map($('.scb_ab_s_image_selected'), function(element){
+      return $(element).attr('id').match(/(\d+)$/)[0];
+    });
+    if(data['image_pk_list'].length>0){
+      $.ajax({
+      url: '/ab/assignments/select_images/',
+      type: "POST",
+      data: data
+    }).then(function() {
+      window.location.reload();
+    });
+    }
+  });
 
   $(".scb_ab_s_histogram_tab_not_selected").click(function () {
     $(".scb_ab_s_draw_histogram_view").toggle();
@@ -388,7 +403,7 @@ $(function() {
 
   });
 
-  $('.scb_ab_s_histogram_dialog').draggable({handle: '.scb_ab_s_dialog_title'});
+  $('.scb_ab_s_analyze_dialog').draggable({handle: '.scb_ab_s_dialog_title'});
 
   /* Mark this histogram for selection from the library */
   $('.scb_ab_f_select_histogram').click(function(){
@@ -397,6 +412,15 @@ $(function() {
       $(canvas).removeClass("scb_ab_s_histogram_selected");
     });
     $(this).addClass("scb_ab_s_histogram_selected");
+  });
+
+  $('.scb_ab_f_select_image').click(function(){
+    if($(this).hasClass("scb_ab_s_image_selected")){
+      $(this).removeClass("scb_ab_s_image_selected");
+    }else{
+      $(this).addClass("scb_ab_s_image_selected");
+    }
+
   });
 
   /* Facs Histogram setup view */
@@ -542,7 +566,7 @@ $(function() {
     var instance_pk = row_id.match(/(\d+)$/)[0];
     $('.scb_ab_f_sample_name').text(sample_name);
     $('.scb_ab_f_treatment_text').text(sample_treatment);
-    $('.scb_ab_s_histogram_dialog')
+    $('.scb_ab_s_analyze_dialog')
       .data({'cell_treatment': sample_treatment_array[0], 'pk': instance_pk})
       .css('visibility', 'visible');
     /* Label x axis with condition name */
@@ -554,6 +578,43 @@ $(function() {
       paper.view.update();
     }
   });
+
+  $(".open_upload_window_btn").click(function(){
+ /* this btn has the id of the corresponding row */
+    var row_id = $(this).data('row_id');
+    /* Get name of the sample from the row itself */
+    var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
+    $('.scb_ab_f_sample_name').text(sample_name);
+    var instance_pk = row_id.match(/(\d+)$/)[0];
+    var sample_treatment  = $(this).data('sample_treatment');
+    $('.scb_ab_f_treatment_text').text(sample_treatment);
+    $('.scb_ab_s_analyze_dialog').css('visibility', 'visible');
+    $('.scb_ab_f_save_image').data('pk', instance_pk);
+    addImageFormHandler();
+
+  });
+  /* If Microscopy Analyze page */
+  if($(".scb_ab_s_image_form").length){
+    /* Event: Close select image dialog */
+    $('.scb_ab_f_close_dialog').click(function () {
+      $('.scb_ab_s_analyze_dialog').css('visibility', 'hidden');
+    });
+    if(dialog_open){
+      addImageFormHandler();
+    }
+  }
+  function addImageFormHandler(){
+    $("#image_form").submit(function () {
+      var parameters = {};
+      parameters['protocol'] = $('.scb_ab_f_sample_name').text();
+      parameters['sample_prep'] = $('.scb_ab_f_treatment_text').text();
+      parameters['mapping_pk'] = $('.scb_ab_f_save_image').data('pk');
+      _.each(parameters, function(value, key){
+        $("<input>", { type: "hidden", name: key, value: value }).appendTo("#image_form");
+      });
+
+    });
+  }
 });
 
 

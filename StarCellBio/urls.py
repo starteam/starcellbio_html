@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -275,6 +277,11 @@ urlpatterns += patterns(
         instructor_common.microscopy_analyze,
         name="microscopy_analyze"
     ),
+    url(
+        r'^ab/assignments/select_images/$',
+        instructor_common.select_images,
+        name="select_images"
+    ),
     # Flow Cytometry
     url(
         r'^ab/assignments/submit_histogram/$',
@@ -305,3 +312,5 @@ v1_api.register(AssignmentResource())
 v1_api.register(StudentAssignmentResource())
 
 urlpatterns += patterns('', url(r'^api/', include(v1_api.urls)), )
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
