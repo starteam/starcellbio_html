@@ -1552,7 +1552,8 @@ def facs_analyze(request):
     facs, _ = models.FlowCytometry.objects.get_or_create(assignment=assignment)
 
     histogram_mappings = models.FlowCytometryHistogramMapping.objects.filter(
-        sample_prep__assignment=assignment
+        sample_prep__assignment=assignment,
+        strain_protocol__enabled=True
     ).order_by(
         'strain_protocol__strain', 'strain_protocol__treatment__drug__name',
         'strain_protocol__treatment__drug__concentration',
