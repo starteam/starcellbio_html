@@ -489,6 +489,12 @@ input[type="checkbox"].disabled {
     right:17px;
 
 }
+.scb_ab_s_copy_button_container{
+    position: absolute;
+    top: 50%;
+    margin-top: -16px;
+    right:30px;
+}
 .scb_ab_s_row>.scb_ab_s_col_width_facs_sample{
     width: 320px;
     text-align: left;
@@ -521,24 +527,55 @@ input[type="checkbox"].disabled {
 }
 
 /* Dialog view for analyze page */
-.scb_ab_s_analyze_dialog{
+.scb_ab_s_dialog{
     position: fixed;
     z-index: 999;
     top:0px;
-    left: 300px;
-    width:800px;
-    height:800px;
     font-family: 'sourcesanspro-regular';
     font-size:10pt;
 }
-.scb_ab_s_analyze_dialog>div{
+.scb_ab_s_dialog>div{
     max-height: 75%;
     overflow: auto;
-    margin: 12% auto auto 0;
     position: relative;
     border: 5px solid white;
     border-radius: 9px;
     background-color: #f5f5f5;
+
+}
+.scb_ab_s_histogram_dialog{
+    width:800px;
+    left: 300px;
+
+}
+.scb_ab_s_histogram_dialog>div{
+    margin: 12% auto auto 0;
+}
+
+.scb_ab_s_copy_dialog{
+    width: 400px;
+    left: 530px;
+
+}
+.scb_ab_s_copy_dialog>div{
+    margin: 330px auto auto 0;
+
+}
+.scb_ab_s_copy_dialog_body{
+    /*height: 350px;*/
+    text-align: center;
+    padding-bottom: 50px;
+
+}
+.scb_ab_s_copy_dialog_scroll_list{
+    height: 200px;
+    overflow: scroll;
+    box-shadow: inset 2px 2px 5px grey;
+}
+.scb_ab_s_copy_button{
+    position: absolute;
+    bottom: 10px;
+    left: 100px;
 }
 
 .scb_ab_s_grey_button_link{

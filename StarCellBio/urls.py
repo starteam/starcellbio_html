@@ -289,6 +289,11 @@ urlpatterns += patterns(
         name="submit_histogram"
     ),
     url(
+        r'^ab/assignments/copy_histogram/$',
+        instructor_common.copy_histogram,
+        name="copy_histogram"
+    ),
+    url(
         r'^ab/assignments/facs_sample_prep/$',
         instructor_common.facs_sample_prep,
         name="facs_sample_prep"

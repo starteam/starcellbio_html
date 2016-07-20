@@ -1,15 +1,70 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
+
+  <div class="scb_ab_s_dialog scb_ab_s_copy_dialog" style="visibility:hidden">
+        <div>
+            <h1 class="scb_ab_s_dialog_title" role="presentation" aria-label="Copy To Histogram">
+                <span class="scb_ab_s_dialog_title_close scb_ab_f_close_copy_dialog" role="button"
+                      aria-label="Close Create Histogram">×</span>
+                Copy To
+            </h1>
+            <div class="scb_ab_s_copy_dialog_body">
+              <div class="scb_ab_s_copy_dialog_scroll_list">
+              {% for cell_treatment, analysis, condition, instance_list in histogram_groups %}
+                <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
+                    <div class="scb_ab_s_facs_condition_header">
+                        {{ cell_treatment }}, {{ analysis }}, {{ condition }}
+                    </div>
+                </div>
+
+                {% for instance in instance_list %}
+                 <div class="scb_ab_s_row">
+                    <div>
+                      <input type="checkbox" class="scb_ab_f_copy_checkbox"
+                             data-instance_id="{{ instance.id }}"
+                             data-cell_treatment="{{ cell_treatment }}"/>
+                    </div>
+                        <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
+                        <div class="scb_ab_s_col_width_facs_sample">
+                            <div class="block-ellipsis" id="row-{{ cell_treatment }}_{{ instance.id }}">
+                                {{ instance.strain_protocol.strain.name }},
+                                {{ instance.strain_protocol.treatment.drug.name }}
+                                {% if variables.has_concentration and instance.strain_protocol.treatment.drug.concentration != None %}
+                                    , {{ instance.strain_protocol.treatment.drug.concentration }}
+                                    {{ instance.strain_protocol.treatment.drug.concentration_unit }}{% endif %}
+                                {% if variables.has_start_time and instance.strain_protocol.treatment.drug.start_time != None %}
+                                    , {{ instance.strain_protocol.treatment.drug.start_time }}
+                                    {{ instance.strain_protocol.treatment.drug.time_unit }}{% endif %}
+                                {% if variables.has_duration and instance.strain_protocol.treatment.drug.duration != None %}
+                                    , {{ instance.strain_protocol.treatment.drug.duration }}
+                                    {{ instance.strain_protocol.treatment.drug.duration_unit }}{% endif %}
+                                {% if variables.has_temperature %},
+                                    {{ instance.strain_protocol.treatment.temperature.degrees }} &#8451;{% endif %}
+                                {% if variables.has_collection_time %},
+                                    {{ instance.strain_protocol.treatment.collection_time.time }}
+                                    {{ instance.strain_protocol.treatment.collection_time.units }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                  {% endfor %}
+            {% endfor %}
+              </div>
+            <button type="button"
+                    class="scb_ab_s_navigation_button scb_ab_s_copy_button scb_ab_f_copy_histogram">COPY</button>
+            </div>
+        </div>
+  </div>
     <!-- Hidden pop out window for entering the graph -->
-    <div class="scb_ab_s_analyze_dialog" style="visibility:hidden">
+    <div class="scb_ab_s_dialog scb_ab_s_histogram_dialog" style="visibility:hidden">
         <div>
             <h1 class="scb_ab_s_dialog_title" role="presentation" aria-label="Create Histogram">
                 <span class="scb_ab_s_dialog_title_close scb_ab_f_close_dialog" role="button"
                       aria-label="Close Create Histogram">×</span>
                 Histogram Tools
             </h1>
-            <div class="scb_ab_s_draw_histogram_view" >
+            <div class="scb_ab_s_draw_histogram_view">
                 <!-- Hidden 'noise preview' window -->
                 <div class="scb_ab_s_preview_canvas_div" style="display:none">
                     <canvas id="noise-canvas" class="scb_ab_s_canvas_noise_preview"></canvas>
@@ -154,9 +209,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="scb_ab_s_copy_checkbox_container">
+                        <div class="scb_ab_s_copy_button_container">
                             <div class="scb_ab_s_col_copy">
-                                <input type="checkbox">
+                                <input class="open_copy_histogram_dialog scb_s_gray_button"
+                                       type="button" value="COPY TO"
+                                       data-instance_id="{{ instance.id }}" data-cell_treatment="{{ cell_treatment }}">
                             </div>
                         </div>
                     </div>
@@ -176,7 +233,7 @@
         <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
     </a>
     <script type="text/javascript">
-    all_histograms_mapping = {{ all_histograms_mapping|safe }}
+    all_histograms_data = {{ all_histograms_data|safe }}
     histograms = {{ histograms|safe }};
     x_upper_bound = {{ x_upper_bound|safe }};
     tick_values = {{ tick_values|safe }};

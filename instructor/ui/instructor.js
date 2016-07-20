@@ -475,6 +475,7 @@ $(function() {
       } else {
         $(canvas).css('display', 'none');
         $(canvas).siblings('div').css('display', 'none');
+        $(canvas).parent().siblings('.scb_ab_s_copy_button_container').css('display', 'none');
       }
     });
 
@@ -491,7 +492,7 @@ $(function() {
       draw_line(30, 130, 260, 130);
       /* y axis */
       draw_line(30, 10, 30, 130);
-      data = all_histograms_mapping[histogram_id];
+      data = all_histograms_data[histogram_id];
       data = JSON.parse(data);
       canvas_data = convertToCanvas(data);
       path = new Path();
@@ -620,6 +621,45 @@ $(function() {
 
     });
   }
+  
+  /* COPY TO button */
+  $('.open_copy_histogram_dialog').click(function(){
+    $(".scb_ab_f_copy_histogram").data({
+        'mapping_id': $(this).data('instance_id'),
+        'cell_treatment': $(this).data('cell_treatment')
+      });
+    $(".scb_ab_s_copy_dialog").css('visibility', 'visible');
+  });
+
+  $('.scb_ab_f_close_copy_dialog').click(function(){
+    $(".scb_ab_s_copy_dialog").css('visibility', 'hidden');
+  });
+
+  /* COPY button: copy histogram to selected samples */
+  $(".scb_ab_f_copy_histogram").click(function(){
+    var checked = $('input.scb_ab_f_copy_checkbox:checked');
+    var copy_to_list = [];
+    _.each(checked, function(element){
+      copy_to_list.push({
+        id: $(element).data('instance_id'),
+        cell_treatment: $(element).data('cell_treatment')
+      });
+    });
+    var data = {
+      copy_from_pk: $(this).data('mapping_id'),
+      cell_treatment: $(this).data('cell_treatment'),
+      copy_to_list: JSON.stringify(copy_to_list)
+    };
+    if (copy_to_list.length > 0) {
+      $.ajax({
+        url: '/ab/assignments/copy_histogram/',
+        type: "POST",
+        data: data
+      }).then(function () {
+        window.location.reload();
+      });
+    }
+  });
 });
 
 

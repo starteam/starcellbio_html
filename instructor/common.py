@@ -1628,7 +1628,7 @@ def facs_analyze(request):
     all_histograms = models.FlowCytometryHistogram.objects.exclude(
         data__isnull=True
     )
-    all_histogram_mapping = {
+    all_histogram_data = {
         int(instance.id): instance.data
         for instance in all_histograms
     }
@@ -1644,7 +1644,7 @@ def facs_analyze(request):
         'instructor/facs_analyze.html',
         {
             'histograms': json.dumps(selected_histograms_mapping),
-            'all_histograms_mapping': json.dumps(all_histogram_mapping),
+            'all_histograms_data': json.dumps(all_histogram_data),
             'all_histograms': all_histograms,
             'access': json.dumps(assignment.access),
             'x_upper_bound': json.dumps(facs.xrange),
@@ -1718,6 +1718,43 @@ def select_images(request):
         instance.images.add(selected_image)
     instance.save()
 
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def copy_histogram(request):
+    """
+    Copy a histogram from one mapping to a given list mappings
+    """
+    pk = request.session['assignment_id']
+    mapping_id = request.POST.get('copy_from_pk')
+    cell_treatment = request.POST.get('cell_treatment')
+    copy_to_list = json.loads(request.POST.get('copy_to_list'))
+    copy_from_mapping = get_object_or_404(
+        models.FlowCytometryHistogramMapping,
+        id=mapping_id,
+        sample_prep__assignment__id=pk
+    )
+    histogram = None
+
+    if cell_treatment == 'Live':
+        histogram = copy_from_mapping.live_data
+    elif cell_treatment == 'Fixed':
+        histogram = copy_from_mapping.fixed_data
+
+    for sample in copy_to_list:
+        mapping = get_object_or_404(
+            models.FlowCytometryHistogramMapping,
+            id=sample['id'],
+            sample_prep__assignment__id=pk
+        )
+        if sample['cell_treatment'] == 'Live':
+            mapping.live_data = histogram
+        elif sample['cell_treatment'] == 'Fixed':
+            mapping.fixed_data = histogram
+        mapping.save()
     return HttpResponse()
 
 
