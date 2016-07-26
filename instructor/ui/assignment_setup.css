@@ -751,7 +751,7 @@ label.custom-dropdown {
 /*Microscopy analyze */
 .scb_ab_s_small_image{
     width: 100px;
-    margin: 0 10px 10px 0;
+    margin: 0 10px 5px 0;
 }
 .scb_ab_s_row>.scb_ab_s_sample_image_list{
     width: 450px;

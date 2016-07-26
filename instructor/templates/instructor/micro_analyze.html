@@ -38,7 +38,7 @@
           {% endfor %}
         </div>
         <button class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_image" data-pk="{{ mapping_pk }}">
-          SAVE IMAGE
+          SAVE SELECTION
         </button>
 
       </div>
@@ -97,22 +97,24 @@
             </div>
           </div>
 
-          <div class="scb_ab_s_row" style="padding: 10px 0 8px 0">
+          {% if instance.images.count > 0 %}
+            <div class="scb_ab_s_row">
 
-            <div class="scb_ab_s_col_width_number"></div>
-            <div class="scb_ab_s_sample_image_list">
-              {% for image in instance.images.all %}
-                <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
-              {% endfor %}
-            </div>
-          <div class="scb_ab_s_copy_checkbox_container">
-              <div class="scb_ab_s_col_copy">
-                <input type="checkbox">
+              <div class="scb_ab_s_col_width_number"></div>
+              <div class="scb_ab_s_sample_image_list">
+                {% for image in instance.images.all %}
+                  <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
+                {% endfor %}
               </div>
-            </div>
+              <div class="scb_ab_s_copy_checkbox_container">
+                <div class="scb_ab_s_col_copy">
+                  <input type="checkbox">
+                </div>
+              </div>
 
-          </div>
-          <div class="scb_ab_s_row">
+            </div>
+          {% endif %}
+          <div class="scb_ab_s_row" style="padding-bottom:10px">
             <div class="scb_ab_s_col_width_number"></div>
             <button type="button" class="scb_s_gray_button open_upload_window_btn"
                         data-row_id="row-{{ instance.id }}"
