@@ -461,6 +461,7 @@ $(function() {
       } else {
         data = histograms[instance_id]['fixed'];
       }
+      var $edit_icon = $("div.scb_ab_s_histogram_edit_icon[data-row_id='row-" + row_id + "']");
       if (data) {
         data = JSON.parse(data);
         canvas_data = convertToCanvas(data);
@@ -472,10 +473,12 @@ $(function() {
         });
         paper.view.update();
         $("button[data-row_id='row-" + row_id + "']").hide();
+        $edit_icon.addClass('scb_ab_s_edit_white_img');
       } else {
         $(canvas).css('display', 'none');
         $(canvas).siblings('div').css('display', 'none');
         $(canvas).parent().siblings('.scb_ab_s_copy_button_container').css('display', 'none');
+        $edit_icon.addClass('scb_ab_s_edit_grey_img');
       }
     });
 
@@ -557,7 +560,7 @@ $(function() {
   }
 
   /* ADD HISTOGRAM button: Open Histogram Tools window */
-  $(".add_histogram_btn, .scb_ab_f_edit_histogram").click(function () {
+  $(".add_histogram_btn, .scb_ab_f_edit_histogram.scb_ab_s_edit_white_img").click(function () {
     /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
     /* Get name of the sample from the row itself */

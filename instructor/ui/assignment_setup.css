@@ -513,17 +513,17 @@ input[type="checkbox"].disabled {
     margin-bottom: -15px;
     font-family: 'sourcesanspro-semibold';
 }
-.scb_ab_s_histogram_edit_grey_img {
-    background: url('../images/Draw_Histogram_Gray.png') no-repeat;
+.scb_ab_s_histogram_edit_icon{
     height: 28px;
-    background-size: 25px;
     margin: 10px 7px;
 }
-.scb_ab_s_histogram_edit_white_img{
-    background: url('../images/Draw_Histogram_White.png') no-repeat;
-    height: 28px;
+.scb_ab_s_edit_grey_img {
+    background: url('../images/Draw_Histogram_Gray.png') no-repeat;
     background-size: 25px;
-    margin: 10px 7px;
+}
+.scb_ab_s_edit_white_img {
+    background: url('../images/Draw_Histogram_White.png') no-repeat;
+    background-size: 25px;
 }
 
 /* Dialog view for analyze page */
