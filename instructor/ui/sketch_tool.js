@@ -134,7 +134,7 @@ function draw_line(x1 ,y1 ,x2 ,y2, color){
 }
 
 function nameXAxis(condition){
-    printText(X_ORIGIN + X_AXIS_LENGTH_PX, Y_ORIGIN + 25, condition);
+    printText(X_ORIGIN + X_AXIS_LENGTH_PX, Y_ORIGIN + 25, condition, 'right');
     paper.view.update();
 }
 function nameYAxis(){
@@ -143,14 +143,15 @@ function nameYAxis(){
     text.rotate(270);
 }
 /* Print PointText */
-function printText(x, y, value){
+function printText(x, y, value, justification){
+    justification = (typeof justification !== 'undefined') ? justification : 'center';
     var text_obj = new PointText(new Point(x, y));
     text_obj.content = value;
     // adjusting for the height of the text
     text_obj.position.y += 5;
     text_obj.style = {
         fontSize: 12,
-        justification: 'center'
+        justification: justification
     };
     return text_obj;
 }
