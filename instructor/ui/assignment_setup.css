@@ -504,6 +504,10 @@ input[type="checkbox"].disabled {
     margin: 15px 0 5px 0;
     font-family: 'sourcesanspro-semibold';
 }
+.scb_ab_s_pre_header_row{
+    margin-bottom: -15px;
+    font-family: 'sourcesanspro-semibold';
+}
 .scb_ab_s_histogram_edit_grey_img {
     background: url('../images/Draw_Histogram_Gray.png') no-repeat;
     height: 28px;
