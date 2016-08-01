@@ -530,8 +530,8 @@ $(function() {
 
   }
 
-  /* Open Histogram Tools window */
-  $(".add_histogram_btn").click(function () {
+  /* ADD HISTOGRAM button: Open Histogram Tools window */
+  $(".add_histogram_btn, .scb_ab_f_edit_histogram").click(function () {
     /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
     /* Get name of the sample from the row itself */
@@ -548,9 +548,12 @@ $(function() {
     /* Label x axis with condition name */
     mypapers[2].activate();
     nameXAxis(sample_treatment_array[2]);
+    if ($(this).hasClass("scb_ab_f_edit_histogram")){
+      $(".scb_ab_s_draw_histogram_view").hide();
+      $(".scb_ab_s_select_histogram_view").show();
+      paper.view.update();
+    }
   });
-
-
 });
 
 
