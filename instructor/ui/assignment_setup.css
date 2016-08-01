@@ -1,4 +1,6 @@
 
+input, select { outline: none; }
+
 .scb_ab_s_input_text_field{
     font-size: 10pt;
     font-family: 'sourcesanspro-regular';
@@ -16,10 +18,7 @@
     font-size: 13px;
     border: 1px solid #ccc;
     height: 31px;
-    padding:5px;
-    border-radius: 0;
     font-style: italic;
-    -webkit-appearance: none;
 }
 
 .scb_s_instructor_view{
@@ -196,8 +195,8 @@ select:disabled {
 .scb_ab_s_form_input_list>div{
     display: inline-block;
 }
-.scb_ab_s_form_input_list>div>input, .scb_ab_s_form_input_list>div>select{
-    margin: 5px 0 0 5px;
+.scb_ab_s_form_input_list>div>input{
+    margin: 2px 0 3px 5px;
 }
 
 .scb_ab_s_form_input_list>.scb_ab_s_counter_margin{
@@ -702,4 +701,35 @@ input[type="checkbox"].disabled {
 /* FACS setup histogram parameters */
 .scb_ab_s_canvas_axis_preview {
     margin-left: 15px;
+}
+
+label.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    height: 21px;
+    margin-left: 3px;
+}
+
+.custom-dropdown:hover {
+    background: url("../images/setup/scb_experiment_dropdown_hover.png") no-repeat right #FFF;
+    background-size: 27px;
+}
+
+.custom-dropdown {
+    padding: 4px 0 4px 5px;
+    overflow: hidden;
+    background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
+    background-size: 27px;
+    box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.custom-dropdown select {
+    background: transparent;
+    font-family: Arial;
+    font-weight: normal;
+    font-size: 10pt;
+    line-height: 1;
+    border: 0;
+    height: 20px;
+    -webkit-appearance: none;
 }

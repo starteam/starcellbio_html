@@ -20,7 +20,11 @@
         {% for form in formset %}
             <div class="scb_ab_s_form_input_list">
               <div class="scb_ab_s_counter_margin">{{ forloop.counter }}.</div>
-                <div class="vertical_align_bottom">{{ form.analysis }}</div>
+                <div class="vertical_align_bottom">
+                  <label role="presentation" class="custom-dropdown">
+                    {{ form.analysis }}
+                  </label>
+                </div>
                 <div>{{ form.condition }}</div>
                 <div>{{ form.id }}</div>
                 <div class="delete_checkbox">{{ form.DELETE }}</div>

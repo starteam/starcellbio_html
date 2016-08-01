@@ -198,14 +198,14 @@ $(function() {
       $("#id_form-0-condition").attr('placeholder', 'Condition Name');
     }
     $('select').change(function(){
-      var condition_input = $(this).parent().parent().find('input[type="text"]')[0];
+      var condition_input = $(this).parent().parent().parent().find('input[type="text"]')[0];
       if ($(this).val() == 'Anti'){
         $(condition_input).attr('value', 'Histone H3 antibody');
       }else if($(this).val() == 'Dye'){
         $(condition_input).attr('value', 'propidium iodide');
       }
     });
-    $("option:first").attr('disabled', true);
+    $('option[value=""]').attr('disabled', true);
   }
 
   /**
