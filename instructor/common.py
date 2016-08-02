@@ -17,7 +17,6 @@ from instructor.compiler import get_protocol_headers
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 
-from django.conf import settings
 page_order = (
     'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
     'techniques', 'wb_lysate_type', 'wb_antibody', 'wb_band_size',
@@ -1401,7 +1400,6 @@ def microscopy_analyze(request):
         {
             'access': json.dumps(assignment.access),
             'all_images': all_images,
-            'MEDIA_ROOT': settings.MEDIA_ROOT,
             'image_form': image_form,
             'dialog_open': json.dumps(dialog_open),
             'protocol_name': chosen_protocol,
@@ -1702,16 +1700,25 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
 @check_assignment_owner
 @login_required
 def select_images(request):
+    pk = request.session['assignment_id']
     mapping_id = request.POST.get('mapping_pk')
     image_pk_list = request.POST.getlist('image_pk_list[]')
-    instance = get_object_or_404(models.MicroscopyImageMapping, pk=mapping_id)
+    instance = get_object_or_404(
+        models.MicroscopyImageMapping,
+        pk=mapping_id,
+        sample_prep__assignment__pk=pk
+    )
     for image_pk in image_pk_list:
-        selected_image = get_object_or_404(models.MicroscopyImage, pk=image_pk)
+        selected_image = get_object_or_404(
+            models.MicroscopyImage,
+            pk=image_pk,
+            assignment__pk=pk
+        )
 
         instance.images.add(selected_image)
     instance.save()
 
-    return HttpResponse('complete')
+    return HttpResponse()
 
 
 @assignment_selected
@@ -1721,6 +1728,8 @@ def submit_histogram(request):
     """
     Save or remove drawn histogram
     """
+    pk = request.session['assignment_id']
+    facs = get_object_or_404(models.FlowCytometry, assignment__id=pk)
     mapping_id = request.POST.get('mapping_pk')
     cell_treatment = request.POST.get('cell_treatment')
     # if no points data is None
@@ -1732,19 +1741,21 @@ def submit_histogram(request):
     if histogram_pk:
         new_histogram = get_object_or_404(
             models.FlowCytometryHistogram,
-            pk=histogram_pk
+            pk=histogram_pk,
+            facs=facs
         )
     # Create new histogram
     elif data:
-        pk = request.session['assignment_id']
-        facs = get_object_or_404(models.FlowCytometry, assignment__id=pk)
-        new_histogram = models.FlowCytometryHistogram(facs=facs, data=data)
-        new_histogram.save()
+        new_histogram = models.FlowCytometryHistogram.objects.create(
+            facs=facs,
+            data=data
+        )
 
     # Find HistogramMapping object and update it
     instance = get_object_or_404(
         models.FlowCytometryHistogramMapping,
-        pk=mapping_id
+        pk=mapping_id,
+        sample_prep__assignment__id=pk
     )
     if cell_treatment == 'Live':
         instance.live_data = new_histogram
@@ -1752,7 +1763,7 @@ def submit_histogram(request):
         instance.fixed_data = new_histogram
     instance.save()
 
-    return HttpResponse('complete')
+    return HttpResponse()
 
 
 @login_required

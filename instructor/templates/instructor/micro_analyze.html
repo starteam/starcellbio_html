@@ -13,7 +13,7 @@
         <div class="scb_ab_s_chosen_sample_heading">
           <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
             <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
-              {{ sample_prep_name }} {{ dialog_open }}
+              {{ sample_prep_name }}
             </div>
           </div>
           <div class="scb_ab_s_row scb_ab_f_sample_name">
@@ -37,7 +37,8 @@
 
           {% endfor %}
         </div>
-        <button class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_image" data-pk="{{ mapping_pk }}">
+        <button type="button" class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_image"
+                data-pk="{{ mapping_pk }}">
           SAVE SELECTION
         </button>
 

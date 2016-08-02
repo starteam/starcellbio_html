@@ -391,7 +391,7 @@ $(function() {
         type: "POST",
         data: data
       }).then(function () {
-        window.location.reload();
+        window.location = '/ab/assignments/microscopy_analyze/';
       });
     }
   });
