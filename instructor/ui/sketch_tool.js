@@ -108,7 +108,7 @@ function load_sketch_tool(x_upper_bound, tick_values) {
     /* Close draw histogram dialog */
     $('.scb_ab_f_close_dialog').click(function () {
         $(".scb_ab_s_preview_canvas_div").hide();
-        $('.scb_ab_s_histogram_dialog').css('visibility', 'hidden');
+        $('.scb_ab_s_analyze_dialog').css('visibility', 'hidden');
         reset_canvas();
     });
     /* Remove drawn graph, enable graphing */

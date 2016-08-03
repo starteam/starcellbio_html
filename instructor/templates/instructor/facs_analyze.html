@@ -2,7 +2,7 @@
 
 {% block right_side %}
     <!-- Hidden pop out window for entering the graph -->
-    <div class="scb_ab_s_histogram_dialog" style="visibility:hidden">
+    <div class="scb_ab_s_analyze_dialog" style="visibility:hidden">
         <div>
             <h1 class="scb_ab_s_dialog_title" role="presentation" aria-label="Create Histogram">
                 <span class="scb_ab_s_dialog_title_close scb_ab_f_close_dialog" role="button"
@@ -42,11 +42,22 @@
                     <div class="scb_ab_s_histogram_tab_selected">Select Histogram</div>
                     <div class="scb_ab_s_histogram_tab_not_selected">Draw New Histogram</div>
                 </div>
+             <div class="scb_ab_s_draw_new_histogram_content">
+                    <div class="scb_ab_s_chosen_sample_heading">
+                        <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
+                            <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
+                            </div>
+                        </div>
+                        <div class="scb_ab_s_row scb_ab_f_sample_name">
+                        </div>
+                    </div>
+
+                </div>
                 <div class="scb_ab_s_canvas_library">
                     {% for histogram in all_histograms %}
-                        <div class="scb_ab_s_canvas_wrapper">
+                        <div class="scb_ab_s_library_item_wrapper">
                             <canvas id="library-{{ histogram.id }}"
-                                class="scb_ab_s_small_canvas scb_ab_f_select_histogram" style="">
+                                class="scb_ab_s_small_canvas scb_ab_f_select_histogram">
                             </canvas>
                         </div>
 

@@ -1334,6 +1334,25 @@ def create_image_mappings(assignment, sample):
 def microscopy_analyze(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
+    chosen_sampleprep = ""
+    chosen_protocol = ""
+    mapping_pk = ""
+    dialog_open = False
+    if request.method == "POST" and 'continue' in request.POST:
+        return redirect('common_assignments')
+    if request.method == "POST" and 'upload' in request.POST:
+        if len(request.FILES) > 0:
+            uploaded_file = request.FILES['file']
+            new_image, _ = models.MicroscopyImage.objects.get_or_create(
+                file=uploaded_file,
+                assignment=assignment
+            )
+        # need few variables to keep the dialog open
+        dialog_open = True
+        if 'mapping_pk' in request.POST:
+            chosen_protocol = request.POST.get('protocol')
+            chosen_sampleprep = request.POST.get('sample_prep')
+            mapping_pk = request.POST.get('mapping_pk')
 
     image_mappings = models.MicroscopyImageMapping.objects.filter(
         sample_prep__assignment=assignment
@@ -1345,9 +1364,6 @@ def microscopy_analyze(request):
         'strain_protocol__treatment__temperature__degrees',
         'strain_protocol__treatment__collection_time__time'
     )
-
-    if request.method == "POST" and 'continue' in request.POST:
-        return redirect('common_assignments')
 
     # Grouping ImageMapping objects by analysis and condition
     grouped_images = []
@@ -1369,6 +1385,9 @@ def microscopy_analyze(request):
             )
         )
 
+    all_images = models.MicroscopyImage.objects.filter(assignment=assignment)
+    ImageForm = modelform_factory(models.MicroscopyImage, fields=['file'])
+    image_form = ImageForm()
     variables = {
         'has_concentration': assignment.has_concentration,
         'has_start_time': assignment.has_start_time,
@@ -1380,6 +1399,12 @@ def microscopy_analyze(request):
         'instructor/micro_analyze.html',
         {
             'access': json.dumps(assignment.access),
+            'all_images': all_images,
+            'image_form': image_form,
+            'dialog_open': json.dumps(dialog_open),
+            'protocol_name': chosen_protocol,
+            'sample_prep_name': chosen_sampleprep,
+            'mapping_pk': mapping_pk,
             'image_groups': grouped_images,
             'variables': variables,
             'assignment_name': assignment.name,
@@ -1671,11 +1696,40 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
     )
 
 
+@assignment_selected
+@check_assignment_owner
+@login_required
+def select_images(request):
+    pk = request.session['assignment_id']
+    mapping_id = request.POST.get('mapping_pk')
+    image_pk_list = request.POST.getlist('image_pk_list[]')
+    instance = get_object_or_404(
+        models.MicroscopyImageMapping,
+        pk=mapping_id,
+        sample_prep__assignment__pk=pk
+    )
+    for image_pk in image_pk_list:
+        selected_image = get_object_or_404(
+            models.MicroscopyImage,
+            pk=image_pk,
+            assignment__pk=pk
+        )
+
+        instance.images.add(selected_image)
+    instance.save()
+
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
 @login_required
 def submit_histogram(request):
     """
     Save or remove drawn histogram
     """
+    pk = request.session['assignment_id']
+    facs = get_object_or_404(models.FlowCytometry, assignment__id=pk)
     mapping_id = request.POST.get('mapping_pk')
     cell_treatment = request.POST.get('cell_treatment')
     # if no points data is None
@@ -1687,19 +1741,21 @@ def submit_histogram(request):
     if histogram_pk:
         new_histogram = get_object_or_404(
             models.FlowCytometryHistogram,
-            pk=histogram_pk
+            pk=histogram_pk,
+            facs=facs
         )
     # Create new histogram
     elif data:
-        pk = request.session['assignment_id']
-        facs = get_object_or_404(models.FlowCytometry, assignment__id=pk)
-        new_histogram = models.FlowCytometryHistogram(facs=facs, data=data)
-        new_histogram.save()
+        new_histogram = models.FlowCytometryHistogram.objects.create(
+            facs=facs,
+            data=data
+        )
 
     # Find HistogramMapping object and update it
     instance = get_object_or_404(
         models.FlowCytometryHistogramMapping,
-        pk=mapping_id
+        pk=mapping_id,
+        sample_prep__assignment__id=pk
     )
     if cell_treatment == 'Live':
         instance.live_data = new_histogram
@@ -1707,7 +1763,7 @@ def submit_histogram(request):
         instance.fixed_data = new_histogram
     instance.save()
 
-    return HttpResponse('complete')
+    return HttpResponse()
 
 
 @login_required
