@@ -1852,12 +1852,10 @@ def is_wb_complete(assignment):
 
 def is_facs_complete(assignment):
     if assignment.has_fc:
-        if models.FlowCytometryHistogramMapping.objects.filter(
+        mappings = models.FlowCytometryHistogramMapping.objects.filter(
             sample_prep__assignment=assignment
-        ).exists():
-            mappings = models.FlowCytometryHistogramMapping.objects.filter(
-                sample_prep__assignment=assignment
-            )
+        )
+        if mappings.exists():
             for mapping in mappings:
                 if mapping.sample_prep.live and mapping.live_data is None:
                     return False
