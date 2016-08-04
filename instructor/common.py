@@ -1375,13 +1375,15 @@ def microscopy_analyze(request):
         filtered_list = [
             instance
             for instance in image_mappings
-            if instance.sample_prep.analysis == sample_prep.analysis and
-            instance.sample_prep.condition == sample_prep.condition
+            if instance.sample_prep.micro_analysis ==
+            sample_prep.micro_analysis and instance.sample_prep.condition ==
+            sample_prep.condition
         ]
 
         grouped_images.append(
             (
-                sample_prep.analysis, sample_prep.condition, filtered_list
+                sample_prep.get_micro_analysis_display, sample_prep.condition,
+                filtered_list
             )
         )
 

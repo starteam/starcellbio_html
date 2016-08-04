@@ -11,7 +11,7 @@ input, select { outline: none; }
     padding: 5px;
     display:inline-block;
 }
-.scb_ab_s_from_select_field{
+.scb_ab_s_form_select_field{
     font-family: 'sourcesanspro-regular';
     width: 141px;
     background: white;
@@ -19,6 +19,9 @@ input, select { outline: none; }
     border: 1px solid #ccc;
     height: 31px;
     font-style: italic;
+}
+.scb_ab_s_micro_analyze>select.scb_ab_s_form_select_field{
+    width: 170px;
 }
 
 .scb_s_instructor_view{
@@ -172,6 +175,9 @@ select:disabled {
     display: inline-block;
     font-family: 'sourcesanspro-semibold';
     font-size: 14px ;
+}
+.scb_ab_s_input_headers>div.scb_ab_s_micro_analyze_header{
+    width: 179px;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_small_header{
     width: 58px;
@@ -543,12 +549,12 @@ input[type="checkbox"].disabled {
     background-color: #f5f5f5;
 
 }
-.scb_ab_s_histogram_dialog{
+.scb_ab_s_analyze_dialog{
     width:800px;
     left: 300px;
 
 }
-.scb_ab_s_histogram_dialog>div{
+.scb_ab_s_analyze_dialog>div{
     margin: 12% auto auto 0;
 }
 

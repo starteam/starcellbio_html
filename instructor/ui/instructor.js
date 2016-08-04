@@ -66,7 +66,7 @@ $(function() {
    * For all text input boxes inside a form
    */
   $("form input[type = 'text'], form input[type = 'number']").addClass("scb_ab_s_input_text_field");
-  $("form select").addClass("scb_ab_s_from_select_field");
+  $("form select").addClass("scb_ab_s_form_select_field");
   /**
    * Edit Strains
    */
@@ -206,6 +206,24 @@ $(function() {
       }
     });
     $('option[value=""]').attr('disabled', true);
+  }
+  /**
+   * Microscopy: Sample Prep
+   */
+  if ($("#id_form-0-micro_analysis").length) {
+    $('input[type="text"]').attr('placeholder', 'Condition Name');
+    var analysis_dict = {
+      'IF': 'histone H3 antibody',
+      'IHC': 'histone H3 antibody',
+      'DYE-FLU': 'DAPI',
+      'DYE-BF': 'Hematoxylin & Eosin',
+      'FLUOR': 'GFP-tagged protein',
+      'BF': 'N/A'
+    };
+    $('select').change(function(){
+      var condition_input = $(this).parent().parent().parent().find('input[type="text"]')[0];
+      $(condition_input).attr('placeholder', analysis_dict[$(this).val()]);
+    });
   }
 
   /**
@@ -624,7 +642,7 @@ $(function() {
 
     });
   }
-  
+
   /* COPY TO button */
   $('.open_copy_histogram_dialog').click(function(){
     $(".scb_ab_f_copy_histogram").data({

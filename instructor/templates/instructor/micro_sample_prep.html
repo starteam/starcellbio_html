@@ -14,15 +14,15 @@
     <form method="post">{% csrf_token %}
         {{ formset.management_form }}
         <div class="scb_ab_s_input_headers">
-            <div>Analysis</div>
+            <div class="scb_ab_s_micro_analyze_header">Analysis</div>
             <div>Conditions</div>
         </div>
         {% for form in formset %}
             <div class="scb_ab_s_form_input_list">
               <div class="scb_ab_s_counter_margin">{{ forloop.counter }}.</div>
                 <div class="vertical_align_bottom">
-                  <label role="presentation" class="custom-dropdown">
-                    {{ form.analysis }}
+                  <label role="presentation" class="custom-dropdown scb_ab_s_micro_analyze">
+                    {{ form.micro_analysis }}
                   </label>
                 </div>
                 <div>{{ form.condition }}</div>
