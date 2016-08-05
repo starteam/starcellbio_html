@@ -24,11 +24,16 @@ FIELDS = (
 ALL = 'merge'
 
 MICRO = (
-    ('Dye', 'Dye/Stain'),
+    ('', 'Select Analysis'),
     ('IF', 'Antibody-labeling IF'),
-    ('IHC', 'Antibody-labeling IHC'))
+    ('IHC', 'Antibody-labeling IHC'),
+    ('DYE-FLU', "dye/stain (fluorescence)"),
+    ('DYE-BF', 'dye/stain (brightfield)'),
+    ('FLUOR', 'fluorescence'),
+    ('BF', 'brightfield')
+)
 
-MICRO_DYE = 'Dye'
+MICRO_DEFAULT = ''
 # yapf: enable
 
 # Common Models
@@ -185,10 +190,10 @@ class MicroscopySamplePrep(models.Model):
         Assignment,
         related_name='microscopy_sample_prep'
     )
-    analysis = models.CharField(
+    micro_analysis = models.CharField(
         max_length=50,
         choices=MICRO,
-        default=MICRO_DYE
+        default=MICRO_DEFAULT
     )
     condition = models.CharField(max_length=50)
     order = models.IntegerField(default=0)
