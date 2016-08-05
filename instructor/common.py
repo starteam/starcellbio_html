@@ -1833,24 +1833,37 @@ def assignment_complete(request):
 
 
 def is_assignment_complete(assignment):
-    can_preview = False
     if models.StrainTreatment.objects.filter(
         assignment=assignment,
         enabled=True
     ).exists():
-        if assignment.has_wb and models.WesternBlotBands.objects.filter(
+        if assignment.has_fc or assignment.has_wb:
+            return is_facs_complete(assignment) and is_wb_complete(assignment)
+    return False
+
+
+def is_wb_complete(assignment):
+    if assignment.has_wb:
+        return models.WesternBlotBands.objects.filter(
             antibody__western_blot__assignment=assignment
-        ).exists():
-            can_preview = True
-        if (
-            assignment.has_fc and
-            models.FlowCytometryHistogramMapping.objects.filter(
-                sample_prep__assignment=assignment
-            ).exists()
-        ):
-            can_preview = True
-        # Add more techniques later when they are done
-    return can_preview
+        ).exists()
+    return True
+
+
+def is_facs_complete(assignment):
+    if assignment.has_fc:
+        mappings = models.FlowCytometryHistogramMapping.objects.filter(
+            sample_prep__assignment=assignment
+        )
+        if mappings.exists():
+            for mapping in mappings:
+                if mapping.sample_prep.live and mapping.live_data is None:
+                    return False
+                if mapping.sample_prep.fixed and mapping.fixed_data is None:
+                    return False
+            return True  # all mappings have data
+        return False
+    return True
 
 
 def is_float(txt):
