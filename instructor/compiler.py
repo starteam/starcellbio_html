@@ -140,16 +140,16 @@ def compile(assignment_id):
         ret['template']['model']['western_blot'] = generate_western_blot_model(
             a
         )
-    ret['template']['ui']['microscopy'] = {}
-    ret['template']['ui']['microscopy'][
-        'disable_blur'
-    ] = True  # # is this right?
-    ret['template']['ui']['microscopy'][
-        'disable_brightness'
-    ] = True  # # is this right?
-    ret['template']['model']['microscopy'] = micro_model(a)
-    ret['template']['slide_parser'] = {'collection_ab': micro_kinds(a)}
-    ret['template']['slides'] = generate_slides(a)
+    if a.has_micro:
+        ret['template']['ui']['microscopy'] = {}
+        ret['template']['ui']['microscopy'][
+            'disable_blur'
+        ] = True  # # is this right?
+        ret['template']['ui']['microscopy'][
+            'disable_brightness'
+        ] = True  # # is this right?
+        ret['template']['model']['microscopy'] = micro_model(a)
+        ret['template']['slides'] = generate_slides(a)
     if a.has_fc:
         ret['template']['facs_kinds'] = facs_kinds(a)
         ret['template']['facs_histograms'] = facs_histograms(a)
@@ -303,39 +303,34 @@ def facs_kinds(assignment):
 
 def micro_model(a):
     ret = {'is_ab': True}
-    for sp in a.microscopy_sample_prep.all():
-        for i in sp.microscopy_images.all():
-            key = "{sp.analysis}%%{sp.condition}%%SP_ID{protocol}".format(
-                sp=sp,
-                protocol=i.strain_protocol_id
+    for sample_prep in a.microscopy_sample_prep.all():
+        for mapping in sample_prep.image_mapping.all():
+            key = "{sp.micro_analysis}%%{sp.condition}%%SP_ID_{protocol}".format(
+                sp=sample_prep,
+                protocol=mapping.strain_protocol.id
             )
-            if key not in ret:
-                ret[key] = {
-                    'slides': [
-                        {
-                            'hash': "IMAGE_{}".format(i.pk),
-                            'if_type': i.filter,
-                            'mag': i.objective
-                        }
-                    ],
-                    'slide_type': sp.analysis
-                }
-            else:
-                ret[key]['slides'].append(
-                    {
-                        'hash': "IMAGE_{}".format(i.pk),
-                        'if_type': i.filter,
-                        'mag': i.objective
+            if mapping.images.count() > 0:
+                if key not in ret:
+                    ret[key] = {
+                        'slides': [],
+                        'slide_type': sample_prep.micro_analysis
                     }
-                )
+
+                for image in mapping.images.all():
+                    ret[key]['slides'].append(
+                        {
+                            'hash': image.pk,
+                            'if_type': 'green',
+                            'mag': 'N/A'
+                        }
+                    )
     return ret
 
 
-def generate_slides(a):
+def generate_slides(assignment):
     ret = {}
-    for sp in a.microscopy_sample_prep.all():
-        for i in sp.microscopy_images.all():
-            ret['IMAGE_{}'.format(i.pk)] = i.url
+    for image in assignment.image.all():
+        ret[image.id] = image.file.url
     return ret
 
 
@@ -406,13 +401,13 @@ def gel_types(a):
 
 
 def micro_kinds(a):
-    ret = {}
-    for sp in a.microscopy_sample_prep.all():
-        analysis = sp.analysis
-        condition = sp.condition
+    ret = {'na': {'name': 'None'}}
+    for sample_prep in a.microscopy_sample_prep.all():
+        analysis = sample_prep.micro_analysis
+        condition = sample_prep.condition
         if analysis not in ret:
             ret[analysis] = {
-                'name': analysis,
+                'name': sample_prep.get_micro_analysis_display(),
                 'conditions': {
                 },
                 'identifiers': {}
@@ -421,17 +416,6 @@ def micro_kinds(a):
             'name': condition,
             'short_name': condition
         }
-        if 'identifiers' not in ret[analysis]['conditions'][condition]:
-            ret[analysis]['conditions'][condition]['identifiers'] = {}
-        for p in sp.microscopy_images.all():
-            ret[analysis]['identifiers'][
-                "SP_ID_{}".format(
-                    p.strain_treatment_id
-                )
-            ] = 1
-            ret[analysis]['conditions'][condition]['identifiers'][
-                "SP_ID_{}".format(p.strain_treatment_id)
-            ] = 1
     return ret
 
 
@@ -544,7 +528,7 @@ def add_multiple_dialog(assignment):
             'cell_line': str(strain.id),
             'treatment_list': {
                 'list': compile_treatments(
-                    [treatment], assignment
+                    [treatment], strain_treatment, assignment
                 )
             }
         }
@@ -552,7 +536,7 @@ def add_multiple_dialog(assignment):
     return ret
 
 
-def compile_treatments(treatments, assignment):
+def compile_treatments(treatments, strain_treatment, assignment):
     ret = []
     for treatment in treatments:
         row = {
@@ -560,7 +544,7 @@ def compile_treatments(treatments, assignment):
             'drug_list': {
                 'list': [
                     {
-                        'drug_id': treatment.drug.id,
+                        'drug_id': int(treatment.drug.id),
                         'drug_name': treatment.drug.name,
                         'concentration_id': ''
                         if treatment.drug.concentration is None else
@@ -578,7 +562,7 @@ def compile_treatments(treatments, assignment):
                 time=treatment.drug.duration,
                 unit=treatment.drug.duration_unit
             ),
-            'microscope': ['rgb', 'g', 'gr', 'rb'],  # # microscope?!
+            'conditions': get_avail_conditions(strain_treatment),
             'collection_id': 'collection_ab'
         }
         if assignment.has_temperature:
@@ -590,6 +574,23 @@ def compile_treatments(treatments, assignment):
             )
         ret.append(row)
     return ret
+
+
+def get_avail_conditions(strain_treatment):
+    conditions = {}
+    mappings = strain_treatment.image_mapping.all()
+    for mapping in mappings:
+        analysis = mapping.sample_prep.micro_analysis
+
+        if mapping.images.count() > 0:
+            if analysis not in conditions:
+                conditions[analysis] = []
+            conditions[analysis].append(mapping.sample_prep.condition)
+
+    if not conditions:
+        conditions['na'] = ['None']
+
+    return conditions
 
 
 def compile_cell_lines(cell_lines):

@@ -65,7 +65,7 @@ def publish_assignment(request):
         backend_assignment.save()
         assignment.access = 'published'
         assignment.save()
-    return HttpResponse('complete')
+    return HttpResponse()
 
 
 @login_required
@@ -1861,9 +1861,17 @@ def is_assignment_complete(assignment):
         assignment=assignment,
         enabled=True
     ).exists():
-        if assignment.has_fc or assignment.has_wb:
+        if assignment.has_fc or assignment.has_wb or assignment.has_micro:
             return is_facs_complete(assignment) and is_wb_complete(assignment)
     return False
+
+
+def is_micro_complete(assignment):
+    if assignment.has_micro:
+        return models.MicroscopyImageMapping.objects.filter(
+            sample_prep__assignment=assignment
+        ).exists()
+    return True
 
 
 def is_wb_complete(assignment):
