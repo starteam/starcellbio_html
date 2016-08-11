@@ -27,10 +27,10 @@ MICRO = (
     ('', 'Select Analysis'),
     ('IF', 'Antibody-labeling IF'),
     ('IHC', 'Antibody-labeling IHC'),
-    ('DYE-FLU', "dye/stain (fluorescence)"),
-    ('DYE-BF', 'dye/stain (brightfield)'),
-    ('FLUOR', 'fluorescence'),
-    ('BF', 'brightfield')
+    ('DYE-FLU', "Dye/stain (fluorescence)"),
+    ('DYE-BF', 'Dye/stain (brightfield)'),
+    ('FLUOR', 'Fluorescence'),
+    ('BF', 'Brightfield')
 )
 
 MICRO_DEFAULT = ''
