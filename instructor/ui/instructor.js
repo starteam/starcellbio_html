@@ -67,9 +67,17 @@ $(function() {
    */
   $("form input[type = 'text'], form input[type = 'number']").addClass("scb_ab_s_input_text_field");
   $("form select").addClass("scb_ab_s_form_select_field");
+
   /**
    * Edit Strains
    */
+  if($("input[name='continue']").attr('disabled') === 'disabled'){
+     $("#id_form-0-name").keyup(function(e){
+       if($(this).val() != '') {
+         $("input:disabled").attr('disabled', false).removeClass('disabled');
+       }
+     });
+  }
 
   $('.delete_checkbox input').each(function() {
     $(this).hide().after('<div class="checkbox_delete_image"/>');
