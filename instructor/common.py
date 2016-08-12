@@ -1167,7 +1167,7 @@ def western_blot_band_intensity(request):
     # Page to go to on 'continue'
     next_view = 'common_assignments'
     if assignment.has_micro:
-        next_view = 'micro_sample_prep'
+        next_view = 'microscopy_sample_prep'
     elif assignment.has_fc:
         next_view = 'facs_sample_prep'
     wb, created = models.WesternBlot.objects.get_or_create(
@@ -1221,6 +1221,11 @@ def western_blot_band_intensity(request):
         'has_temperature': assignment.has_temperature,
         'has_collection_time': assignment.has_collection_time
     }
+    # need to decide to finish the assignment or
+    # to move on to next technique
+    save_and_continue_button = 'SAVE AND FINISH'
+    if assignment.has_fc:
+        save_and_continue_button = 'SAVE AND CONTINUE'
     return render_to_response(
         'instructor/wb_band_intensity.html',
         {
@@ -1228,6 +1233,7 @@ def western_blot_band_intensity(request):
             'access': json.dumps(assignment.access),
             'formset_group': formset_group,
             'variables': variables,
+            'save_and_continue': save_and_continue_button,
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_band_intensity',
@@ -1339,6 +1345,8 @@ def microscopy_analyze(request):
     mapping_pk = ""
     dialog_open = False
     if request.method == "POST" and 'continue' in request.POST:
+        if assignment.has_fc:
+            return redirect('facs_sample_prep')
         return redirect('common_assignments')
     if request.method == "POST" and 'upload' in request.POST:
         if len(request.FILES) > 0:
@@ -1397,6 +1405,10 @@ def microscopy_analyze(request):
         'has_temperature': assignment.has_temperature,
         'has_collection_time': assignment.has_collection_time
     }
+    # need to decide to finish the assignment or to move on to FACS
+    save_and_continue_button = 'SAVE AND FINISH'
+    if assignment.has_fc:
+        save_and_continue_button = 'SAVE AND CONTINUE'
     return render_to_response(
         'instructor/micro_analyze.html',
         {
@@ -1409,6 +1421,7 @@ def microscopy_analyze(request):
             'mapping_pk': mapping_pk,
             'image_groups': grouped_images,
             'variables': variables,
+            'save_and_continue': save_and_continue_button,
             'assignment_name': assignment.name,
             'section_name': 'Microscopy',
             'page_name': 'micro_analyze',
