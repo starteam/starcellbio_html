@@ -14,8 +14,8 @@ before_script:
 - export DISPLAY=:99.0
 - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/cucumber_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16
 - sh -c "mysql -uroot -e \"grant all on *.* to 'starcellbio'@'localhost' identified by '136a411ed9e8592089444b7164ffaf84'\""
-- wget http://goo.gl/qTy1IB -O selenium-server-standalone-2.52.0.jar
-- java -jar selenium-server-standalone-2.52.0.jar > /tmp/selenium.log 2> /tmp/selenium.error &
+- wget http://goo.gl/2lZ46z -O selenium-server-standalone-3.0.0-beta2.jar
+- java -jar selenium-server-standalone-3.0.0-beta2.jar > /tmp/selenium.log 2> /tmp/selenium.error &
 - pip install -r requirements.txt
 - python html_app/build.py
 - "./manage.py collectstatic --noinput"
