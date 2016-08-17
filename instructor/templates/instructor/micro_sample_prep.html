@@ -14,8 +14,15 @@
     <form method="post">{% csrf_token %}
         {{ formset.management_form }}
         <div class="scb_ab_s_input_headers">
-            <div class="scb_ab_s_micro_analyze_header">Analysis</div>
-            <div>Conditions</div>
+            <div class="scb_ab_s_micro_analyze_header vertical_align_top">Analysis</div>
+            <div class="vertical_align_top">Conditions</div>
+            <div class="scb_ab_s_filters_header">
+                <div>Filters</div>
+                <div class="scb_ab_filter_name_header">Red</div>
+                <div class="scb_ab_filter_name_header">Blue</div>
+                <div class="scb_ab_filter_name_header">Green</div>
+                <div class="scb_ab_filter_name_header">All</div>
+            </div>
         </div>
         {% for form in formset %}
             <div class="scb_ab_s_form_input_list">
@@ -27,6 +34,14 @@
                 </div>
                 <div>{{ form.condition }}</div>
                 <div>{{ form.id }}</div>
+                <div class="scb_ab_s_filter_checkboxes">
+                    {% if form.instance.has_filters %}
+                        {{ form.has_red }}
+                        {{ form.has_blue }}
+                        {{ form.has_green }}
+                        {{ form.has_all }}
+                    {% endif %}
+                </div>
                 <div class="delete_checkbox">{{ form.DELETE }}</div>
             </div>
         {% endfor %}

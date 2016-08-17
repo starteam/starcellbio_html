@@ -198,6 +198,10 @@ class MicroscopySamplePrep(models.Model):
     condition = models.CharField(max_length=50)
     order = models.IntegerField(default=0)
     has_filters = models.BooleanField(default=False)
+    has_green = models.BooleanField(default=False)
+    has_red = models.BooleanField(default=False)
+    has_blue = models.BooleanField(default=False)
+    has_all = models.BooleanField(default=False)
 
 
 class MicroscopyImage(models.Model):
@@ -219,11 +223,23 @@ class MicroscopyImageMapping(models.Model):
         related_name='image_mapping'
     )
     objective = models.CharField(max_length=50, default='N/A')
+    # this contains ALL filter images, if present
     images = models.ManyToManyField(
         MicroscopyImage,
         related_name='image_mapping'
     )
-    filter = models.CharField(max_length=50, choices=FIELDS, default=ALL)
+    red_filter_images = models.ManyToManyField(
+        MicroscopyImage,
+        related_name='image_mapping_red'
+    )
+    blue_filter_images = models.ManyToManyField(
+        MicroscopyImage,
+        related_name='image_mapping_blue'
+    )
+    green_filter_images = models.ManyToManyField(
+        MicroscopyImage,
+        related_name='image_mapping_green'
+    )
 
 
 FACS_CT = (('Fixed', 'Fixed Cells'), ('Live', 'Live Cells'))

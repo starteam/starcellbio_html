@@ -403,6 +403,7 @@ $(function() {
     data['image_pk_list'] = _.map($('.scb_ab_s_image_selected'), function (element) {
       return $(element).attr('id').match(/(\d+)$/)[0];
     });
+    data['filter'] = $(this).data('filter');
     if (data['image_pk_list'].length > 0) {
       $.ajax({
         url: '/ab/assignments/select_images/',
@@ -606,6 +607,7 @@ $(function() {
   $(".open_upload_window_btn").click(function(){
     /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
+    var filter = $(this).data('filter');
     /* Get name of the sample from the row itself */
     var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
     $('.scb_ab_f_sample_name').text(sample_name);
@@ -613,7 +615,7 @@ $(function() {
     var sample_treatment  = $(this).data('sample_treatment');
     $('.scb_ab_f_treatment_text').text(sample_treatment);
     $('.scb_ab_s_analyze_dialog').css('visibility', 'visible');
-    $('.scb_ab_f_save_image').data('pk', instance_pk);
+    $('.scb_ab_f_save_image').data({'pk': instance_pk, 'filter': filter});
     addImageFormHandler();
 
   });
@@ -636,6 +638,7 @@ $(function() {
       parameters['protocol'] = $('.scb_ab_f_sample_name').text();
       parameters['sample_prep'] = $('.scb_ab_f_treatment_text').text();
       parameters['mapping_pk'] = $('.scb_ab_f_save_image').data('pk');
+      parameters['filter'] = $('.scb_ab_f_save_image').data('filter');
       _.each(parameters, function(value, key){
         $("<input>", { type: "hidden", name: key, value: value }).appendTo("#image_form");
       });

@@ -63,13 +63,6 @@
           <div class="scb_ab_s_facs_condition_header">
             {{ analysis }}, {{ condition }}
           </div>
-          {% if forloop.counter == 1 %}
-            <div class="scb_ab_s_copy_checkbox_container">
-              <div class="scb_ab_s_col_copy">
-                Copy to another sample(s)
-              </div>
-            </div>
-          {% endif %}
         </div>
 
         {% for instance in instance_list %}
@@ -97,32 +90,63 @@
               </div>
             </div>
           </div>
-
-          {% if instance.images.count > 0 %}
-            <div class="scb_ab_s_row">
-
+          {% if instance.sample_prep.has_filters %}
+            <div class="scb_ab_s_row" style="padding:10px 0">
               <div class="scb_ab_s_col_width_number"></div>
-              <div class="scb_ab_s_sample_image_list">
-                {% for image in instance.images.all %}
-                  <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
+              <div class="scb_ab_s_bold">Filters:</div>
+              {% with tuples_list=images_by_filters|get_item:instance.id %}
+                {% for filter, image_list in tuples_list %}
+                  {% with has_filter="has_"|add:filter %}
+                    {% with has_filter_value=instance.sample_prep|get_item:has_filter %}
+                      {% if has_filter_value %}
+                        <div class="scb_ab_s_filter_images_col">
+                          <div class="scb_ab_s_bold scb_ab_s_filter_header_analyze">{{ filter|title }}</div>
+                          <div class="scb_ab_s_sample_image_list">
+                            {% for image in image_list.all %}
+                              <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
+                            {% endfor %}
+                          </div>
+                          <button type="button" class="scb_s_gray_button open_upload_window_btn"
+                                  data-row_id="row-{{ instance.id }}"
+                                  data-sample_treatment="{{ analysis }}, {{ condition }}"
+                                  data-filter="{{ filter }}">
+                            ADD IMAGE
+                          </button>
+                        </div>
+                      {% endif %}
+                    {% endwith %}
+                  {% endwith %}
                 {% endfor %}
-              </div>
-              <div class="scb_ab_s_copy_checkbox_container">
-                <div class="scb_ab_s_col_copy">
-                  <input type="checkbox">
-                </div>
-              </div>
+              {% endwith %}
+            </div>
+          {% else %}
+            <!-- no filters -->
+            {% if instance.images.count > 0 %}
+              <div class="scb_ab_s_row">
 
+                <div class="scb_ab_s_col_width_number"></div>
+                <div class="scb_ab_s_sample_image_list">
+                  {% for image in instance.images.all %}
+                    <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
+                  {% endfor %}
+                </div>
+                <div class="scb_ab_s_copy_checkbox_container">
+                  <div class="scb_ab_s_col_copy">
+                  </div>
+                </div>
+
+              </div>
+            {% endif %}
+
+            <div class="scb_ab_s_row" style="padding-bottom:10px">
+              <div class="scb_ab_s_col_width_number"></div>
+              <button type="button" class="scb_s_gray_button open_upload_window_btn"
+                      data-row_id="row-{{ instance.id }}"
+                      data-sample_treatment="{{ analysis }}, {{ condition }}">
+                ADD IMAGE
+              </button>
             </div>
           {% endif %}
-          <div class="scb_ab_s_row" style="padding-bottom:10px">
-            <div class="scb_ab_s_col_width_number"></div>
-            <button type="button" class="scb_s_gray_button open_upload_window_btn"
-                        data-row_id="row-{{ instance.id }}"
-                        data-sample_treatment="{{ analysis }}, {{ condition }}">
-                  ADD IMAGE
-            </button>
-          </div>
         {% endfor %}
       {% endfor %}
       <input type="submit"
