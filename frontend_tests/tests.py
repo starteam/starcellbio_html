@@ -11,8 +11,10 @@ from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait  # available since 2.4.0
+from base64 import b64encode
 import time
 from selenium.webdriver import ActionChains
+import selenium.webdriver.chrome.service as service
 import platform
 import os
 import os.path
@@ -26,9 +28,14 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 class SimpleTest(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
+        capabilities = webdriver.DesiredCapabilities.CHROME.copy()
+        capabilities['chromeOptions'] = {
+            'binary': os.getenv('CHROME_BIN'),
+            'args': ['--no-sandbox'],
+        }
         cls.browser = webdriver.Remote(
-            os.getenv('SELENIUM_URL', 'http://localhost:14444/wd/hub'),
-            webdriver.DesiredCapabilities.FIREFOX.copy()
+            os.getenv('SELENIUM_URL'),
+            capabilities
         )
         super(SimpleTest, cls).setUpClass()
 
@@ -40,11 +47,16 @@ class SimpleTest(LiveServerTestCase):
     def tearDown(self):
         if sys.exc_info()[0]:
             test_method_name = self._testMethodName
-            self.browser.save_screenshot(
-                os.path.join(
-                    REPO_ROOT, 'screenshots', "{}.png".format(test_method_name)
-                )
+            filename = os.path.join(
+                REPO_ROOT, 'screenshots', "{}.png".format(test_method_name)
             )
+            self.browser.save_screenshot(filename)
+            with open(filename, 'rb') as f:
+                # Encode PNG screenshot as base64 in travis logs
+                print("PNG screenshot for {test}, b64: {b64}".format(
+                    test=test_method_name,
+                    b64=b64encode(f.read()),
+                ))
 
         super(SimpleTest, self).tearDown()
 
