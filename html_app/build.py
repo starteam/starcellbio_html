@@ -188,9 +188,13 @@ def processor(path):
 
 def process_all():
     for subdir, _, files in os.walk(ROOT):
-        for f in files:
-            path = "{}/{}".format(subdir, f)
-            processor(path)
+        soy_files = [f for f in files if f.endswith(".soy")]
+        gss_files = [f for f in files if f.endswith(".gss")]
+        other_files = [f for f in files if f not in soy_files and f not in gss_files]
+        for group in [soy_files, gss_files, other_files]:
+            for f in group:
+                path = "{}/{}".format(subdir, f)
+                processor(path)
 
     update_index_html()
 
