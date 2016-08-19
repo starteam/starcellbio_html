@@ -800,3 +800,32 @@ label.custom-dropdown {
     width: 450px;
     text-align: left;
 }
+/* Microscopy Sample Prep */
+.scb_ab_s_filter_checkboxes{
+    width:170px;
+    margin-left: 18px;
+}
+.scb_ab_s_filter_checkboxes>input[type='checkbox']{
+    margin-right: 16px;
+}
+
+.scb_ab_filter_name_header{
+    display: inline-block;
+    width: 33px;
+    font-size: 12px;
+}
+.scb_ab_s_filters_header{
+    text-align: center;
+}
+/* Microscopy analyze */
+.scb_ab_s_filter_images_col{
+    width: 100px;
+    display: inline-block;
+}
+.scb_ab_s_bold{
+    font-family: 'sourcesanspro-semibold';
+}
+.scb_ab_s_filter_header_analyze{
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}

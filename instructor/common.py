@@ -16,6 +16,7 @@ import re
 from instructor.compiler import get_protocol_headers
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
+from django.template.defaulttags import register
 
 page_order = (
     'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
@@ -24,6 +25,7 @@ page_order = (
 )
 facs_pages = ('facs_sample_prep', 'facs_setup', 'facs_analyze')
 micro_pages = ('micro_sample_prep', 'micro_analyze')
+fluorescent_analyses = ('IF', 'DYE-FLU', 'FLUOR')
 
 
 @login_required
@@ -1249,7 +1251,7 @@ def microscopy_sample_prep(request):
         extra=1,
         can_delete=True,
         can_order=True,
-        exclude=['assignment', 'order']
+        exclude=['assignment', 'order', 'has_filters']
     )
     if request.method == "POST" and assignment.access == 'private':
         formset = MicroSamplePrepFormset(request.POST)
@@ -1258,6 +1260,10 @@ def microscopy_sample_prep(request):
             for obj in formset.deleted_objects:
                 obj.delete()
             for facs_sample in entries:
+                if facs_sample.micro_analysis in fluorescent_analyses:
+                    facs_sample.has_filters = True
+                else:
+                    facs_sample.has_filters = False
                 if facs_sample.id is None:
                     facs_sample.assignment = assignment
                     facs_sample.save()
@@ -1337,6 +1343,7 @@ def microscopy_analyze(request):
     chosen_sampleprep = ""
     chosen_protocol = ""
     mapping_pk = ""
+    filter_name = ""
     dialog_open = False
     if request.method == "POST" and 'continue' in request.POST:
         return redirect('common_assignments')
@@ -1353,6 +1360,7 @@ def microscopy_analyze(request):
             chosen_protocol = request.POST.get('protocol')
             chosen_sampleprep = request.POST.get('sample_prep')
             mapping_pk = request.POST.get('mapping_pk')
+            filter_name = request.POST.get('filter')
 
     image_mappings = models.MicroscopyImageMapping.objects.filter(
         sample_prep__assignment=assignment
@@ -1386,6 +1394,14 @@ def microscopy_analyze(request):
                 filtered_list
             )
         )
+    # Organizing images by filters, by mapping id
+    images_by_filters = {}
+    for mapping in image_mappings:
+        images_by_filters[mapping.id] = [
+            ('red', mapping.red_filter_images),
+            ('blue', mapping.blue_filter_images),
+            ('green', mapping.green_filter_images), ('all', mapping.images)
+        ]
 
     all_images = models.MicroscopyImage.objects.filter(assignment=assignment)
     ImageForm = modelform_factory(models.MicroscopyImage, fields=['file'])
@@ -1402,11 +1418,13 @@ def microscopy_analyze(request):
         {
             'access': json.dumps(assignment.access),
             'all_images': all_images,
+            'images_by_filters': images_by_filters,
             'image_form': image_form,
             'dialog_open': json.dumps(dialog_open),
             'protocol_name': chosen_protocol,
             'sample_prep_name': chosen_sampleprep,
             'mapping_pk': mapping_pk,
+            'filter': filter_name,
             'image_groups': grouped_images,
             'variables': variables,
             'assignment_name': assignment.name,
@@ -1705,19 +1723,24 @@ def select_images(request):
     pk = request.session['assignment_id']
     mapping_id = request.POST.get('mapping_pk')
     image_pk_list = request.POST.getlist('image_pk_list[]')
+    filter_name = request.POST.get('filter')
     instance = get_object_or_404(
         models.MicroscopyImageMapping,
         pk=mapping_id,
         sample_prep__assignment__pk=pk
     )
+    if filter_name is None or filter_name == 'all':
+        images_attribute = 'images'
+    else:
+        images_attribute = filter_name + '_filter_images'
+
     for image_pk in image_pk_list:
         selected_image = get_object_or_404(
             models.MicroscopyImage,
             pk=image_pk,
             assignment__pk=pk
         )
-
-        instance.images.add(selected_image)
+        getattr(instance, images_attribute).add(selected_image)
     instance.save()
 
     return HttpResponse()
@@ -1880,3 +1903,11 @@ def is_long(s):
         return True
     except ValueError:
         return False
+
+
+@register.filter
+def get_item(dictionary, key):
+    if type(dictionary) is dict:
+        return dictionary.get(key)
+    else:
+        return getattr(dictionary, key)
