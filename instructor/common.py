@@ -556,14 +556,9 @@ def assignments_edit_strains(request):
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
     extra_fields = 0
-    if 'add' in request.POST or not models.Strains.objects.filter(
-        assignment=assignment
-    ):
-        extra_fields = 1
 
     StrainsFormSet = modelformset_factory(
         models.Strains,
-        extra=extra_fields,
         fields=['name'],
         can_delete=True
     )
@@ -590,7 +585,18 @@ def assignments_edit_strains(request):
 
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_assignments_variables")
+    # Add extra form if clicked ADD or none exist
+    if 'add' in request.POST or not models.Strains.objects.filter(
+        assignment=assignment
+    ).exists():
+        extra_fields = 1
 
+    StrainsFormSet = modelformset_factory(
+        models.Strains,
+        extra=extra_fields,
+        fields=['name'],
+        can_delete=True
+    )
     formset = StrainsFormSet(
         queryset=models.Strains.objects.filter(assignment=assignment)
     )
