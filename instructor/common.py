@@ -98,6 +98,11 @@ def get_pages(assignment):
         if page == assignment.last_page_name:
             enabled = False
 
+    if not assignment.has_wb:
+        wb_pages = page_order[-4:]
+        for page in wb_pages:
+            pages[page] = False
+
     if assignment.has_micro:
         enabled = True
         for page in micro_pages:
