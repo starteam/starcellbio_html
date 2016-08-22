@@ -9,13 +9,14 @@ import datetime
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, FieldError
 import backend.models
 import json
 import re
 from instructor.compiler import get_protocol_headers
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
+from django.template.defaulttags import register
 
 page_order = (
     'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
@@ -24,6 +25,8 @@ page_order = (
 )
 facs_pages = ('facs_sample_prep', 'facs_setup', 'facs_analyze')
 micro_pages = ('micro_sample_prep', 'micro_analyze')
+fluorescent_analyses = ('IF', 'DYE-FLU', 'FLUOR')
+filters = ('red', 'blue', 'green', 'merge')
 
 
 @login_required
@@ -1275,6 +1278,10 @@ def microscopy_sample_prep(request):
             for obj in formset.deleted_objects:
                 obj.delete()
             for facs_sample in entries:
+                if facs_sample.micro_analysis in fluorescent_analyses:
+                    facs_sample.has_filters = True
+                else:
+                    facs_sample.has_filters = False
                 if facs_sample.id is None:
                     facs_sample.assignment = assignment
                     facs_sample.save()
@@ -1354,6 +1361,7 @@ def microscopy_analyze(request):
     chosen_sampleprep = ""
     chosen_protocol = ""
     mapping_pk = ""
+    filter_group_id = ""
     dialog_open = False
     if request.method == "POST" and 'continue' in request.POST:
         if assignment.has_fc:
@@ -1372,6 +1380,7 @@ def microscopy_analyze(request):
             chosen_protocol = request.POST.get('protocol')
             chosen_sampleprep = request.POST.get('sample_prep')
             mapping_pk = request.POST.get('mapping_pk')
+            filter_group_id = request.POST.get('filter_group_id')
 
     image_mappings = models.MicroscopyImageMapping.objects.filter(
         sample_prep__assignment=assignment
@@ -1420,16 +1429,19 @@ def microscopy_analyze(request):
     save_and_continue_button = 'SAVE AND FINISH'
     if assignment.has_fc:
         save_and_continue_button = 'SAVE AND CONTINUE'
+
     return render_to_response(
         'instructor/micro_analyze.html',
         {
             'access': json.dumps(assignment.access),
             'all_images': all_images,
             'image_form': image_form,
+            'filters': filters,
             'dialog_open': json.dumps(dialog_open),
             'protocol_name': chosen_protocol,
             'sample_prep_name': chosen_sampleprep,
             'mapping_pk': mapping_pk,
+            'filter_group_id': filter_group_id,
             'image_groups': grouped_images,
             'variables': variables,
             'save_and_continue': save_and_continue_button,
@@ -1728,20 +1740,62 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
 def select_images(request):
     pk = request.session['assignment_id']
     mapping_id = request.POST.get('mapping_pk')
+    filter_group_id = request.POST.get('filter_group_id')
     image_pk_list = request.POST.getlist('image_pk_list[]')
+
+    if filter_group_id:
+        filter_group_id = filter_group_id.split('-')
+        filter_name = filter_group_id[0]
+        group_id = filter_group_id[1]
+
+        if filter_name not in filters:
+            raise FieldError
+        image_group = get_object_or_404(
+            models.MicroscopyGroupedImages,
+            id=group_id,
+            image_mapping__sample_prep__assignment__pk=pk
+        )
+        selected_image = get_object_or_404(
+            models.MicroscopyImage,
+            pk=image_pk_list[0],
+            assignment__pk=pk
+        )
+        field_name = filter_name + '_filter_image'
+        setattr(image_group, field_name, selected_image)
+        image_group.save()
+    else:
+        instance = get_object_or_404(
+            models.MicroscopyImageMapping,
+            pk=mapping_id,
+            sample_prep__assignment__pk=pk
+        )
+        for image_pk in image_pk_list:
+            selected_image = get_object_or_404(
+                models.MicroscopyImage,
+                pk=image_pk,
+                assignment__pk=pk
+            )
+
+            instance.images.add(selected_image)
+        instance.save()
+
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def add_image_group(request):
+    pk = request.session['assignment_id']
+
+    mapping_id = request.POST.get('mapping_id')
     instance = get_object_or_404(
         models.MicroscopyImageMapping,
         pk=mapping_id,
         sample_prep__assignment__pk=pk
     )
-    for image_pk in image_pk_list:
-        selected_image = get_object_or_404(
-            models.MicroscopyImage,
-            pk=image_pk,
-            assignment__pk=pk
-        )
-
-        instance.images.add(selected_image)
+    image_group = models.MicroscopyGroupedImages.objects.create()
+    instance.grouped_images.add(image_group)
     instance.save()
 
     return HttpResponse()
@@ -1912,3 +1966,11 @@ def is_long(s):
         return True
     except ValueError:
         return False
+
+
+@register.filter
+def get_item(dictionary, key):
+    if type(dictionary) is dict:
+        return dictionary.get(key)
+    else:
+        return getattr(dictionary, key, None)

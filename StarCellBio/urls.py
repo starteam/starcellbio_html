@@ -282,6 +282,11 @@ urlpatterns += patterns(
         instructor_common.select_images,
         name="select_images"
     ),
+    url(
+        r'^ab/assignments/add_new_image_set/$',
+        instructor_common.add_image_group,
+        name="add_image_group"
+    ),
     # Flow Cytometry
     url(
         r'^ab/assignments/submit_histogram/$',
