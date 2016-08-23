@@ -173,6 +173,13 @@ def processor(path):
         outfile = "{}/gen/{}.css".format(
             os.path.dirname(infile), os.path.basename(infile)
         )
+
+        # Create directory for output
+        try:
+            os.mkdir(os.path.join(os.path.dirname(infile), 'gen'))
+        except OSError:  # directory already exists
+            pass
+
         call(
             [
                 "java", "-jar", os.path.join(
@@ -188,13 +195,9 @@ def processor(path):
 
 def process_all():
     for subdir, _, files in os.walk(ROOT):
-        soy_files = [f for f in files if f.endswith(".soy")]
-        gss_files = [f for f in files if f.endswith(".gss")]
-        other_files = [f for f in files if f not in soy_files and f not in gss_files]
-        for group in [soy_files, gss_files, other_files]:
-            for f in group:
-                path = "{}/{}".format(subdir, f)
-                processor(path)
+        for f in files:
+            path = os.path.join(subdir, f)
+            processor(path)
 
     update_index_html()
 
