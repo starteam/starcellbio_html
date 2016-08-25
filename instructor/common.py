@@ -1651,7 +1651,7 @@ def facs_analyze(request):
             'fixed': instance.fixed_data.data if instance.fixed_data else None,
             'live': instance.live_data.data if instance.live_data else None
         }
-    all_histograms = models.FlowCytometryHistogram.objects.exclude(
+    all_histograms = models.FlowCytometryHistogram.objects.filter(facs__assignment__id=pk).exclude(
         data__isnull=True
     )
     all_histogram_data = {
