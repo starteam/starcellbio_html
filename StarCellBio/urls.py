@@ -283,6 +283,11 @@ urlpatterns += patterns(
         name="select_images"
     ),
     url(
+        r'^ab/assignments/remove_image/$',
+        instructor_common.remove_image,
+        name="remove_image"
+    ),
+    url(
         r'^ab/assignments/add_new_image_set/$',
         instructor_common.add_image_group,
         name="add_image_group"
