@@ -38,7 +38,7 @@
           {% endfor %}
         </div>
         <button type="button" class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_image"
-                data-pk="{{ mapping_pk }}">
+                data-pk="{{ mapping_pk }}" data-filter_group_id="{{ filter_group_id }}">
           SAVE SELECTION
         </button>
 
@@ -70,7 +70,6 @@
           {% if forloop.counter == 1 %}
             <div class="scb_ab_s_copy_checkbox_container">
               <div class="scb_ab_s_col_copy">
-                Copy to another sample(s)
               </div>
             </div>
           {% endif %}
@@ -101,32 +100,72 @@
               </div>
             </div>
           </div>
-
-          {% if instance.images.count > 0 %}
-            <div class="scb_ab_s_row">
-
-              <div class="scb_ab_s_col_width_number"></div>
-              <div class="scb_ab_s_sample_image_list">
-                {% for image in instance.images.all %}
-                  <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
+          {% if instance.sample_prep.has_filters %}
+            {% if instance.grouped_images.count > 0 %}
+              <div class="scb_ab_s_row">
+                <div class="scb_ab_s_col_width_number"></div>
+                <div class="scb_ab_s_filters_row_name">Filters:</div>
+                {% for filter in filters %}
+                  <div class="scb_ab_s_filtered_image_grid">{{ filter|title }}</div>
                 {% endfor %}
               </div>
-              <div class="scb_ab_s_copy_checkbox_container">
-                <div class="scb_ab_s_col_copy">
-                  <input type="checkbox">
-                </div>
-              </div>
+              {% for image_set in instance.grouped_images.all %}
+                <div class="scb_ab_s_row">
+                  <div class="scb_ab_s_col_width_number"></div>
+                  <div class="scb_ab_s_filters_row_name">Set {{ forloop.counter }} :</div>
 
+                  {% for filter in filters %}
+                    <div class="scb_ab_s_filtered_image_grid">
+                      {% with image_field=filter|add:'_filter_image' %}
+                        {% with filter_image=image_set|get_item:image_field %}
+                          {% if filter_image %}
+                            <img src="{{ filter_image.file.url }}" class="scb_ab_s_small_image"/>
+                          {% else %}
+                            <button type="button" data-filter_group_id="{{ filter }}-{{ image_set.id }}"
+                                    class="open_upload_window_btn"
+                                    data-row_id="row-{{ instance.id }}"
+                                    data-sample_treatment="{{ analysis }}, {{ condition }}">&#43;</button>
+                          {% endif %}
+                        {% endwith %}
+                      {% endwith %}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+            {% endif %}
+            <div class="scb_ab_s_row">
+              <div class="scb_ab_s_col_width_number"></div>
+              <button type="button" class="scb_s_gray_button add_new_image_set"
+                      data-mapping_id="{{ instance.id }}">
+                NEW SET &#43;
+              </button>
+            </div>
+          {% else %}
+            {% if instance.images.count > 0 %}
+              <div class="scb_ab_s_row">
+
+                <div class="scb_ab_s_col_width_number"></div>
+                <div class="scb_ab_s_sample_image_list">
+                  {% for image in instance.images.all %}
+                    <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
+                  {% endfor %}
+                </div>
+                <div class="scb_ab_s_copy_checkbox_container">
+                  <div class="scb_ab_s_col_copy">
+                  </div>
+                </div>
+
+              </div>
+            {% endif %}
+            <div class="scb_ab_s_row" style="padding-bottom:10px">
+              <div class="scb_ab_s_col_width_number"></div>
+              <button type="button" class="scb_s_gray_button open_upload_window_btn"
+                          data-row_id="row-{{ instance.id }}"
+                          data-sample_treatment="{{ analysis }}, {{ condition }}">
+                    ADD IMAGE(S)
+              </button>
             </div>
           {% endif %}
-          <div class="scb_ab_s_row" style="padding-bottom:10px">
-            <div class="scb_ab_s_col_width_number"></div>
-            <button type="button" class="scb_s_gray_button open_upload_window_btn"
-                        data-row_id="row-{{ instance.id }}"
-                        data-sample_treatment="{{ analysis }}, {{ condition }}">
-                  ADD IMAGE
-            </button>
-          </div>
         {% endfor %}
       {% endfor %}
       <input type="submit"

@@ -209,6 +209,33 @@ class MicroscopyImage(models.Model):
     )
 
 
+class MicroscopyGroupedImages(models.Model):
+    red_filter_image = models.ForeignKey(
+        MicroscopyImage,
+        related_name='grouped_images_red',
+        blank=True,
+        null=True
+    )
+    blue_filter_image = models.ForeignKey(
+        MicroscopyImage,
+        related_name='grouped_images_blue',
+        blank=True,
+        null=True
+    )
+    green_filter_image = models.ForeignKey(
+        MicroscopyImage,
+        related_name='grouped_images_green',
+        blank=True,
+        null=True
+    )
+    merge_filter_image = models.ForeignKey(
+        MicroscopyImage,
+        related_name='grouped_images_all',
+        blank=True,
+        null=True
+    )
+
+
 class MicroscopyImageMapping(models.Model):
     sample_prep = models.ForeignKey(
         MicroscopySamplePrep,
@@ -223,7 +250,10 @@ class MicroscopyImageMapping(models.Model):
         MicroscopyImage,
         related_name='image_mapping'
     )
-    filter = models.CharField(max_length=50, choices=FIELDS, default=ALL)
+    grouped_images = models.ManyToManyField(
+        MicroscopyGroupedImages,
+        related_name='image_mapping'
+    )
 
 
 FACS_CT = (('Fixed', 'Fixed Cells'), ('Live', 'Live Cells'))
