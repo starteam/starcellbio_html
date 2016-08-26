@@ -303,27 +303,48 @@ def facs_kinds(assignment):
 
 def micro_model(a):
     ret = {'is_ab': True}
+    filters = ['red', 'blue', 'green', 'merge']
     for sample_prep in a.microscopy_sample_prep.all():
         for mapping in sample_prep.image_mapping.all():
             key = "{sp.micro_analysis}%%{sp.condition}%%SP_ID_{protocol}".format(
                 sp=sample_prep,
                 protocol=mapping.strain_protocol.id
             )
-            if mapping.images.count() > 0:
+            if has_images(mapping, sample_prep):
                 if key not in ret:
                     ret[key] = {
                         'slides': [],
                         'slide_type': sample_prep.micro_analysis
                     }
 
-                for image in mapping.images.all():
-                    ret[key]['slides'].append(
-                        {
-                            'hash': image.pk,
-                            'if_type': 'green',
-                            'mag': 'N/A'
-                        }
-                    )
+                if sample_prep.has_filters:
+                    for image_group in mapping.grouped_images.all():
+                        image_list = []
+                        for filter_name in filters:
+                            image = getattr(
+                                image_group, filter_name + '_filter_image'
+                            )
+                            if image:
+                                image_list.append(
+                                    {
+                                        'hash': image.pk,
+                                        'if_type': filter_name,
+                                        'mag': 'N/A'
+                                    }
+                                )
+
+                        ret[key]['slides'].append(image_list)
+                else:
+                    for image in mapping.images.all():
+                        ret[key]['slides'].append(
+                            [
+                                {
+                                    'hash': image.pk,
+                                    'if_type': 'green',
+                                    'mag': 'N/A'
+                                }
+                            ]
+                        )
     return ret
 
 
@@ -580,17 +601,30 @@ def get_avail_conditions(strain_treatment):
     conditions = {}
     mappings = strain_treatment.image_mapping.all()
     for mapping in mappings:
+        sample_prep = mapping.sample_prep
         analysis = mapping.sample_prep.micro_analysis
 
-        if mapping.images.count() > 0:
+        if has_images(mapping, sample_prep):
             if analysis not in conditions:
                 conditions[analysis] = []
             conditions[analysis].append(mapping.sample_prep.condition)
 
+    # if there are no images for this strain_treatment
     if not conditions:
         conditions['na'] = ['None']
 
     return conditions
+
+
+def has_images(mapping, sample_prep):
+    """
+    Check if there are any images for the sample
+    depending on has_filters in sample_prep
+    """
+    return (
+        ((not sample_prep.has_filters) and mapping.images.count() > 0) or
+        (sample_prep.has_filters and mapping.grouped_images.count() > 0)
+    )
 
 
 def compile_cell_lines(cell_lines):
