@@ -217,7 +217,10 @@ scb.components.MicroscopyModelFactory = function scb_components_MicroscopyModelF
       var identifier = state.microscopy_lane.cell_treatment.identifier;
       var key = kind + "%%" + conditions + "%%" + identifier;
       var image_state = model[key];
-      state.slides = image_state['slides'];
+
+      var max = image_state['slides'].length;
+      var random_num = Math.floor(Math.random() * (max));
+      state.slides = image_state['slides'][random_num];
       state.slide_type = image_state['slide_type'];
     }
   }
