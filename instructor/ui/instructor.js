@@ -705,6 +705,21 @@ $(function() {
       window.location = '/ab/assignments/microscopy_analyze/';
     });
   });
+  /* Remove image */
+  $(".scb_ab_f_remove_image").click(function(){
+    $.ajax({
+      url: '/ab/assignments/remove_image/',
+      type: "POST",
+      data: {
+        mapping_id: $(this).data('mapping_id'),
+        group_id: $(this).data('group_id'),
+        filter: $(this).data('filter'),
+        image_id: $(this).data('image_id')
+      }
+    }).then(function () {
+      window.location = '/ab/assignments/microscopy_analyze/';
+    });
+  })
 });
 
 

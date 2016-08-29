@@ -1663,7 +1663,9 @@ def facs_analyze(request):
             'fixed': instance.fixed_data.data if instance.fixed_data else None,
             'live': instance.live_data.data if instance.live_data else None
         }
-    all_histograms = models.FlowCytometryHistogram.objects.filter(facs__assignment__id=pk).exclude(
+    all_histograms = models.FlowCytometryHistogram.objects.filter(
+        facs__assignment__id=pk
+    ).exclude(
         data__isnull=True
     )
     all_histogram_data = {
@@ -1798,6 +1800,40 @@ def add_image_group(request):
     instance.grouped_images.add(image_group)
     instance.save()
 
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def remove_image(request):
+    pk = request.session['assignment_id']
+    mapping_id = request.POST.get('mapping_id')
+    group_id = request.POST.get('group_id')
+    filter_name = request.POST.get('filter')
+    image_id = request.POST.get('image_id')
+    if group_id:
+        if filter_name not in filters:
+            raise FieldError
+        image_group = get_object_or_404(
+            models.MicroscopyGroupedImages,
+            id=group_id,
+            image_mapping__sample_prep__assignment__pk=pk
+        )
+        setattr(image_group, filter_name + '_filter_image', None)
+        image_group.save()
+    else:
+        mapping = get_object_or_404(
+            models.MicroscopyImageMapping,
+            pk=mapping_id,
+            sample_prep__assignment__pk=pk
+        )
+        image = get_object_or_404(
+            models.MicroscopyImage,
+            pk=image_id,
+            assignment__pk=pk
+        )
+        mapping.images.remove(image)
     return HttpResponse()
 
 

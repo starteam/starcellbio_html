@@ -655,7 +655,7 @@ input[type="checkbox"].disabled {
     background: white;
 }
 
-.scb_ab_s_remove_histogram_icon {
+.scb_ab_s_remove_icon {
     float:right;
     height: 26px;
     width: 26px;
@@ -665,7 +665,7 @@ input[type="checkbox"].disabled {
     background-image: url('../../../images/header/scb_close_button.png');
 }
 
-.scb_ab_s_remove_histogram_icon:hover{
+.scb_ab_s_remove_icon:hover{
     background-color: #e58986;
 }
 .scb_ab_s_remove_histogram_icon_position{
@@ -799,10 +799,34 @@ label.custom-dropdown {
 .scb_ab_s_row>.scb_ab_s_sample_image_list{
     width: 450px;
     text-align: left;
+    position: relative;
+
 }
-.scb_ab_s_filtered_image_grid{
+.scb_ab_s_row>div.scb_ab_s_filtered_image_grid{
     width: 100px;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+
 }
-.scb_ab_s_filters_row_name{
+.scb_ab_s_row>div.scb_ab_s_filters_row_name{
     width: 40px;
+    text-align: left;
+    display: table-cell;
+    vertical-align: middle;
+
+}
+.scb_ab_s_remove_image_icon_position{
+    position:absolute;
+    left: 80px;
+    margin-top: -6px;
+}
+.scb_ab_s_row_offset{
+    display: table-cell;
+    width: 18px
+}
+.scb_ab_s_image_wrapper{
+    position:relative;
+    display:inline-block;
+    vertical-align: middle;
 }

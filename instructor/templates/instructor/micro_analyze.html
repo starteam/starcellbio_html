@@ -102,23 +102,28 @@
           </div>
           {% if instance.sample_prep.has_filters %}
             {% if instance.grouped_images.count > 0 %}
-              <div class="scb_ab_s_row">
-                <div class="scb_ab_s_col_width_number"></div>
+              <div class="scb_ab_s_row" style="display: table-row">
+                <div class="scb_ab_s_row_offset"></div>
                 <div class="scb_ab_s_filters_row_name">Filters:</div>
                 {% for filter in filters %}
                   <div class="scb_ab_s_filtered_image_grid">{{ filter|title }}</div>
                 {% endfor %}
               </div>
               {% for image_set in instance.grouped_images.all %}
-                <div class="scb_ab_s_row">
-                  <div class="scb_ab_s_col_width_number"></div>
+                <div class="scb_ab_s_row" style="display: table-row">
+                  <div class="scb_ab_s_row_offset"></div>
                   <div class="scb_ab_s_filters_row_name">Set {{ forloop.counter }} :</div>
-
                   {% for filter in filters %}
                     <div class="scb_ab_s_filtered_image_grid">
                       {% with image_field=filter|add:'_filter_image' %}
                         {% with filter_image=image_set|get_item:image_field %}
                           {% if filter_image %}
+                            <div class="scb_ab_s_remove_image_icon_position">
+                                <span class="scb_ab_s_remove_icon scb_ab_f_remove_image" role="button"
+                                      data-mapping_id="{{ instance.id }}"
+                                      data-filter="{{ filter }}"
+                                      data-group_id="{{ image_set.id }}" aria-label="Remove Image">×</span>
+                            </div>
                             <img src="{{ filter_image.file.url }}" class="scb_ab_s_small_image"/>
                           {% else %}
                             <button type="button" data-filter_group_id="{{ filter }}-{{ image_set.id }}"
@@ -133,7 +138,7 @@
                 </div>
               {% endfor %}
             {% endif %}
-            <div class="scb_ab_s_row">
+            <div class="scb_ab_s_row" style="padding-top:5px">
               <div class="scb_ab_s_col_width_number"></div>
               <button type="button" class="scb_s_gray_button add_new_image_set"
                       data-mapping_id="{{ instance.id }}">
@@ -143,11 +148,17 @@
           {% else %}
             {% if instance.images.count > 0 %}
               <div class="scb_ab_s_row">
-
                 <div class="scb_ab_s_col_width_number"></div>
                 <div class="scb_ab_s_sample_image_list">
                   {% for image in instance.images.all %}
-                    <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
+                    <div class="scb_ab_s_image_wrapper">
+                      <div class="scb_ab_s_remove_image_icon_position">
+                        <span class="scb_ab_s_remove_icon scb_ab_f_remove_image" role="button"
+                              data-mapping_id="{{ instance.id }}"
+                              data-image_id="{{ image.id }}" aria-label="Remove Image">×</span>
+                      </div>
+                      <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
+                    </div>
                   {% endfor %}
                 </div>
                 <div class="scb_ab_s_copy_checkbox_container">
@@ -160,9 +171,9 @@
             <div class="scb_ab_s_row" style="padding-bottom:10px">
               <div class="scb_ab_s_col_width_number"></div>
               <button type="button" class="scb_s_gray_button open_upload_window_btn"
-                          data-row_id="row-{{ instance.id }}"
-                          data-sample_treatment="{{ analysis }}, {{ condition }}">
-                    ADD IMAGE(S)
+                      data-row_id="row-{{ instance.id }}"
+                      data-sample_treatment="{{ analysis }}, {{ condition }}">
+                ADD IMAGE(S)
               </button>
             </div>
           {% endif %}
