@@ -80,11 +80,11 @@ $(function() {
   }
 
   $('.delete_checkbox input').each(function() {
-    $(this).hide().after('<div class="checkbox_delete_image"/>');
+    $(this).hide().after('<div class="checkbox_form_delete scb_s_ab_trash_icon"/>');
 
   });
   if (typeof (access) !== 'undefined' && access === 'private') {
-    $('.checkbox_delete_image').on('click', function() {
+    $('.checkbox_form_delete').on('click', function() {
       /* Check the hidden checkbox */
       $(this).prev().prop('checked', true);
       /* Want to disable the input box for the strain */
@@ -365,7 +365,7 @@ $(function() {
       .attr('disabled', true);
     $('input[type="checkbox"],input[type="radio"]').addClass('disabled');
     $('input[value="ADD"]').attr('disabled', true).addClass('disabled');
-    $('.checkbox_delete_image').addClass('disabled');
+    $('.scb_s_ab_trash_icon').addClass('disabled');
   }
 
   function show_alert(error) {
@@ -715,6 +715,17 @@ $(function() {
         group_id: $(this).data('group_id'),
         filter: $(this).data('filter'),
         image_id: $(this).data('image_id')
+      }
+    }).then(function () {
+      window.location = '/ab/assignments/microscopy_analyze/';
+    });
+  });
+  $(".remove_image_set").click(function(){
+    $.ajax({
+      url: '/ab/assignments/remove_image_set/',
+      type: "POST",
+      data: {
+        group_id: $(this).data('group_id')
       }
     }).then(function () {
       window.location = '/ab/assignments/microscopy_analyze/';

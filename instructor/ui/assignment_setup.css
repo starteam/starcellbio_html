@@ -222,13 +222,14 @@ select:disabled {
     width: 108px;
 }
 /* Delete trash icon*/
-.checkbox_delete_image{
+.scb_s_ab_trash_icon{
     background: url('images/setup/scb_remove.png') no-repeat;
     display:inline-block;
     height:20px;
     width: 15px;
     background-position: center;
     margin-left: 8px;
+    cursor: pointer;
 }
 .checkbox_image:hover {
     cursor: pointer;
@@ -245,9 +246,6 @@ select:disabled {
 
 .scb_ab_s_hide_variable{
     display:none;
-}
-.checkbox_delete_image{
-    cursor: pointer;
 }
 
 .scb_ab_s_row{
