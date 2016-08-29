@@ -1813,6 +1813,8 @@ def remove_image(request):
     filter_name = request.POST.get('filter')
     image_id = request.POST.get('image_id')
     if group_id:
+        if filter_name not in filters:
+            raise FieldError
         image_group = get_object_or_404(
             models.MicroscopyGroupedImages,
             id=group_id,
