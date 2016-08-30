@@ -452,15 +452,7 @@ def assignments_variables(request):
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
             if form.has_changed():
-                models.Treatment.objects.filter(assignment=assignment).delete()
-                models.StrainTreatment.objects.filter(
-                    assignment=assignment
-                ).delete()
-                models.WesternBlotBands.objects.filter(
-                    antibody__western_blot__assignment=assignment
-                ).delete()
-                create_treatments(assignment)
-                update_wb_bands(assignment)
+                recreate_experimental_setup(assignment)
                 # Want to save the form only if at most 3 vars are selected
                 form.save(commit=False)
                 num_variables = 0
@@ -495,6 +487,15 @@ def assignments_variables(request):
         },
         context_instance=RequestContext(request)
     )
+
+
+def recreate_experimental_setup(assignment):
+    models.Treatment.objects.filter(assignment=assignment).delete()
+    models.StrainTreatment.objects.filter(assignment=assignment).delete()
+    models.WesternBlotBands.objects.filter(
+        antibody__western_blot__assignment=assignment
+    ).delete()
+    create_treatments(assignment)
 
 
 def find_next_view(assignment):
@@ -828,7 +829,11 @@ def strain_treatments_edit(request):
                     models.WesternBlotBands.objects.filter(
                         strain_protocol=strain_treatment
                     ).delete()
+                    models.MicroscopyImageMapping.objects.filter(
+                        strain_protocol=strain_treatment
+                    ).delete()
             update_wb_bands(assignment)
+            update_micro_image_mappings(assignment)
             if 'continue' in request.POST:
                 if page_order.index(assignment.last_page_name) <= page_number:
                     assignment.last_page_name = 'techniques'
@@ -942,6 +947,10 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
                 )
             )
             update_wb_bands(assignment, strain_treatments=[strain_treatment])
+            update_micro_image_mappings(
+                assignment,
+                strain_treatments=[strain_treatment]
+            )
 
 
 @assignment_selected
@@ -1115,6 +1124,28 @@ def western_blot_band_size(request):
     )
 
 
+def update_micro_image_mappings(
+    assignment,
+    strain_treatments=None,
+    sample_prep_list=None
+):
+    if strain_treatments is None:
+        strain_treatments = models.StrainTreatment.objects.filter(
+            assignment=assignment,
+            enabled=True
+        )
+    if sample_prep_list is None:
+        sample_prep_list = models.MicroscopySamplePrep.objects.filter(
+            assignment=assignment
+        )
+    for strain_treatment in strain_treatments:
+        for sample_prep in sample_prep_list:
+            models.MicroscopyImageMapping.objects.get_or_create(
+                strain_protocol=strain_treatment,
+                sample_prep=sample_prep,
+            )
+
+
 def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
     error = ''
     if models.WesternBlot.objects.filter(assignment=assignment).exists():
@@ -1277,17 +1308,21 @@ def microscopy_sample_prep(request):
             entries = formset.save(commit=False)
             for obj in formset.deleted_objects:
                 obj.delete()
-            for facs_sample in entries:
-                if facs_sample.micro_analysis in fluorescent_analyses:
-                    facs_sample.has_filters = True
+            for sample_prep in entries:
+                if sample_prep.micro_analysis in fluorescent_analyses:
+                    sample_prep.has_filters = True
                 else:
-                    facs_sample.has_filters = False
-                if facs_sample.id is None:
-                    facs_sample.assignment = assignment
-                    facs_sample.save()
-                    create_image_mappings(assignment, facs_sample)
+                    sample_prep.has_filters = False
+
+                if sample_prep.id is None:
+                    sample_prep.assignment = assignment
+                    sample_prep.save()
+                    update_micro_image_mappings(
+                        assignment,
+                        sample_prep_list=[sample_prep]
+                    )
                 else:
-                    facs_sample.save()
+                    sample_prep.save()
             if 'continue' in request.POST:
                 if (
                     micro_pages.index('micro_sample_prep') <=
@@ -1337,19 +1372,6 @@ def microscopy_sample_prep(request):
         },
         context_instance=RequestContext(request)
     )
-
-
-def create_image_mappings(assignment, sample):
-    strain_protocols = models.StrainTreatment.objects.filter(
-        assignment=assignment
-    )
-    for strain_protocol in strain_protocols:
-        histogram, _ = (
-            models.MicroscopyImageMapping.objects.get_or_create(
-                sample_prep=sample,
-                strain_protocol=strain_protocol,
-            )
-        )
 
 
 @assignment_selected
