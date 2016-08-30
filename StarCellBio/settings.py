@@ -13,6 +13,7 @@ rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+S3_BACKEND_ENABLED = False
 
 import platform
 if platform.node() == 'starapp':
@@ -25,6 +26,9 @@ else:
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+
+if S3_BACKEND_ENABLED:
+    DEFAULT_FILE_STORAGE = 'libs.storages.S3Storage.S3Storage'
 
 MANAGERS = ADMINS
 
@@ -140,6 +144,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'backend',
     'instructor',
+    'storages'
 ) + auth.settings.INSTALLED_APPS
 
 # django all-auth config
