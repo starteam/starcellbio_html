@@ -1,6 +1,7 @@
 Django==1.7.7
 Markdown==2.2.1
 MySQL-python==1.2.5
+Pillow==3.3.1
 PyYAML==3.10
 Pygments==1.5
 django-allauth==0.19.1
