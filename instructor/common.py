@@ -1385,24 +1385,30 @@ def microscopy_analyze(request):
     mapping_pk = ""
     filter_group_id = ""
     dialog_open = False
-    if request.method == "POST" and 'continue' in request.POST:
-        if assignment.has_fc:
-            return redirect('facs_sample_prep')
-        return redirect('common_assignments')
-    if request.method == "POST" and 'upload' in request.POST:
-        if len(request.FILES) > 0:
-            uploaded_file = request.FILES['file']
-            new_image, _ = models.MicroscopyImage.objects.get_or_create(
-                file=uploaded_file,
-                assignment=assignment
-            )
-        # need few variables to keep the dialog open
-        dialog_open = True
-        if 'mapping_pk' in request.POST:
-            chosen_protocol = request.POST.get('protocol')
-            chosen_sampleprep = request.POST.get('sample_prep')
-            mapping_pk = request.POST.get('mapping_pk')
-            filter_group_id = request.POST.get('filter_group_id')
+
+    if request.method == "POST" and assignment.access == 'private':
+        if 'upload' in request.POST:
+            if len(request.FILES) > 0:
+                uploaded_file = request.FILES['file']
+                objective = request.POST.get('objective')
+                new_image, _ = models.MicroscopyImage.objects.get_or_create(
+                    file=uploaded_file,
+                    assignment=assignment,
+                    objective=objective
+                )
+            # need few variables to keep the dialog open
+            dialog_open = True
+            if 'mapping_pk' in request.POST:
+                chosen_protocol = request.POST.get('protocol')
+                chosen_sampleprep = request.POST.get('sample_prep')
+                mapping_pk = request.POST.get('mapping_pk')
+                filter_group_id = request.POST.get('filter_group_id')
+
+        else:  # then 'save' or 'continue' in request.POST
+            if 'continue' in request.POST:
+                if assignment.has_fc:
+                    return redirect('facs_sample_prep')
+                return redirect('common_assignments')
 
     image_mappings = models.MicroscopyImageMapping.objects.filter(
         sample_prep__assignment=assignment
@@ -1438,7 +1444,10 @@ def microscopy_analyze(request):
         )
 
     all_images = models.MicroscopyImage.objects.filter(assignment=assignment)
-    ImageForm = modelform_factory(models.MicroscopyImage, fields=['file'])
+    ImageForm = modelform_factory(
+        models.MicroscopyImage,
+        fields=['file', 'objective']
+    )
     image_form = ImageForm()
     variables = {
         'has_concentration': assignment.has_concentration,

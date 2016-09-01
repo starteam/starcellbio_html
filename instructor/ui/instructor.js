@@ -720,6 +720,7 @@ $(function() {
       window.location = '/ab/assignments/microscopy_analyze/';
     });
   });
+
   $(".remove_image_set").click(function(){
     $.ajax({
       url: '/ab/assignments/remove_image_set/',
@@ -730,7 +731,9 @@ $(function() {
     }).then(function () {
       window.location = '/ab/assignments/microscopy_analyze/';
     });
-  })
+  });
+  
+  $("input[id='id_objective']").attr('placeholder', '20x');
 });
 
 

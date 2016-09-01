@@ -207,6 +207,7 @@ class MicroscopyImage(models.Model):
         upload_to='microscopy_images',
         null=True
     )
+    objective = models.CharField(max_length=50, default="", blank=True)
 
 
 class MicroscopyGroupedImages(models.Model):
@@ -245,7 +246,6 @@ class MicroscopyImageMapping(models.Model):
         StrainTreatment,
         related_name='image_mapping'
     )
-    objective = models.CharField(max_length=50, default='N/A')
     images = models.ManyToManyField(
         MicroscopyImage,
         related_name='image_mapping'
