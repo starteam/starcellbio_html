@@ -789,18 +789,25 @@
     </div>
     
 	<div class = 'scb_s_microscopy_lens_controls_section_5'>
-    			<span class='scb_s_microscopy_filter_label'>Filters:</span>
-    					<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}' title='Red'  name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.red_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
-				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' title='Blue' name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.blue_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
-				<input class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' title='Green' name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.green_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
-				<input class='scb_f_microscopy_all scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}'  title='All' name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.merge_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
-				<br/>
-
-				<br/>
+	    <span class='scb_s_microscopy_filter_label'>Filters:</span>
+	    <input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}'
+	        title='Red'  name='IF' type="radio" assignment_id='{$assignment.id}'
+	        experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+	        {if $microscopy.red_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
+		<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}'
+		    title='Blue' name='IF' type="radio" assignment_id='{$assignment.id}'
+		    experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+		    {if $microscopy.blue_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
+		<input class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}'
+		    title='Green' name='IF' type="radio" assignment_id='{$assignment.id}'
+			experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+			{if $microscopy.green_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
+		<input class='scb_f_microscopy_merge scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}'
+		    title='Merge' name='IF' type="radio" assignment_id='{$assignment.id}'
+			experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+			{if $microscopy.merge_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
+		<br/>
+		<br/>
     
     </div>
     

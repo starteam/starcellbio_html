@@ -550,7 +550,7 @@ input[type=radio].scb_s_microscopy_if:checked:before{
 	opacity: 1 !important;
 }
 
-.scb_f_microscopy_all{
+.scb_f_microscopy_merge{
 	height: 30px !important;
 	width: 30px !important;
 	right: 6px !important;
@@ -580,7 +580,7 @@ input[type=radio].scb_s_microscopy_if:checked:before{
 }
 
 
-.scb_f_microscopy_all:disabled{
+.scb_f_microscopy_merge:disabled{
 	background-image: url(../../../images/microscopy/Unavailable/Filter_All_Unavailable.png) !important;
 	background-repeat: no-repeat !important;
 }
@@ -601,7 +601,7 @@ input[type=radio].scb_s_microscopy_if:checked:before{
 }
 
 
-.scb_f_microscopy_all:checked{
+.scb_f_microscopy_merge:checked{
 	background-image: url(../../../images/microscopy/Selected/Filter_All_Selected.png) !important;
 	background-repeat: no-repeat !important;
 }

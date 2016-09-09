@@ -332,8 +332,8 @@ def micro_model(a):
                                         'mag': 'N/A'
                                     }
                                 )
-
-                        ret[key]['slides'].append(image_list)
+                        if image_list:
+                            ret[key]['slides'].append(image_list)
                 else:
                     for image in mapping.images.all():
                         ret[key]['slides'].append(
