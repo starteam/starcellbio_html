@@ -215,25 +215,29 @@ class MicroscopyGroupedImages(models.Model):
         MicroscopyImage,
         related_name='grouped_images_red',
         blank=True,
-        null=True
+        null=True,
+        on_delete=models.SET_NULL
     )
     blue_filter_image = models.ForeignKey(
         MicroscopyImage,
         related_name='grouped_images_blue',
         blank=True,
-        null=True
+        null=True,
+        on_delete=models.SET_NULL
     )
     green_filter_image = models.ForeignKey(
         MicroscopyImage,
         related_name='grouped_images_green',
         blank=True,
-        null=True
+        null=True,
+        on_delete=models.SET_NULL
     )
     merge_filter_image = models.ForeignKey(
         MicroscopyImage,
         related_name='grouped_images_all',
         blank=True,
-        null=True
+        null=True,
+        on_delete=models.SET_NULL
     )
 
 

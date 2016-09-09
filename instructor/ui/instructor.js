@@ -403,7 +403,21 @@ $(function() {
       window.location.reload();
     });
   });
-
+  $('.scb_ab_f_remove_image').click(function () {
+    var data = {};
+    data['image_pk_list'] = _.map($('.scb_ab_s_image_selected'), function (element) {
+      return $(element).attr('id').match(/(\d+)$/)[0];
+    });
+    if (data['image_pk_list'].length > 0) {
+      $.ajax({
+        url: '/ab/assignments/delete_images/',
+        type: "POST",
+        data: data
+      }).then(function () {
+        window.location = '/ab/assignments/microscopy_analyze/';
+      });
+    }
+  });
   /* Save selected list of images to an ImageMapping object*/
   $('.scb_ab_f_save_image').click(function () {
     var data = {};
