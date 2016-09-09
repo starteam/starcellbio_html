@@ -1862,6 +1862,20 @@ def remove_image(request):
 @assignment_selected
 @check_assignment_owner
 @login_required
+def remove_image_group(request):
+    pk = request.session['assignment_id']
+    group_id = request.POST.get('group_id')
+
+    models.MicroscopyGroupedImages.objects.filter(
+        id=group_id,
+        image_mapping__sample_prep__assignment__pk=pk
+    ).delete()
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
 def copy_histogram(request):
     """
     Copy a histogram from one mapping to a given list mappings
