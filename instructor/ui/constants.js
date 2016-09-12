@@ -28,3 +28,6 @@ function addNoise(points, factor) {
   });
   return noisy_points;
 }
+
+FILTERS = ['red', 'blue', 'green', 'merge'];
+FLUORESCENT_TYPES = ['IF', 'DYE-FLU', 'FLUOR'];
