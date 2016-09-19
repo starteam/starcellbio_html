@@ -444,8 +444,8 @@ def micro_kinds(a):
                 'identifiers': {}
             }
         ret[analysis]['conditions'][condition] = {
-            'name': condition,
-            'short_name': condition
+            'name': condition if analysis != 'BF' else "",
+            'short_name': condition if analysis != 'BF' else ""
         }
     return ret
 

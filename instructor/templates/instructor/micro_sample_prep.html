@@ -25,7 +25,9 @@
                     {{ form.micro_analysis }}
                   </label>
                 </div>
-                <div>{{ form.condition }}</div>
+                <div {% if form.instance.micro_analysis == 'BF' %}style="visibility:hidden"{% endif %}>
+                  {{ form.condition }}
+                </div>
                 <div>{{ form.id }}</div>
                 <div class="delete_checkbox">{{ form.DELETE }}</div>
             </div>

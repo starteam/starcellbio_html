@@ -71,7 +71,7 @@
 
         <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
           <div class="scb_ab_s_facs_condition_header">
-            {{ analysis }}, {{ condition }}
+            {{ analysis }}{% if analysis != 'Brightfield' %}, {{ condition }} {% endif %}
           </div>
           {% if forloop.counter == 1 %}
             <div class="scb_ab_s_copy_checkbox_container">

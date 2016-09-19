@@ -319,28 +319,30 @@
                 {foreach $condition in $r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]}
                     <!--If there is only one condition, radio button is already checked-->
                     <div class="scb_s_microscopy_condition_wrapper">
-                        <input
-                            class="scb_f_microscopy_select_conditions
-                                {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
-                            microscopy_id='{$microscopy.id}'
-                            assignment_id='{$assignment.id}'
-                            experiment_id='{$experiment.id}' type="radio"
-                            value="{$condition}"
-                            cell_treatment_id='{$r.cell_treatment.id}'
-                            lane_kind="{$r.kind}"
-                            lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
-                            {if $r.is_sample_enabled and
-                                (
-                                    $r.lane.slide_conditions == $condition or
-                                    length($r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]) == 1
-                                )
-                            }checked="checked"{/if}
-                        />
-                        <span class="scb_s_western_blot_choose_gel_type_input_text
-                            {if not $r.is_sample_enabled} scb_s_microscopy_dim_conditions{/if}"
-                        >
-                            {$assignment.template.micro_kinds[$r.lane.kind].conditions[$condition].name}
-                        </span>
+                        {if $assignment.template.micro_kinds[$r.lane.kind].conditions[$condition].name != ''}
+                            <input
+                                class="scb_f_microscopy_select_conditions
+                                    {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+                                microscopy_id='{$microscopy.id}'
+                                assignment_id='{$assignment.id}'
+                                experiment_id='{$experiment.id}' type="radio"
+                                value="{$condition}"
+                                cell_treatment_id='{$r.cell_treatment.id}'
+                                lane_kind="{$r.kind}"
+                                lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+                                {if $r.is_sample_enabled and
+                                    (
+                                        $r.lane.slide_conditions == $condition or
+                                        length($r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]) == 1
+                                    )
+                                }checked="checked"{/if}
+                            />
+                            <span class="scb_s_western_blot_choose_gel_type_input_text
+                                {if not $r.is_sample_enabled} scb_s_microscopy_dim_conditions{/if}"
+                            >
+                                {$assignment.template.micro_kinds[$r.lane.kind].conditions[$condition].name}
+                            </span>
+                        {/if}
                     </div>
                 {/foreach}
 			{/if}
@@ -511,8 +513,13 @@
                         {if $r.lane.id == $microscopy.selected_lane.id}
                             <span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab ' role='tab'>
                                 <div class='scb_s_microscopy_gel_tab_selected'>
+                                {if $microscopy.selected_lane.kinds[$microscopy.selected_lane.kind]
+                                    .conditions[$microscopy.selected_lane.slide_conditions].short_name == ''}
+                                    {$microscopy.selected_lane.kind}
+                                {else}
                                     {$microscopy.selected_lane.kinds[$microscopy.selected_lane.kind]
                                     .conditions[$microscopy.selected_lane.slide_conditions].short_name}
+                                {/if}
                                 </div>
                             </span>
                         <!--unselected lanes for this cell_treatment-->
@@ -520,7 +527,11 @@
                             <div class='scb_s_microscopy_slide_tab' microscopy_id='{$microscopy.id}'
                                 assignment_id='{$assignment.id}' role='tab'
                                 experiment_id='{$experiment.id}' microscopy_lane_id='{$r.lane.id}'>
-                                {$r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name}
+                                {if $r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name == ''}
+                                    {$r.lane.kind}
+                                {else}
+                                    {$r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name}
+                                {/if}
                             </div>
                         {/if}
                     {/if}

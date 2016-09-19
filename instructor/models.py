@@ -195,7 +195,7 @@ class MicroscopySamplePrep(models.Model):
         choices=MICRO,
         default=MICRO_DEFAULT
     )
-    condition = models.CharField(max_length=50)
+    condition = models.CharField(max_length=50, blank=True, null=True)
     order = models.IntegerField(default=0)
     has_filters = models.BooleanField(default=False)
 
