@@ -13,7 +13,9 @@ from django.core.exceptions import PermissionDenied, FieldError
 import backend.models
 import json
 import re
-from instructor.compiler import get_protocol_headers
+from instructor.compiler import (
+    get_protocol_headers, is_wb_complete, is_facs_complete, is_micro_complete
+)
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 from django.template.defaulttags import register
@@ -1972,7 +1974,7 @@ def preview(request, assignment_pk):
 def assignment_complete(request):
     assignment_pk = request.POST.get('pk')
     a = models.Assignment.objects.get(id=assignment_pk)
-    if is_assignment_complete(a):
+    if is_assignment_complete(a, True):
         return HttpResponse('complete')
     else:
         return HttpResponseBadRequest(
@@ -1982,46 +1984,24 @@ def assignment_complete(request):
         )
 
 
-def is_assignment_complete(assignment):
+def is_assignment_complete(assignment, is_preview=False):
     if models.StrainTreatment.objects.filter(
         assignment=assignment,
         enabled=True
     ).exists():
         if assignment.has_fc or assignment.has_wb or assignment.has_micro:
-            return is_facs_complete(assignment) and is_wb_complete(assignment)
+            if is_preview:
+                return (
+                    is_facs_complete(assignment) or
+                    is_wb_complete(assignment) or is_micro_complete(assignment)
+                )
+            else:
+                return (
+                    is_facs_complete(assignment) and
+                    is_wb_complete(assignment) and
+                    is_micro_complete(assignment)
+                )
     return False
-
-
-def is_micro_complete(assignment):
-    if assignment.has_micro:
-        return models.MicroscopyImageMapping.objects.filter(
-            sample_prep__assignment=assignment
-        ).exists()
-    return True
-
-
-def is_wb_complete(assignment):
-    if assignment.has_wb:
-        return models.WesternBlotBands.objects.filter(
-            antibody__western_blot__assignment=assignment
-        ).exists()
-    return True
-
-
-def is_facs_complete(assignment):
-    if assignment.has_fc:
-        mappings = models.FlowCytometryHistogramMapping.objects.filter(
-            sample_prep__assignment=assignment
-        )
-        if mappings.exists():
-            for mapping in mappings:
-                if mapping.sample_prep.live and mapping.live_data is None:
-                    return False
-                if mapping.sample_prep.fixed and mapping.fixed_data is None:
-                    return False
-            return True  # all mappings have data
-        return False
-    return True
 
 
 def is_float(txt):
