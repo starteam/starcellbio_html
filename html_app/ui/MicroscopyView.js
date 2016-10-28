@@ -1917,15 +1917,6 @@ scb.ui.MicroscopyView = function scb_ui_MicroscopyView(gstate) {
       $('.scb_s_microscopy_right_microscopy', '.scb_s_microscopy_view').prop('disabled', false);
     }
 
-    if (kind == 'sample_prep') {
-
-    } else {
-      $('.scb_s_western_blot_progress_gray_bar', '.scb_s_microscopy_view').children().each(function() {
-        console.log($(this).css('left'));
-        $(this).css('left', parseInt($(this).css('left')) - scb.ui.static.MicroscopyView.MAX_BRIGHTNESS + 'px');
-      });
-      $('.scb_s_western_blot_progress_bar', '.scb_s_microscopy_view').css('top', scb.ui.static.MicroscopyView.GRAY_BAR_TOP_OFFSET + 'px');
-    }
     if (!state.microscopy.light_on) {
       $('#brightup').prop('disabled', true);
 
