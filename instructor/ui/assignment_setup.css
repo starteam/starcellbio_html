@@ -828,3 +828,16 @@ label.custom-dropdown {
     display:inline-block;
     vertical-align: middle;
 }
+
+.scb_ab_s_dashboard_icon_active{
+    background-image:url('../images/header/dashboard_icon_on.png');
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    margin-right: 15px;
+}
+
+.scb_ab_s_tab_title{
+    position: relative;
+    top: 5px;
+}
