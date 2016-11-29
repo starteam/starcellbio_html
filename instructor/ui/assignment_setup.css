@@ -852,9 +852,16 @@ input#id_objective{
     top: 5px;
 }
 
-.scb_ab_s_plus_button{
+.scb_ab_s_plus_button {
     font-size: large;
     width: 30px;
     font-family: 'sourcesanspro-semibold';
     letter-spacing: normal;
+}
+
+.scb_ab_s_upload_instruction{
+    margin: 20px 0px 0 30px;
+    font-family: 'sourcesanspro-semibold';
+    color: #316f94;
+    font-weight: bold;
 }
