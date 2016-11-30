@@ -327,6 +327,11 @@ urlpatterns += patterns(
         r'^ab/assignments/facs_analyze/$',
         instructor_common.facs_analyze,
         name="facs_analyze"
+    ),
+    url(
+        r'^ab/assignments/save_scroll/$',
+        instructor_common.save_scroll,
+        name="save_scroll"
     )
 )
 

@@ -1414,6 +1414,12 @@ def microscopy_analyze(request):
                     return redirect('facs_sample_prep')
                 return redirect('common_assignments')
 
+    # Get position on the page
+    microscopy, _ = models.Microscopy.objects.get_or_create(
+        assignment=assignment
+    )
+    page_position = microscopy.scroll_position
+
     image_mappings = models.MicroscopyImageMapping.objects.filter(
         sample_prep__assignment=assignment
     ).order_by(
@@ -1483,10 +1489,20 @@ def microscopy_analyze(request):
             'assignment_name': assignment.name,
             'section_name': 'Microscopy',
             'page_name': 'micro_analyze',
+            'page_position': json.dumps(page_position),
             'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def save_scroll(request):
+    pk = request.session['assignment_id']
+    save_page_position(pk, request.POST.get('position'))
+    return HttpResponse()
 
 
 @assignment_selected
@@ -1904,6 +1920,15 @@ def remove_image_group(request):
         image_mapping__sample_prep__assignment__pk=pk
     ).delete()
     return HttpResponse()
+
+
+def save_page_position(pk, position):
+    """
+    Save scroll position of the page
+    """
+    microscopy = get_object_or_404(models.Microscopy, assignment__pk=pk)
+    microscopy.scroll_position = position
+    microscopy.save()
 
 
 @assignment_selected

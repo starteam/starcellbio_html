@@ -201,7 +201,15 @@
   <a href="{% url "microscopy_sample_prep" %}">
     <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
   </a>
-   <script type="text/javascript">
+  <script type="text/javascript">
     dialog_open = {{ dialog_open|safe }};
+    $(window).scrollTop({{ page_position }});
+    $(window).bind('beforeunload', function () {
+      $.ajax({
+        url: '/ab/assignments/save_scroll/',
+        type: "POST",
+        data: {position: $(window).scrollTop()}
+      });
+    });
   </script>
 {% endblock %}
