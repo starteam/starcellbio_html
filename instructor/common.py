@@ -1976,9 +1976,11 @@ def assignment_complete(request):
         return HttpResponse('complete')
     else:
         return HttpResponseBadRequest(
-            "You must define your experimental setup and the variables "
-            "for at least one experimental technique before you can preview "
-            "the assignment."
+            "Your assignment cannot be previewed. Make sure you have:"
+            "<ul><li>defined the experimental setup and variables for "
+            "at LEAST ONE experimental technique,</li>"
+            "<li>assigned histograms to all samples in flow cytometry "
+            "if using this technique</li></ul>"
         )
 
 
