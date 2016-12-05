@@ -9,7 +9,7 @@
               aria-label="Close Create Histogram">×</span>
         Select Image
       </h1>
-      <div class="scb_ab_s_select_histogram_view">
+      <div class="scb_ab_s_select_image_div">
         <div class="scb_ab_s_chosen_sample_heading">
           <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
             <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
@@ -21,10 +21,11 @@
           </div>
         </div>
         <form id="image_form" method="post" enctype="multipart/form-data" class="scb_ab_s_image_form">
-          {{ image_form }}
+          {{ image_form.as_p }}
 
         <input type="submit"
                name="upload"
+               style="display: inline-block"
                class="scb_s_gray_button"
                value="UPLOAD">
         </form>
@@ -141,7 +142,7 @@
                 </div>
               {% endfor %}
             {% endif %}
-            <div class="scb_ab_s_row" style="padding-top:5px">
+            <div class="scb_ab_s_row" style="padding:5px 0 10px">
               <div class="scb_ab_s_col_width_number"></div>
               <button type="button" class="scb_s_gray_button add_new_image_set"
                       data-mapping_id="{{ instance.id }}">
@@ -171,7 +172,7 @@
 
               </div>
             {% endif %}
-            <div class="scb_ab_s_row" style="padding-bottom:10px">
+            <div class="scb_ab_s_row" style="padding-bottom: 10px">
               <div class="scb_ab_s_col_width_number"></div>
               <button type="button" class="scb_s_gray_button open_upload_window_btn"
                       data-row_id="row-{{ instance.id }}"

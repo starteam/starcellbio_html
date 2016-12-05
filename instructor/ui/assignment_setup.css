@@ -798,14 +798,12 @@ label.custom-dropdown {
     width: 450px;
     text-align: left;
     position: relative;
-
 }
 .scb_ab_s_row>div.scb_ab_s_filtered_image_grid{
     width: 100px;
     position: relative;
     display: table-cell;
     vertical-align: middle;
-
 }
 .scb_ab_s_row>div.scb_ab_s_filters_row_name{
     width: 40px;
@@ -827,6 +825,13 @@ label.custom-dropdown {
     position:relative;
     display:inline-block;
     vertical-align: middle;
+    width: 120px;
+}
+.scb_ab_s_select_image_div{
+    height: 650px;
+}
+input#id_objective{
+    width: 30px;
 }
 
 .scb_ab_s_dashboard_icon_active{

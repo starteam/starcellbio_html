@@ -329,7 +329,8 @@ def micro_model(a):
                                     {
                                         'hash': image.pk,
                                         'if_type': filter_name,
-                                        'mag': 'N/A'
+                                        'mag': image.objective
+                                        if image.objective else 'N/A'
                                     }
                                 )
                         if image_list:
@@ -341,7 +342,8 @@ def micro_model(a):
                                 {
                                     'hash': image.pk,
                                     'if_type': 'green',
-                                    'mag': 'N/A'
+                                    'mag': image.objective
+                                    if image.objective else 'N/A'
                                 }
                             ]
                         )
