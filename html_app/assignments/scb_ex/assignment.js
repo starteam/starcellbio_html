@@ -1545,7 +1545,7 @@ var __scb_sample_2 = {
     ],
     ui: {
       experimental_design: {
-        techniques: ['facs', 'wb'],
+        techniques: ['wb', 'facs'],
         gel_types: ['.10', '.12', '.15']
       },
       experiment_setup: {
