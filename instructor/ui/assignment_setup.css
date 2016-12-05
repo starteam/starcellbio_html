@@ -846,3 +846,10 @@ input#id_objective{
     position: relative;
     top: 5px;
 }
+
+.scb_ab_s_plus_button{
+    font-size: large;
+    width: 30px;
+    font-family: 'sourcesanspro-semibold';
+    letter-spacing: normal;
+}
