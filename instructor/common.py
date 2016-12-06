@@ -1770,6 +1770,26 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
 @assignment_selected
 @check_assignment_owner
 @login_required
+def delete_images(request):
+    """
+    Remove images from library permanently
+    """
+    pk = request.session['assignment_id']
+    image_pk_list = request.POST.getlist('image_pk_list[]')
+
+    for image_pk in image_pk_list:
+        selected_image = get_object_or_404(
+            models.MicroscopyImage,
+            pk=image_pk,
+            assignment__pk=pk
+        )
+        selected_image.delete()
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
 def select_images(request):
     pk = request.session['assignment_id']
     mapping_id = request.POST.get('mapping_pk')

@@ -278,6 +278,11 @@ urlpatterns += patterns(
         name="microscopy_analyze"
     ),
     url(
+        r'^ab/assignments/delete_images/$',
+        instructor_common.delete_images,
+        name="delete_images"
+    ),
+    url(
         r'^ab/assignments/select_images/$',
         instructor_common.select_images,
         name="select_images"

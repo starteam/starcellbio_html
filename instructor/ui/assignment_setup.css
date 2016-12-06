@@ -720,6 +720,11 @@ input[type="checkbox"].disabled {
     position:absolute;
     bottom: 30px;
 }
+.scb_ab_s_delete_btn_position{
+    right: 170px;
+    position:absolute;
+    bottom: 30px;
+}
 .scb_ab_s_histogram_selected{
     border: 1px solid indianred;
     box-shadow: 2px 2px 5px indianred;
