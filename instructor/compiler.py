@@ -1,4 +1,8 @@
-from instructor.models import Assignment, WesternBlotBands
+from django.db.models import Q
+from instructor.models import (
+    Assignment, WesternBlotBands, FlowCytometryHistogramMapping,
+    MicroscopyImageMapping
+)
 import json
 
 
@@ -30,6 +34,7 @@ def get_protocol_headers(assignment):
 
 def compile(assignment_id):
     a = Assignment.objects.get(id=assignment_id)
+    techniques = compile_techniques(a)
     ret = {
         'id': 'a_{}'.format(a.id),
         'name': a.name,
@@ -41,8 +46,8 @@ def compile(assignment_id):
         'template': {
             'ui': {
                 'experimental_design': {
-                    'techniques': compile_techniques(a),
-                    'gel_types': gel_types(a)
+                    'techniques': techniques,
+                    'gel_types': []
                 },
                 'experiment_setup': {
                     'table': [
@@ -133,14 +138,17 @@ def compile(assignment_id):
     ret['template']['ui']['western_blot'] = format_table(a)
     ret['template']['micro_kinds'] = micro_kinds(a)
 
-    if a.has_wb:
+    if 'wb' in techniques:
+        ret['template']['ui']['experimental_design']['gel_types'] = gel_types(
+            a
+        )
         ret['template']['primary_anti_body'] = primary_anti_body(a)
         ret['template']['secondary_anti_body'] = secondary_anti_body(a)
         ret['template']['lysate_kinds'] = lysate_kinds(a)
         ret['template']['model']['western_blot'] = generate_western_blot_model(
             a
         )
-    if a.has_micro:
+    if 'micro' in techniques:
         ret['template']['ui']['microscopy'] = {}
         ret['template']['ui']['microscopy'][
             'disable_blur'
@@ -150,7 +158,7 @@ def compile(assignment_id):
         ] = True  # # is this right?
         ret['template']['model']['microscopy'] = micro_model(a)
         ret['template']['slides'] = generate_slides(a)
-    if a.has_fc:
+    if 'facs' in techniques:
         ret['template']['facs_kinds'] = facs_kinds(a)
         ret['template']['facs_histograms'] = facs_histograms(a)
         ret['template']['model']['facs'] = facs_model(a)
@@ -637,11 +645,60 @@ def compile_cell_lines(cell_lines):
 
 
 def compile_techniques(assignment):
+    """
+    If technique is enabled, it has to be complete.
+    When previewing an assignment user can have technique
+    enabled, and not finished.
+    """
     ret = []
-    if assignment.has_fc:
+    if assignment.has_fc and is_facs_complete(assignment):
         ret.append('facs')
-    if assignment.has_micro:
+    if assignment.has_micro and is_micro_complete(assignment):
         ret.append('micro')
-    if assignment.has_wb:
+    if assignment.has_wb and is_wb_complete(assignment):
         ret.append('wb')
     return ret
+
+
+def is_micro_complete(assignment):
+    """
+    At least one ImageMapping instance should have at least one image,
+    or image group with at least one image.
+    """
+    if assignment.has_micro:
+        return MicroscopyImageMapping.objects.filter(
+            sample_prep__assignment=assignment,
+            images__isnull=False
+        ).exists() or MicroscopyImageMapping.objects.filter(
+            Q(grouped_images__blue_filter_image__isnull=False) |
+            Q(grouped_images__red_filter_image__isnull=False) |
+            Q(grouped_images__green_filter_image__isnull=False) |
+            Q(grouped_images__merge_filter_image__isnull=False),
+            sample_prep__assignment=assignment,
+            grouped_images__isnull=False
+        ).exists()
+    return True
+
+
+def is_wb_complete(assignment):
+    if assignment.has_wb:
+        return WesternBlotBands.objects.filter(
+            antibody__western_blot__assignment=assignment
+        ).exists()
+    return True
+
+
+def is_facs_complete(assignment):
+    if assignment.has_fc:
+        mappings = FlowCytometryHistogramMapping.objects.filter(
+            sample_prep__assignment=assignment
+        )
+        if mappings.exists():
+            for mapping in mappings:
+                if mapping.sample_prep.live and mapping.live_data is None:
+                    return False
+                if mapping.sample_prep.fixed and mapping.fixed_data is None:
+                    return False
+            return True  # all mappings have data
+        return False
+    return True
