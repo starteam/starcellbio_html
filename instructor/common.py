@@ -387,6 +387,8 @@ def course_modify(request):
                     course.owner = user
                     course.save()
                     new_course_pk = course.id
+                else:
+                    course.save()
             # Select course
             pk = request.POST['course_pk']
             # if selected the new course
