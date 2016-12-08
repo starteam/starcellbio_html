@@ -210,9 +210,6 @@ def course_setup(request):
     if course_selected:
         return redirect("common_course_modify")
 
-    formset = CourseFormSet(
-        queryset=models.Course.objects.filter(owner=request.user)
-    )
     pages = {'assignment': True, 'course': True}
     return render_to_response(
         'instructor/course_modify.html',
@@ -406,7 +403,11 @@ def course_modify(request):
                     assignment.last_page_name = 'strains'
                 assignment.save()
                 return redirect("common_assignments_edit_strains")
-            return redirect("common_course_modify")
+            if errors:
+                # want to avoid form errors when have other errors
+                formset = CourseFormSet(
+                    queryset=models.Course.objects.filter(owner=request.user)
+                )
     # for view mode
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_assignments_edit_strains")
