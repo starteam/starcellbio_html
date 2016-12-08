@@ -231,6 +231,11 @@ $(function() {
     $('select').change(function(){
       var condition_input = $(this).parent().parent().parent().find('input[type="text"]')[0];
       $(condition_input).attr('placeholder', analysis_dict[$(this).val()]);
+      if($(this).val() === 'BF'){
+        $(condition_input).parent().css('visibility', 'hidden');
+      }else{
+        $(condition_input).parent().css('visibility', 'visible');
+      }
     });
   }
 
