@@ -1927,7 +1927,7 @@ def save_page_position(pk, position):
     Save scroll position of the page
     """
     microscopy = get_object_or_404(models.Microscopy, assignment__pk=pk)
-    microscopy.scroll_position = position
+    microscopy.scroll_position = int(float(position))
     microscopy.save()
 
 

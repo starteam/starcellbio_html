@@ -6,7 +6,7 @@ from django.db import models, migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [('instructor', '0032_grouped_images_on_delete'), ]
+    dependencies = [('instructor', '0033_micro_condition_blank'), ]
 
     operations = [
         migrations.CreateModel(
