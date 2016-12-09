@@ -195,6 +195,10 @@ def course_setup(request):
                 # need to set the owner
                 course.owner = user
                 course.save()
+    else:
+        formset = CourseFormSet(
+            queryset=models.Course.objects.filter(owner=request.user)
+        )
 
     # if there is at least one course
     all_courses = models.Course.objects.filter(owner=request.user)
