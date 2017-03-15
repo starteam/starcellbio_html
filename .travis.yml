@@ -1,0 +1,37 @@
+language: python
+python:
+  - "2.7"
+cache: pip
+services:
+  - mysql
+env:
+  global:
+  - ARTIFACTS_BUCKET=mitodl-travis-ci-screenshots
+  - SELENIUM_URL="http://localhost:9515"
+  - secure: EifZpzBnMjxwmBFDhIi2Nrzj8Rh6cNYg0m45RK0XfzHLMhiyMDNa17gpKXaR7DAzFvNQ7vUfgIEoovrStT1m7Q20shL2nK3OuhrH7AH9POpGtusIOfcOSsTxDxnel1sgaEOeCLbrIydhEwpeAggMsy+XcBvBqcwNuMIhAo20S8U=
+  - secure: Yw/oQRsZfDqb3e1rC1q3TJZbPjqyeB09ix1aWVCGBCqSbFO+f7NqnKeeB0/m1U+3qXlBgpf2MDpidshikRzqlzMrNu6DUGUS/qHkTLvyqBDgvVf0WRKY/IiD4xbPB0wwQnrzwheo8uCOniYHwHc5ak2FP4KWTKzVlgzGjtSoHcU=
+before_script:
+- wget 'https://download-chromium.appspot.com/dl/Linux_x64?type=continuous' -O chromium-last-good.zip
+- unzip chromium-last-good.zip
+- export CHROME_BIN="$PWD/chrome-linux/chrome"
+- wget 'http://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip' -O chromedriver.zip
+- unzip chromedriver.zip
+- export CHROMEDRIVER_BIN="$PWD/chromedriver"
+- export DISPLAY=:99.0
+- /sbin/start-stop-daemon --start --quiet --pidfile /tmp/cucumber_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16
+- sh -c "mysql -uroot -e \"grant all on *.* to 'starcellbio'@'localhost' identified by '136a411ed9e8592089444b7164ffaf84'\""
+- ./chromedriver > /tmp/chromedriver.log 2> /tmp/chromedriver.err &
+- pip install -r requirements.txt
+- python html_app/build.py
+- "./manage.py collectstatic --noinput"
+install:
+  - pip install -r requirements.dev.txt
+  - npm install
+script:
+- "./manage.py test --liveserver=localhost:8100-8200 --verbosity=2"
+addons:
+  artifacts:
+    s3_region: "us-west-2"
+    paths:
+    - screenshots/
+    debug: true

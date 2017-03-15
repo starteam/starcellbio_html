@@ -6,11 +6,11 @@ from backend.models import Course
 from django.shortcuts import render, render_to_response
 from django.forms.models import modelformset_factory
 
+
 def index(request):
     courses = Course.objects.all()
-    return render(request, 'instructor/index.html', {
-        "courses": courses
-    })
+    return render(request, 'instructor/index.html', {"courses": courses})
+
 
 def courses(request):
     CourseFormSet = modelformset_factory(Course)
@@ -21,13 +21,10 @@ def courses(request):
             # do something.
     else:
         formset = CourseFormSet()
-    ret = render_to_response("instructor/courses.html", {
-        "formset": formset,
-    })
+    ret = render_to_response("instructor/courses.html", {"formset": formset, })
     return ret
+
 
 def course(request, **kwargs):
     course = Course.objects.get(id=kwargs['course_id'])
-    return render(request, 'instructor/course.html', {
-        "course": course
-    })
+    return render(request, 'instructor/course.html', {"course": course})

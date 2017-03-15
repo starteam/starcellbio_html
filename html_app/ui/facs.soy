@@ -325,44 +325,33 @@ FACS Main View
             <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border {/if}
                 scb_s_facs_cell_treatment'>
                 <div class="scb_s_cell_treatment_wrapper">
-                {if $r.is_sample_enabled}
-                    {if $assignment.template.model.facs.is_ab }
-                        {if $r.has_fixed}
-                            <input type="radio" style='left:0px'
-                                assignment_id="{$assignment.id}" experiment_id = "{$experiment.id}"
-                                facs_id = "{$facs.id}" {if $r.kind=='existing'}facs_lane_id="{$r.lane.id}"{/if}
-                                cell_treatment_id="{$r.cell_treatment.id}"
-                                name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}_{index($r)}"
-                                value="fixed" map_key="{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
-                                {if $r.live == 'fixed'}checked {/if}
-                                class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'/>
-                            <span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>
-                                Fixed
-                            </span>
-                        {/if}
-                        {if $r.has_live}
-                            <input style='left:60px' type="radio" assignment_id="{$assignment.id}" experiment_id = "{$experiment.id}"
-                                facs_id = "{$facs.id}" cell_treatment_id="{$r.cell_treatment.id}"
-                                {if $r.kind=='existing'}facs_lane_id="{$r.lane.id}"{/if}
-                                name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}_{index($r)}"
-                                map_key="{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
-                                value="live" {if $r.live == 'live'}checked {/if}
-                                class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'
-                                />
-                            <span style='left:83px' class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>
-                                Live
-                            </span>
-                        {/if}
-                    {else}
-                        <input type="radio"  checked>
-                            <span class='scb_s_facs_cell_treatment_text'>Fixed</span>
-                        </input>
+
+                    {if $r.has_fixed}
+                        <input {if not $r.is_sample_enabled} disabled{/if} type="radio" style='left:0px'
+                            assignment_id="{$assignment.id}" experiment_id = "{$experiment.id}"
+                            facs_id = "{$facs.id}" cell_treatment_id="{$r.cell_treatment.id}"
+                            lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+                            name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}_{index($r)}"
+                            value="Fixed" data-map_key="{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
+                            {if $r.live == 'Fixed'}checked {/if}
+                            class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'/>
+                        <span class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>
+                            Fixed
                     {/if}
-                {else}
-                    <input type="radio" disabled>
-                        <span class='scb_s_facs_cell_treatment_text scb_s_microscopy_dim_conditions'>Fixed</span>
-                    </input>
-                {/if}
+                    {if $r.has_live}
+                        <input {if not $r.is_sample_enabled} disabled{/if} style='left:40px' type="radio"
+                            assignment_id="{$assignment.id}" experiment_id = "{$experiment.id}"
+                            facs_id = "{$facs.id}" cell_treatment_id="{$r.cell_treatment.id}"
+                            lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+                            name="CT_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}_{index($r)}"
+                            data-map_key="{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
+                            value="Live" {if $r.live == 'Live'}checked {/if}
+                            class='scb_f_facs_cell_treatment_radio scb_s_facs_cell_treatment_radio facs_locked'
+                            />
+                        <span style='left:63px' class='scb_s_facs_cell_treatment_text {if $r.is_sample_enabled}facs_locked{else}scb_s_microscopy_dim_conditions{/if}'>
+                            Live
+                        </span>
+                    {/if}
                 </div>
             </td>
             <!-- Flow Cytometry Analysis type -->
@@ -381,43 +370,47 @@ FACS Main View
 
             <!-- Conditions -->
             <td class='scb_s_facs_samples_table_td{if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'>
+
                 {if $r.lane}
-                {if $assignment.template.model.facs.is_ab}
-            	    {foreach $q in keys($kinds[$r.lane.kind].conditions)}
-            	        {if $assignment.template.facs_kinds[$r.lane.kind].conditions[$q].identity[$r.cell_treatment.identifier]}
-            	        <input
-            	        name="SQ_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
-            	        class="scb_f_microscopy_select_conditions" facs_id='{$facs.id}'
-                       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio" value="{$q}" cell_treatment_id='{$r.cell_treatment.id}'
-                       lane_kind="{$r.kind}" facs_lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
-						{if $r.is_sample_enabled and $r.lane.conditions == $q }checked="checked"{/if}
-						/><span class="scb_s_western_blot_choose_gel_type_input_text ">{$assignment.template.facs_kinds[$r.lane.kind].conditions[$q].name}</span>
-                        {/if}
-                    {/foreach}
-                {else}
-                    {foreach $c in keys($kinds[$r.lane.kind].conditions)}
-                    <div class="scb_s_facs_condition_wrapper">
-                        <input class="scb_f_facs_select_conditions
-                        {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
-                        facs_id='{$facs.id}'
-                        assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-                        type="radio" value="{$c}" cell_treatment_id='{$r.cell_treatment.id}'
-                        lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
-                        {if $r.is_sample_enabled and
-                                (
-                                    $r.lane.conditions == $c or
-                                    length(keys($kinds[$r.lane.kind].conditions)) == 1
-                                )
-                            }checked="checked"{/if}
-                        />
-                        <span class="scb_s_western_blot_choose_gel_type_input_text
+                    {if $assignment.template.model.facs.is_ab}
+                        {foreach $q in keys($kinds[$r.live][$r.lane.kind].conditions)}
+                        <div class="scb_s_facs_condition_wrapper">
+                            <input
+                            name="SQ_{$r.cell_treatment.id}_{if $r.kind=='existing'}{$r.lane.id}{/if}"
+                            class="scb_f_facs_select_conditions" facs_id='{$facs.id}'
+                            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' type="radio"
+                            value="{$q}" cell_treatment_id='{$r.cell_treatment.id}'
+                            lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+                            {if $r.is_sample_enabled and $r.lane.conditions == $q }checked="checked"{/if}/>
+                            <span class="scb_s_western_blot_choose_gel_type_input_text ">
+                                {$kinds[$r.live][$r.lane.kind].conditions[$q].name}
+                            </span>
+                        </div>
+                        {/foreach}
+                    {else}
+                        {foreach $c in keys($kinds[$r.lane.kind].conditions)}
+                        <div class="scb_s_facs_condition_wrapper">
+                            <input class="scb_f_facs_select_conditions
                             {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
-                        >
-                            {$assignment.template.facs_kinds[$r.lane.kind].conditions[$c].name}
-                        </span>
-                    </div>
-                    {/foreach}
-                {/if}
+                            facs_id='{$facs.id}'
+                            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                            type="radio" value="{$c}" cell_treatment_id='{$r.cell_treatment.id}'
+                            lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+                            {if $r.is_sample_enabled and
+                                    (
+                                        $r.lane.conditions == $c or
+                                        length(keys($kinds[$r.lane.kind].conditions)) == 1
+                                    )
+                                }checked="checked"{/if}
+                            />
+                            <span class="scb_s_western_blot_choose_gel_type_input_text
+                                {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+                            >
+                                {$assignment.template.facs_kinds[$r.lane.kind].conditions[$c].name}
+                            </span>
+                        </div>
+                        {/foreach}
+                    {/if}
                 {/if}
             </td>
 
@@ -425,27 +418,50 @@ FACS Main View
             <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'
                 style="width:70px">
                 {if $r.kind == 'existing' and $r.display_sample}
-                    {if length(keys($kinds)) > 1 or length(keys($kinds[$r.lane.kind].conditions)) > 1}
+                    {if $assignment.template.model.facs.is_ab}
+                        {if length(keys($kinds)) > 1 or length(keys($kinds[$r.live][$r.lane.kind].conditions)) > 1}
                         <button class="scb_f_facs_add_all_conditions" facs_id='{$facs.id}'
                             assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
                             cell_treatment_id='{$r.cell_treatment.id}' {if not $r.more_conditions} disabled{/if}>
                             Add All
                         </button>
+                        {/if}
+                    {else}
+                        {if length(keys($kinds)) > 1 or length(keys($kinds[$r.lane.kind].conditions)) > 1}
+                        <button class="scb_f_facs_add_all_conditions" facs_id='{$facs.id}'
+                            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                            cell_treatment_id='{$r.cell_treatment.id}' {if not $r.more_conditions} disabled{/if}>
+                            Add All
+                        </button>
+                        {/if}
                     {/if}
+
                 {/if}
             </td>
             
             
             <td class='scb_s_facs_samples_table_td {if not $r.display_sample} scb_s_experiment_setup_table_border{/if}'>
                 {if $r.kind == 'existing' }
-                    {if length(keys($kinds)) > 1 or length(keys($kinds[$r.lane.kind].conditions)) > 1}
-                        <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
-                            assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-                            lane_id='{$r.lane.id}' role='button' aria-label='Delete Sample'
-                            {if $r.is_sample_enabled}{else}disabled="disabled"{/if}
-                            >
-                            <img alt="Delete" title="Delete" src="images/setup/scb_remove.png">
-                        </button>
+                    {if $assignment.template.model.facs.is_ab}
+                        {if length(keys($kinds)) > 1 or length(keys($kinds[$r.live][$r.lane.kind].conditions)) > 1}
+                            <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
+                                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                                lane_id='{$r.lane.id}' role='button' aria-label='Delete Sample'
+                                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}
+                                >
+                                <img alt="Delete" title="Delete" src="images/setup/scb_remove.png">
+                            </button>
+                        {/if}
+                    {else}
+                        {if length(keys($kinds)) > 1 or length(keys($kinds[$r.lane.kind].conditions)) > 1}
+                            <button class="scb_f_facs_sample_remove" facs_id='{$facs.id}'
+                                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
+                                lane_id='{$r.lane.id}' role='button' aria-label='Delete Sample'
+                                {if $r.is_sample_enabled}{else}disabled="disabled"{/if}
+                                >
+                                <img alt="Delete" title="Delete" src="images/setup/scb_remove.png">
+                            </button>
+                        {/if}
                     {/if}
                 {/if}
             </td>
@@ -500,16 +516,16 @@ FACS Main View
         <div id='slider' class='scb_s_facs_video_box swipe'>
             <div  class='slides_container swipe-wrap'>
                 <div>
-                    <iframe height="124" width="187" controls="0"
-                        class='scb_s_experiment_setup_video_box_vid'
-                        src="https://www.youtube.com/embed/EQXPJ7eeesQ" frameborder="0">
-                    </iframe>
+                    <a href="//youtu.be/EQXPJ7eeesQ-Y" target="blank">
+                        <img height='124' width='187'
+                        src="images/youtube_links/facs_video.jpg">
+                    </a>
                 </div>
                 <div>
-                    <iframe height="124" width="187" controls="0"
-                        class='scb_s_experiment_setup_video_box_vid'
-                        src="https://www.youtube.com/embed/W9p6Y8IW89A" frameborder="0">
-                    </iframe>
+                    <a href="//youtu.be/W9p6Y8IW89A-Y" target="blank">
+                        <img height='124' width='187'
+                        src="images/youtube_links/micro_video3_facs_video2.jpg">
+                    </a>
                 </div>
             </div>
 		</div>
@@ -571,6 +587,7 @@ FACS Main View
 {/template}
 
 /**
+Display Flow Cytometry Analysis
 @param assignment
 @param experiment
 @param facs
@@ -581,7 +598,50 @@ FACS Main View
 */
 {template .display_lysate_types}
 
-{if length(keys($kinds)) ==1}
+{if $assignment.template.model.facs.is_ab}
+
+    {if $live}
+        {if length(keys($kinds[$live])) == 1}
+            {foreach $k in keys($kinds[$row.live])}
+            <span class="scb_f_facs_select_lysate_type {if $row.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+            cell_treatment_id='{$cell_treatment.id}'
+            facs_id='{$facs.id}'
+            data-map_key="{$row.cell_treatment.id}_{if $row.kind=='existing'}{$row.lane.id}{/if}"
+            assignment_id="{$assignment.id}"
+            experiment_id="{$experiment.id}" value="{$k}"
+            lane_kind="{$row.kind}" lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}"
+            >
+                {$kinds[$live][$k].name}
+            </span>
+            {/foreach}
+        {else}
+            <select class="scb_f_facs_select_lysate_type {if $row.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+            cell_treatment_id='{$cell_treatment.id}'
+            facs_id='{$facs.id}' assignment_id="{$assignment.id}"
+            data-map_key="{$row.cell_treatment.id}_{if $row.kind=='existing'}{$row.lane.id}{/if}"
+            experiment_id="{$experiment.id}" lane_kind="{$row.kind}"
+            lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}" role='select'
+            {if $row.live }{else}disabled="disabled"{/if}
+            >
+                {if length(keys($kinds[$live])) > 1 or $row.kind != 'existing'}
+                    <option selected="selected" disabled="disabled" role='option' value=''>Select Analysis</option>
+                {/if}
+
+                {if $row.lysate_types[$live]}
+                    {foreach $k in $row.lysate_types[$live]}
+                        <option value='{$k}' role='option'
+                            {if $row.lane and $row.lane.kind == $k}selected="selected"{/if}>
+                            {$kinds[$live][$k].name}
+                        </option>
+                    {/foreach}
+                {/if}
+            </select>
+        {/if}
+    {else}/* Make sure that live is always set */
+    {/if}
+{else} /* not assignment builder */
+
+    {if length(keys($kinds)) ==1}
 		{foreach $k in keys($kinds)}
 		<span class="scb_f_facs_select_lysate_type {if $row.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
 		cell_treatment_id='{$cell_treatment.id}'
@@ -593,48 +653,16 @@ FACS Main View
 		    {$kinds[$k].name}
 		</span>
 		{/foreach}
-{else}
-	<select class="scb_f_facs_select_lysate_type {if $row.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
-	cell_treatment_id='{$cell_treatment.id}'
-	facs_id='{$facs.id}' assignment_id="{$assignment.id}"
-	experiment_id="{$experiment.id}" lane_kind="{$row.kind}"
-	lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}" role='select'
-	{if $row.is_sample_enabled}{else}disabled="disabled"{/if}
-	>
+    {else}
+        <select class="scb_f_facs_select_lysate_type {if $row.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+        cell_treatment_id='{$cell_treatment.id}'
+        facs_id='{$facs.id}' assignment_id="{$assignment.id}"
+        experiment_id="{$experiment.id}" lane_kind="{$row.kind}"
+        lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}" role='select'
+        {if $row.live }{else}disabled="disabled"{/if}
+        >
+        {if $row.kind == 'existing'}
 
-	{if $assignment.template.model.facs.is_ab}
-        {if $row.kind == 'existing'}
-            {if $live == 'live' and $row.has_live and $row.lysate_types['Live']}
-                {foreach $k in $row.lysate_types['Live']}
-                <option value='{$k}' role='option'
-            {if $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
-                {/foreach}
-            {/if}
-            {if $live == 'fixed' and $row.has_fixed and $row.lysate_types['Fixed']}
-                {foreach $k in $row.lysate_types['Fixed']}
-                <option value='{$k}' role='option'
-            {if $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
-                {/foreach}
-            {/if}
-        {else}
-            {if length(keys($kinds)) != 1}
-            <option selected="selected" disabled="disabled" role='option' value=''>Select Analysis</option>
-            {/if}
-            {if $live == 'live' and $row.has_live and $row.lysate_types['Live']}
-                {foreach $k in $row.lysate_types['Live']}
-                <option value='{$k}' role='option'
-            {if $row.lane and $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
-                {/foreach}
-            {/if}
-            {if $live == 'fixed' and $row.has_fixed and $row.lysate_types['Fixed']}
-                {foreach $k in $row.lysate_types['Fixed']}
-                <option value='{$k}' role='option'
-            {if $row.lane and $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
-                {/foreach}
-            {/if}
-	    {/if}
-	{else}
-        {if $row.kind == 'existing'}
             {foreach $k in keys($kinds)}
             <option value='{$k}' role='option'
             {if $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}</option>
@@ -647,9 +675,12 @@ FACS Main View
             <option role='option' value='{$k}'>{$kinds[$k].name}</option>
             {/foreach}
         {/if}
-	{/if}
-	</select>
+    {/if}
+
+
 {/if}
+
+
 {/template}
 
 /**
@@ -723,24 +754,42 @@ FACS Main View
         <div class='scb_s_western_blot_gel_tabs' role='tablist'>
             {if $facs.samples_finished}
                 {foreach $r in $rows}
-                    {if $r.is_valid and $r.lane.id == $facs.selected_lane.id}
-                        <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab ' role='tab'>
-                            <div class='scb_s_facs_gel_tab_selected'>
-                            {$facs.selected_lane.kinds[$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].name}
+                    {if $assignment.template.model.facs.is_ab}
+                        {if $r.is_valid and $r.lane.id == $facs.selected_lane.id}
+                            <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab ' role='tab'>
+                                <div class='scb_s_facs_gel_tab_selected'>
+                                {$r.live}:
+                                {$facs.selected_lane.kinds[$r.live][$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].name}
+                                </div>
+                            </span>
+                        {elseif $r.is_valid and $r.cell_treatment.id == $facs.selected_lane.cell_treatment_id}
+                            <div class='scb_s_western_blot_gel_tab' facs_id='{$facs.id}'
+                                assignment_id='{$assignment.id}' role='tab'
+                                experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>
+                                {$r.live}:
+                                {$r.lane.kinds[$r.live][$r.lane.kind].conditions[$r.lane.conditions].name}
                             </div>
-                        </span>
-                    {elseif $r.is_valid and $r.cell_treatment.id == $facs.selected_lane.cell_treatment_id}
-                        <div class='scb_s_western_blot_gel_tab' facs_id='{$facs.id}'
-                            assignment_id='{$assignment.id}' role='tab'
-                            experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>
-                            {$r.lane.kinds[$r.lane.kind].conditions[$r.lane.conditions].name}
-                        </div>
+                        {/if}
+                    {else}
+                        {if $r.is_valid and $r.lane.id == $facs.selected_lane.id}
+                            <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab ' role='tab'>
+                                <div class='scb_s_facs_gel_tab_selected'>
+                                {$facs.selected_lane.kinds[$facs.selected_lane.kind].conditions[$facs.selected_lane.conditions].name}
+                                </div>
+                            </span>
+                        {elseif $r.is_valid and $r.cell_treatment.id == $facs.selected_lane.cell_treatment_id}
+                            <div class='scb_s_western_blot_gel_tab' facs_id='{$facs.id}'
+                                assignment_id='{$assignment.id}' role='tab'
+                                experiment_id='{$experiment.id}' facs_lane_id='{$r.lane.id}'>
+                                {$r.lane.kinds[$r.lane.kind].conditions[$r.lane.conditions].name}
+                            </div>
+                        {/if}
                     {/if}
                 {/foreach}
             {else}
                 <span class='scb_s_western_blot_gel_active scb_s_western_blot_gel_tab'  role='tab'>
                     <div class='scb_s_facs_gel_tab_selected'>
-                        {$rows[0].lane.kinds[$rows[0].lane.kind].conditions[$rows[0].lane.conditions].name}
+                        SLIDE
                     </div>
                 </span>
             {/if}
@@ -768,11 +817,18 @@ FACS Main View
 
     <div class='scb_s_facs_chart_wrapper'>
         <div class='scb_s_facs_chart_xaxis'>
-                    {if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence
+        {if $assignment.template.model.facs.is_ab}
+            {if $lane and $lane.kinds[$lane.live][$lane.kind].conditions}
+                {$lane.kinds[$lane.live][$lane.kind].conditions[$lane.conditions].name}
+            {else}PI
+            {/if} Fluorescence
+        {else}
+            {if $lane and $lane.kinds[$lane.kind].conditions}
+                {$lane.kinds[$lane.kind].conditions[$lane.conditions].name}
+            {else}PI
+            {/if} Fluorescence
+        {/if}
 
-<!-- 
-            {if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence
- -->
         </div>
         <div class='scb_s_facs_chart_yaxis'>
             Number of cells (thousands)
@@ -839,7 +895,19 @@ Propidium Iodide (PI) (X-axis) of each cell within the sample. &nbsp;
         <tr>
             <td role='columnheader'></td>
             <td role='columnheader'></td>
-            <td role='columnheader'>{if $lane and $lane.kinds[$lane.kind].conditions}{$lane.kinds[$lane.kind].conditions[$lane.conditions].name}{else}PI{/if} Fluorescence</td>
+            <td role='columnheader'>
+                {if $assignment.template.model.facs.is_ab }
+                    {if $lane and $lane.kinds[$lane.live][$lane.kind].conditions}
+                        {$lane.kinds[$lane.live][$lane.kind].conditions[$lane.conditions].name}
+                    {else}PI{/if}
+                    Fluorescence
+                {else}
+                    {if $lane and $lane.kinds[$lane.kind].conditions}
+                        {$lane.kinds[$lane.kind].conditions[$lane.conditions].name}
+                    {else}PI{/if}
+                    Fluorescence
+                {/if}
+            </td>
             <td role='columnheader'>% Cells</td>
             <td role='columnheader'></td>
         </tr>

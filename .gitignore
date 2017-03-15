@@ -70,3 +70,6 @@ gen/
 settings.yml
 
 node_modules/
+
+# design files
+*.psd

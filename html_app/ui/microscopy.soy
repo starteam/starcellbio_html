@@ -316,49 +316,33 @@
             <!-- want to hide this column if there are no conditions-->
             <td class=' scb_s_microscopy_samples_table_td {if $r.display_sample}{else}scb_s_experiment_setup_table_border{/if} scb_s_microscopy_conditions'>
             {if $r.lane}
-                {if $assignment.template.model.microscopy.is_ab}
-                    {foreach $k in keys($assignment.template.micro_kinds[$r.lane.kind].conditions)}
-                        {if $assignment.template.micro_kinds[$r.lane.kind].conditions[$k].identifiers[$r.lane.cell_treatment.identifier] }
-                            <input class='scb_f_microscopy_select_conditions' type="radio"
-                                name="{if $r.kind == 'existing'}{$r.lane.id}{/if}" value="{$k}"
-                                microscopy_id='{$microscopy.id}' cell_treatment_id='{$r.cell_treatment.id}'
-                                assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
-                                lane_kind="{$r.kind}" lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
-                                {if $r.is_sample_enabled and ($r.lane.slide_conditions == $k)}checked='checked'{/if}/>
-                            <span class="scb_s_western_blot_choose_gel_type_input_text ">
-                                {$assignment.template.micro_kinds[$r.lane.kind].conditions[$k].name}
-                            </span>
-                            &nbsp;&nbsp;
-                        {/if}
-                        &nbsp;&nbsp;
-                    {/foreach}
-                {/if}
-
                 {foreach $condition in $r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]}
                     <!--If there is only one condition, radio button is already checked-->
                     <div class="scb_s_microscopy_condition_wrapper">
-                        <input
-                            class="scb_f_microscopy_select_conditions
-                                {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
-                            microscopy_id='{$microscopy.id}'
-                            assignment_id='{$assignment.id}'
-                            experiment_id='{$experiment.id}' type="radio"
-                            value="{$condition}"
-                            cell_treatment_id='{$r.cell_treatment.id}'
-                            lane_kind="{$r.kind}"
-                            lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
-                            {if $r.is_sample_enabled and
-                                (
-                                    $r.lane.slide_conditions == $condition or
-                                    length($r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]) == 1
-                                )
-                            }checked="checked"{/if}
-                        />
-                        <span class="scb_s_western_blot_choose_gel_type_input_text
-                            {if not $r.is_sample_enabled} scb_s_microscopy_dim_conditions{/if}"
-                        >
-                            {$assignment.template.micro_kinds[$r.lane.kind].conditions[$condition].name}
-                        </span>
+                        {if $assignment.template.micro_kinds[$r.lane.kind].conditions[$condition].name != ''}
+                            <input
+                                class="scb_f_microscopy_select_conditions
+                                    {if $r.is_sample_enabled}{else}scb_s_microscopy_dim_conditions{/if}"
+                                microscopy_id='{$microscopy.id}'
+                                assignment_id='{$assignment.id}'
+                                experiment_id='{$experiment.id}' type="radio"
+                                value="{$condition}"
+                                cell_treatment_id='{$r.cell_treatment.id}'
+                                lane_kind="{$r.kind}"
+                                lane_id="{if $r.kind == 'existing'}{$r.lane.id}{/if}"
+                                {if $r.is_sample_enabled and
+                                    (
+                                        $r.lane.slide_conditions == $condition or
+                                        length($r.lane.cell_treatment.treatment_list.first.conditions[$r.lane.kind]) == 1
+                                    )
+                                }checked="checked"{/if}
+                            />
+                            <span class="scb_s_western_blot_choose_gel_type_input_text
+                                {if not $r.is_sample_enabled} scb_s_microscopy_dim_conditions{/if}"
+                            >
+                                {$assignment.template.micro_kinds[$r.lane.kind].conditions[$condition].name}
+                            </span>
+                        {/if}
                     </div>
                 {/foreach}
 			{/if}
@@ -446,8 +430,6 @@
 */
 {template .prepare_slide}
 
-
-<div class='scb_s_microscopy_tab_content_slide'>
 {if $microscopy.samples_finished}
 {call .display_m_progress}
 {param step:3 /}
@@ -531,8 +513,13 @@
                         {if $r.lane.id == $microscopy.selected_lane.id}
                             <span class='scb_s_western_blot_gel_active scb_s_microscopy_slide_tab ' role='tab'>
                                 <div class='scb_s_microscopy_gel_tab_selected'>
+                                {if $microscopy.selected_lane.kinds[$microscopy.selected_lane.kind]
+                                    .conditions[$microscopy.selected_lane.slide_conditions].short_name == ''}
+                                    {$microscopy.selected_lane.kind}
+                                {else}
                                     {$microscopy.selected_lane.kinds[$microscopy.selected_lane.kind]
                                     .conditions[$microscopy.selected_lane.slide_conditions].short_name}
+                                {/if}
                                 </div>
                             </span>
                         <!--unselected lanes for this cell_treatment-->
@@ -540,7 +527,11 @@
                             <div class='scb_s_microscopy_slide_tab' microscopy_id='{$microscopy.id}'
                                 assignment_id='{$assignment.id}' role='tab'
                                 experiment_id='{$experiment.id}' microscopy_lane_id='{$r.lane.id}'>
-                                {$r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name}
+                                {if $r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name == ''}
+                                    {$r.lane.kind}
+                                {else}
+                                    {$r.lane.kinds[$r.lane.kind].conditions[$r.lane.slide_conditions].short_name}
+                                {/if}
                             </div>
                         {/if}
                     {/if}
@@ -579,7 +570,6 @@
 				{/call}
 		{/if}
  		</div>
-</div>	
 {/template}
 
 /**
@@ -598,7 +588,7 @@
 							 or click and drag your mouse to move the microscope lens across the image.<p/>
 
 						{if $microscopy.disable_blur and $microscopy.disable_brightness}
-							Please note that the brightness and focus microscope controls have been disabled.
+							Please note that the brightness and focus controls have been disabled.
 						{elseif $microscopy.disable_blur}
 							Please note that the focus microscope controls have been disabled.
 						{elseif $microscopy.disable_brightness}
@@ -807,18 +797,25 @@
     </div>
     
 	<div class = 'scb_s_microscopy_lens_controls_section_5'>
-    			<span class='scb_s_microscopy_filter_label'>Filters:</span>
-    					<input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}' title='Red'  name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.red_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
-				<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}' title='Blue' name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.blue_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
-				<input class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}' title='Green' name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.green_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
-				<input class='scb_f_microscopy_all scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}'  title='All' name='IF' type="radio" assignment_id='{$assignment.id}'
-				experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if} {if $microscopy.merge_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
-				<br/>
-
-				<br/>
+	    <span class='scb_s_microscopy_filter_label'>Filters:</span>
+	    <input class='scb_f_microscopy_red scb_s_microscopy_if' disabled='disabled'  microscopy_id='{$microscopy.id}'
+	        title='Red'  name='IF' type="radio" assignment_id='{$assignment.id}'
+	        experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+	        {if $microscopy.red_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
+		<input class='scb_f_microscopy_blue scb_s_microscopy_if ' disabled='disabled' microscopy_id='{$microscopy.id}'
+		    title='Blue' name='IF' type="radio" assignment_id='{$assignment.id}'
+		    experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+		    {if $microscopy.blue_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
+		<input class='scb_f_microscopy_green scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}'
+		    title='Green' name='IF' type="radio" assignment_id='{$assignment.id}'
+			experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+			{if $microscopy.green_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
+		<input class='scb_f_microscopy_merge scb_s_microscopy_if' disabled='disabled' microscopy_id='{$microscopy.id}'
+		    title='Merge' name='IF' type="radio" assignment_id='{$assignment.id}'
+			experiment_id='{$experiment.id}' {if $microscopy_line_id}microscopy_lane_id='{$microscopy_line_id}'{/if}
+			{if $microscopy.merge_enabled}checked='checked'{/if} {if $microscopy.samples_finished}{else}disabled{/if}>
+		<br/>
+		<br/>
     
     </div>
     
@@ -867,26 +864,6 @@
 @param kinds - micro_kinds
 */
 {template .display_slide_types}
-
-{if $assignment.template.model.microscopy.is_ab}
-    <select class="scb_f_microscopy_select_slide_type" cell_treatment_id='{$cell_treatment.id}' role='select'
-        microscopy_id='{$microscopy.id}' assignment_id="{$assignment.id}" experiment_id="{$experiment.id}"
-        lane_kind="{$row.kind}" lane_id="{if $row.kind == 'existing'}{$row.lane.id}{/if}"
-        {if $row.is_sample_enabled}{else}disabled="disabled"{/if}
-    >
-        {if $row.kind != 'existing'}
-            <option  role='option' selected="selected" disabled="disabled" value=''>Select Analysis</option>
-        {/if}
-        {foreach $k in keys($assignment.template.micro_kinds)}
-            {if $assignment.template.micro_kinds[$k].identifiers[$row.cell_treatment.identifier] }
-                <option value='{$k}' role='option'
-                    {if $row.kind == 'existing' and $row.lane.kind == $k}selected="selected"{/if}>{$kinds[$k].name}
-                </option>
-            {/if}
-        {/foreach}
-    </select>
-
-{else}
     {if length(keys($cell_treatment.treatment_list.list[0].conditions)) == 1}
 
         {foreach $k in keys($cell_treatment.treatment_list.list[0].conditions)}
@@ -928,7 +905,6 @@
 	            {/foreach}
 	        {/if}
 	     </select>
-    {/if}
 {/if}
 
 {/template}
@@ -947,22 +923,22 @@
     <div id='slider' class='scb_s_western_blot_video_box swipe'>
         <div  class='slides_container swipe-wrap'>
             <div>
-                <iframe height='124' width='187' controls='0'
-                    class='scb_s_experiment_setup_video_box_vid'
-                    src="//www.youtube.com/embed/OPv84Tdgj-Y" frameborder="0">
-                </iframe>
+                <a href="//youtu.be/OPv84Tdgj-Y" target="blank">
+                    <img height='124' width='187'
+                    src="images/youtube_links/micro_video1.jpg">
+                </a>
             </div>
             <div>
-                <iframe height='124' width='187' controls='0'
-                    class='scb_s_experiment_setup_video_box_vid'
-                    src="//www.youtube.com/embed/PCJ13LjncMc" frameborder="0">
-                </iframe>
+                <a href="//youtu.be/PCJ13LjncMc-Y" target="blank">
+                    <img height='124' width='187'
+                    src="images/youtube_links/micro_video2.jpg">
+                </a>
             </div>
             <div>
-                <iframe height='124' width='187' controls='0'
-                    class='scb_s_experiment_setup_video_box_vid'
-                    src="//www.youtube.com/embed/W9p6Y8IW89A" frameborder="0">
-                </iframe>
+                <a href="//youtu.be/W9p6Y8IW89A-Y" target="blank">
+                    <img height='124' width='187'
+                    src="images/youtube_links/micro_video3_facs_video2.jpg">
+                </a>
             </div>
         </div>
     </div>
@@ -1003,7 +979,7 @@
 			<div class='scb_s_western_blot_progress_stripe_bar' style='width: 
 
 						{if $step== 1}20px;{/if}
-				{if $step== 2} 289px;{/if}
+				{if $step== 2} 294px;{/if}
 				{if $step== 3}607px; border-top-right-radius:8px; border-bottom-right-radius:8px;{/if}'
 				
 				 aria-label='

@@ -62,10 +62,14 @@
 <script type="text/javascript" src="/static/js/soyutils.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jqdialog.js?_=1445364014" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/jquery-ui.js?_=1446740740" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/underscore.js?_=1455117369" charset="UTF-8"></script>
 
 
 {% load staticfiles%}
+<script src="{% static "sketch_tool.js" %}"></script>
 <script src="{% static "instructor.js" %}"></script>
+<script src="{% static "paper-core.js" %}"></script>
+<script src="{% static "constants.js" %}"></script>
 <link href="{% static "assignment_setup.css" %}" rel="Stylesheet"/>
 <body>
 <div id="main" style="height: 100%; position: absolute; left: 126.5px; top: 0px;">
@@ -107,8 +111,8 @@
                 href="{% url "common_assignments" %}" aria-label="Assignments" role="menuitem">
                 <div class="scb_s_assignment_step_wrapper" style="position: absolute; left: 29px; bottom: 20px;"
                  aria-hidden="true">
-                <div class="scb_s_assignments_link_img_active" role="presentation"></div>
-                DASHBOARD
+                  <div class="scb_ab_s_dashboard_icon_active" role="presentation"></div>
+                  <div class="scb_ab_s_tab_title">DASHBOARD</div>
                 </div>
             </a>
         </div>

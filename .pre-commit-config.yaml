@@ -1,0 +1,16 @@
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  sha: master
+  hooks:
+    - id: check-ast
+    - id: check-merge-conflict
+    - id: debug-statements
+    - id: flake8
+    - id: trailing-whitespace
+- repo: https://github.com/pre-commit/mirrors-eslint
+  sha: master
+  hooks:
+    - id: eslint
+- repo: https://github.com/pre-commit/mirrors-yapf
+  sha: master
+  hooks:
+    - id: yapf

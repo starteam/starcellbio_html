@@ -17,6 +17,7 @@
       - git
       - emacs24-nox
       - postfix
+      - libjpeg-dev
     pip_packages:
       - virtualenvwrapper
     venv_name: starcellbio
@@ -34,7 +35,7 @@
       sudo: yes
       pip: name={{ item }}
       with_items: pip_packages
-    
+
     - name: Create venv
       shell: >
         executable=/bin/bash
@@ -44,6 +45,9 @@
 
     - name: Install requirements
       pip: requirements='/vagrant/requirements.txt' virtualenv={{ venv_path }}
+
+    - name: Install dev requirements
+      pip: requirements='/vagrant/requirements.dev.txt' virtualenv={{ venv_path }}
 
     - name: Install node packages
       npm: path=/vagrant
@@ -85,7 +89,7 @@
       environment:
         PROJECT_HOME: "/vagrant"
         PATH: "/vagrant/node_modules/.bin:{{ ansible_env.PATH }}"
-        
+
 
     - name: Drop profile
       shell: >

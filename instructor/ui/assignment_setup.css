@@ -1,4 +1,6 @@
 
+input, select { outline: none; }
+
 .scb_ab_s_input_text_field{
     font-size: 10pt;
     font-family: 'sourcesanspro-regular';
@@ -9,6 +11,19 @@
     padding: 5px;
     display:inline-block;
 }
+.scb_ab_s_form_select_field{
+    font-family: 'sourcesanspro-regular';
+    width: 141px;
+    background: white;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    height: 31px;
+    font-style: italic;
+}
+.scb_ab_s_micro_analyze>select.scb_ab_s_form_select_field{
+    width: 170px;
+}
+
 .scb_s_instructor_view{
     width: 1002px;
     background-color: #f4f6f8;
@@ -145,7 +160,7 @@ select:disabled {
 }
 .scb_ab_s_experiment_setup_add_button{
 	width: 104px;
-    margin:20px 0 0 58px;
+    margin:20px 0 0 29px;
 }
 
 /* Input headers  in Define variable */
@@ -153,12 +168,16 @@ select:disabled {
     position: relative;
     left: 29px;
     margin-top:20px;
+
 }
 .scb_ab_s_input_headers>div{
     width: 148px;
     display: inline-block;
     font-family: 'sourcesanspro-semibold';
     font-size: 14px ;
+}
+.scb_ab_s_input_headers>div.scb_ab_s_micro_analyze_header{
+    width: 179px;
 }
 .scb_ab_s_input_headers>div.scb_ab_s_small_header{
     width: 58px;
@@ -173,17 +192,23 @@ select:disabled {
     width: 72px;
 }
 
+
 /* Form inputs  in Define variables*/
 .scb_ab_s_form_input_list{
     position: relative;
-    left: 10px;
+    left: 29px;
 }
 .scb_ab_s_form_input_list>div{
     display: inline-block;
 }
 .scb_ab_s_form_input_list>div>input{
-    margin: 5px 0 0 5px;
+    margin: 2px 0 3px 5px;
 }
+
+.scb_ab_s_form_input_list>.scb_ab_s_counter_margin{
+    margin-left: -19px;
+}
+
 .scb_ab_s_small_input_box>input{
     width: 40px;
 }
@@ -197,13 +222,14 @@ select:disabled {
     width: 108px;
 }
 /* Delete trash icon*/
-.checkbox_delete_image{
+.scb_s_ab_trash_icon{
     background: url('images/setup/scb_remove.png') no-repeat;
     display:inline-block;
     height:20px;
     width: 15px;
     background-position: center;
     margin-left: 8px;
+    cursor: pointer;
 }
 .checkbox_image:hover {
     cursor: pointer;
@@ -220,9 +246,6 @@ select:disabled {
 
 .scb_ab_s_hide_variable{
     display:none;
-}
-.checkbox_delete_image{
-    cursor: pointer;
 }
 
 .scb_ab_s_row{
@@ -241,6 +264,7 @@ select:disabled {
 
 .scb_ab_s_table_header_text{
     font-family: 'sourcesanspro-semibold';
+    margin: 5px 0 10px 0;
 }
 .scb_ab_s_row>div.scb_ab_s_enable_sample{
     width: 50px;
@@ -295,6 +319,8 @@ select:disabled {
 /* Protein size input */
 div.scb_ab_s_antibody_name{
     text-align: left;
+    vertical-align: middle;
+    margin-top: 10px;
     width: 155px;
     font-family: 'sourcesanspro-semibold';
 
@@ -319,7 +345,7 @@ div.scb_ab_s_antibody_name{
     width: 68px;
 }
 /* Band intensity*/
-.scb_ab_s_row>.scb_ab_s_col_width_sample{
+.scb_ab_s_row>.scb_ab_s_col_width_wb_sample{
     width: 240px;
     text-align: left;
 }
@@ -327,7 +353,7 @@ div.scb_ab_s_antibody_name{
     width: 15px;
 }
 .scb_ab_s_col_width_type_size{
-    width: 80px;
+    width: 75px;
 }
 
 .scb_ab_s_col_width_intensity>input{
@@ -365,8 +391,6 @@ div.scb_ab_s_antibody_name{
 }
 .scb_ab_s_antibody_header{
     font-size: 17px;
-    font-family: 'sourcesanspro-semibold';
-    margin: 15px 0 5px 0;
 }
 
 #jqDialog_box{
@@ -378,7 +402,7 @@ div.scb_ab_s_antibody_name{
 div.block-ellipsis {
   display: -webkit-box;
   max-width: 100%;
-  height: 35px;
+  max-height: 35px;
   margin: 0 auto;
   font-size: 14px;
   -webkit-line-clamp: 2;
@@ -400,19 +424,6 @@ div.block-ellipsis {
 .scb_s_dashboard_access_width{
     width: 80px;
 }
-
-/* Temporarily disable techniques */
-.disabled{
-    opacity: 0.4;
-    cursor: default !important;
-}
-
-span.scb_ab_s_dashboard_action {
-    cursor: pointer;
-}
-input[type="checkbox"].disabled {
-    opacity: 1;
-}
 .scb_ab_s_dashboard_new_assignment_button{
     font-size: 9pt;
     font-family: 'sourcesanspro-semibold';
@@ -427,4 +438,430 @@ input[type="checkbox"].disabled {
     color: white;
     padding: 5px 9px 5px 13px;
 
+}
+span.scb_ab_s_dashboard_action {
+    cursor: pointer;
+}
+
+
+/* Temporarily disable techniques */
+.disabled{
+    opacity: 0.4;
+    cursor: default !important;
+}
+input[type="checkbox"].disabled {
+    opacity: 1;
+}
+
+/* FACS Sample Prep */
+.scb_ab_s_input_headers>div.scb_ab_s_facs_cell_treatment_header{
+    width: 167px;
+
+}
+.scb_ab_s_input_headers>div.scb_ab_center_input_header{
+    margin-left: 5px;
+    width: 138px;
+    text-align: center;
+}
+.scb_ab_s_form_input_list>.scb_ab_s_fixed>input{
+    margin-left: 0;
+}
+.scb_ab_s_form_input_list>.scb_ab_s_live{
+    margin-right: 20px;
+}
+.vertical_align_bottom{
+    vertical-align: bottom;
+}
+/* FACS Analyze */
+.scb_ab_s_col_copy{
+    width: 200px;
+}
+.scb_ab_col_edit{
+    width: 50px;
+}
+.scb_ab_s_edit_icon_container{
+    position: absolute;
+    top: 50%;
+    margin-top: -22px;
+    right:222px;
+
+}
+.scb_ab_s_copy_checkbox_container{
+    position: absolute;
+    top: 50%;
+    margin-top: -9px;
+    right:17px;
+
+}
+.scb_ab_s_copy_button_container{
+    position: absolute;
+    top: 50%;
+    margin-top: -16px;
+    right:30px;
+}
+.scb_ab_s_row>.scb_ab_s_col_width_facs_sample{
+    width: 320px;
+    text-align: left;
+}
+.scb_ab_s_row>.scb_ab_s_facs_condition_header{
+    font-size: 17px;
+    width: 339px;
+    text-align: left;
+
+}
+.scb_ab_s_grouping_header_row{
+    margin: 15px 0 5px 0;
+    font-family: 'sourcesanspro-semibold';
+}
+.scb_ab_s_pre_header_row{
+    margin-bottom: -15px;
+    font-family: 'sourcesanspro-semibold';
+}
+.scb_ab_s_histogram_edit_icon{
+    height: 28px;
+    margin: 10px 7px;
+}
+.scb_ab_s_edit_grey_img {
+    background: url('../images/Draw_Histogram_Gray.png') no-repeat;
+    background-size: 25px;
+}
+.scb_ab_s_edit_white_img {
+    background: url('../images/Draw_Histogram_Green.png') no-repeat;
+    background-size: 25px;
+}
+
+/* Dialog view for analyze page */
+.scb_ab_s_dialog{
+    position: fixed;
+    z-index: 999;
+    top:0px;
+    font-family: 'sourcesanspro-regular';
+    font-size:10pt;
+}
+.scb_ab_s_dialog>div{
+    max-height: 75%;
+    overflow: auto;
+    position: relative;
+    border: 5px solid white;
+    border-radius: 9px;
+    background-color: #f5f5f5;
+
+}
+.scb_ab_s_analyze_dialog{
+    width:800px;
+    left: 300px;
+
+}
+.scb_ab_s_analyze_dialog>div{
+    margin: 12% auto auto 0;
+}
+
+.scb_ab_s_copy_dialog{
+    width: 400px;
+    left: 530px;
+
+}
+.scb_ab_s_copy_dialog>div{
+    margin: 330px auto auto 0;
+
+}
+.scb_ab_s_copy_dialog_body{
+    /*height: 350px;*/
+    text-align: center;
+    padding-bottom: 50px;
+
+}
+.scb_ab_s_copy_dialog_scroll_list{
+    height: 200px;
+    overflow: scroll;
+    box-shadow: inset 2px 2px 5px grey;
+}
+.scb_ab_s_copy_button{
+    position: absolute;
+    bottom: 10px;
+    left: 100px;
+}
+
+.scb_ab_s_grey_button_link{
+    background-color: #676767;
+    border: 1px solid #e0e0e0;
+    border-radius: 5pt;
+    padding: 5px;
+    color: white;
+    letter-spacing: 1px;
+    font-size: 10pt;
+    font-family: 'sourcesanspro-regular';
+    cursor: pointer;
+}
+
+.scb_ab_s_dialog_title {
+    font-size: 12pt;
+    color: white;
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 6px;
+    text-align: left;
+    cursor: move;
+    background-color: #27956c;
+    font-family: 'sourcesanspro-bold';
+}
+
+.scb_ab_s_dialog_title_close {
+    padding-top: 0;
+    float: right;
+    -webkit-appearance: none;
+    font-family: 'sourcesanspro-semibold';
+    outline: none;
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    font-size: 14pt;
+    color: transparent;
+    background: transparent;
+    background-image: url('../../../images/header/scb_close_button.png');
+    background-repeat: no-repeat;
+}
+
+/* Draw Histogram View */
+.scb_ab_s_draw_new_histogram_content{
+    margin: 15px;
+    text-align: right;
+    padding-right: 80px;
+}
+
+.scb_ab_s_draw_histogram_canvas{
+    width: 600px;
+    height: 300px;
+    cursor: inherit;
+    border: 1px gray solid;
+    background: white;
+    margin: 20px 0;
+}
+.scb_ab_s_small_canvas{
+    width:200px;
+    height: 100px;
+    border: 1px gray solid;
+    background: white;
+}
+.scb_ab_s_canvas_noise_preview{
+    margin: 25px;
+    width:450px;
+    height: 250px;
+    border: 1px gray solid;
+    background: white;
+}
+
+.scb_ab_s_remove_icon {
+    float:right;
+    height: 26px;
+    width: 26px;
+    cursor:pointer;
+    border-radius: 12px;
+    color: transparent;
+    background-image: url('../../../images/header/scb_close_button.png');
+}
+
+.scb_ab_s_remove_icon:hover{
+    background-color: #e58986;
+}
+.scb_ab_s_remove_histogram_icon_position{
+    position:absolute;
+    left: 196px;
+    margin-top: -6px;
+}
+.scb_ab_s_chosen_sample_heading{
+    padding: 0 0 20px 30px;
+    text-align: left;
+}
+
+/* Choose histogram tabs in the pop-up window */
+.scb_ab_s_histogram_tabs{
+    display:table;
+    width:100%;
+    font-family: 'sourcesanspro-semibold';
+    overflow: hidden;
+
+}
+.scb_ab_s_histogram_tabs>div{
+    display: table-cell;
+    text-align:center;
+    padding: 5px 0;
+}
+.scb_ab_s_histogram_tab_not_selected{
+    background: lightgrey;
+    box-shadow: inset 2px 2px 5px grey;
+    color:  #737373;
+    border:1px solid lightgrey;
+}
+.scb_ab_s_histogram_tab_selected{
+    background: #27956c;
+    box-shadow: 0 0 2px 1px grey;
+    color:  white;
+}
+.scb_ab_s_draw_histogram_view, .scb_ab_s_select_histogram_view{
+    height: 550px;
+}
+.scb_ab_s_library_item_wrapper{
+    display: inline-block;
+    margin: 10px;
+}
+.scb_ab_s_canvas_library{
+    margin: 30px 30px 0;
+    text-align: center;
+    height: 350px;
+    border: 1px solid lightgrey;
+    overflow: scroll;
+    box-shadow: inset 2px 2px 5px grey;
+}
+.scb_ab_s_save_btn_position{
+    right: 30px;
+    position:absolute;
+    bottom: 30px;
+}
+.scb_ab_s_delete_btn_position{
+    right: 170px;
+    position:absolute;
+    bottom: 30px;
+}
+.scb_ab_s_histogram_selected{
+    border: 1px solid indianred;
+    box-shadow: 2px 2px 5px indianred;
+}
+
+.scb_ab_s_preview_canvas_div{
+    z-index: 1000;
+    position: absolute;
+    left:150px;
+    top: 150px;
+    width:500px;
+    height:300px;
+    background-color:darkgrey;
+}
+
+.scb_ab_s_add_noise_btn{
+    display: inline-block;
+    float: right;
+}
+
+/* FACS setup histogram parameters */
+.scb_ab_s_canvas_axis_preview {
+    margin-left: 15px;
+}
+
+label.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    height: 21px;
+    margin-left: 3px;
+}
+
+.custom-dropdown:hover {
+    background: url("../images/setup/scb_experiment_dropdown_hover.png") no-repeat right #FFF;
+    background-size: 27px;
+}
+
+.custom-dropdown {
+    padding: 4px 0 4px 5px;
+    overflow: hidden;
+    background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
+    background-size: 27px;
+    box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.custom-dropdown select {
+    background: transparent;
+    font-family: Arial;
+    font-weight: normal;
+    font-size: 10pt;
+    line-height: 1;
+    border: 0;
+    height: 20px;
+    -webkit-appearance: none;
+}
+
+/* Microscopy select image dialog */
+.scb_ab_s_image_selected{
+    box-sizing: border-box;
+    border: 1px solid #27956c;
+    box-shadow: 2px 2px 5px #27956c;
+    opacity: 0.5;
+}
+.scb_ab_s_library_item_wrapper>img{
+    width: 200px;
+}
+.scb_ab_s_image_form{
+    margin-left: 30px;
+}
+/*Microscopy analyze */
+.scb_ab_s_small_image{
+    width: 100px;
+    margin: 0 10px 5px 0;
+}
+.scb_ab_s_row>.scb_ab_s_sample_image_list{
+    width: 450px;
+    text-align: left;
+    position: relative;
+}
+.scb_ab_s_row>div.scb_ab_s_filtered_image_grid{
+    width: 100px;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+}
+.scb_ab_s_row>div.scb_ab_s_filters_row_name{
+    width: 40px;
+    text-align: left;
+    display: table-cell;
+    vertical-align: middle;
+
+}
+.scb_ab_s_remove_image_icon_position{
+    position:absolute;
+    left: 80px;
+    margin-top: -6px;
+}
+.scb_ab_s_row_offset{
+    display: table-cell;
+    width: 18px
+}
+.scb_ab_s_image_wrapper{
+    position:relative;
+    display:inline-block;
+    vertical-align: middle;
+    width: 120px;
+}
+.scb_ab_s_select_image_div{
+    height: 650px;
+}
+input#id_objective{
+    width: 30px;
+}
+
+.scb_ab_s_dashboard_icon_active{
+    background-image:url('../images/header/dashboard_icon_on.png');
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    margin-right: 15px;
+}
+
+.scb_ab_s_tab_title{
+    position: relative;
+    top: 5px;
+}
+
+.scb_ab_s_plus_button {
+    font-size: large;
+    width: 30px;
+    font-family: 'sourcesanspro-semibold';
+    letter-spacing: normal;
+}
+
+.scb_ab_s_upload_instruction{
+    margin: 20px 0px 0 30px;
+    font-family: 'sourcesanspro-semibold';
+    color: #316f94;
+    font-weight: bold;
 }

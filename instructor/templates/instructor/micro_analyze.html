@@ -1,0 +1,207 @@
+{% extends "instructor/assignment_sidebar.html" %}
+
+{% block right_side %}
+  <!-- Hidden pop out window for entering the graph -->
+  <div class="scb_ab_s_dialog scb_ab_s_analyze_dialog" {% if not mapping_pk %}style="visibility:hidden"{% endif %}>
+    <div>
+      <h1 class="scb_ab_s_dialog_title" role="presentation" aria-label="Create Histogram">
+        <span class="scb_ab_s_dialog_title_close scb_ab_f_close_dialog" role="button"
+              aria-label="Close Create Histogram">×</span>
+        Select Image
+      </h1>
+      <div class="scb_ab_s_select_image_div">
+        <div class="scb_ab_s_chosen_sample_heading">
+          <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
+            <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
+              {{ sample_prep_name }}
+            </div>
+          </div>
+          <div class="scb_ab_s_row scb_ab_f_sample_name">
+            {{ protocol_name }}
+          </div>
+        </div>
+        <form id="image_form" method="post" enctype="multipart/form-data" class="scb_ab_s_image_form">
+          {{ image_form.as_p }}
+
+        <input type="submit"
+               name="upload"
+               style="display: inline-block"
+               class="scb_s_gray_button"
+               value="UPLOAD">
+        </form>
+        <div class="scb_ab_s_canvas_library">
+          {% for image in all_images %}
+            <div class="scb_ab_s_library_item_wrapper">
+              <img id="library-{{ image.id }}" src="{{ image.file.url}}"
+                   class="scb_ab_f_select_image "/>
+            </div>
+
+          {% endfor %}
+        </div>
+        <div class="scb_ab_s_upload_instruction">* Please SELECT uploaded image(s) by clicking on the image</div>
+        <button type="button" class="scb_s_gray_button scb_ab_s_delete_btn_position scb_ab_f_remove_image"
+                data-pk="{{ mapping_pk }}">
+          DELETE IMAGE(S)
+        </button>
+        <button type="button" class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_image"
+                data-pk="{{ mapping_pk }}" data-filter_group_id="{{ filter_group_id }}">
+          SAVE SELECTION
+        </button>
+
+      </div>
+
+    </div>
+  </div><!-- End of hidden window -->
+
+  <div class="scb_ab_s_heading_div">
+    <div class="scb_ab_s_page_title">Images</div>
+    <div class='scb_ab_s_heading_description'>
+      Select the image(s) associated with each sample and its corresponding
+      microscopy analysis and conditions.
+    </div>
+    <div class="scb_ab_s_heading_instructions">
+        Note: We recommend that images are at least 500x500 pixels
+        for optimal viewing in StarCellBio.
+    </div>
+  </div>
+  <div class="scb_ab_s_form_container">
+    <form method="post">{% csrf_token %}
+      <!-- Instances are grouped by analysis, condition-->
+      {% for analysis, condition, instance_list in image_groups %}
+
+        <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
+          <div class="scb_ab_s_facs_condition_header">
+            {{ analysis }}{% if analysis != 'Brightfield' %}, {{ condition }} {% endif %}
+          </div>
+          {% if forloop.counter == 1 %}
+            <div class="scb_ab_s_copy_checkbox_container">
+              <div class="scb_ab_s_col_copy">
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        {% for instance in instance_list %}
+          <div class="scb_ab_s_row">
+            <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
+            <div class="scb_ab_s_col_width_facs_sample">
+              <div class="block-ellipsis" id="row-{{ instance.id }}">
+                {{ instance.strain_protocol.strain.name }},
+                {{ instance.strain_protocol.treatment.drug.name }}
+                {% if variables.has_concentration and instance.strain_protocol.treatment.drug.concentration != None %}
+                  , {{ instance.strain_protocol.treatment.drug.concentration }}
+                  {{ instance.strain_protocol.treatment.drug.concentration_unit }}{% endif %}
+                {% if variables.has_start_time and instance.strain_protocol.treatment.drug.start_time != None %}
+                  , {{ instance.strain_protocol.treatment.drug.start_time }}
+                  {{ instance.strain_protocol.treatment.drug.time_unit }}{% endif %}
+                {% if variables.has_duration and instance.strain_protocol.treatment.drug.duration != None %}
+                  , {{ instance.strain_protocol.treatment.drug.duration }}
+                  {{ instance.strain_protocol.treatment.drug.duration_unit }}{% endif %}
+                {% if variables.has_temperature %},
+                  {{ instance.strain_protocol.treatment.temperature.degrees }} &#8451;{% endif %}
+                {% if variables.has_collection_time %},
+                  {{ instance.strain_protocol.treatment.collection_time.time }}
+                  {{ instance.strain_protocol.treatment.collection_time.units }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% if instance.sample_prep.has_filters %}
+            {% if instance.grouped_images.count > 0 %}
+              <div class="scb_ab_s_row" style="display: table-row">
+                <div class="scb_ab_s_row_offset"></div>
+                <div class="scb_ab_s_filters_row_name">Filters:</div>
+                {% for filter in filters %}
+                  <div class="scb_ab_s_filtered_image_grid">{{ filter|title }}</div>
+                {% endfor %}
+              </div>
+              {% for image_set in instance.grouped_images.all %}
+                <div class="scb_ab_s_row" style="display: table-row">
+                  <div class="scb_ab_s_row_offset"></div>
+                  <div class="scb_ab_s_filters_row_name">Set {{ forloop.counter }} :</div>
+                  {% for filter in filters %}
+                    <div class="scb_ab_s_filtered_image_grid">
+                      {% with image_field=filter|add:'_filter_image' %}
+                        {% with filter_image=image_set|get_item:image_field %}
+                          {% if filter_image %}
+                            <div class="scb_ab_s_remove_image_icon_position">
+                                <span class="scb_ab_s_remove_icon scb_ab_f_remove_image" role="button"
+                                      data-mapping_id="{{ instance.id }}"
+                                      data-filter="{{ filter }}"
+                                      data-group_id="{{ image_set.id }}" aria-label="Remove Image">×</span>
+                            </div>
+                            <img src="{{ filter_image.file.url }}" class="scb_ab_s_small_image"/>
+                          {% else %}
+                            <button type="button" data-filter_group_id="{{ filter }}-{{ image_set.id }}"
+                                    class="open_upload_window_btn scb_s_gray_button scb_ab_s_plus_button"
+                                    data-row_id="row-{{ instance.id }}"
+                                    data-sample_treatment="{{ analysis }}, {{ condition }}">&#43;</button>
+                          {% endif %}
+                        {% endwith %}
+                      {% endwith %}
+                    </div>
+                  {% endfor %}
+                  <div class="scb_ab_s_filtered_image_grid">
+                    <div class="scb_s_ab_trash_icon remove_image_set" data-group_id="{{ image_set.id }}"></div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+            <div class="scb_ab_s_row" style="padding:5px 0 10px">
+              <div class="scb_ab_s_col_width_number"></div>
+              <button type="button" class="scb_s_gray_button add_new_image_set"
+                      data-mapping_id="{{ instance.id }}">
+                NEW SET &#43;
+              </button>
+            </div>
+          {% else %}
+            {% if instance.images.count > 0 %}
+              <div class="scb_ab_s_row">
+                <div class="scb_ab_s_col_width_number"></div>
+                <div class="scb_ab_s_sample_image_list">
+                  {% for image in instance.images.all %}
+                    <div class="scb_ab_s_image_wrapper">
+                      <div class="scb_ab_s_remove_image_icon_position">
+                        <span class="scb_ab_s_remove_icon scb_ab_f_remove_image" role="button"
+                              data-mapping_id="{{ instance.id }}"
+                              data-image_id="{{ image.id }}" aria-label="Remove Image">×</span>
+                      </div>
+                      <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="scb_ab_s_copy_checkbox_container">
+                  <div class="scb_ab_s_col_copy">
+                  </div>
+                </div>
+
+              </div>
+            {% endif %}
+            <div class="scb_ab_s_row" style="padding-bottom: 10px">
+              <div class="scb_ab_s_col_width_number"></div>
+              <button type="button" class="scb_s_gray_button open_upload_window_btn"
+                      data-row_id="row-{{ instance.id }}"
+                      data-sample_treatment="{{ analysis }}, {{ condition }}">
+                ADD IMAGE(S)
+              </button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      <input type="submit"
+             name="continue"
+             class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+             value="{{ save_and_continue }} &nbsp; &#9654;">
+      <input type="submit"
+             name="save"
+             class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+             value="SAVE"/>
+    </form>
+  </div>
+  <a href="{% url "microscopy_sample_prep" %}">
+    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
+  </a>
+   <script type="text/javascript">
+    dialog_open = {{ dialog_open|safe }};
+  </script>
+{% endblock %}

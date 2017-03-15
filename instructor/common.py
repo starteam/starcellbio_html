@@ -1,7 +1,6 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from django import forms
-from django.forms.models import modelformset_factory, inlineformset_factory
+from django.forms.models import modelformset_factory
 from django.forms.models import modelform_factory
 from instructor import models
 from instructor import compiler
@@ -10,13 +9,27 @@ import datetime
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, FieldError
 import backend.models
 import json
 import re
-from instructor.compiler import get_protocol_headers
+from instructor.compiler import (
+    get_protocol_headers, is_wb_complete, is_facs_complete, is_micro_complete
+)
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
+from django.template.defaulttags import register
+
+page_order = (
+    'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
+    'techniques', 'wb_lysate_type', 'wb_antibody', 'wb_band_size',
+    'wb_band_intensity'
+)
+facs_pages = ('facs_sample_prep', 'facs_setup', 'facs_analyze')
+micro_pages = ('micro_sample_prep', 'micro_analyze')
+fluorescent_analyses = ('IF', 'DYE-FLU', 'FLUOR')
+filters = ('red', 'blue', 'green', 'merge')
+
 
 @login_required
 def assignments(request):
@@ -26,7 +39,9 @@ def assignments(request):
         {
             'assignments': assignments
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
+
 
 @login_required
 def publish_assignment(request):
@@ -36,10 +51,13 @@ def publish_assignment(request):
     if not assignment_ready:
         return HttpResponseBadRequest("Cannot publish unfinished assignment.")
 
-    if request.user == assignment.course.owner and assignment.access == 'private':
-        assignment.access = 'published'
-        assignment.save()
-        course, created = backend.models.Course.objects.get_or_create(code=assignment.course.code)
+    if (
+        request.user == assignment.course.owner and
+        assignment.access == 'private'
+    ):
+        course, created = backend.models.Course.objects.get_or_create(
+            code=assignment.course.code
+        )
         assignment_json = compiler.compile(assignment.id)
         backend_assignment = backend.models.Assignment(
             courseID=course,
@@ -50,10 +68,9 @@ def publish_assignment(request):
             access=assignment.access
         )
         backend_assignment.save()
-    return HttpResponse('complete')
-
-
-
+        assignment.access = 'published'
+        assignment.save()
+    return HttpResponse()
 
 
 @login_required
@@ -75,6 +92,40 @@ def create_new_assignment(request):
     return redirect('common_assignment_setup')
 
 
+def get_pages(assignment):
+    """
+    Return a dictionary of enabled/disabled pages
+    """
+    pages = {}
+    enabled = True
+    for page in page_order:
+        pages[page] = enabled
+        if page == assignment.last_page_name:
+            enabled = False
+
+    if not assignment.has_wb:
+        wb_pages = page_order[-4:]
+        for page in wb_pages:
+            pages[page] = False
+
+    if assignment.has_micro:
+        enabled = True
+        for page in micro_pages:
+            pages[page] = enabled
+            if page == assignment.micro_last_enabled_page:
+                enabled = False
+
+    if assignment.has_fc:
+        enabled = True
+        for page in facs_pages:
+            pages[page] = enabled
+            if page == assignment.facs_last_enabled_page:
+                enabled = False
+
+    return pages
+
+
+@login_required
 def assignment_setup(request):
     error = ''
     if request.method == "POST":
@@ -90,14 +141,21 @@ def assignment_setup(request):
     else:
         # giving a default name to the assignment
         assignment_name = "Assignment"
-        filtered_asgmts = models.Assignment.objects.filter(course__owner=request.user, name__regex=r'Assignment.*')
+        filtered_asgmts = models.Assignment.objects.filter(
+            course__owner=request.user,
+            name__regex=r'Assignment.*'
+        )
         # want to allow index one larger then there are currently assignments
-        for index in xrange(1, len(filtered_asgmts)+2):
-            if not filtered_asgmts.filter(name="Assignment {}".format(index)).count():
+        for index in xrange(1, len(filtered_asgmts) + 2):
+            if not filtered_asgmts.filter(
+                name="Assignment {}".format(index)
+            ).count():
                 assignment_name = "Assignment {}".format(index)
                 break
 
-    all_assignments = models.Assignment.objects.filter(course__owner=request.user)
+    all_assignments = models.Assignment.objects.filter(
+        course__owner=request.user
+    )
     return render_to_response(
         'instructor/assignment_setup.html',
         {
@@ -109,14 +167,20 @@ def assignment_setup(request):
             'new': request.session['new'],
             'section_name': 'Assignment',
             'page_name': 'assignment',
-            'last_page_number':  1
+            'pages': {}
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
+
 
 @login_required
 def course_setup(request):
-    page_number = 2
-    CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
+    CourseFormSet = modelformset_factory(
+        models.Course,
+        extra=1,
+        can_delete=True,
+        fields=['name', 'code']
+    )
     course_selected = None
     if request.method == 'POST':
 
@@ -131,6 +195,10 @@ def course_setup(request):
                 # need to set the owner
                 course.owner = user
                 course.save()
+    else:
+        formset = CourseFormSet(
+            queryset=models.Course.objects.filter(owner=request.user)
+        )
 
     # if there is at least one course
     all_courses = models.Course.objects.filter(owner=request.user)
@@ -138,15 +206,15 @@ def course_setup(request):
         course_selected = all_courses[0]
         assignment = create_assignment(request, course_selected)
         if 'continue' in request.POST:
-            assignment.last_enabled_page = page_number+1
+            assignment.last_page_name = 'strains'
             assignment.save()
+
             return redirect("common_assignments_edit_strains")
 
     if course_selected:
         return redirect("common_course_modify")
 
-    formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
-
+    pages = {'assignment': True, 'course': True}
     return render_to_response(
         'instructor/course_modify.html',
         {
@@ -157,26 +225,35 @@ def course_setup(request):
             'assignment_name': request.session['assignment_name'],
             'section_name': 'Assignment',
             'page_name': 'course',
-            'last_page_number':  page_number
+            'pages': pages
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
 
 
 def create_assignment(request, course_selected):
     # Create a new assignment
     assignment_name = request.session['assignment_name']
-    assignment_id = assignment_name + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+    assignment_id = assignment_name + datetime.datetime.now().strftime(
+        "%I:%M%p on %B %d, %Y"
+    )
 
     if request.session['based_on']:
-        based_on = models.Assignment.objects.get(pk=request.session['based_on'])
-        a = models.Assignment(course=course_selected,
-                              name=assignment_name,
-                              assignment_id=assignment_id,
-                              basedOn=based_on)
+        based_on = models.Assignment.objects.get(
+            pk=request.session['based_on']
+        )
+        a = models.Assignment(
+            course=course_selected,
+            name=assignment_name,
+            assignment_id=assignment_id,
+            basedOn=based_on
+        )
     else:
-        a = models.Assignment(course=course_selected,
-                              name=assignment_name,
-                              assignment_id=assignment_id)
+        a = models.Assignment(
+            course=course_selected,
+            name=assignment_name,
+            assignment_id=assignment_id
+        )
     a.save()
     request.session['assignment_id'] = a.id
     request.session['new'] = False
@@ -207,8 +284,24 @@ def check_assignment_owner(func):
         if assignment.course.owner != user:
             raise PermissionDenied
         return func(*args, **kwargs)
+
     return check_owner
 
+
+def assignment_selected(func):
+    @wraps(func)
+    def check_assignment_id(request, *args, **kwargs):
+        try:
+            request.session['assignment_id']
+        except KeyError:
+            return redirect('common_assignments')
+        else:
+            return func(request, *args, **kwargs)
+
+    return check_assignment_id
+
+
+@assignment_selected
 @check_assignment_owner
 @login_required
 def assignment_modify(request):
@@ -227,7 +320,9 @@ def assignment_modify(request):
     else:
         form = AssignmentForm(instance=assignment)
 
-    all_assignments = models.Assignment.objects.filter(course__owner=request.user)
+    all_assignments = models.Assignment.objects.filter(
+        course__owner=request.user
+    )
 
     return render_to_response(
         'instructor/assignment_modify.html',
@@ -240,18 +335,26 @@ def assignment_modify(request):
             'assignment_name': assignment.name,
             'section_name': 'Assignment',
             'page_name': 'assignment',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
 
+
+@assignment_selected
 @check_assignment_owner
 @login_required
 def course_modify(request):
     errors = []
-    page_number = 2
+    page_number = page_order.index('course')
     assignment_id = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, pk=assignment_id)
-    CourseFormSet = modelformset_factory(models.Course, extra=1, can_delete=True, fields=['name', 'code'])
+    CourseFormSet = modelformset_factory(
+        models.Course,
+        extra=1,
+        can_delete=True,
+        fields=['name', 'code']
+    )
     if request.method == 'POST' and assignment.access == 'private':
         # change this course's name or code
         formset = CourseFormSet(request.POST)
@@ -262,16 +365,22 @@ def course_modify(request):
             for obj in formset.deleted_objects:
                 if obj.owner == user:
                     if obj == assignment.course:
-                        errors.append('Cannot delete selected course for this assignment.')
-                    elif not models.Assignment.objects.filter(course=obj).exists():
+                        errors.append(
+                            'Cannot delete selected '
+                            'course for this assignment.'
+                        )
+                    elif not models.Assignment.objects.filter(
+                        course=obj
+                    ).exists():
                         obj.delete()
                     else:
                         errors.append(
-                            'This course cannot be deleted as there are other '
-                            'assignments within this course. If you would like '
-                            'to delete all of the assignments within the course, '
-                            'please delete the assignments individually using '
-                            'the trash can icon on the dashboard.'
+                            'This course cannot be deleted as there are '
+                            'other assignments within this course. If you '
+                            'would like to delete all of the assignments '
+                            'within the course, please delete the assignments '
+                            'individually using the trash can icon on the '
+                            'dashboard.'
                         )
             for course in course_instances:
                 if hasattr(course, 'owner') and course.owner != user:
@@ -281,6 +390,8 @@ def course_modify(request):
                     course.owner = user
                     course.save()
                     new_course_pk = course.id
+                else:
+                    course.save()
             # Select course
             pk = request.POST['course_pk']
             # if selected the new course
@@ -292,16 +403,22 @@ def course_modify(request):
                 assignment.course = new_course
                 assignment.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number+1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'strains'
+                assignment.save()
                 return redirect("common_assignments_edit_strains")
-            return redirect("common_course_modify")
+            if errors:
+                # want to avoid form errors when have other errors
+                formset = CourseFormSet(
+                    queryset=models.Course.objects.filter(owner=request.user)
+                )
     # for view mode
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_assignments_edit_strains")
     else:
-        formset = CourseFormSet(queryset=models.Course.objects.filter(owner=request.user))
+        formset = CourseFormSet(
+            queryset=models.Course.objects.filter(owner=request.user)
+        )
 
     course_selected = assignment.course.code
 
@@ -316,21 +433,24 @@ def course_modify(request):
             'assignment_name': assignment.name,
             'section_name': 'Assignment',
             'page_name': 'course',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
 
 
-
+@assignment_selected
 @check_assignment_owner
 @login_required
 def assignments_variables(request):
-    page_number = 4
+    page_number = page_order.index('variables')
     max_num_of_vars = 3
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
-    var_fields = ['has_concentration', 'has_temperature', 'has_start_time',
-                  'has_duration', 'has_collection_time']
+    var_fields = [
+        'has_concentration', 'has_temperature', 'has_start_time',
+        'has_duration', 'has_collection_time'
+    ]
     AssignmentForm = modelform_factory(models.Assignment, fields=var_fields)
 
     # Want to know if Treatments were already created
@@ -341,11 +461,7 @@ def assignments_variables(request):
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
             if form.has_changed():
-                models.Treatment.objects.filter(assignment=assignment).delete()
-                models.StrainTreatment.objects.filter(assignment=assignment).delete()
-                models.WesternBlotBands.objects.filter(antibody__western_blot__assignment=assignment).delete()
-                create_treatments(assignment)
-                update_wb_bands(assignment)
+                recreate_experimental_setup(assignment)
                 # Want to save the form only if at most 3 vars are selected
                 form.save(commit=False)
                 num_variables = 0
@@ -355,9 +471,9 @@ def assignments_variables(request):
                 if num_variables <= max_num_of_vars:
                     form.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number+1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'treatments'
+                assignment.save()
                 return redirect("common_assignments_edit_treatments")
     # For published assignment
     elif request.method == "POST" and 'continue' in request.POST:
@@ -376,14 +492,38 @@ def assignments_variables(request):
             'assignment_name': assignment.name,
             'section_name': 'Experiment Setup',
             'page_name': 'variables',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
 
+
+def recreate_experimental_setup(assignment):
+    models.Treatment.objects.filter(assignment=assignment).delete()
+    models.StrainTreatment.objects.filter(assignment=assignment).delete()
+    models.WesternBlotBands.objects.filter(
+        antibody__western_blot__assignment=assignment
+    ).delete()
+    create_treatments(assignment)
+
+
+def find_next_view(assignment):
+    """ Page to go to on 'continue' """
+    next_view = 'common_assignments'
+    if assignment.has_wb:
+        next_view = 'western_blot_lysate_type'
+    elif assignment.has_micro:
+        next_view = 'microscopy_sample_prep'
+    elif assignment.has_fc:
+        next_view = 'facs_sample_prep'
+    return next_view
+
+
+@assignment_selected
 @check_assignment_owner
 @login_required
 def select_technique(request):
-    page_number = 7
+    page_number = page_order.index('techniques')
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
     var_fields = ['has_wb', 'has_fc', 'has_micro']
@@ -392,41 +532,54 @@ def select_technique(request):
     if request.method == "POST" and assignment.access == 'private':
         form = AssignmentForm(request.POST, instance=assignment)
         if form.is_valid():
+            # if facs was selected want to enable first link
+            if (
+                form.instance.has_fc and
+                form.instance.facs_last_enabled_page == 0
+            ):
+                form.instance.facs_last_enabled_page = 1
+
             form.save()
             if 'continue' in request.POST:
                 if assignment.has_wb:
-                    if assignment.last_enabled_page <= page_number:
-                        assignment.last_enabled_page = page_number+1
-                        assignment.save()
-                    return redirect("western_blot_lysate_type")
-                # will add more cases for micro and facs later
+                    if (
+                        page_order.index(assignment.last_page_name) <=
+                        page_number
+                    ):
+                        assignment.last_page_name = 'wb_lysate_type'
+                    assignment.save()
+                return redirect(find_next_view(assignment))
+
     elif request.method == "POST" and 'continue' in request.POST:
-        return redirect("western_blot_lysate_type")
+        return redirect(find_next_view(assignment))
 
     form = AssignmentForm(instance=assignment)
     return render_to_response(
-        'instructor/select_technique.html',
-        {
+        'instructor/select_technique.html', {
             'form': form,
             'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Select Technique',
             'page_name': 'techniques',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
+        }
+    )
 
-        })
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def assignments_edit_strains(request):
-    page_number = 3
+    page_number = page_order.index('strains')
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
     extra_fields = 0
-    if 'add' in request.POST or not models.Strains.objects.filter(assignment=assignment):
-        extra_fields = 1
 
-    StrainsFormSet = modelformset_factory(models.Strains, extra=extra_fields, fields=['name'], can_delete=True)
+    StrainsFormSet = modelformset_factory(
+        models.Strains,
+        fields=['name'],
+        can_delete=True
+    )
 
     if request.method == "POST" and assignment.access == 'private':
         formset = StrainsFormSet(request.POST)
@@ -443,15 +596,29 @@ def assignments_edit_strains(request):
                 else:
                     strain.save()
         if 'continue' in request.POST:
-            if assignment.last_enabled_page <= page_number:
-                assignment.last_enabled_page = page_number+1
-                assignment.save()
+            if page_order.index(assignment.last_page_name) <= page_number:
+                assignment.last_page_name = 'variables'
+            assignment.save()
             return redirect('common_assignments_variables')
 
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_assignments_variables")
+    # Add extra form if clicked ADD or none exist
+    if 'add' in request.POST or not models.Strains.objects.filter(
+        assignment=assignment
+    ).exists():
+        extra_fields = 1
 
-    formset = StrainsFormSet(queryset=models.Strains.objects.filter(assignment=assignment))
+    StrainsFormSet = modelformset_factory(
+        models.Strains,
+        extra=extra_fields,
+        fields=['name'],
+        can_delete=True
+    )
+    formset = StrainsFormSet(
+        queryset=models.Strains.objects.filter(assignment=assignment)
+    )
+
     return render_to_response(
         'instructor/strains.html',
         {
@@ -461,14 +628,17 @@ def assignments_edit_strains(request):
             'assignment_name': assignment.name,
             'section_name': 'Experiment Setup',
             'page_name': 'strains',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
 
+
+@assignment_selected
 @check_assignment_owner
 @login_required
 def assignments_edit_treatments(request):
-    page_number = 5
+    page_number = page_order.index('treatments')
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
 
@@ -484,7 +654,11 @@ def assignments_edit_treatments(request):
         input_headers.extend(['Concen.', 'Concen. Units'])
 
     if has_duration and has_start_time:
-        input_headers.extend(['Start Time', 'Time Units', 'Duration', 'Time Units'])
+        input_headers.extend(
+            [
+                'Start Time', 'Time Units', 'Duration', 'Time Units'
+            ]
+        )
     elif has_start_time:
         drug_formset_exclude.append('duration')
         input_headers.extend(['Start Time', 'Time Units'])
@@ -492,18 +666,27 @@ def assignments_edit_treatments(request):
         drug_formset_exclude.append('start_time')
         input_headers.extend(['Duration', 'Duration Units'])
     else:
-        drug_formset_exclude.extend(['duration', 'duration_unit', 'start_time', 'time_unit'])
+        drug_formset_exclude.extend(
+            [
+                'duration', 'duration_unit', 'start_time', 'time_unit'
+            ]
+        )
 
-   
-    DrugFormSet = modelformset_factory(models.Drug,
-                                       can_delete=True,
-                                       exclude=drug_formset_exclude)
-    TemperatureFormSet = modelformset_factory(models.Temperature,
-                                              can_delete=True,
-                                              exclude=['assignment'])
-    CollectionTimeFormSet = modelformset_factory(models.CollectionTime,
-                                                 can_delete=True,
-                                                 exclude=['assignment'])
+    DrugFormSet = modelformset_factory(
+        models.Drug,
+        can_delete=True,
+        exclude=drug_formset_exclude
+    )
+    TemperatureFormSet = modelformset_factory(
+        models.Temperature,
+        can_delete=True,
+        exclude=['assignment']
+    )
+    CollectionTimeFormSet = modelformset_factory(
+        models.CollectionTime,
+        can_delete=True,
+        exclude=['assignment']
+    )
 
     if request.method == "POST" and assignment.access == 'private':
         mapping = {
@@ -521,61 +704,90 @@ def assignments_edit_treatments(request):
                     if instance.id is None:
                         instance.assignment = assignment
                         instance.save()
-                        create_treatments(assignment, **{treatment_kw: [instance]})
+                        create_treatments(
+                            assignment, **{
+                                treatment_kw: [instance]
+                            }
+                        )
                     else:
                         instance.save()
         if 'continue' in request.POST:
-            if assignment.last_enabled_page <= page_number:
-                assignment.last_enabled_page = page_number+1
-                assignment.save()
+            if page_order.index(assignment.last_page_name) <= page_number:
+                assignment.last_page_name = 'protocols'
+            assignment.save()
             return redirect('common_strain_treatments')
 
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_strain_treatments")
 
-     # If instructor clicked ADD, add extra form
+    # If instructor clicked ADD, add extra form
     drug_extra_form = 0
     temperature_extra_form = 0
     collection_extra_form = 0
-    if 'add_drug' in request.POST or not models.Drug.objects.filter(assignment=assignment).exists():
+    if 'add_drug' in request.POST or not models.Drug.objects.filter(
+        assignment=assignment
+    ).exists():
         drug_extra_form = 1
-    if 'add_temperature' in request.POST or not models.Temperature.objects.filter(assignment=assignment).exists():
+    if (
+        'add_temperature' in request.POST or
+        not models.Temperature.objects.filter(
+            assignment=assignment
+        ).exists()
+    ):
         temperature_extra_form = 1
-    if 'add_collection' in request.POST or not models.CollectionTime.objects.filter(assignment=assignment).exists():
+    if (
+        'add_collection' in request.POST or
+        not models.CollectionTime.objects.filter(
+            assignment=assignment
+        ).exists()
+    ):
         collection_extra_form = 1
 
-    DrugFormSet = modelformset_factory(models.Drug,
-                                       extra=drug_extra_form,
-                                       can_delete=True,
-                                       exclude=drug_formset_exclude)
-    TemperatureFormSet = modelformset_factory(models.Temperature,
-                                              extra=temperature_extra_form,
-                                              can_delete=True,
-                                              exclude=['assignment'])
-    CollectionTimeFormSet = modelformset_factory(models.CollectionTime,
-                                                 extra=collection_extra_form,
-                                                 can_delete=True,
-                                                 exclude=['assignment'])
+    DrugFormSet = modelformset_factory(
+        models.Drug,
+        extra=drug_extra_form,
+        can_delete=True,
+        exclude=drug_formset_exclude
+    )
+    TemperatureFormSet = modelformset_factory(
+        models.Temperature,
+        extra=temperature_extra_form,
+        can_delete=True,
+        exclude=['assignment']
+    )
+    CollectionTimeFormSet = modelformset_factory(
+        models.CollectionTime,
+        extra=collection_extra_form,
+        can_delete=True,
+        exclude=['assignment']
+    )
 
     drug_formset = DrugFormSet(
         queryset=models.Drug.objects.filter(assignment=assignment),
-        prefix='drug')
+        prefix='drug'
+    )
     temperature_formset = TemperatureFormSet(
         queryset=models.Temperature.objects.filter(assignment=assignment),
-        prefix='temperature')
+        prefix='temperature'
+    )
     collection_time_formset = CollectionTimeFormSet(
         queryset=models.CollectionTime.objects.filter(assignment=assignment),
-        prefix='collection_time')
+        prefix='collection_time'
+    )
 
     time_unit_list = ['sec', 'min', 'hour', 'day']
     concentration_unit_list = [
-        u'ng/\u03BCL', #ng/uL
-        u'\u03BCg/\u03BCL', #ug/uL
-        u'\u03BCg/mL', #ug/mL
+        # ng/uL
+        u'ng/\u03BCL',
+        # ug/uL
+        u'\u03BCg/\u03BCL',
+        # ug/mL
+        u'\u03BCg/mL',
         'mg/mL',
         'g/L',
         'nM',
-        u'\u03BCM', #uM
+        # uM
+        u'\u03BCM',
         'mM',
         'M'
     ]
@@ -594,23 +806,27 @@ def assignments_edit_treatments(request):
             'assignment_name': assignment.name,
             'section_name': 'Experiment Setup',
             'page_name': 'treatments',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
         context_instance=RequestContext(request)
     )
 
 
+@assignment_selected
 @check_assignment_owner
 @login_required
 def strain_treatments_edit(request):
-    page_number = 6
+    page_number = page_order.index('protocols')
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
 
     headers = get_protocol_headers(assignment)
 
-    STFormSet = modelformset_factory(models.StrainTreatment, extra=0,
-                                     exclude=['assignment', 'strain', 'treatment'])
+    STFormSet = modelformset_factory(
+        models.StrainTreatment,
+        extra=0,
+        exclude=['assignment', 'strain', 'treatment']
+    )
     if request.method == "POST" and assignment.access == 'private':
         formset = STFormSet(request.POST)
         formset.clean()
@@ -619,69 +835,91 @@ def strain_treatments_edit(request):
             for strain_treatment in entries:
                 strain_treatment.save()
                 if not strain_treatment.enabled:
-                    models.WesternBlotBands.objects.filter(strain_protocol=strain_treatment).delete()
+                    models.WesternBlotBands.objects.filter(
+                        strain_protocol=strain_treatment
+                    ).delete()
+                    models.MicroscopyImageMapping.objects.filter(
+                        strain_protocol=strain_treatment
+                    ).delete()
             update_wb_bands(assignment)
+            update_micro_image_mappings(assignment)
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number+1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'techniques'
+                assignment.save()
                 return redirect("common_select_technique")
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("common_select_technique")
 
     formset = STFormSet(
-        queryset=models.StrainTreatment.objects.filter(assignment=assignment).order_by(
-            'strain',
-            'treatment__drug__name',
-            'treatment__drug__concentration',
-            'treatment__drug__start_time',
-            'treatment__drug__duration',
-            'treatment__temperature__degrees',
+        queryset=models.StrainTreatment.objects.filter(
+            assignment=assignment
+        ).order_by(
+            'strain', 'treatment__drug__name',
+            'treatment__drug__concentration', 'treatment__drug__start_time',
+            'treatment__drug__duration', 'treatment__temperature__degrees',
             'treatment__collection_time__time'
         )
     )
-    return render_to_response('instructor/strain_protocols.html',
-                              {'formset': formset,
-                               'access': json.dumps(assignment.access),
-                               'assignment_name': assignment.name,
-                               'headers': headers,
-                               'has_concentration': assignment.has_concentration,
-                               'has_temperature': assignment.has_temperature,
-                               'has_start_time': assignment.has_start_time,
-                               'has_duration': assignment.has_duration,
-                               'has_collection_time': assignment.has_collection_time,
-                               'section_name': 'Experiment Setup',
-                               'page_name': 'protocols',
-                               'last_page_number':  assignment.last_enabled_page
-                              },
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'instructor/strain_protocols.html',
+        {
+            'formset': formset,
+            'access': json.dumps(assignment.access),
+            'assignment_name': assignment.name,
+            'headers': headers,
+            'has_concentration': assignment.has_concentration,
+            'has_temperature': assignment.has_temperature,
+            'has_start_time': assignment.has_start_time,
+            'has_duration': assignment.has_duration,
+            'has_collection_time': assignment.has_collection_time,
+            'section_name': 'Experiment Setup',
+            'page_name': 'protocols',
+            'pages': get_pages(assignment)
+        },
+        context_instance=RequestContext(request)
+    )
 
 
-def create_treatments(assignment, drugs=None, temperatures=None, collection_times=None):
+def create_treatments(
+    assignment,
+    drugs=None,
+    temperatures=None,
+    collection_times=None
+):
     if drugs is None:
         drugs = models.Drug.objects.filter(assignment=assignment)
     if assignment.has_temperature and temperatures is None:
         temperatures = models.Temperature.objects.filter(assignment=assignment)
     if assignment.has_collection_time and collection_times is None:
-        collection_times = models.CollectionTime.objects.filter(assignment=assignment)
+        collection_times = models.CollectionTime.objects.filter(
+            assignment=assignment
+        )
     # Creating treatments
     if assignment.has_temperature and assignment.has_collection_time:
         for d in drugs:
             for t in temperatures:
                 for c in collection_times:
-                    treatment, created = models.Treatment.objects.get_or_create(
-                        drug=d,
-                        temperature=t,
-                        collection_time=c,
-                        assignment=assignment)
-                    create_strain_treatments(assignment, treatments=[treatment])
+                    treatment, created = (
+                        models.Treatment.objects.get_or_create(
+                            drug=d,
+                            temperature=t,
+                            collection_time=c,
+                            assignment=assignment
+                        )
+                    )
+                    create_strain_treatments(
+                        assignment,
+                        treatments=[treatment]
+                    )
     elif assignment.has_collection_time:
         for drug in drugs:
             for c in collection_times:
                 treatment, created = models.Treatment.objects.get_or_create(
                     drug=drug,
                     collection_time=c,
-                    assignment=assignment)
+                    assignment=assignment
+                )
                 create_strain_treatments(assignment, treatments=[treatment])
     elif assignment.has_temperature:
         for drug in drugs:
@@ -689,13 +927,15 @@ def create_treatments(assignment, drugs=None, temperatures=None, collection_time
                 treatment, created = models.Treatment.objects.get_or_create(
                     drug=drug,
                     temperature=temp,
-                    assignment=assignment)
+                    assignment=assignment
+                )
                 create_strain_treatments(assignment, treatments=[treatment])
     else:
         for drug in drugs:
             treatment, created = models.Treatment.objects.get_or_create(
                 drug=drug,
-                assignment=assignment)
+                assignment=assignment
+            )
             create_strain_treatments(assignment, treatments=[treatment])
 
 
@@ -708,37 +948,55 @@ def create_strain_treatments(assignment, strains=None, treatments=None):
 
     for s in strains:
         for t in treatments:
-            strain_treatment, created = models.StrainTreatment.objects.get_or_create(
-                strain=s, treatment=t, assignment=assignment)
+            strain_treatment, created = (
+                models.StrainTreatment.objects.get_or_create(
+                    strain=s,
+                    treatment=t,
+                    assignment=assignment
+                )
+            )
             update_wb_bands(assignment, strain_treatments=[strain_treatment])
+            update_micro_image_mappings(
+                assignment,
+                strain_treatments=[strain_treatment]
+            )
 
+
+@assignment_selected
 @check_assignment_owner
 @login_required
 def western_blot_lysate_type(request):
-    page_number = 8
+    page_number = page_order.index('wb_lysate_type')
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
-    wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
-    WesternBlotForm = modelform_factory(models.WesternBlot, exclude=['assignment'])
+    wb, created = models.WesternBlot.objects.get_or_create(
+        assignment=assignment
+    )
+    WesternBlotForm = modelform_factory(
+        models.WesternBlot,
+        exclude=['assignment']
+    )
 
     if request.method == "POST" and assignment.access == 'private':
         form = WesternBlotForm(request.POST, instance=wb)
         field_names = ['has_gel_10', 'has_gel_12', 'has_gel_15']
         if form.is_valid():
             form.save(commit=False)
-            # if any percentage is selected
+            # make sure at least one percentage is selected
             if any(getattr(wb, field) for field in field_names):
                 form.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number+1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'wb_antibody'
+                assignment.save()
                 return redirect('western_blot_antibody')
 
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("western_blot_antibody")
 
-    wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
+    wb, created = models.WesternBlot.objects.get_or_create(
+        assignment=assignment
+    )
     form = WesternBlotForm(instance=wb)
     return render_to_response(
         'instructor/wb_lysate_type.html',
@@ -748,17 +1006,22 @@ def western_blot_lysate_type(request):
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_lysate_type',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
 
+
+@assignment_selected
 @check_assignment_owner
 @login_required
 def western_blot_antibody(request):
-    page_number = 9
+    page_number = page_order.index('wb_antibody')
     pk = request.session['assignment_id']
     assignment = get_object_or_404(models.Assignment, id=pk)
-    wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
+    wb, created = models.WesternBlot.objects.get_or_create(
+        assignment=assignment
+    )
     exclude_fields = ['western_blot', 'wc_weight', 'nuc_weight', 'cyto_weight']
     WesternBlotAntibodyFormset = modelformset_factory(
         models.WesternBlotAntibody,
@@ -775,15 +1038,17 @@ def western_blot_antibody(request):
                 form.western_blot = wb
                 form.save()
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number+1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'wb_band_size'
+                assignment.save()
                 return redirect('western_blot_band_size')
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("western_blot_band_size")
 
     extra_fields = 0
-    if 'add' in request.POST or not models.WesternBlotAntibody.objects.filter(western_blot=wb).exists():
+    if 'add' in request.POST or not models.WesternBlotAntibody.objects.filter(
+        western_blot=wb
+    ).exists():
         extra_fields = 1
     WesternBlotAntibodyFormset = modelformset_factory(
         models.WesternBlotAntibody,
@@ -792,7 +1057,8 @@ def western_blot_antibody(request):
         exclude=exclude_fields
     )
     formset = WesternBlotAntibodyFormset(
-        queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb))
+        queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb)
+    )
     return render_to_response(
         'instructor/wb_antibody.html',
         {
@@ -801,17 +1067,22 @@ def western_blot_antibody(request):
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_antibody',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
 
+
+@assignment_selected
 @check_assignment_owner
 @login_required
 def western_blot_band_size(request):
-    page_number = 10
+    page_number = page_order.index('wb_band_size')
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
-    wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
+    wb, created = models.WesternBlot.objects.get_or_create(
+        assignment=assignment
+    )
     error = ''
     exclude_fields = ['primary', 'secondary', 'western_blot']
     lysate_types = {
@@ -836,14 +1107,16 @@ def western_blot_band_size(request):
             antibodies = formset.save()
             update_wb_bands(assignment, antibodies=antibodies)
             if 'continue' in request.POST:
-                if assignment.last_enabled_page <= page_number:
-                    assignment.last_enabled_page = page_number+1
-                    assignment.save()
+                if page_order.index(assignment.last_page_name) <= page_number:
+                    assignment.last_page_name = 'wb_band_intensity'
+                assignment.save()
                 return redirect('western_blot_band_intensity')
     elif request.method == "POST" and 'continue' in request.POST:
         return redirect("western_blot_band_intensity")
 
-    formset = AntibodiesFormset(queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb))
+    formset = AntibodiesFormset(
+        queryset=models.WesternBlotAntibody.objects.filter(western_blot=wb)
+    )
     return render_to_response(
         'instructor/wb_band_size.html',
         {
@@ -854,9 +1127,32 @@ def western_blot_band_size(request):
             'error': json.dumps(error),
             'section_name': 'Western Blotting',
             'page_name': 'wb_band_size',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
+
+
+def update_micro_image_mappings(
+    assignment,
+    strain_treatments=None,
+    sample_prep_list=None
+):
+    if strain_treatments is None:
+        strain_treatments = models.StrainTreatment.objects.filter(
+            assignment=assignment,
+            enabled=True
+        )
+    if sample_prep_list is None:
+        sample_prep_list = models.MicroscopySamplePrep.objects.filter(
+            assignment=assignment
+        )
+    for strain_treatment in strain_treatments:
+        for sample_prep in sample_prep_list:
+            models.MicroscopyImageMapping.objects.get_or_create(
+                strain_protocol=strain_treatment,
+                sample_prep=sample_prep,
+            )
 
 
 def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
@@ -865,32 +1161,45 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
 
         message = "You have entered non-numerical values, " \
                   "including negative numbers, text inputs and/or symbols, " \
-                  "in the band size input boxes. The band size input boxes must " \
-                  "only contain numerical values."
+                  "in the band size input boxes. The band size input " \
+                  "boxes must only contain numerical values."
 
         weights_by_type = ['wc_weight', 'nuc_weight', 'cyto_weight']
         antibodies_updated = True
         if antibodies is None:
             antibodies_updated = False
-            antibodies = models.WesternBlotAntibody.objects.filter(western_blot=assignment.western_blot)
+            antibodies = models.WesternBlotAntibody.objects.filter(
+                western_blot=assignment.western_blot
+            )
         if strain_treatments is None:
-            strain_treatments = models.StrainTreatment.objects.filter(assignment=assignment, enabled=True)
+            strain_treatments = models.StrainTreatment.objects.filter(
+                assignment=assignment,
+                enabled=True
+            )
 
         for antibody in antibodies:
             for index, field in enumerate(weights_by_type):
                 weight_str = getattr(antibody, field)
-                error = message if re.search(r'[a-zA-Z-]+', weight_str) else error
+                error = message if re.search(
+                    r'[a-zA-Z-]+', weight_str
+                ) else error
 
-                weights = [float(s) for s in weight_str.split(',')
-                           if is_float(s) and float(s) >= 0]
+                weights = [
+                    float(s)
+                    for s in weight_str.split(',')
+                    if is_float(s) and float(s) >= 0
+                ]
                 if antibodies_updated and antibody.id:
                     bands = models.WesternBlotBands.objects.filter(
                         antibody__id=antibody.id,
-                        lysate_type=field.split('_')[0])
+                        lysate_type=field.split('_')[0]
+                    )
                     for band in bands:
-                        #delete bands that are not in the string anymore
+                        # delete bands that are not in the string anymore
                         if band.weight not in weights:
-                            models.WesternBlotBands.objects.filter(id=band.id).delete()
+                            models.WesternBlotBands.objects.filter(
+                                id=band.id
+                            ).delete()
                 # create new bands
                 for weight in weights:
                     for strain_treatment in strain_treatments:
@@ -902,12 +1211,22 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
                         )
     return error
 
+
+@assignment_selected
 @check_assignment_owner
 @login_required
 def western_blot_band_intensity(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
-    wb, created = models.WesternBlot.objects.get_or_create(assignment=assignment)
+    # Page to go to on 'continue'
+    next_view = 'common_assignments'
+    if assignment.has_micro:
+        next_view = 'microscopy_sample_prep'
+    elif assignment.has_fc:
+        next_view = 'facs_sample_prep'
+    wb, created = models.WesternBlot.objects.get_or_create(
+        assignment=assignment
+    )
     BandsFormset = modelformset_factory(
         models.WesternBlotBands,
         extra=0,
@@ -920,28 +1239,33 @@ def western_blot_band_intensity(request):
             for entry in entries:
                 entry.save()
             if 'continue' in request.POST:
-                return redirect('common_assignments')
+                return redirect(next_view)
     elif request.method == "POST" and 'continue' in request.POST:
-        return redirect("common_assignments")
+        return redirect(next_view)
     else:
-        formset = BandsFormset(queryset=models.WesternBlotBands.objects.filter(
-            antibody__western_blot=wb).order_by(
-            'strain_protocol__strain',
-            'strain_protocol__treatment__drug__name',
-            'strain_protocol__treatment__drug__concentration',
-            'strain_protocol__treatment__drug__start_time',
-            'strain_protocol__treatment__drug__duration',
-            'strain_protocol__treatment__temperature__degrees',
-            'strain_protocol__treatment__collection_time__time',
-            '-lysate_type',
-            'weight'))
-
+        formset = BandsFormset(
+            queryset=models.WesternBlotBands.objects.filter(
+                antibody__western_blot=wb
+            ).order_by(
+                'strain_protocol__strain',
+                'strain_protocol__treatment__drug__name',
+                'strain_protocol__treatment__drug__concentration',
+                'strain_protocol__treatment__drug__start_time',
+                'strain_protocol__treatment__drug__duration',
+                'strain_protocol__treatment__temperature__degrees',
+                'strain_protocol__treatment__collection_time__time',
+                '-lysate_type', 'weight'
+            )
+        )
 
     antibodies = models.WesternBlotAntibody.objects.filter(western_blot=wb)
     formset_group = []
     for antibody in antibodies:
-        form_list = [form for form in formset
-                     if form.instance.antibody.primary == antibody.primary]
+        form_list = [
+            form
+            for form in formset
+            if form.instance.antibody.primary == antibody.primary
+        ]
         formset_group.append((antibody, form_list))
 
     variables = {
@@ -951,120 +1275,485 @@ def western_blot_band_intensity(request):
         'has_temperature': assignment.has_temperature,
         'has_collection_time': assignment.has_collection_time
     }
+    # need to decide to finish the assignment or
+    # to move on to next technique
+    save_and_continue_button = 'SAVE AND FINISH'
+    if assignment.has_fc:
+        save_and_continue_button = 'SAVE AND CONTINUE'
     return render_to_response(
         'instructor/wb_band_intensity.html',
         {
             'formset': formset,
             'access': json.dumps(assignment.access),
             'formset_group': formset_group,
-            'antibodies': antibodies,
             'variables': variables,
+            'save_and_continue': save_and_continue_button,
             'assignment_name': assignment.name,
             'section_name': 'Western Blotting',
             'page_name': 'wb_band_intensity',
-            'last_page_number':  assignment.last_enabled_page
+            'pages': get_pages(assignment)
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
 
 
+@assignment_selected
+@check_assignment_owner
+@login_required
+def microscopy_sample_prep(request):
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
 
-def microscopy_sample_prep(request, assignment):
-    a = models.Assignment.objects.get(id=assignment)
-    message = ''
-    MicroSamplePrepFormset = modelformset_factory(models.MicroscopySamplePrep, extra=1, can_delete=True,
-                                                  can_order=True, exclude=['assignment', 'order'])
-    if request.method == "POST":
+    MicroSamplePrepFormset = modelformset_factory(
+        models.MicroscopySamplePrep,
+        extra=1,
+        can_delete=True,
+        can_order=True,
+        exclude=['assignment', 'order']
+    )
+    if request.method == "POST" and assignment.access == 'private':
         formset = MicroSamplePrepFormset(request.POST)
-        formset.clean()
         if formset.is_valid():
-            message = "Thank you"
-            for form in formset.ordered_forms:
-                form.instance.order = form.cleaned_data['ORDER']
             entries = formset.save(commit=False)
-            for form in entries:
-                form.assignment = a
-                form.save()
-        else:
-            message = "Something went wrong"
+            for obj in formset.deleted_objects:
+                obj.delete()
+            for sample_prep in entries:
+                if sample_prep.micro_analysis in fluorescent_analyses:
+                    sample_prep.has_filters = True
+                else:
+                    sample_prep.has_filters = False
 
-    return render_to_response('instructor/generic_formset.html',
-                              {'formset': MicroSamplePrepFormset(
-                                  queryset=models.MicroscopySamplePrep.objects.filter(assignment=assignment)),
-                               'message': message,
-                               'assignment': a
-                              },
-                              context_instance=RequestContext(request))
+                if sample_prep.id is None:
+                    sample_prep.assignment = assignment
+                    sample_prep.save()
+                    update_micro_image_mappings(
+                        assignment,
+                        sample_prep_list=[sample_prep]
+                    )
+                else:
+                    sample_prep.save()
+            if 'continue' in request.POST:
+                if (
+                    micro_pages.index('micro_sample_prep') <=
+                    micro_pages.index(assignment.micro_last_enabled_page)
+                ):
+                    assignment.micro_last_enabled_page = 'micro_analyze'
+                assignment.save()
+                return redirect('microscopy_analyze')
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("microscopy_analyze")
+
+    extra_fields = 0
+    if (
+        'add' in request.POST or
+        not models.MicroscopySamplePrep.objects.filter(
+            assignment=assignment
+        ).exists()
+    ):
+        extra_fields = 1
+    MicroSamplePrepFormset = modelformset_factory(
+        models.MicroscopySamplePrep,
+        extra=extra_fields,
+        can_delete=True,
+        can_order=True,
+        exclude=['assignment']
+    )
+    back_url = (
+        'western_blot_band_intensity'
+        if assignment.has_wb else 'common_select_technique'
+    )
+
+    formset = MicroSamplePrepFormset(
+        queryset=models.MicroscopySamplePrep.objects.filter(
+            assignment=assignment
+        )
+    )
+    return render_to_response(
+        'instructor/micro_sample_prep.html',
+        {
+            'formset': formset,
+            'access': json.dumps(assignment.access),
+            'back_url': back_url,
+            'assignment_name': assignment.name,
+            'section_name': 'Microscopy',
+            'page_name': 'micro_sample_prep',
+            'pages': get_pages(assignment)
+        },
+        context_instance=RequestContext(request)
+    )
 
 
-def microscopy_images_edit(request, assignment, sample_prep, sp):
-    a = models.Assignment.objects.get(id=assignment)
-    sample = models.MicroscopySamplePrep.objects.get(id=sample_prep)
-    protocol = models.StrainProtocol.objects.get(id=sp)
-    MicroImagesFormset = modelformset_factory(models.MicroscopyImages, extra=1, can_delete=True, can_order=True,
-                                              exclude=['sample_prep', 'strain_protocol', 'order', 'image'])
-    message = ''
-    if request.method == "POST":
-        formset = MicroImagesFormset(request.POST)
-        formset.clean()
-        if formset.is_valid():
-            message = 'Thank you'
-            for form in formset.ordered_forms:
-                form.instance.order = form.cleaned_data['ORDER']
-            entries = formset.save(commit=False)
-            for form in entries:
-                form.sample_prep = sample
-                form.strain_protocol = protocol
-                form.save()
-        else:
-            message = "Something went wrong"
+@assignment_selected
+@check_assignment_owner
+@login_required
+def microscopy_analyze(request):
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
+    chosen_sampleprep = ""
+    chosen_protocol = ""
+    mapping_pk = ""
+    filter_group_id = ""
+    dialog_open = False
 
-    return render_to_response('instructor/generic_formset.html',
-                              {'formset': MicroImagesFormset(
-                                  queryset=models.MicroscopyImages.objects.filter(sample_prep=sample,
-                                                                                  strain_protocol=protocol)),
-                               'message': message,
-                               'assignment': a
-                              },
-                              context_instance=RequestContext(request))
+    if request.method == "POST" and assignment.access == 'private':
+        if 'upload' in request.POST:
+            if len(request.FILES) > 0:
+                uploaded_file = request.FILES['file']
+                objective = request.POST.get('objective')
+                new_image, _ = models.MicroscopyImage.objects.get_or_create(
+                    file=uploaded_file,
+                    assignment=assignment,
+                    objective=objective
+                )
+            # need few variables to keep the dialog open
+            dialog_open = True
+            if 'mapping_pk' in request.POST:
+                chosen_protocol = request.POST.get('protocol')
+                chosen_sampleprep = request.POST.get('sample_prep')
+                mapping_pk = request.POST.get('mapping_pk')
+                filter_group_id = request.POST.get('filter_group_id')
+
+        else:  # then 'save' or 'continue' in request.POST
+            if 'continue' in request.POST:
+                if assignment.has_fc:
+                    return redirect('facs_sample_prep')
+                return redirect('common_assignments')
+
+    image_mappings = models.MicroscopyImageMapping.objects.filter(
+        sample_prep__assignment=assignment
+    ).order_by(
+        'strain_protocol__strain', 'strain_protocol__treatment__drug__name',
+        'strain_protocol__treatment__drug__concentration',
+        'strain_protocol__treatment__drug__start_time',
+        'strain_protocol__treatment__drug__duration',
+        'strain_protocol__treatment__temperature__degrees',
+        'strain_protocol__treatment__collection_time__time'
+    )
+
+    # Grouping ImageMapping objects by analysis and condition
+    grouped_images = []
+    sample_preps = models.MicroscopySamplePrep.objects.filter(
+        assignment=assignment
+    )
+
+    for sample_prep in sample_preps.iterator():
+        filtered_list = [
+            instance
+            for instance in image_mappings
+            if instance.sample_prep.micro_analysis ==
+            sample_prep.micro_analysis and instance.sample_prep.condition ==
+            sample_prep.condition
+        ]
+
+        grouped_images.append(
+            (
+                sample_prep.get_micro_analysis_display, sample_prep.condition,
+                filtered_list
+            )
+        )
+
+    all_images = models.MicroscopyImage.objects.filter(assignment=assignment)
+    ImageForm = modelform_factory(
+        models.MicroscopyImage,
+        fields=['file', 'objective']
+    )
+    image_form = ImageForm()
+    variables = {
+        'has_concentration': assignment.has_concentration,
+        'has_start_time': assignment.has_start_time,
+        'has_duration': assignment.has_duration,
+        'has_temperature': assignment.has_temperature,
+        'has_collection_time': assignment.has_collection_time
+    }
+    # need to decide to finish the assignment or to move on to FACS
+    save_and_continue_button = 'SAVE AND FINISH'
+    if assignment.has_fc:
+        save_and_continue_button = 'SAVE AND CONTINUE'
+
+    return render_to_response(
+        'instructor/micro_analyze.html',
+        {
+            'access': json.dumps(assignment.access),
+            'all_images': all_images,
+            'image_form': image_form,
+            'filters': filters,
+            'dialog_open': json.dumps(dialog_open),
+            'protocol_name': chosen_protocol,
+            'sample_prep_name': chosen_sampleprep,
+            'mapping_pk': mapping_pk,
+            'filter_group_id': filter_group_id,
+            'image_groups': grouped_images,
+            'variables': variables,
+            'save_and_continue': save_and_continue_button,
+            'assignment_name': assignment.name,
+            'section_name': 'Microscopy',
+            'page_name': 'micro_analyze',
+            'pages': get_pages(assignment)
+        },
+        context_instance=RequestContext(request)
+    )
 
 
-def flowcytometry_sample_prep_edit(request, assignment):
-    a = models.Assignment.objects.get(id=assignment)
-    message = ''
-    FACSSamplePrepFormset = modelformset_factory(models.FlowCytometrySamplePrep, extra=1, can_delete=True,
-                                                 can_order=True, exclude=['assignment', 'order'])
-    if request.method == "POST":
+@assignment_selected
+@check_assignment_owner
+@login_required
+def facs_setup(request):
+    """
+    User can set scale, range, and tick values
+    for x axis, for this assignment
+    """
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
+
+    facs, _ = models.FlowCytometry.objects.get_or_create(assignment=assignment)
+    FlowCytometryForm = modelform_factory(
+        models.FlowCytometry,
+        exclude=['assignment']
+    )
+
+    if request.method == "POST" and assignment.access == 'private':
+        form = FlowCytometryForm(request.POST, instance=facs)
+        if form.is_valid():
+            form.save()
+        if 'continue' in request.POST:
+            if (
+                facs_pages.index('facs_setup') <=
+                facs_pages.index(assignment.facs_last_enabled_page)
+            ):
+                assignment.facs_last_enabled_page = 'facs_analyze'
+            assignment.save()
+            return redirect('facs_analyze')
+
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("facs_analyze")
+
+    form = FlowCytometryForm(instance=facs)
+    return render_to_response(
+        'instructor/facs_setup.html',
+        {
+            'form': form,
+            'access': json.dumps(assignment.access),
+            'assignment_name': assignment.name,
+            'section_name': 'Flow Cytometry',
+            'page_name': 'facs_setup',
+            'pages': get_pages(assignment)
+        },
+        context_instance=RequestContext(request)
+    )
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def facs_sample_prep(request):
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
+
+    FACSSamplePrepFormset = modelformset_factory(
+        models.FlowCytometrySamplePrep,
+        can_delete=True,
+        can_order=True,
+        exclude=['assignment']
+    )
+    if request.method == "POST" and assignment.access == 'private':
         formset = FACSSamplePrepFormset(request.POST)
-        formset.clean()
         if formset.is_valid():
-            message = "Thank you"
-            for form in formset.ordered_forms:
-                form.instance.order = form.cleaned_data['ORDER']
             entries = formset.save(commit=False)
-            for form in entries:
-                form.assignment = a
-                form.save()
-        else:
-            message = "Something went wrong"
+            for obj in formset.deleted_objects:
+                obj.delete()
+            for facs_sample in entries:
+                if facs_sample.id is None:
+                    facs_sample.assignment = assignment
+                    facs_sample.save()
+                    create_facs_histograms(assignment, facs_sample)
+                else:
+                    facs_sample.save()
+            if 'continue' in request.POST:
+                if (
+                    facs_pages.index('facs_sample_prep') <=
+                    facs_pages.index(assignment.facs_last_enabled_page)
+                ):
+                    assignment.facs_last_enabled_page = 'facs_setup'
+                assignment.save()
+                return redirect('facs_setup')
+    elif request.method == "POST" and 'continue' in request.POST:
+        return redirect("facs_setup")
 
-    return render_to_response('instructor/generic_formset.html',
-                              {'formset': FACSSamplePrepFormset(
-                                  queryset=models.FlowCytometrySamplePrep.objects.filter(assignment=assignment)),
-                               'message': message,
-                               'assignment': a
-                              },
-                              context_instance=RequestContext(request))
+    extra_fields = 0
+    if (
+        'add' in request.POST or
+        not models.FlowCytometrySamplePrep.objects.filter(
+            assignment=assignment
+        ).exists()
+    ):
+        extra_fields = 1
+    FACSSamplePrepFormset = modelformset_factory(
+        models.FlowCytometrySamplePrep,
+        extra=extra_fields,
+        can_delete=True,
+        can_order=True,
+        exclude=['assignment']
+    )
+    back_url = (
+        'western_blot_band_intensity'
+        if assignment.has_wb else 'common_select_technique'
+    )
+
+    formset = FACSSamplePrepFormset(
+        queryset=models.FlowCytometrySamplePrep.objects.filter(
+            assignment=assignment
+        )
+    )
+    return render_to_response(
+        'instructor/facs_sample_prep.html',
+        {
+            'formset': formset,
+            'access': json.dumps(assignment.access),
+            'back_url': back_url,
+            'assignment_name': assignment.name,
+            'section_name': 'Flow Cytometry',
+            'page_name': 'facs_sample_prep',
+            'pages': get_pages(assignment)
+        },
+        context_instance=RequestContext(request)
+    )
+
+
+def create_facs_histograms(assignment, facs_sample):
+    """
+    Create FlowCytometryHistogram objects, all combinations of
+    this 'facs_sample' (i.e. cell_treatment, analysis, condition)
+    and all strain protocols defined for this assignment
+    Args:
+        assignment: current assignment
+        facs_sample: newly created FlowCytometrySamplePrep object
+
+    """
+    strain_protocols = models.StrainTreatment.objects.filter(
+        assignment=assignment
+    )
+    for strain_protocol in strain_protocols:
+        histogram, created = (
+            models.FlowCytometryHistogramMapping.objects.get_or_create(
+                sample_prep=facs_sample,
+                strain_protocol=strain_protocol,
+            )
+        )
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def facs_analyze(request):
+    """
+    List all combinations of samples, cell treatments,
+    analysis types, and conditions. Let the user assign a
+    histogram to each combination.
+    """
+    pk = request.session['assignment_id']
+    assignment = models.Assignment.objects.get(id=pk)
+    facs, _ = models.FlowCytometry.objects.get_or_create(assignment=assignment)
+
+    histogram_mappings = models.FlowCytometryHistogramMapping.objects.filter(
+        sample_prep__assignment=assignment,
+        strain_protocol__enabled=True
+    ).order_by(
+        'strain_protocol__strain', 'strain_protocol__treatment__drug__name',
+        'strain_protocol__treatment__drug__concentration',
+        'strain_protocol__treatment__drug__start_time',
+        'strain_protocol__treatment__drug__duration',
+        'strain_protocol__treatment__temperature__degrees',
+        'strain_protocol__treatment__collection_time__time'
+    )
+
+    if request.method == "POST" and 'continue' in request.POST:
+        return redirect('common_assignments')
+
+    # Grouping HistogramMapping objects by cell_treatment,
+    # analysis, and condition
+    grouped_histograms = []
+    samples = models.FlowCytometrySamplePrep.objects.filter(
+        assignment=assignment
+    )
+    for sample in samples.iterator():
+        filtered_list = [
+            instance
+            for instance in histogram_mappings
+            if instance.sample_prep.analysis == sample.analysis and
+            instance.sample_prep.condition == sample.condition
+        ]
+        if sample.fixed:
+            grouped_histograms.append(
+                (
+                    'Fixed', sample.get_analysis_display, sample.condition,
+                    filtered_list
+                )
+            )
+        if sample.live:
+            grouped_histograms.append(
+                (
+                    'Live', sample.get_analysis_display, sample.condition,
+                    filtered_list
+                )
+            )
+
+    selected_histograms_mapping = {}
+    for instance in histogram_mappings:
+        selected_histograms_mapping[instance.id] = {
+            'fixed': instance.fixed_data.data if instance.fixed_data else None,
+            'live': instance.live_data.data if instance.live_data else None
+        }
+    all_histograms = models.FlowCytometryHistogram.objects.filter(
+        facs__assignment__id=pk
+    ).exclude(
+        data__isnull=True
+    )
+    all_histogram_data = {
+        int(instance.id): instance.data
+        for instance in all_histograms
+    }
+
+    variables = {
+        'has_concentration': assignment.has_concentration,
+        'has_start_time': assignment.has_start_time,
+        'has_duration': assignment.has_duration,
+        'has_temperature': assignment.has_temperature,
+        'has_collection_time': assignment.has_collection_time
+    }
+    return render_to_response(
+        'instructor/facs_analyze.html',
+        {
+            'histograms': json.dumps(selected_histograms_mapping),
+            'all_histograms_data': json.dumps(all_histogram_data),
+            'all_histograms': all_histograms,
+            'access': json.dumps(assignment.access),
+            'x_upper_bound': json.dumps(facs.xrange),
+            'tick_values': json.dumps(facs.tick_values),
+            'histogram_groups': grouped_histograms,
+            'variables': variables,
+            'assignment_name': assignment.name,
+            'section_name': 'Flow Cytometry',
+            'page_name': 'facs_analyze',
+            'pages': get_pages(assignment)
+        },
+        context_instance=RequestContext(request)
+    )
 
 
 def facs_histograms_edit(request, assignment, sample_prep, sp):
     a = models.Assignment.objects.get(id=assignment)
     sample = models.FlowCytometrySamplePrep.objects.get(id=sample_prep)
     protocol = models.StrainProtocol.objects.get(id=sp)
-    model, created = models.FlowCytometryHistogram.objects.get_or_create(sample_prep=sample, strain_protocol=protocol)
+    model, created = models.FlowCytometryHistogram.objects.get_or_create(
+        sample_prep=sample,
+        strain_protocol=protocol
+    )
     model.save()
 
-    FlowCytometryHistogramForm = modelform_factory(models.FlowCytometryHistogram,
-                                                   exclude=['sample_prep', 'strain_protocol'])
+    FlowCytometryHistogramForm = modelform_factory(
+        models.FlowCytometryHistogram,
+        exclude=['sample_prep', 'strain_protocol']
+    )
     message = ''
     if request.method == "POST":
         form = FlowCytometryHistogramForm(request.POST, instance=model)
@@ -1075,13 +1764,234 @@ def facs_histograms_edit(request, assignment, sample_prep, sp):
             message = "Something went wrong"
     else:
         form = FlowCytometryHistogramForm(instance=model)
-    return render_to_response('instructor/generic_form.html',
-                              {'form': form,
-                               'message': message,
-                               'assignment': a,
-                               'title': 'Flow Cyto Histogram'
-                              },
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'instructor/generic_form.html',
+        {
+            'form': form,
+            'message': message,
+            'assignment': a,
+            'title': 'Flow Cyto Histogram'
+        },
+        context_instance=RequestContext(request)
+    )
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def delete_images(request):
+    """
+    Remove images from library permanently
+    """
+    pk = request.session['assignment_id']
+    image_pk_list = request.POST.getlist('image_pk_list[]')
+
+    for image_pk in image_pk_list:
+        selected_image = get_object_or_404(
+            models.MicroscopyImage,
+            pk=image_pk,
+            assignment__pk=pk
+        )
+        selected_image.delete()
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def select_images(request):
+    pk = request.session['assignment_id']
+    mapping_id = request.POST.get('mapping_pk')
+    filter_group_id = request.POST.get('filter_group_id')
+    image_pk_list = request.POST.getlist('image_pk_list[]')
+
+    if filter_group_id:
+        filter_group_id = filter_group_id.split('-')
+        filter_name = filter_group_id[0]
+        group_id = filter_group_id[1]
+
+        if filter_name not in filters:
+            raise FieldError
+        image_group = get_object_or_404(
+            models.MicroscopyGroupedImages,
+            id=group_id,
+            image_mapping__sample_prep__assignment__pk=pk
+        )
+        selected_image = get_object_or_404(
+            models.MicroscopyImage,
+            pk=image_pk_list[0],
+            assignment__pk=pk
+        )
+        field_name = filter_name + '_filter_image'
+        setattr(image_group, field_name, selected_image)
+        image_group.save()
+    else:
+        instance = get_object_or_404(
+            models.MicroscopyImageMapping,
+            pk=mapping_id,
+            sample_prep__assignment__pk=pk
+        )
+        for image_pk in image_pk_list:
+            selected_image = get_object_or_404(
+                models.MicroscopyImage,
+                pk=image_pk,
+                assignment__pk=pk
+            )
+
+            instance.images.add(selected_image)
+        instance.save()
+
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def add_image_group(request):
+    pk = request.session['assignment_id']
+
+    mapping_id = request.POST.get('mapping_id')
+    instance = get_object_or_404(
+        models.MicroscopyImageMapping,
+        pk=mapping_id,
+        sample_prep__assignment__pk=pk
+    )
+    image_group = models.MicroscopyGroupedImages.objects.create()
+    instance.grouped_images.add(image_group)
+    instance.save()
+
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def remove_image(request):
+    pk = request.session['assignment_id']
+    mapping_id = request.POST.get('mapping_id')
+    group_id = request.POST.get('group_id')
+    filter_name = request.POST.get('filter')
+    image_id = request.POST.get('image_id')
+    if group_id:
+        if filter_name not in filters:
+            raise FieldError
+        image_group = get_object_or_404(
+            models.MicroscopyGroupedImages,
+            id=group_id,
+            image_mapping__sample_prep__assignment__pk=pk
+        )
+        setattr(image_group, filter_name + '_filter_image', None)
+        image_group.save()
+    else:
+        mapping = get_object_or_404(
+            models.MicroscopyImageMapping,
+            pk=mapping_id,
+            sample_prep__assignment__pk=pk
+        )
+        image = get_object_or_404(
+            models.MicroscopyImage,
+            pk=image_id,
+            assignment__pk=pk
+        )
+        mapping.images.remove(image)
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def remove_image_group(request):
+    pk = request.session['assignment_id']
+    group_id = request.POST.get('group_id')
+
+    models.MicroscopyGroupedImages.objects.filter(
+        id=group_id,
+        image_mapping__sample_prep__assignment__pk=pk
+    ).delete()
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def copy_histogram(request):
+    """
+    Copy a histogram from one mapping to a given list mappings
+    """
+    pk = request.session['assignment_id']
+    mapping_id = request.POST.get('copy_from_pk')
+    cell_treatment = request.POST.get('cell_treatment')
+    copy_to_list = json.loads(request.POST.get('copy_to_list'))
+    copy_from_mapping = get_object_or_404(
+        models.FlowCytometryHistogramMapping,
+        id=mapping_id,
+        sample_prep__assignment__id=pk
+    )
+    histogram = None
+
+    if cell_treatment == 'Live':
+        histogram = copy_from_mapping.live_data
+    elif cell_treatment == 'Fixed':
+        histogram = copy_from_mapping.fixed_data
+
+    for sample in copy_to_list:
+        mapping = get_object_or_404(
+            models.FlowCytometryHistogramMapping,
+            id=sample['id'],
+            sample_prep__assignment__id=pk
+        )
+        if sample['cell_treatment'] == 'Live':
+            mapping.live_data = histogram
+        elif sample['cell_treatment'] == 'Fixed':
+            mapping.fixed_data = histogram
+        mapping.save()
+    return HttpResponse()
+
+
+@assignment_selected
+@check_assignment_owner
+@login_required
+def submit_histogram(request):
+    """
+    Save or remove drawn histogram
+    """
+    pk = request.session['assignment_id']
+    facs = get_object_or_404(models.FlowCytometry, assignment__id=pk)
+    mapping_id = request.POST.get('mapping_pk')
+    cell_treatment = request.POST.get('cell_treatment')
+    # if no points data is None
+    data = request.POST.get('points', default=None)
+    histogram_pk = request.POST.get('histogram_pk', default=None)
+
+    new_histogram = None
+    # If existing histogram was selected
+    if histogram_pk:
+        new_histogram = get_object_or_404(
+            models.FlowCytometryHistogram,
+            pk=histogram_pk,
+            facs=facs
+        )
+    # Create new histogram
+    elif data:
+        new_histogram = models.FlowCytometryHistogram.objects.create(
+            facs=facs,
+            data=data
+        )
+
+    # Find HistogramMapping object and update it
+    instance = get_object_or_404(
+        models.FlowCytometryHistogramMapping,
+        pk=mapping_id,
+        sample_prep__assignment__id=pk
+    )
+    if cell_treatment == 'Live':
+        instance.live_data = new_histogram
+    else:
+        instance.fixed_data = new_histogram
+    instance.save()
+
+    return HttpResponse()
+
 
 @login_required
 def preview(request, assignment_pk):
@@ -1092,31 +2002,44 @@ def preview(request, assignment_pk):
             'assignment': a,
             'assignment_json': compiler.preview_as_json(a.id)
         },
-        context_instance=RequestContext(request))
+        context_instance=RequestContext(request)
+    )
 
 
 @login_required
 def assignment_complete(request):
     assignment_pk = request.POST.get('pk')
     a = models.Assignment.objects.get(id=assignment_pk)
-    if is_assignment_complete(a):
+    if is_assignment_complete(a, True):
         return HttpResponse('complete')
     else:
         return HttpResponseBadRequest(
-            "You must define your experimental setup and the variables "
-            "for at least one experimental technique before you can preview "
-            "the assignment."
+            "Your assignment cannot be previewed. Make sure you have:"
+            "<ul><li>defined the experimental setup and variables for "
+            "at LEAST ONE experimental technique,</li>"
+            "<li>assigned histograms to all samples in flow cytometry "
+            "if using this technique</li></ul>"
         )
 
 
-def is_assignment_complete(assignment):
-    can_preview = False
-    if models.StrainTreatment.objects.filter(assignment=assignment, enabled=True).exists():
-        if assignment.has_wb and models.WesternBlotBands.objects.filter(
-                antibody__western_blot__assignment=assignment).exists():
-            can_preview = True
-        # Add more techniques later when they are done
-    return can_preview
+def is_assignment_complete(assignment, is_preview=False):
+    if models.StrainTreatment.objects.filter(
+        assignment=assignment,
+        enabled=True
+    ).exists():
+        if assignment.has_fc or assignment.has_wb or assignment.has_micro:
+            if is_preview:
+                return (
+                    is_facs_complete(assignment) or
+                    is_wb_complete(assignment) or is_micro_complete(assignment)
+                )
+            else:
+                return (
+                    is_facs_complete(assignment) and
+                    is_wb_complete(assignment) and
+                    is_micro_complete(assignment)
+                )
+    return False
 
 
 def is_float(txt):
@@ -1133,3 +2056,11 @@ def is_long(s):
         return True
     except ValueError:
         return False
+
+
+@register.filter
+def get_item(dictionary, key):
+    if type(dictionary) is dict:
+        return dictionary.get(key)
+    else:
+        return getattr(dictionary, key, None)

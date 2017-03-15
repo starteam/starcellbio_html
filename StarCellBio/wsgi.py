@@ -30,7 +30,6 @@ PATH = os.environ['PATH'] + ':/usr/local/bin'
 sys.path.append(STARCELLBIO_PARENT_FOLDER)
 sys.path.append(STARCELLBIO_PATH)
 
-
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
