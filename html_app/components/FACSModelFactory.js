@@ -661,7 +661,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
           data.push([x, y]);
 
         }
-        normalize(data, 1700);
+        data = normalize(data, 1700);
         roundData(data);
         state.data = {
           data: [
@@ -728,7 +728,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
           data.push([x, y]);
 
         }
-        normalize(data, 4000);
+        data = normalize(data, 4000);
         roundData(data);
         state.data = {
           data: [
