@@ -140,7 +140,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'backend',
     'instructor',
-    'storages'
+    'storages',
+    'lti_provider',
 ) + auth.settings.INSTALLED_APPS
 
 # django all-auth config
@@ -210,6 +211,11 @@ DATABASES = {
 ADMINS = tuple(tuple(admin) for admin in ADMINS)
 
 HOSTNAME = platform.node().split('.')[0]
+
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(LOGS_DIR):
+    os.makedirs(LOGS_DIR)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -246,6 +252,12 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOGS_DIR, 'errs.log'),
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'root': {
@@ -267,6 +279,9 @@ LOGGING = {
         },
         'urllib3': {
             'level': 'INFO',
-        }
+        },
+        'lti_provider.views': {
+            'handlers': ['console', 'file'],
+        },
     },
 }
