@@ -18,4 +18,6 @@ def hash_lti_username(user_id):
     :param user_id: user's id
     :return: hash string
     """
-    return hashlib.new('ripemd160').hexdigest()
+    user_hash = hashlib.new('ripemd160')
+    user_hash.update(user_id)
+    return user_hash.hexdigest()[:30]

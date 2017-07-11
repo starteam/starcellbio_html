@@ -281,6 +281,11 @@ LOGGING = {
             'level': 'INFO',
         },
         'lti_provider.views': {
+            'level': LOG_LEVEL,
+            'handlers': ['console', 'file'],
+        },
+        'lti_provider.validator': {
+            'level': 'DEBUG',
             'handlers': ['console', 'file'],
         },
     },

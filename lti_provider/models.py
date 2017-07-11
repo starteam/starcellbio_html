@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+
+from auth import forms
 from lti_provider.utils import key_secret_generator, hash_lti_username
 
 
@@ -27,18 +29,20 @@ class LTIUser(models.Model):
     class Meta:  # pragma: no cover
         unique_together = ('user_id', 'consumer')
 
+    @property
     def is_scb_user(self):
         return bool(self.scb_user)
 
-    def lti_to_scb_user(self):
+    def lti_to_scb_user(self, roles):
         """
         Connecting LTI user with the StarCellBio user account
-        :return:
+        :param roles: list of the strings describing assigned roles
         """
-        # TODO(idegtiarov) will be improved after clarification what the sensitive data is
         username = hash_lti_username(self.user_id)
         scb_user, _ = User.objects.get_or_create(username=username)
         self.scb_user = scb_user
+        for role in roles:
+            forms.add_to_group(scb_user, role)
         self.save()
 
 

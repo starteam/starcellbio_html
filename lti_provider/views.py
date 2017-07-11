@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 ROLES = {
-    'Instructor': 'instuctor',
+    'Instructor': 'instructor',
     'Student': 'student',
 }
 
@@ -51,7 +51,7 @@ def config(request):
     return HttpResponse(lti_tool_config.to_xml(), content_type='text/xml')
 
 
-def lti_launch(request, course_id=None):
+def lti_launch(request, assignment_id=None):
     request_post = request.POST
 
     if settings.DEBUG_LTI:
@@ -70,13 +70,11 @@ def lti_launch(request, course_id=None):
     try:
         if consumer.expiration_date and consumer.expiration_date < date.today():
             raise oauth1.OAuth1Error('Consumer Key is expired.')
-        secret = consumer.consumer_secret
 
         tool_provider = DjangoToolProvider.from_django_request(request=request)
+        print('Provider Secret: {}'.format(tool_provider.consumer_secret))
         validator = RequestValidator()
-        # FIXME(idegtiarov) solve issues with the method: is_valid_request, till then it is commented and ok == True
-        # ok = tool_provider.is_valid_request(validator)
-        ok = True
+        ok = tool_provider.is_valid_request(validator)
     except oauth1.OAuth1Error as err:
         ok = False
         logger.error('Error happened while LTI request: {}'.format(err.__str__()))
@@ -86,27 +84,24 @@ def lti_launch(request, course_id=None):
         # TODO(idegtiarov) add lti_error page if it is needed
         raise Http404('LTI request is not valid')
 
-    context_id = request_post.get('context_id')
     user_id = request_post.get('user_id')
     if not user_id:
         # TODO(idegtiarov) add lti_error page if it is needed
         raise Http404('Required LTI param "user_id" is missed in the request.')
     roles_from_request = request_post.get('roles', '').split(',')
     roles = list({ROLES.get(role, 'student') for role in roles_from_request})
+    logger.warning("Student Roles are : {}".format(roles))
+    from django.contrib.auth.models import Group
+    logger.warning("Group for the role is: {}".format(Group.objects.filter(name=roles[0])))
 
     user, created = LTIUser.objects.get_or_create(user_id=user_id, consumer=consumer)
 
     if not user.is_scb_user:
-        # TODO(idegtiarov) connect user with the SCB user account
-        pass
+        logger.debug('Start creating SCB user')
+        # NOTE(idegtiarov) connect user with the SCB user account
+        user.lti_to_scb_user(roles)
+        logger.debug('Check user was created {}'.format(user.is_scb_user))
     # TODO(idegtiarov) Add possibility for Instructor to create new course if it is not existed.
     # msg="Course you are interested in doesn't exist."
-    course = get_object_or_404(Course, code=course_id)
 
-    params = {}
-    params['course_id'] = course_id
-    params['lis_result_sourcedid'] = request_post.get('lis_result_sourcedid')
-    params['lis_outcome_service_url'] = request_post.get('lis_outcome_service_url')
-    store_outcomes_params(params, request.user, consumer)
-
-    return redirect('/')
+    return redirect('/#view=assignments&assignment_id={}'.format(assignment_id))
