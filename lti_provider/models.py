@@ -14,6 +14,10 @@ class Consumer(models.Model):
     consumer_secret = models.CharField(max_length=30, unique=True, default=key_secret_generator)
     expiration_date = models.DateField(verbose_name='Consumer key expiration date', null=True, blank=True)
 
+    class Meta:
+        verbose_name = "LTI Consumer"
+        verbose_name_plural = "LTI Consumers"
+
     def __unicode__(self):
         return self.consumer_name
 
@@ -27,6 +31,8 @@ class LTIUser(models.Model):
     scb_user = models.ForeignKey(User, null=True, related_name='lti_user')
 
     class Meta:  # pragma: no cover
+        verbose_name = "LTI User"
+        verbose_name_plural = "LTI Users"
         unique_together = ('user_id', 'consumer')
 
     @property
@@ -44,31 +50,3 @@ class LTIUser(models.Model):
         for role in roles:
             forms.add_to_group(scb_user, role)
         self.save()
-
-
-class OutcomeService(models.Model):
-    lis_outcome_service_url = models.CharField(max_length=255)
-    consumer = models.ForeignKey(Consumer)
-
-    class Meta:
-        unique_together = (
-            'lis_outcome_service_url', 'consumer'
-        )
-
-    def __unicode__(self):
-        return self.lis_outcome_service_url
-
-
-class GradedLaunch(models.Model):
-    user = models.ForeignKey(User, db_index=True)
-    course_id = models.IntegerField(db_index=True)
-    outcome_service = models.ForeignKey(OutcomeService)
-    lis_result_sourcedid = models.CharField(max_length=255, db_index=True)
-
-    class Meta(object):
-        unique_together = (
-            'outcome_service', 'lis_result_sourcedid', 'user', 'course_id'
-        )
-
-    def __unicode__(self):
-        return self.lis_result_sourcedid

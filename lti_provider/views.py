@@ -8,10 +8,9 @@ from lti.contrib.django import DjangoToolProvider
 from lti import ToolConfig
 from oauthlib import oauth1
 
-from backend.models import Course
+# from backend.models import Course
 from lti_provider import lti_settings as settings
 from lti_provider.models import Consumer, LTIUser
-from lti_provider.outcomes import store_outcomes_params
 from validator import RequestValidator
 
 

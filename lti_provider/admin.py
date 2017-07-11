@@ -1,7 +1,6 @@
 from django.contrib import admin
-from django.forms.models import ModelForm
 
-from lti_provider.models import LTIUser, Consumer, OutcomeService, GradedLaunch
+from lti_provider.models import LTIUser, Consumer
 
 
 class ConsumerAdmin(admin.ModelAdmin):
@@ -9,4 +8,4 @@ class ConsumerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Consumer, ConsumerAdmin)
-admin.site.register([GradedLaunch, LTIUser, OutcomeService])
+admin.site.register(LTIUser)
