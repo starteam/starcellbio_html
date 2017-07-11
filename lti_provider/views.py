@@ -1,14 +1,13 @@
 import logging
 
-from datetime import date
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, Http404
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from lti.contrib.django import DjangoToolProvider
 from lti import ToolConfig
 from oauthlib import oauth1
 
-# from backend.models import Course
+from backend.models import Course, Assignment
 from lti_provider import lti_settings as settings
 from lti_provider.models import Consumer, LTIUser
 from validator import RequestValidator
@@ -51,25 +50,21 @@ def config(request):
 
 
 def lti_launch(request, assignment_id=None):
+    """
+    LTI main view
+
+    Analyze LTI POST request to launch LTI session
+
+    :param request: LTI request
+    :param assignment_id: assingment id from the launch URL
+    """
     request_post = request.POST
 
     if settings.DEBUG_LTI:
         logger.debug(request.META)
         logger.debug(request_post)
 
-    consumer_key = request_post.get('oauth_consumer_key')
-    consumer = Consumer.objects.filter(consumer_key=consumer_key).first()
-
-    if not consumer:
-        msg = 'Consumer with the key {} is not found.'.format(consumer_key)
-        logger.error(msg)
-        # TODO(idegtiarov) add lti_error page if it is needed
-        raise Http404(msg)
-
     try:
-        if consumer.expiration_date and consumer.expiration_date < date.today():
-            raise oauth1.OAuth1Error('Consumer Key is expired.')
-
         tool_provider = DjangoToolProvider.from_django_request(request=request)
         print('Provider Secret: {}'.format(tool_provider.consumer_secret))
         validator = RequestValidator()
@@ -92,6 +87,7 @@ def lti_launch(request, assignment_id=None):
     logger.warning("Student Roles are : {}".format(roles))
     from django.contrib.auth.models import Group
     logger.warning("Group for the role is: {}".format(Group.objects.filter(name=roles[0])))
+    consumer = Consumer.objects.get(consumer_key=request_post['oauth_consumer_key'])
 
     user, created = LTIUser.objects.get_or_create(user_id=user_id, consumer=consumer)
 
@@ -102,5 +98,10 @@ def lti_launch(request, assignment_id=None):
         logger.debug('Check user was created {}'.format(user.is_scb_user))
     # TODO(idegtiarov) Add possibility for Instructor to create new course if it is not existed.
     # msg="Course you are interested in doesn't exist."
+    course = Course.objects.filter(code=assignment_id).first()
+    if course:
+        logger.debug("Course with code: '{}' is found.".format(assignment_id))
+        id = Assignment.objects.filter(courseID=course).first()
+        logger.debug("Assignment id will be taken: {}".format(id))
 
-    return redirect('/#view=assignments&assignment_id={}'.format(assignment_id))
+    return redirect('/#view=assignments&assignment_id={}'.format(id))
