@@ -288,5 +288,9 @@ LOGGING = {
             'level': 'DEBUG',
             'handlers': ['console', 'file'],
         },
+        'lti_provider.models': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'file'],
+        },
     },
 }

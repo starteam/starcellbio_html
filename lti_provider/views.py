@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 ROLES = {
-    'Instructor': 'instructor',
+    # 'Instructor': 'instructor',
     'Student': 'student',
 }
 
@@ -49,14 +49,14 @@ def config(request):
     return HttpResponse(lti_tool_config.to_xml(), content_type='text/xml')
 
 
-def lti_launch(request, assignment_id=None):
+def lti_launch(request, course_id=None):
     """
     LTI main view
 
     Analyze LTI POST request to launch LTI session
 
     :param request: LTI request
-    :param assignment_id: assingment id from the launch URL
+    :param course_id: assingment id from the launch URL
     """
     request_post = request.POST
 
@@ -66,7 +66,6 @@ def lti_launch(request, assignment_id=None):
 
     try:
         tool_provider = DjangoToolProvider.from_django_request(request=request)
-        print('Provider Secret: {}'.format(tool_provider.consumer_secret))
         validator = RequestValidator()
         ok = tool_provider.is_valid_request(validator)
     except oauth1.OAuth1Error as err:
@@ -94,14 +93,15 @@ def lti_launch(request, assignment_id=None):
     if not user.is_scb_user:
         logger.debug('Start creating SCB user')
         # NOTE(idegtiarov) connect user with the SCB user account
-        user.lti_to_scb_user(roles)
+        user.lti_to_scb_user(roles, course_id)
         logger.debug('Check user was created {}'.format(user.is_scb_user))
+    user.login(request)
     # TODO(idegtiarov) Add possibility for Instructor to create new course if it is not existed.
     # msg="Course you are interested in doesn't exist."
-    course = Course.objects.filter(code=assignment_id).first()
-    if course:
-        logger.debug("Course with code: '{}' is found.".format(assignment_id))
-        id = Assignment.objects.filter(courseID=course).first()
-        logger.debug("Assignment id will be taken: {}".format(id))
+    # course = Course.objects.filter(code=course_id).first()
+    # if course:
+    #     logger.debug("Course with code: '{}' is found.".format(course_id))
+    #     id = Assignment.objects.filter(courseID=course).first()
+    #     logger.debug("Assignment id will be taken: {}".format(id))
 
-    return redirect('/#view=assignments&assignment_id={}'.format(id))
+    return redirect('/')
