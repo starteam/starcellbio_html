@@ -3,11 +3,11 @@ import logging
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
 from lti.contrib.django import DjangoToolProvider
 from lti import ToolConfig
 from oauthlib import oauth1
 
-from backend.models import Course, Assignment
 from lti_provider import lti_settings as settings
 from lti_provider.models import Consumer, LTIUser
 from validator import RequestValidator
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 ROLES = {
-    # 'Instructor': 'instructor',
+    'Instructor': 'instructor',
     'Student': 'student',
 }
 
@@ -49,6 +49,7 @@ def config(request):
     return HttpResponse(lti_tool_config.to_xml(), content_type='text/xml')
 
 
+@csrf_exempt
 def lti_launch(request, course_id=None):
     """
     LTI main view
@@ -83,25 +84,13 @@ def lti_launch(request, course_id=None):
         raise Http404('Required LTI param "user_id" is missed in the request.')
     roles_from_request = request_post.get('roles', '').split(',')
     roles = list({ROLES.get(role, 'student') for role in roles_from_request})
-    logger.warning("Student Roles are : {}".format(roles))
-    from django.contrib.auth.models import Group
-    logger.warning("Group for the role is: {}".format(Group.objects.filter(name=roles[0])))
     consumer = Consumer.objects.get(consumer_key=request_post['oauth_consumer_key'])
 
     user, created = LTIUser.objects.get_or_create(user_id=user_id, consumer=consumer)
 
     if not user.is_scb_user:
-        logger.debug('Start creating SCB user')
         # NOTE(idegtiarov) connect user with the SCB user account
         user.lti_to_scb_user(roles, course_id)
         logger.debug('Check user was created {}'.format(user.is_scb_user))
     user.login(request)
-    # TODO(idegtiarov) Add possibility for Instructor to create new course if it is not existed.
-    # msg="Course you are interested in doesn't exist."
-    # course = Course.objects.filter(code=course_id).first()
-    # if course:
-    #     logger.debug("Course with code: '{}' is found.".format(course_id))
-    #     id = Assignment.objects.filter(courseID=course).first()
-    #     logger.debug("Assignment id will be taken: {}".format(id))
-
-    return redirect('/')
+    return redirect(reverse('home'))

@@ -63,9 +63,7 @@ class LTIUser(models.Model):
         Login connected SCB user
         """
         if self.scb_user:
-            logger.debug("User in request: {}".format(request.user.username))
-            logger.debug("SCB User exists: {}".format(self.scb_user))
-            self.scb_user.backend = 'django.contrib.auth.backends.ModelBackend'
+            self.scb_user.backend = 'allauth.account.auth_backends.AuthenticationBackend'
             logger.debug("Start User {} logining...".format(self.scb_user.username))
             login(request, self.scb_user)
             logger.debug("Check User is authenticated:: {}".format(request.user.is_authenticated()))
