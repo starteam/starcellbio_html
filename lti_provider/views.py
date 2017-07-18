@@ -8,6 +8,7 @@ from lti.contrib.django import DjangoToolProvider
 from lti import ToolConfig
 from oauthlib import oauth1
 
+from backend.models import Assignment, Course
 from lti_provider import lti_settings as settings
 from lti_provider.models import Consumer, LTIUser
 from validator import RequestValidator
@@ -50,7 +51,7 @@ def config(request):
 
 
 @csrf_exempt
-def lti_launch(request, course_id=None):
+def lti_launch(request, course_id=None, assignment=None, experiment=None):
     """
     LTI main view
 
@@ -58,6 +59,7 @@ def lti_launch(request, course_id=None):
 
     :param request: LTI request
     :param course_id: assingment id from the launch URL
+    :param experiment: experiment id from the launch URL
     """
     request_post = request.POST
 
@@ -93,4 +95,17 @@ def lti_launch(request, course_id=None):
         user.lti_to_scb_user(roles, course_id)
         logger.debug('Check user was created {}'.format(user.is_scb_user))
     user.login(request)
-    return redirect(reverse('home'))
+    url = '/'
+    if not course_id or not Course.objects.filter(code=course_id).exists():
+        # TODO(idegtiarov) add lti_error page if it is needed
+        raise Http404('Course with the code {}, does not exist.'.format(course_id))
+    if assignment:
+        if not Assignment.objects.filter(assignmentID=assignment, courseID__code=course_id).exists():
+            # TODO(idegtiarov) add lti_error page if it is needed
+            raise Http404('Assignment with the assignment_id: {}, does not exist.'.format(assignment))
+        url += '#view={0}&assignment_id={1}{2}'.format(
+            'experiment_design' if experiment else 'assignments',
+            assignment,
+            '&experiment_id={}'.format(experiment) if experiment else ''
+        )
+    return redirect(url)
