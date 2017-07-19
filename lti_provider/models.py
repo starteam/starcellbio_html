@@ -34,7 +34,7 @@ class LTIUser(models.Model):
     """
     user_id = models.CharField(max_length=255, blank=False)
     consumer = models.ForeignKey(Consumer, null=True)
-    scb_user = models.ForeignKey(User, null=True, related_name='lti_user')
+    scb_user = models.ForeignKey(User, null=True, related_name='lti_user', on_delete=models.CASCADE)
 
     class Meta:  # pragma: no cover
         verbose_name = "LTI User"

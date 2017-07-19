@@ -95,7 +95,7 @@ def lti_launch(request, course_id=None, assignment=None, experiment=None):
         user.lti_to_scb_user(roles, course_id)
         logger.debug('Check user was created {}'.format(user.is_scb_user))
     user.login(request)
-    url = '/'
+    url = reverse('home')
     if not course_id or not Course.objects.filter(code=course_id).exists():
         # TODO(idegtiarov) add lti_error page if it is needed
         raise Http404('Course with the code {}, does not exist.'.format(course_id))
