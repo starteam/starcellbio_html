@@ -84,9 +84,8 @@ class TestLTI_Launch(TestCase):
         response.client = self.client
         self.assertEqual(
             response.url,
-            '/#view=experiment_design&assignment_id={}&experiment_id={}'.format(
+            '/#view=experiment_design&assignment_id={}'.format(
                 self.assignment_id,
-                experiment
             )
         )
         self.assertEqual(response.status_code, 302)
