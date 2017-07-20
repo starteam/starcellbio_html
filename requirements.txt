@@ -17,7 +17,7 @@ oauth2==1.5.211
 python-dateutil==2.1
 python-openid==2.2.5
 readline==6.2.4.1
-requests==1.1.0
+requests==2.18.1
 six==1.10.0
 urwid==1.1.1
 wsgiref==0.1.2
