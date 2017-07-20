@@ -12,7 +12,7 @@ urlpatterns = [
         name='launch_assignment'
     ),
     url(
-        r'^launch/course/(?P<course_id>\w+)/assignment/(?P<assignment>\w+)/experiment/(?P<experiment>\w+)$',
+        r'^launch/course/(?P<course_id>\w+)/assignment/(?P<assignment>\w+)/(?P<experiment>experiment)$',
         views.lti_launch,
         name='launch_experiment'
     ),

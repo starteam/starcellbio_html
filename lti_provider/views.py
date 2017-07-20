@@ -103,9 +103,8 @@ def lti_launch(request, course_id=None, assignment=None, experiment=None):
         if not Assignment.objects.filter(assignmentID=assignment, courseID__code=course_id).exists():
             # TODO(idegtiarov) add lti_error page if it is needed
             raise Http404('Assignment with the assignment_id: {}, does not exist.'.format(assignment))
-        url += '#view={0}&assignment_id={1}{2}'.format(
+        url += '#view={0}&assignment_id={1}'.format(
             'experiment_design' if experiment else 'assignments',
             assignment,
-            '&experiment_id={}'.format(experiment) if experiment else ''
         )
     return redirect(url)
