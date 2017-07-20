@@ -28,8 +28,12 @@ def config(request):
     # basic stuff
     app_title = 'StarCellBio'
     app_description = 'Star Cell Bio LTI Application'
-    launch_view_name = 'lti:launch'
-    launch_url = request.build_absolute_uri(reverse(launch_view_name))
+    launch_view_name = 'lti:launch_experiment'
+    launch_url = request.build_absolute_uri(reverse(launch_view_name, args=[
+        'course_id',
+        'assignment_id',
+        'experiment'
+    ]))
 
     # maybe you've got some extensions
     # FIXME(idegtiarov) there is no extentions right now, if they don't appear remove example.
