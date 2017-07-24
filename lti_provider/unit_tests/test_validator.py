@@ -21,6 +21,10 @@ class TestRequestValidator(TestCase):
         )
         cls.validator = RequestValidator()
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.lti_consumer.delete()
+
     def test_check_client_key_valid(self):
         is_valid = self.validator.check_client_key(self.key)
         self.assertTrue(is_valid, msg='Consumer key is not valid')
