@@ -212,10 +212,6 @@ ADMINS = tuple(tuple(admin) for admin in ADMINS)
 
 HOSTNAME = platform.node().split('.')[0]
 
-LOGS_DIR = os.path.join(BASE_DIR, 'logs')
-if not os.path.exists(LOGS_DIR):
-    os.makedirs(LOGS_DIR)
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -252,12 +248,6 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOGS_DIR, 'errs.log'),
-            'formatter': 'verbose'
-        },
     },
     'loggers': {
         'root': {
@@ -282,15 +272,15 @@ LOGGING = {
         },
         'lti_provider.views': {
             'level': LOG_LEVEL,
-            'handlers': ['console', 'file'],
+            'handlers': ['console', 'syslog'],
         },
         'lti_provider.validator': {
             'level': 'DEBUG',
-            'handlers': ['console', 'file'],
+            'handlers': ['console', 'syslog'],
         },
         'lti_provider.models': {
             'level': 'DEBUG',
-            'handlers': ['console', 'file'],
+            'handlers': ['console', 'syslog'],
         },
     },
 }
