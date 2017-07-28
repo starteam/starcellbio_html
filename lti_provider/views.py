@@ -5,7 +5,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from lti.contrib.django import DjangoToolProvider
-from lti import ToolConfig
+from lti import ToolConfig, InvalidLTIRequestError
 from oauthlib import oauth1
 
 from backend.models import Assignment, Course
@@ -67,7 +67,7 @@ def lti_launch(request, course_id=None, assignment=None, experiment=None):
         tool_provider = DjangoToolProvider.from_django_request(request=request)
         validator = RequestValidator()
         ok = tool_provider.is_valid_request(validator)
-    except oauth1.OAuth1Error as err:
+    except (oauth1.OAuth1Error, InvalidLTIRequestError, ValueError) as err:
         ok = False
         logger.error('Error happened while LTI request: {}'.format(err.__str__()))
     if settings.DEBUG_LTI:
@@ -87,7 +87,7 @@ def lti_launch(request, course_id=None, assignment=None, experiment=None):
     if not user.is_scb_user:
         # NOTE(idegtiarov) connect user with the SCB user account
         user.lti_to_scb_user(roles, course_id)
-        logger.debug('Check user was created {}'.format(user.is_scb_user))
+        logger.debug('SCB user was successfully created: {}'.format(user.is_scb_user))
     user.login(request)
     url = reverse('home')
     if not course_id or not Course.objects.filter(code=course_id).exists():
