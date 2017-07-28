@@ -64,6 +64,6 @@ class LTIUser(models.Model):
         """
         if self.scb_user:
             self.scb_user.backend = 'allauth.account.auth_backends.AuthenticationBackend'
-            logger.debug("Start User {} logining...".format(self.scb_user.username))
+            logger.debug("Start User {} login process...".format(self.scb_user.username))
             login(request, self.scb_user)
-            logger.debug("Check User is authenticated:: {}".format(request.user.is_authenticated()))
+            logger.debug("Check User is authenticated: {}".format(request.user.is_authenticated()))

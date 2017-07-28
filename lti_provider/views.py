@@ -35,19 +35,10 @@ def config(request):
         'experiment'
     ]))
 
-    # maybe you've got some extensions
-    # FIXME(idegtiarov) there is no extentions right now, if they don't appear remove example.
-    extensions = {
-        'my_extensions_provider': {
-            # extension settings...
-        }
-    }
-
     lti_tool_config = ToolConfig(
         title=app_title,
         launch_url=launch_url,
         secure_launch_url=launch_url,
-        extensions=extensions,
         description=app_description
     )
 
@@ -62,8 +53,9 @@ def lti_launch(request, course_id=None, assignment=None, experiment=None):
     Analyze LTI POST request to launch LTI session
 
     :param request: LTI request
-    :param course_id: assingment id from the launch URL
-    :param experiment: experiment id from the launch URL
+    :param course_id: course id from the launch URL
+    :param assignment: assingment id from the launch URL
+    :param experiment: string 'experiment' from the launch URL is a flag for switch on experiment_design page
     """
     request_post = request.POST
 
@@ -81,12 +73,10 @@ def lti_launch(request, course_id=None, assignment=None, experiment=None):
     if settings.DEBUG_LTI:
         logger.debug("LTI request is {}valid".format('' if ok else 'not '))
     if not ok:
-        # TODO(idegtiarov) add lti_error page if it is needed
         raise Http404('LTI request is not valid')
 
     user_id = request_post.get('user_id')
     if not user_id:
-        # TODO(idegtiarov) add lti_error page if it is needed
         raise Http404('Required LTI param "user_id" is missed in the request.')
     roles_from_request = request_post.get('roles', '').split(',')
     roles = list({ROLES.get(role, 'student') for role in roles_from_request})
@@ -101,11 +91,9 @@ def lti_launch(request, course_id=None, assignment=None, experiment=None):
     user.login(request)
     url = reverse('home')
     if not course_id or not Course.objects.filter(code=course_id).exists():
-        # TODO(idegtiarov) add lti_error page if it is needed
         raise Http404('Course with the code {}, does not exist.'.format(course_id))
     if assignment:
         if not Assignment.objects.filter(assignmentID=assignment, courseID__code=course_id).exists():
-            # TODO(idegtiarov) add lti_error page if it is needed
             raise Http404('Assignment with the assignment_id: {}, does not exist.'.format(assignment))
         url += '#view={0}&assignment_id={1}'.format(
             'experiment_design' if experiment else 'assignments',

@@ -47,7 +47,7 @@ class RequestValidator(oauth1.RequestValidator):
         :param request: LTI request
         :return: boolean flag
         """
-        logger.debug('Timestamp and nonce is validating...')
+        logger.debug('Timestamp validation run...')
         today = datetime.date.today()
         consumer_expired_date = self.consumer.expiration_date
         if consumer_expired_date and consumer_expired_date < today:
@@ -62,7 +62,7 @@ class RequestValidator(oauth1.RequestValidator):
         :param request: LTI request
         :return: boolean flag
         """
-        logger.debug('Client key is validating...')
+        logger.debug('Client key validation run...')
         return True
 
     def get_client_secret(self, client_key, request):
