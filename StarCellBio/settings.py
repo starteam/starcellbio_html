@@ -140,7 +140,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'backend',
     'instructor',
-    'storages'
+    'storages',
+    'lti_provider',
 ) + auth.settings.INSTALLED_APPS
 
 # django all-auth config
@@ -210,6 +211,7 @@ DATABASES = {
 ADMINS = tuple(tuple(admin) for admin in ADMINS)
 
 HOSTNAME = platform.node().split('.')[0]
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -267,6 +269,18 @@ LOGGING = {
         },
         'urllib3': {
             'level': 'INFO',
-        }
+        },
+        'lti_provider.views': {
+            'level': LOG_LEVEL,
+            'handlers': ['console', 'syslog'],
+        },
+        'lti_provider.validator': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'syslog'],
+        },
+        'lti_provider.models': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'syslog'],
+        },
     },
 }

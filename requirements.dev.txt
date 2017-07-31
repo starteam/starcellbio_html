@@ -6,5 +6,5 @@ pudb
 yapf
 selenium==2.35.0
 bok-choy==0.4.10
-mock
+mock==2.0.0
 -r requirements.txt

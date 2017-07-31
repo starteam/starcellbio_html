@@ -96,6 +96,9 @@ urlpatterns = patterns(
             'document_root': 'html_app/js/'
         }
     ),
+
+    # Uncomment the lti_provider line below to enable LTI provider:
+    url(r'^lti/', include('lti_provider.urls', namespace='lti')),
 )
 # add authentication URL patterns
 urlpatterns += auth.urls.urlpatterns
