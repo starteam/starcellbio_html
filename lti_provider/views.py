@@ -24,8 +24,11 @@ ROLES = {
 
 
 def config(request):
-    # Code from lti_django example
-    # basic stuff
+    """
+    View for config endpoint lti/config
+
+    :return: XML with main info about Star Cell Bio source and LTI launch URL structure
+    """
     app_title = 'StarCellBio'
     app_description = 'Star Cell Bio LTI Application'
     launch_view_name = 'lti:launch_experiment'
