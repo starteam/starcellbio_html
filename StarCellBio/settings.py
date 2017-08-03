@@ -161,6 +161,14 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
         'LOCATION': '/var/tmp/django_cache',
+    },
+    # NOTE(idegtiarov) LTI request validation required nonce and timestamp caching with small TIMEOUT param.
+    # To ensure all lti related data has the same lifetime and frequently deleted items are split from other cache data
+    # 'lti_cache' was added.
+    'lti_cache': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_lti_cache',
+        'TIMEOUT': 10,
     }
 }
 
