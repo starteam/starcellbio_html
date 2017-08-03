@@ -29,6 +29,12 @@ class RequestValidator(oauth1.RequestValidator):
         """
         Validate LTI request's timestamp and nonce
 
+        Timestamp is validated to be equal or greater than the timestamp used in previous requests from certain
+        LTI Consumer.
+
+        Nonce is validating to be unique in the time frame which is by default equal to 10 seconds.
+        Time frame could be configured in the StarCellBio settings as a TIMEOUT parameter of the CACHES['lti_cache']
+
         :param client_key: client key from LTI request
         :param timestamp: timestamp from LTI request
         :param nonce: nonce from LTI request
