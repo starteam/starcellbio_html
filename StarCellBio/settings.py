@@ -13,6 +13,7 @@ rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+ALLOWED_HOSTS = ['*']
 
 import platform
 if platform.node() == 'starapp':
