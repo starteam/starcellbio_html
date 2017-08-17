@@ -26,7 +26,7 @@ before_script:
 - "./manage.py collectstatic --noinput"
 install:
   - pip install -r requirements.dev.txt
-  - npm install
+  - npm install --prefix html_app
 script:
 - "./manage.py test --liveserver=localhost:8100-8200 --verbosity=2"
 addons:
