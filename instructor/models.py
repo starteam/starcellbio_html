@@ -270,7 +270,7 @@ FACS_KINDS = (
 )
 LINEAR = 'linear'
 LOG = 'log'
-FACS_SCALE_TYPES = ((LINEAR, 'Linear'), (LOG, 'Logarithmic Scale'))
+FACS_SCALE_TYPES = ((LINEAR, 'Linear'), (LOG, 'Logarithmic'))
 
 
 class FlowCytometry(models.Model):
@@ -281,7 +281,7 @@ class FlowCytometry(models.Model):
         choices=FACS_SCALE_TYPES
     )
     xrange = models.IntegerField(default=200)
-    tick_values = models.CharField(max_length=50, default='50,100,150')
+    yrange = models.IntegerField(default=100)
 
 
 class FlowCytometrySamplePrep(models.Model):

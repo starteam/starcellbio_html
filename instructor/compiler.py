@@ -251,10 +251,9 @@ def facs_histograms(assignment):
 
 def facs_model(assignment):
     facs = assignment.flow_cytometry.first()
-    tick_values = [int(value) for value in facs.tick_values.split(',')]
     ab_parser = {
-        'ticks': tick_values,
-        'max': facs.xrange,
+        'xmax': facs.xrange,
+        'ymax': facs.yrange,
         'scale': facs.scale,
         'dna': {}
     }

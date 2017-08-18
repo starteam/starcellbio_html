@@ -981,8 +981,11 @@ scb.ui.static.FacsView.evaluate_chart = function(state) {
       var yaxes = plot.getYAxes()[0];
       var sensitivity = 4;
       /* Old assignments do not have max value given, they were using the value of a constant MAX_VALUE=150*/
-      var max_x = state.assignment.template.model.facs.max;
-      max_x = max_x ? max_x : 150;
+      var max_x = state.assignment.template.model.facs.is_ab
+                  ? state.assignment.template.model.facs.ab_parser.xmax
+                  : state.assignment.template.model.facs.xmax;
+
+      max_x = max_x ? parseFloat(max_x) : 150;
 
       if (state.facs.samples_finished && state.facs_lane.selected_gate) {
         var selected_gate = state.facs.selected_lane.selected_gate;
