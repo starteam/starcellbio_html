@@ -18,6 +18,9 @@
       - emacs24-nox
       - postfix
       - libjpeg-dev
+      - libxml2-dev
+      - libxslt1-dev
+      - python-dev
     pip_packages:
       - virtualenvwrapper
     venv_name: starcellbio
