@@ -1,7 +1,10 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.forms.models import modelformset_factory
 from django.forms.models import modelform_factory
+from django.views.decorators.http import require_http_methods
+
 from instructor import models
 from instructor import compiler
 from django.contrib.auth.models import User
@@ -507,14 +510,14 @@ def recreate_experimental_setup(assignment):
     create_treatments(assignment)
 
 
-def find_next_view(assignment):
+def find_next_view(assignment, technique):
     """ Page to go to on 'continue' """
-    next_view = 'common_assignments'
-    if assignment.has_wb:
+    next_view = 'common_select_technique'
+    if assignment.has_wb and technique == 'has_wb':
         next_view = 'western_blot_lysate_type'
-    elif assignment.has_micro:
+    elif assignment.has_micro and technique == 'has_micro':
         next_view = 'microscopy_sample_prep'
-    elif assignment.has_fc:
+    elif assignment.has_fc and technique == 'has_fc':
         next_view = 'facs_sample_prep'
     return next_view
 
@@ -526,37 +529,21 @@ def select_technique(request):
     page_number = page_order.index('techniques')
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
-    var_fields = ['has_wb', 'has_fc', 'has_micro']
-    AssignmentForm = modelform_factory(models.Assignment, fields=var_fields)
 
-    if request.method == "POST" and assignment.access == 'private':
-        form = AssignmentForm(request.POST, instance=assignment)
-        if form.is_valid():
-            # if facs was selected want to enable first link
+    if request.method == "POST":
+        technique = json.loads(request.body).get('technique')
+        setattr(assignment, technique, not getattr(assignment, technique))
+        if assignment.has_wb:
             if (
-                form.instance.has_fc and
-                form.instance.facs_last_enabled_page == 0
-            ):
-                form.instance.facs_last_enabled_page = 1
-
-            form.save()
-            if 'continue' in request.POST:
-                if assignment.has_wb:
-                    if (
                         page_order.index(assignment.last_page_name) <=
                         page_number
-                    ):
-                        assignment.last_page_name = 'wb_lysate_type'
-                    assignment.save()
-                return redirect(find_next_view(assignment))
+            ):
+                assignment.last_page_name = 'wb_lysate_type'
+        assignment.save()
+        return HttpResponse(reverse(find_next_view(assignment, technique)), content_type='text')
 
-    elif request.method == "POST" and 'continue' in request.POST:
-        return redirect(find_next_view(assignment))
-
-    form = AssignmentForm(instance=assignment)
     return render_to_response(
         'instructor/select_technique.html', {
-            'form': form,
             'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Select Technique',

@@ -751,8 +751,24 @@ $(function() {
       window.location = '/ab/assignments/microscopy_analyze/';
     });
   });
-  
+
   $("input[id='id_objective']").attr('placeholder', '20x');
+
+  $("input[id^='id_has_']").click(function() {
+      var technique = $(this).attr('id').replace('id_', '');
+      var body = {'technique': technique};
+      $.ajax({
+          url: "/ab/assignments/select_technique/",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(body),
+          success: function (data) {
+              console.log("WB Technique is chosen", data);
+              location.href = data;
+          },
+          error: function (xhr, textStatus, err){
+              console.log("Error adding Technique: " + err + " " + textStatus);
+          }
+      });
+  })
 });
-
-

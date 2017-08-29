@@ -305,6 +305,14 @@ select:disabled {
     color: #316f94;
     padding-top: 5px;
 }
+.scb_ab_s_sidebar_section_subheading{
+    padding-left: 14px;
+    font-size: 12pt;
+    font-weight: bold;
+    font-family: 'sourcesanspro-semibold';
+    color: #316f94;
+    padding-top: 5px;
+}
 .scb_ab_s_sidebar_page_name_selected{
 	background: #c9cdd0;
 }
