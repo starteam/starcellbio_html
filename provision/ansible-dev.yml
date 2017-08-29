@@ -53,7 +53,12 @@
       pip: requirements='/vagrant/requirements.dev.txt' virtualenv={{ venv_path }}
 
     - name: Install node packages
-      npm: path=/vagrant
+      npm: path=/vagrant/html_app
+
+    - name: Install jqDialog
+      get_url:
+        url: https://raw.githubusercontent.com/knadh/jqdialog/master/jqdialog.js
+        dest: /vagrant/html_app/js/
 
     - name: Create database
       sudo: yes
