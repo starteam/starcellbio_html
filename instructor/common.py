@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.forms.models import modelformset_factory
@@ -1397,9 +1398,8 @@ def microscopy_analyze(request):
 
     if request.method == "POST" and assignment.access == 'private':
         if 'upload' in request.POST:
-            if len(request.FILES) > 0:
-                uploaded_file = request.FILES['file']
-                objective = request.POST.get('objective')
+            objective = request.POST.get('objective')
+            for uploaded_file in request.FILES.getlist('file'):
                 new_image, _ = models.MicroscopyImage.objects.get_or_create(
                     file=uploaded_file,
                     assignment=assignment,
@@ -1455,7 +1455,8 @@ def microscopy_analyze(request):
     all_images = models.MicroscopyImage.objects.filter(assignment=assignment)
     ImageForm = modelform_factory(
         models.MicroscopyImage,
-        fields=['file', 'objective']
+        fields=['file', 'objective'],
+        widgets={'file': forms.ClearableFileInput(attrs={'multiple': True})}
     )
     image_form = ImageForm()
     variables = {
