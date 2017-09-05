@@ -53,7 +53,12 @@
       pip: requirements='/vagrant/requirements.dev.txt' virtualenv={{ venv_path }}
 
     - name: Install node packages
-      npm: path=/vagrant/html_app
+      npm: path=/vagrant
+
+    - name: Install soyutils
+      shell: >
+        executable=/bin/bash
+        cp /vagrant/node_modules/closure-templates/soyutils.js /vagrant/html_app/js/
 
     - name: Install jqDialog
       get_url:

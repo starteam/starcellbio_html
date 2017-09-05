@@ -7,7 +7,7 @@ javascripts:
   - js/jquery-1.7.2.min.js
   - js/jquery.tinymce.min.js
   - js/tinymce.min.js
-  - node_modules/gulp-soy/node_modules/closure-templates/soyutils.js
+  - js/soyutils.js
   - starcellbio.app.js
   - ../scb/get_user.js
   - js/plugins/fullscreen/plugin.min.js
