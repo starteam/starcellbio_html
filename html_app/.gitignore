@@ -2,3 +2,4 @@
 videos/
 # Downloaded on install by Ansible to meet TLO's requirements
 js/jqdialog.js
+js/soyutils.js
