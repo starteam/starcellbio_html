@@ -11,5 +11,12 @@
 
     <a href="{% url "common_strain_treatments" %}">
     <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-</a>
+
+    </a>
+    <a href="{% url "common_assignments" %}">
+    <button class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn" role='button'
+            {% if not allow_finish %}hidden{% endif %}>
+        SAVE AND FINISH &nbsp; &#9654;
+    </button>
+    </a>
 {% endblock %}

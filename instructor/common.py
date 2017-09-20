@@ -513,7 +513,7 @@ def recreate_experimental_setup(assignment):
 
 def find_next_view(assignment, technique):
     """ Page to go to on 'continue' """
-    next_view = 'common_assignments'
+    next_view = 'common_select_technique'
     if assignment.has_wb:
         next_view = 'western_blot_lysate_type'
     elif assignment.has_micro and technique == 'has_micro':
@@ -543,13 +543,16 @@ def select_technique(request):
         assignment.save()
         return HttpResponse(reverse(find_next_view(assignment, technique)), content_type='text')
 
+    allow_finish = assignment.has_wb or assignment.has_micro or assignment.has_fc
+
     return render_to_response(
         'instructor/select_technique.html', {
             'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Select Technique',
             'page_name': 'techniques',
-            'pages': get_pages(assignment)
+            'pages': get_pages(assignment),
+            'allow_finish': allow_finish,
         }
     )
 
@@ -1207,11 +1210,7 @@ def western_blot_band_intensity(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
     # Page to go to on 'continue'
-    next_view = 'common_assignments'
-    if assignment.has_micro:
-        next_view = 'microscopy_sample_prep'
-    elif assignment.has_fc:
-        next_view = 'facs_sample_prep'
+    next_view = 'common_select_technique'
     wb, created = models.WesternBlot.objects.get_or_create(
         assignment=assignment
     )
@@ -1265,9 +1264,7 @@ def western_blot_band_intensity(request):
     }
     # need to decide to finish the assignment or
     # to move on to next technique
-    save_and_continue_button = 'SAVE AND FINISH'
-    if assignment.has_fc:
-        save_and_continue_button = 'SAVE AND CONTINUE'
+    save_and_continue_button = 'SAVE AND CONTINUE'
     return render_to_response(
         'instructor/wb_band_intensity.html',
         {
@@ -1402,9 +1399,7 @@ def microscopy_analyze(request):
 
         else:  # then 'save' or 'continue' in request.POST
             if 'continue' in request.POST:
-                if assignment.has_fc:
-                    return redirect('facs_sample_prep')
-                return redirect('common_assignments')
+                return redirect('common_select_technique')
 
     image_mappings = models.MicroscopyImageMapping.objects.filter(
         sample_prep__assignment=assignment
@@ -1454,9 +1449,7 @@ def microscopy_analyze(request):
         'has_collection_time': assignment.has_collection_time
     }
     # need to decide to finish the assignment or to move on to FACS
-    save_and_continue_button = 'SAVE AND FINISH'
-    if assignment.has_fc:
-        save_and_continue_button = 'SAVE AND CONTINUE'
+    save_and_continue_button = 'SAVE AND CONTINUE'
 
     return render_to_response(
         'instructor/micro_analyze.html',
@@ -1655,7 +1648,7 @@ def facs_analyze(request):
     )
 
     if request.method == "POST" and 'continue' in request.POST:
-        return redirect('common_assignments')
+        return redirect('common_select_technique')
 
     # Grouping HistogramMapping objects by cell_treatment,
     # analysis, and condition

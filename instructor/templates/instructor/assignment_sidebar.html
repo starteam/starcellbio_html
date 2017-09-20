@@ -71,7 +71,7 @@
 
         <div class='scb_ab_s_sidebar_section_heading' role='heading'>Experimental Techniques</div>
         <div role="link" class='scb_ab_s_sidebar_page_link'>
-            <div class='scb_ab_s_sidebar_section_subheading' role='heading'><input id="id_has_wb" name="has_wb" type="checkbox" {% if pages.wb_lysate_type %}checked{% endif %}{% if not pages.techniques %}hidden{% endif %}> Western Blotting </div>
+            <div class='scb_ab_s_sidebar_section_subheading' role='heading'><input id="tech_has_wb" name="has_wb" type="checkbox" {% if pages.wb_lysate_type %}checked{% endif %}{% if not pages.techniques %}hidden{% endif %}> Western Blotting </div>
 
             <div role="link" class='scb_ab_s_sidebar_page_link
                 {% if page_name == "wb_lysate_type" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
@@ -116,7 +116,7 @@
             </div>
 
 
-            <div class='scb_ab_s_sidebar_section_subheading' role='heading'><input id="id_has_micro" name="has_micro" type="checkbox" {% if pages.micro_sample_prep %} checked {% endif %}{% if not pages.techniques %}hidden{% endif %}> Microscopy </div>
+            <div class='scb_ab_s_sidebar_section_subheading' role='heading'><input id="tech_has_micro" name="has_micro" type="checkbox" {% if pages.micro_sample_prep %} checked {% endif %}{% if not pages.techniques %}hidden{% endif %}> Microscopy </div>
 
 
             <div role="link" class='scb_ab_s_sidebar_page_link
@@ -140,7 +140,7 @@
                 </a>
             </div>
 
-            <div class='scb_ab_s_sidebar_section_subheading' role='heading'><input id="id_has_fc" name="has_fc" type="checkbox" {% if pages.facs_sample_prep %} checked {% endif %} {% if not pages.techniques %}hidden{% endif %}> Flow Cytometry </div>
+            <div class='scb_ab_s_sidebar_section_subheading' role='heading'><input id="tech_has_fc" name="has_fc" type="checkbox" {% if pages.facs_sample_prep %} checked {% endif %} {% if not pages.techniques %}hidden{% endif %}> Flow Cytometry </div>
 
             <div role="link" class='scb_ab_s_sidebar_page_link
                 {% if page_name == "facs_sample_prep" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>

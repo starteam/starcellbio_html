@@ -754,8 +754,8 @@ $(function() {
 
   $("input[id='id_objective']").attr('placeholder', '20x');
 
-  $("input[id^='id_has_']").click(function() {
-      var technique = $(this).attr('id').replace('id_', '');
+  $("input[id^='tech_has_']").click(function() {
+      var technique = $(this).attr('id').replace('tech_', '');
       var body = {'technique': technique};
       $.ajax({
           url: "/ab/assignments/select_technique/",
@@ -763,7 +763,7 @@ $(function() {
           contentType: "application/json",
           data: JSON.stringify(body),
           success: function (data) {
-              console.log("WB Technique is chosen", data);
+              console.log("Technique is chosen", data);
               location.href = data;
           },
           error: function (xhr, textStatus, err){
