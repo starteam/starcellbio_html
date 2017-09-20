@@ -32,12 +32,12 @@
     - name: Install debian packages
       sudo: yes
       apt: name={{ item }} update_cache=yes
-      with_items: apt_packages
+      with_items: "{{ apt_packages }}"
 
     - name: Install pip packages
       sudo: yes
       pip: name={{ item }}
-      with_items: pip_packages
+      with_items: "{{ pip_packages }}"
 
     - name: Create venv
       shell: >
@@ -53,7 +53,12 @@
       pip: requirements='/vagrant/requirements.dev.txt' virtualenv={{ venv_path }}
 
     - name: Install node packages
-      npm: path=/vagrant/html_app
+      npm: path=/vagrant
+
+    - name: Install soyutils
+      shell: >
+        executable=/bin/bash
+        cp /vagrant/node_modules/closure-templates/soyutils.js /vagrant/html_app/js/
 
     - name: Install jqDialog
       get_url:
@@ -91,7 +96,7 @@
 
     - name: Compile files
       shell: >
-        exceutable=/bin/bash
+        executable=/bin/bash
         chdir=/vagrant/html_app
         {{ venv_path }}/bin/python build.py
       environment:
