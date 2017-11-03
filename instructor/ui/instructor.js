@@ -66,7 +66,135 @@ $(function() {
    * For all text input boxes inside a form
    */
   $("form input[type = 'text'], form input[type = 'number']").addClass("scb_ab_s_input_text_field");
+  $("form textarea").addClass("scb_ab_s_input_text_area");
   $("form select").addClass("scb_ab_s_form_select_field");
+
+  var file_list = get_file_names(),           // Array of names
+      files_to_upload = [],                   // Array of File objects
+      files_to_delete = [],                   // Array of urls
+      uploaded_file_names = get_file_names(); // Array of names, initialize  with files present on server
+
+  function get_file_names() {
+    result = [];
+    $('.scb_ab_s_file_list').find('ul li a').each(function() {
+      result.push($(this).text());
+    });
+    return result;
+  }
+
+  /* Add files in assignment initial setup view */
+  $(".scb_ab_s_add_files_input_setup").on('change', function(e) {
+    var $file_list = $('.scb_ab_s_file_list').find('ul');
+    e.preventDefault();
+    $file_list.empty();
+    $.each(this.files, function(index, file) {
+     $file_list.append(
+        '<li>' +
+          '<a href="' + URL.createObjectURL(file) + '">' + file.name + '</a>' +
+        '</li>'
+      );
+    });
+  });
+
+  /* Add files in assignment modify view  */
+  $(".scb_ab_s_add_files_input").on('change', function(e) {
+    var $file_list = $('.scb_ab_s_file_list').find('ul');
+    e.preventDefault();
+    $.each(this.files, function(index, file) {
+      if (file_list.indexOf(file.name) === -1) {
+        files_to_upload.push(file);
+        $file_list.append(
+          '<li>' +
+            '<a href="' + URL.createObjectURL(file) + '">' + file.name + '</a>' +
+            '<button class="scb_s_ab_trash_icon scb_ab_s_delete_file"></button>' +
+          '</li>'
+        );
+        $file_list.find('li button').last().on('click', delete_file);
+        // Update file list
+        file_list.push(file.name);
+      }
+    });
+  });
+
+  /* Remove assignment file */
+  function delete_file(e) {
+    var $anchor = $(this).siblings('a'),
+        delete_file_name = $anchor.text(),
+        delete_file_url = $anchor.attr('href'),
+        index;
+    e.preventDefault();
+    // Remove element from list
+    index = file_list.indexOf(delete_file_name);
+    if (index !== -1) {
+      file_list.splice(index, 1);
+    }
+    // If already uploaded, update corresponding array
+    if (uploaded_file_names.indexOf(delete_file_name) !== -1) {
+      files_to_delete.push(delete_file_url);
+    }
+    // Otherwise, delete entry in files to upload. Clone files_to_upload beforehand.
+    else {
+      $.each(files_to_upload.slice(0), function(i, file) {
+        if (file.name === delete_file_name) {
+          files_to_upload.splice(i, 1);
+        }
+      });
+    }
+    // Remove DOM element ie <li> element containing anchor and trash button
+    $(this).parent().remove();
+  }
+
+  $(".scb_ab_s_delete_file").on('click', delete_file);
+
+  var save_continue = false, $form = $('.scb_ab_s_assignment_form');
+  $form.find('input[name="save"]').on('click', function() {
+    save_continue = false;
+  });
+  $form.find('input[name="continue"]').on('click', function() {
+    save_continue = true;
+  })
+
+  // Update file list on server
+  $('.scb_ab_s_assignment_form').on('submit', function(e) {
+    var form_data, urls = [], name, text;
+    e.preventDefault();
+    $('.scb_ab_s_file_list').find('li a').each(function() {
+      urls.push($(this).attr('href'));
+    });
+    name = $form.find('input[name="assignment_name"]').val();
+    if (name.length === 0) {
+      $('.name_error').text('Cannot have an empty assignment name.');
+      return;
+    }
+    else {
+      $('.name_error').val('');
+    }
+    text = $form.find('textarea[name="assignment_text"]').val();
+    form_data = new FormData();
+    form_data.append('name', name);
+    form_data.append('text', text);
+    form_data.append('files_to_delete', JSON.stringify(files_to_delete));
+    $.each(files_to_upload, function(index, file) {
+      form_data.append(file.name, file);
+    });
+    $.ajax({
+      url: '/ab/assignments/assignment_modify/',
+      type: 'POST',
+      cache: false,
+      contentType: false,
+      dataType: 'html',
+      processData: false,
+      data: form_data,
+      success: function(data, status) {
+        if (save_continue) {
+          location = '/ab/assignments/course_modify/';
+        }
+      },
+      error: function(xhr, description, error) {
+        console.log('File list could not be updated: ', xhr, description, error);
+      }
+    });
+  });
 
   /**
    * Edit Strains
@@ -1181,5 +1309,4 @@ $(function() {
       });
       x1 = x2 = y1 = y2 = 0;
   }
-
 });

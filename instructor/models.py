@@ -61,6 +61,8 @@ class Assignment(models.Model):
         default='micro_sample_prep'
     )
     name = models.CharField(max_length=50)
+    text = models.TextField(default='')
+    files = models.TextField(default='')
     access = models.CharField(max_length=50, choices=ACCESS, default='private')
     basedOn = models.ForeignKey("Assignment", null=True, blank=True)
     group_by = models.CharField(
