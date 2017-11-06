@@ -20,19 +20,20 @@
             {{ protocol_name }}
           </div>
         </div>
-        <form id="image_form" method="post" enctype="multipart/form-data" class="scb_ab_s_image_form">
-          {{ image_form.as_p }}
+        <form id="image_form" action="" method="POST" enctype="multipart/form-data" class="scb_ab_s_image_form">
+            {{ image_form.as_table }}
 
-        <input type="submit"
-               name="upload"
-               style="display: inline-block"
-               class="scb_s_gray_button"
-               value="UPLOAD">
+            <input id="upload_btn"
+                   type="submit"
+                   name="upload"
+                   class="scb_s_gray_button"
+                   value="UPLOAD">
+
         </form>
-        <div class="scb_ab_s_canvas_library">
+        <div class="scb_ab_s_canvas_library box">
           {% for image in all_images %}
             <div class="scb_ab_s_library_item_wrapper">
-              <img id="library-{{ image.id }}" src="{{ image.file.url}}"
+              <img id="library-{{ image.id }}" src="{{ image.file.url }}"
                    class="scb_ab_f_select_image "/>
             </div>
 

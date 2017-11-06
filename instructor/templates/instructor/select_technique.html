@@ -5,7 +5,12 @@
     <div class='scb_s_experiment_setup_title'>Select Technique in the Left Bar</div>
 
     <div class='scb_s_assignment_setup_course_name_heading'>
-        Which techniques should be available to your students?
+        {% if allow_finish %}
+            Would you like to add another technique to this assignment?
+        {% else %}
+            Which techniques should be available to your students?
+        {% endif %}
+
     </div>
     <br/>
 

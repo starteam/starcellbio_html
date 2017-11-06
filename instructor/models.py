@@ -25,10 +25,6 @@ ALL = 'merge'
 
 MICRO = (
     ('', 'Select Analysis'),
-    ('IF', 'Antibody-labeling IF'),
-    ('IHC', 'Antibody-labeling IHC'),
-    ('DYE-FLU', "Dye/stain (fluorescence)"),
-    ('DYE-BF', 'Dye/stain (brightfield)'),
     ('FLUOR', 'Fluorescence'),
     ('BF', 'Brightfield')
 )

@@ -873,3 +873,27 @@ input#id_objective{
     color: #316f94;
     font-weight: bold;
 }
+
+.box_file,
+input#id_objective,
+input#upload_btn,
+label[for="id_objective"],
+.box_dragndrop {
+    display: none;
+}
+
+label[for="id_file"] {
+    font-size: large;
+}
+
+label[for="id_file"] strong {
+    color: #005fb3;
+}
+
+.scb_ab_s_image_form .box_dragndrop {
+  display: inline;
+}
+
+.box.is-dragover {
+  background-color: grey;
+}

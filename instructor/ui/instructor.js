@@ -419,7 +419,7 @@ $(function() {
         type: "POST",
         data: data
       }).then(function () {
-        window.location = '/ab/assignments/microscopy_analyze/';
+        location.reload();
       });
     }
   });
@@ -659,22 +659,6 @@ $(function() {
       addImageFormHandler();
     }
   }
-  /*
-    Add a form submit handler. Has to be called when a sample is selected.
-   */
-  function addImageFormHandler(){
-    $("#image_form").unbind('submit').submit(function () {
-      var parameters = {};
-      parameters['protocol'] = $('.scb_ab_f_sample_name').text();
-      parameters['sample_prep'] = $('.scb_ab_f_treatment_text').text();
-      parameters['mapping_pk'] = $('.scb_ab_f_save_image').data('pk');
-      parameters['filter_group_id'] = $('.scb_ab_f_save_image').data('filter_group_id');
-      _.each(parameters, function(value, key){
-        $("<input>", { type: "hidden", name: key, value: value }).appendTo("#image_form");
-      });
-
-    });
-  }
 
   /* COPY TO button */
   $('.open_copy_histogram_dialog').click(function(){
@@ -770,5 +754,90 @@ $(function() {
               console.log("Error adding Technique: " + err + " " + textStatus);
           }
       });
+  });
+
+  /*
+  Drag&Drop functionality for the image(s) uploading process in the micro analyze technique.
+   */
+
+  var $filesBox = $('.box'),
+      $imageForm = $('.scb_ab_s_image_form'),
+      $fileInput = $imageForm.find('input[type="file"]'),
+      $label = $imageForm.find('label[for="id_file"]'),
+      $fileInput = $imageForm.find( 'input[type="file"]'),
+      droppedFiles = false,
+      // Function changing label during uploading process
+      showFiles = function(files) {
+          $label.text((files.length > 1 ? ($fileInput.attr('data-plural-caption') || '')
+                .replace('{}', files.length) : files[0].name + " is ") + "uploading ...");
+      };
+  // New event handler for the 'usual' file uploading (not drag&drop)
+  $fileInput.on('change', function(e) {
+      showFiles(e.target.files);
+      $imageForm.trigger('submit');
+  });
+  // Event handler for drag&drop uploading workflow
+  $filesBox.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
   })
+  .on('dragover dragenter', function () {
+    $filesBox.addClass('is-dragover');
+  })
+  .on('dragleave dragend drop', function () {
+    $filesBox.removeClass('is-dragover');
+  })
+  .on('drop', function (e) {
+      droppedFiles = e.originalEvent.dataTransfer.files;
+      showFiles(droppedFiles);
+      $imageForm.trigger('submit');
+  });
+  // Handler for the form submitting process.
+  $imageForm.on('submit', function(e) {
+      if ($imageForm.hasClass('is-uploading')) return false;
+
+      $imageForm.addClass('is-uploading');
+
+      e.preventDefault();
+      console.log('FILES IS SUBMITTING');
+
+      var ajaxData = new FormData($imageForm.get(0));
+
+      var parameters = {'upload': 'UPLOAD', 'objective': '20x'};
+      parameters['protocol'] = $('.scb_ab_f_sample_name').text();
+      parameters['sample_prep'] = $('.scb_ab_f_treatment_text').text();
+      parameters['mapping_pk'] = $('.scb_ab_f_save_image').data('pk');
+      parameters['filter_group_id'] = $('.scb_ab_f_save_image').data('filter_group_id');
+      $.each(parameters, function(key, value){
+          ajaxData.append(key, value)
+      });
+
+      if (droppedFiles) {
+        $.each(droppedFiles, function(i, file) {
+          ajaxData.append($fileInput.attr('name'), file);
+        });
+      }
+
+      $.ajax({
+          url: $imageForm.attr('action'),
+          type: $imageForm.attr('method'),
+          data: ajaxData,
+          dataType: 'html',
+          cache: false,
+          contentType: false,
+          processData: false,
+          complete: function() {
+            $imageForm.removeClass('is-uploading');
+          },
+          success: function(data, status) {
+            console.log("File is saved: ", status);
+            location.reload();
+          },
+          error: function(xhr, description, error) {
+            console.log("File cannot be upload", xhr, description, error);
+          }
+      });
+  });
+
+
 });

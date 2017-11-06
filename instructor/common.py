@@ -4,7 +4,6 @@ from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.forms.models import modelformset_factory
 from django.forms.models import modelform_factory
-from django.views.decorators.http import require_http_methods
 
 from instructor import models
 from instructor import compiler
@@ -14,6 +13,7 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied, FieldError
+from django.utils.safestring import mark_safe
 import backend.models
 import json
 import re
@@ -514,7 +514,7 @@ def recreate_experimental_setup(assignment):
 def find_next_view(assignment, technique):
     """ Page to go to on 'continue' """
     next_view = 'common_select_technique'
-    if assignment.has_wb:
+    if assignment.has_wb and technique == 'has_wb':
         next_view = 'western_blot_lysate_type'
     elif assignment.has_micro and technique == 'has_micro':
         next_view = 'microscopy_sample_prep'
@@ -1150,10 +1150,12 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
     error = ''
     if models.WesternBlot.objects.filter(assignment=assignment).exists():
 
-        message = "You have entered non-numerical values, " \
-                  "including negative numbers, text inputs and/or symbols, " \
-                  "in the band size input boxes. The band size input " \
-                  "boxes must only contain numerical values."
+        message = (
+            "You have entered non-numerical values, "
+            "including negative numbers, text inputs and/or symbols, "
+            "in the band size input boxes. The band size input "
+            "boxes must only contain numerical values."
+       )
 
         weights_by_type = ['wc_weight', 'nuc_weight', 'cyto_weight']
         antibodies_updated = True
@@ -1438,7 +1440,13 @@ def microscopy_analyze(request):
     ImageForm = modelform_factory(
         models.MicroscopyImage,
         fields=['file', 'objective'],
-        widgets={'file': forms.ClearableFileInput(attrs={'multiple': True})}
+        widgets={'file': forms.ClearableFileInput(
+            attrs={'multiple': True, 'class': 'box_file', 'data-plural-caption': '{} files are '},
+        )},
+        labels={'file': mark_safe(
+            'To <b>upload</b> new image(s) <strong>choose a file(s)</strong>'
+            '<span class="box_dragndrop"> or drag and drop it to the window below</span>.'
+        )},
     )
     image_form = ImageForm()
     variables = {
