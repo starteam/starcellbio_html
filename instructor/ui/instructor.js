@@ -408,6 +408,19 @@ $(function() {
       window.location.reload();
     });
   });
+
+  function hrefReloadUrl() {
+      var url = location.href,
+          getRequest = (
+              "?mapping=" + $('.scb_ab_f_save_image').data('pk')
+              + "&protocol=" + $('.scb_ab_f_sample_name').text()
+              + "&sample_prep=" + $('.scb_ab_f_treatment_text').text()
+              + "&filter_group_id=" + $('.scb_ab_f_save_image').data('filter_group_id')
+          );
+      console.log("Ref URL: ", url);
+      return url.indexOf("mapping") > -1 ? url : url + getRequest;
+  };
+
   $('.scb_ab_f_remove_image').click(function () {
     var data = {};
     data['image_pk_list'] = _.map($('.scb_ab_s_image_selected'), function (element) {
@@ -419,7 +432,8 @@ $(function() {
         type: "POST",
         data: data
       }).then(function () {
-        location.reload();
+        // console.log(location.href)
+        location.href = hrefReloadUrl();
       });
     }
   });
@@ -428,9 +442,10 @@ $(function() {
     var data = {};
     data['mapping_pk'] = $(this).data('pk');
     data['filter_group_id'] = $(this).data('filter_group_id');
-    data['image_pk_list'] = _.map($('.scb_ab_s_image_selected'), function (element) {
+    data['image_pk_list'] = _.map($('.scb_ab_s_small_image_selected'), function (element) {
       return $(element).attr('id').match(/(\d+)$/)[0];
     });
+    console.log(data['image_pk_list'], data['mapping_pk'], data['filter_group_id'])
     if (data['image_pk_list'].length > 0) {
       $.ajax({
         url: '/ab/assignments/select_images/',
@@ -467,8 +482,12 @@ $(function() {
     }else{
       $(this).addClass("scb_ab_s_image_selected");
     }
-
   });
+
+  $('.scb_ab_f_select_image').on('dragstart', function (e) {
+      e.originalEvent.dataTransfer.setData("text", dragStartSelection(e));
+  });
+
 
   /* Facs Histogram setup view */
   if ($("#previewXAxis").length){
@@ -631,6 +650,7 @@ $(function() {
   });
 
   /* Open Image Dialog in Microscopy Analyze page */
+
   $(".open_upload_window_btn").click(function(){
     /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
@@ -646,18 +666,38 @@ $(function() {
       'pk': instance_pk,
       'filter_group_id': filter_group_id
     });
-    addImageFormHandler();
-
+    addSelectedImages();
   });
+
+  /*Add already selected images to the selected box*/
+  // $(window).unload(addSelectedImages());
+  $(function(){
+   addSelectedImages();
+  });
+  function addSelectedImages() {
+      var choosenImages = $(".scb_ab_s_sample_image_list img");
+      if (choosenImages.length > 0) {
+          $.each(choosenImages, function (_, image) {
+            var imageUrlList = image.src.split('/'),
+                imageName = imageUrlList[imageUrlList.length - 1],
+                choosenImage = $(".scb_ab_s_image_bank img[src$='{}']".replace("{}", imageName));
+            choosenImage.addClass('scb_ab_s_small_image_selected');
+            $(".scb_ab_s_select_box").append(choosenImage);
+            console.log("IMAGE: ", imageName)
+          });
+      }
+      if ($(".scb_ab_s_analyze_dialog").css('visibility') == 'visible') {
+          $(".scb_ab_f_select_image").css('visibility', 'visible');
+      }
+  };
+
   /* If Microscopy Analyze page */
   if($(".scb_ab_s_image_form").length){
     /* Event: Close select image dialog */
     $('.scb_ab_f_close_dialog').click(function () {
       $('.scb_ab_s_analyze_dialog').css('visibility', 'hidden');
+      $('.scb_ab_f_select_image').css('visibility', 'hidden');
     });
-    if(dialog_open){
-      addImageFormHandler();
-    }
   }
 
   /* COPY TO button */
@@ -757,7 +797,7 @@ $(function() {
   });
 
   /*
-  Drag&Drop functionality for the image(s) uploading process in the micro analyze technique.
+    Drag&Drop functionality for the image(s) uploading process in the micro analyze technique.
    */
 
   var $filesBox = $('.box'),
@@ -765,11 +805,17 @@ $(function() {
       $fileInput = $imageForm.find('input[type="file"]'),
       $label = $imageForm.find('label[for="id_file"]'),
       $fileInput = $imageForm.find( 'input[type="file"]'),
+      $filesSelect = $(".scb_ab_s_select_box"),
       droppedFiles = false,
+      selectedFiles = false,
       // Function changing label during uploading process
-      showFiles = function(files) {
-          $label.text((files.length > 1 ? ($fileInput.attr('data-plural-caption') || '')
+      showFiles = function(files, html) {
+          if (html) {
+            $label.html(html);
+          } else {
+            $label.text((files.length > 1 ? ($fileInput.attr('data-plural-caption') || '')
                 .replace('{}', files.length) : files[0].name + " is ") + "uploading ...");
+          }
       };
   // New event handler for the 'usual' file uploading (not drag&drop)
   $fileInput.on('change', function(e) {
@@ -777,7 +823,7 @@ $(function() {
       $imageForm.trigger('submit');
   });
   // Event handler for drag&drop uploading workflow
-  $filesBox.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+  $filesBox.on('dragend dragover dragenter dragleave drop', function(e) {
     e.preventDefault();
     e.stopPropagation();
   })
@@ -788,10 +834,68 @@ $(function() {
     $filesBox.removeClass('is-dragover');
   })
   .on('drop', function (e) {
-      droppedFiles = e.originalEvent.dataTransfer.files;
-      showFiles(droppedFiles);
-      $imageForm.trigger('submit');
+      if (e.originalEvent.dataTransfer.files.length > 0) {
+          droppedFiles = e.originalEvent.dataTransfer.files;
+          showFiles(droppedFiles);
+          $imageForm.trigger('submit');
+      } else {
+        dragSelected(e, false)
+      }
   });
+
+  function moveSelected(id, direction) {
+      var selectedImage = $("#" + id);
+      if (direction && !selectedImage.hasClass('scb_ab_s_small_image_selected')) {
+          selectedImage.addClass('scb_ab_s_small_image_selected');
+          $(".scb_ab_s_select_box").append(selectedImage);
+      } else if (!direction && selectedImage.hasClass('scb_ab_s_small_image_selected')) {
+          selectedImage.removeClass('scb_ab_s_small_image_selected');
+          $(".box").append(selectedImage);
+      }
+  }
+
+  function dragSelected(event, direction=true) {
+      var selectedId = event.originalEvent.dataTransfer.getData("text");
+      if (selectedId.indexOf(":") > -1) {
+          $.each(selectedId.split(':'), function (_, id) {
+              moveSelected(id, direction);
+          });
+      } else {
+          moveSelected(selectedId, direction);
+      }
+      unselectImages();
+  }
+
+  //Event handler for drag&drop selection workflow
+
+  function dragStartSelection(event) {
+      var selectedImages = $(".scb_ab_s_image_selected"),
+          imageIdList = [];
+      if (selectedImages.length > 0) {
+          selectedImages.each(function () {
+              imageIdList.push($(this).attr("id"))
+          });
+          return imageIdList.join(":")
+      } else {
+          return event.target.id
+      }
+  }
+
+  $filesSelect.on('drag dragend dragover dragenter dragleave drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  })
+  .on('dragstart', function (e) {
+      e.originalEvent.dataTransfer.setData("text", dragStartSelection(e));
+  })
+  .on('dragover dragenter', function () {
+    $filesSelect.addClass('is-dragover');
+  })
+  .on('dragleave dragend drop', function () {
+    $filesSelect.removeClass('is-dragover');
+  })
+  .on('drop', dragSelected);
+
   // Handler for the form submitting process.
   $imageForm.on('submit', function(e) {
       if ($imageForm.hasClass('is-uploading')) return false;
@@ -808,6 +912,7 @@ $(function() {
       parameters['sample_prep'] = $('.scb_ab_f_treatment_text').text();
       parameters['mapping_pk'] = $('.scb_ab_f_save_image').data('pk');
       parameters['filter_group_id'] = $('.scb_ab_f_save_image').data('filter_group_id');
+      console.log("Prameters: ", parameters);
       $.each(parameters, function(key, value){
           ajaxData.append(key, value)
       });
@@ -831,13 +936,89 @@ $(function() {
           },
           success: function(data, status) {
             console.log("File is saved: ", status);
-            location.reload();
+            location.href = hrefReloadUrl();
+            console.log("WE ARE HERE!!!")
           },
           error: function(xhr, description, error) {
             console.log("File cannot be upload", xhr, description, error);
+            showFiles(null, "File <span style='color:red'>cannot be uploaded</span>, please drag again or <strong>choose a file(s)</strong>")
           }
-      });
+      }).then(addSelectedImages());
   });
 
+  /*
+  * Cursor rectangular selector
+  */
+
+  function unselectImages() {
+      $(".scb_ab_s_image_selected").each(function () {
+          $(this).removeClass('scb_ab_s_image_selected')
+      });
+  }
+
+  var x1, x2, y1, y2;
+  var cursor_selector = $("#cursor_selector"),
+      imageLibrary = $(".scb_ab_s_canvas_library"),
+      selectField = false;
+
+  function reCalc() {
+      var x3 = Math.min(x1,x2),
+          x4 = Math.max(x1,x2),
+          y3 = Math.min(y1,y2),
+          y4 = Math.max(y1,y2);
+      cursor_selector.css('left', x3)
+                     .css('top', y3)
+                     .css('width', x4 - x3)
+                     .css('height', y4 - y3);
+  }
+
+  imageLibrary.mousedown(function(e) {
+      if (e.target.tagName != 'IMG') {
+          selectField = 1;
+          x1 = e.pageX;
+          y1 = e.pageY;
+      }
+  });
+  imageLibrary.mousemove(function(e) {
+      if (selectField) {
+          unselectImages();
+          x2 = e.pageX;
+          y2 = e.pageY;
+          reCalc();
+          cursor_selector.show();
+      }
+  });
+  imageLibrary.mouseup(function(e) {
+      cursor_selector.hide();
+      selectField = 0;
+      markImages();
+  });
+
+  // Function matching if image is selected
+  function matchImage(xImage, yImage) {
+      var imageX1 = Math.min(x1,x2),
+          imageX2 = Math.max(x1,x2),
+          imageY1 = Math.min(y1,y2),
+          imageY2 = Math.max(y1,y2);
+
+      if ((xImage > imageX1) && (xImage < imageX2)) {
+          if ((yImage > imageY1) && (yImage < imageY2)) {
+              return true
+          }
+      };
+      return false
+  }
+
+  // Function marking images as selected which is covered by the selector
+  function markImages() {
+      $(".scb_ab_f_select_image").each(function () {
+          var pos = $(this).offset(),
+              xImage = pos.left + $(this).width() / 2,
+              yImage = pos.top + $(this).height() / 2;
+          if (matchImage(xImage, yImage)) {
+              $(this).addClass('scb_ab_s_image_selected')
+          }
+      })
+  }
 
 });

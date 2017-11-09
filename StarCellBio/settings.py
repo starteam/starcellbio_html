@@ -291,5 +291,9 @@ LOGGING = {
             'level': 'DEBUG',
             'handlers': ['console', 'syslog'],
         },
+        'instructor.common': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'syslog'],
+        },
     },
 }

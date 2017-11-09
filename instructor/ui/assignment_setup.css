@@ -560,8 +560,11 @@ input[type="checkbox"].disabled {
     left: 300px;
 
 }
-.scb_ab_s_analyze_dialog>div{
-    margin: 12% auto auto 0;
+
+@media (min-width: 1300px) {
+    .scb_ab_s_analyze_dialog>div{
+        margin: 12% auto auto 0;
+    }
 }
 
 .scb_ab_s_copy_dialog{
@@ -718,20 +721,20 @@ input[type="checkbox"].disabled {
 .scb_ab_s_canvas_library{
     margin: 30px 30px 0;
     text-align: center;
-    height: 350px;
+    height: 500px;
     border: 1px solid lightgrey;
     overflow: scroll;
     box-shadow: inset 2px 2px 5px grey;
 }
 .scb_ab_s_save_btn_position{
-    right: 30px;
+    left: 30px;
     position:absolute;
-    bottom: 30px;
+    bottom: 10px;
 }
 .scb_ab_s_delete_btn_position{
-    right: 170px;
+    right: 30px;
     position:absolute;
-    bottom: 30px;
+    bottom: 10px;
 }
 .scb_ab_s_histogram_selected{
     border: 1px solid indianred;
@@ -796,8 +799,8 @@ label.custom-dropdown {
     box-shadow: 2px 2px 5px #27956c;
     opacity: 0.5;
 }
-.scb_ab_s_library_item_wrapper>img{
-    width: 200px;
+img.scb_ab_s_library_item_wrapper{
+    width: 100px;
 }
 .scb_ab_s_image_form{
     margin-left: 30px;
@@ -868,10 +871,64 @@ input#id_objective{
 }
 
 .scb_ab_s_upload_instruction{
-    margin: 20px 0px 0 30px;
+    right: 180px;
+    position: absolute;
+    margin: 10px 0 0 30px;
     font-family: 'sourcesanspro-semibold';
     color: #316f94;
     font-weight: bold;
+}
+
+.scb_image_menu_title {
+    position: absolute;
+    margin: 10px 0;
+    font-size: medium;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+    font-style: oblique;
+}
+
+.scb_assigment_title {
+    left: 30px;
+}
+
+.scb_image_bank_title {
+    left: 50%;
+}
+
+.scb_ab_f_select_image {
+    visibility: hidden;
+}
+
+img.scb_ab_s_small_image_selected {
+    width: 100px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.scb_ab_s_select_box {
+    margin-left: inherit;
+    text-align: center;
+    width: 180px;
+    height: inherit;
+    border-right: 1px solid lightgrey;
+    overflow: scroll;
+    box-shadow: inset 2px 2px 5px grey;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+}
+
+.scb_ab_s_image_bank {
+    margin-right: inherit;
+    text-align: center;
+    width: 550px;
+    height: inherit;
+    border-right: 1px solid lightgrey;
+    overflow: scroll;
+    box-shadow: inset 2px 2px 5px grey;
+    display: inline-block;
+    position: absolute;
+    right: 0;
 }
 
 .box_file,
@@ -894,6 +951,10 @@ label[for="id_file"] strong {
   display: inline;
 }
 
-.box.is-dragover {
-  background-color: grey;
+.cursor-selector {
+    border: 1px dotted #000;
+    position: fixed;
+    display: none;
+    z-index: 5000;
 }
+

@@ -24,6 +24,8 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 from django.template.defaulttags import register
 
+import logging; log = logging.getLogger(__name__)
+
 page_order = (
     'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
     'techniques', 'wb_lysate_type', 'wb_antibody', 'wb_band_size',
@@ -1382,9 +1384,18 @@ def microscopy_analyze(request):
     filter_group_id = ""
     dialog_open = False
 
-    if request.method == "POST" and assignment.access == 'private':
+    if request.method == 'GET':
+        log.info("Mapping in GET")
+        mapping_pk = request.GET.get("mapping", "")
+        chosen_protocol = request.GET.get('protocol', '')
+        chosen_sampleprep = request.GET.get('sample_prep', '')
+        filter_group_id = request.GET.get('filter_group_id', '')
+
+    if request.method == 'POST' and assignment.access == 'private':
+        log.info("Request.POST: {}".format(request.POST))
         if 'upload' in request.POST:
             objective = request.POST.get('objective')
+            log.info("Request FILES: {}".format(request.FILES))
             for uploaded_file in request.FILES.getlist('file'):
                 new_image, _ = models.MicroscopyImage.objects.get_or_create(
                     file=uploaded_file,
@@ -1394,6 +1405,7 @@ def microscopy_analyze(request):
             # need few variables to keep the dialog open
             dialog_open = True
             if 'mapping_pk' in request.POST:
+                log.info("MAPPING_PK is: {}".format(request.POST.get('mapping_pk')))
                 chosen_protocol = request.POST.get('protocol')
                 chosen_sampleprep = request.POST.get('sample_prep')
                 mapping_pk = request.POST.get('mapping_pk')
@@ -1445,7 +1457,7 @@ def microscopy_analyze(request):
         )},
         labels={'file': mark_safe(
             'To <b>upload</b> new image(s) <strong>choose a file(s)</strong>'
-            '<span class="box_dragndrop"> or drag and drop it to the window below</span>.'
+            '<span class="box_dragndrop"> or drag and drop it to the Image Bank</span>.'
         )},
     )
     image_form = ImageForm()
@@ -1458,6 +1470,8 @@ def microscopy_analyze(request):
     }
     # need to decide to finish the assignment or to move on to FACS
     save_and_continue_button = 'SAVE AND CONTINUE'
+
+    log.info('mapping_pk: {}'.format(mapping_pk))
 
     return render_to_response(
         'instructor/micro_analyze.html',
@@ -1820,12 +1834,14 @@ def select_images(request):
             pk=mapping_id,
             sample_prep__assignment__pk=pk
         )
+        instance.images.clear()
         for image_pk in image_pk_list:
             selected_image = get_object_or_404(
                 models.MicroscopyImage,
                 pk=image_pk,
                 assignment__pk=pk
             )
+            ("Image with pk: {} is selected".format(image_pk))
 
             instance.images.add(selected_image)
         instance.save()
