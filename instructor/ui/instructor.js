@@ -409,15 +409,15 @@ $(function() {
     });
   });
 
+  /* Create new hrel URL with additionl GET prameters to reopen image chosing window */
   function hrefReloadUrl() {
       var url = location.href,
           getRequest = (
               "?mapping=" + $('.scb_ab_f_save_image').data('pk')
               + "&protocol=" + $('.scb_ab_f_sample_name').text()
               + "&sample_prep=" + $('.scb_ab_f_treatment_text').text()
-              + "&filter_group_id=" + $('.scb_ab_f_save_image').data('filter_group_id')
+              + "&group_id=" + $('.scb_ab_f_save_image').data('group_id')
           );
-      console.log("Ref URL: ", url);
       return url.indexOf("mapping") > -1 ? url : url + getRequest;
   };
 
@@ -432,37 +432,54 @@ $(function() {
         type: "POST",
         data: data
       }).then(function () {
-        // console.log(location.href)
-        location.href = hrefReloadUrl();
+        location.href = hrefReloadUrl(); // Reload page without closing image chosing window
       });
     }
   });
+
   /* Save selected list of images to an ImageMapping object*/
   $('.scb_ab_f_save_image').click(function () {
-    var data = {};
-    data['mapping_pk'] = $(this).data('pk');
-    data['filter_group_id'] = $(this).data('filter_group_id');
-    data['image_pk_list'] = _.map($('.scb_ab_s_small_image_selected'), function (element) {
-      return $(element).attr('id').match(/(\d+)$/)[0];
-    });
-    console.log(data['image_pk_list'], data['mapping_pk'], data['filter_group_id'])
-    if (data['image_pk_list'].length > 0) {
-      $.ajax({
-        url: '/ab/assignments/select_images/',
-        type: "POST",
-        data: data
-      }).then(function () {
-        window.location = '/ab/assignments/microscopy_analyze/';
-      });
-    }
+      var data = {},
+          group_id = $(this).data('group_id');
+      data['mapping_pk'] = $(this).data('pk');
+      // If group_id == true all filter's images are collected before saving
+      if (group_id) {
+          var filterImages = $(".scb_f_image_filter img"),
+              group_images = {};
+          data['group_id'] = group_id;
+          filterImages.each(function () {
+              var filter = $(this).parent('div').attr('class').split('_').pop();
+              group_images[filter] = $(this).attr('id').match(/(\d+)$/)[0];
+
+          });
+          data['group_images'] = JSON.stringify(group_images);
+          $.ajax({
+              url: '/ab/assignments/select_images/',
+              type: "POST",
+              data: data
+          }).then(function () {
+              window.location = '/ab/assignments/microscopy_analyze/';
+          });
+      } else {
+          data['image_pk_list'] = _.map($('.scb_ab_s_small_image_selected'), function (element) {
+              return $(element).attr('id').match(/(\d+)$/)[0];
+          });
+          if (data['image_pk_list'].length > 0) {
+              $.ajax({
+                  url: '/ab/assignments/select_images/',
+                  type: "POST",
+                  data: data
+              }).then(function () {
+                  window.location = '/ab/assignments/microscopy_analyze/';
+              });
+          }
+      };
   });
 
   $(".scb_ab_s_histogram_tab_not_selected").click(function () {
     $(".scb_ab_s_draw_histogram_view").toggle();
     $(".scb_ab_s_select_histogram_view").toggle();
     paper.view.update();
-
-
   });
 
   $('.scb_ab_s_analyze_dialog').draggable({handle: '.scb_ab_s_dialog_title'});
@@ -483,11 +500,6 @@ $(function() {
       $(this).addClass("scb_ab_s_image_selected");
     }
   });
-
-  $('.scb_ab_f_select_image').on('dragstart', function (e) {
-      e.originalEvent.dataTransfer.setData("text", dragStartSelection(e));
-  });
-
 
   /* Facs Histogram setup view */
   if ($("#previewXAxis").length){
@@ -654,37 +666,87 @@ $(function() {
   $(".open_upload_window_btn").click(function(){
     /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
-    var filter_group_id = $(this).data('filter_group_id');
     /* Get name of the sample from the row itself */
     var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
     $('.scb_ab_f_sample_name').text(sample_name);
     var instance_pk = row_id.match(/(\d+)$/)[0];
-    var sample_treatment  = $(this).data('sample_treatment');
+    var sample_treatment  = $(this).data('sample_treatment'),
+        group_id = $(this).data('group_id') ? $(this).data('group_id'): null;
+
     $('.scb_ab_f_treatment_text').text(sample_treatment);
     $('.scb_ab_s_analyze_dialog').css('visibility', 'visible');
     $('.scb_ab_f_save_image').data({
-      'pk': instance_pk,
-      'filter_group_id': filter_group_id
+        'pk': instance_pk,
+        'group_id': group_id,
     });
-    addSelectedImages();
+    addSelectedImages(); // Add already saved images to the selected area
   });
 
-  /*Add already selected images to the selected box*/
-  // $(window).unload(addSelectedImages());
   $(function(){
-   addSelectedImages();
+   addSelectedImages(); // Add already saved images to the selected area on the page loading
   });
+
+  /* Remove remove selection from the images and revert all unsaved images to the image bank */
+  function clearSelectedFrame() {
+      var reselectImages = $(".scb_ab_s_small_image_selected");
+      reselectImages.each(function () {
+          $(this).removeClass("scb_ab_s_small_image_selected");
+          $(".scb_ab_s_image_bank").append($(this));
+      });
+  }
+
+  /* Fulfil filter area by chosen image in the Fluorescent image sececting flow*/
+  function fulfilFilter(group_id, chosenImages) {
+      for (var filter in filterMap) {
+          var filterName = filterMap[filter],
+              $filter = $(".scb_f_image_filter_{}".replace('{}', filterName)),
+              filterImage = chosenImages[filterName];
+          $filter.data("filter_group", filter + "-" + group_id);
+          if (filterImage) {
+            shiftImages(filterImage, $filter)
+          } else {
+            $filter.text("{} filter".replace('{}', filterName));
+          }
+          $(".scb_ab_s_select_box").append($filter);
+      }
+  }
+
+  /* Clarify chosen image from the images in the bank and move it to the target element*/
+  function shiftImages(chosenImage, elementToAppend) {
+      var imageUrlList = chosenImage.attr("src").split('/'),
+          imageName = imageUrlList[imageUrlList.length - 1],
+          chosenImages = $(".scb_ab_s_image_bank img[src$='{}']".replace("{}", imageName));
+      chosenImages.addClass('scb_ab_s_small_image_selected');
+      elementToAppend.append(chosenImages);
+  };
+
+
+  var filterMap = ['red', 'blue', 'green', 'merge'];
+
+  /* Add saved images to the selected field on the reopening Upload Image(s) tab */
   function addSelectedImages() {
-      var choosenImages = $(".scb_ab_s_sample_image_list img");
-      if (choosenImages.length > 0) {
-          $.each(choosenImages, function (_, image) {
-            var imageUrlList = image.src.split('/'),
-                imageName = imageUrlList[imageUrlList.length - 1],
-                choosenImage = $(".scb_ab_s_image_bank img[src$='{}']".replace("{}", imageName));
-            choosenImage.addClass('scb_ab_s_small_image_selected');
-            $(".scb_ab_s_select_box").append(choosenImage);
-            console.log("IMAGE: ", imageName)
-          });
+      clearSelectedFrame();
+      var chosenImages = {},
+          group_id = $(".scb_ab_f_save_image").data('group_id'),
+          filtersFrames = $(".scb_f_image_filter");
+      if (group_id) {
+        filtersFrames.css({'visibility': 'visible', 'display': 'inline-block  '});
+        chosenImages = $(".scb_f_set[data-group_id='{}'] img".replace('{}', group_id));
+        $(".scb_f_set[data-group_id='{}'] img".replace('{}', group_id))
+            .each(function(){
+              var filter = filterMap[$('.scb_ab_s_filtered_image_grid').index($(this).parent()) % 4];
+              chosenImages[filter] = $(this)
+            });
+          fulfilFilter(group_id, chosenImages)
+      } else {
+          filtersFrames.hide();
+          chosenImages = $(".scb_ab_s_sample_image_list img");
+
+          if (chosenImages.length > 0) {
+              chosenImages.each(function () {
+                shiftImages($(this), $(".scb_ab_s_select_box"));
+              });
+          }
       }
       if ($(".scb_ab_s_analyze_dialog").css('visibility') == 'visible') {
           $(".scb_ab_f_select_image").css('visibility', 'visible');
@@ -697,6 +759,7 @@ $(function() {
     $('.scb_ab_f_close_dialog').click(function () {
       $('.scb_ab_s_analyze_dialog').css('visibility', 'hidden');
       $('.scb_ab_f_select_image').css('visibility', 'hidden');
+      $('.scb_f_image_filter').css('visibility', 'hidden');
     });
   }
 
@@ -776,7 +839,7 @@ $(function() {
     });
   });
 
-  $("input[id='id_objective']").attr('placeholder', '20x');
+  $("input[id='id_objective']").attr('placeholder', '20x'); // Add default objective to the input field
 
   $("input[id^='tech_has_']").click(function() {
       var technique = $(this).attr('id').replace('tech_', '');
@@ -800,14 +863,13 @@ $(function() {
     Drag&Drop functionality for the image(s) uploading process in the micro analyze technique.
    */
 
-  var $filesBox = $('.box'),
+  var $filesBox = $('.scb_ab_s_image_bank'),
       $imageForm = $('.scb_ab_s_image_form'),
       $fileInput = $imageForm.find('input[type="file"]'),
       $label = $imageForm.find('label[for="id_file"]'),
       $fileInput = $imageForm.find( 'input[type="file"]'),
       $filesSelect = $(".scb_ab_s_select_box"),
       droppedFiles = false,
-      selectedFiles = false,
       // Function changing label during uploading process
       showFiles = function(files, html) {
           if (html) {
@@ -843,30 +905,92 @@ $(function() {
       }
   });
 
-  function moveSelected(id, direction) {
+  /* Moving selected images to the target element*/
+  function moveSelected(id, direction, target) {
       var selectedImage = $("#" + id);
-      if (direction && !selectedImage.hasClass('scb_ab_s_small_image_selected')) {
-          selectedImage.addClass('scb_ab_s_small_image_selected');
-          $(".scb_ab_s_select_box").append(selectedImage);
+      if (direction) {
+          if ($(".scb_ab_f_save_image").data("group_id") && $(target).hasClass('scb_f_image_filter')) {
+              selectedImage.addClass('scb_ab_s_small_image_selected');
+              $(target)
+                  .text("")
+                  .append(selectedImage);
+          } else if (!($(".scb_ab_f_save_image").data("group_id"))) {
+              selectedImage.addClass('scb_ab_s_small_image_selected');
+              $(".scb_ab_s_select_box").append(selectedImage);
+          }
       } else if (!direction && selectedImage.hasClass('scb_ab_s_small_image_selected')) {
           selectedImage.removeClass('scb_ab_s_small_image_selected');
-          $(".box").append(selectedImage);
+          var parent = selectedImage.parent();
+          $(".scb_ab_s_image_bank").append(selectedImage);
+          if (parent.hasClass('scb_f_image_filter')) {
+              var filter = parent.attr('class').split('_').pop();
+              parent.text(filter + ' filter')
+          }
       }
   }
 
+  /* Fluorecent image selecting workflow support automating image saving */
+  function saveSelectedImages(group_id) {
+      var data = {};
+      data['mapping_pk'] = $(this).data('pk');
+      var filterImages = $(".scb_f_image_filter img"),
+          group_images = {};
+      data['group_id'] = group_id;
+      filterImages.each(function () {
+          var filter = $(this).parent('div').attr('class').split('_').pop();
+          group_images[filter] = $(this).attr('id').match(/(\d+)$/)[0];
+
+      });
+      data['group_images'] = JSON.stringify(group_images);
+      $.ajax({
+          url: '/ab/assignments/select_images/',
+          type: "POST",
+          data: data
+      })
+  }
+  /* Fluorecent image selecting workflow support automation Image Set creation */
+  function createNewSet(selectedIds, target) {
+      var selectedIdsList = selectedIds.split(':');
+      moveSelected(selectedIdsList.pop(), true, target);
+      saveSelectedImages($('.scb_ab_f_save_image').data('group_id'));
+      $.each(selectedIdsList, function (_, id) {
+          $.ajax({
+              url: '/ab/assignments/add_new_image_set/',
+              type: "POST",
+              data: {mapping_id: $('.scb_ab_f_save_image').data('pk')}
+          }).then(function (newGroupId) {
+              $(".scb_ab_s_small_image_selected").removeClass("scb_ab_s_small_image_selected");
+              $(target).empty();
+              moveSelected(id, true, target);
+              saveSelectedImages(newGroupId);
+          })
+      });
+      location.reload();
+  }
+
+  /* Dragging selected images between Selected images and Image bank */
   function dragSelected(event, direction=true) {
       var selectedId = event.originalEvent.dataTransfer.getData("text");
       if (selectedId.indexOf(":") > -1) {
-          $.each(selectedId.split(':'), function (_, id) {
-              moveSelected(id, direction);
-          });
+          if ($(".scb_ab_f_save_image").data("group_id") && direction && $(event.target).hasClass('scb_f_image_filter')) {
+              return $(".scb_ab_s_small_image_selected").length ? null : createNewSet(selectedId, event.target);
+          } else {
+              $.each(selectedId.split(':'), function (_, id) {
+                  moveSelected(id, direction, target=event.target);
+              });
+          };
       } else {
-          moveSelected(selectedId, direction);
+          moveSelected(selectedId, direction, target=event.target);
       }
       unselectImages();
   }
 
-  //Event handler for drag&drop selection workflow
+  /* Event handler for drag&drop selection workflow */
+
+  // On draging one image drag all selected images
+  $('.scb_ab_f_select_image').on('dragstart', function (e) {
+      e.originalEvent.dataTransfer.setData("text", dragStartSelection(e));
+  });
 
   function dragStartSelection(event) {
       var selectedImages = $(".scb_ab_s_image_selected"),
@@ -911,8 +1035,7 @@ $(function() {
       parameters['protocol'] = $('.scb_ab_f_sample_name').text();
       parameters['sample_prep'] = $('.scb_ab_f_treatment_text').text();
       parameters['mapping_pk'] = $('.scb_ab_f_save_image').data('pk');
-      parameters['filter_group_id'] = $('.scb_ab_f_save_image').data('filter_group_id');
-      console.log("Prameters: ", parameters);
+      parameters['group_id'] = $('.scb_ab_f_save_image').data('group_id') || '';
       $.each(parameters, function(key, value){
           ajaxData.append(key, value)
       });
@@ -937,7 +1060,6 @@ $(function() {
           success: function(data, status) {
             console.log("File is saved: ", status);
             location.href = hrefReloadUrl();
-            console.log("WE ARE HERE!!!")
           },
           error: function(xhr, description, error) {
             console.log("File cannot be upload", xhr, description, error);
@@ -947,7 +1069,7 @@ $(function() {
   });
 
   /*
-  * Cursor rectangular selector
+     Cursor rectangular selector
   */
 
   function unselectImages() {
@@ -974,14 +1096,14 @@ $(function() {
 
   imageLibrary.mousedown(function(e) {
       if (e.target.tagName != 'IMG') {
+          unselectImages();
           selectField = 1;
-          x1 = e.pageX;
-          y1 = e.pageY;
+          x1 = x2 = e.pageX;
+          y1 = y2 = e.pageY;
       }
   });
   imageLibrary.mousemove(function(e) {
       if (selectField) {
-          unselectImages();
           x2 = e.pageX;
           y2 = e.pageY;
           reCalc();
@@ -1018,7 +1140,8 @@ $(function() {
           if (matchImage(xImage, yImage)) {
               $(this).addClass('scb_ab_s_image_selected')
           }
-      })
+      });
+      x1 = x2 = y1 = y2 = 0
   }
 
 });

@@ -21,20 +21,24 @@
           </div>
         </div>
         <form id="image_form" action="" method="POST" enctype="multipart/form-data" class="scb_ab_s_image_form">
-            {{ image_form.as_table }}
+          {{ image_form.as_table }}
 
             <input id="upload_btn"
                    type="submit"
                    name="upload"
                    class="scb_s_gray_button"
                    value="UPLOAD">
-
         </form>
         <div class="scb_image_menu_title scb_assigment_title">Selected for the Assignment</div>
         <div class="scb_image_menu_title scb_image_bank_title">Images Bank</div>
         <div class="scb_ab_s_canvas_library">
-          <div class="scb_ab_s_select_box"></div>
-          <div class="scb_ab_s_image_bank box">
+          <div class="scb_ab_s_select_box">
+              <div class="scb_f_image_filter scb_f_image_filter_red"></div>
+              <div class="scb_f_image_filter scb_f_image_filter_blue"></div>
+              <div class="scb_f_image_filter scb_f_image_filter_green"></div>
+              <div class="scb_f_image_filter scb_f_image_filter_merge"></div>
+          </div>
+          <div class="scb_ab_s_image_bank noselect">
               {% for image in all_images %}
               <img id="library-{{ image.id }}" src="{{ image.file.url }}"
                    class="scb_ab_s_library_item_wrapper scb_ab_f_select_image"/>
@@ -43,7 +47,7 @@
           <div id="cursor_selector" class="cursor-selector"></div>
         </div>
           <button type="button" class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_image"
-                  data-pk="{{ mapping_pk }}" data-filter_group_id="{{ filter_group_id }}">
+                  data-pk="{{ mapping_pk }}" data-group_id="{{ group_id }}">
               SAVE SELECTION
           </button>
           <div class="scb_ab_s_upload_instruction">* To DELETE please mark image(s) by clicking on it</div>
@@ -120,9 +124,15 @@
                 {% endfor %}
               </div>
               {% for image_set in instance.grouped_images.all %}
-                <div class="scb_ab_s_row" style="display: table-row">
-                  <div class="scb_ab_s_row_offset"></div>
-                  <div class="scb_ab_s_filters_row_name">Set {{ forloop.counter }} :</div>
+                <div class="scb_ab_s_row scb_f_set" style="display: table-row" data-group_id="{{ image_set.id }}">
+{#                  <div class="scb_ab_s_filters_row_name">Set {{ forloop.counter }} :</div>#}
+                  <button type="button" data-group_id="{{ image_set.id }}"
+                      class="open_upload_window_btn scb_s_gray_button scb_ab_s_filters_row_name"
+                      data-row_id="row-{{ instance.id }}"
+                      data-sample_treatment="{{ analysis }}, {{ condition }}"
+                      data-group_id="{{ image_set.id }}">
+                      Set {{ forloop.counter }}/add images
+                  </button>
                   {% for filter in filters %}
                     <div class="scb_ab_s_filtered_image_grid">
                       {% with image_field=filter|add:'_filter_image' %}
@@ -135,11 +145,11 @@
                                       data-group_id="{{ image_set.id }}" aria-label="Remove Image">×</span>
                             </div>
                             <img src="{{ filter_image.file.url }}" class="scb_ab_s_small_image"/>
-                          {% else %}
-                            <button type="button" data-filter_group_id="{{ filter }}-{{ image_set.id }}"
-                                    class="open_upload_window_btn scb_s_gray_button scb_ab_s_plus_button"
-                                    data-row_id="row-{{ instance.id }}"
-                                    data-sample_treatment="{{ analysis }}, {{ condition }}">&#43;</button>
+{#                          {% else %}#}
+{#                            <button type="button" data-filter_group_id="{{ filter }}-{{ image_set.id }}"#}
+{#                                    class="open_upload_window_btn scb_s_gray_button scb_ab_s_plus_button"#}
+{#                                    data-row_id="row-{{ instance.id }}"#}
+{#                                    data-sample_treatment="{{ analysis }}, {{ condition }}">&#43;</button>#}
                           {% endif %}
                         {% endwith %}
                       {% endwith %}
@@ -186,9 +196,6 @@
               <button type="button" class="scb_s_gray_button open_upload_window_btn"
                       data-row_id="row-{{ instance.id }}"
                       data-sample_treatment="{{ analysis }}, {{ condition }}"
-                      {% if instance.images.count > 0 %}
-                          data-instance-images="{{ instance }}"
-                      {% endif %}
               >
                 ADD IMAGE(S)
               </button>

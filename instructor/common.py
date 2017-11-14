@@ -4,7 +4,6 @@ from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.forms.models import modelformset_factory
 from django.forms.models import modelform_factory
-
 from instructor import models
 from instructor import compiler
 from django.contrib.auth.models import User
@@ -24,7 +23,6 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 from django.template.defaulttags import register
 
-import logging; log = logging.getLogger(__name__)
 
 page_order = (
     'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
@@ -537,10 +535,7 @@ def select_technique(request):
         technique = json.loads(request.body).get('technique')
         setattr(assignment, technique, not getattr(assignment, technique))
         if assignment.has_wb:
-            if (
-                        page_order.index(assignment.last_page_name) <=
-                        page_number
-            ):
+            if (page_order.index(assignment.last_page_name) <= page_number):
                 assignment.last_page_name = 'wb_lysate_type'
         assignment.save()
         return HttpResponse(reverse(find_next_view(assignment, technique)), content_type='text')
@@ -1381,21 +1376,18 @@ def microscopy_analyze(request):
     chosen_sampleprep = ""
     chosen_protocol = ""
     mapping_pk = ""
-    filter_group_id = ""
+    group_id = ""
     dialog_open = False
 
     if request.method == 'GET':
-        log.info("Mapping in GET")
         mapping_pk = request.GET.get("mapping", "")
         chosen_protocol = request.GET.get('protocol', '')
         chosen_sampleprep = request.GET.get('sample_prep', '')
-        filter_group_id = request.GET.get('filter_group_id', '')
+        group_id = request.GET.get('group_id', '')
 
     if request.method == 'POST' and assignment.access == 'private':
-        log.info("Request.POST: {}".format(request.POST))
         if 'upload' in request.POST:
             objective = request.POST.get('objective')
-            log.info("Request FILES: {}".format(request.FILES))
             for uploaded_file in request.FILES.getlist('file'):
                 new_image, _ = models.MicroscopyImage.objects.get_or_create(
                     file=uploaded_file,
@@ -1405,11 +1397,10 @@ def microscopy_analyze(request):
             # need few variables to keep the dialog open
             dialog_open = True
             if 'mapping_pk' in request.POST:
-                log.info("MAPPING_PK is: {}".format(request.POST.get('mapping_pk')))
                 chosen_protocol = request.POST.get('protocol')
                 chosen_sampleprep = request.POST.get('sample_prep')
                 mapping_pk = request.POST.get('mapping_pk')
-                filter_group_id = request.POST.get('filter_group_id')
+                group_id = request.POST.get('group_id')
 
         else:  # then 'save' or 'continue' in request.POST
             if 'continue' in request.POST:
@@ -1471,8 +1462,6 @@ def microscopy_analyze(request):
     # need to decide to finish the assignment or to move on to FACS
     save_and_continue_button = 'SAVE AND CONTINUE'
 
-    log.info('mapping_pk: {}'.format(mapping_pk))
-
     return render_to_response(
         'instructor/micro_analyze.html',
         {
@@ -1484,7 +1473,7 @@ def microscopy_analyze(request):
             'protocol_name': chosen_protocol,
             'sample_prep_name': chosen_sampleprep,
             'mapping_pk': mapping_pk,
-            'filter_group_id': filter_group_id,
+            'group_id': group_id,
             'image_groups': grouped_images,
             'variables': variables,
             'save_and_continue': save_and_continue_button,
@@ -1798,35 +1787,34 @@ def delete_images(request):
         selected_image.delete()
     return HttpResponse()
 
-
 @assignment_selected
 @check_assignment_owner
 @login_required
 def select_images(request):
     pk = request.session['assignment_id']
     mapping_id = request.POST.get('mapping_pk')
-    filter_group_id = request.POST.get('filter_group_id')
+    group_id = request.POST.get('group_id')
     image_pk_list = request.POST.getlist('image_pk_list[]')
 
-    if filter_group_id:
-        filter_group_id = filter_group_id.split('-')
-        filter_name = filter_group_id[0]
-        group_id = filter_group_id[1]
-
-        if filter_name not in filters:
-            raise FieldError
+    if group_id:
+        images_selected = json.loads(request.POST.get('group_images'))
         image_group = get_object_or_404(
             models.MicroscopyGroupedImages,
             id=group_id,
             image_mapping__sample_prep__assignment__pk=pk
         )
-        selected_image = get_object_or_404(
-            models.MicroscopyImage,
-            pk=image_pk_list[0],
-            assignment__pk=pk
-        )
-        field_name = filter_name + '_filter_image'
-        setattr(image_group, field_name, selected_image)
+        for filter_name in filters:
+            filter_image_id = images_selected.get(filter_name)
+            field_name = filter_name + '_filter_image'
+            if filter_image_id:
+                selected_image = get_object_or_404(
+                    models.MicroscopyImage,
+                    pk=filter_image_id,
+                    assignment__pk=pk
+                )
+                setattr(image_group, field_name, selected_image)
+            else:
+                setattr(image_group, field_name, None)
         image_group.save()
     else:
         instance = get_object_or_404(
@@ -1865,7 +1853,7 @@ def add_image_group(request):
     instance.grouped_images.add(image_group)
     instance.save()
 
-    return HttpResponse()
+    return HttpResponse(image_group.id)
 
 
 @assignment_selected
