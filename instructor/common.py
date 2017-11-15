@@ -1377,6 +1377,7 @@ def microscopy_analyze(request):
     chosen_protocol = ""
     mapping_pk = ""
     group_id = ""
+    form_analysis = ""
     dialog_open = False
 
     if request.method == 'GET':
@@ -1384,6 +1385,7 @@ def microscopy_analyze(request):
         chosen_protocol = request.GET.get('protocol', '')
         chosen_sampleprep = request.GET.get('sample_prep', '')
         group_id = request.GET.get('group_id', '')
+        form_analysis = request.GET.get('analysis', '')
 
     if request.method == 'POST' and assignment.access == 'private':
         if 'upload' in request.POST:
@@ -1474,6 +1476,7 @@ def microscopy_analyze(request):
             'sample_prep_name': chosen_sampleprep,
             'mapping_pk': mapping_pk,
             'group_id': group_id,
+            'form_analysis': form_analysis,
             'image_groups': grouped_images,
             'variables': variables,
             'save_and_continue': save_and_continue_button,

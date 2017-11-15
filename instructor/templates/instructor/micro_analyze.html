@@ -29,7 +29,7 @@
                    class="scb_s_gray_button"
                    value="UPLOAD">
         </form>
-        <div class="scb_image_menu_title scb_assigment_title">Selected for the Assignment</div>
+        <div class="scb_image_menu_title scb_assigment_title">Selected Images</div>
         <div class="scb_image_menu_title scb_image_bank_title">Images Bank</div>
         <div class="scb_ab_s_canvas_library">
           <div class="scb_ab_s_select_box">
@@ -47,7 +47,7 @@
           <div id="cursor_selector" class="cursor-selector"></div>
         </div>
           <button type="button" class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_image"
-                  data-pk="{{ mapping_pk }}" data-group_id="{{ group_id }}">
+                  data-pk="{{ mapping_pk }}" data-group_id="{{ group_id }}" data-analysis="{{ form_analysis }}">
               SAVE SELECTION
           </button>
           <div class="scb_ab_s_upload_instruction">* To DELETE please mark image(s) by clicking on it</div>
@@ -125,7 +125,6 @@
               </div>
               {% for image_set in instance.grouped_images.all %}
                 <div class="scb_ab_s_row scb_f_set" style="display: table-row" data-group_id="{{ image_set.id }}">
-{#                  <div class="scb_ab_s_filters_row_name">Set {{ forloop.counter }} :</div>#}
                   <button type="button" data-group_id="{{ image_set.id }}"
                       class="open_upload_window_btn scb_s_gray_button scb_ab_s_filters_row_name"
                       data-row_id="row-{{ instance.id }}"
@@ -172,7 +171,7 @@
             {% if instance.images.count > 0 %}
               <div class="scb_ab_s_row">
                 <div class="scb_ab_s_col_width_number"></div>
-                <div class="scb_ab_s_sample_image_list">
+                <div class="scb_ab_s_sample_image_list" data-analysis="{{ analysis }}">
                   {% for image in instance.images.all %}
                     <div class="scb_ab_s_image_wrapper">
                       <div class="scb_ab_s_remove_image_icon_position">

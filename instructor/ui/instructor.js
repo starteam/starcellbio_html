@@ -417,6 +417,7 @@ $(function() {
               + "&protocol=" + $('.scb_ab_f_sample_name').text()
               + "&sample_prep=" + $('.scb_ab_f_treatment_text').text()
               + "&group_id=" + $('.scb_ab_f_save_image').data('group_id')
+              + "&analysis=" + $('.scb_ab_f_save_image').data('analysis')
           );
       return url.indexOf("mapping") > -1 ? url : url + getRequest;
   };
@@ -671,13 +672,15 @@ $(function() {
     $('.scb_ab_f_sample_name').text(sample_name);
     var instance_pk = row_id.match(/(\d+)$/)[0];
     var sample_treatment  = $(this).data('sample_treatment'),
-        group_id = $(this).data('group_id') ? $(this).data('group_id'): null;
+        group_id = $(this).data('group_id') ? $(this).data('group_id'): null,
+        analysis = sample_treatment.split(',')[0];
 
     $('.scb_ab_f_treatment_text').text(sample_treatment);
     $('.scb_ab_s_analyze_dialog').css('visibility', 'visible');
     $('.scb_ab_f_save_image').data({
         'pk': instance_pk,
         'group_id': group_id,
+        'analysis': analysis,
     });
     addSelectedImages(); // Add already saved images to the selected area
   });
@@ -728,6 +731,7 @@ $(function() {
       clearSelectedFrame();
       var chosenImages = {},
           group_id = $(".scb_ab_f_save_image").data('group_id'),
+          analysis = $(".scb_ab_f_save_image").data('analysis'),
           filtersFrames = $(".scb_f_image_filter");
       if (group_id) {
         filtersFrames.css({'visibility': 'visible', 'display': 'inline-block  '});
@@ -740,7 +744,7 @@ $(function() {
           fulfilFilter(group_id, chosenImages)
       } else {
           filtersFrames.hide();
-          chosenImages = $(".scb_ab_s_sample_image_list img");
+          chosenImages = $(".scb_ab_s_sample_image_list[data-analysis='{}'] img".replace('{}', analysis));
 
           if (chosenImages.length > 0) {
               chosenImages.each(function () {
@@ -911,9 +915,14 @@ $(function() {
       if (direction) {
           if ($(".scb_ab_f_save_image").data("group_id") && $(target).hasClass('scb_f_image_filter')) {
               selectedImage.addClass('scb_ab_s_small_image_selected');
+              var parent = selectedImage.parent();
               $(target)
                   .text("")
                   .append(selectedImage);
+              if (parent.hasClass('scb_f_image_filter')) {
+              var filter = parent.attr('class').split('_').pop();
+              parent.text(filter + ' filter')
+          }
           } else if (!($(".scb_ab_f_save_image").data("group_id"))) {
               selectedImage.addClass('scb_ab_s_small_image_selected');
               $(".scb_ab_s_select_box").append(selectedImage);
@@ -1098,14 +1107,14 @@ $(function() {
       if (e.target.tagName != 'IMG') {
           unselectImages();
           selectField = 1;
-          x1 = x2 = e.pageX;
-          y1 = y2 = e.pageY;
+          x1 = x2 = e.clientX;
+          y1 = y2 = e.clientY;
       }
   });
   imageLibrary.mousemove(function(e) {
       if (selectField) {
-          x2 = e.pageX;
-          y2 = e.pageY;
+          x2 = e.clientX;
+          y2 = e.clientY;
           reCalc();
           cursor_selector.show();
       }
@@ -1134,7 +1143,7 @@ $(function() {
   // Function marking images as selected which is covered by the selector
   function markImages() {
       $(".scb_ab_f_select_image").each(function () {
-          var pos = $(this).offset(),
+          var pos = $(this)[0].getBoundingClientRect(),
               xImage = pos.left + $(this).width() / 2,
               yImage = pos.top + $(this).height() / 2;
           if (matchImage(xImage, yImage)) {
