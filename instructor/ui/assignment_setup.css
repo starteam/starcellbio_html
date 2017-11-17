@@ -324,6 +324,14 @@ select:disabled {
 	padding: 7px 3px 5px 33px;
 	color: #010101;
 }
+
+.scb_ab_s_sidebar_technique_link{
+    font-size: 10pt;
+    margin: 0;
+    font-family: 'sourcesanspro-semibold';
+    padding: 7px 3px 5px 33px;
+    color: #010101;
+}
 /* Protein size input */
 div.scb_ab_s_antibody_name{
     text-align: left;
@@ -729,12 +737,12 @@ input[type="checkbox"].disabled {
 .scb_ab_s_save_btn_position{
     left: 30px;
     position:absolute;
-    bottom: 10px;
+    bottom: 5px;
 }
 .scb_ab_s_delete_btn_position{
     right: 30px;
     position:absolute;
-    bottom: 10px;
+    bottom: 5px;
 }
 .scb_ab_s_histogram_selected{
     border: 1px solid indianred;
@@ -800,7 +808,8 @@ label.custom-dropdown {
     opacity: 0.5;
 }
 img.scb_ab_s_library_item_wrapper{
-    width: 100px;
+    max-width: 100px;
+    max-hight: 100px;
 }
 .scb_ab_s_image_form{
     margin-left: 30px;
@@ -881,13 +890,14 @@ input#id_objective{
 
 .scb_image_menu_title {
     position: absolute;
-    margin: 10px 0;
+    margin: 5px 0;
     font-size: medium;
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
     font-style: oblique;
-    background-color: lightgrey;
-    padding: 5px 5px 0 5px;
-    border-radius: 10px;
+    font-weight: bold;
+    color: #316f94;
+    padding: 5px;
+    border: 5px;
 }
 
 .scb_assigment_title {
@@ -904,7 +914,8 @@ input#id_objective{
 
 img.scb_ab_s_small_image_selected {
     float: left;
-    width: 100px;
+    min-width: 100px;
+    min-hight: 100px;
     margin: 10px;
 }
 
@@ -948,6 +959,7 @@ label[for="id_file"] {
 
 label[for="id_file"] strong {
     color: #005fb3;
+    cursor: pointer;
 }
 
 .scb_ab_s_image_form .box_dragndrop {

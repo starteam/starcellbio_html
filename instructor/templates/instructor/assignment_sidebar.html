@@ -73,7 +73,7 @@
         <div role="link" class='scb_ab_s_sidebar_page_link'>
             <div class='scb_ab_s_sidebar_section_subheading' role='heading'><input id="tech_has_wb" name="has_wb" type="checkbox" {% if pages.wb_lysate_type %}checked{% endif %}{% if not pages.techniques %}hidden{% endif %}> Western Blotting </div>
 
-            <div role="link" class='scb_ab_s_sidebar_page_link
+            <div role="link" class='scb_ab_s_sidebar_technique_link
                 {% if page_name == "wb_lysate_type" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
                 <a class="scb_s_assignment_sidebar_link {% if not pages.wb_lysate_type %} disabled {% endif %}"
                     {% if pages.wb_lysate_type %}
@@ -83,7 +83,7 @@
                     Lysate Type
                 </a>
             </div>
-            <div role="link" class='scb_ab_s_sidebar_page_link
+            <div role="link" class='scb_ab_s_sidebar_technique_link
                 {% if page_name == "wb_antibody" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
                 <a class="scb_s_assignment_sidebar_link {% if not pages.wb_antibody %} disabled {% endif %}"
                     {% if pages.wb_antibody %}
@@ -94,7 +94,7 @@
                 </a>
             </div>
 
-            <div role="link" class='scb_ab_s_sidebar_page_link
+            <div role="link" class='scb_ab_s_sidebar_technique_link
                 {% if page_name == "wb_band_size" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
                 <a class="scb_s_assignment_sidebar_link {% if not pages.wb_band_size %} disabled {% endif %}"
                     {% if pages.wb_band_size %}
@@ -104,7 +104,7 @@
                     Band Sizes
                 </a>
             </div>
-            <div role="link" class='scb_ab_s_sidebar_page_link
+            <div role="link" class='scb_ab_s_sidebar_technique_link
                 {% if page_name == "wb_band_intensity" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
                 <a class="scb_s_assignment_sidebar_link {% if not pages.wb_band_intensity %} disabled {% endif %}"
                     {% if pages.wb_band_intensity %}
@@ -119,7 +119,7 @@
             <div class='scb_ab_s_sidebar_section_subheading' role='heading'><input id="tech_has_micro" name="has_micro" type="checkbox" {% if pages.micro_sample_prep %} checked {% endif %}{% if not pages.techniques %}hidden{% endif %}> Microscopy </div>
 
 
-            <div role="link" class='scb_ab_s_sidebar_page_link
+            <div role="link" class='scb_ab_s_sidebar_technique_link
                 {% if page_name == "micro_sample_prep" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
                 <a class="scb_s_assignment_sidebar_link {% if not pages.micro_sample_prep %} disabled {% endif %}"
                     {% if pages.micro_sample_prep %}
@@ -129,7 +129,7 @@
                     Sample Prep
                 </a>
             </div>
-            <div role="link" class='scb_ab_s_sidebar_page_link
+            <div role="link" class='scb_ab_s_sidebar_technique_link
                 {% if page_name == "micro_analyze" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
                 <a class="scb_s_assignment_sidebar_link {% if not pages.micro_analyze %} disabled {% endif %}"
                     {% if pages.micro_analyze %}
@@ -142,7 +142,7 @@
 
             <div class='scb_ab_s_sidebar_section_subheading' role='heading'><input id="tech_has_fc" name="has_fc" type="checkbox" {% if pages.facs_sample_prep %} checked {% endif %} {% if not pages.techniques %}hidden{% endif %}> Flow Cytometry </div>
 
-            <div role="link" class='scb_ab_s_sidebar_page_link
+            <div role="link" class='scb_ab_s_sidebar_technique_link
                 {% if page_name == "facs_sample_prep" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
                 <a class="scb_s_assignment_sidebar_link {% if not pages.facs_sample_prep %} disabled {% endif %}"
                     {% if pages.facs_sample_prep %}
@@ -152,7 +152,7 @@
                     Sample Prep
                 </a>
             </div>
-            <div role="link" class='scb_ab_s_sidebar_page_link
+            <div role="link" class='scb_ab_s_sidebar_technique_link
                 {% if page_name == "facs_setup" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
                 <a class="scb_s_assignment_sidebar_link {% if not pages.facs_setup %} disabled {% endif %}"
                     {% if pages.facs_setup %}
@@ -162,7 +162,7 @@
                     Histogram
                 </a>
             </div>
-            <div role="link" class='scb_ab_s_sidebar_page_link
+            <div role="link" class='scb_ab_s_sidebar_technique_link
                 {% if page_name == "facs_analyze" %}scb_ab_s_sidebar_page_name_selected{% endif %}'>
                 <a class="scb_s_assignment_sidebar_link {% if not pages.facs_analyze %} disabled {% endif %}"
                     {% if pages.facs_analyze %}

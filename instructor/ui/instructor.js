@@ -409,7 +409,7 @@ $(function() {
     });
   });
 
-  /* Create new hrel URL with additionl GET prameters to reopen image chosing window */
+  /* Create new hrel URL with additional GET parameters to reopen image choosing window */
   function hrefReloadUrl() {
       var url = location.href,
           getRequest = (
@@ -433,7 +433,7 @@ $(function() {
         type: "POST",
         data: data
       }).then(function () {
-        location.href = hrefReloadUrl(); // Reload page without closing image chosing window
+        location.href = hrefReloadUrl(); // Reload page without closing image choosing window
       });
     }
   });
@@ -445,10 +445,10 @@ $(function() {
       data['mapping_pk'] = $(this).data('pk');
       // If group_id == true all filter's images are collected before saving
       if (group_id) {
-          var filterImages = $(".scb_f_image_filter img"),
+          var $filterImages = $(".scb_f_image_filter img"),
               group_images = {};
           data['group_id'] = group_id;
-          filterImages.each(function () {
+          $filterImages.each(function () {
               var filter = $(this).parent('div').attr('class').split('_').pop();
               group_images[filter] = $(this).attr('id').match(/(\d+)$/)[0];
 
@@ -698,14 +698,15 @@ $(function() {
       });
   }
 
-  /* Fulfil filter area by chosen image in the Fluorescent image sececting flow*/
-  function fulfilFilter(group_id, chosenImages) {
+  /* Fulfill filter area by chosen image in the Fluorescent image selecting flow*/
+  function fulfilFilter(group_id, $chosenImages) {
       for (var filter in filterMap) {
           var filterName = filterMap[filter],
               $filter = $(".scb_f_image_filter_{}".replace('{}', filterName)),
-              filterImage = chosenImages[filterName];
+              filterImage = $chosenImages[filterName];
           $filter.data("filter_group", filter + "-" + group_id);
           if (filterImage) {
+            $filter.text("");
             shiftImages(filterImage, $filter)
           } else {
             $filter.text("{} filter".replace('{}', filterName));
@@ -718,9 +719,9 @@ $(function() {
   function shiftImages(chosenImage, elementToAppend) {
       var imageUrlList = chosenImage.attr("src").split('/'),
           imageName = imageUrlList[imageUrlList.length - 1],
-          chosenImages = $(".scb_ab_s_image_bank img[src$='{}']".replace("{}", imageName));
-      chosenImages.addClass('scb_ab_s_small_image_selected');
-      elementToAppend.append(chosenImages);
+          $chosenImages = $(".scb_ab_s_image_bank img[src$='{}']".replace("{}", imageName));
+      $chosenImages.addClass('scb_ab_s_small_image_selected');
+      elementToAppend.append($chosenImages);
   };
 
 
@@ -729,30 +730,32 @@ $(function() {
   /* Add saved images to the selected field on the reopening Upload Image(s) tab */
   function addSelectedImages() {
       clearSelectedFrame();
-      var chosenImages = {},
-          group_id = $(".scb_ab_f_save_image").data('group_id'),
+      var group_id = $(".scb_ab_f_save_image").data('group_id'),
           analysis = $(".scb_ab_f_save_image").data('analysis'),
-          filtersFrames = $(".scb_f_image_filter");
+          $filtersFrames = $(".scb_f_image_filter");
       if (group_id) {
-        filtersFrames.css({'visibility': 'visible', 'display': 'inline-block  '});
-        chosenImages = $(".scb_f_set[data-group_id='{}'] img".replace('{}', group_id));
+        $filtersFrames.css({'visibility': 'visible', 'display': 'inline-block  '});
+        var $chosenImages = $(".scb_f_set[data-group_id='{}'] img".replace('{}', group_id));
         $(".scb_f_set[data-group_id='{}'] img".replace('{}', group_id))
             .each(function(){
-              var filter = filterMap[$('.scb_ab_s_filtered_image_grid').index($(this).parent()) % 4];
-              chosenImages[filter] = $(this)
+              var filter = filterMap[
+                  $(".scb_f_set[data-group_id=\'{}\'] .scb_ab_s_filtered_image_grid".replace('{}', group_id))
+                      .index($(this).parent()) % 4
+              ];
+              $chosenImages[filter] = $(this)
             });
-          fulfilFilter(group_id, chosenImages)
+          fulfilFilter(group_id, $chosenImages)
       } else {
-          filtersFrames.hide();
-          chosenImages = $(".scb_ab_s_sample_image_list[data-analysis='{}'] img".replace('{}', analysis));
+          $filtersFrames.hide();
+          $chosenImages = $(".scb_ab_s_sample_image_list[data-analysis='{}'] img".replace('{}', analysis));
 
-          if (chosenImages.length > 0) {
-              chosenImages.each(function () {
+          if ($chosenImages.length > 0) {
+              $chosenImages.each(function () {
                 shiftImages($(this), $(".scb_ab_s_select_box"));
               });
           }
       }
-      if ($(".scb_ab_s_analyze_dialog").css('visibility') == 'visible') {
+      if ($(".scb_ab_s_analyze_dialog").css('visibility') === 'visible') {
           $(".scb_ab_f_select_image").css('visibility', 'visible');
       }
   };
@@ -890,8 +893,7 @@ $(function() {
   });
   // Event handler for drag&drop uploading workflow
   $filesBox.on('dragend dragover dragenter dragleave drop', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    return false;
   })
   .on('dragover dragenter', function () {
     $filesBox.addClass('is-dragover');
@@ -911,26 +913,26 @@ $(function() {
 
   /* Moving selected images to the target element*/
   function moveSelected(id, direction, target) {
-      var selectedImage = $("#" + id);
+      var $selectedImage = $("#" + id);
       if (direction) {
           if ($(".scb_ab_f_save_image").data("group_id") && $(target).hasClass('scb_f_image_filter')) {
-              selectedImage.addClass('scb_ab_s_small_image_selected');
-              var parent = selectedImage.parent();
+              $selectedImage.addClass('scb_ab_s_small_image_selected');
+              var parent = $selectedImage.parent();
               $(target)
                   .text("")
-                  .append(selectedImage);
+                  .append($selectedImage);
               if (parent.hasClass('scb_f_image_filter')) {
               var filter = parent.attr('class').split('_').pop();
               parent.text(filter + ' filter')
           }
           } else if (!($(".scb_ab_f_save_image").data("group_id"))) {
-              selectedImage.addClass('scb_ab_s_small_image_selected');
-              $(".scb_ab_s_select_box").append(selectedImage);
+              $selectedImage.addClass('scb_ab_s_small_image_selected');
+              $(".scb_ab_s_select_box").append($selectedImage);
           }
-      } else if (!direction && selectedImage.hasClass('scb_ab_s_small_image_selected')) {
-          selectedImage.removeClass('scb_ab_s_small_image_selected');
-          var parent = selectedImage.parent();
-          $(".scb_ab_s_image_bank").append(selectedImage);
+      } else if (!direction && $selectedImage.hasClass('scb_ab_s_small_image_selected')) {
+          $selectedImage.removeClass('scb_ab_s_small_image_selected');
+          var parent = $selectedImage.parent();
+          $(".scb_ab_s_image_bank").append($selectedImage);
           if (parent.hasClass('scb_f_image_filter')) {
               var filter = parent.attr('class').split('_').pop();
               parent.text(filter + ' filter')
@@ -942,20 +944,20 @@ $(function() {
   function saveSelectedImages(group_id) {
       var data = {};
       data['mapping_pk'] = $(this).data('pk');
-      var filterImages = $(".scb_f_image_filter img"),
+      var $filterImages = $(".scb_f_image_filter img"),
           group_images = {};
       data['group_id'] = group_id;
-      filterImages.each(function () {
+      $filterImages.each(function () {
           var filter = $(this).parent('div').attr('class').split('_').pop();
           group_images[filter] = $(this).attr('id').match(/(\d+)$/)[0];
 
       });
       data['group_images'] = JSON.stringify(group_images);
-      $.ajax({
+      return $.ajax({
           url: '/ab/assignments/select_images/',
           type: "POST",
           data: data
-      })
+      });
   }
   /* Fluorecent image selecting workflow support automation Image Set creation */
   function createNewSet(selectedIds, target) {
@@ -966,6 +968,7 @@ $(function() {
           $.ajax({
               url: '/ab/assignments/add_new_image_set/',
               type: "POST",
+              async: false,
               data: {mapping_id: $('.scb_ab_f_save_image').data('pk')}
           }).then(function (newGroupId) {
               $(".scb_ab_s_small_image_selected").removeClass("scb_ab_s_small_image_selected");
@@ -979,10 +982,11 @@ $(function() {
 
   /* Dragging selected images between Selected images and Image bank */
   function dragSelected(event, direction=true) {
-      var selectedId = event.originalEvent.dataTransfer.getData("text");
+      var selectedId = event.originalEvent.dataTransfer.getData("text"),
+          alertMsg = "Multiple images cannot be added to the filter if another filter is filled in!";
       if (selectedId.indexOf(":") > -1) {
           if ($(".scb_ab_f_save_image").data("group_id") && direction && $(event.target).hasClass('scb_f_image_filter')) {
-              return $(".scb_ab_s_small_image_selected").length ? null : createNewSet(selectedId, event.target);
+              return $(".scb_ab_s_small_image_selected").length ? $.jqDialog.alert(alertMsg) : createNewSet(selectedId, event.target);
           } else {
               $.each(selectedId.split(':'), function (_, id) {
                   moveSelected(id, direction, target=event.target);
@@ -1002,10 +1006,10 @@ $(function() {
   });
 
   function dragStartSelection(event) {
-      var selectedImages = $(".scb_ab_s_image_selected"),
+      var $selectedImages = $(".scb_ab_s_image_selected"),
           imageIdList = [];
-      if (selectedImages.length > 0) {
-          selectedImages.each(function () {
+      if ($selectedImages.length > 0) {
+          $selectedImages.each(function () {
               imageIdList.push($(this).attr("id"))
           });
           return imageIdList.join(":")
@@ -1015,8 +1019,7 @@ $(function() {
   }
 
   $filesSelect.on('drag dragend dragover dragenter dragleave drop', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    return false;
   })
   .on('dragstart', function (e) {
       e.originalEvent.dataTransfer.setData("text", dragStartSelection(e));
@@ -1031,7 +1034,7 @@ $(function() {
 
   // Handler for the form submitting process.
   $imageForm.on('submit', function(e) {
-      if ($imageForm.hasClass('is-uploading')) return false;
+      if ($imageForm.hasClass('is-uploading')) {return false;};
 
       $imageForm.addClass('is-uploading');
 
@@ -1134,10 +1137,10 @@ $(function() {
 
       if ((xImage > imageX1) && (xImage < imageX2)) {
           if ((yImage > imageY1) && (yImage < imageY2)) {
-              return true
+              return true;
           }
       };
-      return false
+      return false;
   }
 
   // Function marking images as selected which is covered by the selector
@@ -1150,7 +1153,7 @@ $(function() {
               $(this).addClass('scb_ab_s_image_selected')
           }
       });
-      x1 = x2 = y1 = y2 = 0
+      x1 = x2 = y1 = y2 = 0;
   }
 
 });
