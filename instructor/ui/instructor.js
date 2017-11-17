@@ -689,7 +689,7 @@ $(function() {
    addSelectedImages(); // Add already saved images to the selected area on the page loading
   });
 
-  /* Remove remove selection from the images and revert all unsaved images to the image bank */
+  /* Remove selection from the images and revert all unsaved images to the image bank */
   function clearSelectedFrame() {
       var reselectImages = $(".scb_ab_s_small_image_selected");
       reselectImages.each(function () {
