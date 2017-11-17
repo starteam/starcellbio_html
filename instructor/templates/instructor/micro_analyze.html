@@ -129,7 +129,8 @@
                       class="open_upload_window_btn scb_s_gray_button scb_ab_s_filters_row_name"
                       data-row_id="row-{{ instance.id }}"
                       data-sample_treatment="{{ analysis }}, {{ condition }}"
-                      data-group_id="{{ image_set.id }}">
+                      data-group_id="{{ image_set.id }}"
+                      data-strain="{{ forloop.parentloop.counter }}">
                       Set {{ forloop.counter }}/add images
                   </button>
                   {% for filter in filters %}
@@ -190,6 +191,7 @@
               <button type="button" class="scb_s_gray_button open_upload_window_btn"
                       data-row_id="row-{{ instance.id }}"
                       data-sample_treatment="{{ analysis }}, {{ condition }}"
+                      data-strain="{{ forloop.counter }}"
               >
                 ADD IMAGE(S)
               </button>

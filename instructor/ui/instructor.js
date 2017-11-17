@@ -669,7 +669,7 @@ $(function() {
     var row_id = $(this).data('row_id');
     /* Get name of the sample from the row itself */
     var sample_name = $("#" + row_id).text().replace(/(\n *)+/g, "");
-    $('.scb_ab_f_sample_name').text(sample_name);
+    $('.scb_ab_f_sample_name').text($(this).data("strain") + ". " + sample_name);
     var instance_pk = row_id.match(/(\d+)$/)[0];
     var sample_treatment  = $(this).data('sample_treatment'),
         group_id = $(this).data('group_id') ? $(this).data('group_id'): null,
