@@ -423,6 +423,7 @@ $(function() {
   };
 
   $('.scb_ab_f_remove_image').click(function () {
+    localStorage.setItem('scroll', $(window).scrollTop());
     var data = {};
     data['image_pk_list'] = _.map($('.scb_ab_s_image_selected'), function (element) {
       return $(element).attr('id').match(/(\d+)$/)[0];
@@ -440,6 +441,7 @@ $(function() {
 
   /* Save selected list of images to an ImageMapping object*/
   $('.scb_ab_f_save_image').click(function () {
+      localStorage.setItem('scroll', $(window).scrollTop());
       var data = {},
           group_id = $(this).data('group_id');
       data['mapping_pk'] = $(this).data('pk');
@@ -665,6 +667,7 @@ $(function() {
   /* Open Image Dialog in Microscopy Analyze page */
 
   $(".open_upload_window_btn").click(function(){
+    localStorage.setItem('scroll', $(window).scrollTop());
     /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
     /* Get name of the sample from the row itself */
@@ -685,7 +688,9 @@ $(function() {
     addSelectedImages(); // Add already saved images to the selected area
   });
 
+
   $(function(){
+   $(window).scrollTop(localStorage.getItem('scroll'));
    addSelectedImages(); // Add already saved images to the selected area on the page loading
   });
 
@@ -810,6 +815,7 @@ $(function() {
   });
   /* Create new empty image set for this sample */
   $('.add_new_image_set').click(function() {
+    localStorage.setItem('scroll', $(window).scrollTop());
     var $this = $(this),
         id = $this.data('mapping_id');
     $.ajax({
@@ -834,6 +840,7 @@ $(function() {
   });
   /* Remove image */
   $(".scb_ab_f_remove_image").click(function(){
+    localStorage.setItem('scroll', $(window).scrollTop());
     $.ajax({
       url: '/ab/assignments/remove_image/',
       type: "POST",
@@ -849,6 +856,7 @@ $(function() {
   });
 
   $(".remove_image_set").click(function(){
+    localStorage.setItem('scroll', $(window).scrollTop());
     $.ajax({
       url: '/ab/assignments/remove_image_set/',
       type: "POST",
@@ -975,6 +983,7 @@ $(function() {
   }
   /* Fluorecent image selecting workflow support automation Image Set creation */
   function createNewSet(selectedIds, target) {
+      localStorage.setItem('scroll', $(window).scrollTop());
       var selectedIdsList = selectedIds.split(':');
       moveSelected(selectedIdsList.pop(), true, target);
       saveSelectedImages($('.scb_ab_f_save_image').data('group_id'));
