@@ -733,6 +733,7 @@ input[type="checkbox"].disabled {
     border: 1px solid lightgrey;
     overflow: scroll;
     box-shadow: inset 2px 2px 5px grey;
+    cursor: auto;
 }
 .scb_ab_s_save_btn_position{
     left: 30px;
@@ -854,6 +855,7 @@ img.scb_ab_s_library_item_wrapper{
 }
 .scb_ab_s_select_image_div{
     height: 650px;
+    cursor: move;
 }
 input#id_objective{
     width: 30px;

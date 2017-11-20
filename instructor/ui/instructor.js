@@ -485,7 +485,7 @@ $(function() {
     paper.view.update();
   });
 
-  $('.scb_ab_s_analyze_dialog').draggable({handle: '.scb_ab_s_dialog_title'});
+  $('.scb_ab_s_analyze_dialog').draggable({cancel: '.scb_ab_s_canvas_library'});
 
   /* Mark this histogram for selection from the library */
   $('.scb_ab_f_select_histogram').click(function(){

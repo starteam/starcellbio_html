@@ -1450,7 +1450,7 @@ def microscopy_analyze(request):
         )},
         labels={'file': mark_safe(
             'To <b>upload</b> new image(s) <strong>choose a file(s)</strong>'
-            '<span class="box_dragndrop"> or drag and drop it to the Image Bank</span>.'
+            '<span class="box_dragndrop"> or drag and drop it to the Image Bank (image size < 2MB)</span>.'
         )},
     )
     image_form = ImageForm()
