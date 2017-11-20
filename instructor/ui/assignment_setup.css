@@ -691,7 +691,7 @@ input[type="checkbox"].disabled {
     margin-top: -6px;
 }
 .scb_ab_s_chosen_sample_heading{
-    padding: 0 0 20px 30px;
+    padding: 0 0 15px 30px;
     text-align: left;
 }
 
@@ -738,12 +738,12 @@ input[type="checkbox"].disabled {
 .scb_ab_s_save_btn_position{
     left: 30px;
     position:absolute;
-    bottom: 5px;
+    bottom: 0px;
 }
 .scb_ab_s_delete_btn_position{
     right: 30px;
     position:absolute;
-    bottom: 5px;
+    bottom: 0px;
 }
 .scb_ab_s_histogram_selected{
     border: 1px solid indianred;
