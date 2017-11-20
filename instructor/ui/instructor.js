@@ -810,12 +810,26 @@ $(function() {
   });
   /* Create new empty image set for this sample */
   $('.add_new_image_set').click(function() {
+    var $this = $(this),
+        id = $this.data('mapping_id');
     $.ajax({
       url: '/ab/assignments/add_new_image_set/',
       type: "POST",
-      data: {mapping_id: $(this).data('mapping_id')}
-    }).then(function () {
-      window.location = '/ab/assignments/microscopy_analyze/';
+      data: {mapping_id: id}
+    }).then(function (data) {
+      var url = location.href,
+        sample_name = $("#row-" + id).text().replace(/(\n *)+/g, ""),
+        protocol = ($this.data("strain") + ". " + sample_name),
+        treatment = $this.data("sample_treatment"),
+        getRequest = (
+            "?mapping=" + id
+            + "&protocol=" + protocol
+            + "&sample_prep=" + treatment
+            + "&group_id=" + data
+            + "&analysis=" + treatment.split(',')[0]
+        );
+      url += getRequest;
+      window.location = url;
     });
   });
   /* Remove image */
@@ -977,7 +991,7 @@ $(function() {
               saveSelectedImages(newGroupId);
           })
       });
-      location.reload();
+      window.location = '/ab/assignments/microscopy_analyze/';
   }
 
   /* Dragging selected images between Selected images and Image bank */
