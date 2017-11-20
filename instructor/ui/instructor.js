@@ -938,6 +938,9 @@ $(function() {
       var $selectedImage = $("#" + id);
       if (direction) {
           if ($(".scb_ab_f_save_image").data("group_id") && $(target).hasClass('scb_f_image_filter')) {
+              if ($(target).has('img').length) {
+                  return false
+              }
               $selectedImage.addClass('scb_ab_s_small_image_selected');
               var parent = $selectedImage.parent();
               $(target)
