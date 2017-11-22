@@ -11,6 +11,54 @@ input, select { outline: none; }
     padding: 5px;
     display:inline-block;
 }
+.scb_ab_s_input_text_area {
+    font-size: 10pt;
+    font-family: 'sourcesanspro-regular';
+    color: black;
+    margin-left: 27px;
+    margin-top: 10px;
+    padding: 5px;
+    display:inline-block;
+    /* Equivalent to rows = 10, cols = 80 */
+    width: 43em;
+    height: 10em;
+}
+
+.scb_ab_s_add_files_input, .scb_ab_s_add_files_input_setup {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.scb_ab_s_file_list ul {
+    margin: 5px 0 20px 0;
+}
+
+.scb_ab_s_file_list li {
+    margin-bottom: 0.5em;
+}
+
+.scb_ab_s_file_list a {
+    color: #316f94;
+}
+
+.scb_ab_s_file_list a:hover {
+    color: #676767;
+}
+
+.scb_ab_s_add_files_button {
+    padding: 5px;
+    border: 0;
+    margin-left: 27px;
+}
+
+.scb_ab_s_delete_file {
+    border: 0;
+}
+
 .scb_ab_s_form_select_field{
     font-family: 'sourcesanspro-regular';
     width: 141px;

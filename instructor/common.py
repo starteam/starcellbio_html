@@ -11,6 +11,8 @@ import datetime
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.core.files.base import ContentFile
+from django.core.files.storage import FileSystemStorage
 from django.core.exceptions import PermissionDenied, FieldError
 from django.utils.safestring import mark_safe
 import backend.models
@@ -92,6 +94,8 @@ def assignment_delete(request, assignment_pk):
 def create_new_assignment(request):
     request.session['new'] = True
     request.session['assignment_name'] = ''
+    request.session['assignment_text'] = ''
+    request.session['assignment_files'] = ''
     request.session['based_on'] = ''
     return redirect('common_assignment_setup')
 
@@ -132,7 +136,23 @@ def get_pages(assignment):
 @login_required
 def assignment_setup(request):
     error = ''
+    assignment_text = ''
+    assignment_files = ''
     if request.method == "POST":
+        assignment_text = request.POST['assignment_text']
+        request.session['assignment_text'] = assignment_text
+        files = request.FILES.getlist('assignment_files')
+        if files:
+            names_urls = []
+            for file in files:
+                fs = FileSystemStorage()
+                filename = fs.save(file.name, file)
+                names_urls.append({
+                    'name': file.name,
+                    'url': fs.url(filename)
+                })
+            assignment_files = json.dumps(names_urls)
+            request.session['assignment_files'] = assignment_files
         assignment_name = request.POST['name']
         if request.POST['based_on']:
             request.session['based_on'] = request.POST['based_on']
@@ -167,6 +187,8 @@ def assignment_setup(request):
             'access': json.dumps('private'),
             'error': error,
             'assignment_name': assignment_name,
+            'assignment_text': assignment_text,
+            'assignment_files': assignment_files,
             'based_on': request.session['based_on'],
             'new': request.session['new'],
             'section_name': 'Assignment',
@@ -238,6 +260,8 @@ def course_setup(request):
 def create_assignment(request, course_selected):
     # Create a new assignment
     assignment_name = request.session['assignment_name']
+    assignment_text = request.session['assignment_text']
+    assignment_files = request.session['assignment_files']
     assignment_id = assignment_name + datetime.datetime.now().strftime(
         "%I:%M%p on %B %d, %Y"
     )
@@ -249,6 +273,8 @@ def create_assignment(request, course_selected):
         a = models.Assignment(
             course=course_selected,
             name=assignment_name,
+            text=assignment_text,
+            files=assignment_files,
             assignment_id=assignment_id,
             basedOn=based_on
         )
@@ -256,6 +282,8 @@ def create_assignment(request, course_selected):
         a = models.Assignment(
             course=course_selected,
             name=assignment_name,
+            text=assignment_text,
+            files=assignment_files,
             assignment_id=assignment_id
         )
     a.save()
@@ -309,20 +337,46 @@ def assignment_selected(func):
 @check_assignment_owner
 @login_required
 def assignment_modify(request):
-    assignment_id = request.session['assignment_id']
-    assignment = get_object_or_404(models.Assignment, pk=assignment_id)
-    AssignmentForm = modelform_factory(models.Assignment, fields=['name'])
-
+    pk = request.session['assignment_id']
+    assignment = get_object_or_404(models.Assignment, pk=pk)
+    files_to_delete = []
+    assignment_files = []
     if request.method == "POST" and assignment.access == 'private':
-        form = AssignmentForm(request.POST, instance=assignment)
-        if form.is_valid():
-            form.save()
-            if 'continue' in request.POST:
-                return redirect("common_course_modify")
-    elif request.method == "POST" and 'continue' in request.POST:
-        return redirect("common_course_modify")
+        fs = FileSystemStorage()
+        assignment.name = request.POST['name']
+        assignment.text = request.POST['text']
+        # Delete files
+        if request.POST['files_to_delete']:
+            files_to_delete = json.loads(request.POST['files_to_delete'])
+        if assignment.files:
+            assignment_files = json.loads(assignment.files)
+        for file_to_delete in files_to_delete:
+            for file in assignment_files[:]:
+                if file['url'] == file_to_delete:
+                    # Delete file in model
+                    assignment_files.remove(file)
+                    # Delete file on disk
+                    if file_to_delete.startswith('/'):
+                        file_to_delete = file_to_delete[1:]
+                        fs.delete(file_to_delete)
+            assignment.files = json.dumps(assignment_files)
+
+        # Add files
+        files = request.FILES
+        if files:
+            for filename in files.keys():
+                file_name = fs.save(filename, ContentFile(files[filename].read()))
+                assignment_files.append({
+                    'name': filename,
+                    'url': fs.url(file_name)
+                })
+            assignment.files = json.dumps(assignment_files)
+        assignment.save()
     else:
-        form = AssignmentForm(instance=assignment)
+        if assignment.files:
+            assignment_files = json.loads(assignment.files)
+        else:
+            assignment_files = []
 
     all_assignments = models.Assignment.objects.filter(
         course__owner=request.user
@@ -332,11 +386,12 @@ def assignment_modify(request):
         'instructor/assignment_modify.html',
         {
             'assignments': all_assignments,
-            'form': form,
             'access': json.dumps(assignment.access),
             'based_on': request.session['based_on'],
             'new': request.session['new'],
             'assignment_name': assignment.name,
+            'assignment_text': assignment.text,
+            'assignment_files': assignment_files,
             'section_name': 'Assignment',
             'page_name': 'assignment',
             'pages': get_pages(assignment)
