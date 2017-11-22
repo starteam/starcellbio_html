@@ -512,6 +512,11 @@ $(function() {
     $('#jqDialog_box').prepend("<h1 class='jqDialog_header' role='heading' >Error</h1>");
   }
 
+  /* Draw New Histogram Instructions toggle */
+    $('#instructions-toggle').on('click', function() {
+        $('#instructions').toggle();
+    });
+
   /* Save or Remove Histogram */
   $('.scb_ab_f_save_histogram, .scb_ab_f_remove_histogram, ' +
     '.scb_ab_f_save_selected_histogram').click(function () {
@@ -613,7 +618,7 @@ $(function() {
     paper.view.update();
   });
 
-  $('.scb_ab_s_analyze_dialog').draggable({cancel: '.scb_ab_s_canvas_library'});
+  $('.scb_ab_s_analyze_dialog').draggable({cancel: '.scb_ab_s_canvas_library, .scb_ab_s_draw_new_histogram_content'});
 
   /* Mark this histogram for selection from the library */
   $('.scb_ab_f_select_histogram').click(function(){
@@ -631,16 +636,6 @@ $(function() {
       $(this).addClass("scb_ab_s_image_selected");
     }
   });
-
-  /* Facs Histogram setup view */
-  if ($("#previewXAxis").length){
-
-    var x_range = $("#id_xrange").val();
-    var ticks = $("#id_tick_values").val();
-    paper.setup('previewXAxis');
-    draw_graph_background(x_range, ticks);
-    paper.view.update();
-  }
 
   /* Facs analyze view */
   if (typeof(histograms) !== 'undefined') {
@@ -660,9 +655,9 @@ $(function() {
       row_id = canvas.id.split('-')[1];
       paper.setup(canvas.id);
       /* x axis */
-      draw_line(20, 87, 187, 87);
+      drawLine(20, 180, 180, 180);
       /* y axis */
-      draw_line(20, 7, 20, 87);
+      drawLine(20, 20, 20, 180);
 
       if (canvas.id.indexOf('Live') > -1) {
         data = histograms[instance_id]['live'];
@@ -670,14 +665,17 @@ $(function() {
         data = histograms[instance_id]['fixed'];
       }
       var $edit_icon = $("div.scb_ab_s_histogram_edit_icon[data-row_id='row-" + row_id + "']");
+      // Scale: editing canvas is 300x300, small canvas is 160x160
+      var xyScale = 160/300;
       if (data) {
         data = JSON.parse(data);
         canvas_data = convertToCanvas(data);
         path = new Path();
-        path.strokeColor = 'black';
+        path.strokeColor = 'lightslategray';
         path.strokeWidth = '1';
         _.each(canvas_data, function (point) {
-          path.add(new Point(point[0] / 3, point[1] / 3))
+          // Translate and scale points
+          path.add(new Point(xyScale*(point[0] - 20), xyScale*(point[1] + 20)));
         });
         paper.view.update();
         $("button[data-row_id='row-" + row_id + "']").hide();
@@ -697,74 +695,29 @@ $(function() {
     _.each(canvas_library, function (canvas) {
 
       var histogram_id = canvas.id.match(/(\d+)$/)[0];
+      var xyScale = 160/300;
+      canvas.setAttribute('width', 200)
+      canvas.setAttribute('height', 200);
       paper.setup(canvas.id);
-
       /* x axis */
-      draw_line(30, 130, 260, 130);
+      drawLine(20, 180, 180, 180);
       /* y axis */
-      draw_line(30, 10, 30, 130);
+      drawLine(20, 20, 20, 180);
       data = all_histograms_data[histogram_id];
       data = JSON.parse(data);
       canvas_data = convertToCanvas(data);
       path = new Path();
-      path.strokeColor = 'black';
+      path.strokeColor = 'lightslategray';
       path.strokeWidth = '1';
       _.each(canvas_data, function (point) {
-        path.add(new Point(point[0] / 2, point[1] / 2))
+        // Translate and scale points
+        path.add(new Point(xyScale*(point[0] - 20), xyScale*(point[1] + 20)));
       });
 
       paper.view.update();
-
     });
 
-    load_sketch_tool(x_upper_bound, tick_values);
-
-
-    mypapers[3].setup("noise-canvas");
-
-    /*
-      Preview noise for sketched graph
-     */
-    $('.scb_ab_f_add_noise').click(function () {
-      /* Can preview noise, when graph has been plotted */
-      if (typeof(data_points) != 'undefined' && data_points.length > 0) {
-        if ($(".scb_ab_s_preview_canvas_div").css('display') == 'none') {
-          $(".scb_ab_s_preview_canvas_div").show();
-          $(".scb_ab_f_add_noise").text('HIDE PREVIEW');
-          mypapers[3].activate();
-          paper.project.clear();
-          paper.project.view.viewSize.width = CANVAS_NOISE_WIDTH;
-          paper.project.view.viewSize.height = CANVAS_NOISE_HEIGHT;
-          var x_fraction = CANVAS_NOISE_WIDTH / CANVAS_SKETCH_WIDTH;
-          var y_fraction = CANVAS_NOISE_HEIGHT / CANVAS_SKETCH_HEIGHT;
-          /* x axis */
-          draw_line(X_ORIGIN * x_fraction, Y_ORIGIN * y_fraction, X_AXIS_LAST_VALUE * x_fraction, Y_ORIGIN * y_fraction);
-          /* y axis */
-          draw_line(
-            X_ORIGIN * x_fraction,
-            (Y_ORIGIN - Y_AXIS_LENGTH_PX) * y_fraction,
-            X_ORIGIN * x_fraction,
-            Y_ORIGIN * y_fraction
-          );
-          var path = new Path();
-          path.strokeColor = 'black';
-          path.strokeWidth = '1';
-          var noisy_points = addNoise(data_points);
-          _.each(noisy_points, function (point) {
-            path.add(new Point(
-              point[0] * x_fraction,
-              point[1] * y_fraction))
-          });
-          paper.view.update();
-
-        } else {
-          $(".scb_ab_s_preview_canvas_div").hide();
-          $(".scb_ab_f_add_noise").text('SHOW PREVIEW');
-
-        }
-      }
-    });
-
+    loadSketchTool(x_upper_bound, y_upper_bound, scale);
   }
 
   /* ADD HISTOGRAM button: Open Histogram Tools window */
@@ -784,7 +737,7 @@ $(function() {
       .css('visibility', 'visible');
     /* Label x axis with condition name */
     mypapers[2].activate();
-    nameXAxis(sample_treatment_array[2]);
+    drawXAxisName(sample_treatment_array[2]);
     if ($(this).hasClass("scb_ab_f_edit_histogram")){
       $(".scb_ab_s_draw_histogram_view").hide();
       $(".scb_ab_s_select_histogram_view").show();

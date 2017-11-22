@@ -57,7 +57,7 @@
         </div>
   </div>
     <!-- Hidden pop out window for entering the graph -->
-    <div class="scb_ab_s_dialog scb_ab_s_analyze_dialog" style="visibility:hidden">
+    <div class="scb_ab_s_dialog scb_ab_s_analyze_dialog scb_ab_s_analyze_dialog_histogram" style="visibility:hidden">
         <div>
             <h1 class="scb_ab_s_dialog_title" role="presentation" aria-label="Create Histogram">
                 <span class="scb_ab_s_dialog_title_close scb_ab_f_close_dialog" role="button"
@@ -65,10 +65,6 @@
                 Histogram Tools
             </h1>
             <div class="scb_ab_s_draw_histogram_view">
-                <!-- Hidden 'noise preview' window -->
-                <div class="scb_ab_s_preview_canvas_div" style="display:none">
-                    <canvas id="noise-canvas" class="scb_ab_s_canvas_noise_preview"></canvas>
-                </div>
                 <div class="scb_ab_s_histogram_tabs">
                     <div class="scb_ab_s_histogram_tab_not_selected">Select Histogram</div>
                     <div class="scb_ab_s_histogram_tab_selected">Draw New Histogram</div>
@@ -81,18 +77,49 @@
                         </div>
                         <div class="scb_ab_s_row scb_ab_f_sample_name" style="display:inline-block">
                         </div>
-                        <button class="scb_s_gray_button scb_ab_f_add_noise scb_ab_s_add_noise_btn">SHOW PREVIEW</button>
                         <div style="margin-top:10px; color: #316f94">
-                            To draw a histogram, click and drag your cursor within the graph.
+                            <a href="#" id="instructions-toggle">Instructions </a>
+                            <div id="instructions" style="display: none;">
+                                <ul>
+                                    <li>
+                                        Draw a curve: with <strong>Add Anchor Point</strong> selected,
+                                        click within the graph area and add a sequence of anchor points
+                                        to create the shape of the graph.
+                                    </li>
+                                    <li>
+                                        Edit a curve: with <strong>Select Anchor Point</strong> selected,
+                                        click and drag an existing anchor point to the desired position.
+                                    </li>
+                                    <li>
+                                        Show/hide anchor points: toggle the <strong>Show Anchor Points</strong>
+                                        checkbox.
+                                    </li>
+                                    <li>
+                                        Adjust variation in the curve: move the <strong>Noise</strong> slider
+                                        to the desired level before saving the histogram.
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <canvas id="myCanvas" class="scb_ab_s_draw_histogram_canvas"></canvas>
-                    <button class="scb_s_gray_button scb_ab_f_save_histogram">
-                        SAVE HISTOGRAM
-                    </button>
-                    <button class="scb_s_gray_button reset_histogram">
-                        DISCARD HISTOGRAM
-                    </button>
+                    <div class="scb_ab_s_histogram_controls">
+                        <label class="scb_ab_s_checkbox">
+                            <input type="checkbox" class="scb_ab_s_show_points" name="mode" checked>SHOW ANCHOR POINTS
+                        </label>
+                        <label class="scb_ab_s_radio">
+                            <input type="radio" class="scb_ab_s_add_point" name="mode" checked>ADD ANCHOR POINT
+                        </label>
+                        <label class="scb_ab_s_radio">
+                            <input type="radio" class="scb_ab_s_select_point" name="mode">SELECT ANCHOR POINT
+                        </label>
+                    </div>
+                    <canvas id="histogramCanvas" class="scb_ab_s_draw_histogram_canvas"></canvas>
+                    <div class="scb_ab_s_histogram_controls">
+                        <span>NOISE</span>
+                        <div class="scb_ab_s_noise_slider"></div>
+                        <button class="scb_s_gray_button scb_ab_f_save_histogram">SAVE HISTOGRAM</button>
+                        <button class="scb_s_gray_button reset_histogram">DISCARD HISTOGRAM</button>
+                    </div>
                 </div>
             </div>
             <div class="scb_ab_s_select_histogram_view" style="display:none">
@@ -111,7 +138,7 @@
                     </div>
 
                 </div>
-                <div class="scb_ab_s_canvas_library">
+                <div class="scb_ab_s_canvas_library scb_ab_s_canvas_library_histogram">
                     {% for histogram in all_histograms %}
                         <div class="scb_ab_s_library_item_wrapper">
                             <canvas id="library-{{ histogram.id }}"
@@ -122,9 +149,11 @@
                     {% endfor %}
 
                 </div>
-                <button class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_selected_histogram">
-                    SAVE HISTOGRAM
-                </button>
+                <div class="scb_ab_s_save_btn_position_wrapper">
+                    <button class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_selected_histogram">
+                        SAVE HISTOGRAM
+                    </button>
+                </div>
 
             </div>
 
@@ -238,8 +267,9 @@
     <script type="text/javascript">
     all_histograms_data = {{ all_histograms_data|safe }}
     histograms = {{ histograms|safe }};
+    scale = {{ scale|safe }};
     x_upper_bound = {{ x_upper_bound|safe }};
-    tick_values = {{ tick_values|safe }};
+    y_upper_bound = {{ y_upper_bound|safe }};
     paper.install(window);
 
     </script>
