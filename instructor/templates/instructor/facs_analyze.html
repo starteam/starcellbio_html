@@ -127,7 +127,7 @@
                     <div class="scb_ab_s_histogram_tab_selected">Select Histogram</div>
                     <div class="scb_ab_s_histogram_tab_not_selected">Draw New Histogram</div>
                 </div>
-             <div class="scb_ab_s_draw_new_histogram_content">
+                <div class="scb_ab_s_draw_new_histogram_content">
                     <div class="scb_ab_s_chosen_sample_heading">
                         <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
                             <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
@@ -136,7 +136,6 @@
                         <div class="scb_ab_s_row scb_ab_f_sample_name">
                         </div>
                     </div>
-
                 </div>
                 <div class="scb_ab_s_canvas_library scb_ab_s_canvas_library_histogram">
                     {% for histogram in all_histograms %}
@@ -147,20 +146,15 @@
                         </div>
 
                     {% endfor %}
-
                 </div>
                 <div class="scb_ab_s_save_btn_position_wrapper">
                     <button class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_selected_histogram">
                         SAVE HISTOGRAM
                     </button>
                 </div>
-
             </div>
-
         </div>
     </div><!-- End of hidden window -->
-
-
     <div class="scb_ab_s_heading_div">
         <div class="scb_ab_s_page_title">Analyze</div>
         <div class='scb_ab_s_heading_description'>
@@ -176,16 +170,12 @@
             </div>
             <!-- Instances are grouped by cell_treatment, analysis, condition-->
             {% for cell_treatment, analysis, condition, instance_list in histogram_groups %}
-
                 <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
                     <div class="scb_ab_s_facs_condition_header">
                         {{ cell_treatment }}, {{ analysis }}, {{ condition }}
                     </div>
                 </div>
-
                 {% for instance in instance_list %}
-
-
                     <div class="scb_ab_s_row">
                         <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
                         <div class="scb_ab_s_col_width_facs_sample">
@@ -212,10 +202,8 @@
                     </div>
                     <!-- display selected histogram, small version  -->
                     <div class="scb_ab_s_row">
-
                     </div>
                     <div class="scb_ab_s_row" style="padding: 10px 0 8px 0">
-
                         <div class="scb_ab_s_col_width_number"></div>
                         <div class="scb_ab_s_col_width_facs_sample">
                             <div class="scb_ab_s_remove_histogram_icon_position">
@@ -223,7 +211,6 @@
                                       role="button" data-cell_treatment="{{ cell_treatment }}"
                                       data-pk="{{ instance.id }}" aria-label="Remove Histogram">×</span>
                             </div>
-
                             <canvas id="canvas-{{ cell_treatment }}_{{ instance.id }}"
                                 class="scb_ab_s_small_canvas">
                             </canvas>
@@ -251,26 +238,28 @@
                     </div>
                 {% endfor %}
             {% endfor %}
-            <input type="submit"
-                   name="continue"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE AND CONTINUE &nbsp; &#9654;">
-            <input type="submit"
-                   name="save"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE"/>
+            <div class="scb_ab_s_nav_controls scb_ab_s_shift_left">
+                <input type="button"
+                       class="scb_ab_s_navigation_button scb_s_back_btn"
+                       value="&#9664; &nbsp; BACK"
+                       data-location="{% url "facs_setup" %}">
+                <input type="submit"
+                       name="save"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="SAVE">
+                <input type="submit"
+                       name="continue"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="SAVE AND CONTINUE &nbsp; &#9654;">
+            </div>
         </form>
     </div>
-    <a href="{% url "facs_setup" %}">
-        <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-    </a>
     <script type="text/javascript">
-    all_histograms_data = {{ all_histograms_data|safe }}
-    histograms = {{ histograms|safe }};
-    scale = {{ scale|safe }};
-    x_upper_bound = {{ x_upper_bound|safe }};
-    y_upper_bound = {{ y_upper_bound|safe }};
-    paper.install(window);
-
+        all_histograms_data = {{ all_histograms_data|safe }}
+        histograms = {{ histograms|safe }};
+        scale = {{ scale|safe }};
+        x_upper_bound = {{ x_upper_bound|safe }};
+        y_upper_bound = {{ y_upper_bound|safe }};
+        paper.install(window);
     </script>
 {% endblock %}

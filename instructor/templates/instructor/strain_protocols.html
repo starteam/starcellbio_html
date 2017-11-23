@@ -71,18 +71,20 @@
                     {{ form.id }}
                 </div>
             {% endfor %}
-            <input type="submit"
-                   name="continue"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE AND CONTINUE &nbsp; &#9654;">
-            <input type="submit"
-                   name="save"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE"/>
+            <div class="scb_ab_s_nav_controls scb_ab_s_shift_left">
+                <input type="button"
+                       class="scb_ab_s_navigation_button scb_s_back_btn"
+                       value="&#9664; &nbsp; BACK"
+                       data-location="{% url "common_assignments_edit_treatments" %}">
+                <input type="submit"
+                       name="save"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="SAVE">
+                <input type="submit"
+                       name="continue"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="SAVE AND CONTINUE &nbsp; &#9654;">
+            </div>
         </form>
     </div>
-    <a href="{% url "common_assignments_edit_treatments" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-    </a>
-
 {% endblock %}

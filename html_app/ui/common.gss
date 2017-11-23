@@ -9,10 +9,6 @@
 .dummy {
 }
 
-#main button, #main *[role=button], input[type=radio] {
-	outline:none !important;
-}
-
 body {
     background-color: #e9edf1;
 }

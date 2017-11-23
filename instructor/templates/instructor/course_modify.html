@@ -58,25 +58,20 @@
                 <input type="submit" name="add" class='scb_s_gray_button scb_s_experiment_setup_add_button' value="ADD">
             </div>
         </div>
-        <div>
+        <div class="scb_ab_s_nav_controls">
+            <input type="button"
+                   class="scb_ab_s_navigation_button scb_s_back_btn"
+                   value="&#9664; &nbsp; BACK"
+                   data-location="{% if new %}{% url "common_assignment_setup" %}
+                                  {% else %}{% url "common_assignment_modify" %}{% endif %}">
             <input type="submit"
-                   name="continue"
-                   class=" scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE AND CONTINUE &nbsp; &#9654;"/>
+                    name="save"
+                    class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                    value="SAVE">
             <input type="submit"
-                   name="save"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE"/>
+                    name="continue"
+                    class=" scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                    value="SAVE AND CONTINUE &nbsp; &#9654;">
         </div>
     </form>
-
-    <div>
-
-        <a href="{% if new %}{% url "common_assignment_setup" %}
-            {% else %}{% url "common_assignment_modify" %}{% endif %}">
-            <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-        </a>
-
-    </div>
-
 {% endblock %}

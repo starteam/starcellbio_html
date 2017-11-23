@@ -1,7 +1,6 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
-
     <div class='scb_s_assignment_setup_title'>Assignment Setup</div>
     <div class='scb_s_assignment_setup_radio_choice' aria-label='Create New Assignment'>
         <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"
@@ -49,21 +48,20 @@
             </ul>
         </div>
         <div>
+            <input type="file" name="files" id="files" class="scb_ab_s_add_files_input" multiple>
             <label for="files" class="scb_s_gray_button scb_ab_s_add_files_button">
                 ADD FILES
             </label>
-            <input type="file" name="files" id="files" class="scb_ab_s_add_files_input" multiple>
         </div>
-        <div>
-            <input type="submit"
-                   name="continue"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE AND CONTINUE &nbsp; &#9654;"/>
+        <div class="scb_ab_s_nav_controls_right">
             <input type="submit"
                    name="save"
                    class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE"/>
+                   value="SAVE">
+            <input type="submit"
+                   name="continue"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE AND CONTINUE &nbsp; &#9654;">
         </div>
     </form>
-
 {% endblock %}

@@ -35,17 +35,20 @@
         <div>
             <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button' value="ADD">
         </div>
-        <input type="submit"
-               name="continue"
-               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-               value="SAVE AND CONTINUE &nbsp; &#9654;">
-        <input type="submit"
-               name="save"
-               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-               value="SAVE"/>
+        <div class="scb_ab_s_nav_controls">
+          <input type="button"
+                 class="scb_ab_s_navigation_button scb_s_back_btn"
+                 value="&#9664; &nbsp; BACK"
+                 data-location="{% url back_url %}">
+          <input type="submit"
+                 name="save"
+                 class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                 value="SAVE">
+          <input type="submit"
+                 name="continue"
+                 class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                 value="SAVE AND CONTINUE &nbsp; &#9654;">
+        </div>
     </form>
 </div>
-<a href="{% url back_url %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-</a>
 {% endblock %}
