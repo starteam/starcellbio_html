@@ -125,8 +125,9 @@ def compile(assignment_id):
 
     ret['template']['instructions'] = [
         [
-            a.name,
-            assignment_text_files_html(a)
+            [
+                a.name, a.text if a.text else '', json.loads(a.files) if a.files else []
+            ]
         ]
     ]
     ret['template']['model'] = {}
@@ -165,21 +166,6 @@ def compile(assignment_id):
         ret['template']['model']['facs'] = facs_model(a)
     return ret
 
-def assignment_text_files_html(assignment):
-    files = json.loads(assignment.files)
-    return assignment_text(assignment.text) + assignment_files(files)
-
-def assignment_text(text):
-    return format_html('<p>{}</p>', text)
-
-def assignment_files(files):
-    if files:
-        return '<ul>' + format_html_join(
-            '', '<li><a href="{}">{}</li>',
-            ((file['url'], file['name']) for file in files)
-        ) + '</ul>'
-    else:
-        return ''
 
 def format_table(assignment):
     headers = "%CELL_LINE%, %TREATMENT%"
