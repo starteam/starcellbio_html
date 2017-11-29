@@ -42,17 +42,18 @@
         <div class='scb_s_assignment_setup_course_name_heading'>What files would you like to upload?</div>
         <div class="scb_ab_s_file_list"><ul></ul></div>
         <div>
+            <input type="file" name="assignment_files" id="files" class="scb_ab_s_add_files_input_setup" multiple>
             <label for="files" class="scb_s_gray_button scb_ab_s_add_files_button">
                 ADD FILES
             </label>
         </div>
-        <input type="file" name="assignment_files" id="files" class="scb_ab_s_add_files_input_setup" multiple>
         <div class="scb_ab_s_input_error">{{ error }}</div>
         <input type="hidden" name="based_on" id="based_on">
-        <input type="submit" data-based_on="null"
-               name="continue"
-               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-               value="SAVE AND CONTINUE &nbsp; &#9654;"/>
+        <div class="scb_ab_s_nav_controls_right">
+            <input type="submit" data-based_on="null"
+                   name="continue"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE AND CONTINUE &nbsp; &#9654;">
+        </div>
     </form>
-
 {% endblock %}

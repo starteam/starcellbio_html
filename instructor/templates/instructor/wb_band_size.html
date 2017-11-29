@@ -21,8 +21,6 @@
     <div class="scb_ab_s_form_container">
         <form method="post">{% csrf_token %}
             {{ formset.management_form }}
-
-
             <div class="scb_ab_s_row">
                 <div class="scb_ab_s_antibody_name vertical_align_top">Primary Antibody</div>
                 <div class="scb_ab_s_antibody_name vertical_align_top">Secondary Antibody</div>
@@ -39,7 +37,6 @@
                     {% endif %}
                 </div>
             </div>
-
             {% for form in formset %}
                 <div class="scb_ab_s_row">
                     <div class="scb_ab_s_antibody_name">{{ form.instance.primary }}</div>
@@ -52,18 +49,20 @@
                     {{ form.id }}
                 </div>
             {% endfor %}
-            <input type="submit"
-                   name="continue"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE AND CONTINUE &nbsp; &#9654;">
-            <input type="submit"
-                   name="save"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE"/>
+            <div class="scb_ab_s_nav_controls scb_ab_s_shift_left">
+                <input type="button"
+                       class="scb_ab_s_navigation_button scb_s_back_btn"
+                       value="&#9664; &nbsp; BACK"
+                       data-location="{% url "western_blot_antibody" %}">
+                <input type="submit"
+                       name="save"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="SAVE">
+                <input type="submit"
+                       name="continue"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="SAVE AND CONTINUE &nbsp; &#9654;">
+            </div>
         </form>
     </div>
-    <a href="{% url "western_blot_antibody" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-    </a>
-
 {% endblock %}

@@ -201,20 +201,23 @@
           {% endif %}
         {% endfor %}
       {% endfor %}
-      <input type="submit"
-             name="continue"
-             class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-             value="{{ save_and_continue }} &nbsp; &#9654;">
-      <input type="submit"
-             name="save"
-             class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-             value="SAVE"/>
+      <div class="scb_ab_s_nav_controls scb_ab_s_shift_left">
+        <input type="button"
+               class="scb_ab_s_navigation_button scb_s_back_btn"
+               value="&#9664; &nbsp; BACK"
+               data-location="{% url "microscopy_sample_prep" %}">
+        <input type="submit"
+               name="save"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE">
+        <input type="submit"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="{{ save_and_continue }} &nbsp; &#9654;">
+      </div>
     </form>
   </div>
-  <a href="{% url "microscopy_sample_prep" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-  </a>
-   <script type="text/javascript">
+  <script type="text/javascript">
     dialog_open = {{ dialog_open|safe }};
   </script>
 {% endblock %}

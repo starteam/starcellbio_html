@@ -1,5 +1,11 @@
+*:focus {
+    outline: 2px solid #1c1c1c;
+    outline-offset: 1px;
+}
 
-input, select { outline: none; }
+::-moz-focus-inner {
+    border: 0;
+}
 
 .scb_ab_s_input_text_field{
     font-size: 10pt;
@@ -22,6 +28,11 @@ input, select { outline: none; }
     /* Equivalent to rows = 10, cols = 80 */
     width: 43em;
     height: 10em;
+}
+
+.scb_ab_s_add_files_input:focus + label, .scb_ab_s_add_files_input_setup:focus + label {
+    outline: 2px solid #1c1c1c;
+    outline-offset: 1px;
 }
 
 .scb_ab_s_add_files_input, .scb_ab_s_add_files_input_setup {
@@ -77,36 +88,53 @@ input, select { outline: none; }
     background-color: #f4f6f8;
 }
 
+.scb_ab_s_nav_controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.scb_ab_s_shift_left {
+    margin-left: -20px;
+}
+
+.scb_ab_s_nav_controls_left_right {
+    display: flex;
+    justify-content: space-between;
+}
+
+.scb_ab_s_nav_controls_left_right > input {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.scb_ab_s_nav_controls_right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.scb_ab_s_nav_controls_right > input {
+    margin-right: 15px;
+}
+
 .scb_ab_s_navigation_button {
     border: none;
     width: 185px;
     height: 30px;
-    margin: 1px;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
     padding-top: 2px;
-    margin-right: 19px;
-
     border-radius: 8px;
     letter-spacing: 1px;
     background: #27956c;
     color: white;
     text-decoration: none;
     cursor: pointer;
-    padding-left: 13px;
-    padding-right: 9px;
-}
-.scb_ab_s_nav_continue_btn{
-    float: right;
-    margin-top: 100px;
-
 }
 
-.scb_s_back_btn {
+.scb_ab_s_nav_continue_btn, .scb_s_back_btn {
     margin-top: 100px;
-    float: left;
-    margin-left: 20px;
 }
+
 .scb_ab_s_input_error{
     color: indianred;
     display: inline-block;
@@ -687,7 +715,6 @@ input[type="checkbox"].disabled {
     float: right;
     -webkit-appearance: none;
     font-family: 'sourcesanspro-semibold';
-    outline: none;
     height: 26px;
     width: 26px;
     cursor: pointer;

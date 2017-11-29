@@ -69,6 +69,13 @@ $(function() {
   $("form textarea").addClass("scb_ab_s_input_text_area");
   $("form select").addClass("scb_ab_s_form_select_field");
 
+  /**
+   * Back navigation button
+   */
+  $(".scb_s_back_btn").on('click', function() {
+    location = $(this).data('location');
+  });
+
   var file_list = get_file_names(),           // Array of names
       files_to_upload = [],                   // Array of File objects
       files_to_delete = [],                   // Array of urls
@@ -212,7 +219,16 @@ $(function() {
 
   });
   if (typeof (access) !== 'undefined' && access === 'private') {
-    $('.checkbox_form_delete').on('click', function() {
+    var $checkbox_form_delete = $('.checkbox_form_delete');
+    $checkbox_form_delete.attr('tabindex', 0);
+    $checkbox_form_delete.on('keydown', function(event) {
+      // ENTER or SPACE have been pressed
+      if(event.keyCode === 13 || event.keyCode === 32) {
+        event.preventDefault();
+        $(this).trigger('click');
+      }
+    });
+    $checkbox_form_delete.on('click', function() {
       /* Check the hidden checkbox */
       $(this).prev().prop('checked', true);
       /* Want to disable the input box for the strain */

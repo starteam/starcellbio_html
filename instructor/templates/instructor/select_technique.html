@@ -12,16 +12,16 @@
         {% endif %}
 
     </div>
-    <br/>
-
-    <a href="{% url "common_strain_treatments" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-
-    </a>
-    <a href="{% url "common_assignments" %}">
-    <button class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn" role='button'
-            {% if not allow_finish %}hidden{% endif %}>
-        SAVE AND FINISH &nbsp; &#9654;
-    </button>
-    </a>
+    <br>
+    <div class="scb_ab_s_nav_controls_left_right">
+        <input type="button"
+               class="scb_ab_s_navigation_button scb_s_back_btn"
+               value="&#9664; &nbsp; BACK"
+               data-location="{% url "common_assignments" %}">
+        <input type="button"
+               class="scb_ab_s_navigation_button scb_s_back_btn"
+               value="SAVE AND FINISH &nbsp; &#9654;"
+               {% if not allow_finish %}hidden{% endif %}
+               data-location="{% url "common_assignments" %}">
+    </div>
 {% endblock %}

@@ -6,20 +6,14 @@
         <div class='scb_ab_s_heading_description'>
             Define the relative band intensity for each of the proteins detected in your samples and lysate type combinations.
         </div>
-
-
     </div>
     <div class="scb_ab_s_form_container">
         <form method="post">{% csrf_token %}
             {{ formset.management_form }}
-
-
             {% for antibody, form_list in formset_group %}
-
                 <div class="scb_ab_s_antibody_header scb_ab_s_grouping_header_row">
                     {{ antibody.primary }}, {{ antibody.secondary }}
                 </div>
-
                 <div class="scb_ab_s_row scb_ab_s_table_header_text">
                     <div class="scb_ab_s_col_width_wb_sample">Sample</div>
                     <div class="scb_ab_s_col_width_number"></div>
@@ -45,8 +39,6 @@
                             {{ form.instance.strain_protocol.treatment.collection_time.units }}
                         {% endif %}
                         </div>
-
-
                     </div>
                     <div class="scb_ab_s_col_width_type_size">
                         {% if form.instance.lysate_type == 'wc' %} WCL
@@ -66,18 +58,20 @@
                 </div>
                 {% endfor %}
             {% endfor %}
-            <input type="submit"
-                   name="continue"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="{{ save_and_continue }} &nbsp; &#9654;">
-            <input type="submit"
-                   name="save"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE"/>
+            <div class="scb_ab_s_nav_controls scb_ab_s_shift_left">
+                <input type="button"
+                       class="scb_ab_s_navigation_button scb_s_back_btn"
+                       value="&#9664; &nbsp; BACK"
+                       data-location="{% url "western_blot_band_size" %}">
+                <input type="submit"
+                       name="save"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="SAVE">
+                <input type="submit"
+                       name="continue"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="{{ save_and_continue }} &nbsp; &#9654;">
+            </div>
         </form>
     </div>
-    <a href="{% url "western_blot_band_size" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-    </a>
-
 {% endblock %}
