@@ -187,6 +187,11 @@ class WesternBlotBands(models.Model):
     lysate_type = models.CharField(max_length=50, choices=LYSATE_TYPES)
 
 
+class Microscopy(models.Model):
+    assignment = models.OneToOneField(Assignment)
+    scroll_position = models.IntegerField(default=0)
+
+
 class MicroscopySamplePrep(models.Model):
     assignment = models.ForeignKey(
         Assignment,
