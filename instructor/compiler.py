@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.utils.html import format_html, format_html_join
 from instructor.models import (
     Assignment, WesternBlotBands, FlowCytometryHistogramMapping,
     MicroscopyImageMapping
@@ -124,8 +125,9 @@ def compile(assignment_id):
 
     ret['template']['instructions'] = [
         [
-            'Assignment',
-            'Please contact your instructor for your StarCellBio assignment.'
+            [
+                a.name, a.text if a.text else '', json.loads(a.files) if a.files else []
+            ]
         ]
     ]
     ret['template']['model'] = {}
@@ -235,10 +237,9 @@ def facs_histograms(assignment):
 
 def facs_model(assignment):
     facs = assignment.flow_cytometry.first()
-    tick_values = [int(value) for value in facs.tick_values.split(',')]
     ab_parser = {
-        'ticks': tick_values,
-        'max': facs.xrange,
+        'xmax': facs.xrange,
+        'ymax': facs.yrange,
         'scale': facs.scale,
         'dna': {}
     }

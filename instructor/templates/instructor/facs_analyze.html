@@ -57,7 +57,7 @@
         </div>
   </div>
     <!-- Hidden pop out window for entering the graph -->
-    <div class="scb_ab_s_dialog scb_ab_s_analyze_dialog" style="visibility:hidden">
+    <div class="scb_ab_s_dialog scb_ab_s_analyze_dialog scb_ab_s_analyze_dialog_histogram" style="visibility:hidden">
         <div>
             <h1 class="scb_ab_s_dialog_title" role="presentation" aria-label="Create Histogram">
                 <span class="scb_ab_s_dialog_title_close scb_ab_f_close_dialog" role="button"
@@ -65,10 +65,6 @@
                 Histogram Tools
             </h1>
             <div class="scb_ab_s_draw_histogram_view">
-                <!-- Hidden 'noise preview' window -->
-                <div class="scb_ab_s_preview_canvas_div" style="display:none">
-                    <canvas id="noise-canvas" class="scb_ab_s_canvas_noise_preview"></canvas>
-                </div>
                 <div class="scb_ab_s_histogram_tabs">
                     <div class="scb_ab_s_histogram_tab_not_selected">Select Histogram</div>
                     <div class="scb_ab_s_histogram_tab_selected">Draw New Histogram</div>
@@ -81,18 +77,49 @@
                         </div>
                         <div class="scb_ab_s_row scb_ab_f_sample_name" style="display:inline-block">
                         </div>
-                        <button class="scb_s_gray_button scb_ab_f_add_noise scb_ab_s_add_noise_btn">SHOW PREVIEW</button>
                         <div style="margin-top:10px; color: #316f94">
-                            To draw a histogram, click and drag your cursor within the graph.
+                            <a href="#" id="instructions-toggle">Instructions </a>
+                            <div id="instructions" style="display: none;">
+                                <ul>
+                                    <li>
+                                        Draw a curve: with <strong>Add Anchor Point</strong> selected,
+                                        click within the graph area and add a sequence of anchor points
+                                        to create the shape of the graph.
+                                    </li>
+                                    <li>
+                                        Edit a curve: with <strong>Select Anchor Point</strong> selected,
+                                        click and drag an existing anchor point to the desired position.
+                                    </li>
+                                    <li>
+                                        Show/hide anchor points: toggle the <strong>Show Anchor Points</strong>
+                                        checkbox.
+                                    </li>
+                                    <li>
+                                        Adjust variation in the curve: move the <strong>Noise</strong> slider
+                                        to the desired level before saving the histogram.
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <canvas id="myCanvas" class="scb_ab_s_draw_histogram_canvas"></canvas>
-                    <button class="scb_s_gray_button scb_ab_f_save_histogram">
-                        SAVE HISTOGRAM
-                    </button>
-                    <button class="scb_s_gray_button reset_histogram">
-                        DISCARD HISTOGRAM
-                    </button>
+                    <div class="scb_ab_s_histogram_controls">
+                        <label class="scb_ab_s_checkbox">
+                            <input type="checkbox" class="scb_ab_s_show_points" name="mode" checked>SHOW ANCHOR POINTS
+                        </label>
+                        <label class="scb_ab_s_radio">
+                            <input type="radio" class="scb_ab_s_add_point" name="mode" checked>ADD ANCHOR POINT
+                        </label>
+                        <label class="scb_ab_s_radio">
+                            <input type="radio" class="scb_ab_s_select_point" name="mode">SELECT ANCHOR POINT
+                        </label>
+                    </div>
+                    <canvas id="histogramCanvas" class="scb_ab_s_draw_histogram_canvas"></canvas>
+                    <div class="scb_ab_s_histogram_controls">
+                        <span>NOISE</span>
+                        <div class="scb_ab_s_noise_slider"></div>
+                        <button class="scb_s_gray_button scb_ab_f_save_histogram">SAVE HISTOGRAM</button>
+                        <button class="scb_s_gray_button reset_histogram">DISCARD HISTOGRAM</button>
+                    </div>
                 </div>
             </div>
             <div class="scb_ab_s_select_histogram_view" style="display:none">
@@ -100,7 +127,7 @@
                     <div class="scb_ab_s_histogram_tab_selected">Select Histogram</div>
                     <div class="scb_ab_s_histogram_tab_not_selected">Draw New Histogram</div>
                 </div>
-             <div class="scb_ab_s_draw_new_histogram_content">
+                <div class="scb_ab_s_draw_new_histogram_content">
                     <div class="scb_ab_s_chosen_sample_heading">
                         <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
                             <div class="scb_ab_s_facs_condition_header scb_ab_f_treatment_text">
@@ -109,9 +136,8 @@
                         <div class="scb_ab_s_row scb_ab_f_sample_name">
                         </div>
                     </div>
-
                 </div>
-                <div class="scb_ab_s_canvas_library">
+                <div class="scb_ab_s_canvas_library scb_ab_s_canvas_library_histogram">
                     {% for histogram in all_histograms %}
                         <div class="scb_ab_s_library_item_wrapper">
                             <canvas id="library-{{ histogram.id }}"
@@ -120,18 +146,15 @@
                         </div>
 
                     {% endfor %}
-
                 </div>
-                <button class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_selected_histogram">
-                    SAVE HISTOGRAM
-                </button>
-
+                <div class="scb_ab_s_save_btn_position_wrapper">
+                    <button class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_selected_histogram">
+                        SAVE HISTOGRAM
+                    </button>
+                </div>
             </div>
-
         </div>
     </div><!-- End of hidden window -->
-
-
     <div class="scb_ab_s_heading_div">
         <div class="scb_ab_s_page_title">Analyze</div>
         <div class='scb_ab_s_heading_description'>
@@ -147,16 +170,12 @@
             </div>
             <!-- Instances are grouped by cell_treatment, analysis, condition-->
             {% for cell_treatment, analysis, condition, instance_list in histogram_groups %}
-
                 <div class="scb_ab_s_row scb_ab_s_grouping_header_row">
                     <div class="scb_ab_s_facs_condition_header">
                         {{ cell_treatment }}, {{ analysis }}, {{ condition }}
                     </div>
                 </div>
-
                 {% for instance in instance_list %}
-
-
                     <div class="scb_ab_s_row">
                         <div class="scb_ab_s_col_width_number">{{ forloop.counter }}.</div>
                         <div class="scb_ab_s_col_width_facs_sample">
@@ -183,10 +202,8 @@
                     </div>
                     <!-- display selected histogram, small version  -->
                     <div class="scb_ab_s_row">
-
                     </div>
                     <div class="scb_ab_s_row" style="padding: 10px 0 8px 0">
-
                         <div class="scb_ab_s_col_width_number"></div>
                         <div class="scb_ab_s_col_width_facs_sample">
                             <div class="scb_ab_s_remove_histogram_icon_position">
@@ -194,7 +211,6 @@
                                       role="button" data-cell_treatment="{{ cell_treatment }}"
                                       data-pk="{{ instance.id }}" aria-label="Remove Histogram">×</span>
                             </div>
-
                             <canvas id="canvas-{{ cell_treatment }}_{{ instance.id }}"
                                 class="scb_ab_s_small_canvas">
                             </canvas>
@@ -222,25 +238,28 @@
                     </div>
                 {% endfor %}
             {% endfor %}
-            <input type="submit"
-                   name="continue"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE AND FINISH &nbsp; &#9654;">
-            <input type="submit"
-                   name="save"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE"/>
+            <div class="scb_ab_s_nav_controls scb_ab_s_shift_left">
+                <input type="button"
+                       class="scb_ab_s_navigation_button scb_s_back_btn"
+                       value="&#9664; &nbsp; BACK"
+                       data-location="{% url "facs_setup" %}">
+                <input type="submit"
+                       name="save"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="SAVE">
+                <input type="submit"
+                       name="continue"
+                       class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                       value="SAVE AND CONTINUE &nbsp; &#9654;">
+            </div>
         </form>
     </div>
-    <a href="{% url "facs_setup" %}">
-        <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-    </a>
     <script type="text/javascript">
-    all_histograms_data = {{ all_histograms_data|safe }}
-    histograms = {{ histograms|safe }};
-    x_upper_bound = {{ x_upper_bound|safe }};
-    tick_values = {{ tick_values|safe }};
-    paper.install(window);
-
+        all_histograms_data = {{ all_histograms_data|safe }}
+        histograms = {{ histograms|safe }};
+        scale = {{ scale|safe }};
+        x_upper_bound = {{ x_upper_bound|safe }};
+        y_upper_bound = {{ y_upper_bound|safe }};
+        paper.install(window);
     </script>
 {% endblock %}

@@ -1,20 +1,17 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
-
     <div class='scb_s_assignment_setup_title'>Assignment Setup</div>
     <div class='scb_s_assignment_setup_radio_choice' aria-label='Create New Assignment'>
         <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"
                {% if not based_on %}checked{% endif %} disabled/>
         <span class='scb_s_assignment_setup_radio_text'>Create new assignment OR</span>
     </div>
-
     <div class='scb_s_assignment_setup_radio_choice'>
         <input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind"
                {% if based_on %}checked{% endif %} disabled/>
         <span class='scb_s_assignment_setup_radio_text'>Use an existing assignment as a template.</span>
         <br/>
-
     </div>
     <div class="scb_s_assignment_setup_assignment_list"
          aria-labelledby="scb_s_experiment_step_progress_label_for_assignment">
@@ -31,28 +28,40 @@
     </div>
     <br/>
     <br/>
-
-
-    <div class='scb_s_assignment_setup_course_name_heading'>Change name of this assignment</div>
-
-    <form method="post">{% csrf_token %}
-        {{ form.name }}
-        <div class="scb_s_form_errors">
-            {{ form.name.errors }}
+    <form method="post" enctype="multipart/form-data" class="scb_ab_s_assignment_form">{% csrf_token %}
+        <div class='scb_s_assignment_setup_course_name_heading'>Name</div>
+        <input type="text" name="assignment_name" value="{{ assignment_name }}">
+        <span class="name_error"></span>
+        <div class='scb_s_assignment_setup_course_name_heading'>Assignment Text</div>
+        <textarea
+            name="assignment_text"
+            placeholder="This text will be displayed to students above the assignment files. We recommend that you keep this text short.">{{ assignment_text }}</textarea>
+        <div class='scb_s_assignment_setup_course_name_heading'>Upload Assignment Files</div>
+        <div class="scb_ab_s_file_list">
+            <ul>
+                {% for file in assignment_files %}
+                    <li>
+                        <a href="{{ file.url }}">{{ file.name }}</a>
+                        <button class="scb_s_ab_trash_icon scb_ab_s_delete_file"></button>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-
-
         <div>
-            <input type="submit"
-                   name="continue"
-                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE AND CONTINUE &nbsp; &#9654;"/>
+            <input type="file" name="files" id="files" class="scb_ab_s_add_files_input" multiple>
+            <label for="files" class="scb_s_gray_button scb_ab_s_add_files_button">
+                ADD FILES
+            </label>
+        </div>
+        <div class="scb_ab_s_nav_controls_right">
             <input type="submit"
                    name="save"
                    class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-                   value="SAVE"/>
+                   value="SAVE">
+            <input type="submit"
+                   name="continue"
+                   class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                   value="SAVE AND CONTINUE &nbsp; &#9654;">
         </div>
     </form>
-
-
 {% endblock %}

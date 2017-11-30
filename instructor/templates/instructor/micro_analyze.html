@@ -20,32 +20,40 @@
             {{ protocol_name }}
           </div>
         </div>
-        <form id="image_form" method="post" enctype="multipart/form-data" class="scb_ab_s_image_form">
-          {{ image_form.as_p }}
+        <form id="image_form" action="" method="POST" enctype="multipart/form-data" class="scb_ab_s_image_form">
+          {{ image_form.as_table }}
 
-        <input type="submit"
-               name="upload"
-               style="display: inline-block"
-               class="scb_s_gray_button"
-               value="UPLOAD">
+            <input id="upload_btn"
+                   type="submit"
+                   name="upload"
+                   class="scb_s_gray_button"
+                   value="UPLOAD">
         </form>
+        <div class="scb_image_menu_title scb_assigment_title">Selected Images</div>
+        <div class="scb_image_menu_title scb_image_bank_title">Images Bank</div>
         <div class="scb_ab_s_canvas_library">
-          {% for image in all_images %}
-            <div class="scb_ab_s_library_item_wrapper">
-              <img id="library-{{ image.id }}" src="{{ image.file.url}}"
-                   class="scb_ab_f_select_image "/>
-            </div>
-
-          {% endfor %}
+          <div class="scb_ab_s_select_box">
+              <div class="scb_f_image_filter scb_f_image_filter_red"></div>
+              <div class="scb_f_image_filter scb_f_image_filter_blue"></div>
+              <div class="scb_f_image_filter scb_f_image_filter_green"></div>
+              <div class="scb_f_image_filter scb_f_image_filter_merge"></div>
+          </div>
+          <div class="scb_ab_s_image_bank noselect">
+              {% for image in all_images %}
+              <img id="library-{{ image.id }}" src="{{ image.file.url }}"
+                   class="scb_ab_s_library_item_wrapper scb_ab_f_select_image"/>
+              {% endfor %}
+          </div>
+          <div id="cursor_selector" class="cursor-selector"></div>
         </div>
-        <div class="scb_ab_s_upload_instruction">* Please SELECT uploaded image(s) by clicking on the image</div>
-        <button type="button" class="scb_s_gray_button scb_ab_s_delete_btn_position scb_ab_f_remove_image"
+          <button type="button" class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_image"
+                  data-pk="{{ mapping_pk }}" data-group_id="{{ group_id }}" data-analysis="{{ form_analysis }}">
+              SAVE SELECTION
+          </button>
+          <div class="scb_ab_s_upload_instruction">* To DELETE please mark image(s) by clicking on it</div>
+          <button type="button" class="scb_s_gray_button scb_ab_s_delete_btn_position scb_ab_f_remove_image"
                 data-pk="{{ mapping_pk }}">
           DELETE IMAGE(S)
-        </button>
-        <button type="button" class="scb_s_gray_button scb_ab_s_save_btn_position scb_ab_f_save_image"
-                data-pk="{{ mapping_pk }}" data-filter_group_id="{{ filter_group_id }}">
-          SAVE SELECTION
         </button>
 
       </div>
@@ -61,7 +69,7 @@
     </div>
     <div class="scb_ab_s_heading_instructions">
         Note: We recommend that images are at least 500x500 pixels
-        for optimal viewing in StarCellBio.
+        for optimal viewing in StarCellBio and less 2MB for successful uploading.
     </div>
   </div>
   <div class="scb_ab_s_form_container">
@@ -116,9 +124,15 @@
                 {% endfor %}
               </div>
               {% for image_set in instance.grouped_images.all %}
-                <div class="scb_ab_s_row" style="display: table-row">
-                  <div class="scb_ab_s_row_offset"></div>
-                  <div class="scb_ab_s_filters_row_name">Set {{ forloop.counter }} :</div>
+                <div class="scb_ab_s_row scb_f_set" style="display: table-row" data-group_id="{{ image_set.id }}">
+                  <button type="button" data-group_id="{{ image_set.id }}"
+                      class="open_upload_window_btn scb_s_gray_button scb_ab_s_filters_row_name"
+                      data-row_id="row-{{ instance.id }}"
+                      data-sample_treatment="{{ analysis }}, {{ condition }}"
+                      data-group_id="{{ image_set.id }}"
+                      data-strain="{{ forloop.parentloop.counter }}">
+                      Set {{ forloop.counter }}/add images
+                  </button>
                   {% for filter in filters %}
                     <div class="scb_ab_s_filtered_image_grid">
                       {% with image_field=filter|add:'_filter_image' %}
@@ -131,11 +145,6 @@
                                       data-group_id="{{ image_set.id }}" aria-label="Remove Image">×</span>
                             </div>
                             <img src="{{ filter_image.file.url }}" class="scb_ab_s_small_image"/>
-                          {% else %}
-                            <button type="button" data-filter_group_id="{{ filter }}-{{ image_set.id }}"
-                                    class="open_upload_window_btn scb_s_gray_button scb_ab_s_plus_button"
-                                    data-row_id="row-{{ instance.id }}"
-                                    data-sample_treatment="{{ analysis }}, {{ condition }}">&#43;</button>
                           {% endif %}
                         {% endwith %}
                       {% endwith %}
@@ -150,15 +159,17 @@
             <div class="scb_ab_s_row" style="padding:5px 0 10px">
               <div class="scb_ab_s_col_width_number"></div>
               <button type="button" class="scb_s_gray_button add_new_image_set"
-                      data-mapping_id="{{ instance.id }}">
-                NEW SET &#43;
+                      data-mapping_id="{{ instance.id }}"
+                      data-sample_treatment="{{ analysis }}, {{ condition }}"
+                      data-strain="{{ forloop.counter }}">
+                ADD IMAGE(S) &#43;
               </button>
             </div>
           {% else %}
             {% if instance.images.count > 0 %}
               <div class="scb_ab_s_row">
                 <div class="scb_ab_s_col_width_number"></div>
-                <div class="scb_ab_s_sample_image_list">
+                <div class="scb_ab_s_sample_image_list" data-analysis="{{ analysis }}">
                   {% for image in instance.images.all %}
                     <div class="scb_ab_s_image_wrapper">
                       <div class="scb_ab_s_remove_image_icon_position">
@@ -181,27 +192,32 @@
               <div class="scb_ab_s_col_width_number"></div>
               <button type="button" class="scb_s_gray_button open_upload_window_btn"
                       data-row_id="row-{{ instance.id }}"
-                      data-sample_treatment="{{ analysis }}, {{ condition }}">
+                      data-sample_treatment="{{ analysis }}, {{ condition }}"
+                      data-strain="{{ forloop.counter }}"
+              >
                 ADD IMAGE(S)
               </button>
             </div>
           {% endif %}
         {% endfor %}
       {% endfor %}
-      <input type="submit"
-             name="continue"
-             class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-             value="{{ save_and_continue }} &nbsp; &#9654;">
-      <input type="submit"
-             name="save"
-             class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-             value="SAVE"/>
+      <div class="scb_ab_s_nav_controls scb_ab_s_shift_left">
+        <input type="button"
+               class="scb_ab_s_navigation_button scb_s_back_btn"
+               value="&#9664; &nbsp; BACK"
+               data-location="{% url "microscopy_sample_prep" %}">
+        <input type="submit"
+               name="save"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="SAVE">
+        <input type="submit"
+               name="continue"
+               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+               value="{{ save_and_continue }} &nbsp; &#9654;">
+      </div>
     </form>
   </div>
-  <a href="{% url "microscopy_sample_prep" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-  </a>
-   <script type="text/javascript">
+  <script type="text/javascript">
     dialog_open = {{ dialog_open|safe }};
   </script>
 {% endblock %}

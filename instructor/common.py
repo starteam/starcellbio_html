@@ -1,3 +1,5 @@
+from django import forms
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.forms.models import modelformset_factory
@@ -9,7 +11,10 @@ import datetime
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.core.files.base import ContentFile
+from django.core.files.storage import FileSystemStorage
 from django.core.exceptions import PermissionDenied, FieldError
+from django.utils.safestring import mark_safe
 import backend.models
 import json
 import re
@@ -19,6 +24,7 @@ from instructor.compiler import (
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 from django.template.defaulttags import register
+
 
 page_order = (
     'assignment', 'course', 'strains', 'variables', 'treatments', 'protocols',
@@ -88,6 +94,8 @@ def assignment_delete(request, assignment_pk):
 def create_new_assignment(request):
     request.session['new'] = True
     request.session['assignment_name'] = ''
+    request.session['assignment_text'] = ''
+    request.session['assignment_files'] = ''
     request.session['based_on'] = ''
     return redirect('common_assignment_setup')
 
@@ -128,7 +136,23 @@ def get_pages(assignment):
 @login_required
 def assignment_setup(request):
     error = ''
+    assignment_text = ''
+    assignment_files = ''
     if request.method == "POST":
+        assignment_text = request.POST['assignment_text']
+        request.session['assignment_text'] = assignment_text
+        files = request.FILES.getlist('assignment_files')
+        if files:
+            names_urls = []
+            for file in files:
+                fs = FileSystemStorage()
+                filename = fs.save(file.name, file)
+                names_urls.append({
+                    'name': file.name,
+                    'url': fs.url(filename)
+                })
+            assignment_files = json.dumps(names_urls)
+            request.session['assignment_files'] = assignment_files
         assignment_name = request.POST['name']
         if request.POST['based_on']:
             request.session['based_on'] = request.POST['based_on']
@@ -163,6 +187,8 @@ def assignment_setup(request):
             'access': json.dumps('private'),
             'error': error,
             'assignment_name': assignment_name,
+            'assignment_text': assignment_text,
+            'assignment_files': assignment_files,
             'based_on': request.session['based_on'],
             'new': request.session['new'],
             'section_name': 'Assignment',
@@ -234,6 +260,8 @@ def course_setup(request):
 def create_assignment(request, course_selected):
     # Create a new assignment
     assignment_name = request.session['assignment_name']
+    assignment_text = request.session['assignment_text']
+    assignment_files = request.session['assignment_files']
     assignment_id = assignment_name + datetime.datetime.now().strftime(
         "%I:%M%p on %B %d, %Y"
     )
@@ -245,6 +273,8 @@ def create_assignment(request, course_selected):
         a = models.Assignment(
             course=course_selected,
             name=assignment_name,
+            text=assignment_text,
+            files=assignment_files,
             assignment_id=assignment_id,
             basedOn=based_on
         )
@@ -252,6 +282,8 @@ def create_assignment(request, course_selected):
         a = models.Assignment(
             course=course_selected,
             name=assignment_name,
+            text=assignment_text,
+            files=assignment_files,
             assignment_id=assignment_id
         )
     a.save()
@@ -305,20 +337,46 @@ def assignment_selected(func):
 @check_assignment_owner
 @login_required
 def assignment_modify(request):
-    assignment_id = request.session['assignment_id']
-    assignment = get_object_or_404(models.Assignment, pk=assignment_id)
-    AssignmentForm = modelform_factory(models.Assignment, fields=['name'])
-
+    pk = request.session['assignment_id']
+    assignment = get_object_or_404(models.Assignment, pk=pk)
+    files_to_delete = []
+    assignment_files = []
     if request.method == "POST" and assignment.access == 'private':
-        form = AssignmentForm(request.POST, instance=assignment)
-        if form.is_valid():
-            form.save()
-            if 'continue' in request.POST:
-                return redirect("common_course_modify")
-    elif request.method == "POST" and 'continue' in request.POST:
-        return redirect("common_course_modify")
+        fs = FileSystemStorage()
+        assignment.name = request.POST['name']
+        assignment.text = request.POST['text']
+        # Delete files
+        if request.POST['files_to_delete']:
+            files_to_delete = json.loads(request.POST['files_to_delete'])
+        if assignment.files:
+            assignment_files = json.loads(assignment.files)
+        for file_to_delete in files_to_delete:
+            for file in assignment_files[:]:
+                if file['url'] == file_to_delete:
+                    # Delete file in model
+                    assignment_files.remove(file)
+                    # Delete file on disk
+                    if file_to_delete.startswith('/'):
+                        file_to_delete = file_to_delete[1:]
+                        fs.delete(file_to_delete)
+            assignment.files = json.dumps(assignment_files)
+
+        # Add files
+        files = request.FILES
+        if files:
+            for filename in files.keys():
+                file_name = fs.save(filename, ContentFile(files[filename].read()))
+                assignment_files.append({
+                    'name': filename,
+                    'url': fs.url(file_name)
+                })
+            assignment.files = json.dumps(assignment_files)
+        assignment.save()
     else:
-        form = AssignmentForm(instance=assignment)
+        if assignment.files:
+            assignment_files = json.loads(assignment.files)
+        else:
+            assignment_files = []
 
     all_assignments = models.Assignment.objects.filter(
         course__owner=request.user
@@ -328,11 +386,12 @@ def assignment_modify(request):
         'instructor/assignment_modify.html',
         {
             'assignments': all_assignments,
-            'form': form,
             'access': json.dumps(assignment.access),
             'based_on': request.session['based_on'],
             'new': request.session['new'],
             'assignment_name': assignment.name,
+            'assignment_text': assignment.text,
+            'assignment_files': assignment_files,
             'section_name': 'Assignment',
             'page_name': 'assignment',
             'pages': get_pages(assignment)
@@ -507,14 +566,14 @@ def recreate_experimental_setup(assignment):
     create_treatments(assignment)
 
 
-def find_next_view(assignment):
+def find_next_view(assignment, technique):
     """ Page to go to on 'continue' """
-    next_view = 'common_assignments'
-    if assignment.has_wb:
+    next_view = 'common_select_technique'
+    if assignment.has_wb and technique == 'has_wb':
         next_view = 'western_blot_lysate_type'
-    elif assignment.has_micro:
+    elif assignment.has_micro and technique == 'has_micro':
         next_view = 'microscopy_sample_prep'
-    elif assignment.has_fc:
+    elif assignment.has_fc and technique == 'has_fc':
         next_view = 'facs_sample_prep'
     return next_view
 
@@ -526,42 +585,26 @@ def select_technique(request):
     page_number = page_order.index('techniques')
     assignment_id = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=assignment_id)
-    var_fields = ['has_wb', 'has_fc', 'has_micro']
-    AssignmentForm = modelform_factory(models.Assignment, fields=var_fields)
 
-    if request.method == "POST" and assignment.access == 'private':
-        form = AssignmentForm(request.POST, instance=assignment)
-        if form.is_valid():
-            # if facs was selected want to enable first link
-            if (
-                form.instance.has_fc and
-                form.instance.facs_last_enabled_page == 0
-            ):
-                form.instance.facs_last_enabled_page = 1
+    if request.method == "POST":
+        technique = json.loads(request.body).get('technique')
+        setattr(assignment, technique, not getattr(assignment, technique))
+        if assignment.has_wb:
+            if (page_order.index(assignment.last_page_name) <= page_number):
+                assignment.last_page_name = 'wb_lysate_type'
+        assignment.save()
+        return HttpResponse(reverse(find_next_view(assignment, technique)), content_type='text')
 
-            form.save()
-            if 'continue' in request.POST:
-                if assignment.has_wb:
-                    if (
-                        page_order.index(assignment.last_page_name) <=
-                        page_number
-                    ):
-                        assignment.last_page_name = 'wb_lysate_type'
-                    assignment.save()
-                return redirect(find_next_view(assignment))
+    allow_finish = assignment.has_wb or assignment.has_micro or assignment.has_fc
 
-    elif request.method == "POST" and 'continue' in request.POST:
-        return redirect(find_next_view(assignment))
-
-    form = AssignmentForm(instance=assignment)
     return render_to_response(
         'instructor/select_technique.html', {
-            'form': form,
             'access': json.dumps(assignment.access),
             'assignment_name': assignment.name,
             'section_name': 'Select Technique',
             'page_name': 'techniques',
-            'pages': get_pages(assignment)
+            'pages': get_pages(assignment),
+            'allow_finish': allow_finish,
         }
     )
 
@@ -1159,10 +1202,12 @@ def update_wb_bands(assignment, antibodies=None, strain_treatments=None):
     error = ''
     if models.WesternBlot.objects.filter(assignment=assignment).exists():
 
-        message = "You have entered non-numerical values, " \
-                  "including negative numbers, text inputs and/or symbols, " \
-                  "in the band size input boxes. The band size input " \
-                  "boxes must only contain numerical values."
+        message = (
+            "You have entered non-numerical values, "
+            "including negative numbers, text inputs and/or symbols, "
+            "in the band size input boxes. The band size input "
+            "boxes must only contain numerical values."
+       )
 
         weights_by_type = ['wc_weight', 'nuc_weight', 'cyto_weight']
         antibodies_updated = True
@@ -1219,11 +1264,7 @@ def western_blot_band_intensity(request):
     pk = request.session['assignment_id']
     assignment = models.Assignment.objects.get(id=pk)
     # Page to go to on 'continue'
-    next_view = 'common_assignments'
-    if assignment.has_micro:
-        next_view = 'microscopy_sample_prep'
-    elif assignment.has_fc:
-        next_view = 'facs_sample_prep'
+    next_view = 'common_select_technique'
     wb, created = models.WesternBlot.objects.get_or_create(
         assignment=assignment
     )
@@ -1277,9 +1318,7 @@ def western_blot_band_intensity(request):
     }
     # need to decide to finish the assignment or
     # to move on to next technique
-    save_and_continue_button = 'SAVE AND FINISH'
-    if assignment.has_fc:
-        save_and_continue_button = 'SAVE AND CONTINUE'
+    save_and_continue_button = 'SAVE AND CONTINUE'
     return render_to_response(
         'instructor/wb_band_intensity.html',
         {
@@ -1392,14 +1431,21 @@ def microscopy_analyze(request):
     chosen_sampleprep = ""
     chosen_protocol = ""
     mapping_pk = ""
-    filter_group_id = ""
+    group_id = ""
+    form_analysis = ""
     dialog_open = False
 
-    if request.method == "POST" and assignment.access == 'private':
+    if request.method == 'GET':
+        mapping_pk = request.GET.get("mapping", "")
+        chosen_protocol = request.GET.get('protocol', '')
+        chosen_sampleprep = request.GET.get('sample_prep', '')
+        group_id = request.GET.get('group_id', '')
+        form_analysis = request.GET.get('analysis', '')
+
+    if request.method == 'POST' and assignment.access == 'private':
         if 'upload' in request.POST:
-            if len(request.FILES) > 0:
-                uploaded_file = request.FILES['file']
-                objective = request.POST.get('objective')
+            objective = request.POST.get('objective')
+            for uploaded_file in request.FILES.getlist('file'):
                 new_image, _ = models.MicroscopyImage.objects.get_or_create(
                     file=uploaded_file,
                     assignment=assignment,
@@ -1411,13 +1457,11 @@ def microscopy_analyze(request):
                 chosen_protocol = request.POST.get('protocol')
                 chosen_sampleprep = request.POST.get('sample_prep')
                 mapping_pk = request.POST.get('mapping_pk')
-                filter_group_id = request.POST.get('filter_group_id')
+                group_id = request.POST.get('group_id')
 
         else:  # then 'save' or 'continue' in request.POST
             if 'continue' in request.POST:
-                if assignment.has_fc:
-                    return redirect('facs_sample_prep')
-                return redirect('common_assignments')
+                return redirect('common_select_technique')
 
     image_mappings = models.MicroscopyImageMapping.objects.filter(
         sample_prep__assignment=assignment
@@ -1455,7 +1499,14 @@ def microscopy_analyze(request):
     all_images = models.MicroscopyImage.objects.filter(assignment=assignment)
     ImageForm = modelform_factory(
         models.MicroscopyImage,
-        fields=['file', 'objective']
+        fields=['file', 'objective'],
+        widgets={'file': forms.ClearableFileInput(
+            attrs={'multiple': True, 'class': 'box_file', 'data-plural-caption': '{} files are '},
+        )},
+        labels={'file': mark_safe(
+            'To <b>upload</b> new image(s) <strong>choose a file(s)</strong>'
+            '<span class="box_dragndrop"> or drag and drop it to the Image Bank (image size < 2MB)</span>.'
+        )},
     )
     image_form = ImageForm()
     variables = {
@@ -1466,9 +1517,7 @@ def microscopy_analyze(request):
         'has_collection_time': assignment.has_collection_time
     }
     # need to decide to finish the assignment or to move on to FACS
-    save_and_continue_button = 'SAVE AND FINISH'
-    if assignment.has_fc:
-        save_and_continue_button = 'SAVE AND CONTINUE'
+    save_and_continue_button = 'SAVE AND CONTINUE'
 
     return render_to_response(
         'instructor/micro_analyze.html',
@@ -1481,7 +1530,8 @@ def microscopy_analyze(request):
             'protocol_name': chosen_protocol,
             'sample_prep_name': chosen_sampleprep,
             'mapping_pk': mapping_pk,
-            'filter_group_id': filter_group_id,
+            'group_id': group_id,
+            'form_analysis': form_analysis,
             'image_groups': grouped_images,
             'variables': variables,
             'save_and_continue': save_and_continue_button,
@@ -1667,7 +1717,7 @@ def facs_analyze(request):
     )
 
     if request.method == "POST" and 'continue' in request.POST:
-        return redirect('common_assignments')
+        return redirect('common_select_technique')
 
     # Grouping HistogramMapping objects by cell_treatment,
     # analysis, and condition
@@ -1727,8 +1777,9 @@ def facs_analyze(request):
             'all_histograms_data': json.dumps(all_histogram_data),
             'all_histograms': all_histograms,
             'access': json.dumps(assignment.access),
+            'scale': json.dumps(facs.scale),
             'x_upper_bound': json.dumps(facs.xrange),
-            'tick_values': json.dumps(facs.tick_values),
+            'y_upper_bound': json.dumps(facs.yrange),
             'histogram_groups': grouped_histograms,
             'variables': variables,
             'assignment_name': assignment.name,
@@ -1795,35 +1846,34 @@ def delete_images(request):
         selected_image.delete()
     return HttpResponse()
 
-
 @assignment_selected
 @check_assignment_owner
 @login_required
 def select_images(request):
     pk = request.session['assignment_id']
     mapping_id = request.POST.get('mapping_pk')
-    filter_group_id = request.POST.get('filter_group_id')
+    group_id = request.POST.get('group_id')
     image_pk_list = request.POST.getlist('image_pk_list[]')
 
-    if filter_group_id:
-        filter_group_id = filter_group_id.split('-')
-        filter_name = filter_group_id[0]
-        group_id = filter_group_id[1]
-
-        if filter_name not in filters:
-            raise FieldError
+    if group_id:
+        images_selected = json.loads(request.POST.get('group_images'))
         image_group = get_object_or_404(
             models.MicroscopyGroupedImages,
             id=group_id,
             image_mapping__sample_prep__assignment__pk=pk
         )
-        selected_image = get_object_or_404(
-            models.MicroscopyImage,
-            pk=image_pk_list[0],
-            assignment__pk=pk
-        )
-        field_name = filter_name + '_filter_image'
-        setattr(image_group, field_name, selected_image)
+        for filter_name in filters:
+            filter_image_id = images_selected.get(filter_name)
+            field_name = filter_name + '_filter_image'
+            if filter_image_id:
+                selected_image = get_object_or_404(
+                    models.MicroscopyImage,
+                    pk=filter_image_id,
+                    assignment__pk=pk
+                )
+                setattr(image_group, field_name, selected_image)
+            else:
+                setattr(image_group, field_name, None)
         image_group.save()
     else:
         instance = get_object_or_404(
@@ -1831,12 +1881,14 @@ def select_images(request):
             pk=mapping_id,
             sample_prep__assignment__pk=pk
         )
+        instance.images.clear()
         for image_pk in image_pk_list:
             selected_image = get_object_or_404(
                 models.MicroscopyImage,
                 pk=image_pk,
                 assignment__pk=pk
             )
+            ("Image with pk: {} is selected".format(image_pk))
 
             instance.images.add(selected_image)
         instance.save()
@@ -1860,7 +1912,7 @@ def add_image_group(request):
     instance.grouped_images.add(image_group)
     instance.save()
 
-    return HttpResponse()
+    return HttpResponse(image_group.id)
 
 
 @assignment_selected

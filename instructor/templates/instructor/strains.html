@@ -1,7 +1,6 @@
 {% extends "instructor/assignment_sidebar.html" %}
 
 {% block right_side %}
-
 <div class="scb_ab_s_heading_div">
     <div class="scb_ab_s_page_title">Strains</div>
     <div class='scb_ab_s_heading_description'>
@@ -28,19 +27,22 @@
         <div>
             <input type="submit" name="add" class='scb_s_gray_button scb_ab_s_experiment_setup_add_button' value="ADD">
         </div>
-        <input type="submit"
-               name="continue"
-               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn
-               {% if formset.0.id.value == None %}disabled{% endif %}"
-               value="SAVE AND CONTINUE &nbsp; &#9654;"
-               {% if formset.0.id.value == None %}disabled{% endif %}>
-        <input type="submit"
-               name="save"
-               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-               value="SAVE"/>
+        <div class="scb_ab_s_nav_controls">
+          <input type="button"
+                  class="scb_ab_s_navigation_button scb_s_back_btn"
+                  value="&#9664; &nbsp; BACK"
+                  data-location="{% url "common_course_modify" %}">
+          <input type="submit"
+                 name="save"
+                 class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+                 value="SAVE">
+          <input type="submit"
+                 name="continue"
+                 class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn
+                 {% if formset.0.id.value == None %}disabled{% endif %}"
+                 value="SAVE AND CONTINUE &nbsp; &#9654;"
+                 {% if formset.0.id.value == None %}disabled{% endif %}>
+        </div>
     </form>
 </div>
-<a href="{% url "common_course_modify" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-</a>
 {% endblock %}

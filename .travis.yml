@@ -22,6 +22,8 @@ before_script:
 - sh -c "mysql -uroot -e \"grant all on *.* to 'starcellbio'@'localhost' identified by '136a411ed9e8592089444b7164ffaf84'\""
 - ./chromedriver > /tmp/chromedriver.log 2> /tmp/chromedriver.err &
 - pip install -r requirements.txt
+- wget https://raw.githubusercontent.com/knadh/jqdialog/master/jqdialog.js -P html_app/js/
+- cp node_modules/closure-templates/soyutils.js html_app/js/
 - python html_app/build.py
 - "./manage.py collectstatic --noinput"
 install:

@@ -61,7 +61,8 @@ class SimpleTest(LiveServerTestCase):
         super(SimpleTest, self).tearDown()
 
     def setUp(self):
-        User.objects.create_user(username='test', password='test')
+        # NOTE(idegtiarov) Add User id which is used as default for new assignment created
+        User.objects.create_user(username='test', password='test', id=1)
 
     def _setup_experiment(self, number=3, samples=tuple()):
         """

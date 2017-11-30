@@ -1,5 +1,11 @@
+*:focus {
+    outline: 2px solid #1c1c1c;
+    outline-offset: 1px;
+}
 
-input, select { outline: none; }
+::-moz-focus-inner {
+    border: 0;
+}
 
 .scb_ab_s_input_text_field{
     font-size: 10pt;
@@ -11,6 +17,59 @@ input, select { outline: none; }
     padding: 5px;
     display:inline-block;
 }
+.scb_ab_s_input_text_area {
+    font-size: 10pt;
+    font-family: 'sourcesanspro-regular';
+    color: black;
+    margin-left: 27px;
+    margin-top: 10px;
+    padding: 5px;
+    display:inline-block;
+    /* Equivalent to rows = 10, cols = 80 */
+    width: 43em;
+    height: 10em;
+}
+
+.scb_ab_s_add_files_input:focus + label, .scb_ab_s_add_files_input_setup:focus + label {
+    outline: 2px solid #1c1c1c;
+    outline-offset: 1px;
+}
+
+.scb_ab_s_add_files_input, .scb_ab_s_add_files_input_setup {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.scb_ab_s_file_list ul {
+    margin: 5px 0 20px 0;
+}
+
+.scb_ab_s_file_list li {
+    margin-bottom: 0.5em;
+}
+
+.scb_ab_s_file_list a {
+    color: #316f94;
+}
+
+.scb_ab_s_file_list a:hover {
+    color: #676767;
+}
+
+.scb_ab_s_add_files_button {
+    padding: 5px;
+    border: 0;
+    margin-left: 27px;
+}
+
+.scb_ab_s_delete_file {
+    border: 0;
+}
+
 .scb_ab_s_form_select_field{
     font-family: 'sourcesanspro-regular';
     width: 141px;
@@ -29,36 +88,53 @@ input, select { outline: none; }
     background-color: #f4f6f8;
 }
 
+.scb_ab_s_nav_controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.scb_ab_s_shift_left {
+    margin-left: -20px;
+}
+
+.scb_ab_s_nav_controls_left_right {
+    display: flex;
+    justify-content: space-between;
+}
+
+.scb_ab_s_nav_controls_left_right > input {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.scb_ab_s_nav_controls_right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.scb_ab_s_nav_controls_right > input {
+    margin-right: 15px;
+}
+
 .scb_ab_s_navigation_button {
     border: none;
     width: 185px;
     height: 30px;
-    margin: 1px;
     font-size: 10pt;
     font-family: 'sourcesanspro-semibold';
     padding-top: 2px;
-    margin-right: 19px;
-
     border-radius: 8px;
     letter-spacing: 1px;
     background: #27956c;
     color: white;
     text-decoration: none;
     cursor: pointer;
-    padding-left: 13px;
-    padding-right: 9px;
-}
-.scb_ab_s_nav_continue_btn{
-    float: right;
-    margin-top: 100px;
-
 }
 
-.scb_s_back_btn {
+.scb_ab_s_nav_continue_btn, .scb_s_back_btn {
     margin-top: 100px;
-    float: left;
-    margin-left: 20px;
 }
+
 .scb_ab_s_input_error{
     color: indianred;
     display: inline-block;
@@ -305,6 +381,14 @@ select:disabled {
     color: #316f94;
     padding-top: 5px;
 }
+.scb_ab_s_sidebar_section_subheading{
+    padding-left: 14px;
+    font-size: 12pt;
+    font-weight: bold;
+    font-family: 'sourcesanspro-semibold';
+    color: #316f94;
+    padding-top: 5px;
+}
 .scb_ab_s_sidebar_page_name_selected{
 	background: #c9cdd0;
 }
@@ -315,6 +399,14 @@ select:disabled {
 	width: 221px;
 	padding: 7px 3px 5px 33px;
 	color: #010101;
+}
+
+.scb_ab_s_sidebar_technique_link{
+    font-size: 10pt;
+    margin: 0;
+    font-family: 'sourcesanspro-semibold';
+    padding: 7px 3px 5px 33px;
+    color: #010101;
 }
 /* Protein size input */
 div.scb_ab_s_antibody_name{
@@ -550,10 +642,22 @@ input[type="checkbox"].disabled {
 .scb_ab_s_analyze_dialog{
     width:800px;
     left: 300px;
-
 }
-.scb_ab_s_analyze_dialog>div{
-    margin: 12% auto auto 0;
+
+.scb_ab_s_analyze_dialog_histogram {
+    width: 600px;
+    left: 400px;
+}
+
+.scb_ab_s_analyze_dialog_histogram > div {
+    height: 100%;
+    overflow: auto;
+}
+
+@media (min-width: 1300px) {
+    .scb_ab_s_analyze_dialog>div{
+        margin: 12% auto auto 0;
+    }
 }
 
 .scb_ab_s_copy_dialog{
@@ -611,7 +715,6 @@ input[type="checkbox"].disabled {
     float: right;
     -webkit-appearance: none;
     font-family: 'sourcesanspro-semibold';
-    outline: none;
     height: 26px;
     width: 26px;
     cursor: pointer;
@@ -627,28 +730,20 @@ input[type="checkbox"].disabled {
 /* Draw Histogram View */
 .scb_ab_s_draw_new_histogram_content{
     margin: 15px;
-    text-align: right;
-    padding-right: 80px;
 }
 
 .scb_ab_s_draw_histogram_canvas{
-    width: 600px;
-    height: 300px;
+    width: 380px;
+    height: 365px;
     cursor: inherit;
     border: 1px gray solid;
     background: white;
-    margin: 20px 0;
+    margin: 20px 30px;
 }
+
 .scb_ab_s_small_canvas{
-    width:200px;
-    height: 100px;
-    border: 1px gray solid;
-    background: white;
-}
-.scb_ab_s_canvas_noise_preview{
-    margin: 25px;
-    width:450px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     border: 1px gray solid;
     background: white;
 }
@@ -672,7 +767,7 @@ input[type="checkbox"].disabled {
     margin-top: -6px;
 }
 .scb_ab_s_chosen_sample_heading{
-    padding: 0 0 20px 30px;
+    padding: 0 0 15px 30px;
     text-align: left;
 }
 
@@ -688,6 +783,7 @@ input[type="checkbox"].disabled {
     display: table-cell;
     text-align:center;
     padding: 5px 0;
+    cursor: pointer;
 }
 .scb_ab_s_histogram_tab_not_selected{
     background: lightgrey;
@@ -700,9 +796,7 @@ input[type="checkbox"].disabled {
     box-shadow: 0 0 2px 1px grey;
     color:  white;
 }
-.scb_ab_s_draw_histogram_view, .scb_ab_s_select_histogram_view{
-    height: 550px;
-}
+
 .scb_ab_s_library_item_wrapper{
     display: inline-block;
     margin: 10px;
@@ -710,24 +804,32 @@ input[type="checkbox"].disabled {
 .scb_ab_s_canvas_library{
     margin: 30px 30px 0;
     text-align: center;
-    height: 350px;
+    height: 500px;
     border: 1px solid lightgrey;
     overflow: scroll;
     box-shadow: inset 2px 2px 5px grey;
+    cursor: auto;
+}
+.scb_ab_s_canvas_library_histogram {
+    height: 460px;
 }
 .scb_ab_s_save_btn_position{
-    right: 30px;
+    left: 30px;
     position:absolute;
-    bottom: 30px;
+    bottom: 0px;
 }
 .scb_ab_s_delete_btn_position{
-    right: 170px;
+    right: 30px;
     position:absolute;
-    bottom: 30px;
+    bottom: 0px;
 }
 .scb_ab_s_histogram_selected{
     border: 1px solid indianred;
     box-shadow: 2px 2px 5px indianred;
+}
+
+.scb_ab_s_save_btn_position_wrapper {
+    margin-top: 40px;
 }
 
 .scb_ab_s_preview_canvas_div{
@@ -740,14 +842,40 @@ input[type="checkbox"].disabled {
     background-color:darkgrey;
 }
 
-.scb_ab_s_add_noise_btn{
-    display: inline-block;
-    float: right;
+.scb_ab_s_curve_controls {
+    text-align: left;
+    margin-left: 77px;
+    margin-bottom: 10px;
 }
 
-/* FACS setup histogram parameters */
-.scb_ab_s_canvas_axis_preview {
-    margin-left: 15px;
+.scb_ab_s_histogram_controls {
+    padding-left: 30px;
+}
+
+.scb_ab_s_noise_slider {
+  border-radius: 7px;
+  height: 8px;
+  margin: 7px 10px 0 5px;
+  width: 150px;
+  display: inline-block;
+  background: #ebebeb;
+  margin-right: 30px;
+}
+
+.scb_ab_s_noise_slider > .ui-slider-range {
+  height: 3px;
+  top: 3px;
+  border-radius: 2px;
+  left: 3px;
+  margin-right: 15px;
+  background: #92beba;
+}
+
+.scb_ab_s_noise_slider > .ui-slider-handle {
+  border-radius: 13px;
+  height: 20px;
+  width: 20px;
+  top: -0.5em;
 }
 
 label.custom-dropdown {
@@ -788,8 +916,9 @@ label.custom-dropdown {
     box-shadow: 2px 2px 5px #27956c;
     opacity: 0.5;
 }
-.scb_ab_s_library_item_wrapper>img{
-    width: 200px;
+img.scb_ab_s_library_item_wrapper{
+    max-width: 100px;
+    max-height: 100px;
 }
 .scb_ab_s_image_form{
     margin-left: 30px;
@@ -810,8 +939,8 @@ label.custom-dropdown {
     display: table-cell;
     vertical-align: middle;
 }
-.scb_ab_s_row>div.scb_ab_s_filters_row_name{
-    width: 40px;
+.scb_ab_s_row>button.scb_ab_s_filters_row_name{
+    width: 130px;
     text-align: left;
     display: table-cell;
     vertical-align: middle;
@@ -834,6 +963,7 @@ label.custom-dropdown {
 }
 .scb_ab_s_select_image_div{
     height: 650px;
+    cursor: move;
 }
 input#id_objective{
     width: 30px;
@@ -860,8 +990,140 @@ input#id_objective{
 }
 
 .scb_ab_s_upload_instruction{
-    margin: 20px 0px 0 30px;
+    right: 180px;
+    position: absolute;
+    margin: 10px 0 0 30px;
     font-family: 'sourcesanspro-semibold';
     color: #316f94;
     font-weight: bold;
+}
+
+.scb_image_menu_title {
+    position: absolute;
+    margin: 5px 0;
+    font-size: medium;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+    font-style: oblique;
+    font-weight: bold;
+    color: #316f94;
+    padding: 5px;
+    border: 5px;
+}
+
+.scb_assigment_title {
+    left: 7%;
+}
+
+.scb_image_bank_title {
+    left: 50%;
+}
+
+.scb_ab_f_select_image {
+    visibility: hidden;
+}
+
+img.scb_ab_s_small_image_selected {
+    float: left;
+    min-width: 100px;
+    max-height: 100px;
+    margin: 10px;
+}
+
+.scb_ab_s_select_box {
+    margin-left: inherit;
+    text-align: center;
+    width: 180px;
+    height: inherit;
+    border-right: 1px solid lightgrey;
+    overflow: scroll;
+    box-shadow: inset 2px 2px 5px grey;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+}
+
+.scb_ab_s_image_bank {
+    margin-right: inherit;
+    text-align: center;
+    width: 550px;
+    height: inherit;
+    border-right: 1px solid lightgrey;
+    overflow: scroll;
+    box-shadow: inset 2px 2px 5px grey;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+}
+
+.box_file,
+input#id_objective,
+input#upload_btn,
+label[for="id_objective"],
+.box_dragndrop {
+    display: none;
+}
+
+label[for="id_file"] {
+    font-size: large;
+}
+
+label[for="id_file"] strong {
+    color: #005fb3;
+    cursor: pointer;
+}
+
+.scb_ab_s_image_form .box_dragndrop {
+  display: inline;
+}
+
+.cursor-selector {
+    border: 1px dotted #000;
+    position: fixed;
+    display: none;
+    z-index: 5000;
+}
+
+.scb_f_image_filter {
+    display: none;
+    text-align: center;
+    font-size: medium;
+    line-height: 100px;;
+    margin: 10px 30px;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px dotted;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.scb_f_image_filter>.scb_ab_f_select_image {
+    margin: 0;
+}
+
+.scb_f_image_filter_red {
+    color: red;
+    overflow: hidden;
+}
+
+.scb_f_image_filter.scb_f_image_filter_blue {
+    color: blue;
+}
+
+.scb_f_image_filter.scb_f_image_filter_green {
+    color: green;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.scb_ab_s_radio, scb_ab_s_checkbox {
+    margin-right: 5px;
 }

@@ -21,41 +21,35 @@
       </div>
     </div>
     <div class="scb_ab_s_heading_div">
-      <div class='scb_ab_s_heading_description'><i>Axis Ranges</i></div>
+      <div class='scb_ab_s_heading_description'><i>Axes Ranges</i></div>
       <br>
       <div class='scb_ab_s_heading_description'>
-        Please set the range for x, tick values for x
+        Please set the range for x and y
       </div>
     </div>
     <div class="scb_ab_s_input_headers">
       <div class="scb_ab_center_input_header">Upper value for x</div>
-      <div class="scb_ab_center_input_header">Tick values</div>
+      <div class="scb_ab_center_input_header">Upper value for y</div>
     </div>
     <div class="scb_ab_s_form_input_list">
       <div>{{ form.xrange }}</div>
-      <div>{{ form.tick_values }}</div>
+      <div>{{ form.yrange }}</div>
     </div>
-    <div class="scb_ab_s_heading_div">
-      <div class='scb_ab_s_heading_description'>
-        Edit the scale type and axis range values, then click 'save' to see the changes on the previewed graph below.
-      </div>
+    <div class="scb_ab_s_nav_controls">
+      <input type="button"
+             class="scb_ab_s_navigation_button scb_s_back_btn"
+             value="&#9664; &nbsp; BACK"
+             data-location="{% url "facs_sample_prep" %}">
+      <input type="submit"
+             name="save"
+             class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+             value="SAVE">
+      <input type="submit"
+             name="continue"
+             class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
+             value="SAVE AND CONTINUE &nbsp; &#9654;">
     </div>
-    <div style="display: block">
-      <canvas id="previewXAxis" class=" scb_ab_s_draw_histogram_canvas scb_ab_s_canvas_axis_preview"></canvas>
-    </div>
-
-    <input type="submit"
-           name="continue"
-           class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-           value="SAVE AND CONTINUE &nbsp; &#9654;">
-    <input type="submit"
-           name="save"
-           class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-           value="SAVE"/>
   </form>
-  <a href="{% url "facs_sample_prep" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-  </a>
   <script type="text/javascript">
     paper.install(window);
   </script>

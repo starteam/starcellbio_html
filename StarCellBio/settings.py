@@ -13,6 +13,7 @@ rel = lambda p: os.path.join(SITE_ROOT, p)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+ALLOWED_HOSTS = ['*']
 
 import platform
 if platform.node() == 'starapp':
@@ -140,7 +141,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'backend',
     'instructor',
-    'storages'
+    'storages',
+    'lti_provider',
 ) + auth.settings.INSTALLED_APPS
 
 # django all-auth config
@@ -160,6 +162,14 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
         'LOCATION': '/var/tmp/django_cache',
+    },
+    # NOTE(idegtiarov) LTI request validation required nonce and timestamp caching with small TIMEOUT param.
+    # To ensure all lti related data has the same lifetime and frequently deleted items are split from other cache data
+    # 'lti_cache' was added.
+    'lti_cache': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_lti_cache',
+        'TIMEOUT': 10,
     }
 }
 
@@ -210,6 +220,7 @@ DATABASES = {
 ADMINS = tuple(tuple(admin) for admin in ADMINS)
 
 HOSTNAME = platform.node().split('.')[0]
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -267,6 +278,18 @@ LOGGING = {
         },
         'urllib3': {
             'level': 'INFO',
-        }
+        },
+        'lti_provider.views': {
+            'level': LOG_LEVEL,
+            'handlers': ['console', 'syslog'],
+        },
+        'lti_provider.validator': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'syslog'],
+        },
+        'lti_provider.models': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'syslog'],
+        },
     },
 }

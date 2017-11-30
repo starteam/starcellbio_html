@@ -2,34 +2,26 @@
 
 {% block right_side %}
 
-    <div class='scb_s_experiment_setup_title'>Select Technique</div>
+    <div class='scb_s_experiment_setup_title'>Select Technique in the Left Bar</div>
 
     <div class='scb_s_assignment_setup_course_name_heading'>
-        Which techniques should be available to your students?
+        {% if allow_finish %}
+            Would you like to add another technique to this assignment?
+        {% else %}
+            Which techniques should be available to your students?
+        {% endif %}
+
     </div>
-    <br/>
-    <div class='scb_ab_s_form_container'>
-        <form method="post">{% csrf_token %}
-            <div class='scb_ab_s_variable_wrapper'>
-                {{ form.has_wb }} Western Blot
-            </div>
-            <div class='scb_ab_s_variable_wrapper'>
-                {{ form.has_micro }} Microscopy
-            </div>
-            <div class=' scb_ab_s_variable_wrapper'>
-                {{ form.has_fc }} Flow Cytometry
-            </div>
-            <input type="submit"
-               name="continue"
-               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-               value="SAVE AND CONTINUE &nbsp; &#9654;">
-            <input type="submit"
-               name="save"
-               class="scb_ab_s_navigation_button scb_ab_s_nav_continue_btn"
-               value="SAVE"/>
-        </form>
+    <br>
+    <div class="scb_ab_s_nav_controls_left_right">
+        <input type="button"
+               class="scb_ab_s_navigation_button scb_s_back_btn"
+               value="&#9664; &nbsp; BACK"
+               data-location="{% url "common_assignments" %}">
+        <input type="button"
+               class="scb_ab_s_navigation_button scb_s_back_btn"
+               value="SAVE AND FINISH &nbsp; &#9654;"
+               {% if not allow_finish %}hidden{% endif %}
+               data-location="{% url "common_assignments" %}">
     </div>
-    <a href="{% url "common_strain_treatments" %}">
-    <button class="scb_ab_s_navigation_button scb_s_back_btn" role='button'>&#9664; &nbsp; BACK</button>
-</a>
 {% endblock %}

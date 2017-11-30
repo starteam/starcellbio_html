@@ -151,6 +151,18 @@ background-image:url('../../images/western_blot/scb_gray_right_arrow_hover.png')
 	display:block;
 }
 
+.scb_s_display_section li {
+    margin-bottom: 0.5em;
+}
+
+.scb_s_display_section a {
+    color: #316f94;
+}
+
+.scb_s_display_section a:hover {
+    color: #676767;
+}
+
 .scb_assignments_header_link_selected{
 	color:white;
 	background-repeat:no-repeat;

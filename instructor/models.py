@@ -61,6 +61,8 @@ class Assignment(models.Model):
         default='micro_sample_prep'
     )
     name = models.CharField(max_length=50)
+    text = models.TextField(default='')
+    files = models.TextField(default='')
     access = models.CharField(max_length=50, choices=ACCESS, default='private')
     basedOn = models.ForeignKey("Assignment", null=True, blank=True)
     group_by = models.CharField(
@@ -268,7 +270,7 @@ FACS_KINDS = (
 )
 LINEAR = 'linear'
 LOG = 'log'
-FACS_SCALE_TYPES = ((LINEAR, 'Linear'), (LOG, 'Logarithmic Scale'))
+FACS_SCALE_TYPES = ((LINEAR, 'Linear'), (LOG, 'Logarithmic'))
 
 
 class FlowCytometry(models.Model):
@@ -279,7 +281,7 @@ class FlowCytometry(models.Model):
         choices=FACS_SCALE_TYPES
     )
     xrange = models.IntegerField(default=200)
-    tick_values = models.CharField(max_length=50, default='50,100,150')
+    yrange = models.IntegerField(default=100)
 
 
 class FlowCytometrySamplePrep(models.Model):
