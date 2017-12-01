@@ -125,11 +125,11 @@ def compile(assignment_id):
 
     ret['template']['instructions'] = [
         [
-            [
-                a.name, a.text if a.text else '', json.loads(a.files) if a.files else []
-            ]
+            a.name,
+            a.text if a.text else ''
         ]
     ]
+    ret['template']['files'] = json.loads(a.files) if a.files else []
     ret['template']['model'] = {}
 
     ret['template']['ui']['add_multiple_dialog'] = add_multiple_dialog(a)
