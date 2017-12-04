@@ -76,20 +76,18 @@ Assignment description
 
 
 		 {foreach $section in $assignments.selected.template.instructions}
-		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == $assignments.selected.last_instruction}scb_assignments_header_link_selected{/if}' assignment_id='{$assignments.selected.id}' role='link' title='{$section[0][0]}'   value='{$section[0][0]}' aria-controls='scb_s_assignment_scroll' aria-atomic='true' ><span>{$section[0][0]}</span>{if index($section) == $assignments.selected.last_instruction}<div class="arrow-down-blue"></div>{/if}</div>
+		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == $assignments.selected.last_instruction}scb_assignments_header_link_selected{/if}' assignment_id='{$assignments.selected.id}' role='link' title='{$section[0]}'   value='{$section[0]}' aria-controls='scb_s_assignment_scroll' aria-atomic='true' ><span>{$section[0]}</span>{if index($section) == $assignments.selected.last_instruction}<div class="arrow-down-blue"></div>{/if}</div>
 		{/foreach}
 		<div class = 'scb_s_assignment_header_img_right {if length($assignments.selected.template.instructions)<2}scb_s_assignment_header_img_right_inactive{/if}'  assignment_id='{$assignments.selected.id}' role='button' aria-label='Next Section' ></div>
 	</div>
 	<div class='scb_s_assignments_gray_bar'></div>
         <div class='scb_s_assignment_scroll' id ='scb_s_assignment_scroll'  aria-live="assertive">
         	{foreach $section in $assignments.selected.template.instructions}
-				<div class='scb_s_display_section' style='display:{if index($section) == $assignments.selected.last_instruction}block;{/if}' value='{$section[0][0]}' >
-				    {if $section[0][1] != ''}
-                        <p>{$section[0][1]}</p>
-                    {/if}
-                    {if length($section[0][2]) > 0}
+				<div class='scb_s_display_section' style='display:{if index($section) == $assignments.selected.last_instruction}block;{/if}' value='{$section[0]}' >
+                    {$section[1] |noAutoescape}
+                    {if $assignments.selected.template.files and length($assignments.selected.template.files) > 0}
                         <ul>
-                            {foreach $file in $section[0][2]}
+                            {foreach $file in $assignments.selected.template.files}
                                 <li><a href='{$file.url}'>{$file.name}</a></li>
                             {/foreach}
                         </ul>

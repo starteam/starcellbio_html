@@ -248,6 +248,12 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
       var parameters = template.model.facs.is_ab? template.model.facs.ab_parser : template.model.facs;
       var logScale = parameters.scale === 'log';
+      // In template.model.facs.ab_parser, max was renamed xmax when ymax was added.
+      // But old models (template.model.facs) still use it.
+      // In that case, add a new key name xmax to parameters and set its value to parameters.max
+      if (parameters.max) {
+        parameters['xmax'] = parameters.max;
+      }
       function roundData(input) {
         var round_number = 10000;
         for (var index = 0; index < input.length; index++) {
@@ -282,10 +288,10 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
         });
         if (sum != 0) { /*normalizing the y values*/
           _.each(normalized_data, function(point) {
-            if (template.model.facs.scale) {
+            if (parameters.scale) {
               point[1] = point[1] / sum * big_const;
             } else {
-              point[1] = point[1] / sum * (template.model.facs.xmax ? ((big_const * 100) / template.model.facs.xmax) * number_of_curves : 2750);
+              point[1] = point[1] / sum * (parameters.xmax ? ((big_const * 100) / parameters.xmax) * number_of_curves : 2750);
             }
           });
         }
@@ -293,11 +299,11 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
         _.each(normalized_data, function(point) { /*normalizing x values*/
           /* new exercises will now have attribute 'scale' */
           /* Using scale to distinguish old exercises and preserve the old normalization way*/
-          if (template.model.facs.scale) {
+          if (parameters.scale) {
             /*this is assuming that the start point is 0 */
-            point[0] = template.model.facs.xmax * point[0] / normalized_data[data.length - 1][0];
+            point[0] = parameters.xmax * point[0] / normalized_data[data.length - 1][0];
           } else { /*to preserve the old exercise scaling, keeping old code*/
-            point[0] = point[0] * (template.model.facs.xmax ? ((template.model.facs.xmax * 50) / 100) : 50);
+            point[0] = point[0] * (parameters.xmax ? ((parameters.xmax * 50) / 100) : 50);
           }
 
         });
@@ -315,6 +321,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
           return logScale ? Math.log(parameters.xmax)/Math.LN10 : parameters.xmax;
         }
         else {
+          /* Old assignments do not have max value given, they were using the value of a constant MAX_VALUE=150 */
           return 150;
         }
       }
@@ -384,7 +391,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
           show: true,
           color: '#000000',
           min: 0,
-          max: parameters.xmax ? getxMax() : 150,
+          max: getxMax(),
           ticks: getxTicks(),
           tickLength: 5,
           font: {
@@ -395,7 +402,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
         yaxis: {
           show: true,
           color: '#000000',
-          min: parameters.max ? 0 : -1,
+          min: parameters.xmax ? 0 : -1,
           max: getyMax(),
           ticks: getyTicks(),
           tickLength: 5,
@@ -464,7 +471,7 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
       if (shape == 'graph-c') {
         var data = [];
         /* 2 is location of the peak in terms of steps*/
-        var mean = 3 / (template.model.facs.xmax / step) * 2;
+        var mean = 3 / (parameters.xmax / step) * 2;
         var bias = (Math.random() - .5) * .10;
         for (var x = 0; x < 3; x += .01) {
           number_of_curves = 1;
@@ -628,11 +635,11 @@ scb.components.FACSModelFactory = function scb_components_FACSModelFactory(model
 
         /*assuming that 150 is the third point on the scale*/
         if (shape.indexOf('3') > -1) {
-          mean = 3 / (template.model.facs.xmax / step) * 3;
+          mean = 3 / (parameters.xmax / step) * 3;
         } else if (shape.indexOf('2') > -1) {
-          mean = 3 / (template.model.facs.xmax / step) * 2;
+          mean = 3 / (parameters.xmax / step) * 2;
         } else if (shape.indexOf('1') > -1) {
-          mean = 3 / (template.model.facs.xmax / step);
+          mean = 3 / (parameters.xmax / step);
         }
         var bias = (Math.random() - .5) * .10;
         for (var x = 0; x < 3; x += .01) {
