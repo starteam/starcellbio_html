@@ -73,6 +73,9 @@
     src: url("../fonts/SourceSansPro-SemiboldIt.otf") format("opentype");
 }
 
+*:focus {
+    outline: 2px solid #1c1c1c;
+}
 
 #jqDialog_options button{
 	outline: none !important;
@@ -108,35 +111,65 @@
     width:25%;
 }
 
-
-.scb_s_video_icon{
-position: relative;
-bottom: 5px;
+.scb_s_header_tools {
+    float: rigth;
+    vertical-align: top;
+    display: block;
+    text-align: right;
+    margin-top: -10px;
 }
 
-.scb_s_video_text{
-position: relative;
-bottom: 9px;
-
+.scb_f_contact {
+    background-color: inherit;
+    border: none;
+    font-family: inherit;
+    position: relative;
+    top:-9px;
+    cursor: pointer;
 }
 
-.scb_s_user_guide_icon{
-	margin-left: 5px;
-}
- 
-.scb_s_user_guide_text {
-	margin-right:-15px;
-}
-
-.scb_s_cabinet_icon{
-	margin-left: 5px;
-}
- 
-.scb_s_cabinet_text{
-	padding-right: 0 !important;
+.scb_f_reference {
+    display:inline-block;
+    position: relative;
+    top: -9px;
+    cursor: pointer;
 }
 
-.scb_s_pencil_icon{
+.scb_f_user_guide {
+    background-color: inherit;
+    border: none;
+    font-family: inherit;
+    position: relative;
+    top:-10px;
+    cursor: pointer;
+}
+
+.scb_f_video {
+    display:inline-block;
+    position: relative;
+    bottom: 9px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.scb_f_login {
+    cursor: pointer;
+}
+
+.scb_s_header_tools_text {
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 7.5pt;
+    color: black;
+    padding-left: 6px;
+}
+
+.scb_s_header_tools_icon {
+    vertical-align: middle;
+}
+
+.scb_s_pencil_icon {
 	margin-left: 5px;
 }
 
@@ -144,19 +177,18 @@ bottom: 9px;
 	margin-right:5px;
 }
 
-.scb_s_homepage_see_more_button{
+.scb_s_homepage_see_more_button {
 	cursor: pointer;
 }
 
-
-.scb_s_homepage_new_experiment{
+.scb_s_homepage_new_experiment {
 	left: 750px;
 	width: 150px;
 	bottom: 18px;
 	position: absolute;
 }
 
-.scb_s_new_assignments_experiment{
+.scb_s_new_assignments_experiment {
 	left: 750px;
 	width: 150px;
 	bottom: 27px;
@@ -166,18 +198,6 @@ bottom: 9px;
 .scb_s_logo_h1 {
     display:inline;
     font-size: 0px;
-}
-
-.scb_s_header_tools {
-    float: rigth;
-    vertical-align: top;
-    display: block;
-    text-align: right;
-    margin-top: -10px;
-}
-
-.scb_f_contact, .scb_f_reference, .scb_f_user_guide, .scb_f_login, .scb_f_video{
-	cursor: pointer;
 }
 
 .scb_f_login{
@@ -190,49 +210,14 @@ bottom: 9px;
 	color: #316f94;
 }
 
-
-
-.scb_s_homepage_content{
+.scb_s_homepage_content {
 	margin-top: 12px;
 	margin-left: 20px;
-}
-
-.scb_s_envelope_icon {
-    vertical-align: middle;
-    position: relative;
-    top:-10px;
-}
-
-.scb_s_envelope_text {
-    position: relative;
-    top:-9px;
 }
 
 .scb_s_new_homepage_experiment{
 	position: relative;
 	bottom: 10px;
-}
-
-.scb_s_cabinet_text {
-    position: relative;
-    top: -9px;
-}
-
-.scb_s_user_guide_text {
-    position: relative;
-    top:-2px;
-}
-
-.scb_s_header_tools_text {
-    text-align: left;;
-    display: inline-block;
-    font-size: 7.5pt;
-    color: black;
-    width:40px;
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 4px;
-    padding-bottom: 4px;
 }
 
 .scb_s_header_vertical_line {
@@ -468,7 +453,6 @@ bottom: 9px;
     margin-top: 12px;
     font-family: 'sourcesanspro-bold';
     font-size: 14pt;
-
 }
 
 .scb_s_homepage_technique_title_image {
@@ -604,4 +588,8 @@ a {
 
 .scb_s_homepage_top_left_text b {
 	font-size: 14pt;
+}
+
+.scb_f_try_an_experiment {
+    padding: 0 6px;
 }
