@@ -10,42 +10,37 @@ Assignment title
 <div class='scb_s_instructor_header' role='header'>
     <div alt='' class='scb_s_header_line_top' ></div>
 
-    <h1 class='scb_s_logo_h1' aria-label='StarCellBio Home Page Link' ><a aria-hidden='true' href='{if $context.auth and $context.auth.logged_in}#view=assignments{else}#view=homepage{/if}'>StarCellBio<img class='scb_s_logo'
-                                                                       src='images/header/scb_logo.png' 
-                                                                       role='banner'></a></h1>
-    <span class='scb_s_header_tools'>
-        <span class='scb_f_contact' target='_blank' role='link'  aria-label='Contact'>
-            <img class='scb_s_envelope_icon' src='images/header/scb_envelope_icon.png' alt='' role='presentation'>
-        	<span class='scb_s_envelope_text scb_s_header_tools_text'  role='presentation'>
-            CONTACT
-        	</span>
-        </span>
+    <h1 class='scb_s_logo_h1' aria-label='StarCellBio Home Page Link' >
+    	<a aria-hidden='true' href='{if $context.auth and $context.auth.logged_in}#view=assignments{else}#view=homepage{/if}'>
+    		StarCellBio<img class='scb_s_logo' src='images/header/scb_logo.png' role='banner'>
+    	</a>
+    </h1>
+    <div class='scb_s_header_tools'>
+        <button class='scb_f_contact' aria-label='Contact'>
+            <img class='scb_s_header_tools_icon' src='images/header/scb_envelope_icon.png' alt='' role='presentation'>
+        	<span class='scb_s_header_tools_text' role='presentation'>CONTACT</span>
+        </button>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' alt='' role='presentation'>
-        <a class='scb_f_reference' href='/static/ref_lib/full_library.html#'   aria-label='Library' target='_blank'>
-            <img class='scb_s_cabinet_icon' src='images/header/scb_cabinet_icon.png' alt='' role='presentation'>
-            <span class='scb_s_cabinet_text scb_s_header_tools_text' >
-            LIBRARY
-            </span>
+        <a class='scb_f_reference' href='/static/ref_lib/full_library.html#' aria-label='Library' target='_blank'>
+            <img class='scb_s_header_tools_icon' src='images/header/scb_cabinet_icon.png' alt='' role='presentation'>
+            <span class='scb_s_header_tools_text'>LIBRARY</span>
         </a>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' role='presentation'>
-        <!--href='pdf/StarCellBio%20User%20Guide.pdf' target='_blank'-->
-        <span class='scb_f_user_guide' role='link'  aria-label='User Guide' >
-            <img class='scb_s_user_guide_icon' src='images/header/scb_user_guide_icon.png' role='presentation'>
-            <span class='scb_s_user_guide_text scb_s_header_tools_text' role='presentation'  >USER GUIDE</span>
-        </span>
+        <button class='scb_f_user_guide' aria-label='User Guide' >
+            <img class='scb_s_header_tools_icon' src='images/header/scb_user_guide_icon.png' role='presentation'>
+            <span class='scb_s_header_tools_text' role='presentation'>USER<br>GUIDE</span>
+        </button>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' alt='' role='presentation'>
         <a class='scb_f_login' href='#view=assignments' role='presentation' aria-label='Sign In link'>
-        <span class='scb_s_login_status' aria-hidden='true'>        	
-        	{if $context.auth and $context.auth.logged_in}
-        		SIGN OUT
-        	{else}
-        		SIGN IN
-        	{/if}                         
-        </span>
-        
-
+            <span class='scb_s_login_status' aria-hidden='true'>
+            	{if $context.auth and $context.auth.logged_in}
+            		SIGN OUT
+            	{else}
+            		SIGN IN
+            	{/if}
+            </span>
         </a>
-    </span>
+    </div>
 </div>
 {/template}
 
