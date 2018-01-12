@@ -104,11 +104,11 @@ Assignment description
         </div>
     <br/>
  		{if $assignments.selected.id=='decusability' or $assignments.selected.course == 'SCB_SampleExercises' }
-        <span class=" scb_s_assignments_print_assignment scb_f_open_experiment scb_s_navigation_button"
-        href="#view=experiment_design&assignment_id={$assignments.selected.id}" id="{$assignments.selected.id}" aria-label='New Experiment' role='button'></span>
+        <a class=" scb_s_assignments_print_assignment scb_f_open_experiment scb_s_navigation_button"
+        href="#view=experiment_design&assignment_id={$assignments.selected.id}" id="{$assignments.selected.id}" aria-label='New Experiment' role='button'></a>
        {/if}
-        <span class="scb_assignments_new_experiment scb_f_open_experiment scb_s_navigation_button"
-        href="#view=experiment_design&assignment_id={$assignments.selected.id}" aria-label='New Experiment' role='button'> START EXPERIMENTS &nbsp; &#9654;</span>
+        <a class="scb_assignments_new_experiment scb_f_open_experiment scb_s_navigation_button"
+        href="#view=experiment_design&assignment_id={$assignments.selected.id}" aria-label='New Experiment' role='button'> START EXPERIMENTS &nbsp; &#9654;</a>
 
 	{/if}
 </div>
