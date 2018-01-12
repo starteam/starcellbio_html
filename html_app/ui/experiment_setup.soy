@@ -308,23 +308,25 @@ Experiment active area
     
 </div>
 {if $kind == 'readwrite'}
-    <a class="scb_s_navigation_button scb_f_open_experiment_setup_readonly scb_f_run_experiment" aria-label='Run Experiment' role='button'
-       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>RUN EXPERIMENT &nbsp; &#9654;</a><br/>
     <a class="scb_s_navigation_button scb_f_open_experiment_design" aria-label='Design Experiment' role='button'
        href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; DESIGN EXPERIMENT
-        </a>
-    {else}
+    </a>
+    <br/>
+    <a class="scb_s_navigation_button scb_f_open_experiment_setup_readonly scb_f_run_experiment" aria-label='Run Experiment' role='button'
+       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>RUN EXPERIMENT &nbsp; &#9654;
+    </a>
+{else}
     {if $experiment.setup_finished}
-    <a class="scb_s_navigation_button scb_f_open_select_technique"
-       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}" aria-label='Select Technique' role='button'
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>SELECT TECHNIQUE &nbsp; &#9654;</a><br/>
-    <a class="scb_s_navigation_button scb_f_open_experiment_design" role='button' aria-label='Design Experiment' 
-       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; DESIGN EXPERIMENT
-        </a>
-    {else}
+	    <a class="scb_s_navigation_button scb_f_open_experiment_design" role='button' aria-label='Design Experiment' 
+	       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; DESIGN EXPERIMENT
+	    </a>
+	    <br/>
+	    <a class="scb_s_navigation_button scb_f_open_select_technique"
+	       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}" aria-label='Select Technique' role='button'
+	       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>SELECT TECHNIQUE &nbsp; &#9654;
+	    </a>
     {/if}
-
-    {/if}
+{/if}
 </div>
 
 </div>
