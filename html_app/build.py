@@ -173,6 +173,11 @@ def processor(path):
         outfile = "{}/gen/{}.css".format(
             os.path.dirname(infile), os.path.basename(infile)
         )
+        unrecognized_properties = ["outline-offset"]
+        params = []
+        for prop in unrecognized_properties:
+            params += ["--allowed-unrecognized-property", prop]
+        params += ["--pretty-print", infile, "-o", outfile]
 
         # Create directory for output
         try:
@@ -180,13 +185,8 @@ def processor(path):
         except OSError:  # directory already exists
             pass
 
-        call(
-            [
-                "java", "-jar", os.path.join(
-                    REPO_ROOT, "tools/closure-stylesheets-20111230.jar"
-                ), "--pretty-print", infile, "-o", outfile
-            ]
-        )
+        command = ["java", "-jar", os.path.join(REPO_ROOT, "tools/closure-stylesheets-20111230.jar")]
+        call(command + params)
         print "compile gss {} to {} ".format(infile, outfile)
     if update_index:
         global_update_index = True

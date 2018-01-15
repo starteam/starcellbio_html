@@ -69,33 +69,30 @@ Assignment description
             {$assignments.selected.name |noAutoescape}
         </div>
         <div class='scb_s_assignments_slider_header'>
-    		<div
-                class='scb_s_assignment_header_img_left scb_s_assignment_header_img_left_inactive'
-                assignment_id='{$assignments.selected.id}'
-                role='button'
-                aria-label='Previous Section'>
-            </div>
-            {foreach $section in $assignments.selected.template.instructions}
-    		    <div
-                    class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == $assignments.selected.last_instruction}scb_assignments_header_link_selected{/if}'
+    		<button class='scb_s_assignments_header_btn_left scb_s_assignments_header_btn_left_inactive'
                     assignment_id='{$assignments.selected.id}'
-                    role='link'
+                    aria-label='Previous Section'>
+            </button>
+            {foreach $section in $assignments.selected.template.instructions}
+    		    <button
+                    class='scb_s_assignments_header_btn {if index($section) == $assignments.selected.last_instruction}scb_s_assignments_header_btn_selected{/if}'
+                    assignment_id='{$assignments.selected.id}'
                     title='{$section[0]}'
                     value='{$section[0]}'
                     aria-controls='scb_s_assignment_scroll'
                     aria-atomic='true'>
                     <span>{$section[0]}</span>
                     {if index($section) == $assignments.selected.last_instruction}
-                        <div class="arrow-down-blue"></div>
+                        <span class='arrow_down_blue_background'></span>
+                        <span class='arrow_down_blue_border arrow_down_blue_border_selected'></span>
                     {/if}
-                </div>
+                </button>
     		{/foreach}
-    		<div
-                class = 'scb_s_assignment_header_img_right {if length($assignments.selected.template.instructions)<2}scb_s_assignment_header_img_right_inactive{/if}'
+            <button
+                class = 'scb_s_assignments_header_btn_right {if length($assignments.selected.template.instructions)<2}scb_s_assignments_header_btn_right_inactive{/if}'
                 assignment_id='{$assignments.selected.id}'
-                role='button'
                 aria-label='Next Section'>
-            </div>
+            </button>
     	</div>
     	<div class='scb_s_assignments_gray_bar'></div>
         <div class='scb_s_assignment_scroll' id ='scb_s_assignment_scroll'  aria-live="assertive">
@@ -116,19 +113,17 @@ Assignment description
             {/foreach}
         	{if length($assignments.selected.template.instructions)>1}
         	    <div class='scb_s_assignments_bottom_scroll'>
-       				<div
-                        class = 'scb_s_assignment_header_img_left scb_assignments_bottom_arrow_left scb_s_assignment_header_img_left_inactive' 
+       				<button
+                        class = 'scb_s_assignments_header_btn_left scb_assignments_bottom_btn_left scb_s_assignments_header_btn_left_inactive'
                         assignment_id='{$assignments.selected.id}'
-                        role='button'
                         aria-label='Previous Section'>
-                    </div>
+                    </button>
        				<div class='scb_s_assignments_button_divider'></div>
-    				<div
-                        class = 'scb_s_assignment_header_img_right scb_assignments_bottom_arrow_right'
+    				<button
+                        class = 'scb_s_assignments_header_btn_right scb_assignments_bottom_btn_right'
                         assignment_id='{$assignments.selected.id}'
-                        role='button'
                         aria-label='Next Section'>
-                    </div>
+                    </button>
 			    </div>
 			{/if}
         </div>

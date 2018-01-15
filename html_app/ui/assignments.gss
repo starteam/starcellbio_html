@@ -43,14 +43,139 @@
 	max-height: 40px;
 	position: absolute;
 	z-index: 999;
-	background: rgba(0,0,0,0);
+	background-image: linear-gradient(to bottom, #ccc, #f5f5f5 18px, #ccc 36px);;
 }
-
 
 .scb_s_assignments_slider_header > div{
 	display: inline-block;
 }
 
+/*
+  To bypass Firefox outline bug: https://ctidd.com/2017/firefox-outline-bug
+  we use borders instead of outlines to display focus on buttons that display
+  a blue triangle when active.
+*/
+
+.scb_s_assignments_header_btn_left {
+	position: relative;
+	margin-left: -10px;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	outline: none;
+	border: none;
+	background: url('../../images/western_blot/scb_gray_left_arrow_active.png') center center / cover no-repeat;
+}
+
+.scb_s_assignments_header_btn_left:focus {
+	outline: 2px solid black;
+	outline-offset: -2px;
+}
+
+.scb_s_assignments_header_btn_left:hover:not(.scb_s_assignments_header_btn_left_inactive) {
+	background: url('../../images/western_blot/scb_gray_left_arrow_hover.png') center center / cover no-repeat;
+}
+
+.scb_s_assignments_header_btn_left_inactive {
+	background: url('../../images/western_blot/scb_gray_left_arrow_inactive.png') center center / cover no-repeat;
+}
+
+.scb_s_assignments_header_btn_right {
+	position: relative;
+	margin-right: -10px;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	outline: none;
+	border: none;
+	background: url('../../images/western_blot/scb_gray_right_arrow_active.png') center center / cover no-repeat;
+}
+
+.scb_s_assignments_header_btn_right:focus {
+	outline: 2px solid black;
+	outline-offset: -2px;
+}
+
+.scb_s_assignments_header_btn_right:hover:not(.scb_s_assignments_header_btn_right_inactive) {
+	background: url('../../images/western_blot/scb_gray_right_arrow_hover.png') center center / cover no-repeat;
+}
+
+.scb_s_assignments_header_btn_right_inactive {
+	background: url('../../images/western_blot/scb_gray_right_arrow_inactive.png') center center / cover no-repeat;
+}
+
+.scb_s_assignments_header_btn {
+	/* Color lightened by 20% from top to center then darkened by 20% from center to bottom*/
+	background-image: linear-gradient(to bottom, #ccc, #ffffff 18px, #ccc 36px);
+	outline: none;
+	border: 2px solid transparent;
+	position: relative;
+	width: 150px;
+	height: 40px;
+	cursor: pointer;
+	color: #316f94;
+	font-size: 11pt;
+	font-family: 'sourcesanspro-semibold';
+	vertical-align: top;
+}
+
+.scb_s_assignments_header_btn > .arrow_down_blue_background {
+	position: absolute;
+	width: 0;
+	height: 0;
+	top: 36px;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-top: 15px solid #4690c1;
+}
+
+.scb_s_assignments_header_btn > .arrow_down_blue_border {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 27px;
+	background: transparent;
+	transform: rotate(45deg);
+	border: none;
+}
+
+.scb_s_assignments_header_btn:focus {
+	border: 2px solid black;
+}
+
+.scb_s_assignments_header_btn:focus > .arrow_down_blue_border_selected {
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;
+}
+
+.scb_s_assignments_header_btn > span {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
+}
+
+.scb_s_assignments_header_btn_selected {
+	/* Color lightened by 20% from top to center then darkened by 20% from center to bottom */
+	background-image: linear-gradient(to bottom, #4690c1, #60aadb 18px, #4690c1 36px);
+	color: white;
+}
+
+.scb_assignments_bottom_btn_left {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border: 1px solid gray;
+	border-right: none;
+}
+
+.scb_assignments_bottom_btn_right {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border: 1px solid gray;
+	border-left: none;
+}
+
+/* KEEP IN CASE IT IS NEEDED IN OLD INSTRUCTOR APPLICATION */
 .scb_s_assignment_header_img_left{
 	position:relative;
 	margin-left: -10px;
@@ -141,6 +266,7 @@ background-image:url('../../images/western_blot/scb_gray_right_arrow_hover.png')
 	top: -16px;
 	position: relative;
 }
+/* END KEEP */
 
 .scb_s_display_section{
 	display:none;

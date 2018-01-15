@@ -9,6 +9,10 @@
 .dummy {
 }
 
+::-moz-focus-inner {
+	border:0;
+}
+
 body {
     background-color: #e9edf1;
 }
