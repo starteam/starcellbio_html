@@ -9,16 +9,16 @@
 {template .main}
 <div class='scb_s_homepage_view' >
     {call .display_header}
-    {param global_template:$global_template /}
-    {param context:$context /}
+        {param global_template:$global_template /}
+        {param context:$context /}
     {/call}
     {call scb_common.assignment_step}
-    {param step:0/}
-    {param last_step: $last_step/}
+        {param step:0/}
+        {param last_step: $last_step/}
     {/call}
     {call .display_content/}
     {call .display_footer}
-    {param global_template:$global_template /}
+        {param global_template:$global_template /}
     {/call}
 </div>
 {/template}
@@ -31,7 +31,6 @@ Assignment title
 {template .display_header}
 <div class='scb_s_header' role='header'>
     <div alt='' class='scb_s_header_line_top' ></div>
-
     <h1 class='scb_s_logo_h1' aria-label='StarCellBio Home Page Link' >
         <a aria-hidden='true' href='{if $context.auth and $context.auth.logged_in}#view=assignments{else}#view=homepage{/if}'>
             StarCellBio<img class='scb_s_logo' src='images/header/scb_logo.png' role='banner'>
@@ -40,7 +39,7 @@ Assignment title
     <div class='scb_s_header_tools'>
         <button class='scb_f_contact' aria-label='Contact'>
             <img class='scb_s_header_tools_icon' src='images/header/scb_envelope_icon.png' alt='' role='presentation'>
-        	<span class='scb_s_header_tools_text' role='presentation'>CONTACT</span>
+            <span class='scb_s_header_tools_text' role='presentation'>CONTACT</span>
         </button>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' alt='' role='presentation'>
         <a class='scb_f_reference' href='/static/ref_lib/full_library.html#' aria-label='Library' target='_blank'>
@@ -52,24 +51,23 @@ Assignment title
             <img class='scb_s_header_tools_icon' src='images/header/scb_user_guide_icon.png' role='presentation'>
             <span class='scb_s_header_tools_text' role='presentation'>USER<br>GUIDE</span>
         </button>
-    	<img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' role='presentation'>
-		<a class='scb_f_video' href='http://www.youtube.com/playlist?list=PLZhxzzyMIQIHhQ2TOGm3HNLA04ZsTmOLW'
-		    role='link'  aria-label='Videos' target="_blank">
+        <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' role='presentation'>
+        <a class='scb_f_video' href='http://www.youtube.com/playlist?list=PLZhxzzyMIQIHhQ2TOGm3HNLA04ZsTmOLW'
+            role='link'  aria-label='Videos' target="_blank">
             <img class='scb_s_header_tools_icon' src='images/header/scb_video_icon.png' role='presentation'>
             <span class='scb_s_header_tools_text' role='presentation'>VIDEOS</span>
         </a>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' alt='' role='presentation'>
         <a class='scb_f_login' href='#view=assignments' role='presentation' aria-label='Sign In link'>
             <span class='scb_s_login_status' aria-hidden='true'>
-            	{if $context.auth and $context.auth.logged_in}
-            		SIGN OUT
-            	{else}
-            		SIGN IN
-            	{/if}
+                {if $context.auth and $context.auth.logged_in}
+                    SIGN OUT
+                {else}
+                    SIGN IN
+                {/if}
             </span>
         </a>
     </div>
-
     <div id='saving'>
         Saving...
         <div id='saving_message'>
@@ -88,10 +86,12 @@ Assignment footer
 <div class='scb_s_homepage_content' role='main'>
     <span class='scb_s_homepage_top' role='welcome_to_starcellbio'>
         <span class='scb_s_homepage_top_left'>
-		<span class='scb_s_homepage_top_left_text'>
-			<b>Welcome to StarCellBio,</b><br/> a virtual experiment simulation <br/>tool that teaches the fundamental concepts of cell and molecular <br/>biology, experimental design, and analysis. 
-
-		</span>
+            <span class='scb_s_homepage_top_left_text'>
+                <b>Welcome to StarCellBio,</b><br>
+                a virtual experiment simulation<br>
+                tool that teaches the fundamental concepts of cell and molecular<br>
+                biology, experimental design, and analysis.
+            </span>
         </span>
         <span class='scb_s_homepage_top_right' role='signup_area'>
             <iframe width="100%" height="194" src="//www.youtube.com/embed/RqDHjjI-GHg" frameborder="0" allowfullscreen></iframe>
@@ -131,33 +131,40 @@ Assignment display_experiment_design
                 </span>
                 <div class='scb_s_homepage_experimental_design_list_items'>
                     <div class='scb_s_homepage_experimental_design_bullet_item' value='Design' data-id="design" role="link"
-                          aria-controls='scb_s_homepage_experimental_design_list_info'>
-                        <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >1.</span>
-                        <span class='scb_s_homepage_experimental_design_item'>Design</span></div>
+                         aria-controls='scb_s_homepage_experimental_design_list_info'>
+                         <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >1.</span>
+                         <span class='scb_s_homepage_experimental_design_item'>Design</span>
+                    </div>
                     <div class='scb_s_homepage_experimental_design_bullet_item' value='SetUp' data-id="setup" role="link"
-                          aria-controls='scb_s_homepage_experimental_design_list_info'>
-                        <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >2.</span>
-                        <span class='scb_s_homepage_experimental_design_item'>Setup</span></div>
+                         aria-controls='scb_s_homepage_experimental_design_list_info'>
+                         <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >2.</span>
+                         <span class='scb_s_homepage_experimental_design_item'>Setup</span>
+                    </div>
                     <div class='scb_s_homepage_experimental_design_bullet_item' value ='RunExperiment' data-id="run_experiment" role="link"
-                          aria-controls='scb_s_homepage_experimental_design_list_info'>
-                        <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >3.</span>
-                        <span class='scb_s_homepage_experimental_design_item'>Run Experiment</span></div>
+                         aria-controls='scb_s_homepage_experimental_design_list_info'>
+                         <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >3.</span>
+                         <span class='scb_s_homepage_experimental_design_item'>Run Experiment</span>
+                    </div>
                     <div class='scb_s_homepage_experimental_design_bullet_item'  value='SelectTechniques' data-id="select_technique" role="link"
-                          aria-controls='scb_s_homepage_experimental_design_list_info'>
-                        <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >4.</span>
-                        <span class='scb_s_homepage_experimental_design_item'>Select Technique(s)</span></div>
-                    <div class='scb_s_homepage_experimental_design_bullet_item' value='RunTechniques'  data-id="run_technique" role="link"
-                          aria-controls='scb_s_homepage_experimental_design_list_info'>
-                        <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >5.</span>
-                        <span class='scb_s_homepage_experimental_design_item'>Run Technique(s)</span></div>
+                         aria-controls='scb_s_homepage_experimental_design_list_info'>
+                         <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >4.</span>
+                         <span class='scb_s_homepage_experimental_design_item'>Select Technique(s)</span>
+                    </div>
+                    <div class='scb_s_homepage_experimental_design_bullet_item' value='RunTechniques' data-id="run_technique" role="link"
+                         aria-controls='scb_s_homepage_experimental_design_list_info'>
+                         <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >5.</span>
+                         <span class='scb_s_homepage_experimental_design_item'>Run Technique(s)</span>
+                    </div>
                     <div class='scb_s_homepage_experimental_design_bullet_item' value='Analyze' data-id="analyze" role="link"
-                          aria-controls='scb_s_homepage_experimental_design_list_info'>
-                        <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >6.</span>
-                        <span class='scb_s_homepage_experimental_design_item'>Analyze</span></div>
+                         aria-controls='scb_s_homepage_experimental_design_list_info'>
+                         <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >6.</span>
+                         <span class='scb_s_homepage_experimental_design_item'>Analyze</span>
+                    </div>
                     <div class='scb_s_homepage_experimental_design_bullet_item' value='Conclude' data-id="conclude" role="link"
-                          aria-controls='scb_s_homepage_experimental_design_list_info'>
-                        <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >7.</span>
-                        <span class='scb_s_homepage_experimental_design_item'>Conclude</span></div>
+                         aria-controls='scb_s_homepage_experimental_design_list_info'>
+                         <span class='scb_s_homepage_experimental_design_bullet' role="presentation" aria-hidden="true" >7.</span>
+                         <span class='scb_s_homepage_experimental_design_item'>Conclude</span>
+                    </div>
                 </div>
                 <img class='scb_s_homepage_experimental_design_list_bar'
                      src='images/homepage/experimental_design_bar.png' alt=''>
@@ -176,8 +183,7 @@ Assignment display_experiment_design
                 <img src='images/homepage/techniques.png'>
             </span>
             {call scb_homepage.display_techniques}
-            {param techniques:['wb','fc','micro']/}
-
+                {param techniques:['wb','fc','micro']/}
             {/call}
         </span>
     </span>
@@ -188,40 +194,38 @@ Assignment display_experiment_design
 */
 {template .display_techniques}
 {foreach $tech in $techniques}
-{if $tech == 'wb'}
-<span class='scb_s_homepage_technique_wb'>
-    <span class='scb_s_homepage_technique_title_image' role='heading' >Western Blot</span>
-    Western blotting detects overall changes in the amount or chemical modifications of a particular protein.
-    <a href="static/ref_lib/full_library.html#WesternBlotting" role='button' class='scb_s_homepage_technique_learn_more' target='_blank'
-       aria-label='Learn more about western blot'>LEARN MORE</a>
-
-</span>
-<img class='scb_s_homepage_technique_bar'
-     src='images/homepage/experimental_design_bar.png' role='presentation' alt=''>
-{/if}
-{if $tech == 'fc'}
-<span class='scb_s_homepage_technique_flow'>
-    <span class='scb_s_homepage_technique_title_image' role='heading'>Flow Cytometry</span>
-    Flow cytometry is used to count and analyze the size, shape and properties of
-    individual cells within a heterogeneous population of cells.
-    <a href="static/ref_lib/full_library.html#FlowCytometry" role='button' class='scb_s_homepage_technique_learn_more' target='_blank'
-       aria-label='Learn more about flow cytometry'>LEARN MORE</a>
-</span>
-<img class='scb_s_homepage_technique_bar'
-     src='images/homepage/experimental_design_bar.png' role='presentation' alt=''>
-{/if}
-{if $tech == 'micro'}
-<span class='scb_s_homepage_technique_micro'>
-    <span class='scb_s_homepage_technique_title_image' role='heading'>Microscopy</span>
-    Microscopy is used to study the shape, morphology and properties of cells,
-    tissues or organisms that otherwise cannot be observed by eye.
-    <a href="static/ref_lib/full_library.html#Microscopy" role='button' class='scb_s_homepage_technique_learn_more' target='_blank'
-       aria-label='Learn more about microscopy'>LEARN MORE</a>
-</span>
-{/if}
-<!--
-<img class='scb_s_homepage_technique_more' src='images/homepage/more_techniques.png'>
--->
+    {if $tech == 'wb'}
+        <span class='scb_s_homepage_technique_wb'>
+            <span class='scb_s_homepage_technique_title_image' role='heading' >Western Blot</span>
+            Western blotting detects overall changes in the amount or chemical modifications of a particular protein.
+            <a href="static/ref_lib/full_library.html#WesternBlotting" role='button' class='scb_s_homepage_technique_learn_more' target='_blank'
+               aria-label='Learn more about western blot'>LEARN MORE
+            </a>
+        </span>
+        <img class='scb_s_homepage_technique_bar'
+             src='images/homepage/experimental_design_bar.png' role='presentation' alt=''>
+    {/if}
+    {if $tech == 'fc'}
+        <span class='scb_s_homepage_technique_flow'>
+            <span class='scb_s_homepage_technique_title_image' role='heading'>Flow Cytometry</span>
+            Flow cytometry is used to count and analyze the size, shape and properties of
+            individual cells within a heterogeneous population of cells.
+            <a href="static/ref_lib/full_library.html#FlowCytometry" role='button' class='scb_s_homepage_technique_learn_more' target='_blank'
+               aria-label='Learn more about flow cytometry'>LEARN MORE
+            </a>
+        </span>
+        <img class='scb_s_homepage_technique_bar'
+             src='images/homepage/experimental_design_bar.png' role='presentation' alt=''>
+    {/if}
+    {if $tech == 'micro'}
+        <span class='scb_s_homepage_technique_micro'>
+            <span class='scb_s_homepage_technique_title_image' role='heading'>Microscopy</span>
+            Microscopy is used to study the shape, morphology and properties of cells,
+            tissues or organisms that otherwise cannot be observed by eye.
+            <a href="static/ref_lib/full_library.html#Microscopy" role='button' class='scb_s_homepage_technique_learn_more' target='_blank'
+               aria-label='Learn more about microscopy'>LEARN MORE</a>
+        </span>
+    {/if}
 {/foreach}
 {/template}
 /**
@@ -232,14 +236,12 @@ Assignment display_experiment_design
     <a href="http://web.mit.edu/" role='link'>
         <img class='scb_s_homepage_footer_logo' src='images/homepage/mit_logo.png' alt='MIT Logo'>
     </a>
-
     <img class='scb_s_homepage_footer_divider' role='presentation'  src='images/homepage/small_divider.png' alt=''>
     <a href='http://star.mit.edu/CellBio/funding/index.html' role='link' aria-label='Funding' target='_blank'>
         <span aria-hidden='true' class='scb_s_homepage_footer_support' src='images/homepage/support.png'>
             Funding
         </span>
     </a>
-
 </div>
 {/template}
 
@@ -284,4 +286,3 @@ Analyze the results of your experiment.
 {template .experimental_design_conclude}
 Form a conclusion that addresses how your results fit your original hypothesis.
 {/template}
-
