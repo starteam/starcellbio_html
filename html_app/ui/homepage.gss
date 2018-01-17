@@ -393,24 +393,24 @@
 
 .scb_s_homepage_experimental_design_bullet_item {
     display: block;
+    border: none;
+    width: 145px;
+    text-align: left;
+    background: transparent;
+    color: black;
     font-family: 'sourcesanspro-bold';
     font-size: 10pt;
     vertical-align: top;
     margin-left: 10px;
     padding-top: 2px;
     padding-bottom: 3.25px;
-    padding-left: 8px;
+    padding-left: 4px;
     cursor: pointer;
 }
 
 .scb_s_homepage_experimental_design_bullet {
     display: inline-block;
-    color: black;
     margin-right: 5px;
-}
-
-.scb_s_homepage_experimental_design_item {
-    display: inline-block;
 }
 
 .scb_s_homepage_experimental_design_bullet_item_selected {
