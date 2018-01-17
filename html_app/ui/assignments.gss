@@ -163,18 +163,21 @@
     color: white;
 }
 
-.scb_assignments_bottom_btn_left {
+.scb_s_assignments_bottom_btn_left {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border: 1px solid gray;
     border-right: none;
 }
 
-.scb_assignments_bottom_btn_right {
+.scb_s_assignments_bottom_btn_left:focus + .scb_s_assignments_bottom_btn_right {
+    border-left: none;
+}
+
+.scb_s_assignments_bottom_btn_right {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border: 1px solid gray;
-    border-left: none;
 }
 
 /* KEEP IN CASE IT IS NEEDED IN OLD INSTRUCTOR APPLICATION */
@@ -440,7 +443,7 @@
     display: inline;
     width: 1px;
     background: gray;
-    height: 41px;
+    height: 40px;
     z-index: 1;
 }
 
