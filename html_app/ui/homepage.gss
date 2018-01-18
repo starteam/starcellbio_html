@@ -73,10 +73,6 @@
     src: url("../fonts/SourceSansPro-SemiboldIt.otf") format("opentype");
 }
 
-*:focus {
-    outline: 2px solid #1c1c1c;
-}
-
 #jqDialog_options button{
     outline: none !important;
 }

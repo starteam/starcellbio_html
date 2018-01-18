@@ -6,6 +6,19 @@
   /* @alternate */ background-image: -o-linear-gradient(POS, START_COLOR, END_COLOR);   /* Opera 11.10+ */
 }
 
+/* By default, use box shadows instead of outlines to show focus */
+*:focus {
+    outline: none;
+    box-shadow: 0 0 2px 2px #1c1c1c;
+}
+
+/* In certain cases (packed buttons for example), outlines are preferable */
+.enable-outline:focus {
+    outline: 2px solid #1c1c1c;
+    box-shadow: none;
+}
+
+/* Disable Firefox's inner focus outline */
 ::-moz-focus-inner {
     border: 0;
 }

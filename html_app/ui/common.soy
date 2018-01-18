@@ -53,14 +53,14 @@
 
 {if $step > 0}
     <div class='scb_s_assignment_step' role='menu' xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" role='navigation'>
-        <a class='scb_s_assignment_step_link scb_f_assignments_step_link {if $step < 2 and $step > 0}scb_s_assignment_step_link_active{/if}' href='#view=assignments' aria-label='Assignments' role='menuitem'>
+        <a class='scb_s_assignment_step_link scb_f_assignments_step_link enable-outline {if $step < 2 and $step > 0}scb_s_assignment_step_link_active{/if}' href='#view=assignments' aria-label='Assignments' role='menuitem'>
             <div class='scb_s_assignment_step_wrapper' style='position: absolute; left: 29px; bottom: 20px;' aria-hidden='true'>
                 <div class='{if $step < 2 and $step > 0}scb_s_assignments_link_img_active{else}scb_s_assignments_link_img {/if}' role='presentation'>
                 </div>
                 ASSIGNMENTS
             </div>
         </a>
-        <a role='menuitem' class='scb_s_assignment_step_link scb_f_experiments_step_link {if $step >= 2 and $step < 10 }scb_s_assignment_step_link_active{/if}'
+        <a role='menuitem' class='scb_s_assignment_step_link scb_f_experiments_step_link enable-outline {if $step >= 2 and $step < 10 }scb_s_assignment_step_link_active{/if}'
             href=
             {if $assignments and not $assignments.selected.experiments.selected}
                 '#view=experiment_design&assignment_id={$aid}'

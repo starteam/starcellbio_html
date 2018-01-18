@@ -70,8 +70,9 @@
 }
 
 .scb_s_assignments_header_btn_left:focus {
-    outline: 2px solid black;
+    outline: 2px solid #1c1c1c;
     outline-offset: -2px;
+    box-shadow: none; /* Disables default focus indicator */
 }
 
 .scb_s_assignments_header_btn_left:hover:not(.scb_s_assignments_header_btn_left_inactive) {
@@ -94,8 +95,9 @@
 }
 
 .scb_s_assignments_header_btn_right:focus {
-    outline: 2px solid black;
+    outline: 2px solid #1c1c1c;
     outline-offset: -2px;
+    box-shadow: none; /* Disables default focus indicator */
 }
 
 .scb_s_assignments_header_btn_right:hover:not(.scb_s_assignments_header_btn_right_inactive) {
@@ -142,12 +144,13 @@
 }
 
 .scb_s_assignments_header_btn:focus {
-    border: 2px solid black;
+    border: 2px solid #1c1c1c;
+    box-shadow: none; /* Disables default focus indicator */
 }
 
 .scb_s_assignments_header_btn:focus > .arrow_down_blue_border_selected {
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
+    border-right: 2px solid #1c1c1c;
+    border-bottom: 2px solid #1c1c1c;
 }
 
 .scb_s_assignments_header_btn > span {
