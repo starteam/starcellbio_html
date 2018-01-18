@@ -594,7 +594,8 @@ label.custom-select {
     vertical-align: middle;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-family: 'sourcesanspro-semibold'
+    font-family: 'sourcesanspro-semibold';
+    outline-offset: -10px;
 }
 
 .scb_s_assignment_step_link_active {
