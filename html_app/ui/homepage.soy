@@ -30,12 +30,10 @@ Assignment title
 */
 {template .display_header}
 <div class='scb_s_header' role='header'>
-    <div alt='' class='scb_s_header_line_top' ></div>
-    <h1 class='scb_s_logo_h1' aria-label='StarCellBio Home Page Link' >
-        <a aria-hidden='true' href='{if $context.auth and $context.auth.logged_in}#view=assignments{else}#view=homepage{/if}'>
-            StarCellBio<img class='scb_s_logo' src='images/header/scb_logo.png' role='banner'>
-        </a>
-    </h1>
+    <div class='scb_s_header_line_top'></div>
+    <a class='scb_s_logo' role='banner' aria-label='StarCellBio Home Page Link' href='{if $context.auth and $context.auth.logged_in}#view=assignments{else}#view=homepage{/if}'>
+        <img width="250px" src='images/header/scb_logo.png' role='presentation'>
+    </a>
     <div class='scb_s_header_tools'>
         <button class='scb_f_contact' aria-label='Contact'>
             <img class='scb_s_header_tools_icon' src='images/header/scb_envelope_icon.png' alt='' role='presentation'>

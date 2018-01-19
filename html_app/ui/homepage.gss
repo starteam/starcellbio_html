@@ -102,17 +102,17 @@
 
 .scb_s_logo {
     float: left;
-    padding: 15px;
-    display: block;
-    width:25%;
+    margin: 18px 0 0 18px;
+}
+
+.scb_s_logo > img {
+    vertical-align: middle;
 }
 
 .scb_s_header_tools {
-    float: rigth;
-    vertical-align: top;
-    display: block;
-    text-align: right;
-    margin-top: -10px;
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
 }
 
 .scb_f_contact {
@@ -150,6 +150,7 @@
 
 .scb_f_login {
     cursor: pointer;
+    margin-right: 2px;
 }
 
 .scb_s_header_tools_text {
@@ -189,11 +190,6 @@
     width: 150px;
     bottom: 27px;
     position: absolute;
-}
-
-.scb_s_logo_h1 {
-    display:inline;
-    font-size: 0px;
 }
 
 .scb_f_login {
