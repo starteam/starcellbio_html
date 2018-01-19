@@ -525,18 +525,23 @@
     z-index: 0;
 }
 
+.scb_s_homepage_footer_logo {
+    float: left;
+    padding: 2px;
+}
+
 .scb_s_homepage_footer_divider {
     padding-left: 7px;
     padding-right: 7px;
     vertical-align: top;
-    margin-top: 17px;
+    margin-top: 19px;
 }
 
-.scb_s_homepage_footer_support,.scb_s_homepage_footer_about {
+.scb_s_homepage_footer_support {
     vertical-align: top;
     font-size:9pt;
     position: relative;
-    top:17px;
+    top:19px;
     color: #727272;
 }
 
