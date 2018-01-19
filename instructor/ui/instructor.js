@@ -462,7 +462,6 @@ $(function() {
       $('.error_overlay').remove();
     };
     show_message(message, confirm_publish, cancel_publish);
-
   });
 
   /* Preview assignment*/
@@ -499,6 +498,15 @@ $(function() {
       $('.error_overlay').remove();
     };
     show_message(message, confirm_publish, cancel_publish);
+  });
+
+  /* jqDialog adds a keyup event handler to the document element that we do not want to be called
+     when the publish or delete links have focus and the ENTER key is used.
+     When this happens, the click event is triggered as well as the keyup event and its bubbling
+     cannot be cancelled with event.stopPropagation(). We remove all keyup event handlers on the
+     document instead. */
+  $(".scb_ab_f_publish, .scb_ab_f_delete_assignment").keydown(function(event) {
+    $(document).off();
   });
 
   function show_message(message, confirm_func, cancel_func) {
