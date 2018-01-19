@@ -32,7 +32,7 @@ Assignment title
 <div class='scb_s_header' role='header'>
     <div class='scb_s_header_line_top'></div>
     <a class='scb_s_logo' role='banner' aria-label='StarCellBio Home Page Link' href='{if $context.auth and $context.auth.logged_in}#view=assignments{else}#view=homepage{/if}'>
-        <img width="250px" src='images/header/scb_logo.png' role='presentation'>
+        <img width="250px" src='images/header/scb_logo.png' alt='' role='presentation'>
     </a>
     <div class='scb_s_header_tools'>
         <button class='scb_f_contact' aria-label='Contact'>
@@ -44,15 +44,15 @@ Assignment title
             <img class='scb_s_header_tools_icon' src='images/header/scb_cabinet_icon.png' alt='' role='presentation'>
             <span class='scb_s_header_tools_text'>LIBRARY</span>
         </a>
-        <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' role='presentation'>
+        <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' alt='' role='presentation'>
         <button class='scb_f_user_guide' aria-label='User Guide' >
-            <img class='scb_s_header_tools_icon' src='images/header/scb_user_guide_icon.png' role='presentation'>
+            <img class='scb_s_header_tools_icon' src='images/header/scb_user_guide_icon.png' alt='' role='presentation'>
             <span class='scb_s_header_tools_text' role='presentation'>USER<br>GUIDE</span>
         </button>
-        <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' role='presentation'>
+        <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' alt='' role='presentation'>
         <a class='scb_f_video' href='http://www.youtube.com/playlist?list=PLZhxzzyMIQIHhQ2TOGm3HNLA04ZsTmOLW'
             aria-label='Videos' target="_blank">
-            <img class='scb_s_header_tools_icon' src='images/header/scb_video_icon.png' role='presentation'>
+            <img class='scb_s_header_tools_icon' src='images/header/scb_video_icon.png' alt='' role='presentation'>
             <span class='scb_s_header_tools_text' role='presentation'>VIDEOS</span>
         </a>
         <img class='scb_s_header_vertical_line' src='images/header/scb_vertical_divider.png' alt='' role='presentation'>
@@ -178,7 +178,7 @@ Assignment display_experiment_design
         </span>
         <span class='scb_s_homepage_technique' role='techniques'>
             <span class='scb_s_homepage_technique_title'>
-                <img src='images/homepage/techniques.png'>
+                <img src='images/homepage/techniques.png' alt=''>
             </span>
             {call scb_homepage.display_techniques}
                 {param techniques:['wb','fc','micro']/}
