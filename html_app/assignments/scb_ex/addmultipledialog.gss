@@ -18,14 +18,13 @@
     font-size: 10pt;
 }
 
-.scb_ex_samples_table_wrapper{
+.scb_ex_samples_table_wrapper {
     max-height: 300px;
     overflow: auto;
     position: relative;
     border: 1px solid #27956c;
     border-radius: 5px;
     background-color: #edeef2;
-
 }
 
 .scb_ex_samples_table_wrapper::-webkit-scrollbar {
@@ -48,25 +47,25 @@
 }
 
 .scb_ex_inner_dialog_title_close {
-	padding-top: 0px;
-	float:right;
-	-webkit-appearance: none;
-	font-family:'sourcesanspro-semibold';
-	outline: none;
-	height: 26px;
-	width: 26px;
-	cursor: pointer;
-	border: none;
-	border-radius: 12px;
-	font-size: 14pt;
-	color: transparent;
-	background: transparent;
-	background-image: url('../../../images/header/scb_close_button.png');
-	background-repeat: no-repeat;
+    padding-top: 0px;
+    float:right;
+    -webkit-appearance: none;
+    font-family:'sourcesanspro-semibold';
+    outline: none;
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    font-size: 14pt;
+    color: transparent;
+    background: transparent;
+    background-image: url('../../../images/header/scb_close_button.png');
+    background-repeat: no-repeat;
 }
 
-.scb_ex_inner_dialog_title_close:hover{
-	background-color: #e58986;
+.scb_ex_inner_dialog_title_close:hover {
+    background-color: #e58986;
 }
 
 .scb_ex_inner_dialog {
@@ -77,8 +76,8 @@
     margin: 12% auto auto auto;
     position: relative;
     border: 5px solid white;
-	border-radius: 9px;
-	background-color: #f5f5f5;
+    border-radius: 9px;
+    background-color: #f5f5f5;
 }
 
 .scb_ex_inner_dialog_title {
@@ -87,7 +86,7 @@
     margin: 0px;
     margin-bottom: 5px;
     padding: 6px;
-    text-align:left;
+    text-align: left;
     cursor: move;
     @mixin gradient(top,#27956c,#189689,#27956c);
     font-family: 'sourcesanspro-bold';
@@ -117,16 +116,16 @@
     margin-left: 10px;
 }
 
-.scb_s_clear_all{
+.scb_s_clear_all {
     float: right;
 }
 
-.scb_add_samples_add{
+.scb_add_samples_add {
     float: right;
     position: relative;
 }
 
-.scb_add_samples_cancel{
+.scb_add_samples_cancel {
     float: right;
     position: relative;
 }
