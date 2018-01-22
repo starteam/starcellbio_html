@@ -499,6 +499,7 @@ label.custom-select {
     font-family: 'sourcesanspro-semibold';
     cursor: pointer;
     text-transform: uppercase;
+    margin-left: 3px;
 }
 
 .scb_s_assignment_step_experiment_box {
