@@ -23,6 +23,10 @@
     border: 0;
 }
 
+input[type=text], textarea {
+    border: 1px solid #a9a9a9;
+}
+
 .dummy {
 }
 
