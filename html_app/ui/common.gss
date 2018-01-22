@@ -451,7 +451,6 @@ div#main {
 label.custom-select {
     position: relative;
     display: inline-block;
-    height: 19px;
 }
 
 .custom-select:hover {
@@ -460,13 +459,16 @@ label.custom-select {
 
 .custom-select {
     width: 219px;
-    height: 21px;
-    padding-top: 4px;
-    padding-bottom: 3px;
+    height: 24px;
+    padding-top: 2px;
     padding-left: 10px;
     overflow: hidden;
     background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
     box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.custom-select:focus-within {
+   box-shadow: 0 0 2px 2px #1c1c1c; /* Default focus indicator */
 }
 
 .custom-select select {
@@ -476,12 +478,15 @@ label.custom-select {
    font-family: Arial;
    font-weight: normal;
    font-size: 10pt;
-   line-height: 1;
    border: 0;
    border-radius: 0;
    height: 22px;
    -webkit-appearance: none;
    bottom: 1px;
+}
+
+.custom-select select:focus {
+    box-shadow: none;
 }
 
 #jqDialog_options > button {

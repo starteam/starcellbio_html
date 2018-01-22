@@ -871,21 +871,24 @@ input[type="checkbox"].disabled {
 label.custom-dropdown {
     position: relative;
     display: inline-block;
-    height: 21px;
     margin-left: 3px;
 }
 
 .custom-dropdown:hover {
     background: url("../images/setup/scb_experiment_dropdown_hover.png") no-repeat right #FFF;
-    background-size: 27px;
+    background-size: 26px;
 }
 
 .custom-dropdown {
-    padding: 4px 0 4px 5px;
+    padding: 2px 0 2px 5px;
     overflow: hidden;
     background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
-    background-size: 27px;
+    background-size: 26px;
     box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.custom-dropdown:focus-within {
+   box-shadow: 0 0 2px 2px #1c1c1c; /* Default focus indicator */
 }
 
 .custom-dropdown select {
@@ -893,10 +896,14 @@ label.custom-dropdown {
     font-family: Arial;
     font-weight: normal;
     font-size: 10pt;
-    line-height: 1;
     border: 0;
-    height: 20px;
+    height: 24px;
     -webkit-appearance: none;
+    top: 1px;
+}
+
+.custom-dropdown select:focus {
+    box-shadow: none;
 }
 
 /* Microscopy select image dialog */

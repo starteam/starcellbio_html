@@ -46,7 +46,6 @@
 label.custom-select_gel {
     position: relative;
     display: inline-block;
-    height: 19px;
 }
 
 .custom-select_gel:hover {
@@ -55,14 +54,17 @@ label.custom-select_gel {
 
 .custom-select_gel {
     width: 169px;
-    height: 21px;
+    height: 24px;
     padding-right: 4px;
-    padding-top: 4px;
-    padding-bottom: 3px;
+    padding-top: 2px;
     padding-left: 8px;
     overflow: hidden;
     background: url("../images/setup/scb_experiment_dropdown.png") no-repeat right #FFF;
     box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.custom-select_gel:focus-within {
+   box-shadow: 0 0 2px 2px #1c1c1c; /* Default focus indicator */
 }
 
 .custom-select_gel select {
@@ -72,13 +74,16 @@ label.custom-select_gel {
    font-family: Arial;
    font-weight: normal;
    font-size: 8pt;
-   line-height: 1;
    border: 0;
    border-radius: 0;
    height: 22px;
    -webkit-appearance: none;
    bottom: 1px;
    outline: none;
+}
+
+.custom-select_gel select:focus {
+    box-shadow: none;
 }
 
 .scb_f_slider {
