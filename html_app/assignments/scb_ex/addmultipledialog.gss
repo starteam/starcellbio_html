@@ -75,7 +75,7 @@
     overflow: auto;
     margin: 12% auto auto auto;
     position: relative;
-    border: 5px solid white;
+    border: 2px solid #8d97a3;
     border-radius: 9px;
     background-color: #f5f5f5;
 }

@@ -291,12 +291,12 @@ nav ul li.on {
     height: 25px;
     position: relative;
     font-family: 'sourcesanspro-semibold';
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
     font-size: 13pt;
     letter-spacing: .5px;
     right: 0px;
-    bottom: 10px;
+    bottom: 11px;
 }
 
 .jqDialog_confirm_header {
