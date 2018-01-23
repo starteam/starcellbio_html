@@ -151,7 +151,7 @@ scb_ex1.register = function(dialog, state) {
     scb_ex1.static.scb_ex_inner_dialog_add_assignment_builder(this, dialog, state);
     $(this).focus();
   });
-
+  $('.scb_ex_inner_dialog_title_close').focus();
 }
 
 scb_ex1.setup = function(state) {
