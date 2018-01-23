@@ -495,6 +495,14 @@ Experiment active area
     </p>
     <a
         role='button'
+        aria-label='Edit Set Up'
+        class='scb_s_navigation_button scb_f_open_experiment_setup'
+        href='#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
+        &#9664; &nbsp; EDIT SET-UP
+    </a>
+    <br>
+    <a
+        role='button'
         aria-label='Confirm Set Up and Run'
         class='scb_s_navigation_button scb_f_open_select_technique'
         href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}'
@@ -502,14 +510,6 @@ Experiment active area
         experiment_id='{$experiment.id}'>
         CONFIRM SET-UP & RUN &nbsp; &#9654;
     </a>
-    <br>
-    <span
-        role='button'
-        aria-label='Edit Set Up'
-        class='scb_s_navigation_button scb_f_open_experiment_setup'
-        href='#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
-        &#9664; &nbsp; EDIT SET-UP
-    </span>
 </div>
 {/template}
 
