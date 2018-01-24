@@ -688,7 +688,7 @@ $(function() {
       } else {
         data = histograms[instance_id]['fixed'];
       }
-      var $edit_icon = $("div.scb_ab_s_histogram_edit_icon[data-row_id='row-" + row_id + "']");
+      var $edit_icon = $(".scb_ab_col_edit>button.scb_ab_s_histogram_edit_icon[data-row_id='row-" + row_id + "']");
       // Scale: editing canvas is 300x300, small canvas is 160x160
       var xyScale = 160/300;
       if (data) {
@@ -702,13 +702,14 @@ $(function() {
           path.add(new Point(xyScale*(point[0] - 20), xyScale*(point[1] + 20)));
         });
         paper.view.update();
-        $("button[data-row_id='row-" + row_id + "']").hide();
+        $(".scb_ab_s_col_width_facs_sample>button[data-row_id='row-" + row_id + "']").hide();
         $edit_icon.addClass('scb_ab_s_edit_white_img');
       } else {
         $(canvas).css('display', 'none');
         $(canvas).siblings('div').css('display', 'none');
         $(canvas).parent().siblings('.scb_ab_s_copy_button_container').css('display', 'none');
         $edit_icon.addClass('scb_ab_s_edit_grey_img');
+        $edit_icon.prop('disabled', true);
       }
     });
 
@@ -745,7 +746,7 @@ $(function() {
   }
 
   /* ADD HISTOGRAM button: Open Histogram Tools window */
-  $(".add_histogram_btn, .scb_ab_f_edit_histogram.scb_ab_s_edit_white_img").click(function () {
+  $(".add_histogram_btn, .scb_ab_f_edit_histogram.scb_ab_s_edit_white_img").click(function (event) {
     /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
     /* Get name of the sample from the row itself */
@@ -767,6 +768,9 @@ $(function() {
       $(".scb_ab_s_select_histogram_view").show();
       paper.view.update();
     }
+    // Focus on close button
+    $('.scb_ab_s_dialog_title_close.scb_ab_f_close_dialog').focus();
+    event.preventDefault();
   });
 
   /* Open Image Dialog in Microscopy Analyze page */
@@ -887,6 +891,8 @@ $(function() {
         'cell_treatment': $(this).data('cell_treatment')
       });
     $(".scb_ab_s_copy_dialog").css('visibility', 'visible');
+    // Focus on close button
+    $('.scb_ab_s_dialog_title_close.scb_ab_f_close_copy_dialog').focus();
   });
 
   $('.scb_ab_f_close_copy_dialog').click(function(){

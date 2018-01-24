@@ -651,8 +651,16 @@ input[type="checkbox"].disabled {
 }
 
 .scb_ab_s_histogram_edit_icon {
-    height: 28px;
-    margin: 10px 7px;
+    border: none;
+    width: 25px;
+    height: 25px;
+    margin: 10px 7px 8px 7px;
+    cursor: pointer;
+}
+
+.scb_ab_s_histogram_edit_icon:not([disabled]):hover {
+    outline: 2px solid #ccc;
+    outline-offset: 2px;
 }
 
 .scb_ab_s_edit_grey_img {
@@ -799,9 +807,10 @@ input[type="checkbox"].disabled {
     height: 26px;
     width: 26px;
     cursor:pointer;
+    border: none;
     border-radius: 12px;
     color: transparent;
-    background-image: url('../../../images/header/scb_close_button.png');
+    background: url('../../../images/header/scb_close_button.png') 0 0 / cover no-repeat transparent;
 }
 
 .scb_ab_s_remove_icon:hover {
@@ -832,6 +841,10 @@ input[type="checkbox"].disabled {
     text-align: center;
     padding: 5px 0;
     cursor: pointer;
+}
+
+.scb_ab_s_histogram_tabs a {
+    color: inherit;
 }
 
 .scb_ab_s_histogram_tab_not_selected {

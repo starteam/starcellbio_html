@@ -5,8 +5,8 @@
   <div class="scb_ab_s_dialog scb_ab_s_copy_dialog" style="visibility:hidden">
         <div>
             <h1 class="scb_ab_s_dialog_title" role="presentation" aria-label="Copy To Histogram">
-                <span class="scb_ab_s_dialog_title_close scb_ab_f_close_copy_dialog" role="button"
-                      aria-label="Close Create Histogram">×</span>
+                <button class="scb_ab_s_dialog_title_close scb_ab_f_close_copy_dialog" role="button"
+                      aria-label="Close Create Histogram"></button>
                 Copy To
             </h1>
             <div class="scb_ab_s_copy_dialog_body">
@@ -60,14 +60,14 @@
     <div class="scb_ab_s_dialog scb_ab_s_analyze_dialog scb_ab_s_analyze_dialog_histogram" style="visibility:hidden">
         <div>
             <h1 class="scb_ab_s_dialog_title" role="presentation" aria-label="Create Histogram">
-                <span class="scb_ab_s_dialog_title_close scb_ab_f_close_dialog" role="button"
-                      aria-label="Close Create Histogram">×</span>
                 Histogram Tools
+                <button class="scb_ab_s_dialog_title_close scb_ab_f_close_dialog" role="button"
+                      aria-label="Close Create Histogram"></button>
             </h1>
             <div class="scb_ab_s_draw_histogram_view">
                 <div class="scb_ab_s_histogram_tabs">
-                    <div class="scb_ab_s_histogram_tab_not_selected">Select Histogram</div>
-                    <div class="scb_ab_s_histogram_tab_selected">Draw New Histogram</div>
+                    <div class="scb_ab_s_histogram_tab_not_selected"><a href="#">Select Histogram</a></div>
+                    <div class="scb_ab_s_histogram_tab_selected"><a href="#">Draw New Histogram</a></div>
                 </div>
                 <div class="scb_ab_s_draw_new_histogram_content">
                     <div class="scb_ab_s_chosen_sample_heading">
@@ -124,8 +124,8 @@
             </div>
             <div class="scb_ab_s_select_histogram_view" style="display:none">
                 <div class="scb_ab_s_histogram_tabs">
-                    <div class="scb_ab_s_histogram_tab_selected">Select Histogram</div>
-                    <div class="scb_ab_s_histogram_tab_not_selected">Draw New Histogram</div>
+                    <div class="scb_ab_s_histogram_tab_selected"><a href="#">Select Histogram</a></div>
+                    <div class="scb_ab_s_histogram_tab_not_selected"><a href="#">Draw New Histogram</a></div>
                 </div>
                 <div class="scb_ab_s_draw_new_histogram_content">
                     <div class="scb_ab_s_chosen_sample_heading">
@@ -207,9 +207,9 @@
                         <div class="scb_ab_s_col_width_number"></div>
                         <div class="scb_ab_s_col_width_facs_sample">
                             <div class="scb_ab_s_remove_histogram_icon_position">
-                                <span class="scb_ab_s_remove_icon scb_ab_f_remove_histogram"
+                                <button class="scb_ab_s_remove_icon scb_ab_f_remove_histogram"
                                       role="button" data-cell_treatment="{{ cell_treatment }}"
-                                      data-pk="{{ instance.id }}" aria-label="Remove Histogram">×</span>
+                                      data-pk="{{ instance.id }}" aria-label="Remove Histogram"></button>
                             </div>
                             <canvas id="canvas-{{ cell_treatment }}_{{ instance.id }}"
                                 class="scb_ab_s_small_canvas">
@@ -222,10 +222,10 @@
                         </div>
                         <div class="scb_ab_s_edit_icon_container">
                             <div class="scb_ab_col_edit">
-                                <div class="scb_ab_s_histogram_edit_icon scb_ab_f_edit_histogram"
+                                <button class="scb_ab_s_histogram_edit_icon scb_ab_f_edit_histogram"
                                     data-row_id="row-{{ cell_treatment }}_{{ instance.id }}"
                                     data-sample_treatment="{{ cell_treatment }}, {{ analysis }}, {{ condition }}">
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <div class="scb_ab_s_copy_button_container">
