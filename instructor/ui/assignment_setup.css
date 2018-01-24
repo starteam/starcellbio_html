@@ -585,8 +585,6 @@ input[type="checkbox"].disabled {
 }
 
 .scb_ab_s_input_headers > div.scb_ab_center_input_header {
-    margin-left: 5px;
-    width: 138px;
     text-align: center;
 }
 
