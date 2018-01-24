@@ -23,7 +23,7 @@
     border: 0;
 }
 
-input[type=text], textarea {
+input[type='text'], input[type='number'], textarea {
     border: 1px solid #a9a9a9;
 }
 

@@ -285,6 +285,7 @@ select:disabled {
 
 .scb_ab_s_small_input_box > input {
     width: 40px;
+    height: 17px;
 }
 
 .scb_ab_s_units_input > input {
