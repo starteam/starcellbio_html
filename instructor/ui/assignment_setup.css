@@ -1153,7 +1153,7 @@ label[for="id_file"] {
     font-size: large;
 }
 
-label[for="id_file"] strong {
+label[for="id_file"] a {
     color: #005fb3;
     cursor: pointer;
 }

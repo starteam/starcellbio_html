@@ -1010,6 +1010,7 @@ $(function() {
       $imageForm = $('.scb_ab_s_image_form'),
       $fileInput = $imageForm.find('input[type="file"]'),
       $label = $imageForm.find('label[for="id_file"]'),
+      $anchor = $label.children('a'),
       $fileInput = $imageForm.find( 'input[type="file"]'),
       $filesSelect = $(".scb_ab_s_select_box"),
       droppedFiles = false,
@@ -1022,6 +1023,10 @@ $(function() {
                 .replace('{}', files.length) : files[0].name + " is ") + "uploading ...");
           }
       };
+  $anchor.on('click', function(e) {
+    e.preventDefault();
+    $label.click();
+  });
   // New event handler for the 'usual' file uploading (not drag&drop)
   $fileInput.on('change', function(e) {
       showFiles(e.target.files);
