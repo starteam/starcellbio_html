@@ -1,92 +1,83 @@
 <style>
+    body {
+        background: #f4f6f8;
+        top:0px;
+        font-size: 10pt;
+        margin: 50px 0px;
+        padding: 0px;
+        text-align: center;
+        position: relative;
+        overflow:hidden;
+    }
 
+    button {
+        font-weight: bold;
+        text-transform: uppercase;
+        background-color: #e0e0e0;
+        border: 1px solid #e0e0e0;
+    }
 
+    .inlineLabels {
+        margin-left: -3px;
+        border: 0;
+    }
 
-body {
-	
-    background: #f4f6f8;
-    top:0px;
-    font-size: 10pt;
-    margin: 50px 0px;
-    padding: 0px;
-    text-align: center;
-    position: relative;
-    overflow:hidden;
-}
-button{
-	font-weight: bold;
-	text-transform: uppercase;
-	background-color: #e0e0e0;
-	border: 1px solid #e0e0e0;
-	
-}
-.inlineLabels{
-margin-left: -3px;
-border:0;
-}
+    #div_id_login > label, #div_id_password > label {
+        color: #316f94;
+        font-size: 9pt;
+        letter-spacing: 1px;
+        font-weight: bold;
+        float: left;
+        display: block;
+        margin-bottom: 5px;
+    }
 
+    #div_id_login > input, #div_id_password > input {
+        display: block;
+        width: 373px;
+        box-shadow: inset 1px 1px 4px 0px gray;
+    }
 
+    #div_id_remember {
+        float: left;
+        margin-left: -7px;
+    }
 
-#div_id_login > label, #div_id_password > label{
-	color: #316f94;
-	font-size: 9pt;
-	letter-spacing: 1px;
-	font-weight: bold;
-	float: left;
-	display:block;
-	margin-bottom: 5px;
-}
+    input {
+        height: 31px;
+        clear: left;
+    }
 
+    .auth_submit_button {
+        float: right;
+        -webkit-appearance: none;
+        border-radius: 8px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        background: #27956c;
+        height: 27px;
+        color: white;
+        font-size: 9pt;
+        cursor: pointer;
+        position: relative;
+        bottom: 8px;
+        padding-left: 13px;
+        padding-right: 9px;
+        top: 1px;
+    }
 
-#div_id_login > input, #div_id_password > input{
-	display: block;
-	width: 373px;
-	box-shadow: inset 1px 1px 4px 0px gray;
-}
+    .auth_submit_button > div {
+        position: relative;
+        top: 2px;
+    }
 
-
-#div_id_remember{
-	float: left; 
-	margin-left: -7px;
-
-}
-
-input{
-	height: 31px;
-	clear: left;
-}
-
-.auth_submit_button{
-		float:right; 
-		-webkit-appearance:none; 
-		border-radius: 8px; 
-		letter-spacing:1px;
-		text-transform:uppercase;
-		background: #27956c; 
-		height: 27px;
-		color: white;
-		font-size: 9pt; 
-		cursor:pointer;
-		position:relative;
-		bottom: 8px;
-		padding-left: 13px;
-		padding-right: 9px;
-		top:1px;
-}
-
-.auth_submit_button > div{
-	position: relative;
-	top: 2px;
-}
-
-.buttonHolder > a{
-	float: left;
-	font-weight: bold;
-	color: #27956c;
-	font-size: 10pt;
-	text-decoration: none;
-}
-
+    .buttonHolder > a{
+        float: left;
+        font-weight: bold;
+        color: #27956c;
+        font-size: 10pt;
+        text-decoration: none;
+    }
 </style>
 
 {% load url from future %}
@@ -94,56 +85,45 @@ input{
 {% load uni_form_tags %}
 {% load account %}
 
-
 {% block content %}
-{% url 'account_setup' as setup %}
+    {% url 'account_setup' as setup %}
 
-{% if socialaccount.providers  %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a> 
-for a {{site_name}} account and sign in
-below:{% endblocktrans %}</p>
-
-<div class="socialaccount_ballot">
-
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" %}
-  </ul>
-
-  <div class="login-or">{% trans 'or' %}</div>
-
-</div>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% endif %}
-
-
-
-
-<form class="login uniForm" method="POST" action="{% url 'account_login' %}">
- 	{% csrf_token %}
-  <fieldset class="inlineLabels">
-    {{ form|as_uni_form }}
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% if socialaccount.providers  %}
+        <p>
+            {% blocktrans with site.name as site_name %}Please sign in with one
+            of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+            for a {{site_name}} account and sign in below:{% endblocktrans %}
+        </p>
+        <div class="socialaccount_ballot">
+          <ul class="socialaccount_providers">
+            {% include "socialaccount/snippets/provider_list.html" %}
+          </ul>
+          <div class="login-or">{% trans 'or' %}</div>
+        </div>
+        {% include "socialaccount/snippets/login_extra.html" %}
     {% endif %}
-    <div class="buttonHolder">
-      
-      <button class="primaryAction auth_submit_button login_submit" type="submit" ><div>{% trans "Sign In Now" %}</div></button><br/><br/>
-      <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a><br/><br/>
-	  <a class='not_a_member' href="{% url 'account_signup' %}">{% trans "Not a Member?" %}</a>
-    </div>
-    	
-    	
-  </fieldset>
-</form>
-<script>
-document.getElementById('div_id_login').children[0].textContent='USERNAME';
-document.getElementById('div_id_password').children[0].textContent='PASSWORD';
-</script>
-
+    <form class="login uniForm" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        <fieldset class="inlineLabels">
+            {{ form|as_uni_form }}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div class="buttonHolder">
+                <button class="primaryAction auth_submit_button login_submit" type="submit" >
+                    <div>{% trans "Sign In Now" %}</div>
+                </button>
+                <br>
+                <br>
+                <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                <br>
+                <br>
+                <a class='not_a_member' href="{% url 'account_signup' %}">{% trans "Not a Member?" %}</a>
+            </div>
+        </fieldset>
+    </form>
+    <script>
+        document.getElementById('div_id_login').children[0].textContent='USERNAME';
+        document.getElementById('div_id_password').children[0].textContent='PASSWORD';
+    </script>
 {% endblock %}
-
-
-
