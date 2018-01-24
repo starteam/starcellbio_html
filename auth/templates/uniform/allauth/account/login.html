@@ -1,4 +1,9 @@
 <style>
+    *:focus {
+        outline: none;
+        box-shadow: 0 0 2px 2px #1c1c1c;
+    }
+
     body {
         background: #f4f6f8;
         top:0px;
@@ -36,6 +41,12 @@
         display: block;
         width: 373px;
         box-shadow: inset 1px 1px 4px 0px gray;
+        padding-left: 5px;
+    }
+
+    #div_id_login > input:focus, #div_id_password > input:focus {
+        box-shadow: 0 0 2px 2px #1c1c1c;
+        border: none;
     }
 
     #div_id_remember {
