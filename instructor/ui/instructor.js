@@ -795,6 +795,9 @@ $(function() {
         'analysis': analysis,
     });
     addSelectedImages(); // Add already saved images to the selected area
+    // Focus on close button
+    $('.scb_ab_s_dialog_title_close.scb_ab_f_close_dialog').focus();
+    // event.preventDefault();
   });
 
 

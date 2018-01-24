@@ -57,10 +57,6 @@
     margin-left: 27px;
 }
 
-.scb_ab_s_delete_file {
-    border: 0;
-}
-
 .scb_ab_s_form_select_field {
     font-family: 'sourcesanspro-regular';
     width: 141px;
@@ -307,11 +303,17 @@ select:disabled {
 .scb_s_ab_trash_icon {
     background: url('images/setup/scb_remove.png') no-repeat;
     display: inline-block;
-    height: 20px;
-    width: 15px;
+    width: 16px;
+    height: 16px;
     background-position: center;
     margin-left: 8px;
     cursor: pointer;
+    border: none;
+}
+
+.scb_s_ab_trash_icon:hover {
+    outline: 2px solid #ccc;
+    outline-offset: 1px;
 }
 
 .checkbox_image:hover {
