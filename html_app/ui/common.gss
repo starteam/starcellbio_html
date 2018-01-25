@@ -401,14 +401,12 @@ div#main {
 .arrow-down-select {
     width: 0;
     height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid #4690C1;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #4690C1;
     position: absolute;
-}
-
-.arrow-down-select {
-    left: 74px;
+    left: 79px;
+    top: 35px;
 }
 
 .scb_s_experiment_step_text {

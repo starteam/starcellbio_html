@@ -161,13 +161,13 @@ Progress bar
                     {/if}
                 </div>
                 <div class='scb_s_experiment_step_text scb_s_experiment_step_select_technique {if $step>3 or   $last_step >4}scb_s_experiment_step_visited{/if} {if $step>3 }scb_s_experiment_step_selected{/if}'   aria-label='Select Experiment Technique' aria-disabled='{if $step>3 or   $last_step >4  or $step>3}false{else}true{/if}' role ='button'>
+                    {if $step>3 }
+                        <div class="arrow-down-select" role='presentation' ></div>
+                    {/if}
                     {if $step>3 or   $last_step >4}
                         <a href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}' role='presentation' >3. SELECT TECHNIQUE</a>
                     {else}
                         3. SELECT TECHNIQUE
-                    {/if}
-                    {if $step>3 }
-                        <div class="arrow-down-select" role='presentation' ></div>
                     {/if}
                 </div>
             </div>
