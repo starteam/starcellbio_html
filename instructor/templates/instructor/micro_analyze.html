@@ -225,5 +225,9 @@
   </div>
   <script type="text/javascript">
     dialog_open = {{ dialog_open|safe }};
+    if ($('.scb_ab_s_dialog.scb_ab_s_analyze_dialog').is(':visible')) {
+      // Focus on close button
+      $('.scb_ab_s_dialog_title_close.scb_ab_f_close_dialog').focus();
+    }
   </script>
 {% endblock %}
