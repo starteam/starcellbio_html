@@ -89,6 +89,10 @@
         font-size: 10pt;
         text-decoration: none;
     }
+
+    .errorField, #errorMsg {
+        color: red;
+    }
 </style>
 
 {% load url from future %}
@@ -134,7 +138,10 @@
         </fieldset>
     </form>
     <script>
-        document.getElementById('div_id_login').children[0].textContent='USERNAME';
-        document.getElementById('div_id_password').children[0].textContent='PASSWORD';
+        // Override labels returned by form (contain a trailing *)
+        document.querySelector('#div_id_login > label').innerHTML = 'USERNAME';
+        document.querySelector('#div_id_password > label').innerHTML  = 'PASSWORD';
+        // Focus on username input
+        document.querySelector('#div_id_login > input').autofocus = true;
     </script>
 {% endblock %}
