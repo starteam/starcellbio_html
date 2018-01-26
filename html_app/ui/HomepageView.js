@@ -24,6 +24,23 @@ scb.ui.static.HomepageView.select_list_item = function(element, workarea, aria) 
 }
 
 scb.ui.static.HomepageView.register = function(workarea) {
+  // Skip to content link
+  scb.utils.off_on(workarea, 'click', '.scb_s_skip_to_content', function(e) {
+    var hash = window.location.hash, params, view, content = '.scb_s_homepage_content';
+    if (hash !== '') {
+      params = hash.substr(1).split('&');
+      view = params[0].split('=')[1];
+      if (view !== 'homepage') {
+        content = '.scb_s_' + view + '_container';
+        if (view === 'facs') {
+          content += '_student';
+        }
+      }
+    }
+    $(content).find(':focusable').first().focus();
+    e.preventDefault();
+  });
+
   scb.utils.off_on(workarea, 'click', '.scb_s_homepage_experimental_design_bullet_item', function(e) {
     scb.ui.static.HomepageView.select_list_item(this, workarea, true);
   });
