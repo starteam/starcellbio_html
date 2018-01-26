@@ -2,12 +2,23 @@
 <html>
     <head>
         <style>
+            *:focus {
+                outline: none;
+                box-shadow: 0 0 2px 2px #1c1c1c;
+            }
+
             input[type=text] {
                 height: 31px;
                 clear: left;
                 display: block;
                 width: 373px;
+                border: none;
                 box-shadow: inset 1px 1px 4px 0px gray;
+            }
+
+            input[type=text]:focus {
+                box-shadow: 0 0 2px 2px #1c1c1c;
+                border: none;
             }
 
             .radios >input{
@@ -60,7 +71,7 @@
             <fieldset class='scb_f_fieldset'>
                 <input id="project" name="project" type="hidden" value="StarCellBio"> <input id="source" name="source" type="hidden" value="app">
                 <label>Your name (optional):</label><br>
-                <input name="name" size="25/" type="text"><br>
+                <input name="name" size="25/" type="text" autofocus><br>
                 <label>Email (optional):</label><br>
                 <input onkeyup="changeCheck()"  id='scb_f_contact_email' name="email" type="text"><br>
                 <span>
@@ -69,7 +80,7 @@
                 </span><br><br>
                 <label>Report type:</label><br><br>
                 <div class='radios'>
-                  <input name="report" type="radio" value="Bug">Bug<br>
+                  <input name="report" type="radio" value="Bug" checked>Bug<br>
                   <input name="report" type="radio" value="Feature">Feature request<br>
                   <input name="report" type="radio" value="Comment">Comment<br>
                   <input name="report" type="radio" value="Question">Question
