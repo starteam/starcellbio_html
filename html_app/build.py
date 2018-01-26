@@ -45,7 +45,7 @@ JS_SUFFIX = '" charset="UTF-8"></script>\n'
 
 HTML_PREFIX = """
 <!DOCTYPE html>
-<html>
+<html lang='en-US'>
   <head>
     <META http-equiv='Content-Type' content='text/html; charset=UTF-8'>
     <meta http-equiv='content-type' content='text/html; charset=utf-8'>
