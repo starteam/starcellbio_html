@@ -400,11 +400,8 @@ scb.ui.MainFrame = function scb_ui_MainFrame(master_model, context) {
         }
       });
     });
-
+    $('.scb_f_ug_close_button').focus();
     $('iframe.scb_s_ug_dialog').load(function() {
-      $('.scb_f_ug_help_search_bar').width($('iframe.scb_s_ug_dialog').contents().find('.scb_f_help_display').width() + 20);
-      $('iframe.scb_s_ug_dialog').width($('iframe.scb_s_ug_dialog').contents().find('.scb_f_help').width() + 20);
-      $('iframe.scb_s_ug_dialog').height($('iframe.scb_s_ug_dialog').contents().find('.scb_f_help').height() + 20);
       $('.scb_f_ug_help_search_bar').draggable({
         handle: '.user_guide_title'
       });
