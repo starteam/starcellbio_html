@@ -109,6 +109,25 @@
     vertical-align: middle;
 }
 
+.scb_s_skip_links {
+    display: inline-block;
+    height: 72px;
+    line-height: 72px;
+    cursor: default;
+}
+
+.scb_s_skip_to_sidebar, .scb_s_skip_to_content {
+    color: #f4f6f8;
+    margin-left: 10px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+.scb_s_skip_to_sidebar:focus, .scb_s_skip_to_content:focus {
+    color: black;
+    pointer-events: inherit;
+}
+
 .scb_s_header_tools {
     display: inline-block;
     float: right;

@@ -6,6 +6,33 @@ $(function() {
     $('.scb_s_dashboard_link', this).toggle();
   });
   /**
+   * Skip to sidebar and content links
+   */
+  var skip_to_sidebar = $('.scb_s_skip_to_sidebar'),
+      skip_to_content = $('.scb_s_skip_to_content'),
+      pathname = window.location.pathname,
+      is_entry_page = pathname === '/ab/assignments/',
+      is_select_technique_page = pathname === '/ab/assignments/select_technique/';
+  // No sidebar in entry page, hide the corresponding link
+  if (is_entry_page) {
+    skip_to_sidebar.hide();
+  }
+  skip_to_sidebar.click(function(e) {
+    if (is_select_technique_page) {
+      // Focus on first checkbox of Experimental Techniques
+      $('#tech_has_wb').focus();
+    } else {
+      // Focus on page related link
+      $('a[href="' + pathname + '"]').focus();
+    }
+    e.preventDefault();
+  });
+  skip_to_content.click(function(e) {
+    var content = is_entry_page ? $('.scb_s_dashboard_sidebar') : $('.scb_s_course_setup_description');
+    content.find(':focusable').first().focus();
+    e.preventDefault();
+  });
+  /**
    * Course setup
    */
   $('.scb_f_course_setup_create_new_course_option input').click(function() {
