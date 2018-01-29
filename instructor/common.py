@@ -24,6 +24,7 @@ from instructor.compiler import (
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 from django.template.defaulttags import register
+from copy import deepcopy
 
 
 page_order = (
@@ -135,6 +136,11 @@ def get_pages(assignment):
 
 @login_required
 def assignment_setup(request):
+    """
+    Collect preliminary data on the assignment and save it in request.session
+    since we cannot create the object before the course is chosen/created.
+    request.session['new'] indicates that assignment has not yet been created.
+    """
     error = ''
     assignment_text = ''
     assignment_files = ''
@@ -265,19 +271,17 @@ def create_assignment(request, course_selected):
     assignment_id = assignment_name + datetime.datetime.now().strftime(
         "%I:%M%p on %B %d, %Y"
     )
-
     if request.session['based_on']:
-        based_on = models.Assignment.objects.get(
+        based_on = get_object_or_404(
+            models.Assignment,
             pk=request.session['based_on']
         )
-        a = models.Assignment(
-            course=course_selected,
-            name=assignment_name,
-            text=assignment_text,
-            files=assignment_files,
-            assignment_id=assignment_id,
-            basedOn=based_on
-        )
+        a = deepcopy(based_on)
+        a.id = None
+        a.name = assignment_name
+        a.assignment_id = assignment_id
+        a.save()
+        copy_assignment(based_on, a)
     else:
         a = models.Assignment(
             course=course_selected,
@@ -286,10 +290,52 @@ def create_assignment(request, course_selected):
             files=assignment_files,
             assignment_id=assignment_id
         )
-    a.save()
+        a.save()
     request.session['assignment_id'] = a.id
     request.session['new'] = False
     return a
+
+
+def copy_assignment(old_assignment, new_assignment):
+
+    for orig_strain_treat in old_assignment.strain_treatment.all():
+        orig_treatment = orig_strain_treat.treatment
+        old_drug = orig_treatment.drug
+        drug, _ = models.Drug.objects.get_or_create(
+            assignment=new_assignment,
+            name=old_drug.name,
+            concentration=old_drug.concentration,
+            concentration_unit=old_drug.concentration_unit,
+            start_time=old_drug.start_time,
+            time_unit=old_drug.time_unit,
+            duration=old_drug.duration
+        )
+        temperature = collection_time = None
+        if orig_treatment.temperature:
+            temperature, _ = models.Temperature.objects.get_or_create(
+                assignment=new_assignment,
+                degrees=orig_treatment.temperature.degrees
+            )
+        if orig_treatment.collection_time:
+            collection_time, _ = models.CollectionTime.objects.get_or_create(
+                assignment=new_assignment,
+                time=orig_treatment.collection_time.time,
+                units=orig_treatment.collection_time.units
+            )
+        treatment, _ = models.Treatment.objects.get_or_create(
+            assignment=new_assignment,
+            drug=drug,
+            temperature=temperature,
+            collection_time=collection_time
+        )
+        strain, _ = models.Strains.objects.get_or_create(
+            assignment=new_assignment,
+            name=orig_strain_treat.strain.name
+        )
+        orig_strain_treat.id = None
+        orig_strain_treat.assignment = new_assignment
+        orig_strain_treat.strain = strain
+        orig_strain_treat.treatment = treatment
 
 
 @login_required
