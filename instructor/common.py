@@ -279,6 +279,8 @@ def create_assignment(request, course_selected):
         a = deepcopy(based_on)
         a.id = None
         a.name = assignment_name
+        a.text = assignment_text
+        a.files = assignment_files
         a.assignment_id = assignment_id
         a.save()
         copy_assignment(based_on, a)
@@ -297,45 +299,49 @@ def create_assignment(request, course_selected):
 
 
 def copy_assignment(old_assignment, new_assignment):
-
-    for orig_strain_treat in old_assignment.strain_treatment.all():
-        orig_treatment = orig_strain_treat.treatment
-        old_drug = orig_treatment.drug
-        drug, _ = models.Drug.objects.get_or_create(
+    # Create all experiment entries for new_assignment based on values of old_assignment
+    for old_strain_treatment in old_assignment.strain_treatment.all():
+        old_treatment = old_strain_treatment.treatment
+        old_drug = old_treatment.drug
+        drug, created = models.Drug.objects.get_or_create(
             assignment=new_assignment,
             name=old_drug.name,
             concentration=old_drug.concentration,
             concentration_unit=old_drug.concentration_unit,
             start_time=old_drug.start_time,
             time_unit=old_drug.time_unit,
-            duration=old_drug.duration
+            duration=old_drug.duration,
+            duration_unit=old_drug.duration_unit
         )
         temperature = collection_time = None
-        if orig_treatment.temperature:
-            temperature, _ = models.Temperature.objects.get_or_create(
+        if old_treatment.temperature:
+            temperature, created = models.Temperature.objects.get_or_create(
                 assignment=new_assignment,
-                degrees=orig_treatment.temperature.degrees
+                degrees=old_treatment.temperature.degrees
             )
-        if orig_treatment.collection_time:
-            collection_time, _ = models.CollectionTime.objects.get_or_create(
+        if old_treatment.collection_time:
+            collection_time, created = models.CollectionTime.objects.get_or_create(
                 assignment=new_assignment,
-                time=orig_treatment.collection_time.time,
-                units=orig_treatment.collection_time.units
+                time=old_treatment.collection_time.time,
+                units=old_treatment.collection_time.units
             )
-        treatment, _ = models.Treatment.objects.get_or_create(
+        treatment, created = models.Treatment.objects.get_or_create(
             assignment=new_assignment,
             drug=drug,
             temperature=temperature,
             collection_time=collection_time
         )
-        strain, _ = models.Strains.objects.get_or_create(
+        strain, created = models.Strains.objects.get_or_create(
             assignment=new_assignment,
-            name=orig_strain_treat.strain.name
+            name=old_strain_treatment.strain.name
         )
-        orig_strain_treat.id = None
-        orig_strain_treat.assignment = new_assignment
-        orig_strain_treat.strain = strain
-        orig_strain_treat.treatment = treatment
+        strain_treatment, created = (
+            models.StrainTreatment.objects.get_or_create(
+                assignment=new_assignment,
+                strain=strain,
+                treatment=treatment
+            )
+        )
 
 
 @login_required
