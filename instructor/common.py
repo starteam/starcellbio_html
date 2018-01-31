@@ -24,7 +24,6 @@ from instructor.compiler import (
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 from django.template.defaulttags import register
-from copy import deepcopy
 
 
 page_order = (
@@ -271,34 +270,36 @@ def create_assignment(request, course_selected):
     assignment_id = assignment_name + datetime.datetime.now().strftime(
         "%I:%M%p on %B %d, %Y"
     )
+    a = models.Assignment(
+        course=course_selected,
+        name=assignment_name,
+        text=assignment_text,
+        files=assignment_files,
+        assignment_id=assignment_id
+    )
+    a.save()
+    # If based on another assignment, copy experimental setup of the original assignment
     if request.session['based_on']:
         based_on = get_object_or_404(
             models.Assignment,
             pk=request.session['based_on']
         )
-        a = deepcopy(based_on)
-        a.id = None
-        a.name = assignment_name
-        a.text = assignment_text
-        a.files = assignment_files
-        a.assignment_id = assignment_id
+        a.has_concentration = based_on.has_concentration
+        a.has_temperature = based_on.has_temperature
+        a.has_start_time = based_on.has_start_time
+        a.has_duration = based_on.has_duration
+        a.has_collection_time = based_on.has_collection_time
+        a.last_page_name = 'protocols' # Since we will be copying entries up to that page included
         a.save()
-        copy_assignment(based_on, a)
-    else:
-        a = models.Assignment(
-            course=course_selected,
-            name=assignment_name,
-            text=assignment_text,
-            files=assignment_files,
-            assignment_id=assignment_id
-        )
-        a.save()
+        copy_experiment_entries(based_on, a)
+
     request.session['assignment_id'] = a.id
     request.session['new'] = False
+
     return a
 
 
-def copy_assignment(old_assignment, new_assignment):
+def copy_experiment_entries(old_assignment, new_assignment):
     # Create all experiment entries for new_assignment based on values of old_assignment
     for old_strain_treatment in old_assignment.strain_treatment.all():
         old_treatment = old_strain_treatment.treatment
