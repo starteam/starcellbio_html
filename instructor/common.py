@@ -24,6 +24,7 @@ from instructor.compiler import (
 from django.http import HttpResponse, HttpResponseBadRequest
 from functools import wraps
 from django.template.defaulttags import register
+from copy import deepcopy
 
 
 page_order = (
@@ -135,6 +136,11 @@ def get_pages(assignment):
 
 @login_required
 def assignment_setup(request):
+    """
+    Collect preliminary data on the assignment and save it in request.session
+    since we cannot create the object before the course is chosen/created.
+    request.session['new'] indicates that assignment has not yet been created.
+    """
     error = ''
     assignment_text = ''
     assignment_files = ''
@@ -265,19 +271,26 @@ def create_assignment(request, course_selected):
     assignment_id = assignment_name + datetime.datetime.now().strftime(
         "%I:%M%p on %B %d, %Y"
     )
-
     if request.session['based_on']:
-        based_on = models.Assignment.objects.get(
+        based_on = get_object_or_404(
+            models.Assignment,
             pk=request.session['based_on']
         )
-        a = models.Assignment(
-            course=course_selected,
-            name=assignment_name,
-            text=assignment_text,
-            files=assignment_files,
-            assignment_id=assignment_id,
-            basedOn=based_on
-        )
+        a = deepcopy(based_on)
+        a.id = None
+        a.name = assignment_name
+        a.text = assignment_text
+        a.files = assignment_files
+        a.last_page_name = 'techniques'
+        a.facs_last_enabled_page = 'facs_sample_prep'
+        a.micro_last_enabled_page = 'micro_sample_prep'
+        a.has_wb = False
+        a.has_fc = False
+        a.has_micro = False
+        a.access = 'private'
+        a.assignment_id = assignment_id
+        a.save()
+        copy_assignment(based_on, a)
     else:
         a = models.Assignment(
             course=course_selected,
@@ -286,10 +299,56 @@ def create_assignment(request, course_selected):
             files=assignment_files,
             assignment_id=assignment_id
         )
-    a.save()
+        a.save()
     request.session['assignment_id'] = a.id
     request.session['new'] = False
     return a
+
+
+def copy_assignment(old_assignment, new_assignment):
+    # Create all experiment entries for new_assignment based on values of old_assignment
+    for old_strain_treatment in old_assignment.strain_treatment.all():
+        old_treatment = old_strain_treatment.treatment
+        old_drug = old_treatment.drug
+        drug, created = models.Drug.objects.get_or_create(
+            assignment=new_assignment,
+            name=old_drug.name,
+            concentration=old_drug.concentration,
+            concentration_unit=old_drug.concentration_unit,
+            start_time=old_drug.start_time,
+            time_unit=old_drug.time_unit,
+            duration=old_drug.duration,
+            duration_unit=old_drug.duration_unit
+        )
+        temperature = collection_time = None
+        if old_treatment.temperature:
+            temperature, created = models.Temperature.objects.get_or_create(
+                assignment=new_assignment,
+                degrees=old_treatment.temperature.degrees
+            )
+        if old_treatment.collection_time:
+            collection_time, created = models.CollectionTime.objects.get_or_create(
+                assignment=new_assignment,
+                time=old_treatment.collection_time.time,
+                units=old_treatment.collection_time.units
+            )
+        treatment, created = models.Treatment.objects.get_or_create(
+            assignment=new_assignment,
+            drug=drug,
+            temperature=temperature,
+            collection_time=collection_time
+        )
+        strain, created = models.Strains.objects.get_or_create(
+            assignment=new_assignment,
+            name=old_strain_treatment.strain.name
+        )
+        strain_treatment, created = (
+            models.StrainTreatment.objects.get_or_create(
+                assignment=new_assignment,
+                strain=strain,
+                treatment=treatment
+            )
+        )
 
 
 @login_required
