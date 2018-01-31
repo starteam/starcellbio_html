@@ -12,10 +12,9 @@
 {template .main}
 <div class='scb_s_assignments_view' >
     {call scb_homepage.display_header}
-    {param global_template:$global_template /}
-    {param context:$context /}
+        {param global_template:$global_template /}
+        {param context:$context /}
     {/call}
-    
     {call scb_common.assignment_step}
         {param step:1/}
         {param last_step: $last_step/}
@@ -23,17 +22,17 @@
         {param assignments:assignments/}
     {/call}
     <div class='scb_s_assignments_container' role='main'>
-    {call .display_assignments}
-        {param assignments:$assignments/}
-        {param courses:$courses/}
-    {/call}
-    {call .display_assignment}
-    {param global_template:$global_template /}
-    {param assignments:$assignments/}
-    {/call}
+        {call .display_assignments}
+            {param assignments:$assignments/}
+            {param courses:$courses/}
+        {/call}
+        {call .display_assignment}
+            {param global_template:$global_template /}
+            {param assignments:$assignments/}
+        {/call}
     </div>
     {call scb_homepage.display_footer}
-    {param global_template:$global_template /}
+        {param global_template:$global_template /}
     {/call}
 </div>
 {/template}
@@ -44,7 +43,7 @@ Assignment title
 */
 {template .display_header}
 <div class='scb_s_header'>
-        {$global_template.app_title}
+    {$global_template.app_title}
 </div>
 {/template}
 
@@ -54,7 +53,7 @@ Assignment footer
 */
 {template .display_footer}
 <div class='scb_s_footer'>
-        Here comes footer
+    Here comes footer
 </div>
 {/template}
 
@@ -65,25 +64,43 @@ Assignment description
 {template .display_assignment}
 
 <div class='scb_s_abstract scb_s_assignments_description'>
-
     {if $assignments.selected != null}
     	<div class='scb_s_abstract_title'>
             {$assignments.selected.name |noAutoescape}
         </div>
-
-	<div class='scb_s_assignments_slider_header'>
-		<div class = 'scb_s_assignment_header_img_left scb_s_assignment_header_img_left_inactive'  assignment_id='{$assignments.selected.id}'  role='button' aria-label='Previous Section'></div>
-
-
-		 {foreach $section in $assignments.selected.template.instructions}
-		  <div class='scb_assignments_header_link_wrapper scb_s_assignments_slider_overview {if index($section) == $assignments.selected.last_instruction}scb_assignments_header_link_selected{/if}' assignment_id='{$assignments.selected.id}' role='link' title='{$section[0]}'   value='{$section[0]}' aria-controls='scb_s_assignment_scroll' aria-atomic='true' ><span>{$section[0]}</span>{if index($section) == $assignments.selected.last_instruction}<div class="arrow-down-blue"></div>{/if}</div>
-		{/foreach}
-		<div class = 'scb_s_assignment_header_img_right {if length($assignments.selected.template.instructions)<2}scb_s_assignment_header_img_right_inactive{/if}'  assignment_id='{$assignments.selected.id}' role='button' aria-label='Next Section' ></div>
-	</div>
-	<div class='scb_s_assignments_gray_bar'></div>
+        <div class='scb_s_assignments_slider_header'>
+    		<button class='scb_s_assignments_header_btn_left scb_s_assignments_header_btn_left_inactive'
+                    assignment_id='{$assignments.selected.id}'
+                    aria-label='Previous Section'>
+            </button>
+            {foreach $section in $assignments.selected.template.instructions}
+    		    <button
+                    class='scb_s_assignments_header_btn {if index($section) == $assignments.selected.last_instruction}scb_s_assignments_header_btn_selected{/if}'
+                    assignment_id='{$assignments.selected.id}'
+                    title='{$section[0]}'
+                    value='{$section[0]}'
+                    aria-controls='scb_s_assignment_scroll'
+                    aria-atomic='true'>
+                    <span>{$section[0]}</span>
+                    {if index($section) == $assignments.selected.last_instruction}
+                        <span class='arrow_down_blue_background'></span>
+                        <span class='arrow_down_blue_border arrow_down_blue_border_selected'></span>
+                    {/if}
+                </button>
+    		{/foreach}
+            <button
+                class = 'scb_s_assignments_header_btn_right {if length($assignments.selected.template.instructions)<2}scb_s_assignments_header_btn_right_inactive{/if}'
+                assignment_id='{$assignments.selected.id}'
+                aria-label='Next Section'>
+            </button>
+    	</div>
+    	<div class='scb_s_assignments_gray_bar'></div>
         <div class='scb_s_assignment_scroll' id ='scb_s_assignment_scroll'  aria-live="assertive">
-        	{foreach $section in $assignments.selected.template.instructions}
-				<div class='scb_s_display_section' style='display:{if index($section) == $assignments.selected.last_instruction}block;{/if}' value='{$section[0]}' >
+            {foreach $section in $assignments.selected.template.instructions}
+    			<div
+                    class='scb_s_display_section'
+                    style='display:{if index($section) == $assignments.selected.last_instruction}block;{/if}'
+                    value='{$section[0]}'>
                     {$section[1] |noAutoescape}
                     {if $assignments.selected.template.files and length($assignments.selected.template.files) > 0}
                         <ul>
@@ -93,24 +110,40 @@ Assignment description
                         </ul>
                     {/if}
                 </div>
-        	{/foreach}
+            {/foreach}
         	{if length($assignments.selected.template.instructions)>1}
-        	<div class='scb_s_assignments_bottom_scroll'>
-   				<div class = 'scb_s_assignment_header_img_left scb_assignments_bottom_arrow_left scb_s_assignment_header_img_left_inactive'  assignment_id='{$assignments.selected.id}'   role='button' aria-label='Previous Section'></div>
-   				<div class='scb_s_assignments_button_divider'></div>
-				<div class = 'scb_s_assignment_header_img_right scb_assignments_bottom_arrow_right'  assignment_id='{$assignments.selected.id}'  role='button' aria-label='Next Section'></div>
-			</div>
+        	    <div class='scb_s_assignments_bottom_scroll'>
+       				<button
+                        class = 'scb_s_assignments_header_btn_left scb_s_assignments_bottom_btn_left scb_s_assignments_header_btn_left_inactive'
+                        assignment_id='{$assignments.selected.id}'
+                        aria-label='Previous Section'>
+                    </button>
+    				<button
+                        class = 'scb_s_assignments_header_btn_right scb_s_assignments_bottom_btn_right'
+                        assignment_id='{$assignments.selected.id}'
+                        aria-label='Next Section'>
+                    </button>
+			    </div>
 			{/if}
         </div>
-    <br/>
+        <br/>
  		{if $assignments.selected.id=='decusability' or $assignments.selected.course == 'SCB_SampleExercises' }
-        <span class=" scb_s_assignments_print_assignment scb_f_open_experiment scb_s_navigation_button"
-        href="#view=experiment_design&assignment_id={$assignments.selected.id}" id="{$assignments.selected.id}" aria-label='New Experiment' role='button'></span>
-       {/if}
-        <span class="scb_assignments_new_experiment scb_f_open_experiment scb_s_navigation_button"
-        href="#view=experiment_design&assignment_id={$assignments.selected.id}" aria-label='New Experiment' role='button'> START EXPERIMENTS &nbsp; &#9654;</span>
-
-	{/if}
+            <a
+                class=" scb_s_assignments_print_assignment scb_f_open_experiment scb_s_navigation_button"
+                href="#view=experiment_design&assignment_id={$assignments.selected.id}"
+                id="{$assignments.selected.id}"
+                aria-label='New Experiment'
+                role='button'>
+            </a>
+        {/if}
+        <a
+            class="scb_assignments_new_experiment scb_f_open_experiment scb_s_navigation_button"
+            href="#view=experiment_design&assignment_id={$assignments.selected.id}"
+            aria-label='New Experiment'
+            role='button'>
+            START EXPERIMENTS &nbsp; &#9654;
+        </a>
+    {/if}
 </div>
 {/template}
 
@@ -122,22 +155,29 @@ Assignment assignments
 {template .display_assignments}
 <div class='scb_s_assignments_sidebar'>
     <h1 class='scb_s_assignments_sidebar_title'>Assignments: <div class="arrow-down"></div></h1>
-    <ul aria-label="Assignments"  >
+    <ul aria-label="Assignments">
         {foreach $course in keys($courses)}
             <div class='scb_s_assignments_sidebar_course_block'>
-            <div class='scb_s_assignments_sidebar_course' role='heading'>{$courses[$course].name}</div>
-        {foreach $assignment in $courses[$course]}
+                <div class='scb_s_assignments_sidebar_course' role='heading'>{$courses[$course].name}</div>
+                {foreach $assignment in $courses[$course]}
+                    <li
+                        role="link"
+                        class='scb_s_assignments_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_assignments_sidebar_name_selected{/if}'
+                        aria-selected='{if $assignments.selected.id == $assignment.id}true{else}false{/if}'>
+        				<a
+                            role='presentation'
+                            href='#view=assignments&assignment_id={$assignment.id}'
+                            model_id='{$assignment.id}'
+                            class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>
+                            {$assignment.name}
 
-			<li role="link" class='scb_s_assignments_sidebar_name {if $assignments.selected.id == $assignment.id}scb_s_assignments_sidebar_name_selected{/if}' aria-selected='{if $assignments.selected.id == $assignment.id}true{else}false{/if}'  >
-				<a role='presentation' href='#view=assignments&assignment_id={$assignment.id}' model_id='{$assignment.id}' class='scb_s_assignment_sidebar_link {if $assignment.id == $assignments.selected_id}scb_f_open_assignment{else}scb_f_select_assignment{/if}'>{$assignment.name}
-
-				</a>
-				{if $assignments.selected.id == $assignment.id}
-					<div class='scb_s_selection_arrow_img'></div>
-				{/if}
-			</li>
-        {/foreach}
-        </div>
+        				</a>
+        				{if $assignments.selected.id == $assignment.id}
+        					<div class='scb_s_selection_arrow_img'></div>
+        				{/if}
+        			</li>
+                {/foreach}
+            </div>
         {/foreach}
     </ul>
 </div>
@@ -150,15 +190,27 @@ Assignment experiments
 */
 {template .display_experiments}
 <ul class='scb_s_assignment_experiment_list'>
-{if length($experiments.list) != 0}
-    {foreach $experiment in $experiments.list}
-    <li class='scb_s_assignment_experiment_list_item'>
-        <a class='scb_f_open_assignment_experiment' href='#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$experiment.id}' model_id='{$assignment.id}' sub_model_id='{$experiment.id}'>{$experiment.name}</a>
-    </li>
-    {/foreach}
-{/if}
+    {if length($experiments.list) != 0}
+        {foreach $experiment in $experiments.list}
+            <li class='scb_s_assignment_experiment_list_item'>
+                <a
+                    class='scb_f_open_assignment_experiment'
+                    href='#view=experiment_last&assignment_id={$assignment.id}&experiment_id={$experiment.id}'
+                    model_id='{$assignment.id}'
+                    sub_model_id='{$experiment.id}'>
+                    {$experiment.name}
+                </a>
+            </li>
+        {/foreach}
+    {/if}
 </ul>
-    <div class='scb_s_assignment_experiment_list_item_new_experiment'>
-       <span aria-hidden="true" tabindex="-1">+</span><a class='scb_f_new_assignment_experiment scb_s_new_assignment_experiment' href='#view=experiment_design&assignment_id={$assignment.id}' model_id='{$assignment.id}'>New Experiment</a>
-    </div>
+<div class='scb_s_assignment_experiment_list_item_new_experiment'>
+    <span aria-hidden="true" tabindex="-1">+</span>
+    <a
+        class='scb_f_new_assignment_experiment scb_s_new_assignment_experiment'
+        href='#view=experiment_design&assignment_id={$assignment.id}'
+        model_id='{$assignment.id}'>
+        New Experiment
+    </a>
+</div>
 {/template}

@@ -83,7 +83,7 @@ FACS Main View
         {/call}
         
 	{if $kind == 'sample_prep'}
-	<a class='scb_s_navigation_button scb_f_facs_prepare_lysates' facs_id='{$facs.id}'
+	<a class='scb_s_navigation_button scb_f_facs_prepare_lysates' href="#" facs_id='{$facs.id}'
 	   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'
 	{if $can_prepare_lysate}{else}disabled='disabled'{/if}> PREPARE SAMPLES  &nbsp; &#9654;
 	</a>

@@ -1504,7 +1504,7 @@ def microscopy_analyze(request):
             attrs={'multiple': True, 'class': 'box_file', 'data-plural-caption': '{} files are '},
         )},
         labels={'file': mark_safe(
-            'To <b>upload</b> new image(s) <strong>choose a file(s)</strong>'
+            'To <b>upload</b> new image(s) <a href="#"><strong>choose a file(s)</strong></a>'
             '<span class="box_dragndrop"> or drag and drop it to the Image Bank (image size < 2MB)</span>.'
         )},
     )

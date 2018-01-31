@@ -485,6 +485,17 @@ scb.ui.static.WesternBlotView.register = function(workarea) {
   });
   scb.utils.off_on(workarea, 'click', '.scb_f_western_blot_prepare_lysates', function(e) {
     scb.ui.static.WesternBlotView.scb_f_western_blot_prepare_lysates(this);
+    e.preventDefault();
+  });
+  /*
+    jqDialog adds a keyup event handler to the document element that we do not want to be called
+    when the [Prepare Lysates] link has focus and the ENTER key is used.
+    When this happens, the click event is triggered as well as the keyup event and its bubbling
+    cannot be cancelled with event.stopPropagation(). We remove all keyup event handlers on the
+    document instead.
+  */
+  scb.utils.off_on(workarea, 'keydown', '.scb_f_western_blot_prepare_lysates', function() {
+    $(document).off();
   });
   scb.utils.off_on(workarea, 'click', '.scb_s_western_blot_load_marker', function(e) {
     scb.ui.static.WesternBlotView.scb_s_western_blot_load_marker(this);

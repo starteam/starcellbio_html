@@ -18,19 +18,20 @@
     text-align: justify;
     display: inline-block;
     vertical-align: top;
-    min-height:350px;
+    min-height: 350px;
     padding: 10px;
-    width:912px;
+    width: 912px;
     margin-left: 35px;
     border-radius: 8px;
     background: #f5f6f8;
 }
 
-.scb_s_experiment_setup_top{
-	position:relative;
+.scb_s_experiment_setup_top {
+    position: relative;
 }
+
 .scb_f_open_experiment_design {
-    float:left !important;
+    float: left !important;
     bottom: 5px !important;
     left: 29px !important;
 }
@@ -41,63 +42,63 @@
 }
 
 .scb_f_open_experiment_setup {
-	margin-left: 0px !important;
+    margin-left: 0px !important;
 }
 
 .scb_f_open_experiment_setup_readonly {
     bottom: 5px;
     right: 29px;
-	top: 2px;
-	position:relative;
+    top: 2px;
+    position: relative;
 }
 
-.scb_s_warning_dialog>.scb_f_open_experiment_setup{
-	top: -12px;
-    right: 203px !important;
+.scb_s_warning_dialog>.scb_f_open_experiment_setup {
+    top: 3px;
+    float: left;
+    position: relative;
+    left: 50px;
 }
 
 .scb_s_select_technique_container>.scb_f_open_experiment_setup_readonly {
     bottom: 5px;
     left: 29px;
-    float:left;
-	top: 2px;
+    float: left;
+    top: 2px;
 }
 
 .scb_s_experiment_setup_details_view>.scb_f_open_select_technique {
-    float:right;
+    float: right;
     bottom: 3px;
     right: 29px;
-    position:absolute;
+    position: absolute;
 }
 
 .scb_s_experiment_setup_container>.scb_f_open_select_technique {
-    float:right;
+    float: right;
     bottom: 3px;
     right: 29px !important;
-    
-} 
+}
 
 .scb_s_warning_dialog>.scb_f_open_select_technique {
-    float:right;
-    top: 2px;
+    top: -12px;
+    float: right;
     position: relative;
     right: 50px;
 }
-
 
 .scb_s_experiment_setup_choose_template {
     width: 600px;
     display: block;
     left: 11px;
-	position: relative;
-	top: -4px;
+    position: relative;
+    top: -4px;
 }
 
 table.scb_s_experiment_setup_table {
     border: 1px solid #27956c;
-    border-radius:5px;
+    border-radius: 5px;
     border-spacing: 0px;
-    width:98%;
+    width: 98%;
     background-color: white;
     padding-bottom: 2px;
 }
@@ -110,50 +111,45 @@ table.scb_s_experiment_setup_table {
     border-top: 1px solid #e0e0e0;
 }
 
-
-
 .scb_s_experiment_setup_new_set_up{
-	visibility: hidden;	
-	position: relative;
-	margin-top: 109px;
-	margin-bottom: 10px;
-	left: 8px;
+    visibility: hidden;
+    position: relative;
+    margin-top: 109px;
+    margin-bottom: 10px;
+    left: 8px;
 }
-
 
 .scb_s_experiment_setup_td {
 }
 
 .scb_s_experiment_setup_instructions{
-	width: 600px;
-	display: block;
-	bottom: 85px;
-	position: relative;
+    width: 600px;
+    display: block;
+    bottom: 85px;
+    position: relative;
 }
 
 .scb_s_experiment_setup_video_text{
-	color:black;
-	font-size: 7.5pt;
-	font-family: 'sourcesanspro-regular';
-	display: inline-block;
-	margin-left: 15px;
+    color: black;
+    font-size: 7.5pt;
+    font-family: 'sourcesanspro-regular';
+    display: inline-block;
+    margin-left: 15px;
 }
-
 
 .scb_s_experiment_setup_table_element {
 }
 
 .scb_f_experiment_setup_remove_sample, .scb_f_experiment_setup_duplicate_sample {
-    border:0px;
-    width:24px;
+    border: 0px;
+    width: 24px;
     background: transparent;
     height: 20px;
     cursor: pointer;
-    top:0px;
+    top: 0px;
 }
 
 .scb_s_experiment_setup_new_row {
-
 }
 
 .scb_s_experiment_setup_new_row_gray {
@@ -162,13 +158,13 @@ table.scb_s_experiment_setup_table {
 
 .scb_s_experiment_setup_video_box_wrapper {
     width: 199px;
-    height:190px;
-    float:right;
+    height: 190px;
+    float: right;
     background-color: #e1e3e8;
     border-radius: 5px;
     border: 2px solid #f2f3f5;
     position: absolute;
-    top:0px;
+    top: 0px;
     right: 12px;
 
 }
@@ -178,38 +174,38 @@ table.scb_s_experiment_setup_table {
     font-size: 16pt;
     margin-bottom: -27px;
 }
+
 .scb_s_experiment_setup_video_box {
     width: 233px;
-    height:188px;
+    height: 188px;
     background: 0;
     margin-left: 7px;
-    margin-top:27px;
-    overflow:hidden;
+    margin-top: 27px;
+    overflow: hidden;
 }
 
-.scb_s_experiment_setup_container{
-	background: white;
-	padding-bottom: 51px;
-	box-shadow: 0 4px 14px -1px gray;
-	position: relative;
-	z-index: 1;
+.scb_s_experiment_setup_container {
+    background: white;
+    padding-bottom: 51px;
+    box-shadow: 0 4px 14px -1px gray;
+    position: relative;
+    z-index: 1;
 }
 
 .scb_s_experiment_setup_video_box_img {
     width: 187px;
-    height:124px;
+    height: 124px;
     margin-bottom: -5px;
     background-color: #525252;
-
 }
 
 .scb_s_experiment_setup_video_box_placeholder {
-	width: 187px;
-	height: 124px;
-	bottom: 32px;
-	background-color: #525252;
-	position: absolute;
-	left: 6px;
+    width: 187px;
+    height: 124px;
+    bottom: 32px;
+    background-color: #525252;
+    position: absolute;
+    left: 6px;
 }
 
 .scb_s_warning {
@@ -217,47 +213,45 @@ table.scb_s_experiment_setup_table {
     border: 1px solid #d0d0d0;
     border-radius: 10px;
     margin-bottom: 10px;
-    padding: 10px; 
-    width:540px;
+    padding: 10px;
+    width: 540px;
     text-align: left;
 }
 
-nav ul li.on{
-	background: none !important;
-	background-color: #27956c !important;
-	border: 1px solid #000 !important;
-} 
+nav ul li.on {
+    background: none !important;
+    background-color: #27956c !important;
+    border: 1px solid #000 !important;
+}
 
 #nav {
-	display:inline-block;
-	margin-left: 30px;
-	margin-right: 30px;
+    display:inline-block;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
-.slider_controls{
-	bottom:46px;
-	position:relative;
-	width: 217px;
-	right: 8px;
+.slider_controls {
+    bottom: 46px;
+    position: relative;
+    width: 217px;
+    right: 8px;
 }
 
-.scb_s_experiment_setup_create_new_set_up{
-	cursor: pointer;
-	font-size: 14px !important;
+.scb_s_experiment_setup_create_new_set_up {
+    cursor: pointer;
+    font-size: 14px !important;
 }
 
-
-.slider_controls > button{
-
-	padding:3px !important;
-	margin:0px !important;
-	margin-right:-5px !important;
-	margin-left:-5px !important;
-	padding-bottom: 4px !important;
-	border:inherit !important;
-	background: 0 !important;
-	cursor:pointer !important;
-	color: #29a592 !important;
+.slider_controls > button {
+    padding: 3px !important;
+    margin: 0px !important;
+    margin-right: -5px !important;
+    margin-left: -5px !important;
+    padding-bottom: 4px !important;
+    border:inherit !important;
+    background: 0 !important;
+    cursor:pointer !important;
+    color: #29a592 !important;
 }
 
 .swipe {
@@ -266,68 +260,70 @@ nav ul li.on{
   position: relative;
   background:0 !important;
 }
+
 .swipe-wrap {
   overflow: hidden;
   position: relative;
 }
+
 .swipe-wrap > div {
-  float:left;
-  width:100%;
+  float: left;
+  width: 100%;
   position: relative;
 }
+
 .scb_s_warning_dialog {
     background: #f5f5f5;
-	overflow: visible;
-	width: 560px;
-	height: 225px;
+    overflow: visible;
+    width: 560px;
     border-radius: 14px;
-	font-family: sourcesanspro-regular;
-	font-weight: normal !important;
+    font-family: sourcesanspro-regular;
+    font-weight: normal !important;
 }
 
-.scb_s_warning>h1{
-    color:red;
+.scb_s_warning > h1 {
+    color: red;
 }
 
 .jqDialog_header {
-	background: #27956c;
-	color: white;
-	padding: 10px;
-	height: 25px;
-	position: relative;
-	font-family: 'sourcesanspro-semibold';
-	border-top-left-radius: 9px;
-	border-top-right-radius: 9px;
-	font-size: 13pt;
-	letter-spacing: .5px;
-	right: 0px;
-	bottom: 10px;
+    background: #27956c;
+    color: white;
+    padding: 10px;
+    height: 25px;
+    position: relative;
+    font-family: 'sourcesanspro-semibold';
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    font-size: 13pt;
+    letter-spacing: .5px;
+    right: 0px;
+    bottom: 11px;
 }
 
 .jqDialog_confirm_header {
-	background: #27956c;
-	color: white;
-	padding: 10px;
-	height: 25px;
-	position: relative;
-	width: 548px;
-	font-family: 'sourcesanspro-semibold';
-	border-top-left-radius: 9px;
-	border-top-right-radius: 9px;
-	font-size: 13pt;
-	letter-spacing: .5px;
-	right: 3px;
-	bottom: 16px;
+    background: #27956c;
+    color: white;
+    padding: 10px;
+    height: 25px;
+    position: relative;
+    width: 536px;
+    font-family: 'sourcesanspro-semibold';
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    font-size: 13pt;
+    letter-spacing: .5px;
+    left: 2px;
+    bottom: 10px;
 }
 
-.scb_s_experiment_setup_radio_text{
-position: absolute;
-top: 2px;
+.scb_s_experiment_setup_radio_text {
+    position: absolute;
+    top: 2px;
 }
 
 .scb_s_experiment_setup_table_heading {
     font-family: 'sourcesanspro-semibold';
-    font-size:10pt;
+    font-size: 10pt;
     width: 127px;
     text-align: left;
 }
@@ -344,33 +340,31 @@ top: 2px;
     margin-right: 1em;
 }
 
-
-.scb_s_experiment_setup_choose_template > input{
-	-webkit-appearance: none;
-	height:13px;
-	width:12px;
-	border: 1px solid #C0C0C0;
-	background-color:#D0D0D0;
-	border-radius:6px;
-	margin-bottom: -0.125%;
+.scb_s_experiment_setup_choose_template > input {
+    -webkit-appearance: none;
+    height: 13px;
+    width: 12px;
+    border: 1px solid #C0C0C0;
+    background-color: #D0D0D0;
+    border-radius: 6px;
+    margin-bottom: -0.125%;
 }
 
-
-.scb_s_experiment_setup_choose_template > input:checked{
-	-webkit-appearance: none;
-	height:13px;
-	width:12px;
-	border: 1px solid #000000;
-	background-color:white;
-	border-radius:6px;
-	margin-bottom: -0.125%;
+.scb_s_experiment_setup_choose_template > input:checked {
+    -webkit-appearance: none;
+    height: 13px;
+    width: 12px;
+    border: 1px solid #000000;
+    background-color: white;
+    border-radius: 6px;
+    margin-bottom: -0.125%;
 }
 
 .scb_concentration_edit_new {
-    position:absolute;
-    float:left;
-    width:80px;
-    height:24px;
+    position: absolute;
+    float: left;
+    width: 80px;
+    height: 24px;
 }
 
 .scb_s_experiment_setup_table_row:hover {
@@ -381,38 +375,36 @@ top: 2px;
     opacity: 1;
 }
 
-.overlay{
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	z-index: 993; 
-	background: rgba(125,125,125,0.7);
-	visibility: visible;
-	right: 0px;
-	top: 0px;
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 993;
+    background: rgba(125,125,125,0.7);
+    visibility: visible;
+    right: 0px;
+    top: 0px;
 }
 
-
-.error_overlay{
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	z-index: 993; 
-	background: rgba(0,0,0,0);
-	visibility: visible;
-	right: 0px;
-	top: 0px;
+.error_overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 993;
+    background: rgba(0,0,0,0);
+    visibility: visible;
+    right: 0px;
+    top: 0px;
 }
-
 
 .scb_s_experiment_setup_table_element[kind="cell_plate"] {
-    width:60px;
+    width: 60px;
     max-width: 60px;
     min-width: 60px;
 }
 
 .scb_s_experiment_setup_table_element {
-    width:120px;
+    width: 120px;
 }
 
 .scb_f_experiment_setup_action_open_add_samples_dialog {
@@ -420,8 +412,8 @@ top: 2px;
 }
 
 .scb_s_experiment_design_green_line {
-    width:100%;
-    height:2px;
+    width: 100%;
+    height: 2px;
     background-color: #27956c;
-    margin-bottom:2px;
+    margin-bottom: 2px;
 }

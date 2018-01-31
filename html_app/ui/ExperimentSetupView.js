@@ -185,6 +185,16 @@ scb.ui.static.ExperimentSetupView.register = function(workarea) {
   scb.utils.off_on(workarea, 'click', '.scb_f_open_experiment_setup_readonly', function(e) {
     scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly(this, e);
   });
+  /*
+    jqDialog adds a keyup event handler to the document element that we do not want to be called
+    when the [Run Experiment] link has focus and the ENTER key is used.
+    When this happens, the click event is triggered as well as the keyup event and its bubbling
+    cannot be cancelled with event.stopPropagation(). We remove all keyup event handlers on the
+    document instead.
+  */
+  scb.utils.off_on(workarea, 'keydown', '.scb_f_open_experiment_setup_readonly', function() {
+    $(document).off();
+  });
 
   scb.utils.off_on(workarea, 'click', '.scb_f_experiment_setup_action_open_add_samples_dialog', function(e) {
     $(workarea).prepend(scb_common.contact_overlay());
@@ -297,7 +307,6 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
     } else {
       $('body').prepend(scb_experiment_setup.experiment_setup_overlay());
       $(element).attr('href', 'javascript:void(0)');
-      $('#jqDialog_box').css('width', '570px');
       $.jqDialog.content(scb_experiment_setup.experiment_setup_dialog({
         assignment: parsed.assignment,
         experiment: parsed.experiment
@@ -311,6 +320,7 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
           $('#jqDialog_box').hide();
         }
       });
+      $('.scb_f_open_experiment_setup').focus();
       $('.scb_f_open_select_technique').click(function() {
         if ($('.scb_s_warning_dialog').length > 0) {
           $('.scb_s_warning_dialog').remove();
@@ -321,7 +331,8 @@ scb.ui.static.ExperimentSetupView.scb_f_open_experiment_setup_readonly = functio
       });
 
     }
-
+    // Center dialog window
+    $.jqDialog.makeCenter($('#jqDialog_box'));
   }
 }
 

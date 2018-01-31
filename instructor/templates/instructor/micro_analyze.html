@@ -5,8 +5,9 @@
   <div class="scb_ab_s_dialog scb_ab_s_analyze_dialog" {% if not mapping_pk %}style="visibility:hidden"{% endif %}>
     <div>
       <h1 class="scb_ab_s_dialog_title" role="presentation" aria-label="Create Histogram">
-        <span class="scb_ab_s_dialog_title_close scb_ab_f_close_dialog" role="button"
-              aria-label="Close Create Histogram">×</span>
+        <button class="scb_ab_s_dialog_title_close scb_ab_f_close_dialog"
+                aria-label="Close Create Histogram">
+        </button>
         Select Image
       </h1>
       <div class="scb_ab_s_select_image_div">
@@ -139,10 +140,11 @@
                         {% with filter_image=image_set|get_item:image_field %}
                           {% if filter_image %}
                             <div class="scb_ab_s_remove_image_icon_position">
-                                <span class="scb_ab_s_remove_icon scb_ab_f_remove_image" role="button"
-                                      data-mapping_id="{{ instance.id }}"
-                                      data-filter="{{ filter }}"
-                                      data-group_id="{{ image_set.id }}" aria-label="Remove Image">×</span>
+                                <button class="scb_ab_s_remove_icon scb_ab_f_remove_image"
+                                        data-mapping_id="{{ instance.id }}"
+                                        data-filter="{{ filter }}"
+                                        data-group_id="{{ image_set.id }}" aria-label="Remove Image">
+                                </button>
                             </div>
                             <img src="{{ filter_image.file.url }}" class="scb_ab_s_small_image"/>
                           {% endif %}
@@ -151,7 +153,10 @@
                     </div>
                   {% endfor %}
                   <div class="scb_ab_s_filtered_image_grid">
-                    <div class="scb_s_ab_trash_icon remove_image_set" data-group_id="{{ image_set.id }}"></div>
+                    <button class="scb_s_ab_trash_icon remove_image_set"
+                            data-group_id="{{ image_set.id }}"
+                            aria-label="Remove Image Set">
+                    </button>
                   </div>
                 </div>
               {% endfor %}
@@ -173,9 +178,10 @@
                   {% for image in instance.images.all %}
                     <div class="scb_ab_s_image_wrapper">
                       <div class="scb_ab_s_remove_image_icon_position">
-                        <span class="scb_ab_s_remove_icon scb_ab_f_remove_image" role="button"
-                              data-mapping_id="{{ instance.id }}"
-                              data-image_id="{{ image.id }}" aria-label="Remove Image">×</span>
+                        <button class="scb_ab_s_remove_icon scb_ab_f_remove_image"
+                                data-mapping_id="{{ instance.id }}"
+                                data-image_id="{{ image.id }}" aria-label="Remove Image">
+                        </button>
                       </div>
                       <img src="{{ image.file.url }}" class="scb_ab_s_small_image"/>
                     </div>
@@ -219,5 +225,9 @@
   </div>
   <script type="text/javascript">
     dialog_open = {{ dialog_open|safe }};
+    if ($('.scb_ab_s_dialog.scb_ab_s_analyze_dialog').is(':visible')) {
+      // Focus on close button
+      $('.scb_ab_s_dialog_title_close.scb_ab_f_close_dialog').focus();
+    }
   </script>
 {% endblock %}

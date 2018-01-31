@@ -14,8 +14,8 @@
 {template .main}
 <div class='scb_s_experiment_setup_view' >
     {call scb_homepage.display_header}
-    {param global_template:$global_template /}
-    {param context:$context /}
+        {param global_template:$global_template /}
+        {param context:$context /}
     {/call}
     {call scb_common.assignment_step}
         {param step:4/}
@@ -27,15 +27,15 @@
         {param experiment:$experiment/}
     {/call}
     {call .display_details}
-    {param t:$t/}
-    {param last_step: $last_step/}
-    {param global_template:$global_template /}
-    {param assignment:$assignment/}
-    {param new_rows:$new_rows/}
+        {param t:$t/}
+        {param last_step: $last_step/}
+        {param global_template:$global_template /}
+        {param assignment:$assignment/}
+        {param new_rows:$new_rows/}
     {/call}
     {call scb_homepage.display_footer}
-    {param global_template:$t /}
-    {param assignment:$assignment/}
+        {param global_template:$t /}
+        {param assignment:$assignment/}
     {/call}
 </div>
 {/template}
@@ -52,278 +52,298 @@ Experiment active area
 @param new_rows
 */
 {template .display_details}
-	
 <div class='scb_s_experiment_setup_container' role='main'>
-<div class='scb_s_experiment_setup_details_view' mode='{$kind}'>
+    <div class='scb_s_experiment_setup_details_view' mode='{$kind}'>
+        {if $kind == 'readwrite'}
+            {call scb_common.experiment_step}
+                {param step:2/}
+                {param last_step: $last_step/}
+                {param assignment: $assignment/}
+                {param experiment: $experiment/}
 
-    
-
-    {if $kind == 'readwrite'}
-        {call scb_common.experiment_step}
-            {param step:2/}
-            {param last_step: $last_step/}
-            {param assignment: $assignment/}
-            {param experiment: $experiment/}
-
-        {/call}
-    	<div class='scb_s_experiment_setup_top'>
-        <div class='scb_s_experiment_setup_choose_template'>
-<!-- 
-            <div class='scb_s_experiment_setup_create_new_set_up' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' aria-label='Create New Set-up' role='radio'><input class='scb_s_experiment_setup_choose_template_kind scb_f_experiment_setup_new_set_up' type="radio" name="setup_kind"/><span class='scb_s_experiment_setup_radio_text' role='presentation'>Create new set-up</span><br></div>
- -->
-<!-- <div class='scb_s_experiment_setup_choose_existing_template'><input class='scb_s_experiment_setup_choose_template_kind' type="radio" name="setup_kind" disabled="disabled" /><span class='scb_s_experiment_setup_choose_template_kind_disabled'>Select pre-existing set-up as a template</span></div>-->
-
-            <br>
-        </div>
-        <!--
-        <div class='scb_s_experiment_setup_video_box_wrapper'  alt='Video Player Background'  aria-label='Video Player Background'>
-            <div class='scb_s_experiment_setup_video_box_wrapper_title'  role='presentation' >
-                IN THE LAB
-            </div>
-            <div class='scb_s_experiment_setup_video_box_placeholder' role='presentation' >
-						</div>
-				
-				
-			<div class='scb_s_experiment_setup_video_text' role='presentation' >
-			</div>           
-		</div>
-		-->
-    {else}
-        {call scb_common.experiment_step}
-            {param step:3/}
-            {param last_step: $last_step/}
-            {param assignment: $assignment/}
-            {param experiment: $experiment/}
-        {/call}
-        <div class='scb_s_experiment_setup_top'>
-        {if $experiment.setup_finished}
-        <div class='scb_s_warning' role='note'>
-
-        <h1>NOTE!</h1>
-        <p>Below is a summary of your set-up for {$experiment.name}.<br>
-            To create a new experiment, select <b>+ New Experiment</b> next to <b>{$assignment.name}: {$experiment.name}</b> 
-            drop down menu above the navigation tool bar.
-            <br>
-            <br>
-
-        </p>
-        </div>
+            {/call}
+            <div class='scb_s_experiment_setup_top'>
+                <div class='scb_s_experiment_setup_choose_template'>
+                    <br>
+                </div>
         {else}
-			<div class='scb_s_warning_dialog' role='alert'>
-            <h1>CONFIRM SET-UP</h1>
-            <p>Below is your set-up for '{$experiment.name}'.<br>
-            
-            Once you run this experiment, you cannot go back and make changes to this experiment's set-up.
-             Review the summary of your experimental set-up and then either go back to edit your set-up or click on <b>Confirm Set-Up & Run</b> to run your experiment.
-
-            </p>
-			
-			<a class="scb_s_navigation_button scb_f_open_select_technique"
-			   href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
-			   assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' aria-label='Select Technique' role='button' >SELECT TECHNIQUE &nbsp; &#9654;</a><br/>
-			<a class="scb_s_navigation_button scb_f_open_experiment_setup"
-			   href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}" aria-label='Edit Set-Up' role='button'>&#9664; &nbsp; EDIT SET-UP
-				</a>
-				</div>
-        {/if}
- 		<div class='scb_s_experiment_setup_video_box_wrapper' alt='Video Player Background'  aria-label='Video Player Background'>
-            <div class='scb_s_experiment_setup_video_box_wrapper_title' role='presentation' >
-                IN THE LAB
-            </div>
-            <div class='scb_s_experiment_setup_video_box_placeholder' role='presentation' >
-						</div>
-				
-				
-			<div class='scb_s_experiment_setup_video_text' role='presentation' >
-			</div>           
-		</div>
-
-    {/if}
-    </div>
-    <div class="scb_s_experiment_setup_new_set_up">
-        <div class="scb_s_experiment_setup_instructions" aria-label='Setup Instructions' role='textbox'>
-            {if $t.experiment_setup}
-                {$t.experiment_setup|noAutoescape}
-            {else}
-                <ul role='list' class='scb_assignment_specific_tufts_experiment_setup'>
-                    <li role='listitem'>
-                        To setup your experiment, select <b role='presentation' >Add Samples </b>
-                        in the experimental set-up table below. <br>
-                    </li>
-                    <li  role='listitem'>
-                        Select all of the treatment protocols for your experiment within the
-                        <b role='presentation'> Add Samples</b> pop up window, and
-                        then click <b role='presentation'>Add Samples</b>.
-                    </li>
-                </ul>
+            {call scb_common.experiment_step}
+                {param step:3/}
+                {param last_step: $last_step/}
+                {param assignment: $assignment/}
+                {param experiment: $experiment/}
+            {/call}
+            <div class='scb_s_experiment_setup_top'>
+                {if $experiment.setup_finished}
+                    <div class='scb_s_warning' role='note'>
+                        <h1>NOTE!</h1>
+                        <p>
+                            Below is a summary of your set-up for {$experiment.name}.
+                            <br>
+                            To create a new experiment, select <b>+ New Experiment</b> next to <b>{$assignment.name}: {$experiment.name}</b>
+                            drop down menu above the navigation tool bar.
+                            <br>
+                            <br>
+                        </p>
+                    </div>
+                {else}
+                    <div class='scb_s_warning_dialog' role='alert'>
+                        <h1>CONFIRM SET-UP</h1>
+                        <p>
+                            Below is your set-up for '{$experiment.name}'.
+                            <br>
+                            Once you run this experiment, you cannot go back and make changes to this experiment's set-up.
+                            Review the summary of your experimental set-up and then either go back to edit your set-up or click on <b>Confirm Set-Up & Run</b> to run your experiment.
+                        </p>
+                        <a
+                           class="scb_s_navigation_button scb_f_open_select_technique"
+                           href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+                           assignment_id='{$assignment.id}'
+                           experiment_id='{$experiment.id}'
+                           aria-label='Select Technique'
+                           role='button'>
+                           SELECT TECHNIQUE &nbsp; &#9654;
+                        </a>
+                        <br>
+                        <a class="scb_s_navigation_button scb_f_open_experiment_setup"
+                           href="#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}"
+                           aria-label='Edit Set-Up'
+                           role='button'>
+                           &#9664; &nbsp; EDIT SET-UP
+                        </a>
+                    </div>
+                {/if}
+                <div class='scb_s_experiment_setup_video_box_wrapper' alt='Video Player Background'  aria-label='Video Player Background'>
+                    <div class='scb_s_experiment_setup_video_box_wrapper_title' role='presentation'>
+                        IN THE LAB
+                    </div>
+                    <div class='scb_s_experiment_setup_video_box_placeholder' role='presentation'></div>
+                    <div class='scb_s_experiment_setup_video_text' role='presentation'></div>
+                </div>
             {/if}
         </div>
-        <br>
-		<table class="scb_s_experiment_setup_table 
-		{if $kind == 'readwrite'} scb_s_experiment_setup_table_editable{else} scb_s_experiment_setup_table_readonly{/if}"
-		 aria-label='Table of Samples' role='grid'>
-			<thead class='scb_s_experiment_setup_table_head' >
-			{foreach $h in $headings}
-				<td role='columnheader' aria-label='{$h.title}' class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
-
-					{if $kind == 'readonly'}
-						{if $h.kind != 'actions'}
-							{$h.title}
-						{/if}
-					{else}
-					{$h.title}
-
-					{/if}
-
-				</td>
-			{/foreach}
-			</thead>
-			<tbody class='scb_s_experiment_setup_table_body'>
-			{foreach $r in $rows}
-			<tr class='scb_s_experiment_setup_table_row' role='row' aria-label='Sample' cell_treatment_id='{$r.id}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}' treatment_id='{$r.treatment.id}'>
-				{foreach $c in $r.columns}
-				<td class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if}' kind='{$c.kind}' rowspan="{$c.rows}">
-					{if $c.kind == 'actions'}
-						{if $kind == 'readwrite'}
-						{if $assignment.id == 'assignment_706_2014'}
-						{else}
-						<button role='button' aria-label='Copy'  class='scb_f_experiment_setup_duplicate_sample' cell_treatment_id='{$r.id}'
-								assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'><img alt="" title="Copy" role='presentation' src="images/setup/scb_copy.png">
-						</button>
-						{/if}
-						<button role='button' aria-label='Delete'  class='scb_f_experiment_setup_remove_sample' cell_treatment_id='{$r.id}'
-							assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'><img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
-						</button>
-
-						{/if}
-					{else}
-						{if $c.kind=='cell_plate'}
-							<img src="images/setup/scb_cell_plate.png" role='presentation'>
-						{/if}
-						{if $c.kind =='collection' and $c.title =='default'}
-						{else}
-						{$c.title}
-						{/if}
-					{/if}
-				</td>
-				{/foreach}
-			</tr>
-			{/foreach}
-			{if $kind == 'readwrite'}
-			{foreach $r in $new_rows}
-			<tr role='row' aria-label='Sample' class='scb_s_experiment_setup_new_row scb_s_experiment_setup_new_row_gray' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>
-				{foreach $c in $r.columns}
-				<td style='z-index:99' class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_td' kind='{$c.kind}' rowspan="1">
-					{if $c.kind == 'actions'}
-						{if $kind == 'readwrite'} 
-						{/if}
-					{else}
-						{if $c.kind=='cell_plate'}
-							<img src="images/setup/scb_cell_plate.png" role='presentation' >
-						{/if}
-						{if $c.kind=='drug' and length(keys($t.drugs)) > 1}
-						<span>
-
-						 <span class='scb_concentration_edit_new'>
-							 &nbsp;
-						 </span>
-							{call .drug_edit }
-								{param template:$t/}
-								{param assignment:$assignment/}
-								{param experiment:$experiment/}
-								{param drug_id:$r.treatment.drug_list.list[0].drug_id/}
-								{param disabled:true/}
-							{/call}
-						</span>
-						{elseif $c.kind=='concentration' and length(keys($t.concentrations)) > 1 }
-						<span>
-							 <span class='scb_concentration_edit_new'>
-								 &nbsp;
-							 </span>
-							{call .concentration_edit}
-							{param template:$t/}
-							{param assignment:$assignment/}
-							{param experiment:$experiment/}
-							{param drug_id:$r.treatment.drug_list.list[0].drug_id/}
-							{param concentration_id:$r.treatment.drug_list.list[0].concentration_id/}
-							{param concentrations: $t.drugs[$r.treatment.drug_list.list[0].drug_id].concentrations/}
-							{param disabled:true/}
-							{/call}
-						</span>
-						{elseif $c.kind=='cell_line' and length(keys($t.cell_lines)) > 1 }
-						<span>
-
-						 <span class='scb_concentration_edit_new'>
-							 &nbsp;
-						 </span>
-							{call .cell_lines_edit}
-								{param template:$t/}
-								{param assignment:$assignment/}
-								{param experiment:$experiment/}
-								{param cell_line_id:$t.cell_lines['p+']/}
-								{param disabled:true/}
-							{/call}
-						</span>
-						{elseif $c.kind=='collection' and length(keys($t.collections)) > 1 }
-						<span>
-
-						 <span class='scb_concentration_edit_new'>
-							 &nbsp;
-						 </span>
-							{call .collection_edit}
-								{param template:$t/}
-								{param assignment:$assignment/}
-								{param experiment:$experiment/}
-								{param collection_id:$t.collections['3 m']/}
-								{param disabled:true/}
-							{/call}
-						</span>
-						{else}
-						{$c.title}
-						{/if}
-					{/if}
-				</td>
-				{/foreach}
-			</tr>
-			{/foreach}
-				{if $t.ui.experiment_setup.actions.length > 0}
-			<tr role='row' >
-				<td colspan="{$headings.length+1}">
-					<div class='scb_s_experiment_design_green_line' role='presentation'></div>
-					<button class='scb_f_experiment_setup_action_open_add_samples_dialog scb_s_gray_button' role='button' aria-label='{$t.ui.experiment_setup.actions[0].name}' assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>{$t.ui.experiment_setup.actions[0].name}</button>
-				</td>
-			</tr>
-				{/if}
-			{/if}
-			</tbody>
-		</table>
-	</div>
-    {if $t.experiment_setup_actions}
-    {call .display_add_sample_dialog}
-    {param t:$t /}
-    {param assignment:$assignment /}
-    {param experiment:$experiment /}
-    {/call}
-    {/if}
-    
-</div>
-{if $kind == 'readwrite'}
-    <a class="scb_s_navigation_button scb_f_open_experiment_setup_readonly scb_f_run_experiment" aria-label='Run Experiment' role='button'
-       href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}" assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>RUN EXPERIMENT &nbsp; &#9654;</a><br/>
-    <a class="scb_s_navigation_button scb_f_open_experiment_design" aria-label='Design Experiment' role='button'
-       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; DESIGN EXPERIMENT
+        <div class="scb_s_experiment_setup_new_set_up">
+            <div class="scb_s_experiment_setup_instructions" aria-label='Setup Instructions' role='textbox'>
+                {if $t.experiment_setup}
+                    {$t.experiment_setup|noAutoescape}
+                {else}
+                    <ul role='list' class='scb_assignment_specific_tufts_experiment_setup'>
+                        <li role='listitem'>
+                            To setup your experiment, select <b role='presentation' >Add Samples </b>
+                            in the experimental set-up table below. <br>
+                        </li>
+                        <li  role='listitem'>
+                            Select all of the treatment protocols for your experiment within the
+                            <b role='presentation'> Add Samples</b> pop up window, and
+                            then click <b role='presentation'>Add Samples</b>.
+                        </li>
+                    </ul>
+                {/if}
+            </div>
+            <br>
+            <table
+                class="scb_s_experiment_setup_table {if $kind == 'readwrite'} scb_s_experiment_setup_table_editable{else} scb_s_experiment_setup_table_readonly{/if}"
+                aria-label='Table of Samples'
+                role='grid'>
+                <thead class='scb_s_experiment_setup_table_head'>
+                    {foreach $h in $headings}
+                        <td role='columnheader' aria-label='{$h.title}' class='scb_s_experiment_setup_table_heading' kind='{$h.kind}'>
+                            {if $kind == 'readonly'}
+                                {if $h.kind != 'actions'}
+                                    {$h.title}
+                                {/if}
+                            {else}
+                                {$h.title}
+                            {/if}
+                        </td>
+                    {/foreach}
+                </thead>
+                <tbody class='scb_s_experiment_setup_table_body'>
+                    {foreach $r in $rows}
+                        <tr
+                            class='scb_s_experiment_setup_table_row'
+                            role='row' aria-label='Sample'
+                            cell_treatment_id='{$r.id}'
+                            assignment_id='{$assignment.id}'
+                            experiment_id='{$experiment.id}'
+                            treatment_id='{$r.treatment.id}'>
+                            {foreach $c in $r.columns}
+                                <td
+                                    class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if}'
+                                    kind='{$c.kind}'
+                                    rowspan="{$c.rows}">
+                                    {if $c.kind == 'actions'}
+                                        {if $kind == 'readwrite'}
+                                            {if $assignment.id == 'assignment_706_2014'}
+                                            {else}
+                                                <button
+                                                    role='button'
+                                                    aria-label='Copy'
+                                                    class='scb_f_experiment_setup_duplicate_sample'
+                                                    cell_treatment_id='{$r.id}'
+                                                    assignment_id='{$assignment.id}'
+                                                    experiment_id='{$experiment.id}'>
+                                                    <img alt="" title="Copy" role='presentation' src="images/setup/scb_copy.png">
+                                                </button>
+                                            {/if}
+                                            <button
+                                                role='button'
+                                                aria-label='Delete'
+                                                class='scb_f_experiment_setup_remove_sample'
+                                                cell_treatment_id='{$r.id}'
+                                                assignment_id='{$assignment.id}'
+                                                experiment_id='{$experiment.id}'>
+                                                <img alt="" title="Delete" role='presentation' src="images/setup/scb_remove.png">
+                                            </button>
+                                        {/if}
+                                    {else}
+                                        {if $c.kind=='cell_plate'}
+                                            <img src="images/setup/scb_cell_plate.png" role='presentation'>
+                                        {/if}
+                                        {if $c.kind =='collection' and $c.title =='default'}
+                                        {else}
+                                            {$c.title}
+                                        {/if}
+                                    {/if}
+                                </td>
+                            {/foreach}
+                        </tr>
+                    {/foreach}
+                    {if $kind == 'readwrite'}
+                        {foreach $r in $new_rows}
+                            <tr
+                                role='row'
+                                aria-label='Sample'
+                                class='scb_s_experiment_setup_new_row scb_s_experiment_setup_new_row_gray'
+                                assignment_id='{$assignment.id}'
+                                experiment_id='{$experiment.id}'>
+                                {foreach $c in $r.columns}
+                                    <td style='z-index:99' class='scb_s_experiment_setup_table_element {if $c.first_row}scb_s_experiment_setup_table_border{/if} scb_s_experiment_setup_td' kind='{$c.kind}' rowspan="1">
+                                        {if $c.kind == 'actions'}
+                                            {if $kind == 'readwrite'}
+                                            {/if}
+                                        {else}
+                                            {if $c.kind=='cell_plate'}
+                                                <img src="images/setup/scb_cell_plate.png" role='presentation'>
+                                            {/if}
+                                            {if $c.kind=='drug' and length(keys($t.drugs)) > 1}
+                                                <span>
+                                                    <span class='scb_concentration_edit_new'>&nbsp;</span>
+                                                    {call .drug_edit }
+                                                        {param template:$t/}
+                                                        {param assignment:$assignment/}
+                                                        {param experiment:$experiment/}
+                                                        {param drug_id:$r.treatment.drug_list.list[0].drug_id/}
+                                                        {param disabled:true/}
+                                                    {/call}
+                                                </span>
+                                            {elseif $c.kind=='concentration' and length(keys($t.concentrations)) > 1}
+                                                <span>
+                                                    <span class='scb_concentration_edit_new'>&nbsp;</span>
+                                                    {call .concentration_edit}
+                                                        {param template:$t/}
+                                                        {param assignment:$assignment/}
+                                                        {param experiment:$experiment/}
+                                                        {param drug_id:$r.treatment.drug_list.list[0].drug_id/}
+                                                        {param concentration_id:$r.treatment.drug_list.list[0].concentration_id/}
+                                                        {param concentrations: $t.drugs[$r.treatment.drug_list.list[0].drug_id].concentrations/}
+                                                        {param disabled:true/}
+                                                    {/call}
+                                                </span>
+                                            {elseif $c.kind=='cell_line' and length(keys($t.cell_lines)) > 1 }
+                                                <span>
+                                                    <span class='scb_concentration_edit_new'>&nbsp;</span>
+                                                    {call .cell_lines_edit}
+                                                        {param template:$t/}
+                                                        {param assignment:$assignment/}
+                                                        {param experiment:$experiment/}
+                                                        {param cell_line_id:$t.cell_lines['p+']/}
+                                                        {param disabled:true/}
+                                                    {/call}
+                                                </span>
+                                            {elseif $c.kind=='collection' and length(keys($t.collections)) > 1 }
+                                                <span>
+                                                    <span class='scb_concentration_edit_new'>&nbsp;</span>
+                                                    {call .collection_edit}
+                                                        {param template:$t/}
+                                                        {param assignment:$assignment/}
+                                                        {param experiment:$experiment/}
+                                                        {param collection_id:$t.collections['3 m']/}
+                                                        {param disabled:true/}
+                                                    {/call}
+                                                </span>
+                                            {else}
+                                                {$c.title}
+                                            {/if}
+                                        {/if}
+                                    </td>
+                                {/foreach}
+                            </tr>
+                        {/foreach}
+                        {if $t.ui.experiment_setup.actions.length > 0}
+                            <tr role='row' >
+                                <td colspan="{$headings.length+1}">
+                                    <div class='scb_s_experiment_design_green_line' role='presentation'></div>
+                                    <button
+                                        class='scb_f_experiment_setup_action_open_add_samples_dialog scb_s_gray_button'
+                                        role='button'
+                                        aria-label='{$t.ui.experiment_setup.actions[0].name}'
+                                        assignment_id='{$assignment.id}'
+                                        experiment_id='{$experiment.id}'>
+                                        {$t.ui.experiment_setup.actions[0].name}
+                                    </button>
+                                </td>
+                            </tr>
+                        {/if}
+                    {/if}
+                </tbody>
+            </table>
+        </div>
+        {if $t.experiment_setup_actions}
+            {call .display_add_sample_dialog}
+                {param t:$t /}
+                {param assignment:$assignment /}
+                {param experiment:$experiment /}
+            {/call}
+        {/if}
+    </div>
+    {if $kind == 'readwrite'}
+        <a
+            class="scb_s_navigation_button scb_f_open_experiment_design"
+            aria-label='Design Experiment'
+            role='button'
+            href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">
+            &#9664; &nbsp; DESIGN EXPERIMENT
+        </a>
+        <br/>
+        <a
+            class="scb_s_navigation_button scb_f_open_experiment_setup_readonly scb_f_run_experiment"
+            aria-label='Run Experiment'
+            role='button'
+            href="#view=experiment_run&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+            assignment_id='{$assignment.id}'
+            experiment_id='{$experiment.id}'>
+            RUN EXPERIMENT &nbsp; &#9654;
         </a>
     {else}
-    {if $experiment.setup_finished}
-    <a class="scb_s_navigation_button scb_f_open_select_technique"
-       href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}" aria-label='Select Technique' role='button'
-       assignment_id='{$assignment.id}' experiment_id='{$experiment.id}'>SELECT TECHNIQUE &nbsp; &#9654;</a><br/>
-    <a class="scb_s_navigation_button scb_f_open_experiment_design" role='button' aria-label='Design Experiment' 
-       href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">&#9664; &nbsp; DESIGN EXPERIMENT
-        </a>
-    {else}
-    {/if}
-
+        {if $experiment.setup_finished}
+            <a
+                class="scb_s_navigation_button scb_f_open_experiment_design"
+                role='button' aria-label='Design Experiment'
+                href="#view=experiment_design&experiment_id={$experiment.id}&assignment_id={$assignment.id}">
+                &#9664; &nbsp; DESIGN EXPERIMENT
+            </a>
+            <br>
+            <a
+                class="scb_s_navigation_button scb_f_open_select_technique"
+                href="#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}"
+                aria-label='Select Technique'
+                role='button'
+                assignment_id='{$assignment.id}'
+                experiment_id='{$experiment.id}'>
+                SELECT TECHNIQUE &nbsp; &#9654;
+            </a>
+        {/if}
     {/if}
 </div>
 
@@ -343,9 +363,9 @@ Experiment active area
         Choose Your Cell Line:
         <select  role='select' aria-label='Cell Strains' class='scb_s_experiment_setup_dialog_cell_lines_select' multiple='multiple'>
             {foreach $cell_line in $t.experiment_setup_actions.cell_lines}
-            <option role='option' class='scb_s_experiment_setup_dialog_cell_lines_select_option' value='{$cell_line.id}'>
-                {$cell_line.title}
-            </option>
+                <option role='option' class='scb_s_experiment_setup_dialog_cell_lines_select_option' value='{$cell_line.id}'>
+                    {$cell_line.title}
+                </option>
             {/foreach}
         </select>
     </div>
@@ -353,8 +373,8 @@ Experiment active area
         Choose Your Treatment Line<br>
         <select role='select' aria-label='Treatment Line' class='scb_s_experiment_setup_dialog_treatments_select' multiple='multiple'>
             {foreach $treat in $t.experiment_setup_actions.treatment_protocol_list}
-            <option role='option' class='scb_s_experiment_setup_dialog_treatments_select_option' value='{$treat.id}'>{$treat.title}
-            </option>
+                <option role='option' class='scb_s_experiment_setup_dialog_treatments_select_option' value='{$treat.id}'>{$treat.title}
+                </option>
             {/foreach}
         </select>
     </div>
@@ -362,15 +382,14 @@ Experiment active area
         Choose Your Treatment Line<br>
         <select role='select' aria-label='Treatment Line' class='scb_s_experiment_setup_dialog_collection_select' multiple='multiple'>
             {foreach $collect in $t.experiment_setup_actions.collection_schedule_list}
-            <option role='option' class='scb_s_experiment_setup_dialog_collection_select_option' value='{$collect.id}'>
-                {$collect.title}
-            </option>
+                <option role='option' class='scb_s_experiment_setup_dialog_collection_select_option' value='{$collect.id}'>
+                    {$collect.title}
+                </option>
             {/foreach}
         </select>
     </div>
     <button class='scb_f_experiment_setup_dialog_apply' role='button' aria-lable='Add Samples'>Add</button>
     <button class='scb_f_experiment_setup_dialog_cancel' role='button' aria-lable='Add Samples'>Cancel</button>
-
 </div>
 {/template}
 
@@ -385,12 +404,11 @@ Experiment active area
 {template .cell_lines_edit}
     <select role='select'  aria-label='Cell Strains' title='cell_line' size='1' row='0' class='scb_f_experiment_setup_cell_line_edit' {if $disabled}disabled='disabled'{/if}>
         <option role='option' value='' disabled="disabled">Please select</option>
-		{foreach $t in keys($template.cell_lines)}
-			<option role='option'  value='{$t}' {if $t==$cell_line_id}selected='selected'{/if}>{$template.cell_lines[$t].name}</option>
-		{/foreach}
-	</select>
+        {foreach $t in keys($template.cell_lines)}
+            <option role='option'  value='{$t}' {if $t==$cell_line_id}selected='selected'{/if}>{$template.cell_lines[$t].name}</option>
+        {/foreach}
+    </select>
 {/template}
-
 
 /**
 * Collection edit
@@ -403,12 +421,11 @@ Experiment active area
 {template .collection_edit}
     <select role='select'  aria-label='Collection Time'   title='collection' size='1' row='0' class='scb_f_experiment_setup_collection_edit' {if $disabled}disabled='disabled'{/if}>
         <option role='option' value='' disabled="disabled">Please select</option>
-		{foreach $t in keys($template.collections)}
-			<option role='option' value='{$t}' {if $t==$collection_id}selected='selected'{/if}>{$template.collections[$t].name}</option>
-		{/foreach}
-	</select>
+        {foreach $t in keys($template.collections)}
+            <option role='option' value='{$t}' {if $t==$collection_id}selected='selected'{/if}>{$template.collections[$t].name}</option>
+        {/foreach}
+    </select>
 {/template}
-
 
 /**
 * Drug Edit
@@ -421,10 +438,10 @@ Experiment active area
 {template .drug_edit}
     <select role='select'  aria-label='Drug' title='drug' size='1' row='0' class='scb_f_experiment_setup_drug_edit' {if $disabled}disabled='disabled'{/if}>
         <option role='option' value='' disabled="disabled">Please select</option>
-		{foreach $t in keys($template.drugs)}
-			<option role='option' value='{$t}' {if $t==$drug_id}selected='selected'{/if}>{$template.drugs[$t].name}</option>
-		{/foreach}
-	</select>
+        {foreach $t in keys($template.drugs)}
+            <option role='option' value='{$t}' {if $t==$drug_id}selected='selected'{/if}>{$template.drugs[$t].name}</option>
+        {/foreach}
+    </select>
 {/template}
 
 /**
@@ -440,11 +457,10 @@ Experiment active area
     <select role='select'  aria-label='Concentration'  title='concentration' size='1' row='0' class='scb_f_experiment_setup_concentration_edit' {if $disabled}disabled='disabled'{/if}>
         <option role='option' value=''>Please select</option>
         {foreach $t in $concentrations}
-	        <option role='option' value='{$t}' {if $t==$concentration_id}selected='true'{/if}>{$template.concentrations[$t].name}</option>
+            <option role='option' value='{$t}' {if $t==$concentration_id}selected='true'{/if}>{$template.concentrations[$t].name}</option>
         {/foreach}
     </select>
 {/template}
-
 
 /**
 * Temperature Edit
@@ -458,14 +474,10 @@ Experiment active area
     <select role='select'  aria-label='Temperature' title='temperature' size='1' row='0' class='scb_f_experiment_setup_temperature_edit' {if $disabled}disabled='disabled'{/if}>
         <option role='option' value='' disabled="disabled">Please select</option>
         {foreach $t in keys($template.experiment_temperatures)}
-	        <option role='option' value='{$t}' {if $t==$temperature}selected='true'{/if}>{$template.experiment_temperatures[$t].name}</option>
+            <option role='option' value='{$t}' {if $t==$temperature}selected='true'{/if}>{$template.experiment_temperatures[$t].name}</option>
         {/foreach}
     </select>
 {/template}
-
-
-
-
 
 /**
 * Experiment Setup Dialog
@@ -473,30 +485,39 @@ Experiment active area
 * @param experiment
 */
 {template .experiment_setup_dialog}
-<div class='scb_s_warning_dialog' role='alert'><p>
-<h1 class='jqDialog_confirm_header' role='heading'>Confirm Set-Up</h1>
-Once you confirm the set-up of this experiment and run it, you cannot go back to edit this experiment's set-up. 
-To go back and edit your set-up, 
-click <b>EDIT SET-UP</b>
-or click on <b>CONFIRM SET-UP AND RUN</b> to proceed.
-<br/> To create a new experiment set-up, select <b>New Experiment +</b> above the navigation tool bar.
-</p><a role='button' aria-label='Confirm Set Up and Run' class='scb_s_navigation_button scb_f_open_select_technique' 
-			href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}'
-			assignment_id='{$assignment.id}' 
-			experiment_id='{$experiment.id}'>CONFIRM SET-UP & RUN &nbsp; &#9654;</a><br/>
-<span role='button' aria-label='Edit Set Up' class='scb_s_navigation_button scb_f_open_experiment_setup' 
-href='#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
-				&#9664; &nbsp; EDIT SET-UP</span></div>
-
+<div class='scb_s_warning_dialog' role='alert'>
+    <p>
+        <h1 class='jqDialog_confirm_header' role='heading'>Confirm Set-Up</h1>
+        Once you confirm the set-up of this experiment and run it, you cannot go back to edit this experiment's set-up.
+        To go back and edit your set-up, click <b>EDIT SET-UP</b> or click on <b>CONFIRM SET-UP AND RUN</b> to proceed.
+        <br>
+        To create a new experiment set-up, select <b>New Experiment +</b> above the navigation tool bar.
+    </p>
+    <a
+        role='button'
+        aria-label='Edit Set Up'
+        class='scb_s_navigation_button scb_f_open_experiment_setup'
+        href='#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assignment.id}'>
+        &#9664; &nbsp; EDIT SET-UP
+    </a>
+    <br>
+    <a
+        role='button'
+        aria-label='Confirm Set Up and Run'
+        class='scb_s_navigation_button scb_f_open_select_technique'
+        href='#view=select_technique&assignment_id={$assignment.id}&experiment_id={$experiment.id}'
+        assignment_id='{$assignment.id}'
+        experiment_id='{$experiment.id}'>
+        CONFIRM SET-UP & RUN &nbsp; &#9654;
+    </a>
+</div>
 {/template}
-
 
 /**
 * Experiment Setup Overlay
 */
 {template .experiment_setup_overlay}
 <div class='overlay' role='presentation'></div>
-
 {/template}
 
 /**
@@ -504,7 +525,6 @@ href='#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assi
 */
 {template .general_error_overlay}
 <div class='error_overlay' role='presentation'></div>
-
 {/template}
 
 /**
@@ -513,7 +533,6 @@ href='#view=experiment_setup&experiment_id={$experiment.id}&assignment_id={$assi
 {template .experiment_error}
 <h1 class='jqDialog_header' role='heading' >Error</h1>
 {/template}
-
 
 /**
 * Experiment Setup CONFIRM
