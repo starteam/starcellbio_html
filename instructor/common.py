@@ -281,6 +281,7 @@ def create_assignment(request, course_selected):
         a.name = assignment_name
         a.text = assignment_text
         a.files = assignment_files
+        a.access='private'
         a.assignment_id = assignment_id
         a.save()
         copy_assignment(based_on, a)
