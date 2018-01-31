@@ -281,7 +281,13 @@ def create_assignment(request, course_selected):
         a.name = assignment_name
         a.text = assignment_text
         a.files = assignment_files
-        a.access='private'
+        a.last_page_name = 'techniques'
+        a.facs_last_enabled_page = 'facs_sample_prep'
+        a.micro_last_enabled_page = 'micro_sample_prep'
+        a.has_wb = False
+        a.has_fc = False
+        a.has_micro = False
+        a.access = 'private'
         a.assignment_id = assignment_id
         a.save()
         copy_assignment(based_on, a)
