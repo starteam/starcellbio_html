@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><META http-equiv='Content-Type' content='text/html; charset=UTF-8'><meta http-equiv='content-type' content='text/html; charset=utf-8'><title>StarCellBio Prototype</title>
+<!DOCTYPE html><html lang='en-US'><head><META http-equiv='Content-Type' content='text/html; charset=UTF-8'><meta http-equiv='content-type' content='text/html; charset=utf-8'><title>StarCellBio Prototype</title>
 <link type="text/css" href="/static/js/skins/lightgray/skin.min.css?_=1417401991" rel="Stylesheet" />
 <link type="text/css" href="/static/scb_ex/gen/addmultipledialog.gss.css?_=1417401991" rel="Stylesheet" />
 <link type="text/css" href="/static/ui/gen/technique_tabs.gss.css?_=1417401991" rel="Stylesheet" />
@@ -77,11 +77,13 @@
 
         <div class="scb_s_instructor_header" role="header">
             <div alt="" class="scb_s_header_line_top"></div>
-            <h1 class="scb_s_logo_h1" aria-label="StarCellBio Home Page Link">
-                <a aria-hidden="true" href="#view=assignments">StarCellBio
-                    <img class="scb_s_logo" src="images/header/scb_logo.png" role="banner">
-                </a>
-            </h1>
+            <a class="scb_s_logo" role="banner" aria-label="StarCellBio Home Page Link" href="#view=assignments">
+                <img width="250px" src="images/header/scb_logo.png" alt="" role="presentation">
+            </a>
+            <div class="scb_s_skip_links">
+                <a href='#' class="scb_s_skip_to_sidebar">Skip to sidebar</a>
+                <a href='#' class="scb_s_skip_to_content">Skip to content</a>
+            </div>
             <div class="scb_s_header_tools">
                 <button class="scb_f_contact" aria-label="Contact">
                     <img class="scb_s_header_tools_icon" src="images/header/scb_envelope_icon.png" alt="" role="presentation">
@@ -92,9 +94,9 @@
                     <img class="scb_s_header_tools_icon" src="images/header/scb_cabinet_icon.png" alt="" role="presentation">
                     <span class="scb_s_header_tools_text">LIBRARY</span>
                 </a>
-                <img class="scb_s_header_vertical_line" src="images/header/scb_vertical_divider.png" role="presentation">
+                <img class="scb_s_header_vertical_line" src="images/header/scb_vertical_divider.png" alt="" role="presentation">
                 <button class="scb_f_user_guide" aria-label="User Guide">
-                    <img class="scb_s_header_tools_icon" src="images/header/scb_user_guide_icon.png" role="presentation">
+                    <img class="scb_s_header_tools_icon" src="images/header/scb_user_guide_icon.png" alt="" role="presentation">
                     <span class="scb_s_header_tools_text" role="presentation">USER<br>GUIDE</span>
                 </button>
                 <img class="scb_s_header_vertical_line" src="images/header/scb_vertical_divider.png" alt="" role="presentation">
@@ -107,7 +109,7 @@
         <div class="scb_s_instructor_account_title">Assignment Builder: Beta Version</div>
 
         <div class="scb_s_assignment_step" role="menu" xmlns="http://www.w3.org/1999/html">
-            <a class="scb_s_assignment_step_link scb_f_assignments_step_link scb_s_assignment_step_link_active"
+            <a class="scb_s_assignment_step_link scb_f_assignments_step_link enable-outline scb_s_assignment_step_link_active"
                 href="{% url "common_assignments" %}" aria-label="Assignments" role="menuitem">
                 <div class="scb_s_assignment_step_wrapper" style="position: absolute; left: 29px; bottom: 20px;"
                  aria-hidden="true">
@@ -124,30 +126,19 @@
         {% block extra_body %}
         {% endblock %}
 
-
         <div class="scb_s_footer" role="footer">
-            <a href="http://web.mit.edu/" role="link">
-                <img class="scb_s_instructor_homepage_footer_logo" src="images/homepage/mit_logo.png" alt="MIT Logo">
+            <a class="scb_s_homepage_footer_logo" href="http://web.mit.edu/" aria-label="MIT Logo">
+                <img src="images/homepage/mit_logo.png" role="presentation" alt="">
             </a>
-
-            <img class="scb_s_instructor_homepage_footer_divider" role="presentation"
-                 src="images/homepage/small_divider.png" alt="">
-            <a href="http://star.mit.edu/CellBio/funding/index.html"
-               role="link" aria-label="Funding" target="_blank">
-                <span aria-hidden="true" class="scb_s_instructor_homepage_footer_support"
-                      src="images/homepage/support.png">
-                    Funding
-                </span>
+            <img class="scb_s_homepage_footer_divider" src="images/homepage/small_divider.png" role="presentation" alt="">
+            <a class="scb_s_homepage_footer_support" href="http://star.mit.edu/CellBio/funding/index.html" target="_blank">
+                Funding
             </a>
         </div>
     </div>
 </div>
 
-
-
-
 <script src="//cdn.ravenjs.com/1.1.11/jquery,native/raven.min.js"></script>
 <script> Raven.config('https://7845856fc975496e8dc2130b7140b19c@app.getsentry.com/19461', { whitelistUrls: ['starcellbio.mit.edu'] }).install(); </script>
 </body>
-
 </html>

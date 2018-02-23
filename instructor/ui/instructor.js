@@ -6,6 +6,33 @@ $(function() {
     $('.scb_s_dashboard_link', this).toggle();
   });
   /**
+   * Skip to sidebar and content links
+   */
+  var skip_to_sidebar = $('.scb_s_skip_to_sidebar'),
+      skip_to_content = $('.scb_s_skip_to_content'),
+      pathname = window.location.pathname,
+      is_entry_page = pathname === '/ab/assignments/',
+      is_select_technique_page = pathname === '/ab/assignments/select_technique/';
+  // No sidebar in entry page, hide the corresponding link
+  if (is_entry_page) {
+    skip_to_sidebar.hide();
+  }
+  skip_to_sidebar.click(function(e) {
+    if (is_select_technique_page) {
+      // Focus on first checkbox of Experimental Techniques
+      $('#tech_has_wb').focus();
+    } else {
+      // Focus on page related link
+      $('a[href="' + pathname + '"]').focus();
+    }
+    e.preventDefault();
+  });
+  skip_to_content.click(function(e) {
+    var content = is_entry_page ? $('.scb_s_dashboard_sidebar') : $('.scb_s_course_setup_description');
+    content.find(':focusable').first().focus();
+    e.preventDefault();
+  });
+  /**
    * Course setup
    */
   $('.scb_f_course_setup_create_new_course_option input').click(function() {
@@ -462,7 +489,6 @@ $(function() {
       $('.error_overlay').remove();
     };
     show_message(message, confirm_publish, cancel_publish);
-
   });
 
   /* Preview assignment*/
@@ -499,6 +525,15 @@ $(function() {
       $('.error_overlay').remove();
     };
     show_message(message, confirm_publish, cancel_publish);
+  });
+
+  /* jqDialog adds a keyup event handler to the document element that we do not want to be called
+     when the publish or delete links have focus and the ENTER key is used.
+     When this happens, the click event is triggered as well as the keyup event and its bubbling
+     cannot be cancelled with event.stopPropagation(). We remove all keyup event handlers on the
+     document instead. */
+  $(".scb_ab_f_publish, .scb_ab_f_delete_assignment").keydown(function(event) {
+    $(document).off();
   });
 
   function show_message(message, confirm_func, cancel_func) {
@@ -680,7 +715,7 @@ $(function() {
       } else {
         data = histograms[instance_id]['fixed'];
       }
-      var $edit_icon = $("div.scb_ab_s_histogram_edit_icon[data-row_id='row-" + row_id + "']");
+      var $edit_icon = $(".scb_ab_col_edit>button.scb_ab_s_histogram_edit_icon[data-row_id='row-" + row_id + "']");
       // Scale: editing canvas is 300x300, small canvas is 160x160
       var xyScale = 160/300;
       if (data) {
@@ -694,13 +729,14 @@ $(function() {
           path.add(new Point(xyScale*(point[0] - 20), xyScale*(point[1] + 20)));
         });
         paper.view.update();
-        $("button[data-row_id='row-" + row_id + "']").hide();
+        $(".scb_ab_s_col_width_facs_sample>button[data-row_id='row-" + row_id + "']").hide();
         $edit_icon.addClass('scb_ab_s_edit_white_img');
       } else {
         $(canvas).css('display', 'none');
         $(canvas).siblings('div').css('display', 'none');
         $(canvas).parent().siblings('.scb_ab_s_copy_button_container').css('display', 'none');
         $edit_icon.addClass('scb_ab_s_edit_grey_img');
+        $edit_icon.prop('disabled', true);
       }
     });
 
@@ -737,7 +773,7 @@ $(function() {
   }
 
   /* ADD HISTOGRAM button: Open Histogram Tools window */
-  $(".add_histogram_btn, .scb_ab_f_edit_histogram.scb_ab_s_edit_white_img").click(function () {
+  $(".add_histogram_btn, .scb_ab_f_edit_histogram.scb_ab_s_edit_white_img").click(function (event) {
     /* this btn has the id of the corresponding row */
     var row_id = $(this).data('row_id');
     /* Get name of the sample from the row itself */
@@ -759,6 +795,9 @@ $(function() {
       $(".scb_ab_s_select_histogram_view").show();
       paper.view.update();
     }
+    // Focus on close button
+    $('.scb_ab_s_dialog_title_close.scb_ab_f_close_dialog').focus();
+    event.preventDefault();
   });
 
   /* Open Image Dialog in Microscopy Analyze page */
@@ -783,6 +822,9 @@ $(function() {
         'analysis': analysis,
     });
     addSelectedImages(); // Add already saved images to the selected area
+    // Focus on close button
+    $('.scb_ab_s_dialog_title_close.scb_ab_f_close_dialog').focus();
+    // event.preventDefault();
   });
 
 
@@ -879,6 +921,8 @@ $(function() {
         'cell_treatment': $(this).data('cell_treatment')
       });
     $(".scb_ab_s_copy_dialog").css('visibility', 'visible');
+    // Focus on close button
+    $('.scb_ab_s_dialog_title_close.scb_ab_f_close_copy_dialog').focus();
   });
 
   $('.scb_ab_f_close_copy_dialog').click(function(){
@@ -993,6 +1037,7 @@ $(function() {
       $imageForm = $('.scb_ab_s_image_form'),
       $fileInput = $imageForm.find('input[type="file"]'),
       $label = $imageForm.find('label[for="id_file"]'),
+      $anchor = $label.children('a'),
       $fileInput = $imageForm.find( 'input[type="file"]'),
       $filesSelect = $(".scb_ab_s_select_box"),
       droppedFiles = false,
@@ -1005,6 +1050,10 @@ $(function() {
                 .replace('{}', files.length) : files[0].name + " is ") + "uploading ...");
           }
       };
+  $anchor.on('click', function(e) {
+    e.preventDefault();
+    $label.click();
+  });
   // New event handler for the 'usual' file uploading (not drag&drop)
   $fileInput.on('change', function(e) {
       showFiles(e.target.files);

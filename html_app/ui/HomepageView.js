@@ -23,12 +23,27 @@ scb.ui.static.HomepageView.select_list_item = function(element, workarea, aria) 
   }
 }
 
-
 scb.ui.static.HomepageView.register = function(workarea) {
+  // Skip to content link
+  scb.utils.off_on(workarea, 'click', '.scb_s_skip_to_content', function(e) {
+    var hash = window.location.hash, params, view, content = '.scb_s_homepage_content';
+    if (hash !== '') {
+      params = hash.substr(1).split('&');
+      view = params[0].split('=')[1];
+      if (view !== 'homepage') {
+        content = '.scb_s_' + view + '_container';
+        if (view === 'facs') {
+          content += '_student';
+        }
+      }
+    }
+    $(content).find(':focusable').first().focus();
+    e.preventDefault();
+  });
+
   scb.utils.off_on(workarea, 'click', '.scb_s_homepage_experimental_design_bullet_item', function(e) {
     scb.ui.static.HomepageView.select_list_item(this, workarea, true);
   });
-
 
   scb.utils.off_on(workarea, 'click', '.learn_more_dynamic', function(e) {
     var pop_string = $(this).attr('value');
@@ -38,7 +53,6 @@ scb.ui.static.HomepageView.register = function(workarea) {
   });
 
   scb.utils.off_on(workarea, 'click', '.scb_f_create_student_account', function(e) {
-
     $(workarea).append(scb_auth.signup({}));
     scb.utils.off_on(workarea, 'click', '.scb_f_signup_close_button', function() {
       $('.scb_s_signup_dialog').detach();
@@ -96,28 +110,22 @@ scb.ui.static.HomepageView.register = function(workarea) {
             if ($('.scb_f_signup_iframe').contents().find('.login_submit').length > 0) {
               $('.scb_f_signup_iframe').contents().find('#errorMsg').html('Incorrect username or password. Try again');
             }
-
           }
         });
       });
     });
-
   });
-
-
 
   scb.utils.off_on(workarea, 'click', '.scb_s_homepage_see_more_button', function(e) {
     alert("under construction!");
   });
+
   scb.utils.off_on(workarea, 'click', '.scb_f_create_instructors_account', function(e) {
-
-
     $(workarea).append(scb_auth.signup({}));
     scb.utils.off_on(workarea, 'click', '.scb_f_signup_close_button', function() {
       $('.scb_s_signup_dialog').detach();
     });
     $('.scb_f_signup_iframe').load(function() {
-
       var iframe = $('.scb_f_signup_iframe').get(0);
       var content = (iframe.contentDocument || iframe.contentWindow);
       content.body.style.fontSize = '90%';
@@ -177,16 +185,11 @@ scb.ui.static.HomepageView.register = function(workarea) {
         });
       });
     });
-
-
   });
-
 
   scb.utils.off_on(workarea, 'click', '.scb_f_instructor_resources', function(e) {
     alert("under construction!");
   });
-
-
 };
 
 scb.ui.HomepageView = function scb_ui_HomepageView(gstate) {
@@ -211,10 +214,8 @@ scb.ui.HomepageView = function scb_ui_HomepageView(gstate) {
         left: ($(window).width() - $('#main').outerWidth()) / 2,
         top: ($(window).height() - $('#main').outerHeight()) / 2
       });
-
     });
   }
-
 }
 
 function inConstructionError() {

@@ -667,6 +667,17 @@ scb.ui.static.FacsView.register = function(workarea) {
   });
   scb.utils.off_on(workarea, 'click', '.scb_f_facs_prepare_lysates', function(e) {
     scb.ui.static.FacsView.scb_f_facs_prepare_lysates(this, e);
+    event.preventDefault();
+  });
+  /*
+    jqDialog adds a keyup event handler to the document element that we do not want to be called
+    when the [Prepare Samples] link has focus and the ENTER key is used.
+    When this happens, the click event is triggered as well as the keyup event and its bubbling
+    cannot be cancelled with event.stopPropagation(). We remove all keyup event handlers on the
+    document instead.
+  */
+  scb.utils.off_on(workarea, 'keydown', '.scb_f_facs_prepare_lysates', function() {
+    $(document).off();
   });
   scb.utils.off_on(workarea, 'click', '.scb_s_facs_single_range_button', function(e) {
     scb.ui.static.FacsView.scb_s_facs_single_range_button(this, e);

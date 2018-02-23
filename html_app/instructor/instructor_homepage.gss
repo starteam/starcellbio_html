@@ -106,7 +106,6 @@
     text-align: justify;
     display: inline-block;
     vertical-align: top;
-    min-height:350px;
     background: #e9ecf1;
     border-radius: 8px;
     padding: 10px;

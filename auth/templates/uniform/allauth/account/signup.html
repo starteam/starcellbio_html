@@ -1,100 +1,107 @@
 <style>
+    *:focus {
+        outline: none;
+        box-shadow: 0 0 2px 2px #1c1c1c;
+    }
 
-body {
+    body {
+        position: absolute;
+        background: #f4f6f8;
+        top: 0px;
+        font-family: 'sourcesanspro-bold';
+        font-size: 10pt;
+        color: #316f94;
+    }
 
-    position: absolute;
-    background: #f4f6f8;
-    top:0px;
-    font-family: 'sourcesanspro-bold';
-    font-size: 10pt;
-    color:#316f94;
-    
-}
+    .inlineLabels {
+        margin-left: -10px;
+        border: 0;
+    }
 
-.inlineLabels{
-margin-left: -10px;
-border:0;
-}
+    input {
+      height: 31px;
+      clear: left;
+    }
 
+    .auth_submit_button {
+        float: right;
+        -webkit-appearance: none;
+        border-radius: 8px;
+        letter-spacing:1px;
+        text-transform: uppercase;
+        background: #27956c;
+        height: 27px;
+        color: white;
+        font-size: 9pt;
+        cursor: pointer;
+        position: relative;
+        bottom: 8px;
+        padding-left: 13px;
+        padding-right: 9px;
+        top: 1px;
+        border: 0;
+    }
 
-input{
-	height: 31px;
-	clear: left;
-}
-	
-.auth_submit_button{
-		float:right; 
-		-webkit-appearance:none; 
-		border-radius: 8px; 
-		letter-spacing:1px;
-		text-transform:uppercase;
-		background: #27956c; 
-		height: 27px;
-		color: white;
-		font-size: 9pt; 
-		cursor:pointer;
-		position:relative;
-		bottom: 8px;
-		padding-left: 13px;
-		padding-right: 9px;
-		top:1px;
-		border: 0;
-}
+    #errorMsg, #error_1_id_email, #error_1_id_course_code,
+    #error_1_id_password1, #error_1_id_password2 {
+        color: red;
+    }
 
-#errorMsg, #error_1_id_email, #error_1_id_course_code, #error_1_id_password1, #error_1_id_password2{
-	color: red;
-}
+    .auth_submit_button > div {
+        position: relative;
+        top: 2px;
+    }
 
-.auth_submit_button > div{
-	position: relative;
-	top: 2px;
-}
+    #div_id_email > label, #div_id_password1 > label, #div_id_password2 > label,
+    #div_id_course_code > label {
+        color: #316f94;
+        font-size: 9pt;
+        letter-spacing: 1px;
+        font-weight: bold;
+        float: left;
+        display: block;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
 
-#div_id_email > label, #div_id_password1 > label, #div_id_password2 > label,
-#div_id_course_code > label{
-	color: #316f94;
-	font-size: 9pt;
-	letter-spacing: 1px;
-	font-weight: bold;
-	float: left;
-	display:block;
-	margin-bottom: 5px;
-	text-transform: uppercase;
-}
+    #div_id_account_type > label {
+        color: #316f94;
+        font-size: 9pt;
+        letter-spacing: 1px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
 
-#div_id_account_type > label{
-	color: #316f94;
-	font-size: 9pt;
-	letter-spacing: 1px;
-	font-weight: bold;
-	display:block;
-	margin-bottom: 5px;
-	text-transform: uppercase;
-}
+    #id_account_type > li {
+        text-decoration: none;
+         display: inline;
+    }
 
-#id_account_type >li{
-    text-decoration: none;
-     display: inline;
-}
-#id_account_type >li > label> input{
-    height:14px;
-}
+    #id_account_type > li > label> input {
+        height:14px;
+    }
 
+    #div_id_email > input, #div_id_password1 > input,
+    #div_id_password2 > input, #div_id_course_code > input {
+        display: block;
+        width: 373px;
+        box-shadow: inset 1px 1px 4px 0px gray;
+        padding-left: 5px;
+    }
 
-#div_id_email > input, #div_id_password1 > input, #div_id_password2 > input,
-#div_id_course_code > input{
-
-	display: block;
-	width: 373px;
-	box-shadow: inset 1px 1px 4px 0px gray;
-}
-
-
-
+    #div_id_email > input:focus, #div_id_password1 > input:focus,
+    #div_id_password2 > input:focus, #div_id_course_code > input:focus {
+        box-shadow: 0 0 2px 2px #1c1c1c;
+        border: none;
+    }
 </style>
+
 {% load url from future %}
 {% load i18n %}
 {% load uni_form_tags %}
+
 <div id="toggle_message">
     Your instructor should have provided you with a code that you need
     to enter below to register and use this StarCellBio tool. Please contact
@@ -103,71 +110,61 @@ input{
 </div>
 
 {% block content %}
+    <!--
+    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+     -->
+    <form class="signup uniForm" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        <fieldset class="inlineLabels">
+            {{ form|as_uni_form }}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div id='div_id_course_code'>
+                <label>COURSE CODE </label>
+                <input autocomplete="off" id='id_course_code' name="course_code"  placeholder=''/>
+            </div>
+            <div id='code_status' style='visibility:hidden; display:inline'>
+                <span style='color:red'>&#215; </span>&nbsp; This is not a valid code.
+            </div>
+            <div class="buttonHolder">
+                <button class="primaryAction auth_submit_button" type="submit">{% trans "Create Account" %}</button>
+            </div>
+        </fieldset>
+    </form>
 
-<!-- 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
- -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var student_type=document.getElementById('id_account_type_0');
+            student_type.addEventListener('click', showStudentForm);
+            var instructor_type = document.getElementById('id_account_type_1');
+            instructor_type.addEventListener('click', showInstructorForm);
+        });
 
-<form class="signup uniForm" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  <fieldset class="inlineLabels">
+        function showInstructorForm(){
+            var message = "In the instructor account, instructors set up and customize " +
+                    "their own StarCellBio assignments and experiments. The email address " +
+                    "for the instructor account must be different from those used to set " +
+                    "up other StarCellBio accounts. To set up an instructor account, enter " +
+                    "your email and password below and then click Create Account.";
+            document.getElementById('div_id_course_code').style.display = 'none';
+            document.getElementById('toggle_message').innerHTML = message;
+        }
 
-    {{ form|as_uni_form }}
-
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-
-  <div id='div_id_course_code'>
-      <label>COURSE CODE </label>
-      <input autocomplete="off" id='id_course_code' name="course_code"  placeholder=''/>
-  </div>
-
-  <div id='code_status' style='visibility:hidden; display:inline'> <span style='color:red'>&#215; </span>&nbsp; This is not a valid code. </div>
-  <div class="buttonHolder">
-      <button class="primaryAction auth_submit_button" type="submit">{% trans "Create Account" %}</button>
-  </div>
-  </fieldset>
-
-
-</form>
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-    var student_type=document.getElementById('id_account_type_0');
-    student_type.addEventListener('click', showStudentForm);
-    var instructor_type = document.getElementById('id_account_type_1');
-    instructor_type.addEventListener('click', showInstructorForm);
- });
-
-
-if(document.getElementById('div_id_email').className != 'ctrlHolder error ')
-document.getElementById('div_id_email').children[0].textContent='E-MAIL';
-if(document.getElementById('div_id_password2').children[0] != 'ctrlHolder error ')
-document.getElementById('div_id_password2').children[0].textContent='PASSWORD (AGAIN)';
-
-
-function showInstructorForm(){
-    var message = "In the instructor account, instructors set up and customize " +
-            "their own StarCellBio assignments and experiments. The email address " +
-            "for the instructor account must be different from those used to set " +
-            "up other StarCellBio accounts. To set up an instructor account, enter " +
-            "your email and password below and then click Create Account.";
-    document.getElementById('div_id_course_code').style.display = 'none';
-    document.getElementById('toggle_message').innerHTML = message;
-}
-
-function showStudentForm(){
-    var message = 'Your instructor should have provided you with a code that you need ' +
-            'to enter below to register and use this StarCellBio tool. Please contact ' +
-            'your instructor if you have not received this code. You will receive an ' +
-            'email to confirm your account. <br/><br/>Your work will be saved in this account. ';
-    document.getElementById('div_id_course_code').style.display = '';
-    document.getElementById('toggle_message').innerHTML = message;
-}
-
-
-
-
-</script>
-
+        function showStudentForm(){
+            var message = 'Your instructor should have provided you with a code that you need ' +
+                    'to enter below to register and use this StarCellBio tool. Please contact ' +
+                    'your instructor if you have not received this code. You will receive an ' +
+                    'email to confirm your account. <br/><br/>Your work will be saved in this account. ';
+            document.getElementById('div_id_course_code').style.display = '';
+            document.getElementById('toggle_message').innerHTML = message;
+        }
+        // Override labels returned by form (contain a trailing *)
+        document.querySelector('#div_id_account_type > label').innerHTML = 'ACCOUNT TYPE';
+        document.querySelector('#div_id_email > label').innerHTML = 'E-MAIL';
+        document.querySelector('#div_id_password1 > label').innerHTML  = 'PASSWORD';
+        document.querySelector('#div_id_password2 > label').innerHTML  = 'PASSWORD (AGAIN)';
+        // Focus on email input
+        document.querySelector('#div_id_email > input').autofocus = true;
+    </script>
 {% endblock %}

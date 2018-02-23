@@ -1729,6 +1729,17 @@ scb.ui.static.MicroscopyView.register = function(workarea) {
   });
   scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_prepare_slides', function(e) {
     scb.ui.static.MicroscopyView.scb_f_microscopy_prepare_slides(this);
+    e.preventDefault();
+  });
+  /*
+    jqDialog adds a keyup event handler to the document element that we do not want to be called
+    when the [Prepare Slides] link has focus and the ENTER key is used.
+    When this happens, the click event is triggered as well as the keyup event and its bubbling
+    cannot be cancelled with event.stopPropagation(). We remove all keyup event handlers on the
+    document instead.
+  */
+  scb.utils.off_on(workarea, 'keydown', '.scb_f_microscopy_prepare_slides', function() {
+    $(document).off();
   });
   scb.utils.off_on(workarea, 'click', '.scb_f_microscopy_sample_active_all', function(e, ui) {
     scb.ui.static.MicroscopyView.scb_f_microscopy_sample_active_all(this);
