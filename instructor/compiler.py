@@ -1,3 +1,4 @@
+import re
 from django.db.models import Q
 from django.utils.html import format_html, format_html_join
 from instructor.models import (
@@ -362,7 +363,7 @@ def micro_model(a):
 def generate_slides(assignment):
     ret = {}
     for image in assignment.image.all():
-        ret[image.id] = image.file.url
+        ret[image.id] = re.sub(r'\?[\S]+', '', image.file.url)
     return ret
 
 
