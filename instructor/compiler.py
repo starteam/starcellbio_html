@@ -1,3 +1,4 @@
+from urlparse import urlparse, urlunparse
 from django.db.models import Q
 from django.utils.html import format_html, format_html_join
 from instructor.models import (
@@ -362,7 +363,8 @@ def micro_model(a):
 def generate_slides(assignment):
     ret = {}
     for image in assignment.image.all():
-        ret[image.id] = image.file.url
+        image_url = urlparse(image.file.url)._replace(query=None)
+        ret[image.id] = urlunparse(image_url)
     return ret
 
 
