@@ -3,7 +3,7 @@ Markdown==2.2.1
 MySQL-python==1.2.5
 Pillow==3.3.1
 PyYAML==3.10
-Pygments==1.5
+Pygments==2.7.4
 boto3==1.4.0
 django-allauth==0.19.1
 django-bootstrap-form==3.2
