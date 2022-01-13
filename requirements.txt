@@ -1,7 +1,7 @@
 Django==1.7.7
 Markdown==2.2.1
 MySQL-python==1.2.5
-Pillow==3.3.1
+Pillow==9.0.0
 PyYAML==3.10
 Pygments==1.5
 boto3==1.4.0
