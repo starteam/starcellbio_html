@@ -9,3 +9,7 @@ If you want to run the selenium ide scripts, you'll need to `get selenium-ide fi
 
 Note: StarCellBio is no longer being hosted by MIT.
 --------------------------
+
+The complete source code for the site is available in this repository. We invite anyone to host it, and to fork it if necessary. 
+
+We are not taking pull requests at this time. 
